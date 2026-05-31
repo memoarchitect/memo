@@ -2,16 +2,27 @@ stages:
   - build
   - publish
 
+# sysand is distributed on PyPI (https://pypi.org/project/sysand/) — the same
+# external, conformant SysML v2 / KerML tool used locally. Pin it so the
+# portability gate is reproducible.
+variables:
+  SYSAND_VERSION: "0.0.10"
+
+.sysand_setup: &sysand_setup
+  image: python:3.12-slim
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends unzip >/dev/null
+    - pip install --quiet "sysand==${SYSAND_VERSION}"
+    - sysand --version
+
 # ── Portability gate ─────────────────────────────────────────────────────────
-# Proves the constraint-bearing ontology parses in an external, conformant
-# SysML v2 tool (Sensmetry `sysand`). The script regenerates each project's
-# .meta.json and runs the real `sysand build`; any external-parser error fails
-# the pipeline, so a non-portable ontology can never be released.
+# Proves the constraint-bearing ontology parses in an external SysML v2 tool.
+# scripts/build-kpar.sh regenerates each project's .meta.json and runs the real
+# `sysand build`; any external-parser error fails the pipeline, so a non-portable
+# ontology can never be released.
 build:
   stage: build
-  image: ghcr.io/sensmetry/sysand:latest
-  before_script:
-    - apt-get update && apt-get install -y python3 unzip || true
+  <<: *sysand_setup
   script:
     - bash scripts/build-kpar.sh
     - mkdir -p dist
@@ -28,12 +39,11 @@ build:
 # tag version. Installable as a sysand data dependency from the registry URL.
 publish:
   stage: publish
-  image: ghcr.io/sensmetry/sysand:latest
+  <<: *sysand_setup
   rules:
     - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+/'
-  before_script:
-    - apt-get update && apt-get install -y python3 unzip curl || true
   script:
+    - apt-get install -y --no-install-recommends curl >/dev/null
     - bash scripts/build-kpar.sh
     - VERSION="${CI_COMMIT_TAG#v}"
     - |
