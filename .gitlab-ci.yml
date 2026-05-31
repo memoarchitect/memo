@@ -1,0 +1,48 @@
+stages:
+  - build
+  - publish
+
+# ── Portability gate ─────────────────────────────────────────────────────────
+# Proves the constraint-bearing ontology parses in an external, conformant
+# SysML v2 tool (Sensmetry `sysand`). The script regenerates each project's
+# .meta.json and runs the real `sysand build`; any external-parser error fails
+# the pipeline, so a non-portable ontology can never be released.
+build:
+  stage: build
+  image: ghcr.io/sensmetry/sysand:latest
+  before_script:
+    - apt-get update && apt-get install -y python3 unzip || true
+  script:
+    - bash scripts/build-kpar.sh
+    - mkdir -p dist
+    - cp output/*.kpar dist/ || true
+    - cp methodology/output/*.kpar dist/ || true
+  artifacts:
+    paths:
+      - dist/*.kpar
+    expire_in: 30 days
+
+# ── Release ──────────────────────────────────────────────────────────────────
+# On a version tag (v*), rebuild the .kpar archives and upload them to this
+# project's GitLab generic package registry under package `memo-sysmlv2` at the
+# tag version. Installable as a sysand data dependency from the registry URL.
+publish:
+  stage: publish
+  image: ghcr.io/sensmetry/sysand:latest
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+/'
+  before_script:
+    - apt-get update && apt-get install -y python3 unzip curl || true
+  script:
+    - bash scripts/build-kpar.sh
+    - VERSION="${CI_COMMIT_TAG#v}"
+    - |
+      for kpar in output/*.kpar methodology/output/*.kpar; do
+        [ -f "$kpar" ] || continue
+        fname="$(basename "$kpar")"
+        echo "Uploading $fname -> generic/memo-sysmlv2/$VERSION/$fname"
+        curl --fail --silent --show-error \
+          --header "JOB-TOKEN: $CI_JOB_TOKEN" \
+          --upload-file "$kpar" \
+          "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/memo-sysmlv2/${VERSION}/${fname}"
+      done
