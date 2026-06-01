@@ -15,7 +15,7 @@ package memo {
             enum def VerificationMethodKind { enum inspection; enum analysis; enum demonstration; enum test; enum simulation; enum formalProof; enum modelChecking; }
             enum def ArtifactKind { enum plan; enum requirementSpecification; enum architectureDescription; enum softwareDesignDescription; enum riskRecord; enum traceMatrix; enum testProtocol; enum testReport; enum evidenceRecord; enum cybersecurityAssessment; enum threatModel; }
             enum def RiskControlKind { enum inherentSafeDesign; enum protectiveMeasure; enum informationForSafety; enum alarm; enum interlock; enum monitoring; enum plausibilityCheck; }
-            enum def HazardTypeKind { enum overdose; enum underdose; enum occlusion; enum freeFlow; enum airInLine; enum reverseDelivery; enum emptyReservoir; enum delayedAlarm; enum softwareFault; enum usabilityFault; enum networkFault; }
+            enum def HazardTypeKind { enum drugDeliveryError; enum energyExposure; enum informationError; enum mechanicalFailure; enum biologicalContamination; enum softwareAnomaly; enum useError; enum environmentalHazard; }
             enum def DocumentViewKind { enum DHF; enum SDD; enum RMF; enum VV; enum ArchitectureDescription; enum CybersecurityAssessment; enum ThreatModel; }
             enum def SchedulingPolicyKind { enum nonRealTime; enum roundRobin; enum fixedPriorityPreemptive; enum rateMonotonic; enum deadlineMonotonic; enum EDF; }
             enum def LinkStatusKind { enum planned; enum active; enum verified; enum obsolete; }
@@ -40,6 +40,17 @@ package memo {
             enum def OperationalEntityKind { enum human; enum externalSystem; enum environmentalEntity; enum regulatoryBody; enum device; }
             enum def ScenarioKind { enum nominal; enum degraded; enum emergency; enum maintenance; enum error; enum timeout; enum alarm; }
             enum def FunctionalChainKind { enum nominal; enum error; enum degraded; enum alarm; enum startup; enum shutdown; enum calibration; }
+            enum def ProcessingNodeKind { enum microcontroller; enum FPGA; enum SoC; enum gateway; enum cloudServer; enum edgeDevice; enum DSP; }
+            enum def PhysicalLinkKind { enum ethernet; enum CAN; enum SPI; enum I2C; enum USB; enum wireless; enum optical; enum serial; enum bluetooth; }
+            enum def FailureModeKind { enum lossOfFunction; enum degradedFunction; enum unintendedFunction; enum intermittentFunction; enum prematureFunction; enum delayedFunction; }
+            enum def FailureEffectLevel { enum local; enum nextHigher; enum endEffect; }
+            enum def FailureCauseCategory { enum design; enum manufacturing; enum material; enum wear; enum misuse; enum environmental; enum software; }
+            enum def DetectionMethodKind { enum inspection; enum testing; enum monitoring; enum alarm; enum userReport; enum selfDiagnostic; enum periodicMaintenance; }
+            enum def FMEAActionKind { enum designChange; enum processChange; enum verificationActivity; enum labeling; enum training; enum monitoring; }
+            enum def FaultTreeEventKind { enum topEvent; enum intermediateEvent; enum basicEvent; enum undevelopedEvent; enum houseEvent; enum externalEvent; enum conditionalEvent; }
+            enum def FaultTreeGateKind { enum andGate; enum orGate; enum kOfNGate; enum xorGate; enum inhibitGate; enum priorityAndGate; }
+            enum def DesignDecisionStatusKind { enum proposed; enum accepted; enum superseded; enum rejected; }
+            enum def RiskControlImplementationKind { enum hardwareDesign; enum softwareDesign; enum labeling; enum training; enum proceduralControl; }
         }
     }
 }

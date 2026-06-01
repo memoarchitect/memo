@@ -20,6 +20,9 @@ package memo {
         public import memo::architecture::risk::*;
         public import memo::architecture::cybersecurity::*;
         public import memo::architecture::assurance::*;
+        public import memo::architecture::physical::*;
+        public import memo::architecture::analysis::*;
+        public import memo::architecture::decisions::*;
 
         public import memo::viewpoints::core::*;
         public import memo::viewpoints::default_viewpoints::*;

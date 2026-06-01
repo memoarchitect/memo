@@ -12,7 +12,7 @@ package memo {
             item def SequenceOfEvents specializes TraceableElement { attribute initiatingEvent : String; attribute contributingFactors : String; }
             item def HazardousSituation specializes TraceableElement { attribute exposedPersons : String; attribute operatingCondition : String; }
             item def Harm specializes TraceableElement { attribute clinicalImpact : String; attribute reversibility : String; attribute criticality : CriticalityKind; }
-            item def RiskControl specializes VerifiableElement { attribute controlKind : RiskControlKind; attribute implementationKind : String; attribute verificationStatus : String; }
+            item def RiskControl specializes VerifiableElement { attribute controlKind : RiskControlKind; attribute implementationKind : RiskControlImplementationKind; attribute verificationStatus : String; }
             item def OverallResidualRiskEvaluation specializes TraceableElement { attribute conclusion : String; attribute reviewer : String; }
         }
     }

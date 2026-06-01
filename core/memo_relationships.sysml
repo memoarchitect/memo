@@ -38,6 +38,25 @@ package memo {
             part def RealizesCapability specializes SemanticLink { part functionalChain : FunctionalChain; part capability : SystemCapability; }
             part def InvolvesFunction specializes SemanticLink { part functionalChain : FunctionalChain; part function : LogicalFunction; }
             part def RealizesScenario specializes SemanticLink { part functionalChain : FunctionalChain; part scenario : SystemScenario; }
+
+            part def HostedBy specializes SemanticLink { part processingNode : ArchitectureElement; part hostAssembly : ArchitectureElement; }
+            part def RealizesComponentExchange specializes SemanticLink { part physicalLink : ArchitectureElement; part componentExchange : ArchitectureElement; }
+
+            part def HasFailureMode specializes SemanticLink { part element : ArchitectureElement; part failureMode : TraceableElement; }
+            part def CausesEffect specializes SemanticLink { part failureMode : TraceableElement; part failureEffect : TraceableElement; }
+            part def CausedBy specializes SemanticLink { part failureMode : TraceableElement; part failureCause : TraceableElement; }
+            part def DetectedBy specializes SemanticLink { part failureMode : TraceableElement; part detectionMethod : TraceableElement; }
+            part def AddressedByAction specializes SemanticLink { part failureMode : TraceableElement; part fmeaAction : VerifiableElement; }
+
+            part def InputToGate specializes SemanticLink { part input : TraceableElement; part gate : TraceableElement; }
+            part def ProducesEvent specializes SemanticLink { part gate : TraceableElement; part event : TraceableElement; }
+            part def OriginatesFrom specializes SemanticLink { part event : TraceableElement; part origin : ArchitectureElement; }
+            part def ContainsEvent specializes SemanticLink { part cutSet : TraceableElement; part event : TraceableElement; }
+
+            part def Decides specializes SemanticLink { part decision : TraceableElement; part affectedElement : TraceableElement; }
+
+            part def Composes specializes SemanticLink { part parent : ArchitectureElement; part child : ArchitectureElement; }
+            part def AllocatesExchange specializes SemanticLink { part functionalFlow : ArchitectureElement; part componentExchange : ArchitectureElement; }
         }
     }
 }

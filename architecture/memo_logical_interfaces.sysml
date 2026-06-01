@@ -8,6 +8,7 @@ package memo {
             port def DataPort { attribute direction : DirectionKind; attribute interfaceType : String; }
             port def SensorPort specializes DataPort { attribute sensorDomain : String; }
             port def CommandPort specializes DataPort { attribute commandDomain : String; }
+            part def ComponentExchange specializes ArchitectureElement { attribute exchangeKind : FlowKind; attribute sourcePort : String; attribute targetPort : String; attribute allocatedFunctionalExchanges : String; attribute direction : DirectionKind; }
         }
     }
 }
