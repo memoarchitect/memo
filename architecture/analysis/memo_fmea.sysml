@@ -13,6 +13,9 @@ package memo {
             item def FaultTreeEvent specializes TraceableElement { attribute eventKind : FaultTreeEventKind; attribute probability : String; attribute failureRate : String; attribute exposureTime : String; attribute description : String; }
             item def FaultTreeGate specializes TraceableElement { attribute gateKind : FaultTreeGateKind; attribute kValue : Integer; attribute nValue : Integer; }
             item def MinimalCutSet specializes TraceableElement { attribute cutSetOrder : Integer; attribute probability : String; attribute involvedEvents : String; attribute significance : String; }
+            item def HAZOPStudy specializes TraceableElement { attribute standard : String; attribute processDescription : String; attribute studyScope : String; attribute teamComposition : String; }
+            item def HAZOPNode specializes TraceableElement { attribute nodeDescription : String; attribute designIntent : String; attribute operatingConditions : String; }
+            item def HAZOPDeviation specializes TraceableElement { attribute guideWord : HAZOPGuideWordKind; attribute parameter : String; attribute cause : String; attribute consequence : String; attribute existingSafeguard : String; attribute severity : CriticalityKind; attribute likelihood : String; attribute recommendation : String; }
         }
     }
 }

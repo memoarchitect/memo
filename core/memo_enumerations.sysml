@@ -51,6 +51,11 @@ package memo {
             enum def FaultTreeGateKind { enum andGate; enum orGate; enum kOfNGate; enum xorGate; enum inhibitGate; enum priorityAndGate; }
             enum def DesignDecisionStatusKind { enum proposed; enum accepted; enum superseded; enum rejected; }
             enum def RiskControlImplementationKind { enum hardwareDesign; enum softwareDesign; enum labeling; enum training; enum proceduralControl; }
+            enum def ActionKind { enum transform; enum validate; enum route; enum store; enum present; enum actuate; enum sense; enum compute; enum filter; enum encrypt; enum authenticate; }
+            enum def ActivityFlowKind { enum controlFlow; enum objectFlow; enum exceptionFlow; }
+            enum def MessageKind { enum synchronous; enum asynchronous; enum reply; enum create; enum destroy; enum timeout; }
+            enum def TimingConstraintKind { enum deadline; enum period; enum jitter; enum latency; enum separation; enum burstInterval; }
+            enum def HAZOPGuideWordKind { enum no; enum more; enum less; enum asWellAs; enum partOf; enum reverse; enum other; enum early; enum late; enum before; enum after; }
         }
     }
 }

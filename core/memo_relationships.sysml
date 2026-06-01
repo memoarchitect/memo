@@ -57,6 +57,13 @@ package memo {
 
             part def Composes specializes SemanticLink { part parent : ArchitectureElement; part child : ArchitectureElement; }
             part def AllocatesExchange specializes SemanticLink { part functionalFlow : ArchitectureElement; part componentExchange : ArchitectureElement; }
+
+            part def ContributesToHazard specializes SemanticLink { part failureMode : TraceableElement; part hazard : TraceableElement; }
+            part def LeadsToHazard specializes SemanticLink { part topEvent : TraceableElement; part hazard : TraceableElement; }
+            part def IdentifiesHazard specializes SemanticLink { part deviation : TraceableElement; part hazard : TraceableElement; }
+            part def AnalyzedBy specializes SemanticLink { part element : ArchitectureElement; part analysisArtifact : TraceableElement; }
+            part def MitigatedByControl specializes SemanticLink { part failureMode : TraceableElement; part riskControl : VerifiableElement; }
+            part def BrokenByControl specializes SemanticLink { part cutSet : TraceableElement; part riskControl : VerifiableElement; }
         }
     }
 }
