@@ -33,6 +33,13 @@ package memo {
             enum def AssetKind { enum data; enum credential; enum configuration; enum software; enum hardware; enum networkConnection; enum auditRecord; enum safetyCriticalFunction; }
             enum def ViewOutputKind { enum diagram; enum table; enum matrix; enum documentSection; enum dashboard; }
             enum def PresentationKind { enum blockDiagram; enum internalDiagram; enum activityDiagram; enum stateDiagram; enum riskTable; enum traceMatrix; enum narrativeSection; enum custom; }
+            enum def DeploymentKind { enum native; enum containerized; enum cloudHosted; enum embedded; enum partitioned; }
+            enum def ActorKind { enum patient; enum clinician; enum caregiver; enum technician; enum administrator; }
+            enum def ValidationMethodKind { enum clinicalTrial; enum summativeUsabilityTest; enum comparativeStudy; enum benchmarkTest; enum simulatedUse; }
+            enum def SOUPClassificationKind { enum classA; enum classB; enum classC; enum unclassified; }
+            enum def OperationalEntityKind { enum human; enum externalSystem; enum environmentalEntity; enum regulatoryBody; enum device; }
+            enum def ScenarioKind { enum nominal; enum degraded; enum emergency; enum maintenance; enum error; enum timeout; enum alarm; }
+            enum def FunctionalChainKind { enum nominal; enum error; enum degraded; enum alarm; enum startup; enum shutdown; enum calibration; }
         }
     }
 }

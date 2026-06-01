@@ -24,6 +24,20 @@ package memo {
             part def CyberRequirementDerivationLink specializes SemanticLink { part sourceThreatOrRisk : RequirementDriver; part targetRequirement : VerifiableElement; }
             part def CyberSafetyTraceLink specializes SemanticLink { attribute tracePurpose : String; part cyberElement : TraceableElement; part safetyElement : TraceableElement; }
             part def TrustBoundaryCrossingLink specializes SemanticLink { attribute crossingKind : InterfaceKind; part boundary : InterfaceElement; part crossingItem : TraceableElement; }
+
+            part def DerivesInto specializes SemanticLink { part parentRequirement : VerifiableElement; part childRequirement : VerifiableElement; }
+            part def DeploysOnto specializes SemanticLink { attribute deploymentKind : DeploymentKind; part softwareComponent : ArchitectureElement; part hostAssembly : ArchitectureElement; }
+            part def Validates specializes SemanticLink { part validationTarget : VerifiableElement; part validationCase : VerifiableElement; }
+            part def DependsOnSoup specializes SemanticLink { part component : ArchitectureElement; part soupItem : TraceableElement; }
+
+            part def Performs specializes SemanticLink { part entity : OperationalEntity; part activity : OperationalActivity; }
+            part def ContributesToCapability specializes SemanticLink { part activity : OperationalActivity; part capability : OperationalCapability; }
+            part def SequencesStep specializes SemanticLink { part activity : OperationalActivity; part nextActivity : OperationalActivity; }
+            part def DerivesSystemNeed specializes SemanticLink { part activity : OperationalActivity; part systemNeed : VerifiableElement; }
+
+            part def RealizesCapability specializes SemanticLink { part functionalChain : FunctionalChain; part capability : SystemCapability; }
+            part def InvolvesFunction specializes SemanticLink { part functionalChain : FunctionalChain; part function : LogicalFunction; }
+            part def RealizesScenario specializes SemanticLink { part functionalChain : FunctionalChain; part scenario : SystemScenario; }
         }
     }
 }

@@ -6,6 +6,8 @@ package memo {
         public import memo::manifest::release::*;
 
         public import memo::architecture::context::*;
+        public import memo::architecture::operational::*;
+        public import memo::architecture::system::*;
         public import memo::architecture::requirements::*;
         public import memo::architecture::functions::*;
         public import memo::architecture::logical_structure::*;
