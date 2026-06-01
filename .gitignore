@@ -10,5 +10,8 @@ sysand_env/
 # KerML Project Archives (build artifacts)
 *.kpar
 
+# Turborepo per-package cache + build logs
+.turbo/
+
 # OS
 .DS_Store
