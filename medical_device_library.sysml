@@ -30,6 +30,8 @@ package memo {
         public import memo::views::document_views::*;
 
         public import memo::compliance::artifacts::*;
+        public import memo::compliance::change::*;
+        public import memo::compliance::postmarket::*;
 
         public import memo::methodology::core::*;
         public import memo::methodology::viewpoints::*;

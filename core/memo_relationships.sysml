@@ -64,6 +64,11 @@ package memo {
             part def AnalyzedBy specializes SemanticLink { part element : ArchitectureElement; part analysisArtifact : TraceableElement; }
             part def MitigatedByControl specializes SemanticLink { part failureMode : TraceableElement; part riskControl : VerifiableElement; }
             part def BrokenByControl specializes SemanticLink { part cutSet : TraceableElement; part riskControl : VerifiableElement; }
+
+            part def Changes specializes SemanticLink { part changeRequest : TraceableElement; part changedElement : TraceableElement; }
+            part def TestedByUsability specializes SemanticLink { part uiElementOrTask : TraceableElement; part usabilityTest : VerifiableElement; }
+            part def FeedsBackTo specializes SemanticLink { part feedbackItem : TraceableElement; part designElement : TraceableElement; }
+            part def BindsToInterface specializes SemanticLink { part port : InterfaceElement; part boundInterface : InterfaceElement; }
         }
     }
 }

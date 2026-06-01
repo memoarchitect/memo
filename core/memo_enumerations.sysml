@@ -56,6 +56,8 @@ package memo {
             enum def MessageKind { enum synchronous; enum asynchronous; enum reply; enum create; enum destroy; enum timeout; }
             enum def TimingConstraintKind { enum deadline; enum period; enum jitter; enum latency; enum separation; enum burstInterval; }
             enum def HAZOPGuideWordKind { enum no; enum more; enum less; enum asWellAs; enum partOf; enum reverse; enum other; enum early; enum late; enum before; enum after; }
+            enum def ChangeTypeKind { enum corrective; enum preventive; enum enhancement; enum regulatoryDriven; }
+            enum def UseErrorCategoryKind { enum perception; enum cognition; enum action; enum memoryRecall; }
         }
     }
 }
