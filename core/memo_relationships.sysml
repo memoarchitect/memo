@@ -7,23 +7,23 @@ package memo {
             part def SemanticLink specializes TraceableElement { attribute linkStatus : LinkStatusKind; }
             part def DerivesFrom specializes SemanticLink { attribute sourceRole : String; part sourceDriver : RequirementDriver; part targetRequirement : VerifiableElement; }
             part def SatisfiedBy specializes SemanticLink { part requirement : VerifiableElement; part satisfyingElement : ArchitectureElement; }
-            part def HazardMitigationLink specializes SemanticLink { part riskControl : VerifiableElement; part mitigatedHazard : TraceableElement; }
-            part def FunctionAllocationLink specializes SemanticLink { part function : ArchitectureElement; part allocatedElement : ArchitectureElement; }
-            part def InterfaceRealizationLink specializes SemanticLink { part logicalInterface : InterfaceElement; part physicalInterface : InterfaceElement; }
-            part def VerificationLink specializes SemanticLink { part verificationTarget : VerifiableElement; part verificationCase : VerifiableElement; }
-            part def EvidenceProductionLink specializes SemanticLink { part producer : VerifiableElement; part producedEvidence : EvidenceElement; }
-            part def DocumentInclusionLink specializes SemanticLink { part sourceElement : TraceableElement; part targetView : TraceableElement; }
-            part def RiskTraceLink specializes SemanticLink { attribute riskRole : String; part sourceRiskElement : TraceableElement; part targetRiskElement : TraceableElement; }
-            part def ExecutionOrderLink specializes SemanticLink { attribute sameStepRequired : Boolean; attribute precedenceRationale : String; part predecessor : ArchitectureElement; part successor : ArchitectureElement; }
-            part def MethodologyBindingLink specializes SemanticLink { part boundModelElement : TraceableElement; part resolvedMethodology : TraceableElement; }
+            part def MitigatesHazard specializes SemanticLink { part riskControl : VerifiableElement; part mitigatedHazard : TraceableElement; }
+            part def AllocatedTo specializes SemanticLink { part function : ArchitectureElement; part allocatedElement : ArchitectureElement; }
+            part def RealizesInterface specializes SemanticLink { part logicalInterface : InterfaceElement; part physicalInterface : InterfaceElement; }
+            part def VerifiedBy specializes SemanticLink { part verificationTarget : VerifiableElement; part verificationCase : VerifiableElement; }
+            part def ProducesEvidence specializes SemanticLink { part producer : VerifiableElement; part producedEvidence : EvidenceElement; }
+            part def IncludedIn specializes SemanticLink { part sourceElement : TraceableElement; part targetView : TraceableElement; }
+            part def TracesRisk specializes SemanticLink { attribute riskRole : String; part sourceRiskElement : TraceableElement; part targetRiskElement : TraceableElement; }
+            part def Precedes specializes SemanticLink { attribute sameStepRequired : Boolean; attribute precedenceRationale : String; part predecessor : ArchitectureElement; part successor : ArchitectureElement; }
+            part def ResolvesToMethodology specializes SemanticLink { part boundModelElement : TraceableElement; part resolvedMethodology : TraceableElement; }
 
-            part def AssetThreatLink specializes SemanticLink { attribute threatRole : String; part protectedAsset : ArchitectureElement; part realizedThreat : RequirementDriver; }
-            part def ThreatVulnerabilityLink specializes SemanticLink { part realizedThreat : RequirementDriver; part enablingVulnerability : TraceableElement; }
-            part def ThreatScenarioLink specializes SemanticLink { part realizedThreat : RequirementDriver; part scenario : TraceableElement; }
-            part def VulnerabilityMitigationLink specializes SemanticLink { part enablingVulnerability : TraceableElement; part mitigation : VerifiableElement; }
-            part def CyberRequirementDerivationLink specializes SemanticLink { part sourceThreatOrRisk : RequirementDriver; part targetRequirement : VerifiableElement; }
-            part def CyberSafetyTraceLink specializes SemanticLink { attribute tracePurpose : String; part cyberElement : TraceableElement; part safetyElement : TraceableElement; }
-            part def TrustBoundaryCrossingLink specializes SemanticLink { attribute crossingKind : InterfaceKind; part boundary : InterfaceElement; part crossingItem : TraceableElement; }
+            part def ThreatenedBy specializes SemanticLink { attribute threatRole : String; part protectedAsset : ArchitectureElement; part realizedThreat : RequirementDriver; }
+            part def Exploits specializes SemanticLink { part realizedThreat : RequirementDriver; part enablingVulnerability : TraceableElement; }
+            part def RealizedByScenario specializes SemanticLink { part realizedThreat : RequirementDriver; part scenario : TraceableElement; }
+            part def MitigatesVulnerability specializes SemanticLink { part enablingVulnerability : TraceableElement; part mitigation : VerifiableElement; }
+            part def DerivesCyberRequirement specializes SemanticLink { part sourceThreatOrRisk : RequirementDriver; part targetRequirement : VerifiableElement; }
+            part def ImpactsSafety specializes SemanticLink { attribute tracePurpose : String; part cyberElement : TraceableElement; part safetyElement : TraceableElement; }
+            part def CrossesTrustBoundary specializes SemanticLink { attribute crossingKind : InterfaceKind; part boundary : InterfaceElement; part crossingItem : TraceableElement; }
 
             part def DerivesInto specializes SemanticLink { part parentRequirement : VerifiableElement; part childRequirement : VerifiableElement; }
             part def DeploysOnto specializes SemanticLink { attribute deploymentKind : DeploymentKind; part softwareComponent : ArchitectureElement; part hostAssembly : ArchitectureElement; }

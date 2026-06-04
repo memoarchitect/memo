@@ -62,10 +62,10 @@ package memo {
                 attribute rationaleText = "Even a light methodology should distinguish pre- and post-mitigation risk and assess against a matrix.";
             }
 
-            part requireVerificationLinkRule : RelationUsageRule {
+            part requireVerifiedByRule : RelationUsageRule {
                 attribute id = "RULE-002";
-                attribute name = "VerificationLinksRequired";
-                attribute relationTypeName = "VerificationLink";
+                attribute name = "VerifiedBysRequired";
+                attribute relationTypeName = "VerifiedBy";
                 attribute strength = RuleStrengthKind::required;
                 attribute rationaleText = "Safety-relevant requirements and controls shall trace to verification.";
             }

@@ -152,7 +152,7 @@ package memo {
                     attribute status = "planned";
                 }
 
-                part lnkAssetThreat : AssetThreatLink {
+                part lnkAssetThreat : ThreatenedBy {
                     attribute id = "CYL-001";
                     attribute name = "TherapyConfigThreatLink";
                     attribute threatRole = "targeted asset";
@@ -161,7 +161,7 @@ package memo {
                     part realizedThreat :> unauthorizedConfigChangeThreat;
                 }
 
-                part lnkLogAssetThreat : AssetThreatLink {
+                part lnkLogAssetThreat : ThreatenedBy {
                     attribute id = "CYL-010";
                     attribute name = "EventLogThreatLink";
                     attribute threatRole = "targeted asset";
@@ -170,7 +170,7 @@ package memo {
                     part realizedThreat :> eventLogTamperingThreat;
                 }
 
-                part lnkThreatVulnerability : ThreatVulnerabilityLink {
+                part lnkThreatVulnerability : Exploits {
                     attribute id = "CYL-002";
                     attribute name = "ThreatWeakAuthLink";
                     attribute linkStatus = LinkStatusKind::active;
@@ -178,15 +178,15 @@ package memo {
                     part enablingVulnerability :> weakServiceAuthentication;
                 }
 
-                part lnkThreatScenario : ThreatScenarioLink {
+                part lnkThreatScenario : RealizedByScenario {
                     attribute id = "CYL-003";
-                    attribute name = "ThreatScenarioLink";
+                    attribute name = "RealizedByScenario";
                     attribute linkStatus = LinkStatusKind::active;
                     part realizedThreat :> unauthorizedConfigChangeThreat;
                     part scenario :> tamperedConfigurationScenario;
                 }
 
-                part lnkVulnerabilityMitigation : VulnerabilityMitigationLink {
+                part lnkVulnerabilityMitigation : MitigatesVulnerability {
                     attribute id = "CYL-004";
                     attribute name = "WeakAuthMitigationLink";
                     attribute linkStatus = LinkStatusKind::planned;
@@ -194,7 +194,7 @@ package memo {
                     part mitigation :> strongServiceAuthentication;
                 }
 
-                part lnkThreatRequirement : CyberRequirementDerivationLink {
+                part lnkThreatRequirement : DerivesCyberRequirement {
                     attribute id = "CYL-005";
                     attribute name = "ThreatRequirementLink";
                     attribute linkStatus = LinkStatusKind::active;
@@ -202,7 +202,7 @@ package memo {
                     part targetRequirement :> reqAuthenticatedServiceAccess;
                 }
 
-                part lnkLogThreatRequirement : CyberRequirementDerivationLink {
+                part lnkLogThreatRequirement : DerivesCyberRequirement {
                     attribute id = "CYL-011";
                     attribute name = "LogThreatRequirementLink";
                     attribute linkStatus = LinkStatusKind::active;
@@ -210,7 +210,7 @@ package memo {
                     part targetRequirement :> reqAuthenticatedServiceAccess;
                 }
 
-                part lnkCyberSafety : CyberSafetyTraceLink {
+                part lnkCyberSafety : ImpactsSafety {
                     attribute id = "CYL-006";
                     attribute name = "CyberToSafetyRiskLink";
                     attribute linkStatus = LinkStatusKind::active;
@@ -219,7 +219,7 @@ package memo {
                     part safetyElement :> riskBefore;
                 }
 
-                part lnkBoundaryCrossing : TrustBoundaryCrossingLink {
+                part lnkBoundaryCrossing : CrossesTrustBoundary {
                     attribute id = "CYL-007";
                     attribute name = "MaintenanceBoundaryCrossingLink";
                     attribute linkStatus = LinkStatusKind::active;
@@ -228,15 +228,15 @@ package memo {
                     part crossingItem :> therapyConfigurationAsset;
                 }
 
-                part lnkCyberVerification : VerificationLink {
+                part lnkCyberVerification : VerifiedBy {
                     attribute id = "CYL-008";
-                    attribute name = "SecurityRequirementVerificationLink";
+                    attribute name = "SecurityRequirementVerifiedBy";
                     attribute linkStatus = LinkStatusKind::planned;
                     part verificationTarget :> reqAuthenticatedServiceAccess;
                     part verificationCase :> vcAuthenticatedServiceAccess;
                 }
 
-                part lnkCyberMitigationEvidence : EvidenceProductionLink {
+                part lnkCyberMitigationEvidence : ProducesEvidence {
                     attribute id = "CYL-009";
                     attribute name = "MitigationEvidenceLink";
                     attribute linkStatus = LinkStatusKind::planned;
