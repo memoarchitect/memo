@@ -5,8 +5,8 @@ package memo {
             private import memo::core::enumerations::*;
 
             part def SemanticLink specializes TraceableElement { attribute linkStatus : LinkStatusKind; }
-            part def RequirementSourceLink specializes SemanticLink { attribute sourceRole : String; part sourceDriver : RequirementDriver; part targetRequirement : VerifiableElement; }
-            part def RequirementSatisfactionLink specializes SemanticLink { part requirement : VerifiableElement; part satisfyingElement : ArchitectureElement; }
+            part def DerivesFrom specializes SemanticLink { attribute sourceRole : String; part sourceDriver : RequirementDriver; part targetRequirement : VerifiableElement; }
+            part def SatisfiedBy specializes SemanticLink { part requirement : VerifiableElement; part satisfyingElement : ArchitectureElement; }
             part def HazardMitigationLink specializes SemanticLink { part riskControl : VerifiableElement; part mitigatedHazard : TraceableElement; }
             part def FunctionAllocationLink specializes SemanticLink { part function : ArchitectureElement; part allocatedElement : ArchitectureElement; }
             part def InterfaceRealizationLink specializes SemanticLink { part logicalInterface : InterfaceElement; part physicalInterface : InterfaceElement; }

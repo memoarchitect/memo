@@ -19,7 +19,12 @@ package memo {
 
             part def ResolvedMethodology :> TraceableElement {
                 attribute version : String;
-                attribute rigor : MethodRigorKind;
+                // Risk-proportionate scope keyed to the device's software safety
+                // classification (IEC 62304 A/B/C) and lifecycle stage — not a
+                // "rigor dial". The class + stage determine which layers, links,
+                // viewpoints, and gates a release must clear.
+                attribute safetyClassification : SafetyClassKind;
+                attribute lifecycleStage : LifecycleStateKind;
                 attribute resolutionSummary : String;
             }
 

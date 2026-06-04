@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 - 2026-04-23
+## 0.1.0 - 2026-04-23
 Initial integrated release.
 
 Included in this release:
@@ -14,4 +14,4 @@ Included in this release:
 
 Notes:
 - internal draft bundle labels such as v10, v11, and v12 were development snapshots
-- `1.0.0` is the first package-wide release version
+- `0.1.0` is the first package-wide release version, declared in each project's `.project.json` (the version SysML tools query for inclusion)

@@ -19,8 +19,9 @@ package memo {
                     attribute id = "RMETH-GPCA-001";
                     attribute name = "GPCAPrototypeResolved";
                     attribute version = "1.0";
-                    attribute rigor = MethodRigorKind::lightweight;
-                    attribute resolutionSummary = "GPCA prototype resolved methodology — default minus cybersecurity and SOUP.";
+                    attribute safetyClassification = SafetyClassKind::C;
+                    attribute lifecycleStage = LifecycleStateKind::development;
+                    attribute resolutionSummary = "GPCA infusion pump — IEC 62304 Class C at development stage. Default scope minus cybersecurity and SOUP, as the prototype is non-networked.";
                 }
             }
         }

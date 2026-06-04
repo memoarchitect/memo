@@ -4,6 +4,9 @@ package memo {
             enum def ConcernKind { enum safety; enum usability; enum cybersecurity; enum performance; enum interoperability; enum reliability; enum privacy; enum regulatory; }
             enum def RequirementSourceKind { enum stakeholderNeed; enum risk; enum designDecision; enum changeRequest; }
             enum def RequirementStatusKind { enum draft; enum approved; enum implemented; enum verified; enum validated; enum retired; }
+            enum def RequirementNotationKind { enum freeText; enum ears; enum sophist; enum formalConstraint; }
+            enum def EarsPatternKind { enum ubiquitous; enum eventDriven; enum stateDriven; enum optionalFeature; enum unwantedBehavior; enum complex; }
+            enum def ObligationKind { enum shall; enum should; enum will; }
             enum def InterfaceDomainKind { enum logical; enum software; enum hardware; enum user; enum mixed; }
             enum def InterfaceKind { enum data; enum control; enum analogSignal; enum digitalSignal; enum power; enum network; enum api; enum userInteraction; enum notification; enum logging; enum mechanical; enum fluidic; }
             enum def FlowKind { enum information; enum command; enum status; enum telemetry; enum alarm; enum configuration; enum measurement; enum audit; enum power; }
@@ -21,7 +24,6 @@ package memo {
             enum def LinkStatusKind { enum planned; enum active; enum verified; enum obsolete; }
             enum def BehaviorPropertyKind { enum stateInvariant; enum transitionRule; enum temporalProperty; enum safetyProperty; enum livenessProperty; enum assume; enum guarantee; }
             enum def PropertyLanguageKind { enum naturalLanguage; enum pseudoFormal; enum agreeLike; enum ltlLike; enum ctlLike; }
-            enum def MethodRigorKind { enum lightweight; enum balanced; enum formal; }
             enum def RuleStrengthKind { enum optional; enum recommended; enum required; enum forbidden; }
             enum def RulePredicateKind { enum requireRelationship; enum conditionalRequireRelationship; enum requireAttribute; enum uniqueAttribute; enum cardinalityCheck; enum coverageCheck; }
             enum def RuleSeverityKind { enum error; enum warning; enum info; }

@@ -25,7 +25,6 @@ compliance/                  regulatory document views (ISO 14971 risk managemen
 artifacts/                   artifact kinds
 rules/                       native constraint defs (closure, coverage, cross-layer, lifecycle, quantitative)
 viewpoints/  views/          viewpoint + view definitions
-manifest/                    release manifest + changelog
 methodology/                 nested sysand project: default + GPCA methodology (memo-methodology-default)
 packages/                    thin @memo/* package manifests (consumed as data deps by memo-cli)
 examples/gpca-pump/          reference model — pure .sysml

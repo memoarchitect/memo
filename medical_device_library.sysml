@@ -3,7 +3,6 @@ package memo {
         public import memo::core::enumerations::*;
         public import memo::core::common::*;
         public import memo::core::relationships::*;
-        public import memo::manifest::release::*;
 
         public import memo::architecture::context::*;
         public import memo::architecture::operational::*;

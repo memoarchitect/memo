@@ -31,8 +31,9 @@ package memo {
                 attribute id = "RMETH-001";
                 attribute name = "MedicalDeviceLightDefaultResolved";
                 attribute version = "0.1";
-                attribute rigor = MethodRigorKind::lightweight;
-                attribute resolutionSummary = "Light resolved methodology with core requirements, architecture, risk, verification, and RMF support.";
+                attribute safetyClassification = SafetyClassKind::A;
+                attribute lifecycleStage = LifecycleStateKind::development;
+                attribute resolutionSummary = "Class A development-stage scope: core requirements, architecture, risk, verification, and RMF support required; cybersecurity and SOUP out of scope.";
             }
 
             part riskView : Viewpoint {

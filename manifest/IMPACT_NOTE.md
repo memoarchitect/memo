@@ -1,6 +1,6 @@
 # Impact Note
 
-## Release 1.0.0
+## Release 0.1.0
 This release establishes the baseline integrated structure for the package.
 
 ### Expected impact
