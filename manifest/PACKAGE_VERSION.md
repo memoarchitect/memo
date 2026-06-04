@@ -1,9 +1,9 @@
 # Package Version
 
 - Package: Medical Device SysML v2 Package
-- Version: **0.1.0**
-- Release type: initial integrated release
-- Release date: 2026-04-23
+- Version: **0.2.0**
+- Release type: relations remodeled as native SysML connections (breaking)
+- Release date: 2026-06-04
 
 This package uses a **single version for the entire release**.
 

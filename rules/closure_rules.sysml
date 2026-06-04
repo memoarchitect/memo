@@ -21,7 +21,7 @@ package memo {
                 attribute appliesTo = "Hazard";
                 attribute severity = RuleSeverityKind::error;
                 attribute rationaleText = "ISO 14971 requires each identified hazard to have risk control measures.";
-                require constraint { mitigates->size() >= 1 }
+                require constraint { mitigatesHazard->size() >= 1 }
             }
 
             constraint def hazardSeverityRule {
@@ -37,7 +37,7 @@ package memo {
                 attribute appliesTo = "RiskControl";
                 attribute severity = RuleSeverityKind::error;
                 attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.4.";
-                require constraint { verifies->size() >= 1 }
+                require constraint { verifiedBy->size() >= 1 }
             }
 
             constraint def riskBeforeMatrixRule {
@@ -55,7 +55,7 @@ package memo {
                 attribute appliesTo = "SystemRequirement";
                 attribute severity = RuleSeverityKind::error;
                 attribute rationaleText = "Requirements shall be traceable to stakeholder needs per ISO 13485.";
-                require constraint { traceTo->size() >= 1 }
+                require constraint { derivesFrom->size() >= 1 }
             }
 
             constraint def swReqTraceRule {
@@ -63,7 +63,7 @@ package memo {
                 attribute appliesTo = "SoftwareRequirement";
                 attribute severity = RuleSeverityKind::error;
                 attribute rationaleText = "Software requirements derive from system requirements per IEC 62304.";
-                require constraint { traceTo->size() >= 1 }
+                require constraint { derivesFrom->size() >= 1 }
             }
 
             // CR-MED-012 (RequirementIdMustBeUnique) is intentionally omitted from the native
@@ -87,7 +87,7 @@ package memo {
                 attribute appliesTo = "SoftwareComponent";
                 attribute severity = RuleSeverityKind::warning;
                 attribute rationaleText = "Software items shall be linked to their requirements per IEC 62304.";
-                require constraint { satisfies->size() >= 1 }
+                require constraint { satisfiedBy->size() >= 1 }
             }
 
             constraint def logicalFunctionAllocationRule {
@@ -113,7 +113,7 @@ package memo {
                 attribute appliesTo = "VerificationCase";
                 attribute severity = RuleSeverityKind::error;
                 attribute rationaleText = "Verification cases must be linked to verifiable items.";
-                require constraint { verifies->size() >= 1 }
+                require constraint { verifiedBy->size() >= 1 }
             }
 
             constraint def evidenceProductionRule {
@@ -121,7 +121,7 @@ package memo {
                 attribute appliesTo = "VerificationCase";
                 attribute severity = RuleSeverityKind::warning;
                 attribute rationaleText = "Verification results should be documented as evidence records.";
-                require constraint { produces->size() >= 1 }
+                require constraint { producesEvidence->size() >= 1 }
             }
 
             // ─── Cybersecurity Layer Rules ───────────────────────────────────────
@@ -131,7 +131,7 @@ package memo {
                 attribute appliesTo = "Threat";
                 attribute severity = RuleSeverityKind::error;
                 attribute rationaleText = "FDA cybersecurity guidance requires threat mitigation.";
-                require constraint { mitigatedBy->size() >= 1 }
+                require constraint { derivesCyberRequirement->size() >= 1 }
             }
 
             constraint def assetThreatLinkRule {

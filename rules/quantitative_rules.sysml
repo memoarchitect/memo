@@ -13,7 +13,7 @@ package memo {
                 attribute appliesTo = "Hazard";
                 attribute severity = RuleSeverityKind::info;
                 attribute rationaleText = "Excessive controls per hazard suggests the hazard is too broad and should be decomposed.";
-                require constraint { mitigates->size() >= 0 and mitigates->size() <= 10 }
+                require constraint { mitigatesHazard->size() >= 0 and mitigatesHazard->size() <= 10 }
             }
 
             constraint def swComponentMaxInterfacesRule {
@@ -21,7 +21,7 @@ package memo {
                 attribute appliesTo = "SoftwareComponent";
                 attribute severity = RuleSeverityKind::info;
                 attribute rationaleText = "High interface count indicates excessive coupling; consider decomposition.";
-                require constraint { exposes->size() >= 0 and exposes->size() <= 8 }
+                require constraint { threatenedBy->size() >= 0 and threatenedBy->size() <= 8 }
             }
 
             // QT-003 (RequirementVerificationRatio, "≥80% of requirements verified") is an

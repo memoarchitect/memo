@@ -4,71 +4,79 @@ package memo {
             private import memo::core::common::*;
             private import memo::core::enumerations::*;
 
-            part def SemanticLink specializes TraceableElement { attribute linkStatus : LinkStatusKind; }
-            part def DerivesFrom specializes SemanticLink { attribute sourceRole : String; part sourceDriver : RequirementDriver; part targetRequirement : VerifiableElement; }
-            part def SatisfiedBy specializes SemanticLink { part requirement : VerifiableElement; part satisfyingElement : ArchitectureElement; }
-            part def MitigatesHazard specializes SemanticLink { part riskControl : VerifiableElement; part mitigatedHazard : TraceableElement; }
-            part def AllocatedTo specializes SemanticLink { part function : ArchitectureElement; part allocatedElement : ArchitectureElement; }
-            part def RealizesInterface specializes SemanticLink { part logicalInterface : InterfaceElement; part physicalInterface : InterfaceElement; }
-            part def VerifiedBy specializes SemanticLink { part verificationTarget : VerifiableElement; part verificationCase : VerifiableElement; }
-            part def ProducesEvidence specializes SemanticLink { part producer : VerifiableElement; part producedEvidence : EvidenceElement; }
-            part def IncludedIn specializes SemanticLink { part sourceElement : TraceableElement; part targetView : TraceableElement; }
-            part def TracesRisk specializes SemanticLink { attribute riskRole : String; part sourceRiskElement : TraceableElement; part targetRiskElement : TraceableElement; }
-            part def Precedes specializes SemanticLink { attribute sameStepRequired : Boolean; attribute precedenceRationale : String; part predecessor : ArchitectureElement; part successor : ArchitectureElement; }
-            part def ResolvesToMethodology specializes SemanticLink { part boundModelElement : TraceableElement; part resolvedMethodology : TraceableElement; }
+            // All MEMO relations are native SysML v2 `connection def`s (each is a
+            // Connection/Association), specializing the SemanticLink base. The
+            // relationship name is the verb; the RelationshipRegistry derives the
+            // navigable type as camelCase(name) and navigation is bidirectional.
+            connection def SemanticLink { attribute linkStatus : LinkStatusKind; }
 
-            part def ThreatenedBy specializes SemanticLink { attribute threatRole : String; part protectedAsset : ArchitectureElement; part realizedThreat : RequirementDriver; }
-            part def Exploits specializes SemanticLink { part realizedThreat : RequirementDriver; part enablingVulnerability : TraceableElement; }
-            part def RealizedByScenario specializes SemanticLink { part realizedThreat : RequirementDriver; part scenario : TraceableElement; }
-            part def MitigatesVulnerability specializes SemanticLink { part enablingVulnerability : TraceableElement; part mitigation : VerifiableElement; }
-            part def DerivesCyberRequirement specializes SemanticLink { part sourceThreatOrRisk : RequirementDriver; part targetRequirement : VerifiableElement; }
-            part def ImpactsSafety specializes SemanticLink { attribute tracePurpose : String; part cyberElement : TraceableElement; part safetyElement : TraceableElement; }
-            part def CrossesTrustBoundary specializes SemanticLink { attribute crossingKind : InterfaceKind; part boundary : InterfaceElement; part crossingItem : TraceableElement; }
+            connection def DerivesFrom :> SemanticLink { end sourceDriver : RequirementDriver; end targetRequirement : VerifiableElement; }
+            connection def SatisfiedBy :> SemanticLink { end requirement : VerifiableElement; end satisfyingElement : ArchitectureElement; }
+            connection def MitigatesHazard :> SemanticLink { end riskControl : VerifiableElement; end mitigatedHazard : TraceableElement; }
+            connection def AllocatedTo :> SemanticLink { end function : ArchitectureElement; end allocatedElement : ArchitectureElement; }
+            connection def RealizesInterface :> SemanticLink { end logicalInterface : InterfaceElement; end physicalInterface : InterfaceElement; }
+            connection def VerifiedBy :> SemanticLink { end verificationTarget : VerifiableElement; end verificationCase : VerifiableElement; }
+            connection def ProducesEvidence :> SemanticLink { end producer : VerifiableElement; end producedEvidence : EvidenceElement; }
+            connection def IncludedIn :> SemanticLink { end sourceElement : TraceableElement; end targetView : TraceableElement; }
+            connection def Precedes :> SemanticLink { attribute sameStepRequired : Boolean; attribute precedenceRationale : String; end predecessor : ArchitectureElement; end successor : ArchitectureElement; }
+            connection def ResolvesToMethodology :> SemanticLink { end boundModelElement : TraceableElement; end resolvedMethodology : TraceableElement; }
 
-            part def DerivesInto specializes SemanticLink { part parentRequirement : VerifiableElement; part childRequirement : VerifiableElement; }
-            part def DeploysOnto specializes SemanticLink { attribute deploymentKind : DeploymentKind; part softwareComponent : ArchitectureElement; part hostAssembly : ArchitectureElement; }
-            part def Validates specializes SemanticLink { part validationTarget : VerifiableElement; part validationCase : VerifiableElement; }
-            part def DependsOnSoup specializes SemanticLink { part component : ArchitectureElement; part soupItem : TraceableElement; }
+            // ISO 14971 risk chain — distinct sequence-of-events relations over risk elements.
+            connection def TracesRisk :> SemanticLink { end sourceRiskElement : TraceableElement; end targetRiskElement : TraceableElement; }
+            connection def AssessedAgainst :> SemanticLink { end risk : TraceableElement; end riskMatrix : TraceableElement; }
 
-            part def Performs specializes SemanticLink { part entity : OperationalEntity; part activity : OperationalActivity; }
-            part def ContributesToCapability specializes SemanticLink { part activity : OperationalActivity; part capability : OperationalCapability; }
-            part def SequencesStep specializes SemanticLink { part activity : OperationalActivity; part nextActivity : OperationalActivity; }
-            part def DerivesSystemNeed specializes SemanticLink { part activity : OperationalActivity; part systemNeed : VerifiableElement; }
+            connection def ThreatenedBy :> SemanticLink { attribute threatRole : String; end protectedAsset : ArchitectureElement; end realizedThreat : RequirementDriver; }
+            connection def Exploits :> SemanticLink { end realizedThreat : RequirementDriver; end enablingVulnerability : TraceableElement; }
+            connection def RealizedByScenario :> SemanticLink { end realizedThreat : RequirementDriver; end scenario : TraceableElement; }
+            connection def MitigatesVulnerability :> SemanticLink { end enablingVulnerability : TraceableElement; end mitigation : VerifiableElement; }
+            connection def DerivesCyberRequirement :> SemanticLink { end sourceThreatOrRisk : RequirementDriver; end targetRequirement : VerifiableElement; }
+            connection def ImpactsSafety :> SemanticLink { attribute tracePurpose : String; end cyberElement : TraceableElement; end safetyElement : TraceableElement; }
+            connection def CrossesTrustBoundary :> SemanticLink { attribute crossingKind : InterfaceKind; end boundary : InterfaceElement; end crossingItem : TraceableElement; }
 
-            part def RealizesCapability specializes SemanticLink { part functionalChain : FunctionalChain; part capability : SystemCapability; }
-            part def InvolvesFunction specializes SemanticLink { part functionalChain : FunctionalChain; part function : LogicalFunction; }
-            part def RealizesScenario specializes SemanticLink { part functionalChain : FunctionalChain; part scenario : SystemScenario; }
+            connection def DerivesInto :> SemanticLink { end parentRequirement : VerifiableElement; end childRequirement : VerifiableElement; }
+            connection def DeploysOnto :> SemanticLink { attribute deploymentKind : DeploymentKind; end softwareComponent : ArchitectureElement; end hostAssembly : ArchitectureElement; }
+            connection def Validates :> SemanticLink { end validationTarget : VerifiableElement; end validationCase : VerifiableElement; }
+            connection def DependsOnSoup :> SemanticLink { end component : ArchitectureElement; end soupItem : TraceableElement; }
 
-            part def HostedBy specializes SemanticLink { part processingNode : ArchitectureElement; part hostAssembly : ArchitectureElement; }
-            part def RealizesComponentExchange specializes SemanticLink { part physicalLink : ArchitectureElement; part componentExchange : ArchitectureElement; }
+            connection def Performs :> SemanticLink { end entity : OperationalEntity; end activity : OperationalActivity; }
+            connection def ContributesToCapability :> SemanticLink { end activity : OperationalActivity; end capability : OperationalCapability; }
+            connection def SequencesStep :> SemanticLink { end activity : OperationalActivity; end nextActivity : OperationalActivity; }
+            connection def DerivesSystemNeed :> SemanticLink { end activity : OperationalActivity; end systemNeed : VerifiableElement; }
 
-            part def HasFailureMode specializes SemanticLink { part element : ArchitectureElement; part failureMode : TraceableElement; }
-            part def CausesEffect specializes SemanticLink { part failureMode : TraceableElement; part failureEffect : TraceableElement; }
-            part def CausedBy specializes SemanticLink { part failureMode : TraceableElement; part failureCause : TraceableElement; }
-            part def DetectedBy specializes SemanticLink { part failureMode : TraceableElement; part detectionMethod : TraceableElement; }
-            part def AddressedByAction specializes SemanticLink { part failureMode : TraceableElement; part fmeaAction : VerifiableElement; }
+            connection def RealizesCapability :> SemanticLink { end functionalChain : FunctionalChain; end capability : SystemCapability; }
+            connection def InvolvesFunction :> SemanticLink { end functionalChain : FunctionalChain; end function : LogicalFunction; }
+            connection def RealizesScenario :> SemanticLink { end functionalChain : FunctionalChain; end scenario : SystemScenario; }
 
-            part def InputToGate specializes SemanticLink { part input : TraceableElement; part gate : TraceableElement; }
-            part def ProducesEvent specializes SemanticLink { part gate : TraceableElement; part event : TraceableElement; }
-            part def OriginatesFrom specializes SemanticLink { part event : TraceableElement; part origin : ArchitectureElement; }
-            part def ContainsEvent specializes SemanticLink { part cutSet : TraceableElement; part event : TraceableElement; }
+            connection def HostedBy :> SemanticLink { end processingNode : ArchitectureElement; end hostAssembly : ArchitectureElement; }
+            connection def RealizesComponentExchange :> SemanticLink { end physicalLink : ArchitectureElement; end componentExchange : ArchitectureElement; }
 
-            part def Decides specializes SemanticLink { part decision : TraceableElement; part affectedElement : TraceableElement; }
+            connection def HasFailureMode :> SemanticLink { end element : ArchitectureElement; end failureMode : TraceableElement; }
+            connection def CausesEffect :> SemanticLink { end failureMode : TraceableElement; end failureEffect : TraceableElement; }
+            connection def CausedBy :> SemanticLink { end failureMode : TraceableElement; end failureCause : TraceableElement; }
+            connection def DetectedBy :> SemanticLink { end failureMode : TraceableElement; end detectionMethod : TraceableElement; }
+            connection def AddressedByAction :> SemanticLink { end failureMode : TraceableElement; end fmeaAction : VerifiableElement; }
 
-            part def Composes specializes SemanticLink { part parent : ArchitectureElement; part child : ArchitectureElement; }
-            part def AllocatesExchange specializes SemanticLink { part functionalFlow : ArchitectureElement; part componentExchange : ArchitectureElement; }
+            connection def InputToGate :> SemanticLink { end input : TraceableElement; end gate : TraceableElement; }
+            connection def ProducesEvent :> SemanticLink { end gate : TraceableElement; end event : TraceableElement; }
+            connection def OriginatesFrom :> SemanticLink { end event : TraceableElement; end origin : ArchitectureElement; }
+            connection def ContainsEvent :> SemanticLink { end cutSet : TraceableElement; end event : TraceableElement; }
 
-            part def ContributesToHazard specializes SemanticLink { part failureMode : TraceableElement; part hazard : TraceableElement; }
-            part def LeadsToHazard specializes SemanticLink { part topEvent : TraceableElement; part hazard : TraceableElement; }
-            part def IdentifiesHazard specializes SemanticLink { part deviation : TraceableElement; part hazard : TraceableElement; }
-            part def AnalyzedBy specializes SemanticLink { part element : ArchitectureElement; part analysisArtifact : TraceableElement; }
-            part def MitigatedByControl specializes SemanticLink { part failureMode : TraceableElement; part riskControl : VerifiableElement; }
-            part def BrokenByControl specializes SemanticLink { part cutSet : TraceableElement; part riskControl : VerifiableElement; }
+            connection def Decides :> SemanticLink { end decision : TraceableElement; end affectedElement : TraceableElement; }
 
-            part def Changes specializes SemanticLink { part changeRequest : TraceableElement; part changedElement : TraceableElement; }
-            part def TestedByUsability specializes SemanticLink { part uiElementOrTask : TraceableElement; part usabilityTest : VerifiableElement; }
-            part def FeedsBackTo specializes SemanticLink { part feedbackItem : TraceableElement; part designElement : TraceableElement; }
-            part def BindsToInterface specializes SemanticLink { part port : InterfaceElement; part boundInterface : InterfaceElement; }
+            connection def Composes :> SemanticLink { end parent : ArchitectureElement; end child : ArchitectureElement; }
+            connection def AllocatesExchange :> SemanticLink { end functionalFlow : ArchitectureElement; end componentExchange : ArchitectureElement; }
+
+            connection def ContributesToHazard :> SemanticLink { end failureMode : TraceableElement; end hazard : TraceableElement; }
+            connection def LeadsToHazard :> SemanticLink { end topEvent : TraceableElement; end hazard : TraceableElement; }
+            connection def IdentifiesHazard :> SemanticLink { end deviation : TraceableElement; end hazard : TraceableElement; }
+            connection def AnalyzedBy :> SemanticLink { end element : ArchitectureElement; end analysisArtifact : TraceableElement; }
+            connection def MitigatedByControl :> SemanticLink { end failureMode : TraceableElement; end riskControl : VerifiableElement; }
+            connection def BrokenByControl :> SemanticLink { end cutSet : TraceableElement; end riskControl : VerifiableElement; }
+
+            connection def Changes :> SemanticLink { end changeRequest : TraceableElement; end changedElement : TraceableElement; }
+            connection def TestedByUsability :> SemanticLink { end uiElementOrTask : TraceableElement; end usabilityTest : VerifiableElement; }
+            connection def FeedsBackTo :> SemanticLink { end feedbackItem : TraceableElement; end designElement : TraceableElement; }
+            connection def BindsToInterface :> SemanticLink { end port : InterfaceElement; end boundInterface : InterfaceElement; }
         }
     }
 }

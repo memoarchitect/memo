@@ -12,7 +12,7 @@ package memo {
                 attribute appliesTo = "Hazard";
                 attribute severity = RuleSeverityKind::warning;
                 attribute rationaleText = "Risk-requirement traceability required for regulatory submissions.";
-                require constraint { traceTo->size() >= 1 }
+                require constraint { derivesFrom->size() >= 1 }
             }
 
             constraint def reqToArchTraceRule {
