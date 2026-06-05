@@ -19,7 +19,7 @@ Today's evidence is spread across documents that are traced but not always meani
 
 **The artifacts remain. The meaning drifts.**
 
-The problem isn't too few documents. It's that the links between them can't be checked for meaning or completeness. MEMO addresses this by moving the source of meaning from disconnected documents into a connected architecture model.
+The problem isn't too few documents. It's that the links between them can't be checked for meaning or completeness. meMO addresses this by moving the source of meaning from disconnected documents into a connected architecture model.
 
 ## What meMO Provides
 
@@ -71,7 +71,7 @@ Need / Risk / Concern
 
 A concern creates a requirement. A requirement is satisfied by architecture. Architecture exposes interfaces and behavior. Behavior implements or supports risk controls. Verification cases check claims. Evidence records what was shown. Document views communicate the result.
 
-MEMO's ontology exists to make that thread typed and checkable.
+meMO's ontology exists to make that thread typed and checkable.
 
 ## Quick Start
 
