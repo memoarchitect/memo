@@ -1,0 +1,79 @@
+site_name: meMO — Medical Engineering Modelling Ontology
+site_description: A SysML v2-native ontology for medical device architecture and safety assurance.
+site_url: https://memoarchitect.github.io/memo/
+repo_url: https://github.com/memoarchitect/memo
+repo_name: memoarchitect/memo
+
+theme:
+  name: material
+  palette:
+    - scheme: memo
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Nunito
+    code: JetBrains Mono
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+    - search.suggest
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Overview: getting-started/overview.md
+    - Adoption Guide: getting-started/adoption.md
+  - Ontology:
+    - Package Structure: ontology/packages.md
+    - Architecture Layers: ontology/layers.md
+    - Semantic Links: ontology/links.md
+    - Closure Rules: ontology/rules.md
+  - Methodology:
+    - Profiles & Scope: methodology/profiles.md
+    - Viewpoints & Views: methodology/viewpoints.md
+    - Workflow & Gates: methodology/workflow.md
+  - GPCA Example:
+    - Overview: gpca/overview.md
+    - Safety Thread: gpca/safety-thread.md
+  - Reference:
+    - Standards Coverage: reference/standards.md
+    - Changelog: reference/changelog.md

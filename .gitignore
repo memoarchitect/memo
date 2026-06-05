@@ -13,5 +13,8 @@ sysand_env/
 # Turborepo per-package cache + build logs
 .turbo/
 
+# MkDocs build output
+site/
+
 # OS
 .DS_Store
