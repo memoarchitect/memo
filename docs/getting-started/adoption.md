@@ -1,56 +1,165 @@
 # Adoption Guide
 
-Teams do not need to adopt every layer or tool at once. The practical starting point is a typed safety thread that can be reviewed, queried, and extended.
+A team should not begin meMO adoption by modeling the entire product. That is the fastest way to fail. The right starting point is **one useful safety thread**.
 
-## Pilot Checklist
+## Start with a Thread, Not a Taxonomy
 
-### 1. One Product Slice
+A taxonomy asks the team to classify everything. A safety thread asks the team to model one meaningful path through the system.
 
-Select one safety thread, import the core ontology, and model:
+The first meMO model should answer a practical question:
 
-- A stakeholder need or requirement
-- The architecture element that addresses it
-- A risk control tied to the design
-- A verification case with acceptance criteria
-- An evidence placeholder
-- One view that presents the thread
+> Can we connect one safety concern to the architecture, behavior, verification case, and evidence that support it?
 
-This gives you a complete typed chain from need to evidence — small enough to validate the approach with your team.
+## Choosing the First Product Slice
 
-### 2. Keep Core Stable
+The first slice should be small, meaningful, and cross-disciplinary. Good candidates include:
 
-Extend in your own package. Add device-specific states, modes, interfaces, and conventions without changing the released ontology:
+- A safety-relevant alarm
+- A therapy-control behavior
+- A lockout or interlock
+- A cybersecurity mitigation with safety impact
+- A SOUP-dependent control path
+- A configuration or update mechanism
+- A user interaction that could create harm if misunderstood
 
-```sysml
-package MyDevice {
-    import memo::*;
+Avoid starting with an entire product architecture, every requirement, or a full risk-management file migration.
 
-    part def InfusionMode :> ModeState {
-        attribute maxFlowRate : Real;
-    }
-}
-```
+## Modeling the Thread Step by Step
 
-### 3. Methodology Before Tooling
+### Step 1 — Capture the driver
 
-Write the review gates and closure expectations first. Automation should run checks the team already agrees matter.
+The driver may be an intended use concern, stakeholder need, hazard, cybersecurity threat, use error, or regulatory concern. Ask: *Why does this requirement exist? What concern caused it?*
 
-Use `ResolvedMethodology` to scope the method to your device's safety class and lifecycle stage:
+### Step 2 — Create the requirement
 
-```sysml
-part resolvedMethod : ResolvedMethodology {
-    attribute safetyClassification = SafetyClassKind::C;
-    attribute lifecycleStage = LifecycleStageKind::development;
-}
-```
+Express the obligation. meMO distinguishes `SystemRequirement`, `SoftwareRequirement`, and `HardwareRequirement`. Ask: *Is this system-level or software-level? Is it safety-related? What is the source?*
 
-### 4. Add Tools Gradually
+### Step 3 — Connect requirement to architecture
 
-Prove value before integration:
+A requirement should be satisfied by something. Use the `SatisfiedBy` relationship. Ask: *Which component satisfies this requirement? Is the responsibility clear?*
 
-1. Run validation and generate lightweight views first
-2. Integrate with ALM, PLM, or QMS only after the model shows review value
-3. Use CI validation (`memo validate`) to catch gaps before design review
+### Step 4 — Add interface and behavior
+
+Many safety claims depend on interfaces and behavior. Identify logical interfaces, exchange items, behavior machines, modes, transitions, scenarios, and timing constraints. Ask: *What crosses the boundary? What state matters? What happens on fault or timeout?*
+
+### Step 5 — Connect risk control
+
+Connect the architecture and requirement to hazard and risk-control concepts. Ask: *Which hazard is being controlled? Is the control implemented in software, hardware, labeling, or procedure? Which architecture element implements it?*
+
+### Step 6 — Add verification case and evidence
+
+The thread is not complete until verification and evidence are connected. Ask: *What claim is being verified? What method is used? What are the acceptance criteria? What evidence is produced?*
+
+### Step 7 — Create a view
+
+Make the thread visible. A view may be an architecture view, safety view, verification view, or document-backed view. A model that nobody can read will not survive adoption.
+
+## Adoption by Role
+
+### For startups
+
+Use the core ontology. Model intended use and one or two safety threads. Capture key architecture elements and interfaces. Connect hazards, risk controls, verification cases, and evidence placeholders. Generate lightweight architecture and risk views. Grow into DHF support as the product matures.
+
+The value: early coherence before the process becomes heavy.
+
+### For enterprise teams
+
+Do not begin as a replacement program. meMO can begin as a **semantic bridge** across existing tools.
+
+Select one change-impact problem. Model the architecture slice involved. Import or reference existing requirements and risks. Connect verification and evidence. Use meMO views to support review. Add rules gradually. Integrate with existing tools later.
+
+The value: reducing fragmentation without replacing everything.
+
+### For architects
+
+Model architecture elements, interfaces, behavior, decisions, and relationships to requirements and risk controls. Focus on responsibilities, component boundaries, allocations, deployment, SOUP dependencies, and change impact.
+
+### For safety engineers
+
+Focus on hazards, sequences of events, hazardous situations, harms, risk controls, residual risk, and links to architecture and verification. The model should show which component implements a control — you should not have to guess.
+
+### For verification and regulatory teams
+
+Connect test cases and evidence to claims. Distinguish a verification procedure, the evidence it produces, and the claim it supports. Use document views and review surfaces to reduce ambiguity.
+
+## Adoption Checklists
+
+### First pilot
+
+- [ ] Product slice selected
+- [ ] One safety thread selected
+- [ ] Core ontology imported
+- [ ] Requirement modeled
+- [ ] Architecture element modeled
+- [ ] Interface or behavior modeled
+- [ ] Hazard modeled
+- [ ] Risk control modeled
+- [ ] Verification case modeled
+- [ ] Evidence placeholder modeled
+- [ ] One view generated
+- [ ] Review completed with architect, safety, and verification leads
+
+### Startup
+
+- [ ] Start with lightweight architecture/risk model
+- [ ] Capture intended use and critical safety threads
+- [ ] Model key architecture elements and interfaces
+- [ ] Connect risk controls to requirements and verification
+- [ ] Generate lightweight architecture and risk views
+- [ ] Expand toward DHF support over time
+
+### Enterprise
+
+- [ ] Choose one change-impact problem
+- [ ] Model the architecture slice
+- [ ] Reference existing requirements and risks
+- [ ] Connect verification and evidence
+- [ ] Add rule checks gradually
+- [ ] Define model ownership
+- [ ] Integrate with ALM/PLM/QMS only after value is demonstrated
+
+### Architecture review
+
+- [ ] Architecture elements have responsibilities
+- [ ] Interfaces have exchanged items and direction
+- [ ] Safety-relevant components have safety class
+- [ ] SOUP dependencies are identified
+- [ ] Requirements are satisfied by architecture elements
+- [ ] Risk controls are allocated to architecture or behavior
+- [ ] Design decisions include rationale
+- [ ] Impact paths are visible
+
+### Safety review
+
+- [ ] Hazards are identified
+- [ ] Hazardous situations and harms are modeled
+- [ ] Risk controls connect to requirements and architecture
+- [ ] Verification cases exist for controls
+- [ ] Evidence is connected
+- [ ] Residual risk is represented
+
+### Verification review
+
+- [ ] Verification cases identify targets
+- [ ] Verification method is explicit
+- [ ] Acceptance criteria are captured
+- [ ] Evidence artifacts are connected
+- [ ] Evidence lifecycle state is known
+- [ ] Release baseline impact is understood
+
+## Expanding by Pattern
+
+After the first successful safety thread, expand by pattern — not by mandate:
+
+- Alarm pattern
+- Interlock pattern
+- SOUP dependency pattern
+- Cybersecurity mitigation pattern
+- Risk-control verification pattern
+- Document-view pattern
+- Design-decision pattern
+
+Patterns make adoption scalable.
 
 ## Extension Rules
 

@@ -48,6 +48,7 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - def_list
   - attr_list
   - md_in_html
   - tables
@@ -76,4 +77,7 @@ nav:
     - Safety Thread: gpca/safety-thread.md
   - Reference:
     - Standards Coverage: reference/standards.md
+    - Relationship Reference: reference/relationships.md
+    - SysML v2 Primer: reference/sysmlv2-primer.md
+    - Glossary: reference/glossary.md
     - Changelog: reference/changelog.md
