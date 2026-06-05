@@ -74,3 +74,93 @@
 .md-typeset pre > code {
   color: inherit;
 }
+
+/* Package shape cards */
+.memo-pkg {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5em;
+  padding: 1em 1.2em;
+  margin: 0.6em 0;
+  background: var(--md-default-bg-color);
+  border-radius: 0 6px 6px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.memo-pkg-name {
+  min-width: 220px;
+  font-size: 1.05em;
+  font-weight: 700;
+}
+
+.memo-pkg-name code {
+  font-size: 0.95em;
+  color: #0b1e2d !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+[data-md-color-scheme="slate"] .memo-pkg-name code {
+  color: #e2e8f0 !important;
+}
+
+.memo-pkg-desc {
+  font-size: 0.92em;
+  line-height: 1.5;
+}
+
+/* Hierarchy layers */
+.memo-hierarchy {
+  margin: 1.5em 0;
+}
+
+.memo-layer {
+  padding: 1em 1.2em;
+  margin: 0.5em 0;
+  border: 1px solid rgba(45, 212, 168, 0.2);
+  border-left: 3px solid #2dd4a8;
+  border-radius: 0 6px 6px 0;
+  background: var(--md-default-bg-color);
+}
+
+.memo-layer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4em;
+}
+
+.memo-layer-header strong {
+  font-size: 1.1em;
+  color: #0b1e2d;
+}
+
+[data-md-color-scheme="slate"] .memo-layer-header strong {
+  color: #e2e8f0;
+}
+
+.memo-badge {
+  display: inline-block;
+  padding: 0.25em 0.9em;
+  border: 1px solid #0b1e2d;
+  border-radius: 20px;
+  font-size: 0.82em;
+  font-weight: 500;
+  color: #0b1e2d;
+  background: transparent;
+}
+
+[data-md-color-scheme="slate"] .memo-badge {
+  border-color: #94a3b8;
+  color: #94a3b8;
+}
+
+.memo-layer-desc {
+  font-size: 0.92em;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+[data-md-color-scheme="slate"] .memo-layer-desc {
+  color: #94a3b8;
+}
