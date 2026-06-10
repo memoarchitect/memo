@@ -26,5 +26,5 @@
     "iec-62304",
     "iso-13485"
   ],
-  "license": "Apache-2.0"
+  "license": "MIT"
 }

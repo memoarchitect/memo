@@ -1,7 +1,7 @@
 {
   "name": "@memo/ontology-arch",
   "version": "0.2.0",
-  "description": "MEMO architecture ontology — 11-layer MBSE backbone (v12 aligned). 56 classes, 45 object properties.",
+  "description": "MEMO architecture ontology — 14-layer MBSE backbone (Context, Requirements, Functions, Logical Structure/Interfaces, Physical Interfaces, Software/Hardware Structure, Behavior, Risk, Assurance, Cybersecurity, Decisions).",
   "splitTarget": "memo-sysmlv2",
   "type": "module",
   "private": true,
@@ -24,5 +24,5 @@
     "architecture",
     "iso-42010"
   ],
-  "license": "Apache-2.0"
+  "license": "MIT"
 }

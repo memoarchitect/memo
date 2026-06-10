@@ -3,7 +3,10 @@ package memo {
         package requirements {
             private import memo::core::common::*;
             private import memo::core::enumerations::*;
-            requirement def StakeholderNeed specializes RequirementDriver { attribute statement : String; attribute priority : String; }
+            requirement def StakeholderNeed specializes RequirementDriver {
+                attribute statement : String;
+                attribute priority : String;
+            }
             part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
             requirement def Requirement specializes VerifiableElement {
                 attribute statement : String;

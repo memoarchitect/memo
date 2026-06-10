@@ -1,6 +1,6 @@
 {
   "name": "@memo/methodology-gpca",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "GPCA infusion pump methodology — subtraction-based tailoring of @memo/methodology-default for the non-networked prototype variant.",
   "splitTarget": "memo-sysmlv2",
   "type": "module",
@@ -21,5 +21,5 @@
     "medical-device",
     "gpca"
   ],
-  "license": "Apache-2.0"
+  "license": "MIT"
 }
