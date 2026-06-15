@@ -19,7 +19,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 PROJECTS=(
   "."
-  "methodology"
+  "src/methodology"
 )
 
 if ! command -v sysand >/dev/null 2>&1; then

@@ -4,4 +4,4 @@ type: ontology
 description: "MEMO architecture ontology — 14-layer MBSE backbone (Context → Requirements → Functions → Logical Structure → Logical Interfaces → Physical Interfaces → Software Structure → Hardware Structure → Behavior → Risk → Architecture Risk → Assurance → Cybersecurity → Decisions)."
 license: "MIT"
 tags: ["mbse", "sysml-v2", "arcadia", "iso-42010", "medical-device", "architecture"]
-sysmlDir: "../.."
+sysmlDir: "../../src"

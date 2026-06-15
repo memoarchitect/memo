@@ -14,20 +14,28 @@ three phased-release repos (see ADR-1-17).
 
 ## Layout
 
+All SysML v2 content lives under `src/`, where the **directory tree mirrors the
+`memo::` namespace hierarchy** (e.g. `memo::architecture::context` →
+`src/architecture/context/`). Infra (sysand manifests, build output, scripts)
+stays at the repo root.
+
 ```
 .project.json                sysand project: the core ontology (memo-ontology)
 sysand-lock.toml             sysand lockfile
-medical_device_library.sysml
-architecture/                element kinds, structure, interfaces, risk, requirements
-core/                        common types, enumerations, relationships
-base/                        dimensions, semantics, methodology base + KerML stdlib wrapper
-compliance/                  regulatory document views (ISO 14971 risk management file)
-artifacts/                   artifact kinds
-rules/                       native constraint defs (closure, coverage, cross-layer, lifecycle, quantitative)
-viewpoints/  views/          viewpoint + view definitions
-methodology/                 nested sysand project: default + GPCA methodology (memo-methodology-default)
 packages/                    thin @memo/* package manifests (consumed as data deps by memo-cli)
-examples/gpca-pump/          reference model — pure .sysml
+scripts/  manifest/          build scripts + version metadata
+src/                         ── all .sysml content (namespace = directory) ──
+  medical_device_library.sysml   public import surface
+  core/                          common/ enumerations/ relationships/
+  base/                          dimensions/ methodology/ rules/ semantics/ + stdlib/* (KerML wrapper)
+  architecture/                  one folder per layer: context/ requirements/ functions/ behavior/
+                                 logical_structure/ software_structure/ … risk/ cybersecurity/ assurance/ …
+  compliance/                    artifacts/ change/ document_views/ postmarket/ iso14971/
+  viewpoints/  views/            core/ + default_viewpoints/ ; core/ + document_views/
+  rules/                         closure/ coverage/ crosslayer/ lifecycle/ quantitative/ (native constraint defs)
+  artifacts/                     artifact kinds (memo::artifacts)
+  methodology/                   nested sysand project: memo/ (default) + gpca/ (memo-methodology-default)
+  examples/gpca-pump/            reference model — pure .sysml
 ```
 
 ## Build / verify

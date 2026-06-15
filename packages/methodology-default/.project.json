@@ -3,6 +3,6 @@
   "name": "@memo/methodology-default",
   "version": "0.2.0",
   "extends": "@memo/ontology-arch",
-  "sysmlDir": "../../ontology/methodology/memo",
+  "sysmlDir": "../../src/methodology/memo",
   "usage": ["viewpoints", "views", "rules", "gates", "patterns", "profiles", "workflow", "dhf"]
 }
