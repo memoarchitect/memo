@@ -1,7 +1,7 @@
 {
-  "name": "@memo/ontology-process",
+  "name": "@memo/ontology",
   "version": "0.2.0",
-  "description": "MEMO process ontology — regulatory process activities and work products (ISO 14971, IEC 62304, ISO 13485, FDA 21 CFR 820, EU MDR, and more).",
+  "description": "MEMO architecture ontology — 14-layer MBSE backbone (Context, Requirements, Functions, Logical Structure/Interfaces, Physical Interfaces, Software/Hardware Structure, Behavior, Risk, Assurance, Cybersecurity, Decisions).",
   "splitTarget": "memo-sysmlv2",
   "type": "module",
   "private": true,
@@ -21,10 +21,8 @@
     "mbse",
     "ontology",
     "medical-device",
-    "process",
-    "iso-14971",
-    "iec-62304",
-    "iso-13485"
+    "architecture",
+    "iso-42010"
   ],
   "license": "MIT"
 }

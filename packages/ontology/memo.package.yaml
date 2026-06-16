@@ -1,0 +1,7 @@
+name: "@memo/ontology"
+version: "0.2.0"
+type: ontology
+description: "MEMO — the single canonical medical-device ontology: core semantics, the Arcadia-inspired architecture layers (context, requirements, behavior, structure, interfaces, risk, cybersecurity, assurance, …), compliance, viewpoints, views, and invariant rules. One namespace (memo::), one src/ tree."
+license: "MIT"
+tags: ["mbse", "sysml-v2", "arcadia", "iso-42010", "medical-device", "ontology", "iso-14971", "iec-62304"]
+sysmlDir: "../../src"

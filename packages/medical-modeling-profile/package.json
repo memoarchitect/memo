@@ -1,7 +1,7 @@
 {
   "name": "@memo/medical-modeling-profile",
   "version": "0.2.0",
-  "description": "MEMO medical modeling profile package — closure rules, viewpoints, and starter templates on top of @memo/ontology-arch and @memo/ontology-process",
+  "description": "MEMO medical modeling profile package — closure rules, viewpoints, and starter templates on top of @memo/ontology",
   "splitTarget": "memo-sysmlv2",
   "type": "module",
   "private": true,
@@ -10,8 +10,7 @@
     "clean": "echo 'nothing to clean'"
   },
   "dependencies": {
-    "@memo/ontology-arch": "workspace:*",
-    "@memo/ontology-process": "workspace:*"
+    "@memo/ontology": "workspace:*"
   },
   "files": [
     "templates/",
