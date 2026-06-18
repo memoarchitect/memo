@@ -146,7 +146,7 @@ package memo {
 
             constraint def logicalInterfaceDirectionRule {
                 attribute id = "CR-MED-050";
-                attribute appliesTo = "LogicalInterface";
+                attribute appliesTo = "Interface";
                 attribute severity = RuleSeverityKind::error;
                 attribute rationaleText = "Interface direction required for integration analysis.";
                 require constraint { attributes.direction != "" }

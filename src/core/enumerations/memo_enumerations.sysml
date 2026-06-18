@@ -44,12 +44,11 @@ package memo {
                 enum should;
                 enum will;
             }
-            enum def InterfaceDomainKind {
+            enum def ArcadiaLayerKind {
+                enum operational;
+                enum system;
                 enum logical;
-                enum software;
-                enum hardware;
-                enum user;
-                enum mixed;
+                enum physical;
             }
             enum def InterfaceKind {
                 enum data;
@@ -346,17 +345,6 @@ package memo {
                 enum cloudServer;
                 enum edgeDevice;
                 enum DSP;
-            }
-            enum def PhysicalLinkKind {
-                enum ethernet;
-                enum CAN;
-                enum SPI;
-                enum I2C;
-                enum USB;
-                enum wireless;
-                enum optical;
-                enum serial;
-                enum bluetooth;
             }
             enum def FailureModeKind {
                 enum lossOfFunction;

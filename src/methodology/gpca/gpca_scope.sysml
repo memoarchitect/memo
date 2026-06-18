@@ -15,8 +15,7 @@ package memo {
                     attribute includedArchLayer = "requirements";
                     attribute includedArchLayer = "functions";
                     attribute includedArchLayer = "logical_structure";
-                    attribute includedArchLayer = "logical_interfaces";
-                    attribute includedArchLayer = "physical_interfaces";
+                    attribute includedArchLayer = "interfaces";
                     attribute includedArchLayer = "software_structure";
                     attribute includedArchLayer = "hardware_structure";
                     attribute includedArchLayer = "behavior";

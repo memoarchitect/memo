@@ -10,11 +10,10 @@ package memo {
         public import memo::architecture::requirements::*;
         public import memo::architecture::functions::*;
         public import memo::architecture::logical_structure::*;
-        public import memo::architecture::logical_interfaces::*;
+        public import memo::architecture::interfaces::*;
         public import memo::architecture::behavior::*;
         public import memo::architecture::software_structure::*;
         public import memo::architecture::hardware_structure::*;
-        public import memo::architecture::physical_interfaces::*;
         public import memo::architecture::constraints::*;
         public import memo::architecture::risk::*;
         public import memo::architecture::cybersecurity::*;

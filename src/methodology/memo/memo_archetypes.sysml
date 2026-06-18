@@ -45,8 +45,7 @@ package memo {
                 attribute includedLayer = "requirements";
                 attribute includedLayer = "functions";
                 attribute includedLayer = "logical_structure";
-                attribute includedLayer = "logical_interfaces";
-                attribute includedLayer = "physical_interfaces";
+                attribute includedLayer = "interfaces";
                 attribute includedLayer = "software_structure";
                 attribute includedLayer = "hardware_structure";
                 attribute includedLayer = "behavior";
@@ -97,7 +96,7 @@ package memo {
                 attribute includedLayer = "requirements";
                 attribute includedLayer = "functions";
                 attribute includedLayer = "logical_structure";
-                attribute includedLayer = "logical_interfaces";
+                attribute includedLayer = "interfaces";
                 attribute includedLayer = "software_structure";
                 attribute includedLayer = "hardware_structure";
                 attribute includedLayer = "risk";
@@ -120,8 +119,7 @@ package memo {
                 attribute includedLayer = "requirements";
                 attribute includedLayer = "functions";
                 attribute includedLayer = "logical_structure";
-                attribute includedLayer = "logical_interfaces";
-                attribute includedLayer = "physical_interfaces";
+                attribute includedLayer = "interfaces";
                 attribute includedLayer = "software_structure";
                 attribute includedLayer = "hardware_structure";
                 attribute includedLayer = "risk";
@@ -143,8 +141,7 @@ package memo {
                 attribute includedLayer = "requirements";
                 attribute includedLayer = "functions";
                 attribute includedLayer = "logical_structure";
-                attribute includedLayer = "logical_interfaces";
-                attribute includedLayer = "physical_interfaces";
+                attribute includedLayer = "interfaces";
                 attribute includedLayer = "software_structure";
                 attribute includedLayer = "hardware_structure";
                 attribute includedLayer = "behavior";

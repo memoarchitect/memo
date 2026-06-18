@@ -36,8 +36,8 @@ package memo {
                 attribute outputKind = {ViewOutputKind::diagram};
                 attribute presentationKind = {PresentationKind::blockDiagram};
                 attribute concern = {ConcernKind::safety, ConcernKind::performance};
-                attribute includedLayers = {"functions", "logical_structure", "logical_interfaces"};
-                attribute allowedElementKinds = {"LogicalComponent", "LogicalInterface", "Function"};
+                attribute includedLayers = {"functions", "logical_structure", "interfaces"};
+                attribute allowedElementKinds = {"LogicalComponent", "Interface", "Function"};
                 attribute methodologyReference = {"default-layer-viewpoint"};
                 attribute userExtensible = true;
             }
@@ -74,7 +74,7 @@ package memo {
                 attribute outputKind = {ViewOutputKind::diagram};
                 attribute presentationKind = {PresentationKind::custom};
                 attribute concern = {ConcernKind::cybersecurity, ConcernKind::privacy, ConcernKind::safety};
-                attribute includedLayers = {"cybersecurity", "software_structure", "hardware_structure", "logical_interfaces", "risk", "assurance"};
+                attribute includedLayers = {"cybersecurity", "software_structure", "hardware_structure", "interfaces", "risk", "assurance"};
                 attribute allowedElementKinds = {"CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "ThreatScenario"};
                 attribute allowedRelationshipKinds = {"ThreatenedBy", "Exploits", "RealizedByScenario", "MitigatesVulnerability", "DerivesCyberRequirement", "ImpactsSafety", "CrossesTrustBoundary"};
                 attribute methodologyReference = {"stride-default", "fda-cybersecurity-default"};

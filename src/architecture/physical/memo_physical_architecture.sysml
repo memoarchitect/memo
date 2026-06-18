@@ -11,13 +11,6 @@ package memo {
                 attribute safetyPartition : Boolean;
                 attribute redundancyKind : String;
             }
-            part def PhysicalLink specializes ArchitectureElement {
-                attribute linkKind : PhysicalLinkKind;
-                attribute bandwidthMbps : String;
-                attribute latencyMs : String;
-                attribute reliability : String;
-                attribute safetyRelevant : Boolean;
-            }
             part def PhysicalPort specializes InterfaceElement {
                 attribute portKind : InterfaceKind;
                 attribute connectorType : String;
