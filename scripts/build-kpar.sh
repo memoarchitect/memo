@@ -7,8 +7,8 @@
 # lines proves the ontology is portable content, not engine config.
 #
 # Two independent sysand projects are round-tripped:
-#   .            — the core ontology         (root .project.json,   memo-ontology)
-#   methodology/ — default + GPCA methodology (nested .project.json, memo-methodology-default)
+#   .                — the core ontology         (root .project.json,   memo-ontology)
+#   src/methodology/ — default + GPCA methodology (nested .project.json, memo-methodology-default)
 #
 # Reproduce:  ./scripts/build-kpar.sh   (or: pnpm run build)
 # Requires:   sysand on PATH (https://docs.sysand.org/)

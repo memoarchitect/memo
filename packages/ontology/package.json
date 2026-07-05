@@ -1,7 +1,7 @@
 {
   "name": "@memo/ontology",
   "version": "0.2.0",
-  "description": "MEMO architecture ontology — 14-layer MBSE backbone (Context, Requirements, Functions, Logical Structure/Interfaces, Physical Interfaces, Software/Hardware Structure, Behavior, Risk, Assurance, Cybersecurity, Decisions).",
+  "description": "MEMO architecture ontology — 17-layer MBSE backbone (Context, Operational, System, Requirements, Functions, Logical Structure, Interfaces, Software/Hardware Structure, Physical, Behavior, Risk, Cybersecurity, Assurance, Analysis, Constraints, Decisions).",
   "splitTarget": "memo-sysmlv2",
   "type": "module",
   "private": true,

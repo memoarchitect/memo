@@ -12,7 +12,7 @@
 package memo {
     package rules {
         package lifecycle {
-            import memo::base::rules::*;
+            import memo::core::consistency_rules::*;
             import memo::core::enumerations::*;
 
             constraint def reqBeforeArchRule {

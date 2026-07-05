@@ -11,7 +11,7 @@
 package memo {
     package rules {
         package closure {
-            import memo::base::rules::*;
+            import memo::core::consistency_rules::*;
             import memo::core::enumerations::*;
 
             // ─── Risk Layer Rules ────────────────────────────────────────────────

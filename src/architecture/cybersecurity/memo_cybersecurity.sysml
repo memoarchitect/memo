@@ -65,7 +65,7 @@ package memo {
             item def CyberRisk specializes RiskBeforeMitigation {
                 attribute exploitabilityEstimate : String;
                 attribute attackComplexity : String;
-                attribute detectability : String;
+                attribute detectability : DetectionKind;
                 attribute essentialPerformanceImpact : String;
                 attribute patientSafetyContribution : String;
             }
@@ -82,6 +82,7 @@ package memo {
                 attribute derivedFromThreat : String;
                 attribute derivedFromRisk : String;
                 attribute defaultConcern : ConcernKind;
+                attribute safetyClass : SafetyClassKind;
             }
 
             item def TrustBoundary specializes InterfaceElement {

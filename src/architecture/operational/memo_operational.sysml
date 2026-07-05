@@ -3,6 +3,7 @@ package memo {
         package operational {
             private import memo::core::common::*;
             private import memo::core::enumerations::*;
+            private import memo::core::relationships::*;
             part def OperationalEntity specializes ArchitectureElement {
                 attribute entityKind : OperationalEntityKind;
                 attribute operationalDomain : String;
@@ -29,6 +30,23 @@ package memo {
                 attribute exchangeKind : FlowKind;
                 attribute direction : DirectionKind;
                 attribute latencyConstraint : String;
+            }
+
+            connection def Performs :> SemanticLink {
+                end entity : OperationalEntity;
+                end activity : OperationalActivity;
+            }
+            connection def ContributesToCapability :> SemanticLink {
+                end activity : OperationalActivity;
+                end capability : OperationalCapability;
+            }
+            connection def SequencesStep :> SemanticLink {
+                end activity : OperationalActivity;
+                end nextActivity : OperationalActivity;
+            }
+            connection def DerivesSystemNeed :> SemanticLink {
+                end activity : OperationalActivity;
+                end systemNeed : VerifiableElement;
             }
         }
     }

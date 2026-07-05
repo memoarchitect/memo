@@ -22,7 +22,7 @@
       "resource": "urn:kpar:semantic-library"
     },
     {
-      "resource": "urn:kpar:memo-ontology"
+      "resource": "urn:kpar:systems-library"
     }
   ]
 }

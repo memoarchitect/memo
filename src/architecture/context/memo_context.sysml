@@ -3,6 +3,7 @@ package memo {
         package context {
             private import memo::core::common::*;
             private import memo::core::enumerations::*;
+            private import memo::core::relationships::*;
             part def IntendedUse specializes DocumentedElement {
                 attribute indication : String;
                 attribute contraindication : String;
@@ -24,8 +25,13 @@ package memo {
             part def UseError specializes TraceableElement {
                 attribute errorCategory : UseErrorCategoryKind;
                 attribute taskReference : String;
-                attribute severity : CriticalityKind;
+                attribute severity : SeverityKind;
                 attribute rootCauseType : String;
+            }
+
+            connection def InteractsWith :> SemanticLink {
+                end participant : Actor;
+                end target : TraceableElement;
             }
         }
     }

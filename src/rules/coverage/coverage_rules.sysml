@@ -15,7 +15,7 @@
 package memo {
     package rules {
         package coverage {
-            import memo::base::rules::*;
+            import memo::core::consistency_rules::*;
             import memo::core::enumerations::*;
 
             // ─── ISO 14971: Risk Management ──────────────────────────────────────

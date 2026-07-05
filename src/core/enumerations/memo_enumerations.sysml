@@ -10,6 +10,7 @@ package memo {
                 enum reliability;
                 enum privacy;
                 enum regulatory;
+                enum clinical;
             }
             enum def RequirementSourceKind {
                 enum stakeholderNeed;
@@ -127,6 +128,16 @@ package memo {
                 enum evidenceRecord;
                 enum cybersecurityAssessment;
                 enum threatModel;
+                enum usabilityEngineeringReport;
+                enum clinicalSafetyReport;
+                enum failureModeEffectsAnalysis;
+                enum soupList;
+                enum designInputPlan;
+                enum designOutputPlan;
+                enum softwareDevelopmentPlan;
+                enum labelingSpecification;
+                enum designHistoryFileIndex;
+                enum designChangeLog;
             }
             enum def RiskControlKind {
                 enum inherentSafeDesign;
@@ -155,6 +166,8 @@ package memo {
                 enum ArchitectureDescription;
                 enum CybersecurityAssessment;
                 enum ThreatModel;
+                enum Clinical;
+                enum Usability;
             }
             enum def SchedulingPolicyKind {
                 enum nonRealTime;
@@ -233,6 +246,8 @@ package memo {
                 enum projectLead;
                 enum securityEngineer;
                 enum privacyEngineer;
+                enum clinicalEngineer;
+                enum usabilityEngineer;
             }
             enum def ThreatCategoryKind {
                 enum spoofing;
@@ -354,12 +369,12 @@ package memo {
                 enum prematureFunction;
                 enum delayedFunction;
             }
-            enum def FailureEffectLevel {
+            enum def FailureEffectLevelKind {
                 enum local;
                 enum nextHigher;
                 enum endEffect;
             }
-            enum def FailureCauseCategory {
+            enum def FailureCauseCategoryKind {
                 enum design;
                 enum manufacturing;
                 enum material;
@@ -367,6 +382,40 @@ package memo {
                 enum misuse;
                 enum environmental;
                 enum software;
+            }
+            // ISO 14971 severity of harm — distinct from the general-purpose
+            // CriticalityKind used elsewhere for architecture/software criticality.
+            enum def SeverityKind {
+                enum negligible;
+                enum minor;
+                enum serious;
+                enum critical;
+                enum catastrophic;
+            }
+            // Qualitative likelihood of occurrence (ISO 14971 / AAMI TIR style
+            // Likert scale), used wherever a hazard, failure, or fault-tree event
+            // carries a qualitative occurrence estimate rather than a measured rate.
+            enum def ProbabilityKind {
+                enum incredible;
+                enum improbable;
+                enum remote;
+                enum occasional;
+                enum probable;
+                enum frequent;
+            }
+            // Qualitative ability to detect a failure/threat before it causes harm —
+            // used for FMEA detection ratings and cybersecurity detectability.
+            enum def DetectionKind {
+                enum high;
+                enum moderate;
+                enum low;
+                enum none;
+            }
+            // ISO 14971 clause 3.14/8 risk acceptability decision.
+            enum def RiskAcceptabilityKind {
+                enum acceptable;
+                enum alarp;
+                enum unacceptable;
             }
             enum def DetectionMethodKind {
                 enum inspection;

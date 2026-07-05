@@ -5,7 +5,7 @@
 package memo {
     package rules {
         package quantitative {
-            import memo::base::rules::*;
+            import memo::core::consistency_rules::*;
             import memo::core::enumerations::*;
 
             constraint def hazardMaxControlsRule {

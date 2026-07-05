@@ -19,22 +19,22 @@ package memo {
                 attribute criticality : CriticalityKind;
             }
             item def FailureEffect specializes TraceableElement {
-                attribute effectLevel : FailureEffectLevel;
+                attribute effectLevel : FailureEffectLevelKind;
                 attribute effectOnPatient : String;
                 attribute effectOnOperator : String;
                 attribute effectOnSystem : String;
-                attribute severity : CriticalityKind;
+                attribute severity : SeverityKind;
             }
             item def FailureCause specializes TraceableElement {
-                attribute causeCategory : FailureCauseCategory;
+                attribute causeCategory : FailureCauseCategoryKind;
                 attribute causeDescription : String;
-                attribute occurrence : String;
+                attribute occurrence : ProbabilityKind;
                 attribute preventionMethod : String;
             }
             item def DetectionMethod specializes TraceableElement {
                 attribute methodKind : DetectionMethodKind;
                 attribute detectionPoint : String;
-                attribute confidence : String;
+                attribute confidence : DetectionKind;
             }
             part def FMEAAction specializes VerifiableElement {
                 attribute actionKind : FMEAActionKind;
@@ -51,9 +51,9 @@ package memo {
             }
             item def FaultTreeEvent specializes TraceableElement {
                 attribute eventKind : FaultTreeEventKind;
-                attribute probability : String;
-                attribute failureRate : String;
-                attribute exposureTime : String;
+                attribute probability : Real;
+                attribute failureRate : Real;
+                attribute exposureTime : Real;
                 attribute description : String;
             }
             item def FaultTreeGate specializes TraceableElement {
@@ -63,7 +63,7 @@ package memo {
             }
             item def MinimalCutSet specializes TraceableElement {
                 attribute cutSetOrder : Integer;
-                attribute probability : String;
+                attribute probability : Real;
                 attribute involvedEvents : String;
                 attribute significance : String;
             }
@@ -84,8 +84,8 @@ package memo {
                 attribute cause : String;
                 attribute consequence : String;
                 attribute existingSafeguard : String;
-                attribute severity : CriticalityKind;
-                attribute likelihood : String;
+                attribute severity : SeverityKind;
+                attribute likelihood : ProbabilityKind;
                 attribute recommendation : String;
             }
         }

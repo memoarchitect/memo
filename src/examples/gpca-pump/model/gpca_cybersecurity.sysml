@@ -41,8 +41,8 @@ package memo {
                     attribute id = "TB-001";
                     attribute name = "MaintenancePortBoundary";
                     attribute boundaryType = "service-access";
-                    attribute crossingDescription = "Boundary between service tooling and therapy controller runtime.";
-                    attribute boundaryLayer = "interfaces";
+                    attribute crossingConstraint = "Boundary between service tooling and therapy controller runtime.";
+                    attribute trustAssumption = "Service tooling on the untrusted side requires authentication before any crossing is permitted.";
                 }
 
                 part unauthorizedConfigChangeThreat : Threat {
@@ -82,11 +82,9 @@ package memo {
                 part tamperedConfigurationScenario : ThreatScenario {
                     attribute id = "SCN-001";
                     attribute name = "TamperedTherapyConfigurationScenario";
-                    attribute scenarioSummary = "An attacker uses the maintenance pathway to alter lockout or dose parameters.";
-                    attribute strideCategory = ThreatCategoryKind::tampering;
-                    attribute impactSummary = "May enable unsafe therapy delivery or bypass safeguards.";
-                    attribute entryPoint = "maintenance port";
-                    attribute attackerGoal = "alter therapy limits";
+                    attribute description = "An attacker with local access to the maintenance port alters lockout or dose parameters, aiming to bypass safety limits; may enable unsafe therapy delivery or bypass safeguards.";
+                    attribute actorDescription = "unauthorized actor with local access to the maintenance port";
+                    attribute defaultCategory = ThreatCategoryKind::tampering;
                 }
 
                 part unsafeDoseCyberHazard : CyberHazard {
@@ -104,14 +102,14 @@ package memo {
                     attribute id = "CRISK-001";
                     attribute name = "ConfigurationTamperingRisk";
                     attribute driverKind = "cyber risk";
-                    attribute probabilityEstimate = "Occasional";
-                    attribute severityEstimate = "Catastrophic";
-                    attribute riskLevel = "High";
-                    attribute acceptability = "Unacceptable";
-                    attribute exploitabilityEstimate = "Moderate";
-                    attribute detectabilityEstimate = "Low";
-                    attribute attackFeasibility = "Moderate with local access";
-                    attribute patientImpact = "Potential overdose if therapy limits are changed.";
+                    attribute probabilityEstimate = ProbabilityKind::occasional;
+                    attribute severityEstimate = SeverityKind::catastrophic;
+                    attribute riskLevel = CriticalityKind::high;
+                    attribute acceptability = RiskAcceptabilityKind::unacceptable;
+                    attribute exploitabilityEstimate = "moderate";
+                    attribute detectability = DetectionKind::low;
+                    attribute attackComplexity = "moderate with local access";
+                    attribute patientSafetyContribution = "Potential overdose if therapy limits are changed.";
                 }
 
                 part strongServiceAuthentication : CyberMitigation {
@@ -120,9 +118,8 @@ package memo {
                     attribute controlKind = RiskControlKind::protectiveMeasure;
                     attribute implementationKind = RiskControlImplementationKind::softwareDesign;
                     attribute verificationStatus = "planned";
-                    attribute controlCategory = CyberControlKind::authentication;
-                    attribute defenseStrategy = "authenticate, authorize, audit";
-                    attribute defaultFramework = "STRIDE + FDA cybersecurity";
+                    attribute cyberControlKind = CyberControlKind::authentication;
+                    attribute securityMechanism = "authenticate, authorize, audit";
                     attribute verificationExpectation = "verify only authenticated and integrity-protected configuration changes are accepted";
                 }
 
@@ -132,7 +129,6 @@ package memo {
                     attribute statement = "The system shall require authenticated and authorized service access before any therapy configuration parameter can be modified.";
                     attribute sourceKind = RequirementSourceKind::risk;
                     attribute concernKind = ConcernKind::cybersecurity;
-                    attribute safetyClass = SafetyClassKind::C;
                     attribute status = RequirementStatusKind::approved;
                     attribute acceptanceCriteria = "Unauthenticated or unauthorized attempts to modify therapy configuration are rejected and logged.";
                     attribute subjectDescription = "maintenance and configuration path";
@@ -140,8 +136,9 @@ package memo {
                     attribute assumptionSummary = "cryptographic identity available";
                     attribute guaranteeSummary = "only authorized service access can change therapy configuration";
                     attribute securityObjective = "integrity";
-                    attribute abuseCaseReference = "TamperedTherapyConfigurationScenario";
-                    attribute defaultCategory = ThreatCategoryKind::tampering;
+                    attribute derivedFromThreat = "TH-001";
+                    attribute defaultConcern = ConcernKind::cybersecurity;
+                    attribute safetyClass = SafetyClassKind::C;
                 }
 
                 part vcAuthenticatedServiceAccess : VerificationCase {

@@ -11,7 +11,9 @@ package memo {
             connection def SemanticLink { attribute linkStatus : LinkStatusKind; }
 
             connection def DerivesFrom :> SemanticLink {
-                end sourceDriver : RequirementDriver;
+                // Drivers include needs and hazards (ISO 14971: hazards drive
+                // requirements), so the source stays at TraceableElement
+                end sourceDriver : TraceableElement;
                 end targetRequirement : VerifiableElement;
             }
             connection def SatisfiedBy :> SemanticLink {
@@ -31,7 +33,9 @@ package memo {
                 end physicalInterface : InterfaceElement;
             }
             connection def VerifiedBy :> SemanticLink {
-                end verificationTarget : VerifiableElement;
+                // Requirements, risk controls, and architecture components are
+                // all legitimate verification targets
+                end verificationTarget : TraceableElement;
                 end verificationCase : VerifiableElement;
             }
             connection def ProducesEvidence :> SemanticLink {
@@ -113,35 +117,13 @@ package memo {
                 end soupItem : TraceableElement;
             }
 
-            connection def Performs :> SemanticLink {
-                end entity : OperationalEntity;
-                end activity : OperationalActivity;
-            }
-            connection def ContributesToCapability :> SemanticLink {
-                end activity : OperationalActivity;
-                end capability : OperationalCapability;
-            }
-            connection def SequencesStep :> SemanticLink {
-                end activity : OperationalActivity;
-                end nextActivity : OperationalActivity;
-            }
-            connection def DerivesSystemNeed :> SemanticLink {
-                end activity : OperationalActivity;
-                end systemNeed : VerifiableElement;
-            }
-
-            connection def RealizesCapability :> SemanticLink {
-                end functionalChain : FunctionalChain;
-                end capability : SystemCapability;
-            }
-            connection def InvolvesFunction :> SemanticLink {
-                end functionalChain : FunctionalChain;
-                end function : LogicalFunction;
-            }
-            connection def RealizesScenario :> SemanticLink {
-                end functionalChain : FunctionalChain;
-                end scenario : SystemScenario;
-            }
+            // Performs, ContributesToCapability, SequencesStep, DerivesSystemNeed
+            // (operational-entity ends) and RealizesCapability, InvolvesFunction,
+            // RealizesScenario (functional-chain ends) live in their owning
+            // architecture layer packages — memo::architecture::operational and
+            // memo::architecture::system respectively — because core must not
+            // depend on architecture-layer types. See memo_operational.sysml and
+            // memo_system_analysis.sysml.
 
             connection def HostedBy :> SemanticLink {
                 end processingNode : ArchitectureElement;
