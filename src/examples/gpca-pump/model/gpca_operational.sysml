@@ -118,7 +118,7 @@ package memo {
                     attribute preCondition = "prescription issued, reservoir loaded";
                     attribute postCondition = "therapy completed and stopped by clinician";
                     attribute sequenceDescription = "Prescribe > load reservoir > program and confirm > start basal > patient boluses within limits > stop therapy > review log.";
-                    attribute sourceReference = "CITE-004: CriSys GPCA Requirements, Section 2 (Operation)";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.2 Main GPCA System Functions";
                 }
                 part osLockoutBolus : OperationalScenario {
                     attribute id = "OS-002";
@@ -127,7 +127,7 @@ package memo {
                     attribute preCondition = "basal infusion active; lockout interval running";
                     attribute postCondition = "request ignored, logged; basal continues unchanged";
                     attribute sequenceDescription = "Patient presses bolus button during lockout > infusion manager rejects request > event logged > no additional drug delivered.";
-                    attribute sourceReference = "CITE-004: CriSys GPCA Requirements, Section 5 (Patient Bolus)";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 PATIENT BOLUS mode (lockout requirements)";
                 }
                 part osOcclusionAlarm : OperationalScenario {
                     attribute id = "OS-003";
@@ -136,7 +136,7 @@ package memo {
                     attribute preCondition = "therapy active; downstream line becomes blocked";
                     attribute postCondition = "infusion paused, alarm annunciated, clinician clears occlusion and resumes";
                     attribute sequenceDescription = "Occlusion sensor exceeds pressure threshold > alarm raised same step > infusion paused > audible and visual annunciation > clinician resolves and resumes.";
-                    attribute sourceReference = "CITE-001: CriSys Hazard Analysis, Table 3";
+                    attribute sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms and Alerts (occlusion)";
                 }
                 part osAirInLine : OperationalScenario {
                     attribute id = "OS-004";
@@ -145,7 +145,7 @@ package memo {
                     attribute preCondition = "therapy active; air bubble enters tubing";
                     attribute postCondition = "infusion stopped before air reaches patient; alarm annunciated";
                     attribute sequenceDescription = "Air-in-line sensor detects bubble above threshold > infusion stops > level-1 alarm > clinician re-primes line and restarts.";
-                    attribute sourceReference = "CITE-001: CriSys Hazard Analysis, Table 3";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Air embolism)";
                 }
                 part osEmptyReservoir : OperationalScenario {
                     attribute id = "OS-005";
@@ -154,7 +154,7 @@ package memo {
                     attribute preCondition = "therapy active; reservoir volume reaches empty threshold";
                     attribute postCondition = "infusion stopped, alarm raised, reservoir replaced";
                     attribute sequenceDescription = "Reservoir-empty condition detected > infusion stops > level-1 alarm > clinician loads new reservoir > therapy resumed with saved prescription.";
-                    attribute sourceReference = "CITE-004: CriSys GPCA Requirements, Section 6 (Alarms)";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Empty Reservoir)";
                 }
                 part osPowerLoss : OperationalScenario {
                     attribute id = "OS-006";
@@ -163,7 +163,7 @@ package memo {
                     attribute preCondition = "therapy active on mains power";
                     attribute postCondition = "therapy continues on battery; prescription preserved across full power loss";
                     attribute sequenceDescription = "Mains lost > battery takes over with notification > if battery depletes, pump stops safely > on power restore, saved prescription recovered and therapy resumed only after clinician confirmation.";
-                    attribute sourceReference = "CITE-004: CriSys GPCA Requirements, Section 7 (Power)";
+                    attribute sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.3 Electrical Hazards (battery failure)";
                 }
             }
         }

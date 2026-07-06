@@ -17,7 +17,7 @@ package memo {
                     attribute patientPopulation = "Adult in-patients under clinical supervision.";
                     attribute clinicalBenefit = "Timely, patient-titrated analgesia with lower total opioid consumption than fixed-schedule dosing.";
                     attribute regulatoryClassification = "FDA Class II infusion pump (21 CFR 880.5725); IEC 62304 software safety class C.";
-                    attribute sourceReference = "CITE-004: CriSys GPCA Requirements, Section 1 (Introduction)";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1-2.3 (GPCA overview, system functions, user characteristics)";
                 }
 
                 // ── Use contexts ────────────────────────────────────────────
@@ -86,7 +86,7 @@ package memo {
                     attribute severity = SeverityKind::catastrophic;
                     attribute rootCauseType = "decimal-point / unit entry slip during prescription programming";
                     attribute description = "Clinician enters a basal rate or bolus volume an order of magnitude off (e.g. mg vs mL, misplaced decimal).";
-                    attribute sourceReference = "CITE-001: CriSys Hazard Analysis, Table 3";
+                    attribute sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8 Use Hazards (incorrect dose settings)";
                 }
                 part ueBolusByProxy : UseError {
                     attribute id = "UE-002";
@@ -96,7 +96,7 @@ package memo {
                     attribute severity = SeverityKind::catastrophic;
                     attribute rootCauseType = "family member or caregiver presses bolus button on behalf of a sedated patient";
                     attribute description = "Bolus doses requested by someone other than the patient defeat the inherent safety of patient-limited dosing.";
-                    attribute sourceReference = "CITE-001: CriSys Hazard Analysis, Table 3";
+                    attribute sourceReference = "illustrative — no source";
                 }
                 part ueWrongDrugLoaded : UseError {
                     attribute id = "UE-003";
@@ -106,7 +106,7 @@ package memo {
                     attribute severity = SeverityKind::catastrophic;
                     attribute rootCauseType = "reservoir containing wrong drug or concentration mounted without verification";
                     attribute description = "Loaded drug or concentration differs from the programmed prescription, so delivered dose differs from intended dose.";
-                    attribute sourceReference = "CITE-001: CriSys Hazard Analysis, Table 3";
+                    attribute sourceReference = "illustrative — no source";
                 }
                 part ueAlarmDisregard : UseError {
                     attribute id = "UE-004";
@@ -116,7 +116,7 @@ package memo {
                     attribute severity = SeverityKind::serious;
                     attribute rootCauseType = "alarm silenced during high workload and the underlying condition never resolved";
                     attribute description = "Clinician silences an alarm and does not return to resolve the underlying condition (e.g. occlusion), interrupting therapy.";
-                    attribute sourceReference = "CITE-001: CriSys Hazard Analysis, Table 3";
+                    attribute sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8 Use Hazards (attentional/memory failure)";
                 }
             }
         }
