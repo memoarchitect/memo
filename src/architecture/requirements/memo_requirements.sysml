@@ -30,6 +30,26 @@ package memo {
             requirement def SystemRequirement specializes Requirement;
             requirement def SoftwareRequirement specializes Requirement { attribute safetyClass : SafetyClassKind; }
             requirement def HardwareRequirement specializes Requirement { attribute electricalSafetyRelevant : Boolean; }
+            // Named constant defined by a source requirements document (e.g. CriSys
+            // GPCA App. A.4) and referenced from requirement statements.
+            part def SystemConstant specializes TraceableElement {
+                attribute symbol : String;          // identifier as written in the source, e.g. "Tolerance_Max const"
+                attribute unit : String;
+                attribute valueType : String;
+                attribute constantValue : String;   // empty when the source leaves the value open
+                attribute valueCondition : String;  // constraints on the value stated by the source
+            }
+            // One row of a notification/alarm action table (e.g. CriSys GPCA REQ 59):
+            // a named notification, its priority, and the actions the system must take.
+            part def NotificationSpec specializes TraceableElement {
+                attribute priority : NotificationPriorityKind;
+                attribute visualNotification : Boolean;
+                attribute audioNotification : Boolean;
+                attribute inhibitInfusion : Boolean;
+                attribute inhibitSquareBolus : Boolean;
+                attribute inhibitPatientBolus : Boolean;
+                attribute stopBolus : Boolean;
+            }
         }
     }
 }

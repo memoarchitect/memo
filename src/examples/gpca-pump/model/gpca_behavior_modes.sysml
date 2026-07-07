@@ -28,7 +28,7 @@ package memo {
                     attribute id = "MODE-002";
                     attribute name = "ON.THERAPY.PAUSED";
                     attribute modeKind = "paused";
-                    attribute entryCondition = "level-1 alarm or operator pause during ACTIVE";
+                    attribute entryCondition = "High-priority notification or operator pause during ACTIVE";
                     attribute exitCondition = "condition cleared and operator resume, or therapy stopped";
                 }
                 part modeBASAL : ModeState {
@@ -50,7 +50,7 @@ package memo {
                     attribute name = "ON.THERAPY.ACTIVE.PATIENT_BOLUS";
                     attribute modeKind = "active-patient-bolus";
                     attribute entryCondition = "patient request with lockout expired and hourly limit clear";
-                    attribute exitCondition = "bolus volume delivered or level-1 alarm";
+                    attribute exitCondition = "bolus volume delivered or infusion-inhibiting notification";
                 }
 
                 // ── Mode transitions (UMN mode analysis, Section 5) ─────────
@@ -58,7 +58,7 @@ package memo {
                     attribute id = "TR-001"; attribute name = "PowerOnToIdle";
                     attribute sourceState = "OFF"; attribute targetState = "ON.IDLE";
                     attribute trigger = "power switch on";
-                    attribute guardSummary = "POST completes successfully (REQ-004)";
+                    attribute guardSummary = "POST completes successfully (REQ-X-02)";
                     attribute effectSummary = "sensors initialized; saved prescription recovered if present";
                     attribute priority = 1;
                     attribute sameStepCritical = false;
@@ -76,7 +76,7 @@ package memo {
                     attribute id = "TR-003"; attribute name = "AuthorizePatientBolus";
                     attribute sourceState = "ON.THERAPY.ACTIVE.BASAL"; attribute targetState = "ON.THERAPY.ACTIVE.PATIENT_BOLUS";
                     attribute trigger = "debounced patient bolus request";
-                    attribute guardSummary = "lockout interval expired AND hourly max dose not reached (REQ-025, REQ-026)";
+                    attribute guardSummary = "no REQ 25 ignore condition holds: lockout expired, bolus count within maximum (REQ-CS-25, REQ-X-06)";
                     attribute effectSummary = "bolus flow commanded; lockout timer restarted; request logged";
                     attribute priority = 3;
                     attribute sameStepCritical = false;
@@ -102,9 +102,9 @@ package memo {
                 part trAlarmPause : Transition {
                     attribute id = "TR-006"; attribute name = "Level1AlarmPausesTherapy";
                     attribute sourceState = "ON.THERAPY.ACTIVE"; attribute targetState = "ON.THERAPY.PAUSED";
-                    attribute trigger = "level-1 alarm condition asserted";
+                    attribute trigger = "infusion-inhibiting notification asserted (REQ 59 High-priority actions)";
                     attribute guardSummary = "none — unconditional from any ACTIVE substate";
-                    attribute effectSummary = "zero flow commanded in same execution step; alarm annunciated (REQ-019)";
+                    attribute effectSummary = "transition to PAUSED with KVO flow; notification actions per REQ 59 (REQ-CS-19)";
                     attribute priority = 1;
                     attribute sameStepCritical = true;
                 }
@@ -131,7 +131,7 @@ package memo {
                     attribute sourceState = "ON.IDLE"; attribute targetState = "OFF";
                     attribute trigger = "power switch off";
                     attribute guardSummary = "no therapy active";
-                    attribute effectSummary = "prescription and log persisted (REQ-005)";
+                    attribute effectSummary = "prescription and log persisted (REQ-X-03)";
                     attribute priority = 4;
                     attribute sameStepCritical = false;
                 }
@@ -175,7 +175,7 @@ package memo {
                     attribute constraintKind = TimingConstraintKind::deadline;
                     attribute minMs = "40";
                     attribute maxMs = "60";
-                    attribute referenceElement = "REQ-028: WatchdogForcesSafeState";
+                    attribute referenceElement = "REQ-X-08: WatchdogForcesSafeState";
                     attribute verificationMethod = VerificationMethodKind::test;
                 }
             }

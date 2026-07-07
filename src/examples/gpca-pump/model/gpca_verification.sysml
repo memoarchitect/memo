@@ -38,84 +38,84 @@ package memo {
                     attribute id = "VER-005";
                     attribute name = "VerifyAirInLineStop";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Injected air above threshold stops flow in same step and raises level-1 alarm (REQ-020)";
+                    attribute acceptanceCriteria = "Injected air above threshold pauses infusion and annunciates per the REQ 59 High-priority actions (REQ-CS-21)";
                     attribute status = "planned";
                 }
                 part vcOcclusion : VerificationCase {
                     attribute id = "VER-006";
                     attribute name = "VerifyOcclusionDetection";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Clamped line above pressure threshold pauses infusion and annunciates (REQ-021)";
+                    attribute acceptanceCriteria = "Clamped line above pressure threshold pauses infusion and annunciates (REQ-X-04)";
                     attribute status = "planned";
                 }
                 part vcEmptyReservoir : VerificationCase {
                     attribute id = "VER-007";
                     attribute name = "VerifyEmptyReservoirStop";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Reservoir-empty assertion commands zero flow and raises level-1 alarm (REQ-022)";
+                    attribute acceptanceCriteria = "Reservoir-empty assertion transitions to PAUSED (KVO flow) and annunciates per the REQ 59 High-priority actions (REQ-CS-23)";
                     attribute status = "planned";
                 }
                 part vcPost : VerificationCase {
                     attribute id = "VER-008";
                     attribute name = "VerifyPowerOnSelfTest";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Each injected POST fault (CPU, RAM, ROM, watchdog, sensors) blocks therapy and alarms (REQ-004)";
+                    attribute acceptanceCriteria = "Each injected POST fault (CPU, RAM, ROM, watchdog, sensors) blocks therapy and alarms (REQ-X-02)";
                     attribute status = "planned";
                 }
                 part vcPowerLoss : VerificationCase {
                     attribute id = "VER-009";
                     attribute name = "VerifyPowerLossRetentionAndResume";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Prescription and log intact after power cycle; therapy resumes only after confirmation (REQ-005)";
+                    attribute acceptanceCriteria = "Prescription and log intact after power cycle; therapy resumes only after confirmation (REQ-X-03)";
                     attribute status = "planned";
                 }
                 part vcWatchdog : VerificationCase {
                     attribute id = "VER-010";
                     attribute name = "VerifyWatchdogSafeState";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Induced CPU hang forces zero flow and continuous alarm within 60 ms (REQ-028, TC-003)";
+                    attribute acceptanceCriteria = "Induced CPU hang forces zero flow and continuous alarm within 60 ms (REQ-X-08, TC-003)";
                     attribute status = "planned";
                 }
                 part vcHourlyMax : VerificationCase {
                     attribute id = "VER-011";
                     attribute name = "VerifyHourlyDoseCeiling";
                     attribute methodKind = VerificationMethodKind::simulation;
-                    attribute acceptanceCriteria = "Randomized bolus/basal schedules never exceed hourly maximum in sliding window (REQ-026)";
+                    attribute acceptanceCriteria = "Randomized bolus/basal schedules never exceed hourly maximum in sliding window (REQ-X-06)";
                     attribute status = "planned";
                 }
                 part vcPumpAccuracy : VerificationCase {
                     attribute id = "VER-012";
                     attribute name = "VerifyDeliveryAccuracy";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Gravimetric bench measurement within ±5% across rate range (HREQ-001)";
+                    attribute acceptanceCriteria = "Gravimetric bench measurement within ±5% (Tolerance_Min_const) across rate range (REQ-X-11)";
                     attribute status = "planned";
                 }
                 part vcAlarmLoudness : VerificationCase {
                     attribute id = "VER-013";
                     attribute name = "VerifyAlarmSoundPressure";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Each priority tone ≥ 45 dB(A) at 1 m (HREQ-002)";
+                    attribute acceptanceCriteria = "Each priority tone meets Audio_level_const, 50 db for 2 s per I 8 (REQ-X-12)";
                     attribute status = "planned";
                 }
                 part vcFreeFlow : VerificationCase {
                     attribute id = "VER-014";
                     attribute name = "VerifyAntiFreeFlowValve";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "No gravity flow with set disengaged under worst-case head height (HREQ-004)";
+                    attribute acceptanceCriteria = "No gravity flow with set disengaged under worst-case head height (REQ-X-14)";
                     attribute status = "planned";
                 }
                 part vcStuckButton : VerificationCase {
                     attribute id = "VER-015";
                     attribute name = "VerifyStuckButtonDetection";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Shorted pendant input yields no bolus and level-2 alarm after 60 s (REQ-029)";
+                    attribute acceptanceCriteria = "Shorted pendant input yields no bolus and Medium-priority notification after 60 s (REQ-X-09)";
                     attribute status = "planned";
                 }
                 part vcFlowCrossCheck : VerificationCase {
                     attribute id = "VER-016";
                     attribute name = "VerifyFlowCrossCheck";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Injected 5%+ flow deviation pauses therapy and annunciates within 30 s (REQ-030)";
+                    attribute acceptanceCriteria = "Injected deviation beyond Tolerance_Min_const sustained past Max_Duration_OverInfusion_const pauses therapy and annunciates (REQ-X-10)";
                     attribute status = "planned";
                 }
 
@@ -123,21 +123,21 @@ package memo {
                     attribute id = "VER-017";
                     attribute name = "VerifyDrugLibraryEnforcement";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "Hard-limit entries rejected, soft-limit entries require confirmation, both logged (REQ-002)";
+                    attribute acceptanceCriteria = "Hard-limit entries rejected, soft-limit entries require confirmation, both logged (REQ-X-01)";
                     attribute status = "planned";
                 }
                 part vcPrescriptionConfirm : VerificationCase {
                     attribute id = "VER-018";
                     attribute name = "VerifyPrescriptionConfirmation";
                     attribute methodKind = VerificationMethodKind::demonstration;
-                    attribute acceptanceCriteria = "Therapy cannot start without distinct confirmation; displayed values equal stored values (REQ-003)";
+                    attribute acceptanceCriteria = "Therapy cannot start without distinct confirmation; displayed values equal stored values (REQ-CS-09)";
                     attribute status = "planned";
                 }
                 part vcEventLog : VerificationCase {
                     attribute id = "VER-019";
                     attribute name = "VerifyEventLogIntegrity";
                     attribute methodKind = VerificationMethodKind::test;
-                    attribute acceptanceCriteria = "All event classes logged with timestamps; log survives power cycle; tampering detectable (REQ-027)";
+                    attribute acceptanceCriteria = "Operational/error log entries per REQ-CS-78..81; tampering detectable (REQ-X-07)";
                     attribute status = "planned";
                 }
 

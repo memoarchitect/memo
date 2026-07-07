@@ -64,7 +64,7 @@ package memo {
                     attribute id = "HW-006";
                     attribute name = "AirInLineSensor";
                     attribute responsibility = "Ultrasonic detection of air bubbles in the delivery tubing.";
-                    attribute safetyRole = "detects air embolism precursor; feeds level-1 alarm";
+                    attribute safetyRole = "detects air embolism precursor; feeds High-priority Air embolism notification";
                     attribute partNumber = "GPCA-SNS-AIR";
                     attribute mtbfHours = "150000";
                 }
@@ -172,6 +172,13 @@ package memo {
                     attribute partNumber = "GPCA-PWR-PSU";
                     attribute protectionClass = "Class II";
                     attribute ipRating = "IPX2";
+                }
+                part enclosure : HardwareAssembly {
+                    attribute id = "HW-017";
+                    attribute name = "DeviceEnclosure";
+                    attribute responsibility = "Impact-resistant, liquid-ingress-protected housing for the pump.";
+                    attribute safetyRole = "carries the drop and liquid-ingress requirements REQ-CS-83/84";
+                    attribute partNumber = "GPCA-MECH-ENC";
                 }
 
                 // ── Software system and components (UMN behavioral model) ───

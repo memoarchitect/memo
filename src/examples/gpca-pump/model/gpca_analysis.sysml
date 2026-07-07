@@ -119,7 +119,7 @@ package memo {
                     attribute causeCategory = FailureCauseCategoryKind::misuse;
                     attribute causeDescription = "Cable crushed in bed rail shorts the switch line";
                     attribute occurrence = ProbabilityKind::occasional;
-                    attribute preventionMethod = "stuck-input detection (REQ-029); strain-relieved cable";
+                    attribute preventionMethod = "stuck-input detection (REQ-X-09); strain-relieved cable";
                 }
                 part dmFlowCrossCheck : DetectionMethod {
                     attribute id = "DM-001";
@@ -227,7 +227,7 @@ package memo {
                     attribute name = "StuckButtonWithLockoutFault";
                     attribute cutSetOrder = 2;
                     attribute involvedEvents = "FTE-004, FTE-005";
-                    attribute significance = "requires simultaneous software and detection failure; controlled by RC-001 and REQ-029";
+                    attribute significance = "requires simultaneous software and detection failure; controlled by RC-001 and REQ-X-09";
                 }
             }
         }

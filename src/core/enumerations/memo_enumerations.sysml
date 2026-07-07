@@ -17,6 +17,15 @@ package memo {
                 enum risk;
                 enum designDecision;
                 enum changeRequest;
+                enum sourceDocument;
+                enum extension;
+            }
+            // Notification/alarm priority as used by source requirement documents
+            // (e.g. CriSys GPCA REQ 59 action table: High/Med/Low).
+            enum def NotificationPriorityKind {
+                enum high;
+                enum medium;
+                enum low;
             }
             enum def RequirementStatusKind {
                 enum draft;

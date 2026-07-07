@@ -139,7 +139,7 @@ package memo {
                     attribute name = "Level1AlarmPausesInfusion";
                     attribute scenarioKind = ScenarioKind::alarm;
                     attribute sequenceDiagramRef = "VIEW-BHV-002";
-                    attribute precondition = "any ACTIVE therapy mode; level-1 alarm condition detected";
+                    attribute precondition = "any ACTIVE therapy mode; infusion-inhibiting notification detected (REQ 59)";
                     attribute postcondition = "PAUSED mode entered in same execution step; alarm annunciated";
                 }
             }

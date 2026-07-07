@@ -186,7 +186,7 @@ package memo {
                     attribute scenarioKind = ScenarioKind::alarm;
                     attribute preCondition = "therapy active; air bubble enters tubing";
                     attribute postCondition = "infusion stopped before air reaches patient; alarm annunciated";
-                    attribute sequenceDescription = "Air-in-line sensor detects bubble above threshold > infusion stops > level-1 alarm > clinician re-primes line and restarts.";
+                    attribute sequenceDescription = "Air-in-line sensor detects bubble above threshold > transition to PAUSED (KVO flow) > High-priority Air embolism notification > clinician re-primes line and restarts.";
                     attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Air embolism)";
                 }
                 part osEmptyReservoir : OperationalScenario {
@@ -195,7 +195,7 @@ package memo {
                     attribute scenarioKind = ScenarioKind::degraded;
                     attribute preCondition = "therapy active; reservoir volume reaches empty threshold";
                     attribute postCondition = "infusion stopped, alarm raised, reservoir replaced";
-                    attribute sequenceDescription = "Reservoir-empty condition detected > infusion stops > level-1 alarm > clinician loads new reservoir > therapy resumed with saved prescription.";
+                    attribute sequenceDescription = "Reservoir-empty condition detected > transition to PAUSED (KVO flow) > High-priority Empty Reservoir notification > clinician loads new reservoir > therapy resumed with saved prescription.";
                     attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Empty Reservoir)";
                 }
                 part osPowerLoss : OperationalScenario {
