@@ -201,6 +201,9 @@ package memo {
 
                 // ── Requirement satisfaction ────────────────────────────────
                 connection : SatisfiedBy connect requirement ::> reqCs01 to satisfyingElement ::> tlm;
+                connection : SatisfiedBy connect requirement ::> reqCs01 to satisfyingElement ::> outputBus;
+                connection : SatisfiedBy connect requirement ::> reqCs18 to satisfyingElement ::> systemStatus;
+                connection : SatisfiedBy connect requirement ::> reqCs23 to satisfyingElement ::> systemStatus;
                 connection : SatisfiedBy connect requirement ::> reqCs25 to satisfyingElement ::> infusionMgr;
                 connection : SatisfiedBy connect requirement ::> reqCs19 to satisfyingElement ::> alarm;
                 connection : SatisfiedBy connect requirement ::> reqDrugLibraryLimits to satisfyingElement ::> config;
@@ -314,6 +317,8 @@ package memo {
 
                 // ── Function allocation ─────────────────────────────────────
                 connection : AllocatedTo connect function ::> fnAcquireSensors to allocatedElement ::> gpcaDeviceSensors;
+                connection : AllocatedTo connect function ::> fnAcquireSensors to allocatedElement ::> systemStatus;
+                connection : AllocatedTo connect function ::> fnPresentStatus to allocatedElement ::> outputBus;
                 connection : AllocatedTo connect function ::> fnValidatePrescription to allocatedElement ::> config;
                 connection : AllocatedTo connect function ::> fnMonitorAlarm to allocatedElement ::> alarm;
                 connection : AllocatedTo connect function ::> fnAnnunciate to allocatedElement ::> audibleAlarm;
@@ -337,8 +342,52 @@ package memo {
                 connection : AllocatesExchange connect functionalFlow ::> lfFlowCommand to componentExchange ::> exFlowCommand;
                 connection : AllocatesExchange connect functionalFlow ::> lfAlarmSignal to componentExchange ::> exAlarmAnnunciation;
                 connection : AllocatesExchange connect functionalFlow ::> lfPrescriptionEntry to componentExchange ::> exPrescriptionEntry;
-                connection : Precedes connect predecessor ::> tlm to successor ::> alarm;
-                connection : Precedes connect predecessor ::> alarm to successor ::> infusionMgr;
+
+                // ── GPCA_SW.Impl connection topology (AADL, 1:1; CE-101..142) ──
+                // Edges mirror the 42 GPCA_SW.Impl port connections; immediate
+                // semantics per connection are carried on the CE-1xx elements.
+                connection : ExchangesWith connect source ::> portOpCmdIn to target ::> tlm;
+                connection : ExchangesWith connect source ::> portConstIn to target ::> tlm;
+                connection : ExchangesWith connect source ::> tlm to target ::> outputBus;
+                connection : ExchangesWith connect source ::> infusionMgr to target ::> systemStatus;
+                connection : ExchangesWith connect source ::> tlm to target ::> systemStatus;
+                connection : ExchangesWith connect source ::> portSensorIn to target ::> systemStatus;
+                connection : ExchangesWith connect source ::> portConstIn to target ::> systemStatus;
+                connection : ExchangesWith connect source ::> config to target ::> systemStatus;
+                connection : ExchangesWith connect source ::> systemStatus to target ::> outputBus;
+                connection : ExchangesWith connect source ::> infusionMgr to target ::> alarm;
+                connection : ExchangesWith connect source ::> tlm to target ::> alarm;
+                connection : ExchangesWith connect source ::> systemMonitor to target ::> alarm;
+                connection : ExchangesWith connect source ::> portOpCmdIn to target ::> alarm;
+                connection : ExchangesWith connect source ::> portDbIn to target ::> alarm;
+                connection : ExchangesWith connect source ::> portSensorIn to target ::> alarm;
+                connection : ExchangesWith connect source ::> portConstIn to target ::> alarm;
+                connection : ExchangesWith connect source ::> systemStatus to target ::> alarm;
+                connection : ExchangesWith connect source ::> config to target ::> alarm;
+                connection : ExchangesWith connect source ::> alarm to target ::> outputBus;
+                connection : ExchangesWith connect source ::> tlm to target ::> config;
+                connection : ExchangesWith connect source ::> portPresIn to target ::> config;
+                connection : ExchangesWith connect source ::> portOpCmdIn to target ::> config;
+                connection : ExchangesWith connect source ::> portDbIn to target ::> config;
+                connection : ExchangesWith connect source ::> portConstIn to target ::> config;
+                connection : ExchangesWith connect source ::> systemStatus to target ::> config;
+                connection : ExchangesWith connect source ::> config to target ::> outputBus;
+                connection : ExchangesWith connect source ::> tlm to target ::> infusionMgr;
+                connection : ExchangesWith connect source ::> portOpCmdIn to target ::> infusionMgr;
+                connection : ExchangesWith connect source ::> portPatientIn to target ::> infusionMgr;
+                connection : ExchangesWith connect source ::> config to target ::> infusionMgr;
+                connection : ExchangesWith connect source ::> alarm to target ::> infusionMgr;
+                connection : ExchangesWith connect source ::> systemStatus to target ::> infusionMgr;
+                connection : ExchangesWith connect source ::> infusionMgr to target ::> outputBus;
+                connection : ExchangesWith connect source ::> tlm to target ::> systemMonitor;
+                connection : ExchangesWith connect source ::> systemMonitor to target ::> outputBus;
+                connection : ExchangesWith connect source ::> tlm to target ::> logging;
+                connection : ExchangesWith connect source ::> config to target ::> logging;
+                connection : ExchangesWith connect source ::> alarm to target ::> logging;
+                connection : ExchangesWith connect source ::> systemStatus to target ::> logging;
+                connection : ExchangesWith connect source ::> infusionMgr to target ::> logging;
+                connection : ExchangesWith connect source ::> logging to target ::> outputBus;
+                connection : ExchangesWith connect source ::> outputBus to target ::> portGpcaSwOut;
 
                 // ── Risk chains (ISO 14971) ─────────────────────────────────
                 // HZ-001 overdose
@@ -491,6 +540,8 @@ package memo {
                 connection : VerifiedBy connect verificationTarget ::> config to verificationCase ::> vcDrugLibrary;
                 connection : VerifiedBy connect verificationTarget ::> logging to verificationCase ::> vcEventLog;
                 connection : VerifiedBy connect verificationTarget ::> systemMonitor to verificationCase ::> vcPost;
+                connection : VerifiedBy connect verificationTarget ::> systemStatus to verificationCase ::> vcEmptyReservoir;
+                connection : VerifiedBy connect verificationTarget ::> outputBus to verificationCase ::> vcModeRange;
 
                 // ── Validation and usability testing ────────────────────────
                 connection : Validates connect validationTarget ::> reqCs59 to validationCase ::> valSimulatedWard;

@@ -21,22 +21,23 @@ package memo {
                     attribute id = "VIEW-SW-101";
                     attribute name = "GPCA_SoftwareArchitectureView";
                     attribute title = "GPCA Software Architecture View";
-                    attribute shortDescription = "The five UMN software components with scheduling and safety class annotations.";
-                    attribute longDescription = "Top_Level_Mode, Config, Alarm, Logging, Infusion_Manager, and System_Monitor inside the GPCA_Software system, with exchanges to the sensor/actuator hardware.";
+                    attribute shortDescription = "The eight AADL GPCA_SW.Impl subcomponents, top-level ports, and the full inter-component connection topology.";
+                    attribute longDescription = "Top_Level_Mode, System_Status, Alarm, Config, Infusion_Manager, System_Monitor, Logging, and OutputBus inside the GPCA_Software system, wired per GPCA_SW.Impl with the seven top-level ports (OP_CMD_IN, PRES_IN, PATIENT_IN, SENSOR_IN, CONST_IN, DB_IN, GPCA_SW_OUT). Connections are synchronous with AADL immediate port semantics.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::internalDiagram};
                     attribute diagramType = "ibd";
-                    attribute dataSourceDescription = "GPCA software structure and component exchanges";
+                    attribute dataSourceDescription = "GPCA software structure, top-level ports, and the GPCA_SW.Impl connection set (CE-101..CE-142)";
                     attribute autoPopulate = true;
-                    attribute queryDescription = "Include the software system, its components, and their exchanges.";
+                    attribute queryDescription = "Include the software system, its eight components, its boundary ports, and the ExchangesWith topology between them.";
                     attribute documentUsage = {"SDD", "QMSR"};
                     part selectionQuery {
                         attribute id = "QRY-SW-101";
                         attribute name = "GPCA_SoftwareArchitectureQuery";
-                        attribute includeElementKinds = {"SoftwareSystem", "SoftwareComponent", "ComponentExchange", "SoftwareInterface"};
+                        attribute includeElementKinds = {"SoftwareSystem", "SoftwareComponent", "SoftwarePort"};
+                        attribute includeRelationshipKinds = {"ExchangesWith", "Composes"};
                         attribute includeLayers = {"software_structure", "interfaces"};
                         attribute selectionExpression = "product == 'GPCA'";
-                        attribute rationaleText = "Auto-populate the software architecture from the software structure layer.";
+                        attribute rationaleText = "Render the real GPCA_SW.Impl topology: components and boundary ports as nodes, AADL connections as edges.";
                     }
                     part viewpoint :> softwareViewpoint;
                 }

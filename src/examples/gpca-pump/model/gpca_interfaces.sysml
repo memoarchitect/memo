@@ -547,42 +547,463 @@ package memo {
                     attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
                 }
 
-                // ── Component exchanges (physical data flows) ───────────────
+                // ── Device-boundary exchanges (GPCA_Device.aadl level) ─────
                 part exSensorVector : ComponentExchange {
                     attribute id = "CE-001";
                     attribute name = "SensorStatusVectorExchange";
                     attribute exchangeKind = FlowKind::measurement;
                     attribute sourcePort = "HW-001: GPCA_HW_Sensors";
-                    attribute targetPort = "SW-003: Alarm / SW-005: Infusion_Manager";
+                    attribute targetPort = "GPCA_SW.SENSOR_IN (PORT-04)";
                     attribute allocatedFunctionalExchanges = "LF-001: SensorAcquisitionFlow";
                     attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
                 }
                 part exFlowCommand : ComponentExchange {
                     attribute id = "CE-002";
                     attribute name = "FlowCommandExchange";
                     attribute exchangeKind = FlowKind::command;
-                    attribute sourcePort = "SW-005: Infusion_Manager";
+                    attribute sourcePort = "GPCA_SW.GPCA_SW_OUT (Commanded_Flow_Rate)";
                     attribute targetPort = "HW-003: PumpMotorAssembly";
                     attribute allocatedFunctionalExchanges = "LF-002: FlowCommandFlow";
                     attribute direction = DirectionKind::out;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
                 }
                 part exAlarmAnnunciation : ComponentExchange {
                     attribute id = "CE-003";
                     attribute name = "AlarmAnnunciationExchange";
                     attribute exchangeKind = FlowKind::alarm;
-                    attribute sourcePort = "SW-003: Alarm";
+                    attribute sourcePort = "GPCA_SW.GPCA_SW_OUT (Notification_Message, Is_Audio_Disabled)";
                     attribute targetPort = "HW-004: AudibleAlarmAnnunciator / HW-005: OperatorDisplay";
                     attribute allocatedFunctionalExchanges = "LF-003: AlarmSignalFlow";
                     attribute direction = DirectionKind::out;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
                 }
                 part exPrescriptionEntry : ComponentExchange {
                     attribute id = "CE-004";
                     attribute name = "PrescriptionEntryExchange";
                     attribute exchangeKind = FlowKind::configuration;
                     attribute sourcePort = "HW-012: OperatorKeypad";
-                    attribute targetPort = "SW-002: Config";
+                    attribute targetPort = "GPCA_SW.PRES_IN / GPCA_SW.OP_CMD_IN (PORT-02, PORT-01)";
                     attribute allocatedFunctionalExchanges = "LF-004: PrescriptionEntryFlow";
                     attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
+                }
+
+                // ── GPCA_SW top-level ports (AADL GPCA_SW.aadl features) ────
+                part portOpCmdIn : SoftwarePort {
+                    attribute id = "PORT-01"; attribute name = "OP_CMD_IN";
+                    attribute description = "Operator commands (System_Start/Stop, Infusion_Initiate/Inhibit, Notification_Cancel, Disable/Enable_Audio, DataConfig) from the data entry interface (I 2).";
+                    attribute portKind = InterfaceKind::command;
+                    attribute direction = DirectionKind::in;
+                    attribute dataTypeName = "DATATYPES::Operator_Commands.Impl";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part portPresIn : SoftwarePort {
+                    attribute id = "PORT-02"; attribute name = "PRES_IN";
+                    attribute description = "Prescription data entry fields (I 1, 13 fields PatientID_prog..NumberMax_pbolus_prog).";
+                    attribute portKind = InterfaceKind::configuration;
+                    attribute direction = DirectionKind::in;
+                    attribute dataTypeName = "DATATYPES::Prescription_Inputs.Impl";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part portPatientIn : SoftwarePort {
+                    attribute id = "PORT-03"; attribute name = "PATIENT_IN";
+                    attribute description = "Patient bolus request (I 4, BolusRequest_prog).";
+                    attribute portKind = InterfaceKind::userInteraction;
+                    attribute direction = DirectionKind::in;
+                    attribute dataTypeName = "DATATYPES::Patient_Inputs.Impl";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part portSensorIn : SoftwarePort {
+                    attribute id = "PORT-04"; attribute name = "SENSOR_IN";
+                    attribute description = "Device sensor inputs (air-in-line, occlusion, door, reservoir, flow).";
+                    attribute portKind = InterfaceKind::digitalSignal;
+                    attribute direction = DirectionKind::in;
+                    attribute dataTypeName = "DATATYPES::Device_Sensor_Inputs.Impl";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part portConstIn : SoftwarePort {
+                    attribute id = "PORT-05"; attribute name = "CONST_IN";
+                    attribute description = "Device configuration constants (App. A.4 values such as Empty_Reservoir, tolerances).";
+                    attribute portKind = InterfaceKind::configuration;
+                    attribute direction = DirectionKind::in;
+                    attribute dataTypeName = "DATATYPES::Device_Configuration_Inputs.Impl";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part portDbIn : SoftwarePort {
+                    attribute id = "PORT-06"; attribute name = "DB_IN";
+                    attribute description = "Hospital pharmacy database safe values (I 9-I 11); realizes SI-005 HospitalPharmacyDatabaseInterface.";
+                    attribute portKind = InterfaceKind::data;
+                    attribute direction = DirectionKind::in;
+                    attribute dataTypeName = "DATATYPES::Drug_Database_Inputs.Impl";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part portGpcaSwOut : SoftwarePort {
+                    attribute id = "PORT-07"; attribute name = "GPCA_SW_OUT";
+                    attribute description = "Aggregated software output vector (Current_System_Mode, Commanded_Flow_Rate, notifications, prescription echo, status).";
+                    attribute portKind = InterfaceKind::data;
+                    attribute direction = DirectionKind::out;
+                    attribute dataTypeName = "DATATYPES::GPCA_SW_Outputs.Impl";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+
+                // ── GPCA_SW.Impl inter-component connections (AADL, 1:1) ────
+                // ALARM_to_IM immediate is the same-step alarm-response
+                // mechanism the formal properties rely on.
+                part ceOpCmdToTlm : ComponentExchange {
+                    attribute id = "CE-101"; attribute name = "OP_CMDtoTLM";
+                    attribute exchangeKind = FlowKind::command;
+                    attribute sourcePort = "OP_CMD_IN";
+                    attribute targetPort = "TLM.OP_CMD_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConstToTlm : ComponentExchange {
+                    attribute id = "CE-102"; attribute name = "CONSTtoTLM";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONST_IN";
+                    attribute targetPort = "TLM.CONST_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceTlmOutToOutput : ComponentExchange {
+                    attribute id = "CE-103"; attribute name = "TLM_OUT_toOUTPUT";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "TLM.TLM_MODE_OUT";
+                    attribute targetPort = "OUTPUT.TLM_MODE_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceImToSysStat : ComponentExchange {
+                    attribute id = "CE-104"; attribute name = "IM_to_SYS_STAT";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "IM.IM_OUT";
+                    attribute targetPort = "SYS_STAT.IM_IN";
+                    attribute timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceTlmToSysStat : ComponentExchange {
+                    attribute id = "CE-105"; attribute name = "TLM_to_SYS_STAT";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "TLM.TLM_MODE_OUT";
+                    attribute targetPort = "SYS_STAT.TLM_MODE_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSensorToSysStat : ComponentExchange {
+                    attribute id = "CE-106"; attribute name = "SENSOR_to_SYS_STAT";
+                    attribute exchangeKind = FlowKind::measurement;
+                    attribute sourcePort = "SENSOR_IN";
+                    attribute targetPort = "SYS_STAT.SENSOR_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConstToSysStat : ComponentExchange {
+                    attribute id = "CE-107"; attribute name = "CONST_to_SYS_STAT";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONST_IN";
+                    attribute targetPort = "SYS_STAT.CONST_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConfigToSysStat : ComponentExchange {
+                    attribute id = "CE-108"; attribute name = "CONFIG_to_SYS_STAT";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONFIG.CONFIG_OUT";
+                    attribute targetPort = "SYS_STAT.CONFIG_IN";
+                    attribute timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSysStatOutToOutput : ComponentExchange {
+                    attribute id = "CE-109"; attribute name = "SYS_STAT_OUT_toOUTPUT";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "SYS_STAT.SYS_STAT_OUT";
+                    attribute targetPort = "OUTPUT.SYS_STAT_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceImToAlarm : ComponentExchange {
+                    attribute id = "CE-110"; attribute name = "IM_to_ALARM";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "IM.IM_OUT";
+                    attribute targetPort = "ALARM.IM_IN";
+                    attribute timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceTlmToAlarm : ComponentExchange {
+                    attribute id = "CE-111"; attribute name = "TLM_to_ALARM";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "TLM.TLM_MODE_OUT";
+                    attribute targetPort = "ALARM.TLM_MODE_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSysMonToAlarm : ComponentExchange {
+                    attribute id = "CE-112"; attribute name = "SYS_MON_to_ALARM";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "SYS_MON.SYS_MON_OUT";
+                    attribute targetPort = "ALARM.SYS_MON_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceOpCmdToAlarm : ComponentExchange {
+                    attribute id = "CE-113"; attribute name = "OP_CMD_to_ALARM";
+                    attribute exchangeKind = FlowKind::command;
+                    attribute sourcePort = "OP_CMD_IN";
+                    attribute targetPort = "ALARM.OP_CMD_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceDbToAlarm : ComponentExchange {
+                    attribute id = "CE-114"; attribute name = "DB_to_ALARM";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "DB_IN";
+                    attribute targetPort = "ALARM.DB_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSensorToAlarm : ComponentExchange {
+                    attribute id = "CE-115"; attribute name = "SENSOR_to_ALARM";
+                    attribute exchangeKind = FlowKind::measurement;
+                    attribute sourcePort = "SENSOR_IN";
+                    attribute targetPort = "ALARM.SENSOR_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConstToAlarm : ComponentExchange {
+                    attribute id = "CE-116"; attribute name = "CONST_to_ALARM";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONST_IN";
+                    attribute targetPort = "ALARM.CONST_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSysStatToAlarm : ComponentExchange {
+                    attribute id = "CE-117"; attribute name = "SYS_STAT_to_ALARM";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "SYS_STAT.SYS_STAT_OUT";
+                    attribute targetPort = "ALARM.SYS_STAT_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConfigToAlarm : ComponentExchange {
+                    attribute id = "CE-118"; attribute name = "CONFIG_to_ALARM";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONFIG.CONFIG_OUT";
+                    attribute targetPort = "ALARM.CONFIG_IN";
+                    attribute timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceAlarmOutToOutput : ComponentExchange {
+                    attribute id = "CE-119"; attribute name = "ALARM_OUT_toOUTPUT";
+                    attribute exchangeKind = FlowKind::alarm;
+                    attribute sourcePort = "ALARM.ALARM_OUT";
+                    attribute targetPort = "OUTPUT.ALARM_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceTlmToConfig : ComponentExchange {
+                    attribute id = "CE-120"; attribute name = "TLM_to_CONFIG";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "TLM.TLM_MODE_OUT";
+                    attribute targetPort = "CONFIG.TLM_MODE_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part cePresToConfig : ComponentExchange {
+                    attribute id = "CE-121"; attribute name = "PRES_to_CONFIG";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "PRES_IN";
+                    attribute targetPort = "CONFIG.PRES_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceOpCmdToConfig : ComponentExchange {
+                    attribute id = "CE-122"; attribute name = "OP_CMD_to_CONFIG";
+                    attribute exchangeKind = FlowKind::command;
+                    attribute sourcePort = "OP_CMD_IN";
+                    attribute targetPort = "CONFIG.OP_CMD_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceDbToConfig : ComponentExchange {
+                    attribute id = "CE-123"; attribute name = "DB_to_CONFIG";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "DB_IN";
+                    attribute targetPort = "CONFIG.DB_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConsToConfig : ComponentExchange {
+                    attribute id = "CE-124"; attribute name = "CONS_to_CONFIG";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONST_IN";
+                    attribute targetPort = "CONFIG.CONST_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSysStatToConfig : ComponentExchange {
+                    attribute id = "CE-125"; attribute name = "SYS_STAT_to_CONFIG";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "SYS_STAT.SYS_STAT_OUT";
+                    attribute targetPort = "CONFIG.SYS_STAT_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConfigToOutput : ComponentExchange {
+                    attribute id = "CE-126"; attribute name = "CONFIG_toOUTPUT";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONFIG.CONFIG_OUT";
+                    attribute targetPort = "OUTPUT.CONFIG_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceTlmToIm : ComponentExchange {
+                    attribute id = "CE-127"; attribute name = "TLM_to_IM";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "TLM.TLM_MODE_OUT";
+                    attribute targetPort = "IM.TLM_MODE_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceOpCmdToIm : ComponentExchange {
+                    attribute id = "CE-128"; attribute name = "OP_CMD_to_IM";
+                    attribute exchangeKind = FlowKind::command;
+                    attribute sourcePort = "OP_CMD_IN";
+                    attribute targetPort = "IM.OP_CMD_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part cePatientToIm : ComponentExchange {
+                    attribute id = "CE-129"; attribute name = "PATIENT_to_IM";
+                    attribute exchangeKind = FlowKind::command;
+                    attribute sourcePort = "PATIENT_IN";
+                    attribute targetPort = "IM.PATIENT_IN";
+                    attribute direction = DirectionKind::in;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConfigToIm : ComponentExchange {
+                    attribute id = "CE-130"; attribute name = "CONFIG_to_IM";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONFIG.CONFIG_OUT";
+                    attribute targetPort = "IM.CONFIG_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceAlarmToIm : ComponentExchange {
+                    attribute id = "CE-131"; attribute name = "ALARM_to_IM";
+                    attribute exchangeKind = FlowKind::alarm;
+                    attribute sourcePort = "ALARM.ALARM_OUT";
+                    attribute targetPort = "IM.ALARM_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSysStatToIm : ComponentExchange {
+                    attribute id = "CE-132"; attribute name = "SYS_STAT_to_IM";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "SYS_STAT.SYS_STAT_OUT";
+                    attribute targetPort = "IM.SYS_STAT_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceImToOutput : ComponentExchange {
+                    attribute id = "CE-133"; attribute name = "IM_toOUTPUT";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "IM.IM_OUT";
+                    attribute targetPort = "OUTPUT.IM_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceTlmToSysMon : ComponentExchange {
+                    attribute id = "CE-134"; attribute name = "TLM_to_SYS_MON";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "TLM.TLM_MODE_OUT";
+                    attribute targetPort = "SYS_MON.TLM_MODE_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSysMonToOutput : ComponentExchange {
+                    attribute id = "CE-135"; attribute name = "SYS_MON_toOUTPUT";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "SYS_MON.SYS_MON_OUT";
+                    attribute targetPort = "OUTPUT.SYS_MON_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceTlmToLog : ComponentExchange {
+                    attribute id = "CE-136"; attribute name = "TLM_to_LOG";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "TLM.TLM_MODE_OUT";
+                    attribute targetPort = "LOG.TLM_MODE_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceConfigToLog : ComponentExchange {
+                    attribute id = "CE-137"; attribute name = "CONFIG_to_LOG";
+                    attribute exchangeKind = FlowKind::configuration;
+                    attribute sourcePort = "CONFIG.CONFIG_OUT";
+                    attribute targetPort = "LOG.CONFIG_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceAlarmToLog : ComponentExchange {
+                    attribute id = "CE-138"; attribute name = "ALARM_to_LOG";
+                    attribute exchangeKind = FlowKind::alarm;
+                    attribute sourcePort = "ALARM.ALARM_OUT";
+                    attribute targetPort = "LOG.ALARM_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceSysStatToLog : ComponentExchange {
+                    attribute id = "CE-139"; attribute name = "SYS_STAT_to_LOG";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "SYS_STAT.SYS_STAT_OUT";
+                    attribute targetPort = "LOG.SYS_STAT_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceImToLog : ComponentExchange {
+                    attribute id = "CE-140"; attribute name = "IM_to_LOG";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "IM.IM_OUT";
+                    attribute targetPort = "LOG.IM_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceLogToOutput : ComponentExchange {
+                    attribute id = "CE-141"; attribute name = "LOG_toOUTPUT";
+                    attribute exchangeKind = FlowKind::audit;
+                    attribute sourcePort = "LOG.LOG_OUT";
+                    attribute targetPort = "OUTPUT.LOG_IN";
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
+                }
+                part ceOutputToGpcaOut : ComponentExchange {
+                    attribute id = "CE-142"; attribute name = "OUTPUT_to_GPCA_OUT";
+                    attribute exchangeKind = FlowKind::status;
+                    attribute sourcePort = "OUTPUT.GPCA_SW_OUT";
+                    attribute targetPort = "GPCA_SW_OUT";
+                    attribute direction = DirectionKind::out;
+                    attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
                 }
             }
         }

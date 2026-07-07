@@ -189,7 +189,7 @@ package memo {
                     attribute lifecycleState = LifecycleStateKind::development;
                     attribute safetyClass = SafetyClassKind::C;
                     attribute complexity = ComplexityKind::high;
-                    attribute operatingSystem = "bare-metal cyclic executive, 20 ms base step";
+                    attribute operatingSystem = "synchronous data-flow execution; AADL immediate port semantics (source specifies no timing)";
                 }
                 part tlm : SoftwareComponent {
                     attribute id = "SW-001";
@@ -197,10 +197,6 @@ package memo {
                     attribute responsibility = "Ensure system ON/OFF behavior and startup/shutdown checks.";
                     attribute safetyClass = SafetyClassKind::C;
                     attribute complexity = ComplexityKind::medium;
-                    attribute periodMs = 20.0;
-                    attribute deadlineMs = 20.0;
-                    attribute wcetMs = 2.0;
-                    attribute schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
                 }
                 part config : SoftwareComponent {
                     attribute id = "SW-002";
@@ -208,10 +204,6 @@ package memo {
                     attribute responsibility = "Prescription entry, drug-library limit checking, confirmation, and persistent storage.";
                     attribute safetyClass = SafetyClassKind::C;
                     attribute complexity = ComplexityKind::high;
-                    attribute periodMs = 20.0;
-                    attribute deadlineMs = 20.0;
-                    attribute wcetMs = 3.0;
-                    attribute schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
                 }
                 part alarm : SoftwareComponent {
                     attribute id = "SW-003";
@@ -219,10 +211,6 @@ package memo {
                     attribute responsibility = "Monitor and notify exceptional conditions.";
                     attribute safetyClass = SafetyClassKind::C;
                     attribute complexity = ComplexityKind::high;
-                    attribute periodMs = 20.0;
-                    attribute deadlineMs = 20.0;
-                    attribute wcetMs = 3.0;
-                    attribute schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
                 }
                 part logging : SoftwareComponent {
                     attribute id = "SW-004";
@@ -230,10 +218,6 @@ package memo {
                     attribute responsibility = "Append-only event log of doses, mode changes, alarms, and configuration changes.";
                     attribute safetyClass = SafetyClassKind::B;
                     attribute complexity = ComplexityKind::medium;
-                    attribute periodMs = 100.0;
-                    attribute deadlineMs = 100.0;
-                    attribute wcetMs = 2.0;
-                    attribute schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
                 }
                 part infusionMgr : SoftwareComponent {
                     attribute id = "SW-005";
@@ -241,10 +225,6 @@ package memo {
                     attribute responsibility = "Handle drug infusion commands and therapy parameters.";
                     attribute safetyClass = SafetyClassKind::C;
                     attribute complexity = ComplexityKind::high;
-                    attribute periodMs = 20.0;
-                    attribute deadlineMs = 20.0;
-                    attribute wcetMs = 4.0;
-                    attribute schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
                 }
                 part systemMonitor : SoftwareComponent {
                     attribute id = "SW-006";
@@ -252,10 +232,22 @@ package memo {
                     attribute responsibility = "POST, periodic CPU/RAM/ROM checks, watchdog kicking, and battery supervision.";
                     attribute safetyClass = SafetyClassKind::C;
                     attribute complexity = ComplexityKind::medium;
-                    attribute periodMs = 20.0;
-                    attribute deadlineMs = 20.0;
-                    attribute wcetMs = 1.5;
-                    attribute schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
+                }
+                part systemStatus : SoftwareComponent {
+                    attribute id = "SW-007";
+                    attribute name = "System_Status";
+                    attribute responsibility = "Maintain the shared system status vector (Reservoir_Volume, Volume_Infused, Reservoir_Empty, In_Therapy) consumed by Alarm, Config, and Infusion_Manager.";
+                    attribute safetyClass = SafetyClassKind::C;
+                    attribute complexity = ComplexityKind::medium;
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/System_Status.aadl";
+                }
+                part outputBus : SoftwareComponent {
+                    attribute id = "SW-008";
+                    attribute name = "OutputBus";
+                    attribute responsibility = "Aggregate all subsystem outputs into the single GPCA_SW_OUT output vector (mode, commanded flow rate, notifications, prescription echo, status).";
+                    attribute safetyClass = SafetyClassKind::C;
+                    attribute complexity = ComplexityKind::low;
+                    attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/OutputBus.aadl";
                 }
 
                 // ── Structural composition ──────────────────────────────────
@@ -276,6 +268,8 @@ package memo {
                 connection : Composes connect parent ::> gpcaSoftware to child ::> logging;
                 connection : Composes connect parent ::> gpcaSoftware to child ::> infusionMgr;
                 connection : Composes connect parent ::> gpcaSoftware to child ::> systemMonitor;
+                connection : Composes connect parent ::> gpcaSoftware to child ::> systemStatus;
+                connection : Composes connect parent ::> gpcaSoftware to child ::> outputBus;
             }
         }
     }

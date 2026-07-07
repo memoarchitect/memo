@@ -87,6 +87,18 @@ package memo {
                 attribute targetPort : String;
                 attribute allocatedFunctionalExchanges : String;
                 attribute direction : DirectionKind;
+                // Connection timing discipline from the source architecture
+                // (e.g. AADL Communication_Properties::Timing — immediate
+                // connections deliver in the same execution step).
+                attribute timingSemantics : String;
+            }
+            // Boundary data port of a software system (e.g. an AADL top-level
+            // data port), modeled as a first-class element so exchanges can
+            // reference it and views can render the system boundary.
+            part def SoftwarePort specializes InterfaceElement {
+                attribute portKind : InterfaceKind;
+                attribute direction : DirectionKind;
+                attribute dataTypeName : String;
             }
         }
     }
