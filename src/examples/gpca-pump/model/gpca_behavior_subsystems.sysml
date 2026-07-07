@@ -148,15 +148,16 @@ package memo {
                 part ddPrescription : DataDefinition {
                     attribute id = "DD-001";
                     attribute name = "PrescriptionRecord";
-                    attribute semantics = "drug id, concentration, basal rate, bolus volume, lockout interval, max dose per hour";
-                    attribute unit = "mL/h, mL, min, mg/h";
-                    attribute minValue = "drug-library soft/hard lower limits";
-                    attribute maxValue = "drug-library soft/hard upper limits";
+                    attribute semantics = "patient id, drug name, concentration, VTBI total, duration total, basal flow rate, square bolus rate/duration/interval, patient bolus rate/duration/lockout period, max boluses per hour (DD-005..DD-017)";
+                    attribute unit = "ml/hr, ml, minutes, mg/ml, per hour";
+                    attribute minValue = "pharmacy-database safe-value lower bounds (lo_hd)";
+                    attribute maxValue = "pharmacy-database safe-value upper bounds (hi_hd)";
                     attribute encoding = "checksummed persistent record";
                     attribute timestampRequired = true;
                     attribute integrityClass = "class C";
                     attribute confidentialityClass = "clinical";
                     attribute availabilityClass = "must survive power loss";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
                 }
                 part ddBolusRequest : DataDefinition {
                     attribute id = "DD-002";

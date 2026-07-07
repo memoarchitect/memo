@@ -333,6 +333,7 @@ package memo {
                 enum environmentalEntity;
                 enum regulatoryBody;
                 enum device;
+                enum informationArtifact;
             }
             enum def ScenarioKind {
                 enum nominal;

@@ -22,7 +22,7 @@ package memo {
                     attribute name = "GPCA_SystemContextView";
                     attribute title = "GPCA System Context View";
                     attribute shortDescription = "Actors, use contexts, and external entities at the GPCA system boundary.";
-                    attribute longDescription = "Shows the patient, clinical actors, pharmacy, and power infrastructure around the pump, with the intended use anchoring the boundary.";
+                    attribute longDescription = "Shows the CriSys Fig 2.1 boundary: patient, clinician, prescription, drug reservoir, needle, hospital pharmacy database, and hospital environment around the pump, with directional data flows, physical drug-path connections, and the intended use anchoring the boundary.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::blockDiagram};
                     attribute diagramType = "bdd";
@@ -34,7 +34,7 @@ package memo {
                         attribute id = "QRY-CTX-101";
                         attribute name = "GPCA_SystemContextQuery";
                         attribute includeElementKinds = {"Actor", "UseContext", "IntendedUse", "OperationalEntity"};
-                        attribute includeRelationshipKinds = {"InteractsWith"};
+                        attribute includeRelationshipKinds = {"InteractsWith", "ExchangesWith", "ConnectsPhysically", "GovernsUse", "AppliesInContext"};
                         attribute includeLayers = {"context", "operational"};
                         attribute selectionExpression = "product == 'GPCA'";
                         attribute rationaleText = "Auto-populate the GPCA context view from the context layer.";

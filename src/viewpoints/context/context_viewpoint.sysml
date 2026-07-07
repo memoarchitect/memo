@@ -18,7 +18,7 @@ package memo {
                 attribute presentationKind = {PresentationKind::blockDiagram};
                 attribute concern = {ConcernKind::safety, ConcernKind::interoperability};
                 attribute includedLayers = {"context"};
-                attribute allowedElementKinds = {"Actor", "UseContext", "TrustBoundary", "LogicalComponent"};
+                attribute allowedElementKinds = {"Actor", "UseContext", "IntendedUse", "OperationalEntity", "TrustBoundary", "LogicalComponent"};
                 attribute methodologyReference = {"default-layer-viewpoint"};
                 attribute userExtensible = true;
             }

@@ -12,7 +12,7 @@ package memo {
                     attribute shortDescription = "Deliver prescribed analgesia with patient-controlled boluses, never exceeding safe dose limits.";
                     attribute missionKind = "therapeutic device mission";
                     attribute successCriteria = "Drug delivered per prescription; no overdose or undetected under-infusion; every hazardous condition annunciated within its alarm latency budget.";
-                    attribute operationalContext = "Acute-care ward and intra-hospital transport (UC-001, UC-002).";
+                    attribute operationalContext = "Acute-care hospital ward, fixed (non-ambulatory) location (UC-001).";
                 }
 
                 // ── System capabilities ─────────────────────────────────────

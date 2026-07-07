@@ -11,7 +11,7 @@ package memo {
                     attribute name = "HospitalPharmacy";
                     attribute entityKind = OperationalEntityKind::externalSystem;
                     attribute operationalDomain = "medication management";
-                    attribute responsibility = "Prepares labeled drug reservoirs and maintains the approved drug library.";
+                    attribute responsibility = "Prepares labeled drug reservoirs and maintains the hospital pharmacy database of drug safe values.";
                 }
                 part entityPowerInfrastructure : OperationalEntity {
                     attribute id = "OE-002";
@@ -28,12 +28,54 @@ package memo {
                     attribute responsibility = "System of interest: delivers programmed basal and bolus analgesia subject to prescription limits.";
                 }
 
+                // ── External entities per CriSys Fig 2.1 ────────────────────
+                part entityPharmacyDb : OperationalEntity {
+                    attribute id = "OE-004";
+                    attribute name = "HospitalPharmacyDatabase";
+                    attribute entityKind = OperationalEntityKind::externalSystem;
+                    attribute operationalDomain = "medication safety data";
+                    attribute responsibility = "Repository of drug information from manufacturers; stores the safe value ranges for all drugs usable for infusion, retrieved by the GPCA for the programmed drug.";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1 and §3.5";
+                }
+                part entityDrugReservoir : OperationalEntity {
+                    attribute id = "OE-005";
+                    attribute name = "DrugReservoir";
+                    attribute entityKind = OperationalEntityKind::device;
+                    attribute operationalDomain = "drug storage";
+                    attribute responsibility = "Apparatus storing the liquid analgesic drug to be infused; filled according to the prescription and connected to the GPCA by the clinician.";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1";
+                }
+                part entityNeedle : OperationalEntity {
+                    attribute id = "OE-006";
+                    attribute name = "InfusionNeedle";
+                    attribute entityKind = OperationalEntityKind::device;
+                    attribute operationalDomain = "drug delivery path";
+                    attribute responsibility = "Intravenous needle inserted into the patient by the clinician and connected to the GPCA standard CCC connection point (I 5) to infuse the drug.";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1 and §3.3 (I 5)";
+                }
+                part entityPrescription : OperationalEntity {
+                    attribute id = "OE-007";
+                    attribute name = "Prescription";
+                    attribute entityKind = OperationalEntityKind::informationArtifact;
+                    attribute operationalDomain = "plan of care";
+                    attribute responsibility = "Instructions governing the plan of care for an individual patient: the drug to be infused and all administration details; provided by a certified medical practitioner.";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1";
+                }
+                part entityHospital : OperationalEntity {
+                    attribute id = "OE-008";
+                    attribute name = "Hospital";
+                    attribute entityKind = OperationalEntityKind::environmentalEntity;
+                    attribute operationalDomain = "care environment boundary";
+                    attribute responsibility = "Environment boundary: fixed (non-ambulatory) usage location with authorized clinicians and the pharmacy database holding drug safe values.";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.4";
+                }
+
                 // ── Operational activities (therapy lifecycle) ──────────────
                 part oaPrescribe : OperationalActivity {
                     attribute id = "OA-001";
                     attribute name = "PrescribeTherapy";
                     attribute trigger = "patient requires titrated analgesia";
-                    attribute preCondition = "patient assessed; drug selected from approved library";
+                    attribute preCondition = "patient assessed; drug has safe-value records in the hospital pharmacy database";
                     attribute postCondition = "prescription with basal rate, bolus volume, lockout, and max dose limits exists";
                     attribute criticality = CriticalityKind::high;
                 }
@@ -50,7 +92,7 @@ package memo {
                     attribute name = "ProgramPrescription";
                     attribute trigger = "reservoir loaded";
                     attribute preCondition = "pump in IDLE; clinician authenticated by key or code";
-                    attribute postCondition = "prescription entered, checked against drug library limits, and confirmed by second review";
+                    attribute postCondition = "prescription entered, checked against pharmacy-database safe values (I 9-I 11), and confirmed by second review";
                     attribute criticality = CriticalityKind::catastrophic;
                 }
                 part oaStartTherapy : OperationalActivity {
@@ -90,7 +132,7 @@ package memo {
                     attribute name = "MaintainDevice";
                     attribute trigger = "scheduled maintenance or fault";
                     attribute preCondition = "pump out of clinical use; technician authenticated";
-                    attribute postCondition = "battery, calibration, and drug library verified";
+                    attribute postCondition = "battery, calibration, and pharmacy-database connection verified";
                     attribute criticality = CriticalityKind::medium;
                 }
 

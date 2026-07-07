@@ -11,9 +11,9 @@ package memo {
                     attribute name = "GPCA_IntendedUse";
                     attribute title = "GPCA Pump Intended Use";
                     attribute shortDescription = "Patient-controlled analgesia infusion of prescribed opioid analgesics.";
-                    attribute longDescription = "The GPCA pump delivers a prescribed analgesic drug intravenously at a programmed basal rate, supplemented by patient-requested bolus doses and clinician-requested square boluses, subject to lockout intervals and maximum-dose limits.";
+                    attribute longDescription = "The GPCA pump delivers a prescribed analgesic drug intravenously at a programmed basal rate, supplemented by square boluses delivered automatically at programmed intervals and by patient-requested bolus doses, subject to lockout intervals and maximum-dose limits.";
                     attribute indication = "Management of acute post-operative or chronic pain requiring titrated intravenous opioid analgesia.";
-                    attribute contraindication = "Patients unable to comprehend or operate the bolus request mechanism; drugs outside the approved drug library.";
+                    attribute contraindication = "Patients unable to comprehend or operate the bolus request mechanism; drugs without safe-value records in the hospital pharmacy database.";
                     attribute patientPopulation = "Adult in-patients under clinical supervision.";
                     attribute clinicalBenefit = "Timely, patient-titrated analgesia with lower total opioid consumption than fixed-schedule dosing.";
                     attribute regulatoryClassification = "FDA Class II infusion pump (21 CFR 880.5725); IEC 62304 software safety class C.";
@@ -27,18 +27,11 @@ package memo {
                     attribute careSetting = "acute-care hospital ward and post-anesthesia care unit";
                     attribute environment = "indoor clinical environment, mains power with battery backup, pole or bed-rail mounted";
                     attribute jurisdiction = "generic (FDA/EU reference model)";
-                    attribute connectedUse = false;
+                    attribute connectedUse = true;
                     attribute intendedUseReference = "IU-001";
                 }
-                part transportContext : UseContext {
-                    attribute id = "UC-002";
-                    attribute name = "IntraHospitalTransportContext";
-                    attribute careSetting = "patient transport between wards";
-                    attribute environment = "battery operation, vibration, no mains power";
-                    attribute jurisdiction = "generic (FDA/EU reference model)";
-                    attribute connectedUse = false;
-                    attribute intendedUseReference = "IU-001";
-                }
+                // UC-002 (intra-hospital transport) removed: CriSys §2.4 states the
+                // system is used in a fixed location and is not ambulatory.
 
                 // ── Actors ──────────────────────────────────────────────────
                 part actorPatient : Actor {
@@ -74,7 +67,7 @@ package memo {
                     attribute name = "BiomedicalTechnician";
                     attribute actorKind = ActorKind::technician;
                     attribute trainingLevel = "service-trained; authenticated service access";
-                    attribute description = "Performs maintenance, battery replacement, calibration, and drug library updates through the service interface.";
+                    attribute description = "Performs maintenance, battery replacement, and calibration through the service interface.";
                 }
 
                 // ── Foreseeable use errors (IEC 62366-1, AAMI TIR PCA) ──────

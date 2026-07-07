@@ -29,6 +29,23 @@ package memo {
                 connection : InteractsWith connect participant ::> actorTechnician to target ::> entityGpcaPump;
                 connection : InteractsWith connect participant ::> actorPharmacist to target ::> entityPharmacy;
 
+                // ── Fig 2.1 context flows (CriSys §2.1) ─────────────────────
+                // Data flows
+                connection : ExchangesWith connect source ::> entityPrescription to target ::> actorNurse;
+                connection : ExchangesWith connect source ::> actorNurse to target ::> entityGpcaPump;
+                connection : ExchangesWith connect source ::> entityGpcaPump to target ::> actorNurse;
+                connection : ExchangesWith connect source ::> actorPatient to target ::> entityGpcaPump;
+                connection : ExchangesWith connect source ::> entityPharmacyDb to target ::> entityGpcaPump;
+                // Physical connections (drug path)
+                connection : ConnectsPhysically connect source ::> entityDrugReservoir to target ::> entityGpcaPump;
+                connection : ConnectsPhysically connect source ::> entityGpcaPump to target ::> entityNeedle;
+                connection : ConnectsPhysically connect source ::> entityNeedle to target ::> actorPatient;
+                connection : ConnectsPhysically connect source ::> entityPowerInfrastructure to target ::> entityGpcaPump;
+                // Intended use and use context anchoring (no floating context nodes)
+                connection : GovernsUse connect intendedUse ::> gpcaIntendedUse to governedElement ::> entityGpcaPump;
+                connection : AppliesInContext connect useContext ::> hospitalWardContext to subject ::> entityGpcaPump;
+                connection : AppliesInContext connect useContext ::> hospitalWardContext to subject ::> entityHospital;
+
                 // ── Actor participation (use case view) ─────────────────────
                 connection : InteractsWith connect participant ::> actorPrescriber to target ::> oaPrescribe;
                 connection : InteractsWith connect participant ::> actorPharmacist to target ::> oaLoadReservoir;
