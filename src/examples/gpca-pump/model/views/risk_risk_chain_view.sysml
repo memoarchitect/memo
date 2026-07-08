@@ -21,8 +21,8 @@ package memo {
                     attribute id = "VIEW-RISK-101";
                     attribute name = "GPCA_RiskChainView";
                     attribute title = "GPCA Risk Mitigation Chain View";
-                    attribute shortDescription = "All five hazard chains from hazard through harm with controls and residual risk.";
-                    attribute longDescription = "Overdose, under-infusion, air embolism, misprogramming, and free-flow chains with their sequences of events, hazardous situations, harms, risk estimates, controls, and residual evaluations.";
+                    attribute shortDescription = "All seven hazard causal trees from categorized cause through harm with controls and residual risk.";
+                    attribute longDescription = "Opioid over-infusion, under-infusion, air embolism, misprogramming, free-flow, reverse-delivery, and VTBI over-infusion causal trees (GIIP cause-source structure): categorized causes converging on each hazard, sequences of events, hazardous situations, harms, risk estimates, controls, and residual evaluations.";
                     attribute outputKind = {ViewOutputKind::table};
                     attribute presentationKind = {PresentationKind::riskTable};
                     attribute diagramType = "risk";
@@ -33,7 +33,7 @@ package memo {
                     part selectionQuery {
                         attribute id = "QRY-RISK-101";
                         attribute name = "GPCA_RiskChainQuery";
-                        attribute includeElementKinds = {"Hazard", "SequenceOfEvents", "HazardousSituation", "Harm", "RiskBeforeMitigation", "RiskAfterMitigation", "RiskControl", "OverallResidualRiskEvaluation"};
+                        attribute includeElementKinds = {"Hazard", "HazardCause", "SequenceOfEvents", "HazardousSituation", "Harm", "RiskBeforeMitigation", "RiskAfterMitigation", "RiskControl", "OverallResidualRiskEvaluation"};
                         attribute includeLayers = {"risk", "assurance"};
                         attribute includeConcerns = {ConcernKind::safety};
                         attribute selectionExpression = "product == 'GPCA'";

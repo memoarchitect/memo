@@ -98,6 +98,11 @@ package memo {
                 connection : DerivesFrom connect sourceDriver ::> airEmbolismHazard to targetRequirement ::> reqCs21;
                 connection : DerivesFrom connect sourceDriver ::> wrongDoseHazard to targetRequirement ::> reqDrugLibraryLimits;
                 connection : DerivesFrom connect sourceDriver ::> freeFlowHazard to targetRequirement ::> reqFreeFlowPrevention;
+                connection : DerivesFrom connect sourceDriver ::> reverseDeliveryHazard to targetRequirement ::> reqCs22;
+                connection : DerivesFrom connect sourceDriver ::> vtbiOverInfusionHazard to targetRequirement ::> reqCs20;
+                connection : DerivesFrom connect sourceDriver ::> vtbiOverInfusionHazard to targetRequirement ::> reqCs28;
+                connection : DerivesFrom connect sourceDriver ::> riskBeforeReverse to targetRequirement ::> reqCs22;
+                connection : DerivesFrom connect sourceDriver ::> riskBeforeVtbi to targetRequirement ::> reqCs20;
                 connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqCs25;
                 connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqCs19;
                 connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqMaxHourlyDose;
@@ -400,20 +405,32 @@ package memo {
                 connection : ExchangesWith connect source ::> logging to target ::> outputBus;
                 connection : ExchangesWith connect source ::> outputBus to target ::> portGpcaSwOut;
 
-                // ── Risk chains (ISO 14971) ─────────────────────────────────
-                // HZ-001 overdose
+                // ── Risk chains (ISO 14971, GIIP causal-tree structure) ─────
+                // Categorized causes converge on each hazard (GIIP Tables 2-9
+                // pattern); hazard -> sequence -> hazardous situation -> harm.
+                // HZ-001 opioid over-infusion
+                connection : TracesRisk connect sourceRiskElement ::> causeFlowRateTooHigh to targetRiskElement ::> overdoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeFrequentBolus to targetRiskElement ::> overdoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeBolusVolumeTooHigh to targetRiskElement ::> overdoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causePumpCalibration to targetRiskElement ::> overdoseHazard;
                 connection : TracesRisk connect sourceRiskElement ::> overdoseHazard to targetRiskElement ::> seqFrequentBolus;
                 connection : TracesRisk connect sourceRiskElement ::> seqFrequentBolus to targetRiskElement ::> hsExcessInfusion;
                 connection : TracesRisk connect sourceRiskElement ::> hsExcessInfusion to targetRiskElement ::> harmRespiratoryDepression;
                 connection : TracesRisk connect sourceRiskElement ::> harmRespiratoryDepression to targetRiskElement ::> riskBefore;
                 connection : AssessedAgainst connect risk ::> riskBefore to riskMatrix ::> riskMatrix;
                 connection : MitigatesHazard connect riskControl ::> lockoutControl to mitigatedHazard ::> overdoseHazard;
+                connection : MitigatesHazard connect riskControl ::> drugLibraryControl to mitigatedHazard ::> overdoseHazard;
                 connection : MitigatesHazard connect riskControl ::> watchdogControl to mitigatedHazard ::> overdoseHazard;
                 connection : MitigatesHazard connect riskControl ::> flowCrossCheckControl to mitigatedHazard ::> overdoseHazard;
                 connection : TracesRisk connect sourceRiskElement ::> lockoutControl to targetRiskElement ::> riskAfter;
                 connection : AssessedAgainst connect risk ::> riskAfter to riskMatrix ::> riskMatrix;
                 connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfter;
                 // HZ-002 under-infusion
+                connection : TracesRisk connect sourceRiskElement ::> causeOcclusion to targetRiskElement ::> underdoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeReservoirEmpty to targetRiskElement ::> underdoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeAirInLine to targetRiskElement ::> underdoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causePumpMechanismFails to targetRiskElement ::> underdoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeFlowRateTooLow to targetRiskElement ::> underdoseHazard;
                 connection : TracesRisk connect sourceRiskElement ::> underdoseHazard to targetRiskElement ::> seqOcclusion;
                 connection : TracesRisk connect sourceRiskElement ::> seqOcclusion to targetRiskElement ::> hsInterruptedTherapy;
                 connection : TracesRisk connect sourceRiskElement ::> hsInterruptedTherapy to targetRiskElement ::> harmUntreatedPain;
@@ -421,10 +438,16 @@ package memo {
                 connection : AssessedAgainst connect risk ::> riskBeforeUnderdose to riskMatrix ::> riskMatrix;
                 connection : MitigatesHazard connect riskControl ::> occlusionAlarmControl to mitigatedHazard ::> underdoseHazard;
                 connection : MitigatesHazard connect riskControl ::> reservoirMonitorControl to mitigatedHazard ::> underdoseHazard;
+                connection : MitigatesHazard connect riskControl ::> flowCrossCheckControl to mitigatedHazard ::> underdoseHazard;
                 connection : TracesRisk connect sourceRiskElement ::> occlusionAlarmControl to targetRiskElement ::> riskAfterUnderdose;
                 connection : AssessedAgainst connect risk ::> riskAfterUnderdose to riskMatrix ::> riskMatrix;
                 connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterUnderdose;
-                // HZ-003 air embolism
+                // HZ-003 air embolism (shares the air-in-line and empty-reservoir causes)
+                connection : TracesRisk connect sourceRiskElement ::> causeAirInLine to targetRiskElement ::> airEmbolismHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeReservoirEmpty to targetRiskElement ::> airEmbolismHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeImproperPriming to targetRiskElement ::> airEmbolismHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeTubingLeak to targetRiskElement ::> airEmbolismHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeAirSensorSilent to targetRiskElement ::> airEmbolismHazard;
                 connection : TracesRisk connect sourceRiskElement ::> airEmbolismHazard to targetRiskElement ::> seqAirInLine;
                 connection : TracesRisk connect sourceRiskElement ::> seqAirInLine to targetRiskElement ::> hsAirTowardPatient;
                 connection : TracesRisk connect sourceRiskElement ::> hsAirTowardPatient to targetRiskElement ::> harmAirEmbolism;
@@ -435,6 +458,11 @@ package memo {
                 connection : AssessedAgainst connect risk ::> riskAfterAir to riskMatrix ::> riskMatrix;
                 connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterAir;
                 // HZ-004 misprogramming / wrong drug
+                connection : TracesRisk connect sourceRiskElement ::> causeWrongPrescriptionEntered to targetRiskElement ::> wrongDoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeWrongDoseUnits to targetRiskElement ::> wrongDoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeWrongDrugLoaded to targetRiskElement ::> wrongDoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeSettingsChangedInadvertently to targetRiskElement ::> wrongDoseHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causePumpRevertsToDefaults to targetRiskElement ::> wrongDoseHazard;
                 connection : TracesRisk connect sourceRiskElement ::> wrongDoseHazard to targetRiskElement ::> seqMisprogram;
                 connection : TracesRisk connect sourceRiskElement ::> seqMisprogram to targetRiskElement ::> hsWrongTherapy;
                 connection : TracesRisk connect sourceRiskElement ::> hsWrongTherapy to targetRiskElement ::> harmRespiratoryDepression;
@@ -445,19 +473,48 @@ package memo {
                 connection : AssessedAgainst connect risk ::> riskAfterWrongDose to riskMatrix ::> riskMatrix;
                 connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterWrongDose;
                 // HZ-005 free flow
+                connection : TracesRisk connect sourceRiskElement ::> causeSetDisengaged to targetRiskElement ::> freeFlowHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeDoorOpenedDuringInfusion to targetRiskElement ::> freeFlowHazard;
                 connection : TracesRisk connect sourceRiskElement ::> freeFlowHazard to targetRiskElement ::> seqFreeFlow;
                 connection : TracesRisk connect sourceRiskElement ::> seqFreeFlow to targetRiskElement ::> hsFreeFlow;
                 connection : TracesRisk connect sourceRiskElement ::> hsFreeFlow to targetRiskElement ::> harmRespiratoryDepression;
                 connection : TracesRisk connect sourceRiskElement ::> hsFreeFlow to targetRiskElement ::> riskBeforeFreeFlow;
                 connection : AssessedAgainst connect risk ::> riskBeforeFreeFlow to riskMatrix ::> riskMatrix;
                 connection : MitigatesHazard connect riskControl ::> freeFlowValveControl to mitigatedHazard ::> freeFlowHazard;
+                connection : MitigatesHazard connect riskControl ::> doorInterlockControl to mitigatedHazard ::> freeFlowHazard;
                 connection : TracesRisk connect sourceRiskElement ::> freeFlowValveControl to targetRiskElement ::> riskAfterFreeFlow;
                 connection : AssessedAgainst connect risk ::> riskAfterFreeFlow to riskMatrix ::> riskMatrix;
                 connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterFreeFlow;
+                // HZ-006 reverse delivery (CriSys REQ 22; GIP HID 1.14)
+                connection : TracesRisk connect sourceRiskElement ::> causeBleedBack to targetRiskElement ::> reverseDeliveryHazard;
+                connection : TracesRisk connect sourceRiskElement ::> reverseDeliveryHazard to targetRiskElement ::> seqReverseDelivery;
+                connection : TracesRisk connect sourceRiskElement ::> seqReverseDelivery to targetRiskElement ::> hsReverseFlow;
+                connection : TracesRisk connect sourceRiskElement ::> hsReverseFlow to targetRiskElement ::> harmUntreatedPain;
+                connection : TracesRisk connect sourceRiskElement ::> harmUntreatedPain to targetRiskElement ::> riskBeforeReverse;
+                connection : AssessedAgainst connect risk ::> riskBeforeReverse to riskMatrix ::> riskMatrix;
+                connection : MitigatesHazard connect riskControl ::> reverseDeliveryPauseControl to mitigatedHazard ::> reverseDeliveryHazard;
+                connection : MitigatesHazard connect riskControl ::> antiRefluxDesignControl to mitigatedHazard ::> reverseDeliveryHazard;
+                connection : TracesRisk connect sourceRiskElement ::> reverseDeliveryPauseControl to targetRiskElement ::> riskAfterReverse;
+                connection : AssessedAgainst connect risk ::> riskAfterReverse to riskMatrix ::> riskMatrix;
+                connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterReverse;
+                // HZ-007 VTBI over-infusion (CriSys REQ 20/28; GIP use hazard 8.1)
+                connection : TracesRisk connect sourceRiskElement ::> causeVtbiTooHigh to targetRiskElement ::> vtbiOverInfusionHazard;
+                connection : TracesRisk connect sourceRiskElement ::> causeStaleDrugLibrary to targetRiskElement ::> vtbiOverInfusionHazard;
+                connection : TracesRisk connect sourceRiskElement ::> vtbiOverInfusionHazard to targetRiskElement ::> seqVtbiExceeded;
+                connection : TracesRisk connect sourceRiskElement ::> seqVtbiExceeded to targetRiskElement ::> hsVtbiExceeded;
+                connection : TracesRisk connect sourceRiskElement ::> hsVtbiExceeded to targetRiskElement ::> harmRespiratoryDepression;
+                connection : TracesRisk connect sourceRiskElement ::> harmRespiratoryDepression to targetRiskElement ::> riskBeforeVtbi;
+                connection : AssessedAgainst connect risk ::> riskBeforeVtbi to riskMatrix ::> riskMatrix;
+                connection : MitigatesHazard connect riskControl ::> vtbiLimitPauseControl to mitigatedHazard ::> vtbiOverInfusionHazard;
+                connection : MitigatesHazard connect riskControl ::> infusionCompleteControl to mitigatedHazard ::> vtbiOverInfusionHazard;
+                connection : MitigatesHazard connect riskControl ::> drugLibraryControl to mitigatedHazard ::> vtbiOverInfusionHazard;
+                connection : TracesRisk connect sourceRiskElement ::> vtbiLimitPauseControl to targetRiskElement ::> riskAfterVtbi;
+                connection : AssessedAgainst connect risk ::> riskAfterVtbi to riskMatrix ::> riskMatrix;
+                connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterVtbi;
                 // Use errors feeding the risk chains (IEC 62366-1 §5.3)
                 connection : TracesRisk connect sourceRiskElement ::> ueMisprogrammedRate to targetRiskElement ::> seqMisprogram;
                 connection : TracesRisk connect sourceRiskElement ::> ueWrongDrugLoaded to targetRiskElement ::> seqMisprogram;
-                connection : TracesRisk connect sourceRiskElement ::> ueBolusByProxy to targetRiskElement ::> seqFrequentBolus;
+                connection : TracesRisk connect sourceRiskElement ::> ueBolusByProxy to targetRiskElement ::> causeFrequentBolus;
                 connection : TracesRisk connect sourceRiskElement ::> ueAlarmDisregard to targetRiskElement ::> seqOcclusion;
 
                 // ── FMEA and fault tree integration ─────────────────────────
@@ -534,6 +591,11 @@ package memo {
                 connection : VerifiedBy connect verificationTarget ::> freeFlowValveControl to verificationCase ::> vcFreeFlow;
                 connection : VerifiedBy connect verificationTarget ::> watchdogControl to verificationCase ::> vcWatchdog;
                 connection : VerifiedBy connect verificationTarget ::> flowCrossCheckControl to verificationCase ::> vcFlowCrossCheck;
+                connection : VerifiedBy connect verificationTarget ::> doorInterlockControl to verificationCase ::> vcDoorInterlock;
+                connection : VerifiedBy connect verificationTarget ::> reverseDeliveryPauseControl to verificationCase ::> vcReverseDeliveryPause;
+                connection : VerifiedBy connect verificationTarget ::> antiRefluxDesignControl to verificationCase ::> vcAntiRefluxMechanism;
+                connection : VerifiedBy connect verificationTarget ::> vtbiLimitPauseControl to verificationCase ::> vcVtbiCeiling;
+                connection : VerifiedBy connect verificationTarget ::> infusionCompleteControl to verificationCase ::> vcInfusionComplete;
                 // behavior properties, contracts, and timing
                 connection : VerifiedBy connect verificationTarget ::> propAlarmStopsSameStep to verificationCase ::> vcSameStepAlarm;
                 connection : VerifiedBy connect verificationTarget ::> propLockoutTimerMonotonic to verificationCase ::> vcTemporalModeSafety;
@@ -577,6 +639,11 @@ package memo {
                 connection : ProducesEvidence connect producer ::> vcPowerLoss to producedEvidence ::> evidenceSafetyAlarmSuite;
                 connection : ProducesEvidence connect producer ::> vcStuckButton to producedEvidence ::> evidenceSafetyAlarmSuite;
                 connection : ProducesEvidence connect producer ::> vcFlowCrossCheck to producedEvidence ::> evidenceSafetyAlarmSuite;
+                connection : ProducesEvidence connect producer ::> vcReverseDeliveryPause to producedEvidence ::> evidenceSafetyAlarmSuite;
+                connection : ProducesEvidence connect producer ::> vcVtbiCeiling to producedEvidence ::> evidenceSafetyAlarmSuite;
+                connection : ProducesEvidence connect producer ::> vcInfusionComplete to producedEvidence ::> evidenceSafetyAlarmSuite;
+                connection : ProducesEvidence connect producer ::> vcDoorInterlock to producedEvidence ::> evidenceSafetyAlarmSuite;
+                connection : ProducesEvidence connect producer ::> vcAntiRefluxMechanism to producedEvidence ::> evidenceHardwareBench;
                 connection : ProducesEvidence connect producer ::> vcAlarmLoudness to producedEvidence ::> evidenceHardwareBench;
                 connection : ProducesEvidence connect producer ::> vcFreeFlow to producedEvidence ::> evidenceHardwareBench;
                 connection : ProducesEvidence connect producer ::> vcHourlyMax to producedEvidence ::> evidenceDoseProgramming;

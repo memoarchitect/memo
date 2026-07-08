@@ -25,7 +25,7 @@ package memo {
                     part selectionQuery {
                         attribute id = "QRY-DOC-001";
                         attribute name = "rmfViewQuery";
-                        attribute includeElementKinds = {"Hazard", "HazardousSituation", "Harm", "SequenceOfEvents", "Risk", "RiskBeforeMitigation", "RiskAfterMitigation", "RiskControl", "OverallResidualRiskEvaluation", "VerificationCase", "Evidence"};
+                        attribute includeElementKinds = {"Hazard", "HazardCause", "HazardousSituation", "Harm", "SequenceOfEvents", "Risk", "RiskBeforeMitigation", "RiskAfterMitigation", "RiskControl", "OverallResidualRiskEvaluation", "VerificationCase", "Evidence"};
                         attribute includeRelationshipKinds = {"ContributesToHazard", "LeadsToHazard", "CausedBy", "MitigatesHazard", "MitigatedByControl", "TracesRisk", "AssessedAgainst", "VerifiedBy", "ProducesEvidence", "IncludedIn"};
                         attribute rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
                     }

@@ -140,6 +140,41 @@ package memo {
                     attribute acceptanceCriteria = "Operational/error log entries per REQ-CS-78..81; tampering detectable (REQ-X-07)";
                     attribute status = "planned";
                 }
+                part vcReverseDeliveryPause : VerificationCase {
+                    attribute id = "VER-020";
+                    attribute name = "VerifyReverseDeliveryPause";
+                    attribute methodKind = VerificationMethodKind::modelChecking;
+                    attribute acceptanceCriteria = "Continuous or cumulative reverse delivery beyond the REQ-CS-22 duration limits transitions to PAUSED and raises the Reverse Delivery notification (NOTIF-04)";
+                    attribute status = "planned";
+                }
+                part vcAntiRefluxMechanism : VerificationCase {
+                    attribute id = "VER-021";
+                    attribute name = "VerifyContinuousReverseDeliveryPrevention";
+                    attribute methodKind = VerificationMethodKind::test;
+                    attribute acceptanceCriteria = "During normal use and single fault condition, continuous reverse delivery is not possible (IEC 601-2-24 basis per GPCA safety requirements)";
+                    attribute status = "planned";
+                }
+                part vcVtbiCeiling : VerificationCase {
+                    attribute id = "VER-022";
+                    attribute name = "VerifyVtbiCeilingPause";
+                    attribute methodKind = VerificationMethodKind::modelChecking;
+                    attribute acceptanceCriteria = "Actual volume infused above the drug-database maximum VTBI transitions to PAUSED with flow at most KVO (REQ-CS-20, AGREE GP-008) and raises NOTIF-06";
+                    attribute status = "planned";
+                }
+                part vcInfusionComplete : VerificationCase {
+                    attribute id = "VER-023";
+                    attribute name = "VerifyInfusionCompleteStop";
+                    attribute methodKind = VerificationMethodKind::test;
+                    attribute acceptanceCriteria = "Reaching prescribed total duration or maximum VTBI transitions ACTIVE to IDLE with Infusion Complete actions (REQ-CS-28)";
+                    attribute status = "planned";
+                }
+                part vcDoorInterlock : VerificationCase {
+                    attribute id = "VER-024";
+                    attribute name = "VerifyDoorOpenDeliveryInhibit";
+                    attribute methodKind = VerificationMethodKind::test;
+                    attribute acceptanceCriteria = "Door open during THERAPY limits flow to at most KVO and raises a notification (AGREE GP-011; REQ-X-05)";
+                    attribute status = "planned";
+                }
 
                 // ── Validation cases (design validation / IEC 62366) ────────
                 part valSimulatedWard : ValidationCase {
@@ -174,7 +209,7 @@ package memo {
                     attribute version = "0.1";
                     attribute lifecycleState = LifecycleStateKind::development;
                     attribute artifactKind = ArtifactKind::testProtocol;
-                    attribute resultSummary = "covers VER-005..VER-010, VER-015, VER-016";
+                    attribute resultSummary = "covers VER-005..VER-010, VER-015, VER-016, VER-020, VER-022..VER-024";
                 }
                 part evidenceLockout : Evidence {
                     attribute id = "EVD-001";

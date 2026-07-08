@@ -167,6 +167,20 @@ package memo {
                 enum useError;
                 enum environmentalHazard;
             }
+            // Cause-source categories for hazard causal trees. Mirrors the
+            // cause-source tables of the FDA GIIP hazard taxonomy (Zhang et al.
+            // 2010, Tables 2-9) and the section headings of the GIP Hazard
+            // Analysis v1.0 (Arney et al. 2009, section 2.4.1-2.4.8).
+            enum def CauseSourceKind {
+                enum operational;
+                enum environmental;
+                enum electrical;
+                enum hardware;
+                enum software;
+                enum mechanical;
+                enum biologicalChemical;
+                enum use;
+            }
             enum def DocumentViewKind {
                 enum DHF;
                 enum SDD;

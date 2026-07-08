@@ -36,6 +36,13 @@ package memo {
                 attribute initiatingEvent : String;
                 attribute contributingFactors : String;
             }
+            // A categorized root cause in a hazard causal tree (FDA GIIP
+            // taxonomy pattern: cause -> hazard -> hazardous situation -> harm;
+            // several HazardCause elements may converge on one Hazard).
+            item def HazardCause specializes TraceableElement {
+                attribute causeSource : CauseSourceKind;
+                attribute contributingFactors : String;
+            }
             item def HazardousSituation specializes TraceableElement {
                 attribute exposedPersons : String;
                 attribute operatingCondition : String;

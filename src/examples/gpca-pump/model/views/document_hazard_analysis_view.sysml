@@ -25,7 +25,7 @@ package memo {
                     part selectionQuery {
                         attribute id = "QRY-DOC-003";
                         attribute name = "hazardAnalysisViewQuery";
-                        attribute includeElementKinds = {"FMEAWorksheet", "FailureMode", "FailureCause", "FailureEffect", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeEvent", "FaultTreeGate", "MinimalCutSet", "Hazard", "SequenceOfEvents"};
+                        attribute includeElementKinds = {"FMEAWorksheet", "FailureMode", "FailureCause", "FailureEffect", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeEvent", "FaultTreeGate", "MinimalCutSet", "Hazard", "HazardCause", "SequenceOfEvents"};
                         attribute includeRelationshipKinds = {"HasFailureMode", "CausedBy", "CausesEffect", "DetectedBy", "AddressedByAction", "InputToGate", "ContainsEvent", "OriginatesFrom", "ContributesToHazard", "BrokenByControl", "IncludedIn"};
                         attribute rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
                     }
