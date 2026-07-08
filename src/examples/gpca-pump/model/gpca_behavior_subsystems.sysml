@@ -65,7 +65,7 @@ package memo {
                     attribute name = "CommandPumpMotor";
                     attribute functionCategory = "actuation";
                     attribute trigger = "flow command update";
-                    attribute outputSummary = "Motor step rate with enable interlock; zero flow on any stop condition";
+                    attribute outputSummary = "Motor step rate with enable interlock; FlowRate_Mode_macro per mode, KVO floor in PAUSED (REQ 43), zero flow in OFF/IDLE (REQ 6/14)";
                     attribute concernKind = ConcernKind::safety;
                     attribute criticality = CriticalityKind::catastrophic;
                 }

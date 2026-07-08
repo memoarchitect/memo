@@ -1005,6 +1005,61 @@ package memo {
                     attribute timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
                     attribute sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
                 }
+                // ── Text macros (App. A.3 internal state variables) ─────────
+                part ddActualInfusionDurationMacro : DataDefinition {
+                    attribute id = "DD-042";
+                    attribute name = "Actual_Infusion_Duration_macro";
+                    attribute description = "Total duration the system has been in ACTIVE mode since infusion was initiated with the current prescription.";
+                    attribute semantics = "Internal variable; reset to 0 every time infusion is initiated with a new prescription (REQ 12/13).";
+                    attribute unit = "minutes";
+                    attribute encoding = "Time";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
+                }
+                part ddActualVolumeInfusedMacro : DataDefinition {
+                    attribute id = "DD-043";
+                    attribute name = "Actual_Volume_Infused_macro";
+                    attribute description = "Total volume of drug infused during Actual_Infusion_Duration_macro; drives the infusion-complete condition (REQ 28) and over-infusion VTBI (REQ 20).";
+                    attribute semantics = "Internal variable; default 0; reset to 0 on infusion initiation.";
+                    attribute unit = "ml/hr";
+                    attribute encoding = "Positive Integer";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
+                }
+                part ddFlowRateModeMacro : DataDefinition {
+                    attribute id = "DD-044";
+                    attribute name = "FlowRate_Mode_macro";
+                    attribute description = "Programmed flow rate of the current mode: FlowRate_kvo_hd in PAUSED, FlowRate_basal_prog in BASAL, FlowRate_sbolus_prog in SQUARE BOLUS, FlowRate_pbolus_prog in PATIENT BOLUS (§4.1.5).";
+                    attribute semantics = "Internal variable; set by the system when entering the respective mode.";
+                    attribute unit = "ml/hr";
+                    attribute encoding = "Positive Integer";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
+                }
+                part ddInhibitedInfusionMacro : DataDefinition {
+                    attribute id = "DD-045";
+                    attribute name = "Inhibited_Infusion_macro";
+                    attribute description = "TRUE when the notification in effect requires all infusion to be inhibited ('Inhibit Infusion' column of REQ 59); FALSE when that notification is cancelled or the system transitions to OFF.";
+                    attribute semantics = "Internal variable set per the REQ 59 action table; drives REQ 30/37 transitions.";
+                    attribute unit = "-";
+                    attribute encoding = "Boolean";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
+                }
+                part ddInhibitedBolusMacro : DataDefinition {
+                    attribute id = "DD-046";
+                    attribute name = "Inhibited_Bolus_macro";
+                    attribute description = "TRUE when the notification in effect requires square boluses to be inhibited ('Inhibit Square Bolus' column of REQ 59); cleared on cancel or OFF.";
+                    attribute semantics = "Internal variable set per the REQ 59 action table; drives REQ 31/34/39 guards.";
+                    attribute unit = "-";
+                    attribute encoding = "Boolean";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
+                }
+                part ddInhibitedPatientBolusMacro : DataDefinition {
+                    attribute id = "DD-047";
+                    attribute name = "Inhibited_PatientBolus_macro";
+                    attribute description = "TRUE when the notification in effect requires PATIENT BOLUS inhibit ('Inhibit Patient Bolus' column of REQ 59); cleared on cancel or OFF.";
+                    attribute semantics = "Internal variable set per the REQ 59 action table; drives REQ 25/35/36/38 guards.";
+                    attribute unit = "-";
+                    attribute encoding = "Boolean";
+                    attribute sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
+                }
             }
         }
     }

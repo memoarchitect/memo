@@ -94,7 +94,7 @@ package memo {
                     attribute endToEndLatencyBudgetMs = "20";
                     attribute safetyRelevant = true;
                     attribute securityRelevant = false;
-                    attribute description = "Sensor condition through alarm evaluation to same-step infusion stop and annunciation.";
+                    attribute description = "Sensor condition through alarm evaluation to same-step transition to PAUSED (KVO flow, REQ 43) and annunciation.";
                 }
                 part fcsAlarmSense : FunctionalChainStep {
                     attribute id = "FCS-006"; attribute name = "SenseAlarmCondition";
@@ -105,7 +105,7 @@ package memo {
                     attribute stepOrder = "2"; attribute allocatedFunction = "FUNC-003"; attribute exchangeItem = "DD-003: SensorStatusVector";
                 }
                 part fcsAlarmStopInfusion : FunctionalChainStep {
-                    attribute id = "FCS-008"; attribute name = "StopInfusionSameStep";
+                    attribute id = "FCS-008"; attribute name = "LimitFlowToKvoSameStep";
                     attribute stepOrder = "3"; attribute allocatedFunction = "FUNC-005"; attribute exchangeItem = "CD-002: AlarmSignal";
                 }
                 part fcsAlarmAnnunciate : FunctionalChainStep {
@@ -131,16 +131,16 @@ package memo {
                     attribute name = "PatientBolusDuringBasal";
                     attribute scenarioKind = ScenarioKind::nominal;
                     attribute sequenceDiagramRef = "VIEW-BHV-002";
-                    attribute precondition = "BASAL mode active, lockout expired, hourly dose below limit";
+                    attribute precondition = "BASAL mode active; no REQ 25 ignore condition holds";
                     attribute postcondition = "PATIENT_BOLUS mode entered, bolus delivered, return to BASAL";
                 }
                 part ssAlarmPause : SystemScenario {
                     attribute id = "SS-002";
-                    attribute name = "Level1AlarmPausesInfusion";
+                    attribute name = "InhibitingNotificationPausesInfusion";
                     attribute scenarioKind = ScenarioKind::alarm;
                     attribute sequenceDiagramRef = "VIEW-BHV-002";
                     attribute precondition = "any ACTIVE therapy mode; infusion-inhibiting notification detected (REQ 59)";
-                    attribute postcondition = "PAUSED mode entered in same execution step; alarm annunciated";
+                    attribute postcondition = "PAUSED mode entered in same execution step at FlowRate_kvo_hd keep-vein-open flow; notification annunciated per REQ 59";
                 }
             }
         }
