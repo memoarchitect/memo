@@ -25,6 +25,7 @@ package memo {
                     attribute longDescription = "Product-specific logical architecture view that references the default logical architecture viewpoint and is intended for design description and architecture communication.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::blockDiagram};
+                    attribute viewKind = DiagramViewKind::general;
                     attribute diagramType = "bdd";
                     attribute dataSourceDescription = "GPCA architecture and interface model elements";
                     attribute autoPopulate = true;

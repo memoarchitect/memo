@@ -54,6 +54,7 @@ package memo {
             }
 
             part def DiagramView specializes View {
+                attribute viewKind : DiagramViewKind;
                 attribute diagramType : String;
                 attribute layoutHint : String;
                 attribute styleHint : String;

@@ -25,6 +25,7 @@ package memo {
                     attribute longDescription = "Shows the CriSys Fig 2.1 boundary: patient, clinician, prescription, drug reservoir, needle, hospital pharmacy database, and hospital environment around the pump, with directional data flows, physical drug-path connections, and the intended use anchoring the boundary.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::blockDiagram};
+                    attribute viewKind = DiagramViewKind::general;
                     attribute diagramType = "bdd";
                     attribute dataSourceDescription = "GPCA context layer: actors, use contexts, intended use, operational entities";
                     attribute autoPopulate = true;

@@ -24,6 +24,7 @@ package memo {
                     attribute shortDescription = "Allocation of logical functions to software components and hardware assemblies.";
                     attribute outputKind = {ViewOutputKind::matrix};
                     attribute presentationKind = {PresentationKind::traceMatrix};
+                    attribute viewKind = DiagramViewKind::grid;
                     attribute diagramType = "alloc";
                     attribute dataSourceDescription = "AllocatedTo links between functions and architecture elements";
                     attribute autoPopulate = true;

@@ -24,6 +24,7 @@ package memo {
                     attribute shortDescription = "Needs to system/software/hardware requirements to satisfying components and verification.";
                     attribute outputKind = {ViewOutputKind::matrix};
                     attribute presentationKind = {PresentationKind::traceMatrix};
+                    attribute viewKind = DiagramViewKind::general;
                     attribute diagramType = "req";
                     attribute dataSourceDescription = "GPCA requirements with DerivesFrom, SatisfiedBy, and VerifiedBy links";
                     attribute autoPopulate = true;

@@ -25,6 +25,7 @@ package memo {
                     attribute longDescription = "Opioid over-infusion, under-infusion, air embolism, misprogramming, free-flow, reverse-delivery, and VTBI over-infusion causal trees (GIIP cause-source structure): categorized causes converging on each hazard, sequences of events, hazardous situations, harms, risk estimates, controls, and residual evaluations.";
                     attribute outputKind = {ViewOutputKind::table};
                     attribute presentationKind = {PresentationKind::riskTable};
+                    attribute viewKind = DiagramViewKind::general;
                     attribute diagramType = "risk";
                     attribute dataSourceDescription = "GPCA risk layer and TracesRisk/MitigatesHazard links";
                     attribute autoPopulate = true;

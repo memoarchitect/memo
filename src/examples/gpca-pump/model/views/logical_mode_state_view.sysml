@@ -25,6 +25,7 @@ package memo {
                     attribute longDescription = "Hierarchical state diagram per CriSys §4.1 Fig 4.1: OFF and ON at top level, IDLE and THERAPY under ON, PAUSED (KVO delivery) and ACTIVE under THERAPY, and BASAL / SQUARE_BOLUS (auto-scheduled) / PATIENT_BOLUS under ACTIVE — with the REQ 4-47 transitions, Inhibited_* macro guards, and same-step-critical markings.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::stateDiagram};
+                    attribute viewKind = DiagramViewKind::statetransition;
                     attribute diagramType = "stm";
                     attribute dataSourceDescription = "GPCA behavior machine, mode states, and transitions";
                     attribute autoPopulate = true;

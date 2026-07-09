@@ -24,6 +24,7 @@ package memo {
                     attribute shortDescription = "Logical function tree from sensing through dose limiting to actuation.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::blockDiagram};
+                    attribute viewKind = DiagramViewKind::general;
                     attribute diagramType = "bdd";
                     attribute dataSourceDescription = "GPCA logical functions and flows";
                     attribute autoPopulate = true;

@@ -24,6 +24,7 @@ package memo {
                     attribute shortDescription = "Hardware assemblies, processing node, physical ports, and part numbers.";
                     attribute outputKind = {ViewOutputKind::table};
                     attribute presentationKind = {PresentationKind::blockDiagram};
+                    attribute viewKind = DiagramViewKind::general;
                     attribute diagramType = "bdd";
                     attribute dataSourceDescription = "GPCA hardware assemblies, processing node, and physical ports";
                     attribute autoPopulate = true;

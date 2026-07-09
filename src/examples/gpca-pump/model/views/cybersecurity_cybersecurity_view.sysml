@@ -25,6 +25,7 @@ package memo {
                     attribute longDescription = "Product-specific cybersecurity view intended for secure product development and cross-reference into cybersecurity risk documentation.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::custom};
+                    attribute viewKind = DiagramViewKind::general;
                     attribute diagramType = "threat-model";
                     attribute dataSourceDescription = "GPCA cyber assets, threat scenarios, and trace links";
                     attribute autoPopulate = true;

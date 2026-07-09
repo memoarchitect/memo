@@ -181,6 +181,18 @@ package memo {
                 enum biologicalChemical;
                 enum use;
             }
+            // The eight standard SysML v2 view kinds (spec taxonomy). Every
+            // diagram view resolves to exactly one of these (Epic KK).
+            enum def DiagramViewKind {
+                enum general;
+                enum interconnection;
+                enum actionflow;
+                enum statetransition;
+                enum sequence;
+                enum grid;
+                enum browser;
+                enum geometry;
+            }
             enum def DocumentViewKind {
                 enum DHF;
                 enum SDD;

@@ -24,6 +24,7 @@ package memo {
                     attribute shortDescription = "Key therapy and alarm scenarios rendered as sequences over the functional chains.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::activityDiagram};
+                    attribute viewKind = DiagramViewKind::sequence;
                     attribute diagramType = "seq";
                     attribute dataSourceDescription = "GPCA system scenarios, functional chains, and chain steps";
                     attribute autoPopulate = true;

@@ -25,6 +25,7 @@ package memo {
                     attribute longDescription = "Connects patient, nurse, prescriber, pharmacist, and technician to the operational activities (prescribe, load, program, start, bolus, alarm response, log review, maintain) and their scenarios.";
                     attribute outputKind = {ViewOutputKind::diagram};
                     attribute presentationKind = {PresentationKind::custom};
+                    attribute viewKind = DiagramViewKind::general;
                     attribute diagramType = "ucd";
                     attribute dataSourceDescription = "GPCA operational activities, scenarios, and context actors";
                     attribute autoPopulate = true;

@@ -24,6 +24,7 @@ package memo {
                     attribute shortDescription = "Failure modes with causes, effects, detection, RPN, and the overdose fault tree.";
                     attribute outputKind = {ViewOutputKind::table};
                     attribute presentationKind = {PresentationKind::riskTable};
+                    attribute viewKind = DiagramViewKind::grid;
                     attribute diagramType = "fmea";
                     attribute dataSourceDescription = "GPCA FMEA worksheet, failure modes, fault tree events, gates, and cut sets";
                     attribute autoPopulate = true;
