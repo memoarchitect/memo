@@ -85,6 +85,15 @@ package memo {
                 connection : InvolvesFunction connect functionalChain ::> fcStartup to function ::> fnPresentStatus;
                 connection : RealizesScenario connect functionalChain ::> fcPatientBolus to scenario ::> ssBolusDuringBasal;
                 connection : RealizesScenario connect functionalChain ::> fcAlarmStop to scenario ::> ssAlarmPause;
+                connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusSense;
+                connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusValidate;
+                connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusCommand;
+                connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusActuate;
+                connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusLog;
+                connection : IncludesStep connect functionalChain ::> fcAlarmStop to step ::> fcsAlarmSense;
+                connection : IncludesStep connect functionalChain ::> fcAlarmStop to step ::> fcsAlarmEvaluate;
+                connection : IncludesStep connect functionalChain ::> fcAlarmStop to step ::> fcsAlarmStopInfusion;
+                connection : IncludesStep connect functionalChain ::> fcAlarmStop to step ::> fcsAlarmAnnunciate;
 
                 // ── Requirement derivation ──────────────────────────────────
                 // MEMO extension requirements (REQ-X) derive from needs and risks.

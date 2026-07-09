@@ -39,6 +39,10 @@ package memo {
                 end functionalChain : FunctionalChain;
                 end capability : SystemCapability;
             }
+            connection def IncludesStep :> SemanticLink {
+                end functionalChain : FunctionalChain;
+                end step : FunctionalChainStep;
+            }
             connection def InvolvesFunction :> SemanticLink {
                 end functionalChain : FunctionalChain;
                 end function : LogicalFunction;
