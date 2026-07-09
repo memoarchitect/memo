@@ -405,6 +405,26 @@ package memo {
                 connection : ExchangesWith connect source ::> logging to target ::> outputBus;
                 connection : ExchangesWith connect source ::> outputBus to target ::> portGpcaSwOut;
 
+                // ── GPCA_SW boundary features (AADL GPCA_SW.aadl; CITE-002) ──
+                // The seven top-level ports are features of GPCA_Software, so
+                // interconnection views pin them on the software boundary.
+                connection : Composes connect parent ::> gpcaSoftware to child ::> portOpCmdIn;
+                connection : Composes connect parent ::> gpcaSoftware to child ::> portPresIn;
+                connection : Composes connect parent ::> gpcaSoftware to child ::> portPatientIn;
+                connection : Composes connect parent ::> gpcaSoftware to child ::> portSensorIn;
+                connection : Composes connect parent ::> gpcaSoftware to child ::> portConstIn;
+                connection : Composes connect parent ::> gpcaSoftware to child ::> portDbIn;
+                connection : Composes connect parent ::> gpcaSoftware to child ::> portGpcaSwOut;
+
+                // ── Device-boundary interconnect (GPCA_Device.aadl; CE-001..004,
+                //    CITE-002) — hardware ↔ software-port connection topology ──
+                connection : ExchangesWith connect source ::> gpcaDeviceSensors to target ::> portSensorIn;
+                connection : ExchangesWith connect source ::> portGpcaSwOut to target ::> pumpMotorAssembly;
+                connection : ExchangesWith connect source ::> portGpcaSwOut to target ::> audibleAlarm;
+                connection : ExchangesWith connect source ::> portGpcaSwOut to target ::> operatorDisplay;
+                connection : ExchangesWith connect source ::> operatorKeypad to target ::> portPresIn;
+                connection : ExchangesWith connect source ::> operatorKeypad to target ::> portOpCmdIn;
+
                 // ── Risk chains (ISO 14971, GIIP causal-tree structure) ─────
                 // Categorized causes converge on each hazard (GIIP Tables 2-9
                 // pattern); hazard -> sequence -> hazardous situation -> harm.
