@@ -24,7 +24,7 @@ package memo {
                     attribute shortDescription = "Requirements and risk controls against verification cases, validation cases, and evidence.";
                     attribute outputKind = {ViewOutputKind::matrix};
                     attribute presentationKind = {PresentationKind::traceMatrix};
-                    attribute viewKind = DiagramViewKind::general;
+                    attribute viewKind = DiagramViewKind::grid;
                     attribute diagramType = "req";
                     attribute dataSourceDescription = "VerifiedBy, Validates, and ProducesEvidence links in the GPCA model";
                     attribute autoPopulate = true;
