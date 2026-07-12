@@ -1,5 +1,6 @@
 package samples {
     private import memo::architecture::logical_structure::*;
+    private import memo::core::relationships::*;
     private import memo::viewpoints::definitions::*;
     private import memo::core::enumerations::*;
 
@@ -23,38 +24,55 @@ package samples {
     item def FxOcclusionSignal;
 
     // Functions with typed in/out pins
-    action def FxAcquire { out reading : FxSensorReading; }
-    action def FxCompute { in reading : FxSensorReading; out command : FxRateCommand; }
-    action def FxEnforce { in command : FxRateCommand; out safeCommand : FxRateCommand; }
-    action def FxDrive { in command : FxRateCommand; out energy : FxMotorEnergy; }
-    action def FxDeliverMedication { in energy : FxMotorEnergy; out fluid : FxMedicationFluid; }
-    action def FxMonitor { out signal : FxOcclusionSignal; }
-    action def FxDetect { in signal : FxOcclusionSignal; }
+    function def FxAcquire { out reading : FxSensorReading; }
+    function def FxCompute { in reading : FxSensorReading; out command : FxRateCommand; }
+    function def FxEnforce { in command : FxRateCommand; out safeCommand : FxRateCommand; }
+    function def FxDrive { in command : FxRateCommand; out energy : FxMotorEnergy; }
+    function def FxDeliverMedication { in energy : FxMotorEnergy; out fluid : FxMedicationFluid; }
+    function def FxMonitor { out signal : FxOcclusionSignal; }
+    function def FxDetect { in signal : FxOcclusionSignal; }
 
-    // Components — one swimlane each
+    // Component hierarchy used by the Level control:
+    // L1 system → L2 subsystems → L3 allocated components.
+    part fxPumpSystem : LogicalComponent { attribute redefines name = "Infusion Pump System"; }
+    part fxSensingSubsystem : LogicalComponent { attribute redefines name = "Sensing Subsystem"; }
+    part fxControlSubsystem : LogicalComponent { attribute redefines name = "Control Subsystem"; }
+    part fxDeliverySubsystem : LogicalComponent { attribute redefines name = "Delivery Subsystem"; }
+    part fxSafetySubsystem : LogicalComponent { attribute redefines name = "Safety Subsystem"; }
+
+    // L3 components — one natural-level swimlane each
     part fxSensor : LogicalComponent { attribute redefines name = "Sensor Subsystem"; }
     part fxController : LogicalComponent { attribute redefines name = "Infusion Controller"; }
     part fxActuator : LogicalComponent { attribute redefines name = "Pump Actuator"; }
     part fxSafety : LogicalComponent { attribute redefines name = "Safety Monitor"; }
 
-    action fxDeliveryFlow {
-        action fxAcquire : FxAcquire { attribute redefines name = "Acquire Sensor Data"; }
-        action fxCompute : FxCompute { attribute redefines name = "Compute Infusion Rate"; }
+    connection : Composes connect parent ::> fxPumpSystem to child ::> fxSensingSubsystem;
+    connection : Composes connect parent ::> fxPumpSystem to child ::> fxControlSubsystem;
+    connection : Composes connect parent ::> fxPumpSystem to child ::> fxDeliverySubsystem;
+    connection : Composes connect parent ::> fxPumpSystem to child ::> fxSafetySubsystem;
+    connection : Composes connect parent ::> fxSensingSubsystem to child ::> fxSensor;
+    connection : Composes connect parent ::> fxControlSubsystem to child ::> fxController;
+    connection : Composes connect parent ::> fxDeliverySubsystem to child ::> fxActuator;
+    connection : Composes connect parent ::> fxSafetySubsystem to child ::> fxSafety;
+
+    function fxDeliveryFlow {
+        function fxAcquire : FxAcquire { attribute redefines name = "Acquire Sensor Data"; }
+        function fxCompute : FxCompute { attribute redefines name = "Compute Infusion Rate"; }
 
         // Split: enforce/drive/deliver runs concurrently with occlusion monitoring
         fork fxForkDeliver;
-        action fxEnforce : FxEnforce { attribute redefines name = "Enforce Dose Limits"; }
-        action fxDrive : FxDrive { attribute redefines name = "Drive Pump Motor"; }
-        action fxMonitor : FxMonitor { attribute redefines name = "Monitor Occlusion"; }
-        action fxDetect : FxDetect { attribute redefines name = "Detect Occlusion"; }
+        function fxEnforce : FxEnforce { attribute redefines name = "Enforce Dose Limits"; }
+        function fxDrive : FxDrive { attribute redefines name = "Drive Pump Motor"; }
+        function fxMonitor : FxMonitor { attribute redefines name = "Monitor Occlusion"; }
+        function fxDetect : FxDetect { attribute redefines name = "Detect Occlusion"; }
         join fxJoinDeliver;
 
         // Composite function — valve sub-flow (drill-in)
-        action fxDeliver : FxDeliverMedication {
+        function fxDeliver : FxDeliverMedication {
             attribute redefines name = "Deliver Medication";
-            action fxOpenValve { attribute redefines name = "Open Valve"; }
-            action fxHoldDose { attribute redefines name = "Hold Metered Dose"; }
-            action fxCloseValve { attribute redefines name = "Close Valve"; }
+            function fxOpenValve { attribute redefines name = "Open Valve"; }
+            function fxHoldDose { attribute redefines name = "Hold Metered Dose"; }
+            function fxCloseValve { attribute redefines name = "Close Valve"; }
 
             flow of FxMedicationFluid from fxHoldDose to fxCloseValve;
 
@@ -64,7 +82,7 @@ package samples {
             first fxCloseValve then done;
         }
 
-        action fxLog { attribute redefines name = "Log Delivery"; }
+        function fxLog { attribute redefines name = "Log Delivery"; }
 
         flow of FxSensorReading from fxAcquire.reading to fxCompute.reading;
         flow of FxRateCommand from fxEnforce.safeCommand to fxDrive.command;
@@ -102,7 +120,7 @@ package samples {
         attribute redefines title = "Sample · Dose Delivery (Functional Flow)";
         attribute redefines shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in).";
         attribute redefines viewKind = DiagramViewKind::actionflow;
-        attribute redefines diagramType = "afd";
+        attribute redefines diagramType = "ffd";
     }
 
     connection : IncludedIn connect sourceElement ::> fxAcquire to targetView ::> fxDeliveryView;
@@ -118,4 +136,13 @@ package samples {
     connection : IncludedIn connect sourceElement ::> fxOpenValve to targetView ::> fxDeliveryView;
     connection : IncludedIn connect sourceElement ::> fxHoldDose to targetView ::> fxDeliveryView;
     connection : IncludedIn connect sourceElement ::> fxCloseValve to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxPumpSystem to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxSensingSubsystem to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxControlSubsystem to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxDeliverySubsystem to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxSafetySubsystem to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxSensor to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxController to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxActuator to targetView ::> fxDeliveryView;
+    connection : IncludedIn connect sourceElement ::> fxSafety to targetView ::> fxDeliveryView;
 }

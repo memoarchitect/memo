@@ -1,5 +1,6 @@
 package samples {
     private import memo::architecture::context::*;
+    private import memo::core::relationships::*;
     private import memo::viewpoints::definitions::*;
     private import memo::core::enumerations::*;
 
@@ -19,38 +20,51 @@ package samples {
     item def OpBolusRequest;
 
     // Action definitions give steps typed in/out pins
-    action def OpPrescribeTherapy { out prescription : OpPrescription; }
-    action def OpVerifyPrescription { in prescription : OpPrescription; }
-    action def OpRequestBolus { out bolusRequest : OpBolusRequest; }
-    action def OpCheckLockout { in bolusRequest : OpBolusRequest; }
+    operator def OpPrescribeTherapy { out prescription : OpPrescription; }
+    operator def OpVerifyPrescription { in prescription : OpPrescription; }
+    operator def OpRequestBolus { out bolusRequest : OpBolusRequest; }
+    operator def OpCheckLockout { in bolusRequest : OpBolusRequest; }
 
-    // Clinical roles — one swimlane each
+    // Responsibility hierarchy used by the Level control:
+    // L1 care system → L2 responsibility groups → L3 performing actors.
+    part opCareSystem : System { attribute redefines name = "PCA Care System"; }
+    part opClinicalTeam : Actor { attribute redefines name = "Clinical Team"; }
+    part opPatientGroup : Actor { attribute redefines name = "Patient Interaction"; }
+
+    // L3 clinical roles — one natural-level swimlane each
     part opRolePhysician : Actor { attribute redefines name = "Physician"; }
     part opRoleNurse : Actor { attribute redefines name = "Nurse"; }
     part opRoleBiomed : Actor { attribute redefines name = "Biomed Tech"; }
     part opRolePatient : Actor { attribute redefines name = "Patient"; }
 
-    action opSetupFlow {
-        action opPrescribe : OpPrescribeTherapy { attribute redefines name = "Prescribe Therapy"; }
-        action opVerify : OpVerifyPrescription { attribute redefines name = "Verify Prescription"; }
+    connection : Composes connect parent ::> opCareSystem to child ::> opClinicalTeam;
+    connection : Composes connect parent ::> opCareSystem to child ::> opPatientGroup;
+    connection : Composes connect parent ::> opClinicalTeam to child ::> opRolePhysician;
+    connection : Composes connect parent ::> opClinicalTeam to child ::> opRoleNurse;
+    connection : Composes connect parent ::> opClinicalTeam to child ::> opRoleBiomed;
+    connection : Composes connect parent ::> opPatientGroup to child ::> opRolePatient;
+
+    operator opSetupFlow {
+        operator opPrescribe : OpPrescribeTherapy { attribute redefines name = "Prescribe Therapy"; }
+        operator opVerify : OpVerifyPrescription { attribute redefines name = "Verify Prescription"; }
 
         // Concurrent preparation: prime the pump while the device self-tests
         fork opForkPrep;
-        action opPrime { attribute redefines name = "Prime Pump & Load Reservoir"; }
-        action opSelfTest { attribute redefines name = "Run Device Self-Test"; }
+        operator opPrime { attribute redefines name = "Prime Pump & Load Reservoir"; }
+        operator opSelfTest { attribute redefines name = "Run Device Self-Test"; }
         join opJoinPrep;
 
-        action opProgram { attribute redefines name = "Program Pump Parameters"; }
-        action opConnect { attribute redefines name = "Connect to Patient"; }
-        action opStart { attribute redefines name = "Start Infusion"; }
+        operator opProgram { attribute redefines name = "Program Pump Parameters"; }
+        operator opConnect { attribute redefines name = "Connect to Patient"; }
+        operator opStart { attribute redefines name = "Start Infusion"; }
 
         // Composite step — its own sub-flow (drill-in)
-        action opAdminister {
+        operator opAdminister {
             attribute redefines name = "Administer PCA Therapy";
-            action opRequestBolus : OpRequestBolus { attribute redefines name = "Request Bolus"; }
-            action opCheckLockout : OpCheckLockout { attribute redefines name = "Check Lockout"; }
-            action opDeliverDose { attribute redefines name = "Deliver Dose"; }
-            action opLogEvent { attribute redefines name = "Log Dose Event"; }
+            operator opRequestBolus : OpRequestBolus { attribute redefines name = "Request Bolus"; }
+            operator opCheckLockout : OpCheckLockout { attribute redefines name = "Check Lockout"; }
+            operator opDeliverDose { attribute redefines name = "Deliver Dose"; }
+            operator opLogEvent { attribute redefines name = "Log Dose Event"; }
 
             flow of OpBolusRequest from opRequestBolus.bolusRequest to opCheckLockout.bolusRequest;
 
@@ -95,7 +109,7 @@ package samples {
         attribute redefines title = "Sample · Clinical PCA Setup (Operational)";
         attribute redefines shortDescription = "Operational activity across clinical roles: swimlanes per actor, a fork/join for concurrent prep, and a composite 'Administer PCA Therapy' sub-flow (double-click to drill in).";
         attribute redefines viewKind = DiagramViewKind::actionflow;
-        attribute redefines diagramType = "afd";
+        attribute redefines diagramType = "ofd";
     }
 
     connection : IncludedIn connect sourceElement ::> opPrescribe to targetView ::> opSetupView;
@@ -112,4 +126,11 @@ package samples {
     connection : IncludedIn connect sourceElement ::> opCheckLockout to targetView ::> opSetupView;
     connection : IncludedIn connect sourceElement ::> opDeliverDose to targetView ::> opSetupView;
     connection : IncludedIn connect sourceElement ::> opLogEvent to targetView ::> opSetupView;
+    connection : IncludedIn connect sourceElement ::> opCareSystem to targetView ::> opSetupView;
+    connection : IncludedIn connect sourceElement ::> opClinicalTeam to targetView ::> opSetupView;
+    connection : IncludedIn connect sourceElement ::> opPatientGroup to targetView ::> opSetupView;
+    connection : IncludedIn connect sourceElement ::> opRolePhysician to targetView ::> opSetupView;
+    connection : IncludedIn connect sourceElement ::> opRoleNurse to targetView ::> opSetupView;
+    connection : IncludedIn connect sourceElement ::> opRoleBiomed to targetView ::> opSetupView;
+    connection : IncludedIn connect sourceElement ::> opRolePatient to targetView ::> opSetupView;
 }
