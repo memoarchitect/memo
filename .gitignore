@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# SysAnd local cache + generated build metadata
+# .meta.json is regenerated deterministically by scripts/build-kpar.sh
+.meta.json
+output/
+sysand_env/
+
+# KerML Project Archives (build artifacts)
+*.kpar
+
+# Turborepo per-package cache + build logs
+.turbo/
+
+# MkDocs build output
+site/
+
+# OS
+.DS_Store
+
+# Claude Code session config
+.claude/

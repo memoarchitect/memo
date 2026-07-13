@@ -1,0 +1,8 @@
+{
+  "type": "methodology-package",
+  "name": "@memo/methodology-default",
+  "version": "0.2.0",
+  "extends": "@memo/ontology",
+  "sysmlDir": "../../src/methodology",
+  "usage": ["viewpoints", "views", "rules", "gates", "patterns", "profiles", "workflow", "dhf"]
+}
