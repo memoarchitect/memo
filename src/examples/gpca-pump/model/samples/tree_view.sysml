@@ -19,6 +19,7 @@ package samples {
 
     connection : Composes connect parent ::> rootA to child ::> branchA1;
     connection : Composes connect parent ::> rootA to child ::> branchA2;
+    connection : Composes connect parent ::> rootA to child ::> rootB;
     connection : Composes connect parent ::> branchA1 to child ::> leafA11;
     connection : Composes connect parent ::> branchA1 to child ::> leafA12;
     connection : Composes connect parent ::> branchA2 to child ::> leafA21;
@@ -27,7 +28,7 @@ package samples {
 
     part sampleTreeView : DiagramView {
         attribute redefines title = "Sample · Tree";
-        attribute redefines shortDescription = "Two dummy roots and three hierarchy levels for tree layout development.";
+        attribute redefines shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";
         attribute redefines viewKind = DiagramViewKind::general;
         attribute redefines diagramType = "bdd";
         attribute redefines layoutHint = "tree";

@@ -8,9 +8,9 @@ do not describe a product or reference architecture.
 
 | File | Shows |
 |------|-------|
-| `action-flow.sysml` | Minimal renderer smoke test — dummy actions, typed item flows, successions, one composite. |
-| `op-behaviour.sysml` | **Operational** behaviour — swimlanes per clinical role (Physician/Nurse/Biomed Tech/Patient), a `fork`/`join` for concurrent prep, and a composite step (`Administer PCA Therapy`) with a drill-in sub-flow. |
-| `functional-flow.sysml` | **Functional/component** behaviour — swimlanes per realising component, typed data/energy/material flows, a `fork`/`join` for concurrent occlusion monitoring, and a composite `Deliver Medication` valve sub-flow. |
+| `action_flow_view.sysml` | Minimal renderer smoke test — dummy actions, typed item flows, successions, one composite. |
+| `operational_behaviour_view.sysml` | **Operational** behaviour — swimlanes per clinical role (Physician/Nurse/Biomed Tech/Patient), a `fork`/`join` for concurrent prep, and a composite step (`Administer PCA Therapy`) with a drill-in sub-flow. |
+| `functional_flow_view.sysml` | **Functional/component** behaviour — swimlanes per realising component, typed data/energy/material flows, a `fork`/`join` for concurrent occlusion monitoring, and a composite `Deliver Medication` valve sub-flow. |
 
 `fork`/`join` are SysML v2 control nodes: a `fork` splits one control flow into
 concurrent flows, a `join` synchronises them back; the branches are declared by
