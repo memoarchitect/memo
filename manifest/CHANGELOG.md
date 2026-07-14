@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 - 2026-07-13
+Organized the GPCA example so authored catalog content is separated from views
+and view samples.
+
+- Moved all 16 GPCA model source files from `model/` into `model/catalog/`.
+- Updated the backing package namespaces, imports, and canonical namespace facade
+  to match the new catalog directory.
+- Added a conformance gate that prevents `.sysml` files from being placed directly
+  in the GPCA `model/` directory.
+- Verified the catalog, examples, namespace facade, and full ontology with SysIDE.
+
 ## 0.3.0 - 2026-07-13
 Fixed SysIDE workspace discovery after the three-repository split and verified all
 149 SysML sources, including the GPCA examples and canonical namespace facade,

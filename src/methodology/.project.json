@@ -1,7 +1,7 @@
 {
   "name": "memo-methodology-default",
   "description": "MEMO Default Methodology — comprehensive medical device methodology covering full DHF set, selecting subsets across architecture, compliance, artifacts, and viewpoints dimensions.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "MIT",
   "maintainer": [
     "Somesh Kashyap <seesomi@gmail.com>"

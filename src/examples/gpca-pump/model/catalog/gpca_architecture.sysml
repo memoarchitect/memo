@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_gpca_architecture {
+package memo_examples_gpca_pump_model_catalog_gpca_architecture {
     private import ScalarValues::*;
 
     private import memo_architecture_hardware_structure::*;

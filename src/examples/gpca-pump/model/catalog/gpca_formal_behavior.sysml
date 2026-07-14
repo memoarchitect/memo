@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_gpca_formal_behavior {
+package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
     private import ScalarValues::*;
 
     private import memo_architecture_behavior::*;

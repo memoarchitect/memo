@@ -1,5 +1,5 @@
 name: "@memo/ontology"
-version: "0.3.0"
+version: "0.4.0"
 type: ontology
 description: "MEMO — the single canonical medical-device ontology: core semantics, the Arcadia-inspired architecture layers (context, requirements, behavior, structure, interfaces, risk, cybersecurity, assurance, …), compliance, viewpoints, views, and invariant rules. One namespace (memo::), one src/ tree."
 license: "MIT"

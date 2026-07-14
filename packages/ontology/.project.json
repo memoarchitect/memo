@@ -1,6 +1,6 @@
 {
   "type": "ontology-package",
   "name": "@memo/ontology",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "usage": ["kinds", "relationships"]
 }

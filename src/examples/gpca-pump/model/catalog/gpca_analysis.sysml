@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_gpca_analysis {
+package memo_examples_gpca_pump_model_catalog_gpca_analysis {
     private import ScalarValues::*;
 
     private import memo_architecture_analysis::*;
