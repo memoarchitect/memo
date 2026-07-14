@@ -1,10 +1,6 @@
 // Re-export-only wrapper per ADR-1-13. No new types.
-package memo {
-    package core {
-        package stdlib {
-            package collections {
-                public import Collections::*;
-            }
-        }
-    }
+package memo_core_stdlib_collections {
+    private import ScalarValues::*;
+
+    public import Collections::*;
 }

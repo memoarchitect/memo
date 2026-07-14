@@ -1,39 +1,37 @@
 // Multi-valued attributes collapsed to scalar pending grammar extension (ADR-1-16).
 // Bare import (no `private`) per ADR-1-16 fallback.
-package memo {
-    package core {
-        package dimensions {
-            import memo::core::common::*;
+package memo_core_dimensions {
+    private import ScalarValues::*;
 
-            enum def DimensionKind {
-                enum architecture;
-                enum compliance;
-                enum artifact;
-                enum viewpointType;
-            }
+    import memo_core_common::*;
 
-            part def ElementKind specializes TraceableElement {
-                attribute kindName : String;
-                attribute primaryDimension : DimensionKind;
-            }
+    enum def DimensionKind {
+        enum architecture;
+        enum compliance;
+        enum artifact;
+        enum viewpointType;
+    }
 
-            part def ArchitectureElementKind specializes ElementKind {
-                attribute archLayer : String;
-            }
+    part def ElementKind specializes TraceableElement {
+        attribute kindName : String;
+        attribute primaryDimension : DimensionKind;
+    }
 
-            part def ComplianceElementKind specializes ElementKind {
-                attribute standard : String;
-                attribute clause : String;
-            }
+    part def ArchitectureElementKind specializes ElementKind {
+        attribute archLayer : String;
+    }
 
-            part def ArtifactElementKind specializes ElementKind {
-                attribute documentTitle : String;
-                attribute regulatoryReference : String;
-            }
+    part def ComplianceElementKind specializes ElementKind {
+        attribute standardReference : String;
+        attribute clause : String;
+    }
 
-            part def ViewpointTypeKind specializes ElementKind {
-                attribute typeId : String;
-            }
-        }
+    part def ArtifactElementKind specializes ElementKind {
+        attribute documentTitle : String;
+        attribute regulatoryReference : String;
+    }
+
+    part def ViewpointTypeKind specializes ElementKind {
+        attribute typeId : String;
     }
 }

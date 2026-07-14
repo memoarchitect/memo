@@ -63,6 +63,7 @@ nav:
   - Getting Started:
     - Overview: getting-started/overview.md
     - Adoption Guide: getting-started/adoption.md
+    - SysIDE & Validation: getting-started/syside.md
   - Ontology:
     - Package Structure: ontology/packages.md
     - Architecture Layers: ontology/layers.md

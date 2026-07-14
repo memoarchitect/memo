@@ -1,17 +1,15 @@
-package memo {
-    package methodology {
-        package rules {
-            private import memo::core::common::*;
-            private import memo::core::enumerations::*;
-            private import memo::core::consistency_rules::*;
+package memo_methodology_rules {
+    private import ScalarValues::*;
 
-            part def ElementUsageRule :> ConsistencyRule {
-                attribute elementTypeName : String;
-            }
+    private import memo_core_common::*;
+    private import memo_core_enumerations::*;
+    private import memo_core_consistency_rules::*;
 
-            part def RelationUsageRule :> ConsistencyRule {
-                attribute relationTypeName : String;
-            }
-        }
+    part def ElementUsageRule :> ConsistencyRule {
+        attribute elementTypeName : String;
+    }
+
+    part def RelationUsageRule :> ConsistencyRule {
+        attribute relationTypeName : String;
     }
 }

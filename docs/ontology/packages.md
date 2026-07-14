@@ -1,6 +1,31 @@
 # Package Structure
 
-The meMO ontology is published under a single `memo::` namespace. `memo::medical_device_library` is the public import surface. Each package is a focused library; architecture is decomposed into 18 imported layers.
+The meMO ontology is published through a single `memo::` facade. `memo::medical_device_library` is the aggregate import surface, while focused packages support selective imports. Architecture is decomposed into 18 layers.
+
+## Public facade and source packages
+
+Every SysML document owns a globally unique, path-derived source package. For
+example, `src/architecture/assurance/memo_assurance.sysml` declares
+`memo_architecture_assurance`. The generated-looking uppercase implementation
+prefixes used during migration are gone.
+
+`src/memo_namespaces.sysml` maps those source packages into the stable public
+hierarchy:
+
+```sysml
+package memo {
+    alias architecture for memo_namespace_architecture;
+    alias core for memo_namespace_core;
+    alias viewpoints for memo_namespace_viewpoints;
+}
+
+package memo_namespace_architecture_assurance {
+    public import memo_architecture_assurance::*;
+}
+```
+
+Consumers should use `memo::...` imports. The path-derived packages are an
+indexing detail that prevents cross-document package reopening errors in SysIDE.
 
 ## How `memo::` Is Organized
 
@@ -41,10 +66,10 @@ Stakeholder-oriented concerns such as architecture, safety, cybersecurity, verif
 </div>
 
 <div class="memo-pkg" style="border-left: 4px solid #ef4444;">
-<div class="memo-pkg-name"><code>memo::views</code></div>
+<div class="memo-pkg-name"><code>memo::artifacts</code> and <code>memo::rules</code></div>
 <div class="memo-pkg-desc">
-<em style="color: #ef4444;">Concrete projections</em><br>
-Diagram and document-backed views generated from the same model source.
+<em style="color: #ef4444;">Evidence and checks</em><br>
+Controlled artifact definitions plus closure, coverage, lifecycle, and quantitative rules.
 </div>
 </div>
 
@@ -135,10 +160,10 @@ Abstract bases, enumerations, and semantic link definitions.
 |-------|--------|
 | **Requirements & context** | `context` · `operational` · `requirements` |
 | **Function & behavior** | `functions` · `behavior` |
-| **Structure & interfaces** | `logical_structure` · `logical_interfaces` · `software_structure` · `hardware_structure` · `physical_interfaces` |
+| **Structure & interfaces** | `logical_structure` · `interfaces` · `software_structure` · `hardware_structure` |
 | **System & constraints** | `system` · `physical` · `constraints` |
 | **Risk & security** | `risk` · `cybersecurity` |
-| **Assurance & rationale** | `assurance` · `analysis` · `decisions` |
+| **Assurance & rationale** | `assurance` · `analysis_models` · `decisions` |
 
 ## Methodology (`memo::methodology`)
 
@@ -146,8 +171,9 @@ How to apply the ontology — profiles, viewpoints, rules, workflow stages, qual
 
 ## Viewpoints & Views
 
-- `memo::viewpoints` — reusable selection intent per audience and workflow stage
-- `memo::views` — model-driven presentation (document views, diagram views)
+- `memo::viewpoints` — reusable selection intent and model-driven view definitions
+- `memo::viewpoints::verification_models` — verification viewpoint definitions;
+  the descriptive alias avoids the reserved identifier `verification`
 
 ## Compliance (`memo::compliance`)
 
@@ -160,13 +186,18 @@ Controlled artifacts and regulated views:
 
 ## Importing
 
-The ontology matches the authored SysML package nesting. References use paths like `memo::architecture::risk` or `memo::core::SemanticLink`.
+References use canonical paths such as `memo::architecture::risk`. Source-package
+names such as `memo_architecture_risk_risk` should not appear in consuming models.
 
 ```sysml
 package MyDevice {
     import memo::medical_device_library::*;
     // or selectively:
     import memo::architecture::risk::*;
-    import memo::core::*;
+    import memo::core::common::*;
 }
 ```
+
+Version 0.3.0 also replaces reserved identifiers with descriptive names rather
+than quoted escapes. Examples include `standardArchetype`, `analysis_models`,
+`verification_models`, `input`, `output`, and `inputOutput`.

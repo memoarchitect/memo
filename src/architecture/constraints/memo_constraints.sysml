@@ -1,16 +1,14 @@
-package memo {
-    package architecture {
-        package constraints {
-            doc /* archLayer: constraints */
+package memo_architecture_constraints {
+    private import ScalarValues::*;
 
-            constraint def MaxResponseTimeConstraint {
-                attribute responseTimeMs : Real;
-                attribute maxAllowedMs : Real;
-            }
-            constraint def LockoutIntervalConstraint {
-                attribute elapsedMs : Real;
-                attribute lockoutMs : Real;
-            }
-        }
+    doc /* archLayer: constraints */
+
+    constraint def MaxResponseTimeConstraint {
+        attribute responseTimeMs : Real;
+        attribute maxAllowedMs : Real;
+    }
+    constraint def LockoutIntervalConstraint {
+        attribute elapsedMs : Real;
+        attribute lockoutMs : Real;
     }
 }

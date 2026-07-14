@@ -9,35 +9,33 @@
 // so the catalog and traceability stay intact; the constraint loader skips defs that
 // have no require/assert body, so they evaluate to nothing — exactly as before.
 // The proprietary `predicate="…"` attribute pattern is removed per EE-3.
-package memo {
-    package rules {
-        package lifecycle {
-            import memo::core::consistency_rules::*;
-            import memo::core::enumerations::*;
+package memo_rules_lifecycle {
+    private import ScalarValues::*;
 
-            constraint def reqBeforeArchRule {
-                attribute id = "LC-001";
-                attribute appliesTo = "SoftwareComponent";
-                attribute severity = RuleSeverityKind::warning;
-                attribute rationaleText = "IEC 62304 requires requirements to precede architecture decomposition.";
-                // Lifecycle ordering — model-level, no single-subject predicate.
-            }
+    import memo_core_consistency_rules::*;
+    import memo_core_enumerations::*;
 
-            constraint def riskBeforeVerificationRule {
-                attribute id = "LC-002";
-                attribute appliesTo = "VerificationCase";
-                attribute severity = RuleSeverityKind::warning;
-                attribute rationaleText = "Risk controls drive verification scope per ISO 14971.";
-                // Lifecycle ordering — model-level, no single-subject predicate.
-            }
+    constraint def reqBeforeArchRule {
+        attribute id = "LC-001";
+        attribute appliesTo = "SoftwareComponent";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "IEC 62304 requires requirements to precede architecture decomposition.";
+        // Lifecycle ordering — model-level, no single-subject predicate.
+    }
 
-            constraint def evidenceAfterVerificationRule {
-                attribute id = "LC-003";
-                attribute appliesTo = "Evidence";
-                attribute severity = RuleSeverityKind::info;
-                attribute rationaleText = "Evidence is produced by executing verification — ordering matters for DHF assembly.";
-                // Lifecycle ordering — model-level, no single-subject predicate.
-            }
-        }
+    constraint def riskBeforeVerificationRule {
+        attribute id = "LC-002";
+        attribute appliesTo = "VerificationCase";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Risk controls drive verification scope per ISO 14971.";
+        // Lifecycle ordering — model-level, no single-subject predicate.
+    }
+
+    constraint def evidenceAfterVerificationRule {
+        attribute id = "LC-003";
+        attribute appliesTo = "Evidence";
+        attribute severity = RuleSeverityKind::info;
+        attribute rationaleText = "Evidence is produced by executing verification — ordering matters for DHF assembly.";
+        // Lifecycle ordering — model-level, no single-subject predicate.
     }
 }

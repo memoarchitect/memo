@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <code>memo:: 0.2.0</code> &middot; MIT &middot; SysML v2 &middot; ISO 14971 &middot; IEC 62304 &middot; ISO/IEC/IEEE 42010
+  <code>memo:: 0.3.0</code> &middot; MIT &middot; SysML v2 &middot; ISO 14971 &middot; IEC 62304 &middot; ISO/IEC/IEEE 42010
 </p>
 
 ---
@@ -67,14 +67,15 @@ memo::
 ├── architecture            # 18 ontology layers — what the device is
 │   ├── context · operational · system · requirements
 │   ├── functions · behavior
-│   ├── logical_structure · logical_interfaces
-│   ├── software_structure · hardware_structure · physical_interfaces
+│   ├── logical_structure · interfaces
+│   ├── software_structure · hardware_structure
 │   ├── constraints · risk · cybersecurity
-│   └── assurance · physical · analysis · decisions
+│   └── assurance · physical · analysis_models · decisions
 ├── methodology             # how to apply the ontology
 │   └── core · viewpoints · rules · patterns · workflow · gates · profiles
 ├── viewpoints              # reusable selection intent
-├── views                   # model-driven presentation
+├── artifacts               # controlled evidence and document artifacts
+├── rules                   # closure, coverage, lifecycle, and quantitative checks
 ├── compliance              # controlled artifacts + regulated views
 └── examples::gpca          # worked example — GPCA infusion pump
 ```
@@ -93,9 +94,12 @@ Every node is typed. Every edge is a `SemanticLink` with status. Change impact i
 
 ## Repository Layout
 
-All SysML v2 content lives under `src/`, where the directory tree mirrors the
-`memo::` namespace hierarchy (e.g. `memo::architecture::context` → `src/architecture/context/`).
-Infra (sysand manifests, build output, scripts) stays at the repo root.
+All SysML v2 content lives under `src/`. Each document owns one readable,
+path-derived source package, while `src/memo_namespaces.sysml` exposes the stable
+`memo::` facade used by consumers. For example, the implementation package
+`memo_architecture_assurance` is imported through `memo::architecture::assurance`.
+This avoids cross-document package reopening problems in SysIDE without exposing
+implementation names as the public API.
 
 ```
 .project.json                     # sysand project: the core ontology
@@ -103,6 +107,7 @@ sysand-lock.toml                  # sysand lockfile
 packages/                         # thin @memo/* package manifests
 scripts/  manifest/               # build scripts + version metadata
 src/                              # ── all .sysml content (namespace = directory) ──
+  memo_namespaces.sysml           # canonical memo:: facade and aliases
   medical_device_library.sysml    # public import surface
   core/                           # common types, enumerations, relationships, semantics
   architecture/                   # one folder per layer: context, requirements, functions,
@@ -125,6 +130,14 @@ pnpm run build        # or: ./scripts/build-kpar.sh
 ```
 
 Builds both sysand projects (core ontology + methodology) into `.kpar` archives and fails on any external-parser error. This is the portability gate: a clean build proves the constraints are portable SysML v2.
+
+SysIDE users can validate the complete workspace directly:
+
+```bash
+syside check --warnings-as-errors --stats src
+```
+
+Release 0.3.0 validates all 149 SysML documents with zero SysIDE diagnostics.
 
 ## Standards Coverage
 

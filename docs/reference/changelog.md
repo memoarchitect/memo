@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.3.0 — 2026-07-13
+
+SysIDE compatibility and reserved-identifier cleanup.
+
+- Replaced reopened cross-document packages with readable, path-derived source
+  packages and a canonical `memo::` alias facade.
+- Removed temporary uppercase implementation prefixes.
+- Replaced reserved identifiers with descriptive names instead of quoted escapes.
+- Standardized collection values, actions, constraints, relationship references,
+  and scalar visibility to portable SysML v2 syntax.
+- Verified all 149 SysML documents with `syside check --warnings-as-errors`:
+  zero diagnostics.
+
+**Migration:** continue importing canonical `memo::...` packages. If a product
+model referenced a formerly reserved literal or feature, adopt its descriptive
+0.3.0 replacement.
+
 ## 0.2.0 — 2026-06-04
 
 Relations remodeled as native SysML v2 connections (breaking).

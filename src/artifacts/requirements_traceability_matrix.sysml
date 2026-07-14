@@ -1,14 +1,12 @@
-package memo {
-    package artifacts {
-        package requirements_traceability_matrix {
-        private import memo::artifacts::definitions::*;
-        private import memo::core::enumerations::*;
+package memo_artifacts_requirements_traceability_matrix {
+    private import ScalarValues::*;
 
-        part def RequirementsTraceabilityMatrix specializes ArtifactKindDef {
-            attribute documentTitle = "Requirements Traceability Matrix";
-            attribute regulatoryRef = "IEC 62304:2006 §5.1.1";
-            attribute artifactKind = ArtifactKind::traceMatrix;
-        }
-        }
-    }
+            private import memo_artifacts_definitions::*;
+            private import memo_core_enumerations::*;
+
+            part def RequirementsTraceabilityMatrix specializes ArtifactKindDef {
+    attribute documentTitle = "Requirements Traceability Matrix";
+    attribute regulatoryRef = "IEC 62304:2006 §5.1.1";
+    attribute artifactKind = ArtifactKind::traceMatrix;
+            }
 }

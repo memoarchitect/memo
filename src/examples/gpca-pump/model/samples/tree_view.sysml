@@ -1,21 +1,24 @@
-package samples {
-    private import memo::architecture::physical::*;
-    private import memo::core::relationships::*;
-    private import memo::viewpoints::definitions::*;
-    private import memo::core::enumerations::*;
+package memo_examples_gpca_pump_model_samples_tree_view {
+    private import ScalarValues::*;
+    private import memo_architecture_hardware_structure::*;
 
-    part rootA : HardwareAssembly { attribute redefines name = "Root A"; }
-    part rootB : HardwareAssembly { attribute redefines name = "Root B"; }
-    part branchA1 : HardwareAssembly { attribute redefines name = "Branch A.1"; }
-    part branchA2 : HardwareAssembly { attribute redefines name = "Branch A.2 With A Deliberately Long Label"; }
-    part branchB1 : HardwareAssembly { attribute redefines name = "Branch B.1"; }
+    private import memo_architecture_physical::*;
+    private import memo_core_relationships::*;
+    private import memo_viewpoints_definitions::*;
+    private import memo_core_enumerations::*;
+
+    part rootA : HardwareAssembly { attribute name = "Root A"; }
+    part rootB : HardwareAssembly { attribute name = "Root B"; }
+    part branchA1 : HardwareAssembly { attribute name = "Branch A.1"; }
+    part branchA2 : HardwareAssembly { attribute name = "Branch A.2 With A Deliberately Long Label"; }
+    part branchB1 : HardwareAssembly { attribute name = "Branch B.1"; }
     part leafA11 : HardwareAssembly {
-        attribute redefines name = "Leaf A.1.1";
-        attribute redefines partNumber = "PN-001";
+        attribute name = "Leaf A.1.1";
+        attribute partNumber = "PN-001";
     }
-    part leafA12 : HardwareAssembly { attribute redefines name = "Leaf A.1.2"; }
-    part leafA21 : HardwareAssembly { attribute redefines name = "Leaf A.2.1"; }
-    part leafB11 : HardwareAssembly { attribute redefines name = "Leaf B.1.1"; }
+    part leafA12 : HardwareAssembly { attribute name = "Leaf A.1.2"; }
+    part leafA21 : HardwareAssembly { attribute name = "Leaf A.2.1"; }
+    part leafB11 : HardwareAssembly { attribute name = "Leaf B.1.1"; }
 
     connection : Composes connect parent ::> rootA to child ::> branchA1;
     connection : Composes connect parent ::> rootA to child ::> branchA2;
@@ -27,14 +30,14 @@ package samples {
     connection : Composes connect parent ::> branchB1 to child ::> leafB11;
 
     part sampleTreeView : DiagramView {
-        attribute redefines title = "Sample · Tree";
-        attribute redefines shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";
-        attribute redefines viewKind = DiagramViewKind::general;
-        attribute redefines diagramType = "bdd";
-        attribute redefines layoutHint = "tree";
-        attribute redefines styleHint = "expanded:rootA,rootB,branchA1,branchB1";
+        attribute title = "Sample · Tree";
+        attribute shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";
+        attribute viewKind = DiagramViewKind::general;
+        attribute diagramType = "bdd";
+        attribute layoutHint = "tree";
+        attribute styleHint = "expanded:rootA,rootB,branchA1,branchB1";
         part selectionQuery {
-            attribute redefines includeRelationshipKinds = {"Composes"};
+            attribute includeRelationshipKinds = ("Composes");
         }
     }
 

@@ -9,7 +9,7 @@
 
 **meMO** is a SysML v2-native ontology for medical device architecture and safety assurance. It connects design behavior, architecture, risk, cybersecurity, verification, and evidence in one shared, computable model.
 
-`memo:: 0.2.0` · MIT · SysML v2 · ISO 14971 · IEC 62304 · ISO/IEC/IEEE 42010
+`memo:: 0.3.0` · MIT · SysML v2 · ISO 14971 · IEC 62304 · ISO/IEC/IEEE 42010
 
 ## Why meMO Exists
 
@@ -79,6 +79,14 @@ meMO's ontology exists to make that thread typed and checkable.
 # Requires sysand on PATH — see https://docs.sysand.org/
 pnpm run build        # or: ./scripts/build-kpar.sh
 ```
+
+For direct SysIDE validation, open the repository folder in VS Code or run:
+
+```bash
+syside check --warnings-as-errors --stats src
+```
+
+Version 0.3.0 is verified across all 149 SysML documents with zero diagnostics.
 
 ## Next Steps
 
