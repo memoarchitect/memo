@@ -1,6 +1,6 @@
-package memo_examples_gpca_pump_model_gpca_behavior_actions {
+package memo_examples_gpca_pump_model_catalog_gpca_behavior_actions {
     private import ScalarValues::*;
-    private import memo_examples_gpca_pump_model_gpca_architecture::*;
+    private import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
 
     private import memo_architecture_behavior::*;
     private import memo_core_enumerations::*;

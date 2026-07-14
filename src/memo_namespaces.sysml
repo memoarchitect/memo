@@ -500,31 +500,31 @@ package memo_namespace_core_stdlib_time {
 }
 
 package memo_namespace_examples_gpca_analysis {
-    public import memo_examples_gpca_pump_model_gpca_analysis::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_analysis::*;
 }
 
 package memo_namespace_examples_gpca_architecture {
-    public import memo_examples_gpca_pump_model_gpca_architecture::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
 }
 
 package memo_namespace_examples_gpca_behavior_actions {
-    public import memo_examples_gpca_pump_model_gpca_behavior_actions::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_behavior_actions::*;
 }
 
 package memo_namespace_examples_gpca_behavior_modes {
-    public import memo_examples_gpca_pump_model_gpca_behavior_modes::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_behavior_modes::*;
 }
 
 package memo_namespace_examples_gpca_behavior_subsystems {
-    public import memo_examples_gpca_pump_model_gpca_behavior_subsystems::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems::*;
 }
 
 package memo_namespace_examples_gpca_context {
-    public import memo_examples_gpca_pump_model_gpca_context::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_context::*;
 }
 
 package memo_namespace_examples_gpca_cybersecurity {
-    public import memo_examples_gpca_pump_model_gpca_cybersecurity::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_cybersecurity::*;
 }
 
 package memo_namespace_examples_gpca_document_views {
@@ -540,11 +540,11 @@ package memo_namespace_examples_gpca_document_views {
 }
 
 package memo_namespace_examples_gpca_formal_behavior {
-    public import memo_examples_gpca_pump_model_gpca_formal_behavior::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_formal_behavior::*;
 }
 
 package memo_namespace_examples_gpca_interfaces {
-    public import memo_examples_gpca_pump_model_gpca_interfaces::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_interfaces::*;
 }
 
 package memo_namespace_examples_gpca_methodology {
@@ -560,31 +560,31 @@ package memo_namespace_examples_gpca_methodology_scope {
 }
 
 package memo_namespace_examples_gpca_operational {
-    public import memo_examples_gpca_pump_model_gpca_operational::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_operational::*;
 }
 
 package memo_namespace_examples_gpca_physical {
-    public import memo_examples_gpca_pump_model_gpca_physical::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_physical::*;
 }
 
 package memo_namespace_examples_gpca_requirements {
-    public import memo_examples_gpca_pump_model_gpca_requirements::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_requirements::*;
 }
 
 package memo_namespace_examples_gpca_risk {
-    public import memo_examples_gpca_pump_model_gpca_risk::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_risk::*;
 }
 
 package memo_namespace_examples_gpca_system {
-    public import memo_examples_gpca_pump_model_gpca_system::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_system::*;
 }
 
 package memo_namespace_examples_gpca_trace {
-    public import memo_examples_gpca_pump_model_gpca_trace::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_trace::*;
 }
 
 package memo_namespace_examples_gpca_verification {
-    public import memo_examples_gpca_pump_model_gpca_verification::*;
+    public import memo_examples_gpca_pump_model_catalog_gpca_verification::*;
 }
 
 package memo_namespace_examples_gpca_views {

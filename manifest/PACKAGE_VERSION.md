@@ -1,8 +1,8 @@
 # Package Version
 
 - Package: Medical Device SysML v2 Package
-- Version: **0.3.0**
-- Release type: SysIDE compatibility and reserved-identifier cleanup (minor)
+- Version: **0.4.0**
+- Release type: GPCA catalog organization (minor)
 - Release date: 2026-07-13
 
 This package uses a **single version for the entire release**.

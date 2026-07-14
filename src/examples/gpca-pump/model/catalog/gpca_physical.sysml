@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_gpca_physical {
+package memo_examples_gpca_pump_model_catalog_gpca_physical {
     private import ScalarValues::*;
 
     private import memo_architecture_physical::*;

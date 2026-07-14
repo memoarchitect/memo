@@ -1,5 +1,21 @@
 # Impact Note
 
+## Release 0.4.0
+This release organizes the GPCA example's authored model content under
+`model/catalog/`, alongside the existing `model/samples/` and `model/views/`
+collections.
+
+### Expected impact
+- GPCA model browsing now has a clear catalog, samples, and views structure.
+- Package consumers should update ontology and methodology constraints to `^0.4.0`.
+- Tools that discover `model/**/*.sysml` continue to load the same model content.
+
+### Breaking-change assessment
+- File paths and internal path-derived GPCA backing package names changed. Scripts
+  or tests that directly reference the old paths or backing packages must use the
+  new `model/catalog/` paths and `memo_examples_gpca_pump_model_catalog_*` names.
+- Canonical ontology packages and public type names are unchanged.
+
 ## Release 0.3.0
 This release restores clean SysIDE discovery and validation after the ontology
 moved into the nested `memo-tools/memo` submodule.

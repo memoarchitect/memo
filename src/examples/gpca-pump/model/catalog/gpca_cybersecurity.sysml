@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_gpca_cybersecurity {
+package memo_examples_gpca_pump_model_catalog_gpca_cybersecurity {
     private import ScalarValues::*;
 
     private import memo_architecture_cybersecurity::*;
@@ -7,10 +7,10 @@ package memo_examples_gpca_pump_model_gpca_cybersecurity {
     private import memo_architecture_assurance::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_examples_gpca_pump_model_gpca_architecture::*;
-    private import memo_examples_gpca_pump_model_gpca_risk::*;
-    private import memo_examples_gpca_pump_model_gpca_requirements::*;
-    private import memo_examples_gpca_pump_model_gpca_verification::*;
+    private import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
+    private import memo_examples_gpca_pump_model_catalog_gpca_risk::*;
+    private import memo_examples_gpca_pump_model_catalog_gpca_requirements::*;
+    private import memo_examples_gpca_pump_model_catalog_gpca_verification::*;
 
     part therapyConfigurationAsset : CybersecurityAsset {
         attribute id = "AST-CYB-001";
