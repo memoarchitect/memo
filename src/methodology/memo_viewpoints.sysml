@@ -1,7 +1,5 @@
-package memo {
-    package methodology {
-        package viewpoints {
-            public import memo::viewpoints::definitions::*;
-        }
-    }
+package memo_methodology_viewpoints {
+    private import ScalarValues::*;
+
+    public import memo_viewpoints_definitions::*;
 }

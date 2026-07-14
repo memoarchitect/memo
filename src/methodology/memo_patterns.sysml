@@ -1,14 +1,12 @@
-package memo {
-    package methodology {
-        package patterns {
-            private import memo::core::common::*;
-            private import memo::core::enumerations::*;
+package memo_methodology_patterns {
+    private import ScalarValues::*;
 
-            part def ModelingPattern :> TraceableElement {
-                attribute intent : String;
-                attribute stage : WorkflowStageKind;
-                attribute strength : RuleStrengthKind;
-            }
-        }
+    private import memo_core_common::*;
+    private import memo_core_enumerations::*;
+
+    part def ModelingPattern :> TraceableElement {
+        attribute intent : String;
+        attribute stage : WorkflowStageKind;
+        attribute strength : RuleStrengthKind;
     }
 }

@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.0 - 2026-07-13
+Fixed SysIDE workspace discovery after the three-repository split and verified all
+149 SysML sources, including the GPCA examples and canonical namespace facade,
+with SysIDE, compatibility, parser, lint, test, and build gates.
+
+- Updated the parent workspace to index the canonical `memo-tools/memo/src` tree.
+- Added submodule-local SysIDE discovery for opening `memo-tools/memo` directly.
+- Replaced cross-document reopened packages with readable, path-derived source
+  packages such as `memo_architecture_assurance`; `memo_namespaces.sysml` retains
+  the canonical `memo::...` consumer hierarchy through aliases.
+- Replaced reserved identifiers with descriptive names instead of quoted escapes,
+  including `standardArchetype`, `analysis_models`, and `verification_models`.
+- Standardized collection values, actions, constraints, relationship references,
+  and scalar visibility to syntax accepted by SysIDE 0.10.2.
+- Updated MEMO's Langium parser and conformance policy to accept the same standard
+  SysML forms as SysIDE.
+- Verified zero SysIDE diagnostics and all monorepo tests before the version bump.
+
 ## 0.2.0 - 2026-06-04
 Relations remodeled as native SysML v2 connections (breaking).
 

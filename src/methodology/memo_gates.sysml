@@ -1,13 +1,11 @@
-package memo {
-    package methodology {
-        package gates {
-            private import memo::core::common::*;
-            private import memo::core::enumerations::*;
+package memo_methodology_gates {
+    private import ScalarValues::*;
 
-            part def QualityGate :> TraceableElement {
-                attribute gateStage : WorkflowStageKind;
-                attribute passCriteria : String;
-            }
-        }
+    private import memo_core_common::*;
+    private import memo_core_enumerations::*;
+
+    part def QualityGate :> TraceableElement {
+        attribute gateStage : WorkflowStageKind;
+        attribute passCriteria : String;
     }
 }

@@ -1,31 +1,34 @@
-package samples {
-    private import memo::architecture::interfaces::*;
-    private import memo::architecture::logical_structure::*;
-    private import memo::core::relationships::*;
-    private import memo::viewpoints::definitions::*;
-    private import memo::core::enumerations::*;
+package memo_examples_gpca_pump_model_samples_interconnection_view {
+    private import ScalarValues::*;
+    private import memo_architecture_context::*;
 
-    part coffeeMachine : LogicalComponent { attribute redefines name = "Coffee Machine"; }
-    part waterSupply : LogicalComponent { attribute redefines name = "Water Supply"; }
-    part waterTank : LogicalComponent { attribute redefines name = "Water Reservoir"; }
-    part heaterAssembly : LogicalComponent { attribute redefines name = "Thermal Control Assembly"; }
-    part heatingElement : LogicalComponent { attribute redefines name = "Water Heating Element"; }
-    part brewGroup : LogicalComponent { attribute redefines name = "Brew Group"; }
-    part cup : LogicalComponent { attribute redefines name = "Cup"; }
+    private import memo_architecture_interfaces::*;
+    private import memo_architecture_logical_structure::*;
+    private import memo_core_relationships::*;
+    private import memo_viewpoints_definitions::*;
+    private import memo_core_enumerations::*;
 
-    port mainsWaterIn : DataPort { attribute direction = DirectionKind::in; }
-    port beverageOut : DataPort { attribute direction = DirectionKind::out; }
-    port supplyWaterOut : DataPort { attribute direction = DirectionKind::out; }
-    port cupBeverageIn : DataPort { attribute direction = DirectionKind::in; }
+    part coffeeMachine : LogicalComponent { attribute name = "Coffee Machine"; }
+    part waterSupply : LogicalComponent { attribute name = "Water Supply"; }
+    part waterTank : LogicalComponent { attribute name = "Water Reservoir"; }
+    part heaterAssembly : LogicalComponent { attribute name = "Thermal Control Assembly"; }
+    part heatingElement : LogicalComponent { attribute name = "Water Heating Element"; }
+    part brewGroup : LogicalComponent { attribute name = "Brew Group"; }
+    part cup : LogicalComponent { attribute name = "Cup"; }
+
+    port mainsWaterIn : DataPort { attribute direction = DirectionKind::input; }
+    port beverageOut : DataPort { attribute direction = DirectionKind::output; }
+    port supplyWaterOut : DataPort { attribute direction = DirectionKind::output; }
+    port cupBeverageIn : DataPort { attribute direction = DirectionKind::input; }
     port serviceInterface : DataPort { attribute direction = DirectionKind::bidirectional; }
-    port diagnostics : DataPort { attribute direction = DirectionKind::out; }
-    port tankWaterOut : DataPort { attribute direction = DirectionKind::out; }
-    port tankWaterIn : DataPort { attribute direction = DirectionKind::in; }
-    port heaterWaterIn : DataPort { attribute direction = DirectionKind::in; }
-    port heatedWaterOut : DataPort { attribute direction = DirectionKind::out; }
-    port brewWaterIn : DataPort { attribute direction = DirectionKind::in; }
-    port brewedCoffeeOut : DataPort { attribute direction = DirectionKind::out; }
-    port heaterStatusOut : DataPort { attribute direction = DirectionKind::out; }
+    port diagnostics : DataPort { attribute direction = DirectionKind::output; }
+    port tankWaterOut : DataPort { attribute direction = DirectionKind::output; }
+    port tankWaterIn : DataPort { attribute direction = DirectionKind::input; }
+    port heaterWaterIn : DataPort { attribute direction = DirectionKind::input; }
+    port heatedWaterOut : DataPort { attribute direction = DirectionKind::output; }
+    port brewWaterIn : DataPort { attribute direction = DirectionKind::input; }
+    port brewedCoffeeOut : DataPort { attribute direction = DirectionKind::output; }
+    port heaterStatusOut : DataPort { attribute direction = DirectionKind::output; }
 
     connection : Composes connect parent ::> coffeeMachine to child ::> waterTank;
     connection : Composes connect parent ::> coffeeMachine to child ::> heaterAssembly;
@@ -54,12 +57,12 @@ package samples {
     connection : ExchangesWith connect source ::> heaterStatusOut to target ::> diagnostics;
 
     part sampleInterconnectionView : DiagramView {
-        attribute redefines title = "Coffee Machine · Thermal & Fluid IBD";
-        attribute redefines shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
-        attribute redefines viewKind = DiagramViewKind::interconnection;
-        attribute redefines diagramType = "ibd";
+        attribute title = "Coffee Machine · Thermal & Fluid IBD";
+        attribute shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
+        attribute viewKind = DiagramViewKind::interconnection;
+        attribute diagramType = "ibd";
         part selectionQuery {
-            attribute redefines includeRelationshipKinds = {"Composes", "ExchangesWith"};
+            attribute includeRelationshipKinds = ("Composes", "ExchangesWith");
         }
     }
 

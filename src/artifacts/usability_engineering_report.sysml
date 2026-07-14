@@ -1,14 +1,12 @@
-package memo {
-    package artifacts {
-        package usability_engineering_report {
-        private import memo::artifacts::definitions::*;
-        private import memo::core::enumerations::*;
+package memo_artifacts_usability_engineering_report {
+    private import ScalarValues::*;
 
-        part def UsabilityEngineeringReport specializes ArtifactKindDef {
-            attribute documentTitle = "Usability Engineering Report";
-            attribute regulatoryRef = "IEC 62366-1:2015";
-            attribute artifactKind = ArtifactKind::usabilityEngineeringReport;
-        }
-        }
-    }
+            private import memo_artifacts_definitions::*;
+            private import memo_core_enumerations::*;
+
+            part def UsabilityEngineeringReport specializes ArtifactKindDef {
+    attribute documentTitle = "Usability Engineering Report";
+    attribute regulatoryRef = "IEC 62366-1:2015";
+    attribute artifactKind = ArtifactKind::usabilityEngineeringReport;
+            }
 }

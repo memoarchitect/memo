@@ -1,15 +1,11 @@
-package memo {
-    package examples {
-        package gpca {
-            package methodology {
-                private import memo::methodology::profiles::*;
-                private import memo::examples::gpca::methodology_profiles::*;
-                private import memo::core::relationships::*;
-                private import memo::examples::gpca::requirements::*;
-                private import memo::examples::gpca::architecture::*;
+package memo_examples_gpca_pump_methodology_gpca_methodology {
+    private import ScalarValues::*;
 
-                connection : ResolvesToMethodology connect boundModelElement ::> tlm to resolvedMethodology ::> gpcaMethodResolved;
-            }
-        }
-    }
+    private import memo_methodology_profiles::*;
+    private import memo_examples_gpca_pump_methodology_gpca_profiles::*;
+    private import memo_core_relationships::*;
+    private import memo_examples_gpca_pump_model_gpca_requirements::*;
+    private import memo_examples_gpca_pump_model_gpca_architecture::*;
+
+    connection : ResolvesToMethodology connect boundModelElement ::> tlm to resolvedMethodology ::> gpcaMethodResolved;
 }

@@ -1,14 +1,12 @@
-package memo {
-    package artifacts {
-        package definitions {
-            private import memo::core::common::*;
-            private import memo::core::enumerations::*;
+package memo_artifacts_definitions {
+    private import ScalarValues::*;
 
-            part def ArtifactKindDef specializes TraceableElement {
-                attribute documentTitle : String;
-                attribute regulatoryRef : String;
-                attribute artifactKind : ArtifactKind;
-            }
-        }
+    private import memo_core_common::*;
+    private import memo_core_enumerations::*;
+
+    part def ArtifactKindDef specializes TraceableElement {
+        attribute documentTitle : String;
+        attribute regulatoryRef : String;
+        attribute artifactKind : ArtifactKind;
     }
 }

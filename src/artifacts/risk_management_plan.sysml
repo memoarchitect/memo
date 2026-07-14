@@ -1,14 +1,12 @@
-package memo {
-    package artifacts {
-        package risk_management_plan {
-        private import memo::artifacts::definitions::*;
-        private import memo::core::enumerations::*;
+package memo_artifacts_risk_management_plan {
+    private import ScalarValues::*;
 
-        part def RiskManagementPlan specializes ArtifactKindDef {
-            attribute documentTitle = "Risk Management Plan";
-            attribute regulatoryRef = "ISO 14971:2019 §4.4";
-            attribute artifactKind = ArtifactKind::plan;
-        }
-        }
-    }
+            private import memo_artifacts_definitions::*;
+            private import memo_core_enumerations::*;
+
+            part def RiskManagementPlan specializes ArtifactKindDef {
+    attribute documentTitle = "Risk Management Plan";
+    attribute regulatoryRef = "ISO 14971:2019 §4.4";
+    attribute artifactKind = ArtifactKind::plan;
+            }
 }

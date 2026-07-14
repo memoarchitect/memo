@@ -1,6 +1,6 @@
 // Closure consistency rules — native KerML constraints (Epic EE-3).
 // Migrated from the proprietary ConsistencyRule predicate-attribute parts to
-// native `constraint def` bodies whose `require constraint { … }` expression is
+// native `constraint def` bodies whose `constraint { … }` expression is
 // evaluated directly by the KerML constraint evaluator (validator/constraint-eval.ts).
 //
 // Rule metadata (id, appliesTo subject kind, severity, rationale) travels as plain
@@ -8,159 +8,173 @@
 // surface drops the legacy `direction`/`relatedKinds` qualifiers — navigation counts
 // related elements in either direction. Cross-element `uniqueAttribute` (CR-MED-012)
 // has no single-subject expression and stays an engine-level exception (see note).
-package memo {
-    package rules {
-        package closure {
-            import memo::core::consistency_rules::*;
-            import memo::core::enumerations::*;
+package memo_rules_closure {
+    private import ScalarValues::*;
 
-            // ─── Risk Layer Rules ────────────────────────────────────────────────
+    import memo_core_consistency_rules::*;
+    import memo_core_enumerations::*;
 
-            constraint def hazardMitigationRule {
-                attribute id = "CR-MED-001";
-                attribute appliesTo = "Hazard";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "ISO 14971 requires each identified hazard to have risk control measures.";
-                require constraint { mitigatesHazard->size() >= 1 }
-            }
+    // ─── Risk Layer Rules ────────────────────────────────────────────────
 
-            constraint def hazardSeverityRule {
-                attribute id = "CR-MED-002";
-                attribute appliesTo = "Hazard";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "Hazard severity is required for risk estimation per ISO 14971.";
-                require constraint { attributes.severity != "" }
-            }
+    constraint def hazardMitigationRule {
+        attribute id = "CR-MED-001";
+        attribute appliesTo = "Hazard";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "ISO 14971 requires each identified hazard to have risk control measures.";
+        attribute predicateExpression = "mitigatesHazard->size() >= 1";
+        constraint { true }
+    }
 
-            constraint def riskControlVerificationRule {
-                attribute id = "CR-MED-003";
-                attribute appliesTo = "RiskControl";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.4.";
-                require constraint { verifiedBy->size() >= 1 }
-            }
+    constraint def hazardSeverityRule {
+        attribute id = "CR-MED-002";
+        attribute appliesTo = "Hazard";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Hazard severity is required for risk estimation per ISO 14971.";
+        attribute predicateExpression = "attributes.severity != \"\"";
+        constraint { true }
+    }
 
-            constraint def riskBeforeMatrixRule {
-                attribute id = "CR-MED-004";
-                attribute appliesTo = "RiskBeforeMitigation";
-                attribute severity = RuleSeverityKind::warning;
-                attribute rationaleText = "Pre-mitigation risk must be assessed against a risk acceptability matrix.";
-                require constraint { assessedAgainst->size() >= 1 }
-            }
+    constraint def riskControlVerificationRule {
+        attribute id = "CR-MED-003";
+        attribute appliesTo = "RiskControl";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.4.";
+        attribute predicateExpression = "verifiedBy->size() >= 1";
+        constraint { true }
+    }
 
-            // ─── Requirements Layer Rules ────────────────────────────────────────
+    constraint def riskBeforeMatrixRule {
+        attribute id = "CR-MED-004";
+        attribute appliesTo = "RiskBeforeMitigation";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Pre-mitigation risk must be assessed against a risk acceptability matrix.";
+        attribute predicateExpression = "assessedAgainst->size() >= 1";
+        constraint { true }
+    }
 
-            constraint def sysReqTraceRule {
-                attribute id = "CR-MED-010";
-                attribute appliesTo = "SystemRequirement";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "Requirements shall be traceable to stakeholder needs per ISO 13485.";
-                require constraint { derivesFrom->size() >= 1 }
-            }
+    // ─── Requirements Layer Rules ────────────────────────────────────────
 
-            constraint def swReqTraceRule {
-                attribute id = "CR-MED-011";
-                attribute appliesTo = "SoftwareRequirement";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "Software requirements derive from system requirements per IEC 62304.";
-                require constraint { derivesFrom->size() >= 1 }
-            }
+    constraint def sysReqTraceRule {
+        attribute id = "CR-MED-010";
+        attribute appliesTo = "SystemRequirement";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Requirements shall be traceable to stakeholder needs per ISO 13485.";
+        attribute predicateExpression = "derivesFrom->size() >= 1";
+        constraint { true }
+    }
 
-            // CR-MED-012 (RequirementIdMustBeUnique) is intentionally omitted from the native
-            // constraint set: cross-element uniqueness is not a single-subject predicate and
-            // cannot be expressed as a `require constraint { … }` body over one Requirement.
-            // It remains an engine-level check (future model-level constraint support).
-            // Do not reintroduce the `predicate="uniqueAttribute"` part.
+    constraint def swReqTraceRule {
+        attribute id = "CR-MED-011";
+        attribute appliesTo = "SoftwareRequirement";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Software requirements derive from system requirements per IEC 62304.";
+        attribute predicateExpression = "derivesFrom->size() >= 1";
+        constraint { true }
+    }
 
-            // ─── Architecture Layer Rules ────────────────────────────────────────
+    // CR-MED-012 (RequirementIdMustBeUnique) is intentionally omitted from the native
+    // constraint set: cross-element uniqueness is not a single-subject predicate and
+    // cannot be expressed as a `constraint { … }` body over one Requirement.
+    // It remains an engine-level check (future model-level constraint support).
+    // Do not reintroduce the `predicate="uniqueAttribute"` part.
 
-            constraint def swComponentSafetyClassRule {
-                attribute id = "CR-MED-020";
-                attribute appliesTo = "SoftwareComponent";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "IEC 62304 requires safety classification for all software items.";
-                require constraint { attributes.safetyClass != "" }
-            }
+    // ─── Architecture Layer Rules ────────────────────────────────────────
 
-            constraint def swComponentReqRule {
-                attribute id = "CR-MED-021";
-                attribute appliesTo = "SoftwareComponent";
-                attribute severity = RuleSeverityKind::warning;
-                attribute rationaleText = "Software items shall be linked to their requirements per IEC 62304.";
-                require constraint { satisfiedBy->size() >= 1 }
-            }
+    constraint def swComponentSafetyClassRule {
+        attribute id = "CR-MED-020";
+        attribute appliesTo = "SoftwareComponent";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "IEC 62304 requires safety classification for all software items.";
+        attribute predicateExpression = "attributes.safetyClass != \"\"";
+        constraint { true }
+    }
 
-            constraint def logicalFunctionAllocationRule {
-                attribute id = "CR-MED-022";
-                attribute appliesTo = "LogicalFunction";
-                attribute severity = RuleSeverityKind::warning;
-                attribute rationaleText = "Functions should be allocated to implementation elements.";
-                require constraint { allocatedTo->size() >= 1 }
-            }
+    constraint def swComponentReqRule {
+        attribute id = "CR-MED-021";
+        attribute appliesTo = "SoftwareComponent";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Software items shall be linked to their requirements per IEC 62304.";
+        attribute predicateExpression = "satisfiedBy->size() >= 1";
+        constraint { true }
+    }
 
-            // ─── Verification Layer Rules ────────────────────────────────────────
+    constraint def logicalFunctionAllocationRule {
+        attribute id = "CR-MED-022";
+        attribute appliesTo = "LogicalFunction";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Functions should be allocated to implementation elements.";
+        attribute predicateExpression = "allocatedTo->size() >= 1";
+        constraint { true }
+    }
 
-            constraint def verificationCaseMethodRule {
-                attribute id = "CR-MED-030";
-                attribute appliesTo = "VerificationCase";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "Verification method (test, analysis, inspection, demonstration) required per IEC 62304.";
-                require constraint { attributes.methodKind != "" }
-            }
+    // ─── Verification Layer Rules ────────────────────────────────────────
 
-            constraint def verificationCaseTargetRule {
-                attribute id = "CR-MED-031";
-                attribute appliesTo = "VerificationCase";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "Verification cases must be linked to verifiable items.";
-                require constraint { verifiedBy->size() >= 1 }
-            }
+    constraint def verificationCaseMethodRule {
+        attribute id = "CR-MED-030";
+        attribute appliesTo = "VerificationCase";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Verification method (test, analysis, inspection, demonstration) required per IEC 62304.";
+        attribute predicateExpression = "attributes.methodKind != \"\"";
+        constraint { true }
+    }
 
-            constraint def evidenceProductionRule {
-                attribute id = "CR-MED-032";
-                attribute appliesTo = "VerificationCase";
-                attribute severity = RuleSeverityKind::warning;
-                attribute rationaleText = "Verification results should be documented as evidence records.";
-                require constraint { producesEvidence->size() >= 1 }
-            }
+    constraint def verificationCaseTargetRule {
+        attribute id = "CR-MED-031";
+        attribute appliesTo = "VerificationCase";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Verification cases must be linked to verifiable items.";
+        attribute predicateExpression = "verifiedBy->size() >= 1";
+        constraint { true }
+    }
 
-            // ─── Cybersecurity Layer Rules ───────────────────────────────────────
+    constraint def evidenceProductionRule {
+        attribute id = "CR-MED-032";
+        attribute appliesTo = "VerificationCase";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Verification results should be documented as evidence records.";
+        attribute predicateExpression = "producesEvidence->size() >= 1";
+        constraint { true }
+    }
 
-            constraint def threatMitigationRule {
-                attribute id = "CR-MED-040";
-                attribute appliesTo = "Threat";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "FDA cybersecurity guidance requires threat mitigation.";
-                require constraint { derivesCyberRequirement->size() >= 1 }
-            }
+    // ─── Cybersecurity Layer Rules ───────────────────────────────────────
 
-            constraint def assetThreatLinkRule {
-                attribute id = "CR-MED-041";
-                attribute appliesTo = "CybersecurityAsset";
-                attribute severity = RuleSeverityKind::warning;
-                attribute rationaleText = "Assets should have threat analysis per FDA cybersecurity guidance.";
-                require constraint { threatenedBy->size() >= 1 }
-            }
+    constraint def threatMitigationRule {
+        attribute id = "CR-MED-040";
+        attribute appliesTo = "Threat";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "FDA cybersecurity guidance requires threat mitigation.";
+        attribute predicateExpression = "derivesCyberRequirement->size() >= 1";
+        constraint { true }
+    }
 
-            // ─── Interface Rules ─────────────────────────────────────────────────
+    constraint def assetThreatLinkRule {
+        attribute id = "CR-MED-041";
+        attribute appliesTo = "CybersecurityAsset";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Assets should have threat analysis per FDA cybersecurity guidance.";
+        attribute predicateExpression = "threatenedBy->size() >= 1";
+        constraint { true }
+    }
 
-            constraint def logicalInterfaceDirectionRule {
-                attribute id = "CR-MED-050";
-                attribute appliesTo = "Interface";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "Interface direction required for integration analysis.";
-                require constraint { attributes.direction != "" }
-            }
+    // ─── Interface Rules ─────────────────────────────────────────────────
 
-            // ─── Conditional Rules ───────────────────────────────────────────────
+    constraint def logicalInterfaceDirectionRule {
+        attribute id = "CR-MED-050";
+        attribute appliesTo = "Interface";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Interface direction required for integration analysis.";
+        attribute predicateExpression = "attributes.direction != \"\"";
+        constraint { true }
+    }
 
-            constraint def safetyClassCVerificationRule {
-                attribute id = "CR-MED-101";
-                attribute appliesTo = "SoftwareComponent";
-                attribute severity = RuleSeverityKind::error;
-                attribute rationaleText = "IEC 62304 requires rigorous verification for Class C software.";
-                require constraint { not(attributes.safetyClass == "C") or verifiedBy->size() >= 1 }
-            }
-        }
+    // ─── Conditional Rules ───────────────────────────────────────────────
+
+    constraint def safetyClassCVerificationRule {
+        attribute id = "CR-MED-101";
+        attribute appliesTo = "SoftwareComponent";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "IEC 62304 requires rigorous verification for Class C software.";
+        attribute predicateExpression = "not(attributes.safetyClass == \"C\") or verifiedBy->size() >= 1";
+        constraint { true }
     }
 }

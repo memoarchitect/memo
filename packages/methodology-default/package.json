@@ -1,6 +1,6 @@
 {
   "name": "@memo/methodology-default",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "MEMO default medical-device methodology — selects viewpoints/views/DHF docs from @memo/ontology and adds rules, gates, patterns, profiles, workflow.",
   "splitTarget": "memo-sysmlv2",
   "type": "module",
