@@ -70,7 +70,7 @@ package memo_architecture_interfaces {
     // SysML port/interface mechanism + logical exchange, relocated here
     // from the former logical_interfaces namespace.
 
-    interface def DataInterface specializes InterfaceElement {
+    abstract interface def DataInterface specializes InterfaceElement {
         attribute interfaceKind : InterfaceKind;
         attribute protocolSemantics : String;
     }
