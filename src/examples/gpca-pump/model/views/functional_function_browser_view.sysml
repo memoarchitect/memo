@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_functional_function_browser_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaFunctionBrowserView : DiagramView {
+    view gpcaFunctionBrowserView : DiagramView {
         attribute :>> id = "VIEW-FUN-103";
         attribute :>> name = "GPCA_FunctionBrowserView";
         attribute :>> title = "GPCA Function Browser";

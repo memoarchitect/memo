@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_operational_use_case_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaUseCaseView : DiagramView {
+    view gpcaUseCaseView : DiagramView {
         attribute :>> id = "VIEW-OPS-101";
         attribute :>> name = "GPCA_UseCaseView";
         attribute :>> title = "GPCA Use Case View";

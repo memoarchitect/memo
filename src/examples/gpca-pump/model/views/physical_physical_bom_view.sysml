@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_physical_physical_bom_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaPhysicalBomView : DiagramView {
+    view gpcaPhysicalBomView : DiagramView {
         attribute :>> id = "VIEW-PHY-101";
         attribute :>> name = "GPCA_PhysicalBomView";
         attribute :>> title = "GPCA Physical Architecture and BOM View";
