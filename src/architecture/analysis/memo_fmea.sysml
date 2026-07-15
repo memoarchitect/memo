@@ -54,7 +54,7 @@ package memo_architecture_analysis {
         attribute probability : Real;
         attribute failureRate : Real;
         attribute exposureTime : Real;
-        attribute description : String;
+        attribute :>> description : String;
     }
     item def FaultTreeGate specializes TraceableElement {
         attribute gateKind : FaultTreeGateKind;

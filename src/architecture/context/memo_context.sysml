@@ -30,7 +30,7 @@ package memo_architecture_context {
     }
 
     connection def InteractsWith :> SemanticLink {
-        end participant : Actor;
+        end contextParticipant : Actor;
         end target : TraceableElement;
     }
     // Directional context-level data flow between boundary entities

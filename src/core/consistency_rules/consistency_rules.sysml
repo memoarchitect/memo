@@ -3,8 +3,8 @@
 package memo_core_consistency_rules {
     private import ScalarValues::*;
 
-    import memo_core_common::*;
-    import memo_core_enumerations::*;
+    private import memo_core_common::*;
+    private import memo_core_enumerations::*;
 
     part def ConsistencyRule specializes TraceableElement {
         attribute appliesTo : String;

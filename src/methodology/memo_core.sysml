@@ -7,13 +7,13 @@ package memo_methodology_core {
     part def MethodologyLibrary :> TraceableElement {
         attribute version : String;
         attribute domain : String;
-        attribute description : String;
+        attribute :>> description : String;
     }
 
     part def MethodologyDefinition :> TraceableElement {
         attribute version : String;
         attribute domain : String;
-        attribute description : String;
+        attribute :>> description : String;
         attribute baseMethodName : String;
     }
 
@@ -44,7 +44,7 @@ package memo_methodology_core {
 
     part def Archetype :> TraceableElement {
         attribute label : String;
-        attribute description : String;
+        attribute :>> description : String;
         attribute category : String;
         attribute includedLayer : String;
         attribute includedStandard : String;
