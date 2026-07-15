@@ -8,7 +8,7 @@ package memo_examples_gpca_pump_model_views_document_vv_view {
     private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    part vvView : DocumentView {
+    view vvView : DocumentView {
         attribute :>> id = "DOC-006";
         attribute :>> name = "VerificationValidationView";
         attribute :>> title = "GPCA Verification and Validation View";

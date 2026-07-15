@@ -8,7 +8,7 @@ package memo_examples_gpca_pump_model_views_document_rmf_view {
     private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    part rmfView : DocumentView {
+    view rmfView : DocumentView {
         attribute :>> id = "DOC-001";
         attribute :>> name = "RiskManagementFileView";
         attribute :>> title = "GPCA Risk Management File View";

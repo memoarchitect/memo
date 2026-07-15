@@ -8,7 +8,7 @@ package memo_examples_gpca_pump_model_views_document_hazard_analysis_view {
     private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    part hazardAnalysisView : DocumentView {
+    view hazardAnalysisView : DocumentView {
         attribute :>> id = "DOC-009";
         attribute :>> name = "HazardAnalysisReportView";
         attribute :>> title = "GPCA Hazard Analysis Report View";

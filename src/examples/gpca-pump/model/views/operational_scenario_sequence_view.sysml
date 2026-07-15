@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_operational_scenario_sequence_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaScenarioSequenceView : DiagramView {
+    view gpcaScenarioSequenceView : DiagramView {
         attribute :>> id = "VIEW-BHV-002";
         attribute :>> name = "GPCA_ScenarioSequenceView";
         attribute :>> title = "GPCA Scenario Sequence View";

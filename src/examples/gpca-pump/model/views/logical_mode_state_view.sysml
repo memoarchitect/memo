@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_logical_mode_state_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaModeStateView : DiagramView {
+    view gpcaModeStateView : DiagramView {
         attribute :>> id = "VIEW-BHV-001";
         attribute :>> name = "GPCA_ModeStateView";
         attribute :>> title = "GPCA Top-Level Mode State View";

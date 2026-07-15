@@ -27,6 +27,22 @@ package memo_architecture_risk_risk {
         attribute riskLevelMapping : String;
         attribute acceptabilityThresholds : String;
     }
+    part def DesignControlRiskRow specializes Risk {
+        attribute rowTitle : String;
+        attribute hazardAnalysis : String;
+        attribute hazardCategory : String;
+        attribute hazardSubcategory : String;
+        attribute causeSequenceOfEventsFailure : String;
+        attribute harmText : String;
+        attribute probabilityBeforeRaw : String;
+        attribute severityBeforeRaw : String;
+        attribute riskBeforeMeasureRaw : String;
+        attribute probabilityAfterRaw : String;
+        attribute severityAfterRaw : String;
+        attribute riskAfterMitigationRaw : String;
+        attribute cannotReduceFurther : Boolean;
+        attribute linkSummary : String;
+    }
     item def Hazard specializes TraceableElement {
         attribute hazardType : HazardTypeKind;
         attribute severity : SeverityKind;

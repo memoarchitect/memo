@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_logical_device_interconnect_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaDeviceInterconnectView : DiagramView {
+    view gpcaDeviceInterconnectView : DiagramView {
         attribute :>> id = "VIEW-LOG-003";
         attribute :>> name = "GPCA_DeviceInterconnectView";
         attribute :>> title = "GPCA Device Interconnect View";

@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_risk_fmea_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaFmeaView : DiagramView {
+    view gpcaFmeaView : DiagramView {
         attribute :>> id = "VIEW-RISK-102";
         attribute :>> name = "GPCA_FmeaView";
         attribute :>> title = "GPCA FMEA and Fault Tree View";

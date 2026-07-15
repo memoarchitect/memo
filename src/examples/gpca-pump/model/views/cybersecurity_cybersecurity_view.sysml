@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_cybersecurity_cybersecurity_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaCybersecurityView : DiagramView {
+    view gpcaCybersecurityView : DiagramView {
         attribute :>> id = "VIEW-CYB-001";
         attribute :>> name = "GPCA_CybersecurityView";
         attribute :>> title = "GPCA Cybersecurity View";
