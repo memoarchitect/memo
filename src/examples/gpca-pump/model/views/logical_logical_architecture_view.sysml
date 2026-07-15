@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_logical_logical_architecture_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaLogicalArchitectureView : DiagramView {
+    view gpcaLogicalArchitectureView : DiagramView {
         attribute :>> id = "VIEW-LOG-001";
         attribute :>> name = "GPCA_LogicalArchitectureView";
         attribute :>> title = "GPCA Logical Architecture View";

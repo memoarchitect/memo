@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_context_system_context_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaSystemContextView : DiagramView {
+    view gpcaSystemContextView : DiagramView {
         attribute :>> id = "VIEW-CTX-101";
         attribute :>> name = "GPCA_SystemContextView";
         attribute :>> title = "GPCA System Context View";

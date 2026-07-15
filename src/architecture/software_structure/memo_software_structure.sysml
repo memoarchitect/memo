@@ -19,6 +19,14 @@ package memo_architecture_software_structure {
         attribute wcetMs : Real;
         attribute schedulingPolicy : SchedulingPolicyKind;
     }
+    part def SoftwareItem specializes SoftwareComponent {
+        attribute softwareItemKind : String;
+        attribute iec62304Role : String;
+    }
+    part def FirmwareItem specializes SoftwareItem {
+        attribute firmwareTarget : String;
+        attribute updateMechanism : String;
+    }
     part def SOUPComponent specializes SoftwareComponent {
         attribute soupVersion : String;
         attribute soupVendor : String;

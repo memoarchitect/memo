@@ -8,7 +8,7 @@ package memo_examples_gpca_pump_model_views_document_architecture_description_vi
     private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    part architectureDescriptionView : DocumentView {
+    view architectureDescriptionView : DocumentView {
         attribute :>> id = "DOC-005";
         attribute :>> name = "ArchitectureDescriptionView";
         attribute :>> title = "GPCA System Architecture Description View";
