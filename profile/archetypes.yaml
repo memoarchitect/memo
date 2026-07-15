@@ -1,0 +1,36 @@
+archetypes:
+  - id: samd
+    label: Software as Medical Device (SaMD)
+    description: Clinical decision support, diagnostic algorithm, AI/ML tool, mobile medical app
+    category: device-class
+    templateDir: samd
+    includedLayers: [context, requirements, functions, logical_structure, software_structure, risk, assurance, cybersecurity]
+    includedStandards: [ISO 14971, IEC 62304, IEC 82304-1, FDA Cybersecurity Guidance]
+  - id: connected
+    label: Connected / IoT Device
+    description: Remote monitoring, wearable, smart device with cloud connectivity and cybersecurity requirements
+    category: device-class
+    templateDir: connected-device
+    includedLayers: [context, requirements, functions, logical_structure, logical_interfaces, software_structure, hardware_structure, risk, assurance, cybersecurity]
+    includedStandards: [ISO 14971, IEC 62304, 21 CFR 820, FDA Cybersecurity Guidance]
+  - id: monitoring
+    label: Monitoring / Diagnostic Device
+    description: Patient monitor, ECG, SpO2, vital signs, bedside diagnostic equipment
+    category: device-class
+    templateDir: monitoring-device
+    includedLayers: [context, requirements, functions, logical_structure, logical_interfaces, physical_interfaces, software_structure, hardware_structure, risk, assurance]
+    includedStandards: [ISO 14971, IEC 62304, IEC 60601-1, 21 CFR 820]
+  - id: infusion_pump
+    label: Infusion / Drug Delivery Device
+    description: Infusion pump, syringe driver, implantable drug delivery, dosing device
+    category: device-class
+    templateDir: infusion-pump
+    includedLayers: [context, requirements, functions, logical_structure, logical_interfaces, physical_interfaces, software_structure, hardware_structure, behavior, risk, arch_risk, assurance, cybersecurity]
+    includedStandards: [ISO 14971, IEC 62304, IEC 60601-1, 21 CFR 820, ISO 13485]
+  - id: blank
+    label: Blank Project
+    description: Start from scratch with a minimal SysML shell
+    category: device-class
+    templateDir: ""
+    includedLayers: []
+    includedStandards: []

@@ -1,4 +1,4 @@
-# memo-sysmlv2
+# @memo/ontology
 
 **MEMO — Medical Engineering Modelling Ontology** — the pure SysML v2 content layer.
 
@@ -8,23 +8,23 @@ native `constraint def` / `requirement def` bodies (no engine plug-ins), so the 
 is portable *content* consumable by any conformant SysML v2 tool — SysIDE, SysON, or
 [`sysand`](https://docs.sysand.org/).
 
-This repository contains **no TypeScript and no engine code**. The MEMO engine and CLI
-live in `memo-tools`; the web app lives in `memo-architect`. This is the first of the
-three phased-release repos (see ADR-1-17).
+The published package contains **no JavaScript, TypeScript, or engine code**. The MEMO
+engine and CLI live in `memo-tools`; the web app lives in `memo-architect`.
 
 ## Layout
 
-All SysML v2 content lives under `src/`, where the **directory tree mirrors the
-`memo::` namespace hierarchy** (e.g. `memo::architecture::context` →
-`src/architecture/context/`). Infra (sysand manifests, build output, scripts)
-stays at the repo root.
+The package exposes four logical MEMO packages through `memo.manifest.yaml`. Existing
+project `extends:` values remain unchanged; the manifest maps them to package subpaths.
 
 ```
-.project.json                sysand project: the core ontology (memo-ontology)
-sysand-lock.toml             sysand lockfile
-packages/                    thin @memo/* package manifests (consumed as data deps by Memo Tools)
-scripts/  manifest/          reproducible build + version metadata
-src/                         ── all .sysml content (namespace = directory) ──
+memo.manifest.yaml           logical package, init, and example map
+ontology/                    @memo/ontology descriptor
+profile/                     @memo/medical-modeling-profile + archetypes/templates
+methodologies/default/       @memo/methodology-default descriptor
+methodologies/gpca/          @memo/methodology-gpca descriptor
+template/                    complete starter project copied by memo init
+examples/gpca-pump/          reference model (not a scaffold template)
+src/                         all reusable .sysml content (namespace = directory)
   medical_device_library.sysml   public import surface
   core/                          common/ enumerations/ relationships/
                                  dimensions/ semantics/ + stdlib/* (KerML wrapper)
@@ -34,8 +34,7 @@ src/                         ── all .sysml content (namespace = directory) �
   viewpoints/                    reusable viewpoint and view definitions
   rules/                         closure/ coverage/ crosslayer/ lifecycle/ quantitative/ (native constraint defs)
   artifacts/                     artifact kinds (memo::artifacts)
-  methodology/                   default methodology (nested sysand project)
-  examples/gpca-pump/            reference model — pure .sysml
+  methodology/                   default methodology
 ```
 
 ## Build / verify
@@ -46,9 +45,14 @@ Requires [`sysand`](https://docs.sysand.org/) on `PATH`.
 pnpm run build        # or: ./scripts/build-kpar.sh
 ```
 
-Builds both sysand projects (core ontology + methodology) into `.kpar` archives and
-fails on any external-parser error. This is the portability gate: a clean build proves
-the constraints are portable SysML v2.
+Builds transient SysAnd projects for the core ontology and methodology into `.kpar`
+archives and fails on any external-parser error. The transient project descriptors and
+build products are not included in the npm package.
+
+```bash
+pnpm test             # manifest/layout tests + npm pack content gate
+npm pack              # produces the single @memo/ontology content tarball
+```
 
 ## License
 

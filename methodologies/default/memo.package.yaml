@@ -1,0 +1,9 @@
+name: "@memo/methodology-default"
+version: "0.4.3"
+type: methodology
+extends: "@memo/ontology"
+sysmlDir: "../../src/methodology"
+description: "MEMO default medical-device methodology — selects viewpoints/views/DHF documents from @memo/ontology and adds rules, gates, patterns, profiles, and workflow."
+license: "MIT"
+tags: ["methodology", "medical-device", "iso-14971", "iec-62304", "memo"]
+usage: ["viewpoints", "views", "rules", "gates", "patterns", "profiles", "workflow", "dhf"]
