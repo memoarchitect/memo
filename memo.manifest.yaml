@@ -1,0 +1,13 @@
+manifest: 1
+packages:
+  "@memo/ontology": ./ontology
+  "@memo/medical-modeling-profile": ./profile
+  "@memo/methodology-default": ./methodologies/default
+  "@memo/methodology-gpca": ./methodologies/gpca
+init:
+  defaultExtends: "@memo/medical-modeling-profile"
+  rootImport: "memo_medical_device_library"
+  template: ./template
+  archetypes: ./profile/archetypes.yaml
+examples:
+  gpca: ./examples/gpca-pump

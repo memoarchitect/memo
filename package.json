@@ -1,15 +1,15 @@
 {
-  "name": "memo-sysmlv2",
-  "private": true,
+  "name": "@memo/ontology",
   "version": "0.4.3",
   "packageManager": "pnpm@9.15.0",
   "description": "MEMO — Medical Engineering Modelling Ontology. Pure SysML v2 medical-device ontology with native constraints, portable to any conformant SysML v2 tool (SysIDE, SysON, sysand).",
   "scripts": {
     "build": "bash scripts/build-kpar.sh",
-    "check": "bash scripts/build-kpar.sh"
+    "check": "bash scripts/build-kpar.sh",
+    "test": "node --test test/package.test.mjs"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "keywords": [
     "sysml-v2",
@@ -20,5 +20,27 @@
     "ontology",
     "mbse"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "files": [
+    "memo.manifest.yaml",
+    "ontology/memo.package.yaml",
+    "ontology/memo.rendering.yaml",
+    "profile/memo.package.yaml",
+    "profile/archetypes.yaml",
+    "profile/templates/",
+    "methodologies/default/memo.package.yaml",
+    "methodologies/gpca/memo.package.yaml",
+    "src/architecture/",
+    "src/artifacts/",
+    "src/compliance/",
+    "src/core/",
+    "src/methodology/*.sysml",
+    "src/methodology/LICENSES/",
+    "src/rules/",
+    "src/viewpoints/",
+    "src/medical_device_library.sysml",
+    "src/memo_namespaces.sysml",
+    "template/",
+    "examples/"
+  ]
 }

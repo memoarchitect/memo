@@ -1,12 +1,13 @@
 stages:
   - build
+  - test
   - publish
 
 # sysand is distributed on PyPI (https://pypi.org/project/sysand/) — the same
 # external, conformant SysML v2 / KerML tool used locally. Pin it so the
 # portability gate is reproducible.
 variables:
-  SYSAND_VERSION: "0.0.10"
+  SYSAND_VERSION: "0.0.9"
 
 .sysand_setup: &sysand_setup
   image: python:3.12-slim
@@ -32,6 +33,32 @@ build:
     paths:
       - dist/*.kpar
     expire_in: 30 days
+
+# ── Published-package + validating-project gate ─────────────────────────────
+# Build the current tools mirror against this ontology checkout so Phase 1 can
+# exercise the real CLI without depending on an unpublished @memo/cli package.
+test:
+  stage: test
+  image: node:20-bookworm-slim
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends git >/dev/null
+    - corepack enable
+    - git clone --depth 1 https://github.com/memoarchitect/memo-tools.git /tmp/memo-tools
+    - rm -rf /tmp/memo-tools/memo
+    - ln -s "$CI_PROJECT_DIR" /tmp/memo-tools/memo
+    - cd /tmp/memo-tools && pnpm install --frozen-lockfile
+    - pnpm --filter @memo/core build
+    - pnpm --filter @memo/cli build
+  script:
+    - cd "$CI_PROJECT_DIR"
+    - pnpm test
+    - npm pack --dry-run
+    - cp -R template .phase1-template
+    - sed -i 's/{{name}}/phase1-template/g' .phase1-template/memo.package.yaml .phase1-template/src/catalog/starter.sysml
+    - node /tmp/memo-tools/packages/cli/lib/bin/memo.js validate .phase1-template
+    - node /tmp/memo-tools/packages/cli/lib/bin/memo.js validate examples/gpca-pump
+  after_script:
+    - rm -rf "$CI_PROJECT_DIR/.phase1-template"
 
 # ── Release ──────────────────────────────────────────────────────────────────
 # On a version tag (v*), rebuild the .kpar archives and upload them to this

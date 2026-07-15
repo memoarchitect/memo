@@ -1,0 +1,99 @@
+format: memo.viewlayout/v1
+viewSource: model/samples/interconnection_view.sysml
+layouts:
+  diag-sample-sampleInterconnectionView:
+    nodes:
+      coffeeMachine:
+        x: 364
+        y: 0
+        ports:
+          mainsWaterIn:
+            x: -12
+            y: 273
+            side: left
+          beverageOut:
+            x: 1253.1
+            y: 137.70963541666669
+            side: right
+          serviceInterface:
+            x: 1253.1
+            y: 240.73784722222223
+            side: right
+          diagnostics:
+            x: 1253.1
+            y: 380.19422743055554
+            side: right
+      waterTank:
+        x: 128
+        y: 114
+        ports:
+          tankWaterOut:
+            x: 376
+            y: 72
+            side: right
+          tankWaterIn:
+            x: -12
+            y: 72
+            side: left
+      heaterAssembly:
+        x: 570
+        y: 70
+        ports:
+          heaterWaterIn:
+            x: -12
+            y: 116
+            side: left
+          heatedWaterOut:
+            x: 555.1
+            y: 116
+            side: right
+      heatingElement:
+        x: 128
+        y: 70
+        ports:
+          heaterStatusOut:
+            x: 299.1
+            y: 72
+            side: right
+      brewGroup:
+        x: 659.55
+        y: 384
+        ports:
+          brewWaterIn:
+            x: -12
+            y: 72
+            side: left
+          brewedCoffeeOut:
+            x: 376
+            y: 72
+            side: right
+      waterSupply:
+        x: 0
+        y: 201
+        ports:
+          supplyWaterOut:
+            x: 262
+            y: 72
+            side: right
+      cup:
+        x: 1719.1
+        y: 5
+        ports:
+          cupBeverageIn:
+            x: -12
+            y: 72
+            side: left
+    edges:
+      rel-683: {}
+      rel-684: {}
+      rel-685: {}
+      rel-686: {}
+      rel-687: {}
+      rel-688: {}
+      rel-689: {}
+    canvas:
+      autoLayout: false
+      zoom: 0.72
+      pan:
+        x: -201.51599999999996
+        y: 59.80000000000001
