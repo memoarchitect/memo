@@ -5,7 +5,9 @@ package memo_viewpoints_risk_risk_chain_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_risk_risk_viewpoint::*;
 
-                part riskChainView : DiagramView {
+                view riskChainView : MemoDiagramView {
+                    expose memo_viewpoints_risk_risk_chain_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-RISK-001";
     attribute :>> name = "RiskChainView";
     attribute :>> title = "Risk Mitigation Chain View";

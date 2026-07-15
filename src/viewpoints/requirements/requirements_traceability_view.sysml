@@ -5,7 +5,9 @@ package memo_viewpoints_requirements_requirements_traceability_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_requirements_requirements_viewpoint::*;
 
-                part requirementsTraceabilityView : DiagramView {
+                view requirementsTraceabilityView : MemoDiagramView {
+                    expose memo_viewpoints_requirements_requirements_traceability_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-REQ-001";
     attribute :>> name = "RequirementsTraceabilityView";
     attribute :>> title = "Requirements Traceability View";

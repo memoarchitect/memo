@@ -56,7 +56,11 @@ package memo_examples_gpca_pump_model_samples_interconnection_view {
     connection : ExchangesWith connect source ::> beverageOut to target ::> cupBeverageIn;
     connection : ExchangesWith connect source ::> heaterStatusOut to target ::> diagnostics;
 
-    part sampleInterconnectionView : DiagramView {
+    view sampleInterconnectionView : MemoDiagramView {
+        expose coffeeMachine::**;
+        expose waterSupply::**;
+        expose cup::**;
+        attribute depth = 2;
         attribute :>> title = "Coffee Machine · Thermal & Fluid IBD";
         attribute :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
         attribute :>> viewKind = DiagramViewKind::interconnection;

@@ -2,13 +2,11 @@ package memo_examples_gpca_pump_model_views_document_threat_model_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
     private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
-    private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    part threatModelView : CybersecurityThreatModelView {
+    view threatModelView : MemoCybersecurityThreatModelView {
+        expose memo_examples_gpca_pump_model_views_document_threat_model_view::*;
         attribute :>> id = "DOC-002";
         attribute :>> name = "GPCACyberThreatModelView";
         attribute :>> title = "GPCA Cybersecurity Threat Model View";
