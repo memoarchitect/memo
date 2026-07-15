@@ -5,7 +5,9 @@ package memo_viewpoints_verification_verification_coverage_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_verification_verification_viewpoint::*;
 
-                part verificationCoverageView : DiagramView {
+                view verificationCoverageView : MemoDiagramView {
+                    expose memo_viewpoints_verification_verification_coverage_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-VER-001";
     attribute :>> name = "VerificationCoverageView";
     attribute :>> title = "Verification & Validation Coverage View";

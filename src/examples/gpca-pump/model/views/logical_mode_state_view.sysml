@@ -11,12 +11,11 @@ package memo_examples_gpca_pump_model_views_logical_mode_state_view {
     private import memo_viewpoints_requirements_requirements_viewpoint::*;
     private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    view gpcaModeStateView : DiagramView {
+    view gpcaModeStateView : MemoDiagramView {
+        expose memo_examples_gpca_pump_model_views_logical_mode_state_view::*;
+        attribute depth = 2;
         attribute :>> id = "VIEW-BHV-001";
         attribute :>> name = "GPCA_ModeStateView";
         attribute :>> title = "GPCA Top-Level Mode State View";

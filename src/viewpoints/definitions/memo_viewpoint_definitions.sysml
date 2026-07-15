@@ -39,7 +39,7 @@ package memo_viewpoints_definitions {
         attribute rationaleText : String;
     }
 
-    view def View :> Views::View, DocumentedElement {
+    view def MemoView :> Views::View, DocumentedElement {
         attribute outputKind : ViewOutputKind[*];
         attribute presentationKind : PresentationKind[*];
         attribute filterExpression : String;
@@ -53,21 +53,21 @@ package memo_viewpoints_definitions {
         part selectionQuery : ViewSelectionQuery[*];
     }
 
-    view def DiagramView :> View {
+    view def MemoDiagramView :> MemoView {
         attribute viewKind : DiagramViewKind;
         attribute diagramType : String;
         attribute layoutHint : String;
         attribute styleHint : String;
     }
 
-    view def DocumentBackedView :> View {
+    view def MemoDocumentBackedView :> MemoView {
         attribute version : String;
         attribute lifecycleState : LifecycleStateKind;
         attribute generationRule : String;
         attribute marketScope : String;
     }
 
-    view def DocumentView :> DocumentBackedView {
+    view def MemoDocumentView :> MemoDocumentBackedView {
         attribute viewKind : DocumentViewKind;
     }
 

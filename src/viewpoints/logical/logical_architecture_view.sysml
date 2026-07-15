@@ -5,7 +5,9 @@ package memo_viewpoints_logical_logical_architecture_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_logical_logical_viewpoint::*;
 
-                part logicalArchitectureView : DiagramView {
+                view logicalArchitectureView : MemoDiagramView {
+                    expose memo_viewpoints_logical_logical_architecture_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-LOG-001";
     attribute :>> name = "LogicalArchitectureView";
     attribute :>> title = "Logical Architecture View";
