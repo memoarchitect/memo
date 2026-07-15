@@ -109,7 +109,12 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     allocate opSetupFlow.opAdminister.opDeliverDose to opRoleNurse;
     allocate opSetupFlow.opAdminister.opLogEvent to opRoleNurse;
 
-    part opSetupView : DiagramView {
+    view opSetupView : MemoDiagramView {
+        expose opSetupFlow::**;
+        expose opCareSystem::**;
+        expose opClinicalTeam::**;
+        expose opPatientGroup::**;
+        attribute depth = 2;
         attribute :>> title = "Sample · Clinical PCA Setup (Operational)";
         attribute :>> shortDescription = "Operational activity across clinical roles: swimlanes per actor, a fork/join for concurrent prep, and a composite 'Administer PCA Therapy' sub-flow (double-click to drill in).";
         attribute :>> viewKind = DiagramViewKind::actionflow;

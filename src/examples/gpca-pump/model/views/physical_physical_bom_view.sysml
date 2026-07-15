@@ -11,12 +11,11 @@ package memo_examples_gpca_pump_model_views_physical_physical_bom_view {
     private import memo_viewpoints_requirements_requirements_viewpoint::*;
     private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    view gpcaPhysicalBomView : DiagramView {
+    view gpcaPhysicalBomView : MemoDiagramView {
+        expose memo_examples_gpca_pump_model_views_physical_physical_bom_view::*;
+        attribute depth = 2;
         attribute :>> id = "VIEW-PHY-101";
         attribute :>> name = "GPCA_PhysicalBomView";
         attribute :>> title = "GPCA Physical Architecture and BOM View";

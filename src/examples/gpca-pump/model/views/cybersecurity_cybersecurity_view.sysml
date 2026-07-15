@@ -12,11 +12,11 @@ package memo_examples_gpca_pump_model_views_cybersecurity_cybersecurity_view {
     private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    view gpcaCybersecurityView : DiagramView {
+    view gpcaCybersecurityView : MemoDiagramView {
+        expose memo_examples_gpca_pump_model_views_cybersecurity_cybersecurity_view::*;
+        attribute depth = 2;
         attribute :>> id = "VIEW-CYB-001";
         attribute :>> name = "GPCA_CybersecurityView";
         attribute :>> title = "GPCA Cybersecurity View";

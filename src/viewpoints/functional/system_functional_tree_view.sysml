@@ -5,7 +5,9 @@ package memo_viewpoints_functional_system_functional_tree_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_functional_functional_viewpoint::*;
 
-                part systemFunctionalTreeView : DiagramView {
+                view systemFunctionalTreeView : MemoDiagramView {
+                    expose memo_viewpoints_functional_system_functional_tree_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-FUNC-001";
     attribute :>> name = "SystemFunctionalTreeView";
     attribute :>> title = "System Functional Tree";

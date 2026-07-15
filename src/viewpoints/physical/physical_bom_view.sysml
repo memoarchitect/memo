@@ -5,7 +5,9 @@ package memo_viewpoints_physical_physical_bom_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_physical_physical_viewpoint::*;
 
-                part physicalBOMView : DiagramView {
+                view physicalBOMView : MemoDiagramView {
+                    expose memo_viewpoints_physical_physical_bom_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-PHY-001";
     attribute :>> name = "PhysicalBOMView";
     attribute :>> title = "Physical Bill of Materials View";
