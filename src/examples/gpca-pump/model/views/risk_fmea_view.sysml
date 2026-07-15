@@ -17,26 +17,26 @@ package memo_examples_gpca_pump_model_views_risk_fmea_view {
     private import memo_core_enumerations::*;
 
     part gpcaFmeaView : DiagramView {
-        attribute id = "VIEW-RISK-102";
-        attribute name = "GPCA_FmeaView";
-        attribute title = "GPCA FMEA and Fault Tree View";
-        attribute shortDescription = "Failure modes with causes, effects, detection, RPN, and the overdose fault tree.";
-        attribute outputKind = (ViewOutputKind::table);
-        attribute presentationKind = (PresentationKind::riskTable);
-        attribute viewKind = DiagramViewKind::grid;
-        attribute diagramType = "fmea";
-        attribute dataSourceDescription = "GPCA FMEA worksheet, failure modes, fault tree events, gates, and cut sets";
-        attribute autoPopulate = true;
-        attribute queryDescription = "Include FMEA worksheet rows and the overdose fault tree structure.";
-        attribute documentUsage = ("FMEA", "RMF");
-        part selectionQuery {
-            attribute id = "QRY-RISK-102";
-            attribute name = "GPCA_FmeaQuery";
-            attribute includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureEffect", "FailureCause", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeEvent", "FaultTreeGate", "MinimalCutSet");
-            attribute includeLayers = ("analysis", "risk");
-            attribute includeConcerns = (ConcernKind::safety, ConcernKind::reliability);
-            attribute selectionExpression = "product == 'GPCA'";
-            attribute rationaleText = "Auto-populate the FMEA/FTA view from the analysis layer.";
+        attribute :>> id = "VIEW-RISK-102";
+        attribute :>> name = "GPCA_FmeaView";
+        attribute :>> title = "GPCA FMEA and Fault Tree View";
+        attribute :>> shortDescription = "Failure modes with causes, effects, detection, RPN, and the overdose fault tree.";
+        attribute :>> outputKind = (ViewOutputKind::table);
+        attribute :>> presentationKind = (PresentationKind::riskTable);
+        attribute :>> viewKind = DiagramViewKind::grid;
+        attribute :>> diagramType = "fmea";
+        attribute :>> dataSourceDescription = "GPCA FMEA worksheet, failure modes, fault tree events, gates, and cut sets";
+        attribute :>> autoPopulate = true;
+        attribute :>> queryDescription = "Include FMEA worksheet rows and the overdose fault tree structure.";
+        attribute :>> documentUsage = ("FMEA", "RMF");
+        part :>> selectionQuery {
+            attribute :>> id = "QRY-RISK-102";
+            attribute :>> name = "GPCA_FmeaQuery";
+            attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureEffect", "FailureCause", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeEvent", "FaultTreeGate", "MinimalCutSet");
+            attribute :>> includeLayers = ("analysis", "risk");
+            attribute :>> includeConcerns = (ConcernKind::safety, ConcernKind::reliability);
+            attribute :>> selectionExpression = "product == 'GPCA'";
+            attribute :>> rationaleText = "Auto-populate the FMEA/FTA view from the analysis layer.";
         }
         part :>> viewpointDefinition = riskViewpoint;
     }

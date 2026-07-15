@@ -32,14 +32,14 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     // Responsibility hierarchy used by the Level control:
     // L1 care system → L2 responsibility groups → L3 performing actors.
     part opCareSystem : CareSystem { attribute name = "PCA Care System"; }
-    part opClinicalTeam : Actor { attribute name = "Clinical Team"; }
-    part opPatientGroup : Actor { attribute name = "Patient Interaction"; }
+    part opClinicalTeam : Actor { attribute :>> name = "Clinical Team"; }
+    part opPatientGroup : Actor { attribute :>> name = "Patient Interaction"; }
 
     // L3 clinical roles — one natural-level swimlane each
-    part opRolePhysician : Actor { attribute name = "Physician"; }
-    part opRoleNurse : Actor { attribute name = "Nurse"; }
-    part opRoleBiomed : Actor { attribute name = "Biomed Tech"; }
-    part opRolePatient : Actor { attribute name = "Patient"; }
+    part opRolePhysician : Actor { attribute :>> name = "Physician"; }
+    part opRoleNurse : Actor { attribute :>> name = "Nurse"; }
+    part opRoleBiomed : Actor { attribute :>> name = "Biomed Tech"; }
+    part opRolePatient : Actor { attribute :>> name = "Patient"; }
 
     connection : Composes connect parent ::> opCareSystem to child ::> opClinicalTeam;
     connection : Composes connect parent ::> opCareSystem to child ::> opPatientGroup;
@@ -110,10 +110,10 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     allocate opSetupFlow.opAdminister.opLogEvent to opRoleNurse;
 
     part opSetupView : DiagramView {
-        attribute title = "Sample · Clinical PCA Setup (Operational)";
-        attribute shortDescription = "Operational activity across clinical roles: swimlanes per actor, a fork/join for concurrent prep, and a composite 'Administer PCA Therapy' sub-flow (double-click to drill in).";
-        attribute viewKind = DiagramViewKind::actionflow;
-        attribute diagramType = "ofd";
+        attribute :>> title = "Sample · Clinical PCA Setup (Operational)";
+        attribute :>> shortDescription = "Operational activity across clinical roles: swimlanes per actor, a fork/join for concurrent prep, and a composite 'Administer PCA Therapy' sub-flow (double-click to drill in).";
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "ofd";
     }
 
     connection : IncludedIn connect sourceElement ::> opSetupFlow.opPrescribe to targetView ::> opSetupView;

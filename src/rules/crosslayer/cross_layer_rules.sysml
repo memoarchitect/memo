@@ -4,8 +4,8 @@
 package memo_rules_crosslayer {
     private import ScalarValues::*;
 
-    import memo_core_consistency_rules::*;
-    import memo_core_enumerations::*;
+    private import memo_core_consistency_rules::*;
+    private import memo_core_enumerations::*;
 
     constraint def riskToReqTraceRule {
         attribute id = "XL-001";

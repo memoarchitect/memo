@@ -8,27 +8,27 @@ package memo_examples_gpca_pump_model_samples_interconnection_view {
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
-    part coffeeMachine : LogicalComponent { attribute name = "Coffee Machine"; }
-    part waterSupply : LogicalComponent { attribute name = "Water Supply"; }
-    part waterTank : LogicalComponent { attribute name = "Water Reservoir"; }
-    part heaterAssembly : LogicalComponent { attribute name = "Thermal Control Assembly"; }
-    part heatingElement : LogicalComponent { attribute name = "Water Heating Element"; }
-    part brewGroup : LogicalComponent { attribute name = "Brew Group"; }
-    part cup : LogicalComponent { attribute name = "Cup"; }
+    part coffeeMachine : LogicalComponent { attribute :>> name = "Coffee Machine"; }
+    part waterSupply : LogicalComponent { attribute :>> name = "Water Supply"; }
+    part waterTank : LogicalComponent { attribute :>> name = "Water Reservoir"; }
+    part heaterAssembly : LogicalComponent { attribute :>> name = "Thermal Control Assembly"; }
+    part heatingElement : LogicalComponent { attribute :>> name = "Water Heating Element"; }
+    part brewGroup : LogicalComponent { attribute :>> name = "Brew Group"; }
+    part cup : LogicalComponent { attribute :>> name = "Cup"; }
 
-    port mainsWaterIn : DataPort { attribute direction = DirectionKind::input; }
-    port beverageOut : DataPort { attribute direction = DirectionKind::output; }
-    port supplyWaterOut : DataPort { attribute direction = DirectionKind::output; }
-    port cupBeverageIn : DataPort { attribute direction = DirectionKind::input; }
-    port serviceInterface : DataPort { attribute direction = DirectionKind::bidirectional; }
-    port diagnostics : DataPort { attribute direction = DirectionKind::output; }
-    port tankWaterOut : DataPort { attribute direction = DirectionKind::output; }
-    port tankWaterIn : DataPort { attribute direction = DirectionKind::input; }
-    port heaterWaterIn : DataPort { attribute direction = DirectionKind::input; }
-    port heatedWaterOut : DataPort { attribute direction = DirectionKind::output; }
-    port brewWaterIn : DataPort { attribute direction = DirectionKind::input; }
-    port brewedCoffeeOut : DataPort { attribute direction = DirectionKind::output; }
-    port heaterStatusOut : DataPort { attribute direction = DirectionKind::output; }
+    port mainsWaterIn : DataPort { attribute :>> direction = DirectionKind::input; }
+    port beverageOut : DataPort { attribute :>> direction = DirectionKind::output; }
+    port supplyWaterOut : DataPort { attribute :>> direction = DirectionKind::output; }
+    port cupBeverageIn : DataPort { attribute :>> direction = DirectionKind::input; }
+    port serviceInterface : DataPort { attribute :>> direction = DirectionKind::bidirectional; }
+    port diagnostics : DataPort { attribute :>> direction = DirectionKind::output; }
+    port tankWaterOut : DataPort { attribute :>> direction = DirectionKind::output; }
+    port tankWaterIn : DataPort { attribute :>> direction = DirectionKind::input; }
+    port heaterWaterIn : DataPort { attribute :>> direction = DirectionKind::input; }
+    port heatedWaterOut : DataPort { attribute :>> direction = DirectionKind::output; }
+    port brewWaterIn : DataPort { attribute :>> direction = DirectionKind::input; }
+    port brewedCoffeeOut : DataPort { attribute :>> direction = DirectionKind::output; }
+    port heaterStatusOut : DataPort { attribute :>> direction = DirectionKind::output; }
 
     connection : Composes connect parent ::> coffeeMachine to child ::> waterTank;
     connection : Composes connect parent ::> coffeeMachine to child ::> heaterAssembly;
@@ -57,12 +57,12 @@ package memo_examples_gpca_pump_model_samples_interconnection_view {
     connection : ExchangesWith connect source ::> heaterStatusOut to target ::> diagnostics;
 
     part sampleInterconnectionView : DiagramView {
-        attribute title = "Coffee Machine · Thermal & Fluid IBD";
-        attribute shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
-        attribute viewKind = DiagramViewKind::interconnection;
-        attribute diagramType = "ibd";
-        part selectionQuery {
-            attribute includeRelationshipKinds = ("Composes", "ExchangesWith");
+        attribute :>> title = "Coffee Machine · Thermal & Fluid IBD";
+        attribute :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "ExchangesWith");
         }
     }
 

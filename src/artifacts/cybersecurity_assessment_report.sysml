@@ -5,8 +5,8 @@ package memo_artifacts_cybersecurity_assessment_report {
             private import memo_core_enumerations::*;
 
             part def CybersecurityAssessmentReport specializes ArtifactKindDef {
-    attribute documentTitle = "Cybersecurity Risk Assessment";
-    attribute regulatoryRef = "FDA Cybersecurity Guidance";
-    attribute artifactKind = ArtifactKind::cybersecurityAssessment;
+    attribute :>> documentTitle = "Cybersecurity Risk Assessment";
+    attribute :>> regulatoryRef = "FDA Cybersecurity Guidance";
+    attribute :>> artifactKind = ArtifactKind::cybersecurityAssessment;
             }
 }

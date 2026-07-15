@@ -17,26 +17,26 @@ package memo_examples_gpca_pump_model_views_requirements_requirements_trace_view
     private import memo_core_enumerations::*;
 
     part gpcaRequirementsTraceView : DiagramView {
-        attribute id = "VIEW-REQ-101";
-        attribute name = "GPCA_RequirementsTraceabilityView";
-        attribute title = "GPCA Requirements Traceability View";
-        attribute shortDescription = "Needs to system/software/hardware requirements to satisfying components and verification.";
-        attribute outputKind = (ViewOutputKind::matrix);
-        attribute presentationKind = (PresentationKind::traceMatrix);
-        attribute viewKind = DiagramViewKind::grid;
-        attribute diagramType = "req";
-        attribute dataSourceDescription = "GPCA requirements with DerivesFrom, SatisfiedBy, and VerifiedBy links";
-        attribute autoPopulate = true;
-        attribute queryDescription = "Include all needs and requirements with derivation, satisfaction, and verification links.";
-        attribute documentUsage = ("Requirements Traceability Matrix", "DHF", "QMSR");
-        part selectionQuery {
-            attribute id = "QRY-REQ-101";
-            attribute name = "GPCA_RequirementsTraceQuery";
-            attribute includeElementKinds = ("StakeholderNeed", "SystemRequirement", "SoftwareRequirement", "HardwareRequirement", "VerificationCase");
-            attribute includeRelationshipKinds = ("DerivesFrom", "SatisfiedBy", "VerifiedBy");
-            attribute includeLayers = ("requirements", "assurance");
-            attribute selectionExpression = "product == 'GPCA'";
-            attribute rationaleText = "Full derivation-to-verification traceability for design reviews.";
+        attribute :>> id = "VIEW-REQ-101";
+        attribute :>> name = "GPCA_RequirementsTraceabilityView";
+        attribute :>> title = "GPCA Requirements Traceability View";
+        attribute :>> shortDescription = "Needs to system/software/hardware requirements to satisfying components and verification.";
+        attribute :>> outputKind = (ViewOutputKind::matrix);
+        attribute :>> presentationKind = (PresentationKind::traceMatrix);
+        attribute :>> viewKind = DiagramViewKind::grid;
+        attribute :>> diagramType = "req";
+        attribute :>> dataSourceDescription = "GPCA requirements with DerivesFrom, SatisfiedBy, and VerifiedBy links";
+        attribute :>> autoPopulate = true;
+        attribute :>> queryDescription = "Include all needs and requirements with derivation, satisfaction, and verification links.";
+        attribute :>> documentUsage = ("Requirements Traceability Matrix", "DHF", "QMSR");
+        part :>> selectionQuery {
+            attribute :>> id = "QRY-REQ-101";
+            attribute :>> name = "GPCA_RequirementsTraceQuery";
+            attribute :>> includeElementKinds = ("StakeholderNeed", "SystemRequirement", "SoftwareRequirement", "HardwareRequirement", "VerificationCase");
+            attribute :>> includeRelationshipKinds = ("DerivesFrom", "SatisfiedBy", "VerifiedBy");
+            attribute :>> includeLayers = ("requirements", "assurance");
+            attribute :>> selectionExpression = "product == 'GPCA'";
+            attribute :>> rationaleText = "Full derivation-to-verification traceability for design reviews.";
         }
         part :>> viewpointDefinition = requirementsViewpoint;
     }

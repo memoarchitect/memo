@@ -3,7 +3,7 @@
 package memo_core_dimensions {
     private import ScalarValues::*;
 
-    import memo_core_common::*;
+    private import memo_core_common::*;
 
     enum def DimensionKind {
         enum architecture;

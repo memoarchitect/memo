@@ -5,8 +5,8 @@
 package memo_rules_quantitative {
     private import ScalarValues::*;
 
-    import memo_core_consistency_rules::*;
-    import memo_core_enumerations::*;
+    private import memo_core_consistency_rules::*;
+    private import memo_core_enumerations::*;
 
     constraint def hazardMaxControlsRule {
         attribute id = "QT-001";

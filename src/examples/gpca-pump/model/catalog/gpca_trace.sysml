@@ -29,12 +29,12 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     private import memo_examples_gpca_pump_model_catalog_gpca_formal_behavior::*;
 
     // ── System context interactions (context view) ──────────────
-    connection : InteractsWith connect participant ::> actorPatient to target ::> entityGpcaPump;
-    connection : InteractsWith connect participant ::> actorNurse to target ::> entityGpcaPump;
-    connection : InteractsWith connect participant ::> actorPrescriber to target ::> entityGpcaPump;
-    connection : InteractsWith connect participant ::> actorPharmacist to target ::> entityGpcaPump;
-    connection : InteractsWith connect participant ::> actorTechnician to target ::> entityGpcaPump;
-    connection : InteractsWith connect participant ::> actorPharmacist to target ::> entityPharmacy;
+    connection : InteractsWith connect contextParticipant ::> actorPatient to target ::> entityGpcaPump;
+    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> entityGpcaPump;
+    connection : InteractsWith connect contextParticipant ::> actorPrescriber to target ::> entityGpcaPump;
+    connection : InteractsWith connect contextParticipant ::> actorPharmacist to target ::> entityGpcaPump;
+    connection : InteractsWith connect contextParticipant ::> actorTechnician to target ::> entityGpcaPump;
+    connection : InteractsWith connect contextParticipant ::> actorPharmacist to target ::> entityPharmacy;
 
     // ── Fig 2.1 context flows (CriSys §2.1) ─────────────────────
     // Data flows
@@ -54,14 +54,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
 
     // ── Actor participation (use case view) ─────────────────────
-    connection : InteractsWith connect participant ::> actorPrescriber to target ::> oaPrescribe;
-    connection : InteractsWith connect participant ::> actorPharmacist to target ::> oaLoadReservoir;
-    connection : InteractsWith connect participant ::> actorNurse to target ::> oaProgram;
-    connection : InteractsWith connect participant ::> actorNurse to target ::> oaStartTherapy;
-    connection : InteractsWith connect participant ::> actorNurse to target ::> oaRespondAlarm;
-    connection : InteractsWith connect participant ::> actorNurse to target ::> oaReviewLog;
-    connection : InteractsWith connect participant ::> actorPatient to target ::> oaRequestBolus;
-    connection : InteractsWith connect participant ::> actorTechnician to target ::> oaMaintain;
+    connection : InteractsWith connect contextParticipant ::> actorPrescriber to target ::> oaPrescribe;
+    connection : InteractsWith connect contextParticipant ::> actorPharmacist to target ::> oaLoadReservoir;
+    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> oaProgram;
+    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> oaStartTherapy;
+    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> oaRespondAlarm;
+    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> oaReviewLog;
+    connection : InteractsWith connect contextParticipant ::> actorPatient to target ::> oaRequestBolus;
+    connection : InteractsWith connect contextParticipant ::> actorTechnician to target ::> oaMaintain;
 
     // ── Operational thread (therapy lifecycle) ──────────────────
     connection : SequencesStep connect activity ::> oaPrescribe to nextActivity ::> oaLoadReservoir;
