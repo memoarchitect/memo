@@ -118,7 +118,10 @@ package memo_examples_gpca_pump_model_samples_functional_flow_view {
     allocate fxDeliveryFlow.fxDeliver.fxHoldDose to fxActuator;
     allocate fxDeliveryFlow.fxDeliver.fxCloseValve to fxActuator;
 
-    part fxDeliveryView : DiagramView {
+    view fxDeliveryView : MemoDiagramView {
+        expose fxDeliveryFlow::**;
+        expose fxPumpSystem::**;
+        attribute depth = 2;
         attribute :>> title = "Sample · Dose Delivery (Functional Flow)";
         attribute :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in).";
         attribute :>> viewKind = DiagramViewKind::actionflow;

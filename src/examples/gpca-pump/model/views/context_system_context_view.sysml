@@ -11,12 +11,11 @@ package memo_examples_gpca_pump_model_views_context_system_context_view {
     private import memo_viewpoints_requirements_requirements_viewpoint::*;
     private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    view gpcaSystemContextView : DiagramView {
+    view gpcaSystemContextView : MemoDiagramView {
+        expose memo_examples_gpca_pump_model_views_context_system_context_view::*;
+        attribute depth = 2;
         attribute :>> id = "VIEW-CTX-101";
         attribute :>> name = "GPCA_SystemContextView";
         attribute :>> title = "GPCA System Context View";

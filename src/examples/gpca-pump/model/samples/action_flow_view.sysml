@@ -51,7 +51,11 @@ package memo_examples_gpca_pump_model_samples_action_flow_view {
     allocate sampleActionFlow.process.processStepC to laneB;
     allocate sampleActionFlow.record to laneB;
 
-    part sampleActionFlowView : DiagramView {
+    view sampleActionFlowView : MemoDiagramView {
+        expose sampleActionFlow::**;
+        expose laneA;
+        expose laneB;
+        attribute depth = 2;
         attribute :>> title = "Sample · Action Flow";
         attribute :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development.";
         attribute :>> viewKind = DiagramViewKind::actionflow;

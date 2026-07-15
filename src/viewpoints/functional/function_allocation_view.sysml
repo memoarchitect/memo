@@ -5,7 +5,9 @@ package memo_viewpoints_functional_function_allocation_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_functional_functional_viewpoint::*;
 
-                part functionAllocationView : DiagramView {
+                view functionAllocationView : MemoDiagramView {
+                    expose memo_viewpoints_functional_function_allocation_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-FUNC-002";
     attribute :>> name = "FunctionAllocationView";
     attribute :>> title = "Function Allocation View";
