@@ -30,6 +30,22 @@ package memo_architecture_requirements {
     requirement def SystemRequirement specializes Requirement;
     requirement def SoftwareRequirement specializes Requirement { attribute safetyClass : SafetyClassKind; }
     requirement def HardwareRequirement specializes Requirement { attribute electricalSafetyRelevant : Boolean; }
+    requirement def DesignControlNeed specializes StakeholderNeed {
+        attribute sourceFolder : String;
+        attribute linkedDesignControls : String;
+    }
+    requirement def DesignControlSpecification specializes Requirement {
+        attribute specificationDomain : String;
+        attribute sourceFolder : String;
+        attribute linkedUserNeeds : String;
+        attribute linkedRisks : String;
+        attribute linkedTests : String;
+    }
+    requirement def HardwareSpecification specializes DesignControlSpecification;
+    requirement def SoftwareSpecification specializes DesignControlSpecification {
+        attribute softwareSafetyClass : SafetyClassKind;
+    }
+    requirement def SystemSpecification specializes DesignControlSpecification;
     // Named constant defined by a source requirements document (e.g. CriSys
     // GPCA App. A.4) and referenced from requirement statements.
     part def SystemConstant specializes TraceableElement {

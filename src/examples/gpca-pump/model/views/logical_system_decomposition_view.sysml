@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_logical_system_decomposition_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaSystemDecompositionView : DiagramView {
+    view gpcaSystemDecompositionView : DiagramView {
         attribute :>> id = "VIEW-LOG-002";
         attribute :>> name = "GPCA_SystemDecompositionView";
         attribute :>> title = "GPCA System Decomposition View";
