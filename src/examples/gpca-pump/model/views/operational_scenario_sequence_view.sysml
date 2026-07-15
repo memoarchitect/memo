@@ -17,25 +17,25 @@ package memo_examples_gpca_pump_model_views_operational_scenario_sequence_view {
     private import memo_core_enumerations::*;
 
     part gpcaScenarioSequenceView : DiagramView {
-        attribute id = "VIEW-BHV-002";
-        attribute name = "GPCA_ScenarioSequenceView";
-        attribute title = "GPCA Scenario Sequence View";
-        attribute shortDescription = "Key therapy and alarm scenarios rendered as sequences over the functional chains.";
-        attribute outputKind = (ViewOutputKind::diagram);
-        attribute presentationKind = (PresentationKind::activityDiagram);
-        attribute viewKind = DiagramViewKind::sequence;
-        attribute diagramType = "seq";
-        attribute dataSourceDescription = "GPCA system scenarios, functional chains, and chain steps";
-        attribute autoPopulate = true;
-        attribute queryDescription = "Include system scenarios with the functional chains and steps that realize them.";
-        attribute documentUsage = ("SDD", "VV");
-        part selectionQuery {
-            attribute id = "QRY-BHV-102";
-            attribute name = "GPCA_ScenarioSequenceQuery";
-            attribute includeElementKinds = ("SystemScenario", "OperationalScenario", "FunctionalChain", "FunctionalChainStep");
-            attribute includeLayers = ("operational", "system");
-            attribute selectionExpression = "product == 'GPCA'";
-            attribute rationaleText = "Auto-populate scenario sequences from the system layer.";
+        attribute :>> id = "VIEW-BHV-002";
+        attribute :>> name = "GPCA_ScenarioSequenceView";
+        attribute :>> title = "GPCA Scenario Sequence View";
+        attribute :>> shortDescription = "Key therapy and alarm scenarios rendered as sequences over the functional chains.";
+        attribute :>> outputKind = (ViewOutputKind::diagram);
+        attribute :>> presentationKind = (PresentationKind::activityDiagram);
+        attribute :>> viewKind = DiagramViewKind::sequence;
+        attribute :>> diagramType = "seq";
+        attribute :>> dataSourceDescription = "GPCA system scenarios, functional chains, and chain steps";
+        attribute :>> autoPopulate = true;
+        attribute :>> queryDescription = "Include system scenarios with the functional chains and steps that realize them.";
+        attribute :>> documentUsage = ("SDD", "VV");
+        part :>> selectionQuery {
+            attribute :>> id = "QRY-BHV-102";
+            attribute :>> name = "GPCA_ScenarioSequenceQuery";
+            attribute :>> includeElementKinds = ("SystemScenario", "OperationalScenario", "FunctionalChain", "FunctionalChainStep");
+            attribute :>> includeLayers = ("operational", "system");
+            attribute :>> selectionExpression = "product == 'GPCA'";
+            attribute :>> rationaleText = "Auto-populate scenario sequences from the system layer.";
         }
         part :>> viewpointDefinition = operationalViewpoint;
     }

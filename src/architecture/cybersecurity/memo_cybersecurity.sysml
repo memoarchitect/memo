@@ -77,7 +77,7 @@ package memo_architecture_cybersecurity {
         attribute hardeningScope : String;
     }
 
-    part def SecurityRequirement specializes Requirement {
+    requirement def SecurityRequirement :> Requirement {
         attribute securityObjective : String;
         attribute derivedFromThreat : String;
         attribute derivedFromRisk : String;

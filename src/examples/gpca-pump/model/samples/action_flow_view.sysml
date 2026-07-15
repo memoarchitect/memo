@@ -15,8 +15,8 @@ package memo_examples_gpca_pump_model_samples_action_flow_view {
     action def ProcessInput { in validated : EnergyToken; out result : MaterialBatch; }
     action def RecordResult { in result : MaterialBatch; }
 
-    part laneA : LogicalComponent { attribute name = "Lane A"; }
-    part laneB : LogicalComponent { attribute name = "Lane B"; }
+    part laneA : LogicalComponent { attribute :>> name = "Lane A"; }
+    part laneB : LogicalComponent { attribute :>> name = "Lane B"; }
 
     action sampleActionFlow {
         action receive : ReceiveInput;
@@ -52,10 +52,10 @@ package memo_examples_gpca_pump_model_samples_action_flow_view {
     allocate sampleActionFlow.record to laneB;
 
     part sampleActionFlowView : DiagramView {
-        attribute title = "Sample · Action Flow";
-        attribute shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development.";
-        attribute viewKind = DiagramViewKind::actionflow;
-        attribute diagramType = "afd";
+        attribute :>> title = "Sample · Action Flow";
+        attribute :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development.";
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
     }
 
     connection : IncludedIn connect sourceElement ::> sampleActionFlow.receive to targetView ::> sampleActionFlowView;

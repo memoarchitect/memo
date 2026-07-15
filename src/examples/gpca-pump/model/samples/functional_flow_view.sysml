@@ -36,17 +36,17 @@ package memo_examples_gpca_pump_model_samples_functional_flow_view {
 
     // Component hierarchy used by the Level control:
     // L1 system → L2 subsystems → L3 allocated components.
-    part fxPumpSystem : LogicalComponent { attribute name = "Infusion Pump System"; }
-    part fxSensingSubsystem : LogicalComponent { attribute name = "Sensing Subsystem"; }
-    part fxControlSubsystem : LogicalComponent { attribute name = "Control Subsystem"; }
-    part fxDeliverySubsystem : LogicalComponent { attribute name = "Delivery Subsystem"; }
-    part fxSafetySubsystem : LogicalComponent { attribute name = "Safety Subsystem"; }
+    part fxPumpSystem : LogicalComponent { attribute :>> name = "Infusion Pump System"; }
+    part fxSensingSubsystem : LogicalComponent { attribute :>> name = "Sensing Subsystem"; }
+    part fxControlSubsystem : LogicalComponent { attribute :>> name = "Control Subsystem"; }
+    part fxDeliverySubsystem : LogicalComponent { attribute :>> name = "Delivery Subsystem"; }
+    part fxSafetySubsystem : LogicalComponent { attribute :>> name = "Safety Subsystem"; }
 
     // L3 components — one natural-level swimlane each
-    part fxSensor : LogicalComponent { attribute name = "Sensor Subsystem"; }
-    part fxController : LogicalComponent { attribute name = "Infusion Controller"; }
-    part fxActuator : LogicalComponent { attribute name = "Pump Actuator"; }
-    part fxSafety : LogicalComponent { attribute name = "Safety Monitor"; }
+    part fxSensor : LogicalComponent { attribute :>> name = "Sensor Subsystem"; }
+    part fxController : LogicalComponent { attribute :>> name = "Infusion Controller"; }
+    part fxActuator : LogicalComponent { attribute :>> name = "Pump Actuator"; }
+    part fxSafety : LogicalComponent { attribute :>> name = "Safety Monitor"; }
 
     connection : Composes connect parent ::> fxPumpSystem to child ::> fxSensingSubsystem;
     connection : Composes connect parent ::> fxPumpSystem to child ::> fxControlSubsystem;
@@ -119,10 +119,10 @@ package memo_examples_gpca_pump_model_samples_functional_flow_view {
     allocate fxDeliveryFlow.fxDeliver.fxCloseValve to fxActuator;
 
     part fxDeliveryView : DiagramView {
-        attribute title = "Sample · Dose Delivery (Functional Flow)";
-        attribute shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in).";
-        attribute viewKind = DiagramViewKind::actionflow;
-        attribute diagramType = "ffd";
+        attribute :>> title = "Sample · Dose Delivery (Functional Flow)";
+        attribute :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in).";
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "ffd";
     }
 
     connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxAcquire to targetView ::> fxDeliveryView;

@@ -8,7 +8,7 @@ package memo_core_relationships {
     // Connection/Association), specializing the SemanticLink base. The
     // relationship name is the verb; the RelationshipRegistry derives the
     // navigable type as camelCase(name) and navigation is bidirectional.
-    connection def SemanticLink { attribute linkStatus : LinkStatusKind; }
+    abstract connection def SemanticLink { attribute linkStatus : LinkStatusKind; }
 
     connection def DerivesFrom :> SemanticLink {
         // Drivers include needs and hazards (ISO 14971: hazards drive
@@ -17,7 +17,7 @@ package memo_core_relationships {
         end targetRequirement : VerifiableElement;
     }
     connection def SatisfiedBy :> SemanticLink {
-        end requirement : VerifiableElement;
+        end requiredElement : VerifiableElement;
         end satisfyingElement : ArchitectureElement;
     }
     connection def MitigatesHazard :> SemanticLink {
@@ -224,7 +224,7 @@ package memo_core_relationships {
         end designElement : TraceableElement;
     }
     connection def BindsToInterface :> SemanticLink {
-        end port : InterfaceElement;
+        end portElement : InterfaceElement;
         end boundInterface : InterfaceElement;
     }
 }
