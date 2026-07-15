@@ -1,8 +1,0 @@
-{
-  "type": "methodology-package",
-  "name": "@memo/methodology-gpca",
-  "version": "0.4.3",
-  "extends": "@memo/methodology-default",
-  "sysmlDir": "../../src/examples/gpca-pump/methodology",
-  "usage": ["viewpoints", "views", "rules", "gates", "patterns", "profiles", "workflow", "dhf"]
-}
