@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_behavior_action_flow_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaActionFlowView : DiagramView {
+    view gpcaActionFlowView : DiagramView {
         attribute :>> id = "VIEW-BHV-003";
         attribute :>> name = "GPCA_InfusionDeliveryActionFlowView";
         attribute :>> title = "GPCA Infusion Delivery Action Flow";

@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_risk_risk_chain_view {
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaRiskChainView : DiagramView {
+    view gpcaRiskChainView : DiagramView {
         attribute :>> id = "VIEW-RISK-101";
         attribute :>> name = "GPCA_RiskChainView";
         attribute :>> title = "GPCA Risk Mitigation Chain View";

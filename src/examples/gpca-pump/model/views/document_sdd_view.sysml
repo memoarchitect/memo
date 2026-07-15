@@ -8,7 +8,7 @@ package memo_examples_gpca_pump_model_views_document_sdd_view {
     private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    part sddView : DocumentView {
+    view sddView : DocumentView {
         attribute :>> id = "DOC-004";
         attribute :>> name = "SoftwareDesignDescriptionView";
         attribute :>> title = "GPCA Software Design Description View";
