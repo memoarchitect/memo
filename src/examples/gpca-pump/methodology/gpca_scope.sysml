@@ -1,0 +1,54 @@
+package memo_examples_gpca_pump_methodology_gpca_scope {
+    private import ScalarValues::*;
+
+    private import memo_methodology_core::*;
+    private import memo_core_methodology_scope::*;
+    private import memo_core_enumerations::*;
+
+    part gpcaCoverageScope : MethodologyScope {
+        attribute id = "SCOPE-GPCA-001";
+        attribute name = "GPCACoverageScope";
+        attribute scopeName = "coverage";
+
+        attribute includedArchLayer = "context";
+        attribute includedArchLayer = "requirements";
+        attribute includedArchLayer = "functions";
+        attribute includedArchLayer = "logical_structure";
+        attribute includedArchLayer = "interfaces";
+        attribute includedArchLayer = "software_structure";
+        attribute includedArchLayer = "hardware_structure";
+        attribute includedArchLayer = "behavior";
+        attribute includedArchLayer = "risk";
+        attribute includedArchLayer = "assurance";
+        attribute includedArchLayer = "constraints";
+
+        attribute includedStandard = "ISO 14971";
+        attribute includedStandard = "IEC 62304";
+        attribute includedStandard = "21 CFR 820";
+        attribute includedStandard = "ISO 13485";
+        attribute includedStandard = "ISO 14155";
+        attribute includedStandard = "IEC 62366";
+        attribute includedStandard = "IEC 60601-1";
+
+        attribute includedArtifactKind = "RiskManagementPlan";
+
+        attribute includedViewpointType = "VP-CTX";
+        attribute includedViewpointType = "VP-LOG";
+        attribute includedViewpointType = "VP-RISK";
+
+        attribute excludedKind = "CybersecurityAsset";
+        attribute excludedKind = "AttackSurface";
+        attribute excludedKind = "Threat";
+        attribute excludedKind = "Vulnerability";
+        attribute excludedKind = "ThreatScenario";
+        attribute excludedKind = "CyberHazard";
+        attribute excludedKind = "CyberRisk";
+        attribute excludedKind = "CyberMitigation";
+        attribute excludedKind = "SecurityRequirement";
+        attribute excludedKind = "TrustBoundary";
+        attribute excludedKind = "SecurityClaim";
+        attribute excludedKind = "SOUPComponent";
+
+        attribute description = "GPCA prototype methodology — subtracts cybersecurity layer (non-networked device) and SOUPComponent (no SOUP in prototype). Derived from default methodology by exclusion.";
+    }
+}
