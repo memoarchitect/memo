@@ -5,7 +5,9 @@ package memo_viewpoints_software_software_architecture_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_software_software_viewpoint::*;
 
-                part softwareArchitectureView : DiagramView {
+                view softwareArchitectureView : MemoDiagramView {
+                    expose memo_viewpoints_software_software_architecture_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-SW-001";
     attribute :>> name = "SoftwareArchitectureView";
     attribute :>> title = "Software Architecture View";

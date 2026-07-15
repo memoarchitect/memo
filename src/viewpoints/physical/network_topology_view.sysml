@@ -5,7 +5,9 @@ package memo_viewpoints_physical_network_topology_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_physical_physical_viewpoint::*;
 
-                part networkTopologyView : DiagramView {
+                view networkTopologyView : MemoDiagramView {
+                    expose memo_viewpoints_physical_network_topology_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-PHY-002";
     attribute :>> name = "NetworkTopologyView";
     attribute :>> title = "Network Topology View";

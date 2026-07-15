@@ -2,13 +2,10 @@ package memo_examples_gpca_pump_model_views_document_dhf_index_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
-    private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    view dhfIndexView : DocumentView {
+    view dhfIndexView : MemoDocumentView {
+        expose memo_examples_gpca_pump_model_views_document_dhf_index_view::*;
         attribute :>> id = "DOC-007";
         attribute :>> name = "DesignHistoryFileIndexView";
         attribute :>> title = "GPCA Design History File Index View";
@@ -24,7 +21,7 @@ package memo_examples_gpca_pump_model_views_document_dhf_index_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-007";
             attribute :>> name = "dhfIndexViewQuery";
-            attribute :>> includeElementKinds = ("DocumentView", "DiagramView", "UsabilityEngineeringView", "CybersecurityThreatModelView", "CybersecurityAssessmentView", "Evidence", "Citation");
+            attribute :>> includeElementKinds = ("MemoDocumentView", "MemoDiagramView", "MemoUsabilityEngineeringView", "MemoCybersecurityThreatModelView", "MemoCybersecurityAssessmentView", "Evidence", "Citation");
             attribute :>> includeRelationshipKinds = ("IncludedIn", "ProducesEvidence");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }

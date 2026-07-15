@@ -29,7 +29,10 @@ package memo_examples_gpca_pump_model_samples_tree_view {
     connection : Composes connect parent ::> rootB to child ::> branchB1;
     connection : Composes connect parent ::> branchB1 to child ::> leafB11;
 
-    part sampleTreeView : DiagramView {
+    view sampleTreeView : MemoDiagramView {
+        expose rootA::**;
+        expose rootB::**;
+        attribute depth = 2;
         attribute :>> title = "Sample · Tree";
         attribute :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";
         attribute :>> viewKind = DiagramViewKind::general;

@@ -11,12 +11,11 @@ package memo_examples_gpca_pump_model_views_logical_device_interconnect_view {
     private import memo_viewpoints_requirements_requirements_viewpoint::*;
     private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    view gpcaDeviceInterconnectView : DiagramView {
+    view gpcaDeviceInterconnectView : MemoDiagramView {
+        expose memo_examples_gpca_pump_model_views_logical_device_interconnect_view::*;
+        attribute depth = 2;
         attribute :>> id = "VIEW-LOG-003";
         attribute :>> name = "GPCA_DeviceInterconnectView";
         attribute :>> title = "GPCA Device Interconnect View";
