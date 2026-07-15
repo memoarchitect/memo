@@ -1,5 +1,5 @@
 name: "@memo/methodology-default"
-version: "0.4.2"
+version: "0.4.3"
 type: methodology
 extends: "@memo/ontology"
 sysmlDir: "../../src/methodology"

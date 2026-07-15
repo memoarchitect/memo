@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.3 - 2026-07-14
+Removed an unused ad-hoc SysML formatter and aligned every package manifest with
+the canonical release version.
+
+- Removed a formatter that was not part of the build and could not safely parse
+  nested SysML blocks.
+- Aligned the ontology, methodology, modeling-profile, and SysAnd metadata at
+  `0.4.3`.
+- No ontology kinds, public SysML names, or model behavior changed.
+
 ## 0.4.2 - 2026-07-14
 Aligned public project metadata with the shared GitHub/GitLab repository model.
 

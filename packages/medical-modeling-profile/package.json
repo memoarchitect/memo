@@ -1,8 +1,7 @@
 {
   "name": "@memo/medical-modeling-profile",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "MEMO medical modeling profile package — closure rules, viewpoints, and starter templates on top of @memo/ontology",
-  "splitTarget": "memo-sysmlv2",
   "type": "module",
   "private": true,
   "scripts": {

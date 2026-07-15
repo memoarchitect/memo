@@ -9,7 +9,7 @@ is portable *content* consumable by any conformant SysML v2 tool — SysIDE, Sys
 [`sysand`](https://docs.sysand.org/).
 
 This repository contains **no TypeScript and no engine code**. The MEMO engine and CLI
-live in `memo-cli`; the web app lives in `memo-architect`. This is the first of the
+live in `memo-tools`; the web app lives in `memo-architect`. This is the first of the
 three phased-release repos (see ADR-1-17).
 
 ## Layout
@@ -22,19 +22,19 @@ stays at the repo root.
 ```
 .project.json                sysand project: the core ontology (memo-ontology)
 sysand-lock.toml             sysand lockfile
-packages/                    thin @memo/* package manifests (consumed as data deps by memo-cli)
-scripts/  manifest/          build scripts + version metadata
+packages/                    thin @memo/* package manifests (consumed as data deps by Memo Tools)
+scripts/  manifest/          reproducible build + version metadata
 src/                         ── all .sysml content (namespace = directory) ──
   medical_device_library.sysml   public import surface
   core/                          common/ enumerations/ relationships/
-  base/                          dimensions/ methodology/ rules/ semantics/ + stdlib/* (KerML wrapper)
+                                 dimensions/ semantics/ + stdlib/* (KerML wrapper)
   architecture/                  one folder per layer: context/ requirements/ functions/ behavior/
                                  logical_structure/ software_structure/ … risk/ cybersecurity/ assurance/ …
   compliance/                    artifacts/ change/ document_views/ postmarket/ iso14971/
-  viewpoints/  views/            core/ + default_viewpoints/ ; core/ + document_views/
+  viewpoints/                    reusable viewpoint and view definitions
   rules/                         closure/ coverage/ crosslayer/ lifecycle/ quantitative/ (native constraint defs)
   artifacts/                     artifact kinds (memo::artifacts)
-  methodology/                   nested sysand project: memo/ (default) + gpca/ (memo-methodology-default)
+  methodology/                   default methodology (nested sysand project)
   examples/gpca-pump/            reference model — pure .sysml
 ```
 

@@ -1,5 +1,16 @@
 # Impact Note
 
+## Release 0.4.3
+This patch removes unused repository-only formatting code and aligns release
+metadata. Ontology content and public semantics are unchanged.
+
+### Expected impact
+- All `0.4.x` Memo products remain compatible.
+- Package consumers may update compatible patch constraints to `^0.4.3`.
+
+### Breaking-change assessment
+- No breaking changes are expected.
+
 ## Release 0.4.2
 This patch updates repository metadata only.
 

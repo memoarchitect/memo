@@ -5,7 +5,7 @@ version = "0.2"
 
 [[project]]
 name = "memo-ontology"
-version = "0.4.2"
+version = "0.4.3"
 checksum = ""
 
   [[project.usage]]
@@ -19,7 +19,7 @@ checksum = ""
 
 [[project]]
 name = "memo-methodology-default"
-version = "0.4.2"
+version = "0.4.3"
 checksum = ""
 
   [[project.usage]]
