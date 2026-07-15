@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_functional_function_allocation_view 
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaFunctionAllocationView : DiagramView {
+    view gpcaFunctionAllocationView : DiagramView {
         attribute :>> id = "VIEW-FUN-102";
         attribute :>> name = "GPCA_FunctionAllocationView";
         attribute :>> title = "GPCA Function Allocation View";

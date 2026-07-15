@@ -8,7 +8,7 @@ package memo_examples_gpca_pump_model_views_document_dhf_index_view {
     private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    part dhfIndexView : DocumentView {
+    view dhfIndexView : DocumentView {
         attribute :>> id = "DOC-007";
         attribute :>> name = "DesignHistoryFileIndexView";
         attribute :>> title = "GPCA Design History File Index View";

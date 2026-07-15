@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_software_software_architecture_view 
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaSoftwareArchitectureView : DiagramView {
+    view gpcaSoftwareArchitectureView : DiagramView {
         attribute :>> id = "VIEW-SW-101";
         attribute :>> name = "GPCA_SoftwareArchitectureView";
         attribute :>> title = "GPCA Software Architecture View";

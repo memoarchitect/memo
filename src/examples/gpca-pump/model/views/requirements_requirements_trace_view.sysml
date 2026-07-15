@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_requirements_requirements_trace_view
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    part gpcaRequirementsTraceView : DiagramView {
+    view gpcaRequirementsTraceView : DiagramView {
         attribute :>> id = "VIEW-REQ-101";
         attribute :>> name = "GPCA_RequirementsTraceabilityView";
         attribute :>> title = "GPCA Requirements Traceability View";
