@@ -5,7 +5,9 @@ package memo_viewpoints_context_system_context_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_context_context_viewpoint::*;
 
-                part systemContextView : DiagramView {
+                view systemContextView : MemoDiagramView {
+                    expose memo_viewpoints_context_system_context_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-CTX-001";
     attribute :>> name = "SystemContextView";
     attribute :>> title = "System Context View";

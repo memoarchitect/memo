@@ -11,12 +11,11 @@ package memo_examples_gpca_pump_model_views_logical_logical_architecture_view {
     private import memo_viewpoints_requirements_requirements_viewpoint::*;
     private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    view gpcaLogicalArchitectureView : DiagramView {
+    view gpcaLogicalArchitectureView : MemoDiagramView {
+        expose memo_examples_gpca_pump_model_views_logical_logical_architecture_view::*;
+        attribute depth = 2;
         attribute :>> id = "VIEW-LOG-001";
         attribute :>> name = "GPCA_LogicalArchitectureView";
         attribute :>> title = "GPCA Logical Architecture View";

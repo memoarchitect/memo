@@ -2,15 +2,13 @@ package memo_examples_gpca_pump_model_views_document_cyber_assessment_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
-    private import memo_viewpoints_usability_usability_engineering_view::*;
     private import memo_core_enumerations::*;
 
-    part cyberAssessmentView : CybersecurityAssessmentView {
+    view cyberAssessmentView : MemoCybersecurityAssessmentView {
+        expose memo_examples_gpca_pump_model_views_document_cyber_assessment_view::*;
         attribute :>> id = "DOC-003";
-        attribute :>> name = "GPCACybersecurityAssessmentView";
+        attribute :>> name = "GPCAMemoCybersecurityAssessmentView";
         attribute :>> title = "GPCA Cybersecurity Assessment View";
         attribute :>> shortDescription = "Cybersecurity risk-assessment-oriented document view for GPCA.";
         attribute :>> longDescription = "Captures GPCA cyber risks, mitigations, security requirements, verification, and safety/privacy traceability for cybersecurity assessment records.";

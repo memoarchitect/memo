@@ -5,7 +5,9 @@ package memo_viewpoints_operational_use_case_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_operational_operational_viewpoint::*;
 
-                part useCaseView : DiagramView {
+                view useCaseView : MemoDiagramView {
+                    expose memo_viewpoints_operational_use_case_view::*;
+                    attribute depth = 2;
     attribute :>> id = "VIEW-OPS-001";
     attribute :>> name = "UseCaseView";
     attribute :>> title = "Use Case Overview";

@@ -11,12 +11,11 @@ package memo_examples_gpca_pump_model_views_software_software_architecture_view 
     private import memo_viewpoints_requirements_requirements_viewpoint::*;
     private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_threat_model_view::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
     private import memo_core_enumerations::*;
 
-    view gpcaSoftwareArchitectureView : DiagramView {
+    view gpcaSoftwareArchitectureView : MemoDiagramView {
+        expose memo_examples_gpca_pump_model_views_software_software_architecture_view::*;
+        attribute depth = 2;
         attribute :>> id = "VIEW-SW-101";
         attribute :>> name = "GPCA_SoftwareArchitectureView";
         attribute :>> title = "GPCA Software Architecture View";
