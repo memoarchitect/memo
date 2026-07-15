@@ -2,12 +2,12 @@
 // Multi-valued attributes collapsed to scalar pending grammar extension (ADR-1-15).
 // Bare imports (no `private`) per ADR-1-16 fallback.
 // Instances use repeated scalar attribute usages to enumerate set entries
-// (see ADR-1-15 example: `attribute includedArchLayer = "operational";`).
+// (see ADR-1-15 example: `attribute :>> includedArchLayer = "operational";`).
 package memo_core_methodology_scope {
     private import ScalarValues::*;
 
-    import memo_core_common::*;
-    import memo_core_dimensions::*;
+    private import memo_core_common::*;
+    private import memo_core_dimensions::*;
 
     part def MethodologyLayerSet specializes TraceableElement {
         attribute setName : String;

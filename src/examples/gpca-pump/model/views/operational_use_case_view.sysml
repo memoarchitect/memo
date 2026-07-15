@@ -17,27 +17,27 @@ package memo_examples_gpca_pump_model_views_operational_use_case_view {
     private import memo_core_enumerations::*;
 
     part gpcaUseCaseView : DiagramView {
-        attribute id = "VIEW-OPS-101";
-        attribute name = "GPCA_UseCaseView";
-        attribute title = "GPCA Use Case View";
-        attribute shortDescription = "Actors connected to the therapy lifecycle activities and scenarios.";
-        attribute longDescription = "Connects patient, nurse, prescriber, pharmacist, and technician to the operational activities (prescribe, load, program, start, bolus, alarm response, log review, maintain) and their scenarios.";
-        attribute outputKind = (ViewOutputKind::diagram);
-        attribute presentationKind = (PresentationKind::custom);
-        attribute viewKind = DiagramViewKind::general;
-        attribute diagramType = "ucd";
-        attribute dataSourceDescription = "GPCA operational activities, scenarios, and context actors";
-        attribute autoPopulate = true;
-        attribute queryDescription = "Include actors, operational activities, scenarios, and capabilities.";
-        attribute documentUsage = ("Usability Engineering File", "Architecture Description");
-        part selectionQuery {
-            attribute id = "QRY-OPS-101";
-            attribute name = "GPCA_UseCaseQuery";
-            attribute includeElementKinds = ("Actor", "OperationalActivity", "OperationalScenario", "OperationalCapability");
-            attribute includeRelationshipKinds = ("InteractsWith", "SequencesStep", "ContributesToCapability");
-            attribute includeLayers = ("context", "operational");
-            attribute selectionExpression = "product == 'GPCA'";
-            attribute rationaleText = "Auto-populate the GPCA use case view from the operational layer.";
+        attribute :>> id = "VIEW-OPS-101";
+        attribute :>> name = "GPCA_UseCaseView";
+        attribute :>> title = "GPCA Use Case View";
+        attribute :>> shortDescription = "Actors connected to the therapy lifecycle activities and scenarios.";
+        attribute :>> longDescription = "Connects patient, nurse, prescriber, pharmacist, and technician to the operational activities (prescribe, load, program, start, bolus, alarm response, log review, maintain) and their scenarios.";
+        attribute :>> outputKind = (ViewOutputKind::diagram);
+        attribute :>> presentationKind = (PresentationKind::custom);
+        attribute :>> viewKind = DiagramViewKind::general;
+        attribute :>> diagramType = "ucd";
+        attribute :>> dataSourceDescription = "GPCA operational activities, scenarios, and context actors";
+        attribute :>> autoPopulate = true;
+        attribute :>> queryDescription = "Include actors, operational activities, scenarios, and capabilities.";
+        attribute :>> documentUsage = ("Usability Engineering File", "Architecture Description");
+        part :>> selectionQuery {
+            attribute :>> id = "QRY-OPS-101";
+            attribute :>> name = "GPCA_UseCaseQuery";
+            attribute :>> includeElementKinds = ("Actor", "OperationalActivity", "OperationalScenario", "OperationalCapability");
+            attribute :>> includeRelationshipKinds = ("InteractsWith", "SequencesStep", "ContributesToCapability");
+            attribute :>> includeLayers = ("context", "operational");
+            attribute :>> selectionExpression = "product == 'GPCA'";
+            attribute :>> rationaleText = "Auto-populate the GPCA use case view from the operational layer.";
         }
         part :>> viewpointDefinition = operationalViewpoint;
     }

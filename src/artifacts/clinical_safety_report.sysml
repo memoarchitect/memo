@@ -5,8 +5,8 @@ package memo_artifacts_clinical_safety_report {
             private import memo_core_enumerations::*;
 
             part def ClinicalSafetyReport specializes ArtifactKindDef {
-    attribute documentTitle = "Clinical Safety Report";
-    attribute regulatoryRef = "ISO 14971:2019 §10";
-    attribute artifactKind = ArtifactKind::clinicalSafetyReport;
+    attribute :>> documentTitle = "Clinical Safety Report";
+    attribute :>> regulatoryRef = "ISO 14971:2019 §10";
+    attribute :>> artifactKind = ArtifactKind::clinicalSafetyReport;
             }
 }

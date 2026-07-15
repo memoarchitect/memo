@@ -15,8 +15,8 @@
 package memo_rules_coverage {
     private import ScalarValues::*;
 
-    import memo_core_consistency_rules::*;
-    import memo_core_enumerations::*;
+    private import memo_core_consistency_rules::*;
+    private import memo_core_enumerations::*;
 
     // ─── ISO 14971: Risk Management ──────────────────────────────────────
 
