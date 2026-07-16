@@ -14,8 +14,8 @@ engine and CLI live in `memo-tools`; the web app lives in `memo-architect`.
 ## Documentation
 
 Start with the [user guide](docs/index.md) to learn MEMO's layer model, choose
-elements and relationships, and follow the GPCA pump example. The source layout
-and maintainer workflow come last. Build the site with:
+elements and relationships, and follow the GPCA pump example. The reference
+section describes packages, source layout, and maintenance. Build the site with:
 
 ```bash
 python3 -m pip install "mkdocs>=1.6" "mkdocs-material>=9.5" "pymdown-extensions>=10.0"
@@ -24,8 +24,8 @@ pnpm run docs:build
 
 ## Layout
 
-The package exposes four logical MEMO packages through `memo.manifest.yaml`. Existing
-project `extends:` values remain unchanged; the manifest maps them to package subpaths.
+The package exposes four logical MEMO packages through `memo.manifest.yaml`.
+The manifest maps package identifiers to package subpaths.
 
 ```
 memo.manifest.yaml           logical package, init, and example map
