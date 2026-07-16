@@ -1,8 +1,5 @@
 # Source and Maintenance
 
-This section is intentionally last. Users should first understand how to build
-an engineering argument with MEMO.
-
 The repository is the portable content layer of the MEMO stack. It contains
 SysML v2 and KerML source, package descriptors, templates, methodologies, rules,
 and examples. The parser and CLI live in Memo Tools; the visual workbench lives
@@ -27,6 +24,6 @@ When adding a public element or relationship:
 2. show a minimal valid usage;
 3. state source and target direction for relationships;
 4. add it to a worked scenario where practical;
-5. place implementation details after usage guidance.
+5. identify the owning package and validation coverage.
 
 See the repository `README.md` for package layout and maintainer commands.
