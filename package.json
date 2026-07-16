@@ -1,6 +1,6 @@
 {
   "name": "@memo/ontology",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "packageManager": "pnpm@9.15.0",
   "description": "MEMO — Medical Engineering Modelling Ontology. Pure SysML v2 medical-device ontology with native constraints, portable to any conformant SysML v2 tool (SysIDE, SysON, sysand).",
   "scripts": {
@@ -21,7 +21,25 @@
     "mbse"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memoarchitect/memo.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./manifest": "./memo.manifest.yaml",
+    "./src/*": "./src/*",
+    "./profile/*": "./profile/*",
+    "./methodologies/*": "./methodologies/*",
+    "./templates/*": "./template/*",
+    "./examples/*": "./examples/*"
+  },
   "files": [
+    "README.md",
+    "LICENSE",
     "memo.manifest.yaml",
     "ontology/memo.package.yaml",
     "ontology/memo.rendering.yaml",
