@@ -15,3 +15,8 @@ sysand_env/
 
 # OS
 .DS_Store
+
+# Documentation builds
+site/
+public/
+_site/
