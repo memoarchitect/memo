@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - publish
+  - docs
 
 # sysand is distributed on PyPI (https://pypi.org/project/sysand/) — the same
 # external, conformant SysML v2 / KerML tool used locally. Pin it so the
@@ -83,3 +84,15 @@ publish:
           --upload-file "$kpar" \
           "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/memo-sysmlv2/${VERSION}/${fname}"
       done
+
+pages:
+  stage: docs
+  image: python:3.12-slim
+  script:
+    - pip install --quiet "mkdocs>=1.6" "mkdocs-material>=9.5" "pymdown-extensions>=10.0"
+    - mkdocs build --strict --site-dir public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

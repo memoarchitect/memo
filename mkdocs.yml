@@ -1,0 +1,79 @@
+site_name: MEMO Ontology
+site_description: A user guide to modeling medical devices with the MEMO SysML v2 ontology
+site_author: memoarchitect
+repo_url: https://github.com/memoarchitect/memo
+repo_name: memoarchitect/memo
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Use dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Use light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+    - search.suggest
+  icon:
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+
+plugins:
+  - search
+
+docs_dir: docs
+site_dir: site
+
+nav:
+  - Start Here:
+      - Welcome: index.md
+      - The MEMO Mental Model: start/mental-model.md
+      - Your First Model: start/first-model.md
+  - Model by Layer:
+      - Layer Map: layers/index.md
+      - Context and Use: layers/context.md
+      - Operations and System Analysis: layers/operations-system.md
+      - Requirements and Architecture: layers/requirements-architecture.md
+      - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
+  - Connect the Model:
+      - Elements: modeling/elements.md
+      - Relationships: modeling/relationships.md
+      - Views and Evidence: modeling/views-evidence.md
+  - Learn by Example:
+      - GPCA Pump Walkthrough: examples/gpca-walkthrough.md
+  - Reference:
+      - Packages and Imports: reference/packages.md
+      - Source and Maintenance: reference/implementation.md
