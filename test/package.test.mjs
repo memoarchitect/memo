@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
@@ -35,6 +36,15 @@ test('logical package descriptors contain folded usage and no .project.json', ()
 test('published content contains no SysAnd project descriptors', () => {
   assert.equal(existsSync(join(root, '.project.json')), false);
   assert.equal(existsSync(join(root, 'src', 'methodology', '.project.json')), false);
+});
+
+test('repository contains one npm package identity', () => {
+  for (const nested of [
+    'ontology/package.json',
+    'profile/package.json',
+    'methodologies/default/package.json',
+    'methodologies/gpca/package.json',
+  ]) assert.equal(existsSync(join(root, nested)), false, `${nested} must remain an internal directory`);
 });
 
 test('legacy workspace paths resolve to the consolidated logical directories', () => {
@@ -84,6 +94,7 @@ test('npm pack includes all content and no JavaScript', () => {
   const [pack] = JSON.parse(execFileSync('npm', ['pack', '--dry-run', '--json'], {
     cwd: root,
     encoding: 'utf8',
+    env: { ...process.env, npm_config_cache: join(tmpdir(), 'memo-ontology-npm-cache') },
   }));
   const files = pack.files.map(({ path }) => path);
   for (const expected of [
