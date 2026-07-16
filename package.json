@@ -6,7 +6,9 @@
   "scripts": {
     "build": "bash scripts/build-kpar.sh",
     "check": "bash scripts/build-kpar.sh",
-    "test": "node --test test/package.test.mjs"
+    "test": "node --test test/package.test.mjs",
+    "docs:serve": "python3 -m mkdocs serve",
+    "docs:build": "python3 -m mkdocs build --strict"
   },
   "engines": {
     "node": ">=20"

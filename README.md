@@ -11,6 +11,17 @@ is portable *content* consumable by any conformant SysML v2 tool — SysIDE, Sys
 The published package contains **no JavaScript, TypeScript, or engine code**. The MEMO
 engine and CLI live in `memo-tools`; the web app lives in `memo-architect`.
 
+## Documentation
+
+Start with the [user guide](docs/index.md) to learn MEMO's layer model, choose
+elements and relationships, and follow the GPCA pump example. The source layout
+and maintainer workflow come last. Build the site with:
+
+```bash
+python3 -m pip install "mkdocs>=1.6" "mkdocs-material>=9.5" "pymdown-extensions>=10.0"
+pnpm run docs:build
+```
+
 ## Layout
 
 The package exposes four logical MEMO packages through `memo.manifest.yaml`. Existing
