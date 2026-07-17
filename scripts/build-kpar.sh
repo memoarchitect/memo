@@ -68,6 +68,11 @@ PY
     cp "$dir/$source" "$staging/$source"
   done <"$files_file"
 
+  # SysAnd resolves the project license from LICENSES/<SPDX-ID>.txt relative
+  # to .project.json, so stage the repository's MIT license with the sources.
+  mkdir -p "$staging/LICENSES"
+  cp "$dir/LICENSES/MIT.txt" "$staging/LICENSES/MIT.txt"
+
   version="$(node -p "require('$REPO_ROOT/package.json').version")"
   printf '{\n  "name": "%s",\n  "version": "%s",\n  "license": "MIT",\n  "usage": %s\n}\n' \
     "$project_name" "$version" "$project_usage" >"$staging/.project.json"

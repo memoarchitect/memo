@@ -1,4 +1,4 @@
-# @memo/ontology
+# @memoarchitect/ontology
 
 **MEMO — Medical Engineering Modelling Ontology** — the pure SysML v2 content layer.
 
@@ -29,10 +29,10 @@ The manifest maps package identifiers to package subpaths.
 
 ```
 memo.manifest.yaml           logical package, init, and example map
-ontology/                    @memo/ontology descriptor
-profile/                     @memo/medical-modeling-profile + archetypes/templates
-methodologies/default/       @memo/methodology-default descriptor
-methodologies/gpca/          @memo/methodology-gpca descriptor
+ontology/                    @memoarchitect/ontology descriptor
+profile/                     @memoarchitect/medical-modeling-profile + archetypes/templates
+methodologies/default/       @memoarchitect/methodology-default descriptor
+methodologies/gpca/          @memoarchitect/methodology-gpca descriptor
 template/                    complete starter project copied by memo init
 examples/gpca-pump/          reference model (not a scaffold template)
 src/                         all reusable .sysml content (namespace = directory)
@@ -62,7 +62,7 @@ build products are not included in the npm package.
 
 ```bash
 pnpm test             # manifest/layout tests + npm pack content gate
-npm pack              # produces the single @memo/ontology content tarball
+npm pack              # produces the single @memoarchitect/ontology content tarball
 ```
 
 ## License

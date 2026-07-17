@@ -1,4 +1,4 @@
-name: "@memo/ontology"
+name: "@memoarchitect/ontology"
 version: "0.4.3"
 type: ontology
 description: "MEMO — the single canonical medical-device ontology: core semantics, the Arcadia-inspired architecture layers (context, requirements, behavior, structure, interfaces, risk, cybersecurity, assurance, …), compliance, viewpoints, views, and invariant rules. One namespace (memo::), one src/ tree."
