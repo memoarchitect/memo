@@ -50,21 +50,19 @@ test('repository contains one npm package identity', () => {
   ]) assert.equal(existsSync(join(root, nested)), false, `${nested} must remain an internal directory`);
 });
 
-test('legacy workspace paths resolve to the consolidated logical directories', () => {
-  for (const [legacy, current] of [
-    ['ontology', 'ontology'],
-    ['medical-modeling-profile', 'profile'],
-    ['methodology-default', 'methodologies/default'],
-    ['methodology-gpca', 'methodologies/gpca'],
-  ]) {
-    assert.equal(read('packages', legacy, 'memo.package.yaml'), read(current, 'memo.package.yaml'));
+test('legacy names are aliases, not directories: no packages/ mirror, canonical descriptors', () => {
+  // The pre-consolidation packages/ mirror is retired; the tools resolve
+  // legacy @memo/* references through the manifest's @memoarchitect/* entries.
+  assert.equal(existsSync(join(root, 'packages')), false);
+  for (const pkg of ['ontology', 'profile', 'methodologies/default', 'methodologies/gpca']) {
+    assert.match(read(pkg, 'memo.package.yaml'), /^name: "@memoarchitect\//m);
+    assert.doesNotMatch(read(pkg, 'memo.package.yaml'), /"@memo\//);
   }
-  assert.equal(read('packages', 'src', 'medical_device_library.sysml'), read('src', 'medical_device_library.sysml'));
 });
 
 test('template is a complete source project and preserves the public import surface', () => {
   assert.match(read('template', 'memo.package.yaml'), /name: "{{name}}"/);
-  assert.match(read('template', 'memo.package.yaml'), /extends: "@memo\/medical-modeling-profile"/);
+  assert.match(read('template', 'memo.package.yaml'), /extends: "@memoarchitect\/medical-modeling-profile"/);
   assert.match(read('template', 'src', 'catalog', 'starter.sysml'), /import memo_medical_device_library::\*/);
   assert.equal(existsSync(join(root, 'template', 'src', 'views', '.gitkeep')), true);
   assert.equal(existsSync(join(root, 'template', 'src', 'documents', '.gitkeep')), true);
