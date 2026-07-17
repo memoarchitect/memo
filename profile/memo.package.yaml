@@ -1,5 +1,5 @@
 name: "@memoarchitect/medical-modeling-profile"
-version: "0.4.3"
+version: "0.4.6"
 type: profile
 extends:
   - "@memoarchitect/ontology"

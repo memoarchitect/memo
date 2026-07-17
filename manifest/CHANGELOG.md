@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.6 - 2026-07-16
+Aligned every logical ontology and methodology descriptor with the published npm
+package version and added a package test that prevents future version drift.
+
+- Aligned ontology, profile, methodology, example, and SysAnd lock metadata.
+- No ontology kinds, public SysML names, or model behavior changed.
+
 ## 0.4.3 - 2026-07-14
 Removed an unused ad-hoc SysML formatter and aligned every package manifest with
 the canonical release version.
