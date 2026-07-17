@@ -4,16 +4,16 @@ The manifest exposes four logical packages:
 
 | Package | Purpose |
 |---|---|
-| `@memo/ontology` | Core reusable element, relationship, rule, and viewpoint definitions |
-| `@memo/medical-modeling-profile` | Medical-device profile, templates, and archetypes |
-| `@memo/methodology-default` | Default workflow and methodology content |
-| `@memo/methodology-gpca` | GPCA example-specific methodology content |
+| `@memoarchitect/ontology` | Core reusable element, relationship, rule, and viewpoint definitions |
+| `@memoarchitect/medical-modeling-profile` | Medical-device profile, templates, and archetypes |
+| `@memoarchitect/methodology-default` | Default workflow and methodology content |
+| `@memoarchitect/methodology-gpca` | GPCA example-specific methodology content |
 
-Most device projects should extend `@memo/medical-modeling-profile` and import
+Most device projects should extend `@memoarchitect/medical-modeling-profile` and import
 the public library:
 
 ```yaml
-extends: "@memo/medical-modeling-profile"
+extends: "@memoarchitect/medical-modeling-profile"
 ```
 
 ```sysml
