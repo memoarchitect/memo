@@ -11,6 +11,20 @@ is portable *content* consumable by any conformant SysML v2 tool — SysIDE, Sys
 The published package contains **no JavaScript, TypeScript, or engine code**. The MEMO
 engine and CLI live in `memo-tools`; the web app lives in `memo-architect`.
 
+## Current package state
+
+`@memoarchitect/ontology` is an independently installable npm package. Consumers
+pin an exact release; the package has no repository or runtime dependency on Memo
+Tools or Memo Architect.
+
+```bash
+pnpm add @memoarchitect/ontology@0.4.4
+```
+
+For coordinated development, the private `memo-meta` workspace checks out
+Ontology, Tools, and Architect as sibling repositories and links this package
+into its dependants with meta-only pnpm overrides.
+
 ## Documentation
 
 Start with the [user guide](docs/index.md) to learn MEMO's layer model, choose
