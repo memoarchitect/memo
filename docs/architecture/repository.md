@@ -33,9 +33,9 @@ memo/
 
 The manifest is the only contract published code relies on: tools resolve
 logical package names through it, never through a directory convention.
-Content shipped before the scope rename used `@memo/*` names; the tools
-treat those as aliases for the `@memoarchitect/*` manifest entries, so old
-`extends:` values and lock files keep resolving without migration.
+Until 1.0 the content is experimental: names and structure may change
+between releases without migration support, and lock files pin the exact
+version a project was built against.
 
 ## The manifest
 
