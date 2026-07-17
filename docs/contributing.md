@@ -17,7 +17,7 @@ pnpm test          # package-shape and content tests
 pnpm run build     # parses and packages the ontology with SysAnd
 ```
 
-Use Node.js 20 or later and pnpm 9 or later.
+Use Node.js 22 or later and pnpm 9 or later.
 
 ## Where a change belongs
 
