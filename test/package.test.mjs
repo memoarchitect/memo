@@ -50,9 +50,10 @@ test('repository contains one npm package identity', () => {
   ]) assert.equal(existsSync(join(root, nested)), false, `${nested} must remain an internal directory`);
 });
 
-test('legacy names are aliases, not directories: no packages/ mirror, canonical descriptors', () => {
-  // The pre-consolidation packages/ mirror is retired; the tools resolve
-  // legacy @memo/* references through the manifest's @memoarchitect/* entries.
+test('content uses canonical @memoarchitect names and no packages/ mirror exists', () => {
+  // Pre-1.0 policy: no legacy-name compatibility. The pre-consolidation
+  // packages/ mirror and @memo/* names are gone; the manifest is the only
+  // resolution contract.
   assert.equal(existsSync(join(root, 'packages')), false);
   for (const pkg of ['ontology', 'profile', 'methodologies/default', 'methodologies/gpca']) {
     assert.match(read(pkg, 'memo.package.yaml'), /^name: "@memoarchitect\//m);
