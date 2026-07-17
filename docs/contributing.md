@@ -17,7 +17,7 @@ pnpm test          # package-shape and content tests
 pnpm run build     # parses and packages the ontology with SysAnd
 ```
 
-Use Node.js 22 or later and pnpm 9 or later.
+Use Node.js 26 or later and pnpm 9 or later.
 
 ## Where a change belongs
 
@@ -57,14 +57,14 @@ Every public element or relationship must be documented with:
 Undocumented vocabulary is treated as unfinished: reviewers cannot apply an
 element whose intent is not stated.
 
-## Compatibility expectations
+## Compatibility expectations (pre-1.0)
 
-- Existing user project files — `memo.package.yaml` `extends:` values and the
-  lock format — keep working without migration.
-- Renaming or removing a public type or relationship, or tightening a
-  constraint so previously valid models become invalid, is a **breaking**
-  change and needs a major version.
-- Additive vocabulary is a minor version.
+MEMO is experimental until 1.0. Any release may rename types, change
+relationships, tighten constraints, or restructure content without
+migration support — projects pin the exact ontology version they were
+built against (`memo.lock.yaml` records it). 1.0 is the baseline: from
+there, breaking content changes require a major version and additive
+vocabulary a minor version.
 
 ## Propose the change
 
