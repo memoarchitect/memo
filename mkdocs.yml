@@ -6,6 +6,9 @@ repo_name: memoarchitect/memo
 
 theme:
   name: material
+  font:
+    text: Nunito
+    code: JetBrains Mono
   palette:
     - scheme: default
       primary: custom
@@ -76,4 +79,8 @@ nav:
       - GPCA Pump Walkthrough: examples/gpca-walkthrough.md
   - Reference:
       - Packages and Imports: reference/packages.md
-      - Source and Maintenance: reference/implementation.md
+  - Architecture:
+      - Where This Repository Fits: architecture/index.md
+      - "The memo:: Namespace": architecture/namespace.md
+      - Repository and Packaging: architecture/repository.md
+  - Contributing: contributing.md
