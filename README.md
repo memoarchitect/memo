@@ -18,7 +18,7 @@ pin an exact release; the package has no repository or runtime dependency on Mem
 Tools or Memo Architect.
 
 ```bash
-pnpm add @memoarchitect/ontology@0.4.5
+pnpm add @memoarchitect/ontology@0.4.6
 ```
 
 For coordinated development, the private `memo-meta` workspace checks out

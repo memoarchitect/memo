@@ -1,7 +1,7 @@
 # Package Version
 
 - Package: Medical Device SysML v2 Package
-- Version: **0.4.3**
+- Version: **0.4.6**
 - Release type: repository hygiene and metadata alignment (patch)
 - Release date: 2026-07-14
 

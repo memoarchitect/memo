@@ -8,6 +8,7 @@ import test from 'node:test';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const read = (...parts) => readFileSync(join(root, ...parts), 'utf8');
+const packageVersion = JSON.parse(read('package.json')).version;
 
 test('manifest declares the four logical packages and content-owned init values', () => {
   const manifest = read('memo.manifest.yaml');
@@ -28,7 +29,9 @@ test('manifest declares the four logical packages and content-owned init values'
 test('logical package descriptors contain folded usage and no .project.json', () => {
   const packages = ['ontology', 'profile', 'methodologies/default', 'methodologies/gpca'];
   for (const pkg of packages) {
-    assert.match(read(pkg, 'memo.package.yaml'), /^usage:/m);
+    const descriptor = read(pkg, 'memo.package.yaml');
+    assert.match(descriptor, /^usage:/m);
+    assert.match(descriptor, new RegExp(`^version: ["']${packageVersion}["']$`, 'm'));
     assert.equal(existsSync(join(root, pkg, '.project.json')), false);
   }
 });
