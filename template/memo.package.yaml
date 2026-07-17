@@ -1,5 +1,5 @@
 name: "{{name}}"
 version: "0.1.0"
 type: device
-extends: "@memo/medical-modeling-profile"
+extends: "@memoarchitect/medical-modeling-profile"
 description: "MEMO medical device model project"
