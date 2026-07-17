@@ -1,11 +1,11 @@
 manifest: 1
 packages:
-  "@memo/ontology": ./ontology
-  "@memo/medical-modeling-profile": ./profile
-  "@memo/methodology-default": ./methodologies/default
-  "@memo/methodology-gpca": ./methodologies/gpca
+  "@memoarchitect/ontology": ./ontology
+  "@memoarchitect/medical-modeling-profile": ./profile
+  "@memoarchitect/methodology-default": ./methodologies/default
+  "@memoarchitect/methodology-gpca": ./methodologies/gpca
 init:
-  defaultExtends: "@memo/medical-modeling-profile"
+  defaultExtends: "@memoarchitect/medical-modeling-profile"
   rootImport: "memo_medical_device_library"
   template: ./template
   archetypes: ./profile/archetypes.yaml

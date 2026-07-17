@@ -13,11 +13,11 @@ test('manifest declares the four logical packages and content-owned init values'
   const manifest = read('memo.manifest.yaml');
   for (const expected of [
     'manifest: 1',
-    '"@memo/ontology": ./ontology',
-    '"@memo/medical-modeling-profile": ./profile',
-    '"@memo/methodology-default": ./methodologies/default',
-    '"@memo/methodology-gpca": ./methodologies/gpca',
-    'defaultExtends: "@memo/medical-modeling-profile"',
+    '"@memoarchitect/ontology": ./ontology',
+    '"@memoarchitect/medical-modeling-profile": ./profile',
+    '"@memoarchitect/methodology-default": ./methodologies/default',
+    '"@memoarchitect/methodology-gpca": ./methodologies/gpca',
+    'defaultExtends: "@memoarchitect/medical-modeling-profile"',
     'rootImport: "memo_medical_device_library"',
     'template: ./template',
     'archetypes: ./profile/archetypes.yaml',
