@@ -31,13 +31,11 @@ memo/
     └── gpca-pump/         # the reference model — teaching material, not a scaffold
 ```
 
-A `packages/` directory also exists at the root: it mirrors the logical
-packages under their pre-consolidation names (`packages/medical-modeling-profile`,
-`packages/methodology-default`, …) so that legacy `@memo/*` `extends:` values
-and vendor-submodule checkouts keep resolving. The test suite asserts the
-mirror stays byte-identical to the canonical directories. For anything new,
-the manifest is the contract — resolve logical names through it, not through
-a directory convention.
+The manifest is the only contract published code relies on: tools resolve
+logical package names through it, never through a directory convention.
+Content shipped before the scope rename used `@memo/*` names; the tools
+treat those as aliases for the `@memoarchitect/*` manifest entries, so old
+`extends:` values and lock files keep resolving without migration.
 
 ## The manifest
 
