@@ -11,7 +11,7 @@
     "docs:build": "python3 -m mkdocs build --strict"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.0.0"
   },
   "keywords": [
     "sysml-v2",
