@@ -1,5 +1,16 @@
 # Impact Note
 
+## Release 0.4.6
+This patch aligns all content-owned release metadata with the npm package and
+adds an automated consistency gate.
+
+### Expected impact
+- New projects lock Ontology and the medical modeling profile to `0.4.6`.
+- Existing `0.4.x` models remain compatible.
+
+### Breaking-change assessment
+- No breaking changes are expected.
+
 ## Release 0.4.3
 This patch removes unused repository-only formatting code and aligns release
 metadata. Ontology content and public semantics are unchanged.
