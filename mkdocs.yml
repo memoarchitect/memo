@@ -48,6 +48,9 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.superfences:
       custom_fences:
+        - name: sysml
+          class: sysml
+          format: !!python/name:sysml_highlight.sysml_fence_format
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
@@ -62,25 +65,28 @@ site_dir: site
 
 nav:
   - Start Here:
-      - Welcome: index.md
+      - What MEMO Ontology Is: index.md
       - The MEMO Mental Model: start/mental-model.md
-      - Your First Model: start/first-model.md
-  - Model by Layer:
+  - Tutorials:
+      - Set up MEMO in your model: tutorials/setup.md
+      - "First Model: Temperature Alarm": tutorials/first-model.md
+      - GPCA Pump Walkthrough: examples/gpca-walkthrough.md
+  - Use the Ontology:
       - Layer Map: layers/index.md
       - Context and Use: layers/context.md
       - Operations and System Analysis: layers/operations-system.md
       - Requirements and Architecture: layers/requirements-architecture.md
       - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
-  - Connect the Model:
+  - Build Connected Evidence:
       - Elements: modeling/elements.md
       - Relationships: modeling/relationships.md
       - Views and Evidence: modeling/views-evidence.md
-  - Learn by Example:
-      - GPCA Pump Walkthrough: examples/gpca-walkthrough.md
   - Reference:
       - Packages and Imports: reference/packages.md
-  - Architecture:
-      - Where This Repository Fits: architecture/index.md
+  - Concepts and Design:
+      - Product Boundary: architecture/index.md
       - "The memo:: Namespace": architecture/namespace.md
       - Repository and Packaging: architecture/repository.md
-  - Contributing: contributing.md
+      - Architecture Layers and Connections: architecture/layers.md
+  - Contribute:
+      - Contributing: contributing.md
