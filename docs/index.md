@@ -1,38 +1,87 @@
-# Model the device as a connected engineering argument
+<div class="memo-hero" markdown>
 
-MEMO is a SysML v2 vocabulary for medical-device engineering. It gives teams
-shared names for needs, requirements, functions, components, hazards, controls,
-tests, evidence, and the relationships between them.
+<p class="memo-kicker">Medical Engineering Modeling Ontology</p>
 
-The important idea is simple:
+# Make the engineering argument visible
 
-> A model is useful when a reviewer can follow why the device is needed, what it
-> must do, how the design responds, what could go wrong, and what evidence shows
-> the response is adequate.
+MEMO is a portable SysML v2 library for medical-device engineering. It gives a
+team a shared vocabulary for the device, its context, its risks, and the
+evidence used to review it.
 
-```mermaid
-flowchart LR
-    C[Context and users] --> O[Operational needs]
-    O --> R[Requirements]
-    R --> F[Functions and behavior]
-    F --> A[Logical, software, and physical architecture]
-    A --> V[Verification and evidence]
-    H[Hazards and threats] --> R
-    A --> H
-    H --> K[Controls]
-    K --> V
-```
+<p class="memo-hero-path"><span>Need</span><i>→</i><span>Requirement</span><i>→</i><span>Design</span><i>→</i><span>Risk control</span><i>→</i><span>Evidence</span></p>
+
+</div>
+
+## What MEMO provides
+
+<div class="memo-card-grid" markdown>
+
+<div class="memo-card memo-card-teal" markdown>
+
+### A shared vocabulary
+
+Element kinds make the difference between a need, a requirement, a function,
+a hazard, a control, and evidence explicit.
+
+</div>
+
+<div class="memo-card memo-card-blue" markdown>
+
+### Reviewable relationships
+
+Typed links record why one engineering claim leads to another, so a reviewer
+can follow a trace instead of reconstructing intent from files.
+
+</div>
+
+<div class="memo-card memo-card-purple" markdown>
+
+### A modeling method
+
+Layers, viewpoints, patterns, and workflow gates help a team choose the next
+useful slice of the model without creating a second source of truth.
+
+</div>
+
+</div>
 
 ## Choose where to begin
 
-| If you are… | Begin with… | You will learn… |
-|---|---|---|
-| New to MEMO | [The MEMO Mental Model](start/mental-model.md) | How layers, elements, and relationships work together |
-| Starting a model | [Your First Model](start/first-model.md) | A small but complete trace from need to evidence |
-| Mapping existing artifacts | [Layer Map](layers/index.md) | Where requirements, risks, architecture, and tests belong |
-| Looking for a type | [Elements](modeling/elements.md) | Which MEMO element expresses a given engineering idea |
-| Connecting records | [Relationships](modeling/relationships.md) | Which direction and semantic link to use |
-| Learning from a real model | [GPCA Pump Walkthrough](examples/gpca-walkthrough.md) | How the included example grows across layers |
+<div class="memo-start-grid" markdown>
+
+<a class="memo-start-card" href="start/mental-model/">
+<strong>01 · Understand the model</strong>
+<span>Learn how layers, elements, and relationships work together.</span>
+</a>
+
+<a class="memo-start-card" href="start/first-model/">
+<strong>02 · Model one complete slice</strong>
+<span>Build a small thread from need to evidence in SysML v2.</span>
+</a>
+
+<a class="memo-start-card" href="layers/">
+<strong>03 · Place existing material</strong>
+<span>Map requirements, risks, architecture, and tests to their right home.</span>
+</a>
+
+<a class="memo-start-card" href="examples/gpca-walkthrough/">
+<strong>04 · Learn from GPCA</strong>
+<span>Follow a real example across the connected layers.</span>
+</a>
+
+</div>
+
+## The modeling path
+
+Start small. Use the first-model tutorial to create one connected slice, then
+grow it only when the engineering question requires another layer:
+
+`context → need → requirement → design response → risk/control → verification evidence`
+
+This is a reading and modeling order, not a mandated lifecycle. A risk review
+may lead you back to the requirement; an implementation decision may expose a
+new need for evidence. The point is that each change stays connected and
+reviewable.
 
 !!! note "MEMO complements engineering judgment"
     The ontology helps structure claims and expose gaps. It does not decide
