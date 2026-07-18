@@ -1,36 +1,62 @@
 # Layer Map
 
-MEMO layers organize meaning, not folders or organizational ownership. A layer
-should tell a reader which question an element answers.
+MEMO layers organize **engineering questions**, not folders, departments, or a
+sequence that every project must follow. Use this map to place the information
+you already have, then follow one connected thread until it is ready for review.
 
-| Layer | Primary question | Typical elements | Useful output |
-|---|---|---|---|
-| Context | Who and what surrounds the device? | `Actor`, `IntendedUse`, `UseContext`, `UseError` | System-context view |
-| Operational | What work and outcomes matter? | `OperationalActivity`, `OperationalCapability`, `OperationalScenario` | Operational thread |
-| System analysis | What must the system accomplish? | `SystemCapability`, `FunctionalChain`, `SystemScenario` | Capability and functional-chain views |
-| Requirements | What must be true? | `StakeholderNeed`, `SystemRequirement`, `SoftwareRequirement`, `HardwareRequirement` | Requirement trace |
-| Functions and behavior | What transformations and states are needed? | `LogicalFunction`, `BehaviorMachine`, `ModeState`, `ActivityAction` | Functional flow, state, and action views |
-| Logical architecture | Which solution-independent responsibilities exist? | `LogicalComponent`, `Interface`, `ComponentExchange` | Logical architecture and interconnect |
-| Software and hardware | What implements the logical design? | `SoftwareItem`, `FirmwareItem`, `HardwareAssembly`, `ProcessingNode` | Software and physical architecture |
-| Risk and cybersecurity | What can lead to harm or compromise? | `Hazard`, `HazardousSituation`, `Threat`, `Vulnerability`, `RiskControl` | Risk chain, FMEA, threat model |
-| Assurance | What evidence supports the claims? | `VerificationCase`, `ValidationCase`, `TestArtifact`, `Evidence` | Coverage and evidence views |
+<div class="memo-layer-map" markdown>
 
-## A practical modeling order
+<a class="memo-layer-step layer-context" href="context/">
+<span class="memo-layer-number">01</span>
+<span class="memo-layer-copy"><strong>Start with clinical intent</strong><em>Who uses the device, for what purpose, and in which setting?</em></span>
+<span class="memo-layer-examples"><code>Actor</code> <code>IntendedUse</code> <code>UseContext</code></span>
+</a>
 
-For each important use scenario:
+<a class="memo-layer-step layer-operational" href="operations-system/">
+<span class="memo-layer-number">02</span>
+<span class="memo-layer-copy"><strong>Describe operation and system purpose</strong><em>What work, capability, and scenario must the device support?</em></span>
+<span class="memo-layer-examples"><code>OperationalActivity</code> <code>SystemCapability</code> <code>FunctionalChain</code></span>
+</a>
 
-```mermaid
-flowchart TD
-    A[Context: actor and use environment] --> B[Operation: activity and desired outcome]
-    B --> C[Requirement: measurable claim]
-    C --> D[Function: required transformation]
-    D --> E[Architecture: responsible component]
-    E --> F[Risk: failure, hazard, or threat]
-    F --> G[Control: design or process response]
-    C --> H[Assurance: verification case]
-    G --> H
-    H --> I[Evidence]
-```
+<a class="memo-layer-step layer-requirements" href="requirements-architecture/">
+<span class="memo-layer-number">03</span>
+<span class="memo-layer-copy"><strong>State the obligations</strong><em>What must be true, measurable, and reviewable?</em></span>
+<span class="memo-layer-examples"><code>StakeholderNeed</code> <code>SystemRequirement</code></span>
+</a>
 
-This order is a guide, not a gate. Start where the strongest information exists,
-then trace outward until the slice is reviewable.
+<a class="memo-layer-step layer-architecture" href="requirements-architecture/">
+<span class="memo-layer-number">04</span>
+<span class="memo-layer-copy"><strong>Realize the design</strong><em>Which functions, responsibilities, interfaces, and implementations answer the obligation?</em></span>
+<span class="memo-layer-examples"><code>LogicalFunction</code> <code>LogicalComponent</code> <code>SoftwareItem</code> <code>HardwareAssembly</code></span>
+</a>
+
+<a class="memo-layer-step layer-risk" href="risk-assurance/">
+<span class="memo-layer-number">05</span>
+<span class="memo-layer-copy"><strong>Control risk</strong><em>What can lead to harm or compromise, and how is it controlled?</em></span>
+<span class="memo-layer-examples"><code>Hazard</code> <code>Threat</code> <code>RiskControl</code></span>
+</a>
+
+<a class="memo-layer-step layer-assurance" href="risk-assurance/">
+<span class="memo-layer-number">06</span>
+<span class="memo-layer-copy"><strong>Close the claim with evidence</strong><em>What verification, validation, and controlled evidence support the engineering claim?</em></span>
+<span class="memo-layer-examples"><code>VerificationCase</code> <code>Evidence</code></span>
+</a>
+
+</div>
+
+## Use the map in a review
+
+Start with the strongest available fact. A clinical scenario may begin in
+**Context**; a change request may begin with a **Requirement**; an incident may
+begin in **Risk**. Then follow the connection in either direction until you can
+answer the review question.
+
+<div class="memo-review-thread" markdown>
+
+<span>Patient requests a bolus</span><i>→</i><span>Pump shall enforce a limit</span><i>→</i><span>Monitor flow</span><i>→</i><span>Independent flow control</span><i>→</i><span>Over-delivery test evidence</span>
+
+</div>
+
+The direction is not a workflow gate. Risk can expose a missing requirement;
+verification can reveal a design ambiguity. The map helps keep each discovery
+connected to its source and its consequence.

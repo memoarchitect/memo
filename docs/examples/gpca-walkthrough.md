@@ -42,21 +42,16 @@ When reading `gpca_trace.sysml`, search for an element name and inspect all
 connections around it. This is often the fastest way to understand why an
 element exists.
 
-## Run the example
+## Open the example
 
-From Memo Tools:
+Open `examples/gpca-pump` as a SysML v2 project in your editor and inspect the
+catalog files and their imports. The example is intentionally source-first:
+there is no separate generated model to learn before reading the engineering
+content.
 
-```bash
-pnpm run build
-pnpm run example:validate
-```
-
-From Memo Architect:
-
-```bash
-pnpm run build
-pnpm run example:dev
-```
+If you need command-line validation or an interactive review surface, use the
+corresponding guides in MEMO Tools or MEMO Architect. Those workflows consume
+this example; they are not part of the ontology repository.
 
 ## What to copy into your project
 
