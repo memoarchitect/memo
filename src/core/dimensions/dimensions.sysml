@@ -1,37 +1,75 @@
-// Multi-valued attributes collapsed to scalar pending grammar extension (ADR-1-16).
-// Bare import (no `private`) per ADR-1-16 fallback.
+// Orthogonal classification dimensions (ADR-0001). An element participates in
+// several independent dimensions at once — architecture perspective, realization
+// stage, engineering discipline, cross-cutting concern — without being duplicated.
+// Dimensions are typed enums carried as multivalued attributes on the Memo base
+// definitions (memo_core_common) and as metadata defs for constructs whose
+// metaclass cannot specialize a part-based carrier.
 package memo_core_dimensions {
     private import ScalarValues::*;
 
-    private import memo_core_common::*;
-
-    enum def DimensionKind {
-        enum architecture;
-        enum compliance;
-        enum artifact;
-        enum viewpointType;
+    // Horizontal architecture perspectives (Arcadia-informed; implementation
+    // covers software, hardware, and physical realization together).
+    enum def ArchitecturePerspectiveKind {
+        enum operational;
+        enum functional;
+        enum logical;
+        enum implementation;
     }
 
-    part def ElementKind specializes TraceableElement {
-        attribute kindName : String;
-        attribute primaryDimension : DimensionKind;
+    // Vertical realization stages of one element identity across the product
+    // lifecycle (specification through retirement).
+    enum def RealizationStageKind {
+        enum specified;
+        enum designed;
+        enum built;
+        enum configured;
+        enum assembled;
+        enum deployed;
+        enum operated;
+        enum retired;
     }
 
-    part def ArchitectureElementKind specializes ElementKind {
-        attribute archLayer : String;
+    // Engineering disciplines that can claim an element without owning it.
+    enum def EngineeringDisciplineKind {
+        enum requirements;
+        enum safety;
+        enum cybersecurity;
+        enum humanFactors;
+        enum 'verification';
+        enum 'validation';
     }
 
-    part def ComplianceElementKind specializes ElementKind {
-        attribute standardReference : String;
-        attribute clause : String;
+    // Cross-cutting concerns orthogonal to perspective and discipline.
+    enum def CrossCuttingConcernKind {
+        enum evidence;
+        enum traceability;
+        enum configurationManagement;
+        enum changeControl;
+        enum regulatoryCompliance;
+        enum clinicalPerformance;
     }
 
-    part def ArtifactElementKind specializes ElementKind {
-        attribute documentTitle : String;
-        attribute regulatoryReference : String;
+    // Editorial status of the model element itself (distinct from the
+    // lifecycle of the thing the element describes).
+    enum def ElementStatusKind {
+        enum draft;
+        enum inReview;
+        enum approved;
+        enum released;
+        enum deprecated;
+        enum retired;
     }
 
-    part def ViewpointTypeKind specializes ElementKind {
-        attribute typeId : String;
+    // Metadata carriers for tagging non-part constructs (actions, ports,
+    // interfaces, items, views) with the same dimensions. Part-based elements
+    // carry the dimensions directly as attributes of MemoPart.
+    metadata def ArchitectureClassification {
+        attribute perspective : ArchitecturePerspectiveKind[0..*];
+        attribute stage : RealizationStageKind[0..1];
+    }
+
+    metadata def AssuranceClassification {
+        attribute disciplines : EngineeringDisciplineKind[0..*];
+        attribute crossCutting : CrossCuttingConcernKind[0..*];
     }
 }

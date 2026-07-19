@@ -43,7 +43,7 @@ Create a small scratch file in your model and add the public import:
 package import_check {
     private import memo_medical_device_library::*;
 
-    part reviewer : Actor;
+    part reviewer : ClinicalUser;
 }
 ```
 

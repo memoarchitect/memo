@@ -1,8 +1,8 @@
 package memo_monitoring_device_starter {
-    import memo_medical_device_library::*;
+    private import memo_medical_device_library::*;
 
-    part monitoringDeviceSystem : System;
+    part monitoringDevice : MedicalDevice;
     requirement monitoringRequirement : Requirement {
-        attribute redefines title = "Define the monitored physiological parameter";
+        attribute redefines statement = "Define the monitored physiological parameter";
     }
 }

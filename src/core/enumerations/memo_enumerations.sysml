@@ -54,12 +54,6 @@ package memo_core_enumerations {
         enum should;
         enum will;
     }
-    enum def ArcadiaLayerKind {
-        enum operational;
-        enum system;
-        enum logical;
-        enum physical;
-    }
     enum def InterfaceKind {
         enum data;
         enum control;
@@ -370,16 +364,7 @@ package memo_core_enumerations {
         enum device;
         enum informationArtifact;
     }
-    enum def ScenarioKind {
-        enum nominal;
-        enum degraded;
-        enum emergency;
-        enum maintenance;
-        enum error;
-        enum timeout;
-        enum alarm;
-    }
-    enum def FunctionalChainKind {
+    enum def FunctionalFlowKind {
         enum nominal;
         enum error;
         enum degraded;

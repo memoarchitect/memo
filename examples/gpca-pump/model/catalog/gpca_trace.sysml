@@ -2,7 +2,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     private import ScalarValues::*;
 
     private import memo_core_relationships::*;
-    private import memo_architecture_context::*;
+    private import memo_context_actors::*;
+    private import memo_context_use_context::*;
+    private import memo_activities::*;
     private import memo_architecture_operational::*;
     private import memo_architecture_system::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_context::*;
@@ -54,14 +56,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
 
     // ── Actor participation (use case view) ─────────────────────
-    connection : InteractsWith connect contextParticipant ::> actorPrescriber to target ::> oaPrescribe;
-    connection : InteractsWith connect contextParticipant ::> actorPharmacist to target ::> oaLoadReservoir;
-    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> oaProgram;
-    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> oaStartTherapy;
-    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> oaRespondAlarm;
-    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> oaReviewLog;
-    connection : InteractsWith connect contextParticipant ::> actorPatient to target ::> oaRequestBolus;
-    connection : InteractsWith connect contextParticipant ::> actorTechnician to target ::> oaMaintain;
+    connection : PerformsActivity connect performer ::> actorPrescriber to activity ::> oaPrescribe;
+    connection : PerformsActivity connect performer ::> actorPharmacist to activity ::> oaLoadReservoir;
+    connection : PerformsActivity connect performer ::> actorNurse to activity ::> oaProgram;
+    connection : PerformsActivity connect performer ::> actorNurse to activity ::> oaStartTherapy;
+    connection : PerformsActivity connect performer ::> actorNurse to activity ::> oaRespondAlarm;
+    connection : PerformsActivity connect performer ::> actorNurse to activity ::> oaReviewLog;
+    connection : PerformsActivity connect performer ::> actorPatient to activity ::> oaRequestBolus;
+    connection : PerformsActivity connect performer ::> actorTechnician to activity ::> oaMaintain;
 
     // ── Operational thread (therapy lifecycle) ──────────────────
     connection : SequencesStep connect activity ::> oaPrescribe to nextActivity ::> oaLoadReservoir;

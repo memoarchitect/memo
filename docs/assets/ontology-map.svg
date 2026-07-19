@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="800" viewBox="0 0 1240 800" role="img" aria-labelledby="omtitle omdesc">
+  <title id="omtitle">The MEMO ontology map</title>
+  <desc id="omdesc">Architecture perspectives on the left, cross-cutting assurance disciplines across the top, a V of definition and integration in the middle, and an evidence-and-traceability strip at the bottom.</desc>
+  <defs>
+    <marker id="omarrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#5c7188"/></marker>
+  </defs>
+  <rect width="1240" height="800" rx="24" fill="#fbfcfd"/>
+
+  <text x="48" y="52" font-family="Nunito,Arial,sans-serif" font-size="21" font-weight="850" fill="#082744">THE MEMO ONTOLOGY MAP</text>
+  <text x="48" y="79" font-family="Nunito,Arial,sans-serif" font-size="14" fill="#5c7188">Horizontal perspectives say what kind of question you are answering; vertical disciplines claim elements without owning them.</text>
+
+  <!-- ── Discipline header row ── -->
+  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
+    <g><rect x="268" y="104" width="180" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="268" y="104" width="180" height="6" rx="3" fill="#438ed0"/><text x="358" y="130" font-size="13" font-weight="850" fill="#082744">REQUIREMENTS</text><text x="358" y="150" font-size="11" fill="#5c7188">needs → obligations</text></g>
+    <g><rect x="458" y="104" width="180" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="458" y="104" width="180" height="6" rx="3" fill="#ea6b61"/><text x="548" y="130" font-size="13" font-weight="850" fill="#082744">SAFETY / RISK</text><text x="548" y="150" font-size="11" fill="#5c7188">hazards → controls</text></g>
+    <g><rect x="648" y="104" width="180" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="648" y="104" width="180" height="6" rx="3" fill="#8971dc"/><text x="738" y="130" font-size="13" font-weight="850" fill="#082744">CYBERSECURITY</text><text x="738" y="150" font-size="11" fill="#5c7188">assets → controls</text></g>
+    <g><rect x="838" y="104" width="180" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="838" y="104" width="180" height="6" rx="3" fill="#ef9b51"/><text x="928" y="130" font-size="13" font-weight="850" fill="#082744">HUMAN FACTORS</text><text x="928" y="150" font-size="11" fill="#5c7188">tasks → use errors</text></g>
+    <g><rect x="1028" y="104" width="172" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="1028" y="104" width="172" height="6" rx="3" fill="#2dd4a8"/><text x="1114" y="130" font-size="13" font-weight="850" fill="#082744">V &amp; V</text><text x="1114" y="150" font-size="11" fill="#5c7188">cases → evidence</text></g>
+  </g>
+
+  <!-- ── Perspective rail ── -->
+  <g font-family="Nunito,Arial,sans-serif">
+    <g><rect x="40" y="186" width="200" height="96" rx="14" fill="#8971dc"/><text x="60" y="216" font-size="14" font-weight="850" fill="#ffffff">OPERATIONAL</text><text x="60" y="238" font-size="11.5" fill="#f0edff">Why, for whom, in what</text><text x="60" y="254" font-size="11.5" fill="#f0edff">context? Work before device.</text><text x="60" y="272" font-size="10.5" font-weight="700" fill="#dcd2ff">use cases · workflows · tasks</text></g>
+    <g><rect x="40" y="294" width="200" height="96" rx="14" fill="#438ed0"/><text x="60" y="324" font-size="14" font-weight="850" fill="#ffffff">FUNCTIONAL</text><text x="60" y="346" font-size="11.5" fill="#eaf4fd">What must the system do,</text><text x="60" y="362" font-size="11.5" fill="#eaf4fd">independent of technology?</text><text x="60" y="380" font-size="10.5" font-weight="700" fill="#cfe6fb">functions · flows · exchanges</text></g>
+    <g><rect x="40" y="402" width="200" height="96" rx="14" fill="#0a8d76"/><text x="60" y="432" font-size="14" font-weight="850" fill="#ffffff">LOGICAL</text><text x="60" y="454" font-size="11.5" fill="#e3faf3">How is the solution organized,</text><text x="60" y="470" font-size="11.5" fill="#e3faf3">still technology-independent?</text><text x="60" y="488" font-size="10.5" font-weight="700" fill="#bdf2e4">components · channels · modes</text></g>
+    <g><rect x="40" y="510" width="200" height="96" rx="14" fill="#ef9b51"/><text x="60" y="540" font-size="14" font-weight="850" fill="#ffffff">IMPLEMENTATION</text><text x="60" y="562" font-size="11.5" fill="#fff3e8">How is it realized in software,</text><text x="60" y="578" font-size="11.5" fill="#fff3e8">hardware, and physics?</text><text x="60" y="596" font-size="10.5" font-weight="700" fill="#ffe1c4">modules · runtime · parts</text></g>
+    <g><rect x="40" y="618" width="200" height="84" rx="14" fill="#5c7188"/><text x="60" y="648" font-size="14" font-weight="850" fill="#ffffff">REALIZATION STAGE</text><text x="60" y="670" font-size="11.5" fill="#eef4f7">Same identity: specified →</text><text x="60" y="686" font-size="11.5" fill="#eef4f7">built → deployed → retired</text></g>
+  </g>
+
+  <!-- ── V: definition leg ── -->
+  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
+    <g><rect x="300" y="196" width="228" height="66" rx="13" fill="#f0edff" stroke="#8971dc" stroke-width="2"/><text x="414" y="223" font-size="12.5" font-weight="850" fill="#4c3a98">OPERATIONAL CONCEPTS</text><text x="414" y="243" font-size="11.5" fill="#4c3a98">use cases · workflows · scenarios</text></g>
+    <g><rect x="360" y="304" width="228" height="66" rx="13" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/><text x="474" y="331" font-size="12.5" font-weight="850" fill="#17557f">FUNCTIONAL ARCHITECTURE</text><text x="474" y="351" font-size="11.5" fill="#17557f">system functions · functional flows</text></g>
+    <g><rect x="420" y="412" width="228" height="66" rx="13" fill="#e3faf3" stroke="#2dd4a8" stroke-width="2"/><text x="534" y="439" font-size="12.5" font-weight="850" fill="#07604f">LOGICAL ARCHITECTURE</text><text x="534" y="459" font-size="11.5" fill="#07604f">components · channels · interfaces</text></g>
+    <g><rect x="480" y="520" width="228" height="66" rx="13" fill="#fff3e8" stroke="#ef9b51" stroke-width="2"/><text x="594" y="547" font-size="12.5" font-weight="850" fill="#88501f">IMPLEMENTATION ARCHITECTURE</text><text x="594" y="567" font-size="11.5" fill="#88501f">software · hardware · physical parts</text></g>
+  </g>
+
+  <!-- ── V: integration leg ── -->
+  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
+    <g><rect x="900" y="196" width="228" height="66" rx="13" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="1014" y="223" font-size="12.5" font-weight="850" fill="#07604f">OPERATIONAL VALIDATION</text><text x="1014" y="243" font-size="11.5" fill="#07604f">right goal, right users, right context?</text></g>
+    <g><rect x="840" y="304" width="228" height="66" rx="13" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="954" y="331" font-size="12.5" font-weight="850" fill="#07604f">SYSTEM V&amp;V</text><text x="954" y="351" font-size="11.5" fill="#07604f">required functions, met requirements?</text></g>
+    <g><rect x="780" y="412" width="228" height="66" rx="13" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="894" y="439" font-size="12.5" font-weight="850" fill="#07604f">INTEGRATION VERIFICATION</text><text x="894" y="459" font-size="11.5" fill="#07604f">subsystems and interfaces correct?</text></g>
+    <g><rect x="720" y="520" width="228" height="66" rx="13" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="834" y="547" font-size="12.5" font-weight="850" fill="#07604f">COMPONENT VERIFICATION</text><text x="834" y="567" font-size="11.5" fill="#07604f">implemented as specified?</text></g>
+  </g>
+
+  <!-- ── Realization keystone ── -->
+  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
+    <path d="M560 610 L868 610 L830 668 L598 668 Z" fill="#0b1e2d"/>
+    <text x="714" y="636" font-size="13" font-weight="850" fill="#ffffff">REALIZATION</text>
+    <text x="714" y="655" font-size="11" fill="#9fb4c6">build · configure · assemble · deploy</text>
+  </g>
+
+  <!-- ── V legs and per-row verification traces ── -->
+  <g stroke="#5c7188" stroke-width="2.5" fill="none">
+    <path d="M414 262 L474 304" marker-end="url(#omarrow)"/>
+    <path d="M474 370 L534 412" marker-end="url(#omarrow)"/>
+    <path d="M534 478 L594 520" marker-end="url(#omarrow)"/>
+    <path d="M594 586 L636 610" marker-end="url(#omarrow)"/>
+    <path d="M792 610 L834 586" marker-end="url(#omarrow)"/>
+    <path d="M894 520 L834 478" transform="translate(0,0)" marker-end="url(#omarrow)" stroke="#0a8d76"/>
+    <path d="M954 412 L894 370" marker-end="url(#omarrow)" stroke="#0a8d76"/>
+    <path d="M1014 304 L954 262" marker-end="url(#omarrow)" stroke="#0a8d76"/>
+  </g>
+  <g stroke="#5c7188" stroke-width="1.8" stroke-dasharray="5 5" fill="none">
+    <path d="M532 229 L896 229"/>
+    <path d="M592 337 L836 337"/>
+    <path d="M652 445 L776 445"/>
+    <path d="M712 553 L716 553"/>
+  </g>
+  <g font-family="Nunito,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#5c7188" text-anchor="middle">
+    <text x="714" y="222">validates</text>
+    <text x="714" y="330">verifies</text>
+    <text x="714" y="438">verifies</text>
+  </g>
+
+  <!-- ── Evidence strip ── -->
+  <g font-family="Nunito,Arial,sans-serif">
+    <rect x="268" y="712" width="932" height="56" rx="14" fill="#0b1e2d"/>
+    <text x="292" y="736" font-size="13" font-weight="850" fill="#2dd4a8">EVIDENCE &amp; TRACEABILITY</text>
+    <text x="292" y="756" font-size="11.5" fill="#cfe8ff">Typed relationships link the why to the what, the how, and the proof — a many-to-many graph, never a mandatory pipeline.</text>
+    <rect x="40" y="712" width="200" height="56" rx="14" fill="#eef4f7" stroke="#d8e2e9"/>
+    <text x="60" y="736" font-family="Nunito,Arial,sans-serif" font-size="12" font-weight="850" fill="#082744">SIMPLE DEVICES</text>
+    <text x="60" y="754" font-family="Nunito,Arial,sans-serif" font-size="10.5" fill="#5c7188">skip layers they do not need</text>
+  </g>
+</svg>

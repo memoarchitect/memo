@@ -4,27 +4,18 @@ package memo_architecture_operational {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
+    private import memo_activities::*;
+    // OperationalActivity now lives in memo_activities (action def) and
+    // OperationalScenario in memo_scenarios (ADR-0003 / migration map).
     part def OperationalEntity specializes ArchitectureElement {
         attribute entityKind : OperationalEntityKind;
         attribute operationalDomain : String;
         attribute responsibility : String;
     }
-    part def OperationalActivity specializes ArchitectureElement {
-        attribute trigger : String;
-        attribute preCondition : String;
-        attribute postCondition : String;
-        attribute criticality : CriticalityKind;
-    }
     part def OperationalCapability specializes ArchitectureElement {
         attribute capabilityLevel : String;
         attribute preCondition : String;
         attribute postCondition : String;
-    }
-    part def OperationalScenario specializes TraceableElement {
-        attribute scenarioKind : ScenarioKind;
-        attribute preCondition : String;
-        attribute postCondition : String;
-        attribute sequenceDescription : String;
     }
     part def OperationalInteraction specializes ArchitectureElement {
         attribute exchangeKind : FlowKind;
@@ -32,19 +23,19 @@ package memo_architecture_operational {
         attribute latencyConstraint : String;
     }
 
-    connection def Performs :> SemanticLink {
+    connection def Performs :> MemoRelationship {
         end entity : OperationalEntity;
         end activity : OperationalActivity;
     }
-    connection def ContributesToCapability :> SemanticLink {
+    connection def ContributesToCapability :> MemoRelationship {
         end activity : OperationalActivity;
         end capability : OperationalCapability;
     }
-    connection def SequencesStep :> SemanticLink {
+    connection def SequencesStep :> MemoRelationship {
         end activity : OperationalActivity;
         end nextActivity : OperationalActivity;
     }
-    connection def DerivesSystemNeed :> SemanticLink {
+    connection def DerivesSystemNeed :> MemoRelationship {
         end activity : OperationalActivity;
         end systemNeed : VerifiableElement;
     }

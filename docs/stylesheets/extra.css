@@ -248,6 +248,7 @@
 .memo-card-teal { border-color: #9bded5; background: var(--memo-teal-soft); }
 .memo-card-blue { border-color: #cce2f6; background: var(--memo-blue-soft); }
 .memo-card-purple { border-color: #ddd5f6; background: var(--memo-purple-soft); }
+.memo-card-orange { border-color: #f6dcc2; background: var(--memo-orange-soft); }
 .memo-start-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .memo-start-card {
   display: flex;

@@ -1,12 +1,12 @@
 package memo_starter_catalog {
-    import memo_medical_device_library::*;
+    private import memo_medical_device_library::*;
 
-    part starterSystem : System {
+    part starterDevice : MedicalDevice {
         attribute redefines name = "{{name}}";
     }
 
     requirement mainRequirement : Requirement {
-        attribute redefines title = "Main system requirement";
+        attribute redefines statement = "TODO: state the first system requirement.";
         doc /* TODO: define the first system requirement. */
     }
 }

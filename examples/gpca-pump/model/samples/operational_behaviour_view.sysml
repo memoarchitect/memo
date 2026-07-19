@@ -2,7 +2,8 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     private import ScalarValues::*;
     private import memo_architecture_system::*;
 
-    private import memo_architecture_context::*;
+    private import memo_context_actors::*;
+    private import memo_context_use_context::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
@@ -32,14 +33,14 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     // Responsibility hierarchy used by the Level control:
     // L1 care system → L2 responsibility groups → L3 performing actors.
     part opCareSystem : CareSystem { attribute name = "PCA Care System"; }
-    part opClinicalTeam : Actor { attribute :>> name = "Clinical Team"; }
-    part opPatientGroup : Actor { attribute :>> name = "Patient Interaction"; }
+    part opClinicalTeam : ClinicalUser { attribute :>> name = "Clinical Team"; }
+    part opPatientGroup : PatientUser { attribute :>> name = "Patient Interaction"; }
 
     // L3 clinical roles — one natural-level swimlane each
-    part opRolePhysician : Actor { attribute :>> name = "Physician"; }
-    part opRoleNurse : Actor { attribute :>> name = "Nurse"; }
-    part opRoleBiomed : Actor { attribute :>> name = "Biomed Tech"; }
-    part opRolePatient : Actor { attribute :>> name = "Patient"; }
+    part opRolePhysician : ClinicalUser { attribute :>> name = "Physician"; }
+    part opRoleNurse : ClinicalUser { attribute :>> name = "Nurse"; }
+    part opRoleBiomed : TechnicianUser { attribute :>> name = "Biomed Tech"; }
+    part opRolePatient : PatientUser { attribute :>> name = "Patient"; }
 
     connection : Composes connect parent ::> opCareSystem to child ::> opClinicalTeam;
     connection : Composes connect parent ::> opCareSystem to child ::> opPatientGroup;

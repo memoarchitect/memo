@@ -3,10 +3,8 @@ package memo_architecture_requirements {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
-    requirement def StakeholderNeed specializes RequirementDriver {
-        attribute statement : String;
-        attribute priority : String;
-    }
+    // StakeholderNeed and the needs hierarchy now live in memo_needs.
+    private import memo_needs::*;
     part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
     requirement def Requirement specializes VerifiableElement {
         attribute statement : String;
