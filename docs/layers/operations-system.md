@@ -34,6 +34,13 @@ references its primary function; `FunctionalExchange` is a typed transfer
 | `SelectsFlow` / `FunctionalRealizesOperational` | This functional scenario selects a flow and realizes an operational scenario |
 | `AllocatedTo` | This function is the responsibility of that logical component |
 
+[![Function-centered traceability](../assets/function-centered-traceability.png)](../assets/function-centered-traceability.png){ .memo-zoomable aria-label="Open the function-centered traceability diagram" }
+
+Functions provide a useful traceability anchor: requirements and risk controls
+constrain them, architecture elements take responsibility for them, and
+verification cases produce evidence about them. The source model remains the
+authority for the exact relationship types and their endpoints.
+
 ## Example thread
 
 ```mermaid

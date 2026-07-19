@@ -7,7 +7,7 @@ package memo_examples_surgical_closure_workflow {
     private import memo_core_enumerations::*;
     private import memo_context_actors::*;
     private import memo_context_use_context::*;
-    private import memo_needs::*;
+    private import memo_assurance_needs::*;
     private import memo_use_cases::*;
     private import memo_clinical_procedures::*;
     private import memo_activities::*;

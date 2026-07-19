@@ -46,7 +46,7 @@ package memo_assurance_cybersecurity {
         attribute remediable : Boolean;
     }
 
-    // A scenario specialization (ADR-0003): an attack path through the
+    // A scenario specialization: an attack path through the
     // system, classified by the shared scenario dimensions with purpose
     // `cybersecurity`.
     part def ThreatScenario specializes MemoScenario {

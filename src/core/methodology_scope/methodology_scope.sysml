@@ -1,8 +1,6 @@
-// Methodology scope helpers per Epic B-3.
-// Multi-valued attributes collapsed to scalar pending grammar extension (ADR-1-15).
-// Bare imports (no `private`) per ADR-1-16 fallback.
-// Instances use repeated scalar attribute usages to enumerate set entries
-// (see ADR-1-15 example: `attribute :>> includedArchLayer = "operational";`).
+// Methodology scope helpers.
+// Instances use repeated scalar attribute usages to enumerate set entries, for
+// example: `attribute :>> includedArchLayer = "operational";`.
 package memo_core_methodology_scope {
     private import ScalarValues::*;
 

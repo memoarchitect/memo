@@ -17,7 +17,7 @@ describe historical migrations.
 | `src/context/actors/memo_actors.sysml` | `memo_context_actors` | `Actor`, `User`, `ClinicalUser`, `PatientUser`, `CaregiverUser`, `TechnicianUser`, `NonHumanActor` |
 | `src/context/stakeholders/memo_stakeholders.sysml` | `memo_context_stakeholders` | `Stakeholder`, `Concern`, architecture-description concepts |
 | `src/context/use_context/memo_use_context.sysml` | `memo_context_use_context` | `IntendedUse`, `UseContext`, `UseEnvironment` and context links |
-| `src/needs/memo_needs.sysml` | `memo_needs` | needs hierarchy |
+| `src/assurance/needs/memo_needs.sysml` | `memo_assurance_needs` | needs hierarchy |
 | `src/use_cases/memo_use_cases.sysml` | `memo_use_cases` | `UseCase`, `ClinicalUseCase`, `ServiceUseCase`, `ManufacturingUseCase`, `DevelopmentUseCase` |
 | `src/clinical_procedures/memo_clinical_procedures.sysml` | `memo_clinical_procedures` | procedure, technique, variant, instrument-set concepts |
 | `src/activities/memo_activities.sysml` | `memo_activities` | `OperationalActivity`, `UserTask`, `CriticalTask`, task steps |
@@ -41,12 +41,12 @@ describe historical migrations.
 | `src/architecture/behavior/memo_behavior.sysml` | `memo_architecture_behavior` | behavior machines, states, transitions, behavior properties |
 | `src/architecture/constraints/memo_constraints.sysml` | `memo_architecture_constraints` | architecture constraints |
 | `src/architecture/decisions/memo_decisions.sysml` | `memo_architecture_decisions` | `DesignDecision` |
-| `src/architecture/requirements/memo_requirements.sysml` | `memo_architecture_requirements` | requirements and requirement drivers |
-| `src/architecture/risk/memo_risk.sysml` | `memo_architecture_risk_risk` | risks, risk matrices, residual-risk concepts |
-| `src/architecture/risk/memo_arch_risk.sysml` | `memo_architecture_risk_arch_risk` | architecture risk links |
-| `src/architecture/analysis/memo_fmea.sysml` | `memo_architecture_analysis` | FMEA worksheet, failure mode, effect, cause |
-| `src/architecture/assurance/memo_assurance.sysml` | `memo_architecture_assurance` | verification, validation, evidence, review cases |
-| `src/architecture/cybersecurity/memo_cybersecurity.sysml` | `memo_architecture_cybersecurity` | assets, threats, vulnerabilities, mitigations |
+| `src/assurance/requirements/memo_requirements.sysml` | `memo_assurance_requirements` | requirements and requirement drivers |
+| `src/assurance/safety/memo_risk.sysml` | `memo_assurance_safety_risk` | risks, risk matrices, residual-risk concepts |
+| `src/assurance/safety/memo_arch_risk.sysml` | `memo_assurance_safety_arch_risk` | architecture risk links |
+| `src/assurance/safety_analysis/memo_fmea.sysml` | `memo_assurance_safety_analysis` | FMEA worksheet, failure mode, effect, cause |
+| `src/assurance/verification/memo_assurance.sysml` | `memo_assurance_verification` | verification, validation, evidence, review cases |
+| `src/assurance/cybersecurity/memo_cybersecurity.sysml` | `memo_assurance_cybersecurity` | assets, threats, vulnerabilities, mitigations |
 
 ## Supporting model modules
 

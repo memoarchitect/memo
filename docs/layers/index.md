@@ -14,6 +14,14 @@ reaches the other axis only through typed relationships, not by belonging to it.
 
 [![The MEMO ontology map](../assets/ontology-map.svg)](../assets/ontology-map.svg){ .memo-zoomable aria-label="Open a larger ontology map" }
 
+[![MEMO architecture and assurance V-model](../assets/memo-architecture-assurance-v-model.png)](../assets/memo-architecture-assurance-v-model.png){ .memo-zoomable aria-label="Open the architecture and assurance V-model" }
+
+This overview distinguishes the architecture path from operational intent to
+realization and the assurance disciplines that connect to it. The package
+ownership rule remains precise: architecture packages own architecture
+elements, assurance packages own assurance elements, and typed relationships
+provide the cross-cutting traceability.
+
 ## Read the V-model
 
 Read each horizontal row before following either V. The operational row places

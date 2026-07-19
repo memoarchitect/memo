@@ -10,14 +10,14 @@ package memo_examples_temperature_alarm {
     private import memo_core_enumerations::*;
     private import memo_core_dimensions::*;
     private import memo_context_actors::*;
-    private import memo_needs::*;
+    private import memo_assurance_needs::*;
     private import memo_use_cases::*;
     private import memo_activities::*;
     private import memo_scenarios::*;
     private import memo_architecture_functions::*;
     private import memo_architecture_logical_structure::*;
-    private import memo_architecture_risk_risk::*;
-    private import memo_architecture_assurance::*;
+    private import memo_assurance_safety_risk::*;
+    private import memo_assurance_verification::*;
     private import memo_assurance_human_factors::*;
     private import memo_interaction::*;
     private import memo_core_relationships::*;

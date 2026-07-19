@@ -9,7 +9,7 @@ package memo_examples_connected_patient_monitor {
     private import memo_core_relationships::*;
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_interfaces::*;
-    private import memo_architecture_cybersecurity::*;
+    private import memo_assurance_cybersecurity::*;
     private import memo_medical_products_definitions::*;
 
     part monitorDef : MedicalDeviceDefinition {

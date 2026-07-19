@@ -33,7 +33,7 @@ package memo_assurance_verification {
     }
 
     // A scenario executed to verify — selected path with purpose
-    // 'verification' (ADR-0003).
+    // 'verification'.
     part def VerificationScenario specializes MemoScenario {
         attribute verificationEnvironment : String;
         attribute stimulusSummary : String;

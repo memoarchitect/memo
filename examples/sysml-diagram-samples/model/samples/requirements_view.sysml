@@ -4,8 +4,8 @@
 package memo_examples_sysml_diagram_samples_model_samples_requirements_view {
     private import ScalarValues::*;
 
-    private import memo_needs::*;
-    private import memo_architecture_requirements::*;
+    private import memo_assurance_needs::*;
+    private import memo_assurance_requirements::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;

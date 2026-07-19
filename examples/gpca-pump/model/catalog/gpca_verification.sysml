@@ -1,7 +1,7 @@
 package memo_examples_gpca_pump_model_catalog_gpca_verification {
     private import ScalarValues::*;
 
-    private import memo_architecture_assurance::*;
+    private import memo_assurance_verification::*;
     private import memo_core_enumerations::*;
 
     // ── Verification cases ──────────────────────────────────────

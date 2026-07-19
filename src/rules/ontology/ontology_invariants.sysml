@@ -155,7 +155,7 @@ package memo_rules_ontology {
         attribute id = "CR-ONT-043";
         attribute appliesTo = "MemoScenario";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Alternate, exception, and recovery scenarios must identify their base scenario or variation point — never duplicate the workflow (ADR-0003).";
+        attribute rationaleText = "Alternate, exception, and recovery scenarios must identify their base scenario or variation point — never duplicate the workflow.";
         attribute predicateExpression = "variantKind = ScenarioVariantKind::nominal or baseScenario->size() = 1 or variationPoint != ''";
         constraint { true }
     }
@@ -163,7 +163,7 @@ package memo_rules_ontology {
         attribute id = "CR-ONT-045";
         attribute appliesTo = "MemoPart";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Every element is owned by exactly one axis, encoded by its owning package: a horizontal architecture layer (memo_architecture_*) XOR a vertical assurance discipline (memo_assurance_*) — never both. Cross-axis participation is expressed by typed relationships, not by dual membership. Supersedes the ADR-0001 perspective/discipline tagging.";
+        attribute rationaleText = "Every element is owned by exactly one axis, encoded by its owning package: a horizontal architecture layer (memo_architecture_*) XOR a vertical assurance discipline (memo_assurance_*) — never both. Cross-axis participation is expressed by typed relationships, not by dual membership.";
         attribute predicateExpression = "owningPackage.startsWith('memo_architecture_') xor owningPackage.startsWith('memo_assurance_')";
         constraint { true }
     }

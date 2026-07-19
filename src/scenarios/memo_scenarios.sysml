@@ -1,4 +1,4 @@
-// Scenario foundation (§8, ADR-0003). A scenario is a selected path through a
+// Scenario foundation. A scenario is a selected path through a
 // workflow (or functional flow), classified by three independent typed
 // dimensions — variant, operational condition, purpose — replacing the former
 // single ScenarioKind. An occurrence is an actual or hypothetical execution

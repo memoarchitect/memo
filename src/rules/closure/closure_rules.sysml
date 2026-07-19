@@ -75,7 +75,7 @@ package memo_rules_closure {
     // CR-MED-012 (RequirementIdMustBeUnique) is intentionally omitted from the native
     // constraint set: cross-element uniqueness is not a single-subject predicate and
     // cannot be expressed as a `constraint { … }` body over one Requirement.
-    // It remains an engine-level check (future model-level constraint support).
+    // It remains an engine-level check.
     // Do not reintroduce the `predicate="uniqueAttribute"` part.
 
     // ─── Architecture Layer Rules ────────────────────────────────────────

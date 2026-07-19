@@ -103,7 +103,7 @@ package memo_interaction {
     }
 
     // A reusable dialogue structure through the UI; a selected path through
-    // it is an UIScenario (ADR-0003).
+    // it is an UIScenario.
     action def InteractionFlow specializes MemoAction {
         attribute entryPoint : String;
         attribute exitPoint : String;
