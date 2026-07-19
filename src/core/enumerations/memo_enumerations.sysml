@@ -221,6 +221,16 @@ package memo_core_enumerations {
         enum assumption;
         enum guarantee;
     }
+    enum def InterfaceItemKind {
+        enum data;
+        enum command;
+        enum signal;
+        enum event;
+        enum material;
+        enum energy;
+        enum fluid;
+        enum mechanicalForce;
+    }
     enum def PropertyLanguageKind {
         enum naturalLanguage;
         enum pseudoFormal;

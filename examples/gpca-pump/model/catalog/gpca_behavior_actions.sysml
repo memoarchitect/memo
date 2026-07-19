@@ -3,6 +3,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_actions {
     private import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
 
     private import memo_architecture_behavior::*;
+    private import memo_architecture_interfaces::*;
     private import memo_core_enumerations::*;
 
     // ═════════════════════════════════════════════════════════════
@@ -16,11 +17,21 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_actions {
     // ═════════════════════════════════════════════════════════════
 
     // ── Action definitions (typed steps with parameters) ────────
-    item def SensorStatusVector;
-    item def AlarmSignal;
-    item def BolusRequestSignal;
-    item def FlowCommand;
-    item def TherapyEventRecord;
+    item def SensorStatusVector specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
+    }
+    item def AlarmSignal specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::signal;
+    }
+    item def BolusRequestSignal specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::signal;
+    }
+    item def FlowCommand specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::command;
+    }
+    item def TherapyEventRecord specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::event;
+    }
 
     action def AcquireSensorData {
         out sensorStatus : SensorStatusVector;

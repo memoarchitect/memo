@@ -6,7 +6,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     private import memo_context_use_context::*;
     private import memo_activities::*;
     private import memo_architecture_operational::*;
-    private import memo_architecture_system::*;
+    private import memo_architecture_functions::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_context::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_operational::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_system::*;
@@ -77,10 +77,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : DerivesSystemNeed connect activity ::> oaRequestBolus to systemNeed ::> reqCs25;
     connection : DerivesSystemNeed connect activity ::> oaRespondAlarm to systemNeed ::> reqCs59;
 
-    // ── System capabilities and functional chains ───────────────
-    connection : RealizesCapability connect functionalChain ::> fcPatientBolus to capability ::> scPatientBolus;
-    connection : RealizesCapability connect functionalChain ::> fcAlarmStop to capability ::> scAlarmAnnunciation;
-    connection : RealizesCapability connect functionalChain ::> fcStartup to capability ::> scBasalDelivery;
+    // ── Functional chains ───────────────────────────────────────
     connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnAcquireSensors;
     connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnEnforceLimits;
     connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnManageInfusion;

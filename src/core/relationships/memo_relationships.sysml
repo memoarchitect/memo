@@ -118,7 +118,7 @@ package memo_core_relationships {
     }
 
     // Performs, ContributesToCapability, SequencesStep, DerivesSystemNeed
-    // (operational-entity ends) and RealizesCapability, InvolvesFunction,
+    // (operational-entity ends) and InvolvesFunction,
     // RealizesScenario (functional-chain ends) live in their owning
     // architecture layer packages — memo::architecture::operational and
     // memo::architecture::system respectively — because core must not

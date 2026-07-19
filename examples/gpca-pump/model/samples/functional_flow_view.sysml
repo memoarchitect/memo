@@ -2,6 +2,7 @@ package memo_examples_gpca_pump_model_samples_functional_flow_view {
     private import ScalarValues::*;
 
     private import memo_architecture_logical_structure::*;
+    private import memo_architecture_interfaces::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
@@ -19,11 +20,21 @@ package memo_examples_gpca_pump_model_samples_functional_flow_view {
     // ─────────────────────────────────────────────────────────────────────────
 
     // Typed flow payloads
-    item def FxSensorReading;
-    item def FxRateCommand;
-    item def FxMotorEnergy;
-    item def FxMedicationFluid;
-    item def FxOcclusionSignal;
+    item def FxSensorReading specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
+    }
+    item def FxRateCommand specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::command;
+    }
+    item def FxMotorEnergy specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::energy;
+    }
+    item def FxMedicationFluid specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::fluid;
+    }
+    item def FxOcclusionSignal specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::signal;
+    }
 
     // Functions with typed in/out pins
     action def FxAcquire { out reading : FxSensorReading; }

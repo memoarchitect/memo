@@ -1,7 +1,7 @@
 package memo_examples_gpca_pump_model_catalog_gpca_system {
     private import ScalarValues::*;
 
-    private import memo_architecture_system::*;
+    private import memo_architecture_functions::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems::*;
     private import memo_scenarios::*;
     private import memo_core_enumerations::*;
@@ -14,43 +14,6 @@ package memo_examples_gpca_pump_model_catalog_gpca_system {
         attribute :>> missionKind = "therapeutic device mission";
         attribute :>> successCriteria = "Drug delivered per prescription; no overdose or undetected under-infusion; every hazardous condition annunciated within its alarm latency budget.";
         attribute :>> operationalContext = "Acute-care hospital ward, fixed (non-ambulatory) location (UC-001).";
-    }
-
-    // ── System capabilities ─────────────────────────────────────
-    part scBasalDelivery : SystemCapability {
-        attribute :>> id = "SC-001";
-        attribute :>> name = "BasalRateDelivery";
-        attribute :>> capabilityKind = "therapy";
-        ref :>> primaryFunction = fnManageInfusion;
-        attribute :>> safetyRelevant = true;
-    }
-    part scPatientBolus : SystemCapability {
-        attribute :>> id = "SC-002";
-        attribute :>> name = "PatientBolusDelivery";
-        attribute :>> capabilityKind = "therapy";
-        ref :>> primaryFunction = fnEnforceLimits;
-        attribute :>> safetyRelevant = true;
-    }
-    part scAlarmAnnunciation : SystemCapability {
-        attribute :>> id = "SC-003";
-        attribute :>> name = "AlarmDetectionAndAnnunciation";
-        attribute :>> capabilityKind = "safety";
-        ref :>> primaryFunction = fnMonitorAlarm;
-        attribute :>> safetyRelevant = true;
-    }
-    part scPrescriptionMgmt : SystemCapability {
-        attribute :>> id = "SC-004";
-        attribute :>> name = "PrescriptionProgrammingAndChecking";
-        attribute :>> capabilityKind = "configuration";
-        ref :>> primaryFunction = fnValidatePrescription;
-        attribute :>> safetyRelevant = true;
-    }
-    part scEventLogging : SystemCapability {
-        attribute :>> id = "SC-005";
-        attribute :>> name = "TherapyEventLogging";
-        attribute :>> capabilityKind = "record-keeping";
-        ref :>> primaryFunction = fnLogEvents;
-        attribute :>> safetyRelevant = false;
     }
 
     // ── Functional chains ───────────────────────────────────────

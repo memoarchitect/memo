@@ -3,12 +3,19 @@ package memo_examples_gpca_pump_model_samples_action_flow_view {
     private import memo_core_relationships::*;
 
     private import memo_architecture_logical_structure::*;
+    private import memo_architecture_interfaces::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
-    item def DataPacket;
-    item def EnergyToken;
-    item def MaterialBatch;
+    item def DataPacket specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
+    }
+    item def EnergyToken specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::energy;
+    }
+    item def MaterialBatch specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::material;
+    }
 
     action def ReceiveInput { out received : DataPacket; }
     action def ValidateInput { in received : DataPacket; out validated : EnergyToken; }
