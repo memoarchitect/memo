@@ -5,6 +5,8 @@ element on its own is a note; a typed relationship is a claim a reviewer can
 challenge. Select the narrowest relationship whose meaning and endpoint
 direction match what you are asserting.
 
+![Visual relationship guide](../assets/relationship-sentences.svg)
+
 ## The backbone
 
 Across the whole ontology, the relationships form one traceability backbone
@@ -17,9 +19,9 @@ element can join several paths, and simple products skip hops entirely:
 
 | Relationship | From | To | Use it to say… |
 |---|---|---|---|
-| `Motivates` | Need | MedicalUseCase | This need is why the goal exists |
-| `Initiates` | User | MedicalUseCase | This user pursues the goal |
-| `SupportsUseCase` | OperationalWorkflow | MedicalUseCase | This organized work achieves the goal |
+| `Motivates` | Need | UseCase | This need is why the goal exists |
+| `Initiates` | User | UseCase | This user pursues the goal |
+| `SupportsUseCase` | OperationalWorkflow | UseCase | This organized work achieves the goal |
 | `SelectsStep` | Scenario | WorkflowStep | This scenario takes this path |
 | `UsesProduct` / `TaskUsesProduct` | Activity / task | MedicalDevice | This work uses this product in this role |
 | `EnablesActivity` | SystemFunction | OperationalActivity | The system enables this work |
@@ -57,8 +59,8 @@ Where an element holds a reference — a flow's start function, an exchange's
 endpoints, an instance's definition — MEMO uses typed `ref`s, never name
 strings. A string can silently dangle; a typed reference is resolved by the
 tool and checkable by the conformance rules (`rules/ontology`). Path-like
-labels (`sourcePortPath`) exist only as descriptive annotations for AADL
-round-trips.
+labels (`sourcePortPath`) exist only as descriptive annotations for external
+tool round-trips.
 
 ## Prefer semantic links over generic traces
 

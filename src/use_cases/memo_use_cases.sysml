@@ -1,7 +1,6 @@
-// Medical use cases (§5). A MedicalUseCase is the goal a User wants to achieve
-// with support from the system — there is no separate Goal class. Workflows
-// support use cases (memo_workflows); validation cases validate them
-// (memo_architecture_assurance).
+// Use cases (§5). A UseCase is a goal a person or organization wants to
+// achieve with system support — there is no separate Goal class. Clinical,
+// service, manufacturing, and development use cases specialize the same base.
 package memo_use_cases {
     private import ScalarValues::*;
 
@@ -10,21 +9,21 @@ package memo_use_cases {
     private import memo_core_relationships::*;
     private import memo_context_actors::*;
     private import memo_context_use_context::*;
-    private import memo_needs::*;
+    private import memo_assurance_needs::*;
 
-    use case def MedicalUseCase {
+    use case def UseCase {
         attribute id : String;
         attribute name : String;
         attribute description : String;
         attribute rationale : String;
         attribute sourceReference : String;
+        // Text of this use case's goal; this is not a separate Goal element.
         attribute goalStatement : String;
         attribute trigger : String;
         attribute preCondition : String;
         attribute successOutcome : String;
         attribute failureOutcome : String;
         attribute postCondition : String;
-        attribute clinicalSignificance : String;
 
         // The device or system under consideration supports the goal.
         ref supportingSystem : MemoPart[0..1];
@@ -34,20 +33,33 @@ package memo_use_cases {
         ref originatingNeeds : UserNeed[0..*];
     }
 
+    use case def ClinicalUseCase specializes UseCase {
+        attribute clinicalSignificance : String;
+    }
+    use case def ServiceUseCase specializes UseCase {
+        attribute serviceOutcome : String;
+    }
+    use case def ManufacturingUseCase specializes UseCase {
+        attribute productionOutcome : String;
+    }
+    use case def DevelopmentUseCase specializes UseCase {
+        attribute developmentOutcome : String;
+    }
+
     connection def Motivates :> MemoRelationship {
         end motivatingNeed : Need;
-        end motivatedUseCase : MedicalUseCase;
+        end motivatedUseCase : UseCase;
     }
     connection def Initiates :> MemoRelationship {
         end initiatingUser : User;
-        end initiatedUseCase : MedicalUseCase;
+        end initiatedUseCase : UseCase;
     }
     connection def ParticipatesIn :> MemoRelationship {
         end participant : Actor;
-        end useCase : MedicalUseCase;
+        end useCase : UseCase;
     }
     connection def UseCaseAppliesIn :> MemoRelationship {
-        end useCase : MedicalUseCase;
+        end useCase : UseCase;
         end useContext : UseContext;
     }
 }

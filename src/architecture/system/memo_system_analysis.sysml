@@ -69,6 +69,6 @@ package memo_architecture_system {
     }
     connection def FunctionalRealizesOperational :> MemoRelationship {
         end functionalScenario : FunctionalScenario;
-        end operationalScenario : OperationalScenario;
+        end operationalScenario : OperativeScenario;
     }
 }

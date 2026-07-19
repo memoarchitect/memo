@@ -18,7 +18,7 @@ package memo_viewpoints_software_software_viewpoint {
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::reliability);
         attribute :>> includedLayers = ("software_structure", "interfaces");
-        attribute :>> allowedElementKinds = ("SoftwareSystem", "SoftwareComponent", "SOUPComponent", "SoftwareInterface");
+        attribute :>> allowedElementKinds = ("SoftwareSystem", "SoftwareModule", "SOUPComponent", "SoftwareInterface");
         attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }

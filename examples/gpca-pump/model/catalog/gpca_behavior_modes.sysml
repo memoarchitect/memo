@@ -14,7 +14,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
     // external trigger. Mode-tree containment edges (Composes)
     // live in gpca_trace.sysml.
     // ═════════════════════════════════════════════════════════════
-    part topLevelModeMachine : BehaviorMachine {
+    state topLevelModeMachine : BehaviorMachine {
         attribute :>> id = "BM-001";
         attribute :>> name = "TopLevelModeMachine";
         attribute :>> machineKind = "hierarchical state machine";
@@ -23,7 +23,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
     }
 
     // ── Mode states (Fig 4.1) ───────────────────────────────────
-    part modeOFF : ModeState {
+    state modeOFF : ModeState {
         attribute :>> id = "MODE-000";
         attribute :>> name = "OFF";
         attribute :>> modeKind = "top (default)";
@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
         attribute :>> exitCondition = "System_start_prog commanded (REQ 4)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.2";
     }
-    part modeON : ModeState {
+    state modeON : ModeState {
         attribute :>> id = "MODE-001";
         attribute :>> name = "ON";
         attribute :>> modeKind = "operational parent";
@@ -41,7 +41,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
         attribute :>> exitCondition = "System_stop_prog: stop infusion, cancel all notifications (REQ 5)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.3";
     }
-    part modeIDLE : ModeState {
+    state modeIDLE : ModeState {
         attribute :>> id = "MODE-002";
         attribute :>> name = "ON.IDLE";
         attribute :>> modeKind = "idle";
@@ -50,7 +50,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
         attribute :>> exitCondition = "confirmed second Infusion_initiate_prog (REQ 12/13)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.4";
     }
-    part modeTHERAPY : ModeState {
+    state modeTHERAPY : ModeState {
         attribute :>> id = "MODE-003";
         attribute :>> name = "ON.THERAPY";
         attribute :>> modeKind = "therapy parent";
@@ -59,7 +59,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
         attribute :>> exitCondition = "infusion complete to IDLE (REQ 28); manual stop from PAUSED (REQ 47); system stop (REQ 5)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5";
     }
-    part modePAUSED : ModeState {
+    state modePAUSED : ModeState {
         attribute :>> id = "MODE-004";
         attribute :>> name = "ON.THERAPY.PAUSED";
         attribute :>> modeKind = "paused (KVO delivery)";
@@ -68,7 +68,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
         attribute :>> exitCondition = "Infusion_initiate_prog with Inhibited_Infusion_macro = FALSE (REQ 46); Infusion_inhibit_prog to IDLE (REQ 47)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10 (REQ 43-47)";
     }
-    part modeACTIVE : ModeState {
+    state modeACTIVE : ModeState {
         attribute :>> id = "MODE-005";
         attribute :>> name = "ON.THERAPY.ACTIVE";
         attribute :>> modeKind = "active parent";
@@ -77,7 +77,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
         attribute :>> exitCondition = "infusion complete (REQ 28); PAUSED via REQ 29/30/37-39";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6";
     }
-    part modeBASAL : ModeState {
+    state modeBASAL : ModeState {
         attribute :>> id = "MODE-006";
         attribute :>> name = "ON.THERAPY.ACTIVE.BASAL";
         attribute :>> modeKind = "active-basal";
@@ -86,7 +86,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
         attribute :>> exitCondition = "scheduled square bolus (REQ 31); patient bolus granted (REQ 32); Inhibited_Infusion_macro (REQ 37)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.7";
     }
-    part modeSQUARE : ModeState {
+    state modeSQUARE : ModeState {
         attribute :>> id = "MODE-007";
         attribute :>> name = "ON.THERAPY.ACTIVE.SQUARE_BOLUS";
         attribute :>> modeKind = "active-square-bolus (auto-scheduled)";
@@ -95,7 +95,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
         attribute :>> exitCondition = "scheduled end or Inhibited_Bolus_macro (REQ 34); patient bolus granted (REQ 33); inhibits (REQ 39)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.8";
     }
-    part modePBOLUS : ModeState {
+    state modePBOLUS : ModeState {
         attribute :>> id = "MODE-008";
         attribute :>> name = "ON.THERAPY.ACTIVE.PATIENT_BOLUS";
         attribute :>> modeKind = "active-patient-bolus";

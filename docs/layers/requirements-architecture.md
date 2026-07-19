@@ -80,3 +80,9 @@ software *and* mechanics at once — the reason the layers must not collapse.
 Use `BehaviorMachine`, `ModeState`, `Transition`, and `TimingConstraint` when
 order, state, or timing matters, and keep device modes distinct from UI states
 (`memo_interaction`) — a confirmation screen is not a therapy mode.
+
+## Continue the story
+
+Next, read [Risk, Cybersecurity, and Assurance](risk-assurance.md). It shows
+how hazards, threats, controls, verification, validation, and evidence attach
+to the same behavior and architecture.

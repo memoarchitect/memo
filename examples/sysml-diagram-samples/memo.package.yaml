@@ -1,0 +1,5 @@
+name: "sysml-diagram-samples"
+version: "0.1.0"
+type: device
+extends: "@memoarchitect/medical-modeling-profile"
+description: "MEMO Architect diagram rendering samples — one openable view per standard SysML v2 diagram type. Open with: memo-architect --example standard-sysml-diagrams"

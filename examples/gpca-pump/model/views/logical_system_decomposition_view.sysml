@@ -33,7 +33,7 @@ package memo_examples_gpca_pump_model_views_logical_system_decomposition_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-LOG-002";
             attribute :>> name = "GPCA_SystemDecompositionQuery";
-            attribute :>> includeElementKinds = ("HardwareAssembly", "SoftwareSystem", "SoftwareComponent");
+            attribute :>> includeElementKinds = ("HardwareAssembly", "SoftwareSystem", "SoftwareModule");
             attribute :>> includeRelationshipKinds = ("Composes");
             attribute :>> includeLayers = ("logical_structure", "software_structure");
             attribute :>> selectionExpression = "product == 'GPCA'";

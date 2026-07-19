@@ -11,3 +11,4 @@ init:
   archetypes: ./profile/archetypes.yaml
 examples:
   gpca: ./examples/gpca-pump
+  standard-sysml-diagrams: ./examples/sysml-diagram-samples

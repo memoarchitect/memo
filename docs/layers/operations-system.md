@@ -50,3 +50,9 @@ In the GPCA example, `gpca_behavior_subsystems.sysml` defines the functions
 and exchanges, and `gpca_system.sysml` organizes them into flows whose steps
 carry typed references to functions and exchanged items — follow `FCS-001`
 through `FCS-005` for the complete bolus path.
+
+## Continue the story
+
+Next, read [Requirements and Architecture](requirements-architecture.md). It
+connects the claims that constrain a function to the logical and implemented
+parts responsible for it.

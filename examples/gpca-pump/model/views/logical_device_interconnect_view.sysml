@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_model_views_logical_device_interconnect_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-LOG-003";
             attribute :>> name = "GPCA_DeviceInterconnectQuery";
-            attribute :>> includeElementKinds = ("HardwareAssembly", "SoftwareSystem", "SoftwareComponent", "SoftwarePort");
+            attribute :>> includeElementKinds = ("HardwareAssembly", "SoftwareSystem", "SoftwareModule", "SoftwarePort");
             attribute :>> includeRelationshipKinds = ("ExchangesWith", "Composes");
             attribute :>> includeLayers = ("logical_structure", "software_structure", "interfaces");
             attribute :>> selectionExpression = "product == 'GPCA'";

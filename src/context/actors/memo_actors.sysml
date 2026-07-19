@@ -14,13 +14,11 @@ package memo_context_actors {
         attribute responsibility : String;
     }
 
-    part def HumanActor specializes Actor {
+    // A human who interacts with the medical device (IEC 62366-1 intended user).
+    // User is the only human actor type: do not add an alternative type name.
+    part def User specializes Actor {
         attribute userPopulation : String;
         attribute impairmentConsiderations : String;
-    }
-
-    // A human who interacts with the medical device (IEC 62366-1 intended user).
-    part def User specializes HumanActor {
         attribute intendedTraining : String;
         attribute intendedQualification : String;
     }

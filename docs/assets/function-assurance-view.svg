@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="680" viewBox="0 0 1360 680" role="img" aria-labelledby="fatitle fadesc">
+  <title id="fatitle">Function-centered assurance view</title>
+  <desc id="fadesc">Needs, requirements, and risk constraints inform functions. Functions are classified for safety, analyzed in FMEA, allocated to logical architecture, realized by software and physical units, and verified with tests. FMEA identifies hazards.</desc>
+  <defs>
+    <marker id="fa-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5c7188"/></marker>
+    <marker id="fa-teal-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#0a8d76"/></marker>
+  </defs>
+  <rect width="1360" height="680" rx="24" fill="#fbfcfd"/>
+  <g font-family="Nunito,Arial,sans-serif">
+    <text x="48" y="52" font-size="20" font-weight="850" fill="#082744">FUNCTION-CENTERED ASSURANCE VIEW</text>
+    <text x="48" y="79" font-size="14" fill="#5c7188">A review projection: functions connect intent, risk analysis, design realization, and verification. They do not replace the operational scenario model.</text>
+  </g>
+
+  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle" font-size="13" font-weight="800">
+    <rect x="48" y="142" width="190" height="58" rx="12" fill="#f0edff" stroke="#8971dc" stroke-width="2"/><text x="143" y="167" fill="#4c3a98">User needs</text><text x="143" y="186" font-size="10.5" font-weight="600" fill="#5c7188">clinical intent</text>
+    <rect x="48" y="230" width="190" height="58" rx="12" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/><text x="143" y="255" fill="#17557f">Requirements</text><text x="143" y="274" font-size="10.5" font-weight="600" fill="#5c7188">testable obligations</text>
+    <rect x="48" y="318" width="190" height="58" rx="12" fill="#fff0ef" stroke="#ea6b61" stroke-width="2"/><text x="143" y="343" fill="#9d3028">Risk controls</text><text x="143" y="362" font-size="10.5" font-weight="600" fill="#5c7188">risk-derived constraints</text>
+
+    <rect x="390" y="230" width="230" height="72" rx="14" fill="#eaf4fd" stroke="#438ed0" stroke-width="3"/><text x="505" y="258" font-size="15" fill="#17557f">System functions</text><text x="505" y="281" font-size="10.5" font-weight="600" fill="#5c7188">what the system must do</text>
+
+    <rect x="762" y="112" width="214" height="58" rx="12" fill="#fff3e8" stroke="#ef9b51" stroke-width="2"/><text x="869" y="137" fill="#88501f">Safety classification</text><text x="869" y="156" font-size="10.5" font-weight="600" fill="#5c7188">classifies function</text>
+    <rect x="762" y="214" width="214" height="58" rx="12" fill="#fff0ef" stroke="#ea6b61" stroke-width="2"/><text x="869" y="239" fill="#9d3028">FMEA</text><text x="869" y="258" font-size="10.5" font-weight="600" fill="#5c7188">analyzes failure modes</text>
+    <rect x="1030" y="214" width="180" height="58" rx="12" fill="#fff0ef" stroke="#ea6b61" stroke-width="2"/><text x="1120" y="239" fill="#9d3028">Hazards</text><text x="1120" y="258" font-size="10.5" font-weight="600" fill="#5c7188">identified by analysis</text>
+
+    <rect x="390" y="406" width="230" height="64" rx="12" fill="#e3faf3" stroke="#2dd4a8" stroke-width="2"/><text x="505" y="432" fill="#07604f">Logical architecture</text><text x="505" y="451" font-size="10.5" font-weight="600" fill="#5c7188">components and interfaces</text>
+    <rect x="240" y="542" width="230" height="58" rx="12" fill="#fff3e8" stroke="#ef9b51" stroke-width="2"/><text x="355" y="567" fill="#88501f">Physical / hardware units</text><text x="355" y="586" font-size="10.5" font-weight="600" fill="#5c7188">sensors, actuators, assemblies</text>
+    <rect x="540" y="542" width="230" height="58" rx="12" fill="#fff3e8" stroke="#ef9b51" stroke-width="2"/><text x="655" y="567" fill="#88501f">Software units</text><text x="655" y="586" font-size="10.5" font-weight="600" fill="#5c7188">components and services</text>
+    <rect x="818" y="542" width="168" height="58" rx="12" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="902" y="567" fill="#07604f">Unit tests</text><text x="902" y="586" font-size="10.5" font-weight="600" fill="#5c7188">verify units</text>
+  </g>
+
+  <g fill="none" stroke="#5c7188" stroke-width="2.2" marker-end="url(#fa-arrow)">
+    <path d="M238 171 C300 171 322 240 386 250"/><path d="M238 259 H386"/><path d="M238 347 C300 347 322 292 386 282"/>
+    <path d="M505 306 V402"/><path d="M505 470 L355 538"/><path d="M505 470 L655 538"/>
+    <path d="M620 250 H758"/><path d="M620 244 C690 220 700 142 758 142"/><path d="M976 243 H1026"/>
+  </g>
+  <g fill="none" stroke="#0a8d76" stroke-width="2.2" marker-end="url(#fa-teal-arrow)">
+    <path d="M470 571 H814"/>
+  </g>
+  <g font-family="Nunito,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#5c7188" text-anchor="middle">
+    <text x="300" y="218">motivates</text><text x="306" y="251">constrains</text><text x="300" y="321">constrains</text>
+    <text x="524" y="360">allocated to</text><text x="404" y="517">realized by</text><text x="606" y="517">realized by</text>
+    <text x="689" y="240">analyzed by</text><text x="691" y="176">classified by</text><text x="1000" y="198">identifies</text>
+  </g>
+  <text x="752" y="560" font-family="Nunito,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#0a8d76" text-anchor="middle">verified by</text>
+  <g font-family="Nunito,Arial,sans-serif">
+    <rect x="48" y="628" width="1162" height="28" rx="10" fill="#eef4f7"/>
+    <text x="68" y="647" font-size="11.5" fill="#5c7188">Use this as a traceability and review view. Model operational paths separately as: use case → workflow → nominal, alternate, and exception scenarios → involved functions.</text>
+  </g>
+</svg>

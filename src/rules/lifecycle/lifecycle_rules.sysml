@@ -17,7 +17,7 @@ package memo_rules_lifecycle {
 
     constraint def reqBeforeArchRule {
         attribute id = "LC-001";
-        attribute appliesTo = "SoftwareComponent";
+        attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "IEC 62304 requires requirements to precede architecture decomposition.";
         // Lifecycle ordering — model-level, no single-subject predicate.

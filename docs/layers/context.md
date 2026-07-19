@@ -12,8 +12,8 @@ play both roles, and the model links them rather than merging them.
 |---|---|---|
 | `Stakeholder`, `Concern` | Interests the architecture must answer | Hospital biomedical department; infection control |
 | `IntendedUse` | Medical purpose, patient population, intended setting | Patient-controlled analgesia in a hospital ward |
-| `Actor` → `HumanActor`, `NonHumanActor` | Anything interacting with the system | Pharmacy system, mains power, nurse |
-| `User` → `ClinicalUser`, `PatientUser`, `CaregiverUser`, `TechnicianUser` | Humans who interact with the device | Nurse, patient, biomedical technician |
+| `Actor` → `User`, `NonHumanActor` | Anything interacting with the system | Pharmacy system, mains power, nurse |
+| `User` → `ClinicalUser`, `PatientUser`, `CaregiverUser`, `TechnicianUser` | Human actors who interact with the device | Nurse, patient, biomedical technician |
 | `UseContext`, `UseEnvironment` | Situational and physical conditions of use | Hospital ward; sterile field lighting and noise |
 
 “User” is reserved for humans: it is the population that IEC 62366-1 usability

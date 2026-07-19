@@ -1,0 +1,159 @@
+// Illustrative operational model of laparoscopic sleeve gastrectomy. This is
+// a modelling example, not a clinical protocol. It shows a complete procedure
+// as context → use case → workflow → scenarios → scenario-owned activities.
+package memo_examples_surgical_closure_workflow {
+    private import ScalarValues::*;
+
+    private import memo_core_enumerations::*;
+    private import memo_context_actors::*;
+    private import memo_context_use_context::*;
+    private import memo_needs::*;
+    private import memo_use_cases::*;
+    private import memo_clinical_procedures::*;
+    private import memo_activities::*;
+    private import memo_workflows::*;
+    private import memo_scenarios::*;
+
+    // ── Clinical setting and goal ───────────────────────────────
+    part bariatricSurgeon : ClinicalUser {
+        attribute :>> id = "LSG-USR-001"; attribute :>> name = "BariatricSurgeon";
+        attribute :>> clinicalRole = "primary operating surgeon";
+    }
+    part scrubNurse : ClinicalUser {
+        attribute :>> id = "LSG-USR-002"; attribute :>> name = "ScrubNurse";
+        attribute :>> clinicalRole = "sterile instrumentation and count";
+    }
+    part anesthetist : ClinicalUser {
+        attribute :>> id = "LSG-USR-003"; attribute :>> name = "Anesthetist";
+        attribute :>> clinicalRole = "anaesthesia and physiologic monitoring";
+    }
+    part bariatricOr : UseContext {
+        attribute :>> id = "LSG-CTX-001"; attribute :>> name = "BariatricOperatingRoom";
+        attribute :>> careSetting = "hospital operating room";
+        attribute :>> environment = "sterile laparoscopic operating field";
+        attribute :>> connectedUse = false;
+    }
+    requirement needControlledGastricResection : ClinicalUserNeed {
+        attribute :>> needId = "LSG-N-001";
+        attribute :>> statement = "The surgical team needs to perform gastric resection with controlled anatomy, haemostasis, and a checked staple line.";
+    }
+    use case ucPerformSleeveGastrectomy : ClinicalUseCase {
+        attribute :>> id = "LSG-UC-001";
+        attribute :>> name = "PerformLaparoscopicSleeveGastrectomy";
+        attribute :>> goalStatement = "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
+        attribute :>> trigger = "patient prepared and surgical time-out complete";
+        attribute :>> successOutcome = "gastric sleeve created, haemostasis and integrity assessed, patient handed over";
+        attribute :>> failureOutcome = "uncontrolled bleeding, suspected staple-line issue, or conversion/escalation";
+        ref :>> primaryUser = bariatricSurgeon;
+        ref :>> supportingActors = (scrubNurse, anesthetist);
+        ref :>> useContext = bariatricOr;
+    }
+    connection : Motivates connect motivatingNeed ::> needControlledGastricResection to motivatedUseCase ::> ucPerformSleeveGastrectomy;
+    connection : Initiates connect initiatingUser ::> bariatricSurgeon to initiatedUseCase ::> ucPerformSleeveGastrectomy;
+
+    // ── Procedure and operational workflow ─────────────────────
+    part procSleeveGastrectomy : ClinicalProcedure {
+        attribute :>> id = "LSG-PROC-001";
+        attribute :>> name = "LaparoscopicSleeveGastrectomy";
+        attribute :>> bodySite = "stomach";
+        attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
+    }
+    part techStapleLineCreation : ClinicalTechnique {
+        attribute :>> id = "LSG-TECH-001";
+        attribute :>> name = "StapleLineCreationAndInspection";
+        attribute :>> advantages = "provides a repeatable resection and explicit inspection point";
+        attribute :>> limitations = "requires assessment for bleeding and integrity before completion";
+    }
+    connection : UsesTechnique connect procedure ::> procSleeveGastrectomy to technique ::> techStapleLineCreation;
+
+    action actTimeOutAndPosition : OperationalActivity { attribute :>> id = "LSG-ACT-001"; attribute :>> name = "ConfirmTimeOutAndPosition"; }
+    action actEstablishAccess : OperationalActivity { attribute :>> id = "LSG-ACT-002"; attribute :>> name = "EstablishLaparoscopicAccess"; }
+    action actMobilizeStomach : OperationalActivity { attribute :>> id = "LSG-ACT-003"; attribute :>> name = "MobilizeStomach"; }
+    action actSizeAndCreateSleeve : OperationalActivity { attribute :>> id = "LSG-ACT-004"; attribute :>> name = "SizeAndCreateSleeve"; attribute :>> criticality = CriticalityKind::high; }
+    action actAssessStapleLine : OperationalActivity { attribute :>> id = "LSG-ACT-005"; attribute :>> name = "AssessStapleLine"; attribute :>> criticality = CriticalityKind::high; }
+    action actExtractSpecimenAndClose : OperationalActivity { attribute :>> id = "LSG-ACT-006"; attribute :>> name = "ExtractSpecimenAndClosePorts"; }
+    action actHandover : OperationalActivity { attribute :>> id = "LSG-ACT-007"; attribute :>> name = "CompletePostoperativeHandover"; }
+
+    action taskCreateStapleLine : CriticalTask {
+        attribute :>> id = "LSG-TASK-001";
+        attribute :>> name = "CreateAndInspectStapleLine";
+        attribute :>> taskGoal = "create the planned sleeve and identify bleeding or integrity concerns before completion";
+        attribute :>> potentialHarm = "bleeding or staple-line complication not recognized before handover";
+        attribute :>> severityIfFailed = SeverityKind::serious;
+    }
+    action stConfirmAnatomy : ClinicalTaskStep { attribute :>> id = "LSG-ST-001"; attribute :>> name = "ConfirmAnatomy"; attribute :>> stepOrder = 1; }
+    action stCreateStapleLine : ClinicalTaskStep { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; attribute :>> stepOrder = 2; }
+    action stInspectBleeding : ClinicalTaskStep { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; attribute :>> stepOrder = 3; }
+    action stAssessIntegrity : ClinicalTaskStep { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; attribute :>> stepOrder = 4; }
+    connection : ActivityComprisesTask connect activity ::> actSizeAndCreateSleeve to task ::> taskCreateStapleLine;
+    connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stConfirmAnatomy;
+    connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stCreateStapleLine;
+    connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stInspectBleeding;
+    connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stAssessIntegrity;
+
+    action wfSleeveGastrectomy : OperationalWorkflow {
+        attribute :>> id = "LSG-WF-001";
+        attribute :>> name = "LaparoscopicSleeveGastrectomyWorkflow";
+        attribute :>> workflowState = WorkflowStateKind::toBe;
+        attribute :>> entryCondition = "patient prepared; time-out ready";
+        attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
+    }
+    action wsTimeOut : WorkflowStep { attribute :>> stepOrder = 1; ref :>> performedActivity = actTimeOutAndPosition; }
+    action wsAccess : WorkflowStep { attribute :>> stepOrder = 2; ref :>> performedActivity = actEstablishAccess; }
+    action wsMobilize : WorkflowStep { attribute :>> stepOrder = 3; ref :>> performedActivity = actMobilizeStomach; }
+    action wsSleeve : WorkflowStep { attribute :>> stepOrder = 4; ref :>> performedActivity = actSizeAndCreateSleeve; }
+    action wsAssess : WorkflowStep { attribute :>> stepOrder = 5; ref :>> performedActivity = actAssessStapleLine; }
+    action wsClose : WorkflowStep { attribute :>> stepOrder = 6; ref :>> performedActivity = actExtractSpecimenAndClose; }
+    action wsHandover : WorkflowStep { attribute :>> stepOrder = 7; ref :>> performedActivity = actHandover; }
+    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsTimeOut;
+    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsAccess;
+    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsMobilize;
+    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsSleeve;
+    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsAssess;
+    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsClose;
+    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsHandover;
+    connection : StepPrecedes connect predecessor ::> wsTimeOut to successor ::> wsAccess;
+    connection : StepPrecedes connect predecessor ::> wsAccess to successor ::> wsMobilize;
+    connection : StepPrecedes connect predecessor ::> wsMobilize to successor ::> wsSleeve;
+    connection : StepPrecedes connect predecessor ::> wsSleeve to successor ::> wsAssess;
+    connection : StepPrecedes connect predecessor ::> wsAssess to successor ::> wsClose;
+    connection : StepPrecedes connect predecessor ::> wsClose to successor ::> wsHandover;
+    connection : SupportsUseCase connect workflow ::> wfSleeveGastrectomy to useCase ::> ucPerformSleeveGastrectomy;
+    connection : ImplementsProcedure connect workflow ::> wfSleeveGastrectomy to procedure ::> procSleeveGastrectomy;
+
+    // ── Scenario paths, each with its own activity/action flow ──
+    action oaCompleteSleeveProcedure : OperationalActivity {
+        attribute :>> name = "CompleteNominalSleeveProcedure";
+        action prepare; action createSleeve; action assess; action handover;
+        first start then prepare; first prepare then createSleeve; first createSleeve then assess; first assess then handover; first handover then done;
+    }
+    action oaControlStapleLineBleeding : OperationalActivity {
+        attribute :>> name = "ControlStapleLineBleeding";
+        action recognizeBleeding; action controlBleeding; action reassessStapleLine; action escalateIfNeeded;
+        first start then recognizeBleeding; first recognizeBleeding then controlBleeding; first controlBleeding then reassessStapleLine; first reassessStapleLine then escalateIfNeeded; first escalateIfNeeded then done;
+    }
+    part scNominalSleeveProcedure : OperationalScenario {
+        attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
+        attribute :>> variantKind = ScenarioVariantKind::nominal;
+        attribute :>> operationalCondition = OperationalConditionKind::normal;
+        attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
+        ref :>> parentWorkflow = wfSleeveGastrectomy;
+        ref :>> parentUseCase = ucPerformSleeveGastrectomy;
+        ref :>> activities = oaCompleteSleeveProcedure;
+    }
+    part scStapleLineBleeding : OperationalScenario {
+        attribute :>> id = "LSG-SC-002"; attribute :>> name = "StapleLineBleedingRecovery";
+        attribute :>> variantKind = ScenarioVariantKind::recovery;
+        attribute :>> operationalCondition = OperationalConditionKind::degraded;
+        attribute :>> variationPoint = "bleeding observed during staple-line assessment";
+        attribute :>> pathSummary = "Recognize bleeding, apply the selected control, reassess the staple line, and escalate if the condition remains unresolved.";
+        ref :>> baseScenario = scNominalSleeveProcedure;
+        ref :>> parentWorkflow = wfSleeveGastrectomy;
+        ref :>> parentUseCase = ucPerformSleeveGastrectomy;
+        ref :>> activities = oaControlStapleLineBleeding;
+    }
+    connection : ScenarioRealizesUseCase connect scenario ::> scNominalSleeveProcedure to useCase ::> ucPerformSleeveGastrectomy;
+    connection : ScenarioRealizesUseCase connect scenario ::> scStapleLineBleeding to useCase ::> ucPerformSleeveGastrectomy;
+    connection : ScenarioComprisesActivity connect scenario ::> scNominalSleeveProcedure to activity ::> oaCompleteSleeveProcedure;
+    connection : ScenarioComprisesActivity connect scenario ::> scStapleLineBleeding to activity ::> oaControlStapleLineBleeding;
+}

@@ -1,85 +1,208 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="800" viewBox="0 0 1240 800" role="img" aria-labelledby="omtitle omdesc">
-  <title id="omtitle">The MEMO ontology map</title>
-  <desc id="omdesc">Architecture perspectives on the left, cross-cutting assurance disciplines across the top, a V of definition and integration in the middle, and an evidence-and-traceability strip at the bottom.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc" data-ontology-types="UseCase OperationalWorkflow MemoScenario OperationalActivity SystemFunction SystemAction FunctionalFlow FunctionalExchange LogicalComponent LogicalSubsystem LogicalChannel LogicalInterface SoftwareComponent RuntimeComponent HardwareComponent PhysicalPort StakeholderNeed UserNeed IntendedUse Hazard HazardousSituation RiskBeforeMitigation RiskControl CybersecurityAsset Threat ThreatScenario SecurityRequirement CyberMitigation TrustBoundary AttackSurface Vulnerability User UserTask CriticalTask UseError UseEnvironment UserInterface UIElement AlarmElement PhysicalControl ValidationCase VerificationCase TestArtifact Evidence">
+  <title id="title">MEMO architecture and assurance V-model</title>
+  <desc id="desc">Architecture perspectives form horizontal rows. Requirements, safety and risk, cybersecurity, human factors, and verification and validation form assurance columns. Architecture is decomposed down the left side of a V and integrated and evaluated up the right side.</desc>
+
   <defs>
-    <marker id="omarrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#5c7188"/></marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f7f9fc"/>
+    </linearGradient>
+    <linearGradient id="op" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5644a7"/><stop offset="1" stop-color="#7d6bd1"/></linearGradient>
+    <linearGradient id="fn" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#176da8"/><stop offset="1" stop-color="#3d94c8"/></linearGradient>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#087168"/><stop offset="1" stop-color="#2f9990"/></linearGradient>
+    <linearGradient id="im" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bd6a20"/><stop offset="1" stop-color="#e09a56"/></linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#102e49" flood-opacity="0.12"/></filter>
+    <marker id="archArrow" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#205ca5"/></marker>
+    <marker id="vvArrow" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#287b47"/></marker>
+
+    <symbol id="clipboard" viewBox="0 0 48 48">
+      <rect x="10" y="8" width="28" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      <rect x="17" y="4" width="14" height="8" rx="3" fill="#ffffff" stroke="currentColor" stroke-width="2.5"/>
+      <path d="M17 21h14M17 28h14M17 35h9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="shield" viewBox="0 0 48 48">
+      <path d="M24 5L39 11v11c0 10-6 17-15 22C15 39 9 32 9 22V11Z" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="lock" viewBox="0 0 48 48">
+      <rect x="9" y="20" width="30" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.6"/>
+      <path d="M16 20v-6a8 8 0 0116 0v6M24 29v6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="person" viewBox="0 0 48 48">
+      <circle cx="24" cy="13" r="7" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      <path d="M9 42c1-11 6-17 15-17s14 6 15 17M14 42h20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="checkshield" viewBox="0 0 48 48">
+      <path d="M24 5L39 11v11c0 10-6 17-15 22C15 39 9 32 9 22V11Z" fill="none" stroke="currentColor" stroke-width="2.6"/>
+      <path d="M16 24l5 5 11-12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="people" viewBox="0 0 48 48">
+      <circle cx="19" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="33" cy="19" r="5" fill="none" stroke="currentColor" stroke-width="2.3"/>
+      <path d="M7 40c1-9 5-14 12-14s11 5 12 14M28 29c7 0 10 4 11 11" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="gear" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="8" fill="none" stroke="currentColor" stroke-width="2.5"/>
+      <path d="M24 5v6M24 37v6M5 24h6M37 24h6M10.5 10.5l4.3 4.3M33.2 33.2l4.3 4.3M37.5 10.5l-4.3 4.3M14.8 33.2l-4.3 4.3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="network" viewBox="0 0 48 48">
+      <rect x="19" y="5" width="10" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="2.3"/>
+      <rect x="4" y="34" width="10" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="2.3"/>
+      <rect x="19" y="34" width="10" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="2.3"/>
+      <rect x="34" y="34" width="10" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="2.3"/>
+      <path d="M24 14v10M9 24h30M9 24v10M24 24v10M39 24v10" fill="none" stroke="currentColor" stroke-width="2.3"/>
+    </symbol>
+    <symbol id="chip" viewBox="0 0 48 48">
+      <rect x="11" y="11" width="26" height="26" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/>
+      <rect x="17" y="17" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/>
+      <path d="M16 5v6M24 5v6M32 5v6M16 37v6M24 37v6M32 37v6M5 16h6M5 24h6M5 32h6M37 16h6M37 24h6M37 32h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="cube" viewBox="0 0 48 48">
+      <path d="M24 5l16 9v19l-16 10-16-10V14Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M8 14l16 10 16-10M24 24v19" fill="none" stroke="currentColor" stroke-width="2.4"/>
+    </symbol>
+    <symbol id="target" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="24" cy="24" r="9" fill="none" stroke="currentColor" stroke-width="2.3"/><circle cx="24" cy="24" r="2.5" fill="currentColor"/>
+      <path d="M24 3v7M24 38v7M3 24h7M38 24h7" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/>
+    </symbol>
+
+    <style>
+      .t { font-family: Inter, "Segoe UI", Arial, sans-serif; fill: #0a2744; }
+      .title { font-size: 27px; font-weight: 700; letter-spacing: .25px; }
+      .sub { font-size: 14px; font-weight: 400; fill: #526980; }
+      .axis { font-size: 14px; font-weight: 700; letter-spacing: .7px; }
+      .header { font-size: 15px; font-weight: 700; }
+      .header-copy { font-size: 11px; font-weight: 400; fill: #344e66; }
+      .row-title { font-size: 17px; font-weight: 700; fill: #fff; }
+      .row-sub { font-size: 12px; font-weight: 500; fill: #fff; }
+      .row-copy { font-size: 10.5px; font-weight: 400; fill: #fff; }
+      .cell { font-size: 11px; font-weight: 500; }
+      .cell-sub { font-size: 10.5px; font-weight: 400; fill: #263f56; }
+      .v-title { font-size: 13px; font-weight: 700; }
+      .v-copy { font-size: 10.5px; font-weight: 400; fill: #29445d; }
+      .footer-title { font-size: 12px; font-weight: 700; }
+      .footer-copy { font-size: 10.5px; font-weight: 400; fill: #243e55; }
+    </style>
   </defs>
-  <rect width="1240" height="800" rx="24" fill="#fbfcfd"/>
 
-  <text x="48" y="52" font-family="Nunito,Arial,sans-serif" font-size="21" font-weight="850" fill="#082744">THE MEMO ONTOLOGY MAP</text>
-  <text x="48" y="79" font-family="Nunito,Arial,sans-serif" font-size="14" fill="#5c7188">Horizontal perspectives say what kind of question you are answering; vertical disciplines claim elements without owning them.</text>
-
-  <!-- ── Discipline header row ── -->
-  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
-    <g><rect x="268" y="104" width="180" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="268" y="104" width="180" height="6" rx="3" fill="#438ed0"/><text x="358" y="130" font-size="13" font-weight="850" fill="#082744">REQUIREMENTS</text><text x="358" y="150" font-size="11" fill="#5c7188">needs → obligations</text></g>
-    <g><rect x="458" y="104" width="180" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="458" y="104" width="180" height="6" rx="3" fill="#ea6b61"/><text x="548" y="130" font-size="13" font-weight="850" fill="#082744">SAFETY / RISK</text><text x="548" y="150" font-size="11" fill="#5c7188">hazards → controls</text></g>
-    <g><rect x="648" y="104" width="180" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="648" y="104" width="180" height="6" rx="3" fill="#8971dc"/><text x="738" y="130" font-size="13" font-weight="850" fill="#082744">CYBERSECURITY</text><text x="738" y="150" font-size="11" fill="#5c7188">assets → controls</text></g>
-    <g><rect x="838" y="104" width="180" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="838" y="104" width="180" height="6" rx="3" fill="#ef9b51"/><text x="928" y="130" font-size="13" font-weight="850" fill="#082744">HUMAN FACTORS</text><text x="928" y="150" font-size="11" fill="#5c7188">tasks → use errors</text></g>
-    <g><rect x="1028" y="104" width="172" height="58" rx="12" fill="#eef4f7" stroke="#d8e2e9"/><rect x="1028" y="104" width="172" height="6" rx="3" fill="#2dd4a8"/><text x="1114" y="130" font-size="13" font-weight="850" fill="#082744">V &amp; V</text><text x="1114" y="150" font-size="11" fill="#5c7188">cases → evidence</text></g>
+  <rect width="1600" height="1080" rx="24" fill="url(#bg)"/>
+  <g class="t">
+    <text class="title" x="46" y="44">THE MEMO ARCHITECTURE AND ASSURANCE V-MODEL</text>
+    <text class="sub" x="46" y="70">Architecture moves from operational intent to realization. Assurance disciplines own and evaluate elements at every architecture level.</text>
+    <text class="axis" x="42" y="106">ARCHITECTURE LAYERS</text>
   </g>
 
-  <!-- ── Perspective rail ── -->
-  <g font-family="Nunito,Arial,sans-serif">
-    <g><rect x="40" y="186" width="200" height="96" rx="14" fill="#8971dc"/><text x="60" y="216" font-size="14" font-weight="850" fill="#ffffff">OPERATIONAL</text><text x="60" y="238" font-size="11.5" fill="#f0edff">Why, for whom, in what</text><text x="60" y="254" font-size="11.5" fill="#f0edff">context? Work before device.</text><text x="60" y="272" font-size="10.5" font-weight="700" fill="#dcd2ff">use cases · workflows · tasks</text></g>
-    <g><rect x="40" y="294" width="200" height="96" rx="14" fill="#438ed0"/><text x="60" y="324" font-size="14" font-weight="850" fill="#ffffff">FUNCTIONAL</text><text x="60" y="346" font-size="11.5" fill="#eaf4fd">What must the system do,</text><text x="60" y="362" font-size="11.5" fill="#eaf4fd">independent of technology?</text><text x="60" y="380" font-size="10.5" font-weight="700" fill="#cfe6fb">functions · flows · exchanges</text></g>
-    <g><rect x="40" y="402" width="200" height="96" rx="14" fill="#0a8d76"/><text x="60" y="432" font-size="14" font-weight="850" fill="#ffffff">LOGICAL</text><text x="60" y="454" font-size="11.5" fill="#e3faf3">How is the solution organized,</text><text x="60" y="470" font-size="11.5" fill="#e3faf3">still technology-independent?</text><text x="60" y="488" font-size="10.5" font-weight="700" fill="#bdf2e4">components · channels · modes</text></g>
-    <g><rect x="40" y="510" width="200" height="96" rx="14" fill="#ef9b51"/><text x="60" y="540" font-size="14" font-weight="850" fill="#ffffff">IMPLEMENTATION</text><text x="60" y="562" font-size="11.5" fill="#fff3e8">How is it realized in software,</text><text x="60" y="578" font-size="11.5" fill="#fff3e8">hardware, and physics?</text><text x="60" y="596" font-size="10.5" font-weight="700" fill="#ffe1c4">modules · runtime · parts</text></g>
-    <g><rect x="40" y="618" width="200" height="84" rx="14" fill="#5c7188"/><text x="60" y="648" font-size="14" font-weight="850" fill="#ffffff">REALIZATION STAGE</text><text x="60" y="670" font-size="11.5" fill="#eef4f7">Same identity: specified →</text><text x="60" y="686" font-size="11.5" fill="#eef4f7">built → deployed → retired</text></g>
+  <!-- Architecture definition is separate from the bounded assurance area. -->
+  <g filter="url(#soft)" class="t">
+    <rect x="280" y="122" width="320" height="108" rx="12" fill="#f3f8fd" stroke="#9ebfe0"/>
+  </g>
+  <rect x="610" y="92" width="950" height="872" rx="18" fill="#ffffff" fill-opacity=".42" stroke="#9fb1c3" stroke-width="1.5"/>
+  <g class="t" text-anchor="middle">
+    <g transform="translate(307 147)" color="#205ca5"><use href="#network" width="54" height="54"/></g>
+    <text class="header" x="460" y="163" fill="#205ca5">ARCHITECTURE DEFINITION</text>
+    <text class="header-copy" x="460" y="188">decompose intent into a realizable design</text>
+    <text class="header-copy" x="460" y="207">operational · functional · logical · implementation</text>
+    <text class="axis" x="1085" y="116">ASSURANCE — CROSS-CUTTING LIFECYCLE DISCIPLINES</text>
   </g>
 
-  <!-- ── V: definition leg ── -->
-  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
-    <g><rect x="300" y="196" width="228" height="66" rx="13" fill="#f0edff" stroke="#8971dc" stroke-width="2"/><text x="414" y="223" font-size="12.5" font-weight="850" fill="#4c3a98">OPERATIONAL CONCEPTS</text><text x="414" y="243" font-size="11.5" fill="#4c3a98">use cases · workflows · scenarios</text></g>
-    <g><rect x="360" y="304" width="228" height="66" rx="13" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/><text x="474" y="331" font-size="12.5" font-weight="850" fill="#17557f">FUNCTIONAL ARCHITECTURE</text><text x="474" y="351" font-size="11.5" fill="#17557f">system functions · functional flows</text></g>
-    <g><rect x="420" y="412" width="228" height="66" rx="13" fill="#e3faf3" stroke="#2dd4a8" stroke-width="2"/><text x="534" y="439" font-size="12.5" font-weight="850" fill="#07604f">LOGICAL ARCHITECTURE</text><text x="534" y="459" font-size="11.5" fill="#07604f">components · channels · interfaces</text></g>
-    <g><rect x="480" y="520" width="228" height="66" rx="13" fill="#fff3e8" stroke="#ef9b51" stroke-width="2"/><text x="594" y="547" font-size="12.5" font-weight="850" fill="#88501f">IMPLEMENTATION ARCHITECTURE</text><text x="594" y="567" font-size="11.5" fill="#88501f">software · hardware · physical parts</text></g>
+  <!-- Assurance discipline headers -->
+  <g filter="url(#soft)" class="t">
+    <rect x="620" y="128" width="184" height="102" rx="10" fill="#fbf9ff" stroke="#c7bce8"/>
+    <rect x="804" y="128" width="184" height="102" rx="10" fill="#fffaf5" stroke="#e8b889"/>
+    <rect x="988" y="128" width="184" height="102" rx="10" fill="#f8f9fd" stroke="#a9b8d7"/>
+    <rect x="1172" y="128" width="184" height="102" rx="10" fill="#f8fcf6" stroke="#a6c99a"/>
+    <rect x="1356" y="128" width="194" height="102" rx="10" fill="#f5f9ff" stroke="#9fb5d5"/>
+  </g>
+  <g class="t" text-anchor="middle">
+    <g transform="translate(693 134)" color="#6543a5"><use href="#clipboard" width="38" height="38"/></g>
+    <text class="header" x="712" y="190" fill="#54368f">REQUIREMENTS</text><text class="header-copy" x="712" y="212">needs · specifications</text>
+    <g transform="translate(877 134)" color="#d16a12"><use href="#shield" width="38" height="38"/></g>
+    <text class="header" x="896" y="190" fill="#b4570d">SAFETY / RISK</text><text class="header-copy" x="896" y="212">hazards · controls</text>
+    <g transform="translate(1061 134)" color="#173d78"><use href="#lock" width="38" height="38"/></g>
+    <text class="header" x="1080" y="190" fill="#173d78">CYBERSECURITY</text><text class="header-copy" x="1080" y="212">assets · threats</text>
+    <g transform="translate(1245 134)" color="#4d8138"><use href="#person" width="38" height="38"/></g>
+    <text class="header" x="1264" y="190" fill="#3f6e2f">HUMAN FACTORS</text><text class="header-copy" x="1264" y="212">users · tasks</text>
+    <g transform="translate(1434 132)" color="#173d78"><use href="#checkshield" width="38" height="38"/></g>
+    <text x="1453" y="183" font-size="12.5" font-weight="700" fill="#173d78">VERIFICATION &amp;</text><text x="1453" y="199" font-size="12.5" font-weight="700" fill="#173d78">VALIDATION (V&amp;V)</text><text class="header-copy" x="1453" y="218">cases · results · evidence</text>
   </g>
 
-  <!-- ── V: integration leg ── -->
-  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
-    <g><rect x="900" y="196" width="228" height="66" rx="13" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="1014" y="223" font-size="12.5" font-weight="850" fill="#07604f">OPERATIONAL VALIDATION</text><text x="1014" y="243" font-size="11.5" fill="#07604f">right goal, right users, right context?</text></g>
-    <g><rect x="840" y="304" width="228" height="66" rx="13" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="954" y="331" font-size="12.5" font-weight="850" fill="#07604f">SYSTEM V&amp;V</text><text x="954" y="351" font-size="11.5" fill="#07604f">required functions, met requirements?</text></g>
-    <g><rect x="780" y="412" width="228" height="66" rx="13" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="894" y="439" font-size="12.5" font-weight="850" fill="#07604f">INTEGRATION VERIFICATION</text><text x="894" y="459" font-size="11.5" fill="#07604f">subsystems and interfaces correct?</text></g>
-    <g><rect x="720" y="520" width="228" height="66" rx="13" fill="#e3faf3" stroke="#0a8d76" stroke-width="2"/><text x="834" y="547" font-size="12.5" font-weight="850" fill="#07604f">COMPONENT VERIFICATION</text><text x="834" y="567" font-size="11.5" fill="#07604f">implemented as specified?</text></g>
+  <!-- Four architecture rows plus realization as the fifth, bottom layer. -->
+  <rect x="280" y="246" width="1270" height="718" fill="#ffffff" stroke="#c8d4df" stroke-width="1.5"/>
+  <rect x="280" y="246" width="330" height="718" fill="#2d74b8" opacity=".05"/>
+  <rect x="620" y="246" width="184" height="718" fill="#765bb4" opacity=".035"/>
+  <rect x="804" y="246" width="184" height="718" fill="#d77622" opacity=".035"/>
+  <rect x="988" y="246" width="184" height="718" fill="#31558b" opacity=".035"/>
+  <rect x="1172" y="246" width="184" height="718" fill="#4c8337" opacity=".035"/>
+  <rect x="1356" y="246" width="194" height="718" fill="#287b47" opacity=".055"/>
+  <g stroke="#d7e0e8" stroke-width="1">
+    <path d="M280 398H1550M280 550H1550M280 702H1550M280 854H1550"/>
+    <path d="M610 246V964M620 246V964M804 246V964M988 246V964M1172 246V964M1356 246V964"/>
   </g>
 
-  <!-- ── Realization keystone ── -->
-  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
-    <path d="M560 610 L868 610 L830 668 L598 668 Z" fill="#0b1e2d"/>
-    <text x="714" y="636" font-size="13" font-weight="850" fill="#ffffff">REALIZATION</text>
-    <text x="714" y="655" font-size="11" fill="#9fb4c6">build · configure · assemble · deploy</text>
+  <!-- Architecture layer cards -->
+  <g filter="url(#soft)" class="t">
+    <rect x="34" y="256" width="220" height="126" rx="13" fill="url(#op)"/>
+    <rect x="34" y="408" width="220" height="126" rx="13" fill="url(#fn)"/>
+    <rect x="34" y="560" width="220" height="126" rx="13" fill="url(#lg)"/>
+    <rect x="34" y="712" width="220" height="126" rx="13" fill="url(#im)"/>
+    <rect x="34" y="864" width="220" height="90" rx="13" fill="#5d6f82"/>
+  </g>
+  <g class="t">
+    <g transform="translate(49 271)" color="#fff"><use href="#people" width="44" height="44"/></g>
+    <text class="row-title" x="104" y="283">OPERATIONAL</text><text class="row-sub" x="104" y="304">Why and for whom?</text><text class="row-copy" x="104" y="326">UseCase · Workflow · Scenario</text><text class="row-copy" x="104" y="344">OperationalActivity</text>
+    <g transform="translate(49 423)" color="#fff"><use href="#gear" width="44" height="44"/></g>
+    <text class="row-title" x="104" y="435">FUNCTIONAL</text><text class="row-sub" x="104" y="456">What must the system do?</text><text class="row-copy" x="104" y="478">SystemFunction · Flow</text><text class="row-copy" x="104" y="496">FunctionalExchange</text>
+    <g transform="translate(49 575)" color="#fff"><use href="#network" width="44" height="44"/></g>
+    <text class="row-title" x="104" y="587">LOGICAL</text><text class="row-sub" x="104" y="608">How is it organized?</text><text class="row-copy" x="104" y="630">components · channels</text><text class="row-copy" x="104" y="648">interfaces · modes</text>
+    <g transform="translate(49 727)" color="#fff"><use href="#chip" width="44" height="44"/></g>
+    <text class="row-title" x="104" y="739">IMPLEMENTATION</text><text class="row-sub" x="104" y="760">How is it specified?</text><text class="row-copy" x="104" y="782">software · runtime · hardware</text><text class="row-copy" x="104" y="800">physical parts · ports</text>
+    <g transform="translate(51 878)" color="#fff"><use href="#cube" width="40" height="40"/></g>
+    <text class="row-title" x="104" y="890">REALIZATION</text><text class="row-sub" x="104" y="913">What is built and deployed?</text><text class="row-copy" x="104" y="934">build · configure · assemble</text>
   </g>
 
-  <!-- ── V legs and per-row verification traces ── -->
-  <g stroke="#5c7188" stroke-width="2.5" fill="none">
-    <path d="M414 262 L474 304" marker-end="url(#omarrow)"/>
-    <path d="M474 370 L534 412" marker-end="url(#omarrow)"/>
-    <path d="M534 478 L594 520" marker-end="url(#omarrow)"/>
-    <path d="M594 586 L636 610" marker-end="url(#omarrow)"/>
-    <path d="M792 610 L834 586" marker-end="url(#omarrow)"/>
-    <path d="M894 520 L834 478" transform="translate(0,0)" marker-end="url(#omarrow)" stroke="#0a8d76"/>
-    <path d="M954 412 L894 370" marker-end="url(#omarrow)" stroke="#0a8d76"/>
-    <path d="M1014 304 L954 262" marker-end="url(#omarrow)" stroke="#0a8d76"/>
-  </g>
-  <g stroke="#5c7188" stroke-width="1.8" stroke-dasharray="5 5" fill="none">
-    <path d="M532 229 L896 229"/>
-    <path d="M592 337 L836 337"/>
-    <path d="M652 445 L776 445"/>
-    <path d="M712 553 L716 553"/>
-  </g>
-  <g font-family="Nunito,Arial,sans-serif" font-size="10.5" font-weight="700" fill="#5c7188" text-anchor="middle">
-    <text x="714" y="222">validates</text>
-    <text x="714" y="330">verifies</text>
-    <text x="714" y="438">verifies</text>
+  <!-- The V has one node per architecture and V&V level; circles mask the line behind labels. -->
+  <path d="M320 314 L342 466 L370 618 L405 770 L790 909" fill="none" stroke="#205ca5" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="t">
+    <g fill="#fff" stroke="#205ca5" stroke-width="2"><circle cx="342" cy="314" r="27"/><circle cx="364" cy="466" r="27"/><circle cx="392" cy="618" r="27"/><circle cx="427" cy="770" r="27"/></g>
+    <g transform="translate(319 291)" color="#205ca5"><use href="#target" width="46" height="46"/></g><text class="v-title" x="390" y="304">Operational concepts</text><text class="v-copy" x="390" y="325">use cases · workflows · scenarios</text><text class="v-copy" x="390" y="344">activities · entities · interactions</text>
+    <g transform="translate(341 443)" color="#205ca5"><use href="#gear" width="46" height="46"/></g><text class="v-title" x="412" y="456">Functional architecture</text><text class="v-copy" x="412" y="477">functions · actions · flows</text><text class="v-copy" x="412" y="496">exchanges · behavior properties</text>
+    <g transform="translate(369 595)" color="#205ca5"><use href="#network" width="46" height="46"/></g><text class="v-title" x="440" y="608">Logical architecture</text><text class="v-copy" x="440" y="629">components · channels</text><text class="v-copy" x="440" y="648">interfaces · modes · boundaries</text>
+    <g transform="translate(404 747)" color="#205ca5"><use href="#chip" width="46" height="46"/></g><text class="v-title" x="475" y="760">Implementation architecture</text><text class="v-copy" x="475" y="781">software · runtime · hardware</text><text class="v-copy" x="475" y="800">physical parts · ports</text>
   </g>
 
-  <!-- ── Evidence strip ── -->
-  <g font-family="Nunito,Arial,sans-serif">
-    <rect x="268" y="712" width="932" height="56" rx="14" fill="#0b1e2d"/>
-    <text x="292" y="736" font-size="13" font-weight="850" fill="#2dd4a8">EVIDENCE &amp; TRACEABILITY</text>
-    <text x="292" y="756" font-size="11.5" fill="#cfe8ff">Typed relationships link the why to the what, the how, and the proof — a many-to-many graph, never a mandatory pipeline.</text>
-    <rect x="40" y="712" width="200" height="56" rx="14" fill="#eef4f7" stroke="#d8e2e9"/>
-    <text x="60" y="736" font-family="Nunito,Arial,sans-serif" font-size="12" font-weight="850" fill="#082744">SIMPLE DEVICES</text>
-    <text x="60" y="754" font-family="Nunito,Arial,sans-serif" font-size="10.5" fill="#5c7188">skip layers they do not need</text>
+  <!-- Assurance-owned elements in each architecture row -->
+  <g class="t" text-anchor="middle">
+    <g fill="#3d2d76"><text class="cell" x="712" y="278">StakeholderNeed · UserNeed</text><text class="cell-sub" x="712" y="299">IntendedUse · OperationalNeed</text><text class="cell-sub" x="712" y="320">DesignControlNeed</text></g>
+    <g fill="#9e4d18"><text class="cell" x="896" y="278">Hazard · HazardousSituation</text><text class="cell-sub" x="896" y="299">SequenceOfEvents · Harm</text><text class="cell-sub" x="896" y="320">RiskBeforeMitigation</text></g>
+    <g fill="#253f7b"><text class="cell" x="1080" y="278">CybersecurityAsset · Threat</text><text class="cell-sub" x="1080" y="299">ThreatScenario · CyberRisk</text><text class="cell-sub" x="1080" y="320">CyberHazard</text></g>
+    <g fill="#3f6e2f"><text class="cell" x="1264" y="278">User · UserTask</text><text class="cell-sub" x="1264" y="299">UseEnvironment · UseError</text><text class="cell-sub" x="1264" y="320">hazard-related scenarios</text></g>
+    <g fill="#3d2d76"><text class="cell" x="712" y="430">SystemRequirement</text><text class="cell-sub" x="712" y="451">functional · performance</text><text class="cell-sub" x="712" y="472">interaction obligations</text></g>
+    <g fill="#9e4d18"><text class="cell" x="896" y="430">RiskControl</text><text class="cell-sub" x="896" y="451">safety constraints</text><text class="cell-sub" x="896" y="472">risk-derived requirements</text></g>
+    <g fill="#253f7b"><text class="cell" x="1080" y="430">SecurityRequirement</text><text class="cell-sub" x="1080" y="451">CyberMitigation</text><text class="cell-sub" x="1080" y="472">security services</text></g>
+    <g fill="#3f6e2f"><text class="cell" x="1264" y="430">CriticalTask</text><text class="cell-sub" x="1264" y="451">interaction requirements</text><text class="cell-sub" x="1264" y="472">use-related controls</text></g>
+    <g fill="#3d2d76"><text class="cell" x="712" y="582">Allocated requirements</text><text class="cell-sub" x="712" y="603">SatisfiedBy · AllocatedTo</text><text class="cell-sub" x="712" y="624">logical interfaces</text></g>
+    <g fill="#9e4d18"><text class="cell" x="896" y="582">Safety allocation</text><text class="cell-sub" x="896" y="603">independence · isolation</text><text class="cell-sub" x="896" y="624">fault containment</text></g>
+    <g fill="#253f7b"><text class="cell" x="1080" y="582">TrustBoundary</text><text class="cell-sub" x="1080" y="603">security architecture</text><text class="cell-sub" x="1080" y="624">crossing constraints</text></g>
+    <g fill="#3f6e2f"><text class="cell" x="1264" y="582">LogicalUserInterface</text><text class="cell-sub" x="1264" y="603">task-supporting interfaces</text><text class="cell-sub" x="1264" y="624">InteractionFlow</text></g>
+    <g fill="#3d2d76"><text class="cell" x="712" y="734">SoftwareRequirement</text><text class="cell-sub" x="712" y="755">HardwareRequirement</text><text class="cell-sub" x="712" y="776">implementation specifications</text></g>
+    <g fill="#9e4d18"><text class="cell" x="896" y="734">Implemented controls</text><text class="cell-sub" x="896" y="755">FMEAAction · DetectionMethod</text><text class="cell-sub" x="896" y="776">RiskAfterMitigation</text></g>
+    <g fill="#253f7b"><text class="cell" x="1080" y="734">AttackSurface · Vulnerability</text><text class="cell-sub" x="1080" y="755">secure design · hardening</text><text class="cell-sub" x="1080" y="776">SecurityClaim</text></g>
+    <g fill="#3f6e2f"><text class="cell" x="1264" y="734">UserInterface · UIElement</text><text class="cell-sub" x="1264" y="755">AlarmElement · PhysicalControl</text><text class="cell-sub" x="1264" y="776">FormativeEvaluation</text></g>
   </g>
+
+  <!-- V&V is inside assurance and connects each evaluation level back to realization. -->
+  <path d="M1045 909 L1390 770 L1412 618 L1434 466 L1456 314" fill="none" stroke="#287b47" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g class="t">
+    <g fill="#fff" stroke="#287b47" stroke-width="2"><circle cx="1456" cy="314" r="27"/><circle cx="1434" cy="466" r="27"/><circle cx="1412" cy="618" r="27"/><circle cx="1390" cy="770" r="27"/></g>
+    <g transform="translate(1433 291)" color="#287b47"><use href="#checkshield" width="46" height="46"/></g><text class="v-title" x="1500" y="304" text-anchor="middle">Operational validation</text><text class="v-copy" x="1500" y="325" text-anchor="middle">ValidationCase → UseCase</text><text class="v-copy" x="1500" y="344" text-anchor="middle">goal · users · context</text>
+    <g transform="translate(1411 443)" color="#287b47"><use href="#clipboard" width="46" height="46"/></g><text class="v-title" x="1490" y="456" text-anchor="middle">System verification</text><text class="v-copy" x="1490" y="477" text-anchor="middle">VerificationCase → Function</text><text class="v-copy" x="1490" y="496" text-anchor="middle">requirements · evidence</text>
+    <g transform="translate(1389 595)" color="#287b47"><use href="#network" width="46" height="46"/></g><text class="v-title" x="1480" y="608" text-anchor="middle">Integration verification</text><text class="v-copy" x="1480" y="629" text-anchor="middle">subsystem · interface</text><text class="v-copy" x="1480" y="648" text-anchor="middle">integration evidence</text>
+    <g transform="translate(1367 747)" color="#287b47"><use href="#clipboard" width="46" height="46"/></g><text class="v-title" x="1470" y="760" text-anchor="middle">Component verification</text><text class="v-copy" x="1470" y="781" text-anchor="middle">implementation element</text><text class="v-copy" x="1470" y="800" text-anchor="middle">TestArtifact · Evidence</text>
+  </g>
+
+  <!-- Realization occupies the entire bottom architecture row and is the point of the V. -->
+  <path d="M790 868 H1045 L1010 949 H825 Z" fill="#172a3a" filter="url(#soft)"/>
+  <g class="t" text-anchor="middle"><g transform="translate(820 885)" color="#fff"><use href="#cube" width="40" height="40"/></g><text x="920" y="899" font-size="17" font-weight="700" fill="#fff">REALIZATION</text><text x="920" y="923" font-size="11.5" font-weight="400" fill="#fff">build · configure · code · assemble · deploy</text></g>
+
+  <!-- Only the cross-cutting traceability statement remains; unused arrow keys were removed. -->
+  <rect x="34" y="990" width="1520" height="58" rx="12" fill="#0b2235"/>
+  <g class="t"><text x="62" y="1016" font-size="13" font-weight="700" fill="#36d1b4">EVIDENCE &amp; TRACEABILITY</text><text x="265" y="1016" font-size="11.5" font-weight="400" fill="#ffffff">Typed relationships connect architecture, assurance claims, V&amp;V results, and evidence across every layer.</text><text x="62" y="1035" font-size="10.5" font-weight="400" fill="#c8d6e2">The model records what each discipline owns and how each claim is evaluated without duplicating the underlying element.</text></g>
 </svg>

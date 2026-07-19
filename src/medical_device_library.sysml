@@ -10,7 +10,7 @@ package memo_medical_device_library {
     public import memo_context_actors::*;
     public import memo_context_stakeholders::*;
     public import memo_context_use_context::*;
-    public import memo_needs::*;
+    public import memo_assurance_needs::*;
     public import memo_use_cases::*;
     public import memo_clinical_procedures::*;
     public import memo_activities::*;
@@ -20,7 +20,7 @@ package memo_medical_device_library {
     public import memo_interaction::*;
     public import memo_architecture_operational::*;
     public import memo_architecture_system::*;
-    public import memo_architecture_requirements::*;
+    public import memo_assurance_requirements::*;
     public import memo_architecture_functions::*;
     public import memo_architecture_logical_structure::*;
     public import memo_architecture_interfaces::*;
@@ -30,11 +30,11 @@ package memo_medical_device_library {
     public import memo_architecture_deployment::*;
     public import memo_architecture_hardware_structure::*;
     public import memo_architecture_constraints::*;
-    public import memo_architecture_risk_risk::*;
-    public import memo_architecture_cybersecurity::*;
-    public import memo_architecture_assurance::*;
+    public import memo_assurance_safety_risk::*;
+    public import memo_assurance_cybersecurity::*;
+    public import memo_assurance_verification::*;
     public import memo_architecture_physical::*;
-    public import memo_architecture_analysis::*;
+    public import memo_assurance_safety_analysis::*;
     public import memo_architecture_decisions::*;
     public import memo_medical_products_lifecycle::*;
     public import memo_medical_products_definitions::*;
