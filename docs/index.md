@@ -39,7 +39,7 @@ When something changes, follow these links to find what must be reviewed. The
 model supports that check; the engineering team still makes the clinical,
 risk-acceptance, and approval decisions.
 
-[![The MEMO ontology map: architecture perspectives, assurance disciplines, and the V of definition and integration](assets/ontology-map.svg)](assets/ontology-map.svg){ .memo-zoomable aria-label="Open a larger ontology map" }
+[![MEMO architecture and assurance V-model](assets/memo-architecture-assurance-v-model.png)](assets/memo-architecture-assurance-v-model.png){ .memo-zoomable aria-label="Open the architecture and assurance V-model" }
 
 ## What MEMO provides
 

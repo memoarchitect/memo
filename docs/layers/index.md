@@ -12,8 +12,6 @@ package (`memo_architecture_*` for a horizontal layer, `memo_assurance_*` for a
 vertical discipline), enforced by rule CR-ONT-045. An element lives once; it
 reaches the other axis only through typed relationships, not by belonging to it.
 
-[![The MEMO ontology map](../assets/ontology-map.svg)](../assets/ontology-map.svg){ .memo-zoomable aria-label="Open a larger ontology map" }
-
 [![MEMO architecture and assurance V-model](../assets/memo-architecture-assurance-v-model.png)](../assets/memo-architecture-assurance-v-model.png){ .memo-zoomable aria-label="Open the architecture and assurance V-model" }
 
 This overview distinguishes the architecture path from operational intent to
