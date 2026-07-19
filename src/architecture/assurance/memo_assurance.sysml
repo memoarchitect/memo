@@ -3,6 +3,10 @@ package memo_architecture_assurance {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
+    private import memo_core_relationships::*;
+    private import memo_scenarios::*;
+    private import memo_use_cases::*;
+    private import memo_architecture_functions::*;
     part def VerificationCase specializes VerifiableElement {
         attribute methodKind : VerificationMethodKind;
         attribute acceptanceCriteria : String;
@@ -14,16 +18,37 @@ package memo_architecture_assurance {
         attribute acceptanceCriteria : String;
         attribute clinicalContext : String;
     }
-    part def TestArtifact specializes EvidenceElement {
+    part def TestArtifact specializes MemoEvidence {
         attribute version : String;
-        attribute lifecycleState : LifecycleStateKind;
         attribute artifactKind : ArtifactKind;
         attribute resultSummary : String;
     }
-    part def Evidence specializes EvidenceElement {
+    part def Evidence specializes MemoEvidence {
         attribute version : String;
-        attribute lifecycleState : LifecycleStateKind;
         attribute evidenceType : String;
         attribute integrityStatus : String;
+    }
+
+    // A scenario executed to verify — selected path with purpose
+    // 'verification' (ADR-0003).
+    part def VerificationScenario specializes MemoScenario {
+        attribute verificationEnvironment : String;
+        attribute stimulusSummary : String;
+    }
+
+    // Operational validation confirms the user's goal is achieved in the
+    // use environment (§5): ValidationCase validates MedicalUseCase.
+    connection def ValidatesUseCase :> MemoRelationship {
+        end validationCase : ValidationCase;
+        end validatedUseCase : MedicalUseCase;
+    }
+    // Safety-critical functions must trace to verification (rules/coverage).
+    connection def VerifiesFunction :> MemoRelationship {
+        end verificationCase : VerificationCase;
+        end verifiedFunction : SystemFunction;
+    }
+    connection def ExecutesScenario :> MemoRelationship {
+        end verificationCase : VerificationCase;
+        end scenario : MemoScenario;
     }
 }

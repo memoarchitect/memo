@@ -7,53 +7,73 @@ conformant SysML v2 editor. The included
 defines `src/` as the library source tree.
 
 For a contribution, begin by identifying the engineering question the change
-should make clearer. Then locate the smallest existing package that owns that
-meaning.
+should make clearer — the reasoning comes before the SysML. Then locate the
+smallest existing package that owns that meaning, and check the
+[concept-provenance matrix](ontology/provenance-matrix.md): if an established
+standard already makes the distinction you need, adapt it and cite it rather
+than inventing a parallel term.
 
 ## Where a change belongs
 
 | You want to… | Put it in… |
 |---|---|
 | Fix or clarify an existing element, relationship, or rule | `src/` in the owning package |
-| Add a device-specific mode, interface, control, or kind | `profile/` or a project package — **not** `memo::core` |
-| Add or adjust a workflow, gate, or viewpoint binding | `src/methodology/` or `methodologies/` |
+| Extend the operational world (actors, needs, use cases, workflows, scenarios, tasks) | `src/context`, `src/needs`, `src/use_cases`, `src/workflows`, `src/scenarios`, `src/activities` |
+| Extend architecture semantics (functional, logical, software, deployment, physical) | `src/architecture/<layer>` |
+| Extend product identity, reuse lifecycle, or usage roles | `src/medical_products` |
+| Extend UI/interaction or human-factors assurance | `src/interaction`, `src/assurance` |
+| Add a device-specific mode, interface, control, or kind | `profile/` or a project package — **not** the core |
+| Add or adjust a workflow, gate, or viewpoint binding | `src/methodology/`, `src/viewpoints/`, or `methodologies/` |
 | Change a starter-model pattern | `template/`, `profile/archetypes.yaml`, or `profile/templates/` |
-| Demonstrate a modeling pattern | `examples/gpca-pump/` |
+| Demonstrate a modeling pattern | a focused example under `examples/` (see [the examples guide](examples/index.md)) |
 
 The core vocabulary is deliberately small. Growth happens in the profile,
 methodologies, and project extensions — that is what keeps every existing
 model valid as MEMO evolves.
 
-## Review your change
+## Design rules that reviews enforce
 
-A successful text edit is not enough:
+These are the decisions recorded in the ADRs; changes that contradict one need
+a new ADR, not a quiet exception:
 
-1. Open the affected package in a conformant SysML v2 editor and confirm its
-   imports resolve through `memo::`.
-2. Update or add an example that demonstrates the user-facing meaning.
-3. Verify the relationships, rules, and viewpoints that reference what you
-   changed.
-4. Inspect the GPCA example and starter-model content for unintended changes to
-   the public vocabulary.
+1. **Dimensions, not duplicates** ([ADR-0001](adr/ADR-0001-orthogonal-dimensions.md)):
+   never add a per-layer or per-discipline copy of an element, and never add a
+   scalar "layer" string.
+2. **Construct-specific bases** ([ADR-0002](adr/ADR-0002-memo-base-hierarchy.md)):
+   behaviors are `action def`s, flowing content is an `item def`, relations
+   are `connection def`s off `MemoRelationship` — do not force everything into
+   `part def`.
+3. **Workflow ≠ scenario ≠ occurrence** ([ADR-0003](adr/ADR-0003-workflow-scenario-occurrence.md)):
+   scenarios select paths; they never restate workflows.
+4. **Typed references, never name strings** ([ADR-0004](adr/ADR-0004-definition-usage-realization-deployment.md)):
+   a reference is a typed `ref`; strings are labels at most.
+5. **Path-derived package names, one content-bearing leaf package per file, no
+   qualified package declarations, no examples under `src/`.**
 
-Maintainers run the repository's portability and package checks in CI. A pull
-request should explain the modeling intent and show the example used for review.
+## Validate before you open a pull request
+
+```bash
+syside check --warnings-as-errors src/memo_namespaces.sysml
+syside check --warnings-as-errors src
+syside check --warnings-as-errors examples
+node --test test/package.test.mjs
+bash scripts/build-kpar.sh          # external portability gate
+python3 -m mkdocs build --strict    # if you touched docs
+```
+
+A new concept additionally needs: a row in the
+[provenance matrix](ontology/provenance-matrix.md), registration in
+`src/memo_namespaces.sysml` and `src/medical_device_library.sysml`, a
+[migration-map](ontology/migration-map.md) entry if anything was renamed, and
+an example that exercises it.
 
 ## Documentation rule
 
-Every public element or relationship must be documented with:
+Explain the reasoning before the code — in package header comments and in the
+docs. Every public element or relationship must be documented with:
 
 1. the engineering question it answers;
 2. a minimal valid usage;
 3. source and target direction (for relationships);
 4. a worked scenario where practical;
 5. its owning package and validation coverage.
-
-Undocumented vocabulary is treated as unfinished: reviewers cannot apply an
-element whose intent is not stated.
-
-## Propose the change
-
-Open a pull request that states the engineering question your change answers,
-not just what it edits. Small, single-purpose changes with an updated example
-review fastest.

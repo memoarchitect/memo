@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.5.0 - 2026-07-18
+Ontology rework: orthogonal dimensions, construct-specific Memo base
+hierarchy, and the full operational-to-implementation medical-device ontology.
+
+- Added orthogonal classification dimensions (perspective, realization stage,
+  discipline, cross-cutting concern) replacing scalar layer strings (ADR-0001).
+- Added construct-specific foundations (MemoPart, MemoAction, MemoPort,
+  MemoInterface, MemoExchangeItem, MemoNeed, MemoRequirement,
+  MemoRelationship, MemoEvidence) and a terminology kernel
+  (TerminologyCode, UdiCarrier) (ADR-0002).
+- Added stakeholders/actors/users, needs, medical use cases, clinical
+  procedures, first-class workflows, scenario dimensions and occurrences,
+  activities/tasks/task difficulty (ADR-0003).
+- Renamed the functional layer (SystemFunction, FunctionalFlow,
+  FunctionalExchange, FunctionalScenario); expanded logical, software
+  (module/runtime/deployment), hardware/physical, and interface packages;
+  added medical product definitions/instances, technology domains, and reuse
+  lifecycles (ADR-0004).
+- Added interaction/UI ontology, human-factors assurance, viewpoint catalog,
+  and ontology conformance invariants (CR-ONT-*).
+- Removed src/examples; examples/gpca-pump is canonical. Added 13 focused
+  examples across the device-complexity spectrum.
+- Completed the string-to-typed-reference migration: ComponentExchange
+  endpoints and exchange allocations, FunctionalFlow start/end functions,
+  FunctionalFlowStep function/item references, and SystemCapability primary
+  functions are typed refs; the legacy ExchangeItem part-def family became
+  MemoExchangeItem item defs. The GPCA example is fully migrated (46 typed
+  component exchanges).
+- Repaired the project/profile starter templates (dangling `System` type
+  replaced by `MedicalDevice`; explicit import visibility) — they now pass
+  `syside check --warnings-as-errors`.
+- Breaking renames and moves are listed in docs/ontology/migration-map.md.
+
 ## 0.4.6 - 2026-07-16
 Aligned every logical ontology and methodology descriptor with the published npm
 package version and added a package test that prevents future version drift.

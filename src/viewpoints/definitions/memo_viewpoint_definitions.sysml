@@ -49,7 +49,7 @@ package memo_viewpoints_definitions {
         part viewpointDefinition : Viewpoint;
         ref subjectElement : TraceableElement[*];
         ref exposesElement : TraceableElement[*];
-        ref exposesRelationship : SemanticLink[*];
+        ref exposesRelationship : MemoRelationship[*];
         part selectionQuery : ViewSelectionQuery[*];
     }
 
@@ -62,7 +62,6 @@ package memo_viewpoints_definitions {
 
     view def MemoDocumentBackedView :> MemoView {
         attribute version : String;
-        attribute lifecycleState : LifecycleStateKind;
         attribute generationRule : String;
         attribute marketScope : String;
     }

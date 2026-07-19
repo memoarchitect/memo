@@ -1,8 +1,8 @@
 package memo_samd_starter {
-    import memo_medical_device_library::*;
+    private import memo_medical_device_library::*;
 
-    part samdSystem : System;
+    part samdDevice : MedicalDevice;
     requirement clinicalPurpose : Requirement {
-        attribute redefines title = "Define the clinical purpose and intended user";
+        attribute redefines statement = "Define the clinical purpose and intended user";
     }
 }

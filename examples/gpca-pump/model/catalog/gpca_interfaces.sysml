@@ -2,8 +2,11 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     private import ScalarValues::*;
 
     private import memo_architecture_interfaces::*;
-    private import memo_architecture_functions::DataDefinition;
+    private import memo_architecture_functions::*;
+    private import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
+    private import memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems::*;
     private import memo_core_enumerations::*;
+    private import memo_core_dimensions::*;
     abstract interface def SensorDataInterface :> DataInterface {
         attribute :>> interfaceKind = InterfaceKind::data;
         attribute :>> protocolSemantics = "flow, air, occlusion, door, battery, cpu, memory, pump state";
@@ -16,7 +19,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part sensorInputInterface : SoftwareInterface {
         attribute :>> id = "LI-005";
         attribute :>> name = "SensorInputInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::logical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::logical;
         attribute :>> interfaceKind = InterfaceKind::data;
         attribute :>> direction = DirectionKind::input;
         attribute :>> interactionPattern = "sensor feed";
@@ -25,7 +28,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part actuatorCommandInterface : SoftwareInterface {
         attribute :>> id = "LI-006";
         attribute :>> name = "ActuatorCommandInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::logical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::logical;
         attribute :>> interfaceKind = InterfaceKind::control;
         attribute :>> direction = DirectionKind::output;
         attribute :>> interactionPattern = "commanded flow and annunciation outputs";
@@ -34,7 +37,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part operatorEntryInterface : SoftwareInterface {
         attribute :>> id = "LI-007";
         attribute :>> name = "OperatorEntryInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::logical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::logical;
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
         attribute :>> direction = DirectionKind::input;
         attribute :>> interactionPattern = "keypad entry with confirmation readback";
@@ -43,7 +46,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part eventLogInterface : SoftwareInterface {
         attribute :>> id = "LI-008";
         attribute :>> name = "EventLogInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::logical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::logical;
         attribute :>> interfaceKind = InterfaceKind::logging;
         attribute :>> direction = DirectionKind::output;
         attribute :>> interactionPattern = "append-only audit records";
@@ -52,7 +55,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part hwSoftwareBus : DigitalInterface {
         attribute :>> id = "PI-001";
         attribute :>> name = "HW_SW_DataBus";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::physical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::implementation;
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> protocol = "immediate data port mapping";
         attribute :>> directionality = DirectionKind::bidirectional;
@@ -65,7 +68,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part pumpMotorDrive : DigitalInterface {
         attribute :>> id = "PI-002";
         attribute :>> name = "PumpMotorStepDrive";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::physical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::implementation;
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> protocol = "step/direction pulse train";
         attribute :>> directionality = DirectionKind::output;
@@ -78,7 +81,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part bolusButtonLine : DigitalInterface {
         attribute :>> id = "PI-003";
         attribute :>> name = "BolusButtonInputLine";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::physical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::implementation;
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> protocol = "debounced discrete input";
         attribute :>> directionality = DirectionKind::input;
@@ -90,7 +93,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part occlusionAnalogLine : AnalogInterface {
         attribute :>> id = "PI-004";
         attribute :>> name = "OcclusionPressureAnalogLine";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::physical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::implementation;
         attribute :>> interfaceKind = InterfaceKind::analogSignal;
         attribute :>> directionality = DirectionKind::input;
         attribute :>> electricalStandard = "ratiometric 0.5-4.5V";
@@ -101,7 +104,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part batteryMonitorLine : AnalogInterface {
         attribute :>> id = "PI-005";
         attribute :>> name = "BatteryVoltageMonitorLine";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::physical;
+        attribute :>> perspective = ArchitecturePerspectiveKind::implementation;
         attribute :>> interfaceKind = InterfaceKind::power;
         attribute :>> directionality = DirectionKind::input;
         attribute :>> electricalStandard = "divided battery rail to ADC";
@@ -114,7 +117,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part siDataEntry : Interface {
         attribute :>> id = "SI-001";
         attribute :>> name = "DataEntryInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::system;
+        attribute :>> perspective = ArchitecturePerspectiveKind::functional;
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
         attribute :>> direction = DirectionKind::input;
         attribute :>> protocol = "CriSys I 1, I 2, I 3";
@@ -125,7 +128,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part siBolusRequest : Interface {
         attribute :>> id = "SI-002";
         attribute :>> name = "BolusRequestInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::system;
+        attribute :>> perspective = ArchitecturePerspectiveKind::functional;
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
         attribute :>> direction = DirectionKind::input;
         attribute :>> protocol = "CriSys I 4";
@@ -136,7 +139,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part siDrugFlow : Interface {
         attribute :>> id = "SI-003";
         attribute :>> name = "DrugFlowInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::system;
+        attribute :>> perspective = ArchitecturePerspectiveKind::functional;
         attribute :>> interfaceKind = InterfaceKind::fluidic;
         attribute :>> direction = DirectionKind::output;
         attribute :>> protocol = "CriSys I 5, I 6";
@@ -147,7 +150,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part siNotification : Interface {
         attribute :>> id = "SI-004";
         attribute :>> name = "NotificationInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::system;
+        attribute :>> perspective = ArchitecturePerspectiveKind::functional;
         attribute :>> interfaceKind = InterfaceKind::notification;
         attribute :>> direction = DirectionKind::output;
         attribute :>> protocol = "CriSys I 7, I 8";
@@ -158,7 +161,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part siPharmacyDb : Interface {
         attribute :>> id = "SI-005";
         attribute :>> name = "HospitalPharmacyDatabaseInterface";
-        attribute :>> arcadiaLayer = ArcadiaLayerKind::system;
+        attribute :>> perspective = ArchitecturePerspectiveKind::functional;
         attribute :>> interfaceKind = InterfaceKind::data;
         attribute :>> direction = DirectionKind::bidirectional;
         attribute :>> protocol = "CriSys I 9, I 10, I 11";
@@ -168,7 +171,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     }
 
     // ── CriSys Ch.3 data dictionary (prog / hd / output families) ─
-    part ddPatientIDProg : DataDefinition {
+    item ddPatientIDProg : DataDefinition {
         attribute :>> id = "DD-005";
         attribute :>> name = "PatientID_prog";
         attribute :>> description = "Identifier of the patient in the hospital; provided in the prescription and programmed by the clinician.";
@@ -177,7 +180,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "String";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddDrugNameProg : DataDefinition {
+    item ddDrugNameProg : DataDefinition {
         attribute :>> id = "DD-006";
         attribute :>> name = "DrugName_prog";
         attribute :>> description = "Name of the drug prescribed for infusion.";
@@ -186,7 +189,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "String";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddDrugConcentrationProg : DataDefinition {
+    item ddDrugConcentrationProg : DataDefinition {
         attribute :>> id = "DD-007";
         attribute :>> name = "DrugConcentration_prog";
         attribute :>> description = "Concentration of the drug in the solution prescribed for infusion.";
@@ -197,7 +200,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddVTBITotalProg : DataDefinition {
+    item ddVTBITotalProg : DataDefinition {
         attribute :>> id = "DD-008";
         attribute :>> name = "VTBI_total_prog";
         attribute :>> description = "Maximum total volume of the drug solution that can be infused for the prescription.";
@@ -208,7 +211,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddDurationTotalProg : DataDefinition {
+    item ddDurationTotalProg : DataDefinition {
         attribute :>> id = "DD-009";
         attribute :>> name = "Duration_total_prog";
         attribute :>> description = "Prescribed total duration of drug infusion across all delivery modes (BASAL, SQUARE BOLUS, PATIENT BOLUS).";
@@ -219,7 +222,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Time";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddFlowRateBasalProg : DataDefinition {
+    item ddFlowRateBasalProg : DataDefinition {
         attribute :>> id = "DD-010";
         attribute :>> name = "FlowRate_basal_prog";
         attribute :>> description = "Prescribed rate of flow of drug during BASAL delivery mode; default FlowRate_lo_hd.";
@@ -230,7 +233,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddFlowRateSbolusProg : DataDefinition {
+    item ddFlowRateSbolusProg : DataDefinition {
         attribute :>> id = "DD-011";
         attribute :>> name = "FlowRate_sbolus_prog";
         attribute :>> description = "Prescribed flow rate of drug during SQUARE bolus delivery.";
@@ -241,7 +244,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddDurationSbolusProg : DataDefinition {
+    item ddDurationSbolusProg : DataDefinition {
         attribute :>> id = "DD-012";
         attribute :>> name = "Duration_sbolus_prog";
         attribute :>> description = "Maximum duration of a single uninterrupted square bolus delivery.";
@@ -252,7 +255,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Time";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddIntervalSbolusProg : DataDefinition {
+    item ddIntervalSbolusProg : DataDefinition {
         attribute :>> id = "DD-013";
         attribute :>> name = "Interval_sbolus_prog";
         attribute :>> description = "Minimum interval between two consecutive square bolus initiations; the first square bolus starts Interval_sbolus_prog minutes after infusion initiation.";
@@ -263,7 +266,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddFlowRatePbolusProg : DataDefinition {
+    item ddFlowRatePbolusProg : DataDefinition {
         attribute :>> id = "DD-014";
         attribute :>> name = "FlowRate_pbolus_prog";
         attribute :>> description = "Prescribed flow rate of drug during patient bolus delivery.";
@@ -274,7 +277,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddDurationPbolusProg : DataDefinition {
+    item ddDurationPbolusProg : DataDefinition {
         attribute :>> id = "DD-015";
         attribute :>> name = "Duration_pbolus_prog";
         attribute :>> description = "Maximum duration of a single uninterrupted patient bolus delivery.";
@@ -285,7 +288,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Time";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddLockOutPeriodPbolusProg : DataDefinition {
+    item ddLockOutPeriodPbolusProg : DataDefinition {
         attribute :>> id = "DD-016";
         attribute :>> name = "LockOutPeriod_pbolus_prog";
         attribute :>> description = "Minimum interval between two consecutive patient bolus initiations (the lockout period), irrespective of interruption or completion.";
@@ -296,7 +299,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddNumberMaxPbolusProg : DataDefinition {
+    item ddNumberMaxPbolusProg : DataDefinition {
         attribute :>> id = "DD-017";
         attribute :>> name = "NumberMax_pbolus_prog";
         attribute :>> description = "Maximum total number of patient boluses that may be initiated during Duration_total_prog.";
@@ -307,7 +310,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    part ddSystemStartProg : DataDefinition {
+    item ddSystemStartProg : DataDefinition {
         attribute :>> id = "DD-018";
         attribute :>> name = "System_start_prog";
         attribute :>> description = "Command to start the system.";
@@ -316,7 +319,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddSystemStopProg : DataDefinition {
+    item ddSystemStopProg : DataDefinition {
         attribute :>> id = "DD-019";
         attribute :>> name = "System_stop_prog";
         attribute :>> description = "Command to stop the system.";
@@ -325,7 +328,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddInfusionInitiateProg : DataDefinition {
+    item ddInfusionInitiateProg : DataDefinition {
         attribute :>> id = "DD-020";
         attribute :>> name = "Infusion_initiate_prog";
         attribute :>> description = "Command to initiate infusion of drug.";
@@ -334,7 +337,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddInfusionInhibitProg : DataDefinition {
+    item ddInfusionInhibitProg : DataDefinition {
         attribute :>> id = "DD-021";
         attribute :>> name = "Infusion_inhibit_prog";
         attribute :>> description = "Command to inhibit infusion of drug.";
@@ -343,7 +346,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddSystemSaveProg : DataDefinition {
+    item ddSystemSaveProg : DataDefinition {
         attribute :>> id = "DD-022";
         attribute :>> name = "System_save_prog";
         attribute :>> description = "Command to save the prescription and reservoir initial volume data.";
@@ -352,7 +355,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddNotificationCancelProg : DataDefinition {
+    item ddNotificationCancelProg : DataDefinition {
         attribute :>> id = "DD-023";
         attribute :>> name = "Notification_cancel_prog";
         attribute :>> description = "Command to cancel a selected notification.";
@@ -361,7 +364,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddDisableAudioProg : DataDefinition {
+    item ddDisableAudioProg : DataDefinition {
         attribute :>> id = "DD-024";
         attribute :>> name = "Disable_audio_prog";
         attribute :>> description = "Command to disable audio notifications, permanently or temporarily.";
@@ -370,7 +373,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "PERM | TEMP | FALSE";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddEnableAudioProg : DataDefinition {
+    item ddEnableAudioProg : DataDefinition {
         attribute :>> id = "DD-025";
         attribute :>> name = "Enable_audio_prog";
         attribute :>> description = "Command to enable audio notifications.";
@@ -379,7 +382,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddDataConfigProg : DataDefinition {
+    item ddDataConfigProg : DataDefinition {
         attribute :>> id = "DD-026";
         attribute :>> name = "DataConfig_prog";
         attribute :>> description = "Command to configure prescription data (printed as 'DataCofig_prog' in the source).";
@@ -388,7 +391,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    part ddReservoirInitialVolumeProg : DataDefinition {
+    item ddReservoirInitialVolumeProg : DataDefinition {
         attribute :>> id = "DD-027";
         attribute :>> name = "ReservoirInitialVolume_prog";
         attribute :>> description = "Initial volume of drug in the reservoir at the time of entering the prescription; read from the reservoir label.";
@@ -399,7 +402,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.3 Drug Reservoir Data";
     }
-    part ddBolusRequestProg : DataDefinition {
+    item ddBolusRequestProg : DataDefinition {
         attribute :>> id = "DD-028";
         attribute :>> name = "BolusRequest_prog";
         attribute :>> description = "Request by the patient to deliver a patient bolus.";
@@ -408,7 +411,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.2 Bolus Request Interface";
     }
-    part ddFlowRateOutput : DataDefinition {
+    item ddFlowRateOutput : DataDefinition {
         attribute :>> id = "DD-029";
         attribute :>> name = "FlowRate_output";
         attribute :>> description = "Flow rate of the drug through the hose delivering the drug, measured every X seconds when the system is in ON mode.";
@@ -419,7 +422,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.3 Drug Flow Interface";
     }
-    part ddNotificationVisualOutput : DataDefinition {
+    item ddNotificationVisualOutput : DataDefinition {
         attribute :>> id = "DD-030";
         attribute :>> name = "Notification_Visual_output";
         attribute :>> description = "Visual display of the messages of all active notifications in the system.";
@@ -428,7 +431,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "List of String";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.4 Notification Interface";
     }
-    part ddNotificationAudioOutput : DataDefinition {
+    item ddNotificationAudioOutput : DataDefinition {
         attribute :>> id = "DD-031";
         attribute :>> name = "Notification_Audio_output";
         attribute :>> description = "Audio output for each active notification, in the same order as Notification_Visual_output.";
@@ -437,7 +440,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "List of Boolean";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.4 Notification Interface";
     }
-    part ddDrugNameHd : DataDefinition {
+    item ddDrugNameHd : DataDefinition {
         attribute :>> id = "DD-032";
         attribute :>> name = "DrugName_hd";
         attribute :>> description = "Name of a drug usable for infusion in the hospital that matches DrugName_prog.";
@@ -446,7 +449,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "String";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddDrugConcentrationHiHd : DataDefinition {
+    item ddDrugConcentrationHiHd : DataDefinition {
         attribute :>> id = "DD-033";
         attribute :>> name = "DrugConcentration_hi_hd";
         attribute :>> description = "Maximum concentration of the drug in a solution that can safely be used for infusion for DrugName_hd.";
@@ -457,7 +460,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddDrugConcentrationLoHd : DataDefinition {
+    item ddDrugConcentrationLoHd : DataDefinition {
         attribute :>> id = "DD-034";
         attribute :>> name = "DrugConcentration_lo_hd";
         attribute :>> description = "Minimum concentration of the drug in a solution that can safely be used for infusion for DrugName_hd.";
@@ -468,7 +471,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddVTBIHiHd : DataDefinition {
+    item ddVTBIHiHd : DataDefinition {
         attribute :>> id = "DD-035";
         attribute :>> name = "VTBI_hi_hd";
         attribute :>> description = "Maximum volume of drug that is safe to be infused for DrugName_hd.";
@@ -479,7 +482,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddVTBILoHd : DataDefinition {
+    item ddVTBILoHd : DataDefinition {
         attribute :>> id = "DD-036";
         attribute :>> name = "VTBI_lo_hd";
         attribute :>> description = "Minimum volume of drug that is safe to be infused for DrugName_hd.";
@@ -490,7 +493,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddFlowRateHiHd : DataDefinition {
+    item ddFlowRateHiHd : DataDefinition {
         attribute :>> id = "DD-037";
         attribute :>> name = "FlowRate_hi_hd";
         attribute :>> description = "Maximum safe flow rate of the drug for DrugName_hd.";
@@ -501,7 +504,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddFlowRateLoHd : DataDefinition {
+    item ddFlowRateLoHd : DataDefinition {
         attribute :>> id = "DD-038";
         attribute :>> name = "FlowRate_lo_hd";
         attribute :>> description = "Minimum safe flow rate of the drug for DrugName_hd.";
@@ -512,7 +515,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddIntervalPbolusHd : DataDefinition {
+    item ddIntervalPbolusHd : DataDefinition {
         attribute :>> id = "DD-039";
         attribute :>> name = "Interval_pbolus_hd";
         attribute :>> description = "Minimum safe interval between two consecutive patient bolus initiations for DrugName_hd.";
@@ -523,7 +526,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddNumberMaxPbolusHd : DataDefinition {
+    item ddNumberMaxPbolusHd : DataDefinition {
         attribute :>> id = "DD-040";
         attribute :>> name = "NumberMax_pbolus_hd";
         attribute :>> description = "Maximum number of patient bolus initiations safe to be self-administered for DrugName_hd.";
@@ -534,7 +537,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    part ddFlowRateKvoHd : DataDefinition {
+    item ddFlowRateKvoHd : DataDefinition {
         attribute :>> id = "DD-041";
         attribute :>> name = "FlowRate_kvo_hd";
         attribute :>> description = "Minimum flow rate of DrugName_hd that should be maintained to keep the vein open (KVO); default 0.1.";
@@ -551,9 +554,11 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> id = "CE-001";
         attribute :>> name = "SensorStatusVectorExchange";
         attribute :>> exchangeKind = FlowKind::measurement;
-        attribute :>> sourcePort = "HW-001: GPCA_HW_Sensors";
-        attribute :>> targetPort = "GPCA_SW.SENSOR_IN (PORT-04)";
-        attribute :>> allocatedFunctionalExchanges = "LF-001: SensorAcquisitionFlow";
+        ref :>> sourceEndpoint = gpcaDeviceSensors;
+        attribute :>> sourcePortPath = "HW-001: GPCA_HW_Sensors";
+        ref :>> targetEndpoint = portSensorIn;
+        attribute :>> targetPortPath = "GPCA_SW.SENSOR_IN (PORT-04)";
+        ref :>> allocatedExchanges = lfSensorAcquisition;
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
@@ -562,9 +567,11 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> id = "CE-002";
         attribute :>> name = "FlowCommandExchange";
         attribute :>> exchangeKind = FlowKind::command;
-        attribute :>> sourcePort = "GPCA_SW.GPCA_SW_OUT (Commanded_Flow_Rate)";
-        attribute :>> targetPort = "HW-003: PumpMotorAssembly";
-        attribute :>> allocatedFunctionalExchanges = "LF-002: FlowCommandFlow";
+        ref :>> sourceEndpoint = portGpcaSwOut;
+        attribute :>> sourcePortPath = "GPCA_SW.GPCA_SW_OUT (Commanded_Flow_Rate)";
+        ref :>> targetEndpoint = pumpMotorAssembly;
+        attribute :>> targetPortPath = "HW-003: PumpMotorAssembly";
+        ref :>> allocatedExchanges = lfFlowCommand;
         attribute :>> direction = DirectionKind::output;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
@@ -573,9 +580,11 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> id = "CE-003";
         attribute :>> name = "AlarmAnnunciationExchange";
         attribute :>> exchangeKind = FlowKind::alarm;
-        attribute :>> sourcePort = "GPCA_SW.GPCA_SW_OUT (Notification_Message, Is_Audio_Disabled)";
-        attribute :>> targetPort = "HW-004: AudibleAlarmAnnunciator / HW-005: OperatorDisplay";
-        attribute :>> allocatedFunctionalExchanges = "LF-003: AlarmSignalFlow";
+        ref :>> sourceEndpoint = portGpcaSwOut;
+        attribute :>> sourcePortPath = "GPCA_SW.GPCA_SW_OUT (Notification_Message, Is_Audio_Disabled)";
+        ref :>> targetEndpoint = audibleAlarm;
+        attribute :>> targetPortPath = "HW-004: AudibleAlarmAnnunciator / HW-005: OperatorDisplay";
+        ref :>> allocatedExchanges = lfAlarmSignal;
         attribute :>> direction = DirectionKind::output;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
@@ -584,9 +593,11 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> id = "CE-004";
         attribute :>> name = "PrescriptionEntryExchange";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "HW-012: OperatorKeypad";
-        attribute :>> targetPort = "GPCA_SW.PRES_IN / GPCA_SW.OP_CMD_IN (PORT-02, PORT-01)";
-        attribute :>> allocatedFunctionalExchanges = "LF-004: PrescriptionEntryFlow";
+        ref :>> sourceEndpoint = operatorKeypad;
+        attribute :>> sourcePortPath = "HW-012: OperatorKeypad";
+        ref :>> targetEndpoint = portPresIn;
+        attribute :>> targetPortPath = "GPCA_SW.PRES_IN / GPCA_SW.OP_CMD_IN (PORT-02, PORT-01)";
+        ref :>> allocatedExchanges = lfPrescriptionEntry;
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
@@ -656,8 +667,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceOpCmdToTlm : ComponentExchange {
         attribute :>> id = "CE-101"; attribute :>> name = "OP_CMDtoTLM";
         attribute :>> exchangeKind = FlowKind::command;
-        attribute :>> sourcePort = "OP_CMD_IN";
-        attribute :>> targetPort = "TLM.OP_CMD_IN";
+        ref :>> sourceEndpoint = portOpCmdIn;
+        attribute :>> sourcePortPath = "OP_CMD_IN";
+        ref :>> targetEndpoint = tlm;
+        attribute :>> targetPortPath = "TLM.OP_CMD_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -665,8 +678,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceConstToTlm : ComponentExchange {
         attribute :>> id = "CE-102"; attribute :>> name = "CONSTtoTLM";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONST_IN";
-        attribute :>> targetPort = "TLM.CONST_IN";
+        ref :>> sourceEndpoint = portConstIn;
+        attribute :>> sourcePortPath = "CONST_IN";
+        ref :>> targetEndpoint = tlm;
+        attribute :>> targetPortPath = "TLM.CONST_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -674,32 +689,40 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceTlmOutToOutput : ComponentExchange {
         attribute :>> id = "CE-103"; attribute :>> name = "TLM_OUT_toOUTPUT";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "TLM.TLM_MODE_OUT";
-        attribute :>> targetPort = "OUTPUT.TLM_MODE_IN";
+        ref :>> sourceEndpoint = tlm;
+        attribute :>> sourcePortPath = "TLM.TLM_MODE_OUT";
+        ref :>> targetEndpoint = outputBus;
+        attribute :>> targetPortPath = "OUTPUT.TLM_MODE_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceImToSysStat : ComponentExchange {
         attribute :>> id = "CE-104"; attribute :>> name = "IM_to_SYS_STAT";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "IM.IM_OUT";
-        attribute :>> targetPort = "SYS_STAT.IM_IN";
+        ref :>> sourceEndpoint = infusionMgr;
+        attribute :>> sourcePortPath = "IM.IM_OUT";
+        ref :>> targetEndpoint = systemStatus;
+        attribute :>> targetPortPath = "SYS_STAT.IM_IN";
         attribute :>> timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceTlmToSysStat : ComponentExchange {
         attribute :>> id = "CE-105"; attribute :>> name = "TLM_to_SYS_STAT";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "TLM.TLM_MODE_OUT";
-        attribute :>> targetPort = "SYS_STAT.TLM_MODE_IN";
+        ref :>> sourceEndpoint = tlm;
+        attribute :>> sourcePortPath = "TLM.TLM_MODE_OUT";
+        ref :>> targetEndpoint = systemStatus;
+        attribute :>> targetPortPath = "SYS_STAT.TLM_MODE_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceSensorToSysStat : ComponentExchange {
         attribute :>> id = "CE-106"; attribute :>> name = "SENSOR_to_SYS_STAT";
         attribute :>> exchangeKind = FlowKind::measurement;
-        attribute :>> sourcePort = "SENSOR_IN";
-        attribute :>> targetPort = "SYS_STAT.SENSOR_IN";
+        ref :>> sourceEndpoint = portSensorIn;
+        attribute :>> sourcePortPath = "SENSOR_IN";
+        ref :>> targetEndpoint = systemStatus;
+        attribute :>> targetPortPath = "SYS_STAT.SENSOR_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -707,8 +730,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceConstToSysStat : ComponentExchange {
         attribute :>> id = "CE-107"; attribute :>> name = "CONST_to_SYS_STAT";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONST_IN";
-        attribute :>> targetPort = "SYS_STAT.CONST_IN";
+        ref :>> sourceEndpoint = portConstIn;
+        attribute :>> sourcePortPath = "CONST_IN";
+        ref :>> targetEndpoint = systemStatus;
+        attribute :>> targetPortPath = "SYS_STAT.CONST_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -716,48 +741,60 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceConfigToSysStat : ComponentExchange {
         attribute :>> id = "CE-108"; attribute :>> name = "CONFIG_to_SYS_STAT";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONFIG.CONFIG_OUT";
-        attribute :>> targetPort = "SYS_STAT.CONFIG_IN";
+        ref :>> sourceEndpoint = config;
+        attribute :>> sourcePortPath = "CONFIG.CONFIG_OUT";
+        ref :>> targetEndpoint = systemStatus;
+        attribute :>> targetPortPath = "SYS_STAT.CONFIG_IN";
         attribute :>> timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceSysStatOutToOutput : ComponentExchange {
         attribute :>> id = "CE-109"; attribute :>> name = "SYS_STAT_OUT_toOUTPUT";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "SYS_STAT.SYS_STAT_OUT";
-        attribute :>> targetPort = "OUTPUT.SYS_STAT_IN";
+        ref :>> sourceEndpoint = systemStatus;
+        attribute :>> sourcePortPath = "SYS_STAT.SYS_STAT_OUT";
+        ref :>> targetEndpoint = outputBus;
+        attribute :>> targetPortPath = "OUTPUT.SYS_STAT_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceImToAlarm : ComponentExchange {
         attribute :>> id = "CE-110"; attribute :>> name = "IM_to_ALARM";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "IM.IM_OUT";
-        attribute :>> targetPort = "ALARM.IM_IN";
+        ref :>> sourceEndpoint = infusionMgr;
+        attribute :>> sourcePortPath = "IM.IM_OUT";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.IM_IN";
         attribute :>> timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceTlmToAlarm : ComponentExchange {
         attribute :>> id = "CE-111"; attribute :>> name = "TLM_to_ALARM";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "TLM.TLM_MODE_OUT";
-        attribute :>> targetPort = "ALARM.TLM_MODE_IN";
+        ref :>> sourceEndpoint = tlm;
+        attribute :>> sourcePortPath = "TLM.TLM_MODE_OUT";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.TLM_MODE_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceSysMonToAlarm : ComponentExchange {
         attribute :>> id = "CE-112"; attribute :>> name = "SYS_MON_to_ALARM";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "SYS_MON.SYS_MON_OUT";
-        attribute :>> targetPort = "ALARM.SYS_MON_IN";
+        ref :>> sourceEndpoint = systemMonitor;
+        attribute :>> sourcePortPath = "SYS_MON.SYS_MON_OUT";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.SYS_MON_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceOpCmdToAlarm : ComponentExchange {
         attribute :>> id = "CE-113"; attribute :>> name = "OP_CMD_to_ALARM";
         attribute :>> exchangeKind = FlowKind::command;
-        attribute :>> sourcePort = "OP_CMD_IN";
-        attribute :>> targetPort = "ALARM.OP_CMD_IN";
+        ref :>> sourceEndpoint = portOpCmdIn;
+        attribute :>> sourcePortPath = "OP_CMD_IN";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.OP_CMD_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -765,8 +802,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceDbToAlarm : ComponentExchange {
         attribute :>> id = "CE-114"; attribute :>> name = "DB_to_ALARM";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "DB_IN";
-        attribute :>> targetPort = "ALARM.DB_IN";
+        ref :>> sourceEndpoint = portDbIn;
+        attribute :>> sourcePortPath = "DB_IN";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.DB_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -774,8 +813,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceSensorToAlarm : ComponentExchange {
         attribute :>> id = "CE-115"; attribute :>> name = "SENSOR_to_ALARM";
         attribute :>> exchangeKind = FlowKind::measurement;
-        attribute :>> sourcePort = "SENSOR_IN";
-        attribute :>> targetPort = "ALARM.SENSOR_IN";
+        ref :>> sourceEndpoint = portSensorIn;
+        attribute :>> sourcePortPath = "SENSOR_IN";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.SENSOR_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -783,8 +824,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceConstToAlarm : ComponentExchange {
         attribute :>> id = "CE-116"; attribute :>> name = "CONST_to_ALARM";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONST_IN";
-        attribute :>> targetPort = "ALARM.CONST_IN";
+        ref :>> sourceEndpoint = portConstIn;
+        attribute :>> sourcePortPath = "CONST_IN";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.CONST_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -792,40 +835,50 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceSysStatToAlarm : ComponentExchange {
         attribute :>> id = "CE-117"; attribute :>> name = "SYS_STAT_to_ALARM";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "SYS_STAT.SYS_STAT_OUT";
-        attribute :>> targetPort = "ALARM.SYS_STAT_IN";
+        ref :>> sourceEndpoint = systemStatus;
+        attribute :>> sourcePortPath = "SYS_STAT.SYS_STAT_OUT";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.SYS_STAT_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceConfigToAlarm : ComponentExchange {
         attribute :>> id = "CE-118"; attribute :>> name = "CONFIG_to_ALARM";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONFIG.CONFIG_OUT";
-        attribute :>> targetPort = "ALARM.CONFIG_IN";
+        ref :>> sourceEndpoint = config;
+        attribute :>> sourcePortPath = "CONFIG.CONFIG_OUT";
+        ref :>> targetEndpoint = alarm;
+        attribute :>> targetPortPath = "ALARM.CONFIG_IN";
         attribute :>> timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceAlarmOutToOutput : ComponentExchange {
         attribute :>> id = "CE-119"; attribute :>> name = "ALARM_OUT_toOUTPUT";
         attribute :>> exchangeKind = FlowKind::alarm;
-        attribute :>> sourcePort = "ALARM.ALARM_OUT";
-        attribute :>> targetPort = "OUTPUT.ALARM_IN";
+        ref :>> sourceEndpoint = alarm;
+        attribute :>> sourcePortPath = "ALARM.ALARM_OUT";
+        ref :>> targetEndpoint = outputBus;
+        attribute :>> targetPortPath = "OUTPUT.ALARM_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceTlmToConfig : ComponentExchange {
         attribute :>> id = "CE-120"; attribute :>> name = "TLM_to_CONFIG";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "TLM.TLM_MODE_OUT";
-        attribute :>> targetPort = "CONFIG.TLM_MODE_IN";
+        ref :>> sourceEndpoint = tlm;
+        attribute :>> sourcePortPath = "TLM.TLM_MODE_OUT";
+        ref :>> targetEndpoint = config;
+        attribute :>> targetPortPath = "CONFIG.TLM_MODE_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part cePresToConfig : ComponentExchange {
         attribute :>> id = "CE-121"; attribute :>> name = "PRES_to_CONFIG";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "PRES_IN";
-        attribute :>> targetPort = "CONFIG.PRES_IN";
+        ref :>> sourceEndpoint = portPresIn;
+        attribute :>> sourcePortPath = "PRES_IN";
+        ref :>> targetEndpoint = config;
+        attribute :>> targetPortPath = "CONFIG.PRES_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -833,8 +886,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceOpCmdToConfig : ComponentExchange {
         attribute :>> id = "CE-122"; attribute :>> name = "OP_CMD_to_CONFIG";
         attribute :>> exchangeKind = FlowKind::command;
-        attribute :>> sourcePort = "OP_CMD_IN";
-        attribute :>> targetPort = "CONFIG.OP_CMD_IN";
+        ref :>> sourceEndpoint = portOpCmdIn;
+        attribute :>> sourcePortPath = "OP_CMD_IN";
+        ref :>> targetEndpoint = config;
+        attribute :>> targetPortPath = "CONFIG.OP_CMD_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -842,8 +897,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceDbToConfig : ComponentExchange {
         attribute :>> id = "CE-123"; attribute :>> name = "DB_to_CONFIG";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "DB_IN";
-        attribute :>> targetPort = "CONFIG.DB_IN";
+        ref :>> sourceEndpoint = portDbIn;
+        attribute :>> sourcePortPath = "DB_IN";
+        ref :>> targetEndpoint = config;
+        attribute :>> targetPortPath = "CONFIG.DB_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -851,8 +908,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceConsToConfig : ComponentExchange {
         attribute :>> id = "CE-124"; attribute :>> name = "CONS_to_CONFIG";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONST_IN";
-        attribute :>> targetPort = "CONFIG.CONST_IN";
+        ref :>> sourceEndpoint = portConstIn;
+        attribute :>> sourcePortPath = "CONST_IN";
+        ref :>> targetEndpoint = config;
+        attribute :>> targetPortPath = "CONFIG.CONST_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -860,32 +919,40 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceSysStatToConfig : ComponentExchange {
         attribute :>> id = "CE-125"; attribute :>> name = "SYS_STAT_to_CONFIG";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "SYS_STAT.SYS_STAT_OUT";
-        attribute :>> targetPort = "CONFIG.SYS_STAT_IN";
+        ref :>> sourceEndpoint = systemStatus;
+        attribute :>> sourcePortPath = "SYS_STAT.SYS_STAT_OUT";
+        ref :>> targetEndpoint = config;
+        attribute :>> targetPortPath = "CONFIG.SYS_STAT_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceConfigToOutput : ComponentExchange {
         attribute :>> id = "CE-126"; attribute :>> name = "CONFIG_toOUTPUT";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONFIG.CONFIG_OUT";
-        attribute :>> targetPort = "OUTPUT.CONFIG_IN";
+        ref :>> sourceEndpoint = config;
+        attribute :>> sourcePortPath = "CONFIG.CONFIG_OUT";
+        ref :>> targetEndpoint = outputBus;
+        attribute :>> targetPortPath = "OUTPUT.CONFIG_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceTlmToIm : ComponentExchange {
         attribute :>> id = "CE-127"; attribute :>> name = "TLM_to_IM";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "TLM.TLM_MODE_OUT";
-        attribute :>> targetPort = "IM.TLM_MODE_IN";
+        ref :>> sourceEndpoint = tlm;
+        attribute :>> sourcePortPath = "TLM.TLM_MODE_OUT";
+        ref :>> targetEndpoint = infusionMgr;
+        attribute :>> targetPortPath = "IM.TLM_MODE_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceOpCmdToIm : ComponentExchange {
         attribute :>> id = "CE-128"; attribute :>> name = "OP_CMD_to_IM";
         attribute :>> exchangeKind = FlowKind::command;
-        attribute :>> sourcePort = "OP_CMD_IN";
-        attribute :>> targetPort = "IM.OP_CMD_IN";
+        ref :>> sourceEndpoint = portOpCmdIn;
+        attribute :>> sourcePortPath = "OP_CMD_IN";
+        ref :>> targetEndpoint = infusionMgr;
+        attribute :>> targetPortPath = "IM.OP_CMD_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -893,8 +960,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part cePatientToIm : ComponentExchange {
         attribute :>> id = "CE-129"; attribute :>> name = "PATIENT_to_IM";
         attribute :>> exchangeKind = FlowKind::command;
-        attribute :>> sourcePort = "PATIENT_IN";
-        attribute :>> targetPort = "IM.PATIENT_IN";
+        ref :>> sourceEndpoint = portPatientIn;
+        attribute :>> sourcePortPath = "PATIENT_IN";
+        ref :>> targetEndpoint = infusionMgr;
+        attribute :>> targetPortPath = "IM.PATIENT_IN";
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
@@ -902,110 +971,136 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     part ceConfigToIm : ComponentExchange {
         attribute :>> id = "CE-130"; attribute :>> name = "CONFIG_to_IM";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONFIG.CONFIG_OUT";
-        attribute :>> targetPort = "IM.CONFIG_IN";
+        ref :>> sourceEndpoint = config;
+        attribute :>> sourcePortPath = "CONFIG.CONFIG_OUT";
+        ref :>> targetEndpoint = infusionMgr;
+        attribute :>> targetPortPath = "IM.CONFIG_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceAlarmToIm : ComponentExchange {
         attribute :>> id = "CE-131"; attribute :>> name = "ALARM_to_IM";
         attribute :>> exchangeKind = FlowKind::alarm;
-        attribute :>> sourcePort = "ALARM.ALARM_OUT";
-        attribute :>> targetPort = "IM.ALARM_IN";
+        ref :>> sourceEndpoint = alarm;
+        attribute :>> sourcePortPath = "ALARM.ALARM_OUT";
+        ref :>> targetEndpoint = infusionMgr;
+        attribute :>> targetPortPath = "IM.ALARM_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceSysStatToIm : ComponentExchange {
         attribute :>> id = "CE-132"; attribute :>> name = "SYS_STAT_to_IM";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "SYS_STAT.SYS_STAT_OUT";
-        attribute :>> targetPort = "IM.SYS_STAT_IN";
+        ref :>> sourceEndpoint = systemStatus;
+        attribute :>> sourcePortPath = "SYS_STAT.SYS_STAT_OUT";
+        ref :>> targetEndpoint = infusionMgr;
+        attribute :>> targetPortPath = "IM.SYS_STAT_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceImToOutput : ComponentExchange {
         attribute :>> id = "CE-133"; attribute :>> name = "IM_toOUTPUT";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "IM.IM_OUT";
-        attribute :>> targetPort = "OUTPUT.IM_IN";
+        ref :>> sourceEndpoint = infusionMgr;
+        attribute :>> sourcePortPath = "IM.IM_OUT";
+        ref :>> targetEndpoint = outputBus;
+        attribute :>> targetPortPath = "OUTPUT.IM_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceTlmToSysMon : ComponentExchange {
         attribute :>> id = "CE-134"; attribute :>> name = "TLM_to_SYS_MON";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "TLM.TLM_MODE_OUT";
-        attribute :>> targetPort = "SYS_MON.TLM_MODE_IN";
+        ref :>> sourceEndpoint = tlm;
+        attribute :>> sourcePortPath = "TLM.TLM_MODE_OUT";
+        ref :>> targetEndpoint = systemMonitor;
+        attribute :>> targetPortPath = "SYS_MON.TLM_MODE_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceSysMonToOutput : ComponentExchange {
         attribute :>> id = "CE-135"; attribute :>> name = "SYS_MON_toOUTPUT";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "SYS_MON.SYS_MON_OUT";
-        attribute :>> targetPort = "OUTPUT.SYS_MON_IN";
+        ref :>> sourceEndpoint = systemMonitor;
+        attribute :>> sourcePortPath = "SYS_MON.SYS_MON_OUT";
+        ref :>> targetEndpoint = outputBus;
+        attribute :>> targetPortPath = "OUTPUT.SYS_MON_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceTlmToLog : ComponentExchange {
         attribute :>> id = "CE-136"; attribute :>> name = "TLM_to_LOG";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "TLM.TLM_MODE_OUT";
-        attribute :>> targetPort = "LOG.TLM_MODE_IN";
+        ref :>> sourceEndpoint = tlm;
+        attribute :>> sourcePortPath = "TLM.TLM_MODE_OUT";
+        ref :>> targetEndpoint = logging;
+        attribute :>> targetPortPath = "LOG.TLM_MODE_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceConfigToLog : ComponentExchange {
         attribute :>> id = "CE-137"; attribute :>> name = "CONFIG_to_LOG";
         attribute :>> exchangeKind = FlowKind::configuration;
-        attribute :>> sourcePort = "CONFIG.CONFIG_OUT";
-        attribute :>> targetPort = "LOG.CONFIG_IN";
+        ref :>> sourceEndpoint = config;
+        attribute :>> sourcePortPath = "CONFIG.CONFIG_OUT";
+        ref :>> targetEndpoint = logging;
+        attribute :>> targetPortPath = "LOG.CONFIG_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceAlarmToLog : ComponentExchange {
         attribute :>> id = "CE-138"; attribute :>> name = "ALARM_to_LOG";
         attribute :>> exchangeKind = FlowKind::alarm;
-        attribute :>> sourcePort = "ALARM.ALARM_OUT";
-        attribute :>> targetPort = "LOG.ALARM_IN";
+        ref :>> sourceEndpoint = alarm;
+        attribute :>> sourcePortPath = "ALARM.ALARM_OUT";
+        ref :>> targetEndpoint = logging;
+        attribute :>> targetPortPath = "LOG.ALARM_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceSysStatToLog : ComponentExchange {
         attribute :>> id = "CE-139"; attribute :>> name = "SYS_STAT_to_LOG";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "SYS_STAT.SYS_STAT_OUT";
-        attribute :>> targetPort = "LOG.SYS_STAT_IN";
+        ref :>> sourceEndpoint = systemStatus;
+        attribute :>> sourcePortPath = "SYS_STAT.SYS_STAT_OUT";
+        ref :>> targetEndpoint = logging;
+        attribute :>> targetPortPath = "LOG.SYS_STAT_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceImToLog : ComponentExchange {
         attribute :>> id = "CE-140"; attribute :>> name = "IM_to_LOG";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "IM.IM_OUT";
-        attribute :>> targetPort = "LOG.IM_IN";
+        ref :>> sourceEndpoint = infusionMgr;
+        attribute :>> sourcePortPath = "IM.IM_OUT";
+        ref :>> targetEndpoint = logging;
+        attribute :>> targetPortPath = "LOG.IM_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceLogToOutput : ComponentExchange {
         attribute :>> id = "CE-141"; attribute :>> name = "LOG_toOUTPUT";
         attribute :>> exchangeKind = FlowKind::audit;
-        attribute :>> sourcePort = "LOG.LOG_OUT";
-        attribute :>> targetPort = "OUTPUT.LOG_IN";
+        ref :>> sourceEndpoint = logging;
+        attribute :>> sourcePortPath = "LOG.LOG_OUT";
+        ref :>> targetEndpoint = outputBus;
+        attribute :>> targetPortPath = "OUTPUT.LOG_IN";
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     part ceOutputToGpcaOut : ComponentExchange {
         attribute :>> id = "CE-142"; attribute :>> name = "OUTPUT_to_GPCA_OUT";
         attribute :>> exchangeKind = FlowKind::status;
-        attribute :>> sourcePort = "OUTPUT.GPCA_SW_OUT";
-        attribute :>> targetPort = "GPCA_SW_OUT";
+        ref :>> sourceEndpoint = outputBus;
+        attribute :>> sourcePortPath = "OUTPUT.GPCA_SW_OUT";
+        ref :>> targetEndpoint = portGpcaSwOut;
+        attribute :>> targetPortPath = "GPCA_SW_OUT";
         attribute :>> direction = DirectionKind::output;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     // ── Text macros (App. A.3 internal state variables) ─────────
-    part ddActualInfusionDurationMacro : DataDefinition {
+    item ddActualInfusionDurationMacro : DataDefinition {
         attribute :>> id = "DD-042";
         attribute :>> name = "Actual_Infusion_Duration_macro";
         attribute :>> description = "Total duration the system has been in ACTIVE mode since infusion was initiated with the current prescription.";
@@ -1014,7 +1109,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Time";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    part ddActualVolumeInfusedMacro : DataDefinition {
+    item ddActualVolumeInfusedMacro : DataDefinition {
         attribute :>> id = "DD-043";
         attribute :>> name = "Actual_Volume_Infused_macro";
         attribute :>> description = "Total volume of drug infused during Actual_Infusion_Duration_macro; drives the infusion-complete condition (REQ 28) and over-infusion VTBI (REQ 20).";
@@ -1023,7 +1118,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    part ddFlowRateModeMacro : DataDefinition {
+    item ddFlowRateModeMacro : DataDefinition {
         attribute :>> id = "DD-044";
         attribute :>> name = "FlowRate_Mode_macro";
         attribute :>> description = "Programmed flow rate of the current mode: FlowRate_kvo_hd in PAUSED, FlowRate_basal_prog in BASAL, FlowRate_sbolus_prog in SQUARE BOLUS, FlowRate_pbolus_prog in PATIENT BOLUS (§4.1.5).";
@@ -1032,7 +1127,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    part ddInhibitedInfusionMacro : DataDefinition {
+    item ddInhibitedInfusionMacro : DataDefinition {
         attribute :>> id = "DD-045";
         attribute :>> name = "Inhibited_Infusion_macro";
         attribute :>> description = "TRUE when the notification in effect requires all infusion to be inhibited ('Inhibit Infusion' column of REQ 59); FALSE when that notification is cancelled or the system transitions to OFF.";
@@ -1041,7 +1136,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    part ddInhibitedBolusMacro : DataDefinition {
+    item ddInhibitedBolusMacro : DataDefinition {
         attribute :>> id = "DD-046";
         attribute :>> name = "Inhibited_Bolus_macro";
         attribute :>> description = "TRUE when the notification in effect requires square boluses to be inhibited ('Inhibit Square Bolus' column of REQ 59); cleared on cancel or OFF.";
@@ -1050,7 +1145,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    part ddInhibitedPatientBolusMacro : DataDefinition {
+    item ddInhibitedPatientBolusMacro : DataDefinition {
         attribute :>> id = "DD-047";
         attribute :>> name = "Inhibited_PatientBolus_macro";
         attribute :>> description = "TRUE when the notification in effect requires PATIENT BOLUS inhibit ('Inhibit Patient Bolus' column of REQ 59); cleared on cancel or OFF.";

@@ -1,6 +1,7 @@
 package memo_examples_gpca_pump_model_samples_interconnection_view {
     private import ScalarValues::*;
-    private import memo_architecture_context::*;
+    private import memo_context_actors::*;
+    private import memo_context_use_context::*;
 
     private import memo_architecture_interfaces::*;
     private import memo_architecture_logical_structure::*;

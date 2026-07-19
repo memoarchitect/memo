@@ -20,7 +20,7 @@ package memo_viewpoints_functional_function_allocation_view {
     part :>> selectionQuery {
         attribute :>> id = "QRY-FUNC-002";
         attribute :>> name = "FunctionAllocationQuery";
-        attribute :>> includeElementKinds = ("LogicalFunction", "LogicalComponent");
+        attribute :>> includeElementKinds = ("SystemFunction", "LogicalComponent");
         attribute :>> includeLayers = ("functions", "logical_structure");
         attribute :>> rationaleText = "Auto-populate function-to-component allocation from the functions and logical structure layers.";
     }

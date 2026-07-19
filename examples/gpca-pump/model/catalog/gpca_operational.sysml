@@ -2,6 +2,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     private import ScalarValues::*;
 
     private import memo_architecture_operational::*;
+    private import memo_activities::*;
+    private import memo_scenarios::*;
     private import memo_core_enumerations::*;
 
     // ── Operational entities beyond the human actors ────────────
@@ -70,7 +72,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     }
 
     // ── Operational activities (therapy lifecycle) ──────────────
-    part oaPrescribe : OperationalActivity {
+    action oaPrescribe : OperationalActivity {
         attribute :>> id = "OA-001";
         attribute :>> name = "PrescribeTherapy";
         attribute :>> trigger = "patient requires titrated analgesia";
@@ -78,7 +80,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> postCondition = "prescription with basal rate, bolus volume, lockout, and max dose limits exists";
         attribute :>> criticality = CriticalityKind::high;
     }
-    part oaLoadReservoir : OperationalActivity {
+    action oaLoadReservoir : OperationalActivity {
         attribute :>> id = "OA-002";
         attribute :>> name = "LoadDrugReservoir";
         attribute :>> trigger = "prescription issued or reservoir empty";
@@ -86,7 +88,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> postCondition = "reservoir mounted, door closed and latched";
         attribute :>> criticality = CriticalityKind::high;
     }
-    part oaProgram : OperationalActivity {
+    action oaProgram : OperationalActivity {
         attribute :>> id = "OA-003";
         attribute :>> name = "ProgramPrescription";
         attribute :>> trigger = "reservoir loaded";
@@ -94,7 +96,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> postCondition = "prescription entered, checked against pharmacy-database safe values (I 9-I 11), and confirmed by second review";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part oaStartTherapy : OperationalActivity {
+    action oaStartTherapy : OperationalActivity {
         attribute :>> id = "OA-004";
         attribute :>> name = "StartInfusion";
         attribute :>> trigger = "prescription confirmed";
@@ -102,7 +104,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> postCondition = "basal infusion running";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part oaRequestBolus : OperationalActivity {
+    action oaRequestBolus : OperationalActivity {
         attribute :>> id = "OA-005";
         attribute :>> name = "RequestPatientBolus";
         attribute :>> trigger = "patient presses bolus request button";
@@ -110,7 +112,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> postCondition = "bolus delivered, or request ignored when lockout or max-dose limits apply";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part oaRespondAlarm : OperationalActivity {
+    action oaRespondAlarm : OperationalActivity {
         attribute :>> id = "OA-006";
         attribute :>> name = "RespondToAlarm";
         attribute :>> trigger = "audible or visual alarm annunciated";
@@ -118,7 +120,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> postCondition = "cause resolved and therapy resumed, or therapy stopped";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part oaReviewLog : OperationalActivity {
+    action oaReviewLog : OperationalActivity {
         attribute :>> id = "OA-007";
         attribute :>> name = "ReviewEventLog";
         attribute :>> trigger = "shift change, incident review, or dose audit";
@@ -126,7 +128,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> postCondition = "delivered doses and alarm history reviewed";
         attribute :>> criticality = CriticalityKind::medium;
     }
-    part oaMaintain : OperationalActivity {
+    action oaMaintain : OperationalActivity {
         attribute :>> id = "OA-008";
         attribute :>> name = "MaintainDevice";
         attribute :>> trigger = "scheduled maintenance or fault";
@@ -155,55 +157,61 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     part osNominalTherapy : OperationalScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "NominalTherapySession";
-        attribute :>> scenarioKind = ScenarioKind::nominal;
+        attribute :>> variantKind = ScenarioVariantKind::nominal;
+        attribute :>> operationalCondition = OperationalConditionKind::normal;
         attribute :>> preCondition = "prescription issued, reservoir loaded";
         attribute :>> postCondition = "therapy completed and stopped by clinician";
-        attribute :>> sequenceDescription = "Prescribe > load reservoir > program and confirm > start basal > patient boluses within limits > stop therapy > review log.";
+        attribute :>> pathSummary = "Prescribe > load reservoir > program and confirm > start basal > patient boluses within limits > stop therapy > review log.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.2 Main GPCA System Functions";
     }
     part osLockoutBolus : OperationalScenario {
         attribute :>> id = "OS-002";
         attribute :>> name = "BolusRequestDuringLockout";
-        attribute :>> scenarioKind = ScenarioKind::error;
+        attribute :>> variantKind = ScenarioVariantKind::alternate;
+        attribute :>> operationalCondition = OperationalConditionKind::foreseeableMisuse;
         attribute :>> preCondition = "basal infusion active; lockout interval running";
         attribute :>> postCondition = "request ignored, logged; basal continues unchanged";
-        attribute :>> sequenceDescription = "Patient presses bolus button during lockout > infusion manager rejects request > event logged > no additional drug delivered.";
+        attribute :>> pathSummary = "Patient presses bolus button during lockout > infusion manager rejects request > event logged > no additional drug delivered.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 PATIENT BOLUS mode (lockout requirements)";
     }
     part osOcclusionAlarm : OperationalScenario {
         attribute :>> id = "OS-003";
         attribute :>> name = "OcclusionDetectedDuringInfusion";
-        attribute :>> scenarioKind = ScenarioKind::alarm;
+        attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> preCondition = "therapy active; downstream line becomes blocked";
         attribute :>> postCondition = "infusion paused, alarm annunciated, clinician clears occlusion and resumes";
-        attribute :>> sequenceDescription = "Occlusion sensor exceeds pressure threshold > alarm raised same step > infusion paused > audible and visual annunciation > clinician resolves and resumes.";
+        attribute :>> pathSummary = "Occlusion sensor exceeds pressure threshold > alarm raised same step > infusion paused > audible and visual annunciation > clinician resolves and resumes.";
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms and Alerts (occlusion)";
     }
     part osAirInLine : OperationalScenario {
         attribute :>> id = "OS-004";
         attribute :>> name = "AirInLineDetected";
-        attribute :>> scenarioKind = ScenarioKind::alarm;
+        attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> preCondition = "therapy active; air bubble enters tubing";
         attribute :>> postCondition = "infusion stopped before air reaches patient; alarm annunciated";
-        attribute :>> sequenceDescription = "Air-in-line sensor detects bubble above threshold > transition to PAUSED (KVO flow) > High-priority Air embolism notification > clinician re-primes line and restarts.";
+        attribute :>> pathSummary = "Air-in-line sensor detects bubble above threshold > transition to PAUSED (KVO flow) > High-priority Air embolism notification > clinician re-primes line and restarts.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Air embolism)";
     }
     part osEmptyReservoir : OperationalScenario {
         attribute :>> id = "OS-005";
         attribute :>> name = "ReservoirEmptyDuringTherapy";
-        attribute :>> scenarioKind = ScenarioKind::degraded;
+        attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> preCondition = "therapy active; reservoir volume reaches empty threshold";
         attribute :>> postCondition = "infusion stopped, alarm raised, reservoir replaced";
-        attribute :>> sequenceDescription = "Reservoir-empty condition detected > transition to PAUSED (KVO flow) > High-priority Empty Reservoir notification > clinician loads new reservoir > therapy resumed with saved prescription.";
+        attribute :>> pathSummary = "Reservoir-empty condition detected > transition to PAUSED (KVO flow) > High-priority Empty Reservoir notification > clinician loads new reservoir > therapy resumed with saved prescription.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Empty Reservoir)";
     }
     part osPowerLoss : OperationalScenario {
         attribute :>> id = "OS-006";
         attribute :>> name = "MainsPowerLossAndRecovery";
-        attribute :>> scenarioKind = ScenarioKind::degraded;
+        attribute :>> variantKind = ScenarioVariantKind::recovery;
+        attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> preCondition = "therapy active on mains power";
         attribute :>> postCondition = "therapy continues on battery; prescription preserved across full power loss";
-        attribute :>> sequenceDescription = "Mains lost > battery takes over with notification > if battery depletes, pump stops safely > on power restore, saved prescription recovered and therapy resumed only after clinician confirmation.";
+        attribute :>> pathSummary = "Mains lost > battery takes over with notification > if battery depletes, pump stops safely > on power restore, saved prescription recovered and therapy resumed only after clinician confirmation.";
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.3 Electrical Hazards (battery failure)";
     }
 }

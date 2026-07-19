@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_model_views_operational_scenario_sequence_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-BHV-102";
             attribute :>> name = "GPCA_ScenarioSequenceQuery";
-            attribute :>> includeElementKinds = ("SystemScenario", "OperationalScenario", "FunctionalChain", "FunctionalChainStep");
+            attribute :>> includeElementKinds = ("FunctionalScenario", "OperationalScenario", "FunctionalFlow", "FunctionalFlowStep");
             attribute :>> includeLayers = ("operational", "system");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate scenario sequences from the system layer.";

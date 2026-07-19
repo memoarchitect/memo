@@ -1,3 +1,7 @@
+// System-level functional analysis (§9). A FunctionalFlow (renamed from
+// FunctionalFlow) is a reusable organization of system functions; a
+// FunctionalScenario is a selected path through a functional flow and may
+// realize an operational scenario (ADR-0003).
 package memo_architecture_system {
     private import ScalarValues::*;
 
@@ -5,50 +9,66 @@ package memo_architecture_system {
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_architecture_functions::*;
+    private import memo_scenarios::*;
+
     part def SystemCapability specializes ArchitectureElement {
         attribute capabilityKind : String;
-        attribute primaryFunction : String;
+        ref primaryFunction : SystemFunction[0..1];
         attribute safetyRelevant : Boolean;
     }
-    part def FunctionalChain specializes ArchitectureElement {
-        attribute chainKind : FunctionalChainKind;
-        attribute startFunction : String;
-        attribute endFunction : String;
+
+    part def FunctionalFlow specializes ArchitectureElement {
+        attribute flowCategory : FunctionalFlowKind;
+        ref startFunction : SystemFunction[0..1];
+        ref endFunction : SystemFunction[0..1];
         attribute endToEndLatencyBudgetMs : String;
         attribute safetyRelevant : Boolean;
         attribute securityRelevant : Boolean;
+        ref includedFunctions : SystemFunction[0..*];
     }
-    part def FunctionalChainStep specializes TraceableElement {
+
+    part def FunctionalFlowStep specializes MemoPart {
         attribute stepOrder : String;
-        attribute allocatedFunction : String;
-        attribute exchangeItem : String;
+        ref function : SystemFunction[0..1];
+        ref exchange : FunctionalExchange[0..1];
+        ref item exchangedItem : MemoExchangeItem[0..1];
     }
-    part def SystemScenario specializes TraceableElement {
-        attribute scenarioKind : ScenarioKind;
+
+    // A selected path through a functional flow (was FunctionalScenario).
+    part def FunctionalScenario specializes MemoScenario {
         attribute sequenceDiagramRef : String;
-        attribute precondition : String;
-        attribute postcondition : String;
+        ref selectedFlow : FunctionalFlow[0..1];
     }
+
     part def Mission specializes DocumentedElement {
         attribute missionKind : String;
         attribute successCriteria : String;
         attribute operationalContext : String;
     }
 
-    connection def RealizesCapability :> SemanticLink {
-        end functionalChain : FunctionalChain;
+    connection def RealizesCapability :> MemoRelationship {
+        end functionalFlow : FunctionalFlow;
         end capability : SystemCapability;
     }
-    connection def IncludesStep :> SemanticLink {
-        end functionalChain : FunctionalChain;
-        end step : FunctionalChainStep;
+    connection def IncludesStep :> MemoRelationship {
+        end functionalFlow : FunctionalFlow;
+        end step : FunctionalFlowStep;
     }
-    connection def InvolvesFunction :> SemanticLink {
-        end functionalChain : FunctionalChain;
-        end function : LogicalFunction;
+    connection def InvolvesFunction :> MemoRelationship {
+        end functionalFlow : FunctionalFlow;
+        end function : SystemFunction;
     }
-    connection def RealizesScenario :> SemanticLink {
-        end functionalChain : FunctionalChain;
-        end scenario : SystemScenario;
+    connection def RealizesScenario :> MemoRelationship {
+        end functionalFlow : FunctionalFlow;
+        end scenario : FunctionalScenario;
+    }
+    // A functional scenario selects a flow and realizes operational intent.
+    connection def SelectsFlow :> MemoRelationship {
+        end scenario : FunctionalScenario;
+        end selectedFlow : FunctionalFlow;
+    }
+    connection def FunctionalRealizesOperational :> MemoRelationship {
+        end functionalScenario : FunctionalScenario;
+        end operationalScenario : OperationalScenario;
     }
 }

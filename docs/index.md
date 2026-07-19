@@ -5,41 +5,58 @@
 # Make the engineering argument visible
 
 MEMO is a portable SysML v2 library for medical-device engineering. It gives a
-team a shared vocabulary for the device, its context, its risks, and the
-evidence used to review it.
+team one shared vocabulary for the clinical work, the device, its risks, and
+the evidence used to review it — from a reusable forceps to a surgical robot,
+without forcing either through the other's layers.
 
-<p class="memo-hero-path"><span>Need</span><i>→</i><span>Requirement</span><i>→</i><span>Design</span><i>→</i><span>Risk control</span><i>→</i><span>Evidence</span></p>
+<p class="memo-hero-path"><span>Use case</span><i>→</i><span>Workflow</span><i>→</i><span>Function</span><i>→</i><span>Architecture</span><i>→</i><span>Evidence</span></p>
 
 </div>
+
+## Why an ontology at all
+
+A device file already contains needs, requirements, architecture, risks, and
+test results — usually in different tools, written by different disciplines,
+connected by memory. When a reviewer asks *"why does this alarm exist?"* or
+*"which test covers this critical task?"*, someone reconstructs the answer by
+hand. MEMO's premise is that these connections are the engineering argument,
+and the argument should be a model: every claim has a type, every connection
+is a typed relationship, and every question is answerable by following links
+instead of folklore.
+
+![The MEMO ontology map: architecture perspectives, assurance disciplines, and the V of definition and integration](assets/ontology-map.svg)
 
 ## What MEMO provides
 
 <div class="memo-card-grid" markdown>
 
-<div class="memo-card memo-card-teal" markdown>
+<div class="memo-card memo-card-purple" markdown>
 
-### A shared vocabulary
+### The operational world, first-class
 
-Element kinds make the difference between a need, a requirement, a function,
-a hazard, a control, and evidence explicit.
+Stakeholders, users, needs, medical use cases, clinical procedures, workflows,
+scenarios, and tasks exist *before* any device is selected — so you can model
+the work you are improving, not just the box you are building.
 
 </div>
 
 <div class="memo-card memo-card-blue" markdown>
 
-### Reviewable relationships
+### Four architecture perspectives
 
-Typed links record why one engineering claim leads to another, so a reviewer
-can follow a trace instead of reconstructing intent from files.
+Operational, functional, logical, and implementation are independent
+dimensions of one model. Simple devices skip the layers they do not need;
+complex devices keep software, hardware, and physical semantics distinct.
 
 </div>
 
-<div class="memo-card memo-card-purple" markdown>
+<div class="memo-card memo-card-teal" markdown>
 
-### A modeling method
+### Assurance woven through every layer
 
-Layers, viewpoints, patterns, and workflow gates help a team choose the next
-useful slice of the model without creating a second source of truth.
+Safety, cybersecurity, human factors, and V&V claim elements without
+duplicating them. Typed relationships carry the trace from clinical intent to
+postmarket evidence, and conformance rules check the graph.
 
 </div>
 
@@ -51,37 +68,39 @@ useful slice of the model without creating a second source of truth.
 
 <a class="memo-start-card" href="start/mental-model/">
 <strong>01 · Understand the model</strong>
-<span>Learn how layers, elements, and relationships work together.</span>
+<span>Perspectives, dimensions, elements, and relationships in one page.</span>
 </a>
 
-<a class="memo-start-card" href="start/first-model/">
+<a class="memo-start-card" href="tutorials/first-model/">
 <strong>02 · Model one complete slice</strong>
 <span>Build a small thread from need to evidence in SysML v2.</span>
 </a>
 
-<a class="memo-start-card" href="layers/">
-<strong>03 · Place existing material</strong>
-<span>Map requirements, risks, architecture, and tests to their right home.</span>
+<a class="memo-start-card" href="examples/">
+<strong>03 · Learn from the examples</strong>
+<span>Fourteen focused models, each answering one modeling question.</span>
 </a>
 
 <a class="memo-start-card" href="examples/gpca-walkthrough/">
-<strong>04 · Learn from GPCA</strong>
-<span>Follow a real example across the connected layers.</span>
+<strong>04 · Study GPCA end to end</strong>
+<span>A complete infusion-pump model built from public research artifacts.</span>
 </a>
 
 </div>
 
 ## The modeling path
 
-Start small. Use the first-model tutorial to create one connected slice, then
-grow it only when the engineering question requires another layer:
+Start small. Model one vertical slice — a use case, the workflow that supports
+it, the function that enables the work, and the evidence that closes the claim
+— then grow the model only when an engineering question requires another
+layer:
 
-`context → need → requirement → design response → risk/control → verification evidence`
+`use case → workflow → activity → function → logical → implementation → verification evidence`
 
-This is a reading and modeling order, not a mandated lifecycle. A risk review
-may lead you back to the requirement; an implementation decision may expose a
-new need for evidence. The point is that each change stays connected and
-reviewable.
+This is a reading order, not a mandated lifecycle, and not every product walks
+every step: a manual instrument goes from activity straight to physical parts;
+a software-only device has no hardware layer at all. The point is that each
+change stays connected and reviewable.
 
 !!! note "MEMO complements engineering judgment"
     The ontology helps structure claims and expose gaps. It does not decide

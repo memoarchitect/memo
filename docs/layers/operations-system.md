@@ -1,50 +1,52 @@
-# Operations and System Analysis
+# Functional and System Analysis
 
-These layers bridge the problem space and the solution space.
+The functional layer answers *what the system must do* without saying how.
+This separation is what lets one functional architecture survive a technology
+change — and what stops every function from silently becoming software. A
+`SystemFunction` may be realized by human action, mechanics, electronics,
+software, or a combination; the allocation decision is explicit and comes
+later.
 
-- **Operational modeling** describes work as stakeholders understand it.
-- **System analysis** describes capabilities, scenarios, and functional chains
-  the system must realize.
+## Keep five meanings distinct
 
-## Operational elements
-
-| Element | Meaning |
-|---|---|
-| `OperationalEntity` | A participant in the operational world |
-| `OperationalActivity` | Work performed to reach an outcome |
-| `OperationalCapability` | An outcome the operation must be able to achieve |
-| `OperationalScenario` | A particular sequence or situation |
-| `OperationalInteraction` | An exchange between operational participants |
-
-Useful links include `Performs`, `ContributesToCapability`, `SequencesStep`, and
-`DerivesSystemNeed`.
-
-## System-analysis elements
+The vocabulary here earns its size by preventing one recurring confusion —
+work, responsibility, behavior, organization, and path are different claims:
 
 | Element | Meaning |
 |---|---|
-| `SystemCapability` | Ability the system must provide |
-| `FunctionalChain` | Ordered cooperation of functions |
-| `FunctionalChainStep` | One step in a chain |
-| `SystemScenario` | System response in a particular situation |
-| `Mission` | Higher-level objective supported by capabilities |
+| `OperationalActivity` | Work performed in the operational world (by people) |
+| `SystemFunction` | Technology-independent responsibility of the system |
+| `SystemAction` | Executable behavior realizing a function |
+| `FunctionalFlow` / `FunctionalFlowStep` | Reusable organization of functions with typed steps |
+| `FunctionalScenario` | A selected path through a functional flow |
 
-Useful links include `RealizesCapability`, `IncludesStep`, `InvolvesFunction`,
-and `RealizesScenario`.
+`SystemCapability` names an outcome the system must be able to achieve and
+references its primary function; `FunctionalExchange` is a typed transfer
+(measurement, command, alarm, …) between functions.
+
+## Core relationships
+
+| Relationship | Reads as |
+|---|---|
+| `EnablesActivity` | This function enables that operational work — it does not perform it |
+| `PerformsFunction` | This system action executes that function |
+| `InvolvesFunction` / `IncludesStep` | This flow organizes these functions and steps |
+| `SelectsFlow` / `FunctionalRealizesOperational` | This functional scenario selects a flow and realizes an operational scenario |
+| `AllocatedTo` | This function is the responsibility of that logical component |
 
 ## Example thread
 
 ```mermaid
 flowchart LR
-    Prescribe[OperationalActivity: prescribe] --> Program[OperationalActivity: program pump]
-    Program --> Start[OperationalActivity: start therapy]
-    Start --> Bolus[OperationalActivity: request bolus]
-    Bolus --> Capability[OperationalCapability: titrated analgesia]
-    Capability --> Chain[FunctionalChain: patient bolus]
-    Chain --> Sense[LogicalFunction: acquire sensors]
-    Chain --> Limit[LogicalFunction: enforce limits]
-    Chain --> Deliver[LogicalFunction: command pump]
+    Bolus[OperationalActivity: request bolus] --> Capability[SystemCapability: titrated analgesia]
+    Capability --> Chain[FunctionalFlow: patient bolus]
+    Chain --> Sense[SystemFunction: acquire sensors]
+    Chain --> Limit[SystemFunction: enforce limits]
+    Chain --> Command[SystemFunction: command pump]
+    Limit --> Logical[LogicalComponent: monitor channel]
 ```
 
-Use operational names that stakeholders recognize. Introduce implementation
-terms only after you cross into system functions and architecture.
+In the GPCA example, `gpca_behavior_subsystems.sysml` defines the functions
+and exchanges, and `gpca_system.sysml` organizes them into flows whose steps
+carry typed references to functions and exchanged items — follow `FCS-001`
+through `FCS-005` for the complete bolus path.

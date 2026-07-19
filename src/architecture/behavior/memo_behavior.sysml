@@ -42,11 +42,7 @@ package memo_architecture_behavior {
         attribute guardCondition : String;
         attribute weight : String;
     }
-    part def InteractionScenario specializes TraceableElement {
-        attribute scenarioKind : ScenarioKind;
-        attribute relatedCapability : String;
-        attribute diagramReference : String;
-    }
+    // InteractionScenario now lives in memo_interaction (:> MemoScenario).
     part def InteractionMessage specializes TraceableElement {
         attribute messageKind : MessageKind;
         attribute sequenceOrder : Integer;

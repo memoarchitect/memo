@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_model_views_functional_function_allocation_view 
         part :>> selectionQuery {
             attribute :>> id = "QRY-FUN-102";
             attribute :>> name = "GPCA_FunctionAllocationQuery";
-            attribute :>> includeElementKinds = ("LogicalFunction", "SoftwareComponent", "HardwareAssembly");
+            attribute :>> includeElementKinds = ("SystemFunction", "SoftwareComponent", "HardwareAssembly");
             attribute :>> includeRelationshipKinds = ("AllocatedTo");
             attribute :>> includeLayers = ("functions", "software_structure", "hardware_structure");
             attribute :>> selectionExpression = "product == 'GPCA'";

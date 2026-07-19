@@ -12,7 +12,7 @@ verification remain connected to the functions they concern.
 The layer view is **derived from the model’s semantic types and their owning
 packages**. It is not a generic diagram grouping added after the model is
 written. For example, `OperationalActivity` is defined in the operational
-package, `LogicalFunction` in the functions package, `LogicalComponent` in the
+package, `SystemFunction` in the functions package, `LogicalComponent` in the
 logical-structure package, and `SoftwareItem` / `HardwareAssembly` in their
 respective realization packages.
 
@@ -26,7 +26,7 @@ There are also explicit layer fields where they add value:
 
 | Ontology construct | How it records a layer |
 |---|---|
-| `Interface` | `arcadiaLayer : ArcadiaLayerKind` records `operational`, `system`, `logical`, or `physical` because the same interface taxonomy can occur at several layers. |
+| `Interface` | The inherited multivalued `perspective : ArchitecturePerspectiveKind` dimension records `operational`, `functional`, `logical`, or `implementation` because the same interface taxonomy can occur at several perspectives (ADR-0001). |
 | `LayerElement` | Provides a general `layerName` field for elements that need an explicit layer label. |
 | `MethodologyScope` | Records included architecture-layer names for a project’s method scope. |
 
@@ -42,7 +42,7 @@ classifications for the same model element.
   <div class="memo-architecture-bridge"><span>scenario realized as</span><i>↓</i></div>
   <section class="memo-architecture-layer layer-function">
     <header><span>02</span><div><strong>Functional behavior</strong><small>What the system does for the scenario</small></div></header>
-    <div class="memo-architecture-elements"><b>SystemScenario</b><b>LogicalFunction</b></div>
+    <div class="memo-architecture-elements"><b>FunctionalScenario</b><b>SystemFunction</b></div>
   </section>
   <div class="memo-architecture-bridge"><span>allocated to</span><i>↓</i></div>
   <section class="memo-architecture-layer layer-logical">
@@ -63,12 +63,12 @@ classifications for the same model element.
 | `Performs` | `Actor` | `OperationalActivity` | Who carries out this work? |
 | `SequencesStep` | `OperationalActivity` | `OperationalActivity` | What happens next in the workflow? |
 | `DerivesSystemNeed` | `OperationalActivity` | system need | What system concern follows from the work? |
-| `InvolvesFunction` | `SystemScenario` | `LogicalFunction` | Which function realizes the scenario? |
-| `SatisfiedBy` | `SystemRequirement` | `LogicalFunction` | Which function fulfils the claim? |
-| `AllocatedTo` | `LogicalFunction` | `LogicalComponent`, `SoftwareItem`, or `HardwareAssembly` | Which part is responsible? |
+| `InvolvesFunction` | `FunctionalScenario` | `SystemFunction` | Which function realizes the scenario? |
+| `SatisfiedBy` | `SystemRequirement` | `SystemFunction` | Which function fulfils the claim? |
+| `AllocatedTo` | `SystemFunction` | `LogicalComponent`, `SoftwareItem`, or `HardwareAssembly` | Which part is responsible? |
 | `DeploysOnto` | `SoftwareComponent` | `ProcessingNode` or host assembly | Where does the software run? |
 | `RealizesInterface` | logical `Interface` | `PhysicalPort` or physical interface | How is the logical exchange made concrete? |
-| `VerifiedBy` | `LogicalFunction` or requirement | `VerificationCase` | How will the behavior be checked? |
+| `VerifiedBy` | `SystemFunction` or requirement | `VerificationCase` | How will the behavior be checked? |
 | `MitigatesHazard` | `RiskControl` | `Hazard` | Which control reduces the hazard? |
 
 ## Why software, hardware, and physical architecture are separate
@@ -93,8 +93,8 @@ The model connects the three realization concerns through typed links:
 
 | From | Relationship | To | Meaning |
 |---|---|---|---|
-| `LogicalFunction` | `AllocatedTo` | `SoftwareItem` | The software item is responsible for that function. |
-| `LogicalFunction` | `AllocatedTo` | `HardwareAssembly` | The hardware assembly contributes the sensing, actuation, or other physical capability. |
+| `SystemFunction` | `AllocatedTo` | `SoftwareItem` | The software item is responsible for that function. |
+| `SystemFunction` | `AllocatedTo` | `HardwareAssembly` | The hardware assembly contributes the sensing, actuation, or other physical capability. |
 | `SoftwareComponent` | `DeploysOnto` | `ProcessingNode` | The software component runs on that physical computing node. |
 | `Interface` | `RealizesInterface` | `PhysicalPort` | The logical exchange is realized through a concrete physical endpoint. |
 

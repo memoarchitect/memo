@@ -1,27 +1,45 @@
+// Software module view (§11; IEC 62304 5.3-5.4). Code/module structure only:
+// runtime structure lives in memo_architecture_software_runtime and
+// allocation in memo_architecture_deployment (SEI viewtypes, ADR-0004).
 package memo_architecture_software_structure {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
+    private import memo_core_relationships::*;
+    private import memo_architecture_logical_structure::*;
+
     part def SoftwareSystem specializes ArchitectureElement {
         attribute version : String;
-        attribute lifecycleState : LifecycleStateKind;
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
         attribute operatingSystem : String;
     }
+
+    // Module-view element (design responsibility). Runtime properties
+    // (period, WCET, scheduling) moved to RuntimeComponent.
     part def SoftwareComponent specializes ArchitectureElement {
         attribute responsibility : String;
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
-        attribute periodMs : Real;
-        attribute deadlineMs : Real;
-        attribute wcetMs : Real;
-        attribute schedulingPolicy : SchedulingPolicyKind;
     }
     part def SoftwareItem specializes SoftwareComponent {
         attribute softwareItemKind : String;
         attribute iec62304Role : String;
+    }
+    part def SoftwareModule specializes SoftwareComponent {
+        attribute moduleKind : String;
+    }
+    // IEC 62304 software unit: not further decomposed.
+    part def SoftwareUnit specializes SoftwareComponent {
+        attribute implementationLanguage : String;
+    }
+    part def SoftwarePackage specializes SoftwareComponent {
+        attribute namespacePath : String;
+    }
+    part def SoftwareLibrary specializes SoftwareComponent {
+        attribute libraryVersion : String;
+        attribute internallyDeveloped : Boolean;
     }
     part def FirmwareItem specializes SoftwareItem {
         attribute firmwareTarget : String;
@@ -34,11 +52,40 @@ package memo_architecture_software_structure {
         attribute riskAcceptance : String;
         attribute classification : SOUPClassificationKind;
     }
-    item def SBOMEntry specializes TraceableElement {
+
+    part def Algorithm specializes ArchitectureElement {
+        attribute algorithmKind : String;
+        attribute inputSummary : String;
+        attribute outputSummary : String;
+        attribute clinicalPerformanceClaim : String;
+    }
+    part def DataModel specializes ArchitectureElement {
+        attribute schemaReference : String;
+        attribute persistenceScope : String;
+    }
+    part def ConfigurationArtifact specializes ArchitectureElement {
+        attribute configurationScope : String;
+        attribute version : String;
+    }
+
+    item def SBOMEntry specializes MemoExchangeItem {
         attribute componentName : String;
         attribute version : String;
         attribute supplier : String;
         attribute license : String;
         attribute hash : String;
+    }
+
+    connection def ImplementsComponent :> MemoRelationship {
+        end unit : SoftwareUnit;
+        end component : SoftwareComponent;
+    }
+    connection def RealizesLogical :> MemoRelationship {
+        end softwareComponent : SoftwareComponent;
+        end logicalComponent : LogicalComponent;
+    }
+    connection def ModuleUses :> MemoRelationship {
+        end usingModule : SoftwareComponent;
+        end usedModule : SoftwareComponent;
     }
 }

@@ -1,25 +1,106 @@
 package memo {
+    alias activities for memo_namespace_activities;
     alias architecture for memo_namespace_architecture;
+    alias assurance for memo_namespace_assurance;
+    alias clinical_procedures for memo_namespace_clinical_procedures;
+    alias context for memo_namespace_context;
+    alias interaction for memo_namespace_interaction;
     alias artifacts for memo_namespace_artifacts;
     alias compliance for memo_namespace_compliance;
     alias core for memo_namespace_core;
-    alias examples for memo_namespace_examples;
     alias medical_device_library for memo_namespace_medical_device_library;
+    alias medical_products for memo_namespace_medical_products;
     alias methodology for memo_namespace_methodology;
+    alias needs for memo_namespace_needs;
     alias rules for memo_namespace_rules;
+    alias scenarios for memo_namespace_scenarios;
+    alias use_cases for memo_namespace_use_cases;
+    alias workflows for memo_namespace_workflows;
     alias viewpoints for memo_namespace_viewpoints;
+}
+
+package memo_namespace_activities {
+    public import memo_activities::*;
+}
+
+package memo_namespace_assurance {
+    alias human_factors for memo_namespace_assurance_human_factors;
+}
+
+package memo_namespace_assurance_human_factors {
+    public import memo_assurance_human_factors::*;
+}
+
+package memo_namespace_clinical_procedures {
+    public import memo_clinical_procedures::*;
+}
+
+package memo_namespace_context {
+    alias actors for memo_namespace_context_actors;
+    alias stakeholders for memo_namespace_context_stakeholders;
+    alias use_context for memo_namespace_context_use_context;
+}
+
+package memo_namespace_context_actors {
+    public import memo_context_actors::*;
+}
+
+package memo_namespace_context_stakeholders {
+    public import memo_context_stakeholders::*;
+}
+
+package memo_namespace_context_use_context {
+    public import memo_context_use_context::*;
+}
+
+package memo_namespace_needs {
+    public import memo_needs::*;
+}
+
+package memo_namespace_scenarios {
+    public import memo_scenarios::*;
+}
+
+package memo_namespace_use_cases {
+    public import memo_use_cases::*;
+}
+
+package memo_namespace_workflows {
+    public import memo_workflows::*;
+}
+
+package memo_namespace_architecture_deployment {
+    public import memo_architecture_deployment::*;
+}
+
+package memo_namespace_architecture_software_runtime {
+    public import memo_architecture_software_runtime::*;
+}
+
+package memo_namespace_interaction {
+    public import memo_interaction::*;
+}
+
+package memo_namespace_medical_products {
+    alias definitions for memo_namespace_medical_products_definitions;
+    alias lifecycle for memo_namespace_medical_products_lifecycle;
+    alias usage for memo_namespace_medical_products_usage;
+}
+
+package memo_namespace_medical_products_definitions {
+    public import memo_medical_products_definitions::*;
+}
+
+package memo_namespace_medical_products_lifecycle {
+    public import memo_medical_products_lifecycle::*;
+}
+
+package memo_namespace_medical_products_usage {
+    public import memo_medical_products_usage::*;
 }
 
 package memo_architecture_risk_compatibility {
     public import memo_architecture_risk_arch_risk::*;
-}
-
-package memo_examples_gpca_samples {
-    public import memo_examples_gpca_pump_model_samples_action_flow_view::*;
-    public import memo_examples_gpca_pump_model_samples_functional_flow_view::*;
-    public import memo_examples_gpca_pump_model_samples_interconnection_view::*;
-    public import memo_examples_gpca_pump_model_samples_operational_behaviour_view::*;
-    public import memo_examples_gpca_pump_model_samples_tree_view::*;
 }
 
 package memo_namespace_architecture {
@@ -27,9 +108,9 @@ package memo_namespace_architecture {
     alias assurance for memo_namespace_architecture_assurance;
     alias behavior for memo_namespace_architecture_behavior;
     alias constraints for memo_namespace_architecture_constraints;
-    alias context for memo_namespace_architecture_context;
     alias cybersecurity for memo_namespace_architecture_cybersecurity;
     alias decisions for memo_namespace_architecture_decisions;
+    alias deployment for memo_namespace_architecture_deployment;
     alias functions for memo_namespace_architecture_functions;
     alias hardware_structure for memo_namespace_architecture_hardware_structure;
     alias interfaces for memo_namespace_architecture_interfaces;
@@ -38,6 +119,7 @@ package memo_namespace_architecture {
     alias physical for memo_namespace_architecture_physical;
     alias requirements for memo_namespace_architecture_requirements;
     alias risk for memo_namespace_architecture_risk;
+    alias software_runtime for memo_namespace_architecture_software_runtime;
     alias software_structure for memo_namespace_architecture_software_structure;
     alias system for memo_namespace_architecture_system;
 }
@@ -84,10 +166,7 @@ package memo_namespace_core {
     alias relationships for memo_namespace_core_relationships;
     alias semantics for memo_namespace_core_semantics;
     alias stdlib for memo_namespace_core_stdlib;
-}
-
-package memo_namespace_examples {
-    alias gpca for memo_namespace_examples_gpca;
+    alias terminology for memo_namespace_core_terminology;
 }
 
 package memo_namespace_medical_device_library {
@@ -110,10 +189,12 @@ package memo_namespace_rules {
     alias coverage for memo_namespace_rules_coverage;
     alias crosslayer for memo_namespace_rules_crosslayer;
     alias lifecycle for memo_namespace_rules_lifecycle;
+    alias ontology for memo_namespace_rules_ontology;
     alias quantitative for memo_namespace_rules_quantitative;
 }
 
 package memo_namespace_viewpoints {
+    alias catalog for memo_namespace_viewpoints_catalog;
     alias clinical for memo_namespace_viewpoints_clinical;
     alias context for memo_namespace_viewpoints_context;
     alias cybersecurity for memo_namespace_viewpoints_cybersecurity;
@@ -143,10 +224,6 @@ package memo_namespace_architecture_behavior {
 
 package memo_namespace_architecture_constraints {
     public import memo_architecture_constraints::*;
-}
-
-package memo_namespace_architecture_context {
-    public import memo_architecture_context::*;
 }
 
 package memo_namespace_architecture_cybersecurity {
@@ -333,35 +410,15 @@ package memo_namespace_core_semantics {
     public import memo_core_semantics::*;
 }
 
+package memo_namespace_core_terminology {
+    public import memo_core_terminology::*;
+}
+
 package memo_namespace_core_stdlib {
     alias collections for memo_namespace_core_stdlib_collections;
     alias functions for memo_namespace_core_stdlib_functions;
     alias scalars for memo_namespace_core_stdlib_scalars;
     alias time for memo_namespace_core_stdlib_time;
-}
-
-package memo_namespace_examples_gpca {
-    alias analysis_models for memo_namespace_examples_gpca_analysis;
-    alias architecture for memo_namespace_examples_gpca_architecture;
-    alias behavior_actions for memo_namespace_examples_gpca_behavior_actions;
-    alias behavior_modes for memo_namespace_examples_gpca_behavior_modes;
-    alias behavior_subsystems for memo_namespace_examples_gpca_behavior_subsystems;
-    alias context for memo_namespace_examples_gpca_context;
-    alias cybersecurity for memo_namespace_examples_gpca_cybersecurity;
-    alias document_views for memo_namespace_examples_gpca_document_views;
-    alias formal_behavior for memo_namespace_examples_gpca_formal_behavior;
-    alias interfaces for memo_namespace_examples_gpca_interfaces;
-    alias methodology for memo_namespace_examples_gpca_methodology;
-    alias methodology_profiles for memo_namespace_examples_gpca_methodology_profiles;
-    alias methodology_scope for memo_namespace_examples_gpca_methodology_scope;
-    alias operational for memo_namespace_examples_gpca_operational;
-    alias physical for memo_namespace_examples_gpca_physical;
-    alias requirements for memo_namespace_examples_gpca_requirements;
-    alias risk for memo_namespace_examples_gpca_risk;
-    alias system for memo_namespace_examples_gpca_system;
-    alias trace for memo_namespace_examples_gpca_trace;
-    alias verification_models for memo_namespace_examples_gpca_verification;
-    alias views for memo_namespace_examples_gpca_views;
 }
 
 package memo_namespace_methodology_archetypes {
@@ -412,8 +469,16 @@ package memo_namespace_rules_lifecycle {
     public import memo_rules_lifecycle::*;
 }
 
+package memo_namespace_rules_ontology {
+    public import memo_rules_ontology::*;
+}
+
 package memo_namespace_rules_quantitative {
     public import memo_rules_quantitative::*;
+}
+
+package memo_namespace_viewpoints_catalog {
+    public import memo_viewpoints_catalog::*;
 }
 
 package memo_namespace_viewpoints_clinical {
@@ -497,114 +562,6 @@ package memo_namespace_core_stdlib_scalars {
 
 package memo_namespace_core_stdlib_time {
     public import memo_core_stdlib_time::*;
-}
-
-package memo_namespace_examples_gpca_analysis {
-    public import memo_examples_gpca_pump_model_catalog_gpca_analysis::*;
-}
-
-package memo_namespace_examples_gpca_architecture {
-    public import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
-}
-
-package memo_namespace_examples_gpca_behavior_actions {
-    public import memo_examples_gpca_pump_model_catalog_gpca_behavior_actions::*;
-}
-
-package memo_namespace_examples_gpca_behavior_modes {
-    public import memo_examples_gpca_pump_model_catalog_gpca_behavior_modes::*;
-}
-
-package memo_namespace_examples_gpca_behavior_subsystems {
-    public import memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems::*;
-}
-
-package memo_namespace_examples_gpca_context {
-    public import memo_examples_gpca_pump_model_catalog_gpca_context::*;
-}
-
-package memo_namespace_examples_gpca_cybersecurity {
-    public import memo_examples_gpca_pump_model_catalog_gpca_cybersecurity::*;
-}
-
-package memo_namespace_examples_gpca_document_views {
-    public import memo_examples_gpca_pump_model_views_document_architecture_description_view::*;
-    public import memo_examples_gpca_pump_model_views_document_cyber_assessment_view::*;
-    public import memo_examples_gpca_pump_model_views_document_dhf_index_view::*;
-    public import memo_examples_gpca_pump_model_views_document_hazard_analysis_view::*;
-    public import memo_examples_gpca_pump_model_views_document_rmf_view::*;
-    public import memo_examples_gpca_pump_model_views_document_sdd_view::*;
-    public import memo_examples_gpca_pump_model_views_document_threat_model_view::*;
-    public import memo_examples_gpca_pump_model_views_document_usability_view::*;
-    public import memo_examples_gpca_pump_model_views_document_vv_view::*;
-}
-
-package memo_namespace_examples_gpca_formal_behavior {
-    public import memo_examples_gpca_pump_model_catalog_gpca_formal_behavior::*;
-}
-
-package memo_namespace_examples_gpca_interfaces {
-    public import memo_examples_gpca_pump_model_catalog_gpca_interfaces::*;
-}
-
-package memo_namespace_examples_gpca_methodology {
-    public import memo_examples_gpca_pump_methodology_gpca_methodology::*;
-}
-
-package memo_namespace_examples_gpca_methodology_profiles {
-    public import memo_examples_gpca_pump_methodology_gpca_profiles::*;
-}
-
-package memo_namespace_examples_gpca_methodology_scope {
-    public import memo_examples_gpca_pump_methodology_gpca_scope::*;
-}
-
-package memo_namespace_examples_gpca_operational {
-    public import memo_examples_gpca_pump_model_catalog_gpca_operational::*;
-}
-
-package memo_namespace_examples_gpca_physical {
-    public import memo_examples_gpca_pump_model_catalog_gpca_physical::*;
-}
-
-package memo_namespace_examples_gpca_requirements {
-    public import memo_examples_gpca_pump_model_catalog_gpca_requirements::*;
-}
-
-package memo_namespace_examples_gpca_risk {
-    public import memo_examples_gpca_pump_model_catalog_gpca_risk::*;
-}
-
-package memo_namespace_examples_gpca_system {
-    public import memo_examples_gpca_pump_model_catalog_gpca_system::*;
-}
-
-package memo_namespace_examples_gpca_trace {
-    public import memo_examples_gpca_pump_model_catalog_gpca_trace::*;
-}
-
-package memo_namespace_examples_gpca_verification {
-    public import memo_examples_gpca_pump_model_catalog_gpca_verification::*;
-}
-
-package memo_namespace_examples_gpca_views {
-    public import memo_examples_gpca_pump_model_views_behavior_action_flow_view::*;
-    public import memo_examples_gpca_pump_model_views_context_system_context_view::*;
-    public import memo_examples_gpca_pump_model_views_cybersecurity_cybersecurity_view::*;
-    public import memo_examples_gpca_pump_model_views_functional_function_allocation_view::*;
-    public import memo_examples_gpca_pump_model_views_functional_function_browser_view::*;
-    public import memo_examples_gpca_pump_model_views_logical_device_interconnect_view::*;
-    public import memo_examples_gpca_pump_model_views_logical_logical_architecture_view::*;
-    public import memo_examples_gpca_pump_model_views_logical_mode_state_view::*;
-    public import memo_examples_gpca_pump_model_views_logical_system_decomposition_view::*;
-    public import memo_examples_gpca_pump_model_views_operational_scenario_sequence_view::*;
-    public import memo_examples_gpca_pump_model_views_operational_use_case_view::*;
-    public import memo_examples_gpca_pump_model_views_physical_physical_bom_view::*;
-    public import memo_examples_gpca_pump_model_views_requirements_requirements_trace_view::*;
-    public import memo_examples_gpca_pump_model_views_risk_fmea_view::*;
-    public import memo_examples_gpca_pump_model_views_risk_risk_chain_view::*;
-    public import memo_examples_gpca_pump_model_views_software_software_architecture_view::*;
-    public import memo_examples_gpca_pump_model_views_verification_verification_coverage_view::*;
 }
 
 package memo_namespace_viewpoints_clinical_clinical_evidence_view {
