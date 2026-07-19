@@ -56,8 +56,6 @@ each scenario owns the operational activity and action flow that describe its
 selected path. Requirements, risk controls, allocations, and verification
 evidence remain typed traceability links rather than additional ownership.
 
-![Workflow, scenario, and occurrence](../assets/workflow-scenario-occurrence.svg)
-
 Scenarios are classified along three independent dimensions — variant
 (nominal, alternate, exception, recovery), operational condition (normal,
 degraded, emergency, foreseeable misuse, …), and purpose (analysis, design,
