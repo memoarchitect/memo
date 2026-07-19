@@ -93,7 +93,7 @@ The implementation perspective answers **how the design is realized**.
 | Element group | Examples | Key relationships |
 | --- | --- | --- |
 | Software module structure | `SoftwareSystem`, `SoftwareItem`, `SoftwareUnit`, `SOUPComponent` | `RealizesLogical`, `BuildsInto` |
-| Runtime structure | `RuntimeComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` | `HostsRuntime`, timing and interaction links |
+| Runtime structure | `SoftwareComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` | `HostsRuntime`, timing and interaction links |
 | Deployment | `DeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` | `DeploysTo`, `HostsRuntime` |
 | Hardware and physical realization | `HardwareAssembly`, `Sensor`, `Actuator`, `PhysicalAssembly` | `PhysicalRealizesLogical`, `Composes` |
 | Concrete boundaries | `PhysicalPort`, `HardwareInterface`, `SoftwareInterface` | `RealizesInterface`, `ExchangesWith` |
@@ -103,8 +103,9 @@ containment. Use behavior views for actions and state.
 
 ## Cross-cutting disciplines
 
-These disciplines classify and connect elements across perspectives; they do
-not own duplicate copies of architecture elements.
+These disciplines own their assurance elements and connect them to architecture
+elements through typed relationships; they do not duplicate architecture
+elements.
 
 | Discipline | Core elements | Principal relationships |
 | --- | --- | --- |

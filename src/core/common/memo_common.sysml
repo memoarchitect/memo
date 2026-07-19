@@ -1,4 +1,4 @@
-// MEMO base hierarchy (ADR-0002). Construct-specific foundations: one base per
+// MEMO base hierarchy. Construct-specific foundations: one base per
 // SysML v2 metaclass family (part, action, port, interface, item, requirement,
 // connection), each carrying the shared MEMO semantics. Common inheritance
 // across metaclasses is not portable, so non-part bases re-declare the small
@@ -124,7 +124,7 @@ package memo_core_common {
     // Verification-case foundation. A SysML v2 verification case is a behaviour
     // (it checks requirements), and KerML forbids a behaviour from specializing
     // the part-based MemoPart — so, like MemoAction, it re-declares the small
-    // identification core rather than inheriting it (ADR-0002).
+    // identification core rather than inheriting it.
     verification def MemoVerificationCase {
         attribute id : String;
         attribute name : String;
@@ -136,7 +136,7 @@ package memo_core_common {
     // State foundation. SysML v2 states (state machines and their mode states)
     // are behaviours, so — like MemoAction and MemoVerificationCase — they
     // re-declare the identification core instead of specializing MemoPart
-    // (ADR-0002). Transitions stay part-based to keep their traceable safety
+    // Transitions stay part-based to keep their traceable safety
     // attributes (id, sourceReference, priority, sameStepCritical).
     state def MemoState {
         attribute id : String;

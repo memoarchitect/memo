@@ -3,11 +3,9 @@
 // Axis ownership (horizontal architecture layer vs. vertical assurance
 // discipline) is NOT a tag here — it is encoded by package membership: every
 // element is defined in exactly one axis package (memo_architecture_* xor
-// memo_assurance_*), enforced by CR-ONT-045. This reverses ADR-0001, which
-// carried perspective/discipline as free multivalued tags and thereby let one
-// element claim both axes at once. The remaining dimensions below (realization
-// stage, cross-cutting concern, element status) are genuinely orthogonal to the
-// axis and to each other, and stay as metadata.
+// memo_assurance_*), enforced by CR-ONT-045. The remaining dimensions below
+// (realization stage, cross-cutting concern, element status) are genuinely
+// orthogonal to the axis and to each other, and stay as metadata.
 package memo_core_dimensions {
     private import ScalarValues::*;
 

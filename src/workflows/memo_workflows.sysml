@@ -1,4 +1,4 @@
-// First-class operational workflows (§6, ADR-0003). An OperationalWorkflow is
+// First-class operational workflows. An OperationalWorkflow is
 // a reusable definition of how clinical or service work is performed — it may
 // exist before any device is selected. A scenario (memo_scenarios) is a
 // selected path through a workflow; an occurrence is an execution of a

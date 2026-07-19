@@ -1,4 +1,4 @@
-// Focused example: the realization graph across perspectives (ADR-0004).
+// Focused example: the realization graph across perspectives.
 // One function is allocated to a logical component and realized by BOTH a
 // software module and a mechanical part — realization is a many-to-many
 // graph, and no layer is a mandatory pipeline stage.

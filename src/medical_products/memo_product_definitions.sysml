@@ -1,4 +1,4 @@
-// Medical product definitions and instances (§12, §16; ADR-0004). Follows the
+// Medical product definitions and instances. Follows the
 // FHIR DeviceDefinition/Device split: catalog identity (manufacturer, model,
 // UDI-DI, intended purpose, technology domains) belongs to the definition;
 // production identity (serial, lot, UDI-PI, expiry, configuration, history)

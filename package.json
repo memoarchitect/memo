@@ -56,7 +56,6 @@
     "src/context/",
     "src/interaction/",
     "src/medical_products/",
-    "src/needs/",
     "src/scenarios/",
     "src/use_cases/",
     "src/workflows/",

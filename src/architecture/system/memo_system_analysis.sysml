@@ -1,7 +1,7 @@
 // System-level functional analysis (§9). A FunctionalFlow (renamed from
 // FunctionalFlow) is a reusable organization of system functions; a
 // FunctionalScenario is a selected path through a functional flow and may
-// realize an operational scenario (ADR-0003).
+// realize an operational scenario.
 package memo_architecture_system {
     private import ScalarValues::*;
 

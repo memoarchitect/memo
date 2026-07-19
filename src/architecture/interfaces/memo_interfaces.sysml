@@ -9,7 +9,7 @@ package memo_architecture_interfaces {
     // One root `Interface`, specialized by realization domain
     // (hardware / software) then by signaling family then by concrete
     // protocol. Architecture perspective is carried by the inherited
-    // orthogonal dimensions (ADR-0001), not as a type branch.
+    // orthogonal dimensions, not as a type branch.
 
     interface def Interface specializes MemoInterface {
         attribute interfaceKind : InterfaceKind;

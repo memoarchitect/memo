@@ -1,4 +1,4 @@
-// Deployment (allocation) view (§11, ADR-0004): SoftwareModule buildsInto
+// Deployment (allocation) view: SoftwareModule buildsInto
 // DeploymentUnit; DeploymentUnit deploysTo ProcessingNode; SoftwareComponent
 // hostedBy ProcessingNode. Software deploys only to capable execution nodes
 // (rules/crosslayer).
