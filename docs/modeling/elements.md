@@ -9,7 +9,7 @@ Choose an element by asking what kind of statement you are recording.
 | A person or external role | `Actor` | A component named “User” |
 | A user outcome | `StakeholderNeed` | A premature software requirement |
 | A measurable system obligation | `SystemRequirement` | A vague function name |
-| A transformation | `LogicalFunction` | A component unless responsibility is the point |
+| A transformation | `SystemFunction` | A component unless responsibility is the point |
 | A solution-independent responsibility | `LogicalComponent` | A vendor-specific hardware part |
 | Deployed code | `SoftwareItem` or `FirmwareItem` | A generic logical component |
 | A potential source of harm | `Hazard` | A failure mode or harm |

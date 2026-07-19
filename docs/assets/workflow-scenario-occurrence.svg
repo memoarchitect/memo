@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="640" viewBox="0 0 1160 640" role="img" aria-labelledby="wsotitle wsodesc">
+  <title id="wsotitle">Workflow, scenario, and occurrence</title>
+  <desc id="wsodesc">A workflow is a reusable process definition; a scenario is a selected path through it with a variation point; an occurrence is one actual execution of a scenario.</desc>
+  <defs><marker id="wsoarrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#5c7188"/></marker>
+  <marker id="wsoarrowp" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#8971dc"/></marker></defs>
+  <rect width="1160" height="640" rx="24" fill="#fbfcfd"/>
+
+  <text x="48" y="52" font-family="Nunito,Arial,sans-serif" font-size="20" font-weight="850" fill="#082744">WORKFLOW · SCENARIO · OCCURRENCE</text>
+  <text x="48" y="79" font-family="Nunito,Arial,sans-serif" font-size="14" fill="#5c7188">Three levels, three questions: how is the work organized? which path was taken? what actually happened?</text>
+
+  <!-- Panel 1: workflow -->
+  <g font-family="Nunito,Arial,sans-serif">
+    <rect x="48" y="108" width="1064" height="150" rx="16" fill="#f0edff" stroke="#8971dc" stroke-width="2"/>
+    <text x="72" y="140" font-size="13" font-weight="850" fill="#4c3a98">OPERATIONAL WORKFLOW — a reusable process definition</text>
+    <text x="72" y="160" font-size="11.5" fill="#5c7188">Wound-closure workflow: it exists before any device is selected, and it is defined once.</text>
+    <g text-anchor="middle" font-size="10.5" font-weight="800" fill="#4c3a98">
+      <rect x="76" y="180" width="106" height="48" rx="10" fill="#ffffff" stroke="#8971dc" stroke-width="1.6"/><text x="129" y="201">1 · Assess</text><text x="129" y="216">wound</text>
+      <rect x="206" y="180" width="106" height="48" rx="10" fill="#ffffff" stroke="#8971dc" stroke-width="1.6"/><text x="259" y="201">2 · Select</text><text x="259" y="216">technique</text>
+      <rect x="336" y="180" width="106" height="48" rx="10" fill="#ffffff" stroke="#8971dc" stroke-width="1.6"/><text x="389" y="201">3 · Prepare</text><text x="389" y="216">instruments</text>
+      <rect x="466" y="180" width="106" height="48" rx="10" fill="#ffffff" stroke="#8971dc" stroke-width="1.6"/><text x="519" y="201">4 · Approximate</text><text x="519" y="216">tissue</text>
+      <rect x="596" y="180" width="106" height="48" rx="10" fill="#ffffff" stroke="#8971dc" stroke-width="1.6"/><text x="649" y="201">5 · Place</text><text x="649" y="216">sutures</text>
+      <rect x="726" y="180" width="106" height="48" rx="10" fill="#ffffff" stroke="#8971dc" stroke-width="1.6"/><text x="779" y="201">6 · Verify</text><text x="779" y="216">closure</text>
+      <rect x="856" y="180" width="106" height="48" rx="10" fill="#ffffff" stroke="#8971dc" stroke-width="1.6"/><text x="909" y="201">7 · Dispose /</text><text x="909" y="216">reprocess</text>
+      <rect x="986" y="180" width="106" height="48" rx="10" fill="#ffffff" stroke="#8971dc" stroke-width="1.6"/><text x="1039" y="201">8 · Document</text><text x="1039" y="216">procedure</text>
+    </g>
+    <g stroke="#8971dc" stroke-width="2" fill="none" marker-end="url(#wsoarrowp)">
+      <path d="M182 204 H202"/><path d="M312 204 H332"/><path d="M442 204 H462"/><path d="M572 204 H592"/><path d="M702 204 H722"/><path d="M832 204 H852"/><path d="M962 204 H982"/>
+    </g>
+  </g>
+
+  <!-- Panel 2: scenario -->
+  <g font-family="Nunito,Arial,sans-serif">
+    <rect x="48" y="290" width="1064" height="180" rx="16" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/>
+    <text x="72" y="322" font-size="13" font-weight="850" fill="#17557f">SCENARIO — a selected path, never a copy</text>
+    <text x="72" y="342" font-size="11.5" fill="#5c7188">"Suture-break recovery": variant = recovery, condition = normal. It references its base scenario and names the variation point.</text>
+    <g text-anchor="middle" font-size="10.5" font-weight="800">
+      <rect x="76" y="366" width="106" height="44" rx="10" fill="#ffffff" stroke="#d8e2e9"/><text x="129" y="392" fill="#a9b8c6">1 — 4 …</text>
+      <rect x="206" y="366" width="106" height="44" rx="10" fill="#438ed0"/><text x="259" y="386" fill="#ffffff">5 · Place</text><text x="259" y="400" fill="#ffffff">sutures</text>
+      <rect x="336" y="366" width="146" height="44" rx="10" fill="#fff0ef" stroke="#ea6b61" stroke-width="2"/><text x="409" y="386" fill="#94423d">✕ suture snaps</text><text x="409" y="400" fill="#94423d">variation point</text>
+      <rect x="506" y="366" width="126" height="44" rx="10" fill="#438ed0"/><text x="569" y="386" fill="#ffffff">5 · Place sutures</text><text x="569" y="400" fill="#ffffff">(fresh suture)</text>
+      <rect x="656" y="366" width="106" height="44" rx="10" fill="#438ed0"/><text x="709" y="386" fill="#ffffff">6 · Verify</text><text x="709" y="400" fill="#ffffff">closure</text>
+      <rect x="786" y="366" width="106" height="44" rx="10" fill="#ffffff" stroke="#d8e2e9"/><text x="839" y="392" fill="#a9b8c6">7 — 8 …</text>
+    </g>
+    <g stroke="#438ed0" stroke-width="2.2" fill="none" marker-end="url(#wsoarrow)">
+      <path d="M182 388 H202"/><path d="M312 388 H332"/><path d="M482 388 H502"/><path d="M632 388 H652"/><path d="M762 388 H782"/>
+    </g>
+    <g font-size="10.5" font-weight="700" fill="#17557f">
+      <text x="910" y="380" >selects steps of the workflow above;</text>
+      <text x="910" y="396">alternate paths are deltas with a</text>
+      <text x="910" y="412">baseScenario reference (ADR-0003)</text>
+    </g>
+  </g>
+
+  <!-- Panel 3: occurrence -->
+  <g font-family="Nunito,Arial,sans-serif">
+    <rect x="48" y="502" width="1064" height="108" rx="16" fill="#e3faf3" stroke="#2dd4a8" stroke-width="2"/>
+    <text x="72" y="534" font-size="13" font-weight="850" fill="#07604f">OCCURRENCE — one actual or hypothetical execution</text>
+    <text x="72" y="554" font-size="11.5" fill="#5c7188">Usability test runs, simulated-use sessions, and postmarket incident reconstructions are occurrences of a scenario.</text>
+    <g>
+      <rect x="72" y="566" width="560" height="32" rx="8" fill="#ffffff" stroke="#2dd4a8" stroke-width="1.6"/>
+      <text x="88" y="587" font-size="11.5" font-weight="800" fill="#07604f">SCW-OCC-113 · 2026-07-15T14:02Z · executedScenario = SutureBreakRecovery · outcome: recovered, closure verified</text>
+    </g>
+    <g font-size="10.5" font-weight="700" fill="#07604f">
+      <text x="668" y="586">evidence and postmarket records attach here — never to the workflow definition</text>
+    </g>
+  </g>
+
+  <!-- side arrows between panels -->
+  <g stroke="#5c7188" stroke-width="2" fill="none" marker-end="url(#wsoarrow)">
+    <path d="M1130 258 C 1140 268 1140 276 1130 288"/>
+    <path d="M1130 470 C 1140 480 1140 488 1130 500"/>
+  </g>
+</svg>

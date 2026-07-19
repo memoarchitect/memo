@@ -1,7 +1,7 @@
 package memo_architecture_constraints {
     private import ScalarValues::*;
 
-    doc /* archLayer: constraints */
+    doc /* Reusable quantitative constraint definitions. */
 
     constraint def MaxResponseTimeConstraint {
         attribute responseTimeMs : Real;

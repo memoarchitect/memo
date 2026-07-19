@@ -70,12 +70,15 @@ nav:
   - Tutorials:
       - Set up MEMO in your model: tutorials/setup.md
       - "First Model: Temperature Alarm": tutorials/first-model.md
+      - Learn from the Examples: examples/index.md
       - GPCA Pump Walkthrough: examples/gpca-walkthrough.md
   - Use the Ontology:
       - Layer Map: layers/index.md
       - Context and Use: layers/context.md
-      - Operations and System Analysis: layers/operations-system.md
+      - The Operational World: layers/operational-world.md
+      - Functional and System Analysis: layers/operations-system.md
       - Requirements and Architecture: layers/requirements-architecture.md
+      - Medical Products and Identity: layers/medical-products.md
       - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
   - Build Connected Evidence:
       - Elements: modeling/elements.md
@@ -83,8 +86,18 @@ nav:
       - Views and Evidence: modeling/views-evidence.md
   - Reference:
       - Packages and Imports: reference/packages.md
+      - Ontology Audit (0.5): ontology/audit.md
+      - Reference-Methodology Review: ontology/reference-review.md
+      - Concept-Provenance Matrix: ontology/provenance-matrix.md
+      - Migration Map (0.4 to 0.5): ontology/migration-map.md
+      - Downstream Handoff: ontology/handoff.md
+      - Validation Results (0.5): ontology/validation-results.md
   - Concepts and Design:
       - Product Boundary: architecture/index.md
+      - "ADR-0001: Orthogonal Dimensions": adr/ADR-0001-orthogonal-dimensions.md
+      - "ADR-0002: MEMO Base Hierarchy": adr/ADR-0002-memo-base-hierarchy.md
+      - "ADR-0003: Workflow and Scenario Semantics": adr/ADR-0003-workflow-scenario-occurrence.md
+      - "ADR-0004: Realization and Deployment": adr/ADR-0004-definition-usage-realization-deployment.md
       - "The memo:: Namespace": architecture/namespace.md
       - Repository and Packaging: architecture/repository.md
       - Architecture Layers and Connections: architecture/layers.md

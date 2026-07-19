@@ -79,17 +79,79 @@ test('archetype catalog has a starter template for every non-blank fallback', ()
   }
 });
 
-test('gpca-pump is the only packaged example', () => {
-  assert.deepEqual(readdirSync(join(root, 'examples')), ['gpca-pump']);
+test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
+  assert.equal(existsSync(join(root, 'src', 'examples')), false);
   assert.equal(existsSync(join(root, 'examples', 'gpca-pump', 'memo.config.yaml')), true);
-  assert.equal(
-    read('src', 'examples', 'gpca-pump', 'memo.config.yaml'),
-    read('examples', 'gpca-pump', 'memo.config.yaml'),
-  );
-  assert.equal(
-    read('src', 'examples', 'gpca-pump', 'model', 'catalog', 'gpca_requirements.sysml'),
-    read('examples', 'gpca-pump', 'model', 'catalog', 'gpca_requirements.sysml'),
-  );
+  const examples = readdirSync(join(root, 'examples')).filter((entry) => !entry.startsWith('.')).sort();
+  const expected = [
+    'aadl-mapping', 'c4-mapping', 'connected-patient-monitor', 'embedded-infusion-pump',
+    'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
+    'manual-surgical-instrument', 'multidimensional-layers', 'reusable-instrument',
+    'single-use-device', 'software-only-medical-device', 'surgical-closure-workflow',
+    'surgical-robot', 'temperature-alarm',
+  ];
+  assert.deepEqual(examples, expected);
+});
+
+test('ontology namespace facade references no example packages', () => {
+  const facade = read('src', 'memo_namespaces.sysml');
+  assert.doesNotMatch(facade, /memo_examples/);
+});
+
+test('0.5 ontology packages exist with path-derived names', () => {
+  const expectations = {
+    'src/core/dimensions/dimensions.sysml': 'memo_core_dimensions',
+    'src/core/terminology/terminology.sysml': 'memo_core_terminology',
+    'src/context/actors/memo_actors.sysml': 'memo_context_actors',
+    'src/context/stakeholders/memo_stakeholders.sysml': 'memo_context_stakeholders',
+    'src/context/use_context/memo_use_context.sysml': 'memo_context_use_context',
+    'src/needs/memo_needs.sysml': 'memo_needs',
+    'src/use_cases/memo_use_cases.sysml': 'memo_use_cases',
+    'src/clinical_procedures/memo_clinical_procedures.sysml': 'memo_clinical_procedures',
+    'src/activities/memo_activities.sysml': 'memo_activities',
+    'src/workflows/memo_workflows.sysml': 'memo_workflows',
+    'src/scenarios/memo_scenarios.sysml': 'memo_scenarios',
+    'src/assurance/human_factors/memo_human_factors.sysml': 'memo_assurance_human_factors',
+    'src/interaction/memo_interaction.sysml': 'memo_interaction',
+    'src/architecture/software_runtime/memo_software_runtime.sysml': 'memo_architecture_software_runtime',
+    'src/architecture/deployment/memo_deployment.sysml': 'memo_architecture_deployment',
+    'src/medical_products/memo_product_definitions.sysml': 'memo_medical_products_definitions',
+    'src/medical_products/memo_product_lifecycle.sysml': 'memo_medical_products_lifecycle',
+    'src/medical_products/memo_product_usage.sysml': 'memo_medical_products_usage',
+    'src/viewpoints/catalog/memo_viewpoint_catalog.sysml': 'memo_viewpoints_catalog',
+    'src/rules/ontology/ontology_invariants.sysml': 'memo_rules_ontology',
+  };
+  for (const [file, pkg] of Object.entries(expectations)) {
+    const source = read(...file.split('/'));
+    assert.match(source, new RegExp(`^package ${pkg} \\{`, 'm'), `${file} must declare ${pkg}`);
+  }
+});
+
+test('migrated names do not reappear in ontology or canonical example', () => {
+  const roots = ['src', 'examples/gpca-pump'];
+  const banned = [/\bSemanticLink\b/, /\bLogicalFunction\b/, /\bFunctionalChain\b/, /\bArcadiaLayerKind\b/, /\barchLayer\b/];
+  const walk = (dir) => readdirSync(join(root, dir), { withFileTypes: true }).flatMap((entry) =>
+    entry.isDirectory() ? walk(join(dir, entry.name)) : entry.name.endsWith('.sysml') ? [join(dir, entry.name)] : []);
+  for (const dir of roots) {
+    for (const file of walk(dir)) {
+      const source = read(file);
+      for (const pattern of banned) assert.doesNotMatch(source, pattern, `${file} contains banned name ${pattern}`);
+    }
+  }
+});
+
+test('the library facade exports the 0.5 domain packages', () => {
+  const library = read('src', 'medical_device_library.sysml');
+  for (const pkg of [
+    'memo_core_dimensions', 'memo_core_terminology', 'memo_context_actors',
+    'memo_context_stakeholders', 'memo_context_use_context', 'memo_needs',
+    'memo_use_cases', 'memo_clinical_procedures', 'memo_activities',
+    'memo_workflows', 'memo_scenarios', 'memo_assurance_human_factors',
+    'memo_interaction', 'memo_architecture_software_runtime',
+    'memo_architecture_deployment', 'memo_medical_products_definitions',
+    'memo_medical_products_lifecycle', 'memo_medical_products_usage',
+    'memo_viewpoints_catalog',
+  ]) assert.match(library, new RegExp(`public import ${pkg}::\\*;`), `library must export ${pkg}`);
 });
 
 test('npm pack includes all content and no JavaScript', () => {

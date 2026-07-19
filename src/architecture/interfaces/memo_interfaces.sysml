@@ -3,20 +3,30 @@ package memo_architecture_interfaces {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
+    private import memo_architecture_functions::*;
 
     // ─── Interface taxonomy ──────────────────────────────────────────
     // One root `Interface`, specialized by realization domain
     // (hardware / software) then by signaling family then by concrete
-    // protocol. The Arcadia layer (operational/system/logical/physical)
-    // is carried as the `arcadiaLayer` attribute, not as a type branch.
+    // protocol. Architecture perspective is carried by the inherited
+    // orthogonal dimensions (ADR-0001), not as a type branch.
 
     part def Interface specializes InterfaceElement {
-        attribute arcadiaLayer : ArcadiaLayerKind;
         attribute interfaceKind : InterfaceKind;
         attribute direction : DirectionKind;
         attribute protocol : String;
         attribute protocolSemantics : String;
         attribute interactionPattern : String;
+        attribute signalKind : String;
+        attribute timingSummary : String;
+        attribute bandwidth : String;
+        attribute schemaReference : String;
+        attribute compatibilitySummary : String;
+        attribute isolationRequirement : String;
+        attribute safetyRelevant : Boolean;
+        attribute securityCriticality : CriticalityKind;
+        // Applied-part/patient-contact interfaces (IEC 60601-1) must state it.
+        attribute patientContactInterface : Boolean;
     }
 
     // ─── Hardware interfaces ─────────────────────────────────────────
@@ -83,9 +93,15 @@ package memo_architecture_interfaces {
 
     part def ComponentExchange specializes ArchitectureElement {
         attribute exchangeKind : FlowKind;
-        attribute sourcePort : String;
-        attribute targetPort : String;
-        attribute allocatedFunctionalExchanges : String;
+        // Typed endpoints (CR-ONT-002). A component or a boundary port may
+        // terminate an exchange, so the ends are MemoPart-typed.
+        ref sourceEndpoint : MemoPart[0..1];
+        ref targetEndpoint : MemoPart[0..1];
+        // Descriptive port paths (e.g. "TLM.TLM_MODE_OUT") for AADL
+        // round-trips; labels only — never references.
+        attribute sourcePortPath : String;
+        attribute targetPortPath : String;
+        ref allocatedExchanges : FunctionalExchange[0..*];
         attribute direction : DirectionKind;
         // Connection timing discipline from the source architecture
         // (e.g. AADL Communication_Properties::Timing — immediate

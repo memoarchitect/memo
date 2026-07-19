@@ -1,9 +1,11 @@
 # Risk, Cybersecurity, and Assurance
 
-Risk and assurance are cross-cutting arguments. They should connect to context,
-requirements, design, and evidence rather than sit in isolated registers.
+Risk and assurance are cross-cutting arguments. They connect to context,
+requirements, design, and evidence rather than sitting in isolated registers —
+and in MEMO they claim existing elements through typed relationships instead
+of copying them into a "safety model."
 
-## Safety-risk chain
+## Safety-risk chain (ISO 14971)
 
 | Element | Question |
 |---|---|
@@ -11,9 +13,8 @@ requirements, design, and evidence rather than sit in isolated registers.
 | `SequenceOfEvents` | How could the situation develop? |
 | `HazardousSituation` | When is someone exposed to the hazard? |
 | `Harm` | What injury or damage may result? |
-| `RiskBeforeMitigation` | What is the initial risk estimate? |
+| `RiskBeforeMitigation` / `RiskAfterMitigation` | Initial and residual risk estimates |
 | `RiskControl` | What reduces probability or severity? |
-| `RiskAfterMitigation` | What residual risk remains? |
 
 ```mermaid
 flowchart LR
@@ -21,32 +22,50 @@ flowchart LR
     Hazard --> Events[SequenceOfEvents]
     Events --> Situation[HazardousSituation]
     Situation --> Harm[Harm]
-    Hazard --> Initial[RiskBeforeMitigation]
-    Control[RiskControl] --> Hazard
-    Control --> Residual[RiskAfterMitigation]
-    Test[VerificationCase] --> Evidence[Evidence]
-    Control --> Test
+    Control[RiskControl] -->|MitigatesHazard| Hazard
+    Control -->|VerifiedBy| Test[VerificationCase]
+    Test -->|ProducesEvidence| Evidence[Evidence]
 ```
+
+## Human factors (IEC 62366-1, FDA HF guidance)
+
+The usability chain runs from the operational world into risk: a `UserTask`
+can commit a `UseError`; a safety-relevant use error must trace to a `Hazard`;
+a `CriticalTask` — one whose failure could cause serious harm — must trace to
+a `UsabilityValidation`. `HazardRelatedUseScenario` selects the scenarios for
+summative evaluation, and `FormativeEvaluation` records what design iteration
+learned. A risk control implemented in the UI (a confirmation dialog, a
+guarded control, alarm re-annunciation) is linked to the implementing
+`UIElement` with `ControlImplementedBy` — the `temperature-alarm` example
+walks the entire chain.
 
 ## Cybersecurity chain
 
 Use `CybersecurityAsset`, `AttackSurface`, `Threat`, `Vulnerability`,
-`ThreatScenario`, `CyberRisk`, `CyberMitigation`, `SecurityRequirement`,
-`TrustBoundary`, and `SecurityClaim`.
+`ThreatScenario` (a scenario specialization — it shares the workflow/scenario
+semantics), `CyberRisk`, `CyberMitigation`, `SecurityRequirement`,
+`TrustBoundary`, and `SecurityClaim`. Interfaces that cross a trust boundary
+say so (`CrossesTrustBoundary`); see `connected-patient-monitor`.
 
 Safety and security are connected. Use `ImpactsSafety` when a cyber condition
 can affect a safety claim; do not duplicate the same risk independently in two
 registers.
 
-## Assurance
+## V&V and evidence
 
 | Element | Role |
 |---|---|
-| `VerificationCase` | Shows the design output meets a specified input |
-| `ValidationCase` | Shows the resulting device meets user needs and intended use |
-| `TestArtifact` | Procedure, protocol, setup, or result artifact |
-| `Evidence` | Reviewable support for a claim |
+| `VerificationCase` / `VerificationScenario` | Shows a design output meets a specified input, and the path exercised |
+| `ValidationCase` | Shows the device meets user needs and intended use — `ValidatesUseCase` closes the loop to the operational world |
+| `UsabilityValidation` | Summative evaluation of critical tasks |
+| `Evidence` / `TestArtifact` | Reviewable support for a claim |
+
+The V-model is a **view over these relationships**, not an ontology hierarchy:
+each definition-side layer is validated or verified by the matching
+integration-side activity (see the [Layer Map](index.md)). Coverage rules keep
+the graph honest: safety-critical functions must trace to verification, and
+critical tasks to usability validation.
 
 Connect evidence to the claim it supports. A file path alone is not a complete
-assurance argument; record the verification case, acceptance basis, result, and
-the evidence artifact.
+assurance argument; record the verification case, acceptance basis, result,
+and the evidence artifact.

@@ -6,6 +6,7 @@ package memo_architecture_cybersecurity {
     private import memo_architecture_requirements::*;
     private import memo_architecture_risk_risk::*;
     private import memo_architecture_assurance::*;
+    private import memo_scenarios::*;
 
     part def CybersecurityAsset specializes ArchitectureElement {
         attribute assetKind : AssetKind;
@@ -45,7 +46,10 @@ package memo_architecture_cybersecurity {
         attribute remediable : Boolean;
     }
 
-    item def ThreatScenario specializes TraceableElement {
+    // A scenario specialization (ADR-0003): an attack path through the
+    // system, classified by the shared scenario dimensions with purpose
+    // `cybersecurity`.
+    part def ThreatScenario specializes MemoScenario {
         attribute actorDescription : String;
         attribute assumptionSummary : String;
         attribute guaranteeSummary : String;
@@ -91,7 +95,7 @@ package memo_architecture_cybersecurity {
         attribute trustAssumption : String;
     }
 
-    part def SecurityClaim specializes EvidenceElement {
+    part def SecurityClaim specializes MemoEvidence {
         attribute claimText : String;
         attribute claimScope : String;
         attribute supportedByEvidence : String;

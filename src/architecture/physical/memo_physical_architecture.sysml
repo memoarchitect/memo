@@ -1,3 +1,6 @@
+// Execution-platform elements of the physical architecture (§12): the nodes
+// software runs on and the ports the outside world plugs into. The broader
+// physical taxonomy lives in memo_architecture_hardware_structure.
 package memo_architecture_physical {
     private import ScalarValues::*;
 
@@ -10,6 +13,14 @@ package memo_architecture_physical {
         attribute operatingSystem : String;
         attribute safetyPartition : Boolean;
         attribute redundancyKind : String;
+        // Capabilities relevant to deployment feasibility checks.
+        attribute supportsContainerization : Boolean;
+        attribute realTimeCapable : Boolean;
+    }
+    part def MemoryDevice specializes ArchitectureElement {
+        attribute memoryKind : String;
+        attribute capacityMB : String;
+        attribute nonVolatile : Boolean;
     }
     part def PhysicalPort specializes InterfaceElement {
         attribute portKind : InterfaceKind;

@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_model_views_functional_function_browser_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-FUN-103";
             attribute :>> name = "GPCA_FunctionBrowserQuery";
-            attribute :>> includeElementKinds = ("LogicalFunction", "LogicalFlow", "DataDefinition", "ControlDefinition");
+            attribute :>> includeElementKinds = ("SystemFunction", "FunctionalExchange", "DataDefinition", "ControlDefinition");
             attribute :>> includeLayers = ("functions");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the function browser from the functions layer.";

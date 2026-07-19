@@ -91,7 +91,7 @@ package temperature_alarm {
     private import memo_medical_device_library::*;
 
     // The person who relies on the device in this scenario.
-    part clinician : Actor {
+    part clinician : ClinicalUser {
         attribute :>> id = "ACT-001";
         attribute :>> name = "Clinician";
     }
@@ -116,13 +116,13 @@ workflow; the scenario records the event that makes the workflow relevant.
 
 ```sysml
     // The clinician observes the patient's current temperature.
-    part monitorTemperatureStatus : OperationalActivity {
+    action monitorTemperatureStatus : OperationalActivity {
         attribute :>> id = "OA-001";
         attribute :>> name = "MonitorTemperatureStatus";
     }
 
     // The clinician responds when an alert is raised.
-    part respondToTemperatureAlert : OperationalActivity {
+    action respondToTemperatureAlert : OperationalActivity {
         attribute :>> id = "OA-002";
         attribute :>> name = "RespondToTemperatureAlert";
     }
@@ -131,7 +131,9 @@ workflow; the scenario records the event that makes the workflow relevant.
     part highTemperatureScenario : OperationalScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "HighTemperatureScenario";
-        attribute :>> sequenceDescription =
+        attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> operationalCondition = OperationalConditionKind::normal;
+        attribute :>> pathSummary =
             "The clinician observes status and responds to a high-temperature alert.";
     }
 
@@ -152,13 +154,13 @@ analysis challenges them, and verification checks them.
 
 ```sysml
     // Determines whether the measured temperature is inside the safe range.
-    part evaluateTemperature : LogicalFunction {
+    part evaluateTemperature : SystemFunction {
         attribute :>> id = "LF-001";
         attribute :>> name = "EvaluateTemperature";
     }
 
     // Produces the system alert that supports the clinician's response.
-    part notifyClinician : LogicalFunction {
+    part notifyClinician : SystemFunction {
         attribute :>> id = "LF-002";
         attribute :>> name = "NotifyClinician";
     }
@@ -307,7 +309,7 @@ package temperature_alarm {
     private import memo_medical_device_library::*;
 
     // The person who relies on the device in this scenario.
-    part clinician : Actor {
+    part clinician : ClinicalUser {
         attribute :>> id = "ACT-001";
         attribute :>> name = "Clinician";
     }
@@ -321,13 +323,13 @@ package temperature_alarm {
     }
 
     // The clinician observes the patient's current temperature.
-    part monitorTemperatureStatus : OperationalActivity {
+    action monitorTemperatureStatus : OperationalActivity {
         attribute :>> id = "OA-001";
         attribute :>> name = "MonitorTemperatureStatus";
     }
 
     // The clinician responds when an alert is raised.
-    part respondToTemperatureAlert : OperationalActivity {
+    action respondToTemperatureAlert : OperationalActivity {
         attribute :>> id = "OA-002";
         attribute :>> name = "RespondToTemperatureAlert";
     }
@@ -336,7 +338,9 @@ package temperature_alarm {
     part highTemperatureScenario : OperationalScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "HighTemperatureScenario";
-        attribute :>> sequenceDescription =
+        attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> operationalCondition = OperationalConditionKind::normal;
+        attribute :>> pathSummary =
             "The clinician observes status and responds to a high-temperature alert.";
     }
 
@@ -346,13 +350,13 @@ package temperature_alarm {
         to nextActivity ::> respondToTemperatureAlert;
 
     // Determines whether the measured temperature is inside the safe range.
-    part evaluateTemperature : LogicalFunction {
+    part evaluateTemperature : SystemFunction {
         attribute :>> id = "LF-001";
         attribute :>> name = "EvaluateTemperature";
     }
 
     // Produces the system alert that supports the clinician's response.
-    part notifyClinician : LogicalFunction {
+    part notifyClinician : SystemFunction {
         attribute :>> id = "LF-002";
         attribute :>> name = "NotifyClinician";
     }

@@ -100,7 +100,7 @@ package memo_rules_closure {
 
     constraint def logicalFunctionAllocationRule {
         attribute id = "CR-MED-022";
-        attribute appliesTo = "LogicalFunction";
+        attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Functions should be allocated to implementation elements.";
         attribute predicateExpression = "allocatedTo->size() >= 1";

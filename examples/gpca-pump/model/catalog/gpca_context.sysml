@@ -1,7 +1,9 @@
 package memo_examples_gpca_pump_model_catalog_gpca_context {
     private import ScalarValues::*;
 
-    private import memo_architecture_context::*;
+    private import memo_context_actors::*;
+    private import memo_context_use_context::*;
+    private import memo_assurance_human_factors::*;
     private import memo_core_enumerations::*;
 
     // ── Intended use (ISO 14971 §5.2, IEC 62366-1) ──────────────
@@ -33,35 +35,35 @@ package memo_examples_gpca_pump_model_catalog_gpca_context {
     // system is used in a fixed location and is not ambulatory.
 
     // ── Actors ──────────────────────────────────────────────────
-    part actorPatient : Actor {
+    part actorPatient : PatientUser {
         attribute :>> id = "ACT-001";
         attribute :>> name = "Patient";
         attribute :>> actorKind = ActorKind::patient;
         attribute :>> trainingLevel = "instructed by clinician on bolus request button only";
         attribute :>> description = "Receives the infusion and requests bolus doses via the patient pendant.";
     }
-    part actorNurse : Actor {
+    part actorNurse : ClinicalUser {
         attribute :>> id = "ACT-002";
         attribute :>> name = "ClinicianNurse";
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> trainingLevel = "trained clinical user; programs prescriptions and responds to alarms";
         attribute :>> description = "Loads the drug reservoir, programs and confirms the prescription, starts/stops therapy, and responds to alarms.";
     }
-    part actorPrescriber : Actor {
+    part actorPrescriber : ClinicalUser {
         attribute :>> id = "ACT-003";
         attribute :>> name = "PrescribingPhysician";
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> trainingLevel = "licensed prescriber";
         attribute :>> description = "Prescribes drug, concentration, basal rate, bolus volume, lockout interval, and maximum dose limits.";
     }
-    part actorPharmacist : Actor {
+    part actorPharmacist : ClinicalUser {
         attribute :>> id = "ACT-004";
         attribute :>> name = "Pharmacist";
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> trainingLevel = "licensed pharmacist";
         attribute :>> description = "Prepares the drug reservoir and verifies drug and concentration against the prescription.";
     }
-    part actorTechnician : Actor {
+    part actorTechnician : TechnicianUser {
         attribute :>> id = "ACT-005";
         attribute :>> name = "BiomedicalTechnician";
         attribute :>> actorKind = ActorKind::technician;

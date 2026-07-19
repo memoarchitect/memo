@@ -2,10 +2,22 @@ package memo_medical_device_library {
     private import ScalarValues::*;
 
     public import memo_core_enumerations::*;
+    public import memo_core_dimensions::*;
+    public import memo_core_terminology::*;
     public import memo_core_common::*;
     public import memo_core_relationships::*;
 
-    public import memo_architecture_context::*;
+    public import memo_context_actors::*;
+    public import memo_context_stakeholders::*;
+    public import memo_context_use_context::*;
+    public import memo_needs::*;
+    public import memo_use_cases::*;
+    public import memo_clinical_procedures::*;
+    public import memo_activities::*;
+    public import memo_workflows::*;
+    public import memo_scenarios::*;
+    public import memo_assurance_human_factors::*;
+    public import memo_interaction::*;
     public import memo_architecture_operational::*;
     public import memo_architecture_system::*;
     public import memo_architecture_requirements::*;
@@ -14,6 +26,8 @@ package memo_medical_device_library {
     public import memo_architecture_interfaces::*;
     public import memo_architecture_behavior::*;
     public import memo_architecture_software_structure::*;
+    public import memo_architecture_software_runtime::*;
+    public import memo_architecture_deployment::*;
     public import memo_architecture_hardware_structure::*;
     public import memo_architecture_constraints::*;
     public import memo_architecture_risk_risk::*;
@@ -22,8 +36,12 @@ package memo_medical_device_library {
     public import memo_architecture_physical::*;
     public import memo_architecture_analysis::*;
     public import memo_architecture_decisions::*;
+    public import memo_medical_products_lifecycle::*;
+    public import memo_medical_products_definitions::*;
+    public import memo_medical_products_usage::*;
 
     public import memo_viewpoints_definitions::*;
+    public import memo_viewpoints_catalog::*;
 
     public import memo_viewpoints_context_context_viewpoint::*;
     public import memo_viewpoints_context_system_context_view::*;
