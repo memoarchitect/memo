@@ -82,7 +82,7 @@ package memo_rules_closure {
 
     constraint def swComponentSafetyClassRule {
         attribute id = "CR-MED-020";
-        attribute appliesTo = "SoftwareComponent";
+        attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 requires safety classification for all software items.";
         attribute predicateExpression = "attributes.safetyClass != \"\"";
@@ -91,7 +91,7 @@ package memo_rules_closure {
 
     constraint def swComponentReqRule {
         attribute id = "CR-MED-021";
-        attribute appliesTo = "SoftwareComponent";
+        attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Software items shall be linked to their requirements per IEC 62304.";
         attribute predicateExpression = "satisfiedBy->size() >= 1";
@@ -171,7 +171,7 @@ package memo_rules_closure {
 
     constraint def safetyClassCVerificationRule {
         attribute id = "CR-MED-101";
-        attribute appliesTo = "SoftwareComponent";
+        attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 requires rigorous verification for Class C software.";
         attribute predicateExpression = "not(attributes.safetyClass == \"C\") or verifiedBy->size() >= 1";

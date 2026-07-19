@@ -9,22 +9,37 @@ team one shared vocabulary for the clinical work, the device, its risks, and
 the evidence used to review it — from a reusable forceps to a surgical robot,
 without forcing either through the other's layers.
 
-<p class="memo-hero-path"><span>Use case</span><i>→</i><span>Workflow</span><i>→</i><span>Function</span><i>→</i><span>Architecture</span><i>→</i><span>Evidence</span></p>
+<p class="memo-hero-path"><span>Use case</span><i>→</i><span>Workflow</span><i>→</i><span>Scenarios</span><i>→</i><span>Functions</span><i>→</i><span>Architecture</span><i>→</i><span>Evidence</span></p>
 
 </div>
 
-## Why an ontology at all
+## Why use a shared model
 
-A device file already contains needs, requirements, architecture, risks, and
-test results — usually in different tools, written by different disciplines,
-connected by memory. When a reviewer asks *"why does this alarm exist?"* or
-*"which test covers this critical task?"*, someone reconstructs the answer by
-hand. MEMO's premise is that these connections are the engineering argument,
-and the argument should be a model: every claim has a type, every connection
-is a typed relationship, and every question is answerable by following links
-instead of folklore.
+One device is usually described in several places: intended use, requirements,
+architecture, risk analysis, and test records. The same alarm may appear in
+all of them. If each record is separate, a change can leave one of them out of
+date.
 
-![The MEMO ontology map: architecture perspectives, assurance disciplines, and the V of definition and integration](assets/ontology-map.svg)
+MEMO keeps one record for each thing and gives each link a clear meaning. For
+example:
+
+- a need motivates a use case;
+- a requirement is satisfied by a design element;
+- a risk control mitigates a hazard;
+- a test checks a claim and produces evidence.
+
+This gives a reviewer a direct way to check the model:
+
+- Why does this requirement or function exist?
+- Which part is responsible for it?
+- Which hazard or control does it affect?
+- Which test and evidence support it?
+
+When something changes, follow these links to find what must be reviewed. The
+model supports that check; the engineering team still makes the clinical,
+risk-acceptance, and approval decisions.
+
+[![The MEMO ontology map: architecture perspectives, assurance disciplines, and the V of definition and integration](assets/ontology-map.svg)](assets/ontology-map.svg){ .memo-zoomable aria-label="Open a larger ontology map" }
 
 ## What MEMO provides
 
@@ -32,35 +47,81 @@ instead of folklore.
 
 <div class="memo-card memo-card-purple" markdown>
 
-### The operational world, first-class
+### Behavior
 
-Stakeholders, users, needs, medical use cases, clinical procedures, workflows,
-scenarios, and tasks exist *before* any device is selected — so you can model
-the work you are improving, not just the box you are building.
+- Stakeholders, users, and use contexts
+- Use cases and clinical procedures
+- Workflows split into nominal, alternate, and exception scenarios
+- Activities, tasks, states, and functional flows
 
 </div>
 
 <div class="memo-card memo-card-blue" markdown>
 
-### Four architecture perspectives
+### Architecture
 
-Operational, functional, logical, and implementation are independent
-dimensions of one model. Simple devices skip the layers they do not need;
-complex devices keep software, hardware, and physical semantics distinct.
+- Functions and typed functional exchanges
+- Logical components, channels, and interfaces
+- Software structure, runtime, and deployment
+- Hardware assemblies, physical parts, and ports
 
 </div>
 
 <div class="memo-card memo-card-teal" markdown>
 
-### Assurance woven through every layer
+### Assurance
 
-Safety, cybersecurity, human factors, and V&V claim elements without
-duplicating them. Typed relationships carry the trace from clinical intent to
-postmarket evidence, and conformance rules check the graph.
+- Requirements and design constraints
+- Safety risk, controls, and FMEA
+- Cybersecurity assets, threats, and mitigations
+- Human factors, V&V cases, evidence, and records
 
 </div>
 
 </div>
+
+## Scenario-driven modelling
+
+Start with one story about use of the device. One use case can be supported by
+several workflows. Each workflow can have several nominal, alternate,
+exception, or recovery scenarios. Each scenario owns its own operational
+activity. That activity contains the action flow for the selected path; the
+action flow calls the functions the device must support. Read the model from
+left to right:
+
+![Scenario-driven modelling path for the temperature alarm](assets/temperature-alarm-modeling-path.svg)
+
+`use case → workflow → scenario → activities and functions → architecture → evidence`
+
+| Step | What it means | What to model next |
+| --- | --- | --- |
+| **Use case** | A user goal, such as “receive a safe bolus.” It says what success looks like. | Identify the user, need, and use context. |
+| **Workflow** | A reusable way people and the device work toward the use case. One use case may have more than one workflow. | Break each workflow into steps. |
+| **Scenario** | One operational path through one workflow. Each workflow can have nominal, alternate, exception, and recovery scenarios. | State the conditions and selected steps. |
+| **Scenario activity and action flow** | Each scenario has its own operational activity. The activity composes the action flow for that path, which calls the functions the system must perform. | Model the activity's actions and connect them to the functions they call. |
+| **Architecture** | The parts that take responsibility for functions and exchanges. | Allocate each important function to a responsible part. |
+| **Evidence** | Tests, validation, and records showing a claim or control was met. | Link each claim to its case and result. |
+
+The arrows describe traceability, not a mandatory lifecycle. Requirements and
+risk controls can introduce or change functions at any point. A manual
+instrument can go from activity straight to physical parts; a software-only
+device has no hardware layer. Choose only what is needed, but keep every claim
+connected to its reason, responsible design, and evidence.
+
+The distinction is deliberate: a **use case** says what success looks like; it
+can have several **workflows**; each workflow can have several **scenarios**;
+and each scenario owns an operational activity that composes its action flow.
+The action flow calls the functions needed on that path. Functions then connect to requirements, risk controls,
+architecture, verification, and evidence. Do not jump from a use case straight
+to architecture: use scenarios to make the operational reason for each
+function visible.
+
+**Read next:** [Start with a small connected model](start/mental-model.md),
+then continue through the guide in the order shown in the navigation.
+
+!!! note "MEMO complements engineering judgment"
+    The ontology helps structure claims and expose gaps. It does not decide
+    clinical acceptability, regulatory strategy, or risk acceptability for you.
 
 ## Choose where to begin
 
@@ -68,7 +129,7 @@ postmarket evidence, and conformance rules check the graph.
 
 <a class="memo-start-card" href="start/mental-model/">
 <strong>01 · Understand the model</strong>
-<span>Perspectives, dimensions, elements, and relationships in one page.</span>
+<span>Layers, labels, elements, and relationships in one page.</span>
 </a>
 
 <a class="memo-start-card" href="tutorials/first-model/">
@@ -78,7 +139,7 @@ postmarket evidence, and conformance rules check the graph.
 
 <a class="memo-start-card" href="examples/">
 <strong>03 · Learn from the examples</strong>
-<span>Fourteen focused models, each answering one modeling question.</span>
+<span>Focused models, each answering one modeling question.</span>
 </a>
 
 <a class="memo-start-card" href="examples/gpca-walkthrough/">
@@ -87,21 +148,3 @@ postmarket evidence, and conformance rules check the graph.
 </a>
 
 </div>
-
-## The modeling path
-
-Start small. Model one vertical slice — a use case, the workflow that supports
-it, the function that enables the work, and the evidence that closes the claim
-— then grow the model only when an engineering question requires another
-layer:
-
-`use case → workflow → activity → function → logical → implementation → verification evidence`
-
-This is a reading order, not a mandated lifecycle, and not every product walks
-every step: a manual instrument goes from activity straight to physical parts;
-a software-only device has no hardware layer at all. The point is that each
-change stays connected and reviewable.
-
-!!! note "MEMO complements engineering judgment"
-    The ontology helps structure claims and expose gaps. It does not decide
-    clinical acceptability, regulatory strategy, or risk acceptability for you.

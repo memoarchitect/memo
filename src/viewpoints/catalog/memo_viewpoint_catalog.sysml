@@ -27,8 +27,8 @@ package memo_viewpoints_catalog {
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     // ── Operational world ───────────────────────────────────────
-    part vpMedicalUseCase : CatalogViewpoint {
-        attribute :>> id = "VP-CAT-003"; attribute :>> name = "MedicalUseCaseViewpoint";
+    part vpUseCase : CatalogViewpoint {
+        attribute :>> id = "VP-CAT-003"; attribute :>> name = "UseCaseViewpoint";
         attribute :>> purpose = "Use cases, initiating users, supporting actors, and motivating needs.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
@@ -37,8 +37,8 @@ package memo_viewpoints_catalog {
         attribute :>> purpose = "Workflow steps, decisions, parallel work, handoffs, and roles.";
         attribute :>> defaultViewKind = DiagramViewKind::actionflow;
     }
-    part vpOperationalScenario : CatalogViewpoint {
-        attribute :>> id = "VP-CAT-005"; attribute :>> name = "OperationalScenarioViewpoint";
+    part vpOperativeScenario : CatalogViewpoint {
+        attribute :>> id = "VP-CAT-005"; attribute :>> name = "OperativeScenarioViewpoint";
         attribute :>> purpose = "Selected paths through workflows: variants, conditions, variation points.";
         attribute :>> defaultViewKind = DiagramViewKind::actionflow;
     }
@@ -75,8 +75,8 @@ package memo_viewpoints_catalog {
         attribute :>> purpose = "IEC 62304 module structure: systems, items, units, SOUP.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
-    part vpRuntimeComponents : CatalogViewpoint {
-        attribute :>> id = "VP-CAT-012"; attribute :>> name = "RuntimeComponentViewpoint";
+    part vpSoftwareComponents : CatalogViewpoint {
+        attribute :>> id = "VP-CAT-012"; attribute :>> name = "SoftwareComponentViewpoint";
         attribute :>> purpose = "Runtime component-and-connector structure with concurrency and scheduling.";
         attribute :>> defaultViewKind = DiagramViewKind::interconnection;
     }
@@ -151,6 +151,15 @@ package memo_viewpoints_catalog {
         attribute :>> id = "VP-CAT-026"; attribute :>> name = "EvidenceTraceabilityViewpoint";
         attribute :>> purpose = "Evidence records back to the cases and elements they support.";
         attribute :>> defaultViewKind = DiagramViewKind::grid;
+    }
+    // A software sequence diagram is a VIEW conforming to this viewpoint
+    // (ISO/IEC/IEEE 42010): it frames the runtime message ordering between
+    // SoftwareComponents realizing a FunctionalScenario. The viewpoint is the
+    // reusable spec; the diagram of a specific model is the view.
+    part vpSoftwareSequence : CatalogViewpoint {
+        attribute :>> id = "VP-CAT-027"; attribute :>> name = "SoftwareSequenceViewpoint";
+        attribute :>> purpose = "Runtime message ordering between software components along a functional scenario.";
+        attribute :>> defaultViewKind = DiagramViewKind::sequence;
     }
 
     // ── Compatibility mappings (§22): legacy diagram intents resolve to

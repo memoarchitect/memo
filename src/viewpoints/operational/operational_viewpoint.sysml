@@ -18,7 +18,7 @@ package memo_viewpoints_operational_operational_viewpoint {
         attribute :>> presentationKind = (PresentationKind::custom);
         attribute :>> concernKinds = (ConcernKind::performance, ConcernKind::interoperability);
         attribute :>> includedLayers = ("context", "operational", "system");
-        attribute :>> allowedElementKinds = ("Actor", "UseContext", "OperationalActivity", "OperationalScenario", "SystemCapability", "FunctionalFlow");
+        attribute :>> allowedElementKinds = ("Actor", "UseContext", "OperationalActivity", "OperativeScenario", "SystemCapability", "FunctionalFlow");
         attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }

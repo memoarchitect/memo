@@ -36,6 +36,9 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/image-zoom.js
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -64,42 +67,49 @@ docs_dir: docs
 site_dir: site
 
 nav:
-  - Start Here:
-      - What MEMO Ontology Is: index.md
-      - The MEMO Mental Model: start/mental-model.md
-  - Tutorials:
-      - Set up MEMO in your model: tutorials/setup.md
-      - "First Model: Temperature Alarm": tutorials/first-model.md
-      - Learn from the Examples: examples/index.md
-      - GPCA Pump Walkthrough: examples/gpca-walkthrough.md
-  - Use the Ontology:
+  - Explanation:
+      - Why MEMO: index.md
+      - Start Small: start/mental-model.md
       - Layer Map: layers/index.md
       - Context and Use: layers/context.md
-      - The Operational World: layers/operational-world.md
-      - Functional and System Analysis: layers/operations-system.md
+      - Workflows and Scenarios: layers/operational-world.md
+      - Functions and Behavior: layers/operations-system.md
       - Requirements and Architecture: layers/requirements-architecture.md
-      - Medical Products and Identity: layers/medical-products.md
       - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
-  - Build Connected Evidence:
+  - Tutorials:
+      - Overview: examples/index.md
+      - "First Model: Temperature Alarm": tutorials/first-model.md
+      - Small Models:
+          - Temperature Alarm: examples/temperature-alarm.md
+          - Manual Surgical Instrument: examples/manual-surgical-instrument.md
+          - Single-Use Device: examples/single-use-device.md
+          - Standard SysML Diagram Samples: examples/sysml-diagram-samples.md
+      - Building the Model:
+          - Surgical Workflow Modelling: examples/surgical-closure-workflow.md
+          - Reusable Instrument: examples/reusable-instrument.md
+          - Functional, Logical, Physical: examples/functional-logical-physical.md
+          - Software-Only Medical Device: examples/software-only-medical-device.md
+          - Medical Products and Identity: layers/medical-products.md
+      - Complete Systems:
+          - Embedded Infusion Pump: examples/embedded-infusion-pump.md
+          - Connected Patient Monitor: examples/connected-patient-monitor.md
+          - IVD Laboratory System: examples/ivd-laboratory-system.md
+          - Surgical Robot: examples/surgical-robot.md
+      - Further Tutorials:
+          - Multidimensional Layers: examples/multidimensional-layers.md
+  - How-to Guides:
+      - Overview: how-to/index.md
+      - Set up MEMO in a model: tutorials/setup.md
+  - Contribute:
+      - Contributing: contributing.md
+  - Reference:
+      - Packages and Imports: reference/packages.md
+      - SysML Source Reference: reference/sysml.md
       - Elements: modeling/elements.md
       - Relationships: modeling/relationships.md
       - Views and Evidence: modeling/views-evidence.md
-  - Reference:
-      - Packages and Imports: reference/packages.md
-      - Ontology Audit (0.5): ontology/audit.md
-      - Reference-Methodology Review: ontology/reference-review.md
-      - Concept-Provenance Matrix: ontology/provenance-matrix.md
-      - Migration Map (0.4 to 0.5): ontology/migration-map.md
-      - Downstream Handoff: ontology/handoff.md
-      - Validation Results (0.5): ontology/validation-results.md
-  - Concepts and Design:
-      - Product Boundary: architecture/index.md
-      - "ADR-0001: Orthogonal Dimensions": adr/ADR-0001-orthogonal-dimensions.md
-      - "ADR-0002: MEMO Base Hierarchy": adr/ADR-0002-memo-base-hierarchy.md
-      - "ADR-0003: Workflow and Scenario Semantics": adr/ADR-0003-workflow-scenario-occurrence.md
-      - "ADR-0004: Realization and Deployment": adr/ADR-0004-definition-usage-realization-deployment.md
+      - Architecture Overview: architecture/index.md
       - "The memo:: Namespace": architecture/namespace.md
       - Repository and Packaging: architecture/repository.md
-      - Architecture Layers and Connections: architecture/layers.md
-  - Contribute:
-      - Contributing: contributing.md
+  - GPCA:
+      - GPCA Pump: examples/gpca-walkthrough.md

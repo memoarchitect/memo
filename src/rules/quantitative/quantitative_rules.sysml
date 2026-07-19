@@ -19,7 +19,7 @@ package memo_rules_quantitative {
 
     constraint def swComponentMaxInterfacesRule {
         attribute id = "QT-002";
-        attribute appliesTo = "SoftwareComponent";
+        attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::info;
         attribute rationaleText = "High interface count indicates excessive coupling; consider decomposition.";
         attribute predicateExpression = "threatenedBy->size() >= 0 and threatenedBy->size() <= 8";

@@ -11,7 +11,6 @@ package memo {
     alias medical_device_library for memo_namespace_medical_device_library;
     alias medical_products for memo_namespace_medical_products;
     alias methodology for memo_namespace_methodology;
-    alias needs for memo_namespace_needs;
     alias rules for memo_namespace_rules;
     alias scenarios for memo_namespace_scenarios;
     alias use_cases for memo_namespace_use_cases;
@@ -23,8 +22,17 @@ package memo_namespace_activities {
     public import memo_activities::*;
 }
 
+// Vertical axis — assurance disciplines (requirements, safety, cybersecurity,
+// human factors, verification & validation). Each owns its own elements and
+// crosses to the architecture layers only through typed relationships.
 package memo_namespace_assurance {
+    alias needs for memo_namespace_needs;
+    alias requirements for memo_namespace_assurance_requirements;
+    alias safety for memo_namespace_assurance_safety;
+    alias safety_analysis for memo_namespace_assurance_safety_analysis;
+    alias cybersecurity for memo_namespace_assurance_cybersecurity;
     alias human_factors for memo_namespace_assurance_human_factors;
+    alias verification_validation for memo_namespace_assurance_verification;
 }
 
 package memo_namespace_assurance_human_factors {
@@ -54,7 +62,7 @@ package memo_namespace_context_use_context {
 }
 
 package memo_namespace_needs {
-    public import memo_needs::*;
+    public import memo_assurance_needs::*;
 }
 
 package memo_namespace_scenarios {
@@ -99,16 +107,17 @@ package memo_namespace_medical_products_usage {
     public import memo_medical_products_usage::*;
 }
 
-package memo_architecture_risk_compatibility {
-    public import memo_architecture_risk_arch_risk::*;
+package memo_assurance_safety_compatibility {
+    public import memo_assurance_safety_arch_risk::*;
 }
 
+// Horizontal axis — architecture layers (operational → functional → logical →
+// implementation). Vertical assurance disciplines are NOT grouped here; they
+// live under memo_namespace_assurance. This grouping is the public-API side of
+// the single-axis ownership encoded by package membership (CR-ONT-045).
 package memo_namespace_architecture {
-    alias analysis_models for memo_namespace_architecture_analysis;
-    alias assurance for memo_namespace_architecture_assurance;
     alias behavior for memo_namespace_architecture_behavior;
     alias constraints for memo_namespace_architecture_constraints;
-    alias cybersecurity for memo_namespace_architecture_cybersecurity;
     alias decisions for memo_namespace_architecture_decisions;
     alias deployment for memo_namespace_architecture_deployment;
     alias functions for memo_namespace_architecture_functions;
@@ -117,8 +126,6 @@ package memo_namespace_architecture {
     alias logical_structure for memo_namespace_architecture_logical_structure;
     alias operational for memo_namespace_architecture_operational;
     alias physical for memo_namespace_architecture_physical;
-    alias requirements for memo_namespace_architecture_requirements;
-    alias risk for memo_namespace_architecture_risk;
     alias software_runtime for memo_namespace_architecture_software_runtime;
     alias software_structure for memo_namespace_architecture_software_structure;
     alias system for memo_namespace_architecture_system;
@@ -210,12 +217,12 @@ package memo_namespace_viewpoints {
     alias verification_models for memo_namespace_viewpoints_verification;
 }
 
-package memo_namespace_architecture_analysis {
-    public import memo_architecture_analysis::*;
+package memo_namespace_assurance_safety_analysis {
+    public import memo_assurance_safety_analysis::*;
 }
 
-package memo_namespace_architecture_assurance {
-    public import memo_architecture_assurance::*;
+package memo_namespace_assurance_verification {
+    public import memo_assurance_verification::*;
 }
 
 package memo_namespace_architecture_behavior {
@@ -226,8 +233,8 @@ package memo_namespace_architecture_constraints {
     public import memo_architecture_constraints::*;
 }
 
-package memo_namespace_architecture_cybersecurity {
-    public import memo_architecture_cybersecurity::*;
+package memo_namespace_assurance_cybersecurity {
+    public import memo_assurance_cybersecurity::*;
 }
 
 package memo_namespace_architecture_decisions {
@@ -258,12 +265,12 @@ package memo_namespace_architecture_physical {
     public import memo_architecture_physical::*;
 }
 
-package memo_namespace_architecture_requirements {
-    public import memo_architecture_requirements::*;
+package memo_namespace_assurance_requirements {
+    public import memo_assurance_requirements::*;
 }
 
-package memo_namespace_architecture_risk {
-    public import memo_architecture_risk_risk::*;
+package memo_namespace_assurance_safety {
+    public import memo_assurance_safety_risk::*;
 }
 
 package memo_namespace_architecture_software_structure {

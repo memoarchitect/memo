@@ -54,12 +54,12 @@ package memo_rules_coverage {
 
     constraint def iec62304SwArchCoverage {
         attribute id = "COV-62304-001";
-        attribute appliesTo = "SoftwareComponent";
+        attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 clause 5.3 requires software architecture.";
         attribute standardReference = "IEC 62304";
         attribute clause = "5.3";
-        attribute coverageTarget = "SoftwareComponent";
+        attribute coverageTarget = "SoftwareModule";
     }
 
     constraint def iec62304SwReqCoverage {

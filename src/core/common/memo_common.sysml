@@ -24,15 +24,15 @@ package memo_core_common {
     }
 
     // The part-based foundation. Every structural MEMO concept specializes
-    // MemoPart and thereby participates in the orthogonal dimensions
-    // (perspective, realization stage, discipline, cross-cutting concern)
-    // without duplication (ADR-0001).
+    // MemoPart. Axis ownership (horizontal architecture layer vs. vertical
+    // assurance discipline) is NOT an attribute here — it is the element's
+    // owning package (memo_architecture_* xor memo_assurance_*), enforced by
+    // CR-ONT-045. The dimensions that remain are orthogonal to the axis:
+    // realization stage, cross-cutting concern, and editorial status.
     part def MemoPart specializes TraceableElement {
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
-        attribute perspective : ArchitecturePerspectiveKind[0..*];
         attribute realizationStage : RealizationStageKind[0..1];
-        attribute disciplines : EngineeringDisciplineKind[0..*];
         attribute crossCuttingConcerns : CrossCuttingConcernKind[0..*];
         attribute concerns : ConcernKind[0..*];
         attribute applicableStandards : ExternalReference[0..*];
@@ -119,6 +119,31 @@ package memo_core_common {
         attribute statement : String;
         attribute acceptanceCriteria : String;
         attribute requirementStatus : ElementStatusKind;
+    }
+
+    // Verification-case foundation. A SysML v2 verification case is a behaviour
+    // (it checks requirements), and KerML forbids a behaviour from specializing
+    // the part-based MemoPart — so, like MemoAction, it re-declares the small
+    // identification core rather than inheriting it (ADR-0002).
+    verification def MemoVerificationCase {
+        attribute id : String;
+        attribute name : String;
+        attribute description : String;
+        attribute rationale : String;
+        attribute sourceReference : String;
+    }
+
+    // State foundation. SysML v2 states (state machines and their mode states)
+    // are behaviours, so — like MemoAction and MemoVerificationCase — they
+    // re-declare the identification core instead of specializing MemoPart
+    // (ADR-0002). Transitions stay part-based to keep their traceable safety
+    // attributes (id, sourceReference, priority, sameStepCritical).
+    state def MemoState {
+        attribute id : String;
+        attribute name : String;
+        attribute description : String;
+        attribute rationale : String;
+        attribute sourceReference : String;
     }
 
     part def Citation specializes IdentifiedElement {

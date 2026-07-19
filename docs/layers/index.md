@@ -2,12 +2,29 @@
 
 MEMO layers organize **engineering questions**, not folders, departments, or a
 sequence every project must follow. Before reading any package, understand the
-two axes of the map: horizontal **architecture perspectives** say what kind of
-question an element answers; vertical **assurance disciplines** claim elements
-across every perspective without owning them. An element lives once and
-participates in both.
+two axes of the map. Horizontal **architecture layers** tell the engineering
+story — why, what, and how — and own their operational, functional, logical,
+and implementation elements. Vertical **assurance disciplines** also own their
+own elements: requirements, hazards and controls, cyber assets and controls,
+human-factors elements, and V&V cases and evidence. Every element is **owned by
+exactly one axis** — never both — and that ownership is encoded by its owning
+package (`memo_architecture_*` for a horizontal layer, `memo_assurance_*` for a
+vertical discipline), enforced by rule CR-ONT-045. An element lives once; it
+reaches the other axis only through typed relationships, not by belonging to it.
 
-![The MEMO ontology map](../assets/ontology-map.svg)
+[![The MEMO ontology map](../assets/ontology-map.svg)](../assets/ontology-map.svg){ .memo-zoomable aria-label="Open a larger ontology map" }
+
+## Read the V-model
+
+Read each horizontal row before following either V. The operational row places
+stakeholder needs, intended use, users, use-related hazards, security context,
+and operational validation around operational concepts. The functional row
+contains functional and performance requirements, safety and cybersecurity
+controls, interaction requirements, and system V&amp;V. The logical and
+implementation rows continue the same pattern. Thus the V is not separate from
+requirements, risk, cybersecurity, or human factors: each discipline owns
+elements in every applicable architecture row and relates them to the
+architecture and V&amp;V elements in that row.
 
 ## The perspectives, layer by layer
 
@@ -43,10 +60,17 @@ lifecycle) and as `MedicalDeviceInstance`s (serial, lot, UDI-PI, history).
 ## The disciplines
 
 Requirements, safety, cybersecurity, human factors, and V&V run **across** the
-perspectives. A dose-limit checker is one element that the safety engineer,
-the security engineer, and the verification lead each claim through
-classification and typed relationships — the element is never copied per
-discipline. Evidence and traceability underpin all of it.
+layers, but they are not labels attached to an architecture layer. Each owns
+its own model elements. For example, `OperationalValidation` is a V&V element:
+it validates an operational use case, workflow, or scenario but it is not an
+operational element. Likewise, a `VerificationCase` checks a function or a
+component while remaining owned by V&V. Requirements owns `Need` and
+`Requirement`; safety/risk owns `Hazard`, `Risk`, and `RiskControl`;
+cybersecurity owns `CybersecurityAsset`, `Threat`, `Vulnerability`, and its
+controls; and human factors owns user tasks, `UseError`, and usability
+evidence. A dose-limit checker can carry safety, security, and verification
+relationships without being copied for each discipline. Evidence and
+traceability underpin all of it.
 → [Risk, Cybersecurity, and Assurance](risk-assurance.md)
 
 ## Layers are optional; connections are not
@@ -58,6 +82,11 @@ hardware at all (`software-only-medical-device`). What MEMO does insist on is
 that whatever layers you use stay connected: safety-critical functions trace
 to verification, critical tasks trace to usability validation, instances trace
 to definitions.
+
+The map intentionally does not show a “simple device” branch. Skipping an
+unneeded perspective is a modeling decision, not a flow in the V: state that
+decision in the model's scope or rationale and preserve the relationships that
+remain relevant.
 
 ## Use the map in a review
 
@@ -75,3 +104,8 @@ direction until you can answer the review question.
 The direction is not a workflow gate. Risk can expose a missing requirement;
 verification can reveal a design ambiguity. The map keeps each discovery
 connected to its source and its consequence.
+
+## Continue the guide
+
+Next, read [Context and Use](context.md). It introduces the people, setting,
+and intended use before the workflow and scenario pages describe the work.

@@ -12,7 +12,7 @@ package memo_architecture_software_runtime {
     private import memo_core_relationships::*;
     private import memo_architecture_software_structure::*;
 
-    part def RuntimeComponent specializes ArchitectureElement {
+    part def SoftwareComponent specializes ArchitectureElement {
         attribute responsibility : String;
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
@@ -35,48 +35,48 @@ package memo_architecture_software_runtime {
         attribute rollbackPolicy : String;
     }
 
-    part def Process specializes RuntimeComponent {
+    part def Process specializes SoftwareComponent {
         attribute addressSpaceIsolated : Boolean;
     }
-    part def Thread specializes RuntimeComponent {
+    part def Thread specializes SoftwareComponent {
         attribute owningProcessName : String;
     }
-    part def Task specializes RuntimeComponent {
+    part def Task specializes SoftwareComponent {
         attribute taskKind : String;
     }
-    part def Service specializes RuntimeComponent {
+    part def Service specializes SoftwareComponent {
         attribute serviceContract : String;
         attribute discoveryMechanism : String;
     }
-    part def Container specializes RuntimeComponent {
+    part def Container specializes SoftwareComponent {
         attribute imageReference : String;
         attribute orchestrationPlatform : String;
     }
     // Time/space partition (e.g. hypervisor or ARINC-style partitioning).
-    part def RuntimePartition specializes RuntimeComponent {
+    part def RuntimePartition specializes SoftwareComponent {
         attribute partitionBudget : String;
         attribute isolationMechanism : String;
     }
-    part def DataStore specializes RuntimeComponent {
+    part def DataStore specializes SoftwareComponent {
         attribute storageKind : String;
         attribute retentionPolicy : String;
     }
-    part def MessageBroker specializes RuntimeComponent {
+    part def MessageBroker specializes SoftwareComponent {
         attribute deliverySemantics : String;
         attribute topicStructure : String;
     }
 
-    connection def RuntimeRealizesModule :> MemoRelationship {
-        end runtimeComponent : RuntimeComponent;
-        end module : SoftwareComponent;
+    connection def ComponentRealizesModule :> MemoRelationship {
+        end runtimeComponent : SoftwareComponent;
+        end module : SoftwareModule;
     }
-    connection def RuntimeConnects :> MemoRelationship {
+    connection def ComponentConnects :> MemoRelationship {
         attribute protocolSummary : String;
-        end sourceComponent : RuntimeComponent;
-        end targetComponent : RuntimeComponent;
+        end sourceComponent : SoftwareComponent;
+        end targetComponent : SoftwareComponent;
     }
     connection def PartitionHosts :> MemoRelationship {
         end partition : RuntimePartition;
-        end hostedComponent : RuntimeComponent;
+        end hostedComponent : SoftwareComponent;
     }
 }

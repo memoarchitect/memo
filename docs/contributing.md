@@ -8,10 +8,9 @@ defines `src/` as the library source tree.
 
 For a contribution, begin by identifying the engineering question the change
 should make clearer — the reasoning comes before the SysML. Then locate the
-smallest existing package that owns that meaning, and check the
-[concept-provenance matrix](ontology/provenance-matrix.md): if an established
-standard already makes the distinction you need, adapt it and cite it rather
-than inventing a parallel term.
+smallest existing package that owns that meaning. Reuse an existing MEMO term
+when it already expresses the distinction you need; do not introduce a
+parallel name for the same concept.
 
 ## Where a change belongs
 
@@ -34,18 +33,18 @@ model valid as MEMO evolves.
 ## Design rules that reviews enforce
 
 These are the decisions recorded in the ADRs; changes that contradict one need
-a new ADR, not a quiet exception:
+a documented modeling rule, not a quiet exception:
 
-1. **Dimensions, not duplicates** ([ADR-0001](adr/ADR-0001-orthogonal-dimensions.md)):
+1. **Dimensions, not duplicates**:
    never add a per-layer or per-discipline copy of an element, and never add a
    scalar "layer" string.
-2. **Construct-specific bases** ([ADR-0002](adr/ADR-0002-memo-base-hierarchy.md)):
+2. **Construct-specific bases**:
    behaviors are `action def`s, flowing content is an `item def`, relations
    are `connection def`s off `MemoRelationship` — do not force everything into
    `part def`.
-3. **Workflow ≠ scenario ≠ occurrence** ([ADR-0003](adr/ADR-0003-workflow-scenario-occurrence.md)):
+3. **Workflow ≠ scenario ≠ occurrence**:
    scenarios select paths; they never restate workflows.
-4. **Typed references, never name strings** ([ADR-0004](adr/ADR-0004-definition-usage-realization-deployment.md)):
+4. **Typed references, never name strings**:
    a reference is a typed `ref`; strings are labels at most.
 5. **Path-derived package names, one content-bearing leaf package per file, no
    qualified package declarations, no examples under `src/`.**
@@ -62,10 +61,10 @@ python3 -m mkdocs build --strict    # if you touched docs
 ```
 
 A new concept additionally needs: a row in the
-[provenance matrix](ontology/provenance-matrix.md), registration in
-`src/memo_namespaces.sysml` and `src/medical_device_library.sysml`, a
-[migration-map](ontology/migration-map.md) entry if anything was renamed, and
-an example that exercises it.
+registration in `src/memo_namespaces.sysml` and
+`src/medical_device_library.sysml`, an update to the
+[SysML source reference](reference/sysml.md), and an example that exercises
+it.
 
 ## Documentation rule
 

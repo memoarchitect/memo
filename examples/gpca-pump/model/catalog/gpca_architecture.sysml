@@ -190,49 +190,49 @@ package memo_examples_gpca_pump_model_catalog_gpca_architecture {
         attribute :>> complexity = ComplexityKind::high;
         attribute :>> operatingSystem = "synchronous data-flow execution; AADL immediate port semantics (source specifies no timing)";
     }
-    part tlm : SoftwareComponent {
+    part tlm : SoftwareModule {
         attribute :>> id = "SW-001";
         attribute :>> name = "Top_Level_Mode";
         attribute :>> responsibility = "Ensure system ON/OFF behavior and startup/shutdown checks.";
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> complexity = ComplexityKind::medium;
     }
-    part config : SoftwareComponent {
+    part config : SoftwareModule {
         attribute :>> id = "SW-002";
         attribute :>> name = "Config";
         attribute :>> responsibility = "Prescription entry, drug-library limit checking, confirmation, and persistent storage.";
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> complexity = ComplexityKind::high;
     }
-    part alarm : SoftwareComponent {
+    part alarm : SoftwareModule {
         attribute :>> id = "SW-003";
         attribute :>> name = "Alarm";
         attribute :>> responsibility = "Monitor and notify exceptional conditions.";
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> complexity = ComplexityKind::high;
     }
-    part logging : SoftwareComponent {
+    part logging : SoftwareModule {
         attribute :>> id = "SW-004";
         attribute :>> name = "Logging";
         attribute :>> responsibility = "Append-only event log of doses, mode changes, alarms, and configuration changes.";
         attribute :>> safetyClass = SafetyClassKind::B;
         attribute :>> complexity = ComplexityKind::medium;
     }
-    part infusionMgr : SoftwareComponent {
+    part infusionMgr : SoftwareModule {
         attribute :>> id = "SW-005";
         attribute :>> name = "Infusion_Manager";
         attribute :>> responsibility = "Handle drug infusion commands and therapy parameters.";
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> complexity = ComplexityKind::high;
     }
-    part systemMonitor : SoftwareComponent {
+    part systemMonitor : SoftwareModule {
         attribute :>> id = "SW-006";
         attribute :>> name = "System_Monitor";
         attribute :>> responsibility = "POST, periodic CPU/RAM/ROM checks, watchdog kicking, and battery supervision.";
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> complexity = ComplexityKind::medium;
     }
-    part systemStatus : SoftwareComponent {
+    part systemStatus : SoftwareModule {
         attribute :>> id = "SW-007";
         attribute :>> name = "System_Status";
         attribute :>> responsibility = "Maintain the shared system status vector (Reservoir_Volume, Volume_Infused, Reservoir_Empty, In_Therapy) consumed by Alarm, Config, and Infusion_Manager.";
@@ -240,7 +240,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_architecture {
         attribute :>> complexity = ComplexityKind::medium;
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/System_Status.aadl";
     }
-    part outputBus : SoftwareComponent {
+    part outputBus : SoftwareModule {
         attribute :>> id = "SW-008";
         attribute :>> name = "OutputBus";
         attribute :>> responsibility = "Aggregate all subsystem outputs into the single GPCA_SW_OUT output vector (mode, commanded flow rate, notifications, prescription echo, status).";

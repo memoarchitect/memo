@@ -12,6 +12,7 @@ package memo_scenarios {
     private import memo_core_relationships::*;
     private import memo_context_actors::*;
     private import memo_context_use_context::*;
+    private import memo_activities::*;
     private import memo_workflows::*;
     private import memo_use_cases::*;
 
@@ -34,18 +35,21 @@ package memo_scenarios {
         enum foreseeableMisuse;
     }
 
+    // `memoAnalysis` and `memoVerification` keep the regulated terms `analysis`
+    // and `verification` intact but prefixed, because both are SysML v2 reserved
+    // words and cannot be bare enum names. `validation` is not reserved.
     enum def ScenarioPurposeKind {
-        enum 'analysis';
+        enum memoAnalysis;
         enum design;
-        enum 'verification';
-        enum 'validation';
+        enum memoVerification;
+        enum validation;
         enum risk;
         enum cybersecurity;
     }
 
     // Shared scenario foundation. Specializations exist only where structure
-    // or invariants differ (OperationalScenario here; FunctionalScenario in
-    // memo_functions; InteractionScenario in memo_interaction;
+    // or invariants differ (OperativeScenario here; FunctionalScenario in
+    // memo_functions; UIScenario in memo_interaction;
     // VerificationScenario / ThreatScenario in assurance packages).
     part def MemoScenario specializes MemoPart {
         attribute variantKind : ScenarioVariantKind;
@@ -66,10 +70,18 @@ package memo_scenarios {
         attribute variationPoint : String;
     }
 
-    // A path through an OperationalWorkflow in a use context.
-    part def OperationalScenario specializes MemoScenario {
+    // The operational-layer scenario: a path through an OperationalWorkflow in
+    // a use context. It is realized down the V by a FunctionalScenario (the
+    // function sequence) and a UIScenario (the interaction sequence), each owned
+    // by its own architecture layer and linked by typed realization
+    // relationships — never by copying the path. Workflow stays operational;
+    // only the scenario is layered.
+    part def OperativeScenario specializes MemoScenario {
         ref parentWorkflow : OperationalWorkflow[0..1];
-        ref parentUseCase : MedicalUseCase[0..1];
+        ref parentUseCase : UseCase[0..1];
+        // Each scenario owns the operational activity/action flow for its
+        // selected path. Do not reuse one generic activity for every scenario.
+        ref activities : OperationalActivity[0..*];
     }
 
     // An actual or hypothetical execution of a scenario (usability test run,
@@ -90,7 +102,11 @@ package memo_scenarios {
     }
     connection def ScenarioRealizesUseCase :> MemoRelationship {
         end scenario : MemoScenario;
-        end useCase : MedicalUseCase;
+        end useCase : UseCase;
+    }
+    connection def ScenarioComprisesActivity :> MemoRelationship {
+        end scenario : OperativeScenario;
+        end activity : OperationalActivity;
     }
     connection def OccursDuring :> MemoRelationship {
         end occurrence : ScenarioOccurrence;

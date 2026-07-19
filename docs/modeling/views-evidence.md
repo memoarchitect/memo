@@ -42,3 +42,9 @@ Record enough metadata to reproduce and review the result:
 
 Use views to expose missing links, then use the underlying model to correct
 them.
+
+## Continue the story
+
+Read the [GPCA pump walkthrough](../examples/gpca-walkthrough.md) to see the
+same path—from clinical scenario through architecture, risk, and evidence—in a
+complete reference model.
