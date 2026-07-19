@@ -11,6 +11,7 @@ package memo_architecture_functions {
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_activities::*;
+    private import memo_scenarios::*;
 
     part def SystemFunction specializes ArchitectureElement {
         attribute functionCategory : String;
@@ -58,5 +59,19 @@ package memo_architecture_functions {
     connection def PerformsFunction :> MemoRelationship {
         end systemAction : SystemAction;
         end function : SystemFunction;
+    }
+
+    // The functional-layer scenario: the sequence of SystemFunctions exercised
+    // along an operative scenario's path. Owned by the functional layer; it
+    // realizes (is the "how it works" of) exactly one OperativeScenario.
+    part def FunctionalScenario specializes MemoScenario {
+        ref functionSequence : SystemFunction[0..*];
+        ref functionalFlows : FunctionalExchange[0..*];
+    }
+    // FunctionalScenario realizes an OperativeScenario (AADL flow-spec →
+    // flow-implementation, one layer down). The realizer's layer owns the link.
+    connection def FunctionalRealizesOperative :> MemoRelationship {
+        end functionalScenario : FunctionalScenario;
+        end operativeScenario : OperativeScenario;
     }
 }

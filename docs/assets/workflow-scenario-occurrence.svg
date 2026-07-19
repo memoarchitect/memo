@@ -47,7 +47,7 @@
     <g font-size="10.5" font-weight="700" fill="#17557f">
       <text x="910" y="380" >selects steps of the workflow above;</text>
       <text x="910" y="396">alternate paths are deltas with a</text>
-      <text x="910" y="412">baseScenario reference (ADR-0003)</text>
+      <text x="910" y="412">baseScenario reference</text>
     </g>
   </g>
 

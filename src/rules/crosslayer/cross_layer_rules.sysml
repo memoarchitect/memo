@@ -1,4 +1,4 @@
-// C4 cross-layer rule pack — native KerML constraints (Epic EE-3).
+// Cross-layer rule pack — native KerML constraints.
 // Traceability between architecture layers, migrated from ConsistencyRule
 // predicate-attribute parts to native `constraint def` bodies.
 package memo_rules_crosslayer {

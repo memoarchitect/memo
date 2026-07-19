@@ -103,13 +103,13 @@ package memo_interaction {
     }
 
     // A reusable dialogue structure through the UI; a selected path through
-    // it is an InteractionScenario (ADR-0003).
+    // it is an UIScenario (ADR-0003).
     action def InteractionFlow specializes MemoAction {
         attribute entryPoint : String;
         attribute exitPoint : String;
     }
 
-    part def InteractionScenario specializes MemoScenario {
+    part def UIScenario specializes MemoScenario {
         ref parentFlow : InteractionFlow[0..1];
     }
 
@@ -145,11 +145,14 @@ package memo_interaction {
     }
     connection def FlowServesUseCase :> MemoRelationship {
         end interactionFlow : InteractionFlow;
-        end useCase : MedicalUseCase;
+        end useCase : UseCase;
     }
-    connection def InteractionRealizesScenario :> MemoRelationship {
-        end interactionScenario : InteractionScenario;
-        end realizedScenario : MemoScenario;
+    // The UI-layer scenario realizes exactly one FunctionalScenario one layer
+    // up (the interaction sequence that carries out the function sequence),
+    // completing the OperativeScenario → FunctionalScenario → UIScenario chain.
+    connection def UIRealizesFunctional :> MemoRelationship {
+        end uiScenario : UIScenario;
+        end functionalScenario : FunctionalScenario;
     }
     connection def SupportsTask :> MemoRelationship {
         end userInterface : UserInterface;

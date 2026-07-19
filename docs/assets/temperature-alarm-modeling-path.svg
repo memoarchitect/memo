@@ -1,20 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
-  <title id="title">Function-anchored modeling path</title>
-  <desc id="desc">A user goal leads to a use case, workflow, and operational scenario. A functional flow becomes the anchor from which requirements, risk, verification, and software and hardware architecture are developed.</desc>
-  <defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#5c7188"/></marker></defs>
-  <rect width="1100" height="520" rx="24" fill="#f7fbfd"/>
-  <text x="48" y="55" font-family="Nunito,Arial,sans-serif" font-size="20" font-weight="850" fill="#082744">FUNCTION-ANCHORED MODELING PATH</text>
-  <text x="48" y="83" font-family="Nunito,Arial,sans-serif" font-size="14" fill="#5c7188">Follow the clinical story first; use functions to connect requirements, design, risk, and evidence.</text>
-  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
-    <g><rect x="54" y="126" width="176" height="72" rx="13" fill="#f0edff" stroke="#8971dc" stroke-width="2"/><text x="142" y="153" font-size="12" font-weight="800" fill="#4c3a98">USER GOAL</text><text x="142" y="178" font-size="15" font-weight="800" fill="#4c3a98">Maintain safe temperature</text></g>
-    <g><rect x="275" y="126" width="152" height="72" rx="13" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/><text x="351" y="153" font-size="12" font-weight="800" fill="#17557f">USE CASE</text><text x="351" y="178" font-size="15" font-weight="800" fill="#17557f">Monitor and respond</text></g>
-    <g><rect x="472" y="126" width="152" height="72" rx="13" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/><text x="548" y="153" font-size="12" font-weight="800" fill="#17557f">WORKFLOW</text><text x="548" y="178" font-size="15" font-weight="800" fill="#17557f">Observe → respond</text></g>
-    <g><rect x="669" y="126" width="176" height="72" rx="13" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/><text x="757" y="153" font-size="12" font-weight="800" fill="#17557f">OPERATIONAL SCENARIO</text><text x="757" y="178" font-size="15" font-weight="800" fill="#17557f">High-temperature event</text></g>
-    <g><rect x="354" y="260" width="392" height="86" rx="16" fill="#e3faf3" stroke="#2dd4a8" stroke-width="3"/><text x="550" y="292" font-size="13" font-weight="850" fill="#07604f">FUNCTIONAL FLOW · ANCHOR</text><text x="550" y="321" font-size="17" font-weight="850" fill="#07604f">Evaluate temperature → notify clinician</text></g>
-    <g><rect x="58" y="410" width="176" height="66" rx="13" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/><text x="146" y="436" font-size="12" font-weight="800" fill="#17557f">REQUIREMENTS</text><text x="146" y="460" font-size="14" font-weight="800" fill="#17557f">EARS system claims</text></g>
-    <g><rect x="282" y="410" width="176" height="66" rx="13" fill="#fff0ef" stroke="#ea6b61" stroke-width="2"/><text x="370" y="436" font-size="12" font-weight="800" fill="#94423d">RISK</text><text x="370" y="460" font-size="14" font-weight="800" fill="#94423d">Hazards and controls</text></g>
-    <g><rect x="642" y="410" width="176" height="66" rx="13" fill="#fff3e8" stroke="#ef9b51" stroke-width="2"/><text x="730" y="436" font-size="12" font-weight="800" fill="#88501f">ARCHITECTURE</text><text x="730" y="460" font-size="14" font-weight="800" fill="#88501f">Software and hardware</text></g>
-    <g><rect x="866" y="410" width="176" height="66" rx="13" fill="#e3faf3" stroke="#2dd4a8" stroke-width="2"/><text x="954" y="436" font-size="12" font-weight="800" fill="#07604f">VERIFICATION</text><text x="954" y="460" font-size="14" font-weight="800" fill="#07604f">Tests and evidence</text></g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1360" height="720" viewBox="0 0 1360 720" role="img" aria-labelledby="title desc">
+  <title id="title">Scenario-driven modelling structure</title>
+  <desc id="desc">A use case is supported by multiple workflows. Each workflow contains multiple scenarios. Each scenario owns an operational activity, and each activity composes an action flow. Action flows may have typed trace links to functions, requirements and risk, architecture, and verification evidence. Containment is not the same as traceability.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#5c7188"/></marker>
+  </defs>
+  <rect width="1360" height="720" rx="24" fill="#f7fbfd"/>
+  <g font-family="Nunito,Arial,sans-serif">
+    <text x="42" y="48" font-size="22" font-weight="850" fill="#082744">SCENARIO-DRIVEN MODELLING</text>
+    <text x="42" y="75" font-size="14" fill="#5c7188">Read left to right for ownership: one use case → many workflows → many scenarios → one activity and action flow per scenario.</text>
   </g>
-  <g stroke="#5c7188" stroke-width="2.5" fill="none" marker-end="url(#arrow)"><path d="M230 162H271"/><path d="M427 162H468"/><path d="M624 162H665"/><path d="M757 202C710 232 655 253 600 260"/><path d="M468 346L192 406"/><path d="M500 346L408 406"/><path d="M600 346L698 406"/><path d="M640 346L910 406"/></g>
+
+  <!-- column headings -->
+  <g font-family="Nunito,Arial,sans-serif" font-size="11" font-weight="850" fill="#5c7188" text-anchor="middle">
+    <text x="138" y="123">GOAL</text><text x="348" y="123">WORKFLOWS</text><text x="575" y="123">SCENARIOS</text><text x="815" y="123">SCENARIO-OWNED ACTIVITY</text><text x="1080" y="123">ACTION FLOW</text>
+  </g>
+
+  <!-- primary model elements -->
+  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
+    <rect x="42" y="292" width="190" height="86" rx="15" fill="#f0edff" stroke="#8971dc" stroke-width="2.5"/>
+    <text x="137" y="322" font-size="12" font-weight="850" fill="#4c3a98">USE CASE</text><text x="137" y="350" font-size="15" font-weight="850" fill="#4c3a98">Maintain safe</text><text x="137" y="370" font-size="15" font-weight="850" fill="#4c3a98">temperature</text>
+
+    <g fill="#eaf4fd" stroke="#438ed0" stroke-width="2.5"><rect x="270" y="166" width="165" height="72" rx="14"/><rect x="270" y="432" width="165" height="72" rx="14"/></g>
+    <g fill="#17557f"><text x="352" y="195" font-size="12" font-weight="850">WORKFLOW A</text><text x="352" y="220" font-size="15" font-weight="850">Routine monitoring</text><text x="352" y="461" font-size="12" font-weight="850">WORKFLOW B</text><text x="352" y="486" font-size="15" font-weight="850">Respond to alarm</text></g>
+
+    <g fill="#eaf4fd" stroke="#438ed0" stroke-width="2.5"><rect x="480" y="140" width="190" height="64" rx="14"/><rect x="480" y="275" width="190" height="64" rx="14"/><rect x="480" y="430" width="190" height="64" rx="14"/></g>
+    <g fill="#17557f"><text x="575" y="166" font-size="11.5" font-weight="850">SCENARIO A1 · NOMINAL</text><text x="575" y="189" font-size="14" font-weight="850">Temperature normal</text><text x="575" y="301" font-size="11.5" font-weight="850">SCENARIO A2 · EXCEPTION</text><text x="575" y="324" font-size="14" font-weight="850">Sensor out of range</text><text x="575" y="456" font-size="11.5" font-weight="850">SCENARIO B1 · RECOVERY</text><text x="575" y="479" font-size="14" font-weight="850">Alarm acknowledged</text></g>
+
+    <g fill="#e3faf3" stroke="#2dd4a8" stroke-width="2.5"><rect x="720" y="140" width="190" height="64" rx="14"/><rect x="720" y="275" width="190" height="64" rx="14"/><rect x="720" y="430" width="190" height="64" rx="14"/></g>
+    <g fill="#07604f"><text x="815" y="166" font-size="11.5" font-weight="850">OPERATIONAL ACTIVITY A1</text><text x="815" y="189" font-size="14" font-weight="850">Observe patient</text><text x="815" y="301" font-size="11.5" font-weight="850">OPERATIONAL ACTIVITY A2</text><text x="815" y="324" font-size="14" font-weight="850">Check sensor</text><text x="815" y="456" font-size="11.5" font-weight="850">OPERATIONAL ACTIVITY B1</text><text x="815" y="479" font-size="14" font-weight="850">Assess and respond</text></g>
+
+    <g fill="#fff3e8" stroke="#ef9b51" stroke-width="2.5"><rect x="965" y="140" width="300" height="64" rx="14"/><rect x="965" y="275" width="300" height="64" rx="14"/><rect x="965" y="430" width="300" height="64" rx="14"/></g>
+    <g fill="#88501f"><text x="1115" y="166" font-size="11.5" font-weight="850">ACTION FLOW A1</text><text x="1115" y="189" font-size="14" font-weight="850">Read → evaluate → record</text><text x="1115" y="301" font-size="11.5" font-weight="850">ACTION FLOW A2</text><text x="1115" y="324" font-size="14" font-weight="850">Check → alarm → record</text><text x="1115" y="456" font-size="11.5" font-weight="850">ACTION FLOW B1</text><text x="1115" y="479" font-size="14" font-weight="850">Alert → acknowledge → log</text></g>
+  </g>
+
+  <!-- composition / ownership links -->
+  <g fill="none" stroke="#5c7188" stroke-width="2.6" marker-end="url(#arrow)">
+    <path d="M234 310 C250 282 252 220 266 202"/><path d="M234 360 C250 392 252 454 266 468"/>
+    <path d="M437 202 C454 185 464 174 476 172"/><path d="M437 202 C454 230 464 290 476 307"/><path d="M437 468 C454 468 464 465 476 463"/>
+    <path d="M672 172 H716"/><path d="M672 307 H716"/><path d="M672 463 H716"/>
+    <path d="M912 172 H961"/><path d="M912 307 H961"/><path d="M912 463 H961"/>
+  </g>
+  <g font-family="Nunito,Arial,sans-serif" font-size="10.5" font-weight="850" fill="#5c7188">
+    <text x="239" y="276">supports</text><text x="441" y="183">contains</text><text x="677" y="161">owns</text><text x="917" y="161">composes</text>
+  </g>
+
+  <!-- traceability panel -->
+  <g font-family="Nunito,Arial,sans-serif">
+    <rect x="42" y="545" width="1223" height="132" rx="17" fill="#ffffff" stroke="#d8e2e9" stroke-width="2"/>
+    <text x="66" y="574" font-size="13" font-weight="850" fill="#082744">TYPED TRACEABILITY — SEPARATE FROM OWNERSHIP</text>
+    <text x="66" y="595" font-size="11.5" fill="#5c7188">For each action flow, add only the links needed to explain the system responsibilities, claims, implementation, and proof.</text>
+    <g text-anchor="middle" font-size="11.5" font-weight="850">
+      <rect x="78" y="615" width="230" height="42" rx="11" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/><text x="193" y="641" fill="#17557f">Functions · functional flows</text>
+      <rect x="338" y="615" width="230" height="42" rx="11" fill="#fff0ef" stroke="#ea6b61" stroke-width="2"/><text x="453" y="641" fill="#94423d">Requirements · risk controls</text>
+      <rect x="598" y="615" width="230" height="42" rx="11" fill="#fff3e8" stroke="#ef9b51" stroke-width="2"/><text x="713" y="641" fill="#88501f">Architecture · allocations</text>
+      <rect x="858" y="615" width="350" height="42" rx="11" fill="#e3faf3" stroke="#2dd4a8" stroke-width="2"/><text x="1033" y="641" fill="#07604f">V&amp;V cases · evidence</text>
+    </g>
+  </g>
 </svg>

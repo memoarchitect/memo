@@ -82,7 +82,7 @@ package memo_workflows {
     // ── Workflow-level relationships ─────────────────────────────
     connection def SupportsUseCase :> MemoRelationship {
         end workflow : OperationalWorkflow;
-        end useCase : MedicalUseCase;
+        end useCase : UseCase;
     }
     connection def ImplementsProcedure :> MemoRelationship {
         end workflow : OperationalWorkflow;

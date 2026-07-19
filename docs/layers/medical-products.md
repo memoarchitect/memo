@@ -71,7 +71,7 @@ part needleHolderUnit42 : MedicalDeviceInstance {
 connection : InstanceOf connect instance ::> needleHolderUnit42 to definition ::> needleHolderDef;
 ```
 
-Study [`manual-surgical-instrument`](../examples/index.md#give-a-simple-product-a-complete-identity),
-[`single-use-device`](../examples/index.md#prove-the-lifecycle-rules-work), and
-[`reusable-instrument`](../examples/index.md#prove-the-lifecycle-rules-work)
+Study [Manual Surgical Instrument](../examples/manual-surgical-instrument.md),
+[Single-Use Device](../examples/single-use-device.md), and
+[Reusable Instrument](../examples/reusable-instrument.md)
 for the complete patterns.

@@ -31,7 +31,7 @@ upgrades harder.
 | `src/core` | Memo base hierarchy, orthogonal dimensions, terminology, enumerations, relationships, semantics |
 | `src/context` | Stakeholders and concerns (ISO 42010), actor/user hierarchy, intended use and use context |
 | `src/needs` | Needs hierarchy (stakeholder, user, business, service, regulatory, operational) |
-| `src/use_cases` | Medical use cases (the user's goal) |
+| `src/use_cases` | Generic use cases and clinical, service, manufacturing, and development specializations |
 | `src/clinical_procedures` | Clinical procedures, techniques, variants, instrument sets |
 | `src/activities` | Operational activities, user tasks, critical tasks, task steps, task difficulty |
 | `src/workflows` | First-class operational workflows (as-is/to-be, steps, decisions, handoffs) |
@@ -57,12 +57,10 @@ upgrades harder.
 | `reusable-instrument` | reprocessing lifecycle, workflow, occurrence records |
 | `single-use-device` | single-use/sterile lifecycle and lot identity |
 | `surgical-closure-workflow` | operational world only: needs → workflow → tasks → scenarios |
-| `multidimensional-layers` | one element in several orthogonal dimensions (ADR-0001) |
-| `functional-logical-physical` | realization graph across perspectives (ADR-0004) |
+| `multidimensional-layers` | one element in several orthogonal dimensions |
+| `functional-logical-physical` | realization graph across perspectives |
 | `embedded-infusion-pump` | module/runtime/deployment software views |
 | `connected-patient-monitor` | distributed system, network interfaces, trust boundary |
 | `software-only-medical-device` | SaMD with no hardware/physical layers |
 | `surgical-robot` | cyber-physical: channels, independence, interlocks, haptics |
 | `ivd-laboratory-system` | material flows, fluidic/optical parts, coded results |
-| `c4-mapping` | optional C4 viewpoint correspondence |
-| `aadl-mapping` | AADL category/property correspondence profile |

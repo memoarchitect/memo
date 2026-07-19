@@ -245,6 +245,66 @@
 }
 .memo-card h3 { margin-top: 0; }
 .memo-card p { color: var(--memo-muted); }
+.memo-card ul {
+  margin: 0.9rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--memo-muted);
+}
+.memo-card li { margin: 0.34rem 0; line-height: 1.45; }
+.memo-zoomable {
+  display: block;
+  position: relative;
+  cursor: zoom-in;
+}
+.memo-zoomable img {
+  display: block;
+  border-radius: var(--memo-radius);
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+.memo-zoomable:hover img,
+.memo-zoomable:focus-visible img {
+  box-shadow: 0 12px 30px rgba(12, 43, 73, .18);
+  transform: scale(1.01);
+}
+.md-content .memo-zoomable-image {
+  cursor: zoom-in;
+  border-radius: var(--memo-radius);
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+.md-content .memo-zoomable-image:hover,
+.md-content .memo-zoomable-image:focus-visible {
+  box-shadow: 0 12px 30px rgba(12, 43, 73, .18);
+  outline: none;
+  transform: scale(1.01);
+}
+.memo-image-dialog {
+  width: min(96vw, 1500px);
+  max-width: none;
+  max-height: 94vh;
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .42);
+}
+.memo-image-dialog::backdrop { background: rgba(3, 18, 31, .74); }
+.memo-image-dialog__content { position: relative; padding: 0.6rem; background: var(--memo-paper); }
+.memo-image-dialog img { display: block; width: 100%; max-height: calc(94vh - 1.2rem); object-fit: contain; }
+.memo-image-dialog button {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--memo-night);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.45rem;
+  line-height: 1;
+}
 .memo-card-teal { border-color: #9bded5; background: var(--memo-teal-soft); }
 .memo-card-blue { border-color: #cce2f6; background: var(--memo-blue-soft); }
 .memo-card-purple { border-color: #ddd5f6; background: var(--memo-purple-soft); }

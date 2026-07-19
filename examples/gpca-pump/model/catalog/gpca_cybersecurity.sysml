@@ -140,7 +140,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_cybersecurity {
         attribute :>> safetyClass = SafetyClassKind::C;
     }
 
-    part vcAuthenticatedServiceAccess : VerificationCase {
+    verification vcAuthenticatedServiceAccess : VerificationCase {
         attribute :>> id = "CVER-001";
         attribute :>> name = "VerifyAuthenticatedServiceAccess";
         attribute :>> methodKind = VerificationMethodKind::test;

@@ -98,7 +98,7 @@ package memo_architecture_hardware_structure {
         end assembly : PhysicalAssembly;
         end component : PhysicalComponent;
     }
-    connection def PhysicalRealizesLogical :> MemoRelationship {
+    connection def PhysicalModuleRealizesLogical :> MemoRelationship {
         end physicalElement : ArchitectureElement;
         end logicalElement : ArchitectureElement;
     }

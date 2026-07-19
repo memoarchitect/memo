@@ -11,7 +11,7 @@ package memo_architecture_interfaces {
     // protocol. Architecture perspective is carried by the inherited
     // orthogonal dimensions (ADR-0001), not as a type branch.
 
-    part def Interface specializes InterfaceElement {
+    interface def Interface specializes MemoInterface {
         attribute interfaceKind : InterfaceKind;
         attribute direction : DirectionKind;
         attribute protocol : String;
@@ -31,7 +31,7 @@ package memo_architecture_interfaces {
 
     // ─── Hardware interfaces ─────────────────────────────────────────
 
-    part def HardwareInterface specializes Interface {
+    interface def HardwareInterface specializes Interface {
         attribute electricalStandard : String;
         attribute nominalVoltageV : Real;
         attribute nominalCurrentA : Real;
@@ -40,47 +40,47 @@ package memo_architecture_interfaces {
         attribute timingConstraint : String;
     }
 
-    part def DigitalInterface specializes HardwareInterface {
+    interface def DigitalInterface specializes HardwareInterface {
         attribute bitRateBps : String;
         attribute signaling : String;
     }
-    part def SPIInterface specializes DigitalInterface;
-    part def USBInterface specializes DigitalInterface;
-    part def I2CInterface specializes DigitalInterface;
-    part def CANInterface specializes DigitalInterface;
-    part def UARTInterface specializes DigitalInterface;
-    part def EthernetInterface specializes DigitalInterface;
+    interface def SPIInterface specializes DigitalInterface;
+    interface def USBInterface specializes DigitalInterface;
+    interface def I2CInterface specializes DigitalInterface;
+    interface def CANInterface specializes DigitalInterface;
+    interface def UARTInterface specializes DigitalInterface;
+    interface def EthernetInterface specializes DigitalInterface;
 
-    part def AnalogInterface specializes HardwareInterface {
+    interface def AnalogInterface specializes HardwareInterface {
         attribute signalRange : String;
     }
-    part def VoltageInterface specializes AnalogInterface;
-    part def CurrentInterface specializes AnalogInterface;
-    part def CurrentLoop4To20mA specializes AnalogInterface;
-    part def ThermocoupleInterface specializes AnalogInterface;
+    interface def VoltageInterface specializes AnalogInterface;
+    interface def CurrentInterface specializes AnalogInterface;
+    interface def CurrentLoop4To20mA specializes AnalogInterface;
+    interface def ThermocoupleInterface specializes AnalogInterface;
 
     // ─── Software interfaces ─────────────────────────────────────────
 
-    part def SoftwareInterface specializes Interface {
+    interface def SoftwareInterface specializes Interface {
         attribute apiStyle : String;
     }
 
-    part def SynchronousInterface specializes SoftwareInterface;
-    part def RestInterface specializes SynchronousInterface;
-    part def GrpcInterface specializes SynchronousInterface;
-    part def RpcInterface specializes SynchronousInterface;
-    part def LocalApiInterface specializes SynchronousInterface;
+    interface def SynchronousInterface specializes SoftwareInterface;
+    interface def RestInterface specializes SynchronousInterface;
+    interface def GrpcInterface specializes SynchronousInterface;
+    interface def RpcInterface specializes SynchronousInterface;
+    interface def LocalApiInterface specializes SynchronousInterface;
 
-    part def AsynchronousInterface specializes SoftwareInterface;
-    part def MessageQueueInterface specializes AsynchronousInterface;
-    part def PubSubInterface specializes AsynchronousInterface;
-    part def EventStreamInterface specializes AsynchronousInterface;
+    interface def AsynchronousInterface specializes SoftwareInterface;
+    interface def MessageQueueInterface specializes AsynchronousInterface;
+    interface def PubSubInterface specializes AsynchronousInterface;
+    interface def EventStreamInterface specializes AsynchronousInterface;
 
     // ─── Ports, interface defs, and exchanges ────────────────────────
     // SysML port/interface mechanism + logical exchange, relocated here
     // from the former logical_interfaces namespace.
 
-    abstract interface def DataInterface specializes InterfaceElement {
+    abstract interface def DataInterface specializes MemoInterface {
         attribute interfaceKind : InterfaceKind;
         attribute protocolSemantics : String;
     }

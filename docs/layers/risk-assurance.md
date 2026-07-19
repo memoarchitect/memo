@@ -69,3 +69,9 @@ critical tasks to usability validation.
 Connect evidence to the claim it supports. A file path alone is not a complete
 assurance argument; record the verification case, acceptance basis, result,
 and the evidence artifact.
+
+## Continue the story
+
+Next, read [Elements](../modeling/elements.md) and
+[Relationships](../modeling/relationships.md) for the practical choices used
+to write this connected model.

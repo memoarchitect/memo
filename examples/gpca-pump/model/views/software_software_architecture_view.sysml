@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_model_views_software_software_architecture_view 
         part :>> selectionQuery {
             attribute :>> id = "QRY-SW-101";
             attribute :>> name = "GPCA_SoftwareArchitectureQuery";
-            attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareComponent", "SoftwarePort");
+            attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "SoftwarePort");
             attribute :>> includeRelationshipKinds = ("ExchangesWith", "Composes");
             attribute :>> includeLayers = ("software_structure", "interfaces");
             attribute :>> selectionExpression = "product == 'GPCA'";

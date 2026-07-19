@@ -10,6 +10,9 @@ const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const read = (...parts) => readFileSync(join(root, ...parts), 'utf8');
 const packageVersion = JSON.parse(read('package.json')).version;
 
+const walkSysml = (dir) => readdirSync(join(root, dir), { withFileTypes: true }).flatMap((entry) =>
+  entry.isDirectory() ? walkSysml(join(dir, entry.name)) : entry.name.endsWith('.sysml') ? [join(dir, entry.name)] : []);
+
 test('manifest declares the four logical packages and content-owned init values', () => {
   const manifest = read('memo.manifest.yaml');
   for (const expected of [
@@ -23,6 +26,7 @@ test('manifest declares the four logical packages and content-owned init values'
     'template: ./template',
     'archetypes: ./profile/archetypes.yaml',
     'gpca: ./examples/gpca-pump',
+    'standard-sysml-diagrams: ./examples/sysml-diagram-samples',
   ]) assert.match(manifest, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 });
 
@@ -84,18 +88,68 @@ test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
   assert.equal(existsSync(join(root, 'examples', 'gpca-pump', 'memo.config.yaml')), true);
   const examples = readdirSync(join(root, 'examples')).filter((entry) => !entry.startsWith('.')).sort();
   const expected = [
-    'aadl-mapping', 'c4-mapping', 'connected-patient-monitor', 'embedded-infusion-pump',
+    'connected-patient-monitor', 'embedded-infusion-pump',
     'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
     'manual-surgical-instrument', 'multidimensional-layers', 'reusable-instrument',
     'single-use-device', 'software-only-medical-device', 'surgical-closure-workflow',
-    'surgical-robot', 'temperature-alarm',
+    'surgical-robot', 'sysml-diagram-samples', 'temperature-alarm',
   ];
   assert.deepEqual(examples, expected);
+});
+
+test('focused MEMO examples separate their parent package, catalog, and viewpoints', () => {
+  const focused = [
+    'connected-patient-monitor', 'embedded-infusion-pump',
+    'functional-logical-physical', 'ivd-laboratory-system', 'manual-surgical-instrument',
+    'multidimensional-layers', 'reusable-instrument', 'single-use-device',
+    'software-only-medical-device', 'surgical-closure-workflow', 'surgical-robot',
+    'temperature-alarm',
+  ];
+  for (const example of focused) {
+    const model = join(root, 'examples', example, 'model');
+    assert.equal(existsSync(join(root, 'examples', example, 'README.md')), true, `${example} needs a README`);
+    assert.ok(readdirSync(model).some((entry) => entry.endsWith('.sysml')), `${example} needs a parent SysML package`);
+    for (const section of ['catalog', 'viewpoints']) {
+      const directory = join(model, section);
+      assert.equal(existsSync(directory), true, `${example} needs model/${section}`);
+      assert.ok(readdirSync(directory).some((entry) => entry.endsWith('.sysml')), `${example} needs a ${section} SysML file`);
+    }
+  }
 });
 
 test('ontology namespace facade references no example packages', () => {
   const facade = read('src', 'memo_namespaces.sysml');
   assert.doesNotMatch(facade, /memo_examples/);
+});
+
+test('use cases have one generic base and context-specific specializations', () => {
+  const useCases = read('src', 'use_cases', 'memo_use_cases.sysml');
+  for (const expected of [
+    'use case def UseCase',
+    'use case def ClinicalUseCase specializes UseCase',
+    'use case def ServiceUseCase specializes UseCase',
+    'use case def ManufacturingUseCase specializes UseCase',
+    'use case def DevelopmentUseCase specializes UseCase',
+  ]) assert.match(useCases, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  assert.doesNotMatch(useCases, /MedicalUseCase/);
+});
+
+test('ontology V-model names canonical types and remains structurally valid SVG', () => {
+  const diagram = read('docs', 'assets', 'ontology-map.svg');
+  const declared = diagram.match(/data-ontology-types="([^"]+)"/)?.[1].split(/\s+/) ?? [];
+  assert.ok(declared.length >= 40, 'the V-model must declare the ontology types it summarizes');
+
+  const ontology = walkSysml('src').map((file) => read(file)).join('\n');
+  for (const type of declared) {
+    const definition = new RegExp(`\\b(?:part|item|action|requirement|use case|port|interface) def ${type}\\b`);
+    assert.match(ontology, definition, `${type} shown in the V-model must exist in the ontology`);
+  }
+
+  assert.equal((diagram.match(/<g(?:\s|>)/g) ?? []).length, (diagram.match(/<\/g>/g) ?? []).length,
+    'SVG groups must be balanced so browsers render the diagram');
+  for (const label of ['REQUIREMENTS', 'SAFETY / RISK', 'CYBERSECURITY', 'HUMAN FACTORS', 'V&amp;V']) {
+    assert.match(diagram, new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
 });
 
 test('0.5 ontology packages exist with path-derived names', () => {
@@ -171,6 +225,7 @@ test('npm pack includes all content and no JavaScript', () => {
     'template/src/views/.gitkeep',
     'template/src/documents/.gitkeep',
     'examples/gpca-pump/memo.config.yaml',
+    'examples/sysml-diagram-samples/README.md',
     'src/medical_device_library.sysml',
   ]) assert.ok(files.includes(expected), `missing ${expected}`);
   assert.equal(files.some((path) => /\.(?:c|m)?js$/.test(path)), false);

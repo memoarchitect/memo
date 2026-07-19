@@ -2,6 +2,8 @@
 
 Choose an element by asking what kind of statement you are recording.
 
+![Visual element-selection guide](../assets/element-selection-guide.svg)
+
 ## Selection guide
 
 | You are recording… | Prefer… | Avoid… |

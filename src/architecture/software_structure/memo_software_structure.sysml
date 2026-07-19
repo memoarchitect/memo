@@ -17,27 +17,27 @@ package memo_architecture_software_structure {
     }
 
     // Module-view element (design responsibility). Runtime properties
-    // (period, WCET, scheduling) moved to RuntimeComponent.
-    part def SoftwareComponent specializes ArchitectureElement {
+    // (period, WCET, scheduling) moved to SoftwareComponent.
+    part def SoftwareModule specializes ArchitectureElement {
         attribute responsibility : String;
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
     }
-    part def SoftwareItem specializes SoftwareComponent {
+    part def SoftwareItem specializes SoftwareModule {
         attribute softwareItemKind : String;
         attribute iec62304Role : String;
     }
-    part def SoftwareModule specializes SoftwareComponent {
+    part def CodeModule specializes SoftwareModule {
         attribute moduleKind : String;
     }
     // IEC 62304 software unit: not further decomposed.
-    part def SoftwareUnit specializes SoftwareComponent {
+    part def SoftwareUnit specializes SoftwareModule {
         attribute implementationLanguage : String;
     }
-    part def SoftwarePackage specializes SoftwareComponent {
+    part def SoftwarePackage specializes SoftwareModule {
         attribute namespacePath : String;
     }
-    part def SoftwareLibrary specializes SoftwareComponent {
+    part def SoftwareLibrary specializes SoftwareModule {
         attribute libraryVersion : String;
         attribute internallyDeveloped : Boolean;
     }
@@ -45,7 +45,7 @@ package memo_architecture_software_structure {
         attribute firmwareTarget : String;
         attribute updateMechanism : String;
     }
-    part def SOUPComponent specializes SoftwareComponent {
+    part def SOUPComponent specializes SoftwareModule {
         attribute soupVersion : String;
         attribute soupVendor : String;
         attribute knownAnomalies : String;
@@ -78,14 +78,14 @@ package memo_architecture_software_structure {
 
     connection def ImplementsComponent :> MemoRelationship {
         end unit : SoftwareUnit;
-        end component : SoftwareComponent;
+        end component : SoftwareModule;
     }
-    connection def RealizesLogical :> MemoRelationship {
-        end softwareComponent : SoftwareComponent;
+    connection def ModuleRealizesLogical :> MemoRelationship {
+        end softwareComponent : SoftwareModule;
         end logicalComponent : LogicalComponent;
     }
     connection def ModuleUses :> MemoRelationship {
-        end usingModule : SoftwareComponent;
-        end usedModule : SoftwareComponent;
+        end usingModule : SoftwareModule;
+        end usedModule : SoftwareModule;
     }
 }

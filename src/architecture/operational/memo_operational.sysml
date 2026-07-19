@@ -6,7 +6,7 @@ package memo_architecture_operational {
     private import memo_core_relationships::*;
     private import memo_activities::*;
     // OperationalActivity now lives in memo_activities (action def) and
-    // OperationalScenario in memo_scenarios (ADR-0003 / migration map).
+    // OperativeScenario in memo_scenarios (ADR-0003 / migration map).
     part def OperationalEntity specializes ArchitectureElement {
         attribute entityKind : OperationalEntityKind;
         attribute operationalDomain : String;

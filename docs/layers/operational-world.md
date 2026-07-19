@@ -1,12 +1,13 @@
 # The Operational World
 
-The operational layer describes clinical or service work **as it is
-performed** — often before any particular device exists. This ordering is
-deliberate: a device is an intervention in someone's workflow, and you cannot
-argue that an intervention helps unless the workflow itself is in the model.
-It is also what ISO/IEC/IEEE 42010, IEC 62366-1, and use-related risk analysis
-all quietly assume you have: identified users, real tasks, and the context of
-use.
+The operational layer describes work **as it is performed** — clinical care,
+field service, manufacturing, or product development — often before any
+particular device exists. This ordering is deliberate: a device is an
+intervention in someone's workflow, and you cannot argue that an intervention
+helps unless the workflow itself is in the model. Clinical work is one
+specialization, not the boundary of the layer. It is also what
+ISO/IEC/IEEE 42010, IEC 62366-1, and use-related risk analysis assume you
+have: identified users, real tasks, and the context of use.
 
 ## Who: stakeholders, actors, users
 
@@ -21,7 +22,7 @@ MEMO links them (`ActsAsActor`) instead of merging the types.
 | Element | Use it for |
 |---|---|
 | `Stakeholder`, `Concern` | Interests the architecture must answer (ISO 42010) |
-| `Actor` → `HumanActor` / `NonHumanActor` | Anything that interacts with the system |
+| `Actor` → `User` / `NonHumanActor` | Anything that interacts with the system |
 | `User` → `ClinicalUser`, `PatientUser`, `CaregiverUser`, `TechnicianUser` | The intended human users |
 | `IntendedUse`, `UseContext`, `UseEnvironment` | The governed purpose and the setting of use |
 
@@ -29,11 +30,11 @@ MEMO links them (`ActsAsActor`) instead of merging the types.
 
 A **Need** is a problem-space expectation in stakeholder language; the needs
 hierarchy separates user, business, service, regulatory, and operational
-needs. A **MedicalUseCase** is the goal a user wants to achieve with the
-system's support — *close a surgical incision*, *monitor patient temperature*,
-*sterilize a reusable instrument*. There is deliberately no separate "Goal"
-class: the use case *is* the goal, with its trigger, preconditions, success
-and failure outcomes.
+needs. A **UseCase** is the goal a person or organization wants to achieve
+with system support. `ClinicalUseCase` covers patient care; `ServiceUseCase`,
+`ManufacturingUseCase`, and `DevelopmentUseCase` cover the same pattern beyond
+clinical operation. There is no separate "Goal" class: the use case *is* the
+goal, with its trigger, preconditions, success and failure outcomes.
 
 ## How: procedures, workflows, scenarios, tasks
 
@@ -74,8 +75,8 @@ an activity, never a second copy of the product. See
 
 ## Worked examples
 
-- [`surgical-closure-workflow`](../examples/index.md#model-the-work-before-the-device) — the full operational world with no system layers at all.
-- [`reusable-instrument`](../examples/index.md#prove-the-lifecycle-rules-work) — a reprocessing workflow with a recorded occurrence.
+- [Surgical Workflow Modelling](../examples/surgical-closure-workflow.md) — the full operational world with no system layers at all.
+- [Reusable Instrument](../examples/reusable-instrument.md) — a reprocessing workflow with a recorded occurrence.
 
 ## Minimal usage
 
@@ -90,10 +91,17 @@ requirement needSecureClosure : ClinicalUserNeed {
     attribute :>> statement =
         "The surgeon needs to close the incision so that tissue heals with minimal scarring.";
 }
-use case ucCloseIncision : MedicalUseCase {
+use case ucCloseIncision : ClinicalUseCase {
     attribute :>> name = "CloseSurgicalIncision";
     attribute :>> goalStatement = "Close the surgical incision with secure tissue approximation.";
 }
 connection : Motivates connect motivatingNeed ::> needSecureClosure to motivatedUseCase ::> ucCloseIncision;
 connection : Initiates connect initiatingUser ::> surgeon to initiatedUseCase ::> ucCloseIncision;
 ```
+
+## Continue the story
+
+Next, read [Functional and System Analysis](operations-system.md). It explains
+how one selected operational scenario identifies the functions the system must
+perform, without yet deciding whether those functions are software, hardware,
+or mechanical.

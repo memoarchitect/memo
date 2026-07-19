@@ -3,11 +3,15 @@ package memo_architecture_behavior {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
-    part def BehaviorMachine specializes ArchitectureElement {
+    // State machines and their mode states are SysML v2 states (behaviours), so
+    // they derive from the MemoState foundation, not the part-based
+    // ArchitectureElement. Transitions stay part-based (below) to keep their
+    // traceable safety attributes.
+    state def BehaviorMachine :> MemoState {
         attribute machineKind : String;
         attribute executionSemantics : String;
     }
-    part def ModeState specializes ArchitectureElement {
+    state def ModeState :> MemoState {
         attribute modeKind : String;
         attribute entryCondition : String;
         attribute exitCondition : String;
@@ -42,7 +46,7 @@ package memo_architecture_behavior {
         attribute guardCondition : String;
         attribute weight : String;
     }
-    // InteractionScenario now lives in memo_interaction (:> MemoScenario).
+    // UIScenario now lives in memo_interaction (:> MemoScenario).
     part def InteractionMessage specializes TraceableElement {
         attribute messageKind : MessageKind;
         attribute sequenceOrder : Integer;
