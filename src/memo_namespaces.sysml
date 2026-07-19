@@ -111,10 +111,10 @@ package memo_assurance_safety_compatibility {
     public import memo_assurance_safety_arch_risk::*;
 }
 
-// Horizontal axis — architecture layers (operational → functional → logical →
-// implementation). Vertical assurance disciplines are NOT grouped here; they
-// live under memo_namespace_assurance. This grouping is the public-API side of
-// the single-axis ownership encoded by package membership (CR-ONT-045).
+// Horizontal axis — the five V-model architecture layers. Interfaces remain
+// typed ports/connections inside Logical architecture; they are not a layer.
+// Views and viewpoints are presentation packages and are exposed only through
+// the Diagram workspace, never as architecture layers.
 package memo_namespace_architecture {
     alias behavior for memo_namespace_architecture_behavior;
     alias constraints for memo_namespace_architecture_constraints;
@@ -129,6 +129,32 @@ package memo_namespace_architecture {
     alias software_runtime for memo_namespace_architecture_software_runtime;
     alias software_structure for memo_namespace_architecture_software_structure;
     alias system for memo_namespace_architecture_system;
+
+    package operational {
+        alias activities for memo_namespace_activities;
+        alias context for memo_namespace_context;
+        alias scenarios for memo_namespace_scenarios;
+        alias use_cases for memo_namespace_use_cases;
+        alias workflows for memo_namespace_workflows;
+    }
+    package functional {
+        alias behavior for memo_namespace_architecture_behavior;
+        alias functions for memo_namespace_architecture_functions;
+    }
+    package logical {
+        alias interfaces for memo_namespace_architecture_interfaces;
+        alias logical_structure for memo_namespace_architecture_logical_structure;
+        alias system for memo_namespace_architecture_system;
+    }
+    package implementation {
+        alias hardware for memo_namespace_architecture_hardware_structure;
+        alias software_runtime for memo_namespace_architecture_software_runtime;
+        alias software for memo_namespace_architecture_software_structure;
+    }
+    package realization {
+        alias deployment for memo_namespace_architecture_deployment;
+        alias physical for memo_namespace_architecture_physical;
+    }
 }
 
 package memo_namespace_artifacts {
