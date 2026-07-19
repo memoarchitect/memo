@@ -12,7 +12,8 @@ memo/
 ├── memo.manifest.yaml     # the packaging contract (see below)
 ├── src/                   # all SysML v2 / KerML source, one tree
 │   ├── core/              # common types, enumerations, relationships, semantics
-│   ├── architecture/      # one directory per architecture layer
+│   ├── architecture/      # horizontal architecture-layer definitions
+│   ├── assurance/         # vertical assurance-discipline definitions
 │   ├── rules/             # closure, coverage, crosslayer, lifecycle, quantitative
 │   ├── viewpoints/        # viewpoint and view definitions
 │   ├── methodology/       # profiles, patterns, gates, workflow, archetypes
@@ -28,7 +29,8 @@ memo/
 │   └── gpca/              # logical @memoarchitect/methodology-gpca
 ├── template/              # complete starter project copied by `memo init`
 └── examples/
-    └── gpca-pump/         # the reference model — teaching material, not a scaffold
+    ├── gpca-pump/         # the complete reference model — teaching material, not a scaffold
+    └── */                 # focused, domain-specific examples
 ```
 
 The manifest is the only contract published code relies on: tools resolve
@@ -56,6 +58,7 @@ init:
   archetypes: ./profile/archetypes.yaml
 examples:
   gpca: ./examples/gpca-pump
+  standard-sysml-diagrams: ./examples/sysml-diagram-samples
 ```
 
 When a project declares `extends: "@memoarchitect/medical-modeling-profile"`,

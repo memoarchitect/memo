@@ -1,8 +1,8 @@
 package memo_examples_gpca_pump_model_catalog_gpca_requirements {
     private import ScalarValues::*;
 
-    private import memo_architecture_requirements::*;
-    private import memo_needs::*;
+    private import memo_assurance_requirements::*;
+    private import memo_assurance_needs::*;
     private import memo_core_enumerations::*;
 
     // ═════════════════════════════════════════════════════════════

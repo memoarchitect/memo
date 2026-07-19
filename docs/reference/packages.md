@@ -30,13 +30,14 @@ upgrades harder.
 |---|---|
 | `src/core` | Memo base hierarchy, orthogonal dimensions, terminology, enumerations, relationships, semantics |
 | `src/context` | Stakeholders and concerns (ISO 42010), actor/user hierarchy, intended use and use context |
-| `src/needs` | Needs hierarchy (stakeholder, user, business, service, regulatory, operational) |
+| `src/assurance/needs` | Needs hierarchy (stakeholder, user, business, service, regulatory, operational) |
 | `src/use_cases` | Generic use cases and clinical, service, manufacturing, and development specializations |
 | `src/clinical_procedures` | Clinical procedures, techniques, variants, instrument sets |
 | `src/activities` | Operational activities, user tasks, critical tasks, task steps, task difficulty |
 | `src/workflows` | First-class operational workflows (as-is/to-be, steps, decisions, handoffs) |
 | `src/scenarios` | Scenario foundation, variants/conditions/purposes, occurrences |
-| `src/architecture` | Functional, logical, software (module/runtime/deployment), hardware, physical, interface, behavior, risk, cybersecurity, and assurance definitions |
+| `src/architecture` | Operational, system, functional, logical, software (module/runtime/deployment), hardware, physical, interface, behavior, constraint, and decision definitions |
+| `src/assurance` | Requirements and needs, safety/risk and analysis, cybersecurity, and verification definitions |
 | `src/medical_products` | Device definitions/instances, technology domains, reuse lifecycle, product-usage roles |
 | `src/interaction` | User interfaces, UI elements, interaction flows and scenarios |
 | `src/assurance` | Human-factors assurance (use errors, formative/summative evaluation) |

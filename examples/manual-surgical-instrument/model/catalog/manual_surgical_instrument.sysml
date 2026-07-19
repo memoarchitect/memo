@@ -2,7 +2,7 @@
 // (needle holder). Demonstrates the definition/instance split, technology
 // domains (mechanical only), reuse lifecycle, patient-contact declaration,
 // and role-typed product usage in a task — with NO functional, logical, or
-// software layers: irrelevant layers are never mandatory (ADR-0004).
+// software layers: irrelevant layers are never mandatory.
 package memo_examples_manual_surgical_instrument {
     private import ScalarValues::*;
 

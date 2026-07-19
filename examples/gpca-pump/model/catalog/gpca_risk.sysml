@@ -1,7 +1,7 @@
 package memo_examples_gpca_pump_model_catalog_gpca_risk {
     private import ScalarValues::*;
 
-    private import memo_architecture_risk_risk::*;
+    private import memo_assurance_safety_risk::*;
     private import memo_core_common::Citation;
     private import memo_core_enumerations::*;
 

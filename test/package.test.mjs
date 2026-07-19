@@ -141,7 +141,7 @@ test('ontology V-model names canonical types and remains structurally valid SVG'
 
   const ontology = walkSysml('src').map((file) => read(file)).join('\n');
   for (const type of declared) {
-    const definition = new RegExp(`\\b(?:part|item|action|requirement|use case|port|interface) def ${type}\\b`);
+    const definition = new RegExp(`\\b(?:part|item|action|requirement|use case|port|interface|state|verification) def ${type}\\b`);
     assert.match(ontology, definition, `${type} shown in the V-model must exist in the ontology`);
   }
 
@@ -159,7 +159,7 @@ test('0.5 ontology packages exist with path-derived names', () => {
     'src/context/actors/memo_actors.sysml': 'memo_context_actors',
     'src/context/stakeholders/memo_stakeholders.sysml': 'memo_context_stakeholders',
     'src/context/use_context/memo_use_context.sysml': 'memo_context_use_context',
-    'src/needs/memo_needs.sysml': 'memo_needs',
+    'src/assurance/needs/memo_needs.sysml': 'memo_assurance_needs',
     'src/use_cases/memo_use_cases.sysml': 'memo_use_cases',
     'src/clinical_procedures/memo_clinical_procedures.sysml': 'memo_clinical_procedures',
     'src/activities/memo_activities.sysml': 'memo_activities',
@@ -198,7 +198,7 @@ test('the library facade exports the 0.5 domain packages', () => {
   const library = read('src', 'medical_device_library.sysml');
   for (const pkg of [
     'memo_core_dimensions', 'memo_core_terminology', 'memo_context_actors',
-    'memo_context_stakeholders', 'memo_context_use_context', 'memo_needs',
+    'memo_context_stakeholders', 'memo_context_use_context', 'memo_assurance_needs',
     'memo_use_cases', 'memo_clinical_procedures', 'memo_activities',
     'memo_workflows', 'memo_scenarios', 'memo_assurance_human_factors',
     'memo_interaction', 'memo_architecture_software_runtime',

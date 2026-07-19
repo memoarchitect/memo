@@ -1,5 +1,5 @@
 // Focused example: embedded programmable device — the three software views
-// (module / runtime / deployment, ADR-0004) on a minimal infusion pump.
+// (module / runtime / deployment) on a minimal infusion pump.
 // SoftwareItem buildsInto DeploymentUnit deploysTo ProcessingNode;
 // SoftwareComponent hostedBy ProcessingNode with scheduling properties.
 package memo_examples_embedded_infusion_pump {

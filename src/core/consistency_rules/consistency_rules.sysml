@@ -1,5 +1,5 @@
 // Consistency rule base types per Epic N.
-// Bare imports (no `private`) per ADR-1-16 fallback.
+// Bare imports are required by the current compatibility surface.
 package memo_core_consistency_rules {
     private import ScalarValues::*;
 

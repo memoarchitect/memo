@@ -17,7 +17,7 @@ parallel name for the same concept.
 | You want to… | Put it in… |
 |---|---|
 | Fix or clarify an existing element, relationship, or rule | `src/` in the owning package |
-| Extend the operational world (actors, needs, use cases, workflows, scenarios, tasks) | `src/context`, `src/needs`, `src/use_cases`, `src/workflows`, `src/scenarios`, `src/activities` |
+| Extend the operational world (actors, needs, use cases, workflows, scenarios, tasks) | `src/context`, `src/assurance/needs`, `src/use_cases`, `src/workflows`, `src/scenarios`, `src/activities` |
 | Extend architecture semantics (functional, logical, software, deployment, physical) | `src/architecture/<layer>` |
 | Extend product identity, reuse lifecycle, or usage roles | `src/medical_products` |
 | Extend UI/interaction or human-factors assurance | `src/interaction`, `src/assurance` |

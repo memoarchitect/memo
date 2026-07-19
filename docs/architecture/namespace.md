@@ -1,23 +1,26 @@
 # The memo:: Namespace
 
 `memo::` builds bottom-up. Read it from the base upward: core semantics first,
-architecture layers next, viewpoints and views above that, methodology to apply
-the model, and the GPCA pump as a concrete example.
+the horizontal architecture and vertical assurance packages next, then
+viewpoints, methodology, and examples.
 
 ```mermaid
 flowchart BT
     core["<code>memo::core</code><br/>traceable elements · documented and evidence elements<br/>enumerations · dimensions · typed semantic relationships"]
-    arch["<code>memo::architecture</code><br/>context · operational · system · requirements · functions ·<br/>behavior · logical · interfaces · software · hardware · physical ·<br/>constraints · risk · cybersecurity · assurance · analysis · decisions"]
+    arch["<code>memo::architecture</code><br/>operational · system · functions · behavior · logical · interfaces ·<br/>software · deployment · hardware · physical · constraints · decisions"]
+    assurance["<code>memo::assurance</code><br/>needs · requirements · safety · safety analysis · cybersecurity ·<br/>human factors · verification and validation"]
     vp["<code>memo::viewpoints</code> — who needs to see what<br/><code>memo::views</code> — concrete diagram and document projections"]
     meth["<code>memo::methodology</code><br/>profiles · patterns · rules · workflow · gates · archetypes"]
     gpca["<code>memo::examples::gpca</code><br/>a complete infusion-pump reference model"]
     core --> arch --> vp --> meth --> gpca
+    core --> assurance
 ```
 
 | Package | Role |
 |---|---|
 | `memo::core` | Shared foundation: identity, traceability, documented/evidence elements, controlled values, and typed semantic relationships |
-| `memo::architecture` | What the device *is*: Arcadia-inspired layers from clinical context through requirements, behavior, and structure to risk, cybersecurity, and assurance |
+| `memo::architecture` | Horizontal architecture layers: operational, system, functional, logical, interface, behavior, and implementation structure |
+| `memo::assurance` | Vertical assurance disciplines: needs, requirements, safety/risk, cybersecurity, human factors, and verification/validation |
 | `memo::viewpoints` | Stakeholder concerns: architecture, safety, cybersecurity, verification, and regulatory review |
 | `memo::rules` | Native closure, coverage, cross-layer, lifecycle, and quantitative checks |
 | `memo::compliance` | Regulated outputs: controlled artifacts, change, and risk-management-file concepts |
@@ -50,9 +53,10 @@ every hazard have a risk control?"* or *"is every risk control verified?"* are
 expressed as rules under `memo::rules` and evaluated by walking required
 semantic links, flagging missing paths as errors or warnings.
 
-**Risk and cybersecurity are peer layers.** They sit inside
-`memo::architecture` next to the structural layers — not in a separate file
-format — so controls anchor to the design features that implement them.
+**Assurance is separate from architecture ownership.** Risk, cybersecurity,
+requirements, and verification live under `memo::assurance`; typed
+relationships anchor their controls and evidence to the relevant design
+features without duplicating the architecture element.
 
 **Extensions live outside core.** Device-specific modes, interfaces, profiles,
 and organization-specific kinds belong in project packages or the profile, not

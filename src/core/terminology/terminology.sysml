@@ -1,4 +1,4 @@
-// Terminology and identification kernel (ADR-0002 §16). MEMO stays
+// Terminology and identification kernel. MEMO stays
 // terminology-neutral: any concept may carry several TerminologyCodes binding
 // it to SNOMED CT, GMDN, EMDN, UDI/GUDID, ISO/IEEE 11073 nomenclature, or a
 // local catalog — never a single ambiguous `code : String`.

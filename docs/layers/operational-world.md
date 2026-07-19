@@ -48,6 +48,14 @@ transformation relations (preserves / automates / augments / eliminates a
 step). A **scenario** is a selected path through a workflow. An **occurrence**
 is one actual execution:
 
+[![Scenario-driven operational modeling](../assets/scenario-driven-modeling.png)](../assets/scenario-driven-modeling.png){ .memo-zoomable aria-label="Open the scenario-driven modeling diagram" }
+
+The diagram shows the ownership structure used by MEMO: a use case can be
+supported by several workflows; a workflow can contain several scenarios; and
+each scenario owns the operational activity and action flow that describe its
+selected path. Requirements, risk controls, allocations, and verification
+evidence remain typed traceability links rather than additional ownership.
+
 ![Workflow, scenario, and occurrence](../assets/workflow-scenario-occurrence.svg)
 
 Scenarios are classified along three independent dimensions — variant

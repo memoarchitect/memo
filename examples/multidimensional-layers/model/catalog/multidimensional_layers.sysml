@@ -1,4 +1,4 @@
-// Focused example for CR-ONT-045 (single-axis ownership; supersedes ADR-0001).
+// Focused example for CR-ONT-045 single-axis ownership.
 // The dose-limit checker is owned by exactly ONE axis — the implementation
 // architecture layer, encoded by its owning package — and is never duplicated.
 // Its safety, cybersecurity, and verification character are not tags on the
@@ -13,7 +13,7 @@ package memo_examples_multidimensional_layers {
     private import memo_core_dimensions::*;
     private import memo_architecture_software_structure::*;
     private import memo_architecture_software_runtime::*;
-    private import memo_architecture_assurance::*;
+    private import memo_assurance_verification::*;
     private import memo_core_relationships::*;
 
     part doseLimitChecker : SoftwareModule {
