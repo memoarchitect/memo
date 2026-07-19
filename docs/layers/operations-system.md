@@ -1,4 +1,4 @@
-# Functional and System Analysis
+# Functional Analysis
 
 The functional layer answers *what the system must do* without saying how.
 This separation is what lets one functional architecture survive a technology
@@ -16,20 +16,18 @@ work, responsibility, behavior, organization, and path are different claims:
 |---|---|
 | `OperationalActivity` | Work performed in the operational world (by people) |
 | `SystemFunction` | Technology-independent responsibility of the system |
-| `SystemAction` | Executable behavior realizing a function |
 | `FunctionalFlow` / `FunctionalFlowStep` | Reusable organization of functions with typed steps |
 | `FunctionalScenario` | A selected path through a functional flow |
 
-`SystemCapability` names an outcome the system must be able to achieve and
-references its primary function; `FunctionalExchange` is a typed transfer
-(measurement, command, alarm, …) between functions.
+`FunctionalExchange` is a typed transfer (measurement, command, alarm, …)
+between functions. An action flow may call a function, but it is diagram
+behaviour rather than another functional-architecture element.
 
 ## Core relationships
 
 | Relationship | Reads as |
 |---|---|
 | `EnablesActivity` | This function enables that operational work — it does not perform it |
-| `PerformsFunction` | This system action executes that function |
 | `InvolvesFunction` / `IncludesStep` | This flow organizes these functions and steps |
 | `SelectsFlow` / `FunctionalRealizesOperational` | This functional scenario selects a flow and realizes an operational scenario |
 | `AllocatedTo` | This function is the responsibility of that logical component |
@@ -45,8 +43,7 @@ authority for the exact relationship types and their endpoints.
 
 ```mermaid
 flowchart LR
-    Bolus[OperationalActivity: request bolus] --> Capability[SystemCapability: titrated analgesia]
-    Capability --> Chain[FunctionalFlow: patient bolus]
+    Bolus[OperationalActivity: request bolus] --> Chain[FunctionalFlow: patient bolus]
     Chain --> Sense[SystemFunction: acquire sensors]
     Chain --> Limit[SystemFunction: enforce limits]
     Chain --> Command[SystemFunction: command pump]

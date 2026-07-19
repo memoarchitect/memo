@@ -44,7 +44,7 @@ work it claims to improve. → [The Operational World](operational-world.md)
 responsibilities (`SystemFunction`), organized into `FunctionalFlow`s with
 typed exchanges. A function may end up realized by software, mechanics,
 electronics, or a human procedure — the functional layer deliberately does not
-say which. → [Functional and System Analysis](operations-system.md)
+say which. → [Functional Analysis](operations-system.md)
 
 **Logical — how the solution is organized.** Still technology-independent:
 components, channels with safety roles (primary, redundant, monitor,

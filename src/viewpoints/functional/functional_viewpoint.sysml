@@ -17,8 +17,8 @@ package memo_viewpoints_functional_functional_viewpoint {
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::performance);
-        attribute :>> includedLayers = ("functions", "behavior");
-        attribute :>> allowedElementKinds = ("SystemFunction", "FunctionalExchange", "ModeState");
+        attribute :>> includedLayers = ("functions");
+        attribute :>> allowedElementKinds = ("SystemFunction", "FunctionalFlow", "FunctionalFlowStep", "FunctionalScenario", "FunctionalExchange");
         attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }

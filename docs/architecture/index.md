@@ -58,12 +58,11 @@ of a software, electronics, or mechanical choice.
 
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
-| `SystemCapability` | An outcome the system must be able to achieve | references primary function |
 | `SystemFunction` | A technology-independent responsibility | `EnablesActivity`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
 | `FunctionalFlow`, `FunctionalFlowStep` | Reusable organization and order of functions | `InvolvesFunction`, `IncludesStep` |
 | `FunctionalScenario` | The function path for one operational scenario | `SelectsFlow`, `FunctionalRealizesOperational` |
 | `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | connects function endpoints |
-| `SystemAction`, `BehaviorMachine`, `ModeState` | Behavior, sequencing, and state | `PerformsFunction`, transitions, timing constraints |
+| `SystemAction` | Executable behavior realizing a function | `PerformsFunction` |
 
 A function can be allocated to software, hardware, a mechanical part, or a
 human procedure. Do not create a software component merely because a function

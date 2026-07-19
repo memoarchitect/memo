@@ -45,3 +45,34 @@ layers:
   - id: verification
     label: Verification
     color: "#2ECC71"
+
+# Model Explorer taxonomy. This is ontology metadata: Architect receives these
+# values from memo-tools and does not infer MEMO's V-model from source paths.
+explorer:
+  classifications:
+    - { source: activities, domain: architecture, group: operational }
+    - { source: context, domain: architecture, group: operational }
+    - { source: workflows, domain: architecture, group: operational }
+    - { source: scenarios, domain: architecture, group: operational }
+    - { source: use_cases, domain: architecture, group: operational }
+    - { source: interaction, domain: architecture, group: operational }
+    - { source: operational, domain: architecture, group: operational }
+    - { source: functions, domain: architecture, group: functional }
+    - { source: behavior, domain: architecture, group: functional }
+    - { source: constraints, domain: architecture, group: functional }
+    - { source: logical_structure, domain: architecture, group: logical }
+    - { source: interfaces, domain: architecture, group: logical }
+    - { source: hardware_structure, domain: architecture, group: implementation }
+    - { source: software_structure, domain: architecture, group: implementation }
+    - { source: software_runtime, domain: architecture, group: implementation }
+    - { source: physical, domain: architecture, group: realization }
+    - { source: deployment, domain: architecture, group: realization }
+    - { source: needs, domain: assurance, group: requirements }
+    - { source: requirements, domain: assurance, group: requirements }
+    - { source: safety, domain: assurance, group: safety-risk }
+    - { source: safety_analysis, domain: assurance, group: safety-risk }
+    - { source: cybersecurity, domain: assurance, group: cybersecurity }
+    - { source: human_factors, domain: assurance, group: human-factors }
+    - { source: verification, domain: assurance, group: verification-validation }
+    - { source: core, domain: assurance, group: evidence }
+    - { source: methodology, domain: methodology, group: methodology }

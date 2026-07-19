@@ -107,7 +107,7 @@ connection : Initiates connect initiatingUser ::> surgeon to initiatedUseCase ::
 
 ## Continue the story
 
-Next, read [Functional and System Analysis](operations-system.md). It explains
+Next, read [Functional Analysis](operations-system.md). It explains
 how one selected operational scenario identifies the functions the system must
 perform, without yet deciding whether those functions are software, hardware,
 or mechanical.

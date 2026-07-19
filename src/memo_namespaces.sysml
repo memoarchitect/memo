@@ -128,7 +128,6 @@ package memo_namespace_architecture {
     alias physical for memo_namespace_architecture_physical;
     alias software_runtime for memo_namespace_architecture_software_runtime;
     alias software_structure for memo_namespace_architecture_software_structure;
-    alias system for memo_namespace_architecture_system;
 
     package operational {
         alias activities for memo_namespace_activities;
@@ -139,12 +138,12 @@ package memo_namespace_architecture {
     }
     package functional {
         alias behavior for memo_namespace_architecture_behavior;
+        alias constraints for memo_namespace_architecture_constraints;
         alias functions for memo_namespace_architecture_functions;
     }
     package logical {
         alias interfaces for memo_namespace_architecture_interfaces;
         alias logical_structure for memo_namespace_architecture_logical_structure;
-        alias system for memo_namespace_architecture_system;
     }
     package implementation {
         alias hardware for memo_namespace_architecture_hardware_structure;
@@ -301,10 +300,6 @@ package memo_namespace_assurance_safety {
 
 package memo_namespace_architecture_software_structure {
     public import memo_architecture_software_structure::*;
-}
-
-package memo_namespace_architecture_system {
-    public import memo_architecture_system::*;
 }
 
 package memo_namespace_artifacts_clinical_safety_report {

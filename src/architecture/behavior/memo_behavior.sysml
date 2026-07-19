@@ -7,6 +7,8 @@ package memo_architecture_behavior {
     // they derive from the MemoState foundation, not the part-based
     // ArchitectureElement. Transitions stay part-based (below) to keep their
     // traceable safety attributes.
+    // State-machine vocabulary. The historic name BehaviorMachine denotes a
+    // state machine; ModeState denotes a state owned by that model.
     state def BehaviorMachine :> MemoState {
         attribute machineKind : String;
         attribute executionSemantics : String;
@@ -25,6 +27,8 @@ package memo_architecture_behavior {
         attribute sourceState : String;
         attribute targetState : String;
     }
+    // A verifiable behavioural constraint, such as an invariant, transition
+    // rule, temporal claim, assumption, or guarantee.
     part def BehaviorProperty specializes VerifiableElement {
         attribute propertyKind : BehaviorPropertyKind;
         attribute languageKind : PropertyLanguageKind;

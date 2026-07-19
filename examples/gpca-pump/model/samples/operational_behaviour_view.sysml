@@ -1,10 +1,9 @@
 package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     private import ScalarValues::*;
-    private import memo_architecture_system::*;
-
     private import memo_context_actors::*;
     private import memo_context_use_context::*;
     private import memo_core_relationships::*;
+    private import memo_architecture_interfaces::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
@@ -20,8 +19,12 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     // ─────────────────────────────────────────────────────────────────────────
 
     // Items exchanged between steps (typed flow payloads)
-    item def OpPrescription;
-    item def OpBolusRequest;
+    item def OpPrescription specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
+    }
+    item def OpBolusRequest specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::signal;
+    }
     part def CareSystem;
 
     // Action definitions give steps typed in/out pins
