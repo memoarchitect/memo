@@ -73,7 +73,7 @@ nav:
       - Layer Map: layers/index.md
       - Context and Use: layers/context.md
       - Workflows and Scenarios: layers/operational-world.md
-      - Functions and Behavior: layers/operations-system.md
+      - Functional Analysis: layers/operations-system.md
       - Requirements and Architecture: layers/requirements-architecture.md
       - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
   - Tutorials:

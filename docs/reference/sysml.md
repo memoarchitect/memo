@@ -29,7 +29,6 @@ describe historical migrations.
 | SysML file | Package | Public definitions |
 | --- | --- | --- |
 | `src/architecture/functions/memo_functions.sysml` | `memo_architecture_functions` | `SystemFunction`, `SystemAction`, functional exchanges, data and control definitions |
-| `src/architecture/system/memo_system_analysis.sysml` | `memo_architecture_system` | capabilities, functional flows, functional scenarios |
 | `src/architecture/operational/memo_operational.sysml` | `memo_architecture_operational` | operational entities, capabilities, interactions |
 | `src/architecture/logical_structure/memo_logical_structure.sysml` | `memo_architecture_logical_structure` | logical systems, components, channels, ports, interfaces, isolation |
 | `src/architecture/interfaces/memo_interfaces.sysml` | `memo_architecture_interfaces` | physical, hardware, software, and digital interfaces |

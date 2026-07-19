@@ -40,17 +40,6 @@ package memo_architecture_functions {
         ref targetFunction : SystemFunction[0..1];
     }
 
-    item def DataDefinition specializes MemoExchangeItem {
-        attribute confidentialityClass : String;
-        attribute integrityClass : String;
-        attribute availabilityClass : String;
-    }
-    item def ControlDefinition specializes MemoExchangeItem {
-        attribute controlType : String;
-        attribute timeoutMs : Real;
-        attribute retryPolicy : String;
-    }
-
     // A system function enables operational work; it does not perform it.
     connection def EnablesActivity :> MemoRelationship {
         end enablingFunction : SystemFunction;
@@ -61,17 +50,53 @@ package memo_architecture_functions {
         end function : SystemFunction;
     }
 
-    // The functional-layer scenario: the sequence of SystemFunctions exercised
-    // along an operative scenario's path. Owned by the functional layer; it
-    // realizes (is the "how it works" of) exactly one OperativeScenario.
+    // A reusable functional route through system responsibilities. Functional
+    // flows are part of functional architecture, never logical structure.
+    part def FunctionalFlow specializes ArchitectureElement {
+        attribute flowCategory : FunctionalFlowKind;
+        ref startFunction : SystemFunction[0..1];
+        ref endFunction : SystemFunction[0..1];
+        attribute endToEndLatencyBudgetMs : String;
+        attribute safetyRelevant : Boolean;
+        attribute securityRelevant : Boolean;
+        ref includedFunctions : SystemFunction[0..*];
+    }
+    part def FunctionalFlowStep specializes MemoPart {
+        attribute stepOrder : String;
+        ref function : SystemFunction[0..1];
+        ref exchange : FunctionalExchange[0..1];
+        ref item exchangedItem : MemoExchangeItem[0..1];
+    }
+
+    // The functional-layer scenario selects one functional route and realizes
+    // an operative scenario. It is the "what the system does" path, not a
+    // logical component interaction.
     part def FunctionalScenario specializes MemoScenario {
         ref functionSequence : SystemFunction[0..*];
         ref functionalFlows : FunctionalExchange[0..*];
+        attribute sequenceDiagramRef : String;
+        ref selectedFlow : FunctionalFlow[0..1];
     }
-    // FunctionalScenario realizes an OperativeScenario (AADL flow-spec →
-    // flow-implementation, one layer down). The realizer's layer owns the link.
+    connection def IncludesStep :> MemoRelationship {
+        end functionalFlow : FunctionalFlow;
+        end step : FunctionalFlowStep;
+    }
+    connection def InvolvesFunction :> MemoRelationship {
+        end functionalFlow : FunctionalFlow;
+        end function : SystemFunction;
+    }
+    connection def RealizesScenario :> MemoRelationship {
+        end functionalFlow : FunctionalFlow;
+        end scenario : FunctionalScenario;
+    }
+    connection def SelectsFlow :> MemoRelationship {
+        end scenario : FunctionalScenario;
+        end selectedFlow : FunctionalFlow;
+    }
     connection def FunctionalRealizesOperative :> MemoRelationship {
         end functionalScenario : FunctionalScenario;
         end operativeScenario : OperativeScenario;
     }
+    // Compatibility spelling used by existing models.
+    connection def FunctionalRealizesOperational :> FunctionalRealizesOperative;
 }

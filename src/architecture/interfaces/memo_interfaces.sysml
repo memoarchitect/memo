@@ -29,6 +29,22 @@ package memo_architecture_interfaces {
         attribute patientContactInterface : Boolean;
     }
 
+    // A typed thing exchanged at a boundary. Concrete items such as
+    // AlarmSignal and FlowCommand specialize this type; they are neither
+    // functions nor generic action-flow notation.
+    item def InterfaceItem specializes MemoExchangeItem {
+        attribute itemKind : InterfaceItemKind;
+        attribute confidentialityClass : String;
+        attribute integrityClass : String;
+        attribute availabilityClass : String;
+    }
+    item def DataDefinition specializes InterfaceItem;
+    item def ControlDefinition specializes InterfaceItem {
+        attribute controlType : String;
+        attribute timeoutMs : Real;
+        attribute retryPolicy : String;
+    }
+
     // ─── Hardware interfaces ─────────────────────────────────────────
 
     interface def HardwareInterface specializes Interface {
