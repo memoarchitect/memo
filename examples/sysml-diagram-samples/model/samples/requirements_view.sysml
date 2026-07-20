@@ -10,24 +10,29 @@ package memo_examples_sysml_diagram_samples_model_samples_requirements_view {
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
-    requirement needSafeTherapy : StakeholderNeed {
+    requirement needSafeTherapy : Need {
+        attribute :>> needKind = NeedKind::stakeholder;
         attribute :>> id = "NEED-001"; attribute :>> name = "SafeTherapy";
         attribute :>> statement = "The device shall support safe patient-controlled infusion therapy.";
     }
-    requirement needTimelyAlarms : StakeholderNeed {
+    requirement needTimelyAlarms : Need {
+        attribute :>> needKind = NeedKind::stakeholder;
         attribute :>> id = "NEED-002"; attribute :>> name = "TimelyAlarms";
         attribute :>> statement = "Clinicians shall be notified promptly of any condition that endangers therapy.";
     }
 
-    requirement reqDoseLimit : SystemRequirement {
+    requirement reqDoseLimit : Requirement {
+        attribute :>> requirementKind = RequirementKind::system;
         attribute :>> id = "REQ-001"; attribute :>> name = "DoseLimitEnforcement";
         attribute :>> statement = "The pump shall not deliver more than the prescribed maximum dose in any one-hour window.";
     }
-    requirement reqOcclusionAlarm : SystemRequirement {
+    requirement reqOcclusionAlarm : Requirement {
+        attribute :>> requirementKind = RequirementKind::system;
         attribute :>> id = "REQ-002"; attribute :>> name = "OcclusionAlarm";
         attribute :>> statement = "The pump shall raise an alarm within two seconds of detecting a downstream occlusion.";
     }
-    requirement reqAlarmLoudness : SystemRequirement {
+    requirement reqAlarmLoudness : Requirement {
+        attribute :>> requirementKind = RequirementKind::system;
         attribute :>> id = "REQ-003"; attribute :>> name = "AlarmLoudness";
         attribute :>> statement = "An active alarm shall be audible at 65 dBA at one metre.";
     }

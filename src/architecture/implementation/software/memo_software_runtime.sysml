@@ -66,17 +66,9 @@ package memo_architecture_software_runtime {
         attribute topicStructure : String;
     }
 
-    connection def ComponentRealizesModule :> MemoRelationship {
-        end runtimeComponent : SoftwareComponent;
-        end module : SoftwareModule;
-    }
     connection def ComponentConnects :> MemoRelationship {
         attribute protocolSummary : String;
         end sourceComponent : SoftwareComponent;
         end targetComponent : SoftwareComponent;
-    }
-    connection def PartitionHosts :> MemoRelationship {
-        end partition : RuntimePartition;
-        end hostedComponent : SoftwareComponent;
     }
 }

@@ -30,7 +30,7 @@ package memo_use_cases {
         ref primaryUser : User[0..1];
         ref supportingActors : Actor[0..*];
         ref useContext : UseContext[0..1];
-        ref originatingNeeds : UserNeed[0..*];
+        ref originatingNeeds : Need[0..*];
     }
 
     use case def ClinicalUseCase specializes UseCase {
@@ -57,9 +57,5 @@ package memo_use_cases {
     connection def ParticipatesIn :> MemoRelationship {
         end participant : Actor;
         end useCase : UseCase;
-    }
-    connection def UseCaseAppliesIn :> MemoRelationship {
-        end useCase : UseCase;
-        end useContext : UseContext;
     }
 }

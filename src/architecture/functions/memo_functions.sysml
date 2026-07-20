@@ -41,14 +41,6 @@ package memo_architecture_functions {
     }
 
     // A system function enables operational work; it does not perform it.
-    connection def EnablesActivity :> MemoRelationship {
-        end enablingFunction : SystemFunction;
-        end enabledActivity : OperationalActivity;
-    }
-    connection def PerformsFunction :> MemoRelationship {
-        end systemAction : SystemAction;
-        end function : SystemFunction;
-    }
 
     // A reusable functional route through system responsibilities. Functional
     // flows are part of functional architecture, never logical structure.
@@ -85,18 +77,9 @@ package memo_architecture_functions {
         end functionalFlow : FunctionalFlow;
         end function : SystemFunction;
     }
-    connection def RealizesScenario :> MemoRelationship {
-        end functionalFlow : FunctionalFlow;
-        end scenario : FunctionalScenario;
-    }
     connection def SelectsFlow :> MemoRelationship {
         end scenario : FunctionalScenario;
         end selectedFlow : FunctionalFlow;
     }
-    connection def FunctionalRealizesOperative :> MemoRelationship {
-        end functionalScenario : FunctionalScenario;
-        end operativeScenario : OperativeScenario;
-    }
     // Compatibility spelling used by existing models.
-    connection def FunctionalRealizesOperational :> FunctionalRealizesOperative;
 }

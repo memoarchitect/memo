@@ -2,7 +2,9 @@
 // widget forms (button, knob, chart …) are enum classifications, not classes.
 // UI state is distinct from system state (memo_architecture_behavior) and
 // from device modes (memo_architecture_logical_structure::LogicalMode).
-package memo_interaction {
+// UI is an implementation concern (rendered UI is software; physical controls
+// are hardware), so it lives in the implementation layer, not operational.
+package memo_architecture_ui {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -57,33 +59,31 @@ package memo_interaction {
         attribute navigationRole : String;
     }
 
-    abstract part def UIElement specializes ArchitectureElement {
+    // One UIElement. The widget form — screen (field/table/chart) or physical
+    // (knob/switch/indicatorLamp/haptic) — is the `formKind` enum, not a
+    // subclass. Input/output/navigation/alarm/display/physical-control
+    // descriptors are optional attributes; a physical control's mechanical
+    // realization is a hardware part linked by ControlImplementedBy.
+    part def UIElement specializes ArchitectureElement {
         attribute formKind : UIElementFormKind;
         attribute labelText : String;
         attribute accessibilitySummary : String;
-    }
-    part def InputElement specializes UIElement {
+        // input descriptors (optional)
         attribute inputConstraints : String;
         attribute defaultValue : String;
-    }
-    part def OutputElement specializes UIElement {
+        // output / display descriptors (optional)
         attribute updateRate : String;
         attribute unitsDisplayed : String;
-    }
-    part def NavigationElement specializes UIElement {
+        attribute informationContent : String;
+        // navigation (optional)
         attribute navigationTarget : String;
-    }
-    part def AlarmElement specializes UIElement {
-        attribute alarmPriority : NotificationPriorityKind;
+        // alarm annunciation (optional)
+        attribute alarmPriority : NotificationPriorityKind[0..1];
         attribute annunciationModality : String;
         attribute silenceable : Boolean;
-    }
-    part def PhysicalControl specializes UIElement {
+        // physical control (optional)
         attribute actuationForce : String;
         attribute guardedAgainstInadvertentActuation : Boolean;
-    }
-    part def InformationDisplay specializes UIElement {
-        attribute informationContent : String;
     }
 
     // UI state is presentation state — distinct from system/device state.
@@ -125,10 +125,6 @@ package memo_interaction {
         end boundElement : UIElement;
         end dataSource : MemoPart;
     }
-    connection def ContainsElement :> MemoRelationship {
-        end container : UIContainer;
-        end element : UIElement;
-    }
     connection def PresentsState :> MemoRelationship {
         end userInterface : UserInterface;
         end state : UIState;
@@ -150,10 +146,6 @@ package memo_interaction {
     // The UI-layer scenario realizes exactly one FunctionalScenario one layer
     // up (the interaction sequence that carries out the function sequence),
     // completing the OperativeScenario → FunctionalScenario → UIScenario chain.
-    connection def UIRealizesFunctional :> MemoRelationship {
-        end uiScenario : UIScenario;
-        end functionalScenario : FunctionalScenario;
-    }
     connection def SupportsTask :> MemoRelationship {
         end userInterface : UserInterface;
         end task : UserTask;

@@ -76,14 +76,6 @@ package memo_architecture_software_structure {
         attribute hash : String;
     }
 
-    connection def ImplementsComponent :> MemoRelationship {
-        end unit : SoftwareUnit;
-        end component : SoftwareModule;
-    }
-    connection def ModuleRealizesLogical :> MemoRelationship {
-        end softwareComponent : SoftwareModule;
-        end logicalComponent : LogicalComponent;
-    }
     connection def ModuleUses :> MemoRelationship {
         end usingModule : SoftwareModule;
         end usedModule : SoftwareModule;

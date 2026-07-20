@@ -21,8 +21,8 @@ package memo_examples_gpca_pump_model_views_document_sdd_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-004";
             attribute :>> name = "sddViewQuery";
-            attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "ModeState", "Transition", "SoftwareInterface", "SystemFunction", "TimingConstraint", "SOUPComponent");
-            attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "BindsToInterface", "RealizesInterface", "DependsOnSoup", "Changes");
+            attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "ModeState", "Transition", "Interface", "SystemFunction", "TimingConstraint", "SOUPComponent");
+            attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "BindsToInterface", "Realizes", "DependsOnSoup", "Changes");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
     }

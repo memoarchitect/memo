@@ -51,8 +51,8 @@ action taskAckAlarm : CriticalTask {
     attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
     attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
 }
-connection : ActivityComprisesTask connect activity ::> actAcknowledgeAlarm
-    to task ::> taskAckAlarm;
+connection : Composes connect parent ::> actAcknowledgeAlarm
+    to child ::> taskAckAlarm;
 ```
 
 ## System responsibility and logical channel
@@ -69,8 +69,9 @@ part fnDetectDeviation : SystemFunction {
     attribute :>> disciplines =
         (EngineeringDisciplineKind::safety, EngineeringDisciplineKind::'verification');
 }
-part chMonitor : LogicalChannel {
+part chMonitor : LogicalComponent {
     attribute :>> name = "TemperatureMonitorChannel";
+    attribute :>> componentRole = ComponentRoleKind::channel;
     attribute :>> channelRole = ChannelRoleKind::monitor;
 }
 connection : AllocatedTo connect function ::> fnDetectDeviation
@@ -85,7 +86,7 @@ safety argument: task → use error → hazard; risk control → mitigated hazar
 risk control → the element that implements it.
 
 ```sysml
-part elAlarmBanner : AlarmElement {
+part elAlarmBanner : UIElement {
     attribute :>> name = "TempAlarmBanner";
     attribute :>> alarmPriority = NotificationPriorityKind::high;
     attribute :>> annunciationModality = "flashing banner + tone";
@@ -123,10 +124,10 @@ part uvAckTask : UsabilityValidation {
     attribute :>> acceptanceCriteria =
         "no critical-task failures; all alarms assessed before silencing";
 }
-connection : VerifiesFunction connect verificationCase ::> vcAlarmLatency
-    to verifiedFunction ::> fnDetectDeviation;
-connection : ValidatesCriticalTask connect usabilityValidation ::> uvAckTask
-    to criticalTask ::> taskAckAlarm;
+connection : VerifiedBy connect verificationCase ::> vcAlarmLatency
+    to verificationTarget ::> fnDetectDeviation;
+connection : Validates connect validationCase ::> uvAckTask
+    to validationTarget ::> taskAckAlarm;
 connection : ProducesEvidence connect producer ::> vcAlarmLatency
     to producedEvidence ::> evLatencyReport;
 ```

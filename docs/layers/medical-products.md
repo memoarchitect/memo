@@ -44,7 +44,7 @@ and duration (ISO 10993-1).
 ## Products in use: roles
 
 Activities and tasks reference products through `UsesProduct` /
-`TaskUsesProduct`, which carry the role (primary, assisting, cutting,
+`UsesProduct`, which carries the role (primary, assisting, cutting,
 measurement, consumable, …), quantity, sterile and calibration requirements,
 and permitted alternatives. The same needle holder that is a "primary
 instrument" in suturing is one model element with one physical decomposition —

@@ -9,8 +9,8 @@ Choose an element by asking what kind of statement you are recording.
 | You are recording… | Prefer… | Avoid… |
 |---|---|---|
 | A person or external role | `Actor` | A component named “User” |
-| A user outcome | `StakeholderNeed` | A premature software requirement |
-| A measurable system obligation | `SystemRequirement` | A vague function name |
+| A user outcome | `Need` (needKind: stakeholder) | A premature software requirement |
+| A measurable system obligation | `Requirement` (requirementKind: system) | A vague function name |
 | A transformation | `SystemFunction` | A component unless responsibility is the point |
 | A solution-independent responsibility | `LogicalComponent` | A vendor-specific hardware part |
 | Deployed code | `SoftwareItem` or `FirmwareItem` | A generic logical component |
@@ -21,14 +21,15 @@ Choose an element by asking what kind of statement you are recording.
 
 ## Definition versus usage
 
-MEMO provides definitions such as `SystemRequirement`, `Hazard`, and
+MEMO provides definitions such as `Requirement`, `Hazard`, and
 `LogicalComponent`. Your project creates usages that specialize those
-definitions:
+definitions and set the kind attribute that records the level of the claim:
 
 ```sysml
-requirement reqOcclusionAlarm : SystemRequirement {
+requirement reqOcclusionAlarm : Requirement {
     attribute :>> id = "REQ-042";
     attribute :>> name = "OcclusionAlarm";
+    attribute :>> requirementKind = RequirementKind::system;
     attribute :>> statement =
         "The pump shall issue a high-priority alarm after detecting occlusion.";
 }

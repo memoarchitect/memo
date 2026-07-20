@@ -93,7 +93,8 @@ a user, a goal, and the link that says why the goal exists:
 part surgeon : ClinicalUser {
     attribute :>> name = "Surgeon";
 }
-requirement needSecureClosure : ClinicalUserNeed {
+requirement needSecureClosure : Need {
+    attribute :>> needKind = NeedKind::clinicalUser;
     attribute :>> statement =
         "The surgeon needs to close the incision so that tissue heals with minimal scarring.";
 }

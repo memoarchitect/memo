@@ -24,10 +24,10 @@ package memo_examples_functional_logical_physical {
         attribute :>> id = "FLP-FN-001"; attribute :>> name = "LimitLinePressure";
         attribute :>> criticality = CriticalityKind::high;
     }
-    connection : EnablesActivity connect enablingFunction ::> fnLimitLinePressure to enabledActivity ::> actOcclusionResponse;
+    connection : Enables connect enabling ::> fnLimitLinePressure to enabled ::> actOcclusionResponse;
 
     // Logical: solution structure, still technology-independent.
-    part lcPressureProtection : LogicalControlElement {
+    part lcPressureProtection : LogicalComponent {
         attribute :>> id = "FLP-LC-001"; attribute :>> name = "PressureProtectionElement";
         attribute :>> controlledVariable = "line pressure";
     }
@@ -45,6 +45,6 @@ package memo_examples_functional_logical_physical {
         attribute :>> mechanicalFunction = "vents line pressure above mechanical set point, independent of software";
         attribute :>> patientContact = false;
     }
-    connection : ModuleRealizesLogical connect softwareComponent ::> swPressureSupervisor to logicalComponent ::> lcPressureProtection;
-    connection : PhysicalModuleRealizesLogical connect physicalElement ::> mechReliefValve to logicalElement ::> lcPressureProtection;
+    connection : Realizes connect realizing ::> swPressureSupervisor to realized ::> lcPressureProtection;
+    connection : Realizes connect realizing ::> mechReliefValve to realized ::> lcPressureProtection;
 }

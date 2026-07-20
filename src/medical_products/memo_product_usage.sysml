@@ -37,16 +37,9 @@ package memo_medical_products_usage {
         attribute calibrationRequired : Boolean;
         attribute permittedAlternative : String;
         attribute usageInstructions : String;
-        end usingActivity : OperationalActivity;
-        end product : MedicalDevice;
-    }
-    connection def TaskUsesProduct :> MemoRelationship {
-        attribute productRole : ProductRoleKind;
-        attribute required : Boolean;
-        attribute quantity : String;
-        attribute sterileRequired : Boolean;
-        attribute calibrationRequired : Boolean;
-        end usingTask : UserTask;
+        // `using` is generic (activity or task) — unifies the former
+        // UsesProduct / TaskUsesProduct synonyms.
+        end using : MemoPart;
         end product : MedicalDevice;
     }
 }

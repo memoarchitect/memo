@@ -55,7 +55,7 @@ package memo_examples_single_use_device {
         attribute :>> id = "SUD-TASK-001"; attribute :>> name = "AdministerInjection";
         attribute :>> taskGoal = "administer prescribed dose subcutaneously";
     }
-    connection : TaskUsesProduct connect usingTask ::> taskInject to product ::> syringe {
+    connection : UsesProduct connect using ::> taskInject to product ::> syringe {
         attribute :>> productRole = ProductRoleKind::consumable;
         attribute :>> required = true;
         attribute :>> quantity = "1";

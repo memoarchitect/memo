@@ -36,35 +36,45 @@ package memo_architecture_logical_structure {
         enum independentProtection;
     }
 
+    // The role a logical component plays. Was a subclass branch
+    // (LogicalSystem / LogicalSubsystem / LogicalChannel / LogicalDataStore /
+    // LogicalControlElement / LogicalUserInterface / LogicalExternalSystem);
+    // now one attribute, because all of them share the same relationships and
+    // differed only by a couple of descriptive attributes.
+    enum def ComponentRoleKind {
+        enum system;
+        enum subsystem;
+        enum channel;
+        enum dataStore;
+        enum controlElement;
+        enum userInterface;
+        enum externalSystem;
+        enum generic;
+    }
+
+    // One logical component. `componentRole` selects what it is; the role-
+    // specific attributes below are all optional so a component carries only
+    // the ones its role needs. A channel claiming independence must still be
+    // linked by IndependentOf with its basis stated.
     part def LogicalComponent specializes ArchitectureElement {
+        attribute componentRole : ComponentRoleKind;
         attribute responsibility : String;
         attribute decompositionLevel : String;
         attribute safetyPartition : String;
-    }
-
-    part def LogicalSystem specializes LogicalComponent {
+        // system / subsystem
         attribute systemBoundaryDescription : String;
-    }
-    part def LogicalSubsystem specializes LogicalComponent;
-
-    // A processing/transport path with a safety role. Two channels claiming
-    // independence must be linked by IndependentOf with its basis stated.
-    part def LogicalChannel specializes LogicalComponent {
-        attribute channelRole : ChannelRoleKind;
+        // channel (safety role + diversity)
+        attribute channelRole : ChannelRoleKind[0..1];
         attribute diversityBasis : String;
-    }
-    part def LogicalDataStore specializes LogicalComponent {
+        // data store
         attribute persistenceRequirement : String;
         attribute integrityRequirement : String;
-    }
-    part def LogicalControlElement specializes LogicalComponent {
+        // control element
         attribute controlLaw : String;
         attribute controlledVariable : String;
-    }
-    part def LogicalUserInterface specializes LogicalComponent {
+        // user interface
         attribute interactionSummary : String;
-    }
-    part def LogicalExternalSystem specializes LogicalComponent {
+        // external system
         attribute externalOwner : String;
     }
 
@@ -123,23 +133,15 @@ package memo_architecture_logical_structure {
         attribute containmentRationale : String;
     }
 
-    connection def ComposesLogical :> MemoRelationship {
-        end parent : LogicalComponent;
-        end child : LogicalComponent;
-    }
     // Claimed independence between channels (common-cause defense).
     connection def IndependentOf :> MemoRelationship {
         attribute independenceBasis : String;
-        end channel : LogicalChannel;
-        end otherChannel : LogicalChannel;
+        end channel : LogicalComponent;
+        end otherChannel : LogicalComponent;
     }
     connection def MonitorsChannel :> MemoRelationship {
-        end monitorChannel : LogicalChannel;
+        end monitorChannel : LogicalComponent;
         end monitoredComponent : LogicalComponent;
-    }
-    connection def ContainsComponent :> MemoRelationship {
-        end region : FaultContainmentRegion;
-        end containedComponent : LogicalComponent;
     }
     connection def ExhibitsMode :> MemoRelationship {
         end component : LogicalComponent;

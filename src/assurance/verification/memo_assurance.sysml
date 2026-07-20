@@ -41,15 +41,7 @@ package memo_assurance_verification {
 
     // Operational validation confirms the user's goal is achieved in the
     // use environment (§5): ValidationCase validates a UseCase.
-    connection def ValidatesUseCase :> MemoRelationship {
-        end validationCase : ValidationCase;
-        end validatedUseCase : UseCase;
-    }
     // Safety-critical functions must trace to verification (rules/coverage).
-    connection def VerifiesFunction :> MemoRelationship {
-        end verificationCase : VerificationCase;
-        end verifiedFunction : SystemFunction;
-    }
     connection def ExecutesScenario :> MemoRelationship {
         end verificationCase : VerificationCase;
         end scenario : MemoScenario;

@@ -56,7 +56,7 @@ package memo_rules_closure {
 
     constraint def sysReqTraceRule {
         attribute id = "CR-MED-010";
-        attribute appliesTo = "SystemRequirement";
+        attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Requirements shall be traceable to stakeholder needs per ISO 13485.";
         attribute predicateExpression = "derivesFrom->size() >= 1";
@@ -65,7 +65,7 @@ package memo_rules_closure {
 
     constraint def swReqTraceRule {
         attribute id = "CR-MED-011";
-        attribute appliesTo = "SoftwareRequirement";
+        attribute appliesTo = "Requirement[requirementKind=software]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Software requirements derive from system requirements per IEC 62304.";
         attribute predicateExpression = "derivesFrom->size() >= 1";

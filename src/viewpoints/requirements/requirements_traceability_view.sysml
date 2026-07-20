@@ -20,7 +20,7 @@ package memo_viewpoints_requirements_requirements_traceability_view {
     part :>> selectionQuery {
         attribute :>> id = "QRY-REQ-001";
         attribute :>> name = "RequirementsTraceabilityQuery";
-        attribute :>> includeElementKinds = ("StakeholderNeed", "Requirement", "SystemRequirement", "SoftwareRequirement", "HardwareRequirement");
+        attribute :>> includeElementKinds = ("Need", "Requirement");
         attribute :>> includeLayers = ("requirements");
         attribute :>> rationaleText = "Auto-populate requirements traceability from the requirements layer.";
     }

@@ -84,14 +84,6 @@ package memo_workflows {
         end workflow : OperationalWorkflow;
         end useCase : UseCase;
     }
-    connection def ImplementsProcedure :> MemoRelationship {
-        end workflow : OperationalWorkflow;
-        end procedure : ClinicalProcedure;
-    }
-    connection def WorkflowComprisesStep :> MemoRelationship {
-        end workflow : OperationalWorkflow;
-        end step : WorkflowStep;
-    }
     connection def StepPrecedes :> MemoRelationship {
         attribute guardCondition : String;
         end predecessor : WorkflowStep;
@@ -119,8 +111,4 @@ package memo_workflows {
         end sourceStep : WorkflowStep;
     }
     // The device or system whose introduction enables a workflow.
-    connection def EnablesWorkflow :> MemoRelationship {
-        end enablingSystem : MemoPart;
-        end enabledWorkflow : OperationalWorkflow;
-    }
 }
