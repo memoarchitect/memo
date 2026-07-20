@@ -51,7 +51,7 @@ package memo_scenarios {
     // or invariants differ (OperativeScenario here; FunctionalScenario in
     // memo_functions; UIScenario in memo_interaction;
     // VerificationScenario / ThreatScenario in assurance packages).
-    part def MemoScenario specializes MemoPart {
+    abstract part def MemoScenario specializes MemoPart {
         attribute variantKind : ScenarioVariantKind;
         attribute operationalCondition : OperationalConditionKind;
         attribute scenarioPurpose : ScenarioPurposeKind[0..*];
