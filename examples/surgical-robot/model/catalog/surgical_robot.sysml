@@ -9,7 +9,7 @@ package memo_examples_surgical_robot {
     private import memo_medical_products_definitions::*;
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_hardware_structure::*;
-    private import memo_interaction::*;
+    private import memo_architecture_ui::*;
 
     part robotDef : MedicalDeviceDefinition {
         attribute :>> id = "SR-DEF-001"; attribute :>> name = "TeleSurgicalRobot_T1";
@@ -21,11 +21,11 @@ package memo_examples_surgical_robot {
     }
 
     // Control channels: primary + diverse monitor, with declared independence.
-    part chMotionPrimary : LogicalChannel {
+    part chMotionPrimary : LogicalComponent {
         attribute :>> id = "SR-LC-001"; attribute :>> name = "MotionControlChannel";
         attribute :>> channelRole = ChannelRoleKind::primary;
     }
-    part chMotionMonitor : LogicalChannel {
+    part chMotionMonitor : LogicalComponent {
         attribute :>> id = "SR-LC-002"; attribute :>> name = "MotionMonitorChannel";
         attribute :>> channelRole = ChannelRoleKind::monitor;
         attribute :>> diversityBasis = "independent encoder set and diverse processor family";
@@ -36,7 +36,7 @@ package memo_examples_surgical_robot {
     connection : MonitorsChannel connect monitorChannel ::> chMotionMonitor to monitoredComponent ::> chMotionPrimary;
 
     // Interlock: instrument exchange blocked while arm is in motion.
-    part chExchangeInterlock : LogicalChannel {
+    part chExchangeInterlock : LogicalComponent {
         attribute :>> id = "SR-LC-003"; attribute :>> name = "InstrumentExchangeInterlock";
         attribute :>> channelRole = ChannelRoleKind::interlock;
     }
@@ -60,7 +60,7 @@ package memo_examples_surgical_robot {
     }
 
     // Surgeon console: haptic feedback element.
-    part elHapticGrip : PhysicalControl {
+    part elHapticGrip : UIElement {
         attribute :>> id = "SR-UI-001"; attribute :>> name = "HapticMasterGrip";
         attribute :>> formKind = UIElementFormKind::hapticIndicator;
         attribute :>> guardedAgainstInadvertentActuation = true;

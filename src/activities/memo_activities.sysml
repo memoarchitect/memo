@@ -80,18 +80,6 @@ package memo_activities {
         ref scenario : MemoPart[0..1];
     }
 
-    connection def ActivityComprisesTask :> MemoRelationship {
-        end activity : OperationalActivity;
-        end task : UserTask;
-    }
-    connection def TaskComprisesStep :> MemoRelationship {
-        end task : UserTask;
-        end step : ClinicalTaskStep;
-    }
-    connection def PerformsActivity :> MemoRelationship {
-        end performer : Actor;
-        end activity : OperationalActivity;
-    }
     connection def PartOfProcedure :> MemoRelationship {
         end activity : OperationalActivity;
         end procedure : ClinicalProcedure;

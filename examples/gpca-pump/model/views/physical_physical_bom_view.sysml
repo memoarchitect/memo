@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_model_views_physical_physical_bom_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-PHY-101";
             attribute :>> name = "GPCA_PhysicalBomQuery";
-            attribute :>> includeElementKinds = ("HardwareAssembly", "ProcessingNode", "PhysicalPort", "HardwareInterface");
+            attribute :>> includeElementKinds = ("HardwareAssembly", "ProcessingNode", "PhysicalPort", "Interface");
             attribute :>> includeLayers = ("hardware_structure", "physical", "interfaces");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the physical BOM from the hardware and physical layers.";

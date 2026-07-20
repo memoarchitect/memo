@@ -17,7 +17,7 @@ package memo_medical_device_library {
     public import memo_workflows::*;
     public import memo_scenarios::*;
     public import memo_assurance_human_factors::*;
-    public import memo_interaction::*;
+    public import memo_architecture_ui::*;
     public import memo_architecture_operational::*;
     public import memo_assurance_requirements::*;
     public import memo_architecture_functions::*;

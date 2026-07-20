@@ -37,10 +37,6 @@ package memo_architecture_deployment {
         end deploymentUnit : DeploymentUnit;
         end node : ProcessingNode;
     }
-    connection def HostsRuntime :> MemoRelationship {
-        end node : ProcessingNode;
-        end runtimeComponent : SoftwareComponent;
-    }
     connection def ProvidesEnvironment :> MemoRelationship {
         end node : ProcessingNode;
         end environment : RuntimeEnvironment;
@@ -74,7 +70,7 @@ package memo_architecture_deployment {
         attribute analysisPurpose : String;
         ref sourceFunction : SystemFunction[0..1];
         ref sinkFunction : SystemFunction[0..1];
-        ref logicalSegments : LogicalChannel[0..*];
+        ref logicalSegments : LogicalComponent[0..*];
         // Runtime C&C components (SEI) — the elements actually bound to hardware.
         ref softwareSegments : SoftwareComponent[0..*];
         ref hostNodes : ProcessingNode[0..*];

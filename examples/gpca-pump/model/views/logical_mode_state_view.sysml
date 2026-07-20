@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_model_views_logical_mode_state_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-BHV-101";
             attribute :>> name = "GPCA_ModeStateQuery";
-            attribute :>> includeElementKinds = ("BehaviorMachine", "ModeState", "Transition", "BehaviorProperty", "TimingConstraint");
+            attribute :>> includeElementKinds = ("StateMachine", "ModeState", "Transition", "BehaviorProperty", "TimingConstraint");
             attribute :>> includeLayers = ("behavior");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the mode state view from the behavior layer.";

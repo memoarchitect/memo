@@ -33,7 +33,8 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> environment = "sterile laparoscopic operating field";
         attribute :>> connectedUse = false;
     }
-    requirement needControlledGastricResection : ClinicalUserNeed {
+    requirement needControlledGastricResection : Need {
+        attribute :>> needKind = NeedKind::clinicalUser;
         attribute :>> needId = "LSG-N-001";
         attribute :>> statement = "The surgical team needs to perform gastric resection with controlled anatomy, haemostasis, and a checked staple line.";
     }
@@ -85,11 +86,11 @@ package memo_examples_surgical_closure_workflow {
     action stCreateStapleLine : ClinicalTaskStep { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; attribute :>> stepOrder = 2; }
     action stInspectBleeding : ClinicalTaskStep { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; attribute :>> stepOrder = 3; }
     action stAssessIntegrity : ClinicalTaskStep { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; attribute :>> stepOrder = 4; }
-    connection : ActivityComprisesTask connect activity ::> actSizeAndCreateSleeve to task ::> taskCreateStapleLine;
-    connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stConfirmAnatomy;
-    connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stCreateStapleLine;
-    connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stInspectBleeding;
-    connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stAssessIntegrity;
+    connection : Composes connect parent ::> actSizeAndCreateSleeve to child ::> taskCreateStapleLine;
+    connection : Composes connect parent ::> taskCreateStapleLine to child ::> stConfirmAnatomy;
+    connection : Composes connect parent ::> taskCreateStapleLine to child ::> stCreateStapleLine;
+    connection : Composes connect parent ::> taskCreateStapleLine to child ::> stInspectBleeding;
+    connection : Composes connect parent ::> taskCreateStapleLine to child ::> stAssessIntegrity;
 
     action wfSleeveGastrectomy : OperationalWorkflow {
         attribute :>> id = "LSG-WF-001";
@@ -105,13 +106,13 @@ package memo_examples_surgical_closure_workflow {
     action wsAssess : WorkflowStep { attribute :>> stepOrder = 5; ref :>> performedActivity = actAssessStapleLine; }
     action wsClose : WorkflowStep { attribute :>> stepOrder = 6; ref :>> performedActivity = actExtractSpecimenAndClose; }
     action wsHandover : WorkflowStep { attribute :>> stepOrder = 7; ref :>> performedActivity = actHandover; }
-    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsTimeOut;
-    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsAccess;
-    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsMobilize;
-    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsSleeve;
-    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsAssess;
-    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsClose;
-    connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsHandover;
+    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsTimeOut;
+    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsAccess;
+    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsMobilize;
+    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsSleeve;
+    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsAssess;
+    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsClose;
+    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsHandover;
     connection : StepPrecedes connect predecessor ::> wsTimeOut to successor ::> wsAccess;
     connection : StepPrecedes connect predecessor ::> wsAccess to successor ::> wsMobilize;
     connection : StepPrecedes connect predecessor ::> wsMobilize to successor ::> wsSleeve;
@@ -119,7 +120,7 @@ package memo_examples_surgical_closure_workflow {
     connection : StepPrecedes connect predecessor ::> wsAssess to successor ::> wsClose;
     connection : StepPrecedes connect predecessor ::> wsClose to successor ::> wsHandover;
     connection : SupportsUseCase connect workflow ::> wfSleeveGastrectomy to useCase ::> ucPerformSleeveGastrectomy;
-    connection : ImplementsProcedure connect workflow ::> wfSleeveGastrectomy to procedure ::> procSleeveGastrectomy;
+    connection : Realizes connect realizing ::> wfSleeveGastrectomy to realized ::> procSleeveGastrectomy;
 
     // ── Scenario paths, each with its own activity/action flow ──
     action oaCompleteSleeveProcedure : OperationalActivity {
@@ -152,8 +153,8 @@ package memo_examples_surgical_closure_workflow {
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaControlStapleLineBleeding;
     }
-    connection : ScenarioRealizesUseCase connect scenario ::> scNominalSleeveProcedure to useCase ::> ucPerformSleeveGastrectomy;
-    connection : ScenarioRealizesUseCase connect scenario ::> scStapleLineBleeding to useCase ::> ucPerformSleeveGastrectomy;
-    connection : ScenarioComprisesActivity connect scenario ::> scNominalSleeveProcedure to activity ::> oaCompleteSleeveProcedure;
-    connection : ScenarioComprisesActivity connect scenario ::> scStapleLineBleeding to activity ::> oaControlStapleLineBleeding;
+    connection : Realizes connect realizing ::> scNominalSleeveProcedure to realized ::> ucPerformSleeveGastrectomy;
+    connection : Realizes connect realizing ::> scStapleLineBleeding to realized ::> ucPerformSleeveGastrectomy;
+    connection : Composes connect parent ::> scNominalSleeveProcedure to child ::> oaCompleteSleeveProcedure;
+    connection : Composes connect parent ::> scStapleLineBleeding to child ::> oaControlStapleLineBleeding;
 }

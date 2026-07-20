@@ -8,14 +8,16 @@ processor without rewriting the safety case.
 
 ## Requirements
 
-Choose the kind that matches the level of the claim:
+There is one `Need` definition and one `Requirement` definition; the
+`needKind` / `requirementKind` attribute records the level of the claim, so
+choose the kind value that matches:
 
-| Kind | Appropriate claim |
+| Definition and kind | Appropriate claim |
 |---|---|
-| `StakeholderNeed` and the needs hierarchy | Desired outcome in stakeholder language (see [The Operational World](operational-world.md)) |
-| `SystemRequirement` | Externally observable system behavior or constraint |
-| `SoftwareRequirement` / `HardwareRequirement` | Behavior or constraint allocated to one realization |
-| `DesignControlNeed` / `DesignControlSpecification` | Controlled design inputs and outputs |
+| `Need` (needKind: stakeholder, user, clinicalUser, patientUser, business, service, regulatory, operational) | Desired outcome in stakeholder language (see [The Operational World](operational-world.md)) |
+| `Requirement` (requirementKind: system) | Externally observable system behavior or constraint |
+| `Requirement` (requirementKind: software / hardware) | Behavior or constraint allocated to one realization |
+| `Need` (needKind: designControl) / `Requirement` (requirementKind: designControl, systemSpecification, softwareSpecification, hardwareSpecification) | Controlled design inputs and outputs |
 
 A strong requirement has a stable identifier, one principal obligation,
 observable acceptance criteria, and a source or rationale. MEMO's EARS and
@@ -23,13 +25,14 @@ obligation attributes let tools lint the pattern.
 
 ## Logical architecture: organization without technology
 
-The logical layer holds responsibility structure: `LogicalSystem`,
-`LogicalSubsystem`, `LogicalComponent`, plus the safety-architecture
-vocabulary — `LogicalChannel` with a typed role (primary, secondary,
+The logical layer holds responsibility structure in one `LogicalComponent`
+definition whose `componentRole` gives its place — system, subsystem,
+channel, dataStore, controlElement, userInterface, or externalSystem — plus
+the safety-architecture vocabulary: a `LogicalComponent` with
+`componentRole = channel` carries a typed `channelRole` (primary, secondary,
 redundant, diverse, monitor, watchdog, interlock, independent protection),
-`LogicalControlElement`, `LogicalDataStore`, `LogicalUserInterface`,
-`IsolationBoundary`, and `FaultContainmentRegion`. Two design rules follow
-from the reasoning, and both are checked:
+alongside `IsolationBoundary` and `FaultContainmentRegion`. Two design rules
+follow from the reasoning, and both are checked:
 
 - **Redundancy is roles plus independence.** Two channels claiming
   independence are linked by `IndependentOf` with the basis stated (separate
@@ -53,7 +56,7 @@ because "physical" means more than a circuit board.
 
 | Concern | Element examples |
 |---|---|
-| Logical responsibility | `LogicalComponent`, `LogicalChannel`, `IsolationBoundary` |
+| Logical responsibility | `LogicalComponent` (componentRole: system…channel), `IsolationBoundary` |
 | Software module view | `SoftwareSystem`, `SoftwareItem`, `SoftwareUnit`, `SOUPComponent` |
 | Software runtime view | `RuntimeComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` |
 | Deployment | `DeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` |
@@ -62,13 +65,13 @@ because "physical" means more than a circuit board.
 
 ```mermaid
 flowchart LR
-    Need[StakeholderNeed] --> Req[SystemRequirement]
+    Need[Need: stakeholder] --> Req[Requirement: system]
     Req --> Function[SystemFunction]
     Function -->|AllocatedTo| Logical[LogicalComponent]
-    Logical -->|RealizesLogical| Module[SoftwareItem]
+    Logical -->|Realizes| Module[SoftwareItem]
     Module -->|BuildsInto| Unit[DeploymentUnit]
     Unit -->|DeploysTo| Node[ProcessingNode]
-    Logical -->|PhysicalRealizesLogical| Mech[MechanicalPart]
+    Logical -->|Realizes| Mech[MechanicalPart]
 ```
 
 The `embedded-infusion-pump` example shows the three software views on one
@@ -77,9 +80,9 @@ software *and* mechanics at once — the reason the layers must not collapse.
 
 ## Behavior
 
-Use `BehaviorMachine`, `ModeState`, `Transition`, and `TimingConstraint` when
+Use `StateMachine`, `ModeState`, `Transition`, and `TimingConstraint` when
 order, state, or timing matters, and keep device modes distinct from UI states
-(`memo_interaction`) — a confirmation screen is not a therapy mode.
+(`memo_architecture_ui`) — a confirmation screen is not a therapy mode.
 
 ## Continue the story
 

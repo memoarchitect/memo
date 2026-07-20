@@ -4,20 +4,20 @@ package memo_methodology_core {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
 
-    part def MethodologyLibrary :> TraceableElement {
+    part def MethodologyLibrary :> MemoPart {
         attribute version : String;
         attribute domain : String;
         attribute :>> description : String;
     }
 
-    part def MethodologyDefinition :> TraceableElement {
+    part def MethodologyDefinition :> MemoPart {
         attribute version : String;
         attribute domain : String;
         attribute :>> description : String;
         attribute baseMethodName : String;
     }
 
-    part def ResolvedMethodology :> TraceableElement {
+    part def ResolvedMethodology :> MemoPart {
         attribute version : String;
         // Risk-proportionate scope keyed to the device's software safety
         // classification (IEC 62304 A/B/C) and lifecycle stage — not a
@@ -28,11 +28,11 @@ package memo_methodology_core {
         attribute resolutionSummary : String;
     }
 
-    part def ProjectMethodBinding :> TraceableElement {
+    part def ProjectMethodBinding :> MemoPart {
         attribute projectName : String;
     }
 
-    part def DhfDocumentBinding :> TraceableElement {
+    part def DhfDocumentBinding :> MemoPart {
         attribute documentTitle : String;
         attribute groupLabel : String;
         attribute templateId : String;
@@ -42,7 +42,7 @@ package memo_methodology_core {
         attribute required : Boolean;
     }
 
-    part def Archetype :> TraceableElement {
+    part def Archetype :> MemoPart {
         attribute label : String;
         attribute :>> description : String;
         attribute category : String;

@@ -71,7 +71,7 @@ action wfReprocess : OperationalWorkflow {
     attribute :>> entryCondition = "used instrument received in decontamination";
     attribute :>> completionCondition = "sterile pack released to storage";
 }
-connection : WorkflowComprisesStep connect workflow ::> wfReprocess to step ::> wsClean;
+connection : Composes connect parent ::> wfReprocess to child ::> wsClean;
 connection : StepPrecedes connect predecessor ::> wsClean to successor ::> wsInspect;
 connection : StepPrecedes connect predecessor ::> wsInspect to successor ::> wsSterilize;
 ```

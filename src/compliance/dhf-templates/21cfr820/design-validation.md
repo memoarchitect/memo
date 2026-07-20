@@ -43,7 +43,7 @@ empty: "No validation activities defined."
 Coverage of user needs by validation activities, computed live from the model:
 
 ```memo-query
-kind: [StakeholderNeed, Requirement]
+kind: [Need, Requirement]
 display: table
 columns: name, layer, doc
 empty: "No user needs defined."

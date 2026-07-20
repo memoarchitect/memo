@@ -81,8 +81,8 @@ model becomes more detailed.
 ## 1. Clinical need
 
 Create `temperature_alarm.sysml` with this initial content. The `Actor` names
-the person in the scenario; the `StakeholderNeed` records that person’s desired
-clinical outcome.
+the person in the scenario; the `Need` (needKind: stakeholder) records that
+person’s desired clinical outcome.
 
 ```sysml
 // temperature_alarm.sysml
@@ -97,9 +97,10 @@ package temperature_alarm {
     }
 
     // The clinician's clinical goal for the monitored patient.
-    requirement maintainSafePatientTemperature : StakeholderNeed {
+    requirement maintainSafePatientTemperature : Need {
         attribute :>> id = "NEED-001";
         attribute :>> name = "MaintainSafePatientTemperature";
+        attribute :>> needKind = NeedKind::stakeholder;
         attribute :>> statement =
             "The clinician needs to maintain the patient's temperature within a safe range.";
     }
@@ -138,9 +139,9 @@ workflow; the scenario records the event that makes the workflow relevant.
     }
 
     // The workflow direction: observe status, then respond to the alert.
-    connection : SequencesStep
-        connect activity ::> monitorTemperatureStatus
-        to nextActivity ::> respondToTemperatureAlert;
+    connection : Precedes
+        connect predecessor ::> monitorTemperatureStatus
+        to successor ::> respondToTemperatureAlert;
 ```
 
 This workflow describes people and clinical work. It gives the next layer a
@@ -183,9 +184,10 @@ Add this snippet above the closing `}`. It uses the **event-driven EARS** form:
 
 ```sysml
     // A testable EARS requirement extracted from the evaluation function.
-    requirement alarmAboveLimit : SystemRequirement {
+    requirement alarmAboveLimit : Requirement {
         attribute :>> id = "REQ-001";
         attribute :>> name = "AlarmAboveLimit";
+        attribute :>> requirementKind = RequirementKind::system;
         attribute :>> statement =
             "When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds.";
         attribute :>> notation = RequirementNotationKind::ears;
@@ -315,9 +317,10 @@ package temperature_alarm {
     }
 
     // The clinician's clinical goal for the monitored patient.
-    requirement maintainSafePatientTemperature : StakeholderNeed {
+    requirement maintainSafePatientTemperature : Need {
         attribute :>> id = "NEED-001";
         attribute :>> name = "MaintainSafePatientTemperature";
+        attribute :>> needKind = NeedKind::stakeholder;
         attribute :>> statement =
             "The clinician needs to maintain the patient's temperature within a safe range.";
     }
@@ -345,9 +348,9 @@ package temperature_alarm {
     }
 
     // The workflow direction: observe status, then respond to the alert.
-    connection : SequencesStep
-        connect activity ::> monitorTemperatureStatus
-        to nextActivity ::> respondToTemperatureAlert;
+    connection : Precedes
+        connect predecessor ::> monitorTemperatureStatus
+        to successor ::> respondToTemperatureAlert;
 
     // Determines whether the measured temperature is inside the safe range.
     part evaluateTemperature : SystemFunction {
@@ -362,9 +365,10 @@ package temperature_alarm {
     }
 
     // A testable EARS requirement extracted from the evaluation function.
-    requirement alarmAboveLimit : SystemRequirement {
+    requirement alarmAboveLimit : Requirement {
         attribute :>> id = "REQ-001";
         attribute :>> name = "AlarmAboveLimit";
+        attribute :>> requirementKind = RequirementKind::system;
         attribute :>> statement =
             "When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds.";
         attribute :>> notation = RequirementNotationKind::ears;

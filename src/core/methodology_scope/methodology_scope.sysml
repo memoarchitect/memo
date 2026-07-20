@@ -7,27 +7,27 @@ package memo_core_methodology_scope {
     private import memo_core_common::*;
     private import memo_core_dimensions::*;
 
-    part def MethodologyLayerSet specializes TraceableElement {
+    part def MethodologyLayerSet specializes MemoPart {
         attribute setName : String;
         attribute layer : String;
     }
 
-    part def MethodologyStandardSet specializes TraceableElement {
+    part def MethodologyStandardSet specializes MemoPart {
         attribute setName : String;
         attribute standardReference : String;
     }
 
-    part def MethodologyArtifactSet specializes TraceableElement {
+    part def MethodologyArtifactSet specializes MemoPart {
         attribute setName : String;
         attribute artifactKind : String;
     }
 
-    part def MethodologyViewpointTypeSet specializes TraceableElement {
+    part def MethodologyViewpointTypeSet specializes MemoPart {
         attribute setName : String;
         attribute viewpointType : String;
     }
 
-    part def MethodologyScope specializes TraceableElement {
+    part def MethodologyScope specializes MemoPart {
         attribute scopeName : String;
         attribute includedArchLayer : String;
         attribute includedStandard : String;
@@ -36,7 +36,7 @@ package memo_core_methodology_scope {
         attribute excludedKind : String;
     }
 
-    part def ElementKindAlias specializes TraceableElement {
+    part def ElementKindAlias specializes MemoPart {
         attribute methodTerm : String;
         attribute concreteKind : String;
         attribute concreteOntology : String;

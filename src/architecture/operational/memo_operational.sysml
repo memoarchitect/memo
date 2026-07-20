@@ -23,20 +23,8 @@ package memo_architecture_operational {
         attribute latencyConstraint : String;
     }
 
-    connection def Performs :> MemoRelationship {
-        end entity : OperationalEntity;
-        end activity : OperationalActivity;
-    }
     connection def ContributesToCapability :> MemoRelationship {
         end activity : OperationalActivity;
         end capability : OperationalCapability;
-    }
-    connection def SequencesStep :> MemoRelationship {
-        end activity : OperationalActivity;
-        end nextActivity : OperationalActivity;
-    }
-    connection def DerivesSystemNeed :> MemoRelationship {
-        end activity : OperationalActivity;
-        end systemNeed : VerifiableElement;
     }
 }

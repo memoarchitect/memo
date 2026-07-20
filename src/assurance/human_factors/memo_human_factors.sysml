@@ -51,8 +51,4 @@ package memo_assurance_human_factors {
         end evaluation : MemoEvidence;
         end task : UserTask;
     }
-    connection def ValidatesCriticalTask :> MemoRelationship {
-        end usabilityValidation : UsabilityValidation;
-        end criticalTask : CriticalTask;
-    }
 }

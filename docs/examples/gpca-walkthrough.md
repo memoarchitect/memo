@@ -97,7 +97,7 @@ flowchart LR
     Scenario --> Chain[FunctionalFlow: patient bolus]
     Chain --> Limit[SystemFunction: enforce limits]
     Limit --> IM[SoftwareComponent: Infusion_Manager]
-    Limit --> Req[SystemRequirement: lockout]
+    Limit --> Req[Requirement: lockout]
     Req --> VC[VerificationCase: lockout test]
     VC --> Ev[Evidence: test report]
 ```

@@ -28,7 +28,7 @@ package memo_examples_connected_patient_monitor {
         attribute :>> id = "CPM-LC-002"; attribute :>> name = "WardGateway";
         attribute :>> responsibility = "Aggregate device data; bridge device LAN to hospital network.";
     }
-    part lcCdrService : LogicalExternalSystem {
+    part lcCdrService : LogicalComponent {
         attribute :>> id = "CPM-LC-003"; attribute :>> name = "ClinicalDataRepository";
         attribute :>> externalOwner = "hospital IT";
     }
@@ -64,7 +64,7 @@ package memo_examples_connected_patient_monitor {
 
     // Network interface with cybersecurity properties; trust boundary at the
     // hospital network edge.
-    interface ifHl7Feed : EthernetInterface {
+    interface ifHl7Feed : Interface {
         attribute :>> id = "CPM-IF-001"; attribute :>> name = "GatewayToCdrFeed";
         attribute :>> protocol = "HL7 FHIR REST over TLS 1.3";
         attribute :>> securityCriticality = CriticalityKind::high;

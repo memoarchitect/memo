@@ -6,7 +6,7 @@ package memo_core_consistency_rules {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
 
-    part def ConsistencyRule specializes TraceableElement {
+    part def ConsistencyRule specializes MemoPart {
         attribute appliesTo : String;
         attribute predicate : RulePredicateKind;
         attribute strength : RuleStrengthKind;

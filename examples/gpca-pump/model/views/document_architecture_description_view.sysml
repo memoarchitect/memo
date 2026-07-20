@@ -22,7 +22,7 @@ package memo_examples_gpca_pump_model_views_document_architecture_description_vi
             attribute :>> id = "QRY-DOC-005";
             attribute :>> name = "architectureDescriptionViewQuery";
             attribute :>> includeElementKinds = ("LogicalComponent", "SystemFunction", "ComponentExchange", "SoftwareSystem", "SoftwareModule", "HardwareAssembly", "ProcessingNode", "PhysicalPort", "FunctionalFlow", "FunctionalFlowStep");
-            attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "AllocatesExchange", "RealizesInterface", "BindsToInterface", "InvolvesFunction", "SequencesStep", "DeploysOnto", "HostedBy");
+            attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "Realizes", "BindsToInterface", "InvolvesFunction", "Precedes", "DeploysTo", "HostedBy");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
     }

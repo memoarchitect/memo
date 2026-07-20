@@ -64,24 +64,24 @@ package memo_rules_coverage {
 
     constraint def iec62304SwReqCoverage {
         attribute id = "COV-62304-002";
-        attribute appliesTo = "SoftwareRequirement";
+        attribute appliesTo = "Requirement[requirementKind=software]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 clause 5.2 requires software requirements specification.";
         attribute standardReference = "IEC 62304";
         attribute clause = "5.2";
-        attribute coverageTarget = "SoftwareRequirement";
+        attribute coverageTarget = "Requirement[requirementKind=software]";
     }
 
     // ─── FDA 21 CFR 820: Quality System ──────────────────────────────────
 
     constraint def fda820DesignInputCoverage {
         attribute id = "COV-820-001";
-        attribute appliesTo = "SystemRequirement";
+        attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "21 CFR 820.30(c) requires design inputs including requirements.";
         attribute standardReference = "FDA 21 CFR 820";
         attribute clause = "820.30(c)";
-        attribute coverageTarget = "SystemRequirement";
+        attribute coverageTarget = "Requirement[requirementKind=system]";
     }
 
     constraint def fda820DesignVerificationCoverage {
@@ -98,12 +98,12 @@ package memo_rules_coverage {
 
     constraint def iso13485StakeholderNeedCoverage {
         attribute id = "COV-13485-001";
-        attribute appliesTo = "StakeholderNeed";
+        attribute appliesTo = "Need[needKind=stakeholder]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "ISO 13485 clause 7.2 requires determination of customer requirements.";
         attribute standardReference = "ISO 13485";
         attribute clause = "7.2";
-        attribute coverageTarget = "StakeholderNeed";
+        attribute coverageTarget = "Need[needKind=stakeholder]";
     }
 
     // ─── ISO 14155: Clinical Investigations ──────────────────────────────

@@ -56,7 +56,7 @@ registers.
 | Element | Role |
 |---|---|
 | `VerificationCase` / `VerificationScenario` | Shows a design output meets a specified input, and the path exercised |
-| `ValidationCase` | Shows the device meets user needs and intended use — `ValidatesUseCase` closes the loop to the operational world |
+| `ValidationCase` | Shows the device meets user needs and intended use — `Validates` closes the loop to the operational world |
 | `UsabilityValidation` | Summative evaluation of critical tasks |
 | `Evidence` / `TestArtifact` | Reviewable support for a claim |
 

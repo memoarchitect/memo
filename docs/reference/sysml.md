@@ -10,7 +10,7 @@ describe historical migrations.
 
 | SysML file | Package | Public definitions |
 | --- | --- | --- |
-| `src/core/common/memo_common.sysml` | `memo_core_common` | `IdentifiedElement`, `TraceableElement`, `MemoPart`, `RequirementDriver` |
+| `src/core/common/memo_common.sysml` | `memo_core_common` | `MemoPart`, `RequirementDriver` |
 | `src/core/enumerations/memo_enumerations.sysml` | `memo_core_enumerations` | shared controlled value sets |
 | `src/core/relationships/memo_relationships.sysml` | `memo_core_relationships` | `MemoRelationship`, `DerivesFrom`, `SatisfiedBy`, `MitigatesHazard`, `VerifiedBy` |
 | `src/core/dimensions/dimensions.sysml` | `memo_core_dimensions` | perspectives, lifecycle stages, disciplines, and concerns |
@@ -53,7 +53,7 @@ describe historical migrations.
 | --- | --- | --- |
 | `src/medical_products/memo_product_definitions.sysml` | `memo_medical_products_definitions` | `MedicalDeviceDefinition`, `MedicalDevice`, `MedicalInstrument` |
 | `src/medical_products/memo_product_lifecycle.sysml` | `memo_medical_products_lifecycle` | reuse and sterilization classifications |
-| `src/medical_products/memo_product_usage.sysml` | `memo_medical_products_usage` | product roles, `UsesProduct`, `TaskUsesProduct` |
+| `src/medical_products/memo_product_usage.sysml` | `memo_medical_products_usage` | product roles, `UsesProduct` |
 | `src/interaction/memo_interaction.sysml` | `memo_interaction` | user interfaces, interaction elements, flows, and scenarios |
 | `src/assurance/human_factors/memo_human_factors.sysml` | `memo_assurance_human_factors` | `UseError`, `HazardRelatedUseScenario`, formative evaluation, usability validation |
 | `src/compliance/artifacts/memo_artifacts.sysml` | `memo_compliance_artifacts` | `ControlledArtifact` |

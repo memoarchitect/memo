@@ -179,10 +179,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     connection : SupportsUseCase connect workflow ::> wfPrepareAndStartTherapy to useCase ::> ucDeliverPcaTherapy;
     connection : SupportsUseCase connect workflow ::> wfManageActiveTherapy to useCase ::> ucDeliverPcaTherapy;
     connection : SupportsUseCase connect workflow ::> wfRespondToTherapyAlarm to useCase ::> ucDeliverPcaTherapy;
-    connection : WorkflowComprisesStep connect workflow ::> wfPrepareAndStartTherapy to step ::> wsProgram;
-    connection : WorkflowComprisesStep connect workflow ::> wfPrepareAndStartTherapy to step ::> wsStart;
-    connection : WorkflowComprisesStep connect workflow ::> wfManageActiveTherapy to step ::> wsRequestBolus;
-    connection : WorkflowComprisesStep connect workflow ::> wfRespondToTherapyAlarm to step ::> wsRespondAlarm;
+    connection : Composes connect parent ::> wfPrepareAndStartTherapy to child ::> wsProgram;
+    connection : Composes connect parent ::> wfPrepareAndStartTherapy to child ::> wsStart;
+    connection : Composes connect parent ::> wfManageActiveTherapy to child ::> wsRequestBolus;
+    connection : Composes connect parent ::> wfRespondToTherapyAlarm to child ::> wsRespondAlarm;
 
     // ── Scenario-owned operational activities and action flows ──
     action oaCompleteNominalTherapy : OperationalActivity {
@@ -311,16 +311,16 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaRecoverAfterPowerLoss;
     }
-    connection : ScenarioRealizesUseCase connect scenario ::> osNominalTherapy to useCase ::> ucDeliverPcaTherapy;
-    connection : ScenarioRealizesUseCase connect scenario ::> osLockoutBolus to useCase ::> ucDeliverPcaTherapy;
-    connection : ScenarioRealizesUseCase connect scenario ::> osOcclusionAlarm to useCase ::> ucDeliverPcaTherapy;
-    connection : ScenarioRealizesUseCase connect scenario ::> osAirInLine to useCase ::> ucDeliverPcaTherapy;
-    connection : ScenarioRealizesUseCase connect scenario ::> osEmptyReservoir to useCase ::> ucDeliverPcaTherapy;
-    connection : ScenarioRealizesUseCase connect scenario ::> osPowerLoss to useCase ::> ucDeliverPcaTherapy;
-    connection : ScenarioComprisesActivity connect scenario ::> osNominalTherapy to activity ::> oaCompleteNominalTherapy;
-    connection : ScenarioComprisesActivity connect scenario ::> osLockoutBolus to activity ::> oaRejectBolusDuringLockout;
-    connection : ScenarioComprisesActivity connect scenario ::> osOcclusionAlarm to activity ::> oaRespondToOcclusion;
-    connection : ScenarioComprisesActivity connect scenario ::> osAirInLine to activity ::> oaRespondToAirInLine;
-    connection : ScenarioComprisesActivity connect scenario ::> osEmptyReservoir to activity ::> oaReplaceEmptyReservoir;
-    connection : ScenarioComprisesActivity connect scenario ::> osPowerLoss to activity ::> oaRecoverAfterPowerLoss;
+    connection : Realizes connect realizing ::> osNominalTherapy to realized ::> ucDeliverPcaTherapy;
+    connection : Realizes connect realizing ::> osLockoutBolus to realized ::> ucDeliverPcaTherapy;
+    connection : Realizes connect realizing ::> osOcclusionAlarm to realized ::> ucDeliverPcaTherapy;
+    connection : Realizes connect realizing ::> osAirInLine to realized ::> ucDeliverPcaTherapy;
+    connection : Realizes connect realizing ::> osEmptyReservoir to realized ::> ucDeliverPcaTherapy;
+    connection : Realizes connect realizing ::> osPowerLoss to realized ::> ucDeliverPcaTherapy;
+    connection : Composes connect parent ::> osNominalTherapy to child ::> oaCompleteNominalTherapy;
+    connection : Composes connect parent ::> osLockoutBolus to child ::> oaRejectBolusDuringLockout;
+    connection : Composes connect parent ::> osOcclusionAlarm to child ::> oaRespondToOcclusion;
+    connection : Composes connect parent ::> osAirInLine to child ::> oaRespondToAirInLine;
+    connection : Composes connect parent ::> osEmptyReservoir to child ::> oaReplaceEmptyReservoir;
+    connection : Composes connect parent ::> osPowerLoss to child ::> oaRecoverAfterPowerLoss;
 }

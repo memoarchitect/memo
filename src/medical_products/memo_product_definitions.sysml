@@ -91,10 +91,6 @@ package memo_medical_products_definitions {
         end definition : MedicalDeviceDefinition;
     }
     // Links the modeled device to its physical/architecture realization.
-    connection def RealizedByArchitecture :> MemoRelationship {
-        end device : MedicalDevice;
-        end architectureElement : ArchitectureElement;
-    }
     connection def AccessoryOf :> MemoRelationship {
         end accessory : MedicalDeviceAccessory;
         end parentDevice : MedicalDevice;

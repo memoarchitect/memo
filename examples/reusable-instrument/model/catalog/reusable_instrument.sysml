@@ -76,7 +76,7 @@ package memo_examples_reusable_instrument {
     action wsClean : WorkflowStep { attribute :>> stepOrder = 1; ref :>> performedActivity = actClean; }
     action wsInspect : WorkflowStep { attribute :>> stepOrder = 2; ref :>> performedActivity = actInspect; }
     action wsSterilize : WorkflowStep { attribute :>> stepOrder = 3; ref :>> performedActivity = actSterilizeLoad; }
-    connection : WorkflowComprisesStep connect workflow ::> wfReprocess to step ::> wsClean;
+    connection : Composes connect parent ::> wfReprocess to child ::> wsClean;
     connection : StepPrecedes connect predecessor ::> wsClean to successor ::> wsInspect;
     connection : StepPrecedes connect predecessor ::> wsInspect to successor ::> wsSterilize;
     connection : SupportsUseCase connect workflow ::> wfReprocess to useCase ::> ucSterilize;
