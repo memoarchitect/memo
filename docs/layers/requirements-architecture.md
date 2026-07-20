@@ -77,7 +77,7 @@ software *and* mechanics at once — the reason the layers must not collapse.
 
 ## Behavior
 
-Use `BehaviorMachine`, `ModeState`, `Transition`, and `TimingConstraint` when
+Use `StateMachine`, `ModeState`, `Transition`, and `TimingConstraint` when
 order, state, or timing matters, and keep device modes distinct from UI states
 (`memo_interaction`) — a confirmation screen is not a therapy mode.
 

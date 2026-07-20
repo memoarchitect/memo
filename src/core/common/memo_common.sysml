@@ -29,7 +29,7 @@ package memo_core_common {
     // owning package (memo_architecture_* xor memo_assurance_*), enforced by
     // CR-ONT-045. The dimensions that remain are orthogonal to the axis:
     // realization stage, cross-cutting concern, and editorial status.
-    part def MemoPart specializes TraceableElement {
+    abstract part def MemoPart specializes TraceableElement {
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
         attribute realizationStage : RealizationStageKind[0..1];
@@ -42,8 +42,8 @@ package memo_core_common {
     // ─── Role bases retained from the original kernel, re-founded on
     //     MemoPart so all existing content inherits the dimensions. ───
     part def RequirementDriver specializes MemoPart;
-    part def VerifiableElement specializes MemoPart;
-    part def ArchitectureElement specializes MemoPart;
+    abstract part def VerifiableElement specializes MemoPart;
+    abstract part def ArchitectureElement specializes MemoPart;
     part def InterfaceElement specializes MemoPart;
     part def MemoEvidence specializes MemoPart;
 
@@ -138,7 +138,7 @@ package memo_core_common {
     // re-declare the identification core instead of specializing MemoPart
     // Transitions stay part-based to keep their traceable safety
     // attributes (id, sourceReference, priority, sameStepCritical).
-    state def MemoState {
+    abstract state def MemoState {
         attribute id : String;
         attribute name : String;
         attribute description : String;

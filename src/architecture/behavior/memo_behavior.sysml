@@ -7,9 +7,8 @@ package memo_architecture_behavior {
     // they derive from the MemoState foundation, not the part-based
     // ArchitectureElement. Transitions stay part-based (below) to keep their
     // traceable safety attributes.
-    // State-machine vocabulary. The historic name BehaviorMachine denotes a
-    // state machine; ModeState denotes a state owned by that model.
-    state def BehaviorMachine :> MemoState {
+    // State-machine vocabulary. ModeState denotes a state owned by this model.
+    state def StateMachine :> MemoState {
         attribute machineKind : String;
         attribute executionSemantics : String;
     }
