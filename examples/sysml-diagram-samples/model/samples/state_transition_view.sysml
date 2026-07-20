@@ -9,7 +9,7 @@ package memo_examples_sysml_diagram_samples_model_samples_state_transition_view 
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
-    state pumpModes : BehaviorMachine { attribute :>> name = "Pump Operating Modes"; }
+    state pumpModes : StateMachine { attribute :>> name = "Pump Operating Modes"; }
 
     state idle : ModeState { attribute :>> name = "Idle"; }
     state infusing : ModeState { attribute :>> name = "Infusing"; }
@@ -60,7 +60,7 @@ package memo_examples_sysml_diagram_samples_model_samples_state_transition_view 
         attribute :>> viewKind = DiagramViewKind::statetransition;
         attribute :>> diagramType = "stm";
         part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("BehaviorMachine", "ModeState", "Transition");
+            attribute :>> includeElementKinds = ("StateMachine", "ModeState", "Transition");
         }
     }
 
