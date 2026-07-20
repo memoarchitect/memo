@@ -69,7 +69,7 @@ package memo_examples_ivd_laboratory_system {
         attribute :>> id = "IVD-ACT-001"; attribute :>> name = "RunChemistryPanel";
         attribute :>> criticality = CriticalityKind::high;
     }
-    connection : UsesProduct connect usingActivity ::> actRunPanel to product ::> analyzer {
+    connection : UsesProduct connect using ::> actRunPanel to product ::> analyzer {
         attribute :>> productRole = ProductRoleKind::measurementInstrument;
         attribute :>> required = true;
         attribute :>> calibrationRequired = true;

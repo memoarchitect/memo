@@ -56,26 +56,26 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
 
     // ── Actor participation (use case view) ─────────────────────
-    connection : PerformsActivity connect performer ::> actorPrescriber to activity ::> oaPrescribe;
-    connection : PerformsActivity connect performer ::> actorPharmacist to activity ::> oaLoadReservoir;
-    connection : PerformsActivity connect performer ::> actorNurse to activity ::> oaProgram;
-    connection : PerformsActivity connect performer ::> actorNurse to activity ::> oaStartTherapy;
-    connection : PerformsActivity connect performer ::> actorNurse to activity ::> oaRespondAlarm;
-    connection : PerformsActivity connect performer ::> actorNurse to activity ::> oaReviewLog;
-    connection : PerformsActivity connect performer ::> actorPatient to activity ::> oaRequestBolus;
-    connection : PerformsActivity connect performer ::> actorTechnician to activity ::> oaMaintain;
+    connection : Performs connect performer ::> actorPrescriber to performed ::> oaPrescribe;
+    connection : Performs connect performer ::> actorPharmacist to performed ::> oaLoadReservoir;
+    connection : Performs connect performer ::> actorNurse to performed ::> oaProgram;
+    connection : Performs connect performer ::> actorNurse to performed ::> oaStartTherapy;
+    connection : Performs connect performer ::> actorNurse to performed ::> oaRespondAlarm;
+    connection : Performs connect performer ::> actorNurse to performed ::> oaReviewLog;
+    connection : Performs connect performer ::> actorPatient to performed ::> oaRequestBolus;
+    connection : Performs connect performer ::> actorTechnician to performed ::> oaMaintain;
 
     // ── Operational thread (therapy lifecycle) ──────────────────
-    connection : SequencesStep connect activity ::> oaPrescribe to nextActivity ::> oaLoadReservoir;
-    connection : SequencesStep connect activity ::> oaLoadReservoir to nextActivity ::> oaProgram;
-    connection : SequencesStep connect activity ::> oaProgram to nextActivity ::> oaStartTherapy;
-    connection : SequencesStep connect activity ::> oaStartTherapy to nextActivity ::> oaRequestBolus;
+    connection : Precedes connect predecessor ::> oaPrescribe to successor ::> oaLoadReservoir;
+    connection : Precedes connect predecessor ::> oaLoadReservoir to successor ::> oaProgram;
+    connection : Precedes connect predecessor ::> oaProgram to successor ::> oaStartTherapy;
+    connection : Precedes connect predecessor ::> oaStartTherapy to successor ::> oaRequestBolus;
     connection : ContributesToCapability connect activity ::> oaStartTherapy to capability ::> ocTitratedAnalgesia;
     connection : ContributesToCapability connect activity ::> oaRequestBolus to capability ::> ocTitratedAnalgesia;
     connection : ContributesToCapability connect activity ::> oaRespondAlarm to capability ::> ocFailSafeTherapy;
-    connection : DerivesSystemNeed connect activity ::> oaProgram to systemNeed ::> reqDrugLibraryLimits;
-    connection : DerivesSystemNeed connect activity ::> oaRequestBolus to systemNeed ::> reqCs25;
-    connection : DerivesSystemNeed connect activity ::> oaRespondAlarm to systemNeed ::> reqCs59;
+    connection : DerivesFrom connect sourceDriver ::> oaProgram to targetRequirement ::> reqDrugLibraryLimits;
+    connection : DerivesFrom connect sourceDriver ::> oaRequestBolus to targetRequirement ::> reqCs25;
+    connection : DerivesFrom connect sourceDriver ::> oaRespondAlarm to targetRequirement ::> reqCs59;
 
     // ── Functional chains ───────────────────────────────────────
     connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnAcquireSensors;
@@ -89,8 +89,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : InvolvesFunction connect functionalChain ::> fcAlarmStop to function ::> fnAnnunciate;
     connection : InvolvesFunction connect functionalChain ::> fcStartup to function ::> fnSelfTest;
     connection : InvolvesFunction connect functionalChain ::> fcStartup to function ::> fnPresentStatus;
-    connection : RealizesScenario connect functionalChain ::> fcPatientBolus to scenario ::> ssBolusDuringBasal;
-    connection : RealizesScenario connect functionalChain ::> fcAlarmStop to scenario ::> ssAlarmPause;
+    connection : Realizes connect realizing ::> fcPatientBolus to realized ::> ssBolusDuringBasal;
+    connection : Realizes connect realizing ::> fcAlarmStop to realized ::> ssAlarmPause;
     connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusSense;
     connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusValidate;
     connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusCommand;
@@ -351,17 +351,17 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : AllocatedTo connect function ::> fnSelfTest to allocatedElement ::> systemMonitor;
 
     // ── Deployment, hosting, and interface realization ──────────
-    connection : DeploysOnto connect softwareComponent ::> gpcaSoftware to hostAssembly ::> controllerBoard;
+    connection : DeploysTo connect deploymentUnit ::> gpcaSoftware to node ::> controllerBoard;
     connection : HostedBy connect processingNode ::> mainController to hostAssembly ::> controllerBoard;
-    connection : RealizesInterface connect logicalInterface ::> sensorInputInterface to physicalInterface ::> hwSoftwareBus;
-    connection : RealizesInterface connect logicalInterface ::> actuatorCommandInterface to physicalInterface ::> pumpMotorDrive;
+    connection : Realizes connect realized ::> sensorInputInterface to realizing ::> hwSoftwareBus;
+    connection : Realizes connect realized ::> actuatorCommandInterface to realizing ::> pumpMotorDrive;
     connection : BindsToInterface connect portElement ::> portPatientPendant to boundInterface ::> bolusButtonLine;
     connection : BindsToInterface connect portElement ::> portMotorDrive to boundInterface ::> pumpMotorDrive;
     connection : BindsToInterface connect portElement ::> portSensorHarness to boundInterface ::> occlusionAnalogLine;
-    connection : AllocatesExchange connect functionalFlow ::> lfSensorAcquisition to componentExchange ::> exSensorVector;
-    connection : AllocatesExchange connect functionalFlow ::> lfFlowCommand to componentExchange ::> exFlowCommand;
-    connection : AllocatesExchange connect functionalFlow ::> lfAlarmSignal to componentExchange ::> exAlarmAnnunciation;
-    connection : AllocatesExchange connect functionalFlow ::> lfPrescriptionEntry to componentExchange ::> exPrescriptionEntry;
+    connection : AllocatedTo connect function ::> lfSensorAcquisition to allocatedElement ::> exSensorVector;
+    connection : AllocatedTo connect function ::> lfFlowCommand to allocatedElement ::> exFlowCommand;
+    connection : AllocatedTo connect function ::> lfAlarmSignal to allocatedElement ::> exAlarmAnnunciation;
+    connection : AllocatedTo connect function ::> lfPrescriptionEntry to allocatedElement ::> exPrescriptionEntry;
 
     // ── Fig 4.1 mode hierarchy (CriSys §4.1) ────────────────────
     connection : Composes connect parent ::> topLevelModeMachine to child ::> modeOFF;

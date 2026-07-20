@@ -21,7 +21,7 @@ package memo_assurance_safety_risk {
         attribute residualAcceptability : RiskAcceptabilityKind;
         attribute benefitRiskRequired : Boolean;
     }
-    part def RiskMatrix specializes TraceableElement {
+    part def RiskMatrix specializes MemoPart {
         attribute probabilityScaleDefinition : String;
         attribute severityScaleDefinition : String;
         attribute riskLevelMapping : String;
@@ -43,27 +43,27 @@ package memo_assurance_safety_risk {
         attribute cannotReduceFurther : Boolean;
         attribute linkSummary : String;
     }
-    item def Hazard specializes TraceableElement {
+    item def Hazard specializes MemoPart {
         attribute hazardType : HazardTypeKind;
         attribute severity : SeverityKind;
         attribute foreseeable : Boolean;
     }
-    item def SequenceOfEvents specializes TraceableElement {
+    item def SequenceOfEvents specializes MemoPart {
         attribute initiatingEvent : String;
         attribute contributingFactors : String;
     }
     // A categorized root cause in a hazard causal tree (FDA GIIP
     // taxonomy pattern: cause -> hazard -> hazardous situation -> harm;
     // several HazardCause elements may converge on one Hazard).
-    item def HazardCause specializes TraceableElement {
+    item def HazardCause specializes MemoPart {
         attribute causeSource : CauseSourceKind;
         attribute contributingFactors : String;
     }
-    item def HazardousSituation specializes TraceableElement {
+    item def HazardousSituation specializes MemoPart {
         attribute exposedPersons : String;
         attribute operatingCondition : String;
     }
-    item def Harm specializes TraceableElement {
+    item def Harm specializes MemoPart {
         attribute clinicalImpact : String;
         attribute reversibility : String;
         attribute severity : SeverityKind;
@@ -73,7 +73,7 @@ package memo_assurance_safety_risk {
         attribute implementationKind : RiskControlImplementationKind;
         attribute verificationStatus : String;
     }
-    item def OverallResidualRiskEvaluation specializes TraceableElement {
+    item def OverallResidualRiskEvaluation specializes MemoPart {
         attribute conclusion : String;
         attribute reviewer : String;
     }

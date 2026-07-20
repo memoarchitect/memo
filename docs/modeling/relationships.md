@@ -23,17 +23,17 @@ element can join several paths, and simple products skip hops entirely:
 | `Initiates` | User | UseCase | This user pursues the goal |
 | `SupportsUseCase` | OperationalWorkflow | UseCase | This organized work achieves the goal |
 | `SelectsStep` | Scenario | WorkflowStep | This scenario takes this path |
-| `UsesProduct` / `TaskUsesProduct` | Activity / task | MedicalDevice | This work uses this product in this role |
-| `EnablesActivity` | SystemFunction | OperationalActivity | The system enables this work |
+| `UsesProduct` | Activity / task | MedicalDevice | This work uses this product in this role |
+| `Enables` | SystemFunction | OperationalActivity | The system enables this work |
 | `AllocatedTo` | Function | Component | This component is responsible for this behavior |
-| `RealizesLogical` / `PhysicalRealizesLogical` | Software / physical element | LogicalComponent | This implementation realizes this responsibility |
-| `BuildsInto` / `DeploysTo` / `HostsRuntime` | Module / unit / node | Unit / node / runtime | The deployment chain |
+| `Realizes` | Software / physical element | LogicalComponent | This implementation realizes this responsibility |
+| `BuildsInto` / `DeploysTo` / `HostedBy` | Module / unit / node | Unit / node / runtime | The deployment chain |
 | `InstanceOf` | MedicalDeviceInstance | MedicalDeviceDefinition | This unit is of this catalog product |
 | `DerivesFrom` | Need, risk, or source driver | Requirement | This requirement exists because of this driver |
 | `SatisfiedBy` | Requirement | Design element | This design element satisfies the obligation |
 | `MitigatesHazard` | Risk control | Hazard | This control reduces this hazard |
 | `CommitsUseError` / `UseErrorLeadsToHazard` | Task / use error | Use error / hazard | The use-related risk path |
-| `VerifiedBy` / `ValidatesUseCase` / `ValidatesCriticalTask` | Claim / use case / task | V&V case | This case checks the claim |
+| `VerifiedBy` / `Validates` | Claim / use case / task | V&V case | This case checks the claim |
 | `ProducesEvidence` | V&V case | Evidence | This activity produced this evidence |
 
 The ontology includes more specialized links for cybersecurity, FMEA, fault

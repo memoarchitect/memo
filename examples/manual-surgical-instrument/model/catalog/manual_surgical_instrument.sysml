@@ -67,8 +67,8 @@ package memo_examples_manual_surgical_instrument {
         attribute :>> mechanicalFunction = "maintains jaw clamping force without continuous grip";
         attribute :>> patientContact = false;
     }
-    connection : RealizedByArchitecture connect device ::> needleHolder to architectureElement ::> jawAssembly;
-    connection : RealizedByArchitecture connect device ::> needleHolder to architectureElement ::> ratchetLock;
+    connection : Realizes connect realized ::> needleHolder to realizing ::> jawAssembly;
+    connection : Realizes connect realized ::> needleHolder to realizing ::> ratchetLock;
 
     // ── Manufactured instance (identity separate from definition) ──
     part needleHolderUnit42 : MedicalDeviceInstance {
@@ -89,7 +89,7 @@ package memo_examples_manual_surgical_instrument {
         attribute :>> name = "PlaceSutures";
         attribute :>> taskGoal = "place interrupted sutures";
     }
-    connection : TaskUsesProduct connect usingTask ::> taskPlaceSutures to product ::> needleHolder {
+    connection : UsesProduct connect using ::> taskPlaceSutures to product ::> needleHolder {
         attribute :>> productRole = ProductRoleKind::primaryInstrument;
         attribute :>> required = true;
         attribute :>> quantity = "1";

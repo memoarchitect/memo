@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_model_views_requirements_requirements_trace_view
         part :>> selectionQuery {
             attribute :>> id = "QRY-REQ-101";
             attribute :>> name = "GPCA_RequirementsTraceQuery";
-            attribute :>> includeElementKinds = ("StakeholderNeed", "SystemRequirement", "SoftwareRequirement", "HardwareRequirement", "VerificationCase");
+            attribute :>> includeElementKinds = ("Need", "Requirement", "VerificationCase");
             attribute :>> includeRelationshipKinds = ("DerivesFrom", "SatisfiedBy", "VerifiedBy");
             attribute :>> includeLayers = ("requirements", "assurance");
             attribute :>> selectionExpression = "product == 'GPCA'";

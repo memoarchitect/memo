@@ -49,9 +49,9 @@ package memo_scenarios {
 
     // Shared scenario foundation. Specializations exist only where structure
     // or invariants differ (OperativeScenario here; FunctionalScenario in
-    // memo_functions; UIScenario in memo_interaction;
+    // memo_functions; UIScenario in memo_architecture_ui;
     // VerificationScenario / ThreatScenario in assurance packages).
-    part def MemoScenario specializes MemoPart {
+    abstract part def MemoScenario specializes MemoPart {
         attribute variantKind : ScenarioVariantKind;
         attribute operationalCondition : OperationalConditionKind;
         attribute scenarioPurpose : ScenarioPurposeKind[0..*];
@@ -99,14 +99,6 @@ package memo_scenarios {
         attribute decisionTaken : String;
         end scenario : MemoScenario;
         end selectedStep : WorkflowStep;
-    }
-    connection def ScenarioRealizesUseCase :> MemoRelationship {
-        end scenario : MemoScenario;
-        end useCase : UseCase;
-    }
-    connection def ScenarioComprisesActivity :> MemoRelationship {
-        end scenario : OperativeScenario;
-        end activity : OperationalActivity;
     }
     connection def OccursDuring :> MemoRelationship {
         end occurrence : ScenarioOccurrence;

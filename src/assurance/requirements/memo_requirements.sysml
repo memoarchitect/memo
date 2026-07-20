@@ -6,7 +6,26 @@ package memo_assurance_requirements {
     // StakeholderNeed and the needs hierarchy now live in memo_assurance_needs.
     private import memo_assurance_needs::*;
     part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
+
+    // The kind of requirement. Was a subclass branch (SystemRequirement /
+    // SoftwareRequirement / HardwareRequirement) plus a parallel design-control
+    // specification hierarchy (DesignControlSpecification / System- / Software- /
+    // HardwareSpecification); now one attribute. The role-specific attributes
+    // below are all optional so a requirement carries only the ones its kind
+    // needs. IEC 62304 / design-control classification is preserved as the
+    // enum value, not lost.
+    enum def RequirementKind {
+        enum system;
+        enum software;
+        enum hardware;
+        enum systemSpecification;
+        enum softwareSpecification;
+        enum hardwareSpecification;
+        enum designControl;
+    }
+
     requirement def Requirement specializes VerifiableElement {
+        attribute requirementKind : RequirementKind;
         attribute statement : String;
         attribute sourceKind : RequirementSourceKind;
         attribute concernKind : ConcernKind;
@@ -24,29 +43,20 @@ package memo_assurance_requirements {
         attribute obligation : ObligationKind;      // shall/should/will (RFC 2119, SOPHIST legal-obligation)
         attribute conditionClause : String;         // EARS When/While/If/Where or SOPHIST condition clause
         attribute systemResponse : String;          // the "shall <system response>" predicate
-    }
-    requirement def SystemRequirement specializes Requirement;
-    requirement def SoftwareRequirement specializes Requirement { attribute safetyClass : SafetyClassKind; }
-    requirement def HardwareRequirement specializes Requirement { attribute electricalSafetyRelevant : Boolean; }
-    requirement def DesignControlNeed specializes StakeholderNeed {
-        attribute sourceFolder : String;
-        attribute linkedDesignControls : String;
-    }
-    requirement def DesignControlSpecification specializes Requirement {
+        // software requirement / specification (IEC 62304)
+        attribute safetyClass : SafetyClassKind[0..1];
+        // hardware requirement
+        attribute electricalSafetyRelevant : Boolean;
+        // design-control specification (ISO 13485 design output)
         attribute specificationDomain : String;
         attribute sourceFolder : String;
         attribute linkedUserNeeds : String;
         attribute linkedRisks : String;
         attribute linkedTests : String;
     }
-    requirement def HardwareSpecification specializes DesignControlSpecification;
-    requirement def SoftwareSpecification specializes DesignControlSpecification {
-        attribute softwareSafetyClass : SafetyClassKind;
-    }
-    requirement def SystemSpecification specializes DesignControlSpecification;
     // Named constant defined by a source requirements document (e.g. CriSys
     // GPCA App. A.4) and referenced from requirement statements.
-    part def SystemConstant specializes TraceableElement {
+    part def SystemConstant specializes MemoPart {
         attribute symbol : String;          // identifier as written in the source, e.g. "Tolerance_Max const"
         attribute unit : String;
         attribute valueType : String;
@@ -55,7 +65,7 @@ package memo_assurance_requirements {
     }
     // One row of a notification/alarm action table (e.g. CriSys GPCA REQ 59):
     // a named notification, its priority, and the actions the system must take.
-    part def NotificationSpec specializes TraceableElement {
+    part def NotificationSpec specializes MemoPart {
         attribute priority : NotificationPriorityKind;
         attribute visualNotification : Boolean;
         attribute audioNotification : Boolean;

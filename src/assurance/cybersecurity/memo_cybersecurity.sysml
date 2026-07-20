@@ -20,7 +20,7 @@ package memo_assurance_cybersecurity {
         attribute classification : String;
     }
 
-    part def AttackSurface specializes TraceableElement {
+    part def AttackSurface specializes MemoPart {
         attribute entryPointKind : InterfaceKind;
         attribute exposureLevel : String;
         attribute reachableFrom : String;
@@ -37,7 +37,7 @@ package memo_assurance_cybersecurity {
         attribute strideCategory : ThreatCategoryKind;
     }
 
-    item def Vulnerability specializes TraceableElement {
+    item def Vulnerability specializes MemoPart {
         attribute weakness : String;
         attribute exploitability : String;
         attribute discoveryMethod : String;

@@ -19,7 +19,7 @@ package memo_examples_temperature_alarm {
     private import memo_assurance_safety_risk::*;
     private import memo_assurance_verification::*;
     private import memo_assurance_human_factors::*;
-    private import memo_interaction::*;
+    private import memo_architecture_ui::*;
     private import memo_core_relationships::*;
 
     // ── Operational intent ──────────────────────────────────────
@@ -42,7 +42,7 @@ package memo_examples_temperature_alarm {
         attribute :>> severityIfFailed = SeverityKind::serious;
     }
     connection : Initiates connect initiatingUser ::> icuNurse to initiatedUseCase ::> ucMonitorTemp;
-    connection : ActivityComprisesTask connect activity ::> actAcknowledgeAlarm to task ::> taskAckAlarm;
+    connection : Composes connect parent ::> actAcknowledgeAlarm to child ::> taskAckAlarm;
 
     // ── Functional and logical slices ───────────────────────────
     part fnDetectDeviation : SystemFunction {
@@ -52,11 +52,11 @@ package memo_examples_temperature_alarm {
         // package). Its safety and verification character are typed
         // relationships to assurance-owned elements, not tags on the function.
     }
-    part chMonitor : LogicalChannel {
+    part chMonitor : LogicalComponent {
         attribute :>> id = "TA-LC-001"; attribute :>> name = "TemperatureMonitorChannel";
         attribute :>> channelRole = ChannelRoleKind::monitor;
     }
-    part chPrimary : LogicalChannel {
+    part chPrimary : LogicalComponent {
         attribute :>> id = "TA-LC-002"; attribute :>> name = "MeasurementChannel";
         attribute :>> channelRole = ChannelRoleKind::primary;
     }
@@ -70,7 +70,7 @@ package memo_examples_temperature_alarm {
         attribute :>> id = "TA-UI-001"; attribute :>> name = "BedsideDisplay";
         attribute :>> modality = "visual + audible";
     }
-    part elAlarmBanner : AlarmElement {
+    part elAlarmBanner : UIElement {
         attribute :>> id = "TA-EL-001"; attribute :>> name = "TempAlarmBanner";
         attribute :>> alarmPriority = NotificationPriorityKind::high;
         attribute :>> annunciationModality = "flashing banner + tone";
@@ -131,7 +131,7 @@ package memo_examples_temperature_alarm {
         attribute :>> evidenceType = "test report";
     }
     connection : ExecutesScenario connect verificationCase ::> vcAlarmLatency to scenario ::> vsAlarmLatency;
-    connection : VerifiesFunction connect verificationCase ::> vcAlarmLatency to verifiedFunction ::> fnDetectDeviation;
-    connection : ValidatesCriticalTask connect usabilityValidation ::> uvAckTask to criticalTask ::> taskAckAlarm;
+    connection : VerifiedBy connect verificationCase ::> vcAlarmLatency to verificationTarget ::> fnDetectDeviation;
+    connection : Validates connect validationCase ::> uvAckTask to validationTarget ::> taskAckAlarm;
     connection : ProducesEvidence connect producer ::> vcAlarmLatency to producedEvidence ::> evLatencyReport;
 }

@@ -44,8 +44,8 @@ action wfSleeveGastrectomy : OperationalWorkflow {
     attribute :>> entryCondition = "patient prepared; time-out ready";
     attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
 }
-connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsMobilize;
-connection : WorkflowComprisesStep connect workflow ::> wfSleeveGastrectomy to step ::> wsSleeve;
+connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsMobilize;
+connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsSleeve;
 connection : StepPrecedes connect predecessor ::> wsMobilize to successor ::> wsSleeve;
 connection : SupportsUseCase connect workflow ::> wfSleeveGastrectomy
     to useCase ::> ucPerformSleeveGastrectomy;
@@ -65,9 +65,9 @@ action taskCreateStapleLine : CriticalTask {
     attribute :>> potentialHarm =
         "bleeding or staple-line complication not recognized before handover";
 }
-connection : ActivityComprisesTask connect activity ::> actSizeAndCreateSleeve
-    to task ::> taskCreateStapleLine;
-connection : TaskComprisesStep connect task ::> taskCreateStapleLine to step ::> stInspectBleeding;
+connection : Composes connect parent ::> actSizeAndCreateSleeve
+    to child ::> taskCreateStapleLine;
+connection : Composes connect parent ::> taskCreateStapleLine to child ::> stInspectBleeding;
 ```
 
 ## Scenarios own their operational activity
@@ -95,8 +95,8 @@ part scStapleLineBleeding : OperationalScenario {
     ref :>> parentWorkflow = wfSleeveGastrectomy;
     ref :>> activities = oaControlStapleLineBleeding;
 }
-connection : ScenarioComprisesActivity connect scenario ::> scStapleLineBleeding
-    to activity ::> oaControlStapleLineBleeding;
+connection : Composes connect parent ::> scStapleLineBleeding
+    to child ::> oaControlStapleLineBleeding;
 ```
 
 ## What this example deliberately does not model

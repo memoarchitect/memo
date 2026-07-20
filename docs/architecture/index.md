@@ -24,11 +24,11 @@ The operational perspective answers **why, for whom, and in what context**.
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
 | `Actor`, `ClinicalUser`, `Stakeholder` | Who has a goal or responsibility | `Initiates`, `Performs`, `HasConcern` |
-| `IntendedUse`, `UseContext`, `StakeholderNeed` | Purpose, setting, and desired outcome | `Motivates`, `DerivesFrom` |
-| `UseCase` and its specializations | A clinical, service, manufacturing, or development goal | `Motivates`, `SupportsUseCase`, `ValidatesUseCase` |
-| `OperationalWorkflow`, `WorkflowStep` | Reusable organization of work | `SupportsUseCase`, `SequencesStep` |
-| `OperationalScenario` | A nominal, alternate, or exception path | `SelectsStep`, `FunctionalRealizesOperational` |
-| `OperationalActivity`, `Task`, `CriticalTask` | Work performed along a path | `Performs`, `TaskUsesProduct`, `EnablesActivity` |
+| `IntendedUse`, `UseContext`, `Need` (needKind: stakeholder) | Purpose, setting, and desired outcome | `Motivates`, `DerivesFrom` |
+| `UseCase` and its specializations | A clinical, service, manufacturing, or development goal | `Motivates`, `SupportsUseCase`, `Validates` |
+| `OperationalWorkflow`, `WorkflowStep` | Reusable organization of work | `SupportsUseCase`, `Precedes` |
+| `OperationalScenario` | A nominal, alternate, or exception path | `SelectsStep`, `Realizes` |
+| `OperationalActivity`, `Task`, `CriticalTask` | Work performed along a path | `Performs`, `UsesProduct`, `Enables` |
 
 **Core split:** `UseCase → OperationalWorkflow → OperationalScenario →
 OperationalActivity → action flow → SystemFunction`. A scenario owns the
@@ -58,11 +58,11 @@ of a software, electronics, or mechanical choice.
 
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
-| `SystemFunction` | A technology-independent responsibility | `EnablesActivity`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
+| `SystemFunction` | A technology-independent responsibility | `Enables`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
 | `FunctionalFlow`, `FunctionalFlowStep` | Reusable organization and order of functions | `InvolvesFunction`, `IncludesStep` |
-| `FunctionalScenario` | The function path for one operational scenario | `SelectsFlow`, `FunctionalRealizesOperational` |
+| `FunctionalScenario` | The function path for one operational scenario | `SelectsFlow`, `Realizes` |
 | `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | connects function endpoints |
-| `SystemAction` | Executable behavior realizing a function | `PerformsFunction` |
+| `SystemAction` | Executable behavior realizing a function | `Performs` |
 
 A function can be allocated to software, hardware, a mechanical part, or a
 human procedure. Do not create a software component merely because a function
@@ -75,10 +75,10 @@ technology-independent**.
 
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
-| `LogicalSystem`, `LogicalSubsystem`, `LogicalComponent` | Responsibility structure | `Composes`, `AllocatedTo`, `RealizedBy` |
-| `LogicalChannel` | Primary, redundant, monitor, watchdog, interlock, or protection role | `IndependentOf`, allocation and exchange links |
-| `LogicalControlElement`, `LogicalDataStore`, `LogicalUserInterface` | Control, storage, and operator responsibilities | allocation and interface links |
-| `Interface`, `LogicalPort`, `LogicalInterface` | Named exchange boundaries | `RealizesInterface`, typed exchanges |
+| `LogicalComponent` (componentRole: system, subsystem) | Responsibility structure | `Composes`, `AllocatedTo`, `Realizes` |
+| `LogicalComponent` (componentRole: channel) | Primary, redundant, monitor, watchdog, interlock, or protection role via `channelRole` | `IndependentOf`, allocation and exchange links |
+| `LogicalComponent` (componentRole: controlElement, dataStore, userInterface) | Control, storage, and operator responsibilities | allocation and interface links |
+| `Interface`, `LogicalPort`, `LogicalInterface` | Named exchange boundaries | `Realizes`, typed exchanges |
 | `IsolationBoundary`, `FaultContainmentRegion` | Required separation and containment | `IndependentOf`, safety/risk links |
 
 Use `AllocatedTo` to say who is responsible for a function. Use an
@@ -91,11 +91,11 @@ The implementation perspective answers **how the design is realized**.
 
 | Element group | Examples | Key relationships |
 | --- | --- | --- |
-| Software module structure | `SoftwareSystem`, `SoftwareItem`, `SoftwareUnit`, `SOUPComponent` | `RealizesLogical`, `BuildsInto` |
-| Runtime structure | `SoftwareComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` | `HostsRuntime`, timing and interaction links |
-| Deployment | `DeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` | `DeploysTo`, `HostsRuntime` |
-| Hardware and physical realization | `HardwareAssembly`, `Sensor`, `Actuator`, `PhysicalAssembly` | `PhysicalRealizesLogical`, `Composes` |
-| Concrete boundaries | `PhysicalPort`, `HardwareInterface`, `SoftwareInterface` | `RealizesInterface`, `ExchangesWith` |
+| Software module structure | `SoftwareSystem`, `SoftwareItem`, `SoftwareUnit`, `SOUPComponent` | `Realizes`, `BuildsInto` |
+| Runtime structure | `SoftwareComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` | `HostedBy`, timing and interaction links |
+| Deployment | `DeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` | `DeploysTo`, `HostedBy` |
+| Hardware and physical realization | `HardwareAssembly`, `Sensor`, `Actuator`, `PhysicalAssembly` | `Realizes`, `Composes` |
+| Concrete boundaries | `PhysicalPort`, `Interface` (interfaceKind: hardware, software) | `Realizes`, `ExchangesWith` |
 
 An IBD shows parts, ports, and directed exchanges. A BDD shows definitions and
 containment. Use behavior views for actions and state.
@@ -108,11 +108,11 @@ elements.
 
 | Discipline | Core elements | Principal relationships |
 | --- | --- | --- |
-| Requirements | `StakeholderNeed`, `SystemRequirement`, `SoftwareRequirement`, `HardwareRequirement` | `DerivesFrom`, `SatisfiedBy`, `VerifiedBy` |
+| Requirements | `Need` (needKind: stakeholder…), `Requirement` (requirementKind: system, software, hardware) | `DerivesFrom`, `SatisfiedBy`, `VerifiedBy` |
 | Safety and risk | `Hazard`, `HazardousSituation`, `Harm`, `RiskControl`, FMEA elements | `MitigatesHazard`, risk-chain links |
 | Cybersecurity | `CybersecurityAsset`, `Threat`, `Vulnerability`, `CyberMitigation` | asset/threat/vulnerability/mitigation links |
 | Human factors | `CriticalTask`, `UseError`, UI and usability elements | `CommitsUseError`, `UseErrorLeadsToHazard` |
-| Verification and validation | `VerificationCase`, `ValidationCase`, `Evidence` | `VerifiedBy`, `ValidatesUseCase`, `ProducesEvidence` |
+| Verification and validation | `VerificationCase`, `ValidationCase`, `Evidence` | `VerifiedBy`, `Validates`, `ProducesEvidence` |
 
 FMEA analyzes how a function or component can fail and identifies hazards. It
 does not turn a hazard into a successor of the function. Unit tests verify
@@ -122,13 +122,13 @@ implemented units; system and validation cases verify claims and use context.
 
 | From | Relationship | To | Review question |
 | --- | --- | --- | --- |
-| `StakeholderNeed` | `Motivates` | `UseCase` | Why does this goal matter? |
+| `Need` (needKind: stakeholder) | `Motivates` | `UseCase` | Why does this goal matter? |
 | `OperationalWorkflow` | `SupportsUseCase` | `UseCase` | How is work organized? |
 | `OperationalScenario` | `SelectsStep` | `WorkflowStep` | Which path is considered? |
-| `FunctionalScenario` | `FunctionalRealizesOperational` | `OperationalScenario` | What functional path realizes it? |
-| `SystemFunction` | `EnablesActivity` | `OperationalActivity` | What enables the work? |
+| `FunctionalScenario` | `Realizes` | `OperationalScenario` | What functional path realizes it? |
+| `SystemFunction` | `Enables` | `OperationalActivity` | What enables the work? |
 | `SystemFunction` | `AllocatedTo` | logical or implementation element | Who is responsible? |
-| software / physical element | `RealizesLogical` / `PhysicalRealizesLogical` | `LogicalComponent` | How is it realized? |
+| software / physical element | `Realizes` / `Realizes` | `LogicalComponent` | How is it realized? |
 | requirement or control | `VerifiedBy` | `VerificationCase` | How is it checked? |
 | `VerificationCase` | `ProducesEvidence` | `Evidence` | What result supports it? |
 

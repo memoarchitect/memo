@@ -22,14 +22,14 @@ package memo_viewpoints_definitions {
         attribute userExtensible : Boolean;
     }
 
-    part def ViewRule specializes TraceableElement {
+    part def ViewRule specializes MemoPart {
         attribute elementTypeName : String;
         attribute relationTypeName : String;
         attribute strength : RuleStrengthKind;
         attribute rationaleText : String;
     }
 
-    part def ViewSelectionQuery specializes TraceableElement {
+    part def ViewSelectionQuery specializes MemoPart {
         attribute includeElementKinds : String[*];
         attribute includeRelationshipKinds : String[*];
         attribute includeLayers : String[*];
@@ -47,8 +47,8 @@ package memo_viewpoints_definitions {
         attribute dataSourceDescription : String;
         attribute autoPopulate : Boolean;
         part viewpointDefinition : Viewpoint;
-        ref subjectElement : TraceableElement[*];
-        ref exposesElement : TraceableElement[*];
+        ref subjectElement : MemoPart[*];
+        ref exposesElement : MemoPart[*];
         ref exposesRelationship : MemoRelationship[*];
         part selectionQuery : ViewSelectionQuery[*];
     }
@@ -70,7 +70,7 @@ package memo_viewpoints_definitions {
         attribute viewKind : DocumentViewKind;
     }
 
-    part def ViewInclusionRule specializes TraceableElement {
+    part def ViewInclusionRule specializes MemoPart {
         attribute includeElementKinds : String[*];
         attribute includeRelationshipKinds : String[*];
         attribute includeLayers : String[*];

@@ -48,7 +48,7 @@ package memo_examples_software_only_medical_device {
         attribute :>> updatePolicy = "blue/green rollout";
         attribute :>> rollbackPolicy = "previous validated version retained hot";
     }
-    connection : ComponentRealizesModule connect runtimeComponent ::> svcGrading to module ::> swGradingModule;
+    connection : Realizes connect realizing ::> svcGrading to realized ::> swGradingModule;
 
     part duContainerImage : DeploymentUnit {
         attribute :>> id = "SMD-DU-001"; attribute :>> name = "ScreeningServiceImage";
@@ -64,8 +64,8 @@ package memo_examples_software_only_medical_device {
     connection : DeploysTo connect deploymentUnit ::> duContainerImage to node ::> nodeCloud {
         attribute :>> deploymentKind = DeploymentKind::containerized;
     }
-    connection : HostsRuntime connect node ::> nodeCloud to runtimeComponent ::> svcGrading;
-    connection : RealizedByArchitecture connect device ::> samdDevice to architectureElement ::> swScreeningApp;
+    connection : HostedBy connect hostAssembly ::> nodeCloud to processingNode ::> svcGrading;
+    connection : Realizes connect realized ::> samdDevice to realizing ::> swScreeningApp;
     part samdDevice : MedicalDevice {
         attribute :>> id = "SMD-DEV-001"; attribute :>> name = "RetinaScreenDevice";
         ref :>> definition = samdDef;

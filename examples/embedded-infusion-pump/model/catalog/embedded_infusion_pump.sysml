@@ -23,7 +23,7 @@ package memo_examples_embedded_infusion_pump {
         attribute :>> implementationLanguage = "C";
         attribute :>> safetyClass = SafetyClassKind::C;
     }
-    connection : ImplementsComponent connect unit ::> swMotorDriver to component ::> swInfusionControl;
+    connection : Realizes connect realizing ::> swMotorDriver to realized ::> swInfusionControl;
 
     // Runtime view.
     part rtControlLoop : Task {
@@ -35,7 +35,7 @@ package memo_examples_embedded_infusion_pump {
         attribute :>> restartPolicy = "watchdog reset to safe state (pump stopped)";
         attribute :>> faultContainment = "MPU-protected region; safe-state on overrun";
     }
-    connection : ComponentRealizesModule connect runtimeComponent ::> rtControlLoop to module ::> swInfusionControl;
+    connection : Realizes connect realizing ::> rtControlLoop to realized ::> swInfusionControl;
 
     // Deployment view.
     part duControlImage : DeploymentUnit {
@@ -58,6 +58,6 @@ package memo_examples_embedded_infusion_pump {
     connection : DeploysTo connect deploymentUnit ::> duControlImage to node ::> mcuSafety {
         attribute :>> deploymentKind = DeploymentKind::embedded;
     }
-    connection : HostsRuntime connect node ::> mcuSafety to runtimeComponent ::> rtControlLoop;
+    connection : HostedBy connect hostAssembly ::> mcuSafety to processingNode ::> rtControlLoop;
     connection : ProvidesEnvironment connect node ::> mcuSafety to environment ::> rteBareMetal;
 }

@@ -5,20 +5,25 @@ package memo_architecture_interfaces {
     private import memo_core_enumerations::*;
     private import memo_architecture_functions::*;
 
-    // ─── Interface taxonomy ──────────────────────────────────────────
-    // One root `Interface`, specialized by realization domain
-    // (hardware / software) then by signaling family then by concrete
-    // protocol. Architecture perspective is carried by the inherited
-    // orthogonal dimensions, not as a type branch.
+    // ─── One Interface definition ────────────────────────────────────
+    // Realization domain (hardware vs software), signaling family
+    // (digital / analog / synchronous / asynchronous) and concrete protocol
+    // (SPI, CAN, Ethernet, 4-20mA, REST, gRPC, message-queue …) are captured
+    // by `interfaceKind` + `protocol`, NOT by a class branch. Every
+    // descriptive attribute below is optional, so an interface carries only
+    // the ones that apply to it. There is no HardwareInterface /
+    // DigitalInterface / SPIInterface / RestInterface … hierarchy: those were
+    // 20+ classes that differed only in the value of `protocol`.
 
     interface def Interface specializes MemoInterface {
-        attribute interfaceKind : InterfaceKind;
+        attribute interfaceKind : InterfaceKind;   // semantic + signaling family
         attribute direction : DirectionKind;
-        attribute protocol : String;
+        attribute protocol : String;               // "SPI", "CAN", "Ethernet", "REST", "4-20mA"
         attribute protocolSemantics : String;
-        attribute interactionPattern : String;
+        attribute interactionPattern : String;     // request-response, pub-sub, streaming…
         attribute signalKind : String;
         attribute timingSummary : String;
+        attribute timingConstraint : String;
         attribute bandwidth : String;
         attribute schemaReference : String;
         attribute compatibilitySummary : String;
@@ -27,6 +32,16 @@ package memo_architecture_interfaces {
         attribute securityCriticality : CriticalityKind;
         // Applied-part/patient-contact interfaces (IEC 60601-1) must state it.
         attribute patientContactInterface : Boolean;
+        // ── hardware-signal descriptors (optional) ──
+        attribute directionality : DirectionKind[0..1];
+        attribute electricalStandard : String;
+        attribute nominalVoltageV : Real[0..1];
+        attribute nominalCurrentA : Real[0..1];
+        attribute bitRateBps : String;
+        attribute signaling : String;
+        attribute signalRange : String;
+        // ── software-API descriptors (optional) ──
+        attribute apiStyle : String;
     }
 
     // A typed thing exchanged at a boundary. Concrete items such as
@@ -44,53 +59,6 @@ package memo_architecture_interfaces {
         attribute timeoutMs : Real;
         attribute retryPolicy : String;
     }
-
-    // ─── Hardware interfaces ─────────────────────────────────────────
-
-    interface def HardwareInterface specializes Interface {
-        attribute electricalStandard : String;
-        attribute nominalVoltageV : Real;
-        attribute nominalCurrentA : Real;
-        attribute directionality : DirectionKind;
-        attribute bandwidth : String;
-        attribute timingConstraint : String;
-    }
-
-    interface def DigitalInterface specializes HardwareInterface {
-        attribute bitRateBps : String;
-        attribute signaling : String;
-    }
-    interface def SPIInterface specializes DigitalInterface;
-    interface def USBInterface specializes DigitalInterface;
-    interface def I2CInterface specializes DigitalInterface;
-    interface def CANInterface specializes DigitalInterface;
-    interface def UARTInterface specializes DigitalInterface;
-    interface def EthernetInterface specializes DigitalInterface;
-
-    interface def AnalogInterface specializes HardwareInterface {
-        attribute signalRange : String;
-    }
-    interface def VoltageInterface specializes AnalogInterface;
-    interface def CurrentInterface specializes AnalogInterface;
-    interface def CurrentLoop4To20mA specializes AnalogInterface;
-    interface def ThermocoupleInterface specializes AnalogInterface;
-
-    // ─── Software interfaces ─────────────────────────────────────────
-
-    interface def SoftwareInterface specializes Interface {
-        attribute apiStyle : String;
-    }
-
-    interface def SynchronousInterface specializes SoftwareInterface;
-    interface def RestInterface specializes SynchronousInterface;
-    interface def GrpcInterface specializes SynchronousInterface;
-    interface def RpcInterface specializes SynchronousInterface;
-    interface def LocalApiInterface specializes SynchronousInterface;
-
-    interface def AsynchronousInterface specializes SoftwareInterface;
-    interface def MessageQueueInterface specializes AsynchronousInterface;
-    interface def PubSubInterface specializes AsynchronousInterface;
-    interface def EventStreamInterface specializes AsynchronousInterface;
 
     // ─── Ports, interface defs, and exchanges ────────────────────────
     // SysML port/interface mechanism + logical exchange, relocated here

@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> interfaceType = "SensorDataInterface";
         attribute :>> sensorDomain = "physiological and device state";
     }
-    interface sensorInputInterface : SoftwareInterface {
+    interface sensorInputInterface : Interface {
         attribute :>> id = "LI-005";
         attribute :>> name = "SensorInputInterface";
         attribute :>> interfaceKind = InterfaceKind::data;
@@ -24,7 +24,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> interactionPattern = "sensor feed";
         attribute :>> protocolSemantics = "flow, air, occlusion, door, battery, cpu, memory, pump state";
     }
-    interface actuatorCommandInterface : SoftwareInterface {
+    interface actuatorCommandInterface : Interface {
         attribute :>> id = "LI-006";
         attribute :>> name = "ActuatorCommandInterface";
         attribute :>> interfaceKind = InterfaceKind::control;
@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> interactionPattern = "commanded flow and annunciation outputs";
         attribute :>> protocolSemantics = "pump flow command, buzzer tone select, display content";
     }
-    interface operatorEntryInterface : SoftwareInterface {
+    interface operatorEntryInterface : Interface {
         attribute :>> id = "LI-007";
         attribute :>> name = "OperatorEntryInterface";
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
@@ -40,7 +40,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> interactionPattern = "keypad entry with confirmation readback";
         attribute :>> protocolSemantics = "prescription fields, alarm silence, start/stop commands";
     }
-    interface eventLogInterface : SoftwareInterface {
+    interface eventLogInterface : Interface {
         attribute :>> id = "LI-008";
         attribute :>> name = "EventLogInterface";
         attribute :>> interfaceKind = InterfaceKind::logging;
@@ -48,7 +48,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> interactionPattern = "append-only audit records";
         attribute :>> protocolSemantics = "timestamped therapy, alarm, and configuration events";
     }
-    interface hwSoftwareBus : DigitalInterface {
+    interface hwSoftwareBus : Interface {
         attribute :>> id = "PI-001";
         attribute :>> name = "HW_SW_DataBus";
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
@@ -60,7 +60,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> nominalVoltageV = 3.3;
         attribute :>> nominalCurrentA = 0.02;
     }
-    interface pumpMotorDrive : DigitalInterface {
+    interface pumpMotorDrive : Interface {
         attribute :>> id = "PI-002";
         attribute :>> name = "PumpMotorStepDrive";
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
@@ -72,7 +72,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> nominalCurrentA = 0.5;
         attribute :>> signaling = "step/dir with enable interlock";
     }
-    interface bolusButtonLine : DigitalInterface {
+    interface bolusButtonLine : Interface {
         attribute :>> id = "PI-003";
         attribute :>> name = "BolusButtonInputLine";
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
@@ -83,7 +83,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> nominalVoltageV = 3.3;
         attribute :>> nominalCurrentA = 0.001;
     }
-    interface occlusionAnalogLine : AnalogInterface {
+    interface occlusionAnalogLine : Interface {
         attribute :>> id = "PI-004";
         attribute :>> name = "OcclusionPressureAnalogLine";
         attribute :>> interfaceKind = InterfaceKind::analogSignal;
@@ -93,7 +93,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> nominalCurrentA = 0.01;
         attribute :>> signalRange = "0 to 30 psi line pressure";
     }
-    interface batteryMonitorLine : AnalogInterface {
+    interface batteryMonitorLine : Interface {
         attribute :>> id = "PI-005";
         attribute :>> name = "BatteryVoltageMonitorLine";
         attribute :>> interfaceKind = InterfaceKind::power;

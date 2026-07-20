@@ -15,8 +15,8 @@ package memo_rules_ontology {
         attribute id = "CR-ONT-001";
         attribute appliesTo = "MemoPart";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Containment/composition relations (Composes, ComposesLogical, AssemblyComprises, WorkflowComprisesStep) must form no cycles.";
-        attribute predicateExpression = "acyclic(composes | composesLogical | assemblyComprises | workflowComprisesStep)";
+        attribute rationaleText = "Containment/composition relations (Composes) must form no cycles.";
+        attribute predicateExpression = "acyclic(composes)";
         constraint { true }
     }
     constraint def connectorEndpointsExistRule {
@@ -66,16 +66,16 @@ package memo_rules_ontology {
         attribute id = "CR-ONT-011";
         attribute appliesTo = "SoftwareComponent";
         attribute severity = RuleSeverityKind::warning;
-        attribute rationaleText = "Every runtime component must trace to a module-view definition (ComponentRealizesModule).";
-        attribute predicateExpression = "runtimeRealizesModule->size() >= 1";
+        attribute rationaleText = "Every runtime component must trace to a module-view definition (Realizes).";
+        attribute predicateExpression = "realizes->size() >= 1";
         constraint { true }
     }
     constraint def logicalRealizationTypedRule {
         attribute id = "CR-ONT-012";
-        attribute appliesTo = "ModuleRealizesLogical";
+        attribute appliesTo = "Realizes";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Logical realizations must use typed ends (SoftwareModule → LogicalComponent), not name strings.";
-        attribute predicateExpression = "softwareComponent->size() = 1 and logicalComponent->size() = 1";
+        attribute rationaleText = "Realization relations must resolve both ends to model elements, not name strings.";
+        attribute predicateExpression = "realizing->size() = 1 and realized->size() = 1";
         constraint { true }
     }
 
@@ -132,7 +132,7 @@ package memo_rules_ontology {
         attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Safety-critical functions (criticality high or catastrophic) must trace to at least one verification case.";
-        attribute predicateExpression = "criticality < CriticalityKind::high or verifiesFunction->size() >= 1";
+        attribute predicateExpression = "criticality < CriticalityKind::high or verifiedBy->size() >= 1";
         constraint { true }
     }
     constraint def criticalTaskValidatedRule {
@@ -140,7 +140,7 @@ package memo_rules_ontology {
         attribute appliesTo = "CriticalTask";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Critical tasks must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
-        attribute predicateExpression = "validatesCriticalTask->size() >= 1";
+        attribute predicateExpression = "validates->size() >= 1";
         constraint { true }
     }
     constraint def useErrorTracesToHazardRule {

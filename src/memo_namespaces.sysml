@@ -4,7 +4,6 @@ package memo {
     alias assurance for memo_namespace_assurance;
     alias clinical_procedures for memo_namespace_clinical_procedures;
     alias context for memo_namespace_context;
-    alias interaction for memo_namespace_interaction;
     alias artifacts for memo_namespace_artifacts;
     alias compliance for memo_namespace_compliance;
     alias core for memo_namespace_core;
@@ -85,8 +84,32 @@ package memo_namespace_architecture_software_runtime {
     public import memo_architecture_software_runtime::*;
 }
 
-package memo_namespace_interaction {
-    public import memo_interaction::*;
+package memo_namespace_architecture_ui {
+    public import memo_architecture_ui::*;
+}
+
+package memo_namespace_architecture_hardware_common {
+    public import memo_architecture_hardware_common::*;
+}
+
+package memo_namespace_architecture_hardware_electrical {
+    public import memo_architecture_hardware_electrical::*;
+}
+
+package memo_namespace_architecture_hardware_mechanical {
+    public import memo_architecture_hardware_mechanical::*;
+}
+
+package memo_namespace_architecture_hardware_fluidic {
+    public import memo_architecture_hardware_fluidic::*;
+}
+
+package memo_namespace_architecture_hardware_optical {
+    public import memo_architecture_hardware_optical::*;
+}
+
+package memo_namespace_architecture_hardware_sensing {
+    public import memo_architecture_hardware_sensing::*;
 }
 
 package memo_namespace_medical_products {
@@ -146,9 +169,19 @@ package memo_namespace_architecture {
         alias logical_structure for memo_namespace_architecture_logical_structure;
     }
     package implementation {
-        alias hardware for memo_namespace_architecture_hardware_structure;
-        alias software_runtime for memo_namespace_architecture_software_runtime;
-        alias software for memo_namespace_architecture_software_structure;
+        package software {
+            alias structure for memo_namespace_architecture_software_structure;
+            alias runtime for memo_namespace_architecture_software_runtime;
+        }
+        package hardware {
+            alias common for memo_namespace_architecture_hardware_common;
+            alias electrical for memo_namespace_architecture_hardware_electrical;
+            alias mechanical for memo_namespace_architecture_hardware_mechanical;
+            alias fluidic for memo_namespace_architecture_hardware_fluidic;
+            alias optical for memo_namespace_architecture_hardware_optical;
+            alias sensing for memo_namespace_architecture_hardware_sensing;
+        }
+        alias ui for memo_namespace_architecture_ui;
     }
     package realization {
         alias deployment for memo_namespace_architecture_deployment;

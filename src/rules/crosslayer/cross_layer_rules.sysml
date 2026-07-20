@@ -18,7 +18,7 @@ package memo_rules_crosslayer {
 
     constraint def reqToArchTraceRule {
         attribute id = "XL-002";
-        attribute appliesTo = "SystemRequirement";
+        attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Requirements-to-architecture traceability per IEC 62304.";
         attribute predicateExpression = "satisfiedBy->size() >= 1";

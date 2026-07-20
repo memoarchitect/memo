@@ -14,7 +14,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
     // external trigger. Mode-tree containment edges (Composes)
     // live in gpca_trace.sysml.
     // ═════════════════════════════════════════════════════════════
-    state topLevelModeMachine : BehaviorMachine {
+    state topLevelModeMachine : StateMachine {
         attribute :>> id = "BM-001";
         attribute :>> name = "TopLevelModeMachine";
         attribute :>> machineKind = "hierarchical state machine";

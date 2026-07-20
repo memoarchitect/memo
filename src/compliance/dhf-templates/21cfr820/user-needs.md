@@ -31,11 +31,11 @@ _[TODO: Describe all intended user groups with their roles, training levels, and
 User needs captured for **{{project.product}}** are listed below from the model. Each user need should trace forward to at least one design input:
 
 ```memo-query
-kind: [StakeholderNeed, Requirement]
+kind: [Need, Requirement]
 display: table
 columns: name, layer, doc
 sort: name
-empty: "No user need elements defined. Add StakeholderNeed or Requirement elements."
+empty: "No user need elements defined. Add Need or Requirement elements."
 ```
 
 ---
