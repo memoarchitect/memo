@@ -20,6 +20,8 @@ package memo_viewpoints_definitions {
         attribute methodologyReference : String[*];
         attribute extendsViewpointIds : String[*];
         attribute userExtensible : Boolean;
+        // default diagram kind for a catalog viewpoint (optional)
+        attribute defaultViewKind : DiagramViewKind[0..1];
     }
 
     part def ViewRule specializes MemoPart {

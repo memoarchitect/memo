@@ -13,12 +13,14 @@ package memo_examples_embedded_infusion_pump {
     private import memo_architecture_physical::*;
 
     // Module view (IEC 62304).
-    part swInfusionControl : SoftwareItem {
+    part swInfusionControl : SoftwareModule {
+        attribute :>> moduleKind = ModuleKind::item;
         attribute :>> id = "EIP-SW-001"; attribute :>> name = "InfusionControlItem";
         attribute :>> iec62304Role = "software item, class C";
         attribute :>> safetyClass = SafetyClassKind::C;
     }
-    part swMotorDriver : SoftwareUnit {
+    part swMotorDriver : SoftwareModule {
+        attribute :>> moduleKind = ModuleKind::unit;
         attribute :>> id = "EIP-SW-002"; attribute :>> name = "MotorDriverUnit";
         attribute :>> implementationLanguage = "C";
         attribute :>> safetyClass = SafetyClassKind::C;
@@ -26,7 +28,8 @@ package memo_examples_embedded_infusion_pump {
     connection : Realizes connect realizing ::> swMotorDriver to realized ::> swInfusionControl;
 
     // Runtime view.
-    part rtControlLoop : Task {
+    part rtControlLoop : SoftwareComponent {
+        attribute :>> runtimeKind = RuntimeKind::task;
         attribute :>> id = "EIP-RT-001"; attribute :>> name = "ControlLoopTask";
         attribute :>> periodMs = 10.0;
         attribute :>> deadlineMs = 10.0;

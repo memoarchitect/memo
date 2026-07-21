@@ -10,7 +10,7 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
         attribute :>> name = "GPCAPrototypeMethodology";
         attribute :>> version = "1.0";
         attribute :>> domain = "medical device modeling";
-        attribute :>> description = "GPCA infusion pump methodology — subtraction-based tailoring for non-networked prototype. Excludes cybersecurity layer and SOUPComponent.";
+        attribute :>> description = "GPCA infusion pump methodology — subtraction-based tailoring for non-networked prototype. Excludes cybersecurity layer and SOUP modules.";
         attribute :>> baseMethodName = "MedicalDeviceLightDefault";
     }
 

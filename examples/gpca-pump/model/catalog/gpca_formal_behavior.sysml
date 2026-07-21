@@ -38,7 +38,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
     }
 
     // ── Assumptions (GPCA_SW.aadl) ──────────────────────────────
-    part assumeVtbiHighPositive : AssumeProperty {
+    part assumeVtbiHighPositive : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::assumption;
         attribute :>> id = "AP-002";
         attribute :>> name = "VtbiHighPositive";
         attribute :>> propertyKind = BehaviorPropertyKind::assumption;
@@ -46,7 +47,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "assume DB_IN.VTBI_High > 0";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex";
     }
-    part assumeEmptyReservoirPositive : AssumeProperty {
+    part assumeEmptyReservoirPositive : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::assumption;
         attribute :>> id = "AP-003";
         attribute :>> name = "EmptyReservoirConstPositive";
         attribute :>> propertyKind = BehaviorPropertyKind::assumption;
@@ -54,7 +56,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "assume CONST_IN.Empty_Reservoir > 0";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex";
     }
-    part assumeValidPrescriptionSaved : AssumeProperty {
+    part assumeValidPrescriptionSaved : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::assumption;
         attribute :>> id = "AP-001";
         attribute :>> name = "ValidPrescriptionSavedBeforeTherapy";
         attribute :>> propertyKind = BehaviorPropertyKind::assumption;
@@ -64,7 +67,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
     }
 
     // ── Guarantees (GPCA_SW.aadl AGREE annex, 1:1) ──────────────
-    part guaranteeExclusiveMode : GuaranteeProperty {
+    part guaranteeExclusiveMode : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-001";
         attribute :>> name = "ModeRange";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -72,7 +76,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee mode_range: GPCA_SW_OUT.Current_System_Mode in {0, 1, 2, 3, 4, 6, 7, 8} (source enumeration omits 5)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex (REQ 1)";
     }
-    part guaranteeOffMode : GuaranteeProperty {
+    part guaranteeOffMode : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-004";
         attribute :>> name = "NotStartImpliesModeZero";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -80,7 +85,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee not(OP_CMD_IN.System_Start) => GPCA_SW_OUT.Current_System_Mode = 0";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex";
     }
-    part guaranteeInitialStart : GuaranteeProperty {
+    part guaranteeInitialStart : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-005";
         attribute :>> name = "InitialSystemStartImpliesModeOne";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -88,7 +94,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee sys_initial and OP_CMD_IN.System_Start => GPCA_SW_OUT.Current_System_Mode = 1";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex (REQ 4 allocation: TLM System_Start -> System_On; IM System_On -> mode 1)";
     }
-    part guaranteeOffToOn : GuaranteeProperty {
+    part guaranteeOffToOn : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-006";
         attribute :>> name = "OffToOnImpliesModeOne";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -96,7 +103,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee not(sys_initial) and pre(GPCA_SW_OUT.Current_System_Mode) = 0 and OP_CMD_IN.System_Start => GPCA_SW_OUT.Current_System_Mode = 1";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex (REQ 4)";
     }
-    part guaranteeEmptyReservoirNoFlow : GuaranteeProperty {
+    part guaranteeEmptyReservoirNoFlow : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-007";
         attribute :>> name = "EmptyReservoirImpliesNoFlow";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -104,7 +112,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee (OP_CMD_IN.System_Start and pre(Current_System_Mode) > 1 and GPCA_SW_OUT.Reservoir_Volume < CONST_IN.Empty_Reservoir) => GPCA_SW_OUT.Commanded_Flow_Rate = 0";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex (REQ 59 'Empty Reservoir')";
     }
-    part guaranteeVtbiKvo : GuaranteeProperty {
+    part guaranteeVtbiKvo : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-008";
         attribute :>> name = "OverVtbiImpliesFlowAtMostKvo";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -112,7 +121,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee (OP_CMD_IN.System_Start and pre(Current_System_Mode) > 1 and GPCA_SW_OUT.Volume_Infused > DB_IN.VTBI_High) => GPCA_SW_OUT.Commanded_Flow_Rate <= GPCA_SW_OUT.Flow_Rate_KVO";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex (over-infusion => keep-vein-open, not zero)";
     }
-    part guaranteeAirInLineKvo : GuaranteeProperty {
+    part guaranteeAirInLineKvo : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-009";
         attribute :>> name = "AirInLineImpliesFlowAtMostKvo";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -120,7 +130,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee (OP_CMD_IN.System_Start and SENSOR_IN.Air_In_Line) => GPCA_SW_OUT.Commanded_Flow_Rate <= GPCA_SW_OUT.Flow_Rate_KVO";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex (REQ 21 'Air embolism')";
     }
-    part guaranteeOcclusionKvo : GuaranteeProperty {
+    part guaranteeOcclusionKvo : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-010";
         attribute :>> name = "OcclusionImpliesFlowAtMostKvo";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -128,7 +139,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee (OP_CMD_IN.System_Start and SENSOR_IN.Occlusion) => GPCA_SW_OUT.Commanded_Flow_Rate <= GPCA_SW_OUT.Flow_Rate_KVO";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex";
     }
-    part guaranteeDoorOpenKvo : GuaranteeProperty {
+    part guaranteeDoorOpenKvo : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-011";
         attribute :>> name = "DoorOpenImpliesFlowAtMostKvo";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -136,7 +148,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee (OP_CMD_IN.System_Start and SENSOR_IN.Door_Open) => GPCA_SW_OUT.Commanded_Flow_Rate <= GPCA_SW_OUT.Flow_Rate_KVO";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl AGREE annex";
     }
-    part guaranteeAlarmStopsSameStep : GuaranteeProperty {
+    part guaranteeAlarmStopsSameStep : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-003";
         attribute :>> name = "SameStepAlarmKvoGuarantee";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
@@ -144,7 +157,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_formal_behavior {
         attribute :>> formalExpression = "guarantee an infusion-inhibiting notification in a step implies Commanded_Flow_Rate <= Flow_Rate_KVO in the same step (ALARM_OUT -> IM.ALARM_IN is an immediate connection)";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl (ALARM_to_IM immediate) with the flow <= KVO guarantees above";
     }
-    part guaranteeLockoutPreventsBolus : GuaranteeProperty {
+    part guaranteeLockoutPreventsBolus : BehaviorProperty {
+        attribute :>> propertyKind = BehaviorPropertyKind::guarantee;
         attribute :>> id = "GP-002";
         attribute :>> name = "LockoutGuarantee";
         attribute :>> propertyKind = BehaviorPropertyKind::guarantee;

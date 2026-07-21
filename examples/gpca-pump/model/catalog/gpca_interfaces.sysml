@@ -157,7 +157,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     }
 
     // ── CriSys Ch.3 data dictionary (prog / hd / output families) ─
-    item ddPatientIDProg : DataDefinition {
+    item ddPatientIDProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-005";
         attribute :>> name = "PatientID_prog";
         attribute :>> description = "Identifier of the patient in the hospital; provided in the prescription and programmed by the clinician.";
@@ -166,7 +167,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "String";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddDrugNameProg : DataDefinition {
+    item ddDrugNameProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-006";
         attribute :>> name = "DrugName_prog";
         attribute :>> description = "Name of the drug prescribed for infusion.";
@@ -175,7 +177,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "String";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddDrugConcentrationProg : DataDefinition {
+    item ddDrugConcentrationProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-007";
         attribute :>> name = "DrugConcentration_prog";
         attribute :>> description = "Concentration of the drug in the solution prescribed for infusion.";
@@ -186,7 +189,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddVTBITotalProg : DataDefinition {
+    item ddVTBITotalProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-008";
         attribute :>> name = "VTBI_total_prog";
         attribute :>> description = "Maximum total volume of the drug solution that can be infused for the prescription.";
@@ -197,7 +201,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddDurationTotalProg : DataDefinition {
+    item ddDurationTotalProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-009";
         attribute :>> name = "Duration_total_prog";
         attribute :>> description = "Prescribed total duration of drug infusion across all delivery modes (BASAL, SQUARE BOLUS, PATIENT BOLUS).";
@@ -208,7 +213,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Time";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddFlowRateBasalProg : DataDefinition {
+    item ddFlowRateBasalProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-010";
         attribute :>> name = "FlowRate_basal_prog";
         attribute :>> description = "Prescribed rate of flow of drug during BASAL delivery mode; default FlowRate_lo_hd.";
@@ -219,7 +225,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddFlowRateSbolusProg : DataDefinition {
+    item ddFlowRateSbolusProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-011";
         attribute :>> name = "FlowRate_sbolus_prog";
         attribute :>> description = "Prescribed flow rate of drug during SQUARE bolus delivery.";
@@ -230,7 +237,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddDurationSbolusProg : DataDefinition {
+    item ddDurationSbolusProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-012";
         attribute :>> name = "Duration_sbolus_prog";
         attribute :>> description = "Maximum duration of a single uninterrupted square bolus delivery.";
@@ -241,7 +249,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Time";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddIntervalSbolusProg : DataDefinition {
+    item ddIntervalSbolusProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-013";
         attribute :>> name = "Interval_sbolus_prog";
         attribute :>> description = "Minimum interval between two consecutive square bolus initiations; the first square bolus starts Interval_sbolus_prog minutes after infusion initiation.";
@@ -252,7 +261,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddFlowRatePbolusProg : DataDefinition {
+    item ddFlowRatePbolusProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-014";
         attribute :>> name = "FlowRate_pbolus_prog";
         attribute :>> description = "Prescribed flow rate of drug during patient bolus delivery.";
@@ -263,7 +273,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddDurationPbolusProg : DataDefinition {
+    item ddDurationPbolusProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-015";
         attribute :>> name = "Duration_pbolus_prog";
         attribute :>> description = "Maximum duration of a single uninterrupted patient bolus delivery.";
@@ -274,7 +285,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Time";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddLockOutPeriodPbolusProg : DataDefinition {
+    item ddLockOutPeriodPbolusProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-016";
         attribute :>> name = "LockOutPeriod_pbolus_prog";
         attribute :>> description = "Minimum interval between two consecutive patient bolus initiations (the lockout period), irrespective of interruption or completion.";
@@ -285,7 +297,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddNumberMaxPbolusProg : DataDefinition {
+    item ddNumberMaxPbolusProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-017";
         attribute :>> name = "NumberMax_pbolus_prog";
         attribute :>> description = "Maximum total number of patient boluses that may be initiated during Duration_total_prog.";
@@ -296,7 +309,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddSystemStartProg : DataDefinition {
+    item ddSystemStartProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-018";
         attribute :>> name = "System_start_prog";
         attribute :>> description = "Command to start the system.";
@@ -305,7 +319,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddSystemStopProg : DataDefinition {
+    item ddSystemStopProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-019";
         attribute :>> name = "System_stop_prog";
         attribute :>> description = "Command to stop the system.";
@@ -314,7 +329,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddInfusionInitiateProg : DataDefinition {
+    item ddInfusionInitiateProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-020";
         attribute :>> name = "Infusion_initiate_prog";
         attribute :>> description = "Command to initiate infusion of drug.";
@@ -323,7 +339,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddInfusionInhibitProg : DataDefinition {
+    item ddInfusionInhibitProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-021";
         attribute :>> name = "Infusion_inhibit_prog";
         attribute :>> description = "Command to inhibit infusion of drug.";
@@ -332,7 +349,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddSystemSaveProg : DataDefinition {
+    item ddSystemSaveProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-022";
         attribute :>> name = "System_save_prog";
         attribute :>> description = "Command to save the prescription and reservoir initial volume data.";
@@ -341,7 +359,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddNotificationCancelProg : DataDefinition {
+    item ddNotificationCancelProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-023";
         attribute :>> name = "Notification_cancel_prog";
         attribute :>> description = "Command to cancel a selected notification.";
@@ -350,7 +369,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddDisableAudioProg : DataDefinition {
+    item ddDisableAudioProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-024";
         attribute :>> name = "Disable_audio_prog";
         attribute :>> description = "Command to disable audio notifications, permanently or temporarily.";
@@ -359,7 +379,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "PERM | TEMP | FALSE";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddEnableAudioProg : DataDefinition {
+    item ddEnableAudioProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-025";
         attribute :>> name = "Enable_audio_prog";
         attribute :>> description = "Command to enable audio notifications.";
@@ -368,7 +389,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddDataConfigProg : DataDefinition {
+    item ddDataConfigProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-026";
         attribute :>> name = "DataConfig_prog";
         attribute :>> description = "Command to configure prescription data (printed as 'DataCofig_prog' in the source).";
@@ -377,7 +399,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.2 Commands";
     }
-    item ddReservoirInitialVolumeProg : DataDefinition {
+    item ddReservoirInitialVolumeProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-027";
         attribute :>> name = "ReservoirInitialVolume_prog";
         attribute :>> description = "Initial volume of drug in the reservoir at the time of entering the prescription; read from the reservoir label.";
@@ -388,7 +411,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.3 Drug Reservoir Data";
     }
-    item ddBolusRequestProg : DataDefinition {
+    item ddBolusRequestProg : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-028";
         attribute :>> name = "BolusRequest_prog";
         attribute :>> description = "Request by the patient to deliver a patient bolus.";
@@ -397,7 +421,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean event";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.2 Bolus Request Interface";
     }
-    item ddFlowRateOutput : DataDefinition {
+    item ddFlowRateOutput : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-029";
         attribute :>> name = "FlowRate_output";
         attribute :>> description = "Flow rate of the drug through the hose delivering the drug, measured every X seconds when the system is in ON mode.";
@@ -408,7 +433,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.3 Drug Flow Interface";
     }
-    item ddNotificationVisualOutput : DataDefinition {
+    item ddNotificationVisualOutput : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-030";
         attribute :>> name = "Notification_Visual_output";
         attribute :>> description = "Visual display of the messages of all active notifications in the system.";
@@ -417,7 +443,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "List of String";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.4 Notification Interface";
     }
-    item ddNotificationAudioOutput : DataDefinition {
+    item ddNotificationAudioOutput : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-031";
         attribute :>> name = "Notification_Audio_output";
         attribute :>> description = "Audio output for each active notification, in the same order as Notification_Visual_output.";
@@ -426,7 +453,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "List of Boolean";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.4 Notification Interface";
     }
-    item ddDrugNameHd : DataDefinition {
+    item ddDrugNameHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-032";
         attribute :>> name = "DrugName_hd";
         attribute :>> description = "Name of a drug usable for infusion in the hospital that matches DrugName_prog.";
@@ -435,7 +463,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "String";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddDrugConcentrationHiHd : DataDefinition {
+    item ddDrugConcentrationHiHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-033";
         attribute :>> name = "DrugConcentration_hi_hd";
         attribute :>> description = "Maximum concentration of the drug in a solution that can safely be used for infusion for DrugName_hd.";
@@ -446,7 +475,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddDrugConcentrationLoHd : DataDefinition {
+    item ddDrugConcentrationLoHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-034";
         attribute :>> name = "DrugConcentration_lo_hd";
         attribute :>> description = "Minimum concentration of the drug in a solution that can safely be used for infusion for DrugName_hd.";
@@ -457,7 +487,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddVTBIHiHd : DataDefinition {
+    item ddVTBIHiHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-035";
         attribute :>> name = "VTBI_hi_hd";
         attribute :>> description = "Maximum volume of drug that is safe to be infused for DrugName_hd.";
@@ -468,7 +499,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddVTBILoHd : DataDefinition {
+    item ddVTBILoHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-036";
         attribute :>> name = "VTBI_lo_hd";
         attribute :>> description = "Minimum volume of drug that is safe to be infused for DrugName_hd.";
@@ -479,7 +511,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddFlowRateHiHd : DataDefinition {
+    item ddFlowRateHiHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-037";
         attribute :>> name = "FlowRate_hi_hd";
         attribute :>> description = "Maximum safe flow rate of the drug for DrugName_hd.";
@@ -490,7 +523,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddFlowRateLoHd : DataDefinition {
+    item ddFlowRateLoHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-038";
         attribute :>> name = "FlowRate_lo_hd";
         attribute :>> description = "Minimum safe flow rate of the drug for DrugName_hd.";
@@ -501,7 +535,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddIntervalPbolusHd : DataDefinition {
+    item ddIntervalPbolusHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-039";
         attribute :>> name = "Interval_pbolus_hd";
         attribute :>> description = "Minimum safe interval between two consecutive patient bolus initiations for DrugName_hd.";
@@ -512,7 +547,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddNumberMaxPbolusHd : DataDefinition {
+    item ddNumberMaxPbolusHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-040";
         attribute :>> name = "NumberMax_pbolus_hd";
         attribute :>> description = "Maximum number of patient bolus initiations safe to be self-administered for DrugName_hd.";
@@ -523,7 +559,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
-    item ddFlowRateKvoHd : DataDefinition {
+    item ddFlowRateKvoHd : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-041";
         attribute :>> name = "FlowRate_kvo_hd";
         attribute :>> description = "Minimum flow rate of DrugName_hd that should be maintained to keep the vein open (KVO); default 0.1.";
@@ -1086,7 +1123,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
     // ── Text macros (App. A.3 internal state variables) ─────────
-    item ddActualInfusionDurationMacro : DataDefinition {
+    item ddActualInfusionDurationMacro : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-042";
         attribute :>> name = "Actual_Infusion_Duration_macro";
         attribute :>> description = "Total duration the system has been in ACTIVE mode since infusion was initiated with the current prescription.";
@@ -1095,7 +1133,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Time";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    item ddActualVolumeInfusedMacro : DataDefinition {
+    item ddActualVolumeInfusedMacro : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-043";
         attribute :>> name = "Actual_Volume_Infused_macro";
         attribute :>> description = "Total volume of drug infused during Actual_Infusion_Duration_macro; drives the infusion-complete condition (REQ 28) and over-infusion VTBI (REQ 20).";
@@ -1104,7 +1143,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    item ddFlowRateModeMacro : DataDefinition {
+    item ddFlowRateModeMacro : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-044";
         attribute :>> name = "FlowRate_Mode_macro";
         attribute :>> description = "Programmed flow rate of the current mode: FlowRate_kvo_hd in PAUSED, FlowRate_basal_prog in BASAL, FlowRate_sbolus_prog in SQUARE BOLUS, FlowRate_pbolus_prog in PATIENT BOLUS (§4.1.5).";
@@ -1113,7 +1153,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Positive Integer";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    item ddInhibitedInfusionMacro : DataDefinition {
+    item ddInhibitedInfusionMacro : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-045";
         attribute :>> name = "Inhibited_Infusion_macro";
         attribute :>> description = "TRUE when the notification in effect requires all infusion to be inhibited ('Inhibit Infusion' column of REQ 59); FALSE when that notification is cancelled or the system transitions to OFF.";
@@ -1122,7 +1163,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    item ddInhibitedBolusMacro : DataDefinition {
+    item ddInhibitedBolusMacro : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-046";
         attribute :>> name = "Inhibited_Bolus_macro";
         attribute :>> description = "TRUE when the notification in effect requires square boluses to be inhibited ('Inhibit Square Bolus' column of REQ 59); cleared on cancel or OFF.";
@@ -1131,7 +1173,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> encoding = "Boolean";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
-    item ddInhibitedPatientBolusMacro : DataDefinition {
+    item ddInhibitedPatientBolusMacro : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-047";
         attribute :>> name = "Inhibited_PatientBolus_macro";
         attribute :>> description = "TRUE when the notification in effect requires PATIENT BOLUS inhibit ('Inhibit Patient Bolus' column of REQ 59); cleared on cancel or OFF.";
