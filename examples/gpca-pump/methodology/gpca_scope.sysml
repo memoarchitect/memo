@@ -18,8 +18,8 @@ package memo_examples_gpca_pump_methodology_gpca_scope {
 
         attribute :>> includedViewpointType = "VP-CTX; VP-LOG; VP-RISK";
 
-        attribute :>> excludedKind = "CybersecurityAsset; AttackSurface; Threat; Vulnerability; ThreatScenario; CyberHazard; CyberRisk; CyberMitigation; SecurityRequirement; TrustBoundary; SecurityClaim; SOUPComponent";
+        attribute :>> excludedKind = "CybersecurityAsset; AttackSurface; Threat; Vulnerability; ThreatScenario; CyberHazard; CyberRisk; CyberMitigation; SecurityRequirement; TrustBoundary; SecurityClaim; SoftwareModule[moduleKind=soup]";
 
-        attribute :>> description = "GPCA prototype methodology — subtracts cybersecurity layer (non-networked device) and SOUPComponent (no SOUP in prototype). Derived from default methodology by exclusion.";
+        attribute :>> description = "GPCA prototype methodology — subtracts cybersecurity layer (non-networked device) and SOUP modules (no SOUP in prototype). Derived from default methodology by exclusion.";
     }
 }

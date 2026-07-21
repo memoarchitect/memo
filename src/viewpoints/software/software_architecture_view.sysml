@@ -20,7 +20,7 @@ package memo_viewpoints_software_software_architecture_view {
     part :>> selectionQuery {
         attribute :>> id = "QRY-SW-001";
         attribute :>> name = "SoftwareArchitectureQuery";
-        attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "SOUPComponent");
+        attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "SoftwareModule[moduleKind=soup]");
         attribute :>> includeLayers = ("software_structure");
         attribute :>> rationaleText = "Auto-populate the software architecture view from the software structure layer.";
     }

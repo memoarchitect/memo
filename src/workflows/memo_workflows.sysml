@@ -52,21 +52,24 @@ package memo_workflows {
         ref responsibleRole : Actor[0..1];
     }
 
-    action def WorkflowDecision specializes MemoAction {
-        attribute decisionQuestion : String;
-        attribute decisionCriteria : String;
+    // decision / fork / join / handoff.
+    enum def ControlNodeKind {
+        enum decision;
+        enum fork;
+        enum join;
+        enum handoff;
     }
 
-    action def WorkflowFork specializes MemoAction {
-        attribute parallelismRationale : String;
-    }
-    action def WorkflowJoin specializes MemoAction {
-        attribute joinCondition : String;
-    }
-
-    // Transfer of responsibility between roles (shift change, room-to-lab).
-    action def WorkflowHandoff specializes MemoAction {
-        attribute informationTransferred : String;
+    // A workflow control node. The role is given by controlKind; the
+    // kind-specific fields below are set only for the relevant controlKind.
+    // handoff = transfer of responsibility between roles (shift change, room-to-lab).
+    action def WorkflowControlNode specializes MemoAction {
+        attribute controlKind : ControlNodeKind;
+        attribute decisionQuestion : String[0..1];
+        attribute decisionCriteria : String[0..1];
+        attribute parallelismRationale : String[0..1];
+        attribute joinCondition : String[0..1];
+        attribute informationTransferred : String[0..1];
         ref fromRole : Actor[0..1];
         ref toRole : Actor[0..1];
     }
