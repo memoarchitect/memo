@@ -82,27 +82,6 @@ package memo_medical_device_library {
     public import memo_viewpoints_usability_usability_engineering_view::*;
 
     public import memo_artifacts_definitions::*;
-    public import memo_artifacts_risk_management_plan::*;
-    public import memo_artifacts_requirements_specification::*;
-    public import memo_artifacts_system_architecture_description::*;
-    public import memo_artifacts_software_design_description::*;
-    public import memo_artifacts_hazard_analysis_report::*;
-    public import memo_artifacts_requirements_traceability_matrix::*;
-    public import memo_artifacts_test_protocol::*;
-    public import memo_artifacts_test_report::*;
-    public import memo_artifacts_evidence_record::*;
-    public import memo_artifacts_cybersecurity_assessment_report::*;
-    public import memo_artifacts_threat_model_report::*;
-    public import memo_artifacts_usability_engineering_report::*;
-    public import memo_artifacts_clinical_safety_report::*;
-    public import memo_artifacts_failure_mode_effects_analysis::*;
-    public import memo_artifacts_soup_list::*;
-    public import memo_artifacts_design_input_plan::*;
-    public import memo_artifacts_design_output_plan::*;
-    public import memo_artifacts_software_development_plan::*;
-    public import memo_artifacts_labeling_specification::*;
-    public import memo_artifacts_design_history_file_index::*;
-    public import memo_artifacts_design_change_log::*;
     public import memo_compliance_artifacts::*;
     public import memo_compliance_change::*;
     public import memo_compliance_postmarket::*;

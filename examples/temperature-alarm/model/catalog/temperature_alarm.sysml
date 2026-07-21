@@ -23,10 +23,12 @@ package memo_examples_temperature_alarm {
     private import memo_core_relationships::*;
 
     // ── Operational intent ──────────────────────────────────────
-    part icuNurse : ClinicalUser {
+    part icuNurse : User {
+        attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "TA-USR-001"; attribute :>> name = "ICUNurse";
     }
-    use case ucMonitorTemp : ClinicalUseCase {
+    use case ucMonitorTemp : UseCase {
+        attribute :>> useCaseKind = UseCaseKind::clinical;
         attribute :>> id = "TA-UC-001";
         attribute :>> name = "MonitorPatientTemperature";
         attribute :>> goalStatement = "Continuously monitor core temperature and be alerted when it leaves the safe range.";

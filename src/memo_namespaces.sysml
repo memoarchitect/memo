@@ -336,11 +336,9 @@ package memo_namespace_architecture_software_structure {
 }
 
 package memo_namespace_artifacts_clinical_safety_report {
-    public import memo_artifacts_clinical_safety_report::*;
 }
 
 package memo_namespace_artifacts_cybersecurity_assessment_report {
-    public import memo_artifacts_cybersecurity_assessment_report::*;
 }
 
 package memo_namespace_artifacts_definitions {
@@ -348,79 +346,60 @@ package memo_namespace_artifacts_definitions {
 }
 
 package memo_namespace_artifacts_design_change_log {
-    public import memo_artifacts_design_change_log::*;
 }
 
 package memo_namespace_artifacts_design_history_file_index {
-    public import memo_artifacts_design_history_file_index::*;
 }
 
 package memo_namespace_artifacts_design_input_plan {
-    public import memo_artifacts_design_input_plan::*;
 }
 
 package memo_namespace_artifacts_design_output_plan {
-    public import memo_artifacts_design_output_plan::*;
 }
 
 package memo_namespace_artifacts_evidence_record {
-    public import memo_artifacts_evidence_record::*;
 }
 
 package memo_namespace_artifacts_failure_mode_effects_analysis {
-    public import memo_artifacts_failure_mode_effects_analysis::*;
 }
 
 package memo_namespace_artifacts_hazard_analysis_report {
-    public import memo_artifacts_hazard_analysis_report::*;
 }
 
 package memo_namespace_artifacts_labeling_specification {
-    public import memo_artifacts_labeling_specification::*;
 }
 
 package memo_namespace_artifacts_requirements_specification {
-    public import memo_artifacts_requirements_specification::*;
 }
 
 package memo_namespace_artifacts_requirements_traceability_matrix {
-    public import memo_artifacts_requirements_traceability_matrix::*;
 }
 
 package memo_namespace_artifacts_risk_management_plan {
-    public import memo_artifacts_risk_management_plan::*;
 }
 
 package memo_namespace_artifacts_software_design_description {
-    public import memo_artifacts_software_design_description::*;
 }
 
 package memo_namespace_artifacts_software_development_plan {
-    public import memo_artifacts_software_development_plan::*;
 }
 
 package memo_namespace_artifacts_soup_list {
-    public import memo_artifacts_soup_list::*;
 }
 
 package memo_namespace_artifacts_system_architecture_description {
-    public import memo_artifacts_system_architecture_description::*;
 }
 
 package memo_namespace_artifacts_test_protocol {
-    public import memo_artifacts_test_protocol::*;
 }
 
 package memo_namespace_artifacts_test_report {
-    public import memo_artifacts_test_report::*;
 }
 
 package memo_namespace_artifacts_threat_model_report {
-    public import memo_artifacts_threat_model_report::*;
 }
 
 package memo_namespace_artifacts_usability_engineering_report {
-    public import memo_artifacts_usability_engineering_report::*;
 }
 
 package memo_namespace_compliance_artifacts {

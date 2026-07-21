@@ -35,7 +35,8 @@ package memo_examples_single_use_device {
         attribute :>> udiApplicable = true;
     }
 
-    part syringe : MedicalConsumable {
+    part syringe : MedicalDevice {
+        attribute :>> deviceCategory = MedicalDeviceCategoryKind::consumable;
         attribute :>> id = "SUD-DEV-001"; attribute :>> name = "SafetySyringe";
         attribute :>> consumptionMode = "consumed on first use; sharps disposal";
         ref :>> definition = syringeDef;

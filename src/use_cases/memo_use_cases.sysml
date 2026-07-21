@@ -11,6 +11,13 @@ package memo_use_cases {
     private import memo_context_use_context::*;
     private import memo_assurance_needs::*;
 
+    enum def UseCaseKind {
+        enum clinical;
+        enum service;
+        enum manufacturing;
+        enum development;
+    }
+
     use case def UseCase {
         attribute id : String;
         attribute name : String;
@@ -24,6 +31,8 @@ package memo_use_cases {
         attribute successOutcome : String;
         attribute failureOutcome : String;
         attribute postCondition : String;
+        // clinical / service / manufacturing / development
+        attribute useCaseKind : UseCaseKind;
 
         // The device or system under consideration supports the goal.
         ref supportingSystem : MemoPart[0..1];
@@ -31,19 +40,6 @@ package memo_use_cases {
         ref supportingActors : Actor[0..*];
         ref useContext : UseContext[0..1];
         ref originatingNeeds : Need[0..*];
-    }
-
-    use case def ClinicalUseCase specializes UseCase {
-        attribute clinicalSignificance : String;
-    }
-    use case def ServiceUseCase specializes UseCase {
-        attribute serviceOutcome : String;
-    }
-    use case def ManufacturingUseCase specializes UseCase {
-        attribute productionOutcome : String;
-    }
-    use case def DevelopmentUseCase specializes UseCase {
-        attribute developmentOutcome : String;
     }
 
     connection def Motivates :> MemoRelationship {

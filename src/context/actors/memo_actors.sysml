@@ -16,33 +16,23 @@ package memo_context_actors {
 
     // A human who interacts with the medical device (IEC 62366-1 intended user).
     // User is the only human actor type: do not add an alternative type name.
+    // The human actor. The specific role is given by actorKind
+    // (patient / clinician / caregiver / technician / administrator); the
+    // role-specific fields below are set only for the relevant actorKind.
     part def User specializes Actor {
         attribute userPopulation : String;
         attribute impairmentConsiderations : String;
         attribute intendedTraining : String;
         attribute intendedQualification : String;
-    }
-    part def ClinicalUser specializes User {
-        attribute clinicalRole : String;
-    }
-    part def PatientUser specializes User {
-        attribute patientPopulation : String;
-    }
-    part def CaregiverUser specializes User {
-        attribute layCaregiver : Boolean;
-    }
-    part def TechnicianUser specializes User {
-        attribute serviceScope : String;
+        attribute clinicalRole : String[0..1];
+        attribute patientPopulation : String[0..1];
+        attribute layCaregiver : Boolean[0..1];
+        attribute serviceScope : String[0..1];
     }
 
-    part def NonHumanActor specializes Actor;
-    part def ExternalSystemActor specializes NonHumanActor {
-        attribute systemKind : String;
-    }
-    part def ExternalDeviceActor specializes NonHumanActor {
-        attribute deviceKind : String;
-    }
-    part def EnvironmentalAgent specializes NonHumanActor {
-        attribute agentKind : String;
+    // A non-human actor (external system, external device, or environmental
+    // agent). The specific kind is described by externalKind.
+    part def NonHumanActor specializes Actor {
+        attribute externalKind : String[0..1];
     }
 }

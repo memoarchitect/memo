@@ -14,12 +14,14 @@ package memo_examples_reusable_instrument {
     private import memo_medical_products_lifecycle::*;
     private import memo_medical_products_definitions::*;
 
-    part sterileProcessingTech : TechnicianUser {
+    part sterileProcessingTech : User {
+        attribute :>> actorKind = ActorKind::technician;
         attribute :>> id = "RI-USR-001"; attribute :>> name = "SterileProcessingTechnician";
         attribute :>> serviceScope = "central sterile services department";
     }
 
-    use case ucSterilize : ClinicalUseCase {
+    use case ucSterilize : UseCase {
+        attribute :>> useCaseKind = UseCaseKind::clinical;
         attribute :>> id = "RI-UC-001"; attribute :>> name = "SterilizeReusableInstrument";
         attribute :>> goalStatement = "Return a used instrument to sterile, functional condition for the next case.";
         attribute :>> preCondition = "instrument collected from the OR; gross soil removed at point of use";
