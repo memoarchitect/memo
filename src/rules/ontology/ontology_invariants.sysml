@@ -148,7 +148,7 @@ package memo_rules_ontology {
         attribute appliesTo = "UseError";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Safety-relevant use errors (severity serious or worse) must trace to a hazard.";
-        attribute predicateExpression = "severity < SeverityKind::serious or useErrorLeadsToHazard->size() >= 1";
+        attribute predicateExpression = "severity < SeverityKind::serious or causes->size() >= 1";
         constraint { true }
     }
     constraint def alternateScenarioHasBaseRule {

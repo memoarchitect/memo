@@ -33,7 +33,7 @@ package memo_examples_gpca_pump_model_views_risk_risk_chain_view {
             attribute :>> id = "QRY-RISK-101";
             attribute :>> name = "GPCA_RiskChainQuery";
             attribute :>> includeElementKinds = ("Hazard", "HazardCause", "SequenceOfEvents", "HazardousSituation", "Harm", "RiskBeforeMitigation", "RiskAfterMitigation", "RiskControl", "OverallResidualRiskEvaluation");
-            attribute :>> includeRelationshipKinds = ("TracesRisk", "MitigatesHazard", "CausedBy", "ContributesToHazard", "MitigatedByControl", "LeadsToHazard");
+            attribute :>> includeRelationshipKinds = ("TracesRisk", "MitigatesHazard", "Causes", "MitigatedByControl");
             attribute :>> includeLayers = ("risk", "assurance");
             attribute :>> includeConcerns = (ConcernKind::safety);
             attribute :>> selectionExpression = "product == 'GPCA'";

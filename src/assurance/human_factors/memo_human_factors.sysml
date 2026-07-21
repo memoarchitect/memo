@@ -43,10 +43,6 @@ package memo_assurance_human_factors {
         end task : UserTask;
         end useError : UseError;
     }
-    connection def UseErrorLeadsToHazard :> MemoRelationship {
-        end useError : UseError;
-        end hazard : MemoPart;
-    }
     connection def EvaluatesTask :> MemoRelationship {
         end evaluation : MemoEvidence;
         end task : UserTask;

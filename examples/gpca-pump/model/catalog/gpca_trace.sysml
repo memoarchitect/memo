@@ -559,21 +559,21 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : HasFailureMode connect element ::> occlusionSensor to failureMode ::> fmOcclusionDrift;
     connection : HasFailureMode connect element ::> bolusButton to failureMode ::> fmStuckBolusButton;
     connection : HasFailureMode connect element ::> batteryPack to failureMode ::> fmBatteryEarlyDepletion;
-    connection : CausesEffect connect failureMode ::> fmMotorRunaway to failureEffect ::> feOverdose;
-    connection : CausesEffect connect failureMode ::> fmStuckBolusButton to failureEffect ::> feOverdose;
-    connection : CausesEffect connect failureMode ::> fmAirSensorSilent to failureEffect ::> feAirDelivered;
-    connection : CausesEffect connect failureMode ::> fmOcclusionDrift to failureEffect ::> feTherapyInterrupted;
-    connection : CausedBy connect failureMode ::> fmMotorRunaway to failureCause ::> fcMotorDriverFault;
-    connection : CausedBy connect failureMode ::> fmAirSensorSilent to failureCause ::> fcTransducerAging;
-    connection : CausedBy connect failureMode ::> fmStuckBolusButton to failureCause ::> fcPendantAbuse;
+    connection : Causes { attribute :>> causeKind = CauseKind::failureCausesEffect; connect cause ::> fmMotorRunaway to effect ::> feOverdose; }
+    connection : Causes { attribute :>> causeKind = CauseKind::failureCausesEffect; connect cause ::> fmStuckBolusButton to effect ::> feOverdose; }
+    connection : Causes { attribute :>> causeKind = CauseKind::failureCausesEffect; connect cause ::> fmAirSensorSilent to effect ::> feAirDelivered; }
+    connection : Causes { attribute :>> causeKind = CauseKind::failureCausesEffect; connect cause ::> fmOcclusionDrift to effect ::> feTherapyInterrupted; }
+    connection : Causes { attribute :>> causeKind = CauseKind::failureCausedBy; connect cause ::> fcMotorDriverFault to effect ::> fmMotorRunaway; }
+    connection : Causes { attribute :>> causeKind = CauseKind::failureCausedBy; connect cause ::> fcTransducerAging to effect ::> fmAirSensorSilent; }
+    connection : Causes { attribute :>> causeKind = CauseKind::failureCausedBy; connect cause ::> fcPendantAbuse to effect ::> fmStuckBolusButton; }
     connection : DetectedBy connect failureMode ::> fmMotorRunaway to detectionMethod ::> dmFlowCrossCheck;
     connection : DetectedBy connect failureMode ::> fmAirSensorSilent to detectionMethod ::> dmPostSensorCheck;
     connection : DetectedBy connect failureMode ::> fmStuckBolusButton to detectionMethod ::> dmStuckInputMonitor;
     connection : AddressedByAction connect failureMode ::> fmAirSensorSilent to fmeaAction ::> fmeaActionAirSensor;
-    connection : ContributesToHazard connect failureMode ::> fmMotorRunaway to hazard ::> overdoseHazard;
-    connection : ContributesToHazard connect failureMode ::> fmStuckBolusButton to hazard ::> overdoseHazard;
-    connection : ContributesToHazard connect failureMode ::> fmAirSensorSilent to hazard ::> airEmbolismHazard;
-    connection : ContributesToHazard connect failureMode ::> fmOcclusionDrift to hazard ::> underdoseHazard;
+    connection : Causes { attribute :>> causeKind = CauseKind::contributesToHazard; connect cause ::> fmMotorRunaway to effect ::> overdoseHazard; }
+    connection : Causes { attribute :>> causeKind = CauseKind::contributesToHazard; connect cause ::> fmStuckBolusButton to effect ::> overdoseHazard; }
+    connection : Causes { attribute :>> causeKind = CauseKind::contributesToHazard; connect cause ::> fmAirSensorSilent to effect ::> airEmbolismHazard; }
+    connection : Causes { attribute :>> causeKind = CauseKind::contributesToHazard; connect cause ::> fmOcclusionDrift to effect ::> underdoseHazard; }
     connection : MitigatedByControl connect failureMode ::> fmMotorRunaway to riskControl ::> flowCrossCheckControl;
     connection : MitigatedByControl connect failureMode ::> fmStuckBolusButton to riskControl ::> lockoutControl;
     connection : InputToGate connect input ::> fteMotorRunaway to gate ::> ftgMotorAnd;
@@ -583,9 +583,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : InputToGate connect input ::> ftgMotorAnd to gate ::> ftgOverdoseOr;
     connection : InputToGate connect input ::> ftgBolusAnd to gate ::> ftgOverdoseOr;
     connection : ProducesEvent connect gate ::> ftgOverdoseOr to eventElement ::> fteOverdoseTop;
-    connection : LeadsToHazard connect topEvent ::> fteOverdoseTop to hazard ::> overdoseHazard;
-    connection : OriginatesFrom connect eventElement ::> fteMotorRunaway to origin ::> pumpMotorAssembly;
-    connection : OriginatesFrom connect eventElement ::> fteStuckButtonUndetected to origin ::> bolusButton;
+    connection : Causes { attribute :>> causeKind = CauseKind::leadsToHazard; connect cause ::> fteOverdoseTop to effect ::> overdoseHazard; }
+    connection : Causes { attribute :>> causeKind = CauseKind::originatesFrom; connect cause ::> pumpMotorAssembly to effect ::> fteMotorRunaway; }
+    connection : Causes { attribute :>> causeKind = CauseKind::originatesFrom; connect cause ::> bolusButton to effect ::> fteStuckButtonUndetected; }
     connection : ContainsEvent connect cutSet ::> mcsMotorPath to eventElement ::> fteMotorRunaway;
     connection : ContainsEvent connect cutSet ::> mcsMotorPath to eventElement ::> fteCrossCheckFails;
     connection : ContainsEvent connect cutSet ::> mcsBolusPath to eventElement ::> fteLockoutFault;
