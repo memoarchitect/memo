@@ -21,7 +21,7 @@ package memo_rules_closure {
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "ISO 14971 requires each identified hazard to have risk control measures.";
-        attribute predicateExpression = "mitigatesHazard->size() >= 1";
+        attribute predicateExpression = "mitigates->size() >= 1";
         constraint { true }
     }
 

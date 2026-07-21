@@ -107,7 +107,7 @@ package memo_examples_temperature_alarm {
     }
     connection : CommitsUseError connect task ::> taskAckAlarm to useError ::> ueSilenceAndForget;
     connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueSilenceAndForget to effect ::> hzUndetectedDeviation; }
-    connection : MitigatesHazard connect riskControl ::> rcReAnnunciate to mitigatedHazard ::> hzUndetectedDeviation;
+    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> rcReAnnunciate to mitigatedElement ::> hzUndetectedDeviation; }
     connection : ControlImplementedBy connect riskControl ::> rcReAnnunciate to implementingElement ::> elAlarmBanner;
 
     // ── Verification, validation, evidence ──────────────────────

@@ -156,7 +156,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_cybersecurity {
 
     connection : RealizedByScenario connect realizedThreat ::> unauthorizedConfigChangeThreat to scenario ::> tamperedConfigurationScenario;
 
-    connection : MitigatesVulnerability connect enablingVulnerability ::> weakServiceAuthentication to mitigation ::> strongServiceAuthentication;
+    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::vulnerability; connect control ::> strongServiceAuthentication to mitigatedElement ::> weakServiceAuthentication; }
 
     connection : DerivesCyberRequirement connect sourceThreatOrRisk ::> unauthorizedConfigChangeThreat to targetRequirement ::> reqAuthenticatedServiceAccess;
 

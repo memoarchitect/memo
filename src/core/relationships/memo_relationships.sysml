@@ -20,9 +20,22 @@ package memo_core_relationships {
         end requiredElement : VerifiableElement;
         end satisfyingElement : ArchitectureElement;
     }
-    connection def MitigatesHazard :> MemoRelationship {
-        end riskControl : VerifiableElement;
-        end mitigatedHazard : MemoPart;
+    // Mitigates unifies the control/action → risk-element edges of the
+    // ISO 14971 / FMEA / FTA / cyber chains — MitigatesHazard,
+    // MitigatesVulnerability, MitigatedByControl, BrokenByControl,
+    // AddressedByAction — keyed by mitigationKind. control is the mitigating
+    // control/action; mitigatedElement is the hazard/vulnerability/failure/cut set.
+    enum def MitigationKind {
+        enum hazard;
+        enum vulnerability;
+        enum failureMode;
+        enum cutSet;
+        enum fmeaAction;
+    }
+    connection def Mitigates :> MemoRelationship {
+        attribute mitigationKind : MitigationKind;
+        end control : VerifiableElement;
+        end mitigatedElement : MemoPart;
     }
     connection def AllocatedTo :> MemoRelationship {
         end function : ArchitectureElement;
@@ -85,10 +98,6 @@ package memo_core_relationships {
     connection def RealizedByScenario :> MemoRelationship {
         end realizedThreat : RequirementDriver;
         end scenario : MemoPart;
-    }
-    connection def MitigatesVulnerability :> MemoRelationship {
-        end enablingVulnerability : MemoPart;
-        end mitigation : VerifiableElement;
     }
     connection def DerivesCyberRequirement :> MemoRelationship {
         end sourceThreatOrRisk : RequirementDriver;
@@ -161,10 +170,6 @@ package memo_core_relationships {
         end failureMode : MemoPart;
         end detectionMethod : MemoPart;
     }
-    connection def AddressedByAction :> MemoRelationship {
-        end failureMode : MemoPart;
-        end fmeaAction : VerifiableElement;
-    }
 
     connection def InputToGate :> MemoRelationship {
         end input : MemoPart;
@@ -201,14 +206,6 @@ package memo_core_relationships {
     connection def AnalyzedBy :> MemoRelationship {
         end element : ArchitectureElement;
         end analysisArtifact : MemoPart;
-    }
-    connection def MitigatedByControl :> MemoRelationship {
-        end failureMode : MemoPart;
-        end riskControl : VerifiableElement;
-    }
-    connection def BrokenByControl :> MemoRelationship {
-        end cutSet : MemoPart;
-        end riskControl : VerifiableElement;
     }
 
     connection def Changes :> MemoRelationship {
