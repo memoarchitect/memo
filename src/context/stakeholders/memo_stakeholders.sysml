@@ -51,8 +51,14 @@ package memo_context_stakeholders {
         end interestedStakeholder : Stakeholder;
         end actorRole : Actor;
     }
-    connection def GovernsCorrespondence :> MemoRelationship {
-        end rule : CorrespondenceRule;
+    // Governs unifies GovernsCorrespondence / GovernsUse, keyed by governKind.
+    enum def GovernKind {
+        enum correspondence;
+        enum use;
+    }
+    connection def Governs :> MemoRelationship {
+        attribute governKind : GovernKind;
+        end governor : MemoPart;
         end governedElement : MemoPart;
     }
 }

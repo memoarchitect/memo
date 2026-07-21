@@ -49,10 +49,6 @@ package memo_context_use_context {
         end source : MemoPart;
         end target : MemoPart;
     }
-    connection def GovernsUse :> MemoRelationship {
-        end intendedUse : IntendedUse;
-        end governedElement : MemoPart;
-    }
     connection def AppliesInContext :> MemoRelationship {
         end useContext : UseContext;
         end subjectElement : MemoPart;

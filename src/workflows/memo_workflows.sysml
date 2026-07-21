@@ -83,9 +83,17 @@ package memo_workflows {
     }
 
     // ── Workflow-level relationships ─────────────────────────────
-    connection def SupportsUseCase :> MemoRelationship {
-        end workflow : OperationalWorkflow;
-        end useCase : UseCase;
+    // Supports unifies SupportsUseCase / SupportsTask / ContributesToCapability
+    // (an element supports a goal/task/capability), keyed by supportKind.
+    enum def SupportKind {
+        enum useCase;
+        enum task;
+        enum capability;
+    }
+    connection def Supports :> MemoRelationship {
+        attribute supportKind : SupportKind;
+        end supporter : MemoPart;
+        end supported : MemoPart;
     }
     connection def StepPrecedes :> MemoRelationship {
         attribute guardCondition : String;
@@ -98,20 +106,19 @@ package memo_workflows {
     }
 
     // ── Workflow transformation (as-is → to-be) ──────────────────
-    connection def TransformsWorkflow :> MemoRelationship {
-        attribute transformationRationale : String;
-        end sourceWorkflow : OperationalWorkflow;
-        end targetWorkflow : OperationalWorkflow;
+    // Transforms unifies TransformsStep / TransformsWorkflow / ReplacesWorkflow
+    // (tailoring of workflow structure: as-is → to-be), keyed by transformKind.
+    enum def TransformKind {
+        enum step;
+        enum workflow;
+        enum replacesWorkflow;
     }
-    connection def ReplacesWorkflow :> MemoRelationship {
-        end replacingWorkflow : OperationalWorkflow;
-        end replacedWorkflow : OperationalWorkflow;
-    }
-    // How a to-be workflow treats a step of the as-is workflow.
-    connection def TransformsStep :> MemoRelationship {
-        attribute transformation : StepTransformationKind;
-        end targetStep : WorkflowStep;
-        end sourceStep : WorkflowStep;
+    connection def Transforms :> MemoRelationship {
+        attribute transformKind : TransformKind;
+        attribute transformation : StepTransformationKind[0..1];
+        attribute transformationRationale : String[0..1];
+        end source : MemoPart;
+        end target : MemoPart;
     }
     // The device or system whose introduction enables a workflow.
 }

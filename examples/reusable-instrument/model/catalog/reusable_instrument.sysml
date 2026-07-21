@@ -81,7 +81,7 @@ package memo_examples_reusable_instrument {
     connection : Composes connect parent ::> wfReprocess to child ::> wsClean;
     connection : StepPrecedes connect predecessor ::> wsClean to successor ::> wsInspect;
     connection : StepPrecedes connect predecessor ::> wsInspect to successor ::> wsSterilize;
-    connection : SupportsUseCase connect workflow ::> wfReprocess to useCase ::> ucSterilize;
+    connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfReprocess to supported ::> ucSterilize; }
 
     part scNominalCycle : OperationalScenario {
         attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";

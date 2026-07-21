@@ -146,10 +146,6 @@ package memo_architecture_ui {
     // The UI-layer scenario realizes exactly one FunctionalScenario one layer
     // up (the interaction sequence that carries out the function sequence),
     // completing the OperativeScenario → FunctionalScenario → UIScenario chain.
-    connection def SupportsTask :> MemoRelationship {
-        end userInterface : UserInterface;
-        end task : UserTask;
-    }
     connection def ErrorAtElement :> MemoRelationship {
         end useError : UseError;
         end element : UIElement;

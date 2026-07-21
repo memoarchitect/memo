@@ -124,7 +124,7 @@ package memo_examples_surgical_closure_workflow {
     connection : StepPrecedes connect predecessor ::> wsSleeve to successor ::> wsAssess;
     connection : StepPrecedes connect predecessor ::> wsAssess to successor ::> wsClose;
     connection : StepPrecedes connect predecessor ::> wsClose to successor ::> wsHandover;
-    connection : SupportsUseCase connect workflow ::> wfSleeveGastrectomy to useCase ::> ucPerformSleeveGastrectomy;
+    connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfSleeveGastrectomy to supported ::> ucPerformSleeveGastrectomy; }
     connection : Realizes connect realizing ::> wfSleeveGastrectomy to realized ::> procSleeveGastrectomy;
 
     // ── Scenario paths, each with its own activity/action flow ──
