@@ -86,7 +86,7 @@ package memo_examples_temperature_alarm {
     }
     connection : ElementTriggersAction connect element ::> elAlarmBanner to triggeredAction ::> uiaAcknowledge;
     connection : ActionInvokesFunction connect uiAction ::> uiaAcknowledge to systemFunction ::> fnDetectDeviation;
-    connection : SupportsTask connect userInterface ::> uiBedside to task ::> taskAckAlarm;
+    connection : Supports { attribute :>> supportKind = SupportKind::task; connect supporter ::> uiBedside to supported ::> taskAckAlarm; }
 
     // ── Risk chain with use error ───────────────────────────────
     part ueSilenceAndForget : UseError {
