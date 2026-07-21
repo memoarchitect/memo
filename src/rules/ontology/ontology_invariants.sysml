@@ -137,10 +137,10 @@ package memo_rules_ontology {
     }
     constraint def criticalTaskValidatedRule {
         attribute id = "CR-ONT-041";
-        attribute appliesTo = "CriticalTask";
+        attribute appliesTo = "UserTask[criticality=high]";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Critical tasks must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
-        attribute predicateExpression = "validates->size() >= 1";
+        attribute rationaleText = "Critical tasks (criticality high or catastrophic) must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
+        attribute predicateExpression = "criticality < CriticalityKind::high or validates->size() >= 1";
         constraint { true }
     }
     constraint def useErrorTracesToHazardRule {

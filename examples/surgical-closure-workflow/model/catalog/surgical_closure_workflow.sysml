@@ -79,7 +79,8 @@ package memo_examples_surgical_closure_workflow {
     action actExtractSpecimenAndClose : OperationalActivity { attribute :>> id = "LSG-ACT-006"; attribute :>> name = "ExtractSpecimenAndClosePorts"; }
     action actHandover : OperationalActivity { attribute :>> id = "LSG-ACT-007"; attribute :>> name = "CompletePostoperativeHandover"; }
 
-    action taskCreateStapleLine : CriticalTask {
+    action taskCreateStapleLine : UserTask {
+        attribute :>> criticality = CriticalityKind::high;
         attribute :>> id = "LSG-TASK-001";
         attribute :>> name = "CreateAndInspectStapleLine";
         attribute :>> taskGoal = "create the planned sleeve and identify bleeding or integrity concerns before completion";

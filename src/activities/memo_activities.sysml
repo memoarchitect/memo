@@ -1,8 +1,9 @@
 // Operational activities and user tasks (§7, §17). Activities are behavioral
 // concepts (action defs on MemoAction). An OperationalActivity is work
 // performed in the operational world; a UserTask is a unit of user work within
-// an activity (IEC 62366-1); a CriticalTask is a task whose failure could
-// cause serious harm (FDA HF guidance) and must trace to usability validation.
+// an activity (IEC 62366-1); a critical task is a UserTask whose criticality is
+// high/catastrophic — its failure could cause serious harm (FDA HF guidance) and
+// it must trace to usability validation.
 // Task difficulty belongs to a task performed in a context — never to an
 // instrument (TaskDifficultyAssessment).
 package memo_activities {
@@ -31,20 +32,21 @@ package memo_activities {
         ref performedBy : Actor[0..*];
     }
 
+    // A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a
+    // UserTask whose criticality is high or catastrophic — a use error could
+    // cause serious harm. potentialHarm/severityIfFailed are set only for such
+    // tasks. Modeled as an attribute, like SystemFunction.criticality.
     action def UserTask specializes MemoAction {
         attribute taskGoal : String;
         attribute preCondition : String;
         attribute postCondition : String;
         attribute expectedDuration : String;
         attribute frequencyOfUse : String;
+        attribute criticality : CriticalityKind;
+        attribute potentialHarm : String[0..1];
+        attribute severityIfFailed : SeverityKind[0..1];
         ref performingUser : User[0..1];
         ref technique : ClinicalTechnique[0..1];
-    }
-
-    // A task whose use error could cause serious harm (FDA HF guidance §3).
-    action def CriticalTask specializes UserTask {
-        attribute potentialHarm : String;
-        attribute severityIfFailed : SeverityKind;
     }
 
     // An elementary perceptual/cognitive/motor step within a user task
