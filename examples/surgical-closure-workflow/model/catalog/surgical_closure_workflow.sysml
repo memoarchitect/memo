@@ -15,15 +15,18 @@ package memo_examples_surgical_closure_workflow {
     private import memo_scenarios::*;
 
     // ── Clinical setting and goal ───────────────────────────────
-    part bariatricSurgeon : ClinicalUser {
+    part bariatricSurgeon : User {
+        attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-001"; attribute :>> name = "BariatricSurgeon";
         attribute :>> clinicalRole = "primary operating surgeon";
     }
-    part scrubNurse : ClinicalUser {
+    part scrubNurse : User {
+        attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-002"; attribute :>> name = "ScrubNurse";
         attribute :>> clinicalRole = "sterile instrumentation and count";
     }
-    part anesthetist : ClinicalUser {
+    part anesthetist : User {
+        attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-003"; attribute :>> name = "Anesthetist";
         attribute :>> clinicalRole = "anaesthesia and physiologic monitoring";
     }
@@ -38,7 +41,8 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> needId = "LSG-N-001";
         attribute :>> statement = "The surgical team needs to perform gastric resection with controlled anatomy, haemostasis, and a checked staple line.";
     }
-    use case ucPerformSleeveGastrectomy : ClinicalUseCase {
+    use case ucPerformSleeveGastrectomy : UseCase {
+        attribute :>> useCaseKind = UseCaseKind::clinical;
         attribute :>> id = "LSG-UC-001";
         attribute :>> name = "PerformLaparoscopicSleeveGastrectomy";
         attribute :>> goalStatement = "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";

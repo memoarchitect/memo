@@ -25,7 +25,8 @@ package memo_examples_ivd_laboratory_system {
             TechnologyDomainKind::optical);
         attribute :>> riskClassification = "IVDR Class C (example)";
     }
-    part analyzer : MedicalEquipment {
+    part analyzer : MedicalDevice {
+        attribute :>> deviceCategory = MedicalDeviceCategoryKind::equipment;
         attribute :>> id = "IVD-DEV-001"; attribute :>> name = "ChemAnalyzer";
         ref :>> definition = analyzerDef;
     }
