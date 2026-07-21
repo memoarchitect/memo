@@ -37,7 +37,8 @@ package memo_examples_temperature_alarm {
         attribute :>> id = "TA-ACT-001"; attribute :>> name = "ReviewAndAcknowledgeAlarm";
         attribute :>> criticality = CriticalityKind::high;
     }
-    action taskAckAlarm : CriticalTask {
+    action taskAckAlarm : UserTask {
+        attribute :>> criticality = CriticalityKind::high;
         attribute :>> id = "TA-TASK-001"; attribute :>> name = "AcknowledgeTemperatureAlarm";
         attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
         attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
