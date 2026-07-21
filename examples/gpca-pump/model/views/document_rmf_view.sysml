@@ -22,7 +22,7 @@ package memo_examples_gpca_pump_model_views_document_rmf_view {
             attribute :>> id = "QRY-DOC-001";
             attribute :>> name = "rmfViewQuery";
             attribute :>> includeElementKinds = ("Hazard", "HazardCause", "HazardousSituation", "Harm", "SequenceOfEvents", "Risk", "RiskBeforeMitigation", "RiskAfterMitigation", "RiskControl", "OverallResidualRiskEvaluation", "VerificationCase", "Evidence");
-            attribute :>> includeRelationshipKinds = ("ContributesToHazard", "LeadsToHazard", "CausedBy", "MitigatesHazard", "MitigatedByControl", "TracesRisk", "AssessedAgainst", "VerifiedBy", "ProducesEvidence", "IncludedIn");
+            attribute :>> includeRelationshipKinds = ("Causes", "MitigatesHazard", "MitigatedByControl", "TracesRisk", "AssessedAgainst", "VerifiedBy", "ProducesEvidence", "IncludedIn");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
     }

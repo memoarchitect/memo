@@ -140,13 +140,22 @@ package memo_core_relationships {
         end element : ArchitectureElement;
         end failureMode : MemoPart;
     }
-    connection def CausesEffect :> MemoRelationship {
-        end failureMode : MemoPart;
-        end failureEffect : MemoPart;
+    // Causes unifies the former causal edges of the ISO 14971 / FMEA / FTA
+    // chains — CausesEffect, CausedBy, ContributesToHazard, LeadsToHazard,
+    // OriginatesFrom, UseErrorLeadsToHazard — keyed by causeKind. cause is the
+    // originating element, effect the consequence.
+    enum def CauseKind {
+        enum failureCausesEffect;
+        enum failureCausedBy;
+        enum contributesToHazard;
+        enum leadsToHazard;
+        enum originatesFrom;
+        enum useErrorLeadsToHazard;
     }
-    connection def CausedBy :> MemoRelationship {
-        end failureMode : MemoPart;
-        end failureCause : MemoPart;
+    connection def Causes :> MemoRelationship {
+        attribute causeKind : CauseKind;
+        end cause : MemoPart;
+        end effect : MemoPart;
     }
     connection def DetectedBy :> MemoRelationship {
         end failureMode : MemoPart;
@@ -164,10 +173,6 @@ package memo_core_relationships {
     connection def ProducesEvent :> MemoRelationship {
         end gate : MemoPart;
         end eventElement : MemoPart;
-    }
-    connection def OriginatesFrom :> MemoRelationship {
-        end eventElement : MemoPart;
-        end origin : ArchitectureElement;
     }
     connection def ContainsEvent :> MemoRelationship {
         end cutSet : MemoPart;
@@ -189,14 +194,6 @@ package memo_core_relationships {
         end child : MemoPart;
     }
 
-    connection def ContributesToHazard :> MemoRelationship {
-        end failureMode : MemoPart;
-        end hazard : MemoPart;
-    }
-    connection def LeadsToHazard :> MemoRelationship {
-        end topEvent : MemoPart;
-        end hazard : MemoPart;
-    }
     connection def IdentifiesHazard :> MemoRelationship {
         end deviation : MemoPart;
         end hazard : MemoPart;
