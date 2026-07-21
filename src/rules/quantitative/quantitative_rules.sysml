@@ -13,7 +13,7 @@ package memo_rules_quantitative {
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::info;
         attribute rationaleText = "Excessive controls per hazard suggests the hazard is too broad and should be decomposed.";
-        attribute predicateExpression = "mitigatesHazard->size() >= 0 and mitigatesHazard->size() <= 10";
+        attribute predicateExpression = "mitigates->size() >= 0 and mitigates->size() <= 10";
         constraint { true }
     }
 

@@ -22,7 +22,7 @@ package memo_examples_gpca_pump_model_views_document_hazard_analysis_view {
             attribute :>> id = "QRY-DOC-003";
             attribute :>> name = "hazardAnalysisViewQuery";
             attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureCause", "FailureEffect", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeEvent", "FaultTreeGate", "MinimalCutSet", "Hazard", "HazardCause", "SequenceOfEvents");
-            attribute :>> includeRelationshipKinds = ("HasFailureMode", "Causes", "DetectedBy", "AddressedByAction", "InputToGate", "ContainsEvent", "BrokenByControl", "IncludedIn");
+            attribute :>> includeRelationshipKinds = ("HasFailureMode", "Causes", "DetectedBy", "Mitigates", "InputToGate", "ContainsEvent", "Mitigates", "IncludedIn");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
     }
