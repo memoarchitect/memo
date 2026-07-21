@@ -177,9 +177,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     action wsStart : WorkflowStep { ref :>> performedActivity = oaStartTherapy; }
     action wsRequestBolus : WorkflowStep { ref :>> performedActivity = oaRequestBolus; }
     action wsRespondAlarm : WorkflowStep { ref :>> performedActivity = oaRespondAlarm; }
-    connection : SupportsUseCase connect workflow ::> wfPrepareAndStartTherapy to useCase ::> ucDeliverPcaTherapy;
-    connection : SupportsUseCase connect workflow ::> wfManageActiveTherapy to useCase ::> ucDeliverPcaTherapy;
-    connection : SupportsUseCase connect workflow ::> wfRespondToTherapyAlarm to useCase ::> ucDeliverPcaTherapy;
+    connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfPrepareAndStartTherapy to supported ::> ucDeliverPcaTherapy; }
+    connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfManageActiveTherapy to supported ::> ucDeliverPcaTherapy; }
+    connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfRespondToTherapyAlarm to supported ::> ucDeliverPcaTherapy; }
     connection : Composes connect parent ::> wfPrepareAndStartTherapy to child ::> wsProgram;
     connection : Composes connect parent ::> wfPrepareAndStartTherapy to child ::> wsStart;
     connection : Composes connect parent ::> wfManageActiveTherapy to child ::> wsRequestBolus;

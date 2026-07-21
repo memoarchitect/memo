@@ -94,11 +94,18 @@ package memo_scenarios {
     }
 
     // Ordered selection of a workflow step into a scenario path.
-    connection def SelectsStep :> MemoRelationship {
-        attribute pathOrder : Integer;
-        attribute decisionTaken : String;
+    // Selects unifies SelectsStep / SelectsFlow (a scenario selects its path
+    // element), keyed by selectsKind.
+    enum def SelectsKind {
+        enum step;
+        enum flow;
+    }
+    connection def Selects :> MemoRelationship {
+        attribute selectsKind : SelectsKind;
+        attribute pathOrder : Integer[0..1];
+        attribute decisionTaken : String[0..1];
         end scenario : MemoScenario;
-        end selectedStep : WorkflowStep;
+        end selected : MemoPart;
     }
     connection def OccursDuring :> MemoRelationship {
         end occurrence : ScenarioOccurrence;

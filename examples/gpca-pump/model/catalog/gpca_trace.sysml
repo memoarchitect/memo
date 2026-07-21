@@ -51,7 +51,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : ConnectsPhysically connect source ::> entityNeedle to target ::> actorPatient;
     connection : ConnectsPhysically connect source ::> entityPowerInfrastructure to target ::> entityGpcaPump;
     // Intended use and use context anchoring (no floating context nodes)
-    connection : GovernsUse connect intendedUse ::> gpcaIntendedUse to governedElement ::> entityGpcaPump;
+    connection : Governs { attribute :>> governKind = GovernKind::use; connect governor ::> gpcaIntendedUse to governedElement ::> entityGpcaPump; }
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityGpcaPump;
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
 
@@ -70,9 +70,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : Precedes connect predecessor ::> oaLoadReservoir to successor ::> oaProgram;
     connection : Precedes connect predecessor ::> oaProgram to successor ::> oaStartTherapy;
     connection : Precedes connect predecessor ::> oaStartTherapy to successor ::> oaRequestBolus;
-    connection : ContributesToCapability connect activity ::> oaStartTherapy to capability ::> ocTitratedAnalgesia;
-    connection : ContributesToCapability connect activity ::> oaRequestBolus to capability ::> ocTitratedAnalgesia;
-    connection : ContributesToCapability connect activity ::> oaRespondAlarm to capability ::> ocFailSafeTherapy;
+    connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaStartTherapy to supported ::> ocTitratedAnalgesia; }
+    connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaRequestBolus to supported ::> ocTitratedAnalgesia; }
+    connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaRespondAlarm to supported ::> ocFailSafeTherapy; }
     connection : DerivesFrom connect sourceDriver ::> oaProgram to targetRequirement ::> reqDrugLibraryLimits;
     connection : DerivesFrom connect sourceDriver ::> oaRequestBolus to targetRequirement ::> reqCs25;
     connection : DerivesFrom connect sourceDriver ::> oaRespondAlarm to targetRequirement ::> reqCs59;

@@ -77,9 +77,5 @@ package memo_architecture_functions {
         end functionalFlow : FunctionalFlow;
         end function : SystemFunction;
     }
-    connection def SelectsFlow :> MemoRelationship {
-        end scenario : FunctionalScenario;
-        end selectedFlow : FunctionalFlow;
-    }
     // Compatibility spelling used by existing models.
 }

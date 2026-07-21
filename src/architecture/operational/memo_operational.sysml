@@ -23,8 +23,4 @@ package memo_architecture_operational {
         attribute latencyConstraint : String;
     }
 
-    connection def ContributesToCapability :> MemoRelationship {
-        end activity : OperationalActivity;
-        end capability : OperationalCapability;
-    }
 }
