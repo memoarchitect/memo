@@ -33,8 +33,6 @@ package memo_architecture_behavior {
         attribute languageKind : PropertyLanguageKind;
         attribute formalExpression : String;
     }
-    part def AssumeProperty specializes BehaviorProperty;
-    part def GuaranteeProperty specializes BehaviorProperty;
     part def Contract specializes VerifiableElement { attribute contractScope : String; }
     part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }
     part def ActivityAction specializes ArchitectureElement {

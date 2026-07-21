@@ -47,17 +47,16 @@ package memo_architecture_interfaces {
     // A typed thing exchanged at a boundary. Concrete items such as
     // AlarmSignal and FlowCommand specialize this type; they are neither
     // functions nor generic action-flow notation.
+    // The kind of item is given by itemKind (data / command / signal / …);
+    // the control-specific fields below apply only when itemKind = command.
     item def InterfaceItem specializes MemoExchangeItem {
         attribute itemKind : InterfaceItemKind;
         attribute confidentialityClass : String;
         attribute integrityClass : String;
         attribute availabilityClass : String;
-    }
-    item def DataDefinition specializes InterfaceItem;
-    item def ControlDefinition specializes InterfaceItem {
-        attribute controlType : String;
-        attribute timeoutMs : Real;
-        attribute retryPolicy : String;
+        attribute controlType : String[0..1];
+        attribute timeoutMs : Real[0..1];
+        attribute retryPolicy : String[0..1];
     }
 
     // ─── Ports, interface defs, and exchanges ────────────────────────

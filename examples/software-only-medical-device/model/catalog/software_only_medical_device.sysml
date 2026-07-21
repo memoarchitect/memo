@@ -30,10 +30,11 @@ package memo_examples_software_only_medical_device {
         attribute :>> algorithmKind = "convolutional neural network, locked (non-adaptive)";
         attribute :>> clinicalPerformanceClaim = "sensitivity >= 87%, specificity >= 90% vs. reference standard";
     }
-    part soupInference : SOUPComponent {
+    part soupInference : SoftwareModule {
+        attribute :>> moduleKind = ModuleKind::soup;
         attribute :>> id = "SMD-SOUP-001"; attribute :>> name = "InferenceRuntimeLibrary";
         attribute :>> soupVendor = "third-party OSS";
-        attribute :>> classification = SOUPClassificationKind::classB;
+        attribute :>> soupClassification = SOUPClassificationKind::classB;
     }
     part swGradingModule : SoftwareModule {
         attribute :>> id = "SMD-SW-002"; attribute :>> name = "GradingModule";
@@ -42,7 +43,8 @@ package memo_examples_software_only_medical_device {
     }
     connection : ModuleUses connect usingModule ::> swGradingModule to usedModule ::> soupInference;
 
-    part svcGrading : Service {
+    part svcGrading : SoftwareComponent {
+        attribute :>> runtimeKind = RuntimeKind::service;
         attribute :>> id = "SMD-RT-001"; attribute :>> name = "GradingService";
         attribute :>> serviceContract = "REST /grade: image in, structured finding out";
         attribute :>> updatePolicy = "blue/green rollout";

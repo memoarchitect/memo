@@ -151,7 +151,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems {
     }
 
     // ── Exchange item definitions ───────────────────────────────
-    item ddPrescription : DataDefinition {
+    item ddPrescription : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-001";
         attribute :>> name = "PrescriptionRecord";
         attribute :>> semantics = "patient id, drug name, concentration, VTBI total, duration total, basal flow rate, square bolus rate/duration/interval, patient bolus rate/duration/lockout period, max boluses per hour (DD-005..DD-017)";
@@ -165,7 +166,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems {
         attribute :>> availabilityClass = "must survive power loss";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data";
     }
-    item ddBolusRequest : DataDefinition {
+    item ddBolusRequest : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-002";
         attribute :>> name = "BolusRequestSignal";
         attribute :>> semantics = "debounced patient pendant press event";
@@ -175,7 +177,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems {
         attribute :>> confidentialityClass = "none";
         attribute :>> availabilityClass = "sampled every step";
     }
-    item ddSensorVector : DataDefinition {
+    item ddSensorVector : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-003";
         attribute :>> name = "SensorStatusVector";
         attribute :>> semantics = "air-in-line, occlusion pressure, reservoir volume, door state, flow measurement, battery level, CPU/memory status";
@@ -185,7 +188,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems {
         attribute :>> confidentialityClass = "none";
         attribute :>> availabilityClass = "stale after two missed steps";
     }
-    item ddEventRecord : DataDefinition {
+    item ddEventRecord : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
         attribute :>> id = "DD-004";
         attribute :>> name = "TherapyEventRecord";
         attribute :>> semantics = "timestamped dose, alarm, mode, and configuration events";
@@ -195,14 +199,16 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems {
         attribute :>> confidentialityClass = "patient-identifiable";
         attribute :>> availabilityClass = "retained 90 days";
     }
-    item cdFlowCommand : ControlDefinition {
+    item cdFlowCommand : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::command;
         attribute :>> id = "CD-001";
         attribute :>> name = "FlowCommand";
         attribute :>> controlType = "commanded flow rate with enable interlock";
         attribute :>> timeoutMs = 40.0;
         attribute :>> retryPolicy = "no retry; missing command forces zero flow";
     }
-    item cdAlarmSignal : ControlDefinition {
+    item cdAlarmSignal : InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::command;
         attribute :>> id = "CD-002";
         attribute :>> name = "AlarmSignal";
         attribute :>> controlType = "priority-coded alarm assertion (level 1 stops infusion, level 2 warns)";

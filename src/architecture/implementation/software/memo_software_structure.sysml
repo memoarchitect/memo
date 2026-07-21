@@ -18,39 +18,36 @@ package memo_architecture_software_structure {
 
     // Module-view element (design responsibility). Runtime properties
     // (period, WCET, scheduling) moved to SoftwareComponent.
+    // item / unit / package / library / code / firmware / soup (IEC 62304).
+    enum def ModuleKind {
+        enum item;
+        enum unit;
+        enum package;
+        enum library;
+        enum code;
+        enum firmware;
+        enum soup;
+    }
+
     part def SoftwareModule specializes ArchitectureElement {
+        attribute moduleKind : ModuleKind;
         attribute responsibility : String;
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
-    }
-    part def SoftwareItem specializes SoftwareModule {
-        attribute softwareItemKind : String;
-        attribute iec62304Role : String;
-    }
-    part def CodeModule specializes SoftwareModule {
-        attribute moduleKind : String;
-    }
-    // IEC 62304 software unit: not further decomposed.
-    part def SoftwareUnit specializes SoftwareModule {
-        attribute implementationLanguage : String;
-    }
-    part def SoftwarePackage specializes SoftwareModule {
-        attribute namespacePath : String;
-    }
-    part def SoftwareLibrary specializes SoftwareModule {
-        attribute libraryVersion : String;
-        attribute internallyDeveloped : Boolean;
-    }
-    part def FirmwareItem specializes SoftwareItem {
-        attribute firmwareTarget : String;
-        attribute updateMechanism : String;
-    }
-    part def SOUPComponent specializes SoftwareModule {
-        attribute soupVersion : String;
-        attribute soupVendor : String;
-        attribute knownAnomalies : String;
-        attribute riskAcceptance : String;
-        attribute classification : SOUPClassificationKind;
+        // module-kind-specific detail (set only for the relevant moduleKind)
+        attribute iec62304Role : String[0..1];
+        attribute implementationLanguage : String[0..1];
+        attribute namespacePath : String[0..1];
+        attribute libraryVersion : String[0..1];
+        attribute internallyDeveloped : Boolean[0..1];
+        attribute firmwareTarget : String[0..1];
+        attribute updateMechanism : String[0..1];
+        // SOUP (IEC 62304 §8) — set only when moduleKind = soup
+        attribute soupVersion : String[0..1];
+        attribute soupVendor : String[0..1];
+        attribute knownAnomalies : String[0..1];
+        attribute riskAcceptance : String[0..1];
+        attribute soupClassification : SOUPClassificationKind[0..1];
     }
 
     part def Algorithm specializes ArchitectureElement {

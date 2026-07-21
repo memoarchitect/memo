@@ -12,7 +12,21 @@ package memo_architecture_software_runtime {
     private import memo_core_relationships::*;
     private import memo_architecture_software_structure::*;
 
+    // process / thread / task / service / container / partition /
+    // dataStore / messageBroker.
+    enum def RuntimeKind {
+        enum process;
+        enum thread;
+        enum task;
+        enum service;
+        enum container;
+        enum partition;
+        enum dataStore;
+        enum messageBroker;
+    }
+
     part def SoftwareComponent specializes ArchitectureElement {
+        attribute runtimeKind : RuntimeKind;
         attribute responsibility : String;
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
@@ -33,37 +47,19 @@ package memo_architecture_software_runtime {
         attribute auditable : Boolean;
         attribute updatePolicy : String;
         attribute rollbackPolicy : String;
-    }
-
-    part def Process specializes SoftwareComponent {
-        attribute addressSpaceIsolated : Boolean;
-    }
-    part def Thread specializes SoftwareComponent {
-        attribute owningProcessName : String;
-    }
-    part def Task specializes SoftwareComponent {
-        attribute taskKind : String;
-    }
-    part def Service specializes SoftwareComponent {
-        attribute serviceContract : String;
-        attribute discoveryMechanism : String;
-    }
-    part def Container specializes SoftwareComponent {
-        attribute imageReference : String;
-        attribute orchestrationPlatform : String;
-    }
-    // Time/space partition (e.g. hypervisor or ARINC-style partitioning).
-    part def RuntimePartition specializes SoftwareComponent {
-        attribute partitionBudget : String;
-        attribute isolationMechanism : String;
-    }
-    part def DataStore specializes SoftwareComponent {
-        attribute storageKind : String;
-        attribute retentionPolicy : String;
-    }
-    part def MessageBroker specializes SoftwareComponent {
-        attribute deliverySemantics : String;
-        attribute topicStructure : String;
+        // runtime-kind-specific detail (set only for the relevant runtimeKind)
+        attribute addressSpaceIsolated : Boolean[0..1];
+        attribute owningProcessName : String[0..1];
+        attribute serviceContract : String[0..1];
+        attribute discoveryMechanism : String[0..1];
+        attribute imageReference : String[0..1];
+        attribute orchestrationPlatform : String[0..1];
+        attribute partitionBudget : String[0..1];
+        attribute isolationMechanism : String[0..1];
+        attribute storageKind : String[0..1];
+        attribute retentionPolicy : String[0..1];
+        attribute deliverySemantics : String[0..1];
+        attribute topicStructure : String[0..1];
     }
 
     connection def ComponentConnects :> MemoRelationship {
