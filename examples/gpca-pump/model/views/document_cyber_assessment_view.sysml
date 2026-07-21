@@ -21,7 +21,7 @@ package memo_examples_gpca_pump_model_views_document_cyber_assessment_view {
             attribute :>> id = "QRY-DOC-009";
             attribute :>> name = "cyberAssessmentViewQuery";
             attribute :>> includeElementKinds = ("CyberRisk", "CyberHazard", "CybersecurityAsset", "CyberMitigation", "SecurityRequirement", "SecurityClaim", "SBOMEntry", "SoftwareModule[moduleKind=soup]");
-            attribute :>> includeRelationshipKinds = ("ImpactsSafety", "MitigatesVulnerability", "DerivesCyberRequirement", "AssessedAgainst", "DependsOnSoup");
+            attribute :>> includeRelationshipKinds = ("ImpactsSafety", "Mitigates", "DerivesCyberRequirement", "AssessedAgainst", "DependsOnSoup");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
     }
