@@ -143,7 +143,8 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     // ── Scenario-driven operational model ──────────────────────
     // The use case is the patient and clinician goal. It is supported by
     // several workflows, each of which owns multiple selected scenarios.
-    use case ucDeliverPcaTherapy : ClinicalUseCase {
+    use case ucDeliverPcaTherapy : UseCase {
+        attribute :>> useCaseKind = UseCaseKind::clinical;
         attribute :>> id = "UC-001";
         attribute :>> name = "DeliverPatientControlledAnalgesia";
         attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";

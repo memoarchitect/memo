@@ -46,27 +46,27 @@ package memo_medical_products_definitions {
 
     // The system-under-design or a referenced product, independent of any
     // particular manufactured unit.
-    part def MedicalDevice specializes MemoPart {
-        attribute deviceRole : String;
-        ref definition : MedicalDeviceDefinition[0..1];
+    // instrument / equipment / accessory / consumable / supply / implant.
+    enum def MedicalDeviceCategoryKind {
+        enum instrument;
+        enum equipment;
+        enum accessory;
+        enum consumable;
+        enum supply;
+        enum implant;
     }
 
-    part def MedicalInstrument specializes MedicalDevice {
-        attribute instrumentFunction : String;
-    }
-    part def MedicalEquipment specializes MedicalDevice {
-        attribute installationRequirement : String;
-    }
-    part def MedicalDeviceAccessory specializes MedicalDevice {
-        attribute parentDeviceReference : String;
-    }
-    part def MedicalConsumable specializes MedicalDevice {
-        attribute consumptionMode : String;
-    }
-    part def MedicalSupply specializes MedicalDevice;
-    part def Implant specializes MedicalDevice {
-        attribute implantSite : String;
-        attribute intendedImplantDuration : String;
+    part def MedicalDevice specializes MemoPart {
+        attribute deviceRole : String;
+        attribute deviceCategory : MedicalDeviceCategoryKind;
+        ref definition : MedicalDeviceDefinition[0..1];
+        // category-specific detail (set only for the relevant deviceCategory)
+        attribute instrumentFunction : String[0..1];
+        attribute installationRequirement : String[0..1];
+        attribute parentDeviceReference : String[0..1];
+        attribute consumptionMode : String[0..1];
+        attribute implantSite : String[0..1];
+        attribute intendedImplantDuration : String[0..1];
     }
 
     // A manufactured unit of a definition (FHIR Device). The referenced
@@ -92,7 +92,7 @@ package memo_medical_products_definitions {
     }
     // Links the modeled device to its physical/architecture realization.
     connection def AccessoryOf :> MemoRelationship {
-        end accessory : MedicalDeviceAccessory;
+        end accessory : MedicalDevice;
         end parentDevice : MedicalDevice;
     }
 }

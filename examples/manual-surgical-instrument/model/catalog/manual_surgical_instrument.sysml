@@ -47,7 +47,8 @@ package memo_examples_manual_surgical_instrument {
     }
 
     // ── Modeled product and physical structure ──────────────────
-    part needleHolder : MedicalInstrument {
+    part needleHolder : MedicalDevice {
+        attribute :>> deviceCategory = MedicalDeviceCategoryKind::instrument;
         attribute :>> id = "MSI-DEV-001";
         attribute :>> name = "NeedleHolder";
         attribute :>> instrumentFunction = "needle grasping and driving";
