@@ -1,24 +1,13 @@
-package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
+package memo_examples_sysml_diagram_samples_model_samples_operational_behaviour_view {
     private import ScalarValues::*;
     private import memo_context_actors::*;
-    private import memo_context_use_context::*;
     private import memo_core_relationships::*;
     private import memo_architecture_interfaces::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // Sample · Operational behaviour — clinical PCA setup & therapy
-    //
-    // Demonstrates an Action Flow (activity) diagram of *operational* behaviour:
-    // who does what across clinical roles. Swimlanes group steps by the actor
-    // that performs them (allocate <action> to <role>); a fork/join captures
-    // preparation work that happens concurrently; and `opAdminister` is a
-    // composite action — double-click it to drill into its sub-flow, then use
-    // "← Parent" to return.
-    // ─────────────────────────────────────────────────────────────────────────
-
-    // Items exchanged between steps (typed flow payloads)
+    // Operational activity across clinical roles. The fixture is intentionally
+    // product-neutral and belongs only to the diagram-samples project.
     item def OpPrescription specializes InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::data;
     }
@@ -27,21 +16,16 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     }
     part def CareSystem;
 
-    // Action definitions give steps typed in/out pins
     action def OpPrescribeTherapy { out prescription : OpPrescription; }
     action def OpVerifyPrescription { in prescription : OpPrescription; }
     action def OpRequestBolus { out bolusRequest : OpBolusRequest; }
     action def OpCheckLockout { in bolusRequest : OpBolusRequest; }
 
-    // Responsibility hierarchy used by the Level control:
-    // L1 care system → L2 responsibility groups → L3 performing actors.
     part opCareSystem : CareSystem { attribute name = "PCA Care System"; }
     part opClinicalTeam : User {
         attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Clinical Team"; }
     part opPatientGroup : User {
         attribute :>> actorKind = ActorKind::patient; attribute :>> name = "Patient Interaction"; }
-
-    // L3 clinical roles — one natural-level swimlane each
     part opRolePhysician : User {
         attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Physician"; }
     part opRoleNurse : User {
@@ -61,36 +45,27 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
     action opSetupFlow {
         action opPrescribe : OpPrescribeTherapy { attribute name = "Prescribe Therapy"; }
         action opVerify : OpVerifyPrescription { attribute name = "Verify Prescription"; }
-
-        // Concurrent preparation: prime the pump while the device self-tests
         fork opForkPrep;
         action opPrime { attribute name = "Prime Pump & Load Reservoir"; }
         action opSelfTest { attribute name = "Run Device Self-Test"; }
         join opJoinPrep;
-
         action opProgram { attribute name = "Program Pump Parameters"; }
         action opConnect { attribute name = "Connect to Patient"; }
         action opStart { attribute name = "Start Infusion"; }
-
-        // Composite step — its own sub-flow (drill-in)
         action opAdminister {
             attribute name = "Administer PCA Therapy";
             action opRequestBolus : OpRequestBolus { attribute name = "Request Bolus"; }
             action opCheckLockout : OpCheckLockout { attribute name = "Check Lockout"; }
             action opDeliverDose { attribute name = "Deliver Dose"; }
             action opLogEvent { attribute name = "Log Dose Event"; }
-
             flow of OpBolusRequest from opRequestBolus.bolusRequest to opCheckLockout.bolusRequest;
-
             first start then opRequestBolus;
             first opRequestBolus then opCheckLockout;
             first opCheckLockout then opDeliverDose;
             first opDeliverDose then opLogEvent;
             first opLogEvent then done;
         }
-
         flow of OpPrescription from opPrescribe.prescription to opVerify.prescription;
-
         first start then opPrescribe;
         first opPrescribe then opVerify;
         first opVerify then opForkPrep;
@@ -105,7 +80,6 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
         first opAdminister then done;
     }
 
-    // Swimlane allocation — who performs each step
     allocate opSetupFlow.opPrescribe to opRolePhysician;
     allocate opSetupFlow.opVerify to opRoleNurse;
     allocate opSetupFlow.opPrime to opRoleNurse;
@@ -126,7 +100,7 @@ package memo_examples_gpca_pump_model_samples_operational_behaviour_view {
         expose opPatientGroup::**;
         attribute depth = 2;
         attribute :>> title = "Sample · Clinical PCA Setup (Operational)";
-        attribute :>> shortDescription = "Operational activity across clinical roles: swimlanes per actor, a fork/join for concurrent prep, and a composite 'Administer PCA Therapy' sub-flow (double-click to drill in).";
+        attribute :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step.";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ofd";
     }

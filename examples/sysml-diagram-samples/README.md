@@ -20,6 +20,7 @@ dummy elements and grouped under **Model Viewpoint › Samples**.
 | `interconnection_view.sysml` | `ibd` | interconnection | Internal Block Diagram — nested parts, boundary ports, typed connectors. |
 | `action_flow_view.sysml` | `afd` | actionflow | Activity / action flow — actions, item flows, successions. |
 | `functional_flow_view.sysml` | `ffd` | actionflow | Functional flow — swimlanes per realising component, typed data/energy flows. |
+| `operational_behaviour_view.sysml` | `ofd` | actionflow | Operational flow — clinical-role swimlanes, concurrent preparation, and a composite therapy step. |
 | `context_view.sysml` | `context` | general | System context — the system as one block surrounded by external actors, systems, and use context. |
 | `requirements_view.sysml` | `req` | general | Requirements — stakeholder needs deriving into system requirements. |
 | `state_transition_view.sysml` | `stm` | statetransition | State machine — pump operating modes and their triggered transitions. |
