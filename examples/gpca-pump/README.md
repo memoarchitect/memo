@@ -19,7 +19,6 @@ Start with `ucDeliverPcaTherapy` in `model/catalog/gpca_operational.sysml`:
 
 - `model/catalog/` — canonical model elements, grouped by concern.
 - `model/views/` — diagram and document views; each answers a review question.
-- `model/samples/` — renderer samples and saved layouts.
 - `methodology/` — GPCA-specific methodology and profile content.
 - `dhf/` — document templates and generated-document material.
 
