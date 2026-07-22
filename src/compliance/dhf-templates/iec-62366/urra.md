@@ -60,7 +60,7 @@ _[TODO: Identify the critical tasks whose failure could cause a hazardous situat
 This section is generated from the system model. The table below lists the **Mitigation Measures** elements currently defined:
 
 ```memo-query
-kind: [RiskControl, UsabilityRequirement]
+kind: [RiskControlMeasure, UsabilityRequirement]
 display: table
 columns: name, layer, doc
 sort: name

@@ -3,6 +3,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_context {
 
     private import memo_context_actors::*;
     private import memo_context_use_context::*;
+    private import memo_assurance_requirements::*;
     private import memo_assurance_human_factors::*;
     private import memo_core_enumerations::*;
 
@@ -19,6 +20,17 @@ package memo_examples_gpca_pump_model_catalog_gpca_context {
         attribute :>> clinicalBenefit = "Timely, patient-titrated analgesia with lower total opioid consumption than fixed-schedule dosing.";
         attribute :>> regulatoryClassification = "FDA Class II infusion pump (21 CFR 880.5725); IEC 62304 software safety class C.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1-2.3 (GPCA overview, system functions, user characteristics)";
+    }
+    part bolusByProxyMisuse : ReasonablyForeseeableMisuse {
+        attribute :>> id = "RFM-001";
+        attribute :>> name = "BolusRequestBySomeoneOtherThanPatient";
+        attribute :>> title = "Bolus by proxy";
+        attribute :>> shortDescription = "A caregiver or visitor presses the patient bolus control.";
+        attribute :>> longDescription = "A person other than the patient activates the bolus request control, bypassing the intended patient self-limiting behavior.";
+        attribute :>> misuseContext = "Patient-controlled analgesia in a supervised hospital setting.";
+        attribute :>> foreseeableBasis = "Known PCA use pattern represented in the GPCA hazard analysis.";
+        attribute :>> affectedUseContext = "UC-001";
+        attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8; CITE-005: Open PCA ISO 14971 risk analysis, bolus-by-proxy event";
     }
 
     // ── Use contexts ────────────────────────────────────────────

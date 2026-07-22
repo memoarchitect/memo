@@ -15,7 +15,7 @@ Choose an element by asking what kind of statement you are recording.
 | A solution-independent responsibility | `LogicalComponent` | A vendor-specific hardware part |
 | Deployed code | `SoftwareItem` or `FirmwareItem` | A generic logical component |
 | A potential source of harm | `Hazard` | A failure mode or harm |
-| A design measure that reduces risk | `RiskControl` | A requirement with no risk link |
+| A design measure that reduces risk | `RiskControlMeasure` | A requirement with no risk link |
 | A testable assurance activity | `VerificationCase` | An evidence file by itself |
 | A test result or approved record | `Evidence` | An unstructured URL |
 

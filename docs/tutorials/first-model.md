@@ -245,7 +245,7 @@ to the function that they concern.
     }
 
     // A distinct measure intended to reduce the missed-alert hazard.
-    item independentAlarmCheck : RiskControl {
+    item independentAlarmCheck : RiskControlMeasure {
         attribute :>> id = "RC-001";
         attribute :>> name = "IndependentAlarmCheck";
     }
@@ -399,7 +399,7 @@ package temperature_alarm {
     }
 
     // A distinct measure intended to reduce the missed-alert hazard.
-    item independentAlarmCheck : RiskControl {
+    item independentAlarmCheck : RiskControlMeasure {
         attribute :>> id = "RC-001";
         attribute :>> name = "IndependentAlarmCheck";
     }

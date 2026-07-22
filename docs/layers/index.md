@@ -71,7 +71,7 @@ its own model elements. For example, `OperationalValidation` is a V&V element:
 it validates an operational use case, workflow, or scenario but it is not an
 operational element. Likewise, a `VerificationCase` checks a function or a
 component while remaining owned by V&V. Requirements owns `Need` and
-`Requirement`; safety/risk owns `Hazard`, `Risk`, and `RiskControl`;
+`Requirement`; safety/risk owns `Hazard`, `Risk`, and `RiskControlMeasure`;
 cybersecurity owns `CybersecurityAsset`, `Threat`, `Vulnerability`, and its
 controls; and human factors owns user tasks, `UseError`, and usability
 evidence. A dose-limit checker can carry safety, security, and verification

@@ -39,7 +39,7 @@ empty: "No risk elements defined."
 This section is generated from the system model. The table below lists the **Risk Control Coverage** elements currently defined:
 
 ```memo-query
-kind: RiskControl
+kind: RiskControlMeasure
 display: table
 columns: name, layer, doc
 sort: name

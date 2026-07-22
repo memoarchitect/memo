@@ -36,16 +36,16 @@ package memo_rules_closure {
 
     constraint def riskControlVerificationRule {
         attribute id = "CR-MED-003";
-        attribute appliesTo = "RiskControl";
+        attribute appliesTo = "RiskControlMeasure";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.4.";
         attribute predicateExpression = "verifiedBy->size() >= 1";
         constraint { true }
     }
 
-    constraint def riskBeforeMatrixRule {
+    constraint def initialRiskMatrixRule {
         attribute id = "CR-MED-004";
-        attribute appliesTo = "RiskBeforeMitigation";
+        attribute appliesTo = "Risk";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Pre-mitigation risk must be assessed against a risk acceptability matrix.";
         attribute predicateExpression = "assessedAgainst->size() >= 1";

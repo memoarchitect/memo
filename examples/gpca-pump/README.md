@@ -10,8 +10,10 @@ Start with `ucDeliverPcaTherapy` in `model/catalog/gpca_operational.sysml`:
    `wfRespondToTherapyAlarm` are the workflows that support it.
 3. The operational scenarios select normal, alternate, exception, and recovery
    paths through those workflows.
-4. The selected path connects to functions, requirements, risk controls,
-   architecture, verification, and evidence across the catalog.
+4. The selected path connects to the explicit ISO 14971 chain
+   (`HazardCause` → `Hazard` → `SequenceOfEvents` →
+   `HazardousSituation` → `Harm`), initial and residual risk,
+   `RiskControlMeasure`, architecture, verification, and evidence.
 
 ## Layout
 

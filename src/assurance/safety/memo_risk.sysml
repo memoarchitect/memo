@@ -9,16 +9,11 @@ package memo_assurance_safety_risk {
         attribute severityEstimate : SeverityKind;
         attribute riskLevel : CriticalityKind;
         attribute acceptability : RiskAcceptabilityKind;
-    }
-    part def RiskBeforeMitigation specializes Risk {
         attribute estimationBasis : String;
         attribute analysisContext : String;
         attribute foreseeableMisuseIncluded : Boolean;
     }
-    part def RiskAfterMitigation specializes Risk {
-        attribute residualProbability : ProbabilityKind;
-        attribute residualSeverity : SeverityKind;
-        attribute residualAcceptability : RiskAcceptabilityKind;
+    part def ResidualRisk specializes Risk {
         attribute benefitRiskRequired : Boolean;
     }
     part def RiskMatrix specializes MemoPart {
@@ -42,6 +37,14 @@ package memo_assurance_safety_risk {
         attribute riskAfterMitigationRaw : String;
         attribute cannotReduceFurther : Boolean;
         attribute linkSummary : String;
+    }
+    // A device characteristic whose implementation, failure, or misuse can
+    // affect safety. This is the modelable output of ISO 14971 §5.3.
+    part def SafetyRelatedCharacteristic specializes MemoPart {
+        attribute characteristic : String;
+        attribute safetyImpact : String;
+        attribute normalUseRelevant : Boolean;
+        attribute faultConditionRelevant : Boolean;
     }
     item def Hazard specializes MemoPart {
         attribute hazardType : HazardTypeKind;
@@ -68,10 +71,16 @@ package memo_assurance_safety_risk {
         attribute reversibility : String;
         attribute severity : SeverityKind;
     }
-    item def RiskControl specializes VerifiableElement {
+    item def RiskControlMeasure specializes VerifiableElement {
         attribute controlKind : RiskControlKind;
         attribute implementationKind : RiskControlImplementationKind;
         attribute verificationStatus : String;
+    }
+    part def Benefit specializes MemoPart {
+        attribute beneficialOutcome : String;
+        attribute beneficiary : String;
+        attribute clinicalSignificance : String;
+        attribute supportingEvidence : String;
     }
     item def OverallResidualRiskEvaluation specializes MemoPart {
         attribute conclusion : String;

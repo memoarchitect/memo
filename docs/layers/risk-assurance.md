@@ -9,12 +9,18 @@ of copying them into a "safety model."
 
 | Element | Question |
 |---|---|
+| `IntendedUse` / `ReasonablyForeseeableMisuse` | What use and foreseeable misuse bound the analysis? |
+| `SafetyRelatedCharacteristic` | Which device characteristic can affect safety? |
+| `HazardCause` | What initiating or contributing cause is being analyzed? |
 | `Hazard` | What is the potential source of harm? |
-| `SequenceOfEvents` | How could the situation develop? |
+| `SequenceOfEvents` | What reasonably foreseeable sequence or combination of events can create exposure? |
 | `HazardousSituation` | When is someone exposed to the hazard? |
 | `Harm` | What injury or damage may result? |
-| `RiskBeforeMitigation` / `RiskAfterMitigation` | Initial and residual risk estimates |
-| `RiskControl` | What reduces probability or severity? |
+| `Risk` | What are the probability of occurrence of harm and its severity before control? |
+| `RiskControlMeasure` | What measure reduces probability or severity? |
+| `ResidualRisk` | What risk remains after the control measures? |
+| `Benefit` | What positive outcome supports a benefit-risk determination? |
+| `OverallResidualRiskEvaluation` | Is the combined residual risk acceptable? |
 
 ```mermaid
 flowchart LR
@@ -22,10 +28,19 @@ flowchart LR
     Hazard --> Events[SequenceOfEvents]
     Events --> Situation[HazardousSituation]
     Situation --> Harm[Harm]
-    Control[RiskControl] -->|MitigatesHazard| Hazard
+    Harm --> Risk[Risk]
+    Control[RiskControlMeasure] -->|MitigatesHazard| Hazard
+    Risk --> Control
+    Control --> Residual[ResidualRisk]
+    Benefit[Benefit] --> Residual
     Control -->|VerifiedBy| Test[VerificationCase]
     Test -->|ProducesEvidence| Evidence[Evidence]
 ```
+
+These are dedicated ontology elements. Do not replace `SequenceOfEvents` with
+an operational `Scenario`, or merge `HazardCause` with the FMEA-specific
+`FailureCause`. Risk-management plans, reports, matrices, and benefit-risk
+documents are artifact views over these elements.
 
 ## Human factors (IEC 62366-1, FDA HF guidance)
 

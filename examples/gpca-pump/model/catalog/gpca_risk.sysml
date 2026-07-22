@@ -81,6 +81,24 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> acceptabilityThresholds = "High unacceptable";
         attribute :>> sourceReference = "illustrative — no source";
     }
+    part programmedDoseCharacteristic : SafetyRelatedCharacteristic {
+        attribute :>> id = "SRC-001";
+        attribute :>> name = "ProgrammedDoseAndFlowLimits";
+        attribute :>> characteristic = "Programmable basal rate, bolus volume, lockout interval, and maximum dose";
+        attribute :>> safetyImpact = "Incorrect values or failed enforcement can expose the patient to over-infusion or under-infusion.";
+        attribute :>> normalUseRelevant = true;
+        attribute :>> faultConditionRelevant = true;
+        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), prescription and bolus parameters; CITE-004: GIP Hazard Analysis v1.0";
+    }
+    part analgesiaBenefit : Benefit {
+        attribute :>> id = "BEN-001";
+        attribute :>> name = "PatientTitratedAnalgesiaBenefit";
+        attribute :>> beneficialOutcome = "Timely pain relief using patient-titrated opioid delivery within prescribed limits.";
+        attribute :>> beneficiary = "patient";
+        attribute :>> clinicalSignificance = "Improved pain management with lower total opioid consumption than fixed-schedule dosing.";
+        attribute :>> supportingEvidence = "IU-001 intended-use clinical benefit and applicable clinical evidence.";
+        attribute :>> sourceReference = "IU-001";
+    }
 
     // ═══ HZ-001: Opioid over-infusion ═══════════════════════════════
     // Primary hazard 1 of the Open PCA ISO 14971 analysis; GIP
@@ -145,9 +163,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> severity = SeverityKind::catastrophic;
         attribute :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (harm: cardiac arrest) and §5 (H1 respiratory depression, severity catastrophic)";
     }
-    part riskBefore : RiskBeforeMitigation {
+    part riskBefore : Risk {
         attribute :>> id = "RISK-B-001";
-        attribute :>> name = "OverInfusionRiskBeforeMitigation";
+        attribute :>> name = "OverInfusionInitialRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::occasional;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
@@ -158,7 +176,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> foreseeableMisuseIncluded = true;
         attribute :>> sourceReference = "illustrative — no source";
     }
-    part lockoutControl : RiskControl {
+    part lockoutControl : RiskControlMeasure {
         attribute :>> id = "RC-001";
         attribute :>> name = "LockoutAndMaxDoseEnforcement";
         attribute :>> controlKind = RiskControlKind::inherentSafeDesign;
@@ -166,17 +184,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 (REQ 25/26 — model REQ-CS-25/26: ignore bolus requests during lockout or past max doses per hour); CITE-002: CriSys AADL v2.0, GPCA_SW AGREE lockout guarantee (model GP-002)";
     }
-    part riskAfter : RiskAfterMitigation {
+    part riskAfter : ResidualRisk {
         attribute :>> id = "RISK-A-001";
-        attribute :>> name = "OverInfusionRiskAfterMitigation";
+        attribute :>> name = "OverInfusionResidualRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::remote;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
         attribute :>> riskLevel = CriticalityKind::medium;
-        attribute :>> acceptability = RiskAcceptabilityKind::alarp;
-        attribute :>> residualProbability = ProbabilityKind::remote;
-        attribute :>> residualSeverity = SeverityKind::catastrophic;
-        attribute :>> residualAcceptability = RiskAcceptabilityKind::acceptable;
+        attribute :>> acceptability = RiskAcceptabilityKind::acceptable;
         attribute :>> benefitRiskRequired = false;
         attribute :>> sourceReference = "illustrative — no source";
     }
@@ -248,9 +263,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> severity = SeverityKind::serious;
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 (underinfusion rows); CITE-008: GPCA Safety Requirements (2009), Flow rate accuracy (underinfusion alarm)";
     }
-    part riskBeforeUnderdose : RiskBeforeMitigation {
+    part riskBeforeUnderdose : Risk {
         attribute :>> id = "RISK-B-002";
-        attribute :>> name = "UnderInfusionRiskBeforeMitigation";
+        attribute :>> name = "UnderInfusionInitialRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::probable;
         attribute :>> severityEstimate = SeverityKind::serious;
@@ -261,7 +276,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> foreseeableMisuseIncluded = true;
         attribute :>> sourceReference = "illustrative — no source";
     }
-    part occlusionAlarmControl : RiskControl {
+    part occlusionAlarmControl : RiskControlMeasure {
         attribute :>> id = "RC-003";
         attribute :>> name = "OcclusionDetectionAndKvoPause";
         attribute :>> controlKind = RiskControlKind::alarm;
@@ -269,7 +284,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms (occlusion); CITE-008: GPCA Safety Requirements (2009), Occlusion alarm; CITE-002: CriSys AADL v2.0, AGREE occlusion => flow <= KVO (model GP-010; model extension REQ-X-04)";
     }
-    part reservoirMonitorControl : RiskControl {
+    part reservoirMonitorControl : RiskControlMeasure {
         attribute :>> id = "RC-004";
         attribute :>> name = "ReservoirEmptyDetectionAndAlarm";
         attribute :>> controlKind = RiskControlKind::monitoring;
@@ -277,17 +292,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 23 — model REQ-CS-23: empty-reservoir pause) and §4.3 REQ 59 (Empty Reservoir row); CITE-002: CriSys AADL v2.0, AGREE empty reservoir => no flow (model GP-007); CITE-004: §2.2 Alarms (empty reservoir) and Alerts (low reservoir)";
     }
-    part riskAfterUnderdose : RiskAfterMitigation {
+    part riskAfterUnderdose : ResidualRisk {
         attribute :>> id = "RISK-A-002";
-        attribute :>> name = "UnderInfusionRiskAfterMitigation";
+        attribute :>> name = "UnderInfusionResidualRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::remote;
         attribute :>> severityEstimate = SeverityKind::serious;
         attribute :>> riskLevel = CriticalityKind::medium;
-        attribute :>> acceptability = RiskAcceptabilityKind::alarp;
-        attribute :>> residualProbability = ProbabilityKind::remote;
-        attribute :>> residualSeverity = SeverityKind::serious;
-        attribute :>> residualAcceptability = RiskAcceptabilityKind::acceptable;
+        attribute :>> acceptability = RiskAcceptabilityKind::acceptable;
         attribute :>> benefitRiskRequired = false;
         attribute :>> sourceReference = "illustrative — no source";
     }
@@ -346,9 +358,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> severity = SeverityKind::catastrophic;
         attribute :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (harm: tissue or organ damage)";
     }
-    part riskBeforeAir : RiskBeforeMitigation {
+    part riskBeforeAir : Risk {
         attribute :>> id = "RISK-B-003";
-        attribute :>> name = "AirEmbolismRiskBeforeMitigation";
+        attribute :>> name = "AirEmbolismInitialRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::occasional;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
@@ -359,7 +371,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> foreseeableMisuseIncluded = true;
         attribute :>> sourceReference = "illustrative — no source";
     }
-    part airDetectionControl : RiskControl {
+    part airDetectionControl : RiskControlMeasure {
         attribute :>> id = "RC-002";
         attribute :>> name = "AirInLineDetectionAndKvoPause";
         attribute :>> controlKind = RiskControlKind::protectiveMeasure;
@@ -367,17 +379,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 21 — model REQ-CS-21: air-embolism pause on single or cumulative bubble volume); CITE-002: CriSys AADL v2.0, AGREE air-in-line => flow <= KVO (model GP-009); CITE-008: GPCA Safety Requirements (2009), Air-in-line alarm";
     }
-    part riskAfterAir : RiskAfterMitigation {
+    part riskAfterAir : ResidualRisk {
         attribute :>> id = "RISK-A-003";
-        attribute :>> name = "AirEmbolismRiskAfterMitigation";
+        attribute :>> name = "AirEmbolismResidualRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::remote;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
         attribute :>> riskLevel = CriticalityKind::medium;
-        attribute :>> acceptability = RiskAcceptabilityKind::alarp;
-        attribute :>> residualProbability = ProbabilityKind::remote;
-        attribute :>> residualSeverity = SeverityKind::catastrophic;
-        attribute :>> residualAcceptability = RiskAcceptabilityKind::acceptable;
+        attribute :>> acceptability = RiskAcceptabilityKind::acceptable;
         attribute :>> benefitRiskRequired = false;
         attribute :>> sourceReference = "illustrative — no source";
     }
@@ -441,9 +450,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> operatingCondition = "therapy started from an unverified prescription";
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.25 and §2.4.8 Use Hazards (incorrect therapy rows)";
     }
-    part riskBeforeWrongDose : RiskBeforeMitigation {
+    part riskBeforeWrongDose : Risk {
         attribute :>> id = "RISK-B-004";
-        attribute :>> name = "MisprogrammingRiskBeforeMitigation";
+        attribute :>> name = "MisprogrammingInitialRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::probable;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
@@ -454,7 +463,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> foreseeableMisuseIncluded = true;
         attribute :>> sourceReference = "illustrative — no source";
     }
-    part drugLibraryControl : RiskControl {
+    part drugLibraryControl : RiskControlMeasure {
         attribute :>> id = "RC-005";
         attribute :>> name = "DrugDatabaseLimitsAndConfirmation";
         attribute :>> controlKind = RiskControlKind::plausibilityCheck;
@@ -462,17 +471,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-008: GPCA Safety Requirements (2009), Dose Error Reduction (drug library hard/soft limits, re-entry and confirmation prompts) and User Interface (two-step setting changes, confirmation); CITE-001: CriSys GPCA System Requirements (2013), Ch.3 Pharmacy DB interface (safe-value lookup)";
     }
-    part riskAfterWrongDose : RiskAfterMitigation {
+    part riskAfterWrongDose : ResidualRisk {
         attribute :>> id = "RISK-A-004";
-        attribute :>> name = "MisprogrammingRiskAfterMitigation";
+        attribute :>> name = "MisprogrammingResidualRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::remote;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
         attribute :>> riskLevel = CriticalityKind::medium;
-        attribute :>> acceptability = RiskAcceptabilityKind::alarp;
-        attribute :>> residualProbability = ProbabilityKind::remote;
-        attribute :>> residualSeverity = SeverityKind::catastrophic;
-        attribute :>> residualAcceptability = RiskAcceptabilityKind::acceptable;
+        attribute :>> acceptability = RiskAcceptabilityKind::acceptable;
         attribute :>> benefitRiskRequired = true;
         attribute :>> sourceReference = "illustrative — no source";
     }
@@ -515,9 +521,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> operatingCondition = "set change or door open with line still connected";
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.13 (free flow of drug)";
     }
-    part riskBeforeFreeFlow : RiskBeforeMitigation {
+    part riskBeforeFreeFlow : Risk {
         attribute :>> id = "RISK-B-005";
-        attribute :>> name = "FreeFlowRiskBeforeMitigation";
+        attribute :>> name = "FreeFlowInitialRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::occasional;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
@@ -528,7 +534,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> foreseeableMisuseIncluded = true;
         attribute :>> sourceReference = "illustrative — no source";
     }
-    part freeFlowValveControl : RiskControl {
+    part freeFlowValveControl : RiskControlMeasure {
         attribute :>> id = "RC-006";
         attribute :>> name = "AdministrationSetFreeFlowPrevention";
         attribute :>> controlKind = RiskControlKind::inherentSafeDesign;
@@ -536,7 +542,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-008: GPCA Safety Requirements (2009), User Interface (the administration set should be designed to prevent compromising patient safety or causing an unacceptable flow error); CITE-004: §2.4.1 HID 1.13 (free-flow detection via flow sensor, safety requirement 1.2.2)";
     }
-    part doorInterlockControl : RiskControl {
+    part doorInterlockControl : RiskControlMeasure {
         attribute :>> id = "RC-009";
         attribute :>> name = "DoorOpenDeliveryInhibit";
         attribute :>> controlKind = RiskControlKind::interlock;
@@ -544,17 +550,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-002: CriSys AADL v2.0, AGREE door open => flow <= KVO (model GP-011); CITE-004: §2.4.2 HID 2.8/2.9 (panel/door opened during infusion: alert and stop); model extension REQ-X-05";
     }
-    part riskAfterFreeFlow : RiskAfterMitigation {
+    part riskAfterFreeFlow : ResidualRisk {
         attribute :>> id = "RISK-A-005";
-        attribute :>> name = "FreeFlowRiskAfterMitigation";
+        attribute :>> name = "FreeFlowResidualRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::improbable;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
         attribute :>> riskLevel = CriticalityKind::medium;
         attribute :>> acceptability = RiskAcceptabilityKind::acceptable;
-        attribute :>> residualProbability = ProbabilityKind::improbable;
-        attribute :>> residualSeverity = SeverityKind::catastrophic;
-        attribute :>> residualAcceptability = RiskAcceptabilityKind::acceptable;
         attribute :>> benefitRiskRequired = false;
         attribute :>> sourceReference = "illustrative — no source";
     }
@@ -590,9 +593,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> operatingCondition = "THERAPY with reverse flow past the continuous or cumulative duration limits";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 22); CITE-008: GPCA Safety Requirements (2009), Reverse delivery";
     }
-    part riskBeforeReverse : RiskBeforeMitigation {
+    part riskBeforeReverse : Risk {
         attribute :>> id = "RISK-B-006";
-        attribute :>> name = "ReverseDeliveryRiskBeforeMitigation";
+        attribute :>> name = "ReverseDeliveryInitialRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::occasional;
         attribute :>> severityEstimate = SeverityKind::serious;
@@ -603,7 +606,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> foreseeableMisuseIncluded = true;
         attribute :>> sourceReference = "illustrative — no source";
     }
-    part reverseDeliveryPauseControl : RiskControl {
+    part reverseDeliveryPauseControl : RiskControlMeasure {
         attribute :>> id = "RC-010";
         attribute :>> name = "ReverseDeliveryDetectionAndPause";
         attribute :>> controlKind = RiskControlKind::alarm;
@@ -611,7 +614,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 22 — model REQ-CS-22: transition to PAUSED and REQ 59 'Reverse Delivery' actions, model NOTIF-04); CITE-004: §2.4.1 HID 1.14 (flow sensor)";
     }
-    part antiRefluxDesignControl : RiskControl {
+    part antiRefluxDesignControl : RiskControlMeasure {
         attribute :>> id = "RC-011";
         attribute :>> name = "ContinuousReverseDeliveryPrevention";
         attribute :>> controlKind = RiskControlKind::inherentSafeDesign;
@@ -619,17 +622,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-008: GPCA Safety Requirements (2009), Reverse delivery (during normal use and/or single fault condition, continuous reverse delivery shall not be possible; from IEC 601-2-24)";
     }
-    part riskAfterReverse : RiskAfterMitigation {
+    part riskAfterReverse : ResidualRisk {
         attribute :>> id = "RISK-A-006";
-        attribute :>> name = "ReverseDeliveryRiskAfterMitigation";
+        attribute :>> name = "ReverseDeliveryResidualRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::remote;
         attribute :>> severityEstimate = SeverityKind::serious;
         attribute :>> riskLevel = CriticalityKind::medium;
-        attribute :>> acceptability = RiskAcceptabilityKind::alarp;
-        attribute :>> residualProbability = ProbabilityKind::remote;
-        attribute :>> residualSeverity = SeverityKind::serious;
-        attribute :>> residualAcceptability = RiskAcceptabilityKind::acceptable;
+        attribute :>> acceptability = RiskAcceptabilityKind::acceptable;
         attribute :>> benefitRiskRequired = false;
         attribute :>> sourceReference = "illustrative — no source";
     }
@@ -672,9 +672,9 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> operatingCondition = "ACTIVE therapy continuing past the prescribed total volume";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 20: actual volume infused exceeds the drug-database maximum VTBI)";
     }
-    part riskBeforeVtbi : RiskBeforeMitigation {
+    part riskBeforeVtbi : Risk {
         attribute :>> id = "RISK-B-007";
-        attribute :>> name = "VtbiOverInfusionRiskBeforeMitigation";
+        attribute :>> name = "VtbiOverInfusionInitialRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::occasional;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
@@ -685,7 +685,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> foreseeableMisuseIncluded = true;
         attribute :>> sourceReference = "illustrative — no source";
     }
-    part vtbiLimitPauseControl : RiskControl {
+    part vtbiLimitPauseControl : RiskControlMeasure {
         attribute :>> id = "RC-012";
         attribute :>> name = "VtbiCeilingPauseAtKvo";
         attribute :>> controlKind = RiskControlKind::alarm;
@@ -693,7 +693,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 20 — model REQ-CS-20: transition to PAUSED and REQ 59 'Over Infusion VTBI' actions, model NOTIF-06); CITE-002: CriSys AADL v2.0, AGREE over-VTBI => flow <= KVO (model GP-008)";
     }
-    part infusionCompleteControl : RiskControl {
+    part infusionCompleteControl : RiskControlMeasure {
         attribute :>> id = "RC-013";
         attribute :>> name = "InfusionCompleteStopAtVtbi";
         attribute :>> controlKind = RiskControlKind::inherentSafeDesign;
@@ -701,23 +701,20 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6 (REQ 28 — model REQ-CS-28: transition to IDLE when total volume infused reaches the programmed prescription maximum VTBI)";
     }
-    part riskAfterVtbi : RiskAfterMitigation {
+    part riskAfterVtbi : ResidualRisk {
         attribute :>> id = "RISK-A-007";
-        attribute :>> name = "VtbiOverInfusionRiskAfterMitigation";
+        attribute :>> name = "VtbiOverInfusionResidualRisk";
         attribute :>> driverKind = "risk";
         attribute :>> probabilityEstimate = ProbabilityKind::remote;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
         attribute :>> riskLevel = CriticalityKind::medium;
-        attribute :>> acceptability = RiskAcceptabilityKind::alarp;
-        attribute :>> residualProbability = ProbabilityKind::remote;
-        attribute :>> residualSeverity = SeverityKind::catastrophic;
-        attribute :>> residualAcceptability = RiskAcceptabilityKind::acceptable;
+        attribute :>> acceptability = RiskAcceptabilityKind::acceptable;
         attribute :>> benefitRiskRequired = false;
         attribute :>> sourceReference = "illustrative — no source";
     }
 
     // ── Cross-cutting platform controls ─────────────────────────────
-    part watchdogControl : RiskControl {
+    part watchdogControl : RiskControlMeasure {
         attribute :>> id = "RC-007";
         attribute :>> name = "HardwareWatchdogSafeState";
         attribute :>> controlKind = RiskControlKind::protectiveMeasure;
@@ -725,7 +722,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> verificationStatus = "planned";
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms (watchdog alarm) and §2.3 Pump Checks (watchdog interrupt tests); CITE-008: GPCA Safety Requirements (2009), POST (watchdog test)";
     }
-    part flowCrossCheckControl : RiskControl {
+    part flowCrossCheckControl : RiskControlMeasure {
         attribute :>> id = "RC-008";
         attribute :>> name = "IndependentFlowCrossCheck";
         attribute :>> controlKind = RiskControlKind::monitoring;
