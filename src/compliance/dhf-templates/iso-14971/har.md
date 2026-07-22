@@ -35,7 +35,7 @@ label: Hazardous situations
 ```
 
 ```memo-query
-kind: RiskControl
+kind: RiskControlMeasure
 display: count
 label: Risk control measures
 ```
@@ -113,7 +113,7 @@ empty: "No harm elements defined. Add Harm elements linked to HazardousSituation
 ### 6.1 Inherent Safety by Design
 
 ```memo-query
-kind: RiskControl
+kind: RiskControlMeasure
 where: doc contains "design"
 display: table
 columns: name, doc, layer
@@ -123,11 +123,11 @@ empty: "No inherent safety controls."
 ### 6.2 Protective Measures
 
 ```memo-query
-kind: RiskControl
+kind: RiskControlMeasure
 display: table
 columns: name, doc, layer
 sort: name
-empty: "No risk controls defined. Add RiskControl elements."
+empty: "No risk controls defined. Add RiskControlMeasure elements."
 ```
 
 ### 6.3 Information for Safety

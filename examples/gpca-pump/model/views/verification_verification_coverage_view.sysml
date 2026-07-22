@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_model_views_verification_verification_coverage_v
         part :>> selectionQuery {
             attribute :>> id = "QRY-VER-101";
             attribute :>> name = "GPCA_VerificationCoverageQuery";
-            attribute :>> includeElementKinds = ("Requirement", "RiskControl", "VerificationCase", "ValidationCase", "TestArtifact", "Evidence");
+            attribute :>> includeElementKinds = ("Requirement", "RiskControlMeasure", "VerificationCase", "ValidationCase", "TestArtifact", "Evidence");
             attribute :>> includeRelationshipKinds = ("VerifiedBy", "Validates", "ProducesEvidence");
             attribute :>> includeLayers = ("requirements", "risk", "assurance");
             attribute :>> selectionExpression = "product == 'GPCA'";

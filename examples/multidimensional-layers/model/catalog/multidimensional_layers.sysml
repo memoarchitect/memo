@@ -3,7 +3,7 @@
 // architecture layer, encoded by its owning package — and is never duplicated.
 // Its safety, cybersecurity, and verification character are not tags on the
 // element; they are typed relationships to elements owned by the vertical
-// assurance disciplines (a Hazard/RiskControl it mitigates, a VerificationCase
+// assurance disciplines (a Hazard/RiskControlMeasure it mitigates, a VerificationCase
 // that checks it). Ownership lives on one axis; participation crosses axes only
 // through relationships.
 package memo_examples_multidimensional_layers {

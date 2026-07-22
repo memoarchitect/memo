@@ -16,11 +16,11 @@ package memo_viewpoints_risk_risk_chain_view {
     attribute :>> presentationKind = (PresentationKind::riskTable);
     attribute :>> diagramType = "risk";
     attribute :>> autoPopulate = true;
-    attribute :>> queryDescription = "Include hazards, hazardous situations, harms, controls, and verification evidence.";
+    attribute :>> queryDescription = "Include the explicit ISO 14971 chain, risk controls, residual risks, benefits, and verification evidence.";
     part :>> selectionQuery {
         attribute :>> id = "QRY-RISK-001";
         attribute :>> name = "RiskChainQuery";
-        attribute :>> includeElementKinds = ("Hazard", "HazardousSituation", "Harm", "RiskControl", "VerificationCase");
+        attribute :>> includeElementKinds = ("SafetyRelatedCharacteristic", "HazardCause", "Hazard", "SequenceOfEvents", "HazardousSituation", "Harm", "Risk", "RiskControlMeasure", "ResidualRisk", "Benefit", "OverallResidualRiskEvaluation", "VerificationCase");
         attribute :>> includeLayers = ("risk", "assurance");
         attribute :>> includeConcerns = (ConcernKind::safety);
         attribute :>> rationaleText = "Auto-populate the risk chain view from the risk and assurance layers.";

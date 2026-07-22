@@ -26,7 +26,7 @@ A useful assurance path is:
 
 ```mermaid
 flowchart LR
-    Claim[Requirement or RiskControl] -->|VerifiedBy| Case[VerificationCase]
+    Claim[Requirement or RiskControlMeasure] -->|VerifiedBy| Case[VerificationCase]
     Case -->|ProducesEvidence| Evidence[Evidence]
     Evidence --> Result[Result, version, approval, and location]
 ```

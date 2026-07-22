@@ -18,7 +18,7 @@ package memo_viewpoints_context_context_viewpoint {
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::interoperability);
         attribute :>> includedLayers = ("context");
-        attribute :>> allowedElementKinds = ("Actor", "UseContext", "IntendedUse", "OperationalEntity", "TrustBoundary", "LogicalComponent");
+        attribute :>> allowedElementKinds = ("Actor", "UseContext", "IntendedUse", "ReasonablyForeseeableMisuse", "OperationalEntity", "TrustBoundary", "LogicalComponent");
         attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }

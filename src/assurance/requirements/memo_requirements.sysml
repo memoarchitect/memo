@@ -7,6 +7,22 @@ package memo_assurance_requirements {
     private import memo_assurance_needs::*;
     part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
 
+    // ISO 14971 risk-analysis inputs. These are model elements so hazards,
+    // scenarios, requirements, and DHF records can trace to the exact use
+    // definition or foreseeable misuse that motivated them.
+    part def IntendedUse specializes DocumentedElement {
+        attribute indication : String;
+        attribute contraindication : String;
+        attribute patientPopulation : String;
+        attribute clinicalBenefit : String;
+        attribute regulatoryClassification : String;
+    }
+    part def ReasonablyForeseeableMisuse specializes DocumentedElement {
+        attribute misuseContext : String;
+        attribute foreseeableBasis : String;
+        attribute affectedUseContext : String;
+    }
+
     // The kind of requirement. Was a subclass branch (SystemRequirement /
     // SoftwareRequirement / HardwareRequirement) plus a parallel design-control
     // specification hierarchy (DesignControlSpecification / System- / Software- /

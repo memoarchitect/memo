@@ -86,9 +86,14 @@ question through the layers:
 3. **Implementation.** `gpca_architecture.sysml` holds the software components
    (`Infusion_Manager`, `Alarm`, …) and hardware assemblies;
    `gpca_interfaces.sysml` binds 46 component exchanges with typed endpoints.
-4. **Assurance.** `gpca_risk.sysml` carries the over-infusion hazard chain,
-   `gpca_verification.sysml` the lockout verification cases and evidence, and
-   `gpca_trace.sysml` the typed links that make the whole path reviewable.
+4. **Assurance.** `gpca_risk.sysml` carries dedicated
+   `SafetyRelatedCharacteristic`, `HazardCause`, `Hazard`,
+   `SequenceOfEvents`, `HazardousSituation`, `Harm`, `Risk`,
+   `RiskControlMeasure`, `ResidualRisk`, `Benefit`, and
+   `OverallResidualRiskEvaluation` elements, including the over-infusion
+   chain. `gpca_verification.sysml` carries the lockout verification cases
+   and evidence, and `gpca_trace.sysml` the typed links that make the whole
+   path reviewable.
 
 ```mermaid
 flowchart LR
