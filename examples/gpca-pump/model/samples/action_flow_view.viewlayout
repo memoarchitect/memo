@@ -1,9 +1,0 @@
-format: memo.viewlayout/v1
-viewSource: model/samples/action_flow_view.sysml
-layouts:
-  diag-sample-sampleActionFlowView:
-    nodes:
-    nodes: {}
-    edges: {}
-    canvas:
-      autoLayout: true
