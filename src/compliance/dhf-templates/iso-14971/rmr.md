@@ -29,7 +29,7 @@ label: Total hazards identified
 ```
 
 ```memo-query
-kind: RiskControl
+kind: RiskControlMeasure
 display: count
 label: Risk controls implemented
 ```

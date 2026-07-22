@@ -16,7 +16,7 @@ describe historical migrations.
 | `src/core/dimensions/dimensions.sysml` | `memo_core_dimensions` | perspectives, lifecycle stages, disciplines, and concerns |
 | `src/context/actors/memo_actors.sysml` | `memo_context_actors` | `Actor`, `User`, `ClinicalUser`, `PatientUser`, `CaregiverUser`, `TechnicianUser`, `NonHumanActor` |
 | `src/context/stakeholders/memo_stakeholders.sysml` | `memo_context_stakeholders` | `Stakeholder`, `Concern`, architecture-description concepts |
-| `src/context/use_context/memo_use_context.sysml` | `memo_context_use_context` | `IntendedUse`, `UseContext`, `UseEnvironment` and context links |
+| `src/context/use_context/memo_use_context.sysml` | `memo_context_use_context` | `UseContext`, `UseEnvironment` and context links |
 | `src/assurance/needs/memo_needs.sysml` | `memo_assurance_needs` | needs hierarchy |
 | `src/use_cases/memo_use_cases.sysml` | `memo_use_cases` | `UseCase`, `ClinicalUseCase`, `ServiceUseCase`, `ManufacturingUseCase`, `DevelopmentUseCase` |
 | `src/clinical_procedures/memo_clinical_procedures.sysml` | `memo_clinical_procedures` | procedure, technique, variant, instrument-set concepts |
@@ -40,8 +40,8 @@ describe historical migrations.
 | `src/architecture/behavior/memo_behavior.sysml` | `memo_architecture_behavior` | behavior machines, states, transitions, behavior properties |
 | `src/architecture/constraints/memo_constraints.sysml` | `memo_architecture_constraints` | architecture constraints |
 | `src/architecture/decisions/memo_decisions.sysml` | `memo_architecture_decisions` | `DesignDecision` |
-| `src/assurance/requirements/memo_requirements.sysml` | `memo_assurance_requirements` | requirements and requirement drivers |
-| `src/assurance/safety/memo_risk.sysml` | `memo_assurance_safety_risk` | risks, risk matrices, residual-risk concepts |
+| `src/assurance/requirements/memo_requirements.sysml` | `memo_assurance_requirements` | `IntendedUse`, `ReasonablyForeseeableMisuse`, requirements, and requirement drivers |
+| `src/assurance/safety/memo_risk.sysml` | `memo_assurance_safety_risk` | the explicit ISO 14971 risk chain, controls, residual risk, benefit, and overall residual-risk evaluation |
 | `src/assurance/safety/memo_arch_risk.sysml` | `memo_assurance_safety_arch_risk` | architecture risk links |
 | `src/assurance/safety_analysis/memo_fmea.sysml` | `memo_assurance_safety_analysis` | FMEA worksheet, failure mode, effect, cause |
 | `src/assurance/verification/memo_assurance.sysml` | `memo_assurance_verification` | verification, validation, evidence, review cases |

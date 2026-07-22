@@ -122,16 +122,11 @@ test('ontology namespace facade references no example packages', () => {
   assert.doesNotMatch(facade, /memo_examples/);
 });
 
-test('use cases have one generic base and context-specific specializations', () => {
+test('use cases use one standard type with a context kind', () => {
   const useCases = read('src', 'use_cases', 'memo_use_cases.sysml');
-  for (const expected of [
-    'use case def UseCase',
-    'use case def ClinicalUseCase specializes UseCase',
-    'use case def ServiceUseCase specializes UseCase',
-    'use case def ManufacturingUseCase specializes UseCase',
-    'use case def DevelopmentUseCase specializes UseCase',
-  ]) assert.match(useCases, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-  assert.doesNotMatch(useCases, /MedicalUseCase/);
+  assert.match(useCases, /use case def UseCase/);
+  assert.match(useCases, /attribute useCaseKind : UseCaseKind/);
+  assert.doesNotMatch(useCases, /(?:Clinical|Service|Manufacturing|Development|Medical)UseCase/);
 });
 
 test('ontology V-model names canonical types and remains structurally valid SVG', () => {
@@ -166,8 +161,8 @@ test('0.5 ontology packages exist with path-derived names', () => {
     'src/workflows/memo_workflows.sysml': 'memo_workflows',
     'src/scenarios/memo_scenarios.sysml': 'memo_scenarios',
     'src/assurance/human_factors/memo_human_factors.sysml': 'memo_assurance_human_factors',
-    'src/interaction/memo_interaction.sysml': 'memo_interaction',
-    'src/architecture/software_runtime/memo_software_runtime.sysml': 'memo_architecture_software_runtime',
+    'src/architecture/implementation/ui/memo_ui.sysml': 'memo_architecture_ui',
+    'src/architecture/implementation/software/memo_software_runtime.sysml': 'memo_architecture_software_runtime',
     'src/architecture/deployment/memo_deployment.sysml': 'memo_architecture_deployment',
     'src/medical_products/memo_product_definitions.sysml': 'memo_medical_products_definitions',
     'src/medical_products/memo_product_lifecycle.sysml': 'memo_medical_products_lifecycle',
@@ -183,7 +178,11 @@ test('0.5 ontology packages exist with path-derived names', () => {
 
 test('migrated names do not reappear in ontology or canonical example', () => {
   const roots = ['src', 'examples/gpca-pump'];
-  const banned = [/\bSemanticLink\b/, /\bLogicalFunction\b/, /\bFunctionalChain\b/, /\bArcadiaLayerKind\b/, /\barchLayer\b/];
+  const banned = [
+    /\bSemanticLink\b/, /\bLogicalFunction\b/, /\bFunctionalChain\b/,
+    /\bArcadiaLayerKind\b/, /\barchLayer\b/, /\bRiskBeforeMitigation\b/,
+    /\bRiskAfterMitigation\b/, /\bRiskControl\b/,
+  ];
   const walk = (dir) => readdirSync(join(root, dir), { withFileTypes: true }).flatMap((entry) =>
     entry.isDirectory() ? walk(join(dir, entry.name)) : entry.name.endsWith('.sysml') ? [join(dir, entry.name)] : []);
   for (const dir of roots) {
@@ -194,6 +193,21 @@ test('migrated names do not reappear in ontology or canonical example', () => {
   }
 });
 
+test('ISO 14971 concepts are dedicated ontology elements', () => {
+  const requirements = read('src', 'assurance', 'requirements', 'memo_requirements.sysml');
+  const risk = read('src', 'assurance', 'safety', 'memo_risk.sysml');
+  for (const type of ['IntendedUse', 'ReasonablyForeseeableMisuse']) {
+    assert.match(requirements, new RegExp(`\\bpart def ${type}\\b`));
+  }
+  for (const type of [
+    'SafetyRelatedCharacteristic', 'HazardCause', 'Hazard', 'SequenceOfEvents',
+    'HazardousSituation', 'Harm', 'Risk', 'RiskControlMeasure', 'ResidualRisk',
+    'Benefit', 'OverallResidualRiskEvaluation',
+  ]) {
+    assert.match(risk, new RegExp(`\\b(?:part|item) def ${type}\\b`), `${type} must be a dedicated element`);
+  }
+});
+
 test('the library facade exports the 0.5 domain packages', () => {
   const library = read('src', 'medical_device_library.sysml');
   for (const pkg of [
@@ -201,7 +215,7 @@ test('the library facade exports the 0.5 domain packages', () => {
     'memo_context_stakeholders', 'memo_context_use_context', 'memo_assurance_needs',
     'memo_use_cases', 'memo_clinical_procedures', 'memo_activities',
     'memo_workflows', 'memo_scenarios', 'memo_assurance_human_factors',
-    'memo_interaction', 'memo_architecture_software_runtime',
+    'memo_architecture_ui', 'memo_architecture_software_runtime',
     'memo_architecture_deployment', 'memo_medical_products_definitions',
     'memo_medical_products_lifecycle', 'memo_medical_products_usage',
     'memo_viewpoints_catalog',

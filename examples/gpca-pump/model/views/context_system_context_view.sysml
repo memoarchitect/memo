@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_model_views_context_system_context_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-CTX-101";
             attribute :>> name = "GPCA_SystemContextQuery";
-            attribute :>> includeElementKinds = ("Actor", "UseContext", "IntendedUse", "OperationalEntity");
+            attribute :>> includeElementKinds = ("Actor", "UseContext", "IntendedUse", "ReasonablyForeseeableMisuse", "OperationalEntity");
             attribute :>> includeRelationshipKinds = ("InteractsWith", "ExchangesWith", "ConnectsPhysically", "Governs", "AppliesInContext");
             attribute :>> includeLayers = ("context", "operational");
             attribute :>> selectionExpression = "product == 'GPCA'";

@@ -71,7 +71,7 @@ empty: "No interfaces defined."
 This section is generated from the system model. The table below lists the **Risk Controls for FMEA Items** elements currently defined:
 
 ```memo-query
-kind: RiskControl
+kind: RiskControlMeasure
 display: table
 columns: name, layer, doc
 sort: name

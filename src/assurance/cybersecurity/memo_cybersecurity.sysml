@@ -66,7 +66,7 @@ package memo_assurance_cybersecurity {
         attribute linkedSafetyHazardId : String;
     }
 
-    item def CyberRisk specializes RiskBeforeMitigation {
+    item def CyberRisk specializes Risk {
         attribute exploitabilityEstimate : String;
         attribute attackComplexity : String;
         attribute detectability : DetectionKind;
@@ -74,7 +74,7 @@ package memo_assurance_cybersecurity {
         attribute patientSafetyContribution : String;
     }
 
-    part def CyberMitigation specializes RiskControl {
+    part def CyberMitigation specializes RiskControlMeasure {
         attribute cyberControlKind : CyberControlKind;
         attribute securityMechanism : String;
         attribute verificationExpectation : String;

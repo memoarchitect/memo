@@ -18,7 +18,7 @@ package memo_viewpoints_risk_risk_viewpoint {
         attribute :>> presentationKind = (PresentationKind::riskTable);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::regulatory);
         attribute :>> includedLayers = ("risk", "assurance");
-        attribute :>> allowedElementKinds = ("Hazard", "HazardousSituation", "Harm", "Risk", "RiskControl", "VerificationCase");
+        attribute :>> allowedElementKinds = ("SafetyRelatedCharacteristic", "HazardCause", "Hazard", "SequenceOfEvents", "HazardousSituation", "Harm", "Risk", "RiskControlMeasure", "ResidualRisk", "Benefit", "OverallResidualRiskEvaluation", "VerificationCase");
         attribute :>> methodologyReference = ("iso14971-default");
         attribute :>> userExtensible = true;
     }

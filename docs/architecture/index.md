@@ -24,7 +24,7 @@ The operational perspective answers **why, for whom, and in what context**.
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
 | `Actor`, `ClinicalUser`, `Stakeholder` | Who has a goal or responsibility | `Initiates`, `Performs`, `HasConcern` |
-| `IntendedUse`, `UseContext`, `Need` (needKind: stakeholder) | Purpose, setting, and desired outcome | `Motivates`, `DerivesFrom` |
+| `IntendedUse`, `ReasonablyForeseeableMisuse`, `UseContext`, `Need` (needKind: stakeholder) | Purpose, foreseeable misuse, setting, and desired outcome | `Motivates`, `DerivesFrom` |
 | `UseCase` and its specializations | A clinical, service, manufacturing, or development goal | `Motivates`, `SupportsUseCase`, `Validates` |
 | `OperationalWorkflow`, `WorkflowStep` | Reusable organization of work | `SupportsUseCase`, `Precedes` |
 | `OperationalScenario` | A nominal, alternate, or exception path | `SelectsStep`, `Realizes` |
@@ -109,7 +109,7 @@ elements.
 | Discipline | Core elements | Principal relationships |
 | --- | --- | --- |
 | Requirements | `Need` (needKind: stakeholder…), `Requirement` (requirementKind: system, software, hardware) | `DerivesFrom`, `SatisfiedBy`, `VerifiedBy` |
-| Safety and risk | `Hazard`, `HazardousSituation`, `Harm`, `RiskControl`, FMEA elements | `MitigatesHazard`, risk-chain links |
+| Safety and risk | `SafetyRelatedCharacteristic`, `HazardCause`, `Hazard`, `SequenceOfEvents`, `HazardousSituation`, `Harm`, `Risk`, `RiskControlMeasure`, `ResidualRisk`, `Benefit`, FMEA/FTA elements | `MitigatesHazard`, risk-chain links |
 | Cybersecurity | `CybersecurityAsset`, `Threat`, `Vulnerability`, `CyberMitigation` | asset/threat/vulnerability/mitigation links |
 | Human factors | `CriticalTask`, `UseError`, UI and usability elements | `CommitsUseError`, `UseErrorLeadsToHazard` |
 | Verification and validation | `VerificationCase`, `ValidationCase`, `Evidence` | `VerifiedBy`, `Validates`, `ProducesEvidence` |

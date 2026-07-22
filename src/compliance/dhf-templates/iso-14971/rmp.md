@@ -119,7 +119,7 @@ empty: "No hazardous situations defined."
 ### 5.3 Risk Control Measures
 
 ```memo-query
-kind: RiskControl
+kind: RiskControlMeasure
 display: table
 columns: name, layer, doc
 sort: name

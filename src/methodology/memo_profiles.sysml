@@ -54,10 +54,10 @@ package memo_methodology_profiles {
         attribute :>> abstractionLevel = "software design";
     }
 
-    part useRiskBeforeRule : ElementUsageRule {
+    part useRiskAndResidualRule : ElementUsageRule {
         attribute :>> id = "RULE-001";
-        attribute :>> name = "UseRiskBeforeAfter";
-        attribute :>> elementTypeName = "RiskBeforeMitigation,RiskAfterMitigation,RiskMatrix";
+        attribute :>> name = "UseRiskAndResidualRisk";
+        attribute :>> elementTypeName = "Risk,ResidualRisk,RiskMatrix";
         attribute :>> strength = RuleStrengthKind::recommended;
         attribute :>> rationaleText = "Even a light methodology should distinguish pre- and post-mitigation risk and assess against a matrix.";
     }

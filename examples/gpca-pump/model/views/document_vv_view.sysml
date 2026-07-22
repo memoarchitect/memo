@@ -21,7 +21,7 @@ package memo_examples_gpca_pump_model_views_document_vv_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-006";
             attribute :>> name = "vvViewQuery";
-            attribute :>> includeElementKinds = ("VerificationCase", "ValidationCase", "TestArtifact", "Evidence", "Requirement", "RiskControl");
+            attribute :>> includeElementKinds = ("VerificationCase", "ValidationCase", "TestArtifact", "Evidence", "Requirement", "RiskControlMeasure");
             attribute :>> includeRelationshipKinds = ("VerifiedBy", "Validates", "TestedByUsability", "ProducesEvidence", "IncludedIn");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }

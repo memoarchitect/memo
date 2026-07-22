@@ -1,5 +1,6 @@
-// Intended use and use context (IEC 62366-1 use specification; ISO 14971
-// §5.2). Relocated from the former memo_architecture_context.
+// Operational use context (IEC 62366-1 use specification). Intended use and
+// reasonably foreseeable misuse are assurance requirements/risk inputs and
+// live in memo_assurance_requirements.
 package memo_context_use_context {
     private import ScalarValues::*;
 
@@ -7,14 +8,6 @@ package memo_context_use_context {
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_context_actors::*;
-
-    part def IntendedUse specializes DocumentedElement {
-        attribute indication : String;
-        attribute contraindication : String;
-        attribute patientPopulation : String;
-        attribute clinicalBenefit : String;
-        attribute regulatoryClassification : String;
-    }
 
     part def UseContext specializes MemoPart {
         attribute careSetting : String;

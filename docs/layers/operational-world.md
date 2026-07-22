@@ -24,7 +24,7 @@ MEMO links them (`ActsAsActor`) instead of merging the types.
 | `Stakeholder`, `Concern` | Interests the architecture must answer (ISO 42010) |
 | `Actor` → `User` / `NonHumanActor` | Anything that interacts with the system |
 | `User` → `ClinicalUser`, `PatientUser`, `CaregiverUser`, `TechnicianUser` | The intended human users |
-| `IntendedUse`, `UseContext`, `UseEnvironment` | The governed purpose and the setting of use |
+| `IntendedUse`, `ReasonablyForeseeableMisuse`, `UseContext`, `UseEnvironment` | Assurance-owned use definition and foreseeable misuse governing the operational setting |
 
 ## What for: needs and use cases
 
