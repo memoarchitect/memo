@@ -42,11 +42,20 @@ package memo_examples_sysml_diagram_samples_model_samples_use_case_view {
         attribute :>> useCaseKind = UseCaseKind::clinical;
     }
 
+    // L2 child of Review Device Status: makes L0 → L1 → L2 selectable.
+    use case validateTherapySettings : UseCase {
+        attribute :>> id = "UC-SAMPLE-005";
+        attribute :>> name = "Validate Therapy Settings";
+        attribute :>> useCaseKind = UseCaseKind::clinical;
+    }
+
     connection : Initiates connect initiatingUser ::> clinician to initiatedUseCase ::> configureTherapy;
     connection : ParticipatesIn connect participant ::> patient to useCase ::> reviewStatus;
     connection : ParticipatesIn connect participant ::> patient to useCase ::> configureTherapy;
     connection : ParticipatesIn connect participant ::> serviceTechnician to useCase ::> maintainDevice;
+    connection : ParticipatesIn connect participant ::> clinician to useCase ::> validateTherapySettings;
     connection : Includes connect includingUseCase ::> configureTherapy to includedUseCase ::> reviewStatus;
+    connection : Includes connect includingUseCase ::> reviewStatus to includedUseCase ::> validateTherapySettings;
     connection : Extends connect extendingUseCase ::> documentTreatment to extendedUseCase ::> reviewStatus;
 
     view sampleUseCaseView : MemoDiagramView {
@@ -57,6 +66,7 @@ package memo_examples_sysml_diagram_samples_model_samples_use_case_view {
         expose configureTherapy;
         expose maintainDevice;
         expose documentTreatment;
+        expose validateTherapySettings;
         attribute :>> title = "Sample · Device Use Cases";
         attribute :>> shortDescription = "Actors outside a device boundary with include, extend, hierarchy-level, and orthogonal-routing presentation.";
         attribute :>> viewKind = DiagramViewKind::general;
