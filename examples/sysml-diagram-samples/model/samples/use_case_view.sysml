@@ -76,6 +76,6 @@ package memo_examples_sysml_diagram_samples_model_samples_use_case_view {
             attribute :>> includeRelationshipKinds = ("Initiates", "ParticipatesIn", "Includes", "Extends");
         }
         // Presentation is owned by the model view, rather than a canvas control.
-        attribute :>> layoutHint = "usecase:level=all;edge=orthogonal";
+        attribute :>> layoutHint = "usecase:level=all;edge=rounded";
     }
 }
