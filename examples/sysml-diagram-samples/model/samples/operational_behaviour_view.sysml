@@ -3,6 +3,7 @@ package memo_examples_sysml_diagram_samples_model_samples_operational_behaviour_
     private import memo_context_actors::*;
     private import memo_core_relationships::*;
     private import memo_architecture_interfaces::*;
+    private import memo_architecture_operational::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
@@ -14,14 +15,19 @@ package memo_examples_sysml_diagram_samples_model_samples_operational_behaviour_
     item def OpBolusRequest specializes InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::signal;
     }
-    part def CareSystem;
 
     action def OpPrescribeTherapy { out prescription : OpPrescription; }
     action def OpVerifyPrescription { in prescription : OpPrescription; }
     action def OpRequestBolus { out bolusRequest : OpBolusRequest; }
     action def OpCheckLockout { in bolusRequest : OpBolusRequest; }
 
-    part opCareSystem : CareSystem { attribute name = "PCA Care System"; }
+    // Use the canonical MEMO operational system type—never a sample-local
+    // placeholder—so ontology-driven Explorer grouping remains authoritative.
+    part opCareSystem : OperationalEntity {
+        attribute :>> name = "PCA Care System";
+        attribute :>> entityKind = OperationalEntityKind::device;
+        attribute :>> contextRole = "systemOfInterest";
+    }
     part opClinicalTeam : User {
         attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Clinical Team"; }
     part opPatientGroup : User {
