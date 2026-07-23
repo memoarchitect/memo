@@ -12,7 +12,8 @@ memo-architect --example standard-sysml-diagrams
 ```
 
 Each view is a `MemoDiagramView` declared in `model/samples/`, exposing its own
-dummy elements and grouped under **Model Viewpoint › Samples**.
+dummy elements. The Architect explorer groups each authored view by the layer
+of its model content.
 
 | View | Diagram type | View kind | Renders |
 | --- | --- | --- | --- |
@@ -21,7 +22,7 @@ dummy elements and grouped under **Model Viewpoint › Samples**.
 | `action_flow_view.sysml` | `afd` | actionflow | Activity / action flow — actions, item flows, successions. |
 | `functional_flow_view.sysml` | `ffd` | actionflow | Functional flow — swimlanes per realising component, typed data/energy flows. |
 | `operational_behaviour_view.sysml` | `ofd` | actionflow | Operational flow — clinical-role swimlanes, concurrent preparation, and a composite therapy step. |
-| `context_view.sysml` | `context` | general | System context — the system as one block surrounded by external actors, systems, and use context. |
+| `context_view.sysml` | `context` | general | Operational system context — a black-box system of interest inside an explicit boundary, with actors, peer systems, environment, and typed interactions outside it. |
 | `requirements_view.sysml` | `req` | general | Requirements — stakeholder needs deriving into system requirements. |
 | `use_case_view.sysml` | `ucd` | general | Use case — relationship-driven actors, include/extend links, and model-owned `usecase:level` / `edge` presentation hints. |
 | `state_transition_view.sysml` | `stm` | statetransition | State machine — pump operating modes and their triggered transitions. |
