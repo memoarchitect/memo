@@ -6,16 +6,27 @@ package memo_examples_sysml_diagram_samples_model_samples_context_view {
 
     private import memo_context_actors::*;
     private import memo_context_use_context::*;
+    private import memo_architecture_operational::*;
     private import memo_medical_products_definitions::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
-    part infusionSystem : MedicalDevice { attribute :>> name = "Infusion Pump System"; }
+    // The operational system of interest is intentionally represented as one
+    // black box. Context diagrams show its environment and interfaces, not its
+    // internal decomposition.
+    part infusionSystem : OperationalEntity {
+        attribute :>> name = "Infusion Pump System";
+        attribute :>> entityKind = OperationalEntityKind::device;
+        attribute :>> contextRole = "systemOfInterest";
+    }
     part clinician : User { attribute :>> name = "Clinician"; }
     part patient : User { attribute :>> name = "Patient"; }
     part biomedTech : User { attribute :>> name = "Biomedical Technician"; }
-    part pharmacySystem : MedicalDevice { attribute :>> name = "Pharmacy Information System"; }
+    part pharmacySystem : OperationalEntity {
+        attribute :>> name = "Pharmacy Information System";
+        attribute :>> entityKind = OperationalEntityKind::externalSystem;
+    }
     part homeContext : UseContext { attribute :>> name = "Home Care Environment"; }
 
     connection : InteractsWith connect contextParticipant ::> clinician to target ::> infusionSystem;
@@ -28,7 +39,7 @@ package memo_examples_sysml_diagram_samples_model_samples_context_view {
         expose infusionSystem::**;
         attribute depth = 1;
         attribute :>> title = "Sample · System Context";
-        attribute :>> shortDescription = "The system as a single block surrounded by the external actors, neighbouring systems, and use context it exchanges with across its boundary.";
+        attribute :>> shortDescription = "Operational system context: one black-box system boundary, its external people, peer systems, operating environment, and named boundary-crossing interactions.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "context";
         part :>> selectionQuery {
