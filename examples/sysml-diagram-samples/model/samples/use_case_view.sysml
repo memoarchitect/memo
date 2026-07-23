@@ -36,10 +36,18 @@ package memo_examples_sysml_diagram_samples_model_samples_use_case_view {
         attribute :>> useCaseKind = UseCaseKind::service;
     }
 
+    use case documentTreatment : UseCase {
+        attribute :>> id = "UC-SAMPLE-004";
+        attribute :>> name = "Document Treatment";
+        attribute :>> useCaseKind = UseCaseKind::clinical;
+    }
+
     connection : Initiates connect initiatingUser ::> clinician to initiatedUseCase ::> configureTherapy;
     connection : ParticipatesIn connect participant ::> patient to useCase ::> reviewStatus;
     connection : ParticipatesIn connect participant ::> patient to useCase ::> configureTherapy;
     connection : ParticipatesIn connect participant ::> serviceTechnician to useCase ::> maintainDevice;
+    connection : Includes connect includingUseCase ::> configureTherapy to includedUseCase ::> reviewStatus;
+    connection : Extends connect extendingUseCase ::> documentTreatment to extendedUseCase ::> reviewStatus;
 
     view sampleUseCaseView : MemoDiagramView {
         expose patient;
@@ -48,13 +56,16 @@ package memo_examples_sysml_diagram_samples_model_samples_use_case_view {
         expose reviewStatus;
         expose configureTherapy;
         expose maintainDevice;
+        expose documentTreatment;
         attribute :>> title = "Sample · Device Use Cases";
-        attribute :>> shortDescription = "Actors outside a device boundary associated with clinical and service use cases.";
+        attribute :>> shortDescription = "Actors outside a device boundary with include, extend, hierarchy-level, and orthogonal-routing presentation.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "ucd";
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("User", "UseCase");
-            attribute :>> includeRelationshipKinds = ("Initiates", "ParticipatesIn");
+            attribute :>> includeRelationshipKinds = ("Initiates", "ParticipatesIn", "Includes", "Extends");
         }
+        // Presentation is owned by the model view, rather than a canvas control.
+        attribute :>> layoutHint = "usecase:level=all;edge=orthogonal";
     }
 }
