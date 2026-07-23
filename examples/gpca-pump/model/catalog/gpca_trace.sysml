@@ -56,6 +56,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
 
     // ── Actor participation (use case view) ─────────────────────
+    connection : Initiates connect initiatingUser ::> actorNurse to initiatedUseCase ::> ucDeliverPcaTherapy;
+    connection : ParticipatesIn connect participant ::> actorPatient to useCase ::> ucDeliverPcaTherapy;
+    connection : ParticipatesIn connect participant ::> actorPrescriber to useCase ::> ucDeliverPcaTherapy;
+    connection : ParticipatesIn connect participant ::> actorPharmacist to useCase ::> ucDeliverPcaTherapy;
     connection : Performs connect performer ::> actorPrescriber to performed ::> oaPrescribe;
     connection : Performs connect performer ::> actorPharmacist to performed ::> oaLoadReservoir;
     connection : Performs connect performer ::> actorNurse to performed ::> oaProgram;
