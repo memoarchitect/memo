@@ -54,4 +54,14 @@ package memo_use_cases {
         end participant : Actor;
         end useCase : UseCase;
     }
+    // UML use-case relationships. Includes establishes a decomposition level;
+    // extends remains a cross-cutting relationship and is always presented.
+    connection def Includes :> MemoRelationship {
+        end includingUseCase : UseCase;
+        end includedUseCase : UseCase;
+    }
+    connection def Extends :> MemoRelationship {
+        end extendingUseCase : UseCase;
+        end extendedUseCase : UseCase;
+    }
 }
