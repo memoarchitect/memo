@@ -58,6 +58,17 @@ package memo_examples_sysml_diagram_samples_model_samples_action_flow_view {
     allocate sampleActionFlow.process.processStepC to laneB;
     allocate sampleActionFlow.record to laneB;
 
+    // MemoLink sample — the universal relation, exercised where nothing else
+    // reaches. laneB is a `part` (LogicalComponent :> ArchitectureElement) and
+    // ProcessInput is an `action def` (:> MemoAction). Those foundations share
+    // no supertype, so every typed relation in the ontology is unavailable
+    // here: legalRelationshipTypes returns MemoLink and nothing else.
+    connection linkLaneBProcessesInput : MemoLink
+        connect linkSource ::> laneB to linkTarget ::> ProcessInput {
+        attribute :>> linkRationale =
+            "Lane B is the swimlane that carries the ProcessInput behaviour. The association crosses the part/action metaclass boundary, so no typed relation can express it.";
+    }
+
     view sampleActionFlowView : MemoDiagramView {
         expose sampleActionFlow::**;
         expose laneA;
