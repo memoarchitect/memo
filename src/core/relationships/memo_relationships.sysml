@@ -8,7 +8,41 @@ package memo_core_relationships {
     // Connection/Association), specializing the MemoRelationship base. The
     // relationship name is the verb; the RelationshipRegistry derives the
     // navigable type as camelCase(name) and navigation is bidirectional.
-    abstract connection def MemoRelationship { attribute linkStatus : LinkStatusKind; }
+    // Structural properties of a relation, declared here so authoring and
+    // validation read them from the ontology instead of assuming them. Both are
+    // unset on the base and carry the conservative reading: a relation forbids
+    // self-links and forbids repeats unless it says otherwise. A subtype opts
+    // out by redefining, e.g. `attribute :>> isReflexive = true;`.
+    abstract connection def MemoRelationship {
+        attribute linkStatus : LinkStatusKind;
+        doc /* True when an element may be related to itself by this relation.
+             * Unset is read as false. */
+        attribute isReflexive : Boolean;
+        doc /* True when at most one link of this type may join the same ordered
+             * pair of elements — KerML Feature::isUnique over the relation.
+             * Unset is read as true. */
+        attribute isUnique : Boolean;
+    }
+
+    // The one relation that can join any two model elements, whatever their
+    // metaclass. Every other relation types its ends against a foundation
+    // (MemoPart, VerifiableElement, …), and per ADR-0002 those foundations do
+    // not share a supertype — KerML will not let a behaviour specialize a
+    // structure — so a typed end can never reach across from a part to an
+    // action, port, state, item or verification case. MemoLink leaves both ends
+    // untyped, which is what makes it universal: an untyped end accepts any
+    // kind.
+    //
+    // It is deliberately the weakest relation in the ontology. Reach for it
+    // only when no specific relation carries the meaning, and say why in
+    // linkRationale — an untyped link with no stated reason is an audit gap,
+    // not a model fact.
+    connection def MemoLink :> MemoRelationship {
+        doc /* Generic association between any two model elements. */
+        attribute linkRationale : String;
+        end linkSource;
+        end linkTarget;
+    }
 
     connection def DerivesFrom :> MemoRelationship {
         // Drivers include needs and hazards (ISO 14971: hazards drive
