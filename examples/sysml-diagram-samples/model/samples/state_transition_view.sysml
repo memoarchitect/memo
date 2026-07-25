@@ -16,6 +16,12 @@ package memo_examples_sysml_diagram_samples_model_samples_state_transition_view 
     state paused : ModeState { attribute :>> name = "Paused"; }
     state alarm : ModeState { attribute :>> name = "Alarm"; }
 
+    // Infusing is a composite state: its substates show what the pump is doing
+    // while it is infusing, and the machine renders them nested inside it.
+    state priming : ModeState { attribute :>> name = "Priming"; }
+    state delivering : ModeState { attribute :>> name = "Delivering"; }
+    state holding : ModeState { attribute :>> name = "Holding (KVO)"; }
+
     part tStart : Transition {
         attribute :>> name = "start";
         attribute :>> trigger = "startInfusion";
@@ -47,16 +53,35 @@ package memo_examples_sysml_diagram_samples_model_samples_state_transition_view 
         attribute :>> sourceState = "Infusing"; attribute :>> targetState = "Idle";
     }
 
+    part tPrimed : Transition {
+        attribute :>> name = "primed";
+        attribute :>> trigger = "primeComplete";
+        attribute :>> sourceState = "Priming"; attribute :>> targetState = "Delivering";
+    }
+    part tKvo : Transition {
+        attribute :>> name = "keepVeinOpen";
+        attribute :>> trigger = "doseComplete";
+        attribute :>> sourceState = "Delivering"; attribute :>> targetState = "Holding (KVO)";
+    }
+    part tResumeDose : Transition {
+        attribute :>> name = "resumeDose";
+        attribute :>> trigger = "doseScheduled";
+        attribute :>> sourceState = "Holding (KVO)"; attribute :>> targetState = "Delivering";
+    }
+
     connection : Composes connect parent ::> pumpModes to child ::> idle;
     connection : Composes connect parent ::> pumpModes to child ::> infusing;
     connection : Composes connect parent ::> pumpModes to child ::> paused;
     connection : Composes connect parent ::> pumpModes to child ::> alarm;
+    connection : Composes connect parent ::> infusing to child ::> priming;
+    connection : Composes connect parent ::> infusing to child ::> delivering;
+    connection : Composes connect parent ::> infusing to child ::> holding;
 
     view sampleStateTransitionView : MemoDiagramView {
         expose pumpModes::**;
-        attribute depth = 1;
+        attribute depth = 2;
         attribute :>> title = "Sample · State Transition";
-        attribute :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — with triggered transitions between the mode states.";
+        attribute :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding.";
         attribute :>> viewKind = DiagramViewKind::statetransition;
         attribute :>> diagramType = "stm";
         part :>> selectionQuery {
@@ -75,4 +100,10 @@ package memo_examples_sysml_diagram_samples_model_samples_state_transition_view 
     connection : IncludedIn connect sourceElement ::> tFault to targetView ::> sampleStateTransitionView;
     connection : IncludedIn connect sourceElement ::> tRecover to targetView ::> sampleStateTransitionView;
     connection : IncludedIn connect sourceElement ::> tStop to targetView ::> sampleStateTransitionView;
+    connection : IncludedIn connect sourceElement ::> priming to targetView ::> sampleStateTransitionView;
+    connection : IncludedIn connect sourceElement ::> delivering to targetView ::> sampleStateTransitionView;
+    connection : IncludedIn connect sourceElement ::> holding to targetView ::> sampleStateTransitionView;
+    connection : IncludedIn connect sourceElement ::> tPrimed to targetView ::> sampleStateTransitionView;
+    connection : IncludedIn connect sourceElement ::> tKvo to targetView ::> sampleStateTransitionView;
+    connection : IncludedIn connect sourceElement ::> tResumeDose to targetView ::> sampleStateTransitionView;
 }
