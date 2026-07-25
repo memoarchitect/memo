@@ -50,6 +50,8 @@ explains every catalog area and view.
 
 ## The reference example
 
-[GPCA Pump](gpca-walkthrough.md) is the one comprehensive example. It uses
-the tutorial sequence across a complete infusion-pump model and explains what
-is present in the catalog and each view.
+[GPCA Pump](../case-studies/gpca/index.md) is the one comprehensive example: a
+complete infusion-pump model, documented as an ISO/IEC/IEEE 42010 architecture
+description under [Case Studies](../case-studies/index.md). The
+[narrative walkthrough](gpca-walkthrough.md) takes the tutorial sequence
+across that model and explains what is present in the catalog and each view.
