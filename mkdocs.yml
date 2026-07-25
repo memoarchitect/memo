@@ -111,5 +111,12 @@ nav:
       - Architecture Overview: architecture/index.md
       - "The memo:: Namespace": architecture/namespace.md
       - Repository and Packaging: architecture/repository.md
-  - GPCA:
-      - GPCA Pump: examples/gpca-walkthrough.md
+  - Case Studies:
+      - Overview: case-studies/index.md
+      - GPCA Pump:
+          - Overview: case-studies/gpca/index.md
+          - Stakeholders and Concerns: case-studies/gpca/stakeholders-concerns.md
+          - Viewpoints: case-studies/gpca/viewpoints.md
+          - Views: case-studies/gpca/views.md
+          - Correspondences: case-studies/gpca/correspondences.md
+          - Narrative Walkthrough: examples/gpca-walkthrough.md

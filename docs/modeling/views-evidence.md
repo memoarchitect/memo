@@ -20,6 +20,19 @@ Do not copy elements into diagram-specific packages merely to make a picture.
 Reference canonical elements and relationships. Layout metadata may change
 without changing engineering meaning.
 
+## Depth is a view decision, not a model decision
+
+Composite states and composite actions are model structure: a state owns
+substates, an action owns steps, and those relationships are real. How much of
+that depth a reader unfolds is not.
+
+Keep the two apart. Declaring `depth` on a view says what it offers by
+default; folding a composite to a single box, or drilling into one so it
+becomes its own diagram, is a reading move made at the renderer. Neither
+rewrites the model, and neither should be recorded as if it did. A deep
+hierarchy is not a modelling error to be flattened — it is content the reader
+navigates.
+
 ## Evidence closes the loop
 
 A useful assurance path is:
@@ -45,6 +58,7 @@ them.
 
 ## Continue the story
 
-Read the [GPCA pump walkthrough](../examples/gpca-walkthrough.md) to see the
-same path—from clinical scenario through architecture, risk, and evidence—in a
-complete reference model.
+Read the [GPCA case study](../case-studies/gpca/index.md) to see the same
+path—from clinical scenario through architecture, risk, and evidence—in a
+complete reference model, documented as an ISO/IEC/IEEE 42010 architecture
+description.
