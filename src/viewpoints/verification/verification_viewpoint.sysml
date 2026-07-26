@@ -19,7 +19,6 @@ package memo_viewpoints_verification_verification_viewpoint {
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::regulatory);
         attribute :>> includedLayers = ("requirements", "assurance");
         attribute :>> allowedElementKinds = ("Requirement", "VerificationCase", "ValidationCase", "Evidence", "TestArtifact");
-        attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }
 }

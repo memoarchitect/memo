@@ -24,14 +24,13 @@ package memo_core_relationships {
         attribute isUnique : Boolean;
     }
 
-    // The one relation that can join any two model elements, whatever their
-    // metaclass. Every other relation types its ends against a foundation
-    // (MemoPart, VerifiableElement, …), and per ADR-0002 those foundations do
-    // not share a supertype — KerML will not let a behaviour specialize a
-    // structure — so a typed end can never reach across from a part to an
-    // action, port, state, item or verification case. MemoLink leaves both ends
-    // untyped, which is what makes it universal: an untyped end accepts any
-    // kind.
+    // The general relation that can join any two model elements, whatever
+    // their metaclass. Most specific relations type their ends against a
+    // foundation (MemoPart, VerifiableElement, …). A small number of specific
+    // cross-metaclass relations leave an end untyped because their accepted
+    // constructs have no shared MEMO base; their names and attributes still
+    // carry a precise engineering meaning. MemoLink leaves both ends untyped
+    // and adds no domain-specific semantics, which is what makes it universal.
     //
     // It is deliberately the weakest relation in the ontology. Reach for it
     // only when no specific relation carries the meaning, and say why in
@@ -89,10 +88,10 @@ package memo_core_relationships {
         // Requirements, risk controls, and architecture components are
         // all legitimate verification targets
         end verificationTarget : MemoPart;
-        end verificationCase : VerifiableElement;
+        end verificationCase : MemoVerificationCase;
     }
     connection def ProducesEvidence :> MemoRelationship {
-        end producer : VerifiableElement;
+        end producer : MemoVerificationCase;
         end producedEvidence : MemoEvidence;
     }
     connection def IncludedIn :> MemoRelationship {
@@ -149,8 +148,10 @@ package memo_core_relationships {
     }
 
     connection def Validates :> MemoRelationship {
-        end validationTarget : VerifiableElement;
-        end validationCase : VerifiableElement;
+        // Validation targets include use cases and other behavioural elements,
+        // so the target remains untyped across SysML metaclass families.
+        end validationTarget;
+        end validationCase : MemoVerificationCase;
     }
     connection def DependsOnSoup :> MemoRelationship {
         end component : ArchitectureElement;
@@ -239,7 +240,7 @@ package memo_core_relationships {
     }
     connection def AnalyzedBy :> MemoRelationship {
         end element : ArchitectureElement;
-        end analysisArtifact : MemoPart;
+        end analysisArtifact : AnalysisArtifact;
     }
 
     connection def Changes :> MemoRelationship {

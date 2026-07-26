@@ -30,9 +30,10 @@ four submodules and what question each answers:
 | **Implementation and realization** | How is the solution built, assembled, and deployed? | `SoftwareComponent`, `HardwareAssembly`, `UIElement`, `ProcessingNode`, `DeploymentUnit` |
 
 This is the ARCADIA-style progression: operational analysis, then functional
-analysis, then logical architecture, then physical realization. MEMO does not
-require you to populate all four — see
-[the mental model](../what/mental-model.md) on starting with a vertical slice.
+analysis, then logical architecture, then physical realization. Every model
+begins with operational scenarios and functions; the implementation and
+realization path reflects the device technology. See
+[What is MEMO](../what/index.md#scenario-driven-modeling).
 
 ## Ownership is enforced
 

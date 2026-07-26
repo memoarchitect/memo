@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="610" viewBox="0 0 1440 610" role="img" aria-labelledby="title desc">
+  <title id="title">MEMO in a project</title>
+  <desc id="desc">A methodology selects ontology layers and modules. A project model records architecture and assurance. Viewpoints organize selected model content into views.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="13" flood-color="#0b2942" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#58708a"/>
+    </marker>
+    <style>
+      .title { font: 700 30px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0b2942; letter-spacing: .3px; }
+      .subtitle { font: 500 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #58708a; }
+      .heading { font: 700 25px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1.1px; }
+      .body { font: 650 22px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #18344c; }
+      .small { font: 500 20px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #405c75; }
+      .band { font: 700 20px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: .3px; }
+      .arrow-label { font: 700 18px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4d6680; }
+      .caption { font: 600 20px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #29445d; }
+    </style>
+  </defs>
+
+  <rect x="24" y="24" width="1392" height="562" rx="28" fill="#f4f8fa" stroke="#cfdee7" stroke-width="2"/>
+  <text x="72" y="78" class="title">MEMO IN A PROJECT</text>
+  <text x="72" y="108" class="subtitle">Scope the ontology, build the engineering model, then document it for review.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="80" y="158" width="330" height="320" rx="24" fill="#eee9ff" stroke="#c5b7f7" stroke-width="2"/>
+    <rect x="555" y="158" width="330" height="320" rx="24" fill="#e7f2fb" stroke="#a9d1ef" stroke-width="2"/>
+    <rect x="1030" y="158" width="330" height="320" rx="24" fill="#e2f6f1" stroke="#9bdacc" stroke-width="2"/>
+  </g>
+
+  <text x="115" y="207" class="heading" fill="#5743ad">METHODOLOGY</text>
+  <text x="115" y="252" class="body">Selects project scope</text>
+  <text x="115" y="289" class="small">Architecture layers</text>
+  <text x="115" y="321" class="small">Assurance modules</text>
+  <text x="115" y="353" class="small">External modules</text>
+  <rect x="115" y="391" width="260" height="50" rx="13" fill="#ddd4ff"/>
+  <text x="245" y="422" text-anchor="middle" class="band" fill="#5743ad">LAYERS + MODULES</text>
+
+  <text x="590" y="207" class="heading" fill="#1f6596">PROJECT MODEL</text>
+  <text x="590" y="246" class="body">One engineering source</text>
+  <rect x="590" y="274" width="260" height="72" rx="14" fill="#d5eafb"/>
+  <text x="610" y="303" class="band" fill="#1f6596">ARCHITECTURE</text>
+  <text x="610" y="329" class="small">intent · function · design</text>
+  <rect x="590" y="360" width="260" height="72" rx="14" fill="#d5f1ea"/>
+  <text x="610" y="389" class="band" fill="#08705c">ASSURANCE</text>
+  <text x="610" y="415" class="small">risk · V&amp;V · evidence</text>
+
+  <text x="1065" y="198" class="heading" fill="#08705c">VIEWPOINTS</text>
+  <text x="1065" y="226" class="heading" fill="#08705c">AND VIEWS</text>
+  <text x="1065" y="266" class="body">Document the model</text>
+  <text x="1065" y="305" class="small">Stakeholders and concerns</text>
+  <text x="1065" y="337" class="small">Selection and presentation</text>
+  <text x="1065" y="369" class="small">Diagrams, tables, and text</text>
+  <rect x="1065" y="391" width="260" height="50" rx="13" fill="#cceee6"/>
+  <text x="1195" y="422" text-anchor="middle" class="band" fill="#08705c">VIEWPOINT → VIEW</text>
+
+  <line x1="430" y1="318" x2="535" y2="318" stroke="#58708a" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="482" y="292" text-anchor="middle" class="arrow-label">selects</text>
+  <line x1="905" y1="318" x2="1010" y2="318" stroke="#58708a" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="957" y="292" text-anchor="middle" class="arrow-label">documents</text>
+
+  <text x="720" y="536" text-anchor="middle" class="caption">The project model is the engineering source; viewpoints organize its presentation.</text>
+</svg>

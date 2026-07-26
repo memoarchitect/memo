@@ -45,7 +45,7 @@ follow from the reasoning, and both are checked:
 
 Software structure answers three different questions, so MEMO gives it three
 views (the SEI viewtypes): the **module view** (`SoftwareSystem`,
-`SoftwareItem`, `SoftwareUnit`, `SOUPComponent` — the IEC 62304
+`SoftwareComponent`, `SoftwareModule`, `SBOMEntry` — the IEC 62304
 decomposition), the **runtime view** (`RuntimeComponent`, `Process`,
 `Thread`, `Service`, `RuntimePartition` — concurrency, scheduling, WCET,
 restart policy), and the **deployment view** (`DeploymentUnit` builds from
@@ -57,7 +57,7 @@ because "physical" means more than a circuit board.
 | Concern | Element examples |
 |---|---|
 | Logical responsibility | `LogicalComponent` (componentRole: system…channel), `IsolationBoundary` |
-| Software module view | `SoftwareSystem`, `SoftwareItem`, `SoftwareUnit`, `SOUPComponent` |
+| Software module view | `SoftwareSystem`, `SoftwareComponent`, `SoftwareModule`, `SBOMEntry` |
 | Software runtime view | `RuntimeComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` |
 | Deployment | `DeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` |
 | Physical realization | `PhysicalAssembly`, `Sensor`, `Actuator`, `FluidicComponent`, `OpticalComponent`, … |
@@ -68,7 +68,7 @@ flowchart LR
     Need[Need: stakeholder] --> Req[Requirement: system]
     Req --> Function[SystemFunction]
     Function -->|AllocatedTo| Logical[LogicalComponent]
-    Logical -->|Realizes| Module[SoftwareItem]
+    Logical -->|Realizes| Module[SoftwareComponent]
     Module -->|BuildsInto| Unit[DeploymentUnit]
     Unit -->|DeploysTo| Node[ProcessingNode]
     Logical -->|Realizes| Mech[MechanicalPart]

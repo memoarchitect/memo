@@ -15,21 +15,27 @@ package memo_methodology_core {
         attribute domain : String;
         attribute :>> description : String;
         attribute baseMethodName : String;
+        // A methodology is an inclusion set. Layer entries normally name a
+        // public MEMO layer namespace; module entries may name any qualified
+        // package available to the project, including packages outside MEMO.
+        attribute includedLayer : String[0..*];
+        attribute includedModule : String[0..*];
     }
 
     part def ResolvedMethodology :> MemoPart {
         attribute version : String;
-        // Risk-proportionate scope keyed to the device's software safety
-        // classification (IEC 62304 A/B/C) and lifecycle stage — not a
-        // "rigor dial". The class + stage determine which layers, links,
-        // viewpoints, and gates a release must clear.
-        attribute safetyClassification : SafetyClassKind;
-        attribute lifecycleStage : LifecycleStateKind;
-        attribute resolutionSummary : String;
+        // The effective inclusion set after the project binding has added any
+        // project- or supplier-specific modules.
+        attribute includedLayer : String[0..*];
+        attribute includedModule : String[0..*];
     }
 
     part def ProjectMethodBinding :> MemoPart {
         attribute projectName : String;
+        attribute methodologyName : String;
+        // Project bindings may add project or supplier modules to the selected
+        // methodology without requiring those packages to live under memo::.
+        attribute includedModule : String[0..*];
     }
 
     part def DhfDocumentBinding :> MemoPart {

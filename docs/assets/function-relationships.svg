@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="590" viewBox="0 0 1240 590" role="img" aria-labelledby="fr-title fr-desc">
+  <title id="fr-title">Function relationships in the MEMO ontology</title>
+  <desc id="fr-desc">A system function is involved in a functional flow, satisfies a requirement, is allocated to a logical component, is analyzed by an FMEA worksheet, and is verified by a verification case that produces evidence.</desc>
+  <defs>
+    <marker id="fr-arrow" markerWidth="10" markerHeight="10" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#5c7188"/></marker>
+    <filter id="fr-shadow" x="-15%" y="-20%" width="130%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#082744" flood-opacity="0.08"/></filter>
+    <style>
+      .fr-heading { font: 850 22px Nunito, Arial, sans-serif; fill: #082744; }
+      .fr-sub { font: 600 14px Nunito, Arial, sans-serif; fill: #5c7188; }
+      .fr-type { font: 850 14px Nunito, Arial, sans-serif; }
+      .fr-example { font: 650 12px Nunito, Arial, sans-serif; fill: #5c7188; }
+      .fr-rel { font: 800 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #5c7188; }
+      .fr-edge { fill: none; stroke: #5c7188; stroke-width: 2.5; marker-end: url(#fr-arrow); }
+    </style>
+  </defs>
+  <rect width="1240" height="590" rx="24" fill="#fbfcfd"/>
+  <text x="48" y="52" class="fr-heading">FUNCTION RELATIONSHIPS IN THE ONTOLOGY</text>
+  <text x="48" y="79" class="fr-sub">Each connection below uses the relationship direction and endpoint types declared by MEMO.</text>
+
+  <g filter="url(#fr-shadow)">
+    <rect x="48" y="130" width="230" height="72" rx="14" fill="#f2edff" stroke="#8971dc" stroke-width="2"/>
+    <rect x="48" y="270" width="230" height="72" rx="14" fill="#eaf4fd" stroke="#438ed0" stroke-width="2"/>
+    <rect x="470" y="200" width="300" height="112" rx="18" fill="#0b1e2d" stroke="#0b1e2d" stroke-width="2"/>
+    <rect x="962" y="130" width="230" height="72" rx="14" fill="#e3faf3" stroke="#2dd4a8" stroke-width="2"/>
+    <rect x="962" y="270" width="230" height="72" rx="14" fill="#fff0ef" stroke="#ea6b61" stroke-width="2"/>
+    <rect x="340" y="430" width="220" height="72" rx="14" fill="#e3faf3" stroke="#2dd4a8" stroke-width="2"/>
+    <rect x="680" y="430" width="220" height="72" rx="14" fill="#0b1e2d" stroke="#0b1e2d" stroke-width="2"/>
+  </g>
+
+  <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
+    <text x="163" y="160" class="fr-type" fill="#4a3896">Requirement</text><text x="163" y="182" class="fr-example">Alarm response obligation</text>
+    <text x="163" y="300" class="fr-type" fill="#17557f">FunctionalFlow</text><text x="163" y="322" class="fr-example">Detect and notify</text>
+    <text x="620" y="240" class="fr-type" fill="#2dd4a8">SystemFunction</text><text x="620" y="270" font-size="20" font-weight="850" fill="#ffffff">Detect temperature deviation</text><text x="620" y="294" class="fr-example" fill="#c9d9e5">shared system responsibility</text>
+    <text x="1077" y="160" class="fr-type" fill="#07604f">LogicalComponent</text><text x="1077" y="182" class="fr-example">Alarm controller</text>
+    <text x="1077" y="300" class="fr-type" fill="#94423d">FMEAWorksheet</text><text x="1077" y="322" class="fr-example">Alarm-path analysis</text>
+    <text x="450" y="460" class="fr-type" fill="#07604f">VerificationCase</text><text x="450" y="482" class="fr-example">High-temperature response</text>
+    <text x="790" y="460" class="fr-type" fill="#2dd4a8">Evidence</text><text x="790" y="482" class="fr-example" fill="#c9d9e5">Executed test report</text>
+  </g>
+
+  <path d="M288 166H390Q420 166 438 193L463 229" class="fr-edge"/>
+  <text x="382" y="151" text-anchor="middle" class="fr-rel">SatisfiedBy</text>
+  <path d="M288 306H390Q420 306 438 283L463 263" class="fr-edge"/>
+  <text x="384" y="326" text-anchor="middle" class="fr-rel">InvolvesFunction</text>
+  <path d="M780 229L805 193Q823 166 853 166H952" class="fr-edge"/>
+  <text x="858" y="151" text-anchor="middle" class="fr-rel">AllocatedTo</text>
+  <path d="M780 263L805 283Q823 306 853 306H952" class="fr-edge"/>
+  <text x="855" y="326" text-anchor="middle" class="fr-rel">AnalyzedBy</text>
+  <path d="M620 322V370Q620 395 595 410L565 429" class="fr-edge"/>
+  <text x="548" y="386" text-anchor="middle" class="fr-rel">VerifiedBy</text>
+  <path d="M570 466H670" class="fr-edge"/>
+  <text x="620" y="451" text-anchor="middle" class="fr-rel">ProducesEvidence</text>
+
+  <text x="620" y="552" text-anchor="middle" class="fr-sub">The function connects operational behavior to architecture and assurance without duplicating the function definition.</text>
+</svg>

@@ -20,7 +20,6 @@ package memo_viewpoints_cybersecurity_cybersecurity_viewpoint {
         attribute :>> includedLayers = ("cybersecurity", "software_structure", "hardware_structure", "interfaces", "risk", "assurance");
         attribute :>> allowedElementKinds = ("CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "ThreatScenario");
         attribute :>> allowedRelationshipKinds = ("ThreatenedBy", "Exploits", "RealizedByScenario", "Mitigates", "DerivesCyberRequirement", "ImpactsSafety", "CrossesTrustBoundary");
-        attribute :>> methodologyReference = ("stride-default", "fda-cybersecurity-default");
         attribute :>> documentUsage = ("Secure Product Development", "Threat Model", "Cybersecurity Risk Assessment", "QMSR");
         attribute :>> userExtensible = true;
     }

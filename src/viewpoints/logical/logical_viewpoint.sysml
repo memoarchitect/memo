@@ -19,7 +19,6 @@ package memo_viewpoints_logical_logical_viewpoint {
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::performance);
         attribute :>> includedLayers = ("logical_structure", "interfaces");
         attribute :>> allowedElementKinds = ("LogicalComponent", "Interface");
-        attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }
 }

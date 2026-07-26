@@ -90,7 +90,7 @@ The implementation perspective answers **how the design is realized**.
 
 | Element group | Examples | Key relationships |
 | --- | --- | --- |
-| Software module structure | `SoftwareSystem`, `SoftwareItem`, `SoftwareUnit`, `SOUPComponent` | `Realizes`, `BuildsInto` |
+| Software module structure | `SoftwareSystem`, `SoftwareComponent`, `SoftwareModule`, `SBOMEntry` | `Realizes`, `BuildsInto` |
 | Runtime structure | `SoftwareComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` | `HostedBy`, timing and interaction links |
 | Deployment | `DeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` | `DeploysTo`, `HostedBy` |
 | Hardware and physical realization | `HardwareAssembly`, `Sensor`, `Actuator`, `PhysicalAssembly` | `Realizes`, `Composes` |

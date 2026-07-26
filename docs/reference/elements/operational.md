@@ -2,7 +2,7 @@
 
 The operational layer answers *who is involved, where, and what work are they
 doing*. It is the first layer in the
-[scenario-driven reading path](../../what/scenario-driven.md): a use case is
+[scenario-driven modeling](../../what/index.md#scenario-driven-modeling): a use case is
 supported by workflows, a workflow selects scenarios, and a scenario is what
 functions and hazards attach to.
 
@@ -675,8 +675,8 @@ connection def Supports :> MemoRelationship
 
 | End | Type |
 | --- | --- |
-| `supporter` | [`MemoPart`](core.md#memopart) |
-| `supported` | [`MemoPart`](core.md#memopart) |
+| `supporter` | any supporting element |
+| `supported` | any supported goal, task, or capability |
 
 **Attributes**
 
@@ -943,7 +943,7 @@ connection def Selects :> MemoRelationship
 | End | Type |
 | --- | --- |
 | `scenario` | [`MemoScenario`](#memoscenario) |
-| `selected` | [`MemoPart`](core.md#memopart) |
+| `selected` | any workflow step or flow element |
 
 **Attributes**
 

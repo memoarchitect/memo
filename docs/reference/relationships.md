@@ -82,27 +82,27 @@ SysML composition, specialization, or allocation cannot express.
 | [`Precedes`](#precedes) | `predecessor` : [`ArchitectureElement`](elements/core.md#architectureelement) | `successor` : [`ArchitectureElement`](elements/core.md#architectureelement) |
 | [`PresentsState`](#presentsstate) | `userInterface` : [`UserInterface`](elements/implementation.md#userinterface) | `state` : [`UIState`](elements/implementation.md#uistate) |
 | [`ProducesEvent`](#producesevent) | `gate` : [`MemoPart`](elements/core.md#memopart) | `eventElement` : [`MemoPart`](elements/core.md#memopart) |
-| [`ProducesEvidence`](#producesevidence) | `producer` : [`VerifiableElement`](elements/core.md#verifiableelement) | `producedEvidence` : [`MemoEvidence`](elements/core.md#memoevidence) |
+| [`ProducesEvidence`](#producesevidence) | `producer` : [`MemoVerificationCase`](elements/core.md#memoverificationcase) | `producedEvidence` : [`MemoEvidence`](elements/core.md#memoevidence) |
 | [`ProvidesEnvironment`](#providesenvironment) | `node` : [`ProcessingNode`](elements/implementation.md#processingnode) | `environment` : [`RuntimeEnvironment`](elements/implementation.md#runtimeenvironment) |
 | [`RealizedByScenario`](#realizedbyscenario) | `realizedThreat` : [`RequirementDriver`](elements/core.md#requirementdriver) | `scenario` : [`MemoPart`](elements/core.md#memopart) |
 | [`Realizes`](#realizes) | `realizing` : [`MemoPart`](elements/core.md#memopart) | `realized` : [`MemoPart`](elements/core.md#memopart) |
 | [`RequiresResource`](#requiresresource) | `workflow` : [`OperationalWorkflow`](elements/operational.md#operationalworkflow) | `resource` : [`WorkflowResource`](elements/operational.md#workflowresource) |
 | [`ResolvesToMethodology`](#resolvestomethodology) | `boundModelElement` : [`MemoPart`](elements/core.md#memopart) | `resolvedMethodology` : [`MemoPart`](elements/core.md#memopart) |
 | [`SatisfiedBy`](#satisfiedby) | `requiredElement` : [`VerifiableElement`](elements/core.md#verifiableelement) | `satisfyingElement` : [`ArchitectureElement`](elements/core.md#architectureelement) |
-| [`Selects`](#selects) | `scenario` : [`MemoScenario`](elements/operational.md#memoscenario) | `selected` : [`MemoPart`](elements/core.md#memopart) |
+| [`Selects`](#selects) | `scenario` : [`MemoScenario`](elements/operational.md#memoscenario) | `selected` : any path element |
 | [`SetIncludesProduct`](#setincludesproduct) | `instrumentSet` : [`InstrumentSet`](elements/clinical.md#instrumentset) | `product` : [`MemoPart`](elements/core.md#memopart) |
 | [`SituatedIn`](#situatedin) | `useContext` : [`UseContext`](elements/operational.md#usecontext) | `environment` : [`UseEnvironment`](elements/operational.md#useenvironment) |
 | [`StepPrecedes`](#stepprecedes) | `predecessor` : [`WorkflowStep`](elements/operational.md#workflowstep) | `successor` : [`WorkflowStep`](elements/operational.md#workflowstep) |
-| [`Supports`](#supports) | `supporter` : [`MemoPart`](elements/core.md#memopart) | `supported` : [`MemoPart`](elements/core.md#memopart) |
+| [`Supports`](#supports) | `supporter` : any supporting element | `supported` : any supported goal, task, or capability |
 | [`TestedByUsability`](#testedbyusability) | `uiElementOrTask` : [`MemoPart`](elements/core.md#memopart) | `usabilityTest` : [`VerifiableElement`](elements/core.md#verifiableelement) |
 | [`ThreatenedBy`](#threatenedby) | `protectedAsset` : [`ArchitectureElement`](elements/core.md#architectureelement) | `realizedThreat` : [`RequirementDriver`](elements/core.md#requirementdriver) |
 | [`TracesRisk`](#tracesrisk) | `sourceRiskElement` : [`MemoPart`](elements/core.md#memopart) | `targetRiskElement` : [`MemoPart`](elements/core.md#memopart) |
 | [`Transforms`](#transforms) | `source` : [`MemoPart`](elements/core.md#memopart) | `target` : [`MemoPart`](elements/core.md#memopart) |
 | [`UITransition`](#uitransition) | `sourceState` : [`UIState`](elements/implementation.md#uistate) | `targetState` : [`UIState`](elements/implementation.md#uistate) |
-| [`UsesProduct`](#usesproduct) | `using` : [`MemoPart`](elements/core.md#memopart) | `product` : [`MedicalDevice`](elements/clinical.md#medicaldevice) |
+| [`UsesProduct`](#usesproduct) | `using` : [`MemoAction`](elements/core.md#memoaction) | `product` : [`MedicalDevice`](elements/clinical.md#medicaldevice) |
 | [`UsesTechnique`](#usestechnique) | `procedure` : [`ClinicalProcedure`](elements/clinical.md#clinicalprocedure) | `technique` : [`ClinicalTechnique`](elements/clinical.md#clinicaltechnique) |
-| [`Validates`](#validates) | `validationTarget` : [`VerifiableElement`](elements/core.md#verifiableelement) | `validationCase` : [`VerifiableElement`](elements/core.md#verifiableelement) |
-| [`VerifiedBy`](#verifiedby) | `verificationTarget` : [`MemoPart`](elements/core.md#memopart) | `verificationCase` : [`VerifiableElement`](elements/core.md#verifiableelement) |
+| [`Validates`](#validates) | `validationTarget` : any model element | `validationCase` : [`MemoVerificationCase`](elements/core.md#memoverificationcase) |
+| [`VerifiedBy`](#verifiedby) | `verificationTarget` : [`MemoPart`](elements/core.md#memopart) | `verificationCase` : [`MemoVerificationCase`](elements/core.md#memoverificationcase) |
 
 ### AccessoryOf
 
@@ -192,7 +192,7 @@ connection def AnalyzedBy :> MemoRelationship
 | End | Type |
 | --- | --- |
 | `element` | [`ArchitectureElement`](elements/core.md#architectureelement) |
-| `analysisArtifact` | [`MemoPart`](elements/core.md#memopart) |
+| `analysisArtifact` | [`AnalysisArtifact`](elements/core.md#analysisartifact) |
 
 ### AppliesInContext
 
@@ -456,7 +456,7 @@ connection def ControlImplementedBy :> MemoRelationship
 | End | Type |
 | --- | --- |
 | `riskControl` | [`VerifiableElement`](elements/core.md#verifiableelement) |
-| `implementingElement` | [`MemoPart`](elements/core.md#memopart) |
+| `implementingElement` | [`ArchitectureElement`](elements/core.md#architectureelement) |
 
 ### CrossesTrustBoundary
 
@@ -1454,7 +1454,7 @@ connection def ProducesEvidence :> MemoRelationship
 
 | End | Type |
 | --- | --- |
-| `producer` | [`VerifiableElement`](elements/core.md#verifiableelement) |
+| `producer` | [`MemoVerificationCase`](elements/core.md#memoverificationcase) |
 | `producedEvidence` | [`MemoEvidence`](elements/core.md#memoevidence) |
 
 ### ProvidesEnvironment
@@ -1581,7 +1581,7 @@ connection def Selects :> MemoRelationship
 | End | Type |
 | --- | --- |
 | `scenario` | [`MemoScenario`](elements/operational.md#memoscenario) |
-| `selected` | [`MemoPart`](elements/core.md#memopart) |
+| `selected` | any workflow step or flow element |
 
 **Attributes**
 
@@ -1672,8 +1672,8 @@ connection def Supports :> MemoRelationship
 
 | End | Type |
 | --- | --- |
-| `supporter` | [`MemoPart`](elements/core.md#memopart) |
-| `supported` | [`MemoPart`](elements/core.md#memopart) |
+| `supporter` | any supporting element |
+| `supported` | any supported goal, task, or capability |
 
 **Attributes**
 
@@ -1807,7 +1807,7 @@ connection def UsesProduct :> MemoRelationship
 
 | End | Type |
 | --- | --- |
-| `using` | [`MemoPart`](elements/core.md#memopart) |
+| `using` | [`MemoAction`](elements/core.md#memoaction) |
 | `product` | [`MedicalDevice`](elements/clinical.md#medicaldevice) |
 
 **Attributes**
@@ -1856,8 +1856,8 @@ connection def Validates :> MemoRelationship
 
 | End | Type |
 | --- | --- |
-| `validationTarget` | [`VerifiableElement`](elements/core.md#verifiableelement) |
-| `validationCase` | [`VerifiableElement`](elements/core.md#verifiableelement) |
+| `validationTarget` | Any model element |
+| `validationCase` | [`MemoVerificationCase`](elements/core.md#memoverificationcase) |
 
 ### VerifiedBy
 
@@ -1875,4 +1875,4 @@ connection def VerifiedBy :> MemoRelationship
 | End | Type |
 | --- | --- |
 | `verificationTarget` | [`MemoPart`](elements/core.md#memopart) |
-| `verificationCase` | [`VerifiableElement`](elements/core.md#verifiableelement) |
+| `verificationCase` | [`MemoVerificationCase`](elements/core.md#memoverificationcase) |

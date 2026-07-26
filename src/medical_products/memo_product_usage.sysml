@@ -39,7 +39,7 @@ package memo_medical_products_usage {
         attribute usageInstructions : String;
         // `using` is generic (activity or task) — unifies the former
         // UsesProduct / TaskUsesProduct synonyms.
-        end using : MemoPart;
+        end using : MemoAction;
         end product : MedicalDevice;
     }
 }

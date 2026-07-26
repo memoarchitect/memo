@@ -92,8 +92,11 @@ package memo_workflows {
     }
     connection def Supports :> MemoRelationship {
         attribute supportKind : SupportKind;
-        end supporter : MemoPart;
-        end supported : MemoPart;
+        // The accepted endpoints span SysML metaclasses: an operational
+        // workflow or other action may support a use case, task, or
+        // capability. They therefore have no single MEMO base type.
+        end supporter;
+        end supported;
     }
     connection def StepPrecedes :> MemoRelationship {
         attribute guardCondition : String;
