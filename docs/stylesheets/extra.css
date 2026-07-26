@@ -639,7 +639,7 @@
 .memo-slice-example { display: flex; gap: .42rem; align-items: stretch; margin: 1.2rem 0 1.7rem; padding: 1rem; border-radius: 15px; background: #edf3f6; }
 .memo-slice-example span { display: flex; flex: 1 1 0; min-width: 0; min-height: 7.2rem; flex-direction: column; justify-content: center; padding: .7rem; border-radius: 10px; font-size: .72rem; line-height: 1.35; }
 .memo-slice-example b { display: block; margin-bottom: .2rem; font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; }
-.memo-slice-example i { color: var(--memo-muted); font-style: normal; }
+.memo-slice-example i { align-self: center; color: var(--memo-muted); font-style: normal; }
 .slice-need { background: #e5ddff; color: #4c3a98; }
 .slice-requirement { background: #dceefa; color: #1e5d88; }
 .slice-design { background: #ffead7; color: #88501f; }
