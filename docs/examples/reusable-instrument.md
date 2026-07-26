@@ -59,8 +59,9 @@ happen before the instrument can return to sterile storage? The use case gives
 the goal. The workflow gives the reusable process and its sequence.
 
 ```sysml
-use case ucSterilize : ClinicalUseCase {
+use case ucSterilize : UseCase {
     attribute :>> name = "SterilizeReusableInstrument";
+    attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement =
         "Return a used instrument to sterile, functional condition for the next case.";
 }
@@ -84,7 +85,7 @@ the central concept demonstrated by this example: the reusable procedure is
 not the same thing as a completed reprocessing record.
 
 ```sysml
-part scNominalCycle : OperationalScenario {
+part scNominalCycle : OperativeScenario {
     attribute :>> name = "NominalReprocessingCycle";
     attribute :>> variantKind = ScenarioVariantKind::nominal;
     ref :>> parentWorkflow = wfReprocess;
@@ -104,8 +105,8 @@ part occCycle113 : ScenarioOccurrence {
 | --- | --- | --- |
 | Product/lifecycle | What may be reused and under which constraints? | `MedicalDeviceDefinition`, `ReuseLifecycle` |
 | Identity | Which physical item underwent the work? | `MedicalDeviceInstance`, `InstanceOf` |
-| Operational workflow | What work returns the item to service? | `ClinicalUseCase`, `OperationalWorkflow`, activities and steps |
-| Operational occurrence | What happened in a particular cycle? | `OperationalScenario`, `ScenarioOccurrence` |
+| Operational workflow | What work returns the item to service? | clinical `UseCase`, `OperationalWorkflow`, activities and steps |
+| Operational occurrence | What happened in a particular cycle? | `OperativeScenario`, `ScenarioOccurrence` |
 
 There is intentionally no software, logical, or physical architecture view:
 this example's concern is controlled reuse and evidence of a cycle, not how a

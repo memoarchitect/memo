@@ -10,7 +10,7 @@ of project phases or a substitute for the package source.
 ## Jump to a perspective
 
 - [Operational: context, workflows, and scenarios](#operational)
-- [Use-case hierarchy](#use-case-hierarchy)
+- [Use-case kinds](#use-case-kinds)
 - [Functional: capabilities, functions, and flows](#functional)
 - [Logical: responsibilities, channels, and interfaces](#logical)
 - [Implementation: software, hardware, and physical realization](#implementation)
@@ -23,33 +23,32 @@ The operational perspective answers **why, for whom, and in what context**.
 
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
-| `Actor`, `ClinicalUser`, `Stakeholder` | Who has a goal or responsibility | `Initiates`, `Performs`, `HasConcern` |
+| `Actor`, `User`, `Stakeholder` | Who has a goal or responsibility | `Initiates`, `Performs`, `HasConcern` |
 | `IntendedUse`, `ReasonablyForeseeableMisuse`, `UseContext`, `Need` (needKind: stakeholder) | Purpose, foreseeable misuse, setting, and desired outcome | `Motivates`, `DerivesFrom` |
-| `UseCase` and its specializations | A clinical, service, manufacturing, or development goal | `Motivates`, `SupportsUseCase`, `Validates` |
-| `OperationalWorkflow`, `WorkflowStep` | Reusable organization of work | `SupportsUseCase`, `Precedes` |
-| `OperationalScenario` | A nominal, alternate, or exception path | `SelectsStep`, `Realizes` |
+| `UseCase` with `UseCaseKind` | A clinical, service, manufacturing, or development goal | `Motivates`, `Supports`, `Validates` |
+| `OperationalWorkflow`, `WorkflowStep` | Reusable organization of work | `Supports`, `StepPrecedes` |
+| `OperativeScenario` | A nominal, alternate, or exception path | `Selects`, `Realizes` |
 | `OperationalActivity`, `Task`, `CriticalTask` | Work performed along a path | `Performs`, `UsesProduct`, `Enables` |
 
-**Core split:** `UseCase → OperationalWorkflow → OperationalScenario →
+**Core split:** `UseCase → OperationalWorkflow → OperativeScenario →
 OperationalActivity → action flow → SystemFunction`. A scenario owns the
 activity and action flow for its selected path; it is not a copy of the
 workflow.
 
-## Use-case hierarchy
+## Use-case kinds
 
-`UseCase` is the generic base. It stores the goal statement, trigger,
-preconditions, outcomes, participants, context, supporting system, and source
-needs. Use one of these specializations when the context adds meaning:
+`UseCase` stores the goal statement, trigger, preconditions, outcomes,
+participants, context, supporting system, and source needs. `UseCaseKind`
+records the domain of the goal:
 
-| Type | Use it when the goal concerns… | Example |
+| `useCaseKind` | Use it when the goal concerns… | Example |
 | --- | --- | --- |
-| `ClinicalUseCase` | patient care or clinical operation | Deliver patient-controlled analgesia |
-| `ServiceUseCase` | installation, maintenance, repair, calibration, or support | Calibrate a pressure sensor |
-| `ManufacturingUseCase` | producing, assembling, inspecting, packaging, or releasing a product | Inspect a sterile barrier seal |
-| `DevelopmentUseCase` | design, analysis, verification, change, or release work | Verify an alarm latency requirement |
+| `clinical` | patient care or clinical operation | Deliver patient-controlled analgesia |
+| `service` | installation, maintenance, repair, calibration, or support | Calibrate a pressure sensor |
+| `manufacturing` | producing, assembling, inspecting, packaging, or releasing a product | Inspect a sterile barrier seal |
+| `development` | design, analysis, verification, change, or release work | Verify an alarm latency requirement |
 
-The base type remains useful for a generic use case. The specialization adds
-context-specific attributes; it does not create a second copy of the goal.
+Each goal remains a `UseCase`; the enumeration value records its domain.
 
 ## Functional
 
@@ -60,7 +59,7 @@ of a software, electronics, or mechanical choice.
 | --- | --- | --- |
 | `SystemFunction` | A technology-independent responsibility | `Enables`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
 | `FunctionalFlow`, `FunctionalFlowStep` | Reusable organization and order of functions | `InvolvesFunction`, `IncludesStep` |
-| `FunctionalScenario` | The function path for one operational scenario | `SelectsFlow`, `Realizes` |
+| `FunctionalScenario` | The function path for one operational scenario | `selectedFlow`, `Realizes` |
 | `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | connects function endpoints |
 | `SystemAction` | Executable behavior realizing a function | `Performs` |
 
@@ -109,9 +108,9 @@ elements.
 | Discipline | Core elements | Principal relationships |
 | --- | --- | --- |
 | Requirements | `Need` (needKind: stakeholder…), `Requirement` (requirementKind: system, software, hardware) | `DerivesFrom`, `SatisfiedBy`, `VerifiedBy` |
-| Safety and risk | `SafetyRelatedCharacteristic`, `HazardCause`, `Hazard`, `SequenceOfEvents`, `HazardousSituation`, `Harm`, `Risk`, `RiskControlMeasure`, `ResidualRisk`, `Benefit`, FMEA/FTA elements | `MitigatesHazard`, risk-chain links |
+| Safety and risk | `SafetyRelatedCharacteristic`, `HazardCause`, `Hazard`, `SequenceOfEvents`, `HazardousSituation`, `Harm`, `Risk`, `RiskControlMeasure`, `ResidualRisk`, `Benefit`, FMEA/FTA elements | `Mitigates`, risk-chain links |
 | Cybersecurity | `CybersecurityAsset`, `Threat`, `Vulnerability`, `CyberMitigation` | asset/threat/vulnerability/mitigation links |
-| Human factors | `CriticalTask`, `UseError`, UI and usability elements | `CommitsUseError`, `UseErrorLeadsToHazard` |
+| Human factors | `CriticalTask`, `UseError`, UI and usability elements | `CommitsUseError`, `Causes` |
 | Verification and validation | `VerificationCase`, `ValidationCase`, `Evidence` | `VerifiedBy`, `Validates`, `ProducesEvidence` |
 
 FMEA analyzes how a function or component can fail and identifies hazards. It
@@ -123,9 +122,9 @@ implemented units; system and validation cases verify claims and use context.
 | From | Relationship | To | Review question |
 | --- | --- | --- | --- |
 | `Need` (needKind: stakeholder) | `Motivates` | `UseCase` | Why does this goal matter? |
-| `OperationalWorkflow` | `SupportsUseCase` | `UseCase` | How is work organized? |
-| `OperationalScenario` | `SelectsStep` | `WorkflowStep` | Which path is considered? |
-| `FunctionalScenario` | `Realizes` | `OperationalScenario` | What functional path realizes it? |
+| `OperationalWorkflow` | `Supports` | `UseCase` | How is work organized? |
+| `OperativeScenario` | `Selects` | `WorkflowStep` | Which path is considered? |
+| `FunctionalScenario` | `Realizes` | `OperativeScenario` | What functional path realizes it? |
 | `SystemFunction` | `Enables` | `OperationalActivity` | What enables the work? |
 | `SystemFunction` | `AllocatedTo` | logical or implementation element | Who is responsible? |
 | software / physical element | `Realizes` / `Realizes` | `LogicalComponent` | How is it realized? |

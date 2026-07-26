@@ -33,13 +33,15 @@ who starts that use. The acknowledgement activity contains a critical task, so
 the human work can be traced to its possible harm and validation.
 
 ```sysml
-part icuNurse : ClinicalUser {
+part icuNurse : User {
     attribute :>> id = "TA-USR-001";
     attribute :>> name = "ICUNurse";
+    attribute :>> actorKind = ActorKind::clinician;
 }
-use case ucMonitorTemp : ClinicalUseCase {
+use case ucMonitorTemp : UseCase {
     attribute :>> id = "TA-UC-001";
     attribute :>> name = "MonitorPatientTemperature";
+    attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement =
         "Continuously monitor core temperature and be alerted when it leaves the safe range.";
 }
@@ -94,15 +96,15 @@ part elAlarmBanner : UIElement {
 }
 connection : ElementTriggersAction connect element ::> elAlarmBanner
     to triggeredAction ::> uiaAcknowledge;
-connection : SupportsTask connect userInterface ::> uiBedside
-    to task ::> taskAckAlarm;
+connection : Supports { attribute :>> supportKind = SupportKind::task;
+    connect supporter ::> uiBedside to supported ::> taskAckAlarm; }
 
 connection : CommitsUseError connect task ::> taskAckAlarm
     to useError ::> ueSilenceAndForget;
-connection : UseErrorLeadsToHazard connect useError ::> ueSilenceAndForget
-    to hazard ::> hzUndetectedDeviation;
-connection : MitigatesHazard connect riskControl ::> rcReAnnunciate
-    to mitigatedHazard ::> hzUndetectedDeviation;
+connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard;
+    connect cause ::> ueSilenceAndForget to effect ::> hzUndetectedDeviation; }
+connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard;
+    connect control ::> rcReAnnunciate to mitigatedElement ::> hzUndetectedDeviation; }
 connection : ControlImplementedBy connect riskControl ::> rcReAnnunciate
     to implementingElement ::> elAlarmBanner;
 ```

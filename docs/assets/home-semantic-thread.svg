@@ -3,54 +3,54 @@
   <desc id="desc">The overdose hazard drives a lockout requirement, which is satisfied by the infusion manager. A lockout control mitigates the hazard, is checked by verification, and produces evidence.</desc>
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#28796c"/>
+      <path d="M0,0 L0,6 L9,3 z" fill="#168c72"/>
     </marker>
   </defs>
   <rect width="960" height="390" rx="18" fill="#f3fbf8"/>
   <g font-family="system-ui, sans-serif">
     <text x="42" y="42" font-size="17" font-weight="700" fill="#176458">THE MODEL RECORDS THE CLAIM</text>
-    <text x="918" y="42" text-anchor="end" font-size="16" fill="#4d6863">change can follow meaning, not just IDs</text>
+    <text x="918" y="42" text-anchor="end" font-size="16" fill="#4d6863">change follows relationship meaning and stable IDs</text>
 
-    <rect x="42" y="76" width="220" height="100" rx="12" fill="#ffffff" stroke="#58a99c" stroke-width="2"/>
-    <text x="62" y="106" font-size="14" font-weight="700" fill="#28796c">HAZARD</text>
-    <text x="62" y="135" font-size="21" font-weight="700" fill="#173c37">HZ-001</text>
-    <text x="62" y="160" font-size="16" fill="#47625d">Overdose</text>
+    <rect x="42" y="76" width="220" height="100" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+    <text x="62" y="106" font-size="14" font-weight="700" fill="#168c72">HAZARD</text>
+    <text x="62" y="135" font-size="21" font-weight="700" fill="#082744">HZ-001</text>
+    <text x="62" y="160" font-size="16" fill="#5c7188">Overdose</text>
 
-    <rect x="370" y="76" width="220" height="100" rx="12" fill="#ffffff" stroke="#58a99c" stroke-width="2"/>
-    <text x="390" y="106" font-size="14" font-weight="700" fill="#28796c">REQUIREMENT</text>
-    <text x="390" y="135" font-size="21" font-weight="700" fill="#173c37">REQ-025</text>
-    <text x="390" y="160" font-size="16" fill="#47625d">Lockout rule</text>
+    <rect x="370" y="76" width="220" height="100" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+    <text x="390" y="106" font-size="14" font-weight="700" fill="#168c72">REQUIREMENT</text>
+    <text x="390" y="135" font-size="21" font-weight="700" fill="#082744">REQ-025</text>
+    <text x="390" y="160" font-size="16" fill="#5c7188">Lockout rule</text>
 
-    <rect x="698" y="76" width="220" height="100" rx="12" fill="#ffffff" stroke="#58a99c" stroke-width="2"/>
-    <text x="718" y="106" font-size="14" font-weight="700" fill="#28796c">SOFTWARE COMPONENT</text>
-    <text x="718" y="135" font-size="21" font-weight="700" fill="#173c37">SW-005</text>
-    <text x="718" y="160" font-size="16" fill="#47625d">Infusion manager</text>
+    <rect x="698" y="76" width="220" height="100" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+    <text x="718" y="106" font-size="14" font-weight="700" fill="#168c72">SOFTWARE COMPONENT</text>
+    <text x="718" y="135" font-size="21" font-weight="700" fill="#082744">SW-005</text>
+    <text x="718" y="160" font-size="16" fill="#5c7188">Infusion manager</text>
 
-    <path d="M270 126 H360" stroke="#28796c" stroke-width="2.5" marker-end="url(#arrow)"/>
-    <path d="M598 126 H688" stroke="#28796c" stroke-width="2.5" marker-end="url(#arrow)"/>
-    <text x="315" y="111" text-anchor="middle" font-size="14" font-weight="700" fill="#28796c">drives</text>
-    <text x="643" y="111" text-anchor="middle" font-size="14" font-weight="700" fill="#28796c">satisfied by</text>
+    <path d="M270 126 H360" stroke="#168c72" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M598 126 H688" stroke="#168c72" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="315" y="111" text-anchor="middle" font-size="14" font-weight="700" fill="#168c72">drives</text>
+    <text x="643" y="111" text-anchor="middle" font-size="14" font-weight="700" fill="#168c72">satisfied by</text>
 
-    <rect x="42" y="242" width="220" height="100" rx="12" fill="#ffffff" stroke="#58a99c" stroke-width="2"/>
-    <text x="62" y="272" font-size="14" font-weight="700" fill="#28796c">RISK CONTROL</text>
-    <text x="62" y="301" font-size="21" font-weight="700" fill="#173c37">RC-001</text>
-    <text x="62" y="326" font-size="16" fill="#47625d">Lockout</text>
+    <rect x="42" y="242" width="220" height="100" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+    <text x="62" y="272" font-size="14" font-weight="700" fill="#168c72">RISK CONTROL</text>
+    <text x="62" y="301" font-size="21" font-weight="700" fill="#082744">RC-001</text>
+    <text x="62" y="326" font-size="16" fill="#5c7188">Lockout</text>
 
-    <rect x="370" y="242" width="220" height="100" rx="12" fill="#ffffff" stroke="#58a99c" stroke-width="2"/>
-    <text x="390" y="272" font-size="14" font-weight="700" fill="#28796c">VERIFICATION</text>
-    <text x="390" y="301" font-size="21" font-weight="700" fill="#173c37">VER-002</text>
-    <text x="390" y="326" font-size="16" fill="#47625d">Check lockout</text>
+    <rect x="370" y="242" width="220" height="100" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+    <text x="390" y="272" font-size="14" font-weight="700" fill="#168c72">VERIFICATION</text>
+    <text x="390" y="301" font-size="21" font-weight="700" fill="#082744">VER-002</text>
+    <text x="390" y="326" font-size="16" fill="#5c7188">Check lockout</text>
 
-    <rect x="698" y="242" width="220" height="100" rx="12" fill="#ffffff" stroke="#58a99c" stroke-width="2"/>
-    <text x="718" y="272" font-size="14" font-weight="700" fill="#28796c">EVIDENCE</text>
-    <text x="718" y="301" font-size="21" font-weight="700" fill="#173c37">EVD-001</text>
-    <text x="718" y="326" font-size="16" fill="#47625d">Test result + baseline</text>
+    <rect x="698" y="242" width="220" height="100" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+    <text x="718" y="272" font-size="14" font-weight="700" fill="#168c72">EVIDENCE</text>
+    <text x="718" y="301" font-size="21" font-weight="700" fill="#082744">EVD-001</text>
+    <text x="718" y="326" font-size="16" fill="#5c7188">Test result + baseline</text>
 
-    <path d="M152 232 V186" stroke="#28796c" stroke-width="2.5" marker-end="url(#arrow)"/>
-    <path d="M270 292 H360" stroke="#28796c" stroke-width="2.5" marker-end="url(#arrow)"/>
-    <path d="M598 292 H688" stroke="#28796c" stroke-width="2.5" marker-end="url(#arrow)"/>
-    <text x="168" y="211" font-size="14" font-weight="700" fill="#28796c">mitigates</text>
-    <text x="315" y="277" text-anchor="middle" font-size="14" font-weight="700" fill="#28796c">verified by</text>
-    <text x="643" y="277" text-anchor="middle" font-size="14" font-weight="700" fill="#28796c">produces</text>
+    <path d="M152 232 V186" stroke="#168c72" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M270 292 H360" stroke="#168c72" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <path d="M598 292 H688" stroke="#168c72" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="168" y="211" font-size="14" font-weight="700" fill="#168c72">mitigates</text>
+    <text x="315" y="277" text-anchor="middle" font-size="14" font-weight="700" fill="#168c72">verified by</text>
+    <text x="643" y="277" text-anchor="middle" font-size="14" font-weight="700" fill="#168c72">produces</text>
   </g>
 </svg>

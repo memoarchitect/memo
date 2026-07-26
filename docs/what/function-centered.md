@@ -7,11 +7,10 @@ them — so the function is where four disciplines meet on one element.
 
 ![Function-centered traceability: needs, requirements, and risks constrain functions; functions allocate to logical architecture and realization; FMEA identifies hazards; tests verify implemented units](../assets/function-centered-traceability.png)
 
-## Read the arrows as meanings, not as a sequence
+## Read each arrow by its meaning
 
-This is the part that is easy to get wrong. The picture looks like a waterfall
-from "risk" to "test". It is not. Each arrow is a different typed relationship,
-and several of them point backwards:
+Each arrow represents a different typed relationship. The model supports
+traversal in both directions:
 
 | Relationship | Reads as |
 | --- | --- |
@@ -24,10 +23,10 @@ and several of them point backwards:
 | `VerifiedBy` | An element is verified by a verification case |
 | `ProducesEvidence` | A verification case produces evidence |
 
-A hazard found during analysis can create a **new requirement** at any time. A
-failed verification can send you back to the **design**. The model is a
-connected argument that you traverse in whichever direction the question runs,
-not a phase order you march through.
+A hazard found during analysis can create a **new requirement**. A failed
+verification can return attention to the **design**. The model is a connected
+argument that can be traversed in whichever direction the review question
+runs.
 
 ## The four questions it answers
 
@@ -43,8 +42,8 @@ somewhere useful:
 - *How do we know it works?* → follow `VerifiedBy` to the verification case and
   `ProducesEvidence` to the record.
 
-Those four traversals are the reason the ontology is typed. An identifier-only
-matrix can answer none of them.
+Those four traversals show the purpose of typed ontology relationships: each
+link carries the meaning needed to answer a review question.
 
 ## Impact analysis falls out of it
 

@@ -1,8 +1,7 @@
 # The layers
 
-The layers are MEMO's mental model for moving from purpose to evidence. They
-organize engineering questions, not folders, departments, or a mandatory
-process.
+The layers are MEMO's conceptual model for moving from purpose to evidence.
+They organize engineering questions across a medical-device architecture.
 
 Read the model along two axes:
 
@@ -16,10 +15,9 @@ complete and supported.
 
 [![MEMO architecture and assurance V-model](../assets/memo-architecture-assurance-v-model.png)](../assets/memo-architecture-assurance-v-model.png){ .memo-zoomable aria-label="Open the architecture and assurance V-model" }
 
-Each element lives once. A function belongs to the architecture path; a hazard
-belongs to assurance. A typed relationship connects them without copying either
-one into the other axis. MEMO enforces that single ownership in the ontology,
-which prevents separate safety, cybersecurity, and verification versions of
+Each model element retains one identity. A function is an architecture element;
+a hazard is an assurance element. Typed relationships connect them across the
+two domains, allowing safety, cybersecurity, and verification views to refer to
 the same design element.
 
 ## Read the V-model
@@ -29,8 +27,7 @@ stakeholder needs, intended use, users, use-related hazards, security context,
 and operational validation around operational concepts. The functional row
 contains functional and performance requirements, safety and cybersecurity
 controls, interaction requirements, and system V&amp;V. The logical and
-implementation rows continue the same pattern. Thus the V is not separate from
-requirements, risk, cybersecurity, or human factors: each discipline owns
+implementation rows continue the same pattern. Each assurance discipline owns
 elements in every applicable architecture row and relates them to the
 architecture and V&amp;V elements in that row.
 
@@ -44,15 +41,14 @@ work it claims to improve. → [The Operational World](operational-world.md)
 
 **Functional — what the system must do.** Technology-independent
 responsibilities (`SystemFunction`), organized into `FunctionalFlow`s with
-typed exchanges. A function may end up realized by software, mechanics,
-electronics, or a human procedure — the functional layer deliberately does not
-say which. → [Functional Analysis](operations-system.md)
+typed exchanges. A later layer assigns each function to software, mechanics,
+electronics, or a human procedure. → [Functional Analysis](operations-system.md)
 
 **Logical — how the solution is organized.** Still technology-independent:
 components, channels with safety roles (primary, redundant, monitor,
 interlock), data stores, control elements, ports, interfaces, modes, and
-isolation boundaries. Redundancy is expressed by typed roles plus independence
-constraints — never by duplicating a component under two names.
+isolation boundaries. Typed roles and independence constraints express
+redundancy while each component retains one identity.
 → [Requirements and Architecture](requirements-architecture.md)
 
 **Implementation — how it is realized.** Software in three views (module,
@@ -68,33 +64,32 @@ lifecycle) and as `MedicalDeviceInstance`s (serial, lot, UDI-PI, history).
 ## The disciplines
 
 Requirements, safety, cybersecurity, human factors, and V&V run **across** the
-layers, but they are not labels attached to an architecture layer. Each owns
-its own model elements. For example, `OperationalValidation` is a V&V element:
-it validates an operational use case, workflow, or scenario but it is not an
-operational element. Likewise, a `VerificationCase` checks a function or a
-component while remaining owned by V&V. Requirements owns `Need` and
+layers. Each owns its own model elements. For example,
+`OperationalValidation` is a V&V element that validates an operational use
+case, workflow, or scenario. Likewise, a `VerificationCase` remains a V&V
+element while checking a function or component. Requirements owns `Need` and
 `Requirement`; safety/risk owns `Hazard`, `Risk`, and `RiskControlMeasure`;
 cybersecurity owns `CybersecurityAsset`, `Threat`, `Vulnerability`, and its
 controls; and human factors owns user tasks, `UseError`, and usability
-evidence. A dose-limit checker can carry safety, security, and verification
-relationships without being copied for each discipline. Evidence and
+evidence. A dose-limit checker can participate in safety, security, and
+verification relationships through one model identity. Evidence and
 traceability underpin all of it.
 → [Risk, Cybersecurity, and Assurance](risk-assurance.md)
 
-## Layers are optional; connections are not
+## Follow scenarios into the appropriate realization
 
-A reusable forceps has no functional, logical, or software layer — its model
-goes from user task to mechanical parts, and MEMO's rules never demand more
-(see the `manual-surgical-instrument` example). A software-only device has no
-hardware at all (`software-only-medical-device`). What MEMO does insist on is
-that whatever layers you use stay connected: safety-critical functions trace
-to verification, critical tasks trace to usability validation, instances trace
-to definitions.
+Every device model begins in the operational world. Context, use cases,
+workflows, and scenarios establish what people are trying to accomplish and
+the conditions under which the device participates. The functional layer then
+defines the system responsibilities required by those scenarios.
 
-The map intentionally does not show a “simple device” branch. Skipping an
-unneeded perspective is a modeling decision, not a flow in the V: state that
-decision in the model's scope or rationale and preserve the relationships that
-remain relevant.
+The technology-specific path begins when functions are allocated and realized.
+A reusable forceps allocates functions to logical responsibilities and
+mechanical elements (see `manual-surgical-instrument`). A software-only device
+allocates them to logical components, software structure, runtime, and
+deployment (`software-only-medical-device`). In both cases, safety-critical
+functions trace to verification, critical tasks trace to usability validation,
+and instances trace to definitions.
 
 ## Use the map in a review
 
@@ -109,8 +104,8 @@ direction until you can answer the review question.
 
 </div>
 
-The direction is not a workflow gate. Risk can expose a missing requirement;
-verification can reveal a design ambiguity. The map keeps each discovery
+Review can begin from either direction. Risk can expose a missing requirement;
+verification can reveal a design ambiguity. The model keeps each discovery
 connected to its source and its consequence.
 
 ## Continue the guide

@@ -5,7 +5,7 @@
   <rect width="1160" height="560" rx="24" fill="#fbfcfd"/>
 
   <text x="48" y="52" font-family="Nunito,Arial,sans-serif" font-size="20" font-weight="850" fill="#082744">PRODUCT IDENTITY: DEFINITION · INSTANCE · ROLE</text>
-  <text x="48" y="79" font-family="Nunito,Arial,sans-serif" font-size="14" fill="#5c7188">FHIR-aligned split: catalog identity on the definition, production identity on the instance, and "tool" as a role — never a duplicate element.</text>
+  <text x="48" y="79" font-family="Nunito,Arial,sans-serif" font-size="14" fill="#5c7188">FHIR-aligned split: catalog identity on the definition, production identity on the instance, and product use expressed as a role.</text>
 
   <!-- definition card -->
   <g font-family="Nunito,Arial,sans-serif">
@@ -37,7 +37,7 @@
     <text x="562" y="180" font-size="13" font-weight="850" fill="#082744">MedicalDeviceInstance · SN-000042</text>
     <g font-size="11.5" fill="#5c7188">
       <text x="562" y="204">lot LOT-2025-11 · manufactured 2025-11-14</text>
-      <text x="562" y="224">UDI-PI on the instance — never on the definition</text>
+      <text x="562" y="224">UDI-PI records the production identity of the instance</text>
       <text x="562" y="244" font-weight="750" fill="#0a8d76">37 autoclave cycles · last inspection passed</text>
     </g>
   </g>
@@ -48,7 +48,7 @@
     <text x="562" y="360" font-size="13" font-weight="850" fill="#4c3a98">UserTask · PlaceSutures — uses the product through a role</text>
     <g font-size="11.5" fill="#5c7188">
       <text x="562" y="384">UsesProduct: role = <tspan font-weight="800" fill="#4c3a98">primaryInstrument</tspan> · required · qty 1 · sterile required</text>
-      <text x="562" y="404">Difficulty belongs to the task in context (TaskDifficultyAssessment) — never to the instrument.</text>
+      <text x="562" y="404">TaskDifficultyAssessment records difficulty for the task in context.</text>
       <text x="562" y="424" font-weight="750" fill="#94423d">The same product is one element: "tool" is the role it plays in the activity.</text>
     </g>
   </g>
@@ -67,6 +67,6 @@
   <g font-family="Nunito,Arial,sans-serif">
     <rect x="48" y="478" width="1064" height="52" rx="14" fill="#fff0ef" stroke="#ea6b61" stroke-width="1.6"/>
     <text x="72" y="500" font-size="12" font-weight="850" fill="#94423d">CHECKED INVARIANTS</text>
-    <text x="72" y="519" font-size="11.5" fill="#94423d">instance must reference a definition · no serial/lot on definitions · single-use products cannot carry a reprocessing lifecycle · patient-contact parts declare contact nature and duration</text>
+    <text x="72" y="519" font-size="11.5" fill="#94423d">each instance references a definition · serial and lot identify instances · reuse lifecycle matches product type · patient-contact parts record contact nature and duration</text>
   </g>
 </svg>

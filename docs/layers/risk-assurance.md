@@ -29,7 +29,7 @@ flowchart LR
     Events --> Situation[HazardousSituation]
     Situation --> Harm[Harm]
     Harm --> Risk[Risk]
-    Control[RiskControlMeasure] -->|MitigatesHazard| Hazard
+    Control[RiskControlMeasure] -->|Mitigates · hazard| Hazard
     Risk --> Control
     Control --> Residual[ResidualRisk]
     Benefit[Benefit] --> Residual

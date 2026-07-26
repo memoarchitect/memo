@@ -12,17 +12,17 @@ describe historical migrations.
 | --- | --- | --- |
 | `src/core/common/memo_common.sysml` | `memo_core_common` | `MemoPart`, `RequirementDriver` |
 | `src/core/enumerations/memo_enumerations.sysml` | `memo_core_enumerations` | shared controlled value sets |
-| `src/core/relationships/memo_relationships.sysml` | `memo_core_relationships` | `MemoRelationship`, `DerivesFrom`, `SatisfiedBy`, `MitigatesHazard`, `VerifiedBy` |
+| `src/core/relationships/memo_relationships.sysml` | `memo_core_relationships` | `MemoRelationship`, `DerivesFrom`, `SatisfiedBy`, `Mitigates`, `VerifiedBy` |
 | `src/core/dimensions/dimensions.sysml` | `memo_core_dimensions` | perspectives, lifecycle stages, disciplines, and concerns |
-| `src/context/actors/memo_actors.sysml` | `memo_context_actors` | `Actor`, `User`, `ClinicalUser`, `PatientUser`, `CaregiverUser`, `TechnicianUser`, `NonHumanActor` |
+| `src/context/actors/memo_actors.sysml` | `memo_context_actors` | `Actor`, `User`, `NonHumanActor`, `ActorKind` |
 | `src/context/stakeholders/memo_stakeholders.sysml` | `memo_context_stakeholders` | `Stakeholder`, `Concern`, architecture-description concepts |
 | `src/context/use_context/memo_use_context.sysml` | `memo_context_use_context` | `UseContext`, `UseEnvironment` and context links |
 | `src/assurance/needs/memo_needs.sysml` | `memo_assurance_needs` | needs hierarchy |
-| `src/use_cases/memo_use_cases.sysml` | `memo_use_cases` | `UseCase`, `ClinicalUseCase`, `ServiceUseCase`, `ManufacturingUseCase`, `DevelopmentUseCase` |
+| `src/use_cases/memo_use_cases.sysml` | `memo_use_cases` | `UseCase`, `UseCaseKind`, use-case relationships |
 | `src/clinical_procedures/memo_clinical_procedures.sysml` | `memo_clinical_procedures` | procedure, technique, variant, instrument-set concepts |
 | `src/activities/memo_activities.sysml` | `memo_activities` | `OperationalActivity`, `UserTask`, `CriticalTask`, task steps |
 | `src/workflows/memo_workflows.sysml` | `memo_workflows` | `OperationalWorkflow`, workflow steps, decisions, handoffs, workflow links |
-| `src/scenarios/memo_scenarios.sysml` | `memo_scenarios` | `MemoScenario`, `OperationalScenario`, `ScenarioOccurrence`, scenario links |
+| `src/scenarios/memo_scenarios.sysml` | `memo_scenarios` | `MemoScenario`, `OperativeScenario`, `ScenarioOccurrence`, scenario links |
 
 ## Architecture model
 

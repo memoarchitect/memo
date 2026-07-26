@@ -13,7 +13,7 @@ and the evidence used to review the result.
 Do not begin with the component list. Begin with a use case and follow one
 scenario. GPCA uses the same modelling logic recommended on the opening page:
 
-1. A `ClinicalUseCase` states the clinical goal.
+1. A `UseCase` with `useCaseKind = clinical` states the clinical goal.
 2. One or more operational workflows support that use case.
 3. Each workflow has nominal, alternate, exception, or recovery scenarios.
 4. A selected scenario identifies operational activities, functional flows,
@@ -98,7 +98,7 @@ question through the layers:
 ```mermaid
 flowchart LR
     Patient[PatientUser] --> Request[OperationalActivity: request bolus]
-    Request --> Scenario[OperationalScenario: bolus during lockout]
+    Request --> Scenario[OperativeScenario: bolus during lockout]
     Scenario --> Chain[FunctionalFlow: patient bolus]
     Chain --> Limit[SystemFunction: enforce limits]
     Limit --> IM[SoftwareComponent: Infusion_Manager]
@@ -119,17 +119,18 @@ The use case is the goal. It is not duplicated as a separate “user goal”
 element. Three workflows support that one goal.
 
 ```sysml
-use case ucDeliverPcaTherapy : ClinicalUseCase {
+use case ucDeliverPcaTherapy : UseCase {
     attribute :>> name = "DeliverPatientControlledAnalgesia";
+    attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
     ref :>> primaryUser = actorNurse;
     ref :>> supportingActors = (actorPatient, actorPrescriber, actorPharmacist);
     ref :>> useContext = hospitalWardContext;
 }
 
-connection : SupportsUseCase connect workflow ::> wfPrepareAndStartTherapy to useCase ::> ucDeliverPcaTherapy;
-connection : SupportsUseCase connect workflow ::> wfManageActiveTherapy to useCase ::> ucDeliverPcaTherapy;
-connection : SupportsUseCase connect workflow ::> wfRespondToTherapyAlarm to useCase ::> ucDeliverPcaTherapy;
+connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfPrepareAndStartTherapy to supported ::> ucDeliverPcaTherapy; }
+connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfManageActiveTherapy to supported ::> ucDeliverPcaTherapy; }
+connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfRespondToTherapyAlarm to supported ::> ucDeliverPcaTherapy; }
 ```
 
 ### 2. A workflow has scenarios; each scenario owns its operational activity
@@ -147,7 +148,7 @@ action oaRejectBolusDuringLockout : OperationalActivity {
     first rejectAndLog then done;
 }
 
-part osLockoutBolus : OperationalScenario {
+part osLockoutBolus : OperativeScenario {
     attribute :>> name = "BolusRequestDuringLockout";
     attribute :>> variantKind = ScenarioVariantKind::alternate;
     ref :>> parentWorkflow = wfManageActiveTherapy;
@@ -191,7 +192,7 @@ view gpcaScenarioSequenceView : MemoDiagramView {
     attribute :>> viewKind = DiagramViewKind::sequence;
     part :>> selectionQuery {
         attribute :>> includeElementKinds =
-            ("FunctionalScenario", "OperationalScenario", "FunctionalFlow", "FunctionalFlowStep");
+            ("FunctionalScenario", "OperativeScenario", "FunctionalFlow", "FunctionalFlowStep");
         attribute :>> includeLayers = ("operational", "system");
         attribute :>> selectionExpression = "product == 'GPCA'";
     }
