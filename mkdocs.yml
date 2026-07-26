@@ -140,8 +140,9 @@ nav:
           - "How memo:: is organised": what/namespace-map.md
       - The layers:
           - layers/index.md
-          - Context and Use: layers/context.md
-          - Workflows and Scenarios: layers/operational-world.md
+          - "Layer 1 — Context and use": layers/context.md
+          - "Layer 2 — Use cases": layers/use-cases.md
+          - "Layer 3 — Workflows and scenarios": layers/operational-world.md
           - Functional Analysis: layers/operations-system.md
           - Requirements and Architecture: layers/requirements-architecture.md
           - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
