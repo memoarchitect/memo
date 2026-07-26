@@ -290,3 +290,25 @@ several workflows; several scenario paths per workflow; an operational action
 flow for each scenario; system functions and functional flows; architecture;
 and assurance links to requirements, risks, verification, and evidence. The
 viewpoints make that one connected model usable in different reviews.
+
+<!-- memo:reinforce -->
+
+## Where this sits in MEMO
+
+Unlike the focused tutorials, this model is populated all the way through. It is the conformance target the other examples point at:
+
+| Layer | Element types it uses | Reference |
+| --- | --- | --- |
+| Operational | `ArchitectureDescription`, `OperationalActivity`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `WorkflowStep` | [Operational](../reference/elements/operational.md) |
+| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `FunctionalFlowStep`, `FunctionalScenario`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../reference/elements/functional.md) |
+| Logical | `ComponentExchange`, `Interface`, `InterfaceItem`, `LogicalComponent`, `SoftwarePort` | [Logical](../reference/elements/logical.md) |
+| Implementation and realization | `HardwareAssembly`, `PhysicalPort`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../reference/elements/implementation.md) |
+| Assurance | `Benefit`, `CyberHazard`, `CyberMitigation`, `CyberRisk`, `CybersecurityAsset`, `DetectionMethod`, `Evidence`, `FMEAAction`, `FMEAWorksheet`, `FailureCause` … +32 | [Assurance](../reference/elements/assurance.md) |
+| Views and methodology | `MemoCybersecurityAssessmentView`, `MemoCybersecurityThreatModelView`, `MemoDiagramView`, `MemoDocumentView`, `MemoUsabilityEngineeringView`, `MethodologyDefinition`, `ResolvedMethodology` | [Views and methodology](../reference/elements/views.md) |
+| Core | `Citation`, `MethodologyScope` | [Core](../reference/elements/core.md) |
+
+**Typed links it uses:** `AllocatedTo`, `AnalyzedBy`, `AppliesInContext`, `AssessedAgainst`, `BindsToInterface`, `Causes`, `Composes`, `ConnectsPhysically`, `ContainsEvent`, `CrossesTrustBoundary`, `DeploysTo`, `DerivesCyberRequirement` … +30 — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+
+**Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
+
+**Source model:** [`examples/gpca-pump`](https://github.com/memoarchitect/memo/tree/main/examples/gpca-pump)

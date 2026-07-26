@@ -113,3 +113,23 @@ device is implemented.
 
 Open the [source model](https://github.com/memoarchitect/memo/tree/main/examples/reusable-instrument)
 to inspect the complete catalog and its overview viewpoint.
+
+<!-- memo:reinforce -->
+
+## Where this sits in MEMO
+
+Every tutorial is one slice of the same structure. This example populates these layers:
+
+| Layer | Element types it uses | Reference |
+| --- | --- | --- |
+| Operational | `OperationalActivity`, `OperationalWorkflow`, `ScenarioOccurrence`, `UseCase`, `User`, `WorkflowStep` | [Operational](../reference/elements/operational.md) |
+| Clinical and products | `MedicalDeviceDefinition`, `MedicalDeviceInstance`, `ReuseLifecycle` | [Clinical and products](../reference/elements/clinical.md) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+
+**Typed links it uses:** `Composes`, `Initiates`, `InstanceOf`, `StepPrecedes`, `Supports` — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+
+**Layers it does not populate:** functional, logical, implementation and realization, assurance. That is deliberate rather than incomplete — `layersOptionalRule` says a model fills only the layers its device needs. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+
+**Narrative treatment:** [Context and Use](../layers/context.md) · [Medical Products and Identity](../layers/medical-products.md).
+
+**Source model:** [`examples/reusable-instrument`](https://github.com/memoarchitect/memo/tree/main/examples/reusable-instrument)
