@@ -71,60 +71,35 @@ site_dir: site
 
 nav:
   - Home: index.md
-  - Why MEMO:
-      - why/index.md
-      - Evidence drifts as the design changes: why/evidence-drift.md
-      - Links without meaning: why/links-without-meaning.md
-      - How other domains do it: why/industry-context.md
-      - Why medical architecture stays weak: why/architecture-gap.md
-      - What a shared model must provide: why/shared-model.md
-  - What is MEMO:
-      - what/index.md
-      - The four products: what/products.md
-      - The mental model: what/mental-model.md
-      - Scenario-driven modelling: what/scenario-driven.md
-      - Function-centered traceability: what/function-centered.md
-      - One closed thread: what/closed-thread.md
-      - "How memo:: is organised": what/namespace-map.md
-  - Concepts:
-      - layers/index.md
-      - Context and Use: layers/context.md
-      - Workflows and Scenarios: layers/operational-world.md
-      - Functional Analysis: layers/operations-system.md
-      - Requirements and Architecture: layers/requirements-architecture.md
-      - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
-      - Medical Products and Identity: layers/medical-products.md
-      - Choosing an element: modeling/elements.md
-      - Writing relationships: modeling/relationships.md
-      - Views and Evidence: modeling/views-evidence.md
   - Tutorials:
       - examples/index.md
-      - "First model: Temperature Alarm": tutorials/first-model.md
-      - Small models:
+      - Lessons:
+          - "Your first model: temperature alarm": tutorials/first-model.md
+          - Surgical workflow modelling: examples/surgical-closure-workflow.md
+      - Worked examples:
           - Temperature Alarm: examples/temperature-alarm.md
           - Manual Surgical Instrument: examples/manual-surgical-instrument.md
           - Single-Use Device: examples/single-use-device.md
-          - Standard SysML Diagram Samples: examples/sysml-diagram-samples.md
-      - Building the model:
-          - Surgical Workflow Modelling: examples/surgical-closure-workflow.md
           - Reusable Instrument: examples/reusable-instrument.md
           - Functional, Logical, Physical: examples/functional-logical-physical.md
           - Software-Only Medical Device: examples/software-only-medical-device.md
-      - Complete systems:
           - Embedded Infusion Pump: examples/embedded-infusion-pump.md
           - Connected Patient Monitor: examples/connected-patient-monitor.md
           - IVD Laboratory System: examples/ivd-laboratory-system.md
           - Surgical Robot: examples/surgical-robot.md
-      - Further tutorials:
           - Multidimensional Layers: examples/multidimensional-layers.md
+          - Standard SysML Diagram Samples: examples/sysml-diagram-samples.md
   - How-to Guides:
       - how-to/index.md
-      - Adopting MEMO: how-to/adopt.md
-      - Install:
+      - Install MEMO:
           - how-to/install/index.md
           - With npm: how-to/install/npm.md
           - As a KerML archive: how-to/install/kpar.md
           - From a source checkout: how-to/install/source.md
+      - Adopt MEMO on a project: how-to/adopt.md
+      - Choose an element: modeling/elements.md
+      - Write a relationship: modeling/relationships.md
+      - Model views and evidence: modeling/views-evidence.md
   - Reference:
       - reference/index.md
       - Modules: reference/modules.md
@@ -144,17 +119,41 @@ nav:
       - Packaging:
           - Packages and Imports: reference/packages.md
           - SysML Source Reference: reference/sysml.md
-          - Architecture Overview: architecture/index.md
+          - Navigate by question: architecture/index.md
           - "The memo:: Namespace": architecture/namespace.md
           - Repository and Packaging: architecture/repository.md
+  - Explanation:
+      - why/index.md
+      - Why MEMO:
+          - Evidence drifts as the design changes: why/evidence-drift.md
+          - Links without meaning: why/links-without-meaning.md
+          - How other domains do it: why/industry-context.md
+          - Why medical architecture stays weak: why/architecture-gap.md
+          - What a shared model must provide: why/shared-model.md
+      - What MEMO is:
+          - what/index.md
+          - The four products: what/products.md
+          - The mental model: what/mental-model.md
+          - Scenario-driven modelling: what/scenario-driven.md
+          - Function-centered traceability: what/function-centered.md
+          - One closed thread: what/closed-thread.md
+          - "How memo:: is organised": what/namespace-map.md
+      - The layers:
+          - layers/index.md
+          - Context and Use: layers/context.md
+          - Workflows and Scenarios: layers/operational-world.md
+          - Functional Analysis: layers/operations-system.md
+          - Requirements and Architecture: layers/requirements-architecture.md
+          - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
+          - Medical Products and Identity: layers/medical-products.md
   - Case Studies:
       - case-studies/index.md
       - GPCA Pump:
           - case-studies/gpca/index.md
+          - Narrative Walkthrough: examples/gpca-walkthrough.md
           - Stakeholders and Concerns: case-studies/gpca/stakeholders-concerns.md
           - Viewpoints: case-studies/gpca/viewpoints.md
           - Views: case-studies/gpca/views.md
           - Correspondences: case-studies/gpca/correspondences.md
-          - Narrative Walkthrough: examples/gpca-walkthrough.md
   - Contribute:
       - contributing.md

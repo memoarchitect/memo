@@ -1,12 +1,15 @@
 # Reference
 
-Exact definitions, extracted from the shipped SysML v2 sources. Use Reference
-when you know what you are looking for and need the precise type, its
+Information-oriented material: a description of what the ontology actually
+contains, extracted from the shipped SysML v2 sources. It states; it does not
+teach or persuade.
+
+Use it when you know what you are looking for and need the precise type, its
 supertype, or its attributes.
 
-If you are still deciding *what* to record, start with
-[What is MEMO](../what/index.md) or the [Layer Map](../layers/index.md)
-instead — those explain; this one states.
+- Deciding *what to record*? → [Choose an element](../modeling/elements.md)
+- Wanting to understand *why*? → [Explanation](../why/index.md)
+- Learning by building? → [Tutorials](../examples/index.md)
 
 ## The library in numbers
 

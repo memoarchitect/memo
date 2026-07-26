@@ -100,7 +100,7 @@ PAUSED/ACTIVE → BASAL/SQUARE_BOLUS/PATIENT_BOLUS). The `depth = 2` attribute
 sets what the view offers by default; how much a reviewer actually unfolds is
 a reading decision made in the renderer, not a change to the model.
 
-MEMO Architect supports both moves on this view — folding a composite state in
+Both moves are properties of the view declaration — folding a composite state in
 place, and drilling into one so it becomes its own diagram. Neither alters the
 model; both change only what is on screen. The same two moves work on the
 action-flow view for composite actions.

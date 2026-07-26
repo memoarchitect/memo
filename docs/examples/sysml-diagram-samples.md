@@ -1,21 +1,18 @@
 # Standard SysML diagram samples
 
 The [standard SysML diagram sample project](https://github.com/memoarchitect/memo/tree/main/examples/sysml-diagram-samples)
-is a small, openable MEMO Architect project whose only job is to render **one
-diagram per standard SysML v2 view kind**. Together the views describe no
-product or reference architecture — each exists solely to exercise one renderer.
+ships with the ontology package. It declares **one `MemoDiagramView` per
+standard SysML v2 view kind** under `model/samples/`, and nothing else — the
+views describe no product and no reference architecture.
 
-Open it read-only in the Architect UI:
+Read it when you want to see how a `MemoDiagramView` is declared for each
+`DiagramViewKind` value, and what `diagramType` pairs with each.
 
-```sh
-memo-architect --example standard-sysml-diagrams
-```
+!!! info "Rendering these views"
 
-The command copies the bundled example to a disposable directory and starts the
-Architect dev server there, so any edits are discarded when you quit.
-
-Each view is a `MemoDiagramView` under `model/samples/`, grouped in the Architect
-explorer under **Model Viewpoint › Samples**.
+    This page covers what the sample model *declares*. Opening the views in a
+    graphical workbench is [MEMO Architect](https://github.com/memoarchitect/memo-architect)'s
+    job, and is documented there.
 
 | View | Diagram type | View kind | Demonstrates |
 | --- | --- | --- | --- |
