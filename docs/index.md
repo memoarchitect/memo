@@ -10,74 +10,56 @@ review it.
 
 </div>
 
-## Scope
+## What MEMO is
 
 MEMO is an ontology in the engineering sense: a set of definitions that fixes
-what the terms of a domain mean and how they may be combined. It provides three
-things.
+what the terms of a domain mean and how they may be combined. It supplies the
+medical-device vocabulary that SysML v2 deliberately leaves open, so that a
+team writes `Hazard`, `RiskControlMeasure`, and `VerificationCase` rather than
+inventing an equivalent for each programme.
 
-First, **element definitions**. A hazard is declared as a `Hazard`, a risk
-control as a `RiskControlMeasure`, a software item as a `SoftwareComponent`.
-Each definition carries the attributes its governing standard expects — a
-`Risk`, for instance, holds `probabilityEstimate`, `severityEstimate`,
-`riskLevel`, and `acceptability`, typed against closed value sets rather than
-free text.
+It is content rather than a tool: plain SysML v2 source text, readable by any
+conformant editor, with no runtime of its own.
 
-Second, **relationship definitions**. Links between elements are themselves
-typed, and their ends are constrained. `Mitigates` connects a control to a
-hazard; `SatisfiedBy` connects a requirement to a design element; `VerifiedBy`
-connects an element to a verification case. Because each link states what it
-asserts, the assertion can be examined by a tool rather than inferred by a
-reader.
+## The problem it addresses
 
-Third, **constraint definitions**. Questions asked during design review —
-whether every hazard has a control, whether every control is verified — are
-expressed as native SysML v2 constraints within the library, and are therefore
-evaluated by any conformant tool.
+A medical device is approved on the strength of an argument. This is what the
+device is for; this is how it was designed; these are the ways it could cause
+harm; this is what was done about them; here is the evidence. The argument is
+assembled from requirements specifications, architecture descriptions, risk
+files, verification protocols, and test records.
 
-## How a model is organised
+The argument is generally sound when written. The difficulty arises afterwards,
+because the design changes and the evidence does not follow it automatically.
 
-A MEMO model is arranged along two axes. The horizontal axis carries the
-engineering account of the device and descends through six layers, each
-answering one question and constraining the next:
+Traceability exists in every regulated programme, but it records the
+association between artifacts as pairs of identifiers. An identifier
+association survives a design change, because nothing within it depends on the
+design. It therefore cannot indicate which of the associated records has become
+inconsistent. A test remains linked to its requirement whether or not it still
+exercises the behaviour the hazard describes.
 
-| Layer | Question | Principal elements |
-| --- | --- | --- |
-| 1. [Context and use](layers/context.md) | Who is involved, where, and what is the device for? | `IntendedUse`, `UseContext`, `User` |
-| 2. [Use cases](layers/use-cases.md) | What are those people trying to achieve? | `UseCase` |
-| 3. [Workflows and scenarios](layers/operational-world.md) | How is that goal pursued, and how does it fail? | `OperationalWorkflow`, `MemoScenario` |
-| 4. [Functional analysis](layers/operations-system.md) | What must the system do on those paths? | `SystemFunction`, `FunctionalFlow` |
-| 5. [Logical architecture](layers/requirements-architecture.md) | Which components hold which responsibilities? | `LogicalComponent`, `LogicalInterface` |
-| 6. [Implementation](layers/requirements-architecture.md) | How is the solution built and deployed? | `SoftwareComponent`, `HardwareAssembly` |
+The consequence is familiar: controls that are named in a risk file but not
+anchored to a design feature, threats held apart from the interfaces they
+concern, tests that pass without exercising the failure path, and architecture
+documents that drift from the implementation. These are usually treated as four
+problems. They are one problem observed from four positions — nothing connects
+the design to the claims made about it.
 
-The vertical axis carries the disciplines that must be satisfied about the
-device: requirements, safety and risk, cybersecurity, human factors, and
-verification and validation. These are not a seventh layer. They attach to
-elements at every horizontal layer through typed relationships, which is why a
-hazard can be anchored to the specific scenario in which it arises and to the
-component whose behaviour controls it.
+[Why MEMO exists, at length](why/index.md)
 
-An element belongs to exactly one axis, and reaches the other only by
-relationship. This is enforced by `singleAxisOwnershipRule`, and it is what
-prevents a model from accumulating separate copies of the same component in the
-safety, cybersecurity, and verification views.
+## What MEMO does about it
 
-A model is not required to populate every layer. A manual instrument has no
-software architecture, and `layersOptionalRule` states that this is a complete
-model rather than an unfinished one.
+MEMO records the argument itself. Elements are typed, so a hazard is a
+`Hazard` and carries the attributes ISO 14971 expects of one. Links between
+elements are typed as well, so a link states what it asserts rather than merely
+connecting two identifiers. Review questions are expressed as constraints
+within the library, and are therefore evaluated by a tool rather than by
+recollection.
 
-## Rationale
-
-A device's safety argument is distributed across requirements specifications,
-architecture descriptions, risk files, verification protocols, and test
-records. Conventional traceability records the association between these
-artifacts as pairs of identifiers. An identifier association is preserved when
-the design changes, because nothing in it depends on the design; consequently
-it cannot indicate which of the associated records has become inconsistent.
-
-The following thread illustrates the alternative. It is taken from the
-[GPCA reference model](case-studies/gpca/index.md), in which a patient-
-controlled analgesia pump must suppress a bolus dose during a lockout interval.
+The following thread illustrates the result. It is drawn from the
+[GPCA reference model](case-studies/gpca/index.md), a patient-controlled
+analgesia pump that must suppress a bolus dose during a lockout interval.
 
 ```text
 HZ-001    Overdose            drug delivery error · catastrophic
@@ -93,11 +75,10 @@ VER-002   Verify lockout      test · acceptance criteria
 EVD-001   Lockout evidence    tied to baseline
 ```
 
-Each node is an instance of a defined type and each edge is an instance of a
-defined relationship. `REQ-025` records `source = risk` as a typed attribute,
-so the model itself represents the fact that the requirement exists in response
-to a hazard. Given a change to `HZ-001`, the set of elements requiring
-re-review is obtained by traversing these relationships.
+`REQ-025` records `source = risk` as a typed attribute, so the model itself
+represents the fact that the requirement exists in response to a hazard. Given
+a change to `HZ-001`, the set of elements requiring re-review is obtained by
+traversing these relationships rather than by searching documents.
 
 The same typing allows the constraints to be evaluated:
 
@@ -113,15 +94,40 @@ CR-MED-003  Risk control must be verified           (ISO 14971 §7.4)
 Result: 2 errors · 1 warning · thread HZ-001 closed
 ```
 
-This procedure identifies gaps in the recorded argument. It does not establish
-that a device is safe, and it does not substitute for review. Clinical
-judgement, risk acceptance, and approval remain with the personnel responsible
-for them.
+This identifies gaps in the recorded argument. It does not establish that a
+device is safe, and it does not substitute for review. Clinical judgement, risk
+acceptance, and approval remain with the personnel responsible for them.
+
+## How a model is organised
+
+A MEMO model is arranged along two axes. The horizontal axis carries the
+engineering account of the device and descends through six layers, each
+answering one question and constraining the next.
+
+| Layer | Question |
+| --- | --- |
+| 1. [Context and use](layers/context.md) | Who is involved, where, and what is the device for? |
+| 2. [Use cases](layers/use-cases.md) | What are those people trying to achieve? |
+| 3. [Workflows and scenarios](layers/operational-world.md) | How is that goal pursued, and how does it fail? |
+| 4. [Functional analysis](layers/operations-system.md) | What must the system do on those paths? |
+| 5. [Logical architecture](layers/requirements-architecture.md) | Which components hold which responsibilities? |
+| 6. [Implementation](layers/requirements-architecture.md) | How is the solution built and deployed? |
+
+The vertical axis carries the disciplines that must be satisfied about the
+device: requirements, safety and risk, cybersecurity, human factors, and
+verification and validation. These are not a seventh layer. They attach to
+elements at every horizontal layer, which is why a hazard can be anchored both
+to the scenario in which it arises and to the component whose behaviour
+controls it.
+
+Populating every layer is not required. A manual instrument has no software
+architecture, and the ontology treats such a model as complete rather than
+unfinished.
 
 ## Distribution
 
-The library is SysML v2 source text. It has no runtime and depends on no
-particular tool, and can be consumed as an npm package, as a KerML project
+The library is SysML v2 source text with no runtime and no dependency on a
+particular tool. It may be consumed as an npm package, as a KerML project
 archive, or from a source checkout. Two further products exist and are
 documented separately: [Tools](https://github.com/memoarchitect/memo-tools),
 which provides the `memo` command-line interface, and
