@@ -74,8 +74,9 @@ nav:
       - index.md
       - Getting Started: getting-started.md
   - Explanation:
-      - why/index.md
+      - explanation/index.md
       - Why MEMO:
+          - why/index.md
           - Evidence drifts as the design changes: why/evidence-drift.md
           - Links without meaning: why/links-without-meaning.md
           - How other domains do it: why/industry-context.md
@@ -83,21 +84,20 @@ nav:
           - What a shared model must provide: why/shared-model.md
       - What MEMO is:
           - what/index.md
-          - The four products: what/products.md
           - The mental model: what/mental-model.md
+          - The layers:
+              - layers/index.md
+              - "Layer 1 — Context and use": layers/context.md
+              - "Layer 2 — Use cases": layers/use-cases.md
+              - "Layer 3 — Workflows and scenarios": layers/operational-world.md
+              - Functional Analysis: layers/operations-system.md
+              - Requirements and Architecture: layers/requirements-architecture.md
+              - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
+              - Medical Products and Identity: layers/medical-products.md
           - Scenario-driven modelling: what/scenario-driven.md
           - Function-centered traceability: what/function-centered.md
           - One closed thread: what/closed-thread.md
           - "How memo:: is organised": what/namespace-map.md
-      - The layers:
-          - layers/index.md
-          - "Layer 1 — Context and use": layers/context.md
-          - "Layer 2 — Use cases": layers/use-cases.md
-          - "Layer 3 — Workflows and scenarios": layers/operational-world.md
-          - Functional Analysis: layers/operations-system.md
-          - Requirements and Architecture: layers/requirements-architecture.md
-          - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
-          - Medical Products and Identity: layers/medical-products.md
   - Reference:
       - reference/index.md
       - Modules: reference/modules.md

@@ -77,7 +77,7 @@ registers.
 
 The V-model is a **view over these relationships**, not an ontology hierarchy:
 each definition-side layer is validated or verified by the matching
-integration-side activity (see the [Layer Map](index.md)). Coverage rules keep
+integration-side activity (see [The layers](index.md)). Coverage rules keep
 the graph honest: safety-critical functions must trace to verification, and
 critical tasks to usability validation.
 

@@ -51,8 +51,8 @@ architecture. Neither is copied into the other; they are connected by a typed
 relationship.
 
 This is what stops the model from growing parallel copies of the same component
-in safety, cybersecurity, and verification. [Layer Map](../layers/index.md)
-explains the axes in full.
+in safety, cybersecurity, and verification. [The layers](../layers/index.md)
+explain the axes in full.
 
 ---
 

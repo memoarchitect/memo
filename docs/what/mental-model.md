@@ -23,9 +23,9 @@ actually run.
 ## Three rules for building the model
 
 <div class="memo-card-grid">
-  <article class="memo-card memo-card-purple"><h3>1. Ask one question</h3><ul><li>Who uses the device and where?</li><li>What must the system do?</li><li>Which part is responsible?</li><li>How will the team check it?</li></ul><p><a href="../layers/index.md">Find the right layer →</a></p></article>
-  <article class="memo-card memo-card-blue"><h3>2. Record the facts</h3><ul><li>People, needs, and use cases</li><li>Requirements and functions</li><li>Components, interfaces, and parts</li><li>Hazards, controls, tests, and evidence</li></ul><p><a href="../reference/elements/index.md">Choose what to record →</a></p></article>
-  <article class="memo-card memo-card-teal"><h3>3. Link the facts</h3><ul><li>A need explains a use case.</li><li>A function is assigned to a component.</li><li>A requirement or control is checked by a test.</li><li>A test produces evidence.</li></ul><p><a href="../reference/relationships.md">Choose the link →</a></p></article>
+  <article class="memo-card memo-card-purple"><h3>1. Ask one question</h3><ul><li>Who uses the device and where?</li><li>What must the system do?</li><li>Which part is responsible?</li><li>How will the team check it?</li></ul><p><a href="../layers/">Find the right layer →</a></p></article>
+  <article class="memo-card memo-card-blue"><h3>2. Record the facts</h3><ul><li>People, needs, and use cases</li><li>Requirements and functions</li><li>Components, interfaces, and parts</li><li>Hazards, controls, tests, and evidence</li></ul><p><a href="../reference/elements/">Choose what to record →</a></p></article>
+  <article class="memo-card memo-card-teal"><h3>3. Link the facts</h3><ul><li>A need explains a use case.</li><li>A function is assigned to a component.</li><li>A requirement or control is checked by a test.</li><li>A test produces evidence.</li></ul><p><a href="../reference/relationships/">Choose the link →</a></p></article>
 </div>
 
 Keep one record for each real thing. Do not copy the same component into
@@ -47,7 +47,7 @@ elements to show.
 This is the rule the ontology enforces as **single-axis ownership**: an element
 is owned by exactly one axis — a horizontal architecture layer or a vertical
 assurance discipline — and reaches the other only through typed relationships.
-[Layer Map](../layers/index.md) explains the two axes.
+[The layers](../layers/index.md) explain the two axes.
 
 ## Start with a small argument, not a complete layer
 
@@ -69,6 +69,6 @@ exactly what [scenario-driven modelling](scenario-driven.md) describes.
 
 | Next step | Page |
 | --- | --- |
-| See the two axes and every layer | [Layer Map](../layers/index.md) |
+| See the two axes and every layer | [The layers](../layers/index.md) |
 | Install MEMO | [Installation](../how-to/install/index.md) |
 | Build the vertical slice above | [Temperature Alarm tutorial](../tutorials/first-model.md) |

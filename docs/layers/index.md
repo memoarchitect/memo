@@ -1,24 +1,26 @@
-# Layer Map
+# The layers
 
-MEMO layers organize **engineering questions**, not folders, departments, or a
-sequence every project must follow. Before reading any package, understand the
-two axes of the map. Horizontal **architecture layers** tell the engineering
-story — why, what, and how — and own their operational, functional, logical,
-and implementation elements. Vertical **assurance disciplines** also own their
-own elements: requirements, hazards and controls, cyber assets and controls,
-human-factors elements, and V&V cases and evidence. Every element is **owned by
-exactly one axis** — never both — and that ownership is encoded by its owning
-package (`memo_architecture_*` for a horizontal layer, `memo_assurance_*` for a
-vertical discipline), enforced by rule CR-ONT-045. An element lives once; it
-reaches the other axis only through typed relationships, not by belonging to it.
+The layers are MEMO's mental model for moving from purpose to evidence. They
+organize engineering questions, not folders, departments, or a mandatory
+process.
+
+Read the model along two axes:
+
+- The **architecture path** moves from context and goals, through scenarios and
+  functions, to logical organization and implementation.
+- The **assurance disciplines**—requirements, safety, cybersecurity, human
+  factors, verification, and evidence—connect across that path.
+
+The first axis explains the device. The second asks whether the explanation is
+complete and supported.
 
 [![MEMO architecture and assurance V-model](../assets/memo-architecture-assurance-v-model.png)](../assets/memo-architecture-assurance-v-model.png){ .memo-zoomable aria-label="Open the architecture and assurance V-model" }
 
-This overview distinguishes the architecture path from operational intent to
-realization and the assurance disciplines that connect to it. The package
-ownership rule remains precise: architecture packages own architecture
-elements, assurance packages own assurance elements, and typed relationships
-provide the cross-cutting traceability.
+Each element lives once. A function belongs to the architecture path; a hazard
+belongs to assurance. A typed relationship connects them without copying either
+one into the other axis. MEMO enforces that single ownership in the ontology,
+which prevents separate safety, cybersecurity, and verification versions of
+the same design element.
 
 ## Read the V-model
 
