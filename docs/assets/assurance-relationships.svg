@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1240" height="660" viewBox="0 0 1240 660" role="img" aria-labelledby="title desc">
+  <title id="title">Representative assurance relationships across the MEMO architecture</title>
+  <desc id="desc">Five rows place assurance facts on the left and their architecture or operational targets on the right. Arrow direction preserves each typed MEMO relationship.</desc>
+  <defs>
+    <marker id="assurance-arrow" markerWidth="10" markerHeight="10" refX="8" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9Z" fill="#5c7188"/>
+    </marker>
+    <filter id="soft-shadow" x="-10%" y="-15%" width="120%" height="135%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#082744" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .heading { font: 800 24px Nunito, Arial, sans-serif; fill: #082744; }
+      .subtitle { font: 500 15px Nunito, Arial, sans-serif; fill: #5c7188; }
+      .discipline { font: 800 15px Nunito, Arial, sans-serif; }
+      .node-type { font: 800 14px Nunito, Arial, sans-serif; }
+      .node-example { font: 600 12px Nunito, Arial, sans-serif; fill: #5c7188; }
+      .relation { font: 800 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #5c7188; }
+      .edge { fill: none; stroke: #5c7188; stroke-width: 2.5; marker-end: url(#assurance-arrow); }
+    </style>
+  </defs>
+
+  <rect width="1240" height="660" rx="24" fill="#fbfcfd"/>
+  <text x="48" y="50" class="heading">ASSURANCE RELATIONSHIPS REACH INTO THE ARCHITECTURE</text>
+  <text x="48" y="78" class="subtitle">Each row reads as a MEMO engineering sentence. The relationship name states the claim.</text>
+
+  <g font-family="Nunito,Arial,sans-serif">
+    <rect x="36" y="108" width="1168" height="94" rx="18" fill="#f5f0ff" stroke="#d7c9fa"/>
+    <text x="62" y="138" class="discipline" fill="#4a3896">REQUIREMENTS</text>
+    <g filter="url(#soft-shadow)">
+      <rect x="252" y="126" width="236" height="58" rx="12" fill="#ffffff" stroke="#8971dc" stroke-width="2"/>
+      <rect x="756" y="126" width="236" height="58" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+    </g>
+    <text x="370" y="151" text-anchor="middle" class="node-type" fill="#4a3896">Requirement</text>
+    <text x="370" y="171" text-anchor="middle" class="node-example">Alarm response time</text>
+    <path d="M498 155H746" class="edge"/>
+    <text x="622" y="142" text-anchor="middle" class="relation">SatisfiedBy</text>
+    <text x="874" y="151" text-anchor="middle" class="node-type" fill="#07604f">LogicalComponent</text>
+    <text x="874" y="171" text-anchor="middle" class="node-example">Alarm controller</text>
+
+    <rect x="36" y="214" width="1168" height="94" rx="18" fill="#fff6ed" stroke="#f4cfaa"/>
+    <text x="62" y="244" class="discipline" fill="#9a4f16">SAFETY / RISK</text>
+    <g filter="url(#soft-shadow)">
+      <rect x="252" y="232" width="236" height="58" rx="12" fill="#ffffff" stroke="#ef9a4a" stroke-width="2"/>
+      <rect x="756" y="232" width="236" height="58" rx="12" fill="#ffffff" stroke="#ea6b61" stroke-width="2"/>
+    </g>
+    <text x="370" y="257" text-anchor="middle" class="node-type" fill="#9a4f16">RiskControlMeasure</text>
+    <text x="370" y="277" text-anchor="middle" class="node-example">Enforce dose lockout</text>
+    <path d="M498 261H746" class="edge"/>
+    <text x="622" y="248" text-anchor="middle" class="relation">ControlImplementedBy</text>
+    <text x="874" y="257" text-anchor="middle" class="node-type" fill="#07604f">LogicalComponent</text>
+    <text x="874" y="277" text-anchor="middle" class="node-example">Bolus-request handler</text>
+
+    <rect x="36" y="320" width="1168" height="94" rx="18" fill="#edf5ff" stroke="#c5dcf5"/>
+    <text x="62" y="350" class="discipline" fill="#17557f">CYBERSECURITY</text>
+    <g filter="url(#soft-shadow)">
+      <rect x="252" y="338" width="236" height="58" rx="12" fill="#ffffff" stroke="#438ed0" stroke-width="2"/>
+      <rect x="756" y="338" width="236" height="58" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+    </g>
+    <text x="370" y="363" text-anchor="middle" class="node-type" fill="#17557f">CyberMitigation</text>
+    <text x="370" y="383" text-anchor="middle" class="node-example">Authenticated command</text>
+    <path d="M498 367H746" class="edge"/>
+    <text x="622" y="354" text-anchor="middle" class="relation">ControlImplementedBy</text>
+    <text x="874" y="363" text-anchor="middle" class="node-type" fill="#07604f">SoftwareComponent</text>
+    <text x="874" y="383" text-anchor="middle" class="node-example">Command gateway</text>
+
+    <rect x="36" y="426" width="1168" height="94" rx="18" fill="#eefaf6" stroke="#bce9db"/>
+    <text x="62" y="456" class="discipline" fill="#07604f">HUMAN FACTORS</text>
+    <g filter="url(#soft-shadow)">
+      <rect x="252" y="444" width="236" height="58" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+      <rect x="756" y="444" width="236" height="58" rx="12" fill="#ffffff" stroke="#8971dc" stroke-width="2"/>
+    </g>
+    <text x="370" y="469" text-anchor="middle" class="node-type" fill="#07604f">UsabilityValidation</text>
+    <text x="370" y="489" text-anchor="middle" class="node-example">Summative evaluation</text>
+    <path d="M498 473H746" class="edge"/>
+    <text x="622" y="460" text-anchor="middle" class="relation">EvaluatesTask</text>
+    <text x="874" y="469" text-anchor="middle" class="node-type" fill="#4a3896">UserTask</text>
+    <text x="874" y="489" text-anchor="middle" class="node-example">Confirm infusion settings</text>
+
+    <rect x="36" y="532" width="1168" height="94" rx="18" fill="#eaf8f5" stroke="#afe4d8"/>
+    <text x="62" y="554" class="discipline" fill="#07604f">VERIFICATION &amp;</text>
+    <text x="62" y="575" class="discipline" fill="#07604f">VALIDATION</text>
+    <g filter="url(#soft-shadow)">
+      <rect x="238" y="550" width="180" height="58" rx="12" fill="#082744" stroke="#082744" stroke-width="2"/>
+      <rect x="548" y="550" width="220" height="58" rx="12" fill="#ffffff" stroke="#2dd4a8" stroke-width="2"/>
+      <rect x="892" y="550" width="236" height="58" rx="12" fill="#ffffff" stroke="#438ed0" stroke-width="2"/>
+    </g>
+    <text x="328" y="575" text-anchor="middle" class="node-type" fill="#35d6b0">Evidence</text>
+    <text x="328" y="595" text-anchor="middle" class="node-example" fill="#d5e5ed">Test report</text>
+    <path d="M538 579H428" class="edge"/>
+    <text x="483" y="566" text-anchor="middle" class="relation" style="font-size:11px">ProducesEvidence</text>
+    <text x="658" y="575" text-anchor="middle" class="node-type" fill="#07604f">VerificationCase</text>
+    <text x="658" y="595" text-anchor="middle" class="node-example">Occlusion response test</text>
+    <path d="M882 579H778" class="edge"/>
+    <text x="830" y="566" text-anchor="middle" class="relation">VerifiedBy</text>
+    <text x="1010" y="575" text-anchor="middle" class="node-type" fill="#17557f">SystemFunction</text>
+    <text x="1010" y="595" text-anchor="middle" class="node-example">Detect occlusion</text>
+  </g>
+</svg>

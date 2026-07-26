@@ -12,28 +12,12 @@ package memo_core_methodology_scope {
         attribute layer : String;
     }
 
-    part def MethodologyStandardSet specializes MemoPart {
-        attribute setName : String;
-        attribute standardReference : String;
-    }
-
-    part def MethodologyArtifactSet specializes MemoPart {
-        attribute setName : String;
-        attribute artifactKind : String;
-    }
-
-    part def MethodologyViewpointTypeSet specializes MemoPart {
-        attribute setName : String;
-        attribute viewpointType : String;
-    }
-
     part def MethodologyScope specializes MemoPart {
         attribute scopeName : String;
-        attribute includedArchLayer : String;
-        attribute includedStandard : String;
-        attribute includedArtifactKind : String;
-        attribute includedViewpointType : String;
-        attribute excludedKind : String;
+        attribute includedArchLayer : String[0..*];
+        // Qualified package names may resolve to MEMO, project, supplier, or
+        // other externally provided ontology modules.
+        attribute includedModule : String[0..*];
     }
 
     part def ElementKindAlias specializes MemoPart {

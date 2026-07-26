@@ -32,10 +32,10 @@
 
     <g filter="url(#shadow)">
       <rect x="440" y="92" width="320" height="316" rx="24" fill="#0b1e2d"/>
-      <rect x="474" y="128" width="252" height="86" rx="17" fill="#168c72"/>
+      <rect x="474" y="128" width="252" height="52" rx="17" fill="#168c72"/>
     </g>
-    <text x="600" y="154" text-anchor="middle" font-size="13" font-weight="900" letter-spacing="1.8" fill="#dffbf4">SHARED SOURCE OF TRUTH</text>
-    <text x="600" y="188" text-anchor="middle" font-size="23" font-weight="900" fill="#ffffff">Meaning + structure + rules</text>
+    <text x="600" y="160" text-anchor="middle" font-size="13" font-weight="900" letter-spacing="1.8" fill="#dffbf4">SHARED SOURCE OF TRUTH</text>
+    <text x="600" y="217" text-anchor="middle" font-size="20" font-weight="900" fill="#ffffff">Meaning + structure + rules</text>
     <rect x="477" y="250" width="112" height="42" rx="21" fill="#132d42" stroke="#2dd4a8" stroke-opacity="0.55"/>
     <rect x="611" y="250" width="112" height="42" rx="21" fill="#132d42" stroke="#2dd4a8" stroke-opacity="0.55"/>
     <rect x="520" y="317" width="160" height="42" rx="21" fill="#132d42" stroke="#2dd4a8" stroke-opacity="0.55"/>

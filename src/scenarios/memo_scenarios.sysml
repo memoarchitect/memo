@@ -105,7 +105,9 @@ package memo_scenarios {
         attribute pathOrder : Integer[0..1];
         attribute decisionTaken : String[0..1];
         end scenario : MemoScenario;
-        end selected : MemoPart;
+        // A selected path element may be a WorkflowStep action or a flow
+        // element. Those constructs do not share a MEMO base metaclass.
+        end selected;
     }
     connection def OccursDuring :> MemoRelationship {
         end occurrence : ScenarioOccurrence;

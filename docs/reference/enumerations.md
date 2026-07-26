@@ -55,7 +55,7 @@ instead. A value set is closed only where the closure carries meaning.
 | [`InteractionIntentKind`](#interactionintentkind) | 13 | [`UIAction`](elements/implementation.md#uiaction), [`UIEvent`](elements/implementation.md#uievent) |
 | [`InterfaceItemKind`](#interfaceitemkind) | 8 | [`InterfaceItem`](elements/logical.md#interfaceitem) |
 | [`InterfaceKind`](#interfacekind) | 12 | [`AttackSurface`](elements/assurance.md#attacksurface), [`CrossesTrustBoundary`](elements/core.md#crossestrustboundary), [`DataInterface`](elements/logical.md#datainterface), [`Interface`](elements/logical.md#interface) … +2 |
-| [`LifecycleStateKind`](#lifecyclestatekind) | 5 | [`ControlledArtifact`](elements/assurance.md#controlledartifact), [`MemoPart`](elements/core.md#memopart), [`ResolvedMethodology`](elements/views.md#resolvedmethodology) |
+| [`LifecycleStateKind`](#lifecyclestatekind) | 5 | [`ControlledArtifact`](elements/assurance.md#controlledartifact), [`MemoPart`](elements/core.md#memopart) |
 | [`LinkStatusKind`](#linkstatuskind) | 4 | [`MemoRelationship`](elements/core.md#memorelationship) |
 | [`MedicalDeviceCategoryKind`](#medicaldevicecategorykind) | 6 | [`MedicalDevice`](elements/clinical.md#medicaldevice) |
 | [`MessageKind`](#messagekind) | 6 | [`InteractionMessage`](elements/functional.md#interactionmessage) |
@@ -86,7 +86,7 @@ instead. A value set is closed only where the closure carries meaning.
 | [`RuleStrengthKind`](#rulestrengthkind) | 4 | [`ConsistencyRule`](elements/core.md#consistencyrule), [`ModelingPattern`](elements/views.md#modelingpattern), [`ViewRule`](elements/views.md#viewrule) |
 | [`RuntimeKind`](#runtimekind) | 8 | [`SoftwareComponent`](elements/implementation.md#softwarecomponent) |
 | [`SOUPClassificationKind`](#soupclassificationkind) | 4 | [`SoftwareModule`](elements/implementation.md#softwaremodule) |
-| [`SafetyClassKind`](#safetyclasskind) | 4 | [`Requirement`](elements/assurance.md#requirement), [`ResolvedMethodology`](elements/views.md#resolvedmethodology), [`SecurityRequirement`](elements/assurance.md#securityrequirement), [`SoftwareComponent`](elements/implementation.md#softwarecomponent) … +2 |
+| [`SafetyClassKind`](#safetyclasskind) | 4 | [`Requirement`](elements/assurance.md#requirement), [`SecurityRequirement`](elements/assurance.md#securityrequirement), [`SoftwareComponent`](elements/implementation.md#softwarecomponent) … +2 |
 | [`ScenarioPurposeKind`](#scenariopurposekind) | 6 | [`MemoScenario`](elements/operational.md#memoscenario) |
 | [`ScenarioVariantKind`](#scenariovariantkind) | 4 | [`MemoScenario`](elements/operational.md#memoscenario) |
 | [`SchedulingPolicyKind`](#schedulingpolicykind) | 6 | [`SoftwareComponent`](elements/implementation.md#softwarecomponent) |

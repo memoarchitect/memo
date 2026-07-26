@@ -49,6 +49,7 @@ package memo_core_common {
     abstract part def ArchitectureElement specializes MemoPart;
     part def InterfaceElement specializes MemoPart;
     part def MemoEvidence specializes MemoPart;
+    abstract part def AnalysisArtifact specializes MemoPart;
 
     part def DocumentedElement specializes MemoPart {
         attribute title : String;

@@ -19,7 +19,6 @@ package memo_viewpoints_physical_physical_viewpoint {
         attribute :>> concernKinds = (ConcernKind::reliability, ConcernKind::interoperability);
         attribute :>> includedLayers = ("hardware_structure", "physical");
         attribute :>> allowedElementKinds = ("ProcessingNode", "HardwareAssembly", "PhysicalPort");
-        attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }
 }

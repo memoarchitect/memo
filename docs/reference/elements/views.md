@@ -183,7 +183,6 @@ part def Viewpoint :> DocumentedElement
 | `allowedElementKinds` | `String` |
 | `allowedRelationshipKinds` | `String` |
 | `filterExpression` | `String` |
-| `methodologyReference` | `String` |
 | `extendsViewpointIds` | `String` |
 | `userExtensible` | `Boolean` |
 | `defaultViewKind` | [`DiagramViewKind`](core.md#diagramviewkind) |
@@ -351,6 +350,8 @@ part def MethodologyDefinition :> MemoPart
 | `domain` | `String` |
 | `description` | `String` |
 | `baseMethodName` | `String` |
+| `includedLayer` | `String` |
+| `includedModule` | `String` |
 
 ### MethodologyLibrary
 
@@ -406,6 +407,8 @@ part def ProjectMethodBinding :> MemoPart
 | Attribute | Type |
 | --- | --- |
 | `projectName` | `String` |
+| `methodologyName` | `String` |
+| `includedModule` | `String` |
 
 ### QualityGate
 
@@ -458,9 +461,8 @@ part def ResolvedMethodology :> MemoPart
 | Attribute | Type |
 | --- | --- |
 | `version` | `String` |
-| `safetyClassification` | [`SafetyClassKind`](core.md#safetyclasskind) |
-| `lifecycleStage` | [`LifecycleStateKind`](core.md#lifecyclestatekind) |
-| `resolutionSummary` | `String` |
+| `includedLayer` | `String` |
+| `includedModule` | `String` |
 
 ## Artifact definitions
 

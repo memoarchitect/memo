@@ -19,7 +19,6 @@ package memo_viewpoints_clinical_clinical_viewpoint {
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::clinical);
         attribute :>> includedLayers = ("context", "assurance");
         attribute :>> allowedElementKinds = ("Actor", "UseContext", "Evidence");
-        attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }
 }

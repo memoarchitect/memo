@@ -261,9 +261,12 @@
 .memo-card-grid,
 .memo-start-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.9rem;
   margin: 1.2rem 0 2.4rem;
+}
+.memo-card-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .memo-card {
   min-height: 11.5rem;
@@ -381,6 +384,7 @@
 @media screen and (max-width: 44.9375em) {
   .memo-hero { padding: 2rem 1.45rem 2.15rem; border-radius: 16px; }
   .memo-card-grid,
+  .memo-card-grid-two,
   .memo-start-grid { grid-template-columns: 1fr; }
   .memo-card { min-height: 0; }
 }
@@ -632,14 +636,57 @@
 .argument-obligation { background: var(--memo-blue-soft); color: #1e5d88; }
 .argument-design { background: var(--memo-orange-soft); color: #88501f; }
 .argument-proof { background: var(--memo-teal-soft); color: #08634f; }
-.memo-slice-example { display: flex; gap: .42rem; align-items: center; margin: 1.2rem 0 1.7rem; padding: 1rem; border-radius: 15px; background: var(--memo-wash); }
-.memo-slice-example span { flex: 1 1 0; min-width: 0; padding: .7rem; border-radius: 10px; font-size: .72rem; line-height: 1.35; }
+.memo-slice-example { display: flex; gap: .42rem; align-items: stretch; margin: 1.2rem 0 1.7rem; padding: 1rem; border-radius: 15px; background: #edf3f6; }
+.memo-slice-example span { display: flex; flex: 1 1 0; min-width: 0; min-height: 7.2rem; flex-direction: column; justify-content: center; padding: .7rem; border-radius: 10px; font-size: .72rem; line-height: 1.35; }
 .memo-slice-example b { display: block; margin-bottom: .2rem; font-size: .64rem; letter-spacing: .07em; text-transform: uppercase; }
 .memo-slice-example i { color: var(--memo-muted); font-style: normal; }
-.slice-need { background: var(--memo-purple-soft); color: #4c3a98; }
-.slice-requirement { background: var(--memo-blue-soft); color: #1e5d88; }
-.slice-design { background: var(--memo-orange-soft); color: #88501f; }
-.slice-proof { background: var(--memo-teal-soft); color: #08634f; }
+.slice-need { background: #e5ddff; color: #4c3a98; }
+.slice-requirement { background: #dceefa; color: #1e5d88; }
+.slice-design { background: #ffead7; color: #88501f; }
+.slice-proof { background: #d6f4ee; color: #08634f; }
+
+/* Project-model operations: full-width rows preserve technical readability. */
+.memo-model-steps {
+  display: grid;
+  gap: .75rem;
+  margin: 1.15rem 0 2rem;
+}
+.memo-model-step {
+  display: grid;
+  grid-template-columns: 2.8rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--memo-line);
+  border-left-width: 5px;
+  border-radius: 14px;
+  background: var(--memo-paper);
+  box-shadow: 0 8px 20px rgba(12, 43, 73, 0.05);
+}
+.memo-model-step .memo-step-number {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 850;
+}
+.memo-model-step h3 { margin: 0 0 .28rem; font-size: 1rem; }
+.memo-model-step p { margin: 0; color: var(--memo-muted); font-size: .78rem; line-height: 1.55; }
+.memo-model-step > a { white-space: nowrap; font-size: .72rem; font-weight: 800; }
+.step-scope { border-left-color: var(--memo-purple); background: linear-gradient(90deg, var(--memo-purple-soft), var(--memo-paper) 30%); }
+.step-scope .memo-step-number { background: #ddd5f6; color: #4c3a98; }
+.step-elements { border-left-color: var(--memo-blue); background: linear-gradient(90deg, var(--memo-blue-soft), var(--memo-paper) 30%); }
+.step-elements .memo-step-number { background: #cce2f6; color: #17557f; }
+.step-relations { border-left-color: var(--memo-teal); background: linear-gradient(90deg, var(--memo-teal-soft), var(--memo-paper) 30%); }
+.step-relations .memo-step-number { background: #bce9df; color: #07604f; }
+[data-md-color-scheme="slate"] .memo-model-step {
+  border-color: rgba(216,226,233,.16);
+  border-left-color: currentColor;
+  background: rgba(255,255,255,.035);
+}
+[data-md-color-scheme="slate"] .memo-model-step p { color: rgba(232,241,248,.7); }
 
 /* ── Architecture map: layers, internal vocabulary, cross-layer links ── */
 
@@ -687,4 +734,6 @@
   .memo-argument-map i { display: none; }
   .memo-slice-example { display: grid; grid-template-columns: 1fr 1fr; }
   .memo-slice-example i { display: none; }
+  .memo-model-step { grid-template-columns: 2.6rem minmax(0, 1fr); align-items: start; }
+  .memo-model-step > a { grid-column: 2; white-space: normal; }
 }

@@ -87,7 +87,6 @@ package memo_medical_device_library {
     public import memo_compliance_postmarket::*;
 
     public import memo_methodology_core::*;
-    public import memo_methodology_viewpoints::*;
     public import memo_methodology_rules::*;
     public import memo_methodology_patterns::*;
     public import memo_methodology_workflow::*;

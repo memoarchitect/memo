@@ -245,7 +245,6 @@ package memo_namespace_methodology {
     alias patterns for memo_namespace_methodology_patterns;
     alias profiles for memo_namespace_methodology_profiles;
     alias rules for memo_namespace_methodology_rules;
-    alias viewpoints for memo_namespace_methodology_viewpoints;
     alias workflow for memo_namespace_methodology_workflow;
 }
 
@@ -483,10 +482,6 @@ package memo_namespace_methodology_profiles {
 
 package memo_namespace_methodology_rules {
     public import memo_methodology_rules::*;
-}
-
-package memo_namespace_methodology_viewpoints {
-    public import memo_methodology_viewpoints::*;
 }
 
 package memo_namespace_methodology_workflow {

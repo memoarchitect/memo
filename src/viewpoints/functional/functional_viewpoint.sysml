@@ -19,7 +19,6 @@ package memo_viewpoints_functional_functional_viewpoint {
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::performance);
         attribute :>> includedLayers = ("functions");
         attribute :>> allowedElementKinds = ("SystemFunction", "FunctionalFlow", "FunctionalFlowStep", "FunctionalScenario", "FunctionalExchange");
-        attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }
 }

@@ -17,7 +17,6 @@ package memo_viewpoints_definitions {
         attribute allowedElementKinds : String[*];
         attribute allowedRelationshipKinds : String[*];
         attribute filterExpression : String;
-        attribute methodologyReference : String[*];
         attribute extendsViewpointIds : String[*];
         attribute userExtensible : Boolean;
         // default diagram kind for a catalog viewpoint (optional)

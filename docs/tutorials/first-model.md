@@ -227,8 +227,8 @@ allocated from the functional flow. The hazard and risk control are also linked
 to the function that they concern.
 
 ```sysml
-    // The software item that implements temperature evaluation.
-    part temperatureEvaluationSoftware : SoftwareItem {
+    // The software component that implements temperature evaluation.
+    part temperatureEvaluationSoftware : SoftwareComponent {
         attribute :>> id = "SW-001";
         attribute :>> name = "TemperatureEvaluationSoftware";
     }
@@ -390,8 +390,8 @@ package temperature_alarm {
             "At 38.1 °C, an audible alert begins within 2 seconds.";
     }
 
-    // The software item that implements temperature evaluation.
-    part temperatureEvaluationSoftware : SoftwareItem {
+    // The software component that implements temperature evaluation.
+    part temperatureEvaluationSoftware : SoftwareComponent {
         attribute :>> id = "SW-001";
         attribute :>> name = "TemperatureEvaluationSoftware";
     }

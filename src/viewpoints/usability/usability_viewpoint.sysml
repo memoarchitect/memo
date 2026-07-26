@@ -19,7 +19,6 @@ package memo_viewpoints_usability_usability_viewpoint {
         attribute :>> concernKinds = (ConcernKind::usability, ConcernKind::safety);
         attribute :>> includedLayers = ("context", "requirements");
         attribute :>> allowedElementKinds = ("Actor", "UseContext", "UseError", "Requirement");
-        attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }
 }

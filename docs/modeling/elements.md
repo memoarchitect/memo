@@ -13,7 +13,7 @@ Choose an element by asking what kind of statement you are recording.
 | A measurable system obligation | `Requirement` (requirementKind: system) | A vague function name |
 | A transformation | `SystemFunction` | A component unless responsibility is the point |
 | A solution-independent responsibility | `LogicalComponent` | A vendor-specific hardware part |
-| Deployed code | `SoftwareItem` or `FirmwareItem` | A generic logical component |
+| Implemented software | `SoftwareComponent`, `SoftwareModule`, or `DeploymentUnit` | A generic logical component |
 | A potential source of harm | `Hazard` | A failure mode or harm |
 | A design measure that reduces risk | `RiskControlMeasure` | A requirement with no risk link |
 | A testable assurance activity | `VerificationCase` | An evidence file by itself |

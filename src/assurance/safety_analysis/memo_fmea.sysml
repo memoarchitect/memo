@@ -3,7 +3,7 @@ package memo_assurance_safety_analysis {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
-    item def FMEAWorksheet specializes MemoPart {
+    item def FMEAWorksheet specializes AnalysisArtifact {
         attribute analysisScope : String;
         attribute standardReference : String;
         attribute analysisBasis : String;
@@ -42,7 +42,7 @@ package memo_assurance_safety_analysis {
         attribute targetCompletionDate : String;
         attribute revisedRpn : Integer;
     }
-    item def FaultTree specializes MemoPart {
+    item def FaultTree specializes AnalysisArtifact {
         attribute standardReference : String;
         attribute analysisScope : String;
         attribute topEventDescription : String;
@@ -67,7 +67,7 @@ package memo_assurance_safety_analysis {
         attribute involvedEvents : String;
         attribute significance : String;
     }
-    item def HAZOPStudy specializes MemoPart {
+    item def HAZOPStudy specializes AnalysisArtifact {
         attribute standardReference : String;
         attribute processDescription : String;
         attribute studyScope : String;

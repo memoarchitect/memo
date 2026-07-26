@@ -4,29 +4,35 @@
 
 # MEMO
 
-A SysML v2-native ontology for keeping medical-device architecture, risk,
-verification, and evidence connected as the design changes.
+A domain model for medical-device engineering, based on SysML v2, that keeps
+architecture, risk, verification, and evidence connected as the design changes.
 
 </div>
 
 ## What is MEMO
 
 MEMO is a domain model for medical-device engineering. It specializes SysML v2
-with the concepts and rules needed to describe a device and its assurance case
-in the same model.
+with the concepts and rules needed to describe a device architecture and its
+assurance information in the same model.
 
-It covers the clinical context, behavior, architecture, requirements, risk,
-cybersecurity, verification, and evidence. These are not separate document
-models. They are different views of one connected engineering model.
+Its architecture definitions cover operational context, scenarios, behavior,
+design, and realization. Its assurance definitions cover requirements, safety,
+cybersecurity, human factors, verification, validation, and evidence. Typed
+relationships connect these facts in one engineering model, and viewpoints
+select them for diagrams, tables, and documents.
 
-MEMO is distributed as importable SysML v2 source. It defines the model; it is
-not an editor, command-line tool, or modeling application.
+MEMO is distributed as importable SysML v2 source for use by projects and
+SysML v2 modeling environments.
+
+[Read **What is MEMO** →](what/index.md)
 
 ## Problem statement
 
-Medical devices are software-intensive, connected, and configurable. Safety
-depends on the behavior of the whole system—not on any single requirement or
-component.
+Medical devices can combine clinical workflows, configurable behavior,
+software, electronics, mechanics, interfaces, and connected services. Safety
+depends on how the whole system behaves in its intended and foreseeable use.
+
+[Read **Why MEMO** →](why/index.md)
 
 The assurance case, however, is split across teams and artifacts:
 
@@ -35,7 +41,7 @@ The assurance case, however, is split across teams and artifacts:
 - Threats are listed, but may not be tied to the interfaces they threaten.
 - Architecture is documented, but can drift from the implementation.
 
-![A conventional trace joins a hazard, requirement, and test with generic related-to links. Every link still resolves after the lockout interval changes.](assets/home-generic-trace.svg)
+![A linked test covers the physical-button path to the bolus handler. The current touchscreen and event-adapter path remains unverified.](assets/home-generic-trace.svg)
 
 The artifacts are linked, but the links often stop at IDs. They do not capture
 the engineering meaning of the claim. When the design changes, the links still
@@ -43,14 +49,14 @@ resolve even when the evidence behind them has become stale.
 
 ## Solution
 
-The missing piece is a shared, architecture-backed model that every assurance
-activity can use.
+MEMO supplies a shared, architecture-backed model that assurance activities
+can use.
 
 <div class="memo-card-grid" markdown>
 
 <div class="memo-card memo-card-purple" markdown>
 
-### Shared source of truth
+### One engineering model
 
 Clinical intent, behavior, architecture, requirements, risk, verification, and
 evidence are modeled together.
@@ -59,16 +65,16 @@ evidence are modeled together.
 
 <div class="memo-card memo-card-blue" markdown>
 
-### Meaningful connections
+### Relationship definitions
 
-Relationships state the claim being made—not merely that two identifiers are
-associated.
+Relationship definitions state the engineering claim, direction, and accepted
+endpoint roles.
 
 </div>
 
 <div class="memo-card memo-card-teal" markdown>
 
-### Architecture backbone
+### Architecture and assurance
 
 Risk controls, interfaces, behavior, implementation, and evidence remain tied
 to the design they describe.
@@ -77,7 +83,7 @@ to the design they describe.
 
 <div class="memo-card memo-card-orange" markdown>
 
-### Computable review
+### Rules and viewpoints
 
 Completeness checks, change-impact analysis, and assurance views can be derived
 from the model.
@@ -86,8 +92,8 @@ from the model.
 
 </div>
 
-The goal is not another document. It is one versionable engineering model whose
-meaning can be reviewed and checked as the design evolves.
+The result is one version-controlled engineering model whose meaning can be
+reviewed and checked as the design evolves.
 
 ## Introducing MEMO
 
@@ -97,16 +103,17 @@ medical-device semantic layer:
 
 - **Typed elements** for clinical use, medical products, architecture,
   requirements, hazards, controls, verification, and evidence.
-- **Typed relationships** with direction, meaning, and legal ends.
+- **Relationship definitions** with direction, meaning, and declared endpoint
+  roles.
 - **Closure rules** that express completeness and consistency questions as
   model constraints.
 
-![A semantic model records that the overdose hazard drives the lockout requirement, the infusion manager satisfies that requirement, the lockout control mitigates the hazard, and verification produces evidence.](assets/home-semantic-thread.svg)
+![A semantic model records that the overdose hazard is a source for the lockout requirement, the infusion manager satisfies that requirement and implements its risk control, the control mitigates the hazard, and a verification case produces evidence.](assets/home-semantic-thread.svg)
 
 In this model, the requirement exists because of a known hazard, the component
-satisfies that requirement, the control mitigates the hazard, and verification
-produces evidence. A change can therefore follow the meaning of the model
-instead of stopping at a list of IDs.
+satisfies that requirement and implements the lockout control, the control
+mitigates the hazard, and the verification case produces evidence. A change can
+therefore follow the meaning of the model instead of stopping at a list of IDs.
 
 ---
 

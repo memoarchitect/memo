@@ -692,7 +692,7 @@ connection def ControlImplementedBy :> MemoRelationship
 | End | Type |
 | --- | --- |
 | `riskControl` | [`VerifiableElement`](core.md#verifiableelement) |
-| `implementingElement` | [`MemoPart`](core.md#memopart) |
+| `implementingElement` | [`ArchitectureElement`](core.md#architectureelement) |
 
 ### DataBinding
 

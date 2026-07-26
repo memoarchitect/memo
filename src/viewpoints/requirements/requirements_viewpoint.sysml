@@ -19,7 +19,6 @@ package memo_viewpoints_requirements_requirements_viewpoint {
         attribute :>> concernKinds = (ConcernKind::regulatory, ConcernKind::safety);
         attribute :>> includedLayers = ("requirements");
         attribute :>> allowedElementKinds = ("Need", "Requirement");
-        attribute :>> methodologyReference = ("default-layer-viewpoint");
         attribute :>> userExtensible = true;
     }
 }

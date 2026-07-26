@@ -154,6 +154,6 @@ package memo_architecture_ui {
     // (confirmation dialog, lockout, guarded control).
     connection def ControlImplementedBy :> MemoRelationship {
         end riskControl : VerifiableElement;
-        end implementingElement : MemoPart;
+        end implementingElement : ArchitectureElement;
     }
 }
