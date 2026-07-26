@@ -1,8 +1,8 @@
 # Tutorial: model a temperature alarm
 
-This tutorial assumes MEMO is already available in your SysML project. If the
-import below does not resolve, complete [Installing MEMO](../how-to/install/index.md)
-first.
+This tutorial assumes MEMO is already available in your SysML project. Confirm
+that the import below resolves; [Installing MEMO](../how-to/install/index.md)
+provides the setup steps.
 
 You will create one file: `temperature_alarm.sysml`. Start with the small file
 below, then add each following snippet immediately above the final `}` of
@@ -20,7 +20,7 @@ verification case.
 ![Function-anchored model slice for the temperature alarm](../assets/temperature-alarm-argument.svg)
 
 The diagram is the destination for this tutorial. Read it from left to right to
-understand the rationale and response; use the central logical function as the
+understand the rationale and response; use the central system function as the
 anchor when you review requirements, architecture, risk, and tests.
 
 <div class="memo-tutorial-overview" markdown>
@@ -91,9 +91,10 @@ package temperature_alarm {
     private import memo_medical_device_library::*;
 
     // The person who relies on the device in this scenario.
-    part clinician : ClinicalUser {
+    part clinician : User {
         attribute :>> id = "ACT-001";
         attribute :>> name = "Clinician";
+        attribute :>> actorKind = ActorKind::clinician;
     }
 
     // The clinician's clinical goal for the monitored patient.
@@ -129,7 +130,7 @@ workflow; the scenario records the event that makes the workflow relevant.
     }
 
     // The operational event that frames this slice of work.
-    part highTemperatureScenario : OperationalScenario {
+    part highTemperatureScenario : OperativeScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "HighTemperatureScenario";
         attribute :>> variantKind = ScenarioVariantKind::exception;
@@ -261,9 +262,16 @@ to the function that they concern.
         to allocatedElement ::> temperatureSensorAssembly;
 
     // State which control reduces this particular hazard.
-    connection : MitigatesHazard
+    connection : Mitigates {
+        attribute :>> mitigationKind = MitigationKind::hazard;
+        connect control ::> independentAlarmCheck
+        to mitigatedElement ::> missedHighTemperature;
+    }
+
+    // State which function implements the risk-control behavior.
+    connection : ControlImplementedBy
         connect riskControl ::> independentAlarmCheck
-        to mitigatedHazard ::> missedHighTemperature;
+        to implementingElement ::> evaluateTemperature;
 ```
 
 The function, hazard, and control are separate model elements because they
@@ -271,8 +279,9 @@ answer separate review questions: what the system does, what can cause harm,
 and which measure reduces that concern.
 
 Before completing verification, show how the functional flow is realized in
-the internal block diagram. This is a focused design view: parts, exchanges,
-and direction are visible without mixing in the requirements or test evidence.
+the internal block diagram. This focused design view presents parts, exchanges,
+and direction; the requirement and verification relationships remain connected
+in the underlying model.
 
 ![Internal block diagram for the temperature alarm](../assets/temperature-alarm-ibd.svg)
 
@@ -311,9 +320,10 @@ package temperature_alarm {
     private import memo_medical_device_library::*;
 
     // The person who relies on the device in this scenario.
-    part clinician : ClinicalUser {
+    part clinician : User {
         attribute :>> id = "ACT-001";
         attribute :>> name = "Clinician";
+        attribute :>> actorKind = ActorKind::clinician;
     }
 
     // The clinician's clinical goal for the monitored patient.
@@ -338,7 +348,7 @@ package temperature_alarm {
     }
 
     // The operational event that frames this slice of work.
-    part highTemperatureScenario : OperationalScenario {
+    part highTemperatureScenario : OperativeScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "HighTemperatureScenario";
         attribute :>> variantKind = ScenarioVariantKind::exception;
@@ -433,9 +443,15 @@ package temperature_alarm {
         to allocatedElement ::> temperatureSensorAssembly;
 
     // State which control reduces this particular hazard.
-    connection : MitigatesHazard
+    connection : Mitigates {
+        attribute :>> mitigationKind = MitigationKind::hazard;
+        connect control ::> independentAlarmCheck
+        to mitigatedElement ::> missedHighTemperature;
+    }
+
+    connection : ControlImplementedBy
         connect riskControl ::> independentAlarmCheck
-        to mitigatedHazard ::> missedHighTemperature;
+        to implementingElement ::> evaluateTemperature;
 
     // Connect the function to the test that will verify its behavior.
     connection : VerifiedBy

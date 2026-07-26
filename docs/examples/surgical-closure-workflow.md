@@ -17,12 +17,13 @@ flowchart LR
 ## The clinical goal and setting
 
 The use case records the operation's goal, people, and operating-room context.
-It is one `ClinicalUseCase`, supported by a reusable workflow—not a duplicate
-goal for every scenario.
+It is one clinical `UseCase`, supported by a reusable workflow and shared by
+its scenarios.
 
 ```sysml
-use case ucPerformSleeveGastrectomy : ClinicalUseCase {
+use case ucPerformSleeveGastrectomy : UseCase {
     attribute :>> name = "PerformLaparoscopicSleeveGastrectomy";
+    attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement =
         "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
     ref :>> primaryUser = bariatricSurgeon;
@@ -47,8 +48,9 @@ action wfSleeveGastrectomy : OperationalWorkflow {
 connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsMobilize;
 connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsSleeve;
 connection : StepPrecedes connect predecessor ::> wsMobilize to successor ::> wsSleeve;
-connection : SupportsUseCase connect workflow ::> wfSleeveGastrectomy
-    to useCase ::> ucPerformSleeveGastrectomy;
+connection : Supports { attribute :>> supportKind = SupportKind::useCase;
+    connect supporter ::> wfSleeveGastrectomy
+    to supported ::> ucPerformSleeveGastrectomy; }
 ```
 
 ## A critical task inside the operation
@@ -87,7 +89,7 @@ action oaControlStapleLineBleeding : OperationalActivity {
     first controlBleeding then reassessStapleLine;
 }
 
-part scStapleLineBleeding : OperationalScenario {
+part scStapleLineBleeding : OperativeScenario {
     attribute :>> name = "StapleLineBleedingRecovery";
     attribute :>> variantKind = ScenarioVariantKind::recovery;
     attribute :>> variationPoint = "bleeding observed during staple-line assessment";

@@ -27,8 +27,7 @@ recorded as typed model elements.
 | Document view | `rmfView` | The generated risk-management view produced from the same thread |
 
 Each step is a typed element, and each arrow between them is a typed
-relationship carrying a status — not a row in a spreadsheet that happens to
-name both ends.
+relationship carrying a status and the meaning between its two ends.
 
 ## The same thread with real identifiers
 
@@ -83,20 +82,19 @@ Result: 2 errors · 1 warning · thread HZ-001 closed
 
 Four things follow from that output:
 
-- Gaps surface **before** the design review or the audit, not during it.
+- Gaps surface early enough for correction ahead of design review or audit.
 - Closure is visible to software, systems, risk, and V&V at the same time,
   from the same run.
 - The rules run in CI, before merge or release — compliance becomes a build
   step.
-- Each change produces a deterministic re-review scope rather than a
-  judgement call about what to re-check.
+- Each change produces a defined set of elements to re-check.
 
-!!! warning "What this does not do"
+!!! note "What validation establishes"
 
-    This does not prove the device is safe, and it does not replace review. It
-    makes review gaps visible early enough for engineers, safety, and V&V to
-    act on them. The clinical, risk-acceptance, and approval decisions remain
-    entirely with the people qualified to make them.
+    Validation establishes structural completeness against the encoded rules
+    and makes review gaps visible to engineering, safety, and V&V. Qualified
+    people retain responsibility for clinical judgement, risk acceptance, and
+    approval decisions.
 
 ## Why this thread works
 

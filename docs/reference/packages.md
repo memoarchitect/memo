@@ -54,7 +54,7 @@ upgrades harder.
 | Example | Demonstrates |
 |---|---|
 | `temperature-alarm` | assurance chain: use case → UI → risk → V&V → evidence |
-| `manual-surgical-instrument` | passive reusable instrument; layer omission |
+| `manual-surgical-instrument` | passive reusable instrument; mechanical product identity and realization |
 | `reusable-instrument` | reprocessing lifecycle, workflow, occurrence records |
 | `single-use-device` | single-use/sterile lifecycle and lot identity |
 | `surgical-closure-workflow` | operational world only: needs → workflow → tasks → scenarios |

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-labelledby="title desc">
+  <title id="title">One shared engineering model</title>
+  <desc id="desc">Clinical intent, system behavior, and architecture enter a shared model containing meaning, structure, and rules. The model connects them to risk controls, verification evidence, and change-impact paths.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#168c72"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#021f36" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="500" rx="24" fill="#fbfcfd"/>
+  <text x="42" y="48" font-family="Nunito, Arial, sans-serif" font-size="18" font-weight="900" letter-spacing="2" fill="#168c72">THE SHARED MODEL</text>
+  <text x="1158" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#5c7188">one source · several review views</text>
+
+  <g font-family="Nunito, Arial, sans-serif">
+    <g filter="url(#shadow)">
+      <rect x="42" y="92" width="275" height="86" rx="15" fill="#e4faf7" stroke="#9bded5"/>
+      <rect x="42" y="207" width="275" height="86" rx="15" fill="#eaf4fd" stroke="#cce2f6"/>
+      <rect x="42" y="322" width="275" height="86" rx="15" fill="#f0edff" stroke="#ddd5f6"/>
+    </g>
+    <text x="66" y="123" font-size="13" font-weight="900" letter-spacing="1.4" fill="#168c72">CLINICAL INTENT</text>
+    <text x="66" y="151" font-size="18" font-weight="800" fill="#082744">users · context · goals</text>
+    <text x="66" y="238" font-size="13" font-weight="900" letter-spacing="1.4" fill="#438ed0">SYSTEM BEHAVIOR</text>
+    <text x="66" y="266" font-size="18" font-weight="800" fill="#082744">scenarios · functions</text>
+    <text x="66" y="353" font-size="13" font-weight="900" letter-spacing="1.4" fill="#8971dc">ARCHITECTURE</text>
+    <text x="66" y="381" font-size="18" font-weight="800" fill="#082744">components · interfaces</text>
+
+    <path d="M327 135 C380 135 385 182 430 182" fill="none" stroke="#168c72" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M327 250 H430" fill="none" stroke="#168c72" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M327 365 C380 365 385 318 430 318" fill="none" stroke="#168c72" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="440" y="92" width="320" height="316" rx="24" fill="#0b1e2d"/>
+      <rect x="474" y="128" width="252" height="86" rx="17" fill="#168c72"/>
+    </g>
+    <text x="600" y="154" text-anchor="middle" font-size="13" font-weight="900" letter-spacing="1.8" fill="#dffbf4">SHARED SOURCE OF TRUTH</text>
+    <text x="600" y="188" text-anchor="middle" font-size="23" font-weight="900" fill="#ffffff">Meaning + structure + rules</text>
+    <rect x="477" y="250" width="112" height="42" rx="21" fill="#132d42" stroke="#2dd4a8" stroke-opacity="0.55"/>
+    <rect x="611" y="250" width="112" height="42" rx="21" fill="#132d42" stroke="#2dd4a8" stroke-opacity="0.55"/>
+    <rect x="520" y="317" width="160" height="42" rx="21" fill="#132d42" stroke="#2dd4a8" stroke-opacity="0.55"/>
+    <text x="533" y="276" text-anchor="middle" font-size="15" font-weight="800" fill="#2dd4a8">one model</text>
+    <text x="667" y="276" text-anchor="middle" font-size="15" font-weight="800" fill="#2dd4a8">typed links</text>
+    <text x="600" y="343" text-anchor="middle" font-size="15" font-weight="800" fill="#2dd4a8">version controlled</text>
+
+    <path d="M770 182 C815 182 820 135 873 135" fill="none" stroke="#168c72" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M770 250 H873" fill="none" stroke="#168c72" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M770 318 C815 318 820 365 873 365" fill="none" stroke="#168c72" stroke-width="3" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="883" y="92" width="275" height="86" rx="15" fill="#fff3e8" stroke="#f6dcc2"/>
+      <rect x="883" y="207" width="275" height="86" rx="15" fill="#e4faf7" stroke="#9bded5"/>
+      <rect x="883" y="322" width="275" height="86" rx="15" fill="#eaf4fd" stroke="#cce2f6"/>
+    </g>
+    <text x="907" y="123" font-size="13" font-weight="900" letter-spacing="1.4" fill="#ef9b51">RISK CONTROLS</text>
+    <text x="907" y="151" font-size="18" font-weight="800" fill="#082744">anchored to the design</text>
+    <text x="907" y="238" font-size="13" font-weight="900" letter-spacing="1.4" fill="#168c72">VERIFICATION EVIDENCE</text>
+    <text x="907" y="266" font-size="18" font-weight="800" fill="#082744">tied to claims and baseline</text>
+    <text x="907" y="353" font-size="13" font-weight="900" letter-spacing="1.4" fill="#438ed0">CHANGE IMPACT</text>
+    <text x="907" y="381" font-size="18" font-weight="800" fill="#082744">reachable dependencies</text>
+
+    <text x="600" y="462" text-anchor="middle" font-size="18" font-weight="850" fill="#082744">A change follows typed model relationships to the affected evidence.</text>
+  </g>
+</svg>

@@ -29,7 +29,7 @@ behaviour rather than another functional-architecture element.
 |---|---|
 | `Enables` | This function enables that operational work — it does not perform it |
 | `InvolvesFunction` / `IncludesStep` | This flow organizes these functions and steps |
-| `SelectsFlow` / `Realizes` | This functional scenario selects a flow and realizes an operational scenario |
+| `selectedFlow` / `Realizes` | This functional scenario selects a flow and realizes an operative scenario |
 | `AllocatedTo` | This function is the responsibility of that logical component |
 
 [![Function-centered traceability](../assets/function-centered-traceability.png)](../assets/function-centered-traceability.png){ .memo-zoomable aria-label="Open the function-centered traceability diagram" }

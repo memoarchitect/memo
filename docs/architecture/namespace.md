@@ -44,7 +44,7 @@ project to internal organization and make upgrades harder.
 
 **Typed links, not free-form arrows.** Every relation is a native SysML v2
 `connection def` specializing `MemoRelationship`: its name is the verb
-(`MitigatesHazard`, `VerifiedBy`, `AllocatedTo`), its typed ends carry the
+(`Mitigates`, `VerifiedBy`, `AllocatedTo`), its typed ends carry the
 roles, a `linkStatus` carries state, and navigation is bidirectional. This is
 what makes change impact computable instead of a manual search.
 

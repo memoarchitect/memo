@@ -6,22 +6,22 @@
 
 :root {
   --memo-night: #0b1e2d;
-  --memo-night-2: #0a3452;
+  --memo-night-2: #132d42;
   --memo-ink: #082744;
   --memo-muted: #5c7188;
   --memo-paper: #fbfcfd;
   --memo-wash: #eef4f7;
-  --memo-line: #d8e2e9;
+  --memo-line: #d5e0e7;
   --memo-teal: #2dd4a8;
-  --memo-teal-deep: #0a8d76;
-  --memo-teal-soft: #e3faf3;
+  --memo-teal-deep: #168c72;
+  --memo-teal-soft: #e4faf7;
   --memo-blue: #438ed0;
   --memo-blue-soft: #eaf4fd;
   --memo-purple: #8971dc;
   --memo-purple-soft: #f0edff;
   --memo-orange: #ef9b51;
   --memo-orange-soft: #fff3e8;
-  --memo-red: #ea6b61;
+  --memo-red: #e05d6f;
   --memo-red-soft: #fff0ef;
   --memo-code-bg: #06243d;
   --memo-code-ink: #cfe8ff;
@@ -31,8 +31,9 @@
 /* ── Palette mapping ─────────────────────────────────────────────────── */
 
 [data-md-color-scheme="default"] {
-  --md-primary-fg-color: #1b3a4b;
+  --md-primary-fg-color: var(--memo-night);
   --md-primary-fg-color--dark: var(--memo-night);
+  --md-primary-fg-color--light: var(--memo-night-2);
   --md-accent-fg-color: var(--memo-teal-deep);
   --md-typeset-a-color: var(--memo-teal-deep);
   --md-default-bg-color: var(--memo-paper);
@@ -41,8 +42,9 @@
 }
 
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #1b3a4b;
+  --md-primary-fg-color: var(--memo-night);
   --md-primary-fg-color--dark: var(--memo-night);
+  --md-primary-fg-color--light: var(--memo-night-2);
   --md-accent-fg-color: var(--memo-teal);
   --md-typeset-a-color: var(--memo-teal);
   --md-default-bg-color: #0d2231;
@@ -53,9 +55,29 @@
 
 .md-header { background: var(--memo-night); }
 .md-header--shadow { box-shadow: 0 1px 0 rgba(45, 212, 168, 0.25), 0 8px 24px rgba(2, 31, 54, 0.18); }
-.md-tabs { background: #1b3a4b; }
-.md-tabs__link--active { color: var(--memo-teal); font-weight: 700; }
+.md-tabs { background: var(--memo-night-2); border-bottom: 1px solid rgba(45, 212, 168, 0.20); }
+.md-tabs__link { font-weight: 750; letter-spacing: 0.01em; }
+.md-tabs__link--active { color: var(--memo-teal); font-weight: 850; }
 .md-header__topic:first-child { font-weight: 800; letter-spacing: -0.01em; }
+
+/* Sidebar navigation uses the same teal selection language as Architect. */
+.md-nav__link {
+  margin-top: 0.12rem;
+  padding: 0.34rem 0.48rem;
+  border-radius: 8px;
+  line-height: 1.35;
+}
+.md-nav__link:hover { color: var(--memo-teal-deep); background: rgba(45, 212, 168, 0.07); }
+.md-nav__link--active {
+  color: var(--memo-teal-deep) !important;
+  background: var(--memo-teal-soft);
+  font-weight: 850;
+}
+[data-md-color-scheme="slate"] .md-nav__link:hover,
+[data-md-color-scheme="slate"] .md-nav__link--active {
+  color: var(--memo-teal) !important;
+  background: rgba(45, 212, 168, 0.10);
+}
 
 /* ── Typography: tight display headings like the deck ────────────────── */
 
@@ -64,9 +86,15 @@
   font-weight: 800;
   letter-spacing: -0.03em;
 }
-.md-typeset h2 { font-weight: 750; letter-spacing: -0.02em; }
-.md-typeset h3 { font-weight: 700; letter-spacing: -0.01em; }
+.md-typeset { color: #263746; line-height: 1.68; }
+.md-typeset p { margin-top: 0.8em; margin-bottom: 1em; }
+.md-typeset h2 { color: var(--memo-ink); font-weight: 800; letter-spacing: -0.025em; }
+.md-typeset h3 { color: var(--memo-ink); font-weight: 750; letter-spacing: -0.015em; }
+.md-typeset a { font-weight: 700; text-underline-offset: 0.15em; }
+.md-typeset a:hover { color: var(--memo-ink); }
 [data-md-color-scheme="slate"] .md-typeset h1 { color: #e8f1f8; }
+[data-md-color-scheme="slate"] .md-typeset h2,
+[data-md-color-scheme="slate"] .md-typeset h3 { color: #e8f1f8; }
 
 /* ── Inline code: teal chips, as the deck styles package names ───────── */
 
@@ -113,6 +141,7 @@
   color: var(--memo-ink);
   font-weight: 750;
 }
+.md-typeset table:not([class]) tr:hover td { background: rgba(45, 212, 168, 0.045); }
 [data-md-color-scheme="slate"] .md-typeset table:not([class]) {
   border-color: rgba(216, 226, 233, 0.16);
 }
@@ -255,6 +284,19 @@
   display: block;
   position: relative;
   cursor: zoom-in;
+}
+.md-typeset .memo-presentation-graphic {
+  display: block;
+  width: 100%;
+  margin: 1.6rem 0 2.2rem;
+  border: 1px solid var(--memo-line);
+  border-radius: 20px;
+  background: var(--memo-paper);
+  box-shadow: 0 18px 38px rgba(2, 31, 54, 0.10);
+}
+[data-md-color-scheme="slate"] .md-typeset .memo-presentation-graphic {
+  border-color: rgba(216, 226, 233, 0.18);
+  background: #f6f9fb;
 }
 .memo-zoomable img {
   display: block;
