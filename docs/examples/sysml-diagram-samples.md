@@ -40,3 +40,24 @@ They are not a device reference model and they do not teach the MEMO ontology.
 For a connected medical-device argument — context through evidence — use the
 [GPCA pump walkthrough](gpca-walkthrough.md), whose own `model/samples/` folder
 backs the same Samples experience.
+
+<!-- memo:reinforce -->
+
+## Where this sits in MEMO
+
+Every tutorial is one slice of the same structure. This example populates these layers:
+
+| Layer | Element types it uses | Reference |
+| --- | --- | --- |
+| Operational | `OperationalEntity`, `UseCase`, `UseContext`, `User` | [Operational](../reference/elements/operational.md) |
+| Functional | `ModeState`, `StateMachine`, `Transition` | [Functional](../reference/elements/functional.md) |
+| Logical | `DataPort`, `LogicalComponent` | [Logical](../reference/elements/logical.md) |
+| Implementation and realization | `HardwareAssembly` | [Implementation and realization](../reference/elements/implementation.md) |
+| Assurance | `Need`, `Requirement` | [Assurance](../reference/elements/assurance.md) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+
+**Typed links it uses:** `AppliesInContext`, `Composes`, `DerivesFrom`, `ExchangesWith`, `Extends`, `IncludedIn`, `Includes`, `Initiates`, `InteractsWith`, `MemoLink`, `ParticipatesIn` — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+
+**Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
+
+**Source model:** [`examples/sysml-diagram-samples`](https://github.com/memoarchitect/memo/tree/main/examples/sysml-diagram-samples)

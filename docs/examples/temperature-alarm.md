@@ -149,3 +149,24 @@ view temperatureAlarmOverview : MemoDiagramView {
 
 The [full catalog source](https://github.com/memoarchitect/memo/tree/main/examples/temperature-alarm/model/catalog)
 contains the remaining attributes and elements used by these excerpts.
+
+<!-- memo:reinforce -->
+
+## Where this sits in MEMO
+
+Every tutorial is one slice of the same structure. This example populates these layers:
+
+| Layer | Element types it uses | Reference |
+| --- | --- | --- |
+| Operational | `OperationalActivity`, `UseCase`, `User`, `UserTask` | [Operational](../reference/elements/operational.md) |
+| Functional | `SystemFunction` | [Functional](../reference/elements/functional.md) |
+| Logical | `LogicalComponent` | [Logical](../reference/elements/logical.md) |
+| Implementation and realization | `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../reference/elements/implementation.md) |
+| Assurance | `Evidence`, `Hazard`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `VerificationScenario` | [Assurance](../reference/elements/assurance.md) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+
+**Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates`, `ProducesEvidence` … +3 — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+
+**Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
+
+**Source model:** [`examples/temperature-alarm`](https://github.com/memoarchitect/memo/tree/main/examples/temperature-alarm)
