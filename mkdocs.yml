@@ -73,57 +73,6 @@ nav:
   - Home:
       - index.md
       - Getting Started: getting-started.md
-  - Tutorials:
-      - examples/index.md
-      - Lessons:
-          - "Your first model: temperature alarm": tutorials/first-model.md
-          - Surgical workflow modelling: examples/surgical-closure-workflow.md
-      - Worked examples:
-          - Temperature Alarm: examples/temperature-alarm.md
-          - Manual Surgical Instrument: examples/manual-surgical-instrument.md
-          - Single-Use Device: examples/single-use-device.md
-          - Reusable Instrument: examples/reusable-instrument.md
-          - Functional, Logical, Physical: examples/functional-logical-physical.md
-          - Software-Only Medical Device: examples/software-only-medical-device.md
-          - Embedded Infusion Pump: examples/embedded-infusion-pump.md
-          - Connected Patient Monitor: examples/connected-patient-monitor.md
-          - IVD Laboratory System: examples/ivd-laboratory-system.md
-          - Surgical Robot: examples/surgical-robot.md
-          - Multidimensional Layers: examples/multidimensional-layers.md
-          - Standard SysML Diagram Samples: examples/sysml-diagram-samples.md
-  - How-to Guides:
-      - how-to/index.md
-      - Install MEMO:
-          - how-to/install/index.md
-          - With npm: how-to/install/npm.md
-          - As a KerML archive: how-to/install/kpar.md
-          - From a source checkout: how-to/install/source.md
-      - Adopt MEMO on a project: how-to/adopt.md
-      - Choose an element: modeling/elements.md
-      - Write a relationship: modeling/relationships.md
-      - Model views and evidence: modeling/views-evidence.md
-  - Reference:
-      - reference/index.md
-      - Modules: reference/modules.md
-      - Elements by layer:
-          - reference/elements/index.md
-          - Core: reference/elements/core.md
-          - Operational: reference/elements/operational.md
-          - Functional: reference/elements/functional.md
-          - Logical: reference/elements/logical.md
-          - Implementation and realization: reference/elements/implementation.md
-          - Clinical and products: reference/elements/clinical.md
-          - Assurance: reference/elements/assurance.md
-          - Views and methodology: reference/elements/views.md
-      - Relationships: reference/relationships.md
-      - Enumerations: reference/enumerations.md
-      - Rules: reference/rules.md
-      - Packaging:
-          - Packages and Imports: reference/packages.md
-          - SysML Source Reference: reference/sysml.md
-          - Navigate by question: architecture/index.md
-          - "The memo:: Namespace": architecture/namespace.md
-          - Repository and Packaging: architecture/repository.md
   - Explanation:
       - why/index.md
       - Why MEMO:
@@ -149,6 +98,57 @@ nav:
           - Requirements and Architecture: layers/requirements-architecture.md
           - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
           - Medical Products and Identity: layers/medical-products.md
+  - Reference:
+      - reference/index.md
+      - Modules: reference/modules.md
+      - Elements by layer:
+          - reference/elements/index.md
+          - Core: reference/elements/core.md
+          - Operational: reference/elements/operational.md
+          - Functional: reference/elements/functional.md
+          - Logical: reference/elements/logical.md
+          - Implementation and realization: reference/elements/implementation.md
+          - Clinical and products: reference/elements/clinical.md
+          - Assurance: reference/elements/assurance.md
+          - Views and methodology: reference/elements/views.md
+      - Relationships: reference/relationships.md
+      - Enumerations: reference/enumerations.md
+      - Rules: reference/rules.md
+      - Packaging:
+          - Packages and Imports: reference/packages.md
+          - SysML Source Reference: reference/sysml.md
+          - Navigate by question: architecture/index.md
+          - "The memo:: Namespace": architecture/namespace.md
+          - Repository and Packaging: architecture/repository.md
+  - How-to Guides:
+      - how-to/index.md
+      - Install MEMO:
+          - how-to/install/index.md
+          - With npm: how-to/install/npm.md
+          - As a KerML archive: how-to/install/kpar.md
+          - From a source checkout: how-to/install/source.md
+      - Adopt MEMO on a project: how-to/adopt.md
+      - Choose an element: modeling/elements.md
+      - Write a relationship: modeling/relationships.md
+      - Model views and evidence: modeling/views-evidence.md
+  - Tutorials:
+      - examples/index.md
+      - Lessons:
+          - "Your first model: temperature alarm": tutorials/first-model.md
+          - Surgical workflow modelling: examples/surgical-closure-workflow.md
+      - Worked examples:
+          - Temperature Alarm: examples/temperature-alarm.md
+          - Manual Surgical Instrument: examples/manual-surgical-instrument.md
+          - Single-Use Device: examples/single-use-device.md
+          - Reusable Instrument: examples/reusable-instrument.md
+          - Functional, Logical, Physical: examples/functional-logical-physical.md
+          - Software-Only Medical Device: examples/software-only-medical-device.md
+          - Embedded Infusion Pump: examples/embedded-infusion-pump.md
+          - Connected Patient Monitor: examples/connected-patient-monitor.md
+          - IVD Laboratory System: examples/ivd-laboratory-system.md
+          - Surgical Robot: examples/surgical-robot.md
+          - Multidimensional Layers: examples/multidimensional-layers.md
+          - Standard SysML Diagram Samples: examples/sysml-diagram-samples.md
   - Case Studies:
       - case-studies/index.md
       - GPCA Pump:
