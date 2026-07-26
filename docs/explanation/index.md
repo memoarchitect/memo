@@ -5,7 +5,12 @@ documents used to justify it. Requirements, architecture, risk, verification,
 and evidence may remain linked while the engineering meaning of those links
 has gone stale.
 
-The pages in this section develop MEMO's response in two stages.
+MEMO's response is to put those facts and claims in one shared model.
+
+![A shared model connects clinical intent, system behavior, and architecture to risk controls, verification evidence, and change-impact paths.](../assets/memo-shared-model.svg){ .memo-presentation-graphic }
+
+The pages in this section explain why that model is needed, what MEMO adds to
+SysML v2, and how the model is organized.
 
 ## Why MEMO
 
@@ -14,8 +19,8 @@ missing shared model:
 
 1. Device complexity makes safety depend on system behavior.
 2. Identifier-only traceability cannot state or check an engineering claim.
-3. Medical-device standards produce strong discipline-specific records but do
-   not supply one architecture model that connects them.
+3. Medical-device standards produce strong discipline-specific records; MEMO
+   adds an architecture model that connects them.
 4. MEMO addresses the gap with a versionable, architecture-backed semantic
    model.
 
@@ -23,13 +28,14 @@ missing shared model:
 
 ## What MEMO is
 
-[What MEMO is](../what/index.md) explains how the ontology implements that
-shared model. It introduces the domain types, semantic relationships, closure
-rules, and the mental model that organizes them.
+[What MEMO is](../what/index.md) explains the implementation of that shared
+model. A project imports a SysML v2 library that provides medical-device
+concepts, architecture layers, meaningful relationships, and completeness
+rules. The project then uses those definitions to model its own device.
 
-The mental model then unfolds through the [layers](../layers/index.md): context
-and use, goals, workflows and scenarios, functions, architecture, realization,
-and the assurance disciplines that connect across them.
+The [mental model](../what/mental-model.md) and
+[layers](../layers/index.md) explain where each fact belongs and how intent,
+design, risk, and evidence remain connected.
 
 [Continue to What MEMO is →](../what/index.md)
 

@@ -1,9 +1,9 @@
 # Scenario-driven modelling
 
-Hazards do not attach to components. They attach to **situations** — a
-particular user, doing a particular task, in a particular context, when
-something behaves in a particular way. A model that jumps straight from
-"the device" to "the software architecture" has no place to put that.
+Scenarios give a hazard a concrete **situation**: a particular user, performing
+a particular task, in a particular context, while the system is in a
+particular state. This context makes the hazard, control, and verification case
+more specific.
 
 MEMO therefore reaches behavior through the path a real user takes.
 
@@ -40,24 +40,23 @@ The occlusion scenario is where the hazard lives. It has a user, a context, a
 device state, and a set of functions that must behave correctly. A risk control
 attaches to that, and a verification case can exercise exactly it.
 
-Without the scenario, the same hazard is recorded as "occlusion may cause
-under-infusion" with a control that points at a component and a test that
-points at a requirement — three artifacts with no shared situation between
-them.
+The scenario provides the shared situation connecting the occlusion hazard,
+the control applied to the behavior, and the verification case that exercises
+the exception path.
 
 ## What this means when you model
 
-- Do not start with the block diagram. Start with the use case and one
-  scenario.
-- A scenario is a real path, not a category. "Nominal use" is not a scenario;
-  "clinician programs a bolus while the pump is in keep-vein-open" is.
+- Start with a use case and one scenario, then introduce the architecture that
+  performs the required functions.
+- Name a scenario as a concrete path, such as "clinician programs a bolus while
+  the pump is in keep-vein-open."
 - Model the exception paths deliberately. They are where the argument is.
 - One scenario at a time is a complete piece of work. The
   [First model tutorial](../tutorials/first-model.md) builds exactly one.
 
 ## In the model
 
-Scenarios and workflows are shipped types, not conventions:
+Scenarios and workflows are explicit ontology types:
 
 | Concept | MEMO type | Package |
 | --- | --- | --- |

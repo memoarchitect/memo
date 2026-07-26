@@ -5,7 +5,7 @@
   <rect width="1160" height="560" rx="24" fill="#fbfcfd"/>
 
   <text x="48" y="52" font-family="Nunito,Arial,sans-serif" font-size="20" font-weight="850" fill="#082744">ONE ELEMENT, FOUR SETS OF LABELS</text>
-  <text x="48" y="79" font-family="Nunito,Arial,sans-serif" font-size="14" fill="#5c7188">Add labels to one element; do not make copies for layers, assurance, or life stages.</text>
+  <text x="48" y="79" font-family="Nunito,Arial,sans-serif" font-size="14" fill="#5c7188">One element carries the labels for its layer, assurance role, and life stage.</text>
 
   <!-- center element card -->
   <g font-family="Nunito,Arial,sans-serif" text-anchor="middle">
@@ -77,5 +77,5 @@
     <path d="M798 356 C 760 340 745 334 732 328"/>
   </g>
 
-  <text x="580" y="530" font-family="Nunito,Arial,sans-serif" font-size="13" font-weight="750" fill="#5c7188" text-anchor="middle">Views show the labels that matter for a review — the element itself is never copied.</text>
+  <text x="580" y="530" font-family="Nunito,Arial,sans-serif" font-size="13" font-weight="750" fill="#5c7188" text-anchor="middle">Views select the labels needed for a review; the element retains one identity.</text>
 </svg>

@@ -1,8 +1,8 @@
 # The mental model
 
 MEMO records a device concern, the design response, and the evidence for it in
-one model. You do not need to use every layer. Start with one scenario, then
-add only the elements and relationships needed to answer the review question.
+one model. Start with one scenario and add the layers, elements, and
+relationships needed to answer the review question.
 
 <div class="memo-argument-map" aria-label="An engineering argument from clinical intent to evidence">
   <div class="argument-intent"><span>Why?</span><strong>Clinical intent</strong><small>What does a person need?</small></div>
@@ -14,11 +14,11 @@ add only the elements and relationships needed to answer the review question.
   <div class="argument-proof"><span>How do we know?</span><strong>Evidence</strong><small>Verification and records</small></div>
 </div>
 
-Risk is not a late-stage column in this story. A hazard can introduce a new
-requirement at any time, and a failed verification can send you back to the
-design. The model is a connected argument, not a waterfall checklist — see
-[function-centered traceability](function-centered.md) for how the links
-actually run.
+Risk participates throughout this story. A hazard can introduce a new
+requirement, and a failed verification can return attention to the design. The
+model records these feedback paths as typed connections. See
+[function-centered traceability](function-centered.md) for the relationship
+pattern.
 
 ## Three rules for building the model
 
@@ -28,16 +28,13 @@ actually run.
   <article class="memo-card memo-card-teal"><h3>3. Link the facts</h3><ul><li>A need explains a use case.</li><li>A function is assigned to a component.</li><li>A requirement or control is checked by a test.</li><li>A test produces evidence.</li></ul><p><a href="../reference/relationships/">Choose the link →</a></p></article>
 </div>
 
-Keep one record for each real thing. Do not copy the same component into
-separate safety, cybersecurity, and verification models; add those concerns to
-the same component and use views to show it to different reviewers.
+Keep one record for each real thing. Relate safety, cybersecurity, and
+verification elements to the same component, then use views to present the
+relevant connections to each reviewer.
 
 ## Keep one element; add labels
 
-Do not create a separate copy of the same component for software, safety, and
-cybersecurity. Those copies drift apart when the component changes.
-
-Instead, keep one component and give it the labels that describe it: where it
+Keep one component and give it the labels that describe it: where it
 fits in the engineering story, its life stage, the assurance disciplines that
 apply, and the concerns that follow it. A view simply chooses which labeled
 elements to show.
@@ -49,7 +46,7 @@ is owned by exactly one axis — a horizontal architecture layer or a vertical
 assurance discipline — and reaches the other only through typed relationships.
 [The layers](../layers/index.md) explain the two axes.
 
-## Start with a small argument, not a complete layer
+## Start with a small assurance thread
 
 The most productive first model is a **vertical slice**: one narrow scenario
 that reaches from a real user concern to a checkable result. For example:
