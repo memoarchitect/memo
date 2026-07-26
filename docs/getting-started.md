@@ -1,9 +1,5 @@
 # Getting started
 
-This site is the documentation for the MEMO ontology. It is organized so that
-you can learn the ontology progressively, complete a specific task, or look up
-an exact definition without reading the site from beginning to end.
-
 ## How this documentation is organized
 
 The main navigation is divided by what the reader is trying to do:
@@ -19,19 +15,6 @@ The main navigation is divided by what the reader is trying to do:
 | **[Case Studies](case-studies/index.md)** | Shows complete device models and end-to-end assurance threads. |
 | **[Contribute](contributing.md)** | Explains how to propose and review changes to MEMO. |
 
-The sections serve different purposes:
-
-- **Tutorials** are for learning. Follow them in order and build along with the
-  examples.
-- **How-to guides** are for doing. Open one when you already know the outcome
-  you need.
-- **Reference** is for lookup. It is the source for exact names, definitions,
-  legal relationships, and model rules.
-- **Explanation** is for understanding. It carries the rationale and the larger
-  conceptual model.
-- **Case studies** bring those sections together in complete medical-device
-  models.
-
 ## Recommended reading path
 
 If this is your first visit:
@@ -45,13 +28,13 @@ If this is your first visit:
 6. Study the [GPCA case study](case-studies/gpca/index.md) when you are ready for
    a complete model.
 
-You do not need to read the Reference section in sequence. It is intentionally
-organized for direct lookup from tutorials, how-to guides, and model reviews.
+The Reference section is organized for direct lookup from tutorials, how-to
+guides, and model reviews.
 
 ## Public repository
 
 The MEMO ontology and this documentation are developed in public at
 [**github.com/memoarchitect/memo**](https://github.com/memoarchitect/memo).
 
-MEMO Tools and MEMO Architect are separate products with their own
-documentation. They are not required to use the ontology.
+MEMO Tools and MEMO Architect are separate products, each with its own
+documentation.

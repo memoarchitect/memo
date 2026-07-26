@@ -5,7 +5,7 @@ the hub of the argument — requirements motivate them, risk analyses them,
 architecture implements them, verification exercises them.
 
 Narrative treatment: [Functional Analysis](../../layers/operations-system.md)
-and [function-centered traceability](../../what/function-centered.md).
+and [Functions are the traceability hub](../../what/index.md#functions-are-the-traceability-hub).
 
 20 definitions. Each entry gives the declaration, its position in the specialization hierarchy, its attributes and their types, and the relationships that accept it.
 

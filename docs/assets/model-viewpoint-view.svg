@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="mvv-title mvv-desc">
+  <title id="mvv-title">Model, viewpoint, and view</title>
+  <desc id="mvv-desc">The engineering model contains project facts and relationships. A reusable viewpoint specifies stakeholder concerns, selection rules, and presentation conventions. A conforming view documents the project model with diagrams and text.</desc>
+  <defs>
+    <marker id="mvv-arrow" markerWidth="10" markerHeight="10" refX="8" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9Z" fill="#5c7188"/>
+    </marker>
+    <filter id="mvv-shadow" x="-15%" y="-20%" width="130%" height="150%">
+      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#082744" flood-opacity="0.08"/>
+    </filter>
+    <style>
+      .mvv-title { font: 850 21px Nunito, Arial, sans-serif; fill: #082744; }
+      .mvv-label { font: 850 15px Nunito, Arial, sans-serif; letter-spacing: 1.2px; }
+      .mvv-body { font: 650 16px Nunito, Arial, sans-serif; fill: #294157; }
+      .mvv-small { font: 650 13px Nunito, Arial, sans-serif; fill: #5c7188; }
+      .mvv-edge { fill: none; stroke: #5c7188; stroke-width: 2.5; marker-end: url(#mvv-arrow); }
+    </style>
+  </defs>
+  <rect width="1200" height="420" rx="24" fill="#fbfcfd"/>
+  <text x="46" y="50" class="mvv-title">MODEL, VIEWPOINT, AND VIEW</text>
+  <text x="46" y="76" class="mvv-small">Views document one engineering model for particular stakeholders and concerns.</text>
+
+  <g filter="url(#mvv-shadow)">
+    <rect x="48" y="116" width="300" height="226" rx="20" fill="#eaf4fd" stroke="#bcd9f1"/>
+    <rect x="450" y="116" width="300" height="226" rx="20" fill="#f0edff" stroke="#d5cbfa"/>
+    <rect x="852" y="116" width="300" height="226" rx="20" fill="#e7f7f4" stroke="#a8ddd4"/>
+  </g>
+
+  <text x="76" y="153" class="mvv-label" fill="#2778b7">ENGINEERING MODEL</text>
+  <text x="76" y="190" class="mvv-body">Project facts and typed</text>
+  <text x="76" y="216" class="mvv-body">relationships across</text>
+  <text x="76" y="242" class="mvv-body">architecture and assurance</text>
+  <text x="76" y="292" class="mvv-small">One version-controlled source</text>
+  <text x="76" y="313" class="mvv-small">for the device description</text>
+
+  <text x="478" y="153" class="mvv-label" fill="#6550bd">VIEWPOINT</text>
+  <text x="478" y="190" class="mvv-body">Reusable specification of</text>
+  <text x="478" y="216" class="mvv-body">stakeholders, concerns,</text>
+  <text x="478" y="242" class="mvv-body">selection, and presentation</text>
+  <text x="478" y="292" class="mvv-small">Defines how a model is</text>
+  <text x="478" y="313" class="mvv-small">documented for a purpose</text>
+
+  <text x="880" y="153" class="mvv-label" fill="#0f7f6d">VIEW</text>
+  <text x="880" y="190" class="mvv-body">Diagrams, tables, and text</text>
+  <text x="880" y="216" class="mvv-body">describing this project model</text>
+  <text x="880" y="242" class="mvv-body">for the stated concerns</text>
+  <text x="880" y="292" class="mvv-small">A project-specific document</text>
+  <text x="880" y="313" class="mvv-small">conforming to the viewpoint</text>
+
+  <path d="M358 229H440" class="mvv-edge"/>
+  <text x="399" y="212" text-anchor="middle" class="mvv-small">selected by</text>
+  <path d="M760 229H842" class="mvv-edge"/>
+  <text x="801" y="212" text-anchor="middle" class="mvv-small">governs</text>
+
+  <text x="600" y="386" text-anchor="middle" class="mvv-small">A viewpoint can select model content from any architecture layer or assurance discipline.</text>
+</svg>

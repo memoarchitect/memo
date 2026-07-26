@@ -61,8 +61,8 @@ Where a product has behavior, read its model in this order:
 5. Follow functions into requirements, risks and controls, architecture, V&V,
    and evidence.
 
-[Scenario-driven modelling](../what/scenario-driven.md) explains why that order
-is the right one.
+[Scenario-driven modeling](../what/index.md#scenario-driven-modeling)
+explains that order.
 
 ## Partial on purpose
 

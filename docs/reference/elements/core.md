@@ -8,11 +8,26 @@ Nothing in core is device-specific. If you are looking for a hazard or a
 software component, it is in [assurance](assurance.md) or
 [implementation](implementation.md); core is what those specialize *from*.
 
-142 definitions. Each entry gives the declaration, its position in the specialization hierarchy, its attributes and their types, and the relationships that accept it.
+143 definitions. Each entry gives the declaration, its position in the specialization hierarchy, its attributes and their types, and the relationships that accept it.
 
 ## Common base types
 
-`src/core/common/` — 16 definitions: [`ArchitectureElement`](#architectureelement), [`Citation`](#citation), [`DocumentedElement`](#documentedelement), [`InterfaceElement`](#interfaceelement), [`MemoAction`](#memoaction), [`MemoEvidence`](#memoevidence), [`MemoExchangeItem`](#memoexchangeitem), [`MemoInterface`](#memointerface), [`MemoNeed`](#memoneed), [`MemoPart`](#memopart), [`MemoPort`](#memoport), [`MemoRequirement`](#memorequirement), [`MemoState`](#memostate), [`MemoVerificationCase`](#memoverificationcase), [`RequirementDriver`](#requirementdriver), [`VerifiableElement`](#verifiableelement)
+`src/core/common/` — 17 definitions: [`AnalysisArtifact`](#analysisartifact), [`ArchitectureElement`](#architectureelement), [`Citation`](#citation), [`DocumentedElement`](#documentedelement), [`InterfaceElement`](#interfaceelement), [`MemoAction`](#memoaction), [`MemoEvidence`](#memoevidence), [`MemoExchangeItem`](#memoexchangeitem), [`MemoInterface`](#memointerface), [`MemoNeed`](#memoneed), [`MemoPart`](#memopart), [`MemoPort`](#memoport), [`MemoRequirement`](#memorequirement), [`MemoState`](#memostate), [`MemoVerificationCase`](#memoverificationcase), [`RequirementDriver`](#requirementdriver), [`VerifiableElement`](#verifiableelement)
+
+### AnalysisArtifact
+
+```sysml
+abstract part def AnalysisArtifact :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](#memopart) |
+| **Specialized by** | [`FMEAWorksheet`](assurance.md#fmeaworksheet), [`FaultTree`](assurance.md#faulttree), [`HAZOPStudy`](assurance.md#hazopstudy) |
+| **Abstract** | Yes — specialize it rather than instantiating it |
+| **Defined in** | [`src/core/common/memo_common.sysml`](https://github.com/memoarchitect/memo/blob/main/src/core/common/memo_common.sysml) |
+
+**Accepted by** [`AnalyzedBy`](#analyzedby) (`analysisArtifact`)
 
 ### ArchitectureElement
 
@@ -1272,7 +1287,7 @@ connection def AnalyzedBy :> MemoRelationship
 | End | Type |
 | --- | --- |
 | `element` | [`ArchitectureElement`](#architectureelement) |
-| `analysisArtifact` | [`MemoPart`](#memopart) |
+| `analysisArtifact` | [`AnalysisArtifact`](#analysisartifact) |
 
 ### AssessedAgainst
 
@@ -1835,7 +1850,7 @@ connection def ProducesEvidence :> MemoRelationship
 
 | End | Type |
 | --- | --- |
-| `producer` | [`VerifiableElement`](#verifiableelement) |
+| `producer` | [`MemoVerificationCase`](#memoverificationcase) |
 | `producedEvidence` | [`MemoEvidence`](#memoevidence) |
 
 ### RealizedByScenario
@@ -1985,8 +2000,8 @@ connection def Validates :> MemoRelationship
 
 | End | Type |
 | --- | --- |
-| `validationTarget` | [`VerifiableElement`](#verifiableelement) |
-| `validationCase` | [`VerifiableElement`](#verifiableelement) |
+| `validationTarget` | Any model element |
+| `validationCase` | [`MemoVerificationCase`](#memoverificationcase) |
 
 ### VerifiedBy
 
@@ -2004,7 +2019,7 @@ connection def VerifiedBy :> MemoRelationship
 | End | Type |
 | --- | --- |
 | `verificationTarget` | [`MemoPart`](#memopart) |
-| `verificationCase` | [`VerifiableElement`](#verifiableelement) |
+| `verificationCase` | [`MemoVerificationCase`](#memoverificationcase) |
 
 ## Dimensions and classification
 
@@ -2290,7 +2305,7 @@ part def RelationshipConsistencyRule :> ConsistencyRule
 
 ## Methodology scope types
 
-`src/core/methodology_scope/` — 6 definitions: [`ElementKindAlias`](#elementkindalias), [`MethodologyArtifactSet`](#methodologyartifactset), [`MethodologyLayerSet`](#methodologylayerset), [`MethodologyScope`](#methodologyscope), [`MethodologyStandardSet`](#methodologystandardset), [`MethodologyViewpointTypeSet`](#methodologyviewpointtypeset)
+`src/core/methodology_scope/` — 3 definitions: [`ElementKindAlias`](#elementkindalias), [`MethodologyLayerSet`](#methodologylayerset), [`MethodologyScope`](#methodologyscope)
 
 ### ElementKindAlias
 
@@ -2310,24 +2325,6 @@ part def ElementKindAlias :> MemoPart
 | `methodTerm` | `String` |
 | `concreteKind` | `String` |
 | `concreteOntology` | `String` |
-
-### MethodologyArtifactSet
-
-```sysml
-part def MethodologyArtifactSet :> MemoPart
-```
-
-| | |
-| --- | --- |
-| **Specializes** | [`MemoPart`](#memopart) |
-| **Defined in** | [`src/core/methodology_scope/methodology_scope.sysml`](https://github.com/memoarchitect/memo/blob/main/src/core/methodology_scope/methodology_scope.sysml) |
-
-**Attributes**
-
-| Attribute | Type |
-| --- | --- |
-| `setName` | `String` |
-| `artifactKind` | `String` |
 
 ### MethodologyLayerSet
 
@@ -2364,43 +2361,4 @@ part def MethodologyScope :> MemoPart
 | --- | --- |
 | `scopeName` | `String` |
 | `includedArchLayer` | `String` |
-| `includedStandard` | `String` |
-| `includedArtifactKind` | `String` |
-| `includedViewpointType` | `String` |
-| `excludedKind` | `String` |
-
-### MethodologyStandardSet
-
-```sysml
-part def MethodologyStandardSet :> MemoPart
-```
-
-| | |
-| --- | --- |
-| **Specializes** | [`MemoPart`](#memopart) |
-| **Defined in** | [`src/core/methodology_scope/methodology_scope.sysml`](https://github.com/memoarchitect/memo/blob/main/src/core/methodology_scope/methodology_scope.sysml) |
-
-**Attributes**
-
-| Attribute | Type |
-| --- | --- |
-| `setName` | `String` |
-| `standardReference` | `String` |
-
-### MethodologyViewpointTypeSet
-
-```sysml
-part def MethodologyViewpointTypeSet :> MemoPart
-```
-
-| | |
-| --- | --- |
-| **Specializes** | [`MemoPart`](#memopart) |
-| **Defined in** | [`src/core/methodology_scope/methodology_scope.sysml`](https://github.com/memoarchitect/memo/blob/main/src/core/methodology_scope/methodology_scope.sysml) |
-
-**Attributes**
-
-| Attribute | Type |
-| --- | --- |
-| `setName` | `String` |
-| `viewpointType` | `String` |
+| `includedModule` | `String` |

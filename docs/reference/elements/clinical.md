@@ -386,7 +386,7 @@ connection def UsesProduct :> MemoRelationship
 
 | End | Type |
 | --- | --- |
-| `using` | [`MemoPart`](core.md#memopart) |
+| `using` | [`MemoAction`](core.md#memoaction) |
 | `product` | [`MedicalDevice`](#medicaldevice) |
 
 **Attributes**

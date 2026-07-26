@@ -2,7 +2,6 @@ package memo_methodology_profiles {
     private import ScalarValues::*;
 
     private import memo_methodology_core::*;
-    private import memo_methodology_viewpoints::*;
     private import memo_methodology_rules::*;
     private import memo_methodology_patterns::*;
     private import memo_methodology_workflow::*;
@@ -25,33 +24,24 @@ package memo_methodology_profiles {
         attribute :>> domain = "medical device modeling";
         attribute :>> description = "Light default methodology around the ontology for smaller or early project use.";
         attribute :>> baseMethodName = "";
+        attribute :>> includedLayer = "memo::architecture::operational";
+        attribute :>> includedLayer = "memo::architecture::functional";
+        attribute :>> includedLayer = "memo::architecture::logical";
+        attribute :>> includedModule = "memo::assurance::requirements";
+        attribute :>> includedModule = "memo::assurance::safety";
+        attribute :>> includedModule = "memo::assurance::verification_validation";
     }
 
     part mdLightDefaultResolved : ResolvedMethodology {
         attribute :>> id = "RMETH-001";
         attribute :>> name = "MedicalDeviceLightDefaultResolved";
         attribute :>> version = "0.1";
-        attribute :>> safetyClassification = SafetyClassKind::A;
-        attribute :>> lifecycleStage = LifecycleStateKind::development;
-        attribute :>> resolutionSummary = "Class A development-stage scope: core requirements, architecture, risk, verification, and RMF support required; cybersecurity and SOUP out of scope.";
-    }
-
-    part riskView : Viewpoint {
-        attribute :>> id = "VP-001";
-        attribute :>> name = "RiskManagementView";
-        attribute :>> purpose = "Focus on risk chain, controls, verification, and residual risk.";
-        attribute :>> audience = AudienceKind::safetyEngineer;
-        attribute :>> stage = WorkflowStageKind::risk;
-        attribute :>> abstractionLevel = "safety management";
-    }
-
-    part swArchView : Viewpoint {
-        attribute :>> id = "VP-002";
-        attribute :>> name = "SoftwareArchitectureView";
-        attribute :>> purpose = "Focus on software decomposition, interfaces, timing, and contracts.";
-        attribute :>> audience = AudienceKind::softwareArchitect;
-        attribute :>> stage = WorkflowStageKind::architecture;
-        attribute :>> abstractionLevel = "software design";
+        attribute :>> includedLayer = "memo::architecture::operational";
+        attribute :>> includedLayer = "memo::architecture::functional";
+        attribute :>> includedLayer = "memo::architecture::logical";
+        attribute :>> includedModule = "memo::assurance::requirements";
+        attribute :>> includedModule = "memo::assurance::safety";
+        attribute :>> includedModule = "memo::assurance::verification_validation";
     }
 
     part useRiskAndResidualRule : ElementUsageRule {
@@ -138,22 +128,24 @@ package memo_methodology_profiles {
         attribute :>> name = "MedicalDeviceCoverageScope";
         attribute :>> scopeName = "coverage";
 
-        attribute :>> includedArchLayer = "context; requirements; functions; logical_structure; interfaces; software_structure; hardware_structure; behavior; risk; arch_risk; assurance; cybersecurity; constraints";
-
-        attribute :>> includedStandard = "ISO 14971; IEC 62304; 21 CFR 820; ISO 13485; ISO 14155; IEC 62366; IEC 60601-1; IEC 82304-1; FDA Cybersecurity Guidance";
-
-        attribute :>> includedArtifactKind = "RiskManagementPlan; RequirementsSpecification; SystemArchitectureDescription; SoftwareDesignDescription; HazardAnalysisReport; RequirementsTraceabilityMatrix; CybersecurityAssessmentReport; ThreatModelReport; UsabilityEngineeringReport; ClinicalSafetyReport; FailureModeEffectsAnalysisReport; SoupList; DesignInputPlan; DesignOutputPlan; SoftwareDevelopmentPlan; LabelingSpecification; DesignHistoryFileIndex; DesignChangeLog";
-
-        attribute :>> includedViewpointType = "VP-CTX; VP-OPS; VP-REQ; VP-FUNC; VP-LOG; VP-SW; VP-PHY; VP-RISK; VP-VER; VP-CYB; VP-USE; VP-CLIN";
-
-        attribute :>> excludedKind = "";
-        attribute :>> description = "Comprehensive default methodology — includes all architecture layers, supported standards, artifact kinds, and viewpoint types. No GPCA-specific subtraction.";
+        attribute :>> includedArchLayer = "memo::architecture::operational";
+        attribute :>> includedArchLayer = "memo::architecture::functional";
+        attribute :>> includedArchLayer = "memo::architecture::logical";
+        attribute :>> includedArchLayer = "memo::architecture::implementation";
+        attribute :>> includedArchLayer = "memo::architecture::realization";
+        attribute :>> includedModule = "memo::assurance::requirements";
+        attribute :>> includedModule = "memo::assurance::safety";
+        attribute :>> includedModule = "memo::assurance::cybersecurity";
+        attribute :>> includedModule = "memo::assurance::human_factors";
+        attribute :>> includedModule = "memo::assurance::verification_validation";
+        attribute :>> description = "Comprehensive default MEMO layer and module selection.";
     }
 
     part gpcaProjectBinding : ProjectMethodBinding {
         attribute :>> id = "PMB-001";
         attribute :>> name = "GPCAProjectMethodBinding";
         attribute :>> projectName = "GPCA";
+        attribute :>> methodologyName = "MedicalDeviceLightDefault";
     }
 
     part rmpDoc : DhfDocumentBinding {
