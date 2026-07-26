@@ -1,53 +1,60 @@
 # The artifacts are linked, but the links lack meaning
 
-Most regulated programmes already have traceability. Requirements trace to
-tests, hazards trace to controls, controls trace to requirements. The matrices
-exist and they are maintained.
+Every regulated programme has traceability. Requirements trace to tests,
+hazards to controls, controls to requirements. The matrices exist, they are
+reviewed, and they are maintained.
 
-The problem is what the links say. They stop at identifiers.
+The problem is not their existence. It is what they claim.
 
-## What an identifier link does not tell you
+## Three islands and one missing middle
 
-`SW-REQ-104 → TC-221` records that a requirement and a test case are related.
-It does not record:
+Specialised teams and a document-heavy process produce three artifact islands.
+Each is internally consistent. Each references the design informally — by name,
+in prose, in a diagram pasted into a document — and formally not at all.
 
-- **which claim** the test supports — that this requirement is met, or that a
-  specific hazard is controlled, or both;
-- **which design element** implements the behavior being verified;
-- **under what conditions** the test exercised it — which mode, which
-  configuration, which clinical context.
-
-So when the design changes, the matrix still resolves. Every identifier still
-points at something. Nothing in it is able to say that the link no longer means
-what it meant when it was written.
-
-## Three islands, one missing middle
-
-In practice the artifacts settle into islands, each internally consistent and
-externally vague:
-
-| Island | What it holds | What the link to the design is missing |
+| Island | The link it records | The gap |
 | --- | --- | --- |
-| Requirements | User needs, system requirements, software requirements | Traced to tests, but the link does not carry the safety claim it supports |
-| Risk | Hazards, hazardous situations, risk controls | Controls are named in a risk file, not anchored to the element that implements them |
-| Verification | Protocols, test cases, reports | Linked to a requirement, not to the behavior or design element it verifies |
+| **Requirements** | Traced to tests | The link does not carry the safety claim it is meant to support |
+| **Risk** | Hazards and controls in a risk file | The control is named, but not anchored to the design feature that implements it |
+| **Verification** | Test linked to requirement | The test is linked to a requirement, not to the behavior or design element it verifies |
 
-The gap between them is always the same gap: **the architecture**. Each island
-references the design informally — by name, in prose, in a diagram pasted into
-a document — and formally not at all.
+The middle they are all missing is the same one: **the architecture**.
 
-## Typed links close the gap
+## What this costs, concretely
 
-A typed link states its own meaning, so the model can be queried and checked:
+Consider a test that passes. Three different things could be true, and the
+matrix cannot distinguish them:
 
-- a risk control **mitigates** a hazard;
-- a requirement is **satisfied by** a design element;
-- a design element is **verified by** a verification case;
-- a verification case **produces evidence**.
+- The test exercised the failure path the hazard describes, under the load and
+  the mode where the hazard occurs. The evidence is real.
+- The test exercised the nominal path. It passes, and it says nothing about the
+  hazard.
+- The test exercised a path that existed two design revisions ago. It passes
+  against an implementation that has since changed.
 
-Each of these is a different fact with different rules. `mitigates` and
-`satisfied by` are not interchangeable, and a tool that knows the difference
-can tell you when one is missing. That is what MEMO's
-[relationships](../reference/relationships.md) are for.
+An identifier link reports all three as "verified". This is the *wrong path,
+wrong load, wrong assumption* failure, and it is invisible by construction —
+which is why it survives review.
+
+## Typed links state their claim
+
+A typed link is a different kind of record. It names what it asserts, and its
+ends constrain what may legally sit on either side:
+
+| Link | Asserts |
+| --- | --- |
+| `Mitigates` | This risk control reduces this hazard |
+| `SatisfiedBy` | This requirement is satisfied by this design element |
+| `AllocatedTo` | This function is the responsibility of this component |
+| `VerifiedBy` | This element is checked by this verification case |
+| `ProducesEvidence` | This verification case produced this record |
+
+`Mitigates` and `SatisfiedBy` are not interchangeable. They have different
+legal endpoints and different rules, so a tool can report a hazard with no
+`Mitigates` reaching it, or a control with no `VerifiedBy`. That is the whole
+difference: **a claim that a machine can check.**
+
+See [one closed thread](../what/closed-thread.md) for the same six links
+carrying a real scenario, and the validator output when one of them is missing.
 
 [Next: safety-critical domains lean on architecture →](industry-context.md)
