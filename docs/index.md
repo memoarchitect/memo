@@ -13,16 +13,86 @@ without forcing either through the other's layers.
 
 </div>
 
-## Start here
+## Start with something that can go wrong
+
+A patient presses the dose button on an infusion pump for pain relief. The pump
+may deliver one extra dose — a bolus — but only if the lockout timer says
+enough time has passed. Otherwise it must block the dose, or the patient is
+overdosed.
+
+Every discipline in the building has a record of that situation. Risk has a
+hazard. Requirements has an obligation. Architecture has a component. V&V has a
+test. Each record is real, each is reviewed, and each lives in a different
+document.
+
+Now change the lockout interval. **Which of those records is now wrong?**
+
+Traceability answers by identifier: `HZ-001` relates to `REQ-025`, which
+relates to `TC-221`. Every pointer still resolves. None of them can tell you
+whether the test still exercises the behavior the hazard describes.
+
+## MEMO records the same situation as one thread
+
+```text
+HZ-001    Overdose            drug delivery error · catastrophic
+  ↓ identifies
+REQ-025   Ignore bolus        SW requirement · source = risk
+  ↓ satisfied by
+SW-005    Infusion_Manager    responsible · Class C
+  ↓ mitigated by
+RC-001    Lockout             inherent safe design
+  ↓ verified by
+VER-002   Verify lockout      test · acceptance criteria
+  ↓ produces
+EVD-001   Lockout evidence    tied to baseline
+```
+
+Each node is typed. Each arrow is a typed relationship that states a claim —
+not a pointer that happens to connect two identifiers. `REQ-025` records
+`source = risk`, so the model itself knows that requirement exists *because of*
+a hazard.
+
+That is enough to ask the question directly: change `HZ-001`, and the model
+returns the requirement, the component, the control, the test, and the evidence
+that must be re-reviewed.
+
+## And enough to check it mechanically
+
+Because the rules are part of the model, review questions execute:
+
+```text
+$ memo validate
+
+CR-MED-001  Hazard must have ≥1 risk control        (ISO 14971)
+            Missing mitigation: hazAirInLine
+
+CR-MED-003  Risk control must be verified           (ISO 14971 §7.4)
+            Missing verification: rcDoorOpenAlarm
+
+Result: 2 errors · 1 warning · thread HZ-001 closed
+```
+
+Gaps surface before the design review, not during it. The rules run in CI, so
+compliance becomes a build step.
+
+This does not prove the device is safe and it does not replace review. It makes
+review gaps visible early enough for engineers, safety, and V&V to act on them.
+The clinical, risk-acceptance, and approval decisions stay with the people
+qualified to make them.
+
+## What MEMO actually is
+
+A SysML v2 library — typed elements, typed relationships, and closure rules for
+medical-device engineering. It is content, not a tool: plain SysML v2 text that
+any conformant editor can read, so adopting it does not mean adopting a vendor.
 
 <div class="memo-card-grid" markdown>
 
 <div class="memo-card memo-card-purple" markdown>
 
-### Why MEMO
+### Why this problem is hard
 
-Safety evidence drifts as the design changes, and identifier-only traceability
-cannot tell you what a change invalidated.
+Four forces keep safety evidence drifting, and none of them is carelessness.
 
 [Read the problem →](why/index.md)
 
@@ -30,10 +100,10 @@ cannot tell you what a change invalidated.
 
 <div class="memo-card memo-card-blue" markdown>
 
-### What is MEMO
+### How the library is built
 
-A typed semantic layer over SysML v2: typed elements, typed relationships, and
-closure rules that a tool can check.
+Typed elements, typed links, closure rules — and the two modelling ideas the
+whole structure follows from.
 
 [Read the overview →](what/index.md)
 
@@ -41,10 +111,10 @@ closure rules that a tool can check.
 
 <div class="memo-card memo-card-teal" markdown>
 
-### Build something
+### Build one yourself
 
-Install the library and model one complete thread — a temperature alarm from
-clinical need to verification evidence.
+A temperature alarm, from clinical need to verification evidence, in about
+twenty minutes.
 
 [Start the tutorial →](tutorials/first-model.md)
 
@@ -54,49 +124,14 @@ clinical need to verification evidence.
 
 ### See a whole device
 
-The GPCA infusion pump: a complete model documented as an ISO/IEC/IEEE 42010
-architecture description.
+The GPCA pump — the model the thread above comes from — documented as an
+ISO/IEC/IEEE 42010 architecture description.
 
 [Open the case study →](case-studies/gpca/index.md)
 
 </div>
 
 </div>
-
-## The idea in four links
-
-One device is described in several places: intended use, requirements,
-architecture, risk analysis, and test records. The same alarm appears in all of
-them. When each record is separate, a change leaves one of them out of date —
-and nothing tells you which.
-
-MEMO keeps one record for each real thing and gives each link a specific
-meaning:
-
-- a need **motivates** a use case;
-- a requirement is **satisfied by** a design element;
-- a risk control **mitigates** a hazard;
-- a verification case **produces evidence**.
-
-That is enough for a reviewer to ask the model directly: *Why does this
-requirement exist? Which part is responsible? Which hazard does it affect?
-Which test supports it?* When something changes, the same links find what must
-be reviewed.
-
-The model supports that check. The engineering team still makes the clinical,
-risk-acceptance, and approval decisions.
-
-## Where things are
-
-| Section | Use it when |
-| --- | --- |
-| [Why MEMO](why/index.md) | You are deciding whether this problem is your problem |
-| [What is MEMO](what/index.md) | You want the shape of the thing before the detail |
-| [Concepts](layers/index.md) | You are learning the layers and what belongs in each |
-| [Tutorials](examples/index.md) | You learn by building |
-| [How-to guides](how-to/index.md) | You know the concepts and need to get a task done |
-| [Reference](reference/index.md) | You need the exact type, supertype, or attribute |
-| [Case studies](case-studies/index.md) | You want to interrogate a complete device model |
 
 ---
 

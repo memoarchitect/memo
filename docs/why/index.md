@@ -1,4 +1,15 @@
-# Why MEMO
+# Explanation
+
+Understanding-oriented material: the reasoning behind MEMO, not instructions
+for using it. Read it when you want to know *why* the library is shaped this
+way. Nothing here tells you to type anything.
+
+This section has three parts: **why MEMO exists** (below), **what MEMO is**,
+and **the layers** it organises a model into.
+
+---
+
+## Why MEMO exists
 
 A medical device is approved on the strength of an argument: this is what the
 device is for, this is how it was designed, these are the ways it could harm
@@ -61,3 +72,13 @@ a reviewer asks are answered by the model rather than by someone's memory of
 it — and the checks can run in CI.
 
 [What MEMO is →](../what/index.md) · [See one thread end to end →](../what/closed-thread.md)
+
+---
+
+## The rest of this section
+
+| Part | Covers |
+| --- | --- |
+| **Why MEMO** | The four forces above, one page each — start with [evidence drift](evidence-drift.md) |
+| **[What MEMO is](../what/index.md)** | The semantic layer, the four products, the mental model, and the two modelling ideas the structure follows from |
+| **[The layers](../layers/index.md)** | The two axes and what belongs in each layer, from operational context through to assurance |

@@ -1,39 +1,36 @@
 # How-to guides
 
-Use these pages when you already understand the MEMO concepts and need to
-complete a task. They are goal-oriented directions, not conceptual explanations
-or reference.
+Task-oriented directions for someone who already understands the concepts and
+now needs to get something done. Each page assumes competence and takes the
+shortest path to a result.
 
-## Install
+If you are learning rather than working, use [Tutorials](../examples/index.md).
+If you need exact definitions, use [Reference](../reference/index.md). If you
+want to understand *why*, use [Explanation](../why/index.md).
 
-Three routes to the same place. Pick the one that matches your toolchain.
+## Get MEMO into your project
 
 | Goal | Guide |
 | --- | --- |
-| Add MEMO to a project with a Node toolchain | [Install with npm](install/npm.md) |
+| Add MEMO where a Node toolchain already exists | [Install with npm](install/npm.md) |
 | Use MEMO from a conformant SysML v2 tool, without Node | [Install as a KerML archive](install/kpar.md) |
 | Read and modify the library alongside your model | [Use a source checkout](install/source.md) |
-| Not sure which | [Installing MEMO](install/index.md) |
+| Decide which route fits | [Installing MEMO](install/index.md) |
 
-## Adopt
-
-| Goal | Guide |
-| --- | --- |
-| Pilot MEMO on a real project without boiling the ocean | [Adopting MEMO](adopt.md) |
-
-## Model
+## Run a project with it
 
 | Goal | Guide |
 | --- | --- |
-| Learn by building one small connected thread | [First model tutorial](../tutorials/first-model.md) |
-| Work through a device by complexity | [Tutorials](../examples/index.md) |
-| Interrogate a complete device model | [GPCA case study](../case-studies/gpca/index.md) |
+| Pilot MEMO without boiling the ocean | [Adopt MEMO on a project](adopt.md) |
 
-## Elsewhere
+## Make modelling decisions
 
-- For why MEMO exists, read [Why MEMO](../why/index.md).
-- For what MEMO is and how it is organised, read
-  [What is MEMO](../what/index.md).
-- For the meaning of layers and what belongs in each, read the
-  [Layer Map](../layers/index.md).
-- For exact definitions and attributes, use [Reference](../reference/index.md).
+| Goal | Guide |
+| --- | --- |
+| Decide which element type records what you have | [Choose an element](../modeling/elements.md) |
+| Decide which typed link states what you mean | [Write a relationship](../modeling/relationships.md) |
+| Present the model to a specific reviewer | [Model views and evidence](../modeling/views-evidence.md) |
+
+These three are the decisions modellers actually get stuck on. Each gives you a
+rule for choosing, not a catalogue — the catalogue is in
+[Reference](../reference/index.md).
