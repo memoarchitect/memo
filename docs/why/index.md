@@ -1,84 +1,56 @@
-# Explanation
-
-Understanding-oriented material: the reasoning behind MEMO, not instructions
-for using it. Read it when you want to know *why* the library is shaped this
-way. Nothing here tells you to type anything.
-
-This section has three parts: **why MEMO exists** (below), **what MEMO is**,
-and **the layers** it organises a model into.
-
----
-
-## Why MEMO exists
+# Why MEMO
 
 A medical device is approved on the strength of an argument: this is what the
-device is for, this is how it was designed, these are the ways it could harm
-someone, this is what we did about them, here is the evidence. The argument is
-assembled from requirements, architecture descriptions, risk files,
-verification protocols, and test records.
+device is for, this is how it behaves, these are the ways it could cause harm,
+this is what the design does about them, and this is the evidence.
 
-That argument is usually correct on the day it is written. The problem is what
-happens next.
+That argument is distributed across requirements, architecture descriptions,
+risk files, verification protocols, and test records. It may be sound when it
+is written. The difficulty is keeping it sound after the design changes.
 
-## The problem
+## Change breaks meaning before it breaks links
 
-Design changes. Evidence does not follow it automatically.
+Most traceability connects identifiers. A requirement still points to a test
+after the behavior changes; a control still points to a requirement after its
+implementation moves; a test report remains a valid file after the tested
+baseline is obsolete.
 
-The documents are traced — every programme has a traceability matrix — but the
-links stop at identifiers. `SW-REQ-104 → TC-221` records that a requirement and
-a test are related. It does not record which claim the test supports, which
-design element implements the control, or which conditions the test actually
-exercised.
+Every link resolves, but the claim behind the link may no longer be true.
 
-So after a change, the matrix still resolves. Every identifier still points at
-something. Nothing in it can say that the link no longer means what it meant
-when it was written.
+That is the central problem MEMO addresses. The pages below develop it in one
+sequence.
 
-**The problem is not too few documents. It is that the links cannot be
-checked.**
+## The argument, step by step
 
-## Why it is hard to fix
+1. **[Safety evidence drifts](evidence-drift.md).** Connected, configurable,
+   software-intensive devices accumulate change faster than document-based
+   evidence can follow it.
+2. **[Links lack meaning](links-without-meaning.md).** Identifier pairs record
+   association, not the behavior, design responsibility, or test conditions
+   that make an assurance claim valid.
+3. **[Other safety-critical domains lean on architecture](industry-context.md).**
+   Aerospace and automotive attach assurance work to an explicit architecture;
+   medical-device standards leave more of that connective model to each
+   manufacturer.
+4. **[Medical architecture stays weak](architecture-gap.md).** Team boundaries,
+   document-heavy evidence, code-first product histories, and adoption cost
+   turn architecture into a review picture that ages separately from the
+   implementation.
+5. **[A shared model has specific requirements](shared-model.md).** It must be
+   versionable, architecture-backed, typed, checkable, viewpoint-driven, and
+   practical enough to remain current.
 
-Four forces hold the current situation in place, and none of them is
-carelessness:
+## The conclusion
 
-| | |
-| --- | --- |
-| **Devices got complex** | Connected, configurable, software-defined systems. Safety depends on how the whole system behaves, not on any single requirement text. [More →](evidence-drift.md) |
-| **The links carry no meaning** | Requirements, risk, and verification each form an island that references the design informally and formally not at all. [More →](links-without-meaning.md) |
-| **Medical standards are process-led** | Aerospace and automotive write architecture into their standards as the backbone of the safety case. Medical describes activities and records instead. [More →](industry-context.md) |
-| **Architecture becomes a picture** | Drawn for a review, exported to a document, approved — and unable to prove that what was documented is what was built. [More →](architecture-gap.md) |
+The missing artifact is not another matrix or document format. It is a shared
+semantic model in which:
 
-What all four produce is the same failure, stated four ways: controls float
-free of design features, threats sit apart from behavior and interfaces, tests
-miss the behavior they were meant to exercise, and the architecture drifts away
-from the code.
+- each engineering fact is recorded once;
+- each relationship states the claim it makes;
+- architecture connects intent to implementation;
+- assurance disciplines refer to that same design; and
+- completeness and change impact can be computed from the model.
 
-## What is missing
+MEMO is that model, expressed as a SysML v2 ontology.
 
-Not another document format, and not another matrix. What is missing is a
-shared ontology and a low-cost architecture model that connects design
-behavior, implementation, risk, cybersecurity, V&V, and evidence — cheap enough
-that a code-first team will keep it current.
-
-[What a shared model has to provide →](shared-model.md)
-
-## What MEMO does about it
-
-MEMO makes the argument itself the artifact. Each real thing is recorded once,
-with a type. Each link carries a specific meaning: *mitigates*, *satisfied by*,
-*verified by*, *produces evidence*. Because both are computable, the questions
-a reviewer asks are answered by the model rather than by someone's memory of
-it — and the checks can run in CI.
-
-[What MEMO is →](../what/index.md) · [See one thread end to end →](../what/closed-thread.md)
-
----
-
-## The rest of this section
-
-| Part | Covers |
-| --- | --- |
-| **Why MEMO** | The four forces above, one page each — start with [evidence drift](evidence-drift.md) |
-| **[What MEMO is](../what/index.md)** | The semantic layer, the four products, the mental model, and the two modelling ideas the structure follows from |
-| **[The layers](../layers/index.md)** | The two axes and what belongs in each layer, from operational context through to assurance |
+[Continue to What MEMO is →](../what/index.md)

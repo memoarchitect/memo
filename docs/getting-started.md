@@ -12,7 +12,7 @@ The main navigation is divided by what the reader is trying to do:
 | --- | --- |
 | **[Home](index.md)** | Introduces MEMO, the problem it addresses, and the shared-model solution. |
 | **[Getting Started](getting-started.md)** | Explains how this documentation is organized and where to begin. |
-| **[Explanation](why/index.md)** | Describes why MEMO is structured this way and how its concepts fit together. |
+| **[Explanation](explanation/index.md)** | Describes why MEMO is structured this way and how its concepts fit together. |
 | **[Reference](reference/index.md)** | Documents the ontology modules, elements, relationships, enumerations, rules, and packaging. |
 | **[How-to Guides](how-to/index.md)** | Gives task-focused instructions for installation and modeling work. |
 | **[Tutorials](examples/index.md)** | Teaches MEMO through guided lessons and worked models. |
@@ -41,7 +41,7 @@ If this is your first visit:
 3. Use [How-to Guides](how-to/index.md) when you begin applying MEMO to your own
    work.
 4. Keep [Reference](reference/index.md) open for exact ontology definitions.
-5. Read [Explanation](why/index.md) when you need the reasoning behind a concept.
+5. Read [Explanation](explanation/index.md) when you need the reasoning behind a concept.
 6. Study the [GPCA case study](case-studies/gpca/index.md) when you are ready for
    a complete model.
 

@@ -1,36 +1,25 @@
 # What is MEMO
 
-MEMO is the **Medical Engineering Modeling Ontology**: a SysML v2 library that
-supplies the medical-device domain model and assurance rules that SysML v2
-itself deliberately leaves open.
+MEMO is the **Medical Engineering Modeling Ontology**: an importable SysML v2
+model library for describing a medical device and the assurance argument around
+it in one connected model.
 
-SysML is the language. MEMO is the vocabulary and the rules you would otherwise
-have to invent for every programme.
+SysML v2 supplies the general modeling language. MEMO supplies the
+medical-device semantics: what the elements mean, which relationships are
+legal, how architecture and assurance connect, and which conditions make a
+model complete enough to review.
 
-## The division of labour
-
-| SysML v2 provides | MEMO specializes it into | The engineering result |
-| --- | --- | --- |
-| `part`, `action`, `item`, `port` | `Hazard`, `RiskControlMeasure`, `SystemFunction`, `LogicalComponent` | Elements that mean something to a reviewer, and carry the attributes their standard expects |
-| `connection def` | `Mitigates`, `SatisfiedBy`, `AllocatedTo`, `VerifiedBy` | Links that state a claim, with typed ends that constrain what may legally connect |
-| `constraint def` | Closure and coverage rules | Review questions that execute — see [one closed thread](closed-thread.md) |
-| Views and viewpoints | Risk, architecture, DHF, and cybersecurity viewpoints | Each reader gets a projection of one model, not a separate document |
-
-The consequence is the point: **design review questions become model queries.**
-*Which requirements exist only because of a hazard? Which controls are not yet
-verified? What does this interface change reach?* Each is a traversal of typed
-links rather than a search through documents.
-
-## Three things it adds
+## What MEMO adds to SysML v2
 
 <div class="memo-card-grid" markdown>
 
 <div class="memo-card memo-card-purple" markdown>
 
-### Typed elements
+### Domain elements
 
-Well-defined artifacts. A hazard is a `Hazard`, not a part named "hazard", so
-the attributes ISO 14971 expects are structural rather than conventional.
+Clinical use, products, functions, architecture, requirements, hazards,
+controls, verification, and evidence become first-class model elements with
+defined properties.
 
 [Elements by layer](../reference/elements/index.md)
 
@@ -38,11 +27,10 @@ the attributes ISO 14971 expects are structural rather than conventional.
 
 <div class="memo-card memo-card-blue" markdown>
 
-### Typed relationships
+### Semantic relationships
 
-Meaningful connections. `Mitigates` and `SatisfiedBy` are different facts with
-different legal endpoints — a tool that knows the difference can tell you when
-one is missing.
+Links state a claim. `Mitigates`, `SatisfiedBy`, `AllocatedTo`, and
+`VerifiedBy` have different meanings and different legal endpoints.
 
 [Relationships](../reference/relationships.md)
 
@@ -52,44 +40,60 @@ one is missing.
 
 ### Closure rules
 
-Logical checks. Native SysML constraints that walk the required links and
-report what is missing, in any conformant tool.
+Native model constraints express review questions such as whether every hazard
+has a control and every control has verification.
 
 [Rules](../reference/rules.md)
 
 </div>
 
+<div class="memo-card memo-card-orange" markdown>
+
+### Shared viewpoints
+
+Architecture, risk, cybersecurity, human factors, and evidence views project
+the same source model instead of creating parallel copies.
+
+[Views and evidence](../modeling/views-evidence.md)
+
 </div>
 
-All three are expressed in SysML v2 itself. They are model content, not engine
-configuration, which is why the checks are portable and why `memo validate` is
-a runner rather than the authority on legality.
+</div>
 
-## See it work
+Together, these turn review questions into traversals of the model: *Which
+requirements exist because of this hazard? Which component implements the
+control? Which verification must be repeated after this interface changes?*
 
-The fastest way to understand MEMO is to follow one thread from a patient
-pressing a dose button to the evidence that the lockout works — and then watch
-the rules report what is missing.
+## The mental model
 
-[One closed thread →](closed-thread.md)
+MEMO records an engineering argument from intent to evidence:
 
-## Two ideas do most of the work
+**clinical context → goal → scenario → function → architecture → evidence**
 
-MEMO's structure follows from two modelling decisions:
+Requirements, risk, cybersecurity, human factors, and verification connect
+across that path. They do not create separate copies of the device.
 
-- **[Scenario-driven modelling](scenario-driven.md)** — behavior is reached
-  through the path a real user takes, so hazards attach to situations rather
-  than to abstractions.
-- **[Function-centered traceability](function-centered.md)** — functions are
-  the hub that requirements, risk, architecture, and verification attach to,
-  which is what keeps the argument connected under change.
+[The mental model](mental-model.md) explains this structure first. The
+[layers](../layers/index.md) then show where each kind of engineering fact
+belongs and how the assurance disciplines cross the architecture path.
 
-## Where to go next
+## Two ideas hold the model together
 
-| You want to | Read |
-| --- | --- |
-| Follow a concrete thread end to end | [One closed thread](closed-thread.md) |
-| Know what you actually install | [The four products](products.md) |
-| Understand the shape of the library | [The mental model](mental-model.md) |
-| See how the packages are named | [How `memo::` is organised](namespace-map.md) |
-| Start using it on a real project | [Adopting MEMO](../how-to/adopt.md) |
+- **[Scenario-driven modeling](scenario-driven.md)** reaches behavior through
+  a real path taken by a user or system, giving hazards and verification a
+  concrete situation to refer to.
+- **[Function-centered traceability](function-centered.md)** uses functions as
+  the meeting point for requirements, risk, architecture, and verification.
+
+These are complementary: scenarios establish the path; functions state the
+system responsibilities on that path.
+
+## See the ontology as one argument
+
+[One closed thread](closed-thread.md) follows an infusion-pump lockout from its
+clinical purpose through requirement, behavior, architecture, risk control,
+verification, and evidence.
+
+After that example, use [How `memo::` is organized](namespace-map.md) to
+understand the package structure or go to [Reference](../reference/index.md)
+for exact definitions.
