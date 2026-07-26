@@ -1,7 +1,7 @@
 # Tutorial: model a temperature alarm
 
 This tutorial assumes MEMO is already available in your SysML project. If the
-import below does not resolve, complete [Set up MEMO in your model](setup.md)
+import below does not resolve, complete [Installing MEMO](../how-to/install/index.md)
 first.
 
 You will create one file: `temperature_alarm.sysml`. Start with the small file

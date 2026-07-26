@@ -1,9 +1,8 @@
-# Start with a small connected model
+# The mental model
 
-Use MEMO to record a device concern, the design response, and the evidence for
-it in one model. You do not need to use every layer. Start with one scenario,
-then add only the elements and relationships needed to answer the review
-question.
+MEMO records a device concern, the design response, and the evidence for it in
+one model. You do not need to use every layer. Start with one scenario, then
+add only the elements and relationships needed to answer the review question.
 
 <div class="memo-argument-map" aria-label="An engineering argument from clinical intent to evidence">
   <div class="argument-intent"><span>Why?</span><strong>Clinical intent</strong><small>What does a person need?</small></div>
@@ -17,14 +16,16 @@ question.
 
 Risk is not a late-stage column in this story. A hazard can introduce a new
 requirement at any time, and a failed verification can send you back to the
-design. The model is a connected argument, not a waterfall checklist.
+design. The model is a connected argument, not a waterfall checklist — see
+[function-centered traceability](function-centered.md) for how the links
+actually run.
 
 ## Three rules for building the model
 
 <div class="memo-card-grid">
   <article class="memo-card memo-card-purple"><h3>1. Ask one question</h3><ul><li>Who uses the device and where?</li><li>What must the system do?</li><li>Which part is responsible?</li><li>How will the team check it?</li></ul><p><a href="../layers/index.md">Find the right layer →</a></p></article>
-  <article class="memo-card memo-card-blue"><h3>2. Record the facts</h3><ul><li>People, needs, and use cases</li><li>Requirements and functions</li><li>Components, interfaces, and parts</li><li>Hazards, controls, tests, and evidence</li></ul><p><a href="../modeling/elements.md">Choose what to record →</a></p></article>
-  <article class="memo-card memo-card-teal"><h3>3. Link the facts</h3><ul><li>A need explains a use case.</li><li>A function is assigned to a component.</li><li>A requirement or control is checked by a test.</li><li>A test produces evidence.</li></ul><p><a href="../modeling/relationships.md">Choose the link →</a></p></article>
+  <article class="memo-card memo-card-blue"><h3>2. Record the facts</h3><ul><li>People, needs, and use cases</li><li>Requirements and functions</li><li>Components, interfaces, and parts</li><li>Hazards, controls, tests, and evidence</li></ul><p><a href="../reference/elements/index.md">Choose what to record →</a></p></article>
+  <article class="memo-card memo-card-teal"><h3>3. Link the facts</h3><ul><li>A need explains a use case.</li><li>A function is assigned to a component.</li><li>A requirement or control is checked by a test.</li><li>A test produces evidence.</li></ul><p><a href="../reference/relationships.md">Choose the link →</a></p></article>
 </div>
 
 Keep one record for each real thing. Do not copy the same component into
@@ -43,6 +44,11 @@ elements to show.
 
 ![One element with four sets of labels](../assets/ontology-dimensions.svg)
 
+This is the rule the ontology enforces as **single-axis ownership**: an element
+is owned by exactly one axis — a horizontal architecture layer or a vertical
+assurance discipline — and reaches the other only through typed relationships.
+[Layer Map](../layers/index.md) explains the two axes.
+
 ## Start with a small argument, not a complete layer
 
 The most productive first model is a **vertical slice**: one narrow scenario
@@ -56,32 +62,13 @@ that reaches from a real user concern to a checkable result. For example:
 </div>
 
 That slice is enough to expose missing rationale, an unaddressed hazard, or an
-untestable requirement. Expand the model one scenario at a time.
+untestable requirement. Expand the model one scenario at a time — which is
+exactly what [scenario-driven modelling](scenario-driven.md) describes.
 
-## Representing the functional assurance view
+## Continue
 
-The function-centered sketch is a useful review view when its arrows retain
-their semantic meaning. Needs, requirements, and risks **constrain or motivate
-functions**; a safety classification **classifies** a function; FMEA **analyzes
-failure modes** and identifies hazards; and tests verify the implemented
-software and physical units. It is therefore a connected argument, not a
-waterfall from “risk” to “test.”
-
-![Function-centered assurance view: inputs constrain functions, functions allocate to logical architecture and realization, FMEA identifies hazards, and tests verify implemented units](../assets/function-assurance-view.svg)
-
-For operational behavior, keep the preceding split explicit: a use case can
-support a workflow; one workflow can select multiple nominal, alternate, and
-exception scenarios; each scenario involves the functions required on that
-path. That is why scenarios belong between workflows and functions in the
-reading path.
-
-## Continue the guide
-
-Next, read the [Layer Map](../layers/index.md), then [Context and Use](../layers/context.md).
-They introduce the people, setting, and user goal before the workflow and
-scenario pages introduce the paths through that work.
-
-## Practice
-
-When you are ready to write a model, [set up MEMO](../tutorials/setup.md) and
-complete the [Temperature Alarm tutorial](../tutorials/first-model.md).
+| Next step | Page |
+| --- | --- |
+| See the two axes and every layer | [Layer Map](../layers/index.md) |
+| Install MEMO | [Installation](../how-to/install/index.md) |
+| Build the vertical slice above | [Temperature Alarm tutorial](../tutorials/first-model.md) |

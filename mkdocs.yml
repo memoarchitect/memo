@@ -23,10 +23,13 @@ theme:
         icon: material/brightness-7
         name: Use light mode
   features:
+    # navigation.sections is deliberately absent: it renders second-level
+    # groups as flat bold headers. Without it the groups collapse and expand,
+    # which is what lets Tutorials, Reference, and Case Studies nest.
     - navigation.tabs
-    - navigation.sections
     - navigation.indexes
     - navigation.top
+    - toc.follow
     - content.code.copy
     - search.highlight
     - search.suggest
@@ -67,56 +70,89 @@ docs_dir: docs
 site_dir: site
 
 nav:
-  - Explanation:
-      - Why MEMO: index.md
-      - Start Small: start/mental-model.md
-      - Layer Map: layers/index.md
+  - Home: index.md
+  - Why MEMO:
+      - why/index.md
+      - Evidence drifts as the design changes: why/evidence-drift.md
+      - Links without meaning: why/links-without-meaning.md
+      - How other domains do it: why/industry-context.md
+      - Why medical architecture stays weak: why/architecture-gap.md
+      - What a shared model must provide: why/shared-model.md
+  - What is MEMO:
+      - what/index.md
+      - The four products: what/products.md
+      - The mental model: what/mental-model.md
+      - Scenario-driven modelling: what/scenario-driven.md
+      - Function-centered traceability: what/function-centered.md
+      - "How memo:: is organised": what/namespace-map.md
+  - Concepts:
+      - layers/index.md
       - Context and Use: layers/context.md
       - Workflows and Scenarios: layers/operational-world.md
       - Functional Analysis: layers/operations-system.md
       - Requirements and Architecture: layers/requirements-architecture.md
       - Risk, Cybersecurity, and Assurance: layers/risk-assurance.md
+      - Medical Products and Identity: layers/medical-products.md
+      - Choosing an element: modeling/elements.md
+      - Writing relationships: modeling/relationships.md
+      - Views and Evidence: modeling/views-evidence.md
   - Tutorials:
-      - Overview: examples/index.md
-      - "First Model: Temperature Alarm": tutorials/first-model.md
-      - Small Models:
+      - examples/index.md
+      - "First model: Temperature Alarm": tutorials/first-model.md
+      - Small models:
           - Temperature Alarm: examples/temperature-alarm.md
           - Manual Surgical Instrument: examples/manual-surgical-instrument.md
           - Single-Use Device: examples/single-use-device.md
           - Standard SysML Diagram Samples: examples/sysml-diagram-samples.md
-      - Building the Model:
+      - Building the model:
           - Surgical Workflow Modelling: examples/surgical-closure-workflow.md
           - Reusable Instrument: examples/reusable-instrument.md
           - Functional, Logical, Physical: examples/functional-logical-physical.md
           - Software-Only Medical Device: examples/software-only-medical-device.md
-          - Medical Products and Identity: layers/medical-products.md
-      - Complete Systems:
+      - Complete systems:
           - Embedded Infusion Pump: examples/embedded-infusion-pump.md
           - Connected Patient Monitor: examples/connected-patient-monitor.md
           - IVD Laboratory System: examples/ivd-laboratory-system.md
           - Surgical Robot: examples/surgical-robot.md
-      - Further Tutorials:
+      - Further tutorials:
           - Multidimensional Layers: examples/multidimensional-layers.md
   - How-to Guides:
-      - Overview: how-to/index.md
-      - Set up MEMO in a model: tutorials/setup.md
-  - Contribute:
-      - Contributing: contributing.md
+      - how-to/index.md
+      - Install:
+          - how-to/install/index.md
+          - With npm: how-to/install/npm.md
+          - As a KerML archive: how-to/install/kpar.md
+          - From a source checkout: how-to/install/source.md
   - Reference:
-      - Packages and Imports: reference/packages.md
-      - SysML Source Reference: reference/sysml.md
-      - Elements: modeling/elements.md
-      - Relationships: modeling/relationships.md
-      - Views and Evidence: modeling/views-evidence.md
-      - Architecture Overview: architecture/index.md
-      - "The memo:: Namespace": architecture/namespace.md
-      - Repository and Packaging: architecture/repository.md
+      - reference/index.md
+      - Modules: reference/modules.md
+      - Elements by layer:
+          - reference/elements/index.md
+          - Core: reference/elements/core.md
+          - Operational: reference/elements/operational.md
+          - Functional: reference/elements/functional.md
+          - Logical: reference/elements/logical.md
+          - Implementation and realization: reference/elements/implementation.md
+          - Clinical and products: reference/elements/clinical.md
+          - Assurance: reference/elements/assurance.md
+          - Views and methodology: reference/elements/views.md
+      - Relationships: reference/relationships.md
+      - Enumerations: reference/enumerations.md
+      - Rules: reference/rules.md
+      - Packaging:
+          - Packages and Imports: reference/packages.md
+          - SysML Source Reference: reference/sysml.md
+          - Architecture Overview: architecture/index.md
+          - "The memo:: Namespace": architecture/namespace.md
+          - Repository and Packaging: architecture/repository.md
   - Case Studies:
-      - Overview: case-studies/index.md
+      - case-studies/index.md
       - GPCA Pump:
-          - Overview: case-studies/gpca/index.md
+          - case-studies/gpca/index.md
           - Stakeholders and Concerns: case-studies/gpca/stakeholders-concerns.md
           - Viewpoints: case-studies/gpca/viewpoints.md
           - Views: case-studies/gpca/views.md
           - Correspondences: case-studies/gpca/correspondences.md
           - Narrative Walkthrough: examples/gpca-walkthrough.md
+  - Contribute:
+      - contributing.md
