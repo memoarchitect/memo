@@ -6,7 +6,7 @@ adoption guidance.
 
 MEMO is developed in public on GitHub:
 
-[:octicons-mark-github-16: **github.com/memoarchitect/memo**](https://github.com/memoarchitect/memo)
+[**github.com/memoarchitect/memo**](https://github.com/memoarchitect/memo)
 
 The repository contains the ontology source under `src/`, complete and focused
 models under `examples/`, reusable project material under `methodologies/` and
