@@ -18,9 +18,14 @@ Where the product needs behavior, read its model in this order:
 5. Follow functions into requirements, risks and controls, architecture, V&amp;V, and evidence.
 
 Some focused examples stop early on purpose. A manual instrument may have no
-software architecture; a lifecycle example may focus on product identity. The
-GPCA walkthrough is the complete reference: it shows the full sequence and
-explains every catalog area and view.
+software architecture; a lifecycle example may focus on product identity. That
+is a valid model, not an incomplete one — `layersOptionalRule` says so.
+
+For a device modelled all the way through, do not look for a tutorial. The
+[GPCA Pump case study](../case-studies/gpca/index.md) is a **complete** MEMO
+model, fully populated across every layer and documented as an ISO/IEC/IEEE
+42010 architecture description. Tutorials teach one modelling move at a time;
+the case study is a whole device you can interrogate.
 
 ## Small, focused models
 
@@ -48,10 +53,14 @@ explains every catalog area and view.
 
 - [Multidimensional Layers](multidimensional-layers.md) — show the same elements in several views without copying them.
 
-## The reference example
+## When you have finished these
 
-[GPCA Pump](../case-studies/gpca/index.md) is the one comprehensive example: a
-complete infusion-pump model, documented as an ISO/IEC/IEEE 42010 architecture
-description under [Case Studies](../case-studies/index.md). The
-[narrative walkthrough](gpca-walkthrough.md) takes the tutorial sequence
-across that model and explains what is present in the catalog and each view.
+Tutorials are deliberately partial. The next step is a device modelled all the
+way through: the [GPCA Pump case study](../case-studies/gpca/index.md) — a
+complete infusion-pump model, populated across every layer and documented as an
+ISO/IEC/IEEE 42010 architecture description under
+[Case Studies](../case-studies/index.md).
+
+Its [narrative walkthrough](gpca-walkthrough.md) takes the scenario-driven
+sequence above across that model and explains what is present in the catalog
+and in each view.
