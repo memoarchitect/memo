@@ -13,9 +13,14 @@ typed links back into the catalog.
 
 ## Available case studies
 
-| Case study | Device | Model |
-|---|---|---|
-| [GPCA Pump](gpca/index.md) | Generic Patient-Controlled Analgesia infusion pump | [`examples/gpca-pump`](https://github.com/memoarchitect/memo/tree/main/examples/gpca-pump) |
+| Case study | Device | Coverage | Model |
+|---|---|---|---|
+| [GPCA Pump](gpca/index.md) | Generic Patient-Controlled Analgesia infusion pump | Complete — every layer populated | [`examples/gpca-pump`](https://github.com/memoarchitect/memo/tree/main/examples/gpca-pump) |
+
+GPCA is the reference model. It is not a partial teaching example: the model is
+populated across operational, functional, logical, and implementation layers
+and across every assurance discipline, which is what makes it usable as a
+conformance target for your own model.
 
 ## How a case study is organised
 
