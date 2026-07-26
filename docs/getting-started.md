@@ -1,44 +1,67 @@
 # Getting started
 
-This documentation covers the **MEMO ontology**: the SysML v2 domain model,
-its architecture, modeling concepts, relationships, rules, examples, and
-adoption guidance.
+MEMO brings clinical intent, system behavior, architecture, risk,
+verification, and evidence into one connected SysML v2 model. The documentation
+introduces those ideas in the same order that a team encounters them.
 
-MEMO is developed in public on GitHub:
+## Start with the idea
 
-[**github.com/memoarchitect/memo**](https://github.com/memoarchitect/memo)
+Begin with the [home page](index.md). It explains:
 
-The repository contains the ontology source under `src/`, complete and focused
-models under `examples/`, reusable project material under `methodologies/` and
-`template/`, and the source for this documentation under `docs/`.
+1. why document-level traceability loses meaning as a design changes;
+2. why assurance needs a shared, architecture-backed model; and
+3. how MEMO supplies that model through typed elements, semantic
+   relationships, and closure rules.
 
-## How this documentation is organized
+This is the foundation for everything that follows.
 
-| Section | Use it when you want to… |
-| --- | --- |
-| **Home** | Understand the problem MEMO addresses and the ontology's role. |
-| **Tutorials** | Learn by building small models and reading worked examples. |
-| **How-to Guides** | Install MEMO or complete a specific modeling task. |
-| **Reference** | Look up modules, elements, relationships, enumerations, rules, and packaging details. |
-| **Explanation** | Understand the reasoning behind MEMO, its semantic model, and its engineering layers. |
-| **Case Studies** | Follow a complete device model and its assurance threads. |
-| **Contribute** | Propose changes and work with the repository. |
+## Learn the modeling progression
 
-The documentation follows a simple progression:
+Once the purpose is clear, learn how MEMO builds a model from intent to
+evidence:
 
-1. Begin with [What MEMO is and the problem it solves](index.md).
-2. Use a [tutorial](examples/index.md) to see the ontology in a model.
-3. Follow a [how-to guide](how-to/index.md) when doing project work.
-4. Use the [reference](reference/index.md) for exact definitions.
-5. Read the [explanation](why/index.md) when you need the design rationale.
+1. **Context and use** — who uses the device, where, and for what purpose.
+2. **Use cases** — the goals those people need to achieve.
+3. **Workflows and scenarios** — how the work proceeds and how it can fail.
+4. **Functions** — what the system must do on each scenario path.
+5. **Architecture** — which components and interfaces carry those functions.
+6. **Assurance** — how requirements, risks, controls, verification, and
+   evidence connect across every layer.
 
-## Installing the ontology
+Read the [layer map](layers/index.md) for the complete progression. The
+[scenario-driven](what/scenario-driven.md) and
+[function-centered](what/function-centered.md) explanations show the two ideas
+that connect the layers.
 
-MEMO is distributed as SysML v2 source and can be consumed in three ways:
+## Build one small thread
 
-- [Install the npm package](how-to/install/npm.md)
-- [Use the KerML project archive](how-to/install/kpar.md)
-- [Work from a source checkout](how-to/install/source.md)
+Do not begin by trying to model an entire device. Start with one use case, one
+scenario, the functions needed on that path, the responsible architecture, and
+the evidence that closes the thread.
+
+The [first-model tutorial](tutorials/first-model.md) walks through that process.
+The remaining [tutorials and worked examples](examples/index.md) then expand the
+same pattern to different kinds of medical devices.
+
+## Grow the model when you need to
+
+After the first thread is clear:
+
+- Use the [how-to guides](how-to/index.md) for installation and specific
+  modeling tasks.
+- Use the [reference](reference/index.md) when you need an exact element,
+  relationship, enumeration, or rule definition.
+- Read the [explanation](why/index.md) for the reasoning behind the ontology.
+- Follow the [GPCA case study](case-studies/gpca/index.md) to see a complete
+  device model organized around several assurance threads.
+
+That order is deliberate: understand the problem, learn the model, build one
+thread, then use the detailed reference.
+
+## Public repository
+
+MEMO is developed in public at
+[**github.com/memoarchitect/memo**](https://github.com/memoarchitect/memo).
 
 MEMO Tools and MEMO Architect are separate products with their own
 documentation. They are not required to use the ontology.
