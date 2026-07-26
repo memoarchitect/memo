@@ -11,145 +11,1352 @@ an architecture package.
 Narrative treatment:
 [Risk, Cybersecurity, and Assurance](../../layers/risk-assurance.md).
 
-**64 definitions** across 11 packages, extracted from the shipped SysML sources.
+64 definitions. Each entry gives the declaration, its position in the specialization hierarchy, its attributes and their types, and the relationships that accept it.
 
 ## Needs
 
-`src/assurance/needs/` — 2 definitions
+`src/assurance/needs/` — 2 definitions: [`Need`](#need), [`NeedKind`](#needkind)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `Need` | requirement def | `MemoNeed` | `needKind`, `userPopulationReference`, `jurisdiction`, `regulationReference`, `operationalContextReference`, `sourceFolder` … +1 |
-| `NeedKind` | enum def | — | — |
+### Need
+
+```sysml
+requirement def Need :> MemoNeed
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoNeed`](core.md#memoneed) |
+| **Defined in** | [`src/assurance/needs/memo_needs.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/needs/memo_needs.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `needKind` | [`NeedKind`](#needkind) |
+| `userPopulationReference` | `String` |
+| `jurisdiction` | `String` |
+| `regulationReference` | `String` |
+| `operationalContextReference` | `String` |
+| `sourceFolder` | `String` |
+| `linkedDesignControls` | `String` |
+
+**Accepted by** [`Motivates`](operational.md#motivates) (`motivatingNeed`)
+
+### NeedKind
+
+```sysml
+enum def NeedKind
+```
+
+| | |
+| --- | --- |
+| **Defined in** | [`src/assurance/needs/memo_needs.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/needs/memo_needs.sysml) |
+
+**Values**
+
+`stakeholder`, `user`, `clinicalUser`, `patientUser`, `business`, `service`, `regulatory`, `operational`, `designControl`
 
 ## Requirements
 
-`src/assurance/requirements/` — 7 definitions
+`src/assurance/requirements/` — 7 definitions: [`IntendedUse`](#intendeduse), [`NotificationSpec`](#notificationspec), [`ReasonablyForeseeableMisuse`](#reasonablyforeseeablemisuse), [`Requirement`](#requirement), [`RequirementKind`](#requirementkind), [`RiskDriver`](#riskdriver), [`SystemConstant`](#systemconstant)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `IntendedUse` | part def | `DocumentedElement` | `indication`, `contraindication`, `patientPopulation`, `clinicalBenefit`, `regulatoryClassification` |
-| `NotificationSpec` | part def | `MemoPart` | `priority`, `visualNotification`, `audioNotification`, `inhibitInfusion`, `inhibitSquareBolus`, `inhibitPatientBolus` … +1 |
-| `ReasonablyForeseeableMisuse` | part def | `DocumentedElement` | `misuseContext`, `foreseeableBasis`, `affectedUseContext` |
-| `Requirement` | requirement def | `VerifiableElement` | `requirementKind`, `statement`, `sourceKind`, `concernKind`, `status`, `acceptanceCriteria` … +16 |
-| `RequirementKind` | enum def | — | — |
-| `RiskDriver` | part def | `RequirementDriver` | `driverKind` |
-| `SystemConstant` | part def | `MemoPart` | `symbol`, `unit`, `valueType`, `constantValue`, `valueCondition` |
+### IntendedUse
+
+```sysml
+part def IntendedUse :> DocumentedElement
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`DocumentedElement`](core.md#documentedelement) |
+| **Defined in** | [`src/assurance/requirements/memo_requirements.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/requirements/memo_requirements.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `indication` | `String` |
+| `contraindication` | `String` |
+| `patientPopulation` | `String` |
+| `clinicalBenefit` | `String` |
+| `regulatoryClassification` | `String` |
+
+### NotificationSpec
+
+```sysml
+part def NotificationSpec :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/requirements/memo_requirements.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/requirements/memo_requirements.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `priority` | [`NotificationPriorityKind`](core.md#notificationprioritykind) |
+| `visualNotification` | `Boolean` |
+| `audioNotification` | `Boolean` |
+| `inhibitInfusion` | `Boolean` |
+| `inhibitSquareBolus` | `Boolean` |
+| `inhibitPatientBolus` | `Boolean` |
+| `stopBolus` | `Boolean` |
+
+### ReasonablyForeseeableMisuse
+
+```sysml
+part def ReasonablyForeseeableMisuse :> DocumentedElement
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`DocumentedElement`](core.md#documentedelement) |
+| **Defined in** | [`src/assurance/requirements/memo_requirements.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/requirements/memo_requirements.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `misuseContext` | `String` |
+| `foreseeableBasis` | `String` |
+| `affectedUseContext` | `String` |
+
+### Requirement
+
+```sysml
+requirement def Requirement :> VerifiableElement
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`VerifiableElement`](core.md#verifiableelement) |
+| **Specialized by** | [`SecurityRequirement`](#securityrequirement) |
+| **Defined in** | [`src/assurance/requirements/memo_requirements.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/requirements/memo_requirements.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `requirementKind` | [`RequirementKind`](#requirementkind) |
+| `statement` | `String` |
+| `sourceKind` | [`RequirementSourceKind`](core.md#requirementsourcekind) |
+| `concernKind` | [`ConcernKind`](core.md#concernkind) |
+| `status` | [`RequirementStatusKind`](core.md#requirementstatuskind) |
+| `acceptanceCriteria` | `String` |
+| `subjectDescription` | `String` |
+| `actorDescription` | `String` |
+| `assumptionSummary` | `String` |
+| `guaranteeSummary` | `String` |
+| `notation` | [`RequirementNotationKind`](core.md#requirementnotationkind) |
+| `earsPattern` | [`EarsPatternKind`](core.md#earspatternkind) |
+| `obligation` | [`ObligationKind`](core.md#obligationkind) |
+| `conditionClause` | `String` |
+| `systemResponse` | `String` |
+| `safetyClass` | [`SafetyClassKind`](core.md#safetyclasskind) |
+| `electricalSafetyRelevant` | `Boolean` |
+| `specificationDomain` | `String` |
+| `sourceFolder` | `String` |
+| `linkedUserNeeds` | `String` |
+| `linkedRisks` | `String` |
+| `linkedTests` | `String` |
+
+### RequirementKind
+
+```sysml
+enum def RequirementKind
+```
+
+| | |
+| --- | --- |
+| **Defined in** | [`src/assurance/requirements/memo_requirements.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/requirements/memo_requirements.sysml) |
+
+**Values**
+
+`system`, `software`, `hardware`, `systemSpecification`, `softwareSpecification`, `hardwareSpecification`, `designControl`
+
+### RiskDriver
+
+```sysml
+part def RiskDriver :> RequirementDriver
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`RequirementDriver`](core.md#requirementdriver) |
+| **Specialized by** | [`Risk`](#risk), [`Threat`](#threat) |
+| **Defined in** | [`src/assurance/requirements/memo_requirements.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/requirements/memo_requirements.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `driverKind` | `String` |
+
+### SystemConstant
+
+```sysml
+part def SystemConstant :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/requirements/memo_requirements.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/requirements/memo_requirements.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `symbol` | `String` |
+| `unit` | `String` |
+| `valueType` | `String` |
+| `constantValue` | `String` |
+| `valueCondition` | `String` |
 
 ## Safety and risk (ISO 14971)
 
-`src/assurance/safety/` — 13 definitions
+`src/assurance/safety/` — 13 definitions: [`Benefit`](#benefit), [`DesignControlRiskRow`](#designcontrolriskrow), [`Harm`](#harm), [`Hazard`](#hazard), [`HazardCause`](#hazardcause), [`HazardousSituation`](#hazardoussituation), [`OverallResidualRiskEvaluation`](#overallresidualriskevaluation), [`ResidualRisk`](#residualrisk), [`Risk`](#risk), [`RiskControlMeasure`](#riskcontrolmeasure), [`RiskMatrix`](#riskmatrix), [`SafetyRelatedCharacteristic`](#safetyrelatedcharacteristic), [`SequenceOfEvents`](#sequenceofevents)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `Benefit` | part def | `MemoPart` | `beneficialOutcome`, `beneficiary`, `clinicalSignificance`, `supportingEvidence` |
-| `DesignControlRiskRow` | part def | `Risk` | `rowTitle`, `hazardAnalysis`, `hazardCategory`, `hazardSubcategory`, `causeSequenceOfEventsFailure`, `harmText` … +8 |
-| `Harm` | item def | `MemoPart` | `clinicalImpact`, `reversibility`, `severity` |
-| `Hazard` | item def | `MemoPart` | `hazardType`, `severity`, `foreseeable` |
-| `HazardCause` | item def | `MemoPart` | `causeSource`, `contributingFactors` |
-| `HazardousSituation` | item def | `MemoPart` | `exposedPersons`, `operatingCondition` |
-| `OverallResidualRiskEvaluation` | item def | `MemoPart` | `conclusion`, `reviewer` |
-| `ResidualRisk` | part def | `Risk` | `benefitRiskRequired` |
-| `Risk` | part def | `RiskDriver` | `probabilityEstimate`, `severityEstimate`, `riskLevel`, `acceptability`, `estimationBasis`, `analysisContext` … +1 |
-| `RiskControlMeasure` | item def | `VerifiableElement` | `controlKind`, `implementationKind`, `verificationStatus` |
-| `RiskMatrix` | part def | `MemoPart` | `probabilityScaleDefinition`, `severityScaleDefinition`, `riskLevelMapping`, `acceptabilityThresholds` |
-| `SafetyRelatedCharacteristic` | part def | `MemoPart` | `characteristic`, `safetyImpact`, `normalUseRelevant`, `faultConditionRelevant` |
-| `SequenceOfEvents` | item def | `MemoPart` | `initiatingEvent`, `contributingFactors` |
+### Benefit
+
+```sysml
+part def Benefit :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `beneficialOutcome` | `String` |
+| `beneficiary` | `String` |
+| `clinicalSignificance` | `String` |
+| `supportingEvidence` | `String` |
+
+### DesignControlRiskRow
+
+```sysml
+part def DesignControlRiskRow :> Risk
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`Risk`](#risk) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `rowTitle` | `String` |
+| `hazardAnalysis` | `String` |
+| `hazardCategory` | `String` |
+| `hazardSubcategory` | `String` |
+| `causeSequenceOfEventsFailure` | `String` |
+| `harmText` | `String` |
+| `probabilityBeforeRaw` | `String` |
+| `severityBeforeRaw` | `String` |
+| `riskBeforeMeasureRaw` | `String` |
+| `probabilityAfterRaw` | `String` |
+| `severityAfterRaw` | `String` |
+| `riskAfterMitigationRaw` | `String` |
+| `cannotReduceFurther` | `Boolean` |
+| `linkSummary` | `String` |
+
+### Harm
+
+```sysml
+item def Harm :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `clinicalImpact` | `String` |
+| `reversibility` | `String` |
+| `severity` | [`SeverityKind`](core.md#severitykind) |
+
+### Hazard
+
+```sysml
+item def Hazard :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Specialized by** | [`CyberHazard`](#cyberhazard) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `hazardType` | [`HazardTypeKind`](core.md#hazardtypekind) |
+| `severity` | [`SeverityKind`](core.md#severitykind) |
+| `foreseeable` | `Boolean` |
+
+### HazardCause
+
+```sysml
+item def HazardCause :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `causeSource` | [`CauseSourceKind`](core.md#causesourcekind) |
+| `contributingFactors` | `String` |
+
+### HazardousSituation
+
+```sysml
+item def HazardousSituation :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `exposedPersons` | `String` |
+| `operatingCondition` | `String` |
+
+### OverallResidualRiskEvaluation
+
+```sysml
+item def OverallResidualRiskEvaluation :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `conclusion` | `String` |
+| `reviewer` | `String` |
+
+### ResidualRisk
+
+```sysml
+part def ResidualRisk :> Risk
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`Risk`](#risk) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `benefitRiskRequired` | `Boolean` |
+
+### Risk
+
+```sysml
+part def Risk :> RiskDriver
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`RiskDriver`](#riskdriver) |
+| **Specialized by** | [`CyberRisk`](#cyberrisk), [`DesignControlRiskRow`](#designcontrolriskrow), [`ResidualRisk`](#residualrisk) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `probabilityEstimate` | [`ProbabilityKind`](core.md#probabilitykind) |
+| `severityEstimate` | [`SeverityKind`](core.md#severitykind) |
+| `riskLevel` | [`CriticalityKind`](core.md#criticalitykind) |
+| `acceptability` | [`RiskAcceptabilityKind`](core.md#riskacceptabilitykind) |
+| `estimationBasis` | `String` |
+| `analysisContext` | `String` |
+| `foreseeableMisuseIncluded` | `Boolean` |
+
+### RiskControlMeasure
+
+```sysml
+item def RiskControlMeasure :> VerifiableElement
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`VerifiableElement`](core.md#verifiableelement) |
+| **Specialized by** | [`CyberMitigation`](#cybermitigation) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `controlKind` | [`RiskControlKind`](core.md#riskcontrolkind) |
+| `implementationKind` | [`RiskControlImplementationKind`](core.md#riskcontrolimplementationkind) |
+| `verificationStatus` | `String` |
+
+### RiskMatrix
+
+```sysml
+part def RiskMatrix :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `probabilityScaleDefinition` | `String` |
+| `severityScaleDefinition` | `String` |
+| `riskLevelMapping` | `String` |
+| `acceptabilityThresholds` | `String` |
+
+### SafetyRelatedCharacteristic
+
+```sysml
+part def SafetyRelatedCharacteristic :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `characteristic` | `String` |
+| `safetyImpact` | `String` |
+| `normalUseRelevant` | `Boolean` |
+| `faultConditionRelevant` | `Boolean` |
+
+### SequenceOfEvents
+
+```sysml
+item def SequenceOfEvents :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety/memo_risk.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety/memo_risk.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `initiatingEvent` | `String` |
+| `contributingFactors` | `String` |
 
 ## Safety analysis — FMEA, fault tree, HAZOP
 
-`src/assurance/safety_analysis/` — 13 definitions
+`src/assurance/safety_analysis/` — 13 definitions: [`DetectionMethod`](#detectionmethod), [`FMEAAction`](#fmeaaction), [`FMEAWorksheet`](#fmeaworksheet), [`FailureCause`](#failurecause), [`FailureEffect`](#failureeffect), [`FailureMode`](#failuremode), [`FaultTree`](#faulttree), [`FaultTreeEvent`](#faulttreeevent), [`FaultTreeGate`](#faulttreegate), [`HAZOPDeviation`](#hazopdeviation), [`HAZOPNode`](#hazopnode), [`HAZOPStudy`](#hazopstudy), [`MinimalCutSet`](#minimalcutset)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `DetectionMethod` | item def | `MemoPart` | `methodKind`, `detectionPoint`, `confidence` |
-| `FMEAAction` | part def | `VerifiableElement` | `actionKind`, `responsible`, `targetCompletionDate`, `revisedRpn` |
-| `FMEAWorksheet` | item def | `MemoPart` | `analysisScope`, `standardReference`, `analysisBasis`, `revisionDate`, `reviewer` |
-| `FailureCause` | item def | `MemoPart` | `causeCategory`, `causeDescription`, `occurrenceRating`, `preventionMethod` |
-| `FailureEffect` | item def | `MemoPart` | `effectLevel`, `effectOnPatient`, `effectOnOperator`, `effectOnSystem`, `severity` |
-| `FailureMode` | item def | `MemoPart` | `failureModeKind`, `severityRating`, `occurrenceRating`, `detectionRating`, `rpn`, `criticality` |
-| `FaultTree` | item def | `MemoPart` | `standardReference`, `analysisScope`, `topEventDescription`, `cutSetSummary`, `revisionDate` |
-| `FaultTreeEvent` | item def | `MemoPart` | `eventKind`, `probability`, `failureRate`, `exposureTime`, `description` |
-| `FaultTreeGate` | item def | `MemoPart` | `gateKind`, `kValue`, `nValue` |
-| `HAZOPDeviation` | item def | `MemoPart` | `guideWord`, `parameter`, `cause`, `consequence`, `existingSafeguard`, `severity` … +2 |
-| `HAZOPNode` | item def | `MemoPart` | `nodeDescription`, `designIntent`, `operatingConditions` |
-| `HAZOPStudy` | item def | `MemoPart` | `standardReference`, `processDescription`, `studyScope`, `teamComposition` |
-| `MinimalCutSet` | item def | `MemoPart` | `cutSetOrder`, `probability`, `involvedEvents`, `significance` |
+### DetectionMethod
+
+```sysml
+item def DetectionMethod :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `methodKind` | [`DetectionMethodKind`](core.md#detectionmethodkind) |
+| `detectionPoint` | `String` |
+| `confidence` | [`DetectionKind`](core.md#detectionkind) |
+
+### FMEAAction
+
+```sysml
+part def FMEAAction :> VerifiableElement
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`VerifiableElement`](core.md#verifiableelement) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `actionKind` | [`FMEAActionKind`](core.md#fmeaactionkind) |
+| `responsible` | `String` |
+| `targetCompletionDate` | `String` |
+| `revisedRpn` | `Integer` |
+
+### FMEAWorksheet
+
+```sysml
+item def FMEAWorksheet :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `analysisScope` | `String` |
+| `standardReference` | `String` |
+| `analysisBasis` | `String` |
+| `revisionDate` | `String` |
+| `reviewer` | `String` |
+
+### FailureCause
+
+```sysml
+item def FailureCause :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `causeCategory` | [`FailureCauseCategoryKind`](core.md#failurecausecategorykind) |
+| `causeDescription` | `String` |
+| `occurrenceRating` | [`ProbabilityKind`](core.md#probabilitykind) |
+| `preventionMethod` | `String` |
+
+### FailureEffect
+
+```sysml
+item def FailureEffect :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `effectLevel` | [`FailureEffectLevelKind`](core.md#failureeffectlevelkind) |
+| `effectOnPatient` | `String` |
+| `effectOnOperator` | `String` |
+| `effectOnSystem` | `String` |
+| `severity` | [`SeverityKind`](core.md#severitykind) |
+
+### FailureMode
+
+```sysml
+item def FailureMode :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `failureModeKind` | [`FailureModeKind`](core.md#failuremodekind) |
+| `severityRating` | `Integer` |
+| `occurrenceRating` | `Integer` |
+| `detectionRating` | `Integer` |
+| `rpn` | `Integer` |
+| `criticality` | [`CriticalityKind`](core.md#criticalitykind) |
+
+### FaultTree
+
+```sysml
+item def FaultTree :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `standardReference` | `String` |
+| `analysisScope` | `String` |
+| `topEventDescription` | `String` |
+| `cutSetSummary` | `String` |
+| `revisionDate` | `String` |
+
+### FaultTreeEvent
+
+```sysml
+item def FaultTreeEvent :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `eventKind` | [`FaultTreeEventKind`](core.md#faulttreeeventkind) |
+| `probability` | `Real` |
+| `failureRate` | `Real` |
+| `exposureTime` | `Real` |
+| `description` | `String` |
+
+### FaultTreeGate
+
+```sysml
+item def FaultTreeGate :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `gateKind` | [`FaultTreeGateKind`](core.md#faulttreegatekind) |
+| `kValue` | `Integer` |
+| `nValue` | `Integer` |
+
+### HAZOPDeviation
+
+```sysml
+item def HAZOPDeviation :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `guideWord` | [`HAZOPGuideWordKind`](core.md#hazopguidewordkind) |
+| `parameter` | `String` |
+| `cause` | `String` |
+| `consequence` | `String` |
+| `existingSafeguard` | `String` |
+| `severity` | [`SeverityKind`](core.md#severitykind) |
+| `likelihood` | [`ProbabilityKind`](core.md#probabilitykind) |
+| `recommendation` | `String` |
+
+### HAZOPNode
+
+```sysml
+item def HAZOPNode :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `nodeDescription` | `String` |
+| `designIntent` | `String` |
+| `operatingConditions` | `String` |
+
+### HAZOPStudy
+
+```sysml
+item def HAZOPStudy :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `standardReference` | `String` |
+| `processDescription` | `String` |
+| `studyScope` | `String` |
+| `teamComposition` | `String` |
+
+### MinimalCutSet
+
+```sysml
+item def MinimalCutSet :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/safety_analysis/memo_fmea.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/safety_analysis/memo_fmea.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `cutSetOrder` | `Integer` |
+| `probability` | `Real` |
+| `involvedEvents` | `String` |
+| `significance` | `String` |
 
 ## Cybersecurity
 
-`src/assurance/cybersecurity/` — 11 definitions
+`src/assurance/cybersecurity/` — 11 definitions: [`AttackSurface`](#attacksurface), [`CyberHazard`](#cyberhazard), [`CyberMitigation`](#cybermitigation), [`CyberRisk`](#cyberrisk), [`CybersecurityAsset`](#cybersecurityasset), [`SecurityClaim`](#securityclaim), [`SecurityRequirement`](#securityrequirement), [`Threat`](#threat), [`ThreatScenario`](#threatscenario), [`TrustBoundary`](#trustboundary), [`Vulnerability`](#vulnerability)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `AttackSurface` | part def | `MemoPart` | `entryPointKind`, `exposureLevel`, `reachableFrom`, `authenticationExpected` |
-| `CyberHazard` | item def | `Hazard` | `securityImpact`, `safetyImpact`, `privacyImpact`, `operationalImpact`, `linkedSafetyHazardId` |
-| `CyberMitigation` | part def | `RiskControlMeasure` | `cyberControlKind`, `securityMechanism`, `verificationExpectation`, `hardeningScope` |
-| `CyberRisk` | item def | `Risk` | `exploitabilityEstimate`, `attackComplexity`, `detectability`, `essentialPerformanceImpact`, `patientSafetyContribution` |
-| `CybersecurityAsset` | part def | `ArchitectureElement` | `assetKind`, `confidentialityNeed`, `integrityNeed`, `availabilityNeed`, `privacyRelevant`, `safetyRelevant` … +3 |
-| `SecurityClaim` | part def | `MemoEvidence` | `claimText`, `claimScope`, `supportedByEvidence` |
-| `SecurityRequirement` | requirement def | `Requirement` | `securityObjective`, `derivedFromThreat`, `derivedFromRisk`, `defaultConcern`, `safetyClass` |
-| `Threat` | item def | `RiskDriver` | `threatCategory`, `attackVector`, `threatSource`, `precondition`, `affectedConcern`, `defaultTechnique` … +1 |
-| `ThreatScenario` | part def | `MemoScenario` | `actorDescription`, `assumptionSummary`, `guaranteeSummary`, `securityObjective`, `abuseCaseReference`, `defaultCategory` |
-| `TrustBoundary` | item def | `InterfaceElement` | `boundaryType`, `crossingConstraint`, `trustAssumption` |
-| `Vulnerability` | item def | `MemoPart` | `weakness`, `exploitability`, `discoveryMethod`, `affectedLayer`, `cweReference`, `remediable` |
+### AttackSurface
+
+```sysml
+part def AttackSurface :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `entryPointKind` | [`InterfaceKind`](core.md#interfacekind) |
+| `exposureLevel` | `String` |
+| `reachableFrom` | `String` |
+| `authenticationExpected` | `Boolean` |
+
+### CyberHazard
+
+```sysml
+item def CyberHazard :> Hazard
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`Hazard`](#hazard) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `securityImpact` | `String` |
+| `safetyImpact` | `String` |
+| `privacyImpact` | `String` |
+| `operationalImpact` | `String` |
+| `linkedSafetyHazardId` | `String` |
+
+### CyberMitigation
+
+```sysml
+part def CyberMitigation :> RiskControlMeasure
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`RiskControlMeasure`](#riskcontrolmeasure) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `cyberControlKind` | [`CyberControlKind`](core.md#cybercontrolkind) |
+| `securityMechanism` | `String` |
+| `verificationExpectation` | `String` |
+| `hardeningScope` | `String` |
+
+### CyberRisk
+
+```sysml
+item def CyberRisk :> Risk
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`Risk`](#risk) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `exploitabilityEstimate` | `String` |
+| `attackComplexity` | `String` |
+| `detectability` | [`DetectionKind`](core.md#detectionkind) |
+| `essentialPerformanceImpact` | `String` |
+| `patientSafetyContribution` | `String` |
+
+### CybersecurityAsset
+
+```sysml
+part def CybersecurityAsset :> ArchitectureElement
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`ArchitectureElement`](core.md#architectureelement) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `assetKind` | [`AssetKind`](core.md#assetkind) |
+| `confidentialityNeed` | `String` |
+| `integrityNeed` | `String` |
+| `availabilityNeed` | `String` |
+| `privacyRelevant` | `Boolean` |
+| `safetyRelevant` | `Boolean` |
+| `owningLayer` | `String` |
+| `assetOwner` | `String` |
+| `classification` | `String` |
+
+### SecurityClaim
+
+```sysml
+part def SecurityClaim :> MemoEvidence
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoEvidence`](core.md#memoevidence) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `claimText` | `String` |
+| `claimScope` | `String` |
+| `supportedByEvidence` | `String` |
+
+### SecurityRequirement
+
+```sysml
+requirement def SecurityRequirement :> Requirement
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`Requirement`](#requirement) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `securityObjective` | `String` |
+| `derivedFromThreat` | `String` |
+| `derivedFromRisk` | `String` |
+| `defaultConcern` | [`ConcernKind`](core.md#concernkind) |
+| `safetyClass` | [`SafetyClassKind`](core.md#safetyclasskind) |
+
+### Threat
+
+```sysml
+item def Threat :> RiskDriver
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`RiskDriver`](#riskdriver) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `threatCategory` | [`ThreatCategoryKind`](core.md#threatcategorykind) |
+| `attackVector` | `String` |
+| `threatSource` | `String` |
+| `precondition` | `String` |
+| `affectedConcern` | [`ConcernKind`](core.md#concernkind) |
+| `defaultTechnique` | `String` |
+| `strideCategory` | [`ThreatCategoryKind`](core.md#threatcategorykind) |
+
+### ThreatScenario
+
+```sysml
+part def ThreatScenario :> MemoScenario
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoScenario`](operational.md#memoscenario) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `actorDescription` | `String` |
+| `assumptionSummary` | `String` |
+| `guaranteeSummary` | `String` |
+| `securityObjective` | `String` |
+| `abuseCaseReference` | `String` |
+| `defaultCategory` | [`ThreatCategoryKind`](core.md#threatcategorykind) |
+
+### TrustBoundary
+
+```sysml
+item def TrustBoundary :> InterfaceElement
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`InterfaceElement`](core.md#interfaceelement) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `boundaryType` | `String` |
+| `crossingConstraint` | `String` |
+| `trustAssumption` | `String` |
+
+### Vulnerability
+
+```sysml
+item def Vulnerability :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/cybersecurity/memo_cybersecurity.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/cybersecurity/memo_cybersecurity.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `weakness` | `String` |
+| `exploitability` | `String` |
+| `discoveryMethod` | `String` |
+| `affectedLayer` | `String` |
+| `cweReference` | `String` |
+| `remediable` | `Boolean` |
 
 ## Human factors (IEC 62366)
 
-`src/assurance/human_factors/` — 6 definitions
+`src/assurance/human_factors/` — 6 definitions: [`CommitsUseError`](#commitsuseerror), [`EvaluatesTask`](#evaluatestask), [`FormativeEvaluation`](#formativeevaluation), [`HazardRelatedUseScenario`](#hazardrelatedusescenario), [`UsabilityValidation`](#usabilityvalidation), [`UseError`](#useerror)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `CommitsUseError` | connection def | `MemoRelationship` | — |
-| `EvaluatesTask` | connection def | `MemoRelationship` | — |
-| `FormativeEvaluation` | part def | `MemoEvidence` | `evaluationMethod`, `findingsSummary`, `designChangesTriggered` |
-| `HazardRelatedUseScenario` | part def | `MemoScenario` | `hazardReference`, `selectionRationale` |
-| `UsabilityValidation` | part def | `MemoEvidence` | `participantProfile`, `participantCount`, `acceptanceCriteria`, `resultSummary` |
-| `UseError` | part def | `MemoPart` | `errorCategory`, `taskReference`, `severity`, `rootCauseType` |
+### CommitsUseError
+
+```sysml
+connection def CommitsUseError :> MemoRelationship
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoRelationship`](core.md#memorelationship) |
+| **Defined in** | [`src/assurance/human_factors/memo_human_factors.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/human_factors/memo_human_factors.sysml) |
+
+**Ends**
+
+| End | Type |
+| --- | --- |
+| `task` | [`UserTask`](operational.md#usertask) |
+| `useError` | [`UseError`](#useerror) |
+
+### EvaluatesTask
+
+```sysml
+connection def EvaluatesTask :> MemoRelationship
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoRelationship`](core.md#memorelationship) |
+| **Defined in** | [`src/assurance/human_factors/memo_human_factors.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/human_factors/memo_human_factors.sysml) |
+
+**Ends**
+
+| End | Type |
+| --- | --- |
+| `evaluation` | [`MemoEvidence`](core.md#memoevidence) |
+| `task` | [`UserTask`](operational.md#usertask) |
+
+### FormativeEvaluation
+
+```sysml
+part def FormativeEvaluation :> MemoEvidence
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoEvidence`](core.md#memoevidence) |
+| **Defined in** | [`src/assurance/human_factors/memo_human_factors.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/human_factors/memo_human_factors.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `evaluationMethod` | `String` |
+| `findingsSummary` | `String` |
+| `designChangesTriggered` | `String` |
+
+### HazardRelatedUseScenario
+
+```sysml
+part def HazardRelatedUseScenario :> MemoScenario
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoScenario`](operational.md#memoscenario) |
+| **Defined in** | [`src/assurance/human_factors/memo_human_factors.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/human_factors/memo_human_factors.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `hazardReference` | `String` |
+| `selectionRationale` | `String` |
+
+### UsabilityValidation
+
+```sysml
+part def UsabilityValidation :> MemoEvidence
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoEvidence`](core.md#memoevidence) |
+| **Defined in** | [`src/assurance/human_factors/memo_human_factors.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/human_factors/memo_human_factors.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `participantProfile` | `String` |
+| `participantCount` | `Integer` |
+| `acceptanceCriteria` | `String` |
+| `resultSummary` | `String` |
+
+### UseError
+
+```sysml
+part def UseError :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/assurance/human_factors/memo_human_factors.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/human_factors/memo_human_factors.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `errorCategory` | [`UseErrorCategoryKind`](core.md#useerrorcategorykind) |
+| `taskReference` | `String` |
+| `severity` | [`SeverityKind`](core.md#severitykind) |
+| `rootCauseType` | `String` |
+
+**Accepted by** [`CommitsUseError`](#commitsuseerror) (`useError`), [`ErrorAtElement`](implementation.md#erroratelement) (`useError`)
 
 ## Verification and validation
 
-`src/assurance/verification/` — 6 definitions
+`src/assurance/verification/` — 6 definitions: [`Evidence`](#evidence), [`ExecutesScenario`](#executesscenario), [`TestArtifact`](#testartifact), [`ValidationCase`](#validationcase), [`VerificationCase`](#verificationcase), [`VerificationScenario`](#verificationscenario)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `Evidence` | part def | `MemoEvidence` | `version`, `evidenceType`, `integrityStatus` |
-| `ExecutesScenario` | connection def | `MemoRelationship` | — |
-| `TestArtifact` | part def | `MemoEvidence` | `version`, `artifactKind`, `resultSummary` |
-| `ValidationCase` | verification def | `MemoVerificationCase` | `validationMethod`, `userParticipation`, `acceptanceCriteria`, `clinicalContext` |
-| `VerificationCase` | verification def | `MemoVerificationCase` | `methodKind`, `acceptanceCriteria`, `status` |
-| `VerificationScenario` | part def | `MemoScenario` | `verificationEnvironment`, `stimulusSummary` |
+### Evidence
+
+```sysml
+part def Evidence :> MemoEvidence
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoEvidence`](core.md#memoevidence) |
+| **Defined in** | [`src/assurance/verification/memo_assurance.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/verification/memo_assurance.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `version` | `String` |
+| `evidenceType` | `String` |
+| `integrityStatus` | `String` |
+
+### ExecutesScenario
+
+```sysml
+connection def ExecutesScenario :> MemoRelationship
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoRelationship`](core.md#memorelationship) |
+| **Defined in** | [`src/assurance/verification/memo_assurance.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/verification/memo_assurance.sysml) |
+
+**Ends**
+
+| End | Type |
+| --- | --- |
+| `verificationCase` | [`VerificationCase`](#verificationcase) |
+| `scenario` | [`MemoScenario`](operational.md#memoscenario) |
+
+### TestArtifact
+
+```sysml
+part def TestArtifact :> MemoEvidence
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoEvidence`](core.md#memoevidence) |
+| **Defined in** | [`src/assurance/verification/memo_assurance.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/verification/memo_assurance.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `version` | `String` |
+| `artifactKind` | [`ArtifactKind`](core.md#artifactkind) |
+| `resultSummary` | `String` |
+
+### ValidationCase
+
+```sysml
+verification def ValidationCase :> MemoVerificationCase
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoVerificationCase`](core.md#memoverificationcase) |
+| **Defined in** | [`src/assurance/verification/memo_assurance.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/verification/memo_assurance.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `validationMethod` | [`ValidationMethodKind`](core.md#validationmethodkind) |
+| `userParticipation` | `String` |
+| `acceptanceCriteria` | `String` |
+| `clinicalContext` | `String` |
+
+### VerificationCase
+
+```sysml
+verification def VerificationCase :> MemoVerificationCase
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoVerificationCase`](core.md#memoverificationcase) |
+| **Defined in** | [`src/assurance/verification/memo_assurance.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/verification/memo_assurance.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `methodKind` | [`VerificationMethodKind`](core.md#verificationmethodkind) |
+| `acceptanceCriteria` | `String` |
+| `status` | `String` |
+
+**Accepted by** [`ExecutesScenario`](#executesscenario) (`verificationCase`)
+
+### VerificationScenario
+
+```sysml
+part def VerificationScenario :> MemoScenario
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoScenario`](operational.md#memoscenario) |
+| **Defined in** | [`src/assurance/verification/memo_assurance.sysml`](https://github.com/memoarchitect/memo/blob/main/src/assurance/verification/memo_assurance.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `verificationEnvironment` | `String` |
+| `stimulusSummary` | `String` |
 
 ## Controlled artifacts
 
-`src/compliance/artifacts/` — 1 definitions
+`src/compliance/artifacts/` — 1 definitions: [`ControlledArtifact`](#controlledartifact)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `ControlledArtifact` | item def | `MemoPart` | `version`, `lifecycleState`, `artifactKind`, `owner`, `approvalStatus` |
+### ControlledArtifact
+
+```sysml
+item def ControlledArtifact :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/compliance/artifacts/memo_artifacts.sysml`](https://github.com/memoarchitect/memo/blob/main/src/compliance/artifacts/memo_artifacts.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `version` | `String` |
+| `lifecycleState` | [`LifecycleStateKind`](core.md#lifecyclestatekind) |
+| `artifactKind` | [`ArtifactKind`](core.md#artifactkind) |
+| `owner` | `String` |
+| `approvalStatus` | `String` |
 
 ## Change and configuration
 
-`src/compliance/change/` — 2 definitions
+`src/compliance/change/` — 2 definitions: [`ChangeRequest`](#changerequest), [`ConfigurationItem`](#configurationitem)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `ChangeRequest` | part def | `MemoPart` | `changeType`, `impactAssessment`, `approvalStatus`, `affectedBaseline` |
-| `ConfigurationItem` | part def | `MemoPart` | `version`, `baseline`, `controlLevel` |
+### ChangeRequest
+
+```sysml
+part def ChangeRequest :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/compliance/change/memo_change.sysml`](https://github.com/memoarchitect/memo/blob/main/src/compliance/change/memo_change.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `changeType` | [`ChangeTypeKind`](core.md#changetypekind) |
+| `impactAssessment` | `String` |
+| `approvalStatus` | `String` |
+| `affectedBaseline` | `String` |
+
+### ConfigurationItem
+
+```sysml
+part def ConfigurationItem :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/compliance/change/memo_change.sysml`](https://github.com/memoarchitect/memo/blob/main/src/compliance/change/memo_change.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `version` | `String` |
+| `baseline` | `String` |
+| `controlLevel` | `String` |
 
 ## Risk management file
 
-`src/compliance/iso14971/` — 1 definitions
+`src/compliance/iso14971/` — 1 definitions: [`RiskManagementFile`](#riskmanagementfile)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `RiskManagementFile` | part def | `MemoPart` | `standardReference`, `clause`, `edition`, `completenessStatus` |
+### RiskManagementFile
+
+```sysml
+part def RiskManagementFile :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/compliance/iso14971/risk_management_file.sysml`](https://github.com/memoarchitect/memo/blob/main/src/compliance/iso14971/risk_management_file.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `standardReference` | `String` |
+| `clause` | `String` |
+| `edition` | `String` |
+| `completenessStatus` | `String` |
 
 ## Post-market and clinical evaluation
 
-`src/compliance/postmarket/` — 2 definitions
+`src/compliance/postmarket/` — 2 definitions: [`ClinicalEvaluation`](#clinicalevaluation), [`PostMarketSurveillance`](#postmarketsurveillance)
 
-| Definition | Kind | Specializes | Attributes |
-| --- | --- | --- | --- |
-| `ClinicalEvaluation` | part def | `MemoPart` | `evaluationStage`, `clinicalDataSource`, `conclusion` |
-| `PostMarketSurveillance` | part def | `MemoPart` | `surveillanceKind`, `dataSource`, `reportingObligation` |
+### ClinicalEvaluation
+
+```sysml
+part def ClinicalEvaluation :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/compliance/postmarket/memo_postmarket.sysml`](https://github.com/memoarchitect/memo/blob/main/src/compliance/postmarket/memo_postmarket.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `evaluationStage` | `String` |
+| `clinicalDataSource` | `String` |
+| `conclusion` | `String` |
+
+### PostMarketSurveillance
+
+```sysml
+part def PostMarketSurveillance :> MemoPart
+```
+
+| | |
+| --- | --- |
+| **Specializes** | [`MemoPart`](core.md#memopart) |
+| **Defined in** | [`src/compliance/postmarket/memo_postmarket.sysml`](https://github.com/memoarchitect/memo/blob/main/src/compliance/postmarket/memo_postmarket.sysml) |
+
+**Attributes**
+
+| Attribute | Type |
+| --- | --- |
+| `surveillanceKind` | `String` |
+| `dataSource` | `String` |
+| `reportingObligation` | `String` |

@@ -2,36 +2,51 @@
 
 <p class="memo-kicker">Medical Engineering Modeling Ontology</p>
 
-# Make the engineering argument visible
+# MEMO
 
-MEMO is a portable SysML v2 library for medical-device engineering. It gives a
-team one shared vocabulary for the clinical work, the device, its risks, and
-the evidence used to review it — from a reusable forceps to a surgical robot,
-without forcing either through the other's layers.
-
-<p class="memo-hero-path"><span>Use case</span><i>→</i><span>Workflow</span><i>→</i><span>Scenarios</span><i>→</i><span>Functions</span><i>→</i><span>Architecture</span><i>→</i><span>Evidence</span></p>
+A SysML v2 library that supplies a typed vocabulary for medical-device
+engineering: the clinical work, the device, its risks, and the evidence used to
+review it.
 
 </div>
 
-## Start with something that can go wrong
+## Scope
 
-A patient presses the dose button on an infusion pump for pain relief. The pump
-may deliver one extra dose — a bolus — but only if the lockout timer says
-enough time has passed. Otherwise it must block the dose, or the patient is
-overdosed.
+MEMO is an ontology in the engineering sense: a set of definitions that fixes
+what the terms of a domain mean and how they may be combined. It provides three
+things.
 
-Every discipline in the building has a record of that situation. Risk has a
-hazard. Requirements has an obligation. Architecture has a component. V&V has a
-test. Each record is real, each is reviewed, and each lives in a different
-document.
+First, **element definitions**. A hazard is declared as a `Hazard`, a risk
+control as a `RiskControlMeasure`, a software item as a `SoftwareComponent`.
+Each definition carries the attributes its governing standard expects — a
+`Risk`, for instance, holds `probabilityEstimate`, `severityEstimate`,
+`riskLevel`, and `acceptability`, typed against closed value sets rather than
+free text.
 
-Now change the lockout interval. **Which of those records is now wrong?**
+Second, **relationship definitions**. Links between elements are themselves
+typed, and their ends are constrained. `Mitigates` connects a control to a
+hazard; `SatisfiedBy` connects a requirement to a design element; `VerifiedBy`
+connects an element to a verification case. Because each link states what it
+asserts, the assertion can be examined by a tool rather than inferred by a
+reader.
 
-Traceability answers by identifier: `HZ-001` relates to `REQ-025`, which
-relates to `TC-221`. Every pointer still resolves. None of them can tell you
-whether the test still exercises the behavior the hazard describes.
+Third, **constraint definitions**. Questions asked during design review —
+whether every hazard has a control, whether every control is verified — are
+expressed as native SysML v2 constraints within the library, and are therefore
+evaluated by any conformant tool.
 
-## MEMO records the same situation as one thread
+## Rationale
+
+A device's safety argument is distributed across requirements specifications,
+architecture descriptions, risk files, verification protocols, and test
+records. Conventional traceability records the association between these
+artifacts as pairs of identifiers. An identifier association is preserved when
+the design changes, because nothing in it depends on the design; consequently
+it cannot indicate which of the associated records has become inconsistent.
+
+The following thread illustrates the alternative. It is taken from the
+[GPCA reference model](case-studies/gpca/index.md), in which a patient-
+controlled analgesia pump must suppress a bolus dose during a lockout interval.
 
 ```text
 HZ-001    Overdose            drug delivery error · catastrophic
@@ -47,18 +62,13 @@ VER-002   Verify lockout      test · acceptance criteria
 EVD-001   Lockout evidence    tied to baseline
 ```
 
-Each node is typed. Each arrow is a typed relationship that states a claim —
-not a pointer that happens to connect two identifiers. `REQ-025` records
-`source = risk`, so the model itself knows that requirement exists *because of*
-a hazard.
+Each node is an instance of a defined type and each edge is an instance of a
+defined relationship. `REQ-025` records `source = risk` as a typed attribute,
+so the model itself represents the fact that the requirement exists in response
+to a hazard. Given a change to `HZ-001`, the set of elements requiring
+re-review is obtained by traversing these relationships.
 
-That is enough to ask the question directly: change `HZ-001`, and the model
-returns the requirement, the component, the control, the test, and the evidence
-that must be re-reviewed.
-
-## And enough to check it mechanically
-
-Because the rules are part of the model, review questions execute:
+The same typing allows the constraints to be evaluated:
 
 ```text
 $ memo validate
@@ -72,66 +82,30 @@ CR-MED-003  Risk control must be verified           (ISO 14971 §7.4)
 Result: 2 errors · 1 warning · thread HZ-001 closed
 ```
 
-Gaps surface before the design review, not during it. The rules run in CI, so
-compliance becomes a build step.
+This procedure identifies gaps in the recorded argument. It does not establish
+that a device is safe, and it does not substitute for review. Clinical
+judgement, risk acceptance, and approval remain with the personnel responsible
+for them.
 
-This does not prove the device is safe and it does not replace review. It makes
-review gaps visible early enough for engineers, safety, and V&V to act on them.
-The clinical, risk-acceptance, and approval decisions stay with the people
-qualified to make them.
+## Distribution
 
-## What MEMO actually is
+The library is SysML v2 source text. It has no runtime and depends on no
+particular tool, and can be consumed as an npm package, as a KerML project
+archive, or from a source checkout. Two further products exist and are
+documented separately: [Tools](https://github.com/memoarchitect/memo-tools),
+which provides the `memo` command-line interface, and
+[Architect](https://github.com/memoarchitect/memo-architect), an optional
+visual workbench. Neither is required.
 
-A SysML v2 library — typed elements, typed relationships, and closure rules for
-medical-device engineering. It is content, not a tool: plain SysML v2 text that
-any conformant editor can read, so adopting it does not mean adopting a vendor.
+## Organisation of this documentation
 
-<div class="memo-card-grid" markdown>
-
-<div class="memo-card memo-card-purple" markdown>
-
-### Why this problem is hard
-
-Four forces keep safety evidence drifting, and none of them is carelessness.
-
-[Read the problem →](why/index.md)
-
-</div>
-
-<div class="memo-card memo-card-blue" markdown>
-
-### How the library is built
-
-Typed elements, typed links, closure rules — and the two modelling ideas the
-whole structure follows from.
-
-[Read the overview →](what/index.md)
-
-</div>
-
-<div class="memo-card memo-card-teal" markdown>
-
-### Build one yourself
-
-A temperature alarm, from clinical need to verification evidence, in about
-twenty minutes.
-
-[Start the tutorial →](tutorials/first-model.md)
-
-</div>
-
-<div class="memo-card memo-card-orange" markdown>
-
-### See a whole device
-
-The GPCA pump — the model the thread above comes from — documented as an
-ISO/IEC/IEEE 42010 architecture description.
-
-[Open the case study →](case-studies/gpca/index.md)
-
-</div>
-
-</div>
+| Section | Purpose |
+| --- | --- |
+| [Tutorials](examples/index.md) | Lessons for readers new to MEMO, and worked examples of existing models |
+| [How-to guides](how-to/index.md) | Directions for completing a specific task |
+| [Reference](reference/index.md) | Definitions extracted from the library source |
+| [Explanation](why/index.md) | The reasoning behind the ontology, and the layers it organises a model into |
+| [Case studies](case-studies/index.md) | Complete device models documented per ISO/IEC/IEEE 42010 |
 
 ---
 
