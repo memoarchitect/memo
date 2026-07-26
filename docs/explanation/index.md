@@ -33,13 +33,23 @@ and the assurance disciplines that connect across them.
 
 [Continue to What MEMO is →](../what/index.md)
 
-## Read the section as one argument
+## How to use these pages
 
-The intended path is:
+If MEMO is new to you, read these pages in order:
 
-**evidence drift → links without meaning → shared model → MEMO semantics →
-mental model → layers → one closed assurance thread**
+1. **[Why MEMO](../why/index.md)** — understand the engineering problem the
+   ontology addresses.
+2. **[What is MEMO](../what/index.md)** — understand what MEMO adds to SysML v2.
+3. **[The mental model](../what/mental-model.md)** — learn how intent, design,
+   assurance, and evidence form one connected model.
+4. **[The layers](../layers/index.md)** — learn where each kind of engineering
+   information belongs.
+5. **[One closed thread](../what/closed-thread.md)** — follow one concern from
+   clinical intent to verification evidence.
 
-If you already understand the rationale, begin with
-[the mental model](../what/mental-model.md). If you need an exact definition
-rather than an explanation, go directly to [Reference](../reference/index.md).
+After these pages:
+
+- use [How-to Guides](../how-to/index.md) to perform a modeling task;
+- use [Tutorials](../examples/index.md) to build a model step by step; and
+- use [Reference](../reference/index.md) to look up exact definitions and
+  legal relationships.
