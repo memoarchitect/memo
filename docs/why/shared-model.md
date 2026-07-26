@@ -5,7 +5,7 @@ carries engineering meaning across teams. "Low-cost" is part of the
 requirement, not a nice-to-have: a model a code-first team will not maintain is
 worse than no model, because it becomes another stale artifact to reconcile.
 
-## Six properties
+## Six requirements
 
 <div class="memo-card-grid" markdown>
 
@@ -45,15 +45,25 @@ model rather than a separate document to keep in sync.
 
 </div>
 
+<div class="memo-card memo-card-purple" markdown>
+
+### Ready to start
+
+A team can begin from a usable model structure instead of first inventing its
+own ontology, package layout, and review pattern.
+
 </div>
 
-Two more that matter as much:
+<div class="memo-card memo-card-blue" markdown>
 
-- **A starter scaffold.** A shared vocabulary is only useful if a team can
-  begin without designing one. The model has to ship with a usable default.
-- **Document export.** Regulated review consumes documents. The model has to
-  generate them, so the document becomes a rendering of the model rather than a
-  parallel copy of it.
+### Able to produce review artifacts
+
+Documents are generated as views of the model, so regulated deliverables do
+not become parallel sources of engineering truth.
+
+</div>
+
+</div>
 
 ## One shared source of truth
 
@@ -69,10 +79,10 @@ When these are in one model, a change is followed rather than remembered.
 
 ## The goal
 
-MBSE's benefits with code-first adoption cost and lower setup friction. That is
-the target MEMO is built against, and it is why MEMO is a **library and a
-methodology** rather than a tool you have to buy: the model is plain SysML v2
-text that any conformant tool can read.
+The target is the reasoning power of model-based engineering with the review
+habits and low setup cost of a code-first workflow. That is why MEMO expresses
+the model as versionable SysML v2 source rather than binding its meaning to one
+application.
 
 We compile code. We should be able to compile the safety argument.
 

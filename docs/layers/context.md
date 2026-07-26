@@ -137,26 +137,3 @@ by narrative. An actor is bound to a use case by `Initiates` or
 `ParticipatesIn`; a use case is bound to its setting by `AppliesInContext`.
 
 [Next: Layer 2 — Use cases](use-cases.md)
-
-## Element and relationship types
-
-| Type | Records |
-| --- | --- |
-| [`IntendedUse`](../reference/elements/assurance.md#intendeduse) | The stated purpose, indications, and contraindications |
-| [`UseContext`](../reference/elements/operational.md#usecontext) | The setting in which the device is used |
-| [`UseEnvironment`](../reference/elements/operational.md#useenvironment) | Physical and operational conditions of that setting |
-| [`User`](../reference/elements/operational.md#user) | A person who interacts with the device |
-| [`NonHumanActor`](../reference/elements/operational.md#nonhumanactor) | An external system that interacts with the device |
-| [`Stakeholder`](../reference/elements/operational.md#stakeholder) | A party holding a concern in the architecture description |
-| [`Concern`](../reference/elements/operational.md#concern) | An interest a stakeholder holds |
-| [`ReasonablyForeseeableMisuse`](../reference/elements/assurance.md#reasonablyforeseeablemisuse) | Predictable use outside the intended use |
-
-| Relationship | Asserts |
-| --- | --- |
-| [`HasConcern`](../reference/relationships.md#hasconcern) | A stakeholder holds a concern the architecture must frame |
-| [`ActsAsActor`](../reference/relationships.md#actsasactor) | One entity occupies both stakeholder and actor roles |
-| [`InteractsWith`](../reference/relationships.md#interactswith) | An actor interacts with a target at the boundary |
-| [`ExchangesWith`](../reference/relationships.md#exchangeswith) | Information or material crosses the context boundary |
-| [`ConnectsPhysically`](../reference/relationships.md#connectsphysically) | A physical path connects two context participants |
-| [`AppliesInContext`](../reference/relationships.md#appliesincontext) | A use context applies to a subject |
-| [`SituatedIn`](../reference/relationships.md#situatedin) | A use context sits within an environment |

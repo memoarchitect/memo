@@ -107,20 +107,3 @@ and `ParticipatesIn` from actors, and `Supports` from a workflow to the use
 case it serves.
 
 [Next: Layer 3 — Workflows and scenarios](operational-world.md)
-
-## Element and relationship types
-
-| Type | Records |
-| --- | --- |
-| [`UseCase`](../reference/elements/operational.md#usecase) | A goal an actor pursues in a context |
-| [`UseCaseKind`](../reference/enumerations.md#usecasekind) | The classification of a use case, such as `clinical` |
-| [`Need`](../reference/elements/assurance.md#need) | A stakeholder requirement motivating a use case |
-
-| Relationship | Asserts |
-| --- | --- |
-| [`Motivates`](../reference/relationships.md#motivates) | A need motivates a use case |
-| [`Initiates`](../reference/relationships.md#initiates) | An actor initiates a use case |
-| [`ParticipatesIn`](../reference/relationships.md#participatesin) | An actor takes part in a use case |
-| [`Includes`](../reference/relationships.md#includes) | A use case includes another unconditionally |
-| [`Extends`](../reference/relationships.md#extends) | A use case extends another conditionally |
-| [`AppliesInContext`](../reference/relationships.md#appliesincontext) | A use case applies in a use context |

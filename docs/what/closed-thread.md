@@ -1,8 +1,8 @@
 # One closed thread
 
-Everything on the previous pages is abstract until you follow a single thread
-end to end. This is the one MEMO uses to prove the idea: small enough to read
-in a minute, complete enough to exercise every layer.
+The ontology becomes concrete when one engineering concern is followed from
+clinical intent to evidence. This infusion-pump lockout thread is small enough
+to read in a minute and complete enough to show how the layers connect.
 
 ## The scenario in plain language
 
