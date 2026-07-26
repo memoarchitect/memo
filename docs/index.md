@@ -35,6 +35,37 @@ whether every hazard has a control, whether every control is verified — are
 expressed as native SysML v2 constraints within the library, and are therefore
 evaluated by any conformant tool.
 
+## How a model is organised
+
+A MEMO model is arranged along two axes. The horizontal axis carries the
+engineering account of the device and descends through six layers, each
+answering one question and constraining the next:
+
+| Layer | Question | Principal elements |
+| --- | --- | --- |
+| 1. [Context and use](layers/context.md) | Who is involved, where, and what is the device for? | `IntendedUse`, `UseContext`, `User` |
+| 2. [Use cases](layers/use-cases.md) | What are those people trying to achieve? | `UseCase` |
+| 3. [Workflows and scenarios](layers/operational-world.md) | How is that goal pursued, and how does it fail? | `OperationalWorkflow`, `MemoScenario` |
+| 4. [Functional analysis](layers/operations-system.md) | What must the system do on those paths? | `SystemFunction`, `FunctionalFlow` |
+| 5. [Logical architecture](layers/requirements-architecture.md) | Which components hold which responsibilities? | `LogicalComponent`, `LogicalInterface` |
+| 6. [Implementation](layers/requirements-architecture.md) | How is the solution built and deployed? | `SoftwareComponent`, `HardwareAssembly` |
+
+The vertical axis carries the disciplines that must be satisfied about the
+device: requirements, safety and risk, cybersecurity, human factors, and
+verification and validation. These are not a seventh layer. They attach to
+elements at every horizontal layer through typed relationships, which is why a
+hazard can be anchored to the specific scenario in which it arises and to the
+component whose behaviour controls it.
+
+An element belongs to exactly one axis, and reaches the other only by
+relationship. This is enforced by `singleAxisOwnershipRule`, and it is what
+prevents a model from accumulating separate copies of the same component in the
+safety, cybersecurity, and verification views.
+
+A model is not required to populate every layer. A manual instrument has no
+software architecture, and `layersOptionalRule` states that this is a complete
+model rather than an unfinished one.
+
 ## Rationale
 
 A device's safety argument is distributed across requirements specifications,
