@@ -35,28 +35,21 @@ in what order, and when you are done. MEMO's methodology layer supplies:
 A profile constrains the choices, which is what makes a starter project
 possible: `memo init` scaffolds from an archetype rather than from nothing.
 
-## Tools — parse, check, generate
+## Tools and Architect
 
-The `memo` CLI and the libraries behind it. Same model, mechanised:
+Both are separate products with their own documentation. This site documents
+the **ontology**; it does not duplicate theirs.
 
-- parse the SysML v2 sources into a semantic model;
-- validate against the ontology and the project's rules;
-- report closure gaps — unmitigated hazards, unverified controls;
-- export Design History File documents from the model.
+- **[Tools](https://github.com/memoarchitect/memo-tools)** — the `memo` CLI and
+  the engine libraries: parse the sources, validate against the ontology,
+  report closure gaps, export DHF documents. Because the rules live in the
+  ontology, the CLI is a runner, not the authority on legality.
+- **[Architect](https://github.com/memoarchitect/memo-architect)** — an optional
+  visual workbench over the same model. It maintains no second engineering
+  model: the SysML source stays the single source of truth, and a project is
+  fully usable without it.
 
-Because the rules live in the ontology, the CLI is not the authority on
-legality — it is a runner for rules the model already states.
-
-## Architect — an optional visual workbench
-
-A thin React workbench over the same model: explore layers, render BDD, IBD,
-action-flow, sequence, state, tree, DSM, and tabular views, author
-relationships, and export DHF documents.
-
-It maintains no second engineering model. It reuses the parser, semantic model,
-validation, and project operations from Tools, and the SysML source stays the
-single source of truth — the workbench is a way to look at it, and the project
-remains fully usable without it.
+Neither is required. The ontology works in any conformant SysML v2 editor.
 
 ## Choosing a starting point
 
