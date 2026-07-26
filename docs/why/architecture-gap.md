@@ -25,6 +25,19 @@ code, the risk file, or the test suite — so the diagram ages at a different
 rate than the thing it describes, and nobody finds out until an audit or an
 incident.
 
+That single weakness shows up as four separate symptoms, one per discipline:
+
+| Discipline | Symptom | Because |
+| --- | --- | --- |
+| **Risk** | Controls float | They are not anchored to design features |
+| **Cybersecurity** | Threats sit apart | They are not tied to behavior and interfaces |
+| **Verification** | Tests miss behavior | Wrong path, wrong load, wrong assumption |
+| **Implementation** | Architecture drifts | Code and architecture documents do not stay aligned |
+
+Teams usually treat these as four problems and staff them separately. They are
+one problem seen from four sides: nothing connects the design to the claims
+made about it.
+
 ## Code-first is fast, until assurance needs architecture
 
 The common alternative is to skip the model and let the implementation be the
@@ -49,8 +62,9 @@ argument that connects them.
 
 ## The conclusion
 
-The gap is not a missing document type and not a missing diagram. It is a
-missing **shared, computable model** that is cheap enough to adopt that a
-code-first team will actually keep it current.
+The gap is not a missing document type and not a missing diagram. What is
+missing is **a shared ontology and a low-cost architecture model** that
+connects design behavior, implementation, risk, cybersecurity, V&V, and
+evidence — and that is cheap enough for a code-first team to keep current.
 
 [Next: what a shared model has to provide →](shared-model.md)

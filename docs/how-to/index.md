@@ -15,6 +15,12 @@ Three routes to the same place. Pick the one that matches your toolchain.
 | Read and modify the library alongside your model | [Use a source checkout](install/source.md) |
 | Not sure which | [Installing MEMO](install/index.md) |
 
+## Adopt
+
+| Goal | Guide |
+| --- | --- |
+| Pilot MEMO on a real project without boiling the ocean | [Adopting MEMO](adopt.md) |
+
 ## Model
 
 | Goal | Guide |

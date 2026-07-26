@@ -2,84 +2,62 @@
 
 A medical device is approved on the strength of an argument: this is what the
 device is for, this is how it was designed, these are the ways it could harm
-someone, this is what we did about them, and here is the evidence. The argument
-is assembled from requirements, architecture descriptions, risk files,
+someone, this is what we did about them, here is the evidence. The argument is
+assembled from requirements, architecture descriptions, risk files,
 verification protocols, and test records.
 
 That argument is usually correct on the day it is written. The problem is what
 happens next.
 
-## The problem in one paragraph
+## The problem
 
-Design changes. Evidence does not follow it automatically. The links between
-the documents are recorded as identifiers, not as meaning, so nothing in the
-process can tell you which parts of the safety argument a design change just
-invalidated. Teams compensate with review effort, spreadsheets, and
-institutional memory — and the argument still drifts.
+Design changes. Evidence does not follow it automatically.
 
-## Five things that make this hard
+The documents are traced — every programme has a traceability matrix — but the
+links stop at identifiers. `SW-REQ-104 → TC-221` records that a requirement and
+a test are related. It does not record which claim the test supports, which
+design element implements the control, or which conditions the test actually
+exercised.
 
-<div class="memo-card-grid" markdown>
+So after a change, the matrix still resolves. Every identifier still points at
+something. Nothing in it can say that the link no longer means what it meant
+when it was written.
 
-<div class="memo-card memo-card-purple" markdown>
+**The problem is not too few documents. It is that the links cannot be
+checked.**
 
-### Devices got complex
+## Why it is hard to fix
 
-Connected, configurable, software-defined systems. Safety now depends on how
-the whole system behaves, not on any single requirement.
+Four forces hold the current situation in place, and none of them is
+carelessness:
 
-[Read more](evidence-drift.md)
+| | |
+| --- | --- |
+| **Devices got complex** | Connected, configurable, software-defined systems. Safety depends on how the whole system behaves, not on any single requirement text. [More →](evidence-drift.md) |
+| **The links carry no meaning** | Requirements, risk, and verification each form an island that references the design informally and formally not at all. [More →](links-without-meaning.md) |
+| **Medical standards are process-led** | Aerospace and automotive write architecture into their standards as the backbone of the safety case. Medical describes activities and records instead. [More →](industry-context.md) |
+| **Architecture becomes a picture** | Drawn for a review, exported to a document, approved — and unable to prove that what was documented is what was built. [More →](architecture-gap.md) |
 
-</div>
+What all four produce is the same failure, stated four ways: controls float
+free of design features, threats sit apart from behavior and interfaces, tests
+miss the behavior they were meant to exercise, and the architecture drifts away
+from the code.
 
-<div class="memo-card memo-card-blue" markdown>
+## What is missing
 
-### Links carry no meaning
-
-A requirement is "traced to" a test. The link does not say what claim the test
-supports, or which design element implements the control.
-
-[Read more](links-without-meaning.md)
-
-</div>
-
-<div class="memo-card memo-card-teal" markdown>
-
-### Other domains lean on architecture
-
-Aerospace and automotive write architecture into their standards as the
-backbone of the safety case. Medical has strong standards, less architecture.
-
-[Read more](industry-context.md)
-
-</div>
-
-<div class="memo-card memo-card-orange" markdown>
-
-### Architecture becomes a picture
-
-Useful for review, weak at proving that the documented architecture matches
-what was implemented.
-
-[Read more](architecture-gap.md)
-
-</div>
-
-</div>
-
-The fifth is the conclusion the others lead to: what is missing is not another
-document format or another traceability matrix, but **one shared model** that
-every discipline can use and a machine can check.
+Not another document format, and not another matrix. What is missing is a
+shared ontology and a low-cost architecture model that connects design
+behavior, implementation, risk, cybersecurity, V&V, and evidence — cheap enough
+that a code-first team will keep it current.
 
 [What a shared model has to provide →](shared-model.md)
 
 ## What MEMO does about it
 
-MEMO makes the argument itself the artifact. Each real thing — a hazard, a
-requirement, a component, a test — is recorded once, with a type. Each link
-between them carries a specific meaning: *mitigates*, *satisfied by*,
-*verified by*, *produces evidence*. Because the types and the links are
-computable, the questions a reviewer asks can be answered by the model rather
-than by a person's memory of it.
+MEMO makes the argument itself the artifact. Each real thing is recorded once,
+with a type. Each link carries a specific meaning: *mitigates*, *satisfied by*,
+*verified by*, *produces evidence*. Because both are computable, the questions
+a reviewer asks are answered by the model rather than by someone's memory of
+it — and the checks can run in CI.
 
-That is the whole idea. [What MEMO is →](../what/index.md)
+[What MEMO is →](../what/index.md) · [See one thread end to end →](../what/closed-thread.md)

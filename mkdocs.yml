@@ -84,6 +84,7 @@ nav:
       - The mental model: what/mental-model.md
       - Scenario-driven modelling: what/scenario-driven.md
       - Function-centered traceability: what/function-centered.md
+      - One closed thread: what/closed-thread.md
       - "How memo:: is organised": what/namespace-map.md
   - Concepts:
       - layers/index.md
@@ -118,6 +119,7 @@ nav:
           - Multidimensional Layers: examples/multidimensional-layers.md
   - How-to Guides:
       - how-to/index.md
+      - Adopting MEMO: how-to/adopt.md
       - Install:
           - how-to/install/index.md
           - With npm: how-to/install/npm.md
