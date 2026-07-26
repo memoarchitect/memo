@@ -10,14 +10,14 @@ The main navigation is divided by what the reader is trying to do:
 
 | Section | Purpose |
 | --- | --- |
-| **Home** | Introduces MEMO, the problem it addresses, and the shared-model solution. |
-| **Getting Started** | Explains how this documentation is organized and where to begin. |
-| **Tutorials** | Teaches MEMO through guided lessons and worked models. |
-| **How-to Guides** | Gives task-focused instructions for installation and modeling work. |
-| **Reference** | Documents the ontology modules, elements, relationships, enumerations, rules, and packaging. |
-| **Explanation** | Describes why MEMO is structured this way and how its concepts fit together. |
-| **Case Studies** | Shows complete device models and end-to-end assurance threads. |
-| **Contribute** | Explains how to propose and review changes to MEMO. |
+| **[Home](index.md)** | Introduces MEMO, the problem it addresses, and the shared-model solution. |
+| **[Getting Started](getting-started.md)** | Explains how this documentation is organized and where to begin. |
+| **[Explanation](why/index.md)** | Describes why MEMO is structured this way and how its concepts fit together. |
+| **[Reference](reference/index.md)** | Documents the ontology modules, elements, relationships, enumerations, rules, and packaging. |
+| **[How-to Guides](how-to/index.md)** | Gives task-focused instructions for installation and modeling work. |
+| **[Tutorials](examples/index.md)** | Teaches MEMO through guided lessons and worked models. |
+| **[Case Studies](case-studies/index.md)** | Shows complete device models and end-to-end assurance threads. |
+| **[Contribute](contributing.md)** | Explains how to propose and review changes to MEMO. |
 
 The sections serve different purposes:
 
