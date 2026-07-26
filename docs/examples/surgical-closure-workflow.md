@@ -108,3 +108,24 @@ those elements should be added only when there is a real review question.
 
 Open the [source model](https://github.com/memoarchitect/memo/tree/main/examples/surgical-closure-workflow)
 to inspect the full workflow and both scenario paths.
+
+<!-- memo:reinforce -->
+
+## Where this sits in MEMO
+
+Every tutorial is one slice of the same structure. This example populates these layers:
+
+| Layer | Element types it uses | Reference |
+| --- | --- | --- |
+| Operational | `ClinicalTaskStep`, `OperationalActivity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `UserTask`, `WorkflowStep` | [Operational](../reference/elements/operational.md) |
+| Clinical and products | `ClinicalProcedure`, `ClinicalTechnique` | [Clinical and products](../reference/elements/clinical.md) |
+| Assurance | `Need` | [Assurance](../reference/elements/assurance.md) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+
+**Typed links it uses:** `Composes`, `Initiates`, `Motivates`, `Realizes`, `StepPrecedes`, `Supports`, `UsesTechnique` — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+
+**Layers it does not populate:** functional, logical, implementation and realization. That is deliberate rather than incomplete — `layersOptionalRule` says a model fills only the layers its device needs. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+
+**Narrative treatment:** [Context and Use](../layers/context.md) · [Medical Products and Identity](../layers/medical-products.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
+
+**Source model:** [`examples/surgical-closure-workflow`](https://github.com/memoarchitect/memo/tree/main/examples/surgical-closure-workflow)
