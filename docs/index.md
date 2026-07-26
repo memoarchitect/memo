@@ -4,65 +4,91 @@
 
 # MEMO
 
-A ready-made vocabulary for medical-device models. Instead of inventing new
-terms for hazards, requirements, components, and tests on every programme, a
-team uses the same definitions — and a SysML validator can check whether the
-recorded safety argument is complete and connected.
+MEMO is a SysML v2-native ontology for medical-device engineering. It connects
+clinical intent, behavior, architecture, requirements, risk controls,
+verification, and evidence in one semantic model — and defines the rules that
+make those connections checkable.
 
 </div>
 
-## A short story
+## The problem: assurance is split across artifacts
 
-A nurse sets up an infusion pump. The patient presses a button asking for more
-pain relief. The pump refuses, because a lockout timer is still running.
+A medical device is reviewed through many different artifacts:
 
-That refusal is a safety feature, and four teams have recorded part of it:
+- **Clinical and systems engineering** describe the intended use and behavior.
+- **Architecture teams** describe the functions, components, and interfaces.
+- **Risk and cybersecurity** identify hazards, threats, and controls.
+- **Verification** produces tests, results, and evidence.
 
-- **Risk** recorded the overdose hazard.
-- **Requirements** wrote the six-minute lockout rule.
-- **Software** built the component that enforces the rule.
-- **V&V** tested the six-minute boundary.
-
-Six months later, a design review changes the lockout from six minutes to ten.
-The software is updated.
-
-**What else must be reviewed?**
-
-Everyone's traceability matrix still looks fine. `HZ-001` still points at
-`REQ-025`, which still points at the test. Every link resolves. Not one of them
-can tell you whether the test still tests the right thing.
-
-That is the problem MEMO exists to fix.
-
-## Why the links don't help
-
-A normal trace link is just two IDs sitting next to each other:
+Those artifacts may be traced, but most trace links say only that two IDs are
+related. They do not record the engineering claim: which behavior creates the
+risk, which design element implements the control, or which conditions the test
+actually exercised.
 
 ![A conventional trace joins a hazard, requirement, and test with generic related-to links. Every link still resolves after the lockout interval changes.](assets/home-generic-trace.svg)
 
-The link says *these two things are connected*. It doesn't say how, so it can't
-notice when the connection stops being true. Change the design and the link
-survives unharmed, because nothing in it ever depended on the design.
+When the design changes, every link can still resolve while the evidence behind
+it has become stale. That is why risk controls float away from the design,
+tests miss changed behavior, and architecture descriptions drift from the
+implementation.
 
-You see the results everywhere:
+## What MEMO contributes
 
-- Risk controls named in a risk file, but not attached to anything in the design.
-- Threats listed separately from the interfaces they actually threaten.
-- Tests that pass without ever exercising the failure they were written for.
-- Architecture diagrams that quietly stop matching the code.
+SysML v2 supplies the modeling language. MEMO specializes it with the medical
+engineering meaning needed to build and review a safety argument.
 
-These look like four different problems. They're one problem: **nothing joins
-the design to the claims made about it.**
+<div class="memo-card-grid" markdown>
 
-## What MEMO does instead
+<div class="memo-card memo-card-purple" markdown>
 
-MEMO gives every element a type and every link a meaning:
+### Domain model
+
+First-class concepts for clinical use, medical products, requirements, risks,
+controls, architecture, verification, and evidence.
+
+</div>
+
+<div class="memo-card memo-card-blue" markdown>
+
+### Architecture structure
+
+Layers that carry a device from context and scenarios through functions,
+logical architecture, and implementation.
+
+</div>
+
+<div class="memo-card memo-card-teal" markdown>
+
+### Semantic relationships
+
+Directed, typed claims with legal ends: a requirement is satisfied by a design
+element; a control mitigates a risk; a verification case produces evidence.
+
+</div>
+
+<div class="memo-card memo-card-orange" markdown>
+
+### Closure rules
+
+Model constraints for review questions such as whether every hazard is
+controlled and every control is verified.
+
+</div>
+
+</div>
+
+MEMO is therefore more than a vocabulary. It is an importable model library:
+domain definitions, architecture structure, relationship semantics, and
+computable rules packaged together as SysML v2 source.
+
+## One connected assurance model
 
 ![A semantic model records that the overdose hazard drives the lockout requirement, the infusion manager satisfies that requirement, the lockout control mitigates the hazard, and verification produces evidence.](assets/home-semantic-thread.svg)
 
-Now the chain says something. `REQ-025` isn't just "related to" the hazard — it
-records that it **exists because of** it. So when `HZ-001` changes, you can ask
-the model what to re-review, and get an answer instead of a search.
+Here the links carry claims. The requirement exists because of a known hazard;
+the component satisfies that requirement; the control mitigates the hazard;
+and the verification result belongs to a specific evidence baseline. A change
+can therefore follow the model's meaning instead of stopping at a list of IDs.
 
 The library also carries rules that a tool can check:
 
