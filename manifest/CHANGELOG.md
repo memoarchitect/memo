@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.6.1 - 2026-07-27
+
+- Moved complete project templates under `templates/` and declared them in
+  `memo.manifest.yaml`.
+- Made the default template extend `@memoarchitect/methodology-default` and
+  create architecture, assurance, and artifact source areas.
+- Removed the device-archetype startup catalog used by the CLI.
+
 ## 0.6.0 - 2026-07-26
 
 - Moved clinical-procedure and medical-product vocabulary from `src/` to

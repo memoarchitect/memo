@@ -1,14 +1,12 @@
 # Package Version
 
 - Package: Medical Device SysML v2 Package
-- Version: **0.6.0**
-- Release type: namespace and documentation reorganization (minor)
-- Release date: 2026-07-26
+- Version: **0.6.1**
+- Release type: ontology-owned project templates (patch)
+- Release date: 2026-07-27
 
 This package uses a **single version for the entire release**.
 
-The version of record is declared in each project's `.project.json`
-(`memo-ontology`, `memo-methodology-default`) and pinned in `sysand-lock.toml` —
-that is the version SysML v2 tools (e.g. `sysand`) query to resolve and include
-packages. This file and the changelog are human-readable notes that track it;
-they are not consumed by the toolchain.
+The version of record is declared in `package.json` and each logical package's
+`memo.package.yaml`, and is pinned in `sysand-lock.toml`. This file and the
+changelog are human-readable notes; they are not consumed by the toolchain.

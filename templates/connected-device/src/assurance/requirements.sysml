@@ -1,7 +1,6 @@
-package memo_connected_device_starter {
+package connected_device_assurance {
     private import memo::*;
 
-    part connectedDevice : PhysicalAssembly;
     requirement connectivityRequirement : Requirement {
         attribute redefines statement = "Define connectivity and cybersecurity boundaries";
     }

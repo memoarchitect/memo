@@ -1,6 +1,6 @@
 {
   "name": "@memoarchitect/ontology",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "packageManager": "pnpm@9.15.0",
   "description": "MEMO \u2014 Medical Engineering Modelling Ontology. Pure SysML v2 medical-device ontology with native constraints, portable to any conformant SysML v2 tool (SysIDE, SysON, sysand).",
   "scripts": {
@@ -39,7 +39,7 @@
     "./src/*": "./src/*",
     "./profile/*": "./profile/*",
     "./methodologies/*": "./methodologies/*",
-    "./templates/*": "./template/*",
+    "./templates/*": "./templates/*",
     "./examples/*": "./examples/*"
   },
   "files": [
@@ -49,8 +49,6 @@
     "ontology/memo.package.yaml",
     "ontology/memo.rendering.yaml",
     "profile/memo.package.yaml",
-    "profile/archetypes.yaml",
-    "profile/templates/",
     "methodologies/default/memo.package.yaml",
     "methodologies/gpca/memo.package.yaml",
     "src/assurance/",
@@ -70,7 +68,7 @@
     "src/rules/",
     "src/viewpoints/",
     "src/memo_namespaces.sysml",
-    "template/",
+    "templates/",
     "examples/"
   ]
 }

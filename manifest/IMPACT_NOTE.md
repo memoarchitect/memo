@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## Release 0.6.1
+
+`memo init` now selects complete ontology-owned templates. Projects created
+without a selection use the `default` template and the complete default MEMO
+methodology. The former device-archetype selection is removed.
+
 ## Release 0.6.0
 
 The ontology source tree now follows the nested public namespace structure.

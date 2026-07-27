@@ -16,17 +16,15 @@ memo/
 │   ├── assurance/         # vertical assurance-discipline definitions
 │   ├── rules/             # closure, coverage, crosslayer, lifecycle, quantitative
 │   ├── viewpoints/        # viewpoint and view definitions
-│   ├── methodology/       # profiles, patterns, gates, workflow, archetypes
+│   ├── methodology/       # profiles, patterns, gates, workflow
 │   ├── compliance/        # regulated artifact and lifecycle concepts
 │   └── memo_namespaces.sysml          # public memo import and alias map
 ├── ontology/              # logical @memoarchitect/ontology descriptor
 ├── profile/               # logical @memoarchitect/medical-modeling-profile
-│   ├── archetypes.yaml    # archetype catalog used by `memo init`
-│   └── templates/         # per-archetype starter templates
 ├── methodologies/
 │   ├── default/           # logical @memoarchitect/methodology-default
 │   └── gpca/              # logical @memoarchitect/methodology-gpca
-├── template/              # complete starter project copied by `memo init`
+├── templates/             # complete starter projects selected by `memo init --template`
 └── examples/
     ├── gpca-pump/         # the complete reference model — teaching material, not a scaffold
     └── */                 # focused, domain-specific examples
@@ -51,20 +49,22 @@ packages:
   "@memoarchitect/methodology-default": ./methodologies/default
   "@memoarchitect/methodology-gpca": ./methodologies/gpca
 init:
-  defaultExtends: "@memoarchitect/medical-modeling-profile"
+  defaultExtends: "@memoarchitect/methodology-default"
   rootImport: "memo"
-  template: ./template
-  archetypes: ./profile/archetypes.yaml
+  defaultTemplate: default
+templates:
+  default: ./templates/default
+  samd: ./templates/samd
 examples:
   gpca: ./examples/gpca-pump
   standard-sysml-diagrams: ./examples/sysml-diagram-samples
 ```
 
-When a project declares `extends: "@memoarchitect/medical-modeling-profile"`,
+When a default project declares `extends: "@memoarchitect/methodology-default"`,
 the tools resolve the installed ontology npm package, read this manifest, and
-map the logical name to its subpath. `memo init` reads the same manifest to
-copy `template/`, substitute the project name, and write `memo.lock.yaml`
-pinning the resolved ontology identity and version.
+map the logical name to its subpath. `memo init --list` shows the manifest's
+templates and examples. `memo init --template <id>` copies the selected
+template, substitutes the project name, and writes `memo.lock.yaml`.
 
 ## How the three packages relate
 
@@ -85,7 +85,8 @@ flowchart LR
 
 ## Guarantees kept by CI
 
-- `template/` (after name substitution) and `examples/gpca-pump` must pass
+- Every directory under `templates/` (after name substitution) and
+  `examples/gpca-pump` must pass
   `memo validate`.
 - The packed tarball contains content and the manifest only — no executable
   code (see `files:` in `package.json`).

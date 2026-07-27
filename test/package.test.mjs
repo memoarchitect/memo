@@ -53,10 +53,14 @@ test('manifest declares the four logical packages and content-owned init values'
     '"@memoarchitect/medical-modeling-profile": ./profile',
     '"@memoarchitect/methodology-default": ./methodologies/default',
     '"@memoarchitect/methodology-gpca": ./methodologies/gpca',
-    'defaultExtends: "@memoarchitect/medical-modeling-profile"',
+    'defaultExtends: "@memoarchitect/methodology-default"',
     'rootImport: "memo"',
-    'template: ./template',
-    'archetypes: ./profile/archetypes.yaml',
+    'defaultTemplate: default',
+    'default: ./templates/default',
+    'samd: ./templates/samd',
+    'connected-device: ./templates/connected-device',
+    'monitoring-device: ./templates/monitoring-device',
+    'infusion-pump: ./templates/infusion-pump',
     'gpca: ./examples/gpca-pump',
     'standard-sysml-diagrams: ./examples/sysml-diagram-samples',
     'extension-template: ./examples/extensions/template',
@@ -120,21 +124,15 @@ test('content uses canonical @memoarchitect names and no packages/ mirror exists
   }
 });
 
-test('template is a complete source project and uses the public memo import', () => {
-  assert.match(read('template', 'memo.package.yaml'), /name: "{{name}}"/);
-  assert.match(read('template', 'memo.package.yaml'), /extends: "@memoarchitect\/medical-modeling-profile"/);
-  assert.match(read('template', 'src', 'catalog', 'starter.sysml'), /import memo::\*/);
-  assert.equal(existsSync(join(root, 'template', 'src', 'views', '.gitkeep')), true);
-  assert.equal(existsSync(join(root, 'template', 'src', 'documents', '.gitkeep')), true);
-});
-
-test('archetype catalog has a starter template for every non-blank fallback', () => {
-  const catalog = read('profile', 'archetypes.yaml');
-  const ids = [...catalog.matchAll(/^  - id: (.+)$/gm)].map((match) => match[1]);
-  assert.deepEqual(ids, ['samd', 'connected', 'monitoring', 'infusion_pump', 'blank']);
-  for (const dir of ['samd', 'connected-device', 'monitoring-device', 'infusion-pump']) {
-    const starter = read('profile', 'templates', dir, 'starter.sysml');
-    assert.match(starter, /import memo::\*/);
+test('manifest templates are complete source projects using the public memo import', () => {
+  for (const dir of ['default', 'samd', 'connected-device', 'monitoring-device', 'infusion-pump']) {
+    assert.match(read('templates', dir, 'memo.package.yaml'), /name: "{{name}}"/);
+    assert.match(read('templates', dir, 'memo.package.yaml'), /extends: "@memoarchitect\/methodology-default"/);
+    for (const file of [
+      ['architecture', 'system.sysml'],
+      ['assurance', 'requirements.sysml'],
+      ['artifacts', 'artifacts.sysml'],
+    ]) assert.match(read('templates', dir, 'src', ...file), /import memo::\*/);
   }
 });
 
@@ -394,12 +392,16 @@ test('npm pack includes all content and no JavaScript', () => {
   for (const expected of [
     'memo.manifest.yaml',
     'ontology/memo.package.yaml',
-    'profile/archetypes.yaml',
     'methodologies/default/memo.package.yaml',
     'methodologies/gpca/memo.package.yaml',
-    'template/memo.package.yaml',
-    'template/src/views/.gitkeep',
-    'template/src/documents/.gitkeep',
+    'templates/default/memo.package.yaml',
+    'templates/default/src/architecture/system.sysml',
+    'templates/default/src/assurance/requirements.sysml',
+    'templates/default/src/artifacts/artifacts.sysml',
+    'templates/samd/memo.package.yaml',
+    'templates/connected-device/memo.package.yaml',
+    'templates/monitoring-device/memo.package.yaml',
+    'templates/infusion-pump/memo.package.yaml',
     'examples/gpca-pump/memo.config.yaml',
     'examples/sysml-diagram-samples/README.md',
     'src/memo_namespaces.sysml',
