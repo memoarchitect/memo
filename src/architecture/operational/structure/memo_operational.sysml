@@ -7,6 +7,11 @@ package memo_architecture_operational_structure {
     private import memo_architecture_operational_activities::*;
     // OperationalActivity now lives in memo_architecture_operational_activities (action def) and
     // Operational scenarios are defined in memo_architecture_operational_scenarios.
+    part def Mission specializes DocumentedElement {
+        attribute missionKind : String;
+        attribute successCriteria : String;
+        attribute operationalContext : String;
+    }
     part def OperationalEntity specializes ArchitectureElement {
         attribute entityKind : OperationalEntityKind;
         attribute operationalDomain : String;

@@ -53,7 +53,7 @@ package memo_examples_reusable_instrument {
     connection : StepPrecedes connect predecessor ::> wsInspect to successor ::> wsSterilize;
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfReprocess to supported ::> ucSterilize; }
 
-    part scNominalCycle : OperationalScenario {
+    part scNominalCycle : OperativeScenario {
         attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
