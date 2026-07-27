@@ -300,15 +300,15 @@ Unlike the focused tutorials, this model is populated all the way through. It is
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `ArchitectureDescription`, `OperationalActivity`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `WorkflowStep` | [Operational](../reference/elements/operational.md) |
-| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `FunctionalFlowStep`, `FunctionalScenario`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../reference/elements/functional.md) |
-| Logical | `ComponentExchange`, `Interface`, `InterfaceItem`, `LogicalComponent`, `SoftwarePort` | [Logical](../reference/elements/logical.md) |
-| Implementation and realization | `HardwareAssembly`, `PhysicalPort`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../reference/elements/implementation.md) |
-| Assurance | `Benefit`, `CyberHazard`, `CyberMitigation`, `CyberRisk`, `CybersecurityAsset`, `DetectionMethod`, `Evidence`, `FMEAAction`, `FMEAWorksheet`, `FailureCause` … +32 | [Assurance](../reference/elements/assurance.md) |
-| Views and methodology | `MemoCybersecurityAssessmentView`, `MemoCybersecurityThreatModelView`, `MemoDiagramView`, `MemoDocumentView`, `MemoUsabilityEngineeringView`, `MethodologyDefinition`, `ResolvedMethodology` | [Views and methodology](../reference/elements/views.md) |
-| Core | `Citation`, `MethodologyScope` | [Core](../reference/elements/core.md) |
+| Operational | `ArchitectureDescription`, `OperationalActivity`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `WorkflowStep` | [Operational](../reference/areas/architecture.md#operational) |
+| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `FunctionalFlowStep`, `FunctionalScenario`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../reference/areas/architecture.md#functional) |
+| Logical | `ComponentExchange`, `Interface`, `InterfaceItem`, `LogicalComponent`, `SoftwarePort` | [Logical](../reference/areas/architecture.md#logical) |
+| Implementation and realization | `HardwareAssembly`, `PhysicalPort`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Assurance | `Benefit`, `CyberHazard`, `CyberMitigation`, `CyberRisk`, `CybersecurityAsset`, `DetectionMethod`, `Evidence`, `FMEAAction`, `FMEAWorksheet`, `FailureCause` … +32 | [Assurance](../reference/areas/assurance.md) |
+| Views and methodology | `MemoCybersecurityAssessmentView`, `MemoCybersecurityThreatModelView`, `MemoDiagramView`, `MemoDocumentView`, `MemoUsabilityEngineeringView`, `MethodologyDefinition`, `ResolvedMethodology` | [Views and methodology](../reference/areas/viewpoints.md) |
+| Core | `Citation`, `MethodologyScope` | [Core](../reference/areas/core.md) |
 
-**Typed links it uses:** `AllocatedTo`, `AnalyzedBy`, `AppliesInContext`, `AssessedAgainst`, `BindsToInterface`, `Causes`, `Composes`, `ConnectsPhysically`, `ContainsEvent`, `CrossesTrustBoundary`, `DeploysTo`, `DerivesCyberRequirement` … +30 — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+**Typed links it uses:** `AllocatedTo`, `AnalyzedBy`, `AppliesInContext`, `AssessedAgainst`, `BindsToInterface`, `Causes`, `Composes`, `ConnectsPhysically`, `ContainsEvent`, `CrossesTrustBoundary`, `DeploysTo`, `DerivesCyberRequirement` … +30 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 

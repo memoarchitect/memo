@@ -58,7 +58,7 @@ Pass an archetype to start from a device shape rather than a blank model.
 
 ```sysml
 package import_check {
-    private import memo_medical_device_library::*;
+    private import memo::*;
 
     part reviewer : User;
 }

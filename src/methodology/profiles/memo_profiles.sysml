@@ -1,0 +1,210 @@
+package memo_methodology_profiles {
+    private import ScalarValues::*;
+
+    private import memo_methodology_core::*;
+    private import memo_methodology_rules::*;
+    private import memo_methodology_patterns::*;
+    private import memo_methodology_workflow::*;
+    private import memo_methodology_gates::*;
+    private import memo_core_enumerations::*;
+    private import memo_core_methodology_scope::*;
+
+    part mdCoreLibrary : MethodologyLibrary {
+        attribute :>> id = "METHLIB-001";
+        attribute :>> name = "MedicalDeviceMethodologyLibrary";
+        attribute :>> version = "0.1";
+        attribute :>> domain = "medical device modeling";
+        attribute :>> description = "Methodology layer for selecting, restricting, sequencing, tailoring, and lightly extending use of the medical-device ontology.";
+    }
+
+    part mdLightDefaultDefinition : MethodologyDefinition {
+        attribute :>> id = "METH-001";
+        attribute :>> name = "MedicalDeviceLightDefault";
+        attribute :>> version = "0.1";
+        attribute :>> domain = "medical device modeling";
+        attribute :>> description = "Light default methodology around the ontology for smaller or early project use.";
+        attribute :>> baseMethodName = "";
+        attribute :>> includedLayer = "memo::architecture::operational";
+        attribute :>> includedLayer = "memo::architecture::functional";
+        attribute :>> includedLayer = "memo::architecture::logical";
+        attribute :>> includedModule = "memo::assurance::requirements";
+        attribute :>> includedModule = "memo::assurance::safety_risk";
+        attribute :>> includedModule = "memo::assurance::verification_validation";
+    }
+
+    part mdLightDefaultResolved : ResolvedMethodology {
+        attribute :>> id = "RMETH-001";
+        attribute :>> name = "MedicalDeviceLightDefaultResolved";
+        attribute :>> version = "0.1";
+        attribute :>> includedLayer = "memo::architecture::operational";
+        attribute :>> includedLayer = "memo::architecture::functional";
+        attribute :>> includedLayer = "memo::architecture::logical";
+        attribute :>> includedModule = "memo::assurance::requirements";
+        attribute :>> includedModule = "memo::assurance::safety_risk";
+        attribute :>> includedModule = "memo::assurance::verification_validation";
+    }
+
+    part useRiskAndResidualRule : ElementUsageRule {
+        attribute :>> id = "RULE-001";
+        attribute :>> name = "UseRiskAndResidualRisk";
+        attribute :>> elementTypeName = "Risk,ResidualRisk,RiskMatrix";
+        attribute :>> strength = RuleStrengthKind::recommended;
+        attribute :>> rationaleText = "Even a light methodology should distinguish pre- and post-mitigation risk and assess against a matrix.";
+    }
+
+    part requireVerifiedByRule : RelationUsageRule {
+        attribute :>> id = "RULE-002";
+        attribute :>> name = "VerifiedBysRequired";
+        attribute :>> relationTypeName = "VerifiedBy";
+        attribute :>> strength = RuleStrengthKind::required;
+        attribute :>> rationaleText = "Safety-relevant requirements and controls shall trace to verification.";
+    }
+
+    part lightRiskPattern : ModelingPattern {
+        attribute :>> id = "PAT-001";
+        attribute :>> name = "LightRiskBeforeAfterPattern";
+        attribute :>> intent = "Model hazard chain, before/after mitigation risk, controls, and residual evaluation in a lightweight way.";
+        attribute :>> stage = WorkflowStageKind::risk;
+        attribute :>> strength = RuleStrengthKind::recommended;
+    }
+
+    part lightTracePattern : ModelingPattern {
+        attribute :>> id = "PAT-002";
+        attribute :>> name = "CoreTracePattern";
+        attribute :>> intent = "Need or risk to requirement, requirement to architecture, requirement/control to verification.";
+        attribute :>> stage = WorkflowStageKind::requirements;
+        attribute :>> strength = RuleStrengthKind::required;
+    }
+
+    part stepRequirements : WorkflowStep {
+        attribute :>> id = "STEP-001";
+        attribute :>> name = "CaptureRequirements";
+        attribute :>> stepOrder = 1;
+        attribute :>> stage = WorkflowStageKind::requirements;
+        attribute :>> objectiveDescription = "Capture stakeholder needs and derive requirements.";
+        attribute :>> entryCriteria = "Intended use and actors understood.";
+        attribute :>> exitCriteria = "Initial requirement set exists.";
+    }
+
+    part stepArchitecture : WorkflowStep {
+        attribute :>> id = "STEP-002";
+        attribute :>> name = "DefineArchitecture";
+        attribute :>> stepOrder = 2;
+        attribute :>> stage = WorkflowStageKind::architecture;
+        attribute :>> objectiveDescription = "Define key software and hardware architecture elements and interfaces.";
+        attribute :>> entryCriteria = "Initial requirements exist.";
+        attribute :>> exitCriteria = "Core architecture and interfaces exist.";
+    }
+
+    part stepRisk : WorkflowStep {
+        attribute :>> id = "STEP-003";
+        attribute :>> name = "PerformRiskAnalysis";
+        attribute :>> stepOrder = 3;
+        attribute :>> stage = WorkflowStageKind::risk;
+        attribute :>> objectiveDescription = "Create core risk chain and controls.";
+        attribute :>> entryCriteria = "Initial requirements and key behavior exist.";
+        attribute :>> exitCriteria = "Risk and control model exists.";
+    }
+
+    part stepVerification : WorkflowStep {
+        attribute :>> id = "STEP-004";
+        attribute :>> name = "PlanVerification";
+        attribute :>> stepOrder = 4;
+        attribute :>> stage = WorkflowStageKind::verificationStage;
+        attribute :>> objectiveDescription = "Define verification and evidence expectations.";
+        attribute :>> entryCriteria = "Requirements and controls exist.";
+        attribute :>> exitCriteria = "Verification cases and evidence targets exist.";
+    }
+
+    part gateLightComplete : QualityGate {
+        attribute :>> id = "GATE-001";
+        attribute :>> name = "LightMethodReady";
+        attribute :>> gateStage = WorkflowStageKind::verificationStage;
+        attribute :>> passCriteria = "Core traceability, risk, verification, and RMF view support are present.";
+    }
+
+    part mdCoverageScope : MethodologyScope {
+        attribute :>> id = "SCOPE-COV-001";
+        attribute :>> name = "MedicalDeviceCoverageScope";
+        attribute :>> scopeName = "coverage";
+
+        attribute :>> includedArchLayer = "memo::architecture::operational";
+        attribute :>> includedArchLayer = "memo::architecture::functional";
+        attribute :>> includedArchLayer = "memo::architecture::logical";
+        attribute :>> includedArchLayer = "memo::architecture::implementation";
+        attribute :>> includedArchLayer = "memo::architecture::realization";
+        attribute :>> includedModule = "memo::assurance::requirements";
+        attribute :>> includedModule = "memo::assurance::safety_risk";
+        attribute :>> includedModule = "memo::assurance::cybersecurity";
+        attribute :>> includedModule = "memo::assurance::human_factors";
+        attribute :>> includedModule = "memo::assurance::verification_validation";
+        attribute :>> description = "Comprehensive default MEMO layer and module selection.";
+    }
+
+    part gpcaProjectBinding : ProjectMethodBinding {
+        attribute :>> id = "PMB-001";
+        attribute :>> name = "GPCAProjectMethodBinding";
+        attribute :>> projectName = "GPCA";
+        attribute :>> methodologyName = "MedicalDeviceLightDefault";
+    }
+
+    part rmpDoc : DhfDocumentBinding {
+        attribute :>> id = "DHF-001";
+        attribute :>> name = "RiskManagementPlan";
+        attribute :>> documentTitle = "Risk Management Plan";
+        attribute :>> groupLabel = "Risk Management";
+        attribute :>> templateId = "iso-14971/rmp";
+        attribute :>> viewKind = "RMF";
+        attribute :>> regulatoryReference = "ISO 14971";
+        attribute :>> lifecycleStage = WorkflowStageKind::risk;
+        attribute :>> required = true;
+    }
+
+    part harDoc : DhfDocumentBinding {
+        attribute :>> id = "DHF-002";
+        attribute :>> name = "HazardAnalysisReport";
+        attribute :>> documentTitle = "Hazard Analysis Report";
+        attribute :>> groupLabel = "Risk Management";
+        attribute :>> templateId = "iso-14971/har";
+        attribute :>> viewKind = "RMF";
+        attribute :>> regulatoryReference = "ISO 14971";
+        attribute :>> lifecycleStage = WorkflowStageKind::risk;
+        attribute :>> required = true;
+    }
+
+    part sadDoc : DhfDocumentBinding {
+        attribute :>> id = "DHF-003";
+        attribute :>> name = "SoftwareArchitectureDescription";
+        attribute :>> documentTitle = "Software Architecture Description";
+        attribute :>> groupLabel = "Software";
+        attribute :>> templateId = "iec-62304/sad";
+        attribute :>> viewKind = "ArchitectureDescription";
+        attribute :>> regulatoryReference = "IEC 62304";
+        attribute :>> lifecycleStage = WorkflowStageKind::architecture;
+        attribute :>> required = true;
+    }
+
+    part threatModelDoc : DhfDocumentBinding {
+        attribute :>> id = "DHF-004";
+        attribute :>> name = "CybersecurityThreatModel";
+        attribute :>> documentTitle = "Threat Model";
+        attribute :>> groupLabel = "Cybersecurity";
+        attribute :>> templateId = "fda-cybersecurity/threat-model";
+        attribute :>> viewKind = "ThreatModel";
+        attribute :>> regulatoryReference = "FDA Cybersecurity Guidance";
+        attribute :>> lifecycleStage = WorkflowStageKind::risk;
+        attribute :>> required = true;
+    }
+
+    part vvPlanDoc : DhfDocumentBinding {
+        attribute :>> id = "DHF-005";
+        attribute :>> name = "VerificationValidationPlan";
+        attribute :>> documentTitle = "V&V Plan";
+        attribute :>> groupLabel = "Verification & Validation";
+        attribute :>> templateId = "21cfr820/vv-plan";
+        attribute :>> viewKind = "VV";
+        attribute :>> regulatoryReference = "21 CFR 820.30";
+        attribute :>> lifecycleStage = WorkflowStageKind::verificationStage;
+        attribute :>> required = true;
+    }
+}

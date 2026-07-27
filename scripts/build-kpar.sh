@@ -47,11 +47,11 @@ for i in "${!PROJECTS[@]}"; do
 import os, sys
 root = sys.argv[1]
 project = sys.argv[2]
-for r, ds, fs in os.walk(root):
+source_root = os.path.join(root, 'src') if project == '.' else root
+for r, ds, fs in os.walk(source_root):
     ar = os.path.abspath(r)
     rel_dir = os.path.relpath(ar, root)
-    excluded = ('src/methodology', 'src/examples')
-    if project == '.' and any(rel_dir == path or rel_dir.startswith(path + os.sep) for path in excluded):
+    if project == '.' and (rel_dir == 'src/methodology' or rel_dir.startswith('src/methodology' + os.sep)):
         continue
     ds[:] = [d for d in ds if d not in {'.git', 'node_modules', 'output', '.turbo'}]
     for f in fs:
@@ -95,8 +95,10 @@ PY
     fi
     nsysml="$(unzip -l "$kpar" | grep -c '\.sysml' || true)"
     echo "  ✔ $(basename "$kpar") built — $nsysml source files, zero errors"
-    mkdir -p "$dir/output"
-    cp "$kpar" "$dir/output/"
+    # Archives are build products, so keep them outside every source tree.
+    artifact_dir="$REPO_ROOT/output/kpar/$project_name"
+    mkdir -p "$artifact_dir"
+    cp "$kpar" "$artifact_dir/"
   ) || fail=1
 
   rm -f "$files_file"

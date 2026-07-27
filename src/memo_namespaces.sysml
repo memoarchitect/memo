@@ -1,19 +1,89 @@
 package memo {
-    alias activities for memo_namespace_activities;
+    private import ScalarValues::*;
+
+    public import memo_core_enumerations::*;
+    public import memo_core_dimensions::*;
+    public import memo_core_terminology::*;
+    public import memo_core_common::*;
+    public import memo_core_relationships::*;
+
+    public import memo_context_actors::*;
+    public import memo_context_stakeholders::*;
+    public import memo_context_use_context::*;
+    public import memo_assurance_needs::*;
+    public import memo_use_cases::*;
+    public import memo_activities::*;
+    public import memo_workflows::*;
+    public import memo_scenarios::*;
+    public import memo_assurance_human_factors::*;
+    public import memo_architecture_ui::*;
+    public import memo_architecture_operational::*;
+    public import memo_assurance_requirements::*;
+    public import memo_architecture_functions::*;
+    public import memo_architecture_logical_structure::*;
+    public import memo_architecture_interfaces::*;
+    public import memo_architecture_behavior::*;
+    public import memo_architecture_software_structure::*;
+    public import memo_architecture_software_runtime::*;
+    public import memo_architecture_deployment::*;
+    public import memo_architecture_hardware_structure::*;
+    public import memo_architecture_constraints::*;
+    public import memo_assurance_safety_risk::*;
+    public import memo_assurance_cybersecurity::*;
+    public import memo_assurance_verification::*;
+    public import memo_architecture_physical::*;
+    public import memo_assurance_safety_analysis::*;
+    public import memo_architecture_decisions::*;
+
+    public import memo_viewpoints_definitions::*;
+    public import memo_viewpoints_catalog::*;
+    public import memo_viewpoints_context_context_viewpoint::*;
+    public import memo_viewpoints_context_system_context_view::*;
+    public import memo_viewpoints_operational_operational_viewpoint::*;
+    public import memo_viewpoints_operational_use_case_view::*;
+    public import memo_viewpoints_requirements_requirements_viewpoint::*;
+    public import memo_viewpoints_requirements_requirements_traceability_view::*;
+    public import memo_viewpoints_functional_functional_viewpoint::*;
+    public import memo_viewpoints_functional_system_functional_tree_view::*;
+    public import memo_viewpoints_functional_function_allocation_view::*;
+    public import memo_viewpoints_logical_logical_viewpoint::*;
+    public import memo_viewpoints_logical_logical_architecture_view::*;
+    public import memo_viewpoints_software_software_viewpoint::*;
+    public import memo_viewpoints_software_software_architecture_view::*;
+    public import memo_viewpoints_physical_physical_viewpoint::*;
+    public import memo_viewpoints_physical_physical_bom_view::*;
+    public import memo_viewpoints_physical_network_topology_view::*;
+    public import memo_viewpoints_risk_risk_viewpoint::*;
+    public import memo_viewpoints_risk_risk_chain_view::*;
+    public import memo_viewpoints_verification_verification_viewpoint::*;
+    public import memo_viewpoints_verification_verification_coverage_view::*;
+    public import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
+    public import memo_viewpoints_cybersecurity_threat_model_view::*;
+    public import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
+    public import memo_viewpoints_clinical_clinical_viewpoint::*;
+    public import memo_viewpoints_clinical_clinical_evidence_view::*;
+    public import memo_viewpoints_usability_usability_viewpoint::*;
+    public import memo_viewpoints_usability_usability_engineering_view::*;
+
+    public import memo_artifacts_definitions::*;
+    public import memo_compliance_artifacts::*;
+    public import memo_compliance_change::*;
+    public import memo_compliance_postmarket::*;
+
+    public import memo_methodology_core::*;
+    public import memo_methodology_rules::*;
+    public import memo_methodology_patterns::*;
+    public import memo_methodology_workflow::*;
+    public import memo_methodology_gates::*;
+    public import memo_methodology_profiles::*;
+
     alias architecture for memo_namespace_architecture;
     alias assurance for memo_namespace_assurance;
-    alias clinical_procedures for memo_namespace_clinical_procedures;
-    alias context for memo_namespace_context;
     alias artifacts for memo_namespace_artifacts;
     alias compliance for memo_namespace_compliance;
     alias core for memo_namespace_core;
-    alias medical_device_library for memo_namespace_medical_device_library;
-    alias medical_products for memo_namespace_medical_products;
     alias methodology for memo_namespace_methodology;
     alias rules for memo_namespace_rules;
-    alias scenarios for memo_namespace_scenarios;
-    alias use_cases for memo_namespace_use_cases;
-    alias workflows for memo_namespace_workflows;
     alias viewpoints for memo_namespace_viewpoints;
 }
 
@@ -25,21 +95,22 @@ package memo_namespace_activities {
 // human factors, verification & validation). Each owns its own elements and
 // crosses to the architecture layers only through typed relationships.
 package memo_namespace_assurance {
-    alias needs for memo_namespace_needs;
-    alias requirements for memo_namespace_assurance_requirements;
-    alias safety for memo_namespace_assurance_safety;
-    alias safety_analysis for memo_namespace_assurance_safety_analysis;
+    package requirements {
+        public import memo_assurance_requirements::*;
+        alias needs for memo_namespace_assurance_requirements_needs;
+    }
+    package safety_risk {
+        public import memo_assurance_safety_risk::*;
+        public import memo_assurance_safety_arch_risk::*;
+        alias analysis for memo_namespace_assurance_safety_risk_analysis;
+    }
     alias cybersecurity for memo_namespace_assurance_cybersecurity;
     alias human_factors for memo_namespace_assurance_human_factors;
-    alias verification_validation for memo_namespace_assurance_verification;
+    alias verification_validation for memo_namespace_assurance_verification_validation;
 }
 
 package memo_namespace_assurance_human_factors {
     public import memo_assurance_human_factors::*;
-}
-
-package memo_namespace_clinical_procedures {
-    public import memo_clinical_procedures::*;
 }
 
 package memo_namespace_context {
@@ -60,7 +131,7 @@ package memo_namespace_context_use_context {
     public import memo_context_use_context::*;
 }
 
-package memo_namespace_needs {
+package memo_namespace_assurance_requirements_needs {
     public import memo_assurance_needs::*;
 }
 
@@ -112,24 +183,6 @@ package memo_namespace_architecture_hardware_sensing {
     public import memo_architecture_hardware_sensing::*;
 }
 
-package memo_namespace_medical_products {
-    alias definitions for memo_namespace_medical_products_definitions;
-    alias lifecycle for memo_namespace_medical_products_lifecycle;
-    alias usage for memo_namespace_medical_products_usage;
-}
-
-package memo_namespace_medical_products_definitions {
-    public import memo_medical_products_definitions::*;
-}
-
-package memo_namespace_medical_products_lifecycle {
-    public import memo_medical_products_lifecycle::*;
-}
-
-package memo_namespace_medical_products_usage {
-    public import memo_medical_products_usage::*;
-}
-
 package memo_assurance_safety_compatibility {
     public import memo_assurance_safety_arch_risk::*;
 }
@@ -139,20 +192,10 @@ package memo_assurance_safety_compatibility {
 // Views and viewpoints are presentation packages and are exposed only through
 // the Diagram workspace, never as architecture layers.
 package memo_namespace_architecture {
-    alias behavior for memo_namespace_architecture_behavior;
-    alias constraints for memo_namespace_architecture_constraints;
     alias decisions for memo_namespace_architecture_decisions;
-    alias deployment for memo_namespace_architecture_deployment;
-    alias functions for memo_namespace_architecture_functions;
-    alias hardware_structure for memo_namespace_architecture_hardware_structure;
-    alias interfaces for memo_namespace_architecture_interfaces;
-    alias logical_structure for memo_namespace_architecture_logical_structure;
-    alias operational for memo_namespace_architecture_operational;
-    alias physical for memo_namespace_architecture_physical;
-    alias software_runtime for memo_namespace_architecture_software_runtime;
-    alias software_structure for memo_namespace_architecture_software_structure;
 
     package operational {
+        alias structure for memo_namespace_architecture_operational;
         alias activities for memo_namespace_activities;
         alias context for memo_namespace_context;
         alias scenarios for memo_namespace_scenarios;
@@ -166,7 +209,7 @@ package memo_namespace_architecture {
     }
     package logical {
         alias interfaces for memo_namespace_architecture_interfaces;
-        alias logical_structure for memo_namespace_architecture_logical_structure;
+        alias structure for memo_namespace_architecture_logical_structure;
     }
     package implementation {
         package software {
@@ -175,6 +218,7 @@ package memo_namespace_architecture {
         }
         package hardware {
             alias common for memo_namespace_architecture_hardware_common;
+            alias structure for memo_namespace_architecture_hardware_structure;
             alias electrical for memo_namespace_architecture_hardware_electrical;
             alias mechanical for memo_namespace_architecture_hardware_mechanical;
             alias fluidic for memo_namespace_architecture_hardware_fluidic;
@@ -190,28 +234,7 @@ package memo_namespace_architecture {
 }
 
 package memo_namespace_artifacts {
-    alias clinical_safety_report for memo_namespace_artifacts_clinical_safety_report;
-    alias cybersecurity_assessment_report for memo_namespace_artifacts_cybersecurity_assessment_report;
     alias definitions for memo_namespace_artifacts_definitions;
-    alias design_change_log for memo_namespace_artifacts_design_change_log;
-    alias design_history_file_index for memo_namespace_artifacts_design_history_file_index;
-    alias design_input_plan for memo_namespace_artifacts_design_input_plan;
-    alias design_output_plan for memo_namespace_artifacts_design_output_plan;
-    alias evidence_record for memo_namespace_artifacts_evidence_record;
-    alias failure_mode_effects_analysis for memo_namespace_artifacts_failure_mode_effects_analysis;
-    alias hazard_analysis_report for memo_namespace_artifacts_hazard_analysis_report;
-    alias labeling_specification for memo_namespace_artifacts_labeling_specification;
-    alias requirements_specification for memo_namespace_artifacts_requirements_specification;
-    alias requirements_traceability_matrix for memo_namespace_artifacts_requirements_traceability_matrix;
-    alias risk_management_plan for memo_namespace_artifacts_risk_management_plan;
-    alias software_design_description for memo_namespace_artifacts_software_design_description;
-    alias software_development_plan for memo_namespace_artifacts_software_development_plan;
-    alias soup_list for memo_namespace_artifacts_soup_list;
-    alias system_architecture_description for memo_namespace_artifacts_system_architecture_description;
-    alias test_protocol for memo_namespace_artifacts_test_protocol;
-    alias test_report for memo_namespace_artifacts_test_report;
-    alias threat_model_report for memo_namespace_artifacts_threat_model_report;
-    alias usability_engineering_report for memo_namespace_artifacts_usability_engineering_report;
 }
 
 package memo_namespace_compliance {
@@ -234,10 +257,6 @@ package memo_namespace_core {
     alias terminology for memo_namespace_core_terminology;
 }
 
-package memo_namespace_medical_device_library {
-    public import memo_medical_device_library::*;
-}
-
 package memo_namespace_methodology {
     alias archetypes for memo_namespace_methodology_archetypes;
     alias core for memo_namespace_methodology_core;
@@ -245,6 +264,7 @@ package memo_namespace_methodology {
     alias patterns for memo_namespace_methodology_patterns;
     alias profiles for memo_namespace_methodology_profiles;
     alias rules for memo_namespace_methodology_rules;
+    alias viewpoints for memo_namespace_methodology_viewpoints;
     alias workflow for memo_namespace_methodology_workflow;
 }
 
@@ -271,14 +291,14 @@ package memo_namespace_viewpoints {
     alias risk for memo_namespace_viewpoints_risk;
     alias software for memo_namespace_viewpoints_software;
     alias usability for memo_namespace_viewpoints_usability;
-    alias verification_models for memo_namespace_viewpoints_verification;
+    alias verification for memo_namespace_viewpoints_verification;
 }
 
-package memo_namespace_assurance_safety_analysis {
+package memo_namespace_assurance_safety_risk_analysis {
     public import memo_assurance_safety_analysis::*;
 }
 
-package memo_namespace_assurance_verification {
+package memo_namespace_assurance_verification_validation {
     public import memo_assurance_verification::*;
 }
 
@@ -322,83 +342,12 @@ package memo_namespace_architecture_physical {
     public import memo_architecture_physical::*;
 }
 
-package memo_namespace_assurance_requirements {
-    public import memo_assurance_requirements::*;
-}
-
-package memo_namespace_assurance_safety {
-    public import memo_assurance_safety_risk::*;
-}
-
 package memo_namespace_architecture_software_structure {
     public import memo_architecture_software_structure::*;
 }
 
-package memo_namespace_artifacts_clinical_safety_report {
-}
-
-package memo_namespace_artifacts_cybersecurity_assessment_report {
-}
-
 package memo_namespace_artifacts_definitions {
     public import memo_artifacts_definitions::*;
-}
-
-package memo_namespace_artifacts_design_change_log {
-}
-
-package memo_namespace_artifacts_design_history_file_index {
-}
-
-package memo_namespace_artifacts_design_input_plan {
-}
-
-package memo_namespace_artifacts_design_output_plan {
-}
-
-package memo_namespace_artifacts_evidence_record {
-}
-
-package memo_namespace_artifacts_failure_mode_effects_analysis {
-}
-
-package memo_namespace_artifacts_hazard_analysis_report {
-}
-
-package memo_namespace_artifacts_labeling_specification {
-}
-
-package memo_namespace_artifacts_requirements_specification {
-}
-
-package memo_namespace_artifacts_requirements_traceability_matrix {
-}
-
-package memo_namespace_artifacts_risk_management_plan {
-}
-
-package memo_namespace_artifacts_software_design_description {
-}
-
-package memo_namespace_artifacts_software_development_plan {
-}
-
-package memo_namespace_artifacts_soup_list {
-}
-
-package memo_namespace_artifacts_system_architecture_description {
-}
-
-package memo_namespace_artifacts_test_protocol {
-}
-
-package memo_namespace_artifacts_test_report {
-}
-
-package memo_namespace_artifacts_threat_model_report {
-}
-
-package memo_namespace_artifacts_usability_engineering_report {
 }
 
 package memo_namespace_compliance_artifacts {
@@ -482,6 +431,10 @@ package memo_namespace_methodology_profiles {
 
 package memo_namespace_methodology_rules {
     public import memo_methodology_rules::*;
+}
+
+package memo_namespace_methodology_viewpoints {
+    public import memo_methodology_viewpoints::*;
 }
 
 package memo_namespace_methodology_workflow {

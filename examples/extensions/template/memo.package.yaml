@@ -1,0 +1,9 @@
+name: "{{name}}"
+version: "0.1.0"
+type: methodology
+extends: "@memoarchitect/methodology-default"
+sysmlDir: "./src"
+description: "MEMO methodology extension"
+license: "MIT"
+tags: ["memo", "methodology", "extension"]
+usage: ["extension"]

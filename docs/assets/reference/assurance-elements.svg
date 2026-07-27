@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1160" viewBox="0 0 1600 1160" role="img" aria-labelledby="title desc">
+  <title id="title">Assurance elements</title>
+  <desc id="desc">requirements, analysis, control, verification, and evidence</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="1160" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Assurance elements</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">requirements, analysis, control, verification, and evidence</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="730" height="250" rx="24" fill="#f7fafc" stroke="#7657b7" stroke-width="2"/>
+  <rect x="40" y="120" width="730" height="58" rx="24" fill="#7657b7"/>
+  <rect x="40" y="154" width="730" height="24" fill="#7657b7"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Requirements</tspan></text>
+    
+  <rect x="80" y="220" width="180" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="170" y="261" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="170" dy="0">Need</tspan></text>
+  <rect x="340" y="220" width="200" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="440" y="261" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="440" dy="0">Requirement</tspan></text>
+  <rect x="610" y="220" width="120" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="670" y="261" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="670" dy="0">SecurityRequirement</tspan></text>
+    
+  <path d="M 260 254 L 340 254" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="238.4" y="236" width="123.19999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="300" y="256" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">DerivesFrom</text>
+
+    
+  <rect x="820" y="120" width="740" height="250" rx="24" fill="#f7fafc" stroke="#7657b7" stroke-width="2"/>
+  <rect x="820" y="120" width="740" height="58" rx="24" fill="#7657b7"/>
+  <rect x="820" y="154" width="740" height="24" fill="#7657b7"/>
+  <text x="844" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="844" dy="0">Verification and validation</tspan></text>
+    
+  <rect x="860" y="220" width="210" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="965" y="261" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="965" dy="0">VerificationCase</tspan></text>
+  <rect x="1130" y="220" width="190" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1225" y="261" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1225" dy="0">ValidationCase</tspan></text>
+  <rect x="1380" y="220" width="140" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1450" y="261" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1450" dy="0">Evidence</tspan></text>
+    
+  <path d="M 1070 254 L 1130 254" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1038.4" y="236" width="123.19999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1100" y="256" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">complements</text>
+  <path d="M 1320 254 L 1380 254" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1265.4" y="236" width="169.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1350" y="256" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ProducesEvidence</text>
+
+    
+  <rect x="40" y="420" width="1520" height="330" rx="24" fill="#f7fafc" stroke="#7657b7" stroke-width="2"/>
+  <rect x="40" y="420" width="1520" height="58" rx="24" fill="#7657b7"/>
+  <rect x="40" y="454" width="1520" height="24" fill="#7657b7"/>
+  <text x="64" y="458" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Safety and risk</tspan></text>
+    
+  <rect x="70" y="535" width="160" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="150" y="576" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="150" dy="0">HazardCause</tspan></text>
+  <rect x="280" y="535" width="140" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="350" y="576" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="350" dy="0">Hazard</tspan></text>
+  <rect x="470" y="535" width="205" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="572.5" y="576" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="572.5" dy="0">SequenceOfEvents</tspan></text>
+  <rect x="725" y="535" width="220" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="835" y="576" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="835" dy="0">HazardousSituation</tspan></text>
+  <rect x="995" y="535" width="120" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1055" y="576" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1055" dy="0">Harm</tspan></text>
+  <rect x="1165" y="535" width="120" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1225" y="576" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1225" dy="0">Risk</tspan></text>
+  <rect x="1335" y="535" width="190" height="68" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1430" y="576" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1430" dy="0">RiskControlMeasure</tspan></text>
+    
+  <path d="M 230 569 L 280 569" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+  <path d="M 420 569 L 470 569" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+  <path d="M 675 569 L 725 569" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+  <path d="M 945 569 L 995 569" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+  <path d="M 1115 569 L 1165 569" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+  <path d="M 1285 569 L 1335 569" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1257.6" y="551" width="104.8" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1310" y="571" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Mitigates</text>
+    
+  <rect x="280" y="650" width="170" height="60" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="365" y="687" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="365" dy="0">ResidualRisk</tspan></text>
+  <rect x="520" y="650" width="130" height="60" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="585" y="687" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="585" dy="0">Benefit</tspan></text>
+  <rect x="720" y="650" width="300" height="60" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="870" y="687" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="870" dy="0">OverallResidualRiskEvaluation</tspan></text>
+
+    
+  <rect x="40" y="800" width="730" height="290" rx="24" fill="#f7fafc" stroke="#7657b7" stroke-width="2"/>
+  <rect x="40" y="800" width="730" height="58" rx="24" fill="#7657b7"/>
+  <rect x="40" y="834" width="730" height="24" fill="#7657b7"/>
+  <text x="64" y="838" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Cybersecurity and human factors</tspan></text>
+    
+  <rect x="80" y="900" width="210" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="185" y="939" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="185" dy="0">CybersecurityAsset</tspan></text>
+  <rect x="340" y="900" width="130" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="405" y="939" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="405" dy="0">Threat</tspan></text>
+  <rect x="520" y="900" width="170" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="605" y="939" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="605" dy="0">Vulnerability</tspan></text>
+    
+  <rect x="80" y="995" width="180" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="170" y="1034" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="170" dy="0">CyberMitigation</tspan></text>
+  <rect x="320" y="995" width="150" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="395" y="1034" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="395" dy="0">UseError</tspan></text>
+  <rect x="520" y="995" width="170" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="605" y="1034" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="605" dy="0">UsabilityValidation</tspan></text>
+
+    
+  <rect x="820" y="800" width="740" height="290" rx="24" fill="#f7fafc" stroke="#7657b7" stroke-width="2"/>
+  <rect x="820" y="800" width="740" height="58" rx="24" fill="#7657b7"/>
+  <rect x="820" y="834" width="740" height="24" fill="#7657b7"/>
+  <text x="844" y="838" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="844" dy="0">Safety analysis</tspan></text>
+    
+  <rect x="860" y="900" width="170" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="945" y="939" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="945" dy="0">FailureMode</tspan></text>
+  <rect x="1080" y="900" width="170" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1165" y="939" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1165" dy="0">FailureCause</tspan></text>
+  <rect x="1300" y="900" width="170" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1385" y="939" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1385" dy="0">FailureEffect</tspan></text>
+    
+  <rect x="860" y="995" width="150" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="935" y="1034" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="935" dy="0">FaultTree</tspan></text>
+  <rect x="1060" y="995" width="190" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1155" y="1034" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1155" dy="0">FaultTreeEvent</tspan></text>
+  <rect x="1300" y="995" width="190" height="64" rx="14" fill="#ffffff" stroke="#7657b7" stroke-width="2"/>
+  <text x="1395" y="1034" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1395" dy="0">MinimalCutSet</tspan></text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#7657b7"/>
+</svg>

@@ -6,9 +6,11 @@ packages:
   "@memoarchitect/methodology-gpca": ./methodologies/gpca
 init:
   defaultExtends: "@memoarchitect/medical-modeling-profile"
-  rootImport: "memo_medical_device_library"
+  rootImport: "memo"
   template: ./template
   archetypes: ./profile/archetypes.yaml
 examples:
   gpca: ./examples/gpca-pump
   standard-sysml-diagrams: ./examples/sysml-diagram-samples
+  extension-template: ./examples/extensions/template
+  clinical-extension: ./examples/extensions/clinical

@@ -30,7 +30,6 @@ answer, not in order.
 
 - [Temperature Alarm](temperature-alarm.md) — one complete safety and evidence thread.
 - [Manual Surgical Instrument](manual-surgical-instrument.md) — a deliberately simple mechanical device.
-- [Single-Use Device](single-use-device.md) — product identity and lifecycle for a disposable.
 
 **Connecting behavior to structure**
 
@@ -67,8 +66,8 @@ explains that order.
 ## Partial on purpose
 
 Most of these examples populate two or three layers, not all of them. A manual
-instrument has no software architecture; a lifecycle example focuses on product
-identity. That is a valid model, and `layersOptionalRule` says so.
+instrument has no software architecture, while a software-only system has no
+physical architecture.
 
 Each page ends with **Where this sits in MEMO** — the layers it populates, the
 layers it deliberately skips, and the types it uses.

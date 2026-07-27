@@ -1,0 +1,9 @@
+name: "@memoarchitect/example-extension-clinical"
+version: "0.5.0"
+type: methodology
+extends: "@memoarchitect/methodology-default"
+sysmlDir: "./src"
+description: "Example methodology extension for clinical-procedure vocabulary"
+license: "MIT"
+tags: ["memo", "methodology", "extension", "clinical"]
+usage: ["extension", "clinical-procedures"]

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+  <title id="title">Realization elements</title>
+  <desc id="desc">physical execution, deployment, and end-to-end flow</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="760" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Realization elements</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">physical execution, deployment, and end-to-end flow</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="1520" height="300" rx="24" fill="#f7fafc" stroke="#294a73" stroke-width="2"/>
+  <rect x="40" y="120" width="1520" height="58" rx="24" fill="#294a73"/>
+  <rect x="40" y="154" width="1520" height="24" fill="#294a73"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Deployment</tspan></text>
+    
+  <rect x="80" y="225" width="210" height="70" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="185" y="267" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="185" dy="0">SoftwareModule</tspan></text>
+  <rect x="390" y="225" width="220" height="70" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="500" y="267" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="500" dy="0">DeploymentUnit</tspan></text>
+  <rect x="710" y="225" width="220" height="70" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="820" y="267" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="820" dy="0">ProcessingNode</tspan></text>
+  <rect x="1030" y="225" width="230" height="70" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="1145" y="267" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1145" dy="0">RuntimeEnvironment</tspan></text>
+    
+  <path d="M 290 260 L 390 260" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="283" y="242" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="340" y="262" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">BuildsInto</text>
+  <path d="M 610 260 L 710 260" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="607.6" y="242" width="104.8" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="660" y="262" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">DeploysTo</text>
+  <path d="M 930 260 L 1030 260" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="881.6" y="242" width="196.79999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="980" y="262" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ProvidesEnvironment</text>
+    
+  <rect x="710" y="335" width="190" height="60" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="805" y="372" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="805" dy="0">MemoryDevice</tspan></text>
+  <rect x="970" y="335" width="180" height="60" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="1060" y="372" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1060" dy="0">PhysicalPort</tspan></text>
+
+    
+  <rect x="40" y="460" width="1520" height="230" rx="24" fill="#f7fafc" stroke="#294a73" stroke-width="2"/>
+  <rect x="40" y="460" width="1520" height="58" rx="24" fill="#294a73"/>
+  <rect x="40" y="494" width="1520" height="24" fill="#294a73"/>
+  <text x="64" y="498" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Realized flow</tspan></text>
+    
+  <rect x="90" y="555" width="210" height="70" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="195" y="597" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="195" dy="0">EndToEndFlow</tspan></text>
+  <rect x="410" y="555" width="220" height="70" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="520" y="597" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="520" dy="0">FlowSpecification</tspan></text>
+  <rect x="740" y="555" width="220" height="70" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="850" y="597" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="850" dy="0">DeploymentUnit</tspan></text>
+  <rect x="1070" y="555" width="220" height="70" rx="14" fill="#ffffff" stroke="#294a73" stroke-width="2"/>
+  <text x="1180" y="597" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1180" dy="0">ProcessingNode</tspan></text>
+    
+  <path d="M 300 590 L 410 590" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="265.8" y="572" width="178.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="355" y="592" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">FlowComprisesSpec</text>
+  <path d="M 630 590 L 740 590" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="582" y="572" width="206" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="685" y="592" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">FlowTraversesBinding</text>
+  <path d="M 960 590 L 1070 590" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="944.2" y="572" width="141.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1015" y="592" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">hostNodes ref</text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#294a73"/>
+</svg>

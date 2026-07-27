@@ -1,5 +1,30 @@
 # Impact Note
 
+## Unreleased
+
+The ontology source tree now follows the nested public namespace structure.
+
+### Expected impact
+
+- Product models now import `memo::*`.
+- Repository scripts and links that reference individual source files must use
+  the new nested paths.
+
+### Breaking-change assessment
+
+- Flat navigation aliases such as `memo::context`, `memo::activities`,
+  `memo::architecture::functions`, and `memo::architecture::interfaces` are
+  removed. Use their nested `memo::architecture::<layer>::...` paths.
+- `memo::assurance::needs` is now `memo::assurance::requirements::needs`;
+  `memo::assurance::safety` and `memo::assurance::safety_analysis` are now
+  grouped under `memo::assurance::safety_risk`.
+- Backing declaration package names for the retained base ontology remain unchanged.
+- Clinical-procedure packages are not registered under `memo::`. Projects
+  using them select the clinical example methodology extension and import
+  `memo_extension_clinical::*`.
+- The experimental medical-product extension was removed. Product, lot,
+  serial-number, UDI, and asset-record schemas remain outside MEMO.
+
 ## Release 0.4.6
 This patch aligns all content-owned release metadata with the npm package and
 adds an automated consistency gate.

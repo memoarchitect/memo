@@ -2,7 +2,7 @@
 
 # When this nested repository is opened directly in VS Code, its `.git` file is
 # a SysIDE root marker. Include the canonical source tree explicitly so its
-# path-derived source packages and memo:: namespace facade resolve as one model.
+# namespace-aligned source modules and the memo:: facade resolve as one model.
 include = [
     "src",
 ]

@@ -1,7 +1,6 @@
 // Focused example: reusable, reprocessable instrument. Centers on the
-// "Sterilize a reusable instrument" use case: reuse lifecycle constraints,
-// the reprocessing workflow, and a ScenarioOccurrence recording one actual
-// reprocessing cycle against a manufactured instance.
+// "Sterilize a reusable instrument" use case and its reprocessing workflow.
+// Product identity and manufacturing records remain outside this model.
 package memo_examples_reusable_instrument {
     private import ScalarValues::*;
 
@@ -11,8 +10,6 @@ package memo_examples_reusable_instrument {
     private import memo_activities::*;
     private import memo_workflows::*;
     private import memo_scenarios::*;
-    private import memo_medical_products_lifecycle::*;
-    private import memo_medical_products_definitions::*;
 
     part sterileProcessingTech : User {
         attribute :>> actorKind = ActorKind::technician;
@@ -28,33 +25,6 @@ package memo_examples_reusable_instrument {
         attribute :>> successOutcome = "instrument cleaned, inspected, sterilized, and released to sterile storage";
     }
     connection : Initiates connect initiatingUser ::> sterileProcessingTech to initiatedUseCase ::> ucSterilize;
-
-    part forcepsDef : MedicalDeviceDefinition {
-        attribute :>> id = "RI-DEF-001"; attribute :>> name = "TissueForceps_DeBakey";
-        attribute :>> manufacturer = "Example Surgical GmbH";
-        attribute :>> model = "DB-20";
-        attribute :>> technologyDomains = TechnologyDomainKind::mechanical;
-        attribute :>> reuse = forcepsReuse;
-    }
-    attribute forcepsReuse : ReuseLifecycle {
-        attribute :>> reuseMode = ReuseModeKind::reusable;
-        attribute :>> maximumReuseCount = 300;
-        attribute :>> reprocessingRequired = true;
-        attribute :>> cleaningRequired = true;
-        attribute :>> disinfectionRequired = true;
-        attribute :>> suppliedSterile = false;
-        attribute :>> sterilizable = true;
-        attribute :>> sterilizationMethod = SterilizationMethodKind::steamAutoclave;
-        attribute :>> lotTraceabilityRequired = true;
-        attribute :>> udiApplicable = true;
-    }
-    part forcepsUnit7 : MedicalDeviceInstance {
-        attribute :>> id = "RI-INST-007"; attribute :>> name = "TissueForceps_SN007";
-        attribute :>> serialNumber = "SN-000007";
-        attribute :>> reprocessingHistorySummary = "112 cycles; jaw alignment inspected 2026-07-01";
-        ref :>> definition = forcepsDef;
-    }
-    connection : InstanceOf connect instance ::> forcepsUnit7 to definition ::> forcepsDef;
 
     // Reprocessing workflow: exists independently of any single instrument.
     action wfReprocess : OperationalWorkflow {
@@ -89,12 +59,13 @@ package memo_examples_reusable_instrument {
         attribute :>> operationalCondition = OperationalConditionKind::normal;
         ref :>> parentWorkflow = wfReprocess;
     }
-    // One actual execution against instance SN007 (postmarket-style record).
+    // One modeled occurrence of the workflow. External operational systems
+    // may associate this occurrence with their asset or batch record.
     part occCycle113 : ScenarioOccurrence {
-        attribute :>> id = "RI-OCC-113"; attribute :>> name = "Cycle113_SN007";
+        attribute :>> id = "RI-OCC-113"; attribute :>> name = "ReprocessingCycle113";
         attribute :>> occurredAt = "2026-07-15T14:02:00Z";
         attribute :>> hypothetical = false;
-        attribute :>> outcomeSummary = "cycle 113 of 300 completed; biological indicator passed";
+        attribute :>> outcomeSummary = "cycle completed; biological indicator passed";
         ref :>> executedScenario = scNominalCycle;
     }
 }

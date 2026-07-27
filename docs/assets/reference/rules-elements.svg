@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="title desc">
+  <title id="title">Rule packages</title>
+  <desc id="desc">selectable SysML constraints evaluated against a project model</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="700" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Rule packages</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">selectable SysML constraints evaluated against a project model</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="1520" height="500" rx="24" fill="#f7fafc" stroke="#7d61c8" stroke-width="2"/>
+  <rect x="40" y="120" width="1520" height="58" rx="24" fill="#7d61c8"/>
+  <rect x="40" y="154" width="1520" height="24" fill="#7d61c8"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Constraint families</tspan></text>
+    
+  <rect x="80" y="220" width="200" height="70" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="180" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="180" dy="0">Closure</tspan></text>
+  <rect x="340" y="220" width="200" height="70" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="440" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="440" dy="0">Coverage</tspan></text>
+  <rect x="600" y="220" width="200" height="70" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="700" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="700" dy="0">Cross-layer</tspan></text>
+  <rect x="860" y="220" width="200" height="70" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="960" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="960" dy="0">Lifecycle</tspan></text>
+  <rect x="1120" y="220" width="200" height="70" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="1220" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1220" dy="0">Ontology</tspan></text>
+  <rect x="1380" y="220" width="140" height="70" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="1450" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1450" dy="0">Quantitative</tspan></text>
+    
+  <rect x="80" y="390" width="240" height="68" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="200" y="431" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="200" dy="0">Methodology selection</tspan></text>
+  <rect x="450" y="390" width="220" height="68" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="560" y="431" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="560" dy="0">Project model</tspan></text>
+  <rect x="800" y="390" width="220" height="68" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="910" y="431" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="910" dy="0">Constraint result</tspan></text>
+  <rect x="1150" y="390" width="260" height="68" rx="14" fill="#ffffff" stroke="#7d61c8" stroke-width="2"/>
+  <text x="1280" y="431" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1280" dy="0">Quality gate evidence</tspan></text>
+    
+  <path d="M 320 424 L 450 424" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="341.8" y="406" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="385" y="426" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">selects</text>
+  <path d="M 670 424 L 800 424" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="682.6" y="406" width="104.8" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="735" y="426" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">evaluates</text>
+  <path d="M 1020 424 L 1150 424" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1041.8" y="406" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1085" y="426" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">records</text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#7d61c8"/>
+</svg>

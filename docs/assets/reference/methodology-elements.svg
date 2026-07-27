@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="850" viewBox="0 0 1600 850" role="img" aria-labelledby="title desc">
+  <title id="title">Methodology elements</title>
+  <desc id="desc">selection and governance of ontology use on a project</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="850" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Methodology elements</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">selection and governance of ontology use on a project</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="1520" height="650" rx="24" fill="#f7fafc" stroke="#4d9a57" stroke-width="2"/>
+  <rect x="40" y="120" width="1520" height="58" rx="24" fill="#4d9a57"/>
+  <rect x="40" y="154" width="1520" height="24" fill="#4d9a57"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Method resolution and project use</tspan></text>
+    
+  <rect x="80" y="220" width="260" height="72" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="210" y="263" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="210" dy="0">MethodologyDefinition</tspan></text>
+  <rect x="450" y="180" width="220" height="64" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="560" y="219" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="560" dy="0">Selected modules</tspan></text>
+  <rect x="450" y="270" width="220" height="64" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="560" y="309" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="560" dy="0">Selected viewpoints</tspan></text>
+  <rect x="450" y="360" width="220" height="64" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="560" y="399" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="560" dy="0">Selected rules</tspan></text>
+    
+  <path d="M 340 256 L 450 212" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+  <path d="M 340 256 L 450 302" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+  <path d="M 340 256 L 450 392" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+    
+  <rect x="790" y="270" width="260" height="72" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="920" y="313" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="920" dy="0">ResolvedMethodology</tspan></text>
+  <path d="M 670 302 L 790 306" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="682.2" y="286" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="730" y="306" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">resolves</text>
+    
+  <rect x="1170" y="270" width="260" height="72" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="1300" y="313" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1300" dy="0">ProjectMethodBinding</tspan></text>
+  <path d="M 1050 306 L 1170 306" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1066.8" y="288" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1110" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">applies</text>
+    
+  <rect x="80" y="520" width="180" height="68" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="170" y="561" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="170" dy="0">Archetype</tspan></text>
+  <rect x="320" y="520" width="210" height="68" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="425" y="561" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="425" dy="0">ModelingPattern</tspan></text>
+  <rect x="590" y="520" width="220" height="68" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="700" y="561" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="700" dy="0">ElementUsageRule</tspan></text>
+  <rect x="870" y="520" width="210" height="68" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="975" y="561" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="975" dy="0">WorkflowStep</tspan></text>
+  <rect x="1140" y="520" width="190" height="68" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="1235" y="561" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1235" dy="0">QualityGate</tspan></text>
+  <rect x="1370" y="520" width="150" height="68" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="1445" y="561" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1445" dy="0">DHF binding</tspan></text>
+    
+  <rect x="450" y="650" width="260" height="68" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
+  <text x="580" y="691" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="580" dy="0">Extension module</tspan></text>
+  <path d="M 580 650 L 580 430" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="599.6" y="602" width="150.79999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="675" y="622" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">includedModule</text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#4d9a57"/>
+</svg>

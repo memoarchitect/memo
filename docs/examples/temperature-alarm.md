@@ -160,14 +160,14 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity`, `UseCase`, `User`, `UserTask` | [Operational](../reference/elements/operational.md) |
-| Functional | `SystemFunction` | [Functional](../reference/elements/functional.md) |
-| Logical | `LogicalComponent` | [Logical](../reference/elements/logical.md) |
-| Implementation and realization | `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../reference/elements/implementation.md) |
-| Assurance | `Evidence`, `Hazard`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `VerificationScenario` | [Assurance](../reference/elements/assurance.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+| Operational | `OperationalActivity`, `UseCase`, `User`, `UserTask` | [Operational](../reference/areas/architecture.md#operational) |
+| Functional | `SystemFunction` | [Functional](../reference/areas/architecture.md#functional) |
+| Logical | `LogicalComponent` | [Logical](../reference/areas/architecture.md#logical) |
+| Implementation and realization | `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Assurance | `Evidence`, `Hazard`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `VerificationScenario` | [Assurance](../reference/areas/assurance.md) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates`, `ProducesEvidence` … +3 — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+**Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates`, `ProducesEvidence` … +3 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 

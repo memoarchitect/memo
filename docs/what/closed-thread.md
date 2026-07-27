@@ -109,4 +109,4 @@ That is the whole argument for MEMO, in one scenario.
 
 - [Adopting MEMO](../how-to/adopt.md) — start with one thread like this one
 - [GPCA Pump case study](../case-studies/gpca/index.md) — the complete model this thread comes from
-- [Relationships](../reference/relationships.md) — every link type and its legal ends
+- [Relationships](../reference/building-blocks.md#relationships) — every link type and its legal ends

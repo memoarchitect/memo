@@ -79,28 +79,23 @@ nav:
       - Why MEMO: why/index.md
       - What is MEMO: what/index.md
   - Reference:
-      - reference/index.md
-      - Modules: reference/modules.md
-      - Elements by layer:
-          - reference/elements/index.md
-          - Core: reference/elements/core.md
-          - Operational: reference/elements/operational.md
-          - Functional: reference/elements/functional.md
-          - Logical: reference/elements/logical.md
-          - Implementation and realization: reference/elements/implementation.md
-          - Clinical and products: reference/elements/clinical.md
-          - Assurance: reference/elements/assurance.md
-          - Views and methodology: reference/elements/views.md
-      - Relationships: reference/relationships.md
-      - Enumerations: reference/enumerations.md
-      - Rules: reference/rules.md
-      - Packaging:
-          - Packages and Imports: reference/packages.md
-          - Public namespaces and imports: what/namespace-map.md
-          - SysML Source Reference: reference/sysml.md
-          - Navigate by question: architecture/index.md
-          - "The memo:: Namespace": architecture/namespace.md
-          - Repository and Packaging: architecture/repository.md
+      - Source layout: reference/index.md
+      - Core: reference/areas/core.md
+      - Architecture: reference/areas/architecture.md
+      - Assurance: reference/areas/assurance.md
+      - Artifacts: reference/areas/artifacts.md
+      - Compliance: reference/areas/compliance.md
+      - Viewpoints: reference/areas/viewpoints.md
+      - Methodology: reference/areas/methodology.md
+      - Rules: reference/areas/rules.md
+      - Building blocks: reference/building-blocks.md
+  - SysML API:
+      - sysml-api/index.md
+      - Elements: sysml-api/elements.md
+      - Relationships: sysml-api/relationships.md
+      - Enumerations: sysml-api/enumerations.md
+      - Constraints: sysml-api/constraints.md
+      - Type hierarchy: sysml-api/hierarchy.md
   - How-to Guides:
       - how-to/index.md
       - Install MEMO:
@@ -120,7 +115,6 @@ nav:
       - Worked examples:
           - Temperature Alarm: examples/temperature-alarm.md
           - Manual Surgical Instrument: examples/manual-surgical-instrument.md
-          - Single-Use Device: examples/single-use-device.md
           - Reusable Instrument: examples/reusable-instrument.md
           - Functional, Logical, Physical: examples/functional-logical-physical.md
           - Software-Only Medical Device: examples/software-only-medical-device.md

@@ -17,10 +17,11 @@ parallel name for the same concept.
 | You want to… | Put it in… |
 |---|---|
 | Fix or clarify an existing element, relationship, or rule | `src/` in the owning package |
-| Extend the operational world (actors, needs, use cases, workflows, scenarios, tasks) | `src/context`, `src/assurance/needs`, `src/use_cases`, `src/workflows`, `src/scenarios`, `src/activities` |
+| Extend the operational world (actors, use cases, workflows, scenarios, tasks) | `src/architecture/operational/` |
+| Extend needs, requirements, risk, cybersecurity, human factors, or V&V | `src/assurance/<discipline>/` |
 | Extend architecture semantics (functional, logical, software, deployment, physical) | `src/architecture/<layer>` |
-| Extend product identity, reuse lifecycle, or usage roles | `src/medical_products` |
-| Extend UI/interaction or human-factors assurance | `src/interaction`, `src/assurance` |
+| Demonstrate optional domain vocabulary | `examples/extensions/<extension>/src` and its methodology `includedModule` |
+| Extend UI or interaction definitions | `src/architecture/implementation/ui` |
 | Add a device-specific mode, interface, control, or kind | `profile/` or a project package — **not** the core |
 | Add or adjust a workflow, gate, or viewpoint binding | `src/methodology/`, `src/viewpoints/`, or `methodologies/` |
 | Change a starter-model pattern | `template/`, `profile/archetypes.yaml`, or `profile/templates/` |
@@ -46,8 +47,9 @@ a documented modeling rule, not a quiet exception:
    scenarios select paths; they never restate workflows.
 4. **Typed references, never name strings**:
    a reference is a typed `ref`; strings are labels at most.
-5. **Path-derived package names, one content-bearing leaf package per file, no
-   qualified package declarations, no examples under `src/`.**
+5. **Namespace-aligned directories, stable public package names, one
+   content-bearing leaf package per file, no qualified package declarations,
+   and no examples under `src/`.**
 
 ## Validate before you open a pull request
 
@@ -61,9 +63,8 @@ python3 -m mkdocs build --strict    # if you touched docs
 ```
 
 A new concept additionally needs: a row in the
-registration in `src/memo_namespaces.sysml` and
-`src/medical_device_library.sysml`, an update to the
-[SysML source reference](reference/sysml.md), and an example that exercises
+registration in `src/memo_namespaces.sysml`, an update to the
+[SysML source reference](reference/index.md), and an example that exercises
 it.
 
 ## Documentation rule
