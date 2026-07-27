@@ -24,7 +24,7 @@ parallel name for the same concept.
 | Extend UI or interaction definitions | `src/architecture/implementation/ui` |
 | Add a device-specific mode, interface, control, or kind | `profile/` or a project package — **not** the core |
 | Add or adjust a workflow, gate, or viewpoint binding | `src/methodology/`, `src/viewpoints/`, or `methodologies/` |
-| Change a starter-model pattern | `template/`, `profile/archetypes.yaml`, or `profile/templates/` |
+| Change or add a starter project | `templates/<template-id>/` and the `templates` map in `memo.manifest.yaml` |
 | Demonstrate a modeling pattern | a focused example under `examples/` (see [the examples guide](examples/index.md)) |
 
 The core vocabulary is deliberately small. Growth happens in the profile,

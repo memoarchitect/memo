@@ -1,0 +1,5 @@
+name: "{{name}}"
+version: "0.1.0"
+type: device
+extends: "@memoarchitect/methodology-default"
+description: "MEMO monitoring device model"

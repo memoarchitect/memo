@@ -31,7 +31,7 @@ use it to locate the ontology, profile, methodology, templates, and examples:
 | Logical package | Contains |
 | --- | --- |
 | `@memoarchitect/ontology` | The core reusable element, relationship, rule, and viewpoint definitions |
-| `@memoarchitect/medical-modeling-profile` | The default profile and archetype catalog — the usual `extends:` target |
+| `@memoarchitect/medical-modeling-profile` | The default modeling profile — the usual `extends:` target |
 | `@memoarchitect/methodology-default` | The default methodology |
 | `@memoarchitect/methodology-gpca` | The methodology used by the GPCA reference model |
 
