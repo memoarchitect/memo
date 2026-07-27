@@ -1,7 +1,7 @@
 package memo_connected_device_starter {
-    private import memo_medical_device_library::*;
+    private import memo::*;
 
-    part connectedDevice : MedicalDevice;
+    part connectedDevice : PhysicalAssembly;
     requirement connectivityRequirement : Requirement {
         attribute redefines statement = "Define connectivity and cybersecurity boundaries";
     }

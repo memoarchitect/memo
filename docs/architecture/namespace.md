@@ -1,18 +1,16 @@
 # The memo:: Namespace
 
-`memo::` builds bottom-up. Read it from the base upward: core semantics first,
-the horizontal architecture and vertical assurance packages next, then
-viewpoints, methodology, and examples.
+`memo::` groups the base ontology. Extensions and examples are deliberately
+outside it.
 
 ```mermaid
 flowchart BT
     core["<code>memo::core</code><br/>traceable elements · documented and evidence elements<br/>enumerations · dimensions · typed semantic relationships"]
     arch["<code>memo::architecture</code><br/>operational · system · functions · behavior · logical · interfaces ·<br/>software · deployment · hardware · physical · constraints · decisions"]
-    assurance["<code>memo::assurance</code><br/>needs · requirements · safety · safety analysis · cybersecurity ·<br/>human factors · verification and validation"]
-    vp["<code>memo::viewpoints</code> — who needs to see what<br/><code>memo::views</code> — concrete diagram and document projections"]
+    assurance["<code>memo::assurance</code><br/>requirements · safety/risk · cybersecurity ·<br/>human factors · verification/validation"]
+    vp["<code>memo::viewpoints</code><br/>viewpoint and view definitions"]
     meth["<code>memo::methodology</code><br/>profiles · patterns · rules · workflow · gates · archetypes"]
-    gpca["<code>memo::examples::gpca</code><br/>a complete infusion-pump reference model"]
-    core --> arch --> vp --> meth --> gpca
+    core --> arch --> vp --> meth
     core --> assurance
 ```
 
@@ -20,25 +18,26 @@ flowchart BT
 |---|---|
 | `memo::core` | Shared foundation: identity, traceability, documented/evidence elements, controlled values, and typed semantic relationships |
 | `memo::architecture` | Horizontal architecture layers: operational, system, functional, logical, interface, behavior, and implementation structure |
-| `memo::assurance` | Vertical assurance disciplines: needs, requirements, safety/risk, cybersecurity, human factors, and verification/validation |
+| `memo::assurance` | Vertical assurance disciplines: requirements, safety/risk, cybersecurity, human factors, and verification/validation |
 | `memo::viewpoints` | Stakeholder concerns: architecture, safety, cybersecurity, verification, and regulatory review |
 | `memo::rules` | Native closure, coverage, cross-layer, lifecycle, and quantitative checks |
 | `memo::compliance` | Regulated outputs: controlled artifacts, change, and risk-management-file concepts |
 | `memo::methodology` | How teams apply the ontology: profiles, patterns, workflow steps, quality gates, and project bindings |
-| `memo::examples::gpca` | A worked example used to validate and teach the modeling style |
 
 ## The public import surface
 
-Product models import **one library** and use focused packages underneath it:
+Product models import the base library:
 
 ```sysml
-private import memo_medical_device_library::*;
+private import memo::*;
 ```
 
-`memo_medical_device_library` (aliased `memo::medical_device_library`)
-re-exports core, every architecture layer, and the standard viewpoints and
-views. Prefer it over deep imports into source packages: deep imports couple a
-project to internal organization and make upgrades harder.
+The root `memo` package re-exports the public definitions and owns the nested
+namespace aliases. Prefer it over deep imports into declaration packages:
+deep imports couple a project to internal organization.
+
+If the selected methodology includes an extension, the project also imports
+that extension facade. Extension packages do not become `memo::` children.
 
 ## Design decisions worth knowing
 

@@ -17,15 +17,15 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity` | [Operational](../reference/elements/operational.md) |
-| Functional | `SystemFunction` | [Functional](../reference/elements/functional.md) |
-| Logical | `LogicalComponent` | [Logical](../reference/elements/logical.md) |
-| Implementation and realization | `MechanicalPart`, `SoftwareModule` | [Implementation and realization](../reference/elements/implementation.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+| Operational | `OperationalActivity` | [Operational](../reference/areas/architecture.md#operational) |
+| Functional | `SystemFunction` | [Functional](../reference/areas/architecture.md#functional) |
+| Logical | `LogicalComponent` | [Logical](../reference/areas/architecture.md#logical) |
+| Implementation and realization | `MechanicalPart`, `SoftwareModule` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `AllocatedTo`, `Enables`, `Realizes` — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+**Typed links it uses:** `AllocatedTo`, `Enables`, `Realizes` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
-**Layers it does not populate:** assurance. That is deliberate rather than incomplete — `layersOptionalRule` says a model fills only the layers its device needs. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+**Layers it does not populate:** assurance. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md).
 

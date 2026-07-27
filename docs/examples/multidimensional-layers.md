@@ -17,13 +17,13 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Implementation and realization | `SoftwareComponent`, `SoftwareModule` | [Implementation and realization](../reference/elements/implementation.md) |
-| Assurance | `VerificationCase` | [Assurance](../reference/elements/assurance.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+| Implementation and realization | `SoftwareComponent`, `SoftwareModule` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Assurance | `VerificationCase` | [Assurance](../reference/areas/assurance.md) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `Realizes`, `VerifiedBy` — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+**Typed links it uses:** `Realizes`, `VerifiedBy` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
-**Layers it does not populate:** operational, functional, logical. That is deliberate rather than incomplete — `layersOptionalRule` says a model fills only the layers its device needs. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+**Layers it does not populate:** operational, functional, logical. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
 **Narrative treatment:** [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 

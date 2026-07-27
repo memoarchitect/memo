@@ -1,88 +1,51 @@
-# Reference
+# Source layout
 
-Information-oriented material: a description of what the ontology actually
-contains, extracted from the shipped SysML v2 sources. It states; it does not
-teach or persuade.
+The reference covers the ontology in `src/`.
 
-Use it when you know what you are looking for and need the precise type, its
-supertype, or its attributes.
+Product models import the public ontology package:
 
-- Deciding *what to record*? → [Choose an element](../modeling/elements.md)
-- Wanting to understand *why*? → [Explanation](../why/index.md)
-- Learning by building? → [Tutorials](../examples/index.md)
+```sysml
+private import memo::*;
+```
 
-## The library in numbers
+Folder paths and SysML namespaces use the same hierarchy.
 
-| | Count |
+```text
+src/
+├── memo_namespaces.sysml  public memo package and namespace assembly
+├── core/                  shared ontology foundations
+├── architecture/          system description from operation to deployment
+├── assurance/             requirements and assurance disciplines
+├── artifacts/             artifact classifications
+├── compliance/            controlled records and document-oriented content
+├── viewpoints/            selection and presentation of model content
+├── methodology/           project scope, workflow, gates, and bindings
+└── rules/                 selectable model constraints
+```
+
+| Source area | Namespace | Responsibility | Reference |
+| --- | --- | --- | --- |
+| `src/core/` | `memo::core` | Shared base types, relationships, dimensions, enumerations, semantics, and terminology | [Core](areas/core.md) |
+| `src/architecture/` | `memo::architecture` | Operational, functional, logical, implementation, and realization descriptions of the system | [Architecture](areas/architecture.md) |
+| `src/assurance/` | `memo::assurance` | Requirements, safety and risk, cybersecurity, human factors, and verification and validation | [Assurance](areas/assurance.md) |
+| `src/artifacts/` | `memo::artifacts` | Reusable classifications for model-backed artifacts | [Artifacts](areas/artifacts.md) |
+| `src/compliance/` | `memo::compliance` | Controlled artifacts, change records, document views, risk files, and post-market records | [Compliance](areas/compliance.md) |
+| `src/viewpoints/` | `memo::viewpoints` | Viewpoint contracts and views over existing model content | [Viewpoints](areas/viewpoints.md) |
+| `src/methodology/` | `memo::methodology` | Definitions that select and govern ontology use on a project | [Methodology](areas/methodology.md) |
+| `src/rules/` | `memo::rules` | Constraint packages selected by a methodology | [Rules](areas/rules.md) |
+
+For example, `memo::architecture::logical::interfaces` is in
+`src/architecture/logical/interfaces/`.
+
+## Building blocks
+
+| Building block | Describes |
 | --- | --- |
-| Element, view, and viewpoint definitions | 418 |
-| Relationship definitions | 91 |
-| Enumerations | 96 |
-| Rules | 65 |
+| [Elements](building-blocks.md#elements) | The types used to create model content, grouped by source area |
+| [Relationships](building-blocks.md#relationships) | Typed semantic connections between elements |
+| [Enumerations](building-blocks.md#enumerations) | Controlled values used by element and relationship attributes |
+| [Rules](areas/rules.md) | Constraints selected to check a model |
 
-Every name on these pages is extracted from `src/**/*.sysml` in this
-repository. Nothing here is aspirational.
+## SysML API
 
-## Where to look
-
-<div class="memo-card-grid" markdown>
-
-<div class="memo-card memo-card-purple" markdown>
-
-### Elements
-
-Grouped by the layer that owns them: core, operational, functional, logical,
-implementation, clinical, assurance, views.
-
-[Elements by layer](elements/index.md)
-
-</div>
-
-<div class="memo-card memo-card-blue" markdown>
-
-### Relationships
-
-Every typed link, what it connects, and what it means.
-
-[Relationships](relationships.md)
-
-</div>
-
-<div class="memo-card memo-card-teal" markdown>
-
-### Enumerations
-
-Closed value sets, grouped by the module that owns them.
-
-[Enumerations](enumerations.md)
-
-</div>
-
-<div class="memo-card memo-card-orange" markdown>
-
-### Rules
-
-The constraints that check the argument, by category.
-
-[Rules](rules.md)
-
-</div>
-
-</div>
-
-## Structure and packaging
-
-| Page | Answers |
-| --- | --- |
-| [Modules](modules.md) | How the library is divided, and which module owns what |
-| [Packages and imports](packages.md) | The logical packages and how to import them |
-| [SysML source reference](sysml.md) | The source layout and entry points |
-| [The `memo::` namespace](../architecture/namespace.md) | Namespace design and the decisions behind it |
-| [Repository and packaging](../architecture/repository.md) | The manifest contract and distribution |
-| [Views and evidence](../modeling/views-evidence.md) | How views and evidence are modelled |
-
-## A note on stability
-
-Until 1.0 the content is experimental. Names and structure may change between
-releases without migration support, so pin the version your project was built
-against — see [Installing MEMO](../how-to/install/index.md).
+[Browse every SysML file and declaration under `src/`.](../sysml-api/index.md)

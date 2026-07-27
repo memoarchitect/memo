@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+  <title id="title">Compliance elements</title>
+  <desc id="desc">controlled records and document-oriented model content</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="760" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Compliance elements</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">controlled records and document-oriented model content</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="1520" height="560" rx="24" fill="#f7fafc" stroke="#0f7e8d" stroke-width="2"/>
+  <rect x="40" y="120" width="1520" height="58" rx="24" fill="#0f7e8d"/>
+  <rect x="40" y="154" width="1520" height="24" fill="#0f7e8d"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Controlled content</tspan></text>
+    
+  <rect x="80" y="240" width="230" height="72" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="195" y="283" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="195" dy="0">ControlledArtifact</tspan></text>
+  <rect x="410" y="190" width="220" height="72" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="520" y="233" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="520" dy="0">ChangeRequest</tspan></text>
+  <rect x="410" y="310" width="220" height="72" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="520" y="353" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="520" dy="0">ConfigurationItem</tspan></text>
+    
+  <rect x="760" y="190" width="240" height="72" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="880" y="233" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="880" dy="0">Document views</tspan></text>
+  <rect x="760" y="310" width="240" height="72" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="880" y="353" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="880" dy="0">RiskManagementFile</tspan></text>
+    
+  <rect x="1130" y="190" width="220" height="72" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="1240" y="233" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1240" dy="0">ClinicalEvaluation</tspan></text>
+  <rect x="1130" y="310" width="270" height="72" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="1265" y="353" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1265" dy="0">PostMarketSurveillance</tspan></text>
+    
+  <path d="M 310 276 L 410 226" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="316.8" y="233" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="360" y="253" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Changes</text>
+  <path d="M 310 276 L 410 346" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="312.2" y="293" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="360" y="313" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">controls</text>
+  <path d="M 630 226 L 760 226" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="633.4" y="208" width="123.19999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="695" y="228" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">recorded by</text>
+  <path d="M 630 346 L 760 346" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="638" y="328" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="695" y="348" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">IncludedIn</text>
+  <path d="M 1000 226 L 1130 226" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1017.2" y="208" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1065" y="228" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">supports</text>
+  <path d="M 1000 346 L 1130 346" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1017.2" y="328" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1065" y="348" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">supports</text>
+    
+  <rect x="410" y="500" width="260" height="68" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="540" y="541" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="540" dy="0">Architecture content</tspan></text>
+  <rect x="760" y="500" width="230" height="68" rx="14" fill="#ffffff" stroke="#0f7e8d" stroke-width="2"/>
+  <text x="875" y="541" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="875" dy="0">Assurance evidence</tspan></text>
+  <path d="M 670 534 L 760 534" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="630.4" y="516" width="169.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="715" y="536" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ProducesEvidence</text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#0f7e8d"/>
+</svg>

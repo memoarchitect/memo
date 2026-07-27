@@ -18,8 +18,7 @@ memo/
 │   ├── viewpoints/        # viewpoint and view definitions
 │   ├── methodology/       # profiles, patterns, gates, workflow, archetypes
 │   ├── compliance/        # regulated artifact and lifecycle concepts
-│   ├── medical_device_library.sysml   # the public import surface
-│   └── memo_namespaces.sysml          # memo:: alias map
+│   └── memo_namespaces.sysml          # public memo import and alias map
 ├── ontology/              # logical @memoarchitect/ontology descriptor
 ├── profile/               # logical @memoarchitect/medical-modeling-profile
 │   ├── archetypes.yaml    # archetype catalog used by `memo init`
@@ -53,7 +52,7 @@ packages:
   "@memoarchitect/methodology-gpca": ./methodologies/gpca
 init:
   defaultExtends: "@memoarchitect/medical-modeling-profile"
-  rootImport: "memo_medical_device_library"
+  rootImport: "memo"
   template: ./template
   archetypes: ./profile/archetypes.yaml
 examples:

@@ -1,24 +1,16 @@
 // Focused example: software-only medical device (SaMD, IMDRF N10/N12).
-// technologyDomains = {software}; there is deliberately NO hardware or
-// physical layer — irrelevant layers are never mandatory. Deployment targets
+// There is deliberately no device-specific product record or physical layer.
+// Deployment targets
 // off-the-shelf infrastructure the manufacturer does not control.
 package memo_examples_software_only_medical_device {
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_medical_products_definitions::*;
     private import memo_architecture_software_structure::*;
     private import memo_architecture_software_runtime::*;
     private import memo_architecture_deployment::*;
     private import memo_architecture_physical::*;
-
-    part samdDef : MedicalDeviceDefinition {
-        attribute :>> id = "SMD-DEF-001"; attribute :>> name = "RetinaScreen_AI";
-        attribute :>> intendedPurpose = "Screening for referable diabetic retinopathy from fundus images.";
-        attribute :>> technologyDomains = TechnologyDomainKind::software;
-        attribute :>> riskClassification = "IMDRF SaMD category III; FDA Class II (example)";
-    }
 
     part swScreeningApp : SoftwareSystem {
         attribute :>> id = "SMD-SW-001"; attribute :>> name = "ScreeningApplication";
@@ -67,9 +59,4 @@ package memo_examples_software_only_medical_device {
         attribute :>> deploymentKind = DeploymentKind::containerized;
     }
     connection : HostedBy connect hostAssembly ::> nodeCloud to processingNode ::> svcGrading;
-    connection : Realizes connect realized ::> samdDevice to realizing ::> swScreeningApp;
-    part samdDevice : MedicalDevice {
-        attribute :>> id = "SMD-DEV-001"; attribute :>> name = "RetinaScreenDevice";
-        ref :>> definition = samdDef;
-    }
 }

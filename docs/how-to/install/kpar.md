@@ -71,7 +71,7 @@ If you also want the default methodology, add
 
 ```sysml
 package import_check {
-    private import memo_medical_device_library::*;
+    private import memo::*;
 
     part reviewer : User;
 }
@@ -93,4 +93,4 @@ Build your project. If `User` resolves, MEMO is available.
 ## Next
 
 - [Temperature Alarm tutorial](../../tutorials/first-model.md) — build a first model
-- [SysML source reference](../../reference/sysml.md) — what the library defines
+- [SysML source reference](../../reference/index.md) — what the library defines

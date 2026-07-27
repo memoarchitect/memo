@@ -13,6 +13,38 @@ const packageVersion = JSON.parse(read('package.json')).version;
 const walkSysml = (dir) => readdirSync(join(root, dir), { withFileTypes: true }).flatMap((entry) =>
   entry.isDirectory() ? walkSysml(join(dir, entry.name)) : entry.name.endsWith('.sysml') ? [join(dir, entry.name)] : []);
 
+const matchingBrace = (source, openingBrace) => {
+  let depth = 1;
+  for (let index = openingBrace + 1; index < source.length; index += 1) {
+    if (source[index] === '{') depth += 1;
+    if (source[index] === '}') depth -= 1;
+    if (depth === 0) return index;
+  }
+  throw new Error('unbalanced package body in memo_namespaces.sysml');
+};
+
+const namespaceMembers = (source) => {
+  const members = [];
+  const clean = source.replace(/\/\/.*$/gm, '');
+  let cursor = 0;
+  while (cursor < clean.length) {
+    const remainder = clean.slice(cursor);
+    const token = remainder.match(/\b(package\s+([A-Za-z_]\w*)\s*\{|alias\s+([A-Za-z_]\w*)\s+for\s+([A-Za-z_]\w*)\s*;)/);
+    if (!token) break;
+    cursor += token.index;
+    if (token[2]) {
+      const openingBrace = clean.indexOf('{', cursor);
+      const closingBrace = matchingBrace(clean, openingBrace);
+      members.push({ kind: 'package', name: token[2], body: clean.slice(openingBrace + 1, closingBrace) });
+      cursor = closingBrace + 1;
+    } else {
+      members.push({ kind: 'alias', name: token[3], target: token[4] });
+      cursor += token[0].length;
+    }
+  }
+  return members;
+};
+
 test('manifest declares the four logical packages and content-owned init values', () => {
   const manifest = read('memo.manifest.yaml');
   for (const expected of [
@@ -22,11 +54,13 @@ test('manifest declares the four logical packages and content-owned init values'
     '"@memoarchitect/methodology-default": ./methodologies/default',
     '"@memoarchitect/methodology-gpca": ./methodologies/gpca',
     'defaultExtends: "@memoarchitect/medical-modeling-profile"',
-    'rootImport: "memo_medical_device_library"',
+    'rootImport: "memo"',
     'template: ./template',
     'archetypes: ./profile/archetypes.yaml',
     'gpca: ./examples/gpca-pump',
     'standard-sysml-diagrams: ./examples/sysml-diagram-samples',
+    'extension-template: ./examples/extensions/template',
+    'clinical-extension: ./examples/extensions/clinical',
   ]) assert.match(manifest, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 });
 
@@ -43,6 +77,27 @@ test('logical package descriptors contain folded usage and no .project.json', ()
 test('published content contains no SysAnd project descriptors', () => {
   assert.equal(existsSync(join(root, '.project.json')), false);
   assert.equal(existsSync(join(root, 'src', 'methodology', '.project.json')), false);
+});
+
+test('compiled and generated output is ignored', () => {
+  for (const generatedPath of [
+    'output/kpar/memo-ontology/example.kpar',
+    'src/example/output/example.kpar',
+    'src/example/.meta.json',
+    'build/native/example.o',
+    'dist/memo_ontology-0.5.0-py3-none-any.whl',
+    'site/index.html',
+    '__pycache__/module.pyc',
+    '.pytest_cache/state',
+    'coverage/index.html',
+  ]) {
+    assert.doesNotThrow(() => execFileSync('git', ['check-ignore', '--no-index', '-q', generatedPath], {
+      cwd: root,
+    }), `${generatedPath} must be ignored`);
+  }
+  assert.throws(() => execFileSync('git', ['check-ignore', '--no-index', '-q', 'src/rules/coverage/coverage_rules.sysml'], {
+    cwd: root,
+  }), 'the ontology coverage namespace must not be ignored');
 });
 
 test('repository contains one npm package identity', () => {
@@ -65,10 +120,10 @@ test('content uses canonical @memoarchitect names and no packages/ mirror exists
   }
 });
 
-test('template is a complete source project and preserves the public import surface', () => {
+test('template is a complete source project and uses the public memo import', () => {
   assert.match(read('template', 'memo.package.yaml'), /name: "{{name}}"/);
   assert.match(read('template', 'memo.package.yaml'), /extends: "@memoarchitect\/medical-modeling-profile"/);
-  assert.match(read('template', 'src', 'catalog', 'starter.sysml'), /import memo_medical_device_library::\*/);
+  assert.match(read('template', 'src', 'catalog', 'starter.sysml'), /import memo::\*/);
   assert.equal(existsSync(join(root, 'template', 'src', 'views', '.gitkeep')), true);
   assert.equal(existsSync(join(root, 'template', 'src', 'documents', '.gitkeep')), true);
 });
@@ -79,7 +134,7 @@ test('archetype catalog has a starter template for every non-blank fallback', ()
   assert.deepEqual(ids, ['samd', 'connected', 'monitoring', 'infusion_pump', 'blank']);
   for (const dir of ['samd', 'connected-device', 'monitoring-device', 'infusion-pump']) {
     const starter = read('profile', 'templates', dir, 'starter.sysml');
-    assert.match(starter, /import memo_medical_device_library::\*/);
+    assert.match(starter, /import memo::\*/);
   }
 });
 
@@ -89,9 +144,9 @@ test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
   const examples = readdirSync(join(root, 'examples')).filter((entry) => !entry.startsWith('.')).sort();
   const expected = [
     'connected-patient-monitor', 'embedded-infusion-pump',
-    'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
+    'extensions', 'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
     'manual-surgical-instrument', 'multidimensional-layers', 'reusable-instrument',
-    'single-use-device', 'software-only-medical-device', 'surgical-closure-workflow',
+    'software-only-medical-device', 'surgical-closure-workflow',
     'surgical-robot', 'sysml-diagram-samples', 'temperature-alarm',
   ];
   assert.deepEqual(examples, expected);
@@ -101,7 +156,7 @@ test('focused MEMO examples separate their parent package, catalog, and viewpoin
   const focused = [
     'connected-patient-monitor', 'embedded-infusion-pump',
     'functional-logical-physical', 'ivd-laboratory-system', 'manual-surgical-instrument',
-    'multidimensional-layers', 'reusable-instrument', 'single-use-device',
+    'multidimensional-layers', 'reusable-instrument',
     'software-only-medical-device', 'surgical-closure-workflow', 'surgical-robot',
     'temperature-alarm',
   ];
@@ -123,7 +178,9 @@ test('ontology namespace facade references no example packages', () => {
 });
 
 test('use cases use one standard type with a context kind', () => {
-  const useCases = read('src', 'use_cases', 'memo_use_cases.sysml');
+  const useCases = read(
+    'src', 'architecture', 'operational', 'use_cases', 'memo_use_cases.sysml',
+  );
   assert.match(useCases, /use case def UseCase/);
   assert.match(useCases, /attribute useCaseKind : UseCaseKind/);
   assert.doesNotMatch(useCases, /(?:Clinical|Service|Manufacturing|Development|Medical)UseCase/);
@@ -147,26 +204,22 @@ test('ontology V-model names canonical types and remains structurally valid SVG'
   }
 });
 
-test('0.5 ontology packages exist with path-derived names', () => {
+test('namespace-aligned source paths retain their public package names', () => {
   const expectations = {
     'src/core/dimensions/dimensions.sysml': 'memo_core_dimensions',
     'src/core/terminology/terminology.sysml': 'memo_core_terminology',
-    'src/context/actors/memo_actors.sysml': 'memo_context_actors',
-    'src/context/stakeholders/memo_stakeholders.sysml': 'memo_context_stakeholders',
-    'src/context/use_context/memo_use_context.sysml': 'memo_context_use_context',
-    'src/assurance/needs/memo_needs.sysml': 'memo_assurance_needs',
-    'src/use_cases/memo_use_cases.sysml': 'memo_use_cases',
-    'src/clinical_procedures/memo_clinical_procedures.sysml': 'memo_clinical_procedures',
-    'src/activities/memo_activities.sysml': 'memo_activities',
-    'src/workflows/memo_workflows.sysml': 'memo_workflows',
-    'src/scenarios/memo_scenarios.sysml': 'memo_scenarios',
+    'src/architecture/operational/context/actors/memo_actors.sysml': 'memo_context_actors',
+    'src/architecture/operational/context/stakeholders/memo_stakeholders.sysml': 'memo_context_stakeholders',
+    'src/architecture/operational/context/use_context/memo_use_context.sysml': 'memo_context_use_context',
+    'src/assurance/requirements/needs/memo_needs.sysml': 'memo_assurance_needs',
+    'src/architecture/operational/use_cases/memo_use_cases.sysml': 'memo_use_cases',
+    'src/architecture/operational/activities/memo_activities.sysml': 'memo_activities',
+    'src/architecture/operational/workflows/memo_workflows.sysml': 'memo_workflows',
+    'src/architecture/operational/scenarios/memo_scenarios.sysml': 'memo_scenarios',
     'src/assurance/human_factors/memo_human_factors.sysml': 'memo_assurance_human_factors',
     'src/architecture/implementation/ui/memo_ui.sysml': 'memo_architecture_ui',
-    'src/architecture/implementation/software/memo_software_runtime.sysml': 'memo_architecture_software_runtime',
-    'src/architecture/deployment/memo_deployment.sysml': 'memo_architecture_deployment',
-    'src/medical_products/memo_product_definitions.sysml': 'memo_medical_products_definitions',
-    'src/medical_products/memo_product_lifecycle.sysml': 'memo_medical_products_lifecycle',
-    'src/medical_products/memo_product_usage.sysml': 'memo_medical_products_usage',
+    'src/architecture/implementation/software/runtime/memo_software_runtime.sysml': 'memo_architecture_software_runtime',
+    'src/architecture/realization/deployment/memo_deployment.sysml': 'memo_architecture_deployment',
     'src/viewpoints/catalog/memo_viewpoint_catalog.sysml': 'memo_viewpoints_catalog',
     'src/rules/ontology/ontology_invariants.sysml': 'memo_rules_ontology',
   };
@@ -174,6 +227,59 @@ test('0.5 ontology packages exist with path-derived names', () => {
     const source = read(...file.split('/'));
     assert.match(source, new RegExp(`^package ${pkg} \\{`, 'm'), `${file} must declare ${pkg}`);
   }
+});
+
+test('source modules follow the nested memo namespace layout', () => {
+  const namespace = read('src', 'memo_namespaces.sysml');
+  const globalPackages = new Map(namespaceMembers(namespace)
+    .filter(({ kind }) => kind === 'package')
+    .map((pkg) => [pkg.name, pkg]));
+  const assertNamespaceTree = (body, path = []) => {
+    for (const member of namespaceMembers(body)) {
+      const namespacePath = [...path, member.name];
+      const directory = namespacePath.join('/');
+      assert.equal(existsSync(join(root, 'src', directory)), true,
+        `memo::${namespacePath.join('::')} needs src/${directory}/`);
+      assert.ok(walkSysml(join('src', directory)).length > 0, `src/${directory}/ needs SysML source`);
+      if (member.kind === 'package') assertNamespaceTree(member.body, namespacePath);
+      if (member.kind === 'alias') {
+        const target = globalPackages.get(member.target);
+        assert.ok(target, `${member.target} must resolve to a namespace adapter package`);
+        assertNamespaceTree(target.body, namespacePath);
+      }
+    }
+  };
+  assertNamespaceTree(globalPackages.get('memo').body);
+  for (const legacyDirectory of [
+    'activities', 'context', 'scenarios', 'use_cases', 'workflows',
+  ]) {
+    assert.equal(existsSync(join(root, 'src', legacyDirectory)), false);
+  }
+  assert.equal(existsSync(join(root, 'src', 'assurance', 'verification_validation')), true);
+  assert.equal(existsSync(join(root, 'src', 'assurance', 'verification')), false);
+  for (const discipline of [
+    'requirements', 'safety_risk', 'cybersecurity', 'human_factors',
+    'verification_validation',
+  ]) {
+    assert.equal(existsSync(join(root, 'src', 'assurance', discipline)), true);
+  }
+  for (const legacyDiscipline of ['needs', 'safety', 'safety_analysis']) {
+    assert.equal(existsSync(join(root, 'src', 'assurance', legacyDiscipline)), false);
+  }
+  for (const extensionOnlyDirectory of ['clinical_procedures', 'medical_products']) {
+    assert.equal(existsSync(join(root, 'src', extensionOnlyDirectory)), false);
+  }
+
+  const rootNamespace = namespace.match(/^package memo \{([\s\S]*?)^\}/m)?.[1] ?? '';
+  for (const removedRootAlias of ['activities', 'context', 'scenarios', 'use_cases', 'workflows']) {
+    assert.doesNotMatch(rootNamespace, new RegExp(`alias ${removedRootAlias}\\b`));
+  }
+  assert.match(namespace, /package operational \{\s+alias structure/s);
+  assert.match(namespace, /package logical \{[\s\S]*alias structure/s);
+  assert.match(namespace, /package hardware \{[\s\S]*alias structure/s);
+  assert.match(namespace, /package requirements \{[\s\S]*alias needs/s);
+  assert.match(namespace, /package safety_risk \{[\s\S]*alias analysis/s);
+  assert.doesNotMatch(namespace, /package memo_namespace_artifacts_[a-z_]+ \{\s*\}/);
 });
 
 test('migrated names do not reappear in ontology or canonical example', () => {
@@ -195,7 +301,7 @@ test('migrated names do not reappear in ontology or canonical example', () => {
 
 test('ISO 14971 concepts are dedicated ontology elements', () => {
   const requirements = read('src', 'assurance', 'requirements', 'memo_requirements.sysml');
-  const risk = read('src', 'assurance', 'safety', 'memo_risk.sysml');
+  const risk = read('src', 'assurance', 'safety_risk', 'memo_risk.sysml');
   for (const type of ['IntendedUse', 'ReasonablyForeseeableMisuse']) {
     assert.match(requirements, new RegExp(`\\bpart def ${type}\\b`));
   }
@@ -208,18 +314,73 @@ test('ISO 14971 concepts are dedicated ontology elements', () => {
   }
 });
 
-test('the library facade exports the 0.5 domain packages', () => {
-  const library = read('src', 'medical_device_library.sysml');
+test('the memo root exports the public domain packages', () => {
+  const library = read('src', 'memo_namespaces.sysml');
+  assert.equal(existsSync(join(root, 'src', 'medical_device_library.sysml')), false);
+  assert.doesNotMatch(library, /memo_medical_device_library/);
   for (const pkg of [
     'memo_core_dimensions', 'memo_core_terminology', 'memo_context_actors',
     'memo_context_stakeholders', 'memo_context_use_context', 'memo_assurance_needs',
-    'memo_use_cases', 'memo_clinical_procedures', 'memo_activities',
+    'memo_use_cases', 'memo_activities',
     'memo_workflows', 'memo_scenarios', 'memo_assurance_human_factors',
     'memo_architecture_ui', 'memo_architecture_software_runtime',
-    'memo_architecture_deployment', 'memo_medical_products_definitions',
-    'memo_medical_products_lifecycle', 'memo_medical_products_usage',
+    'memo_architecture_deployment',
     'memo_viewpoints_catalog',
   ]) assert.match(library, new RegExp(`public import ${pkg}::\\*;`), `library must export ${pkg}`);
+  assert.doesNotMatch(library, /memo_(?:clinical_procedures|medical_products_)/);
+});
+
+test('example extensions use methodology inclusion and remain outside src', () => {
+  const extensions = [['clinical', 'memo_extension_clinical']];
+  for (const [name, includedModule] of extensions) {
+    const descriptor = read('examples', 'extensions', name, 'memo.package.yaml');
+    assert.match(descriptor, /^type: methodology$/m);
+    assert.match(descriptor, /^extends: "@memoarchitect\/methodology-default"$/m);
+    const sources = walkSysml(join('examples', 'extensions', name));
+    assert.ok(sources.length > 1, `${name} needs extension and methodology sources`);
+    const content = sources.map((file) => read(file)).join('\n');
+    assert.match(content, new RegExp(`includedModule = "${includedModule}"`));
+  }
+  assert.equal(existsSync(join(root, 'examples', 'extensions', 'template', 'memo.package.yaml')), true);
+  const buildScript = read('scripts', 'build-kpar.sh');
+  assert.match(buildScript, /source_root = os\.path\.join\(root, 'src'\) if project == '\.' else root/);
+});
+
+test('example extensions specialize the base ontology without duplicate definitions', () => {
+  const definitionNames = (content) => new Set(Array.from(content.matchAll(
+    /\b(?:attribute|part|item|action|requirement|use case|port|interface|state|verification|connection|enum|constraint) def\s+([A-Za-z_]\w*)/g,
+  ), (match) => match[1]));
+  const base = definitionNames(walkSysml('src').map((file) => read(file)).join('\n'));
+  const extensionFiles = walkSysml(join('examples', 'extensions'));
+  const extensionContent = extensionFiles.map((file) => read(file)).join('\n');
+  const extensions = definitionNames(extensionContent);
+  const duplicates = [...extensions].filter((name) => base.has(name));
+  assert.deepEqual(duplicates, [], `extension definitions duplicate base definitions: ${duplicates.join(', ')}`);
+
+  const clinical = read(
+    'examples', 'extensions', 'clinical', 'src', 'procedures', 'memo_clinical_procedures.sysml',
+  );
+  assert.match(clinical, /action def ClinicalProcedureWorkflow specializes OperationalWorkflow/);
+  assert.doesNotMatch(clinical, /\b(?:ClinicalProcedure|ClinicalTechnique|ProcedureVariant|InstrumentSet)\b/);
+  assert.doesNotMatch(clinical, /\bconnection def\b/);
+
+  assert.equal(existsSync(join(root, 'examples', 'extensions', 'medical-products')), false);
+});
+
+test('reference prose avoids inventory counts and removed extension vocabulary', () => {
+  const reference = readdirSync(join(root, 'docs', 'reference'), { withFileTypes: true })
+    .flatMap((entry) => {
+      if (entry.isFile() && entry.name.endsWith('.md')) return [read('docs', 'reference', entry.name)];
+      if (entry.isDirectory() && entry.name === 'elements') {
+        return readdirSync(join(root, 'docs', 'reference', 'elements'))
+          .filter((name) => name.endsWith('.md'))
+          .map((name) => read('docs', 'reference', 'elements', name));
+      }
+      return [];
+    })
+    .join('\n');
+  assert.doesNotMatch(reference, /\b\d+\s+(?:definitions|declarations|rules|source files)\b/);
+  assert.doesNotMatch(reference, /medical-products|memo_extension_medical_products/);
 });
 
 test('npm pack includes all content and no JavaScript', () => {
@@ -240,7 +401,7 @@ test('npm pack includes all content and no JavaScript', () => {
     'template/src/documents/.gitkeep',
     'examples/gpca-pump/memo.config.yaml',
     'examples/sysml-diagram-samples/README.md',
-    'src/medical_device_library.sysml',
+    'src/memo_namespaces.sysml',
   ]) assert.ok(files.includes(expected), `missing ${expected}`);
   assert.equal(files.some((path) => /\.(?:c|m)?js$/.test(path)), false);
   assert.equal(files.some((path) => path.endsWith('.project.json')), false);

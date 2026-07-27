@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+- Moved clinical-procedure and medical-product vocabulary from `src/` to
+  `examples/extensions/`. They are optional methodology modules selected with
+  `includedModule`; no extension metaclass was added.
+- Reorganized ontology sources to mirror the nested `memo::` namespace:
+  `architecture/operational`, `functional`, `logical`, `implementation`, and
+  `realization`; assurance now follows the five V-model disciplines:
+  `requirements`, `safety_risk`, `cybersecurity`, `human_factors`, and
+  `verification_validation`.
+- Removed flat root namespace aliases for operational packages and flat
+  architecture-package aliases. The canonical navigation paths are now nested
+  below `memo::architecture`.
+- Replaced the separate public facade with `memo::*`; the root package now
+  provides both the public import and the nested namespace.
+
 ## 0.5.0 - 2026-07-18
 Ontology rework: orthogonal dimensions, construct-specific Memo base
 hierarchy, and the full operational-to-implementation medical-device ontology.
@@ -29,7 +45,7 @@ hierarchy, and the full operational-to-implementation medical-device ontology.
   MemoExchangeItem item defs. The GPCA example is fully migrated (46 typed
   component exchanges).
 - Repaired the project/profile starter templates (dangling `System` type
-  replaced by `MedicalDevice`; explicit import visibility) — they now pass
+  replaced by base `PhysicalAssembly` or `SoftwareSystem`; explicit import visibility) — they now pass
   `syside check --warnings-as-errors`.
 - Breaking renames and moves are listed in docs/ontology/migration-map.md.
 

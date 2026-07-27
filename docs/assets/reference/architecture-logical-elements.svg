@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="930" viewBox="0 0 1600 930" role="img" aria-labelledby="title desc">
+  <title id="title">Logical elements</title>
+  <desc id="desc">technology-independent components and interfaces</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="930" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Logical elements</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">technology-independent components and interfaces</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="1520" height="390" rx="24" fill="#f7fafc" stroke="#008a8a" stroke-width="2"/>
+  <rect x="40" y="120" width="1520" height="58" rx="24" fill="#008a8a"/>
+  <rect x="40" y="154" width="1520" height="24" fill="#008a8a"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Component interaction</tspan></text>
+    
+  <rect x="85" y="220" width="220" height="70" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="195" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="195" dy="0">LogicalComponent</tspan></text>
+  <rect x="400" y="220" width="210" height="70" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="505" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="505" dy="0">LogicalConnector</tspan></text>
+  <rect x="705" y="220" width="220" height="70" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="815" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="815" dy="0">LogicalComponent</tspan></text>
+    
+  <path d="M 305 255 L 400 255" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+  <path d="M 610 255 L 705 255" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+    
+  <rect x="85" y="350" width="190" height="68" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="180" y="391" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="180" dy="0">LogicalPort</tspan></text>
+  <rect x="360" y="350" width="210" height="68" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="465" y="391" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="465" dy="0">LogicalInterface</tspan></text>
+  <rect x="655" y="350" width="190" height="68" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="750" y="391" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="750" dy="0">LogicalPort</tspan></text>
+    
+  <path d="M 275 384 L 360 384" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="251.3" y="366" width="132.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="317.5" y="386" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">providerPort</text>
+  <path d="M 570 384 L 655 384" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="546.3" y="366" width="132.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="612.5" y="386" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">consumerPort</text>
+    
+  <rect x="1010" y="220" width="200" height="70" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="1110" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1110" dy="0">LogicalExchange</tspan></text>
+  <rect x="1305" y="220" width="210" height="70" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="1410" y="262" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1410" dy="0">LogicalExchangeItem</tspan></text>
+  <path d="M 1210 255 L 1305 255" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1168.3" y="237" width="178.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1257.5" y="257" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">exchangedItem ref</text>
+    
+  <rect x="1010" y="350" width="200" height="68" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="1110" y="391" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1110" dy="0">LogicalMode</tspan></text>
+  <path d="M 925 255 L 1010 384" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="948.8" y="297" width="132.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1015" y="317" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ExhibitsMode</text>
+
+    
+  <rect x="40" y="550" width="930" height="300" rx="24" fill="#f7fafc" stroke="#008a8a" stroke-width="2"/>
+  <rect x="40" y="550" width="930" height="58" rx="24" fill="#008a8a"/>
+  <rect x="40" y="584" width="930" height="24" fill="#008a8a"/>
+  <text x="64" y="588" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Reusable interface definitions</tspan></text>
+    
+  <rect x="85" y="650" width="190" height="66" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="180" y="690" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="180" dy="0">MemoInterface</tspan></text>
+  <rect x="355" y="620" width="175" height="66" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="442.5" y="660" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="442.5" dy="0">Interface</tspan></text>
+  <rect x="355" y="730" width="175" height="66" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="442.5" y="770" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="442.5" dy="0">DataInterface</tspan></text>
+    
+  <path d="M 275 683 L 355 653" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="239.60000000000002" y="650" width="150.79999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="315" y="670" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specialized by</text>
+  <path d="M 275 683 L 355 763" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="239.60000000000002" y="705" width="150.79999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="315" y="725" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specialized by</text>
+    
+  <rect x="610" y="620" width="170" height="66" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="695" y="660" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="695" dy="0">DataPort</tspan></text>
+  <rect x="830" y="590" width="110" height="66" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="885" y="630" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="885" dy="0">SensorPort</tspan></text>
+  <rect x="830" y="700" width="110" height="66" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="885" y="740" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="885" dy="0">CommandPort</tspan></text>
+    
+  <path d="M 830 623 L 780 653" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="743.4" y="620" width="123.19999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="805" y="640" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specializes</text>
+  <path d="M 830 733 L 780 653" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="743.4" y="675" width="123.19999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="805" y="695" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specializes</text>
+
+    
+  <rect x="1010" y="550" width="550" height="300" rx="24" fill="#f7fafc" stroke="#008a8a" stroke-width="2"/>
+  <rect x="1010" y="550" width="550" height="58" rx="24" fill="#008a8a"/>
+  <rect x="1010" y="584" width="550" height="24" fill="#008a8a"/>
+  <text x="1034" y="588" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="1034" dy="0">Boundaries and containment</tspan></text>
+    
+  <rect x="1050" y="650" width="215" height="70" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="1157.5" y="692" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1157.5" dy="0">IsolationBoundary</tspan></text>
+  <rect x="1305" y="650" width="215" height="70" rx="14" fill="#ffffff" stroke="#008a8a" stroke-width="2"/>
+  <text x="1412.5" y="692" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1412.5" dy="0">FaultContainmentRegion</tspan></text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#008a8a"/>
+</svg>

@@ -79,43 +79,6 @@ package memo_rules_ontology {
         constraint { true }
     }
 
-    // ─── Device identity ─────────────────────────────────────────────────
-
-    constraint def instanceHasDefinitionRule {
-        attribute id = "CR-ONT-020";
-        attribute appliesTo = "MedicalDeviceInstance";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "A device instance must reference exactly one device definition (FHIR Device→DeviceDefinition).";
-        attribute predicateExpression = "definition->size() = 1";
-        constraint { true }
-    }
-    constraint def noInstanceIdentityOnDefinitionRule {
-        attribute id = "CR-ONT-021";
-        attribute appliesTo = "MedicalDeviceDefinition";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Instance identifiers (serial, lot, UDI-PI, expiry) must not appear on definitions; the definition carries only the UDI-DI.";
-        attribute predicateExpression = "attributes->excludes('serialNumber') and attributes->excludes('lotNumber')";
-        constraint { true }
-    }
-
-    // ─── Reuse lifecycle ─────────────────────────────────────────────────
-
-    constraint def singleUseNoReprocessingRule {
-        attribute id = "CR-ONT-030";
-        attribute appliesTo = "MedicalDeviceDefinition";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Single-use products must not carry a reusable reprocessing lifecycle (FDA reprocessing guidance).";
-        attribute predicateExpression = "reuse.reuseMode != ReuseModeKind::singleUse or (reuse.reprocessingRequired = false and reuse.maximumReuseCount <= 1)";
-        constraint { true }
-    }
-    constraint def reusableSterileIdentifiesReprocessingRule {
-        attribute id = "CR-ONT-031";
-        attribute appliesTo = "MedicalDeviceDefinition";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Reusable instruments used sterile must identify reprocessing requirements and a sterilization method.";
-        attribute predicateExpression = "reuse.reuseMode != ReuseModeKind::reusable or reuse.sterilizable = false or (reuse.reprocessingRequired = true and reuse.sterilizationMethod != SterilizationMethodKind::notApplicable)";
-        constraint { true }
-    }
     constraint def patientContactCharacterizedRule {
         attribute id = "CR-ONT-032";
         attribute appliesTo = "PhysicalComponent";
@@ -165,14 +128,6 @@ package memo_rules_ontology {
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Every element is owned by exactly one axis, encoded by its owning package: a horizontal architecture layer (memo_architecture_*) XOR a vertical assurance discipline (memo_assurance_*) — never both. Cross-axis participation is expressed by typed relationships, not by dual membership.";
         attribute predicateExpression = "owningPackage.startsWith('memo_architecture_') xor owningPackage.startsWith('memo_assurance_')";
-        constraint { true }
-    }
-    constraint def layersOptionalRule {
-        attribute id = "CR-ONT-044";
-        attribute appliesTo = "MedicalDevice";
-        attribute severity = RuleSeverityKind::info;
-        attribute rationaleText = "Irrelevant layers are never mandatory: no rule may require functional/logical/software elements for a product whose technology domains do not include them.";
-        attribute predicateExpression = "true";
         constraint { true }
     }
 }

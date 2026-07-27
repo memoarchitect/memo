@@ -10,15 +10,6 @@ package memo_examples_connected_patient_monitor {
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_interfaces::*;
     private import memo_assurance_cybersecurity::*;
-    private import memo_medical_products_definitions::*;
-
-    part monitorDef : MedicalDeviceDefinition {
-        attribute :>> id = "CPM-DEF-001"; attribute :>> name = "BedsideMonitor_M300";
-        attribute :>> technologyDomains = (
-            TechnologyDomainKind::electrical,
-            TechnologyDomainKind::electronic,
-            TechnologyDomainKind::software);
-    }
 
     part lcMonitor : LogicalComponent {
         attribute :>> id = "CPM-LC-001"; attribute :>> name = "BedsideMonitor";

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="780" viewBox="0 0 1600 780" role="img" aria-labelledby="title desc">
+  <title id="title">Viewpoint elements</title>
+  <desc id="desc">selection and presentation of existing model content</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="780" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Viewpoint elements</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">selection and presentation of existing model content</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="1520" height="580" rx="24" fill="#f7fafc" stroke="#3f7db6" stroke-width="2"/>
+  <rect x="40" y="120" width="1520" height="58" rx="24" fill="#3f7db6"/>
+  <rect x="40" y="154" width="1520" height="24" fill="#3f7db6"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Concern to view</tspan></text>
+    
+  <rect x="80" y="245" width="190" height="70" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="175" y="287" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="175" dy="0">Stakeholder</tspan></text>
+  <rect x="370" y="245" width="170" height="70" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="455" y="287" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="455" dy="0">Concern</tspan></text>
+  <rect x="650" y="245" width="190" height="70" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="745" y="287" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="745" dy="0">Viewpoint</tspan></text>
+  <rect x="950" y="245" width="190" height="70" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="1045" y="287" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1045" dy="0">MemoView</tspan></text>
+  <rect x="1250" y="245" width="240" height="70" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="1370" y="287" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1370" dy="0">Selected model content</tspan></text>
+    
+  <path d="M 270 280 L 370 280" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="263" y="262" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="320" y="282" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">HasConcern</text>
+  <path d="M 540 280 L 650 280" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="524.2" y="262" width="141.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="595" y="282" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">FramesConcern</text>
+  <path d="M 840 280 L 950 280" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="851.8" y="262" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="895" y="282" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">governs</text>
+  <path d="M 1140 280 L 1250 280" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1147.2" y="262" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1195" y="282" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">includes</text>
+    
+  <rect x="370" y="405" width="230" height="68" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="485" y="446" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="485" dy="0">ViewSelectionQuery</tspan></text>
+  <rect x="650" y="405" width="220" height="68" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="760" y="446" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="760" dy="0">ViewInclusionRule</tspan></text>
+  <path d="M 600 439 L 650 439" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  
+    
+  <rect x="950" y="405" width="210" height="68" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="1055" y="446" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1055" dy="0">MemoDiagramView</tspan></text>
+  <rect x="1230" y="405" width="260" height="68" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="1360" y="446" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1360" dy="0">MemoDocumentBackedView</tspan></text>
+    
+  <rect x="370" y="545" width="240" height="68" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="490" y="586" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="490" dy="0">Viewpoint catalog</tspan></text>
+  <rect x="690" y="545" width="230" height="68" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="805" y="586" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="805" dy="0">Concern-specific views</tspan></text>
+  <rect x="1000" y="545" width="240" height="68" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="1120" y="586" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1120" dy="0">Diagram intent</tspan></text>
+  <rect x="1320" y="545" width="170" height="68" rx="14" fill="#ffffff" stroke="#3f7db6" stroke-width="2"/>
+  <text x="1405" y="586" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1405" dy="0">Document intent</tspan></text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#3f7db6"/>
+</svg>

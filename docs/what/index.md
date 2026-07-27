@@ -113,7 +113,7 @@ functions required on that path.
 | Use case | `UseCase` | `use_cases` |
 | Workflow | `OperationalWorkflow`, `WorkflowStep` | `workflows` |
 | Scenario | `MemoScenario`, `OperativeScenario`, `ScenarioOccurrence` | `scenarios` |
-| Activity on a path | `OperationalActivity`, `ClinicalTaskStep`, `UserTask` | `activities` |
+| Activity on a path | `OperationalActivity`, `TaskStep`, `UserTask` | `activities` |
 
 ## Architecture layers: from intent to realization
 
@@ -275,7 +275,7 @@ and ontology modules that a project will use.
 | Inclusion | What the methodology names | Example |
 |---|---|---|
 | **Architecture layer** | a public layer namespace and the modules collected beneath it | `memo::architecture::operational`, `memo::architecture::functional` |
-| **MEMO module** | a specific public ontology package | `memo::assurance::safety` |
+| **MEMO module** | a specific public ontology package | `memo::assurance::safety_risk` |
 | **External module** | any qualified package made available to the project alongside MEMO | `acme::infusion_extension` |
 
 The same inclusion mechanism is used for MEMO and external modules. A project
