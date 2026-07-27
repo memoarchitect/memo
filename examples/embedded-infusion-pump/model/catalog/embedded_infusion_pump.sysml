@@ -7,10 +7,10 @@ package memo_examples_embedded_infusion_pump {
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_architecture_software_structure::*;
-    private import memo_architecture_software_runtime::*;
-    private import memo_architecture_deployment::*;
-    private import memo_architecture_physical::*;
+    private import memo_architecture_implementation_software_structure::*;
+    private import memo_architecture_implementation_software_runtime::*;
+    private import memo_architecture_realization_deployment::*;
+    private import memo_architecture_realization_physical::*;
 
     // Module view (IEC 62304).
     part swInfusionControl : SoftwareModule {

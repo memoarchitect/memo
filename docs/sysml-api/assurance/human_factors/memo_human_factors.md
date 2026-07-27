@@ -27,8 +27,8 @@
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
-| private | `memo_activities::*` |
-| private | `memo_scenarios::*` |
+| private | `memo_architecture_operational_activities::*` |
+| private | `memo_architecture_operational_scenarios::*` |
 
 ## Declarations
 
@@ -147,8 +147,8 @@ connection def EvaluatesTask :> MemoRelationship
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
-        private import memo_activities::*;
-        private import memo_scenarios::*;
+        private import memo_architecture_operational_activities::*;
+        private import memo_architecture_operational_scenarios::*;
     
         part def UseError specializes MemoPart {
             attribute errorCategory : UseErrorCategoryKind;

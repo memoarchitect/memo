@@ -7,10 +7,10 @@ package memo_examples_software_only_medical_device {
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_architecture_software_structure::*;
-    private import memo_architecture_software_runtime::*;
-    private import memo_architecture_deployment::*;
-    private import memo_architecture_physical::*;
+    private import memo_architecture_implementation_software_structure::*;
+    private import memo_architecture_implementation_software_runtime::*;
+    private import memo_architecture_realization_deployment::*;
+    private import memo_architecture_realization_physical::*;
 
     part swScreeningApp : SoftwareSystem {
         attribute :>> id = "SMD-SW-001"; attribute :>> name = "ScreeningApplication";

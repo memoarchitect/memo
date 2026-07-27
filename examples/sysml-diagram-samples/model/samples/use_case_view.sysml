@@ -1,7 +1,7 @@
 package memo_examples_sysml_diagram_samples_model_samples_use_case_view {
     private import ScalarValues::*;
-    private import memo_context_actors::*;
-    private import memo_use_cases::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_use_cases::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;

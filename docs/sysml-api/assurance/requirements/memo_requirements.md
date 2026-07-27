@@ -26,7 +26,7 @@
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
-| private | `memo_assurance_needs::*` |
+| private | `memo_assurance_requirements_needs::*` |
 
 ## Declarations
 
@@ -155,8 +155,8 @@ part def NotificationSpec specializes MemoPart
     
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
-        // StakeholderNeed and the needs hierarchy now live in memo_assurance_needs.
-        private import memo_assurance_needs::*;
+        // StakeholderNeed and the needs hierarchy now live in memo_assurance_requirements_needs.
+        private import memo_assurance_requirements_needs::*;
         part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
     
         // ISO 14971 risk-analysis inputs. These are model elements so hazards,

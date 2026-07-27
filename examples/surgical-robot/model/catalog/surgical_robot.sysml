@@ -7,8 +7,8 @@ package memo_examples_surgical_robot {
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_architecture_logical_structure::*;
-    private import memo_architecture_hardware_structure::*;
-    private import memo_architecture_ui::*;
+    private import memo_architecture_implementation_hardware_structure::*;
+    private import memo_architecture_implementation_ui::*;
 
     // Control channels: primary + diverse monitor, with declared independence.
     part chMotionPrimary : LogicalComponent {

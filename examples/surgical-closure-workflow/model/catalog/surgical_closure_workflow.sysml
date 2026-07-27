@@ -5,14 +5,14 @@ package memo_examples_surgical_closure_workflow {
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
-    private import memo_context_actors::*;
-    private import memo_context_use_context::*;
-    private import memo_assurance_needs::*;
-    private import memo_use_cases::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_context_use_context::*;
+    private import memo_assurance_requirements_needs::*;
+    private import memo_architecture_operational_use_cases::*;
     private import memo_extension_clinical::*;
-    private import memo_activities::*;
-    private import memo_workflows::*;
-    private import memo_scenarios::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_workflows::*;
+    private import memo_architecture_operational_scenarios::*;
 
     // ── Clinical setting and goal ───────────────────────────────
     part bariatricSurgeon : User {

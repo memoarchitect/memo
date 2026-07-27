@@ -1,19 +1,19 @@
 // User interface and interaction (§18). A small semantic hierarchy: concrete
 // widget forms (button, knob, chart …) are enum classifications, not classes.
-// UI state is distinct from system state (memo_architecture_behavior) and
+// UI state is distinct from system state (memo_architecture_functional_behavior) and
 // from device modes (memo_architecture_logical_structure::LogicalMode).
 // UI is an implementation concern (rendered UI is software; physical controls
 // are hardware), so it lives in the implementation layer, not operational.
-package memo_architecture_ui {
+package memo_architecture_implementation_ui {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_activities::*;
-    private import memo_scenarios::*;
-    private import memo_use_cases::*;
-    private import memo_architecture_functions::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_scenarios::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_architecture_functional_functions::*;
     private import memo_assurance_human_factors::*;
 
     enum def UIElementFormKind {

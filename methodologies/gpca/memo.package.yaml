@@ -1,5 +1,5 @@
 name: "@memoarchitect/methodology-gpca"
-version: "0.5.0"
+version: "0.6.0"
 type: methodology
 extends: "@memoarchitect/methodology-default"
 sysmlDir: "../../examples/gpca-pump/methodology"

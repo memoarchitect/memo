@@ -5,8 +5,8 @@ package memo_assurance_cybersecurity {
     private import memo_core_enumerations::*;
     private import memo_assurance_requirements::*;
     private import memo_assurance_safety_risk::*;
-    private import memo_assurance_verification::*;
-    private import memo_scenarios::*;
+    private import memo_assurance_verification_validation::*;
+    private import memo_architecture_operational_scenarios::*;
 
     part def CybersecurityAsset specializes ArchitectureElement {
         attribute assetKind : AssetKind;

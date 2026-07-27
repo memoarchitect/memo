@@ -1,12 +1,12 @@
-package memo_assurance_verification {
+package memo_assurance_verification_validation {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_scenarios::*;
-    private import memo_use_cases::*;
-    private import memo_architecture_functions::*;
+    private import memo_architecture_operational_scenarios::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_architecture_functional_functions::*;
     // Verification and validation cases are SysML v2 verification cases
     // (behaviours that check requirements), not verifiable structures — they
     // derive from the MemoVerificationCase foundation, not MemoPart.

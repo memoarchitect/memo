@@ -1,4 +1,4 @@
-package memo_assurance_safety_analysis {
+package memo_assurance_safety_risk_analysis {
     private import ScalarValues::*;
 
     private import memo_core_common::*;

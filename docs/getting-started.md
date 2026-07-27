@@ -20,12 +20,13 @@ The main navigation is divided by what the reader is trying to do:
 If this is your first visit:
 
 1. Read [Home](index.md) for the problem, solution, and introduction to MEMO.
-2. Open [Tutorials](examples/index.md) and build one small model.
-3. Use [How-to Guides](how-to/index.md) when you begin applying MEMO to your own
+2. Check the [prerequisites](how-to/install/prerequisites.md) and install MEMO.
+3. Open [Tutorials](examples/index.md) and build one small model.
+4. Use [How-to Guides](how-to/index.md) when you begin applying MEMO to your own
    work.
-4. Keep [Reference](reference/index.md) open for exact ontology definitions.
-5. Read [Explanation](explanation/index.md) when you need the reasoning behind a concept.
-6. Study the [GPCA case study](case-studies/gpca/index.md) when you are ready for
+5. Keep [Reference](reference/index.md) open for exact ontology definitions.
+6. Read [Explanation](explanation/index.md) when you need the reasoning behind a concept.
+7. Study the [GPCA case study](case-studies/gpca/index.md) when you are ready for
    a complete model.
 
 The Reference section is organized for direct lookup from tutorials, how-to

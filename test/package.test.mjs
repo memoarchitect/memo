@@ -85,7 +85,7 @@ test('compiled and generated output is ignored', () => {
     'src/example/output/example.kpar',
     'src/example/.meta.json',
     'build/native/example.o',
-    'dist/memo_ontology-0.5.0-py3-none-any.whl',
+    `dist/memo_ontology-${packageVersion}-py3-none-any.whl`,
     'site/index.html',
     '__pycache__/module.pyc',
     '.pytest_cache/state',
@@ -204,22 +204,22 @@ test('ontology V-model names canonical types and remains structurally valid SVG'
   }
 });
 
-test('namespace-aligned source paths retain their public package names', () => {
+test('source paths and backing package names remain aligned', () => {
   const expectations = {
     'src/core/dimensions/dimensions.sysml': 'memo_core_dimensions',
     'src/core/terminology/terminology.sysml': 'memo_core_terminology',
-    'src/architecture/operational/context/actors/memo_actors.sysml': 'memo_context_actors',
-    'src/architecture/operational/context/stakeholders/memo_stakeholders.sysml': 'memo_context_stakeholders',
-    'src/architecture/operational/context/use_context/memo_use_context.sysml': 'memo_context_use_context',
-    'src/assurance/requirements/needs/memo_needs.sysml': 'memo_assurance_needs',
-    'src/architecture/operational/use_cases/memo_use_cases.sysml': 'memo_use_cases',
-    'src/architecture/operational/activities/memo_activities.sysml': 'memo_activities',
-    'src/architecture/operational/workflows/memo_workflows.sysml': 'memo_workflows',
-    'src/architecture/operational/scenarios/memo_scenarios.sysml': 'memo_scenarios',
+    'src/architecture/operational/context/actors/memo_actors.sysml': 'memo_architecture_operational_context_actors',
+    'src/architecture/operational/context/stakeholders/memo_stakeholders.sysml': 'memo_architecture_operational_context_stakeholders',
+    'src/architecture/operational/context/use_context/memo_use_context.sysml': 'memo_architecture_operational_context_use_context',
+    'src/assurance/requirements/needs/memo_needs.sysml': 'memo_assurance_requirements_needs',
+    'src/architecture/operational/use_cases/memo_use_cases.sysml': 'memo_architecture_operational_use_cases',
+    'src/architecture/operational/activities/memo_activities.sysml': 'memo_architecture_operational_activities',
+    'src/architecture/operational/workflows/memo_workflows.sysml': 'memo_architecture_operational_workflows',
+    'src/architecture/operational/scenarios/memo_scenarios.sysml': 'memo_architecture_operational_scenarios',
     'src/assurance/human_factors/memo_human_factors.sysml': 'memo_assurance_human_factors',
-    'src/architecture/implementation/ui/memo_ui.sysml': 'memo_architecture_ui',
-    'src/architecture/implementation/software/runtime/memo_software_runtime.sysml': 'memo_architecture_software_runtime',
-    'src/architecture/realization/deployment/memo_deployment.sysml': 'memo_architecture_deployment',
+    'src/architecture/implementation/ui/memo_ui.sysml': 'memo_architecture_implementation_ui',
+    'src/architecture/implementation/software/runtime/memo_software_runtime.sysml': 'memo_architecture_implementation_software_runtime',
+    'src/architecture/realization/deployment/memo_deployment.sysml': 'memo_architecture_realization_deployment',
     'src/viewpoints/catalog/memo_viewpoint_catalog.sysml': 'memo_viewpoints_catalog',
     'src/rules/ontology/ontology_invariants.sysml': 'memo_rules_ontology',
   };
@@ -319,12 +319,13 @@ test('the memo root exports the public domain packages', () => {
   assert.equal(existsSync(join(root, 'src', 'medical_device_library.sysml')), false);
   assert.doesNotMatch(library, /memo_medical_device_library/);
   for (const pkg of [
-    'memo_core_dimensions', 'memo_core_terminology', 'memo_context_actors',
-    'memo_context_stakeholders', 'memo_context_use_context', 'memo_assurance_needs',
-    'memo_use_cases', 'memo_activities',
-    'memo_workflows', 'memo_scenarios', 'memo_assurance_human_factors',
-    'memo_architecture_ui', 'memo_architecture_software_runtime',
-    'memo_architecture_deployment',
+    'memo_core_dimensions', 'memo_core_terminology', 'memo_architecture_operational_context_actors',
+    'memo_architecture_operational_context_stakeholders', 'memo_architecture_operational_context_use_context',
+    'memo_assurance_requirements_needs', 'memo_architecture_operational_use_cases',
+    'memo_architecture_operational_activities', 'memo_architecture_operational_workflows',
+    'memo_architecture_operational_scenarios', 'memo_assurance_human_factors',
+    'memo_architecture_implementation_ui', 'memo_architecture_implementation_software_runtime',
+    'memo_architecture_realization_deployment',
     'memo_viewpoints_catalog',
   ]) assert.match(library, new RegExp(`public import ${pkg}::\\*;`), `library must export ${pkg}`);
   assert.doesNotMatch(library, /memo_(?:clinical_procedures|medical_products_)/);

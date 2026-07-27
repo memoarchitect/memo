@@ -19,31 +19,31 @@ Generated from `src/**/*.sysml`. [Source layout](../reference/index.md)
 | Public namespace | Declared package | Source file |
 | --- | --- | --- |
 | `memo::architecture::decisions` | `memo_architecture_decisions` | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
-| `memo::architecture::functional::behavior` | `memo_architecture_behavior` | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
-| `memo::architecture::functional::constraints` | `memo_architecture_constraints` | [`architecture/functional/constraints/memo_constraints.sysml`](architecture/functional/constraints/memo_constraints.md) |
-| `memo::architecture::functional::functions` | `memo_architecture_functions` | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
-| `memo::architecture::implementation::hardware::common` | `memo_architecture_hardware_common` | [`architecture/implementation/hardware/common/memo_hardware_common.sysml`](architecture/implementation/hardware/common/memo_hardware_common.md) |
-| `memo::architecture::implementation::hardware::electrical` | `memo_architecture_hardware_electrical` | [`architecture/implementation/hardware/electrical/memo_hardware_electrical.sysml`](architecture/implementation/hardware/electrical/memo_hardware_electrical.md) |
-| `memo::architecture::implementation::hardware::fluidic` | `memo_architecture_hardware_fluidic` | [`architecture/implementation/hardware/fluidic/memo_hardware_fluidic.sysml`](architecture/implementation/hardware/fluidic/memo_hardware_fluidic.md) |
-| `memo::architecture::implementation::hardware::mechanical` | `memo_architecture_hardware_mechanical` | [`architecture/implementation/hardware/mechanical/memo_hardware_mechanical.sysml`](architecture/implementation/hardware/mechanical/memo_hardware_mechanical.md) |
-| `memo::architecture::implementation::hardware::optical` | `memo_architecture_hardware_optical` | [`architecture/implementation/hardware/optical/memo_hardware_optical.sysml`](architecture/implementation/hardware/optical/memo_hardware_optical.md) |
-| `memo::architecture::implementation::hardware::sensing` | `memo_architecture_hardware_sensing` | [`architecture/implementation/hardware/sensing/memo_hardware_sensing.sysml`](architecture/implementation/hardware/sensing/memo_hardware_sensing.md) |
-| `memo::architecture::implementation::hardware::structure` | `memo_architecture_hardware_structure` | [`architecture/implementation/hardware/structure/memo_hardware_structure.sysml`](architecture/implementation/hardware/structure/memo_hardware_structure.md) |
-| `memo::architecture::implementation::software::runtime` | `memo_architecture_software_runtime` | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
-| `memo::architecture::implementation::software::structure` | `memo_architecture_software_structure` | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
-| `memo::architecture::implementation::ui` | `memo_architecture_ui` | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| `memo::architecture::logical::interfaces` | `memo_architecture_interfaces` | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
+| `memo::architecture::functional::behavior` | `memo_architecture_functional_behavior` | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
+| `memo::architecture::functional::constraints` | `memo_architecture_functional_constraints` | [`architecture/functional/constraints/memo_constraints.sysml`](architecture/functional/constraints/memo_constraints.md) |
+| `memo::architecture::functional::functions` | `memo_architecture_functional_functions` | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| `memo::architecture::implementation::hardware::common` | `memo_architecture_implementation_hardware_common` | [`architecture/implementation/hardware/common/memo_hardware_common.sysml`](architecture/implementation/hardware/common/memo_hardware_common.md) |
+| `memo::architecture::implementation::hardware::electrical` | `memo_architecture_implementation_hardware_electrical` | [`architecture/implementation/hardware/electrical/memo_hardware_electrical.sysml`](architecture/implementation/hardware/electrical/memo_hardware_electrical.md) |
+| `memo::architecture::implementation::hardware::fluidic` | `memo_architecture_implementation_hardware_fluidic` | [`architecture/implementation/hardware/fluidic/memo_hardware_fluidic.sysml`](architecture/implementation/hardware/fluidic/memo_hardware_fluidic.md) |
+| `memo::architecture::implementation::hardware::mechanical` | `memo_architecture_implementation_hardware_mechanical` | [`architecture/implementation/hardware/mechanical/memo_hardware_mechanical.sysml`](architecture/implementation/hardware/mechanical/memo_hardware_mechanical.md) |
+| `memo::architecture::implementation::hardware::optical` | `memo_architecture_implementation_hardware_optical` | [`architecture/implementation/hardware/optical/memo_hardware_optical.sysml`](architecture/implementation/hardware/optical/memo_hardware_optical.md) |
+| `memo::architecture::implementation::hardware::sensing` | `memo_architecture_implementation_hardware_sensing` | [`architecture/implementation/hardware/sensing/memo_hardware_sensing.sysml`](architecture/implementation/hardware/sensing/memo_hardware_sensing.md) |
+| `memo::architecture::implementation::hardware::structure` | `memo_architecture_implementation_hardware_structure` | [`architecture/implementation/hardware/structure/memo_hardware_structure.sysml`](architecture/implementation/hardware/structure/memo_hardware_structure.md) |
+| `memo::architecture::implementation::software::runtime` | `memo_architecture_implementation_software_runtime` | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
+| `memo::architecture::implementation::software::structure` | `memo_architecture_implementation_software_structure` | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
+| `memo::architecture::implementation::ui` | `memo_architecture_implementation_ui` | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| `memo::architecture::logical::interfaces` | `memo_architecture_logical_interfaces` | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
 | `memo::architecture::logical::structure` | `memo_architecture_logical_structure` | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
-| `memo::architecture::operational::activities` | `memo_activities` | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
-| `memo::architecture::operational::context::actors` | `memo_context_actors` | [`architecture/operational/context/actors/memo_actors.sysml`](architecture/operational/context/actors/memo_actors.md) |
-| `memo::architecture::operational::context::stakeholders` | `memo_context_stakeholders` | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
-| `memo::architecture::operational::context::use_context` | `memo_context_use_context` | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
-| `memo::architecture::operational::scenarios` | `memo_scenarios` | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
-| `memo::architecture::operational::structure` | `memo_architecture_operational` | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
-| `memo::architecture::operational::use_cases` | `memo_use_cases` | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| `memo::architecture::operational::workflows` | `memo_workflows` | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| `memo::architecture::realization::deployment` | `memo_architecture_deployment` | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
-| `memo::architecture::realization::physical` | `memo_architecture_physical` | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
+| `memo::architecture::operational::activities` | `memo_architecture_operational_activities` | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
+| `memo::architecture::operational::context::actors` | `memo_architecture_operational_context_actors` | [`architecture/operational/context/actors/memo_actors.sysml`](architecture/operational/context/actors/memo_actors.md) |
+| `memo::architecture::operational::context::stakeholders` | `memo_architecture_operational_context_stakeholders` | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
+| `memo::architecture::operational::context::use_context` | `memo_architecture_operational_context_use_context` | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
+| `memo::architecture::operational::scenarios` | `memo_architecture_operational_scenarios` | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| `memo::architecture::operational::structure` | `memo_architecture_operational_structure` | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
+| `memo::architecture::operational::use_cases` | `memo_architecture_operational_use_cases` | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
+| `memo::architecture::operational::workflows` | `memo_architecture_operational_workflows` | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| `memo::architecture::realization::deployment` | `memo_architecture_realization_deployment` | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
+| `memo::architecture::realization::physical` | `memo_architecture_realization_physical` | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
 
 
 ## artifacts
@@ -60,11 +60,11 @@ Generated from `src/**/*.sysml`. [Source layout](../reference/index.md)
 | `memo::assurance::cybersecurity` | `memo_assurance_cybersecurity` | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | `memo::assurance::human_factors` | `memo_assurance_human_factors` | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
 | `memo::assurance::requirements` | `memo_assurance_requirements` | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
-| `memo::assurance::requirements::needs` | `memo_assurance_needs` | [`assurance/requirements/needs/memo_needs.sysml`](assurance/requirements/needs/memo_needs.md) |
-| `memo::assurance::safety_risk::analysis` | `memo_assurance_safety_analysis` | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
-| `memo::assurance::safety_risk` | `memo_assurance_safety_arch_risk` | [`assurance/safety_risk/memo_arch_risk.sysml`](assurance/safety_risk/memo_arch_risk.md) |
+| `memo::assurance::requirements::needs` | `memo_assurance_requirements_needs` | [`assurance/requirements/needs/memo_needs.sysml`](assurance/requirements/needs/memo_needs.md) |
+| `memo::assurance::safety_risk::analysis` | `memo_assurance_safety_risk_analysis` | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| `memo::assurance::safety_risk` | `memo_assurance_safety_risk_arch_risk` | [`assurance/safety_risk/memo_arch_risk.sysml`](assurance/safety_risk/memo_arch_risk.md) |
 | `memo::assurance::safety_risk` | `memo_assurance_safety_risk` | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
-| `memo::assurance::verification_validation` | `memo_assurance_verification` | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
+| `memo::assurance::verification_validation` | `memo_assurance_verification_validation` | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 
 
 ## compliance

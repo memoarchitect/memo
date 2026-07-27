@@ -1,4 +1,4 @@
-package memo_architecture_constraints {
+package memo_architecture_functional_constraints {
     private import ScalarValues::*;
 
     doc /* Reusable quantitative constraint definitions. */

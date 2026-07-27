@@ -6,14 +6,14 @@
 // it must trace to usability validation.
 // Task difficulty belongs to a task performed in a context — never to an
 // instrument (TaskDifficultyAssessment).
-package memo_activities {
+package memo_architecture_operational_activities {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_context_actors::*;
-    private import memo_context_use_context::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_context_use_context::*;
 
     enum def DemandLevelKind {
         enum minimal;

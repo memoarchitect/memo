@@ -1,4 +1,4 @@
-package memo_assurance_safety_arch_risk {
+package memo_assurance_safety_risk_arch_risk {
     private import ScalarValues::*;
 
     doc /* Configuration Item (CI) aggregator for MEMO architecture risk domain.

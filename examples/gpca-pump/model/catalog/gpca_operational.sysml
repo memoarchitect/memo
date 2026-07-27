@@ -1,11 +1,11 @@
 package memo_examples_gpca_pump_model_catalog_gpca_operational {
     private import ScalarValues::*;
 
-    private import memo_architecture_operational::*;
-    private import memo_activities::*;
-    private import memo_scenarios::*;
-    private import memo_use_cases::*;
-    private import memo_workflows::*;
+    private import memo_architecture_operational_structure::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_scenarios::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_architecture_operational_workflows::*;
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_context::*;
 

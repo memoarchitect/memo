@@ -17,22 +17,16 @@ npm install @memoarchitect/ontology
 `node_modules/@memoarchitect/ontology/`, with the SysML sources under `src/`
 and the packaging contract at `memo.manifest.yaml`.
 
-## 2. Point your project at it
+## 2. Point the modeling environment at it
 
-A MEMO project declares what it extends in `memo.package.yaml`:
+Configure the modeling environment to load this library directory:
 
-```yaml
-name: my-device
-version: "0.1.0"
-type: device
-extends: "@memoarchitect/medical-modeling-profile"
-description: "MEMO medical device model project"
+```text
+node_modules/@memoarchitect/ontology/src/
 ```
 
-`@memoarchitect/medical-modeling-profile` is one of four *logical* packages
-declared inside the single npm package. Tools resolve logical names through
-`memo.manifest.yaml`, never through a directory path, so this reference stays
-valid even if the layout changes:
+The npm package also includes `memo.manifest.yaml`. Node-based consumers can
+use it to locate the ontology, profile, methodology, templates, and examples:
 
 | Logical package | Contains |
 | --- | --- |
@@ -41,20 +35,7 @@ valid even if the layout changes:
 | `@memoarchitect/methodology-default` | The default methodology |
 | `@memoarchitect/methodology-gpca` | The methodology used by the GPCA reference model |
 
-## 3. Or scaffold a new project
-
-If you are starting from nothing, let the CLI do both steps. Install
-[Tools](https://github.com/memoarchitect/memo-tools) and run:
-
-```bash
-memo init my-device
-```
-
-That copies the starter template, writes `memo.package.yaml` with the profile
-already set, and produces `memo.lock.yaml` pinning the exact ontology version.
-Pass an archetype to start from a device shape rather than a blank model.
-
-## 4. Confirm the import resolves
+## 3. Confirm the import resolves
 
 ```sysml
 package import_check {
@@ -64,19 +45,16 @@ package import_check {
 }
 ```
 
-If your editor resolves `User`, you are done. If it does not, the editor
-probably does not know to look inside `node_modules` — see
-[Use a source checkout](source.md) for how to register a library path
-explicitly, or check your tool's library configuration.
+If the environment resolves `User`, the ontology is available. If it does not,
+verify that the library path points to the package's `src/` directory.
 
 ## Pinning
 
-`memo.lock.yaml` records the ontology version the project was built against.
-Commit it. Until 1.0 the content is experimental and names may change between
-releases without migration support, so an unpinned project can break on an
-unrelated install.
+Pin the ontology version in `package.json` and commit the package-manager lock
+file. Until 1.0, an unpinned dependency can receive namespace or API changes.
 
 ## Next
 
 - [Temperature Alarm tutorial](../../tutorials/first-model.md) — build a first model
 - [Repository and packaging](../../architecture/repository.md) — the manifest contract in full
+- [MEMO Tools](https://github.com/memoarchitect/memo-tools) — optional project scaffolding and validation
