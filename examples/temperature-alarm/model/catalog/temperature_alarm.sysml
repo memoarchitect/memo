@@ -9,17 +9,17 @@ package memo_examples_temperature_alarm {
 
     private import memo_core_enumerations::*;
     private import memo_core_dimensions::*;
-    private import memo_context_actors::*;
-    private import memo_assurance_needs::*;
-    private import memo_use_cases::*;
-    private import memo_activities::*;
-    private import memo_scenarios::*;
-    private import memo_architecture_functions::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_assurance_requirements_needs::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_scenarios::*;
+    private import memo_architecture_functional_functions::*;
     private import memo_architecture_logical_structure::*;
     private import memo_assurance_safety_risk::*;
-    private import memo_assurance_verification::*;
+    private import memo_assurance_verification_validation::*;
     private import memo_assurance_human_factors::*;
-    private import memo_architecture_ui::*;
+    private import memo_architecture_implementation_ui::*;
     private import memo_core_relationships::*;
 
     // ── Operational intent ──────────────────────────────────────

@@ -4,7 +4,7 @@ package memo_extension_clinical_procedures {
     private import ScalarValues::*;
 
     private import memo_core_terminology::*;
-    private import memo_workflows::*;
+    private import memo_architecture_operational_workflows::*;
 
     action def ClinicalProcedureWorkflow specializes OperationalWorkflow {
         attribute procedureCode : TerminologyCode[0..1];

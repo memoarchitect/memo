@@ -7,11 +7,11 @@ package memo_examples_functional_logical_physical {
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_activities::*;
-    private import memo_architecture_functions::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_functional_functions::*;
     private import memo_architecture_logical_structure::*;
-    private import memo_architecture_software_structure::*;
-    private import memo_architecture_hardware_structure::*;
+    private import memo_architecture_implementation_software_structure::*;
+    private import memo_architecture_implementation_hardware_structure::*;
 
     // Operational world: what the clinician does.
     action actOcclusionResponse : OperationalActivity {

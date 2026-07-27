@@ -5,11 +5,11 @@ package memo_examples_reusable_instrument {
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
-    private import memo_context_actors::*;
-    private import memo_use_cases::*;
-    private import memo_activities::*;
-    private import memo_workflows::*;
-    private import memo_scenarios::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_workflows::*;
+    private import memo_architecture_operational_scenarios::*;
 
     part sterileProcessingTech : User {
         attribute :>> actorKind = ActorKind::technician;

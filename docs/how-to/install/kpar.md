@@ -1,11 +1,10 @@
 # Install as a KerML archive (`.kpar`)
 
-A **KerML Project Archive** (`.kpar`) is the interchange format for SysML v2
-content. Using MEMO this way needs no Node toolchain and no MEMO tooling — only
-a conformant SysML v2 tool.
+A **KerML Project Archive** (`.kpar`) packages SysML v2 library content. Using
+an existing archive needs no Node toolchain or MEMO tooling. Building an
+archive from this repository requires `sysand`.
 
-Use this route when your team works in SysIDE, SysON, `sysand`, or another
-conformant tool and wants MEMO as portable library content.
+Use this route only when your SysML v2 environment can load `.kpar` libraries.
 
 ## Why this route exists
 
@@ -22,7 +21,10 @@ Two archives are produced:
 | `memo-ontology` | The ontology: core, architecture, assurance, rules, viewpoints, compliance |
 | `memo-methodology-default` | The default methodology, which depends on `memo-ontology` |
 
-## 1. Install sysand
+Compiled archives are build output and are not stored under `src/` or committed
+to the repository.
+
+## 1. Install `sysand`
 
 Get it from [docs.sysand.org](https://docs.sysand.org/) and confirm it is on
 your `PATH`:
@@ -31,22 +33,25 @@ your `PATH`:
 sysand --version
 ```
 
-## 2. Obtain the archive
+## 2. Build the archives
 
-Take `output/memo-ontology.kpar` from a MEMO release, or build it yourself from
-a checkout:
+From a source checkout, run:
 
 ```bash
 ./scripts/build-kpar.sh
 ```
 
-The script requires `sysand` and writes archives to `output/`. It fails on any
-parse error, so a produced archive is by definition one that parsed cleanly.
+The script writes versioned archives below `output/kpar/memo-ontology/` and
+`output/kpar/memo-methodology-default/`. It fails when the external parse
+reports an error.
 
-## 3. Declare it as a dependency
+## 3. Install the archive
 
-In your own `sysand` project, list the MEMO archive alongside the standard
-libraries in `.project.json`:
+Use the target modeling environment's library or package installation
+mechanism. The procedure is environment-specific.
+
+For a `sysand` project, list the MEMO archive alongside the standard libraries
+in `.project.json`:
 
 ```json
 {
@@ -60,9 +65,6 @@ libraries in `.project.json`:
   ]
 }
 ```
-
-MEMO's own methodology project uses exactly this declaration, which is the
-worked example to copy.
 
 If you also want the default methodology, add
 `{ "resource": "urn:kpar:memo-methodology-default" }`.
@@ -81,14 +83,10 @@ Build your project. If `User` resolves, MEMO is available.
 
 ## Trade-offs
 
-- **No `memo init`.** Scaffolding, archetypes, and lock files come from
-  [Tools](https://github.com/memoarchitect/memo-tools), which is a Node
-  package. You can still use MEMO fully; you write the project structure
-  yourself.
-- **Pinning is manual.** Vendor the `.kpar` you built against and record its
+- **Pinning is manual.** Retain the `.kpar` you built against and record its
   version, since there is no lock file doing it for you.
-- **Maximum portability.** In exchange, nothing about your project depends on
-  MEMO's tooling — which is the point of this route.
+- **Installation differs by environment.** `.kpar` support and library
+  registration are provided by the selected SysML v2 environment.
 
 ## Next
 

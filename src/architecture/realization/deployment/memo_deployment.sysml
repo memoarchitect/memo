@@ -2,16 +2,16 @@
 // DeploymentUnit; DeploymentUnit deploysTo ProcessingNode; SoftwareComponent
 // hostedBy ProcessingNode. Software deploys only to capable execution nodes
 // (rules/crosslayer).
-package memo_architecture_deployment {
+package memo_architecture_realization_deployment {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_architecture_software_structure::*;
-    private import memo_architecture_software_runtime::*;
-    private import memo_architecture_physical::*;
-    private import memo_architecture_functions::*;
+    private import memo_architecture_implementation_software_structure::*;
+    private import memo_architecture_implementation_software_runtime::*;
+    private import memo_architecture_realization_physical::*;
+    private import memo_architecture_functional_functions::*;
     private import memo_architecture_logical_structure::*;
 
     part def DeploymentUnit specializes ArchitectureElement {

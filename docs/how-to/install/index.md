@@ -4,10 +4,13 @@ MEMO is content — SysML v2 source — so "installing" it means making that sou
 resolvable from your model. There are three ways to do that, and they suit
 different situations.
 
+[Check the prerequisites](prerequisites.md) before choosing an installation
+route. The requirements differ for using MEMO and building the repository.
+
 | Route | Use it when | Guide |
 | --- | --- | --- |
-| **npm package** | Your project already has a Node toolchain, or you want a pinned, versioned dependency | [Install with npm](npm.md) |
-| **`.kpar` archive** | You use a conformant SysML v2 tool such as `sysand` and want tool-portable content with no Node at all | [Install as a KerML archive](kpar.md) |
+| **npm package** | A Node-based project or modeling tool can resolve library source from `node_modules` | [Install with npm](npm.md) |
+| **`.kpar` archive** | Your SysML v2 environment loads KerML Project Archives | [Build and install a KerML archive](kpar.md) |
 | **Source checkout** | You are contributing to MEMO, or you want to read and modify the library alongside your model | [Use a source checkout](source.md) |
 
 All three end at the same place. Your model imports one library:
@@ -18,11 +21,10 @@ private import memo::*;
 
 ## Which should I choose?
 
-- **Starting a new project?** Use npm. `memo init` scaffolds a project from an
-  archetype and writes the lock file that pins the ontology version.
-- **Using SysIDE, SysON, or another SysML v2 tool without Node?** Use the
-  `.kpar` route. It is the reason MEMO is validated against an external
-  conformant tool on every build.
+- **Using a Node-based project?** Use npm and configure the modeling
+  environment to load `node_modules/@memoarchitect/ontology/src/`.
+- **Using an environment that accepts `.kpar` libraries?** Build an archive
+  with `sysand`, then install it using that environment's library mechanism.
 - **Evaluating or contributing?** Use a source checkout so you can read the
   definitions while you model against them.
 
@@ -45,7 +47,7 @@ library resolves.
 ## Versioning
 
 Until 1.0 the content is experimental: names and structure may change between
-releases without migration support. Pin the version you built against — with
-npm that is `memo.lock.yaml`, with `.kpar` it is the archive you vendored, and
-with a checkout it is the commit. See
+releases without migration support. Pin the version you built against—with npm
+that is the package version in your package-manager lock file, with `.kpar` it
+is the archive you retained, and with a checkout it is the commit. See
 [Repository and packaging](../../architecture/repository.md).

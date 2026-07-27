@@ -1,18 +1,18 @@
 // First-class operational workflows. An OperationalWorkflow is
 // a reusable definition of how clinical or service work is performed — it may
-// exist before any device is selected. A scenario (memo_scenarios) is a
+// exist before any device is selected. A scenario (memo_architecture_operational_scenarios) is a
 // selected path through a workflow; an occurrence is an execution of a
 // scenario. Workflows are action defs: steps, decisions, forks/joins, and
 // successions use native SysML v2 action semantics where portable.
-package memo_workflows {
+package memo_architecture_operational_workflows {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_context_actors::*;
-    private import memo_activities::*;
-    private import memo_use_cases::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_use_cases::*;
 
     // As-is vs. to-be vs. contingency is a typed dimension of the workflow,
     // not a name suffix.

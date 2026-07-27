@@ -1,8 +1,8 @@
 // Actor hierarchy (§4). An Actor interacts with the system; it is distinct
-// from a Stakeholder (memo_context_stakeholders), who has concerns about the
+// from a Stakeholder (memo_architecture_operational_context_stakeholders), who has concerns about the
 // system but need not interact with it. "User" is reserved for a human who
 // interacts with the medical device.
-package memo_context_actors {
+package memo_architecture_operational_context_actors {
     private import ScalarValues::*;
 
     private import memo_core_common::*;

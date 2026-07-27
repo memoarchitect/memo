@@ -3,7 +3,7 @@
 // obligations derived from needs. Need specializes the part-based
 // RequirementDriver so it can serve as a typed end of trace relations
 // (DerivesFrom, Motivates).
-package memo_assurance_needs {
+package memo_assurance_requirements_needs {
     private import ScalarValues::*;
 
     private import memo_core_common::*;

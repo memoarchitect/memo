@@ -4,17 +4,17 @@
 // single ScenarioKind. An occurrence is an actual or hypothetical execution
 // of a scenario. Alternate scenarios reference their base scenario and
 // variation point instead of duplicating the workflow.
-package memo_scenarios {
+package memo_architecture_operational_scenarios {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_context_actors::*;
-    private import memo_context_use_context::*;
-    private import memo_activities::*;
-    private import memo_workflows::*;
-    private import memo_use_cases::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_context_use_context::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_workflows::*;
+    private import memo_architecture_operational_use_cases::*;
 
     enum def ScenarioVariantKind {
         enum nominal;
@@ -49,7 +49,7 @@ package memo_scenarios {
 
     // Shared scenario foundation. Specializations exist only where structure
     // or invariants differ (OperativeScenario here; FunctionalScenario in
-    // memo_functions; UIScenario in memo_architecture_ui;
+    // memo_functions; UIScenario in memo_architecture_implementation_ui;
     // VerificationScenario / ThreatScenario in assurance packages).
     abstract part def MemoScenario specializes MemoPart {
         attribute variantKind : ScenarioVariantKind;

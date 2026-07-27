@@ -6,7 +6,7 @@
 // fluidic, optical, sensing) nest in sibling packages and specialize the roots
 // declared here; acoustic and thermal parts have no dedicated subgroup and stay
 // with the roots.
-package memo_architecture_hardware_common {
+package memo_architecture_implementation_hardware_common {
     private import ScalarValues::*;
 
     private import memo_core_common::*;

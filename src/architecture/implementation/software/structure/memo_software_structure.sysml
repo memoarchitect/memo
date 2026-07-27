@@ -1,7 +1,7 @@
 // Software module view (§11; IEC 62304 5.3-5.4). Code/module structure only:
-// runtime structure lives in memo_architecture_software_runtime and
-// allocation in memo_architecture_deployment.
-package memo_architecture_software_structure {
+// runtime structure lives in memo_architecture_implementation_software_runtime and
+// allocation in memo_architecture_realization_deployment.
+package memo_architecture_implementation_software_structure {
     private import ScalarValues::*;
 
     private import memo_core_common::*;

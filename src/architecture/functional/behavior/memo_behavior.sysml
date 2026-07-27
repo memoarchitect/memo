@@ -1,4 +1,4 @@
-package memo_architecture_behavior {
+package memo_architecture_functional_behavior {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -47,7 +47,7 @@ package memo_architecture_behavior {
         attribute guardCondition : String;
         attribute weight : String;
     }
-    // UIScenario now lives in memo_architecture_ui (:> MemoScenario).
+    // UIScenario now lives in memo_architecture_implementation_ui (:> MemoScenario).
     part def InteractionMessage specializes MemoPart {
         attribute messageKind : MessageKind;
         attribute sequenceOrder : Integer;

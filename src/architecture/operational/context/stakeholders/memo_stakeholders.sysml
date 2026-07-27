@@ -4,13 +4,13 @@
 // ArchitectureDescription. The same real-world entity may play both the
 // Stakeholder and the Actor role — expressed by ActsAsActor, never by merging
 // the types.
-package memo_context_stakeholders {
+package memo_architecture_operational_context_stakeholders {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_context_actors::*;
+    private import memo_architecture_operational_context_actors::*;
 
     part def Stakeholder specializes MemoPart {
         attribute stakeholderCategory : String;

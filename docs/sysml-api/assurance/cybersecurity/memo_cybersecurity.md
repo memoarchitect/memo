@@ -28,8 +28,8 @@
 | private | `memo_core_enumerations::*` |
 | private | `memo_assurance_requirements::*` |
 | private | `memo_assurance_safety_risk::*` |
-| private | `memo_assurance_verification::*` |
-| private | `memo_scenarios::*` |
+| private | `memo_assurance_verification_validation::*` |
+| private | `memo_architecture_operational_scenarios::*` |
 
 ## Declarations
 
@@ -224,8 +224,8 @@ part def SecurityClaim specializes MemoEvidence
         private import memo_core_enumerations::*;
         private import memo_assurance_requirements::*;
         private import memo_assurance_safety_risk::*;
-        private import memo_assurance_verification::*;
-        private import memo_scenarios::*;
+        private import memo_assurance_verification_validation::*;
+        private import memo_architecture_operational_scenarios::*;
     
         part def CybersecurityAsset specializes ArchitectureElement {
             attribute assetKind : AssetKind;

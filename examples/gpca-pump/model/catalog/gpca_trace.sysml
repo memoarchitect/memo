@@ -2,11 +2,11 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     private import ScalarValues::*;
 
     private import memo_core_relationships::*;
-    private import memo_context_actors::*;
-    private import memo_context_use_context::*;
-    private import memo_activities::*;
-    private import memo_architecture_operational::*;
-    private import memo_architecture_functions::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_context_use_context::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_structure::*;
+    private import memo_architecture_functional_functions::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_context::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_operational::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_system::*;

@@ -5,7 +5,7 @@ package memo_extension_clinical_methodology {
     part clinicalExtensionMethod : MethodologyDefinition {
         attribute :>> id = "EXT-CLINICAL-001";
         attribute :>> name = "ClinicalProcedureExtension";
-        attribute :>> version = "0.5.0";
+        attribute :>> version = "0.6.0";
         attribute :>> domain = "clinical procedures";
         attribute :>> description = "Adds optional clinical-procedure vocabulary to a MEMO project.";
         attribute :>> baseMethodName = "MedicalDeviceLightDefault";

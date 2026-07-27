@@ -1,7 +1,7 @@
 package memo_examples_gpca_pump_model_catalog_gpca_analysis {
     private import ScalarValues::*;
 
-    private import memo_assurance_safety_analysis::*;
+    private import memo_assurance_safety_risk_analysis::*;
     private import memo_core_enumerations::*;
 
     // ── FMEA (IEC 60812) ────────────────────────────────────────

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.6.0 - 2026-07-26
+
 - Moved clinical-procedure and medical-product vocabulary from `src/` to
   `examples/extensions/`. They are optional methodology modules selected with
   `includedModule`; no extension metaclass was added.

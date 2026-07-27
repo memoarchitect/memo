@@ -1,7 +1,7 @@
 package memo_examples_gpca_pump_model_catalog_gpca_physical {
     private import ScalarValues::*;
 
-    private import memo_architecture_physical::*;
+    private import memo_architecture_realization_physical::*;
     private import memo_core_enumerations::*;
 
     part mainController : ProcessingNode {

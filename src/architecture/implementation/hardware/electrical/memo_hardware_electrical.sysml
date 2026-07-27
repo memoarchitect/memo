@@ -1,9 +1,9 @@
 // Electrical / electronic realization subgroup (§12). Electrical power and
 // signal parts, plus cabling and connectivity media, specialize the physical
-// roots in memo_architecture_hardware_common.
-package memo_architecture_hardware_electrical {
+// roots in memo_architecture_implementation_hardware_common.
+package memo_architecture_implementation_hardware_electrical {
     private import ScalarValues::*;
-    private import memo_architecture_hardware_common::*;
+    private import memo_architecture_implementation_hardware_common::*;
 
     part def ElectricalComponent specializes PhysicalComponent {
         attribute ratedVoltageV : String;
