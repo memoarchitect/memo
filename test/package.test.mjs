@@ -128,6 +128,13 @@ test('manifest templates are complete source projects using the public memo impo
   for (const dir of ['default', 'samd', 'connected-device', 'monitoring-device', 'infusion-pump']) {
     assert.match(read('templates', dir, 'memo.package.yaml'), /name: "{{name}}"/);
     assert.match(read('templates', dir, 'memo.package.yaml'), /extends: "@memoarchitect\/methodology-default"/);
+    const npmPackage = JSON.parse(read('templates', dir, 'package.json'));
+    assert.equal(npmPackage.name, '{{npmName}}');
+    assert.equal(npmPackage.private, true);
+    assert.equal(npmPackage.dependencies['@memoarchitect/ontology'], '{{ontologyVersion}}');
+    const syside = read('templates', dir, 'syside.toml');
+    assert.match(syside, /"src"/);
+    assert.match(syside, /"node_modules\/@memoarchitect\/ontology\/src"/);
     for (const file of [
       ['architecture', 'system.sysml'],
       ['assurance', 'requirements.sysml'],
@@ -395,6 +402,8 @@ test('npm pack includes all content and no JavaScript', () => {
     'methodologies/default/memo.package.yaml',
     'methodologies/gpca/memo.package.yaml',
     'templates/default/memo.package.yaml',
+    'templates/default/package.json',
+    'templates/default/syside.toml',
     'templates/default/src/architecture/system.sysml',
     'templates/default/src/assurance/requirements.sysml',
     'templates/default/src/artifacts/artifacts.sysml',
