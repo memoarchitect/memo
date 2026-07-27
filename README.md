@@ -18,7 +18,7 @@ pin an exact release; the package has no repository or runtime dependency on Mem
 Tools or Memo Architect.
 
 ```bash
-pnpm add @memoarchitect/ontology@0.6.0
+pnpm add @memoarchitect/ontology@0.6.1
 ```
 
 For coordinated development, the private `memo-meta` workspace checks out
@@ -44,10 +44,10 @@ The manifest maps package identifiers to package subpaths.
 ```
 memo.manifest.yaml           logical package, init, and example map
 ontology/                    @memoarchitect/ontology descriptor
-profile/                     @memoarchitect/medical-modeling-profile + archetypes/templates
+profile/                     @memoarchitect/medical-modeling-profile
 methodologies/default/       @memoarchitect/methodology-default descriptor
 methodologies/gpca/          @memoarchitect/methodology-gpca descriptor
-template/                    complete starter project copied by memo init
+templates/                   complete starter projects selectable by memo init --template
 examples/gpca-pump/          reference model (not a scaffold template)
 src/                         all reusable .sysml content (namespace = directory)
   memo_namespaces.sysml          public memo import and nested namespace map
