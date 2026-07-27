@@ -11,9 +11,9 @@ package memo_examples_multidimensional_layers {
 
     private import memo_core_enumerations::*;
     private import memo_core_dimensions::*;
-    private import memo_architecture_software_structure::*;
-    private import memo_architecture_software_runtime::*;
-    private import memo_assurance_verification::*;
+    private import memo_architecture_implementation_software_structure::*;
+    private import memo_architecture_implementation_software_runtime::*;
+    private import memo_assurance_verification_validation::*;
     private import memo_core_relationships::*;
 
     part doseLimitChecker : SoftwareModule {

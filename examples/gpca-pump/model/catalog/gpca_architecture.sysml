@@ -1,8 +1,8 @@
 package memo_examples_gpca_pump_model_catalog_gpca_architecture {
     private import ScalarValues::*;
 
-    private import memo_architecture_hardware_structure::*;
-    private import memo_architecture_software_structure::*;
+    private import memo_architecture_implementation_hardware_structure::*;
+    private import memo_architecture_implementation_software_structure::*;
     private import memo_architecture_logical_structure::*;
     private import memo_core_relationships::*;
     private import memo_core_enumerations::*;

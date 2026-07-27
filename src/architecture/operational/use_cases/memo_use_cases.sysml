@@ -1,15 +1,15 @@
 // Use cases (§5). A UseCase is a goal a person or organization wants to
 // achieve with system support — there is no separate Goal class. Clinical,
 // service, manufacturing, and development use cases specialize the same base.
-package memo_use_cases {
+package memo_architecture_operational_use_cases {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_context_actors::*;
-    private import memo_context_use_context::*;
-    private import memo_assurance_needs::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_context_use_context::*;
+    private import memo_assurance_requirements_needs::*;
 
     enum def UseCaseKind {
         enum clinical;

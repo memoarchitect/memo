@@ -1,16 +1,16 @@
 // Software runtime (component-and-connector) view (§11). Runtime structure
 // with concurrency, scheduling, health monitoring, fault containment, and
 // update/rollback semantics. Module structure lives in
-// memo_architecture_software_structure; allocation in
-// memo_architecture_deployment. Detailed AADL categories stay in the AADL
+// memo_architecture_implementation_software_structure; allocation in
+// memo_architecture_realization_deployment. Detailed AADL categories stay in the AADL
 // correspondence profile (examples/aadl-mapping).
-package memo_architecture_software_runtime {
+package memo_architecture_implementation_software_runtime {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_architecture_software_structure::*;
+    private import memo_architecture_implementation_software_structure::*;
 
     // process / thread / task / service / container / partition /
     // dataStore / messageBroker.

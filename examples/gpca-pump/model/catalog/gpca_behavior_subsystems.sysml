@@ -1,7 +1,7 @@
 package memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems {
     private import ScalarValues::*;
 
-    private import memo_architecture_functions::*;
+    private import memo_architecture_functional_functions::*;
     private import memo_core_enumerations::*;
 
     // ── Logical functions ───────────────────────────────────────

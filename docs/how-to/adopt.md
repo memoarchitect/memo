@@ -19,12 +19,12 @@ layers that reach nothing.
 | 3 · Operational analysis | Clinical context, actors, therapy state, system response |
 | 4 · Functional flow | Functions, mode transitions, alarms, timing, user and system actions |
 | 5 · Logical architecture | Responsibilities, software items, interfaces, SOUP, data paths |
-| 6 · Physical allocation | Hardware/software boundary, sensors, actuators, UI, network |
+| 6 · Implementation and realization | Hardware/software boundary, sensors, actuators, UI, network, and deployment |
 | 7 · Change impact | Affected requirements, hazards, interfaces, tests, and decisions |
 | 8 · Evidence thread | Verification results, validation claims, DHF and RMF evidence state |
 
-[One closed thread](../what/closed-thread.md) shows exactly this walk on a
-real scenario, ending in `memo validate` output.
+[One closed thread](../what/closed-thread.md) shows this walk on a real
+scenario from operational intent to evidence.
 
 ### Cross-cutting work that runs alongside
 
@@ -53,8 +53,9 @@ modes, organisation-specific kinds, and project vocabulary belong outside
 will actually use before you automate anything. A rule nobody agreed to is a
 build failure nobody will fix.
 
-**4. Add tools gradually.** Prove the value of the shared model first. The CLI
-and Architect read the same source; neither is required to start.
+**4. Add automation gradually.** Prove the value of the shared model first.
+Validation, CI, and visual review can be added without changing the ontology
+content.
 
 ## Adopt by team context
 
@@ -102,7 +103,8 @@ change impact is where document-based traceability hurts most.
 ## What good looks like after one quarter
 
 - One scenario is modelled from use case to evidence.
-- `memo validate` runs in CI and the team fixes what it reports.
+- The selected SysML v2 environment validates the model in CI and the team
+  fixes what it reports.
 - At least one review question that used to take a day of searching is
   answered by querying the model.
 - The core ontology is unmodified; everything project-specific lives in your

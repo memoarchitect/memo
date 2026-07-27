@@ -141,32 +141,32 @@
 | public | `memo_core_terminology::*` |
 | public | `memo_core_common::*` |
 | public | `memo_core_relationships::*` |
-| public | `memo_context_actors::*` |
-| public | `memo_context_stakeholders::*` |
-| public | `memo_context_use_context::*` |
-| public | `memo_assurance_needs::*` |
-| public | `memo_use_cases::*` |
-| public | `memo_activities::*` |
-| public | `memo_workflows::*` |
-| public | `memo_scenarios::*` |
+| public | `memo_architecture_operational_context_actors::*` |
+| public | `memo_architecture_operational_context_stakeholders::*` |
+| public | `memo_architecture_operational_context_use_context::*` |
+| public | `memo_assurance_requirements_needs::*` |
+| public | `memo_architecture_operational_use_cases::*` |
+| public | `memo_architecture_operational_activities::*` |
+| public | `memo_architecture_operational_workflows::*` |
+| public | `memo_architecture_operational_scenarios::*` |
 | public | `memo_assurance_human_factors::*` |
-| public | `memo_architecture_ui::*` |
-| public | `memo_architecture_operational::*` |
+| public | `memo_architecture_implementation_ui::*` |
+| public | `memo_architecture_operational_structure::*` |
 | public | `memo_assurance_requirements::*` |
-| public | `memo_architecture_functions::*` |
+| public | `memo_architecture_functional_functions::*` |
 | public | `memo_architecture_logical_structure::*` |
-| public | `memo_architecture_interfaces::*` |
-| public | `memo_architecture_behavior::*` |
-| public | `memo_architecture_software_structure::*` |
-| public | `memo_architecture_software_runtime::*` |
-| public | `memo_architecture_deployment::*` |
-| public | `memo_architecture_hardware_structure::*` |
-| public | `memo_architecture_constraints::*` |
+| public | `memo_architecture_logical_interfaces::*` |
+| public | `memo_architecture_functional_behavior::*` |
+| public | `memo_architecture_implementation_software_structure::*` |
+| public | `memo_architecture_implementation_software_runtime::*` |
+| public | `memo_architecture_realization_deployment::*` |
+| public | `memo_architecture_implementation_hardware_structure::*` |
+| public | `memo_architecture_functional_constraints::*` |
 | public | `memo_assurance_safety_risk::*` |
 | public | `memo_assurance_cybersecurity::*` |
-| public | `memo_assurance_verification::*` |
-| public | `memo_architecture_physical::*` |
-| public | `memo_assurance_safety_analysis::*` |
+| public | `memo_assurance_verification_validation::*` |
+| public | `memo_architecture_realization_physical::*` |
+| public | `memo_assurance_safety_risk_analysis::*` |
 | public | `memo_architecture_decisions::*` |
 | public | `memo_viewpoints_definitions::*` |
 | public | `memo_viewpoints_catalog::*` |
@@ -207,41 +207,41 @@
 | public | `memo_methodology_workflow::*` |
 | public | `memo_methodology_gates::*` |
 | public | `memo_methodology_profiles::*` |
-| public | `memo_activities::*` |
+| public | `memo_architecture_operational_activities::*` |
 | public | `memo_assurance_requirements::*` |
 | public | `memo_assurance_safety_risk::*` |
-| public | `memo_assurance_safety_arch_risk::*` |
+| public | `memo_assurance_safety_risk_arch_risk::*` |
 | public | `memo_assurance_human_factors::*` |
-| public | `memo_context_actors::*` |
-| public | `memo_context_stakeholders::*` |
-| public | `memo_context_use_context::*` |
-| public | `memo_assurance_needs::*` |
-| public | `memo_scenarios::*` |
-| public | `memo_use_cases::*` |
-| public | `memo_workflows::*` |
-| public | `memo_architecture_deployment::*` |
-| public | `memo_architecture_software_runtime::*` |
-| public | `memo_architecture_ui::*` |
-| public | `memo_architecture_hardware_common::*` |
-| public | `memo_architecture_hardware_electrical::*` |
-| public | `memo_architecture_hardware_mechanical::*` |
-| public | `memo_architecture_hardware_fluidic::*` |
-| public | `memo_architecture_hardware_optical::*` |
-| public | `memo_architecture_hardware_sensing::*` |
-| public | `memo_assurance_safety_arch_risk::*` |
-| public | `memo_assurance_safety_analysis::*` |
-| public | `memo_assurance_verification::*` |
-| public | `memo_architecture_behavior::*` |
-| public | `memo_architecture_constraints::*` |
+| public | `memo_architecture_operational_context_actors::*` |
+| public | `memo_architecture_operational_context_stakeholders::*` |
+| public | `memo_architecture_operational_context_use_context::*` |
+| public | `memo_assurance_requirements_needs::*` |
+| public | `memo_architecture_operational_scenarios::*` |
+| public | `memo_architecture_operational_use_cases::*` |
+| public | `memo_architecture_operational_workflows::*` |
+| public | `memo_architecture_realization_deployment::*` |
+| public | `memo_architecture_implementation_software_runtime::*` |
+| public | `memo_architecture_implementation_ui::*` |
+| public | `memo_architecture_implementation_hardware_common::*` |
+| public | `memo_architecture_implementation_hardware_electrical::*` |
+| public | `memo_architecture_implementation_hardware_mechanical::*` |
+| public | `memo_architecture_implementation_hardware_fluidic::*` |
+| public | `memo_architecture_implementation_hardware_optical::*` |
+| public | `memo_architecture_implementation_hardware_sensing::*` |
+| public | `memo_assurance_safety_risk_arch_risk::*` |
+| public | `memo_assurance_safety_risk_analysis::*` |
+| public | `memo_assurance_verification_validation::*` |
+| public | `memo_architecture_functional_behavior::*` |
+| public | `memo_architecture_functional_constraints::*` |
 | public | `memo_assurance_cybersecurity::*` |
 | public | `memo_architecture_decisions::*` |
-| public | `memo_architecture_functions::*` |
-| public | `memo_architecture_hardware_structure::*` |
-| public | `memo_architecture_interfaces::*` |
+| public | `memo_architecture_functional_functions::*` |
+| public | `memo_architecture_implementation_hardware_structure::*` |
+| public | `memo_architecture_logical_interfaces::*` |
 | public | `memo_architecture_logical_structure::*` |
-| public | `memo_architecture_operational::*` |
-| public | `memo_architecture_physical::*` |
-| public | `memo_architecture_software_structure::*` |
+| public | `memo_architecture_operational_structure::*` |
+| public | `memo_architecture_realization_physical::*` |
+| public | `memo_architecture_implementation_software_structure::*` |
 | public | `memo_artifacts_definitions::*` |
 | public | `memo_compliance_artifacts::*` |
 | public | `memo_compliance_change::*` |
@@ -325,32 +325,32 @@
         public import memo_core_common::*;
         public import memo_core_relationships::*;
     
-        public import memo_context_actors::*;
-        public import memo_context_stakeholders::*;
-        public import memo_context_use_context::*;
-        public import memo_assurance_needs::*;
-        public import memo_use_cases::*;
-        public import memo_activities::*;
-        public import memo_workflows::*;
-        public import memo_scenarios::*;
+        public import memo_architecture_operational_context_actors::*;
+        public import memo_architecture_operational_context_stakeholders::*;
+        public import memo_architecture_operational_context_use_context::*;
+        public import memo_assurance_requirements_needs::*;
+        public import memo_architecture_operational_use_cases::*;
+        public import memo_architecture_operational_activities::*;
+        public import memo_architecture_operational_workflows::*;
+        public import memo_architecture_operational_scenarios::*;
         public import memo_assurance_human_factors::*;
-        public import memo_architecture_ui::*;
-        public import memo_architecture_operational::*;
+        public import memo_architecture_implementation_ui::*;
+        public import memo_architecture_operational_structure::*;
         public import memo_assurance_requirements::*;
-        public import memo_architecture_functions::*;
+        public import memo_architecture_functional_functions::*;
         public import memo_architecture_logical_structure::*;
-        public import memo_architecture_interfaces::*;
-        public import memo_architecture_behavior::*;
-        public import memo_architecture_software_structure::*;
-        public import memo_architecture_software_runtime::*;
-        public import memo_architecture_deployment::*;
-        public import memo_architecture_hardware_structure::*;
-        public import memo_architecture_constraints::*;
+        public import memo_architecture_logical_interfaces::*;
+        public import memo_architecture_functional_behavior::*;
+        public import memo_architecture_implementation_software_structure::*;
+        public import memo_architecture_implementation_software_runtime::*;
+        public import memo_architecture_realization_deployment::*;
+        public import memo_architecture_implementation_hardware_structure::*;
+        public import memo_architecture_functional_constraints::*;
         public import memo_assurance_safety_risk::*;
         public import memo_assurance_cybersecurity::*;
-        public import memo_assurance_verification::*;
-        public import memo_architecture_physical::*;
-        public import memo_assurance_safety_analysis::*;
+        public import memo_assurance_verification_validation::*;
+        public import memo_architecture_realization_physical::*;
+        public import memo_assurance_safety_risk_analysis::*;
         public import memo_architecture_decisions::*;
     
         public import memo_viewpoints_definitions::*;
@@ -406,7 +406,7 @@
     }
     
     package memo_namespace_activities {
-        public import memo_activities::*;
+        public import memo_architecture_operational_activities::*;
     }
     
     // Vertical axis — assurance disciplines (requirements, safety, cybersecurity,
@@ -419,7 +419,7 @@
         }
         package safety_risk {
             public import memo_assurance_safety_risk::*;
-            public import memo_assurance_safety_arch_risk::*;
+            public import memo_assurance_safety_risk_arch_risk::*;
             alias analysis for memo_namespace_assurance_safety_risk_analysis;
         }
         alias cybersecurity for memo_namespace_assurance_cybersecurity;
@@ -438,71 +438,71 @@
     }
     
     package memo_namespace_context_actors {
-        public import memo_context_actors::*;
+        public import memo_architecture_operational_context_actors::*;
     }
     
     package memo_namespace_context_stakeholders {
-        public import memo_context_stakeholders::*;
+        public import memo_architecture_operational_context_stakeholders::*;
     }
     
     package memo_namespace_context_use_context {
-        public import memo_context_use_context::*;
+        public import memo_architecture_operational_context_use_context::*;
     }
     
     package memo_namespace_assurance_requirements_needs {
-        public import memo_assurance_needs::*;
+        public import memo_assurance_requirements_needs::*;
     }
     
     package memo_namespace_scenarios {
-        public import memo_scenarios::*;
+        public import memo_architecture_operational_scenarios::*;
     }
     
     package memo_namespace_use_cases {
-        public import memo_use_cases::*;
+        public import memo_architecture_operational_use_cases::*;
     }
     
     package memo_namespace_workflows {
-        public import memo_workflows::*;
+        public import memo_architecture_operational_workflows::*;
     }
     
     package memo_namespace_architecture_deployment {
-        public import memo_architecture_deployment::*;
+        public import memo_architecture_realization_deployment::*;
     }
     
     package memo_namespace_architecture_software_runtime {
-        public import memo_architecture_software_runtime::*;
+        public import memo_architecture_implementation_software_runtime::*;
     }
     
     package memo_namespace_architecture_ui {
-        public import memo_architecture_ui::*;
+        public import memo_architecture_implementation_ui::*;
     }
     
     package memo_namespace_architecture_hardware_common {
-        public import memo_architecture_hardware_common::*;
+        public import memo_architecture_implementation_hardware_common::*;
     }
     
     package memo_namespace_architecture_hardware_electrical {
-        public import memo_architecture_hardware_electrical::*;
+        public import memo_architecture_implementation_hardware_electrical::*;
     }
     
     package memo_namespace_architecture_hardware_mechanical {
-        public import memo_architecture_hardware_mechanical::*;
+        public import memo_architecture_implementation_hardware_mechanical::*;
     }
     
     package memo_namespace_architecture_hardware_fluidic {
-        public import memo_architecture_hardware_fluidic::*;
+        public import memo_architecture_implementation_hardware_fluidic::*;
     }
     
     package memo_namespace_architecture_hardware_optical {
-        public import memo_architecture_hardware_optical::*;
+        public import memo_architecture_implementation_hardware_optical::*;
     }
     
     package memo_namespace_architecture_hardware_sensing {
-        public import memo_architecture_hardware_sensing::*;
+        public import memo_architecture_implementation_hardware_sensing::*;
     }
     
     package memo_assurance_safety_compatibility {
-        public import memo_assurance_safety_arch_risk::*;
+        public import memo_assurance_safety_risk_arch_risk::*;
     }
     
     // Horizontal axis — the five V-model architecture layers. Interfaces remain
@@ -613,19 +613,19 @@
     }
     
     package memo_namespace_assurance_safety_risk_analysis {
-        public import memo_assurance_safety_analysis::*;
+        public import memo_assurance_safety_risk_analysis::*;
     }
     
     package memo_namespace_assurance_verification_validation {
-        public import memo_assurance_verification::*;
+        public import memo_assurance_verification_validation::*;
     }
     
     package memo_namespace_architecture_behavior {
-        public import memo_architecture_behavior::*;
+        public import memo_architecture_functional_behavior::*;
     }
     
     package memo_namespace_architecture_constraints {
-        public import memo_architecture_constraints::*;
+        public import memo_architecture_functional_constraints::*;
     }
     
     package memo_namespace_assurance_cybersecurity {
@@ -637,15 +637,15 @@
     }
     
     package memo_namespace_architecture_functions {
-        public import memo_architecture_functions::*;
+        public import memo_architecture_functional_functions::*;
     }
     
     package memo_namespace_architecture_hardware_structure {
-        public import memo_architecture_hardware_structure::*;
+        public import memo_architecture_implementation_hardware_structure::*;
     }
     
     package memo_namespace_architecture_interfaces {
-        public import memo_architecture_interfaces::*;
+        public import memo_architecture_logical_interfaces::*;
     }
     
     package memo_namespace_architecture_logical_structure {
@@ -653,15 +653,15 @@
     }
     
     package memo_namespace_architecture_operational {
-        public import memo_architecture_operational::*;
+        public import memo_architecture_operational_structure::*;
     }
     
     package memo_namespace_architecture_physical {
-        public import memo_architecture_physical::*;
+        public import memo_architecture_realization_physical::*;
     }
     
     package memo_namespace_architecture_software_structure {
-        public import memo_architecture_software_structure::*;
+        public import memo_architecture_implementation_software_structure::*;
     }
     
     package memo_namespace_artifacts_definitions {

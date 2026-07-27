@@ -1,8 +1,8 @@
 package memo_examples_sysml_diagram_samples_model_samples_tree_view {
     private import ScalarValues::*;
-    private import memo_architecture_hardware_structure::*;
+    private import memo_architecture_implementation_hardware_structure::*;
 
-    private import memo_architecture_physical::*;
+    private import memo_architecture_realization_physical::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;

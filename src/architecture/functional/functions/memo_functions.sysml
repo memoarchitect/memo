@@ -4,14 +4,14 @@
 // function may be realized by human action, mechanical design, electrical
 // hardware, software, or a combination — allocation is optional and never
 // assumes software.
-package memo_architecture_functions {
+package memo_architecture_functional_functions {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_activities::*;
-    private import memo_scenarios::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_scenarios::*;
 
     part def SystemFunction specializes ArchitectureElement {
         attribute functionCategory : String;

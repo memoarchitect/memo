@@ -1,9 +1,9 @@
-package memo_architecture_interfaces {
+package memo_architecture_logical_interfaces {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
-    private import memo_architecture_functions::*;
+    private import memo_architecture_functional_functions::*;
 
     // ─── One Interface definition ────────────────────────────────────
     // Realization domain (hardware vs software), signaling family

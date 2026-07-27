@@ -1,8 +1,8 @@
 package memo_examples_gpca_pump_model_catalog_gpca_context {
     private import ScalarValues::*;
 
-    private import memo_context_actors::*;
-    private import memo_context_use_context::*;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_context_use_context::*;
     private import memo_assurance_requirements::*;
     private import memo_assurance_human_factors::*;
     private import memo_core_enumerations::*;

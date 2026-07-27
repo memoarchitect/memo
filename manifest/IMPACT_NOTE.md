@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## Release 0.6.0
+
 The ontology source tree now follows the nested public namespace structure.
 
 ### Expected impact

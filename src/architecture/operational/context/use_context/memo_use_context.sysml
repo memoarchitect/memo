@@ -1,13 +1,13 @@
 // Operational use context (IEC 62366-1 use specification). Intended use and
 // reasonably foreseeable misuse are assurance requirements/risk inputs and
 // live in memo_assurance_requirements.
-package memo_context_use_context {
+package memo_architecture_operational_context_use_context {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_context_actors::*;
+    private import memo_architecture_operational_context_actors::*;
 
     part def UseContext specializes MemoPart {
         attribute careSetting : String;

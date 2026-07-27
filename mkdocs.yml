@@ -100,6 +100,7 @@ nav:
       - how-to/index.md
       - Install MEMO:
           - how-to/install/index.md
+          - Prerequisites: how-to/install/prerequisites.md
           - With npm: how-to/install/npm.md
           - As a KerML archive: how-to/install/kpar.md
           - From a source checkout: how-to/install/source.md

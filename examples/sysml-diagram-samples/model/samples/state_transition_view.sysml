@@ -4,7 +4,7 @@
 package memo_examples_sysml_diagram_samples_model_samples_state_transition_view {
     private import ScalarValues::*;
 
-    private import memo_architecture_behavior::*;
+    private import memo_architecture_functional_behavior::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;

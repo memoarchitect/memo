@@ -1,7 +1,7 @@
 package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
     private import ScalarValues::*;
 
-    private import memo_architecture_behavior::*;
+    private import memo_architecture_functional_behavior::*;
     private import memo_core_enumerations::*;
 
     // ═════════════════════════════════════════════════════════════

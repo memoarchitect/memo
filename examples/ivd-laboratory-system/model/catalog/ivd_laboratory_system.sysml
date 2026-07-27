@@ -7,9 +7,9 @@ package memo_examples_ivd_laboratory_system {
     private import memo_core_enumerations::*;
     private import memo_core_terminology::*;
     private import memo_core_relationships::*;
-    private import memo_activities::*;
+    private import memo_architecture_operational_activities::*;
     private import memo_architecture_logical_structure::*;
-    private import memo_architecture_hardware_structure::*;
+    private import memo_architecture_implementation_hardware_structure::*;
 
     part analyzer : PhysicalAssembly {
         attribute :>> id = "IVD-DEV-001"; attribute :>> name = "ChemAnalyzer";

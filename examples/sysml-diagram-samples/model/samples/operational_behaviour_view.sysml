@@ -1,9 +1,9 @@
 package memo_examples_sysml_diagram_samples_model_samples_operational_behaviour_view {
     private import ScalarValues::*;
-    private import memo_context_actors::*;
+    private import memo_architecture_operational_context_actors::*;
     private import memo_core_relationships::*;
-    private import memo_architecture_interfaces::*;
-    private import memo_architecture_operational::*;
+    private import memo_architecture_logical_interfaces::*;
+    private import memo_architecture_operational_structure::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
