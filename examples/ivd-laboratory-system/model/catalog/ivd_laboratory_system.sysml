@@ -1,34 +1,19 @@
 // Focused example: in-vitro diagnostic laboratory analyzer. Specimen as
 // material flow through fluidic components, a LOINC-coded measurement
-// result, and calibration as a required product-usage property.
+// result, and an operational activity for running a panel.
 package memo_examples_ivd_laboratory_system {
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_terminology::*;
     private import memo_core_relationships::*;
-    private import memo_medical_products_definitions::*;
-    private import memo_medical_products_usage::*;
     private import memo_activities::*;
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_hardware_structure::*;
 
-    part analyzerDef : MedicalDeviceDefinition {
-        attribute :>> id = "IVD-DEF-001"; attribute :>> name = "ChemAnalyzer_CA200";
-        attribute :>> intendedPurpose = "Quantitative measurement of clinical chemistry analytes in serum and plasma.";
-        attribute :>> technologyDomains = (
-            TechnologyDomainKind::mechanical,
-            TechnologyDomainKind::electrical,
-            TechnologyDomainKind::electronic,
-            TechnologyDomainKind::software,
-            TechnologyDomainKind::fluidic,
-            TechnologyDomainKind::optical);
-        attribute :>> riskClassification = "IVDR Class C (example)";
-    }
-    part analyzer : MedicalDevice {
-        attribute :>> deviceCategory = MedicalDeviceCategoryKind::equipment;
+    part analyzer : PhysicalAssembly {
         attribute :>> id = "IVD-DEV-001"; attribute :>> name = "ChemAnalyzer";
-        ref :>> definition = analyzerDef;
+        attribute :>> responsibility = "automate clinical chemistry measurements";
     }
 
     // Specimen path: material flow through fluidic hardware.
@@ -65,15 +50,9 @@ package memo_examples_ivd_laboratory_system {
         attribute :>> display = "Glucose [Mass/volume] in Serum or Plasma";
     }
 
-    // Operating the analyzer requires calibration (product-usage property).
+    // Operating activity for the analyzer.
     action actRunPanel : OperationalActivity {
         attribute :>> id = "IVD-ACT-001"; attribute :>> name = "RunChemistryPanel";
         attribute :>> criticality = CriticalityKind::high;
-    }
-    connection : UsesProduct connect using ::> actRunPanel to product ::> analyzer {
-        attribute :>> productRole = ProductRoleKind::measurementInstrument;
-        attribute :>> required = true;
-        attribute :>> calibrationRequired = true;
-        attribute :>> usageInstructions = "two-level QC must pass within the current calibration window";
     }
 }

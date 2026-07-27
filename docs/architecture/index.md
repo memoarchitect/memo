@@ -28,7 +28,7 @@ The operational perspective answers **why, for whom, and in what context**.
 | `UseCase` with `UseCaseKind` | A clinical, service, manufacturing, or development goal | `Motivates`, `Supports`, `Validates` |
 | `OperationalWorkflow`, `WorkflowStep` | Reusable organization of work | `Supports`, `StepPrecedes` |
 | `OperativeScenario` | A nominal, alternate, or exception path | `Selects`, `Realizes` |
-| `OperationalActivity`, `Task`, `CriticalTask` | Work performed along a path | `Performs`, `UsesProduct`, `Enables` |
+| `OperationalActivity`, `UserTask` | Work performed along a path | `Performs`, `Enables`; optional extensions may add resource details |
 
 **Core split:** `UseCase → OperationalWorkflow → OperativeScenario →
 OperationalActivity → action flow → SystemFunction`. A scenario owns the

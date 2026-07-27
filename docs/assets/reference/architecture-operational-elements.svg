@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1030" viewBox="0 0 1600 1030" role="img" aria-labelledby="title desc">
+  <title id="title">Operational elements</title>
+  <desc id="desc">people, context, work, and scenarios</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="1030" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Operational elements</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">people, context, work, and scenarios</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="710" height="260" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="120" width="710" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="40" y="154" width="710" height="24" fill="#6f42c1"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">People and context</tspan></text>
+    
+  <rect x="75" y="205" width="190" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="170" y="245" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="170" dy="0">Stakeholder</tspan></text>
+  <rect x="330" y="205" width="170" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="415" y="245" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="415" dy="0">Concern</tspan></text>
+  <path d="M 265 238 L 330 238" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="240.5" y="220" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="297.5" y="240" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">HasConcern</text>
+    
+  <rect x="75" y="300" width="190" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="170" y="340" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="170" dy="0">User</tspan></text>
+  <rect x="330" y="300" width="170" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="415" y="340" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="415" dy="0">Actor</tspan></text>
+  <path d="M 265 333 L 330 333" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="235.9" y="315" width="123.19999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="297.5" y="335" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specializes</text>
+    
+  <rect x="535" y="205" width="180" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="625" y="245" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="625" dy="0">UseContext</tspan></text>
+  <rect x="535" y="300" width="180" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="625" y="340" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="625" dy="0">UseEnvironment</tspan></text>
+  <path d="M 625 271 L 625 300" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="623" y="267.5" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="680" y="287.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">SituatedIn</text>
+
+    
+  <rect x="790" y="120" width="770" height="260" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="790" y="120" width="770" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="790" y="154" width="770" height="24" fill="#6f42c1"/>
+  <text x="814" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="814" dy="0">Goals and operational work</tspan></text>
+    
+  <rect x="830" y="205" width="190" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="925" y="245" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="925" dy="0">UseCase</tspan></text>
+  <rect x="1090" y="205" width="210" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="1195" y="245" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1195" dy="0">OperationalActivity</tspan></text>
+  <rect x="1340" y="205" width="180" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="1430" y="245" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1430" dy="0">UserTask</tspan></text>
+    
+  <rect x="830" y="300" width="210" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="935" y="340" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="935" dy="0">OperationalEntity</tspan></text>
+  <rect x="1090" y="300" width="210" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="1195" y="340" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1195" dy="0">OperationalCapability</tspan></text>
+  <rect x="1340" y="300" width="180" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="1430" y="340" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1430" dy="0">TaskStep</tspan></text>
+
+    
+  <rect x="40" y="420" width="1520" height="540" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="420" width="1520" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="40" y="454" width="1520" height="24" fill="#6f42c1"/>
+  <text x="64" y="458" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Workflow and scenario structure</tspan></text>
+    
+  <rect x="90" y="525" width="245" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="212.5" y="567" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="212.5" dy="0">OperationalWorkflow</tspan></text>
+  <rect x="425" y="525" width="205" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="527.5" y="567" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="527.5" dy="0">WorkflowStep</tspan></text>
+  <rect x="720" y="525" width="230" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="835" y="567" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="835" dy="0">WorkflowControlNode</tspan></text>
+  <rect x="1040" y="525" width="220" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="1150" y="567" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1150" dy="0">WorkflowResource</tspan></text>
+    
+  <path d="M 335 560 L 425 560" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="332.2" y="542" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="380" y="562" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">contains</text>
+  <path d="M 630 560 L 720 560" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="608.8" y="542" width="132.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="675" y="562" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">StepPrecedes</text>
+  <path d="M 950 560 L 1040 560" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="910.4" y="542" width="169.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="995" y="562" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">RequiresResource</text>
+    
+  <rect x="90" y="690" width="220" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="200" y="732" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="200" dy="0">OperativeScenario</tspan></text>
+  <rect x="410" y="690" width="205" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="512.5" y="732" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="512.5" dy="0">WorkflowStep</tspan></text>
+  <rect x="715" y="690" width="225" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="827.5" y="732" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="827.5" dy="0">ScenarioOccurrence</tspan></text>
+  <rect x="1040" y="690" width="220" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="1150" y="732" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1150" dy="0">UseContext</tspan></text>
+    
+  <path d="M 310 725 L 410 725" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="316.8" y="707" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="360" y="727" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Selects</text>
+  <path d="M 940 725 L 1040 725" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="923.8" y="707" width="132.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="990" y="727" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">OccursDuring</text>
+    
+  <path d="M 200 690 L 212 595" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="26.200000000000003" y="622" width="187.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="120" y="642" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">parentWorkflow ref</text>
+  <path d="M 827 690 L 827 595" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="822" y="624" width="206" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="925" y="644" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">executedScenario ref</text>
+    
+  <rect x="90" y="850" width="200" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="190" y="890" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="190" dy="0">Actor</tspan></text>
+  <rect x="390" y="850" width="200" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="490" y="890" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="490" dy="0">UseCase</tspan></text>
+  <rect x="690" y="850" width="230" height="66" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="805" y="890" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="805" dy="0">OperationalWorkflow</tspan></text>
+    
+  <path d="M 290 883 L 390 883" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="264.6" y="865" width="150.79999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="340" y="885" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ParticipatesIn</text>
+  <path d="M 590 883 L 690 883" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="592.2" y="865" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="640" y="885" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Supports</text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#6f42c1"/>
+</svg>

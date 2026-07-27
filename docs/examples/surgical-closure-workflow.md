@@ -40,7 +40,7 @@ staple line, close, and hand over. `WorkflowStep`s refer to operational
 activities, so the order is inspectable without embedding it in prose.
 
 ```sysml
-action wfSleeveGastrectomy : OperationalWorkflow {
+action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
     attribute :>> name = "LaparoscopicSleeveGastrectomyWorkflow";
     attribute :>> entryCondition = "patient prepared; time-out ready";
     attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
@@ -119,15 +119,15 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `ClinicalTaskStep`, `OperationalActivity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `UserTask`, `WorkflowStep` | [Operational](../reference/elements/operational.md) |
-| Clinical and products | `ClinicalProcedure`, `ClinicalTechnique` | [Clinical and products](../reference/elements/clinical.md) |
-| Assurance | `Need` | [Assurance](../reference/elements/assurance.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+| Operational | `TaskStep`, `OperationalActivity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `UserTask`, `WorkflowStep` | [Operational](../reference/areas/architecture.md#operational) |
+| Clinical extension | `ClinicalProcedureWorkflow` | [Extension modules](../reference/areas/methodology.md#extensions) |
+| Assurance | `Need` | [Assurance](../reference/areas/assurance.md) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `Composes`, `Initiates`, `Motivates`, `Realizes`, `StepPrecedes`, `Supports`, `UsesTechnique` — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+**Typed links it uses:** `Composes`, `Initiates`, `Motivates`, `Realizes`, `StepPrecedes`, and `Supports` come from the base ontology. The clinical extension adds no relationship type.
 
-**Layers it does not populate:** functional, logical, implementation and realization. That is deliberate rather than incomplete — `layersOptionalRule` says a model fills only the layers its device needs. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+**Layers it does not populate:** functional, logical, implementation and realization. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
-**Narrative treatment:** [Context and Use](../layers/context.md) · [Medical Products and Identity](../layers/medical-products.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
+**Narrative treatment:** [Context and Use](../layers/context.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 
 **Source model:** [`examples/surgical-closure-workflow`](https://github.com/memoarchitect/memo/tree/main/examples/surgical-closure-workflow)

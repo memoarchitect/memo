@@ -42,8 +42,8 @@ These are not a ninth step. They accompany every step above:
 ## Four rules for the pilot
 
 **1. One product slice.** Model one safety thread completely rather than every
-layer partially. `layersOptionalRule` exists precisely so a partial model is a
-valid one.
+layer partially. The methodology scope determines which layers and modules the
+project includes.
 
 **2. Keep the core stable.** Extend in your own package or profile. Device
 modes, organisation-specific kinds, and project vocabulary belong outside

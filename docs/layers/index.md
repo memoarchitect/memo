@@ -56,11 +56,6 @@ runtime, deployment), electronics, mechanics, fluidics, optics, and the rest
 of the physical taxonomy. This is where technology commitments live, and only
 here. → [Requirements and Architecture](requirements-architecture.md)
 
-**Products and identity.** The modeled device meets the market as a
-`MedicalDeviceDefinition` (catalog identity, UDI-DI, technology domains, reuse
-lifecycle) and as `MedicalDeviceInstance`s (serial, lot, UDI-PI, history).
-→ [Medical Products and Identity](medical-products.md)
-
 ## The disciplines
 
 Requirements, safety, cybersecurity, human factors, and V&V run **across** the
@@ -89,7 +84,7 @@ mechanical elements (see `manual-surgical-instrument`). A software-only device
 allocates them to logical components, software structure, runtime, and
 deployment (`software-only-medical-device`). In both cases, safety-critical
 functions trace to verification, critical tasks trace to usability validation,
-and instances trace to definitions.
+and assurance evidence remains connected to the architecture it evaluates.
 
 ## Use the map in a review
 

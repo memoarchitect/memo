@@ -46,24 +46,17 @@
       <rect x="875" y="394" width="145" height="46" rx="10" fill="#fff" stroke="#2dd4a8"/><text x="947" y="422" fill="#07604f">VerificationCase</text>
       <rect x="1080" y="394" width="105" height="46" rx="10" fill="#0b1e2d"/><text x="1132" y="422" fill="#2dd4a8">Evidence</text>
 
-      <!-- Product pairs -->
-      <rect x="70" y="520" width="180" height="46" rx="10" fill="#fff" stroke="#5c7188"/><text x="160" y="548" fill="#082744">MedicalDeviceInstance</text>
-      <rect x="330" y="520" width="185" height="46" rx="10" fill="#fff" stroke="#5c7188"/><text x="422" y="548" fill="#082744">MedicalDeviceDefinition</text>
-      <rect x="680" y="520" width="130" height="46" rx="10" fill="#fff" stroke="#8971dc"/><text x="745" y="548" fill="#4c3a98">UserTask</text>
-      <rect x="900" y="520" width="145" height="46" rx="10" fill="#fff" stroke="#ef9b51"/><text x="972" y="548" fill="#88501f">MedicalDevice</text>
     </g>
 
     <g stroke="#5c7188" stroke-width="2.2" fill="none" marker-end="url(#arrow)">
       <path d="M204 165H266"/><path d="M624 165H686"/><path d="M1034 165H1076"/>
       <path d="M214 291H276"/><path d="M609 291H671"/><path d="M1009 291H1061"/>
       <path d="M204 417H266"/><path d="M624 417H686"/><path d="M1024 417H1076"/>
-      <path d="M254 543H326"/><path d="M814 543H896"/>
     </g>
     <g font-family="JetBrains Mono,monospace" font-size="10.5" font-weight="700" fill="#5c7188" text-anchor="middle">
       <text x="235" y="137">Motivates</text><text x="655" y="137">Supports</text><text x="1055" y="137">Selects</text>
       <text x="245" y="263">InvolvesFunction</text><text x="640" y="263">AllocatedTo</text><text x="1035" y="263">Realizes</text>
       <text x="235" y="389">SatisfiedBy</text><text x="655" y="389">Mitigates</text><text x="1050" y="389">ProducesEvidence</text>
-      <text x="290" y="515">InstanceOf</text><text x="855" y="515">UsesProduct</text>
     </g>
 
     <text x="50" y="622" font-size="12.5" font-weight="750" fill="#5c7188">Use the generated relationship reference for exact endpoint roles, attributes, and specializations.</text>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1280" viewBox="0 0 1600 1280" role="img" aria-labelledby="title desc">
+  <title id="title">Implementation elements</title>
+  <desc id="desc">software, hardware, and user-interface design</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="1280" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Implementation elements</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">software, hardware, and user-interface design</tspan></text>
+  <g filter="url(#shadow)">
+    
+  <rect x="40" y="120" width="1520" height="300" rx="24" fill="#f7fafc" stroke="#ed6c02" stroke-width="2"/>
+  <rect x="40" y="120" width="1520" height="58" rx="24" fill="#ed6c02"/>
+  <rect x="40" y="154" width="1520" height="24" fill="#ed6c02"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Software structure and runtime</tspan></text>
+    
+  <rect x="60" y="205" width="200" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="160" y="246" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="160" dy="0">SoftwareSystem</tspan></text>
+  <rect x="330" y="205" width="200" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="430" y="246" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="430" dy="0">SoftwareModule</tspan></text>
+  <rect x="680" y="205" width="200" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="780" y="246" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="780" dy="0">SoftwareModule</tspan></text>
+  <path d="M 530 239 L 680 239" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="548" y="221" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="605" y="241" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ModuleUses</text>
+    
+  <rect x="1010" y="205" width="210" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1115" y="246" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1115" dy="0">SoftwareComponent</tspan></text>
+  <rect x="1370" y="205" width="190" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1465" y="246" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1465" dy="0">SoftwareComponent</tspan></text>
+  <path d="M 1220 239 L 1370 239" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1205.8" y="221" width="178.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1295" y="241" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ComponentConnects</text>
+    
+  <rect x="330" y="320" width="150" height="62" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="405" y="358" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="405" dy="0">Algorithm</tspan></text>
+  <rect x="530" y="320" width="160" height="62" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="610" y="358" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="610" dy="0">DataModel</tspan></text>
+  <rect x="740" y="320" width="230" height="62" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="855" y="358" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="855" dy="0">ConfigurationArtifact</tspan></text>
+  <rect x="1020" y="320" width="150" height="62" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1095" y="358" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1095" dy="0">SBOMEntry</tspan></text>
+
+    
+  <rect x="40" y="460" width="1520" height="300" rx="24" fill="#f7fafc" stroke="#ed6c02" stroke-width="2"/>
+  <rect x="40" y="460" width="1520" height="58" rx="24" fill="#ed6c02"/>
+  <rect x="40" y="494" width="1520" height="24" fill="#ed6c02"/>
+  <text x="64" y="498" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Hardware</tspan></text>
+    
+  <rect x="60" y="555" width="220" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="170" y="596" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="170" dy="0">PhysicalAssembly</tspan></text>
+  <rect x="430" y="525" width="230" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="545" y="566" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="545" dy="0">PhysicalSubassembly</tspan></text>
+  <rect x="430" y="645" width="230" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="545" y="686" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="545" dy="0">HardwareAssembly</tspan></text>
+    
+  <path d="M 430 559 L 280 589" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="293.4" y="556" width="123.19999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="355" y="576" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specializes</text>
+  <path d="M 430 679 L 280 589" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="293.4" y="616" width="123.19999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="355" y="636" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specializes</text>
+    
+  <rect x="760" y="555" width="220" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="870" y="596" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="870" dy="0">PhysicalComponent</tspan></text>
+  <rect x="1130" y="510" width="390" height="62" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1325" y="548" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1325" dy="0">Electrical · Mechanical</tspan></text>
+  <rect x="1130" y="595" width="390" height="62" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1325" y="633" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1325" dy="0">Fluidic · Optical</tspan></text>
+  <rect x="1130" y="680" width="390" height="62" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1325" y="718" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1325" dy="0">Sensor · Actuator</tspan></text>
+    
+  <path d="M 1130 541 L 980 589" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="998" y="547" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1055" y="567" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specialize</text>
+  <path d="M 1130 626 L 980 589" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="998" y="589.5" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1055" y="609.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specialize</text>
+  <path d="M 1130 711 L 980 589" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="998" y="632" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1055" y="652" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">specialize</text>
+
+    
+  <rect x="40" y="800" width="1520" height="400" rx="24" fill="#f7fafc" stroke="#ed6c02" stroke-width="2"/>
+  <rect x="40" y="800" width="1520" height="58" rx="24" fill="#ed6c02"/>
+  <rect x="40" y="834" width="1520" height="24" fill="#ed6c02"/>
+  <text x="64" y="838" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">User interface and interaction</tspan></text>
+    
+  <rect x="60" y="900" width="200" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="160" y="941" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="160" dy="0">UserInterface</tspan></text>
+  <rect x="390" y="900" width="170" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="475" y="941" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="475" dy="0">UIState</tspan></text>
+  <path d="M 260 934 L 390 934" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="254.2" y="916" width="141.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="325" y="936" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">PresentsState</text>
+    
+  <rect x="650" y="900" width="170" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="735" y="941" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="735" dy="0">UIElement</tspan></text>
+  <rect x="990" y="900" width="170" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1075" y="941" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1075" dy="0">UIAction</tspan></text>
+  <rect x="1350" y="900" width="190" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1445" y="941" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1445" dy="0">SystemFunction</tspan></text>
+  <path d="M 820 934 L 990 934" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="797.4" y="916" width="215.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="905" y="936" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ElementTriggersAction</text>
+  <path d="M 1160 934 L 1350 934" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="1147.4" y="916" width="215.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1255" y="936" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ActionInvokesFunction</text>
+    
+  <rect x="60" y="1055" width="190" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="155" y="1096" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="155" dy="0">UIScenario</tspan></text>
+  <rect x="380" y="1055" width="210" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="485" y="1096" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="485" dy="0">InteractionFlow</tspan></text>
+  <rect x="720" y="1055" width="170" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="805" y="1096" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="805" dy="0">UseCase</tspan></text>
+  <path d="M 250 1089 L 380 1089" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="239.60000000000002" y="1071" width="150.79999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="315" y="1091" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">parentFlow ref</text>
+  <path d="M 590 1089 L 720 1089" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="565.8" y="1071" width="178.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="655" y="1091" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">FlowServesUseCase</text>
+    
+  <rect x="1050" y="1055" width="170" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1135" y="1096" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1135" dy="0">UIEvent</tspan></text>
+  <rect x="1320" y="1055" width="190" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
+  <text x="1415" y="1096" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1415" dy="0">UIContainer</tspan></text>
+  </g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#ed6c02"/>
+</svg>

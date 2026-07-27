@@ -6,19 +6,9 @@ package memo_examples_surgical_robot {
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_medical_products_definitions::*;
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_hardware_structure::*;
     private import memo_architecture_ui::*;
-
-    part robotDef : MedicalDeviceDefinition {
-        attribute :>> id = "SR-DEF-001"; attribute :>> name = "TeleSurgicalRobot_T1";
-        attribute :>> technologyDomains = (
-            TechnologyDomainKind::mechanical,
-            TechnologyDomainKind::electrical,
-            TechnologyDomainKind::electronic,
-            TechnologyDomainKind::software);
-    }
 
     // Control channels: primary + diverse monitor, with declared independence.
     part chMotionPrimary : LogicalComponent {

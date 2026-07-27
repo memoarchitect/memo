@@ -50,16 +50,17 @@ methodologies/gpca/          @memoarchitect/methodology-gpca descriptor
 template/                    complete starter project copied by memo init
 examples/gpca-pump/          reference model (not a scaffold template)
 src/                         all reusable .sysml content (namespace = directory)
-  medical_device_library.sysml   public import surface
+  memo_namespaces.sysml          public memo import and nested namespace map
   core/                          common/ enumerations/ relationships/
                                  dimensions/ semantics/ + stdlib/* (KerML wrapper)
-  architecture/                  one folder per layer: context/ requirements/ functions/ behavior/
-                                 logical_structure/ software_structure/ … risk/ cybersecurity/ assurance/ …
+  architecture/                  operational/ functional/ logical/ implementation/ realization/
+  assurance/                     requirements/ safety_risk/ cybersecurity/ human_factors/ verification_validation/
   compliance/                    artifacts/ change/ document_views/ postmarket/ iso14971/
   viewpoints/                    reusable viewpoint and view definitions
   rules/                         closure/ coverage/ crosslayer/ lifecycle/ quantitative/ (native constraint defs)
   artifacts/                     artifact kinds (memo::artifacts)
   methodology/                   default methodology
+examples/extensions/             optional domain modules selected by methodology
 ```
 
 ## Build / verify

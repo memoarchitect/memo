@@ -8,12 +8,12 @@ want to read the definitions alongside the model you are writing against them.
 
 Use a local checkout of the [`memo`](https://github.com/memoarchitect/memo)
 repository and keep its `src/` directory intact. That directory is the MEMO
-source library; `src/medical_device_library.sysml` is its public entry point.
+source library; `src/memo_namespaces.sysml` declares its public entry point.
 
 ```text
 memo/
 ├── src/
-│   └── medical_device_library.sysml
+│   └── memo_namespaces.sysml
 └── syside.toml
 ```
 
@@ -41,7 +41,7 @@ Create a small scratch file in your model and add the public import:
 
 ```sysml
 package import_check {
-    private import memo_medical_device_library::*;
+    private import memo::*;
 
     part reviewer : User;
 }

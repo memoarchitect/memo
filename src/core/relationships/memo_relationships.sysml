@@ -227,7 +227,7 @@ package memo_core_relationships {
     // Composes is the single whole/part decomposition relation. It unifies the
     // former ComposesLogical / AssemblyComprises / Contains{Component,Element} /
     // {Workflow,Task,Activity,Scenario}Comprises* / FlowComprisesSpec /
-    // SetIncludesProduct synonyms; the layer is carried by the end instance
+    // Collection membership is carried by the end instance.
     // types, so the ends are generic MemoPart.
     connection def Composes :> MemoRelationship {
         end parent : MemoPart;

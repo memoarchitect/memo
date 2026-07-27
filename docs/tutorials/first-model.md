@@ -88,7 +88,7 @@ person’s desired clinical outcome.
 // temperature_alarm.sysml
 package temperature_alarm {
     // Import the public MEMO library surface once for this package.
-    private import memo_medical_device_library::*;
+    private import memo::*;
 
     // The person who relies on the device in this scenario.
     part clinician : User {
@@ -317,7 +317,7 @@ Your finished `temperature_alarm.sysml` should contain this connected model:
 // temperature_alarm.sysml
 package temperature_alarm {
     // Import the public MEMO library surface once for this package.
-    private import memo_medical_device_library::*;
+    private import memo::*;
 
     // The person who relies on the device in this scenario.
     part clinician : User {
@@ -473,14 +473,14 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity`, `UseCase`, `User`, `UserTask` | [Operational](../reference/elements/operational.md) |
-| Functional | `SystemFunction` | [Functional](../reference/elements/functional.md) |
-| Logical | `LogicalComponent` | [Logical](../reference/elements/logical.md) |
-| Implementation and realization | `HardwareAssembly`, `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../reference/elements/implementation.md) |
-| Assurance | `Evidence`, `Hazard`, `Need`, `Requirement`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `VerificationScenario` | [Assurance](../reference/elements/assurance.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/elements/views.md) |
+| Operational | `OperationalActivity`, `UseCase`, `User`, `UserTask` | [Operational](../reference/areas/architecture.md#operational) |
+| Functional | `SystemFunction` | [Functional](../reference/areas/architecture.md#functional) |
+| Logical | `LogicalComponent` | [Logical](../reference/areas/architecture.md#logical) |
+| Implementation and realization | `HardwareAssembly`, `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Assurance | `Evidence`, `Hazard`, `Need`, `Requirement`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `VerificationScenario` | [Assurance](../reference/areas/assurance.md) |
+| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `DerivesFrom`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates` … +6 — see [Relationships](../reference/relationships.md) for what each one claims and which ends are legal.
+**Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `DerivesFrom`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates` … +6 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 

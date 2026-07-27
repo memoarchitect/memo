@@ -13,7 +13,7 @@ different situations.
 All three end at the same place. Your model imports one library:
 
 ```sysml
-private import memo_medical_device_library::*;
+private import memo::*;
 ```
 
 ## Which should I choose?
@@ -32,7 +32,7 @@ Whichever route you took, the check is the same. Create a scratch file:
 
 ```sysml
 package import_check {
-    private import memo_medical_device_library::*;
+    private import memo::*;
 
     part reviewer : User;
 }

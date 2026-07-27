@@ -737,3 +737,210 @@
   .memo-model-step { grid-template-columns: 2.6rem minmax(0, 1fr); align-items: start; }
   .memo-model-step > a { grid-column: 2; white-space: normal; }
 }
+
+/* ── Ontology reference diagrams ────────────────────────────────────── */
+
+.memo-ontology-layers > p { margin: 0; }
+
+.memo-model-axis {
+  display: grid;
+  grid-template-columns: 1.45fr .9fr;
+  gap: .8rem;
+  margin: 1rem 0 2rem;
+}
+.memo-model-axis > div {
+  padding: 1.05rem 1.1rem;
+  border: 1px solid var(--memo-line);
+  border-radius: 14px;
+}
+.memo-axis-horizontal { border-left: 5px solid var(--memo-blue) !important; background: var(--memo-blue-soft); }
+.memo-axis-vertical { border-left: 5px solid var(--memo-teal-deep) !important; background: var(--memo-teal-soft); }
+.memo-model-axis span { display: block; margin-bottom: .35rem; font-size: .65rem; font-weight: 900; letter-spacing: .08em; }
+.memo-model-axis p { margin: .35rem 0 0; color: var(--memo-muted); font-size: .75rem; line-height: 1.45; }
+.memo-element-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  margin: 1rem 0;
+  padding: .9rem;
+  border: 1px solid var(--memo-line);
+  border-radius: 13px;
+  background: var(--memo-wash);
+}
+.memo-ontology-layers {
+  display: grid;
+  gap: .7rem;
+  margin: 1.15rem 0 1.4rem;
+}
+.memo-ontology-layer {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.7rem 10rem minmax(0,1fr);
+  gap: .9rem;
+  align-items: center;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--memo-line);
+  border-left: 6px solid var(--memo-blue);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--memo-ink) !important;
+  text-decoration: none !important;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.memo-ontology-layer:hover { box-shadow: 0 10px 22px rgba(12,43,73,.1); transform: translateX(3px); }
+.memo-ontology-layer > span {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--memo-blue-soft);
+  color: #17557f;
+  font-family: var(--md-code-font-family);
+  font-size: .68rem;
+  font-weight: 900;
+}
+.memo-ontology-layer h3 { margin: 0; font-size: .95rem; }
+.memo-ontology-layer p { margin: 0; color: var(--memo-muted); font-size: .76rem; line-height: 1.5; }
+.ontology-operational { border-left-color: var(--memo-purple); }
+.ontology-operational > span { background: var(--memo-purple-soft); color: #4c3a98; }
+.ontology-functional { border-left-color: var(--memo-teal-deep); }
+.ontology-functional > span { background: var(--memo-teal-soft); color: #07604f; }
+.ontology-logical { border-left-color: var(--memo-blue); }
+.ontology-realization { border-left-color: var(--memo-orange); }
+.ontology-realization > span { background: var(--memo-orange-soft); color: #88501f; }
+.memo-assurance-grid,
+.memo-rule-families {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: .65rem;
+  margin: 1rem 0 1.4rem;
+}
+.memo-assurance-grid > div,
+.memo-rule-families > div {
+  padding: .9rem;
+  border: 1px solid #bce9df;
+  border-radius: 12px;
+  background: var(--memo-teal-soft);
+  color: #07604f;
+  font-size: .74rem;
+  line-height: 1.5;
+}
+.memo-assurance-grid code { font-size: .65rem; }
+.memo-semantic-thread {
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+  margin: 1.1rem 0;
+  padding: .85rem;
+  border: 1px solid var(--memo-line);
+  border-radius: 15px;
+  background: var(--memo-wash);
+}
+.memo-semantic-thread span { flex: 1 1 0; min-width: 0; padding: .7rem; border-radius: 9px; background: #fff; }
+.memo-semantic-thread b { display: block; margin-bottom: .25rem; color: var(--memo-ink); font-size: .76rem; }
+.memo-semantic-thread code { font-size: .62rem; }
+.memo-semantic-thread i { color: var(--memo-teal-deep); font-style: normal; }
+
+.memo-view-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: .55rem;
+  align-items: stretch;
+  margin: 1rem 0 1.8rem;
+}
+.memo-view-flow > div {
+  padding: 1rem;
+  border: 1px solid var(--memo-line);
+  border-radius: 14px;
+  background: #fff;
+}
+.memo-view-flow > div:nth-of-type(2) { background: var(--memo-teal-soft); border-color: #bce9df; }
+.memo-view-flow span {
+  display: grid;
+  width: 1.55rem;
+  height: 1.55rem;
+  margin-bottom: .55rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--memo-wash);
+  color: var(--memo-teal-deep);
+  font-family: var(--md-code-font-family);
+  font-size: .66rem;
+  font-weight: 900;
+}
+.memo-view-flow p { margin: .3rem 0 0; color: var(--memo-muted); font-size: .72rem; line-height: 1.45; }
+.memo-view-flow > i,
+.memo-view-flow > p { align-self: center; margin: 0; color: var(--memo-teal-deep); font-style: normal; }
+.memo-view-flow > p i { color: var(--memo-teal-deep); font-style: normal; }
+.memo-viewpoint-catalog {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: .7rem;
+  margin: 1rem 0 1.7rem;
+}
+.memo-viewpoint-catalog > div {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--memo-line);
+  border-radius: 14px;
+  background: linear-gradient(145deg,#fff,var(--memo-teal-soft));
+}
+.memo-viewpoint-catalog h3 { margin: 0 0 .45rem; font-size: .9rem; }
+.memo-viewpoint-catalog p { margin: 0; color: var(--memo-muted); font-size: .73rem; line-height: 1.55; }
+.memo-dual-view {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: .7rem;
+  margin: 1rem 0 1.7rem;
+}
+.memo-dual-view > div {
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--memo-line);
+  border-left: 5px solid var(--memo-teal-deep);
+  border-radius: 13px;
+  background: #fff;
+  color: var(--memo-muted);
+  font-size: .78rem;
+}
+
+.memo-rule-families > div {
+  border-color: #ddd5f6;
+  background: var(--memo-purple-soft);
+  color: #4c3a98;
+}
+[data-md-color-scheme="slate"] .memo-ontology-layer,
+[data-md-color-scheme="slate"] .memo-view-flow > div,
+[data-md-color-scheme="slate"] .memo-viewpoint-catalog > div,
+[data-md-color-scheme="slate"] .memo-dual-view > div {
+  border-color: rgba(216,226,233,.16);
+  background: rgba(255,255,255,.04);
+  color: #e8f1f8 !important;
+}
+[data-md-color-scheme="slate"] .memo-ontology-layer p,
+[data-md-color-scheme="slate"] .memo-view-flow p,
+[data-md-color-scheme="slate"] .memo-viewpoint-catalog p { color: rgba(232,241,248,.7); }
+[data-md-color-scheme="slate"] .memo-model-axis > div,
+[data-md-color-scheme="slate"] .memo-element-strip,
+[data-md-color-scheme="slate"] .memo-semantic-thread {
+  border-color: rgba(216,226,233,.16);
+  background: rgba(255,255,255,.035);
+}
+
+@media screen and (max-width: 60em) {
+  .memo-model-axis { grid-template-columns: 1fr; }
+  .memo-ontology-layer { grid-template-columns: 2.7rem minmax(0,1fr); }
+  .memo-ontology-layer p { grid-column: 2; }
+  .memo-assurance-grid, .memo-rule-families { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .memo-view-flow { display: flex; flex-direction: column; }
+  .memo-view-flow > i,
+  .memo-view-flow > p { transform: rotate(90deg); }
+}
+
+@media screen and (max-width: 44.9375em) {
+  .memo-viewpoint-catalog,
+  .memo-dual-view,
+  .memo-assurance-grid,
+  .memo-rule-families { grid-template-columns: 1fr; }
+  .memo-semantic-thread { display: grid; grid-template-columns: 1fr; }
+  .memo-semantic-thread i { display: none; }
+}

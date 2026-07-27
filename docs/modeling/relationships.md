@@ -23,12 +23,10 @@ declared by the ontology:
 | `Initiates` | User | UseCase | This user pursues the goal |
 | `Supports` | OperationalWorkflow | UseCase | This organized work supports the goal |
 | `Selects` | MemoScenario | WorkflowStep | This scenario selects this path element |
-| `UsesProduct` | Activity / task | MedicalDevice | This work uses this product in this role |
 | `Enables` | SystemFunction | OperationalActivity | The system enables this work |
 | `AllocatedTo` | Function | Component | This component is responsible for this behavior |
 | `Realizes` | Software / physical element | LogicalComponent | This implementation realizes this responsibility |
 | `BuildsInto` / `DeploysTo` / `HostedBy` | Module / unit / node | Unit / node / runtime | The deployment chain |
-| `InstanceOf` | MedicalDeviceInstance | MedicalDeviceDefinition | This unit is of this catalog product |
 | `DerivesFrom` | Need, risk, or source driver | Requirement | This requirement exists because of this driver |
 | `SatisfiedBy` | Requirement | Design element | This design element satisfies the obligation |
 | `Mitigates` | Risk control | Hazard | This control reduces this hazard (`mitigationKind = hazard`) |

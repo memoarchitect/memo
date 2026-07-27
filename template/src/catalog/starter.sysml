@@ -1,7 +1,7 @@
 package memo_starter_catalog {
-    private import memo_medical_device_library::*;
+    private import memo::*;
 
-    part starterDevice : MedicalDevice {
+    part starterSystem : MemoPart {
         attribute redefines name = "{{name}}";
     }
 

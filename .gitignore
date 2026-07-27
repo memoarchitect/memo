@@ -1,14 +1,50 @@
 # Dependencies
 node_modules/
+.pnpm-store/
+.venv/
+venv/
 
 # SysAnd local cache + generated build metadata
 # .meta.json is regenerated deterministically by scripts/build-kpar.sh
-.meta.json
+*.meta.json
 output/
+.sysand/
 sysand_env/
 
 # KerML Project Archives (build artifacts)
 *.kpar
+
+# Package and compiler output
+build/
+dist/
+*.egg-info/
+*.whl
+*.tar.gz
+*.tgz
+*.tsbuildinfo
+*.map
+*.o
+*.obj
+*.so
+*.dylib
+*.dll
+*.exe
+*.wasm
+
+# Python bytecode and tool caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+
+# Test output. Use root-anchored /coverage/ because src/rules/coverage/ is
+# ontology source and must remain tracked.
+/.coverage
+/.coverage.*
+/coverage/
+/htmlcov/
 
 # Turborepo per-package cache + build logs
 .turbo/
