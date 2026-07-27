@@ -234,7 +234,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     }
 
     // ── Operational scenarios ───────────────────────────────────
-    part osNominalTherapy : OperationalScenario {
+    part osNominalTherapy : OperativeScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "NominalTherapySession";
         attribute :>> variantKind = ScenarioVariantKind::nominal;
@@ -247,7 +247,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaCompleteNominalTherapy;
     }
-    part osLockoutBolus : OperationalScenario {
+    part osLockoutBolus : OperativeScenario {
         attribute :>> id = "OS-002";
         attribute :>> name = "BolusRequestDuringLockout";
         attribute :>> variantKind = ScenarioVariantKind::alternate;
@@ -260,7 +260,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaRejectBolusDuringLockout;
     }
-    part osOcclusionAlarm : OperationalScenario {
+    part osOcclusionAlarm : OperativeScenario {
         attribute :>> id = "OS-003";
         attribute :>> name = "OcclusionDetectedDuringInfusion";
         attribute :>> variantKind = ScenarioVariantKind::exception;
@@ -273,7 +273,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaRespondToOcclusion;
     }
-    part osAirInLine : OperationalScenario {
+    part osAirInLine : OperativeScenario {
         attribute :>> id = "OS-004";
         attribute :>> name = "AirInLineDetected";
         attribute :>> variantKind = ScenarioVariantKind::exception;
@@ -286,7 +286,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaRespondToAirInLine;
     }
-    part osEmptyReservoir : OperationalScenario {
+    part osEmptyReservoir : OperativeScenario {
         attribute :>> id = "OS-005";
         attribute :>> name = "ReservoirEmptyDuringTherapy";
         attribute :>> variantKind = ScenarioVariantKind::exception;
@@ -299,7 +299,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaReplaceEmptyReservoir;
     }
-    part osPowerLoss : OperationalScenario {
+    part osPowerLoss : OperativeScenario {
         attribute :>> id = "OS-006";
         attribute :>> name = "MainsPowerLossAndRecovery";
         attribute :>> variantKind = ScenarioVariantKind::recovery;

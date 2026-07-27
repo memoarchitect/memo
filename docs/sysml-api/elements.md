@@ -211,6 +211,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
+| [`Mission`](architecture/operational/structure/memo_operational.md#mission) | `part def` | Mission definition specializing `DocumentedElement`. | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
 | [`OperationalCapability`](architecture/operational/structure/memo_operational.md#operationalcapability) | `part def` | Operational capability definition specializing `ArchitectureElement`. | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
 | [`OperationalEntity`](architecture/operational/structure/memo_operational.md#operationalentity) | `part def` | Operational entity definition specializing `ArchitectureElement`. | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
 | [`OperationalInteraction`](architecture/operational/structure/memo_operational.md#operationalinteraction) | `part def` | Operational interaction definition specializing `ArchitectureElement`. | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
