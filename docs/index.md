@@ -9,6 +9,11 @@ architecture, risk, verification, and evidence connected as the design changes.
 
 </div>
 
+!!! warning "Experimental before 1.0"
+    Until MEMO reaches version 1.0, the ontology and its public API are
+    experimental. Namespaces, definitions, relationships, and imports may
+    change without notice as feedback is incorporated.
+
 ## What is MEMO
 
 MEMO is a domain model for medical-device engineering. It specializes SysML v2
