@@ -2,6 +2,7 @@ package memo_examples_gpca_pump_model_views_document_vv_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
     view vvView : MemoDocumentView {
@@ -18,6 +19,7 @@ package memo_examples_gpca_pump_model_views_document_vv_view {
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("VV", "DHF", "QMSR");
         attribute :>> sectionIdentifier = "VV";
+        part :>> viewpointDefinition = verificationViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-006";
             attribute :>> name = "vvViewQuery";

@@ -2,6 +2,7 @@ package memo_examples_gpca_pump_model_views_document_sdd_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_software_software_viewpoint::*;
     private import memo_core_enumerations::*;
 
     view sddView : MemoDocumentView {
@@ -18,6 +19,7 @@ package memo_examples_gpca_pump_model_views_document_sdd_view {
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("SDD", "QMSR");
         attribute :>> sectionIdentifier = "SDD";
+        part :>> viewpointDefinition = softwareViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-004";
             attribute :>> name = "sddViewQuery";

@@ -3,6 +3,7 @@ package memo_examples_gpca_pump_model_views_document_cyber_assessment_view {
 
     private import memo_viewpoints_definitions::*;
     private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
+    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
     private import memo_core_enumerations::*;
 
     view cyberAssessmentView : MemoCybersecurityAssessmentView {
@@ -17,6 +18,7 @@ package memo_examples_gpca_pump_model_views_document_cyber_assessment_view {
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("Cybersecurity Risk Assessment", "RMF", "QMSR");
         attribute :>> sectionIdentifier = "CYB-RA";
+        part :>> viewpointDefinition = cybersecurityViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-009";
             attribute :>> name = "cyberAssessmentViewQuery";

@@ -2,6 +2,7 @@ package memo_examples_gpca_pump_model_views_document_hazard_analysis_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_core_enumerations::*;
 
     view hazardAnalysisView : MemoDocumentView {
@@ -18,6 +19,7 @@ package memo_examples_gpca_pump_model_views_document_hazard_analysis_view {
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("Hazard Analysis Report", "RMF");
         attribute :>> sectionIdentifier = "HAZ";
+        part :>> viewpointDefinition = riskViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-003";
             attribute :>> name = "hazardAnalysisViewQuery";
