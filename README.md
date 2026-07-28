@@ -1,5 +1,10 @@
 # @memoarchitect/ontology
 
+[Product website](https://memoarchitect.com/memo.html) ·
+[MkDocs documentation](https://memoarchitect.com/memo/) ·
+[GitHub repository](https://github.com/memoarchitect/memo) ·
+[npm package](https://www.npmjs.com/package/@memoarchitect/ontology)
+
 **MEMO — Medical Engineering Modelling Ontology** — the pure SysML v2 content layer.
 
 A standalone, tool-portable SysML v2 / KerML ontology for medical-device architecture
@@ -18,8 +23,13 @@ pin an exact release; the package has no repository or runtime dependency on Mem
 Tools or Memo Architect.
 
 ```bash
-pnpm add @memoarchitect/ontology@0.6.2
+pnpm add @memoarchitect/ontology@0.6.3
 ```
+
+> **Pre-1.0 notice:** ontology names, relationships, and package layout may
+> change before 1.0. Use the exact npm version above or a
+> [tagged release](https://github.com/memoarchitect/memo/releases) rather than
+> tracking `main` for reproducible project work.
 
 For coordinated development, the private `memo-meta` workspace checks out
 Ontology, Tools, and Architect as sibling repositories and links this package
@@ -27,14 +37,21 @@ into its dependants with meta-only pnpm overrides.
 
 ## Documentation
 
-Start with the [user guide](docs/index.md) to learn MEMO's layer model, choose
+Start with the [published MkDocs site](https://memoarchitect.com/memo/) to learn
+MEMO's layer model, choose
 elements and relationships, and follow the GPCA pump example. The reference
-section describes packages, source layout, and maintenance. Build the site with:
+section describes packages, source layout, and maintenance. Its source starts at
+[`docs/index.md`](docs/index.md). Build the site with:
 
 ```bash
 python3 -m pip install "mkdocs>=1.6" "mkdocs-material>=9.5" "pymdown-extensions>=10.0"
 pnpm run docs:build
 ```
+
+Related products: [MEMO Tools documentation](https://memoarchitect.com/memo-tools/)
+and [repository](https://github.com/memoarchitect/memo-tools) ·
+[MEMO Architect documentation](https://memoarchitect.com/memo-architect/)
+and [repository](https://github.com/memoarchitect/memo-architect).
 
 ## Layout
 
