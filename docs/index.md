@@ -12,7 +12,15 @@ architecture, risk, verification, and evidence connected as the design changes.
 !!! warning "Experimental before 1.0"
     Until MEMO reaches version 1.0, the ontology and its public API are
     experimental. Namespaces, definitions, relationships, and imports may
-    change without notice as feedback is incorporated.
+    change as feedback is incorporated. Use a [tagged release](https://github.com/memoarchitect/memo/releases)
+    or an exact npm version rather than `main` for reproducible project work.
+
+## Project links
+
+- [MEMO Ontology GitHub repository](https://github.com/memoarchitect/memo)
+- [MEMO Tools documentation](https://memoarchitect.com/memo-tools/) · [GitHub repository](https://github.com/memoarchitect/memo-tools)
+- [MEMO Architect documentation](https://memoarchitect.com/memo-architect/) · [GitHub repository](https://github.com/memoarchitect/memo-architect)
+- [MEMO product website](https://memoarchitect.com/)
 
 ## What is MEMO
 
