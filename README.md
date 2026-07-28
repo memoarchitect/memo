@@ -1,7 +1,7 @@
 # @memoarchitect/ontology
 
 [Product website](https://memoarchitect.com/memo.html) ·
-[MkDocs documentation](https://memoarchitect.com/memo/) ·
+[Documentation](https://memoarchitect.com/memo/) ·
 [GitHub repository](https://github.com/memoarchitect/memo) ·
 [npm package](https://www.npmjs.com/package/@memoarchitect/ontology)
 
@@ -42,7 +42,7 @@ automatically creates the matching `v<version>` tag when the change reaches
 
 ## Documentation
 
-Start with the [published MkDocs site](https://memoarchitect.com/memo/) to learn
+Start with the [published documentation](https://memoarchitect.com/memo/) to learn
 MEMO's layer model, choose
 elements and relationships, and follow the GPCA pump example. The reference
 section describes packages, source layout, and maintenance. Its source starts at
