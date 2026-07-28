@@ -2,6 +2,7 @@ package memo_examples_gpca_pump_model_views_document_rmf_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_core_enumerations::*;
 
     view rmfView : MemoDocumentView {
@@ -18,6 +19,7 @@ package memo_examples_gpca_pump_model_views_document_rmf_view {
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("RMF", "QMSR");
         attribute :>> sectionIdentifier = "RMF";
+        part :>> viewpointDefinition = riskViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-001";
             attribute :>> name = "rmfViewQuery";

@@ -2,6 +2,9 @@ package memo_examples_gpca_pump_model_views_document_dhf_index_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_requirements_requirements_viewpoint::*;
+    private import memo_viewpoints_risk_risk_viewpoint::*;
+    private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
     view dhfIndexView : MemoDocumentView {
@@ -18,6 +21,9 @@ package memo_examples_gpca_pump_model_views_document_dhf_index_view {
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("DHF");
         attribute :>> sectionIdentifier = "DHF";
+        part :>> viewpointDefinition = requirementsViewpoint;
+        part :>> viewpointDefinition = riskViewpoint;
+        part :>> viewpointDefinition = verificationViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-007";
             attribute :>> name = "dhfIndexViewQuery";
