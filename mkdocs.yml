@@ -1,6 +1,7 @@
 site_name: MEMO Ontology
 site_description: A user guide to modeling medical devices with the MEMO SysML v2 ontology
 site_author: memoarchitect
+site_url: https://memoarchitect.com/memo/
 repo_url: https://github.com/memoarchitect/memo
 repo_name: memoarchitect/memo
 
