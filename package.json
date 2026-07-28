@@ -11,7 +11,9 @@
     "docs:diagrams": "node scripts/generate-reference-diagrams.mjs",
     "docs:serve": "node scripts/generate-reference-diagrams.mjs && node scripts/generate-sysml-api.mjs && node scripts/check-reference-coverage.mjs && python3 -m mkdocs serve",
     "docs:build": "node scripts/generate-reference-diagrams.mjs && node scripts/generate-sysml-api.mjs && node scripts/check-reference-coverage.mjs && python3 -m mkdocs build --strict",
-    "docs:check-reference": "node scripts/check-reference-coverage.mjs"
+    "docs:check-reference": "node scripts/check-reference-coverage.mjs",
+    "version:sync": "node scripts/sync-version.mjs",
+    "version:check": "node scripts/sync-version.mjs --check"
   },
   "engines": {
     "node": ">=26.0.0"
