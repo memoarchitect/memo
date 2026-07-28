@@ -2,6 +2,9 @@ package memo_examples_gpca_pump_model_views_document_architecture_description_vi
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_logical_logical_viewpoint::*;
+    private import memo_viewpoints_software_software_viewpoint::*;
+    private import memo_viewpoints_physical_physical_viewpoint::*;
     private import memo_core_enumerations::*;
 
     view architectureDescriptionView : MemoDocumentView {
@@ -18,6 +21,9 @@ package memo_examples_gpca_pump_model_views_document_architecture_description_vi
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("Architecture Description", "DHF");
         attribute :>> sectionIdentifier = "AD";
+        part :>> viewpointDefinition = logicalArchitectureViewpoint;
+        part :>> viewpointDefinition = softwareViewpoint;
+        part :>> viewpointDefinition = physicalViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-005";
             attribute :>> name = "architectureDescriptionViewQuery";

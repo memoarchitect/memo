@@ -19,6 +19,8 @@ package memo_viewpoints_definitions {
         attribute filterExpression : String;
         attribute extendsViewpointIds : String[*];
         attribute userExtensible : Boolean;
+        // Optional navigation grouping interpreted by Memo Architect.
+        attribute group : String;
         // default diagram kind for a catalog viewpoint (optional)
         attribute defaultViewKind : DiagramViewKind[0..1];
     }
@@ -47,7 +49,11 @@ package memo_viewpoints_definitions {
         attribute queryDescription : String;
         attribute dataSourceDescription : String;
         attribute autoPopulate : Boolean;
-        part viewpointDefinition : Viewpoint;
+        // ISO 42010 conformance is many-to-many: every view has one or more
+        // viewpoints, and a viewpoint may be realized by many reusable views.
+        part viewpointDefinition : Viewpoint[1..*];
+        // Optional grouping within each viewpoint, interpreted by Architect.
+        attribute group : String;
         ref subjectElement : MemoPart[*];
         ref exposesElement : MemoPart[*];
         ref exposesRelationship : MemoRelationship[*];
