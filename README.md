@@ -35,6 +35,11 @@ For coordinated development, the private `memo-meta` workspace checks out
 Ontology, Tools, and Architect as sibling repositories and links this package
 into its dependants with meta-only pnpm overrides.
 
+`VERSION` is the sole release-version source for this repository. Run
+`pnpm version:sync` after changing it; CI rejects unsynchronized manifests and
+automatically creates the matching `v<version>` tag when the change reaches
+`main`.
+
 ## Documentation
 
 Start with the [published MkDocs site](https://memoarchitect.com/memo/) to learn
