@@ -102,7 +102,7 @@ package memo_namespace_assurance {
     package safety_risk {
         public import memo_assurance_safety_risk::*;
         public import memo_assurance_safety_risk_arch_risk::*;
-        alias analysis for memo_namespace_assurance_safety_risk_analysis;
+        alias 'analysis' for memo_namespace_assurance_safety_risk_analysis;
     }
     alias cybersecurity for memo_namespace_assurance_cybersecurity;
     alias human_factors for memo_namespace_assurance_human_factors;
@@ -291,7 +291,7 @@ package memo_namespace_viewpoints {
     alias risk for memo_namespace_viewpoints_risk;
     alias software for memo_namespace_viewpoints_software;
     alias usability for memo_namespace_viewpoints_usability;
-    alias verification for memo_namespace_viewpoints_verification;
+    alias 'verification' for memo_namespace_viewpoints_verification;
 }
 
 package memo_namespace_assurance_safety_risk_analysis {

@@ -45,12 +45,15 @@ package memo_core_relationships {
 
     connection def DerivesFrom :> MemoRelationship {
         // Drivers include needs and hazards (ISO 14971: hazards drive
-        // requirements), so the source stays at MemoPart
+        // requirements). targetRequirement is untyped: Need is a requirement def
+        // (MemoNeed + RequirementDriver) and does not conform to VerifiableElement
+        // under SysIDE related-feature-conformance.
         end sourceDriver : MemoPart;
-        end targetRequirement : VerifiableElement;
+        end targetRequirement;
     }
     connection def SatisfiedBy :> MemoRelationship {
-        end requiredElement : VerifiableElement;
+        // Untyped: Need (requirement) instances must participate alongside Requirement.
+        end requiredElement;
         end satisfyingElement : ArchitectureElement;
     }
     // Mitigates unifies the control/action → risk-element edges of the
@@ -67,8 +70,9 @@ package memo_core_relationships {
     }
     connection def Mitigates :> MemoRelationship {
         attribute mitigationKind : MitigationKind;
-        end control : VerifiableElement;
-        end mitigatedElement : MemoPart;
+        // Untyped: controls/hazards may be item defs (RiskControlMeasure, Hazard, …).
+        end control;
+        end mitigatedElement;
     }
     connection def AllocatedTo :> MemoRelationship {
         end function : ArchitectureElement;

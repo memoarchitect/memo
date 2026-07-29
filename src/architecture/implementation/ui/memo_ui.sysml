@@ -127,7 +127,7 @@ package memo_architecture_implementation_ui {
     }
     connection def PresentsState :> MemoRelationship {
         end userInterface : UserInterface;
-        end state : UIState;
+        end uiState : UIState;
     }
 
     // ── §18 traceability ─────────────────────────────────────────

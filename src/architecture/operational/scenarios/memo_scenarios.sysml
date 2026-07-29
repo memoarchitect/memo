@@ -98,7 +98,7 @@ package memo_architecture_operational_scenarios {
     // element), keyed by selectsKind.
     enum def SelectsKind {
         enum step;
-        enum flow;
+        enum 'flow';
     }
     connection def Selects :> MemoRelationship {
         attribute selectsKind : SelectsKind;

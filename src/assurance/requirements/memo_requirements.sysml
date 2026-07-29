@@ -45,7 +45,7 @@ package memo_assurance_requirements {
         attribute statement : String;
         attribute sourceKind : RequirementSourceKind;
         attribute concernKind : ConcernKind;
-        attribute status : RequirementStatusKind;
+        attribute requirementStatus : RequirementStatusKind;
         attribute acceptanceCriteria : String;
         attribute subjectDescription : String;
         attribute actorDescription : String;

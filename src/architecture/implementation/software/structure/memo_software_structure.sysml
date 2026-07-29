@@ -20,10 +20,10 @@ package memo_architecture_implementation_software_structure {
     // (period, WCET, scheduling) moved to SoftwareComponent.
     // item / unit / package / library / code / firmware / soup (IEC 62304).
     enum def ModuleKind {
-        enum item;
+        enum 'item';
         enum unit;
-        enum package;
-        enum library;
+        enum 'package';
+        enum 'library';
         enum code;
         enum firmware;
         enum soup;

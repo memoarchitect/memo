@@ -128,7 +128,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_cybersecurity {
         attribute :>> statement = "The system shall require authenticated and authorized service access before any therapy configuration parameter can be modified.";
         attribute :>> sourceKind = RequirementSourceKind::risk;
         attribute :>> concernKind = ConcernKind::cybersecurity;
-        attribute :>> status = RequirementStatusKind::approved;
+        attribute :>> requirementStatus = RequirementStatusKind::approved;
         attribute :>> acceptanceCriteria = "Unauthenticated or unauthorized attempts to modify therapy configuration are rejected and logged.";
         attribute :>> subjectDescription = "maintenance and configuration path";
         attribute :>> actorDescription = "service personnel";

@@ -51,15 +51,15 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : ConnectsPhysically connect source ::> entityNeedle to target ::> actorPatient;
     connection : ConnectsPhysically connect source ::> entityPowerInfrastructure to target ::> entityGpcaPump;
     // Intended use and use context anchoring (no floating context nodes)
-    connection : Governs { attribute :>> governKind = GovernKind::use; connect governor ::> gpcaIntendedUse to governedElement ::> entityGpcaPump; }
+    connection : Governs { attribute :>> governKind = GovernKind::'use'; connect governor ::> gpcaIntendedUse to governedElement ::> entityGpcaPump; }
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityGpcaPump;
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
 
     // ── Actor participation (use case view) ─────────────────────
     connection : Initiates connect initiatingUser ::> actorNurse to initiatedUseCase ::> ucDeliverPcaTherapy;
-    connection : ParticipatesIn connect participant ::> actorPatient to useCase ::> ucDeliverPcaTherapy;
-    connection : ParticipatesIn connect participant ::> actorPrescriber to useCase ::> ucDeliverPcaTherapy;
-    connection : ParticipatesIn connect participant ::> actorPharmacist to useCase ::> ucDeliverPcaTherapy;
+    connection : ParticipatesIn connect participatingActor ::> actorPatient to useCase ::> ucDeliverPcaTherapy;
+    connection : ParticipatesIn connect participatingActor ::> actorPrescriber to useCase ::> ucDeliverPcaTherapy;
+    connection : ParticipatesIn connect participatingActor ::> actorPharmacist to useCase ::> ucDeliverPcaTherapy;
     connection : Performs connect performer ::> actorPrescriber to performed ::> oaPrescribe;
     connection : Performs connect performer ::> actorPharmacist to performed ::> oaLoadReservoir;
     connection : Performs connect performer ::> actorNurse to performed ::> oaProgram;
