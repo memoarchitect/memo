@@ -50,10 +50,10 @@ package memo_examples_sysml_diagram_samples_model_samples_use_case_view {
     }
 
     connection : Initiates connect initiatingUser ::> clinician to initiatedUseCase ::> configureTherapy;
-    connection : ParticipatesIn connect participant ::> patient to useCase ::> reviewStatus;
-    connection : ParticipatesIn connect participant ::> patient to useCase ::> configureTherapy;
-    connection : ParticipatesIn connect participant ::> serviceTechnician to useCase ::> maintainDevice;
-    connection : ParticipatesIn connect participant ::> clinician to useCase ::> validateTherapySettings;
+    connection : ParticipatesIn connect participatingActor ::> patient to useCase ::> reviewStatus;
+    connection : ParticipatesIn connect participatingActor ::> patient to useCase ::> configureTherapy;
+    connection : ParticipatesIn connect participatingActor ::> serviceTechnician to useCase ::> maintainDevice;
+    connection : ParticipatesIn connect participatingActor ::> clinician to useCase ::> validateTherapySettings;
     connection : Includes connect includingUseCase ::> configureTherapy to includedUseCase ::> reviewStatus;
     connection : Includes connect includingUseCase ::> reviewStatus to includedUseCase ::> validateTherapySettings;
     connection : Extends connect extendingUseCase ::> documentTreatment to extendedUseCase ::> reviewStatus;

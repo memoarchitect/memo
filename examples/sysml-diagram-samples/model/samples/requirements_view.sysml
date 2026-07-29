@@ -11,12 +11,12 @@ package memo_examples_sysml_diagram_samples_model_samples_requirements_view {
     private import memo_core_enumerations::*;
 
     requirement needSafeTherapy : Need {
-        attribute :>> needKind = NeedKind::stakeholder;
+        attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> id = "NEED-001"; attribute :>> name = "SafeTherapy";
         attribute :>> statement = "The device shall support safe patient-controlled infusion therapy.";
     }
     requirement needTimelyAlarms : Need {
-        attribute :>> needKind = NeedKind::stakeholder;
+        attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> id = "NEED-002"; attribute :>> name = "TimelyAlarms";
         attribute :>> statement = "Clinicians shall be notified promptly of any condition that endangers therapy.";
     }

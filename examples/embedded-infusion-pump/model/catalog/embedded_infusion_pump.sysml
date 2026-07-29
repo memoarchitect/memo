@@ -14,7 +14,7 @@ package memo_examples_embedded_infusion_pump {
 
     // Module view (IEC 62304).
     part swInfusionControl : SoftwareModule {
-        attribute :>> moduleKind = ModuleKind::item;
+        attribute :>> moduleKind = ModuleKind::'item';
         attribute :>> id = "EIP-SW-001"; attribute :>> name = "InfusionControlItem";
         attribute :>> iec62304Role = "software item, class C";
         attribute :>> safetyClass = SafetyClassKind::C;

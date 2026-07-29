@@ -18,7 +18,16 @@ package memo_viewpoints_context_context_viewpoint {
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::interoperability);
         attribute :>> includedLayers = ("context");
-        attribute :>> allowedElementKinds = ("Actor", "UseContext", "IntendedUse", "ReasonablyForeseeableMisuse", "OperationalEntity", "TrustBoundary", "LogicalComponent");
+        // UseEnvironment (IEC 62366-1 3.20) is what the device sits inside —
+        // facility, procedure area, ambient conditions. A context view that
+        // cannot show it is missing half of "where is this used".
+        attribute :>> allowedElementKinds = ("Actor", "UseContext", "UseEnvironment", "IntendedUse", "ReasonablyForeseeableMisuse", "OperationalEntity", "TrustBoundary", "LogicalComponent");
+        // InteractsInContext is the context relation: a context view draws it
+        // and nothing else, so general-purpose model edges cannot leak into the
+        // boundary picture. Projects derive their own verbs from it and are
+        // picked up through the specialization closure. The three older
+        // relations remain for models authored before it existed.
+        attribute :>> allowedRelationshipKinds = ("InteractsInContext", "InteractsWith", "ExchangesWith", "ConnectsPhysically");
         attribute :>> userExtensible = true;
     }
 }

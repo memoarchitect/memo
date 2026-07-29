@@ -51,7 +51,7 @@ package memo_architecture_operational_use_cases {
         end initiatedUseCase : UseCase;
     }
     connection def ParticipatesIn :> MemoRelationship {
-        end participant : Actor;
+        end participatingActor : Actor;
         end useCase : UseCase;
     }
     // UML use-case relationships. Includes establishes a decomposition level;

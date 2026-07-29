@@ -40,7 +40,7 @@ package memo_architecture_operational_context_stakeholders {
 
     connection def HasConcern :> MemoRelationship {
         end interestedStakeholder : Stakeholder;
-        end concern : Concern;
+        end stakeholderConcern : Concern;
     }
     connection def FramesConcern :> MemoRelationship {
         end framingViewpoint : MemoPart;
@@ -54,7 +54,7 @@ package memo_architecture_operational_context_stakeholders {
     // Governs unifies GovernsCorrespondence / GovernsUse, keyed by governKind.
     enum def GovernKind {
         enum correspondence;
-        enum use;
+        enum 'use';
     }
     connection def Governs :> MemoRelationship {
         attribute governKind : GovernKind;

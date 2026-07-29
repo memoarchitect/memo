@@ -54,8 +54,8 @@ package memo_architecture_operational_workflows {
     // decision / fork / join / handoff.
     enum def ControlNodeKind {
         enum decision;
-        enum fork;
-        enum join;
+        enum 'fork';
+        enum 'join';
         enum handoff;
     }
 

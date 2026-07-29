@@ -5,7 +5,6 @@ package memo_compliance_artifacts {
     private import memo_core_enumerations::*;
     item def ControlledArtifact specializes MemoPart {
         attribute version : String;
-        attribute lifecycleState : LifecycleStateKind;
         attribute artifactKind : ArtifactKind;
         attribute owner : String;
         attribute approvalStatus : String;

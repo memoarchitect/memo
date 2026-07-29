@@ -86,7 +86,6 @@ package memo_assurance_cybersecurity {
         attribute derivedFromThreat : String;
         attribute derivedFromRisk : String;
         attribute defaultConcern : ConcernKind;
-        attribute safetyClass : SafetyClassKind;
     }
 
     item def TrustBoundary specializes InterfaceElement {

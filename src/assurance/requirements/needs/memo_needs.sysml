@@ -16,7 +16,7 @@ package memo_assurance_requirements_needs {
     // (ISO 13485 §7.3.3, IEC 62366-1 user needs) is unchanged — it is simply
     // an attribute of the one Need type rather than a class the modeler picks.
     enum def NeedKind {
-        enum stakeholder;
+        enum 'stakeholder';
         enum user;
         enum clinicalUser;
         enum patientUser;
