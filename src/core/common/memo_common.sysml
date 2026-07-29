@@ -81,7 +81,9 @@ package memo_core_common {
     }
 
     // Interaction-contract foundation for interface definitions between ports.
-    interface def MemoInterface {
+    abstract interface def MemoInterface {
+        end source;
+        end target;
         attribute id : String;
         attribute name : String;
         attribute description : String;

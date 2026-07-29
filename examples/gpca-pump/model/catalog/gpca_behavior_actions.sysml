@@ -30,7 +30,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_actions {
         attribute :>> itemKind = InterfaceItemKind::command;
     }
     item def TherapyEventRecord specializes InterfaceItem {
-        attribute :>> itemKind = InterfaceItemKind::event;
+        attribute :>> itemKind = InterfaceItemKind::'event';
     }
 
     action def AcquireSensorData {

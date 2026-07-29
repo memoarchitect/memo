@@ -283,7 +283,7 @@ test('source modules follow the nested memo namespace layout', () => {
   assert.match(namespace, /package logical \{[\s\S]*alias structure/s);
   assert.match(namespace, /package hardware \{[\s\S]*alias structure/s);
   assert.match(namespace, /package requirements \{[\s\S]*alias needs/s);
-  assert.match(namespace, /package safety_risk \{[\s\S]*alias analysis/s);
+  assert.match(namespace, /package safety_risk \{[\s\S]*alias 'analysis'/s);
   assert.doesNotMatch(namespace, /package memo_namespace_artifacts_[a-z_]+ \{\s*\}/);
 });
 

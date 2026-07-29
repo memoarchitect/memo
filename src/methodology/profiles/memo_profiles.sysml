@@ -24,24 +24,16 @@ package memo_methodology_profiles {
         attribute :>> domain = "medical device modeling";
         attribute :>> description = "Light default methodology around the ontology for smaller or early project use.";
         attribute :>> baseMethodName = "";
-        attribute :>> includedLayer = "memo::architecture::operational";
-        attribute :>> includedLayer = "memo::architecture::functional";
-        attribute :>> includedLayer = "memo::architecture::logical";
-        attribute :>> includedModule = "memo::assurance::requirements";
-        attribute :>> includedModule = "memo::assurance::safety_risk";
-        attribute :>> includedModule = "memo::assurance::verification_validation";
+        attribute :>> includedLayer = ("memo::architecture::operational", "memo::architecture::functional", "memo::architecture::logical");
+        attribute :>> includedModule = ("memo::assurance::requirements", "memo::assurance::safety_risk", "memo::assurance::verification_validation");
     }
 
     part mdLightDefaultResolved : ResolvedMethodology {
         attribute :>> id = "RMETH-001";
         attribute :>> name = "MedicalDeviceLightDefaultResolved";
         attribute :>> version = "0.1";
-        attribute :>> includedLayer = "memo::architecture::operational";
-        attribute :>> includedLayer = "memo::architecture::functional";
-        attribute :>> includedLayer = "memo::architecture::logical";
-        attribute :>> includedModule = "memo::assurance::requirements";
-        attribute :>> includedModule = "memo::assurance::safety_risk";
-        attribute :>> includedModule = "memo::assurance::verification_validation";
+        attribute :>> includedLayer = ("memo::architecture::operational", "memo::architecture::functional", "memo::architecture::logical");
+        attribute :>> includedModule = ("memo::assurance::requirements", "memo::assurance::safety_risk", "memo::assurance::verification_validation");
     }
 
     part useRiskAndResidualRule : ElementUsageRule {
@@ -128,16 +120,8 @@ package memo_methodology_profiles {
         attribute :>> name = "MedicalDeviceCoverageScope";
         attribute :>> scopeName = "coverage";
 
-        attribute :>> includedArchLayer = "memo::architecture::operational";
-        attribute :>> includedArchLayer = "memo::architecture::functional";
-        attribute :>> includedArchLayer = "memo::architecture::logical";
-        attribute :>> includedArchLayer = "memo::architecture::implementation";
-        attribute :>> includedArchLayer = "memo::architecture::realization";
-        attribute :>> includedModule = "memo::assurance::requirements";
-        attribute :>> includedModule = "memo::assurance::safety_risk";
-        attribute :>> includedModule = "memo::assurance::cybersecurity";
-        attribute :>> includedModule = "memo::assurance::human_factors";
-        attribute :>> includedModule = "memo::assurance::verification_validation";
+        attribute :>> includedArchLayer = ("memo::architecture::operational", "memo::architecture::functional", "memo::architecture::logical", "memo::architecture::implementation", "memo::architecture::realization");
+        attribute :>> includedModule = ("memo::assurance::requirements", "memo::assurance::safety_risk", "memo::assurance::cybersecurity", "memo::assurance::human_factors", "memo::assurance::verification_validation");
         attribute :>> description = "Comprehensive default MEMO layer and module selection.";
     }
 

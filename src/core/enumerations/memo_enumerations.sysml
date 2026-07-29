@@ -225,7 +225,7 @@ package memo_core_enumerations {
         enum data;
         enum command;
         enum signal;
-        enum event;
+        enum 'event';
         enum material;
         enum energy;
         enum fluid;
@@ -345,6 +345,22 @@ package memo_core_enumerations {
         enum cloudHosted;
         enum embedded;
         enum partitioned;
+    }
+    // Which side of a system context diagram a participant belongs on.
+    // Animate and inanimate are kept apart because they are governed
+    // differently: a human participant carries training and use-error
+    // considerations (IEC 62366-1), an external system carries interface and
+    // interoperability ones.
+    enum def ContextSideKind {
+        // A human who interacts with the device (IEC 62366-1 intended user).
+        enum 'actor';
+        // An inanimate external system, device, or supply the device exchanges with.
+        enum externalSystem;
+        // The setting the device sits inside (IEC 62366-1 3.20 use environment).
+        enum environment;
+        // A condition the context imposes rather than a thing it connects to —
+        // regulatory, clinical, or operational limits on use.
+        enum 'constraint';
     }
     enum def ActorKind {
         enum patient;
