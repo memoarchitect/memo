@@ -19,6 +19,19 @@ package memo_rules_ontology {
         attribute predicateExpression = "acyclic(composes)";
         constraint { true }
     }
+    constraint def nestedPartConnectedRule {
+        attribute id = "AR-IBD-001";
+        attribute appliesTo = "MemoPart";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A structural part nested inside another part should expose at least one modeled interface connector. Passive or intentionally isolated parts may retain this warning with an explicit modelling rationale.";
+        attribute predicateExpression = "hasConnectorInComposition";
+        // Graph-aware structural rule, evaluated by Memo Architect's rule
+        // engine: it lifts port endpoints to their owning part, ignores
+        // composition/trace/deployment links, and includes a connected child's
+        // containing assemblies. The generic KerML expression evaluator cannot
+        // represent that transitive containment query.
+        constraint { true }
+    }
     constraint def connectorEndpointsExistRule {
         attribute id = "CR-ONT-002";
         attribute appliesTo = "ComponentExchange";

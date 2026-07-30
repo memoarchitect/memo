@@ -19,8 +19,8 @@ package memo_examples_gpca_pump_model_views_logical_device_interconnect_view {
         attribute :>> id = "VIEW-LOG-003";
         attribute :>> name = "GPCA_DeviceInterconnectView";
         attribute :>> title = "GPCA Device Interconnect View";
-        attribute :>> shortDescription = "Device-level interconnection: hardware assemblies wired to the software system's boundary ports.";
-        attribute :>> longDescription = "Interconnection-kind view of the GPCA device per GPCA_Device.aadl: sensor and actuator assemblies, the GPCA software system with its seven AADL boundary ports (OP_CMD_IN, PRES_IN, PATIENT_IN, SENSOR_IN, CONST_IN, DB_IN, GPCA_SW_OUT) pinned on its boundary, the eight software subcomponents nested inside, and the ExchangesWith connection topology (device-boundary CE-001..004 plus the GPCA_SW.Impl internal connections). Rendered through the KK-3 Interconnection view template.";
+        attribute :>> shortDescription = "AADL device-level interconnection: GPCA_HW_Sensors, GPCA_SW, and GPCA_HW_Actuators with their declared boundary features.";
+        attribute :>> longDescription = "Source-faithful interconnection view of GPCA_Device.Impl: exactly the three AADL subcomponents (GPCA_HW_Sensors, GPCA_SW, GPCA_HW_Actuators), the device and subsystem boundary ports, and the twelve declared port connections. MEMO physical-design additions such as the controller board, power sources, enclosure, and individual sensors/actuators are intentionally excluded because the published AADL v2.0 model does not declare them as GPCA_Device.Impl subcomponents. Drill into GPCA_SW to inspect its eight subcomponents and 42 internal connections; use the connection-density control to switch between bundled summary and full fidelity.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::internalDiagram);
         attribute :>> viewKind = DiagramViewKind::interconnection;
@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_model_views_logical_device_interconnect_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-LOG-003";
             attribute :>> name = "GPCA_DeviceInterconnectQuery";
-            attribute :>> includeElementKinds = ("HardwareAssembly", "SoftwareSystem", "SoftwareModule", "SoftwarePort");
+            attribute :>> includeElementIds = ("gpcaDevice", "gpcaDeviceSensors", "gpcaSoftware", "gpcaActuators", "devOpCmdIn", "devDbIn", "devPresIn", "devPatientIn", "devGpcaOut", "snsOpCmdIn", "snsDbIn", "snsPresIn", "snsPatientIn", "snsOpCmdOut", "snsPresOut", "snsPatientOut", "snsSensorOut", "snsConstOut", "snsDbOut", "portOpCmdIn", "portPresIn", "portPatientIn", "portSensorIn", "portConstIn", "portDbIn", "portGpcaSwOut", "actGpcaSwIn", "actGpcaOut", "tlm", "systemStatus", "alarm", "config", "infusionMgr", "systemMonitor", "logging", "outputBus");
             attribute :>> includeRelationshipKinds = ("ExchangesWith", "Composes");
             attribute :>> includeLayers = ("logical_structure", "software_structure", "interfaces");
             attribute :>> selectionExpression = "product == 'GPCA'";

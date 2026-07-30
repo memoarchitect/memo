@@ -2,6 +2,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     private import ScalarValues::*;
 
     private import memo_architecture_logical_interfaces::*;
+    private import memo_architecture_realization_physical::*;
     private import memo_architecture_functional_functions::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems::*;
@@ -572,7 +573,10 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface";
     }
 
-    // ── Device-boundary exchanges (GPCA_Device.aadl level) ─────
+    // ── MEMO functional-to-physical allocation abstractions ────
+    // These four exchanges summarize requirements-derived physical design
+    // intent. They are not the named port connections in GPCA_Device.aadl;
+    // the exact AADL feature topology is authored below and in gpca_trace.
     part exSensorVector : ComponentExchange {
         attribute :>> id = "CE-001";
         attribute :>> name = "SensorStatusVectorExchange";
@@ -584,7 +588,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         ref :>> allocatedExchanges = lfSensorAcquisition;
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
-        attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
+        attribute :>> sourceReference = "MEMO design extension allocated from LF-001; not a GPCA_Device.aadl connection";
     }
     part exFlowCommand : ComponentExchange {
         attribute :>> id = "CE-002";
@@ -597,7 +601,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         ref :>> allocatedExchanges = lfFlowCommand;
         attribute :>> direction = DirectionKind::output;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
-        attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
+        attribute :>> sourceReference = "MEMO design extension allocated from LF-002; not a GPCA_Device.aadl connection";
     }
     part exAlarmAnnunciation : ComponentExchange {
         attribute :>> id = "CE-003";
@@ -610,7 +614,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         ref :>> allocatedExchanges = lfAlarmSignal;
         attribute :>> direction = DirectionKind::output;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
-        attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
+        attribute :>> sourceReference = "MEMO design extension allocated from LF-003; not a GPCA_Device.aadl connection";
     }
     part exPrescriptionEntry : ComponentExchange {
         attribute :>> id = "CE-004";
@@ -623,8 +627,33 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         ref :>> allocatedExchanges = lfPrescriptionEntry;
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
-        attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_Device.aadl";
+        attribute :>> sourceReference = "MEMO design extension allocated from LF-004; not a GPCA_Device.aadl connection";
     }
+
+    // ── GPCA_Device and hardware-subsystem ports (AADL, 1:1) ───
+    // The published AADL hardware packages are interface wrappers: they do
+    // not decompose into the individual physical parts modelled elsewhere in
+    // this MEMO example. These features and their connections are therefore
+    // kept exact and separate from that extended physical design content.
+    part devOpCmdIn : PhysicalPort { attribute :>> id = "PORT-DEV-01"; attribute :>> name = "OP_CMD_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    part devDbIn : PhysicalPort { attribute :>> id = "PORT-DEV-02"; attribute :>> name = "DB_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    part devPresIn : PhysicalPort { attribute :>> id = "PORT-DEV-03"; attribute :>> name = "PRES_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    part devPatientIn : PhysicalPort { attribute :>> id = "PORT-DEV-04"; attribute :>> name = "PATIENT_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    part devGpcaOut : PhysicalPort { attribute :>> id = "PORT-DEV-05"; attribute :>> name = "GPCA_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+
+    part snsOpCmdIn : PhysicalPort { attribute :>> id = "PORT-SNS-01"; attribute :>> name = "OP_CMD_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsDbIn : PhysicalPort { attribute :>> id = "PORT-SNS-02"; attribute :>> name = "DB_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsPresIn : PhysicalPort { attribute :>> id = "PORT-SNS-03"; attribute :>> name = "PRES_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsPatientIn : PhysicalPort { attribute :>> id = "PORT-SNS-04"; attribute :>> name = "PATIENT_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsOpCmdOut : PhysicalPort { attribute :>> id = "PORT-SNS-05"; attribute :>> name = "OP_CMD_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsPresOut : PhysicalPort { attribute :>> id = "PORT-SNS-06"; attribute :>> name = "PRES_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsPatientOut : PhysicalPort { attribute :>> id = "PORT-SNS-07"; attribute :>> name = "PATIENT_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsSensorOut : PhysicalPort { attribute :>> id = "PORT-SNS-08"; attribute :>> name = "SENSOR_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsConstOut : PhysicalPort { attribute :>> id = "PORT-SNS-09"; attribute :>> name = "CONST_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    part snsDbOut : PhysicalPort { attribute :>> id = "PORT-SNS-10"; attribute :>> name = "DB_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+
+    part actGpcaSwIn : PhysicalPort { attribute :>> id = "PORT-ACT-01"; attribute :>> name = "GPCA_SW_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Actuators.aadl"; }
+    part actGpcaOut : PhysicalPort { attribute :>> id = "PORT-ACT-02"; attribute :>> name = "GPCA_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Actuators.aadl"; }
 
     // ── GPCA_SW top-level ports (AADL GPCA_SW.aadl features) ────
     part portOpCmdIn : SoftwarePort {

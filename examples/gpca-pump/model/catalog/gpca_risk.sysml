@@ -71,6 +71,15 @@ package memo_examples_gpca_pump_model_catalog_gpca_risk {
         attribute :>> year = "2009";
     }
 
+    part citeCriSysSoftwareBehavior : Citation {
+        attribute :>> id = "CITE-009";
+        attribute :>> name = "CriSysGpcaSoftwareBehaviorModel";
+        attribute :>> source = "PCA Pump Software Model (Simulink/Stateflow) — University of Minnesota CriSys";
+        attribute :>> section = "Infusion Pump Software Model Stateflow chart";
+        attribute :>> uri = "https://crisys.cs.umn.edu/downloads/gpca/PCA_Pump_SoftwareModel.mdl";
+        attribute :>> year = "undated";
+    }
+
     // ── Shared risk matrix ───────────────────────────────────────────
     part riskMatrix : RiskMatrix {
         attribute :>> id = "RMX-001";

@@ -435,14 +435,38 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     connection : Composes connect parent ::> gpcaSoftware to child ::> portDbIn;
     connection : Composes connect parent ::> gpcaSoftware to child ::> portGpcaSwOut;
 
-    // ── Device-boundary interconnect (GPCA_Device.aadl; CE-001..004,
-    //    CITE-002) — hardware ↔ software-port connection topology ──
-    connection : ExchangesWith connect source ::> gpcaDeviceSensors to target ::> portSensorIn;
-    connection : ExchangesWith connect source ::> portGpcaSwOut to target ::> pumpMotorAssembly;
-    connection : ExchangesWith connect source ::> portGpcaSwOut to target ::> audibleAlarm;
-    connection : ExchangesWith connect source ::> portGpcaSwOut to target ::> operatorDisplay;
-    connection : ExchangesWith connect source ::> operatorKeypad to target ::> portPresIn;
-    connection : ExchangesWith connect source ::> operatorKeypad to target ::> portOpCmdIn;
+    // ── Device/subsystem feature ownership (published AADL, 1:1) ──
+    connection : Composes connect parent ::> gpcaDevice to child ::> devOpCmdIn;
+    connection : Composes connect parent ::> gpcaDevice to child ::> devDbIn;
+    connection : Composes connect parent ::> gpcaDevice to child ::> devPresIn;
+    connection : Composes connect parent ::> gpcaDevice to child ::> devPatientIn;
+    connection : Composes connect parent ::> gpcaDevice to child ::> devGpcaOut;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsOpCmdIn;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsDbIn;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsPresIn;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsPatientIn;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsOpCmdOut;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsPresOut;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsPatientOut;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsSensorOut;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsConstOut;
+    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsDbOut;
+    connection : Composes connect parent ::> gpcaActuators to child ::> actGpcaSwIn;
+    connection : Composes connect parent ::> gpcaActuators to child ::> actGpcaOut;
+
+    // ── GPCA_Device.Impl connections (GPCA_Device.aadl, 1:1) ──
+    connection : ExchangesWith connect source ::> devOpCmdIn to target ::> snsOpCmdIn;
+    connection : ExchangesWith connect source ::> devDbIn to target ::> snsDbIn;
+    connection : ExchangesWith connect source ::> devPresIn to target ::> snsPresIn;
+    connection : ExchangesWith connect source ::> devPatientIn to target ::> snsPatientIn;
+    connection : ExchangesWith connect source ::> snsOpCmdOut to target ::> portOpCmdIn;
+    connection : ExchangesWith connect source ::> snsPresOut to target ::> portPresIn;
+    connection : ExchangesWith connect source ::> snsPatientOut to target ::> portPatientIn;
+    connection : ExchangesWith connect source ::> snsSensorOut to target ::> portSensorIn;
+    connection : ExchangesWith connect source ::> snsConstOut to target ::> portConstIn;
+    connection : ExchangesWith connect source ::> snsDbOut to target ::> portDbIn;
+    connection : ExchangesWith connect source ::> portGpcaSwOut to target ::> actGpcaSwIn;
+    connection : ExchangesWith connect source ::> actGpcaOut to target ::> devGpcaOut;
 
     // ── Risk chains (ISO 14971, GIIP causal-tree structure) ─────
     // Categorized causes converge on each hazard (GIIP Tables 2-9

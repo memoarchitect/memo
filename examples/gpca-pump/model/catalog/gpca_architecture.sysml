@@ -44,6 +44,17 @@ package memo_examples_gpca_pump_model_catalog_gpca_architecture {
         attribute :>> safetyPartition = "supporting partition";
     }
 
+    // ── Device (UMN AADL architectural model) ───────────────────
+    // The AADL top-level `GPCA_Device` system. GPCA_Device.Impl declares only
+    // GPCA_HW_Sensors, GPCA_SW, and GPCA_HW_Actuators as subcomponents.
+    part gpcaDevice : PhysicalAssembly {
+        attribute :>> id = "HW-000";
+        attribute :>> name = "GPCA_Device";
+        attribute :>> responsibility = "AADL device boundary containing the sensor wrapper, GPCA software, and actuator wrapper.";
+        attribute :>> safetyRole = "device boundary carrying the intended use and the risk-control architecture";
+        attribute :>> partNumber = "GPCA-DEV-001";
+    }
+
     // ── Hardware: aggregates (UMN AADL architectural model) ─────
     part gpcaDeviceSensors : HardwareAssembly {
         attribute :>> id = "HW-001";
@@ -250,17 +261,16 @@ package memo_examples_gpca_pump_model_catalog_gpca_architecture {
     }
 
     // ── Structural composition ──────────────────────────────────
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> airInLineSensor;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> occlusionSensor;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> reservoirSensor;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> doorSensor;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> flowSensor;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> bolusButton;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> operatorKeypad;
-    connection : Composes connect parent ::> gpcaActuators to child ::> pumpMotorAssembly;
-    connection : Composes connect parent ::> gpcaActuators to child ::> antiFreeFlowValve;
-    connection : Composes connect parent ::> gpcaActuators to child ::> audibleAlarm;
-    connection : Composes connect parent ::> gpcaActuators to child ::> operatorDisplay;
+    // Device level (GPCA_Device.aadl): the assemblies and the software system
+    // the device is built from.
+    connection : Composes connect parent ::> gpcaDevice to child ::> gpcaDeviceSensors;
+    connection : Composes connect parent ::> gpcaDevice to child ::> gpcaActuators;
+    connection : Composes connect parent ::> gpcaDevice to child ::> gpcaSoftware;
+
+    // The physical parts below are MEMO design extensions derived from system
+    // requirements and hazard analysis, not subcomponents in the published
+    // AADL packages. They intentionally remain outside this AADL composition
+    // until a project authority defines their interfaces and ownership.
     connection : Composes connect parent ::> gpcaSoftware to child ::> tlm;
     connection : Composes connect parent ::> gpcaSoftware to child ::> config;
     connection : Composes connect parent ::> gpcaSoftware to child ::> alarm;
