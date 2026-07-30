@@ -34,6 +34,7 @@ package memo_viewpoints_definitions {
 
     part def ViewSelectionQuery specializes MemoPart {
         attribute includeElementKinds : String[*];
+        attribute includeElementIds : String[*];
         attribute includeRelationshipKinds : String[*];
         attribute includeLayers : String[*];
         attribute includeConcerns : ConcernKind[*];
@@ -79,6 +80,7 @@ package memo_viewpoints_definitions {
 
     part def ViewInclusionRule specializes MemoPart {
         attribute includeElementKinds : String[*];
+        attribute includeElementIds : String[*];
         attribute includeRelationshipKinds : String[*];
         attribute includeLayers : String[*];
         attribute includeConcerns : ConcernKind[*];
