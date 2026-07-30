@@ -13,13 +13,19 @@ package memo_examples_gpca_pump_model_catalog_gpca_behavior_modes {
     // auto-initiate on the prescribed schedule (REQ 24), with no
     // external trigger. Mode-tree containment edges (Composes)
     // live in gpca_trace.sysml.
+    // Audit scope: this is a requirements-level therapy-mode abstraction, not
+    // a full transcription of CITE-009's monolithic Stateflow chart. The
+    // source chart also contains detailed Configuration, Alarms,
+    // System_Monitor, Log, and Infusion_Manager state behavior that remains
+    // outside this compact mode view.
     // ═════════════════════════════════════════════════════════════
     state topLevelModeMachine : StateMachine {
         attribute :>> id = "BM-001";
         attribute :>> name = "TopLevelModeMachine";
         attribute :>> machineKind = "hierarchical state machine";
         attribute :>> executionSemantics = "single-step synchronous; sub-modes inherit all parent-mode requirements";
-        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1 Fig 4.1";
+        attribute fidelityScope = "Requirements-derived therapy mode hierarchy; partial abstraction of CITE-009, not a state-for-state Stateflow transcription";
+        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1 Fig 4.1; CITE-009: CriSys PCA Pump Software Model";
     }
 
     // ── Mode states (Fig 4.1) ───────────────────────────────────
