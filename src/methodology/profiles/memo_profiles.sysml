@@ -68,7 +68,7 @@ package memo_methodology_profiles {
         attribute :>> strength = RuleStrengthKind::required;
     }
 
-    action stepRequirements : WorkflowStep {
+    action stepRequirements : MethodologyWorkflowStep {
         attribute :>> id = "STEP-001";
         attribute :>> name = "CaptureRequirements";
         attribute :>> stage = WorkflowStageKind::requirements;
@@ -77,7 +77,7 @@ package memo_methodology_profiles {
         attribute :>> exitCriteria = "Initial requirement set exists.";
     }
 
-    action stepArchitecture : WorkflowStep {
+    action stepArchitecture : MethodologyWorkflowStep {
         attribute :>> id = "STEP-002";
         attribute :>> name = "DefineArchitecture";
         attribute :>> stage = WorkflowStageKind::architecture;
@@ -86,7 +86,7 @@ package memo_methodology_profiles {
         attribute :>> exitCriteria = "Core architecture and interfaces exist.";
     }
 
-    action stepRisk : WorkflowStep {
+    action stepRisk : MethodologyWorkflowStep {
         attribute :>> id = "STEP-003";
         attribute :>> name = "PerformRiskAnalysis";
         attribute :>> stage = WorkflowStageKind::risk;
@@ -95,7 +95,7 @@ package memo_methodology_profiles {
         attribute :>> exitCriteria = "Risk and control model exists.";
     }
 
-    action stepVerification : WorkflowStep {
+    action stepVerification : MethodologyWorkflowStep {
         attribute :>> id = "STEP-004";
         attribute :>> name = "PlanVerification";
         attribute :>> stage = WorkflowStageKind::verificationStage;
