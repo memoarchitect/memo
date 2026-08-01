@@ -9,7 +9,7 @@ package memo_viewpoints_context_context_viewpoint {
         attribute :>> name = "ContextViewpoint";
         attribute :>> title = "System Context Viewpoint";
         attribute :>> shortDescription = "Shows actors, use context, and system boundary.";
-        attribute :>> longDescription = "Default viewpoint derived from the context layer to communicate who interacts with the device, under which use conditions, and where trust or safety boundaries exist.";
+        attribute :>> description = "Default viewpoint derived from the context layer to communicate who interacts with the device, under which use conditions, and where trust or safety boundaries exist.";
         attribute :>> purpose = "Communicate operational context and boundaries.";
         attribute :>> audience = (AudienceKind::systemArchitect);
         attribute :>> stage = WorkflowStageKind::context;

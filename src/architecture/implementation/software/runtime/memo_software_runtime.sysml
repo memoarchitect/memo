@@ -25,11 +25,9 @@ package memo_architecture_implementation_software_runtime {
         enum messageBroker;
     }
 
-    part def SoftwareComponent specializes ArchitectureElement {
+    part def SoftwareComponent specializes SoftwareItem {
         attribute runtimeKind : RuntimeKind;
         attribute responsibility : String;
-        attribute safetyClass : SafetyClassKind;
-        attribute complexity : ComplexityKind;
         attribute periodMs : Real;
         attribute deadlineMs : Real;
         attribute wcetMs : Real;

@@ -4,6 +4,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
     private import memo_architecture_logical_interfaces::*;
     private import memo_architecture_realization_physical::*;
     private import memo_architecture_functional_functions::*;
+    private import memo_core_common::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
     private import memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems::*;
     private import memo_core_enumerations::*;
@@ -13,7 +14,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> protocolSemantics = "flow, air, occlusion, door, battery, cpu, memory, pump state";
     }
     port def SensorInputPort :> SensorPort {
-        attribute :>> direction = DirectionKind::input;
+        in item sensorData : MemoExchangeItem;
         attribute :>> interfaceType = "SensorDataInterface";
         attribute :>> sensorDomain = "physiological and device state";
     }
@@ -54,7 +55,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> name = "HW_SW_DataBus";
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> protocol = "immediate data port mapping";
-        attribute :>> directionality = DirectionKind::bidirectional;
+        attribute :>> directionality = DirectionKind::inputOutput;
         attribute :>> bandwidth = "implementation-defined";
         attribute :>> timingConstraint = "same execution step where required";
         attribute :>> electricalStandard = "logical/AADL";
@@ -150,7 +151,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_interfaces {
         attribute :>> id = "SI-005";
         attribute :>> name = "HospitalPharmacyDatabaseInterface";
         attribute :>> interfaceKind = InterfaceKind::data;
-        attribute :>> direction = DirectionKind::bidirectional;
+        attribute :>> direction = DirectionKind::inputOutput;
         attribute :>> protocol = "CriSys I 9, I 10, I 11";
         attribute :>> protocolSemantics = "Retrieves the safe-value set (concentration, VTBI, flow rate, bolus interval/count, KVO rate) where DrugName_hd = DrugName_prog; resets to defaults when no record matches";
         attribute :>> interactionPattern = "query/response safe-value lookup";

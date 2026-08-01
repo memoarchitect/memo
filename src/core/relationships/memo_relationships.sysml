@@ -85,8 +85,10 @@ package memo_core_relationships {
     // Implements{Component,Procedure}, UIRealizesFunctional,
     // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase.
     connection def Realizes :> MemoRelationship {
-        end realizing : MemoPart;
-        end realized : MemoPart;
+        // Realization crosses structural and behavioral metaclasses (for
+        // example a FunctionalFlow route realizing a FunctionalScenario).
+        end realizing;
+        end realized;
     }
     connection def VerifiedBy :> MemoRelationship {
         // Requirements, risk controls, and architecture components are

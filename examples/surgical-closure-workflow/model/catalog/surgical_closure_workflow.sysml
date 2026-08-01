@@ -73,10 +73,13 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> potentialHarm = "bleeding or staple-line complication not recognized before handover";
         attribute :>> severityIfFailed = SeverityKind::serious;
     }
-    action stConfirmAnatomy : TaskStep { attribute :>> id = "LSG-ST-001"; attribute :>> name = "ConfirmAnatomy"; attribute :>> stepOrder = 1; }
-    action stCreateStapleLine : TaskStep { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; attribute :>> stepOrder = 2; }
-    action stInspectBleeding : TaskStep { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; attribute :>> stepOrder = 3; }
-    action stAssessIntegrity : TaskStep { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; attribute :>> stepOrder = 4; }
+    action stConfirmAnatomy : TaskStep { attribute :>> id = "LSG-ST-001"; attribute :>> name = "ConfirmAnatomy"; }
+    action stCreateStapleLine : TaskStep { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; }
+    action stInspectBleeding : TaskStep { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; }
+    action stAssessIntegrity : TaskStep { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; }
+    first stConfirmAnatomy then stCreateStapleLine;
+    first stCreateStapleLine then stInspectBleeding;
+    first stInspectBleeding then stAssessIntegrity;
     connection : Composes connect parent ::> actSizeAndCreateSleeve to child ::> taskCreateStapleLine;
     connection : Composes connect parent ::> taskCreateStapleLine to child ::> stConfirmAnatomy;
     connection : Composes connect parent ::> taskCreateStapleLine to child ::> stCreateStapleLine;
@@ -91,13 +94,13 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
     }
-    action wsTimeOut : WorkflowStep { attribute :>> stepOrder = 1; ref :>> performedActivity = actTimeOutAndPosition; }
-    action wsAccess : WorkflowStep { attribute :>> stepOrder = 2; ref :>> performedActivity = actEstablishAccess; }
-    action wsMobilize : WorkflowStep { attribute :>> stepOrder = 3; ref :>> performedActivity = actMobilizeStomach; }
-    action wsSleeve : WorkflowStep { attribute :>> stepOrder = 4; ref :>> performedActivity = actSizeAndCreateSleeve; }
-    action wsAssess : WorkflowStep { attribute :>> stepOrder = 5; ref :>> performedActivity = actAssessStapleLine; }
-    action wsClose : WorkflowStep { attribute :>> stepOrder = 6; ref :>> performedActivity = actExtractSpecimenAndClose; }
-    action wsHandover : WorkflowStep { attribute :>> stepOrder = 7; ref :>> performedActivity = actHandover; }
+    action wsTimeOut : WorkflowStep { ref :>> performedActivity = actTimeOutAndPosition; }
+    action wsAccess : WorkflowStep { ref :>> performedActivity = actEstablishAccess; }
+    action wsMobilize : WorkflowStep { ref :>> performedActivity = actMobilizeStomach; }
+    action wsSleeve : WorkflowStep { ref :>> performedActivity = actSizeAndCreateSleeve; }
+    action wsAssess : WorkflowStep { ref :>> performedActivity = actAssessStapleLine; }
+    action wsClose : WorkflowStep { ref :>> performedActivity = actExtractSpecimenAndClose; }
+    action wsHandover : WorkflowStep { ref :>> performedActivity = actHandover; }
     connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsTimeOut;
     connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsAccess;
     connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsMobilize;
@@ -105,12 +108,12 @@ package memo_examples_surgical_closure_workflow {
     connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsAssess;
     connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsClose;
     connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsHandover;
-    connection : StepPrecedes connect predecessor ::> wsTimeOut to successor ::> wsAccess;
-    connection : StepPrecedes connect predecessor ::> wsAccess to successor ::> wsMobilize;
-    connection : StepPrecedes connect predecessor ::> wsMobilize to successor ::> wsSleeve;
-    connection : StepPrecedes connect predecessor ::> wsSleeve to successor ::> wsAssess;
-    connection : StepPrecedes connect predecessor ::> wsAssess to successor ::> wsClose;
-    connection : StepPrecedes connect predecessor ::> wsClose to successor ::> wsHandover;
+    first wsTimeOut then wsAccess;
+    first wsAccess then wsMobilize;
+    first wsMobilize then wsSleeve;
+    first wsSleeve then wsAssess;
+    first wsAssess then wsClose;
+    first wsClose then wsHandover;
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfSleeveGastrectomy to supported ::> ucPerformSleeveGastrectomy; }
 
     // ── Scenario paths, each with its own activity/action flow ──
@@ -124,7 +127,7 @@ package memo_examples_surgical_closure_workflow {
         action recognizeBleeding; action controlBleeding; action reassessStapleLine; action escalateIfNeeded;
         first start then recognizeBleeding; first recognizeBleeding then controlBleeding; first controlBleeding then reassessStapleLine; first reassessStapleLine then escalateIfNeeded; first escalateIfNeeded then done;
     }
-    part scNominalSleeveProcedure : OperativeScenario {
+    action scNominalSleeveProcedure : OperativeScenario {
         attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
@@ -133,7 +136,7 @@ package memo_examples_surgical_closure_workflow {
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaCompleteSleeveProcedure;
     }
-    part scStapleLineBleeding : OperativeScenario {
+    action scStapleLineBleeding : OperativeScenario {
         attribute :>> id = "LSG-SC-002"; attribute :>> name = "StapleLineBleedingRecovery";
         attribute :>> variantKind = ScenarioVariantKind::recovery;
         attribute :>> operationalCondition = OperationalConditionKind::degraded;

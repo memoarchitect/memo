@@ -9,7 +9,7 @@ package memo_viewpoints_functional_functional_viewpoint {
         attribute :>> name = "FunctionalViewpoint";
         attribute :>> title = "Functional Viewpoint";
         attribute :>> shortDescription = "Shows system functions, their decomposition, and allocation.";
-        attribute :>> longDescription = "Default viewpoint derived from the functions layer for what the system does, independent of how it is structured — function trees, function allocation, and behavior triggers.";
+        attribute :>> description = "Default viewpoint derived from the functions layer for what the system does, independent of how it is structured — function trees, function allocation, and behavior triggers.";
         attribute :>> purpose = "Describe the system's functional decomposition and behavior.";
         attribute :>> audience = (AudienceKind::systemArchitect);
         attribute :>> stage = WorkflowStageKind::architecture;

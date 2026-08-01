@@ -37,13 +37,15 @@ package memo_architecture_logical_structure {
     }
 
     // The role a logical component plays. Was a subclass branch
-    // (LogicalSystem / LogicalSubsystem / LogicalChannel / LogicalDataStore /
-    // LogicalControlElement / LogicalUserInterface / LogicalExternalSystem);
-    // now one attribute, because all of them share the same relationships and
-    // differed only by a couple of descriptive attributes.
+    // (LogicalChannel / LogicalDataStore / LogicalControlElement /
+    // LogicalUserInterface / LogicalExternalSystem); now one attribute, because
+    // those all share the same relationships and differed only by a couple of
+    // descriptive attributes.
+    //
+    // System / Subsystem / SystemOfSystems are types below, not values here:
+    // each admits a different set of children, and a value on an attribute
+    // cannot carry containment legality.
     enum def ComponentRoleKind {
-        enum system;
-        enum subsystem;
         enum channel;
         enum dataStore;
         enum controlElement;
@@ -52,17 +54,73 @@ package memo_architecture_logical_structure {
         enum generic;
     }
 
-    // One logical component. `componentRole` selects what it is; the role-
-    // specific attributes below are all optional so a component carries only
-    // the ones its role needs. A channel claiming independence must still be
-    // linked by IndependentOf with its basis stated.
+    // The discipline a logical block is realized in. Orthogonal to
+    // `componentRole`: a subsystem may be software, a system may be hardware,
+    // and a block whose realization is not yet decided stays `logical`.
+    //
+    // This does NOT relocate the element. The block remains logical-layer —
+    // MEMO encodes layer by owning package, and this one is
+    // memo_architecture_logical_structure. `systemType` records what the block
+    // WILL BE realized in, which is a logical-architecture decision made
+    // before any software or hardware element exists. Once those elements do
+    // exist, AllocatedTo carries the actual allocation and this attribute
+    // stays as the stated intent.
+    enum def SystemTypeKind {
+        enum logical;
+        enum software;
+        enum hardware;
+    }
+
+    // ─── System hierarchy ────────────────────────────────────────
+    // Three types rather than three role values, because they differ in what
+    // they may CONTAIN — and containment legality cannot live on an attribute.
+    //
+    // The allowed children are declared as typed part features, which is how
+    // SysML v2 already states "what may be contained". No new relationship is
+    // introduced: `Composes` remains the single containment relation for
+    // instances, exactly as everywhere else in MEMO. The features below say
+    // which types are admissible; Composes records the actual links.
+
+    part def SystemOfSystems specializes LogicalComponent {
+        // Constituent systems are independently operated and independently
+        // managed, collaborating for a capability none delivers alone
+        // (ISO/IEC/IEEE 21841). A connected pump talking to a hospital
+        // infusion-management server is one; a pump and its own pole-mounted
+        // battery are not — which is why ownership is recorded here and is the
+        // attribute that distinguishes an SoS from a merely large system.
+        attribute systemBoundaryDescription : String;
+        attribute constituentOwnership : String;
+        // A constituent may itself coordinate systems-of-systems, or it may be
+        // an independently operated system. Subsystems and components remain
+        // inside one of those constituent systems.
+        part constituentSystemOfSystems : SystemOfSystems[0..*];
+        part constituentSystem : System[0..*];
+    }
+
+    part def System specializes LogicalComponent {
+        attribute systemBoundaryDescription : String;
+        part system : System[0..*];
+        part subsystem : Subsystem[0..*];
+        part component : LogicalComponent[0..*];
+    }
+
+    part def Subsystem specializes LogicalComponent {
+        attribute systemBoundaryDescription : String;
+        part subsystem : Subsystem[0..*];
+        part component : LogicalComponent[0..*];
+    }
+
+    // One logical component. `componentRole` selects what it is, `systemType`
+    // what it is realized in; the role-specific attributes below are all
+    // optional so a component carries only the ones its role needs. A channel
+    // claiming independence must still be linked by IndependentOf with its
+    // basis stated.
     part def LogicalComponent specializes ArchitectureElement {
         attribute componentRole : ComponentRoleKind;
+        attribute systemType : SystemTypeKind[0..1];
         attribute responsibility : String;
         attribute decompositionLevel : String;
         attribute safetyPartition : String;
-        // system / subsystem
-        attribute systemBoundaryDescription : String;
         // channel (safety role + diversity)
         attribute channelRole : ChannelRoleKind[0..1];
         attribute diversityBasis : String;
@@ -79,9 +137,7 @@ package memo_architecture_logical_structure {
     }
 
     // Boundary features and contracts.
-    port def LogicalPort specializes MemoPort {
-        attribute contentKind : FlowContentKind;
-    }
+    port def LogicalPort specializes MemoPort;
     interface def LogicalInterface specializes MemoInterface {
         attribute contentKind : FlowContentKind;
         attribute interactionPattern : String;

@@ -21,7 +21,7 @@ package memo_assurance_human_factors {
 
     // A use scenario whose performance could lead to a hazardous situation
     // (IEC 62366-1 3.9); selected for summative evaluation.
-    part def HazardRelatedUseScenario specializes MemoScenario {
+    action def HazardRelatedUseScenario specializes MemoScenario {
         attribute hazardReference : String;
         attribute selectionRationale : String;
     }

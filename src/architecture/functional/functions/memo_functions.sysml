@@ -28,11 +28,11 @@ package memo_architecture_functional_functions {
         ref performedFunction : SystemFunction[0..1];
     }
 
-    // Typed transfer of information/command/status/etc. between functions
-    // (renamed from LogicalFlow — it belongs to the functional perspective).
+    // Named traceable route between functions. Native `flow of` usages carry
+    // the transported item; this element exists for budgets and assurance
+    // attributes that a flow usage cannot own.
     part def FunctionalExchange specializes ArchitectureElement {
         attribute flowKind : FlowKind;
-        attribute direction : DirectionKind;
         attribute latencyBudgetMs : Real;
         attribute staleAfterMs : Real;
         attribute integrityLevel : String;
@@ -46,15 +46,11 @@ package memo_architecture_functional_functions {
     // flows are part of functional architecture, never logical structure.
     part def FunctionalFlow specializes ArchitectureElement {
         attribute flowCategory : FunctionalFlowKind;
-        ref startFunction : SystemFunction[0..1];
-        ref endFunction : SystemFunction[0..1];
         attribute endToEndLatencyBudgetMs : String;
         attribute safetyRelevant : Boolean;
         attribute securityRelevant : Boolean;
-        ref includedFunctions : SystemFunction[0..*];
     }
-    part def FunctionalFlowStep specializes MemoPart {
-        attribute stepOrder : String;
+    action def FunctionalFlowStep specializes MemoAction {
         ref function : SystemFunction[0..1];
         ref exchange : FunctionalExchange[0..1];
         ref item exchangedItem : MemoExchangeItem[0..1];
@@ -63,10 +59,7 @@ package memo_architecture_functional_functions {
     // The functional-layer scenario selects one functional route and realizes
     // an operative scenario. It is the "what the system does" path, not a
     // logical component interaction.
-    part def FunctionalScenario specializes MemoScenario {
-        ref functionSequence : SystemFunction[0..*];
-        ref functionalFlows : FunctionalExchange[0..*];
-        attribute sequenceDiagramRef : String;
+    action def FunctionalScenario specializes MemoScenario {
         ref selectedFlow : FunctionalFlow[0..1];
     }
     connection def IncludesStep :> MemoRelationship {

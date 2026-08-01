@@ -49,7 +49,7 @@ package memo_assurance_cybersecurity {
     // A scenario specialization: an attack path through the
     // system, classified by the shared scenario dimensions with purpose
     // `cybersecurity`.
-    part def ThreatScenario specializes MemoScenario {
+    action def ThreatScenario specializes MemoScenario {
         attribute actorDescription : String;
         attribute assumptionSummary : String;
         attribute guaranteeSummary : String;

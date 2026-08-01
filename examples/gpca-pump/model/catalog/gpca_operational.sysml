@@ -234,7 +234,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     }
 
     // ── Operational scenarios ───────────────────────────────────
-    part osNominalTherapy : OperativeScenario {
+    action osNominalTherapy : OperativeScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "NominalTherapySession";
         attribute :>> variantKind = ScenarioVariantKind::nominal;
@@ -247,10 +247,11 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaCompleteNominalTherapy;
     }
-    part osLockoutBolus : OperativeScenario {
+    action osLockoutBolus : OperativeScenario {
         attribute :>> id = "OS-002";
         attribute :>> name = "BolusRequestDuringLockout";
         attribute :>> variantKind = ScenarioVariantKind::alternate;
+        attribute :>> variationPoint = "patient bolus request during the nominal therapy lockout interval";
         attribute :>> operationalCondition = OperationalConditionKind::foreseeableMisuse;
         attribute :>> preCondition = "basal infusion active; lockout interval running";
         attribute :>> postCondition = "request ignored, logged; basal continues unchanged";
@@ -258,12 +259,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 PATIENT BOLUS mode (lockout requirements)";
         ref :>> parentWorkflow = wfManageActiveTherapy;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
+        ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRejectBolusDuringLockout;
     }
-    part osOcclusionAlarm : OperativeScenario {
+    action osOcclusionAlarm : OperativeScenario {
         attribute :>> id = "OS-003";
         attribute :>> name = "OcclusionDetectedDuringInfusion";
         attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> variationPoint = "occlusion detected while nominal infusion is active";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> preCondition = "therapy active; downstream line becomes blocked";
         attribute :>> postCondition = "infusion paused, alarm annunciated, clinician clears occlusion and resumes";
@@ -271,12 +274,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms and Alerts (occlusion)";
         ref :>> parentWorkflow = wfRespondToTherapyAlarm;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
+        ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToOcclusion;
     }
-    part osAirInLine : OperativeScenario {
+    action osAirInLine : OperativeScenario {
         attribute :>> id = "OS-004";
         attribute :>> name = "AirInLineDetected";
         attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> variationPoint = "air-in-line detected while nominal infusion is active";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> preCondition = "therapy active; air bubble enters tubing";
         attribute :>> postCondition = "infusion stopped before air reaches patient; alarm annunciated";
@@ -284,12 +289,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Air embolism)";
         ref :>> parentWorkflow = wfRespondToTherapyAlarm;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
+        ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToAirInLine;
     }
-    part osEmptyReservoir : OperativeScenario {
+    action osEmptyReservoir : OperativeScenario {
         attribute :>> id = "OS-005";
         attribute :>> name = "ReservoirEmptyDuringTherapy";
         attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> variationPoint = "reservoir-empty threshold reached during nominal therapy";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> preCondition = "therapy active; reservoir volume reaches empty threshold";
         attribute :>> postCondition = "infusion stopped, alarm raised, reservoir replaced";
@@ -297,12 +304,14 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Empty Reservoir)";
         ref :>> parentWorkflow = wfRespondToTherapyAlarm;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
+        ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaReplaceEmptyReservoir;
     }
-    part osPowerLoss : OperativeScenario {
+    action osPowerLoss : OperativeScenario {
         attribute :>> id = "OS-006";
         attribute :>> name = "MainsPowerLossAndRecovery";
         attribute :>> variantKind = ScenarioVariantKind::recovery;
+        attribute :>> variationPoint = "mains supply lost during nominal therapy";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> preCondition = "therapy active on mains power";
         attribute :>> postCondition = "therapy continues on battery; prescription preserved across full power loss";
@@ -310,6 +319,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.3 Electrical Hazards (battery failure)";
         ref :>> parentWorkflow = wfRespondToTherapyAlarm;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
+        ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRecoverAfterPowerLoss;
     }
     connection : Realizes connect realizing ::> osNominalTherapy to realized ::> ucDeliverPcaTherapy;

@@ -9,7 +9,7 @@ package memo_viewpoints_cybersecurity_cybersecurity_viewpoint {
         attribute :>> name = "CybersecurityViewpoint";
         attribute :>> title = "Cybersecurity Viewpoint";
         attribute :>> shortDescription = "Shows assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, and mitigations.";
-        attribute :>> longDescription = "Default viewpoint derived from the cybersecurity layer, using STRIDE-style threat categories by default while allowing safety and privacy impacts to be traced into the broader model.";
+        attribute :>> description = "Default viewpoint derived from the cybersecurity layer, using STRIDE-style threat categories by default while allowing safety and privacy impacts to be traced into the broader model.";
         attribute :>> purpose = "Communicate cybersecurity design, threat analysis, and cyber risk posture.";
         attribute :>> audience = (AudienceKind::securityEngineer);
         attribute :>> stage = WorkflowStageKind::risk;

@@ -42,7 +42,7 @@ package memo_architecture_functional_behavior {
         attribute wcetMs : String;
         attribute safetyRelevant : Boolean;
     }
-    part def ActivityFlow specializes ArchitectureElement {
+    action def ActivityFlow specializes MemoAction {
         attribute flowKind : ActivityFlowKind;
         attribute guardCondition : String;
         attribute weight : String;
