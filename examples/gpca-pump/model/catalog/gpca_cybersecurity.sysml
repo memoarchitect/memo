@@ -78,7 +78,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_cybersecurity {
         attribute :>> cweReference = "CWE-798";
     }
 
-    part tamperedConfigurationScenario : ThreatScenario {
+    action tamperedConfigurationScenario : ThreatScenario {
         attribute :>> id = "SCN-001";
         attribute :>> name = "TamperedTherapyConfigurationScenario";
         attribute :>> description = "An attacker with local access to the maintenance port alters lockout or dose parameters, aiming to bypass safety limits; may enable unsafe therapy delivery or bypass safeguards.";

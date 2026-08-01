@@ -17,5 +17,6 @@ templates:
 examples:
   gpca: ./examples/gpca-pump
   standard-sysml-diagrams: ./examples/sysml-diagram-samples
+  ui-screen-regions: ./examples/ui-screen-regions
   extension-template: ./examples/extensions/template
   clinical-extension: ./examples/extensions/clinical

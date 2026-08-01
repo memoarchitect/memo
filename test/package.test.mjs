@@ -152,7 +152,7 @@ test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
     'extensions', 'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
     'manual-surgical-instrument', 'multidimensional-layers', 'reusable-instrument',
     'software-only-medical-device', 'surgical-closure-workflow',
-    'surgical-robot', 'sysml-diagram-samples', 'temperature-alarm',
+    'surgical-robot', 'sysml-diagram-samples', 'temperature-alarm', 'ui-screen-regions',
   ];
   assert.deepEqual(examples, expected);
 });
@@ -163,7 +163,7 @@ test('focused MEMO examples separate their parent package, catalog, and viewpoin
     'functional-logical-physical', 'ivd-laboratory-system', 'manual-surgical-instrument',
     'multidimensional-layers', 'reusable-instrument',
     'software-only-medical-device', 'surgical-closure-workflow', 'surgical-robot',
-    'temperature-alarm',
+    'temperature-alarm', 'ui-screen-regions',
   ];
   for (const example of focused) {
     const model = join(root, 'examples', example, 'model');
@@ -189,6 +189,17 @@ test('use cases use one standard type with a context kind', () => {
   assert.match(useCases, /use case def UseCase/);
   assert.match(useCases, /attribute useCaseKind : UseCaseKind/);
   assert.doesNotMatch(useCases, /(?:Clinical|Service|Manufacturing|Development|Medical)UseCase/);
+});
+
+test('logical hierarchy declares recursive system containment explicitly', () => {
+  const hierarchy = read(
+    'src', 'architecture', 'logical', 'structure', 'memo_logical_structure.sysml',
+  );
+  assert.match(hierarchy, /part constituentSystemOfSystems : SystemOfSystems\[0\.\.\*\];/);
+  assert.match(hierarchy, /part constituentSystem : System\[0\.\.\*\];/);
+  assert.match(hierarchy, /part system : System\[0\.\.\*\];/);
+  assert.match(hierarchy, /part subsystem : Subsystem\[0\.\.\*\];/);
+  assert.match(hierarchy, /part component : LogicalComponent\[0\.\.\*\];/);
 });
 
 test('ontology V-model names canonical types and remains structurally valid SVG', () => {

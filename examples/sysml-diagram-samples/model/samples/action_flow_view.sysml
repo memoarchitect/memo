@@ -4,6 +4,7 @@ package memo_examples_sysml_diagram_samples_model_samples_action_flow_view {
 
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_logical_interfaces::*;
+    private import memo_architecture_functional_functions::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
@@ -17,15 +18,15 @@ package memo_examples_sysml_diagram_samples_model_samples_action_flow_view {
         attribute :>> itemKind = InterfaceItemKind::material;
     }
 
-    action def ReceiveInput { out received : DataPacket; }
-    action def ValidateInput { in received : DataPacket; out validated : EnergyToken; }
-    action def ProcessInput { in validated : EnergyToken; out result : MaterialBatch; }
-    action def RecordResult { in result : MaterialBatch; }
+    action def ReceiveInput specializes SystemAction { out item received : DataPacket; }
+    action def ValidateInput specializes SystemAction { in item received : DataPacket; out item validated : EnergyToken; }
+    action def ProcessInput specializes SystemAction { in item validated : EnergyToken; out item result : MaterialBatch; }
+    action def RecordResult specializes SystemAction { in item result : MaterialBatch; }
 
     part laneA : LogicalComponent { attribute :>> name = "Lane A"; }
     part laneB : LogicalComponent { attribute :>> name = "Lane B"; }
 
-    action sampleActionFlow {
+    action sampleActionFlow : SystemAction {
         action receive : ReceiveInput;
         action validate : ValidateInput;
         action process : ProcessInput {

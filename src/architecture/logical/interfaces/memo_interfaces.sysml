@@ -67,8 +67,7 @@ package memo_architecture_logical_interfaces {
         attribute interfaceKind : InterfaceKind;
         attribute protocolSemantics : String;
     }
-    port def DataPort {
-        attribute direction : DirectionKind;
+    port def DataPort specializes MemoPort {
         attribute interfaceType : String;
     }
     port def SensorPort specializes DataPort { attribute sensorDomain : String; }

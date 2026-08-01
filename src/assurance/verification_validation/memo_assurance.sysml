@@ -34,7 +34,7 @@ package memo_assurance_verification_validation {
 
     // A scenario executed to verify — selected path with purpose
     // 'verification'.
-    part def VerificationScenario specializes MemoScenario {
+    action def VerificationScenario specializes MemoScenario {
         attribute verificationEnvironment : String;
         attribute stimulusSummary : String;
     }

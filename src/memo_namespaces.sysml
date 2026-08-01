@@ -6,6 +6,7 @@ package memo {
     public import memo_core_terminology::*;
     public import memo_core_common::*;
     public import memo_core_relationships::*;
+    public import memo_core_annotations::*;
 
     public import memo_architecture_operational_context_actors::*;
     public import memo_architecture_operational_context_stakeholders::*;
@@ -64,6 +65,8 @@ package memo {
     public import memo_viewpoints_clinical_clinical_evidence_view::*;
     public import memo_viewpoints_usability_usability_viewpoint::*;
     public import memo_viewpoints_usability_usability_engineering_view::*;
+    public import memo_viewpoints_ui_layout_ui_layout_viewpoint::*;
+    public import memo_viewpoints_ui_layout_screen_layout_view::*;
 
     public import memo_artifacts_definitions::*;
     public import memo_compliance_artifacts::*;
@@ -246,6 +249,7 @@ package memo_namespace_compliance {
 }
 
 package memo_namespace_core {
+    alias annotations for memo_namespace_core_annotations;
     alias common for memo_namespace_core_common;
     alias consistency_rules for memo_namespace_core_consistency_rules;
     alias dimensions for memo_namespace_core_dimensions;
@@ -290,6 +294,7 @@ package memo_namespace_viewpoints {
     alias requirements for memo_namespace_viewpoints_requirements;
     alias risk for memo_namespace_viewpoints_risk;
     alias software for memo_namespace_viewpoints_software;
+    alias ui_layout for memo_namespace_viewpoints_ui_layout;
     alias usability for memo_namespace_viewpoints_usability;
     alias 'verification' for memo_namespace_viewpoints_verification;
 }
@@ -368,6 +373,10 @@ package memo_namespace_compliance_iso14971 {
 
 package memo_namespace_compliance_postmarket {
     public import memo_compliance_postmarket::*;
+}
+
+package memo_namespace_core_annotations {
+    public import memo_core_annotations::*;
 }
 
 package memo_namespace_core_common {
@@ -531,6 +540,11 @@ package memo_namespace_viewpoints_usability {
     public import memo_viewpoints_usability_usability_viewpoint::*;
 }
 
+package memo_namespace_viewpoints_ui_layout {
+    alias screen_layout_view for memo_namespace_viewpoints_ui_layout_screen_layout_view;
+    public import memo_viewpoints_ui_layout_ui_layout_viewpoint::*;
+}
+
 package memo_namespace_viewpoints_verification {
     alias verification_coverage_view for memo_namespace_viewpoints_verification_verification_coverage_view;
     public import memo_viewpoints_verification_verification_viewpoint::*;
@@ -606,6 +620,14 @@ package memo_namespace_viewpoints_software_software_architecture_view {
 
 package memo_namespace_viewpoints_usability_usability_engineering_view {
     public import memo_viewpoints_usability_usability_engineering_view::*;
+}
+
+package memo_namespace_viewpoints_ui_layout_ui_layout_viewpoint {
+    public import memo_viewpoints_ui_layout_ui_layout_viewpoint::*;
+}
+
+package memo_namespace_viewpoints_ui_layout_screen_layout_view {
+    public import memo_viewpoints_ui_layout_screen_layout_view::*;
 }
 
 package memo_namespace_viewpoints_verification_verification_coverage_view {

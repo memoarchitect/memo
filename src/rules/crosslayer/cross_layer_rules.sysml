@@ -1,13 +1,12 @@
-// Cross-layer rule pack — native KerML constraints.
-// Traceability between architecture layers, migrated from ConsistencyRule
-// predicate-attribute parts to native `constraint def` bodies.
+// Cross-layer traceability constraints evaluated from their ontology-owned
+// predicate expressions.
 package memo_rules_crosslayer {
     private import ScalarValues::*;
 
     private import memo_core_consistency_rules::*;
     private import memo_core_enumerations::*;
 
-    constraint def riskToReqTraceRule {
+    constraint def RiskToReqTraceRule {
         attribute id = "XL-001";
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::warning;
@@ -16,7 +15,7 @@ package memo_rules_crosslayer {
         constraint { true }
     }
 
-    constraint def reqToArchTraceRule {
+    constraint def ReqToArchTraceRule {
         attribute id = "XL-002";
         attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::warning;
@@ -25,14 +24,4 @@ package memo_rules_crosslayer {
         constraint { true }
     }
 
-    // XL-003 had minCount=0 (advisory only), so the native form is vacuously true
-    // (size >= 0). Retained for metadata/rationale parity; flags nothing.
-    constraint def cyberToSafetyTraceRule {
-        attribute id = "XL-003";
-        attribute appliesTo = "CyberHazard";
-        attribute severity = RuleSeverityKind::warning;
-        attribute rationaleText = "FDA cybersecurity guidance requires linking cybersecurity to patient safety.";
-        attribute predicateExpression = "impactsSafety->size() >= 0";
-        constraint { true }
-    }
 }

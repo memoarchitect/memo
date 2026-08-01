@@ -83,7 +83,6 @@ package memo_core_enumerations {
         enum input;
         enum output;
         enum inputOutput;
-        enum bidirectional;
     }
     enum def CriticalityKind {
         enum low;
@@ -192,11 +191,11 @@ package memo_core_enumerations {
         enum SDD;
         enum RMF;
         enum VV;
-        enum ArchitectureDescription;
-        enum CybersecurityAssessment;
-        enum ThreatModel;
-        enum Clinical;
-        enum Usability;
+        enum architectureDescription;
+        enum cybersecurityAssessment;
+        enum threatModel;
+        enum clinical;
+        enum usability;
     }
     enum def SchedulingPolicyKind {
         enum nonRealTime;
@@ -337,6 +336,9 @@ package memo_core_enumerations {
         enum riskTable;
         enum traceMatrix;
         enum narrativeSection;
+        // A captured screen with its regions drawn over it — the presentation
+        // of the geometry view kind.
+        enum screenLayout;
         enum custom;
     }
     enum def DeploymentKind {
@@ -569,5 +571,15 @@ package memo_core_enumerations {
         enum cognition;
         enum actionCategory;
         enum memoryRecall;
+    }
+    // Lifecycle of a review remark on a model element. `rejected` is a closed
+    // state with a stated reason, not a deletion: a design review that
+    // considered a point and declined it is a record the DHF wants to keep.
+    enum def CommentStatusKind {
+        enum open;
+        enum acknowledged;
+        enum addressed;
+        enum resolved;
+        enum rejected;
     }
 }

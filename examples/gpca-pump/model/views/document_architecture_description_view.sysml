@@ -16,7 +16,7 @@ package memo_examples_gpca_pump_model_views_document_architecture_description_vi
         attribute :>> longDescription = "Aggregates context, operational, functional, logical, software, and physical layers with their views and correspondences for the system architecture description.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
-        attribute :>> viewKind = DocumentViewKind::ArchitectureDescription;
+        attribute :>> viewKind = DocumentViewKind::architectureDescription;
         attribute :>> generationRule = "Include all architecture layers, functional chains, interfaces, and the physical BOM with cross-layer allocations";
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("Architecture Description", "DHF");

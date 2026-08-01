@@ -10,9 +10,13 @@ package memo_core_dimensions {
     private import ScalarValues::*;
 
     // Realization stages of one element identity across the product
-    // lifecycle (specification through retirement). Orthogonal to the axis:
+    // lifecycle (proposal through retirement). Orthogonal to the axis:
     // a single identity progresses through stages without changing its owner.
     enum def RealizationStageKind {
+        // Put forward but not yet specified — a candidate under consideration,
+        // so a design alternative can be modelled and traced without implying
+        // it has been accepted into the specification.
+        enum proposed;
         enum specified;
         enum designed;
         enum built;

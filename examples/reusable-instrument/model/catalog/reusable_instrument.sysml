@@ -45,15 +45,15 @@ package memo_examples_reusable_instrument {
         attribute :>> id = "RI-ACT-003"; attribute :>> name = "PackAndAutoclave";
         attribute :>> criticality = CriticalityKind::high;
     }
-    action wsClean : WorkflowStep { attribute :>> stepOrder = 1; ref :>> performedActivity = actClean; }
-    action wsInspect : WorkflowStep { attribute :>> stepOrder = 2; ref :>> performedActivity = actInspect; }
-    action wsSterilize : WorkflowStep { attribute :>> stepOrder = 3; ref :>> performedActivity = actSterilizeLoad; }
+    action wsClean : WorkflowStep { ref :>> performedActivity = actClean; }
+    action wsInspect : WorkflowStep { ref :>> performedActivity = actInspect; }
+    action wsSterilize : WorkflowStep { ref :>> performedActivity = actSterilizeLoad; }
     connection : Composes connect parent ::> wfReprocess to child ::> wsClean;
-    connection : StepPrecedes connect predecessor ::> wsClean to successor ::> wsInspect;
-    connection : StepPrecedes connect predecessor ::> wsInspect to successor ::> wsSterilize;
+    first wsClean then wsInspect;
+    first wsInspect then wsSterilize;
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfReprocess to supported ::> ucSterilize; }
 
-    part scNominalCycle : OperativeScenario {
+    action scNominalCycle : OperativeScenario {
         attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;

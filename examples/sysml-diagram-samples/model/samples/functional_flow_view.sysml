@@ -3,6 +3,7 @@ package memo_examples_sysml_diagram_samples_model_samples_functional_flow_view {
 
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_logical_interfaces::*;
+    private import memo_architecture_functional_functions::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
@@ -37,13 +38,13 @@ package memo_examples_sysml_diagram_samples_model_samples_functional_flow_view {
     }
 
     // Functions with typed in/out pins
-    action def FxAcquire { out reading : FxSensorReading; }
-    action def FxCompute { in reading : FxSensorReading; out command : FxRateCommand; }
-    action def FxEnforce { in command : FxRateCommand; out safeCommand : FxRateCommand; }
-    action def FxDrive { in command : FxRateCommand; out energy : FxMotorEnergy; }
-    action def FxDeliverMedication { in energy : FxMotorEnergy; out fluid : FxMedicationFluid; }
-    action def FxMonitor { out signal : FxOcclusionSignal; }
-    action def FxDetect { in signal : FxOcclusionSignal; }
+    action def FxAcquire specializes SystemAction { out item reading : FxSensorReading; }
+    action def FxCompute specializes SystemAction { in item reading : FxSensorReading; out item command : FxRateCommand; }
+    action def FxEnforce specializes SystemAction { in item command : FxRateCommand; out item safeCommand : FxRateCommand; }
+    action def FxDrive specializes SystemAction { in item command : FxRateCommand; out item energy : FxMotorEnergy; }
+    action def FxDeliverMedication specializes SystemAction { in item energy : FxMotorEnergy; out item fluid : FxMedicationFluid; }
+    action def FxMonitor specializes SystemAction { out item signal : FxOcclusionSignal; }
+    action def FxDetect specializes SystemAction { in item signal : FxOcclusionSignal; }
 
     // Component hierarchy used by the Level control:
     // L1 system → L2 subsystems → L3 allocated components.
@@ -68,7 +69,7 @@ package memo_examples_sysml_diagram_samples_model_samples_functional_flow_view {
     connection : Composes connect parent ::> fxDeliverySubsystem to child ::> fxActuator;
     connection : Composes connect parent ::> fxSafetySubsystem to child ::> fxSafety;
 
-    action fxDeliveryFlow {
+    action fxDeliveryFlow : SystemAction {
         action fxAcquire : FxAcquire { attribute name = "Acquire Sensor Data"; }
         action fxCompute : FxCompute { attribute name = "Compute Infusion Rate"; }
 
@@ -83,9 +84,9 @@ package memo_examples_sysml_diagram_samples_model_samples_functional_flow_view {
         // Composite function — valve sub-flow (drill-in)
         action fxDeliver : FxDeliverMedication {
             attribute name = "Deliver Medication";
-            action fxOpenValve { attribute name = "Open Valve"; }
-            action fxHoldDose { attribute name = "Hold Metered Dose"; }
-            action fxCloseValve { attribute name = "Close Valve"; }
+            action fxOpenValve : SystemAction { attribute name = "Open Valve"; }
+            action fxHoldDose : SystemAction { attribute name = "Hold Metered Dose"; }
+            action fxCloseValve : SystemAction { attribute name = "Close Valve"; }
 
             flow of FxMedicationFluid from fxDeliveryFlow.fxDeliver.fxHoldDose to fxCloseValve;
 
@@ -95,7 +96,7 @@ package memo_examples_sysml_diagram_samples_model_samples_functional_flow_view {
             first fxCloseValve then done;
         }
 
-        action fxLog { attribute name = "Log Delivery"; }
+        action fxLog : SystemAction { attribute name = "Log Delivery"; }
 
         flow of FxSensorReading from fxAcquire.reading to fxCompute.reading;
         flow of FxRateCommand from fxEnforce.safeCommand to fxDrive.command;
