@@ -43,7 +43,6 @@ package memo_architecture_operational_workflows {
     // A step in a workflow wraps an operational activity or user task by
     // reference — the same activity may appear in several workflows.
     action def WorkflowStep specializes MemoAction {
-        attribute stepOrder : Integer;
         attribute entryCondition : String;
         attribute exitCondition : String;
         ref performedActivity : OperationalActivity[0..1];
@@ -96,11 +95,6 @@ package memo_architecture_operational_workflows {
         // capability. They therefore have no single MEMO base type.
         end supporter;
         end supported;
-    }
-    connection def StepPrecedes :> MemoRelationship {
-        attribute guardCondition : String;
-        end predecessor : WorkflowStep;
-        end successor : WorkflowStep;
     }
     connection def RequiresResource :> MemoRelationship {
         end workflow : OperationalWorkflow;

@@ -41,7 +41,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_physical {
         attribute :>> name = "ServiceMaintenancePort";
         attribute :>> portKind = InterfaceKind::api;
         attribute :>> connectorType = "covered UART/USB service connector";
-        attribute :>> direction = DirectionKind::bidirectional;
+        attribute :>> direction = DirectionKind::inputOutput;
     }
     part portMainsInlet : PhysicalPort {
         attribute :>> id = "PP-005";

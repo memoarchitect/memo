@@ -21,68 +21,69 @@ package memo_examples_gpca_pump_model_catalog_gpca_system {
         attribute :>> id = "FC-001";
         attribute :>> name = "PatientBolusChain";
         attribute :>> flowCategory = FunctionalFlowKind::nominal;
-        ref :>> startFunction = fnAcquireSensors;
-        ref :>> endFunction = fnCommandPump;
         attribute :>> endToEndLatencyBudgetMs = "100";
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         attribute :>> description = "Bolus button press through lockout/max-dose check to pump actuation and logging.";
     }
-    part fcsBolusSense : FunctionalFlowStep {
+    action fcsBolusSense : FunctionalFlowStep {
         attribute :>> id = "FCS-001"; attribute :>> name = "SenseBolusRequest";
-        attribute :>> stepOrder = "1"; ref :>> function = fnAcquireSensors; ref :>> exchangedItem = ddBolusRequest;
+        ref :>> function = fnAcquireSensors; ref :>> exchangedItem = ddBolusRequest;
     }
-    part fcsBolusValidate : FunctionalFlowStep {
+    action fcsBolusValidate : FunctionalFlowStep {
         attribute :>> id = "FCS-002"; attribute :>> name = "CheckLockoutAndMaxDose";
-        attribute :>> stepOrder = "2"; ref :>> function = fnEnforceLimits; ref :>> exchangedItem = ddPrescription;
+        ref :>> function = fnEnforceLimits; ref :>> exchangedItem = ddPrescription;
     }
-    part fcsBolusCommand : FunctionalFlowStep {
+    action fcsBolusCommand : FunctionalFlowStep {
         attribute :>> id = "FCS-003"; attribute :>> name = "CommandBolusFlow";
-        attribute :>> stepOrder = "3"; ref :>> function = fnManageInfusion; ref :>> exchangedItem = cdFlowCommand;
+        ref :>> function = fnManageInfusion; ref :>> exchangedItem = cdFlowCommand;
     }
-    part fcsBolusActuate : FunctionalFlowStep {
+    action fcsBolusActuate : FunctionalFlowStep {
         attribute :>> id = "FCS-004"; attribute :>> name = "ActuatePumpMotor";
-        attribute :>> stepOrder = "4"; ref :>> function = fnCommandPump; ref :>> exchangedItem = cdFlowCommand;
+        ref :>> function = fnCommandPump; ref :>> exchangedItem = cdFlowCommand;
     }
-    part fcsBolusLog : FunctionalFlowStep {
+    action fcsBolusLog : FunctionalFlowStep {
         attribute :>> id = "FCS-005"; attribute :>> name = "LogBolusOutcome";
-        attribute :>> stepOrder = "5"; ref :>> function = fnLogEvents; ref :>> exchangedItem = ddEventRecord;
+        ref :>> function = fnLogEvents; ref :>> exchangedItem = ddEventRecord;
     }
+    first fcsBolusSense then fcsBolusValidate;
+    first fcsBolusValidate then fcsBolusCommand;
+    first fcsBolusCommand then fcsBolusActuate;
+    first fcsBolusActuate then fcsBolusLog;
 
     part fcAlarmStop : FunctionalFlow {
         attribute :>> id = "FC-002";
         attribute :>> name = "AlarmDetectionToSafeStateChain";
         attribute :>> flowCategory = FunctionalFlowKind::alarm;
-        ref :>> startFunction = fnAcquireSensors;
-        ref :>> endFunction = fnAnnunciate;
         attribute :>> endToEndLatencyBudgetMs = "20";
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         attribute :>> description = "Sensor condition through alarm evaluation to same-step transition to PAUSED (KVO flow, REQ 43) and annunciation.";
     }
-    part fcsAlarmSense : FunctionalFlowStep {
+    action fcsAlarmSense : FunctionalFlowStep {
         attribute :>> id = "FCS-006"; attribute :>> name = "SenseAlarmCondition";
-        attribute :>> stepOrder = "1"; ref :>> function = fnAcquireSensors; ref :>> exchangedItem = ddSensorVector;
+        ref :>> function = fnAcquireSensors; ref :>> exchangedItem = ddSensorVector;
     }
-    part fcsAlarmEvaluate : FunctionalFlowStep {
+    action fcsAlarmEvaluate : FunctionalFlowStep {
         attribute :>> id = "FCS-007"; attribute :>> name = "EvaluateAlarmCondition";
-        attribute :>> stepOrder = "2"; ref :>> function = fnMonitorAlarm; ref :>> exchangedItem = ddSensorVector;
+        ref :>> function = fnMonitorAlarm; ref :>> exchangedItem = ddSensorVector;
     }
-    part fcsAlarmStopInfusion : FunctionalFlowStep {
+    action fcsAlarmStopInfusion : FunctionalFlowStep {
         attribute :>> id = "FCS-008"; attribute :>> name = "LimitFlowToKvoSameStep";
-        attribute :>> stepOrder = "3"; ref :>> function = fnManageInfusion; ref :>> exchangedItem = cdAlarmSignal;
+        ref :>> function = fnManageInfusion; ref :>> exchangedItem = cdAlarmSignal;
     }
-    part fcsAlarmAnnunciate : FunctionalFlowStep {
+    action fcsAlarmAnnunciate : FunctionalFlowStep {
         attribute :>> id = "FCS-009"; attribute :>> name = "AnnunciateAudibleVisual";
-        attribute :>> stepOrder = "4"; ref :>> function = fnAnnunciate; ref :>> exchangedItem = cdAlarmSignal;
+        ref :>> function = fnAnnunciate; ref :>> exchangedItem = cdAlarmSignal;
     }
+    first fcsAlarmSense then fcsAlarmEvaluate;
+    first fcsAlarmEvaluate then fcsAlarmStopInfusion;
+    first fcsAlarmStopInfusion then fcsAlarmAnnunciate;
 
     part fcStartup : FunctionalFlow {
         attribute :>> id = "FC-003";
         attribute :>> name = "PowerOnSelfTestChain";
         attribute :>> flowCategory = FunctionalFlowKind::startup;
-        ref :>> startFunction = fnManagePower;
-        ref :>> endFunction = fnPresentStatus;
         attribute :>> endToEndLatencyBudgetMs = "5000";
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
@@ -90,22 +91,22 @@ package memo_examples_gpca_pump_model_catalog_gpca_system {
     }
 
     // ── System scenarios ────────────────────────────────────────
-    part ssBolusDuringBasal : FunctionalScenario {
+    action ssBolusDuringBasal : FunctionalScenario {
         attribute :>> id = "SS-001";
         attribute :>> name = "PatientBolusDuringBasal";
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
-        attribute :>> sequenceDiagramRef = "VIEW-BHV-002";
         attribute :>> preCondition = "BASAL mode active; no REQ 25 ignore condition holds";
         attribute :>> postCondition = "PATIENT_BOLUS mode entered, bolus delivered, return to BASAL";
     }
-    part ssAlarmPause : FunctionalScenario {
+    action ssAlarmPause : FunctionalScenario {
         attribute :>> id = "SS-002";
         attribute :>> name = "InhibitingNotificationPausesInfusion";
         attribute :>> variantKind = ScenarioVariantKind::exception;
+        attribute :>> variationPoint = "an infusion-inhibiting notification interrupts active therapy";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
-        attribute :>> sequenceDiagramRef = "VIEW-BHV-002";
         attribute :>> preCondition = "any ACTIVE therapy mode; infusion-inhibiting notification detected (REQ 59)";
         attribute :>> postCondition = "PAUSED mode entered in same execution step at FlowRate_kvo_hd keep-vein-open flow; notification annunciated per REQ 59";
+        ref :>> baseScenario = ssBolusDuringBasal;
     }
 }

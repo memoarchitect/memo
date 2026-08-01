@@ -1,13 +1,6 @@
-// Closure consistency rules — native KerML constraints (Epic EE-3).
-// Migrated from the proprietary ConsistencyRule predicate-attribute parts to
-// native `constraint def` bodies whose `constraint { … }` expression is
-// evaluated directly by the KerML constraint evaluator (validator/constraint-eval.ts).
-//
-// Rule metadata (id, appliesTo subject kind, severity, rationale) travels as plain
-// attribute members; the boolean body is the rule. Per the EE-3 mapping the native
-// surface drops the legacy `direction`/`relatedKinds` qualifiers — navigation counts
-// related elements in either direction. Cross-element `uniqueAttribute` (CR-MED-012)
-// has no single-subject expression and stays an engine-level exception (see note).
+// Closure consistency rules. Portable SysML bodies remain literal `true` where
+// cross-model navigation is not resolvable by a general SysML compiler; MEMO
+// compiles the ontology-owned `predicateExpression` against the semantic model.
 package memo_rules_closure {
     private import ScalarValues::*;
 
@@ -16,7 +9,7 @@ package memo_rules_closure {
 
     // ─── Risk Layer Rules ────────────────────────────────────────────────
 
-    constraint def hazardMitigationRule {
+    constraint def HazardMitigationRule {
         attribute id = "CR-MED-001";
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
@@ -25,16 +18,16 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def hazardSeverityRule {
+    constraint def HazardSeverityRule {
         attribute id = "CR-MED-002";
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Hazard severity is required for risk estimation per ISO 14971.";
-        attribute predicateExpression = "attributes.severity != \"\"";
+        attribute predicateExpression = "attributes.severity != ''";
         constraint { true }
     }
 
-    constraint def riskControlVerificationRule {
+    constraint def RiskControlVerificationRule {
         attribute id = "CR-MED-003";
         attribute appliesTo = "RiskControlMeasure";
         attribute severity = RuleSeverityKind::error;
@@ -43,7 +36,7 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def initialRiskMatrixRule {
+    constraint def InitialRiskMatrixRule {
         attribute id = "CR-MED-004";
         attribute appliesTo = "Risk";
         attribute severity = RuleSeverityKind::warning;
@@ -54,7 +47,7 @@ package memo_rules_closure {
 
     // ─── Requirements Layer Rules ────────────────────────────────────────
 
-    constraint def sysReqTraceRule {
+    constraint def SysReqTraceRule {
         attribute id = "CR-MED-010";
         attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::error;
@@ -63,7 +56,7 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def swReqTraceRule {
+    constraint def SwReqTraceRule {
         attribute id = "CR-MED-011";
         attribute appliesTo = "Requirement[requirementKind=software]";
         attribute severity = RuleSeverityKind::error;
@@ -80,16 +73,16 @@ package memo_rules_closure {
 
     // ─── Architecture Layer Rules ────────────────────────────────────────
 
-    constraint def swComponentSafetyClassRule {
+    constraint def SwComponentSafetyClassRule {
         attribute id = "CR-MED-020";
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 requires safety classification for all software items.";
-        attribute predicateExpression = "attributes.safetyClass != \"\"";
+        attribute predicateExpression = "attributes.safetyClass != ''";
         constraint { true }
     }
 
-    constraint def swComponentReqRule {
+    constraint def SwComponentReqRule {
         attribute id = "CR-MED-021";
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
@@ -98,7 +91,7 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def logicalFunctionAllocationRule {
+    constraint def LogicalFunctionAllocationRule {
         attribute id = "CR-MED-022";
         attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::warning;
@@ -109,16 +102,16 @@ package memo_rules_closure {
 
     // ─── Verification Layer Rules ────────────────────────────────────────
 
-    constraint def verificationCaseMethodRule {
+    constraint def VerificationCaseMethodRule {
         attribute id = "CR-MED-030";
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Verification method (test, analysis, inspection, demonstration) required per IEC 62304.";
-        attribute predicateExpression = "attributes.methodKind != \"\"";
+        attribute predicateExpression = "attributes.methodKind != ''";
         constraint { true }
     }
 
-    constraint def verificationCaseTargetRule {
+    constraint def VerificationCaseTargetRule {
         attribute id = "CR-MED-031";
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::error;
@@ -127,7 +120,7 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def evidenceProductionRule {
+    constraint def EvidenceProductionRule {
         attribute id = "CR-MED-032";
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::warning;
@@ -138,7 +131,7 @@ package memo_rules_closure {
 
     // ─── Cybersecurity Layer Rules ───────────────────────────────────────
 
-    constraint def threatMitigationRule {
+    constraint def ThreatMitigationRule {
         attribute id = "CR-MED-040";
         attribute appliesTo = "Threat";
         attribute severity = RuleSeverityKind::error;
@@ -147,7 +140,7 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def assetThreatLinkRule {
+    constraint def AssetThreatLinkRule {
         attribute id = "CR-MED-041";
         attribute appliesTo = "CybersecurityAsset";
         attribute severity = RuleSeverityKind::warning;
@@ -158,23 +151,83 @@ package memo_rules_closure {
 
     // ─── Interface Rules ─────────────────────────────────────────────────
 
-    constraint def logicalInterfaceDirectionRule {
+    constraint def LogicalInterfaceDirectionRule {
         attribute id = "CR-MED-050";
         attribute appliesTo = "Interface";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Interface direction required for integration analysis.";
-        attribute predicateExpression = "attributes.direction != \"\"";
+        attribute predicateExpression = "attributes.direction != '' or attributes.directionality != ''";
         constraint { true }
     }
 
     // ─── Conditional Rules ───────────────────────────────────────────────
 
-    constraint def safetyClassCVerificationRule {
+    constraint def SafetyClassCVerificationRule {
         attribute id = "CR-MED-101";
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 requires rigorous verification for Class C software.";
-        attribute predicateExpression = "not(attributes.safetyClass == \"C\") or verifiedBy->size() >= 1";
+        attribute predicateExpression = "not(attributes.safetyClass == 'C') or verifiedBy->size() >= 1";
+        constraint { true }
+    }
+
+    // ─── UI Layout Rules ─────────────────────────────────────────────────
+    //
+    // Traceability only: every part of a screen must have a design record
+    // behind it, and captured evidence must say where it came from.
+    //
+    // Scope is traceability, not geometry. Layout correctness (child within
+    // parent, inline siblings disjoint) is checked where the geometry is drawn,
+    // in the renderer: a pairwise sibling comparison has no KerML constraint
+    // form, since the evaluator has no Real literal and binds one implicit
+    // subject per quantifier.
+
+    // The load-bearing traceability rule. A UI element that is not chrome must
+    // reach a design record — a requirement it satisfies, or an action it
+    // triggers. Chrome must be DECLARED `decoration`; an element left
+    // unclassified fails rather than passing as scenery.
+    constraint def UiElementDesignRecordRule {
+        attribute id = "CR-MED-110";
+        attribute appliesTo = "UIElement";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Every functional UI element must have a design record — a requirement it satisfies or an action it triggers. Elements with formKind `decoration` are chrome and are exempt.";
+        attribute predicateExpression = "attributes.formKind == 'decoration' or satisfiedBy->size() >= 1 or elementTriggersAction->size() >= 1";
+        constraint { true }
+    }
+
+    // Interactive UI is where use error happens (IEC 62366-1), so a control
+    // that reaches no system function is either dead UI or unmodelled UI.
+    // The interactive-form restriction lives in the predicate because it spans
+    // several enum values.
+    constraint def ControlInvokesFunctionRule {
+        attribute id = "CR-MED-111";
+        attribute appliesTo = "UIElement";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "An interactive UI element (button, selector, slider, field) should trigger a UIAction that invokes a system function; otherwise the control's purpose is not in the model. Physical controls are OperatorInterfaceElement and are covered separately.";
+        attribute predicateExpression = "not(formKind == 'button' or formKind == 'selector' or formKind == 'slider' or formKind == 'field') or elementTriggersAction->size() >= 1";
+        constraint { true }
+    }
+
+    // Automatic boundary detection proposes; a reviewer disposes. An
+    // unconfirmed machine guess must never reach a design review looking like
+    // an engineering decision.
+    constraint def BoundsDetectionConfirmedRule {
+        attribute id = "CR-MED-112";
+        attribute appliesTo = "UIElement";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Automatically detected bounds are a proposal until a reviewer confirms them; released UI documentation should contain no unconfirmed automatic bounds.";
+        attribute predicateExpression = "not(attributes.detectionMethod == 'automatic') or attributes.confirmedBy != ''";
+        constraint { true }
+    }
+
+    // A screenshot with no build behind it is undated design intent, not
+    // evidence of what the device does.
+    constraint def ScreenCaptureProvenanceRule {
+        attribute id = "CR-MED-113";
+        attribute appliesTo = "ScreenCapture";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A screen capture used as design or usability evidence must identify the build it was taken from and hash the image bytes, or it cannot be relied on in the DHF.";
+        attribute predicateExpression = "attributes.capturedBuild != '' and attributes.imageHash != ''";
         constraint { true }
     }
 }

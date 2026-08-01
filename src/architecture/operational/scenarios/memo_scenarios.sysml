@@ -51,7 +51,7 @@ package memo_architecture_operational_scenarios {
     // or invariants differ (OperativeScenario here; FunctionalScenario in
     // memo_functions; UIScenario in memo_architecture_implementation_ui;
     // VerificationScenario / ThreatScenario in assurance packages).
-    abstract part def MemoScenario specializes MemoPart {
+    abstract action def MemoScenario specializes MemoAction {
         attribute variantKind : ScenarioVariantKind;
         attribute operationalCondition : OperationalConditionKind;
         attribute scenarioPurpose : ScenarioPurposeKind[0..*];
@@ -76,7 +76,7 @@ package memo_architecture_operational_scenarios {
     // by its own architecture layer and linked by typed realization
     // relationships — never by copying the path. Workflow stays operational;
     // only the scenario is layered.
-    part def OperativeScenario specializes MemoScenario {
+    action def OperativeScenario specializes MemoScenario {
         ref parentWorkflow : OperationalWorkflow[0..1];
         ref parentUseCase : UseCase[0..1];
         // Each scenario owns the operational activity/action flow for its

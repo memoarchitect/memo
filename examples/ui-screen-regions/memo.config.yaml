@@ -1,0 +1,7 @@
+# UI screen regions — screenshot markup traced to function, spec, and risk
+projectName: ui-screen-regions
+projectType: device
+
+# The default methodology pulls in the full ontology, which is what makes the
+# UI layout rules (CR-MED-110 … CR-MED-113) evaluable against this model.
+methodology: "@memoarchitect/methodology-default"

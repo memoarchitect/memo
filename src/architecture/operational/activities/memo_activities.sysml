@@ -50,7 +50,6 @@ package memo_architecture_operational_activities {
     // An elementary perceptual/cognitive/motor step within a user task
     // (task analysis granularity: grasp needle, drive needle, tie knot …).
     action def TaskStep specializes MemoAction {
-        attribute stepOrder : Integer;
         attribute perceptualCue : String;
         attribute feedbackExpected : String;
     }

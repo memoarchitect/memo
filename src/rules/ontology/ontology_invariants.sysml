@@ -11,17 +11,24 @@ package memo_rules_ontology {
 
     // ─── Structure ───────────────────────────────────────────────────────
 
-    constraint def containmentAcyclicRule {
+    constraint def ContainmentAcyclicRule {
         attribute id = "CR-ONT-001";
-        attribute appliesTo = "MemoPart";
+        attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Containment/composition relations (Composes) must form no cycles.";
         attribute predicateExpression = "acyclic(composes)";
         constraint { true }
     }
-    constraint def nestedPartConnectedRule {
+    constraint def NestedPartConnectedRule {
         attribute id = "AR-IBD-001";
-        attribute appliesTo = "MemoPart";
+        // Internal-block connectivity is a structural-architecture concern, so
+        // the subject is the structural component — not every MemoPart. UI
+        // elements, captured evidence, and review comments nest in compositions
+        // without ever bearing a connector, and judging them produced warnings
+        // no modeller could act on. The engine reads this value; narrowing or
+        // widening the rule happens here, not in TypeScript.
+        attribute appliesTo = "LogicalComponent";
+        attribute evaluator = "architecture";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "A structural part nested inside another part should expose at least one modeled interface connector. Passive or intentionally isolated parts may retain this warning with an explicit modelling rationale.";
         attribute predicateExpression = "hasConnectorInComposition";
@@ -32,50 +39,9 @@ package memo_rules_ontology {
         // represent that transitive containment query.
         constraint { true }
     }
-    constraint def connectorEndpointsExistRule {
-        attribute id = "CR-ONT-002";
-        attribute appliesTo = "ComponentExchange";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Connector endpoints must resolve to model elements via the typed refs sourceEndpoint/targetEndpoint; port-path strings are descriptive labels only.";
-        attribute predicateExpression = "sourceEndpoint->size() = 1 and targetEndpoint->size() = 1";
-        constraint { true }
-    }
-    constraint def portCompatibilityRule {
-        attribute id = "CR-ONT-003";
-        attribute appliesTo = "LogicalConnector";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Connected ports must agree on content kind; a fluid port cannot connect to an information port.";
-        attribute predicateExpression = "sourceComponent.ports.contentKind->intersect(targetComponent.ports.contentKind)->size() >= 1";
-        constraint { true }
-    }
-    constraint def directionAgreesWithFlowRule {
-        attribute id = "CR-ONT-004";
-        attribute appliesTo = "LogicalExchange";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Exchange direction must agree with the direction of its source and target ports.";
-        attribute predicateExpression = "sourcePort.direction != DirectionKind::input and targetPort.direction != DirectionKind::output";
-        constraint { true }
-    }
-    constraint def exchangedItemTypeRule {
-        attribute id = "CR-ONT-005";
-        attribute appliesTo = "LogicalExchange";
-        attribute severity = RuleSeverityKind::warning;
-        attribute rationaleText = "Exchanged items must be type-compatible with the exchange content kind.";
-        attribute predicateExpression = "exchangedItem->isEmpty() or exchangedItem.contentKind = contentKind";
-        constraint { true }
-    }
-
     // ─── Deployment and realization ──────────────────────────────────────
 
-    constraint def deployToCapableNodeRule {
-        attribute id = "CR-ONT-010";
-        attribute appliesTo = "DeploysTo";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Software deploys only to capable execution nodes (e.g. containerized units require supportsContainerization).";
-        attribute predicateExpression = "deploymentKind != DeploymentKind::containerized or node.supportsContainerization = true";
-        constraint { true }
-    }
-    constraint def runtimeTracesToModuleRule {
+    constraint def RuntimeTracesToModuleRule {
         attribute id = "CR-ONT-011";
         attribute appliesTo = "SoftwareComponent";
         attribute severity = RuleSeverityKind::warning;
@@ -83,64 +49,47 @@ package memo_rules_ontology {
         attribute predicateExpression = "realizes->size() >= 1";
         constraint { true }
     }
-    constraint def logicalRealizationTypedRule {
-        attribute id = "CR-ONT-012";
-        attribute appliesTo = "Realizes";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Realization relations must resolve both ends to model elements, not name strings.";
-        attribute predicateExpression = "realizing->size() = 1 and realized->size() = 1";
-        constraint { true }
-    }
-
-    constraint def patientContactCharacterizedRule {
+    constraint def PatientContactCharacterizedRule {
         attribute id = "CR-ONT-032";
         attribute appliesTo = "PhysicalComponent";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Patient-contact components must identify contact nature and duration (ISO 10993-1).";
-        attribute predicateExpression = "patientContact = false or (contactNature != '' and contactDuration != '')";
+        attribute predicateExpression = "patientContact == false or (contactNature != '' and contactDuration != '')";
         constraint { true }
     }
 
     // ─── Assurance coverage ──────────────────────────────────────────────
 
-    constraint def safetyCriticalFunctionVerifiedRule {
+    constraint def SafetyCriticalFunctionVerifiedRule {
         attribute id = "CR-ONT-040";
         attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Safety-critical functions (criticality high or catastrophic) must trace to at least one verification case.";
-        attribute predicateExpression = "criticality < CriticalityKind::high or verifiedBy->size() >= 1";
+        attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or verifiedBy->size() >= 1";
         constraint { true }
     }
-    constraint def criticalTaskValidatedRule {
+    constraint def CriticalTaskValidatedRule {
         attribute id = "CR-ONT-041";
         attribute appliesTo = "UserTask[criticality=high]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Critical tasks (criticality high or catastrophic) must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
-        attribute predicateExpression = "criticality < CriticalityKind::high or validates->size() >= 1";
+        attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or validates->size() >= 1";
         constraint { true }
     }
-    constraint def useErrorTracesToHazardRule {
+    constraint def UseErrorTracesToHazardRule {
         attribute id = "CR-ONT-042";
         attribute appliesTo = "UseError";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Safety-relevant use errors (severity serious or worse) must trace to a hazard.";
-        attribute predicateExpression = "severity < SeverityKind::serious or causes->size() >= 1";
+        attribute predicateExpression = "not(severity == 'serious' or severity == 'critical' or severity == 'catastrophic') or causes->size() >= 1 or tracesRisk->size() >= 1";
         constraint { true }
     }
-    constraint def alternateScenarioHasBaseRule {
+    constraint def AlternateScenarioHasBaseRule {
         attribute id = "CR-ONT-043";
         attribute appliesTo = "MemoScenario";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Alternate, exception, and recovery scenarios must identify their base scenario or variation point — never duplicate the workflow.";
-        attribute predicateExpression = "variantKind = ScenarioVariantKind::nominal or baseScenario->size() = 1 or variationPoint != ''";
-        constraint { true }
-    }
-    constraint def singleAxisOwnershipRule {
-        attribute id = "CR-ONT-045";
-        attribute appliesTo = "MemoPart";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Every element is owned by exactly one axis, encoded by its owning package: a horizontal architecture layer (memo_architecture_*) XOR a vertical assurance discipline (memo_assurance_*) — never both. Cross-axis participation is expressed by typed relationships, not by dual membership.";
-        attribute predicateExpression = "owningPackage.startsWith('memo_architecture_') xor owningPackage.startsWith('memo_assurance_')";
+        attribute predicateExpression = "not(variantKind == 'alternate' or variantKind == 'exception' or variantKind == 'recovery') or baseScenario->size() == 1 or variationPoint != ''";
         constraint { true }
     }
 }

@@ -49,10 +49,12 @@ package memo_examples_surgical_robot {
         attribute :>> contactDuration = "limited (<24 h)";
     }
 
-    // Surgeon console: haptic feedback element.
-    part elHapticGrip : UIElement {
+    // Surgeon console: haptic feedback element. The grip is hardware the
+    // surgeon holds, so it is an OperatorInterfaceElement (a PhysicalComponent)
+    // rather than a UIElement — UIElement is software.
+    part elHapticGrip : OperatorInterfaceElement {
         attribute :>> id = "SR-UI-001"; attribute :>> name = "HapticMasterGrip";
-        attribute :>> formKind = UIElementFormKind::hapticIndicator;
+        attribute :>> formKind = OperatorInterfaceFormKind::hapticIndicator;
         attribute :>> guardedAgainstInadvertentActuation = true;
     }
 }

@@ -27,6 +27,15 @@ package memo_core_common {
         // identity
         attribute id : String;
         attribute name : String;
+        // Two description registers on every MEMO element, because views have
+        // two densities. `shortDescription` is the one-line form a table cell,
+        // matrix header, chip, or diagram node can show whole; `description` is
+        // the full prose a properties panel or a generated document section
+        // renders. A view picks the register that fits — it never truncates
+        // the long one, because a silently clipped sentence in a DHF table is
+        // a defect, not a layout choice.
+        attribute shortDescription : String;
+        attribute shortDescription : String;
         attribute description : String;
         // traceability
         attribute rationale : String;
@@ -51,10 +60,12 @@ package memo_core_common {
     part def MemoEvidence specializes MemoPart;
     abstract part def AnalysisArtifact specializes MemoPart;
 
+    // Document-bound elements add only what a document needs beyond the two
+    // description registers every MemoPart now carries: a title and its place
+    // in a document. The former `shortDescription`/`longDescription` pair is
+    // gone — short is inherited, and `description` IS the long form.
     part def DocumentedElement specializes MemoPart {
         attribute title : String;
-        attribute shortDescription : String;
-        attribute longDescription : String;
         attribute documentUsage : String[*];
         attribute sectionIdentifier : String;
     }
@@ -66,6 +77,7 @@ package memo_core_common {
     action def MemoAction {
         attribute id : String;
         attribute name : String;
+        attribute shortDescription : String;
         attribute description : String;
         attribute rationale : String;
         attribute sourceReference : String;
@@ -76,8 +88,8 @@ package memo_core_common {
     port def MemoPort {
         attribute id : String;
         attribute name : String;
+        attribute shortDescription : String;
         attribute description : String;
-        attribute direction : DirectionKind;
     }
 
     // Interaction-contract foundation for interface definitions between ports.
@@ -86,6 +98,7 @@ package memo_core_common {
         end target;
         attribute id : String;
         attribute name : String;
+        attribute shortDescription : String;
         attribute description : String;
         attribute rationale : String;
         attribute sourceReference : String;
@@ -96,6 +109,7 @@ package memo_core_common {
     item def MemoExchangeItem {
         attribute id : String;
         attribute name : String;
+        attribute shortDescription : String;
         attribute description : String;
         attribute rationale : String;
         attribute sourceReference : String;
@@ -113,6 +127,7 @@ package memo_core_common {
     // solution-space obligation.
     requirement def MemoNeed {
         attribute needId : String;
+        attribute shortDescription : String;
         attribute statement : String;
         attribute needRationale : String;
         attribute needSource : String;
@@ -122,6 +137,7 @@ package memo_core_common {
 
     requirement def MemoRequirement {
         attribute requirementId : String;
+        attribute shortDescription : String;
         attribute statement : String;
         attribute acceptanceCriteria : String;
         attribute requirementStatus : ElementStatusKind;
@@ -134,6 +150,7 @@ package memo_core_common {
     verification def MemoVerificationCase {
         attribute id : String;
         attribute name : String;
+        attribute shortDescription : String;
         attribute description : String;
         attribute rationale : String;
         attribute sourceReference : String;
@@ -147,6 +164,7 @@ package memo_core_common {
     abstract state def MemoState {
         attribute id : String;
         attribute name : String;
+        attribute shortDescription : String;
         attribute description : String;
         attribute rationale : String;
         attribute sourceReference : String;

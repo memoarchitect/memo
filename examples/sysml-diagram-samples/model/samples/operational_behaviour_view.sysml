@@ -16,10 +16,10 @@ package memo_examples_sysml_diagram_samples_model_samples_operational_behaviour_
         attribute :>> itemKind = InterfaceItemKind::signal;
     }
 
-    action def OpPrescribeTherapy { out prescription : OpPrescription; }
-    action def OpVerifyPrescription { in prescription : OpPrescription; }
-    action def OpRequestBolus { out bolusRequest : OpBolusRequest; }
-    action def OpCheckLockout { in bolusRequest : OpBolusRequest; }
+    action def OpPrescribeTherapy specializes OperationalActivity { out item prescription : OpPrescription; }
+    action def OpVerifyPrescription specializes OperationalActivity { in item prescription : OpPrescription; }
+    action def OpRequestBolus specializes OperationalActivity { out item bolusRequest : OpBolusRequest; }
+    action def OpCheckLockout specializes OperationalActivity { in item bolusRequest : OpBolusRequest; }
 
     // Use the canonical MEMO operational system type—never a sample-local
     // placeholder—so ontology-driven Explorer grouping remains authoritative.
@@ -48,22 +48,22 @@ package memo_examples_sysml_diagram_samples_model_samples_operational_behaviour_
     connection : Composes connect parent ::> opClinicalTeam to child ::> opRoleBiomed;
     connection : Composes connect parent ::> opPatientGroup to child ::> opRolePatient;
 
-    action opSetupFlow {
+    action opSetupFlow : OperationalActivity {
         action opPrescribe : OpPrescribeTherapy { attribute name = "Prescribe Therapy"; }
         action opVerify : OpVerifyPrescription { attribute name = "Verify Prescription"; }
         fork opForkPrep;
-        action opPrime { attribute name = "Prime Pump & Load Reservoir"; }
-        action opSelfTest { attribute name = "Run Device Self-Test"; }
+        action opPrime : OperationalActivity { attribute name = "Prime Pump & Load Reservoir"; }
+        action opSelfTest : OperationalActivity { attribute name = "Run Device Self-Test"; }
         join opJoinPrep;
-        action opProgram { attribute name = "Program Pump Parameters"; }
-        action opConnect { attribute name = "Connect to Patient"; }
-        action opStart { attribute name = "Start Infusion"; }
-        action opAdminister {
+        action opProgram : OperationalActivity { attribute name = "Program Pump Parameters"; }
+        action opConnect : OperationalActivity { attribute name = "Connect to Patient"; }
+        action opStart : OperationalActivity { attribute name = "Start Infusion"; }
+        action opAdminister : OperationalActivity {
             attribute name = "Administer PCA Therapy";
             action opRequestBolus : OpRequestBolus { attribute name = "Request Bolus"; }
             action opCheckLockout : OpCheckLockout { attribute name = "Check Lockout"; }
-            action opDeliverDose { attribute name = "Deliver Dose"; }
-            action opLogEvent { attribute name = "Log Dose Event"; }
+            action opDeliverDose : OperationalActivity { attribute name = "Deliver Dose"; }
+            action opLogEvent : OperationalActivity { attribute name = "Log Dose Event"; }
             flow of OpBolusRequest from opRequestBolus.bolusRequest to opCheckLockout.bolusRequest;
             first start then opRequestBolus;
             first opRequestBolus then opCheckLockout;

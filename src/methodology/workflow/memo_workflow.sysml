@@ -4,8 +4,7 @@ package memo_methodology_workflow {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
 
-    part def WorkflowStep :> MemoPart {
-        attribute stepOrder : Integer;
+    action def WorkflowStep :> MemoAction {
         attribute stage : WorkflowStageKind;
         attribute objectiveDescription : String;
         attribute entryCriteria : String;
