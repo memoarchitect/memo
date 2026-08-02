@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_catalog_gpca_analysis {
+package memo_examples_gpca_pump_gpca_analysis {
     private import ScalarValues::*;
 
     private import memo_assurance_safety_risk_analysis::*;

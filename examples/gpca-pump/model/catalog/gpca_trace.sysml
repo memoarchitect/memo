@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_catalog_gpca_trace {
+package memo_examples_gpca_pump_gpca_trace {
     private import ScalarValues::*;
 
     private import memo_core_relationships::*;
@@ -7,28 +7,28 @@ package memo_examples_gpca_pump_model_catalog_gpca_trace {
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_structure::*;
     private import memo_architecture_functional_functions::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_context::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_operational::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_system::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_requirements::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_architecture::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_physical::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_behavior_modes::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_interfaces::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_risk::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_analysis::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_verification::*;
-    private import memo_examples_gpca_pump_model_views_document_architecture_description_view::*;
-    private import memo_examples_gpca_pump_model_views_document_cyber_assessment_view::*;
-    private import memo_examples_gpca_pump_model_views_document_dhf_index_view::*;
-    private import memo_examples_gpca_pump_model_views_document_hazard_analysis_view::*;
-    private import memo_examples_gpca_pump_model_views_document_rmf_view::*;
-    private import memo_examples_gpca_pump_model_views_document_sdd_view::*;
-    private import memo_examples_gpca_pump_model_views_document_threat_model_view::*;
-    private import memo_examples_gpca_pump_model_views_document_usability_view::*;
-    private import memo_examples_gpca_pump_model_views_document_vv_view::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_formal_behavior::*;
+    private import memo_examples_gpca_pump_gpca_context::*;
+    private import memo_examples_gpca_pump_gpca_operational::*;
+    private import memo_examples_gpca_pump_gpca_system::*;
+    private import memo_examples_gpca_pump_gpca_requirements::*;
+    private import memo_examples_gpca_pump_gpca_architecture::*;
+    private import memo_examples_gpca_pump_gpca_physical::*;
+    private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
+    private import memo_examples_gpca_pump_gpca_behavior_modes::*;
+    private import memo_examples_gpca_pump_gpca_interfaces::*;
+    private import memo_examples_gpca_pump_gpca_risk::*;
+    private import memo_examples_gpca_pump_gpca_analysis::*;
+    private import memo_examples_gpca_pump_gpca_verification::*;
+    private import memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_description_view::*;
+    private import memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_cyber_assessment_view::*;
+    private import memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index_view::*;
+    private import memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_view::*;
+    private import memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view::*;
+    private import memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view::*;
+    private import memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_threat_model_view::*;
+    private import memo_examples_gpca_pump_viewpoints_usability_views_document_usability_view::*;
+    private import memo_examples_gpca_pump_viewpoints_verification_views_document_vv_view::*;
+    private import memo_examples_gpca_pump_gpca_formal_behavior::*;
 
     // ── System context interactions (context view) ──────────────
     connection : InteractsWith connect contextParticipant ::> actorPatient to target ::> entityGpcaPump;

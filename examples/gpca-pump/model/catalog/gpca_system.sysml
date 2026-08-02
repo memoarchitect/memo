@@ -1,8 +1,8 @@
-package memo_examples_gpca_pump_model_catalog_gpca_system {
+package memo_examples_gpca_pump_gpca_system {
     private import ScalarValues::*;
 
     private import memo_architecture_functional_functions::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_behavior_subsystems::*;
+    private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
     private import memo_architecture_operational_scenarios::*;
     private import memo_core_enumerations::*;
 
