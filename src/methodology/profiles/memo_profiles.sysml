@@ -17,23 +17,26 @@ package memo_methodology_profiles {
         attribute :>> description = "Methodology layer for selecting, restricting, sequencing, tailoring, and lightly extending use of the medical-device ontology.";
     }
 
-    part mdLightDefaultDefinition : MethodologyDefinition {
-        attribute :>> id = "METH-001";
-        attribute :>> name = "MedicalDeviceLightDefault";
-        attribute :>> version = "0.1";
+    // The default methodology deliberately selects everything the project's
+    // resolved reusable packages provide. That is what `scopeMode` exists to
+    // say: `allAvailable` is an authored decision, not an empty list that the
+    // resolver silently reads as "allow everything". Under `allAvailable` the
+    // inclusion lists must stay empty — authoring both would leave two
+    // competing answers to the same question.
+    //
+    // Before the flip this methodology carried a narrower `includedLayer` /
+    // `includedModule` pair that nothing consumed: effective scope came from
+    // the separate `mdCoverageScope : MethodologyScope` part, whose lists said
+    // "all five architecture layers, all five assurance disciplines". Folding
+    // that into `allAvailable` preserves the effective result and removes the
+    // second scope authority.
+    part mdDefaultDefinition : MethodologyDefinition {
+        attribute :>> id = "METH-MD-DEFAULT";
+        attribute :>> name = "MedicalDeviceDefault";
+        attribute :>> version = "0.6.5";
         attribute :>> domain = "medical device modeling";
-        attribute :>> description = "Light default methodology around the ontology for smaller or early project use.";
-        attribute :>> baseMethodName = "";
-        attribute :>> includedLayer = ("memo::architecture::operational", "memo::architecture::functional", "memo::architecture::logical");
-        attribute :>> includedModule = ("memo::assurance::requirements", "memo::assurance::safety_risk", "memo::assurance::verification_validation");
-    }
-
-    part mdLightDefaultResolved : ResolvedMethodology {
-        attribute :>> id = "RMETH-001";
-        attribute :>> name = "MedicalDeviceLightDefaultResolved";
-        attribute :>> version = "0.1";
-        attribute :>> includedLayer = ("memo::architecture::operational", "memo::architecture::functional", "memo::architecture::logical");
-        attribute :>> includedModule = ("memo::assurance::requirements", "memo::assurance::safety_risk", "memo::assurance::verification_validation");
+        attribute :>> description = "MEMO default medical-device methodology. Selects every layer, discipline, standard, artifact kind, and viewpoint the resolved ontology and extension packages provide.";
+        attribute :>> scopeMode = ScopeModeKind::allAvailable;
     }
 
     part useRiskAndResidualRule : ElementUsageRule {
@@ -114,22 +117,10 @@ package memo_methodology_profiles {
         attribute :>> passCriteria = "Core traceability, risk, verification, and RMF view support are present.";
     }
 
-    part mdCoverageScope : MethodologyScope {
-        attribute :>> id = "SCOPE-COV-001";
-        attribute :>> name = "MedicalDeviceCoverageScope";
-        attribute :>> scopeName = "coverage";
-
-        attribute :>> includedArchLayer = ("memo::architecture::operational", "memo::architecture::functional", "memo::architecture::logical", "memo::architecture::implementation", "memo::architecture::realization");
-        attribute :>> includedModule = ("memo::assurance::requirements", "memo::assurance::safety_risk", "memo::assurance::cybersecurity", "memo::assurance::human_factors", "memo::assurance::verification_validation");
-        attribute :>> description = "Comprehensive default MEMO layer and module selection.";
-    }
-
-    part gpcaProjectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-001";
-        attribute :>> name = "GPCAProjectMethodBinding";
-        attribute :>> projectName = "GPCA";
-        attribute :>> methodologyName = "MedicalDeviceLightDefault";
-    }
+    // The GPCA binding used to live here, in the reusable default methodology,
+    // naming its methodology by string. A project binding is project content:
+    // it now lives in the GPCA project's own `model/catalog/project.sysml` and
+    // references its methodology with a typed SysML reference.
 
     part rmpDoc : DhfDocumentBinding {
         attribute :>> id = "DHF-001";

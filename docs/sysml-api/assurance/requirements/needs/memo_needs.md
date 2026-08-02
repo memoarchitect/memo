@@ -31,7 +31,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`NeedKind`](#needkind) | `enum def` | Controlled values for need: `stakeholder`, `user`, `clinicalUser`, `patientUser`, `business`, `service`, `regulatory`, `operational`, `designControl`. | — |
+| [`NeedKind`](#needkind) | `enum def` | Controlled values for need: `user`, `clinicalUser`, `patientUser`, `business`, `service`, `regulatory`, `operational`, `designControl`. | — |
 | [`Need`](#need) | `requirement def` | Need definition specializing `MemoNeed,`. | `MemoNeed,` |
 
 ## NeedKind
@@ -42,7 +42,7 @@ enum def NeedKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for need: `stakeholder`, `user`, `clinicalUser`, `patientUser`, `business`, `service`, `regulatory`, `operational`, `designControl`. |
+| Description | Controlled values for need: `user`, `clinicalUser`, `patientUser`, `business`, `service`, `regulatory`, `operational`, `designControl`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -87,7 +87,7 @@ requirement def Need specializes MemoNeed, RequirementDriver
         // (ISO 13485 §7.3.3, IEC 62366-1 user needs) is unchanged — it is simply
         // an attribute of the one Need type rather than a class the modeler picks.
         enum def NeedKind {
-            enum stakeholder;
+            enum 'stakeholder';
             enum user;
             enum clinicalUser;
             enum patientUser;

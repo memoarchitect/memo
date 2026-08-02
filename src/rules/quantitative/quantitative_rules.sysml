@@ -6,8 +6,9 @@ package memo_rules_quantitative {
     private import memo_core_consistency_rules::*;
     private import memo_core_enumerations::*;
 
-    constraint def HazardMaxControlsRule {
+    constraint def HazardMaxControlsRule :> MemoConsistencyRule {
         attribute id = "QT-001";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::info;
         attribute rationaleText = "Excessive controls per hazard suggests the hazard is too broad and should be decomposed.";
@@ -15,8 +16,9 @@ package memo_rules_quantitative {
         constraint { true }
     }
 
-    constraint def SwComponentMaxInterfacesRule {
+    constraint def SwComponentMaxInterfacesRule :> MemoConsistencyRule {
         attribute id = "QT-002";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::info;
         attribute rationaleText = "High interface count indicates excessive coupling; consider decomposition.";

@@ -1,8 +1,23 @@
-name: "@memoarchitect/ontology"
-version: "0.6.5"
-type: ontology
-description: "MEMO — the single canonical medical-device ontology: core semantics, the Arcadia-inspired architecture layers (context, requirements, behavior, structure, interfaces, risk, cybersecurity, assurance, …), compliance, viewpoints, views, and invariant rules. One namespace (memo::), one src/ tree."
-license: "MIT"
-tags: ["mbse", "sysml-v2", "arcadia", "iso-42010", "medical-device", "ontology", "iso-14971", "iec-62304"]
-usage: ["kinds", "relationships"]
-sysmlDir: "../src"
+# Application/distribution descriptor for this MEMO package.
+#
+# Identity and location only. It records what this package is called, what
+# version it is, and where its SysML source sits so a resolver can find it.
+# It does not select model content: the project's native SysML imports and its
+# ProjectMethodBinding decide what is in the model. Semantic fields
+# (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
+# removed at the native semantic flip and are now rejected if present.
+name: '@memoarchitect/ontology'
+version: 0.6.5
+description: "MEMO \u2014 the single canonical medical-device ontology: core semantics, the Arcadia-inspired architecture layers (context, requirements, behavior, structure, interfaces, risk, cybersecurity,\
+  \ assurance, \u2026), compliance, viewpoints, views, and invariant rules. One namespace (memo::), one src/ tree."
+license: MIT
+tags:
+- mbse
+- sysml-v2
+- arcadia
+- iso-42010
+- medical-device
+- ontology
+- iso-14971
+- iec-62304
+sysmlDir: ../src

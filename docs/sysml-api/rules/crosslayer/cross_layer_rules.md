@@ -31,14 +31,13 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`riskToReqTraceRule`](#risktoreqtracerule) | `constraint def` | Constraint that checks risk to req trace rule. | — |
-| [`reqToArchTraceRule`](#reqtoarchtracerule) | `constraint def` | Constraint that checks req to arch trace rule. | — |
-| [`cyberToSafetyTraceRule`](#cybertosafetytracerule) | `constraint def` | XL-003 had minCount=0 (advisory only), so the native form is vacuously true (size >= 0). Retained for metadata/rationale parity; flags nothing. | — |
+| [`RiskToReqTraceRule`](#risktoreqtracerule) | `constraint def` | Constraint that checks risk to req trace rule. | `MemoConsistencyRule` |
+| [`ReqToArchTraceRule`](#reqtoarchtracerule) | `constraint def` | Constraint that checks req to arch trace rule. | `MemoConsistencyRule` |
 
-## riskToReqTraceRule
+## RiskToReqTraceRule
 
 ```sysml
-constraint def riskToReqTraceRule
+constraint def RiskToReqTraceRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -46,14 +45,14 @@ constraint def riskToReqTraceRule
 | Description | Constraint that checks risk to req trace rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_crosslayer` |
 
 
-## reqToArchTraceRule
+## ReqToArchTraceRule
 
 ```sysml
-constraint def reqToArchTraceRule
+constraint def ReqToArchTraceRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -61,22 +60,7 @@ constraint def reqToArchTraceRule
 | Description | Constraint that checks req to arch trace rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
-| Owning package | `memo_rules_crosslayer` |
-
-
-## cyberToSafetyTraceRule
-
-```sysml
-constraint def cyberToSafetyTraceRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | XL-003 had minCount=0 (advisory only), so the native form is vacuously true (size >= 0). Retained for metadata/rationale parity; flags nothing. |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_crosslayer` |
 
 
@@ -85,17 +69,17 @@ constraint def cyberToSafetyTraceRule
 ??? code "rules/crosslayer/cross_layer_rules.sysml"
 
     ```sysml
-    // Cross-layer rule pack — native KerML constraints.
-    // Traceability between architecture layers, migrated from ConsistencyRule
-    // predicate-attribute parts to native `constraint def` bodies.
+    // Cross-layer traceability constraints evaluated from their ontology-owned
+    // predicate expressions.
     package memo_rules_crosslayer {
         private import ScalarValues::*;
     
         private import memo_core_consistency_rules::*;
         private import memo_core_enumerations::*;
     
-        constraint def riskToReqTraceRule {
+        constraint def RiskToReqTraceRule :> MemoConsistencyRule {
             attribute id = "XL-001";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Hazard";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Risk-requirement traceability required for regulatory submissions.";
@@ -103,8 +87,9 @@ constraint def cyberToSafetyTraceRule
             constraint { true }
         }
     
-        constraint def reqToArchTraceRule {
+        constraint def ReqToArchTraceRule :> MemoConsistencyRule {
             attribute id = "XL-002";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Requirement[requirementKind=system]";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Requirements-to-architecture traceability per IEC 62304.";
@@ -112,16 +97,6 @@ constraint def cyberToSafetyTraceRule
             constraint { true }
         }
     
-        // XL-003 had minCount=0 (advisory only), so the native form is vacuously true
-        // (size >= 0). Retained for metadata/rationale parity; flags nothing.
-        constraint def cyberToSafetyTraceRule {
-            attribute id = "XL-003";
-            attribute appliesTo = "CyberHazard";
-            attribute severity = RuleSeverityKind::warning;
-            attribute rationaleText = "FDA cybersecurity guidance requires linking cybersecurity to patient safety.";
-            attribute predicateExpression = "impactsSafety->size() >= 0";
-            constraint { true }
-        }
     }
     
     ```

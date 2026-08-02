@@ -31,20 +31,20 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`WorkflowStep`](#workflowstep) | `part def` | Workflow step definition specializing `MemoPart`. | `MemoPart` |
+| [`MethodologyWorkflowStep`](#methodologyworkflowstep) | `action def` | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from memo_architecture_operational_workflows::WorkflowStep, which is a step in an OPERATIONAL workflow performed by users.… | `MemoAction` |
 
-## WorkflowStep
+## MethodologyWorkflowStep
 
 ```sysml
-part def WorkflowStep :> MemoPart
+action def MethodologyWorkflowStep :> MemoAction
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Workflow step definition specializing `MemoPart`. |
-| Kind | `part def` |
+| Description | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from memo_architecture_operational_workflows::WorkflowStep, which is a step in an OPERATIONAL workflow performed by users.… |
+| Kind | `action def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoAction` |
 | Owning package | `memo_methodology_workflow` |
 
 
@@ -59,8 +59,13 @@ part def WorkflowStep :> MemoPart
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
     
-        part def WorkflowStep :> MemoPart {
-            attribute stepOrder : Integer;
+        // Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle
+        // stage with entry/exit criteria), distinct from
+        // memo_architecture_operational_workflows::WorkflowStep, which is a step in
+        // an OPERATIONAL workflow performed by users. The two carry different
+        // attributes and must not share a short name — an overloaded name resolves
+        // by load order and silently validates a usage against the wrong type.
+        action def MethodologyWorkflowStep :> MemoAction {
             attribute stage : WorkflowStageKind;
             attribute objectiveDescription : String;
             attribute entryCriteria : String;

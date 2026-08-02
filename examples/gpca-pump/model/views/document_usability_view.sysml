@@ -2,7 +2,7 @@ package memo_examples_gpca_pump_model_views_document_usability_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_usability_usability_engineering_view::*;
+    private import memo_viewpoints_usability_views_usability_engineering_view::*;
     private import memo_viewpoints_usability_usability_viewpoint::*;
     private import memo_core_enumerations::*;
 

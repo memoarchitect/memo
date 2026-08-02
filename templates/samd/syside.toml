@@ -1,7 +1,7 @@
 #:schema https://docs.sensmetry.com/schemas/latest/syside.schema.json
 
 include = [
-    "src",
+    "model",
     "node_modules/@memoarchitect/ontology/src",
 ]
 

@@ -13,98 +13,65 @@ SysML `constraint def` declarations in `src/`.
 | [`MaxResponseTimeConstraint`](architecture/functional/constraints/memo_constraints.md#maxresponsetimeconstraint) | `constraint def` | Constraint that checks max response time constraint. | [`architecture/functional/constraints/memo_constraints.sysml`](architecture/functional/constraints/memo_constraints.md) |
 
 
+## `memo::core::consistency_rules`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MemoConsistencyRule`](core/consistency_rules/consistency_rules.md#memoconsistencyrule) | `constraint def` | Common supertype of every executable MEMO rule. It carries no members of its own: a rule's metadata is declared on the rule, and a shared member here would be shadowed by every rule that sets it.… | [`core/consistency_rules/consistency_rules.sysml`](core/consistency_rules/consistency_rules.md) |
+
+
 ## `memo::rules::closure`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`assetThreatLinkRule`](rules/closure/closure_rules.md#assetthreatlinkrule) | `constraint def` | Constraint that checks asset threat link rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`evidenceProductionRule`](rules/closure/closure_rules.md#evidenceproductionrule) | `constraint def` | Constraint that checks evidence production rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`hazardMitigationRule`](rules/closure/closure_rules.md#hazardmitigationrule) | `constraint def` | Constraint that checks hazard mitigation rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`hazardSeverityRule`](rules/closure/closure_rules.md#hazardseverityrule) | `constraint def` | Constraint that checks hazard severity rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`initialRiskMatrixRule`](rules/closure/closure_rules.md#initialriskmatrixrule) | `constraint def` | Constraint that checks initial risk matrix rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`logicalFunctionAllocationRule`](rules/closure/closure_rules.md#logicalfunctionallocationrule) | `constraint def` | Constraint that checks logical function allocation rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`logicalInterfaceDirectionRule`](rules/closure/closure_rules.md#logicalinterfacedirectionrule) | `constraint def` | Constraint that checks logical interface direction rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`riskControlVerificationRule`](rules/closure/closure_rules.md#riskcontrolverificationrule) | `constraint def` | Constraint that checks risk control verification rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`safetyClassCVerificationRule`](rules/closure/closure_rules.md#safetyclasscverificationrule) | `constraint def` | Constraint that checks safety class cverification rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`swComponentReqRule`](rules/closure/closure_rules.md#swcomponentreqrule) | `constraint def` | Constraint that checks sw component req rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`swComponentSafetyClassRule`](rules/closure/closure_rules.md#swcomponentsafetyclassrule) | `constraint def` | Constraint that checks sw component safety class rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`swReqTraceRule`](rules/closure/closure_rules.md#swreqtracerule) | `constraint def` | Constraint that checks sw req trace rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`sysReqTraceRule`](rules/closure/closure_rules.md#sysreqtracerule) | `constraint def` | Constraint that checks sys req trace rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`threatMitigationRule`](rules/closure/closure_rules.md#threatmitigationrule) | `constraint def` | Constraint that checks threat mitigation rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`verificationCaseMethodRule`](rules/closure/closure_rules.md#verificationcasemethodrule) | `constraint def` | Constraint that checks verification case method rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-| [`verificationCaseTargetRule`](rules/closure/closure_rules.md#verificationcasetargetrule) | `constraint def` | Constraint that checks verification case target rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
-
-
-## `memo::rules::coverage`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`fda820DesignInputCoverage`](rules/coverage/coverage_rules.md#fda820designinputcoverage) | `constraint def` | Constraint that checks fda820 design input coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fda820DesignVerificationCoverage`](rules/coverage/coverage_rules.md#fda820designverificationcoverage) | `constraint def` | Constraint that checks fda820 design verification coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberAssetCoverage`](rules/coverage/coverage_rules.md#fdacyberassetcoverage) | `constraint def` | Constraint that checks fda cyber asset coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberHazardCoverage`](rules/coverage/coverage_rules.md#fdacyberhazardcoverage) | `constraint def` | Constraint that checks fda cyber hazard coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberMitigationCoverage`](rules/coverage/coverage_rules.md#fdacybermitigationcoverage) | `constraint def` | Constraint that checks fda cyber mitigation coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberRiskCoverage`](rules/coverage/coverage_rules.md#fdacyberriskcoverage) | `constraint def` | Constraint that checks fda cyber risk coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberSecurityReqCoverage`](rules/coverage/coverage_rules.md#fdacybersecurityreqcoverage) | `constraint def` | Constraint that checks fda cyber security req coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberThreatCoverage`](rules/coverage/coverage_rules.md#fdacyberthreatcoverage) | `constraint def` | Constraint that checks fda cyber threat coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberThreatScenarioCoverage`](rules/coverage/coverage_rules.md#fdacyberthreatscenariocoverage) | `constraint def` | Constraint that checks fda cyber threat scenario coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberTrustBoundaryCoverage`](rules/coverage/coverage_rules.md#fdacybertrustboundarycoverage) | `constraint def` | Constraint that checks fda cyber trust boundary coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberVerificationCoverage`](rules/coverage/coverage_rules.md#fdacyberverificationcoverage) | `constraint def` | Constraint that checks fda cyber verification coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`fdaCyberVulnerabilityCoverage`](rules/coverage/coverage_rules.md#fdacybervulnerabilitycoverage) | `constraint def` | Constraint that checks fda cyber vulnerability coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iec60601HarmCoverage`](rules/coverage/coverage_rules.md#iec60601harmcoverage) | `constraint def` | Constraint that checks iec60601 harm coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iec62304SwArchCoverage`](rules/coverage/coverage_rules.md#iec62304swarchcoverage) | `constraint def` | Constraint that checks iec62304 sw arch coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iec62304SwReqCoverage`](rules/coverage/coverage_rules.md#iec62304swreqcoverage) | `constraint def` | Constraint that checks iec62304 sw req coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iec62366ActorCoverage`](rules/coverage/coverage_rules.md#iec62366actorcoverage) | `constraint def` | Constraint that checks iec62366 actor coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iec82304SwSystemCoverage`](rules/coverage/coverage_rules.md#iec82304swsystemcoverage) | `constraint def` | Constraint that checks iec82304 sw system coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iso13485StakeholderNeedCoverage`](rules/coverage/coverage_rules.md#iso13485stakeholderneedcoverage) | `constraint def` | Constraint that checks iso13485 stakeholder need coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iso14155UseContextCoverage`](rules/coverage/coverage_rules.md#iso14155usecontextcoverage) | `constraint def` | Constraint that checks iso14155 use context coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iso14971HazardCoverage`](rules/coverage/coverage_rules.md#iso14971hazardcoverage) | `constraint def` | Constraint that checks iso14971 hazard coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iso14971ResidualRiskCoverage`](rules/coverage/coverage_rules.md#iso14971residualriskcoverage) | `constraint def` | Constraint that checks iso14971 residual risk coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
-| [`iso14971RiskMatrixCoverage`](rules/coverage/coverage_rules.md#iso14971riskmatrixcoverage) | `constraint def` | Constraint that checks iso14971 risk matrix coverage. | [`rules/coverage/coverage_rules.sysml`](rules/coverage/coverage_rules.md) |
+| [`AssetThreatLinkRule`](rules/closure/closure_rules.md#assetthreatlinkrule) | `constraint def` | Constraint that checks asset threat link rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`BoundsDetectionConfirmedRule`](rules/closure/closure_rules.md#boundsdetectionconfirmedrule) | `constraint def` | Automatic boundary detection proposes; a reviewer disposes. An unconfirmed machine guess must never reach a design review looking like an engineering decision. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`ControlInvokesFunctionRule`](rules/closure/closure_rules.md#controlinvokesfunctionrule) | `constraint def` | Interactive UI is where use error happens (IEC 62366-1), so a control that reaches no system function is either dead UI or unmodelled UI. The interactive-form restriction lives in the predicate because it spans several enum values. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`EvidenceProductionRule`](rules/closure/closure_rules.md#evidenceproductionrule) | `constraint def` | Constraint that checks evidence production rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`HazardMitigationRule`](rules/closure/closure_rules.md#hazardmitigationrule) | `constraint def` | Constraint that checks hazard mitigation rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`HazardSeverityRule`](rules/closure/closure_rules.md#hazardseverityrule) | `constraint def` | Constraint that checks hazard severity rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`InitialRiskMatrixRule`](rules/closure/closure_rules.md#initialriskmatrixrule) | `constraint def` | Constraint that checks initial risk matrix rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`LogicalFunctionAllocationRule`](rules/closure/closure_rules.md#logicalfunctionallocationrule) | `constraint def` | Constraint that checks logical function allocation rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`LogicalInterfaceDirectionRule`](rules/closure/closure_rules.md#logicalinterfacedirectionrule) | `constraint def` | Constraint that checks logical interface direction rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`RiskControlVerificationRule`](rules/closure/closure_rules.md#riskcontrolverificationrule) | `constraint def` | Constraint that checks risk control verification rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`SafetyClassCVerificationRule`](rules/closure/closure_rules.md#safetyclasscverificationrule) | `constraint def` | Constraint that checks safety class cverification rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`ScreenCaptureProvenanceRule`](rules/closure/closure_rules.md#screencaptureprovenancerule) | `constraint def` | A screenshot with no build behind it is undated design intent, not evidence of what the device does. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`SwComponentReqRule`](rules/closure/closure_rules.md#swcomponentreqrule) | `constraint def` | Constraint that checks sw component req rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`SwComponentSafetyClassRule`](rules/closure/closure_rules.md#swcomponentsafetyclassrule) | `constraint def` | Constraint that checks sw component safety class rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`SwReqTraceRule`](rules/closure/closure_rules.md#swreqtracerule) | `constraint def` | Constraint that checks sw req trace rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`SysReqTraceRule`](rules/closure/closure_rules.md#sysreqtracerule) | `constraint def` | Constraint that checks sys req trace rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`ThreatMitigationRule`](rules/closure/closure_rules.md#threatmitigationrule) | `constraint def` | Constraint that checks threat mitigation rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`UiElementDesignRecordRule`](rules/closure/closure_rules.md#uielementdesignrecordrule) | `constraint def` | The load-bearing traceability rule. A UI element that is not chrome must reach a design record — a requirement it satisfies, or an action it triggers. Chrome must be DECLARED `decoration`; an element left unclassified fails rather than passing as scenery. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`VerificationCaseMethodRule`](rules/closure/closure_rules.md#verificationcasemethodrule) | `constraint def` | Constraint that checks verification case method rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
+| [`VerificationCaseTargetRule`](rules/closure/closure_rules.md#verificationcasetargetrule) | `constraint def` | Constraint that checks verification case target rule. | [`rules/closure/closure_rules.sysml`](rules/closure/closure_rules.md) |
 
 
 ## `memo::rules::crosslayer`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`cyberToSafetyTraceRule`](rules/crosslayer/cross_layer_rules.md#cybertosafetytracerule) | `constraint def` | XL-003 had minCount=0 (advisory only), so the native form is vacuously true (size >= 0). Retained for metadata/rationale parity; flags nothing. | [`rules/crosslayer/cross_layer_rules.sysml`](rules/crosslayer/cross_layer_rules.md) |
-| [`reqToArchTraceRule`](rules/crosslayer/cross_layer_rules.md#reqtoarchtracerule) | `constraint def` | Constraint that checks req to arch trace rule. | [`rules/crosslayer/cross_layer_rules.sysml`](rules/crosslayer/cross_layer_rules.md) |
-| [`riskToReqTraceRule`](rules/crosslayer/cross_layer_rules.md#risktoreqtracerule) | `constraint def` | Constraint that checks risk to req trace rule. | [`rules/crosslayer/cross_layer_rules.sysml`](rules/crosslayer/cross_layer_rules.md) |
-
-
-## `memo::rules::lifecycle`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`evidenceAfterVerificationRule`](rules/lifecycle/lifecycle_rules.md#evidenceafterverificationrule) | `constraint def` | Constraint that checks evidence after verification rule. | [`rules/lifecycle/lifecycle_rules.sysml`](rules/lifecycle/lifecycle_rules.md) |
-| [`reqBeforeArchRule`](rules/lifecycle/lifecycle_rules.md#reqbeforearchrule) | `constraint def` | Constraint that checks req before arch rule. | [`rules/lifecycle/lifecycle_rules.sysml`](rules/lifecycle/lifecycle_rules.md) |
-| [`riskBeforeVerificationRule`](rules/lifecycle/lifecycle_rules.md#riskbeforeverificationrule) | `constraint def` | Constraint that checks risk before verification rule. | [`rules/lifecycle/lifecycle_rules.sysml`](rules/lifecycle/lifecycle_rules.md) |
+| [`ReqToArchTraceRule`](rules/crosslayer/cross_layer_rules.md#reqtoarchtracerule) | `constraint def` | Constraint that checks req to arch trace rule. | [`rules/crosslayer/cross_layer_rules.sysml`](rules/crosslayer/cross_layer_rules.md) |
+| [`RiskToReqTraceRule`](rules/crosslayer/cross_layer_rules.md#risktoreqtracerule) | `constraint def` | Constraint that checks risk to req trace rule. | [`rules/crosslayer/cross_layer_rules.sysml`](rules/crosslayer/cross_layer_rules.md) |
 
 
 ## `memo::rules::ontology`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`alternateScenarioHasBaseRule`](rules/ontology/ontology_invariants.md#alternatescenariohasbaserule) | `constraint def` | Constraint that checks alternate scenario has base rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`connectorEndpointsExistRule`](rules/ontology/ontology_invariants.md#connectorendpointsexistrule) | `constraint def` | Constraint that checks connector endpoints exist rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`containmentAcyclicRule`](rules/ontology/ontology_invariants.md#containmentacyclicrule) | `constraint def` | Constraint that checks containment acyclic rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`criticalTaskValidatedRule`](rules/ontology/ontology_invariants.md#criticaltaskvalidatedrule) | `constraint def` | Constraint that checks critical task validated rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`deployToCapableNodeRule`](rules/ontology/ontology_invariants.md#deploytocapablenoderule) | `constraint def` | Constraint that checks deploy to capable node rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`directionAgreesWithFlowRule`](rules/ontology/ontology_invariants.md#directionagreeswithflowrule) | `constraint def` | Constraint that checks direction agrees with flow rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`exchangedItemTypeRule`](rules/ontology/ontology_invariants.md#exchangeditemtyperule) | `constraint def` | Constraint that checks exchanged item type rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`logicalRealizationTypedRule`](rules/ontology/ontology_invariants.md#logicalrealizationtypedrule) | `constraint def` | Constraint that checks logical realization typed rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`patientContactCharacterizedRule`](rules/ontology/ontology_invariants.md#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`portCompatibilityRule`](rules/ontology/ontology_invariants.md#portcompatibilityrule) | `constraint def` | Constraint that checks port compatibility rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`runtimeTracesToModuleRule`](rules/ontology/ontology_invariants.md#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`safetyCriticalFunctionVerifiedRule`](rules/ontology/ontology_invariants.md#safetycriticalfunctionverifiedrule) | `constraint def` | Constraint that checks safety critical function verified rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`singleAxisOwnershipRule`](rules/ontology/ontology_invariants.md#singleaxisownershiprule) | `constraint def` | Constraint that checks single axis ownership rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
-| [`useErrorTracesToHazardRule`](rules/ontology/ontology_invariants.md#useerrortracestohazardrule) | `constraint def` | Constraint that checks use error traces to hazard rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`AlternateScenarioHasBaseRule`](rules/ontology/ontology_invariants.md#alternatescenariohasbaserule) | `constraint def` | Constraint that checks alternate scenario has base rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`ContainmentAcyclicRule`](rules/ontology/ontology_invariants.md#containmentacyclicrule) | `constraint def` | Constraint that checks containment acyclic rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`CriticalTaskValidatedRule`](rules/ontology/ontology_invariants.md#criticaltaskvalidatedrule) | `constraint def` | Constraint that checks critical task validated rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`NestedPartConnectedRule`](rules/ontology/ontology_invariants.md#nestedpartconnectedrule) | `constraint def` | Constraint that checks nested part connected rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`PatientContactCharacterizedRule`](rules/ontology/ontology_invariants.md#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`RuntimeTracesToModuleRule`](rules/ontology/ontology_invariants.md#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`SafetyCriticalFunctionVerifiedRule`](rules/ontology/ontology_invariants.md#safetycriticalfunctionverifiedrule) | `constraint def` | Constraint that checks safety critical function verified rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`UseErrorTracesToHazardRule`](rules/ontology/ontology_invariants.md#useerrortracestohazardrule) | `constraint def` | Constraint that checks use error traces to hazard rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
 
 
 ## `memo::rules::quantitative`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`hazardMaxControlsRule`](rules/quantitative/quantitative_rules.md#hazardmaxcontrolsrule) | `constraint def` | Constraint that checks hazard max controls rule. | [`rules/quantitative/quantitative_rules.sysml`](rules/quantitative/quantitative_rules.md) |
-| [`swComponentMaxInterfacesRule`](rules/quantitative/quantitative_rules.md#swcomponentmaxinterfacesrule) | `constraint def` | Constraint that checks sw component max interfaces rule. | [`rules/quantitative/quantitative_rules.sysml`](rules/quantitative/quantitative_rules.md) |
+| [`HazardMaxControlsRule`](rules/quantitative/quantitative_rules.md#hazardmaxcontrolsrule) | `constraint def` | Constraint that checks hazard max controls rule. | [`rules/quantitative/quantitative_rules.sysml`](rules/quantitative/quantitative_rules.md) |
+| [`SwComponentMaxInterfacesRule`](rules/quantitative/quantitative_rules.md#swcomponentmaxinterfacesrule) | `constraint def` | Constraint that checks sw component max interfaces rule. | [`rules/quantitative/quantitative_rules.sysml`](rules/quantitative/quantitative_rules.md) |
 

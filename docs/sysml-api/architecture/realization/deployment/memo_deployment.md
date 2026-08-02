@@ -284,12 +284,12 @@ connection def FlowTraversesBinding :> MemoRelationship
         // segment per traversed component boundary (AADL flow-spec → end-to-end).
         connection def FlowComprisesSpec :> MemoRelationship {
             attribute segmentOrder : Integer;
-            end flow : EndToEndFlow;
+            end endToEndFlow : EndToEndFlow;
             end spec : FlowSpecification;
         }
         // The flow traverses a software→hardware binding; latency accrues here.
         connection def FlowTraversesBinding :> MemoRelationship {
-            end flow : EndToEndFlow;
+            end endToEndFlow : EndToEndFlow;
             end deploymentUnit : DeploymentUnit;
         }
     }

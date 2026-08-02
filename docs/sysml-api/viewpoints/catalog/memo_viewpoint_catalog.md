@@ -214,6 +214,13 @@ part def DiagramIntentMapping specializes MemoPart
             attribute :>> purpose = "Runtime message ordering between software components along a functional scenario.";
             attribute :>> defaultViewKind = DiagramViewKind::sequence;
         }
+        // The first cataloged viewpoint to resolve to `geometry`: screen regions
+        // carry authored RegionBounds, so a geometry view draws modelled facts.
+        part vpUILayout : Viewpoint {
+            attribute :>> id = "VP-CAT-028"; attribute :>> name = "UILayoutViewpoint";
+            attribute :>> purpose = "Captured screens with their marked regions and the UI elements those regions present.";
+            attribute :>> defaultViewKind = DiagramViewKind::geometry;
+        }
     
         // ── Compatibility mappings (§22): legacy diagram intents resolve to
         //     standard view kinds; C4 and AADL stay in examples/ mappings. ──

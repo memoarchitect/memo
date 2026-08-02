@@ -35,7 +35,8 @@
 | --- | --- | --- | --- |
 | [`UseContext`](#usecontext) | `part def` | Use context definition specializing `MemoPart`. | `MemoPart` |
 | [`UseEnvironment`](#useenvironment) | `part def` | The physical/organizational environment of use (IEC 62366-1 3.20), separable from the care-setting context so environments are reusable. | `MemoPart` |
-| [`InteractsWith`](#interactswith) | `connection def` | Typed relationship from `Actor` to `MemoPart`. | `MemoRelationship` |
+| [`InteractsInContext`](#interactsincontext) | `connection def` | Typed relationship for interacts in context. | `MemoRelationship` |
+| [`InteractsWith`](#interactswith) | `connection def` | Typed relationship for interacts with. | `MemoRelationship` |
 | [`ExchangesWith`](#exchangeswith) | `connection def` | Directional context-level data flow between boundary entities. | `MemoRelationship` |
 | [`ConnectsPhysically`](#connectsphysically) | `connection def` | Physical connection between boundary entities (fluid path, mounting). | `MemoRelationship` |
 | [`AppliesInContext`](#appliesincontext) | `connection def` | Typed relationship from `UseContext` to `MemoPart`. | `MemoRelationship` |
@@ -71,6 +72,21 @@ part def UseEnvironment specializes MemoPart
 | Owning package | `memo_architecture_operational_context_use_context` |
 
 
+## InteractsInContext
+
+```sysml
+connection def InteractsInContext :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for interacts in context. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_operational_context_use_context` |
+
+
 ## InteractsWith
 
 ```sysml
@@ -79,7 +95,7 @@ connection def InteractsWith :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `Actor` to `MemoPart`. |
+| Description | Typed relationship for interacts with. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -181,9 +197,34 @@ connection def SituatedIn :> MemoRelationship
             attribute mobility : String;
         }
     
+        // The single relation a system context view draws.
+        //
+        // A context diagram labels its edges with open-ended verbs — "directs
+        // procedure", "electrical power", "fluid supply", "environmental
+        // conditions". Enumerating those as relation kinds never terminates, so the
+        // ontology fixes the *role* an edge plays and leaves the verb to the
+        // project: a project declares `connection def SuppliesFluid :>
+        // InteractsInContext` and the view picks it up through the specialization
+        // closure, exactly as a FirmwareComponent is recognised as a
+        // SoftwareComponent.
+        //
+        // Keeping it separate from InteractsWith is the point: a context view draws
+        // this relation and nothing else, so a model's general-purpose edges cannot
+        // leak into the boundary picture.
+        connection def InteractsInContext :> MemoRelationship {
+            // Which side of the boundary picture the participant belongs on.
+            attribute contextSide : ContextSideKind;
+            // The verb, as it should read on the edge ("Directs procedure").
+            attribute interactionLabel : String[0..1];
+            end contextParticipant : MemoPart;
+            // Untyped: the system of interest may be a part or an operational activity.
+            end systemOfInterest;
+        }
+    
         connection def InteractsWith :> MemoRelationship {
             end contextParticipant : Actor;
-            end target : MemoPart;
+            // Untyped so operational activities (action def) can be targets as well as parts.
+            end target;
         }
         // Directional context-level data flow between boundary entities.
         connection def ExchangesWith :> MemoRelationship {

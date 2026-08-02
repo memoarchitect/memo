@@ -40,10 +40,10 @@
 | [`ScenarioVariantKind`](#scenariovariantkind) | `enum def` | Controlled values for scenario variant: `nominal`, `alternate`, `exception`, `recovery`. | — |
 | [`OperationalConditionKind`](#operationalconditionkind) | `enum def` | Controlled values for operational condition: `normal`, `degraded`, `emergency`, `maintenance`, `startup`, `shutdown`, `timeout`, `misuse`, `foreseeableMisuse`. | — |
 | [`ScenarioPurposeKind`](#scenariopurposekind) | `enum def` | `memoAnalysis` and `memoVerification` keep the regulated terms `analysis` and `verification` intact but prefixed, because both are SysML v2 reserved words and cannot be bare enum names. `validation` is not reserved. | — |
-| [`MemoScenario`](#memoscenario) | `part def` | Memo scenario definition specializing `MemoPart`. | `MemoPart` |
-| [`OperativeScenario`](#operativescenario) | `part def` | The operational-layer scenario: a path through an OperationalWorkflow in a use context. It is realized down the V by a FunctionalScenario (the function sequence) and a UIScenario (the interaction sequence), each owned by its own architecture layer and linked by typed realizati… | `MemoScenario` |
+| [`MemoScenario`](#memoscenario) | `action def` | Memo scenario definition specializing `MemoAction`. | `MemoAction` |
+| [`OperativeScenario`](#operativescenario) | `action def` | The operational-layer scenario: a path through an OperationalWorkflow in a use context. It is realized down the V by a FunctionalScenario (the function sequence) and a UIScenario (the interaction sequence), each owned by its own architecture layer and linked by typed realizati… | `MemoScenario` |
 | [`ScenarioOccurrence`](#scenariooccurrence) | `part def` | An actual or hypothetical execution of a scenario (usability test run, postmarket incident reconstruction, simulated-use session). | `MemoPart` |
-| [`SelectsKind`](#selectskind) | `enum def` | Controlled values for selects: `step`, `flow`. | — |
+| [`SelectsKind`](#selectskind) | `enum def` | Controlled values for selects: `step`. | — |
 | [`Selects`](#selects) | `connection def` | Typed relationship for selects. | `MemoRelationship` |
 | [`OccursDuring`](#occursduring) | `connection def` | Typed relationship from `ScenarioOccurrence` to `UseContext`. | `MemoRelationship` |
 
@@ -95,28 +95,28 @@ enum def ScenarioPurposeKind
 ## MemoScenario
 
 ```sysml
-abstract part def MemoScenario specializes MemoPart
+abstract action def MemoScenario specializes MemoAction
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Memo scenario definition specializing `MemoPart`. |
-| Kind | `part def` |
+| Description | Memo scenario definition specializing `MemoAction`. |
+| Kind | `action def` |
 | Abstract | Yes |
-| Specializes | `MemoPart` |
+| Specializes | `MemoAction` |
 | Owning package | `memo_architecture_operational_scenarios` |
 
 
 ## OperativeScenario
 
 ```sysml
-part def OperativeScenario specializes MemoScenario
+action def OperativeScenario specializes MemoScenario
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | The operational-layer scenario: a path through an OperationalWorkflow in a use context. It is realized down the V by a FunctionalScenario (the function sequence) and a UIScenario (the interaction sequence), each owned by its own architecture layer and linked by typed realizati… |
-| Kind | `part def` |
+| Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoScenario` |
 | Owning package | `memo_architecture_operational_scenarios` |
@@ -145,7 +145,7 @@ enum def SelectsKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for selects: `step`, `flow`. |
+| Description | Controlled values for selects: `step`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -240,7 +240,7 @@ connection def OccursDuring :> MemoRelationship
         // or invariants differ (OperativeScenario here; FunctionalScenario in
         // memo_functions; UIScenario in memo_architecture_implementation_ui;
         // VerificationScenario / ThreatScenario in assurance packages).
-        abstract part def MemoScenario specializes MemoPart {
+        abstract action def MemoScenario specializes MemoAction {
             attribute variantKind : ScenarioVariantKind;
             attribute operationalCondition : OperationalConditionKind;
             attribute scenarioPurpose : ScenarioPurposeKind[0..*];
@@ -265,7 +265,7 @@ connection def OccursDuring :> MemoRelationship
         // by its own architecture layer and linked by typed realization
         // relationships — never by copying the path. Workflow stays operational;
         // only the scenario is layered.
-        part def OperativeScenario specializes MemoScenario {
+        action def OperativeScenario specializes MemoScenario {
             ref parentWorkflow : OperationalWorkflow[0..1];
             ref parentUseCase : UseCase[0..1];
             // Each scenario owns the operational activity/action flow for its
@@ -287,7 +287,7 @@ connection def OccursDuring :> MemoRelationship
         // element), keyed by selectsKind.
         enum def SelectsKind {
             enum step;
-            enum flow;
+            enum 'flow';
         }
         connection def Selects :> MemoRelationship {
             attribute selectsKind : SelectsKind;

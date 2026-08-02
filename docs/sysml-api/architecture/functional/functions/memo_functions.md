@@ -36,10 +36,10 @@
 | --- | --- | --- | --- |
 | [`SystemFunction`](#systemfunction) | `part def` | System function definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`SystemAction`](#systemaction) | `action def` | Executable behavior realizing a system function. | `MemoAction` |
-| [`FunctionalExchange`](#functionalexchange) | `part def` | Functional exchange definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for budgets and assurance attributes that a flow usage cannot own. | `ArchitectureElement` |
 | [`FunctionalFlow`](#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | `ArchitectureElement` |
-| [`FunctionalFlowStep`](#functionalflowstep) | `part def` | Functional flow step definition specializing `MemoPart`. | `MemoPart` |
-| [`FunctionalScenario`](#functionalscenario) | `part def` | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. | `MemoScenario` |
+| [`FunctionalFlowStep`](#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | `MemoAction` |
+| [`FunctionalScenario`](#functionalscenario) | `action def` | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. | `MemoScenario` |
 | [`IncludesStep`](#includesstep) | `connection def` | Typed relationship from `FunctionalFlow` to `FunctionalFlowStep`. | `MemoRelationship` |
 | [`InvolvesFunction`](#involvesfunction) | `connection def` | Typed relationship from `FunctionalFlow` to `SystemFunction`. | `MemoRelationship` |
 
@@ -81,7 +81,7 @@ part def FunctionalExchange specializes ArchitectureElement
 
 | Property | Value |
 | --- | --- |
-| Description | Functional exchange definition specializing `ArchitectureElement`. |
+| Description | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for budgets and assurance attributes that a flow usage cannot own. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `ArchitectureElement` |
@@ -106,28 +106,28 @@ part def FunctionalFlow specializes ArchitectureElement
 ## FunctionalFlowStep
 
 ```sysml
-part def FunctionalFlowStep specializes MemoPart
+action def FunctionalFlowStep specializes MemoAction
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Functional flow step definition specializing `MemoPart`. |
-| Kind | `part def` |
+| Description | Functional flow step definition specializing `MemoAction`. |
+| Kind | `action def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoAction` |
 | Owning package | `memo_architecture_functional_functions` |
 
 
 ## FunctionalScenario
 
 ```sysml
-part def FunctionalScenario specializes MemoScenario
+action def FunctionalScenario specializes MemoScenario
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. |
-| Kind | `part def` |
+| Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoScenario` |
 | Owning package | `memo_architecture_functional_functions` |
@@ -198,11 +198,11 @@ connection def InvolvesFunction :> MemoRelationship
             ref performedFunction : SystemFunction[0..1];
         }
     
-        // Typed transfer of information/command/status/etc. between functions
-        // (renamed from LogicalFlow — it belongs to the functional perspective).
+        // Named traceable route between functions. Native `flow of` usages carry
+        // the transported item; this element exists for budgets and assurance
+        // attributes that a flow usage cannot own.
         part def FunctionalExchange specializes ArchitectureElement {
             attribute flowKind : FlowKind;
-            attribute direction : DirectionKind;
             attribute latencyBudgetMs : Real;
             attribute staleAfterMs : Real;
             attribute integrityLevel : String;
@@ -216,15 +216,11 @@ connection def InvolvesFunction :> MemoRelationship
         // flows are part of functional architecture, never logical structure.
         part def FunctionalFlow specializes ArchitectureElement {
             attribute flowCategory : FunctionalFlowKind;
-            ref startFunction : SystemFunction[0..1];
-            ref endFunction : SystemFunction[0..1];
             attribute endToEndLatencyBudgetMs : String;
             attribute safetyRelevant : Boolean;
             attribute securityRelevant : Boolean;
-            ref includedFunctions : SystemFunction[0..*];
         }
-        part def FunctionalFlowStep specializes MemoPart {
-            attribute stepOrder : String;
+        action def FunctionalFlowStep specializes MemoAction {
             ref function : SystemFunction[0..1];
             ref exchange : FunctionalExchange[0..1];
             ref item exchangedItem : MemoExchangeItem[0..1];
@@ -233,10 +229,7 @@ connection def InvolvesFunction :> MemoRelationship
         // The functional-layer scenario selects one functional route and realizes
         // an operative scenario. It is the "what the system does" path, not a
         // logical component interaction.
-        part def FunctionalScenario specializes MemoScenario {
-            ref functionSequence : SystemFunction[0..*];
-            ref functionalFlows : FunctionalExchange[0..*];
-            attribute sequenceDiagramRef : String;
+        action def FunctionalScenario specializes MemoScenario {
             ref selectedFlow : FunctionalFlow[0..1];
         }
         connection def IncludesStep :> MemoRelationship {

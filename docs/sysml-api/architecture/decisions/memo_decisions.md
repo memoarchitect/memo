@@ -26,12 +26,15 @@
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_core_relationships::*` |
+| private | `memo_artifacts_core::*` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`DesignDecision`](#designdecision) | `part def` | Design decision definition specializing `MemoPart`. | `MemoPart` |
+| [`DecisionRecordedInADR`](#decisionrecordedinadr) | `connection def` | Typed relationship from `DesignDecision` to `ADRArtifact`. | `MemoRelationship` |
 
 ## DesignDecision
 
@@ -48,6 +51,21 @@ part def DesignDecision specializes MemoPart
 | Owning package | `memo_architecture_decisions` |
 
 
+## DecisionRecordedInADR
+
+```sysml
+connection def DecisionRecordedInADR :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `DesignDecision` to `ADRArtifact`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_decisions` |
+
+
 ## Source
 
 ??? code "architecture/decisions/memo_decisions.sysml"
@@ -58,11 +76,18 @@ part def DesignDecision specializes MemoPart
     
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
+        private import memo_core_relationships::*;
+        private import memo_artifacts_core::*;
         part def DesignDecision specializes MemoPart {
             attribute decisionKind : String;
             attribute alternatives : String;
             attribute selectedOption : String;
             attribute decisionStatus : DesignDecisionStatusKind;
+        }
+    
+        connection def DecisionRecordedInADR :> MemoRelationship {
+            end decision : DesignDecision;
+            end adr : ADRArtifact;
         }
     }
     

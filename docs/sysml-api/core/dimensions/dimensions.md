@@ -29,7 +29,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`RealizationStageKind`](#realizationstagekind) | `enum def` | Realization stages of one element identity across the product lifecycle (specification through retirement). Orthogonal to the axis: a single identity progresses through stages without changing its owner. | — |
+| [`RealizationStageKind`](#realizationstagekind) | `enum def` | Realization stages of one element identity across the product lifecycle (proposal through retirement). Orthogonal to the axis: a single identity progresses through stages without changing its owner. | — |
 | [`CrossCuttingConcernKind`](#crosscuttingconcernkind) | `enum def` | Cross-cutting concerns orthogonal to the axis. | — |
 | [`ElementStatusKind`](#elementstatuskind) | `enum def` | Editorial status of the model element itself (distinct from the lifecycle of the thing the element describes). | — |
 | [`RealizationClassification`](#realizationclassification) | `metadata def` | Metadata carriers for tagging non-part constructs (actions, ports, interfaces, items, views) with the orthogonal dimensions. Part-based elements carry these directly as attributes of MemoPart. Axis ownership is never tagged here — it is the construct's owning package. | — |
@@ -43,7 +43,7 @@ enum def RealizationStageKind
 
 | Property | Value |
 | --- | --- |
-| Description | Realization stages of one element identity across the product lifecycle (specification through retirement). Orthogonal to the axis: a single identity progresses through stages without changing its owner. |
+| Description | Realization stages of one element identity across the product lifecycle (proposal through retirement). Orthogonal to the axis: a single identity progresses through stages without changing its owner. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -127,9 +127,13 @@ metadata def CrossCuttingClassification
         private import ScalarValues::*;
     
         // Realization stages of one element identity across the product
-        // lifecycle (specification through retirement). Orthogonal to the axis:
+        // lifecycle (proposal through retirement). Orthogonal to the axis:
         // a single identity progresses through stages without changing its owner.
         enum def RealizationStageKind {
+            // Put forward but not yet specified — a candidate under consideration,
+            // so a design alternative can be modelled and traced without implying
+            // it has been accepted into the specification.
+            enum proposed;
             enum specified;
             enum designed;
             enum built;

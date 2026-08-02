@@ -50,7 +50,7 @@
             attribute :>> name = "ClinicalViewpoint";
             attribute :>> title = "Clinical Viewpoint";
             attribute :>> shortDescription = "Shows clinical context, users, use environment, and clinical evidence.";
-            attribute :>> longDescription = "Default viewpoint derived from the context and assurance layers for clinical stakeholders — intended use, patient/clinician interaction, clinical evidence, and clinical safety claims.";
+            attribute :>> description = "Default viewpoint derived from the context and assurance layers for clinical stakeholders — intended use, patient/clinician interaction, clinical evidence, and clinical safety claims.";
             attribute :>> purpose = "Communicate clinical use context and clinical evidence for the device.";
             attribute :>> audience = (AudienceKind::clinicalEngineer, AudienceKind::regulatoryEngineer);
             attribute :>> stage = WorkflowStageKind::context;
