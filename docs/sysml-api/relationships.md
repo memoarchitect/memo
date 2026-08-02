@@ -5,6 +5,13 @@
 
 SysML `connection def` declarations in `src/`.
 
+## `memo::architecture::decisions`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`DecisionRecordedInADR`](architecture/decisions/memo_decisions.md#decisionrecordedinadr) | `connection def` | Typed relationship from `DesignDecision` to `ADRArtifact`. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
+
+
 ## `memo::architecture::functional::functions`
 
 | Name | SysML kind | Description | Source |
@@ -32,11 +39,13 @@ SysML `connection def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ActionInvokesFunction`](architecture/implementation/ui/memo_ui.md#actioninvokesfunction) | `connection def` | Typed relationship from `UIAction` to `SystemFunction`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`CapturesScreen`](architecture/implementation/ui/memo_ui.md#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`ControlImplementedBy`](architecture/implementation/ui/memo_ui.md#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`DataBinding`](architecture/implementation/ui/memo_ui.md#databinding) | `connection def` | Typed relationship from `UIElement` to `MemoPart`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`ElementTriggersAction`](architecture/implementation/ui/memo_ui.md#elementtriggersaction) | `connection def` | Typed relationship from `UIElement` to `UIAction`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`ErrorAtElement`](architecture/implementation/ui/memo_ui.md#erroratelement) | `connection def` | Typed relationship from `UseError` to `UIElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`DataBinding`](architecture/implementation/ui/memo_ui.md#databinding) | `connection def` | Typed relationship from `InteractionElement` to `MemoPart`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`ElementTriggersAction`](architecture/implementation/ui/memo_ui.md#elementtriggersaction) | `connection def` | Typed relationship from `InteractionElement` to `UIAction`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`ErrorAtElement`](architecture/implementation/ui/memo_ui.md#erroratelement) | `connection def` | Typed relationship from `UseError` to `InteractionElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`FlowServesUseCase`](architecture/implementation/ui/memo_ui.md#flowservesusecase) | `connection def` | Typed relationship from `InteractionFlow` to `UseCase`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`NavigatesTo`](architecture/implementation/ui/memo_ui.md#navigatesto) | `connection def` | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`PresentsState`](architecture/implementation/ui/memo_ui.md#presentsstate) | `connection def` | Typed relationship from `UserInterface` to `UIState`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`UITransition`](architecture/implementation/ui/memo_ui.md#uitransition) | `connection def` | Typed relationship from `UIState` to `UIState`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 
@@ -75,7 +84,8 @@ SysML `connection def` declarations in `src/`.
 | [`AppliesInContext`](architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | `connection def` | Typed relationship from `UseContext` to `MemoPart`. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`ConnectsPhysically`](architecture/operational/context/use_context/memo_use_context.md#connectsphysically) | `connection def` | Physical connection between boundary entities (fluid path, mounting). | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`ExchangesWith`](architecture/operational/context/use_context/memo_use_context.md#exchangeswith) | `connection def` | Directional context-level data flow between boundary entities. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
-| [`InteractsWith`](architecture/operational/context/use_context/memo_use_context.md#interactswith) | `connection def` | Typed relationship from `Actor` to `MemoPart`. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
+| [`InteractsInContext`](architecture/operational/context/use_context/memo_use_context.md#interactsincontext) | `connection def` | Typed relationship for interacts in context. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
+| [`InteractsWith`](architecture/operational/context/use_context/memo_use_context.md#interactswith) | `connection def` | Typed relationship for interacts with. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`SituatedIn`](architecture/operational/context/use_context/memo_use_context.md#situatedin) | `connection def` | Typed relationship from `UseContext` to `UseEnvironment`. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 
 
@@ -103,7 +113,6 @@ SysML `connection def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`RequiresResource`](architecture/operational/workflows/memo_workflows.md#requiresresource) | `connection def` | Typed relationship from `OperationalWorkflow` to `WorkflowResource`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`StepPrecedes`](architecture/operational/workflows/memo_workflows.md#stepprecedes) | `connection def` | Typed relationship from `WorkflowStep` to `WorkflowStep`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`Supports`](architecture/operational/workflows/memo_workflows.md#supports) | `connection def` | Typed relationship for supports. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`Transforms`](architecture/operational/workflows/memo_workflows.md#transforms) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
@@ -134,6 +143,15 @@ SysML `connection def` declarations in `src/`.
 | [`ExecutesScenario`](assurance/verification_validation/memo_assurance.md#executesscenario) | `connection def` | Typed relationship from `VerificationCase` to `MemoScenario`. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 
 
+## `memo::core::annotations`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`CommentsOn`](core/annotations/memo_annotations.md#commentson) | `connection def` | Replies form a thread through the ordinary Composes relation (parent comment → reply), so CR-ONT-001's acyclicity invariant already covers comment threads and no thread-specific relation is needed.… | [`core/annotations/memo_annotations.sysml`](core/annotations/memo_annotations.md) |
+| [`NotesOn`](core/annotations/memo_annotations.md#noteson) | `connection def` | Typed relationship for notes on. | [`core/annotations/memo_annotations.sysml`](core/annotations/memo_annotations.md) |
+| [`RationaleFor`](core/annotations/memo_annotations.md#rationalefor) | `connection def` | Typed relationship for rationale for. | [`core/annotations/memo_annotations.sysml`](core/annotations/memo_annotations.md) |
+
+
 ## `memo::core::relationships`
 
 | Name | SysML kind | Description | Source |
@@ -150,7 +168,7 @@ SysML `connection def` declarations in `src/`.
 | [`Decides`](core/relationships/memo_relationships.md#decides) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`DependsOnSoup`](core/relationships/memo_relationships.md#dependsonsoup) | `connection def` | Typed relationship from `ArchitectureElement` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`DerivesCyberRequirement`](core/relationships/memo_relationships.md#derivescyberrequirement) | `connection def` | Typed relationship from `RequirementDriver` to `VerifiableElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`DerivesFrom`](core/relationships/memo_relationships.md#derivesfrom) | `connection def` | Typed relationship from `MemoPart` to `VerifiableElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`DerivesFrom`](core/relationships/memo_relationships.md#derivesfrom) | `connection def` | Typed relationship for derives from. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`DetectedBy`](core/relationships/memo_relationships.md#detectedby) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Enables`](core/relationships/memo_relationships.md#enables) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Exploits`](core/relationships/memo_relationships.md#exploits) | `connection def` | Typed relationship from `RequirementDriver` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
@@ -163,7 +181,7 @@ SysML `connection def` declarations in `src/`.
 | [`InputToGate`](core/relationships/memo_relationships.md#inputtogate) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`MemoLink`](core/relationships/memo_relationships.md#memolink) | `connection def` | The general relation that can join any two model elements, whatever their metaclass. Most specific relations type their ends against a foundation (MemoPart, VerifiableElement, …).… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`MemoRelationship`](core/relationships/memo_relationships.md#memorelationship) | `connection def` | All MEMO relations are native SysML v2 `connection def`s (each is a Connection/Association), specializing the MemoRelationship base. The relationship name is the verb; the RelationshipRegistry derives the navigable type as camelCase(name) and navigation is bidirectional.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Mitigates`](core/relationships/memo_relationships.md#mitigates) | `connection def` | Typed relationship from `VerifiableElement` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`Mitigates`](core/relationships/memo_relationships.md#mitigates) | `connection def` | Typed relationship for mitigates. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Performs`](core/relationships/memo_relationships.md#performs) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Precedes`](core/relationships/memo_relationships.md#precedes) | `connection def` | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`ProducesEvent`](core/relationships/memo_relationships.md#producesevent) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
@@ -171,7 +189,7 @@ SysML `connection def` declarations in `src/`.
 | [`RealizedByScenario`](core/relationships/memo_relationships.md#realizedbyscenario) | `connection def` | Typed relationship from `RequirementDriver` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Realizes`](core/relationships/memo_relationships.md#realizes) | `connection def` | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`ResolvesToMethodology`](core/relationships/memo_relationships.md#resolvestomethodology) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`SatisfiedBy`](core/relationships/memo_relationships.md#satisfiedby) | `connection def` | Typed relationship from `VerifiableElement` to `ArchitectureElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`SatisfiedBy`](core/relationships/memo_relationships.md#satisfiedby) | `connection def` | Typed relationship for satisfied by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`TestedByUsability`](core/relationships/memo_relationships.md#testedbyusability) | `connection def` | Typed relationship from `MemoPart` to `VerifiableElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`ThreatenedBy`](core/relationships/memo_relationships.md#threatenedby) | `connection def` | Typed relationship from `ArchitectureElement` to `RequirementDriver`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`TracesRisk`](core/relationships/memo_relationships.md#tracesrisk) | `connection def` | ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |

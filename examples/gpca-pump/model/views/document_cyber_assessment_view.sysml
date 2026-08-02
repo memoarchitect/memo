@@ -2,7 +2,7 @@ package memo_examples_gpca_pump_model_views_document_cyber_assessment_view {
     private import ScalarValues::*;
 
     private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
+    private import memo_viewpoints_cybersecurity_views_cybersecurity_assessment_view::*;
     private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
     private import memo_core_enumerations::*;
 

@@ -41,7 +41,7 @@
 | [`HasConcern`](#hasconcern) | `connection def` | Typed relationship from `Stakeholder` to `Concern`. | `MemoRelationship` |
 | [`FramesConcern`](#framesconcern) | `connection def` | Typed relationship from `MemoPart` to `Concern`. | `MemoRelationship` |
 | [`ActsAsActor`](#actsasactor) | `connection def` | Links the stakeholder to the actor role the same entity plays, if any. | `MemoRelationship` |
-| [`GovernKind`](#governkind) | `enum def` | Controlled values for govern: `correspondence`, `use`. | — |
+| [`GovernKind`](#governkind) | `enum def` | Controlled values for govern: `correspondence`. | — |
 | [`Governs`](#governs) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
 
 ## Stakeholder
@@ -172,7 +172,7 @@ enum def GovernKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for govern: `correspondence`, `use`. |
+| Description | Controlled values for govern: `correspondence`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -241,7 +241,7 @@ connection def Governs :> MemoRelationship
     
         connection def HasConcern :> MemoRelationship {
             end interestedStakeholder : Stakeholder;
-            end concern : Concern;
+            end stakeholderConcern : Concern;
         }
         connection def FramesConcern :> MemoRelationship {
             end framingViewpoint : MemoPart;
@@ -255,7 +255,7 @@ connection def Governs :> MemoRelationship
         // Governs unifies GovernsCorrespondence / GovernsUse, keyed by governKind.
         enum def GovernKind {
             enum correspondence;
-            enum use;
+            enum 'use';
         }
         connection def Governs :> MemoRelationship {
             attribute governKind : GovernKind;

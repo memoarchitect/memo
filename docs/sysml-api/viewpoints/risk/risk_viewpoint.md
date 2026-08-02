@@ -50,7 +50,7 @@
             attribute :>> name = "RiskViewpoint";
             attribute :>> title = "Risk and Control Viewpoint";
             attribute :>> shortDescription = "Shows hazards, risks, controls, and assurance links.";
-            attribute :>> longDescription = "Default viewpoint derived from the risk layer for ISO 14971-style reasoning across hazard, hazardous situation, harm, control, and verification evidence.";
+            attribute :>> description = "Default viewpoint derived from the risk layer for ISO 14971-style reasoning across hazard, hazardous situation, harm, control, and verification evidence.";
             attribute :>> purpose = "Communicate safety risk chains and controls.";
             attribute :>> audience = (AudienceKind::safetyEngineer);
             attribute :>> stage = WorkflowStageKind::risk;

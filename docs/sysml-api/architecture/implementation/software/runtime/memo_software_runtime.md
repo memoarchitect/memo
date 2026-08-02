@@ -34,7 +34,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`RuntimeKind`](#runtimekind) | `enum def` | process / thread / task / service / container / partition / dataStore / messageBroker. | — |
-| [`SoftwareComponent`](#softwarecomponent) | `part def` | Software component definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`SoftwareComponent`](#softwarecomponent) | `part def` | Software component definition specializing `SoftwareItem`. | `SoftwareItem` |
 | [`ComponentConnects`](#componentconnects) | `connection def` | Typed relationship from `SoftwareComponent` to `SoftwareComponent`. | `MemoRelationship` |
 
 ## RuntimeKind
@@ -55,15 +55,15 @@ enum def RuntimeKind
 ## SoftwareComponent
 
 ```sysml
-part def SoftwareComponent specializes ArchitectureElement
+part def SoftwareComponent specializes SoftwareItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software component definition specializing `ArchitectureElement`. |
+| Description | Software component definition specializing `SoftwareItem`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `SoftwareItem` |
 | Owning package | `memo_architecture_implementation_software_runtime` |
 
 
@@ -114,11 +114,9 @@ connection def ComponentConnects :> MemoRelationship
             enum messageBroker;
         }
     
-        part def SoftwareComponent specializes ArchitectureElement {
+        part def SoftwareComponent specializes SoftwareItem {
             attribute runtimeKind : RuntimeKind;
             attribute responsibility : String;
-            attribute safetyClass : SafetyClassKind;
-            attribute complexity : ComplexityKind;
             attribute periodMs : Real;
             attribute deadlineMs : Real;
             attribute wcetMs : Real;

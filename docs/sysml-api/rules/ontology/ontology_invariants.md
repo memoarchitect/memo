@@ -31,25 +31,19 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`containmentAcyclicRule`](#containmentacyclicrule) | `constraint def` | Constraint that checks containment acyclic rule. | — |
-| [`connectorEndpointsExistRule`](#connectorendpointsexistrule) | `constraint def` | Constraint that checks connector endpoints exist rule. | — |
-| [`portCompatibilityRule`](#portcompatibilityrule) | `constraint def` | Constraint that checks port compatibility rule. | — |
-| [`directionAgreesWithFlowRule`](#directionagreeswithflowrule) | `constraint def` | Constraint that checks direction agrees with flow rule. | — |
-| [`exchangedItemTypeRule`](#exchangeditemtyperule) | `constraint def` | Constraint that checks exchanged item type rule. | — |
-| [`deployToCapableNodeRule`](#deploytocapablenoderule) | `constraint def` | Constraint that checks deploy to capable node rule. | — |
-| [`runtimeTracesToModuleRule`](#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | — |
-| [`logicalRealizationTypedRule`](#logicalrealizationtypedrule) | `constraint def` | Constraint that checks logical realization typed rule. | — |
-| [`patientContactCharacterizedRule`](#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | — |
-| [`safetyCriticalFunctionVerifiedRule`](#safetycriticalfunctionverifiedrule) | `constraint def` | Constraint that checks safety critical function verified rule. | — |
-| [`criticalTaskValidatedRule`](#criticaltaskvalidatedrule) | `constraint def` | Constraint that checks critical task validated rule. | — |
-| [`useErrorTracesToHazardRule`](#useerrortracestohazardrule) | `constraint def` | Constraint that checks use error traces to hazard rule. | — |
-| [`alternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | Constraint that checks alternate scenario has base rule. | — |
-| [`singleAxisOwnershipRule`](#singleaxisownershiprule) | `constraint def` | Constraint that checks single axis ownership rule. | — |
+| [`ContainmentAcyclicRule`](#containmentacyclicrule) | `constraint def` | Constraint that checks containment acyclic rule. | `MemoConsistencyRule` |
+| [`NestedPartConnectedRule`](#nestedpartconnectedrule) | `constraint def` | Constraint that checks nested part connected rule. | `MemoConsistencyRule` |
+| [`RuntimeTracesToModuleRule`](#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | `MemoConsistencyRule` |
+| [`PatientContactCharacterizedRule`](#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | `MemoConsistencyRule` |
+| [`SafetyCriticalFunctionVerifiedRule`](#safetycriticalfunctionverifiedrule) | `constraint def` | Constraint that checks safety critical function verified rule. | `MemoConsistencyRule` |
+| [`CriticalTaskValidatedRule`](#criticaltaskvalidatedrule) | `constraint def` | Constraint that checks critical task validated rule. | `MemoConsistencyRule` |
+| [`UseErrorTracesToHazardRule`](#useerrortracestohazardrule) | `constraint def` | Constraint that checks use error traces to hazard rule. | `MemoConsistencyRule` |
+| [`AlternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | Constraint that checks alternate scenario has base rule. | `MemoConsistencyRule` |
 
-## containmentAcyclicRule
+## ContainmentAcyclicRule
 
 ```sysml
-constraint def containmentAcyclicRule
+constraint def ContainmentAcyclicRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -57,89 +51,29 @@ constraint def containmentAcyclicRule
 | Description | Constraint that checks containment acyclic rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_ontology` |
 
 
-## connectorEndpointsExistRule
+## NestedPartConnectedRule
 
 ```sysml
-constraint def connectorEndpointsExistRule
+constraint def NestedPartConnectedRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Constraint that checks connector endpoints exist rule. |
+| Description | Constraint that checks nested part connected rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_ontology` |
 
 
-## portCompatibilityRule
+## RuntimeTracesToModuleRule
 
 ```sysml
-constraint def portCompatibilityRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Constraint that checks port compatibility rule. |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_rules_ontology` |
-
-
-## directionAgreesWithFlowRule
-
-```sysml
-constraint def directionAgreesWithFlowRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Constraint that checks direction agrees with flow rule. |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_rules_ontology` |
-
-
-## exchangedItemTypeRule
-
-```sysml
-constraint def exchangedItemTypeRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Constraint that checks exchanged item type rule. |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_rules_ontology` |
-
-
-## deployToCapableNodeRule
-
-```sysml
-constraint def deployToCapableNodeRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Constraint that checks deploy to capable node rule. |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_rules_ontology` |
-
-
-## runtimeTracesToModuleRule
-
-```sysml
-constraint def runtimeTracesToModuleRule
+constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -147,29 +81,14 @@ constraint def runtimeTracesToModuleRule
 | Description | Constraint that checks runtime traces to module rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_ontology` |
 
 
-## logicalRealizationTypedRule
+## PatientContactCharacterizedRule
 
 ```sysml
-constraint def logicalRealizationTypedRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Constraint that checks logical realization typed rule. |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_rules_ontology` |
-
-
-## patientContactCharacterizedRule
-
-```sysml
-constraint def patientContactCharacterizedRule
+constraint def PatientContactCharacterizedRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -177,14 +96,14 @@ constraint def patientContactCharacterizedRule
 | Description | Constraint that checks patient contact characterized rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_ontology` |
 
 
-## safetyCriticalFunctionVerifiedRule
+## SafetyCriticalFunctionVerifiedRule
 
 ```sysml
-constraint def safetyCriticalFunctionVerifiedRule
+constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -192,14 +111,14 @@ constraint def safetyCriticalFunctionVerifiedRule
 | Description | Constraint that checks safety critical function verified rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_ontology` |
 
 
-## criticalTaskValidatedRule
+## CriticalTaskValidatedRule
 
 ```sysml
-constraint def criticalTaskValidatedRule
+constraint def CriticalTaskValidatedRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -207,14 +126,14 @@ constraint def criticalTaskValidatedRule
 | Description | Constraint that checks critical task validated rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_ontology` |
 
 
-## useErrorTracesToHazardRule
+## UseErrorTracesToHazardRule
 
 ```sysml
-constraint def useErrorTracesToHazardRule
+constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -222,14 +141,14 @@ constraint def useErrorTracesToHazardRule
 | Description | Constraint that checks use error traces to hazard rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_ontology` |
 
 
-## alternateScenarioHasBaseRule
+## AlternateScenarioHasBaseRule
 
 ```sysml
-constraint def alternateScenarioHasBaseRule
+constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -237,22 +156,7 @@ constraint def alternateScenarioHasBaseRule
 | Description | Constraint that checks alternate scenario has base rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
-| Owning package | `memo_rules_ontology` |
-
-
-## singleAxisOwnershipRule
-
-```sysml
-constraint def singleAxisOwnershipRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Constraint that checks single axis ownership rule. |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_ontology` |
 
 
@@ -274,123 +178,93 @@ constraint def singleAxisOwnershipRule
     
         // ─── Structure ───────────────────────────────────────────────────────
     
-        constraint def containmentAcyclicRule {
+        constraint def ContainmentAcyclicRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-001";
-            attribute appliesTo = "MemoPart";
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Containment/composition relations (Composes) must form no cycles.";
             attribute predicateExpression = "acyclic(composes)";
             constraint { true }
         }
-        constraint def connectorEndpointsExistRule {
-            attribute id = "CR-ONT-002";
-            attribute appliesTo = "ComponentExchange";
-            attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "Connector endpoints must resolve to model elements via the typed refs sourceEndpoint/targetEndpoint; port-path strings are descriptive labels only.";
-            attribute predicateExpression = "sourceEndpoint->size() = 1 and targetEndpoint->size() = 1";
-            constraint { true }
-        }
-        constraint def portCompatibilityRule {
-            attribute id = "CR-ONT-003";
-            attribute appliesTo = "LogicalConnector";
-            attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "Connected ports must agree on content kind; a fluid port cannot connect to an information port.";
-            attribute predicateExpression = "sourceComponent.ports.contentKind->intersect(targetComponent.ports.contentKind)->size() >= 1";
-            constraint { true }
-        }
-        constraint def directionAgreesWithFlowRule {
-            attribute id = "CR-ONT-004";
-            attribute appliesTo = "LogicalExchange";
-            attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "Exchange direction must agree with the direction of its source and target ports.";
-            attribute predicateExpression = "sourcePort.direction != DirectionKind::input and targetPort.direction != DirectionKind::output";
-            constraint { true }
-        }
-        constraint def exchangedItemTypeRule {
-            attribute id = "CR-ONT-005";
-            attribute appliesTo = "LogicalExchange";
+        constraint def NestedPartConnectedRule :> MemoConsistencyRule {
+            attribute id = "AR-IBD-001";
+            attribute tailoring = RuleTailoringKind::invariant;
+            // Internal-block connectivity is a structural-architecture concern, so
+            // the subject is the structural component — not every MemoPart. UI
+            // elements, captured evidence, and review comments nest in compositions
+            // without ever bearing a connector, and judging them produced warnings
+            // no modeller could act on. The engine reads this value; narrowing or
+            // widening the rule happens here, not in TypeScript.
+            attribute appliesTo = "LogicalComponent";
+            attribute evaluator = "architecture";
             attribute severity = RuleSeverityKind::warning;
-            attribute rationaleText = "Exchanged items must be type-compatible with the exchange content kind.";
-            attribute predicateExpression = "exchangedItem->isEmpty() or exchangedItem.contentKind = contentKind";
+            attribute rationaleText = "A structural part nested inside another part should expose at least one modeled interface connector. Passive or intentionally isolated parts may retain this warning with an explicit modelling rationale.";
+            attribute predicateExpression = "hasConnectorInComposition";
+            // Graph-aware structural rule, evaluated by Memo Architect's rule
+            // engine: it lifts port endpoints to their owning part, ignores
+            // composition/trace/deployment links, and includes a connected child's
+            // containing assemblies. The generic KerML expression evaluator cannot
+            // represent that transitive containment query.
             constraint { true }
         }
-    
         // ─── Deployment and realization ──────────────────────────────────────
     
-        constraint def deployToCapableNodeRule {
-            attribute id = "CR-ONT-010";
-            attribute appliesTo = "DeploysTo";
-            attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "Software deploys only to capable execution nodes (e.g. containerized units require supportsContainerization).";
-            attribute predicateExpression = "deploymentKind != DeploymentKind::containerized or node.supportsContainerization = true";
-            constraint { true }
-        }
-        constraint def runtimeTracesToModuleRule {
+        constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-011";
+            attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "SoftwareComponent";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Every runtime component must trace to a module-view definition (Realizes).";
             attribute predicateExpression = "realizes->size() >= 1";
             constraint { true }
         }
-        constraint def logicalRealizationTypedRule {
-            attribute id = "CR-ONT-012";
-            attribute appliesTo = "Realizes";
-            attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "Realization relations must resolve both ends to model elements, not name strings.";
-            attribute predicateExpression = "realizing->size() = 1 and realized->size() = 1";
-            constraint { true }
-        }
-    
-        constraint def patientContactCharacterizedRule {
+        constraint def PatientContactCharacterizedRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-032";
+            attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "PhysicalComponent";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Patient-contact components must identify contact nature and duration (ISO 10993-1).";
-            attribute predicateExpression = "patientContact = false or (contactNature != '' and contactDuration != '')";
+            attribute predicateExpression = "patientContact == false or (contactNature != '' and contactDuration != '')";
             constraint { true }
         }
     
         // ─── Assurance coverage ──────────────────────────────────────────────
     
-        constraint def safetyCriticalFunctionVerifiedRule {
+        constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-040";
+            attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "SystemFunction";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Safety-critical functions (criticality high or catastrophic) must trace to at least one verification case.";
-            attribute predicateExpression = "criticality < CriticalityKind::high or verifiedBy->size() >= 1";
+            attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or verifiedBy->size() >= 1";
             constraint { true }
         }
-        constraint def criticalTaskValidatedRule {
+        constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-041";
+            attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "UserTask[criticality=high]";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Critical tasks (criticality high or catastrophic) must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
-            attribute predicateExpression = "criticality < CriticalityKind::high or validates->size() >= 1";
+            attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or validates->size() >= 1";
             constraint { true }
         }
-        constraint def useErrorTracesToHazardRule {
+        constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-042";
+            attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "UseError";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Safety-relevant use errors (severity serious or worse) must trace to a hazard.";
-            attribute predicateExpression = "severity < SeverityKind::serious or causes->size() >= 1";
+            attribute predicateExpression = "not(severity == 'serious' or severity == 'critical' or severity == 'catastrophic') or causes->size() >= 1 or tracesRisk->size() >= 1";
             constraint { true }
         }
-        constraint def alternateScenarioHasBaseRule {
+        constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-043";
+            attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "MemoScenario";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Alternate, exception, and recovery scenarios must identify their base scenario or variation point — never duplicate the workflow.";
-            attribute predicateExpression = "variantKind = ScenarioVariantKind::nominal or baseScenario->size() = 1 or variationPoint != ''";
-            constraint { true }
-        }
-        constraint def singleAxisOwnershipRule {
-            attribute id = "CR-ONT-045";
-            attribute appliesTo = "MemoPart";
-            attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "Every element is owned by exactly one axis, encoded by its owning package: a horizontal architecture layer (memo_architecture_*) XOR a vertical assurance discipline (memo_assurance_*) — never both. Cross-axis participation is expressed by typed relationships, not by dual membership.";
-            attribute predicateExpression = "owningPackage.startsWith('memo_architecture_') xor owningPackage.startsWith('memo_assurance_')";
+            attribute predicateExpression = "not(variantKind == 'alternate' or variantKind == 'exception' or variantKind == 'recovery') or baseScenario->size() == 1 or variationPoint != ''";
             constraint { true }
         }
     }

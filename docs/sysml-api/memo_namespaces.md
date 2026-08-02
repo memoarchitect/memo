@@ -6,7 +6,7 @@
 | | |
 | --- | --- |
 | Public namespace | `memo` |
-| Declared package | `memo`, `memo_namespace_activities`, `memo_namespace_assurance`, `requirements`, `safety_risk`, `memo_namespace_assurance_human_factors`, `memo_namespace_context`, `memo_namespace_context_actors`, `memo_namespace_context_stakeholders`, `memo_namespace_context_use_context`, `memo_namespace_assurance_requirements_needs`, `memo_namespace_scenarios`, `memo_namespace_use_cases`, `memo_namespace_workflows`, `memo_namespace_architecture_deployment`, `memo_namespace_architecture_software_runtime`, `memo_namespace_architecture_ui`, `memo_namespace_architecture_hardware_common`, `memo_namespace_architecture_hardware_electrical`, `memo_namespace_architecture_hardware_mechanical`, `memo_namespace_architecture_hardware_fluidic`, `memo_namespace_architecture_hardware_optical`, `memo_namespace_architecture_hardware_sensing`, `memo_assurance_safety_compatibility`, `memo_namespace_architecture`, `operational`, `functional`, `logical`, `implementation`, `software`, `hardware`, `realization`, `memo_namespace_artifacts`, `memo_namespace_compliance`, `memo_namespace_core`, `memo_namespace_methodology`, `memo_namespace_rules`, `memo_namespace_viewpoints`, `memo_namespace_assurance_safety_risk_analysis`, `memo_namespace_assurance_verification_validation`, `memo_namespace_architecture_behavior`, `memo_namespace_architecture_constraints`, `memo_namespace_assurance_cybersecurity`, `memo_namespace_architecture_decisions`, `memo_namespace_architecture_functions`, `memo_namespace_architecture_hardware_structure`, `memo_namespace_architecture_interfaces`, `memo_namespace_architecture_logical_structure`, `memo_namespace_architecture_operational`, `memo_namespace_architecture_physical`, `memo_namespace_architecture_software_structure`, `memo_namespace_artifacts_definitions`, `memo_namespace_compliance_artifacts`, `memo_namespace_compliance_change`, `memo_namespace_compliance_document_views`, `memo_namespace_compliance_iso14971`, `memo_namespace_compliance_postmarket`, `memo_namespace_core_common`, `memo_namespace_core_consistency_rules`, `memo_namespace_core_dimensions`, `memo_namespace_core_enumerations`, `memo_namespace_core_methodology_scope`, `memo_namespace_core_relationships`, `memo_namespace_core_semantics`, `memo_namespace_core_terminology`, `memo_namespace_core_stdlib`, `memo_namespace_methodology_archetypes`, `memo_namespace_methodology_core`, `memo_namespace_methodology_gates`, `memo_namespace_methodology_patterns`, `memo_namespace_methodology_profiles`, `memo_namespace_methodology_rules`, `memo_namespace_methodology_viewpoints`, `memo_namespace_methodology_workflow`, `memo_namespace_rules_closure`, `memo_namespace_rules_coverage`, `memo_namespace_rules_crosslayer`, `memo_namespace_rules_lifecycle`, `memo_namespace_rules_ontology`, `memo_namespace_rules_quantitative`, `memo_namespace_viewpoints_catalog`, `memo_namespace_viewpoints_clinical`, `memo_namespace_viewpoints_context`, `memo_namespace_viewpoints_cybersecurity`, `memo_namespace_viewpoints_definitions`, `memo_namespace_viewpoints_functional`, `memo_namespace_viewpoints_logical`, `memo_namespace_viewpoints_operational`, `memo_namespace_viewpoints_physical`, `memo_namespace_viewpoints_requirements`, `memo_namespace_viewpoints_risk`, `memo_namespace_viewpoints_software`, `memo_namespace_viewpoints_usability`, `memo_namespace_viewpoints_verification`, `memo_namespace_core_stdlib_collections`, `memo_namespace_core_stdlib_functions`, `memo_namespace_core_stdlib_scalars`, `memo_namespace_core_stdlib_time`, `memo_namespace_viewpoints_clinical_clinical_evidence_view`, `memo_namespace_viewpoints_context_system_context_view`, `memo_namespace_viewpoints_cybersecurity_cybersecurity_assessment_view`, `memo_namespace_viewpoints_cybersecurity_threat_model_view`, `memo_namespace_viewpoints_functional_function_allocation_view`, `memo_namespace_viewpoints_functional_system_functional_tree_view`, `memo_namespace_viewpoints_logical_logical_architecture_view`, `memo_namespace_viewpoints_operational_use_case_view`, `memo_namespace_viewpoints_physical_network_topology_view`, `memo_namespace_viewpoints_physical_physical_bom_view`, `memo_namespace_viewpoints_requirements_requirements_traceability_view`, `memo_namespace_viewpoints_risk_risk_chain_view`, `memo_namespace_viewpoints_software_software_architecture_view`, `memo_namespace_viewpoints_usability_usability_engineering_view`, `memo_namespace_viewpoints_verification_verification_coverage_view` |
+| Declared package | `memo`, `memo_namespace_activities`, `memo_namespace_assurance`, `requirements`, `safety_risk`, `memo_namespace_assurance_human_factors`, `memo_namespace_context`, `memo_namespace_context_actors`, `memo_namespace_context_stakeholders`, `memo_namespace_context_use_context`, `memo_namespace_assurance_requirements_needs`, `memo_namespace_scenarios`, `memo_namespace_use_cases`, `memo_namespace_workflows`, `memo_namespace_architecture_deployment`, `memo_namespace_architecture_software_runtime`, `memo_namespace_architecture_ui`, `memo_namespace_architecture_hardware_common`, `memo_namespace_architecture_hardware_electrical`, `memo_namespace_architecture_hardware_mechanical`, `memo_namespace_architecture_hardware_fluidic`, `memo_namespace_architecture_hardware_optical`, `memo_namespace_architecture_hardware_sensing`, `memo_assurance_safety_compatibility`, `memo_namespace_architecture`, `operational`, `functional`, `logical`, `implementation`, `software`, `hardware`, `realization`, `memo_namespace_artifacts`, `memo_namespace_core`, `memo_namespace_methodology`, `memo_namespace_rules`, `memo_namespace_viewpoints`, `memo_namespace_assurance_safety_risk_analysis`, `memo_namespace_assurance_verification_validation`, `memo_namespace_architecture_behavior`, `memo_namespace_architecture_constraints`, `memo_namespace_assurance_cybersecurity`, `memo_namespace_architecture_decisions`, `memo_namespace_architecture_functions`, `memo_namespace_architecture_hardware_structure`, `memo_namespace_architecture_interfaces`, `memo_namespace_architecture_logical_structure`, `memo_namespace_architecture_operational`, `memo_namespace_architecture_physical`, `memo_namespace_architecture_software_structure`, `memo_namespace_artifacts_definitions`, `memo_namespace_artifacts_core`, `memo_namespace_artifacts_configuration_management`, `memo_namespace_artifacts_documents`, `memo_namespace_artifacts_documents_risk_management`, `memo_namespace_assurance_verification_validation_clinical_evaluation`, `memo_namespace_assurance_safety_risk_postmarket_surveillance`, `memo_namespace_core_annotations`, `memo_namespace_core_common`, `memo_namespace_core_consistency_rules`, `memo_namespace_core_dimensions`, `memo_namespace_core_enumerations`, `memo_namespace_core_methodology_scope`, `memo_namespace_core_relationships`, `memo_namespace_core_semantics`, `memo_namespace_core_terminology`, `memo_namespace_core_stdlib`, `memo_namespace_methodology_archetypes`, `memo_namespace_methodology_core`, `memo_namespace_methodology_gates`, `memo_namespace_methodology_patterns`, `memo_namespace_methodology_profiles`, `memo_namespace_methodology_rules`, `memo_namespace_methodology_viewpoints`, `memo_namespace_methodology_workflow`, `memo_namespace_rules_closure`, `memo_namespace_rules_coverage`, `memo_namespace_rules_crosslayer`, `memo_namespace_rules_lifecycle`, `memo_namespace_rules_ontology`, `memo_namespace_rules_quantitative`, `memo_namespace_viewpoints_catalog`, `memo_namespace_viewpoints_clinical`, `views`, `memo_namespace_viewpoints_context`, `views`, `memo_namespace_viewpoints_cybersecurity`, `views`, `memo_namespace_viewpoints_definitions`, `memo_namespace_viewpoints_functional`, `views`, `memo_namespace_viewpoints_logical`, `views`, `memo_namespace_viewpoints_operational`, `views`, `memo_namespace_viewpoints_physical`, `views`, `memo_namespace_viewpoints_requirements`, `views`, `memo_namespace_viewpoints_risk`, `views`, `memo_namespace_viewpoints_software`, `views`, `memo_namespace_viewpoints_usability`, `views`, `memo_namespace_viewpoints_ui_layout`, `views`, `memo_namespace_viewpoints_verification`, `views`, `memo_namespace_core_stdlib_collections`, `memo_namespace_core_stdlib_functions`, `memo_namespace_core_stdlib_scalars`, `memo_namespace_core_stdlib_time`, `memo_namespace_viewpoints_clinical_clinical_evidence_view`, `memo_namespace_viewpoints_context_system_context_view`, `memo_namespace_viewpoints_cybersecurity_cybersecurity_assessment_view`, `memo_namespace_viewpoints_cybersecurity_threat_model_view`, `memo_namespace_viewpoints_functional_function_allocation_view`, `memo_namespace_viewpoints_functional_system_functional_tree_view`, `memo_namespace_viewpoints_logical_logical_architecture_view`, `memo_namespace_viewpoints_operational_use_case_view`, `memo_namespace_viewpoints_physical_network_topology_view`, `memo_namespace_viewpoints_physical_physical_bom_view`, `memo_namespace_viewpoints_requirements_requirements_traceability_view`, `memo_namespace_viewpoints_risk_risk_chain_view`, `memo_namespace_viewpoints_software_software_architecture_view`, `memo_namespace_viewpoints_usability_usability_engineering_view`, `memo_namespace_viewpoints_ui_layout_ui_layout_viewpoint`, `memo_namespace_viewpoints_ui_layout_screen_layout_view`, `memo_namespace_viewpoints_verification_verification_coverage_view` |
 | Source | [`src/memo_namespaces.sysml`](https://github.com/memoarchitect/memo/blob/main/src/memo_namespaces.sysml) |
 
 ## Namespace hierarchy
@@ -50,7 +50,6 @@
 | `hardware` |
 | `realization` |
 | `memo_namespace_artifacts` |
-| `memo_namespace_compliance` |
 | `memo_namespace_core` |
 | `memo_namespace_methodology` |
 | `memo_namespace_rules` |
@@ -69,11 +68,13 @@
 | `memo_namespace_architecture_physical` |
 | `memo_namespace_architecture_software_structure` |
 | `memo_namespace_artifacts_definitions` |
-| `memo_namespace_compliance_artifacts` |
-| `memo_namespace_compliance_change` |
-| `memo_namespace_compliance_document_views` |
-| `memo_namespace_compliance_iso14971` |
-| `memo_namespace_compliance_postmarket` |
+| `memo_namespace_artifacts_core` |
+| `memo_namespace_artifacts_configuration_management` |
+| `memo_namespace_artifacts_documents` |
+| `memo_namespace_artifacts_documents_risk_management` |
+| `memo_namespace_assurance_verification_validation_clinical_evaluation` |
+| `memo_namespace_assurance_safety_risk_postmarket_surveillance` |
+| `memo_namespace_core_annotations` |
 | `memo_namespace_core_common` |
 | `memo_namespace_core_consistency_rules` |
 | `memo_namespace_core_dimensions` |
@@ -99,18 +100,32 @@
 | `memo_namespace_rules_quantitative` |
 | `memo_namespace_viewpoints_catalog` |
 | `memo_namespace_viewpoints_clinical` |
+| `views` |
 | `memo_namespace_viewpoints_context` |
+| `views` |
 | `memo_namespace_viewpoints_cybersecurity` |
+| `views` |
 | `memo_namespace_viewpoints_definitions` |
 | `memo_namespace_viewpoints_functional` |
+| `views` |
 | `memo_namespace_viewpoints_logical` |
+| `views` |
 | `memo_namespace_viewpoints_operational` |
+| `views` |
 | `memo_namespace_viewpoints_physical` |
+| `views` |
 | `memo_namespace_viewpoints_requirements` |
+| `views` |
 | `memo_namespace_viewpoints_risk` |
+| `views` |
 | `memo_namespace_viewpoints_software` |
+| `views` |
 | `memo_namespace_viewpoints_usability` |
+| `views` |
+| `memo_namespace_viewpoints_ui_layout` |
+| `views` |
 | `memo_namespace_viewpoints_verification` |
+| `views` |
 | `memo_namespace_core_stdlib_collections` |
 | `memo_namespace_core_stdlib_functions` |
 | `memo_namespace_core_stdlib_scalars` |
@@ -129,6 +144,8 @@
 | `memo_namespace_viewpoints_risk_risk_chain_view` |
 | `memo_namespace_viewpoints_software_software_architecture_view` |
 | `memo_namespace_viewpoints_usability_usability_engineering_view` |
+| `memo_namespace_viewpoints_ui_layout_ui_layout_viewpoint` |
+| `memo_namespace_viewpoints_ui_layout_screen_layout_view` |
 | `memo_namespace_viewpoints_verification_verification_coverage_view` |
 
 ## Imports
@@ -141,6 +158,7 @@
 | public | `memo_core_terminology::*` |
 | public | `memo_core_common::*` |
 | public | `memo_core_relationships::*` |
+| public | `memo_core_annotations::*` |
 | public | `memo_architecture_operational_context_actors::*` |
 | public | `memo_architecture_operational_context_stakeholders::*` |
 | public | `memo_architecture_operational_context_use_context::*` |
@@ -165,42 +183,46 @@
 | public | `memo_assurance_safety_risk::*` |
 | public | `memo_assurance_cybersecurity::*` |
 | public | `memo_assurance_verification_validation::*` |
+| public | `memo_assurance_verification_validation_clinical_evaluation::*` |
 | public | `memo_architecture_realization_physical::*` |
 | public | `memo_assurance_safety_risk_analysis::*` |
+| public | `memo_assurance_safety_risk_postmarket_surveillance::*` |
 | public | `memo_architecture_decisions::*` |
 | public | `memo_viewpoints_definitions::*` |
 | public | `memo_viewpoints_catalog::*` |
 | public | `memo_viewpoints_context_context_viewpoint::*` |
-| public | `memo_viewpoints_context_system_context_view::*` |
+| public | `memo_viewpoints_context_views_system_context_view::*` |
 | public | `memo_viewpoints_operational_operational_viewpoint::*` |
-| public | `memo_viewpoints_operational_use_case_view::*` |
+| public | `memo_viewpoints_operational_views_use_case_view::*` |
 | public | `memo_viewpoints_requirements_requirements_viewpoint::*` |
-| public | `memo_viewpoints_requirements_requirements_traceability_view::*` |
+| public | `memo_viewpoints_requirements_views_requirements_traceability_view::*` |
 | public | `memo_viewpoints_functional_functional_viewpoint::*` |
-| public | `memo_viewpoints_functional_system_functional_tree_view::*` |
-| public | `memo_viewpoints_functional_function_allocation_view::*` |
+| public | `memo_viewpoints_functional_views_system_functional_tree_view::*` |
+| public | `memo_viewpoints_functional_views_function_allocation_view::*` |
 | public | `memo_viewpoints_logical_logical_viewpoint::*` |
-| public | `memo_viewpoints_logical_logical_architecture_view::*` |
+| public | `memo_viewpoints_logical_views_logical_architecture_view::*` |
 | public | `memo_viewpoints_software_software_viewpoint::*` |
-| public | `memo_viewpoints_software_software_architecture_view::*` |
+| public | `memo_viewpoints_software_views_software_architecture_view::*` |
 | public | `memo_viewpoints_physical_physical_viewpoint::*` |
-| public | `memo_viewpoints_physical_physical_bom_view::*` |
-| public | `memo_viewpoints_physical_network_topology_view::*` |
+| public | `memo_viewpoints_physical_views_physical_bom_view::*` |
+| public | `memo_viewpoints_physical_views_network_topology_view::*` |
 | public | `memo_viewpoints_risk_risk_viewpoint::*` |
-| public | `memo_viewpoints_risk_risk_chain_view::*` |
+| public | `memo_viewpoints_risk_views_risk_chain_view::*` |
 | public | `memo_viewpoints_verification_verification_viewpoint::*` |
-| public | `memo_viewpoints_verification_verification_coverage_view::*` |
+| public | `memo_viewpoints_verification_views_verification_coverage_view::*` |
 | public | `memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*` |
-| public | `memo_viewpoints_cybersecurity_threat_model_view::*` |
-| public | `memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*` |
+| public | `memo_viewpoints_cybersecurity_views_threat_model_view::*` |
+| public | `memo_viewpoints_cybersecurity_views_cybersecurity_assessment_view::*` |
 | public | `memo_viewpoints_clinical_clinical_viewpoint::*` |
-| public | `memo_viewpoints_clinical_clinical_evidence_view::*` |
+| public | `memo_viewpoints_clinical_views_clinical_evidence_view::*` |
 | public | `memo_viewpoints_usability_usability_viewpoint::*` |
-| public | `memo_viewpoints_usability_usability_engineering_view::*` |
+| public | `memo_viewpoints_usability_views_usability_engineering_view::*` |
+| public | `memo_viewpoints_ui_layout_ui_layout_viewpoint::*` |
+| public | `memo_viewpoints_ui_layout_views_screen_layout_view::*` |
 | public | `memo_artifacts_definitions::*` |
-| public | `memo_compliance_artifacts::*` |
-| public | `memo_compliance_change::*` |
-| public | `memo_compliance_postmarket::*` |
+| public | `memo_artifacts_core::*` |
+| public | `memo_artifacts_configuration_management::*` |
+| public | `memo_artifacts_documents_risk_management::*` |
 | public | `memo_methodology_core::*` |
 | public | `memo_methodology_rules::*` |
 | public | `memo_methodology_patterns::*` |
@@ -243,11 +265,12 @@
 | public | `memo_architecture_realization_physical::*` |
 | public | `memo_architecture_implementation_software_structure::*` |
 | public | `memo_artifacts_definitions::*` |
-| public | `memo_compliance_artifacts::*` |
-| public | `memo_compliance_change::*` |
-| public | `memo_compliance_document_views::*` |
-| public | `memo_compliance_iso14971::*` |
-| public | `memo_compliance_postmarket::*` |
+| public | `memo_artifacts_core::*` |
+| public | `memo_artifacts_configuration_management::*` |
+| public | `memo_artifacts_documents_risk_management::*` |
+| public | `memo_assurance_verification_validation_clinical_evaluation::*` |
+| public | `memo_assurance_safety_risk_postmarket_surveillance::*` |
+| public | `memo_core_annotations::*` |
 | public | `memo_core_common::*` |
 | public | `memo_core_consistency_rules::*` |
 | public | `memo_core_dimensions::*` |
@@ -283,26 +306,29 @@
 | public | `memo_viewpoints_risk_risk_viewpoint::*` |
 | public | `memo_viewpoints_software_software_viewpoint::*` |
 | public | `memo_viewpoints_usability_usability_viewpoint::*` |
+| public | `memo_viewpoints_ui_layout_ui_layout_viewpoint::*` |
 | public | `memo_viewpoints_verification_verification_viewpoint::*` |
 | public | `memo_core_stdlib_collections::*` |
 | public | `memo_core_stdlib_functions::*` |
 | public | `memo_core_stdlib_scalars::*` |
 | public | `memo_core_stdlib_time::*` |
-| public | `memo_viewpoints_clinical_clinical_evidence_view::*` |
-| public | `memo_viewpoints_context_system_context_view::*` |
-| public | `memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*` |
-| public | `memo_viewpoints_cybersecurity_threat_model_view::*` |
-| public | `memo_viewpoints_functional_function_allocation_view::*` |
-| public | `memo_viewpoints_functional_system_functional_tree_view::*` |
-| public | `memo_viewpoints_logical_logical_architecture_view::*` |
-| public | `memo_viewpoints_operational_use_case_view::*` |
-| public | `memo_viewpoints_physical_network_topology_view::*` |
-| public | `memo_viewpoints_physical_physical_bom_view::*` |
-| public | `memo_viewpoints_requirements_requirements_traceability_view::*` |
-| public | `memo_viewpoints_risk_risk_chain_view::*` |
-| public | `memo_viewpoints_software_software_architecture_view::*` |
-| public | `memo_viewpoints_usability_usability_engineering_view::*` |
-| public | `memo_viewpoints_verification_verification_coverage_view::*` |
+| public | `memo_viewpoints_clinical_views_clinical_evidence_view::*` |
+| public | `memo_viewpoints_context_views_system_context_view::*` |
+| public | `memo_viewpoints_cybersecurity_views_cybersecurity_assessment_view::*` |
+| public | `memo_viewpoints_cybersecurity_views_threat_model_view::*` |
+| public | `memo_viewpoints_functional_views_function_allocation_view::*` |
+| public | `memo_viewpoints_functional_views_system_functional_tree_view::*` |
+| public | `memo_viewpoints_logical_views_logical_architecture_view::*` |
+| public | `memo_viewpoints_operational_views_use_case_view::*` |
+| public | `memo_viewpoints_physical_views_network_topology_view::*` |
+| public | `memo_viewpoints_physical_views_physical_bom_view::*` |
+| public | `memo_viewpoints_requirements_views_requirements_traceability_view::*` |
+| public | `memo_viewpoints_risk_views_risk_chain_view::*` |
+| public | `memo_viewpoints_software_views_software_architecture_view::*` |
+| public | `memo_viewpoints_usability_views_usability_engineering_view::*` |
+| public | `memo_viewpoints_ui_layout_ui_layout_viewpoint::*` |
+| public | `memo_viewpoints_ui_layout_views_screen_layout_view::*` |
+| public | `memo_viewpoints_verification_views_verification_coverage_view::*` |
 
 ## Declarations
 
@@ -324,6 +350,7 @@
         public import memo_core_terminology::*;
         public import memo_core_common::*;
         public import memo_core_relationships::*;
+        public import memo_core_annotations::*;
     
         public import memo_architecture_operational_context_actors::*;
         public import memo_architecture_operational_context_stakeholders::*;
@@ -349,44 +376,48 @@
         public import memo_assurance_safety_risk::*;
         public import memo_assurance_cybersecurity::*;
         public import memo_assurance_verification_validation::*;
+        public import memo_assurance_verification_validation_clinical_evaluation::*;
         public import memo_architecture_realization_physical::*;
         public import memo_assurance_safety_risk_analysis::*;
+        public import memo_assurance_safety_risk_postmarket_surveillance::*;
         public import memo_architecture_decisions::*;
     
         public import memo_viewpoints_definitions::*;
         public import memo_viewpoints_catalog::*;
         public import memo_viewpoints_context_context_viewpoint::*;
-        public import memo_viewpoints_context_system_context_view::*;
+        public import memo_viewpoints_context_views_system_context_view::*;
         public import memo_viewpoints_operational_operational_viewpoint::*;
-        public import memo_viewpoints_operational_use_case_view::*;
+        public import memo_viewpoints_operational_views_use_case_view::*;
         public import memo_viewpoints_requirements_requirements_viewpoint::*;
-        public import memo_viewpoints_requirements_requirements_traceability_view::*;
+        public import memo_viewpoints_requirements_views_requirements_traceability_view::*;
         public import memo_viewpoints_functional_functional_viewpoint::*;
-        public import memo_viewpoints_functional_system_functional_tree_view::*;
-        public import memo_viewpoints_functional_function_allocation_view::*;
+        public import memo_viewpoints_functional_views_system_functional_tree_view::*;
+        public import memo_viewpoints_functional_views_function_allocation_view::*;
         public import memo_viewpoints_logical_logical_viewpoint::*;
-        public import memo_viewpoints_logical_logical_architecture_view::*;
+        public import memo_viewpoints_logical_views_logical_architecture_view::*;
         public import memo_viewpoints_software_software_viewpoint::*;
-        public import memo_viewpoints_software_software_architecture_view::*;
+        public import memo_viewpoints_software_views_software_architecture_view::*;
         public import memo_viewpoints_physical_physical_viewpoint::*;
-        public import memo_viewpoints_physical_physical_bom_view::*;
-        public import memo_viewpoints_physical_network_topology_view::*;
+        public import memo_viewpoints_physical_views_physical_bom_view::*;
+        public import memo_viewpoints_physical_views_network_topology_view::*;
         public import memo_viewpoints_risk_risk_viewpoint::*;
-        public import memo_viewpoints_risk_risk_chain_view::*;
+        public import memo_viewpoints_risk_views_risk_chain_view::*;
         public import memo_viewpoints_verification_verification_viewpoint::*;
-        public import memo_viewpoints_verification_verification_coverage_view::*;
+        public import memo_viewpoints_verification_views_verification_coverage_view::*;
         public import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-        public import memo_viewpoints_cybersecurity_threat_model_view::*;
-        public import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
+        public import memo_viewpoints_cybersecurity_views_threat_model_view::*;
+        public import memo_viewpoints_cybersecurity_views_cybersecurity_assessment_view::*;
         public import memo_viewpoints_clinical_clinical_viewpoint::*;
-        public import memo_viewpoints_clinical_clinical_evidence_view::*;
+        public import memo_viewpoints_clinical_views_clinical_evidence_view::*;
         public import memo_viewpoints_usability_usability_viewpoint::*;
-        public import memo_viewpoints_usability_usability_engineering_view::*;
+        public import memo_viewpoints_usability_views_usability_engineering_view::*;
+        public import memo_viewpoints_ui_layout_ui_layout_viewpoint::*;
+        public import memo_viewpoints_ui_layout_views_screen_layout_view::*;
     
         public import memo_artifacts_definitions::*;
-        public import memo_compliance_artifacts::*;
-        public import memo_compliance_change::*;
-        public import memo_compliance_postmarket::*;
+        public import memo_artifacts_core::*;
+        public import memo_artifacts_configuration_management::*;
+        public import memo_artifacts_documents_risk_management::*;
     
         public import memo_methodology_core::*;
         public import memo_methodology_rules::*;
@@ -398,7 +429,6 @@
         alias architecture for memo_namespace_architecture;
         alias assurance for memo_namespace_assurance;
         alias artifacts for memo_namespace_artifacts;
-        alias compliance for memo_namespace_compliance;
         alias core for memo_namespace_core;
         alias methodology for memo_namespace_methodology;
         alias rules for memo_namespace_rules;
@@ -420,7 +450,8 @@
         package safety_risk {
             public import memo_assurance_safety_risk::*;
             public import memo_assurance_safety_risk_arch_risk::*;
-            alias analysis for memo_namespace_assurance_safety_risk_analysis;
+            alias 'analysis' for memo_namespace_assurance_safety_risk_analysis;
+            alias postmarket_surveillance for memo_namespace_assurance_safety_risk_postmarket_surveillance;
         }
         alias cybersecurity for memo_namespace_assurance_cybersecurity;
         alias human_factors for memo_namespace_assurance_human_factors;
@@ -553,17 +584,13 @@
     
     package memo_namespace_artifacts {
         alias definitions for memo_namespace_artifacts_definitions;
-    }
-    
-    package memo_namespace_compliance {
-        alias artifacts for memo_namespace_compliance_artifacts;
-        alias change for memo_namespace_compliance_change;
-        alias document_views for memo_namespace_compliance_document_views;
-        alias iso14971 for memo_namespace_compliance_iso14971;
-        alias postmarket for memo_namespace_compliance_postmarket;
+        alias core for memo_namespace_artifacts_core;
+        alias configuration_management for memo_namespace_artifacts_configuration_management;
+        alias documents for memo_namespace_artifacts_documents;
     }
     
     package memo_namespace_core {
+        alias annotations for memo_namespace_core_annotations;
         alias common for memo_namespace_core_common;
         alias consistency_rules for memo_namespace_core_consistency_rules;
         alias dimensions for memo_namespace_core_dimensions;
@@ -608,8 +635,9 @@
         alias requirements for memo_namespace_viewpoints_requirements;
         alias risk for memo_namespace_viewpoints_risk;
         alias software for memo_namespace_viewpoints_software;
+        alias ui_layout for memo_namespace_viewpoints_ui_layout;
         alias usability for memo_namespace_viewpoints_usability;
-        alias verification for memo_namespace_viewpoints_verification;
+        alias 'verification' for memo_namespace_viewpoints_verification;
     }
     
     package memo_namespace_assurance_safety_risk_analysis {
@@ -618,6 +646,7 @@
     
     package memo_namespace_assurance_verification_validation {
         public import memo_assurance_verification_validation::*;
+        alias clinical_evaluation for memo_namespace_assurance_verification_validation_clinical_evaluation;
     }
     
     package memo_namespace_architecture_behavior {
@@ -668,24 +697,32 @@
         public import memo_artifacts_definitions::*;
     }
     
-    package memo_namespace_compliance_artifacts {
-        public import memo_compliance_artifacts::*;
+    package memo_namespace_artifacts_core {
+        public import memo_artifacts_core::*;
     }
     
-    package memo_namespace_compliance_change {
-        public import memo_compliance_change::*;
+    package memo_namespace_artifacts_configuration_management {
+        public import memo_artifacts_configuration_management::*;
     }
     
-    package memo_namespace_compliance_document_views {
-        public import memo_compliance_document_views::*;
+    package memo_namespace_artifacts_documents {
+        alias risk_management for memo_namespace_artifacts_documents_risk_management;
     }
     
-    package memo_namespace_compliance_iso14971 {
-        public import memo_compliance_iso14971::*;
+    package memo_namespace_artifacts_documents_risk_management {
+        public import memo_artifacts_documents_risk_management::*;
     }
     
-    package memo_namespace_compliance_postmarket {
-        public import memo_compliance_postmarket::*;
+    package memo_namespace_assurance_verification_validation_clinical_evaluation {
+        public import memo_assurance_verification_validation_clinical_evaluation::*;
+    }
+    
+    package memo_namespace_assurance_safety_risk_postmarket_surveillance {
+        public import memo_assurance_safety_risk_postmarket_surveillance::*;
+    }
+    
+    package memo_namespace_core_annotations {
+        public import memo_core_annotations::*;
     }
     
     package memo_namespace_core_common {
@@ -788,19 +825,21 @@
     }
     
     package memo_namespace_viewpoints_clinical {
-        alias clinical_evidence_view for memo_namespace_viewpoints_clinical_clinical_evidence_view;
         public import memo_viewpoints_clinical_clinical_viewpoint::*;
+        package views { alias clinical_evidence_view for memo_namespace_viewpoints_clinical_clinical_evidence_view; }
     }
     
     package memo_namespace_viewpoints_context {
-        alias system_context_view for memo_namespace_viewpoints_context_system_context_view;
         public import memo_viewpoints_context_context_viewpoint::*;
+        package views { alias system_context_view for memo_namespace_viewpoints_context_system_context_view; }
     }
     
     package memo_namespace_viewpoints_cybersecurity {
-        alias cybersecurity_assessment_view for memo_namespace_viewpoints_cybersecurity_cybersecurity_assessment_view;
-        alias threat_model_view for memo_namespace_viewpoints_cybersecurity_threat_model_view;
         public import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
+        package views {
+            alias cybersecurity_assessment_view for memo_namespace_viewpoints_cybersecurity_cybersecurity_assessment_view;
+            alias threat_model_view for memo_namespace_viewpoints_cybersecurity_threat_model_view;
+        }
     }
     
     package memo_namespace_viewpoints_definitions {
@@ -808,50 +847,59 @@
     }
     
     package memo_namespace_viewpoints_functional {
-        alias function_allocation_view for memo_namespace_viewpoints_functional_function_allocation_view;
-        alias system_functional_tree_view for memo_namespace_viewpoints_functional_system_functional_tree_view;
         public import memo_viewpoints_functional_functional_viewpoint::*;
+        package views {
+            alias function_allocation_view for memo_namespace_viewpoints_functional_function_allocation_view;
+            alias system_functional_tree_view for memo_namespace_viewpoints_functional_system_functional_tree_view;
+        }
     }
     
     package memo_namespace_viewpoints_logical {
-        alias logical_architecture_view for memo_namespace_viewpoints_logical_logical_architecture_view;
         public import memo_viewpoints_logical_logical_viewpoint::*;
+        package views { alias logical_architecture_view for memo_namespace_viewpoints_logical_logical_architecture_view; }
     }
     
     package memo_namespace_viewpoints_operational {
-        alias use_case_view for memo_namespace_viewpoints_operational_use_case_view;
         public import memo_viewpoints_operational_operational_viewpoint::*;
+        package views { alias use_case_view for memo_namespace_viewpoints_operational_use_case_view; }
     }
     
     package memo_namespace_viewpoints_physical {
-        alias network_topology_view for memo_namespace_viewpoints_physical_network_topology_view;
-        alias physical_bom_view for memo_namespace_viewpoints_physical_physical_bom_view;
         public import memo_viewpoints_physical_physical_viewpoint::*;
+        package views {
+            alias network_topology_view for memo_namespace_viewpoints_physical_network_topology_view;
+            alias physical_bom_view for memo_namespace_viewpoints_physical_physical_bom_view;
+        }
     }
     
     package memo_namespace_viewpoints_requirements {
-        alias requirements_traceability_view for memo_namespace_viewpoints_requirements_requirements_traceability_view;
         public import memo_viewpoints_requirements_requirements_viewpoint::*;
+        package views { alias requirements_traceability_view for memo_namespace_viewpoints_requirements_requirements_traceability_view; }
     }
     
     package memo_namespace_viewpoints_risk {
-        alias risk_chain_view for memo_namespace_viewpoints_risk_risk_chain_view;
         public import memo_viewpoints_risk_risk_viewpoint::*;
+        package views { alias risk_chain_view for memo_namespace_viewpoints_risk_risk_chain_view; }
     }
     
     package memo_namespace_viewpoints_software {
-        alias software_architecture_view for memo_namespace_viewpoints_software_software_architecture_view;
         public import memo_viewpoints_software_software_viewpoint::*;
+        package views { alias software_architecture_view for memo_namespace_viewpoints_software_software_architecture_view; }
     }
     
     package memo_namespace_viewpoints_usability {
-        alias usability_engineering_view for memo_namespace_viewpoints_usability_usability_engineering_view;
         public import memo_viewpoints_usability_usability_viewpoint::*;
+        package views { alias usability_engineering_view for memo_namespace_viewpoints_usability_usability_engineering_view; }
+    }
+    
+    package memo_namespace_viewpoints_ui_layout {
+        public import memo_viewpoints_ui_layout_ui_layout_viewpoint::*;
+        package views { alias screen_layout_view for memo_namespace_viewpoints_ui_layout_screen_layout_view; }
     }
     
     package memo_namespace_viewpoints_verification {
-        alias verification_coverage_view for memo_namespace_viewpoints_verification_verification_coverage_view;
         public import memo_viewpoints_verification_verification_viewpoint::*;
+        package views { alias verification_coverage_view for memo_namespace_viewpoints_verification_verification_coverage_view; }
     }
     
     package memo_namespace_core_stdlib_collections {
@@ -871,63 +919,71 @@
     }
     
     package memo_namespace_viewpoints_clinical_clinical_evidence_view {
-        public import memo_viewpoints_clinical_clinical_evidence_view::*;
+        public import memo_viewpoints_clinical_views_clinical_evidence_view::*;
     }
     
     package memo_namespace_viewpoints_context_system_context_view {
-        public import memo_viewpoints_context_system_context_view::*;
+        public import memo_viewpoints_context_views_system_context_view::*;
     }
     
     package memo_namespace_viewpoints_cybersecurity_cybersecurity_assessment_view {
-        public import memo_viewpoints_cybersecurity_cybersecurity_assessment_view::*;
+        public import memo_viewpoints_cybersecurity_views_cybersecurity_assessment_view::*;
     }
     
     package memo_namespace_viewpoints_cybersecurity_threat_model_view {
-        public import memo_viewpoints_cybersecurity_threat_model_view::*;
+        public import memo_viewpoints_cybersecurity_views_threat_model_view::*;
     }
     
     package memo_namespace_viewpoints_functional_function_allocation_view {
-        public import memo_viewpoints_functional_function_allocation_view::*;
+        public import memo_viewpoints_functional_views_function_allocation_view::*;
     }
     
     package memo_namespace_viewpoints_functional_system_functional_tree_view {
-        public import memo_viewpoints_functional_system_functional_tree_view::*;
+        public import memo_viewpoints_functional_views_system_functional_tree_view::*;
     }
     
     package memo_namespace_viewpoints_logical_logical_architecture_view {
-        public import memo_viewpoints_logical_logical_architecture_view::*;
+        public import memo_viewpoints_logical_views_logical_architecture_view::*;
     }
     
     package memo_namespace_viewpoints_operational_use_case_view {
-        public import memo_viewpoints_operational_use_case_view::*;
+        public import memo_viewpoints_operational_views_use_case_view::*;
     }
     
     package memo_namespace_viewpoints_physical_network_topology_view {
-        public import memo_viewpoints_physical_network_topology_view::*;
+        public import memo_viewpoints_physical_views_network_topology_view::*;
     }
     
     package memo_namespace_viewpoints_physical_physical_bom_view {
-        public import memo_viewpoints_physical_physical_bom_view::*;
+        public import memo_viewpoints_physical_views_physical_bom_view::*;
     }
     
     package memo_namespace_viewpoints_requirements_requirements_traceability_view {
-        public import memo_viewpoints_requirements_requirements_traceability_view::*;
+        public import memo_viewpoints_requirements_views_requirements_traceability_view::*;
     }
     
     package memo_namespace_viewpoints_risk_risk_chain_view {
-        public import memo_viewpoints_risk_risk_chain_view::*;
+        public import memo_viewpoints_risk_views_risk_chain_view::*;
     }
     
     package memo_namespace_viewpoints_software_software_architecture_view {
-        public import memo_viewpoints_software_software_architecture_view::*;
+        public import memo_viewpoints_software_views_software_architecture_view::*;
     }
     
     package memo_namespace_viewpoints_usability_usability_engineering_view {
-        public import memo_viewpoints_usability_usability_engineering_view::*;
+        public import memo_viewpoints_usability_views_usability_engineering_view::*;
+    }
+    
+    package memo_namespace_viewpoints_ui_layout_ui_layout_viewpoint {
+        public import memo_viewpoints_ui_layout_ui_layout_viewpoint::*;
+    }
+    
+    package memo_namespace_viewpoints_ui_layout_screen_layout_view {
+        public import memo_viewpoints_ui_layout_views_screen_layout_view::*;
     }
     
     package memo_namespace_viewpoints_verification_verification_coverage_view {
-        public import memo_viewpoints_verification_verification_coverage_view::*;
+        public import memo_viewpoints_verification_views_verification_coverage_view::*;
     }
     
     ```

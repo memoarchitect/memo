@@ -35,7 +35,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`UseError`](#useerror) | `part def` | Use error definition specializing `MemoPart`. | `MemoPart` |
-| [`HazardRelatedUseScenario`](#hazardrelatedusescenario) | `part def` | A use scenario whose performance could lead to a hazardous situation (IEC 62366-1 3.9); selected for summative evaluation. | `MemoScenario` |
+| [`HazardRelatedUseScenario`](#hazardrelatedusescenario) | `action def` | A use scenario whose performance could lead to a hazardous situation (IEC 62366-1 3.9); selected for summative evaluation. | `MemoScenario` |
 | [`FormativeEvaluation`](#formativeevaluation) | `part def` | Formative evaluation definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`UsabilityValidation`](#usabilityvalidation) | `part def` | Usability validation definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`CommitsUseError`](#commitsuseerror) | `connection def` | Typed relationship from `UserTask` to `UseError`. | `MemoRelationship` |
@@ -59,13 +59,13 @@ part def UseError specializes MemoPart
 ## HazardRelatedUseScenario
 
 ```sysml
-part def HazardRelatedUseScenario specializes MemoScenario
+action def HazardRelatedUseScenario specializes MemoScenario
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | A use scenario whose performance could lead to a hazardous situation (IEC 62366-1 3.9); selected for summative evaluation. |
-| Kind | `part def` |
+| Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoScenario` |
 | Owning package | `memo_assurance_human_factors` |
@@ -159,7 +159,7 @@ connection def EvaluatesTask :> MemoRelationship
     
         // A use scenario whose performance could lead to a hazardous situation
         // (IEC 62366-1 3.9); selected for summative evaluation.
-        part def HazardRelatedUseScenario specializes MemoScenario {
+        action def HazardRelatedUseScenario specializes MemoScenario {
             attribute hazardReference : String;
             attribute selectionRationale : String;
         }

@@ -35,7 +35,6 @@ package memo_core_common {
         // the long one, because a silently clipped sentence in a DHF table is
         // a defect, not a layout choice.
         attribute shortDescription : String;
-        attribute shortDescription : String;
         attribute description : String;
         // traceability
         attribute rationale : String;

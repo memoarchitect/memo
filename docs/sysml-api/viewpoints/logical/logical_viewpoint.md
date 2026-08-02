@@ -50,7 +50,7 @@
             attribute :>> name = "LogicalArchitectureViewpoint";
             attribute :>> title = "Logical Viewpoint";
             attribute :>> shortDescription = "Shows logical decomposition and interfaces.";
-            attribute :>> longDescription = "Default viewpoint derived from the logical architecture layer for subsystem structure, responsibilities, and major interactions, independent of physical realization.";
+            attribute :>> description = "Default viewpoint derived from the logical architecture layer for subsystem structure, responsibilities, and major interactions, independent of physical realization.";
             attribute :>> purpose = "Describe the system's logical decomposition.";
             attribute :>> audience = (AudienceKind::systemArchitect);
             attribute :>> stage = WorkflowStageKind::architecture;
