@@ -8,6 +8,7 @@ package memo_examples_gpca_pump_gpca_operational {
     private import memo_architecture_operational_workflows::*;
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_context::*;
+    private import memo_core_relationships::*;
 
     // ── Operational entities beyond the human actors ────────────
     part entityPharmacy : OperationalEntity {

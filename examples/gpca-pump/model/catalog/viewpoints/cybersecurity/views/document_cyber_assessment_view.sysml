@@ -12,7 +12,7 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_cyber_as
         attribute :>> name = "GPCAMemoCybersecurityAssessmentView";
         attribute :>> title = "GPCA Cybersecurity Assessment View";
         attribute :>> shortDescription = "Cybersecurity risk-assessment-oriented document view for GPCA.";
-        attribute :>> longDescription = "Captures GPCA cyber risks, mitigations, security requirements, verification, and safety/privacy traceability for cybersecurity assessment records.";
+        attribute :>> description = "Captures GPCA cyber risks, mitigations, security requirements, verification, and safety/privacy traceability for cybersecurity assessment records.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> marketScope = "generic";

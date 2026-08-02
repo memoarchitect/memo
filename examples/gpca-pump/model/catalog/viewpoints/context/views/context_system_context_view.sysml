@@ -20,7 +20,7 @@ package memo_examples_gpca_pump_viewpoints_context_views_context_system_context_
         attribute :>> name = "GPCA_SystemContextView";
         attribute :>> title = "GPCA System Context View";
         attribute :>> shortDescription = "Actors, use contexts, and external entities at the GPCA system boundary.";
-        attribute :>> longDescription = "Shows the CriSys Fig 2.1 boundary: patient, clinician, prescription, drug reservoir, needle, hospital pharmacy database, and hospital environment around the pump, with directional data flows, physical drug-path connections, and the intended use anchoring the boundary.";
+        attribute :>> description = "Shows the CriSys Fig 2.1 boundary: patient, clinician, prescription, drug reservoir, needle, hospital pharmacy database, and hospital environment around the pump, with directional data flows, physical drug-path connections, and the intended use anchoring the boundary.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> viewKind = DiagramViewKind::general;

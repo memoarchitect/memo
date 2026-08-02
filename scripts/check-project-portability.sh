@@ -55,8 +55,26 @@ else
   echo "  ✔ native entrypoint present"
 fi
 
+# ── Reusable roots the project imports ───────────────────────────────────────
+# The ontology `src/` is always in the closure. An extension is not: it ships as
+# its own package outside `src/`, so a project importing one resolves a root
+# this gate has to stage too. Only the extensions the project actually names are
+# added — staging all of them would make each project's check non-hermetic, and
+# an unused package's diagnostics would be attributed to the wrong project.
+REUSABLE_ROOTS=("$REPO_ROOT/src")
+imported_extensions="$(grep -rhoE 'import[[:space:]]+memo_extension_[A-Za-z0-9_]+' \
+  "$PROJECT_DIR" --include='*.sysml' 2>/dev/null | awk '{print $2}' | sort -u)"
+for pkg in $imported_extensions; do
+  for candidate in "$REPO_ROOT"/examples/extensions/*/src; do
+    [ -d "$candidate" ] || continue
+    if grep -rqE "^package[[:space:]]+${pkg}[[:space:]]*\{" "$candidate" --include='*.sysml' 2>/dev/null; then
+      case " ${REUSABLE_ROOTS[*]} " in *" $candidate "*) ;; *) REUSABLE_ROOTS+=("$candidate") ;; esac
+    fi
+  done
+done
+
 # ── 2. SysIDE ────────────────────────────────────────────────────────────────
-syside_out="$(syside check "$PROJECT_DIR" "$REPO_ROOT/src" 2>&1)"
+syside_out="$(syside check "$PROJECT_DIR" "${REUSABLE_ROOTS[@]}" 2>&1)"
 if [ -n "$syside_out" ]; then
   echo "  ✖ syside check reported:"
   echo "$syside_out" | sed 's/^/      /'
@@ -71,9 +89,11 @@ fi
 staging="$(mktemp -d)"
 mkdir -p "$staging/reusable" "$staging/project" "$staging/LICENSES"
 cp "$REPO_ROOT/LICENSES/MIT.txt" "$staging/LICENSES/MIT.txt"
-( cd "$REPO_ROOT/src" && find . -name '*.sysml' -print0 | while IFS= read -r -d '' f; do
-    mkdir -p "$staging/reusable/$(dirname "$f")"; cp "$f" "$staging/reusable/$f"
-  done )
+for root in "${REUSABLE_ROOTS[@]}"; do
+  ( cd "$root" && find . -name '*.sysml' -print0 | while IFS= read -r -d '' f; do
+      mkdir -p "$staging/reusable/$(dirname "$f")"; cp "$f" "$staging/reusable/$f"
+    done )
+done
 ( cd "$PROJECT_DIR" && find . -name '*.sysml' -not -path './node_modules/*' -not -path '*/.venv/*' -print0 \
   | while IFS= read -r -d '' f; do
       mkdir -p "$staging/project/$(dirname "$f")"; cp "$f" "$staging/project/$f"

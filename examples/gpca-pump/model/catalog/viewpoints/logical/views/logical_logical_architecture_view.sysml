@@ -20,7 +20,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_logical_archite
         attribute :>> name = "GPCA_LogicalArchitectureView";
         attribute :>> title = "GPCA Logical Architecture View";
         attribute :>> shortDescription = "Logical decomposition of the GPCA system.";
-        attribute :>> longDescription = "Product-specific logical architecture view that references the default logical architecture viewpoint and is intended for design description and architecture communication.";
+        attribute :>> description = "Product-specific logical architecture view that references the default logical architecture viewpoint and is intended for design description and architecture communication.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> viewKind = DiagramViewKind::general;

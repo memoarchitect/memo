@@ -11,7 +11,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_v
         attribute :>> name = "HazardAnalysisReportView";
         attribute :>> title = "GPCA Hazard Analysis Report View";
         attribute :>> shortDescription = "Hazard analysis report aligned to the UMN CriSys GPCA hazard tables.";
-        attribute :>> longDescription = "Aggregates the five hazard chains, the FMEA worksheet, and the overdose fault tree with their controls and verification pointers.";
+        attribute :>> description = "Aggregates the five hazard chains, the FMEA worksheet, and the overdose fault tree with their controls and verification pointers.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::RMF;

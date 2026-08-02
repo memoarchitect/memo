@@ -21,7 +21,7 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
         attribute :>> name = "GPCA_CybersecurityView";
         attribute :>> title = "GPCA Cybersecurity View";
         attribute :>> shortDescription = "Shows GPCA assets, trust boundaries, threats, vulnerabilities, and mitigations.";
-        attribute :>> longDescription = "Product-specific cybersecurity view intended for secure product development and cross-reference into cybersecurity risk documentation.";
+        attribute :>> description = "Product-specific cybersecurity view intended for secure product development and cross-reference into cybersecurity risk documentation.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);
         attribute :>> viewKind = DiagramViewKind::general;

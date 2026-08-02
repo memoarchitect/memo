@@ -20,7 +20,7 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
         attribute :>> name = "GPCA_FunctionBrowserView";
         attribute :>> title = "GPCA Function Browser";
         attribute :>> shortDescription = "Membership tree over the functions layer: logical functions, flows, and the exchange item definitions, grouped by kind.";
-        attribute :>> longDescription = "Browser view (SysML v2 browser view kind) exposing the functions-layer membership hierarchy as a first-class view: the eleven logical functions, the logical flows connecting them, and the data/control definitions they exchange — with kind icons, expand/collapse, and filtering.";
+        attribute :>> description = "Browser view (SysML v2 browser view kind) exposing the functions-layer membership hierarchy as a first-class view: the eleven logical functions, the logical flows connecting them, and the data/control definitions they exchange — with kind icons, expand/collapse, and filtering.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> viewKind = DiagramViewKind::browser;

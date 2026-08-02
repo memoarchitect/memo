@@ -17,7 +17,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
     part infusionSystem : OperationalEntity {
         attribute :>> name = "Infusion Pump System";
         attribute :>> entityKind = OperationalEntityKind::device;
-        attribute :>> contextRole = "systemOfInterest";
+        attribute :>> responsibility = "System of interest for this context view.";
     }
     part clinician : User { attribute :>> name = "Clinician"; }
     part patient : User { attribute :>> name = "Patient"; }

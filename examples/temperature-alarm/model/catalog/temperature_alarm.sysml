@@ -13,6 +13,7 @@ package memo_examples_temperature_alarm {
     private import memo_assurance_requirements_needs::*;
     private import memo_architecture_operational_use_cases::*;
     private import memo_architecture_operational_activities::*;
+    private import memo_architecture_operational_workflows::*;
     private import memo_architecture_operational_scenarios::*;
     private import memo_architecture_functional_functions::*;
     private import memo_architecture_logical_structure::*;

@@ -5,6 +5,7 @@ package memo_examples_manual_surgical_instrument {
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
+    private import memo_core_relationships::*;
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_implementation_hardware_structure::*;
 
