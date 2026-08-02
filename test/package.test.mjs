@@ -68,12 +68,13 @@ test('manifest declares the four logical packages and content-owned init values'
   ]) assert.match(manifest, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 });
 
-test('logical package descriptors contain folded usage and no .project.json', () => {
+test('logical package descriptors contain identity/location only and no .project.json', () => {
   const packages = ['ontology', 'profile', 'methodologies/default', 'methodologies/gpca'];
   for (const pkg of packages) {
     const descriptor = read(pkg, 'memo.package.yaml');
-    assert.match(descriptor, /^usage:/m);
-    assert.match(descriptor, new RegExp(`^version: ["']${packageVersion}["']$`, 'm'));
+    assert.match(descriptor, /^name:/m);
+    assert.match(descriptor, new RegExp(`^version: ["']?${packageVersion}["']?$`, 'm'));
+    assert.doesNotMatch(descriptor, /^(?:type|extends|usage|ontologies|methodology|modules):/m);
     assert.equal(existsSync(join(root, pkg, '.project.json')), false);
   }
 });
@@ -119,33 +120,34 @@ test('content uses canonical @memoarchitect names and no packages/ mirror exists
   // resolution contract.
   assert.equal(existsSync(join(root, 'packages')), false);
   for (const pkg of ['ontology', 'profile', 'methodologies/default', 'methodologies/gpca']) {
-    assert.match(read(pkg, 'memo.package.yaml'), /^name: "@memoarchitect\//m);
+    assert.match(read(pkg, 'memo.package.yaml'), /^name: ["']@memoarchitect\//m);
     assert.doesNotMatch(read(pkg, 'memo.package.yaml'), /"@memo\//);
   }
 });
 
 test('manifest templates are complete source projects using the public memo import', () => {
   for (const dir of ['default', 'samd', 'connected-device', 'monitoring-device', 'infusion-pump']) {
-    assert.match(read('templates', dir, 'memo.package.yaml'), /name: "{{name}}"/);
-    assert.match(read('templates', dir, 'memo.package.yaml'), /extends: "@memoarchitect\/methodology-default"/);
+    const descriptor = read('templates', dir, 'memo.package.yaml');
+    assert.match(descriptor, /name: ["']{{name}}["']/);
+    assert.doesNotMatch(descriptor, /^(?:type|extends|usage|ontologies|methodology|modules):/m);
     const npmPackage = JSON.parse(read('templates', dir, 'package.json'));
     assert.equal(npmPackage.name, '{{npmName}}');
     assert.equal(npmPackage.private, true);
     assert.equal(npmPackage.dependencies['@memoarchitect/ontology'], '{{ontologyVersion}}');
     const syside = read('templates', dir, 'syside.toml');
-    assert.match(syside, /"src"/);
+    assert.match(syside, /"model"/);
     assert.match(syside, /"node_modules\/@memoarchitect\/ontology\/src"/);
     for (const file of [
       ['architecture', 'system.sysml'],
       ['assurance', 'requirements.sysml'],
-      ['artifacts', 'artifacts.sysml'],
-    ]) assert.match(read('templates', dir, 'src', ...file), /import memo::\*/);
+      ['artifacts', 'catalog.sysml'],
+    ]) assert.match(read('templates', dir, 'model', 'catalog', ...file), /import memo::\*/);
   }
 });
 
 test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
   assert.equal(existsSync(join(root, 'src', 'examples')), false);
-  assert.equal(existsSync(join(root, 'examples', 'gpca-pump', 'memo.config.yaml')), true);
+  assert.equal(existsSync(join(root, 'examples', 'gpca-pump', 'model', 'catalog', 'project.sysml')), true);
   const examples = readdirSync(join(root, 'examples')).filter((entry) => !entry.startsWith('.')).sort();
   const expected = [
     'connected-patient-monitor', 'embedded-infusion-pump',
@@ -168,12 +170,10 @@ test('focused MEMO examples separate their parent package, catalog, and viewpoin
   for (const example of focused) {
     const model = join(root, 'examples', example, 'model');
     assert.equal(existsSync(join(root, 'examples', example, 'README.md')), true, `${example} needs a README`);
-    assert.ok(readdirSync(model).some((entry) => entry.endsWith('.sysml')), `${example} needs a parent SysML package`);
-    for (const section of ['catalog', 'viewpoints']) {
-      const directory = join(model, section);
-      assert.equal(existsSync(directory), true, `${example} needs model/${section}`);
-      assert.ok(readdirSync(directory).some((entry) => entry.endsWith('.sysml')), `${example} needs a ${section} SysML file`);
-    }
+    const catalog = join(model, 'catalog');
+    assert.equal(existsSync(join(catalog, 'project.sysml')), true, `${example} needs a native project entrypoint`);
+    assert.ok(readdirSync(catalog).some((entry) => entry.endsWith('.sysml')), `${example} needs catalog SysML`);
+    assert.equal(existsSync(join(catalog, 'viewpoints')), true, `${example} needs catalog/viewpoints`);
   }
 });
 
@@ -351,8 +351,8 @@ test('example extensions use methodology inclusion and remain outside src', () =
   const extensions = [['clinical', 'memo_extension_clinical']];
   for (const [name, includedModule] of extensions) {
     const descriptor = read('examples', 'extensions', name, 'memo.package.yaml');
-    assert.match(descriptor, /^type: methodology$/m);
-    assert.match(descriptor, /^extends: "@memoarchitect\/methodology-default"$/m);
+    assert.match(descriptor, /^name: ["']@memoarchitect\//m);
+    assert.doesNotMatch(descriptor, /^(?:type|extends|usage|ontologies|methodology|modules):/m);
     const sources = walkSysml(join('examples', 'extensions', name));
     assert.ok(sources.length > 1, `${name} needs extension and methodology sources`);
     const content = sources.map((file) => read(file)).join('\n');
@@ -415,14 +415,15 @@ test('npm pack includes all content and no JavaScript', () => {
     'templates/default/memo.package.yaml',
     'templates/default/package.json',
     'templates/default/syside.toml',
-    'templates/default/src/architecture/system.sysml',
-    'templates/default/src/assurance/requirements.sysml',
-    'templates/default/src/artifacts/artifacts.sysml',
+    'templates/default/model/catalog/project.sysml',
+    'templates/default/model/catalog/architecture/system.sysml',
+    'templates/default/model/catalog/assurance/requirements.sysml',
+    'templates/default/model/catalog/artifacts/catalog.sysml',
     'templates/samd/memo.package.yaml',
     'templates/connected-device/memo.package.yaml',
     'templates/monitoring-device/memo.package.yaml',
     'templates/infusion-pump/memo.package.yaml',
-    'examples/gpca-pump/memo.config.yaml',
+    'examples/gpca-pump/model/catalog/project.sysml',
     'examples/sysml-diagram-samples/README.md',
     'src/memo_namespaces.sysml',
   ]) assert.ok(files.includes(expected), `missing ${expected}`);
