@@ -20,7 +20,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_risk_chain_view {
         attribute :>> name = "GPCA_RiskChainView";
         attribute :>> title = "GPCA Risk Mitigation Chain View";
         attribute :>> shortDescription = "All seven hazard causal trees from categorized cause through harm with controls and residual risk.";
-        attribute :>> longDescription = "Opioid over-infusion, under-infusion, air embolism, misprogramming, free-flow, reverse-delivery, and VTBI over-infusion causal trees (GIIP cause-source structure): categorized causes converging on each hazard, sequences of events, hazardous situations, harms, risk estimates, controls, and residual evaluations.";
+        attribute :>> description = "Opioid over-infusion, under-infusion, air embolism, misprogramming, free-flow, reverse-delivery, and VTBI over-infusion causal trees (GIIP cause-source structure): categorized causes converging on each hazard, sequences of events, hazardous situations, harms, risk estimates, controls, and residual evaluations.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> viewKind = DiagramViewKind::general;

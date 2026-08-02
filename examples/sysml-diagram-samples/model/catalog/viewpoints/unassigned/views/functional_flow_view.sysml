@@ -70,23 +70,23 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     connection : Composes connect parent ::> fxSafetySubsystem to child ::> fxSafety;
 
     action fxDeliveryFlow : SystemAction {
-        action fxAcquire : FxAcquire { attribute name = "Acquire Sensor Data"; }
-        action fxCompute : FxCompute { attribute name = "Compute Infusion Rate"; }
+        action fxAcquire : FxAcquire { attribute :>> name = "Acquire Sensor Data"; }
+        action fxCompute : FxCompute { attribute :>> name = "Compute Infusion Rate"; }
 
         // Split: enforce/drive/deliver runs concurrently with occlusion monitoring
         fork fxForkDeliver;
-        action fxEnforce : FxEnforce { attribute name = "Enforce Dose Limits"; }
-        action fxDrive : FxDrive { attribute name = "Drive Pump Motor"; }
-        action fxMonitor : FxMonitor { attribute name = "Monitor Occlusion"; }
-        action fxDetect : FxDetect { attribute name = "Detect Occlusion"; }
+        action fxEnforce : FxEnforce { attribute :>> name = "Enforce Dose Limits"; }
+        action fxDrive : FxDrive { attribute :>> name = "Drive Pump Motor"; }
+        action fxMonitor : FxMonitor { attribute :>> name = "Monitor Occlusion"; }
+        action fxDetect : FxDetect { attribute :>> name = "Detect Occlusion"; }
         join fxJoinDeliver;
 
         // Composite function — valve sub-flow (drill-in)
         action fxDeliver : FxDeliverMedication {
-            attribute name = "Deliver Medication";
-            action fxOpenValve : SystemAction { attribute name = "Open Valve"; }
-            action fxHoldDose : SystemAction { attribute name = "Hold Metered Dose"; }
-            action fxCloseValve : SystemAction { attribute name = "Close Valve"; }
+            attribute :>> name = "Deliver Medication";
+            action fxOpenValve : SystemAction { attribute :>> name = "Open Valve"; }
+            action fxHoldDose : SystemAction { attribute :>> name = "Hold Metered Dose"; }
+            action fxCloseValve : SystemAction { attribute :>> name = "Close Valve"; }
 
             flow of FxMedicationFluid from fxDeliveryFlow.fxDeliver.fxHoldDose to fxCloseValve;
 
@@ -96,7 +96,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
             first fxCloseValve then done;
         }
 
-        action fxLog : SystemAction { attribute name = "Log Delivery"; }
+        action fxLog : SystemAction { attribute :>> name = "Log Delivery"; }
 
         flow of FxSensorReading from fxAcquire.reading to fxCompute.reading;
         flow of FxRateCommand from fxEnforce.safeCommand to fxDrive.command;

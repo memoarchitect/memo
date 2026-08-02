@@ -5,6 +5,9 @@ package memo_examples_gpca_pump_gpca_system {
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
     private import memo_architecture_operational_scenarios::*;
     private import memo_core_enumerations::*;
+    private import memo_architecture_operational_structure::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_core_common::*;
 
     part gpcaMission : Mission {
         attribute :>> id = "MSN-001";

@@ -13,7 +13,7 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> name = "GPCA_IntendedUse";
         attribute :>> title = "GPCA Pump Intended Use";
         attribute :>> shortDescription = "Patient-controlled analgesia infusion of prescribed opioid analgesics.";
-        attribute :>> longDescription = "The GPCA pump delivers a prescribed analgesic drug intravenously at a programmed basal rate, supplemented by square boluses delivered automatically at programmed intervals and by patient-requested bolus doses, subject to lockout intervals and maximum-dose limits.";
+        attribute :>> description = "The GPCA pump delivers a prescribed analgesic drug intravenously at a programmed basal rate, supplemented by square boluses delivered automatically at programmed intervals and by patient-requested bolus doses, subject to lockout intervals and maximum-dose limits.";
         attribute :>> indication = "Management of acute post-operative or chronic pain requiring titrated intravenous opioid analgesia.";
         attribute :>> contraindication = "Patients unable to comprehend or operate the bolus request mechanism; drugs without safe-value records in the hospital pharmacy database.";
         attribute :>> patientPopulation = "Adult in-patients under clinical supervision.";
@@ -26,7 +26,7 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> name = "BolusRequestBySomeoneOtherThanPatient";
         attribute :>> title = "Bolus by proxy";
         attribute :>> shortDescription = "A caregiver or visitor presses the patient bolus control.";
-        attribute :>> longDescription = "A person other than the patient activates the bolus request control, bypassing the intended patient self-limiting behavior.";
+        attribute :>> description = "A person other than the patient activates the bolus request control, bypassing the intended patient self-limiting behavior.";
         attribute :>> misuseContext = "Patient-controlled analgesia in a supervised hospital setting.";
         attribute :>> foreseeableBasis = "Known PCA use pattern represented in the GPCA hazard analysis.";
         attribute :>> affectedUseContext = "UC-001";
@@ -51,7 +51,6 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> actorKind = ActorKind::patient;
         attribute :>> id = "ACT-001";
         attribute :>> name = "Patient";
-        attribute :>> actorKind = ActorKind::patient;
         attribute :>> trainingLevel = "instructed by clinician on bolus request button only";
         attribute :>> description = "Receives the infusion and requests bolus doses via the patient pendant.";
     }
@@ -59,7 +58,6 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-002";
         attribute :>> name = "ClinicianNurse";
-        attribute :>> actorKind = ActorKind::clinician;
         attribute :>> trainingLevel = "trained clinical user; programs prescriptions and responds to alarms";
         attribute :>> description = "Loads the drug reservoir, programs and confirms the prescription, starts/stops therapy, and responds to alarms.";
     }
@@ -67,7 +65,6 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-003";
         attribute :>> name = "PrescribingPhysician";
-        attribute :>> actorKind = ActorKind::clinician;
         attribute :>> trainingLevel = "licensed prescriber";
         attribute :>> description = "Prescribes drug, concentration, basal rate, bolus volume, lockout interval, and maximum dose limits.";
     }
@@ -75,7 +72,6 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-004";
         attribute :>> name = "Pharmacist";
-        attribute :>> actorKind = ActorKind::clinician;
         attribute :>> trainingLevel = "licensed pharmacist";
         attribute :>> description = "Prepares the drug reservoir and verifies drug and concentration against the prescription.";
     }
@@ -83,7 +79,6 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> actorKind = ActorKind::technician;
         attribute :>> id = "ACT-005";
         attribute :>> name = "BiomedicalTechnician";
-        attribute :>> actorKind = ActorKind::technician;
         attribute :>> trainingLevel = "service-trained; authenticated service access";
         attribute :>> description = "Performs maintenance, battery replacement, and calibration through the service interface.";
     }
