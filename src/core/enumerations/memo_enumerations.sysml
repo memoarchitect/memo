@@ -263,6 +263,29 @@ package memo_core_enumerations {
         enum crossLayer;
         enum quantitative;
     }
+    // How far a methodology may tailor a rule. `invariant` rules hold the
+    // ontology's own consistency and may only change in an ontology release;
+    // `assurance` and `methodology` rules may be disabled or replaced through
+    // an explicit RulePolicy carrying rationale and authority.
+    enum def RuleTailoringKind {
+        enum invariant;
+        enum assurance;
+        enum methodology;
+    }
+    enum def RuleDispositionKind {
+        enum enabled;
+        enum disabled;
+        enum replaced;
+    }
+    // Whether a methodology's inclusion lists are the whole selection or a
+    // deliberate subset. An empty list under `explicit` selects nothing; it
+    // never means "everything". `allAvailable` is the only way to say "all",
+    // and it is always deliberate. (SysML v2 reserves `all`, so the literal is
+    // spelled `allAvailable`.)
+    enum def ScopeModeKind {
+        enum allAvailable;
+        enum explicit;
+    }
     enum def WorkflowStageKind {
         enum context;
         enum requirements;

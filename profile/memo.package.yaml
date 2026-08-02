@@ -1,9 +1,18 @@
-name: "@memoarchitect/medical-modeling-profile"
-version: "0.6.5"
-type: profile
-extends:
-  - "@memoarchitect/ontology"
-description: "Closure rules and viewpoints for medical device modeling"
-license: "MIT"
-tags: ["medical-device", "iso-14971", "iec-62304", "iso-13485", "modeling-profile"]
-usage: ["rules", "viewpoints"]
+# Application/distribution descriptor for this MEMO package.
+#
+# Identity and location only. It records what this package is called, what
+# version it is, and where its SysML source sits so a resolver can find it.
+# It does not select model content: the project's native SysML imports and its
+# ProjectMethodBinding decide what is in the model. Semantic fields
+# (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
+# removed at the native semantic flip and are now rejected if present.
+name: '@memoarchitect/medical-modeling-profile'
+version: 0.6.5
+description: Closure rules and viewpoints for medical device modeling
+license: MIT
+tags:
+- medical-device
+- iso-14971
+- iec-62304
+- iso-13485
+- modeling-profile

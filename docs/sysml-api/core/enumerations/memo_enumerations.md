@@ -38,7 +38,7 @@
 | [`ObligationKind`](#obligationkind) | `enum def` | Controlled values for obligation: `shall`, `should`, `will`. | — |
 | [`InterfaceKind`](#interfacekind) | `enum def` | Controlled values for interface: `data`, `control`, `analogSignal`, `digitalSignal`, `power`, `network`, `api`, `userInteraction`, `notification`, `logging`, `mechanical`, `fluidic`. | — |
 | [`FlowKind`](#flowkind) | `enum def` | Controlled values for flow: `information`, `command`, `status`, `telemetry`, `alarm`, `configuration`, `measurement`, `audit`, `power`. | — |
-| [`DirectionKind`](#directionkind) | `enum def` | Controlled values for direction: `input`, `output`, `inputOutput`, `bidirectional`. | — |
+| [`DirectionKind`](#directionkind) | `enum def` | Controlled values for direction: `input`, `output`, `inputOutput`. | — |
 | [`CriticalityKind`](#criticalitykind) | `enum def` | Controlled values for criticality: `low`, `medium`, `high`, `catastrophic`. | — |
 | [`SafetyClassKind`](#safetyclasskind) | `enum def` | Controlled values for safety class: `none`, `A`, `B`, `C`. | — |
 | [`ComplexityKind`](#complexitykind) | `enum def` | Controlled values for complexity: `low`, `medium`, `high`, `complex`. | — |
@@ -49,24 +49,28 @@
 | [`HazardTypeKind`](#hazardtypekind) | `enum def` | Controlled values for hazard type: `drugDeliveryError`, `energyExposure`, `informationError`, `mechanicalFailure`, `biologicalContamination`, `softwareAnomaly`, `useError`, `environmentalHazard`. | — |
 | [`CauseSourceKind`](#causesourcekind) | `enum def` | Cause-source categories for hazard causal trees. Mirrors the cause-source tables of the FDA GIIP hazard taxonomy (Zhang et al. 2010, Tables 2-9) and the section headings of the GIP Hazard Analysis v1.0 (Arney et al. 2009, section 2.4.1-2.4.8). | — |
 | [`DiagramViewKind`](#diagramviewkind) | `enum def` | The eight standard SysML v2 view kinds (spec taxonomy). Every diagram view resolves to exactly one of these (Epic KK). | — |
-| [`DocumentViewKind`](#documentviewkind) | `enum def` | Controlled values for document view: `DHF`, `SDD`, `RMF`, `VV`, `ArchitectureDescription`, `CybersecurityAssessment`, `ThreatModel`, `Clinical`, `Usability`. | — |
+| [`DocumentViewKind`](#documentviewkind) | `enum def` | Controlled values for document view: `DHF`, `SDD`, `RMF`, `VV`, `architectureDescription`, `cybersecurityAssessment`, `threatModel`, `clinical`, `usability`. | — |
 | [`SchedulingPolicyKind`](#schedulingpolicykind) | `enum def` | Controlled values for scheduling policy: `nonRealTime`, `roundRobin`, `fixedPriorityPreemptive`, `rateMonotonic`, `deadlineMonotonic`, `EDF`. | — |
 | [`LinkStatusKind`](#linkstatuskind) | `enum def` | Controlled values for link status: `planned`, `active`, `verified`, `obsolete`. | — |
 | [`BehaviorPropertyKind`](#behaviorpropertykind) | `enum def` | Controlled values for behavior property: `stateInvariant`, `transitionRule`, `temporalProperty`, `safetyProperty`, `livenessProperty`, `assumption`, `guarantee`. | — |
-| [`InterfaceItemKind`](#interfaceitemkind) | `enum def` | Controlled values for interface item: `data`, `command`, `signal`, `event`, `material`, `energy`, `fluid`, `mechanicalForce`. | — |
+| [`InterfaceItemKind`](#interfaceitemkind) | `enum def` | Controlled values for interface item: `data`, `command`, `signal`, `material`, `energy`, `fluid`, `mechanicalForce`. | — |
 | [`PropertyLanguageKind`](#propertylanguagekind) | `enum def` | Controlled values for property language: `naturalLanguage`, `pseudoFormal`, `agreeLike`, `ltlLike`, `ctlLike`. | — |
 | [`RuleStrengthKind`](#rulestrengthkind) | `enum def` | Controlled values for rule strength: `optional`, `recommended`, `required`, `forbidden`. | — |
 | [`RulePredicateKind`](#rulepredicatekind) | `enum def` | Controlled values for rule predicate: `requireRelationship`, `conditionalRequireRelationship`, `requireAttribute`, `uniqueAttribute`, `cardinalityCheck`, `coverageCheck`. | — |
 | [`RuleSeverityKind`](#ruleseveritykind) | `enum def` | Controlled values for rule severity: `error`, `warning`, `info`. | — |
 | [`RuleCategoryKind`](#rulecategorykind) | `enum def` | Controlled values for rule category: `closure`, `coverage`, `lifecycle`, `crossLayer`, `quantitative`. | — |
+| [`RuleTailoringKind`](#ruletailoringkind) | `enum def` | How far a methodology may tailor a rule. `invariant` rules hold the ontology's own consistency and may only change in an ontology release; `assurance` and `methodology` rules may be disabled or replaced through an explicit RulePolicy carrying rationale and authority. | — |
+| [`RuleDispositionKind`](#ruledispositionkind) | `enum def` | Controlled values for rule disposition: `enabled`, `disabled`, `replaced`. | — |
+| [`ScopeModeKind`](#scopemodekind) | `enum def` | Whether a methodology's inclusion lists are the whole selection or a deliberate subset. An empty list under `explicit` selects nothing; it never means "everything". `allAvailable` is the only way to say "all", and it is always deliberate.… | — |
 | [`WorkflowStageKind`](#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`. | — |
 | [`AudienceKind`](#audiencekind) | `enum def` | Controlled values for audience: `systemArchitect`, `softwareArchitect`, `hardwareEngineer`, `safetyEngineer`, `verificationEngineer`, `regulatoryEngineer`, `projectLead`, `securityEngineer`, `privacyEngineer`, `clinicalEngineer`, `usabilityEngineer`. | — |
 | [`ThreatCategoryKind`](#threatcategorykind) | `enum def` | Controlled values for threat category: `spoofing`, `tampering`, `repudiation`, `informationDisclosure`, `denialOfService`, `elevationOfPrivilege`, `privacyLoss`, `supplyChain`. | — |
 | [`CyberControlKind`](#cybercontrolkind) | `enum def` | Controlled values for cyber control: `prevent`, `detect`, `respond`, `recover`, `hardening`, `monitoring`, `authentication`, `authorization`, `encryption`, `integrityProtection`, `audit`, `updateMechanism`. | — |
 | [`AssetKind`](#assetkind) | `enum def` | Controlled values for asset: `data`, `credential`, `configuration`, `software`, `hardware`, `networkConnection`, `auditRecord`, `safetyCriticalFunction`. | — |
 | [`ViewOutputKind`](#viewoutputkind) | `enum def` | Controlled values for view output: `diagram`, `table`, `matrix`, `documentSection`, `dashboard`. | — |
-| [`PresentationKind`](#presentationkind) | `enum def` | Controlled values for presentation: `blockDiagram`, `internalDiagram`, `activityDiagram`, `stateDiagram`, `riskTable`, `traceMatrix`, `narrativeSection`, `custom`. | — |
+| [`PresentationKind`](#presentationkind) | `enum def` | Controlled values for presentation: `blockDiagram`, `internalDiagram`, `activityDiagram`, `stateDiagram`, `riskTable`, `traceMatrix`, `narrativeSection`, `screenLayout`, `custom`. | — |
 | [`DeploymentKind`](#deploymentkind) | `enum def` | Controlled values for deployment: `native`, `containerized`, `cloudHosted`, `embedded`, `partitioned`. | — |
+| [`ContextSideKind`](#contextsidekind) | `enum def` | Which side of a system context diagram a participant belongs on. Animate and inanimate are kept apart because they are governed differently: a human participant carries training and use-error considerations (IEC 62366-1), an external system carries interface and interoperabili… | — |
 | [`ActorKind`](#actorkind) | `enum def` | Controlled values for actor: `patient`, `clinician`, `caregiver`, `technician`, `administrator`. | — |
 | [`ValidationMethodKind`](#validationmethodkind) | `enum def` | Controlled values for validation method: `clinicalTrial`, `summativeUsabilityTest`, `comparativeStudy`, `benchmarkTest`, `simulatedUse`. | — |
 | [`SOUPClassificationKind`](#soupclassificationkind) | `enum def` | Controlled values for soupclassification: `classA`, `classB`, `classC`, `unclassified`. | — |
@@ -93,6 +97,7 @@
 | [`HAZOPGuideWordKind`](#hazopguidewordkind) | `enum def` | Controlled values for hazopguide word: `no`, `more`, `less`, `asWellAs`, `partOf`, `reverse`, `other`, `early`, `late`, `before`, `subsequent`. | — |
 | [`ChangeTypeKind`](#changetypekind) | `enum def` | Controlled values for change type: `corrective`, `preventive`, `enhancement`, `regulatoryDriven`. | — |
 | [`UseErrorCategoryKind`](#useerrorcategorykind) | `enum def` | Controlled values for use error category: `perception`, `cognition`, `actionCategory`, `memoryRecall`. | — |
+| [`CommentStatusKind`](#commentstatuskind) | `enum def` | Lifecycle of a review remark on a model element. `rejected` is a closed state with a stated reason, not a deletion: a design review that considered a point and declined it is a record the DHF wants to keep. | — |
 
 ## ConcernKind
 
@@ -237,7 +242,7 @@ enum def DirectionKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for direction: `input`, `output`, `inputOutput`, `bidirectional`. |
+| Description | Controlled values for direction: `input`, `output`, `inputOutput`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -402,7 +407,7 @@ enum def DocumentViewKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for document view: `DHF`, `SDD`, `RMF`, `VV`, `ArchitectureDescription`, `CybersecurityAssessment`, `ThreatModel`, `Clinical`, `Usability`. |
+| Description | Controlled values for document view: `DHF`, `SDD`, `RMF`, `VV`, `architectureDescription`, `cybersecurityAssessment`, `threatModel`, `clinical`, `usability`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -462,7 +467,7 @@ enum def InterfaceItemKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for interface item: `data`, `command`, `signal`, `event`, `material`, `energy`, `fluid`, `mechanicalForce`. |
+| Description | Controlled values for interface item: `data`, `command`, `signal`, `material`, `energy`, `fluid`, `mechanicalForce`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -538,6 +543,51 @@ enum def RuleCategoryKind
 | Property | Value |
 | --- | --- |
 | Description | Controlled values for rule category: `closure`, `coverage`, `lifecycle`, `crossLayer`, `quantitative`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## RuleTailoringKind
+
+```sysml
+enum def RuleTailoringKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | How far a methodology may tailor a rule. `invariant` rules hold the ontology's own consistency and may only change in an ontology release; `assurance` and `methodology` rules may be disabled or replaced through an explicit RulePolicy carrying rationale and authority. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## RuleDispositionKind
+
+```sysml
+enum def RuleDispositionKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for rule disposition: `enabled`, `disabled`, `replaced`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## ScopeModeKind
+
+```sysml
+enum def ScopeModeKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Whether a methodology's inclusion lists are the whole selection or a deliberate subset. An empty list under `explicit` selects nothing; it never means "everything". `allAvailable` is the only way to say "all", and it is always deliberate.… |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -642,7 +692,7 @@ enum def PresentationKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for presentation: `blockDiagram`, `internalDiagram`, `activityDiagram`, `stateDiagram`, `riskTable`, `traceMatrix`, `narrativeSection`, `custom`. |
+| Description | Controlled values for presentation: `blockDiagram`, `internalDiagram`, `activityDiagram`, `stateDiagram`, `riskTable`, `traceMatrix`, `narrativeSection`, `screenLayout`, `custom`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -658,6 +708,21 @@ enum def DeploymentKind
 | Property | Value |
 | --- | --- |
 | Description | Controlled values for deployment: `native`, `containerized`, `cloudHosted`, `embedded`, `partitioned`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## ContextSideKind
+
+```sysml
+enum def ContextSideKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Which side of a system context diagram a participant belongs on. Animate and inanimate are kept apart because they are governed differently: a human participant carries training and use-error considerations (IEC 62366-1), an external system carries interface and interoperabili… |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1054,6 +1119,21 @@ enum def UseErrorCategoryKind
 | Owning package | `memo_core_enumerations` |
 
 
+## CommentStatusKind
+
+```sysml
+enum def CommentStatusKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Lifecycle of a review remark on a model element. `rejected` is a closed state with a stated reason, not a deletion: a design review that considered a point and declined it is a record the DHF wants to keep. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
 ## Source
 
 ??? code "core/enumerations/memo_enumerations.sysml"
@@ -1144,7 +1224,6 @@ enum def UseErrorCategoryKind
             enum input;
             enum output;
             enum inputOutput;
-            enum bidirectional;
         }
         enum def CriticalityKind {
             enum low;
@@ -1253,11 +1332,11 @@ enum def UseErrorCategoryKind
             enum SDD;
             enum RMF;
             enum VV;
-            enum ArchitectureDescription;
-            enum CybersecurityAssessment;
-            enum ThreatModel;
-            enum Clinical;
-            enum Usability;
+            enum architectureDescription;
+            enum cybersecurityAssessment;
+            enum threatModel;
+            enum clinical;
+            enum usability;
         }
         enum def SchedulingPolicyKind {
             enum nonRealTime;
@@ -1286,7 +1365,7 @@ enum def UseErrorCategoryKind
             enum data;
             enum command;
             enum signal;
-            enum event;
+            enum 'event';
             enum material;
             enum energy;
             enum fluid;
@@ -1324,6 +1403,29 @@ enum def UseErrorCategoryKind
             enum lifecycle;
             enum crossLayer;
             enum quantitative;
+        }
+        // How far a methodology may tailor a rule. `invariant` rules hold the
+        // ontology's own consistency and may only change in an ontology release;
+        // `assurance` and `methodology` rules may be disabled or replaced through
+        // an explicit RulePolicy carrying rationale and authority.
+        enum def RuleTailoringKind {
+            enum invariant;
+            enum assurance;
+            enum methodology;
+        }
+        enum def RuleDispositionKind {
+            enum enabled;
+            enum disabled;
+            enum replaced;
+        }
+        // Whether a methodology's inclusion lists are the whole selection or a
+        // deliberate subset. An empty list under `explicit` selects nothing; it
+        // never means "everything". `allAvailable` is the only way to say "all",
+        // and it is always deliberate. (SysML v2 reserves `all`, so the literal is
+        // spelled `allAvailable`.)
+        enum def ScopeModeKind {
+            enum allAvailable;
+            enum explicit;
         }
         enum def WorkflowStageKind {
             enum context;
@@ -1398,6 +1500,9 @@ enum def UseErrorCategoryKind
             enum riskTable;
             enum traceMatrix;
             enum narrativeSection;
+            // A captured screen with its regions drawn over it — the presentation
+            // of the geometry view kind.
+            enum screenLayout;
             enum custom;
         }
         enum def DeploymentKind {
@@ -1406,6 +1511,22 @@ enum def UseErrorCategoryKind
             enum cloudHosted;
             enum embedded;
             enum partitioned;
+        }
+        // Which side of a system context diagram a participant belongs on.
+        // Animate and inanimate are kept apart because they are governed
+        // differently: a human participant carries training and use-error
+        // considerations (IEC 62366-1), an external system carries interface and
+        // interoperability ones.
+        enum def ContextSideKind {
+            // A human who interacts with the device (IEC 62366-1 intended user).
+            enum 'actor';
+            // An inanimate external system, device, or supply the device exchanges with.
+            enum externalSystem;
+            // The setting the device sits inside (IEC 62366-1 3.20 use environment).
+            enum environment;
+            // A condition the context imposes rather than a thing it connects to —
+            // regulatory, clinical, or operational limits on use.
+            enum 'constraint';
         }
         enum def ActorKind {
             enum patient;
@@ -1614,6 +1735,16 @@ enum def UseErrorCategoryKind
             enum cognition;
             enum actionCategory;
             enum memoryRecall;
+        }
+        // Lifecycle of a review remark on a model element. `rejected` is a closed
+        // state with a stated reason, not a deletion: a design review that
+        // considered a point and declined it is a record the DHF wants to keep.
+        enum def CommentStatusKind {
+            enum open;
+            enum acknowledged;
+            enum addressed;
+            enum resolved;
+            enum rejected;
         }
     }
     

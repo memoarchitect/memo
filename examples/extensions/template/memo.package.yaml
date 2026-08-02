@@ -1,9 +1,17 @@
-name: "{{name}}"
-version: "0.1.0"
-type: methodology
-extends: "@memoarchitect/methodology-default"
-sysmlDir: "./src"
-description: "MEMO methodology extension"
-license: "MIT"
-tags: ["memo", "methodology", "extension"]
-usage: ["extension"]
+# Application/distribution descriptor for this MEMO package.
+#
+# Identity and location only. It records what this package is called, what
+# version it is, and where its SysML source sits so a resolver can find it.
+# It does not select model content: the project's native SysML imports and its
+# ProjectMethodBinding decide what is in the model. Semantic fields
+# (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
+# removed at the native semantic flip and are now rejected if present.
+name: '{{name}}'
+version: 0.1.0
+description: MEMO methodology extension
+license: MIT
+tags:
+- memo
+- methodology
+- extension
+sysmlDir: ./src

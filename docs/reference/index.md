@@ -29,7 +29,7 @@ src/
 | `src/architecture/` | `memo::architecture` | Operational, functional, logical, implementation, and realization descriptions of the system | [Architecture](areas/architecture.md) |
 | `src/assurance/` | `memo::assurance` | Requirements, safety and risk, cybersecurity, human factors, and verification and validation | [Assurance](areas/assurance.md) |
 | `src/artifacts/` | `memo::artifacts` | Reusable classifications for model-backed artifacts | [Artifacts](areas/artifacts.md) |
-| `src/compliance/` | `memo::compliance` | Controlled artifacts, change records, document views, risk files, and post-market records | [Compliance](areas/compliance.md) |
+| `src/artifacts/` | `memo::artifacts` | Controlled artifacts, ADRs, configuration-management records, and risk-management documents | [Artifacts](areas/artifacts.md) |
 | `src/viewpoints/` | `memo::viewpoints` | Viewpoint contracts and views over existing model content | [Viewpoints](areas/viewpoints.md) |
 | `src/methodology/` | `memo::methodology` | Definitions that select and govern ontology use on a project | [Methodology](areas/methodology.md) |
 | `src/rules/` | `memo::rules` | Constraint packages selected by a methodology | [Rules](areas/rules.md) |

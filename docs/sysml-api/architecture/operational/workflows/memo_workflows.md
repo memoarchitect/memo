@@ -44,7 +44,6 @@
 | [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. | `MemoPart` |
 | [`SupportKind`](#supportkind) | `enum def` | Controlled values for support: `useCase`, `task`, `capability`. | — |
 | [`Supports`](#supports) | `connection def` | Typed relationship for supports. | `MemoRelationship` |
-| [`StepPrecedes`](#stepprecedes) | `connection def` | Typed relationship from `WorkflowStep` to `WorkflowStep`. | `MemoRelationship` |
 | [`RequiresResource`](#requiresresource) | `connection def` | Typed relationship from `OperationalWorkflow` to `WorkflowResource`. | `MemoRelationship` |
 | [`TransformKind`](#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | — |
 | [`Transforms`](#transforms) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
@@ -184,21 +183,6 @@ connection def Supports :> MemoRelationship
 | Owning package | `memo_architecture_operational_workflows` |
 
 
-## StepPrecedes
-
-```sysml
-connection def StepPrecedes :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `WorkflowStep` to `WorkflowStep`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_workflows` |
-
-
 ## RequiresResource
 
 ```sysml
@@ -294,7 +278,6 @@ connection def Transforms :> MemoRelationship
         // A step in a workflow wraps an operational activity or user task by
         // reference — the same activity may appear in several workflows.
         action def WorkflowStep specializes MemoAction {
-            attribute stepOrder : Integer;
             attribute entryCondition : String;
             attribute exitCondition : String;
             ref performedActivity : OperationalActivity[0..1];
@@ -305,8 +288,8 @@ connection def Transforms :> MemoRelationship
         // decision / fork / join / handoff.
         enum def ControlNodeKind {
             enum decision;
-            enum fork;
-            enum join;
+            enum 'fork';
+            enum 'join';
             enum handoff;
         }
     
@@ -347,11 +330,6 @@ connection def Transforms :> MemoRelationship
             // capability. They therefore have no single MEMO base type.
             end supporter;
             end supported;
-        }
-        connection def StepPrecedes :> MemoRelationship {
-            attribute guardCondition : String;
-            end predecessor : WorkflowStep;
-            end successor : WorkflowStep;
         }
         connection def RequiresResource :> MemoRelationship {
             end workflow : OperationalWorkflow;

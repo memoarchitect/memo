@@ -31,27 +31,31 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`hazardMitigationRule`](#hazardmitigationrule) | `constraint def` | Constraint that checks hazard mitigation rule. | — |
-| [`hazardSeverityRule`](#hazardseverityrule) | `constraint def` | Constraint that checks hazard severity rule. | — |
-| [`riskControlVerificationRule`](#riskcontrolverificationrule) | `constraint def` | Constraint that checks risk control verification rule. | — |
-| [`initialRiskMatrixRule`](#initialriskmatrixrule) | `constraint def` | Constraint that checks initial risk matrix rule. | — |
-| [`sysReqTraceRule`](#sysreqtracerule) | `constraint def` | Constraint that checks sys req trace rule. | — |
-| [`swReqTraceRule`](#swreqtracerule) | `constraint def` | Constraint that checks sw req trace rule. | — |
-| [`swComponentSafetyClassRule`](#swcomponentsafetyclassrule) | `constraint def` | Constraint that checks sw component safety class rule. | — |
-| [`swComponentReqRule`](#swcomponentreqrule) | `constraint def` | Constraint that checks sw component req rule. | — |
-| [`logicalFunctionAllocationRule`](#logicalfunctionallocationrule) | `constraint def` | Constraint that checks logical function allocation rule. | — |
-| [`verificationCaseMethodRule`](#verificationcasemethodrule) | `constraint def` | Constraint that checks verification case method rule. | — |
-| [`verificationCaseTargetRule`](#verificationcasetargetrule) | `constraint def` | Constraint that checks verification case target rule. | — |
-| [`evidenceProductionRule`](#evidenceproductionrule) | `constraint def` | Constraint that checks evidence production rule. | — |
-| [`threatMitigationRule`](#threatmitigationrule) | `constraint def` | Constraint that checks threat mitigation rule. | — |
-| [`assetThreatLinkRule`](#assetthreatlinkrule) | `constraint def` | Constraint that checks asset threat link rule. | — |
-| [`logicalInterfaceDirectionRule`](#logicalinterfacedirectionrule) | `constraint def` | Constraint that checks logical interface direction rule. | — |
-| [`safetyClassCVerificationRule`](#safetyclasscverificationrule) | `constraint def` | Constraint that checks safety class cverification rule. | — |
+| [`HazardMitigationRule`](#hazardmitigationrule) | `constraint def` | Constraint that checks hazard mitigation rule. | `MemoConsistencyRule` |
+| [`HazardSeverityRule`](#hazardseverityrule) | `constraint def` | Constraint that checks hazard severity rule. | `MemoConsistencyRule` |
+| [`RiskControlVerificationRule`](#riskcontrolverificationrule) | `constraint def` | Constraint that checks risk control verification rule. | `MemoConsistencyRule` |
+| [`InitialRiskMatrixRule`](#initialriskmatrixrule) | `constraint def` | Constraint that checks initial risk matrix rule. | `MemoConsistencyRule` |
+| [`SysReqTraceRule`](#sysreqtracerule) | `constraint def` | Constraint that checks sys req trace rule. | `MemoConsistencyRule` |
+| [`SwReqTraceRule`](#swreqtracerule) | `constraint def` | Constraint that checks sw req trace rule. | `MemoConsistencyRule` |
+| [`SwComponentSafetyClassRule`](#swcomponentsafetyclassrule) | `constraint def` | Constraint that checks sw component safety class rule. | `MemoConsistencyRule` |
+| [`SwComponentReqRule`](#swcomponentreqrule) | `constraint def` | Constraint that checks sw component req rule. | `MemoConsistencyRule` |
+| [`LogicalFunctionAllocationRule`](#logicalfunctionallocationrule) | `constraint def` | Constraint that checks logical function allocation rule. | `MemoConsistencyRule` |
+| [`VerificationCaseMethodRule`](#verificationcasemethodrule) | `constraint def` | Constraint that checks verification case method rule. | `MemoConsistencyRule` |
+| [`VerificationCaseTargetRule`](#verificationcasetargetrule) | `constraint def` | Constraint that checks verification case target rule. | `MemoConsistencyRule` |
+| [`EvidenceProductionRule`](#evidenceproductionrule) | `constraint def` | Constraint that checks evidence production rule. | `MemoConsistencyRule` |
+| [`ThreatMitigationRule`](#threatmitigationrule) | `constraint def` | Constraint that checks threat mitigation rule. | `MemoConsistencyRule` |
+| [`AssetThreatLinkRule`](#assetthreatlinkrule) | `constraint def` | Constraint that checks asset threat link rule. | `MemoConsistencyRule` |
+| [`LogicalInterfaceDirectionRule`](#logicalinterfacedirectionrule) | `constraint def` | Constraint that checks logical interface direction rule. | `MemoConsistencyRule` |
+| [`SafetyClassCVerificationRule`](#safetyclasscverificationrule) | `constraint def` | Constraint that checks safety class cverification rule. | `MemoConsistencyRule` |
+| [`UiElementDesignRecordRule`](#uielementdesignrecordrule) | `constraint def` | The load-bearing traceability rule. A UI element that is not chrome must reach a design record — a requirement it satisfies, or an action it triggers. Chrome must be DECLARED `decoration`; an element left unclassified fails rather than passing as scenery. | `MemoConsistencyRule` |
+| [`ControlInvokesFunctionRule`](#controlinvokesfunctionrule) | `constraint def` | Interactive UI is where use error happens (IEC 62366-1), so a control that reaches no system function is either dead UI or unmodelled UI. The interactive-form restriction lives in the predicate because it spans several enum values. | `MemoConsistencyRule` |
+| [`BoundsDetectionConfirmedRule`](#boundsdetectionconfirmedrule) | `constraint def` | Automatic boundary detection proposes; a reviewer disposes. An unconfirmed machine guess must never reach a design review looking like an engineering decision. | `MemoConsistencyRule` |
+| [`ScreenCaptureProvenanceRule`](#screencaptureprovenancerule) | `constraint def` | A screenshot with no build behind it is undated design intent, not evidence of what the device does. | `MemoConsistencyRule` |
 
-## hazardMitigationRule
+## HazardMitigationRule
 
 ```sysml
-constraint def hazardMitigationRule
+constraint def HazardMitigationRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -59,14 +63,14 @@ constraint def hazardMitigationRule
 | Description | Constraint that checks hazard mitigation rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## hazardSeverityRule
+## HazardSeverityRule
 
 ```sysml
-constraint def hazardSeverityRule
+constraint def HazardSeverityRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -74,14 +78,14 @@ constraint def hazardSeverityRule
 | Description | Constraint that checks hazard severity rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## riskControlVerificationRule
+## RiskControlVerificationRule
 
 ```sysml
-constraint def riskControlVerificationRule
+constraint def RiskControlVerificationRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -89,14 +93,14 @@ constraint def riskControlVerificationRule
 | Description | Constraint that checks risk control verification rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## initialRiskMatrixRule
+## InitialRiskMatrixRule
 
 ```sysml
-constraint def initialRiskMatrixRule
+constraint def InitialRiskMatrixRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -104,14 +108,14 @@ constraint def initialRiskMatrixRule
 | Description | Constraint that checks initial risk matrix rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## sysReqTraceRule
+## SysReqTraceRule
 
 ```sysml
-constraint def sysReqTraceRule
+constraint def SysReqTraceRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -119,14 +123,14 @@ constraint def sysReqTraceRule
 | Description | Constraint that checks sys req trace rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## swReqTraceRule
+## SwReqTraceRule
 
 ```sysml
-constraint def swReqTraceRule
+constraint def SwReqTraceRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -134,14 +138,14 @@ constraint def swReqTraceRule
 | Description | Constraint that checks sw req trace rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## swComponentSafetyClassRule
+## SwComponentSafetyClassRule
 
 ```sysml
-constraint def swComponentSafetyClassRule
+constraint def SwComponentSafetyClassRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -149,14 +153,14 @@ constraint def swComponentSafetyClassRule
 | Description | Constraint that checks sw component safety class rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## swComponentReqRule
+## SwComponentReqRule
 
 ```sysml
-constraint def swComponentReqRule
+constraint def SwComponentReqRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -164,14 +168,14 @@ constraint def swComponentReqRule
 | Description | Constraint that checks sw component req rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## logicalFunctionAllocationRule
+## LogicalFunctionAllocationRule
 
 ```sysml
-constraint def logicalFunctionAllocationRule
+constraint def LogicalFunctionAllocationRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -179,14 +183,14 @@ constraint def logicalFunctionAllocationRule
 | Description | Constraint that checks logical function allocation rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## verificationCaseMethodRule
+## VerificationCaseMethodRule
 
 ```sysml
-constraint def verificationCaseMethodRule
+constraint def VerificationCaseMethodRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -194,14 +198,14 @@ constraint def verificationCaseMethodRule
 | Description | Constraint that checks verification case method rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## verificationCaseTargetRule
+## VerificationCaseTargetRule
 
 ```sysml
-constraint def verificationCaseTargetRule
+constraint def VerificationCaseTargetRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -209,14 +213,14 @@ constraint def verificationCaseTargetRule
 | Description | Constraint that checks verification case target rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## evidenceProductionRule
+## EvidenceProductionRule
 
 ```sysml
-constraint def evidenceProductionRule
+constraint def EvidenceProductionRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -224,14 +228,14 @@ constraint def evidenceProductionRule
 | Description | Constraint that checks evidence production rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## threatMitigationRule
+## ThreatMitigationRule
 
 ```sysml
-constraint def threatMitigationRule
+constraint def ThreatMitigationRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -239,14 +243,14 @@ constraint def threatMitigationRule
 | Description | Constraint that checks threat mitigation rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## assetThreatLinkRule
+## AssetThreatLinkRule
 
 ```sysml
-constraint def assetThreatLinkRule
+constraint def AssetThreatLinkRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -254,14 +258,14 @@ constraint def assetThreatLinkRule
 | Description | Constraint that checks asset threat link rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## logicalInterfaceDirectionRule
+## LogicalInterfaceDirectionRule
 
 ```sysml
-constraint def logicalInterfaceDirectionRule
+constraint def LogicalInterfaceDirectionRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -269,14 +273,14 @@ constraint def logicalInterfaceDirectionRule
 | Description | Constraint that checks logical interface direction rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
-## safetyClassCVerificationRule
+## SafetyClassCVerificationRule
 
 ```sysml
-constraint def safetyClassCVerificationRule
+constraint def SafetyClassCVerificationRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -284,7 +288,67 @@ constraint def safetyClassCVerificationRule
 | Description | Constraint that checks safety class cverification rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## UiElementDesignRecordRule
+
+```sysml
+constraint def UiElementDesignRecordRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The load-bearing traceability rule. A UI element that is not chrome must reach a design record — a requirement it satisfies, or an action it triggers. Chrome must be DECLARED `decoration`; an element left unclassified fails rather than passing as scenery. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## ControlInvokesFunctionRule
+
+```sysml
+constraint def ControlInvokesFunctionRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Interactive UI is where use error happens (IEC 62366-1), so a control that reaches no system function is either dead UI or unmodelled UI. The interactive-form restriction lives in the predicate because it spans several enum values. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## BoundsDetectionConfirmedRule
+
+```sysml
+constraint def BoundsDetectionConfirmedRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Automatic boundary detection proposes; a reviewer disposes. An unconfirmed machine guess must never reach a design review looking like an engineering decision. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## ScreenCaptureProvenanceRule
+
+```sysml
+constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A screenshot with no build behind it is undated design intent, not evidence of what the device does. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_closure` |
 
 
@@ -293,16 +357,9 @@ constraint def safetyClassCVerificationRule
 ??? code "rules/closure/closure_rules.sysml"
 
     ```sysml
-    // Closure consistency rules — native KerML constraints (Epic EE-3).
-    // Migrated from the proprietary ConsistencyRule predicate-attribute parts to
-    // native `constraint def` bodies whose `constraint { … }` expression is
-    // evaluated directly by the KerML constraint evaluator (validator/constraint-eval.ts).
-    //
-    // Rule metadata (id, appliesTo subject kind, severity, rationale) travels as plain
-    // attribute members; the boolean body is the rule. Per the EE-3 mapping the native
-    // surface drops the legacy `direction`/`relatedKinds` qualifiers — navigation counts
-    // related elements in either direction. Cross-element `uniqueAttribute` (CR-MED-012)
-    // has no single-subject expression and stays an engine-level exception (see note).
+    // Closure consistency rules. Portable SysML bodies remain literal `true` where
+    // cross-model navigation is not resolvable by a general SysML compiler; MEMO
+    // compiles the ontology-owned `predicateExpression` against the semantic model.
     package memo_rules_closure {
         private import ScalarValues::*;
     
@@ -311,8 +368,9 @@ constraint def safetyClassCVerificationRule
     
         // ─── Risk Layer Rules ────────────────────────────────────────────────
     
-        constraint def hazardMitigationRule {
+        constraint def HazardMitigationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-001";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Hazard";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "ISO 14971 requires each identified hazard to have risk control measures.";
@@ -320,17 +378,19 @@ constraint def safetyClassCVerificationRule
             constraint { true }
         }
     
-        constraint def hazardSeverityRule {
+        constraint def HazardSeverityRule :> MemoConsistencyRule {
             attribute id = "CR-MED-002";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Hazard";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Hazard severity is required for risk estimation per ISO 14971.";
-            attribute predicateExpression = "attributes.severity != \"\"";
+            attribute predicateExpression = "attributes.severity != ''";
             constraint { true }
         }
     
-        constraint def riskControlVerificationRule {
+        constraint def RiskControlVerificationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-003";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "RiskControlMeasure";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.4.";
@@ -338,8 +398,9 @@ constraint def safetyClassCVerificationRule
             constraint { true }
         }
     
-        constraint def initialRiskMatrixRule {
+        constraint def InitialRiskMatrixRule :> MemoConsistencyRule {
             attribute id = "CR-MED-004";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Risk";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Pre-mitigation risk must be assessed against a risk acceptability matrix.";
@@ -349,8 +410,9 @@ constraint def safetyClassCVerificationRule
     
         // ─── Requirements Layer Rules ────────────────────────────────────────
     
-        constraint def sysReqTraceRule {
+        constraint def SysReqTraceRule :> MemoConsistencyRule {
             attribute id = "CR-MED-010";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Requirement[requirementKind=system]";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Requirements shall be traceable to stakeholder needs per ISO 13485.";
@@ -358,8 +420,9 @@ constraint def safetyClassCVerificationRule
             constraint { true }
         }
     
-        constraint def swReqTraceRule {
+        constraint def SwReqTraceRule :> MemoConsistencyRule {
             attribute id = "CR-MED-011";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Requirement[requirementKind=software]";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Software requirements derive from system requirements per IEC 62304.";
@@ -375,17 +438,19 @@ constraint def safetyClassCVerificationRule
     
         // ─── Architecture Layer Rules ────────────────────────────────────────
     
-        constraint def swComponentSafetyClassRule {
+        constraint def SwComponentSafetyClassRule :> MemoConsistencyRule {
             attribute id = "CR-MED-020";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SoftwareModule";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "IEC 62304 requires safety classification for all software items.";
-            attribute predicateExpression = "attributes.safetyClass != \"\"";
+            attribute predicateExpression = "attributes.safetyClass != ''";
             constraint { true }
         }
     
-        constraint def swComponentReqRule {
+        constraint def SwComponentReqRule :> MemoConsistencyRule {
             attribute id = "CR-MED-021";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SoftwareModule";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Software items shall be linked to their requirements per IEC 62304.";
@@ -393,8 +458,9 @@ constraint def safetyClassCVerificationRule
             constraint { true }
         }
     
-        constraint def logicalFunctionAllocationRule {
+        constraint def LogicalFunctionAllocationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-022";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SystemFunction";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Functions should be allocated to implementation elements.";
@@ -404,17 +470,19 @@ constraint def safetyClassCVerificationRule
     
         // ─── Verification Layer Rules ────────────────────────────────────────
     
-        constraint def verificationCaseMethodRule {
+        constraint def VerificationCaseMethodRule :> MemoConsistencyRule {
             attribute id = "CR-MED-030";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "VerificationCase";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Verification method (test, analysis, inspection, demonstration) required per IEC 62304.";
-            attribute predicateExpression = "attributes.methodKind != \"\"";
+            attribute predicateExpression = "attributes.methodKind != ''";
             constraint { true }
         }
     
-        constraint def verificationCaseTargetRule {
+        constraint def VerificationCaseTargetRule :> MemoConsistencyRule {
             attribute id = "CR-MED-031";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "VerificationCase";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Verification cases must be linked to verifiable items.";
@@ -422,8 +490,9 @@ constraint def safetyClassCVerificationRule
             constraint { true }
         }
     
-        constraint def evidenceProductionRule {
+        constraint def EvidenceProductionRule :> MemoConsistencyRule {
             attribute id = "CR-MED-032";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "VerificationCase";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Verification results should be documented as evidence records.";
@@ -433,8 +502,9 @@ constraint def safetyClassCVerificationRule
     
         // ─── Cybersecurity Layer Rules ───────────────────────────────────────
     
-        constraint def threatMitigationRule {
+        constraint def ThreatMitigationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-040";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Threat";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "FDA cybersecurity guidance requires threat mitigation.";
@@ -442,8 +512,9 @@ constraint def safetyClassCVerificationRule
             constraint { true }
         }
     
-        constraint def assetThreatLinkRule {
+        constraint def AssetThreatLinkRule :> MemoConsistencyRule {
             attribute id = "CR-MED-041";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "CybersecurityAsset";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Assets should have threat analysis per FDA cybersecurity guidance.";
@@ -453,23 +524,89 @@ constraint def safetyClassCVerificationRule
     
         // ─── Interface Rules ─────────────────────────────────────────────────
     
-        constraint def logicalInterfaceDirectionRule {
+        constraint def LogicalInterfaceDirectionRule :> MemoConsistencyRule {
             attribute id = "CR-MED-050";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Interface";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Interface direction required for integration analysis.";
-            attribute predicateExpression = "attributes.direction != \"\"";
+            attribute predicateExpression = "attributes.direction != '' or attributes.directionality != ''";
             constraint { true }
         }
     
         // ─── Conditional Rules ───────────────────────────────────────────────
     
-        constraint def safetyClassCVerificationRule {
+        constraint def SafetyClassCVerificationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-101";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SoftwareModule";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "IEC 62304 requires rigorous verification for Class C software.";
-            attribute predicateExpression = "not(attributes.safetyClass == \"C\") or verifiedBy->size() >= 1";
+            attribute predicateExpression = "not(attributes.safetyClass == 'C') or verifiedBy->size() >= 1";
+            constraint { true }
+        }
+    
+        // ─── UI Layout Rules ─────────────────────────────────────────────────
+        //
+        // Traceability only: every part of a screen must have a design record
+        // behind it, and captured evidence must say where it came from.
+        //
+        // Scope is traceability, not geometry. Layout correctness (child within
+        // parent, inline siblings disjoint) is checked where the geometry is drawn,
+        // in the renderer: a pairwise sibling comparison has no KerML constraint
+        // form, since the evaluator has no Real literal and binds one implicit
+        // subject per quantifier.
+    
+        // The load-bearing traceability rule. A UI element that is not chrome must
+        // reach a design record — a requirement it satisfies, or an action it
+        // triggers. Chrome must be DECLARED `decoration`; an element left
+        // unclassified fails rather than passing as scenery.
+        constraint def UiElementDesignRecordRule :> MemoConsistencyRule {
+            attribute id = "CR-MED-110";
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute appliesTo = "UIElement";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "Every functional UI element must have a design record — a requirement it satisfies or an action it triggers. Elements with formKind `decoration` are chrome and are exempt.";
+            attribute predicateExpression = "attributes.formKind == 'decoration' or satisfiedBy->size() >= 1 or elementTriggersAction->size() >= 1";
+            constraint { true }
+        }
+    
+        // Interactive UI is where use error happens (IEC 62366-1), so a control
+        // that reaches no system function is either dead UI or unmodelled UI.
+        // The interactive-form restriction lives in the predicate because it spans
+        // several enum values.
+        constraint def ControlInvokesFunctionRule :> MemoConsistencyRule {
+            attribute id = "CR-MED-111";
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute appliesTo = "UIElement";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "An interactive UI element (button, selector, slider, field) should trigger a UIAction that invokes a system function; otherwise the control's purpose is not in the model. Physical controls are OperatorInterfaceElement and are covered separately.";
+            attribute predicateExpression = "not(formKind == 'button' or formKind == 'selector' or formKind == 'slider' or formKind == 'field') or elementTriggersAction->size() >= 1";
+            constraint { true }
+        }
+    
+        // Automatic boundary detection proposes; a reviewer disposes. An
+        // unconfirmed machine guess must never reach a design review looking like
+        // an engineering decision.
+        constraint def BoundsDetectionConfirmedRule :> MemoConsistencyRule {
+            attribute id = "CR-MED-112";
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute appliesTo = "UIElement";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "Automatically detected bounds are a proposal until a reviewer confirms them; released UI documentation should contain no unconfirmed automatic bounds.";
+            attribute predicateExpression = "not(attributes.detectionMethod == 'automatic') or attributes.confirmedBy != ''";
+            constraint { true }
+        }
+    
+        // A screenshot with no build behind it is undated design intent, not
+        // evidence of what the device does.
+        constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule {
+            attribute id = "CR-MED-113";
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute appliesTo = "ScreenCapture";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "A screen capture used as design or usability evidence must identify the build it was taken from and hash the image bytes, or it cannot be relied on in the DHF.";
+            attribute predicateExpression = "attributes.capturedBuild != '' and attributes.imageHash != ''";
             constraint { true }
         }
     }

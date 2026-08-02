@@ -17,7 +17,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ActivityAction`](architecture/functional/behavior/memo_behavior.md#activityaction) | `part def` | Activity action definition specializing `ArchitectureElement`. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
-| [`ActivityFlow`](architecture/functional/behavior/memo_behavior.md#activityflow) | `part def` | Activity flow definition specializing `ArchitectureElement`. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
+| [`ActivityFlow`](architecture/functional/behavior/memo_behavior.md#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
 | [`BehaviorProperty`](architecture/functional/behavior/memo_behavior.md#behaviorproperty) | `part def` | A verifiable behavioural constraint, such as an invariant, transition rule, temporal claim, assumption, or guarantee. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
 | [`Contract`](architecture/functional/behavior/memo_behavior.md#contract) | `part def` | Contract definition specializing `VerifiableElement`. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
 | [`InteractionMessage`](architecture/functional/behavior/memo_behavior.md#interactionmessage) | `part def` | Interaction message definition specializing `MemoPart`. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
@@ -32,10 +32,10 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`FunctionalExchange`](architecture/functional/functions/memo_functions.md#functionalexchange) | `part def` | Functional exchange definition specializing `ArchitectureElement`. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| [`FunctionalExchange`](architecture/functional/functions/memo_functions.md#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for budgets and assurance attributes that a flow usage cannot own. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 | [`FunctionalFlow`](architecture/functional/functions/memo_functions.md#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
-| [`FunctionalFlowStep`](architecture/functional/functions/memo_functions.md#functionalflowstep) | `part def` | Functional flow step definition specializing `MemoPart`. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
-| [`FunctionalScenario`](architecture/functional/functions/memo_functions.md#functionalscenario) | `part def` | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| [`FunctionalFlowStep`](architecture/functional/functions/memo_functions.md#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| [`FunctionalScenario`](architecture/functional/functions/memo_functions.md#functionalscenario) | `action def` | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 | [`SystemAction`](architecture/functional/functions/memo_functions.md#systemaction) | `action def` | Executable behavior realizing a system function. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 | [`SystemFunction`](architecture/functional/functions/memo_functions.md#systemfunction) | `part def` | System function definition specializing `ArchitectureElement`. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 
@@ -101,7 +101,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`SoftwareComponent`](architecture/implementation/software/runtime/memo_software_runtime.md#softwarecomponent) | `part def` | Software component definition specializing `ArchitectureElement`. | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
+| [`SoftwareComponent`](architecture/implementation/software/runtime/memo_software_runtime.md#softwarecomponent) | `part def` | Software component definition specializing `SoftwareItem`. | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
 
 
 ## `memo::architecture::implementation::software::structure`
@@ -112,20 +112,24 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`ConfigurationArtifact`](architecture/implementation/software/structure/memo_software_structure.md#configurationartifact) | `part def` | Configuration artifact definition specializing `ArchitectureElement`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
 | [`DataModel`](architecture/implementation/software/structure/memo_software_structure.md#datamodel) | `part def` | Data model definition specializing `ArchitectureElement`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
 | [`SBOMEntry`](architecture/implementation/software/structure/memo_software_structure.md#sbomentry) | `item def` | Sbomentry definition specializing `MemoExchangeItem`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
-| [`SoftwareModule`](architecture/implementation/software/structure/memo_software_structure.md#softwaremodule) | `part def` | Software module definition specializing `ArchitectureElement`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
-| [`SoftwareSystem`](architecture/implementation/software/structure/memo_software_structure.md#softwaresystem) | `part def` | Software system definition specializing `ArchitectureElement`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
+| [`SoftwareItem`](architecture/implementation/software/structure/memo_software_structure.md#softwareitem) | `part def` | Software item definition specializing `ArchitectureElement`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
+| [`SoftwareModule`](architecture/implementation/software/structure/memo_software_structure.md#softwaremodule) | `part def` | Software module definition specializing `SoftwareItem`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
+| [`SoftwareSystem`](architecture/implementation/software/structure/memo_software_structure.md#softwaresystem) | `part def` | Software system definition specializing `SoftwareItem`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
 
 
 ## `memo::architecture::implementation::ui`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
+| [`InteractionElement`](architecture/implementation/ui/memo_ui.md#interactionelement) | `part def` | Interaction element definition specializing `ArchitectureElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`InteractionFlow`](architecture/implementation/ui/memo_ui.md#interactionflow) | `action def` | Interaction flow definition specializing `MemoAction`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`OperatorInterfaceElement`](architecture/implementation/ui/memo_ui.md#operatorinterfaceelement) | `part def` | Operator interface element definition specializing `PhysicalComponent,`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`RegionBounds`](architecture/implementation/ui/memo_ui.md#regionbounds) | `attribute def` | Region bounds definition. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`ScreenCapture`](architecture/implementation/ui/memo_ui.md#screencapture) | `part def` | Screen capture definition specializing `MemoEvidence`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`UIAction`](architecture/implementation/ui/memo_ui.md#uiaction) | `action def` | Uiaction definition specializing `MemoAction`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`UIContainer`](architecture/implementation/ui/memo_ui.md#uicontainer) | `part def` | Uicontainer definition specializing `ArchitectureElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`UIElement`](architecture/implementation/ui/memo_ui.md#uielement) | `part def` | Uielement definition specializing `ArchitectureElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`UIElement`](architecture/implementation/ui/memo_ui.md#uielement) | `part def` | Uielement definition specializing `SoftwareItem,`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`UIEvent`](architecture/implementation/ui/memo_ui.md#uievent) | `part def` | Uievent definition specializing `ArchitectureElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`UIScenario`](architecture/implementation/ui/memo_ui.md#uiscenario) | `part def` | Uiscenario definition specializing `MemoScenario`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`UIScenario`](architecture/implementation/ui/memo_ui.md#uiscenario) | `action def` | Uiscenario definition specializing `MemoScenario`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`UIState`](architecture/implementation/ui/memo_ui.md#uistate) | `part def` | UI state is presentation state — distinct from system/device state. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`UserInterface`](architecture/implementation/ui/memo_ui.md#userinterface) | `part def` | User interface definition specializing `ArchitectureElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 
@@ -137,7 +141,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`CommandPort`](architecture/logical/interfaces/memo_interfaces.md#commandport) | `port def` | Command port definition specializing `DataPort`. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
 | [`ComponentExchange`](architecture/logical/interfaces/memo_interfaces.md#componentexchange) | `part def` | Component exchange definition specializing `ArchitectureElement`. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
 | [`DataInterface`](architecture/logical/interfaces/memo_interfaces.md#datainterface) | `interface def` | Data interface definition specializing `MemoInterface`. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
-| [`DataPort`](architecture/logical/interfaces/memo_interfaces.md#dataport) | `port def` | Data port definition. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
+| [`DataPort`](architecture/logical/interfaces/memo_interfaces.md#dataport) | `port def` | Data port definition specializing `MemoPort`. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
 | [`Interface`](architecture/logical/interfaces/memo_interfaces.md#interface) | `interface def` | Realization domain (hardware vs software), signaling family (digital / analog / synchronous / asynchronous) and concrete protocol (SPI, CAN, Ethernet, 4-20mA, REST, gRPC, message-queue …) are captured by `interfaceKind` + `protocol`, NOT by a class branch.… | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
 | [`InterfaceItem`](architecture/logical/interfaces/memo_interfaces.md#interfaceitem) | `item def` | A typed thing exchanged at a boundary. Concrete items such as AlarmSignal and FlowCommand specialize this type; they are neither functions nor generic action-flow notation.… | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
 | [`SensorPort`](architecture/logical/interfaces/memo_interfaces.md#sensorport) | `port def` | Sensor port definition specializing `DataPort`. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
@@ -158,6 +162,9 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`LogicalMode`](architecture/logical/structure/memo_logical_structure.md#logicalmode) | `part def` | Logical mode definition specializing `ArchitectureElement`. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`LogicalPort`](architecture/logical/structure/memo_logical_structure.md#logicalport) | `port def` | Boundary features and contracts. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`LogicalState`](architecture/logical/structure/memo_logical_structure.md#logicalstate) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
+| [`Subsystem`](architecture/logical/structure/memo_logical_structure.md#subsystem) | `part def` | Subsystem definition specializing `LogicalComponent`. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
+| [`System`](architecture/logical/structure/memo_logical_structure.md#system) | `part def` | System definition specializing `LogicalComponent`. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
+| [`SystemOfSystems`](architecture/logical/structure/memo_logical_structure.md#systemofsystems) | `part def` | Three types rather than three role values, because they differ in what they may CONTAIN — and containment legality cannot live on an attribute. The allowed children are declared as typed part features, which is how SysML v2 already states "what may be contained".… | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 
 
 ## `memo::architecture::operational::activities`
@@ -202,8 +209,8 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`MemoScenario`](architecture/operational/scenarios/memo_scenarios.md#memoscenario) | `part def` | Memo scenario definition specializing `MemoPart`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
-| [`OperativeScenario`](architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `part def` | The operational-layer scenario: a path through an OperationalWorkflow in a use context. It is realized down the V by a FunctionalScenario (the function sequence) and a UIScenario (the interaction sequence), each owned by its own architecture layer and linked by typed realizati… | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| [`MemoScenario`](architecture/operational/scenarios/memo_scenarios.md#memoscenario) | `action def` | Memo scenario definition specializing `MemoAction`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| [`OperativeScenario`](architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `action def` | The operational-layer scenario: a path through an OperationalWorkflow in a use context. It is realized down the V by a FunctionalScenario (the function sequence) and a UIScenario (the interaction sequence), each owned by its own architecture layer and linked by typed realizati… | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 | [`ScenarioOccurrence`](architecture/operational/scenarios/memo_scenarios.md#scenariooccurrence) | `part def` | An actual or hypothetical execution of a scenario (usability test run, postmarket incident reconstruction, simulated-use session). | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 
@@ -253,11 +260,40 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`ProcessingNode`](architecture/realization/physical/memo_physical_architecture.md#processingnode) | `part def` | Processing node definition specializing `ArchitectureElement`. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
 
 
+## `memo::artifacts::configuration_management`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`ChangeRequest`](artifacts/configuration_management/memo_configuration_management.md#changerequest) | `part def` | Change request definition specializing `MemoPart`. | [`artifacts/configuration_management/memo_configuration_management.sysml`](artifacts/configuration_management/memo_configuration_management.md) |
+| [`ConfigurationItem`](artifacts/configuration_management/memo_configuration_management.md#configurationitem) | `part def` | Configuration item definition specializing `MemoPart`. | [`artifacts/configuration_management/memo_configuration_management.sysml`](artifacts/configuration_management/memo_configuration_management.md) |
+
+
+## `memo::artifacts::core`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`ADRArtifact`](artifacts/core/memo_controlled_artifacts.md#adrartifact) | `part def` | Adrartifact definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`AnalysisNotebook`](artifacts/core/memo_controlled_artifacts.md#analysisnotebook) | `part def` | Analysis notebook definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`ControlledArtifact`](artifacts/core/memo_controlled_artifacts.md#controlledartifact) | `item def` | Controlled artifact definition specializing `MemoPart`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`GeneratedReport`](artifacts/core/memo_controlled_artifacts.md#generatedreport) | `part def` | Generated report definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`MarkdownDocumentSource`](artifacts/core/memo_controlled_artifacts.md#markdowndocumentsource) | `part def` | Markdown document source definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`ModelDataset`](artifacts/core/memo_controlled_artifacts.md#modeldataset) | `part def` | Model dataset definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`ModelOwnedArtifact`](artifacts/core/memo_controlled_artifacts.md#modelownedartifact) | `part def` | Model owned artifact definition specializing `ControlledArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`ModelQueryScript`](artifacts/core/memo_controlled_artifacts.md#modelqueryscript) | `part def` | Model query script definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+
+
 ## `memo::artifacts::definitions`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ArtifactKindDef`](artifacts/definitions/memo_artifact_definitions.md#artifactkinddef) | `part def` | Artifact kind def definition specializing `MemoPart`. | [`artifacts/definitions/memo_artifact_definitions.sysml`](artifacts/definitions/memo_artifact_definitions.md) |
+
+
+## `memo::artifacts::documents::risk_management`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`RiskManagementFile`](artifacts/documents/risk_management/memo_risk_management.md#riskmanagementfile) | `part def` | Risk management file definition specializing `ModelOwnedArtifact`. | [`artifacts/documents/risk_management/memo_risk_management.sysml`](artifacts/documents/risk_management/memo_risk_management.md) |
 
 
 ## `memo::assurance::cybersecurity`
@@ -272,7 +308,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`SecurityClaim`](assurance/cybersecurity/memo_cybersecurity.md#securityclaim) | `part def` | Security claim definition specializing `MemoEvidence`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`SecurityRequirement`](assurance/cybersecurity/memo_cybersecurity.md#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`Threat`](assurance/cybersecurity/memo_cybersecurity.md#threat) | `item def` | Threat definition specializing `RiskDriver`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
-| [`ThreatScenario`](assurance/cybersecurity/memo_cybersecurity.md#threatscenario) | `part def` | A scenario specialization: an attack path through the system, classified by the shared scenario dimensions with purpose `cybersecurity`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ThreatScenario`](assurance/cybersecurity/memo_cybersecurity.md#threatscenario) | `action def` | A scenario specialization: an attack path through the system, classified by the shared scenario dimensions with purpose `cybersecurity`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`TrustBoundary`](assurance/cybersecurity/memo_cybersecurity.md#trustboundary) | `item def` | Trust boundary definition specializing `InterfaceElement`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`Vulnerability`](assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | `item def` | Vulnerability definition specializing `MemoPart`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 
@@ -282,7 +318,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`FormativeEvaluation`](assurance/human_factors/memo_human_factors.md#formativeevaluation) | `part def` | Formative evaluation definition specializing `MemoEvidence`. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
-| [`HazardRelatedUseScenario`](assurance/human_factors/memo_human_factors.md#hazardrelatedusescenario) | `part def` | A use scenario whose performance could lead to a hazardous situation (IEC 62366-1 3.9); selected for summative evaluation. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
+| [`HazardRelatedUseScenario`](assurance/human_factors/memo_human_factors.md#hazardrelatedusescenario) | `action def` | A use scenario whose performance could lead to a hazardous situation (IEC 62366-1 3.9); selected for summative evaluation. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
 | [`UsabilityValidation`](assurance/human_factors/memo_human_factors.md#usabilityvalidation) | `part def` | Usability validation definition specializing `MemoEvidence`. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
 | [`UseError`](assurance/human_factors/memo_human_factors.md#useerror) | `part def` | Use error definition specializing `MemoPart`. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
 
@@ -344,6 +380,13 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`MinimalCutSet`](assurance/safety_risk/analysis/memo_fmea.md#minimalcutset) | `item def` | Minimal cut set definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 
 
+## `memo::assurance::safety_risk::postmarket_surveillance`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`PostMarketSurveillance`](assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.md#postmarketsurveillance) | `part def` | Post market surveillance definition specializing `MemoPart`. | [`assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.sysml`](assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.md) |
+
+
 ## `memo::assurance::verification_validation`
 
 | Name | SysML kind | Description | Source |
@@ -352,37 +395,24 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`TestArtifact`](assurance/verification_validation/memo_assurance.md#testartifact) | `part def` | Test artifact definition specializing `MemoEvidence`. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 | [`ValidationCase`](assurance/verification_validation/memo_assurance.md#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 | [`VerificationCase`](assurance/verification_validation/memo_assurance.md#verificationcase) | `verification def` | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
-| [`VerificationScenario`](assurance/verification_validation/memo_assurance.md#verificationscenario) | `part def` | A scenario executed to verify — selected path with purpose 'verification'. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
+| [`VerificationScenario`](assurance/verification_validation/memo_assurance.md#verificationscenario) | `action def` | A scenario executed to verify — selected path with purpose 'verification'. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 
 
-## `memo::compliance::artifacts`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`ControlledArtifact`](compliance/artifacts/memo_artifacts.md#controlledartifact) | `item def` | Controlled artifact definition specializing `MemoPart`. | [`compliance/artifacts/memo_artifacts.sysml`](compliance/artifacts/memo_artifacts.md) |
-
-
-## `memo::compliance::change`
+## `memo::assurance::verification_validation::clinical_evaluation`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ChangeRequest`](compliance/change/memo_change.md#changerequest) | `part def` | Change request definition specializing `MemoPart`. | [`compliance/change/memo_change.sysml`](compliance/change/memo_change.md) |
-| [`ConfigurationItem`](compliance/change/memo_change.md#configurationitem) | `part def` | Configuration item definition specializing `MemoPart`. | [`compliance/change/memo_change.sysml`](compliance/change/memo_change.md) |
+| [`ClinicalEvaluation`](assurance/verification_validation/clinical_evaluation/memo_clinical_evaluation.md#clinicalevaluation) | `part def` | Clinical evaluation definition specializing `MemoPart`. | [`assurance/verification_validation/clinical_evaluation/memo_clinical_evaluation.sysml`](assurance/verification_validation/clinical_evaluation/memo_clinical_evaluation.md) |
 
 
-## `memo::compliance::iso14971`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`RiskManagementFile`](compliance/iso14971/risk_management_file.md#riskmanagementfile) | `part def` | Risk management file definition specializing `MemoPart`. | [`compliance/iso14971/risk_management_file.sysml`](compliance/iso14971/risk_management_file.md) |
-
-
-## `memo::compliance::postmarket`
+## `memo::core::annotations`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ClinicalEvaluation`](compliance/postmarket/memo_postmarket.md#clinicalevaluation) | `part def` | Clinical evaluation definition specializing `MemoPart`. | [`compliance/postmarket/memo_postmarket.sysml`](compliance/postmarket/memo_postmarket.md) |
-| [`PostMarketSurveillance`](compliance/postmarket/memo_postmarket.md#postmarketsurveillance) | `part def` | Post market surveillance definition specializing `MemoPart`. | [`compliance/postmarket/memo_postmarket.sysml`](compliance/postmarket/memo_postmarket.md) |
+| [`ModelAnnotation`](core/annotations/memo_annotations.md#modelannotation) | `part def` | Model annotation definition specializing `MemoPart`. | [`core/annotations/memo_annotations.sysml`](core/annotations/memo_annotations.md) |
+| [`ModelComment`](core/annotations/memo_annotations.md#modelcomment) | `part def` | Model comment definition specializing `ModelAnnotation`. | [`core/annotations/memo_annotations.sysml`](core/annotations/memo_annotations.md) |
+| [`ModelNote`](core/annotations/memo_annotations.md#modelnote) | `part def` | Model note definition specializing `ModelAnnotation`. | [`core/annotations/memo_annotations.sysml`](core/annotations/memo_annotations.md) |
+| [`ModelRationale`](core/annotations/memo_annotations.md#modelrationale) | `part def` | Model rationale definition specializing `ModelAnnotation`. | [`core/annotations/memo_annotations.sysml`](core/annotations/memo_annotations.md) |
 
 
 ## `memo::core::common`
@@ -432,8 +462,6 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ElementKindAlias`](core/methodology_scope/methodology_scope.md#elementkindalias) | `part def` | Element kind alias definition specializing `MemoPart`. | [`core/methodology_scope/methodology_scope.sysml`](core/methodology_scope/methodology_scope.md) |
-| [`MethodologyLayerSet`](core/methodology_scope/methodology_scope.md#methodologylayerset) | `part def` | Methodology layer set definition specializing `MemoPart`. | [`core/methodology_scope/methodology_scope.sysml`](core/methodology_scope/methodology_scope.md) |
-| [`MethodologyScope`](core/methodology_scope/methodology_scope.md#methodologyscope) | `part def` | Methodology scope definition specializing `MemoPart`. | [`core/methodology_scope/methodology_scope.sysml`](core/methodology_scope/methodology_scope.md) |
 
 
 ## `memo::core::semantics`
@@ -462,7 +490,8 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`MethodologyDefinition`](methodology/core/memo_core.md#methodologydefinition) | `part def` | Methodology definition definition specializing `MemoPart`. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 | [`MethodologyLibrary`](methodology/core/memo_core.md#methodologylibrary) | `part def` | Methodology library definition specializing `MemoPart`. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 | [`ProjectMethodBinding`](methodology/core/memo_core.md#projectmethodbinding) | `part def` | Project method binding definition specializing `MemoPart`. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
-| [`ResolvedMethodology`](methodology/core/memo_core.md#resolvedmethodology) | `part def` | Resolved methodology definition specializing `MemoPart`. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
+| [`ResolvedMethodology`](methodology/core/memo_core.md#resolvedmethodology) | `part def` | Derived, never authored. The resolver projects this from a binding and its methodology chain. If it is serialized for review it is generated output that records its input hashes; it does not compete with the authored methodology and binding, and ontology source declares no ins… | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
+| [`RulePolicy`](methodology/core/memo_core.md#rulepolicy) | `part def` | A rule's disposition under one methodology or project binding. `targetRule` and `replacementRule` are typed references to the rule's own `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.… | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 
 
 ## `memo::methodology::gates`
@@ -491,7 +520,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`WorkflowStep`](methodology/workflow/memo_workflow.md#workflowstep) | `part def` | Workflow step definition specializing `MemoPart`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`MethodologyWorkflowStep`](methodology/workflow/memo_workflow.md#methodologyworkflowstep) | `action def` | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from memo_architecture_operational_workflows::WorkflowStep, which is a step in an OPERATIONAL workflow performed by users.… | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 
 
 ## `memo::viewpoints::catalog`
@@ -501,25 +530,25 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`DiagramIntentMapping`](viewpoints/catalog/memo_viewpoint_catalog.md#diagramintentmapping) | `part def` | Diagram intent mapping definition specializing `MemoPart`. | [`viewpoints/catalog/memo_viewpoint_catalog.sysml`](viewpoints/catalog/memo_viewpoint_catalog.md) |
 
 
-## `memo::viewpoints::clinical::clinical_evidence_view`
+## `memo::viewpoints::clinical::views::clinical_evidence_view`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`MemoClinicalEvidenceView`](viewpoints/clinical/clinical_evidence_view/clinical_evidence_view.md#memoclinicalevidenceview) | `view def` | Memo clinical evidence view definition specializing `MemoDocumentView`. | [`viewpoints/clinical/clinical_evidence_view/clinical_evidence_view.sysml`](viewpoints/clinical/clinical_evidence_view/clinical_evidence_view.md) |
+| [`MemoClinicalEvidenceView`](viewpoints/clinical/views/clinical_evidence_view/clinical_evidence_view.md#memoclinicalevidenceview) | `view def` | Memo clinical evidence view definition specializing `MemoDocumentView`. | [`viewpoints/clinical/views/clinical_evidence_view/clinical_evidence_view.sysml`](viewpoints/clinical/views/clinical_evidence_view/clinical_evidence_view.md) |
 
 
-## `memo::viewpoints::cybersecurity::cybersecurity_assessment_view`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`MemoCybersecurityAssessmentView`](viewpoints/cybersecurity/cybersecurity_assessment_view/cybersecurity_assessment_view.md#memocybersecurityassessmentview) | `view def` | Memo cybersecurity assessment view definition specializing `MemoDocumentView`. | [`viewpoints/cybersecurity/cybersecurity_assessment_view/cybersecurity_assessment_view.sysml`](viewpoints/cybersecurity/cybersecurity_assessment_view/cybersecurity_assessment_view.md) |
-
-
-## `memo::viewpoints::cybersecurity::threat_model_view`
+## `memo::viewpoints::cybersecurity::views::cybersecurity_assessment_view`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`MemoCybersecurityThreatModelView`](viewpoints/cybersecurity/threat_model_view/threat_model_view.md#memocybersecuritythreatmodelview) | `view def` | Memo cybersecurity threat model view definition specializing `MemoDocumentView`. | [`viewpoints/cybersecurity/threat_model_view/threat_model_view.sysml`](viewpoints/cybersecurity/threat_model_view/threat_model_view.md) |
+| [`MemoCybersecurityAssessmentView`](viewpoints/cybersecurity/views/cybersecurity_assessment_view/cybersecurity_assessment_view.md#memocybersecurityassessmentview) | `view def` | Memo cybersecurity assessment view definition specializing `MemoDocumentView`. | [`viewpoints/cybersecurity/views/cybersecurity_assessment_view/cybersecurity_assessment_view.sysml`](viewpoints/cybersecurity/views/cybersecurity_assessment_view/cybersecurity_assessment_view.md) |
+
+
+## `memo::viewpoints::cybersecurity::views::threat_model_view`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MemoCybersecurityThreatModelView`](viewpoints/cybersecurity/views/threat_model_view/threat_model_view.md#memocybersecuritythreatmodelview) | `view def` | Memo cybersecurity threat model view definition specializing `MemoDocumentView`. | [`viewpoints/cybersecurity/views/threat_model_view/threat_model_view.sysml`](viewpoints/cybersecurity/views/threat_model_view/threat_model_view.md) |
 
 
 ## `memo::viewpoints::definitions`
@@ -536,9 +565,31 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`ViewSelectionQuery`](viewpoints/definitions/memo_viewpoint_definitions.md#viewselectionquery) | `part def` | View selection query definition specializing `MemoPart`. | [`viewpoints/definitions/memo_viewpoint_definitions.sysml`](viewpoints/definitions/memo_viewpoint_definitions.md) |
 
 
-## `memo::viewpoints::usability::usability_engineering_view`
+## `memo::viewpoints::rendering`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`MemoUsabilityEngineeringView`](viewpoints/usability/usability_engineering_view/usability_engineering_view.md#memousabilityengineeringview) | `view def` | Memo usability engineering view definition specializing `MemoDocumentView`. | [`viewpoints/usability/usability_engineering_view/usability_engineering_view.sysml`](viewpoints/usability/usability_engineering_view/usability_engineering_view.md) |
+| [`ExplorerClassification`](viewpoints/rendering/memo_rendering.md#explorerclassification) | `part def` | Where a source namespace's kinds appear in the Model Explorer tree. `sourceNamespace` names the ontology namespace or kind group the classification applies to; `explorerDomain` and `explorerGroup` name its place in MEMO's V-model taxonomy. | [`viewpoints/rendering/memo_rendering.sysml`](viewpoints/rendering/memo_rendering.md) |
+| [`LayerRendering`](viewpoints/rendering/memo_rendering.md#layerrendering) | `part def` | The presentation identity of one architecture layer. | [`viewpoints/rendering/memo_rendering.sysml`](viewpoints/rendering/memo_rendering.md) |
+
+
+## `memo::viewpoints::ui_layout::screen_layout_view`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MemoScreenLayoutView`](viewpoints/ui_layout/screen_layout_view/screen_layout_view.md#memoscreenlayoutview) | `view def` | Memo screen layout view definition specializing `MemoDiagramView`. | [`viewpoints/ui_layout/screen_layout_view/screen_layout_view.sysml`](viewpoints/ui_layout/screen_layout_view/screen_layout_view.md) |
+
+
+## `memo::viewpoints::ui_layout::views::screen_layout_view`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MemoScreenLayoutView`](viewpoints/ui_layout/views/screen_layout_view/screen_layout_view.md#memoscreenlayoutview) | `view def` | Memo screen layout view definition specializing `MemoDiagramView`. | [`viewpoints/ui_layout/views/screen_layout_view/screen_layout_view.sysml`](viewpoints/ui_layout/views/screen_layout_view/screen_layout_view.md) |
+
+
+## `memo::viewpoints::usability::views::usability_engineering_view`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MemoUsabilityEngineeringView`](viewpoints/usability/views/usability_engineering_view/usability_engineering_view.md#memousabilityengineeringview) | `view def` | Memo usability engineering view definition specializing `MemoDocumentView`. | [`viewpoints/usability/views/usability_engineering_view/usability_engineering_view.sysml`](viewpoints/usability/views/usability_engineering_view/usability_engineering_view.md) |
 

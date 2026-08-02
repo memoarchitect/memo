@@ -9,8 +9,9 @@ package memo_rules_closure {
 
     // ─── Risk Layer Rules ────────────────────────────────────────────────
 
-    constraint def HazardMitigationRule {
+    constraint def HazardMitigationRule :> MemoConsistencyRule {
         attribute id = "CR-MED-001";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "ISO 14971 requires each identified hazard to have risk control measures.";
@@ -18,8 +19,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def HazardSeverityRule {
+    constraint def HazardSeverityRule :> MemoConsistencyRule {
         attribute id = "CR-MED-002";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Hazard severity is required for risk estimation per ISO 14971.";
@@ -27,8 +29,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def RiskControlVerificationRule {
+    constraint def RiskControlVerificationRule :> MemoConsistencyRule {
         attribute id = "CR-MED-003";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "RiskControlMeasure";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.4.";
@@ -36,8 +39,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def InitialRiskMatrixRule {
+    constraint def InitialRiskMatrixRule :> MemoConsistencyRule {
         attribute id = "CR-MED-004";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Risk";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Pre-mitigation risk must be assessed against a risk acceptability matrix.";
@@ -47,8 +51,9 @@ package memo_rules_closure {
 
     // ─── Requirements Layer Rules ────────────────────────────────────────
 
-    constraint def SysReqTraceRule {
+    constraint def SysReqTraceRule :> MemoConsistencyRule {
         attribute id = "CR-MED-010";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Requirements shall be traceable to stakeholder needs per ISO 13485.";
@@ -56,8 +61,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def SwReqTraceRule {
+    constraint def SwReqTraceRule :> MemoConsistencyRule {
         attribute id = "CR-MED-011";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Requirement[requirementKind=software]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Software requirements derive from system requirements per IEC 62304.";
@@ -73,8 +79,9 @@ package memo_rules_closure {
 
     // ─── Architecture Layer Rules ────────────────────────────────────────
 
-    constraint def SwComponentSafetyClassRule {
+    constraint def SwComponentSafetyClassRule :> MemoConsistencyRule {
         attribute id = "CR-MED-020";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 requires safety classification for all software items.";
@@ -82,8 +89,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def SwComponentReqRule {
+    constraint def SwComponentReqRule :> MemoConsistencyRule {
         attribute id = "CR-MED-021";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Software items shall be linked to their requirements per IEC 62304.";
@@ -91,8 +99,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def LogicalFunctionAllocationRule {
+    constraint def LogicalFunctionAllocationRule :> MemoConsistencyRule {
         attribute id = "CR-MED-022";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Functions should be allocated to implementation elements.";
@@ -102,8 +111,9 @@ package memo_rules_closure {
 
     // ─── Verification Layer Rules ────────────────────────────────────────
 
-    constraint def VerificationCaseMethodRule {
+    constraint def VerificationCaseMethodRule :> MemoConsistencyRule {
         attribute id = "CR-MED-030";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Verification method (test, analysis, inspection, demonstration) required per IEC 62304.";
@@ -111,8 +121,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def VerificationCaseTargetRule {
+    constraint def VerificationCaseTargetRule :> MemoConsistencyRule {
         attribute id = "CR-MED-031";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Verification cases must be linked to verifiable items.";
@@ -120,8 +131,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def EvidenceProductionRule {
+    constraint def EvidenceProductionRule :> MemoConsistencyRule {
         attribute id = "CR-MED-032";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Verification results should be documented as evidence records.";
@@ -131,8 +143,9 @@ package memo_rules_closure {
 
     // ─── Cybersecurity Layer Rules ───────────────────────────────────────
 
-    constraint def ThreatMitigationRule {
+    constraint def ThreatMitigationRule :> MemoConsistencyRule {
         attribute id = "CR-MED-040";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Threat";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "FDA cybersecurity guidance requires threat mitigation.";
@@ -140,8 +153,9 @@ package memo_rules_closure {
         constraint { true }
     }
 
-    constraint def AssetThreatLinkRule {
+    constraint def AssetThreatLinkRule :> MemoConsistencyRule {
         attribute id = "CR-MED-041";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "CybersecurityAsset";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Assets should have threat analysis per FDA cybersecurity guidance.";
@@ -151,8 +165,9 @@ package memo_rules_closure {
 
     // ─── Interface Rules ─────────────────────────────────────────────────
 
-    constraint def LogicalInterfaceDirectionRule {
+    constraint def LogicalInterfaceDirectionRule :> MemoConsistencyRule {
         attribute id = "CR-MED-050";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Interface";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Interface direction required for integration analysis.";
@@ -162,8 +177,9 @@ package memo_rules_closure {
 
     // ─── Conditional Rules ───────────────────────────────────────────────
 
-    constraint def SafetyClassCVerificationRule {
+    constraint def SafetyClassCVerificationRule :> MemoConsistencyRule {
         attribute id = "CR-MED-101";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 requires rigorous verification for Class C software.";
@@ -186,8 +202,9 @@ package memo_rules_closure {
     // reach a design record — a requirement it satisfies, or an action it
     // triggers. Chrome must be DECLARED `decoration`; an element left
     // unclassified fails rather than passing as scenery.
-    constraint def UiElementDesignRecordRule {
+    constraint def UiElementDesignRecordRule :> MemoConsistencyRule {
         attribute id = "CR-MED-110";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Every functional UI element must have a design record — a requirement it satisfies or an action it triggers. Elements with formKind `decoration` are chrome and are exempt.";
@@ -199,8 +216,9 @@ package memo_rules_closure {
     // that reaches no system function is either dead UI or unmodelled UI.
     // The interactive-form restriction lives in the predicate because it spans
     // several enum values.
-    constraint def ControlInvokesFunctionRule {
+    constraint def ControlInvokesFunctionRule :> MemoConsistencyRule {
         attribute id = "CR-MED-111";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "An interactive UI element (button, selector, slider, field) should trigger a UIAction that invokes a system function; otherwise the control's purpose is not in the model. Physical controls are OperatorInterfaceElement and are covered separately.";
@@ -211,8 +229,9 @@ package memo_rules_closure {
     // Automatic boundary detection proposes; a reviewer disposes. An
     // unconfirmed machine guess must never reach a design review looking like
     // an engineering decision.
-    constraint def BoundsDetectionConfirmedRule {
+    constraint def BoundsDetectionConfirmedRule :> MemoConsistencyRule {
         attribute id = "CR-MED-112";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Automatically detected bounds are a proposal until a reviewer confirms them; released UI documentation should contain no unconfirmed automatic bounds.";
@@ -222,8 +241,9 @@ package memo_rules_closure {
 
     // A screenshot with no build behind it is undated design intent, not
     // evidence of what the device does.
-    constraint def ScreenCaptureProvenanceRule {
+    constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule {
         attribute id = "CR-MED-113";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "ScreenCapture";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "A screen capture used as design or usability evidence must identify the build it was taken from and hash the image bytes, or it cannot be relied on in the DHF.";

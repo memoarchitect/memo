@@ -6,8 +6,9 @@ package memo_rules_crosslayer {
     private import memo_core_consistency_rules::*;
     private import memo_core_enumerations::*;
 
-    constraint def RiskToReqTraceRule {
+    constraint def RiskToReqTraceRule :> MemoConsistencyRule {
         attribute id = "XL-001";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Risk-requirement traceability required for regulatory submissions.";
@@ -15,8 +16,9 @@ package memo_rules_crosslayer {
         constraint { true }
     }
 
-    constraint def ReqToArchTraceRule {
+    constraint def ReqToArchTraceRule :> MemoConsistencyRule {
         attribute id = "XL-002";
+        attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Requirements-to-architecture traceability per IEC 62304.";

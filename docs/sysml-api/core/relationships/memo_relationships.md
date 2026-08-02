@@ -33,10 +33,10 @@
 | --- | --- | --- | --- |
 | [`MemoRelationship`](#memorelationship) | `connection def` | All MEMO relations are native SysML v2 `connection def`s (each is a Connection/Association), specializing the MemoRelationship base. The relationship name is the verb; the RelationshipRegistry derives the navigable type as camelCase(name) and navigation is bidirectional.… | — |
 | [`MemoLink`](#memolink) | `connection def` | The general relation that can join any two model elements, whatever their metaclass. Most specific relations type their ends against a foundation (MemoPart, VerifiableElement, …).… | `MemoRelationship` |
-| [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship from `MemoPart` to `VerifiableElement`. | `MemoRelationship` |
-| [`SatisfiedBy`](#satisfiedby) | `connection def` | Typed relationship from `VerifiableElement` to `ArchitectureElement`. | `MemoRelationship` |
+| [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship for derives from. | `MemoRelationship` |
+| [`SatisfiedBy`](#satisfiedby) | `connection def` | Typed relationship for satisfied by. | `MemoRelationship` |
 | [`MitigationKind`](#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | — |
-| [`Mitigates`](#mitigates) | `connection def` | Typed relationship from `VerifiableElement` to `MemoPart`. | `MemoRelationship` |
+| [`Mitigates`](#mitigates) | `connection def` | Typed relationship for mitigates. | `MemoRelationship` |
 | [`AllocatedTo`](#allocatedto) | `connection def` | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. | `MemoRelationship` |
 | [`Realizes`](#realizes) | `connection def` | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… | `MemoRelationship` |
 | [`VerifiedBy`](#verifiedby) | `connection def` | Typed relationship from `MemoPart` to `MemoVerificationCase`. | `MemoRelationship` |
@@ -111,7 +111,7 @@ connection def DerivesFrom :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoPart` to `VerifiableElement`. |
+| Description | Typed relationship for derives from. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -126,7 +126,7 @@ connection def SatisfiedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `VerifiableElement` to `ArchitectureElement`. |
+| Description | Typed relationship for satisfied by. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -156,7 +156,7 @@ connection def Mitigates :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `VerifiableElement` to `MemoPart`. |
+| Description | Typed relationship for mitigates. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -740,12 +740,15 @@ connection def BindsToInterface :> MemoRelationship
     
         connection def DerivesFrom :> MemoRelationship {
             // Drivers include needs and hazards (ISO 14971: hazards drive
-            // requirements), so the source stays at MemoPart
+            // requirements). targetRequirement is untyped: Need is a requirement def
+            // (MemoNeed + RequirementDriver) and does not conform to VerifiableElement
+            // under SysIDE related-feature-conformance.
             end sourceDriver : MemoPart;
-            end targetRequirement : VerifiableElement;
+            end targetRequirement;
         }
         connection def SatisfiedBy :> MemoRelationship {
-            end requiredElement : VerifiableElement;
+            // Untyped: Need (requirement) instances must participate alongside Requirement.
+            end requiredElement;
             end satisfyingElement : ArchitectureElement;
         }
         // Mitigates unifies the control/action → risk-element edges of the
@@ -762,8 +765,9 @@ connection def BindsToInterface :> MemoRelationship
         }
         connection def Mitigates :> MemoRelationship {
             attribute mitigationKind : MitigationKind;
-            end control : VerifiableElement;
-            end mitigatedElement : MemoPart;
+            // Untyped: controls/hazards may be item defs (RiskControlMeasure, Hazard, …).
+            end control;
+            end mitigatedElement;
         }
         connection def AllocatedTo :> MemoRelationship {
             end function : ArchitectureElement;
@@ -776,8 +780,10 @@ connection def BindsToInterface :> MemoRelationship
         // Implements{Component,Procedure}, UIRealizesFunctional,
         // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase.
         connection def Realizes :> MemoRelationship {
-            end realizing : MemoPart;
-            end realized : MemoPart;
+            // Realization crosses structural and behavioral metaclasses (for
+            // example a FunctionalFlow route realizing a FunctionalScenario).
+            end realizing;
+            end realized;
         }
         connection def VerifiedBy :> MemoRelationship {
             // Requirements, risk controls, and architecture components are

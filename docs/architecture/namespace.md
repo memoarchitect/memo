@@ -21,7 +21,7 @@ flowchart BT
 | `memo::assurance` | Vertical assurance disciplines: requirements, safety/risk, cybersecurity, human factors, and verification/validation |
 | `memo::viewpoints` | Stakeholder concerns: architecture, safety, cybersecurity, verification, and regulatory review |
 | `memo::rules` | Native closure, coverage, cross-layer, lifecycle, and quantitative checks |
-| `memo::compliance` | Regulated outputs: controlled artifacts, change, and risk-management-file concepts |
+| `memo::artifacts` | Controlled artifacts, ADRs, configuration-management records, and risk-management-file concepts |
 | `memo::methodology` | How teams apply the ontology: profiles, patterns, workflow steps, quality gates, and project bindings |
 
 ## The public import surface

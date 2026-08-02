@@ -33,27 +33,43 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`SoftwareSystem`](#softwaresystem) | `part def` | Software system definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`SoftwareItem`](#softwareitem) | `part def` | Software item definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`SoftwareSystem`](#softwaresystem) | `part def` | Software system definition specializing `SoftwareItem`. | `SoftwareItem` |
 | [`ModuleKind`](#modulekind) | `enum def` | Module-view element (design responsibility). Runtime properties (period, WCET, scheduling) moved to SoftwareComponent. item / unit / package / library / code / firmware / soup (IEC 62304). | — |
-| [`SoftwareModule`](#softwaremodule) | `part def` | Software module definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`SoftwareModule`](#softwaremodule) | `part def` | Software module definition specializing `SoftwareItem`. | `SoftwareItem` |
 | [`Algorithm`](#algorithm) | `part def` | Algorithm definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`DataModel`](#datamodel) | `part def` | Data model definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`ConfigurationArtifact`](#configurationartifact) | `part def` | Configuration artifact definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`SBOMEntry`](#sbomentry) | `item def` | Sbomentry definition specializing `MemoExchangeItem`. | `MemoExchangeItem` |
 | [`ModuleUses`](#moduleuses) | `connection def` | Typed relationship from `SoftwareModule` to `SoftwareModule`. | `MemoRelationship` |
 
-## SoftwareSystem
+## SoftwareItem
 
 ```sysml
-part def SoftwareSystem specializes ArchitectureElement
+abstract part def SoftwareItem specializes ArchitectureElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software system definition specializing `ArchitectureElement`. |
+| Description | Software item definition specializing `ArchitectureElement`. |
+| Kind | `part def` |
+| Abstract | Yes |
+| Specializes | `ArchitectureElement` |
+| Owning package | `memo_architecture_implementation_software_structure` |
+
+
+## SoftwareSystem
+
+```sysml
+part def SoftwareSystem specializes SoftwareItem
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Software system definition specializing `SoftwareItem`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `SoftwareItem` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
@@ -75,15 +91,15 @@ enum def ModuleKind
 ## SoftwareModule
 
 ```sysml
-part def SoftwareModule specializes ArchitectureElement
+part def SoftwareModule specializes SoftwareItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software module definition specializing `ArchitectureElement`. |
+| Description | Software module definition specializing `SoftwareItem`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `SoftwareItem` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
@@ -178,10 +194,25 @@ connection def ModuleUses :> MemoRelationship
         private import memo_core_relationships::*;
         private import memo_architecture_logical_structure::*;
     
-        part def SoftwareSystem specializes ArchitectureElement {
-            attribute version : String;
+        // IEC 62304 §3.25: a SOFTWARE ITEM is "any identifiable part of a computer
+        // program". It is the general, recursive term — a SOFTWARE SYSTEM (§3.24)
+        // is the top item and a SOFTWARE UNIT (§3.26) is one not subdivided
+        // further; both are software items. So this is a base, not a fourth
+        // sibling of system/module/component.
+        //
+        // It exists because §4.3 classifies, and §5.3–5.4 decompose, SOFTWARE
+        // ITEMS — not "modules" or "components" specifically. Anything the
+        // standard obliges at item level therefore belongs here, and every
+        // software view inherits it rather than re-declaring it: the code view
+        // (SoftwareModule), the runtime view (SoftwareComponent), the system, and
+        // the user interface (memo_architecture_implementation_ui::UIElement).
+        abstract part def SoftwareItem specializes ArchitectureElement {
             attribute safetyClass : SafetyClassKind;
             attribute complexity : ComplexityKind;
+        }
+    
+        part def SoftwareSystem specializes SoftwareItem {
+            attribute version : String;
             attribute operatingSystem : String;
         }
     
@@ -189,20 +220,18 @@ connection def ModuleUses :> MemoRelationship
         // (period, WCET, scheduling) moved to SoftwareComponent.
         // item / unit / package / library / code / firmware / soup (IEC 62304).
         enum def ModuleKind {
-            enum item;
+            enum 'item';
             enum unit;
-            enum package;
-            enum library;
+            enum 'package';
+            enum 'library';
             enum code;
             enum firmware;
             enum soup;
         }
     
-        part def SoftwareModule specializes ArchitectureElement {
+        part def SoftwareModule specializes SoftwareItem {
             attribute moduleKind : ModuleKind;
             attribute responsibility : String;
-            attribute safetyClass : SafetyClassKind;
-            attribute complexity : ComplexityKind;
             // module-kind-specific detail (set only for the relevant moduleKind)
             attribute iec62304Role : String[0..1];
             attribute implementationLanguage : String[0..1];

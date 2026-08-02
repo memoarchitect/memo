@@ -1,9 +1,18 @@
-name: "@memoarchitect/example-extension-clinical"
-version: "0.6.1"
-type: methodology
-extends: "@memoarchitect/methodology-default"
-sysmlDir: "./src"
-description: "Example methodology extension for clinical-procedure vocabulary"
-license: "MIT"
-tags: ["memo", "methodology", "extension", "clinical"]
-usage: ["extension", "clinical-procedures"]
+# Application/distribution descriptor for this MEMO package.
+#
+# Identity and location only. It records what this package is called, what
+# version it is, and where its SysML source sits so a resolver can find it.
+# It does not select model content: the project's native SysML imports and its
+# ProjectMethodBinding decide what is in the model. Semantic fields
+# (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
+# removed at the native semantic flip and are now rejected if present.
+name: '@memoarchitect/example-extension-clinical'
+version: 0.6.1
+description: Example methodology extension for clinical-procedure vocabulary
+license: MIT
+tags:
+- memo
+- methodology
+- extension
+- clinical
+sysmlDir: ./src

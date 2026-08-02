@@ -31,7 +31,7 @@ The root namespace currently exposes these aliases:
 | `memo::assurance` | requirements, safety/risk, cybersecurity, human factors, and verification/validation |
 | `memo::viewpoints` | viewpoint and view definitions by review concern |
 | `memo::rules` | closure, coverage, cross-layer, lifecycle, quantitative, and ontology-invariant rules |
-| `memo::artifacts`, `memo::compliance` | regulated artifacts, document views, change, ISO 14971, and postmarket concepts |
+| `memo::artifacts` | regulated artifacts, ADRs, configuration-management records, and ISO 14971 concepts |
 | `memo::methodology` | archetypes, profiles, patterns, workflow, gates, and methodology rules |
 
 Operational packages are nested below `memo::architecture::operational` rather

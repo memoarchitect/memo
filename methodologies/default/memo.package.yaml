@@ -1,9 +1,19 @@
-name: "@memoarchitect/methodology-default"
-version: "0.6.5"
-type: methodology
-extends: "@memoarchitect/ontology"
-sysmlDir: "../../src/methodology"
-description: "MEMO default medical-device methodology — selects viewpoints/views/DHF documents from @memoarchitect/ontology and adds rules, gates, patterns, profiles, and workflow."
-license: "MIT"
-tags: ["methodology", "medical-device", "iso-14971", "iec-62304", "memo"]
-usage: ["viewpoints", "views", "rules", "gates", "patterns", "profiles", "workflow", "dhf"]
+# Application/distribution descriptor for this MEMO package.
+#
+# Identity and location only. It records what this package is called, what
+# version it is, and where its SysML source sits so a resolver can find it.
+# It does not select model content: the project's native SysML imports and its
+# ProjectMethodBinding decide what is in the model. Semantic fields
+# (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
+# removed at the native semantic flip and are now rejected if present.
+name: '@memoarchitect/methodology-default'
+version: 0.6.5
+description: "MEMO default medical-device methodology \u2014 selects viewpoints/views/DHF documents from @memoarchitect/ontology and adds rules, gates, patterns, profiles, and workflow."
+license: MIT
+tags:
+- methodology
+- medical-device
+- iso-14971
+- iec-62304
+- memo
+sysmlDir: ../../src/methodology

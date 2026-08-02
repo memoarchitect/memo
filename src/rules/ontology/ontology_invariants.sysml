@@ -11,16 +11,18 @@ package memo_rules_ontology {
 
     // ─── Structure ───────────────────────────────────────────────────────
 
-    constraint def ContainmentAcyclicRule {
+    constraint def ContainmentAcyclicRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-001";
+        attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Containment/composition relations (Composes) must form no cycles.";
         attribute predicateExpression = "acyclic(composes)";
         constraint { true }
     }
-    constraint def NestedPartConnectedRule {
+    constraint def NestedPartConnectedRule :> MemoConsistencyRule {
         attribute id = "AR-IBD-001";
+        attribute tailoring = RuleTailoringKind::invariant;
         // Internal-block connectivity is a structural-architecture concern, so
         // the subject is the structural component — not every MemoPart. UI
         // elements, captured evidence, and review comments nest in compositions
@@ -41,16 +43,18 @@ package memo_rules_ontology {
     }
     // ─── Deployment and realization ──────────────────────────────────────
 
-    constraint def RuntimeTracesToModuleRule {
+    constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-011";
+        attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "SoftwareComponent";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Every runtime component must trace to a module-view definition (Realizes).";
         attribute predicateExpression = "realizes->size() >= 1";
         constraint { true }
     }
-    constraint def PatientContactCharacterizedRule {
+    constraint def PatientContactCharacterizedRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-032";
+        attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "PhysicalComponent";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Patient-contact components must identify contact nature and duration (ISO 10993-1).";
@@ -60,32 +64,36 @@ package memo_rules_ontology {
 
     // ─── Assurance coverage ──────────────────────────────────────────────
 
-    constraint def SafetyCriticalFunctionVerifiedRule {
+    constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-040";
+        attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Safety-critical functions (criticality high or catastrophic) must trace to at least one verification case.";
         attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or verifiedBy->size() >= 1";
         constraint { true }
     }
-    constraint def CriticalTaskValidatedRule {
+    constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-041";
+        attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "UserTask[criticality=high]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Critical tasks (criticality high or catastrophic) must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
         attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or validates->size() >= 1";
         constraint { true }
     }
-    constraint def UseErrorTracesToHazardRule {
+    constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-042";
+        attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "UseError";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Safety-relevant use errors (severity serious or worse) must trace to a hazard.";
         attribute predicateExpression = "not(severity == 'serious' or severity == 'critical' or severity == 'catastrophic') or causes->size() >= 1 or tracesRisk->size() >= 1";
         constraint { true }
     }
-    constraint def AlternateScenarioHasBaseRule {
+    constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-043";
+        attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "MemoScenario";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Alternate, exception, and recovery scenarios must identify their base scenario or variation point — never duplicate the workflow.";

@@ -50,7 +50,7 @@
             attribute :>> name = "PhysicalViewpoint";
             attribute :>> title = "Physical Viewpoint";
             attribute :>> shortDescription = "Shows physical components, hardware structure, and their interconnections.";
-            attribute :>> longDescription = "Default viewpoint derived from the physical and hardware structure layers for bill-of-materials, hardware decomposition, physical interfaces, and network/connectivity topology.";
+            attribute :>> description = "Default viewpoint derived from the physical and hardware structure layers for bill-of-materials, hardware decomposition, physical interfaces, and network/connectivity topology.";
             attribute :>> purpose = "Describe the system's physical realization and interconnections.";
             attribute :>> audience = (AudienceKind::hardwareEngineer);
             attribute :>> stage = WorkflowStageKind::architecture;

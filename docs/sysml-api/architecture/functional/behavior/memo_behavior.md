@@ -38,7 +38,7 @@
 | [`Contract`](#contract) | `part def` | Contract definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`PropertySet`](#propertyset) | `part def` | Property set definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`ActivityAction`](#activityaction) | `part def` | Activity action definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`ActivityFlow`](#activityflow) | `part def` | Activity flow definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
 | [`InteractionMessage`](#interactionmessage) | `part def` | Interaction message definition specializing `MemoPart`. | `MemoPart` |
 | [`TimingConstraint`](#timingconstraint) | `part def` | Timing constraint definition specializing `VerifiableElement`. | `VerifiableElement` |
 
@@ -150,15 +150,15 @@ part def ActivityAction specializes ArchitectureElement
 ## ActivityFlow
 
 ```sysml
-part def ActivityFlow specializes ArchitectureElement
+action def ActivityFlow specializes MemoAction
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Activity flow definition specializing `ArchitectureElement`. |
-| Kind | `part def` |
+| Description | Activity flow definition specializing `MemoAction`. |
+| Kind | `action def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoAction` |
 | Owning package | `memo_architecture_functional_behavior` |
 
 
@@ -241,7 +241,7 @@ part def TimingConstraint specializes VerifiableElement
             attribute wcetMs : String;
             attribute safetyRelevant : Boolean;
         }
-        part def ActivityFlow specializes ArchitectureElement {
+        action def ActivityFlow specializes MemoAction {
             attribute flowKind : ActivityFlowKind;
             attribute guardCondition : String;
             attribute weight : String;

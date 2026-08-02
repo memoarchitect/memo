@@ -35,7 +35,7 @@
 | [`Interface`](#interface) | `interface def` | Realization domain (hardware vs software), signaling family (digital / analog / synchronous / asynchronous) and concrete protocol (SPI, CAN, Ethernet, 4-20mA, REST, gRPC, message-queue …) are captured by `interfaceKind` + `protocol`, NOT by a class branch.… | `MemoInterface` |
 | [`InterfaceItem`](#interfaceitem) | `item def` | A typed thing exchanged at a boundary. Concrete items such as AlarmSignal and FlowCommand specialize this type; they are neither functions nor generic action-flow notation.… | `MemoExchangeItem` |
 | [`DataInterface`](#datainterface) | `interface def` | Data interface definition specializing `MemoInterface`. | `MemoInterface` |
-| [`DataPort`](#dataport) | `port def` | Data port definition. | — |
+| [`DataPort`](#dataport) | `port def` | Data port definition specializing `MemoPort`. | `MemoPort` |
 | [`SensorPort`](#sensorport) | `port def` | Sensor port definition specializing `DataPort`. | `DataPort` |
 | [`CommandPort`](#commandport) | `port def` | Command port definition specializing `DataPort`. | `DataPort` |
 | [`ComponentExchange`](#componentexchange) | `part def` | Component exchange definition specializing `ArchitectureElement`. | `ArchitectureElement` |
@@ -89,15 +89,15 @@ abstract interface def DataInterface specializes MemoInterface
 ## DataPort
 
 ```sysml
-port def DataPort
+port def DataPort specializes MemoPort
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Data port definition. |
+| Description | Data port definition specializing `MemoPort`. |
 | Kind | `port def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoPort` |
 | Owning package | `memo_architecture_logical_interfaces` |
 
 
@@ -235,8 +235,7 @@ part def SoftwarePort specializes InterfaceElement
             attribute interfaceKind : InterfaceKind;
             attribute protocolSemantics : String;
         }
-        port def DataPort {
-            attribute direction : DirectionKind;
+        port def DataPort specializes MemoPort {
             attribute interfaceType : String;
         }
         port def SensorPort specializes DataPort { attribute sensorDomain : String; }

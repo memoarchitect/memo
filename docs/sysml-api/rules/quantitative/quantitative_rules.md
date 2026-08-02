@@ -31,13 +31,13 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`hazardMaxControlsRule`](#hazardmaxcontrolsrule) | `constraint def` | Constraint that checks hazard max controls rule. | — |
-| [`swComponentMaxInterfacesRule`](#swcomponentmaxinterfacesrule) | `constraint def` | Constraint that checks sw component max interfaces rule. | — |
+| [`HazardMaxControlsRule`](#hazardmaxcontrolsrule) | `constraint def` | Constraint that checks hazard max controls rule. | `MemoConsistencyRule` |
+| [`SwComponentMaxInterfacesRule`](#swcomponentmaxinterfacesrule) | `constraint def` | Constraint that checks sw component max interfaces rule. | `MemoConsistencyRule` |
 
-## hazardMaxControlsRule
+## HazardMaxControlsRule
 
 ```sysml
-constraint def hazardMaxControlsRule
+constraint def HazardMaxControlsRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -45,14 +45,14 @@ constraint def hazardMaxControlsRule
 | Description | Constraint that checks hazard max controls rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_quantitative` |
 
 
-## swComponentMaxInterfacesRule
+## SwComponentMaxInterfacesRule
 
 ```sysml
-constraint def swComponentMaxInterfacesRule
+constraint def SwComponentMaxInterfacesRule :> MemoConsistencyRule
 ```
 
 | Property | Value |
@@ -60,7 +60,7 @@ constraint def swComponentMaxInterfacesRule
 | Description | Constraint that checks sw component max interfaces rule. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConsistencyRule` |
 | Owning package | `memo_rules_quantitative` |
 
 
@@ -69,31 +69,31 @@ constraint def swComponentMaxInterfacesRule
 ??? code "rules/quantitative/quantitative_rules.sysml"
 
     ```sysml
-    // C5 quantitative rule pack — native KerML constraints (Epic EE-3).
-    // Numeric cardinality bounds migrated from cardinalityCheck predicate parts to
-    // native `constraint def` bodies. The aggregate ratio rule (QT-003) is a
-    // model-level metric, not a single-subject predicate, and is omitted (see note).
+    // Quantitative per-subject cardinality constraints. Aggregate ratios belong to
+    // model-level coverage reporting rather than this evaluator.
     package memo_rules_quantitative {
         private import ScalarValues::*;
     
         private import memo_core_consistency_rules::*;
         private import memo_core_enumerations::*;
     
-        constraint def hazardMaxControlsRule {
+        constraint def HazardMaxControlsRule :> MemoConsistencyRule {
             attribute id = "QT-001";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Hazard";
             attribute severity = RuleSeverityKind::info;
             attribute rationaleText = "Excessive controls per hazard suggests the hazard is too broad and should be decomposed.";
-            attribute predicateExpression = "mitigates->size() >= 0 and mitigates->size() <= 10";
+            attribute predicateExpression = "mitigates->size() <= 10";
             constraint { true }
         }
     
-        constraint def swComponentMaxInterfacesRule {
+        constraint def SwComponentMaxInterfacesRule :> MemoConsistencyRule {
             attribute id = "QT-002";
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SoftwareModule";
             attribute severity = RuleSeverityKind::info;
             attribute rationaleText = "High interface count indicates excessive coupling; consider decomposition.";
-            attribute predicateExpression = "threatenedBy->size() >= 0 and threatenedBy->size() <= 8";
+            attribute predicateExpression = "threatenedBy->size() <= 8";
             constraint { true }
         }
     

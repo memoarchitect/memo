@@ -39,7 +39,7 @@
 | [`ValidationCase`](#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. | `MemoVerificationCase` |
 | [`TestArtifact`](#testartifact) | `part def` | Test artifact definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`Evidence`](#evidence) | `part def` | Evidence definition specializing `MemoEvidence`. | `MemoEvidence` |
-| [`VerificationScenario`](#verificationscenario) | `part def` | A scenario executed to verify — selected path with purpose 'verification'. | `MemoScenario` |
+| [`VerificationScenario`](#verificationscenario) | `action def` | A scenario executed to verify — selected path with purpose 'verification'. | `MemoScenario` |
 | [`ExecutesScenario`](#executesscenario) | `connection def` | Typed relationship from `VerificationCase` to `MemoScenario`. | `MemoRelationship` |
 
 ## VerificationCase
@@ -105,13 +105,13 @@ part def Evidence specializes MemoEvidence
 ## VerificationScenario
 
 ```sysml
-part def VerificationScenario specializes MemoScenario
+action def VerificationScenario specializes MemoScenario
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | A scenario executed to verify — selected path with purpose 'verification'. |
-| Kind | `part def` |
+| Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoScenario` |
 | Owning package | `memo_assurance_verification_validation` |
@@ -173,7 +173,7 @@ connection def ExecutesScenario :> MemoRelationship
     
         // A scenario executed to verify — selected path with purpose
         // 'verification'.
-        part def VerificationScenario specializes MemoScenario {
+        action def VerificationScenario specializes MemoScenario {
             attribute verificationEnvironment : String;
             attribute stimulusSummary : String;
         }
