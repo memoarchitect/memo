@@ -3,6 +3,10 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
 
     private import memo_architecture_functional_functions::*;
     private import memo_core_enumerations::*;
+    private import memo_architecture_logical_interfaces::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_assurance_requirements::*;
+    private import memo_core_common::*;
 
     // ── Logical functions ───────────────────────────────────────
     part fnAcquireSensors : SystemFunction {
@@ -110,7 +114,6 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> id = "LF-001";
         attribute :>> name = "SensorAcquisitionFlow";
         attribute :>> flowKind = FlowKind::measurement;
-        attribute :>> direction = DirectionKind::input;
         attribute :>> latencyBudgetMs = 20.0;
         attribute :>> staleAfterMs = 40.0;
         attribute :>> integrityLevel = "class C data path";
@@ -121,7 +124,6 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> id = "LF-002";
         attribute :>> name = "FlowCommandFlow";
         attribute :>> flowKind = FlowKind::command;
-        attribute :>> direction = DirectionKind::output;
         attribute :>> latencyBudgetMs = 20.0;
         attribute :>> staleAfterMs = 20.0;
         attribute :>> integrityLevel = "class C command path";
@@ -132,7 +134,6 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> id = "LF-003";
         attribute :>> name = "AlarmSignalFlow";
         attribute :>> flowKind = FlowKind::alarm;
-        attribute :>> direction = DirectionKind::output;
         attribute :>> latencyBudgetMs = 20.0;
         attribute :>> staleAfterMs = 20.0;
         attribute :>> integrityLevel = "class C alarm path; same-step delivery to infusion manager";
@@ -143,7 +144,6 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> id = "LF-004";
         attribute :>> name = "PrescriptionEntryFlow";
         attribute :>> flowKind = FlowKind::configuration;
-        attribute :>> direction = DirectionKind::input;
         attribute :>> latencyBudgetMs = 500.0;
         attribute :>> staleAfterMs = 0.0;
         attribute :>> integrityLevel = "confirmed double-entry path";

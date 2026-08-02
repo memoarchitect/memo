@@ -20,7 +20,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_system_decompos
         attribute :>> name = "GPCA_SystemDecompositionView";
         attribute :>> title = "GPCA System Decomposition View";
         attribute :>> shortDescription = "Nested containment of the GPCA device: hardware assemblies and the software system.";
-        attribute :>> longDescription = "General-kind membership structure of the GPCA device per the AADL GPCA_Device.Impl decomposition: sensor and actuator assemblies with their subcomponents, supporting hardware, and the GPCA software system with its eight AADL subcomponents. Rendered through the KK-2 General view template in containment mode (nested blocks with expand/collapse; the tree mode shows the same hierarchy as a decomposition tree).";
+        attribute :>> description = "General-kind membership structure of the GPCA device per the AADL GPCA_Device.Impl decomposition: sensor and actuator assemblies with their subcomponents, supporting hardware, and the GPCA software system with its eight AADL subcomponents. Rendered through the KK-2 General view template in containment mode (nested blocks with expand/collapse; the tree mode shows the same hierarchy as a decomposition tree).";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> viewKind = DiagramViewKind::general;

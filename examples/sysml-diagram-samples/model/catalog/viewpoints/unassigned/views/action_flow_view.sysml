@@ -61,11 +61,16 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
 
     // MemoLink sample — the universal relation, exercised where nothing else
     // reaches. laneB is a `part` (LogicalComponent :> ArchitectureElement) and
-    // ProcessInput is an `action def` (:> MemoAction). Those foundations share
-    // no supertype, so every typed relation in the ontology is unavailable
-    // here: legalRelationshipTypes returns MemoLink and nothing else.
+    // `sampleActionFlow.process` is an action usage (:> MemoAction). Those
+    // foundations share no supertype, so every typed relation in the ontology
+    // is unavailable here: legalRelationshipTypes returns MemoLink and nothing
+    // else.
+    //
+    // The target is the action *usage*, not the `ProcessInput` definition.
+    // Binding a value to a definition is not portable — SysIDE rejects it,
+    // because a value must be a feature and a definition is not.
     connection linkLaneBProcessesInput : MemoLink
-        connect linkSource ::> laneB to linkTarget ::> ProcessInput {
+        connect linkSource ::> laneB to linkTarget ::> sampleActionFlow.process {
         attribute :>> linkRationale =
             "Lane B is the swimlane that carries the ProcessInput behaviour. The association crosses the part/action metaclass boundary, so no typed relation can express it.";
     }

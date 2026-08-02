@@ -5,6 +5,7 @@ package memo_examples_surgical_closure_workflow {
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
+    private import memo_core_relationships::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_context_use_context::*;
     private import memo_assurance_requirements_needs::*;

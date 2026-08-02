@@ -11,7 +11,7 @@ package memo_examples_gpca_pump_viewpoints_verification_views_document_vv_view {
         attribute :>> name = "VerificationValidationView";
         attribute :>> title = "GPCA Verification and Validation View";
         attribute :>> shortDescription = "V&V plan and coverage for requirements and risk controls.";
-        attribute :>> longDescription = "Aggregates verification cases, validation cases, test artifacts, and evidence with their coverage of requirements, risk controls, behavior properties, and timing constraints.";
+        attribute :>> description = "Aggregates verification cases, validation cases, test artifacts, and evidence with their coverage of requirements, risk controls, behavior properties, and timing constraints.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::VV;

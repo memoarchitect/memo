@@ -11,7 +11,7 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
         attribute :>> name = "SoftwareDesignDescriptionView";
         attribute :>> title = "GPCA Software Design Description View";
         attribute :>> shortDescription = "IEC 62304 software design description for the GPCA software system.";
-        attribute :>> longDescription = "Aggregates the software system, its six components with safety classes and scheduling attributes, mode machine and transitions, interfaces, and function allocations for the SDD.";
+        attribute :>> description = "Aggregates the software system, its six components with safety classes and scheduling attributes, mode machine and transitions, interfaces, and function allocations for the SDD.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::SDD;

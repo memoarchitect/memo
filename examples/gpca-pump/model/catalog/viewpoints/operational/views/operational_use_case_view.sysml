@@ -20,7 +20,7 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_use_cas
         attribute :>> name = "GPCA_UseCaseView";
         attribute :>> title = "GPCA Use Case View";
         attribute :>> shortDescription = "Actors connected to the patient-controlled analgesia use case.";
-        attribute :>> longDescription = "Connects the nurse, patient, prescriber, and pharmacist to the patient-controlled analgesia use case.";
+        attribute :>> description = "Connects the nurse, patient, prescriber, and pharmacist to the patient-controlled analgesia use case.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);
         attribute :>> viewKind = DiagramViewKind::general;

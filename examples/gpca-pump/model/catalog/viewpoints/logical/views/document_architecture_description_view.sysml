@@ -13,7 +13,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_d
         attribute :>> name = "ArchitectureDescriptionView";
         attribute :>> title = "GPCA System Architecture Description View";
         attribute :>> shortDescription = "ISO/IEC/IEEE 42010 architecture description across all layers.";
-        attribute :>> longDescription = "Aggregates context, operational, functional, logical, software, and physical layers with their views and correspondences for the system architecture description.";
+        attribute :>> description = "Aggregates context, operational, functional, logical, software, and physical layers with their views and correspondences for the system architecture description.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::architectureDescription;
@@ -21,9 +21,9 @@ package memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_d
         attribute :>> marketScope = "generic";
         attribute :>> documentUsage = ("Architecture Description", "DHF");
         attribute :>> sectionIdentifier = "AD";
-        part :>> viewpointDefinition = logicalArchitectureViewpoint;
-        part :>> viewpointDefinition = softwareViewpoint;
-        part :>> viewpointDefinition = physicalViewpoint;
+        part vpLogicalArchitecture :> viewpointDefinition = logicalArchitectureViewpoint;
+        part vpSoftware :> viewpointDefinition = softwareViewpoint;
+        part vpPhysical :> viewpointDefinition = physicalViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-005";
             attribute :>> name = "architectureDescriptionViewQuery";

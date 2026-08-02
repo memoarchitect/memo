@@ -29,6 +29,10 @@ package memo_examples_gpca_pump_gpca_trace {
     private import memo_examples_gpca_pump_viewpoints_usability_views_document_usability_view::*;
     private import memo_examples_gpca_pump_viewpoints_verification_views_document_vv_view::*;
     private import memo_examples_gpca_pump_gpca_formal_behavior::*;
+    private import memo_architecture_operational_context_stakeholders::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_architecture_operational_workflows::*;
+    private import memo_architecture_realization_deployment::*;
 
     // ── System context interactions (context view) ──────────────
     connection : InteractsWith connect contextParticipant ::> actorPatient to target ::> entityGpcaPump;

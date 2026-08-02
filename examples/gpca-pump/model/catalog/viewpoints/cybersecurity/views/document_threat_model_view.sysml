@@ -12,7 +12,7 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_threat_m
         attribute :>> name = "GPCACyberThreatModelView";
         attribute :>> title = "GPCA Cybersecurity Threat Model View";
         attribute :>> shortDescription = "Threat-model-oriented document view for GPCA.";
-        attribute :>> longDescription = "Captures GPCA cyber assets, trust boundaries, threats, threat scenarios, vulnerabilities, and mitigations for secure product development records.";
+        attribute :>> description = "Captures GPCA cyber assets, trust boundaries, threats, threat scenarios, vulnerabilities, and mitigations for secure product development records.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> marketScope = "generic";
