@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_catalog_gpca_operational {
+package memo_examples_gpca_pump_gpca_operational {
     private import ScalarValues::*;
 
     private import memo_architecture_operational_structure::*;
@@ -7,7 +7,7 @@ package memo_examples_gpca_pump_model_catalog_gpca_operational {
     private import memo_architecture_operational_use_cases::*;
     private import memo_architecture_operational_workflows::*;
     private import memo_core_enumerations::*;
-    private import memo_examples_gpca_pump_model_catalog_gpca_context::*;
+    private import memo_examples_gpca_pump_gpca_context::*;
 
     // ── Operational entities beyond the human actors ────────────
     part entityPharmacy : OperationalEntity {

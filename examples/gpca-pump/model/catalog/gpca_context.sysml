@@ -1,4 +1,4 @@
-package memo_examples_gpca_pump_model_catalog_gpca_context {
+package memo_examples_gpca_pump_gpca_context {
     private import ScalarValues::*;
 
     private import memo_architecture_operational_context_actors::*;

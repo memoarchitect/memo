@@ -3,7 +3,7 @@
 // This file is the project's native entrypoint. It imports the methodology it
 // selects and states the selection as a typed SysML reference — no YAML field
 // participates in the choice.
-package memo_examples_gpca_pump_model_catalog_gpca_project {
+package memo_examples_gpca_pump_project {
     private import ScalarValues::*;
 
     private import memo_methodology_core::*;
