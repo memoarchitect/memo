@@ -15,6 +15,11 @@ Each view is a `MemoDiagramView` declared in `model/samples/`, exposing its own
 dummy elements. The Architect explorer groups each authored view by the layer
 of its model content.
 
+`reference/sysml-v2-activity-example.sysml` is the authoritative SysML v2
+activity-diagram acceptance fixture. It is kept outside `model/` until the
+bundled parser supports its decision, merge, accept/send, termination, and
+guard syntax; this keeps the currently runnable sample project parse-clean.
+
 | View | Diagram type | View kind | Renders |
 | --- | --- | --- | --- |
 | `tree_view.sysml` | `bdd` | general | Block Definition Diagram — a decomposition hierarchy. |
