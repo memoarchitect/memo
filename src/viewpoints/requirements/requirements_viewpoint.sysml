@@ -18,6 +18,8 @@ package memo_viewpoints_requirements_requirements_viewpoint {
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
         attribute :>> concernKinds = (ConcernKind::regulatory, ConcernKind::safety);
         attribute :>> includedLayers = ("requirements");
+        attribute :>> explorerLane = "assurance";
+        attribute :>> explorerOrder = 1;
         attribute :>> allowedElementKinds = ("Need", "Requirement");
         attribute :>> userExtensible = true;
     }

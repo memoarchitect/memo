@@ -6,6 +6,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
     private import memo_architecture_logical_interfaces::*;
     private import memo_architecture_functional_functions::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_functional_functional_viewpoint::*;
     private import memo_core_enumerations::*;
 
     item def DataPacket specializes InterfaceItem {
@@ -84,6 +85,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
         attribute :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development.";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
+        part :>> viewpointDefinition = functionalViewpoint;
     }
 
     connection : IncludedIn connect sourceElement ::> sampleActionFlow.receive to targetView ::> sampleActionFlowView;

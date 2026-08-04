@@ -8,6 +8,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     private import memo_core_common::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_logical_logical_viewpoint::*;
     private import memo_core_enumerations::*;
 
     part coffeeMachine : LogicalComponent { attribute :>> name = "Coffee Machine"; }
@@ -67,6 +68,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
         attribute :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
+        part :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "ExchangesWith");
         }

@@ -6,6 +6,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     private import memo_architecture_functional_functions::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_functional_functional_viewpoint::*;
     private import memo_core_enumerations::*;
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -138,6 +139,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
         attribute :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in).";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ffd";
+        part :>> viewpointDefinition = functionalViewpoint;
     }
 
     connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxAcquire to targetView ::> fxDeliveryView;

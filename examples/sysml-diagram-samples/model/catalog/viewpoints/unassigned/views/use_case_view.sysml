@@ -4,6 +4,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     private import memo_architecture_operational_use_cases::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_operational_operational_viewpoint::*;
     private import memo_core_enumerations::*;
 
     // Product-neutral fixture for the UML-style use-case presentation.
@@ -71,6 +72,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         attribute :>> shortDescription = "Actors outside a device boundary with include, extend, hierarchy-level, and orthogonal-routing presentation.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "ucd";
+        part :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("User", "UseCase");
             attribute :>> includeRelationshipKinds = ("Initiates", "ParticipatesIn", "Includes", "Extends");
