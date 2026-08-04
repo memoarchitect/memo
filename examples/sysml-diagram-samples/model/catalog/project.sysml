@@ -18,6 +18,7 @@ package memo_examples_sysml_diagram_samples_project {
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard_activity_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::*;
