@@ -18,6 +18,8 @@ package memo_viewpoints_usability_usability_viewpoint {
         attribute :>> presentationKind = (PresentationKind::narrativeSection);
         attribute :>> concernKinds = (ConcernKind::usability, ConcernKind::safety);
         attribute :>> includedLayers = ("context", "requirements");
+        attribute :>> explorerLane = "assurance";
+        attribute :>> explorerOrder = 4;
         attribute :>> allowedElementKinds = ("Actor", "UseContext", "UseError", "Requirement");
         attribute :>> userExtensible = true;
     }

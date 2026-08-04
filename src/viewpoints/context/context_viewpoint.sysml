@@ -18,6 +18,8 @@ package memo_viewpoints_context_context_viewpoint {
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::interoperability);
         attribute :>> includedLayers = ("context");
+        attribute :>> explorerLane = "architecture";
+        attribute :>> explorerOrder = 0;
         // UseEnvironment (IEC 62366-1 3.20) is what the device sits inside —
         // facility, procedure area, ambient conditions. A context view that
         // cannot show it is missing half of "where is this used".
