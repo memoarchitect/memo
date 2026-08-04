@@ -1,0 +1,46 @@
+format: memo.viewlayout/v1
+viewSource: model/catalog/viewpoints/unassigned/views/context_view.sysml
+layouts:
+  diag-sample-sampleContextView:
+    nodes:
+      __context_boundary__:
+        x: 327.4
+        y: 109
+        ports: {}
+      infusionSystem:
+        x: 800
+        y: 560
+        ports: {}
+      biomedTech:
+        x: 20
+        y: 140
+        ports: {}
+      clinician:
+        x: 53.400000000000006
+        y: 146
+        ports: {}
+      patient:
+        x: 20
+        y: 440
+        ports: {}
+      homeContext:
+        x: 40
+        y: 580
+        ports: {}
+      pharmacySystem:
+        x: 1980
+        y: 460
+        ports: {}
+    edges:
+      rel-8: {}
+      rel-9: {}
+      rel-10: {}
+      rel-11: {}
+      rel-12: {}
+    annotations: {}
+    canvas:
+      autoLayout: false
+      zoom: 0.3829981718464351
+      pan:
+        x: 26.340036563071294
+        y: 96.70521023765997
