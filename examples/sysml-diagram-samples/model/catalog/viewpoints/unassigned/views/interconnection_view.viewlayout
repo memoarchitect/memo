@@ -2,95 +2,12 @@ format: memo.viewlayout/v1
 viewSource: model/catalog/viewpoints/unassigned/views/interconnection_view.sysml
 layouts:
   diag-sample-sampleInterconnectionView:
-    nodes:
-      coffeeMachine:
-        x: 280.5
-        y: -100
-        ports:
-          mainsWaterIn:
-            x: -12
-            y: 95
-            side: left
-          beverageOut:
-            x: 1234.5
-            y: 137
-            side: right
-          serviceInterface:
-            x: 1234.5
-            y: 77
-            side: right
-          diagnostics:
-            x: 1234.5
-            y: 107
-            side: right
-        width: 1246.5
-        height: 576
-      waterTank:
-        x: 99.5
-        y: 100
-        ports:
-          tankWaterOut:
-            x: 298.5
-            y: 50
-            side: right
-          tankWaterIn:
-            x: -12
-            y: 47
-            side: left
-        width: 310.5
-        height: 82
-      heaterAssembly:
-        x: 79.5
-        y: 280
-        ports:
-          heaterWaterIn:
-            x: -12
-            y: 47
-            side: left
-          heatedWaterOut:
-            x: 352
-            y: 47
-            side: right
-      brewGroup:
-        x: 459.5
-        y: 360
-        ports:
-          brewWaterIn:
-            x: -12
-            y: 47
-            side: left
-          brewedCoffeeOut:
-            x: 268
-            y: 47
-            side: right
-      waterSupply:
-        x: 0
-        y: 48
-        ports:
-          supplyWaterOut:
-            x: 199.2
-            y: 50
-            side: right
-      cup:
-        x: 1637.7
-        y: 90
-        ports:
-          cupBeverageIn:
-            x: -12
-            y: 47
-            side: left
-    edges:
-      rel-66: {}
-      rel-67: {}
-      rel-68: {}
-      rel-69: {}
-      rel-70: {}
-      rel-71: {}
-    annotations: {}
+    nodes: {}
+    edges: {}
     canvas:
-      autoLayout: false
-      zoom: 0.3305555246357745
+      autoLayout: true
+      zoom: 0.48124239147054637
       pan:
-        x: 208.34782937506273
-        y: 268.9057152170766
+        x: 120.99323405657199
+        y: 111.66086260270083
       coordinateSpace: context-child-v1
