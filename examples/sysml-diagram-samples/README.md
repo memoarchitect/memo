@@ -16,9 +16,10 @@ dummy elements. The Architect explorer groups each authored view by the layer
 of its model content.
 
 `reference/sysml-v2-activity-example.sysml` is the authoritative SysML v2
-activity-diagram acceptance fixture. It is kept outside `model/` until the
-bundled parser supports its decision, merge, accept/send, termination, and
-guard syntax; this keeps the currently runnable sample project parse-clean.
+activity-diagram acceptance fixture. The bundled parser now accepts its
+decision, merge, accept/send, termination and guard syntax, so it is promoted
+into `model/sysml_v2_activity_example.sysml` and runs as part of the sample
+project. `reference/` keeps the original as the acceptance source of truth.
 
 | View | Diagram type | View kind | Renders |
 | --- | --- | --- | --- |
