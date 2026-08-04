@@ -15,17 +15,18 @@ Each view is a `MemoDiagramView` declared in `model/samples/`, exposing its own
 dummy elements. The Architect explorer groups each authored view by the layer
 of its model content.
 
-`reference/sysml-v2-activity-example.sysml` is the authoritative SysML v2
-activity-diagram acceptance fixture. The bundled parser now accepts its
-decision, merge, accept/send, termination and guard syntax, so it is promoted
-into `model/sysml_v2_activity_example.sysml` and runs as part of the sample
-project. `reference/` keeps the original as the acceptance source of truth.
+`model/sysml_v2_activity_example.sysml` is the SysML v2 activity-diagram
+acceptance fixture, and is the single copy — it sits with the rest of the
+model's SysML rather than in a parallel `reference/` tree. The bundled parser
+accepts its decision, merge, accept/send, termination and guard syntax, and
+`standard_activity_view.sysml` is the view that draws it.
 
 | View | Diagram type | View kind | Renders |
 | --- | --- | --- | --- |
 | `tree_view.sysml` | `bdd` | general | Block Definition Diagram — a decomposition hierarchy. |
 | `interconnection_view.sysml` | `ibd` | interconnection | Internal Block Diagram — nested parts, boundary ports, typed connectors. |
 | `action_flow_view.sysml` | `afd` | actionflow | Activity / action flow — actions, item flows, successions. |
+| `standard_activity_view.sysml` | `afd` | actionflow | Standard SysML v2 activity — decision, merge, fork, join, accept, send, terminate, guarded successions. |
 | `functional_flow_view.sysml` | `ffd` | actionflow | Functional flow — swimlanes per realising component, typed data/energy flows. |
 | `operational_behaviour_view.sysml` | `ofd` | actionflow | Operational flow — clinical-role swimlanes, concurrent preparation, and a composite therapy step. |
 | `context_view.sysml` | `context` | general | Operational system context — a black-box system of interest inside an explicit boundary, with actors, peer systems, environment, and typed interactions outside it. |

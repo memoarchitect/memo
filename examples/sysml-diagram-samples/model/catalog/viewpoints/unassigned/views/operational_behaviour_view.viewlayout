@@ -1,0 +1,13 @@
+format: memo.viewlayout/v1
+viewSource: model/catalog/viewpoints/unassigned/views/operational_behaviour_view.sysml
+layouts:
+  diag-sample-opSetupView:
+    nodes: {}
+    edges: {}
+    canvas:
+      autoLayout: true
+      zoom: 0.3666153460391409
+      pan:
+        x: 359.78478424853927
+        y: 41.19938625300375
+      coordinateSpace: context-child-v1
