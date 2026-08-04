@@ -8,6 +8,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
     private import memo_assurance_requirements::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_requirements_requirements_viewpoint::*;
     private import memo_core_enumerations::*;
 
     requirement needSafeTherapy : Need {
@@ -50,6 +51,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
         attribute :>> shortDescription = "Stakeholder needs deriving into system requirements, wired by DerivesFrom trace edges.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "req";
+        part :>> viewpointDefinition = requirementsViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("DerivesFrom");
         }

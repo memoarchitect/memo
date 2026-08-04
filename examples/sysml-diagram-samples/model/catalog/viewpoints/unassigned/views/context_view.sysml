@@ -9,6 +9,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
     private import memo_architecture_operational_structure::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_context_context_viewpoint::*;
     private import memo_core_enumerations::*;
 
     // The operational system of interest is intentionally represented as one
@@ -41,6 +42,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
         attribute :>> shortDescription = "Operational system context: one black-box system boundary, its external people, peer systems, operating environment, and named boundary-crossing interactions.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "context";
+        part :>> viewpointDefinition = contextViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("InteractsWith", "ExchangesWith", "AppliesInContext");
         }

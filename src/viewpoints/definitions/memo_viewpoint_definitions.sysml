@@ -21,6 +21,10 @@ package memo_viewpoints_definitions {
         attribute userExtensible : Boolean;
         // Optional navigation grouping interpreted by Memo Architect.
         attribute group : String;
+        // Explorer placement follows the MEMO V-model: Architecture is read
+        // top-to-bottom; Assurance is read left-to-right.
+        attribute explorerLane : String;
+        attribute explorerOrder : Integer;
         // default diagram kind for a catalog viewpoint (optional)
         attribute defaultViewKind : DiagramViewKind[0..1];
     }

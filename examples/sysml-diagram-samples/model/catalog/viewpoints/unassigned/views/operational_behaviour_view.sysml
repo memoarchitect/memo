@@ -6,6 +6,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
     private import memo_architecture_operational_structure::*;
     private import memo_architecture_operational_activities::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_operational_operational_viewpoint::*;
     private import memo_core_enumerations::*;
 
     // Operational activity across clinical roles. The fixture is intentionally
@@ -110,6 +111,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         attribute :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step.";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ofd";
+        part :>> viewpointDefinition = operationalViewpoint;
     }
 
     connection : IncludedIn connect sourceElement ::> opSetupFlow.opPrescribe to targetView ::> opSetupView;

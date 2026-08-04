@@ -7,6 +7,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
     private import memo_architecture_functional_behavior::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_functional_functional_viewpoint::*;
     private import memo_core_enumerations::*;
 
     state pumpModes : StateMachine { attribute :>> name = "Pump Operating Modes"; }
@@ -84,6 +85,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
         attribute :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding.";
         attribute :>> viewKind = DiagramViewKind::statetransition;
         attribute :>> diagramType = "stm";
+        part :>> viewpointDefinition = functionalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("StateMachine", "ModeState", "Transition");
         }

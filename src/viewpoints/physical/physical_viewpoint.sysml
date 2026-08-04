@@ -18,6 +18,8 @@ package memo_viewpoints_physical_physical_viewpoint {
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> concernKinds = (ConcernKind::reliability, ConcernKind::interoperability);
         attribute :>> includedLayers = ("hardware_structure", "physical");
+        attribute :>> explorerLane = "architecture";
+        attribute :>> explorerOrder = 5;
         attribute :>> allowedElementKinds = ("ProcessingNode", "HardwareAssembly", "PhysicalPort");
         attribute :>> userExtensible = true;
     }

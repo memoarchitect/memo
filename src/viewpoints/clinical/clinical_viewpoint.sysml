@@ -18,6 +18,8 @@ package memo_viewpoints_clinical_clinical_viewpoint {
         attribute :>> presentationKind = (PresentationKind::narrativeSection);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::clinical);
         attribute :>> includedLayers = ("context", "assurance");
+        attribute :>> explorerLane = "assurance";
+        attribute :>> explorerOrder = 4;
         attribute :>> allowedElementKinds = ("Actor", "UseContext", "Evidence");
         attribute :>> userExtensible = true;
     }

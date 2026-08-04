@@ -16,6 +16,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard
 
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_functional_functional_viewpoint::*;
     private import memo_core_enumerations::*;
 
     private import activity_example::*;
@@ -27,6 +28,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard
         attribute :>> shortDescription = "Standard SysML v2 activity notation — decision, merge, fork, join, accept, send, and terminate nodes with guarded successions.";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
+        part :>> viewpointDefinition = functionalViewpoint;
     }
 
     connection : IncludedIn connect sourceElement ::> FulfillOrder::receiveOrder to targetView ::> standardActivityView;

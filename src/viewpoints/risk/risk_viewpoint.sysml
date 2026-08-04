@@ -18,6 +18,8 @@ package memo_viewpoints_risk_risk_viewpoint {
         attribute :>> presentationKind = (PresentationKind::riskTable);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::regulatory);
         attribute :>> includedLayers = ("risk", "assurance");
+        attribute :>> explorerLane = "assurance";
+        attribute :>> explorerOrder = 2;
         attribute :>> allowedElementKinds = ("SafetyRelatedCharacteristic", "HazardCause", "Hazard", "SequenceOfEvents", "HazardousSituation", "Harm", "Risk", "RiskControlMeasure", "ResidualRisk", "Benefit", "OverallResidualRiskEvaluation", "VerificationCase");
         attribute :>> userExtensible = true;
     }

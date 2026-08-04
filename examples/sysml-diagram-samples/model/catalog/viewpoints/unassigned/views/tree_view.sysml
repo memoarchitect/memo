@@ -5,6 +5,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
     private import memo_architecture_realization_physical::*;
     private import memo_core_relationships::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_physical_physical_viewpoint::*;
     private import memo_core_enumerations::*;
 
     part rootA : HardwareAssembly { attribute :>> name = "Root A"; }
@@ -37,6 +38,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
         attribute :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
+        part :>> viewpointDefinition = physicalViewpoint;
         attribute :>> layoutHint = "tree";
         attribute :>> styleHint = "expanded:rootA,rootB,branchA1,branchB1";
         part :>> selectionQuery {
