@@ -24,7 +24,7 @@ layouts:
         y: 252
         ports: {}
       homeContext:
-        x: 400
+        x: 440
         y: 600
         ports: {}
       pharmacySystem:

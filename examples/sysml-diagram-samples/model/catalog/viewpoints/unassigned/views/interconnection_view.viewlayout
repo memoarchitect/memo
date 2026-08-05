@@ -30,7 +30,7 @@ layouts:
         y: 48
         ports:
           tankWaterOut:
-            x: 299
+            x: 299.5
             y: 47
             side: right
           tankWaterIn:
@@ -66,7 +66,7 @@ layouts:
         y: 170
         ports:
           supplyWaterOut:
-            x: 199
+            x: 198.8
             y: 47
             side: right
       cup:
@@ -89,6 +89,6 @@ layouts:
       autoLayout: false
       zoom: 0.83251321227496
       pan:
-        x: -3.9311202601139428
-        y: 8.599623309219538
+        x: -129.43112026011397
+        y: -3.900376690780462
       coordinateSpace: context-child-v1
