@@ -24,7 +24,12 @@ if (packageName === '@memoarchitect/ontology') {
     'profile/memo.package.yaml',
     'methodologies/default/memo.package.yaml',
     'methodologies/gpca/memo.package.yaml',
-  ]) replace(path, /^(version: ")[^"]+("$)/m, `$1${version}$2`);
+    // These files are emitted by a YAML dumper that quotes only what YAML
+    // requires, so a semantic version is always bare. Matching that one form
+    // keeps the check honest: if a file ever drifts to another shape, syncing
+    // fails loudly instead of quietly matching nothing, which is how the
+    // package versions came to be hand-edited in the first place.
+  ]) replace(path, /^(version: )[^\s"']+$/m, `$1${version}`);
   replace('README.md', /@memoarchitect\/ontology@\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?/g, `@memoarchitect/ontology@${version}`);
 } else if (packageName === '@memoarchitect/tools') {
   replace('README.md', /memo-tools \d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?/g, `memo-tools ${version}`);
