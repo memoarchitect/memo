@@ -110,4 +110,29 @@ if [ "$fail" -ne 0 ]; then
   echo "✖ build FAILED — ontology does not parse cleanly in external tool."
   exit 1
 fi
+
+# ─── Name resolution gate ────────────────────────────────────────────────────
+#
+# `sysand build` packages files; it does NOT resolve names. A package whose
+# supertypes do not exist anywhere — `:> MemoItem` when the real base is
+# `MemoPart` — packaged happily and reported "zero errors", so an ontology that
+# no tool could load shipped green. SysIDE is the compiler of record, so the
+# build asks it whether every reference resolves.
+# ─────────────────────────────────────────────────────────────────────────────
+echo "── name resolution: syside check ──"
+if ! command -v syside >/dev/null 2>&1; then
+  echo "✖ syside not found on PATH — required to resolve names (https://sensmetry.com/syside)" >&2
+  exit 127
+fi
+
+check_out="$(cd "$REPO_ROOT" && syside check src 2>&1)" || true
+if echo "$check_out" | grep -q 'error'; then
+  echo "$check_out" | grep -A2 'error' | sed 's/^/  /'
+  echo ""
+  echo "  ✖ $(echo "$check_out" | grep -c 'error') unresolved reference(s)"
+  echo "✖ build FAILED — ontology packages, but does not resolve."
+  exit 1
+fi
+echo "  ✔ every reference resolves"
+
 echo "✔ build PASSED — memo-sysmlv2 is portable SysML v2."
