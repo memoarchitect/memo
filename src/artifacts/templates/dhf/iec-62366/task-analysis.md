@@ -14,25 +14,61 @@ required_for: ["CE", "MDR"]
 
 ## 1. Purpose
 
-Documents task analysis for **{{project.product}}** per IEC 62366-1:2015 §5.4, identifying tasks that could cause hazardous situations if performed incorrectly.
+Documents task analysis for **{{project.product}}** per IEC 62366-1:2015+AMD1:2020 §5.4, identifying the tasks users perform — through software user interfaces and through physical interaction with the equipment — and which of them could cause a hazardous situation if performed incorrectly.
 
 ---
 
 ## 2. User Tasks
 
-This section is generated from the system model. The table below lists the **User Tasks** elements currently defined:
+This section is generated from the system model. The table below lists the user tasks and task steps currently defined:
 
 ```memo-query
-kind: UserActivity
+kind: [UserTask, TaskStep]
 display: table
 columns: name, layer, doc
 sort: name
-empty: "No UserActivity elements defined."
+empty: "No UserTask or TaskStep elements defined."
+```
+
+### 2.1 Task Boundary — What Each Task Acts Through
+
+A task is cyber-physical when the element it is allocated to is a user interface, an operator interface element, or a port. The set below is derived by traversing `allocatedTo` from the tasks above, so it follows the model rather than the wording of a task name.
+
+```memo-query
+kind: [UserTask, TaskStep]
+traverse: outgoing allocatedTo
+display: table
+columns: name, kind, layer, doc
+sort: name
+empty: "No tasks are allocated to an interface element. Add AllocatedTo links from UserTask to the UI, operator interface, or port the task acts through."
+```
+
+### 2.2 Operator-Facing Boundary Elements
+
+The user-facing elements a task can act through, hardware and software alike:
+
+```memo-query
+kind: [UserInterface, OperatorInterfaceElement, Interface, MemoPort, PhysicalPort]
+display: table
+columns: name, kind, layer, doc
+sort: name
+empty: "No user interface or operator interface elements defined."
 ```
 
 ---
 
 ## 3. Critical Tasks
+
+A task is critical when incorrect performance can lead to a hazardous situation. The table below is derived by traversing `causes` from the task set — the `useErrorLeadsToHazard` edge of IEC 62366-1 §5.4:
+
+```memo-query
+kind: [UserTask, TaskStep]
+traverse: outgoing causes
+display: table
+columns: name, kind, layer, doc
+sort: name
+empty: "No hazardous situations linked to user tasks. Add Causes links (causeKind = useErrorLeadsToHazard) from UserTask to HazardousSituation."
+```
 
 Complete this section for **{{project.product}}** using the guidance below.
 

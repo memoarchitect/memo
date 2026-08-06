@@ -2,7 +2,7 @@
 id: fmea
 title: Failure Mode and Effects Analysis
 standard: IEC 60812:2018
-clauses: ["5", "6", "7"]
+clauses: ["5", "6", "7", "ISO 14971:2019 §7"]
 required_for: ["CE", "FDA_510k", "FDA_PMA"]
 ---
 
@@ -14,61 +14,84 @@ required_for: ["CE", "FDA_510k", "FDA_PMA"]
 
 ## 1. Purpose and Scope
 
-This FMEA documents failure modes for **{{project.product}}** components, their effects, severity, and mitigations. Combines hardware, software, and system-level failure analysis.
+This FMEA documents failure modes for **{{project.product}}** components, their effects, severity, and mitigations, across the hardware layer, the software layer, and the boundary between them. IEC 60812 is the analysis method; the results feed the ISO 14971 risk management process.
 
 ---
 
 ## 2. Component Inventory
 
-This section is generated from the system model. The table below lists the **Component Inventory** elements currently defined:
+This section is generated from the system model. The table below lists the components in scope of this analysis:
 
 ```memo-query
-kind: [Component, Subsystem, SoftwareItem]
+kind: [PhysicalAssembly, HardwareAssembly, PhysicalComponent, HardwareComponent, SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, kind, layer, doc
 sort: name
-empty: "No components defined. Add Component, Subsystem, or SoftwareItem elements."
+empty: "No components defined. Add hardware or software architecture elements."
 ```
 
 ---
 
 ## 3. FMEA Worksheet
 
-### 3.1 Hardware Failures
+Each subsection traverses `hasFailureMode` from a set of architecture elements, so a failure mode appears under hardware, software, or the interface according to **what it is attached to in the model** — not according to what it is called.
+
+### 3.1 Hardware Failure Modes
+
+Physical component failures: electrical shorts, mechanical wear, sensor drift, power loss.
 
 ```memo-query
-kind: Component
+kind: [PhysicalAssembly, HardwareAssembly, PhysicalSubassembly, PhysicalComponent, HardwareComponent, ElectricalComponent, ElectronicComponent, ThermalComponent, FluidicComponent]
+traverse: outgoing hasFailureMode
 display: table
-columns: name, layer, doc
+columns: name, effect, severityRating, probability, doc
 sort: name
-empty: "No hardware components defined."
+empty: "No hardware failure modes defined. Link FailureMode elements to hardware components with HasFailureMode."
 ```
 
-### 3.2 Software Failures
+### 3.2 Software Failure Modes
+
+Software failures: logic errors, memory exhaustion, data corruption, timing violations.
 
 ```memo-query
-kind: [SoftwareItem, SoftwareUnit]
+kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
+traverse: outgoing hasFailureMode
+display: table
+columns: name, effect, severityRating, probability, doc
+sort: name
+empty: "No software failure modes defined. Link FailureMode elements to software items with HasFailureMode."
+```
+
+### 3.3 Hardware-Software Interface Failure Modes
+
+Failures at the boundary between hardware and software — sensor data misinterpreted, actuator commands lost, protocol desynchronisation. The boundary is queried through the interface and port types, never by matching a name.
+
+```memo-query
+kind: [Interface, LogicalInterface, InterfaceElement, MemoPort, DataPort, SensorPort, CommandPort, SoftwarePort, PhysicalPort, LogicalPort]
+traverse: outgoing hasFailureMode
+display: table
+columns: name, effect, severityRating, probability, doc
+sort: name
+empty: "No interface failure modes defined. Link FailureMode elements to interfaces or ports with HasFailureMode."
+```
+
+### 3.4 Interface Inventory
+
+The boundary elements the section above analyses:
+
+```memo-query
+kind: [Interface, LogicalInterface, InterfaceElement, MemoPort, DataPort, SensorPort, CommandPort, SoftwarePort, PhysicalPort, LogicalPort]
 display: table
 columns: name, kind, layer, doc
 sort: name
-empty: "No software items defined."
-```
-
-### 3.3 Interface Failures
-
-```memo-query
-kind: Interface
-display: table
-columns: name, layer, doc
-sort: name
-empty: "No interfaces defined."
+empty: "No interfaces or ports defined."
 ```
 
 ---
 
 ## 4. Risk Controls for FMEA Items
 
-This section is generated from the system model. The table below lists the **Risk Controls for FMEA Items** elements currently defined:
+Risk control measures defined for **{{project.product}}**. A failure mode with no risk control belongs in §5.
 
 ```memo-query
 kind: RiskControlMeasure
@@ -84,7 +107,7 @@ empty: "No risk controls defined."
 
 Complete this section for **{{project.product}}** using the guidance below.
 
-_[TODO: List any failure modes without risk controls and justify residual risk]_
+_[TODO: List any failure modes without risk controls and justify residual risk per ISO 14971:2019 §7.4 and §8]_
 
 ---
 

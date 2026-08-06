@@ -74,6 +74,7 @@ package memo {
     public import memo_artifacts_core::*;
     public import memo_artifacts_configuration_management::*;
     public import memo_artifacts_documents_risk_management::*;
+    public import memo_artifacts_standards_traceability::*;
 
     public import memo_methodology_core::*;
     public import memo_methodology_rules::*;
@@ -243,6 +244,7 @@ package memo_namespace_artifacts {
     alias core for memo_namespace_artifacts_core;
     alias configuration_management for memo_namespace_artifacts_configuration_management;
     alias documents for memo_namespace_artifacts_documents;
+    alias standards for memo_namespace_artifacts_standards;
 }
 
 package memo_namespace_core {
@@ -367,6 +369,10 @@ package memo_namespace_artifacts_documents {
 
 package memo_namespace_artifacts_documents_risk_management {
     public import memo_artifacts_documents_risk_management::*;
+}
+
+package memo_namespace_artifacts_standards {
+    public import memo_artifacts_standards_traceability::*;
 }
 
 package memo_namespace_assurance_verification_validation_clinical_evaluation {
