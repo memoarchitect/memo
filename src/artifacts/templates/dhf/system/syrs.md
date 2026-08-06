@@ -26,7 +26,7 @@ Summary metrics for the system requirements captured in the model:
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "system"
+where: requirementKind == "RequirementKind::system"
 display: count
 label: Total system requirements
 ```
@@ -39,7 +39,7 @@ Binding system requirements — those carrying a `shall` obligation:
 
 ```memo-query
 kind: Requirement
-where: obligation == "shall"
+where: obligation == "ObligationKind::shall"
 display: table
 columns: name, requirementKind, doc
 sort: name
@@ -50,7 +50,7 @@ empty: "No requirements carry a `shall` obligation. Set `obligation` on Requirem
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "system"
+where: requirementKind == "RequirementKind::system"
 display: table
 columns: name, requirementKind, safetyClass, doc
 sort: name
@@ -67,7 +67,7 @@ How system requirements are allocated down to hardware and software.
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "system"
+where: requirementKind == "RequirementKind::system"
 traverse: outgoing satisfiedBy
 display: table
 columns: name, kind, layer, doc
