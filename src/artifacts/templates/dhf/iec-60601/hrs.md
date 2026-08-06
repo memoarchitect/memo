@@ -26,7 +26,7 @@ Summary metrics for the hardware requirements captured in the model:
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "hardware"
+where: requirementKind == "hardware"
 display: count
 label: Total hardware requirements
 ```
@@ -35,7 +35,7 @@ label: Total hardware requirements
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "hardware"
+where: requirementKind == "hardware"
 display: table
 columns: name, requirementKind, electricalSafetyRelevant, doc
 sort: name
@@ -154,7 +154,7 @@ Hardware requirements traced to the elements that satisfy them:
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "hardware"
+where: requirementKind == "hardware"
 traverse: outgoing satisfiedBy
 display: table
 columns: name, kind, layer, doc

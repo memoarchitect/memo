@@ -26,14 +26,14 @@ Summary metrics for the requirements captured in the model:
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "software"
+where: requirementKind == "software"
 display: count
 label: Total software requirements
 ```
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "system"
+where: requirementKind == "system"
 display: count
 label: System requirements
 ```
@@ -46,7 +46,7 @@ Requirements carrying a `shall` obligation — the binding ones:
 
 ```memo-query
 kind: Requirement
-where: obligation contains "shall"
+where: obligation == "shall"
 display: table
 columns: name, requirementKind, safetyClass, doc
 sort: name
@@ -57,7 +57,7 @@ empty: "No requirements carry a `shall` obligation. Set `obligation` on Requirem
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "software"
+where: requirementKind == "software"
 display: table
 columns: name, requirementKind, safetyClass, doc
 sort: name
@@ -82,7 +82,7 @@ Requirements satisfied by elements on that boundary:
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "software"
+where: requirementKind == "software"
 traverse: outgoing satisfiedBy
 display: table
 columns: name, kind, layer, doc
@@ -98,7 +98,7 @@ System requirements allocated to software per IEC 62304 §5.2, drawn from the mo
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "system"
+where: requirementKind == "system"
 display: table
 columns: name, requirementKind, safetyClass, doc
 sort: name
@@ -156,7 +156,7 @@ empty: "No SOUP identified. Add DependsOnSoup links from software items to the S
 
 ```memo-query
 kind: Requirement
-where: requirementKind contains "software"
+where: requirementKind == "software"
 traverse: outgoing verifiedBy
 display: table
 columns: name, kind, layer, doc
