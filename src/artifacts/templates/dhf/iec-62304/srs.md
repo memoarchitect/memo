@@ -2,7 +2,7 @@
 id: srs
 title: Software Requirements Specification
 standard: IEC 62304:2006+AMD1:2015
-clauses: ["5.2"]
+clauses: ["5.2", "5.2.2", "5.2.3", "5.2.6"]
 required_for: ["CE", "FDA_510k", "MDR"]
 ---
 
@@ -14,7 +14,9 @@ required_for: ["CE", "FDA_510k", "MDR"]
 
 ## 1. Purpose
 
-This Software Requirements Specification (SRS) defines the software requirements for **{{project.product}}** in accordance with IEC 62304:2006 §5.2.
+This Software Requirements Specification (SRS) defines the software requirements for **{{project.product}}** in accordance with IEC 62304:2006+AMD1:2015 §5.2.
+
+Software, hardware and system requirements are distinguished by the model's own `requirementKind` attribute, never by which layer directory a file sits in and never by what a requirement is called. There is no "software layer": hardware and software are sibling directories inside `implementation`.
 
 ---
 
@@ -24,12 +26,14 @@ Summary metrics for the requirements captured in the model:
 
 ```memo-query
 kind: Requirement
+where: requirementKind contains "software"
 display: count
 label: Total software requirements
 ```
 
 ```memo-query
 kind: Requirement
+where: requirementKind contains "system"
 display: count
 label: System requirements
 ```
@@ -38,25 +42,52 @@ label: System requirements
 
 ## 3. Functional Requirements
 
-Functional requirements are listed below from the model:
+Requirements carrying a `shall` obligation — the binding ones:
 
 ```memo-query
 kind: Requirement
-where: doc contains "shall"
+where: obligation contains "shall"
 display: table
-columns: name, layer, doc
+columns: name, requirementKind, safetyClass, doc
 sort: name
-empty: "No functional software requirements defined."
+empty: "No requirements carry a `shall` obligation. Set `obligation` on Requirement elements."
 ```
 
 ### All Software Requirements
 
 ```memo-query
 kind: Requirement
+where: requirementKind contains "software"
+display: table
+columns: name, requirementKind, safetyClass, doc
+sort: name
+empty: "No software requirements defined. Add Requirement elements with requirementKind = software."
+```
+
+---
+
+## 3.1 Hardware-Software Interface Requirements
+
+The hardware/software boundary is a modelled element, not a naming convention. The interfaces and ports below are the boundary this software crosses; requirements are traced to them through the model rather than selected by having "interface" in their name.
+
+```memo-query
+kind: [Interface, LogicalInterface, InterfaceElement, MemoPort, DataPort, SensorPort, CommandPort, SoftwarePort, PhysicalPort, LogicalPort]
 display: table
 columns: name, kind, layer, doc
 sort: name
-empty: "No software requirements defined. Add Requirement elements to model/requirements/*.sysml."
+empty: "No interfaces or ports defined."
+```
+
+Requirements satisfied by elements on that boundary:
+
+```memo-query
+kind: Requirement
+where: requirementKind contains "software"
+traverse: outgoing satisfiedBy
+display: table
+columns: name, kind, layer, doc
+sort: name
+empty: "No software requirements are linked to a satisfying architecture element. Add SatisfiedBy links."
 ```
 
 ---
@@ -67,8 +98,9 @@ System requirements allocated to software per IEC 62304 §5.2, drawn from the mo
 
 ```memo-query
 kind: Requirement
+where: requirementKind contains "system"
 display: table
-columns: name, layer, doc
+columns: name, requirementKind, safetyClass, doc
 sort: name
 empty: "No system requirements defined."
 ```
@@ -83,21 +115,23 @@ _[TODO: Define performance requirements (response time, throughput, memory)]_
 
 ### 5.2 Safety Requirements
 
+Software safety requirements are those whose `safetyClass` is set. The hazards they derive from:
+
 ```memo-query
 kind: Hazard
-where: layer == "software"
 display: table
-columns: name, doc
+columns: name, layer, doc
 sort: name
-empty: "No software safety requirements derived from hazard analysis."
+empty: "No hazards defined in the risk model."
 ```
 
 ### 5.3 Security Requirements
 
 ```memo-query
-kind: [SecurityControl, ThreatModel]
+kind: SecurityRequirement
 display: table
 columns: name, layer, doc
+sort: name
 empty: "No security requirements defined."
 ```
 
@@ -105,28 +139,29 @@ empty: "No security requirements defined."
 
 ## 6. SOUP Requirements
 
-This section is generated from the system model. The table below lists the **SOUP Requirements** elements currently defined:
+Software of Unknown Provenance depended on by **{{project.product}}**, derived by traversing `dependsOnSoup` from the software items:
 
 ```memo-query
-kind: SOUPComponent
+kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
+traverse: outgoing dependsOnSoup
 display: table
-columns: name, doc
+columns: name, kind, layer, doc
 sort: name
-empty: "No SOUP components identified."
+empty: "No SOUP identified. Add DependsOnSoup links from software items to the SOUP they depend on."
 ```
 
 ---
 
 ## 7. Requirements Traceability
 
-This section is generated from the system model. The table below lists the **Requirements Traceability** elements currently defined:
-
 ```memo-query
 kind: Requirement
+where: requirementKind contains "software"
+traverse: outgoing verifiedBy
 display: table
-columns: name, layer
+columns: name, kind, layer, doc
 sort: name
-empty: "No software requirements to trace."
+empty: "No software requirements are linked to a verification case. Add VerifiedBy links."
 ```
 
 ---

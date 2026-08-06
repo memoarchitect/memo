@@ -18,8 +18,10 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> id = "FM-001";
         attribute :>> name = "PumpMotorRunaway";
         attribute :>> failureModeKind = FailureModeKind::unintendedFunction;
+        attribute :>> effect = "Excess drug delivered to the patient beyond the prescribed rate.";
         attribute :>> severityRating = 10;
         attribute :>> occurrenceRating = 2;
+        attribute :>> probability = ProbabilityKind::improbable;
         attribute :>> detectionRating = 3;
         attribute :>> rpn = 60;
         attribute :>> criticality = CriticalityKind::catastrophic;
@@ -29,8 +31,10 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> id = "FM-002";
         attribute :>> name = "AirSensorFailsSilent";
         attribute :>> failureModeKind = FailureModeKind::lossOfFunction;
+        attribute :>> effect = "Air embolism reaches the patient undetected.";
         attribute :>> severityRating = 10;
         attribute :>> occurrenceRating = 3;
+        attribute :>> probability = ProbabilityKind::remote;
         attribute :>> detectionRating = 4;
         attribute :>> rpn = 120;
         attribute :>> criticality = CriticalityKind::catastrophic;
@@ -40,8 +44,10 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> id = "FM-003";
         attribute :>> name = "OcclusionSensorDrift";
         attribute :>> failureModeKind = FailureModeKind::degradedFunction;
+        attribute :>> effect = "Occluded line is detected late or not at all, interrupting therapy.";
         attribute :>> severityRating = 7;
         attribute :>> occurrenceRating = 4;
+        attribute :>> probability = ProbabilityKind::occasional;
         attribute :>> detectionRating = 4;
         attribute :>> rpn = 112;
         attribute :>> criticality = CriticalityKind::high;
@@ -51,8 +57,10 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> id = "FM-004";
         attribute :>> name = "BolusButtonStuckClosed";
         attribute :>> failureModeKind = FailureModeKind::unintendedFunction;
+        attribute :>> effect = "Repeated unrequested boluses are delivered.";
         attribute :>> severityRating = 9;
         attribute :>> occurrenceRating = 3;
+        attribute :>> probability = ProbabilityKind::remote;
         attribute :>> detectionRating = 2;
         attribute :>> rpn = 54;
         attribute :>> criticality = CriticalityKind::high;
@@ -62,8 +70,10 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> id = "FM-005";
         attribute :>> name = "BatteryDepletesEarly";
         attribute :>> failureModeKind = FailureModeKind::prematureFunction;
+        attribute :>> effect = "Pump loses power during transport, stopping therapy.";
         attribute :>> severityRating = 6;
         attribute :>> occurrenceRating = 4;
+        attribute :>> probability = ProbabilityKind::occasional;
         attribute :>> detectionRating = 3;
         attribute :>> rpn = 72;
         attribute :>> criticality = CriticalityKind::medium;
