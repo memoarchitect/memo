@@ -2,7 +2,7 @@
 id: vuln-assessment
 title: Vulnerability Assessment and Penetration Testing Report
 standard: FDA Cybersecurity Guidance 2023
-clauses: ["3.4"]
+clauses: ["V.C"]
 required_for: ["FDA_510k", "FDA_PMA"]
 ---
 

@@ -16,6 +16,26 @@
 // Nothing here is abstract. An abstract def cannot be instantiated, so a
 // traceability matrix over abstract clause types is empty by construction —
 // which is the failure mode this whole area exists to prevent.
+//
+// ─── The clause library and how a document cites it ──────────────────────
+//
+// The concrete instances live one file per standard beside this one
+// (iec_62304.sysml, iec_60601_1.sysml, …). A DHF template cites them from its
+// frontmatter, in one of two shapes:
+//
+//   clauses: ["5.4"]                              relative — the clause number
+//                                                 belongs to this document's
+//                                                 own `standard:`
+//   clauses: ["ISO 14971:2019 §7"]                qualified — the designation
+//                                                 before the section sign, the
+//                                                 clause number after it
+//
+// An entry containing "§" is qualified and nothing else is: that is the whole
+// grammar. The designation must match a RegulatoryStandard's `designation`
+// exactly, amendments included, and the clause number must match a
+// StandardClause's `clauseNumber` exactly. Both are checked by
+// standards-library.test.ts in memo-tools, which is what makes "adding a
+// standard is one file" true rather than aspirational.
 package memo_artifacts_standards_traceability {
     private import ScalarValues::*;
     private import memo_core_common::*;
