@@ -138,37 +138,31 @@ empty: "No SOUP identified. Add DependsOnSoup links from software items to the S
 
 ## 6. Standards Compliance and Traceability
 
-Maps architectural elements to the regulatory clauses they claim, for compliance audits. Both tables are relationship tables — rows are `ConformsTo` links, with columns drawn from both endpoints — and a query can only select elements today.
+Maps architectural elements to the regulatory clauses they claim, for compliance audits. Both tables are relationship tables — rows are `ConformsTo` links, with columns drawn from both endpoints. Each is scoped to one standard by the clause's declaring package, since the standards library is one package per standard; a clause *number* would not do it, because "5" is a clause of seven of the standards MEMO ships.
 
 ### 6.1 Compliance with IEC 62304
 
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
 ```memo-query
-kind: ConformsTo
-where: target.clauseNumber starts with "5.3"
+select: relationships
+kind: conformsTo
+where: target.package == "memo_artifacts_standards_iec_62304"
 display: table
-columns: source, target.clauseNumber, target.title
+columns: source, source.kind, target.clauseNumber, target.title
 sort: target.clauseNumber
 empty: "No IEC 62304 compliance traces defined."
 ```
--->
-
-_[TODO: requires `select: relationships`]_
 
 ### 6.2 Compliance with IEC 60601-1
 
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
 ```memo-query
-kind: ConformsTo
-where: target.clauseNumber starts with "4.2"
+select: relationships
+kind: conformsTo
+where: target.package == "memo_artifacts_standards_iec_60601_1"
 display: table
-columns: source, target.clauseNumber, target.title
+columns: source, source.kind, target.clauseNumber, target.title
 sort: target.clauseNumber
 empty: "No IEC 60601-1 compliance traces defined."
 ```
--->
-
-_[TODO: requires `select: relationships`]_
 
 ---
 

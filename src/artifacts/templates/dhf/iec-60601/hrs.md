@@ -2,7 +2,7 @@
 id: hrs
 title: Hardware Requirements Specification
 standard: IEC 60601-1:2005+AMD1:2012+AMD2:2020
-clauses: ["8", "9", "11", "IEC 60601-1-2:2014+AMD1:2020 §7"]
+clauses: ["8", "9", "11", "15", "IEC 60601-1-2:2014+AMD1:2020 §7"]
 required_for: ["CE", "FDA_510k", "MDR"]
 ---
 
@@ -16,7 +16,7 @@ required_for: ["CE", "FDA_510k", "MDR"]
 
 This Hardware Requirements Specification (HRS) defines the safety, construction, and performance requirements for the **{{project.product}}** physical equipment, ensuring compliance with IEC 60601-1 (general safety) and applicable collateral standards (IEC 60601-1-2 for electromagnetic compatibility).
 
-Hardware requirements are identified by the model's `requirementKind` attribute. Per-topic sections — electrical, EMC, mechanical, thermal — are **not** name filters: each is the set of requirements claiming the IEC 60601-1 clause that governs that topic, via `ConformsTo`. That query shape needs `select: relationships`, which does not exist yet; see §3–§6.
+Hardware requirements are identified by the model's `requirementKind` attribute. Per-topic sections — construction, electrical, EMC, mechanical — are **not** name filters: each is the set of elements claiming the clause that governs that topic, selected by traversing `ConformsTo` to that clause. A clause is named by its element id rather than by its number, because a clause number is not unique across standards: "8" is a clause of IEC 60601-1, of IEC 60601-1-2 and of IEC 62304.
 
 ---
 
@@ -44,7 +44,7 @@ empty: "No hardware requirements defined. Add Requirement elements with requirem
 
 ---
 
-## 3. Physical & Construction Requirements (IEC 60601-1 §8)
+## 3. Physical & Construction Requirements (IEC 60601-1 §15)
 
 The physical elements these requirements govern:
 
@@ -56,20 +56,17 @@ sort: name
 empty: "No physical assemblies or components defined."
 ```
 
-The requirements claiming IEC 60601-1 §8 are a `ConformsTo` table:
+The elements claiming IEC 60601-1 §15 are a `ConformsTo` table:
 
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
 ```memo-query
-kind: ConformsTo
-where: target.clauseNumber == "8"
+select: relationships
+kind: conformsTo
+where: target.id == "iec60601_1Clause15"
 display: table
-columns: source, target.clauseNumber, target.title
-sort: target.clauseNumber
-empty: "No requirements claim IEC 60601-1 §8."
+columns: source, source.kind, target.clauseNumber, target.title
+sort: source
+empty: "No elements claim IEC 60601-1 §15."
 ```
--->
-
-_[TODO: requires `select: relationships`]_
 
 ---
 
@@ -85,18 +82,15 @@ sort: name
 empty: "No electrical or electronic components defined."
 ```
 
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
 ```memo-query
-kind: ConformsTo
-where: target.clauseNumber == "8.5"
+select: relationships
+kind: conformsTo
+where: target.id == "iec60601_1Clause8"
 display: table
-columns: source, target.clauseNumber, target.title
-sort: target.clauseNumber
-empty: "No requirements claim IEC 60601-1 §8.5."
+columns: source, source.kind, target.clauseNumber, target.title
+sort: source
+empty: "No elements claim IEC 60601-1 §8."
 ```
--->
-
-_[TODO: requires `select: relationships`]_
 
 ---
 
@@ -106,18 +100,15 @@ Immunity from electromagnetic disturbances and limits on emissions.
 
 This section is the one that pays for clause-level traceability: once a requirement carries `ConformsTo → IEC 60601-1-2 §7`, "EMC Requirements" stops being a filter over names and becomes *the set of requirements claiming that clause*. The section heading and the standard then come from one source.
 
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
 ```memo-query
-kind: ConformsTo
-where: target.clauseNumber == "7"
+select: relationships
+kind: conformsTo
+where: target.id == "iec60601_1_2Clause7"
 display: table
-columns: source, target.clauseNumber, target.title
-sort: target.clauseNumber
-empty: "No requirements claim IEC 60601-1-2 §7."
+columns: source, source.kind, target.clauseNumber, target.title
+sort: source
+empty: "No elements claim IEC 60601-1-2 §7."
 ```
--->
-
-_[TODO: requires `select: relationships`]_
 
 ---
 
@@ -133,18 +124,15 @@ sort: name
 empty: "No mechanical, thermal, fluidic or optical components defined."
 ```
 
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
 ```memo-query
-kind: ConformsTo
-where: target.clauseNumber == "9"
+select: relationships
+kind: conformsTo
+where: target.id == "iec60601_1Clause9"
 display: table
-columns: source, target.clauseNumber, target.title
-sort: target.clauseNumber
-empty: "No requirements claim IEC 60601-1 §9."
+columns: source, source.kind, target.clauseNumber, target.title
+sort: source
+empty: "No elements claim IEC 60601-1 §9."
 ```
--->
-
-_[TODO: requires `select: relationships`]_
 
 ---
 
@@ -162,19 +150,16 @@ sort: name
 empty: "No hardware requirements are linked to a satisfying element. Add SatisfiedBy links."
 ```
 
-The allocation table proper — *which* system requirement allocates to *which* hardware element — is relationship-shaped:
+The allocation table proper — *which* element allocates to *which* — is relationship-shaped. It is not filtered to hardware: `AllocatedTo` joins two architecture elements and carries no layer of its own, so the receiving element's kind and layer are shown as columns instead of guessed at by a filter.
 
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
 ```memo-query
-kind: AllocatedTo
+select: relationships
+kind: allocatedTo
 display: table
-columns: source, target
+columns: source, target, target.kind, target.layer
 sort: target
-empty: "No hardware allocations defined."
+empty: "No allocations defined."
 ```
--->
-
-_[TODO: requires `select: relationships`]_
 
 ---
 
