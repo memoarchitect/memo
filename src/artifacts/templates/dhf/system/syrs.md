@@ -75,37 +75,19 @@ sort: name
 empty: "No system requirements are linked to a satisfying element. Add SatisfiedBy links."
 ```
 
-### 4.2 System to Hardware Allocation
+### 4.2 Function Allocation
 
-The allocation table proper — which requirement allocates to which element — is a relationship table, not an element table:
+The allocation table proper — which element allocates to which — is a relationship table, not an element table. It is grouped by the kind of the receiving element, which is where the hardware/software split actually lives: `AllocatedTo` joins two architecture elements and carries no layer of its own, so a single comparison cannot ask for "the hardware ones" without naming one hardware kind and dropping the rest.
 
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
 ```memo-query
-kind: AllocatedTo
-where: target.requirementKind contains "hardware"
-display: table
-columns: source, target, doc
+select: relationships
+kind: allocatedTo
+display: grouped
+group_by: target.kind
+columns: source, source.kind, target, target.layer
 sort: source
-empty: "No system-to-hardware allocations defined."
+empty: "No allocations defined. Add AllocatedTo links."
 ```
--->
-
-_[TODO: requires `select: relationships`]_
-
-### 4.3 System to Software Allocation
-
-<!-- _[TODO: requires `select: relationships`]_ — a query cannot select relationships today
-```memo-query
-kind: AllocatedTo
-where: target.requirementKind contains "software"
-display: table
-columns: source, target, doc
-sort: source
-empty: "No system-to-software allocations defined."
-```
--->
-
-_[TODO: requires `select: relationships`]_
 
 ---
 
