@@ -2,7 +2,7 @@
 id: incident-response
 title: Cybersecurity Incident Response Plan
 standard: FDA Cybersecurity Guidance 2023
-clauses: ["5.2"]
+clauses: ["VI"]
 required_for: ["FDA_510k", "FDA_PMA"]
 ---
 
