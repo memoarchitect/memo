@@ -75,6 +75,16 @@ package memo {
     public import memo_artifacts_configuration_management::*;
     public import memo_artifacts_documents_risk_management::*;
     public import memo_artifacts_standards_traceability::*;
+    public import memo_artifacts_standards_cfr_21_820::*;
+    public import memo_artifacts_standards_fda_cybersecurity_2023::*;
+    public import memo_artifacts_standards_iec_60601_1::*;
+    public import memo_artifacts_standards_iec_60601_1_2::*;
+    public import memo_artifacts_standards_iec_60812::*;
+    public import memo_artifacts_standards_iec_62304::*;
+    public import memo_artifacts_standards_iec_62366_1::*;
+    public import memo_artifacts_standards_iso_13485::*;
+    public import memo_artifacts_standards_iso_14971::*;
+    public import memo_artifacts_standards_iso_iec_ieee_42010::*;
 
     public import memo_methodology_core::*;
     public import memo_methodology_rules::*;
@@ -373,6 +383,18 @@ package memo_namespace_artifacts_documents_risk_management {
 
 package memo_namespace_artifacts_standards {
     public import memo_artifacts_standards_traceability::*;
+    // The library itself: one package per standard, concrete clause instances.
+    // Adding a standard is one file next to these and no change anywhere else.
+    public import memo_artifacts_standards_cfr_21_820::*;
+    public import memo_artifacts_standards_fda_cybersecurity_2023::*;
+    public import memo_artifacts_standards_iec_60601_1::*;
+    public import memo_artifacts_standards_iec_60601_1_2::*;
+    public import memo_artifacts_standards_iec_60812::*;
+    public import memo_artifacts_standards_iec_62304::*;
+    public import memo_artifacts_standards_iec_62366_1::*;
+    public import memo_artifacts_standards_iso_13485::*;
+    public import memo_artifacts_standards_iso_14971::*;
+    public import memo_artifacts_standards_iso_iec_ieee_42010::*;
 }
 
 package memo_namespace_assurance_verification_validation_clinical_evaluation {

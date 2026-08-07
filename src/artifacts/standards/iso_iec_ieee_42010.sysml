@@ -1,0 +1,38 @@
+// ISO/IEC/IEEE 42010:2022 — architecture description.
+//
+// One standard from a joint committee, not three: the spaced slash is what
+// separates two designations, and there is none here.
+//
+// SCOPE PHRASES DELIBERATELY ABSENT — same reason as the IEC 60812 pack. The
+// 2022 edition reorganised the clause structure of 42010:2011, and MEMO has no
+// verified reading of the new numbering. A missing label is a gap a reviewer
+// closes in one line; a guessed one is a citation nobody can check.
+package memo_artifacts_standards_iso_iec_ieee_42010 {
+    private import ScalarValues::*;
+    private import memo_core_relationships::*;
+    private import memo_artifacts_standards_traceability::*;
+
+    item isoIecIeee42010 : RegulatoryStandard {
+        attribute :>> id = "STD-ISO-IEC-IEEE-42010";
+        attribute :>> name = "ISOIECIEEE42010";
+        attribute :>> designation = "ISO/IEC/IEEE 42010:2022";
+        attribute :>> edition = "2022";
+        attribute :>> issuer = "ISO/IEC/IEEE";
+    }
+
+    item isoIecIeee42010Clause5 : StandardClause {
+        attribute :>> id = "STD-ISO-IEC-IEEE-42010-5";
+        attribute :>> name = "ISOIECIEEE42010Clause5";
+        attribute :>> clauseNumber = "5";
+        attribute :>> normativeStrength = "shall";
+    }
+    item isoIecIeee42010Clause6 : StandardClause {
+        attribute :>> id = "STD-ISO-IEC-IEEE-42010-6";
+        attribute :>> name = "ISOIECIEEE42010Clause6";
+        attribute :>> clauseNumber = "6";
+        attribute :>> normativeStrength = "shall";
+    }
+
+    connection isoIecIeee42010Has5 : Composes connect parent ::> isoIecIeee42010 to child ::> isoIecIeee42010Clause5;
+    connection isoIecIeee42010Has6 : Composes connect parent ::> isoIecIeee42010 to child ::> isoIecIeee42010Clause6;
+}

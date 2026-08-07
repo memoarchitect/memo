@@ -2,7 +2,7 @@
 id: postmarket-surveillance
 title: Post-Market Cybersecurity Surveillance Plan
 standard: FDA Cybersecurity Guidance 2023
-clauses: ["5"]
+clauses: ["VI"]
 required_for: ["FDA_510k", "FDA_PMA"]
 ---
 

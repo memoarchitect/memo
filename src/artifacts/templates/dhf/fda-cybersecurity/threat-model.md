@@ -2,7 +2,7 @@
 id: threat-model
 title: Cybersecurity Threat Model
 standard: FDA Cybersecurity Guidance 2023
-clauses: ["3.2"]
+clauses: ["V.A"]
 required_for: ["FDA_510k", "FDA_PMA"]
 ---
 

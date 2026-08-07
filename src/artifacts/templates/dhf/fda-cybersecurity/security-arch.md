@@ -2,7 +2,7 @@
 id: security-arch
 title: Cybersecurity Architecture Description
 standard: FDA Cybersecurity Guidance 2023
-clauses: ["3.3"]
+clauses: ["V.B"]
 required_for: ["FDA_510k", "FDA_PMA"]
 ---
 
