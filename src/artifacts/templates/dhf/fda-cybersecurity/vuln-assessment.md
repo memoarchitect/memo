@@ -23,7 +23,7 @@ Documents cybersecurity vulnerability assessment and testing for **{{project.pro
 Define the boundaries of this assessment: components, interfaces, and threat classes in and out of scope.
 
 ```memo-query
-kind: [SoftwareSystem, SoftwareItem, Interface]
+kind: [HardwareComponent, HardwareAssembly, SoftwareSystem, SoftwareComponent, SoftwareModule, InterfaceElement, MemoPort]
 display: table
 columns: name, kind, layer
 sort: name
@@ -37,7 +37,8 @@ empty: "No software assets defined."
 Known vulnerabilities in SOUP and third-party components (e.g. from CVE/NVD monitoring) and their disposition:
 
 ```memo-query
-kind: SOUPComponent
+kind: SoftwareModule
+where: moduleKind == "SoftwareModuleKind::soup"
 display: table
 columns: name, doc
 sort: name

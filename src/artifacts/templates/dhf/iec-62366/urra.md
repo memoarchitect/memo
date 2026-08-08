@@ -23,7 +23,7 @@ This Use-Related Risk Analysis (URRA) identifies use errors and use-related haza
 This section is generated from the system model. The table below lists the **Use Scenarios** elements currently defined:
 
 ```memo-query
-kind: [UseCase, UserActivity]
+kind: [UseCase, UserTask]
 display: table
 columns: name, layer, doc
 sort: name
@@ -38,7 +38,7 @@ This section is generated from the system model. The table below lists the **Use
 
 ```memo-query
 kind: [Hazard, HazardousSituation]
-where: layer == "ui"
+where: layer == "human-factors"
 display: table
 columns: name, doc, layer
 sort: name
@@ -60,7 +60,7 @@ _[TODO: Identify the critical tasks whose failure could cause a hazardous situat
 This section is generated from the system model. The table below lists the **Mitigation Measures** elements currently defined:
 
 ```memo-query
-kind: [RiskControlMeasure, UsabilityRequirement]
+kind: [RiskControlMeasure, Requirement]
 display: table
 columns: name, layer, doc
 sort: name

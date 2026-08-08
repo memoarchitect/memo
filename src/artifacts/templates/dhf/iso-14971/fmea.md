@@ -67,8 +67,8 @@ empty: "No software failure modes defined. Link FailureMode elements to software
 Failures at the boundary between hardware and software — sensor data misinterpreted, actuator commands lost, protocol desynchronisation. The boundary is queried through the interface and port types, never by matching a name.
 
 ```memo-query
-kind: [Interface, LogicalInterface, InterfaceElement, MemoPort, DataPort, SensorPort, CommandPort, SoftwarePort, PhysicalPort, LogicalPort]
-traverse: outgoing hasFailureMode
+kind: [InterfaceElement, MemoPort]
+traverse: incoming hasFailureMode
 display: table
 columns: name, effect, severityRating, probability, doc
 sort: name
@@ -80,7 +80,7 @@ empty: "No interface failure modes defined. Link FailureMode elements to interfa
 The boundary elements the section above analyses:
 
 ```memo-query
-kind: [Interface, LogicalInterface, InterfaceElement, MemoPort, DataPort, SensorPort, CommandPort, SoftwarePort, PhysicalPort, LogicalPort]
+kind: [InterfaceElement, MemoPort]
 display: table
 columns: name, kind, layer, doc
 sort: name

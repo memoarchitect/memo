@@ -33,7 +33,7 @@ This plan covers:
 ### 3.1 Requirements to Verify
 
 ```memo-query
-kind: [Requirement, Requirement]
+kind: Requirement
 display: table
 columns: name, layer, doc
 sort: name
@@ -43,7 +43,7 @@ empty: "No requirements defined."
 ### 3.2 Verification Test Cases
 
 ```memo-query
-kind: [TestCase, VerificationActivity]
+kind: VerificationCase
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -57,7 +57,7 @@ empty: "No verification test cases defined."
 Validation activities demonstrating that **{{project.product}}** meets user needs and intended uses:
 
 ```memo-query
-kind: ValidationActivity
+kind: ValidationCase
 display: table
 columns: name, layer, doc
 sort: name

@@ -23,7 +23,7 @@ This document provides detailed design specifications for **{{project.product}}*
 The software units — the lowest level of decomposition per IEC 62304 — are listed below from the model:
 
 ```memo-query
-kind: SoftwareUnit
+kind: SoftwareModule
 display: table
 columns: name, layer, doc
 sort: name

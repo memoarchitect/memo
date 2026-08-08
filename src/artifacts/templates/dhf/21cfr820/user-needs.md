@@ -31,7 +31,7 @@ _[TODO: Describe all intended user groups with their roles, training levels, and
 User needs captured for **{{project.product}}** are listed below from the model. Each user need should trace forward to at least one design input:
 
 ```memo-query
-kind: [Need, Requirement]
+kind: [Requirement, Need]
 display: table
 columns: name, layer, doc
 sort: name
