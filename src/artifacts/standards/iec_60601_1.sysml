@@ -11,6 +11,7 @@
 // the standard's own normative wording.
 package memo_artifacts_standards_iec_60601_1 {
     private import ScalarValues::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
@@ -20,6 +21,7 @@ package memo_artifacts_standards_iec_60601_1 {
         attribute :>> designation = "IEC 60601-1:2005+AMD1:2012+AMD2:2020";
         attribute :>> edition = "3.2";
         attribute :>> issuer = "IEC";
+        attribute :>> appliesToRegime = (RegulatoryRegimeKind::CE, RegulatoryRegimeKind::MDR, RegulatoryRegimeKind::UKCA, RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
     }
 
     item iec60601_1Clause4 : StandardClause {

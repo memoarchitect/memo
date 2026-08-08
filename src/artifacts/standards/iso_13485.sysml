@@ -6,6 +6,7 @@
 // nothing to add later.
 package memo_artifacts_standards_iso_13485 {
     private import ScalarValues::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
@@ -15,6 +16,7 @@ package memo_artifacts_standards_iso_13485 {
         attribute :>> designation = "ISO 13485:2016";
         attribute :>> edition = "2016";
         attribute :>> issuer = "ISO";
+        attribute :>> appliesToRegime = (RegulatoryRegimeKind::CE, RegulatoryRegimeKind::MDR, RegulatoryRegimeKind::UKCA);
     }
 
     item iso13485Clause4 : StandardClause {

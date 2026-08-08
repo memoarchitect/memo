@@ -6,6 +6,7 @@
 // own normative wording.
 package memo_artifacts_standards_iec_62366_1 {
     private import ScalarValues::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
@@ -16,6 +17,7 @@ package memo_artifacts_standards_iec_62366_1 {
         attribute :>> edition = "2015";
         attribute :>> issuer = "IEC";
         attribute :>> amendments = "AMD1:2020";
+        attribute :>> appliesToRegime = (RegulatoryRegimeKind::CE, RegulatoryRegimeKind::MDR, RegulatoryRegimeKind::UKCA, RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
     }
 
     item iec62366_1Clause4 : StandardClause {

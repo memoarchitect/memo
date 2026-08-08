@@ -118,6 +118,25 @@ package memo_core_enumerations {
         enum formalProof;
         enum modelChecking;
     }
+    // The submission regime a project targets, and the regimes a standard has
+    // standing in. This is the axis that decides which clauses a project is
+    // required to claim: `required(project)` is the clauses of every standard
+    // whose `appliesToRegime` intersects the regimes the project's
+    // ProjectMethodBinding declares.
+    //
+    // The members are spelled as the regulatory designations themselves rather
+    // than in the lowerCamel convention the rest of this file uses. All 44 DHF
+    // templates already carry these exact strings in `required_for`, and any
+    // transformation between the enum and those arrays would be a hardcoded
+    // spelling map in TypeScript — the one thing the standards axis exists to
+    // avoid. One vocabulary, one spelling, declared here.
+    enum def RegulatoryRegimeKind {
+        enum CE;
+        enum MDR;
+        enum UKCA;
+        enum FDA_510k;
+        enum FDA_PMA;
+    }
     enum def ArtifactKind {
         enum plan;
         enum requirementSpecification;

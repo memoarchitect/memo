@@ -17,5 +17,10 @@ package memo_examples_gpca_pump_project {
         ref :>> selectedMethodology = gpcaMethodDefinition;
         // The project adds nothing to the methodology's selection.
         attribute :>> scopeMode = ScopeModeKind::explicit;
+        // The submission regimes this device targets. `memo standards check`
+        // reads this to decide which standards are required: an EU + US launch
+        // pulls in both the harmonised IEC/ISO packs and 21 CFR Part 820,
+        // where a CE-only project would not be asked for the FDA clauses.
+        attribute :>> regulatoryRegime = (RegulatoryRegimeKind::CE, RegulatoryRegimeKind::MDR, RegulatoryRegimeKind::FDA_510k);
     }
 }

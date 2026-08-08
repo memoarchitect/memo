@@ -18,6 +18,10 @@ package memo_artifacts_standards_iso_iec_ieee_42010 {
         attribute :>> designation = "ISO/IEC/IEEE 42010:2022";
         attribute :>> edition = "2022";
         attribute :>> issuer = "ISO/IEC/IEEE";
+        // No submission regime mandates this standard: it is a method /
+        // reference standard, cited by documents rather than required by a
+        // market. Empty is the authored value, not an omission — see
+        // appliesToRegime in memo_artifacts_standards_traceability.
     }
 
     item isoIecIeee42010Clause5 : StandardClause {

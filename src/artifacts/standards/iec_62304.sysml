@@ -12,6 +12,7 @@
 // traverse ConformsTo to the clause instance, they never match on its text.
 package memo_artifacts_standards_iec_62304 {
     private import ScalarValues::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
@@ -22,6 +23,7 @@ package memo_artifacts_standards_iec_62304 {
         attribute :>> edition = "2006";
         attribute :>> issuer = "IEC";
         attribute :>> amendments = "AMD1:2015";
+        attribute :>> appliesToRegime = (RegulatoryRegimeKind::CE, RegulatoryRegimeKind::MDR, RegulatoryRegimeKind::UKCA, RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
     }
 
     // ── 4 General requirements ───────────────────────────────────────────
