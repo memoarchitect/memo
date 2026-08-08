@@ -33,7 +33,7 @@ empty: "No system requirements defined."
 ### 2.2 Design Inputs from User Needs
 
 ```memo-query
-kind: [DesignInput, Need]
+kind: [Requirement, Need]
 display: table
 columns: name, layer, doc
 sort: name

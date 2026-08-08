@@ -64,7 +64,7 @@ Complete the table below for **{{project.product}}**:
 ### 4.1 Severity Levels
 
 ```memo-query
-kind: RiskAcceptabilityCriteria
+kind: Requirement
 display: table
 columns: name, doc, layer
 empty: "No risk acceptability criteria defined. Add RiskAcceptabilityCriteria elements to the model."
@@ -83,7 +83,7 @@ Residual risk is acceptable when:
 
 ```memo-query
 kind: Hazard
-where: layer == "risk"
+where: layer == "safety_risk"
 display: count
 label: Total hazards in model
 ```

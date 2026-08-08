@@ -31,7 +31,7 @@ _[TODO: Describe participant demographics, number, and selection criteria]_
 This section is generated from the system model. The table below lists the **Test Scenarios** elements currently defined:
 
 ```memo-query
-kind: [UseCase, ValidationActivity]
+kind: [UseCase, ValidationCase]
 display: table
 columns: name, layer, doc
 sort: name

@@ -58,6 +58,7 @@ test:
     - sed -i 's/{{name}}/phase1-template/g' .phase1-template/memo.package.yaml .phase1-template/src/catalog/starter.sysml
     - node /tmp/memo-tools/packages/tools/lib/bin/memo.js validate .phase1-template
     - node /tmp/memo-tools/packages/tools/lib/bin/memo.js validate examples/gpca-pump
+    - node /tmp/memo-tools/packages/tools/lib/bin/memo.js dhf lint
   after_script:
     - rm -rf "$CI_PROJECT_DIR/.phase1-template"
 

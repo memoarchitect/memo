@@ -37,7 +37,7 @@ empty: "No system requirements defined."
 This section is generated from the system model. The table below lists the **System Test Cases** elements currently defined:
 
 ```memo-query
-kind: [TestCase, ValidationActivity]
+kind: [VerificationCase, ValidationCase]
 display: table
 columns: name, kind, layer, doc
 sort: name

@@ -23,13 +23,13 @@ This V&V Report documents the results of all verification and validation activit
 Summary metrics computed live from the model:
 
 ```memo-query
-kind: TestCase
+kind: VerificationCase
 display: count
 label: Total test cases
 ```
 
 ```memo-query
-kind: [VerificationActivity, ValidationActivity]
+kind: [VerificationCase, ValidationCase]
 display: count
 label: V&V activities
 ```
@@ -41,7 +41,7 @@ label: V&V activities
 ### 3.1 Test Results by Requirement
 
 ```memo-query
-kind: [TestCase, VerificationActivity]
+kind: VerificationCase
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -55,7 +55,7 @@ empty: "No verification activities defined."
 Results of the validation activities are summarized below:
 
 ```memo-query
-kind: ValidationActivity
+kind: ValidationCase
 display: table
 columns: name, layer, doc
 sort: name

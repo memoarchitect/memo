@@ -5,7 +5,8 @@
   "description": "MEMO \u2014 Medical Engineering Modelling Ontology. Pure SysML v2 medical-device ontology with native constraints, portable to any conformant SysML v2 tool (SysIDE, SysON, sysand).",
   "scripts": {
     "build": "bash scripts/build-kpar.sh",
-    "check": "bash scripts/build-kpar.sh",
+    "check": "bash scripts/build-kpar.sh && npm run lint",
+    "lint": "node ../memo-tools/packages/tools/lib/bin/memo.js dhf lint",
     "test": "node --test test/package.test.mjs",
     "docs:api": "node scripts/generate-sysml-api.mjs",
     "docs:diagrams": "node scripts/generate-reference-diagrams.mjs",

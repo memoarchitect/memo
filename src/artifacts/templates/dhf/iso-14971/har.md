@@ -50,7 +50,7 @@ All foreseeable hazards arising from the device, its intended use, and reasonabl
 
 ```memo-query
 kind: Hazard
-where: doc contains "energy"
+where: hazardType == "HazardTypeKind::energyExposure"
 display: table
 columns: name, doc, layer
 sort: name
@@ -61,7 +61,7 @@ empty: "No energy hazards identified."
 
 ```memo-query
 kind: Hazard
-where: doc contains "biolog"
+where: hazardType == "HazardTypeKind::biologicalContamination"
 display: table
 columns: name, doc, layer
 empty: "No biological/chemical hazards identified."
@@ -114,7 +114,7 @@ empty: "No harm elements defined. Add Harm elements linked to HazardousSituation
 
 ```memo-query
 kind: RiskControlMeasure
-where: doc contains "design"
+where: controlKind == "RiskControlKind::inherentSafeDesign"
 display: table
 columns: name, doc, layer
 empty: "No inherent safety controls."

@@ -29,7 +29,7 @@ _[TODO: Reference V&V Plan]_
 Describe clinical or bench validation activities demonstrating conformity with user needs under actual or simulated use conditions.
 
 ```memo-query
-kind: ValidationActivity
+kind: ValidationCase
 display: table
 columns: name, layer, doc
 sort: name
@@ -43,7 +43,7 @@ empty: "No validation activities defined."
 Coverage of user needs by validation activities, computed live from the model:
 
 ```memo-query
-kind: [Need, Requirement]
+kind: [Requirement, Need]
 display: table
 columns: name, layer, doc
 empty: "No user needs defined."

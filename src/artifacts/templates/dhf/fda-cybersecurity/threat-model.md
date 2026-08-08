@@ -23,7 +23,7 @@ This threat model documents cybersecurity threats for **{{project.product}}** pe
 Assets requiring protection (data, functions, interfaces), drawn from the model:
 
 ```memo-query
-kind: [SoftwareSystem, Interface, SOUPComponent]
+kind: [SoftwareSystem, InterfaceElement, SoftwareModule]
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -51,7 +51,7 @@ empty: "No interfaces defined."
 The threat catalog below is generated from the model. Each threat should be assessed for likelihood and impact and trace to mitigating security controls:
 
 ```memo-query
-kind: ThreatModel
+kind: [FMEAWorksheet, FaultTree, HAZOPStudy]
 display: table
 columns: name, layer, doc
 sort: name
@@ -76,7 +76,7 @@ empty: "No threat model elements defined. Add ThreatModel elements."
 Security controls implemented in **{{project.product}}** are listed below from the model. Each control should trace to at least one identified threat:
 
 ```memo-query
-kind: SecurityControl
+kind: RiskControlMeasure
 display: table
 columns: name, layer, doc
 sort: name

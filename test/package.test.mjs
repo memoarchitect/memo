@@ -152,7 +152,7 @@ test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
   const expected = [
     'connected-patient-monitor', 'embedded-infusion-pump',
     'extensions', 'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
-    'manual-surgical-instrument', 'multidimensional-layers', 'reusable-instrument',
+    'manual-surgical-instrument', 'multidimensional-layers', 'nested-architecture-dsm', 'reusable-instrument',
     'software-only-medical-device', 'surgical-closure-workflow',
     'surgical-robot', 'sysml-diagram-samples', 'temperature-alarm', 'ui-screen-regions',
   ];
