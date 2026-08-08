@@ -14,6 +14,7 @@
 // section of the published guidance; those were replaced when this pack landed.
 package memo_artifacts_standards_fda_cybersecurity_2023 {
     private import ScalarValues::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
@@ -23,6 +24,7 @@ package memo_artifacts_standards_fda_cybersecurity_2023 {
         attribute :>> designation = "FDA Cybersecurity Guidance 2023";
         attribute :>> edition = "2023-09";
         attribute :>> issuer = "FDA";
+        attribute :>> appliesToRegime = (RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
     }
 
     item fdaCyberSection4 : StandardClause {

@@ -6,6 +6,7 @@
 // emissions cites this document, not the general standard.
 package memo_artifacts_standards_iec_60601_1_2 {
     private import ScalarValues::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
@@ -16,6 +17,7 @@ package memo_artifacts_standards_iec_60601_1_2 {
         attribute :>> edition = "4.1";
         attribute :>> issuer = "IEC";
         attribute :>> amendments = "AMD1:2020";
+        attribute :>> appliesToRegime = (RegulatoryRegimeKind::CE, RegulatoryRegimeKind::MDR, RegulatoryRegimeKind::UKCA, RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
     }
 
     item iec60601_1_2Clause4 : StandardClause {

@@ -20,6 +20,10 @@ package memo_artifacts_standards_iec_60812 {
         attribute :>> designation = "IEC 60812:2018";
         attribute :>> edition = "2018";
         attribute :>> issuer = "IEC";
+        // No submission regime mandates this standard: it is a method /
+        // reference standard, cited by documents rather than required by a
+        // market. Empty is the authored value, not an omission — see
+        // appliesToRegime in memo_artifacts_standards_traceability.
     }
 
     item iec60812Clause5 : StandardClause {

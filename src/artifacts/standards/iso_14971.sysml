@@ -4,6 +4,7 @@
 // MEMO-AUTHORED scope phrase, never the standard's own normative wording.
 package memo_artifacts_standards_iso_14971 {
     private import ScalarValues::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
@@ -13,6 +14,7 @@ package memo_artifacts_standards_iso_14971 {
         attribute :>> designation = "ISO 14971:2019";
         attribute :>> edition = "2019";
         attribute :>> issuer = "ISO";
+        attribute :>> appliesToRegime = (RegulatoryRegimeKind::CE, RegulatoryRegimeKind::MDR, RegulatoryRegimeKind::UKCA, RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
     }
 
     item iso14971Clause4 : StandardClause {
