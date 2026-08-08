@@ -39,6 +39,7 @@
 package memo_artifacts_standards_traceability {
     private import ScalarValues::*;
     private import memo_core_common::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_core::*;
 
@@ -56,6 +57,19 @@ package memo_artifacts_standards_traceability {
         attribute edition : String[0..1];
         attribute issuer : String[0..1];
         attribute amendments : String[0..*];
+        // Which submission regimes this standard has standing in. Empty is a
+        // MEANINGFUL value, not an unset one: it says no regime mandates this
+        // standard, which is true of the method and reference standards MEMO
+        // carries (IEC 60812's FMEA method, ISO/IEC/IEEE 42010's architecture
+        // description). A regime-free standard never contributes to
+        // `required(project)` — its clauses are claimable but not required.
+        //
+        // Because empty means something, it cannot also mean "the pack author
+        // forgot". `memo standards check` prints regime-free standards in their
+        // own section rather than dropping them, and standards-library.test.ts
+        // names the exact set — the same way Phase 2 named the four document
+        // types that derive no standards. A forgotten regime is a red test.
+        attribute appliesToRegime : RegulatoryRegimeKind[0..*];
     }
 
     item def StandardClause :> MemoPart {

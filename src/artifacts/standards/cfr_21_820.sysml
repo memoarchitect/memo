@@ -11,6 +11,7 @@
 // registry.
 package memo_artifacts_standards_cfr_21_820 {
     private import ScalarValues::*;
+    private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
@@ -19,6 +20,7 @@ package memo_artifacts_standards_cfr_21_820 {
         attribute :>> name = "CFR21Part820";
         attribute :>> designation = "21 CFR Part 820";
         attribute :>> issuer = "FDA";
+        attribute :>> appliesToRegime = (RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
     }
 
     item cfr820_30 : StandardClause {
