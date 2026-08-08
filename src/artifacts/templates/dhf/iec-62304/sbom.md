@@ -23,7 +23,7 @@ This Software Bill of Materials (SBOM) provides a complete inventory of software
 Software developed in-house for this system is listed below from the model:
 
 ```memo-query
-kind: [SoftwareSystem, SoftwareItem, SoftwareUnit]
+kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -37,7 +37,8 @@ empty: "No first-party software items defined."
 All third-party and SOUP components with their versions and origins, generated from the model:
 
 ```memo-query
-kind: SOUPComponent
+kind: SoftwareModule
+where: moduleKind == "SoftwareModuleKind::soup"
 display: table
 columns: name, doc, layer
 sort: name

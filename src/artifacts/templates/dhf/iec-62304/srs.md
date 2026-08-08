@@ -71,7 +71,7 @@ empty: "No software requirements defined. Add Requirement elements with requirem
 The hardware/software boundary is a modelled element, not a naming convention. The interfaces and ports below are the boundary this software crosses; requirements are traced to them through the model rather than selected by having "interface" in their name.
 
 ```memo-query
-kind: [Interface, LogicalInterface, InterfaceElement, MemoPort, DataPort, SensorPort, CommandPort, SoftwarePort, PhysicalPort, LogicalPort]
+kind: [InterfaceElement, MemoPort]
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -81,9 +81,8 @@ empty: "No interfaces or ports defined."
 Requirements satisfied by elements on that boundary:
 
 ```memo-query
-kind: Requirement
-where: requirementKind == "RequirementKind::software"
-traverse: outgoing satisfiedBy
+kind: [InterfaceElement, MemoPort]
+traverse: incoming satisfiedBy
 display: table
 columns: name, kind, layer, doc
 sort: name

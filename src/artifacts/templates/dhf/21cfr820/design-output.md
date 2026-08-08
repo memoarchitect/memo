@@ -23,8 +23,8 @@ Defines design outputs for **{{project.product}}** per 21 CFR 820.30(d). Design 
 ### 2.1 Hardware Design Outputs
 
 ```memo-query
-kind: [Component, Subsystem, DesignOutput]
-where: layer == "physical"
+kind: [HardwareComponent, HardwareAssembly, SoftwareComponent, SoftwareSystem]
+where: layer == "implementation"
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -34,8 +34,8 @@ empty: "No hardware design outputs defined."
 ### 2.2 Software Design Outputs
 
 ```memo-query
-kind: [SoftwareItem, SoftwareUnit, DesignOutput]
-where: layer == "software"
+kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
+where: layer == "implementation"
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -45,7 +45,7 @@ empty: "No software design outputs defined."
 ### 2.3 All Design Outputs
 
 ```memo-query
-kind: DesignOutput
+kind: [HardwareComponent, HardwareAssembly, SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, layer, doc
 sort: name

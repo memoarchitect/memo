@@ -27,7 +27,7 @@ This Software Development Plan (SDP) defines the processes, activities, and task
 | {{project.product}} Software System | Class B | |
 
 ```memo-query
-kind: [SoftwareSystem, SoftwareItem]
+kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -57,7 +57,8 @@ Identify the coding standards, review procedures, and quality gates applied duri
 ### 4.1 Software Items of Unknown Provenance (SOUP)
 
 ```memo-query
-kind: SOUPComponent
+kind: SoftwareModule
+where: moduleKind == "SoftwareModuleKind::soup"
 display: table
 columns: name, doc, layer
 sort: name
@@ -68,7 +69,7 @@ empty: "No SOUP components defined."
 
 ```memo-query
 kind: Hazard
-where: layer == "software"
+where: layer == "implementation"
 display: table
 columns: name, doc, layer
 sort: name

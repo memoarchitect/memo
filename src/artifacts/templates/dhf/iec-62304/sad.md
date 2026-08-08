@@ -33,7 +33,7 @@ empty: "No SoftwareSystem defined."
 **Total elements:**
 
 ```memo-query
-kind: [SoftwareSystem, SoftwareItem, SoftwareUnit, SOUPComponent]
+kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: count
 label: Total software elements
 ```
@@ -49,7 +49,7 @@ This section describes the decomposition of the software into software items per
 ### 3.1 Software Items
 
 ```memo-query
-kind: SoftwareItem
+kind: [HardwareComponent, HardwareAssembly, SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, layer, doc
 sort: name
@@ -59,7 +59,7 @@ empty: "No SoftwareItem elements defined."
 ### 3.2 Software Units
 
 ```memo-query
-kind: SoftwareUnit
+kind: SoftwareModule
 display: table
 columns: name, layer, doc
 sort: name
@@ -83,7 +83,8 @@ empty: "No Interface elements defined."
 Software of Unknown Provenance (SOUP) used by **{{project.product}}** is listed below per IEC 62304 §5.3.3–5.3.4. For each SOUP item, functional/performance requirements and required hardware/software must be specified:
 
 ```memo-query
-kind: SOUPComponent
+kind: SoftwareModule
+where: moduleKind == "SoftwareModuleKind::soup"
 display: table
 columns: name, doc, layer
 sort: name

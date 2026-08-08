@@ -35,7 +35,7 @@ label: Software requirements
 ```
 
 ```memo-query
-kind: TestCase
+kind: VerificationCase
 display: count
 label: Test cases
 ```
@@ -75,7 +75,7 @@ empty: "No software requirements defined."
 This section is generated from the system model. The table below lists the **Software Requirements → Design Elements** elements currently defined:
 
 ```memo-query
-kind: [SoftwareItem, SoftwareUnit]
+kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -89,7 +89,7 @@ empty: "No software design elements defined."
 This section is generated from the system model. The table below lists the **Test Cases** elements currently defined:
 
 ```memo-query
-kind: TestCase
+kind: VerificationCase
 display: table
 columns: name, layer, doc
 sort: name

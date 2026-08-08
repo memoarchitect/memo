@@ -79,7 +79,7 @@ Key characteristics of **{{project.product}}**, drawn from the model:
 Summary statistics of the system model at the time this document was generated:
 
 ```memo-query
-kind: [Requirement, Requirement]
+kind: Requirement
 display: count
 label: Total requirements
 ```
@@ -91,7 +91,7 @@ label: Total hazards
 ```
 
 ```memo-query
-kind: [TestCase, VerificationActivity]
+kind: VerificationCase
 display: count
 label: Total test cases
 ```

@@ -36,7 +36,7 @@ Checklist of items required before design transfer to production is complete:
 Production specifications derived from the design outputs:
 
 ```memo-query
-kind: DesignOutput
+kind: [HardwareComponent, HardwareAssembly, SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, layer, doc
 sort: name

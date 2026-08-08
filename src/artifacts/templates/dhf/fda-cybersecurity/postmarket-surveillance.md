@@ -30,7 +30,8 @@ Defines ongoing cybersecurity surveillance for **{{project.product}}** in the po
 Describe the process for ongoing monitoring of SOUP components for newly published vulnerabilities.
 
 ```memo-query
-kind: SOUPComponent
+kind: SoftwareModule
+where: moduleKind == "SoftwareModuleKind::soup"
 display: table
 columns: name, doc
 sort: name

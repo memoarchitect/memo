@@ -45,7 +45,7 @@ empty: "No interfaces defined."
 Security controls implemented in **{{project.product}}** are listed below from the model. Each control should trace to at least one identified threat:
 
 ```memo-query
-kind: SecurityControl
+kind: RiskControlMeasure
 display: table
 columns: name, layer, doc
 sort: name

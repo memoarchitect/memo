@@ -23,7 +23,7 @@ This Integration Test Plan defines the approach for integration testing of **{{p
 The software items in scope for this test plan, drawn from the model:
 
 ```memo-query
-kind: [SoftwareItem, SoftwareUnit]
+kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, kind, layer, doc
 sort: name
@@ -37,8 +37,8 @@ empty: "No software items defined."
 Integration test cases are listed below from the model:
 
 ```memo-query
-kind: TestCase
-where: layer == "verification"
+kind: VerificationCase
+where: layer == "verification_validation"
 display: table
 columns: name, layer, doc
 sort: name

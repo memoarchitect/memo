@@ -82,6 +82,7 @@ package memo {
     public import memo_artifacts_standards_iec_60812::*;
     public import memo_artifacts_standards_iec_62304::*;
     public import memo_artifacts_standards_iec_62366_1::*;
+    public import memo_artifacts_standards_iec_81001_5_1::*;
     public import memo_artifacts_standards_iso_13485::*;
     public import memo_artifacts_standards_iso_14971::*;
     public import memo_artifacts_standards_iso_iec_ieee_42010::*;
@@ -392,6 +393,7 @@ package memo_namespace_artifacts_standards {
     public import memo_artifacts_standards_iec_60812::*;
     public import memo_artifacts_standards_iec_62304::*;
     public import memo_artifacts_standards_iec_62366_1::*;
+    public import memo_artifacts_standards_iec_81001_5_1::*;
     public import memo_artifacts_standards_iso_13485::*;
     public import memo_artifacts_standards_iso_14971::*;
     public import memo_artifacts_standards_iso_iec_ieee_42010::*;

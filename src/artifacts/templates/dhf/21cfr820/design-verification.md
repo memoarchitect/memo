@@ -21,7 +21,7 @@ Documents design verification that design outputs meet design inputs for **{{pro
 The verification traceability below is generated live from the model — every requirement should be covered by at least one verification activity:
 
 ```memo-query
-kind: VerificationActivity
+kind: VerificationCase
 display: table
 columns: name, layer, doc
 sort: name
@@ -35,7 +35,7 @@ empty: "No verification activities defined."
 Test executions and their outcomes are summarized below from the model:
 
 ```memo-query
-kind: TestCase
+kind: VerificationCase
 display: table
 columns: name, layer, doc
 sort: name
