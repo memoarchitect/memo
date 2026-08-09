@@ -437,17 +437,17 @@ part def Citation specializes MemoPart
         // expectation in stakeholder language; MemoRequirement a testable
         // solution-space obligation.
         requirement def MemoNeed {
-            attribute needId : String;
+            attribute id : String;
             attribute shortDescription : String;
             attribute statement : String;
-            attribute needRationale : String;
+            attribute rationale : String;
             attribute needSource : String;
             attribute priority : String;
             attribute needStatus : ElementStatusKind;
         }
     
         requirement def MemoRequirement {
-            attribute requirementId : String;
+            attribute id : String;
             attribute shortDescription : String;
             attribute statement : String;
             attribute acceptanceCriteria : String;
