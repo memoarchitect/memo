@@ -95,20 +95,23 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
     // Open, this sibling overlays the same parent region. `overlay` states that
     // covering adjacent content is intended dropdown behaviour, not a defect.
     part elDrugMenuExpanded : UIElement {
-        attribute :>> id = "UIE-011"; attribute :>> name = "ExpandedDrugMenu";
-        attribute :>> shortDescription = "Expanded drug library choices.";
-        attribute :>> description = "Expanded state listing Norepinephrine, Dopamine, and Heparin. It shares the DrugSelectorRegion parent with the closed state and can extend beyond that parent's normal inline allocation.";
-        attribute :>> formKind = UIElementFormKind::selector;
-        attribute :>> safetyClass = SafetyClassKind::C;
-        attribute :>> labelText = "Norepinephrine; Dopamine; Heparin";
-        attribute :>> disclosureKind = UIDisclosureKind::overlay;
-        attribute :>> visibilityCondition = "drug selector activated";
-        attribute :>> bounds {
-            attribute :>> x = 0.0; attribute :>> y = 0.20;
-            attribute :>> width = 1.0; attribute :>> height = 0.80;
+        attribute redefines name = "ExpandedDrugMenu";
+        attribute redefines id = "UIE-011";
+        attribute redefines shortDescription = "Expanded drug library choices.";
+        attribute redefines description = "Expanded state listing Norepinephrine, Dopamine, and Heparin. It shares the DrugSelectorRegion parent with the closed state and can extend beyond that parent's normal inline allocation.";
+        attribute redefines formKind = UIElementFormKind::selector;
+        attribute redefines safetyClass = SafetyClassKind::C;
+        attribute redefines labelText = "Norepinephrine; Dopamine; Heparin";
+        attribute redefines disclosureKind = UIDisclosureKind::overlay;
+        attribute redefines visibilityCondition = "drug selector activated";
+        attribute redefines boundaryColor = "#d97706";
+        attribute redefines detectionMethod = BoundsDetectionKind::manual;
+        attribute redefines bounds {
+            attribute redefines x = 0.0;
+            attribute redefines y = 0.20;
+            attribute redefines width = 1.0;
+            attribute redefines height = 0.80;
         }
-        attribute :>> boundaryColor = "#D97706";
-        attribute :>> detectionMethod = BoundsDetectionKind::manual;
     }
 
     // ── The settings screen: a sibling root, not a child ────────
@@ -178,6 +181,7 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
         attribute redefines detectionMethod = BoundsDetectionKind::manual;
         attribute redefines boundaryColor = "#14B8A6";
         attribute redefines boundaryOpacity = 0.12;
+        attribute redefines boundaryWidth = 5;
         attribute redefines bounds {
             attribute redefines x = 0.52234;
             attribute redefines y = 0.11311;
