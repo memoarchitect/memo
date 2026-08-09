@@ -89,6 +89,7 @@ package memo_core_common {
         attribute name : String;
         attribute shortDescription : String;
         attribute description : String;
+        attribute rationale : String;
     }
 
     // Interaction-contract foundation for interface definitions between ports.
@@ -125,18 +126,23 @@ package memo_core_common {
     // expectation in stakeholder language; MemoRequirement a testable
     // solution-space obligation.
     requirement def MemoNeed {
-        attribute needId : String;
+        attribute id : String;
+        attribute name : String;
         attribute shortDescription : String;
+        attribute description : String;
+        attribute rationale : String;
         attribute statement : String;
-        attribute needRationale : String;
         attribute needSource : String;
         attribute priority : String;
         attribute needStatus : ElementStatusKind;
     }
 
     requirement def MemoRequirement {
-        attribute requirementId : String;
+        attribute id : String;
+        attribute name : String;
         attribute shortDescription : String;
+        attribute description : String;
+        attribute rationale : String;
         attribute statement : String;
         attribute acceptanceCriteria : String;
         attribute requirementStatus : ElementStatusKind;
