@@ -39,7 +39,7 @@ package memo_examples_surgical_closure_workflow {
     }
     requirement needControlledGastricResection : Need {
         attribute :>> needKind = NeedKind::clinicalUser;
-        attribute :>> needId = "LSG-N-001";
+        attribute :>> id = "LSG-N-001";
         attribute :>> statement = "The surgical team needs to perform gastric resection with controlled anatomy, haemostasis, and a checked staple line.";
     }
     use case ucPerformSleeveGastrectomy : UseCase {
