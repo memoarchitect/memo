@@ -1,4 +1,5 @@
 package memo_assurance_safety_risk_postmarket_surveillance {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
     private import memo_core_relationships::*;   // MemoRelationship
 
@@ -16,5 +17,11 @@ package memo_assurance_safety_risk_postmarket_surveillance {
     connection def FeedsBackTo :> MemoRelationship {
         end feedbackItem : PostMarketSurveillance :>> source;
         end designElement : MemoPart :>> target;
+    }
+    abstract connection feedsBackToLinks : FeedsBackTo[*];
+    metadata def <feedsBackTo> FeedsBackToMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = feedsBackToLinks meta SysML::Usage;
     }
 }

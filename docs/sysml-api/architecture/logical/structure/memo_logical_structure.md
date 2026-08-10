@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -380,6 +381,7 @@ connection def ExhibitsMode :> MemoRelationship
     // plus independence constraints — never by duplicating identically named
     // components.
     package memo_architecture_logical_structure {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import memo_core_common::*;
@@ -531,6 +533,12 @@ connection def ExhibitsMode :> MemoRelationship
             end sourceComponent : LogicalComponent :>> source;
             end targetComponent : LogicalComponent :>> target;
         }
+        abstract connection logicalConnectorLinks : LogicalConnector[*];
+        metadata def <logicalConnector> LogicalConnectorMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = logicalConnectorLinks meta SysML::Usage;
+        }
         // A transfer of a typed item across a connector.
         part def LogicalExchange specializes ArchitectureElement {
             attribute contentKind : FlowContentKind;
@@ -571,13 +579,31 @@ connection def ExhibitsMode :> MemoRelationship
             end channel : LogicalComponent :>> source;
             end otherChannel : LogicalComponent :>> target;
         }
+        abstract connection independentOfLinks : IndependentOf[*];
+        metadata def <independentOf> IndependentOfMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = independentOfLinks meta SysML::Usage;
+        }
         connection def MonitorsChannel :> MemoRelationship {
             end monitorChannel : LogicalComponent :>> source;
             end monitoredComponent : LogicalComponent :>> target;
         }
+        abstract connection monitorsChannelLinks : MonitorsChannel[*];
+        metadata def <monitorsChannel> MonitorsChannelMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = monitorsChannelLinks meta SysML::Usage;
+        }
         connection def ExhibitsMode :> MemoRelationship {
             end component : LogicalComponent :>> source;
             end mode : LogicalMode :>> target;
+        }
+        abstract connection exhibitsModeLinks : ExhibitsMode[*];
+        metadata def <exhibitsMode> ExhibitsModeMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = exhibitsModeLinks meta SysML::Usage;
         }
     }
     

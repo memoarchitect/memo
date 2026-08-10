@@ -1,4 +1,5 @@
 package memo_artifacts_configuration_management {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
     private import memo_core_relationships::*;   // MemoRelationship
 
@@ -24,5 +25,11 @@ package memo_artifacts_configuration_management {
     connection def Changes :> MemoRelationship {
         end changeRequest : ChangeRequest :>> source;
         end changedElement : MemoPart :>> target;
+    }
+    abstract connection changesLinks : Changes[*];
+    metadata def <changes> ChangesMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = changesLinks meta SysML::Usage;
     }
 }

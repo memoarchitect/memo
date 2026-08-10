@@ -7,6 +7,7 @@
 // Task difficulty belongs to a task performed in a context — never to an
 // instrument (TaskDifficultyAssessment).
 package memo_architecture_operational_activities {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -81,5 +82,11 @@ package memo_architecture_operational_activities {
     connection def AssessesDifficulty :> MemoRelationship {
         end assessment : TaskDifficultyAssessment :>> source;
         end task : UserTask :>> target;
+    }
+    abstract connection assessesDifficultyLinks : AssessesDifficulty[*];
+    metadata def <assessesDifficulty> AssessesDifficultyMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = assessesDifficultyLinks meta SysML::Usage;
     }
 }

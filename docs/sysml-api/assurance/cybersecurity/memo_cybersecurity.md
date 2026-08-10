@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
@@ -267,6 +268,7 @@ connection def ImpactsSafety :> MemoRelationship
 
     ```sysml
     package memo_assurance_cybersecurity {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_relationships::*;   // MemoRelationship
     
@@ -376,14 +378,32 @@ connection def ImpactsSafety :> MemoRelationship
             end realizedThreat : RequirementDriver :>> source;
             end enablingVulnerability : Vulnerability :>> target;
         }
+        abstract connection exploitsLinks : Exploits[*];
+        metadata def <exploits> ExploitsMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = exploitsLinks meta SysML::Usage;
+        }
         connection def RealizedByScenario :> MemoRelationship {
             end realizedThreat : RequirementDriver :>> source;
             end scenario : MemoScenario :>> target;
+        }
+        abstract connection realizedByScenarioLinks : RealizedByScenario[*];
+        metadata def <realizedByScenario> RealizedByScenarioMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = realizedByScenarioLinks meta SysML::Usage;
         }
         connection def ImpactsSafety :> MemoRelationship {
             attribute tracePurpose : String;
             end cyberElement : MemoPart :>> source;
             end safetyElement : RiskItem :>> target;
+        }
+        abstract connection impactsSafetyLinks : ImpactsSafety[*];
+        metadata def <impactsSafety> ImpactsSafetyMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = impactsSafetyLinks meta SysML::Usage;
         }
     }
     

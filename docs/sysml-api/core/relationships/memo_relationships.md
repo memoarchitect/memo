@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `Connections::BinaryConnection` |
 | private | `memo_core_common::*` |
@@ -344,6 +345,7 @@ connection def BindsToInterface :> MemoRelationship
 
     ```sysml
     package memo_core_relationships {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import Connections::BinaryConnection;
@@ -440,6 +442,12 @@ connection def BindsToInterface :> MemoRelationship
             end linkSource :>> source;
             end linkTarget :>> target;
         }
+        abstract connection memoLinkLinks : MemoLink[*];
+        metadata def <memoLink> MemoLinkMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = memoLinkLinks meta SysML::Usage;
+        }
     
         connection def DerivesFrom :> MemoRelationship {
             // Drivers span metaclasses — a need is a requirement def, a hazard an
@@ -449,14 +457,32 @@ connection def BindsToInterface :> MemoRelationship
             end sourceDriver :>> source;
             end targetRequirement : MemoRequirementElement :>> target;
         }
+        abstract connection derivesFromLinks : DerivesFrom[*];
+        metadata def <derivesFrom> DerivesFromMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = derivesFromLinks meta SysML::Usage;
+        }
         connection def SatisfiedBy :> MemoRelationship {
             // MemoRequirementElement covers Need and Requirement alike.
             end requiredElement : MemoRequirementElement :>> source;
             end satisfyingElement :>> target;
         }
+        abstract connection satisfiedByLinks : SatisfiedBy[*];
+        metadata def <satisfiedBy> SatisfiedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = satisfiedByLinks meta SysML::Usage;
+        }
         connection def AllocatedTo :> MemoRelationship {
             end function :>> source;
             end allocatedElement :>> target;
+        }
+        abstract connection allocatedToLinks : AllocatedTo[*];
+        metadata def <allocatedTo> AllocatedToMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = allocatedToLinks meta SysML::Usage;
         }
         // Realizes is the single realization relation (realizing/concrete element →
         // realized/abstract element). It unifies RealizesInterface,
@@ -470,21 +496,45 @@ connection def BindsToInterface :> MemoRelationship
             end realizing :>> source;
             end realized :>> target;
         }
+        abstract connection realizesLinks : Realizes[*];
+        metadata def <realizes> RealizesMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = realizesLinks meta SysML::Usage;
+        }
         connection def VerifiedBy :> MemoRelationship {
             // Requirements, risk controls, and architecture components are
             // all legitimate verification targets
             end verificationTarget :>> source;
             end verificationCase : MemoVerificationCase :>> target;
         }
+        abstract connection verifiedByLinks : VerifiedBy[*];
+        metadata def <verifiedBy> VerifiedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = verifiedByLinks meta SysML::Usage;
+        }
         connection def ProducesEvidence :> MemoRelationship {
             end producer : MemoVerificationCase :>> source;
             end producedEvidence : MemoEvidence :>> target;
+        }
+        abstract connection producesEvidenceLinks : ProducesEvidence[*];
+        metadata def <producesEvidence> ProducesEvidenceMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = producesEvidenceLinks meta SysML::Usage;
         }
         connection def Precedes :> MemoRelationship {
             attribute sameStepRequired : Boolean;
             attribute precedenceRationale : String;
             end predecessor :>> source;
             end successor :>> target;
+        }
+        abstract connection precedesLinks : Precedes[*];
+        metadata def <precedes> PrecedesMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = precedesLinks meta SysML::Usage;
         }
     
     
@@ -493,14 +543,32 @@ connection def BindsToInterface :> MemoRelationship
             end protectedAsset : ArchitectureElement :>> source;
             end realizedThreat : RequirementDriver :>> target;
         }
+        abstract connection threatenedByLinks : ThreatenedBy[*];
+        metadata def <threatenedBy> ThreatenedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = threatenedByLinks meta SysML::Usage;
+        }
         connection def DerivesCyberRequirement :> MemoRelationship {
             end sourceThreatOrRisk : RequirementDriver :>> source;
             end targetRequirement : MemoRequirementElement :>> target;
+        }
+        abstract connection derivesCyberRequirementLinks : DerivesCyberRequirement[*];
+        metadata def <derivesCyberRequirement> DerivesCyberRequirementMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = derivesCyberRequirementLinks meta SysML::Usage;
         }
         connection def CrossesTrustBoundary :> MemoRelationship {
             attribute crossingKind : InterfaceKind;
             end boundary :>> source;
             end crossingItem :>> target;
+        }
+        abstract connection crossesTrustBoundaryLinks : CrossesTrustBoundary[*];
+        metadata def <crossesTrustBoundary> CrossesTrustBoundaryMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = crossesTrustBoundaryLinks meta SysML::Usage;
         }
     
         connection def Validates :> MemoRelationship {
@@ -508,6 +576,12 @@ connection def BindsToInterface :> MemoRelationship
             // so the target remains untyped across SysML metaclass families.
             end validationTarget :>> source;
             end validationCase : MemoVerificationCase :>> target;
+        }
+        abstract connection validatesLinks : Validates[*];
+        metadata def <validates> ValidatesMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = validatesLinks meta SysML::Usage;
         }
     
         // Performs unifies the former Performs / PerformsActivity / PerformsFunction
@@ -519,6 +593,12 @@ connection def BindsToInterface :> MemoRelationship
             end performer :>> source;
             end performed : MemoAction :>> target;
         }
+        abstract connection performsLinks : Performs[*];
+        metadata def <performs> PerformsMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = performsLinks meta SysML::Usage;
+        }
     
         // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms
         // (an enabling system/function enables a workflow/activity).
@@ -526,10 +606,22 @@ connection def BindsToInterface :> MemoRelationship
             end enabling :>> source;
             end enabled : MemoAction :>> target;
         }
+        abstract connection enablesLinks : Enables[*];
+        metadata def <enables> EnablesMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = enablesLinks meta SysML::Usage;
+        }
     
         connection def HostedBy :> MemoRelationship {
             end processingNode : ArchitectureElement :>> source;
             end hostAssembly : ArchitectureElement :>> target;
+        }
+        abstract connection hostedByLinks : HostedBy[*];
+        metadata def <hostedBy> HostedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = hostedByLinks meta SysML::Usage;
         }
     
     
@@ -544,15 +636,33 @@ connection def BindsToInterface :> MemoRelationship
             end parent :>> source;
             end child :>> target;
         }
+        abstract connection composesLinks : Composes[*];
+        metadata def <composes> ComposesMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = composesLinks meta SysML::Usage;
+        }
     
         connection def AnalyzedBy :> MemoRelationship {
             end element : ArchitectureElement :>> source;
             end analysisArtifact : AnalysisArtifact :>> target;
         }
+        abstract connection analyzedByLinks : AnalyzedBy[*];
+        metadata def <analyzedBy> AnalyzedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = analyzedByLinks meta SysML::Usage;
+        }
     
         connection def BindsToInterface :> MemoRelationship {
             end portElement :>> source;
             end boundInterface :>> target;
+        }
+        abstract connection bindsToInterfaceLinks : BindsToInterface[*];
+        metadata def <bindsToInterface> BindsToInterfaceMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = bindsToInterfaceLinks meta SysML::Usage;
         }
     }
     

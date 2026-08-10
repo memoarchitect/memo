@@ -10,6 +10,7 @@
 // though it existed; it never has. A dangling pointer to a profile is worse
 // than no profile, so it says "planned" until the profile is there.
 package memo_architecture_implementation_software_runtime {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -69,5 +70,11 @@ package memo_architecture_implementation_software_runtime {
         attribute protocolSummary : String;
         end sourceComponent : SoftwareComponent :>> source;
         end targetComponent : SoftwareComponent :>> target;
+    }
+    abstract connection componentConnectsLinks : ComponentConnects[*];
+    metadata def <componentConnects> ComponentConnectsMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = componentConnectsLinks meta SysML::Usage;
     }
 }

@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
@@ -87,6 +88,7 @@ connection def Changes :> MemoRelationship
 
     ```sysml
     package memo_artifacts_configuration_management {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_relationships::*;   // MemoRelationship
     
@@ -112,6 +114,12 @@ connection def Changes :> MemoRelationship
         connection def Changes :> MemoRelationship {
             end changeRequest : ChangeRequest :>> source;
             end changedElement : MemoPart :>> target;
+        }
+        abstract connection changesLinks : Changes[*];
+        metadata def <changes> ChangesMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = changesLinks meta SysML::Usage;
         }
     }
     

@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -142,6 +143,7 @@ connection def TracesToDocument :> MemoRelationship
     // standards-library.test.ts in memo-tools, which is what makes "adding a
     // standard is one file" true rather than aspirational.
     package memo_artifacts_standards_traceability {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
@@ -208,6 +210,12 @@ connection def TracesToDocument :> MemoRelationship
             end conformingElement : MemoPart :>> source;
             end clause : StandardClause :>> target;
         }
+        abstract connection conformsToLinks : ConformsTo[*];
+        metadata def <conformsTo> ConformsToMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = conformsToLinks meta SysML::Usage;
+        }
     
         connection def TracesToDocument :> MemoRelationship {
             doc /* Where the evidence for a clause claim is written down. The target
@@ -220,6 +228,12 @@ connection def TracesToDocument :> MemoRelationship
             attribute sectionReference : String[0..1];
             end tracedElement : MemoPart :>> source;
             end artifact : ControlledArtifact :>> target;
+        }
+        abstract connection tracesToDocumentLinks : TracesToDocument[*];
+        metadata def <tracesToDocument> TracesToDocumentMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = tracesToDocumentLinks meta SysML::Usage;
         }
     }
     

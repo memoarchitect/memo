@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
@@ -70,6 +71,7 @@ connection def FeedsBackTo :> MemoRelationship
 
     ```sysml
     package memo_assurance_safety_risk_postmarket_surveillance {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_relationships::*;   // MemoRelationship
     
@@ -87,6 +89,12 @@ connection def FeedsBackTo :> MemoRelationship
         connection def FeedsBackTo :> MemoRelationship {
             end feedbackItem : PostMarketSurveillance :>> source;
             end designElement : MemoPart :>> target;
+        }
+        abstract connection feedsBackToLinks : FeedsBackTo[*];
+        metadata def <feedsBackTo> FeedsBackToMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = feedsBackToLinks meta SysML::Usage;
         }
     }
     

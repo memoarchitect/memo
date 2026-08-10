@@ -1,4 +1,5 @@
 package memo_assurance_safety_risk {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
     private import memo_core_relationships::*;   // MemoRelationship
 
@@ -116,9 +117,21 @@ package memo_assurance_safety_risk {
         end sourceRiskElement : RiskItem :>> source;
         end targetRiskElement : RiskItem :>> target;
     }
+    abstract connection tracesRiskLinks : TracesRisk[*];
+    metadata def <tracesRisk> TracesRiskMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = tracesRiskLinks meta SysML::Usage;
+    }
     connection def AssessedAgainst :> MemoRelationship {
         end risk : Risk :>> source;
         end riskMatrix : RiskMatrix :>> target;
+    }
+    abstract connection assessedAgainstLinks : AssessedAgainst[*];
+    metadata def <assessedAgainst> AssessedAgainstMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = assessedAgainstLinks meta SysML::Usage;
     }
     // Mitigates unifies the control/action → risk-element edges of the
     // ISO 14971 / FMEA / FTA / cyber chains — MitigatesHazard,
@@ -137,5 +150,11 @@ package memo_assurance_safety_risk {
         // Untyped: controls/hazards may be item defs (RiskControlMeasure, Hazard, …).
         end control :>> source;
         end mitigatedElement : RiskItem :>> target;
+    }
+    abstract connection mitigatesLinks : Mitigates[*];
+    metadata def <mitigates> MitigatesMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = mitigatesLinks meta SysML::Usage;
     }
 }
