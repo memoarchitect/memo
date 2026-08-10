@@ -2,6 +2,7 @@
 // the traceability matrix (function → verification case).
 package memo_examples_nested_architecture_dsm_assurance_verification_validation {
     private import ScalarValues::*;
+    private import memo_core_dimensions::*;   // ElementStatusKind
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
@@ -13,49 +14,49 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> id = "NDS-VER-001"; attribute :>> name = "VerifyDoseAccuracy";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Gravimetric delivery over 60 minutes is within ±5% of the prescribed volume at 1, 25 and 999 mL/h.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcOcclusionResponse : VerificationCase {
         attribute :>> id = "NDS-VER-002"; attribute :>> name = "VerifyOcclusionResponse";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Delivery stops within 2 s of the occlusion threshold being crossed, at every supported rate.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcAirInLineResponse : VerificationCase {
         attribute :>> id = "NDS-VER-003"; attribute :>> name = "VerifyAirInLineResponse";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "A 0.1 mL air bolus stops delivery and raises a high-priority alarm.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcAlarmSignals : VerificationCase {
         attribute :>> id = "NDS-VER-004"; attribute :>> name = "VerifyAlarmSignals";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Alarm signals conform to IEC 60601-1-8 for every priority, and persist until cleared or acknowledged.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcBatteryEndurance : VerificationCase {
         attribute :>> id = "NDS-VER-005"; attribute :>> name = "VerifyBatteryEndurance";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Delivery continues for at least 4 hours at 25 mL/h from a fully charged battery after mains loss.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcConfirmationFlow : VerificationCase {
         attribute :>> id = "NDS-VER-006"; attribute :>> name = "VerifyConfirmationFlow";
         attribute :>> methodKind = VerificationMethodKind::demonstration;
         attribute :>> acceptanceCriteria = "No rate change reaches the controller without an explicit confirmation step.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcStatusLegibility : VerificationCase {
         attribute :>> id = "NDS-VER-007"; attribute :>> name = "VerifyStatusLegibility";
         attribute :>> methodKind = VerificationMethodKind::inspection;
         attribute :>> acceptanceCriteria = "Rate and volume delivered are readable at 1 m under 100–1000 lux.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcPowerSourceSwitch : VerificationCase {
         attribute :>> id = "NDS-VER-008"; attribute :>> name = "VerifyPowerSourceSwitch";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Rail brownout switches source without interrupting delivery.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
 
     // Requirement → verification case.

@@ -1,6 +1,7 @@
 // Verification and validation: cases and the evidence they produce.
 package memo_examples_ui_screen_regions_assurance_verification_validation {
     private import ScalarValues::*;
+    private import memo_core_dimensions::*;   // ElementStatusKind
 
     private import memo_core_relationships::*;
     private import memo_core_annotations::*;
@@ -19,7 +20,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> id = "UIR-VER-001"; attribute :>> name = "VerifyRateChangeConfirmation";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "A rate change cannot reach the controller until the displayed value is explicitly confirmed.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
 
     part evRateChange : Evidence {
@@ -33,7 +34,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> id = "VER-002"; attribute :>> name = "VerifyCareAreaDrugLibrarySelection";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Only enabled care-area drug and concentration records are selectable, and every selection supplies the matching dosing limits.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
 
     part evDrugLibrarySelection : Evidence {
@@ -47,7 +48,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> id = "VER-003"; attribute :>> name = "VerifyInfusionStatusContentAndFreshness";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Time, battery, active rate, drug identity, and total delivered volume satisfy their content, accuracy, and latency criteria under normal and threshold-transition conditions.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
 
     part evInfusionStatusContent : Evidence {
