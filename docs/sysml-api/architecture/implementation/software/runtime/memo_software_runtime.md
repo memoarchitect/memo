@@ -91,8 +91,13 @@ connection def ComponentConnects :> MemoRelationship
     // with concurrency, scheduling, health monitoring, fault containment, and
     // update/rollback semantics. Module structure lives in
     // memo_architecture_implementation_software_structure; allocation in
-    // memo_architecture_realization_deployment. Detailed AADL categories stay in the AADL
-    // correspondence profile (examples/aadl-mapping).
+    // memo_architecture_realization_deployment.
+    //
+    // Detailed AADL categories are PLANNED to live in an AADL correspondence
+    // profile built as an extension package — plans/memo-arcadia-native-coverage.md
+    // §C5, session 4. This comment used to point at `examples/aadl-mapping` as
+    // though it existed; it never has. A dangling pointer to a profile is worse
+    // than no profile, so it says "planned" until the profile is there.
     package memo_architecture_implementation_software_runtime {
         private import ScalarValues::*;
     

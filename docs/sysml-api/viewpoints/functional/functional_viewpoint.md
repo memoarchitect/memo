@@ -61,7 +61,7 @@
             attribute :>> includedLayers = ("functions");
             attribute :>> explorerLane = "architecture";
             attribute :>> explorerOrder = 2;
-            attribute :>> allowedElementKinds = ("SystemFunction", "FunctionalFlow", "FunctionalFlowStep", "FunctionalScenario", "FunctionalExchange");
+            attribute :>> allowedElementKinds = ("SystemFunction", "ComponentFunction", "FunctionalFlow", "FunctionalFlowStep", "FunctionalScenario", "FunctionalExchange");
             attribute :>> userExtensible = true;
         }
     }

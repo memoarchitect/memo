@@ -114,9 +114,13 @@ package memo_architecture_logical_interfaces {
     // Boundary data port of a software system (e.g. an AADL top-level
     // data port), modeled as a first-class element so exchanges can
     // reference it and views can render the system boundary.
-    part def SoftwarePort specializes InterfaceElement {
+    //
+    // A `port def` (Track A1) — see PhysicalPort in
+    // memo_architecture_realization_physical for why the specialization moved
+    // off InterfaceElement, why `direction` is native now (Track A2), and why
+    // `portKind` is duplicated on both ports instead of hoisted onto a base.
+    port def SoftwarePort specializes MemoPort {
         attribute portKind : InterfaceKind;
-        attribute direction : DirectionKind;
         attribute dataTypeName : String;
     }
 }

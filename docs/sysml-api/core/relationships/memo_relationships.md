@@ -34,7 +34,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
-| [`MemoLink`](#memolink) | `connection def` | The general relation that can join any two model elements, whatever their metaclass. Most specific relations type their ends against a foundation (MemoPart, VerifiableElement, …).… | `MemoRelationship` |
+| [`MemoLink`](#memolink) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | `MemoRelationship` |
 | [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship for derives from. | `MemoRelationship` |
 | [`SatisfiedBy`](#satisfiedby) | `connection def` | Typed relationship for satisfied by. | `MemoRelationship` |
 | [`AllocatedTo`](#allocatedto) | `connection def` | Typed relationship for allocated to. | `MemoRelationship` |
@@ -76,7 +76,7 @@ connection def MemoLink :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | The general relation that can join any two model elements, whatever their metaclass. Most specific relations type their ends against a foundation (MemoPart, VerifiableElement, …).… |
+| Description | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -394,13 +394,42 @@ connection def BindsToInterface :> MemoRelationship
             attribute isUnique : Boolean;
         }
     
+        // ─── Metaclass-neutral ends (Track A0) ──────────────────────────────
+        //
+        // An end is left UNTYPED (`:>> source` / `:>> target`) wherever its
+        // legitimate endpoints do not share a MEMO base, and a rule in
+        // memo_rules_ontology states the constraint the type used to state.
+        //
+        // The reason is structural, not stylistic. KerML will not let a port or a
+        // behaviour specialize a part-based type, so a `MemoPart`-typed end forces
+        // everything it accepts to be a part. That is what made PhysicalPort and
+        // SoftwarePort part defs (so they could terminate exchanges), what made
+        // SystemFunction a part def with its behaviour stapled on through a
+        // separate action def, and what makes `allocate <function> to <actor>` —
+        // ARCADIA's own System Analysis mechanism — illegal, since Actor is a
+        // MemoPart but not an ArchitectureElement.
+        //
+        // Several of the relaxed ends were ALREADY being violated by real content
+        // before they were relaxed: `composes` links parts to WorkflowStep and
+        // OperationalActivity (action defs) and to SoftwarePort/PhysicalPort;
+        // `precedes` links OperationalActivity to OperationalActivity; `allocatedTo`
+        // has ActionUsage sources; `bindsToInterface` targets an `interface def`,
+        // which an InterfaceElement-typed end cannot hold. The types were not
+        // buying the strictness they appeared to buy.
+        //
+        // What is NOT relaxed stays typed on purpose: `verificationCase` and
+        // `validationCase` are verification defs, `performed` and `enabled` are
+        // MemoActions, `targetRequirement` is a MemoRequirementElement. Those ends
+        // name one metaclass and mean it.
+        //
+        // The strictness did not evaporate — see CR-ONT-060..CR-ONT-071 in
+        // src/rules/ontology/ontology_invariants.sysml. Relaxing the ends without
+        // those rules would have been a silent loss of every constraint the ends
+        // were carrying.
+        //
         // The general relation that can join any two model elements, whatever
-        // their metaclass. Most specific relations type their ends against a
-        // foundation (MemoPart, VerifiableElement, …). A small number of specific
-        // cross-metaclass relations leave an end untyped because their accepted
-        // constructs have no shared MEMO base; their names and attributes still
-        // carry a precise engineering meaning. MemoLink leaves both ends untyped
-        // and adds no domain-specific semantics, which is what makes it universal.
+        // their metaclass. MemoLink leaves both ends untyped and adds no
+        // domain-specific semantics, which is what makes it universal.
         //
         // It is deliberately the weakest relation in the ontology. Reach for it
         // only when no specific relation carries the meaning, and say why in the
@@ -423,11 +452,11 @@ connection def BindsToInterface :> MemoRelationship
         connection def SatisfiedBy :> MemoRelationship {
             // MemoRequirementElement covers Need and Requirement alike.
             end requiredElement : MemoRequirementElement :>> source;
-            end satisfyingElement : ArchitectureElement :>> target;
+            end satisfyingElement :>> target;
         }
         connection def AllocatedTo :> MemoRelationship {
-            end function : ArchitectureElement :>> source;
-            end allocatedElement : ArchitectureElement :>> target;
+            end function :>> source;
+            end allocatedElement :>> target;
         }
         // Realizes is the single realization relation (realizing/concrete element →
         // realized/abstract element). It unifies RealizesInterface,
@@ -444,7 +473,7 @@ connection def BindsToInterface :> MemoRelationship
         connection def VerifiedBy :> MemoRelationship {
             // Requirements, risk controls, and architecture components are
             // all legitimate verification targets
-            end verificationTarget : MemoPart :>> source;
+            end verificationTarget :>> source;
             end verificationCase : MemoVerificationCase :>> target;
         }
         connection def ProducesEvidence :> MemoRelationship {
@@ -454,8 +483,8 @@ connection def BindsToInterface :> MemoRelationship
         connection def Precedes :> MemoRelationship {
             attribute sameStepRequired : Boolean;
             attribute precedenceRationale : String;
-            end predecessor : ArchitectureElement :>> source;
-            end successor : ArchitectureElement :>> target;
+            end predecessor :>> source;
+            end successor :>> target;
         }
     
     
@@ -470,8 +499,8 @@ connection def BindsToInterface :> MemoRelationship
         }
         connection def CrossesTrustBoundary :> MemoRelationship {
             attribute crossingKind : InterfaceKind;
-            end boundary : InterfaceElement :>> source;
-            end crossingItem : MemoExchangeItem :>> target;
+            end boundary :>> source;
+            end crossingItem :>> target;
         }
     
         connection def Validates :> MemoRelationship {
@@ -487,14 +516,14 @@ connection def BindsToInterface :> MemoRelationship
         // instance types, so generic MemoPart ends keep this in core without a
         // dependency on architecture-layer types.
         connection def Performs :> MemoRelationship {
-            end performer : MemoPart :>> source;
+            end performer :>> source;
             end performed : MemoAction :>> target;
         }
     
         // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms
         // (an enabling system/function enables a workflow/activity).
         connection def Enables :> MemoRelationship {
-            end enabling : MemoPart :>> source;
+            end enabling :>> source;
             end enabled : MemoAction :>> target;
         }
     
@@ -512,8 +541,8 @@ connection def BindsToInterface :> MemoRelationship
         // Collection membership is carried by the end instance.
         // types, so the ends are generic MemoPart.
         connection def Composes :> MemoRelationship {
-            end parent : MemoPart :>> source;
-            end child : MemoPart :>> target;
+            end parent :>> source;
+            end child :>> target;
         }
     
         connection def AnalyzedBy :> MemoRelationship {
@@ -522,8 +551,8 @@ connection def BindsToInterface :> MemoRelationship
         }
     
         connection def BindsToInterface :> MemoRelationship {
-            end portElement : InterfaceElement :>> source;
-            end boundInterface : InterfaceElement :>> target;
+            end portElement :>> source;
+            end boundInterface :>> target;
         }
     }
     

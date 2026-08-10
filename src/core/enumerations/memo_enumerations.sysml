@@ -71,6 +71,22 @@ package memo_core_enumerations {
         enum audit;
         enum power;
     }
+    // Direction of a flow across a boundary.
+    //
+    // Track A2 removed this from PORTS: a port usage says `in` / `out` /
+    // `inout` natively, which is the language's own spelling and the only one
+    // a conforming tool reads. The enum survives because four non-port
+    // constructs still carry a direction and none of them is a port, so none
+    // of them can use the keyword:
+    //
+    //   Interface.direction / .directionality   (interface def)
+    //   LogicalConnector.direction              (connection def)
+    //   LogicalExchange.direction               (part def)
+    //   ComponentExchange.direction             (part def)
+    //   OperationalInteraction.direction        (part def)
+    //
+    // Deleting it would have cost those five their direction; the reinvention
+    // was only ever the port case.
     enum def DirectionKind {
         enum input;
         enum output;
