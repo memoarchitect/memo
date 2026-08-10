@@ -78,8 +78,24 @@ package memo_architecture_functional_functions {
     action def ComponentFunction specializes MemoFunction;
 
     // Named traceable route between functions. Native `flow of` usages carry
-    // the transported item; this element exists for budgets and assurance
-    // attributes that a flow usage cannot own.
+    // the transported item; this element exists for the budgets and assurance
+    // attributes below.
+    //
+    // The reason is MEMO's grammar, NOT the language — the earlier wording here
+    // said "attributes that a flow usage cannot own", and that was a false
+    // claim about SysML v2. The standard's `FlowUsage` is
+    // `OccurrenceUsagePrefix 'flow' FlowDeclaration DefinitionBody`
+    // (SysML-textual-bnf.kebnf:829), so a conforming flow usage takes a name
+    // from its `UsageDeclaration` and owns attributes in its body like any
+    // other usage. MEMO's own production is
+    // `'flow' 'of' itemType 'from' … 'to' … ';'` — no name, no body — so a
+    // MEMO flow can carry neither an `id` nor a latency budget, and nothing
+    // can refer to it. Every MEMO element rests on the identification core in
+    // memo_core_common, and an anonymous attribute-less edge cannot join it.
+    //
+    // So this part def is a workaround for a MEMO gap, not a design MEMO is
+    // entitled to. Restoring the two dropped clauses is what would let it
+    // collapse into the flow it stands in for.
     part def FunctionalExchange specializes ArchitectureElement {
         attribute flowKind : FlowKind;
         attribute latencyBudgetMs : Real;
