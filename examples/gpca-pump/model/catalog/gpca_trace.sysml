@@ -439,6 +439,58 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : Composes connect parent ::> gpcaSoftware to child ::> portDbIn;
     connection : Composes connect parent ::> gpcaSoftware to child ::> portGpcaSwOut;
 
+    // Each software module owns the AADL features it declares — same shape as
+    // the gpcaSoftware -> top-level-port composition above.
+    connection : Composes connect parent ::> alarm to child ::> portAlarmAlarmOut;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmConfigIn;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmConstIn;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmDbIn;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmImIn;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmOpCmdIn;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmSensorIn;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmSysMonIn;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmSysStatIn;
+    connection : Composes connect parent ::> alarm to child ::> portAlarmTlmModeIn;
+    connection : Composes connect parent ::> config to child ::> portConfigConfigOut;
+    connection : Composes connect parent ::> config to child ::> portConfigConstIn;
+    connection : Composes connect parent ::> config to child ::> portConfigDbIn;
+    connection : Composes connect parent ::> config to child ::> portConfigOpCmdIn;
+    connection : Composes connect parent ::> config to child ::> portConfigPresIn;
+    connection : Composes connect parent ::> config to child ::> portConfigSysStatIn;
+    connection : Composes connect parent ::> config to child ::> portConfigTlmModeIn;
+    connection : Composes connect parent ::> infusionMgr to child ::> portImAlarmIn;
+    connection : Composes connect parent ::> infusionMgr to child ::> portImConfigIn;
+    connection : Composes connect parent ::> infusionMgr to child ::> portImImOut;
+    connection : Composes connect parent ::> infusionMgr to child ::> portImOpCmdIn;
+    connection : Composes connect parent ::> infusionMgr to child ::> portImPatientIn;
+    connection : Composes connect parent ::> infusionMgr to child ::> portImSysStatIn;
+    connection : Composes connect parent ::> infusionMgr to child ::> portImTlmModeIn;
+    connection : Composes connect parent ::> logging to child ::> portLogAlarmIn;
+    connection : Composes connect parent ::> logging to child ::> portLogConfigIn;
+    connection : Composes connect parent ::> logging to child ::> portLogImIn;
+    connection : Composes connect parent ::> logging to child ::> portLogLogOut;
+    connection : Composes connect parent ::> logging to child ::> portLogSysStatIn;
+    connection : Composes connect parent ::> logging to child ::> portLogTlmModeIn;
+    connection : Composes connect parent ::> systemMonitor to child ::> portSysMonSysMonOut;
+    connection : Composes connect parent ::> systemMonitor to child ::> portSysMonTlmModeIn;
+    connection : Composes connect parent ::> outputBus to child ::> portOutputAlarmIn;
+    connection : Composes connect parent ::> outputBus to child ::> portOutputConfigIn;
+    connection : Composes connect parent ::> outputBus to child ::> portOutputGpcaSwOut;
+    connection : Composes connect parent ::> outputBus to child ::> portOutputImIn;
+    connection : Composes connect parent ::> outputBus to child ::> portOutputLogIn;
+    connection : Composes connect parent ::> outputBus to child ::> portOutputSysMonIn;
+    connection : Composes connect parent ::> outputBus to child ::> portOutputSysStatIn;
+    connection : Composes connect parent ::> outputBus to child ::> portOutputTlmModeIn;
+    connection : Composes connect parent ::> systemStatus to child ::> portSysStatConfigIn;
+    connection : Composes connect parent ::> systemStatus to child ::> portSysStatConstIn;
+    connection : Composes connect parent ::> systemStatus to child ::> portSysStatImIn;
+    connection : Composes connect parent ::> systemStatus to child ::> portSysStatSensorIn;
+    connection : Composes connect parent ::> systemStatus to child ::> portSysStatSysStatOut;
+    connection : Composes connect parent ::> systemStatus to child ::> portSysStatTlmModeIn;
+    connection : Composes connect parent ::> tlm to child ::> portTlmConstIn;
+    connection : Composes connect parent ::> tlm to child ::> portTlmOpCmdIn;
+    connection : Composes connect parent ::> tlm to child ::> portTlmTlmModeOut;
+
     // ── Device/subsystem feature ownership (published AADL, 1:1) ──
     connection : Composes connect parent ::> gpcaDevice to child ::> devOpCmdIn;
     connection : Composes connect parent ::> gpcaDevice to child ::> devDbIn;
