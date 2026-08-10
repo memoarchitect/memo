@@ -100,10 +100,20 @@ package memo_architecture_logical_interfaces {
         // element", not a workaround.
         ref sourceEndpoint : Base::Anything[0..1];
         ref targetEndpoint : Base::Anything[0..1];
-        // Descriptive port paths (e.g. "TLM.TLM_MODE_OUT") for AADL
-        // round-trips; labels only — never references.
-        attribute sourcePortPath : String;
-        attribute targetPortPath : String;
+        // `sourcePortPath` / `targetPortPath` are GONE. They were String
+        // "descriptive port paths (e.g. TLM.TLM_MODE_OUT) for AADL round-trips;
+        // labels only — never references", which is §13.3's string
+        // pseudo-reference: nothing can follow a string to an element, so
+        // anything built on them produced no traceability.
+        //
+        // Measured across the 92 sites in the GPCA example before removing
+        // them: 23 merely restated the endpoint the ref already named (15 gave
+        // the port's own display name, 8 were prose like "HW-001:
+        // GPCA_HW_Sensors"), and the other 69 named a port ON the endpoint
+        // component, resolving to 49 distinct AADL features. Those 49 are
+        // declared as real ports now and the endpoint refs point straight at
+        // them, which is what Track A1 making SoftwarePort a `port def` is for.
+        // The AADL round-trip is better served by an element than by its name.
         ref allocatedExchanges : FunctionalExchange[0..*];
         attribute direction : DirectionKind;
         // Connection timing discipline from the source architecture
