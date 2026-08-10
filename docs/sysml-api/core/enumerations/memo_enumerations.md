@@ -37,7 +37,7 @@
 | [`ObligationKind`](#obligationkind) | `enum def` | Controlled values for obligation: `shall`, `should`, `will`. | — |
 | [`InterfaceKind`](#interfacekind) | `enum def` | Controlled values for interface: `data`, `control`, `analogSignal`, `digitalSignal`, `power`, `network`, `api`, `userInteraction`, `notification`, `logging`, `mechanical`, `fluidic`. | — |
 | [`FlowKind`](#flowkind) | `enum def` | Controlled values for flow: `information`, `command`, `status`, `telemetry`, `alarm`, `configuration`, `measurement`, `audit`, `power`. | — |
-| [`DirectionKind`](#directionkind) | `enum def` | Controlled values for direction: `input`, `output`, `inputOutput`. | — |
+| [`DirectionKind`](#directionkind) | `enum def` | Direction of a flow across a boundary. Track A2 removed this from PORTS: a port usage says `in` / `out` / `inout` natively, which is the language's own spelling and the only one a conforming tool reads.… | — |
 | [`CriticalityKind`](#criticalitykind) | `enum def` | Controlled values for criticality: `low`, `medium`, `high`, `catastrophic`. | — |
 | [`SafetyClassKind`](#safetyclasskind) | `enum def` | Controlled values for safety class: `none`, `A`, `B`, `C`. | — |
 | [`ComplexityKind`](#complexitykind) | `enum def` | Controlled values for complexity: `low`, `medium`, `high`, `complex`. | — |
@@ -226,7 +226,7 @@ enum def DirectionKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for direction: `input`, `output`, `inputOutput`. |
+| Description | Direction of a flow across a boundary. Track A2 removed this from PORTS: a port usage says `in` / `out` / `inout` natively, which is the language's own spelling and the only one a conforming tool reads.… |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1196,6 +1196,22 @@ enum def CommentStatusKind
             enum audit;
             enum power;
         }
+        // Direction of a flow across a boundary.
+        //
+        // Track A2 removed this from PORTS: a port usage says `in` / `out` /
+        // `inout` natively, which is the language's own spelling and the only one
+        // a conforming tool reads. The enum survives because four non-port
+        // constructs still carry a direction and none of them is a port, so none
+        // of them can use the keyword:
+        //
+        //   Interface.direction / .directionality   (interface def)
+        //   LogicalConnector.direction              (connection def)
+        //   LogicalExchange.direction               (part def)
+        //   ComponentExchange.direction             (part def)
+        //   OperationalInteraction.direction        (part def)
+        //
+        // Deleting it would have cost those five their direction; the reinvention
+        // was only ever the port case.
         enum def DirectionKind {
             enum input;
             enum output;

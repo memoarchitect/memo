@@ -15,39 +15,34 @@ package memo_examples_gpca_pump_gpca_physical {
         attribute :>> redundancyKind = "hardware watchdog plus independent flow cross-check";
     }
 
-    part portSensorHarness : PhysicalPort {
+    in port portSensorHarness : PhysicalPort {
         attribute :>> id = "PP-001";
         attribute :>> name = "SensorHarnessConnector";
         attribute :>> portKind = InterfaceKind::digitalSignal;
         attribute :>> connectorType = "keyed 12-pin locking header";
-        attribute :>> direction = DirectionKind::input;
     }
-    part portMotorDrive : PhysicalPort {
+    out port portMotorDrive : PhysicalPort {
         attribute :>> id = "PP-002";
         attribute :>> name = "MotorDriveConnector";
         attribute :>> portKind = InterfaceKind::digitalSignal;
         attribute :>> connectorType = "keyed 6-pin locking header with enable interlock";
-        attribute :>> direction = DirectionKind::output;
     }
-    part portPatientPendant : PhysicalPort {
+    in port portPatientPendant : PhysicalPort {
         attribute :>> id = "PP-003";
         attribute :>> name = "PatientPendantJack";
         attribute :>> portKind = InterfaceKind::digitalSignal;
         attribute :>> connectorType = "latching 3.5 mm pendant jack";
-        attribute :>> direction = DirectionKind::input;
     }
-    part portServiceAccess : PhysicalPort {
+    inout port portServiceAccess : PhysicalPort {
         attribute :>> id = "PP-004";
         attribute :>> name = "ServiceMaintenancePort";
         attribute :>> portKind = InterfaceKind::api;
         attribute :>> connectorType = "covered UART/USB service connector";
-        attribute :>> direction = DirectionKind::inputOutput;
     }
-    part portMainsInlet : PhysicalPort {
+    in port portMainsInlet : PhysicalPort {
         attribute :>> id = "PP-005";
         attribute :>> name = "MainsPowerInlet";
         attribute :>> portKind = InterfaceKind::power;
         attribute :>> connectorType = "IEC 60320 C8 inlet";
-        attribute :>> direction = DirectionKind::input;
     }
 }

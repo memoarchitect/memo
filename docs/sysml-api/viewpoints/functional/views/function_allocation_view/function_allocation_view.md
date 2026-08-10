@@ -62,7 +62,7 @@
         part :>> selectionQuery {
             attribute :>> id = "QRY-FUNC-002";
             attribute :>> name = "FunctionAllocationQuery";
-            attribute :>> includeElementKinds = ("SystemFunction", "LogicalComponent");
+            attribute :>> includeElementKinds = ("SystemFunction", "ComponentFunction", "LogicalComponent");
             attribute :>> includeLayers = ("functions", "logical_structure");
             attribute :>> rationaleText = "Auto-populate function-to-component allocation from the functions and logical structure layers.";
         }

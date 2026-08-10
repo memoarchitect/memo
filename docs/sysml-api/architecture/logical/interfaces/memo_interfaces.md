@@ -39,7 +39,7 @@
 | [`SensorPort`](#sensorport) | `port def` | Sensor port definition specializing `DataPort`. | `DataPort` |
 | [`CommandPort`](#commandport) | `port def` | Command port definition specializing `DataPort`. | `DataPort` |
 | [`ComponentExchange`](#componentexchange) | `part def` | Component exchange definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`SoftwarePort`](#softwareport) | `part def` | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary. | `InterfaceElement` |
+| [`SoftwarePort`](#softwareport) | `port def` | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary.… | `MemoPort` |
 
 ## Interface
 
@@ -149,15 +149,15 @@ part def ComponentExchange specializes ArchitectureElement
 ## SoftwarePort
 
 ```sysml
-part def SoftwarePort specializes InterfaceElement
+port def SoftwarePort specializes MemoPort
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary. |
-| Kind | `part def` |
+| Description | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary.… |
+| Kind | `port def` |
 | Abstract | No |
-| Specializes | `InterfaceElement` |
+| Specializes | `MemoPort` |
 | Owning package | `memo_architecture_logical_interfaces` |
 
 
@@ -243,10 +243,31 @@ part def SoftwarePort specializes InterfaceElement
     
         part def ComponentExchange specializes ArchitectureElement {
             attribute exchangeKind : FlowKind;
-            // Typed endpoints (CR-ONT-002). A component or a boundary port may
-            // terminate an exchange, so the ends are MemoPart-typed.
-            ref sourceEndpoint : MemoPart[0..1];
-            ref targetEndpoint : MemoPart[0..1];
+            // Metaclass-neutral endpoints. CR-ONT-002 used to read: "Typed
+            // endpoints. A component or a boundary port may terminate an exchange,
+            // so the ends are MemoPart-typed." That reasoning was circular —
+            // PhysicalPort and SoftwarePort are part defs precisely SO THAT they
+            // could satisfy this typing, and the typing was justified by their
+            // being parts. Track A0 cut the circle at the ends, which is the side
+            // that has to move first: A1 turns those two into `port def`s, and a
+            // port cannot specialize a part-based type.
+            //
+            // The constraint the type was carrying — an endpoint is a component or
+            // a boundary port, never a requirement or a document — is now stated
+            // where it can be checked across metaclasses, as CR-ONT-072/073 in
+            // src/rules/ontology/ontology_invariants.sysml.
+            //
+            // `Base::Anything` rather than no type at all — the only place in this
+            // change that reaches for it. The 36 untyped ends in
+            // memo_core_relationships are `end` declarations, and an untyped `end`
+            // is established practice; an untyped `ref` with a multiplicity is not
+            // something MEMO's own grammar accepts (`Expecting token of type ';'
+            // but found '['`), and the grammar is not in this session's scope.
+            // `Base::Anything` is what the standard's `Allocations::Allocation`
+            // types its own ends with, so it is the conforming spelling of "any
+            // element", not a workaround.
+            ref sourceEndpoint : Base::Anything[0..1];
+            ref targetEndpoint : Base::Anything[0..1];
             // Descriptive port paths (e.g. "TLM.TLM_MODE_OUT") for AADL
             // round-trips; labels only — never references.
             attribute sourcePortPath : String;
@@ -261,9 +282,13 @@ part def SoftwarePort specializes InterfaceElement
         // Boundary data port of a software system (e.g. an AADL top-level
         // data port), modeled as a first-class element so exchanges can
         // reference it and views can render the system boundary.
-        part def SoftwarePort specializes InterfaceElement {
+        //
+        // A `port def` (Track A1) — see PhysicalPort in
+        // memo_architecture_realization_physical for why the specialization moved
+        // off InterfaceElement, why `direction` is native now (Track A2), and why
+        // `portKind` is duplicated on both ports instead of hoisted onto a base.
+        port def SoftwarePort specializes MemoPort {
             attribute portKind : InterfaceKind;
-            attribute direction : DirectionKind;
             attribute dataTypeName : String;
         }
     }
