@@ -60,6 +60,31 @@ package memo_core_enumerations {
         enum mechanical;
         enum fluidic;
     }
+    // AADL (SAE AS5506) port category. Distinct from InterfaceKind, which says
+    // WHAT crosses a port; this says HOW it is delivered, and the difference is
+    // safety-relevant: when a deadline is missed a `data` port overwrites the
+    // last sample and loses it, while an `event` or `eventData` port queues,
+    // and a queue that outgrows its bound is a different failure with a
+    // different mitigation. MEMO carried the distinction on items and not on
+    // ports, so neither failure could be argued about at the boundary where it
+    // happens.
+    enum def PortCategoryKind {
+        doc /* Sampled. The reader sees the most recent value; a missed
+             * deadline drops a sample and never blocks. */
+        enum data;
+        doc /* Queued signal with no payload. A missed deadline grows the
+             * queue; overflow is the failure to bound.
+             *
+             * Quoted because `event` is reserved in SysML v2 — the same
+             * treatment GovernKind's `'use'` already gets. AADL's word is kept
+             * rather than paraphrased to `queued`: it is the term the standard
+             * and every AADL tool use, and a renamed one would not survive a
+             * round trip. */
+        enum 'event';
+        doc /* Queued signal carrying a payload — the queueing semantics of
+             * `event` with the value of `data`. */
+        enum eventData;
+    }
     enum def FlowKind {
         enum information;
         enum command;
