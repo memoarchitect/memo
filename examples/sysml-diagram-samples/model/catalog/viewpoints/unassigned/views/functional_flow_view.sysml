@@ -39,13 +39,13 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     }
 
     // Functions with typed in/out pins
-    action def FxAcquire specializes SystemAction { out item reading : FxSensorReading; }
-    action def FxCompute specializes SystemAction { in item reading : FxSensorReading; out item command : FxRateCommand; }
-    action def FxEnforce specializes SystemAction { in item command : FxRateCommand; out item safeCommand : FxRateCommand; }
-    action def FxDrive specializes SystemAction { in item command : FxRateCommand; out item energy : FxMotorEnergy; }
-    action def FxDeliverMedication specializes SystemAction { in item energy : FxMotorEnergy; out item fluid : FxMedicationFluid; }
-    action def FxMonitor specializes SystemAction { out item signal : FxOcclusionSignal; }
-    action def FxDetect specializes SystemAction { in item signal : FxOcclusionSignal; }
+    action def FxAcquire specializes SystemFunction { out item reading : FxSensorReading; }
+    action def FxCompute specializes SystemFunction { in item reading : FxSensorReading; out item command : FxRateCommand; }
+    action def FxEnforce specializes SystemFunction { in item command : FxRateCommand; out item safeCommand : FxRateCommand; }
+    action def FxDrive specializes SystemFunction { in item command : FxRateCommand; out item energy : FxMotorEnergy; }
+    action def FxDeliverMedication specializes SystemFunction { in item energy : FxMotorEnergy; out item fluid : FxMedicationFluid; }
+    action def FxMonitor specializes SystemFunction { out item signal : FxOcclusionSignal; }
+    action def FxDetect specializes SystemFunction { in item signal : FxOcclusionSignal; }
 
     // Component hierarchy used by the Level control:
     // L1 system → L2 subsystems → L3 allocated components.
@@ -70,7 +70,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     connection : Composes connect parent ::> fxDeliverySubsystem to child ::> fxActuator;
     connection : Composes connect parent ::> fxSafetySubsystem to child ::> fxSafety;
 
-    action fxDeliveryFlow : SystemAction {
+    action fxDeliveryFlow : SystemFunction {
         action fxAcquire : FxAcquire { attribute :>> name = "Acquire Sensor Data"; }
         action fxCompute : FxCompute { attribute :>> name = "Compute Infusion Rate"; }
 
@@ -85,9 +85,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
         // Composite function — valve sub-flow (drill-in)
         action fxDeliver : FxDeliverMedication {
             attribute :>> name = "Deliver Medication";
-            action fxOpenValve : SystemAction { attribute :>> name = "Open Valve"; }
-            action fxHoldDose : SystemAction { attribute :>> name = "Hold Metered Dose"; }
-            action fxCloseValve : SystemAction { attribute :>> name = "Close Valve"; }
+            action fxOpenValve : SystemFunction { attribute :>> name = "Open Valve"; }
+            action fxHoldDose : SystemFunction { attribute :>> name = "Hold Metered Dose"; }
+            action fxCloseValve : SystemFunction { attribute :>> name = "Close Valve"; }
 
             flow of FxMedicationFluid from fxDeliveryFlow.fxDeliver.fxHoldDose to fxCloseValve;
 
@@ -97,7 +97,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
             first fxCloseValve then done;
         }
 
-        action fxLog : SystemAction { attribute :>> name = "Log Delivery"; }
+        action fxLog : SystemFunction { attribute :>> name = "Log Delivery"; }
 
         flow of FxSensorReading from fxAcquire.reading to fxCompute.reading;
         flow of FxRateCommand from fxEnforce.safeCommand to fxDrive.command;

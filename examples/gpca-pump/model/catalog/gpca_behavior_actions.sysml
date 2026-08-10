@@ -3,6 +3,8 @@ package memo_examples_gpca_pump_gpca_behavior_actions {
     private import memo_examples_gpca_pump_gpca_architecture::*;
 
     private import memo_architecture_functional_behavior::*;
+    private import memo_core_relationships::*;
+    private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
     private import memo_architecture_logical_interfaces::*;
     private import memo_core_enumerations::*;
 
@@ -89,4 +91,19 @@ package memo_examples_gpca_pump_gpca_behavior_actions {
     allocate infusionDeliveryFlow.computeFlow to infusionMgr;
     allocate infusionDeliveryFlow.actuateMotor to pumpMotorAssembly;
     allocate infusionDeliveryFlow.logEvent to logging;
+
+    // ── Functional decomposition and component allocation ───────
+    // FUNC-001 "AcquireSensorData" is what the SYSTEM is answerable for.
+    // Decomposing it names who is answerable for each piece: the flowmeter for
+    // the flow rate, the air detector for air in line, the sensor subassembly
+    // for the aggregated vector. Composes carries the decomposition and
+    // AllocatedTo carries the ownership — they are different statements, which
+    // is what CR-ONT-075 keeps apart.
+    connection : Composes connect parent ::> fnAcquireSensors to child ::> cfnMeasureFlowRate;
+    connection : Composes connect parent ::> fnAcquireSensors to child ::> cfnDetectAirInLine;
+    connection : Composes connect parent ::> fnAcquireSensors to child ::> cfnAggregateSensorStatus;
+
+    allocate cfnMeasureFlowRate to flowSensor;
+    allocate cfnDetectAirInLine to airInLineSensor;
+    allocate cfnAggregateSensorStatus to gpcaDeviceSensors;
 }

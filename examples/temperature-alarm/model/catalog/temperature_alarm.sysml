@@ -49,7 +49,7 @@ package memo_examples_temperature_alarm {
     connection : Composes connect parent ::> actAcknowledgeAlarm to child ::> taskAckAlarm;
 
     // ── Functional and logical slices ───────────────────────────
-    part fnDetectDeviation : SystemFunction {
+    action fnDetectDeviation : SystemFunction {
         attribute :>> id = "TA-FN-001"; attribute :>> name = "DetectTemperatureDeviation";
         attribute :>> criticality = CriticalityKind::high;
         // This function is owned by the functional architecture layer (its
