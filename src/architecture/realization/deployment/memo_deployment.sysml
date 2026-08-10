@@ -74,8 +74,8 @@ package memo_architecture_realization_deployment {
     part def EndToEndFlow specializes ArchitectureElement {
         attribute latencyBudgetMs : Real;
         attribute analysisPurpose : String;
-        ref sourceFunction : SystemFunction[0..1];
-        ref sinkFunction : SystemFunction[0..1];
+        ref sourceFunction : MemoFunction[0..1];
+        ref sinkFunction : MemoFunction[0..1];
         ref logicalSegments : LogicalComponent[0..*];
         // Runtime C&C components (SEI) — the elements actually bound to hardware.
         ref softwareSegments : SoftwareComponent[0..*];

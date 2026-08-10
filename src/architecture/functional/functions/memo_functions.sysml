@@ -1,9 +1,54 @@
-// Functional architecture (§9). A SystemFunction is a technology-independent
-// responsibility of the system; a SystemAction is executable behavior realizing
-// a function; a FunctionalExchange is a typed transfer between functions. A
-// function may be realized by human action, mechanical design, electrical
-// hardware, software, or a combination — allocation is optional and never
-// assumes software.
+// Functional architecture (§9). A function is a responsibility: what the
+// system, or one of its components, is answerable for. A FunctionalExchange is
+// a typed transfer between functions. A function may be realized by human
+// action, mechanical design, electrical hardware, software, or a combination —
+// allocation to the system's own parts is what ComponentFunction records, and
+// it never assumes software.
+//
+// ─── A function is a behaviour ───────────────────────────────────────────
+//
+// `MemoFunction` and both its specializations are `action def`s. They were
+// `part def SystemFunction specializes ArchitectureElement` until Track A0
+// removed the reason: relation ends were typed on MemoPart/ArchitectureElement,
+// KerML forbids a behaviour from specializing a part-based type, and a function
+// has to be satisfiable, verifiable, and allocatable. So a function was declared
+// a part, and a separate `action def SystemAction` carried the behaviour with a
+// `ref performedFunction` stapling the two back together — a reference used in
+// ZERO example files. The ends are metaclass-neutral now (CR-ONT-060..073), so
+// the split has no cause and is gone: SystemAction is merged into the function
+// family, and its `actionKind` moved onto MemoFunction where it was always
+// describing the function anyway.
+//
+// `functionCategory` and `actionKind` are NOT two spellings of one axis, and
+// merging them would lose information. `actionKind` is the verb — sense,
+// compute, actuate, route. `functionCategory` is the domain grouping the
+// project argues in — therapy, alarm, platform, protection. A function can be
+// `sense` in the `protection` category, and a safety case reasons about both.
+//
+// ─── System function vs. component function ──────────────────────────────
+//
+// ARCADIA's functional chain does not stop at the system boundary: system
+// functions decompose until each piece is the responsibility of exactly one
+// component. MEMO names the two ends of that chain because they obey different
+// rules, not because they carry different attributes:
+//
+//   SystemFunction    — a responsibility of the system as a whole.
+//                       Technology-independent. Allocation is OPTIONAL, and a
+//                       system function may be realized by several components,
+//                       by a human, or by mechanism.
+//   ComponentFunction — a responsibility of ONE component: a flowmeter's
+//                       "measure flow rate", a subsystem's "arbitrate alarms".
+//                       Allocation is MANDATORY and single-valued (CR-ONT-074).
+//
+// That difference is structural, which is why these are two definitions rather
+// than one definition carrying a `functionLevel` enum. An enum member cannot
+// change a multiplicity, and "is answerable to exactly one component" is the
+// whole content of the concept.
+//
+// Decomposition and allocation reuse the existing relations and need no new
+// ones — `Composes` for the function tree, `AllocatedTo` for the component.
+// Both had part-typed ends until A0; both are metaclass-neutral now, which is
+// precisely what makes an action-def function usable at all.
 package memo_architecture_functional_functions {
     private import ScalarValues::*;
 
@@ -13,20 +58,24 @@ package memo_architecture_functional_functions {
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_scenarios::*;
 
-    part def SystemFunction specializes ArchitectureElement {
+    abstract action def MemoFunction specializes MemoAction {
         attribute functionCategory : String;
+        attribute actionKind : ActionKind;
         attribute trigger : String;
         attribute outputSummary : String;
         attribute concernKind : ConcernKind;
         attribute criticality : CriticalityKind;
     }
 
-    // Executable behavior realizing a system function.
-    action def SystemAction specializes MemoAction {
-        attribute actionKind : ActionKind;
-        attribute executionSummary : String;
-        ref performedFunction : SystemFunction[0..1];
-    }
+    // A responsibility of the system as a whole. Allocation is optional: a
+    // system function that no single component owns is a normal intermediate
+    // state of the functional chain, not a defect.
+    action def SystemFunction specializes MemoFunction;
+
+    // A responsibility of exactly one component. `AllocatedTo` names that
+    // component; CR-ONT-074 requires it. A component function that reaches no
+    // component is a responsibility nobody has accepted.
+    action def ComponentFunction specializes MemoFunction;
 
     // Named traceable route between functions. Native `flow of` usages carry
     // the transported item; this element exists for budgets and assurance
@@ -36,8 +85,10 @@ package memo_architecture_functional_functions {
         attribute latencyBudgetMs : Real;
         attribute staleAfterMs : Real;
         attribute integrityLevel : String;
-        ref sourceFunction : SystemFunction[0..1];
-        ref targetFunction : SystemFunction[0..1];
+        // MemoFunction, not SystemFunction: an exchange between two component
+        // functions is the ordinary case once the chain is decomposed.
+        ref sourceFunction : MemoFunction[0..1];
+        ref targetFunction : MemoFunction[0..1];
     }
 
     // A system function enables operational work; it does not perform it.
@@ -51,7 +102,7 @@ package memo_architecture_functional_functions {
         attribute securityRelevant : Boolean;
     }
     action def FunctionalFlowStep specializes MemoAction {
-        ref function : SystemFunction[0..1];
+        ref function : MemoFunction[0..1];
         ref exchange : FunctionalExchange[0..1];
         ref item exchangedItem : MemoExchangeItem[0..1];
     }
@@ -68,7 +119,7 @@ package memo_architecture_functional_functions {
     }
     connection def InvolvesFunction :> MemoRelationship {
         end functionalFlow : FunctionalFlow :>> source;
-        end function : SystemFunction :>> target;
+        end function : MemoFunction :>> target;
     }
     // Compatibility spelling used by existing models.
 }
