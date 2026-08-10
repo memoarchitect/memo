@@ -29,17 +29,17 @@ package memo_architecture_realization_deployment {
     }
 
     connection def BuildsInto :> MemoRelationship {
-        end module : SoftwareModule;
-        end deploymentUnit : DeploymentUnit;
+        end module : SoftwareModule :>> source;
+        end deploymentUnit : DeploymentUnit :>> target;
     }
     connection def DeploysTo :> MemoRelationship {
         attribute deploymentKind : DeploymentKind;
-        end deploymentUnit : DeploymentUnit;
-        end node : ProcessingNode;
+        end deploymentUnit : DeploymentUnit :>> source;
+        end node : ProcessingNode :>> target;
     }
     connection def ProvidesEnvironment :> MemoRelationship {
-        end node : ProcessingNode;
-        end environment : RuntimeEnvironment;
+        end node : ProcessingNode :>> source;
+        end environment : RuntimeEnvironment :>> target;
     }
 
     // ─── AADL-style flow modeling (SAE AS5506) ───────────────────────────
@@ -79,12 +79,12 @@ package memo_architecture_realization_deployment {
     // segment per traversed component boundary (AADL flow-spec → end-to-end).
     connection def FlowComprisesSpec :> MemoRelationship {
         attribute segmentOrder : Integer;
-        end endToEndFlow : EndToEndFlow;
-        end spec : FlowSpecification;
+        end endToEndFlow : EndToEndFlow :>> source;
+        end spec : FlowSpecification :>> target;
     }
     // The flow traverses a software→hardware binding; latency accrues here.
     connection def FlowTraversesBinding :> MemoRelationship {
-        end endToEndFlow : EndToEndFlow;
-        end deploymentUnit : DeploymentUnit;
+        end endToEndFlow : EndToEndFlow :>> source;
+        end deploymentUnit : DeploymentUnit :>> target;
     }
 }

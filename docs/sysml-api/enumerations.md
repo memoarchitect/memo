@@ -103,12 +103,26 @@ SysML `enum def` declarations in `src/`.
 | [`NeedKind`](assurance/requirements/needs/memo_needs.md#needkind) | `enum def` | Controlled values for need: `user`, `clinicalUser`, `patientUser`, `business`, `service`, `regulatory`, `operational`, `designControl`. | [`assurance/requirements/needs/memo_needs.sysml`](assurance/requirements/needs/memo_needs.md) |
 
 
+## `memo::assurance::safety_risk`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MitigationKind`](assurance/safety_risk/memo_risk.md#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+
+
+## `memo::assurance::safety_risk::analysis`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`CauseKind`](assurance/safety_risk/analysis/memo_fmea.md#causekind) | `enum def` | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+
+
 ## `memo::core::dimensions`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`CrossCuttingConcernKind`](core/dimensions/dimensions.md#crosscuttingconcernkind) | `enum def` | Cross-cutting concerns orthogonal to the axis. | [`core/dimensions/dimensions.sysml`](core/dimensions/dimensions.md) |
-| [`ElementStatusKind`](core/dimensions/dimensions.md#elementstatuskind) | `enum def` | Editorial status of the model element itself (distinct from the lifecycle of the thing the element describes). | [`core/dimensions/dimensions.sysml`](core/dimensions/dimensions.md) |
+| [`ElementStatusKind`](core/dimensions/dimensions.md#elementstatuskind) | `enum def` | Controlled values for element status: `proposed`, `draft`, `inReview`, `approved`, `released`, `deprecated`, `retired`. | [`core/dimensions/dimensions.sysml`](core/dimensions/dimensions.md) |
 | [`RealizationStageKind`](core/dimensions/dimensions.md#realizationstagekind) | `enum def` | Realization stages of one element identity across the product lifecycle (proposal through retirement). Orthogonal to the axis: a single identity progresses through stages without changing its owner. | [`core/dimensions/dimensions.sysml`](core/dimensions/dimensions.md) |
 
 
@@ -152,7 +166,6 @@ SysML `enum def` declarations in `src/`.
 | [`InterfaceItemKind`](core/enumerations/memo_enumerations.md#interfaceitemkind) | `enum def` | Controlled values for interface item: `data`, `command`, `signal`, `material`, `energy`, `fluid`, `mechanicalForce`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`InterfaceKind`](core/enumerations/memo_enumerations.md#interfacekind) | `enum def` | Controlled values for interface: `data`, `control`, `analogSignal`, `digitalSignal`, `power`, `network`, `api`, `userInteraction`, `notification`, `logging`, `mechanical`, `fluidic`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`LifecycleStateKind`](core/enumerations/memo_enumerations.md#lifecyclestatekind) | `enum def` | Controlled values for lifecycle state: `concept`, `development`, `released`, `maintenance`, `obsolete`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
-| [`LinkStatusKind`](core/enumerations/memo_enumerations.md#linkstatuskind) | `enum def` | Controlled values for link status: `planned`, `active`, `verified`, `obsolete`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`MessageKind`](core/enumerations/memo_enumerations.md#messagekind) | `enum def` | Controlled values for message: `synchronous`, `asynchronous`, `reply`, `create`, `destroy`, `timeout`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`NotificationPriorityKind`](core/enumerations/memo_enumerations.md#notificationprioritykind) | `enum def` | Notification/alarm priority as used by source requirement documents (e.g. CriSys GPCA REQ 59 action table: High/Med/Low). | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`ObligationKind`](core/enumerations/memo_enumerations.md#obligationkind) | `enum def` | Controlled values for obligation: `shall`, `should`, `will`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
@@ -161,9 +174,9 @@ SysML `enum def` declarations in `src/`.
 | [`ProbabilityKind`](core/enumerations/memo_enumerations.md#probabilitykind) | `enum def` | Qualitative likelihood of occurrence (ISO 14971 / AAMI TIR style Likert scale), used wherever a hazard, failure, or fault-tree event carries a qualitative occurrence estimate rather than a measured rate. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`ProcessingNodeKind`](core/enumerations/memo_enumerations.md#processingnodekind) | `enum def` | Controlled values for processing node: `microcontroller`, `FPGA`, `SoC`, `gateway`, `cloudServer`, `edgeDevice`, `DSP`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`PropertyLanguageKind`](core/enumerations/memo_enumerations.md#propertylanguagekind) | `enum def` | Controlled values for property language: `naturalLanguage`, `pseudoFormal`, `agreeLike`, `ltlLike`, `ctlLike`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
+| [`RegulatoryRegimeKind`](core/enumerations/memo_enumerations.md#regulatoryregimekind) | `enum def` | The submission regime a project targets, and the regimes a standard has standing in. This is the axis that decides which clauses a project is required to claim: `required(project)` is the clauses of every standard whose `appliesToRegime` intersects the regimes the project's Pr… | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`RequirementNotationKind`](core/enumerations/memo_enumerations.md#requirementnotationkind) | `enum def` | Controlled values for requirement notation: `freeText`, `ears`, `sophist`, `formalConstraint`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`RequirementSourceKind`](core/enumerations/memo_enumerations.md#requirementsourcekind) | `enum def` | Controlled values for requirement source: `stakeholderNeed`, `risk`, `designDecision`, `changeRequest`, `sourceDocument`, `extension`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
-| [`RequirementStatusKind`](core/enumerations/memo_enumerations.md#requirementstatuskind) | `enum def` | Controlled values for requirement status: `draft`, `approved`, `implemented`, `verified`, `validated`, `retired`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`RiskAcceptabilityKind`](core/enumerations/memo_enumerations.md#riskacceptabilitykind) | `enum def` | ISO 14971 clause 3.14/8 risk acceptability decision. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`RiskControlImplementationKind`](core/enumerations/memo_enumerations.md#riskcontrolimplementationkind) | `enum def` | Controlled values for risk control implementation: `hardwareDesign`, `softwareDesign`, `labeling`, `training`, `proceduralControl`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`RiskControlKind`](core/enumerations/memo_enumerations.md#riskcontrolkind) | `enum def` | Controlled values for risk control: `inherentSafeDesign`, `protectiveMeasure`, `informationForSafety`, `alarm`, `interlock`, `monitoring`, `plausibilityCheck`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
@@ -185,12 +198,4 @@ SysML `enum def` declarations in `src/`.
 | [`VerificationMethodKind`](core/enumerations/memo_enumerations.md#verificationmethodkind) | `enum def` | Controlled values for verification method: `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`ViewOutputKind`](core/enumerations/memo_enumerations.md#viewoutputkind) | `enum def` | Controlled values for view output: `diagram`, `table`, `matrix`, `documentSection`, `dashboard`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`WorkflowStageKind`](core/enumerations/memo_enumerations.md#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
-
-
-## `memo::core::relationships`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`CauseKind`](core/relationships/memo_relationships.md#causekind) | `enum def` | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`MitigationKind`](core/relationships/memo_relationships.md#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 

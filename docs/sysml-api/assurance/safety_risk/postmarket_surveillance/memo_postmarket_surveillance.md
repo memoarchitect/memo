@@ -24,6 +24,7 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
 
 ## Declarations
@@ -31,6 +32,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`PostMarketSurveillance`](#postmarketsurveillance) | `part def` | Post market surveillance definition specializing `MemoPart`. | `MemoPart` |
+| [`FeedsBackTo`](#feedsbackto) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## PostMarketSurveillance
 
@@ -47,6 +49,21 @@ part def PostMarketSurveillance :> MemoPart
 | Owning package | `memo_assurance_safety_risk_postmarket_surveillance` |
 
 
+## FeedsBackTo
+
+```sysml
+connection def FeedsBackTo :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk_postmarket_surveillance` |
+
+
 ## Source
 
 ??? code "assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.sysml"
@@ -54,6 +71,7 @@ part def PostMarketSurveillance :> MemoPart
     ```sysml
     package memo_assurance_safety_risk_postmarket_surveillance {
         private import ScalarValues::*;
+        private import memo_core_relationships::*;   // MemoRelationship
     
         private import memo_core_common::*;
     
@@ -61,6 +79,14 @@ part def PostMarketSurveillance :> MemoPart
             attribute surveillanceKind : String;
             attribute dataSource : String;
             attribute reportingObligation : String;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        connection def FeedsBackTo :> MemoRelationship {
+            end feedbackItem : PostMarketSurveillance :>> source;
+            end designElement : MemoPart :>> target;
         }
     }
     

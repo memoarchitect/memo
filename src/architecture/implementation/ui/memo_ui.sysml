@@ -9,6 +9,7 @@ package memo_architecture_implementation_ui {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
+    private import memo_assurance_safety_risk::*;   // RiskControlMeasure
     private import memo_core_relationships::*;
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_scenarios::*;
@@ -280,25 +281,25 @@ package memo_architecture_implementation_ui {
     connection def UITransition :> MemoRelationship {
         attribute triggeringEvent : String;
         attribute guardCondition : String;
-        end sourceState : UIState;
-        end targetState : UIState;
+        end sourceState : UIState :>> source;
+        end targetState : UIState :>> target;
     }
     connection def DataBinding :> MemoRelationship {
         attribute bindingExpression : String;
         attribute refreshPolicy : String;
-        end boundElement : InteractionElement;
-        end dataSource : MemoPart;
+        end boundElement : InteractionElement :>> source;
+        end dataSource : MemoExchangeItem :>> target;
     }
     connection def PresentsState :> MemoRelationship {
-        end userInterface : UserInterface;
-        end uiState : UIState;
+        end userInterface : UserInterface :>> source;
+        end uiState : UIState :>> target;
     }
 
     // ── Screen layout relations ──────────────────────────────────
     // Which modelled screen an image is a rendering of.
     connection def CapturesScreen :> MemoRelationship {
-        end capture : ScreenCapture;
-        end screen : UIElement;
+        end capture : ScreenCapture :>> source;
+        end screen : UIElement :>> target;
     }
 
     // Activating this element opens another screen. This is NAVIGATION, not
@@ -309,34 +310,34 @@ package memo_architecture_implementation_ui {
     // from here, and only this relation says so.
     connection def NavigatesTo :> MemoRelationship {
         attribute triggerGesture : String;
-        end sourceElement : UIElement;
-        end targetScreen : UIElement;
+        end sourceElement : UIElement :>> source;
+        end targetScreen : UIElement :>> target;
     }
 
     // ── §18 traceability ─────────────────────────────────────────
     connection def ElementTriggersAction :> MemoRelationship {
-        end element : InteractionElement;
-        end triggeredAction : UIAction;
+        end element : InteractionElement :>> source;
+        end triggeredAction : UIAction :>> target;
     }
     connection def ActionInvokesFunction :> MemoRelationship {
-        end uiAction : UIAction;
-        end systemFunction : SystemFunction;
+        end uiAction : UIAction :>> source;
+        end systemFunction : SystemFunction :>> target;
     }
     connection def FlowServesUseCase :> MemoRelationship {
-        end interactionFlow : InteractionFlow;
-        end useCase : UseCase;
+        end interactionFlow : InteractionFlow :>> source;
+        end useCase : UseCase :>> target;
     }
     // The UI-layer scenario realizes exactly one FunctionalScenario one layer
     // up (the interaction sequence that carries out the function sequence),
     // completing the OperativeScenario → FunctionalScenario → UIScenario chain.
     connection def ErrorAtElement :> MemoRelationship {
-        end useError : UseError;
-        end element : InteractionElement;
+        end useError : UseError :>> source;
+        end element : InteractionElement :>> target;
     }
     // A risk control implemented by a UI element or by task design
     // (confirmation dialog, lockout, guarded control).
     connection def ControlImplementedBy :> MemoRelationship {
-        end riskControl : VerifiableElement;
-        end implementingElement : ArchitectureElement;
+        end riskControl : RiskControlMeasure :>> source;
+        end implementingElement : ArchitectureElement :>> target;
     }
 }

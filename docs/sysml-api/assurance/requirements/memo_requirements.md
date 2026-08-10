@@ -36,7 +36,7 @@
 | [`IntendedUse`](#intendeduse) | `part def` | ISO 14971 risk-analysis inputs. These are model elements so hazards, scenarios, requirements, and DHF records can trace to the exact use definition or foreseeable misuse that motivated them. | `DocumentedElement` |
 | [`ReasonablyForeseeableMisuse`](#reasonablyforeseeablemisuse) | `part def` | Reasonably foreseeable misuse definition specializing `DocumentedElement`. | `DocumentedElement` |
 | [`RequirementKind`](#requirementkind) | `enum def` | The kind of requirement. Was a subclass branch (SystemRequirement / SoftwareRequirement / HardwareRequirement) plus a parallel design-control specification hierarchy (DesignControlSpecification / System- / Software- / HardwareSpecification); now one attribute.… | — |
-| [`Requirement`](#requirement) | `requirement def` | Requirement definition specializing `VerifiableElement`. | `VerifiableElement` |
+| [`Requirement`](#requirement) | `requirement def` | Requirement definition specializing `MemoRequirement`. | `MemoRequirement` |
 | [`SystemConstant`](#systemconstant) | `part def` | Named constant defined by a source requirements document (e.g. CriSys GPCA App. A.4) and referenced from requirement statements. | `MemoPart` |
 | [`NotificationSpec`](#notificationspec) | `part def` | One row of a notification/alarm action table (e.g. CriSys GPCA REQ 59): a named notification, its priority, and the actions the system must take. | `MemoPart` |
 
@@ -103,15 +103,15 @@ enum def RequirementKind
 ## Requirement
 
 ```sysml
-requirement def Requirement specializes VerifiableElement
+requirement def Requirement specializes MemoRequirement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Requirement definition specializing `VerifiableElement`. |
+| Description | Requirement definition specializing `MemoRequirement`. |
 | Kind | `requirement def` |
 | Abstract | No |
-| Specializes | `VerifiableElement` |
+| Specializes | `MemoRequirement` |
 | Owning package | `memo_assurance_requirements` |
 
 
@@ -192,12 +192,15 @@ part def NotificationSpec specializes MemoPart
             enum designControl;
         }
     
-        requirement def Requirement specializes VerifiableElement {
+        requirement def Requirement specializes MemoRequirement {
             attribute requirementKind : RequirementKind;
             attribute statement : String;
             attribute sourceKind : RequirementSourceKind;
             attribute concernKind : ConcernKind;
-            attribute requirementStatus : RequirementStatusKind;
+            // Editorial state is the inherited `status : ElementStatusKind` — the
+            // one status vocabulary in MEMO. Whether a requirement is implemented,
+            // verified, or validated is read from its Realizes / VerifiedBy /
+            // Validates links, not restated here.
             attribute acceptanceCriteria : String;
             attribute subjectDescription : String;
             attribute actorDescription : String;

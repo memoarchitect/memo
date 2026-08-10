@@ -24,6 +24,7 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 
@@ -33,6 +34,7 @@
 | --- | --- | --- | --- |
 | [`ChangeRequest`](#changerequest) | `part def` | Change request definition specializing `MemoPart`. | `MemoPart` |
 | [`ConfigurationItem`](#configurationitem) | `part def` | Configuration item definition specializing `MemoPart`. | `MemoPart` |
+| [`Changes`](#changes) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## ChangeRequest
 
@@ -64,6 +66,21 @@ part def ConfigurationItem :> MemoPart
 | Owning package | `memo_artifacts_configuration_management` |
 
 
+## Changes
+
+```sysml
+connection def Changes :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
 ## Source
 
 ??? code "artifacts/configuration_management/memo_configuration_management.sysml"
@@ -71,6 +88,7 @@ part def ConfigurationItem :> MemoPart
     ```sysml
     package memo_artifacts_configuration_management {
         private import ScalarValues::*;
+        private import memo_core_relationships::*;   // MemoRelationship
     
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
@@ -86,6 +104,14 @@ part def ConfigurationItem :> MemoPart
             attribute version : String;
             attribute baseline : String;
             attribute controlLevel : String;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        connection def Changes :> MemoRelationship {
+            end changeRequest : ChangeRequest :>> source;
+            end changedElement : MemoPart :>> target;
         }
     }
     

@@ -24,6 +24,7 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_consistency_rules::*` |
@@ -39,6 +40,7 @@
 | [`ProjectMethodBinding`](#projectmethodbinding) | `part def` | Project method binding definition specializing `MemoPart`. | `MemoPart` |
 | [`DhfDocumentBinding`](#dhfdocumentbinding) | `part def` | Dhf document binding definition specializing `MemoPart`. | `MemoPart` |
 | [`Archetype`](#archetype) | `part def` | Archetype definition specializing `MemoPart`. | `MemoPart` |
+| [`ResolvesToMethodology`](#resolvestomethodology) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## MethodologyLibrary
 
@@ -145,6 +147,21 @@ part def Archetype :> MemoPart
 | Owning package | `memo_methodology_core` |
 
 
+## ResolvesToMethodology
+
+```sysml
+connection def ResolvesToMethodology :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_methodology_core` |
+
+
 ## Source
 
 ??? code "methodology/core/memo_core.sysml"
@@ -152,6 +169,7 @@ part def Archetype :> MemoPart
     ```sysml
     package memo_methodology_core {
         private import ScalarValues::*;
+        private import memo_core_relationships::*;   // MemoRelationship
     
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
@@ -230,6 +248,14 @@ part def Archetype :> MemoPart
             // Project bindings may add project or supplier modules to the selected
             // methodology without requiring those packages to live under memo::.
             attribute includedModule : String[0..*];
+            // The submission regimes this project targets, declared once here.
+            // Everything downstream that needs to know which standards apply —
+            // `memo standards check`, the standards checklist, the Architect gap
+            // badges — reads this, so the regime axis is a project fact stated in
+            // SysML rather than a per-document array maintained in 44 places.
+            // Empty means the project has not declared its regimes; a report that
+            // needs them says so rather than assuming a default market.
+            attribute regulatoryRegime : RegulatoryRegimeKind[0..*];
             part rulePolicy : RulePolicy[0..*];
         }
     
@@ -250,6 +276,14 @@ part def Archetype :> MemoPart
             attribute includedLayer : String;
             attribute includedStandard : String;
             attribute templateDir : String;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        connection def ResolvesToMethodology :> MemoRelationship {
+            end boundModelElement : MemoPart :>> source;
+            end resolvedMethodology : MethodologyDefinition :>> target;
         }
     }
     

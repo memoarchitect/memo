@@ -79,7 +79,7 @@ package memo_architecture_operational_activities {
     }
 
     connection def AssessesDifficulty :> MemoRelationship {
-        end assessment : TaskDifficultyAssessment;
-        end task : UserTask;
+        end assessment : TaskDifficultyAssessment :>> source;
+        end task : UserTask :>> target;
     }
 }

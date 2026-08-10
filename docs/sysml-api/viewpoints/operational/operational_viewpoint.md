@@ -59,6 +59,8 @@
             attribute :>> presentationKind = (PresentationKind::custom);
             attribute :>> concernKinds = (ConcernKind::performance, ConcernKind::interoperability);
             attribute :>> includedLayers = ("context", "operational", "system");
+            attribute :>> explorerLane = "architecture";
+            attribute :>> explorerOrder = 1;
             attribute :>> allowedElementKinds = ("Actor", "UseContext", "OperationalActivity", "OperativeScenario");
             attribute :>> userExtensible = true;
         }

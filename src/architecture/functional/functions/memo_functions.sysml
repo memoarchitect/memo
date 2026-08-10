@@ -63,12 +63,12 @@ package memo_architecture_functional_functions {
         ref selectedFlow : FunctionalFlow[0..1];
     }
     connection def IncludesStep :> MemoRelationship {
-        end functionalFlow : FunctionalFlow;
-        end step : FunctionalFlowStep;
+        end functionalFlow : FunctionalFlow :>> source;
+        end step : FunctionalFlowStep :>> target;
     }
     connection def InvolvesFunction :> MemoRelationship {
-        end functionalFlow : FunctionalFlow;
-        end function : SystemFunction;
+        end functionalFlow : FunctionalFlow :>> source;
+        end function : SystemFunction :>> target;
     }
     // Compatibility spelling used by existing models.
 }

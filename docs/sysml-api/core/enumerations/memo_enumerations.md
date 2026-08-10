@@ -32,7 +32,6 @@
 | [`ConcernKind`](#concernkind) | `enum def` | Controlled values for concern: `safety`, `usability`, `cybersecurity`, `performance`, `interoperability`, `reliability`, `privacy`, `regulatory`, `clinical`. | — |
 | [`RequirementSourceKind`](#requirementsourcekind) | `enum def` | Controlled values for requirement source: `stakeholderNeed`, `risk`, `designDecision`, `changeRequest`, `sourceDocument`, `extension`. | — |
 | [`NotificationPriorityKind`](#notificationprioritykind) | `enum def` | Notification/alarm priority as used by source requirement documents (e.g. CriSys GPCA REQ 59 action table: High/Med/Low). | — |
-| [`RequirementStatusKind`](#requirementstatuskind) | `enum def` | Controlled values for requirement status: `draft`, `approved`, `implemented`, `verified`, `validated`, `retired`. | — |
 | [`RequirementNotationKind`](#requirementnotationkind) | `enum def` | Controlled values for requirement notation: `freeText`, `ears`, `sophist`, `formalConstraint`. | — |
 | [`EarsPatternKind`](#earspatternkind) | `enum def` | Controlled values for ears pattern: `ubiquitous`, `eventDriven`, `stateDriven`, `optionalFeature`, `unwantedBehavior`, `complex`. | — |
 | [`ObligationKind`](#obligationkind) | `enum def` | Controlled values for obligation: `shall`, `should`, `will`. | — |
@@ -44,6 +43,7 @@
 | [`ComplexityKind`](#complexitykind) | `enum def` | Controlled values for complexity: `low`, `medium`, `high`, `complex`. | — |
 | [`LifecycleStateKind`](#lifecyclestatekind) | `enum def` | Controlled values for lifecycle state: `concept`, `development`, `released`, `maintenance`, `obsolete`. | — |
 | [`VerificationMethodKind`](#verificationmethodkind) | `enum def` | Controlled values for verification method: `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking`. | — |
+| [`RegulatoryRegimeKind`](#regulatoryregimekind) | `enum def` | The submission regime a project targets, and the regimes a standard has standing in. This is the axis that decides which clauses a project is required to claim: `required(project)` is the clauses of every standard whose `appliesToRegime` intersects the regimes the project's Pr… | — |
 | [`ArtifactKind`](#artifactkind) | `enum def` | Controlled values for artifact: `plan`, `requirementSpecification`, `architectureDescription`, `softwareDesignDescription`, `riskRecord`, `traceMatrix`, `testProtocol`, `testReport`, `evidenceRecord`, `cybersecurityAssessment`, `threatModel`, `usabilityEngineeringReport`, `clinicalSafetyReport`, `failureModeEffectsAnalysis`, `soupList`, `designInputPlan`, `designOutputPlan`, `softwareDevelopmentPlan`, `labelingSpecification`, `designHistoryFileIndex`, `designChangeLog`. | — |
 | [`RiskControlKind`](#riskcontrolkind) | `enum def` | Controlled values for risk control: `inherentSafeDesign`, `protectiveMeasure`, `informationForSafety`, `alarm`, `interlock`, `monitoring`, `plausibilityCheck`. | — |
 | [`HazardTypeKind`](#hazardtypekind) | `enum def` | Controlled values for hazard type: `drugDeliveryError`, `energyExposure`, `informationError`, `mechanicalFailure`, `biologicalContamination`, `softwareAnomaly`, `useError`, `environmentalHazard`. | — |
@@ -51,7 +51,6 @@
 | [`DiagramViewKind`](#diagramviewkind) | `enum def` | The eight standard SysML v2 view kinds (spec taxonomy). Every diagram view resolves to exactly one of these (Epic KK). | — |
 | [`DocumentViewKind`](#documentviewkind) | `enum def` | Controlled values for document view: `DHF`, `SDD`, `RMF`, `VV`, `architectureDescription`, `cybersecurityAssessment`, `threatModel`, `clinical`, `usability`. | — |
 | [`SchedulingPolicyKind`](#schedulingpolicykind) | `enum def` | Controlled values for scheduling policy: `nonRealTime`, `roundRobin`, `fixedPriorityPreemptive`, `rateMonotonic`, `deadlineMonotonic`, `EDF`. | — |
-| [`LinkStatusKind`](#linkstatuskind) | `enum def` | Controlled values for link status: `planned`, `active`, `verified`, `obsolete`. | — |
 | [`BehaviorPropertyKind`](#behaviorpropertykind) | `enum def` | Controlled values for behavior property: `stateInvariant`, `transitionRule`, `temporalProperty`, `safetyProperty`, `livenessProperty`, `assumption`, `guarantee`. | — |
 | [`InterfaceItemKind`](#interfaceitemkind) | `enum def` | Controlled values for interface item: `data`, `command`, `signal`, `material`, `energy`, `fluid`, `mechanicalForce`. | — |
 | [`PropertyLanguageKind`](#propertylanguagekind) | `enum def` | Controlled values for property language: `naturalLanguage`, `pseudoFormal`, `agreeLike`, `ltlLike`, `ctlLike`. | — |
@@ -138,21 +137,6 @@ enum def NotificationPriorityKind
 | Property | Value |
 | --- | --- |
 | Description | Notification/alarm priority as used by source requirement documents (e.g. CriSys GPCA REQ 59 action table: High/Med/Low). |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_core_enumerations` |
-
-
-## RequirementStatusKind
-
-```sysml
-enum def RequirementStatusKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for requirement status: `draft`, `approved`, `implemented`, `verified`, `validated`, `retired`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -324,6 +308,21 @@ enum def VerificationMethodKind
 | Owning package | `memo_core_enumerations` |
 
 
+## RegulatoryRegimeKind
+
+```sysml
+enum def RegulatoryRegimeKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The submission regime a project targets, and the regimes a standard has standing in. This is the axis that decides which clauses a project is required to claim: `required(project)` is the clauses of every standard whose `appliesToRegime` intersects the regimes the project's Pr… |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
 ## ArtifactKind
 
 ```sysml
@@ -423,21 +422,6 @@ enum def SchedulingPolicyKind
 | Property | Value |
 | --- | --- |
 | Description | Controlled values for scheduling policy: `nonRealTime`, `roundRobin`, `fixedPriorityPreemptive`, `rateMonotonic`, `deadlineMonotonic`, `EDF`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_core_enumerations` |
-
-
-## LinkStatusKind
-
-```sysml
-enum def LinkStatusKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for link status: `planned`, `active`, `verified`, `obsolete`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1168,14 +1152,6 @@ enum def CommentStatusKind
             enum medium;
             enum low;
         }
-        enum def RequirementStatusKind {
-            enum draft;
-            enum approved;
-            enum implemented;
-            enum verified;
-            enum validated;
-            enum retired;
-        }
         enum def RequirementNotationKind {
             enum freeText;
             enum ears;
@@ -1258,6 +1234,25 @@ enum def CommentStatusKind
             enum simulation;
             enum formalProof;
             enum modelChecking;
+        }
+        // The submission regime a project targets, and the regimes a standard has
+        // standing in. This is the axis that decides which clauses a project is
+        // required to claim: `required(project)` is the clauses of every standard
+        // whose `appliesToRegime` intersects the regimes the project's
+        // ProjectMethodBinding declares.
+        //
+        // The members are spelled as the regulatory designations themselves rather
+        // than in the lowerCamel convention the rest of this file uses. All 44 DHF
+        // templates already carry these exact strings in `required_for`, and any
+        // transformation between the enum and those arrays would be a hardcoded
+        // spelling map in TypeScript — the one thing the standards axis exists to
+        // avoid. One vocabulary, one spelling, declared here.
+        enum def RegulatoryRegimeKind {
+            enum CE;
+            enum MDR;
+            enum UKCA;
+            enum FDA_510k;
+            enum FDA_PMA;
         }
         enum def ArtifactKind {
             enum plan;
@@ -1345,12 +1340,6 @@ enum def CommentStatusKind
             enum rateMonotonic;
             enum deadlineMonotonic;
             enum EDF;
-        }
-        enum def LinkStatusKind {
-            enum planned;
-            enum active;
-            enum verified;
-            enum obsolete;
         }
         enum def BehaviorPropertyKind {
             enum stateInvariant;

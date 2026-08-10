@@ -38,8 +38,9 @@
 | [`HazardRelatedUseScenario`](#hazardrelatedusescenario) | `action def` | A use scenario whose performance could lead to a hazardous situation (IEC 62366-1 3.9); selected for summative evaluation. | `MemoScenario` |
 | [`FormativeEvaluation`](#formativeevaluation) | `part def` | Formative evaluation definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`UsabilityValidation`](#usabilityvalidation) | `part def` | Usability validation definition specializing `MemoEvidence`. | `MemoEvidence` |
-| [`CommitsUseError`](#commitsuseerror) | `connection def` | Typed relationship from `UserTask` to `UseError`. | `MemoRelationship` |
-| [`EvaluatesTask`](#evaluatestask) | `connection def` | Typed relationship from `MemoEvidence` to `UserTask`. | `MemoRelationship` |
+| [`CommitsUseError`](#commitsuseerror) | `connection def` | Typed relationship for commits use error. | `MemoRelationship` |
+| [`EvaluatesTask`](#evaluatestask) | `connection def` | Typed relationship for evaluates task. | `MemoRelationship` |
+| [`TestedByUsability`](#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## UseError
 
@@ -109,7 +110,7 @@ connection def CommitsUseError :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UserTask` to `UseError`. |
+| Description | Typed relationship for commits use error. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -124,7 +125,22 @@ connection def EvaluatesTask :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoEvidence` to `UserTask`. |
+| Description | Typed relationship for evaluates task. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_human_factors` |
+
+
+## TestedByUsability
+
+```sysml
+connection def TestedByUsability :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -178,12 +194,20 @@ connection def EvaluatesTask :> MemoRelationship
         }
     
         connection def CommitsUseError :> MemoRelationship {
-            end task : UserTask;
-            end useError : UseError;
+            end task : UserTask :>> source;
+            end useError : UseError :>> target;
         }
         connection def EvaluatesTask :> MemoRelationship {
-            end evaluation : MemoEvidence;
-            end task : UserTask;
+            end evaluation : MemoEvidence :>> source;
+            end task : UserTask :>> target;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        connection def TestedByUsability :> MemoRelationship {
+            end uiElementOrTask : MemoPart :>> source;
+            end usabilityTest : UsabilityValidation :>> target;
         }
     }
     

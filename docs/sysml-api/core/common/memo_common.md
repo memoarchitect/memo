@@ -44,8 +44,9 @@
 | [`MemoPort`](#memoport) | `port def` | Boundary feature foundation for typed ports. | — |
 | [`MemoInterface`](#memointerface) | `interface def` | Interaction-contract foundation for interface definitions between ports. | — |
 | [`MemoExchangeItem`](#memoexchangeitem) | `item def` | Exchange-content foundation: everything that flows — information, command, material, energy — is an item, not a part. | — |
-| [`MemoNeed`](#memoneed) | `requirement def` | Memo need definition. | — |
-| [`MemoRequirement`](#memorequirement) | `requirement def` | Memo requirement definition. | — |
+| [`MemoRequirementElement`](#memorequirementelement) | `requirement def` | Memo requirement element definition. | — |
+| [`MemoNeed`](#memoneed) | `requirement def` | Memo need definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
+| [`MemoRequirement`](#memorequirement) | `requirement def` | Memo requirement definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`MemoVerificationCase`](#memoverificationcase) | `verification def` | Memo verification case definition. | — |
 | [`MemoState`](#memostate) | `state def` | Memo state definition. | — |
 | [`Citation`](#citation) | `part def` | Citation definition specializing `MemoPart`. | `MemoPart` |
@@ -230,33 +231,48 @@ item def MemoExchangeItem
 | Owning package | `memo_core_common` |
 
 
-## MemoNeed
+## MemoRequirementElement
 
 ```sysml
-requirement def MemoNeed
+abstract requirement def MemoRequirementElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Memo need definition. |
+| Description | Memo requirement element definition. |
+| Kind | `requirement def` |
+| Abstract | Yes |
+| Specializes | — |
+| Owning package | `memo_core_common` |
+
+
+## MemoNeed
+
+```sysml
+requirement def MemoNeed :> MemoRequirementElement
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Memo need definition specializing `MemoRequirementElement`. |
 | Kind | `requirement def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoRequirementElement` |
 | Owning package | `memo_core_common` |
 
 
 ## MemoRequirement
 
 ```sysml
-requirement def MemoRequirement
+requirement def MemoRequirement :> MemoRequirementElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Memo requirement definition. |
+| Description | Memo requirement definition specializing `MemoRequirementElement`. |
 | Kind | `requirement def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoRequirementElement` |
 | Owning package | `memo_core_common` |
 
 
@@ -316,6 +332,28 @@ part def Citation specializes MemoPart
     // across metaclasses is not portable, so non-part bases re-declare the small
     // identification core and share classification through the metadata defs in
     // memo_core_dimensions.
+    //
+    // ─── The identification core ────────────────────────────────────────────
+    // Every MEMO base below declares the SAME attributes, in the same order,
+    // with no exceptions:
+    //
+    //     id, uuid, name, shortDescription, description,
+    //     rationale, sourceReference, status
+    //
+    // They are re-declared per metaclass only because KerML will not let an
+    // action, port, item, requirement, or connection inherit from a part def.
+    // The duplication is a language constraint, not a design choice — so treat
+    // the block as one unit: anything added or removed here is added or removed
+    // in all of them. The drift this replaces was real (MemoPort carried no
+    // sourceReference and no status; MemoRequirement and MemoNeed each invented
+    // their own status attribute), and drift here shows up as an element whose
+    // properties panel is missing fields its neighbours have.
+    //
+    // `uuid` is the stable technical identity: never displayed, never used as a
+    // label, never reused. Authors normally leave it unset and let the compiler
+    // derive it (memo-tools assigns a v5 UUID over file+kind+id); set it
+    // explicitly on an element whose file or id must be free to change without
+    // breaking external references to it, and the authored value wins.
     package memo_core_common {
         private import ScalarValues::*;
     
@@ -338,6 +376,7 @@ part def Citation specializes MemoPart
         abstract part def MemoPart {
             // identity
             attribute id : String;
+            attribute uuid : String;
             attribute name : String;
             // Two description registers on every MEMO element, because views have
             // two densities. `shortDescription` is the one-line form a table cell,
@@ -387,6 +426,7 @@ part def Citation specializes MemoPart
         // and interaction steps specialize MemoAction.
         action def MemoAction {
             attribute id : String;
+            attribute uuid : String;
             attribute name : String;
             attribute shortDescription : String;
             attribute description : String;
@@ -398,9 +438,13 @@ part def Citation specializes MemoPart
         // Boundary feature foundation for typed ports.
         port def MemoPort {
             attribute id : String;
+            attribute uuid : String;
             attribute name : String;
             attribute shortDescription : String;
             attribute description : String;
+            attribute rationale : String;
+            attribute sourceReference : String;
+            attribute status : ElementStatusKind;
         }
     
         // Interaction-contract foundation for interface definitions between ports.
@@ -408,6 +452,7 @@ part def Citation specializes MemoPart
             end source;
             end target;
             attribute id : String;
+            attribute uuid : String;
             attribute name : String;
             attribute shortDescription : String;
             attribute description : String;
@@ -419,11 +464,13 @@ part def Citation specializes MemoPart
         // command, material, energy — is an item, not a part.
         item def MemoExchangeItem {
             attribute id : String;
+            attribute uuid : String;
             attribute name : String;
             attribute shortDescription : String;
             attribute description : String;
             attribute rationale : String;
             attribute sourceReference : String;
+            attribute status : ElementStatusKind;
             attribute semantics : String;
             attribute unit : String;
             attribute minValue : String;
@@ -436,22 +483,28 @@ part def Citation specializes MemoPart
         // Requirement-family foundations. MemoNeed captures a problem-space
         // expectation in stakeholder language; MemoRequirement a testable
         // solution-space obligation.
-        requirement def MemoNeed {
+        // Shared base of the requirement family. It exists so a relation end can
+        // say "a need or a requirement" with one type name — before it, every end
+        // that had to accept both was left untyped.
+        abstract requirement def MemoRequirementElement {
             attribute id : String;
+            attribute uuid : String;
+            attribute name : String;
             attribute shortDescription : String;
-            attribute statement : String;
+            attribute description : String;
             attribute rationale : String;
-            attribute needSource : String;
-            attribute priority : String;
-            attribute needStatus : ElementStatusKind;
+            attribute sourceReference : String;
+            attribute status : ElementStatusKind;
+            attribute statement : String;
         }
     
-        requirement def MemoRequirement {
-            attribute id : String;
-            attribute shortDescription : String;
-            attribute statement : String;
+        requirement def MemoNeed :> MemoRequirementElement {
+            attribute needSource : String;
+            attribute priority : String;
+        }
+    
+        requirement def MemoRequirement :> MemoRequirementElement {
             attribute acceptanceCriteria : String;
-            attribute requirementStatus : ElementStatusKind;
         }
     
         // Verification-case foundation. A SysML v2 verification case is a behaviour
@@ -460,11 +513,13 @@ part def Citation specializes MemoPart
         // identification core rather than inheriting it.
         verification def MemoVerificationCase {
             attribute id : String;
+            attribute uuid : String;
             attribute name : String;
             attribute shortDescription : String;
             attribute description : String;
             attribute rationale : String;
             attribute sourceReference : String;
+            attribute status : ElementStatusKind;
         }
     
         // State foundation. SysML v2 states (state machines and their mode states)
@@ -474,11 +529,13 @@ part def Citation specializes MemoPart
         // attributes (id, sourceReference, priority, sameStepCritical).
         abstract state def MemoState {
             attribute id : String;
+            attribute uuid : String;
             attribute name : String;
             attribute shortDescription : String;
             attribute description : String;
             attribute rationale : String;
             attribute sourceReference : String;
+            attribute status : ElementStatusKind;
         }
     
         part def Citation specializes MemoPart {

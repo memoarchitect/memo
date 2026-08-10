@@ -1,5 +1,6 @@
 package memo_methodology_core {
     private import ScalarValues::*;
+    private import memo_core_relationships::*;   // MemoRelationship
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
@@ -106,5 +107,13 @@ package memo_methodology_core {
         attribute includedLayer : String;
         attribute includedStandard : String;
         attribute templateDir : String;
+    }
+
+    // ── Relations owned by this package ─────────────────────────────
+    // Moved out of memo_core_relationships: their ends are typed against
+    // types declared here, and core must not depend on a domain package.
+    connection def ResolvesToMethodology :> MemoRelationship {
+        end boundModelElement : MemoPart :>> source;
+        end resolvedMethodology : MethodologyDefinition :>> target;
     }
 }

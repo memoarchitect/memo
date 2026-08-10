@@ -152,8 +152,8 @@ package memo_architecture_logical_structure {
     connection def LogicalConnector :> MemoRelationship {
         attribute contentKind : FlowContentKind;
         attribute direction : DirectionKind;
-        end sourceComponent : LogicalComponent;
-        end targetComponent : LogicalComponent;
+        end sourceComponent : LogicalComponent :>> source;
+        end targetComponent : LogicalComponent :>> target;
     }
     // A transfer of a typed item across a connector.
     part def LogicalExchange specializes ArchitectureElement {
@@ -192,15 +192,15 @@ package memo_architecture_logical_structure {
     // Claimed independence between channels (common-cause defense).
     connection def IndependentOf :> MemoRelationship {
         attribute independenceBasis : String;
-        end channel : LogicalComponent;
-        end otherChannel : LogicalComponent;
+        end channel : LogicalComponent :>> source;
+        end otherChannel : LogicalComponent :>> target;
     }
     connection def MonitorsChannel :> MemoRelationship {
-        end monitorChannel : LogicalComponent;
-        end monitoredComponent : LogicalComponent;
+        end monitorChannel : LogicalComponent :>> source;
+        end monitoredComponent : LogicalComponent :>> target;
     }
     connection def ExhibitsMode :> MemoRelationship {
-        end component : LogicalComponent;
-        end mode : LogicalMode;
+        end component : LogicalComponent :>> source;
+        end mode : LogicalMode :>> target;
     }
 }

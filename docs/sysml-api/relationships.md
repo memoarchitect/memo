@@ -9,62 +9,64 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`DecisionRecordedInADR`](architecture/decisions/memo_decisions.md#decisionrecordedinadr) | `connection def` | Typed relationship from `DesignDecision` to `ADRArtifact`. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
+| [`Decides`](architecture/decisions/memo_decisions.md#decides) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
+| [`DecisionRecordedInADR`](architecture/decisions/memo_decisions.md#decisionrecordedinadr) | `connection def` | Typed relationship for decision recorded in adr. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
 
 
 ## `memo::architecture::functional::functions`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`IncludesStep`](architecture/functional/functions/memo_functions.md#includesstep) | `connection def` | Typed relationship from `FunctionalFlow` to `FunctionalFlowStep`. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
-| [`InvolvesFunction`](architecture/functional/functions/memo_functions.md#involvesfunction) | `connection def` | Typed relationship from `FunctionalFlow` to `SystemFunction`. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| [`IncludesStep`](architecture/functional/functions/memo_functions.md#includesstep) | `connection def` | Typed relationship for includes step. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| [`InvolvesFunction`](architecture/functional/functions/memo_functions.md#involvesfunction) | `connection def` | Typed relationship for involves function. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 
 
 ## `memo::architecture::implementation::software::runtime`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ComponentConnects`](architecture/implementation/software/runtime/memo_software_runtime.md#componentconnects) | `connection def` | Typed relationship from `SoftwareComponent` to `SoftwareComponent`. | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
+| [`ComponentConnects`](architecture/implementation/software/runtime/memo_software_runtime.md#componentconnects) | `connection def` | Typed relationship for component connects. | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
 
 
 ## `memo::architecture::implementation::software::structure`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ModuleUses`](architecture/implementation/software/structure/memo_software_structure.md#moduleuses) | `connection def` | Typed relationship from `SoftwareModule` to `SoftwareModule`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
+| [`DependsOnSoup`](architecture/implementation/software/structure/memo_software_structure.md#dependsonsoup) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
+| [`ModuleUses`](architecture/implementation/software/structure/memo_software_structure.md#moduleuses) | `connection def` | Typed relationship for module uses. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
 
 
 ## `memo::architecture::implementation::ui`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ActionInvokesFunction`](architecture/implementation/ui/memo_ui.md#actioninvokesfunction) | `connection def` | Typed relationship from `UIAction` to `SystemFunction`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`ActionInvokesFunction`](architecture/implementation/ui/memo_ui.md#actioninvokesfunction) | `connection def` | Typed relationship for action invokes function. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`CapturesScreen`](architecture/implementation/ui/memo_ui.md#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`ControlImplementedBy`](architecture/implementation/ui/memo_ui.md#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`DataBinding`](architecture/implementation/ui/memo_ui.md#databinding) | `connection def` | Typed relationship from `InteractionElement` to `MemoPart`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`ElementTriggersAction`](architecture/implementation/ui/memo_ui.md#elementtriggersaction) | `connection def` | Typed relationship from `InteractionElement` to `UIAction`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`ErrorAtElement`](architecture/implementation/ui/memo_ui.md#erroratelement) | `connection def` | Typed relationship from `UseError` to `InteractionElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`FlowServesUseCase`](architecture/implementation/ui/memo_ui.md#flowservesusecase) | `connection def` | Typed relationship from `InteractionFlow` to `UseCase`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`DataBinding`](architecture/implementation/ui/memo_ui.md#databinding) | `connection def` | Typed relationship for data binding. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`ElementTriggersAction`](architecture/implementation/ui/memo_ui.md#elementtriggersaction) | `connection def` | Typed relationship for element triggers action. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`ErrorAtElement`](architecture/implementation/ui/memo_ui.md#erroratelement) | `connection def` | Typed relationship for error at element. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`FlowServesUseCase`](architecture/implementation/ui/memo_ui.md#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`NavigatesTo`](architecture/implementation/ui/memo_ui.md#navigatesto) | `connection def` | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`PresentsState`](architecture/implementation/ui/memo_ui.md#presentsstate) | `connection def` | Typed relationship from `UserInterface` to `UIState`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`UITransition`](architecture/implementation/ui/memo_ui.md#uitransition) | `connection def` | Typed relationship from `UIState` to `UIState`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`PresentsState`](architecture/implementation/ui/memo_ui.md#presentsstate) | `connection def` | Typed relationship for presents state. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`UITransition`](architecture/implementation/ui/memo_ui.md#uitransition) | `connection def` | Typed relationship for uitransition. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 
 
 ## `memo::architecture::logical::structure`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ExhibitsMode`](architecture/logical/structure/memo_logical_structure.md#exhibitsmode) | `connection def` | Typed relationship from `LogicalComponent` to `LogicalMode`. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
+| [`ExhibitsMode`](architecture/logical/structure/memo_logical_structure.md#exhibitsmode) | `connection def` | Typed relationship for exhibits mode. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`IndependentOf`](architecture/logical/structure/memo_logical_structure.md#independentof) | `connection def` | Claimed independence between channels (common-cause defense). | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`LogicalConnector`](architecture/logical/structure/memo_logical_structure.md#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
-| [`MonitorsChannel`](architecture/logical/structure/memo_logical_structure.md#monitorschannel) | `connection def` | Typed relationship from `LogicalComponent` to `LogicalComponent`. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
+| [`MonitorsChannel`](architecture/logical/structure/memo_logical_structure.md#monitorschannel) | `connection def` | Typed relationship for monitors channel. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 
 
 ## `memo::architecture::operational::activities`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`AssessesDifficulty`](architecture/operational/activities/memo_activities.md#assessesdifficulty) | `connection def` | Typed relationship from `TaskDifficultyAssessment` to `UserTask`. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
+| [`AssessesDifficulty`](architecture/operational/activities/memo_activities.md#assessesdifficulty) | `connection def` | Typed relationship for assesses difficulty. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
 
 
 ## `memo::architecture::operational::context::stakeholders`
@@ -72,28 +74,28 @@ SysML `connection def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ActsAsActor`](architecture/operational/context/stakeholders/memo_stakeholders.md#actsasactor) | `connection def` | Links the stakeholder to the actor role the same entity plays, if any. | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
-| [`FramesConcern`](architecture/operational/context/stakeholders/memo_stakeholders.md#framesconcern) | `connection def` | Typed relationship from `MemoPart` to `Concern`. | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
-| [`Governs`](architecture/operational/context/stakeholders/memo_stakeholders.md#governs) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
-| [`HasConcern`](architecture/operational/context/stakeholders/memo_stakeholders.md#hasconcern) | `connection def` | Typed relationship from `Stakeholder` to `Concern`. | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
+| [`FramesConcern`](architecture/operational/context/stakeholders/memo_stakeholders.md#framesconcern) | `connection def` | Typed relationship for frames concern. | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
+| [`Governs`](architecture/operational/context/stakeholders/memo_stakeholders.md#governs) | `connection def` | Typed relationship for governs. | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
+| [`HasConcern`](architecture/operational/context/stakeholders/memo_stakeholders.md#hasconcern) | `connection def` | Typed relationship for has concern. | [`architecture/operational/context/stakeholders/memo_stakeholders.sysml`](architecture/operational/context/stakeholders/memo_stakeholders.md) |
 
 
 ## `memo::architecture::operational::context::use_context`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`AppliesInContext`](architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | `connection def` | Typed relationship from `UseContext` to `MemoPart`. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
+| [`AppliesInContext`](architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | `connection def` | Typed relationship for applies in context. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`ConnectsPhysically`](architecture/operational/context/use_context/memo_use_context.md#connectsphysically) | `connection def` | Physical connection between boundary entities (fluid path, mounting). | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`ExchangesWith`](architecture/operational/context/use_context/memo_use_context.md#exchangeswith) | `connection def` | Directional context-level data flow between boundary entities. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`InteractsInContext`](architecture/operational/context/use_context/memo_use_context.md#interactsincontext) | `connection def` | Typed relationship for interacts in context. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`InteractsWith`](architecture/operational/context/use_context/memo_use_context.md#interactswith) | `connection def` | Typed relationship for interacts with. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
-| [`SituatedIn`](architecture/operational/context/use_context/memo_use_context.md#situatedin) | `connection def` | Typed relationship from `UseContext` to `UseEnvironment`. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
+| [`SituatedIn`](architecture/operational/context/use_context/memo_use_context.md#situatedin) | `connection def` | Typed relationship for situated in. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 
 
 ## `memo::architecture::operational::scenarios`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`OccursDuring`](architecture/operational/scenarios/memo_scenarios.md#occursduring) | `connection def` | Typed relationship from `ScenarioOccurrence` to `UseContext`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| [`OccursDuring`](architecture/operational/scenarios/memo_scenarios.md#occursduring) | `connection def` | Typed relationship for occurs during. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 | [`Selects`](architecture/operational/scenarios/memo_scenarios.md#selects) | `connection def` | Typed relationship for selects. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 
@@ -101,46 +103,100 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`Extends`](architecture/operational/use_cases/memo_use_cases.md#extends) | `connection def` | Typed relationship from `UseCase` to `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
+| [`Extends`](architecture/operational/use_cases/memo_use_cases.md#extends) | `connection def` | Typed relationship for extends. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 | [`Includes`](architecture/operational/use_cases/memo_use_cases.md#includes) | `connection def` | UML use-case relationships. Includes establishes a decomposition level; extends remains a cross-cutting relationship and is always presented. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| [`Initiates`](architecture/operational/use_cases/memo_use_cases.md#initiates) | `connection def` | Typed relationship from `User` to `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| [`Motivates`](architecture/operational/use_cases/memo_use_cases.md#motivates) | `connection def` | Typed relationship from `Need` to `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| [`ParticipatesIn`](architecture/operational/use_cases/memo_use_cases.md#participatesin) | `connection def` | Typed relationship from `Actor` to `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
+| [`Initiates`](architecture/operational/use_cases/memo_use_cases.md#initiates) | `connection def` | Typed relationship for initiates. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
+| [`Motivates`](architecture/operational/use_cases/memo_use_cases.md#motivates) | `connection def` | Typed relationship for motivates. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
+| [`ParticipatesIn`](architecture/operational/use_cases/memo_use_cases.md#participatesin) | `connection def` | Typed relationship for participates in. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 
 
 ## `memo::architecture::operational::workflows`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`RequiresResource`](architecture/operational/workflows/memo_workflows.md#requiresresource) | `connection def` | Typed relationship from `OperationalWorkflow` to `WorkflowResource`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`RequiresResource`](architecture/operational/workflows/memo_workflows.md#requiresresource) | `connection def` | Typed relationship for requires resource. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`Supports`](architecture/operational/workflows/memo_workflows.md#supports) | `connection def` | Typed relationship for supports. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`Transforms`](architecture/operational/workflows/memo_workflows.md#transforms) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`Transforms`](architecture/operational/workflows/memo_workflows.md#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 
 ## `memo::architecture::realization::deployment`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`BuildsInto`](architecture/realization/deployment/memo_deployment.md#buildsinto) | `connection def` | Typed relationship from `SoftwareModule` to `DeploymentUnit`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
-| [`DeploysTo`](architecture/realization/deployment/memo_deployment.md#deploysto) | `connection def` | Typed relationship from `DeploymentUnit` to `ProcessingNode`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
+| [`BuildsInto`](architecture/realization/deployment/memo_deployment.md#buildsinto) | `connection def` | Typed relationship for builds into. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
+| [`DeploysTo`](architecture/realization/deployment/memo_deployment.md#deploysto) | `connection def` | Typed relationship for deploys to. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`FlowComprisesSpec`](architecture/realization/deployment/memo_deployment.md#flowcomprisesspec) | `connection def` | The end-to-end flow is realized by an ordered flow specification, one segment per traversed component boundary (AADL flow-spec → end-to-end). | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`FlowTraversesBinding`](architecture/realization/deployment/memo_deployment.md#flowtraversesbinding) | `connection def` | The flow traverses a software→hardware binding; latency accrues here. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
-| [`ProvidesEnvironment`](architecture/realization/deployment/memo_deployment.md#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
+| [`ProvidesEnvironment`](architecture/realization/deployment/memo_deployment.md#providesenvironment) | `connection def` | Typed relationship for provides environment. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
+
+
+## `memo::artifacts::configuration_management`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`Changes`](artifacts/configuration_management/memo_configuration_management.md#changes) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`artifacts/configuration_management/memo_configuration_management.sysml`](artifacts/configuration_management/memo_configuration_management.md) |
+
+
+## `memo::artifacts::standards`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`ConformsTo`](artifacts/standards/memo_artifacts_standards_traceability.md#conformsto) | `connection def` | Relationships | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
+| [`TracesToDocument`](artifacts/standards/memo_artifacts_standards_traceability.md#tracestodocument) | `connection def` | Typed relationship for traces to document. | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
+
+
+## `memo::assurance::cybersecurity`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`Exploits`](assurance/cybersecurity/memo_cybersecurity.md#exploits) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ImpactsSafety`](assurance/cybersecurity/memo_cybersecurity.md#impactssafety) | `connection def` | Typed relationship for impacts safety. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`RealizedByScenario`](assurance/cybersecurity/memo_cybersecurity.md#realizedbyscenario) | `connection def` | Typed relationship for realized by scenario. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 
 
 ## `memo::assurance::human_factors`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`CommitsUseError`](assurance/human_factors/memo_human_factors.md#commitsuseerror) | `connection def` | Typed relationship from `UserTask` to `UseError`. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
-| [`EvaluatesTask`](assurance/human_factors/memo_human_factors.md#evaluatestask) | `connection def` | Typed relationship from `MemoEvidence` to `UserTask`. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
+| [`CommitsUseError`](assurance/human_factors/memo_human_factors.md#commitsuseerror) | `connection def` | Typed relationship for commits use error. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
+| [`EvaluatesTask`](assurance/human_factors/memo_human_factors.md#evaluatestask) | `connection def` | Typed relationship for evaluates task. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
+| [`TestedByUsability`](assurance/human_factors/memo_human_factors.md#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
+
+
+## `memo::assurance::safety_risk`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`AssessedAgainst`](assurance/safety_risk/memo_risk.md#assessedagainst) | `connection def` | Typed relationship for assessed against. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`Mitigates`](assurance/safety_risk/memo_risk.md#mitigates) | `connection def` | Typed relationship for mitigates. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`TracesRisk`](assurance/safety_risk/memo_risk.md#tracesrisk) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+
+
+## `memo::assurance::safety_risk::analysis`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`Causes`](assurance/safety_risk/analysis/memo_fmea.md#causes) | `connection def` | Typed relationship for causes. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`ContainsEvent`](assurance/safety_risk/analysis/memo_fmea.md#containsevent) | `connection def` | Typed relationship for contains event. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`DetectedBy`](assurance/safety_risk/analysis/memo_fmea.md#detectedby) | `connection def` | Typed relationship for detected by. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`HasFailureMode`](assurance/safety_risk/analysis/memo_fmea.md#hasfailuremode) | `connection def` | Typed relationship for has failure mode. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`IdentifiesHazard`](assurance/safety_risk/analysis/memo_fmea.md#identifieshazard) | `connection def` | Typed relationship for identifies hazard. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`InputToGate`](assurance/safety_risk/analysis/memo_fmea.md#inputtogate) | `connection def` | Typed relationship for input to gate. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`ProducesEvent`](assurance/safety_risk/analysis/memo_fmea.md#producesevent) | `connection def` | Typed relationship for produces event. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+
+
+## `memo::assurance::safety_risk::postmarket_surveillance`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`FeedsBackTo`](assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.md#feedsbackto) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.sysml`](assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.md) |
 
 
 ## `memo::assurance::verification_validation`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ExecutesScenario`](assurance/verification_validation/memo_assurance.md#executesscenario) | `connection def` | Typed relationship from `VerificationCase` to `MemoScenario`. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
+| [`ExecutesScenario`](assurance/verification_validation/memo_assurance.md#executesscenario) | `connection def` | Typed relationship for executes scenario. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 
 
 ## `memo::core::annotations`
@@ -156,43 +212,37 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`AllocatedTo`](core/relationships/memo_relationships.md#allocatedto) | `connection def` | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`AnalyzedBy`](core/relationships/memo_relationships.md#analyzedby) | `connection def` | Typed relationship from `ArchitectureElement` to `AnalysisArtifact`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`AssessedAgainst`](core/relationships/memo_relationships.md#assessedagainst) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`BindsToInterface`](core/relationships/memo_relationships.md#bindstointerface) | `connection def` | Typed relationship from `InterfaceElement` to `InterfaceElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Causes`](core/relationships/memo_relationships.md#causes) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Changes`](core/relationships/memo_relationships.md#changes) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Composes`](core/relationships/memo_relationships.md#composes) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ContainsEvent`](core/relationships/memo_relationships.md#containsevent) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`CrossesTrustBoundary`](core/relationships/memo_relationships.md#crossestrustboundary) | `connection def` | Typed relationship from `InterfaceElement` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Decides`](core/relationships/memo_relationships.md#decides) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`DependsOnSoup`](core/relationships/memo_relationships.md#dependsonsoup) | `connection def` | Typed relationship from `ArchitectureElement` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`DerivesCyberRequirement`](core/relationships/memo_relationships.md#derivescyberrequirement) | `connection def` | Typed relationship from `RequirementDriver` to `VerifiableElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`AllocatedTo`](core/relationships/memo_relationships.md#allocatedto) | `connection def` | Typed relationship for allocated to. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`AnalyzedBy`](core/relationships/memo_relationships.md#analyzedby) | `connection def` | Typed relationship for analyzed by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`BindsToInterface`](core/relationships/memo_relationships.md#bindstointerface) | `connection def` | Typed relationship for binds to interface. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`Composes`](core/relationships/memo_relationships.md#composes) | `connection def` | Typed relationship for composes. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`CrossesTrustBoundary`](core/relationships/memo_relationships.md#crossestrustboundary) | `connection def` | Typed relationship for crosses trust boundary. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`DerivesCyberRequirement`](core/relationships/memo_relationships.md#derivescyberrequirement) | `connection def` | Typed relationship for derives cyber requirement. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`DerivesFrom`](core/relationships/memo_relationships.md#derivesfrom) | `connection def` | Typed relationship for derives from. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`DetectedBy`](core/relationships/memo_relationships.md#detectedby) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Enables`](core/relationships/memo_relationships.md#enables) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Exploits`](core/relationships/memo_relationships.md#exploits) | `connection def` | Typed relationship from `RequirementDriver` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`FeedsBackTo`](core/relationships/memo_relationships.md#feedsbackto) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`HasFailureMode`](core/relationships/memo_relationships.md#hasfailuremode) | `connection def` | Typed relationship from `ArchitectureElement` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`HostedBy`](core/relationships/memo_relationships.md#hostedby) | `connection def` | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`IdentifiesHazard`](core/relationships/memo_relationships.md#identifieshazard) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ImpactsSafety`](core/relationships/memo_relationships.md#impactssafety) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`IncludedIn`](core/relationships/memo_relationships.md#includedin) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`InputToGate`](core/relationships/memo_relationships.md#inputtogate) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`Enables`](core/relationships/memo_relationships.md#enables) | `connection def` | Typed relationship for enables. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`HostedBy`](core/relationships/memo_relationships.md#hostedby) | `connection def` | Typed relationship for hosted by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`MemoLink`](core/relationships/memo_relationships.md#memolink) | `connection def` | The general relation that can join any two model elements, whatever their metaclass. Most specific relations type their ends against a foundation (MemoPart, VerifiableElement, …).… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`MemoRelationship`](core/relationships/memo_relationships.md#memorelationship) | `connection def` | All MEMO relations are native SysML v2 `connection def`s (each is a Connection/Association), specializing the MemoRelationship base. The relationship name is the verb; the RelationshipRegistry derives the navigable type as camelCase(name) and navigation is bidirectional.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Mitigates`](core/relationships/memo_relationships.md#mitigates) | `connection def` | Typed relationship for mitigates. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Performs`](core/relationships/memo_relationships.md#performs) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Precedes`](core/relationships/memo_relationships.md#precedes) | `connection def` | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ProducesEvent`](core/relationships/memo_relationships.md#producesevent) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ProducesEvidence`](core/relationships/memo_relationships.md#producesevidence) | `connection def` | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`RealizedByScenario`](core/relationships/memo_relationships.md#realizedbyscenario) | `connection def` | Typed relationship from `RequirementDriver` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`MemoRelationship`](core/relationships/memo_relationships.md#memorelationship) | `connection def` | Typed relationship for memo relationship. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`Performs`](core/relationships/memo_relationships.md#performs) | `connection def` | Typed relationship for performs. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`Precedes`](core/relationships/memo_relationships.md#precedes) | `connection def` | Typed relationship for precedes. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`ProducesEvidence`](core/relationships/memo_relationships.md#producesevidence) | `connection def` | Typed relationship for produces evidence. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Realizes`](core/relationships/memo_relationships.md#realizes) | `connection def` | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ResolvesToMethodology`](core/relationships/memo_relationships.md#resolvestomethodology) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`SatisfiedBy`](core/relationships/memo_relationships.md#satisfiedby) | `connection def` | Typed relationship for satisfied by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`TestedByUsability`](core/relationships/memo_relationships.md#testedbyusability) | `connection def` | Typed relationship from `MemoPart` to `VerifiableElement`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ThreatenedBy`](core/relationships/memo_relationships.md#threatenedby) | `connection def` | Typed relationship from `ArchitectureElement` to `RequirementDriver`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`TracesRisk`](core/relationships/memo_relationships.md#tracesrisk) | `connection def` | ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`ThreatenedBy`](core/relationships/memo_relationships.md#threatenedby) | `connection def` | Typed relationship for threatened by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Validates`](core/relationships/memo_relationships.md#validates) | `connection def` | Typed relationship for validates. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`VerifiedBy`](core/relationships/memo_relationships.md#verifiedby) | `connection def` | Typed relationship from `MemoPart` to `MemoVerificationCase`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`VerifiedBy`](core/relationships/memo_relationships.md#verifiedby) | `connection def` | Typed relationship for verified by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+
+
+## `memo::methodology::core`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`ResolvesToMethodology`](methodology/core/memo_core.md#resolvestomethodology) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
+
+
+## `memo::viewpoints::definitions`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`IncludedIn`](viewpoints/definitions/memo_viewpoint_definitions.md#includedin) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`viewpoints/definitions/memo_viewpoint_definitions.sysml`](viewpoints/definitions/memo_viewpoint_definitions.md) |
 

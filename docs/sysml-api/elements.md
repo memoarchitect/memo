@@ -296,6 +296,14 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`RiskManagementFile`](artifacts/documents/risk_management/memo_risk_management.md#riskmanagementfile) | `part def` | Risk management file definition specializing `ModelOwnedArtifact`. | [`artifacts/documents/risk_management/memo_risk_management.sysml`](artifacts/documents/risk_management/memo_risk_management.md) |
 
 
+## `memo::artifacts::standards`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`RegulatoryStandard`](artifacts/standards/memo_artifacts_standards_traceability.md#regulatorystandard) | `item def` | Standards and clauses | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
+| [`StandardClause`](artifacts/standards/memo_artifacts_standards_traceability.md#standardclause) | `item def` | Standard clause definition specializing `MemoPart`. | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
+
+
 ## `memo::assurance::cybersecurity`
 
 | Name | SysML kind | Description | Source |
@@ -310,7 +318,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`Threat`](assurance/cybersecurity/memo_cybersecurity.md#threat) | `item def` | Threat definition specializing `RiskDriver`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`ThreatScenario`](assurance/cybersecurity/memo_cybersecurity.md#threatscenario) | `action def` | A scenario specialization: an attack path through the system, classified by the shared scenario dimensions with purpose `cybersecurity`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`TrustBoundary`](assurance/cybersecurity/memo_cybersecurity.md#trustboundary) | `item def` | Trust boundary definition specializing `InterfaceElement`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
-| [`Vulnerability`](assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | `item def` | Vulnerability definition specializing `MemoPart`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`Vulnerability`](assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | `item def` | Vulnerability definition specializing `RiskItem`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 
 
 ## `memo::assurance::human_factors`
@@ -330,7 +338,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`IntendedUse`](assurance/requirements/memo_requirements.md#intendeduse) | `part def` | ISO 14971 risk-analysis inputs. These are model elements so hazards, scenarios, requirements, and DHF records can trace to the exact use definition or foreseeable misuse that motivated them. | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
 | [`NotificationSpec`](assurance/requirements/memo_requirements.md#notificationspec) | `part def` | One row of a notification/alarm action table (e.g. CriSys GPCA REQ 59): a named notification, its priority, and the actions the system must take. | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
 | [`ReasonablyForeseeableMisuse`](assurance/requirements/memo_requirements.md#reasonablyforeseeablemisuse) | `part def` | Reasonably foreseeable misuse definition specializing `DocumentedElement`. | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
-| [`Requirement`](assurance/requirements/memo_requirements.md#requirement) | `requirement def` | Requirement definition specializing `VerifiableElement`. | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
+| [`Requirement`](assurance/requirements/memo_requirements.md#requirement) | `requirement def` | Requirement definition specializing `MemoRequirement`. | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
 | [`RiskDriver`](assurance/requirements/memo_requirements.md#riskdriver) | `part def` | Risk driver definition specializing `RequirementDriver`. | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
 | [`SystemConstant`](assurance/requirements/memo_requirements.md#systemconstant) | `part def` | Named constant defined by a source requirements document (e.g. CriSys GPCA App. A.4) and referenced from requirement statements. | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
 
@@ -339,7 +347,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`Need`](assurance/requirements/needs/memo_needs.md#need) | `requirement def` | Need definition specializing `MemoNeed,`. | [`assurance/requirements/needs/memo_needs.sysml`](assurance/requirements/needs/memo_needs.md) |
+| [`Need`](assurance/requirements/needs/memo_needs.md#need) | `requirement def` | Need definition specializing `MemoNeed`. | [`assurance/requirements/needs/memo_needs.sysml`](assurance/requirements/needs/memo_needs.md) |
 
 
 ## `memo::assurance::safety_risk`
@@ -348,17 +356,18 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | --- | --- | --- | --- |
 | [`Benefit`](assurance/safety_risk/memo_risk.md#benefit) | `part def` | Benefit definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`DesignControlRiskRow`](assurance/safety_risk/memo_risk.md#designcontrolriskrow) | `part def` | Design control risk row definition specializing `Risk`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
-| [`Harm`](assurance/safety_risk/memo_risk.md#harm) | `item def` | Harm definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
-| [`Hazard`](assurance/safety_risk/memo_risk.md#hazard) | `item def` | Hazard definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
-| [`HazardCause`](assurance/safety_risk/memo_risk.md#hazardcause) | `item def` | Hazard cause definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
-| [`HazardousSituation`](assurance/safety_risk/memo_risk.md#hazardoussituation) | `item def` | Hazardous situation definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`Harm`](assurance/safety_risk/memo_risk.md#harm) | `item def` | Harm definition specializing `RiskItem`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`Hazard`](assurance/safety_risk/memo_risk.md#hazard) | `item def` | Hazard definition specializing `RiskItem`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`HazardCause`](assurance/safety_risk/memo_risk.md#hazardcause) | `item def` | Hazard cause definition specializing `RiskItem`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`HazardousSituation`](assurance/safety_risk/memo_risk.md#hazardoussituation) | `item def` | Hazardous situation definition specializing `RiskItem`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`OverallResidualRiskEvaluation`](assurance/safety_risk/memo_risk.md#overallresidualriskevaluation) | `item def` | Overall residual risk evaluation definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`ResidualRisk`](assurance/safety_risk/memo_risk.md#residualrisk) | `part def` | Residual risk definition specializing `Risk`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`Risk`](assurance/safety_risk/memo_risk.md#risk) | `part def` | Risk definition specializing `RiskDriver`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`RiskControlMeasure`](assurance/safety_risk/memo_risk.md#riskcontrolmeasure) | `item def` | Risk control measure definition specializing `VerifiableElement`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`RiskItem`](assurance/safety_risk/memo_risk.md#riskitem) | `item def` | Risk item definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`RiskMatrix`](assurance/safety_risk/memo_risk.md#riskmatrix) | `part def` | Risk matrix definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`SafetyRelatedCharacteristic`](assurance/safety_risk/memo_risk.md#safetyrelatedcharacteristic) | `part def` | A device characteristic whose implementation, failure, or misuse can affect safety. This is the modelable output of ISO 14971 §5.3. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
-| [`SequenceOfEvents`](assurance/safety_risk/memo_risk.md#sequenceofevents) | `item def` | Sequence of events definition specializing `MemoPart`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`SequenceOfEvents`](assurance/safety_risk/memo_risk.md#sequenceofevents) | `item def` | Sequence of events definition specializing `RiskItem`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 
 
 ## `memo::assurance::safety_risk::analysis`
@@ -366,18 +375,18 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`DetectionMethod`](assurance/safety_risk/analysis/memo_fmea.md#detectionmethod) | `item def` | Detection method definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
-| [`FailureCause`](assurance/safety_risk/analysis/memo_fmea.md#failurecause) | `item def` | Failure cause definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
-| [`FailureEffect`](assurance/safety_risk/analysis/memo_fmea.md#failureeffect) | `item def` | Failure effect definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
-| [`FailureMode`](assurance/safety_risk/analysis/memo_fmea.md#failuremode) | `item def` | Failure mode definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`FailureCause`](assurance/safety_risk/analysis/memo_fmea.md#failurecause) | `item def` | Failure cause definition specializing `RiskItem`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`FailureEffect`](assurance/safety_risk/analysis/memo_fmea.md#failureeffect) | `item def` | Failure effect definition specializing `RiskItem`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`FailureMode`](assurance/safety_risk/analysis/memo_fmea.md#failuremode) | `item def` | Failure mode definition specializing `RiskItem`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 | [`FaultTree`](assurance/safety_risk/analysis/memo_fmea.md#faulttree) | `item def` | Fault tree definition specializing `AnalysisArtifact`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
-| [`FaultTreeEvent`](assurance/safety_risk/analysis/memo_fmea.md#faulttreeevent) | `item def` | Fault tree event definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`FaultTreeEvent`](assurance/safety_risk/analysis/memo_fmea.md#faulttreeevent) | `item def` | Fault tree event definition specializing `RiskItem`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 | [`FaultTreeGate`](assurance/safety_risk/analysis/memo_fmea.md#faulttreegate) | `item def` | Fault tree gate definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 | [`FMEAAction`](assurance/safety_risk/analysis/memo_fmea.md#fmeaaction) | `part def` | Fmeaaction definition specializing `VerifiableElement`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 | [`FMEAWorksheet`](assurance/safety_risk/analysis/memo_fmea.md#fmeaworksheet) | `item def` | Fmeaworksheet definition specializing `AnalysisArtifact`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
-| [`HAZOPDeviation`](assurance/safety_risk/analysis/memo_fmea.md#hazopdeviation) | `item def` | Hazopdeviation definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`HAZOPDeviation`](assurance/safety_risk/analysis/memo_fmea.md#hazopdeviation) | `item def` | Hazopdeviation definition specializing `RiskItem`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 | [`HAZOPNode`](assurance/safety_risk/analysis/memo_fmea.md#hazopnode) | `item def` | Hazopnode definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 | [`HAZOPStudy`](assurance/safety_risk/analysis/memo_fmea.md#hazopstudy) | `item def` | Hazopstudy definition specializing `AnalysisArtifact`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
-| [`MinimalCutSet`](assurance/safety_risk/analysis/memo_fmea.md#minimalcutset) | `item def` | Minimal cut set definition specializing `MemoPart`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
+| [`MinimalCutSet`](assurance/safety_risk/analysis/memo_fmea.md#minimalcutset) | `item def` | Minimal cut set definition specializing `RiskItem`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 
 
 ## `memo::assurance::safety_risk::postmarket_surveillance`
@@ -428,10 +437,11 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`MemoEvidence`](core/common/memo_common.md#memoevidence) | `part def` | Memo evidence definition specializing `MemoPart`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoExchangeItem`](core/common/memo_common.md#memoexchangeitem) | `item def` | Exchange-content foundation: everything that flows — information, command, material, energy — is an item, not a part. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoInterface`](core/common/memo_common.md#memointerface) | `interface def` | Interaction-contract foundation for interface definitions between ports. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
-| [`MemoNeed`](core/common/memo_common.md#memoneed) | `requirement def` | Memo need definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+| [`MemoNeed`](core/common/memo_common.md#memoneed) | `requirement def` | Memo need definition specializing `MemoRequirementElement`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoPart`](core/common/memo_common.md#memopart) | `part def` | Every structural MEMO concept specializes MemoPart. Identity and traceability are attributes of this one root — MEMO has no separate IdentifiedElement/TraceableElement classes, because *everything* is identifiable and traceable by definition; that is not a type a modeler picks… | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoPort`](core/common/memo_common.md#memoport) | `port def` | Boundary feature foundation for typed ports. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
-| [`MemoRequirement`](core/common/memo_common.md#memorequirement) | `requirement def` | Memo requirement definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+| [`MemoRequirement`](core/common/memo_common.md#memorequirement) | `requirement def` | Memo requirement definition specializing `MemoRequirementElement`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+| [`MemoRequirementElement`](core/common/memo_common.md#memorequirementelement) | `requirement def` | Memo requirement element definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoState`](core/common/memo_common.md#memostate) | `state def` | Memo state definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoVerificationCase`](core/common/memo_common.md#memoverificationcase) | `verification def` | Memo verification case definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`RequirementDriver`](core/common/memo_common.md#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |

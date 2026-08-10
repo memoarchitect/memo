@@ -34,7 +34,8 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`DesignDecision`](#designdecision) | `part def` | Design decision definition specializing `MemoPart`. | `MemoPart` |
-| [`DecisionRecordedInADR`](#decisionrecordedinadr) | `connection def` | Typed relationship from `DesignDecision` to `ADRArtifact`. | `MemoRelationship` |
+| [`DecisionRecordedInADR`](#decisionrecordedinadr) | `connection def` | Typed relationship for decision recorded in adr. | `MemoRelationship` |
+| [`Decides`](#decides) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## DesignDecision
 
@@ -59,7 +60,22 @@ connection def DecisionRecordedInADR :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `DesignDecision` to `ADRArtifact`. |
+| Description | Typed relationship for decision recorded in adr. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_decisions` |
+
+
+## Decides
+
+```sysml
+connection def Decides :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -86,8 +102,16 @@ connection def DecisionRecordedInADR :> MemoRelationship
         }
     
         connection def DecisionRecordedInADR :> MemoRelationship {
-            end decision : DesignDecision;
-            end adr : ADRArtifact;
+            end decision : DesignDecision :>> source;
+            end adr : ADRArtifact :>> target;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        connection def Decides :> MemoRelationship {
+            end decision : DesignDecision :>> source;
+            end affectedElement : MemoPart :>> target;
         }
     }
     

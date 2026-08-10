@@ -47,32 +47,32 @@ package memo_architecture_operational_context_use_context {
         attribute contextSide : ContextSideKind;
         // The verb, as it should read on the edge ("Directs procedure").
         attribute interactionLabel : String[0..1];
-        end contextParticipant : MemoPart;
+        end contextParticipant : ArchitectureElement :>> source;
         // Untyped: the system of interest may be a part or an operational activity.
-        end systemOfInterest;
+        end systemOfInterest : ArchitectureElement :>> target;
     }
 
     connection def InteractsWith :> MemoRelationship {
-        end contextParticipant : Actor;
+        end contextParticipant : Actor :>> source;
         // Untyped so operational activities (action def) can be targets as well as parts.
         end target;
     }
     // Directional context-level data flow between boundary entities.
     connection def ExchangesWith :> MemoRelationship {
-        end source : MemoPart;
-        end target : MemoPart;
+        end source : ArchitectureElement;
+        end target : ArchitectureElement;
     }
     // Physical connection between boundary entities (fluid path, mounting).
     connection def ConnectsPhysically :> MemoRelationship {
-        end source : MemoPart;
-        end target : MemoPart;
+        end source : ArchitectureElement;
+        end target : ArchitectureElement;
     }
     connection def AppliesInContext :> MemoRelationship {
-        end useContext : UseContext;
-        end subjectElement : MemoPart;
+        end useContext : UseContext :>> source;
+        end subjectElement : MemoPart :>> target;
     }
     connection def SituatedIn :> MemoRelationship {
-        end useContext : UseContext;
-        end environment : UseEnvironment;
+        end useContext : UseContext :>> source;
+        end environment : UseEnvironment :>> target;
     }
 }
