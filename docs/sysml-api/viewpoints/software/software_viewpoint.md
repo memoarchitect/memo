@@ -59,6 +59,8 @@
             attribute :>> presentationKind = (PresentationKind::blockDiagram);
             attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::reliability);
             attribute :>> includedLayers = ("software_structure", "interfaces");
+            attribute :>> explorerLane = "architecture";
+            attribute :>> explorerOrder = 4;
             attribute :>> allowedElementKinds = ("SoftwareSystem", "SoftwareModule", "SoftwareModule[moduleKind=soup]", "Interface");
             attribute :>> userExtensible = true;
         }

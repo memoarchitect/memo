@@ -6,7 +6,7 @@
 | | |
 | --- | --- |
 | Public namespace | `memo` |
-| Declared package | `memo`, `memo_namespace_activities`, `memo_namespace_assurance`, `requirements`, `safety_risk`, `memo_namespace_assurance_human_factors`, `memo_namespace_context`, `memo_namespace_context_actors`, `memo_namespace_context_stakeholders`, `memo_namespace_context_use_context`, `memo_namespace_assurance_requirements_needs`, `memo_namespace_scenarios`, `memo_namespace_use_cases`, `memo_namespace_workflows`, `memo_namespace_architecture_deployment`, `memo_namespace_architecture_software_runtime`, `memo_namespace_architecture_ui`, `memo_namespace_architecture_hardware_common`, `memo_namespace_architecture_hardware_electrical`, `memo_namespace_architecture_hardware_mechanical`, `memo_namespace_architecture_hardware_fluidic`, `memo_namespace_architecture_hardware_optical`, `memo_namespace_architecture_hardware_sensing`, `memo_assurance_safety_compatibility`, `memo_namespace_architecture`, `operational`, `functional`, `logical`, `implementation`, `software`, `hardware`, `realization`, `memo_namespace_artifacts`, `memo_namespace_core`, `memo_namespace_methodology`, `memo_namespace_rules`, `memo_namespace_viewpoints`, `memo_namespace_assurance_safety_risk_analysis`, `memo_namespace_assurance_verification_validation`, `memo_namespace_architecture_behavior`, `memo_namespace_architecture_constraints`, `memo_namespace_assurance_cybersecurity`, `memo_namespace_architecture_decisions`, `memo_namespace_architecture_functions`, `memo_namespace_architecture_hardware_structure`, `memo_namespace_architecture_interfaces`, `memo_namespace_architecture_logical_structure`, `memo_namespace_architecture_operational`, `memo_namespace_architecture_physical`, `memo_namespace_architecture_software_structure`, `memo_namespace_artifacts_definitions`, `memo_namespace_artifacts_core`, `memo_namespace_artifacts_configuration_management`, `memo_namespace_artifacts_documents`, `memo_namespace_artifacts_documents_risk_management`, `memo_namespace_assurance_verification_validation_clinical_evaluation`, `memo_namespace_assurance_safety_risk_postmarket_surveillance`, `memo_namespace_core_annotations`, `memo_namespace_core_common`, `memo_namespace_core_consistency_rules`, `memo_namespace_core_dimensions`, `memo_namespace_core_enumerations`, `memo_namespace_core_methodology_scope`, `memo_namespace_core_relationships`, `memo_namespace_core_semantics`, `memo_namespace_core_terminology`, `memo_namespace_core_stdlib`, `memo_namespace_methodology_archetypes`, `memo_namespace_methodology_core`, `memo_namespace_methodology_gates`, `memo_namespace_methodology_patterns`, `memo_namespace_methodology_profiles`, `memo_namespace_methodology_rules`, `memo_namespace_methodology_viewpoints`, `memo_namespace_methodology_workflow`, `memo_namespace_rules_closure`, `memo_namespace_rules_coverage`, `memo_namespace_rules_crosslayer`, `memo_namespace_rules_lifecycle`, `memo_namespace_rules_ontology`, `memo_namespace_rules_quantitative`, `memo_namespace_viewpoints_catalog`, `memo_namespace_viewpoints_clinical`, `views`, `memo_namespace_viewpoints_context`, `views`, `memo_namespace_viewpoints_cybersecurity`, `views`, `memo_namespace_viewpoints_definitions`, `memo_namespace_viewpoints_functional`, `views`, `memo_namespace_viewpoints_logical`, `views`, `memo_namespace_viewpoints_operational`, `views`, `memo_namespace_viewpoints_physical`, `views`, `memo_namespace_viewpoints_requirements`, `views`, `memo_namespace_viewpoints_risk`, `views`, `memo_namespace_viewpoints_software`, `views`, `memo_namespace_viewpoints_usability`, `views`, `memo_namespace_viewpoints_ui_layout`, `views`, `memo_namespace_viewpoints_verification`, `views`, `memo_namespace_core_stdlib_collections`, `memo_namespace_core_stdlib_functions`, `memo_namespace_core_stdlib_scalars`, `memo_namespace_core_stdlib_time`, `memo_namespace_viewpoints_clinical_clinical_evidence_view`, `memo_namespace_viewpoints_context_system_context_view`, `memo_namespace_viewpoints_cybersecurity_cybersecurity_assessment_view`, `memo_namespace_viewpoints_cybersecurity_threat_model_view`, `memo_namespace_viewpoints_functional_function_allocation_view`, `memo_namespace_viewpoints_functional_system_functional_tree_view`, `memo_namespace_viewpoints_logical_logical_architecture_view`, `memo_namespace_viewpoints_operational_use_case_view`, `memo_namespace_viewpoints_physical_network_topology_view`, `memo_namespace_viewpoints_physical_physical_bom_view`, `memo_namespace_viewpoints_requirements_requirements_traceability_view`, `memo_namespace_viewpoints_risk_risk_chain_view`, `memo_namespace_viewpoints_software_software_architecture_view`, `memo_namespace_viewpoints_usability_usability_engineering_view`, `memo_namespace_viewpoints_ui_layout_ui_layout_viewpoint`, `memo_namespace_viewpoints_ui_layout_screen_layout_view`, `memo_namespace_viewpoints_verification_verification_coverage_view` |
+| Declared package | `memo`, `memo_namespace_activities`, `memo_namespace_assurance`, `requirements`, `safety_risk`, `memo_namespace_assurance_human_factors`, `memo_namespace_context`, `memo_namespace_context_actors`, `memo_namespace_context_stakeholders`, `memo_namespace_context_use_context`, `memo_namespace_assurance_requirements_needs`, `memo_namespace_scenarios`, `memo_namespace_use_cases`, `memo_namespace_workflows`, `memo_namespace_architecture_deployment`, `memo_namespace_architecture_software_runtime`, `memo_namespace_architecture_ui`, `memo_namespace_architecture_hardware_common`, `memo_namespace_architecture_hardware_electrical`, `memo_namespace_architecture_hardware_mechanical`, `memo_namespace_architecture_hardware_fluidic`, `memo_namespace_architecture_hardware_optical`, `memo_namespace_architecture_hardware_sensing`, `memo_assurance_safety_compatibility`, `memo_namespace_architecture`, `operational`, `functional`, `logical`, `implementation`, `software`, `hardware`, `realization`, `memo_namespace_artifacts`, `memo_namespace_core`, `memo_namespace_methodology`, `memo_namespace_rules`, `memo_namespace_viewpoints`, `memo_namespace_assurance_safety_risk_analysis`, `memo_namespace_assurance_verification_validation`, `memo_namespace_architecture_behavior`, `memo_namespace_architecture_constraints`, `memo_namespace_assurance_cybersecurity`, `memo_namespace_architecture_decisions`, `memo_namespace_architecture_functions`, `memo_namespace_architecture_hardware_structure`, `memo_namespace_architecture_interfaces`, `memo_namespace_architecture_logical_structure`, `memo_namespace_architecture_operational`, `memo_namespace_architecture_physical`, `memo_namespace_architecture_software_structure`, `memo_namespace_artifacts_definitions`, `memo_namespace_artifacts_core`, `memo_namespace_artifacts_configuration_management`, `memo_namespace_artifacts_documents`, `memo_namespace_artifacts_documents_risk_management`, `memo_namespace_artifacts_standards`, `memo_namespace_assurance_verification_validation_clinical_evaluation`, `memo_namespace_assurance_safety_risk_postmarket_surveillance`, `memo_namespace_core_annotations`, `memo_namespace_core_common`, `memo_namespace_core_consistency_rules`, `memo_namespace_core_dimensions`, `memo_namespace_core_enumerations`, `memo_namespace_core_methodology_scope`, `memo_namespace_core_relationships`, `memo_namespace_core_semantics`, `memo_namespace_core_terminology`, `memo_namespace_core_stdlib`, `memo_namespace_methodology_archetypes`, `memo_namespace_methodology_core`, `memo_namespace_methodology_gates`, `memo_namespace_methodology_patterns`, `memo_namespace_methodology_profiles`, `memo_namespace_methodology_rules`, `memo_namespace_methodology_viewpoints`, `memo_namespace_methodology_workflow`, `memo_namespace_rules_closure`, `memo_namespace_rules_coverage`, `memo_namespace_rules_crosslayer`, `memo_namespace_rules_lifecycle`, `memo_namespace_rules_ontology`, `memo_namespace_rules_quantitative`, `memo_namespace_viewpoints_catalog`, `memo_namespace_viewpoints_clinical`, `views`, `memo_namespace_viewpoints_context`, `views`, `memo_namespace_viewpoints_cybersecurity`, `views`, `memo_namespace_viewpoints_definitions`, `memo_namespace_viewpoints_functional`, `views`, `memo_namespace_viewpoints_logical`, `views`, `memo_namespace_viewpoints_operational`, `views`, `memo_namespace_viewpoints_physical`, `views`, `memo_namespace_viewpoints_requirements`, `views`, `memo_namespace_viewpoints_risk`, `views`, `memo_namespace_viewpoints_software`, `views`, `memo_namespace_viewpoints_usability`, `views`, `memo_namespace_viewpoints_ui_layout`, `views`, `memo_namespace_viewpoints_verification`, `views`, `memo_namespace_core_stdlib_collections`, `memo_namespace_core_stdlib_functions`, `memo_namespace_core_stdlib_scalars`, `memo_namespace_core_stdlib_time`, `memo_namespace_viewpoints_clinical_clinical_evidence_view`, `memo_namespace_viewpoints_context_system_context_view`, `memo_namespace_viewpoints_cybersecurity_cybersecurity_assessment_view`, `memo_namespace_viewpoints_cybersecurity_threat_model_view`, `memo_namespace_viewpoints_functional_function_allocation_view`, `memo_namespace_viewpoints_functional_system_functional_tree_view`, `memo_namespace_viewpoints_logical_logical_architecture_view`, `memo_namespace_viewpoints_operational_use_case_view`, `memo_namespace_viewpoints_physical_network_topology_view`, `memo_namespace_viewpoints_physical_physical_bom_view`, `memo_namespace_viewpoints_requirements_requirements_traceability_view`, `memo_namespace_viewpoints_risk_risk_chain_view`, `memo_namespace_viewpoints_software_software_architecture_view`, `memo_namespace_viewpoints_usability_usability_engineering_view`, `memo_namespace_viewpoints_ui_layout_ui_layout_viewpoint`, `memo_namespace_viewpoints_ui_layout_screen_layout_view`, `memo_namespace_viewpoints_verification_verification_coverage_view` |
 | Source | [`src/memo_namespaces.sysml`](https://github.com/memoarchitect/memo/blob/main/src/memo_namespaces.sysml) |
 
 ## Namespace hierarchy
@@ -72,6 +72,7 @@
 | `memo_namespace_artifacts_configuration_management` |
 | `memo_namespace_artifacts_documents` |
 | `memo_namespace_artifacts_documents_risk_management` |
+| `memo_namespace_artifacts_standards` |
 | `memo_namespace_assurance_verification_validation_clinical_evaluation` |
 | `memo_namespace_assurance_safety_risk_postmarket_surveillance` |
 | `memo_namespace_core_annotations` |
@@ -223,6 +224,18 @@
 | public | `memo_artifacts_core::*` |
 | public | `memo_artifacts_configuration_management::*` |
 | public | `memo_artifacts_documents_risk_management::*` |
+| public | `memo_artifacts_standards_traceability::*` |
+| public | `memo_artifacts_standards_cfr_21_820::*` |
+| public | `memo_artifacts_standards_fda_cybersecurity_2023::*` |
+| public | `memo_artifacts_standards_iec_60601_1::*` |
+| public | `memo_artifacts_standards_iec_60601_1_2::*` |
+| public | `memo_artifacts_standards_iec_60812::*` |
+| public | `memo_artifacts_standards_iec_62304::*` |
+| public | `memo_artifacts_standards_iec_62366_1::*` |
+| public | `memo_artifacts_standards_iec_81001_5_1::*` |
+| public | `memo_artifacts_standards_iso_13485::*` |
+| public | `memo_artifacts_standards_iso_14971::*` |
+| public | `memo_artifacts_standards_iso_iec_ieee_42010::*` |
 | public | `memo_methodology_core::*` |
 | public | `memo_methodology_rules::*` |
 | public | `memo_methodology_patterns::*` |
@@ -268,6 +281,18 @@
 | public | `memo_artifacts_core::*` |
 | public | `memo_artifacts_configuration_management::*` |
 | public | `memo_artifacts_documents_risk_management::*` |
+| public | `memo_artifacts_standards_traceability::*` |
+| public | `memo_artifacts_standards_cfr_21_820::*` |
+| public | `memo_artifacts_standards_fda_cybersecurity_2023::*` |
+| public | `memo_artifacts_standards_iec_60601_1::*` |
+| public | `memo_artifacts_standards_iec_60601_1_2::*` |
+| public | `memo_artifacts_standards_iec_60812::*` |
+| public | `memo_artifacts_standards_iec_62304::*` |
+| public | `memo_artifacts_standards_iec_62366_1::*` |
+| public | `memo_artifacts_standards_iec_81001_5_1::*` |
+| public | `memo_artifacts_standards_iso_13485::*` |
+| public | `memo_artifacts_standards_iso_14971::*` |
+| public | `memo_artifacts_standards_iso_iec_ieee_42010::*` |
 | public | `memo_assurance_verification_validation_clinical_evaluation::*` |
 | public | `memo_assurance_safety_risk_postmarket_surveillance::*` |
 | public | `memo_core_annotations::*` |
@@ -418,6 +443,18 @@
         public import memo_artifacts_core::*;
         public import memo_artifacts_configuration_management::*;
         public import memo_artifacts_documents_risk_management::*;
+        public import memo_artifacts_standards_traceability::*;
+        public import memo_artifacts_standards_cfr_21_820::*;
+        public import memo_artifacts_standards_fda_cybersecurity_2023::*;
+        public import memo_artifacts_standards_iec_60601_1::*;
+        public import memo_artifacts_standards_iec_60601_1_2::*;
+        public import memo_artifacts_standards_iec_60812::*;
+        public import memo_artifacts_standards_iec_62304::*;
+        public import memo_artifacts_standards_iec_62366_1::*;
+        public import memo_artifacts_standards_iec_81001_5_1::*;
+        public import memo_artifacts_standards_iso_13485::*;
+        public import memo_artifacts_standards_iso_14971::*;
+        public import memo_artifacts_standards_iso_iec_ieee_42010::*;
     
         public import memo_methodology_core::*;
         public import memo_methodology_rules::*;
@@ -587,6 +624,7 @@
         alias core for memo_namespace_artifacts_core;
         alias configuration_management for memo_namespace_artifacts_configuration_management;
         alias documents for memo_namespace_artifacts_documents;
+        alias standards for memo_namespace_artifacts_standards;
     }
     
     package memo_namespace_core {
@@ -711,6 +749,23 @@
     
     package memo_namespace_artifacts_documents_risk_management {
         public import memo_artifacts_documents_risk_management::*;
+    }
+    
+    package memo_namespace_artifacts_standards {
+        public import memo_artifacts_standards_traceability::*;
+        // The library itself: one package per standard, concrete clause instances.
+        // Adding a standard is one file next to these and no change anywhere else.
+        public import memo_artifacts_standards_cfr_21_820::*;
+        public import memo_artifacts_standards_fda_cybersecurity_2023::*;
+        public import memo_artifacts_standards_iec_60601_1::*;
+        public import memo_artifacts_standards_iec_60601_1_2::*;
+        public import memo_artifacts_standards_iec_60812::*;
+        public import memo_artifacts_standards_iec_62304::*;
+        public import memo_artifacts_standards_iec_62366_1::*;
+        public import memo_artifacts_standards_iec_81001_5_1::*;
+        public import memo_artifacts_standards_iso_13485::*;
+        public import memo_artifacts_standards_iso_14971::*;
+        public import memo_artifacts_standards_iso_iec_ieee_42010::*;
     }
     
     package memo_namespace_assurance_verification_validation_clinical_evaluation {

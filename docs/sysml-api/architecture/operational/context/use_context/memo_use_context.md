@@ -39,8 +39,8 @@
 | [`InteractsWith`](#interactswith) | `connection def` | Typed relationship for interacts with. | `MemoRelationship` |
 | [`ExchangesWith`](#exchangeswith) | `connection def` | Directional context-level data flow between boundary entities. | `MemoRelationship` |
 | [`ConnectsPhysically`](#connectsphysically) | `connection def` | Physical connection between boundary entities (fluid path, mounting). | `MemoRelationship` |
-| [`AppliesInContext`](#appliesincontext) | `connection def` | Typed relationship from `UseContext` to `MemoPart`. | `MemoRelationship` |
-| [`SituatedIn`](#situatedin) | `connection def` | Typed relationship from `UseContext` to `UseEnvironment`. | `MemoRelationship` |
+| [`AppliesInContext`](#appliesincontext) | `connection def` | Typed relationship for applies in context. | `MemoRelationship` |
+| [`SituatedIn`](#situatedin) | `connection def` | Typed relationship for situated in. | `MemoRelationship` |
 
 ## UseContext
 
@@ -140,7 +140,7 @@ connection def AppliesInContext :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UseContext` to `MemoPart`. |
+| Description | Typed relationship for applies in context. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -155,7 +155,7 @@ connection def SituatedIn :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UseContext` to `UseEnvironment`. |
+| Description | Typed relationship for situated in. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -216,33 +216,33 @@ connection def SituatedIn :> MemoRelationship
             attribute contextSide : ContextSideKind;
             // The verb, as it should read on the edge ("Directs procedure").
             attribute interactionLabel : String[0..1];
-            end contextParticipant : MemoPart;
+            end contextParticipant : ArchitectureElement :>> source;
             // Untyped: the system of interest may be a part or an operational activity.
-            end systemOfInterest;
+            end systemOfInterest : ArchitectureElement :>> target;
         }
     
         connection def InteractsWith :> MemoRelationship {
-            end contextParticipant : Actor;
+            end contextParticipant : Actor :>> source;
             // Untyped so operational activities (action def) can be targets as well as parts.
             end target;
         }
         // Directional context-level data flow between boundary entities.
         connection def ExchangesWith :> MemoRelationship {
-            end source : MemoPart;
-            end target : MemoPart;
+            end source : ArchitectureElement;
+            end target : ArchitectureElement;
         }
         // Physical connection between boundary entities (fluid path, mounting).
         connection def ConnectsPhysically :> MemoRelationship {
-            end source : MemoPart;
-            end target : MemoPart;
+            end source : ArchitectureElement;
+            end target : ArchitectureElement;
         }
         connection def AppliesInContext :> MemoRelationship {
-            end useContext : UseContext;
-            end subjectElement : MemoPart;
+            end useContext : UseContext :>> source;
+            end subjectElement : MemoPart :>> target;
         }
         connection def SituatedIn :> MemoRelationship {
-            end useContext : UseContext;
-            end environment : UseEnvironment;
+            end useContext : UseContext :>> source;
+            end environment : UseEnvironment :>> target;
         }
     }
     

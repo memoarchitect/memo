@@ -62,7 +62,7 @@ package memo_architecture_implementation_software_runtime {
 
     connection def ComponentConnects :> MemoRelationship {
         attribute protocolSummary : String;
-        end sourceComponent : SoftwareComponent;
-        end targetComponent : SoftwareComponent;
+        end sourceComponent : SoftwareComponent :>> source;
+        end targetComponent : SoftwareComponent :>> target;
     }
 }

@@ -91,4 +91,12 @@ package memo_viewpoints_definitions {
         attribute selectionExpression : String;
         attribute rationaleText : String;
     }
+
+    // ── Relations owned by this package ─────────────────────────────
+    // Moved out of memo_core_relationships: their ends are typed against
+    // types declared here, and core must not depend on a domain package.
+    connection def IncludedIn :> MemoRelationship {
+        end sourceElement : MemoPart :>> source;
+        end targetView : MemoView :>> target;
+    }
 }

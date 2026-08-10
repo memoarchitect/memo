@@ -39,7 +39,19 @@ package memo_core_dimensions {
 
     // Editorial status of the model element itself (distinct from the
     // lifecycle of the thing the element describes).
+    // This is the ONE status vocabulary in MEMO: every element carries
+    // `status : ElementStatusKind`, whatever its metaclass. The former
+    // per-family variants (RequirementStatusKind, LinkStatusKind,
+    // MemoNeed::needStatus) are gone — three overlapping status dropdowns on
+    // one element was cognitive load, not precision.
+    //
+    // The V&V states the requirement variant carried (implemented, verified,
+    // validated) are deliberately NOT here: they are facts about links, not
+    // editorial states. An element is implemented when a Realizes link exists,
+    // verified when VerifiedBy does, validated when Validates does. Duplicating
+    // them as an attribute lets the attribute disagree with the graph.
     enum def ElementStatusKind {
+        enum proposed;
         enum draft;
         enum inReview;
         enum approved;

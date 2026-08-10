@@ -24,26 +24,36 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_assurance_safety_risk::*` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`FMEAWorksheet`](#fmeaworksheet) | `item def` | Fmeaworksheet definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
-| [`FailureMode`](#failuremode) | `item def` | Failure mode definition specializing `MemoPart`. | `MemoPart` |
-| [`FailureEffect`](#failureeffect) | `item def` | Failure effect definition specializing `MemoPart`. | `MemoPart` |
-| [`FailureCause`](#failurecause) | `item def` | Failure cause definition specializing `MemoPart`. | `MemoPart` |
+| [`FailureMode`](#failuremode) | `item def` | Failure mode definition specializing `RiskItem`. | `RiskItem` |
+| [`FailureEffect`](#failureeffect) | `item def` | Failure effect definition specializing `RiskItem`. | `RiskItem` |
+| [`FailureCause`](#failurecause) | `item def` | Failure cause definition specializing `RiskItem`. | `RiskItem` |
 | [`DetectionMethod`](#detectionmethod) | `item def` | Detection method definition specializing `MemoPart`. | `MemoPart` |
 | [`FMEAAction`](#fmeaaction) | `part def` | Fmeaaction definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`FaultTree`](#faulttree) | `item def` | Fault tree definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
-| [`FaultTreeEvent`](#faulttreeevent) | `item def` | Fault tree event definition specializing `MemoPart`. | `MemoPart` |
+| [`FaultTreeEvent`](#faulttreeevent) | `item def` | Fault tree event definition specializing `RiskItem`. | `RiskItem` |
 | [`FaultTreeGate`](#faulttreegate) | `item def` | Fault tree gate definition specializing `MemoPart`. | `MemoPart` |
-| [`MinimalCutSet`](#minimalcutset) | `item def` | Minimal cut set definition specializing `MemoPart`. | `MemoPart` |
+| [`MinimalCutSet`](#minimalcutset) | `item def` | Minimal cut set definition specializing `RiskItem`. | `RiskItem` |
 | [`HAZOPStudy`](#hazopstudy) | `item def` | Hazopstudy definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
 | [`HAZOPNode`](#hazopnode) | `item def` | Hazopnode definition specializing `MemoPart`. | `MemoPart` |
-| [`HAZOPDeviation`](#hazopdeviation) | `item def` | Hazopdeviation definition specializing `MemoPart`. | `MemoPart` |
+| [`HAZOPDeviation`](#hazopdeviation) | `item def` | Hazopdeviation definition specializing `RiskItem`. | `RiskItem` |
+| [`CauseKind`](#causekind) | `enum def` | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. | — |
+| [`Causes`](#causes) | `connection def` | Typed relationship for causes. | `MemoRelationship` |
+| [`DetectedBy`](#detectedby) | `connection def` | Typed relationship for detected by. | `MemoRelationship` |
+| [`InputToGate`](#inputtogate) | `connection def` | Typed relationship for input to gate. | `MemoRelationship` |
+| [`ProducesEvent`](#producesevent) | `connection def` | Typed relationship for produces event. | `MemoRelationship` |
+| [`ContainsEvent`](#containsevent) | `connection def` | Typed relationship for contains event. | `MemoRelationship` |
+| [`IdentifiesHazard`](#identifieshazard) | `connection def` | Typed relationship for identifies hazard. | `MemoRelationship` |
+| [`HasFailureMode`](#hasfailuremode) | `connection def` | Typed relationship for has failure mode. | `MemoRelationship` |
 
 ## FMEAWorksheet
 
@@ -63,45 +73,45 @@ item def FMEAWorksheet specializes AnalysisArtifact
 ## FailureMode
 
 ```sysml
-item def FailureMode specializes MemoPart
+item def FailureMode specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Failure mode definition specializing `MemoPart`. |
+| Description | Failure mode definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
 
 
 ## FailureEffect
 
 ```sysml
-item def FailureEffect specializes MemoPart
+item def FailureEffect specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Failure effect definition specializing `MemoPart`. |
+| Description | Failure effect definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
 
 
 ## FailureCause
 
 ```sysml
-item def FailureCause specializes MemoPart
+item def FailureCause specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Failure cause definition specializing `MemoPart`. |
+| Description | Failure cause definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
 
 
@@ -153,15 +163,15 @@ item def FaultTree specializes AnalysisArtifact
 ## FaultTreeEvent
 
 ```sysml
-item def FaultTreeEvent specializes MemoPart
+item def FaultTreeEvent specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Fault tree event definition specializing `MemoPart`. |
+| Description | Fault tree event definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
 
 
@@ -183,15 +193,15 @@ item def FaultTreeGate specializes MemoPart
 ## MinimalCutSet
 
 ```sysml
-item def MinimalCutSet specializes MemoPart
+item def MinimalCutSet specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Minimal cut set definition specializing `MemoPart`. |
+| Description | Minimal cut set definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
 
 
@@ -228,15 +238,135 @@ item def HAZOPNode specializes MemoPart
 ## HAZOPDeviation
 
 ```sysml
-item def HAZOPDeviation specializes MemoPart
+item def HAZOPDeviation specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Hazopdeviation definition specializing `MemoPart`. |
+| Description | Hazopdeviation definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
+| Owning package | `memo_assurance_safety_risk_analysis` |
+
+
+## CauseKind
+
+```sysml
+enum def CauseKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_safety_risk_analysis` |
+
+
+## Causes
+
+```sysml
+connection def Causes :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for causes. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk_analysis` |
+
+
+## DetectedBy
+
+```sysml
+connection def DetectedBy :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for detected by. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk_analysis` |
+
+
+## InputToGate
+
+```sysml
+connection def InputToGate :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for input to gate. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk_analysis` |
+
+
+## ProducesEvent
+
+```sysml
+connection def ProducesEvent :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for produces event. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk_analysis` |
+
+
+## ContainsEvent
+
+```sysml
+connection def ContainsEvent :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for contains event. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk_analysis` |
+
+
+## IdentifiesHazard
+
+```sysml
+connection def IdentifiesHazard :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for identifies hazard. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk_analysis` |
+
+
+## HasFailureMode
+
+```sysml
+connection def HasFailureMode :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for has failure mode. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
 
 
@@ -247,9 +377,11 @@ item def HAZOPDeviation specializes MemoPart
     ```sysml
     package memo_assurance_safety_risk_analysis {
         private import ScalarValues::*;
+        private import memo_core_relationships::*;   // MemoRelationship
     
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
+        private import memo_assurance_safety_risk::*;   // RiskItem
         item def FMEAWorksheet specializes AnalysisArtifact {
             attribute analysisScope : String;
             attribute standardReference : String;
@@ -257,22 +389,39 @@ item def HAZOPDeviation specializes MemoPart
             attribute revisionDate : String;
             attribute reviewer : String;
         }
-        item def FailureMode specializes MemoPart {
+        // An FMEA worksheet row states, on one line, what fails, what that does,
+        // how likely it is, and what controls it. The RPN triple carries the
+        // *scoring*; `effect` and `probability` carry the two facts a reader of the
+        // row needs in words. They are summaries, not replacements: the modelled
+        // form of an effect is a FailureEffect linked by Causes, and the modelled
+        // form of a control is a RiskControlMeasure linked by
+        // Mitigates(mitigationKind = failureMode) — traversable as
+        // `traverse: incoming mitigates`. MEMO deliberately does not add a second
+        // failure-mode-to-control relation; one whole/part and one mitigation
+        // relation is the lean shape the rest of the ontology already uses.
+        item def FailureMode specializes RiskItem {
             attribute failureModeKind : FailureModeKind;
+            doc /* One-line statement of what this failure does, for the worksheet
+                 * row. The structured form is a FailureEffect. */
+            attribute effect : String[0..1];
             attribute severityRating : Integer;
+            doc /* Qualitative likelihood, the ISO 14971 register. `occurrenceRating`
+                 * is the same fact as an FMEA score; both are kept because an FMEA
+                 * reports the score and a risk file reports the qualitative band. */
+            attribute probability : ProbabilityKind[0..1];
             attribute occurrenceRating : Integer;
             attribute detectionRating : Integer;
             attribute rpn : Integer;
             attribute criticality : CriticalityKind;
         }
-        item def FailureEffect specializes MemoPart {
+        item def FailureEffect specializes RiskItem {
             attribute effectLevel : FailureEffectLevelKind;
             attribute effectOnPatient : String;
             attribute effectOnOperator : String;
             attribute effectOnSystem : String;
             attribute severity : SeverityKind;
         }
-        item def FailureCause specializes MemoPart {
+        item def FailureCause specializes RiskItem {
             attribute causeCategory : FailureCauseCategoryKind;
             attribute causeDescription : String;
             attribute occurrenceRating : ProbabilityKind;
@@ -296,7 +445,7 @@ item def HAZOPDeviation specializes MemoPart
             attribute cutSetSummary : String;
             attribute revisionDate : String;
         }
-        item def FaultTreeEvent specializes MemoPart {
+        item def FaultTreeEvent specializes RiskItem {
             attribute eventKind : FaultTreeEventKind;
             attribute probability : Real;
             attribute failureRate : Real;
@@ -308,7 +457,7 @@ item def HAZOPDeviation specializes MemoPart
             attribute kValue : Integer;
             attribute nValue : Integer;
         }
-        item def MinimalCutSet specializes MemoPart {
+        item def MinimalCutSet specializes RiskItem {
             attribute cutSetOrder : Integer;
             attribute probability : Real;
             attribute involvedEvents : String;
@@ -325,7 +474,7 @@ item def HAZOPDeviation specializes MemoPart
             attribute designIntent : String;
             attribute operatingConditions : String;
         }
-        item def HAZOPDeviation specializes MemoPart {
+        item def HAZOPDeviation specializes RiskItem {
             attribute guideWord : HAZOPGuideWordKind;
             attribute parameter : String;
             attribute cause : String;
@@ -334,6 +483,51 @@ item def HAZOPDeviation specializes MemoPart
             attribute severity : SeverityKind;
             attribute likelihood : ProbabilityKind;
             attribute recommendation : String;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        // Causes unifies the former causal edges of the ISO 14971 / FMEA / FTA
+        // chains — CausesEffect, CausedBy, ContributesToHazard, LeadsToHazard,
+        // OriginatesFrom, UseErrorLeadsToHazard — keyed by causeKind. cause is the
+        // originating element, effect the consequence.
+        enum def CauseKind {
+            enum failureCausesEffect;
+            enum failureCausedBy;
+            enum contributesToHazard;
+            enum leadsToHazard;
+            enum originatesFrom;
+            enum useErrorLeadsToHazard;
+        }
+        connection def Causes :> MemoRelationship {
+            attribute causeKind : CauseKind;
+            end cause : MemoPart :>> source;
+            end effect : RiskItem :>> target;
+        }
+        connection def DetectedBy :> MemoRelationship {
+            end failureMode : FailureMode :>> source;
+            end detectionMethod : DetectionMethod :>> target;
+        }
+        connection def InputToGate :> MemoRelationship {
+            end input : FaultTreeEvent :>> source;
+            end gate : FaultTreeGate :>> target;
+        }
+        connection def ProducesEvent :> MemoRelationship {
+            end gate : FaultTreeGate :>> source;
+            end eventElement : FaultTreeEvent :>> target;
+        }
+        connection def ContainsEvent :> MemoRelationship {
+            end cutSet : MinimalCutSet :>> source;
+            end eventElement : FaultTreeEvent :>> target;
+        }
+        connection def IdentifiesHazard :> MemoRelationship {
+            end deviation : HAZOPDeviation :>> source;
+            end hazard : Hazard :>> target;
+        }
+        connection def HasFailureMode :> MemoRelationship {
+            end element : ArchitectureElement :>> source;
+            end failureMode : FailureMode :>> target;
         }
     }
     

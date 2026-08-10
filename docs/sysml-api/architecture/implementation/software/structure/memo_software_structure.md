@@ -41,7 +41,8 @@
 | [`DataModel`](#datamodel) | `part def` | Data model definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`ConfigurationArtifact`](#configurationartifact) | `part def` | Configuration artifact definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`SBOMEntry`](#sbomentry) | `item def` | Sbomentry definition specializing `MemoExchangeItem`. | `MemoExchangeItem` |
-| [`ModuleUses`](#moduleuses) | `connection def` | Typed relationship from `SoftwareModule` to `SoftwareModule`. | `MemoRelationship` |
+| [`ModuleUses`](#moduleuses) | `connection def` | Typed relationship for module uses. | `MemoRelationship` |
+| [`DependsOnSoup`](#dependsonsoup) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## SoftwareItem
 
@@ -171,7 +172,22 @@ connection def ModuleUses :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `SoftwareModule` to `SoftwareModule`. |
+| Description | Typed relationship for module uses. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_implementation_software_structure` |
+
+
+## DependsOnSoup
+
+```sysml
+connection def DependsOnSoup :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -272,8 +288,16 @@ connection def ModuleUses :> MemoRelationship
         }
     
         connection def ModuleUses :> MemoRelationship {
-            end usingModule : SoftwareModule;
-            end usedModule : SoftwareModule;
+            end usingModule : SoftwareModule :>> source;
+            end usedModule : SoftwareModule :>> target;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        connection def DependsOnSoup :> MemoRelationship {
+            end component : ArchitectureElement :>> source;
+            end soupItem : SoftwareItem :>> target;
         }
     }
     

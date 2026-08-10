@@ -213,18 +213,18 @@ connection def NotesOn :> MemoRelationship
         // The end is `remark`, not `comment`: `comment` is a reserved KerML
         // keyword and cannot name a feature.
         connection def CommentsOn :> MemoRelationship {
-            end remark : ModelComment;
-            end annotatedElement;
+            end remark : ModelComment :>> source;
+            end annotatedElement :>> target;
         }
     
         connection def RationaleFor :> MemoRelationship {
-            end rationaleRecord : ModelRationale;
-            end justifiedElement;
+            end rationaleRecord : ModelRationale :>> source;
+            end justifiedElement :>> target;
         }
     
         connection def NotesOn :> MemoRelationship {
-            end noteRecord : ModelNote;
-            end notedElement;
+            end noteRecord : ModelNote :>> source;
+            end notedElement :>> target;
         }
     }
     

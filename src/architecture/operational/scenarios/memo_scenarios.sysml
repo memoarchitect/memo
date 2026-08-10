@@ -104,13 +104,13 @@ package memo_architecture_operational_scenarios {
         attribute selectsKind : SelectsKind;
         attribute pathOrder : Integer[0..1];
         attribute decisionTaken : String[0..1];
-        end scenario : MemoScenario;
+        end scenario : MemoScenario :>> source;
         // A selected path element may be a WorkflowStep action or a flow
         // element. Those constructs do not share a MEMO base metaclass.
-        end selected;
+        end selected :>> target;
     }
     connection def OccursDuring :> MemoRelationship {
-        end occurrence : ScenarioOccurrence;
-        end context : UseContext;
+        end occurrence : ScenarioOccurrence :>> source;
+        end context : UseContext :>> target;
     }
 }
