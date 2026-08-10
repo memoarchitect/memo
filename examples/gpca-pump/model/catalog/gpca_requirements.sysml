@@ -1,5 +1,6 @@
 package memo_examples_gpca_pump_gpca_requirements {
     private import ScalarValues::*;
+    private import memo_core_dimensions::*;   // ElementStatusKind
 
     private import memo_assurance_requirements::*;
     private import memo_assurance_requirements_needs::*;

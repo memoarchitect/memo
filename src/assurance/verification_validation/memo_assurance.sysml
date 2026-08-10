@@ -10,10 +10,17 @@ package memo_assurance_verification_validation {
     // Verification and validation cases are SysML v2 verification cases
     // (behaviours that check requirements), not verifiable structures — they
     // derive from the MemoVerificationCase foundation, not MemoPart.
+    // `status` is NOT redeclared here. It used to be re-declared as a String,
+    // which shadowed the `status : ElementStatusKind` every MEMO base carries
+    // and let a verification case hold an editorial status no other element
+    // could hold — against the "one status vocabulary in MEMO" rule stated in
+    // memo_requirements.sysml. The values it actually held ("planned") were an
+    // EXECUTION state, not an editorial one; execution state belongs in an
+    // attribute of its own (see RiskControlMeasure.verificationStatus), not in
+    // a second spelling of `status`.
     verification def VerificationCase :> MemoVerificationCase {
         attribute methodKind : VerificationMethodKind;
         attribute acceptanceCriteria : String;
-        attribute status : String;
     }
     verification def ValidationCase :> MemoVerificationCase {
         attribute validationMethod : ValidationMethodKind;
