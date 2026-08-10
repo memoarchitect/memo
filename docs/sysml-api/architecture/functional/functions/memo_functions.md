@@ -37,7 +37,7 @@
 | [`MemoFunction`](#memofunction) | `action def` | Memo function definition specializing `MemoAction`. | `MemoAction` |
 | [`SystemFunction`](#systemfunction) | `action def` | A responsibility of the system as a whole. Allocation is optional: a system function that no single component owns is a normal intermediate state of the functional chain, not a defect. | `MemoFunction` |
 | [`ComponentFunction`](#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. | `MemoFunction` |
-| [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for budgets and assurance attributes that a flow usage cannot own. | `ArchitectureElement` |
+| [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… | `ArchitectureElement` |
 | [`FunctionalFlow`](#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | `ArchitectureElement` |
 | [`FunctionalFlowStep`](#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | `MemoAction` |
 | [`FunctionalScenario`](#functionalscenario) | `action def` | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. | `MemoScenario` |
@@ -97,7 +97,7 @@ part def FunctionalExchange specializes ArchitectureElement
 
 | Property | Value |
 | --- | --- |
-| Description | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for budgets and assurance attributes that a flow usage cannot own. |
+| Description | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `ArchitectureElement` |
@@ -264,8 +264,24 @@ connection def InvolvesFunction :> MemoRelationship
         action def ComponentFunction specializes MemoFunction;
     
         // Named traceable route between functions. Native `flow of` usages carry
-        // the transported item; this element exists for budgets and assurance
-        // attributes that a flow usage cannot own.
+        // the transported item; this element exists for the budgets and assurance
+        // attributes below.
+        //
+        // The reason is MEMO's grammar, NOT the language — the earlier wording here
+        // said "attributes that a flow usage cannot own", and that was a false
+        // claim about SysML v2. The standard's `FlowUsage` is
+        // `OccurrenceUsagePrefix 'flow' FlowDeclaration DefinitionBody`
+        // (SysML-textual-bnf.kebnf:829), so a conforming flow usage takes a name
+        // from its `UsageDeclaration` and owns attributes in its body like any
+        // other usage. MEMO's own production is
+        // `'flow' 'of' itemType 'from' … 'to' … ';'` — no name, no body — so a
+        // MEMO flow can carry neither an `id` nor a latency budget, and nothing
+        // can refer to it. Every MEMO element rests on the identification core in
+        // memo_core_common, and an anonymous attribute-less edge cannot join it.
+        //
+        // So this part def is a workaround for a MEMO gap, not a design MEMO is
+        // entitled to. Restoring the two dropped clauses is what would let it
+        // collapse into the flow it stands in for.
         part def FunctionalExchange specializes ArchitectureElement {
             attribute flowKind : FlowKind;
             attribute latencyBudgetMs : Real;
