@@ -2,6 +2,7 @@
 // runtime structure lives in memo_architecture_implementation_software_runtime and
 // allocation in memo_architecture_realization_deployment.
 package memo_architecture_implementation_software_structure {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -90,6 +91,12 @@ package memo_architecture_implementation_software_structure {
         end usingModule : SoftwareModule :>> source;
         end usedModule : SoftwareModule :>> target;
     }
+    abstract connection moduleUsesLinks : ModuleUses[*];
+    metadata def <moduleUses> ModuleUsesMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = moduleUsesLinks meta SysML::Usage;
+    }
 
     // ── Relations owned by this package ─────────────────────────────
     // Moved out of memo_core_relationships: their ends are typed against
@@ -97,5 +104,11 @@ package memo_architecture_implementation_software_structure {
     connection def DependsOnSoup :> MemoRelationship {
         end component : ArchitectureElement :>> source;
         end soupItem : SoftwareItem :>> target;
+    }
+    abstract connection dependsOnSoupLinks : DependsOnSoup[*];
+    metadata def <dependsOnSoup> DependsOnSoupMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = dependsOnSoupLinks meta SysML::Usage;
     }
 }

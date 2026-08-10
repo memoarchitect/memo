@@ -50,6 +50,7 @@
 // Both had part-typed ends until A0; both are metaclass-neutral now, which is
 // precisely what makes an action-def function usable at all.
 package memo_architecture_functional_functions {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -133,9 +134,21 @@ package memo_architecture_functional_functions {
         end functionalFlow : FunctionalFlow :>> source;
         end step : FunctionalFlowStep :>> target;
     }
+    abstract connection includesStepLinks : IncludesStep[*];
+    metadata def <includesStep> IncludesStepMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = includesStepLinks meta SysML::Usage;
+    }
     connection def InvolvesFunction :> MemoRelationship {
         end functionalFlow : FunctionalFlow :>> source;
         end function : MemoFunction :>> target;
+    }
+    abstract connection involvesFunctionLinks : InvolvesFunction[*];
+    metadata def <involvesFunction> InvolvesFunctionMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = involvesFunctionLinks meta SysML::Usage;
     }
     // Compatibility spelling used by existing models.
 }

@@ -4,6 +4,7 @@
 // engineering chain: user → task → use error → hazard → risk control →
 // usability validation.
 package memo_assurance_human_factors {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -43,9 +44,21 @@ package memo_assurance_human_factors {
         end task : UserTask :>> source;
         end useError : UseError :>> target;
     }
+    abstract connection commitsUseErrorLinks : CommitsUseError[*];
+    metadata def <commitsUseError> CommitsUseErrorMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = commitsUseErrorLinks meta SysML::Usage;
+    }
     connection def EvaluatesTask :> MemoRelationship {
         end evaluation : MemoEvidence :>> source;
         end task : UserTask :>> target;
+    }
+    abstract connection evaluatesTaskLinks : EvaluatesTask[*];
+    metadata def <evaluatesTask> EvaluatesTaskMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = evaluatesTaskLinks meta SysML::Usage;
     }
 
     // ── Relations owned by this package ─────────────────────────────
@@ -54,5 +67,11 @@ package memo_assurance_human_factors {
     connection def TestedByUsability :> MemoRelationship {
         end uiElementOrTask : MemoPart :>> source;
         end usabilityTest : UsabilityValidation :>> target;
+    }
+    abstract connection testedByUsabilityLinks : TestedByUsability[*];
+    metadata def <testedByUsability> TestedByUsabilityMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = testedByUsabilityLinks meta SysML::Usage;
     }
 }

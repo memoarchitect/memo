@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
@@ -168,6 +169,7 @@ connection def ResolvesToMethodology :> MemoRelationship
 
     ```sysml
     package memo_methodology_core {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_relationships::*;   // MemoRelationship
     
@@ -284,6 +286,12 @@ connection def ResolvesToMethodology :> MemoRelationship
         connection def ResolvesToMethodology :> MemoRelationship {
             end boundModelElement : MemoPart :>> source;
             end resolvedMethodology : MethodologyDefinition :>> target;
+        }
+        abstract connection resolvesToMethodologyLinks : ResolvesToMethodology[*];
+        metadata def <resolvesToMethodology> ResolvesToMethodologyMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = resolvesToMethodologyLinks meta SysML::Usage;
         }
     }
     

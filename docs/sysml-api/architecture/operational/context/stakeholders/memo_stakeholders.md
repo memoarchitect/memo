@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -206,6 +207,7 @@ connection def Governs :> MemoRelationship
     // Stakeholder and the Actor role — expressed by ActsAsActor, never by merging
     // the types.
     package memo_architecture_operational_context_stakeholders {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import memo_core_common::*;
@@ -243,14 +245,32 @@ connection def Governs :> MemoRelationship
             end interestedStakeholder : Stakeholder :>> source;
             end stakeholderConcern : Concern :>> target;
         }
+        abstract connection hasConcernLinks : HasConcern[*];
+        metadata def <hasConcern> HasConcernMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = hasConcernLinks meta SysML::Usage;
+        }
         connection def FramesConcern :> MemoRelationship {
             end framingViewpoint : MemoPart :>> source;
             end framedConcern : Concern :>> target;
+        }
+        abstract connection framesConcernLinks : FramesConcern[*];
+        metadata def <framesConcern> FramesConcernMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = framesConcernLinks meta SysML::Usage;
         }
         // Links the stakeholder to the actor role the same entity plays, if any.
         connection def ActsAsActor :> MemoRelationship {
             end interestedStakeholder : Stakeholder :>> source;
             end actorRole : Actor :>> target;
+        }
+        abstract connection actsAsActorLinks : ActsAsActor[*];
+        metadata def <actsAsActor> ActsAsActorMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = actsAsActorLinks meta SysML::Usage;
         }
         // Governs unifies GovernsCorrespondence / GovernsUse, keyed by governKind.
         enum def GovernKind {
@@ -261,6 +281,12 @@ connection def Governs :> MemoRelationship
             attribute governKind : GovernKind;
             end governor : Stakeholder :>> source;
             end governedElement : MemoPart :>> target;
+        }
+        abstract connection governsLinks : Governs[*];
+        metadata def <governs> GovernsMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = governsLinks meta SysML::Usage;
         }
     }
     

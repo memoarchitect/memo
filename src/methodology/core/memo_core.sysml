@@ -1,4 +1,5 @@
 package memo_methodology_core {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
     private import memo_core_relationships::*;   // MemoRelationship
 
@@ -115,5 +116,11 @@ package memo_methodology_core {
     connection def ResolvesToMethodology :> MemoRelationship {
         end boundModelElement : MemoPart :>> source;
         end resolvedMethodology : MethodologyDefinition :>> target;
+    }
+    abstract connection resolvesToMethodologyLinks : ResolvesToMethodology[*];
+    metadata def <resolvesToMethodology> ResolvesToMethodologyMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = resolvesToMethodologyLinks meta SysML::Usage;
     }
 }
