@@ -636,80 +636,73 @@ package memo_examples_gpca_pump_gpca_interfaces {
     // not decompose into the individual physical parts modelled elsewhere in
     // this MEMO example. These features and their connections are therefore
     // kept exact and separate from that extended physical design content.
-    part devOpCmdIn : PhysicalPort { attribute :>> id = "PORT-DEV-01"; attribute :>> name = "OP_CMD_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
-    part devDbIn : PhysicalPort { attribute :>> id = "PORT-DEV-02"; attribute :>> name = "DB_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
-    part devPresIn : PhysicalPort { attribute :>> id = "PORT-DEV-03"; attribute :>> name = "PRES_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
-    part devPatientIn : PhysicalPort { attribute :>> id = "PORT-DEV-04"; attribute :>> name = "PATIENT_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
-    part devGpcaOut : PhysicalPort { attribute :>> id = "PORT-DEV-05"; attribute :>> name = "GPCA_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    in port devOpCmdIn : PhysicalPort { attribute :>> id = "PORT-DEV-01"; attribute :>> name = "OP_CMD_IN"; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    in port devDbIn : PhysicalPort { attribute :>> id = "PORT-DEV-02"; attribute :>> name = "DB_IN"; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    in port devPresIn : PhysicalPort { attribute :>> id = "PORT-DEV-03"; attribute :>> name = "PRES_IN"; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    in port devPatientIn : PhysicalPort { attribute :>> id = "PORT-DEV-04"; attribute :>> name = "PATIENT_IN"; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
+    out port devGpcaOut : PhysicalPort { attribute :>> id = "PORT-DEV-05"; attribute :>> name = "GPCA_OUT"; attribute :>> sourceReference = "CITE-002: GPCA_Device.aadl"; }
 
-    part snsOpCmdIn : PhysicalPort { attribute :>> id = "PORT-SNS-01"; attribute :>> name = "OP_CMD_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsDbIn : PhysicalPort { attribute :>> id = "PORT-SNS-02"; attribute :>> name = "DB_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsPresIn : PhysicalPort { attribute :>> id = "PORT-SNS-03"; attribute :>> name = "PRES_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsPatientIn : PhysicalPort { attribute :>> id = "PORT-SNS-04"; attribute :>> name = "PATIENT_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsOpCmdOut : PhysicalPort { attribute :>> id = "PORT-SNS-05"; attribute :>> name = "OP_CMD_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsPresOut : PhysicalPort { attribute :>> id = "PORT-SNS-06"; attribute :>> name = "PRES_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsPatientOut : PhysicalPort { attribute :>> id = "PORT-SNS-07"; attribute :>> name = "PATIENT_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsSensorOut : PhysicalPort { attribute :>> id = "PORT-SNS-08"; attribute :>> name = "SENSOR_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsConstOut : PhysicalPort { attribute :>> id = "PORT-SNS-09"; attribute :>> name = "CONST_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
-    part snsDbOut : PhysicalPort { attribute :>> id = "PORT-SNS-10"; attribute :>> name = "DB_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    in port snsOpCmdIn : PhysicalPort { attribute :>> id = "PORT-SNS-01"; attribute :>> name = "OP_CMD_IN"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    in port snsDbIn : PhysicalPort { attribute :>> id = "PORT-SNS-02"; attribute :>> name = "DB_IN"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    in port snsPresIn : PhysicalPort { attribute :>> id = "PORT-SNS-03"; attribute :>> name = "PRES_IN"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    in port snsPatientIn : PhysicalPort { attribute :>> id = "PORT-SNS-04"; attribute :>> name = "PATIENT_IN"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    out port snsOpCmdOut : PhysicalPort { attribute :>> id = "PORT-SNS-05"; attribute :>> name = "OP_CMD_OUT"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    out port snsPresOut : PhysicalPort { attribute :>> id = "PORT-SNS-06"; attribute :>> name = "PRES_OUT"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    out port snsPatientOut : PhysicalPort { attribute :>> id = "PORT-SNS-07"; attribute :>> name = "PATIENT_OUT"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    out port snsSensorOut : PhysicalPort { attribute :>> id = "PORT-SNS-08"; attribute :>> name = "SENSOR_OUT"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    out port snsConstOut : PhysicalPort { attribute :>> id = "PORT-SNS-09"; attribute :>> name = "CONST_OUT"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
+    out port snsDbOut : PhysicalPort { attribute :>> id = "PORT-SNS-10"; attribute :>> name = "DB_OUT"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Sensors.aadl"; }
 
-    part actGpcaSwIn : PhysicalPort { attribute :>> id = "PORT-ACT-01"; attribute :>> name = "GPCA_SW_IN"; attribute :>> direction = DirectionKind::input; attribute :>> sourceReference = "CITE-002: GPCA_HW_Actuators.aadl"; }
-    part actGpcaOut : PhysicalPort { attribute :>> id = "PORT-ACT-02"; attribute :>> name = "GPCA_OUT"; attribute :>> direction = DirectionKind::output; attribute :>> sourceReference = "CITE-002: GPCA_HW_Actuators.aadl"; }
+    in port actGpcaSwIn : PhysicalPort { attribute :>> id = "PORT-ACT-01"; attribute :>> name = "GPCA_SW_IN"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Actuators.aadl"; }
+    out port actGpcaOut : PhysicalPort { attribute :>> id = "PORT-ACT-02"; attribute :>> name = "GPCA_OUT"; attribute :>> sourceReference = "CITE-002: GPCA_HW_Actuators.aadl"; }
 
     // ── GPCA_SW top-level ports (AADL GPCA_SW.aadl features) ────
-    part portOpCmdIn : SoftwarePort {
+    in port portOpCmdIn : SoftwarePort {
         attribute :>> id = "PORT-01"; attribute :>> name = "OP_CMD_IN";
         attribute :>> description = "Operator commands (System_Start/Stop, Infusion_Initiate/Inhibit, Notification_Cancel, Disable/Enable_Audio, DataConfig) from the data entry interface (I 2).";
         attribute :>> portKind = InterfaceKind::control;
-        attribute :>> direction = DirectionKind::input;
         attribute :>> dataTypeName = "DATATYPES::Operator_Commands.Impl";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
-    part portPresIn : SoftwarePort {
+    in port portPresIn : SoftwarePort {
         attribute :>> id = "PORT-02"; attribute :>> name = "PRES_IN";
         attribute :>> description = "Prescription data entry fields (I 1, 13 fields PatientID_prog..NumberMax_pbolus_prog).";
         attribute :>> portKind = InterfaceKind::data;
-        attribute :>> direction = DirectionKind::input;
         attribute :>> dataTypeName = "DATATYPES::Prescription_Inputs.Impl";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
-    part portPatientIn : SoftwarePort {
+    in port portPatientIn : SoftwarePort {
         attribute :>> id = "PORT-03"; attribute :>> name = "PATIENT_IN";
         attribute :>> description = "Patient bolus request (I 4, BolusRequest_prog).";
         attribute :>> portKind = InterfaceKind::userInteraction;
-        attribute :>> direction = DirectionKind::input;
         attribute :>> dataTypeName = "DATATYPES::Patient_Inputs.Impl";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
-    part portSensorIn : SoftwarePort {
+    in port portSensorIn : SoftwarePort {
         attribute :>> id = "PORT-04"; attribute :>> name = "SENSOR_IN";
         attribute :>> description = "Device sensor inputs (air-in-line, occlusion, door, reservoir, flow).";
         attribute :>> portKind = InterfaceKind::digitalSignal;
-        attribute :>> direction = DirectionKind::input;
         attribute :>> dataTypeName = "DATATYPES::Device_Sensor_Inputs.Impl";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
-    part portConstIn : SoftwarePort {
+    in port portConstIn : SoftwarePort {
         attribute :>> id = "PORT-05"; attribute :>> name = "CONST_IN";
         attribute :>> description = "Device configuration constants (App. A.4 values such as Empty_Reservoir, tolerances).";
         attribute :>> portKind = InterfaceKind::data;
-        attribute :>> direction = DirectionKind::input;
         attribute :>> dataTypeName = "DATATYPES::Device_Configuration_Inputs.Impl";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
-    part portDbIn : SoftwarePort {
+    in port portDbIn : SoftwarePort {
         attribute :>> id = "PORT-06"; attribute :>> name = "DB_IN";
         attribute :>> description = "Hospital pharmacy database safe values (I 9-I 11); realizes SI-005 HospitalPharmacyDatabaseInterface.";
         attribute :>> portKind = InterfaceKind::data;
-        attribute :>> direction = DirectionKind::input;
         attribute :>> dataTypeName = "DATATYPES::Drug_Database_Inputs.Impl";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }
-    part portGpcaSwOut : SoftwarePort {
+    out port portGpcaSwOut : SoftwarePort {
         attribute :>> id = "PORT-07"; attribute :>> name = "GPCA_SW_OUT";
         attribute :>> description = "Aggregated software output vector (Current_System_Mode, Commanded_Flow_Rate, notifications, prescription echo, status).";
         attribute :>> portKind = InterfaceKind::data;
-        attribute :>> direction = DirectionKind::output;
         attribute :>> dataTypeName = "DATATYPES::GPCA_SW_Outputs.Impl";
         attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)";
     }

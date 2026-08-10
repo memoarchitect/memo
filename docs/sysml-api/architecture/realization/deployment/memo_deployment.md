@@ -203,10 +203,16 @@ connection def FlowTraversesBinding :> MemoRelationship
 ??? code "architecture/realization/deployment/memo_deployment.sysml"
 
     ```sysml
-    // Deployment (allocation) view: SoftwareModule buildsInto
-    // DeploymentUnit; DeploymentUnit deploysTo ProcessingNode; SoftwareComponent
-    // hostedBy ProcessingNode. Software deploys only to capable execution nodes
-    // (rules/crosslayer).
+    // Deployment (allocation) view: SoftwareModule buildsInto DeploymentUnit;
+    // DeploymentUnit deploysTo ProcessingNode. Software deploys only to capable
+    // execution nodes (rules/crosslayer).
+    //
+    // `HostedBy` is NOT part of that chain, and this comment used to claim it was
+    // ("SoftwareComponent hostedBy ProcessingNode"). It is
+    // `processingNode : ArchitectureElement -> hostAssembly : ArchitectureElement`:
+    // physical hosting of a node by the assembly it is mounted in, running the
+    // other way and between different things. Software reaches a node through
+    // DeploysTo.
     package memo_architecture_realization_deployment {
         private import ScalarValues::*;
     
@@ -273,8 +279,8 @@ connection def FlowTraversesBinding :> MemoRelationship
         part def EndToEndFlow specializes ArchitectureElement {
             attribute latencyBudgetMs : Real;
             attribute analysisPurpose : String;
-            ref sourceFunction : SystemFunction[0..1];
-            ref sinkFunction : SystemFunction[0..1];
+            ref sourceFunction : MemoFunction[0..1];
+            ref sinkFunction : MemoFunction[0..1];
             ref logicalSegments : LogicalComponent[0..*];
             // Runtime C&C components (SEI) — the elements actually bound to hardware.
             ref softwareSegments : SoftwareComponent[0..*];

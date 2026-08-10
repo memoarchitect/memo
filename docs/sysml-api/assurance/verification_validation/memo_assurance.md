@@ -35,7 +35,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`VerificationCase`](#verificationcase) | `verification def` | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. | `MemoVerificationCase` |
+| [`VerificationCase`](#verificationcase) | `verification def` | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. `status` is NOT redeclared here.… | `MemoVerificationCase` |
 | [`ValidationCase`](#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. | `MemoVerificationCase` |
 | [`TestArtifact`](#testartifact) | `part def` | Test artifact definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`Evidence`](#evidence) | `part def` | Evidence definition specializing `MemoEvidence`. | `MemoEvidence` |
@@ -50,7 +50,7 @@ verification def VerificationCase :> MemoVerificationCase
 
 | Property | Value |
 | --- | --- |
-| Description | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. |
+| Description | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. `status` is NOT redeclared here.… |
 | Kind | `verification def` |
 | Abstract | No |
 | Specializes | `MemoVerificationCase` |
@@ -149,10 +149,17 @@ connection def ExecutesScenario :> MemoRelationship
         // Verification and validation cases are SysML v2 verification cases
         // (behaviours that check requirements), not verifiable structures — they
         // derive from the MemoVerificationCase foundation, not MemoPart.
+        // `status` is NOT redeclared here. It used to be re-declared as a String,
+        // which shadowed the `status : ElementStatusKind` every MEMO base carries
+        // and let a verification case hold an editorial status no other element
+        // could hold — against the "one status vocabulary in MEMO" rule stated in
+        // memo_requirements.sysml. The values it actually held ("planned") were an
+        // EXECUTION state, not an editorial one; execution state belongs in an
+        // attribute of its own (see RiskControlMeasure.verificationStatus), not in
+        // a second spelling of `status`.
         verification def VerificationCase :> MemoVerificationCase {
             attribute methodKind : VerificationMethodKind;
             attribute acceptanceCriteria : String;
-            attribute status : String;
         }
         verification def ValidationCase :> MemoVerificationCase {
             attribute validationMethod : ValidationMethodKind;
