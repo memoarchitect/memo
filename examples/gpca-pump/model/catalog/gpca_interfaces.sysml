@@ -1181,4 +1181,64 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> encoding = "Boolean";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.3 Text Macros";
     }
+
+    // ── The exchanges as FLOWS (Track A3) ────────────────────────────
+    // The flow is the edge; the ComponentExchange part above it carries the
+    // budget and assurance attributes. Each flow is NAMED with its exchange,
+    // and that shared identifier IS the binding between the two halves —
+    // `relationships["ceOpCmdToTlm"]` and `elements["ceOpCmdToTlm"]` are one
+    // statement, checked by CR-ONT-076. A named flow needs the grammar to
+    // accept a name at all, which is why this could not land before the
+    // productions did.
+    //
+    // The ends are the PORTS, not the components — the port-level topology the
+    // *PortPath strings used to approximate. `ExchangesWith` keeps the
+    // component-level dependency it always carried; AADL distinguishes the two
+    // granularities and so does this.
+    flow exSensorVector of InterfaceItem from gpcaDeviceSensors to portSensorIn;
+    flow exFlowCommand of InterfaceItem from portGpcaSwOut to pumpMotorAssembly;
+    flow exAlarmAnnunciation of InterfaceItem from portGpcaSwOut to audibleAlarm;
+    flow exPrescriptionEntry of InterfaceItem from operatorKeypad to portPresIn;
+    flow ceOpCmdToTlm of InterfaceItem from portOpCmdIn to portTlmOpCmdIn;
+    flow ceConstToTlm of InterfaceItem from portConstIn to portTlmConstIn;
+    flow ceTlmOutToOutput of InterfaceItem from portTlmTlmModeOut to portOutputTlmModeIn;
+    flow ceImToSysStat of InterfaceItem from portImImOut to portSysStatImIn;
+    flow ceTlmToSysStat of InterfaceItem from portTlmTlmModeOut to portSysStatTlmModeIn;
+    flow ceSensorToSysStat of InterfaceItem from portSensorIn to portSysStatSensorIn;
+    flow ceConstToSysStat of InterfaceItem from portConstIn to portSysStatConstIn;
+    flow ceConfigToSysStat of InterfaceItem from portConfigConfigOut to portSysStatConfigIn;
+    flow ceSysStatOutToOutput of InterfaceItem from portSysStatSysStatOut to portOutputSysStatIn;
+    flow ceImToAlarm of InterfaceItem from portImImOut to portAlarmImIn;
+    flow ceTlmToAlarm of InterfaceItem from portTlmTlmModeOut to portAlarmTlmModeIn;
+    flow ceSysMonToAlarm of InterfaceItem from portSysMonSysMonOut to portAlarmSysMonIn;
+    flow ceOpCmdToAlarm of InterfaceItem from portOpCmdIn to portAlarmOpCmdIn;
+    flow ceDbToAlarm of InterfaceItem from portDbIn to portAlarmDbIn;
+    flow ceSensorToAlarm of InterfaceItem from portSensorIn to portAlarmSensorIn;
+    flow ceConstToAlarm of InterfaceItem from portConstIn to portAlarmConstIn;
+    flow ceSysStatToAlarm of InterfaceItem from portSysStatSysStatOut to portAlarmSysStatIn;
+    flow ceConfigToAlarm of InterfaceItem from portConfigConfigOut to portAlarmConfigIn;
+    flow ceAlarmOutToOutput of InterfaceItem from portAlarmAlarmOut to portOutputAlarmIn;
+    flow ceTlmToConfig of InterfaceItem from portTlmTlmModeOut to portConfigTlmModeIn;
+    flow cePresToConfig of InterfaceItem from portPresIn to portConfigPresIn;
+    flow ceOpCmdToConfig of InterfaceItem from portOpCmdIn to portConfigOpCmdIn;
+    flow ceDbToConfig of InterfaceItem from portDbIn to portConfigDbIn;
+    flow ceConsToConfig of InterfaceItem from portConstIn to portConfigConstIn;
+    flow ceSysStatToConfig of InterfaceItem from portSysStatSysStatOut to portConfigSysStatIn;
+    flow ceConfigToOutput of InterfaceItem from portConfigConfigOut to portOutputConfigIn;
+    flow ceTlmToIm of InterfaceItem from portTlmTlmModeOut to portImTlmModeIn;
+    flow ceOpCmdToIm of InterfaceItem from portOpCmdIn to portImOpCmdIn;
+    flow cePatientToIm of InterfaceItem from portPatientIn to portImPatientIn;
+    flow ceConfigToIm of InterfaceItem from portConfigConfigOut to portImConfigIn;
+    flow ceAlarmToIm of InterfaceItem from portAlarmAlarmOut to portImAlarmIn;
+    flow ceSysStatToIm of InterfaceItem from portSysStatSysStatOut to portImSysStatIn;
+    flow ceImToOutput of InterfaceItem from portImImOut to portOutputImIn;
+    flow ceTlmToSysMon of InterfaceItem from portTlmTlmModeOut to portSysMonTlmModeIn;
+    flow ceSysMonToOutput of InterfaceItem from portSysMonSysMonOut to portOutputSysMonIn;
+    flow ceTlmToLog of InterfaceItem from portTlmTlmModeOut to portLogTlmModeIn;
+    flow ceConfigToLog of InterfaceItem from portConfigConfigOut to portLogConfigIn;
+    flow ceAlarmToLog of InterfaceItem from portAlarmAlarmOut to portLogAlarmIn;
+    flow ceSysStatToLog of InterfaceItem from portSysStatSysStatOut to portLogSysStatIn;
+    flow ceImToLog of InterfaceItem from portImImOut to portLogImIn;
+    flow ceLogToOutput of InterfaceItem from portLogLogOut to portOutputLogIn;
+    flow ceOutputToGpcaOut of InterfaceItem from portOutputGpcaSwOut to portGpcaSwOut;
 }

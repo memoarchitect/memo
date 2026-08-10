@@ -284,6 +284,25 @@ package memo_rules_ontology {
         constraint { true }
     }
 
+    // Track A3. The flow is the edge; the exchange part carries the budget and
+    // assurance attributes. The two halves are bound by a SHARED NAME — the flow
+    // usage is named with its exchange — and this is what makes that binding a
+    // checked fact rather than a convention someone can quietly break.
+    //
+    // It needs `linksOf`, because the question is about a link's IDENTITY, not
+    // about what sits at its ends: `sourcesOf`/`targetsOf` yield the elements at
+    // the ends and can never answer it. Naming the flow is what the grammar's
+    // restored FlowDeclaration name makes possible at all.
+    constraint def ExchangeHasFlowRule :> MemoConsistencyRule {
+        attribute id = "CR-ONT-076";
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "ComponentExchange";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "An exchange states that something crosses a boundary, which is an EDGE, and the edge is a native flow. The part def exists for the budget and assurance attributes a reader has to find from the edge, so the two are named alike and this rule holds them together. An exchange with no flow is a budget attached to nothing.";
+        attribute predicateExpression = "linksOf(flow)->exists(id == subject.id)";
+        constraint { true }
+    }
+
     constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-043";
         attribute tailoring = RuleTailoringKind::invariant;
