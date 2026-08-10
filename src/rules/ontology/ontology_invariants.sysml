@@ -67,7 +67,7 @@ package memo_rules_ontology {
     constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-040";
         attribute tailoring = RuleTailoringKind::invariant;
-        attribute appliesTo = "SystemFunction";
+        attribute appliesTo = "MemoFunction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Safety-critical functions (criticality high or catastrophic) must trace to at least one verification case.";
         attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or verifiedBy->size() >= 1";
@@ -256,6 +256,31 @@ package memo_rules_ontology {
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "An exchange ends at a component or at a boundary port, on the same grounds as CR-ONT-072.";
         attribute predicateExpression = "attributes.targetEndpoint == '' or allOfKind('ArchitectureElement')->exists(id == subject.attributes.targetEndpoint) or allOfKind('InterfaceElement')->exists(id == subject.attributes.targetEndpoint) or allOfKind('MemoPort')->exists(id == subject.attributes.targetEndpoint)";
+        constraint { true }
+    }
+
+    // ─── The functional chain ────────────────────────────────────────────
+    //
+    // What makes ComponentFunction a definition of its own rather than an enum
+    // member on SystemFunction. An enum value cannot change a multiplicity, and
+    // "answerable to exactly one component" is the whole content of the concept.
+
+    constraint def ComponentFunctionAllocatedRule :> MemoConsistencyRule {
+        attribute id = "CR-ONT-074";
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "ComponentFunction";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A component function is the responsibility of exactly one component, and AllocatedTo is what names it. A component function allocated nowhere is a responsibility nobody has accepted; one allocated twice is a responsibility nobody owns. A system-level responsibility with no single owner is a SystemFunction, which allows that.";
+        attribute predicateExpression = "allocatedTo->size() == 1";
+        constraint { true }
+    }
+    constraint def FunctionDecomposesIntoFunctionsRule :> MemoConsistencyRule {
+        attribute id = "CR-ONT-075";
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "MemoFunction";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "The functional chain decomposes functions into functions. A function composed of a component, or owned by one, is confusing allocation with decomposition — the component is named by AllocatedTo, never by Composes.";
+        attribute predicateExpression = "composes->forAll(conformsTo(MemoFunction))";
         constraint { true }
     }
 

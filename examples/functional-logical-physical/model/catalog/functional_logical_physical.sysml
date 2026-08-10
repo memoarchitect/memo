@@ -20,7 +20,7 @@ package memo_examples_functional_logical_physical {
     }
 
     // Functional: technology-independent responsibility.
-    part fnLimitLinePressure : SystemFunction {
+    action fnLimitLinePressure : SystemFunction {
         attribute :>> id = "FLP-FN-001"; attribute :>> name = "LimitLinePressure";
         attribute :>> criticality = CriticalityKind::high;
     }

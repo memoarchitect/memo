@@ -321,7 +321,7 @@ package memo_architecture_implementation_ui {
     }
     connection def ActionInvokesFunction :> MemoRelationship {
         end uiAction : UIAction :>> source;
-        end systemFunction : SystemFunction :>> target;
+        end systemFunction : MemoFunction :>> target;
     }
     connection def FlowServesUseCase :> MemoRelationship {
         end interactionFlow : InteractionFlow :>> source;

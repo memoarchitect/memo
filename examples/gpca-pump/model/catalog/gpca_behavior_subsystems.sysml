@@ -9,7 +9,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     private import memo_core_common::*;
 
     // ── Logical functions ───────────────────────────────────────
-    part fnAcquireSensors : SystemFunction {
+    action fnAcquireSensors : SystemFunction {
         attribute :>> id = "FUNC-001";
         attribute :>> name = "AcquireSensorData";
         attribute :>> functionCategory = "sensing";
@@ -18,7 +18,46 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part fnValidatePrescription : SystemFunction {
+    // ── Component functions decomposing FUNC-001 ────────────────
+    // The functional chain does not stop at the system boundary.
+    // "Acquire sensor data" is a system responsibility; measuring a flow rate
+    // is the flowmeter's, and aggregating the status vector is the sensor
+    // subassembly's. Each names its component through AllocatedTo (see
+    // gpca_behavior_actions), which CR-ONT-074 requires — a component function
+    // allocated nowhere is a responsibility nobody has accepted.
+    action cfnMeasureFlowRate : ComponentFunction {
+        attribute :>> id = "CFUN-001";
+        attribute :>> name = "MeasureFlowRate";
+        attribute :>> functionCategory = "sensing";
+        attribute :>> actionKind = ActionKind::sense;
+        attribute :>> trigger = "continuous, sampled every 20 ms execution step";
+        attribute :>> outputSummary = "Measured delivered flow rate in mL/h, with a validity flag";
+        attribute :>> concernKind = ConcernKind::safety;
+        attribute :>> criticality = CriticalityKind::catastrophic;
+    }
+    action cfnDetectAirInLine : ComponentFunction {
+        attribute :>> id = "CFUN-002";
+        attribute :>> name = "DetectAirInLine";
+        attribute :>> functionCategory = "protection";
+        attribute :>> actionKind = ActionKind::sense;
+        attribute :>> trigger = "continuous, sampled every 20 ms execution step";
+        attribute :>> outputSummary = "Air-in-line present or absent, with accumulated bolus volume";
+        attribute :>> concernKind = ConcernKind::safety;
+        attribute :>> criticality = CriticalityKind::catastrophic;
+    }
+    // The subassembly case: a component function need not sit on a leaf part.
+    action cfnAggregateSensorStatus : ComponentFunction {
+        attribute :>> id = "CFUN-003";
+        attribute :>> name = "AggregateSensorStatus";
+        attribute :>> functionCategory = "sensing";
+        attribute :>> actionKind = ActionKind::transform;
+        attribute :>> trigger = "every 20 ms execution step";
+        attribute :>> outputSummary = "Debounced, range-checked sensor status vector for the controller";
+        attribute :>> concernKind = ConcernKind::safety;
+        attribute :>> criticality = CriticalityKind::catastrophic;
+    }
+
+    action fnValidatePrescription : SystemFunction {
         attribute :>> id = "FUNC-002";
         attribute :>> name = "ValidatePrescription";
         attribute :>> functionCategory = "configuration";
@@ -27,7 +66,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part fnMonitorAlarm : SystemFunction {
+    action fnMonitorAlarm : SystemFunction {
         attribute :>> id = "FUNC-003";
         attribute :>> name = "MonitorExceptionalConditions";
         attribute :>> functionCategory = "alarm";
@@ -36,7 +75,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part fnAnnunciate : SystemFunction {
+    action fnAnnunciate : SystemFunction {
         attribute :>> id = "FUNC-004";
         attribute :>> name = "AnnunciateAlarms";
         attribute :>> functionCategory = "alarm";
@@ -45,7 +84,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::high;
     }
-    part fnManageInfusion : SystemFunction {
+    action fnManageInfusion : SystemFunction {
         attribute :>> id = "FUNC-005";
         attribute :>> name = "ManageInfusion";
         attribute :>> functionCategory = "infusion";
@@ -54,7 +93,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part fnEnforceLimits : SystemFunction {
+    action fnEnforceLimits : SystemFunction {
         attribute :>> id = "FUNC-006";
         attribute :>> name = "EnforceDoseLimits";
         attribute :>> functionCategory = "infusion";
@@ -63,7 +102,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part fnCommandPump : SystemFunction {
+    action fnCommandPump : SystemFunction {
         attribute :>> id = "FUNC-007";
         attribute :>> name = "CommandPumpMotor";
         attribute :>> functionCategory = "actuation";
@@ -72,7 +111,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part fnLogEvents : SystemFunction {
+    action fnLogEvents : SystemFunction {
         attribute :>> id = "FUNC-008";
         attribute :>> name = "LogTherapyEvents";
         attribute :>> functionCategory = "logging";
@@ -81,7 +120,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::regulatory;
         attribute :>> criticality = CriticalityKind::medium;
     }
-    part fnManagePower : SystemFunction {
+    action fnManagePower : SystemFunction {
         attribute :>> id = "FUNC-009";
         attribute :>> name = "ManagePower";
         attribute :>> functionCategory = "platform";
@@ -90,7 +129,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::reliability;
         attribute :>> criticality = CriticalityKind::high;
     }
-    part fnPresentStatus : SystemFunction {
+    action fnPresentStatus : SystemFunction {
         attribute :>> id = "FUNC-010";
         attribute :>> name = "PresentStatus";
         attribute :>> functionCategory = "user-interface";
@@ -99,7 +138,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> concernKind = ConcernKind::usability;
         attribute :>> criticality = CriticalityKind::high;
     }
-    part fnSelfTest : SystemFunction {
+    action fnSelfTest : SystemFunction {
         attribute :>> id = "FUNC-011";
         attribute :>> name = "ExecuteSelfTest";
         attribute :>> functionCategory = "platform";

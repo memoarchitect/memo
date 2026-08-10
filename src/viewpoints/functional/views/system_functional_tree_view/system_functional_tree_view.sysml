@@ -20,7 +20,7 @@ package memo_viewpoints_functional_views_system_functional_tree_view {
     part :>> selectionQuery {
         attribute :>> id = "QRY-FUNC-001";
         attribute :>> name = "SystemFunctionalTreeQuery";
-        attribute :>> includeElementKinds = ("SystemFunction");
+        attribute :>> includeElementKinds = ("SystemFunction", "ComponentFunction");
         attribute :>> includeLayers = ("functions");
         attribute :>> rationaleText = "Auto-populate the functional tree from the functions layer.";
     }

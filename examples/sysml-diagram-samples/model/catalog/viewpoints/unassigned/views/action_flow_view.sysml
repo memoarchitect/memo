@@ -19,15 +19,15 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
         attribute :>> itemKind = InterfaceItemKind::material;
     }
 
-    action def ReceiveInput specializes SystemAction { out item received : DataPacket; }
-    action def ValidateInput specializes SystemAction { in item received : DataPacket; out item validated : EnergyToken; }
-    action def ProcessInput specializes SystemAction { in item validated : EnergyToken; out item result : MaterialBatch; }
-    action def RecordResult specializes SystemAction { in item result : MaterialBatch; }
+    action def ReceiveInput specializes SystemFunction { out item received : DataPacket; }
+    action def ValidateInput specializes SystemFunction { in item received : DataPacket; out item validated : EnergyToken; }
+    action def ProcessInput specializes SystemFunction { in item validated : EnergyToken; out item result : MaterialBatch; }
+    action def RecordResult specializes SystemFunction { in item result : MaterialBatch; }
 
     part laneA : LogicalComponent { attribute :>> name = "Lane A"; }
     part laneB : LogicalComponent { attribute :>> name = "Lane B"; }
 
-    action sampleActionFlow : SystemAction {
+    action sampleActionFlow : SystemFunction {
         action receive : ReceiveInput;
         action validate : ValidateInput;
         action process : ProcessInput {
