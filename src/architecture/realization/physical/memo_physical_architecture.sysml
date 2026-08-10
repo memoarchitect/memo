@@ -46,6 +46,10 @@ package memo_architecture_realization_physical {
     // what the lean direction removes. One attribute, two sites, no new type.
     port def PhysicalPort specializes MemoPort {
         attribute portKind : InterfaceKind;
+        // AADL port category (plan C2) — see SoftwarePort. A physical port
+        // carries it for the same reason: a sampled sensor line and a queued
+        // interrupt line fail differently under overload.
+        attribute portCategory : PortCategoryKind;
         attribute connectorType : String;
     }
 }
