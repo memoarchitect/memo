@@ -1,7 +1,13 @@
-// Deployment (allocation) view: SoftwareModule buildsInto
-// DeploymentUnit; DeploymentUnit deploysTo ProcessingNode; SoftwareComponent
-// hostedBy ProcessingNode. Software deploys only to capable execution nodes
-// (rules/crosslayer).
+// Deployment (allocation) view: SoftwareModule buildsInto DeploymentUnit;
+// DeploymentUnit deploysTo ProcessingNode. Software deploys only to capable
+// execution nodes (rules/crosslayer).
+//
+// `HostedBy` is NOT part of that chain, and this comment used to claim it was
+// ("SoftwareComponent hostedBy ProcessingNode"). It is
+// `processingNode : ArchitectureElement -> hostAssembly : ArchitectureElement`:
+// physical hosting of a node by the assembly it is mounted in, running the
+// other way and between different things. Software reaches a node through
+// DeploysTo.
 package memo_architecture_realization_deployment {
     private import ScalarValues::*;
 

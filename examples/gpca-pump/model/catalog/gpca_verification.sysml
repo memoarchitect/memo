@@ -1,5 +1,6 @@
 package memo_examples_gpca_pump_gpca_verification {
     private import ScalarValues::*;
+    private import memo_core_dimensions::*;   // ElementStatusKind
 
     private import memo_assurance_verification_validation::*;
     private import memo_core_enumerations::*;
@@ -10,112 +11,112 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> name = "VerifyModeRange";
         attribute :>> methodKind = VerificationMethodKind::formalProof;
         attribute :>> acceptanceCriteria = "Current_System_mode only takes valid exclusive values";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcLockout : VerificationCase {
         attribute :>> id = "VER-002";
         attribute :>> name = "VerifyBolusLockout";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "No patient bolus initiated when lockout or max bolus constraints active";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcSameStepAlarm : VerificationCase {
         attribute :>> id = "VER-003";
         attribute :>> name = "VerifySameStepAlarmStop";
         attribute :>> methodKind = VerificationMethodKind::modelChecking;
         attribute :>> acceptanceCriteria = "Alarm output affects infusion in same execution step";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcTemporalModeSafety : VerificationCase {
         attribute :>> id = "VER-004";
         attribute :>> name = "VerifyTemporalModeSafety";
         attribute :>> methodKind = VerificationMethodKind::modelChecking;
         attribute :>> acceptanceCriteria = "No invalid transitions and pause on critical alarms";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcAirInLine : VerificationCase {
         attribute :>> id = "VER-005";
         attribute :>> name = "VerifyAirInLineStop";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Injected air above threshold pauses infusion and annunciates per the REQ 59 High-priority actions (REQ-CS-21)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcOcclusion : VerificationCase {
         attribute :>> id = "VER-006";
         attribute :>> name = "VerifyOcclusionDetection";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Clamped line above pressure threshold pauses infusion and annunciates (REQ-X-04)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcEmptyReservoir : VerificationCase {
         attribute :>> id = "VER-007";
         attribute :>> name = "VerifyEmptyReservoirStop";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Reservoir-empty assertion transitions to PAUSED (KVO flow) and annunciates per the REQ 59 High-priority actions (REQ-CS-23)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcPost : VerificationCase {
         attribute :>> id = "VER-008";
         attribute :>> name = "VerifyPowerOnSelfTest";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Each injected POST fault (CPU, RAM, ROM, watchdog, sensors) blocks therapy and alarms (REQ-X-02)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcPowerLoss : VerificationCase {
         attribute :>> id = "VER-009";
         attribute :>> name = "VerifyPowerLossRetentionAndResume";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Prescription and log intact after power cycle; therapy resumes only after confirmation (REQ-X-03)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcWatchdog : VerificationCase {
         attribute :>> id = "VER-010";
         attribute :>> name = "VerifyWatchdogSafeState";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Induced CPU hang forces zero flow and continuous alarm within 60 ms (REQ-X-08, TC-003)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcHourlyMax : VerificationCase {
         attribute :>> id = "VER-011";
         attribute :>> name = "VerifyHourlyDoseCeiling";
         attribute :>> methodKind = VerificationMethodKind::simulation;
         attribute :>> acceptanceCriteria = "Randomized bolus/basal schedules never exceed hourly maximum in sliding window (REQ-X-06)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcPumpAccuracy : VerificationCase {
         attribute :>> id = "VER-012";
         attribute :>> name = "VerifyDeliveryAccuracy";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Gravimetric bench measurement within ±5% (Tolerance_Min_const) across rate range (REQ-X-11)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcAlarmLoudness : VerificationCase {
         attribute :>> id = "VER-013";
         attribute :>> name = "VerifyAlarmSoundPressure";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Each priority tone meets Audio_level_const, 50 db for 2 s per I 8 (REQ-X-12)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcFreeFlow : VerificationCase {
         attribute :>> id = "VER-014";
         attribute :>> name = "VerifyAntiFreeFlowValve";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "No gravity flow with set disengaged under worst-case head height (REQ-X-14)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcStuckButton : VerificationCase {
         attribute :>> id = "VER-015";
         attribute :>> name = "VerifyStuckButtonDetection";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Shorted pendant input yields no bolus and Medium-priority notification after 60 s (REQ-X-09)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcFlowCrossCheck : VerificationCase {
         attribute :>> id = "VER-016";
         attribute :>> name = "VerifyFlowCrossCheck";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Injected deviation beyond Tolerance_Min_const sustained past Max_Duration_OverInfusion_const pauses therapy and annunciates (REQ-X-10)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
 
     verification vcDrugLibrary : VerificationCase {
@@ -123,56 +124,56 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> name = "VerifyDrugLibraryEnforcement";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Hard-limit entries rejected, soft-limit entries require confirmation, both logged (REQ-X-01)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcPrescriptionConfirm : VerificationCase {
         attribute :>> id = "VER-018";
         attribute :>> name = "VerifyPrescriptionConfirmation";
         attribute :>> methodKind = VerificationMethodKind::demonstration;
         attribute :>> acceptanceCriteria = "Therapy cannot start without distinct confirmation; displayed values equal stored values (REQ-CS-09)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcEventLog : VerificationCase {
         attribute :>> id = "VER-019";
         attribute :>> name = "VerifyEventLogIntegrity";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Operational/error log entries per REQ-CS-78..81; tampering detectable (REQ-X-07)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcReverseDeliveryPause : VerificationCase {
         attribute :>> id = "VER-020";
         attribute :>> name = "VerifyReverseDeliveryPause";
         attribute :>> methodKind = VerificationMethodKind::modelChecking;
         attribute :>> acceptanceCriteria = "Continuous or cumulative reverse delivery beyond the REQ-CS-22 duration limits transitions to PAUSED and raises the Reverse Delivery notification (NOTIF-04)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcAntiRefluxMechanism : VerificationCase {
         attribute :>> id = "VER-021";
         attribute :>> name = "VerifyContinuousReverseDeliveryPrevention";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "During normal use and single fault condition, continuous reverse delivery is not possible (IEC 601-2-24 basis per GPCA safety requirements)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcVtbiCeiling : VerificationCase {
         attribute :>> id = "VER-022";
         attribute :>> name = "VerifyVtbiCeilingPause";
         attribute :>> methodKind = VerificationMethodKind::modelChecking;
         attribute :>> acceptanceCriteria = "Actual volume infused above the drug-database maximum VTBI transitions to PAUSED with flow at most KVO (REQ-CS-20, AGREE GP-008) and raises NOTIF-06";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcInfusionComplete : VerificationCase {
         attribute :>> id = "VER-023";
         attribute :>> name = "VerifyInfusionCompleteStop";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Reaching prescribed total duration or maximum VTBI transitions ACTIVE to IDLE with Infusion Complete actions (REQ-CS-28)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
     verification vcDoorInterlock : VerificationCase {
         attribute :>> id = "VER-024";
         attribute :>> name = "VerifyDoorOpenDeliveryInhibit";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Door open during THERAPY limits flow to at most KVO and raises a notification (AGREE GP-011; REQ-X-05)";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
 
     // ── Validation cases (design validation / IEC 62366) ────────

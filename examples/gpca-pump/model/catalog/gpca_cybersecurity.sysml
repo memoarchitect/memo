@@ -1,5 +1,6 @@
 package memo_examples_gpca_pump_gpca_cybersecurity {
     private import ScalarValues::*;
+    private import memo_core_dimensions::*;   // ElementStatusKind
 
     private import memo_assurance_cybersecurity::*;
     private import memo_assurance_requirements::*;
@@ -145,7 +146,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> name = "VerifyAuthenticatedServiceAccess";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Only authenticated and authorized service sessions may modify therapy configuration; all attempts are logged.";
-        attribute :>> status = "planned";
+        attribute :>> status = ElementStatusKind::approved;
     }
 
     connection : ThreatenedBy connect protectedAsset ::> therapyConfigurationAsset to realizedThreat ::> unauthorizedConfigChangeThreat;
