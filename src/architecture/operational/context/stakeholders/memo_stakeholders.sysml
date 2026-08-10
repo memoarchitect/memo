@@ -39,17 +39,17 @@ package memo_architecture_operational_context_stakeholders {
     }
 
     connection def HasConcern :> MemoRelationship {
-        end interestedStakeholder : Stakeholder;
-        end stakeholderConcern : Concern;
+        end interestedStakeholder : Stakeholder :>> source;
+        end stakeholderConcern : Concern :>> target;
     }
     connection def FramesConcern :> MemoRelationship {
-        end framingViewpoint : MemoPart;
-        end framedConcern : Concern;
+        end framingViewpoint : MemoPart :>> source;
+        end framedConcern : Concern :>> target;
     }
     // Links the stakeholder to the actor role the same entity plays, if any.
     connection def ActsAsActor :> MemoRelationship {
-        end interestedStakeholder : Stakeholder;
-        end actorRole : Actor;
+        end interestedStakeholder : Stakeholder :>> source;
+        end actorRole : Actor :>> target;
     }
     // Governs unifies GovernsCorrespondence / GovernsUse, keyed by governKind.
     enum def GovernKind {
@@ -58,7 +58,7 @@ package memo_architecture_operational_context_stakeholders {
     }
     connection def Governs :> MemoRelationship {
         attribute governKind : GovernKind;
-        end governor : MemoPart;
-        end governedElement : MemoPart;
+        end governor : Stakeholder :>> source;
+        end governedElement : MemoPart :>> target;
     }
 }

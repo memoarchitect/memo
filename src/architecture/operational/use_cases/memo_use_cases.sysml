@@ -43,25 +43,25 @@ package memo_architecture_operational_use_cases {
     }
 
     connection def Motivates :> MemoRelationship {
-        end motivatingNeed : Need;
-        end motivatedUseCase : UseCase;
+        end motivatingNeed : Need :>> source;
+        end motivatedUseCase : UseCase :>> target;
     }
     connection def Initiates :> MemoRelationship {
-        end initiatingUser : User;
-        end initiatedUseCase : UseCase;
+        end initiatingUser : User :>> source;
+        end initiatedUseCase : UseCase :>> target;
     }
     connection def ParticipatesIn :> MemoRelationship {
-        end participatingActor : Actor;
-        end useCase : UseCase;
+        end participatingActor : Actor :>> source;
+        end useCase : UseCase :>> target;
     }
     // UML use-case relationships. Includes establishes a decomposition level;
     // extends remains a cross-cutting relationship and is always presented.
     connection def Includes :> MemoRelationship {
-        end includingUseCase : UseCase;
-        end includedUseCase : UseCase;
+        end includingUseCase : UseCase :>> source;
+        end includedUseCase : UseCase :>> target;
     }
     connection def Extends :> MemoRelationship {
-        end extendingUseCase : UseCase;
-        end extendedUseCase : UseCase;
+        end extendingUseCase : UseCase :>> source;
+        end extendedUseCase : UseCase :>> target;
     }
 }

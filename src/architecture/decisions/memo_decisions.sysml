@@ -13,7 +13,15 @@ package memo_architecture_decisions {
     }
 
     connection def DecisionRecordedInADR :> MemoRelationship {
-        end decision : DesignDecision;
-        end adr : ADRArtifact;
+        end decision : DesignDecision :>> source;
+        end adr : ADRArtifact :>> target;
+    }
+
+    // ── Relations owned by this package ─────────────────────────────
+    // Moved out of memo_core_relationships: their ends are typed against
+    // types declared here, and core must not depend on a domain package.
+    connection def Decides :> MemoRelationship {
+        end decision : DesignDecision :>> source;
+        end affectedElement : MemoPart :>> target;
     }
 }

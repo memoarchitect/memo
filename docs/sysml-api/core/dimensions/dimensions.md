@@ -31,7 +31,7 @@
 | --- | --- | --- | --- |
 | [`RealizationStageKind`](#realizationstagekind) | `enum def` | Realization stages of one element identity across the product lifecycle (proposal through retirement). Orthogonal to the axis: a single identity progresses through stages without changing its owner. | — |
 | [`CrossCuttingConcernKind`](#crosscuttingconcernkind) | `enum def` | Cross-cutting concerns orthogonal to the axis. | — |
-| [`ElementStatusKind`](#elementstatuskind) | `enum def` | Editorial status of the model element itself (distinct from the lifecycle of the thing the element describes). | — |
+| [`ElementStatusKind`](#elementstatuskind) | `enum def` | Controlled values for element status: `proposed`, `draft`, `inReview`, `approved`, `released`, `deprecated`, `retired`. | — |
 | [`RealizationClassification`](#realizationclassification) | `metadata def` | Metadata carriers for tagging non-part constructs (actions, ports, interfaces, items, views) with the orthogonal dimensions. Part-based elements carry these directly as attributes of MemoPart. Axis ownership is never tagged here — it is the construct's owning package. | — |
 | [`CrossCuttingClassification`](#crosscuttingclassification) | `metadata def` | Cross cutting classification definition. | — |
 
@@ -73,7 +73,7 @@ enum def ElementStatusKind
 
 | Property | Value |
 | --- | --- |
-| Description | Editorial status of the model element itself (distinct from the lifecycle of the thing the element describes). |
+| Description | Controlled values for element status: `proposed`, `draft`, `inReview`, `approved`, `released`, `deprecated`, `retired`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -156,7 +156,19 @@ metadata def CrossCuttingClassification
     
         // Editorial status of the model element itself (distinct from the
         // lifecycle of the thing the element describes).
+        // This is the ONE status vocabulary in MEMO: every element carries
+        // `status : ElementStatusKind`, whatever its metaclass. The former
+        // per-family variants (RequirementStatusKind, LinkStatusKind,
+        // MemoNeed::needStatus) are gone — three overlapping status dropdowns on
+        // one element was cognitive load, not precision.
+        //
+        // The V&V states the requirement variant carried (implemented, verified,
+        // validated) are deliberately NOT here: they are facts about links, not
+        // editorial states. An element is implemented when a Realizes link exists,
+        // verified when VerifiedBy does, validated when Validates does. Duplicating
+        // them as an attribute lets the attribute disagree with the graph.
         enum def ElementStatusKind {
+            enum proposed;
             enum draft;
             enum inReview;
             enum approved;

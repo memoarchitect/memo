@@ -35,7 +35,7 @@
 | --- | --- | --- | --- |
 | [`RuntimeKind`](#runtimekind) | `enum def` | process / thread / task / service / container / partition / dataStore / messageBroker. | — |
 | [`SoftwareComponent`](#softwarecomponent) | `part def` | Software component definition specializing `SoftwareItem`. | `SoftwareItem` |
-| [`ComponentConnects`](#componentconnects) | `connection def` | Typed relationship from `SoftwareComponent` to `SoftwareComponent`. | `MemoRelationship` |
+| [`ComponentConnects`](#componentconnects) | `connection def` | Typed relationship for component connects. | `MemoRelationship` |
 
 ## RuntimeKind
 
@@ -75,7 +75,7 @@ connection def ComponentConnects :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `SoftwareComponent` to `SoftwareComponent`. |
+| Description | Typed relationship for component connects. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -151,8 +151,8 @@ connection def ComponentConnects :> MemoRelationship
     
         connection def ComponentConnects :> MemoRelationship {
             attribute protocolSummary : String;
-            end sourceComponent : SoftwareComponent;
-            end targetComponent : SoftwareComponent;
+            end sourceComponent : SoftwareComponent :>> source;
+            end targetComponent : SoftwareComponent :>> target;
         }
     }
     

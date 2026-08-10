@@ -59,6 +59,8 @@
             attribute :>> presentationKind = (PresentationKind::screenLayout);
             attribute :>> concernKinds = (ConcernKind::usability, ConcernKind::safety);
             attribute :>> includedLayers = ("implementation");
+            attribute :>> explorerLane = "architecture";
+            attribute :>> explorerOrder = 4;
             attribute :>> allowedElementKinds = ("ScreenCapture", "UIElement", "UserInterface");
             attribute :>> allowedRelationshipKinds = ("CapturesScreen", "NavigatesTo", "Composes", "SatisfiedBy", "ElementTriggersAction");
             attribute :>> defaultViewKind = DiagramViewKind::geometry;

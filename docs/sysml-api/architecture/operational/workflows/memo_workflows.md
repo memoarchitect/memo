@@ -44,9 +44,9 @@
 | [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. | `MemoPart` |
 | [`SupportKind`](#supportkind) | `enum def` | Controlled values for support: `useCase`, `task`, `capability`. | — |
 | [`Supports`](#supports) | `connection def` | Typed relationship for supports. | `MemoRelationship` |
-| [`RequiresResource`](#requiresresource) | `connection def` | Typed relationship from `OperationalWorkflow` to `WorkflowResource`. | `MemoRelationship` |
+| [`RequiresResource`](#requiresresource) | `connection def` | Typed relationship for requires resource. | `MemoRelationship` |
 | [`TransformKind`](#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | — |
-| [`Transforms`](#transforms) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
+| [`Transforms`](#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | `MemoRelationship` |
 
 ## WorkflowStateKind
 
@@ -191,7 +191,7 @@ connection def RequiresResource :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `OperationalWorkflow` to `WorkflowResource`. |
+| Description | Typed relationship for requires resource. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -221,7 +221,7 @@ connection def Transforms :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship from `MemoAction` to `MemoAction`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -328,12 +328,12 @@ connection def Transforms :> MemoRelationship
             // The accepted endpoints span SysML metaclasses: an operational
             // workflow or other action may support a use case, task, or
             // capability. They therefore have no single MEMO base type.
-            end supporter;
-            end supported;
+            end supporter :>> source;
+            end supported : MemoAction :>> target;
         }
         connection def RequiresResource :> MemoRelationship {
-            end workflow : OperationalWorkflow;
-            end resource : WorkflowResource;
+            end workflow : OperationalWorkflow :>> source;
+            end resource : WorkflowResource :>> target;
         }
     
         // ── Workflow transformation (as-is → to-be) ──────────────────
@@ -348,8 +348,8 @@ connection def Transforms :> MemoRelationship
             attribute transformKind : TransformKind;
             attribute transformation : StepTransformationKind[0..1];
             attribute transformationRationale : String[0..1];
-            end source : MemoPart;
-            end target : MemoPart;
+            end source : MemoAction;
+            end target : MemoAction;
         }
         // The device or system whose introduction enables a workflow.
     }

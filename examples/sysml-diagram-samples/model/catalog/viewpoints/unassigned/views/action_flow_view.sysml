@@ -72,7 +72,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
     // because a value must be a feature and a definition is not.
     connection linkLaneBProcessesInput : MemoLink
         connect linkSource ::> laneB to linkTarget ::> sampleActionFlow.process {
-        attribute :>> linkRationale =
+        attribute :>> rationale =
             "Lane B is the swimlane that carries the ProcessInput behaviour. The association crosses the part/action metaclass boundary, so no typed relation can express it.";
     }
 

@@ -40,8 +40,8 @@
 | [`FunctionalFlow`](#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | `ArchitectureElement` |
 | [`FunctionalFlowStep`](#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | `MemoAction` |
 | [`FunctionalScenario`](#functionalscenario) | `action def` | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. | `MemoScenario` |
-| [`IncludesStep`](#includesstep) | `connection def` | Typed relationship from `FunctionalFlow` to `FunctionalFlowStep`. | `MemoRelationship` |
-| [`InvolvesFunction`](#involvesfunction) | `connection def` | Typed relationship from `FunctionalFlow` to `SystemFunction`. | `MemoRelationship` |
+| [`IncludesStep`](#includesstep) | `connection def` | Typed relationship for includes step. | `MemoRelationship` |
+| [`InvolvesFunction`](#involvesfunction) | `connection def` | Typed relationship for involves function. | `MemoRelationship` |
 
 ## SystemFunction
 
@@ -141,7 +141,7 @@ connection def IncludesStep :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `FunctionalFlow` to `FunctionalFlowStep`. |
+| Description | Typed relationship for includes step. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -156,7 +156,7 @@ connection def InvolvesFunction :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `FunctionalFlow` to `SystemFunction`. |
+| Description | Typed relationship for involves function. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -233,12 +233,12 @@ connection def InvolvesFunction :> MemoRelationship
             ref selectedFlow : FunctionalFlow[0..1];
         }
         connection def IncludesStep :> MemoRelationship {
-            end functionalFlow : FunctionalFlow;
-            end step : FunctionalFlowStep;
+            end functionalFlow : FunctionalFlow :>> source;
+            end step : FunctionalFlowStep :>> target;
         }
         connection def InvolvesFunction :> MemoRelationship {
-            end functionalFlow : FunctionalFlow;
-            end function : SystemFunction;
+            end functionalFlow : FunctionalFlow :>> source;
+            end function : SystemFunction :>> target;
         }
         // Compatibility spelling used by existing models.
     }

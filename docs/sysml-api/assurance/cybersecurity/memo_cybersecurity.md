@@ -24,6 +24,7 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_assurance_requirements::*` |
@@ -38,7 +39,7 @@
 | [`CybersecurityAsset`](#cybersecurityasset) | `part def` | Cybersecurity asset definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`AttackSurface`](#attacksurface) | `part def` | Attack surface definition specializing `MemoPart`. | `MemoPart` |
 | [`Threat`](#threat) | `item def` | Threat definition specializing `RiskDriver`. | `RiskDriver` |
-| [`Vulnerability`](#vulnerability) | `item def` | Vulnerability definition specializing `MemoPart`. | `MemoPart` |
+| [`Vulnerability`](#vulnerability) | `item def` | Vulnerability definition specializing `RiskItem`. | `RiskItem` |
 | [`ThreatScenario`](#threatscenario) | `action def` | A scenario specialization: an attack path through the system, classified by the shared scenario dimensions with purpose `cybersecurity`. | `MemoScenario` |
 | [`CyberHazard`](#cyberhazard) | `item def` | Cyber hazard definition specializing `Hazard`. | `Hazard` |
 | [`CyberRisk`](#cyberrisk) | `item def` | Cyber risk definition specializing `Risk`. | `Risk` |
@@ -46,6 +47,9 @@
 | [`SecurityRequirement`](#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. | `Requirement` |
 | [`TrustBoundary`](#trustboundary) | `item def` | Trust boundary definition specializing `InterfaceElement`. | `InterfaceElement` |
 | [`SecurityClaim`](#securityclaim) | `part def` | Security claim definition specializing `MemoEvidence`. | `MemoEvidence` |
+| [`Exploits`](#exploits) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
+| [`RealizedByScenario`](#realizedbyscenario) | `connection def` | Typed relationship for realized by scenario. | `MemoRelationship` |
+| [`ImpactsSafety`](#impactssafety) | `connection def` | Typed relationship for impacts safety. | `MemoRelationship` |
 
 ## CybersecurityAsset
 
@@ -95,15 +99,15 @@ item def Threat specializes RiskDriver
 ## Vulnerability
 
 ```sysml
-item def Vulnerability specializes MemoPart
+item def Vulnerability specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Vulnerability definition specializing `MemoPart`. |
+| Description | Vulnerability definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_cybersecurity` |
 
 
@@ -212,6 +216,51 @@ part def SecurityClaim specializes MemoEvidence
 | Owning package | `memo_assurance_cybersecurity` |
 
 
+## Exploits
+
+```sysml
+connection def Exploits :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## RealizedByScenario
+
+```sysml
+connection def RealizedByScenario :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for realized by scenario. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## ImpactsSafety
+
+```sysml
+connection def ImpactsSafety :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for impacts safety. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
 ## Source
 
 ??? code "assurance/cybersecurity/memo_cybersecurity.sysml"
@@ -219,6 +268,7 @@ part def SecurityClaim specializes MemoEvidence
     ```sysml
     package memo_assurance_cybersecurity {
         private import ScalarValues::*;
+        private import memo_core_relationships::*;   // MemoRelationship
     
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
@@ -256,7 +306,7 @@ part def SecurityClaim specializes MemoEvidence
             attribute strideCategory : ThreatCategoryKind;
         }
     
-        item def Vulnerability specializes MemoPart {
+        item def Vulnerability specializes RiskItem {
             attribute weakness : String;
             attribute exploitability : String;
             attribute discoveryMethod : String;
@@ -317,6 +367,23 @@ part def SecurityClaim specializes MemoEvidence
             attribute claimText : String;
             attribute claimScope : String;
             attribute supportedByEvidence : String;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        connection def Exploits :> MemoRelationship {
+            end realizedThreat : RequirementDriver :>> source;
+            end enablingVulnerability : Vulnerability :>> target;
+        }
+        connection def RealizedByScenario :> MemoRelationship {
+            end realizedThreat : RequirementDriver :>> source;
+            end scenario : MemoScenario :>> target;
+        }
+        connection def ImpactsSafety :> MemoRelationship {
+            attribute tracePurpose : String;
+            end cyberElement : MemoPart :>> source;
+            end safetyElement : RiskItem :>> target;
         }
     }
     

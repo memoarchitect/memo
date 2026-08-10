@@ -100,8 +100,8 @@ package memo_artifacts_standards_traceability {
         doc /* Any model element claims conformance to a standard clause.
              * This is the edge the standards traceability matrix and the
              * clause coverage report are computed over. */
-        end conformingElement : MemoPart;
-        end clause : StandardClause;
+        end conformingElement : MemoPart :>> source;
+        end clause : StandardClause :>> target;
     }
 
     connection def TracesToDocument :> MemoRelationship {
@@ -113,7 +113,7 @@ package memo_artifacts_standards_traceability {
              * granularity rides on the link as a reference string rather than
              * as a duplicate element type. */
         attribute sectionReference : String[0..1];
-        end tracedElement : MemoPart;
-        end artifact : ControlledArtifact;
+        end tracedElement : MemoPart :>> source;
+        end artifact : ControlledArtifact :>> target;
     }
 }

@@ -87,7 +87,15 @@ package memo_architecture_implementation_software_structure {
     }
 
     connection def ModuleUses :> MemoRelationship {
-        end usingModule : SoftwareModule;
-        end usedModule : SoftwareModule;
+        end usingModule : SoftwareModule :>> source;
+        end usedModule : SoftwareModule :>> target;
+    }
+
+    // ── Relations owned by this package ─────────────────────────────
+    // Moved out of memo_core_relationships: their ends are typed against
+    // types declared here, and core must not depend on a domain package.
+    connection def DependsOnSoup :> MemoRelationship {
+        end component : ArchitectureElement :>> source;
+        end soupItem : SoftwareItem :>> target;
     }
 }

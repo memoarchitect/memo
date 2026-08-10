@@ -43,7 +43,7 @@ package memo_assurance_verification_validation {
     // use environment (§5): ValidationCase validates a UseCase.
     // Safety-critical functions must trace to verification (rules/coverage).
     connection def ExecutesScenario :> MemoRelationship {
-        end verificationCase : VerificationCase;
-        end scenario : MemoScenario;
+        end verificationCase : VerificationCase :>> source;
+        end scenario : MemoScenario :>> target;
     }
 }

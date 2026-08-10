@@ -32,7 +32,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`NeedKind`](#needkind) | `enum def` | Controlled values for need: `user`, `clinicalUser`, `patientUser`, `business`, `service`, `regulatory`, `operational`, `designControl`. | — |
-| [`Need`](#need) | `requirement def` | Need definition specializing `MemoNeed,`. | `MemoNeed,` |
+| [`Need`](#need) | `requirement def` | Need definition specializing `MemoNeed`. | `MemoNeed` |
 
 ## NeedKind
 
@@ -52,15 +52,15 @@ enum def NeedKind
 ## Need
 
 ```sysml
-requirement def Need specializes MemoNeed, RequirementDriver
+requirement def Need specializes MemoNeed
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Need definition specializing `MemoNeed,`. |
+| Description | Need definition specializing `MemoNeed`. |
 | Kind | `requirement def` |
 | Abstract | No |
-| Specializes | `MemoNeed,` |
+| Specializes | `MemoNeed` |
 | Owning package | `memo_assurance_requirements_needs` |
 
 
@@ -98,7 +98,7 @@ requirement def Need specializes MemoNeed, RequirementDriver
             enum designControl;
         }
     
-        requirement def Need specializes MemoNeed, RequirementDriver {
+        requirement def Need specializes MemoNeed {
             attribute needKind : NeedKind;
             // user need (IEC 62366-1)
             attribute userPopulationReference : String;

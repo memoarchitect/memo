@@ -38,11 +38,11 @@
 | [`ArchitectureDescription`](#architecturedescription) | `part def` | Architecture description definition specializing `DocumentedElement`. | `DocumentedElement` |
 | [`ModelKind`](#modelkind) | `part def` | Model definition specializing `MemoPart`. | `MemoPart` |
 | [`CorrespondenceRule`](#correspondencerule) | `part def` | 42010 correspondence: a rule that must hold between architecture description elements (e.g. consistency between two views). | `MemoPart` |
-| [`HasConcern`](#hasconcern) | `connection def` | Typed relationship from `Stakeholder` to `Concern`. | `MemoRelationship` |
-| [`FramesConcern`](#framesconcern) | `connection def` | Typed relationship from `MemoPart` to `Concern`. | `MemoRelationship` |
+| [`HasConcern`](#hasconcern) | `connection def` | Typed relationship for has concern. | `MemoRelationship` |
+| [`FramesConcern`](#framesconcern) | `connection def` | Typed relationship for frames concern. | `MemoRelationship` |
 | [`ActsAsActor`](#actsasactor) | `connection def` | Links the stakeholder to the actor role the same entity plays, if any. | `MemoRelationship` |
 | [`GovernKind`](#governkind) | `enum def` | Controlled values for govern: `correspondence`. | — |
-| [`Governs`](#governs) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
+| [`Governs`](#governs) | `connection def` | Typed relationship for governs. | `MemoRelationship` |
 
 ## Stakeholder
 
@@ -127,7 +127,7 @@ connection def HasConcern :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `Stakeholder` to `Concern`. |
+| Description | Typed relationship for has concern. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -142,7 +142,7 @@ connection def FramesConcern :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoPart` to `Concern`. |
+| Description | Typed relationship for frames concern. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -187,7 +187,7 @@ connection def Governs :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for governs. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -240,17 +240,17 @@ connection def Governs :> MemoRelationship
         }
     
         connection def HasConcern :> MemoRelationship {
-            end interestedStakeholder : Stakeholder;
-            end stakeholderConcern : Concern;
+            end interestedStakeholder : Stakeholder :>> source;
+            end stakeholderConcern : Concern :>> target;
         }
         connection def FramesConcern :> MemoRelationship {
-            end framingViewpoint : MemoPart;
-            end framedConcern : Concern;
+            end framingViewpoint : MemoPart :>> source;
+            end framedConcern : Concern :>> target;
         }
         // Links the stakeholder to the actor role the same entity plays, if any.
         connection def ActsAsActor :> MemoRelationship {
-            end interestedStakeholder : Stakeholder;
-            end actorRole : Actor;
+            end interestedStakeholder : Stakeholder :>> source;
+            end actorRole : Actor :>> target;
         }
         // Governs unifies GovernsCorrespondence / GovernsUse, keyed by governKind.
         enum def GovernKind {
@@ -259,8 +259,8 @@ connection def Governs :> MemoRelationship
         }
         connection def Governs :> MemoRelationship {
             attribute governKind : GovernKind;
-            end governor : MemoPart;
-            end governedElement : MemoPart;
+            end governor : Stakeholder :>> source;
+            end governedElement : MemoPart :>> target;
         }
     }
     

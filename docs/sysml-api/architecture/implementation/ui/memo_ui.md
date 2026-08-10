@@ -26,6 +26,7 @@
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_assurance_safety_risk::*` |
 | private | `memo_core_relationships::*` |
 | private | `memo_architecture_operational_activities::*` |
 | private | `memo_architecture_operational_scenarios::*` |
@@ -55,15 +56,15 @@
 | [`UIAction`](#uiaction) | `action def` | Uiaction definition specializing `MemoAction`. | `MemoAction` |
 | [`InteractionFlow`](#interactionflow) | `action def` | Interaction flow definition specializing `MemoAction`. | `MemoAction` |
 | [`UIScenario`](#uiscenario) | `action def` | Uiscenario definition specializing `MemoScenario`. | `MemoScenario` |
-| [`UITransition`](#uitransition) | `connection def` | Typed relationship from `UIState` to `UIState`. | `MemoRelationship` |
-| [`DataBinding`](#databinding) | `connection def` | Typed relationship from `InteractionElement` to `MemoPart`. | `MemoRelationship` |
-| [`PresentsState`](#presentsstate) | `connection def` | Typed relationship from `UserInterface` to `UIState`. | `MemoRelationship` |
+| [`UITransition`](#uitransition) | `connection def` | Typed relationship for uitransition. | `MemoRelationship` |
+| [`DataBinding`](#databinding) | `connection def` | Typed relationship for data binding. | `MemoRelationship` |
+| [`PresentsState`](#presentsstate) | `connection def` | Typed relationship for presents state. | `MemoRelationship` |
 | [`CapturesScreen`](#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | `MemoRelationship` |
 | [`NavigatesTo`](#navigatesto) | `connection def` | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… | `MemoRelationship` |
-| [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship from `InteractionElement` to `UIAction`. | `MemoRelationship` |
-| [`ActionInvokesFunction`](#actioninvokesfunction) | `connection def` | Typed relationship from `UIAction` to `SystemFunction`. | `MemoRelationship` |
-| [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship from `InteractionFlow` to `UseCase`. | `MemoRelationship` |
-| [`ErrorAtElement`](#erroratelement) | `connection def` | Typed relationship from `UseError` to `InteractionElement`. | `MemoRelationship` |
+| [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship for element triggers action. | `MemoRelationship` |
+| [`ActionInvokesFunction`](#actioninvokesfunction) | `connection def` | Typed relationship for action invokes function. | `MemoRelationship` |
+| [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | `MemoRelationship` |
+| [`ErrorAtElement`](#erroratelement) | `connection def` | Typed relationship for error at element. | `MemoRelationship` |
 | [`ControlImplementedBy`](#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | `MemoRelationship` |
 
 ## UIElementFormKind
@@ -314,7 +315,7 @@ connection def UITransition :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UIState` to `UIState`. |
+| Description | Typed relationship for uitransition. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -329,7 +330,7 @@ connection def DataBinding :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `InteractionElement` to `MemoPart`. |
+| Description | Typed relationship for data binding. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -344,7 +345,7 @@ connection def PresentsState :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UserInterface` to `UIState`. |
+| Description | Typed relationship for presents state. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -389,7 +390,7 @@ connection def ElementTriggersAction :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `InteractionElement` to `UIAction`. |
+| Description | Typed relationship for element triggers action. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -404,7 +405,7 @@ connection def ActionInvokesFunction :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UIAction` to `SystemFunction`. |
+| Description | Typed relationship for action invokes function. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -419,7 +420,7 @@ connection def FlowServesUseCase :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `InteractionFlow` to `UseCase`. |
+| Description | Typed relationship for flow serves use case. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -434,7 +435,7 @@ connection def ErrorAtElement :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UseError` to `InteractionElement`. |
+| Description | Typed relationship for error at element. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -472,6 +473,7 @@ connection def ControlImplementedBy :> MemoRelationship
     
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
+        private import memo_assurance_safety_risk::*;   // RiskControlMeasure
         private import memo_core_relationships::*;
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_scenarios::*;
@@ -743,25 +745,25 @@ connection def ControlImplementedBy :> MemoRelationship
         connection def UITransition :> MemoRelationship {
             attribute triggeringEvent : String;
             attribute guardCondition : String;
-            end sourceState : UIState;
-            end targetState : UIState;
+            end sourceState : UIState :>> source;
+            end targetState : UIState :>> target;
         }
         connection def DataBinding :> MemoRelationship {
             attribute bindingExpression : String;
             attribute refreshPolicy : String;
-            end boundElement : InteractionElement;
-            end dataSource : MemoPart;
+            end boundElement : InteractionElement :>> source;
+            end dataSource : MemoExchangeItem :>> target;
         }
         connection def PresentsState :> MemoRelationship {
-            end userInterface : UserInterface;
-            end uiState : UIState;
+            end userInterface : UserInterface :>> source;
+            end uiState : UIState :>> target;
         }
     
         // ── Screen layout relations ──────────────────────────────────
         // Which modelled screen an image is a rendering of.
         connection def CapturesScreen :> MemoRelationship {
-            end capture : ScreenCapture;
-            end screen : UIElement;
+            end capture : ScreenCapture :>> source;
+            end screen : UIElement :>> target;
         }
     
         // Activating this element opens another screen. This is NAVIGATION, not
@@ -772,35 +774,35 @@ connection def ControlImplementedBy :> MemoRelationship
         // from here, and only this relation says so.
         connection def NavigatesTo :> MemoRelationship {
             attribute triggerGesture : String;
-            end sourceElement : UIElement;
-            end targetScreen : UIElement;
+            end sourceElement : UIElement :>> source;
+            end targetScreen : UIElement :>> target;
         }
     
         // ── §18 traceability ─────────────────────────────────────────
         connection def ElementTriggersAction :> MemoRelationship {
-            end element : InteractionElement;
-            end triggeredAction : UIAction;
+            end element : InteractionElement :>> source;
+            end triggeredAction : UIAction :>> target;
         }
         connection def ActionInvokesFunction :> MemoRelationship {
-            end uiAction : UIAction;
-            end systemFunction : SystemFunction;
+            end uiAction : UIAction :>> source;
+            end systemFunction : SystemFunction :>> target;
         }
         connection def FlowServesUseCase :> MemoRelationship {
-            end interactionFlow : InteractionFlow;
-            end useCase : UseCase;
+            end interactionFlow : InteractionFlow :>> source;
+            end useCase : UseCase :>> target;
         }
         // The UI-layer scenario realizes exactly one FunctionalScenario one layer
         // up (the interaction sequence that carries out the function sequence),
         // completing the OperativeScenario → FunctionalScenario → UIScenario chain.
         connection def ErrorAtElement :> MemoRelationship {
-            end useError : UseError;
-            end element : InteractionElement;
+            end useError : UseError :>> source;
+            end element : InteractionElement :>> target;
         }
         // A risk control implemented by a UI element or by task design
         // (confirmation dialog, lockout, guarded control).
         connection def ControlImplementedBy :> MemoRelationship {
-            end riskControl : VerifiableElement;
-            end implementingElement : ArchitectureElement;
+            end riskControl : RiskControlMeasure :>> source;
+            end implementingElement : ArchitectureElement :>> target;
         }
     }
     

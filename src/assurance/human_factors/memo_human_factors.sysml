@@ -40,11 +40,19 @@ package memo_assurance_human_factors {
     }
 
     connection def CommitsUseError :> MemoRelationship {
-        end task : UserTask;
-        end useError : UseError;
+        end task : UserTask :>> source;
+        end useError : UseError :>> target;
     }
     connection def EvaluatesTask :> MemoRelationship {
-        end evaluation : MemoEvidence;
-        end task : UserTask;
+        end evaluation : MemoEvidence :>> source;
+        end task : UserTask :>> target;
+    }
+
+    // ── Relations owned by this package ─────────────────────────────
+    // Moved out of memo_core_relationships: their ends are typed against
+    // types declared here, and core must not depend on a domain package.
+    connection def TestedByUsability :> MemoRelationship {
+        end uiElementOrTask : MemoPart :>> source;
+        end usabilityTest : UsabilityValidation :>> target;
     }
 }

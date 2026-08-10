@@ -24,6 +24,7 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_assurance_requirements::*` |
@@ -37,14 +38,19 @@
 | [`RiskMatrix`](#riskmatrix) | `part def` | Risk matrix definition specializing `MemoPart`. | `MemoPart` |
 | [`DesignControlRiskRow`](#designcontrolriskrow) | `part def` | Design control risk row definition specializing `Risk`. | `Risk` |
 | [`SafetyRelatedCharacteristic`](#safetyrelatedcharacteristic) | `part def` | A device characteristic whose implementation, failure, or misuse can affect safety. This is the modelable output of ISO 14971 §5.3. | `MemoPart` |
-| [`Hazard`](#hazard) | `item def` | Hazard definition specializing `MemoPart`. | `MemoPart` |
-| [`SequenceOfEvents`](#sequenceofevents) | `item def` | Sequence of events definition specializing `MemoPart`. | `MemoPart` |
-| [`HazardCause`](#hazardcause) | `item def` | Hazard cause definition specializing `MemoPart`. | `MemoPart` |
-| [`HazardousSituation`](#hazardoussituation) | `item def` | Hazardous situation definition specializing `MemoPart`. | `MemoPart` |
-| [`Harm`](#harm) | `item def` | Harm definition specializing `MemoPart`. | `MemoPart` |
+| [`RiskItem`](#riskitem) | `item def` | Risk item definition specializing `MemoPart`. | `MemoPart` |
+| [`Hazard`](#hazard) | `item def` | Hazard definition specializing `RiskItem`. | `RiskItem` |
+| [`SequenceOfEvents`](#sequenceofevents) | `item def` | Sequence of events definition specializing `RiskItem`. | `RiskItem` |
+| [`HazardCause`](#hazardcause) | `item def` | Hazard cause definition specializing `RiskItem`. | `RiskItem` |
+| [`HazardousSituation`](#hazardoussituation) | `item def` | Hazardous situation definition specializing `RiskItem`. | `RiskItem` |
+| [`Harm`](#harm) | `item def` | Harm definition specializing `RiskItem`. | `RiskItem` |
 | [`RiskControlMeasure`](#riskcontrolmeasure) | `item def` | Risk control measure definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`Benefit`](#benefit) | `part def` | Benefit definition specializing `MemoPart`. | `MemoPart` |
 | [`OverallResidualRiskEvaluation`](#overallresidualriskevaluation) | `item def` | Overall residual risk evaluation definition specializing `MemoPart`. | `MemoPart` |
+| [`TracesRisk`](#tracesrisk) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | `MemoRelationship` |
+| [`AssessedAgainst`](#assessedagainst) | `connection def` | Typed relationship for assessed against. | `MemoRelationship` |
+| [`MitigationKind`](#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | — |
+| [`Mitigates`](#mitigates) | `connection def` | Typed relationship for mitigates. | `MemoRelationship` |
 
 ## Risk
 
@@ -121,78 +127,93 @@ part def SafetyRelatedCharacteristic specializes MemoPart
 | Owning package | `memo_assurance_safety_risk` |
 
 
-## Hazard
+## RiskItem
 
 ```sysml
-item def Hazard specializes MemoPart
+abstract item def RiskItem specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Hazard definition specializing `MemoPart`. |
+| Description | Risk item definition specializing `MemoPart`. |
+| Kind | `item def` |
+| Abstract | Yes |
+| Specializes | `MemoPart` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
+## Hazard
+
+```sysml
+item def Hazard specializes RiskItem
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Hazard definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk` |
 
 
 ## SequenceOfEvents
 
 ```sysml
-item def SequenceOfEvents specializes MemoPart
+item def SequenceOfEvents specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Sequence of events definition specializing `MemoPart`. |
+| Description | Sequence of events definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk` |
 
 
 ## HazardCause
 
 ```sysml
-item def HazardCause specializes MemoPart
+item def HazardCause specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Hazard cause definition specializing `MemoPart`. |
+| Description | Hazard cause definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk` |
 
 
 ## HazardousSituation
 
 ```sysml
-item def HazardousSituation specializes MemoPart
+item def HazardousSituation specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Hazardous situation definition specializing `MemoPart`. |
+| Description | Hazardous situation definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk` |
 
 
 ## Harm
 
 ```sysml
-item def Harm specializes MemoPart
+item def Harm specializes RiskItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Harm definition specializing `MemoPart`. |
+| Description | Harm definition specializing `RiskItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `RiskItem` |
 | Owning package | `memo_assurance_safety_risk` |
 
 
@@ -241,6 +262,66 @@ item def OverallResidualRiskEvaluation specializes MemoPart
 | Owning package | `memo_assurance_safety_risk` |
 
 
+## TracesRisk
+
+```sysml
+connection def TracesRisk :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
+## AssessedAgainst
+
+```sysml
+connection def AssessedAgainst :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for assessed against. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
+## MitigationKind
+
+```sysml
+enum def MitigationKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_safety_risk` |
+
+
+## Mitigates
+
+```sysml
+connection def Mitigates :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for mitigates. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
 ## Source
 
 ??? code "assurance/safety_risk/memo_risk.sysml"
@@ -248,6 +329,7 @@ item def OverallResidualRiskEvaluation specializes MemoPart
     ```sysml
     package memo_assurance_safety_risk {
         private import ScalarValues::*;
+        private import memo_core_relationships::*;   // MemoRelationship
     
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
@@ -294,27 +376,47 @@ item def OverallResidualRiskEvaluation specializes MemoPart
             attribute normalUseRelevant : Boolean;
             attribute faultConditionRelevant : Boolean;
         }
-        item def Hazard specializes MemoPart {
+        // ─── Risk-element base ──────────────────────────────────────────
+        // The common supertype of the item-based elements an ISO 14971 / FMEA /
+        // FTA chain relates: hazards, sequences of events, hazardous situations,
+        // harms, causes, failure modes, fault-tree events, cut sets, HAZOP
+        // deviations, vulnerabilities.
+        //
+        // It exists so the risk relations can TYPE their ends. Before it, every
+        // one of them (Causes, TracesRisk, DetectedBy, InputToGate, ProducesEvent,
+        // ContainsEvent, IdentifiesHazard, Mitigates, ImpactsSafety) fell back to
+        // MemoPart — which every element in MEMO is — so the authoring picker
+        // offered fault-tree edges when linking a screen to a requirement.
+        //
+        // It is deliberately an `item def` and deliberately does NOT cover Risk /
+        // ResidualRisk / RiskMatrix, which are parts: a risk is an assessed
+        // judgement about a chain, not a link in it, and it is reached by
+        // AssessedAgainst instead. One base per metaclass is the right shape here
+        // — forcing the two families under one supertype would put a hazard and a
+        // risk matrix back in the same picker.
+        abstract item def RiskItem specializes MemoPart;
+    
+        item def Hazard specializes RiskItem {
             attribute hazardType : HazardTypeKind;
             attribute severity : SeverityKind;
             attribute foreseeable : Boolean;
         }
-        item def SequenceOfEvents specializes MemoPart {
+        item def SequenceOfEvents specializes RiskItem {
             attribute initiatingEvent : String;
             attribute contributingFactors : String;
         }
         // A categorized root cause in a hazard causal tree (FDA GIIP
         // taxonomy pattern: cause -> hazard -> hazardous situation -> harm;
         // several HazardCause elements may converge on one Hazard).
-        item def HazardCause specializes MemoPart {
+        item def HazardCause specializes RiskItem {
             attribute causeSource : CauseSourceKind;
             attribute contributingFactors : String;
         }
-        item def HazardousSituation specializes MemoPart {
+        item def HazardousSituation specializes RiskItem {
             attribute exposedPersons : String;
             attribute operatingCondition : String;
         }
-        item def Harm specializes MemoPart {
+        item def Harm specializes RiskItem {
             attribute clinicalImpact : String;
             attribute reversibility : String;
             attribute severity : SeverityKind;
@@ -333,6 +435,37 @@ item def OverallResidualRiskEvaluation specializes MemoPart
         item def OverallResidualRiskEvaluation specializes MemoPart {
             attribute conclusion : String;
             attribute reviewer : String;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        // ISO 14971 risk chain — distinct sequence-of-events relations over risk elements.
+        connection def TracesRisk :> MemoRelationship {
+            end sourceRiskElement : RiskItem :>> source;
+            end targetRiskElement : RiskItem :>> target;
+        }
+        connection def AssessedAgainst :> MemoRelationship {
+            end risk : Risk :>> source;
+            end riskMatrix : RiskMatrix :>> target;
+        }
+        // Mitigates unifies the control/action → risk-element edges of the
+        // ISO 14971 / FMEA / FTA / cyber chains — MitigatesHazard,
+        // MitigatesVulnerability, MitigatedByControl, BrokenByControl,
+        // AddressedByAction — keyed by mitigationKind. control is the mitigating
+        // control/action; mitigatedElement is the hazard/vulnerability/failure/cut set.
+        enum def MitigationKind {
+            enum hazard;
+            enum vulnerability;
+            enum failureMode;
+            enum cutSet;
+            enum fmeaAction;
+        }
+        connection def Mitigates :> MemoRelationship {
+            attribute mitigationKind : MitigationKind;
+            // Untyped: controls/hazards may be item defs (RiskControlMeasure, Hazard, …).
+            end control :>> source;
+            end mitigatedElement : RiskItem :>> target;
         }
     }
     

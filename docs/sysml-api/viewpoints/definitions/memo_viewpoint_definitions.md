@@ -40,6 +40,7 @@
 | [`MemoDocumentBackedView`](#memodocumentbackedview) | `view def` | Memo document backed view definition specializing `MemoView`. | `MemoView` |
 | [`MemoDocumentView`](#memodocumentview) | `view def` | Memo document view definition specializing `MemoDocumentBackedView`. | `MemoDocumentBackedView` |
 | [`ViewInclusionRule`](#viewinclusionrule) | `part def` | View inclusion rule definition specializing `MemoPart`. | `MemoPart` |
+| [`IncludedIn`](#includedin) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## Viewpoint
 
@@ -161,6 +162,21 @@ part def ViewInclusionRule specializes MemoPart
 | Owning package | `memo_viewpoints_definitions` |
 
 
+## IncludedIn
+
+```sysml
+connection def IncludedIn :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_viewpoints_definitions` |
+
+
 ## Source
 
 ??? code "viewpoints/definitions/memo_viewpoint_definitions.sysml"
@@ -189,6 +205,10 @@ part def ViewInclusionRule specializes MemoPart
             attribute userExtensible : Boolean;
             // Optional navigation grouping interpreted by Memo Architect.
             attribute group : String;
+            // Explorer placement follows the MEMO V-model: Architecture is read
+            // top-to-bottom; Assurance is read left-to-right.
+            attribute explorerLane : String;
+            attribute explorerOrder : Integer;
             // default diagram kind for a catalog viewpoint (optional)
             attribute defaultViewKind : DiagramViewKind[0..1];
         }
@@ -254,6 +274,14 @@ part def ViewInclusionRule specializes MemoPart
             attribute includeConcerns : ConcernKind[*];
             attribute selectionExpression : String;
             attribute rationaleText : String;
+        }
+    
+        // ── Relations owned by this package ─────────────────────────────
+        // Moved out of memo_core_relationships: their ends are typed against
+        // types declared here, and core must not depend on a domain package.
+        connection def IncludedIn :> MemoRelationship {
+            end sourceElement : MemoPart :>> source;
+            end targetView : MemoView :>> target;
         }
     }
     

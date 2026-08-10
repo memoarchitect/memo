@@ -37,11 +37,11 @@
 | --- | --- | --- | --- |
 | [`UseCaseKind`](#usecasekind) | `enum def` | Controlled values for use case: `clinical`, `service`, `manufacturing`, `development`. | — |
 | [`UseCase`](#usecase) | `use case def` | Use case definition. | — |
-| [`Motivates`](#motivates) | `connection def` | Typed relationship from `Need` to `UseCase`. | `MemoRelationship` |
-| [`Initiates`](#initiates) | `connection def` | Typed relationship from `User` to `UseCase`. | `MemoRelationship` |
-| [`ParticipatesIn`](#participatesin) | `connection def` | Typed relationship from `Actor` to `UseCase`. | `MemoRelationship` |
+| [`Motivates`](#motivates) | `connection def` | Typed relationship for motivates. | `MemoRelationship` |
+| [`Initiates`](#initiates) | `connection def` | Typed relationship for initiates. | `MemoRelationship` |
+| [`ParticipatesIn`](#participatesin) | `connection def` | Typed relationship for participates in. | `MemoRelationship` |
 | [`Includes`](#includes) | `connection def` | UML use-case relationships. Includes establishes a decomposition level; extends remains a cross-cutting relationship and is always presented. | `MemoRelationship` |
-| [`Extends`](#extends) | `connection def` | Typed relationship from `UseCase` to `UseCase`. | `MemoRelationship` |
+| [`Extends`](#extends) | `connection def` | Typed relationship for extends. | `MemoRelationship` |
 
 ## UseCaseKind
 
@@ -81,7 +81,7 @@ connection def Motivates :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `Need` to `UseCase`. |
+| Description | Typed relationship for motivates. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -96,7 +96,7 @@ connection def Initiates :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `User` to `UseCase`. |
+| Description | Typed relationship for initiates. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -111,7 +111,7 @@ connection def ParticipatesIn :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `Actor` to `UseCase`. |
+| Description | Typed relationship for participates in. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -141,7 +141,7 @@ connection def Extends :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UseCase` to `UseCase`. |
+| Description | Typed relationship for extends. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -198,26 +198,26 @@ connection def Extends :> MemoRelationship
         }
     
         connection def Motivates :> MemoRelationship {
-            end motivatingNeed : Need;
-            end motivatedUseCase : UseCase;
+            end motivatingNeed : Need :>> source;
+            end motivatedUseCase : UseCase :>> target;
         }
         connection def Initiates :> MemoRelationship {
-            end initiatingUser : User;
-            end initiatedUseCase : UseCase;
+            end initiatingUser : User :>> source;
+            end initiatedUseCase : UseCase :>> target;
         }
         connection def ParticipatesIn :> MemoRelationship {
-            end participatingActor : Actor;
-            end useCase : UseCase;
+            end participatingActor : Actor :>> source;
+            end useCase : UseCase :>> target;
         }
         // UML use-case relationships. Includes establishes a decomposition level;
         // extends remains a cross-cutting relationship and is always presented.
         connection def Includes :> MemoRelationship {
-            end includingUseCase : UseCase;
-            end includedUseCase : UseCase;
+            end includingUseCase : UseCase :>> source;
+            end includedUseCase : UseCase :>> target;
         }
         connection def Extends :> MemoRelationship {
-            end extendingUseCase : UseCase;
-            end extendedUseCase : UseCase;
+            end extendingUseCase : UseCase :>> source;
+            end extendedUseCase : UseCase :>> target;
         }
     }
     

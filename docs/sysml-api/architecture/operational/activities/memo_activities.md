@@ -39,7 +39,7 @@
 | [`UserTask`](#usertask) | `action def` | A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a UserTask whose criticality is high or catastrophic — a use error could cause serious harm. potentialHarm/severityIfFailed are set only for such tasks. Modeled as an attribute, like SystemFunction.criticality. | `MemoAction` |
 | [`TaskStep`](#taskstep) | `action def` | An elementary perceptual/cognitive/motor step within a user task (task analysis granularity: grasp needle, drive needle, tie knot …). | `MemoAction` |
 | [`TaskDifficultyAssessment`](#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | `MemoPart` |
-| [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship from `TaskDifficultyAssessment` to `UserTask`. | `MemoRelationship` |
+| [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship for assesses difficulty. | `MemoRelationship` |
 
 ## DemandLevelKind
 
@@ -124,7 +124,7 @@ connection def AssessesDifficulty :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `TaskDifficultyAssessment` to `UserTask`. |
+| Description | Typed relationship for assesses difficulty. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -217,8 +217,8 @@ connection def AssessesDifficulty :> MemoRelationship
         }
     
         connection def AssessesDifficulty :> MemoRelationship {
-            end assessment : TaskDifficultyAssessment;
-            end task : UserTask;
+            end assessment : TaskDifficultyAssessment :>> source;
+            end task : UserTask :>> target;
         }
     }
     

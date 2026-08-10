@@ -1,5 +1,6 @@
 package memo_assurance_cybersecurity {
     private import ScalarValues::*;
+    private import memo_core_relationships::*;   // MemoRelationship
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
@@ -37,7 +38,7 @@ package memo_assurance_cybersecurity {
         attribute strideCategory : ThreatCategoryKind;
     }
 
-    item def Vulnerability specializes MemoPart {
+    item def Vulnerability specializes RiskItem {
         attribute weakness : String;
         attribute exploitability : String;
         attribute discoveryMethod : String;
@@ -98,5 +99,22 @@ package memo_assurance_cybersecurity {
         attribute claimText : String;
         attribute claimScope : String;
         attribute supportedByEvidence : String;
+    }
+
+    // ── Relations owned by this package ─────────────────────────────
+    // Moved out of memo_core_relationships: their ends are typed against
+    // types declared here, and core must not depend on a domain package.
+    connection def Exploits :> MemoRelationship {
+        end realizedThreat : RequirementDriver :>> source;
+        end enablingVulnerability : Vulnerability :>> target;
+    }
+    connection def RealizedByScenario :> MemoRelationship {
+        end realizedThreat : RequirementDriver :>> source;
+        end scenario : MemoScenario :>> target;
+    }
+    connection def ImpactsSafety :> MemoRelationship {
+        attribute tracePurpose : String;
+        end cyberElement : MemoPart :>> source;
+        end safetyElement : RiskItem :>> target;
     }
 }

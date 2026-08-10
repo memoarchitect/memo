@@ -27,7 +27,7 @@ package memo_assurance_requirements_needs {
         enum designControl;
     }
 
-    requirement def Need specializes MemoNeed, RequirementDriver {
+    requirement def Need specializes MemoNeed {
         attribute needKind : NeedKind;
         // user need (IEC 62366-1)
         attribute userPopulationReference : String;

@@ -27,14 +27,6 @@ package memo_core_enumerations {
         enum medium;
         enum low;
     }
-    enum def RequirementStatusKind {
-        enum draft;
-        enum approved;
-        enum implemented;
-        enum verified;
-        enum validated;
-        enum retired;
-    }
     enum def RequirementNotationKind {
         enum freeText;
         enum ears;
@@ -223,12 +215,6 @@ package memo_core_enumerations {
         enum rateMonotonic;
         enum deadlineMonotonic;
         enum EDF;
-    }
-    enum def LinkStatusKind {
-        enum planned;
-        enum active;
-        enum verified;
-        enum obsolete;
     }
     enum def BehaviorPropertyKind {
         enum stateInvariant;

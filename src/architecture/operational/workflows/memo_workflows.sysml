@@ -93,12 +93,12 @@ package memo_architecture_operational_workflows {
         // The accepted endpoints span SysML metaclasses: an operational
         // workflow or other action may support a use case, task, or
         // capability. They therefore have no single MEMO base type.
-        end supporter;
-        end supported;
+        end supporter :>> source;
+        end supported : MemoAction :>> target;
     }
     connection def RequiresResource :> MemoRelationship {
-        end workflow : OperationalWorkflow;
-        end resource : WorkflowResource;
+        end workflow : OperationalWorkflow :>> source;
+        end resource : WorkflowResource :>> target;
     }
 
     // ── Workflow transformation (as-is → to-be) ──────────────────
@@ -113,8 +113,8 @@ package memo_architecture_operational_workflows {
         attribute transformKind : TransformKind;
         attribute transformation : StepTransformationKind[0..1];
         attribute transformationRationale : String[0..1];
-        end source : MemoPart;
-        end target : MemoPart;
+        end source : MemoAction;
+        end target : MemoAction;
     }
     // The device or system whose introduction enables a workflow.
 }

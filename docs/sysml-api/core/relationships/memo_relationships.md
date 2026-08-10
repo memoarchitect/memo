@@ -24,67 +24,47 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `Connections::BinaryConnection` |
 | private | `memo_core_common::*` |
+| private | `memo_core_dimensions::*` |
 | private | `memo_core_enumerations::*` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`MemoRelationship`](#memorelationship) | `connection def` | All MEMO relations are native SysML v2 `connection def`s (each is a Connection/Association), specializing the MemoRelationship base. The relationship name is the verb; the RelationshipRegistry derives the navigable type as camelCase(name) and navigation is bidirectional.… | — |
+| [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
 | [`MemoLink`](#memolink) | `connection def` | The general relation that can join any two model elements, whatever their metaclass. Most specific relations type their ends against a foundation (MemoPart, VerifiableElement, …).… | `MemoRelationship` |
 | [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship for derives from. | `MemoRelationship` |
 | [`SatisfiedBy`](#satisfiedby) | `connection def` | Typed relationship for satisfied by. | `MemoRelationship` |
-| [`MitigationKind`](#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | — |
-| [`Mitigates`](#mitigates) | `connection def` | Typed relationship for mitigates. | `MemoRelationship` |
-| [`AllocatedTo`](#allocatedto) | `connection def` | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. | `MemoRelationship` |
+| [`AllocatedTo`](#allocatedto) | `connection def` | Typed relationship for allocated to. | `MemoRelationship` |
 | [`Realizes`](#realizes) | `connection def` | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… | `MemoRelationship` |
-| [`VerifiedBy`](#verifiedby) | `connection def` | Typed relationship from `MemoPart` to `MemoVerificationCase`. | `MemoRelationship` |
-| [`ProducesEvidence`](#producesevidence) | `connection def` | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. | `MemoRelationship` |
-| [`IncludedIn`](#includedin) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`Precedes`](#precedes) | `connection def` | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. | `MemoRelationship` |
-| [`ResolvesToMethodology`](#resolvestomethodology) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`TracesRisk`](#tracesrisk) | `connection def` | ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | `MemoRelationship` |
-| [`AssessedAgainst`](#assessedagainst) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship from `ArchitectureElement` to `RequirementDriver`. | `MemoRelationship` |
-| [`Exploits`](#exploits) | `connection def` | Typed relationship from `RequirementDriver` to `MemoPart`. | `MemoRelationship` |
-| [`RealizedByScenario`](#realizedbyscenario) | `connection def` | Typed relationship from `RequirementDriver` to `MemoPart`. | `MemoRelationship` |
-| [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship from `RequirementDriver` to `VerifiableElement`. | `MemoRelationship` |
-| [`ImpactsSafety`](#impactssafety) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`CrossesTrustBoundary`](#crossestrustboundary) | `connection def` | Typed relationship from `InterfaceElement` to `MemoPart`. | `MemoRelationship` |
+| [`VerifiedBy`](#verifiedby) | `connection def` | Typed relationship for verified by. | `MemoRelationship` |
+| [`ProducesEvidence`](#producesevidence) | `connection def` | Typed relationship for produces evidence. | `MemoRelationship` |
+| [`Precedes`](#precedes) | `connection def` | Typed relationship for precedes. | `MemoRelationship` |
+| [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship for threatened by. | `MemoRelationship` |
+| [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship for derives cyber requirement. | `MemoRelationship` |
+| [`CrossesTrustBoundary`](#crossestrustboundary) | `connection def` | Typed relationship for crosses trust boundary. | `MemoRelationship` |
 | [`Validates`](#validates) | `connection def` | Typed relationship for validates. | `MemoRelationship` |
-| [`DependsOnSoup`](#dependsonsoup) | `connection def` | Typed relationship from `ArchitectureElement` to `MemoPart`. | `MemoRelationship` |
-| [`Performs`](#performs) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`Enables`](#enables) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`HostedBy`](#hostedby) | `connection def` | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. | `MemoRelationship` |
-| [`HasFailureMode`](#hasfailuremode) | `connection def` | Typed relationship from `ArchitectureElement` to `MemoPart`. | `MemoRelationship` |
-| [`CauseKind`](#causekind) | `enum def` | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. | — |
-| [`Causes`](#causes) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`DetectedBy`](#detectedby) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`InputToGate`](#inputtogate) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`ProducesEvent`](#producesevent) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`ContainsEvent`](#containsevent) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`Decides`](#decides) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`Composes`](#composes) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`IdentifiesHazard`](#identifieshazard) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`AnalyzedBy`](#analyzedby) | `connection def` | Typed relationship from `ArchitectureElement` to `AnalysisArtifact`. | `MemoRelationship` |
-| [`Changes`](#changes) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`TestedByUsability`](#testedbyusability) | `connection def` | Typed relationship from `MemoPart` to `VerifiableElement`. | `MemoRelationship` |
-| [`FeedsBackTo`](#feedsbackto) | `connection def` | Typed relationship from `MemoPart` to `MemoPart`. | `MemoRelationship` |
-| [`BindsToInterface`](#bindstointerface) | `connection def` | Typed relationship from `InterfaceElement` to `InterfaceElement`. | `MemoRelationship` |
+| [`Performs`](#performs) | `connection def` | Typed relationship for performs. | `MemoRelationship` |
+| [`Enables`](#enables) | `connection def` | Typed relationship for enables. | `MemoRelationship` |
+| [`HostedBy`](#hostedby) | `connection def` | Typed relationship for hosted by. | `MemoRelationship` |
+| [`Composes`](#composes) | `connection def` | Typed relationship for composes. | `MemoRelationship` |
+| [`AnalyzedBy`](#analyzedby) | `connection def` | Typed relationship for analyzed by. | `MemoRelationship` |
+| [`BindsToInterface`](#bindstointerface) | `connection def` | Typed relationship for binds to interface. | `MemoRelationship` |
 
 ## MemoRelationship
 
 ```sysml
-abstract connection def MemoRelationship
+abstract connection def MemoRelationship :> Connections::BinaryConnection
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | All MEMO relations are native SysML v2 `connection def`s (each is a Connection/Association), specializing the MemoRelationship base. The relationship name is the verb; the RelationshipRegistry derives the navigable type as camelCase(name) and navigation is bidirectional.… |
+| Description | Typed relationship for memo relationship. |
 | Kind | `connection def` |
 | Abstract | Yes |
-| Specializes | — |
+| Specializes | `Connections::BinaryConnection` |
 | Owning package | `memo_core_relationships` |
 
 
@@ -133,36 +113,6 @@ connection def SatisfiedBy :> MemoRelationship
 | Owning package | `memo_core_relationships` |
 
 
-## MitigationKind
-
-```sysml
-enum def MitigationKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_core_relationships` |
-
-
-## Mitigates
-
-```sysml
-connection def Mitigates :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for mitigates. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
 ## AllocatedTo
 
 ```sysml
@@ -171,7 +121,7 @@ connection def AllocatedTo :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. |
+| Description | Typed relationship for allocated to. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -201,7 +151,7 @@ connection def VerifiedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoVerificationCase`. |
+| Description | Typed relationship for verified by. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -216,22 +166,7 @@ connection def ProducesEvidence :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## IncludedIn
-
-```sysml
-connection def IncludedIn :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for produces evidence. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -246,52 +181,7 @@ connection def Precedes :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## ResolvesToMethodology
-
-```sysml
-connection def ResolvesToMethodology :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## TracesRisk
-
-```sysml
-connection def TracesRisk :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## AssessedAgainst
-
-```sysml
-connection def AssessedAgainst :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for precedes. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -306,37 +196,7 @@ connection def ThreatenedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `ArchitectureElement` to `RequirementDriver`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## Exploits
-
-```sysml
-connection def Exploits :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `RequirementDriver` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## RealizedByScenario
-
-```sysml
-connection def RealizedByScenario :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `RequirementDriver` to `MemoPart`. |
+| Description | Typed relationship for threatened by. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -351,22 +211,7 @@ connection def DerivesCyberRequirement :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `RequirementDriver` to `VerifiableElement`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## ImpactsSafety
-
-```sysml
-connection def ImpactsSafety :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for derives cyber requirement. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -381,7 +226,7 @@ connection def CrossesTrustBoundary :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `InterfaceElement` to `MemoPart`. |
+| Description | Typed relationship for crosses trust boundary. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -403,21 +248,6 @@ connection def Validates :> MemoRelationship
 | Owning package | `memo_core_relationships` |
 
 
-## DependsOnSoup
-
-```sysml
-connection def DependsOnSoup :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `ArchitectureElement` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
 ## Performs
 
 ```sysml
@@ -426,7 +256,7 @@ connection def Performs :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for performs. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -441,7 +271,7 @@ connection def Enables :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for enables. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -456,127 +286,7 @@ connection def HostedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `ArchitectureElement` to `ArchitectureElement`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## HasFailureMode
-
-```sysml
-connection def HasFailureMode :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `ArchitectureElement` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## CauseKind
-
-```sysml
-enum def CauseKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_core_relationships` |
-
-
-## Causes
-
-```sysml
-connection def Causes :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## DetectedBy
-
-```sysml
-connection def DetectedBy :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## InputToGate
-
-```sysml
-connection def InputToGate :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## ProducesEvent
-
-```sysml
-connection def ProducesEvent :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## ContainsEvent
-
-```sysml
-connection def ContainsEvent :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## Decides
-
-```sysml
-connection def Decides :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for hosted by. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -591,22 +301,7 @@ connection def Composes :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## IdentifiesHazard
-
-```sysml
-connection def IdentifiesHazard :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for composes. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -621,52 +316,7 @@ connection def AnalyzedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `ArchitectureElement` to `AnalysisArtifact`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## Changes
-
-```sysml
-connection def Changes :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## TestedByUsability
-
-```sysml
-connection def TestedByUsability :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `VerifiableElement`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## FeedsBackTo
-
-```sysml
-connection def FeedsBackTo :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `MemoPart`. |
+| Description | Typed relationship for analyzed by. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -681,7 +331,7 @@ connection def BindsToInterface :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `InterfaceElement` to `InterfaceElement`. |
+| Description | Typed relationship for binds to interface. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -696,20 +346,45 @@ connection def BindsToInterface :> MemoRelationship
     package memo_core_relationships {
         private import ScalarValues::*;
     
+        private import Connections::BinaryConnection;
+    
         private import memo_core_common::*;
+        private import memo_core_dimensions::*;   // ElementStatusKind
         private import memo_core_enumerations::*;
     
         // All MEMO relations are native SysML v2 `connection def`s (each is a
         // Connection/Association), specializing the MemoRelationship base. The
         // relationship name is the verb; the RelationshipRegistry derives the
         // navigable type as camelCase(name) and navigation is bidirectional.
-        // Structural properties of a relation, declared here so authoring and
-        // validation read them from the ontology instead of assuming them. Both are
-        // unset on the base and carry the conservative reading: a relation forbids
-        // self-links and forbids repeats unless it says otherwise. A subtype opts
-        // out by redefining, e.g. `attribute :>> isReflexive = true;`.
-        abstract connection def MemoRelationship {
-            attribute linkStatus : LinkStatusKind;
+        //
+        // MemoRelationship roots on the SysML v2 standard library's
+        // Connections::BinaryConnection rather than floating free. Every two-ended
+        // `connection def` implicitly specializes it anyway; saying so explicitly
+        // is what lets MEMO relations be read as ordinary SysML connections by any
+        // conforming tool instead of as a MEMO-private construct.
+        //
+        // A relation is a MEMO element like any other, so it carries the same
+        // identification core as the part/action/item/requirement bases in
+        // memo_core_common — including `status`. The former `linkStatus`
+        // (planned/active/verified/obsolete) is gone: a link being "verified" was
+        // never an editorial state, and the other three duplicated
+        // ElementStatusKind under different words.
+        //
+        // isReflexive/isUnique are structural properties of the relation itself,
+        // declared here so authoring and validation read them from the ontology
+        // instead of assuming them. Both are unset on the base and carry the
+        // conservative reading: a relation forbids self-links and forbids repeats
+        // unless it says otherwise. A subtype opts out by redefining, e.g.
+        // `attribute :>> isReflexive = true;`.
+        abstract connection def MemoRelationship :> Connections::BinaryConnection {
+            attribute id : String;
+            attribute uuid : String;
+            attribute name : String;
+            attribute shortDescription : String;
+            attribute description : String;
+            attribute rationale : String;
+            attribute sourceReference : String;
+            attribute status : ElementStatusKind;
             doc /* True when an element may be related to itself by this relation.
                  * Unset is read as false. */
             attribute isReflexive : Boolean;
@@ -728,50 +403,31 @@ connection def BindsToInterface :> MemoRelationship
         // and adds no domain-specific semantics, which is what makes it universal.
         //
         // It is deliberately the weakest relation in the ontology. Reach for it
-        // only when no specific relation carries the meaning, and say why in
-        // linkRationale — an untyped link with no stated reason is an audit gap,
-        // not a model fact.
+        // only when no specific relation carries the meaning, and say why in the
+        // inherited `rationale` — an untyped link with no stated reason is an
+        // audit gap, not a model fact.
         connection def MemoLink :> MemoRelationship {
             doc /* Generic association between any two model elements. */
-            attribute linkRationale : String;
-            end linkSource;
-            end linkTarget;
+            end linkSource :>> source;
+            end linkTarget :>> target;
         }
     
         connection def DerivesFrom :> MemoRelationship {
-            // Drivers include needs and hazards (ISO 14971: hazards drive
-            // requirements). targetRequirement is untyped: Need is a requirement def
-            // (MemoNeed + RequirementDriver) and does not conform to VerifiableElement
-            // under SysIDE related-feature-conformance.
-            end sourceDriver : MemoPart;
-            end targetRequirement;
+            // Drivers span metaclasses — a need is a requirement def, a hazard an
+            // item, a threat an item — so the source end stays untyped. The target
+            // is now typed: since Requirement re-rooted onto MemoRequirement, one
+            // type name covers the whole requirement family.
+            end sourceDriver :>> source;
+            end targetRequirement : MemoRequirementElement :>> target;
         }
         connection def SatisfiedBy :> MemoRelationship {
-            // Untyped: Need (requirement) instances must participate alongside Requirement.
-            end requiredElement;
-            end satisfyingElement : ArchitectureElement;
-        }
-        // Mitigates unifies the control/action → risk-element edges of the
-        // ISO 14971 / FMEA / FTA / cyber chains — MitigatesHazard,
-        // MitigatesVulnerability, MitigatedByControl, BrokenByControl,
-        // AddressedByAction — keyed by mitigationKind. control is the mitigating
-        // control/action; mitigatedElement is the hazard/vulnerability/failure/cut set.
-        enum def MitigationKind {
-            enum hazard;
-            enum vulnerability;
-            enum failureMode;
-            enum cutSet;
-            enum fmeaAction;
-        }
-        connection def Mitigates :> MemoRelationship {
-            attribute mitigationKind : MitigationKind;
-            // Untyped: controls/hazards may be item defs (RiskControlMeasure, Hazard, …).
-            end control;
-            end mitigatedElement;
+            // MemoRequirementElement covers Need and Requirement alike.
+            end requiredElement : MemoRequirementElement :>> source;
+            end satisfyingElement : ArchitectureElement :>> target;
         }
         connection def AllocatedTo :> MemoRelationship {
-            end function : ArchitectureElement;
-            end allocatedElement : ArchitectureElement;
+            end function : ArchitectureElement :>> source;
+            end allocatedElement : ArchitectureElement :>> target;
         }
         // Realizes is the single realization relation (realizing/concrete element →
         // realized/abstract element). It unifies RealizesInterface,
@@ -782,81 +438,47 @@ connection def BindsToInterface :> MemoRelationship
         connection def Realizes :> MemoRelationship {
             // Realization crosses structural and behavioral metaclasses (for
             // example a FunctionalFlow route realizing a FunctionalScenario).
-            end realizing;
-            end realized;
+            end realizing :>> source;
+            end realized :>> target;
         }
         connection def VerifiedBy :> MemoRelationship {
             // Requirements, risk controls, and architecture components are
             // all legitimate verification targets
-            end verificationTarget : MemoPart;
-            end verificationCase : MemoVerificationCase;
+            end verificationTarget : MemoPart :>> source;
+            end verificationCase : MemoVerificationCase :>> target;
         }
         connection def ProducesEvidence :> MemoRelationship {
-            end producer : MemoVerificationCase;
-            end producedEvidence : MemoEvidence;
-        }
-        connection def IncludedIn :> MemoRelationship {
-            end sourceElement : MemoPart;
-            end targetView : MemoPart;
+            end producer : MemoVerificationCase :>> source;
+            end producedEvidence : MemoEvidence :>> target;
         }
         connection def Precedes :> MemoRelationship {
             attribute sameStepRequired : Boolean;
             attribute precedenceRationale : String;
-            end predecessor : ArchitectureElement;
-            end successor : ArchitectureElement;
-        }
-        connection def ResolvesToMethodology :> MemoRelationship {
-            end boundModelElement : MemoPart;
-            end resolvedMethodology : MemoPart;
+            end predecessor : ArchitectureElement :>> source;
+            end successor : ArchitectureElement :>> target;
         }
     
-        // ISO 14971 risk chain — distinct sequence-of-events relations over risk elements.
-        connection def TracesRisk :> MemoRelationship {
-            end sourceRiskElement : MemoPart;
-            end targetRiskElement : MemoPart;
-        }
-        connection def AssessedAgainst :> MemoRelationship {
-            end risk : MemoPart;
-            end riskMatrix : MemoPart;
-        }
     
         connection def ThreatenedBy :> MemoRelationship {
             attribute threatRole : String;
-            end protectedAsset : ArchitectureElement;
-            end realizedThreat : RequirementDriver;
-        }
-        connection def Exploits :> MemoRelationship {
-            end realizedThreat : RequirementDriver;
-            end enablingVulnerability : MemoPart;
-        }
-        connection def RealizedByScenario :> MemoRelationship {
-            end realizedThreat : RequirementDriver;
-            end scenario : MemoPart;
+            end protectedAsset : ArchitectureElement :>> source;
+            end realizedThreat : RequirementDriver :>> target;
         }
         connection def DerivesCyberRequirement :> MemoRelationship {
-            end sourceThreatOrRisk : RequirementDriver;
-            end targetRequirement : VerifiableElement;
-        }
-        connection def ImpactsSafety :> MemoRelationship {
-            attribute tracePurpose : String;
-            end cyberElement : MemoPart;
-            end safetyElement : MemoPart;
+            end sourceThreatOrRisk : RequirementDriver :>> source;
+            end targetRequirement : MemoRequirementElement :>> target;
         }
         connection def CrossesTrustBoundary :> MemoRelationship {
             attribute crossingKind : InterfaceKind;
-            end boundary : InterfaceElement;
-            end crossingItem : MemoPart;
+            end boundary : InterfaceElement :>> source;
+            end crossingItem : MemoExchangeItem :>> target;
         }
     
         connection def Validates :> MemoRelationship {
             // Validation targets include use cases and other behavioural elements,
             // so the target remains untyped across SysML metaclass families.
-            end validationTarget;
-            end validationCase : MemoVerificationCase;
-        }
-        connection def DependsOnSoup :> MemoRelationship {
-            end component : ArchitectureElement;
-            end soupItem : MemoPart;
+            end validationTarget :>> source;
+            end validationCase : MemoVerificationCase :>> target;
         }
     
         // Performs unifies the former Performs / PerformsActivity / PerformsFunction
@@ -865,65 +487,24 @@ connection def BindsToInterface :> MemoRelationship
         // instance types, so generic MemoPart ends keep this in core without a
         // dependency on architecture-layer types.
         connection def Performs :> MemoRelationship {
-            end performer : MemoPart;
-            end performed : MemoPart;
+            end performer : MemoPart :>> source;
+            end performed : MemoAction :>> target;
         }
     
         // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms
         // (an enabling system/function enables a workflow/activity).
         connection def Enables :> MemoRelationship {
-            end enabling : MemoPart;
-            end enabled : MemoPart;
+            end enabling : MemoPart :>> source;
+            end enabled : MemoAction :>> target;
         }
     
         connection def HostedBy :> MemoRelationship {
-            end processingNode : ArchitectureElement;
-            end hostAssembly : ArchitectureElement;
+            end processingNode : ArchitectureElement :>> source;
+            end hostAssembly : ArchitectureElement :>> target;
         }
     
-        connection def HasFailureMode :> MemoRelationship {
-            end element : ArchitectureElement;
-            end failureMode : MemoPart;
-        }
-        // Causes unifies the former causal edges of the ISO 14971 / FMEA / FTA
-        // chains — CausesEffect, CausedBy, ContributesToHazard, LeadsToHazard,
-        // OriginatesFrom, UseErrorLeadsToHazard — keyed by causeKind. cause is the
-        // originating element, effect the consequence.
-        enum def CauseKind {
-            enum failureCausesEffect;
-            enum failureCausedBy;
-            enum contributesToHazard;
-            enum leadsToHazard;
-            enum originatesFrom;
-            enum useErrorLeadsToHazard;
-        }
-        connection def Causes :> MemoRelationship {
-            attribute causeKind : CauseKind;
-            end cause : MemoPart;
-            end effect : MemoPart;
-        }
-        connection def DetectedBy :> MemoRelationship {
-            end failureMode : MemoPart;
-            end detectionMethod : MemoPart;
-        }
     
-        connection def InputToGate :> MemoRelationship {
-            end input : MemoPart;
-            end gate : MemoPart;
-        }
-        connection def ProducesEvent :> MemoRelationship {
-            end gate : MemoPart;
-            end eventElement : MemoPart;
-        }
-        connection def ContainsEvent :> MemoRelationship {
-            end cutSet : MemoPart;
-            end eventElement : MemoPart;
-        }
     
-        connection def Decides :> MemoRelationship {
-            end decision : MemoPart;
-            end affectedElement : MemoPart;
-        }
     
         // Composes is the single whole/part decomposition relation. It unifies the
         // former ComposesLogical / AssemblyComprises / Contains{Component,Element} /
@@ -931,34 +512,18 @@ connection def BindsToInterface :> MemoRelationship
         // Collection membership is carried by the end instance.
         // types, so the ends are generic MemoPart.
         connection def Composes :> MemoRelationship {
-            end parent : MemoPart;
-            end child : MemoPart;
+            end parent : MemoPart :>> source;
+            end child : MemoPart :>> target;
         }
     
-        connection def IdentifiesHazard :> MemoRelationship {
-            end deviation : MemoPart;
-            end hazard : MemoPart;
-        }
         connection def AnalyzedBy :> MemoRelationship {
-            end element : ArchitectureElement;
-            end analysisArtifact : AnalysisArtifact;
+            end element : ArchitectureElement :>> source;
+            end analysisArtifact : AnalysisArtifact :>> target;
         }
     
-        connection def Changes :> MemoRelationship {
-            end changeRequest : MemoPart;
-            end changedElement : MemoPart;
-        }
-        connection def TestedByUsability :> MemoRelationship {
-            end uiElementOrTask : MemoPart;
-            end usabilityTest : VerifiableElement;
-        }
-        connection def FeedsBackTo :> MemoRelationship {
-            end feedbackItem : MemoPart;
-            end designElement : MemoPart;
-        }
         connection def BindsToInterface :> MemoRelationship {
-            end portElement : InterfaceElement;
-            end boundInterface : InterfaceElement;
+            end portElement : InterfaceElement :>> source;
+            end boundInterface : InterfaceElement :>> target;
         }
     }
     

@@ -39,9 +39,9 @@
 | --- | --- | --- | --- |
 | [`DeploymentUnit`](#deploymentunit) | `part def` | Deployment unit definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`RuntimeEnvironment`](#runtimeenvironment) | `part def` | Runtime environment definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`BuildsInto`](#buildsinto) | `connection def` | Typed relationship from `SoftwareModule` to `DeploymentUnit`. | `MemoRelationship` |
-| [`DeploysTo`](#deploysto) | `connection def` | Typed relationship from `DeploymentUnit` to `ProcessingNode`. | `MemoRelationship` |
-| [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | `MemoRelationship` |
+| [`BuildsInto`](#buildsinto) | `connection def` | Typed relationship for builds into. | `MemoRelationship` |
+| [`DeploysTo`](#deploysto) | `connection def` | Typed relationship for deploys to. | `MemoRelationship` |
+| [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship for provides environment. | `MemoRelationship` |
 | [`FlowSpecKind`](#flowspeckind) | `enum def` | AADL separates a flow *specification* (declared at a component boundary as source / sink / path through ports) from a flow *implementation* (its routing through subcomponents and connectors), and traces a complete source→sink flow as an *end-to-end flow* across the assembly.… | — |
 | [`FlowSpecification`](#flowspecification) | `part def` | A flow declared at a logical component boundary (in-port → out-port). | `ArchitectureElement` |
 | [`EndToEndFlow`](#endtoendflow) | `part def` | A complete source→sink flow traced across the layers and the software→ hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose` (latency \| fault-propagation \| security) drive the AADL-style analysis. | `ArchitectureElement` |
@@ -86,7 +86,7 @@ connection def BuildsInto :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `SoftwareModule` to `DeploymentUnit`. |
+| Description | Typed relationship for builds into. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -101,7 +101,7 @@ connection def DeploysTo :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `DeploymentUnit` to `ProcessingNode`. |
+| Description | Typed relationship for deploys to. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -116,7 +116,7 @@ connection def ProvidesEnvironment :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. |
+| Description | Typed relationship for provides environment. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -234,17 +234,17 @@ connection def FlowTraversesBinding :> MemoRelationship
         }
     
         connection def BuildsInto :> MemoRelationship {
-            end module : SoftwareModule;
-            end deploymentUnit : DeploymentUnit;
+            end module : SoftwareModule :>> source;
+            end deploymentUnit : DeploymentUnit :>> target;
         }
         connection def DeploysTo :> MemoRelationship {
             attribute deploymentKind : DeploymentKind;
-            end deploymentUnit : DeploymentUnit;
-            end node : ProcessingNode;
+            end deploymentUnit : DeploymentUnit :>> source;
+            end node : ProcessingNode :>> target;
         }
         connection def ProvidesEnvironment :> MemoRelationship {
-            end node : ProcessingNode;
-            end environment : RuntimeEnvironment;
+            end node : ProcessingNode :>> source;
+            end environment : RuntimeEnvironment :>> target;
         }
     
         // ─── AADL-style flow modeling (SAE AS5506) ───────────────────────────
@@ -284,13 +284,13 @@ connection def FlowTraversesBinding :> MemoRelationship
         // segment per traversed component boundary (AADL flow-spec → end-to-end).
         connection def FlowComprisesSpec :> MemoRelationship {
             attribute segmentOrder : Integer;
-            end endToEndFlow : EndToEndFlow;
-            end spec : FlowSpecification;
+            end endToEndFlow : EndToEndFlow :>> source;
+            end spec : FlowSpecification :>> target;
         }
         // The flow traverses a software→hardware binding; latency accrues here.
         connection def FlowTraversesBinding :> MemoRelationship {
-            end endToEndFlow : EndToEndFlow;
-            end deploymentUnit : DeploymentUnit;
+            end endToEndFlow : EndToEndFlow :>> source;
+            end deploymentUnit : DeploymentUnit :>> target;
         }
     }
     

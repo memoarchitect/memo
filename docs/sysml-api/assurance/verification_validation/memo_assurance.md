@@ -40,7 +40,7 @@
 | [`TestArtifact`](#testartifact) | `part def` | Test artifact definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`Evidence`](#evidence) | `part def` | Evidence definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`VerificationScenario`](#verificationscenario) | `action def` | A scenario executed to verify — selected path with purpose 'verification'. | `MemoScenario` |
-| [`ExecutesScenario`](#executesscenario) | `connection def` | Typed relationship from `VerificationCase` to `MemoScenario`. | `MemoRelationship` |
+| [`ExecutesScenario`](#executesscenario) | `connection def` | Typed relationship for executes scenario. | `MemoRelationship` |
 
 ## VerificationCase
 
@@ -125,7 +125,7 @@ connection def ExecutesScenario :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `VerificationCase` to `MemoScenario`. |
+| Description | Typed relationship for executes scenario. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -182,8 +182,8 @@ connection def ExecutesScenario :> MemoRelationship
         // use environment (§5): ValidationCase validates a UseCase.
         // Safety-critical functions must trace to verification (rules/coverage).
         connection def ExecutesScenario :> MemoRelationship {
-            end verificationCase : VerificationCase;
-            end scenario : MemoScenario;
+            end verificationCase : VerificationCase :>> source;
+            end scenario : MemoScenario :>> target;
         }
     }
     

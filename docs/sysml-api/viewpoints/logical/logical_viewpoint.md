@@ -59,6 +59,8 @@
             attribute :>> presentationKind = (PresentationKind::blockDiagram);
             attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::performance);
             attribute :>> includedLayers = ("logical_structure", "interfaces");
+            attribute :>> explorerLane = "architecture";
+            attribute :>> explorerOrder = 3;
             attribute :>> allowedElementKinds = ("LogicalComponent", "Interface");
             attribute :>> userExtensible = true;
         }

@@ -45,7 +45,7 @@
 | [`ScenarioOccurrence`](#scenariooccurrence) | `part def` | An actual or hypothetical execution of a scenario (usability test run, postmarket incident reconstruction, simulated-use session). | `MemoPart` |
 | [`SelectsKind`](#selectskind) | `enum def` | Controlled values for selects: `step`. | — |
 | [`Selects`](#selects) | `connection def` | Typed relationship for selects. | `MemoRelationship` |
-| [`OccursDuring`](#occursduring) | `connection def` | Typed relationship from `ScenarioOccurrence` to `UseContext`. | `MemoRelationship` |
+| [`OccursDuring`](#occursduring) | `connection def` | Typed relationship for occurs during. | `MemoRelationship` |
 
 ## ScenarioVariantKind
 
@@ -175,7 +175,7 @@ connection def OccursDuring :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `ScenarioOccurrence` to `UseContext`. |
+| Description | Typed relationship for occurs during. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -293,14 +293,14 @@ connection def OccursDuring :> MemoRelationship
             attribute selectsKind : SelectsKind;
             attribute pathOrder : Integer[0..1];
             attribute decisionTaken : String[0..1];
-            end scenario : MemoScenario;
+            end scenario : MemoScenario :>> source;
             // A selected path element may be a WorkflowStep action or a flow
             // element. Those constructs do not share a MEMO base metaclass.
-            end selected;
+            end selected :>> target;
         }
         connection def OccursDuring :> MemoRelationship {
-            end occurrence : ScenarioOccurrence;
-            end context : UseContext;
+            end occurrence : ScenarioOccurrence :>> source;
+            end context : UseContext :>> target;
         }
     }
     
