@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -214,6 +215,7 @@ connection def FlowTraversesBinding :> MemoRelationship
     // other way and between different things. Software reaches a node through
     // DeploysTo.
     package memo_architecture_realization_deployment {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import memo_core_common::*;
@@ -243,14 +245,32 @@ connection def FlowTraversesBinding :> MemoRelationship
             end module : SoftwareModule :>> source;
             end deploymentUnit : DeploymentUnit :>> target;
         }
+        abstract connection buildsIntoLinks : BuildsInto[*];
+        metadata def <buildsInto> BuildsIntoMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = buildsIntoLinks meta SysML::Usage;
+        }
         connection def DeploysTo :> MemoRelationship {
             attribute deploymentKind : DeploymentKind;
             end deploymentUnit : DeploymentUnit :>> source;
             end node : ProcessingNode :>> target;
         }
+        abstract connection deploysToLinks : DeploysTo[*];
+        metadata def <deploysTo> DeploysToMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = deploysToLinks meta SysML::Usage;
+        }
         connection def ProvidesEnvironment :> MemoRelationship {
             end node : ProcessingNode :>> source;
             end environment : RuntimeEnvironment :>> target;
+        }
+        abstract connection providesEnvironmentLinks : ProvidesEnvironment[*];
+        metadata def <providesEnvironment> ProvidesEnvironmentMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = providesEnvironmentLinks meta SysML::Usage;
         }
     
         // ─── AADL-style flow modeling (SAE AS5506) ───────────────────────────
@@ -293,10 +313,22 @@ connection def FlowTraversesBinding :> MemoRelationship
             end endToEndFlow : EndToEndFlow :>> source;
             end spec : FlowSpecification :>> target;
         }
+        abstract connection flowComprisesSpecLinks : FlowComprisesSpec[*];
+        metadata def <flowComprisesSpec> FlowComprisesSpecMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = flowComprisesSpecLinks meta SysML::Usage;
+        }
         // The flow traverses a software→hardware binding; latency accrues here.
         connection def FlowTraversesBinding :> MemoRelationship {
             end endToEndFlow : EndToEndFlow :>> source;
             end deploymentUnit : DeploymentUnit :>> target;
+        }
+        abstract connection flowTraversesBindingLinks : FlowTraversesBinding[*];
+        metadata def <flowTraversesBinding> FlowTraversesBindingMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = flowTraversesBindingLinks meta SysML::Usage;
         }
     }
     

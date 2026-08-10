@@ -1,4 +1,5 @@
 package memo_assurance_verification_validation {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -52,5 +53,11 @@ package memo_assurance_verification_validation {
     connection def ExecutesScenario :> MemoRelationship {
         end verificationCase : VerificationCase :>> source;
         end scenario : MemoScenario :>> target;
+    }
+    abstract connection executesScenarioLinks : ExecutesScenario[*];
+    metadata def <executesScenario> ExecutesScenarioMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = executesScenarioLinks meta SysML::Usage;
     }
 }

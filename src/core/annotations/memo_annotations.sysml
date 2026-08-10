@@ -14,6 +14,7 @@
 // NotesOn leave their subject ends untyped, following the MemoLink precedent in
 // memo_core_relationships.
 package memo_core_annotations {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -64,14 +65,32 @@ package memo_core_annotations {
         end remark : ModelComment :>> source;
         end annotatedElement :>> target;
     }
+    abstract connection commentsOnLinks : CommentsOn[*];
+    metadata def <commentsOn> CommentsOnMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = commentsOnLinks meta SysML::Usage;
+    }
 
     connection def RationaleFor :> MemoRelationship {
         end rationaleRecord : ModelRationale :>> source;
         end justifiedElement :>> target;
     }
+    abstract connection rationaleForLinks : RationaleFor[*];
+    metadata def <rationaleFor> RationaleForMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = rationaleForLinks meta SysML::Usage;
+    }
 
     connection def NotesOn :> MemoRelationship {
         end noteRecord : ModelNote :>> source;
         end notedElement :>> target;
+    }
+    abstract connection notesOnLinks : NotesOn[*];
+    metadata def <notesOn> NotesOnMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = notesOnLinks meta SysML::Usage;
     }
 }

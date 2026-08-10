@@ -1,4 +1,5 @@
 package memo_assurance_safety_risk_analysis {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
     private import memo_core_relationships::*;   // MemoRelationship
 
@@ -128,28 +129,70 @@ package memo_assurance_safety_risk_analysis {
         end cause : MemoPart :>> source;
         end effect : RiskItem :>> target;
     }
+    abstract connection causesLinks : Causes[*];
+    metadata def <causes> CausesMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = causesLinks meta SysML::Usage;
+    }
     connection def DetectedBy :> MemoRelationship {
         end failureMode : FailureMode :>> source;
         end detectionMethod : DetectionMethod :>> target;
+    }
+    abstract connection detectedByLinks : DetectedBy[*];
+    metadata def <detectedBy> DetectedByMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = detectedByLinks meta SysML::Usage;
     }
     connection def InputToGate :> MemoRelationship {
         end input : FaultTreeEvent :>> source;
         end gate : FaultTreeGate :>> target;
     }
+    abstract connection inputToGateLinks : InputToGate[*];
+    metadata def <inputToGate> InputToGateMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = inputToGateLinks meta SysML::Usage;
+    }
     connection def ProducesEvent :> MemoRelationship {
         end gate : FaultTreeGate :>> source;
         end eventElement : FaultTreeEvent :>> target;
+    }
+    abstract connection producesEventLinks : ProducesEvent[*];
+    metadata def <producesEvent> ProducesEventMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = producesEventLinks meta SysML::Usage;
     }
     connection def ContainsEvent :> MemoRelationship {
         end cutSet : MinimalCutSet :>> source;
         end eventElement : FaultTreeEvent :>> target;
     }
+    abstract connection containsEventLinks : ContainsEvent[*];
+    metadata def <containsEvent> ContainsEventMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = containsEventLinks meta SysML::Usage;
+    }
     connection def IdentifiesHazard :> MemoRelationship {
         end deviation : HAZOPDeviation :>> source;
         end hazard : Hazard :>> target;
     }
+    abstract connection identifiesHazardLinks : IdentifiesHazard[*];
+    metadata def <identifiesHazard> IdentifiesHazardMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = identifiesHazardLinks meta SysML::Usage;
+    }
     connection def HasFailureMode :> MemoRelationship {
         end element : ArchitectureElement :>> source;
         end failureMode : FailureMode :>> target;
+    }
+    abstract connection hasFailureModeLinks : HasFailureMode[*];
+    metadata def <hasFailureMode> HasFailureModeMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = hasFailureModeLinks meta SysML::Usage;
     }
 }

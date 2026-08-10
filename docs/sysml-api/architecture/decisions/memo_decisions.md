@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -88,6 +89,7 @@ connection def Decides :> MemoRelationship
 
     ```sysml
     package memo_architecture_decisions {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import memo_core_common::*;
@@ -105,6 +107,12 @@ connection def Decides :> MemoRelationship
             end decision : DesignDecision :>> source;
             end adr : ADRArtifact :>> target;
         }
+        abstract connection decisionRecordedInADRLinks : DecisionRecordedInADR[*];
+        metadata def <decisionRecordedInADR> DecisionRecordedInADRMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = decisionRecordedInADRLinks meta SysML::Usage;
+        }
     
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
@@ -112,6 +120,12 @@ connection def Decides :> MemoRelationship
         connection def Decides :> MemoRelationship {
             end decision : DesignDecision :>> source;
             end affectedElement : MemoPart :>> target;
+        }
+        abstract connection decidesLinks : Decides[*];
+        metadata def <decides> DecidesMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = decidesLinks meta SysML::Usage;
         }
     }
     

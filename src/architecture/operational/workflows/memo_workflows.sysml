@@ -5,6 +5,7 @@
 // scenario. Workflows are action defs: steps, decisions, forks/joins, and
 // successions use native SysML v2 action semantics where portable.
 package memo_architecture_operational_workflows {
+    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -96,9 +97,21 @@ package memo_architecture_operational_workflows {
         end supporter :>> source;
         end supported : MemoAction :>> target;
     }
+    abstract connection supportsLinks : Supports[*];
+    metadata def <supports> SupportsMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = supportsLinks meta SysML::Usage;
+    }
     connection def RequiresResource :> MemoRelationship {
         end workflow : OperationalWorkflow :>> source;
         end resource : WorkflowResource :>> target;
+    }
+    abstract connection requiresResourceLinks : RequiresResource[*];
+    metadata def <requiresResource> RequiresResourceMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = requiresResourceLinks meta SysML::Usage;
     }
 
     // ── Workflow transformation (as-is → to-be) ──────────────────
@@ -115,6 +128,12 @@ package memo_architecture_operational_workflows {
         attribute transformationRationale : String[0..1];
         end source : MemoAction;
         end target : MemoAction;
+    }
+    abstract connection transformsLinks : Transforms[*];
+    metadata def <transforms> TransformsMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = transformsLinks meta SysML::Usage;
     }
     // The device or system whose introduction enables a workflow.
 }

@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -138,6 +139,7 @@ connection def ExecutesScenario :> MemoRelationship
 
     ```sysml
     package memo_assurance_verification_validation {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import memo_core_common::*;
@@ -191,6 +193,12 @@ connection def ExecutesScenario :> MemoRelationship
         connection def ExecutesScenario :> MemoRelationship {
             end verificationCase : VerificationCase :>> source;
             end scenario : MemoScenario :>> target;
+        }
+        abstract connection executesScenarioLinks : ExecutesScenario[*];
+        metadata def <executesScenario> ExecutesScenarioMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = executesScenarioLinks meta SysML::Usage;
         }
     }
     

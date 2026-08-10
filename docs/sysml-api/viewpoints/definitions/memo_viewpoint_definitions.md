@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -183,6 +184,7 @@ connection def IncludedIn :> MemoRelationship
 
     ```sysml
     package memo_viewpoints_definitions {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import memo_core_common::*;
@@ -282,6 +284,12 @@ connection def IncludedIn :> MemoRelationship
         connection def IncludedIn :> MemoRelationship {
             end sourceElement : MemoPart :>> source;
             end targetView : MemoView :>> target;
+        }
+        abstract connection includedInLinks : IncludedIn[*];
+        metadata def <includedIn> IncludedInMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = includedInLinks meta SysML::Usage;
         }
     }
     

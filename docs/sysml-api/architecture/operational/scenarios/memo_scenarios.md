@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -194,6 +195,7 @@ connection def OccursDuring :> MemoRelationship
     // of a scenario. Alternate scenarios reference their base scenario and
     // variation point instead of duplicating the workflow.
     package memo_architecture_operational_scenarios {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import memo_core_common::*;
@@ -298,9 +300,21 @@ connection def OccursDuring :> MemoRelationship
             // element. Those constructs do not share a MEMO base metaclass.
             end selected :>> target;
         }
+        abstract connection selectsLinks : Selects[*];
+        metadata def <selects> SelectsMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = selectsLinks meta SysML::Usage;
+        }
         connection def OccursDuring :> MemoRelationship {
             end occurrence : ScenarioOccurrence :>> source;
             end context : UseContext :>> target;
+        }
+        abstract connection occursDuringLinks : OccursDuring[*];
+        metadata def <occursDuring> OccursDuringMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = occursDuringLinks meta SysML::Usage;
         }
     }
     

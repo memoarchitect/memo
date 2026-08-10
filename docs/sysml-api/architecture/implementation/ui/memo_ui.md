@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -469,6 +470,7 @@ connection def ControlImplementedBy :> MemoRelationship
     // UI is an implementation concern (rendered UI is software; physical controls
     // are hardware), so it lives in the implementation layer, not operational.
     package memo_architecture_implementation_ui {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
     
         private import memo_core_common::*;
@@ -748,15 +750,33 @@ connection def ControlImplementedBy :> MemoRelationship
             end sourceState : UIState :>> source;
             end targetState : UIState :>> target;
         }
+        abstract connection uITransitionLinks : UITransition[*];
+        metadata def <uITransition> UITransitionMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = uITransitionLinks meta SysML::Usage;
+        }
         connection def DataBinding :> MemoRelationship {
             attribute bindingExpression : String;
             attribute refreshPolicy : String;
             end boundElement : InteractionElement :>> source;
             end dataSource : MemoExchangeItem :>> target;
         }
+        abstract connection dataBindingLinks : DataBinding[*];
+        metadata def <dataBinding> DataBindingMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = dataBindingLinks meta SysML::Usage;
+        }
         connection def PresentsState :> MemoRelationship {
             end userInterface : UserInterface :>> source;
             end uiState : UIState :>> target;
+        }
+        abstract connection presentsStateLinks : PresentsState[*];
+        metadata def <presentsState> PresentsStateMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = presentsStateLinks meta SysML::Usage;
         }
     
         // ── Screen layout relations ──────────────────────────────────
@@ -764,6 +784,12 @@ connection def ControlImplementedBy :> MemoRelationship
         connection def CapturesScreen :> MemoRelationship {
             end capture : ScreenCapture :>> source;
             end screen : UIElement :>> target;
+        }
+        abstract connection capturesScreenLinks : CapturesScreen[*];
+        metadata def <capturesScreen> CapturesScreenMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = capturesScreenLinks meta SysML::Usage;
         }
     
         // Activating this element opens another screen. This is NAVIGATION, not
@@ -777,19 +803,43 @@ connection def ControlImplementedBy :> MemoRelationship
             end sourceElement : UIElement :>> source;
             end targetScreen : UIElement :>> target;
         }
+        abstract connection navigatesToLinks : NavigatesTo[*];
+        metadata def <navigatesTo> NavigatesToMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = navigatesToLinks meta SysML::Usage;
+        }
     
         // ── §18 traceability ─────────────────────────────────────────
         connection def ElementTriggersAction :> MemoRelationship {
             end element : InteractionElement :>> source;
             end triggeredAction : UIAction :>> target;
         }
+        abstract connection elementTriggersActionLinks : ElementTriggersAction[*];
+        metadata def <elementTriggersAction> ElementTriggersActionMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = elementTriggersActionLinks meta SysML::Usage;
+        }
         connection def ActionInvokesFunction :> MemoRelationship {
             end uiAction : UIAction :>> source;
             end systemFunction : MemoFunction :>> target;
         }
+        abstract connection actionInvokesFunctionLinks : ActionInvokesFunction[*];
+        metadata def <actionInvokesFunction> ActionInvokesFunctionMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = actionInvokesFunctionLinks meta SysML::Usage;
+        }
         connection def FlowServesUseCase :> MemoRelationship {
             end interactionFlow : InteractionFlow :>> source;
             end useCase : UseCase :>> target;
+        }
+        abstract connection flowServesUseCaseLinks : FlowServesUseCase[*];
+        metadata def <flowServesUseCase> FlowServesUseCaseMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = flowServesUseCaseLinks meta SysML::Usage;
         }
         // The UI-layer scenario realizes exactly one FunctionalScenario one layer
         // up (the interaction sequence that carries out the function sequence),
@@ -798,11 +848,23 @@ connection def ControlImplementedBy :> MemoRelationship
             end useError : UseError :>> source;
             end element : InteractionElement :>> target;
         }
+        abstract connection errorAtElementLinks : ErrorAtElement[*];
+        metadata def <errorAtElement> ErrorAtElementMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = errorAtElementLinks meta SysML::Usage;
+        }
         // A risk control implemented by a UI element or by task design
         // (confirmation dialog, lockout, guarded control).
         connection def ControlImplementedBy :> MemoRelationship {
             end riskControl : RiskControlMeasure :>> source;
             end implementingElement : ArchitectureElement :>> target;
+        }
+        abstract connection controlImplementedByLinks : ControlImplementedBy[*];
+        metadata def <controlImplementedBy> ControlImplementedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = controlImplementedByLinks meta SysML::Usage;
         }
     }
     
