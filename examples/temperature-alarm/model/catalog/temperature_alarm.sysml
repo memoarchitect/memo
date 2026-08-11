@@ -101,7 +101,7 @@ package memo_examples_temperature_alarm {
         attribute :>> severity = SeverityKind::serious;
         attribute :>> foreseeable = true;
     }
-    item rcReAnnunciate : RiskControlMeasure {
+    part rcReAnnunciate : RiskControlMeasure {
         attribute :>> id = "TA-RC-001"; attribute :>> name = "AutoReAnnunciationAfterSilence";
         attribute :>> controlKind = RiskControlKind::alarm;
         attribute :>> implementationKind = RiskControlImplementationKind::softwareDesign;

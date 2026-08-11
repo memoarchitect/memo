@@ -6,7 +6,7 @@ package memo_assurance_safety_risk_analysis {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_assurance_safety_risk::*;   // RiskItem
-    item def FMEAWorksheet specializes AnalysisArtifact {
+    part def FMEAWorksheet specializes AnalysisArtifact {
         attribute analysisScope : String;
         attribute standardReference : String;
         attribute analysisBasis : String;
@@ -51,7 +51,7 @@ package memo_assurance_safety_risk_analysis {
         attribute occurrenceRating : ProbabilityKind;
         attribute preventionMethod : String;
     }
-    item def DetectionMethod specializes MemoPart {
+    part def DetectionMethod specializes MemoPart {
         attribute methodKind : DetectionMethodKind;
         attribute detectionPoint : String;
         attribute confidence : DetectionKind;
@@ -62,7 +62,7 @@ package memo_assurance_safety_risk_analysis {
         attribute targetCompletionDate : String;
         attribute revisedRpn : Integer;
     }
-    item def FaultTree specializes AnalysisArtifact {
+    part def FaultTree specializes AnalysisArtifact {
         attribute standardReference : String;
         attribute analysisScope : String;
         attribute topEventDescription : String;
@@ -76,7 +76,7 @@ package memo_assurance_safety_risk_analysis {
         attribute exposureTime : Real;
         attribute :>> description : String;
     }
-    item def FaultTreeGate specializes MemoPart {
+    part def FaultTreeGate specializes MemoPart {
         attribute gateKind : FaultTreeGateKind;
         attribute kValue : Integer;
         attribute nValue : Integer;
@@ -87,13 +87,13 @@ package memo_assurance_safety_risk_analysis {
         attribute involvedEvents : String;
         attribute significance : String;
     }
-    item def HAZOPStudy specializes AnalysisArtifact {
+    part def HAZOPStudy specializes AnalysisArtifact {
         attribute standardReference : String;
         attribute processDescription : String;
         attribute studyScope : String;
         attribute teamComposition : String;
     }
-    item def HAZOPNode specializes MemoPart {
+    part def HAZOPNode specializes MemoPart {
         attribute nodeDescription : String;
         attribute designIntent : String;
         attribute operatingConditions : String;

@@ -1,6 +1,7 @@
 // MEMO base hierarchy. Construct-specific foundations: one base per
-// SysML v2 metaclass family (part, action, port, interface, item, requirement,
-// connection), each carrying the shared MEMO semantics. Common inheritance
+// SysML v2 metaclass family (part, action, port, interface, item, use case,
+// requirement, constraint, verification, state, connection), each carrying
+// the shared MEMO semantics. Common inheritance
 // across metaclasses is not portable, so non-part bases re-declare the small
 // identification core and share classification through the metadata defs in
 // memo_core_dimensions.
@@ -132,9 +133,11 @@ package memo_core_common {
         attribute sourceReference : String;
     }
 
-    // Exchange-content foundation: everything that flows — information,
-    // command, material, energy — is an item, not a part.
-    item def MemoExchangeItem {
+    // Single item foundation. Standards, hazards, stored software data, and
+    // message payloads are all item-native concepts. Whether an item is
+    // exchanged is expressed by its use in a port or flow, not by a second
+    // ontology root.
+    abstract item def MemoItem {
         attribute id : String;
         attribute uuid : String;
         attribute name : String;
@@ -143,13 +146,33 @@ package memo_core_common {
         attribute rationale : String;
         attribute sourceReference : String;
         attribute status : ElementStatusKind;
-        attribute semantics : String;
-        attribute unit : String;
-        attribute minValue : String;
-        attribute maxValue : String;
-        attribute encoding : String;
-        attribute timestampRequired : Boolean;
-        attribute codes : TerminologyCode[0..*];
+    }
+
+    // Use-case foundation. The domain UseCase adds its goal and actor
+    // references; identity is carried here so use cases do not maintain a
+    // partial hand-written copy of the MEMO identification core.
+    abstract use case def MemoUseCase {
+        attribute id : String;
+        attribute uuid : String;
+        attribute name : String;
+        attribute shortDescription : String;
+        attribute description : String;
+        attribute rationale : String;
+        attribute sourceReference : String;
+        attribute status : ElementStatusKind;
+    }
+
+    // General constraint foundation. Executable consistency rules and
+    // reusable quantitative constraints are both native constraint defs.
+    abstract constraint def MemoConstraint {
+        attribute id : String;
+        attribute uuid : String;
+        attribute name : String;
+        attribute shortDescription : String;
+        attribute description : String;
+        attribute rationale : String;
+        attribute sourceReference : String;
+        attribute status : ElementStatusKind;
     }
 
     // Requirement-family foundations. MemoNeed captures a problem-space

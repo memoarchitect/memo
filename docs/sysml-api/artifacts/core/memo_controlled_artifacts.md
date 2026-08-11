@@ -31,7 +31,8 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`ControlledArtifact`](#controlledartifact) | `item def` | Controlled artifact definition specializing `MemoPart`. | `MemoPart` |
+| [`MemoArtifactItem`](#memoartifactitem) | `item def` | Memo artifact item definition specializing `MemoItem`. | `MemoItem` |
+| [`ControlledArtifact`](#controlledartifact) | `item def` | Controlled artifact definition specializing `MemoArtifactItem`. | `MemoArtifactItem` |
 | [`ModelOwnedArtifact`](#modelownedartifact) | `part def` | Model owned artifact definition specializing `ControlledArtifact`. | `ControlledArtifact` |
 | [`ADRArtifact`](#adrartifact) | `part def` | Adrartifact definition specializing `ModelOwnedArtifact`. | `ModelOwnedArtifact` |
 | [`MarkdownDocumentSource`](#markdowndocumentsource) | `part def` | Markdown document source definition specializing `ModelOwnedArtifact`. | `ModelOwnedArtifact` |
@@ -40,18 +41,33 @@
 | [`ModelDataset`](#modeldataset) | `part def` | Model dataset definition specializing `ModelOwnedArtifact`. | `ModelOwnedArtifact` |
 | [`GeneratedReport`](#generatedreport) | `part def` | Generated report definition specializing `ModelOwnedArtifact`. | `ModelOwnedArtifact` |
 
-## ControlledArtifact
+## MemoArtifactItem
 
 ```sysml
-item def ControlledArtifact :> MemoPart
+abstract item def MemoArtifactItem :> MemoItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled artifact definition specializing `MemoPart`. |
+| Description | Memo artifact item definition specializing `MemoItem`. |
+| Kind | `item def` |
+| Abstract | Yes |
+| Specializes | `MemoItem` |
+| Owning package | `memo_artifacts_core` |
+
+
+## ControlledArtifact
+
+```sysml
+item def ControlledArtifact :> MemoArtifactItem
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled artifact definition specializing `MemoArtifactItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoArtifactItem` |
 | Owning package | `memo_artifacts_core` |
 
 
@@ -167,17 +183,19 @@ part def GeneratedReport :> ModelOwnedArtifact
     ```sysml
     package memo_artifacts_core {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
-    
-        item def ControlledArtifact :> MemoPart {
+
+        abstract item def MemoArtifactItem :> MemoItem;
+
+        item def ControlledArtifact :> MemoArtifactItem {
             attribute version : String;
             attribute artifactKind : ArtifactKind;
             attribute owner : String;
             attribute approvalStatus : String;
         }
-    
+
         part def ModelOwnedArtifact :> ControlledArtifact {
             attribute uri : String;
             attribute mediaType : String;
@@ -187,16 +205,16 @@ part def GeneratedReport :> ModelOwnedArtifact
             attribute executionEnvironment : String[0..1];
             attribute generated : Boolean;
         }
-    
+
         part def ADRArtifact :> ModelOwnedArtifact {
             attribute decisionId : String;
         }
-    
+
         part def MarkdownDocumentSource :> ModelOwnedArtifact {}
         part def ModelQueryScript :> ModelOwnedArtifact {}
         part def AnalysisNotebook :> ModelOwnedArtifact {}
         part def ModelDataset :> ModelOwnedArtifact {}
         part def GeneratedReport :> ModelOwnedArtifact {}
     }
-    
+
     ```

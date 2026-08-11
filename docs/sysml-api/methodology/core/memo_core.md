@@ -172,17 +172,17 @@ connection def ResolvesToMethodology :> MemoRelationship
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_relationships::*;   // MemoRelationship
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_consistency_rules::*;
-    
+
         part def MethodologyLibrary :> MemoPart {
             attribute version : String;
             attribute domain : String;
             attribute :>> description : String;
         }
-    
+
         // A rule's disposition under one methodology or project binding.
         //
         // `targetRule` and `replacementRule` are typed references to the rule's own
@@ -205,7 +205,7 @@ connection def ResolvesToMethodology :> MemoRelationship
             attribute approvedBy : String[0..1];
             attribute approvedOn : String[0..1];
         }
-    
+
         part def MethodologyDefinition :> MemoPart {
             attribute version : String;
             attribute domain : String;
@@ -227,7 +227,7 @@ connection def ResolvesToMethodology :> MemoRelationship
             attribute includedViewpoint : String[0..*];
             part rulePolicy : RulePolicy[0..*];
         }
-    
+
         // Derived, never authored. The resolver projects this from a binding and
         // its methodology chain. If it is serialized for review it is generated
         // output that records its input hashes; it does not compete with the
@@ -240,7 +240,7 @@ connection def ResolvesToMethodology :> MemoRelationship
             attribute includedLayer : String[0..*];
             attribute includedModule : String[0..*];
         }
-    
+
         part def ProjectMethodBinding :> MemoPart {
             attribute projectName : String;
             ref selectedMethodology : MethodologyDefinition;
@@ -260,7 +260,7 @@ connection def ResolvesToMethodology :> MemoRelationship
             attribute regulatoryRegime : RegulatoryRegimeKind[0..*];
             part rulePolicy : RulePolicy[0..*];
         }
-    
+
         part def DhfDocumentBinding :> MemoPart {
             attribute documentTitle : String;
             attribute groupLabel : String;
@@ -270,7 +270,7 @@ connection def ResolvesToMethodology :> MemoRelationship
             attribute lifecycleStage : WorkflowStageKind;
             attribute required : Boolean;
         }
-    
+
         part def Archetype :> MemoPart {
             attribute label : String;
             attribute :>> description : String;
@@ -279,7 +279,7 @@ connection def ResolvesToMethodology :> MemoRelationship
             attribute includedStandard : String;
             attribute templateDir : String;
         }
-    
+
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
@@ -294,5 +294,5 @@ connection def ResolvesToMethodology :> MemoRelationship
             :>> baseType = resolvesToMethodologyLinks meta SysML::Usage;
         }
     }
-    
+
     ```

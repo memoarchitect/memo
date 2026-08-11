@@ -40,9 +40,9 @@
     ```sysml
     package memo_methodology_archetypes {
         private import ScalarValues::*;
-    
+
         private import memo_methodology_core::*;
-    
+
         part minimal : Archetype {
             attribute :>> id = "ARCH-MINIMAL";
             attribute :>> name = "Minimal";
@@ -53,7 +53,7 @@
             attribute :>> includedStandard = "ISO 14971";
             attribute :>> templateDir = "";
         }
-    
+
         part standardArchetype : Archetype {
             attribute :>> id = "ARCH-STANDARD";
             attribute :>> name = "Standard";
@@ -64,7 +64,7 @@
             attribute :>> includedStandard = "ISO 14971; IEC 62304; 21 CFR 820";
             attribute :>> templateDir = "";
         }
-    
+
         part full : Archetype {
             attribute :>> id = "ARCH-FULL";
             attribute :>> name = "Full";
@@ -75,7 +75,7 @@
             attribute :>> includedStandard = "ISO 14971; IEC 62304; 21 CFR 820; ISO 13485; IEC 62366; IEC 60601-1; IEC 82304-1; FDA Cybersecurity Guidance";
             attribute :>> templateDir = "";
         }
-    
+
         part samd : Archetype {
             attribute :>> id = "ARCH-SAMD";
             attribute :>> name = "SaMD";
@@ -86,7 +86,7 @@
             attribute :>> includedStandard = "ISO 14971; IEC 62304; IEC 82304-1; FDA Cybersecurity Guidance";
             attribute :>> templateDir = "samd";
         }
-    
+
         part connected : Archetype {
             attribute :>> id = "ARCH-CONNECTED";
             attribute :>> name = "Connected";
@@ -97,7 +97,7 @@
             attribute :>> includedStandard = "ISO 14971; IEC 62304; 21 CFR 820; FDA Cybersecurity Guidance";
             attribute :>> templateDir = "connected-device";
         }
-    
+
         part monitoring : Archetype {
             attribute :>> id = "ARCH-MONITORING";
             attribute :>> name = "Monitoring";
@@ -108,7 +108,7 @@
             attribute :>> includedStandard = "ISO 14971; IEC 62304; IEC 60601-1; 21 CFR 820";
             attribute :>> templateDir = "monitoring-device";
         }
-    
+
         part infusion_pump : Archetype {
             attribute :>> id = "ARCH-INFUSION";
             attribute :>> name = "InfusionPump";
@@ -119,7 +119,7 @@
             attribute :>> includedStandard = "ISO 14971; IEC 62304; IEC 60601-1; 21 CFR 820; ISO 13485";
             attribute :>> templateDir = "infusion-pump";
         }
-    
+
         part blank : Archetype {
             attribute :>> id = "ARCH-BLANK";
             attribute :>> name = "Blank";
@@ -131,5 +131,5 @@
             attribute :>> templateDir = "";
         }
     }
-    
+
     ```

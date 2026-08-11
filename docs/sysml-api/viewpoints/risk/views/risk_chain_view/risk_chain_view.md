@@ -42,11 +42,11 @@
     ```sysml
     package memo_viewpoints_risk_views_risk_chain_view {
         private import ScalarValues::*;
-    
+
                     private import memo_viewpoints_definitions::*;
                     private import memo_core_enumerations::*;
         private import memo_viewpoints_risk_risk_viewpoint::*;
-    
+
                     view riskChainView : MemoDiagramView {
                         expose memo_viewpoints_risk_views_risk_chain_view::*;
                         attribute depth = 2;
@@ -70,5 +70,5 @@
         part :>> viewpointDefinition = riskViewpoint;
                     }
     }
-    
+
     ```

@@ -444,12 +444,12 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
     // the typed relations introduced in 0.5 — typed references make them checkable.
     package memo_rules_ontology {
         private import ScalarValues::*;
-    
+
         private import memo_core_consistency_rules::*;
         private import memo_core_enumerations::*;
-    
+
         // ─── Structure ───────────────────────────────────────────────────────
-    
+
         constraint def ContainmentAcyclicRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-001";
             attribute tailoring = RuleTailoringKind::invariant;
@@ -481,7 +481,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         // ─── Deployment and realization ──────────────────────────────────────
-    
+
         constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-011";
             attribute tailoring = RuleTailoringKind::invariant;
@@ -500,9 +500,9 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             attribute predicateExpression = "patientContact == false or (contactNature != '' and contactDuration != '')";
             constraint { true }
         }
-    
+
         // ─── Assurance coverage ──────────────────────────────────────────────
-    
+
         constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-040";
             attribute tailoring = RuleTailoringKind::invariant;
@@ -564,7 +564,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // no per-element subject can reach it. The cost is that a violation names
         // the rule and not the offending link; the rationale text names the relation
         // and the admissible types so the report is still actionable.
-    
+
         constraint def SatisfiedBySourceKindRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-060";
             attribute tailoring = RuleTailoringKind::invariant;
@@ -673,7 +673,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             attribute predicateExpression = "sourcesOf(crossesTrustBoundary)->forAll(conformsTo(InterfaceElement) or construct == 'port') and targetsOf(crossesTrustBoundary)->forAll(conformsTo(ArchitectureElement) or construct == 'item')";
             constraint { true }
         }
-    
+
         // CR-ONT-002's replacement. ComponentExchange's endpoints are `ref`
         // features, not links, and the builder projects them as element-ID STRINGS
         // in the attribute map (a §13.3 string pseudo-reference) — so they cannot be
@@ -697,13 +697,13 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             attribute predicateExpression = "attributes.targetEndpoint == '' or allOfKind('ArchitectureElement')->exists(id == subject.attributes.targetEndpoint) or allOfKind('InterfaceElement')->exists(id == subject.attributes.targetEndpoint) or allOfKind('MemoPort')->exists(id == subject.attributes.targetEndpoint)";
             constraint { true }
         }
-    
+
         // ─── The functional chain ────────────────────────────────────────────
         //
         // What makes ComponentFunction a definition of its own rather than an enum
         // member on SystemFunction. An enum value cannot change a multiplicity, and
         // "answerable to exactly one component" is the whole content of the concept.
-    
+
         constraint def ComponentFunctionAllocatedRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-074";
             attribute tailoring = RuleTailoringKind::invariant;
@@ -722,7 +722,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             attribute predicateExpression = "composes->forAll(conformsTo(MemoFunction))";
             constraint { true }
         }
-    
+
         // Track A3. The flow is the edge; the exchange part carries the budget and
         // assurance attributes. The two halves are bound by a SHARED NAME — the flow
         // usage is named with its exchange — and this is what makes that binding a
@@ -741,7 +741,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             attribute predicateExpression = "linksOf(flow)->exists(id == subject.id)";
             constraint { true }
         }
-    
+
         constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-043";
             attribute tailoring = RuleTailoringKind::invariant;
@@ -752,5 +752,5 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
     }
-    
+
     ```

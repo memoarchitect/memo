@@ -174,12 +174,12 @@ connection def SituatedIn :> MemoRelationship
     package memo_architecture_operational_context_use_context {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_operational_context_actors::*;
-    
+
         part def UseContext specializes MemoPart {
             attribute careSetting : String;
             attribute environment : String;
@@ -187,7 +187,7 @@ connection def SituatedIn :> MemoRelationship
             attribute connectedUse : Boolean;
             attribute intendedUseReference : String;
         }
-    
+
         // The physical/organizational environment of use (IEC 62366-1 3.20),
         // separable from the care-setting context so environments are reusable.
         part def UseEnvironment specializes MemoPart {
@@ -198,7 +198,7 @@ connection def SituatedIn :> MemoRelationship
             attribute infectionControlConstraints : String;
             attribute mobility : String;
         }
-    
+
         // The single relation a system context view draws.
         //
         // A context diagram labels its edges with open-ended verbs — "directs
@@ -228,7 +228,7 @@ connection def SituatedIn :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = interactsInContextLinks meta SysML::Usage;
         }
-    
+
         connection def InteractsWith :> MemoRelationship {
             end contextParticipant : Actor :>> source;
             // Untyped so operational activities (action def) can be targets as well as parts.
@@ -283,5 +283,5 @@ connection def SituatedIn :> MemoRelationship
             :>> baseType = situatedInLinks meta SysML::Usage;
         }
     }
-    
+
     ```

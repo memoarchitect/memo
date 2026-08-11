@@ -54,5 +54,5 @@
         public import memo_architecture_implementation_hardware_optical::*;
         public import memo_architecture_implementation_hardware_sensing::*;
     }
-    
+
     ```

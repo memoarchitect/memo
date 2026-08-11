@@ -90,7 +90,7 @@ port def PhysicalPort specializes MemoPort
     // physical taxonomy lives in memo_architecture_implementation_hardware_structure.
     package memo_architecture_realization_physical {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         part def ProcessingNode specializes ArchitectureElement {
@@ -140,5 +140,5 @@ port def PhysicalPort specializes MemoPort
             attribute connectorType : String;
         }
     }
-    
+
     ```

@@ -362,12 +362,12 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
     // compiles the ontology-owned `predicateExpression` against the semantic model.
     package memo_rules_closure {
         private import ScalarValues::*;
-    
+
         private import memo_core_consistency_rules::*;
         private import memo_core_enumerations::*;
-    
+
         // ─── Risk Layer Rules ────────────────────────────────────────────────
-    
+
         constraint def HazardMitigationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-001";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -377,7 +377,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "mitigates->size() >= 1";
             constraint { true }
         }
-    
+
         constraint def HazardSeverityRule :> MemoConsistencyRule {
             attribute id = "CR-MED-002";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -387,7 +387,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "attributes.severity != ''";
             constraint { true }
         }
-    
+
         constraint def RiskControlVerificationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-003";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -397,7 +397,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "verifiedBy->size() >= 1";
             constraint { true }
         }
-    
+
         constraint def InitialRiskMatrixRule :> MemoConsistencyRule {
             attribute id = "CR-MED-004";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -407,9 +407,9 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "assessedAgainst->size() >= 1";
             constraint { true }
         }
-    
+
         // ─── Requirements Layer Rules ────────────────────────────────────────
-    
+
         constraint def SysReqTraceRule :> MemoConsistencyRule {
             attribute id = "CR-MED-010";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -419,7 +419,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "derivesFrom->size() >= 1";
             constraint { true }
         }
-    
+
         constraint def SwReqTraceRule :> MemoConsistencyRule {
             attribute id = "CR-MED-011";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -429,15 +429,15 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "derivesFrom->size() >= 1";
             constraint { true }
         }
-    
+
         // CR-MED-012 (RequirementIdMustBeUnique) is intentionally omitted from the native
         // constraint set: cross-element uniqueness is not a single-subject predicate and
         // cannot be expressed as a `constraint { … }` body over one Requirement.
         // It remains an engine-level check.
         // Do not reintroduce the `predicate="uniqueAttribute"` part.
-    
+
         // ─── Architecture Layer Rules ────────────────────────────────────────
-    
+
         constraint def SwComponentSafetyClassRule :> MemoConsistencyRule {
             attribute id = "CR-MED-020";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -447,7 +447,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "attributes.safetyClass != ''";
             constraint { true }
         }
-    
+
         constraint def SwComponentReqRule :> MemoConsistencyRule {
             attribute id = "CR-MED-021";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -457,7 +457,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "satisfiedBy->size() >= 1";
             constraint { true }
         }
-    
+
         constraint def LogicalFunctionAllocationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-022";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -467,9 +467,9 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "allocatedTo->size() >= 1";
             constraint { true }
         }
-    
+
         // ─── Verification Layer Rules ────────────────────────────────────────
-    
+
         constraint def VerificationCaseMethodRule :> MemoConsistencyRule {
             attribute id = "CR-MED-030";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -479,7 +479,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "attributes.methodKind != ''";
             constraint { true }
         }
-    
+
         constraint def VerificationCaseTargetRule :> MemoConsistencyRule {
             attribute id = "CR-MED-031";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -489,7 +489,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "verifiedBy->size() >= 1";
             constraint { true }
         }
-    
+
         constraint def EvidenceProductionRule :> MemoConsistencyRule {
             attribute id = "CR-MED-032";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -499,9 +499,9 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "producesEvidence->size() >= 1";
             constraint { true }
         }
-    
+
         // ─── Cybersecurity Layer Rules ───────────────────────────────────────
-    
+
         constraint def ThreatMitigationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-040";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -511,7 +511,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "derivesCyberRequirement->size() >= 1";
             constraint { true }
         }
-    
+
         constraint def AssetThreatLinkRule :> MemoConsistencyRule {
             attribute id = "CR-MED-041";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -521,9 +521,9 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "threatenedBy->size() >= 1";
             constraint { true }
         }
-    
+
         // ─── Interface Rules ─────────────────────────────────────────────────
-    
+
         constraint def LogicalInterfaceDirectionRule :> MemoConsistencyRule {
             attribute id = "CR-MED-050";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -533,9 +533,9 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "attributes.direction != '' or attributes.directionality != ''";
             constraint { true }
         }
-    
+
         // ─── Conditional Rules ───────────────────────────────────────────────
-    
+
         constraint def SafetyClassCVerificationRule :> MemoConsistencyRule {
             attribute id = "CR-MED-101";
             attribute tailoring = RuleTailoringKind::assurance;
@@ -545,7 +545,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "not(attributes.safetyClass == 'C') or verifiedBy->size() >= 1";
             constraint { true }
         }
-    
+
         // ─── UI Layout Rules ─────────────────────────────────────────────────
         //
         // Traceability only: every part of a screen must have a design record
@@ -556,7 +556,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // in the renderer: a pairwise sibling comparison has no KerML constraint
         // form, since the evaluator has no Real literal and binds one implicit
         // subject per quantifier.
-    
+
         // The load-bearing traceability rule. A UI element that is not chrome must
         // reach a design record — a requirement it satisfies, or an action it
         // triggers. Chrome must be DECLARED `decoration`; an element left
@@ -570,7 +570,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "attributes.formKind == 'decoration' or satisfiedBy->size() >= 1 or elementTriggersAction->size() >= 1";
             constraint { true }
         }
-    
+
         // Interactive UI is where use error happens (IEC 62366-1), so a control
         // that reaches no system function is either dead UI or unmodelled UI.
         // The interactive-form restriction lives in the predicate because it spans
@@ -584,7 +584,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "not(formKind == 'button' or formKind == 'selector' or formKind == 'slider' or formKind == 'field') or elementTriggersAction->size() >= 1";
             constraint { true }
         }
-    
+
         // Automatic boundary detection proposes; a reviewer disposes. An
         // unconfirmed machine guess must never reach a design review looking like
         // an engineering decision.
@@ -597,7 +597,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute predicateExpression = "not(attributes.detectionMethod == 'automatic') or attributes.confirmedBy != ''";
             constraint { true }
         }
-    
+
         // A screenshot with no build behind it is undated design intent, not
         // evidence of what the device does.
         constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule {
@@ -610,5 +610,5 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             constraint { true }
         }
     }
-    
+
     ```

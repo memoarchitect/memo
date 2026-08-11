@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_logical_logical_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part logicalArchitectureViewpoint : Viewpoint {
             attribute :>> id = "VP-LOG";
             attribute :>> name = "LogicalArchitectureViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

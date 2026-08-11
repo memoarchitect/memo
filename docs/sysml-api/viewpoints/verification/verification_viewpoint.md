@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_verification_verification_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part verificationViewpoint : Viewpoint {
             attribute :>> id = "VP-VER";
             attribute :>> name = "VerificationViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

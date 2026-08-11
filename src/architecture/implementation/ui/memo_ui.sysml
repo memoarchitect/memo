@@ -145,15 +145,15 @@ package memo_architecture_implementation_ui {
     // errors, and risk controls already trace to it. Screen layout adds four
     // numbers to that tree — it does not add a tree.
     //
-    // A UIElement IS a SOFTWARE ITEM (IEC 62304 §3.25) and specializes the
-    // SoftwareItem base, inheriting safetyClass and complexity, so the
+    // A UIElement IS a structural SOFTWARE ITEM (IEC 62304 §3.25) and
+    // specializes SoftwareElement, inheriting safetyClass and complexity, so the
     // interface is classified and decomposed like the software it is.
     //
-    // It specializes SoftwareItem and NOT SoftwareModule: the module view is
+    // It specializes SoftwareElement and NOT SoftwareModule: the module view is
     // CODE, and a screen is not a source module. Runtime processes are
     // SoftwareComponent, code is SoftwareModule, and the UI is a third view of
     // the same software — a sibling of those, not a kind of either.
-    part def UIElement specializes SoftwareItem, InteractionElement {
+    part def UIElement specializes SoftwareElement, InteractionElement {
         attribute formKind : UIElementFormKind;
         // ── screen layout (optional; set for elements that are laid out) ──
         // Bounds are relative to the parent element in the Composes tree; a
@@ -295,7 +295,7 @@ package memo_architecture_implementation_ui {
         attribute bindingExpression : String;
         attribute refreshPolicy : String;
         end boundElement : InteractionElement :>> source;
-        end dataSource : MemoExchangeItem :>> target;
+        end dataSource : MemoItem :>> target;
     }
     abstract connection dataBindingLinks : DataBinding[*];
     metadata def <dataBinding> DataBindingMetadata :> SemanticMetadata {

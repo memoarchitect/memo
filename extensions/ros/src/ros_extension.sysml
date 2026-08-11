@@ -1,7 +1,8 @@
 // ROS 2 (Robot Operating System 2).
 //
 // The acceptance test for MEMO's extension point (plan §10.3): a whole
-// technology stack — nodes, topics, quality of service, publish/subscribe, and
+// technology stack — nodes, messages, topics, quality of service, services,
+// actions, and
 // containerized deployment — landing without a single change to a base
 // relation. `BuildsInto`, `DeploysTo`, and `ProvidesEnvironment` are reused
 // exactly as the base declares them.
@@ -9,15 +10,15 @@
 // Composition is by MODULE LIST, not by chaining. `baseMethodology` is [0..1],
 // but `includedModule` is [0..*], so this extension's methodology names
 // `memo_extension_messaging` and `memo_extension_container` alongside its own
-// module. A ROS topic IS a messaging topic and a ROS container image IS an OCI
-// image; specializing them is what keeps a ROS model comparable with a
-// non-ROS one, and restating them would have made two vocabularies for one
-// thing.
+// module. ROS communication specializes native MEMO item, port, and interface
+// families; it does not invent publish/subscribe relations.
 package memo_extension_ros {
-    private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
 
-    private import memo_core_relationships::*;
+    private import memo_core_common::*;
+    private import memo_architecture_functional_behavior::*;
+    private import memo_architecture_logical_interfaces::*;
+    private import memo_architecture_implementation_software_structure::*;
     private import memo_architecture_implementation_software_runtime::*;
     private import memo_extension_messaging::*;
     private import memo_extension_container::*;
@@ -60,7 +61,7 @@ package memo_extension_ros {
         attribute historyDepth : Integer;
     }
 
-    // ── Nodes and topics ────────────────────────────────────────────────
+    // ── Nodes, messages, topics, and endpoint roles ────────────────────
 
     // A ROS node. `runtimeKind` is deliberately NOT bound: a node may run as
     // its own process or be composed with others into a single container
@@ -76,47 +77,100 @@ package memo_extension_ros {
         attribute executorModel : String;
     }
 
-    item def RosTopic specializes MessagingTopic {
-        // Fully-qualified ROS message type, e.g. "sensor_msgs/msg/LaserScan".
-        attribute messageType : String;
-        // The offered profile. A subscriber whose requested profile is not
-        // compatible with it never receives anything — a failure mode that is
-        // invisible in code review and obvious in a model.
+    // A definition is the ROS message contract (`LaserScan`, `Twist`, ...).
+    // A named item usage of that definition is a deployed topic (`/scan`).
+    // Individual deliveries are native flows/messages between ports that
+    // reference the same topic usage.
+    abstract item def RosMessage specializes MessagingMessage {
+        attribute rosTypeName : String;
+    }
+
+    port def RosPublisher specializes MessagingPublisher {
         attribute offeredQos : RosQosProfile;
     }
 
-    // ── Publish and subscribe ───────────────────────────────────────────
-    //
-    // Both specialize the technology-neutral messaging relations, which root
-    // on `MemoLink` because `ComponentConnects` types both ends
-    // `SoftwareComponent` and a topic is an item. See the note in
-    // memo_extension_messaging and §22 of the plan.
-    connection def RosPublishesTo :> MessagingPublishesTo {
-        attribute qos : RosQosProfile;
-        end publishingNode : RosNode :>> publisher;
-        end rosTopic : RosTopic :>> publishedTopic;
-    }
-    abstract connection rosPublishesToLinks : RosPublishesTo[*];
-    metadata def <rosPublishesTo> RosPublishesToMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = rosPublishesToLinks meta SysML::Usage;
+    port def RosSubscriber specializes MessagingSubscriber {
+        attribute requestedQos : RosQosProfile;
     }
 
-    connection def RosSubscribesTo :> MessagingSubscribesTo {
-        // The REQUESTED profile, which is a different statement from the
-        // offered one on the topic. QoS incompatibility is exactly the
-        // mismatch between these two.
-        attribute qos : RosQosProfile;
-        end subscribingNode : RosNode :>> subscriber;
-        end rosTopic : RosTopic :>> subscribedTopic;
+    interface def RosTopicInterface specializes MessagingTopicInterface {
+        end rosPublisher : RosPublisher :>> publisher;
+        end rosSubscriber : RosSubscriber :>> subscriber;
     }
-    abstract connection rosSubscribesToLinks : RosSubscribesTo[*];
-    metadata def <rosSubscribesTo> RosSubscribesToMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = rosSubscribesToLinks meta SysML::Usage;
+
+    // ── Services: one correlated request/reply contract ────────────────
+    abstract item def RosServiceRequest specializes RosMessage;
+    abstract item def RosServiceResponse specializes RosMessage;
+
+    port def RosServiceClient specializes SoftwarePort {
+        out item request : RosServiceRequest;
+        in item response : RosServiceResponse;
+        attribute serviceName : String;
+        attribute timeoutMs : Real;
     }
+
+    port def RosServiceServer specializes SoftwarePort {
+        in item request : RosServiceRequest;
+        out item response : RosServiceResponse;
+        attribute serviceName : String;
+    }
+
+    interface def RosServiceInterface specializes SoftwareInterface {
+        end client : RosServiceClient :>> source;
+        end server : RosServiceServer :>> target;
+        flow of RosServiceRequest from client.request to server.request;
+        flow of RosServiceResponse from server.response to client.response;
+    }
+
+    // ── Actions: long-running goal protocol ─────────────────────────────
+    // ROS 2 realizes an action through goal/result/cancel services plus
+    // feedback/status topics. The port exposes those distinct native message
+    // features, so an action cannot be mistaken for a two-message service.
+    abstract item def RosActionGoal specializes RosMessage;
+    abstract item def RosActionAcceptance specializes RosMessage;
+    abstract item def RosActionFeedback specializes RosMessage;
+    abstract item def RosActionResult specializes RosMessage;
+    abstract item def RosActionCancel specializes RosMessage;
+    abstract item def RosActionStatus specializes RosMessage;
+
+    port def RosActionClient specializes SoftwarePort {
+        out item goal : RosActionGoal;
+        in item acceptance : RosActionAcceptance;
+        in item feedback : RosActionFeedback;
+        in item result : RosActionResult;
+        out item cancel : RosActionCancel;
+        in item actionStatus : RosActionStatus;
+        attribute actionName : String;
+    }
+
+    port def RosActionServer specializes SoftwarePort {
+        in item goal : RosActionGoal;
+        out item acceptance : RosActionAcceptance;
+        out item feedback : RosActionFeedback;
+        out item result : RosActionResult;
+        in item cancel : RosActionCancel;
+        out item actionStatus : RosActionStatus;
+        attribute actionName : String;
+    }
+
+    interface def RosActionInterface specializes SoftwareInterface {
+        end client : RosActionClient :>> source;
+        end server : RosActionServer :>> target;
+        flow of RosActionGoal from client.goal to server.goal;
+        flow of RosActionAcceptance from server.acceptance to client.acceptance;
+        flow of RosActionFeedback from server.feedback to client.feedback;
+        flow of RosActionCancel from client.cancel to server.cancel;
+        flow of RosActionResult from server.result to client.result;
+        flow of RosActionStatus from server.actionStatus to client.actionStatus;
+    }
+
+    abstract state def RosActionExecution specializes MemoState;
+    state def RosActionAccepted specializes RosActionExecution;
+    state def RosActionExecuting specializes RosActionExecution;
+    state def RosActionCanceling specializes RosActionExecution;
+    state def RosActionSucceeded specializes RosActionExecution;
+    state def RosActionCanceled specializes RosActionExecution;
+    state def RosActionAborted specializes RosActionExecution;
 
     // ── Deployment ──────────────────────────────────────────────────────
     //

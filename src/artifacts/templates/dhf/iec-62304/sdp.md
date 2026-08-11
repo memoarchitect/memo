@@ -31,7 +31,7 @@ kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
 display: table
 columns: name, kind, layer, doc
 sort: name
-empty: "No software items defined. Add SoftwareSystem or SoftwareItem elements."
+empty: "No structural software elements defined. Add SoftwareSystem or SoftwareElement elements."
 ```
 
 ---

@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_software_software_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part softwareViewpoint : Viewpoint {
             attribute :>> id = "VP-SW";
             attribute :>> name = "SoftwareViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

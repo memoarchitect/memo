@@ -14,7 +14,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> protocolSemantics = "flow, air, occlusion, door, battery, cpu, memory, pump state";
     }
     port def SensorInputPort :> SensorPort {
-        in item sensorData : MemoExchangeItem;
+        in item sensorData : MemoItem;
         attribute :>> interfaceType = "SensorDataInterface";
         attribute :>> sensorDomain = "physiological and device state";
     }

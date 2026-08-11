@@ -66,7 +66,7 @@ package memo_assurance_safety_risk {
     // AssessedAgainst instead. One base per metaclass is the right shape here
     // — forcing the two families under one supertype would put a hazard and a
     // risk matrix back in the same picker.
-    abstract item def RiskItem specializes MemoPart;
+    abstract item def RiskItem specializes MemoItem;
 
     item def Hazard specializes RiskItem {
         attribute hazardType : HazardTypeKind;
@@ -93,7 +93,7 @@ package memo_assurance_safety_risk {
         attribute reversibility : String;
         attribute severity : SeverityKind;
     }
-    item def RiskControlMeasure specializes VerifiableElement {
+    part def RiskControlMeasure specializes VerifiableElement {
         attribute controlKind : RiskControlKind;
         attribute implementationKind : RiskControlImplementationKind;
         attribute verificationStatus : String;
@@ -104,7 +104,7 @@ package memo_assurance_safety_risk {
         attribute clinicalSignificance : String;
         attribute supportingEvidence : String;
     }
-    item def OverallResidualRiskEvaluation specializes MemoPart {
+    part def OverallResidualRiskEvaluation specializes MemoPart {
         attribute conclusion : String;
         attribute reviewer : String;
     }

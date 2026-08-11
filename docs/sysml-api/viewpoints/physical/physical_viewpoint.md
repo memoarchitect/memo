@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_physical_physical_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part physicalViewpoint : Viewpoint {
             attribute :>> id = "VP-PHY";
             attribute :>> name = "PhysicalViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

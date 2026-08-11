@@ -42,11 +42,11 @@
     ```sysml
     package memo_viewpoints_verification_views_verification_coverage_view {
         private import ScalarValues::*;
-    
+
                     private import memo_viewpoints_definitions::*;
                     private import memo_core_enumerations::*;
         private import memo_viewpoints_verification_verification_viewpoint::*;
-    
+
                     view verificationCoverageView : MemoDiagramView {
                         expose memo_viewpoints_verification_views_verification_coverage_view::*;
                         attribute depth = 2;
@@ -69,5 +69,5 @@
         part :>> viewpointDefinition = verificationViewpoint;
                     }
     }
-    
+
     ```

@@ -7,8 +7,8 @@
 //   1. Extension types are used exactly like base types. `RosNode` is a
 //      `SoftwareComponent`, so period, WCET, safety class and the rest are
 //      inherited and every base rule still applies to it.
-//   2. Publish and subscribe are RELATIONS. This is why an extension may
-//      declare connection defs.
+//   2. ROS communication uses native item definitions/usages, directional
+//      ports, interfaces, and flows — no publish/subscribe relation is added.
 //   3. Deployment reuses the BASE relations unchanged — `BuildsInto`,
 //      `DeploysTo`, `ProvidesEnvironment` — with no ROS-specific relation
 //      anywhere in the chain.
@@ -19,11 +19,39 @@ package memo_examples_ros_mobile_robot {
     private import memo_core_relationships::*;
     private import memo_architecture_implementation_software_structure::*;
     private import memo_architecture_implementation_software_runtime::*;
+    private import memo_architecture_functional_behavior::*;
     private import memo_architecture_realization_deployment::*;
     private import memo_architecture_realization_physical::*;
     private import memo_extension_messaging::*;
     private import memo_extension_container::*;
     private import memo_extension_ros::*;
+
+    // ── Message definitions and named topic instances ──────────────────
+    // The definition is the ROS message contract. A named usage is the topic
+    // deployed in this system; publisher/subscriber ports reference that same
+    // usage and native flows carry its message type.
+    item def LaserScan specializes RosMessage {
+        attribute :>> rosTypeName = "sensor_msgs/msg/LaserScan";
+        attribute :>> messageSchema = "ranges[], intensities[], angle_min, angle_max, scan_time";
+    }
+    item def VelocityCommand specializes RosMessage {
+        attribute :>> rosTypeName = "geometry_msgs/msg/Twist";
+        attribute :>> messageSchema = "linear.x, angular.z";
+    }
+    item def EmergencyStop specializes RosMessage {
+        attribute :>> rosTypeName = "std_msgs/msg/Bool";
+        attribute :>> messageSchema = "data (true = stop asserted)";
+    }
+
+    item topicScan : LaserScan {
+        attribute :>> id = "RMR-TP-001"; attribute :>> name = "ScanTopic";
+    }
+    item topicCmdVel : VelocityCommand {
+        attribute :>> id = "RMR-TP-002"; attribute :>> name = "CmdVelTopic";
+    }
+    item topicEstop : EmergencyStop {
+        attribute :>> id = "RMR-TP-003"; attribute :>> name = "EmergencyStopTopic";
+    }
 
     // ── Code ────────────────────────────────────────────────────────────
     part swPerception : SoftwareModule {
@@ -60,6 +88,18 @@ package memo_examples_ros_mobile_robot {
         attribute :>> periodMs = 50.0;
         attribute :>> wcetMs = 8.0;
         attribute :>> safetyClass = SafetyClassKind::B;
+        out port scanPublisher : RosPublisher {
+            ref :>> topic = topicScan;
+            attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
+            attribute :>> publishRateHz = 20.0;
+            attribute :>> offeredQos {
+                attribute :>> reliability = RosReliabilityKind::bestEffort;
+                attribute :>> durability = RosDurabilityKind::volatile;
+                attribute :>> deadlineMs = 60.0;
+                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> historyDepth = 5;
+            }
+        }
     }
     part nodeNavigation : RosNode {
         attribute :>> runtimeKind = RuntimeKind::thread;
@@ -70,6 +110,49 @@ package memo_examples_ros_mobile_robot {
         attribute :>> periodMs = 100.0;
         attribute :>> wcetMs = 35.0;
         attribute :>> safetyClass = SafetyClassKind::B;
+        in port scanSubscriber : RosSubscriber {
+            ref :>> topic = topicScan;
+            attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
+            attribute :>> lossBehaviour = "hold the last costmap for 200 ms, then command zero velocity";
+            attribute :>> requestedQos {
+                attribute :>> reliability = RosReliabilityKind::bestEffort;
+                attribute :>> durability = RosDurabilityKind::volatile;
+                attribute :>> deadlineMs = 60.0;
+                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> historyDepth = 5;
+            }
+        }
+        out port cmdVelPublisher : RosPublisher {
+            ref :>> topic = topicCmdVel;
+            attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
+            attribute :>> publishRateHz = 10.0;
+            attribute :>> offeredQos {
+                attribute :>> reliability = RosReliabilityKind::reliable;
+                attribute :>> durability = RosDurabilityKind::volatile;
+                attribute :>> deadlineMs = 150.0;
+                attribute :>> livelinessLeaseMs = 300.0;
+                attribute :>> historyDepth = 1;
+            }
+        }
+        in port estopSubscriber : RosSubscriber {
+            ref :>> topic = topicEstop;
+            attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
+            attribute :>> lossBehaviour = "no publisher within the liveliness lease is treated as stop asserted";
+            attribute :>> requestedQos {
+                attribute :>> reliability = RosReliabilityKind::reliable;
+                attribute :>> durability = RosDurabilityKind::transientLocal;
+                attribute :>> deadlineMs = 100.0;
+                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> historyDepth = 1;
+            }
+        }
+        inout port setModeClient : RosServiceClient {
+            attribute :>> serviceName = "/robot/safety/set_mode";
+            attribute :>> timeoutMs = 500.0;
+        }
+        inout port navigateActionServer : RosActionServer {
+            attribute :>> actionName = "/robot/navigation/navigate_to_pose";
+        }
     }
     part nodeSafetyMonitor : RosNode {
         attribute :>> runtimeKind = RuntimeKind::process;
@@ -83,86 +166,74 @@ package memo_examples_ros_mobile_robot {
         attribute :>> priority = 90;
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> faultContainment = "separate process; watchdog-fed; stops the base on its own timeout";
-    }
-
-    // ── Topics ──────────────────────────────────────────────────────────
-    //
-    // Each carries the QoS profile it is OFFERED with. A subscriber requests
-    // its own, and the two have to be compatible — the mismatch that silently
-    // delivers nothing at runtime is visible here as two profiles side by side.
-    item topicScan : RosTopic {
-        attribute :>> id = "RMR-TP-001"; attribute :>> name = "ScanTopic";
-        attribute :>> messageType = "sensor_msgs/msg/LaserScan";
-        attribute :>> topicStructure = "/{namespace}/{sensor}/scan";
-        attribute :>> messageSchema = "ranges[], intensities[], angle_min, angle_max, scan_time";
-        attribute :>> offeredQos {
-            attribute :>> reliability = RosReliabilityKind::bestEffort;
-            attribute :>> durability = RosDurabilityKind::volatile;
-            attribute :>> deadlineMs = 60.0;
-            attribute :>> livelinessLeaseMs = 200.0;
-            attribute :>> historyDepth = 5;
+        in port scanSubscriber : RosSubscriber {
+            ref :>> topic = topicScan;
+            attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
+            attribute :>> lossBehaviour = "two consecutive misses assert the stop";
         }
-    }
-    item topicCmdVel : RosTopic {
-        attribute :>> id = "RMR-TP-002"; attribute :>> name = "CmdVelTopic";
-        attribute :>> messageType = "geometry_msgs/msg/Twist";
-        attribute :>> topicStructure = "/{namespace}/cmd_vel";
-        attribute :>> messageSchema = "linear.x, angular.z";
-        attribute :>> offeredQos {
-            attribute :>> reliability = RosReliabilityKind::reliable;
-            attribute :>> durability = RosDurabilityKind::volatile;
-            attribute :>> deadlineMs = 150.0;
-            attribute :>> livelinessLeaseMs = 300.0;
-            attribute :>> historyDepth = 1;
+        in port cmdVelSubscriber : RosSubscriber {
+            ref :>> topic = topicCmdVel;
+            attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
+            attribute :>> lossBehaviour = "missing velocity commands assert the stop";
         }
-    }
-    item topicEstop : RosTopic {
-        attribute :>> id = "RMR-TP-003"; attribute :>> name = "EmergencyStopTopic";
-        attribute :>> messageType = "std_msgs/msg/Bool";
-        attribute :>> topicStructure = "/{namespace}/safety/estop";
-        attribute :>> messageSchema = "data (true = stop asserted)";
-        // Latched: a node that starts or restarts must immediately learn that
-        // a stop is asserted rather than wait for the next publication.
-        attribute :>> offeredQos {
-            attribute :>> reliability = RosReliabilityKind::reliable;
-            attribute :>> durability = RosDurabilityKind::transientLocal;
-            attribute :>> deadlineMs = 100.0;
-            attribute :>> livelinessLeaseMs = 200.0;
-            attribute :>> historyDepth = 1;
+        out port estopPublisher : RosPublisher {
+            ref :>> topic = topicEstop;
+            attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
+            attribute :>> publishRateHz = 50.0;
+            attribute :>> offeredQos {
+                attribute :>> reliability = RosReliabilityKind::reliable;
+                attribute :>> durability = RosDurabilityKind::transientLocal;
+                attribute :>> deadlineMs = 100.0;
+                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> historyDepth = 1;
+            }
+        }
+        inout port setModeServer : RosServiceServer {
+            attribute :>> serviceName = "/robot/safety/set_mode";
+        }
+        inout port navigateActionClient : RosActionClient {
+            attribute :>> actionName = "/robot/navigation/navigate_to_pose";
         }
     }
 
-    // ── Publish and subscribe ───────────────────────────────────────────
-    connection lidarPublishesScan : RosPublishesTo
-        connect publishingNode ::> nodeLidar to rosTopic ::> topicScan {
-        attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
-        attribute :>> publishRateHz = 20.0;
-    }
-    connection navigationSubscribesScan : RosSubscribesTo
-        connect subscribingNode ::> nodeNavigation to rosTopic ::> topicScan {
-        attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
-        attribute :>> lossBehaviour = "planner holds last costmap for 200 ms, then commands zero velocity";
-    }
-    connection safetySubscribesScan : RosSubscribesTo
-        connect subscribingNode ::> nodeSafetyMonitor to rosTopic ::> topicScan {
-        attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
-        attribute :>> lossBehaviour = "two consecutive misses assert the stop";
-    }
-    connection navigationPublishesCmdVel : RosPublishesTo
-        connect publishingNode ::> nodeNavigation to rosTopic ::> topicCmdVel {
-        attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
-        attribute :>> publishRateHz = 10.0;
-    }
-    connection safetyPublishesEstop : RosPublishesTo
-        connect publishingNode ::> nodeSafetyMonitor to rosTopic ::> topicEstop {
-        attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
-        attribute :>> publishRateHz = 50.0;
-    }
-    connection navigationSubscribesEstop : RosSubscribesTo
-        connect subscribingNode ::> nodeNavigation to rosTopic ::> topicEstop {
-        attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
-        attribute :>> lossBehaviour = "no publisher within the liveliness lease is treated as stop asserted";
-    }
+    // Cross-view mappings: SEI module-view implementation units are distinct
+    // from component-and-connector runtime elements. A runtime node realizes
+    // the module whose code it executes; it is not the same model element.
+    connection : Realizes connect realizing ::> nodeLidar to realized ::> swPerception;
+    connection : Realizes connect realizing ::> nodeNavigation to realized ::> swNavigation;
+    connection : Realizes connect realizing ::> nodeSafetyMonitor to realized ::> swSafety;
+
+    // ── Native topic, service, and action interfaces ───────────────────
+    interface scanToNavigation : RosTopicInterface
+        connect nodeLidar.scanPublisher to nodeNavigation.scanSubscriber {
+            attribute :>> direction = DirectionKind::output;
+        }
+    interface scanToSafety : RosTopicInterface
+        connect nodeLidar.scanPublisher to nodeSafetyMonitor.scanSubscriber {
+            attribute :>> direction = DirectionKind::output;
+        }
+    interface cmdVelToSafety : RosTopicInterface
+        connect nodeNavigation.cmdVelPublisher to nodeSafetyMonitor.cmdVelSubscriber {
+            attribute :>> direction = DirectionKind::output;
+        }
+    interface estopToNavigation : RosTopicInterface
+        connect nodeSafetyMonitor.estopPublisher to nodeNavigation.estopSubscriber {
+            attribute :>> direction = DirectionKind::output;
+        }
+
+    flow of LaserScan from nodeLidar.scanPublisher.message to nodeNavigation.scanSubscriber.message;
+    flow of LaserScan from nodeLidar.scanPublisher.message to nodeSafetyMonitor.scanSubscriber.message;
+    flow of VelocityCommand from nodeNavigation.cmdVelPublisher.message to nodeSafetyMonitor.cmdVelSubscriber.message;
+    flow of EmergencyStop from nodeSafetyMonitor.estopPublisher.message to nodeNavigation.estopSubscriber.message;
+
+    interface setModeService : RosServiceInterface
+        connect nodeNavigation.setModeClient to nodeSafetyMonitor.setModeServer {
+            attribute :>> direction = DirectionKind::inputOutput;
+        }
+    interface navigateAction : RosActionInterface
+        connect nodeSafetyMonitor.navigateActionClient to nodeNavigation.navigateActionServer {
+            attribute :>> direction = DirectionKind::inputOutput;
+        }
 
     // ── Deployment: base relations, unchanged ───────────────────────────
     part imageRuntime : RosContainerImage {

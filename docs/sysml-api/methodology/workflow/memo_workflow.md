@@ -55,10 +55,10 @@ action def MethodologyWorkflowStep :> MemoAction
     ```sysml
     package memo_methodology_workflow {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
-    
+
         // Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle
         // stage with entry/exit criteria), distinct from
         // memo_architecture_operational_workflows::WorkflowStep, which is a step in
@@ -72,5 +72,5 @@ action def MethodologyWorkflowStep :> MemoAction
             attribute exitCriteria : String;
         }
     }
-    
+
     ```

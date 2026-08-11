@@ -3,6 +3,7 @@ package memo_examples_gpca_pump_gpca_behavior_actions {
     private import memo_examples_gpca_pump_gpca_architecture::*;
 
     private import memo_architecture_functional_behavior::*;
+    private import memo_core_common::*;
     private import memo_core_relationships::*;
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
     private import memo_architecture_logical_interfaces::*;
@@ -35,27 +36,27 @@ package memo_examples_gpca_pump_gpca_behavior_actions {
         attribute :>> itemKind = InterfaceItemKind::'event';
     }
 
-    action def AcquireSensorData {
+    action def AcquireSensorData :> FunctionalAction {
         out sensorStatus : SensorStatusVector;
     }
-    action def EvaluateAlarmConditions {
+    action def EvaluateAlarmConditions :> FunctionalAction {
         in sensorStatus : SensorStatusVector;
         out alarmSignal : AlarmSignal;
     }
-    action def EnforceDoseLimits {
+    action def EnforceDoseLimits :> FunctionalAction {
         in bolusRequest : BolusRequestSignal;
         out authorizedBolus : BolusRequestSignal;
     }
-    action def ComputeFlowCommand {
+    action def ComputeFlowCommand :> FunctionalAction {
         in alarmSignal : AlarmSignal;
         in authorizedBolus : BolusRequestSignal;
         out flowCommand : FlowCommand;
     }
-    action def ActuatePumpMotor {
+    action def ActuatePumpMotor :> FunctionalAction {
         in flowCommand : FlowCommand;
         out actuation : FlowCommand;
     }
-    action def LogTherapyEvent {
+    action def LogTherapyEvent :> FunctionalAction {
         in actuation : FlowCommand;
         out eventRecord : TherapyEventRecord;
     }

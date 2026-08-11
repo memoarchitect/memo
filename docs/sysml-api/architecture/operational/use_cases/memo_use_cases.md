@@ -37,7 +37,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`UseCaseKind`](#usecasekind) | `enum def` | Controlled values for use case: `clinical`, `service`, `manufacturing`, `development`. | — |
-| [`UseCase`](#usecase) | `use case def` | Use case definition. | — |
+| [`UseCase`](#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. | `MemoUseCase` |
 | [`Motivates`](#motivates) | `connection def` | Typed relationship for motivates. | `MemoRelationship` |
 | [`Initiates`](#initiates) | `connection def` | Typed relationship for initiates. | `MemoRelationship` |
 | [`ParticipatesIn`](#participatesin) | `connection def` | Typed relationship for participates in. | `MemoRelationship` |
@@ -62,15 +62,15 @@ enum def UseCaseKind
 ## UseCase
 
 ```sysml
-use case def UseCase
+use case def UseCase :> MemoUseCase
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Use case definition. |
+| Description | Use case definition specializing `MemoUseCase`. |
 | Kind | `use case def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoUseCase` |
 | Owning package | `memo_architecture_operational_use_cases` |
 
 
@@ -160,27 +160,22 @@ connection def Extends :> MemoRelationship
     package memo_architecture_operational_use_cases {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_operational_context_actors::*;
         private import memo_architecture_operational_context_use_context::*;
         private import memo_assurance_requirements_needs::*;
-    
+
         enum def UseCaseKind {
             enum clinical;
             enum service;
             enum manufacturing;
             enum development;
         }
-    
-        use case def UseCase {
-            attribute id : String;
-            attribute name : String;
-            attribute description : String;
-            attribute rationale : String;
-            attribute sourceReference : String;
+
+        use case def UseCase :> MemoUseCase {
             // Text of this use case's goal; this is not a separate Goal element.
             attribute goalStatement : String;
             attribute trigger : String;
@@ -190,7 +185,7 @@ connection def Extends :> MemoRelationship
             attribute postCondition : String;
             // clinical / service / manufacturing / development
             attribute useCaseKind : UseCaseKind;
-    
+
             // The device or system under consideration supports the goal.
             ref supportingSystem : MemoPart[0..1];
             ref primaryUser : User[0..1];
@@ -198,7 +193,7 @@ connection def Extends :> MemoRelationship
             ref useContext : UseContext[0..1];
             ref originatingNeeds : Need[0..*];
         }
-    
+
         connection def Motivates :> MemoRelationship {
             end motivatingNeed : Need :>> source;
             end motivatedUseCase : UseCase :>> target;
@@ -252,5 +247,5 @@ connection def Extends :> MemoRelationship
             :>> baseType = extendsLinks meta SysML::Usage;
         }
     }
-    
+
     ```

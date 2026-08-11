@@ -39,14 +39,14 @@
 | --- | --- | --- | --- |
 | [`CybersecurityAsset`](#cybersecurityasset) | `part def` | Cybersecurity asset definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`AttackSurface`](#attacksurface) | `part def` | Attack surface definition specializing `MemoPart`. | `MemoPart` |
-| [`Threat`](#threat) | `item def` | Threat definition specializing `RiskDriver`. | `RiskDriver` |
+| [`Threat`](#threat) | `part def` | Threat definition specializing `RiskDriver`. | `RiskDriver` |
 | [`Vulnerability`](#vulnerability) | `item def` | Vulnerability definition specializing `RiskItem`. | `RiskItem` |
 | [`ThreatScenario`](#threatscenario) | `action def` | A scenario specialization: an attack path through the system, classified by the shared scenario dimensions with purpose `cybersecurity`. | `MemoScenario` |
 | [`CyberHazard`](#cyberhazard) | `item def` | Cyber hazard definition specializing `Hazard`. | `Hazard` |
-| [`CyberRisk`](#cyberrisk) | `item def` | Cyber risk definition specializing `Risk`. | `Risk` |
+| [`CyberRisk`](#cyberrisk) | `part def` | Cyber risk definition specializing `Risk`. | `Risk` |
 | [`CyberMitigation`](#cybermitigation) | `part def` | Cyber mitigation definition specializing `RiskControlMeasure`. | `RiskControlMeasure` |
 | [`SecurityRequirement`](#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. | `Requirement` |
-| [`TrustBoundary`](#trustboundary) | `item def` | Trust boundary definition specializing `InterfaceElement`. | `InterfaceElement` |
+| [`TrustBoundary`](#trustboundary) | `part def` | Trust boundary definition specializing `InterfaceElement`. | `InterfaceElement` |
 | [`SecurityClaim`](#securityclaim) | `part def` | Security claim definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`Exploits`](#exploits) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 | [`RealizedByScenario`](#realizedbyscenario) | `connection def` | Typed relationship for realized by scenario. | `MemoRelationship` |
@@ -85,13 +85,13 @@ part def AttackSurface specializes MemoPart
 ## Threat
 
 ```sysml
-item def Threat specializes RiskDriver
+part def Threat specializes RiskDriver
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Threat definition specializing `RiskDriver`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `RiskDriver` |
 | Owning package | `memo_assurance_cybersecurity` |
@@ -145,13 +145,13 @@ item def CyberHazard specializes Hazard
 ## CyberRisk
 
 ```sysml
-item def CyberRisk specializes Risk
+part def CyberRisk specializes Risk
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Cyber risk definition specializing `Risk`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `Risk` |
 | Owning package | `memo_assurance_cybersecurity` |
@@ -190,13 +190,13 @@ requirement def SecurityRequirement :> Requirement
 ## TrustBoundary
 
 ```sysml
-item def TrustBoundary specializes InterfaceElement
+part def TrustBoundary specializes InterfaceElement
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Trust boundary definition specializing `InterfaceElement`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `InterfaceElement` |
 | Owning package | `memo_assurance_cybersecurity` |
@@ -271,14 +271,14 @@ connection def ImpactsSafety :> MemoRelationship
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_relationships::*;   // MemoRelationship
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_assurance_requirements::*;
         private import memo_assurance_safety_risk::*;
         private import memo_assurance_verification_validation::*;
         private import memo_architecture_operational_scenarios::*;
-    
+
         part def CybersecurityAsset specializes ArchitectureElement {
             attribute assetKind : AssetKind;
             attribute confidentialityNeed : String;
@@ -290,15 +290,15 @@ connection def ImpactsSafety :> MemoRelationship
             attribute assetOwner : String;
             attribute classification : String;
         }
-    
+
         part def AttackSurface specializes MemoPart {
             attribute entryPointKind : InterfaceKind;
             attribute exposureLevel : String;
             attribute reachableFrom : String;
             attribute authenticationExpected : Boolean;
         }
-    
-        item def Threat specializes RiskDriver {
+
+        part def Threat specializes RiskDriver {
             attribute threatCategory : ThreatCategoryKind;
             attribute attackVector : String;
             attribute threatSource : String;
@@ -307,7 +307,7 @@ connection def ImpactsSafety :> MemoRelationship
             attribute defaultTechnique : String;
             attribute strideCategory : ThreatCategoryKind;
         }
-    
+
         item def Vulnerability specializes RiskItem {
             attribute weakness : String;
             attribute exploitability : String;
@@ -316,7 +316,7 @@ connection def ImpactsSafety :> MemoRelationship
             attribute cweReference : String;
             attribute remediable : Boolean;
         }
-    
+
         // A scenario specialization: an attack path through the
         // system, classified by the shared scenario dimensions with purpose
         // `cybersecurity`.
@@ -328,7 +328,7 @@ connection def ImpactsSafety :> MemoRelationship
             attribute abuseCaseReference : String;
             attribute defaultCategory : ThreatCategoryKind;
         }
-    
+
         item def CyberHazard specializes Hazard {
             attribute securityImpact : String;
             attribute safetyImpact : String;
@@ -336,41 +336,41 @@ connection def ImpactsSafety :> MemoRelationship
             attribute operationalImpact : String;
             attribute linkedSafetyHazardId : String;
         }
-    
-        item def CyberRisk specializes Risk {
+
+        part def CyberRisk specializes Risk {
             attribute exploitabilityEstimate : String;
             attribute attackComplexity : String;
             attribute detectability : DetectionKind;
             attribute essentialPerformanceImpact : String;
             attribute patientSafetyContribution : String;
         }
-    
+
         part def CyberMitigation specializes RiskControlMeasure {
             attribute cyberControlKind : CyberControlKind;
             attribute securityMechanism : String;
             attribute verificationExpectation : String;
             attribute hardeningScope : String;
         }
-    
+
         requirement def SecurityRequirement :> Requirement {
             attribute securityObjective : String;
             attribute derivedFromThreat : String;
             attribute derivedFromRisk : String;
             attribute defaultConcern : ConcernKind;
         }
-    
-        item def TrustBoundary specializes InterfaceElement {
+
+        part def TrustBoundary specializes InterfaceElement {
             attribute boundaryType : String;
             attribute crossingConstraint : String;
             attribute trustAssumption : String;
         }
-    
+
         part def SecurityClaim specializes MemoEvidence {
             attribute claimText : String;
             attribute claimScope : String;
             attribute supportedByEvidence : String;
         }
-    
+
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
@@ -406,5 +406,5 @@ connection def ImpactsSafety :> MemoRelationship
             :>> baseType = impactsSafetyLinks meta SysML::Usage;
         }
     }
-    
+
     ```

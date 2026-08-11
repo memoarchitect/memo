@@ -43,5 +43,5 @@
     // package declares no consistency constraints.
     package memo_rules_coverage {
     }
-    
+
     ```

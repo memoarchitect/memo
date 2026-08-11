@@ -11,7 +11,7 @@ package memo_core_consistency_rules {
     // here would be shadowed by every rule that sets it. Its job is to give
     // RulePolicy a type to reference, so a policy names a rule the way SysML
     // names anything else rather than through a parallel string-ID namespace.
-    abstract constraint def MemoConsistencyRule;
+    abstract constraint def MemoConsistencyRule :> MemoConstraint;
 
     part def ConsistencyRule specializes MemoPart {
         attribute appliesTo : String;

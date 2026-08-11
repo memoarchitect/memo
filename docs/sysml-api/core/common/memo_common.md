@@ -43,7 +43,9 @@
 | [`MemoAction`](#memoaction) | `action def` | Behavioral foundation: operational activities, tasks, system actions, and interaction steps specialize MemoAction. | — |
 | [`MemoPort`](#memoport) | `port def` | Boundary feature foundation for typed ports. | — |
 | [`MemoInterface`](#memointerface) | `interface def` | Interaction-contract foundation for interface definitions between ports. | — |
-| [`MemoExchangeItem`](#memoexchangeitem) | `item def` | Exchange-content foundation: everything that flows — information, command, material, energy — is an item, not a part. | — |
+| [`MemoItem`](#memoitem) | `item def` | Single item foundation. Standards, hazards, stored software data, and message payloads are all item-native concepts. Whether an item is exchanged is expressed by its use in a port or flow, not by a second ontology root. | — |
+| [`MemoUseCase`](#memousecase) | `use case def` | Use-case foundation. The domain UseCase adds its goal and actor references; identity is carried here so use cases do not maintain a partial hand-written copy of the MEMO identification core. | — |
+| [`MemoConstraint`](#memoconstraint) | `constraint def` | General constraint foundation. Executable consistency rules and reusable quantitative constraints are both native constraint defs. | — |
 | [`MemoRequirementElement`](#memorequirementelement) | `requirement def` | Memo requirement element definition. | — |
 | [`MemoNeed`](#memoneed) | `requirement def` | Memo need definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`MemoRequirement`](#memorequirement) | `requirement def` | Memo requirement definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
@@ -216,17 +218,47 @@ abstract interface def MemoInterface
 | Owning package | `memo_core_common` |
 
 
-## MemoExchangeItem
+## MemoItem
 
 ```sysml
-item def MemoExchangeItem
+abstract item def MemoItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Exchange-content foundation: everything that flows — information, command, material, energy — is an item, not a part. |
+| Description | Single item foundation. Standards, hazards, stored software data, and message payloads are all item-native concepts. Whether an item is exchanged is expressed by its use in a port or flow, not by a second ontology root. |
 | Kind | `item def` |
-| Abstract | No |
+| Abstract | Yes |
+| Specializes | — |
+| Owning package | `memo_core_common` |
+
+
+## MemoUseCase
+
+```sysml
+abstract use case def MemoUseCase
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Use-case foundation. The domain UseCase adds its goal and actor references; identity is carried here so use cases do not maintain a partial hand-written copy of the MEMO identification core. |
+| Kind | `use case def` |
+| Abstract | Yes |
+| Specializes | — |
+| Owning package | `memo_core_common` |
+
+
+## MemoConstraint
+
+```sysml
+abstract constraint def MemoConstraint
+```
+
+| Property | Value |
+| --- | --- |
+| Description | General constraint foundation. Executable consistency rules and reusable quantitative constraints are both native constraint defs. |
+| Kind | `constraint def` |
+| Abstract | Yes |
 | Specializes | — |
 | Owning package | `memo_core_common` |
 
@@ -327,8 +359,9 @@ part def Citation specializes MemoPart
 
     ```sysml
     // MEMO base hierarchy. Construct-specific foundations: one base per
-    // SysML v2 metaclass family (part, action, port, interface, item, requirement,
-    // connection), each carrying the shared MEMO semantics. Common inheritance
+    // SysML v2 metaclass family (part, action, port, interface, item, use case,
+    // requirement, constraint, verification, state, connection), each carrying
+    // the shared MEMO semantics. Common inheritance
     // across metaclasses is not portable, so non-part bases re-declare the small
     // identification core and share classification through the metadata defs in
     // memo_core_dimensions.
@@ -356,11 +389,11 @@ part def Citation specializes MemoPart
     // breaking external references to it, and the authored value wins.
     package memo_core_common {
         private import ScalarValues::*;
-    
+
         private import memo_core_dimensions::*;
         private import memo_core_terminology::*;
         private import memo_core_enumerations::*;
-    
+
         // ─── Single abstract part root ──────────────────────────────────
         // Every structural MEMO concept specializes MemoPart. Identity and
         // traceability are attributes of this one root — MEMO has no separate
@@ -400,7 +433,7 @@ part def Citation specializes MemoPart
             attribute applicableStandards : ExternalReference[0..*];
             attribute codes : TerminologyCode[0..*];
         }
-    
+
         // ─── Role bases retained from the original kernel, re-founded on
         //     MemoPart so all existing content inherits the dimensions. ───
         part def RequirementDriver specializes MemoPart;
@@ -409,7 +442,7 @@ part def Citation specializes MemoPart
         part def InterfaceElement specializes MemoPart;
         part def MemoEvidence specializes MemoPart;
         abstract part def AnalysisArtifact specializes MemoPart;
-    
+
         // Document-bound elements add only what a document needs beyond the two
         // description registers every MemoPart now carries: a title and its place
         // in a document. The former `shortDescription`/`longDescription` pair is
@@ -419,9 +452,9 @@ part def Citation specializes MemoPart
             attribute documentUsage : String[*];
             attribute sectionIdentifier : String;
         }
-    
+
         // ─── Construct-specific foundations (non-part metaclasses) ───────
-    
+
         // Behavioral foundation: operational activities, tasks, system actions,
         // and interaction steps specialize MemoAction.
         action def MemoAction {
@@ -434,7 +467,7 @@ part def Citation specializes MemoPart
             attribute sourceReference : String;
             attribute status : ElementStatusKind;
         }
-    
+
         // Boundary feature foundation for typed ports.
         port def MemoPort {
             attribute id : String;
@@ -446,7 +479,7 @@ part def Citation specializes MemoPart
             attribute sourceReference : String;
             attribute status : ElementStatusKind;
         }
-    
+
         // Interaction-contract foundation for interface definitions between ports.
         abstract interface def MemoInterface {
             end source;
@@ -459,10 +492,12 @@ part def Citation specializes MemoPart
             attribute rationale : String;
             attribute sourceReference : String;
         }
-    
-        // Exchange-content foundation: everything that flows — information,
-        // command, material, energy — is an item, not a part.
-        item def MemoExchangeItem {
+
+        // Single item foundation. Standards, hazards, stored software data, and
+        // message payloads are all item-native concepts. Whether an item is
+        // exchanged is expressed by its use in a port or flow, not by a second
+        // ontology root.
+        abstract item def MemoItem {
             attribute id : String;
             attribute uuid : String;
             attribute name : String;
@@ -471,15 +506,35 @@ part def Citation specializes MemoPart
             attribute rationale : String;
             attribute sourceReference : String;
             attribute status : ElementStatusKind;
-            attribute semantics : String;
-            attribute unit : String;
-            attribute minValue : String;
-            attribute maxValue : String;
-            attribute encoding : String;
-            attribute timestampRequired : Boolean;
-            attribute codes : TerminologyCode[0..*];
         }
-    
+
+        // Use-case foundation. The domain UseCase adds its goal and actor
+        // references; identity is carried here so use cases do not maintain a
+        // partial hand-written copy of the MEMO identification core.
+        abstract use case def MemoUseCase {
+            attribute id : String;
+            attribute uuid : String;
+            attribute name : String;
+            attribute shortDescription : String;
+            attribute description : String;
+            attribute rationale : String;
+            attribute sourceReference : String;
+            attribute status : ElementStatusKind;
+        }
+
+        // General constraint foundation. Executable consistency rules and
+        // reusable quantitative constraints are both native constraint defs.
+        abstract constraint def MemoConstraint {
+            attribute id : String;
+            attribute uuid : String;
+            attribute name : String;
+            attribute shortDescription : String;
+            attribute description : String;
+            attribute rationale : String;
+            attribute sourceReference : String;
+            attribute status : ElementStatusKind;
+        }
+
         // Requirement-family foundations. MemoNeed captures a problem-space
         // expectation in stakeholder language; MemoRequirement a testable
         // solution-space obligation.
@@ -497,16 +552,16 @@ part def Citation specializes MemoPart
             attribute status : ElementStatusKind;
             attribute statement : String;
         }
-    
+
         requirement def MemoNeed :> MemoRequirementElement {
             attribute needSource : String;
             attribute priority : String;
         }
-    
+
         requirement def MemoRequirement :> MemoRequirementElement {
             attribute acceptanceCriteria : String;
         }
-    
+
         // Verification-case foundation. A SysML v2 verification case is a behaviour
         // (it checks requirements), and KerML forbids a behaviour from specializing
         // the part-based MemoPart — so, like MemoAction, it re-declares the small
@@ -521,7 +576,7 @@ part def Citation specializes MemoPart
             attribute sourceReference : String;
             attribute status : ElementStatusKind;
         }
-    
+
         // State foundation. SysML v2 states (state machines and their mode states)
         // are behaviours, so — like MemoAction and MemoVerificationCase — they
         // re-declare the identification core instead of specializing MemoPart
@@ -537,7 +592,7 @@ part def Citation specializes MemoPart
             attribute sourceReference : String;
             attribute status : ElementStatusKind;
         }
-    
+
         part def Citation specializes MemoPart {
             attribute source : String;
             attribute section : String;
@@ -545,5 +600,5 @@ part def Citation specializes MemoPart
             attribute year : String;
         }
     }
-    
+
     ```

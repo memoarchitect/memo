@@ -8,7 +8,7 @@
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/extension-ros'
 version: 0.7.0
-description: ROS 2 nodes, topics, QoS, publish/subscribe, and containerized deployment
+description: ROS 2 nodes, messages, topic/service/action interfaces, QoS, and containerized deployment
 license: MIT
 tags:
 - memo

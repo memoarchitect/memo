@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_requirements_requirements_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part requirementsViewpoint : Viewpoint {
             attribute :>> id = "VP-REQ";
             attribute :>> name = "RequirementsViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

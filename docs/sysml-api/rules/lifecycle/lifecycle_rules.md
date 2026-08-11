@@ -43,5 +43,5 @@
     // methodology workflow instead of presenting an unevaluable rule as assurance.
     package memo_rules_lifecycle {
     }
-    
+
     ```

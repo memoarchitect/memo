@@ -1141,7 +1141,7 @@ enum def CommentStatusKind
     ```sysml
     package memo_core_enumerations {
         private import ScalarValues::*;
-    
+
         enum def ConcernKind {
             enum safety;
             enum usability;
@@ -1793,5 +1793,5 @@ enum def CommentStatusKind
             enum rejected;
         }
     }
-    
+
     ```

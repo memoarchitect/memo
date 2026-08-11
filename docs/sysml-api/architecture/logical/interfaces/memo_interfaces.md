@@ -33,7 +33,8 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`Interface`](#interface) | `interface def` | Realization domain (hardware vs software), signaling family (digital / analog / synchronous / asynchronous) and concrete protocol (SPI, CAN, Ethernet, 4-20mA, REST, gRPC, message-queue …) are captured by `interfaceKind` + `protocol`, NOT by a class branch.… | `MemoInterface` |
-| [`InterfaceItem`](#interfaceitem) | `item def` | A typed thing exchanged at a boundary. Concrete items such as AlarmSignal and FlowCommand specialize this type; they are neither functions nor generic action-flow notation.… | `MemoExchangeItem` |
+| [`SoftwareInterface`](#softwareinterface) | `interface def` | Software interaction contracts specialize the native MEMO interface family. Concrete technologies add their protocol roles and message flows; ports remain the endpoints that components actually own. | `Interface` |
+| [`InterfaceItem`](#interfaceitem) | `item def` | A typed thing exchanged at a boundary. Concrete items such as AlarmSignal and FlowCommand specialize this type; they are neither functions nor generic action-flow notation.… | `MemoItem` |
 | [`DataInterface`](#datainterface) | `interface def` | Data interface definition specializing `MemoInterface`. | `MemoInterface` |
 | [`DataPort`](#dataport) | `port def` | Data port definition specializing `MemoPort`. | `MemoPort` |
 | [`SensorPort`](#sensorport) | `port def` | Sensor port definition specializing `DataPort`. | `DataPort` |
@@ -56,10 +57,25 @@ interface def Interface specializes MemoInterface
 | Owning package | `memo_architecture_logical_interfaces` |
 
 
+## SoftwareInterface
+
+```sysml
+abstract interface def SoftwareInterface specializes Interface
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Software interaction contracts specialize the native MEMO interface family. Concrete technologies add their protocol roles and message flows; ports remain the endpoints that components actually own. |
+| Kind | `interface def` |
+| Abstract | Yes |
+| Specializes | `Interface` |
+| Owning package | `memo_architecture_logical_interfaces` |
+
+
 ## InterfaceItem
 
 ```sysml
-item def InterfaceItem specializes MemoExchangeItem
+item def InterfaceItem specializes MemoItem
 ```
 
 | Property | Value |
@@ -67,7 +83,7 @@ item def InterfaceItem specializes MemoExchangeItem
 | Description | A typed thing exchanged at a boundary. Concrete items such as AlarmSignal and FlowCommand specialize this type; they are neither functions nor generic action-flow notation.… |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoExchangeItem` |
+| Specializes | `MemoItem` |
 | Owning package | `memo_architecture_logical_interfaces` |
 
 
@@ -168,11 +184,11 @@ port def SoftwarePort specializes MemoPort
     ```sysml
     package memo_architecture_logical_interfaces {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_architecture_functional_functions::*;
-    
+
         // ─── One Interface definition ────────────────────────────────────
         // Realization domain (hardware vs software), signaling family
         // (digital / analog / synchronous / asynchronous) and concrete protocol
@@ -182,7 +198,7 @@ port def SoftwarePort specializes MemoPort
         // the ones that apply to it. There is no HardwareInterface /
         // DigitalInterface / SPIInterface / RestInterface … hierarchy: those were
         // 20+ classes that differed only in the value of `protocol`.
-    
+
         interface def Interface specializes MemoInterface {
             attribute interfaceKind : InterfaceKind;   // semantic + signaling family
             attribute direction : DirectionKind;
@@ -211,13 +227,20 @@ port def SoftwarePort specializes MemoPort
             // ── software-API descriptors (optional) ──
             attribute apiStyle : String;
         }
-    
+
+        // Software interaction contracts specialize the native MEMO interface
+        // family. Concrete technologies add their protocol roles and message
+        // flows; ports remain the endpoints that components actually own.
+        abstract interface def SoftwareInterface specializes Interface {
+            attribute :>> direction = DirectionKind::inputOutput;
+        }
+
         // A typed thing exchanged at a boundary. Concrete items such as
         // AlarmSignal and FlowCommand specialize this type; they are neither
         // functions nor generic action-flow notation.
         // The kind of item is given by itemKind (data / command / signal / …);
         // the control-specific fields below apply only when itemKind = command.
-        item def InterfaceItem specializes MemoExchangeItem {
+        item def InterfaceItem specializes MemoItem {
             attribute itemKind : InterfaceItemKind;
             attribute confidentialityClass : String;
             attribute integrityClass : String;
@@ -226,11 +249,11 @@ port def SoftwarePort specializes MemoPort
             attribute timeoutMs : Real[0..1];
             attribute retryPolicy : String[0..1];
         }
-    
+
         // ─── Ports, interface defs, and exchanges ────────────────────────
         // SysML port/interface mechanism + logical exchange, relocated here
         // from the former logical_interfaces namespace.
-    
+
         abstract interface def DataInterface specializes MemoInterface {
             attribute interfaceKind : InterfaceKind;
             attribute protocolSemantics : String;
@@ -240,7 +263,7 @@ port def SoftwarePort specializes MemoPort
         }
         port def SensorPort specializes DataPort { attribute sensorDomain : String; }
         port def CommandPort specializes DataPort { attribute commandDomain : String; }
-    
+
         part def ComponentExchange specializes ArchitectureElement {
             attribute exchangeKind : FlowKind;
             // Metaclass-neutral endpoints. CR-ONT-002 used to read: "Typed
@@ -307,5 +330,5 @@ port def SoftwarePort specializes MemoPort
             attribute dataTypeName : String;
         }
     }
-    
+
     ```

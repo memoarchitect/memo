@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_operational_operational_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part operationalViewpoint : Viewpoint {
             attribute :>> id = "VP-OPS";
             attribute :>> name = "OperationalViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

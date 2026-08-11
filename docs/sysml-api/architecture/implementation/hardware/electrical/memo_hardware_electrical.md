@@ -154,7 +154,7 @@ part def NetworkMedium specializes PhysicalComponent
     package memo_architecture_implementation_hardware_electrical {
         private import ScalarValues::*;
         private import memo_architecture_implementation_hardware_common::*;
-    
+
         part def ElectricalComponent specializes PhysicalComponent {
             attribute ratedVoltageV : String;
             attribute ratedCurrentA : String;
@@ -184,5 +184,5 @@ part def NetworkMedium specializes PhysicalComponent
             attribute bandwidthSummary : String;
         }
     }
-    
+
     ```

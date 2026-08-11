@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_context_context_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part contextViewpoint : Viewpoint {
             attribute :>> id = "VP-CTX";
             attribute :>> name = "ContextViewpoint";
@@ -74,5 +74,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

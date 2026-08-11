@@ -145,7 +145,7 @@ package memo_architecture_logical_structure {
         end providerPort : LogicalPort;
         end consumerPort : ~LogicalPort;
     }
-    item def LogicalExchangeItem specializes MemoExchangeItem {
+    item def LogicalExchangeItem specializes MemoItem {
         attribute contentKind : FlowContentKind;
     }
 

@@ -73,7 +73,7 @@ part def Enclosure specializes MechanicalPart
     package memo_architecture_implementation_hardware_mechanical {
         private import ScalarValues::*;
         private import memo_architecture_implementation_hardware_common::*;
-    
+
         part def MechanicalPart specializes PhysicalComponent {
             attribute mechanicalFunction : String;
         }
@@ -82,5 +82,5 @@ part def Enclosure specializes MechanicalPart
             attribute cleanability : String;
         }
     }
-    
+
     ```

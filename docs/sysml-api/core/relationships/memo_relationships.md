@@ -347,13 +347,13 @@ connection def BindsToInterface :> MemoRelationship
     package memo_core_relationships {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import Connections::BinaryConnection;
-    
+
         private import memo_core_common::*;
         private import memo_core_dimensions::*;   // ElementStatusKind
         private import memo_core_enumerations::*;
-    
+
         // All MEMO relations are native SysML v2 `connection def`s (each is a
         // Connection/Association), specializing the MemoRelationship base. The
         // relationship name is the verb; the RelationshipRegistry derives the
@@ -395,7 +395,7 @@ connection def BindsToInterface :> MemoRelationship
                  * Unset is read as true. */
             attribute isUnique : Boolean;
         }
-    
+
         // ─── Metaclass-neutral ends (Track A0) ──────────────────────────────
         //
         // An end is left UNTYPED (`:>> source` / `:>> target`) wherever its
@@ -448,7 +448,7 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = memoLinkLinks meta SysML::Usage;
         }
-    
+
         connection def DerivesFrom :> MemoRelationship {
             // Drivers span metaclasses — a need is a requirement def, a hazard an
             // item, a threat an item — so the source end stays untyped. The target
@@ -536,8 +536,8 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = precedesLinks meta SysML::Usage;
         }
-    
-    
+
+
         connection def ThreatenedBy :> MemoRelationship {
             attribute threatRole : String;
             end protectedAsset : ArchitectureElement :>> source;
@@ -570,7 +570,7 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = crossesTrustBoundaryLinks meta SysML::Usage;
         }
-    
+
         connection def Validates :> MemoRelationship {
             // Validation targets include use cases and other behavioural elements,
             // so the target remains untyped across SysML metaclass families.
@@ -583,7 +583,7 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = validatesLinks meta SysML::Usage;
         }
-    
+
         // Performs unifies the former Performs / PerformsActivity / PerformsFunction
         // synonyms. The performer (operational entity, actor, or system action) and
         // the performed element (activity or function) are distinguished by the end
@@ -599,7 +599,7 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = performsLinks meta SysML::Usage;
         }
-    
+
         // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms
         // (an enabling system/function enables a workflow/activity).
         connection def Enables :> MemoRelationship {
@@ -612,7 +612,7 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = enablesLinks meta SysML::Usage;
         }
-    
+
         connection def HostedBy :> MemoRelationship {
             end processingNode : ArchitectureElement :>> source;
             end hostAssembly : ArchitectureElement :>> target;
@@ -623,10 +623,10 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = hostedByLinks meta SysML::Usage;
         }
-    
-    
-    
-    
+
+
+
+
         // Composes is the single whole/part decomposition relation. It unifies the
         // former ComposesLogical / AssemblyComprises / Contains{Component,Element} /
         // {Workflow,Task,Activity,Scenario}Comprises* / FlowComprisesSpec /
@@ -642,7 +642,7 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = composesLinks meta SysML::Usage;
         }
-    
+
         connection def AnalyzedBy :> MemoRelationship {
             end element : ArchitectureElement :>> source;
             end analysisArtifact : AnalysisArtifact :>> target;
@@ -653,7 +653,7 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = analyzedByLinks meta SysML::Usage;
         }
-    
+
         connection def BindsToInterface :> MemoRelationship {
             end portElement :>> source;
             end boundInterface :>> target;
@@ -665,5 +665,5 @@ connection def BindsToInterface :> MemoRelationship
             :>> baseType = bindsToInterfaceLinks meta SysML::Usage;
         }
     }
-    
+
     ```

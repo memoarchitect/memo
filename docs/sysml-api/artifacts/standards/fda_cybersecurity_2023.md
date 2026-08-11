@@ -59,7 +59,7 @@
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_artifacts_standards_traceability::*;
-    
+
         item fdaCybersecurity2023 : RegulatoryStandard {
             attribute :>> id = "STD-FDA-CYBER-2023";
             attribute :>> name = "FDACybersecurity2023";
@@ -68,7 +68,7 @@
             attribute :>> issuer = "FDA";
             attribute :>> appliesToRegime = (RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
         }
-    
+
         item fdaCyberSection4 : StandardClause {
             attribute :>> id = "STD-FDA-CYBER-2023-IV";
             attribute :>> name = "FDACyberSectionIV";
@@ -111,14 +111,14 @@
             attribute :>> title = "cybersecurity transparency and vulnerability management";
             attribute :>> normativeStrength = "informative";
         }
-    
+
         connection fdaCyberHas4 : Composes connect parent ::> fdaCybersecurity2023 to child ::> fdaCyberSection4;
         connection fdaCyberHas5 : Composes connect parent ::> fdaCybersecurity2023 to child ::> fdaCyberSection5;
         connection fdaCyberHas6 : Composes connect parent ::> fdaCybersecurity2023 to child ::> fdaCyberSection6;
-    
+
         connection fdaCyberHas5A : Composes connect parent ::> fdaCyberSection5 to child ::> fdaCyberSection5A;
         connection fdaCyberHas5B : Composes connect parent ::> fdaCyberSection5 to child ::> fdaCyberSection5B;
         connection fdaCyberHas5C : Composes connect parent ::> fdaCyberSection5 to child ::> fdaCyberSection5C;
     }
-    
+
     ```

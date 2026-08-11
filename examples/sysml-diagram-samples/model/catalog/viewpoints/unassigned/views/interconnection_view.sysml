@@ -19,19 +19,19 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     part brewGroup : LogicalComponent { attribute :>> name = "Brew Group"; }
     part cup : LogicalComponent { attribute :>> name = "Cup"; }
 
-    in port mainsWaterIn : DataPort { in item payload : MemoExchangeItem; }
-    out port beverageOut : DataPort { out item payload : MemoExchangeItem; }
-    out port supplyWaterOut : DataPort { out item payload : MemoExchangeItem; }
-    in port cupBeverageIn : DataPort { in item payload : MemoExchangeItem; }
-    inout port serviceInterface : DataPort { inout item payload : MemoExchangeItem; }
-    out port diagnostics : DataPort { out item payload : MemoExchangeItem; }
-    out port tankWaterOut : DataPort { out item payload : MemoExchangeItem; }
-    in port tankWaterIn : DataPort { in item payload : MemoExchangeItem; }
-    in port heaterWaterIn : DataPort { in item payload : MemoExchangeItem; }
-    out port heatedWaterOut : DataPort { out item payload : MemoExchangeItem; }
-    in port brewWaterIn : DataPort { in item payload : MemoExchangeItem; }
-    out port brewedCoffeeOut : DataPort { out item payload : MemoExchangeItem; }
-    out port heaterStatusOut : DataPort { out item payload : MemoExchangeItem; }
+    in port mainsWaterIn : DataPort { in item payload : MemoItem; }
+    out port beverageOut : DataPort { out item payload : MemoItem; }
+    out port supplyWaterOut : DataPort { out item payload : MemoItem; }
+    in port cupBeverageIn : DataPort { in item payload : MemoItem; }
+    inout port serviceInterface : DataPort { inout item payload : MemoItem; }
+    out port diagnostics : DataPort { out item payload : MemoItem; }
+    out port tankWaterOut : DataPort { out item payload : MemoItem; }
+    in port tankWaterIn : DataPort { in item payload : MemoItem; }
+    in port heaterWaterIn : DataPort { in item payload : MemoItem; }
+    out port heatedWaterOut : DataPort { out item payload : MemoItem; }
+    in port brewWaterIn : DataPort { in item payload : MemoItem; }
+    out port brewedCoffeeOut : DataPort { out item payload : MemoItem; }
+    out port heaterStatusOut : DataPort { out item payload : MemoItem; }
 
     connection : Composes connect parent ::> coffeeMachine to child ::> waterTank;
     connection : Composes connect parent ::> coffeeMachine to child ::> heaterAssembly;

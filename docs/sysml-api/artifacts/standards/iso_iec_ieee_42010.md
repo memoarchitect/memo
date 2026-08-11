@@ -52,7 +52,7 @@
         private import ScalarValues::*;
         private import memo_core_relationships::*;
         private import memo_artifacts_standards_traceability::*;
-    
+
         item isoIecIeee42010 : RegulatoryStandard {
             attribute :>> id = "STD-ISO-IEC-IEEE-42010";
             attribute :>> name = "ISOIECIEEE42010";
@@ -64,7 +64,7 @@
             // market. Empty is the authored value, not an omission — see
             // appliesToRegime in memo_artifacts_standards_traceability.
         }
-    
+
         item isoIecIeee42010Clause5 : StandardClause {
             attribute :>> id = "STD-ISO-IEC-IEEE-42010-5";
             attribute :>> name = "ISOIECIEEE42010Clause5";
@@ -77,9 +77,9 @@
             attribute :>> clauseNumber = "6";
             attribute :>> normativeStrength = "shall";
         }
-    
+
         connection isoIecIeee42010Has5 : Composes connect parent ::> isoIecIeee42010 to child ::> isoIecIeee42010Clause5;
         connection isoIecIeee42010Has6 : Composes connect parent ::> isoIecIeee42010 to child ::> isoIecIeee42010Clause6;
     }
-    
+
     ```

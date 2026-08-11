@@ -81,16 +81,16 @@ part def ExplorerClassification :> MemoPart
     // supply them for the model to be complete.
     package memo_viewpoints_rendering {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
-    
+
         // The presentation identity of one architecture layer.
         part def LayerRendering :> MemoPart {
             attribute layerId : String;
             attribute layerLabel : String;
             attribute layerColor : String;
         }
-    
+
         // Where a source namespace's kinds appear in the Model Explorer tree.
         // `sourceNamespace` names the ontology namespace or kind group the
         // classification applies to; `explorerDomain` and `explorerGroup` name its
@@ -100,7 +100,7 @@ part def ExplorerClassification :> MemoPart
             attribute explorerDomain : String;
             attribute explorerGroup : String;
         }
-    
+
         part layerOperationalRendering : LayerRendering {
             attribute :>> id = "LAYER-OPERATIONAL";
             attribute :>> name = "OperationalLayerRendering";
@@ -108,7 +108,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Operational";
             attribute :>> layerColor = "#C0392B";
         }
-    
+
         part layerBehavioralRendering : LayerRendering {
             attribute :>> id = "LAYER-BEHAVIORAL";
             attribute :>> name = "BehavioralLayerRendering";
@@ -116,7 +116,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Behavioral";
             attribute :>> layerColor = "#E74C3C";
         }
-    
+
         part layerFunctionalRendering : LayerRendering {
             attribute :>> id = "LAYER-FUNCTIONAL";
             attribute :>> name = "FunctionalLayerRendering";
@@ -124,7 +124,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Functional";
             attribute :>> layerColor = "#E67E22";
         }
-    
+
         part layerLogicalRendering : LayerRendering {
             attribute :>> id = "LAYER-LOGICAL";
             attribute :>> name = "LogicalLayerRendering";
@@ -132,7 +132,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Logical";
             attribute :>> layerColor = "#7B68EE";
         }
-    
+
         part layerSoftwareRendering : LayerRendering {
             attribute :>> id = "LAYER-SOFTWARE";
             attribute :>> name = "SoftwareLayerRendering";
@@ -140,7 +140,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Software";
             attribute :>> layerColor = "#F39C12";
         }
-    
+
         part layerSoftwareExtensionRendering : LayerRendering {
             attribute :>> id = "LAYER-SOFTWARE-EXTENSION";
             attribute :>> name = "Software Extension (ROS)LayerRendering";
@@ -148,7 +148,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Software Extension (ROS)";
             attribute :>> layerColor = "#D4AC0D";
         }
-    
+
         part layerHardwareRendering : LayerRendering {
             attribute :>> id = "LAYER-HARDWARE";
             attribute :>> name = "HardwareLayerRendering";
@@ -156,7 +156,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Hardware";
             attribute :>> layerColor = "#95A5A6";
         }
-    
+
         part layerSafetyRendering : LayerRendering {
             attribute :>> id = "LAYER-SAFETY";
             attribute :>> name = "SafetyLayerRendering";
@@ -164,7 +164,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Safety";
             attribute :>> layerColor = "#E74C3C";
         }
-    
+
         part layerSecurityRendering : LayerRendering {
             attribute :>> id = "LAYER-SECURITY";
             attribute :>> name = "SecurityLayerRendering";
@@ -172,7 +172,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Security";
             attribute :>> layerColor = "#2C3E50";
         }
-    
+
         part layerPrivacyRendering : LayerRendering {
             attribute :>> id = "LAYER-PRIVACY";
             attribute :>> name = "PrivacyLayerRendering";
@@ -180,7 +180,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Privacy";
             attribute :>> layerColor = "#8E44AD";
         }
-    
+
         part layerVerificationRendering : LayerRendering {
             attribute :>> id = "LAYER-VERIFICATION";
             attribute :>> name = "VerificationLayerRendering";
@@ -188,7 +188,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> layerLabel = "Verification";
             attribute :>> layerColor = "#2ECC71";
         }
-    
+
         part explorerActivitiesClassification : ExplorerClassification {
             attribute :>> id = "EXPL-001";
             attribute :>> name = "activitiesExplorerClassification";
@@ -196,7 +196,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerContextClassification : ExplorerClassification {
             attribute :>> id = "EXPL-002";
             attribute :>> name = "contextExplorerClassification";
@@ -204,7 +204,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerActorsClassification : ExplorerClassification {
             attribute :>> id = "EXPL-003";
             attribute :>> name = "actorsExplorerClassification";
@@ -212,7 +212,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerUseContextClassification : ExplorerClassification {
             attribute :>> id = "EXPL-004";
             attribute :>> name = "use_contextExplorerClassification";
@@ -220,7 +220,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerWorkflowsClassification : ExplorerClassification {
             attribute :>> id = "EXPL-005";
             attribute :>> name = "workflowsExplorerClassification";
@@ -228,7 +228,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerScenariosClassification : ExplorerClassification {
             attribute :>> id = "EXPL-006";
             attribute :>> name = "scenariosExplorerClassification";
@@ -236,7 +236,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerUseCasesClassification : ExplorerClassification {
             attribute :>> id = "EXPL-007";
             attribute :>> name = "use_casesExplorerClassification";
@@ -244,7 +244,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerInteractionClassification : ExplorerClassification {
             attribute :>> id = "EXPL-008";
             attribute :>> name = "interactionExplorerClassification";
@@ -252,7 +252,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerOperationalClassification : ExplorerClassification {
             attribute :>> id = "EXPL-009";
             attribute :>> name = "operationalExplorerClassification";
@@ -260,7 +260,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "operational";
         }
-    
+
         part explorerFunctionsClassification : ExplorerClassification {
             attribute :>> id = "EXPL-010";
             attribute :>> name = "functionsExplorerClassification";
@@ -268,7 +268,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "functional";
         }
-    
+
         part explorerBehaviorClassification : ExplorerClassification {
             attribute :>> id = "EXPL-011";
             attribute :>> name = "behaviorExplorerClassification";
@@ -276,7 +276,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "functional";
         }
-    
+
         part explorerConstraintsClassification : ExplorerClassification {
             attribute :>> id = "EXPL-012";
             attribute :>> name = "constraintsExplorerClassification";
@@ -284,7 +284,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "functional";
         }
-    
+
         part explorerLogicalStructureClassification : ExplorerClassification {
             attribute :>> id = "EXPL-013";
             attribute :>> name = "logical_structureExplorerClassification";
@@ -292,7 +292,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "logical";
         }
-    
+
         part explorerInterfacesClassification : ExplorerClassification {
             attribute :>> id = "EXPL-014";
             attribute :>> name = "interfacesExplorerClassification";
@@ -300,7 +300,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "logical";
         }
-    
+
         part explorerHardwareStructureClassification : ExplorerClassification {
             attribute :>> id = "EXPL-015";
             attribute :>> name = "hardware_structureExplorerClassification";
@@ -308,7 +308,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "implementation";
         }
-    
+
         part explorerImplementationClassification : ExplorerClassification {
             attribute :>> id = "EXPL-016";
             attribute :>> name = "implementationExplorerClassification";
@@ -316,7 +316,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "implementation";
         }
-    
+
         part explorerSoftwareStructureClassification : ExplorerClassification {
             attribute :>> id = "EXPL-017";
             attribute :>> name = "software_structureExplorerClassification";
@@ -324,7 +324,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "implementation";
         }
-    
+
         part explorerSoftwareRuntimeClassification : ExplorerClassification {
             attribute :>> id = "EXPL-018";
             attribute :>> name = "software_runtimeExplorerClassification";
@@ -332,7 +332,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "implementation";
         }
-    
+
         part explorerPhysicalClassification : ExplorerClassification {
             attribute :>> id = "EXPL-019";
             attribute :>> name = "physicalExplorerClassification";
@@ -340,7 +340,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "realization";
         }
-    
+
         part explorerDeploymentClassification : ExplorerClassification {
             attribute :>> id = "EXPL-020";
             attribute :>> name = "deploymentExplorerClassification";
@@ -348,7 +348,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "architecture";
             attribute :>> explorerGroup = "realization";
         }
-    
+
         part explorerNeedsClassification : ExplorerClassification {
             attribute :>> id = "EXPL-021";
             attribute :>> name = "needsExplorerClassification";
@@ -356,7 +356,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "assurance";
             attribute :>> explorerGroup = "requirements";
         }
-    
+
         part explorerRequirementsClassification : ExplorerClassification {
             attribute :>> id = "EXPL-022";
             attribute :>> name = "requirementsExplorerClassification";
@@ -364,7 +364,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "assurance";
             attribute :>> explorerGroup = "requirements";
         }
-    
+
         part explorerSafetyClassification : ExplorerClassification {
             attribute :>> id = "EXPL-023";
             attribute :>> name = "safetyExplorerClassification";
@@ -372,7 +372,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "assurance";
             attribute :>> explorerGroup = "safety-risk";
         }
-    
+
         part explorerSafetyAnalysisClassification : ExplorerClassification {
             attribute :>> id = "EXPL-024";
             attribute :>> name = "safety_analysisExplorerClassification";
@@ -380,7 +380,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "assurance";
             attribute :>> explorerGroup = "safety-risk";
         }
-    
+
         part explorerCybersecurityClassification : ExplorerClassification {
             attribute :>> id = "EXPL-025";
             attribute :>> name = "cybersecurityExplorerClassification";
@@ -388,7 +388,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "assurance";
             attribute :>> explorerGroup = "cybersecurity";
         }
-    
+
         part explorerHumanFactorsClassification : ExplorerClassification {
             attribute :>> id = "EXPL-026";
             attribute :>> name = "human_factorsExplorerClassification";
@@ -396,7 +396,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "assurance";
             attribute :>> explorerGroup = "human-factors";
         }
-    
+
         part explorerVerificationClassification : ExplorerClassification {
             attribute :>> id = "EXPL-027";
             attribute :>> name = "verificationExplorerClassification";
@@ -404,7 +404,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "assurance";
             attribute :>> explorerGroup = "verification-validation";
         }
-    
+
         part explorerCoreClassification : ExplorerClassification {
             attribute :>> id = "EXPL-028";
             attribute :>> name = "coreExplorerClassification";
@@ -412,7 +412,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "assurance";
             attribute :>> explorerGroup = "evidence";
         }
-    
+
         part explorerMethodologyClassification : ExplorerClassification {
             attribute :>> id = "EXPL-029";
             attribute :>> name = "methodologyExplorerClassification";
@@ -420,7 +420,7 @@ part def ExplorerClassification :> MemoPart
             attribute :>> explorerDomain = "methodology";
             attribute :>> explorerGroup = "methodology";
         }
-    
+
     }
-    
+
     ```

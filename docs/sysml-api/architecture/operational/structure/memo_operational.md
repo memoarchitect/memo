@@ -105,7 +105,7 @@ part def OperationalInteraction specializes ArchitectureElement
     ```sysml
     package memo_architecture_operational_structure {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
@@ -132,7 +132,7 @@ part def OperationalInteraction specializes ArchitectureElement
             attribute direction : DirectionKind;
             attribute latencyConstraint : String;
         }
-    
+
     }
-    
+
     ```

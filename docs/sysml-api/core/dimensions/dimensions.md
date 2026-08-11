@@ -125,7 +125,7 @@ metadata def CrossCuttingClassification
     // orthogonal to the axis and to each other, and stay as metadata.
     package memo_core_dimensions {
         private import ScalarValues::*;
-    
+
         // Realization stages of one element identity across the product
         // lifecycle (proposal through retirement). Orthogonal to the axis:
         // a single identity progresses through stages without changing its owner.
@@ -143,7 +143,7 @@ metadata def CrossCuttingClassification
             enum operated;
             enum retired;
         }
-    
+
         // Cross-cutting concerns orthogonal to the axis.
         enum def CrossCuttingConcernKind {
             enum evidence;
@@ -153,7 +153,7 @@ metadata def CrossCuttingClassification
             enum regulatoryCompliance;
             enum clinicalPerformance;
         }
-    
+
         // Editorial status of the model element itself (distinct from the
         // lifecycle of the thing the element describes).
         // This is the ONE status vocabulary in MEMO: every element carries
@@ -176,7 +176,7 @@ metadata def CrossCuttingClassification
             enum deprecated;
             enum retired;
         }
-    
+
         // Metadata carriers for tagging non-part constructs (actions, ports,
         // interfaces, items, views) with the orthogonal dimensions. Part-based
         // elements carry these directly as attributes of MemoPart. Axis ownership
@@ -184,10 +184,10 @@ metadata def CrossCuttingClassification
         metadata def RealizationClassification {
             attribute stage : RealizationStageKind[0..1];
         }
-    
+
         metadata def CrossCuttingClassification {
             attribute crossCutting : CrossCuttingConcernKind[0..*];
         }
     }
-    
+
     ```

@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_functional_functional_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part functionalViewpoint : Viewpoint {
             attribute :>> id = "VP-FUNC";
             attribute :>> name = "FunctionalViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

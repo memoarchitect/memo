@@ -39,15 +39,15 @@
 | [`RiskMatrix`](#riskmatrix) | `part def` | Risk matrix definition specializing `MemoPart`. | `MemoPart` |
 | [`DesignControlRiskRow`](#designcontrolriskrow) | `part def` | Design control risk row definition specializing `Risk`. | `Risk` |
 | [`SafetyRelatedCharacteristic`](#safetyrelatedcharacteristic) | `part def` | A device characteristic whose implementation, failure, or misuse can affect safety. This is the modelable output of ISO 14971 §5.3. | `MemoPart` |
-| [`RiskItem`](#riskitem) | `item def` | Risk item definition specializing `MemoPart`. | `MemoPart` |
+| [`RiskItem`](#riskitem) | `item def` | Risk item definition specializing `MemoItem`. | `MemoItem` |
 | [`Hazard`](#hazard) | `item def` | Hazard definition specializing `RiskItem`. | `RiskItem` |
 | [`SequenceOfEvents`](#sequenceofevents) | `item def` | Sequence of events definition specializing `RiskItem`. | `RiskItem` |
 | [`HazardCause`](#hazardcause) | `item def` | Hazard cause definition specializing `RiskItem`. | `RiskItem` |
 | [`HazardousSituation`](#hazardoussituation) | `item def` | Hazardous situation definition specializing `RiskItem`. | `RiskItem` |
 | [`Harm`](#harm) | `item def` | Harm definition specializing `RiskItem`. | `RiskItem` |
-| [`RiskControlMeasure`](#riskcontrolmeasure) | `item def` | Risk control measure definition specializing `VerifiableElement`. | `VerifiableElement` |
+| [`RiskControlMeasure`](#riskcontrolmeasure) | `part def` | Risk control measure definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`Benefit`](#benefit) | `part def` | Benefit definition specializing `MemoPart`. | `MemoPart` |
-| [`OverallResidualRiskEvaluation`](#overallresidualriskevaluation) | `item def` | Overall residual risk evaluation definition specializing `MemoPart`. | `MemoPart` |
+| [`OverallResidualRiskEvaluation`](#overallresidualriskevaluation) | `part def` | Overall residual risk evaluation definition specializing `MemoPart`. | `MemoPart` |
 | [`TracesRisk`](#tracesrisk) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | `MemoRelationship` |
 | [`AssessedAgainst`](#assessedagainst) | `connection def` | Typed relationship for assessed against. | `MemoRelationship` |
 | [`MitigationKind`](#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | — |
@@ -131,15 +131,15 @@ part def SafetyRelatedCharacteristic specializes MemoPart
 ## RiskItem
 
 ```sysml
-abstract item def RiskItem specializes MemoPart
+abstract item def RiskItem specializes MemoItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Risk item definition specializing `MemoPart`. |
+| Description | Risk item definition specializing `MemoItem`. |
 | Kind | `item def` |
 | Abstract | Yes |
-| Specializes | `MemoPart` |
+| Specializes | `MemoItem` |
 | Owning package | `memo_assurance_safety_risk` |
 
 
@@ -221,13 +221,13 @@ item def Harm specializes RiskItem
 ## RiskControlMeasure
 
 ```sysml
-item def RiskControlMeasure specializes VerifiableElement
+part def RiskControlMeasure specializes VerifiableElement
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Risk control measure definition specializing `VerifiableElement`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `VerifiableElement` |
 | Owning package | `memo_assurance_safety_risk` |
@@ -251,13 +251,13 @@ part def Benefit specializes MemoPart
 ## OverallResidualRiskEvaluation
 
 ```sysml
-item def OverallResidualRiskEvaluation specializes MemoPart
+part def OverallResidualRiskEvaluation specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Overall residual risk evaluation definition specializing `MemoPart`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
 | Owning package | `memo_assurance_safety_risk` |
@@ -332,7 +332,7 @@ connection def Mitigates :> MemoRelationship
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_relationships::*;   // MemoRelationship
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_assurance_requirements::*;
@@ -396,8 +396,8 @@ connection def Mitigates :> MemoRelationship
         // AssessedAgainst instead. One base per metaclass is the right shape here
         // — forcing the two families under one supertype would put a hazard and a
         // risk matrix back in the same picker.
-        abstract item def RiskItem specializes MemoPart;
-    
+        abstract item def RiskItem specializes MemoItem;
+
         item def Hazard specializes RiskItem {
             attribute hazardType : HazardTypeKind;
             attribute severity : SeverityKind;
@@ -423,7 +423,7 @@ connection def Mitigates :> MemoRelationship
             attribute reversibility : String;
             attribute severity : SeverityKind;
         }
-        item def RiskControlMeasure specializes VerifiableElement {
+        part def RiskControlMeasure specializes VerifiableElement {
             attribute controlKind : RiskControlKind;
             attribute implementationKind : RiskControlImplementationKind;
             attribute verificationStatus : String;
@@ -434,11 +434,11 @@ connection def Mitigates :> MemoRelationship
             attribute clinicalSignificance : String;
             attribute supportingEvidence : String;
         }
-        item def OverallResidualRiskEvaluation specializes MemoPart {
+        part def OverallResidualRiskEvaluation specializes MemoPart {
             attribute conclusion : String;
             attribute reviewer : String;
         }
-    
+
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
@@ -488,5 +488,5 @@ connection def Mitigates :> MemoRelationship
             :>> baseType = mitigatesLinks meta SysML::Usage;
         }
     }
-    
+
     ```

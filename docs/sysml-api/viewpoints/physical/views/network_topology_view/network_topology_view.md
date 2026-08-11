@@ -42,11 +42,11 @@
     ```sysml
     package memo_viewpoints_physical_views_network_topology_view {
         private import ScalarValues::*;
-    
+
                     private import memo_viewpoints_definitions::*;
                     private import memo_core_enumerations::*;
         private import memo_viewpoints_physical_physical_viewpoint::*;
-    
+
                     view networkTopologyView : MemoDiagramView {
                         expose memo_viewpoints_physical_views_network_topology_view::*;
                         attribute depth = 2;
@@ -69,5 +69,5 @@
         part :>> viewpointDefinition = physicalViewpoint;
                     }
     }
-    
+
     ```
