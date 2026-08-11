@@ -4,7 +4,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     private import memo_architecture_functional_behavior::*;
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_system::*;
-    private import memo_examples_gpca_pump_gpca_requirements::*;
+    private import memo_examples_gpca_pump_gpca_architecture::*;
 
     // ═════════════════════════════════════════════════════════════
     // GPCA mode machine per CriSys Ch.4 Fig 4.1 mode hierarchy:
@@ -378,7 +378,11 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> constraintKind = TimingConstraintKind::deadline;
         attribute :>> minMs = "40";
         attribute :>> maxMs = "60";
-        ref :>> referenceElement = reqWatchdogSafeState;
+        // The deadline is a claim about the element that kicks the watchdog, so
+        // the reference is the software module, not the requirement it supports.
+        // `referenceElement` is a MemoPart; a requirement is a requirement def
+        // and does not conform to it — that link is REQ-X-08's own trace.
+        ref :>> referenceElement = systemMonitor;
         attribute :>> verificationMethod = VerificationMethodKind::test;
         attribute :>> sourceReference = "MEMO extension — supports extension requirement REQ-X-08; watchdog not specified by the source";
     }
