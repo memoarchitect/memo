@@ -248,7 +248,7 @@ connection def FlowTraversesBinding :> MemoRelationship
             attribute providedServices : String;
             attribute certificationEvidence : String;
         }
-    
+
         connection def BuildsInto :> MemoRelationship {
             end module : SoftwareModule :>> source;
             end deploymentUnit : DeploymentUnit :>> target;
@@ -280,7 +280,7 @@ connection def FlowTraversesBinding :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = providesEnvironmentLinks meta SysML::Usage;
         }
-    
+
         // ─── AADL bindings (SAE AS5506) — plan C1 ────────────────────────────
         //
         // AADL's analytic power is that EVERYTHING is bound to something, and the
@@ -392,5 +392,5 @@ connection def FlowTraversesBinding :> MemoRelationship
             :>> baseType = flowTraversesBindingLinks meta SysML::Usage;
         }
     }
-    
+
     ```

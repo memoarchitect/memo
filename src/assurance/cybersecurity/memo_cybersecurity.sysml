@@ -29,7 +29,7 @@ package memo_assurance_cybersecurity {
         attribute authenticationExpected : Boolean;
     }
 
-    item def Threat specializes RiskDriver {
+    part def Threat specializes RiskDriver {
         attribute threatCategory : ThreatCategoryKind;
         attribute attackVector : String;
         attribute threatSource : String;
@@ -68,7 +68,7 @@ package memo_assurance_cybersecurity {
         attribute linkedSafetyHazardId : String;
     }
 
-    item def CyberRisk specializes Risk {
+    part def CyberRisk specializes Risk {
         attribute exploitabilityEstimate : String;
         attribute attackComplexity : String;
         attribute detectability : DetectionKind;
@@ -90,7 +90,7 @@ package memo_assurance_cybersecurity {
         attribute defaultConcern : ConcernKind;
     }
 
-    item def TrustBoundary specializes InterfaceElement {
+    part def TrustBoundary specializes InterfaceElement {
         attribute boundaryType : String;
         attribute crossingConstraint : String;
         attribute trustAssumption : String;

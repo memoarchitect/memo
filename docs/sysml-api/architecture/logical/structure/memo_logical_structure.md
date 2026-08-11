@@ -43,7 +43,7 @@
 | [`LogicalComponent`](#logicalcomponent) | `part def` | Logical component definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`LogicalPort`](#logicalport) | `port def` | Boundary features and contracts. | `MemoPort` |
 | [`LogicalInterface`](#logicalinterface) | `interface def` | Logical interface definition specializing `MemoInterface`. | `MemoInterface` |
-| [`LogicalExchangeItem`](#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoExchangeItem`. | `MemoExchangeItem` |
+| [`LogicalExchangeItem`](#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoItem`. | `MemoItem` |
 | [`LogicalConnector`](#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | `MemoRelationship` |
 | [`LogicalExchange`](#logicalexchange) | `part def` | A transfer of a typed item across a connector. | `ArchitectureElement` |
 | [`LogicalState`](#logicalstate) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `ArchitectureElement` |
@@ -208,15 +208,15 @@ interface def LogicalInterface specializes MemoInterface
 ## LogicalExchangeItem
 
 ```sysml
-item def LogicalExchangeItem specializes MemoExchangeItem
+item def LogicalExchangeItem specializes MemoItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Logical exchange item definition specializing `MemoExchangeItem`. |
+| Description | Logical exchange item definition specializing `MemoItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoExchangeItem` |
+| Specializes | `MemoItem` |
 | Owning package | `memo_architecture_logical_structure` |
 
 
@@ -383,11 +383,11 @@ connection def ExhibitsMode :> MemoRelationship
     package memo_architecture_logical_structure {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
-    
+
         // What a logical connection carries: information and control, but also
         // energy, material, fluid, and mechanical force (§10).
         enum def FlowContentKind {
@@ -402,7 +402,7 @@ connection def ExhibitsMode :> MemoRelationship
             enum fluid;
             enum mechanicalForce;
         }
-    
+
         enum def ChannelRoleKind {
             enum primary;
             enum secondary;
@@ -413,7 +413,7 @@ connection def ExhibitsMode :> MemoRelationship
             enum interlock;
             enum independentProtection;
         }
-    
+
         // The role a logical component plays. Was a subclass branch
         // (LogicalChannel / LogicalDataStore / LogicalControlElement /
         // LogicalUserInterface / LogicalExternalSystem); now one attribute, because
@@ -431,7 +431,7 @@ connection def ExhibitsMode :> MemoRelationship
             enum externalSystem;
             enum generic;
         }
-    
+
         // The discipline a logical block is realized in. Orthogonal to
         // `componentRole`: a subsystem may be software, a system may be hardware,
         // and a block whose realization is not yet decided stays `logical`.
@@ -448,7 +448,7 @@ connection def ExhibitsMode :> MemoRelationship
             enum software;
             enum hardware;
         }
-    
+
         // ─── System hierarchy ────────────────────────────────────────
         // Three types rather than three role values, because they differ in what
         // they may CONTAIN — and containment legality cannot live on an attribute.
@@ -458,7 +458,7 @@ connection def ExhibitsMode :> MemoRelationship
         // introduced: `Composes` remains the single containment relation for
         // instances, exactly as everywhere else in MEMO. The features below say
         // which types are admissible; Composes records the actual links.
-    
+
         part def SystemOfSystems specializes LogicalComponent {
             // Constituent systems are independently operated and independently
             // managed, collaborating for a capability none delivers alone
@@ -474,20 +474,20 @@ connection def ExhibitsMode :> MemoRelationship
             part constituentSystemOfSystems : SystemOfSystems[0..*];
             part constituentSystem : System[0..*];
         }
-    
+
         part def System specializes LogicalComponent {
             attribute systemBoundaryDescription : String;
             part system : System[0..*];
             part subsystem : Subsystem[0..*];
             part component : LogicalComponent[0..*];
         }
-    
+
         part def Subsystem specializes LogicalComponent {
             attribute systemBoundaryDescription : String;
             part subsystem : Subsystem[0..*];
             part component : LogicalComponent[0..*];
         }
-    
+
         // One logical component. `componentRole` selects what it is, `systemType`
         // what it is realized in; the role-specific attributes below are all
         // optional so a component carries only the ones its role needs. A channel
@@ -513,7 +513,7 @@ connection def ExhibitsMode :> MemoRelationship
             // external system
             attribute externalOwner : String;
         }
-    
+
         // Boundary features and contracts.
         port def LogicalPort specializes MemoPort;
         interface def LogicalInterface specializes MemoInterface {
@@ -522,10 +522,10 @@ connection def ExhibitsMode :> MemoRelationship
             end providerPort : LogicalPort;
             end consumerPort : ~LogicalPort;
         }
-        item def LogicalExchangeItem specializes MemoExchangeItem {
+        item def LogicalExchangeItem specializes MemoItem {
             attribute contentKind : FlowContentKind;
         }
-    
+
         // A typed logical connection between two components' ports.
         connection def LogicalConnector :> MemoRelationship {
             attribute contentKind : FlowContentKind;
@@ -548,7 +548,7 @@ connection def ExhibitsMode :> MemoRelationship
             ref sourcePort : LogicalPort[0..1];
             ref targetPort : LogicalPort[0..1];
         }
-    
+
         // States and modes of the logical solution (kept distinct from UI state
         // and from physical device configuration).
         part def LogicalState specializes ArchitectureElement {
@@ -563,7 +563,7 @@ connection def ExhibitsMode :> MemoRelationship
             attribute behaviorSummary : String;
             attribute executionSemantics : String;
         }
-    
+
         // Isolation, fault containment, and trust boundaries (§10).
         part def IsolationBoundary specializes ArchitectureElement {
             attribute boundaryKind : String;
@@ -572,7 +572,7 @@ connection def ExhibitsMode :> MemoRelationship
         part def FaultContainmentRegion specializes ArchitectureElement {
             attribute containmentRationale : String;
         }
-    
+
         // Claimed independence between channels (common-cause defense).
         connection def IndependentOf :> MemoRelationship {
             attribute independenceBasis : String;
@@ -606,5 +606,5 @@ connection def ExhibitsMode :> MemoRelationship
             :>> baseType = exhibitsModeLinks meta SysML::Usage;
         }
     }
-    
+
     ```

@@ -42,11 +42,11 @@
     ```sysml
     package memo_viewpoints_software_views_software_architecture_view {
         private import ScalarValues::*;
-    
+
                     private import memo_viewpoints_definitions::*;
                     private import memo_core_enumerations::*;
         private import memo_viewpoints_software_software_viewpoint::*;
-    
+
                     view softwareArchitectureView : MemoDiagramView {
                         expose memo_viewpoints_software_views_software_architecture_view::*;
                         attribute depth = 2;
@@ -69,5 +69,5 @@
         part :>> viewpointDefinition = softwareViewpoint;
                     }
     }
-    
+
     ```

@@ -209,38 +209,38 @@ connection def Governs :> MemoRelationship
     package memo_architecture_operational_context_stakeholders {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_operational_context_actors::*;
-    
+
         part def Stakeholder specializes MemoPart {
             attribute stakeholderCategory : String;
             attribute influence : String;
         }
-    
+
         part def Concern specializes MemoPart {
             attribute concernKind : ConcernKind;
             attribute question : String;
         }
-    
+
         part def ArchitectureDescription specializes DocumentedElement {
             attribute systemOfInterest : String;
             attribute version : String;
         }
-    
+
         part def ModelKind specializes MemoPart {
             attribute conventions : String;
             attribute notationReference : String;
         }
-    
+
         // 42010 correspondence: a rule that must hold between architecture
         // description elements (e.g. consistency between two views).
         part def CorrespondenceRule specializes MemoPart {
             attribute ruleExpression : String;
         }
-    
+
         connection def HasConcern :> MemoRelationship {
             end interestedStakeholder : Stakeholder :>> source;
             end stakeholderConcern : Concern :>> target;
@@ -289,5 +289,5 @@ connection def Governs :> MemoRelationship
             :>> baseType = governsLinks meta SysML::Usage;
         }
     }
-    
+
     ```

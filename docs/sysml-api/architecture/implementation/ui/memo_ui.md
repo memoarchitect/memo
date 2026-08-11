@@ -48,7 +48,7 @@
 | [`InteractionIntentKind`](#interactionintentkind) | `enum def` | The interaction intents a step or action can carry (§18). | — |
 | [`UserInterface`](#userinterface) | `part def` | User interface definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`InteractionElement`](#interactionelement) | `part def` | Interaction element definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`UIElement`](#uielement) | `part def` | Uielement definition specializing `SoftwareItem,`. | `SoftwareItem,` |
+| [`UIElement`](#uielement) | `part def` | Uielement definition specializing `SoftwareElement,`. | `SoftwareElement,` |
 | [`OperatorInterfaceFormKind`](#operatorinterfaceformkind) | `enum def` | Controlled values for operator interface form: `knob`, `dial`, `pushButton`, `toggleSwitch`, `rockerSwitch`, `lever`, `physicalSlider`, `keypad`, `footPedal`, `touchSurface`, `indicatorLamp`, `gauge`, `audibleIndicator`, `hapticIndicator`, `printedMarking`. | — |
 | [`OperatorInterfaceElement`](#operatorinterfaceelement) | `part def` | Operator interface element definition specializing `PhysicalComponent,`. | `PhysicalComponent,` |
 | [`ScreenCapture`](#screencapture) | `part def` | Screen capture definition specializing `MemoEvidence`. | `MemoEvidence` |
@@ -176,15 +176,15 @@ abstract part def InteractionElement specializes ArchitectureElement
 ## UIElement
 
 ```sysml
-part def UIElement specializes SoftwareItem, InteractionElement
+part def UIElement specializes SoftwareElement, InteractionElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Uielement definition specializing `SoftwareItem,`. |
+| Description | Uielement definition specializing `SoftwareElement,`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `SoftwareItem,` |
+| Specializes | `SoftwareElement,` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
@@ -472,7 +472,7 @@ connection def ControlImplementedBy :> MemoRelationship
     package memo_architecture_implementation_ui {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_assurance_safety_risk::*;   // RiskControlMeasure
@@ -484,7 +484,7 @@ connection def ControlImplementedBy :> MemoRelationship
         private import memo_architecture_implementation_software_structure::*;
         private import memo_architecture_implementation_hardware_common::*;
         private import memo_assurance_human_factors::*;
-    
+
         // Every concrete UI form, holding and held alike. A screen is not a
         // different KIND of thing from a button — it is a UIElement that happens to
         // contain others, exactly as an assembly is a part that contains parts.
@@ -518,7 +518,7 @@ connection def ControlImplementedBy :> MemoRelationship
             // slipping through as scenery.
             enum decoration;
         }
-    
+
         // ─── Screen geometry ─────────────────────────────────────────
         // Position and size of a UIElement inside its PARENT element, each value
         // normalized to 0..1 of the parent's box — not pixels. Two consequences
@@ -532,7 +532,7 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute width : Real;
             attribute height : Real;
         }
-    
+
         // How an element appears relative to its parent and siblings. It records
         // design intent a bare rectangle cannot: an element whose box escapes its
         // parent and covers its siblings is a defect if it is `inline` and correct
@@ -546,7 +546,7 @@ connection def ControlImplementedBy :> MemoRelationship
             enum scrolled;     // inside the parent, but beyond its viewport until scrolled
             enum conditional;  // rendered only while a stated condition holds
         }
-    
+
         // How the element's bounds were obtained. Automatic boundary detection
         // PROPOSES; a reviewer DISPOSES. In a regulated review the reader must be
         // able to see which boxes a human confirmed and which the tool guessed, so
@@ -557,7 +557,7 @@ connection def ControlImplementedBy :> MemoRelationship
             enum automaticConfirmed;
             enum imported;
         }
-    
+
         // The interaction intents a step or action can carry (§18).
         enum def InteractionIntentKind {
             enum userInput;
@@ -574,12 +574,12 @@ connection def ControlImplementedBy :> MemoRelationship
             enum correction;
             enum recovery;
         }
-    
+
         part def UserInterface specializes ArchitectureElement {
             attribute modality : String;
             attribute uiTechnology : String;
         }
-    
+
         // What a rendered control and a physical one genuinely share: a label, an
         // accessibility story, and — when they annunciate — an alarm character.
         // The base exists so that the §18 traceability relations can type against
@@ -594,8 +594,8 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute annunciationModality : String;
             attribute silenceable : Boolean;
         }
-    
-    
+
+
         // One UIElement — the single UI part type. The widget form — holding
         // (screen/panel/dialog), acting (button/knob/slider), presenting
         // (field/table/chart), physical (knob/switch/indicatorLamp/haptic), or
@@ -610,15 +610,15 @@ connection def ControlImplementedBy :> MemoRelationship
         // errors, and risk controls already trace to it. Screen layout adds four
         // numbers to that tree — it does not add a tree.
         //
-        // A UIElement IS a SOFTWARE ITEM (IEC 62304 §3.25) and specializes the
-        // SoftwareItem base, inheriting safetyClass and complexity, so the
+        // A UIElement IS a structural SOFTWARE ITEM (IEC 62304 §3.25) and
+        // specializes SoftwareElement, inheriting safetyClass and complexity, so the
         // interface is classified and decomposed like the software it is.
         //
-        // It specializes SoftwareItem and NOT SoftwareModule: the module view is
+        // It specializes SoftwareElement and NOT SoftwareModule: the module view is
         // CODE, and a screen is not a source module. Runtime processes are
         // SoftwareComponent, code is SoftwareModule, and the UI is a third view of
         // the same software — a sibling of those, not a kind of either.
-        part def UIElement specializes SoftwareItem, InteractionElement {
+        part def UIElement specializes SoftwareElement, InteractionElement {
             attribute formKind : UIElementFormKind;
             // ── screen layout (optional; set for elements that are laid out) ──
             // Bounds are relative to the parent element in the Composes tree; a
@@ -650,7 +650,7 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute unitsDisplayed : String;
             attribute informationContent : String;
         }
-    
+
         // ─── Physical operator interface ─────────────────────────────
         // The hardware the user actually touches and reads. IEC 60601-1 marks
         // "controls and instruments" and defines OPERATOR; this is that surface,
@@ -681,7 +681,7 @@ connection def ControlImplementedBy :> MemoRelationship
             enum hapticIndicator;
             enum printedMarking;
         }
-    
+
         part def OperatorInterfaceElement specializes PhysicalComponent, InteractionElement {
             attribute formKind : OperatorInterfaceFormKind;
             // actuation (optional; set for actuated forms)
@@ -693,7 +693,7 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute legendText : String;
             attribute luminanceOrVolume : String;
         }
-    
+
         // ─── Captured evidence ───────────────────────────────────────
         // One image of one screen. MemoEvidence, not ArchitectureElement: it
         // records what a specific build actually displayed at a specific time,
@@ -716,7 +716,7 @@ connection def ControlImplementedBy :> MemoRelationship
             // what the screen shows without changing the software.
             attribute captureContext : String;
         }
-    
+
         // UI state is presentation state — distinct from system/device state.
         part def UIState specializes ArchitectureElement {
             attribute displayedInformation : String;
@@ -726,24 +726,24 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute eventSource : String;
             attribute intent : InteractionIntentKind;
         }
-    
+
         action def UIAction specializes MemoAction {
             attribute intent : InteractionIntentKind;
             attribute feedbackProvided : String;
             attribute confirmationRequired : Boolean;
         }
-    
+
         // A reusable dialogue structure through the UI; a selected path through
         // it is an UIScenario.
         action def InteractionFlow specializes MemoAction {
             attribute entryPoint : String;
             attribute exitPoint : String;
         }
-    
+
         action def UIScenario specializes MemoScenario {
             ref parentFlow : InteractionFlow[0..1];
         }
-    
+
         connection def UITransition :> MemoRelationship {
             attribute triggeringEvent : String;
             attribute guardCondition : String;
@@ -760,7 +760,7 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute bindingExpression : String;
             attribute refreshPolicy : String;
             end boundElement : InteractionElement :>> source;
-            end dataSource : MemoExchangeItem :>> target;
+            end dataSource : MemoItem :>> target;
         }
         abstract connection dataBindingLinks : DataBinding[*];
         metadata def <dataBinding> DataBindingMetadata :> SemanticMetadata {
@@ -778,7 +778,7 @@ connection def ControlImplementedBy :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = presentsStateLinks meta SysML::Usage;
         }
-    
+
         // ── Screen layout relations ──────────────────────────────────
         // Which modelled screen an image is a rendering of.
         connection def CapturesScreen :> MemoRelationship {
@@ -791,7 +791,7 @@ connection def ControlImplementedBy :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = capturesScreenLinks meta SysML::Usage;
         }
-    
+
         // Activating this element opens another screen. This is NAVIGATION, not
         // containment — the opened screen is not laid out inside the element, so
         // it is not a Composes child and the geometric rules do not relate them.
@@ -809,7 +809,7 @@ connection def ControlImplementedBy :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = navigatesToLinks meta SysML::Usage;
         }
-    
+
         // ── §18 traceability ─────────────────────────────────────────
         connection def ElementTriggersAction :> MemoRelationship {
             end element : InteractionElement :>> source;
@@ -867,5 +867,5 @@ connection def ControlImplementedBy :> MemoRelationship
             :>> baseType = controlImplementedByLinks meta SysML::Usage;
         }
     }
-    
+
     ```

@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_clinical_clinical_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part clinicalViewpoint : Viewpoint {
             attribute :>> id = "VP-CLIN";
             attribute :>> name = "ClinicalViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

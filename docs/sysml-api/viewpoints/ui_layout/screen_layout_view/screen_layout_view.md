@@ -61,10 +61,10 @@ view def MemoScreenLayoutView :> MemoDiagramView
     // renderer now has something true to draw.
     package memo_viewpoints_ui_layout_views_screen_layout_view {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         view def MemoScreenLayoutView :> MemoDiagramView {
             attribute :>> viewKind = DiagramViewKind::geometry;
             attribute :>> shortDescription = "Screen capture overlaid with its UI element tree.";
@@ -76,5 +76,5 @@ view def MemoScreenLayoutView :> MemoDiagramView
             attribute :>> queryDescription = "One ScreenCapture, the screen UIElement it captures, and the UIElement tree composed beneath that screen.";
         }
     }
-    
+
     ```

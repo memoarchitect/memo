@@ -3,6 +3,11 @@ package memo_architecture_functional_behavior {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
+
+    // Typed functional execution step. Project-specific action definitions
+    // specialize this rather than bypassing MemoAction; ActivityFlow remains
+    // the composite route that sequences such steps.
+    abstract action def FunctionalAction specializes MemoAction;
     // State machines and their mode states are SysML v2 states (behaviours), so
     // they derive from the MemoState foundation, not the part-based
     // ArchitectureElement. Transitions stay part-based (below) to keep their

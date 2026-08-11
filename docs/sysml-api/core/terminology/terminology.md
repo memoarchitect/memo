@@ -89,7 +89,7 @@ attribute def ExternalReference
     // local catalog — never a single ambiguous `code : String`.
     package memo_core_terminology {
         private import ScalarValues::*;
-    
+
         // One coding of a concept in one code system. Mirrors the FHIR Coding
         // datatype (system/version/code/display) so FHIR mappings stay lossless.
         attribute def TerminologyCode {
@@ -99,7 +99,7 @@ attribute def ExternalReference
             attribute codeSystemVersion : String;
             attribute designation : String;
         }
-    
+
         // A device-identity carrier per IMDRF UDI guidance: the DI portion
         // belongs to the device definition, PI portions to the instance.
         attribute def UdiCarrier {
@@ -108,7 +108,7 @@ attribute def ExternalReference
             attribute carrierHRF : String;
             attribute carrierAIDC : String;
         }
-    
+
         // A reference into an external registry or document (regulatory listing,
         // standard clause, catalog page) with enough context to resolve it.
         attribute def ExternalReference {
@@ -118,5 +118,5 @@ attribute def ExternalReference
             attribute section : String;
         }
     }
-    
+
     ```

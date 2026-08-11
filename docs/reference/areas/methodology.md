@@ -60,8 +60,8 @@ it through `includedModule`.
 | `extensions/aadl/` | AADL (SAE AS5506) correspondence profile and runtime families |
 | `extensions/cloud/` | Networked services and managed data stores |
 | `extensions/container/` | OCI container images and runtimes |
-| `extensions/messaging/` | Topics, brokers, and publish/subscribe |
-| `extensions/ros/` | ROS 2 nodes, topics, QoS, and containerized deployment |
+| `extensions/messaging/` | Message items, directional ports, topic interfaces, brokers, and delivery semantics |
+| `extensions/ros/` | ROS 2 nodes, messages, topic/service/action interfaces, QoS, and containerized deployment |
 
 The rules an extension follows — relations specialize base relations, and every
 definition carries the extension's prefix — are in `extensions/README.md`.

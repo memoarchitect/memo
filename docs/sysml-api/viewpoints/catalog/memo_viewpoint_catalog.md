@@ -60,14 +60,14 @@ part def DiagramIntentMapping specializes MemoPart
     // sequence | grid | browser | geometry). No renderer semantics here.
     package memo_viewpoints_catalog {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_viewpoints_definitions::*;
-    
+
         // A cataloged viewpoint: the Viewpoint descriptor plus its default
         // resolution to a standard SysML v2 view kind.
-    
+
         // ── Content and context ─────────────────────────────────────
         part vpModelContent : Viewpoint {
             attribute :>> id = "VP-CAT-001"; attribute :>> name = "ModelContentViewpoint";
@@ -221,7 +221,7 @@ part def DiagramIntentMapping specializes MemoPart
             attribute :>> purpose = "Captured screens with their marked regions and the UI elements those regions present.";
             attribute :>> defaultViewKind = DiagramViewKind::geometry;
         }
-    
+
         // ── Compatibility mappings (§22): legacy diagram intents resolve to
         //     standard view kinds; C4 and AADL stay in examples/ mappings. ──
         part def DiagramIntentMapping specializes MemoPart {
@@ -250,5 +250,5 @@ part def DiagramIntentMapping specializes MemoPart
             attribute :>> legacyIntent = "hierarchy/content"; attribute :>> resolvesTo = DiagramViewKind::browser;
         }
     }
-    
+
     ```

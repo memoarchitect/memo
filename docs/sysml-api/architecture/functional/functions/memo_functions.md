@@ -239,13 +239,13 @@ connection def InvolvesFunction :> MemoRelationship
     package memo_architecture_functional_functions {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_scenarios::*;
-    
+
         abstract action def MemoFunction specializes MemoAction {
             attribute functionCategory : String;
             attribute actionKind : ActionKind;
@@ -254,17 +254,17 @@ connection def InvolvesFunction :> MemoRelationship
             attribute concernKind : ConcernKind;
             attribute criticality : CriticalityKind;
         }
-    
+
         // A responsibility of the system as a whole. Allocation is optional: a
         // system function that no single component owns is a normal intermediate
         // state of the functional chain, not a defect.
         action def SystemFunction specializes MemoFunction;
-    
+
         // A responsibility of exactly one component. `AllocatedTo` names that
         // component; CR-ONT-074 requires it. A component function that reaches no
         // component is a responsibility nobody has accepted.
         action def ComponentFunction specializes MemoFunction;
-    
+
         // Named traceable route between functions. Native `flow of` usages carry
         // the transported item; this element exists for the budgets and assurance
         // attributes below.
@@ -294,9 +294,9 @@ connection def InvolvesFunction :> MemoRelationship
             ref sourceFunction : MemoFunction[0..1];
             ref targetFunction : MemoFunction[0..1];
         }
-    
+
         // A system function enables operational work; it does not perform it.
-    
+
         // A reusable functional route through system responsibilities. Functional
         // flows are part of functional architecture, never logical structure.
         part def FunctionalFlow specializes ArchitectureElement {
@@ -308,9 +308,9 @@ connection def InvolvesFunction :> MemoRelationship
         action def FunctionalFlowStep specializes MemoAction {
             ref function : MemoFunction[0..1];
             ref exchange : FunctionalExchange[0..1];
-            ref item exchangedItem : MemoExchangeItem[0..1];
+            ref item exchangedItem : MemoItem[0..1];
         }
-    
+
         // The functional-layer scenario selects one functional route and realizes
         // an operative scenario. It is the "what the system does" path, not a
         // logical component interaction.
@@ -339,5 +339,5 @@ connection def InvolvesFunction :> MemoRelationship
         }
         // Compatibility spelling used by existing models.
     }
-    
+
     ```

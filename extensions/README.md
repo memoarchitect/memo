@@ -27,13 +27,14 @@ are `String[0..*]`, so a project combines any number of independent extensions
 by listing their modules in its own binding. That is *the* composition
 mechanism; nothing else is supported.
 
-## Rule 1 — an extension may declare relations, and they specialize base ones
+## Rule 1 — use native mechanisms first; extension relations specialize base ones
 
-An extension **may** declare `connection def`s, `allocation def`s, and flows.
-This is not a grudging allowance: a technology stack is usually a set of
-connector concepts, and forbidding them would make whole domains unmodelable.
-ROS publish and subscribe are relations between a node and a topic, not
-attributes on a component; an extension that cannot say so cannot describe ROS.
+An extension **may** declare `connection def`s and `allocation def`s when the
+domain adds a relationship SysML does not already express. It must first use
+native ports, interfaces, flows, messages, allocations, and dependencies. ROS
+is the worked example: publisher/subscriber roles are directional ports, the
+message is an item definition, the named topic is an item usage, and native
+interfaces/flows connect them. No ROS publish/subscribe relation exists.
 The OMG's own `Domain Libraries/Requirement Derivation` ships a `connection def`
 next to a `metadata def :> SemanticMetadata` — domain relations are the
 sanctioned extension mechanism in SysML v2 too.
@@ -43,8 +44,8 @@ The constraint is on where they root:
 > **A relation declared by an extension specializes a base MEMO relation. It
 > never roots independently.**
 
-`connection def RosPublishesTo :> ComponentConnects` is correct;
-`connection def RosPublishesTo { … }` is not. Rooting independently would give
+For a genuinely new relation, `connection def DomainRelation :> MemoLink` is
+correct; `connection def DomainRelation { … }` is not. Rooting independently would give
 the relation no identification core, no place in the relationship registry, and
 no ends the base can reason about — a conforming tool would read it as opaque,
 which is the same defect §2 of the plan names in the base itself. Give each one
@@ -86,7 +87,7 @@ Enumeration literals are not definitions and are not prefixed —
 | `clinical/` | `Clinical` | Clinical-procedure data on the base operational workflow. |
 | `aadl/` | `Aadl` | The AADL (SAE AS5506) correspondence profile: MEMO names mapped to AADL categories, plus the process / thread / virtual-processor component families. |
 | `cloud/` | `Cloud` | Networked services and managed data stores. |
-| `ros/` | `Ros` | ROS 2: nodes, topics, QoS, publish/subscribe, and containerized deployment. |
+| `ros/` | `Ros` | ROS 2: nodes, messages, directional ports, topic/service/action interfaces, QoS, and containerized deployment. |
 
 `aadl`, `cloud`, and `ros` between them are where the twelve runtime-technology
 attributes that used to sit on `SoftwareComponent` now live — see

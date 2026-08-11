@@ -186,11 +186,11 @@ connection def IncludedIn :> MemoRelationship
     package memo_viewpoints_definitions {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
-    
+
         part def Viewpoint specializes DocumentedElement {
             attribute purpose : String;
             attribute audience : AudienceKind[*];
@@ -214,14 +214,14 @@ connection def IncludedIn :> MemoRelationship
             // default diagram kind for a catalog viewpoint (optional)
             attribute defaultViewKind : DiagramViewKind[0..1];
         }
-    
+
         part def ViewRule specializes MemoPart {
             attribute elementTypeName : String;
             attribute relationTypeName : String;
             attribute strength : RuleStrengthKind;
             attribute rationaleText : String;
         }
-    
+
         part def ViewSelectionQuery specializes MemoPart {
             attribute includeElementKinds : String[*];
             attribute includeElementIds : String[*];
@@ -232,7 +232,7 @@ connection def IncludedIn :> MemoRelationship
             attribute selectionExpression : String;
             attribute rationaleText : String;
         }
-    
+
         view def MemoView :> Views::View, DocumentedElement {
             attribute outputKind : ViewOutputKind[*];
             attribute presentationKind : PresentationKind[*];
@@ -250,24 +250,24 @@ connection def IncludedIn :> MemoRelationship
             ref exposesRelationship : MemoRelationship[*];
             part selectionQuery : ViewSelectionQuery[*];
         }
-    
+
         view def MemoDiagramView :> MemoView {
             attribute viewKind : DiagramViewKind;
             attribute diagramType : String;
             attribute layoutHint : String;
             attribute styleHint : String;
         }
-    
+
         view def MemoDocumentBackedView :> MemoView {
             attribute version : String;
             attribute generationRule : String;
             attribute marketScope : String;
         }
-    
+
         view def MemoDocumentView :> MemoDocumentBackedView {
             attribute viewKind : DocumentViewKind;
         }
-    
+
         part def ViewInclusionRule specializes MemoPart {
             attribute includeElementKinds : String[*];
             attribute includeElementIds : String[*];
@@ -277,7 +277,7 @@ connection def IncludedIn :> MemoRelationship
             attribute selectionExpression : String;
             attribute rationaleText : String;
         }
-    
+
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
@@ -292,5 +292,5 @@ connection def IncludedIn :> MemoRelationship
             :>> baseType = includedInLinks meta SysML::Usage;
         }
     }
-    
+
     ```

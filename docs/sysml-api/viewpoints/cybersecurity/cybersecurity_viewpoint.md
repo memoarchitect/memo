@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_cybersecurity_cybersecurity_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part cybersecurityViewpoint : Viewpoint {
             attribute :>> id = "VP-CYB";
             attribute :>> name = "CybersecurityViewpoint";
@@ -67,5 +67,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

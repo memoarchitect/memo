@@ -197,7 +197,7 @@ connection def OccursDuring :> MemoRelationship
     package memo_architecture_operational_scenarios {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
@@ -206,14 +206,14 @@ connection def OccursDuring :> MemoRelationship
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_workflows::*;
         private import memo_architecture_operational_use_cases::*;
-    
+
         enum def ScenarioVariantKind {
             enum nominal;
             enum alternate;
             enum exception;
             enum recovery;
         }
-    
+
         enum def OperationalConditionKind {
             enum normal;
             enum degraded;
@@ -225,7 +225,7 @@ connection def OccursDuring :> MemoRelationship
             enum misuse;
             enum foreseeableMisuse;
         }
-    
+
         // `memoAnalysis` and `memoVerification` keep the regulated terms `analysis`
         // and `verification` intact but prefixed, because both are SysML v2 reserved
         // words and cannot be bare enum names. `validation` is not reserved.
@@ -237,7 +237,7 @@ connection def OccursDuring :> MemoRelationship
             enum risk;
             enum cybersecurity;
         }
-    
+
         // Shared scenario foundation. Specializations exist only where structure
         // or invariants differ (OperativeScenario here; FunctionalScenario in
         // memo_functions; UIScenario in memo_architecture_implementation_ui;
@@ -252,7 +252,7 @@ connection def OccursDuring :> MemoRelationship
             attribute expectedResult : String;
             attribute postCondition : String;
             attribute pathSummary : String;
-    
+
             ref involvedActors : Actor[0..*];
             ref useContext : UseContext[0..1];
             // Alternate/exception/recovery scenarios reference their base and the
@@ -260,7 +260,7 @@ connection def OccursDuring :> MemoRelationship
             ref baseScenario : MemoScenario[0..1];
             attribute variationPoint : String;
         }
-    
+
         // The operational-layer scenario: a path through an OperationalWorkflow in
         // a use context. It is realized down the V by a FunctionalScenario (the
         // function sequence) and a UIScenario (the interaction sequence), each owned
@@ -274,7 +274,7 @@ connection def OccursDuring :> MemoRelationship
             // selected path. Do not reuse one generic activity for every scenario.
             ref activities : OperationalActivity[0..*];
         }
-    
+
         // An actual or hypothetical execution of a scenario (usability test run,
         // postmarket incident reconstruction, simulated-use session).
         part def ScenarioOccurrence specializes MemoPart {
@@ -283,7 +283,7 @@ connection def OccursDuring :> MemoRelationship
             attribute outcomeSummary : String;
             ref executedScenario : MemoScenario[1];
         }
-    
+
         // Ordered selection of a workflow step into a scenario path.
         // Selects unifies SelectsStep / SelectsFlow (a scenario selects its path
         // element), keyed by selectsKind.
@@ -317,5 +317,5 @@ connection def OccursDuring :> MemoRelationship
             :>> baseType = occursDuringLinks meta SysML::Usage;
         }
     }
-    
+
     ```

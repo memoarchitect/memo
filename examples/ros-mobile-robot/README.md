@@ -21,15 +21,20 @@ beside the ontology. This project is one of their consumers.
    set `runtimeKind` individually — two composed into one container process,
    the safety monitor in its own — because that is a design decision the
    extension type must not make for the modeller.
-2. **Publish and subscribe are relations, not attributes.** This is the case
-   that settles whether an extension may declare `connection def`s. It may;
-   see [`extensions/README.md`](../../extensions/README.md) rule 1.
+2. **Publish and subscribe use native SysML.** A ROS message is an item
+   definition, a named topic is its item usage, nodes own `out` publisher and
+   `in` subscriber ports, and native interfaces/flows connect those ports. The
+   extension declares no publish/subscribe relation.
 3. **Deployment reuses the base relations unchanged.** `BuildsInto`,
    `DeploysTo` and `ProvidesEnvironment` carry the whole chain from source
    module to container image to compute unit to ROS runtime, with no
    ROS-specific relation anywhere in it. That is the evidence the base is
    factored correctly.
-4. **QoS is a typed profile, not a property bag.** The topics carry an offered
-   `RosQosProfile` and the subscriptions a requested one, so the incompatibility
+4. **QoS is a typed profile, not a property bag.** Publisher ports carry an
+   offered `RosQosProfile` and subscriber ports a requested one, so the incompatibility
    that silently delivers nothing at runtime is two adjacent values in the
    model. This is why the `PropertySet` stub was deleted rather than made real.
+5. **Services and actions are different native interface contracts.** A service
+   has one request and one correlated response. An action has goal,
+   acceptance, feedback, cancellation, result, and status features plus a
+   native execution-state family.

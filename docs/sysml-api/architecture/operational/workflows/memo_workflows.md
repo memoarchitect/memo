@@ -243,14 +243,14 @@ connection def Transforms :> MemoRelationship
     package memo_architecture_operational_workflows {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_operational_context_actors::*;
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_use_cases::*;
-    
+
         // As-is vs. to-be vs. contingency is a typed dimension of the workflow,
         // not a name suffix.
         enum def WorkflowStateKind {
@@ -259,14 +259,14 @@ connection def Transforms :> MemoRelationship
             enum contingency;
             enum deprecated;
         }
-    
+
         enum def StepTransformationKind {
             enum preserves;
             enum automates;
             enum augments;
             enum eliminates;
         }
-    
+
         action def OperationalWorkflow specializes MemoAction {
             attribute workflowState : WorkflowStateKind;
             attribute entryCondition : String;
@@ -276,7 +276,7 @@ connection def Transforms :> MemoRelationship
             ref involvedActors : Actor[0..*];
             attribute environmentSummary : String;
         }
-    
+
         // A step in a workflow wraps an operational activity or user task by
         // reference — the same activity may appear in several workflows.
         action def WorkflowStep specializes MemoAction {
@@ -286,7 +286,7 @@ connection def Transforms :> MemoRelationship
             ref performedTask : UserTask[0..1];
             ref responsibleRole : Actor[0..1];
         }
-    
+
         // decision / fork / join / handoff.
         enum def ControlNodeKind {
             enum decision;
@@ -294,7 +294,7 @@ connection def Transforms :> MemoRelationship
             enum 'join';
             enum handoff;
         }
-    
+
         // A workflow control node. The role is given by controlKind; the
         // kind-specific fields below are set only for the relevant controlKind.
         // handoff = transfer of responsibility between roles (shift change, room-to-lab).
@@ -308,7 +308,7 @@ connection def Transforms :> MemoRelationship
             ref fromRole : Actor[0..1];
             ref toRole : Actor[0..1];
         }
-    
+
         // Resources a workflow requires: information, materials, or equipment by
         // reference.
         part def WorkflowResource specializes MemoPart {
@@ -316,7 +316,7 @@ connection def Transforms :> MemoRelationship
             attribute quantity : String;
             ref resolvedProduct : MemoPart[0..1];
         }
-    
+
         // ── Workflow-level relationships ─────────────────────────────
         // Supports unifies SupportsUseCase / SupportsTask / ContributesToCapability
         // (an element supports a goal/task/capability), keyed by supportKind.
@@ -349,7 +349,7 @@ connection def Transforms :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = requiresResourceLinks meta SysML::Usage;
         }
-    
+
         // ── Workflow transformation (as-is → to-be) ──────────────────
         // Transforms unifies TransformsStep / TransformsWorkflow / ReplacesWorkflow
         // (tailoring of workflow structure: as-is → to-be), keyed by transformKind.
@@ -373,5 +373,5 @@ connection def Transforms :> MemoRelationship
         }
         // The device or system whose introduction enables a workflow.
     }
-    
+
     ```

@@ -55,10 +55,10 @@ view def MemoCybersecurityAssessmentView :> MemoDocumentView
     ```sysml
     package memo_viewpoints_cybersecurity_views_cybersecurity_assessment_view {
         private import ScalarValues::*;
-    
+
                     private import memo_viewpoints_definitions::*;
                     private import memo_core_enumerations::*;
-    
+
                     view def MemoCybersecurityAssessmentView :> MemoDocumentView {
         attribute :>> viewKind = DocumentViewKind::cybersecurityAssessment;
         attribute :>> generationRule = "Include cyber risks, exploitability, mitigations, security requirements, verification, residual risk, and postmarket evidence references.";
@@ -66,5 +66,5 @@ view def MemoCybersecurityAssessmentView :> MemoDocumentView
         attribute :>> presentationKind = (PresentationKind::riskTable);
                     }
     }
-    
+
     ```
