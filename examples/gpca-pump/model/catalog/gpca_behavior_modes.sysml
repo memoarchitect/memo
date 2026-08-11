@@ -111,6 +111,39 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9";
     }
 
+    // ── Mode-conditioned configurations ─────────────────────────
+    // AADL modes and ARCADIA configurations select the live arrangement, not
+    // merely a label on a state.  The variation point is the single choice;
+    // each variant binds that choice to the corresponding GPCA therapy mode.
+    // The individual configurations remain ordinary model elements, so their
+    // active mode is navigable as well as visible in the choice-point edge.
+    part basalConfiguration : ModeConfiguration {
+        attribute :>> id = "CFG-001";
+        attribute :>> name = "BasalTherapyConfiguration";
+        ref :>> activeMode = modeBASAL;
+    }
+    part squareBolusConfiguration : ModeConfiguration {
+        attribute :>> id = "CFG-002";
+        attribute :>> name = "SquareBolusConfiguration";
+        ref :>> activeMode = modeSQUARE;
+    }
+    part patientBolusConfiguration : ModeConfiguration {
+        attribute :>> id = "CFG-003";
+        attribute :>> name = "PatientBolusConfiguration";
+        ref :>> activeMode = modePBOLUS;
+    }
+    part pausedConfiguration : ModeConfiguration {
+        attribute :>> id = "CFG-004";
+        attribute :>> name = "PausedKvoConfiguration";
+        ref :>> activeMode = modePAUSED;
+    }
+    variation part activeTherapyConfiguration : ModeConfiguration[1] {
+        variant basalConfiguration;
+        variant squareBolusConfiguration;
+        variant patientBolusConfiguration;
+        variant pausedConfiguration;
+    }
+
     // ── Mode transitions (CriSys §4.1, 1:1 with source REQs) ────
     transition trSystemStart : Transition first modeOFF then modeIDLE {
         attribute :>> id = "TR-001"; attribute :>> name = "SystemStartToIdle";
