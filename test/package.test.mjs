@@ -63,8 +63,9 @@ test('manifest declares the four logical packages and content-owned init values'
     'infusion-pump: ./templates/infusion-pump',
     'gpca: ./examples/gpca-pump',
     'standard-sysml-diagrams: ./examples/sysml-diagram-samples',
-    'extension-template: ./examples/extensions/template',
-    'clinical-extension: ./examples/extensions/clinical',
+    'ros-mobile-robot: ./examples/ros-mobile-robot',
+    'clinical: ./extensions/clinical',
+    'ros: ./extensions/ros',
   ]) assert.match(manifest, new RegExp(expected.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
 });
 
@@ -151,9 +152,9 @@ test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
   const examples = readdirSync(join(root, 'examples')).filter((entry) => !entry.startsWith('.')).sort();
   const expected = [
     'connected-patient-monitor', 'embedded-infusion-pump',
-    'extensions', 'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
+    'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
     'manual-surgical-instrument', 'multidimensional-layers', 'nested-architecture-dsm', 'reusable-instrument',
-    'software-only-medical-device', 'surgical-closure-workflow',
+    'ros-mobile-robot', 'software-only-medical-device', 'surgical-closure-workflow',
     'surgical-robot', 'sysml-diagram-samples', 'temperature-alarm', 'ui-screen-regions',
   ];
   assert.deepEqual(examples, expected);
@@ -163,7 +164,7 @@ test('focused MEMO examples separate their parent package, catalog, and viewpoin
   const focused = [
     'connected-patient-monitor', 'embedded-infusion-pump',
     'functional-logical-physical', 'ivd-laboratory-system', 'manual-surgical-instrument',
-    'multidimensional-layers', 'reusable-instrument',
+    'multidimensional-layers', 'reusable-instrument', 'ros-mobile-robot',
     'software-only-medical-device', 'surgical-closure-workflow', 'surgical-robot',
     'temperature-alarm', 'ui-screen-regions',
   ];
@@ -347,41 +348,173 @@ test('the memo root exports the public domain packages', () => {
   assert.doesNotMatch(library, /memo_(?:clinical_procedures|medical_products_)/);
 });
 
-test('example extensions use methodology inclusion and remain outside src', () => {
-  const extensions = [['clinical', 'memo_extension_clinical']];
-  for (const [name, includedModule] of extensions) {
-    const descriptor = read('examples', 'extensions', name, 'memo.package.yaml');
-    assert.match(descriptor, /^name: ["']@memoarchitect\//m);
-    assert.doesNotMatch(descriptor, /^(?:type|extends|usage|ontologies|methodology|modules):/m);
-    const sources = walkSysml(join('examples', 'extensions', name));
-    assert.ok(sources.length > 1, `${name} needs extension and methodology sources`);
-    const content = sources.map((file) => read(file)).join('\n');
-    assert.match(content, new RegExp(`includedModule = "${includedModule}"`));
+// ─── Extensions ──────────────────────────────────────────────────────────────
+//
+// An extension is a way to MODEL, not a sample: a reusable ontology package
+// that specializes the base and is selected by a methodology or a project
+// binding. So `extensions/` sits beside `src/`, and `examples/` holds projects
+// that USE an extension. The rules the tests below enforce are written down in
+// extensions/README.md; each test enforces the stated rule rather than an
+// accident of the current content.
+
+/** `clinical` -> `Clinical`, `ros` -> `Ros`, `cloud` -> `Cloud`. */
+const extensionPrefix = (dir) => dir.split(/[-_]/)
+  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  .join('');
+
+const extensionDirs = () => readdirSync(join(root, 'extensions'), { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && entry.name !== 'LICENSES')
+  .map((entry) => entry.name).sort();
+
+/**
+ * Comments are prose about the model, not the model. Stripping them is what
+ * lets a comment explain `attribute def RosQosProfile` without the collision
+ * check reading it as a declaration — which it did, on the first run.
+ */
+const stripComments = (content) => content
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/\/\/[^\n]*/g, '');
+
+const DEFINITION_RE = new RegExp(
+  '\\b(?:attribute|part|item|action|requirement|use case|port|interface|state|verification'
+  + '|connection|allocation|enum|constraint|metadata|view|viewpoint|occurrence|flow)'
+  // A metadata def may introduce a short name first: `metadata def <derive> X`.
+  + ' def\\s+(?:<[^>]+>\\s+)?([A-Za-z_]\\w*)', 'g');
+
+const definitionNames = (content) => new Set(
+  Array.from(stripComments(content).matchAll(DEFINITION_RE), (match) => match[1]));
+
+/** name -> first supertype, for every relation definition in `content`. */
+const relationSupertypes = (content) => new Map(Array.from(stripComments(content).matchAll(
+  /\b(?:connection|allocation) def\s+([A-Za-z_]\w*)\s*(?::>|specializes)\s*([A-Za-z_][\w:]*)/g,
+), (match) => [match[1], match[2].split('::').pop()]));
+
+test('extensions are ontology, beside src — not examples', () => {
+  assert.equal(existsSync(join(root, 'examples', 'extensions')), false,
+    'extensions moved out of examples/; an extension is a modelling mechanism, not a sample');
+  assert.ok(extensionDirs().includes('template'), 'the extension skeleton ships');
+
+  // The manifest lists them in their own section, not among the examples.
+  const manifest = read('memo.manifest.yaml');
+  assert.match(manifest, /^extensions:$/m);
+  for (const dir of extensionDirs()) {
+    assert.match(manifest, new RegExp(`\\n  ${dir}: \\./extensions/${dir}$`, 'm'),
+      `memo.manifest.yaml must list extensions/${dir}`);
   }
-  assert.equal(existsSync(join(root, 'examples', 'extensions', 'template', 'memo.package.yaml')), true);
+  assert.doesNotMatch(manifest, /examples\/extensions/);
+
+  // Extensions ship, build, and resolve exactly as the base does.
+  assert.ok(JSON.parse(read('package.json')).files.includes('extensions/'));
   const buildScript = read('scripts', 'build-kpar.sh');
+  assert.match(buildScript, /PROJECTS=\("\." "src\/methodology" "extensions"\)/);
+  assert.match(buildScript, /syside check src extensions/);
   assert.match(buildScript, /source_root = os\.path\.join\(root, 'src'\) if project == '\.' else root/);
 });
 
-test('example extensions specialize the base ontology without duplicate definitions', () => {
-  const definitionNames = (content) => new Set(Array.from(content.matchAll(
-    /\b(?:attribute|part|item|action|requirement|use case|port|interface|state|verification|connection|enum|constraint) def\s+([A-Za-z_]\w*)/g,
-  ), (match) => match[1]));
-  const base = definitionNames(walkSysml('src').map((file) => read(file)).join('\n'));
-  const extensionFiles = walkSysml(join('examples', 'extensions'));
-  const extensionContent = extensionFiles.map((file) => read(file)).join('\n');
-  const extensions = definitionNames(extensionContent);
-  const duplicates = [...extensions].filter((name) => base.has(name));
-  assert.deepEqual(duplicates, [], `extension definitions duplicate base definitions: ${duplicates.join(', ')}`);
-
-  const clinical = read(
-    'examples', 'extensions', 'clinical', 'src', 'procedures', 'memo_clinical_procedures.sysml',
-  );
+test('every extension carries identity-only descriptor, methodology, and its own module', () => {
+  for (const dir of extensionDirs()) {
+    const descriptor = read('extensions', dir, 'memo.package.yaml');
+    assert.match(descriptor, dir === 'template' ? /^name:/m : /^name: ["']@memoarchitect\//m);
+    assert.doesNotMatch(descriptor, /^(?:type|extends|usage|ontologies|methodology|modules):/m);
+    const sources = walkSysml(join('extensions', dir));
+    assert.ok(sources.length >= 1, `${dir} needs SysML source`);
+    const content = sources.map((file) => read(file)).join('\n');
+    // Composition is by module list at the binding, so every extension states
+    // its own module and its single base methodology.
+    assert.match(content, /includedModule = /, `${dir} must declare its included module`);
+    assert.doesNotMatch(stripComments(content), /baseMethodName/,
+      `${dir} uses the pre-flip baseMethodName spelling, which resolves to nothing`);
+  }
+  // The clinical extension is the worked example of specializing the base.
+  const clinical = read('extensions', 'clinical', 'src', 'procedures', 'memo_clinical_procedures.sysml');
   assert.match(clinical, /action def ClinicalProcedureWorkflow specializes OperationalWorkflow/);
   assert.doesNotMatch(clinical, /\b(?:ClinicalProcedure|ClinicalTechnique|ProcedureVariant|InstrumentSet)\b/);
-  assert.doesNotMatch(clinical, /\bconnection def\b/);
+  assert.equal(existsSync(join(root, 'extensions', 'medical-products')), false);
+});
 
-  assert.equal(existsSync(join(root, 'examples', 'extensions', 'medical-products')), false);
+test('extension definitions collide with neither the base nor each other (D2)', () => {
+  // extensions/README.md rule 2. Definition names share one flat namespace with
+  // the base AND with every other extension, so the prefix is what lets two
+  // independent extensions be included in one project.
+  const base = definitionNames(walkSysml('src').map((file) => read(file)).join('\n'));
+  const owners = new Map();
+  for (const dir of extensionDirs()) {
+    const prefix = extensionPrefix(dir);
+    const declared = definitionNames(walkSysml(join('extensions', dir)).map((f) => read(f)).join('\n'));
+    for (const name of declared) {
+      assert.ok(!base.has(name), `extensions/${dir} redeclares the base definition ${name}`);
+      const other = owners.get(name);
+      assert.ok(other === undefined,
+        `extensions/${dir} and extensions/${other} both declare ${name}`);
+      owners.set(name, dir);
+      assert.ok(name.startsWith(prefix),
+        `extensions/${dir} declares ${name}, which does not carry the ${prefix} prefix`);
+    }
+  }
+});
+
+test('a relation declared by an extension specializes a base relation (D1)', () => {
+  // extensions/README.md rule 1. An extension MAY declare relations — publish
+  // and subscribe are connector concepts, and a technology stack that cannot
+  // say so cannot be modelled. What it may not do is root one independently:
+  // that would leave it without the identification core, without a place in
+  // the relationship registry, and opaque to a conforming tool.
+  //
+  // The guard this replaces was `doesNotMatch(clinical, /connection def/)` — a
+  // regression check on one example that had hardened into an apparent rule.
+  const baseRelations = relationSupertypes(walkSysml('src').map((file) => read(file)).join('\n'));
+  const extensionRelations = relationSupertypes(
+    walkSysml('extensions').map((file) => read(file)).join('\n'));
+  assert.ok(extensionRelations.size > 0, 'at least one extension exercises the rule');
+
+  for (const [name, supertype] of extensionRelations) {
+    // Walk the specialization chain; it must terminate in a base relation.
+    const seen = new Set([name]);
+    let current = supertype;
+    while (current !== undefined && extensionRelations.has(current) && !seen.has(current)) {
+      seen.add(current);
+      current = extensionRelations.get(current);
+    }
+    assert.ok(current !== undefined && baseRelations.has(current),
+      `${name} roots on ${current ?? 'nothing'}, which is not a base relation`);
+  }
+});
+
+test('the base declares no attribute conditional on an enum value (D3 regression)', () => {
+  // Plan §11.2. The regression that slowly rebuilds a god object is an
+  // optional attribute documented "set only when <enum> = <value>": a subtype
+  // family in disguise, and usually a technology the base has no business
+  // asserting. `SoftwareComponent`'s twelve left in session 4.
+  //
+  // KNOWN AND RECORDED, not a licence to add more:
+  //   SoftwareModule — 13 module-kind-conditional attributes, incl. the SOUP
+  //   block. Unlike the runtime twelve these are NOT extension material: SOUP
+  //   is IEC 62304 §8 and applies to every regulated project, so the fix is a
+  //   subtype in the base, not an extension. Recorded here so the count cannot
+  //   grow while that change waits.
+  const EXEMPT = new Map([['SoftwareModule', 13]]);
+  const marker = /^\s*\/\/.*\b(?:set only (?:for|when)|-specific detail)\b/i;
+  const offenders = new Map();
+  for (const file of walkSysml('src')) {
+    const lines = read(file).split('\n');
+    let owner = null;
+    let conditional = false;
+    for (const line of lines) {
+      const definition = line.match(/\b(?:part|item|action|port|connection|allocation) def\s+([A-Za-z_]\w*)/);
+      if (definition) { owner = definition[1]; conditional = false; }
+      if (marker.test(line)) { conditional = true; continue; }
+      if (/^\s*}/.test(line)) conditional = false;
+      if (conditional && /^\s*attribute\s+\w+\s*:/.test(line) && owner) {
+        offenders.set(owner, (offenders.get(owner) ?? 0) + 1);
+      }
+    }
+  }
+  assert.equal(offenders.has('SoftwareComponent'), false,
+    'SoftwareComponent carries runtime-kind-conditional attributes again');
+  for (const [owner, count] of offenders) {
+    assert.ok(EXEMPT.has(owner), `${owner} declares ${count} enum-conditional attribute(s); move them to an extension`);
+    assert.ok(count <= EXEMPT.get(owner), `${owner} grew from ${EXEMPT.get(owner)} to ${count} conditional attributes`);
+  }
 });
 
 test('reference prose avoids inventory counts and removed extension vocabulary', () => {

@@ -55,8 +55,16 @@ it through `includedModule`.
 
 | Location | Purpose |
 | --- | --- |
-| `examples/extensions/template/` | Extension package template |
-| `examples/extensions/clinical/` | Clinical-procedure extension example |
+| `extensions/template/` | Extension package skeleton |
+| `extensions/clinical/` | Clinical-procedure vocabulary |
+| `extensions/aadl/` | AADL (SAE AS5506) correspondence profile and runtime families |
+| `extensions/cloud/` | Networked services and managed data stores |
+| `extensions/container/` | OCI container images and runtimes |
+| `extensions/messaging/` | Topics, brokers, and publish/subscribe |
+| `extensions/ros/` | ROS 2 nodes, topics, QoS, and containerized deployment |
+
+The rules an extension follows — relations specialize base relations, and every
+definition carries the extension's prefix — are in `extensions/README.md`.
 
 ## SysML source
 

@@ -36,6 +36,7 @@
 | [`EarsPatternKind`](#earspatternkind) | `enum def` | Controlled values for ears pattern: `ubiquitous`, `eventDriven`, `stateDriven`, `optionalFeature`, `unwantedBehavior`, `complex`. | — |
 | [`ObligationKind`](#obligationkind) | `enum def` | Controlled values for obligation: `shall`, `should`, `will`. | — |
 | [`InterfaceKind`](#interfacekind) | `enum def` | Controlled values for interface: `data`, `control`, `analogSignal`, `digitalSignal`, `power`, `network`, `api`, `userInteraction`, `notification`, `logging`, `mechanical`, `fluidic`. | — |
+| [`PortCategoryKind`](#portcategorykind) | `enum def` | Controlled values for port category: `data`, `eventData`. | — |
 | [`FlowKind`](#flowkind) | `enum def` | Controlled values for flow: `information`, `command`, `status`, `telemetry`, `alarm`, `configuration`, `measurement`, `audit`, `power`. | — |
 | [`DirectionKind`](#directionkind) | `enum def` | Direction of a flow across a boundary. Track A2 removed this from PORTS: a port usage says `in` / `out` / `inout` natively, which is the language's own spelling and the only one a conforming tool reads.… | — |
 | [`CriticalityKind`](#criticalitykind) | `enum def` | Controlled values for criticality: `low`, `medium`, `high`, `catastrophic`. | — |
@@ -197,6 +198,21 @@ enum def InterfaceKind
 | Property | Value |
 | --- | --- |
 | Description | Controlled values for interface: `data`, `control`, `analogSignal`, `digitalSignal`, `power`, `network`, `api`, `userInteraction`, `notification`, `logging`, `mechanical`, `fluidic`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## PortCategoryKind
+
+```sysml
+enum def PortCategoryKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for port category: `data`, `eventData`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1184,6 +1200,31 @@ enum def CommentStatusKind
             enum logging;
             enum mechanical;
             enum fluidic;
+        }
+        // AADL (SAE AS5506) port category. Distinct from InterfaceKind, which says
+        // WHAT crosses a port; this says HOW it is delivered, and the difference is
+        // safety-relevant: when a deadline is missed a `data` port overwrites the
+        // last sample and loses it, while an `event` or `eventData` port queues,
+        // and a queue that outgrows its bound is a different failure with a
+        // different mitigation. MEMO carried the distinction on items and not on
+        // ports, so neither failure could be argued about at the boundary where it
+        // happens.
+        enum def PortCategoryKind {
+            doc /* Sampled. The reader sees the most recent value; a missed
+                 * deadline drops a sample and never blocks. */
+            enum data;
+            doc /* Queued signal with no payload. A missed deadline grows the
+                 * queue; overflow is the failure to bound.
+                 *
+                 * Quoted because `event` is reserved in SysML v2 — the same
+                 * treatment GovernKind's `'use'` already gets. AADL's word is kept
+                 * rather than paraphrased to `queued`: it is the term the standard
+                 * and every AADL tool use, and a renamed one would not survive a
+                 * round trip. */
+            enum 'event';
+            doc /* Queued signal carrying a payload — the queueing semantics of
+                 * `event` with the value of `data`. */
+            enum eventData;
         }
         enum def FlowKind {
             enum information;

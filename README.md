@@ -82,7 +82,9 @@ src/                         all reusable .sysml content (namespace = directory)
   rules/                         closure/ coverage/ crosslayer/ lifecycle/ quantitative/ (native constraint defs)
   artifacts/                     artifact kinds (memo::artifacts)
   methodology/                   default methodology
-examples/extensions/             optional domain modules selected by methodology
+extensions/                      reusable ontology packages that specialize the base
+                                 (aadl/ clinical/ cloud/ container/ messaging/ ros/ template/),
+                                 selected by a methodology or a project binding
 ```
 
 ## Build / verify

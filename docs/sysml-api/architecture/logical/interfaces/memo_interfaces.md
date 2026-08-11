@@ -299,6 +299,11 @@ port def SoftwarePort specializes MemoPort
         // `portKind` is duplicated on both ports instead of hoisted onto a base.
         port def SoftwarePort specializes MemoPort {
             attribute portKind : InterfaceKind;
+            // AADL port category (plan C2). Sampled vs. queued delivery decides
+            // whether a missed deadline drops a sample or grows a queue, which the
+            // timing analysis and the safety case both need and neither could ask
+            // the model for. `portKind` says what crosses; this says how.
+            attribute portCategory : PortCategoryKind;
             attribute dataTypeName : String;
         }
     }
