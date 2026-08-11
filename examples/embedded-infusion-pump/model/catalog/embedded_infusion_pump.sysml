@@ -34,6 +34,7 @@ package memo_examples_embedded_infusion_pump {
         attribute :>> periodMs = 10.0;
         attribute :>> deadlineMs = 10.0;
         attribute :>> wcetMs = 2.5;
+        attribute :>> memoryBudget = 96.0;
         attribute :>> schedulingPolicy = SchedulingPolicyKind::rateMonotonic;
         attribute :>> restartPolicy = "watchdog reset to safe state (pump stopped)";
         attribute :>> faultContainment = "MPU-protected region; safe-state on overrun";

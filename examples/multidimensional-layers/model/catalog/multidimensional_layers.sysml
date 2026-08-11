@@ -37,6 +37,7 @@ package memo_examples_multidimensional_layers {
         attribute :>> periodMs = 50.0;
         attribute :>> deadlineMs = 50.0;
         attribute :>> wcetMs = 8.0;
+        attribute :>> memoryBudget = 64.0;
         attribute :>> schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
         attribute :>> realizationStage = RealizationStageKind::deployed;
     }
