@@ -22,6 +22,16 @@ package memo_architecture_functional_behavior {
         attribute entryCondition : String;
         attribute exitCondition : String;
     }
+    // A configuration is the concrete selection made at a `variation` choice
+    // point.  It is deliberately separate from `LogicalMode` / `LogicalState`:
+    // those are R3's pending logical-structure collapse, while a configuration
+    // says which mode and elements are active in one selectable arrangement.
+    // The reference is typed to the existing native state family so a consumer
+    // can navigate from the selected configuration to its governing mode.
+    part def ModeConfiguration specializes ArchitectureElement {
+        ref activeMode : ModeState[1];
+        ref activeElement : MemoPart[0..*];
+    }
     part def Transition specializes ArchitectureElement {
         attribute trigger : String;
         attribute guardSummary : String;
