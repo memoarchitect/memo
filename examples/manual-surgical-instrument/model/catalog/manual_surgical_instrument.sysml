@@ -29,8 +29,8 @@ package memo_examples_manual_surgical_instrument {
         attribute :>> mechanicalFunction = "maintains jaw clamping force without continuous grip";
         attribute :>> patientContact = false;
     }
-    connection : Realizes connect realized ::> needleHolder to realizing ::> jawAssembly;
-    connection : Realizes connect realized ::> needleHolder to realizing ::> ratchetLock;
+    #refinement dependency needleHolder to jawAssembly;
+    #refinement dependency needleHolder to ratchetLock;
 
     // A task may be traced to the architecture later when the project has a
     // specific allocation or interaction claim to make.

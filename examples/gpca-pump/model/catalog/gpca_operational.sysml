@@ -323,12 +323,12 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRecoverAfterPowerLoss;
     }
-    connection : Realizes connect realizing ::> osNominalTherapy to realized ::> ucDeliverPcaTherapy;
-    connection : Realizes connect realizing ::> osLockoutBolus to realized ::> ucDeliverPcaTherapy;
-    connection : Realizes connect realizing ::> osOcclusionAlarm to realized ::> ucDeliverPcaTherapy;
-    connection : Realizes connect realizing ::> osAirInLine to realized ::> ucDeliverPcaTherapy;
-    connection : Realizes connect realizing ::> osEmptyReservoir to realized ::> ucDeliverPcaTherapy;
-    connection : Realizes connect realizing ::> osPowerLoss to realized ::> ucDeliverPcaTherapy;
+    #refinement dependency osNominalTherapy to ucDeliverPcaTherapy;
+    #refinement dependency osLockoutBolus to ucDeliverPcaTherapy;
+    #refinement dependency osOcclusionAlarm to ucDeliverPcaTherapy;
+    #refinement dependency osAirInLine to ucDeliverPcaTherapy;
+    #refinement dependency osEmptyReservoir to ucDeliverPcaTherapy;
+    #refinement dependency osPowerLoss to ucDeliverPcaTherapy;
     connection : Composes connect parent ::> osNominalTherapy to child ::> oaCompleteNominalTherapy;
     connection : Composes connect parent ::> osLockoutBolus to child ::> oaRejectBolusDuringLockout;
     connection : Composes connect parent ::> osOcclusionAlarm to child ::> oaRespondToOcclusion;

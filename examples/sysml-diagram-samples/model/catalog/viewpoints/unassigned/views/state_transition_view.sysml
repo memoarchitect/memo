@@ -1,6 +1,6 @@
 // State transition sample (statetransition view kind, `stm` diagram type). A
-// behaviour machine owns its mode states; each Transition carries `sourceState`
-// / `targetState` naming the states it connects, and renders as a labelled edge.
+// behaviour machine owns its mode states; each native transition references the
+// state IDs it connects, and renders as a labelled edge.
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view {
     private import ScalarValues::*;
 
@@ -23,51 +23,42 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
     state delivering : ModeState { attribute :>> name = "Delivering"; }
     state holding : ModeState { attribute :>> name = "Holding (KVO)"; }
 
-    part tStart : Transition {
+    transition tStart : Transition first idle then infusing {
         attribute :>> name = "start";
         attribute :>> trigger = "startInfusion";
-        attribute :>> sourceState = "Idle"; attribute :>> targetState = "Infusing";
     }
-    part tPause : Transition {
+    transition tPause : Transition first infusing then paused {
         attribute :>> name = "pause";
         attribute :>> trigger = "pauseRequested";
-        attribute :>> sourceState = "Infusing"; attribute :>> targetState = "Paused";
     }
-    part tResume : Transition {
+    transition tResume : Transition first paused then infusing {
         attribute :>> name = "resume";
         attribute :>> trigger = "resumeRequested";
-        attribute :>> sourceState = "Paused"; attribute :>> targetState = "Infusing";
     }
-    part tFault : Transition {
+    transition tFault : Transition first infusing then alarm {
         attribute :>> name = "fault";
         attribute :>> trigger = "occlusionDetected";
-        attribute :>> sourceState = "Infusing"; attribute :>> targetState = "Alarm";
     }
-    part tRecover : Transition {
+    transition tRecover : Transition first alarm then idle {
         attribute :>> name = "acknowledge";
         attribute :>> trigger = "alarmCleared";
-        attribute :>> sourceState = "Alarm"; attribute :>> targetState = "Idle";
     }
-    part tStop : Transition {
+    transition tStop : Transition first infusing then idle {
         attribute :>> name = "stop";
         attribute :>> trigger = "stopInfusion";
-        attribute :>> sourceState = "Infusing"; attribute :>> targetState = "Idle";
     }
 
-    part tPrimed : Transition {
+    transition tPrimed : Transition first priming then delivering {
         attribute :>> name = "primed";
         attribute :>> trigger = "primeComplete";
-        attribute :>> sourceState = "Priming"; attribute :>> targetState = "Delivering";
     }
-    part tKvo : Transition {
+    transition tKvo : Transition first delivering then holding {
         attribute :>> name = "keepVeinOpen";
         attribute :>> trigger = "doseComplete";
-        attribute :>> sourceState = "Delivering"; attribute :>> targetState = "Holding (KVO)";
     }
-    part tResumeDose : Transition {
+    transition tResumeDose : Transition first holding then delivering {
         attribute :>> name = "resumeDose";
         attribute :>> trigger = "doseScheduled";
-        attribute :>> sourceState = "Holding (KVO)"; attribute :>> targetState = "Delivering";
     }
 
     connection : Composes connect parent ::> pumpModes to child ::> idle;

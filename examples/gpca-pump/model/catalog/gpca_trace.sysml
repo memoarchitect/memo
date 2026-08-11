@@ -64,14 +64,6 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : ParticipatesIn connect participatingActor ::> actorPatient to useCase ::> ucDeliverPcaTherapy;
     connection : ParticipatesIn connect participatingActor ::> actorPrescriber to useCase ::> ucDeliverPcaTherapy;
     connection : ParticipatesIn connect participatingActor ::> actorPharmacist to useCase ::> ucDeliverPcaTherapy;
-    connection : Performs connect performer ::> actorPrescriber to performed ::> oaPrescribe;
-    connection : Performs connect performer ::> actorPharmacist to performed ::> oaLoadReservoir;
-    connection : Performs connect performer ::> actorNurse to performed ::> oaProgram;
-    connection : Performs connect performer ::> actorNurse to performed ::> oaStartTherapy;
-    connection : Performs connect performer ::> actorNurse to performed ::> oaRespondAlarm;
-    connection : Performs connect performer ::> actorNurse to performed ::> oaReviewLog;
-    connection : Performs connect performer ::> actorPatient to performed ::> oaRequestBolus;
-    connection : Performs connect performer ::> actorTechnician to performed ::> oaMaintain;
 
     // ── Operational thread (therapy lifecycle) ──────────────────
     connection : Precedes connect predecessor ::> oaPrescribe to successor ::> oaLoadReservoir;
@@ -97,17 +89,21 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : InvolvesFunction connect functionalChain ::> fcAlarmStop to function ::> fnAnnunciate;
     connection : InvolvesFunction connect functionalChain ::> fcStartup to function ::> fnSelfTest;
     connection : InvolvesFunction connect functionalChain ::> fcStartup to function ::> fnPresentStatus;
-    connection : Realizes connect realizing ::> fcPatientBolus to realized ::> ssBolusDuringBasal;
-    connection : Realizes connect realizing ::> fcAlarmStop to realized ::> ssAlarmPause;
-    connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusSense;
-    connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusValidate;
-    connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusCommand;
-    connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusActuate;
-    connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusLog;
-    connection : IncludesStep connect functionalChain ::> fcAlarmStop to step ::> fcsAlarmSense;
-    connection : IncludesStep connect functionalChain ::> fcAlarmStop to step ::> fcsAlarmEvaluate;
-    connection : IncludesStep connect functionalChain ::> fcAlarmStop to step ::> fcsAlarmStopInfusion;
-    connection : IncludesStep connect functionalChain ::> fcAlarmStop to step ::> fcsAlarmAnnunciate;
+    #refinement dependency fcPatientBolus to ssBolusDuringBasal;
+    #refinement dependency fcAlarmStop to ssAlarmPause;
+
+    // A user task may be realized by several system-side steps: the mapping is
+    // refinement, not specialization, because the steps retain distinct
+    // functions and exchanged items while tracing the same operative intent.
+    #refinement dependency fcsBolusSense to wsRequestBolus;
+    #refinement dependency fcsBolusValidate to wsRequestBolus;
+    #refinement dependency fcsBolusCommand to wsRequestBolus;
+    #refinement dependency fcsBolusActuate to wsRequestBolus;
+    #refinement dependency fcsBolusLog to wsRequestBolus;
+    #refinement dependency fcsAlarmSense to wsRespondAlarm;
+    #refinement dependency fcsAlarmEvaluate to wsRespondAlarm;
+    #refinement dependency fcsAlarmStopInfusion to wsRespondAlarm;
+    #refinement dependency fcsAlarmAnnunciate to wsRespondAlarm;
 
     // ── Requirement derivation ──────────────────────────────────
     // MEMO extension requirements (REQ-X) derive from needs and risks.
@@ -359,10 +355,10 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : AllocatedTo connect function ::> fnSelfTest to allocatedElement ::> systemMonitor;
 
     // ── Deployment, hosting, and interface realization ──────────
-    connection : DeploysTo connect deploymentUnit ::> gpcaSoftware to node ::> controllerBoard;
+    allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaSoftware to controllerBoard;
     connection : HostedBy connect processingNode ::> mainController to hostAssembly ::> controllerBoard;
-    connection : Realizes connect realized ::> sensorInputInterface to realizing ::> hwSoftwareBus;
-    connection : Realizes connect realized ::> actuatorCommandInterface to realizing ::> pumpMotorDrive;
+    #refinement dependency sensorInputInterface to hwSoftwareBus;
+    #refinement dependency actuatorCommandInterface to pumpMotorDrive;
     connection : BindsToInterface connect portElement ::> portPatientPendant to boundInterface ::> bolusButtonLine;
     connection : BindsToInterface connect portElement ::> portMotorDrive to boundInterface ::> pumpMotorDrive;
     connection : BindsToInterface connect portElement ::> portSensorHarness to boundInterface ::> occlusionAnalogLine;
