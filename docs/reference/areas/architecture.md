@@ -31,7 +31,7 @@ realization.
 | --- | --- |
 | Functions and flows | `SystemFunction`, `SystemAction`, `FunctionalExchange`, `FunctionalFlow`, `FunctionalFlowStep`, `FunctionalScenario` |
 | Behavior | `StateMachine`, `ModeState`, `Transition`, `ActivityAction`, `ActivityFlow`, `InteractionMessage` |
-| Verifiable behavior | `BehaviorProperty`, `Contract`, `PropertySet`, `TimingConstraint` and functional constraints |
+| Verifiable behavior | `BehaviorProperty`, `Contract`, `TimingConstraint` and functional constraints |
 
 ## Logical
 

@@ -34,7 +34,21 @@ package memo_architecture_functional_behavior {
         attribute formalExpression : String;
     }
     part def Contract specializes VerifiableElement { attribute contractScope : String; }
-    part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }
+    // `part def PropertySet specializes VerifiableElement { attribute
+    // propertySetScope : String; }` stood here and is DELETED (plan C3,
+    // open question §14.6). It was AADL's property-set idea imported as a
+    // name: one String field, no typed content, no binding to whatever it
+    // annotated, and zero usages anywhere in the tree.
+    //
+    // Per-technology properties belong on the extension type that owns them,
+    // typed. ROS QoS was the first real customer and settled it:
+    // `attribute def RosQosProfile` has reliability, durability, deadline,
+    // liveliness and history depth as typed fields, so a publisher's offer and
+    // a subscriber's request can be compared. A `propertySetScope` String
+    // could not have expressed one of them. Where an extension needs to
+    // annotate a BASE element rather than declare its own type, the SysML-
+    // native answer is `metadata def` + `Metaobjects::SemanticMetadata`, which
+    // is what every MEMO relation already carries since A4.
     part def ActivityAction specializes ArchitectureElement {
         attribute actionKind : ActionKind;
         attribute inputSummary : String;

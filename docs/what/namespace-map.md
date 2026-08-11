@@ -38,9 +38,11 @@ Operational packages are nested below `memo::architecture::operational` rather
 than repeated as root aliases. Examples live outside the ontology and import
 the public library like other projects.
 
-Optional clinical-procedure vocabulary is provided as a methodology extension
-example under `examples/extensions/`. That package remains outside `memo::`
-and is selected through `includedModule`.
+Optional vocabulary that is not true of every project — clinical procedures,
+AADL runtime families, cloud services, containers, messaging, ROS 2 — lives in
+extension packages under `extensions/`. Extensions are a way to model, so they
+sit beside the ontology rather than under `examples/`; each remains outside
+`memo::` and is selected through `includedModule`.
 
 ## Architecture namespaces expose the five layers
 

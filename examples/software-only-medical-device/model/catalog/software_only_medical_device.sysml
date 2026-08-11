@@ -11,6 +11,11 @@ package memo_examples_software_only_medical_device {
     private import memo_architecture_implementation_software_runtime::*;
     private import memo_architecture_realization_deployment::*;
     private import memo_architecture_realization_physical::*;
+    // `serviceContract` was an optional attribute on SoftwareComponent, set
+    // only when runtimeKind = service. It moved to `CloudService` in the cloud
+    // extension, so the project that uses it includes the extension — which is
+    // the mechanism working as designed rather than a cost of the move.
+    private import memo_extension_cloud::*;
 
     part swScreeningApp : SoftwareSystem {
         attribute :>> id = "SMD-SW-001"; attribute :>> name = "ScreeningApplication";
@@ -35,10 +40,10 @@ package memo_examples_software_only_medical_device {
     }
     connection : ModuleUses connect usingModule ::> swGradingModule to usedModule ::> soupInference;
 
-    part svcGrading : SoftwareComponent {
-        attribute :>> runtimeKind = RuntimeKind::service;
+    part svcGrading : CloudService {
         attribute :>> id = "SMD-RT-001"; attribute :>> name = "GradingService";
         attribute :>> serviceContract = "REST /grade: image in, structured finding out";
+        attribute :>> discoveryMechanism = "DNS name behind the cluster ingress";
         attribute :>> updatePolicy = "blue/green rollout";
         attribute :>> rollbackPolicy = "previous validated version retained hot";
     }

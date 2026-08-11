@@ -17,11 +17,16 @@ set -uo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-PROJECTS=("." "src/methodology")
-PROJECT_NAMES=("memo-ontology" "memo-methodology-default")
+# Three independently round-tripped projects. `extensions` is one of them
+# because an extension is ontology — a reusable package that specializes the
+# base — not sample content. If an extension does not build and resolve, the
+# extension point is not real, and the build is where that has to show.
+PROJECTS=("." "src/methodology" "extensions")
+PROJECT_NAMES=("memo-ontology" "memo-methodology-default" "memo-extensions")
 PROJECT_USAGE=(
   '[{"resource":"urn:kpar:semantic-library"},{"resource":"urn:kpar:systems-library"},{"resource":"urn:kpar:metadata-library"}]'
   '[{"resource":"urn:kpar:memo-ontology"},{"resource":"urn:kpar:semantic-library"},{"resource":"urn:kpar:systems-library"}]'
+  '[{"resource":"urn:kpar:memo-ontology"},{"resource":"urn:kpar:memo-methodology-default"},{"resource":"urn:kpar:semantic-library"},{"resource":"urn:kpar:systems-library"},{"resource":"urn:kpar:metadata-library"}]'
 )
 
 if ! command -v sysand >/dev/null 2>&1; then
@@ -125,7 +130,7 @@ if ! command -v syside >/dev/null 2>&1; then
   exit 127
 fi
 
-check_out="$(cd "$REPO_ROOT" && syside check src 2>&1)" || true
+check_out="$(cd "$REPO_ROOT" && syside check src extensions 2>&1)" || true
 if echo "$check_out" | grep -q 'error'; then
   echo "$check_out" | grep -A2 'error' | sed 's/^/  /'
   echo ""

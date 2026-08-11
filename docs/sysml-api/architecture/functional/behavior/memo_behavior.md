@@ -36,8 +36,7 @@
 | [`Transition`](#transition) | `part def` | Transition definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`BehaviorProperty`](#behaviorproperty) | `part def` | A verifiable behavioural constraint, such as an invariant, transition rule, temporal claim, assumption, or guarantee. | `VerifiableElement` |
 | [`Contract`](#contract) | `part def` | Contract definition specializing `VerifiableElement`. | `VerifiableElement` |
-| [`PropertySet`](#propertyset) | `part def` | Property set definition specializing `VerifiableElement`. | `VerifiableElement` |
-| [`ActivityAction`](#activityaction) | `part def` | Activity action definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`ActivityAction`](#activityaction) | `part def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `ArchitectureElement` |
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
 | [`InteractionMessage`](#interactionmessage) | `part def` | Interaction message definition specializing `MemoPart`. | `MemoPart` |
 | [`TimingConstraint`](#timingconstraint) | `part def` | Timing constraint definition specializing `VerifiableElement`. | `VerifiableElement` |
@@ -117,21 +116,6 @@ part def Contract specializes VerifiableElement
 | Owning package | `memo_architecture_functional_behavior` |
 
 
-## PropertySet
-
-```sysml
-part def PropertySet specializes VerifiableElement
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Property set definition specializing `VerifiableElement`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `VerifiableElement` |
-| Owning package | `memo_architecture_functional_behavior` |
-
-
 ## ActivityAction
 
 ```sysml
@@ -140,7 +124,7 @@ part def ActivityAction specializes ArchitectureElement
 
 | Property | Value |
 | --- | --- |
-| Description | Activity action definition specializing `ArchitectureElement`. |
+| Description | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `ArchitectureElement` |
@@ -233,7 +217,21 @@ part def TimingConstraint specializes VerifiableElement
             attribute formalExpression : String;
         }
         part def Contract specializes VerifiableElement { attribute contractScope : String; }
-        part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }
+        // `part def PropertySet specializes VerifiableElement { attribute
+        // propertySetScope : String; }` stood here and is DELETED (plan C3,
+        // open question §14.6). It was AADL's property-set idea imported as a
+        // name: one String field, no typed content, no binding to whatever it
+        // annotated, and zero usages anywhere in the tree.
+        //
+        // Per-technology properties belong on the extension type that owns them,
+        // typed. ROS QoS was the first real customer and settled it:
+        // `attribute def RosQosProfile` has reliability, durability, deadline,
+        // liveliness and history depth as typed fields, so a publisher's offer and
+        // a subscriber's request can be compared. A `propertySetScope` String
+        // could not have expressed one of them. Where an extension needs to
+        // annotate a BASE element rather than declare its own type, the SysML-
+        // native answer is `metadata def` + `Metaobjects::SemanticMetadata`, which
+        // is what every MEMO relation already carries since A4.
         part def ActivityAction specializes ArchitectureElement {
             attribute actionKind : ActionKind;
             attribute inputSummary : String;

@@ -19,5 +19,16 @@ examples:
   standard-sysml-diagrams: ./examples/sysml-diagram-samples
   ui-screen-regions: ./examples/ui-screen-regions
   nested-architecture-dsm: ./examples/nested-architecture-dsm
-  extension-template: ./examples/extensions/template
-  clinical-extension: ./examples/extensions/clinical
+  ros-mobile-robot: ./examples/ros-mobile-robot
+# Extensions are a way to MODEL, not a thing to copy. They are reusable
+# ontology packages that specialize the base, selected by a methodology or a
+# project binding — so they sit beside the ontology, not under examples/.
+# `examples/ros-mobile-robot` demonstrates using one; it is not the extension.
+extensions:
+  template: ./extensions/template
+  clinical: ./extensions/clinical
+  aadl: ./extensions/aadl
+  cloud: ./extensions/cloud
+  container: ./extensions/container
+  messaging: ./extensions/messaging
+  ros: ./extensions/ros

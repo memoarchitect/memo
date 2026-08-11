@@ -1,0 +1,18 @@
+# Application/distribution descriptor for this MEMO package.
+#
+# Identity and location only. It records what this package is called, what
+# version it is, and where its SysML source sits so a resolver can find it.
+# It does not select model content: the project's native SysML imports and its
+# ProjectMethodBinding decide what is in the model. Semantic fields
+# (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
+# removed at the native semantic flip and are now rejected if present.
+name: '@memoarchitect/extension-messaging'
+version: 0.7.0
+description: Publish/subscribe messaging — topics, brokers, and delivery semantics
+license: MIT
+tags:
+- memo
+- methodology
+- extension
+- messaging
+sysmlDir: ./src

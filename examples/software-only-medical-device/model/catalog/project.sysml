@@ -20,5 +20,9 @@ package memo_examples_software_only_medical_device_project {
         attribute :>> projectName = "Software Only Medical Device";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
+        // Composition happens here, not by chaining methodologies. The cloud
+        // extension supplies CloudService, which is what the grading service
+        // is.
+        attribute :>> includedModule = "memo_extension_cloud";
     }
 }

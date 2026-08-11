@@ -65,7 +65,7 @@ REUSABLE_ROOTS=("$REPO_ROOT/src")
 imported_extensions="$(grep -rhoE 'import[[:space:]]+memo_extension_[A-Za-z0-9_]+' \
   "$PROJECT_DIR" --include='*.sysml' 2>/dev/null | awk '{print $2}' | sort -u)"
 for pkg in $imported_extensions; do
-  for candidate in "$REPO_ROOT"/examples/extensions/*/src; do
+  for candidate in "$REPO_ROOT"/extensions/*/src; do
     [ -d "$candidate" ] || continue
     if grep -rqE "^package[[:space:]]+${pkg}[[:space:]]*\{" "$candidate" --include='*.sysml' 2>/dev/null; then
       case " ${REUSABLE_ROOTS[*]} " in *" $candidate "*) ;; *) REUSABLE_ROOTS+=("$candidate") ;; esac
