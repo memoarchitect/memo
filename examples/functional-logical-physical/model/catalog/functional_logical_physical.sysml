@@ -45,6 +45,6 @@ package memo_examples_functional_logical_physical {
         attribute :>> mechanicalFunction = "vents line pressure above mechanical set point, independent of software";
         attribute :>> patientContact = false;
     }
-    connection : Realizes connect realizing ::> swPressureSupervisor to realized ::> lcPressureProtection;
-    connection : Realizes connect realizing ::> mechReliefValve to realized ::> lcPressureProtection;
+    #refinement dependency swPressureSupervisor to lcPressureProtection;
+    #refinement dependency mechReliefValve to lcPressureProtection;
 }

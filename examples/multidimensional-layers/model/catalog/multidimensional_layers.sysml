@@ -40,7 +40,7 @@ package memo_examples_multidimensional_layers {
         attribute :>> schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
         attribute :>> realizationStage = RealizationStageKind::deployed;
     }
-    connection : Realizes connect realizing ::> doseLimitCheckerRuntime to realized ::> doseLimitChecker;
+    #refinement dependency doseLimitCheckerRuntime to doseLimitChecker;
 
     verification vcLimitEnforcement : VerificationCase {
         attribute :>> id = "MDL-VC-001"; attribute :>> name = "VerifyHardLimitEnforcement";

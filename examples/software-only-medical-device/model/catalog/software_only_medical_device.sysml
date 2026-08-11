@@ -42,7 +42,7 @@ package memo_examples_software_only_medical_device {
         attribute :>> updatePolicy = "blue/green rollout";
         attribute :>> rollbackPolicy = "previous validated version retained hot";
     }
-    connection : Realizes connect realizing ::> svcGrading to realized ::> swGradingModule;
+    #refinement dependency svcGrading to swGradingModule;
 
     part duContainerImage : DeploymentUnit {
         attribute :>> id = "SMD-DU-001"; attribute :>> name = "ScreeningServiceImage";
@@ -55,7 +55,7 @@ package memo_examples_software_only_medical_device {
         attribute :>> supportsContainerization = true;
         attribute :>> realTimeCapable = false;
     }
-    connection : DeploysTo connect deploymentUnit ::> duContainerImage to node ::> nodeCloud {
+    allocation duContainerImageDeployment : DeploysTo allocate duContainerImage to nodeCloud {
         attribute :>> deploymentKind = DeploymentKind::containerized;
     }
     connection : HostedBy connect hostAssembly ::> nodeCloud to processingNode ::> svcGrading;

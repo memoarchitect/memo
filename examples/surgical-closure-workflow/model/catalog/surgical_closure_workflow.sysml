@@ -16,17 +16,17 @@ package memo_examples_surgical_closure_workflow {
     private import memo_architecture_operational_scenarios::*;
 
     // ── Clinical setting and goal ───────────────────────────────
-    part bariatricSurgeon : User {
+    actor bariatricSurgeon : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-001"; attribute :>> name = "BariatricSurgeon";
         attribute :>> clinicalRole = "primary operating surgeon";
     }
-    part scrubNurse : User {
+    actor scrubNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-002"; attribute :>> name = "ScrubNurse";
         attribute :>> clinicalRole = "sterile instrumentation and count";
     }
-    part anesthetist : User {
+    actor anesthetist : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-003"; attribute :>> name = "Anesthetist";
         attribute :>> clinicalRole = "anaesthesia and physiologic monitoring";
@@ -148,8 +148,8 @@ package memo_examples_surgical_closure_workflow {
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaControlStapleLineBleeding;
     }
-    connection : Realizes connect realizing ::> scNominalSleeveProcedure to realized ::> ucPerformSleeveGastrectomy;
-    connection : Realizes connect realizing ::> scStapleLineBleeding to realized ::> ucPerformSleeveGastrectomy;
+    #refinement dependency scNominalSleeveProcedure to ucPerformSleeveGastrectomy;
+    #refinement dependency scStapleLineBleeding to ucPerformSleeveGastrectomy;
     connection : Composes connect parent ::> scNominalSleeveProcedure to child ::> oaCompleteSleeveProcedure;
     connection : Composes connect parent ::> scStapleLineBleeding to child ::> oaControlStapleLineBleeding;
 }

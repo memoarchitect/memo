@@ -28,6 +28,11 @@ package memo_examples_gpca_pump_gpca_system {
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         attribute :>> description = "Bolus button press through lockout/max-dose check to pump actuation and logging.";
+        include fcsBolusSense;
+        include fcsBolusValidate;
+        include fcsBolusCommand;
+        include fcsBolusActuate;
+        include fcsBolusLog;
     }
     action fcsBolusSense : FunctionalFlowStep {
         attribute :>> id = "FCS-001"; attribute :>> name = "SenseBolusRequest";
@@ -62,6 +67,10 @@ package memo_examples_gpca_pump_gpca_system {
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         attribute :>> description = "Sensor condition through alarm evaluation to same-step transition to PAUSED (KVO flow, REQ 43) and annunciation.";
+        include fcsAlarmSense;
+        include fcsAlarmEvaluate;
+        include fcsAlarmStopInfusion;
+        include fcsAlarmAnnunciate;
     }
     action fcsAlarmSense : FunctionalFlowStep {
         attribute :>> id = "FCS-006"; attribute :>> name = "SenseAlarmCondition";

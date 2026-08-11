@@ -12,7 +12,7 @@ package memo_examples_reusable_instrument {
     private import memo_architecture_operational_workflows::*;
     private import memo_architecture_operational_scenarios::*;
 
-    part sterileProcessingTech : User {
+    actor sterileProcessingTech : User {
         attribute :>> actorKind = ActorKind::technician;
         attribute :>> id = "RI-USR-001"; attribute :>> name = "SterileProcessingTechnician";
         attribute :>> serviceScope = "central sterile services department";
