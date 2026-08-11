@@ -3,6 +3,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
 
     private import memo_architecture_functional_behavior::*;
     private import memo_core_enumerations::*;
+    private import memo_examples_gpca_pump_gpca_system::*;
+    private import memo_examples_gpca_pump_gpca_requirements::*;
 
     // ═════════════════════════════════════════════════════════════
     // GPCA mode machine per CriSys Ch.4 Fig 4.1 mode hierarchy:
@@ -356,7 +358,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> constraintKind = TimingConstraintKind::latency;
         attribute :>> minMs = "0";
         attribute :>> maxMs = "20";
-        attribute :>> referenceElement = "FC-002: AlarmDetectionToSafeStateChain";
+        ref :>> referenceElement = fcAlarmStop;
         attribute :>> verificationMethod = VerificationMethodKind::modelChecking;
         attribute :>> sourceReference = "MEMO extension — illustrative wall-clock budget; the source specifies synchronous same-step (immediate) semantics with no timing figures";
     }
@@ -366,7 +368,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> constraintKind = TimingConstraintKind::latency;
         attribute :>> minMs = "0";
         attribute :>> maxMs = "100";
-        attribute :>> referenceElement = "FC-001: PatientBolusChain";
+        ref :>> referenceElement = fcPatientBolus;
         attribute :>> verificationMethod = VerificationMethodKind::test;
         attribute :>> sourceReference = "MEMO extension — illustrative wall-clock budget; not specified by the source";
     }
@@ -376,7 +378,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> constraintKind = TimingConstraintKind::deadline;
         attribute :>> minMs = "40";
         attribute :>> maxMs = "60";
-        attribute :>> referenceElement = "REQ-X-08: WatchdogForcesSafeState";
+        ref :>> referenceElement = reqWatchdogSafeState;
         attribute :>> verificationMethod = VerificationMethodKind::test;
         attribute :>> sourceReference = "MEMO extension — supports extension requirement REQ-X-08; watchdog not specified by the source";
     }
