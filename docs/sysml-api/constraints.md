@@ -13,6 +13,13 @@ SysML `constraint def` declarations in `src/`.
 | [`MaxResponseTimeConstraint`](architecture/functional/constraints/memo_constraints.md#maxresponsetimeconstraint) | `constraint def` | Constraint that checks max response time constraint. | [`architecture/functional/constraints/memo_constraints.sysml`](architecture/functional/constraints/memo_constraints.md) |
 
 
+## `memo::core::common`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MemoConstraint`](core/common/memo_common.md#memoconstraint) | `constraint def` | General constraint foundation. Executable consistency rules and reusable quantitative constraints are both native constraint defs. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+
+
 ## `memo::core::consistency_rules`
 
 | Name | SysML kind | Description | Source |

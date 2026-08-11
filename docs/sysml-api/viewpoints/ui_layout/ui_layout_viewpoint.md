@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_ui_layout_ui_layout_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part uiLayoutViewpoint : Viewpoint {
             attribute :>> id = "VP-UIL";
             attribute :>> name = "UILayoutViewpoint";
@@ -67,5 +67,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

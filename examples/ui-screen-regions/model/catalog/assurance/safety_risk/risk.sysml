@@ -22,7 +22,7 @@ package memo_examples_ui_screen_regions_assurance_safety_risk {
         attribute :>> foreseeable = true;
     }
 
-    item rcRateConfirm : RiskControlMeasure {
+    part rcRateConfirm : RiskControlMeasure {
         attribute :>> id = "UIR-RC-001"; attribute :>> name = "RateChangeConfirmationDialog";
         attribute :>> shortDescription = "Explicit confirmation step before a rate change applies.";
         attribute :>> description = "A confirmation dialog restates the requested rate in words and numerals before the change is committed, so a mis-set decimal point has a second chance to be caught.";
@@ -37,7 +37,7 @@ package memo_examples_ui_screen_regions_assurance_safety_risk {
         attribute :>> foreseeable = true;
     }
 
-    item rcDrugLibraryGuard : RiskControlMeasure {
+    part rcDrugLibraryGuard : RiskControlMeasure {
         attribute :>> id = "UIR-RC-002"; attribute :>> name = "CareAreaDrugLibraryGuard";
         attribute :>> shortDescription = "Restrict selection to enabled care-area drug-library entries.";
         attribute :>> description = "Filters the dynamic selector to the active care-area formulary and validates the selected drug and concentration before its dosing limits are used.";
@@ -52,7 +52,7 @@ package memo_examples_ui_screen_regions_assurance_safety_risk {
         attribute :>> foreseeable = true;
     }
 
-    item rcLowBatteryProminence : RiskControlMeasure {
+    part rcLowBatteryProminence : RiskControlMeasure {
         attribute :>> id = "UIR-RC-003"; attribute :>> name = "ProminentLowBatteryStatus";
         attribute :>> shortDescription = "Update and emphasize low remaining battery status within one second.";
         attribute :>> description = "Monitors battery telemetry and changes the status indicator's color and icon state at the low-runtime threshold so the clinician can restore power before therapy interruption.";
@@ -67,7 +67,7 @@ package memo_examples_ui_screen_regions_assurance_safety_risk {
         attribute :>> foreseeable = true;
     }
 
-    item rcDisplayFreshnessMonitor : RiskControlMeasure {
+    part rcDisplayFreshnessMonitor : RiskControlMeasure {
         attribute :>> id = "UIR-RC-004"; attribute :>> name = "InfusionDisplayFreshnessMonitor";
         attribute :>> shortDescription = "Refresh displayed rate and volume at 1 Hz and detect stale telemetry.";
         attribute :>> description = "Maintains a one-second display age budget for infusion status and detects a missed telemetry refresh before stale values can persist.";
@@ -82,7 +82,7 @@ package memo_examples_ui_screen_regions_assurance_safety_risk {
         attribute :>> foreseeable = true;
     }
 
-    item rcClockFreshnessCheck : RiskControlMeasure {
+    part rcClockFreshnessCheck : RiskControlMeasure {
         attribute :>> id = "UIR-RC-005"; attribute :>> name = "SynchronizedClockFreshnessCheck";
         attribute :>> shortDescription = "Synchronize the display clock and bound visible time error.";
         attribute :>> description = "Checks the displayed clock against the synchronized device clock and refreshes the visible minute at rollover.";

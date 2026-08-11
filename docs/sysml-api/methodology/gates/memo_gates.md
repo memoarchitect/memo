@@ -55,14 +55,14 @@ part def QualityGate :> MemoPart
     ```sysml
     package memo_methodology_gates {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
-    
+
         part def QualityGate :> MemoPart {
             attribute gateStage : WorkflowStageKind;
             attribute passCriteria : String;
         }
     }
-    
+
     ```

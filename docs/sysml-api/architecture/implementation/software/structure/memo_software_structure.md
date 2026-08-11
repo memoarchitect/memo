@@ -34,26 +34,27 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`SoftwareItem`](#softwareitem) | `part def` | Software item definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`SoftwareSystem`](#softwaresystem) | `part def` | Software system definition specializing `SoftwareItem`. | `SoftwareItem` |
+| [`SoftwareElement`](#softwareelement) | `part def` | Software element definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`SoftwareSystem`](#softwaresystem) | `part def` | Software system definition specializing `SoftwareElement`. | `SoftwareElement` |
 | [`ModuleKind`](#modulekind) | `enum def` | Module-view element (design responsibility). Runtime properties (period, WCET, scheduling) moved to SoftwareComponent. item / unit / package / library / code / firmware / soup (IEC 62304). | — |
-| [`SoftwareModule`](#softwaremodule) | `part def` | Software module definition specializing `SoftwareItem`. | `SoftwareItem` |
+| [`SoftwareModule`](#softwaremodule) | `part def` | Software module definition specializing `SoftwareElement`. | `SoftwareElement` |
 | [`Algorithm`](#algorithm) | `part def` | Algorithm definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`DataModel`](#datamodel) | `part def` | Data model definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`ConfigurationArtifact`](#configurationartifact) | `part def` | Configuration artifact definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`SBOMEntry`](#sbomentry) | `item def` | Sbomentry definition specializing `MemoExchangeItem`. | `MemoExchangeItem` |
+| [`SoftwareItem`](#softwareitem) | `item def` | Software data/content that may be stored or exchanged through ports. | `MemoItem` |
+| [`SBOMEntry`](#sbomentry) | `item def` | Sbomentry definition specializing `SoftwareItem`. | `SoftwareItem` |
 | [`ModuleUses`](#moduleuses) | `connection def` | Typed relationship for module uses. | `MemoRelationship` |
 | [`DependsOnSoup`](#dependsonsoup) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
-## SoftwareItem
+## SoftwareElement
 
 ```sysml
-abstract part def SoftwareItem specializes ArchitectureElement
+abstract part def SoftwareElement specializes ArchitectureElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software item definition specializing `ArchitectureElement`. |
+| Description | Software element definition specializing `ArchitectureElement`. |
 | Kind | `part def` |
 | Abstract | Yes |
 | Specializes | `ArchitectureElement` |
@@ -63,15 +64,15 @@ abstract part def SoftwareItem specializes ArchitectureElement
 ## SoftwareSystem
 
 ```sysml
-part def SoftwareSystem specializes SoftwareItem
+part def SoftwareSystem specializes SoftwareElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software system definition specializing `SoftwareItem`. |
+| Description | Software system definition specializing `SoftwareElement`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `SoftwareItem` |
+| Specializes | `SoftwareElement` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
@@ -93,15 +94,15 @@ enum def ModuleKind
 ## SoftwareModule
 
 ```sysml
-part def SoftwareModule specializes SoftwareItem
+part def SoftwareModule specializes SoftwareElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software module definition specializing `SoftwareItem`. |
+| Description | Software module definition specializing `SoftwareElement`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `SoftwareItem` |
+| Specializes | `SoftwareElement` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
@@ -150,18 +151,33 @@ part def ConfigurationArtifact specializes ArchitectureElement
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
-## SBOMEntry
+## SoftwareItem
 
 ```sysml
-item def SBOMEntry specializes MemoExchangeItem
+abstract item def SoftwareItem specializes MemoItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Sbomentry definition specializing `MemoExchangeItem`. |
+| Description | Software data/content that may be stored or exchanged through ports. |
+| Kind | `item def` |
+| Abstract | Yes |
+| Specializes | `MemoItem` |
+| Owning package | `memo_architecture_implementation_software_structure` |
+
+
+## SBOMEntry
+
+```sysml
+item def SBOMEntry specializes SoftwareItem
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Sbomentry definition specializing `SoftwareItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoExchangeItem` |
+| Specializes | `SoftwareItem` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
@@ -200,18 +216,20 @@ connection def DependsOnSoup :> MemoRelationship
 ??? code "architecture/implementation/software/structure/memo_software_structure.sysml"
 
     ```sysml
-    // Software module view (§11; IEC 62304 5.3-5.4). Code/module structure only:
-    // runtime structure lives in memo_architecture_implementation_software_runtime and
-    // allocation in memo_architecture_realization_deployment.
+    // Software module view (§11; IEC 62304 5.3-5.4). Following the SEI Views and
+    // Beyond viewtypes, modules are implementation/code units; interacting runtime
+    // elements are SoftwareComponents in
+    // memo_architecture_implementation_software_runtime, and allocation lives in
+    // memo_architecture_realization_deployment.
     package memo_architecture_implementation_software_structure {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_logical_structure::*;
-    
+
         // IEC 62304 §3.25: a SOFTWARE ITEM is "any identifiable part of a computer
         // program". It is the general, recursive term — a SOFTWARE SYSTEM (§3.24)
         // is the top item and a SOFTWARE UNIT (§3.26) is one not subdivided
@@ -224,16 +242,20 @@ connection def DependsOnSoup :> MemoRelationship
         // software view inherits it rather than re-declaring it: the code view
         // (SoftwareModule), the runtime view (SoftwareComponent), the system, and
         // the user interface (memo_architecture_implementation_ui::UIElement).
-        abstract part def SoftwareItem specializes ArchitectureElement {
+        // Structural software decomposition is part-native. IEC 62304 also uses
+        // the term "software item" for this concept, but reserving SoftwareItem
+        // for the native SysML item family keeps structural parts and exchanged
+        // values unambiguous in the model.
+        abstract part def SoftwareElement specializes ArchitectureElement {
             attribute safetyClass : SafetyClassKind;
             attribute complexity : ComplexityKind;
         }
-    
-        part def SoftwareSystem specializes SoftwareItem {
+
+        part def SoftwareSystem specializes SoftwareElement {
             attribute version : String;
             attribute operatingSystem : String;
         }
-    
+
         // Module-view element (design responsibility). Runtime properties
         // (period, WCET, scheduling) moved to SoftwareComponent.
         // item / unit / package / library / code / firmware / soup (IEC 62304).
@@ -246,8 +268,8 @@ connection def DependsOnSoup :> MemoRelationship
             enum firmware;
             enum soup;
         }
-    
-        part def SoftwareModule specializes SoftwareItem {
+
+        part def SoftwareModule specializes SoftwareElement {
             attribute moduleKind : ModuleKind;
             attribute responsibility : String;
             // module-kind-specific detail (set only for the relevant moduleKind)
@@ -265,7 +287,7 @@ connection def DependsOnSoup :> MemoRelationship
             attribute riskAcceptance : String[0..1];
             attribute soupClassification : SOUPClassificationKind[0..1];
         }
-    
+
         part def Algorithm specializes ArchitectureElement {
             attribute algorithmKind : String;
             attribute inputSummary : String;
@@ -280,15 +302,23 @@ connection def DependsOnSoup :> MemoRelationship
             attribute configurationScope : String;
             attribute version : String;
         }
-    
-        item def SBOMEntry specializes MemoExchangeItem {
+
+        // Software data/content that may be stored or exchanged through ports.
+        abstract item def SoftwareItem specializes MemoItem {
+            attribute schemaIdentifier : String;
+            attribute schemaVersion : String;
+            attribute encoding : String;
+            attribute timestampRequired : Boolean;
+        }
+
+        item def SBOMEntry specializes SoftwareItem {
             attribute componentName : String;
             attribute version : String;
             attribute supplier : String;
             attribute license : String;
             attribute hash : String;
         }
-    
+
         connection def ModuleUses :> MemoRelationship {
             end usingModule : SoftwareModule :>> source;
             end usedModule : SoftwareModule :>> target;
@@ -299,13 +329,13 @@ connection def DependsOnSoup :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = moduleUsesLinks meta SysML::Usage;
         }
-    
+
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
         connection def DependsOnSoup :> MemoRelationship {
             end component : ArchitectureElement :>> source;
-            end soupItem : SoftwareItem :>> target;
+            end soupItem : SoftwareElement :>> target;
         }
         abstract connection dependsOnSoupLinks : DependsOnSoup[*];
         metadata def <dependsOnSoup> DependsOnSoupMetadata :> SemanticMetadata {
@@ -314,5 +344,5 @@ connection def DependsOnSoup :> MemoRelationship
             :>> baseType = dependsOnSoupLinks meta SysML::Usage;
         }
     }
-    
+
     ```

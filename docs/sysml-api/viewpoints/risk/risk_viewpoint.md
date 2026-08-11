@@ -41,10 +41,10 @@
     ```sysml
     package memo_viewpoints_risk_risk_viewpoint {
         private import ScalarValues::*;
-    
+
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
-    
+
         part riskViewpoint : Viewpoint {
             attribute :>> id = "VP-RISK";
             attribute :>> name = "RiskViewpoint";
@@ -65,5 +65,5 @@
             attribute :>> userExtensible = true;
         }
     }
-    
+
     ```

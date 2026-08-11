@@ -31,6 +31,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
+| [`FunctionalAction`](#functionalaction) | `action def` | Functional action definition specializing `MemoAction`. | `MemoAction` |
 | [`StateMachine`](#statemachine) | `state def` | State machine definition specializing `MemoState`. | `MemoState` |
 | [`ModeState`](#modestate) | `state def` | Mode state definition specializing `MemoState`. | `MemoState` |
 | [`Transition`](#transition) | `part def` | Transition definition specializing `ArchitectureElement`. | `ArchitectureElement` |
@@ -40,6 +41,21 @@
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
 | [`InteractionMessage`](#interactionmessage) | `part def` | Interaction message definition specializing `MemoPart`. | `MemoPart` |
 | [`TimingConstraint`](#timingconstraint) | `part def` | Timing constraint definition specializing `VerifiableElement`. | `VerifiableElement` |
+
+## FunctionalAction
+
+```sysml
+abstract action def FunctionalAction specializes MemoAction
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Functional action definition specializing `MemoAction`. |
+| Kind | `action def` |
+| Abstract | Yes |
+| Specializes | `MemoAction` |
+| Owning package | `memo_architecture_functional_behavior` |
+
 
 ## StateMachine
 
@@ -183,9 +199,14 @@ part def TimingConstraint specializes VerifiableElement
     ```sysml
     package memo_architecture_functional_behavior {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
+
+        // Typed functional execution step. Project-specific action definitions
+        // specialize this rather than bypassing MemoAction; ActivityFlow remains
+        // the composite route that sequences such steps.
+        abstract action def FunctionalAction specializes MemoAction;
         // State machines and their mode states are SysML v2 states (behaviours), so
         // they derive from the MemoState foundation, not the part-based
         // ArchitectureElement. Transitions stay part-based (below) to keep their
@@ -261,5 +282,5 @@ part def TimingConstraint specializes VerifiableElement
             attribute verificationMethod : VerificationMethodKind;
         }
     }
-    
+
     ```

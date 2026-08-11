@@ -76,10 +76,10 @@ requirement def Need specializes MemoNeed
     // (DerivesFrom, Motivates).
     package memo_assurance_requirements_needs {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
-    
+
         // The kind of need. Was a subclass branch (StakeholderNeed / UserNeed /
         // ClinicalUserNeed / PatientUserNeed / BusinessNeed / ServiceNeed /
         // RegulatoryNeed / OperationalNeed / DesignControlNeed); now one attribute.
@@ -97,7 +97,7 @@ requirement def Need specializes MemoNeed
             enum operational;
             enum designControl;
         }
-    
+
         requirement def Need specializes MemoNeed {
             attribute needKind : NeedKind;
             // user need (IEC 62366-1)
@@ -112,5 +112,5 @@ requirement def Need specializes MemoNeed
             attribute linkedDesignControls : String;
         }
     }
-    
+
     ```

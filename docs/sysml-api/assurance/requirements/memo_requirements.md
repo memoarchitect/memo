@@ -152,13 +152,13 @@ part def NotificationSpec specializes MemoPart
     ```sysml
     package memo_assurance_requirements {
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         // StakeholderNeed and the needs hierarchy now live in memo_assurance_requirements_needs.
         private import memo_assurance_requirements_needs::*;
         part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
-    
+
         // ISO 14971 risk-analysis inputs. These are model elements so hazards,
         // scenarios, requirements, and DHF records can trace to the exact use
         // definition or foreseeable misuse that motivated them.
@@ -174,7 +174,7 @@ part def NotificationSpec specializes MemoPart
             attribute foreseeableBasis : String;
             attribute affectedUseContext : String;
         }
-    
+
         // The kind of requirement. Was a subclass branch (SystemRequirement /
         // SoftwareRequirement / HardwareRequirement) plus a parallel design-control
         // specification hierarchy (DesignControlSpecification / System- / Software- /
@@ -191,7 +191,7 @@ part def NotificationSpec specializes MemoPart
             enum hardwareSpecification;
             enum designControl;
         }
-    
+
         requirement def Requirement specializes MemoRequirement {
             attribute requirementKind : RequirementKind;
             attribute statement : String;
@@ -246,5 +246,5 @@ part def NotificationSpec specializes MemoPart
             attribute stopBolus : Boolean;
         }
     }
-    
+
     ```

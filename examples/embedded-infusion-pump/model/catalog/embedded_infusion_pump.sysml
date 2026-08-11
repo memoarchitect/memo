@@ -1,6 +1,6 @@
 // Focused example: embedded programmable device — the three software views
 // (module / runtime / deployment) on a minimal infusion pump.
-// SoftwareItem buildsInto DeploymentUnit deploysTo ProcessingNode;
+// SoftwareElement buildsInto DeploymentUnit deploysTo ProcessingNode;
 // SoftwareComponent hostedBy ProcessingNode with scheduling properties.
 package memo_examples_embedded_infusion_pump {
     private import ScalarValues::*;

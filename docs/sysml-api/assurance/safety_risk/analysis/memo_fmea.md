@@ -34,18 +34,18 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`FMEAWorksheet`](#fmeaworksheet) | `item def` | Fmeaworksheet definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
+| [`FMEAWorksheet`](#fmeaworksheet) | `part def` | Fmeaworksheet definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
 | [`FailureMode`](#failuremode) | `item def` | Failure mode definition specializing `RiskItem`. | `RiskItem` |
 | [`FailureEffect`](#failureeffect) | `item def` | Failure effect definition specializing `RiskItem`. | `RiskItem` |
 | [`FailureCause`](#failurecause) | `item def` | Failure cause definition specializing `RiskItem`. | `RiskItem` |
-| [`DetectionMethod`](#detectionmethod) | `item def` | Detection method definition specializing `MemoPart`. | `MemoPart` |
+| [`DetectionMethod`](#detectionmethod) | `part def` | Detection method definition specializing `MemoPart`. | `MemoPart` |
 | [`FMEAAction`](#fmeaaction) | `part def` | Fmeaaction definition specializing `VerifiableElement`. | `VerifiableElement` |
-| [`FaultTree`](#faulttree) | `item def` | Fault tree definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
+| [`FaultTree`](#faulttree) | `part def` | Fault tree definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
 | [`FaultTreeEvent`](#faulttreeevent) | `item def` | Fault tree event definition specializing `RiskItem`. | `RiskItem` |
-| [`FaultTreeGate`](#faulttreegate) | `item def` | Fault tree gate definition specializing `MemoPart`. | `MemoPart` |
+| [`FaultTreeGate`](#faulttreegate) | `part def` | Fault tree gate definition specializing `MemoPart`. | `MemoPart` |
 | [`MinimalCutSet`](#minimalcutset) | `item def` | Minimal cut set definition specializing `RiskItem`. | `RiskItem` |
-| [`HAZOPStudy`](#hazopstudy) | `item def` | Hazopstudy definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
-| [`HAZOPNode`](#hazopnode) | `item def` | Hazopnode definition specializing `MemoPart`. | `MemoPart` |
+| [`HAZOPStudy`](#hazopstudy) | `part def` | Hazopstudy definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
+| [`HAZOPNode`](#hazopnode) | `part def` | Hazopnode definition specializing `MemoPart`. | `MemoPart` |
 | [`HAZOPDeviation`](#hazopdeviation) | `item def` | Hazopdeviation definition specializing `RiskItem`. | `RiskItem` |
 | [`CauseKind`](#causekind) | `enum def` | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. | — |
 | [`Causes`](#causes) | `connection def` | Typed relationship for causes. | `MemoRelationship` |
@@ -59,13 +59,13 @@
 ## FMEAWorksheet
 
 ```sysml
-item def FMEAWorksheet specializes AnalysisArtifact
+part def FMEAWorksheet specializes AnalysisArtifact
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Fmeaworksheet definition specializing `AnalysisArtifact`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `AnalysisArtifact` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
@@ -119,13 +119,13 @@ item def FailureCause specializes RiskItem
 ## DetectionMethod
 
 ```sysml
-item def DetectionMethod specializes MemoPart
+part def DetectionMethod specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Detection method definition specializing `MemoPart`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
@@ -149,13 +149,13 @@ part def FMEAAction specializes VerifiableElement
 ## FaultTree
 
 ```sysml
-item def FaultTree specializes AnalysisArtifact
+part def FaultTree specializes AnalysisArtifact
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Fault tree definition specializing `AnalysisArtifact`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `AnalysisArtifact` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
@@ -179,13 +179,13 @@ item def FaultTreeEvent specializes RiskItem
 ## FaultTreeGate
 
 ```sysml
-item def FaultTreeGate specializes MemoPart
+part def FaultTreeGate specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Fault tree gate definition specializing `MemoPart`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
@@ -209,13 +209,13 @@ item def MinimalCutSet specializes RiskItem
 ## HAZOPStudy
 
 ```sysml
-item def HAZOPStudy specializes AnalysisArtifact
+part def HAZOPStudy specializes AnalysisArtifact
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Hazopstudy definition specializing `AnalysisArtifact`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `AnalysisArtifact` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
@@ -224,13 +224,13 @@ item def HAZOPStudy specializes AnalysisArtifact
 ## HAZOPNode
 
 ```sysml
-item def HAZOPNode specializes MemoPart
+part def HAZOPNode specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Hazopnode definition specializing `MemoPart`. |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
 | Owning package | `memo_assurance_safety_risk_analysis` |
@@ -380,11 +380,11 @@ connection def HasFailureMode :> MemoRelationship
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
         private import memo_core_relationships::*;   // MemoRelationship
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_assurance_safety_risk::*;   // RiskItem
-        item def FMEAWorksheet specializes AnalysisArtifact {
+        part def FMEAWorksheet specializes AnalysisArtifact {
             attribute analysisScope : String;
             attribute standardReference : String;
             attribute analysisBasis : String;
@@ -429,7 +429,7 @@ connection def HasFailureMode :> MemoRelationship
             attribute occurrenceRating : ProbabilityKind;
             attribute preventionMethod : String;
         }
-        item def DetectionMethod specializes MemoPart {
+        part def DetectionMethod specializes MemoPart {
             attribute methodKind : DetectionMethodKind;
             attribute detectionPoint : String;
             attribute confidence : DetectionKind;
@@ -440,7 +440,7 @@ connection def HasFailureMode :> MemoRelationship
             attribute targetCompletionDate : String;
             attribute revisedRpn : Integer;
         }
-        item def FaultTree specializes AnalysisArtifact {
+        part def FaultTree specializes AnalysisArtifact {
             attribute standardReference : String;
             attribute analysisScope : String;
             attribute topEventDescription : String;
@@ -454,7 +454,7 @@ connection def HasFailureMode :> MemoRelationship
             attribute exposureTime : Real;
             attribute :>> description : String;
         }
-        item def FaultTreeGate specializes MemoPart {
+        part def FaultTreeGate specializes MemoPart {
             attribute gateKind : FaultTreeGateKind;
             attribute kValue : Integer;
             attribute nValue : Integer;
@@ -465,13 +465,13 @@ connection def HasFailureMode :> MemoRelationship
             attribute involvedEvents : String;
             attribute significance : String;
         }
-        item def HAZOPStudy specializes AnalysisArtifact {
+        part def HAZOPStudy specializes AnalysisArtifact {
             attribute standardReference : String;
             attribute processDescription : String;
             attribute studyScope : String;
             attribute teamComposition : String;
         }
-        item def HAZOPNode specializes MemoPart {
+        part def HAZOPNode specializes MemoPart {
             attribute nodeDescription : String;
             attribute designIntent : String;
             attribute operatingConditions : String;
@@ -486,7 +486,7 @@ connection def HasFailureMode :> MemoRelationship
             attribute likelihood : ProbabilityKind;
             attribute recommendation : String;
         }
-    
+
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
@@ -574,5 +574,5 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = hasFailureModeLinks meta SysML::Usage;
         }
     }
-    
+
     ```

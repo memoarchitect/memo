@@ -169,11 +169,11 @@ connection def NotesOn :> MemoRelationship
     package memo_core_annotations {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
-    
+
         abstract part def ModelAnnotation specializes MemoPart {
             // `body` is the annotation content; `shortDescription` is the one-line
             // form shown in badges, tables, and generated indexes.
@@ -186,7 +186,7 @@ connection def NotesOn :> MemoRelationship
             // requirement clause, diagram node, or other stable local reference.
             attribute anchor : String;
         }
-    
+
         part def ModelComment specializes ModelAnnotation {
             attribute commentStatus : CommentStatusKind;
             // Why the comment closed. Required in practice for `resolved` and
@@ -196,19 +196,19 @@ connection def NotesOn :> MemoRelationship
             attribute resolvedBy : String;
             attribute resolvedAt : String;
         }
-    
+
         part def ModelRationale specializes ModelAnnotation {
             // Decision, trade-off, standard clause, or evidence that the rationale
             // rests on. The body explains the reasoning in full.
             attribute basis : String;
         }
-    
+
         part def ModelNote specializes ModelAnnotation {
             // A lightweight category for filtering notes without constraining their
             // content (for example assumption, usage, implementation, or warning).
             attribute noteKind : String;
         }
-    
+
         // Replies form a thread through the ordinary Composes relation (parent
         // comment → reply), so CR-ONT-001's acyclicity invariant already covers
         // comment threads and no thread-specific relation is needed.
@@ -224,7 +224,7 @@ connection def NotesOn :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = commentsOnLinks meta SysML::Usage;
         }
-    
+
         connection def RationaleFor :> MemoRelationship {
             end rationaleRecord : ModelRationale :>> source;
             end justifiedElement :>> target;
@@ -235,7 +235,7 @@ connection def NotesOn :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = rationaleForLinks meta SysML::Usage;
         }
-    
+
         connection def NotesOn :> MemoRelationship {
             end noteRecord : ModelNote :>> source;
             end notedElement :>> target;
@@ -247,5 +247,5 @@ connection def NotesOn :> MemoRelationship
             :>> baseType = notesOnLinks meta SysML::Usage;
         }
     }
-    
+
     ```

@@ -24,18 +24,19 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_common::*` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`MaxResponseTimeConstraint`](#maxresponsetimeconstraint) | `constraint def` | Constraint that checks max response time constraint. | — |
-| [`LockoutIntervalConstraint`](#lockoutintervalconstraint) | `constraint def` | Constraint that checks lockout interval constraint. | — |
+| [`MaxResponseTimeConstraint`](#maxresponsetimeconstraint) | `constraint def` | Constraint that checks max response time constraint. | `MemoConstraint` |
+| [`LockoutIntervalConstraint`](#lockoutintervalconstraint) | `constraint def` | Constraint that checks lockout interval constraint. | `MemoConstraint` |
 
 ## MaxResponseTimeConstraint
 
 ```sysml
-constraint def MaxResponseTimeConstraint
+constraint def MaxResponseTimeConstraint :> MemoConstraint
 ```
 
 | Property | Value |
@@ -43,14 +44,14 @@ constraint def MaxResponseTimeConstraint
 | Description | Constraint that checks max response time constraint. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConstraint` |
 | Owning package | `memo_architecture_functional_constraints` |
 
 
 ## LockoutIntervalConstraint
 
 ```sysml
-constraint def LockoutIntervalConstraint
+constraint def LockoutIntervalConstraint :> MemoConstraint
 ```
 
 | Property | Value |
@@ -58,7 +59,7 @@ constraint def LockoutIntervalConstraint
 | Description | Constraint that checks lockout interval constraint. |
 | Kind | `constraint def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoConstraint` |
 | Owning package | `memo_architecture_functional_constraints` |
 
 
@@ -69,17 +70,18 @@ constraint def LockoutIntervalConstraint
     ```sysml
     package memo_architecture_functional_constraints {
         private import ScalarValues::*;
-    
+        private import memo_core_common::*;
+
         doc /* Reusable quantitative constraint definitions. */
-    
-        constraint def MaxResponseTimeConstraint {
+
+        constraint def MaxResponseTimeConstraint :> MemoConstraint {
             attribute responseTimeMs : Real;
             attribute maxAllowedMs : Real;
         }
-        constraint def LockoutIntervalConstraint {
+        constraint def LockoutIntervalConstraint :> MemoConstraint {
             attribute elapsedMs : Real;
             attribute lockoutMs : Real;
         }
     }
-    
+
     ```

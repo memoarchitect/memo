@@ -13,7 +13,7 @@ package memo_extension_ros_methodology {
         attribute :>> name = "Ros2Extension";
         attribute :>> version = "0.7.0";
         attribute :>> domain = "ROS 2 robotics middleware";
-        attribute :>> description = "Adds ROS 2 nodes, topics, QoS, publish/subscribe, and containerized ROS deployment.";
+        attribute :>> description = "Adds ROS 2 nodes, messages, directional ports, topic/service/action interfaces, QoS, and containerized deployment.";
         ref :>> baseMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
         attribute :>> includedModule = (

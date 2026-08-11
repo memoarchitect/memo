@@ -1,6 +1,8 @@
-// Software module view (§11; IEC 62304 5.3-5.4). Code/module structure only:
-// runtime structure lives in memo_architecture_implementation_software_runtime and
-// allocation in memo_architecture_realization_deployment.
+// Software module view (§11; IEC 62304 5.3-5.4). Following the SEI Views and
+// Beyond viewtypes, modules are implementation/code units; interacting runtime
+// elements are SoftwareComponents in
+// memo_architecture_implementation_software_runtime, and allocation lives in
+// memo_architecture_realization_deployment.
 package memo_architecture_implementation_software_structure {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
@@ -22,12 +24,16 @@ package memo_architecture_implementation_software_structure {
     // software view inherits it rather than re-declaring it: the code view
     // (SoftwareModule), the runtime view (SoftwareComponent), the system, and
     // the user interface (memo_architecture_implementation_ui::UIElement).
-    abstract part def SoftwareItem specializes ArchitectureElement {
+    // Structural software decomposition is part-native. IEC 62304 also uses
+    // the term "software item" for this concept, but reserving SoftwareItem
+    // for the native SysML item family keeps structural parts and exchanged
+    // values unambiguous in the model.
+    abstract part def SoftwareElement specializes ArchitectureElement {
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
     }
 
-    part def SoftwareSystem specializes SoftwareItem {
+    part def SoftwareSystem specializes SoftwareElement {
         attribute version : String;
         attribute operatingSystem : String;
     }
@@ -45,7 +51,7 @@ package memo_architecture_implementation_software_structure {
         enum soup;
     }
 
-    part def SoftwareModule specializes SoftwareItem {
+    part def SoftwareModule specializes SoftwareElement {
         attribute moduleKind : ModuleKind;
         attribute responsibility : String;
         // module-kind-specific detail (set only for the relevant moduleKind)
@@ -79,7 +85,15 @@ package memo_architecture_implementation_software_structure {
         attribute version : String;
     }
 
-    item def SBOMEntry specializes MemoExchangeItem {
+    // Software data/content that may be stored or exchanged through ports.
+    abstract item def SoftwareItem specializes MemoItem {
+        attribute schemaIdentifier : String;
+        attribute schemaVersion : String;
+        attribute encoding : String;
+        attribute timestampRequired : Boolean;
+    }
+
+    item def SBOMEntry specializes SoftwareItem {
         attribute componentName : String;
         attribute version : String;
         attribute supplier : String;
@@ -103,7 +117,7 @@ package memo_architecture_implementation_software_structure {
     // types declared here, and core must not depend on a domain package.
     connection def DependsOnSoup :> MemoRelationship {
         end component : ArchitectureElement :>> source;
-        end soupItem : SoftwareItem :>> target;
+        end soupItem : SoftwareElement :>> target;
     }
     abstract connection dependsOnSoupLinks : DependsOnSoup[*];
     metadata def <dependsOnSoup> DependsOnSoupMetadata :> SemanticMetadata {

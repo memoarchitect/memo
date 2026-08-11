@@ -9,7 +9,7 @@ package memo_extension_messaging_methodology {
         attribute :>> name = "MessagingExtension";
         attribute :>> version = "0.7.0";
         attribute :>> domain = "publish/subscribe messaging";
-        attribute :>> description = "Adds topics, brokers, and publish/subscribe relations with delivery semantics.";
+        attribute :>> description = "Adds message items, publisher/subscriber ports, topic interfaces, brokers, and delivery semantics.";
         ref :>> baseMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
         attribute :>> includedModule = "memo_extension_messaging";

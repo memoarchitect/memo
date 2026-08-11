@@ -34,15 +34,15 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`RegulatoryStandard`](#regulatorystandard) | `item def` | Standards and clauses | `MemoPart` |
-| [`StandardClause`](#standardclause) | `item def` | Standard clause definition specializing `MemoPart`. | `MemoPart` |
+| [`RegulatoryStandard`](#regulatorystandard) | `item def` | Standards and clauses | `MemoArtifactItem` |
+| [`StandardClause`](#standardclause) | `item def` | Standard clause definition specializing `MemoArtifactItem`. | `MemoArtifactItem` |
 | [`ConformsTo`](#conformsto) | `connection def` | Relationships | `MemoRelationship` |
 | [`TracesToDocument`](#tracestodocument) | `connection def` | Typed relationship for traces to document. | `MemoRelationship` |
 
 ## RegulatoryStandard
 
 ```sysml
-item def RegulatoryStandard :> MemoPart
+item def RegulatoryStandard :> MemoArtifactItem
 ```
 
 | Property | Value |
@@ -50,22 +50,22 @@ item def RegulatoryStandard :> MemoPart
 | Description | Standards and clauses |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoArtifactItem` |
 | Owning package | `memo_artifacts_standards_traceability` |
 
 
 ## StandardClause
 
 ```sysml
-item def StandardClause :> MemoPart
+item def StandardClause :> MemoArtifactItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Standard clause definition specializing `MemoPart`. |
+| Description | Standard clause definition specializing `MemoArtifactItem`. |
 | Kind | `item def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoArtifactItem` |
 | Owning package | `memo_artifacts_standards_traceability` |
 
 
@@ -149,12 +149,12 @@ connection def TracesToDocument :> MemoRelationship
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_artifacts_core::*;
-    
+
         // =========================================================================
         // Standards and clauses
         // =========================================================================
-    
-        item def RegulatoryStandard :> MemoPart {
+
+        item def RegulatoryStandard :> MemoArtifactItem {
             doc /* A regulatory or consensus standard a project claims conformance
                  * to, identified by its full designation including edition and
                  * amendments (e.g. "IEC 62366-1:2015+AMD1:2020"). Dropping the
@@ -178,8 +178,8 @@ connection def TracesToDocument :> MemoRelationship
             // types that derive no standards. A forgotten regime is a red test.
             attribute appliesToRegime : RegulatoryRegimeKind[0..*];
         }
-    
-        item def StandardClause :> MemoPart {
+
+        item def StandardClause :> MemoArtifactItem {
             doc /* One normative clause of a RegulatoryStandard, at the depth at
                  * which the standard makes a distinct requirement a MEMO document
                  * actually claims. `title` is a MEMO-authored scope phrase — a
@@ -198,11 +198,11 @@ connection def TracesToDocument :> MemoRelationship
             attribute title : String[0..1];
             attribute normativeStrength : String[0..1];
         }
-    
+
         // =========================================================================
         // Relationships
         // =========================================================================
-    
+
         connection def ConformsTo :> MemoRelationship {
             doc /* Any model element claims conformance to a standard clause.
                  * This is the edge the standards traceability matrix and the
@@ -216,7 +216,7 @@ connection def TracesToDocument :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = conformsToLinks meta SysML::Usage;
         }
-    
+
         connection def TracesToDocument :> MemoRelationship {
             doc /* Where the evidence for a clause claim is written down. The target
                  * is the existing controlled-artifact type — MEMO does not model a
@@ -236,5 +236,5 @@ connection def TracesToDocument :> MemoRelationship
             :>> baseType = tracesToDocumentLinks meta SysML::Usage;
         }
     }
-    
+
     ```

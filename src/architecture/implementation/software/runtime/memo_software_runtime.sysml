@@ -1,6 +1,7 @@
-// Software runtime (component-and-connector) view (§11). Runtime structure
-// with concurrency, scheduling, health monitoring, fault containment, and
-// update/rollback semantics. Module structure lives in
+// Software runtime (component-and-connector) view (§11), matching the SEI
+// Views and Beyond distinction between runtime components and implementation
+// modules. Runtime structure carries concurrency, scheduling, health
+// monitoring, fault containment, and update/rollback semantics. Module structure lives in
 // memo_architecture_implementation_software_structure; allocation in
 // memo_architecture_realization_deployment.
 //
@@ -31,7 +32,7 @@ package memo_architecture_implementation_software_runtime {
         enum messageBroker;
     }
 
-    part def SoftwareComponent specializes SoftwareItem {
+    part def SoftwareComponent specializes SoftwareElement {
         attribute runtimeKind : RuntimeKind;
         attribute responsibility : String;
         attribute periodMs : Real;

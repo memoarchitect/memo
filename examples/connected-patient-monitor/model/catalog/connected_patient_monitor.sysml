@@ -61,7 +61,7 @@ package memo_examples_connected_patient_monitor {
         attribute :>> securityCriticality = CriticalityKind::high;
         attribute :>> patientContactInterface = false;
     }
-    item tbHospitalEdge : TrustBoundary {
+    part tbHospitalEdge : TrustBoundary {
         attribute :>> id = "CPM-TB-001"; attribute :>> name = "DeviceLanToHospitalNetwork";
     }
     connection : CrossesTrustBoundary connect boundary ::> tbHospitalEdge to crossingItem ::> ifHl7Feed {

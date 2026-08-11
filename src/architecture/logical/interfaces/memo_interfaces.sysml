@@ -44,12 +44,19 @@ package memo_architecture_logical_interfaces {
         attribute apiStyle : String;
     }
 
+    // Software interaction contracts specialize the native MEMO interface
+    // family. Concrete technologies add their protocol roles and message
+    // flows; ports remain the endpoints that components actually own.
+    abstract interface def SoftwareInterface specializes Interface {
+        attribute :>> direction = DirectionKind::inputOutput;
+    }
+
     // A typed thing exchanged at a boundary. Concrete items such as
     // AlarmSignal and FlowCommand specialize this type; they are neither
     // functions nor generic action-flow notation.
     // The kind of item is given by itemKind (data / command / signal / …);
     // the control-specific fields below apply only when itemKind = command.
-    item def InterfaceItem specializes MemoExchangeItem {
+    item def InterfaceItem specializes MemoItem {
         attribute itemKind : InterfaceItemKind;
         attribute confidentialityClass : String;
         attribute integrityClass : String;

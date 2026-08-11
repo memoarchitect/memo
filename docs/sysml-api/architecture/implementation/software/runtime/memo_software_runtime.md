@@ -35,7 +35,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`RuntimeKind`](#runtimekind) | `enum def` | process / thread / task / service / container / partition / dataStore / messageBroker. | — |
-| [`SoftwareComponent`](#softwarecomponent) | `part def` | Software component definition specializing `SoftwareItem`. | `SoftwareItem` |
+| [`SoftwareComponent`](#softwarecomponent) | `part def` | Software component definition specializing `SoftwareElement`. | `SoftwareElement` |
 | [`ComponentConnects`](#componentconnects) | `connection def` | Typed relationship for component connects. | `MemoRelationship` |
 
 ## RuntimeKind
@@ -56,15 +56,15 @@ enum def RuntimeKind
 ## SoftwareComponent
 
 ```sysml
-part def SoftwareComponent specializes SoftwareItem
+part def SoftwareComponent specializes SoftwareElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software component definition specializing `SoftwareItem`. |
+| Description | Software component definition specializing `SoftwareElement`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `SoftwareItem` |
+| Specializes | `SoftwareElement` |
 | Owning package | `memo_architecture_implementation_software_runtime` |
 
 
@@ -88,9 +88,10 @@ connection def ComponentConnects :> MemoRelationship
 ??? code "architecture/implementation/software/runtime/memo_software_runtime.sysml"
 
     ```sysml
-    // Software runtime (component-and-connector) view (§11). Runtime structure
-    // with concurrency, scheduling, health monitoring, fault containment, and
-    // update/rollback semantics. Module structure lives in
+    // Software runtime (component-and-connector) view (§11), matching the SEI
+    // Views and Beyond distinction between runtime components and implementation
+    // modules. Runtime structure carries concurrency, scheduling, health
+    // monitoring, fault containment, and update/rollback semantics. Module structure lives in
     // memo_architecture_implementation_software_structure; allocation in
     // memo_architecture_realization_deployment.
     //
@@ -102,12 +103,12 @@ connection def ComponentConnects :> MemoRelationship
     package memo_architecture_implementation_software_runtime {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-    
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_implementation_software_structure::*;
-    
+
         // process / thread / task / service / container / partition /
         // dataStore / messageBroker.
         enum def RuntimeKind {
@@ -120,8 +121,8 @@ connection def ComponentConnects :> MemoRelationship
             enum dataStore;
             enum messageBroker;
         }
-    
-        part def SoftwareComponent specializes SoftwareItem {
+
+        part def SoftwareComponent specializes SoftwareElement {
             attribute runtimeKind : RuntimeKind;
             attribute responsibility : String;
             attribute periodMs : Real;
@@ -163,7 +164,7 @@ connection def ComponentConnects :> MemoRelationship
             // assurance ones — plus `runtimeKind` itself, which says which family
             // a component belongs to without claiming to describe it.
         }
-    
+
         connection def ComponentConnects :> MemoRelationship {
             attribute protocolSummary : String;
             end sourceComponent : SoftwareComponent :>> source;
@@ -176,5 +177,5 @@ connection def ComponentConnects :> MemoRelationship
             :>> baseType = componentConnectsLinks meta SysML::Usage;
         }
     }
-    
+
     ```

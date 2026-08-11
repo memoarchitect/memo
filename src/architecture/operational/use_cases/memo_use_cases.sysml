@@ -19,12 +19,7 @@ package memo_architecture_operational_use_cases {
         enum development;
     }
 
-    use case def UseCase {
-        attribute id : String;
-        attribute name : String;
-        attribute description : String;
-        attribute rationale : String;
-        attribute sourceReference : String;
+    use case def UseCase :> MemoUseCase {
         // Text of this use case's goal; this is not a separate Goal element.
         attribute goalStatement : String;
         attribute trigger : String;

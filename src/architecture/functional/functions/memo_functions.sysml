@@ -121,7 +121,7 @@ package memo_architecture_functional_functions {
     action def FunctionalFlowStep specializes MemoAction {
         ref function : MemoFunction[0..1];
         ref exchange : FunctionalExchange[0..1];
-        ref item exchangedItem : MemoExchangeItem[0..1];
+        ref item exchangedItem : MemoItem[0..1];
     }
 
     // The functional-layer scenario selects one functional route and realizes

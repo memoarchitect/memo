@@ -4,7 +4,9 @@ package memo_artifacts_core {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
 
-    item def ControlledArtifact :> MemoPart {
+    abstract item def MemoArtifactItem :> MemoItem;
+
+    item def ControlledArtifact :> MemoArtifactItem {
         attribute version : String;
         attribute artifactKind : ArtifactKind;
         attribute owner : String;

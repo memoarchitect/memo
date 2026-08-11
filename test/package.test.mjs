@@ -454,19 +454,16 @@ test('extension definitions collide with neither the base nor each other (D2)', 
 });
 
 test('a relation declared by an extension specializes a base relation (D1)', () => {
-  // extensions/README.md rule 1. An extension MAY declare relations — publish
-  // and subscribe are connector concepts, and a technology stack that cannot
-  // say so cannot be modelled. What it may not do is root one independently:
-  // that would leave it without the identification core, without a place in
-  // the relationship registry, and opaque to a conforming tool.
+  // extensions/README.md rule 1. Native constructs come first (ROS uses ports,
+  // interfaces, items and flows). When a domain genuinely needs a new
+  // relation, it may declare one, but it may not root independently: that
+  // would leave it without the identification core and relationship registry.
   //
   // The guard this replaces was `doesNotMatch(clinical, /connection def/)` — a
   // regression check on one example that had hardened into an apparent rule.
   const baseRelations = relationSupertypes(walkSysml('src').map((file) => read(file)).join('\n'));
   const extensionRelations = relationSupertypes(
     walkSysml('extensions').map((file) => read(file)).join('\n'));
-  assert.ok(extensionRelations.size > 0, 'at least one extension exercises the rule');
-
   for (const [name, supertype] of extensionRelations) {
     // Walk the specialization chain; it must terminate in a base relation.
     const seen = new Set([name]);
@@ -477,6 +474,52 @@ test('a relation declared by an extension specializes a base relation (D1)', () 
     }
     assert.ok(current !== undefined && baseRelations.has(current),
       `${name} roots on ${current ?? 'nothing'}, which is not a base relation`);
+  }
+});
+
+test('MEMO definitions use their native metaclass wrapper', () => {
+  // The standalone SysML activity sample intentionally demonstrates the
+  // language without MEMO. Every ontology, extension, and ordinary MEMO
+  // example definition must instead specialize a construct-specific root.
+  const nativeSample = join('examples', 'sysml-diagram-samples', 'model', 'sysml_v2_activity_example.sysml');
+  const files = [...walkSysml('src'), ...walkSysml('extensions'), ...walkSysml('examples')]
+    .filter((file) => file !== nativeSample && !file.includes('/.venv/'));
+  const roots = new Set([
+    'MemoPart', 'MemoAction', 'MemoPort', 'MemoInterface', 'MemoItem',
+    'MemoUseCase', 'MemoConstraint', 'MemoRequirementElement',
+    'MemoVerificationCase', 'MemoState',
+  ]);
+  const definition = /^\s*(?:abstract\s+)?(?:part|item|action|port|interface|use case|constraint|requirement|verification|state) def\s+([A-Za-z_]\w*)([^\n]*)/gm;
+
+  for (const file of files) {
+    for (const match of read(file).matchAll(definition)) {
+      const [, name, declaration] = match;
+      if (roots.has(name)) continue;
+      assert.match(declaration, /(?:\bspecializes\b|:>)/,
+        `${file}: ${name} bypasses its MEMO metaclass wrapper`);
+    }
+  }
+});
+
+test('every MEMO item definition reaches MemoItem', () => {
+  const nativeSample = join('examples', 'sysml-diagram-samples', 'model', 'sysml_v2_activity_example.sysml');
+  const files = [...walkSysml('src'), ...walkSysml('extensions'), ...walkSysml('examples')]
+    .filter((file) => file !== nativeSample && !file.includes('/.venv/'));
+  const parents = new Map([['MemoItem', undefined]]);
+  const itemDefinition = /^\s*(?:abstract\s+)?item def\s+([A-Za-z_]\w*)\s*(?:(?:specializes|:>)\s*([A-Za-z_]\w*))?/gm;
+
+  for (const file of files) {
+    for (const match of read(file).matchAll(itemDefinition)) parents.set(match[1], match[2]);
+  }
+  for (const name of parents.keys()) {
+    if (name === 'MemoItem') continue;
+    const seen = new Set([name]);
+    let current = parents.get(name);
+    while (current !== undefined && current !== 'MemoItem' && !seen.has(current)) {
+      seen.add(current);
+      current = parents.get(current);
+    }
+    assert.equal(current, 'MemoItem', `${name} does not specialize MemoItem`);
   }
 });
 

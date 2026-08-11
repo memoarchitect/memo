@@ -46,7 +46,7 @@
     ```sysml
     package memo_methodology_profiles {
         private import ScalarValues::*;
-    
+
         private import memo_methodology_core::*;
         private import memo_methodology_rules::*;
         private import memo_methodology_patterns::*;
@@ -54,7 +54,7 @@
         private import memo_methodology_gates::*;
         private import memo_core_enumerations::*;
         private import memo_core_methodology_scope::*;
-    
+
         part mdCoreLibrary : MethodologyLibrary {
             attribute :>> id = "METHLIB-001";
             attribute :>> name = "MedicalDeviceMethodologyLibrary";
@@ -62,7 +62,7 @@
             attribute :>> domain = "medical device modeling";
             attribute :>> description = "Methodology layer for selecting, restricting, sequencing, tailoring, and lightly extending use of the medical-device ontology.";
         }
-    
+
         // The default methodology deliberately selects everything the project's
         // resolved reusable packages provide. That is what `scopeMode` exists to
         // say: `allAvailable` is an authored decision, not an empty list that the
@@ -84,7 +84,7 @@
             attribute :>> description = "MEMO default medical-device methodology. Selects every layer, discipline, standard, artifact kind, and viewpoint the resolved ontology and extension packages provide.";
             attribute :>> scopeMode = ScopeModeKind::allAvailable;
         }
-    
+
         part useRiskAndResidualRule : ElementUsageRule {
             attribute :>> id = "RULE-001";
             attribute :>> name = "UseRiskAndResidualRisk";
@@ -92,7 +92,7 @@
             attribute :>> strength = RuleStrengthKind::recommended;
             attribute :>> rationaleText = "Even a light methodology should distinguish pre- and post-mitigation risk and assess against a matrix.";
         }
-    
+
         part requireVerifiedByRule : RelationUsageRule {
             attribute :>> id = "RULE-002";
             attribute :>> name = "VerifiedBysRequired";
@@ -100,7 +100,7 @@
             attribute :>> strength = RuleStrengthKind::required;
             attribute :>> rationaleText = "Safety-relevant requirements and controls shall trace to verification.";
         }
-    
+
         part lightRiskPattern : ModelingPattern {
             attribute :>> id = "PAT-001";
             attribute :>> name = "LightRiskBeforeAfterPattern";
@@ -108,7 +108,7 @@
             attribute :>> stage = WorkflowStageKind::risk;
             attribute :>> strength = RuleStrengthKind::recommended;
         }
-    
+
         part lightTracePattern : ModelingPattern {
             attribute :>> id = "PAT-002";
             attribute :>> name = "CoreTracePattern";
@@ -116,7 +116,7 @@
             attribute :>> stage = WorkflowStageKind::requirements;
             attribute :>> strength = RuleStrengthKind::required;
         }
-    
+
         action stepRequirements : MethodologyWorkflowStep {
             attribute :>> id = "STEP-001";
             attribute :>> name = "CaptureRequirements";
@@ -125,7 +125,7 @@
             attribute :>> entryCriteria = "Intended use and actors understood.";
             attribute :>> exitCriteria = "Initial requirement set exists.";
         }
-    
+
         action stepArchitecture : MethodologyWorkflowStep {
             attribute :>> id = "STEP-002";
             attribute :>> name = "DefineArchitecture";
@@ -134,7 +134,7 @@
             attribute :>> entryCriteria = "Initial requirements exist.";
             attribute :>> exitCriteria = "Core architecture and interfaces exist.";
         }
-    
+
         action stepRisk : MethodologyWorkflowStep {
             attribute :>> id = "STEP-003";
             attribute :>> name = "PerformRiskAnalysis";
@@ -143,7 +143,7 @@
             attribute :>> entryCriteria = "Initial requirements and key behavior exist.";
             attribute :>> exitCriteria = "Risk and control model exists.";
         }
-    
+
         action stepVerification : MethodologyWorkflowStep {
             attribute :>> id = "STEP-004";
             attribute :>> name = "PlanVerification";
@@ -155,19 +155,19 @@
         first stepRequirements then stepArchitecture;
         first stepArchitecture then stepRisk;
         first stepRisk then stepVerification;
-    
+
         part gateLightComplete : QualityGate {
             attribute :>> id = "GATE-001";
             attribute :>> name = "LightMethodReady";
             attribute :>> gateStage = WorkflowStageKind::verificationStage;
             attribute :>> passCriteria = "Core traceability, risk, verification, and RMF view support are present.";
         }
-    
+
         // The GPCA binding used to live here, in the reusable default methodology,
         // naming its methodology by string. A project binding is project content:
         // it now lives in the GPCA project's own `model/catalog/project.sysml` and
         // references its methodology with a typed SysML reference.
-    
+
         part rmpDoc : DhfDocumentBinding {
             attribute :>> id = "DHF-001";
             attribute :>> name = "RiskManagementPlan";
@@ -179,7 +179,7 @@
             attribute :>> lifecycleStage = WorkflowStageKind::risk;
             attribute :>> required = true;
         }
-    
+
         part harDoc : DhfDocumentBinding {
             attribute :>> id = "DHF-002";
             attribute :>> name = "HazardAnalysisReport";
@@ -191,7 +191,7 @@
             attribute :>> lifecycleStage = WorkflowStageKind::risk;
             attribute :>> required = true;
         }
-    
+
         part sadDoc : DhfDocumentBinding {
             attribute :>> id = "DHF-003";
             attribute :>> name = "SoftwareArchitectureDescription";
@@ -203,7 +203,7 @@
             attribute :>> lifecycleStage = WorkflowStageKind::architecture;
             attribute :>> required = true;
         }
-    
+
         part threatModelDoc : DhfDocumentBinding {
             attribute :>> id = "DHF-004";
             attribute :>> name = "CybersecurityThreatModel";
@@ -215,7 +215,7 @@
             attribute :>> lifecycleStage = WorkflowStageKind::risk;
             attribute :>> required = true;
         }
-    
+
         part vvPlanDoc : DhfDocumentBinding {
             attribute :>> id = "DHF-005";
             attribute :>> name = "VerificationValidationPlan";
@@ -228,5 +228,5 @@
             attribute :>> required = true;
         }
     }
-    
+
     ```

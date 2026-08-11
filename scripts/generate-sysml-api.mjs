@@ -208,7 +208,7 @@ ${declarationSections}
 ??? code "${record.relativeSource}"
 
     \`\`\`sysml
-${fenceSource(record.source).split('\n').map((line) => `    ${line}`).join('\n')}
+${fenceSource(record.source).split('\n').map((line) => line.length ? `    ${line}` : '').join('\n')}
     \`\`\`
 `;
 };

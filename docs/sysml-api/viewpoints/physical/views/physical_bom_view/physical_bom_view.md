@@ -42,11 +42,11 @@
     ```sysml
     package memo_viewpoints_physical_views_physical_bom_view {
         private import ScalarValues::*;
-    
+
                     private import memo_viewpoints_definitions::*;
                     private import memo_core_enumerations::*;
         private import memo_viewpoints_physical_physical_viewpoint::*;
-    
+
                     view physicalBOMView : MemoDiagramView {
                         expose memo_viewpoints_physical_views_physical_bom_view::*;
                         attribute depth = 2;
@@ -69,5 +69,5 @@
         part :>> viewpointDefinition = physicalViewpoint;
                     }
     }
-    
+
     ```

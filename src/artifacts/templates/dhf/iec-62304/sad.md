@@ -53,7 +53,7 @@ kind: [HardwareComponent, HardwareAssembly, SoftwareSystem, SoftwareComponent, S
 display: table
 columns: name, layer, doc
 sort: name
-empty: "No SoftwareItem elements defined."
+empty: "No SoftwareElement elements defined."
 ```
 
 ### 3.2 Software Units
