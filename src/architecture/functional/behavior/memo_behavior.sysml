@@ -80,16 +80,16 @@ package memo_architecture_functional_behavior {
     part def InteractionMessage specializes MemoPart {
         attribute messageKind : MessageKind;
         attribute sequenceOrder : Integer;
-        attribute senderComponent : String;
-        attribute receiverComponent : String;
-        attribute exchangeItem : String;
+        ref senderComponent : MemoPart[1];
+        ref receiverComponent : MemoPart[1];
+        ref exchangeItem : MemoItem[1];
         attribute timingConstraintMs : String;
     }
     part def TimingConstraint specializes VerifiableElement {
         attribute constraintKind : TimingConstraintKind;
         attribute minMs : String;
         attribute maxMs : String;
-        attribute referenceElement : String;
+        ref referenceElement : MemoPart[1];
         attribute verificationMethod : VerificationMethodKind;
     }
 }

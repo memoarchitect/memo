@@ -44,6 +44,10 @@ package memo_examples_gpca_pump_gpca_architecture {
         attribute :>> safetyPartition = "supporting partition";
     }
 
+    // Native SysML message: the safety monitor's alarm notification is a flow
+    // between the two logical components, not an opaque InteractionMessage.
+    message alarmNotification of LogicalExchangeItem from lcSafetyMonitoring to lcOperatorInterface;
+
     // ── Device (UMN AADL architectural model) ───────────────────
     // The AADL top-level `GPCA_Device` system. GPCA_Device.Impl declares only
     // GPCA_HW_Sensors, GPCA_SW, and GPCA_HW_Actuators as subcomponents.
