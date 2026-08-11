@@ -36,14 +36,14 @@ package memo_extension_messaging {
     // and the port usage placed on a component. The shared `topic` reference
     // points every endpoint at the same named item usage.
     port def MessagingPublisher specializes SoftwarePort {
-        out item message : MessagingMessage;
+        out item payload : MessagingMessage;
         ref item topic : MessagingMessage;
         attribute deliverySemantics : MessagingDeliveryKind;
         attribute publishRateHz : Real;
     }
 
     port def MessagingSubscriber specializes SoftwarePort {
-        in item message : MessagingMessage;
+        in item payload : MessagingMessage;
         ref item topic : MessagingMessage;
         attribute deliverySemantics : MessagingDeliveryKind;
         attribute lossBehaviour : String;
@@ -52,7 +52,7 @@ package memo_extension_messaging {
     interface def MessagingTopicInterface specializes SoftwareInterface {
         end publisher : MessagingPublisher :>> source;
         end subscriber : MessagingSubscriber :>> target;
-        flow of MessagingMessage from publisher.message to subscriber.message;
+        flow of MessagingMessage from publisher.payload to subscriber.payload;
     }
 
     part def MessagingBroker specializes SoftwareComponent {
