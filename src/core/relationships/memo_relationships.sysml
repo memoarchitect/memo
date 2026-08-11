@@ -128,14 +128,14 @@ package memo_core_relationships {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = satisfiedByLinks meta SysML::Usage;
     }
-    connection def AllocatedTo :> MemoRelationship {
+    allocation def AllocatedTo :> MemoRelationship, Allocations::Allocation {
         end function :>> source;
         end allocatedElement :>> target;
     }
     abstract connection allocatedToLinks : AllocatedTo[*];
     metadata def <allocatedTo> AllocatedToMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
+        :> annotatedElement : SysML::AllocationDefinition;
+        :> annotatedElement : SysML::AllocationUsage;
         :>> baseType = allocatedToLinks meta SysML::Usage;
     }
     // Realizes is the single realization relation (realizing/concrete element →
