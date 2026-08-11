@@ -5,6 +5,10 @@
 # namespace-aligned source modules and the memo:: facade resolve as one model.
 include = [
     "src",
+    # Extensions are ontology, not examples: reusable packages that specialize
+    # the base and are selected by a methodology or a project binding. They
+    # resolve against `src`, so the editor has to see both as one model.
+    "extensions",
 ]
 
 exclude = [

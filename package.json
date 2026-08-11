@@ -70,6 +70,7 @@
     "src/viewpoints/",
     "src/memo_namespaces.sysml",
     "templates/",
-    "examples/"
+    "examples/",
+    "extensions/"
   ]
 }

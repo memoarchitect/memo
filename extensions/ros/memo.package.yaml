@@ -1,0 +1,18 @@
+# Application/distribution descriptor for this MEMO package.
+#
+# Identity and location only. It records what this package is called, what
+# version it is, and where its SysML source sits so a resolver can find it.
+# It does not select model content: the project's native SysML imports and its
+# ProjectMethodBinding decide what is in the model. Semantic fields
+# (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
+# removed at the native semantic flip and are now rejected if present.
+name: '@memoarchitect/extension-ros'
+version: 0.7.0
+description: ROS 2 nodes, topics, QoS, publish/subscribe, and containerized deployment
+license: MIT
+tags:
+- memo
+- methodology
+- extension
+- ros
+sysmlDir: ./src

@@ -20,7 +20,8 @@ parallel name for the same concept.
 | Extend the operational world (actors, use cases, workflows, scenarios, tasks) | `src/architecture/operational/` |
 | Extend needs, requirements, risk, cybersecurity, human factors, or V&V | `src/assurance/<discipline>/` |
 | Extend architecture semantics (functional, logical, software, deployment, physical) | `src/architecture/<layer>` |
-| Demonstrate optional domain vocabulary | `examples/extensions/<extension>/src` and its methodology `includedModule` |
+| Add technology or domain vocabulary that is not true of every project | `extensions/<extension>/src` and its methodology `includedModule` |
+| Demonstrate using an extension | a focused example under `examples/` whose binding lists the module |
 | Extend UI or interaction definitions | `src/architecture/implementation/ui` |
 | Add a device-specific mode, interface, control, or kind | `profile/` or a project package — **not** the core |
 | Add or adjust a workflow, gate, or viewpoint binding | `src/methodology/`, `src/viewpoints/`, or `methodologies/` |
