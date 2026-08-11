@@ -112,9 +112,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     }
 
     // ── Mode transitions (CriSys §4.1, 1:1 with source REQs) ────
-    part trSystemStart : Transition {
+    transition trSystemStart : Transition first modeOFF then modeIDLE {
         attribute :>> id = "TR-001"; attribute :>> name = "SystemStartToIdle";
-        attribute :>> sourceState = "OFF"; attribute :>> targetState = "ON.IDLE";
         attribute :>> trigger = "System_start_prog commanded";
         attribute :>> guardSummary = "none in source (MEMO extension REQ-X-02 additionally gates therapy on POST)";
         attribute :>> effectSummary = "A.4 variables set to default values (REQ 4)";
@@ -122,9 +121,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.1.2 (REQ 4)";
     }
-    part trSystemStop : Transition {
+    transition trSystemStop : Transition first modeON then modeOFF {
         attribute :>> id = "TR-002"; attribute :>> name = "SystemStopToOff";
-        attribute :>> sourceState = "ON"; attribute :>> targetState = "OFF";
         attribute :>> trigger = "System_stop_prog commanded";
         attribute :>> guardSummary = "none — allowed from any ON sub-mode";
         attribute :>> effectSummary = "stop infusion, cancel all notifications (REQ 5)";
@@ -132,9 +130,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.1.2 (REQ 5)";
     }
-    part trStartTherapy : Transition {
+    transition trStartTherapy : Transition first modeIDLE then modeBASAL {
         attribute :>> id = "TR-003"; attribute :>> name = "ConfirmedInitiateToBasal";
-        attribute :>> sourceState = "ON.IDLE"; attribute :>> targetState = "ON.THERAPY.ACTIVE.BASAL";
         attribute :>> trigger = "second Infusion_initiate_prog (confirmation per REQ 9)";
         attribute :>> guardSummary = "Inhibited_Infusion_macro = FALSE; saved prescription available (REQ 7)";
         attribute :>> effectSummary = "Actual_Infusion_Duration_macro = 0; Actual_Volume_Infused_macro = 0 (REQ 12)";
@@ -142,9 +139,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.3.2 (REQ 12)";
     }
-    part trInitiateWhileInhibited : Transition {
+    transition trInitiateWhileInhibited : Transition first modeIDLE then modePAUSED {
         attribute :>> id = "TR-004"; attribute :>> name = "ConfirmedInitiateWhileInhibitedToPaused";
-        attribute :>> sourceState = "ON.IDLE"; attribute :>> targetState = "ON.THERAPY.PAUSED";
         attribute :>> trigger = "second Infusion_initiate_prog (confirmation per REQ 9)";
         attribute :>> guardSummary = "Inhibited_Infusion_macro = TRUE";
         attribute :>> effectSummary = "macros reset; 'Infusion Inhibited' actions per REQ 59 (REQ 13)";
@@ -152,9 +148,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.3.2 (REQ 13)";
     }
-    part trAlarmPause : Transition {
+    transition trAlarmPause : Transition first modeTHERAPY then modePAUSED {
         attribute :>> id = "TR-005"; attribute :>> name = "TherapyAlarmToPausedKvo";
-        attribute :>> sourceState = "ON.THERAPY"; attribute :>> targetState = "ON.THERAPY.PAUSED";
         attribute :>> trigger = "over-infusion flow rate (REQ 19), over-infusion VTBI (REQ 20), air embolism (REQ 21), reverse delivery (REQ 22), or empty reservoir (REQ 23) condition";
         attribute :>> guardSummary = "none — unconditional from any THERAPY sub-mode";
         attribute :>> effectSummary = "REQ 59 actions for the notification; PAUSED delivers FlowRate_kvo_hd keep-vein-open flow (REQ 43), not zero";
@@ -162,9 +157,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = true;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 19-23)";
     }
-    part trInfusionComplete : Transition {
+    transition trInfusionComplete : Transition first modeACTIVE then modeIDLE {
         attribute :>> id = "TR-006"; attribute :>> name = "InfusionCompleteToIdle";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE"; attribute :>> targetState = "ON.IDLE";
         attribute :>> trigger = "Actual_Infusion_Duration_macro >= Duration_total_prog OR Actual_Volume_Infused_macro >= VTBI_total_prog";
         attribute :>> guardSummary = "none";
         attribute :>> effectSummary = "'Infusion Complete' actions per REQ 59; completion record in operational log (REQ 79)";
@@ -172,9 +166,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 28)";
     }
-    part trManualInhibit : Transition {
+    transition trManualInhibit : Transition first modeACTIVE then modePAUSED {
         attribute :>> id = "TR-007"; attribute :>> name = "ManualInhibitToPaused";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE"; attribute :>> targetState = "ON.THERAPY.PAUSED";
         attribute :>> trigger = "Infusion_inhibit_prog commanded";
         attribute :>> guardSummary = "none";
         attribute :>> effectSummary = "'Infusion Manually Inhibited' actions per REQ 59";
@@ -182,9 +175,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 29)";
     }
-    part trAllInhibited : Transition {
+    transition trAllInhibited : Transition first modeACTIVE then modePAUSED {
         attribute :>> id = "TR-008"; attribute :>> name = "AllInhibitedToPaused";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE"; attribute :>> targetState = "ON.THERAPY.PAUSED";
         attribute :>> trigger = "Inhibited_Infusion_macro AND Inhibited_Bolus_macro AND Inhibited_PatientBolus_macro all TRUE";
         attribute :>> guardSummary = "none";
         attribute :>> effectSummary = "therapy paused at KVO flow";
@@ -192,9 +184,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = true;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 30)";
     }
-    part trSquareBolus : Transition {
+    transition trSquareBolus : Transition first modeBASAL then modeSQUARE {
         attribute :>> id = "TR-009"; attribute :>> name = "ScheduledSquareBolusStart";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.BASAL"; attribute :>> targetState = "ON.THERAPY.ACTIVE.SQUARE_BOLUS";
         attribute :>> trigger = "scheduled SQUARE BOLUS start — auto-initiates every Interval_sbolus_prog for Duration_sbolus_prog during Duration_total_prog (REQ 24); no external trigger";
         attribute :>> guardSummary = "Inhibited_Bolus_macro = FALSE AND Inhibited_Infusion_macro = FALSE AND (no BolusRequest_prog OR a REQ 25 ignore condition holds)";
         attribute :>> effectSummary = "FlowRate_Mode_macro = FlowRate_sbolus_prog";
@@ -202,9 +193,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 31) and §4.1.6.1 (REQ 24)";
     }
-    part trPatientBolus : Transition {
+    transition trPatientBolus : Transition first modeBASAL then modePBOLUS {
         attribute :>> id = "TR-010"; attribute :>> name = "BasalToPatientBolus";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.BASAL"; attribute :>> targetState = "ON.THERAPY.ACTIVE.PATIENT_BOLUS";
         attribute :>> trigger = "BolusRequest_prog";
         attribute :>> guardSummary = "none of the REQ 25 ignore conditions hold (inhibits, lockout, bolus count, already in PATIENT BOLUS)";
         attribute :>> effectSummary = "FlowRate_Mode_macro = FlowRate_pbolus_prog";
@@ -212,9 +202,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 32)";
     }
-    part trSquareToPatientBolus : Transition {
+    transition trSquareToPatientBolus : Transition first modeSQUARE then modePBOLUS {
         attribute :>> id = "TR-011"; attribute :>> name = "SquareBolusToPatientBolus";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.SQUARE_BOLUS"; attribute :>> targetState = "ON.THERAPY.ACTIVE.PATIENT_BOLUS";
         attribute :>> trigger = "BolusRequest_prog";
         attribute :>> guardSummary = "none of the REQ 25 ignore conditions hold";
         attribute :>> effectSummary = "patient bolus interrupts the square bolus; FlowRate_Mode_macro = FlowRate_pbolus_prog";
@@ -222,9 +211,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 33)";
     }
-    part trSquareToBasal : Transition {
+    transition trSquareToBasal : Transition first modeSQUARE then modeBASAL {
         attribute :>> id = "TR-012"; attribute :>> name = "SquareBolusEndToBasal";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.SQUARE_BOLUS"; attribute :>> targetState = "ON.THERAPY.ACTIVE.BASAL";
         attribute :>> trigger = "Inhibited_Bolus_macro = TRUE or scheduled square bolus end (REQ 24)";
         attribute :>> guardSummary = "Inhibited_Infusion_macro = FALSE AND (no BolusRequest_prog OR a REQ 25 ignore condition holds)";
         attribute :>> effectSummary = "FlowRate_Mode_macro = FlowRate_basal_prog";
@@ -232,9 +220,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 34)";
     }
-    part trPatientBolusToBasal : Transition {
+    transition trPatientBolusToBasal : Transition first modePBOLUS then modeBASAL {
         attribute :>> id = "TR-013"; attribute :>> name = "PatientBolusEndToBasal";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.PATIENT_BOLUS"; attribute :>> targetState = "ON.THERAPY.ACTIVE.BASAL";
         attribute :>> trigger = "Inhibited_PatientBolus_macro = TRUE or patient-bolus duration >= Duration_pbolus_prog";
         attribute :>> guardSummary = "Inhibited_Infusion_macro = FALSE AND (no square bolus scheduled in progress OR (square bolus scheduled AND Inhibited_Bolus_macro = TRUE))";
         attribute :>> effectSummary = "patient bolus delivery stopped; FlowRate_Mode_macro = FlowRate_basal_prog";
@@ -242,9 +229,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 35)";
     }
-    part trPatientBolusToSquare : Transition {
+    transition trPatientBolusToSquare : Transition first modePBOLUS then modeSQUARE {
         attribute :>> id = "TR-014"; attribute :>> name = "PatientBolusEndToSquareBolus";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.PATIENT_BOLUS"; attribute :>> targetState = "ON.THERAPY.ACTIVE.SQUARE_BOLUS";
         attribute :>> trigger = "Inhibited_PatientBolus_macro = TRUE or patient-bolus duration >= Duration_pbolus_prog";
         attribute :>> guardSummary = "Inhibited_Infusion_macro = FALSE AND a square bolus is scheduled to be in progress AND Inhibited_Bolus_macro = FALSE";
         attribute :>> effectSummary = "patient bolus delivery stopped; scheduled square bolus resumes";
@@ -252,9 +238,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 36)";
     }
-    part trBasalInhibit : Transition {
+    transition trBasalInhibit : Transition first modeBASAL then modePAUSED {
         attribute :>> id = "TR-015"; attribute :>> name = "BasalInhibitToPaused";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.BASAL"; attribute :>> targetState = "ON.THERAPY.PAUSED";
         attribute :>> trigger = "Inhibited_Infusion_macro = TRUE";
         attribute :>> guardSummary = "none";
         attribute :>> effectSummary = "therapy paused at KVO flow";
@@ -262,9 +247,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = true;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 37)";
     }
-    part trPatientBolusInhibit : Transition {
+    transition trPatientBolusInhibit : Transition first modePBOLUS then modePAUSED {
         attribute :>> id = "TR-016"; attribute :>> name = "PatientBolusInhibitToPaused";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.PATIENT_BOLUS"; attribute :>> targetState = "ON.THERAPY.PAUSED";
         attribute :>> trigger = "Inhibited_PatientBolus_macro = TRUE AND Inhibited_Infusion_macro = TRUE";
         attribute :>> guardSummary = "none";
         attribute :>> effectSummary = "therapy paused at KVO flow";
@@ -272,9 +256,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = true;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 38)";
     }
-    part trSquareInhibit : Transition {
+    transition trSquareInhibit : Transition first modeSQUARE then modePAUSED {
         attribute :>> id = "TR-017"; attribute :>> name = "SquareBolusInhibitToPaused";
-        attribute :>> sourceState = "ON.THERAPY.ACTIVE.SQUARE_BOLUS"; attribute :>> targetState = "ON.THERAPY.PAUSED";
         attribute :>> trigger = "Inhibited_Bolus_macro = TRUE AND Inhibited_Infusion_macro = TRUE";
         attribute :>> guardSummary = "none";
         attribute :>> effectSummary = "therapy paused at KVO flow";
@@ -282,9 +265,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = true;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6.2 (REQ 39)";
     }
-    part trResume : Transition {
+    transition trResume : Transition first modePAUSED then modeBASAL {
         attribute :>> id = "TR-018"; attribute :>> name = "PausedResumeToBasal";
-        attribute :>> sourceState = "ON.THERAPY.PAUSED"; attribute :>> targetState = "ON.THERAPY.ACTIVE.BASAL";
         attribute :>> trigger = "Infusion_initiate_prog";
         attribute :>> guardSummary = "Inhibited_Infusion_macro = FALSE (while TRUE, no transition occurs — REQ 45)";
         attribute :>> effectSummary = "basal flow re-established";
@@ -292,9 +274,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> sameStepCritical = false;
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10.2 (REQ 46)";
     }
-    part trPausedStop : Transition {
+    transition trPausedStop : Transition first modePAUSED then modeIDLE {
         attribute :>> id = "TR-019"; attribute :>> name = "PausedInhibitToIdle";
-        attribute :>> sourceState = "ON.THERAPY.PAUSED"; attribute :>> targetState = "ON.IDLE";
         attribute :>> trigger = "Infusion_inhibit_prog commanded";
         attribute :>> guardSummary = "none";
         attribute :>> effectSummary = "'Infusion Stopped Manually' actions per REQ 59";

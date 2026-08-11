@@ -47,40 +47,48 @@ package memo_examples_gpca_pump_gpca_context {
     // system is used in a fixed location and is not ambulatory.
 
     // ── Actors ──────────────────────────────────────────────────
-    part actorPatient : User {
+    actor actorPatient : User {
         attribute :>> actorKind = ActorKind::patient;
         attribute :>> id = "ACT-001";
         attribute :>> name = "Patient";
         attribute :>> trainingLevel = "instructed by clinician on bolus request button only";
         attribute :>> description = "Receives the infusion and requests bolus doses via the patient pendant.";
+        perform oaRequestBolus;
     }
-    part actorNurse : User {
+    actor actorNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-002";
         attribute :>> name = "ClinicianNurse";
         attribute :>> trainingLevel = "trained clinical user; programs prescriptions and responds to alarms";
         attribute :>> description = "Loads the drug reservoir, programs and confirms the prescription, starts/stops therapy, and responds to alarms.";
+        perform oaProgram;
+        perform oaStartTherapy;
+        perform oaRespondAlarm;
+        perform oaReviewLog;
     }
-    part actorPrescriber : User {
+    actor actorPrescriber : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-003";
         attribute :>> name = "PrescribingPhysician";
         attribute :>> trainingLevel = "licensed prescriber";
         attribute :>> description = "Prescribes drug, concentration, basal rate, bolus volume, lockout interval, and maximum dose limits.";
+        perform oaPrescribe;
     }
-    part actorPharmacist : User {
+    actor actorPharmacist : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-004";
         attribute :>> name = "Pharmacist";
         attribute :>> trainingLevel = "licensed pharmacist";
         attribute :>> description = "Prepares the drug reservoir and verifies drug and concentration against the prescription.";
+        perform oaLoadReservoir;
     }
-    part actorTechnician : User {
+    actor actorTechnician : User {
         attribute :>> actorKind = ActorKind::technician;
         attribute :>> id = "ACT-005";
         attribute :>> name = "BiomedicalTechnician";
         attribute :>> trainingLevel = "service-trained; authenticated service access";
         attribute :>> description = "Performs maintenance, battery replacement, and calibration through the service interface.";
+        perform oaMaintain;
     }
 
     // ── Foreseeable use errors (IEC 62366-1, AAMI TIR PCA) ──────
