@@ -23,7 +23,7 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-004";
             attribute :>> name = "sddViewQuery";
-            attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "ModeState", "Transition", "Interface", "SystemFunction", "TimingConstraint", "SoftwareModule[moduleKind=soup]");
+            attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "MemoState[stateKind=mode]", "Transition", "Interface", "SystemFunction", "TimingConstraint", "SoftwareModule[moduleKind=soup]");
             attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "BindsToInterface", "Realizes", "DependsOnSoup", "Changes");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
