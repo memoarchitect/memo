@@ -6,6 +6,7 @@
 // partitioned DSM still shows one genuine feedback mark instead of an empty
 // lower triangle.
 package memo_examples_nested_architecture_dsm_architecture_functional_functions {
+    private import memo_examples_nested_architecture_dsm_assurance_requirements::*;
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
@@ -171,4 +172,15 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
     connection : ExchangesWith connect source ::> fnMonitorBattery to target ::> fnAnnunciateAlarm;
     connection : ExchangesWith connect source ::> fnSelectPowerSource to target ::> fnDriveActuator;
     connection : ExchangesWith connect source ::> fnDetectOcclusion to target ::> fnAnnunciateAlarm;
+    satisfy reqDoseAccuracy by fnComputeRate;
+    satisfy reqDoseAccuracy by fnDriveActuator;
+    satisfy reqOcclusionDetection by fnDetectOcclusion;
+    satisfy reqOcclusionDetection by fnEnforceDoseLimits;
+    satisfy reqAirInLine by fnDetectAirInLine;
+    satisfy reqAirInLine by fnAnnunciateAlarm;
+    satisfy reqAlarmAnnunciation by fnAnnunciateAlarm;
+    satisfy reqBatteryEndurance by fnMonitorBattery;
+    satisfy reqBatteryEndurance by fnSelectPowerSource;
+    satisfy reqPrescriptionConfirmation by fnAcceptInput;
+    satisfy reqPrescriptionConfirmation by fnValidatePrescription;
 }

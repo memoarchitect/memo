@@ -47,6 +47,8 @@ package memo_examples_multidimensional_layers {
         attribute :>> id = "MDL-VC-001"; attribute :>> name = "VerifyHardLimitEnforcement";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "all out-of-limit programs rejected across the equivalence classes";
+
+        subject verified : Base::Anything[*] = (doseLimitChecker);
     }
-    connection : VerifiedBy connect verificationTarget ::> doseLimitChecker to verificationCase ::> vcLimitEnforcement;
+
 }

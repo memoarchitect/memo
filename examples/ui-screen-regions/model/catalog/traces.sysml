@@ -61,42 +61,6 @@ package memo_examples_ui_screen_regions_traces {
 
     connection : ActionInvokesFunction connect uiAction ::> uiaOpenSettings to systemFunction ::> fnManageInfusionDisplay;
 
-    connection : SatisfiedBy connect requiredElement ::> reqRateEntry to satisfyingElement ::> fnSetInfusionRate;
-
-    connection : SatisfiedBy connect requiredElement ::> reqRateLegibility to satisfyingElement ::> fnPresentDeliveryStatus;
-
-    connection : SatisfiedBy connect requiredElement ::> reqVolumeDisplay to satisfyingElement ::> fnPresentDeliveryStatus;
-
-    connection : SatisfiedBy connect requiredElement ::> reqRateLegibility to satisfyingElement ::> elMainScreen;
-
-    connection : SatisfiedBy connect requiredElement ::> reqRateEntry to satisfyingElement ::> elSettingsScreen;
-
-    connection : SatisfiedBy connect requiredElement ::> reqRateEntry to satisfyingElement ::> elRateConfirmDialog;
-
-    connection : SatisfiedBy connect requiredElement ::> reqDrugLibrarySelection to satisfyingElement ::> elDrugSelectorRegion;
-
-    connection : SatisfiedBy connect requiredElement ::> reqDrugLibrarySelection to satisfyingElement ::> fnValidateDrugSelection;
-
-    connection : SatisfiedBy connect requiredElement ::> reqDisplayFreshness to satisfyingElement ::> fnPresentDeliveryStatus;
-
-    connection : SatisfiedBy connect requiredElement ::> reqActiveRateDisplay to satisfyingElement ::> fnPresentDeliveryStatus;
-
-    connection : SatisfiedBy connect requiredElement ::> reqDrugIdentityDisplay to satisfyingElement ::> elDrugSelectorClosed;
-
-    connection : SatisfiedBy connect requiredElement ::> reqDrugIdentityDisplay to satisfyingElement ::> fnValidateDrugSelection;
-
-    connection : SatisfiedBy connect requiredElement ::> reqTimeDisplay to satisfyingElement ::> fnPresentLocalTime;
-
-    connection : SatisfiedBy connect requiredElement ::> reqTimeAccuracy to satisfyingElement ::> fnPresentLocalTime;
-
-    connection : SatisfiedBy connect requiredElement ::> reqBatteryStatusDisplay to satisfyingElement ::> fnPresentBatteryStatus;
-
-    connection : SatisfiedBy connect requiredElement ::> reqBatteryWarningPerformance to satisfyingElement ::> fnPresentBatteryStatus;
-
-    connection : SatisfiedBy connect requiredElement ::> reqDrugSelectionPerformance to satisfyingElement ::> elDrugSelectorRegion;
-
-    connection : SatisfiedBy connect requiredElement ::> reqDrugSelectionPerformance to satisfyingElement ::> fnValidateDrugSelection;
-
     connection : DerivesFrom connect sourceDriver ::> needReadableProgramming to targetRequirement ::> reqRateLegibility;
 
     connection : DerivesFrom connect sourceDriver ::> reqRateLegibility to targetRequirement ::> reqRateEntry;
@@ -193,66 +157,22 @@ package memo_examples_ui_screen_regions_traces {
 
     connection : DerivesFrom connect sourceDriver ::> hzIncorrectEventChronology to targetRequirement ::> reqTimeAccuracy;
 
-    connection : VerifiedBy connect verificationTarget ::> rcRateConfirm to verificationCase ::> vcRateChange;
-
-    connection : VerifiedBy connect verificationTarget ::> fnSetInfusionRate to verificationCase ::> vcRateChange;
-
-    connection : VerifiedBy connect verificationTarget ::> fnManageInfusionDisplay to verificationCase ::> vcRateChange;
-
-    connection : VerifiedBy connect verificationTarget ::> rcDrugLibraryGuard to verificationCase ::> vcDrugLibrarySelection;
-
-    connection : VerifiedBy connect verificationTarget ::> fnValidateDrugSelection to verificationCase ::> vcDrugLibrarySelection;
-
-    connection : VerifiedBy connect verificationTarget ::> rcLowBatteryProminence to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> rcDisplayFreshnessMonitor to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> rcClockFreshnessCheck to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> reqActiveRateDisplay to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> reqDrugIdentityDisplay to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> reqVolumeDisplay to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> reqTimeDisplay to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> reqTimeAccuracy to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> reqBatteryStatusDisplay to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> reqBatteryWarningPerformance to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> fnPresentDeliveryStatus to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> fnPresentLocalTime to verificationCase ::> vcInfusionStatusContent;
-
-    connection : VerifiedBy connect verificationTarget ::> fnPresentBatteryStatus to verificationCase ::> vcInfusionStatusContent;
-
     connection : ProducesEvidence connect producer ::> vcRateChange to producedEvidence ::> evRateChange;
 
     connection : ProducesEvidence connect producer ::> vcDrugLibrarySelection to producedEvidence ::> evDrugLibrarySelection;
 
     connection : ProducesEvidence connect producer ::> vcInfusionStatusContent to producedEvidence ::> evInfusionStatusContent;
 
-    connection : AllocatedTo connect function ::> fnSetInfusionRate to allocatedElement ::> uiPumpPanel;
-
-    connection : AllocatedTo connect function ::> fnManageInfusionDisplay to allocatedElement ::> uiPumpPanel;
-
-    connection : AllocatedTo connect function ::> fnValidateDrugSelection to allocatedElement ::> uiPumpPanel;
-
-    connection : AllocatedTo connect function ::> fnPresentDeliveryStatus to allocatedElement ::> uiPumpPanel;
-
-    connection : AllocatedTo connect function ::> fnPresentLocalTime to allocatedElement ::> uiPumpPanel;
-
-    connection : AllocatedTo connect function ::> fnPresentBatteryStatus to allocatedElement ::> uiPumpPanel;
-
+    allocation : AllocatedTo allocate fnSetInfusionRate to uiPumpPanel;
+    allocation : AllocatedTo allocate fnManageInfusionDisplay to uiPumpPanel;
+    allocation : AllocatedTo allocate fnValidateDrugSelection to uiPumpPanel;
+    allocation : AllocatedTo allocate fnPresentDeliveryStatus to uiPumpPanel;
+    allocation : AllocatedTo allocate fnPresentLocalTime to uiPumpPanel;
+    allocation : AllocatedTo allocate fnPresentBatteryStatus to uiPumpPanel;
     // Two seeded function-to-region traces for exercising relationship editing
     // in the UI. Newly drawn regions can be linked the same way.
-    connection : AllocatedTo connect function ::> fnValidateDrugSelection to allocatedElement ::> elDrugSelectorRegion;
-
-    connection : AllocatedTo connect function ::> fnSetInfusionRate to allocatedElement ::> elRateConfirmDialog;
-
+    allocation : AllocatedTo allocate fnValidateDrugSelection to elDrugSelectorRegion;
+    allocation : AllocatedTo allocate fnSetInfusionRate to elRateConfirmDialog;
     connection : CapturesScreen connect capture ::> capMain to screen ::> elMainScreen;
 
     connection : CapturesScreen connect capture ::> capSettings to screen ::> elSettingsScreen;

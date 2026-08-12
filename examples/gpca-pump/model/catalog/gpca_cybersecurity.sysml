@@ -147,6 +147,8 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Only authenticated and authorized service sessions may modify therapy configuration; all attempts are logged.";
         attribute :>> status = ElementStatusKind::approved;
+
+        objective { verify reqAuthenticatedServiceAccess; }
     }
 
     connection : ThreatenedBy connect protectedAsset ::> therapyConfigurationAsset to realizedThreat ::> unauthorizedConfigChangeThreat;
@@ -166,8 +168,6 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     connection : ImpactsSafety connect cyberElement ::> configurationTamperingRisk to safetyElement ::> riskBefore;
 
     connection : CrossesTrustBoundary connect boundary ::> maintenancePortBoundary to crossingItem ::> therapyConfigurationAsset;
-
-    connection : VerifiedBy connect verificationTarget ::> reqAuthenticatedServiceAccess to verificationCase ::> vcAuthenticatedServiceAccess;
 
     connection : ProducesEvidence connect producer ::> vcAuthenticatedServiceAccess to producedEvidence ::> evidenceLockout;
 }

@@ -67,8 +67,7 @@ package memo_examples_temperature_alarm {
     connection : IndependentOf connect channel ::> chMonitor to otherChannel ::> chPrimary {
         attribute :>> independenceBasis = "separate sensing element and power rail";
     }
-    connection : AllocatedTo connect function ::> fnDetectDeviation to allocatedElement ::> chMonitor;
-
+    allocation : AllocatedTo allocate fnDetectDeviation to chMonitor;
     // ── UI: alarm element and acknowledgement action ────────────
     part uiBedside : UserInterface {
         attribute :>> id = "TA-UI-001"; attribute :>> name = "BedsideDisplay";
@@ -123,6 +122,8 @@ package memo_examples_temperature_alarm {
         attribute :>> id = "TA-VC-001"; attribute :>> name = "VerifyAlarmLatency";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "annunciation within 2 s of sustained deviation";
+
+        subject verified : Base::Anything[*] = (fnDetectDeviation);
     }
     part uvAckTask : UsabilityValidation {
         attribute :>> id = "TA-UV-001"; attribute :>> name = "SummativeAlarmAcknowledgement";
@@ -135,7 +136,7 @@ package memo_examples_temperature_alarm {
         attribute :>> evidenceType = "test report";
     }
     connection : ExecutesScenario connect verificationCase ::> vcAlarmLatency to scenario ::> vsAlarmLatency;
-    connection : VerifiedBy connect verificationCase ::> vcAlarmLatency to verificationTarget ::> fnDetectDeviation;
+
     connection : Validates connect validationCase ::> uvAckTask to validationTarget ::> taskAckAlarm;
     connection : ProducesEvidence connect producer ::> vcAlarmLatency to producedEvidence ::> evLatencyReport;
 }
