@@ -55,9 +55,7 @@
 | [`UIState`](#uistate) | `part def` | UI state is presentation state — distinct from system/device state. | `ArchitectureElement` |
 | [`UIEvent`](#uievent) | `part def` | Uievent definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`UIAction`](#uiaction) | `action def` | Uiaction definition specializing `MemoAction`. | `MemoAction` |
-| [`InteractionFlow`](#interactionflow) | `action def` | Interaction flow definition specializing `MemoAction`. | `MemoAction` |
-| [`UIScenario`](#uiscenario) | `action def` | Uiscenario definition specializing `MemoScenario`. | `MemoScenario` |
-| [`UITransition`](#uitransition) | `connection def` | Typed relationship for uitransition. | `MemoRelationship` |
+| [`InteractionFlow`](#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a MemoScenario with scenarioKind `ui`. | `MemoAction` |
 | [`DataBinding`](#databinding) | `connection def` | Typed relationship for data binding. | `MemoRelationship` |
 | [`PresentsState`](#presentsstate) | `connection def` | Typed relationship for presents state. | `MemoRelationship` |
 | [`CapturesScreen`](#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | `MemoRelationship` |
@@ -65,7 +63,7 @@
 | [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship for element triggers action. | `MemoRelationship` |
 | [`ActionInvokesFunction`](#actioninvokesfunction) | `connection def` | Typed relationship for action invokes function. | `MemoRelationship` |
 | [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | `MemoRelationship` |
-| [`ErrorAtElement`](#erroratelement) | `connection def` | Typed relationship for error at element. | `MemoRelationship` |
+| [`ErrorAtElement`](#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a MemoScenario selected by scenarioKind rather than a separate definition. | `MemoRelationship` |
 | [`ControlImplementedBy`](#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | `MemoRelationship` |
 
 ## UIElementFormKind
@@ -286,40 +284,10 @@ action def InteractionFlow specializes MemoAction
 
 | Property | Value |
 | --- | --- |
-| Description | Interaction flow definition specializing `MemoAction`. |
+| Description | A reusable dialogue structure through the UI; a selected path through it is a MemoScenario with scenarioKind `ui`. |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
-| Owning package | `memo_architecture_implementation_ui` |
-
-
-## UIScenario
-
-```sysml
-action def UIScenario specializes MemoScenario
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Uiscenario definition specializing `MemoScenario`. |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoScenario` |
-| Owning package | `memo_architecture_implementation_ui` |
-
-
-## UITransition
-
-```sysml
-connection def UITransition :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for uitransition. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
@@ -436,7 +404,7 @@ connection def ErrorAtElement :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for error at element. |
+| Description | A UI scenario realizes a functional scenario one layer up: each is a MemoScenario selected by scenarioKind rather than a separate definition. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -734,28 +702,12 @@ connection def ControlImplementedBy :> MemoRelationship
         }
 
         // A reusable dialogue structure through the UI; a selected path through
-        // it is an UIScenario.
+        // it is a MemoScenario with scenarioKind `ui`.
         action def InteractionFlow specializes MemoAction {
             attribute entryPoint : String;
             attribute exitPoint : String;
         }
 
-        action def UIScenario specializes MemoScenario {
-            ref parentFlow : InteractionFlow[0..1];
-        }
-
-        connection def UITransition :> MemoRelationship {
-            attribute triggeringEvent : String;
-            attribute guardCondition : String;
-            end sourceState : UIState :>> source;
-            end targetState : UIState :>> target;
-        }
-        abstract connection uITransitionLinks : UITransition[*];
-        metadata def <uITransition> UITransitionMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = uITransitionLinks meta SysML::Usage;
-        }
         connection def DataBinding :> MemoRelationship {
             attribute bindingExpression : String;
             attribute refreshPolicy : String;
@@ -841,9 +793,8 @@ connection def ControlImplementedBy :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = flowServesUseCaseLinks meta SysML::Usage;
         }
-        // The UI-layer scenario realizes exactly one FunctionalScenario one layer
-        // up (the interaction sequence that carries out the function sequence),
-        // completing the OperativeScenario → FunctionalScenario → UIScenario chain.
+        // A UI scenario realizes a functional scenario one layer up: each is a
+        // MemoScenario selected by scenarioKind rather than a separate definition.
         connection def ErrorAtElement :> MemoRelationship {
             end useError : UseError :>> source;
             end element : InteractionElement :>> target;

@@ -112,7 +112,7 @@ functions required on that path.
 |---|---|---|
 | Use case | `UseCase` | `use_cases` |
 | Workflow | `OperationalWorkflow`, `WorkflowStep` | `workflows` |
-| Scenario | `MemoScenario`, `OperativeScenario`, `ScenarioOccurrence` | `scenarios` |
+| Scenario | `MemoScenario` (selected by `scenarioKind`), `ScenarioOccurrence` | `scenarios` |
 | Activity on a path | `OperationalActivity`, `TaskStep`, `UserTask` | `activities` |
 
 ## Architecture layers: from intent to realization
@@ -123,8 +123,8 @@ the clinical intent and scenario established above it.
 
 | Layer | Engineering question | Representative MEMO definitions |
 |---|---|---|
-| **Operational** | Who uses the device, for what goal, in which context and scenario? | `User`, `UseContext`, `Need`, `UseCase`, `OperationalWorkflow`, `OperativeScenario`, `UserTask` |
-| **Functional** | What must the system accomplish on that scenario path? | `SystemFunction`, `FunctionalFlow`, `FunctionalScenario`, `FunctionalExchange` |
+| **Operational** | Who uses the device, for what goal, in which context and scenario? | `User`, `UseContext`, `Need`, `UseCase`, `OperationalWorkflow`, `MemoScenario[scenarioKind=operative]`, `UserTask` |
+| **Functional** | What must the system accomplish on that scenario path? | `SystemFunction`, `FunctionalFlow`, `MemoScenario[scenarioKind=functional]`, `FunctionalExchange` |
 | **Logical** | How are responsibilities, interactions, interfaces, and modes organized? | `LogicalComponent`, channels, ports, interfaces, modes |
 | **Implementation** | Which technology implements those responsibilities? | `SoftwareComponent`, `SoftwareModule`, `ElectronicComponent`, `MechanicalPart`, `UserInterface` |
 | **Realization** | How is the design assembled, hosted, and deployed? | `DeploymentUnit`, `RuntimeEnvironment`, `ProcessingNode`, `HardwareAssembly`, `PhysicalAssembly` |
@@ -208,7 +208,7 @@ A project develops a scenario-driven vertical slice in three steps:
     <span class="memo-step-number">1</span>
     <div class="memo-step-content">
       <h3>Model the operational scenario</h3>
-      <p>Define the <code>Need</code> and <code>UseCase</code>, the <code>OperationalWorkflow</code> that supports the use case, and an <code>OperativeScenario</code> that selects the applicable <code>WorkflowStep</code> path.</p>
+      <p>Define the <code>Need</code> and <code>UseCase</code>, the <code>OperationalWorkflow</code> that supports the use case, and a <code>MemoScenario</code> with <code>scenarioKind=operative</code> that selects the applicable <code>WorkflowStep</code> path.</p>
     </div>
     <a href="../reference/elements/operational/">Operational definitions →</a>
   </article>
@@ -216,7 +216,7 @@ A project develops a scenario-driven vertical slice in three steps:
     <span class="memo-step-number">2</span>
     <div class="memo-step-content">
       <h3>Describe system behavior and architecture</h3>
-      <p>Use a <code>FunctionalScenario</code> and <code>FunctionalFlow</code> to identify the required <code>SystemFunction</code> sequence, then allocate those functions to the responsible <code>LogicalComponent</code> elements.</p>
+      <p>Use a <code>MemoScenario</code> with <code>scenarioKind=functional</code> and a <code>FunctionalFlow</code> to identify the required <code>SystemFunction</code> sequence, then allocate those functions to the responsible <code>LogicalComponent</code> elements.</p>
     </div>
     <a href="../reference/elements/functional/">Functional definitions →</a>
   </article>

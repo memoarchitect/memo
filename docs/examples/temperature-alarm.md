@@ -164,7 +164,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 | Functional | `SystemFunction` | [Functional](../reference/areas/architecture.md#functional) |
 | Logical | `LogicalComponent` | [Logical](../reference/areas/architecture.md#logical) |
 | Implementation and realization | `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
-| Assurance | `Evidence`, `Hazard`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `VerificationScenario` | [Assurance](../reference/areas/assurance.md) |
+| Assurance | `Evidence`, `Hazard`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `MemoScenario[scenarioKind=memoVerification]` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates`, `ProducesEvidence` … +3 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.

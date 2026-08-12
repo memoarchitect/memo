@@ -104,7 +104,7 @@
   <rect x="1147.4" y="916" width="215.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1255" y="936" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">ActionInvokesFunction</text>
     
   <rect x="60" y="1055" width="190" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
-  <text x="155" y="1096" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="155" dy="0">UIScenario</tspan></text>
+  <text x="155" y="1096" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="155" dy="0">MemoScenario (ui)</tspan></text>
   <rect x="380" y="1055" width="210" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>
   <text x="485" y="1096" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="485" dy="0">InteractionFlow</tspan></text>
   <rect x="720" y="1055" width="170" height="68" rx="14" fill="#ffffff" stroke="#ed6c02" stroke-width="2"/>

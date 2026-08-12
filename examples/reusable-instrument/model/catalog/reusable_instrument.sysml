@@ -54,8 +54,9 @@ package memo_examples_reusable_instrument {
     first wsInspect then wsSterilize;
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfReprocess to supported ::> ucSterilize; }
 
-    action scNominalCycle : OperativeScenario {
+    action scNominalCycle : MemoScenario {
         attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
         ref :>> parentWorkflow = wfReprocess;

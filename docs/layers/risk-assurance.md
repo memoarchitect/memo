@@ -47,7 +47,7 @@ documents are artifact views over these elements.
 The usability chain runs from the operational world into risk: a `UserTask`
 can commit a `UseError`; a safety-relevant use error must trace to a `Hazard`;
 a `CriticalTask` — one whose failure could cause serious harm — must trace to
-a `UsabilityValidation`. `HazardRelatedUseScenario` selects the scenarios for
+a `UsabilityValidation`. `MemoScenario[scenarioKind=hazardRelatedUse]` selects the scenarios for
 summative evaluation, and `FormativeEvaluation` records what design iteration
 learned. A risk control implemented in the UI (a confirmation dialog, a
 guarded control, alarm re-annunciation) is linked to the implementing
@@ -57,7 +57,7 @@ walks the entire chain.
 ## Cybersecurity chain
 
 Use `CybersecurityAsset`, `AttackSurface`, `Threat`, `Vulnerability`,
-`ThreatScenario` (a scenario specialization — it shares the workflow/scenario
+`MemoScenario[scenarioKind=threat]` (a threat scenario sharing the workflow/scenario
 semantics), `CyberRisk`, `CyberMitigation`, `SecurityRequirement`,
 `TrustBoundary`, and `SecurityClaim`. Interfaces that cross a trust boundary
 say so (`CrossesTrustBoundary`); see `connected-patient-monitor`.
@@ -70,7 +70,7 @@ registers.
 
 | Element | Role |
 |---|---|
-| `VerificationCase` / `VerificationScenario` | Shows a design output meets a specified input, and the path exercised |
+| `VerificationCase` / `MemoScenario[scenarioKind=memoVerification]` | Shows a design output meets a specified input, and the path exercised |
 | `ValidationCase` | Shows the device meets user needs and intended use — `Validates` closes the loop to the operational world |
 | `UsabilityValidation` | Summative evaluation of critical tasks |
 | `Evidence` / `TestArtifact` | Reviewable support for a claim |

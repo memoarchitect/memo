@@ -235,9 +235,10 @@ package memo_examples_gpca_pump_gpca_operational {
     }
 
     // ── Operational scenarios ───────────────────────────────────
-    action osNominalTherapy : OperativeScenario {
+    action osNominalTherapy : MemoScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "NominalTherapySession";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
         attribute :>> preCondition = "prescription issued, reservoir loaded";
@@ -248,9 +249,10 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaCompleteNominalTherapy;
     }
-    action osLockoutBolus : OperativeScenario {
+    action osLockoutBolus : MemoScenario {
         attribute :>> id = "OS-002";
         attribute :>> name = "BolusRequestDuringLockout";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::alternate;
         attribute :>> variationPoint = "patient bolus request during the nominal therapy lockout interval";
         attribute :>> operationalCondition = OperationalConditionKind::foreseeableMisuse;
@@ -263,9 +265,10 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRejectBolusDuringLockout;
     }
-    action osOcclusionAlarm : OperativeScenario {
+    action osOcclusionAlarm : MemoScenario {
         attribute :>> id = "OS-003";
         attribute :>> name = "OcclusionDetectedDuringInfusion";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
         attribute :>> variationPoint = "occlusion detected while nominal infusion is active";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
@@ -278,9 +281,10 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToOcclusion;
     }
-    action osAirInLine : OperativeScenario {
+    action osAirInLine : MemoScenario {
         attribute :>> id = "OS-004";
         attribute :>> name = "AirInLineDetected";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
         attribute :>> variationPoint = "air-in-line detected while nominal infusion is active";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
@@ -293,9 +297,10 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToAirInLine;
     }
-    action osEmptyReservoir : OperativeScenario {
+    action osEmptyReservoir : MemoScenario {
         attribute :>> id = "OS-005";
         attribute :>> name = "ReservoirEmptyDuringTherapy";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
         attribute :>> variationPoint = "reservoir-empty threshold reached during nominal therapy";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
@@ -308,9 +313,10 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaReplaceEmptyReservoir;
     }
-    action osPowerLoss : OperativeScenario {
+    action osPowerLoss : MemoScenario {
         attribute :>> id = "OS-006";
         attribute :>> name = "MainsPowerLossAndRecovery";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::recovery;
         attribute :>> variationPoint = "mains supply lost during nominal therapy";
         attribute :>> operationalCondition = OperationalConditionKind::degraded;

@@ -90,8 +90,8 @@ part def DiagramIntentMapping specializes MemoPart
             attribute :>> purpose = "Workflow steps, decisions, parallel work, handoffs, and roles.";
             attribute :>> defaultViewKind = DiagramViewKind::actionflow;
         }
-        part vpOperativeScenario : Viewpoint {
-            attribute :>> id = "VP-CAT-005"; attribute :>> name = "OperativeScenarioViewpoint";
+        part vpScenario : Viewpoint {
+            attribute :>> id = "VP-CAT-005"; attribute :>> name = "ScenarioViewpoint";
             attribute :>> purpose = "Selected paths through workflows: variants, conditions, variation points.";
             attribute :>> defaultViewKind = DiagramViewKind::actionflow;
         }
@@ -207,7 +207,7 @@ part def DiagramIntentMapping specializes MemoPart
         }
         // A software sequence diagram is a VIEW conforming to this viewpoint
         // (ISO/IEC/IEEE 42010): it frames the runtime message ordering between
-        // SoftwareComponents realizing a FunctionalScenario. The viewpoint is the
+        // SoftwareComponents realizing a functional MemoScenario. The viewpoint is the
         // reusable spec; the diagram of a specific model is the view.
         part vpSoftwareSequence : Viewpoint {
             attribute :>> id = "VP-CAT-027"; attribute :>> name = "SoftwareSequenceViewpoint";

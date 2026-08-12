@@ -189,7 +189,7 @@ connection def Extends :> MemoRelationship
             // The device or system under consideration supports the goal.
             ref supportingSystem : MemoPart[0..1];
             ref primaryUser : User[0..1];
-            ref supportingActors : Actor[0..*];
+            ref supportingActors : OperationalParticipant[0..*];
             ref useContext : UseContext[0..1];
             ref originatingNeeds : Need[0..*];
         }
@@ -215,7 +215,7 @@ connection def Extends :> MemoRelationship
             :>> baseType = initiatesLinks meta SysML::Usage;
         }
         connection def ParticipatesIn :> MemoRelationship {
-            end participatingActor : Actor :>> source;
+            end participatingActor : OperationalParticipant :>> source;
             end useCase : UseCase :>> target;
         }
         abstract connection participatesInLinks : ParticipatesIn[*];

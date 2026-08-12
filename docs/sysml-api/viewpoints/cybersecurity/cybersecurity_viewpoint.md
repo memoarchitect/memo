@@ -61,7 +61,7 @@
             attribute :>> includedLayers = ("cybersecurity", "software_structure", "hardware_structure", "interfaces", "risk", "assurance");
             attribute :>> explorerLane = "assurance";
             attribute :>> explorerOrder = 3;
-            attribute :>> allowedElementKinds = ("CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "ThreatScenario");
+            attribute :>> allowedElementKinds = ("CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "MemoScenario[scenarioKind=threat]");
             attribute :>> allowedRelationshipKinds = ("ThreatenedBy", "Exploits", "RealizedByScenario", "Mitigates", "DerivesCyberRequirement", "ImpactsSafety", "CrossesTrustBoundary");
             attribute :>> documentUsage = ("Secure Product Development", "Threat Model", "Cybersecurity Risk Assessment", "QMSR");
             attribute :>> userExtensible = true;

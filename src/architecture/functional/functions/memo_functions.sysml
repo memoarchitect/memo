@@ -124,13 +124,6 @@ package memo_architecture_functional_functions {
         ref item exchangedItem : MemoItem[0..1];
     }
 
-    // The functional-layer scenario selects one functional route and realizes
-    // an operative scenario. It is the "what the system does" path, not a
-    // logical component interaction.
-    action def FunctionalScenario specializes MemoScenario {
-        ref selectedFlow : FunctionalFlow[0..1];
-    }
-
     connection def InvolvesFunction :> MemoRelationship {
         end functionalFlow : FunctionalFlow :>> source;
         end function : MemoFunction :>> target;
