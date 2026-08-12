@@ -6,6 +6,7 @@ package memo_examples_gpca_pump_gpca_context {
     private import memo_assurance_requirements::*;
     private import memo_assurance_human_factors::*;
     private import memo_core_enumerations::*;
+    private import memo_examples_gpca_pump_gpca_operational::*;
 
     // ── Intended use (ISO 14971 §5.2, IEC 62366-1) ──────────────
     part gpcaIntendedUse : IntendedUse {

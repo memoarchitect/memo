@@ -91,4 +91,4 @@ Enumeration literals are not definitions and are not prefixed —
 
 `aadl`, `cloud`, and `ros` between them are where the twelve runtime-technology
 attributes that used to sit on `SoftwareComponent` now live — see
-`plans/memo-arcadia-native-coverage.md` §10 and §22.
+`plans/reference/memo-r1-arcadia-residue.md`.

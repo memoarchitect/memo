@@ -130,11 +130,11 @@ if ! command -v syside >/dev/null 2>&1; then
   exit 127
 fi
 
-# SCOPE: src + extensions — the three kpar packages this script builds. `examples/`
-# is deliberately NOT checked here and is not clean; it ships to users via
-# `memo init --example`, and gating it is epic R8 in memo-meta/plans (R8-S4 adds
-# it to this line). Until then, a green build says nothing about the examples.
-check_out="$(cd "$REPO_ROOT" && syside check src extensions 2>&1)" || true
+# SCOPE: src + extensions + examples — everything MEMO ships, not just the three
+# kpar packages this script builds. `examples/` reaches users via
+# `memo init --example`, so a green build that skipped it said nothing about
+# what users actually run. R8-S4 added it here and to check-syside-gate.mjs.
+check_out="$(cd "$REPO_ROOT" && syside check src extensions examples 2>&1)" || true
 if echo "$check_out" | grep -q 'error'; then
   echo "$check_out" | grep -A2 'error' | sed 's/^/  /'
   echo ""
