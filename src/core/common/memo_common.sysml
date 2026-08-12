@@ -222,7 +222,10 @@ package memo_core_common {
     // re-declare the identification core instead of specializing MemoPart
     // Transitions stay part-based to keep their traceable safety
     // attributes (id, sourceReference, priority, sameStepCritical).
-    abstract state def MemoState {
+    enum def StateKind { enum mode; enum logical; }
+
+    state def MemoState {
+        attribute stateKind : StateKind;
         attribute id : String;
         attribute uuid : String;
         attribute name : String;
@@ -231,6 +234,10 @@ package memo_core_common {
         attribute rationale : String;
         attribute sourceReference : String;
         attribute status : ElementStatusKind;
+        attribute modeKind : String;
+        attribute entryCondition : String;
+        attribute exitCondition : String;
+        attribute modePurpose : String;
     }
 
     part def Citation specializes MemoPart {

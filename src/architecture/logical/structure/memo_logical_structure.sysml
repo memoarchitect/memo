@@ -175,11 +175,6 @@ package memo_architecture_logical_structure {
     // States and modes of the logical solution (kept distinct from UI state
     // and from physical device configuration).
 
-    part def LogicalMode specializes ArchitectureElement {
-        attribute modePurpose : String;
-        attribute entryCondition : String;
-        attribute exitCondition : String;
-    }
     part def LogicalBehavior specializes ArchitectureElement {
         attribute behaviorSummary : String;
         attribute executionSemantics : String;

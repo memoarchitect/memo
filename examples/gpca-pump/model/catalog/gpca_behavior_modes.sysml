@@ -31,8 +31,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     }
 
     // ── Mode states (Fig 4.1) ───────────────────────────────────
-    state modeOFF : ModeState {
+    state modeOFF : MemoState {
         attribute :>> id = "MODE-000";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "OFF";
         attribute :>> modeKind = "top (default)";
         attribute :>> description = "No functionality; the GPCA is turned off. FlowRate_output = 0 (REQ 6).";
@@ -40,8 +41,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> exitCondition = "System_start_prog commanded (REQ 4)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.2";
     }
-    state modeON : ModeState {
+    state modeON : MemoState {
         attribute :>> id = "MODE-001";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON";
         attribute :>> modeKind = "operational parent";
         attribute :>> description = "Topmost operational mode: prescription configuration (REQ 8), infusion initiation gating (REQ 7, 9), notification (REQ 10) and logging (REQ 11) are available.";
@@ -49,8 +51,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> exitCondition = "System_stop_prog: stop infusion, cancel all notifications (REQ 5)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.3";
     }
-    state modeIDLE : ModeState {
+    state modeIDLE : MemoState {
         attribute :>> id = "MODE-002";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON.IDLE";
         attribute :>> modeKind = "idle";
         attribute :>> description = "Default sub-mode on entry to ON; no infusion, FlowRate_output = 0 (REQ 14); prescription set-up happens here. 'IDLE Time' actions after Max_IDLE_Duration_const (REQ 15).";
@@ -58,8 +61,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> exitCondition = "confirmed second Infusion_initiate_prog (REQ 12/13)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.4";
     }
-    state modeTHERAPY : ModeState {
+    state modeTHERAPY : MemoState {
         attribute :>> id = "MODE-003";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON.THERAPY";
         attribute :>> modeKind = "therapy parent";
         attribute :>> description = "Parent of all drug-delivering sub-modes. Delivers FlowRate_Mode_macro within Tolerance_Max_const (REQ 16); monitors under-infusion (REQ 17), low reservoir (REQ 18), over-infusion, VTBI, air, reverse delivery, empty reservoir (REQ 19-23).";
@@ -67,8 +71,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> exitCondition = "infusion complete to IDLE (REQ 28); manual stop from PAUSED (REQ 47); system stop (REQ 5)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5";
     }
-    state modePAUSED : ModeState {
+    state modePAUSED : MemoState {
         attribute :>> id = "MODE-004";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON.THERAPY.PAUSED";
         attribute :>> modeKind = "paused (KVO delivery)";
         attribute :>> description = "Infusion paused by notification actions or manual inhibit. FlowRate_Mode_macro = FlowRate_kvo_hd — keep-vein-open flow within Tolerance_Max_const, NOT zero (REQ 43). 'PAUSED Time' actions after Max_PAUSED_Duration_const (REQ 44). Infusion_initiate_prog while Inhibited_Infusion_macro = TRUE causes no transition (REQ 45).";
@@ -76,8 +81,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> exitCondition = "Infusion_initiate_prog with Inhibited_Infusion_macro = FALSE (REQ 46); Infusion_inhibit_prog to IDLE (REQ 47)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10 (REQ 43-47)";
     }
-    state modeACTIVE : ModeState {
+    state modeACTIVE : MemoState {
         attribute :>> id = "MODE-005";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON.THERAPY.ACTIVE";
         attribute :>> modeKind = "active parent";
         attribute :>> description = "Actual infusion through BASAL, SQUARE BOLUS or PATIENT BOLUS. Only mode where a patient bolus may be requested (REQ 25). Square boluses are scheduled automatically every Interval_sbolus_prog for Duration_sbolus_prog (REQ 24). Actual_Infusion_Duration_macro accumulates here.";
@@ -85,8 +91,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> exitCondition = "infusion complete (REQ 28); PAUSED via REQ 29/30/37-39";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6";
     }
-    state modeBASAL : ModeState {
+    state modeBASAL : MemoState {
         attribute :>> id = "MODE-006";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON.THERAPY.ACTIVE.BASAL";
         attribute :>> modeKind = "active-basal";
         attribute :>> description = "Constant-rate delivery at FlowRate_basal_prog within Tolerance_Max_const (REQ 40). FlowRate_Mode_macro = FlowRate_basal_prog.";
@@ -94,8 +101,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> exitCondition = "scheduled square bolus (REQ 31); patient bolus granted (REQ 32); Inhibited_Infusion_macro (REQ 37)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.7";
     }
-    state modeSQUARE : ModeState {
+    state modeSQUARE : MemoState {
         attribute :>> id = "MODE-007";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON.THERAPY.ACTIVE.SQUARE_BOLUS";
         attribute :>> modeKind = "active-square-bolus (auto-scheduled)";
         attribute :>> description = "Prescribed extra delivery at FlowRate_sbolus_prog within Tolerance_Max_const (REQ 41). Auto-initiates at the prescribed frequency and ends after the prescribed duration — no external trigger (§4.1.8, REQ 24). FlowRate_Mode_macro = FlowRate_sbolus_prog.";
@@ -103,8 +111,9 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> exitCondition = "scheduled end or Inhibited_Bolus_macro (REQ 34); patient bolus granted (REQ 33); inhibits (REQ 39)";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.8";
     }
-    state modePBOLUS : ModeState {
+    state modePBOLUS : MemoState {
         attribute :>> id = "MODE-008";
+        attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON.THERAPY.ACTIVE.PATIENT_BOLUS";
         attribute :>> modeKind = "active-patient-bolus";
         attribute :>> description = "Patient-requested delivery at FlowRate_pbolus_prog within Tolerance_Max_const (REQ 42). Granted only when no REQ 25 ignore condition holds. FlowRate_Mode_macro = FlowRate_pbolus_prog.";
