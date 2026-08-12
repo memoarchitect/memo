@@ -23,9 +23,10 @@ package memo_examples_temperature_alarm {
     private import memo_assurance_human_factors::*;
     private import memo_architecture_implementation_ui::*;
     private import memo_core_relationships::*;
+    private import memo_assurance_safety_risk_analysis::*;
 
     // ── Operational intent ──────────────────────────────────────
-    actor icuNurse : User {
+    part icuNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "TA-USR-001"; attribute :>> name = "ICUNurse";
     }

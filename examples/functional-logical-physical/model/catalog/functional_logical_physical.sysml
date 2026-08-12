@@ -4,6 +4,7 @@
 // graph, and no layer is a mandatory pipeline stage.
 package memo_examples_functional_logical_physical {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;

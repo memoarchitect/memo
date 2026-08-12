@@ -1,5 +1,6 @@
 package memo_examples_gpca_pump_gpca_operational {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_architecture_operational_structure::*;
     private import memo_architecture_operational_activities::*;
