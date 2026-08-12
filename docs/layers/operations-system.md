@@ -17,7 +17,7 @@ work, responsibility, behavior, organization, and path are different claims:
 | `OperationalActivity` | Work performed in the operational world (by people) |
 | `SystemFunction` | Technology-independent responsibility of the system |
 | `FunctionalFlow` / `FunctionalFlowStep` | Reusable organization of functions with typed steps |
-| `FunctionalScenario` | A selected path through a functional flow |
+| `MemoScenario[scenarioKind=functional]` | A selected path through a functional flow |
 
 `FunctionalExchange` is a typed transfer (measurement, command, alarm, …)
 between functions. An action flow may call a function, but it is diagram

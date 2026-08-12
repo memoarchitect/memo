@@ -46,14 +46,12 @@
 | [`LogicalExchangeItem`](#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoItem`. | `MemoItem` |
 | [`LogicalConnector`](#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | `MemoRelationship` |
 | [`LogicalExchange`](#logicalexchange) | `part def` | A transfer of a typed item across a connector. | `ArchitectureElement` |
-| [`LogicalState`](#logicalstate) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `ArchitectureElement` |
-| [`LogicalMode`](#logicalmode) | `part def` | Logical mode definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`LogicalMode`](#logicalmode) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `ArchitectureElement` |
 | [`LogicalBehavior`](#logicalbehavior) | `part def` | Logical behavior definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). | `ArchitectureElement` |
 | [`FaultContainmentRegion`](#faultcontainmentregion) | `part def` | Fault containment region definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`IndependentOf`](#independentof) | `connection def` | Claimed independence between channels (common-cause defense). | `MemoRelationship` |
 | [`MonitorsChannel`](#monitorschannel) | `connection def` | Typed relationship for monitors channel. | `MemoRelationship` |
-| [`ExhibitsMode`](#exhibitsmode) | `connection def` | Typed relationship for exhibits mode. | `MemoRelationship` |
 
 ## FlowContentKind
 
@@ -250,21 +248,6 @@ part def LogicalExchange specializes ArchitectureElement
 | Owning package | `memo_architecture_logical_structure` |
 
 
-## LogicalState
-
-```sysml
-part def LogicalState specializes ArchitectureElement
-```
-
-| Property | Value |
-| --- | --- |
-| Description | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `ArchitectureElement` |
-| Owning package | `memo_architecture_logical_structure` |
-
-
 ## LogicalMode
 
 ```sysml
@@ -273,7 +256,7 @@ part def LogicalMode specializes ArchitectureElement
 
 | Property | Value |
 | --- | --- |
-| Description | Logical mode definition specializing `ArchitectureElement`. |
+| Description | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `ArchitectureElement` |
@@ -349,21 +332,6 @@ connection def MonitorsChannel :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship for monitors channel. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_logical_structure` |
-
-
-## ExhibitsMode
-
-```sysml
-connection def ExhibitsMode :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for exhibits mode. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -551,9 +519,7 @@ connection def ExhibitsMode :> MemoRelationship
 
         // States and modes of the logical solution (kept distinct from UI state
         // and from physical device configuration).
-        part def LogicalState specializes ArchitectureElement {
-            attribute stateInvariant : String;
-        }
+
         part def LogicalMode specializes ArchitectureElement {
             attribute modePurpose : String;
             attribute entryCondition : String;
@@ -595,16 +561,7 @@ connection def ExhibitsMode :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = monitorsChannelLinks meta SysML::Usage;
         }
-        connection def ExhibitsMode :> MemoRelationship {
-            end component : LogicalComponent :>> source;
-            end mode : LogicalMode :>> target;
-        }
-        abstract connection exhibitsModeLinks : ExhibitsMode[*];
-        metadata def <exhibitsMode> ExhibitsModeMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = exhibitsModeLinks meta SysML::Usage;
-        }
+
     }
 
     ```

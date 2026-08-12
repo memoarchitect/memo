@@ -62,7 +62,7 @@
         part :>> selectionQuery {
             attribute :>> id = "QRY-OPS-001";
             attribute :>> name = "UseCaseQuery";
-            attribute :>> includeElementKinds = ("Actor", "UseContext", "OperativeScenario");
+            attribute :>> includeElementKinds = ("Actor", "UseContext", "MemoScenario[scenarioKind=operative]");
             attribute :>> includeLayers = ("context", "operational");
             attribute :>> rationaleText = "Auto-populate the use case view from the context and operational layers.";
         }

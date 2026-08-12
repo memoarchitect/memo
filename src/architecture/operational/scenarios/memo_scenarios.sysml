@@ -1,7 +1,6 @@
 // Scenario foundation. A scenario is a selected path through a
-// workflow (or functional flow), classified by three independent typed
-// dimensions — variant, operational condition, purpose — replacing the former
-// single ScenarioKind. An occurrence is an actual or hypothetical execution
+// workflow (or functional flow), classified by its kind plus three independent
+// dimensions — variant, operational condition, and purpose. An occurrence is an actual or hypothetical execution
 // of a scenario. Alternate scenarios reference their base scenario and
 // variation point instead of duplicating the workflow.
 package memo_architecture_operational_scenarios {
@@ -48,11 +47,25 @@ package memo_architecture_operational_scenarios {
         enum cybersecurity;
     }
 
-    // Shared scenario foundation. Specializations exist only where structure
-    // or invariants differ (OperativeScenario here; FunctionalScenario in
-    // memo_functions; UIScenario in memo_architecture_implementation_ui;
-    // VerificationScenario / ThreatScenario in assurance packages).
-    abstract action def MemoScenario specializes MemoAction {
+    // The architecture/assurance role a scenario plays. These values preserve
+    // the former named scenario specializations without turning a taxonomy into
+    // six action definitions.
+    enum def ScenarioKind {
+        enum functional;
+        enum operative;
+        enum ui;
+        enum threat;
+        // `verification` is a SysML v2 reserved word; retain the regulated
+        // term with the same `memo` prefix used by ScenarioPurposeKind.
+        enum memoVerification;
+        enum hazardRelatedUse;
+    }
+
+    // Shared scenario foundation. Fields that apply only to one scenario kind
+    // remain optional here; this keeps the taxonomy queryable without six
+    // otherwise redundant action definitions.
+    action def MemoScenario specializes MemoAction {
+        attribute scenarioKind : ScenarioKind;
         attribute variantKind : ScenarioVariantKind;
         attribute operationalCondition : OperationalConditionKind;
         attribute scenarioPurpose : ScenarioPurposeKind[0..*];
@@ -69,20 +82,28 @@ package memo_architecture_operational_scenarios {
         // point at which behavior diverges — never a copied workflow.
         ref baseScenario : MemoScenario[0..1];
         attribute variationPoint : String;
-    }
 
-    // The operational-layer scenario: a path through an OperationalWorkflow in
-    // a use context. It is realized down the V by a FunctionalScenario (the
-    // function sequence) and a UIScenario (the interaction sequence), each owned
-    // by its own architecture layer and linked by typed realization
-    // relationships — never by copying the path. Workflow stays operational;
-    // only the scenario is layered.
-    action def OperativeScenario specializes MemoScenario {
+        // functional scenario
+        ref selectedFlow : MemoAction[0..1];
+        // operative scenario
         ref parentWorkflow : OperationalWorkflow[0..1];
         ref parentUseCase : UseCase[0..1];
-        // Each scenario owns the operational activity/action flow for its
-        // selected path. Do not reuse one generic activity for every scenario.
         ref activities : OperationalActivity[0..*];
+        // UI scenario
+        ref parentFlow : MemoAction[0..1];
+        // threat scenario
+        attribute actorDescription : String;
+        attribute assumptionSummary : String;
+        attribute guaranteeSummary : String;
+        attribute securityObjective : String;
+        attribute abuseCaseReference : String;
+        attribute defaultCategory : ThreatCategoryKind[0..1];
+        // verification scenario
+        attribute verificationEnvironment : String;
+        attribute stimulusSummary : String;
+        // hazard-related use scenario (IEC 62366-1 3.9)
+        attribute hazardReference : String;
+        attribute selectionRationale : String;
     }
 
     // An actual or hypothetical execution of a scenario (usability test run,

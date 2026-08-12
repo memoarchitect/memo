@@ -269,14 +269,10 @@ package memo_architecture_implementation_ui {
     }
 
     // A reusable dialogue structure through the UI; a selected path through
-    // it is an UIScenario.
+    // it is a MemoScenario with scenarioKind `ui`.
     action def InteractionFlow specializes MemoAction {
         attribute entryPoint : String;
         attribute exitPoint : String;
-    }
-
-    action def UIScenario specializes MemoScenario {
-        ref parentFlow : InteractionFlow[0..1];
     }
 
     connection def DataBinding :> MemoRelationship {
@@ -364,9 +360,8 @@ package memo_architecture_implementation_ui {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = flowServesUseCaseLinks meta SysML::Usage;
     }
-    // The UI-layer scenario realizes exactly one FunctionalScenario one layer
-    // up (the interaction sequence that carries out the function sequence),
-    // completing the OperativeScenario → FunctionalScenario → UIScenario chain.
+    // A UI scenario realizes a functional scenario one layer up: each is a
+    // MemoScenario selected by scenarioKind rather than a separate definition.
     connection def ErrorAtElement :> MemoRelationship {
         end useError : UseError :>> source;
         end element : InteractionElement :>> target;

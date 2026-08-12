@@ -22,7 +22,7 @@ package memo_examples_gpca_pump_viewpoints_usability_views_document_usability_vi
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-002";
             attribute :>> name = "usabilityViewQuery";
-            attribute :>> includeElementKinds = ("UseError", "UseContext", "Actor", "ValidationCase", "OperativeScenario", "IntendedUse", "ReasonablyForeseeableMisuse");
+            attribute :>> includeElementKinds = ("UseError", "UseContext", "Actor", "ValidationCase", "MemoScenario[scenarioKind=operative]", "IntendedUse", "ReasonablyForeseeableMisuse");
             attribute :>> includeRelationshipKinds = ("TestedByUsability", "RealizedByScenario", "InteractsWith", "IncludedIn");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }

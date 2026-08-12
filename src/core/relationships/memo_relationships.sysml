@@ -125,7 +125,7 @@ package memo_core_relationships {
     // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase.
     connection def Realizes :> MemoRelationship {
         // Realization crosses structural and behavioral metaclasses (for
-        // example a FunctionalFlow route realizing a FunctionalScenario).
+        // example a FunctionalFlow route realizing a functional MemoScenario).
         end realizing :>> source;
         end realized :>> target;
     }

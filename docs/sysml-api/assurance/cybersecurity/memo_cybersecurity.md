@@ -41,7 +41,6 @@
 | [`AttackSurface`](#attacksurface) | `part def` | Attack surface definition specializing `MemoPart`. | `MemoPart` |
 | [`Threat`](#threat) | `part def` | Threat definition specializing `RiskDriver`. | `RiskDriver` |
 | [`Vulnerability`](#vulnerability) | `item def` | Vulnerability definition specializing `RiskItem`. | `RiskItem` |
-| [`ThreatScenario`](#threatscenario) | `action def` | A scenario specialization: an attack path through the system, classified by the shared scenario dimensions with purpose `cybersecurity`. | `MemoScenario` |
 | [`CyberHazard`](#cyberhazard) | `item def` | Cyber hazard definition specializing `Hazard`. | `Hazard` |
 | [`CyberRisk`](#cyberrisk) | `part def` | Cyber risk definition specializing `Risk`. | `Risk` |
 | [`CyberMitigation`](#cybermitigation) | `part def` | Cyber mitigation definition specializing `RiskControlMeasure`. | `RiskControlMeasure` |
@@ -109,21 +108,6 @@ item def Vulnerability specializes RiskItem
 | Kind | `item def` |
 | Abstract | No |
 | Specializes | `RiskItem` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
-## ThreatScenario
-
-```sysml
-action def ThreatScenario specializes MemoScenario
-```
-
-| Property | Value |
-| --- | --- |
-| Description | A scenario specialization: an attack path through the system, classified by the shared scenario dimensions with purpose `cybersecurity`. |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoScenario` |
 | Owning package | `memo_assurance_cybersecurity` |
 
 
@@ -315,18 +299,6 @@ connection def ImpactsSafety :> MemoRelationship
             attribute affectedLayer : String;
             attribute cweReference : String;
             attribute remediable : Boolean;
-        }
-
-        // A scenario specialization: an attack path through the
-        // system, classified by the shared scenario dimensions with purpose
-        // `cybersecurity`.
-        action def ThreatScenario specializes MemoScenario {
-            attribute actorDescription : String;
-            attribute assumptionSummary : String;
-            attribute guaranteeSummary : String;
-            attribute securityObjective : String;
-            attribute abuseCaseReference : String;
-            attribute defaultCategory : ThreatCategoryKind;
         }
 
         item def CyberHazard specializes Hazard {

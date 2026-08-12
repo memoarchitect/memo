@@ -89,8 +89,9 @@ action oaControlStapleLineBleeding : OperationalActivity {
     first controlBleeding then reassessStapleLine;
 }
 
-part scStapleLineBleeding : OperativeScenario {
+action scStapleLineBleeding : MemoScenario {
     attribute :>> name = "StapleLineBleedingRecovery";
+    attribute :>> scenarioKind = ScenarioKind::operative;
     attribute :>> variantKind = ScenarioVariantKind::recovery;
     attribute :>> variationPoint = "bleeding observed during staple-line assessment";
     ref :>> baseScenario = scNominalSleeveProcedure;

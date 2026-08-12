@@ -111,8 +111,9 @@ package memo_examples_temperature_alarm {
     connection : ControlImplementedBy connect riskControl ::> rcReAnnunciate to implementingElement ::> elAlarmBanner;
 
     // ── Verification, validation, evidence ──────────────────────
-    action vsAlarmLatency : VerificationScenario {
+    action vsAlarmLatency : MemoScenario {
         attribute :>> id = "TA-VS-001"; attribute :>> name = "AlarmLatencyScenario";
+        attribute :>> scenarioKind = ScenarioKind::memoVerification;
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
         attribute :>> scenarioPurpose = ScenarioPurposeKind::memoVerification;
