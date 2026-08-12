@@ -130,16 +130,7 @@ package memo_architecture_functional_functions {
     action def FunctionalScenario specializes MemoScenario {
         ref selectedFlow : FunctionalFlow[0..1];
     }
-    connection def IncludesStep :> MemoRelationship {
-        end functionalFlow : FunctionalFlow :>> source;
-        end step : FunctionalFlowStep :>> target;
-    }
-    abstract connection includesStepLinks : IncludesStep[*];
-    metadata def <includesStep> IncludesStepMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = includesStepLinks meta SysML::Usage;
-    }
+
     connection def InvolvesFunction :> MemoRelationship {
         end functionalFlow : FunctionalFlow :>> source;
         end function : MemoFunction :>> target;

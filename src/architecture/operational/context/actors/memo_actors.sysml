@@ -1,5 +1,5 @@
-// Actor hierarchy (§4). An Actor interacts with the system; it is distinct
-// from a Stakeholder (memo_architecture_operational_context_stakeholders), who has concerns about the
+// Operational participants (§4) interact with the system; they are distinct
+// from stakeholders (memo_architecture_operational_context_stakeholders), who have concerns about the
 // system but need not interact with it. "User" is reserved for a human who
 // interacts with the medical device.
 package memo_architecture_operational_context_actors {
@@ -7,8 +7,7 @@ package memo_architecture_operational_context_actors {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
-
-    abstract part def Actor specializes MemoPart {
+    abstract part def OperationalParticipant specializes MemoPart {
         attribute actorKind : ActorKind;
         attribute trainingLevel : String;
         attribute responsibility : String;
@@ -19,7 +18,7 @@ package memo_architecture_operational_context_actors {
     // The human actor. The specific role is given by actorKind
     // (patient / clinician / caregiver / technician / administrator); the
     // role-specific fields below are set only for the relevant actorKind.
-    part def User specializes Actor {
+    part def User specializes OperationalParticipant {
         attribute userPopulation : String;
         attribute impairmentConsiderations : String;
         attribute intendedTraining : String;
@@ -32,7 +31,5 @@ package memo_architecture_operational_context_actors {
 
     // A non-human actor (external system, external device, or environmental
     // agent). The specific kind is described by externalKind.
-    part def NonHumanActor specializes Actor {
-        attribute externalKind : String[0..1];
-    }
+
 }
