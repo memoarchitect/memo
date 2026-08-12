@@ -81,6 +81,7 @@ nav:
       - What is MEMO: what/index.md
   - Reference:
       - Source layout: reference/index.md
+      - Native project format: reference/native-project-format.md
       - Core: reference/areas/core.md
       - Architecture: reference/areas/architecture.md
       - Assurance: reference/areas/assurance.md

@@ -2,7 +2,7 @@
 
 One npm package — `@memoarchitect/ontology` — carries all MEMO content. Four
 *logical* packages survive inside it as subpaths declared in a root manifest,
-so `extends:` references in user projects stay stable even if the directory
+so the package names user projects import stay stable even if the directory
 layout changes.
 
 ## Directory layout
@@ -60,9 +60,10 @@ examples:
   standard-sysml-diagrams: ./examples/sysml-diagram-samples
 ```
 
-When a default project declares `extends: "@memoarchitect/methodology-default"`,
-the tools resolve the installed ontology npm package, read this manifest, and
-map the logical name to its subpath. `memo init --list` shows the manifest's
+When a project imports `@memoarchitect/methodology-default` and binds it in its
+`ProjectMethodBinding`, the tools resolve the installed ontology npm package,
+read this manifest, and map the logical name to its subpath. The manifest says
+where the source sits; the import decides that it is loaded. `memo init --list` shows the manifest's
 templates and examples. `memo init --template <id>` copies the selected
 template, substitutes the project name, and writes `memo.lock.yaml`.
 
