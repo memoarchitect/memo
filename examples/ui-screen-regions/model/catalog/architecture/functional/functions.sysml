@@ -1,5 +1,6 @@
 // Functional architecture: the display-management function tree.
 package memo_examples_ui_screen_regions_architecture_functional_functions {
+    private import memo_examples_ui_screen_regions_assurance_requirements::*;
     private import ScalarValues::*;
 
     private import memo_core_relationships::*;
@@ -57,4 +58,28 @@ package memo_examples_ui_screen_regions_architecture_functional_functions {
         attribute :>> criticality = CriticalityKind::medium;
     }
 
+
+    satisfy reqRateEntry by fnSetInfusionRate;
+
+    satisfy reqRateLegibility by fnPresentDeliveryStatus;
+
+    satisfy reqVolumeDisplay by fnPresentDeliveryStatus;
+
+    satisfy reqDrugLibrarySelection by fnValidateDrugSelection;
+
+    satisfy reqDisplayFreshness by fnPresentDeliveryStatus;
+
+    satisfy reqActiveRateDisplay by fnPresentDeliveryStatus;
+
+    satisfy reqDrugIdentityDisplay by fnValidateDrugSelection;
+
+    satisfy reqTimeDisplay by fnPresentLocalTime;
+
+    satisfy reqTimeAccuracy by fnPresentLocalTime;
+
+    satisfy reqBatteryStatusDisplay by fnPresentBatteryStatus;
+
+    satisfy reqBatteryWarningPerformance by fnPresentBatteryStatus;
+
+    satisfy reqDrugSelectionPerformance by fnValidateDrugSelection;
 }

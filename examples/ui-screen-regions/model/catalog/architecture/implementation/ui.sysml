@@ -2,6 +2,7 @@
 // panel they run on. One part tree carries geometry and design record — there
 // is no separate region type.
 package memo_examples_ui_screen_regions_architecture_implementation_ui {
+    private import memo_examples_ui_screen_regions_assurance_requirements::*;
     private import ScalarValues::*;
 
     private import memo_core_relationships::*;
@@ -190,4 +191,16 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
         }
     }
 
+
+    satisfy reqRateLegibility by elMainScreen;
+
+    satisfy reqRateEntry by elSettingsScreen;
+
+    satisfy reqRateEntry by elRateConfirmDialog;
+
+    satisfy reqDrugLibrarySelection by elDrugSelectorRegion;
+
+    satisfy reqDrugIdentityDisplay by elDrugSelectorClosed;
+
+    satisfy reqDrugSelectionPerformance by elDrugSelectorRegion;
 }

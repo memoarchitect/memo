@@ -31,8 +31,7 @@ package memo_examples_functional_logical_physical {
         attribute :>> id = "FLP-LC-001"; attribute :>> name = "PressureProtectionElement";
         attribute :>> controlledVariable = "line pressure";
     }
-    connection : AllocatedTo connect function ::> fnLimitLinePressure to allocatedElement ::> lcPressureProtection;
-
+    allocation : AllocatedTo allocate fnLimitLinePressure to lcPressureProtection;
     // Implementation: the SAME logical element is realized by software
     // (pressure-limit supervision) AND mechanics (mechanical relief valve).
     part swPressureSupervisor : SoftwareModule {
