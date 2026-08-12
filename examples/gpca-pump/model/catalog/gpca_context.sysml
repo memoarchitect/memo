@@ -47,7 +47,7 @@ package memo_examples_gpca_pump_gpca_context {
     // system is used in a fixed location and is not ambulatory.
 
     // ── Actors ──────────────────────────────────────────────────
-    actor actorPatient : User {
+    part actorPatient : User {
         attribute :>> actorKind = ActorKind::patient;
         attribute :>> id = "ACT-001";
         attribute :>> name = "Patient";
@@ -55,7 +55,7 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> description = "Receives the infusion and requests bolus doses via the patient pendant.";
         perform oaRequestBolus;
     }
-    actor actorNurse : User {
+    part actorNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-002";
         attribute :>> name = "ClinicianNurse";
@@ -66,7 +66,7 @@ package memo_examples_gpca_pump_gpca_context {
         perform oaRespondAlarm;
         perform oaReviewLog;
     }
-    actor actorPrescriber : User {
+    part actorPrescriber : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-003";
         attribute :>> name = "PrescribingPhysician";
@@ -74,7 +74,7 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> description = "Prescribes drug, concentration, basal rate, bolus volume, lockout interval, and maximum dose limits.";
         perform oaPrescribe;
     }
-    actor actorPharmacist : User {
+    part actorPharmacist : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "ACT-004";
         attribute :>> name = "Pharmacist";
@@ -82,7 +82,7 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> description = "Prepares the drug reservoir and verifies drug and concentration against the prescription.";
         perform oaLoadReservoir;
     }
-    actor actorTechnician : User {
+    part actorTechnician : User {
         attribute :>> actorKind = ActorKind::technician;
         attribute :>> id = "ACT-005";
         attribute :>> name = "BiomedicalTechnician";

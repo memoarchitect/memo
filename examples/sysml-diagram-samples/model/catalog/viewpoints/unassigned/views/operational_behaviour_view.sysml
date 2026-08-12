@@ -30,17 +30,17 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         attribute :>> entityKind = OperationalEntityKind::device;
         attribute :>> responsibility = "System of interest for this context view.";
     }
-    actor opClinicalTeam : User {
+    part opClinicalTeam : User {
         attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Clinical Team"; }
-    actor opPatientGroup : User {
+    part opPatientGroup : User {
         attribute :>> actorKind = ActorKind::patient; attribute :>> name = "Patient Interaction"; }
-    actor opRolePhysician : User {
+    part opRolePhysician : User {
         attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Physician"; }
-    actor opRoleNurse : User {
+    part opRoleNurse : User {
         attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Nurse"; }
-    actor opRoleBiomed : User {
+    part opRoleBiomed : User {
         attribute :>> actorKind = ActorKind::technician; attribute :>> name = "Biomed Tech"; }
-    actor opRolePatient : User {
+    part opRolePatient : User {
         attribute :>> actorKind = ActorKind::patient; attribute :>> name = "Patient"; }
 
     connection : Composes connect parent ::> opCareSystem to child ::> opClinicalTeam;
