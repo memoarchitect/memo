@@ -171,6 +171,11 @@ package memo_architecture_implementation_ui {
         // Capture-relative fill transparency for region review overlays. A
         // modelled value keeps interactive review and exported figures aligned.
         attribute boundaryOpacity : Real[0..1];
+        // Stroke width of the same box, in pixels. Colour and opacity are
+        // modelled so a review print, an exported figure, and the workbench
+        // agree on which box is which; a width chosen per renderer breaks that
+        // agreement for exactly the same reason.
+        attribute boundaryWidth : Real[0..1];
         attribute detectionMethod : BoundsDetectionKind[0..1];
         attribute detectionConfidence : Real[0..1];
         attribute confirmedBy : String;
