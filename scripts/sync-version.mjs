@@ -24,6 +24,15 @@ if (packageName === '@memoarchitect/ontology') {
     'profile/memo.package.yaml',
     'methodologies/default/memo.package.yaml',
     'methodologies/gpca/memo.package.yaml',
+    // The five technology extensions were added after this list was written and
+    // drifted a whole minor version behind the product before anyone noticed.
+    // They ship from this repo and carry the product's version, so they belong
+    // under the same check rather than under the next person's memory.
+    'extensions/aadl/memo.package.yaml',
+    'extensions/cloud/memo.package.yaml',
+    'extensions/container/memo.package.yaml',
+    'extensions/messaging/memo.package.yaml',
+    'extensions/ros/memo.package.yaml',
     // These files are emitted by a YAML dumper that quotes only what YAML
     // requires, so a semantic version is always bare. Matching that one form
     // keeps the check honest: if a file ever drifts to another shape, syncing
