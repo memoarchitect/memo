@@ -1,5 +1,8 @@
 // Verification and validation: cases and the evidence they produce.
 package memo_examples_ui_screen_regions_assurance_verification_validation {
+    private import memo_examples_ui_screen_regions_assurance_safety_risk::*;
+    private import memo_examples_ui_screen_regions_architecture_functional_functions::*;
+    private import memo_examples_ui_screen_regions_assurance_requirements::*;
     private import ScalarValues::*;
     private import memo_core_dimensions::*;   // ElementStatusKind
 
@@ -21,6 +24,8 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "A rate change cannot reach the controller until the displayed value is explicitly confirmed.";
         attribute :>> status = ElementStatusKind::approved;
+
+        subject verified : Base::Anything[*] = (rcRateConfirm, fnSetInfusionRate, fnManageInfusionDisplay);
     }
 
     part evRateChange : Evidence {
@@ -35,6 +40,8 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Only enabled care-area drug and concentration records are selectable, and every selection supplies the matching dosing limits.";
         attribute :>> status = ElementStatusKind::approved;
+
+        subject verified : Base::Anything[*] = (rcDrugLibraryGuard, fnValidateDrugSelection);
     }
 
     part evDrugLibrarySelection : Evidence {
@@ -49,6 +56,9 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Time, battery, active rate, drug identity, and total delivered volume satisfy their content, accuracy, and latency criteria under normal and threshold-transition conditions.";
         attribute :>> status = ElementStatusKind::approved;
+
+        objective { verify reqActiveRateDisplay; verify reqDrugIdentityDisplay; verify reqVolumeDisplay; verify reqTimeDisplay; verify reqTimeAccuracy; verify reqBatteryStatusDisplay; verify reqBatteryWarningPerformance; }
+        subject verified : Base::Anything[*] = (rcLowBatteryProminence, rcDisplayFreshnessMonitor, rcClockFreshnessCheck, fnPresentDeliveryStatus, fnPresentLocalTime, fnPresentBatteryStatus);
     }
 
     part evInfusionStatusContent : Evidence {

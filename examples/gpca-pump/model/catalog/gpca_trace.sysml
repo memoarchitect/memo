@@ -224,136 +224,134 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs86;
 
     // ── Requirement satisfaction ────────────────────────────────
-    connection : SatisfiedBy connect requirementElement ::> reqCs01 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs01 to satisfyingElement ::> outputBus;
-    connection : SatisfiedBy connect requirementElement ::> reqCs18 to satisfyingElement ::> systemStatus;
-    connection : SatisfiedBy connect requirementElement ::> reqCs23 to satisfyingElement ::> systemStatus;
-    connection : SatisfiedBy connect requirementElement ::> reqCs25 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs19 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqDrugLibraryLimits to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs09 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqPowerLossRetention to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqPost to satisfyingElement ::> systemMonitor;
-    connection : SatisfiedBy connect requirementElement ::> reqWatchdogSafeState to satisfyingElement ::> systemMonitor;
-    connection : SatisfiedBy connect requirementElement ::> reqWatchdogSafeState to satisfyingElement ::> controllerBoard;
-    connection : SatisfiedBy connect requirementElement ::> reqCs59 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs72 to satisfyingElement ::> audibleAlarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs73 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs75 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs21 to satisfyingElement ::> airInLineSensor;
-    connection : SatisfiedBy connect requirementElement ::> reqCs21 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqOcclusion to satisfyingElement ::> occlusionSensor;
-    connection : SatisfiedBy connect requirementElement ::> reqOcclusion to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs23 to satisfyingElement ::> reservoirSensor;
-    connection : SatisfiedBy connect requirementElement ::> reqCs23 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqDoorOpen to satisfyingElement ::> doorSensor;
-    connection : SatisfiedBy connect requirementElement ::> reqDoorOpen to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqMaxHourlyDose to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqStuckButton to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqFlowCrossCheck to satisfyingElement ::> flowSensor;
-    connection : SatisfiedBy connect requirementElement ::> reqFlowCrossCheck to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs77 to satisfyingElement ::> logging;
-    connection : SatisfiedBy connect requirementElement ::> reqCs78 to satisfyingElement ::> logging;
-    connection : SatisfiedBy connect requirementElement ::> reqEventLogging to satisfyingElement ::> logging;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // CriSys REQ-CS allocation to the UMN software subsystems
     // (coarse; refined against the AADL architecture in GR.04).
     // Mode control -> TLM; flow production -> Infusion_Manager;
     // notifications -> Alarm; data configuration -> Config;
     // logs -> Logging; enclosure non-behavioral -> DeviceEnclosure.
-    connection : SatisfiedBy connect requirementElement ::> reqCs02 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs03 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs04 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs05 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs06 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs07 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs08 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs10 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs11 to satisfyingElement ::> logging;
-    connection : SatisfiedBy connect requirementElement ::> reqCs12 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs13 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs14 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs15 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs16 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs17 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs18 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs20 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs22 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs24 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs26 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs27 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs28 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs29 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs30 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs31 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs32 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs33 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs34 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs35 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs36 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs37 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs38 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs39 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs40 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs41 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs42 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs43 to satisfyingElement ::> infusionMgr;
-    connection : SatisfiedBy connect requirementElement ::> reqCs44 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs45 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs46 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs47 to satisfyingElement ::> tlm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs48 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs49 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs50 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs51 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs52 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs53 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs54 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs55 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs56 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs57 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs58 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs60 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs61 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs62 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs63 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs64 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs65 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs66 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs67 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs68 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs69 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs70 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs71 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs74 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs76 to satisfyingElement ::> alarm;
-    connection : SatisfiedBy connect requirementElement ::> reqCs79 to satisfyingElement ::> logging;
-    connection : SatisfiedBy connect requirementElement ::> reqCs80 to satisfyingElement ::> logging;
-    connection : SatisfiedBy connect requirementElement ::> reqCs81 to satisfyingElement ::> logging;
-    connection : SatisfiedBy connect requirementElement ::> reqCs82 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqCs83 to satisfyingElement ::> enclosure;
-    connection : SatisfiedBy connect requirementElement ::> reqCs84 to satisfyingElement ::> enclosure;
-    connection : SatisfiedBy connect requirementElement ::> reqCs85 to satisfyingElement ::> logging;
-    connection : SatisfiedBy connect requirementElement ::> reqCs86 to satisfyingElement ::> config;
-    connection : SatisfiedBy connect requirementElement ::> reqPumpAccuracy to satisfyingElement ::> pumpMotorAssembly;
-    connection : SatisfiedBy connect requirementElement ::> reqAlarmLoudness to satisfyingElement ::> audibleAlarm;
-    connection : SatisfiedBy connect requirementElement ::> reqBatteryBackup to satisfyingElement ::> batteryPack;
-    connection : SatisfiedBy connect requirementElement ::> reqFreeFlowPrevention to satisfyingElement ::> antiFreeFlowValve;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // ── Function allocation ─────────────────────────────────────
-    connection : AllocatedTo connect function ::> fnAcquireSensors to allocatedElement ::> gpcaDeviceSensors;
-    connection : AllocatedTo connect function ::> fnAcquireSensors to allocatedElement ::> systemStatus;
-    connection : AllocatedTo connect function ::> fnPresentStatus to allocatedElement ::> outputBus;
-    connection : AllocatedTo connect function ::> fnValidatePrescription to allocatedElement ::> config;
-    connection : AllocatedTo connect function ::> fnMonitorAlarm to allocatedElement ::> alarm;
-    connection : AllocatedTo connect function ::> fnAnnunciate to allocatedElement ::> audibleAlarm;
-    connection : AllocatedTo connect function ::> fnManageInfusion to allocatedElement ::> infusionMgr;
-    connection : AllocatedTo connect function ::> fnEnforceLimits to allocatedElement ::> infusionMgr;
-    connection : AllocatedTo connect function ::> fnCommandPump to allocatedElement ::> pumpMotorAssembly;
-    connection : AllocatedTo connect function ::> fnLogEvents to allocatedElement ::> logging;
-    connection : AllocatedTo connect function ::> fnManagePower to allocatedElement ::> systemMonitor;
-    connection : AllocatedTo connect function ::> fnPresentStatus to allocatedElement ::> operatorDisplay;
-    connection : AllocatedTo connect function ::> fnSelfTest to allocatedElement ::> systemMonitor;
-
+    allocation : AllocatedTo allocate fnAcquireSensors to gpcaDeviceSensors;
+    allocation : AllocatedTo allocate fnAcquireSensors to systemStatus;
+    allocation : AllocatedTo allocate fnPresentStatus to outputBus;
+    allocation : AllocatedTo allocate fnValidatePrescription to config;
+    allocation : AllocatedTo allocate fnMonitorAlarm to alarm;
+    allocation : AllocatedTo allocate fnAnnunciate to audibleAlarm;
+    allocation : AllocatedTo allocate fnManageInfusion to infusionMgr;
+    allocation : AllocatedTo allocate fnEnforceLimits to infusionMgr;
+    allocation : AllocatedTo allocate fnCommandPump to pumpMotorAssembly;
+    allocation : AllocatedTo allocate fnLogEvents to logging;
+    allocation : AllocatedTo allocate fnManagePower to systemMonitor;
+    allocation : AllocatedTo allocate fnPresentStatus to operatorDisplay;
+    allocation : AllocatedTo allocate fnSelfTest to systemMonitor;
     // ── Deployment, hosting, and interface realization ──────────
     allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaSoftware to controllerBoard;
     connection : HostedBy connect processingNode ::> mainController to hostAssembly ::> controllerBoard;
@@ -362,11 +360,10 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : BindsToInterface connect portElement ::> portPatientPendant to boundInterface ::> bolusButtonLine;
     connection : BindsToInterface connect portElement ::> portMotorDrive to boundInterface ::> pumpMotorDrive;
     connection : BindsToInterface connect portElement ::> portSensorHarness to boundInterface ::> occlusionAnalogLine;
-    connection : AllocatedTo connect function ::> lfSensorAcquisition to allocatedElement ::> exSensorVector;
-    connection : AllocatedTo connect function ::> lfFlowCommand to allocatedElement ::> exFlowCommand;
-    connection : AllocatedTo connect function ::> lfAlarmSignal to allocatedElement ::> exAlarmAnnunciation;
-    connection : AllocatedTo connect function ::> lfPrescriptionEntry to allocatedElement ::> exPrescriptionEntry;
-
+    allocation : AllocatedTo allocate lfSensorAcquisition to exSensorVector;
+    allocation : AllocatedTo allocate lfFlowCommand to exFlowCommand;
+    allocation : AllocatedTo allocate lfAlarmSignal to exAlarmAnnunciation;
+    allocation : AllocatedTo allocate lfPrescriptionEntry to exPrescriptionEntry;
     // ── Fig 4.1 mode hierarchy (CriSys §4.1) ────────────────────
     connection : Composes connect parent ::> topLevelModeMachine to child ::> modeOFF;
     connection : Composes connect parent ::> topLevelModeMachine to child ::> modeON;
@@ -674,62 +671,61 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::cutSet; connect control ::> lockoutControl to mitigatedElement ::> mcsBolusPath; }
 
     // ── Verification coverage (IEC 62304 §5.7) ──────────────────
-    connection : VerifiedBy connect verificationTarget ::> reqCs01 to verificationCase ::> vcModeRange;
-    connection : VerifiedBy connect verificationTarget ::> reqCs25 to verificationCase ::> vcLockout;
-    connection : VerifiedBy connect verificationTarget ::> reqCs19 to verificationCase ::> vcSameStepAlarm;
-    connection : VerifiedBy connect verificationTarget ::> reqDrugLibraryLimits to verificationCase ::> vcDrugLibrary;
-    connection : VerifiedBy connect verificationTarget ::> reqCs09 to verificationCase ::> vcPrescriptionConfirm;
-    connection : VerifiedBy connect verificationTarget ::> reqPost to verificationCase ::> vcPost;
-    connection : VerifiedBy connect verificationTarget ::> reqPowerLossRetention to verificationCase ::> vcPowerLoss;
-    connection : VerifiedBy connect verificationTarget ::> reqCs72 to verificationCase ::> vcAlarmLoudness;
-    connection : VerifiedBy connect verificationTarget ::> reqCs75 to verificationCase ::> vcTemporalModeSafety;
-    connection : VerifiedBy connect verificationTarget ::> reqCs21 to verificationCase ::> vcAirInLine;
-    connection : VerifiedBy connect verificationTarget ::> reqOcclusion to verificationCase ::> vcOcclusion;
-    connection : VerifiedBy connect verificationTarget ::> reqCs23 to verificationCase ::> vcEmptyReservoir;
-    connection : VerifiedBy connect verificationTarget ::> reqDoorOpen to verificationCase ::> vcTemporalModeSafety;
-    connection : VerifiedBy connect verificationTarget ::> reqMaxHourlyDose to verificationCase ::> vcHourlyMax;
-    connection : VerifiedBy connect verificationTarget ::> reqCs78 to verificationCase ::> vcEventLog;
-    connection : VerifiedBy connect verificationTarget ::> reqEventLogging to verificationCase ::> vcEventLog;
-    connection : VerifiedBy connect verificationTarget ::> reqWatchdogSafeState to verificationCase ::> vcWatchdog;
-    connection : VerifiedBy connect verificationTarget ::> reqStuckButton to verificationCase ::> vcStuckButton;
-    connection : VerifiedBy connect verificationTarget ::> reqFlowCrossCheck to verificationCase ::> vcFlowCrossCheck;
-    connection : VerifiedBy connect verificationTarget ::> reqPumpAccuracy to verificationCase ::> vcPumpAccuracy;
-    connection : VerifiedBy connect verificationTarget ::> reqAlarmLoudness to verificationCase ::> vcAlarmLoudness;
-    connection : VerifiedBy connect verificationTarget ::> reqBatteryBackup to verificationCase ::> vcPowerLoss;
-    connection : VerifiedBy connect verificationTarget ::> reqFreeFlowPrevention to verificationCase ::> vcFreeFlow;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // risk controls
-    connection : VerifiedBy connect verificationTarget ::> lockoutControl to verificationCase ::> vcLockout;
-    connection : VerifiedBy connect verificationTarget ::> airDetectionControl to verificationCase ::> vcAirInLine;
-    connection : VerifiedBy connect verificationTarget ::> occlusionAlarmControl to verificationCase ::> vcOcclusion;
-    connection : VerifiedBy connect verificationTarget ::> reservoirMonitorControl to verificationCase ::> vcEmptyReservoir;
-    connection : VerifiedBy connect verificationTarget ::> drugLibraryControl to verificationCase ::> vcDrugLibrary;
-    connection : VerifiedBy connect verificationTarget ::> freeFlowValveControl to verificationCase ::> vcFreeFlow;
-    connection : VerifiedBy connect verificationTarget ::> watchdogControl to verificationCase ::> vcWatchdog;
-    connection : VerifiedBy connect verificationTarget ::> flowCrossCheckControl to verificationCase ::> vcFlowCrossCheck;
-    connection : VerifiedBy connect verificationTarget ::> doorInterlockControl to verificationCase ::> vcDoorInterlock;
-    connection : VerifiedBy connect verificationTarget ::> reverseDeliveryPauseControl to verificationCase ::> vcReverseDeliveryPause;
-    connection : VerifiedBy connect verificationTarget ::> antiRefluxDesignControl to verificationCase ::> vcAntiRefluxMechanism;
-    connection : VerifiedBy connect verificationTarget ::> vtbiLimitPauseControl to verificationCase ::> vcVtbiCeiling;
-    connection : VerifiedBy connect verificationTarget ::> infusionCompleteControl to verificationCase ::> vcInfusionComplete;
+
+
+
+
+
+
+
+
+
+
+
+
+
     // behavior properties, contracts, and timing
-    connection : VerifiedBy connect verificationTarget ::> propAlarmStopsSameStep to verificationCase ::> vcSameStepAlarm;
-    connection : VerifiedBy connect verificationTarget ::> propLockoutTimerMonotonic to verificationCase ::> vcTemporalModeSafety;
-    connection : VerifiedBy connect verificationTarget ::> guaranteeExclusiveMode to verificationCase ::> vcModeRange;
-    connection : VerifiedBy connect verificationTarget ::> guaranteeLockoutPreventsBolus to verificationCase ::> vcLockout;
-    connection : VerifiedBy connect verificationTarget ::> guaranteeAlarmStopsSameStep to verificationCase ::> vcSameStepAlarm;
-    connection : VerifiedBy connect verificationTarget ::> temporalNoInvalidTransition to verificationCase ::> vcTemporalModeSafety;
-    connection : VerifiedBy connect verificationTarget ::> tcAlarmLatency to verificationCase ::> vcSameStepAlarm;
-    connection : VerifiedBy connect verificationTarget ::> tcBolusResponse to verificationCase ::> vcLockout;
-    connection : VerifiedBy connect verificationTarget ::> tcWatchdogTimeout to verificationCase ::> vcWatchdog;
+
+
+
+
+
+
+
+
+
     // class-C software items
-    connection : VerifiedBy connect verificationTarget ::> tlm to verificationCase ::> vcModeRange;
-    connection : VerifiedBy connect verificationTarget ::> alarm to verificationCase ::> vcSameStepAlarm;
-    connection : VerifiedBy connect verificationTarget ::> infusionMgr to verificationCase ::> vcLockout;
-    connection : VerifiedBy connect verificationTarget ::> config to verificationCase ::> vcDrugLibrary;
-    connection : VerifiedBy connect verificationTarget ::> logging to verificationCase ::> vcEventLog;
-    connection : VerifiedBy connect verificationTarget ::> systemMonitor to verificationCase ::> vcPost;
-    connection : VerifiedBy connect verificationTarget ::> systemStatus to verificationCase ::> vcEmptyReservoir;
-    connection : VerifiedBy connect verificationTarget ::> outputBus to verificationCase ::> vcModeRange;
+
+
+
+
+
+
+
 
     // ── Validation and usability testing ────────────────────────
     connection : Validates connect validationTarget ::> reqCs59 to validationCase ::> valSimulatedWard;
