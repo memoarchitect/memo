@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_fmea_view {
         part :>> selectionQuery {
             attribute :>> id = "QRY-RISK-102";
             attribute :>> name = "GPCA_FmeaQuery";
-            attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureEffect", "FailureCause", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeEvent", "FaultTreeGate", "MinimalCutSet");
+            attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureEffect", "FailureCause", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeNode", "MinimalCutSet");
             attribute :>> includeLayers = ("analysis", "risk");
             attribute :>> includeConcerns = (ConcernKind::safety, ConcernKind::reliability);
             attribute :>> selectionExpression = "product == 'GPCA'";

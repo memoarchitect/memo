@@ -262,7 +262,8 @@ package memo_examples_gpca_pump_gpca_verification {
     }
 
     // ── Test artifacts and evidence ─────────────────────────────
-    part testReportLockout : TestArtifact {
+    part testReportLockout : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::testArtifact;
         attribute :>> id = "TEST-001";
         attribute :>> name = "BolusLockoutTestReport";
         attribute :>> version = "0.1";
@@ -270,7 +271,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> artifactKind = ArtifactKind::testReport;
         attribute :>> resultSummary = "planned";
     }
-    part testProtocolSafetySuite : TestArtifact {
+    part testProtocolSafetySuite : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::testArtifact;
         attribute :>> id = "TEST-002";
         attribute :>> name = "SafetyAlarmTestProtocol";
         attribute :>> version = "0.1";
@@ -278,7 +280,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> artifactKind = ArtifactKind::testProtocol;
         attribute :>> resultSummary = "covers VER-005..VER-010, VER-015, VER-016, VER-020, VER-022..VER-024";
     }
-    part evidenceLockout : Evidence {
+    part evidenceLockout : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-001";
         attribute :>> name = "BolusLockoutEvidence";
         attribute :>> version = "0.1";
@@ -286,7 +289,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> evidenceType = "verification evidence";
         attribute :>> integrityStatus = "draft";
     }
-    part evidenceModeRange : Evidence {
+    part evidenceModeRange : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-002";
         attribute :>> name = "ModeRangeEvidence";
         attribute :>> version = "0.1";
@@ -294,7 +298,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> evidenceType = "formal proof evidence";
         attribute :>> integrityStatus = "draft";
     }
-    part evidenceSameStepAlarm : Evidence {
+    part evidenceSameStepAlarm : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-003";
         attribute :>> name = "SameStepAlarmEvidence";
         attribute :>> version = "0.1";
@@ -302,7 +307,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> evidenceType = "model checking evidence";
         attribute :>> integrityStatus = "draft";
     }
-    part evidenceTemporalModeSafety : Evidence {
+    part evidenceTemporalModeSafety : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-004";
         attribute :>> name = "TemporalModeSafetyEvidence";
         attribute :>> version = "0.1";
@@ -310,7 +316,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> evidenceType = "model checking evidence";
         attribute :>> integrityStatus = "draft";
     }
-    part evidenceSafetyAlarmSuite : Evidence {
+    part evidenceSafetyAlarmSuite : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-005";
         attribute :>> name = "SafetyAlarmSuiteEvidence";
         attribute :>> version = "0.1";
@@ -318,7 +325,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> evidenceType = "bench test evidence for alarm-driven safe states";
         attribute :>> integrityStatus = "draft";
     }
-    part evidenceUsability : Evidence {
+    part evidenceUsability : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-006";
         attribute :>> name = "SummativeUsabilityEvidence";
         attribute :>> version = "0.1";
@@ -326,7 +334,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> evidenceType = "summative usability report per IEC 62366-1";
         attribute :>> integrityStatus = "draft";
     }
-    part evidenceHardwareBench : Evidence {
+    part evidenceHardwareBench : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-008";
         attribute :>> name = "HardwareBenchEvidence";
         attribute :>> version = "0.1";
@@ -334,7 +343,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> evidenceType = "bench evidence for alarm loudness and anti-free-flow valve";
         attribute :>> integrityStatus = "draft";
     }
-    part evidenceDoseProgramming : Evidence {
+    part evidenceDoseProgramming : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-009";
         attribute :>> name = "DoseProgrammingEvidence";
         attribute :>> version = "0.1";
@@ -342,7 +352,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> evidenceType = "test evidence for prescription limits, confirmation, dose ceiling, and event log";
         attribute :>> integrityStatus = "draft";
     }
-    part evidenceDeliveryAccuracy : Evidence {
+    part evidenceDeliveryAccuracy : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-007";
         attribute :>> name = "DeliveryAccuracyEvidence";
         attribute :>> version = "0.1";

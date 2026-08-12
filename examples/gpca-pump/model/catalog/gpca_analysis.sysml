@@ -171,13 +171,13 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> cutSetSummary = "All minimal cut sets are order 2 or higher after mitigation";
         attribute :>> revisionDate = "2026-07-03";
     }
-    part fteOverdoseTop : FaultTreeEvent {
+    part fteOverdoseTop : FaultTreeNode {
         attribute :>> id = "FTE-001";
         attribute :>> name = "ExcessDrugDeliveredTopEvent";
         attribute :>> eventKind = FaultTreeEventKind::topEvent;
         attribute :>> description = "Delivered volume exceeds prescribed limits";
     }
-    part fteMotorRunaway : FaultTreeEvent {
+    part fteMotorRunaway : FaultTreeNode {
         attribute :>> id = "FTE-002";
         attribute :>> name = "MotorRunawayBasicEvent";
         attribute :>> eventKind = FaultTreeEventKind::basicEvent;
@@ -185,7 +185,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> exposureTime = 100.0;
         attribute :>> description = "Pump motor delivers faster than commanded (FM-001)";
     }
-    part fteCrossCheckFails : FaultTreeEvent {
+    part fteCrossCheckFails : FaultTreeNode {
         attribute :>> id = "FTE-003";
         attribute :>> name = "FlowCrossCheckUnavailable";
         attribute :>> eventKind = FaultTreeEventKind::basicEvent;
@@ -193,7 +193,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> exposureTime = 100.0;
         attribute :>> description = "Independent flow sensor or comparison logic fails (FM-003 family)";
     }
-    part fteLockoutFault : FaultTreeEvent {
+    part fteLockoutFault : FaultTreeNode {
         attribute :>> id = "FTE-004";
         attribute :>> name = "LockoutEnforcementFault";
         attribute :>> eventKind = FaultTreeEventKind::basicEvent;
@@ -201,7 +201,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> exposureTime = 100.0;
         attribute :>> description = "Infusion manager authorizes bolus despite active lockout";
     }
-    part fteStuckButtonUndetected : FaultTreeEvent {
+    part fteStuckButtonUndetected : FaultTreeNode {
         attribute :>> id = "FTE-005";
         attribute :>> name = "StuckBolusButtonUndetected";
         attribute :>> eventKind = FaultTreeEventKind::basicEvent;
@@ -209,17 +209,17 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> exposureTime = 100.0;
         attribute :>> description = "Pendant stuck closed and stuck-input monitor fails (FM-004)";
     }
-    part ftgOverdoseOr : FaultTreeGate {
+    part ftgOverdoseOr : FaultTreeNode {
         attribute :>> id = "FTG-001";
         attribute :>> name = "OverdelivryPathOrGate";
         attribute :>> gateKind = FaultTreeGateKind::orGate;
     }
-    part ftgMotorAnd : FaultTreeGate {
+    part ftgMotorAnd : FaultTreeNode {
         attribute :>> id = "FTG-002";
         attribute :>> name = "MotorRunawayAndCrossCheckGate";
         attribute :>> gateKind = FaultTreeGateKind::andGate;
     }
-    part ftgBolusAnd : FaultTreeGate {
+    part ftgBolusAnd : FaultTreeNode {
         attribute :>> id = "FTG-003";
         attribute :>> name = "UnauthorizedBolusAndGate";
         attribute :>> gateKind = FaultTreeGateKind::andGate;

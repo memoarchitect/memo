@@ -80,7 +80,15 @@ package memo_core_common {
     abstract part def VerifiableElement specializes MemoPart;
     abstract part def ArchitectureElement specializes MemoPart;
     part def InterfaceElement specializes MemoPart;
-    part def MemoEvidence specializes MemoPart;
+    enum def EvidenceKind { enum testArtifact; enum evidence; enum formativeEvaluation; enum usabilityValidation; enum securityClaim; }
+    part def MemoEvidence specializes MemoPart {
+        attribute evidenceKind : EvidenceKind;
+        attribute version : String;
+        attribute artifactKind : ArtifactKind[0..1];
+        attribute resultSummary : String;
+        attribute evidenceType : String;
+        attribute integrityStatus : String;
+    }
     abstract part def AnalysisArtifact specializes MemoPart;
 
     // Document-bound elements add only what a document needs beyond the two

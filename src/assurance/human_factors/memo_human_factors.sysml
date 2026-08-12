@@ -20,19 +20,6 @@ package memo_assurance_human_factors {
         attribute rootCauseType : String;
     }
 
-    part def FormativeEvaluation specializes MemoEvidence {
-        attribute evaluationMethod : String;
-        attribute findingsSummary : String;
-        attribute designChangesTriggered : String;
-    }
-
-    part def UsabilityValidation specializes MemoEvidence {
-        attribute participantProfile : String;
-        attribute participantCount : Integer;
-        attribute acceptanceCriteria : String;
-        attribute resultSummary : String;
-    }
-
     connection def CommitsUseError :> MemoRelationship {
         end task : UserTask :>> source;
         end useError : UseError :>> target;
@@ -59,7 +46,7 @@ package memo_assurance_human_factors {
     // types declared here, and core must not depend on a domain package.
     connection def TestedByUsability :> MemoRelationship {
         end uiElementOrTask : MemoPart :>> source;
-        end usabilityTest : UsabilityValidation :>> target;
+        end usabilityTest : MemoEvidence :>> target;
     }
     abstract connection testedByUsabilityLinks : TestedByUsability[*];
     metadata def <testedByUsability> TestedByUsabilityMetadata :> SemanticMetadata {
