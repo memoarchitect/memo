@@ -365,15 +365,6 @@ package memo_examples_gpca_pump_gpca_trace {
     allocate lfAlarmSignal to exAlarmAnnunciation;
     allocate lfPrescriptionEntry to exPrescriptionEntry;
     // ── Fig 4.1 mode hierarchy (CriSys §4.1) ────────────────────
-    connection : Composes connect parent ::> topLevelModeMachine to child ::> modeOFF;
-    connection : Composes connect parent ::> topLevelModeMachine to child ::> modeON;
-    connection : Composes connect parent ::> modeON to child ::> modeIDLE;
-    connection : Composes connect parent ::> modeON to child ::> modeTHERAPY;
-    connection : Composes connect parent ::> modeTHERAPY to child ::> modePAUSED;
-    connection : Composes connect parent ::> modeTHERAPY to child ::> modeACTIVE;
-    connection : Composes connect parent ::> modeACTIVE to child ::> modeBASAL;
-    connection : Composes connect parent ::> modeACTIVE to child ::> modeSQUARE;
-    connection : Composes connect parent ::> modeACTIVE to child ::> modePBOLUS;
 
     // ── GPCA_SW.Impl connection topology (AADL, 1:1; CE-101..142) ──
     // Edges mirror the 42 GPCA_SW.Impl port connections; immediate
