@@ -3,6 +3,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
 
     private import memo_architecture_functional_behavior::*;
     private import memo_core_enumerations::*;
+    private import memo_core_common::*;
     private import memo_examples_gpca_pump_gpca_system::*;
     private import memo_examples_gpca_pump_gpca_architecture::*;
 

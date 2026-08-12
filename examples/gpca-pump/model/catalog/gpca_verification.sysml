@@ -10,6 +10,7 @@ package memo_examples_gpca_pump_gpca_verification {
 
     private import memo_assurance_verification_validation::*;
     private import memo_core_enumerations::*;
+    private import memo_core_common::*;
 
     // ── Verification cases ──────────────────────────────────────
     verification vcModeRange : VerificationCase {

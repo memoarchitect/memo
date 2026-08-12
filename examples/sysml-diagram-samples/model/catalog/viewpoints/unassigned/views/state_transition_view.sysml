@@ -9,19 +9,20 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
     private import memo_viewpoints_definitions::*;
     private import memo_viewpoints_functional_functional_viewpoint::*;
     private import memo_core_enumerations::*;
+    private import memo_core_common::*;
 
     state pumpModes : StateMachine { attribute :>> name = "Pump Operating Modes"; }
 
-    state idle : ModeState { attribute :>> name = "Idle"; }
-    state infusing : ModeState { attribute :>> name = "Infusing"; }
-    state paused : ModeState { attribute :>> name = "Paused"; }
-    state alarm : ModeState { attribute :>> name = "Alarm"; }
+    state idle : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Idle"; }
+    state infusing : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Infusing"; }
+    state paused : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Paused"; }
+    state alarm : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Alarm"; }
 
     // Infusing is a composite state: its substates show what the pump is doing
     // while it is infusing, and the machine renders them nested inside it.
-    state priming : ModeState { attribute :>> name = "Priming"; }
-    state delivering : ModeState { attribute :>> name = "Delivering"; }
-    state holding : ModeState { attribute :>> name = "Holding (KVO)"; }
+    state priming : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Priming"; }
+    state delivering : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Delivering"; }
+    state holding : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Holding (KVO)"; }
 
     transition tStart : Transition first idle then infusing {
         attribute :>> name = "start";
