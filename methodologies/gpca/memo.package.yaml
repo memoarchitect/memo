@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/methodology-gpca'
-version: 0.7.0
+version: 0.8.0
 description: "GPCA infusion pump methodology \u2014 subtraction-based tailoring of @memoarchitect/methodology-default for the non-networked prototype variant. Excludes cybersecurity and SOUP."
 license: MIT
 tags:
