@@ -222,8 +222,8 @@ review; it does not create a separate model of the pump.
 
 ## Model source: what each catalog file contains
 
-The parent configuration is `memo.config.yaml`. It imports the catalog and the
-views; it does not duplicate model content. The catalog contains the canonical
+The entrypoint is `model/catalog/project.sysml`. It imports the catalog and the
+views and declares the method binding; it does not duplicate model content. The catalog contains the canonical
 elements. The views select and present those elements for a review question.
 
 | Catalog file | Read it when you need to understand… |
