@@ -67,7 +67,7 @@ package memo_examples_temperature_alarm {
     connection : IndependentOf connect channel ::> chMonitor to otherChannel ::> chPrimary {
         attribute :>> independenceBasis = "separate sensing element and power rail";
     }
-    allocation : AllocatedTo allocate fnDetectDeviation to chMonitor;
+    allocate fnDetectDeviation to chMonitor;
     // ── UI: alarm element and acknowledgement action ────────────
     part uiBedside : UserInterface {
         attribute :>> id = "TA-UI-001"; attribute :>> name = "BedsideDisplay";

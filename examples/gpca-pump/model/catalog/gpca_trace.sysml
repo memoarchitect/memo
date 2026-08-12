@@ -339,19 +339,19 @@ package memo_examples_gpca_pump_gpca_trace {
 
 
     // ── Function allocation ─────────────────────────────────────
-    allocation : AllocatedTo allocate fnAcquireSensors to gpcaDeviceSensors;
-    allocation : AllocatedTo allocate fnAcquireSensors to systemStatus;
-    allocation : AllocatedTo allocate fnPresentStatus to outputBus;
-    allocation : AllocatedTo allocate fnValidatePrescription to config;
-    allocation : AllocatedTo allocate fnMonitorAlarm to alarm;
-    allocation : AllocatedTo allocate fnAnnunciate to audibleAlarm;
-    allocation : AllocatedTo allocate fnManageInfusion to infusionMgr;
-    allocation : AllocatedTo allocate fnEnforceLimits to infusionMgr;
-    allocation : AllocatedTo allocate fnCommandPump to pumpMotorAssembly;
-    allocation : AllocatedTo allocate fnLogEvents to logging;
-    allocation : AllocatedTo allocate fnManagePower to systemMonitor;
-    allocation : AllocatedTo allocate fnPresentStatus to operatorDisplay;
-    allocation : AllocatedTo allocate fnSelfTest to systemMonitor;
+    allocate fnAcquireSensors to gpcaDeviceSensors;
+    allocate fnAcquireSensors to systemStatus;
+    allocate fnPresentStatus to outputBus;
+    allocate fnValidatePrescription to config;
+    allocate fnMonitorAlarm to alarm;
+    allocate fnAnnunciate to audibleAlarm;
+    allocate fnManageInfusion to infusionMgr;
+    allocate fnEnforceLimits to infusionMgr;
+    allocate fnCommandPump to pumpMotorAssembly;
+    allocate fnLogEvents to logging;
+    allocate fnManagePower to systemMonitor;
+    allocate fnPresentStatus to operatorDisplay;
+    allocate fnSelfTest to systemMonitor;
     // ── Deployment, hosting, and interface realization ──────────
     allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaSoftware to controllerBoard;
     connection : HostedBy connect processingNode ::> mainController to hostAssembly ::> controllerBoard;
@@ -360,10 +360,10 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : BindsToInterface connect portElement ::> portPatientPendant to boundInterface ::> bolusButtonLine;
     connection : BindsToInterface connect portElement ::> portMotorDrive to boundInterface ::> pumpMotorDrive;
     connection : BindsToInterface connect portElement ::> portSensorHarness to boundInterface ::> occlusionAnalogLine;
-    allocation : AllocatedTo allocate lfSensorAcquisition to exSensorVector;
-    allocation : AllocatedTo allocate lfFlowCommand to exFlowCommand;
-    allocation : AllocatedTo allocate lfAlarmSignal to exAlarmAnnunciation;
-    allocation : AllocatedTo allocate lfPrescriptionEntry to exPrescriptionEntry;
+    allocate lfSensorAcquisition to exSensorVector;
+    allocate lfFlowCommand to exFlowCommand;
+    allocate lfAlarmSignal to exAlarmAnnunciation;
+    allocate lfPrescriptionEntry to exPrescriptionEntry;
     // ── Fig 4.1 mode hierarchy (CriSys §4.1) ────────────────────
     connection : Composes connect parent ::> topLevelModeMachine to child ::> modeOFF;
     connection : Composes connect parent ::> topLevelModeMachine to child ::> modeON;

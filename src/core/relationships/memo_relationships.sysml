@@ -117,27 +117,6 @@ package memo_core_relationships {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = derivesFromLinks meta SysML::Usage;
     }
-    connection def SatisfiedBy :> MemoRelationship {
-        // MemoRequirementElement covers Need and Requirement alike.
-        end requiredElement : MemoRequirementElement :>> source;
-        end satisfyingElement :>> target;
-    }
-    abstract connection satisfiedByLinks : SatisfiedBy[*];
-    metadata def <satisfiedBy> SatisfiedByMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = satisfiedByLinks meta SysML::Usage;
-    }
-    allocation def AllocatedTo :> MemoRelationship, Allocations::Allocation {
-        end function :>> source;
-        end allocatedElement :>> target;
-    }
-    abstract connection allocatedToLinks : AllocatedTo[*];
-    metadata def <allocatedTo> AllocatedToMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::AllocationDefinition;
-        :> annotatedElement : SysML::AllocationUsage;
-        :>> baseType = allocatedToLinks meta SysML::Usage;
-    }
     // Realizes is the single realization relation (realizing/concrete element →
     // realized/abstract element). It unifies RealizesInterface,
     // RealizesComponentExchange, RealizedByArchitecture, RealizesScenario,
@@ -155,18 +134,6 @@ package memo_core_relationships {
         :> annotatedElement : SysML::ConnectionDefinition;
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = realizesLinks meta SysML::Usage;
-    }
-    connection def VerifiedBy :> MemoRelationship {
-        // Requirements, risk controls, and architecture components are
-        // all legitimate verification targets
-        end verificationTarget :>> source;
-        end verificationCase : MemoVerificationCase :>> target;
-    }
-    abstract connection verifiedByLinks : VerifiedBy[*];
-    metadata def <verifiedBy> VerifiedByMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = verifiedByLinks meta SysML::Usage;
     }
     connection def ProducesEvidence :> MemoRelationship {
         end producer : MemoVerificationCase :>> source;

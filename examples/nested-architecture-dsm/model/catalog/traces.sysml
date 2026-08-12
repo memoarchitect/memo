@@ -15,24 +15,24 @@ package memo_examples_nested_architecture_dsm_traces {
     private import memo_examples_nested_architecture_dsm_assurance_requirements::*;
 
     // ── Function → block allocation ──────────────────────────────
-    allocation allocDrive : AllocatedTo allocate fnDriveActuator to lcPumpMechanism;
-    allocation allocMeasure : AllocatedTo allocate fnMeasureDelivered to lcPumpMechanism;
-    allocation allocComputeRate : AllocatedTo allocate fnComputeRate to lcDoseController;
-    allocation allocValidate : AllocatedTo allocate fnValidatePrescription to lcDoseController;
-    allocation allocOcclusion : AllocatedTo allocate fnDetectOcclusion to lcOcclusionChannel;
-    allocation allocAirInLine : AllocatedTo allocate fnDetectAirInLine to lcOcclusionChannel;
+    allocate fnDriveActuator to lcPumpMechanism;
+    allocate fnMeasureDelivered to lcPumpMechanism;
+    allocate fnComputeRate to lcDoseController;
+    allocate fnValidatePrescription to lcDoseController;
+    allocate fnDetectOcclusion to lcOcclusionChannel;
+    allocate fnDetectAirInLine to lcOcclusionChannel;
     // Two channels carry the same protective function — the redundancy shows
     // up in the matrix as two marks on one row.
-    allocation allocLimitsWatchdog : AllocatedTo allocate fnEnforceDoseLimits to lcWatchdogChannel;
-    allocation allocLimitsPressure : AllocatedTo allocate fnEnforceDoseLimits to lcPressureIntegrityChannel;
-    allocation allocRender : AllocatedTo allocate fnRenderStatus to lcDisplayManager;
-    allocation allocAlarm : AllocatedTo allocate fnAnnunciateAlarm to lcAlarmAnnunciator;
-    allocation allocInput : AllocatedTo allocate fnAcceptInput to lcKeypadHandler;
-    allocation allocBattery : AllocatedTo allocate fnMonitorBattery to lcBatteryManager;
-    allocation allocPowerSource : AllocatedTo allocate fnSelectPowerSource to lcPowerRailMonitor;
+    allocate fnEnforceDoseLimits to lcWatchdogChannel;
+    allocate fnEnforceDoseLimits to lcPressureIntegrityChannel;
+    allocate fnRenderStatus to lcDisplayManager;
+    allocate fnAnnunciateAlarm to lcAlarmAnnunciator;
+    allocate fnAcceptInput to lcKeypadHandler;
+    allocate fnMonitorBattery to lcBatteryManager;
+    allocate fnSelectPowerSource to lcPowerRailMonitor;
     // A capability allocated at subsystem level rather than to one component:
     // collapsed, it lands in the same cell as its children's allocations.
-    allocation allocMeterFluid : AllocatedTo allocate fnMeterFluid to subFluidPath;
+    allocate fnMeterFluid to subFluidPath;
     // ── Requirement → function satisfaction ──────────────────────
 
 
