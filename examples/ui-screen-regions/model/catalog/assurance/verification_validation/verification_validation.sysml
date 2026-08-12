@@ -17,6 +17,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
     private import memo_artifacts_core::*;
 
     private import memo_core_enumerations::*;
+    private import memo_core_common::*;
     private import memo_assurance_verification_validation::*;
 
     verification vcRateChange : VerificationCase {

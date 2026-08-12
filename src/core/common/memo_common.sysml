@@ -88,6 +88,19 @@ package memo_core_common {
         attribute resultSummary : String;
         attribute evidenceType : String;
         attribute integrityStatus : String;
+        // Promoted from the retired `UsabilityValidation` and
+        // `FormativeEvaluation` specializations. The collapse in `02083c5`
+        // deleted both subclasses without carrying their fields up, so an
+        // IEC 62366-1 evaluation record lost what it actually reports.
+        // Promoted on the standard's terms, not on in-tree usage: MEMO is a
+        // library, so what its own examples happen to set says nothing about
+        // what an adopter's usability file needs.
+        attribute participantProfile : String;
+        attribute participantCount : Integer;
+        attribute acceptanceCriteria : String;
+        attribute evaluationMethod : String;
+        attribute findingsSummary : String;
+        attribute designChangesTriggered : String;
     }
     abstract part def AnalysisArtifact specializes MemoPart;
 
