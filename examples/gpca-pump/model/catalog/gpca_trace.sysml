@@ -1,5 +1,6 @@
 package memo_examples_gpca_pump_gpca_trace {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_core_relationships::*;
     private import memo_architecture_operational_context_actors::*;
@@ -33,6 +34,10 @@ package memo_examples_gpca_pump_gpca_trace {
     private import memo_architecture_operational_use_cases::*;
     private import memo_architecture_operational_workflows::*;
     private import memo_architecture_realization_deployment::*;
+    private import memo_assurance_human_factors::*;
+    private import memo_assurance_safety_risk::*;
+    private import memo_assurance_safety_risk_analysis::*;
+    private import memo_viewpoints_definitions::*;
 
     // ── System context interactions (context view) ──────────────
     connection : InteractsWith connect contextParticipant ::> actorPatient to target ::> entityGpcaPump;

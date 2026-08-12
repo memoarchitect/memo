@@ -4,6 +4,7 @@
 // SoftwareComponent hostedBy ProcessingNode with scheduling properties.
 package memo_examples_embedded_infusion_pump {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;

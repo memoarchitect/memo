@@ -8,15 +8,15 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     private import memo_core_enumerations::*;
 
     // Product-neutral fixture for the UML-style use-case presentation.
-    actor patient : User {
+    part patient : User {
         attribute :>> actorKind = ActorKind::patient;
         attribute :>> name = "Patient";
     }
-    actor clinician : User {
+    part clinician : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> name = "Clinician";
     }
-    actor serviceTechnician : User {
+    part serviceTechnician : User {
         attribute :>> actorKind = ActorKind::technician;
         attribute :>> name = "Service Technician";
     }

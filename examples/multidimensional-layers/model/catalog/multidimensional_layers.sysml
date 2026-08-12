@@ -8,6 +8,7 @@
 // through relationships.
 package memo_examples_multidimensional_layers {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_dimensions::*;

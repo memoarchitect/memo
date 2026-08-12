@@ -3,6 +3,7 @@
 // as context → use case → workflow → scenarios → scenario-owned activities.
 package memo_examples_surgical_closure_workflow {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
@@ -16,17 +17,17 @@ package memo_examples_surgical_closure_workflow {
     private import memo_architecture_operational_scenarios::*;
 
     // ── Clinical setting and goal ───────────────────────────────
-    actor bariatricSurgeon : User {
+    part bariatricSurgeon : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-001"; attribute :>> name = "BariatricSurgeon";
         attribute :>> clinicalRole = "primary operating surgeon";
     }
-    actor scrubNurse : User {
+    part scrubNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-002"; attribute :>> name = "ScrubNurse";
         attribute :>> clinicalRole = "sterile instrumentation and count";
     }
-    actor anesthetist : User {
+    part anesthetist : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> id = "LSG-USR-003"; attribute :>> name = "Anesthetist";
         attribute :>> clinicalRole = "anaesthesia and physiologic monitoring";

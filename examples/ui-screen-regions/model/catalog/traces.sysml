@@ -29,6 +29,7 @@ package memo_examples_ui_screen_regions_traces {
     private import memo_examples_ui_screen_regions_artifacts_reviews_comments::*;
     private import memo_examples_ui_screen_regions_artifacts_reviews_rationales::*;
     private import memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
+    private import memo_assurance_safety_risk_analysis::*;
 
     // One tree. Spatial containment only.
     connection : Composes connect parent ::> elMainScreen to child ::> elDrugSelectorRegion;

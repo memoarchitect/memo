@@ -4,6 +4,7 @@
 // off-the-shelf infrastructure the manufacturer does not control.
 package memo_examples_software_only_medical_device {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
