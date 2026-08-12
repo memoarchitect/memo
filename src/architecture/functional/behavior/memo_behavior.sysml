@@ -12,23 +12,19 @@ package memo_architecture_functional_behavior {
     // they derive from the MemoState foundation, not the part-based
     // ArchitectureElement. Transitions stay part-based (below) to keep their
     // traceable safety attributes.
-    // State-machine vocabulary. ModeState denotes a state owned by this model.
+    // State machines retain their own execution semantics; individual modes
+    // are MemoState usages selected by stateKind.
     state def StateMachine :> MemoState {
         attribute machineKind : String;
         attribute executionSemantics : String;
     }
-    state def ModeState :> MemoState {
-        attribute modeKind : String;
-        attribute entryCondition : String;
-        attribute exitCondition : String;
-    }
     // A configuration is the concrete selection made at a `variation` choice
     // point. It remains separate from a mode state: it says which mode and
     // elements are active in one selectable arrangement.
-    // The reference is typed to the existing native state family so a consumer
+    // The reference is typed to the shared native state family so a consumer
     // can navigate from the selected configuration to its governing mode.
     part def ModeConfiguration specializes ArchitectureElement {
-        ref activeMode : ModeState[1];
+        ref activeMode : MemoState[1];
         ref activeElement : MemoPart[0..*];
     }
 
