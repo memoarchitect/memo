@@ -27,6 +27,26 @@ package memo_architecture_functional_behavior {
         ref activeMode : MemoState[1];
         ref activeElement : MemoPart[0..*];
     }
+    // Transitions are native SysML v2 `transition` usages inside the owning
+    // state — there is no `part def Transition`, and its `transition` keyword
+    // collision is why. A transition usage's definition is always implicit, so
+    // it has no MEMO supertype to carry the identification core; this record
+    // carries it instead, applied with `@TransitionRecord`.
+    //
+    // `trigger`, `guardSummary`, and `effectSummary` are prose summaries, not
+    // executable semantics: a guard reading "none in source (MEMO extension
+    // REQ-X-02 additionally gates therapy on POST)" is a citation. Formal
+    // triggers and guards belong in native `accept` and `if`; these stay
+    // records so the two are not confused.
+    metadata def TransitionRecord {
+        attribute id : String;
+        attribute name : String;
+        attribute trigger : String;
+        attribute guardSummary : String;
+        attribute effectSummary : String;
+        attribute sourceReference : String;
+    }
+
     // A verifiable behavioural constraint, such as an invariant, transition
     // rule, temporal claim, assumption, or guarantee.
     part def BehaviorProperty specializes VerifiableElement {

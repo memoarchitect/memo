@@ -1,6 +1,6 @@
 // State transition sample (statetransition view kind, `stm` diagram type). A
-// behaviour machine owns its mode states; each native transition references the
-// state IDs it connects, and renders as a labelled edge.
+// behaviour machine owns its mode states by containing them, and each native
+// transition lives inside the state whose substates it connects.
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view {
     private import ScalarValues::*;
 
@@ -11,64 +11,55 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
     private import memo_core_enumerations::*;
     private import memo_core_common::*;
 
-    state pumpModes : StateMachine { attribute :>> name = "Pump Operating Modes"; }
+    state pumpModes : StateMachine {
+        attribute :>> name = "Pump Operating Modes";
 
-    state idle : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Idle"; }
-    state infusing : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Infusing"; }
-    state paused : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Paused"; }
-    state alarm : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Alarm"; }
+        state idle : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Idle"; }
 
-    // Infusing is a composite state: its substates show what the pump is doing
-    // while it is infusing, and the machine renders them nested inside it.
-    state priming : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Priming"; }
-    state delivering : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Delivering"; }
-    state holding : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Holding (KVO)"; }
+        // Infusing is a composite state: its substates show what the pump is
+        // doing while it is infusing, and containment is the nesting itself —
+        // not a parallel set of Composes edges.
+        state infusing : MemoState {
+            attribute :>> stateKind = StateKind::mode;
+            attribute :>> name = "Infusing";
 
-    transition tStart : Transition first idle then infusing {
-        attribute :>> name = "start";
-        attribute :>> trigger = "startInfusion";
-    }
-    transition tPause : Transition first infusing then paused {
-        attribute :>> name = "pause";
-        attribute :>> trigger = "pauseRequested";
-    }
-    transition tResume : Transition first paused then infusing {
-        attribute :>> name = "resume";
-        attribute :>> trigger = "resumeRequested";
-    }
-    transition tFault : Transition first infusing then alarm {
-        attribute :>> name = "fault";
-        attribute :>> trigger = "occlusionDetected";
-    }
-    transition tRecover : Transition first alarm then idle {
-        attribute :>> name = "acknowledge";
-        attribute :>> trigger = "alarmCleared";
-    }
-    transition tStop : Transition first infusing then idle {
-        attribute :>> name = "stop";
-        attribute :>> trigger = "stopInfusion";
-    }
+            state priming : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Priming"; }
+            state delivering : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Delivering"; }
+            state holding : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Holding (KVO)"; }
 
-    transition tPrimed : Transition first priming then delivering {
-        attribute :>> name = "primed";
-        attribute :>> trigger = "primeComplete";
-    }
-    transition tKvo : Transition first delivering then holding {
-        attribute :>> name = "keepVeinOpen";
-        attribute :>> trigger = "doseComplete";
-    }
-    transition tResumeDose : Transition first holding then delivering {
-        attribute :>> name = "resumeDose";
-        attribute :>> trigger = "doseScheduled";
-    }
+            transition tPrimed first priming then delivering {
+                @TransitionRecord { :>> name = "primed"; :>> trigger = "primeComplete"; }
+            }
+            transition tKvo first delivering then holding {
+                @TransitionRecord { :>> name = "keepVeinOpen"; :>> trigger = "doseComplete"; }
+            }
+            transition tResumeDose first holding then delivering {
+                @TransitionRecord { :>> name = "resumeDose"; :>> trigger = "doseScheduled"; }
+            }
+        }
 
-    connection : Composes connect parent ::> pumpModes to child ::> idle;
-    connection : Composes connect parent ::> pumpModes to child ::> infusing;
-    connection : Composes connect parent ::> pumpModes to child ::> paused;
-    connection : Composes connect parent ::> pumpModes to child ::> alarm;
-    connection : Composes connect parent ::> infusing to child ::> priming;
-    connection : Composes connect parent ::> infusing to child ::> delivering;
-    connection : Composes connect parent ::> infusing to child ::> holding;
+        state paused : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Paused"; }
+        state alarm : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Alarm"; }
+
+        transition tStart first idle then infusing {
+            @TransitionRecord { :>> name = "start"; :>> trigger = "startInfusion"; }
+        }
+        transition tPause first infusing then paused {
+            @TransitionRecord { :>> name = "pause"; :>> trigger = "pauseRequested"; }
+        }
+        transition tResume first paused then infusing {
+            @TransitionRecord { :>> name = "resume"; :>> trigger = "resumeRequested"; }
+        }
+        transition tFault first infusing then alarm {
+            @TransitionRecord { :>> name = "fault"; :>> trigger = "occlusionDetected"; }
+        }
+        transition tRecover first alarm then idle {
+            @TransitionRecord { :>> name = "acknowledge"; :>> trigger = "alarmCleared"; }
+        }
+        transition tStop first infusing then idle {
+            @TransitionRecord { :>> name = "stop"; :>> trigger = "stopInfusion"; }
+        }
+    }
 
     view sampleStateTransitionView : MemoDiagramView {
         expose pumpModes::**;
@@ -79,25 +70,12 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
         attribute :>> diagramType = "stm";
         part :>> viewpointDefinition = functionalViewpoint;
         part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("StateMachine", "ModeState", "Transition");
+            attribute :>> includeElementKinds = ("StateMachine", "MemoState");
         }
     }
 
+    // The machine is one containment tree, so exposing its root reaches every
+    // state and transition; the former per-element IncludedIn list restated
+    // that tree a second time and is gone with it.
     connection : IncludedIn connect sourceElement ::> pumpModes to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> idle to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> infusing to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> paused to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> alarm to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tStart to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tPause to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tResume to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tFault to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tRecover to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tStop to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> priming to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> delivering to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> holding to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tPrimed to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tKvo to targetView ::> sampleStateTransitionView;
-    connection : IncludedIn connect sourceElement ::> tResumeDose to targetView ::> sampleStateTransitionView;
 }
