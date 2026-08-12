@@ -163,16 +163,16 @@ package memo_examples_ui_screen_regions_traces {
 
     connection : ProducesEvidence connect producer ::> vcInfusionStatusContent to producedEvidence ::> evInfusionStatusContent;
 
-    allocation : AllocatedTo allocate fnSetInfusionRate to uiPumpPanel;
-    allocation : AllocatedTo allocate fnManageInfusionDisplay to uiPumpPanel;
-    allocation : AllocatedTo allocate fnValidateDrugSelection to uiPumpPanel;
-    allocation : AllocatedTo allocate fnPresentDeliveryStatus to uiPumpPanel;
-    allocation : AllocatedTo allocate fnPresentLocalTime to uiPumpPanel;
-    allocation : AllocatedTo allocate fnPresentBatteryStatus to uiPumpPanel;
+    allocate fnSetInfusionRate to uiPumpPanel;
+    allocate fnManageInfusionDisplay to uiPumpPanel;
+    allocate fnValidateDrugSelection to uiPumpPanel;
+    allocate fnPresentDeliveryStatus to uiPumpPanel;
+    allocate fnPresentLocalTime to uiPumpPanel;
+    allocate fnPresentBatteryStatus to uiPumpPanel;
     // Two seeded function-to-region traces for exercising relationship editing
     // in the UI. Newly drawn regions can be linked the same way.
-    allocation : AllocatedTo allocate fnValidateDrugSelection to elDrugSelectorRegion;
-    allocation : AllocatedTo allocate fnSetInfusionRate to elRateConfirmDialog;
+    allocate fnValidateDrugSelection to elDrugSelectorRegion;
+    allocate fnSetInfusionRate to elRateConfirmDialog;
     connection : CapturesScreen connect capture ::> capMain to screen ::> elMainScreen;
 
     connection : CapturesScreen connect capture ::> capSettings to screen ::> elSettingsScreen;

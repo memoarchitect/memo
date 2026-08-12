@@ -50,7 +50,7 @@ package memo_methodology_profiles {
     part requireVerifiedByRule : RelationUsageRule {
         attribute :>> id = "RULE-002";
         attribute :>> name = "VerifiedBysRequired";
-        attribute :>> relationTypeName = "VerifiedBy";
+        attribute :>> relationTypeName = "verify";
         attribute :>> strength = RuleStrengthKind::required;
         attribute :>> rationaleText = "Safety-relevant requirements and controls shall trace to verification.";
     }
