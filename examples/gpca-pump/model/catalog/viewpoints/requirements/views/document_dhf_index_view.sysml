@@ -27,7 +27,7 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-007";
             attribute :>> name = "dhfIndexViewQuery";
-            attribute :>> includeElementKinds = ("MemoDocumentView", "MemoDiagramView", "MemoUsabilityEngineeringView", "MemoCybersecurityThreatModelView", "MemoCybersecurityAssessmentView", "Evidence", "Citation");
+            attribute :>> includeElementKinds = ("MemoDocumentView", "MemoDiagramView", "MemoUsabilityEngineeringView", "MemoCybersecurityThreatModelView", "MemoCybersecurityAssessmentView", "MemoEvidence", "Citation");
             attribute :>> includeRelationshipKinds = ("IncludedIn", "ProducesEvidence");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
