@@ -63,7 +63,7 @@ package memo_architecture_operational_scenarios {
         attribute postCondition : String;
         attribute pathSummary : String;
 
-        ref involvedActors : Actor[0..*];
+        ref involvedActors : OperationalParticipant[0..*];
         ref useContext : UseContext[0..1];
         // Alternate/exception/recovery scenarios reference their base and the
         // point at which behavior diverges — never a copied workflow.
