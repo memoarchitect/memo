@@ -21,7 +21,7 @@ package memo_viewpoints_ui_layout_ui_layout_viewpoint {
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 4;
         attribute :>> allowedElementKinds = ("ScreenCapture", "UIElement", "UserInterface");
-        attribute :>> allowedRelationshipKinds = ("CapturesScreen", "NavigatesTo", "Composes", "SatisfiedBy", "ElementTriggersAction");
+        attribute :>> allowedRelationshipKinds = ("CapturesScreen", "NavigatesTo", "Composes", "satisfy", "ElementTriggersAction");
         attribute :>> defaultViewKind = DiagramViewKind::geometry;
         attribute :>> userExtensible = true;
     }
