@@ -130,9 +130,10 @@ workflow; the scenario records the event that makes the workflow relevant.
     }
 
     // The operational event that frames this slice of work.
-    part highTemperatureScenario : OperativeScenario {
+    action highTemperatureScenario : MemoScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "HighTemperatureScenario";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
         attribute :>> pathSummary =
@@ -348,9 +349,10 @@ package temperature_alarm {
     }
 
     // The operational event that frames this slice of work.
-    part highTemperatureScenario : OperativeScenario {
+    action highTemperatureScenario : MemoScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "HighTemperatureScenario";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
         attribute :>> pathSummary =
@@ -477,7 +479,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 | Functional | `SystemFunction` | [Functional](../reference/areas/architecture.md#functional) |
 | Logical | `LogicalComponent` | [Logical](../reference/areas/architecture.md#logical) |
 | Implementation and realization | `HardwareAssembly`, `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
-| Assurance | `Evidence`, `Hazard`, `Need`, `Requirement`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `VerificationScenario` | [Assurance](../reference/areas/assurance.md) |
+| Assurance | `Evidence`, `Hazard`, `Need`, `Requirement`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `MemoScenario[scenarioKind=memoVerification]` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `DerivesFrom`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates` … +6 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.

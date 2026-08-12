@@ -20,7 +20,7 @@ package memo_viewpoints_operational_operational_viewpoint {
         attribute :>> includedLayers = ("context", "operational", "system");
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 1;
-        attribute :>> allowedElementKinds = ("Actor", "UseContext", "OperationalActivity", "OperativeScenario");
+        attribute :>> allowedElementKinds = ("Actor", "UseContext", "OperationalActivity", "MemoScenario[scenarioKind=operative]");
         attribute :>> userExtensible = true;
     }
 }

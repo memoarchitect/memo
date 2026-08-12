@@ -31,19 +31,18 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`Actor`](#actor) | `part def` | Actor definition specializing `MemoPart`. | `MemoPart` |
-| [`User`](#user) | `part def` | A human who interacts with the medical device (IEC 62366-1 intended user). User is the only human actor type: do not add an alternative type name. The human actor.… | `Actor` |
-| [`NonHumanActor`](#nonhumanactor) | `part def` | A non-human actor (external system, external device, or environmental agent). The specific kind is described by externalKind. | `Actor` |
+| [`OperationalParticipant`](#operationalparticipant) | `part def` | Operational participant definition specializing `MemoPart`. | `MemoPart` |
+| [`User`](#user) | `part def` | A human who interacts with the medical device (IEC 62366-1 intended user). User is the only human actor type: do not add an alternative type name. The human actor.… | `OperationalParticipant` |
 
-## Actor
+## OperationalParticipant
 
 ```sysml
-abstract part def Actor specializes MemoPart
+abstract part def OperationalParticipant specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Actor definition specializing `MemoPart`. |
+| Description | Operational participant definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | Yes |
 | Specializes | `MemoPart` |
@@ -53,7 +52,7 @@ abstract part def Actor specializes MemoPart
 ## User
 
 ```sysml
-part def User specializes Actor
+part def User specializes OperationalParticipant
 ```
 
 | Property | Value |
@@ -61,22 +60,7 @@ part def User specializes Actor
 | Description | A human who interacts with the medical device (IEC 62366-1 intended user). User is the only human actor type: do not add an alternative type name. The human actor.… |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `Actor` |
-| Owning package | `memo_architecture_operational_context_actors` |
-
-
-## NonHumanActor
-
-```sysml
-part def NonHumanActor specializes Actor
-```
-
-| Property | Value |
-| --- | --- |
-| Description | A non-human actor (external system, external device, or environmental agent). The specific kind is described by externalKind. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `Actor` |
+| Specializes | `OperationalParticipant` |
 | Owning package | `memo_architecture_operational_context_actors` |
 
 
@@ -85,8 +69,8 @@ part def NonHumanActor specializes Actor
 ??? code "architecture/operational/context/actors/memo_actors.sysml"
 
     ```sysml
-    // Actor hierarchy (§4). An Actor interacts with the system; it is distinct
-    // from a Stakeholder (memo_architecture_operational_context_stakeholders), who has concerns about the
+    // Operational participants (§4) interact with the system; they are distinct
+    // from stakeholders (memo_architecture_operational_context_stakeholders), who have concerns about the
     // system but need not interact with it. "User" is reserved for a human who
     // interacts with the medical device.
     package memo_architecture_operational_context_actors {
@@ -94,8 +78,7 @@ part def NonHumanActor specializes Actor
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
-
-        abstract part def Actor specializes MemoPart {
+        abstract part def OperationalParticipant specializes MemoPart {
             attribute actorKind : ActorKind;
             attribute trainingLevel : String;
             attribute responsibility : String;
@@ -106,7 +89,7 @@ part def NonHumanActor specializes Actor
         // The human actor. The specific role is given by actorKind
         // (patient / clinician / caregiver / technician / administrator); the
         // role-specific fields below are set only for the relevant actorKind.
-        part def User specializes Actor {
+        part def User specializes OperationalParticipant {
             attribute userPopulation : String;
             attribute impairmentConsiderations : String;
             attribute intendedTraining : String;
@@ -119,9 +102,7 @@ part def NonHumanActor specializes Actor
 
         // A non-human actor (external system, external device, or environmental
         // agent). The specific kind is described by externalKind.
-        part def NonHumanActor specializes Actor {
-            attribute externalKind : String[0..1];
-        }
+
     }
 
     ```

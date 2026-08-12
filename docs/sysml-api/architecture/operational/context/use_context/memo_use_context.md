@@ -230,7 +230,7 @@ connection def SituatedIn :> MemoRelationship
         }
 
         connection def InteractsWith :> MemoRelationship {
-            end contextParticipant : Actor :>> source;
+            end contextParticipant : OperationalParticipant :>> source;
             // Untyped so operational activities (action def) can be targets as well as parts.
             end target;
         }

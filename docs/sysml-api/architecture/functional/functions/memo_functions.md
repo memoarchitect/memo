@@ -41,8 +41,6 @@
 | [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… | `ArchitectureElement` |
 | [`FunctionalFlow`](#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | `ArchitectureElement` |
 | [`FunctionalFlowStep`](#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | `MemoAction` |
-| [`FunctionalScenario`](#functionalscenario) | `action def` | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. | `MemoScenario` |
-| [`IncludesStep`](#includesstep) | `connection def` | Typed relationship for includes step. | `MemoRelationship` |
 | [`InvolvesFunction`](#involvesfunction) | `connection def` | Typed relationship for involves function. | `MemoRelationship` |
 
 ## MemoFunction
@@ -132,36 +130,6 @@ action def FunctionalFlowStep specializes MemoAction
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
-| Owning package | `memo_architecture_functional_functions` |
-
-
-## FunctionalScenario
-
-```sysml
-action def FunctionalScenario specializes MemoScenario
-```
-
-| Property | Value |
-| --- | --- |
-| Description | The functional-layer scenario selects one functional route and realizes an operative scenario. It is the "what the system does" path, not a logical component interaction. |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoScenario` |
-| Owning package | `memo_architecture_functional_functions` |
-
-
-## IncludesStep
-
-```sysml
-connection def IncludesStep :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for includes step. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_functional_functions` |
 
 
@@ -311,22 +279,6 @@ connection def InvolvesFunction :> MemoRelationship
             ref item exchangedItem : MemoItem[0..1];
         }
 
-        // The functional-layer scenario selects one functional route and realizes
-        // an operative scenario. It is the "what the system does" path, not a
-        // logical component interaction.
-        action def FunctionalScenario specializes MemoScenario {
-            ref selectedFlow : FunctionalFlow[0..1];
-        }
-        connection def IncludesStep :> MemoRelationship {
-            end functionalFlow : FunctionalFlow :>> source;
-            end step : FunctionalFlowStep :>> target;
-        }
-        abstract connection includesStepLinks : IncludesStep[*];
-        metadata def <includesStep> IncludesStepMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = includesStepLinks meta SysML::Usage;
-        }
         connection def InvolvesFunction :> MemoRelationship {
             end functionalFlow : FunctionalFlow :>> source;
             end function : MemoFunction :>> target;

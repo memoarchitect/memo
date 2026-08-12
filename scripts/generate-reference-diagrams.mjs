@@ -73,7 +73,7 @@ write('architecture-operational-elements', {
     ${group(40, 420, 1520, 540, 'Workflow and scenario structure', '#6f42c1')}
     ${node(90, 525, 245, 70, 'OperationalWorkflow', '#6f42c1')}${node(425, 525, 205, 70, 'WorkflowStep', '#6f42c1')}${node(720, 525, 230, 70, 'WorkflowControlNode', '#6f42c1')}${node(1040, 525, 220, 70, 'WorkflowResource', '#6f42c1')}
     ${edge(335, 560, 425, 560, 'contains')}${edge(630, 560, 720, 560, 'StepPrecedes')}${edge(950, 560, 1040, 560, 'RequiresResource')}
-    ${node(90, 690, 220, 70, 'OperativeScenario', '#6f42c1')}${node(410, 690, 205, 70, 'WorkflowStep', '#6f42c1')}${node(715, 690, 225, 70, 'ScenarioOccurrence', '#6f42c1')}${node(1040, 690, 220, 70, 'UseContext', '#6f42c1')}
+    ${node(90, 690, 220, 70, 'MemoScenario (operative)', '#6f42c1')}${node(410, 690, 205, 70, 'WorkflowStep', '#6f42c1')}${node(715, 690, 225, 70, 'ScenarioOccurrence', '#6f42c1')}${node(1040, 690, 220, 70, 'UseContext', '#6f42c1')}
     ${edge(310, 725, 410, 725, 'Selects')}${edge(940, 725, 1040, 725, 'OccursDuring')}
     ${edge(200, 690, 212, 595, 'parentWorkflow ref', { labelX: 120, labelY: 640 })}${edge(827, 690, 827, 595, 'executedScenario ref', { labelX: 925, labelY: 642 })}
     ${node(90, 850, 200, 66, 'Actor', '#6f42c1')}${node(390, 850, 200, 66, 'UseCase', '#6f42c1')}${node(690, 850, 230, 66, 'OperationalWorkflow', '#6f42c1')}
@@ -89,7 +89,7 @@ write('architecture-functional-elements', {
     ${edge(285, 239, 380, 239, 'sourceFunction ref')}${edge(600, 239, 695, 239, 'targetFunction ref')}
     ${node(85, 330, 200, 68, 'SystemAction', '#1769d2')}${edge(185, 330, 185, 273, 'performedFunction ref', { labelX: 295, labelY: 305 })}
     ${node(970, 205, 200, 68, 'FunctionalFlow', '#1769d2')}${node(1270, 205, 225, 68, 'FunctionalFlowStep', '#1769d2')}${edge(1170, 239, 1270, 239, 'IncludesStep')}
-    ${node(970, 330, 220, 68, 'FunctionalScenario', '#1769d2')}${edge(1080, 330, 1080, 273, 'selectedFlow ref', { labelX: 1170, labelY: 305 })}
+    ${node(970, 330, 220, 68, 'MemoScenario (functional)', '#1769d2')}${edge(1080, 330, 1080, 273, 'selectedFlow ref', { labelX: 1170, labelY: 305 })}
 
     ${group(40, 550, 1520, 260, 'Behavior and verifiable properties', '#1769d2')}
     ${node(85, 650, 190, 68, 'StateMachine', '#1769d2')}${node(355, 650, 170, 68, 'ModeState', '#1769d2')}${node(605, 650, 170, 68, 'Transition', '#1769d2')}${node(855, 650, 210, 68, 'BehaviorProperty', '#1769d2')}${node(1145, 650, 160, 68, 'Contract', '#1769d2')}${node(1385, 650, 140, 68, 'TimingConstraint', '#1769d2')}
@@ -136,7 +136,7 @@ write('architecture-implementation-elements', {
     ${group(40, 800, 1520, 400, 'User interface and interaction', '#ed6c02')}
     ${node(60, 900, 200, 68, 'UserInterface', '#ed6c02')}${node(390, 900, 170, 68, 'UIState', '#ed6c02')}${edge(260, 934, 390, 934, 'PresentsState')}
     ${node(650, 900, 170, 68, 'UIElement', '#ed6c02')}${node(990, 900, 170, 68, 'UIAction', '#ed6c02')}${node(1350, 900, 190, 68, 'SystemFunction', '#ed6c02')}${edge(820, 934, 990, 934, 'ElementTriggersAction')}${edge(1160, 934, 1350, 934, 'ActionInvokesFunction')}
-    ${node(60, 1055, 190, 68, 'UIScenario', '#ed6c02')}${node(380, 1055, 210, 68, 'InteractionFlow', '#ed6c02')}${node(720, 1055, 170, 68, 'UseCase', '#ed6c02')}${edge(250, 1089, 380, 1089, 'parentFlow ref')}${edge(590, 1089, 720, 1089, 'FlowServesUseCase')}
+    ${node(60, 1055, 190, 68, 'MemoScenario (ui)', '#ed6c02')}${node(380, 1055, 210, 68, 'InteractionFlow', '#ed6c02')}${node(720, 1055, 170, 68, 'UseCase', '#ed6c02')}${edge(250, 1089, 380, 1089, 'parentFlow ref')}${edge(590, 1089, 720, 1089, 'FlowServesUseCase')}
     ${node(1050, 1055, 170, 68, 'UIEvent', '#ed6c02')}${node(1320, 1055, 190, 68, 'UIContainer', '#ed6c02')}
   `,
 });

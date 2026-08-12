@@ -34,13 +34,12 @@
 | [`FunctionalAction`](#functionalaction) | `action def` | Functional action definition specializing `MemoAction`. | `MemoAction` |
 | [`StateMachine`](#statemachine) | `state def` | State machine definition specializing `MemoState`. | `MemoState` |
 | [`ModeState`](#modestate) | `state def` | Mode state definition specializing `MemoState`. | `MemoState` |
-| [`Transition`](#transition) | `part def` | Transition definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… | `ArchitectureElement` |
 | [`BehaviorProperty`](#behaviorproperty) | `part def` | A verifiable behavioural constraint, such as an invariant, transition rule, temporal claim, assumption, or guarantee. | `VerifiableElement` |
 | [`Contract`](#contract) | `part def` | Contract definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`ActivityAction`](#activityaction) | `part def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `ArchitectureElement` |
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
-| [`InteractionMessage`](#interactionmessage) | `part def` | Interaction message definition specializing `MemoPart`. | `MemoPart` |
-| [`TimingConstraint`](#timingconstraint) | `part def` | Timing constraint definition specializing `VerifiableElement`. | `VerifiableElement` |
+| [`TimingConstraint`](#timingconstraint) | `part def` | UI scenarios are MemoScenario usages with scenarioKind `ui`. | `VerifiableElement` |
 
 ## FunctionalAction
 
@@ -87,15 +86,15 @@ state def ModeState :> MemoState
 | Owning package | `memo_architecture_functional_behavior` |
 
 
-## Transition
+## ModeConfiguration
 
 ```sysml
-part def Transition specializes ArchitectureElement
+part def ModeConfiguration specializes ArchitectureElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Transition definition specializing `ArchitectureElement`. |
+| Description | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `ArchitectureElement` |
@@ -162,21 +161,6 @@ action def ActivityFlow specializes MemoAction
 | Owning package | `memo_architecture_functional_behavior` |
 
 
-## InteractionMessage
-
-```sysml
-part def InteractionMessage specializes MemoPart
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Interaction message definition specializing `MemoPart`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `MemoPart` |
-| Owning package | `memo_architecture_functional_behavior` |
-
-
 ## TimingConstraint
 
 ```sysml
@@ -185,7 +169,7 @@ part def TimingConstraint specializes VerifiableElement
 
 | Property | Value |
 | --- | --- |
-| Description | Timing constraint definition specializing `VerifiableElement`. |
+| Description | UI scenarios are MemoScenario usages with scenarioKind `ui`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `VerifiableElement` |
@@ -221,15 +205,16 @@ part def TimingConstraint specializes VerifiableElement
             attribute entryCondition : String;
             attribute exitCondition : String;
         }
-        part def Transition specializes ArchitectureElement {
-            attribute trigger : String;
-            attribute guardSummary : String;
-            attribute effectSummary : String;
-            attribute priority : Integer;
-            attribute sameStepCritical : Boolean;
-            attribute sourceState : String;
-            attribute targetState : String;
+        // A configuration is the concrete selection made at a `variation` choice
+        // point. It remains separate from a mode state: it says which mode and
+        // elements are active in one selectable arrangement.
+        // The reference is typed to the existing native state family so a consumer
+        // can navigate from the selected configuration to its governing mode.
+        part def ModeConfiguration specializes ArchitectureElement {
+            ref activeMode : ModeState[1];
+            ref activeElement : MemoPart[0..*];
         }
+
         // A verifiable behavioural constraint, such as an invariant, transition
         // rule, temporal claim, assumption, or guarantee.
         part def BehaviorProperty specializes VerifiableElement {
@@ -265,20 +250,13 @@ part def TimingConstraint specializes VerifiableElement
             attribute guardCondition : String;
             attribute weight : String;
         }
-        // UIScenario now lives in memo_architecture_implementation_ui (:> MemoScenario).
-        part def InteractionMessage specializes MemoPart {
-            attribute messageKind : MessageKind;
-            attribute sequenceOrder : Integer;
-            attribute senderComponent : String;
-            attribute receiverComponent : String;
-            attribute exchangeItem : String;
-            attribute timingConstraintMs : String;
-        }
+        // UI scenarios are MemoScenario usages with scenarioKind `ui`.
+
         part def TimingConstraint specializes VerifiableElement {
             attribute constraintKind : TimingConstraintKind;
             attribute minMs : String;
             attribute maxMs : String;
-            attribute referenceElement : String;
+            ref referenceElement : MemoPart[1];
             attribute verificationMethod : VerificationMethodKind;
         }
     }

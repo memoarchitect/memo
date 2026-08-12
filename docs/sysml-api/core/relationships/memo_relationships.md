@@ -37,17 +37,13 @@
 | [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
 | [`MemoLink`](#memolink) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | `MemoRelationship` |
 | [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship for derives from. | `MemoRelationship` |
-| [`SatisfiedBy`](#satisfiedby) | `connection def` | Typed relationship for satisfied by. | `MemoRelationship` |
-| [`AllocatedTo`](#allocatedto) | `connection def` | Typed relationship for allocated to. | `MemoRelationship` |
 | [`Realizes`](#realizes) | `connection def` | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… | `MemoRelationship` |
-| [`VerifiedBy`](#verifiedby) | `connection def` | Typed relationship for verified by. | `MemoRelationship` |
 | [`ProducesEvidence`](#producesevidence) | `connection def` | Typed relationship for produces evidence. | `MemoRelationship` |
 | [`Precedes`](#precedes) | `connection def` | Typed relationship for precedes. | `MemoRelationship` |
 | [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship for threatened by. | `MemoRelationship` |
 | [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship for derives cyber requirement. | `MemoRelationship` |
 | [`CrossesTrustBoundary`](#crossestrustboundary) | `connection def` | Typed relationship for crosses trust boundary. | `MemoRelationship` |
 | [`Validates`](#validates) | `connection def` | Typed relationship for validates. | `MemoRelationship` |
-| [`Performs`](#performs) | `connection def` | Typed relationship for performs. | `MemoRelationship` |
 | [`Enables`](#enables) | `connection def` | Typed relationship for enables. | `MemoRelationship` |
 | [`HostedBy`](#hostedby) | `connection def` | Typed relationship for hosted by. | `MemoRelationship` |
 | [`Composes`](#composes) | `connection def` | Typed relationship for composes. | `MemoRelationship` |
@@ -99,36 +95,6 @@ connection def DerivesFrom :> MemoRelationship
 | Owning package | `memo_core_relationships` |
 
 
-## SatisfiedBy
-
-```sysml
-connection def SatisfiedBy :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for satisfied by. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## AllocatedTo
-
-```sysml
-connection def AllocatedTo :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for allocated to. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
 ## Realizes
 
 ```sysml
@@ -138,21 +104,6 @@ connection def Realizes :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## VerifiedBy
-
-```sysml
-connection def VerifiedBy :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for verified by. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -243,21 +194,6 @@ connection def Validates :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship for validates. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## Performs
-
-```sysml
-connection def Performs :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for performs. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -463,27 +399,6 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = derivesFromLinks meta SysML::Usage;
         }
-        connection def SatisfiedBy :> MemoRelationship {
-            // MemoRequirementElement covers Need and Requirement alike.
-            end requiredElement : MemoRequirementElement :>> source;
-            end satisfyingElement :>> target;
-        }
-        abstract connection satisfiedByLinks : SatisfiedBy[*];
-        metadata def <satisfiedBy> SatisfiedByMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = satisfiedByLinks meta SysML::Usage;
-        }
-        connection def AllocatedTo :> MemoRelationship {
-            end function :>> source;
-            end allocatedElement :>> target;
-        }
-        abstract connection allocatedToLinks : AllocatedTo[*];
-        metadata def <allocatedTo> AllocatedToMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = allocatedToLinks meta SysML::Usage;
-        }
         // Realizes is the single realization relation (realizing/concrete element →
         // realized/abstract element). It unifies RealizesInterface,
         // RealizesComponentExchange, RealizedByArchitecture, RealizesScenario,
@@ -492,7 +407,7 @@ connection def BindsToInterface :> MemoRelationship
         // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase.
         connection def Realizes :> MemoRelationship {
             // Realization crosses structural and behavioral metaclasses (for
-            // example a FunctionalFlow route realizing a FunctionalScenario).
+            // example a FunctionalFlow route realizing a functional MemoScenario).
             end realizing :>> source;
             end realized :>> target;
         }
@@ -501,18 +416,6 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = realizesLinks meta SysML::Usage;
-        }
-        connection def VerifiedBy :> MemoRelationship {
-            // Requirements, risk controls, and architecture components are
-            // all legitimate verification targets
-            end verificationTarget :>> source;
-            end verificationCase : MemoVerificationCase :>> target;
-        }
-        abstract connection verifiedByLinks : VerifiedBy[*];
-        metadata def <verifiedBy> VerifiedByMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = verifiedByLinks meta SysML::Usage;
         }
         connection def ProducesEvidence :> MemoRelationship {
             end producer : MemoVerificationCase :>> source;
@@ -582,22 +485,6 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = validatesLinks meta SysML::Usage;
-        }
-
-        // Performs unifies the former Performs / PerformsActivity / PerformsFunction
-        // synonyms. The performer (operational entity, actor, or system action) and
-        // the performed element (activity or function) are distinguished by the end
-        // instance types, so generic MemoPart ends keep this in core without a
-        // dependency on architecture-layer types.
-        connection def Performs :> MemoRelationship {
-            end performer :>> source;
-            end performed : MemoAction :>> target;
-        }
-        abstract connection performsLinks : Performs[*];
-        metadata def <performs> PerformsMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = performsLinks meta SysML::Usage;
         }
 
         // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms

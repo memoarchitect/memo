@@ -48,18 +48,6 @@ package memo_assurance_cybersecurity {
         attribute remediable : Boolean;
     }
 
-    // A scenario specialization: an attack path through the
-    // system, classified by the shared scenario dimensions with purpose
-    // `cybersecurity`.
-    action def ThreatScenario specializes MemoScenario {
-        attribute actorDescription : String;
-        attribute assumptionSummary : String;
-        attribute guaranteeSummary : String;
-        attribute securityObjective : String;
-        attribute abuseCaseReference : String;
-        attribute defaultCategory : ThreatCategoryKind;
-    }
-
     item def CyberHazard specializes Hazard {
         attribute securityImpact : String;
         attribute safetyImpact : String;

@@ -27,10 +27,10 @@ The operational perspective answers **why, for whom, and in what context**.
 | `IntendedUse`, `ReasonablyForeseeableMisuse`, `UseContext`, `Need` (needKind: stakeholder) | Purpose, foreseeable misuse, setting, and desired outcome | `Motivates`, `DerivesFrom` |
 | `UseCase` with `UseCaseKind` | A clinical, service, manufacturing, or development goal | `Motivates`, `Supports`, `Validates` |
 | `OperationalWorkflow`, `WorkflowStep` | Reusable organization of work | `Supports`, `StepPrecedes` |
-| `OperativeScenario` | A nominal, alternate, or exception path | `Selects`, `Realizes` |
+| `MemoScenario[scenarioKind=operative]` | A nominal, alternate, or exception path | `Selects`, `Realizes` |
 | `OperationalActivity`, `UserTask` | Work performed along a path | `Performs`, `Enables`; optional extensions may add resource details |
 
-**Core split:** `UseCase → OperationalWorkflow → OperativeScenario →
+**Core split:** `UseCase → OperationalWorkflow → MemoScenario[scenarioKind=operative] →
 OperationalActivity → action flow → SystemFunction`. A scenario owns the
 activity and action flow for its selected path; it is not a copy of the
 workflow.
@@ -59,7 +59,7 @@ of a software, electronics, or mechanical choice.
 | --- | --- | --- |
 | `SystemFunction` | A technology-independent responsibility | `Enables`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
 | `FunctionalFlow`, `FunctionalFlowStep` | Reusable organization and order of functions | `InvolvesFunction`, `IncludesStep` |
-| `FunctionalScenario` | The function path for one operational scenario | `selectedFlow`, `Realizes` |
+| `MemoScenario[scenarioKind=functional]` | The function path for one operational scenario | `selectedFlow`, `Realizes` |
 | `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | connects function endpoints |
 | `SystemAction` | Executable behavior realizing a function | `Performs` |
 
@@ -123,8 +123,8 @@ implemented units; system and validation cases verify claims and use context.
 | --- | --- | --- | --- |
 | `Need` (needKind: stakeholder) | `Motivates` | `UseCase` | Why does this goal matter? |
 | `OperationalWorkflow` | `Supports` | `UseCase` | How is work organized? |
-| `OperativeScenario` | `Selects` | `WorkflowStep` | Which path is considered? |
-| `FunctionalScenario` | `Realizes` | `OperativeScenario` | What functional path realizes it? |
+| `MemoScenario[scenarioKind=operative]` | `Selects` | `WorkflowStep` | Which path is considered? |
+| `MemoScenario[scenarioKind=functional]` | `Realizes` | `MemoScenario[scenarioKind=operative]` | What functional path realizes it? |
 | `SystemFunction` | `Enables` | `OperationalActivity` | What enables the work? |
 | `SystemFunction` | `AllocatedTo` | logical or implementation element | Who is responsible? |
 | software / physical element | `Realizes` / `Realizes` | `LogicalComponent` | How is it realized? |

@@ -67,7 +67,7 @@ package memo_architecture_functional_behavior {
         attribute guardCondition : String;
         attribute weight : String;
     }
-    // UIScenario now lives in memo_architecture_implementation_ui (:> MemoScenario).
+    // UI scenarios are MemoScenario usages with scenarioKind `ui`.
 
     part def TimingConstraint specializes VerifiableElement {
         attribute constraintKind : TimingConstraintKind;

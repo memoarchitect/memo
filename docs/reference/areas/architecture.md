@@ -19,7 +19,7 @@ realization.
 | Operational structure | `OperationalEntity`, `OperationalCapability`, `OperationalInteraction` |
 | Context | `Actor`, `User`, `NonHumanActor`, `Stakeholder`, `Concern`, `UseContext`, `UseEnvironment` |
 | Work | `UseCase`, `OperationalActivity`, `UserTask`, `TaskStep`, `OperationalWorkflow`, `WorkflowStep`, `WorkflowControlNode`, `WorkflowResource` |
-| Scenarios | `MemoScenario`, `OperativeScenario`, `ScenarioOccurrence` |
+| Scenarios | `MemoScenario` (selected by `scenarioKind`), `ScenarioOccurrence` |
 
 ## Functional
 
@@ -29,7 +29,7 @@ realization.
 
 | Element group | Definitions |
 | --- | --- |
-| Functions and flows | `SystemFunction`, `SystemAction`, `FunctionalExchange`, `FunctionalFlow`, `FunctionalFlowStep`, `FunctionalScenario` |
+| Functions and flows | `SystemFunction`, `SystemAction`, `FunctionalExchange`, `FunctionalFlow`, `FunctionalFlowStep`, `MemoScenario[scenarioKind=functional]` |
 | Behavior | `StateMachine`, `ModeState`, `Transition`, `ActivityAction`, `ActivityFlow`, `InteractionMessage` |
 | Verifiable behavior | `BehaviorProperty`, `Contract`, `TimingConstraint` and functional constraints |
 
@@ -57,7 +57,7 @@ realization.
 | Software runtime | `SoftwareComponent` |
 | Hardware roots | `PhysicalAssembly`, `PhysicalSubassembly`, `HardwareAssembly`, `PhysicalComponent`, `HardwareComponent` |
 | Hardware specializations | electrical, mechanical, fluidic, optical, acoustic, thermal, sensing, and actuation definitions |
-| User interface | `UserInterface`, `UIContainer`, `UIElement`, `UIState`, `UIEvent`, `UIAction`, `InteractionFlow`, `UIScenario` |
+| User interface | `UserInterface`, `UIContainer`, `UIElement`, `UIState`, `UIEvent`, `UIAction`, `InteractionFlow`, `MemoScenario[scenarioKind=ui]` |
 
 ## Realization
 

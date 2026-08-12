@@ -84,7 +84,7 @@
   <rect x="910.4" y="542" width="169.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="995" y="562" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">RequiresResource</text>
     
   <rect x="90" y="690" width="220" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
-  <text x="200" y="732" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="200" dy="0">OperativeScenario</tspan></text>
+  <text x="200" y="732" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="200" dy="0">MemoScenario (operative)</tspan></text>
   <rect x="410" y="690" width="205" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
   <text x="512.5" y="732" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="512.5" dy="0">WorkflowStep</tspan></text>
   <rect x="715" y="690" width="225" height="70" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>

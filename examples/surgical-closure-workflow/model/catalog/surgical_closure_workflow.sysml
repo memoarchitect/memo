@@ -128,8 +128,9 @@ package memo_examples_surgical_closure_workflow {
         action recognizeBleeding; action controlBleeding; action reassessStapleLine; action escalateIfNeeded;
         first start then recognizeBleeding; first recognizeBleeding then controlBleeding; first controlBleeding then reassessStapleLine; first reassessStapleLine then escalateIfNeeded; first escalateIfNeeded then done;
     }
-    action scNominalSleeveProcedure : OperativeScenario {
+    action scNominalSleeveProcedure : MemoScenario {
         attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
         attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
@@ -137,8 +138,9 @@ package memo_examples_surgical_closure_workflow {
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaCompleteSleeveProcedure;
     }
-    action scStapleLineBleeding : OperativeScenario {
+    action scStapleLineBleeding : MemoScenario {
         attribute :>> id = "LSG-SC-002"; attribute :>> name = "StapleLineBleedingRecovery";
+        attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::recovery;
         attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> variationPoint = "bleeding observed during staple-line assessment";

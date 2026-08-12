@@ -40,13 +40,6 @@ package memo_assurance_verification_validation {
         attribute integrityStatus : String;
     }
 
-    // A scenario executed to verify — selected path with purpose
-    // 'verification'.
-    action def VerificationScenario specializes MemoScenario {
-        attribute verificationEnvironment : String;
-        attribute stimulusSummary : String;
-    }
-
     // Operational validation confirms the user's goal is achieved in the
     // use environment (§5): ValidationCase validates a UseCase.
     // Safety-critical functions must trace to verification (rules/coverage).

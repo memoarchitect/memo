@@ -36,7 +36,6 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`UseError`](#useerror) | `part def` | Use error definition specializing `MemoPart`. | `MemoPart` |
-| [`HazardRelatedUseScenario`](#hazardrelatedusescenario) | `action def` | A use scenario whose performance could lead to a hazardous situation (IEC 62366-1 3.9); selected for summative evaluation. | `MemoScenario` |
 | [`FormativeEvaluation`](#formativeevaluation) | `part def` | Formative evaluation definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`UsabilityValidation`](#usabilityvalidation) | `part def` | Usability validation definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`CommitsUseError`](#commitsuseerror) | `connection def` | Typed relationship for commits use error. | `MemoRelationship` |
@@ -55,21 +54,6 @@ part def UseError specializes MemoPart
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
-| Owning package | `memo_assurance_human_factors` |
-
-
-## HazardRelatedUseScenario
-
-```sysml
-action def HazardRelatedUseScenario specializes MemoScenario
-```
-
-| Property | Value |
-| --- | --- |
-| Description | A use scenario whose performance could lead to a hazardous situation (IEC 62366-1 3.9); selected for summative evaluation. |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoScenario` |
 | Owning package | `memo_assurance_human_factors` |
 
 
@@ -173,13 +157,6 @@ connection def TestedByUsability :> MemoRelationship
             attribute taskReference : String;
             attribute severity : SeverityKind;
             attribute rootCauseType : String;
-        }
-
-        // A use scenario whose performance could lead to a hazardous situation
-        // (IEC 62366-1 3.9); selected for summative evaluation.
-        action def HazardRelatedUseScenario specializes MemoScenario {
-            attribute hazardReference : String;
-            attribute selectionRationale : String;
         }
 
         part def FormativeEvaluation specializes MemoEvidence {

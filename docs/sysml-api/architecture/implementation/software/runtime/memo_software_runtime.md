@@ -133,7 +133,10 @@ connection def ComponentConnects :> MemoRelationship
             attribute activation : String;
             attribute synchronizationMechanism : String;
             attribute sharedResources : String;
-            attribute memoryBudget : String;
+            // Maximum resident memory allocation in megabytes.  The public name
+            // predates MEMO's unit-suffixed scalar convention, so document the
+            // unit here rather than silently changing the published feature name.
+            attribute memoryBudget : Real;
             attribute healthMonitoring : String;
             attribute restartPolicy : String;
             attribute faultContainment : String;
