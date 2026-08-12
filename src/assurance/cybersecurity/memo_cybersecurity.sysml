@@ -84,12 +84,6 @@ package memo_assurance_cybersecurity {
         attribute trustAssumption : String;
     }
 
-    part def SecurityClaim specializes MemoEvidence {
-        attribute claimText : String;
-        attribute claimScope : String;
-        attribute supportedByEvidence : String;
-    }
-
     // ── Relations owned by this package ─────────────────────────────
     // Moved out of memo_core_relationships: their ends are typed against
     // types declared here, and core must not depend on a domain package.

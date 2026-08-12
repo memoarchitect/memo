@@ -126,13 +126,15 @@ package memo_examples_temperature_alarm {
 
         subject verified : Base::Anything[*] = (fnDetectDeviation);
     }
-    part uvAckTask : UsabilityValidation {
+    part uvAckTask : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::usabilityValidation;
         attribute :>> id = "TA-UV-001"; attribute :>> name = "SummativeAlarmAcknowledgement";
         attribute :>> participantProfile = "15 ICU nurses, representative shift conditions";
         attribute :>> participantCount = 15;
         attribute :>> acceptanceCriteria = "no critical-task failures; all alarms assessed before silencing";
     }
-    part evLatencyReport : Evidence {
+    part evLatencyReport : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "TA-EV-001"; attribute :>> name = "AlarmLatencyTestReport";
         attribute :>> evidenceType = "test report";
     }

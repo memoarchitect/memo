@@ -69,14 +69,12 @@ package memo_assurance_safety_risk_analysis {
         attribute cutSetSummary : String;
         attribute revisionDate : String;
     }
-    item def FaultTreeEvent specializes RiskItem {
+    part def FaultTreeNode specializes MemoPart {
         attribute eventKind : FaultTreeEventKind;
         attribute probability : Real;
         attribute failureRate : Real;
         attribute exposureTime : Real;
         attribute :>> description : String;
-    }
-    part def FaultTreeGate specializes MemoPart {
         attribute gateKind : FaultTreeGateKind;
         attribute kValue : Integer;
         attribute nValue : Integer;
@@ -146,8 +144,8 @@ package memo_assurance_safety_risk_analysis {
         :>> baseType = detectedByLinks meta SysML::Usage;
     }
     connection def InputToGate :> MemoRelationship {
-        end input : FaultTreeEvent :>> source;
-        end gate : FaultTreeGate :>> target;
+        end input : FaultTreeNode :>> source;
+        end gate : FaultTreeNode :>> target;
     }
     abstract connection inputToGateLinks : InputToGate[*];
     metadata def <inputToGate> InputToGateMetadata :> SemanticMetadata {
@@ -156,8 +154,8 @@ package memo_assurance_safety_risk_analysis {
         :>> baseType = inputToGateLinks meta SysML::Usage;
     }
     connection def ProducesEvent :> MemoRelationship {
-        end gate : FaultTreeGate :>> source;
-        end eventElement : FaultTreeEvent :>> target;
+        end gate : FaultTreeNode :>> source;
+        end eventElement : FaultTreeNode :>> target;
     }
     abstract connection producesEventLinks : ProducesEvent[*];
     metadata def <producesEvent> ProducesEventMetadata :> SemanticMetadata {
@@ -167,7 +165,7 @@ package memo_assurance_safety_risk_analysis {
     }
     connection def ContainsEvent :> MemoRelationship {
         end cutSet : MinimalCutSet :>> source;
-        end eventElement : FaultTreeEvent :>> target;
+        end eventElement : FaultTreeNode :>> target;
     }
     abstract connection containsEventLinks : ContainsEvent[*];
     metadata def <containsEvent> ContainsEventMetadata :> SemanticMetadata {

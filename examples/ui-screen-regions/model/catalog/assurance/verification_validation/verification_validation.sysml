@@ -28,7 +28,8 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         subject verified : Base::Anything[*] = (rcRateConfirm, fnSetInfusionRate, fnManageInfusionDisplay);
     }
 
-    part evRateChange : Evidence {
+    part evRateChange : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "UIR-EV-001"; attribute :>> name = "RateChangeConfirmationTestRecord";
         attribute :>> version = "planned";
         attribute :>> evidenceType = "test record";
@@ -44,7 +45,8 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         subject verified : Base::Anything[*] = (rcDrugLibraryGuard, fnValidateDrugSelection);
     }
 
-    part evDrugLibrarySelection : Evidence {
+    part evDrugLibrarySelection : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-002"; attribute :>> name = "DrugLibrarySelectionTestRecord";
         attribute :>> version = "planned";
         attribute :>> evidenceType = "test record";
@@ -61,7 +63,8 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         subject verified : Base::Anything[*] = (rcLowBatteryProminence, rcDisplayFreshnessMonitor, rcClockFreshnessCheck, fnPresentDeliveryStatus, fnPresentLocalTime, fnPresentBatteryStatus);
     }
 
-    part evInfusionStatusContent : Evidence {
+    part evInfusionStatusContent : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
         attribute :>> id = "EVD-003"; attribute :>> name = "InfusionStatusDisplayTestRecord";
         attribute :>> version = "planned";
         attribute :>> evidenceType = "test record";

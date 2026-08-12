@@ -29,17 +29,6 @@ package memo_assurance_verification_validation {
         attribute acceptanceCriteria : String;
         attribute clinicalContext : String;
     }
-    part def TestArtifact specializes MemoEvidence {
-        attribute version : String;
-        attribute artifactKind : ArtifactKind;
-        attribute resultSummary : String;
-    }
-    part def Evidence specializes MemoEvidence {
-        attribute version : String;
-        attribute evidenceType : String;
-        attribute integrityStatus : String;
-    }
-
     // Operational validation confirms the user's goal is achieved in the
     // use environment (§5): ValidationCase validates a UseCase.
     // Safety-critical functions must trace to verification (rules/coverage).
