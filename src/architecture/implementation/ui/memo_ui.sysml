@@ -279,18 +279,6 @@ package memo_architecture_implementation_ui {
         ref parentFlow : InteractionFlow[0..1];
     }
 
-    connection def UITransition :> MemoRelationship {
-        attribute triggeringEvent : String;
-        attribute guardCondition : String;
-        end sourceState : UIState :>> source;
-        end targetState : UIState :>> target;
-    }
-    abstract connection uITransitionLinks : UITransition[*];
-    metadata def <uITransition> UITransitionMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = uITransitionLinks meta SysML::Usage;
-    }
     connection def DataBinding :> MemoRelationship {
         attribute bindingExpression : String;
         attribute refreshPolicy : String;

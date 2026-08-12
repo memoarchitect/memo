@@ -29,7 +29,7 @@ package memo_architecture_operational_activities {
         attribute preCondition : String;
         attribute postCondition : String;
         attribute criticality : CriticalityKind;
-        ref performedBy : Actor[0..*];
+        ref performedBy : OperationalParticipant[0..*];
     }
 
     // A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a

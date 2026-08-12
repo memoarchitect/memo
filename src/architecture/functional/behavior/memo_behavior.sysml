@@ -23,24 +23,15 @@ package memo_architecture_functional_behavior {
         attribute exitCondition : String;
     }
     // A configuration is the concrete selection made at a `variation` choice
-    // point.  It is deliberately separate from `LogicalMode` / `LogicalState`:
-    // those are R3's pending logical-structure collapse, while a configuration
-    // says which mode and elements are active in one selectable arrangement.
+    // point. It remains separate from a mode state: it says which mode and
+    // elements are active in one selectable arrangement.
     // The reference is typed to the existing native state family so a consumer
     // can navigate from the selected configuration to its governing mode.
     part def ModeConfiguration specializes ArchitectureElement {
         ref activeMode : ModeState[1];
         ref activeElement : MemoPart[0..*];
     }
-    part def Transition specializes ArchitectureElement {
-        attribute trigger : String;
-        attribute guardSummary : String;
-        attribute effectSummary : String;
-        attribute priority : Integer;
-        attribute sameStepCritical : Boolean;
-        attribute sourceState : String;
-        attribute targetState : String;
-    }
+
     // A verifiable behavioural constraint, such as an invariant, transition
     // rule, temporal claim, assumption, or guarantee.
     part def BehaviorProperty specializes VerifiableElement {
@@ -77,14 +68,7 @@ package memo_architecture_functional_behavior {
         attribute weight : String;
     }
     // UIScenario now lives in memo_architecture_implementation_ui (:> MemoScenario).
-    part def InteractionMessage specializes MemoPart {
-        attribute messageKind : MessageKind;
-        attribute sequenceOrder : Integer;
-        ref senderComponent : MemoPart[1];
-        ref receiverComponent : MemoPart[1];
-        ref exchangeItem : MemoItem[1];
-        attribute timingConstraintMs : String;
-    }
+
     part def TimingConstraint specializes VerifiableElement {
         attribute constraintKind : TimingConstraintKind;
         attribute minMs : String;

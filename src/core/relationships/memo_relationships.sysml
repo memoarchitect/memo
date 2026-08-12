@@ -205,22 +205,6 @@ package memo_core_relationships {
         :>> baseType = validatesLinks meta SysML::Usage;
     }
 
-    // Performs unifies the former Performs / PerformsActivity / PerformsFunction
-    // synonyms. The performer (operational entity, actor, or system action) and
-    // the performed element (activity or function) are distinguished by the end
-    // instance types, so generic MemoPart ends keep this in core without a
-    // dependency on architecture-layer types.
-    connection def Performs :> MemoRelationship {
-        end performer :>> source;
-        end performed : MemoAction :>> target;
-    }
-    abstract connection performsLinks : Performs[*];
-    metadata def <performs> PerformsMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = performsLinks meta SysML::Usage;
-    }
-
     // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms
     // (an enabling system/function enables a workflow/activity).
     connection def Enables :> MemoRelationship {

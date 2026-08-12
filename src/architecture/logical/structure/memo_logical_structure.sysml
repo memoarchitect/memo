@@ -174,9 +174,7 @@ package memo_architecture_logical_structure {
 
     // States and modes of the logical solution (kept distinct from UI state
     // and from physical device configuration).
-    part def LogicalState specializes ArchitectureElement {
-        attribute stateInvariant : String;
-    }
+
     part def LogicalMode specializes ArchitectureElement {
         attribute modePurpose : String;
         attribute entryCondition : String;
@@ -218,14 +216,5 @@ package memo_architecture_logical_structure {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = monitorsChannelLinks meta SysML::Usage;
     }
-    connection def ExhibitsMode :> MemoRelationship {
-        end component : LogicalComponent :>> source;
-        end mode : LogicalMode :>> target;
-    }
-    abstract connection exhibitsModeLinks : ExhibitsMode[*];
-    metadata def <exhibitsMode> ExhibitsModeMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = exhibitsModeLinks meta SysML::Usage;
-    }
+
 }
