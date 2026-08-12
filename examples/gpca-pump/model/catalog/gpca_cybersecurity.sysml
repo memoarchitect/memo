@@ -7,6 +7,8 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     private import memo_assurance_safety_risk::*;
     private import memo_assurance_verification_validation::*;
     private import memo_core_enumerations::*;
+    private import memo_core_common::*;
+    private import memo_architecture_operational_scenarios::*;
     private import memo_core_relationships::*;
     private import memo_examples_gpca_pump_gpca_architecture::*;
     private import memo_examples_gpca_pump_gpca_risk::*;

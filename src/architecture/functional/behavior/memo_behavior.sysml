@@ -27,7 +27,6 @@ package memo_architecture_functional_behavior {
         ref activeMode : MemoState[1];
         ref activeElement : MemoPart[0..*];
     }
-
     // A verifiable behavioural constraint, such as an invariant, transition
     // rule, temporal claim, assumption, or guarantee.
     part def BehaviorProperty specializes VerifiableElement {

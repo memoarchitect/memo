@@ -8,6 +8,7 @@ package memo_examples_temperature_alarm {
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
+    private import memo_core_common::*;
     private import memo_core_dimensions::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_assurance_requirements_needs::*;
