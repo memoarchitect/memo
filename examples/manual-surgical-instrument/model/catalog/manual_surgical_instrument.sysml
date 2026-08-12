@@ -3,6 +3,7 @@
 // without adding functional, logical, or software layers.
 package memo_examples_manual_surgical_instrument {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;

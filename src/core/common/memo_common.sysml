@@ -167,6 +167,19 @@ package memo_core_common {
         attribute rationale : String;
         attribute sourceReference : String;
         attribute status : ElementStatusKind;
+        // What the item CARRIES, as distinct from what it is called. Removed
+        // by `595bfac` while modelling native wrappers; nothing replaced them,
+        // and every exchange item in the examples went on setting them. A
+        // measured value without its unit, its range, or its terminology code
+        // is not a regulated data item — an IVD result is "5.5 mg/dL, LOINC
+        // 2345-7", not "5.5".
+        attribute semantics : String;
+        attribute unit : String;
+        attribute minValue : String;
+        attribute maxValue : String;
+        attribute encoding : String;
+        attribute timestampRequired : Boolean;
+        attribute codes : TerminologyCode[0..*];
     }
 
     // Use-case foundation. The domain UseCase adds its goal and actor

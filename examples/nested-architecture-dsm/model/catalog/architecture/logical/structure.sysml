@@ -10,6 +10,7 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_architecture_logical_structure::*;
+    private import memo_architecture_operational_context_use_context::*;
 
     // ── Level 0: the system ──────────────────────────────────────
     part sysTherapyDelivery : System {

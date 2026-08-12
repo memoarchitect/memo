@@ -20,9 +20,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
         attribute :>> entityKind = OperationalEntityKind::device;
         attribute :>> responsibility = "System of interest for this context view.";
     }
-    actor clinician : User { attribute :>> name = "Clinician"; }
-    actor patient : User { attribute :>> name = "Patient"; }
-    actor biomedTech : User { attribute :>> name = "Biomedical Technician"; }
+    part clinician : User { attribute :>> name = "Clinician"; }
+    part patient : User { attribute :>> name = "Patient"; }
+    part biomedTech : User { attribute :>> name = "Biomedical Technician"; }
     part pharmacySystem : OperationalEntity {
         attribute :>> name = "Pharmacy Information System";
         attribute :>> entityKind = OperationalEntityKind::externalSystem;
