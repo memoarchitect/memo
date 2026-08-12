@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/extension-aadl'
-version: 0.7.0
+version: 0.8.0
 description: AADL (SAE AS5506) correspondence profile and runtime component families
 license: MIT
 tags:
