@@ -64,11 +64,8 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityGpcaPump;
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
 
-    // ── Actor participation (use case view) ─────────────────────
-    connection : Initiates connect initiatingUser ::> actorNurse to initiatedUseCase ::> ucDeliverPcaTherapy;
-    connection : ParticipatesIn connect participatingActor ::> actorPatient to useCase ::> ucDeliverPcaTherapy;
-    connection : ParticipatesIn connect participatingActor ::> actorPrescriber to useCase ::> ucDeliverPcaTherapy;
-    connection : ParticipatesIn connect participatingActor ::> actorPharmacist to useCase ::> ucDeliverPcaTherapy;
+    // Actor participation (use case view): native `actor`, nested in
+    // ucDeliverPcaTherapy's own body in gpca_operational.sysml (R10-S6).
 
     // ── Operational thread (therapy lifecycle) ──────────────────
     connection : Precedes connect predecessor ::> oaPrescribe to successor ::> oaLoadReservoir;
