@@ -36,10 +36,8 @@
 | [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
 | [`MemoLink`](#memolink) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | `MemoRelationship` |
 | [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship for derives from. | `MemoRelationship` |
-| [`Realizes`](#realizes) | `connection def` | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… | `MemoRelationship` |
-| [`ProducesEvidence`](#producesevidence) | `connection def` | Typed relationship for produces evidence. | `MemoRelationship` |
-| [`Precedes`](#precedes) | `connection def` | Typed relationship for precedes. | `MemoRelationship` |
-| [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship for threatened by. | `MemoRelationship` |
+| [`ProducesEvidence`](#producesevidence) | `connection def` | `Realizes` (realizing/concrete element → realized/abstract element) is native `#refinement dependency` (R10-S6): write `#refinement dependency <realizing> to <realized>;` instead.… | `MemoRelationship` |
+| [`ThreatenedBy`](#threatenedby) | `connection def` | `Precedes` is native `succession` (`first a then b;`), R10-S6. `sameStepRequired`/`precedenceRationale` had zero usages anywhere in the tree (same free-deletion shape R10-S5 found for `rationale`), so there was no content to carry forward. | `MemoRelationship` |
 | [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship for derives cyber requirement. | `MemoRelationship` |
 | [`CrossesTrustBoundary`](#crossestrustboundary) | `connection def` | Typed relationship for crosses trust boundary. | `MemoRelationship` |
 | [`Validates`](#validates) | `connection def` | Typed relationship for validates. | `MemoRelationship` |
@@ -94,21 +92,6 @@ connection def DerivesFrom :> MemoRelationship
 | Owning package | `memo_core_relationships` |
 
 
-## Realizes
-
-```sysml
-connection def Realizes :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
 ## ProducesEvidence
 
 ```sysml
@@ -117,22 +100,7 @@ connection def ProducesEvidence :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for produces evidence. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## Precedes
-
-```sysml
-connection def Precedes :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for precedes. |
+| Description | `Realizes` (realizing/concrete element → realized/abstract element) is native `#refinement dependency` (R10-S6): write `#refinement dependency <realizing> to <realized>;` instead.… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -147,7 +115,7 @@ connection def ThreatenedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for threatened by. |
+| Description | `Precedes` is native `succession` (`first a then b;`), R10-S6. `sameStepRequired`/`precedenceRationale` had zero usages anywhere in the tree (same free-deletion shape R10-S5 found for `rationale`), so there was no content to carry forward. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -414,24 +382,16 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = derivesFromLinks meta SysML::Usage;
         }
-        // Realizes is the single realization relation (realizing/concrete element →
-        // realized/abstract element). It unifies RealizesInterface,
-        // RealizesComponentExchange, RealizedByArchitecture, RealizesScenario,
-        // ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogical,
+        // `Realizes` (realizing/concrete element → realized/abstract element) is
+        // native `#refinement dependency` (R10-S6): write
+        // `#refinement dependency <realizing> to <realized>;` instead. It used to
+        // unify RealizesInterface, RealizesComponentExchange,
+        // RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical,
+        // ComponentRealizesModule, PhysicalModuleRealizesLogical,
         // Implements{Component,Procedure}, UIRealizesFunctional,
-        // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase.
-        connection def Realizes :> MemoRelationship {
-            // Realization crosses structural and behavioral metaclasses (for
-            // example a FunctionalFlow route realizing a functional MemoScenario).
-            end realizing :>> source;
-            end realized :>> target;
-        }
-        abstract connection realizesLinks : Realizes[*];
-        metadata def <realizes> RealizesMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = realizesLinks meta SysML::Usage;
-        }
+        // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase; the
+        // native form keeps that reach, since `#refinement` places no metaclass
+        // restriction on either end.
         connection def ProducesEvidence :> MemoRelationship {
             end producer : MemoVerificationCase :>> source;
             end producedEvidence : MemoEvidence :>> target;
@@ -442,19 +402,10 @@ connection def BindsToInterface :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = producesEvidenceLinks meta SysML::Usage;
         }
-        connection def Precedes :> MemoRelationship {
-            attribute sameStepRequired : Boolean;
-            attribute precedenceRationale : String;
-            end predecessor :>> source;
-            end successor :>> target;
-        }
-        abstract connection precedesLinks : Precedes[*];
-        metadata def <precedes> PrecedesMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = precedesLinks meta SysML::Usage;
-        }
-
+        // `Precedes` is native `succession` (`first a then b;`), R10-S6.
+        // `sameStepRequired`/`precedenceRationale` had zero usages anywhere in
+        // the tree (same free-deletion shape R10-S5 found for `rationale`), so
+        // there was no content to carry forward.
 
         connection def ThreatenedBy :> MemoRelationship {
             attribute threatRole : String;

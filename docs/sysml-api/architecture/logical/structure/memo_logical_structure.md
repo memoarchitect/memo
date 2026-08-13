@@ -50,7 +50,6 @@
 | [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). | `ArchitectureElement` |
 | [`FaultContainmentRegion`](#faultcontainmentregion) | `part def` | Fault containment region definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`IndependentOf`](#independentof) | `connection def` | Claimed independence between channels (common-cause defense). | `MemoRelationship` |
-| [`MonitorsChannel`](#monitorschannel) | `connection def` | Typed relationship for monitors channel. | `MemoRelationship` |
 
 ## FlowContentKind
 
@@ -307,21 +306,6 @@ connection def IndependentOf :> MemoRelationship
 | Owning package | `memo_architecture_logical_structure` |
 
 
-## MonitorsChannel
-
-```sysml
-connection def MonitorsChannel :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for monitors channel. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_logical_structure` |
-
-
 ## Source
 
 ??? code "architecture/logical/structure/memo_logical_structure.sysml"
@@ -530,16 +514,8 @@ connection def MonitorsChannel :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = independentOfLinks meta SysML::Usage;
         }
-        connection def MonitorsChannel :> MemoRelationship {
-            end monitorChannel : LogicalComponent :>> source;
-            end monitoredComponent : LogicalComponent :>> target;
-        }
-        abstract connection monitorsChannelLinks : MonitorsChannel[*];
-        metadata def <monitorsChannel> MonitorsChannelMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = monitorsChannelLinks meta SysML::Usage;
-        }
+        // `MonitorsChannel` is native `dependency` (R10-S6): write
+        // `dependency <monitorChannel> to <monitoredComponent>;` instead.
 
     }
 

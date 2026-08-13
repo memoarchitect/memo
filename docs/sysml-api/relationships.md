@@ -13,13 +13,6 @@ SysML `connection def` declarations in `src/`.
 | [`DecisionRecordedInADR`](architecture/decisions/memo_decisions.md#decisionrecordedinadr) | `connection def` | Typed relationship for decision recorded in adr. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
 
 
-## `memo::architecture::functional::functions`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`InvolvesFunction`](architecture/functional/functions/memo_functions.md#involvesfunction) | `connection def` | Typed relationship for involves function. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
-
-
 ## `memo::architecture::implementation::software::runtime`
 
 | Name | SysML kind | Description | Source |
@@ -32,14 +25,12 @@ SysML `connection def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`DependsOnSoup`](architecture/implementation/software/structure/memo_software_structure.md#dependsonsoup) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
-| [`ModuleUses`](architecture/implementation/software/structure/memo_software_structure.md#moduleuses) | `connection def` | Typed relationship for module uses. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
 
 
 ## `memo::architecture::implementation::ui`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ActionInvokesFunction`](architecture/implementation/ui/memo_ui.md#actioninvokesfunction) | `connection def` | Typed relationship for action invokes function. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`CapturesScreen`](architecture/implementation/ui/memo_ui.md#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`ControlImplementedBy`](architecture/implementation/ui/memo_ui.md#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`DataBinding`](architecture/implementation/ui/memo_ui.md#databinding) | `connection def` | Typed relationship for data binding. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
@@ -47,7 +38,6 @@ SysML `connection def` declarations in `src/`.
 | [`ErrorAtElement`](architecture/implementation/ui/memo_ui.md#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a MemoScenario selected by scenarioKind rather than a separate definition. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`FlowServesUseCase`](architecture/implementation/ui/memo_ui.md#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`NavigatesTo`](architecture/implementation/ui/memo_ui.md#navigatesto) | `connection def` | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`PresentsState`](architecture/implementation/ui/memo_ui.md#presentsstate) | `connection def` | Typed relationship for presents state. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 
 
 ## `memo::architecture::logical::structure`
@@ -56,7 +46,6 @@ SysML `connection def` declarations in `src/`.
 | --- | --- | --- | --- |
 | [`IndependentOf`](architecture/logical/structure/memo_logical_structure.md#independentof) | `connection def` | Claimed independence between channels (common-cause defense). | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`LogicalConnector`](architecture/logical/structure/memo_logical_structure.md#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
-| [`MonitorsChannel`](architecture/logical/structure/memo_logical_structure.md#monitorschannel) | `connection def` | Typed relationship for monitors channel. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 
 
 ## `memo::architecture::operational::activities`
@@ -77,8 +66,7 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`AppliesInContext`](architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | `connection def` | Typed relationship for applies in context. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
-| [`ConnectsPhysically`](architecture/operational/context/use_context/memo_use_context.md#connectsphysically) | `connection def` | Physical connection between boundary entities (fluid path, mounting). | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
+| [`AppliesInContext`](architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | `connection def` | `ConnectsPhysically` is native `connect` (R10-S6): write `connection connect source ::> <a> to target ::> <b>;` — the ordinary untyped binary connection — instead of a connection def for it. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`InteractsInContext`](architecture/operational/context/use_context/memo_use_context.md#interactsincontext) | `connection def` | Typed relationship for interacts in context. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`InteractsWith`](architecture/operational/context/use_context/memo_use_context.md#interactswith) | `connection def` | Typed relationship for interacts with. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`SituatedIn`](architecture/operational/context/use_context/memo_use_context.md#situatedin) | `connection def` | Typed relationship for situated in. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
@@ -97,10 +85,7 @@ SysML `connection def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`Extends`](architecture/operational/use_cases/memo_use_cases.md#extends) | `connection def` | Typed relationship for extends. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| [`Includes`](architecture/operational/use_cases/memo_use_cases.md#includes) | `connection def` | UML use-case relationships. Includes establishes a decomposition level; extends remains a cross-cutting relationship and is always presented. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| [`Initiates`](architecture/operational/use_cases/memo_use_cases.md#initiates) | `connection def` | Typed relationship for initiates. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 | [`Motivates`](architecture/operational/use_cases/memo_use_cases.md#motivates) | `connection def` | Typed relationship for motivates. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| [`ParticipatesIn`](architecture/operational/use_cases/memo_use_cases.md#participatesin) | `connection def` | Typed relationship for participates in. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 
 
 ## `memo::architecture::operational::workflows`
@@ -215,10 +200,8 @@ SysML `connection def` declarations in `src/`.
 | [`HostedBy`](core/relationships/memo_relationships.md#hostedby) | `connection def` | Typed relationship for hosted by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`MemoLink`](core/relationships/memo_relationships.md#memolink) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`MemoRelationship`](core/relationships/memo_relationships.md#memorelationship) | `connection def` | Typed relationship for memo relationship. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Precedes`](core/relationships/memo_relationships.md#precedes) | `connection def` | Typed relationship for precedes. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ProducesEvidence`](core/relationships/memo_relationships.md#producesevidence) | `connection def` | Typed relationship for produces evidence. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Realizes`](core/relationships/memo_relationships.md#realizes) | `connection def` | Realizes is the single realization relation (realizing/concrete element → realized/abstract element). It unifies RealizesInterface, RealizesComponentExchange, RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogica… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ThreatenedBy`](core/relationships/memo_relationships.md#threatenedby) | `connection def` | Typed relationship for threatened by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`ProducesEvidence`](core/relationships/memo_relationships.md#producesevidence) | `connection def` | `Realizes` (realizing/concrete element → realized/abstract element) is native `#refinement dependency` (R10-S6): write `#refinement dependency <realizing> to <realized>;` instead.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`ThreatenedBy`](core/relationships/memo_relationships.md#threatenedby) | `connection def` | `Precedes` is native `succession` (`first a then b;`), R10-S6. `sameStepRequired`/`precedenceRationale` had zero usages anywhere in the tree (same free-deletion shape R10-S5 found for `rationale`), so there was no content to carry forward. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Validates`](core/relationships/memo_relationships.md#validates) | `connection def` | Typed relationship for validates. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 
 

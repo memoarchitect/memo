@@ -57,11 +57,9 @@
 | [`UIAction`](#uiaction) | `action def` | Uiaction definition specializing `MemoAction`. | `MemoAction` |
 | [`InteractionFlow`](#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a MemoScenario with scenarioKind `ui`. | `MemoAction` |
 | [`DataBinding`](#databinding) | `connection def` | Typed relationship for data binding. | `MemoRelationship` |
-| [`PresentsState`](#presentsstate) | `connection def` | Typed relationship for presents state. | `MemoRelationship` |
 | [`CapturesScreen`](#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | `MemoRelationship` |
 | [`NavigatesTo`](#navigatesto) | `connection def` | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… | `MemoRelationship` |
 | [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship for element triggers action. | `MemoRelationship` |
-| [`ActionInvokesFunction`](#actioninvokesfunction) | `connection def` | Typed relationship for action invokes function. | `MemoRelationship` |
 | [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | `MemoRelationship` |
 | [`ErrorAtElement`](#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a MemoScenario selected by scenarioKind rather than a separate definition. | `MemoRelationship` |
 | [`ControlImplementedBy`](#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | `MemoRelationship` |
@@ -306,21 +304,6 @@ connection def DataBinding :> MemoRelationship
 | Owning package | `memo_architecture_implementation_ui` |
 
 
-## PresentsState
-
-```sysml
-connection def PresentsState :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for presents state. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_implementation_ui` |
-
-
 ## CapturesScreen
 
 ```sysml
@@ -360,21 +343,6 @@ connection def ElementTriggersAction :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship for element triggers action. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_implementation_ui` |
-
-
-## ActionInvokesFunction
-
-```sysml
-connection def ActionInvokesFunction :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for action invokes function. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -725,16 +693,14 @@ connection def ControlImplementedBy :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = dataBindingLinks meta SysML::Usage;
         }
-        connection def PresentsState :> MemoRelationship {
-            end userInterface : UserInterface :>> source;
-            end uiState : UIState :>> target;
-        }
-        abstract connection presentsStateLinks : PresentsState[*];
-        metadata def <presentsState> PresentsStateMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = presentsStateLinks meta SysML::Usage;
-        }
+        // `PresentsState` had zero usages anywhere in the tree (R10-S6). Its
+        // audited native form, `exhibit state`, does not actually fit: `UIState`
+        // is a `part def` with plain string attributes, not a `state def`, and
+        // SysIDE rejects `exhibit` referencing anything that does not conform to
+        // `States::StateAction` ("An exhibit state must reference another
+        // state"). Free deletion rather than a migration — nothing referenced
+        // it, so nothing to preserve. If `UIState` is ever restructured onto a
+        // real state machine, `exhibit state` becomes available then.
 
         // ── Screen layout relations ──────────────────────────────────
         // Which modelled screen an image is a rendering of.
@@ -778,16 +744,8 @@ connection def ControlImplementedBy :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = elementTriggersActionLinks meta SysML::Usage;
         }
-        connection def ActionInvokesFunction :> MemoRelationship {
-            end uiAction : UIAction :>> source;
-            end systemFunction : MemoFunction :>> target;
-        }
-        abstract connection actionInvokesFunctionLinks : ActionInvokesFunction[*];
-        metadata def <actionInvokesFunction> ActionInvokesFunctionMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = actionInvokesFunctionLinks meta SysML::Usage;
-        }
+        // `ActionInvokesFunction` is native `perform` (R10-S6): write
+        // `perform <systemFunction>;` inside the `UIAction` usage instead.
         connection def FlowServesUseCase :> MemoRelationship {
             end interactionFlow : InteractionFlow :>> source;
             end useCase : UseCase :>> target;

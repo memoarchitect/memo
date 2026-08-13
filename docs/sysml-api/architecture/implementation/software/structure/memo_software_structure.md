@@ -43,7 +43,6 @@
 | [`ConfigurationArtifact`](#configurationartifact) | `part def` | Configuration artifact definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`SoftwareItem`](#softwareitem) | `item def` | Software data/content that may be stored or exchanged through ports. | `MemoItem` |
 | [`SBOMEntry`](#sbomentry) | `item def` | Sbomentry definition specializing `SoftwareItem`. | `SoftwareItem` |
-| [`ModuleUses`](#moduleuses) | `connection def` | Typed relationship for module uses. | `MemoRelationship` |
 | [`DependsOnSoup`](#dependsonsoup) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## SoftwareElement
@@ -181,21 +180,6 @@ item def SBOMEntry specializes SoftwareItem
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
-## ModuleUses
-
-```sysml
-connection def ModuleUses :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for module uses. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_implementation_software_structure` |
-
-
 ## DependsOnSoup
 
 ```sysml
@@ -319,16 +303,8 @@ connection def DependsOnSoup :> MemoRelationship
             attribute hash : String;
         }
 
-        connection def ModuleUses :> MemoRelationship {
-            end usingModule : SoftwareModule :>> source;
-            end usedModule : SoftwareModule :>> target;
-        }
-        abstract connection moduleUsesLinks : ModuleUses[*];
-        metadata def <moduleUses> ModuleUsesMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = moduleUsesLinks meta SysML::Usage;
-        }
+        // `ModuleUses` is native `dependency` (R10-S6): write
+        // `dependency <usingModule> to <usedModule>;` instead of a connection.
 
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
