@@ -68,10 +68,10 @@ package memo_examples_gpca_pump_gpca_trace {
     // ucDeliverPcaTherapy's own body in gpca_operational.sysml (R10-S6).
 
     // ── Operational thread (therapy lifecycle) ──────────────────
-    connection : Precedes connect predecessor ::> oaPrescribe to successor ::> oaLoadReservoir;
-    connection : Precedes connect predecessor ::> oaLoadReservoir to successor ::> oaProgram;
-    connection : Precedes connect predecessor ::> oaProgram to successor ::> oaStartTherapy;
-    connection : Precedes connect predecessor ::> oaStartTherapy to successor ::> oaRequestBolus;
+    first oaPrescribe then oaLoadReservoir;
+    first oaLoadReservoir then oaProgram;
+    first oaProgram then oaStartTherapy;
+    first oaStartTherapy then oaRequestBolus;
     connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaStartTherapy to supported ::> ocTitratedAnalgesia; }
     connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaRequestBolus to supported ::> ocTitratedAnalgesia; }
     connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaRespondAlarm to supported ::> ocFailSafeTherapy; }
@@ -80,17 +80,12 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : DerivesFrom connect sourceDriver ::> oaRespondAlarm to targetRequirement ::> reqCs59;
 
     // ── Functional chains ───────────────────────────────────────
-    connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnAcquireSensors;
-    connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnEnforceLimits;
-    connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnManageInfusion;
-    connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnCommandPump;
-    connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnLogEvents;
-    connection : InvolvesFunction connect functionalChain ::> fcAlarmStop to function ::> fnAcquireSensors;
-    connection : InvolvesFunction connect functionalChain ::> fcAlarmStop to function ::> fnMonitorAlarm;
-    connection : InvolvesFunction connect functionalChain ::> fcAlarmStop to function ::> fnManageInfusion;
-    connection : InvolvesFunction connect functionalChain ::> fcAlarmStop to function ::> fnAnnunciate;
-    connection : InvolvesFunction connect functionalChain ::> fcStartup to function ::> fnSelfTest;
-    connection : InvolvesFunction connect functionalChain ::> fcStartup to function ::> fnPresentStatus;
+    // fcPatientBolus/fcAlarmStop already name every one of these functions
+    // via their step chain (perform fcsBolusSense; ... ref :>> function =
+    // fnAcquireSensors;) in gpca_system.sysml — InvolvesFunction was a
+    // flattened restatement of that two-hop path, not new information.
+    // fcStartup declares no steps, so its two functions are native `perform`
+    // statements directly on fcStartup in gpca_system.sysml instead.
     #refinement dependency fcPatientBolus to ssBolusDuringBasal;
     #refinement dependency fcAlarmStop to ssAlarmPause;
 
