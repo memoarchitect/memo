@@ -153,19 +153,10 @@ package memo_core_relationships {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = producesEvidenceLinks meta SysML::Usage;
     }
-    connection def Precedes :> MemoRelationship {
-        attribute sameStepRequired : Boolean;
-        attribute precedenceRationale : String;
-        end predecessor :>> source;
-        end successor :>> target;
-    }
-    abstract connection precedesLinks : Precedes[*];
-    metadata def <precedes> PrecedesMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = precedesLinks meta SysML::Usage;
-    }
-
+    // `Precedes` is native `succession` (`first a then b;`), R10-S6.
+    // `sameStepRequired`/`precedenceRationale` had zero usages anywhere in
+    // the tree (same free-deletion shape R10-S5 found for `rationale`), so
+    // there was no content to carry forward.
 
     connection def ThreatenedBy :> MemoRelationship {
         attribute threatRole : String;

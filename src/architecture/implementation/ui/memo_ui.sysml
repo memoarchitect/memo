@@ -292,16 +292,14 @@ package memo_architecture_implementation_ui {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = dataBindingLinks meta SysML::Usage;
     }
-    connection def PresentsState :> MemoRelationship {
-        end userInterface : UserInterface :>> source;
-        end uiState : UIState :>> target;
-    }
-    abstract connection presentsStateLinks : PresentsState[*];
-    metadata def <presentsState> PresentsStateMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = presentsStateLinks meta SysML::Usage;
-    }
+    // `PresentsState` had zero usages anywhere in the tree (R10-S6). Its
+    // audited native form, `exhibit state`, does not actually fit: `UIState`
+    // is a `part def` with plain string attributes, not a `state def`, and
+    // SysIDE rejects `exhibit` referencing anything that does not conform to
+    // `States::StateAction` ("An exhibit state must reference another
+    // state"). Free deletion rather than a migration — nothing referenced
+    // it, so nothing to preserve. If `UIState` is ever restructured onto a
+    // real state machine, `exhibit state` becomes available then.
 
     // ── Screen layout relations ──────────────────────────────────
     // Which modelled screen an image is a rendering of.
@@ -345,16 +343,8 @@ package memo_architecture_implementation_ui {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = elementTriggersActionLinks meta SysML::Usage;
     }
-    connection def ActionInvokesFunction :> MemoRelationship {
-        end uiAction : UIAction :>> source;
-        end systemFunction : MemoFunction :>> target;
-    }
-    abstract connection actionInvokesFunctionLinks : ActionInvokesFunction[*];
-    metadata def <actionInvokesFunction> ActionInvokesFunctionMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = actionInvokesFunctionLinks meta SysML::Usage;
-    }
+    // `ActionInvokesFunction` is native `perform` (R10-S6): write
+    // `perform <systemFunction>;` inside the `UIAction` usage instead.
     connection def FlowServesUseCase :> MemoRelationship {
         end interactionFlow : InteractionFlow :>> source;
         end useCase : UseCase :>> target;
