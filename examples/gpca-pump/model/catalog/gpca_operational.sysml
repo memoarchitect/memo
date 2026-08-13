@@ -9,6 +9,7 @@ package memo_examples_gpca_pump_gpca_operational {
     private import memo_architecture_operational_workflows::*;
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_context::*;
+    private import memo_examples_gpca_pump_gpca_system::*;
     private import memo_core_relationships::*;
 
     // ── Operational entities beyond the human actors ────────────
@@ -167,62 +168,43 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
         attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
+
+        action wsProgram : WorkflowStep { ref :>> performedActivity = oaProgram; }
+        action wsStart : WorkflowStep { ref :>> performedActivity = oaStartTherapy; }
     }
     action wfManageActiveTherapy : OperationalWorkflow {
         attribute :>> name = "ManageActiveTherapy";
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "Basal therapy is active.";
         attribute :>> completionCondition = "A bolus is handled or active therapy continues safely.";
+
+        action wsRequestBolus : WorkflowStep { ref :>> performedActivity = oaRequestBolus; }
+        // Refinement targets a nested step by its local name — the shorthand's
+        // `to` end does not accept a qualified path — so this is written
+        // inside wsRequestBolus's own owning scope rather than at package
+        // level.
+        #refinement dependency fcsBolusSense to wsRequestBolus;
+        #refinement dependency fcsBolusValidate to wsRequestBolus;
+        #refinement dependency fcsBolusCommand to wsRequestBolus;
+        #refinement dependency fcsBolusActuate to wsRequestBolus;
+        #refinement dependency fcsBolusLog to wsRequestBolus;
     }
     action wfRespondToTherapyAlarm : OperationalWorkflow {
         attribute :>> name = "RespondToTherapyAlarm";
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
         attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";
+
+        action wsRespondAlarm : WorkflowStep { ref :>> performedActivity = oaRespondAlarm; }
+        #refinement dependency fcsAlarmSense to wsRespondAlarm;
+        #refinement dependency fcsAlarmEvaluate to wsRespondAlarm;
+        #refinement dependency fcsAlarmStopInfusion to wsRespondAlarm;
+        #refinement dependency fcsAlarmAnnunciate to wsRespondAlarm;
     }
-    action wsProgram : WorkflowStep { ref :>> performedActivity = oaProgram; }
-    action wsStart : WorkflowStep { ref :>> performedActivity = oaStartTherapy; }
-    action wsRequestBolus : WorkflowStep { ref :>> performedActivity = oaRequestBolus; }
-    action wsRespondAlarm : WorkflowStep { ref :>> performedActivity = oaRespondAlarm; }
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfPrepareAndStartTherapy to supported ::> ucDeliverPcaTherapy; }
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfManageActiveTherapy to supported ::> ucDeliverPcaTherapy; }
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfRespondToTherapyAlarm to supported ::> ucDeliverPcaTherapy; }
-    connection : Composes connect parent ::> wfPrepareAndStartTherapy to child ::> wsProgram;
-    connection : Composes connect parent ::> wfPrepareAndStartTherapy to child ::> wsStart;
-    connection : Composes connect parent ::> wfManageActiveTherapy to child ::> wsRequestBolus;
-    connection : Composes connect parent ::> wfRespondToTherapyAlarm to child ::> wsRespondAlarm;
 
-    // ── Scenario-owned operational activities and action flows ──
-    action oaCompleteNominalTherapy : OperationalActivity {
-        attribute :>> name = "CompleteNominalTherapy";
-        action deliverWithinLimits; action recordTherapyEvent;
-        first start then deliverWithinLimits; first deliverWithinLimits then recordTherapyEvent; first recordTherapyEvent then done;
-    }
-    action oaRejectBolusDuringLockout : OperationalActivity {
-        attribute :>> name = "RejectBolusDuringLockout";
-        action checkLockout; action rejectAndLog;
-        first start then checkLockout; first checkLockout then rejectAndLog; first rejectAndLog then done;
-    }
-    action oaRespondToOcclusion : OperationalActivity {
-        attribute :>> name = "RespondToOcclusion";
-        action pauseInfusion; action annunciateOcclusion; action resolveAndResume;
-        first start then pauseInfusion; first pauseInfusion then annunciateOcclusion; first annunciateOcclusion then resolveAndResume; first resolveAndResume then done;
-    }
-    action oaRespondToAirInLine : OperationalActivity {
-        attribute :>> name = "RespondToAirInLine";
-        action stopOrKvo; action annunciateAir; action reprimeAndRestart;
-        first start then stopOrKvo; first stopOrKvo then annunciateAir; first annunciateAir then reprimeAndRestart; first reprimeAndRestart then done;
-    }
-    action oaReplaceEmptyReservoir : OperationalActivity {
-        attribute :>> name = "ReplaceEmptyReservoir";
-        action stopAndAnnunciate; action replaceReservoir; action resumeTherapy;
-        first start then stopAndAnnunciate; first stopAndAnnunciate then replaceReservoir; first replaceReservoir then resumeTherapy; first resumeTherapy then done;
-    }
-    action oaRecoverAfterPowerLoss : OperationalActivity {
-        attribute :>> name = "RecoverAfterPowerLoss";
-        action switchToBattery; action restorePrescription; action confirmRestart;
-        first start then switchToBattery; first switchToBattery then restorePrescription; first restorePrescription then confirmRestart; first confirmRestart then done;
-    }
 
     // ── Operational capabilities ────────────────────────────────
     part ocTitratedAnalgesia : OperationalCapability {
@@ -254,6 +236,12 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> parentWorkflow = wfManageActiveTherapy;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaCompleteNominalTherapy;
+
+        action oaCompleteNominalTherapy : OperationalActivity {
+            attribute :>> name = "CompleteNominalTherapy";
+            action deliverWithinLimits; action recordTherapyEvent;
+            first start then deliverWithinLimits; first deliverWithinLimits then recordTherapyEvent; first recordTherapyEvent then done;
+        }
     }
     action osLockoutBolus : MemoScenario {
         attribute :>> id = "OS-002";
@@ -270,6 +258,12 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRejectBolusDuringLockout;
+
+        action oaRejectBolusDuringLockout : OperationalActivity {
+            attribute :>> name = "RejectBolusDuringLockout";
+            action checkLockout; action rejectAndLog;
+            first start then checkLockout; first checkLockout then rejectAndLog; first rejectAndLog then done;
+        }
     }
     action osOcclusionAlarm : MemoScenario {
         attribute :>> id = "OS-003";
@@ -286,6 +280,12 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToOcclusion;
+
+        action oaRespondToOcclusion : OperationalActivity {
+            attribute :>> name = "RespondToOcclusion";
+            action pauseInfusion; action annunciateOcclusion; action resolveAndResume;
+            first start then pauseInfusion; first pauseInfusion then annunciateOcclusion; first annunciateOcclusion then resolveAndResume; first resolveAndResume then done;
+        }
     }
     action osAirInLine : MemoScenario {
         attribute :>> id = "OS-004";
@@ -302,6 +302,12 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToAirInLine;
+
+        action oaRespondToAirInLine : OperationalActivity {
+            attribute :>> name = "RespondToAirInLine";
+            action stopOrKvo; action annunciateAir; action reprimeAndRestart;
+            first start then stopOrKvo; first stopOrKvo then annunciateAir; first annunciateAir then reprimeAndRestart; first reprimeAndRestart then done;
+        }
     }
     action osEmptyReservoir : MemoScenario {
         attribute :>> id = "OS-005";
@@ -318,6 +324,12 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaReplaceEmptyReservoir;
+
+        action oaReplaceEmptyReservoir : OperationalActivity {
+            attribute :>> name = "ReplaceEmptyReservoir";
+            action stopAndAnnunciate; action replaceReservoir; action resumeTherapy;
+            first start then stopAndAnnunciate; first stopAndAnnunciate then replaceReservoir; first replaceReservoir then resumeTherapy; first resumeTherapy then done;
+        }
     }
     action osPowerLoss : MemoScenario {
         attribute :>> id = "OS-006";
@@ -334,6 +346,12 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRecoverAfterPowerLoss;
+
+        action oaRecoverAfterPowerLoss : OperationalActivity {
+            attribute :>> name = "RecoverAfterPowerLoss";
+            action switchToBattery; action restorePrescription; action confirmRestart;
+            first start then switchToBattery; first switchToBattery then restorePrescription; first restorePrescription then confirmRestart; first confirmRestart then done;
+        }
     }
     #refinement dependency osNominalTherapy to ucDeliverPcaTherapy;
     #refinement dependency osLockoutBolus to ucDeliverPcaTherapy;
@@ -341,10 +359,4 @@ package memo_examples_gpca_pump_gpca_operational {
     #refinement dependency osAirInLine to ucDeliverPcaTherapy;
     #refinement dependency osEmptyReservoir to ucDeliverPcaTherapy;
     #refinement dependency osPowerLoss to ucDeliverPcaTherapy;
-    connection : Composes connect parent ::> osNominalTherapy to child ::> oaCompleteNominalTherapy;
-    connection : Composes connect parent ::> osLockoutBolus to child ::> oaRejectBolusDuringLockout;
-    connection : Composes connect parent ::> osOcclusionAlarm to child ::> oaRespondToOcclusion;
-    connection : Composes connect parent ::> osAirInLine to child ::> oaRespondToAirInLine;
-    connection : Composes connect parent ::> osEmptyReservoir to child ::> oaReplaceEmptyReservoir;
-    connection : Composes connect parent ::> osPowerLoss to child ::> oaRecoverAfterPowerLoss;
 }

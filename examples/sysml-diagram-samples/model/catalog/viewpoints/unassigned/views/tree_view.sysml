@@ -8,38 +8,31 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
     private import memo_viewpoints_physical_physical_viewpoint::*;
     private import memo_core_enumerations::*;
 
-    part rootA : HardwareAssembly { attribute :>> name = "Root A"; }
-    part rootB : HardwareAssembly { attribute :>> name = "Root B"; }
-    part branchA1 : HardwareAssembly { attribute :>> name = "Branch A.1"; }
-    part branchA2 : HardwareAssembly { attribute :>> name = "Branch A.2 With A Deliberately Long Label"; }
-    part branchB1 : HardwareAssembly { attribute :>> name = "Branch B.1"; }
-    part leafA11 : HardwareAssembly {
-        attribute :>> name = "Leaf A.1.1";
-        attribute :>> partNumber = "PN-001";
+    part rootA : HardwareAssembly {
+        attribute :>> name = "Root A";
+        part branchA1 : HardwareAssembly {
+            attribute :>> name = "Branch A.1";
+            part leafA11 : HardwareAssembly {
+                attribute :>> name = "Leaf A.1.1";
+                attribute :>> partNumber = "PN-001";
+            }
+            part leafA12 : HardwareAssembly { attribute :>> name = "Leaf A.1.2"; }
+        }
+        part branchA2 : HardwareAssembly {
+            attribute :>> name = "Branch A.2 With A Deliberately Long Label";
+            part leafA21 : HardwareAssembly { attribute :>> name = "Leaf A.2.1"; }
+        }
+        part rootB : HardwareAssembly {
+            attribute :>> name = "Root B";
+            part branchB1 : HardwareAssembly {
+                attribute :>> name = "Branch B.1";
+                part leafB11 : HardwareAssembly { attribute :>> name = "Leaf B.1.1"; }
+            }
+        }
     }
-    part leafA12 : HardwareAssembly { attribute :>> name = "Leaf A.1.2"; }
-    part leafA21 : HardwareAssembly { attribute :>> name = "Leaf A.2.1"; }
-    part leafB11 : HardwareAssembly { attribute :>> name = "Leaf B.1.1"; }
-
-    connection : Composes connect parent ::> rootA to child ::> branchA1;
-    connection : Composes connect parent ::> rootA to child ::> branchA2;
-    connection : Composes connect parent ::> rootA to child ::> rootB;
-    connection : Composes connect parent ::> branchA1 to child ::> leafA11;
-    connection : Composes connect parent ::> branchA1 to child ::> leafA12;
-    connection : Composes connect parent ::> branchA2 to child ::> leafA21;
-    connection : Composes connect parent ::> rootB to child ::> branchB1;
-    connection : Composes connect parent ::> branchB1 to child ::> leafB11;
 
     view sampleTreeView : MemoDiagramView {
         expose rootA::**;
-        expose rootB::**;
-        expose branchA1;
-        expose branchA2;
-        expose branchB1;
-        expose leafA11;
-        expose leafA12;
-        expose leafA21;
-        expose leafB11;
         attribute depth = 2;
         attribute :>> title = "Sample · Tree";
         attribute :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";

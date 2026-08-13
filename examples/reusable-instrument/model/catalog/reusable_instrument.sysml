@@ -34,6 +34,9 @@ package memo_examples_reusable_instrument {
         attribute :>> workflowState = WorkflowStateKind::asIs;
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";
+
+        action wsClean : WorkflowStep { ref :>> performedActivity = actClean; }
+        first wsClean then wsInspect;
     }
     action actClean : OperationalActivity {
         attribute :>> id = "RI-ACT-001"; attribute :>> name = "CleanAndDisinfect";
@@ -47,11 +50,8 @@ package memo_examples_reusable_instrument {
         attribute :>> id = "RI-ACT-003"; attribute :>> name = "PackAndAutoclave";
         attribute :>> criticality = CriticalityKind::high;
     }
-    action wsClean : WorkflowStep { ref :>> performedActivity = actClean; }
     action wsInspect : WorkflowStep { ref :>> performedActivity = actInspect; }
     action wsSterilize : WorkflowStep { ref :>> performedActivity = actSterilizeLoad; }
-    connection : Composes connect parent ::> wfReprocess to child ::> wsClean;
-    first wsClean then wsInspect;
     first wsInspect then wsSterilize;
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfReprocess to supported ::> ucSterilize; }
 

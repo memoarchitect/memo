@@ -14,9 +14,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     // Ports are owned by the part whose boundary they are, which is what lets
     // a delegation be written at all: SysML v2 checks a flow's source for
     // `out`-ness relative to the owner, so a boundary port only reads as a
-    // source from INSIDE its part. Declaring ports beside their parts and
-    // linking them with `Composes` also made a port the whole of a
-    // decomposition, which CR-ONT-065 forbids.
+    // source from INSIDE its part. The subassemblies are nested the same way —
+    // real containment, not a port-to-port `Composes` edge, which is what
+    // CR-ONT-065 used to forbid before nesting made the rule unnecessary.
     part coffeeMachine : LogicalComponent {
         attribute :>> name = "Coffee Machine";
         in port mainsWaterIn : DataPort { in item payload : MemoItem; }
@@ -25,62 +25,55 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
             inout item payload : MemoItem;
             out port diagnostics : DataPort { out item payload : MemoItem; }
         }
+
+        part waterTank : LogicalComponent {
+            attribute :>> name = "Water Reservoir";
+            out port tankWaterOut : DataPort { out item payload : MemoItem; }
+            in port tankWaterIn : DataPort { in item payload : MemoItem; }
+        }
+        part heaterAssembly : LogicalComponent {
+            attribute :>> name = "Thermal Control Assembly";
+            in port heaterWaterIn : DataPort { in item payload : MemoItem; }
+            out port heatedWaterOut : DataPort { out item payload : MemoItem; }
+
+            part heatingElement : LogicalComponent {
+                attribute :>> name = "Water Heating Element";
+                out port heaterStatusOut : DataPort { out item payload : MemoItem; }
+            }
+        }
+        part brewGroup : LogicalComponent {
+            attribute :>> name = "Brew Group";
+            in port brewWaterIn : DataPort { in item payload : MemoItem; }
+            out port brewedCoffeeOut : DataPort { out item payload : MemoItem; }
+        }
     }
     part waterSupply : LogicalComponent {
         attribute :>> name = "Water Supply";
         out port supplyWaterOut : DataPort { out item payload : MemoItem; }
-    }
-    part waterTank : LogicalComponent {
-        attribute :>> name = "Water Reservoir";
-        out port tankWaterOut : DataPort { out item payload : MemoItem; }
-        in port tankWaterIn : DataPort { in item payload : MemoItem; }
-    }
-    part heaterAssembly : LogicalComponent {
-        attribute :>> name = "Thermal Control Assembly";
-        in port heaterWaterIn : DataPort { in item payload : MemoItem; }
-        out port heatedWaterOut : DataPort { out item payload : MemoItem; }
-    }
-    part heatingElement : LogicalComponent {
-        attribute :>> name = "Water Heating Element";
-        out port heaterStatusOut : DataPort { out item payload : MemoItem; }
-    }
-    part brewGroup : LogicalComponent {
-        attribute :>> name = "Brew Group";
-        in port brewWaterIn : DataPort { in item payload : MemoItem; }
-        out port brewedCoffeeOut : DataPort { out item payload : MemoItem; }
     }
     part cup : LogicalComponent {
         attribute :>> name = "Cup";
         in port cupBeverageIn : DataPort { in item payload : MemoItem; }
     }
 
-    connection : Composes connect parent ::> coffeeMachine to child ::> waterTank;
-    connection : Composes connect parent ::> coffeeMachine to child ::> heaterAssembly;
-    connection : Composes connect parent ::> coffeeMachine to child ::> brewGroup;
-    connection : Composes connect parent ::> heaterAssembly to child ::> heatingElement;
-
     // Transport between two components: `out` to `in`, one item moving.
     flow from waterSupply.supplyWaterOut to coffeeMachine.mainsWaterIn;
-    flow from waterTank.tankWaterOut to heaterAssembly.heaterWaterIn;
-    flow from heaterAssembly.heatedWaterOut to brewGroup.brewWaterIn;
+    flow from coffeeMachine.waterTank.tankWaterOut to coffeeMachine.heaterAssembly.heaterWaterIn;
+    flow from coffeeMachine.heaterAssembly.heatedWaterOut to coffeeMachine.brewGroup.brewWaterIn;
     flow from coffeeMachine.beverageOut to cup.cupBeverageIn;
 
     // Delegation between a boundary port and the interior it stands for. These
     // are `in`-to-`in` and `out`-to-`out`, because nothing travels: the two
     // features are the same feature. SysML v2 spells that `bind` (training
     // ch. 12), not `flow` (ch. 13).
-    bind coffeeMachine.mainsWaterIn = waterTank.tankWaterIn;
-    bind brewGroup.brewedCoffeeOut = coffeeMachine.beverageOut;
-    bind heatingElement.heaterStatusOut = coffeeMachine.serviceInterface.diagnostics;
+    bind coffeeMachine.mainsWaterIn = coffeeMachine.waterTank.tankWaterIn;
+    bind coffeeMachine.brewGroup.brewedCoffeeOut = coffeeMachine.beverageOut;
+    bind coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut = coffeeMachine.serviceInterface.diagnostics;
 
     view sampleInterconnectionView : MemoDiagramView {
         expose coffeeMachine::**;
         expose waterSupply::**;
         expose cup::**;
-        expose waterTank::**;
-        expose heaterAssembly::**;
-        expose heatingElement::**;
-        expose brewGroup::**;
         attribute depth = 2;
         attribute :>> title = "Coffee Machine · Thermal & Fluid IBD";
         attribute :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";

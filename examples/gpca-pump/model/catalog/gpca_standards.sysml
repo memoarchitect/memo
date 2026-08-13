@@ -97,11 +97,11 @@ package memo_examples_gpca_pump_gpca_standards {
     connection : ConformsTo connect conformingElement ::> reqFlowCrossCheck to clause ::> iec62304Clause5_2_3;
 
     // §5.3 software architectural design: the software decomposition.
-    connection : ConformsTo connect conformingElement ::> gpcaSoftware to clause ::> iec62304Clause5_3;
-    connection : ConformsTo connect conformingElement ::> tlm to clause ::> iec62304Clause5_3;
-    connection : ConformsTo connect conformingElement ::> infusionMgr to clause ::> iec62304Clause5_3;
-    connection : ConformsTo connect conformingElement ::> systemMonitor to clause ::> iec62304Clause5_3;
-    connection : ConformsTo connect conformingElement ::> config to clause ::> iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware to clause ::> iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.tlm to clause ::> iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.infusionMgr to clause ::> iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.systemMonitor to clause ::> iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.config to clause ::> iec62304Clause5_3;
 
     // ── IEC 60601-1 — basic safety and essential performance ─────────────
     // §8 protection against electrical hazards.
@@ -115,7 +115,7 @@ package memo_examples_gpca_pump_gpca_standards {
     connection : ConformsTo connect conformingElement ::> enclosure to clause ::> iec60601_1Clause9;
 
     // §14 programmable electrical medical systems.
-    connection : ConformsTo connect conformingElement ::> gpcaSoftware to clause ::> iec60601_1Clause14;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware to clause ::> iec60601_1Clause14;
 
     // ── IEC 60601-1-2 — electromagnetic compatibility ────────────────────
     connection : ConformsTo connect conformingElement ::> controllerBoard to clause ::> iec60601_1_2Clause7;
