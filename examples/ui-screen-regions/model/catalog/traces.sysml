@@ -31,30 +31,18 @@ package memo_examples_ui_screen_regions_traces {
     private import memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
     private import memo_assurance_safety_risk_analysis::*;
 
-    // One tree. Spatial containment only.
-    connection : Composes connect parent ::> elMainScreen to child ::> elDrugSelectorRegion;
+    // The UI-element and function trees are native nesting now (see
+    // architecture/implementation/ui.sysml and architecture/functional/
+    // functions.sysml); no Composes edge is written for either. The two that
+    // remain below are the ones nesting cannot express: a tool-drawn region
+    // (uiElement12, appended by memo-architect's canvas editor as a flat
+    // element plus a Composes edge, not by hand) and a comment-reply thread
+    // (a review feature with the same runtime-append shape).
+    connection : ElementTriggersAction connect element ::> elMainScreen.elDrugSelectorRegion to triggeredAction ::> uiaSelectDrug;
 
-    connection : Composes connect parent ::> elDrugSelectorRegion to child ::> elDrugSelectorClosed;
+    connection : ElementTriggersAction connect element ::> elMainScreen.elDrugSelectorRegion.elDrugSelectorClosed to triggeredAction ::> uiaSelectDrug;
 
-    connection : Composes connect parent ::> elDrugSelectorRegion to child ::> elDrugMenuExpanded;
-
-    connection : Composes connect parent ::> elSettingsScreen to child ::> elRateConfirmDialog;
-
-    connection : Composes connect parent ::> fnManageInfusionDisplay to child ::> fnSetInfusionRate;
-
-    connection : Composes connect parent ::> fnManageInfusionDisplay to child ::> fnValidateDrugSelection;
-
-    connection : Composes connect parent ::> fnManageInfusionDisplay to child ::> fnPresentDeliveryStatus;
-
-    connection : Composes connect parent ::> fnManageInfusionDisplay to child ::> fnPresentLocalTime;
-
-    connection : Composes connect parent ::> fnManageInfusionDisplay to child ::> fnPresentBatteryStatus;
-
-    connection : ElementTriggersAction connect element ::> elDrugSelectorRegion to triggeredAction ::> uiaSelectDrug;
-
-    connection : ElementTriggersAction connect element ::> elDrugSelectorClosed to triggeredAction ::> uiaSelectDrug;
-
-    connection : ElementTriggersAction connect element ::> elDrugMenuExpanded to triggeredAction ::> uiaSelectDrug;
+    connection : ElementTriggersAction connect element ::> elMainScreen.elDrugSelectorRegion.elDrugMenuExpanded to triggeredAction ::> uiaSelectDrug;
 
     connection : DerivesFrom connect sourceDriver ::> needReadableProgramming to targetRequirement ::> reqRateLegibility;
 
@@ -82,7 +70,7 @@ package memo_examples_ui_screen_regions_traces {
 
     connection : ErrorAtElement connect useError ::> ueMisreadRate to element ::> elMainScreen;
 
-    connection : ControlImplementedBy connect riskControl ::> rcRateConfirm to implementingElement ::> elRateConfirmDialog;
+    connection : ControlImplementedBy connect riskControl ::> rcRateConfirm to implementingElement ::> elSettingsScreen.elRateConfirmDialog;
 
     connection : Causes connect cause ::> ueMisreadRate to effect ::> hzWrongRate {
         attribute :>> causeKind = CauseKind::useErrorLeadsToHazard;
@@ -94,7 +82,7 @@ package memo_examples_ui_screen_regions_traces {
 
     connection : DerivesFrom connect sourceDriver ::> hzWrongRate to targetRequirement ::> reqRateEntry;
 
-    connection : ErrorAtElement connect useError ::> ueSelectWrongDrug to element ::> elDrugSelectorRegion;
+    connection : ErrorAtElement connect useError ::> ueSelectWrongDrug to element ::> elMainScreen.elDrugSelectorRegion;
 
     connection : Causes connect cause ::> ueSelectWrongDrug to effect ::> hzWrongDrug {
         attribute :>> causeKind = CauseKind::useErrorLeadsToHazard;
@@ -104,9 +92,9 @@ package memo_examples_ui_screen_regions_traces {
         attribute :>> mitigationKind = MitigationKind::hazard;
     }
 
-    connection : ControlImplementedBy connect riskControl ::> rcDrugLibraryGuard to implementingElement ::> elDrugSelectorRegion;
+    connection : ControlImplementedBy connect riskControl ::> rcDrugLibraryGuard to implementingElement ::> elMainScreen.elDrugSelectorRegion;
 
-    connection : ControlImplementedBy connect riskControl ::> rcDrugLibraryGuard to implementingElement ::> fnValidateDrugSelection;
+    connection : ControlImplementedBy connect riskControl ::> rcDrugLibraryGuard to implementingElement ::> fnManageInfusionDisplay.fnValidateDrugSelection;
 
     connection : DerivesFrom connect sourceDriver ::> hzWrongDrug to targetRequirement ::> reqDrugLibrarySelection;
 
@@ -120,7 +108,7 @@ package memo_examples_ui_screen_regions_traces {
         attribute :>> mitigationKind = MitigationKind::hazard;
     }
 
-    connection : ControlImplementedBy connect riskControl ::> rcLowBatteryProminence to implementingElement ::> fnPresentBatteryStatus;
+    connection : ControlImplementedBy connect riskControl ::> rcLowBatteryProminence to implementingElement ::> fnManageInfusionDisplay.fnPresentBatteryStatus;
 
     connection : DerivesFrom connect sourceDriver ::> hzUnexpectedPowerLoss to targetRequirement ::> reqBatteryWarningPerformance;
 
@@ -134,7 +122,7 @@ package memo_examples_ui_screen_regions_traces {
         attribute :>> mitigationKind = MitigationKind::hazard;
     }
 
-    connection : ControlImplementedBy connect riskControl ::> rcDisplayFreshnessMonitor to implementingElement ::> fnPresentDeliveryStatus;
+    connection : ControlImplementedBy connect riskControl ::> rcDisplayFreshnessMonitor to implementingElement ::> fnManageInfusionDisplay.fnPresentDeliveryStatus;
 
     connection : DerivesFrom connect sourceDriver ::> hzIncorrectDeliveredVolumeAssessment to targetRequirement ::> reqDisplayFreshness;
 
@@ -148,7 +136,7 @@ package memo_examples_ui_screen_regions_traces {
         attribute :>> mitigationKind = MitigationKind::hazard;
     }
 
-    connection : ControlImplementedBy connect riskControl ::> rcClockFreshnessCheck to implementingElement ::> fnPresentLocalTime;
+    connection : ControlImplementedBy connect riskControl ::> rcClockFreshnessCheck to implementingElement ::> fnManageInfusionDisplay.fnPresentLocalTime;
 
     connection : DerivesFrom connect sourceDriver ::> hzIncorrectEventChronology to targetRequirement ::> reqTimeAccuracy;
 
@@ -158,27 +146,27 @@ package memo_examples_ui_screen_regions_traces {
 
     connection : ProducesEvidence connect producer ::> vcInfusionStatusContent to producedEvidence ::> evInfusionStatusContent;
 
-    allocate fnSetInfusionRate to uiPumpPanel;
+    allocate fnManageInfusionDisplay.fnSetInfusionRate to uiPumpPanel;
     allocate fnManageInfusionDisplay to uiPumpPanel;
-    allocate fnValidateDrugSelection to uiPumpPanel;
-    allocate fnPresentDeliveryStatus to uiPumpPanel;
-    allocate fnPresentLocalTime to uiPumpPanel;
-    allocate fnPresentBatteryStatus to uiPumpPanel;
+    allocate fnManageInfusionDisplay.fnValidateDrugSelection to uiPumpPanel;
+    allocate fnManageInfusionDisplay.fnPresentDeliveryStatus to uiPumpPanel;
+    allocate fnManageInfusionDisplay.fnPresentLocalTime to uiPumpPanel;
+    allocate fnManageInfusionDisplay.fnPresentBatteryStatus to uiPumpPanel;
     // Two seeded function-to-region traces for exercising relationship editing
     // in the UI. Newly drawn regions can be linked the same way.
-    allocate fnValidateDrugSelection to elDrugSelectorRegion;
-    allocate fnSetInfusionRate to elRateConfirmDialog;
+    allocate fnManageInfusionDisplay.fnValidateDrugSelection to elMainScreen.elDrugSelectorRegion;
+    allocate fnManageInfusionDisplay.fnSetInfusionRate to elSettingsScreen.elRateConfirmDialog;
     connection : CapturesScreen connect capture ::> capMain to screen ::> elMainScreen;
 
     connection : CapturesScreen connect capture ::> capSettings to screen ::> elSettingsScreen;
 
-    connection : CapturesScreen connect capture ::> capDrugSelector to screen ::> elDrugSelectorRegion;
+    connection : CapturesScreen connect capture ::> capDrugSelector to screen ::> elMainScreen.elDrugSelectorRegion;
 
     connection : CommentsOn connect remark ::> cmtDecimalSalience to annotatedElement ::> elMainScreen;
 
     connection : CommentsOn connect remark ::> cmtStatusBarScope to annotatedElement ::> elMainScreen;
 
-    connection : RationaleFor connect rationaleRecord ::> ratOverlayGeometry to justifiedElement ::> elDrugMenuExpanded;
+    connection : RationaleFor connect rationaleRecord ::> ratOverlayGeometry to justifiedElement ::> elMainScreen.elDrugSelectorRegion.elDrugMenuExpanded;
 
     connection : NotesOn connect noteRecord ::> noteCaptureReview to notedElement ::> capMain;
 

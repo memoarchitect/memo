@@ -86,25 +86,21 @@ package memo_examples_gpca_pump_gpca_behavior_actions {
     }
 
     // ── Swimlane allocation to the logical architecture ─────────
-    allocate infusionDeliveryFlow.acquireSensors to gpcaDeviceSensors;
-    allocate infusionDeliveryFlow.evaluateAlarms to alarm;
-    allocate infusionDeliveryFlow.enforceLimits to infusionMgr;
-    allocate infusionDeliveryFlow.computeFlow to infusionMgr;
+    allocate infusionDeliveryFlow.acquireSensors to gpcaDevice.gpcaDeviceSensors;
+    allocate infusionDeliveryFlow.evaluateAlarms to gpcaDevice.gpcaSoftware.alarm;
+    allocate infusionDeliveryFlow.enforceLimits to gpcaDevice.gpcaSoftware.infusionMgr;
+    allocate infusionDeliveryFlow.computeFlow to gpcaDevice.gpcaSoftware.infusionMgr;
     allocate infusionDeliveryFlow.actuateMotor to pumpMotorAssembly;
-    allocate infusionDeliveryFlow.logEvent to logging;
+    allocate infusionDeliveryFlow.logEvent to gpcaDevice.gpcaSoftware.logging;
 
     // ── Functional decomposition and component allocation ───────
     // FUNC-001 "AcquireSensorData" is what the SYSTEM is answerable for.
     // Decomposing it names who is answerable for each piece: the flowmeter for
     // the flow rate, the air detector for air in line, the sensor subassembly
-    // for the aggregated vector. Composes carries the decomposition and
-    // AllocatedTo carries the ownership — they are different statements, which
-    // is what CR-ONT-075 keeps apart.
-    connection : Composes connect parent ::> fnAcquireSensors to child ::> cfnMeasureFlowRate;
-    connection : Composes connect parent ::> fnAcquireSensors to child ::> cfnDetectAirInLine;
-    connection : Composes connect parent ::> fnAcquireSensors to child ::> cfnAggregateSensorStatus;
-
-    allocate cfnMeasureFlowRate to flowSensor;
-    allocate cfnDetectAirInLine to airInLineSensor;
-    allocate cfnAggregateSensorStatus to gpcaDeviceSensors;
+    // for the aggregated vector — native nesting in gpca_behavior_subsystems.
+    // AllocatedTo carries the ownership, a different statement from
+    // containment, which is what CR-ONT-075 keeps apart.
+    allocate fnAcquireSensors.cfnMeasureFlowRate to flowSensor;
+    allocate fnAcquireSensors.cfnDetectAirInLine to airInLineSensor;
+    allocate fnAcquireSensors.cfnAggregateSensorStatus to gpcaDevice.gpcaDeviceSensors;
 }

@@ -63,31 +63,29 @@ package memo_examples_surgical_closure_workflow {
     action actTimeOutAndPosition : OperationalActivity { attribute :>> id = "LSG-ACT-001"; attribute :>> name = "ConfirmTimeOutAndPosition"; }
     action actEstablishAccess : OperationalActivity { attribute :>> id = "LSG-ACT-002"; attribute :>> name = "EstablishLaparoscopicAccess"; }
     action actMobilizeStomach : OperationalActivity { attribute :>> id = "LSG-ACT-003"; attribute :>> name = "MobilizeStomach"; }
-    action actSizeAndCreateSleeve : OperationalActivity { attribute :>> id = "LSG-ACT-004"; attribute :>> name = "SizeAndCreateSleeve"; attribute :>> criticality = CriticalityKind::high; }
+    action actSizeAndCreateSleeve : OperationalActivity {
+        attribute :>> id = "LSG-ACT-004"; attribute :>> name = "SizeAndCreateSleeve"; attribute :>> criticality = CriticalityKind::high;
+
+        action taskCreateStapleLine : UserTask {
+            attribute :>> criticality = CriticalityKind::high;
+            attribute :>> id = "LSG-TASK-001";
+            attribute :>> name = "CreateAndInspectStapleLine";
+            attribute :>> taskGoal = "create the planned sleeve and identify bleeding or integrity concerns before completion";
+            attribute :>> potentialHarm = "bleeding or staple-line complication not recognized before handover";
+            attribute :>> severityIfFailed = SeverityKind::serious;
+
+            action stConfirmAnatomy : TaskStep { attribute :>> id = "LSG-ST-001"; attribute :>> name = "ConfirmAnatomy"; }
+            action stCreateStapleLine : TaskStep { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; }
+            action stInspectBleeding : TaskStep { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; }
+            action stAssessIntegrity : TaskStep { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; }
+            first stConfirmAnatomy then stCreateStapleLine;
+            first stCreateStapleLine then stInspectBleeding;
+            first stInspectBleeding then stAssessIntegrity;
+        }
+    }
     action actAssessStapleLine : OperationalActivity { attribute :>> id = "LSG-ACT-005"; attribute :>> name = "AssessStapleLine"; attribute :>> criticality = CriticalityKind::high; }
     action actExtractSpecimenAndClose : OperationalActivity { attribute :>> id = "LSG-ACT-006"; attribute :>> name = "ExtractSpecimenAndClosePorts"; }
     action actHandover : OperationalActivity { attribute :>> id = "LSG-ACT-007"; attribute :>> name = "CompletePostoperativeHandover"; }
-
-    action taskCreateStapleLine : UserTask {
-        attribute :>> criticality = CriticalityKind::high;
-        attribute :>> id = "LSG-TASK-001";
-        attribute :>> name = "CreateAndInspectStapleLine";
-        attribute :>> taskGoal = "create the planned sleeve and identify bleeding or integrity concerns before completion";
-        attribute :>> potentialHarm = "bleeding or staple-line complication not recognized before handover";
-        attribute :>> severityIfFailed = SeverityKind::serious;
-    }
-    action stConfirmAnatomy : TaskStep { attribute :>> id = "LSG-ST-001"; attribute :>> name = "ConfirmAnatomy"; }
-    action stCreateStapleLine : TaskStep { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; }
-    action stInspectBleeding : TaskStep { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; }
-    action stAssessIntegrity : TaskStep { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; }
-    first stConfirmAnatomy then stCreateStapleLine;
-    first stCreateStapleLine then stInspectBleeding;
-    first stInspectBleeding then stAssessIntegrity;
-    connection : Composes connect parent ::> actSizeAndCreateSleeve to child ::> taskCreateStapleLine;
-    connection : Composes connect parent ::> taskCreateStapleLine to child ::> stConfirmAnatomy;
-    connection : Composes connect parent ::> taskCreateStapleLine to child ::> stCreateStapleLine;
-    connection : Composes connect parent ::> taskCreateStapleLine to child ::> stInspectBleeding;
-    connection : Composes connect parent ::> taskCreateStapleLine to child ::> stAssessIntegrity;
 
     action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
         attribute :>> id = "LSG-WF-001";
@@ -96,40 +94,24 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> entryCondition = "patient prepared; time-out ready";
         attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
+
+        action wsTimeOut : WorkflowStep { ref :>> performedActivity = actTimeOutAndPosition; }
+        action wsAccess : WorkflowStep { ref :>> performedActivity = actEstablishAccess; }
+        action wsMobilize : WorkflowStep { ref :>> performedActivity = actMobilizeStomach; }
+        action wsSleeve : WorkflowStep { ref :>> performedActivity = actSizeAndCreateSleeve; }
+        action wsAssess : WorkflowStep { ref :>> performedActivity = actAssessStapleLine; }
+        action wsClose : WorkflowStep { ref :>> performedActivity = actExtractSpecimenAndClose; }
+        action wsHandover : WorkflowStep { ref :>> performedActivity = actHandover; }
+        first wsTimeOut then wsAccess;
+        first wsAccess then wsMobilize;
+        first wsMobilize then wsSleeve;
+        first wsSleeve then wsAssess;
+        first wsAssess then wsClose;
+        first wsClose then wsHandover;
     }
-    action wsTimeOut : WorkflowStep { ref :>> performedActivity = actTimeOutAndPosition; }
-    action wsAccess : WorkflowStep { ref :>> performedActivity = actEstablishAccess; }
-    action wsMobilize : WorkflowStep { ref :>> performedActivity = actMobilizeStomach; }
-    action wsSleeve : WorkflowStep { ref :>> performedActivity = actSizeAndCreateSleeve; }
-    action wsAssess : WorkflowStep { ref :>> performedActivity = actAssessStapleLine; }
-    action wsClose : WorkflowStep { ref :>> performedActivity = actExtractSpecimenAndClose; }
-    action wsHandover : WorkflowStep { ref :>> performedActivity = actHandover; }
-    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsTimeOut;
-    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsAccess;
-    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsMobilize;
-    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsSleeve;
-    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsAssess;
-    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsClose;
-    connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsHandover;
-    first wsTimeOut then wsAccess;
-    first wsAccess then wsMobilize;
-    first wsMobilize then wsSleeve;
-    first wsSleeve then wsAssess;
-    first wsAssess then wsClose;
-    first wsClose then wsHandover;
     connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfSleeveGastrectomy to supported ::> ucPerformSleeveGastrectomy; }
 
     // ── Scenario paths, each with its own activity/action flow ──
-    action oaCompleteSleeveProcedure : OperationalActivity {
-        attribute :>> name = "CompleteNominalSleeveProcedure";
-        action prepare; action createSleeve; action assess; action handover;
-        first start then prepare; first prepare then createSleeve; first createSleeve then assess; first assess then handover; first handover then done;
-    }
-    action oaControlStapleLineBleeding : OperationalActivity {
-        attribute :>> name = "ControlStapleLineBleeding";
-        action recognizeBleeding; action controlBleeding; action reassessStapleLine; action escalateIfNeeded;
-        first start then recognizeBleeding; first recognizeBleeding then controlBleeding; first controlBleeding then reassessStapleLine; first reassessStapleLine then escalateIfNeeded; first escalateIfNeeded then done;
-    }
     action scNominalSleeveProcedure : MemoScenario {
         attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
         attribute :>> scenarioKind = ScenarioKind::operative;
@@ -139,6 +121,12 @@ package memo_examples_surgical_closure_workflow {
         ref :>> parentWorkflow = wfSleeveGastrectomy;
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaCompleteSleeveProcedure;
+
+        action oaCompleteSleeveProcedure : OperationalActivity {
+            attribute :>> name = "CompleteNominalSleeveProcedure";
+            action prepare; action createSleeve; action assess; action handover;
+            first start then prepare; first prepare then createSleeve; first createSleeve then assess; first assess then handover; first handover then done;
+        }
     }
     action scStapleLineBleeding : MemoScenario {
         attribute :>> id = "LSG-SC-002"; attribute :>> name = "StapleLineBleedingRecovery";
@@ -151,9 +139,13 @@ package memo_examples_surgical_closure_workflow {
         ref :>> parentWorkflow = wfSleeveGastrectomy;
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaControlStapleLineBleeding;
+
+        action oaControlStapleLineBleeding : OperationalActivity {
+            attribute :>> name = "ControlStapleLineBleeding";
+            action recognizeBleeding; action controlBleeding; action reassessStapleLine; action escalateIfNeeded;
+            first start then recognizeBleeding; first recognizeBleeding then controlBleeding; first controlBleeding then reassessStapleLine; first reassessStapleLine then escalateIfNeeded; first escalateIfNeeded then done;
+        }
     }
     #refinement dependency scNominalSleeveProcedure to ucPerformSleeveGastrectomy;
     #refinement dependency scStapleLineBleeding to ucPerformSleeveGastrectomy;
-    connection : Composes connect parent ::> scNominalSleeveProcedure to child ::> oaCompleteSleeveProcedure;
-    connection : Composes connect parent ::> scStapleLineBleeding to child ::> oaControlStapleLineBleeding;
 }

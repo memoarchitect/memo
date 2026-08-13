@@ -21,7 +21,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs01; }
-        subject verified : Base::Anything[*] = (guaranteeExclusiveMode, tlm, outputBus);
+        subject verified : Base::Anything[*] = (guaranteeExclusiveMode, gpcaDevice.gpcaSoftware.tlm, gpcaDevice.gpcaSoftware.outputBus);
     }
     verification vcLockout : VerificationCase {
         attribute :>> id = "VER-002";
@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs25; }
-        subject verified : Base::Anything[*] = (lockoutControl, guaranteeLockoutPreventsBolus, tcBolusResponse, infusionMgr);
+        subject verified : Base::Anything[*] = (lockoutControl, guaranteeLockoutPreventsBolus, tcBolusResponse, gpcaDevice.gpcaSoftware.infusionMgr);
     }
     verification vcSameStepAlarm : VerificationCase {
         attribute :>> id = "VER-003";
@@ -41,7 +41,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs19; }
-        subject verified : Base::Anything[*] = (propAlarmStopsSameStep, guaranteeAlarmStopsSameStep, tcAlarmLatency, alarm);
+        subject verified : Base::Anything[*] = (propAlarmStopsSameStep, guaranteeAlarmStopsSameStep, tcAlarmLatency, gpcaDevice.gpcaSoftware.alarm);
     }
     verification vcTemporalModeSafety : VerificationCase {
         attribute :>> id = "VER-004";
@@ -81,7 +81,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs23; }
-        subject verified : Base::Anything[*] = (reservoirMonitorControl, systemStatus);
+        subject verified : Base::Anything[*] = (reservoirMonitorControl, gpcaDevice.gpcaSoftware.systemStatus);
     }
     verification vcPost : VerificationCase {
         attribute :>> id = "VER-008";
@@ -91,7 +91,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqPost; }
-        subject verified : Base::Anything[*] = (systemMonitor);
+        subject verified : Base::Anything[*] = (gpcaDevice.gpcaSoftware.systemMonitor);
     }
     verification vcPowerLoss : VerificationCase {
         attribute :>> id = "VER-009";
@@ -177,7 +177,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqDrugLibraryLimits; }
-        subject verified : Base::Anything[*] = (drugLibraryControl, config);
+        subject verified : Base::Anything[*] = (drugLibraryControl, gpcaDevice.gpcaSoftware.config);
     }
     verification vcPrescriptionConfirm : VerificationCase {
         attribute :>> id = "VER-018";
@@ -196,7 +196,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs78; verify reqEventLogging; }
-        subject verified : Base::Anything[*] = (logging);
+        subject verified : Base::Anything[*] = (gpcaDevice.gpcaSoftware.logging);
     }
     verification vcReverseDeliveryPause : VerificationCase {
         attribute :>> id = "VER-020";
