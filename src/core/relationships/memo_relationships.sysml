@@ -5,7 +5,6 @@ package memo_core_relationships {
     private import Connections::BinaryConnection;
 
     private import memo_core_common::*;
-    private import memo_core_dimensions::*;   // ElementStatusKind
     private import memo_core_enumerations::*;
 
     // All MEMO relations are native SysML v2 `connection def`s (each is a
@@ -21,10 +20,31 @@ package memo_core_relationships {
     //
     // A relation is a MEMO element like any other, so it carries the same
     // identification core as the part/action/item/requirement bases in
-    // memo_core_common — including `status`. The former `linkStatus`
-    // (planned/active/verified/obsolete) is gone: a link being "verified" was
-    // never an editorial state, and the other three duplicated
-    // ElementStatusKind under different words.
+    // memo_core_common — with four exceptions, R10-S5 (2026-08-13). `name`,
+    // `description`, `rationale` and `status` were declared here too, and a
+    // tree measurement found them dead weight: across every connection usage
+    // in src/ and examples/ (876 of them, 77 with a body at all), exactly one
+    // ever set `rationale` and none ever set `name`, `description` or
+    // `status`. The former `linkStatus` (planned/active/verified/obsolete) is
+    // already gone for the same reason: a link being "verified" was never an
+    // editorial state.
+    //
+    // The replacement is native, not a MEMO-authored substitute:
+    //   - `name`        → the connection usage's own declared name
+    //     (`connection linkFoo : Bar …`), which every usage already has.
+    //   - `description` → `doc /* … */` on the usage.
+    //   - `rationale`   → standard `Rationale` metadata: `@Rationale { :>> text
+    //     = "…"; }` (ModelingMetadata.sysml:95). `text` is exported into
+    //     `rel.attributes.rationale` by the builder, same key as before.
+    //   - `status`      → standard `StatusInfo` metadata: `@StatusInfo { :>>
+    //     status = StatusKind::…; }` (ModelingMetadata.sysml:60). StatusKind
+    //     (open/tbd/tbr/tbc/done/closed) is NOT ElementStatusKind
+    //     (proposed/draft/inReview/approved/released/deprecated/retired) — the
+    //     mapping between them, and why no MEMO-side conversion code exists, is
+    //     recorded in docs/reference/naming-and-native-constructs.md. Exported
+    //     into `rel.attributes.status`.
+    // Both metadata defs live in the standard `ModelingMetadata` package;
+    // `private import ModelingMetadata::*;` wherever they are applied.
     //
     // isReflexive/isUnique are structural properties of the relation itself,
     // declared here so authoring and validation read them from the ontology
@@ -35,12 +55,8 @@ package memo_core_relationships {
     abstract connection def MemoRelationship :> Connections::BinaryConnection {
         attribute id : String;
         attribute uuid : String;
-        attribute name : String;
         attribute shortDescription : String;
-        attribute description : String;
-        attribute rationale : String;
         attribute sourceReference : String;
-        attribute status : ElementStatusKind;
         doc /* True when an element may be related to itself by this relation.
              * Unset is read as false. */
         attribute isReflexive : Boolean;
