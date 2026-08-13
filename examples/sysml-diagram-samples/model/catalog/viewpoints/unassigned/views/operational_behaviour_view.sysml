@@ -29,26 +29,21 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         attribute :>> name = "PCA Care System";
         attribute :>> entityKind = OperationalEntityKind::device;
         attribute :>> responsibility = "System of interest for this context view.";
+        part opClinicalTeam : User {
+            attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Clinical Team";
+            part opRolePhysician : User {
+                attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Physician"; }
+            part opRoleNurse : User {
+                attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Nurse"; }
+            part opRoleBiomed : User {
+                attribute :>> actorKind = ActorKind::technician; attribute :>> name = "Biomed Tech"; }
+        }
+        part opPatientGroup : User {
+            attribute :>> actorKind = ActorKind::patient; attribute :>> name = "Patient Interaction";
+            part opRolePatient : User {
+                attribute :>> actorKind = ActorKind::patient; attribute :>> name = "Patient"; }
+        }
     }
-    part opClinicalTeam : User {
-        attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Clinical Team"; }
-    part opPatientGroup : User {
-        attribute :>> actorKind = ActorKind::patient; attribute :>> name = "Patient Interaction"; }
-    part opRolePhysician : User {
-        attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Physician"; }
-    part opRoleNurse : User {
-        attribute :>> actorKind = ActorKind::clinician; attribute :>> name = "Nurse"; }
-    part opRoleBiomed : User {
-        attribute :>> actorKind = ActorKind::technician; attribute :>> name = "Biomed Tech"; }
-    part opRolePatient : User {
-        attribute :>> actorKind = ActorKind::patient; attribute :>> name = "Patient"; }
-
-    connection : Composes connect parent ::> opCareSystem to child ::> opClinicalTeam;
-    connection : Composes connect parent ::> opCareSystem to child ::> opPatientGroup;
-    connection : Composes connect parent ::> opClinicalTeam to child ::> opRolePhysician;
-    connection : Composes connect parent ::> opClinicalTeam to child ::> opRoleNurse;
-    connection : Composes connect parent ::> opClinicalTeam to child ::> opRoleBiomed;
-    connection : Composes connect parent ::> opPatientGroup to child ::> opRolePatient;
 
     action opSetupFlow : OperationalActivity {
         action opPrescribe : OpPrescribeTherapy { attribute :>> name = "Prescribe Therapy"; }
@@ -88,28 +83,22 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         first opAdminister then done;
     }
 
-    allocate opSetupFlow.opPrescribe to opRolePhysician;
-    allocate opSetupFlow.opVerify to opRoleNurse;
-    allocate opSetupFlow.opPrime to opRoleNurse;
-    allocate opSetupFlow.opSelfTest to opRoleBiomed;
-    allocate opSetupFlow.opProgram to opRoleNurse;
-    allocate opSetupFlow.opConnect to opRoleNurse;
-    allocate opSetupFlow.opStart to opRoleNurse;
-    allocate opSetupFlow.opAdminister to opRoleNurse;
-    allocate opSetupFlow.opAdminister.opRequestBolus to opRolePatient;
-    allocate opSetupFlow.opAdminister.opCheckLockout to opRoleNurse;
-    allocate opSetupFlow.opAdminister.opDeliverDose to opRoleNurse;
-    allocate opSetupFlow.opAdminister.opLogEvent to opRoleNurse;
+    allocate opSetupFlow.opPrescribe to opCareSystem.opClinicalTeam.opRolePhysician;
+    allocate opSetupFlow.opVerify to opCareSystem.opClinicalTeam.opRoleNurse;
+    allocate opSetupFlow.opPrime to opCareSystem.opClinicalTeam.opRoleNurse;
+    allocate opSetupFlow.opSelfTest to opCareSystem.opClinicalTeam.opRoleBiomed;
+    allocate opSetupFlow.opProgram to opCareSystem.opClinicalTeam.opRoleNurse;
+    allocate opSetupFlow.opConnect to opCareSystem.opClinicalTeam.opRoleNurse;
+    allocate opSetupFlow.opStart to opCareSystem.opClinicalTeam.opRoleNurse;
+    allocate opSetupFlow.opAdminister to opCareSystem.opClinicalTeam.opRoleNurse;
+    allocate opSetupFlow.opAdminister.opRequestBolus to opCareSystem.opPatientGroup.opRolePatient;
+    allocate opSetupFlow.opAdminister.opCheckLockout to opCareSystem.opClinicalTeam.opRoleNurse;
+    allocate opSetupFlow.opAdminister.opDeliverDose to opCareSystem.opClinicalTeam.opRoleNurse;
+    allocate opSetupFlow.opAdminister.opLogEvent to opCareSystem.opClinicalTeam.opRoleNurse;
 
     view opSetupView : MemoDiagramView {
         expose opSetupFlow::**;
         expose opCareSystem::**;
-        expose opClinicalTeam::**;
-        expose opPatientGroup::**;
-        expose opRolePhysician;
-        expose opRoleNurse;
-        expose opRoleBiomed;
-        expose opRolePatient;
         attribute depth = 2;
         attribute :>> title = "Sample · Clinical PCA Setup (Operational)";
         attribute :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step.";

@@ -17,7 +17,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqDoseAccuracy; }
-        subject verified : Base::Anything[*] = (fnDeliverTherapy, fnMeterFluid, fnDriveActuator, fnMeasureDelivered, fnControlDose, fnComputeRate);
+        subject verified : Base::Anything[*] = (fnDeliverTherapy, fnDeliverTherapy.fnMeterFluid, fnDeliverTherapy.fnMeterFluid.fnDriveActuator, fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered, fnDeliverTherapy.fnControlDose, fnDeliverTherapy.fnControlDose.fnComputeRate);
     }
     verification vcOcclusionResponse : VerificationCase {
         attribute :>> id = "NDS-VER-002"; attribute :>> name = "VerifyOcclusionResponse";
@@ -26,7 +26,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqOcclusionDetection; }
-        subject verified : Base::Anything[*] = (fnEnsureSafety, fnDetectOcclusion, fnEnforceDoseLimits);
+        subject verified : Base::Anything[*] = (fnEnsureSafety, fnEnsureSafety.fnDetectOcclusion, fnEnsureSafety.fnEnforceDoseLimits);
     }
     verification vcAirInLineResponse : VerificationCase {
         attribute :>> id = "NDS-VER-003"; attribute :>> name = "VerifyAirInLineResponse";
@@ -35,7 +35,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqAirInLine; }
-        subject verified : Base::Anything[*] = (fnDetectAirInLine);
+        subject verified : Base::Anything[*] = (fnEnsureSafety.fnDetectAirInLine);
     }
     verification vcAlarmSignals : VerificationCase {
         attribute :>> id = "NDS-VER-004"; attribute :>> name = "VerifyAlarmSignals";
@@ -44,7 +44,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqAlarmAnnunciation; }
-        subject verified : Base::Anything[*] = (fnAnnunciateAlarm);
+        subject verified : Base::Anything[*] = (fnInformUser.fnAnnunciateAlarm);
     }
     verification vcBatteryEndurance : VerificationCase {
         attribute :>> id = "NDS-VER-005"; attribute :>> name = "VerifyBatteryEndurance";
@@ -53,7 +53,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqBatteryEndurance; }
-        subject verified : Base::Anything[*] = (fnManagePower, fnMonitorBattery);
+        subject verified : Base::Anything[*] = (fnManagePower, fnManagePower.fnMonitorBattery);
     }
     verification vcConfirmationFlow : VerificationCase {
         attribute :>> id = "NDS-VER-006"; attribute :>> name = "VerifyConfirmationFlow";
@@ -62,7 +62,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqPrescriptionConfirmation; }
-        subject verified : Base::Anything[*] = (fnValidatePrescription, fnAcceptInput);
+        subject verified : Base::Anything[*] = (fnDeliverTherapy.fnControlDose.fnValidatePrescription, fnInformUser.fnAcceptInput);
     }
     verification vcStatusLegibility : VerificationCase {
         attribute :>> id = "NDS-VER-007"; attribute :>> name = "VerifyStatusLegibility";
@@ -71,7 +71,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqStatusVisibility; }
-        subject verified : Base::Anything[*] = (fnInformUser, fnRenderStatus);
+        subject verified : Base::Anything[*] = (fnInformUser, fnInformUser.fnRenderStatus);
     }
     verification vcPowerSourceSwitch : VerificationCase {
         attribute :>> id = "NDS-VER-008"; attribute :>> name = "VerifyPowerSourceSwitch";
@@ -79,7 +79,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         attribute :>> acceptanceCriteria = "Rail brownout switches source without interrupting delivery.";
         attribute :>> status = ElementStatusKind::approved;
 
-        subject verified : Base::Anything[*] = (fnSelectPowerSource);
+        subject verified : Base::Anything[*] = (fnManagePower.fnSelectPowerSource);
     }
 
     // Requirement → verification case.
