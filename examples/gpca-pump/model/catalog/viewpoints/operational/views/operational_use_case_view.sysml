@@ -33,7 +33,7 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_use_cas
             attribute :>> id = "QRY-OPS-101";
             attribute :>> name = "GPCA_UseCaseQuery";
             attribute :>> includeElementKinds = ("Actor", "User", "UseCase");
-            attribute :>> includeRelationshipKinds = ("Initiates", "ParticipatesIn");
+            attribute :>> includeRelationshipKinds = ("ParticipatesIn");
             attribute :>> includeLayers = ("context", "operational");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the GPCA use case view from the operational layer.";
