@@ -23,7 +23,7 @@ package memo_examples_surgical_robot {
     connection : IndependentOf connect channel ::> chMotionMonitor to otherChannel ::> chMotionPrimary {
         attribute :>> independenceBasis = "separate sensing, power, and processing; common-cause analysis SR-CCA-01";
     }
-    connection : MonitorsChannel connect monitorChannel ::> chMotionMonitor to monitoredComponent ::> chMotionPrimary;
+    dependency chMotionMonitor to chMotionPrimary;
 
     // Interlock: instrument exchange blocked while arm is in motion.
     part chExchangeInterlock : LogicalComponent {
