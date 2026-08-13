@@ -77,5 +77,4 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
     // The machine is one containment tree, so exposing its root reaches every
     // state and transition; the former per-element IncludedIn list restated
     // that tree a second time and is gone with it.
-    connection : IncludedIn connect sourceElement ::> pumpModes to targetView ::> sampleStateTransitionView;
 }

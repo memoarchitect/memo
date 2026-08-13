@@ -87,12 +87,4 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
         attribute :>> diagramType = "afd";
         part :>> viewpointDefinition = functionalViewpoint;
     }
-
-    connection : IncludedIn connect sourceElement ::> sampleActionFlow.receive to targetView ::> sampleActionFlowView;
-    connection : IncludedIn connect sourceElement ::> sampleActionFlow.validate to targetView ::> sampleActionFlowView;
-    connection : IncludedIn connect sourceElement ::> sampleActionFlow.process to targetView ::> sampleActionFlowView;
-    connection : IncludedIn connect sourceElement ::> sampleActionFlow.process.processStepA to targetView ::> sampleActionFlowView;
-    connection : IncludedIn connect sourceElement ::> sampleActionFlow.process.processStepB to targetView ::> sampleActionFlowView;
-    connection : IncludedIn connect sourceElement ::> sampleActionFlow.process.processStepC to targetView ::> sampleActionFlowView;
-    connection : IncludedIn connect sourceElement ::> sampleActionFlow.record to targetView ::> sampleActionFlowView;
 }

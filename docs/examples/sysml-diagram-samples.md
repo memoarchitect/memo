@@ -53,7 +53,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 | Assurance | `Need`, `Requirement` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `AppliesInContext`, `Composes`, `DerivesFrom`, `ExchangesWith`, `Extends`, `IncludedIn`, `Includes`, `Initiates`, `InteractsWith`, `MemoLink`, `ParticipatesIn` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
+**Typed links it uses:** `AppliesInContext`, `Composes`, `DerivesFrom`, `ExchangesWith`, `Extends`, `Includes`, `Initiates`, `InteractsWith`, `MemoLink`, `ParticipatesIn` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 

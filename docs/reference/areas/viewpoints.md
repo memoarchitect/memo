@@ -44,9 +44,10 @@ viewpoints/
 
 ## Relationships
 
-Viewpoints frame concerns and include existing model content through typed
-relationships such as `FramesConcern` and `IncludedIn`. Selection does not
-change ownership of the selected element.
+Viewpoints frame concerns through typed relationships such as `FramesConcern`.
+A view selects existing model content with the native `expose` member, not a
+typed relationship — see [Naming and native constructs](../naming-and-native-constructs.md).
+Selection does not change ownership of the selected element.
 
 ## Enumerations
 
