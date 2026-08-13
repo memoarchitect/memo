@@ -41,7 +41,6 @@
 | [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… | `ArchitectureElement` |
 | [`FunctionalFlow`](#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | `ArchitectureElement` |
 | [`FunctionalFlowStep`](#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | `MemoAction` |
-| [`InvolvesFunction`](#involvesfunction) | `connection def` | Typed relationship for involves function. | `MemoRelationship` |
 
 ## MemoFunction
 
@@ -130,21 +129,6 @@ action def FunctionalFlowStep specializes MemoAction
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
-| Owning package | `memo_architecture_functional_functions` |
-
-
-## InvolvesFunction
-
-```sysml
-connection def InvolvesFunction :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for involves function. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_functional_functions` |
 
 
@@ -279,17 +263,10 @@ connection def InvolvesFunction :> MemoRelationship
             ref item exchangedItem : MemoItem[0..1];
         }
 
-        connection def InvolvesFunction :> MemoRelationship {
-            end functionalFlow : FunctionalFlow :>> source;
-            end function : MemoFunction :>> target;
-        }
-        abstract connection involvesFunctionLinks : InvolvesFunction[*];
-        metadata def <involvesFunction> InvolvesFunctionMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = involvesFunctionLinks meta SysML::Usage;
-        }
-        // Compatibility spelling used by existing models.
+        // `InvolvesFunction` is native `perform` (R10-S6): a `FunctionalFlow`
+        // already names its functions via its step chain
+        // (`perform <step>;` + the step's own `ref function`), and a flow with no
+        // step chain performs its functions directly.
     }
 
     ```
