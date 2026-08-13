@@ -106,6 +106,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         expose opCareSystem::**;
         expose opClinicalTeam::**;
         expose opPatientGroup::**;
+        expose opRolePhysician;
+        expose opRoleNurse;
+        expose opRoleBiomed;
+        expose opRolePatient;
         attribute depth = 2;
         attribute :>> title = "Sample · Clinical PCA Setup (Operational)";
         attribute :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step.";
@@ -113,26 +117,4 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         attribute :>> diagramType = "ofd";
         part :>> viewpointDefinition = operationalViewpoint;
     }
-
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opPrescribe to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opVerify to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opForkPrep to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opPrime to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opSelfTest to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opJoinPrep to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opProgram to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opConnect to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opStart to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opAdminister to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opAdminister.opRequestBolus to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opAdminister.opCheckLockout to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opAdminister.opDeliverDose to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opSetupFlow.opAdminister.opLogEvent to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opCareSystem to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opClinicalTeam to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opPatientGroup to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opRolePhysician to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opRoleNurse to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opRoleBiomed to targetView ::> opSetupView;
-    connection : IncludedIn connect sourceElement ::> opRolePatient to targetView ::> opSetupView;
 }

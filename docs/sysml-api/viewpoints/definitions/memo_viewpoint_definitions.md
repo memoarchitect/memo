@@ -41,7 +41,6 @@
 | [`MemoDocumentBackedView`](#memodocumentbackedview) | `view def` | Memo document backed view definition specializing `MemoView`. | `MemoView` |
 | [`MemoDocumentView`](#memodocumentview) | `view def` | Memo document view definition specializing `MemoDocumentBackedView`. | `MemoDocumentBackedView` |
 | [`ViewInclusionRule`](#viewinclusionrule) | `part def` | View inclusion rule definition specializing `MemoPart`. | `MemoPart` |
-| [`IncludedIn`](#includedin) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## Viewpoint
 
@@ -163,21 +162,6 @@ part def ViewInclusionRule specializes MemoPart
 | Owning package | `memo_viewpoints_definitions` |
 
 
-## IncludedIn
-
-```sysml
-connection def IncludedIn :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_viewpoints_definitions` |
-
-
 ## Source
 
 ??? code "viewpoints/definitions/memo_viewpoint_definitions.sysml"
@@ -276,20 +260,6 @@ connection def IncludedIn :> MemoRelationship
             attribute includeConcerns : ConcernKind[*];
             attribute selectionExpression : String;
             attribute rationaleText : String;
-        }
-
-        // ── Relations owned by this package ─────────────────────────────
-        // Moved out of memo_core_relationships: their ends are typed against
-        // types declared here, and core must not depend on a domain package.
-        connection def IncludedIn :> MemoRelationship {
-            end sourceElement : MemoPart :>> source;
-            end targetView : MemoView :>> target;
-        }
-        abstract connection includedInLinks : IncludedIn[*];
-        metadata def <includedIn> IncludedInMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = includedInLinks meta SysML::Usage;
         }
     }
 

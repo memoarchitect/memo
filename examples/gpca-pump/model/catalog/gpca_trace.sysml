@@ -755,9 +755,4 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : ProducesEvidence connect producer ::> vcEventLog to producedEvidence ::> evidenceDoseProgramming;
     connection : ProducesEvidence connect producer ::> vcPumpAccuracy to producedEvidence ::> evidenceDeliveryAccuracy;
     connection : ProducesEvidence connect producer ::> valSummativeUsability to producedEvidence ::> evidenceUsability;
-    connection : IncludedIn connect sourceElement ::> evidenceLockout to targetView ::> rmfView;
-    connection : IncludedIn connect sourceElement ::> evidenceSafetyAlarmSuite to targetView ::> vvView;
-    connection : IncludedIn connect sourceElement ::> evidenceUsability to targetView ::> usabilityView;
-    connection : IncludedIn connect sourceElement ::> fmeaDelivery to targetView ::> hazardAnalysisView;
-    connection : IncludedIn connect sourceElement ::> ftaOverdose to targetView ::> hazardAnalysisView;
 }

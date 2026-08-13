@@ -77,6 +77,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
         expose coffeeMachine::**;
         expose waterSupply::**;
         expose cup::**;
+        expose waterTank::**;
+        expose heaterAssembly::**;
+        expose heatingElement::**;
+        expose brewGroup::**;
         attribute depth = 2;
         attribute :>> title = "Coffee Machine · Thermal & Fluid IBD";
         attribute :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
@@ -87,25 +91,4 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }
     }
-
-    connection : IncludedIn connect sourceElement ::> coffeeMachine to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> waterSupply to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> waterTank to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> heaterAssembly to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> heatingElement to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> brewGroup to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> cup to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> coffeeMachine.mainsWaterIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> coffeeMachine.beverageOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> waterSupply.supplyWaterOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> cup.cupBeverageIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> coffeeMachine.serviceInterface to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> coffeeMachine.serviceInterface.diagnostics to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> waterTank.tankWaterOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> waterTank.tankWaterIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> heaterAssembly.heaterWaterIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> heaterAssembly.heatedWaterOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> brewGroup.brewWaterIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> brewGroup.brewedCoffeeOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> heatingElement.heaterStatusOut to targetView ::> sampleInterconnectionView;
 }

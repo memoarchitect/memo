@@ -228,10 +228,3 @@ SysML `connection def` declarations in `src/`.
 | --- | --- | --- | --- |
 | [`ResolvesToMethodology`](methodology/core/memo_core.md#resolvestomethodology) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 
-
-## `memo::viewpoints::definitions`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`IncludedIn`](viewpoints/definitions/memo_viewpoint_definitions.md#includedin) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`viewpoints/definitions/memo_viewpoint_definitions.sysml`](viewpoints/definitions/memo_viewpoint_definitions.md) |
-
