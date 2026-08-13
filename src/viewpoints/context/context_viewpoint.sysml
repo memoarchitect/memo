@@ -29,7 +29,7 @@ package memo_viewpoints_context_context_viewpoint {
         // boundary picture. Projects derive their own verbs from it and are
         // picked up through the specialization closure. The three older
         // relations remain for models authored before it existed.
-        attribute :>> allowedRelationshipKinds = ("InteractsInContext", "InteractsWith", "flow", "bind", "ConnectsPhysically");
+        attribute :>> allowedRelationshipKinds = ("InteractsInContext", "InteractsWith", "flow", "bind", "connect");
         attribute :>> userExtensible = true;
     }
 }
