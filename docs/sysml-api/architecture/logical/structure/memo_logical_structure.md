@@ -46,8 +46,7 @@
 | [`LogicalExchangeItem`](#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoItem`. | `MemoItem` |
 | [`LogicalConnector`](#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | `MemoRelationship` |
 | [`LogicalExchange`](#logicalexchange) | `part def` | A transfer of a typed item across a connector. | `ArchitectureElement` |
-| [`LogicalMode`](#logicalmode) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `ArchitectureElement` |
-| [`LogicalBehavior`](#logicalbehavior) | `part def` | Logical behavior definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`LogicalBehavior`](#logicalbehavior) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `ArchitectureElement` |
 | [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). | `ArchitectureElement` |
 | [`FaultContainmentRegion`](#faultcontainmentregion) | `part def` | Fault containment region definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`IndependentOf`](#independentof) | `connection def` | Claimed independence between channels (common-cause defense). | `MemoRelationship` |
@@ -248,21 +247,6 @@ part def LogicalExchange specializes ArchitectureElement
 | Owning package | `memo_architecture_logical_structure` |
 
 
-## LogicalMode
-
-```sysml
-part def LogicalMode specializes ArchitectureElement
-```
-
-| Property | Value |
-| --- | --- |
-| Description | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `ArchitectureElement` |
-| Owning package | `memo_architecture_logical_structure` |
-
-
 ## LogicalBehavior
 
 ```sysml
@@ -271,7 +255,7 @@ part def LogicalBehavior specializes ArchitectureElement
 
 | Property | Value |
 | --- | --- |
-| Description | Logical behavior definition specializing `ArchitectureElement`. |
+| Description | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `ArchitectureElement` |
@@ -520,11 +504,6 @@ connection def MonitorsChannel :> MemoRelationship
         // States and modes of the logical solution (kept distinct from UI state
         // and from physical device configuration).
 
-        part def LogicalMode specializes ArchitectureElement {
-            attribute modePurpose : String;
-            attribute entryCondition : String;
-            attribute exitCondition : String;
-        }
         part def LogicalBehavior specializes ArchitectureElement {
             attribute behaviorSummary : String;
             attribute executionSemantics : String;
