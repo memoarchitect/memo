@@ -41,15 +41,15 @@ package memo_examples_temperature_alarm {
     action actAcknowledgeAlarm : OperationalActivity {
         attribute :>> id = "TA-ACT-001"; attribute :>> name = "ReviewAndAcknowledgeAlarm";
         attribute :>> criticality = CriticalityKind::high;
+
+        action taskAckAlarm : UserTask {
+            attribute :>> criticality = CriticalityKind::high;
+            attribute :>> id = "TA-TASK-001"; attribute :>> name = "AcknowledgeTemperatureAlarm";
+            attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
+            attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
+            attribute :>> severityIfFailed = SeverityKind::serious;
+        }
     }
-    action taskAckAlarm : UserTask {
-        attribute :>> criticality = CriticalityKind::high;
-        attribute :>> id = "TA-TASK-001"; attribute :>> name = "AcknowledgeTemperatureAlarm";
-        attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
-        attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
-        attribute :>> severityIfFailed = SeverityKind::serious;
-    }
-    connection : Composes connect parent ::> actAcknowledgeAlarm to child ::> taskAckAlarm;
 
     // ── Functional and logical slices ───────────────────────────
     action fnDetectDeviation : SystemFunction {
@@ -89,7 +89,7 @@ package memo_examples_temperature_alarm {
         perform fnDetectDeviation;
     }
     connection : ElementTriggersAction connect element ::> elAlarmBanner to triggeredAction ::> uiaAcknowledge;
-    connection : Supports { attribute :>> supportKind = SupportKind::task; connect supporter ::> uiBedside to supported ::> taskAckAlarm; }
+    connection : Supports { attribute :>> supportKind = SupportKind::task; connect supporter ::> uiBedside to supported ::> actAcknowledgeAlarm.taskAckAlarm; }
 
     // ── Risk chain with use error ───────────────────────────────
     part ueSilenceAndForget : UseError {
@@ -108,7 +108,7 @@ package memo_examples_temperature_alarm {
         attribute :>> controlKind = RiskControlKind::alarm;
         attribute :>> implementationKind = RiskControlImplementationKind::softwareDesign;
     }
-    connection : CommitsUseError connect task ::> taskAckAlarm to useError ::> ueSilenceAndForget;
+    connection : CommitsUseError connect task ::> actAcknowledgeAlarm.taskAckAlarm to useError ::> ueSilenceAndForget;
     connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueSilenceAndForget to effect ::> hzUndetectedDeviation; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> rcReAnnunciate to mitigatedElement ::> hzUndetectedDeviation; }
     connection : ControlImplementedBy connect riskControl ::> rcReAnnunciate to implementingElement ::> elAlarmBanner;
@@ -143,6 +143,6 @@ package memo_examples_temperature_alarm {
     }
     connection : ExecutesScenario connect verificationCase ::> vcAlarmLatency to scenario ::> vsAlarmLatency;
 
-    connection : Validates connect validationCase ::> uvAckTask to validationTarget ::> taskAckAlarm;
+    connection : Validates connect validationCase ::> uvAckTask to validationTarget ::> actAcknowledgeAlarm.taskAckAlarm;
     connection : ProducesEvidence connect producer ::> vcAlarmLatency to producedEvidence ::> evLatencyReport;
 }

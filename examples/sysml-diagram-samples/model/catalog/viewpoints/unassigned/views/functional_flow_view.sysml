@@ -49,26 +49,25 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
 
     // Component hierarchy used by the Level control:
     // L1 system → L2 subsystems → L3 allocated components.
-    part fxPumpSystem : LogicalComponent { attribute :>> name = "Infusion Pump System"; }
-    part fxSensingSubsystem : LogicalComponent { attribute :>> name = "Sensing Subsystem"; }
-    part fxControlSubsystem : LogicalComponent { attribute :>> name = "Control Subsystem"; }
-    part fxDeliverySubsystem : LogicalComponent { attribute :>> name = "Delivery Subsystem"; }
-    part fxSafetySubsystem : LogicalComponent { attribute :>> name = "Safety Subsystem"; }
-
-    // L3 components — one natural-level swimlane each
-    part fxSensor : LogicalComponent { attribute :>> name = "Sensor Subsystem"; }
-    part fxController : LogicalComponent { attribute :>> name = "Infusion Controller"; }
-    part fxActuator : LogicalComponent { attribute :>> name = "Pump Actuator"; }
-    part fxSafety : LogicalComponent { attribute :>> name = "Safety Monitor"; }
-
-    connection : Composes connect parent ::> fxPumpSystem to child ::> fxSensingSubsystem;
-    connection : Composes connect parent ::> fxPumpSystem to child ::> fxControlSubsystem;
-    connection : Composes connect parent ::> fxPumpSystem to child ::> fxDeliverySubsystem;
-    connection : Composes connect parent ::> fxPumpSystem to child ::> fxSafetySubsystem;
-    connection : Composes connect parent ::> fxSensingSubsystem to child ::> fxSensor;
-    connection : Composes connect parent ::> fxControlSubsystem to child ::> fxController;
-    connection : Composes connect parent ::> fxDeliverySubsystem to child ::> fxActuator;
-    connection : Composes connect parent ::> fxSafetySubsystem to child ::> fxSafety;
+    part fxPumpSystem : LogicalComponent {
+        attribute :>> name = "Infusion Pump System";
+        part fxSensingSubsystem : LogicalComponent {
+            attribute :>> name = "Sensing Subsystem";
+            part fxSensor : LogicalComponent { attribute :>> name = "Sensor Subsystem"; }
+        }
+        part fxControlSubsystem : LogicalComponent {
+            attribute :>> name = "Control Subsystem";
+            part fxController : LogicalComponent { attribute :>> name = "Infusion Controller"; }
+        }
+        part fxDeliverySubsystem : LogicalComponent {
+            attribute :>> name = "Delivery Subsystem";
+            part fxActuator : LogicalComponent { attribute :>> name = "Pump Actuator"; }
+        }
+        part fxSafetySubsystem : LogicalComponent {
+            attribute :>> name = "Safety Subsystem";
+            part fxSafety : LogicalComponent { attribute :>> name = "Safety Monitor"; }
+        }
+    }
 
     action fxDeliveryFlow : SystemFunction {
         action fxAcquire : FxAcquire { attribute :>> name = "Acquire Sensor Data"; }
@@ -119,29 +118,21 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     }
 
     // Swimlane allocation — which component realises each function
-    allocate fxDeliveryFlow.fxAcquire to fxSensor;
-    allocate fxDeliveryFlow.fxCompute to fxController;
-    allocate fxDeliveryFlow.fxEnforce to fxSafety;
-    allocate fxDeliveryFlow.fxDrive to fxActuator;
-    allocate fxDeliveryFlow.fxDeliver to fxActuator;
-    allocate fxDeliveryFlow.fxMonitor to fxSafety;
-    allocate fxDeliveryFlow.fxDetect to fxSafety;
-    allocate fxDeliveryFlow.fxLog to fxController;
-    allocate fxDeliveryFlow.fxDeliver.fxOpenValve to fxActuator;
-    allocate fxDeliveryFlow.fxDeliver.fxHoldDose to fxActuator;
-    allocate fxDeliveryFlow.fxDeliver.fxCloseValve to fxActuator;
+    allocate fxDeliveryFlow.fxAcquire to fxPumpSystem.fxSensingSubsystem.fxSensor;
+    allocate fxDeliveryFlow.fxCompute to fxPumpSystem.fxControlSubsystem.fxController;
+    allocate fxDeliveryFlow.fxEnforce to fxPumpSystem.fxSafetySubsystem.fxSafety;
+    allocate fxDeliveryFlow.fxDrive to fxPumpSystem.fxDeliverySubsystem.fxActuator;
+    allocate fxDeliveryFlow.fxDeliver to fxPumpSystem.fxDeliverySubsystem.fxActuator;
+    allocate fxDeliveryFlow.fxMonitor to fxPumpSystem.fxSafetySubsystem.fxSafety;
+    allocate fxDeliveryFlow.fxDetect to fxPumpSystem.fxSafetySubsystem.fxSafety;
+    allocate fxDeliveryFlow.fxLog to fxPumpSystem.fxControlSubsystem.fxController;
+    allocate fxDeliveryFlow.fxDeliver.fxOpenValve to fxPumpSystem.fxDeliverySubsystem.fxActuator;
+    allocate fxDeliveryFlow.fxDeliver.fxHoldDose to fxPumpSystem.fxDeliverySubsystem.fxActuator;
+    allocate fxDeliveryFlow.fxDeliver.fxCloseValve to fxPumpSystem.fxDeliverySubsystem.fxActuator;
 
     view fxDeliveryView : MemoDiagramView {
         expose fxDeliveryFlow::**;
         expose fxPumpSystem::**;
-        expose fxSensingSubsystem;
-        expose fxControlSubsystem;
-        expose fxDeliverySubsystem;
-        expose fxSafetySubsystem;
-        expose fxSensor;
-        expose fxController;
-        expose fxActuator;
-        expose fxSafety;
         attribute depth = 2;
         attribute :>> title = "Sample · Dose Delivery (Functional Flow)";
         attribute :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in).";

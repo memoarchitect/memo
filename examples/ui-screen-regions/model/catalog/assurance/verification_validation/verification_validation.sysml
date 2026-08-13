@@ -26,7 +26,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> acceptanceCriteria = "A rate change cannot reach the controller until the displayed value is explicitly confirmed.";
         attribute :>> status = ElementStatusKind::approved;
 
-        subject verified : Base::Anything[*] = (rcRateConfirm, fnSetInfusionRate, fnManageInfusionDisplay);
+        subject verified : Base::Anything[*] = (rcRateConfirm, fnManageInfusionDisplay.fnSetInfusionRate, fnManageInfusionDisplay);
     }
 
     part evRateChange : MemoEvidence {
@@ -43,7 +43,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> acceptanceCriteria = "Only enabled care-area drug and concentration records are selectable, and every selection supplies the matching dosing limits.";
         attribute :>> status = ElementStatusKind::approved;
 
-        subject verified : Base::Anything[*] = (rcDrugLibraryGuard, fnValidateDrugSelection);
+        subject verified : Base::Anything[*] = (rcDrugLibraryGuard, fnManageInfusionDisplay.fnValidateDrugSelection);
     }
 
     part evDrugLibrarySelection : MemoEvidence {
@@ -61,7 +61,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqActiveRateDisplay; verify reqDrugIdentityDisplay; verify reqVolumeDisplay; verify reqTimeDisplay; verify reqTimeAccuracy; verify reqBatteryStatusDisplay; verify reqBatteryWarningPerformance; }
-        subject verified : Base::Anything[*] = (rcLowBatteryProminence, rcDisplayFreshnessMonitor, rcClockFreshnessCheck, fnPresentDeliveryStatus, fnPresentLocalTime, fnPresentBatteryStatus);
+        subject verified : Base::Anything[*] = (rcLowBatteryProminence, rcDisplayFreshnessMonitor, rcClockFreshnessCheck, fnManageInfusionDisplay.fnPresentDeliveryStatus, fnManageInfusionDisplay.fnPresentLocalTime, fnManageInfusionDisplay.fnPresentBatteryStatus);
     }
 
     part evInfusionStatusContent : MemoEvidence {

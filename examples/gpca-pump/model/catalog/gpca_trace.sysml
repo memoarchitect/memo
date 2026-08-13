@@ -92,15 +92,10 @@ package memo_examples_gpca_pump_gpca_trace {
     // A user task may be realized by several system-side steps: the mapping is
     // refinement, not specialization, because the steps retain distinct
     // functions and exchanged items while tracing the same operative intent.
-    #refinement dependency fcsBolusSense to wsRequestBolus;
-    #refinement dependency fcsBolusValidate to wsRequestBolus;
-    #refinement dependency fcsBolusCommand to wsRequestBolus;
-    #refinement dependency fcsBolusActuate to wsRequestBolus;
-    #refinement dependency fcsBolusLog to wsRequestBolus;
-    #refinement dependency fcsAlarmSense to wsRespondAlarm;
-    #refinement dependency fcsAlarmEvaluate to wsRespondAlarm;
-    #refinement dependency fcsAlarmStopInfusion to wsRespondAlarm;
-    #refinement dependency fcsAlarmAnnunciate to wsRespondAlarm;
+    // The nine refinement statements themselves live in gpca_operational.sysml,
+    // inside wsRequestBolus's/wsRespondAlarm's own owning scope — the
+    // `#refinement dependency ... to ...` shorthand's target end does not
+    // accept a qualified path, and both steps are nested now.
 
     // ── Requirement derivation ──────────────────────────────────
     // MEMO extension requirements (REQ-X) derive from needs and risks.
@@ -336,21 +331,21 @@ package memo_examples_gpca_pump_gpca_trace {
 
 
     // ── Function allocation ─────────────────────────────────────
-    allocate fnAcquireSensors to gpcaDeviceSensors;
-    allocate fnAcquireSensors to systemStatus;
-    allocate fnPresentStatus to outputBus;
-    allocate fnValidatePrescription to config;
-    allocate fnMonitorAlarm to alarm;
+    allocate fnAcquireSensors to gpcaDevice.gpcaDeviceSensors;
+    allocate fnAcquireSensors to gpcaDevice.gpcaSoftware.systemStatus;
+    allocate fnPresentStatus to gpcaDevice.gpcaSoftware.outputBus;
+    allocate fnValidatePrescription to gpcaDevice.gpcaSoftware.config;
+    allocate fnMonitorAlarm to gpcaDevice.gpcaSoftware.alarm;
     allocate fnAnnunciate to audibleAlarm;
-    allocate fnManageInfusion to infusionMgr;
-    allocate fnEnforceLimits to infusionMgr;
+    allocate fnManageInfusion to gpcaDevice.gpcaSoftware.infusionMgr;
+    allocate fnEnforceLimits to gpcaDevice.gpcaSoftware.infusionMgr;
     allocate fnCommandPump to pumpMotorAssembly;
-    allocate fnLogEvents to logging;
-    allocate fnManagePower to systemMonitor;
+    allocate fnLogEvents to gpcaDevice.gpcaSoftware.logging;
+    allocate fnManagePower to gpcaDevice.gpcaSoftware.systemMonitor;
     allocate fnPresentStatus to operatorDisplay;
-    allocate fnSelfTest to systemMonitor;
+    allocate fnSelfTest to gpcaDevice.gpcaSoftware.systemMonitor;
     // ── Deployment, hosting, and interface realization ──────────
-    allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaSoftware to controllerBoard;
+    allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaDevice.gpcaSoftware to controllerBoard;
     connection : HostedBy connect processingNode ::> mainController to hostAssembly ::> controllerBoard;
     #refinement dependency sensorInputInterface to hwSoftwareBus;
     #refinement dependency actuatorCommandInterface to pumpMotorDrive;
@@ -377,129 +372,54 @@ package memo_examples_gpca_pump_gpca_trace {
     // recorded exactly, at port granularity, as `bind` statements in
     // gpca_interfaces.sysml — so nothing is lost by not restating them
     // here in a granularity that cannot express them.
-    flow from tlm to outputBus;
-    flow from infusionMgr to systemStatus;
-    flow from tlm to systemStatus;
-    flow from config to systemStatus;
-    flow from systemStatus to outputBus;
-    flow from infusionMgr to alarm;
-    flow from tlm to alarm;
-    flow from systemMonitor to alarm;
-    flow from systemStatus to alarm;
-    flow from config to alarm;
-    flow from alarm to outputBus;
-    flow from tlm to config;
-    flow from systemStatus to config;
-    flow from config to outputBus;
-    flow from tlm to infusionMgr;
-    flow from config to infusionMgr;
-    flow from alarm to infusionMgr;
-    flow from systemStatus to infusionMgr;
-    flow from infusionMgr to outputBus;
-    flow from tlm to systemMonitor;
-    flow from systemMonitor to outputBus;
-    flow from tlm to logging;
-    flow from config to logging;
-    flow from alarm to logging;
-    flow from systemStatus to logging;
-    flow from infusionMgr to logging;
-    flow from logging to outputBus;
+    flow from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.outputBus;
+    flow from gpcaDevice.gpcaSoftware.infusionMgr to gpcaDevice.gpcaSoftware.systemStatus;
+    flow from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.systemStatus;
+    flow from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.systemStatus;
+    flow from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.outputBus;
+    flow from gpcaDevice.gpcaSoftware.infusionMgr to gpcaDevice.gpcaSoftware.alarm;
+    flow from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.alarm;
+    flow from gpcaDevice.gpcaSoftware.systemMonitor to gpcaDevice.gpcaSoftware.alarm;
+    flow from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.alarm;
+    flow from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.alarm;
+    flow from gpcaDevice.gpcaSoftware.alarm to gpcaDevice.gpcaSoftware.outputBus;
+    flow from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.config;
+    flow from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.config;
+    flow from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.outputBus;
+    flow from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.infusionMgr;
+    flow from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.infusionMgr;
+    flow from gpcaDevice.gpcaSoftware.alarm to gpcaDevice.gpcaSoftware.infusionMgr;
+    flow from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.infusionMgr;
+    flow from gpcaDevice.gpcaSoftware.infusionMgr to gpcaDevice.gpcaSoftware.outputBus;
+    flow from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.systemMonitor;
+    flow from gpcaDevice.gpcaSoftware.systemMonitor to gpcaDevice.gpcaSoftware.outputBus;
+    flow from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.logging;
+    flow from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.logging;
+    flow from gpcaDevice.gpcaSoftware.alarm to gpcaDevice.gpcaSoftware.logging;
+    flow from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.logging;
+    flow from gpcaDevice.gpcaSoftware.infusionMgr to gpcaDevice.gpcaSoftware.logging;
+    flow from gpcaDevice.gpcaSoftware.logging to gpcaDevice.gpcaSoftware.outputBus;
 
     // ── GPCA_SW boundary features (AADL GPCA_SW.aadl; CITE-002) ──
     // The seven top-level ports are features of GPCA_Software, so
-    // interconnection views pin them on the software boundary.
-    connection : Composes connect parent ::> gpcaSoftware to child ::> portOpCmdIn;
-    connection : Composes connect parent ::> gpcaSoftware to child ::> portPresIn;
-    connection : Composes connect parent ::> gpcaSoftware to child ::> portPatientIn;
-    connection : Composes connect parent ::> gpcaSoftware to child ::> portSensorIn;
-    connection : Composes connect parent ::> gpcaSoftware to child ::> portConstIn;
-    connection : Composes connect parent ::> gpcaSoftware to child ::> portDbIn;
-    connection : Composes connect parent ::> gpcaSoftware to child ::> portGpcaSwOut;
-
-    // Each software module owns the AADL features it declares — same shape as
-    // the gpcaSoftware -> top-level-port composition above.
-    connection : Composes connect parent ::> alarm to child ::> portAlarmAlarmOut;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmConfigIn;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmConstIn;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmDbIn;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmImIn;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmOpCmdIn;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmSensorIn;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmSysMonIn;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmSysStatIn;
-    connection : Composes connect parent ::> alarm to child ::> portAlarmTlmModeIn;
-    connection : Composes connect parent ::> config to child ::> portConfigConfigOut;
-    connection : Composes connect parent ::> config to child ::> portConfigConstIn;
-    connection : Composes connect parent ::> config to child ::> portConfigDbIn;
-    connection : Composes connect parent ::> config to child ::> portConfigOpCmdIn;
-    connection : Composes connect parent ::> config to child ::> portConfigPresIn;
-    connection : Composes connect parent ::> config to child ::> portConfigSysStatIn;
-    connection : Composes connect parent ::> config to child ::> portConfigTlmModeIn;
-    connection : Composes connect parent ::> infusionMgr to child ::> portImAlarmIn;
-    connection : Composes connect parent ::> infusionMgr to child ::> portImConfigIn;
-    connection : Composes connect parent ::> infusionMgr to child ::> portImImOut;
-    connection : Composes connect parent ::> infusionMgr to child ::> portImOpCmdIn;
-    connection : Composes connect parent ::> infusionMgr to child ::> portImPatientIn;
-    connection : Composes connect parent ::> infusionMgr to child ::> portImSysStatIn;
-    connection : Composes connect parent ::> infusionMgr to child ::> portImTlmModeIn;
-    connection : Composes connect parent ::> logging to child ::> portLogAlarmIn;
-    connection : Composes connect parent ::> logging to child ::> portLogConfigIn;
-    connection : Composes connect parent ::> logging to child ::> portLogImIn;
-    connection : Composes connect parent ::> logging to child ::> portLogLogOut;
-    connection : Composes connect parent ::> logging to child ::> portLogSysStatIn;
-    connection : Composes connect parent ::> logging to child ::> portLogTlmModeIn;
-    connection : Composes connect parent ::> systemMonitor to child ::> portSysMonSysMonOut;
-    connection : Composes connect parent ::> systemMonitor to child ::> portSysMonTlmModeIn;
-    connection : Composes connect parent ::> outputBus to child ::> portOutputAlarmIn;
-    connection : Composes connect parent ::> outputBus to child ::> portOutputConfigIn;
-    connection : Composes connect parent ::> outputBus to child ::> portOutputGpcaSwOut;
-    connection : Composes connect parent ::> outputBus to child ::> portOutputImIn;
-    connection : Composes connect parent ::> outputBus to child ::> portOutputLogIn;
-    connection : Composes connect parent ::> outputBus to child ::> portOutputSysMonIn;
-    connection : Composes connect parent ::> outputBus to child ::> portOutputSysStatIn;
-    connection : Composes connect parent ::> outputBus to child ::> portOutputTlmModeIn;
-    connection : Composes connect parent ::> systemStatus to child ::> portSysStatConfigIn;
-    connection : Composes connect parent ::> systemStatus to child ::> portSysStatConstIn;
-    connection : Composes connect parent ::> systemStatus to child ::> portSysStatImIn;
-    connection : Composes connect parent ::> systemStatus to child ::> portSysStatSensorIn;
-    connection : Composes connect parent ::> systemStatus to child ::> portSysStatSysStatOut;
-    connection : Composes connect parent ::> systemStatus to child ::> portSysStatTlmModeIn;
-    connection : Composes connect parent ::> tlm to child ::> portTlmConstIn;
-    connection : Composes connect parent ::> tlm to child ::> portTlmOpCmdIn;
-    connection : Composes connect parent ::> tlm to child ::> portTlmTlmModeOut;
-
-    // ── Device/subsystem feature ownership (published AADL, 1:1) ──
-    connection : Composes connect parent ::> gpcaDevice to child ::> devOpCmdIn;
-    connection : Composes connect parent ::> gpcaDevice to child ::> devDbIn;
-    connection : Composes connect parent ::> gpcaDevice to child ::> devPresIn;
-    connection : Composes connect parent ::> gpcaDevice to child ::> devPatientIn;
-    connection : Composes connect parent ::> gpcaDevice to child ::> devGpcaOut;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsOpCmdIn;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsDbIn;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsPresIn;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsPatientIn;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsOpCmdOut;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsPresOut;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsPatientOut;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsSensorOut;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsConstOut;
-    connection : Composes connect parent ::> gpcaDeviceSensors to child ::> snsDbOut;
-    connection : Composes connect parent ::> gpcaActuators to child ::> actGpcaSwIn;
-    connection : Composes connect parent ::> gpcaActuators to child ::> actGpcaOut;
+    // interconnection views pin them on the software boundary. Each software
+    // module owns the AADL features it declares, natively: the ports are
+    // nested in the module's own body in gpca_architecture.sysml, not wired
+    // here with a separate relationship.
 
     // ── GPCA_Device.Impl connections (GPCA_Device.aadl, 1:1) ──
-    bind devOpCmdIn = snsOpCmdIn;
-    bind devDbIn = snsDbIn;
-    bind devPresIn = snsPresIn;
-    bind devPatientIn = snsPatientIn;
-    flow from snsOpCmdOut to portOpCmdIn;
-    flow from snsPresOut to portPresIn;
-    flow from snsPatientOut to portPatientIn;
-    flow from snsSensorOut to portSensorIn;
-    flow from snsConstOut to portConstIn;
-    flow from snsDbOut to portDbIn;
-    flow from portGpcaSwOut to actGpcaSwIn;
-    bind actGpcaOut = devGpcaOut;
+    bind gpcaDevice.devOpCmdIn = gpcaDevice.gpcaDeviceSensors.snsOpCmdIn;
+    bind gpcaDevice.devDbIn = gpcaDevice.gpcaDeviceSensors.snsDbIn;
+    bind gpcaDevice.devPresIn = gpcaDevice.gpcaDeviceSensors.snsPresIn;
+    bind gpcaDevice.devPatientIn = gpcaDevice.gpcaDeviceSensors.snsPatientIn;
+    flow from gpcaDevice.gpcaDeviceSensors.snsOpCmdOut to gpcaDevice.gpcaSoftware.portOpCmdIn;
+    flow from gpcaDevice.gpcaDeviceSensors.snsPresOut to gpcaDevice.gpcaSoftware.portPresIn;
+    flow from gpcaDevice.gpcaDeviceSensors.snsPatientOut to gpcaDevice.gpcaSoftware.portPatientIn;
+    flow from gpcaDevice.gpcaDeviceSensors.snsSensorOut to gpcaDevice.gpcaSoftware.portSensorIn;
+    flow from gpcaDevice.gpcaDeviceSensors.snsConstOut to gpcaDevice.gpcaSoftware.portConstIn;
+    flow from gpcaDevice.gpcaDeviceSensors.snsDbOut to gpcaDevice.gpcaSoftware.portDbIn;
+    flow from gpcaDevice.gpcaSoftware.portGpcaSwOut to gpcaDevice.gpcaActuators.actGpcaSwIn;
+    bind gpcaDevice.gpcaActuators.actGpcaOut = gpcaDevice.devGpcaOut;
 
     // ── Risk chains (ISO 14971, GIIP causal-tree structure) ─────
     // Categorized causes converge on each hazard (GIIP Tables 2-9

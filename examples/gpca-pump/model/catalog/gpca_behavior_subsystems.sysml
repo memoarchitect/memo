@@ -17,44 +17,46 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> outputSummary = "Debounced, range-checked sensor status vector";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
-    }
-    // ── Component functions decomposing FUNC-001 ────────────────
-    // The functional chain does not stop at the system boundary.
-    // "Acquire sensor data" is a system responsibility; measuring a flow rate
-    // is the flowmeter's, and aggregating the status vector is the sensor
-    // subassembly's. Each names its component through AllocatedTo (see
-    // gpca_behavior_actions), which CR-ONT-074 requires — a component function
-    // allocated nowhere is a responsibility nobody has accepted.
-    action cfnMeasureFlowRate : ComponentFunction {
-        attribute :>> id = "CFUN-001";
-        attribute :>> name = "MeasureFlowRate";
-        attribute :>> functionCategory = "sensing";
-        attribute :>> actionKind = ActionKind::sense;
-        attribute :>> trigger = "continuous, sampled every 20 ms execution step";
-        attribute :>> outputSummary = "Measured delivered flow rate in mL/h, with a validity flag";
-        attribute :>> concernKind = ConcernKind::safety;
-        attribute :>> criticality = CriticalityKind::catastrophic;
-    }
-    action cfnDetectAirInLine : ComponentFunction {
-        attribute :>> id = "CFUN-002";
-        attribute :>> name = "DetectAirInLine";
-        attribute :>> functionCategory = "protection";
-        attribute :>> actionKind = ActionKind::sense;
-        attribute :>> trigger = "continuous, sampled every 20 ms execution step";
-        attribute :>> outputSummary = "Air-in-line present or absent, with accumulated bolus volume";
-        attribute :>> concernKind = ConcernKind::safety;
-        attribute :>> criticality = CriticalityKind::catastrophic;
-    }
-    // The subassembly case: a component function need not sit on a leaf part.
-    action cfnAggregateSensorStatus : ComponentFunction {
-        attribute :>> id = "CFUN-003";
-        attribute :>> name = "AggregateSensorStatus";
-        attribute :>> functionCategory = "sensing";
-        attribute :>> actionKind = ActionKind::transform;
-        attribute :>> trigger = "every 20 ms execution step";
-        attribute :>> outputSummary = "Debounced, range-checked sensor status vector for the controller";
-        attribute :>> concernKind = ConcernKind::safety;
-        attribute :>> criticality = CriticalityKind::catastrophic;
+
+        // ── Component functions decomposing FUNC-001 ─────────────
+        // The functional chain does not stop at the system boundary.
+        // "Acquire sensor data" is a system responsibility; measuring a flow
+        // rate is the flowmeter's, and aggregating the status vector is the
+        // sensor subassembly's. Each names its component through
+        // AllocatedTo (see gpca_behavior_actions), which CR-ONT-074
+        // requires — a component function allocated nowhere is a
+        // responsibility nobody has accepted.
+        action cfnMeasureFlowRate : ComponentFunction {
+            attribute :>> id = "CFUN-001";
+            attribute :>> name = "MeasureFlowRate";
+            attribute :>> functionCategory = "sensing";
+            attribute :>> actionKind = ActionKind::sense;
+            attribute :>> trigger = "continuous, sampled every 20 ms execution step";
+            attribute :>> outputSummary = "Measured delivered flow rate in mL/h, with a validity flag";
+            attribute :>> concernKind = ConcernKind::safety;
+            attribute :>> criticality = CriticalityKind::catastrophic;
+        }
+        action cfnDetectAirInLine : ComponentFunction {
+            attribute :>> id = "CFUN-002";
+            attribute :>> name = "DetectAirInLine";
+            attribute :>> functionCategory = "protection";
+            attribute :>> actionKind = ActionKind::sense;
+            attribute :>> trigger = "continuous, sampled every 20 ms execution step";
+            attribute :>> outputSummary = "Air-in-line present or absent, with accumulated bolus volume";
+            attribute :>> concernKind = ConcernKind::safety;
+            attribute :>> criticality = CriticalityKind::catastrophic;
+        }
+        // The subassembly case: a component function need not sit on a leaf part.
+        action cfnAggregateSensorStatus : ComponentFunction {
+            attribute :>> id = "CFUN-003";
+            attribute :>> name = "AggregateSensorStatus";
+            attribute :>> functionCategory = "sensing";
+            attribute :>> actionKind = ActionKind::transform;
+            attribute :>> trigger = "every 20 ms execution step";
+            attribute :>> outputSummary = "Debounced, range-checked sensor status vector for the controller";
+            attribute :>> concernKind = ConcernKind::safety;
+            attribute :>> criticality = CriticalityKind::catastrophic;
+        }
     }
 
     action fnValidatePrescription : SystemFunction {

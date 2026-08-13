@@ -1,6 +1,6 @@
 // Functional architecture — the row axis of the DSM.
 //
-// Four capability trees, each decomposed with Composes, plus the functional
+// Four capability trees, each a native containment tree, plus the functional
 // exchanges between the leaves. The exchanges are deliberately not a clean
 // pipeline: DriveActuator and MeasureDeliveredVolume feed each other, so a
 // partitioned DSM still shows one genuine feedback mark instead of an empty
@@ -21,54 +21,51 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
         attribute :>> criticality = CriticalityKind::catastrophic;
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> outputSummary = "fluid delivered to the patient line at the prescribed rate";
+
+        action fnMeterFluid : SystemFunction {
+            attribute :>> id = "NDS-FN-002"; attribute :>> name = "MeterFluid";
+            attribute :>> functionCategory = "therapy";
+            attribute :>> criticality = CriticalityKind::catastrophic;
+            attribute :>> concernKind = ConcernKind::safety;
+            attribute :>> outputSummary = "measured volume displaced per control period";
+
+            action fnDriveActuator : SystemFunction {
+                attribute :>> id = "NDS-FN-003"; attribute :>> name = "DriveActuator";
+                attribute :>> functionCategory = "therapy";
+                attribute :>> criticality = CriticalityKind::catastrophic;
+                attribute :>> trigger = "rate command from the dose control loop";
+                attribute :>> concernKind = ConcernKind::safety;
+            }
+            action fnMeasureDelivered : SystemFunction {
+                attribute :>> id = "NDS-FN-004"; attribute :>> name = "MeasureDeliveredVolume";
+                attribute :>> functionCategory = "therapy";
+                attribute :>> criticality = CriticalityKind::high;
+                attribute :>> concernKind = ConcernKind::safety;
+                attribute :>> outputSummary = "cumulative delivered volume";
+            }
+        }
+        action fnControlDose : SystemFunction {
+            attribute :>> id = "NDS-FN-005"; attribute :>> name = "ControlDose";
+            attribute :>> functionCategory = "therapy";
+            attribute :>> criticality = CriticalityKind::catastrophic;
+            attribute :>> concernKind = ConcernKind::safety;
+
+            action fnComputeRate : SystemFunction {
+                attribute :>> id = "NDS-FN-006"; attribute :>> name = "ComputeInfusionRate";
+                attribute :>> functionCategory = "therapy";
+                attribute :>> criticality = CriticalityKind::catastrophic;
+                attribute :>> concernKind = ConcernKind::safety;
+                attribute :>> outputSummary = "rate command, saturated at the prescribed ceiling";
+            }
+            action fnValidatePrescription : SystemFunction {
+                attribute :>> id = "NDS-FN-007"; attribute :>> name = "ValidatePrescription";
+                attribute :>> functionCategory = "therapy";
+                attribute :>> criticality = CriticalityKind::high;
+                attribute :>> concernKind = ConcernKind::clinical;
+                attribute :>> outputSummary = "accepted or rejected prescription, with the reason";
+            }
+        }
     }
-    action fnMeterFluid : SystemFunction {
-        attribute :>> id = "NDS-FN-002"; attribute :>> name = "MeterFluid";
-        attribute :>> functionCategory = "therapy";
-        attribute :>> criticality = CriticalityKind::catastrophic;
-        attribute :>> concernKind = ConcernKind::safety;
-        attribute :>> outputSummary = "measured volume displaced per control period";
-    }
-    action fnDriveActuator : SystemFunction {
-        attribute :>> id = "NDS-FN-003"; attribute :>> name = "DriveActuator";
-        attribute :>> functionCategory = "therapy";
-        attribute :>> criticality = CriticalityKind::catastrophic;
-        attribute :>> trigger = "rate command from the dose control loop";
-        attribute :>> concernKind = ConcernKind::safety;
-    }
-    action fnMeasureDelivered : SystemFunction {
-        attribute :>> id = "NDS-FN-004"; attribute :>> name = "MeasureDeliveredVolume";
-        attribute :>> functionCategory = "therapy";
-        attribute :>> criticality = CriticalityKind::high;
-        attribute :>> concernKind = ConcernKind::safety;
-        attribute :>> outputSummary = "cumulative delivered volume";
-    }
-    action fnControlDose : SystemFunction {
-        attribute :>> id = "NDS-FN-005"; attribute :>> name = "ControlDose";
-        attribute :>> functionCategory = "therapy";
-        attribute :>> criticality = CriticalityKind::catastrophic;
-        attribute :>> concernKind = ConcernKind::safety;
-    }
-    action fnComputeRate : SystemFunction {
-        attribute :>> id = "NDS-FN-006"; attribute :>> name = "ComputeInfusionRate";
-        attribute :>> functionCategory = "therapy";
-        attribute :>> criticality = CriticalityKind::catastrophic;
-        attribute :>> concernKind = ConcernKind::safety;
-        attribute :>> outputSummary = "rate command, saturated at the prescribed ceiling";
-    }
-    action fnValidatePrescription : SystemFunction {
-        attribute :>> id = "NDS-FN-007"; attribute :>> name = "ValidatePrescription";
-        attribute :>> functionCategory = "therapy";
-        attribute :>> criticality = CriticalityKind::high;
-        attribute :>> concernKind = ConcernKind::clinical;
-        attribute :>> outputSummary = "accepted or rejected prescription, with the reason";
-    }
-    connection : Composes connect parent ::> fnDeliverTherapy to child ::> fnMeterFluid;
-    connection : Composes connect parent ::> fnDeliverTherapy to child ::> fnControlDose;
-    connection : Composes connect parent ::> fnMeterFluid to child ::> fnDriveActuator;
-    connection : Composes connect parent ::> fnMeterFluid to child ::> fnMeasureDelivered;
-    connection : Composes connect parent ::> fnControlDose to child ::> fnComputeRate;
-    connection : Composes connect parent ::> fnControlDose to child ::> fnValidatePrescription;
 
     // ── Ensure safety ────────────────────────────────────────────
     action fnEnsureSafety : SystemFunction {
@@ -76,31 +73,29 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
         attribute :>> functionCategory = "protection";
         attribute :>> criticality = CriticalityKind::catastrophic;
         attribute :>> concernKind = ConcernKind::safety;
+
+        action fnDetectOcclusion : SystemFunction {
+            attribute :>> id = "NDS-FN-009"; attribute :>> name = "DetectOcclusion";
+            attribute :>> functionCategory = "protection";
+            attribute :>> criticality = CriticalityKind::catastrophic;
+            attribute :>> trigger = "line pressure above the occlusion threshold";
+            attribute :>> concernKind = ConcernKind::safety;
+        }
+        action fnDetectAirInLine : SystemFunction {
+            attribute :>> id = "NDS-FN-010"; attribute :>> name = "DetectAirInLine";
+            attribute :>> functionCategory = "protection";
+            attribute :>> criticality = CriticalityKind::catastrophic;
+            attribute :>> trigger = "air bolus detected in the patient line";
+            attribute :>> concernKind = ConcernKind::safety;
+        }
+        action fnEnforceDoseLimits : SystemFunction {
+            attribute :>> id = "NDS-FN-011"; attribute :>> name = "EnforceDoseLimits";
+            attribute :>> functionCategory = "protection";
+            attribute :>> criticality = CriticalityKind::catastrophic;
+            attribute :>> concernKind = ConcernKind::safety;
+            attribute :>> outputSummary = "delivery stopped when the commanded dose leaves the accepted envelope";
+        }
     }
-    action fnDetectOcclusion : SystemFunction {
-        attribute :>> id = "NDS-FN-009"; attribute :>> name = "DetectOcclusion";
-        attribute :>> functionCategory = "protection";
-        attribute :>> criticality = CriticalityKind::catastrophic;
-        attribute :>> trigger = "line pressure above the occlusion threshold";
-        attribute :>> concernKind = ConcernKind::safety;
-    }
-    action fnDetectAirInLine : SystemFunction {
-        attribute :>> id = "NDS-FN-010"; attribute :>> name = "DetectAirInLine";
-        attribute :>> functionCategory = "protection";
-        attribute :>> criticality = CriticalityKind::catastrophic;
-        attribute :>> trigger = "air bolus detected in the patient line";
-        attribute :>> concernKind = ConcernKind::safety;
-    }
-    action fnEnforceDoseLimits : SystemFunction {
-        attribute :>> id = "NDS-FN-011"; attribute :>> name = "EnforceDoseLimits";
-        attribute :>> functionCategory = "protection";
-        attribute :>> criticality = CriticalityKind::catastrophic;
-        attribute :>> concernKind = ConcernKind::safety;
-        attribute :>> outputSummary = "delivery stopped when the commanded dose leaves the accepted envelope";
-    }
-    connection : Composes connect parent ::> fnEnsureSafety to child ::> fnDetectOcclusion;
-    connection : Composes connect parent ::> fnEnsureSafety to child ::> fnDetectAirInLine;
-    connection : Composes connect parent ::> fnEnsureSafety to child ::> fnEnforceDoseLimits;
 
     // ── Inform the user ──────────────────────────────────────────
     action fnInformUser : SystemFunction {
@@ -108,31 +103,29 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
         attribute :>> functionCategory = "interaction";
         attribute :>> criticality = CriticalityKind::high;
         attribute :>> concernKind = ConcernKind::usability;
+
+        action fnRenderStatus : SystemFunction {
+            attribute :>> id = "NDS-FN-013"; attribute :>> name = "RenderTherapyStatus";
+            attribute :>> functionCategory = "interaction";
+            attribute :>> criticality = CriticalityKind::high;
+            attribute :>> concernKind = ConcernKind::usability;
+            attribute :>> outputSummary = "rate, volume delivered and time remaining";
+        }
+        action fnAnnunciateAlarm : SystemFunction {
+            attribute :>> id = "NDS-FN-014"; attribute :>> name = "AnnunciateAlarm";
+            attribute :>> functionCategory = "interaction";
+            attribute :>> criticality = CriticalityKind::catastrophic;
+            attribute :>> trigger = "any active alarm condition";
+            attribute :>> concernKind = ConcernKind::safety;
+        }
+        action fnAcceptInput : SystemFunction {
+            attribute :>> id = "NDS-FN-015"; attribute :>> name = "AcceptClinicianInput";
+            attribute :>> functionCategory = "interaction";
+            attribute :>> criticality = CriticalityKind::high;
+            attribute :>> concernKind = ConcernKind::usability;
+            attribute :>> outputSummary = "confirmed prescription changes";
+        }
     }
-    action fnRenderStatus : SystemFunction {
-        attribute :>> id = "NDS-FN-013"; attribute :>> name = "RenderTherapyStatus";
-        attribute :>> functionCategory = "interaction";
-        attribute :>> criticality = CriticalityKind::high;
-        attribute :>> concernKind = ConcernKind::usability;
-        attribute :>> outputSummary = "rate, volume delivered and time remaining";
-    }
-    action fnAnnunciateAlarm : SystemFunction {
-        attribute :>> id = "NDS-FN-014"; attribute :>> name = "AnnunciateAlarm";
-        attribute :>> functionCategory = "interaction";
-        attribute :>> criticality = CriticalityKind::catastrophic;
-        attribute :>> trigger = "any active alarm condition";
-        attribute :>> concernKind = ConcernKind::safety;
-    }
-    action fnAcceptInput : SystemFunction {
-        attribute :>> id = "NDS-FN-015"; attribute :>> name = "AcceptClinicianInput";
-        attribute :>> functionCategory = "interaction";
-        attribute :>> criticality = CriticalityKind::high;
-        attribute :>> concernKind = ConcernKind::usability;
-        attribute :>> outputSummary = "confirmed prescription changes";
-    }
-    connection : Composes connect parent ::> fnInformUser to child ::> fnRenderStatus;
-    connection : Composes connect parent ::> fnInformUser to child ::> fnAnnunciateAlarm;
-    connection : Composes connect parent ::> fnInformUser to child ::> fnAcceptInput;
 
     // ── Manage power ─────────────────────────────────────────────
     action fnManagePower : SystemFunction {
@@ -140,48 +133,47 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
         attribute :>> functionCategory = "platform";
         attribute :>> criticality = CriticalityKind::high;
         attribute :>> concernKind = ConcernKind::reliability;
+
+        action fnMonitorBattery : SystemFunction {
+            attribute :>> id = "NDS-FN-017"; attribute :>> name = "MonitorBatteryState";
+            attribute :>> functionCategory = "platform";
+            attribute :>> criticality = CriticalityKind::high;
+            attribute :>> concernKind = ConcernKind::reliability;
+            attribute :>> outputSummary = "state of charge and remaining run time";
+        }
+        action fnSelectPowerSource : SystemFunction {
+            attribute :>> id = "NDS-FN-018"; attribute :>> name = "SelectPowerSource";
+            attribute :>> functionCategory = "platform";
+            attribute :>> criticality = CriticalityKind::high;
+            attribute :>> trigger = "mains loss or rail brownout";
+            attribute :>> concernKind = ConcernKind::reliability;
+        }
     }
-    action fnMonitorBattery : SystemFunction {
-        attribute :>> id = "NDS-FN-017"; attribute :>> name = "MonitorBatteryState";
-        attribute :>> functionCategory = "platform";
-        attribute :>> criticality = CriticalityKind::high;
-        attribute :>> concernKind = ConcernKind::reliability;
-        attribute :>> outputSummary = "state of charge and remaining run time";
-    }
-    action fnSelectPowerSource : SystemFunction {
-        attribute :>> id = "NDS-FN-018"; attribute :>> name = "SelectPowerSource";
-        attribute :>> functionCategory = "platform";
-        attribute :>> criticality = CriticalityKind::high;
-        attribute :>> trigger = "mains loss or rail brownout";
-        attribute :>> concernKind = ConcernKind::reliability;
-    }
-    connection : Composes connect parent ::> fnManagePower to child ::> fnMonitorBattery;
-    connection : Composes connect parent ::> fnManagePower to child ::> fnSelectPowerSource;
 
     // ── Functional exchange ──────────────────────────────────────
     // Cross-tree marks are the interesting ones: they are what a collapsed DSM
     // rolls up into a single number between two capabilities.
-    flow from fnMeasureDelivered to fnComputeRate;
-    flow from fnComputeRate to fnDriveActuator;
-    flow from fnDriveActuator to fnMeasureDelivered;
-    flow from fnValidatePrescription to fnComputeRate;
-    flow from fnAcceptInput to fnValidatePrescription;
-    flow from fnDetectOcclusion to fnEnforceDoseLimits;
-    flow from fnDetectAirInLine to fnAnnunciateAlarm;
-    flow from fnEnforceDoseLimits to fnDriveActuator;
-    flow from fnMeasureDelivered to fnRenderStatus;
-    flow from fnMonitorBattery to fnAnnunciateAlarm;
-    flow from fnSelectPowerSource to fnDriveActuator;
-    flow from fnDetectOcclusion to fnAnnunciateAlarm;
-    satisfy reqDoseAccuracy by fnComputeRate;
-    satisfy reqDoseAccuracy by fnDriveActuator;
-    satisfy reqOcclusionDetection by fnDetectOcclusion;
-    satisfy reqOcclusionDetection by fnEnforceDoseLimits;
-    satisfy reqAirInLine by fnDetectAirInLine;
-    satisfy reqAirInLine by fnAnnunciateAlarm;
-    satisfy reqAlarmAnnunciation by fnAnnunciateAlarm;
-    satisfy reqBatteryEndurance by fnMonitorBattery;
-    satisfy reqBatteryEndurance by fnSelectPowerSource;
-    satisfy reqPrescriptionConfirmation by fnAcceptInput;
-    satisfy reqPrescriptionConfirmation by fnValidatePrescription;
+    flow from fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered to fnDeliverTherapy.fnControlDose.fnComputeRate;
+    flow from fnDeliverTherapy.fnControlDose.fnComputeRate to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
+    flow from fnDeliverTherapy.fnMeterFluid.fnDriveActuator to fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered;
+    flow from fnDeliverTherapy.fnControlDose.fnValidatePrescription to fnDeliverTherapy.fnControlDose.fnComputeRate;
+    flow from fnInformUser.fnAcceptInput to fnDeliverTherapy.fnControlDose.fnValidatePrescription;
+    flow from fnEnsureSafety.fnDetectOcclusion to fnEnsureSafety.fnEnforceDoseLimits;
+    flow from fnEnsureSafety.fnDetectAirInLine to fnInformUser.fnAnnunciateAlarm;
+    flow from fnEnsureSafety.fnEnforceDoseLimits to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
+    flow from fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered to fnInformUser.fnRenderStatus;
+    flow from fnManagePower.fnMonitorBattery to fnInformUser.fnAnnunciateAlarm;
+    flow from fnManagePower.fnSelectPowerSource to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
+    flow from fnEnsureSafety.fnDetectOcclusion to fnInformUser.fnAnnunciateAlarm;
+    satisfy reqDoseAccuracy by fnDeliverTherapy.fnControlDose.fnComputeRate;
+    satisfy reqDoseAccuracy by fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
+    satisfy reqOcclusionDetection by fnEnsureSafety.fnDetectOcclusion;
+    satisfy reqOcclusionDetection by fnEnsureSafety.fnEnforceDoseLimits;
+    satisfy reqAirInLine by fnEnsureSafety.fnDetectAirInLine;
+    satisfy reqAirInLine by fnInformUser.fnAnnunciateAlarm;
+    satisfy reqAlarmAnnunciation by fnInformUser.fnAnnunciateAlarm;
+    satisfy reqBatteryEndurance by fnManagePower.fnMonitorBattery;
+    satisfy reqBatteryEndurance by fnManagePower.fnSelectPowerSource;
+    satisfy reqPrescriptionConfirmation by fnInformUser.fnAcceptInput;
+    satisfy reqPrescriptionConfirmation by fnDeliverTherapy.fnControlDose.fnValidatePrescription;
 }
