@@ -46,7 +46,6 @@
 | [`CyberMitigation`](#cybermitigation) | `part def` | Cyber mitigation definition specializing `RiskControlMeasure`. | `RiskControlMeasure` |
 | [`SecurityRequirement`](#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. | `Requirement` |
 | [`TrustBoundary`](#trustboundary) | `part def` | Trust boundary definition specializing `InterfaceElement`. | `InterfaceElement` |
-| [`SecurityClaim`](#securityclaim) | `part def` | Security claim definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`Exploits`](#exploits) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 | [`RealizedByScenario`](#realizedbyscenario) | `connection def` | Typed relationship for realized by scenario. | `MemoRelationship` |
 | [`ImpactsSafety`](#impactssafety) | `connection def` | Typed relationship for impacts safety. | `MemoRelationship` |
@@ -186,21 +185,6 @@ part def TrustBoundary specializes InterfaceElement
 | Owning package | `memo_assurance_cybersecurity` |
 
 
-## SecurityClaim
-
-```sysml
-part def SecurityClaim specializes MemoEvidence
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Security claim definition specializing `MemoEvidence`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `MemoEvidence` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
 ## Exploits
 
 ```sysml
@@ -335,12 +319,6 @@ connection def ImpactsSafety :> MemoRelationship
             attribute boundaryType : String;
             attribute crossingConstraint : String;
             attribute trustAssumption : String;
-        }
-
-        part def SecurityClaim specializes MemoEvidence {
-            attribute claimText : String;
-            attribute claimScope : String;
-            attribute supportedByEvidence : String;
         }
 
         // ── Relations owned by this package ─────────────────────────────

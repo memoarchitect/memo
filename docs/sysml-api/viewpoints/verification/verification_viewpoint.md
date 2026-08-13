@@ -61,7 +61,7 @@
             attribute :>> includedLayers = ("requirements", "assurance");
             attribute :>> explorerLane = "assurance";
             attribute :>> explorerOrder = 5;
-            attribute :>> allowedElementKinds = ("Requirement", "VerificationCase", "ValidationCase", "Evidence", "TestArtifact");
+            attribute :>> allowedElementKinds = ("Requirement", "VerificationCase", "ValidationCase", "MemoEvidence");
             attribute :>> userExtensible = true;
         }
     }

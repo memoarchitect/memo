@@ -32,7 +32,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
     connection : InteractsWith connect contextParticipant ::> clinician to target ::> infusionSystem;
     connection : InteractsWith connect contextParticipant ::> patient to target ::> infusionSystem;
     connection : InteractsWith connect contextParticipant ::> biomedTech to target ::> infusionSystem;
-    connection : ExchangesWith connect source ::> infusionSystem to target ::> pharmacySystem;
+    flow from infusionSystem to pharmacySystem;
     connection : AppliesInContext connect useContext ::> homeContext to subjectElement ::> infusionSystem;
 
     view sampleContextView : MemoDiagramView {
@@ -44,7 +44,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
         attribute :>> diagramType = "context";
         part :>> viewpointDefinition = contextViewpoint;
         part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("InteractsWith", "ExchangesWith", "AppliesInContext");
+            attribute :>> includeRelationshipKinds = ("InteractsWith", "flow", "AppliesInContext");
         }
     }
 

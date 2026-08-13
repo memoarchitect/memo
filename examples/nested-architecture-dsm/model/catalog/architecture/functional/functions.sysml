@@ -161,18 +161,18 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
     // ── Functional exchange ──────────────────────────────────────
     // Cross-tree marks are the interesting ones: they are what a collapsed DSM
     // rolls up into a single number between two capabilities.
-    connection : ExchangesWith connect source ::> fnMeasureDelivered to target ::> fnComputeRate;
-    connection : ExchangesWith connect source ::> fnComputeRate to target ::> fnDriveActuator;
-    connection : ExchangesWith connect source ::> fnDriveActuator to target ::> fnMeasureDelivered;
-    connection : ExchangesWith connect source ::> fnValidatePrescription to target ::> fnComputeRate;
-    connection : ExchangesWith connect source ::> fnAcceptInput to target ::> fnValidatePrescription;
-    connection : ExchangesWith connect source ::> fnDetectOcclusion to target ::> fnEnforceDoseLimits;
-    connection : ExchangesWith connect source ::> fnDetectAirInLine to target ::> fnAnnunciateAlarm;
-    connection : ExchangesWith connect source ::> fnEnforceDoseLimits to target ::> fnDriveActuator;
-    connection : ExchangesWith connect source ::> fnMeasureDelivered to target ::> fnRenderStatus;
-    connection : ExchangesWith connect source ::> fnMonitorBattery to target ::> fnAnnunciateAlarm;
-    connection : ExchangesWith connect source ::> fnSelectPowerSource to target ::> fnDriveActuator;
-    connection : ExchangesWith connect source ::> fnDetectOcclusion to target ::> fnAnnunciateAlarm;
+    flow from fnMeasureDelivered to fnComputeRate;
+    flow from fnComputeRate to fnDriveActuator;
+    flow from fnDriveActuator to fnMeasureDelivered;
+    flow from fnValidatePrescription to fnComputeRate;
+    flow from fnAcceptInput to fnValidatePrescription;
+    flow from fnDetectOcclusion to fnEnforceDoseLimits;
+    flow from fnDetectAirInLine to fnAnnunciateAlarm;
+    flow from fnEnforceDoseLimits to fnDriveActuator;
+    flow from fnMeasureDelivered to fnRenderStatus;
+    flow from fnMonitorBattery to fnAnnunciateAlarm;
+    flow from fnSelectPowerSource to fnDriveActuator;
+    flow from fnDetectOcclusion to fnAnnunciateAlarm;
     satisfy reqDoseAccuracy by fnComputeRate;
     satisfy reqDoseAccuracy by fnDriveActuator;
     satisfy reqOcclusionDetection by fnDetectOcclusion;

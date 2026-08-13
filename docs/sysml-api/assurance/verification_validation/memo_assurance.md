@@ -38,8 +38,6 @@
 | --- | --- | --- | --- |
 | [`VerificationCase`](#verificationcase) | `verification def` | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. `status` is NOT redeclared here.… | `MemoVerificationCase` |
 | [`ValidationCase`](#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. | `MemoVerificationCase` |
-| [`TestArtifact`](#testartifact) | `part def` | Test artifact definition specializing `MemoEvidence`. | `MemoEvidence` |
-| [`Evidence`](#evidence) | `part def` | Evidence definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`ExecutesScenario`](#executesscenario) | `connection def` | Typed relationship for executes scenario. | `MemoRelationship` |
 
 ## VerificationCase
@@ -69,36 +67,6 @@ verification def ValidationCase :> MemoVerificationCase
 | Kind | `verification def` |
 | Abstract | No |
 | Specializes | `MemoVerificationCase` |
-| Owning package | `memo_assurance_verification_validation` |
-
-
-## TestArtifact
-
-```sysml
-part def TestArtifact specializes MemoEvidence
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Test artifact definition specializing `MemoEvidence`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `MemoEvidence` |
-| Owning package | `memo_assurance_verification_validation` |
-
-
-## Evidence
-
-```sysml
-part def Evidence specializes MemoEvidence
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Evidence definition specializing `MemoEvidence`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `MemoEvidence` |
 | Owning package | `memo_assurance_verification_validation` |
 
 
@@ -153,17 +121,6 @@ connection def ExecutesScenario :> MemoRelationship
             attribute acceptanceCriteria : String;
             attribute clinicalContext : String;
         }
-        part def TestArtifact specializes MemoEvidence {
-            attribute version : String;
-            attribute artifactKind : ArtifactKind;
-            attribute resultSummary : String;
-        }
-        part def Evidence specializes MemoEvidence {
-            attribute version : String;
-            attribute evidenceType : String;
-            attribute integrityStatus : String;
-        }
-
         // Operational validation confirms the user's goal is achieved in the
         // use environment (§5): ValidationCase validates a UseCase.
         // Safety-critical functions must trace to verification (rules/coverage).

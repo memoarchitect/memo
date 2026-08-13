@@ -49,11 +49,11 @@ package memo_examples_gpca_pump_gpca_trace {
 
     // ── Fig 2.1 context flows (CriSys §2.1) ─────────────────────
     // Data flows
-    connection : ExchangesWith connect source ::> entityPrescription to target ::> actorNurse;
-    connection : ExchangesWith connect source ::> actorNurse to target ::> entityGpcaPump;
-    connection : ExchangesWith connect source ::> entityGpcaPump to target ::> actorNurse;
-    connection : ExchangesWith connect source ::> actorPatient to target ::> entityGpcaPump;
-    connection : ExchangesWith connect source ::> entityPharmacyDb to target ::> entityGpcaPump;
+    flow from entityPrescription to actorNurse;
+    flow from actorNurse to entityGpcaPump;
+    flow from entityGpcaPump to actorNurse;
+    flow from actorPatient to entityGpcaPump;
+    flow from entityPharmacyDb to entityGpcaPump;
     // Physical connections (drug path)
     connection : ConnectsPhysically connect source ::> entityDrugReservoir to target ::> entityGpcaPump;
     connection : ConnectsPhysically connect source ::> entityGpcaPump to target ::> entityNeedle;
@@ -371,51 +371,47 @@ package memo_examples_gpca_pump_gpca_trace {
     allocate lfPrescriptionEntry to exPrescriptionEntry;
     // ── Fig 4.1 mode hierarchy (CriSys §4.1) ────────────────────
 
-    // ── GPCA_SW.Impl connection topology (AADL, 1:1; CE-101..142) ──
-    // Edges mirror the 42 GPCA_SW.Impl port connections; immediate
-    // semantics per connection are carried on the CE-1xx elements.
-    connection : ExchangesWith connect source ::> portOpCmdIn to target ::> tlm;
-    connection : ExchangesWith connect source ::> portConstIn to target ::> tlm;
-    connection : ExchangesWith connect source ::> tlm to target ::> outputBus;
-    connection : ExchangesWith connect source ::> infusionMgr to target ::> systemStatus;
-    connection : ExchangesWith connect source ::> tlm to target ::> systemStatus;
-    connection : ExchangesWith connect source ::> portSensorIn to target ::> systemStatus;
-    connection : ExchangesWith connect source ::> portConstIn to target ::> systemStatus;
-    connection : ExchangesWith connect source ::> config to target ::> systemStatus;
-    connection : ExchangesWith connect source ::> systemStatus to target ::> outputBus;
-    connection : ExchangesWith connect source ::> infusionMgr to target ::> alarm;
-    connection : ExchangesWith connect source ::> tlm to target ::> alarm;
-    connection : ExchangesWith connect source ::> systemMonitor to target ::> alarm;
-    connection : ExchangesWith connect source ::> portOpCmdIn to target ::> alarm;
-    connection : ExchangesWith connect source ::> portDbIn to target ::> alarm;
-    connection : ExchangesWith connect source ::> portSensorIn to target ::> alarm;
-    connection : ExchangesWith connect source ::> portConstIn to target ::> alarm;
-    connection : ExchangesWith connect source ::> systemStatus to target ::> alarm;
-    connection : ExchangesWith connect source ::> config to target ::> alarm;
-    connection : ExchangesWith connect source ::> alarm to target ::> outputBus;
-    connection : ExchangesWith connect source ::> tlm to target ::> config;
-    connection : ExchangesWith connect source ::> portPresIn to target ::> config;
-    connection : ExchangesWith connect source ::> portOpCmdIn to target ::> config;
-    connection : ExchangesWith connect source ::> portDbIn to target ::> config;
-    connection : ExchangesWith connect source ::> portConstIn to target ::> config;
-    connection : ExchangesWith connect source ::> systemStatus to target ::> config;
-    connection : ExchangesWith connect source ::> config to target ::> outputBus;
-    connection : ExchangesWith connect source ::> tlm to target ::> infusionMgr;
-    connection : ExchangesWith connect source ::> portOpCmdIn to target ::> infusionMgr;
-    connection : ExchangesWith connect source ::> portPatientIn to target ::> infusionMgr;
-    connection : ExchangesWith connect source ::> config to target ::> infusionMgr;
-    connection : ExchangesWith connect source ::> alarm to target ::> infusionMgr;
-    connection : ExchangesWith connect source ::> systemStatus to target ::> infusionMgr;
-    connection : ExchangesWith connect source ::> infusionMgr to target ::> outputBus;
-    connection : ExchangesWith connect source ::> tlm to target ::> systemMonitor;
-    connection : ExchangesWith connect source ::> systemMonitor to target ::> outputBus;
-    connection : ExchangesWith connect source ::> tlm to target ::> logging;
-    connection : ExchangesWith connect source ::> config to target ::> logging;
-    connection : ExchangesWith connect source ::> alarm to target ::> logging;
-    connection : ExchangesWith connect source ::> systemStatus to target ::> logging;
-    connection : ExchangesWith connect source ::> infusionMgr to target ::> logging;
-    connection : ExchangesWith connect source ::> logging to target ::> outputBus;
-    connection : ExchangesWith connect source ::> outputBus to target ::> portGpcaSwOut;
+    // ── GPCA_SW.Impl connection topology (AADL; CE-101..142) ─────
+    // The COMPONENT-granularity half of the 42 GPCA_SW.Impl port
+    // connections; immediate semantics per connection are carried on
+    // the CE-1xx elements.
+    //
+    // Only the 27 subcomponent-to-subcomponent edges live here. AADL's
+    // other 15 are DELEGATIONS between GPCA_SW's own boundary port and
+    // a subcomponent, and a delegation has no component-granularity
+    // spelling: writing it `portOpCmdIn -> tlm` mixes a port end with a
+    // component end, and SysML v2 rejects it because a boundary port
+    // reads as a sink from outside its part. All 15 are already
+    // recorded exactly, at port granularity, as `bind` statements in
+    // gpca_interfaces.sysml — so nothing is lost by not restating them
+    // here in a granularity that cannot express them.
+    flow from tlm to outputBus;
+    flow from infusionMgr to systemStatus;
+    flow from tlm to systemStatus;
+    flow from config to systemStatus;
+    flow from systemStatus to outputBus;
+    flow from infusionMgr to alarm;
+    flow from tlm to alarm;
+    flow from systemMonitor to alarm;
+    flow from systemStatus to alarm;
+    flow from config to alarm;
+    flow from alarm to outputBus;
+    flow from tlm to config;
+    flow from systemStatus to config;
+    flow from config to outputBus;
+    flow from tlm to infusionMgr;
+    flow from config to infusionMgr;
+    flow from alarm to infusionMgr;
+    flow from systemStatus to infusionMgr;
+    flow from infusionMgr to outputBus;
+    flow from tlm to systemMonitor;
+    flow from systemMonitor to outputBus;
+    flow from tlm to logging;
+    flow from config to logging;
+    flow from alarm to logging;
+    flow from systemStatus to logging;
+    flow from infusionMgr to logging;
+    flow from logging to outputBus;
 
     // ── GPCA_SW boundary features (AADL GPCA_SW.aadl; CITE-002) ──
     // The seven top-level ports are features of GPCA_Software, so
@@ -500,18 +496,18 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : Composes connect parent ::> gpcaActuators to child ::> actGpcaOut;
 
     // ── GPCA_Device.Impl connections (GPCA_Device.aadl, 1:1) ──
-    connection : ExchangesWith connect source ::> devOpCmdIn to target ::> snsOpCmdIn;
-    connection : ExchangesWith connect source ::> devDbIn to target ::> snsDbIn;
-    connection : ExchangesWith connect source ::> devPresIn to target ::> snsPresIn;
-    connection : ExchangesWith connect source ::> devPatientIn to target ::> snsPatientIn;
-    connection : ExchangesWith connect source ::> snsOpCmdOut to target ::> portOpCmdIn;
-    connection : ExchangesWith connect source ::> snsPresOut to target ::> portPresIn;
-    connection : ExchangesWith connect source ::> snsPatientOut to target ::> portPatientIn;
-    connection : ExchangesWith connect source ::> snsSensorOut to target ::> portSensorIn;
-    connection : ExchangesWith connect source ::> snsConstOut to target ::> portConstIn;
-    connection : ExchangesWith connect source ::> snsDbOut to target ::> portDbIn;
-    connection : ExchangesWith connect source ::> portGpcaSwOut to target ::> actGpcaSwIn;
-    connection : ExchangesWith connect source ::> actGpcaOut to target ::> devGpcaOut;
+    bind devOpCmdIn = snsOpCmdIn;
+    bind devDbIn = snsDbIn;
+    bind devPresIn = snsPresIn;
+    bind devPatientIn = snsPatientIn;
+    flow from snsOpCmdOut to portOpCmdIn;
+    flow from snsPresOut to portPresIn;
+    flow from snsPatientOut to portPatientIn;
+    flow from snsSensorOut to portSensorIn;
+    flow from snsConstOut to portConstIn;
+    flow from snsDbOut to portDbIn;
+    flow from portGpcaSwOut to actGpcaSwIn;
+    bind actGpcaOut = devGpcaOut;
 
     // ── Risk chains (ISO 14971, GIIP causal-tree structure) ─────
     // Categorized causes converge on each hazard (GIIP Tables 2-9

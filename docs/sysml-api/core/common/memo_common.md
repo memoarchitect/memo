@@ -37,6 +37,7 @@
 | [`VerifiableElement`](#verifiableelement) | `part def` | Verifiable element definition specializing `MemoPart`. | `MemoPart` |
 | [`ArchitectureElement`](#architectureelement) | `part def` | Architecture element definition specializing `MemoPart`. | `MemoPart` |
 | [`InterfaceElement`](#interfaceelement) | `part def` | Interface element definition specializing `MemoPart`. | `MemoPart` |
+| [`EvidenceKind`](#evidencekind) | `enum def` | Controlled values for evidence: `testArtifact`. | — |
 | [`MemoEvidence`](#memoevidence) | `part def` | Memo evidence definition specializing `MemoPart`. | `MemoPart` |
 | [`AnalysisArtifact`](#analysisartifact) | `part def` | Analysis artifact definition specializing `MemoPart`. | `MemoPart` |
 | [`DocumentedElement`](#documentedelement) | `part def` | Documented element definition specializing `MemoPart`. | `MemoPart` |
@@ -50,6 +51,7 @@
 | [`MemoNeed`](#memoneed) | `requirement def` | Memo need definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`MemoRequirement`](#memorequirement) | `requirement def` | Memo requirement definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`MemoVerificationCase`](#memoverificationcase) | `verification def` | Memo verification case definition. | — |
+| [`StateKind`](#statekind) | `enum def` | Controlled values for state: `mode`. | — |
 | [`MemoState`](#memostate) | `state def` | Memo state definition. | — |
 | [`Citation`](#citation) | `part def` | Citation definition specializing `MemoPart`. | `MemoPart` |
 
@@ -125,6 +127,21 @@ part def InterfaceElement specializes MemoPart
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
+| Owning package | `memo_core_common` |
+
+
+## EvidenceKind
+
+```sysml
+enum def EvidenceKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for evidence: `testArtifact`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
 | Owning package | `memo_core_common` |
 
 
@@ -323,17 +340,32 @@ verification def MemoVerificationCase
 | Owning package | `memo_core_common` |
 
 
+## StateKind
+
+```sysml
+enum def StateKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for state: `mode`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_common` |
+
+
 ## MemoState
 
 ```sysml
-abstract state def MemoState
+state def MemoState
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Memo state definition. |
 | Kind | `state def` |
-| Abstract | Yes |
+| Abstract | No |
 | Specializes | — |
 | Owning package | `memo_core_common` |
 
@@ -440,7 +472,28 @@ part def Citation specializes MemoPart
         abstract part def VerifiableElement specializes MemoPart;
         abstract part def ArchitectureElement specializes MemoPart;
         part def InterfaceElement specializes MemoPart;
-        part def MemoEvidence specializes MemoPart;
+        enum def EvidenceKind { enum testArtifact; enum evidence; enum formativeEvaluation; enum usabilityValidation; enum securityClaim; }
+        part def MemoEvidence specializes MemoPart {
+            attribute evidenceKind : EvidenceKind;
+            attribute version : String;
+            attribute artifactKind : ArtifactKind[0..1];
+            attribute resultSummary : String;
+            attribute evidenceType : String;
+            attribute integrityStatus : String;
+            // Promoted from the retired `UsabilityValidation` and
+            // `FormativeEvaluation` specializations. The collapse in `02083c5`
+            // deleted both subclasses without carrying their fields up, so an
+            // IEC 62366-1 evaluation record lost what it actually reports.
+            // Promoted on the standard's terms, not on in-tree usage: MEMO is a
+            // library, so what its own examples happen to set says nothing about
+            // what an adopter's usability file needs.
+            attribute participantProfile : String;
+            attribute participantCount : Integer;
+            attribute acceptanceCriteria : String;
+            attribute evaluationMethod : String;
+            attribute findingsSummary : String;
+            attribute designChangesTriggered : String;
+        }
         abstract part def AnalysisArtifact specializes MemoPart;
 
         // Document-bound elements add only what a document needs beyond the two
@@ -506,6 +559,19 @@ part def Citation specializes MemoPart
             attribute rationale : String;
             attribute sourceReference : String;
             attribute status : ElementStatusKind;
+            // What the item CARRIES, as distinct from what it is called. Removed
+            // by `595bfac` while modelling native wrappers; nothing replaced them,
+            // and every exchange item in the examples went on setting them. A
+            // measured value without its unit, its range, or its terminology code
+            // is not a regulated data item — an IVD result is "5.5 mg/dL, LOINC
+            // 2345-7", not "5.5".
+            attribute semantics : String;
+            attribute unit : String;
+            attribute minValue : String;
+            attribute maxValue : String;
+            attribute encoding : String;
+            attribute timestampRequired : Boolean;
+            attribute codes : TerminologyCode[0..*];
         }
 
         // Use-case foundation. The domain UseCase adds its goal and actor
@@ -582,7 +648,10 @@ part def Citation specializes MemoPart
         // re-declare the identification core instead of specializing MemoPart
         // Transitions stay part-based to keep their traceable safety
         // attributes (id, sourceReference, priority, sameStepCritical).
-        abstract state def MemoState {
+        enum def StateKind { enum mode; enum logical; }
+
+        state def MemoState {
+            attribute stateKind : StateKind;
             attribute id : String;
             attribute uuid : String;
             attribute name : String;
@@ -591,6 +660,10 @@ part def Citation specializes MemoPart
             attribute rationale : String;
             attribute sourceReference : String;
             attribute status : ElementStatusKind;
+            attribute modeKind : String;
+            attribute entryCondition : String;
+            attribute exitCondition : String;
+            attribute modePurpose : String;
         }
 
         part def Citation specializes MemoPart {
