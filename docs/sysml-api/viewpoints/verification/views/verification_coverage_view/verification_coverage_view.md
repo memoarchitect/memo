@@ -62,7 +62,7 @@
         part :>> selectionQuery {
             attribute :>> id = "QRY-VER-001";
             attribute :>> name = "VerificationCoverageQuery";
-            attribute :>> includeElementKinds = ("Requirement", "VerificationCase", "ValidationCase", "Evidence");
+            attribute :>> includeElementKinds = ("Requirement", "VerificationCase", "ValidationCase", "MemoEvidence");
             attribute :>> includeLayers = ("requirements", "assurance");
             attribute :>> rationaleText = "Auto-populate V&V coverage from the requirements and assurance layers.";
         }

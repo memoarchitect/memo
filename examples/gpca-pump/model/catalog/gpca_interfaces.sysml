@@ -1192,9 +1192,18 @@ package memo_examples_gpca_pump_gpca_interfaces {
     // productions did.
     //
     // The ends are the PORTS, not the components — the port-level topology the
-    // *PortPath strings used to approximate. `ExchangesWith` keeps the
-    // component-level dependency it always carried; AADL distinguishes the two
-    // granularities and so does this.
+    // *PortPath strings used to approximate. gpca_trace.sysml keeps the
+    // component-level dependencies; AADL distinguishes the two granularities
+    // and so does this.
+    //
+    // Two spellings, because AADL's two connection kinds are two different
+    // things. A `flow` transports an item between components and runs `out` to
+    // `in`. A `bind` is a DELEGATION between a boundary port and the interior
+    // it stands for: `in` to `in`, or `out` to `out`, because nothing travels —
+    // the two features are the same feature. SysML v2 keeps them apart the same
+    // way (training ch. 13 and ch. 12), and the 15 delegations recorded below
+    // are the ones gpca_trace.sysml therefore cannot restate at component
+    // granularity.
     flow of InterfaceItem from gpcaDeviceSensors to portSensorIn;
     flow of InterfaceItem from portGpcaSwOut to pumpMotorAssembly;
     flow of InterfaceItem from portGpcaSwOut to audibleAlarm;

@@ -25,7 +25,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_device_intercon
         attribute :>> presentationKind = (PresentationKind::internalDiagram);
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
-        attribute :>> dataSourceDescription = "GPCA hardware assemblies, software system, software components, boundary ports, and the ExchangesWith/Composes topology";
+        attribute :>> dataSourceDescription = "GPCA hardware assemblies, software system, software components, boundary ports, and the flow/bind/Composes topology";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include hardware assemblies, the software system with its components and boundary ports, and the exchange topology between them.";
         attribute :>> documentUsage = ("SDD", "Architecture Description", "QMSR");
@@ -33,7 +33,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_device_intercon
             attribute :>> id = "QRY-LOG-003";
             attribute :>> name = "GPCA_DeviceInterconnectQuery";
             attribute :>> includeElementIds = ("gpcaDevice", "gpcaDeviceSensors", "gpcaSoftware", "gpcaActuators", "devOpCmdIn", "devDbIn", "devPresIn", "devPatientIn", "devGpcaOut", "snsOpCmdIn", "snsDbIn", "snsPresIn", "snsPatientIn", "snsOpCmdOut", "snsPresOut", "snsPatientOut", "snsSensorOut", "snsConstOut", "snsDbOut", "portOpCmdIn", "portPresIn", "portPatientIn", "portSensorIn", "portConstIn", "portDbIn", "portGpcaSwOut", "actGpcaSwIn", "actGpcaOut", "tlm", "systemStatus", "alarm", "config", "infusionMgr", "systemMonitor", "logging", "outputBus");
-            attribute :>> includeRelationshipKinds = ("ExchangesWith", "Composes");
+            attribute :>> includeRelationshipKinds = ("flow", "bind", "Composes");
             attribute :>> includeLayers = ("logical_structure", "software_structure", "interfaces");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Render the device interconnect: parts with boundary ports as nodes, AADL connections as typed connectors, composition as nesting.";

@@ -27,13 +27,13 @@ package memo_examples_gpca_pump_viewpoints_software_views_software_software_arch
         attribute :>> diagramType = "ibd";
         attribute :>> dataSourceDescription = "GPCA software structure, top-level ports, and the GPCA_SW.Impl connection set (CE-101..CE-142)";
         attribute :>> autoPopulate = true;
-        attribute :>> queryDescription = "Include the software system, its eight components, its boundary ports, and the ExchangesWith topology between them.";
+        attribute :>> queryDescription = "Include the software system, its eight components, its boundary ports, and the flow and delegation topology between them.";
         attribute :>> documentUsage = ("SDD", "QMSR");
         part :>> selectionQuery {
             attribute :>> id = "QRY-SW-101";
             attribute :>> name = "GPCA_SoftwareArchitectureQuery";
             attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "SoftwarePort");
-            attribute :>> includeRelationshipKinds = ("ExchangesWith", "Composes");
+            attribute :>> includeRelationshipKinds = ("flow", "bind", "Composes");
             attribute :>> includeLayers = ("software_structure", "interfaces");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Render the real GPCA_SW.Impl topology: components and boundary ports as nodes, AADL connections as edges.";

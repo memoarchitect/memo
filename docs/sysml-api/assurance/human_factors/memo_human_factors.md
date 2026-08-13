@@ -36,8 +36,6 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`UseError`](#useerror) | `part def` | Use error definition specializing `MemoPart`. | `MemoPart` |
-| [`FormativeEvaluation`](#formativeevaluation) | `part def` | Formative evaluation definition specializing `MemoEvidence`. | `MemoEvidence` |
-| [`UsabilityValidation`](#usabilityvalidation) | `part def` | Usability validation definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`CommitsUseError`](#commitsuseerror) | `connection def` | Typed relationship for commits use error. | `MemoRelationship` |
 | [`EvaluatesTask`](#evaluatestask) | `connection def` | Typed relationship for evaluates task. | `MemoRelationship` |
 | [`TestedByUsability`](#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
@@ -54,36 +52,6 @@ part def UseError specializes MemoPart
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
-| Owning package | `memo_assurance_human_factors` |
-
-
-## FormativeEvaluation
-
-```sysml
-part def FormativeEvaluation specializes MemoEvidence
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Formative evaluation definition specializing `MemoEvidence`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `MemoEvidence` |
-| Owning package | `memo_assurance_human_factors` |
-
-
-## UsabilityValidation
-
-```sysml
-part def UsabilityValidation specializes MemoEvidence
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Usability validation definition specializing `MemoEvidence`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `MemoEvidence` |
 | Owning package | `memo_assurance_human_factors` |
 
 
@@ -159,19 +127,6 @@ connection def TestedByUsability :> MemoRelationship
             attribute rootCauseType : String;
         }
 
-        part def FormativeEvaluation specializes MemoEvidence {
-            attribute evaluationMethod : String;
-            attribute findingsSummary : String;
-            attribute designChangesTriggered : String;
-        }
-
-        part def UsabilityValidation specializes MemoEvidence {
-            attribute participantProfile : String;
-            attribute participantCount : Integer;
-            attribute acceptanceCriteria : String;
-            attribute resultSummary : String;
-        }
-
         connection def CommitsUseError :> MemoRelationship {
             end task : UserTask :>> source;
             end useError : UseError :>> target;
@@ -198,7 +153,7 @@ connection def TestedByUsability :> MemoRelationship
         // types declared here, and core must not depend on a domain package.
         connection def TestedByUsability :> MemoRelationship {
             end uiElementOrTask : MemoPart :>> source;
-            end usabilityTest : UsabilityValidation :>> target;
+            end usabilityTest : MemoEvidence :>> target;
         }
         abstract connection testedByUsabilityLinks : TestedByUsability[*];
         metadata def <testedByUsability> TestedByUsabilityMetadata :> SemanticMetadata {

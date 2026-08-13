@@ -38,7 +38,6 @@
 | [`UseEnvironment`](#useenvironment) | `part def` | The physical/organizational environment of use (IEC 62366-1 3.20), separable from the care-setting context so environments are reusable. | `MemoPart` |
 | [`InteractsInContext`](#interactsincontext) | `connection def` | Typed relationship for interacts in context. | `MemoRelationship` |
 | [`InteractsWith`](#interactswith) | `connection def` | Typed relationship for interacts with. | `MemoRelationship` |
-| [`ExchangesWith`](#exchangeswith) | `connection def` | Directional context-level data flow between boundary entities. | `MemoRelationship` |
 | [`ConnectsPhysically`](#connectsphysically) | `connection def` | Physical connection between boundary entities (fluid path, mounting). | `MemoRelationship` |
 | [`AppliesInContext`](#appliesincontext) | `connection def` | Typed relationship for applies in context. | `MemoRelationship` |
 | [`SituatedIn`](#situatedin) | `connection def` | Typed relationship for situated in. | `MemoRelationship` |
@@ -103,21 +102,6 @@ connection def InteractsWith :> MemoRelationship
 | Owning package | `memo_architecture_operational_context_use_context` |
 
 
-## ExchangesWith
-
-```sysml
-connection def ExchangesWith :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Directional context-level data flow between boundary entities. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_context_use_context` |
-
-
 ## ConnectsPhysically
 
 ```sysml
@@ -171,6 +155,14 @@ connection def SituatedIn :> MemoRelationship
     // Operational use context (IEC 62366-1 use specification). Intended use and
     // reasonably foreseeable misuse are assurance requirements/risk inputs and
     // live in memo_assurance_requirements.
+    //
+    // This package once defined `ExchangesWith` for directional context-level data
+    // flow between boundary entities. It is deleted: SysML v2's own `flow` covers
+    // every case and is strictly stronger, because `of <ItemDef>` says WHAT moves
+    // and two untyped connection ends cannot. Delegation between a boundary port
+    // and the interior it stands for is `bind` — identity, not transport. SysML v2
+    // keeps the two apart the same way: training ch. 13 wires components with
+    // `flow`, ch. 12 delegates across a boundary with `bind`.
     package memo_architecture_operational_context_use_context {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
@@ -239,17 +231,6 @@ connection def SituatedIn :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = interactsWithLinks meta SysML::Usage;
-        }
-        // Directional context-level data flow between boundary entities.
-        connection def ExchangesWith :> MemoRelationship {
-            end source : ArchitectureElement;
-            end target : ArchitectureElement;
-        }
-        abstract connection exchangesWithLinks : ExchangesWith[*];
-        metadata def <exchangesWith> ExchangesWithMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = exchangesWithLinks meta SysML::Usage;
         }
         // Physical connection between boundary entities (fluid path, mounting).
         connection def ConnectsPhysically :> MemoRelationship {

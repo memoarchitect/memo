@@ -11,53 +11,67 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     private import memo_viewpoints_logical_logical_viewpoint::*;
     private import memo_core_enumerations::*;
 
-    part coffeeMachine : LogicalComponent { attribute :>> name = "Coffee Machine"; }
-    part waterSupply : LogicalComponent { attribute :>> name = "Water Supply"; }
-    part waterTank : LogicalComponent { attribute :>> name = "Water Reservoir"; }
-    part heaterAssembly : LogicalComponent { attribute :>> name = "Thermal Control Assembly"; }
-    part heatingElement : LogicalComponent { attribute :>> name = "Water Heating Element"; }
-    part brewGroup : LogicalComponent { attribute :>> name = "Brew Group"; }
-    part cup : LogicalComponent { attribute :>> name = "Cup"; }
-
-    in port mainsWaterIn : DataPort { in item payload : MemoItem; }
-    out port beverageOut : DataPort { out item payload : MemoItem; }
-    out port supplyWaterOut : DataPort { out item payload : MemoItem; }
-    in port cupBeverageIn : DataPort { in item payload : MemoItem; }
-    inout port serviceInterface : DataPort { inout item payload : MemoItem; }
-    out port diagnostics : DataPort { out item payload : MemoItem; }
-    out port tankWaterOut : DataPort { out item payload : MemoItem; }
-    in port tankWaterIn : DataPort { in item payload : MemoItem; }
-    in port heaterWaterIn : DataPort { in item payload : MemoItem; }
-    out port heatedWaterOut : DataPort { out item payload : MemoItem; }
-    in port brewWaterIn : DataPort { in item payload : MemoItem; }
-    out port brewedCoffeeOut : DataPort { out item payload : MemoItem; }
-    out port heaterStatusOut : DataPort { out item payload : MemoItem; }
+    // Ports are owned by the part whose boundary they are, which is what lets
+    // a delegation be written at all: SysML v2 checks a flow's source for
+    // `out`-ness relative to the owner, so a boundary port only reads as a
+    // source from INSIDE its part. Declaring ports beside their parts and
+    // linking them with `Composes` also made a port the whole of a
+    // decomposition, which CR-ONT-065 forbids.
+    part coffeeMachine : LogicalComponent {
+        attribute :>> name = "Coffee Machine";
+        in port mainsWaterIn : DataPort { in item payload : MemoItem; }
+        out port beverageOut : DataPort { out item payload : MemoItem; }
+        inout port serviceInterface : DataPort {
+            inout item payload : MemoItem;
+            out port diagnostics : DataPort { out item payload : MemoItem; }
+        }
+    }
+    part waterSupply : LogicalComponent {
+        attribute :>> name = "Water Supply";
+        out port supplyWaterOut : DataPort { out item payload : MemoItem; }
+    }
+    part waterTank : LogicalComponent {
+        attribute :>> name = "Water Reservoir";
+        out port tankWaterOut : DataPort { out item payload : MemoItem; }
+        in port tankWaterIn : DataPort { in item payload : MemoItem; }
+    }
+    part heaterAssembly : LogicalComponent {
+        attribute :>> name = "Thermal Control Assembly";
+        in port heaterWaterIn : DataPort { in item payload : MemoItem; }
+        out port heatedWaterOut : DataPort { out item payload : MemoItem; }
+    }
+    part heatingElement : LogicalComponent {
+        attribute :>> name = "Water Heating Element";
+        out port heaterStatusOut : DataPort { out item payload : MemoItem; }
+    }
+    part brewGroup : LogicalComponent {
+        attribute :>> name = "Brew Group";
+        in port brewWaterIn : DataPort { in item payload : MemoItem; }
+        out port brewedCoffeeOut : DataPort { out item payload : MemoItem; }
+    }
+    part cup : LogicalComponent {
+        attribute :>> name = "Cup";
+        in port cupBeverageIn : DataPort { in item payload : MemoItem; }
+    }
 
     connection : Composes connect parent ::> coffeeMachine to child ::> waterTank;
     connection : Composes connect parent ::> coffeeMachine to child ::> heaterAssembly;
     connection : Composes connect parent ::> coffeeMachine to child ::> brewGroup;
-    connection : Composes connect parent ::> coffeeMachine to child ::> mainsWaterIn;
-    connection : Composes connect parent ::> coffeeMachine to child ::> beverageOut;
-    connection : Composes connect parent ::> coffeeMachine to child ::> serviceInterface;
-    connection : Composes connect parent ::> serviceInterface to child ::> diagnostics;
-    connection : Composes connect parent ::> waterTank to child ::> tankWaterOut;
-    connection : Composes connect parent ::> waterTank to child ::> tankWaterIn;
     connection : Composes connect parent ::> heaterAssembly to child ::> heatingElement;
-    connection : Composes connect parent ::> heaterAssembly to child ::> heaterWaterIn;
-    connection : Composes connect parent ::> heaterAssembly to child ::> heatedWaterOut;
-    connection : Composes connect parent ::> brewGroup to child ::> brewWaterIn;
-    connection : Composes connect parent ::> brewGroup to child ::> brewedCoffeeOut;
-    connection : Composes connect parent ::> heatingElement to child ::> heaterStatusOut;
-    connection : Composes connect parent ::> waterSupply to child ::> supplyWaterOut;
-    connection : Composes connect parent ::> cup to child ::> cupBeverageIn;
 
-    connection : ExchangesWith connect source ::> supplyWaterOut to target ::> mainsWaterIn;
-    connection : ExchangesWith connect source ::> mainsWaterIn to target ::> tankWaterIn;
-    connection : ExchangesWith connect source ::> tankWaterOut to target ::> heaterWaterIn;
-    connection : ExchangesWith connect source ::> heatedWaterOut to target ::> brewWaterIn;
-    connection : ExchangesWith connect source ::> brewedCoffeeOut to target ::> beverageOut;
-    connection : ExchangesWith connect source ::> beverageOut to target ::> cupBeverageIn;
-    connection : ExchangesWith connect source ::> heaterStatusOut to target ::> diagnostics;
+    // Transport between two components: `out` to `in`, one item moving.
+    flow from waterSupply.supplyWaterOut to coffeeMachine.mainsWaterIn;
+    flow from waterTank.tankWaterOut to heaterAssembly.heaterWaterIn;
+    flow from heaterAssembly.heatedWaterOut to brewGroup.brewWaterIn;
+    flow from coffeeMachine.beverageOut to cup.cupBeverageIn;
+
+    // Delegation between a boundary port and the interior it stands for. These
+    // are `in`-to-`in` and `out`-to-`out`, because nothing travels: the two
+    // features are the same feature. SysML v2 spells that `bind` (training
+    // ch. 12), not `flow` (ch. 13).
+    bind coffeeMachine.mainsWaterIn = waterTank.tankWaterIn;
+    bind brewGroup.brewedCoffeeOut = coffeeMachine.beverageOut;
+    bind heatingElement.heaterStatusOut = coffeeMachine.serviceInterface.diagnostics;
 
     view sampleInterconnectionView : MemoDiagramView {
         expose coffeeMachine::**;
@@ -70,7 +84,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
         attribute :>> diagramType = "ibd";
         part :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("Composes", "ExchangesWith");
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }
     }
 
@@ -81,17 +95,17 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     connection : IncludedIn connect sourceElement ::> heatingElement to targetView ::> sampleInterconnectionView;
     connection : IncludedIn connect sourceElement ::> brewGroup to targetView ::> sampleInterconnectionView;
     connection : IncludedIn connect sourceElement ::> cup to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> mainsWaterIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> beverageOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> supplyWaterOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> cupBeverageIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> serviceInterface to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> diagnostics to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> tankWaterOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> tankWaterIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> heaterWaterIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> heatedWaterOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> brewWaterIn to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> brewedCoffeeOut to targetView ::> sampleInterconnectionView;
-    connection : IncludedIn connect sourceElement ::> heaterStatusOut to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> coffeeMachine.mainsWaterIn to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> coffeeMachine.beverageOut to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> waterSupply.supplyWaterOut to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> cup.cupBeverageIn to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> coffeeMachine.serviceInterface to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> coffeeMachine.serviceInterface.diagnostics to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> waterTank.tankWaterOut to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> waterTank.tankWaterIn to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> heaterAssembly.heaterWaterIn to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> heaterAssembly.heatedWaterOut to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> brewGroup.brewWaterIn to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> brewGroup.brewedCoffeeOut to targetView ::> sampleInterconnectionView;
+    connection : IncludedIn connect sourceElement ::> heatingElement.heaterStatusOut to targetView ::> sampleInterconnectionView;
 }

@@ -171,14 +171,14 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
 
     // ── Component-to-component dependency ────────────────────────
     // What the DSM plots when both axes are architecture: who needs whom.
-    connection : ExchangesWith connect source ::> lcOcclusionChannel to target ::> lcDoseController;
-    connection : ExchangesWith connect source ::> lcDoseController to target ::> lcPumpMechanism;
-    connection : ExchangesWith connect source ::> lcPumpMechanism to target ::> lcTherapyStateStore;
-    connection : ExchangesWith connect source ::> lcTherapyStateStore to target ::> lcDisplayManager;
-    connection : ExchangesWith connect source ::> lcWatchdogChannel to target ::> lcDoseController;
-    connection : ExchangesWith connect source ::> lcPressureIntegrityChannel to target ::> lcAlarmAnnunciator;
-    connection : ExchangesWith connect source ::> lcKeypadHandler to target ::> lcDoseController;
-    connection : ExchangesWith connect source ::> lcReservoirInterface to target ::> lcPumpMechanism;
-    connection : ExchangesWith connect source ::> lcBatteryManager to target ::> lcPowerRailMonitor;
-    connection : ExchangesWith connect source ::> lcPowerRailMonitor to target ::> lcAlarmAnnunciator;
+    flow from lcOcclusionChannel to lcDoseController;
+    flow from lcDoseController to lcPumpMechanism;
+    flow from lcPumpMechanism to lcTherapyStateStore;
+    flow from lcTherapyStateStore to lcDisplayManager;
+    flow from lcWatchdogChannel to lcDoseController;
+    flow from lcPressureIntegrityChannel to lcAlarmAnnunciator;
+    flow from lcKeypadHandler to lcDoseController;
+    flow from lcReservoirInterface to lcPumpMechanism;
+    flow from lcBatteryManager to lcPowerRailMonitor;
+    flow from lcPowerRailMonitor to lcAlarmAnnunciator;
 }

@@ -61,7 +61,7 @@
             attribute :>> includedLayers = ("context", "assurance");
             attribute :>> explorerLane = "assurance";
             attribute :>> explorerOrder = 4;
-            attribute :>> allowedElementKinds = ("Actor", "UseContext", "Evidence");
+            attribute :>> allowedElementKinds = ("Actor", "UseContext", "MemoEvidence");
             attribute :>> userExtensible = true;
         }
     }
