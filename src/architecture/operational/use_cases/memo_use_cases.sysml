@@ -68,18 +68,10 @@ package memo_architecture_operational_use_cases {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = participatesInLinks meta SysML::Usage;
     }
-    // UML use-case relationships. Includes establishes a decomposition level;
-    // extends remains a cross-cutting relationship and is always presented.
-    connection def Includes :> MemoRelationship {
-        end includingUseCase : UseCase :>> source;
-        end includedUseCase : UseCase :>> target;
-    }
-    abstract connection includesLinks : Includes[*];
-    metadata def <includes> IncludesMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = includesLinks meta SysML::Usage;
-    }
+    // UML use-case decomposition (`Includes`) is native `include use case` /
+    // `include` (R10-S6); write that instead of a connection here. `extends`
+    // has 0 hits in the corpus for a use-case `extend` production, so it stays
+    // a MEMO construct: a cross-cutting relationship that is always presented.
     connection def Extends :> MemoRelationship {
         end extendingUseCase : UseCase :>> source;
         end extendedUseCase : UseCase :>> target;
