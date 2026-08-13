@@ -6,8 +6,7 @@
 [Source layout](../index.md#source-layout)
 
 Artifacts classifies model-backed outputs. It defines what kind of artifact an
-output is; [Compliance](compliance.md) defines controlled records and their
-lifecycle.
+output is, and the controlled records and their lifecycle.
 
 ![Artifact ontology elements](../../assets/reference/artifacts-elements.svg){ .memo-presentation-graphic }
 
