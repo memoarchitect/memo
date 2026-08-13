@@ -124,15 +124,8 @@ package memo_architecture_functional_functions {
         ref item exchangedItem : MemoItem[0..1];
     }
 
-    connection def InvolvesFunction :> MemoRelationship {
-        end functionalFlow : FunctionalFlow :>> source;
-        end function : MemoFunction :>> target;
-    }
-    abstract connection involvesFunctionLinks : InvolvesFunction[*];
-    metadata def <involvesFunction> InvolvesFunctionMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = involvesFunctionLinks meta SysML::Usage;
-    }
-    // Compatibility spelling used by existing models.
+    // `InvolvesFunction` is native `perform` (R10-S6): a `FunctionalFlow`
+    // already names its functions via its step chain
+    // (`perform <step>;` + the step's own `ref function`), and a flow with no
+    // step chain performs its functions directly.
 }

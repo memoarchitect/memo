@@ -50,17 +50,11 @@ package memo_examples_ui_screen_regions_traces {
 
     connection : Composes connect parent ::> fnManageInfusionDisplay to child ::> fnPresentBatteryStatus;
 
-    connection : ActionInvokesFunction connect uiAction ::> uiaEditRate to systemFunction ::> fnSetInfusionRate;
-
     connection : ElementTriggersAction connect element ::> elDrugSelectorRegion to triggeredAction ::> uiaSelectDrug;
 
     connection : ElementTriggersAction connect element ::> elDrugSelectorClosed to triggeredAction ::> uiaSelectDrug;
 
     connection : ElementTriggersAction connect element ::> elDrugMenuExpanded to triggeredAction ::> uiaSelectDrug;
-
-    connection : ActionInvokesFunction connect uiAction ::> uiaSelectDrug to systemFunction ::> fnValidateDrugSelection;
-
-    connection : ActionInvokesFunction connect uiAction ::> uiaOpenSettings to systemFunction ::> fnManageInfusionDisplay;
 
     connection : DerivesFrom connect sourceDriver ::> needReadableProgramming to targetRequirement ::> reqRateLegibility;
 

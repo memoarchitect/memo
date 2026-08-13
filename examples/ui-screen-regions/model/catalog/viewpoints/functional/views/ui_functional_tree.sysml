@@ -53,7 +53,7 @@ package memo_examples_ui_screen_regions_viewpoints_functional_views_ui_functiona
             attribute :>> id = "QRY-102";
             attribute :>> name = "UIFunctionalTreeQuery";
             attribute :>> includeElementKinds = ("SystemFunction", "UIAction", "UIElement", "UserInterface");
-            attribute :>> includeRelationshipKinds = ("Composes", "ElementTriggersAction", "ActionInvokesFunction", "AllocatedTo");
+            attribute :>> includeRelationshipKinds = ("Composes", "ElementTriggersAction", "Performs", "AllocatedTo");
             attribute :>> includeLayers = ("functions", "implementation");
             attribute :>> rationaleText = "Show function decomposition from interaction to allocated user interface.";
         }
