@@ -78,17 +78,9 @@ package memo_architecture_operational_context_use_context {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = interactsWithLinks meta SysML::Usage;
     }
-    // Physical connection between boundary entities (fluid path, mounting).
-    connection def ConnectsPhysically :> MemoRelationship {
-        end source : ArchitectureElement;
-        end target : ArchitectureElement;
-    }
-    abstract connection connectsPhysicallyLinks : ConnectsPhysically[*];
-    metadata def <connectsPhysically> ConnectsPhysicallyMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = connectsPhysicallyLinks meta SysML::Usage;
-    }
+    // `ConnectsPhysically` is native `connect` (R10-S6): write
+    // `connection connect source ::> <a> to target ::> <b>;` — the ordinary
+    // untyped binary connection — instead of a connection def for it.
     connection def AppliesInContext :> MemoRelationship {
         end useContext : UseContext :>> source;
         end subjectElement : MemoPart :>> target;
