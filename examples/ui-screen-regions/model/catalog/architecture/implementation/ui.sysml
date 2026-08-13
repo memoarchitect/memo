@@ -4,6 +4,7 @@
 package memo_examples_ui_screen_regions_architecture_implementation_ui {
     private import memo_examples_ui_screen_regions_assurance_requirements::*;
     private import ScalarValues::*;
+    private import memo_examples_ui_screen_regions_architecture_functional_functions::*;
 
     private import memo_core_relationships::*;
     private import memo_core_annotations::*;
@@ -160,18 +161,21 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
         attribute :>> intent = InteractionIntentKind::userInput;
         attribute :>> confirmationRequired = true;
         attribute :>> feedbackProvided = "new rate echoed on a confirmation dialog before it is applied";
+        perform fnSetInfusionRate;
     }
 
     action uiaOpenSettings : UIAction {
         attribute :>> id = "UIR-UIA-002"; attribute :>> name = "OpenInfusionSettings";
         attribute :>> intent = InteractionIntentKind::navigation;
         attribute :>> confirmationRequired = false;
+        perform fnManageInfusionDisplay;
     }
 
     action uiaSelectDrug : UIAction {
         attribute :>> id = "UIR-UIA-003"; attribute :>> name = "SelectDrug";
         attribute :>> intent = InteractionIntentKind::userInput;
         attribute :>> confirmationRequired = true;
+        perform fnValidateDrugSelection;
     }
 
     part uiElement12 : UIElement {

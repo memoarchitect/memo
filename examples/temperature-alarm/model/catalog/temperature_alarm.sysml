@@ -86,9 +86,9 @@ package memo_examples_temperature_alarm {
         attribute :>> id = "TA-UIA-001"; attribute :>> name = "AcknowledgeAlarm";
         attribute :>> intent = InteractionIntentKind::acknowledgement;
         attribute :>> confirmationRequired = true;
+        perform fnDetectDeviation;
     }
     connection : ElementTriggersAction connect element ::> elAlarmBanner to triggeredAction ::> uiaAcknowledge;
-    connection : ActionInvokesFunction connect uiAction ::> uiaAcknowledge to systemFunction ::> fnDetectDeviation;
     connection : Supports { attribute :>> supportKind = SupportKind::task; connect supporter ::> uiBedside to supported ::> taskAckAlarm; }
 
     // ── Risk chain with use error ───────────────────────────────

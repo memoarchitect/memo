@@ -100,6 +100,8 @@ package memo_examples_gpca_pump_gpca_system {
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         attribute :>> description = "Power-on through CPU/memory/sensor self test to IDLE with status display; failed POST blocks therapy.";
+        perform fnSelfTest;
+        perform fnPresentStatus;
     }
 
     // ── System scenarios ────────────────────────────────────────
