@@ -1,6 +1,7 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view {
     private import ScalarValues::*;
     private import memo_core_relationships::*;
+    private import ModelingMetadata::*;
 
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_logical_interfaces::*;
@@ -72,8 +73,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
     // because a value must be a feature and a definition is not.
     connection linkLaneBProcessesInput : MemoLink
         connect linkSource ::> laneB to linkTarget ::> sampleActionFlow.process {
-        attribute :>> rationale =
-            "Lane B is the swimlane that carries the ProcessInput behaviour. The association crosses the part/action metaclass boundary, so no typed relation can express it.";
+        @Rationale {
+            :>> text =
+                "Lane B is the swimlane that carries the ProcessInput behaviour. The association crosses the part/action metaclass boundary, so no typed relation can express it.";
+        }
     }
 
     view sampleActionFlowView : MemoDiagramView {
