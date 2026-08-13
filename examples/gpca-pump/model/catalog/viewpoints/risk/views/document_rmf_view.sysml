@@ -4,9 +4,11 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
     private import memo_viewpoints_definitions::*;
     private import memo_viewpoints_risk_risk_viewpoint::*;
     private import memo_core_enumerations::*;
+    private import memo_examples_gpca_pump_gpca_verification::*;
 
     view rmfView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view::*;
+        expose evidenceLockout;
         attribute :>> id = "DOC-001";
         attribute :>> name = "RiskManagementFileView";
         attribute :>> title = "GPCA Risk Management File View";
@@ -24,7 +26,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
             attribute :>> id = "QRY-DOC-001";
             attribute :>> name = "rmfViewQuery";
             attribute :>> includeElementKinds = ("IntendedUse", "ReasonablyForeseeableMisuse", "SafetyRelatedCharacteristic", "Hazard", "HazardCause", "SequenceOfEvents", "HazardousSituation", "Harm", "Risk", "RiskControlMeasure", "ResidualRisk", "Benefit", "OverallResidualRiskEvaluation", "VerificationCase", "MemoEvidence");
-            attribute :>> includeRelationshipKinds = ("Causes", "Mitigates", "Mitigates", "TracesRisk", "AssessedAgainst", "VerifiedBy", "ProducesEvidence", "IncludedIn");
+            attribute :>> includeRelationshipKinds = ("Causes", "Mitigates", "Mitigates", "TracesRisk", "AssessedAgainst", "VerifiedBy", "ProducesEvidence");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
     }

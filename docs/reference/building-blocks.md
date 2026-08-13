@@ -31,7 +31,7 @@ Relationships are SysML `connection def` declarations with typed ends.
 | Implementation and deployment | `ModuleUses`, `BuildsInto`, `DeploysTo`, `ProvidesEnvironment`, `FlowTraversesBinding` |
 | Requirements and risk | `DerivesFrom`, `SatisfiedBy`, `IdentifiesHazard`, `Mitigates`, `ControlImplementedBy` |
 | Cybersecurity and safety | `ThreatenedBy`, `Exploits`, `CrossesTrustBoundary`, `ImpactsSafety` |
-| Verification and evidence | `VerifiedBy`, `Validates`, `ProducesEvidence`, `IncludedIn` |
+| Verification and evidence | `VerifiedBy`, `Validates`, `ProducesEvidence` |
 
 [Browse relationship declarations by namespace.](../sysml-api/relationships.md)
 

@@ -134,6 +134,14 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     view fxDeliveryView : MemoDiagramView {
         expose fxDeliveryFlow::**;
         expose fxPumpSystem::**;
+        expose fxSensingSubsystem;
+        expose fxControlSubsystem;
+        expose fxDeliverySubsystem;
+        expose fxSafetySubsystem;
+        expose fxSensor;
+        expose fxController;
+        expose fxActuator;
+        expose fxSafety;
         attribute depth = 2;
         attribute :>> title = "Sample · Dose Delivery (Functional Flow)";
         attribute :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in).";
@@ -141,27 +149,4 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
         attribute :>> diagramType = "ffd";
         part :>> viewpointDefinition = functionalViewpoint;
     }
-
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxAcquire to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxCompute to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxForkDeliver to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxEnforce to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxDrive to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxDeliver to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxMonitor to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxDetect to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxJoinDeliver to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxLog to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxDeliver.fxOpenValve to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxDeliver.fxHoldDose to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliveryFlow.fxDeliver.fxCloseValve to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxPumpSystem to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxSensingSubsystem to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxControlSubsystem to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxDeliverySubsystem to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxSafetySubsystem to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxSensor to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxController to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxActuator to targetView ::> fxDeliveryView;
-    connection : IncludedIn connect sourceElement ::> fxSafety to targetView ::> fxDeliveryView;
 }

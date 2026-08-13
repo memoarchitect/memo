@@ -33,6 +33,13 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
     view sampleTreeView : MemoDiagramView {
         expose rootA::**;
         expose rootB::**;
+        expose branchA1;
+        expose branchA2;
+        expose branchB1;
+        expose leafA11;
+        expose leafA12;
+        expose leafA21;
+        expose leafB11;
         attribute depth = 2;
         attribute :>> title = "Sample · Tree";
         attribute :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";
@@ -45,14 +52,4 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
             attribute :>> includeRelationshipKinds = ("Composes");
         }
     }
-
-    connection : IncludedIn connect sourceElement ::> rootA to targetView ::> sampleTreeView;
-    connection : IncludedIn connect sourceElement ::> rootB to targetView ::> sampleTreeView;
-    connection : IncludedIn connect sourceElement ::> branchA1 to targetView ::> sampleTreeView;
-    connection : IncludedIn connect sourceElement ::> branchA2 to targetView ::> sampleTreeView;
-    connection : IncludedIn connect sourceElement ::> branchB1 to targetView ::> sampleTreeView;
-    connection : IncludedIn connect sourceElement ::> leafA11 to targetView ::> sampleTreeView;
-    connection : IncludedIn connect sourceElement ::> leafA12 to targetView ::> sampleTreeView;
-    connection : IncludedIn connect sourceElement ::> leafA21 to targetView ::> sampleTreeView;
-    connection : IncludedIn connect sourceElement ::> leafB11 to targetView ::> sampleTreeView;
 }

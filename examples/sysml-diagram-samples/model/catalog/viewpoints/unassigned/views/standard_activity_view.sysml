@@ -30,22 +30,4 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard
         attribute :>> diagramType = "afd";
         part :>> viewpointDefinition = functionalViewpoint;
     }
-
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::customerLogsIn to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::validUserDecision to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::rejected to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::browseCatalog to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::viewBookStore to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::selectBookForPurchase to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::addToShoppingBasket to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::viewShoppingBasket to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::shoppingDecision to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::commitOrder to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::supplyCreditCardDetails to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::creditDecision to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::rejectCreditCard to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::closeOrder to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::confirmPurchase to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::itemsDelivered to targetView ::> standardActivityView;
-    connection : IncludedIn connect sourceElement ::> CustomerProcess::orderComplete to targetView ::> standardActivityView;
 }
