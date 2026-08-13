@@ -46,6 +46,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
     view sampleRequirementsView : MemoDiagramView {
         expose needSafeTherapy::**;
         expose needTimelyAlarms::**;
+        expose reqDoseLimit;
+        expose reqOcclusionAlarm;
+        expose reqAlarmLoudness;
         attribute depth = 1;
         attribute :>> title = "Sample · Requirements";
         attribute :>> shortDescription = "Stakeholder needs deriving into system requirements, wired by DerivesFrom trace edges.";
@@ -56,10 +59,4 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
             attribute :>> includeRelationshipKinds = ("DerivesFrom");
         }
     }
-
-    connection : IncludedIn connect sourceElement ::> needSafeTherapy to targetView ::> sampleRequirementsView;
-    connection : IncludedIn connect sourceElement ::> needTimelyAlarms to targetView ::> sampleRequirementsView;
-    connection : IncludedIn connect sourceElement ::> reqDoseLimit to targetView ::> sampleRequirementsView;
-    connection : IncludedIn connect sourceElement ::> reqOcclusionAlarm to targetView ::> sampleRequirementsView;
-    connection : IncludedIn connect sourceElement ::> reqAlarmLoudness to targetView ::> sampleRequirementsView;
 }
