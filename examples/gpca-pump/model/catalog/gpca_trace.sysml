@@ -55,10 +55,10 @@ package memo_examples_gpca_pump_gpca_trace {
     flow from actorPatient to entityGpcaPump;
     flow from entityPharmacyDb to entityGpcaPump;
     // Physical connections (drug path)
-    connection : ConnectsPhysically connect source ::> entityDrugReservoir to target ::> entityGpcaPump;
-    connection : ConnectsPhysically connect source ::> entityGpcaPump to target ::> entityNeedle;
-    connection : ConnectsPhysically connect source ::> entityNeedle to target ::> actorPatient;
-    connection : ConnectsPhysically connect source ::> entityPowerInfrastructure to target ::> entityGpcaPump;
+    connection connect source ::> entityDrugReservoir to target ::> entityGpcaPump;
+    connection connect source ::> entityGpcaPump to target ::> entityNeedle;
+    connection connect source ::> entityNeedle to target ::> actorPatient;
+    connection connect source ::> entityPowerInfrastructure to target ::> entityGpcaPump;
     // Intended use and use context anchoring (no floating context nodes)
     connection : Governs { attribute :>> governKind = GovernKind::'use'; connect governor ::> gpcaIntendedUse to governedElement ::> entityGpcaPump; }
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityGpcaPump;
