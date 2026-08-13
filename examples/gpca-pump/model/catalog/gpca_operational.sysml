@@ -155,6 +155,11 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> primaryUser = actorNurse;
         ref :>> supportingActors = (actorPatient, actorPrescriber, actorPharmacist);
         ref :>> useContext = hospitalWardContext;
+        subject supportingSystem;
+        actor nurseInitiator = actorNurse;
+        actor patientActor = actorPatient;
+        actor prescriberActor = actorPrescriber;
+        actor pharmacistActor = actorPharmacist;
     }
 
     action wfPrepareAndStartTherapy : OperationalWorkflow {

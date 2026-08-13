@@ -30,8 +30,13 @@ package memo_architecture_operational_use_cases {
         // clinical / service / manufacturing / development
         attribute useCaseKind : UseCaseKind;
 
-        // The device or system under consideration supports the goal.
-        ref supportingSystem : MemoPart[0..1];
+        // The device or system under consideration supports the goal. Native
+        // `subject`, not `ref` (R10-S6): SysIDE requires an explicit subject
+        // before a use case can declare `actor` — `case-usage-subject-
+        // parameter-position` — and "the device/system under consideration"
+        // is exactly what a case's subject means, so this was a duplicate
+        // waiting to surface once `actor` needed a subject to attach to.
+        subject supportingSystem : MemoPart[0..1];
         ref primaryUser : User[0..1];
         ref supportingActors : OperationalParticipant[0..*];
         ref useContext : UseContext[0..1];
@@ -48,26 +53,12 @@ package memo_architecture_operational_use_cases {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = motivatesLinks meta SysML::Usage;
     }
-    connection def Initiates :> MemoRelationship {
-        end initiatingUser : User :>> source;
-        end initiatedUseCase : UseCase :>> target;
-    }
-    abstract connection initiatesLinks : Initiates[*];
-    metadata def <initiates> InitiatesMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = initiatesLinks meta SysML::Usage;
-    }
-    connection def ParticipatesIn :> MemoRelationship {
-        end participatingActor : OperationalParticipant :>> source;
-        end useCase : UseCase :>> target;
-    }
-    abstract connection participatesInLinks : ParticipatesIn[*];
-    metadata def <participatesIn> ParticipatesInMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = participatesInLinks meta SysML::Usage;
-    }
+    // `Initiates` and `ParticipatesIn` are native `actor` (R10-S6): both were
+    // a bare typed edge onto UseCase with no attributes of their own, and
+    // native `actor` does not distinguish an initiating actor from a
+    // participating one — that distinction now lives in how the actor is
+    // named on the use case, not in a relationship type. Write
+    // `actor <role> = <existingElement>;` inside the use case instead.
     // UML use-case decomposition (`Includes`) is native `include use case` /
     // `include` (R10-S6); write that instead of a connection here. `extends`
     // has 0 hits in the corpus for a use-case `extend` production, so it stays
