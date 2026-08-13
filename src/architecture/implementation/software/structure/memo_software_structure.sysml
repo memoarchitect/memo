@@ -101,16 +101,8 @@ package memo_architecture_implementation_software_structure {
         attribute hash : String;
     }
 
-    connection def ModuleUses :> MemoRelationship {
-        end usingModule : SoftwareModule :>> source;
-        end usedModule : SoftwareModule :>> target;
-    }
-    abstract connection moduleUsesLinks : ModuleUses[*];
-    metadata def <moduleUses> ModuleUsesMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = moduleUsesLinks meta SysML::Usage;
-    }
+    // `ModuleUses` is native `dependency` (R10-S6): write
+    // `dependency <usingModule> to <usedModule>;` instead of a connection.
 
     // ── Relations owned by this package ─────────────────────────────
     // Moved out of memo_core_relationships: their ends are typed against
