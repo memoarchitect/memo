@@ -14,6 +14,7 @@
 //      anywhere in the chain.
 package memo_examples_ros_mobile_robot {
     private import ScalarValues::*;
+    private import ModelingMetadata::*;
 
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
@@ -199,9 +200,9 @@ package memo_examples_ros_mobile_robot {
     // Cross-view mappings: SEI module-view implementation units are distinct
     // from component-and-connector runtime elements. A runtime node realizes
     // the module whose code it executes; it is not the same model element.
-    connection : Realizes connect realizing ::> nodeLidar to realized ::> swPerception;
-    connection : Realizes connect realizing ::> nodeNavigation to realized ::> swNavigation;
-    connection : Realizes connect realizing ::> nodeSafetyMonitor to realized ::> swSafety;
+    #refinement dependency nodeLidar to swPerception;
+    #refinement dependency nodeNavigation to swNavigation;
+    #refinement dependency nodeSafetyMonitor to swSafety;
 
     // ── Native topic, service, and action interfaces ───────────────────
     interface scanToNavigation : RosTopicInterface
