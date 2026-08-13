@@ -39,7 +39,7 @@ package memo_examples_software_only_medical_device {
         attribute :>> responsibility = "Wraps the grading model behind the service API; owns input validation and result structuring.";
         attribute :>> safetyClass = SafetyClassKind::B;
     }
-    connection : ModuleUses connect usingModule ::> swGradingModule to usedModule ::> soupInference;
+    dependency swGradingModule to soupInference;
 
     part svcGrading : CloudService {
         attribute :>> id = "SMD-RT-001"; attribute :>> name = "GradingService";

@@ -201,15 +201,7 @@ package memo_architecture_logical_structure {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = independentOfLinks meta SysML::Usage;
     }
-    connection def MonitorsChannel :> MemoRelationship {
-        end monitorChannel : LogicalComponent :>> source;
-        end monitoredComponent : LogicalComponent :>> target;
-    }
-    abstract connection monitorsChannelLinks : MonitorsChannel[*];
-    metadata def <monitorsChannel> MonitorsChannelMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = monitorsChannelLinks meta SysML::Usage;
-    }
+    // `MonitorsChannel` is native `dependency` (R10-S6): write
+    // `dependency <monitorChannel> to <monitoredComponent>;` instead.
 
 }
