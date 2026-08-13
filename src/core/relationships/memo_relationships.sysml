@@ -133,24 +133,16 @@ package memo_core_relationships {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = derivesFromLinks meta SysML::Usage;
     }
-    // Realizes is the single realization relation (realizing/concrete element →
-    // realized/abstract element). It unifies RealizesInterface,
-    // RealizesComponentExchange, RealizedByArchitecture, RealizesScenario,
-    // ModuleRealizesLogical, ComponentRealizesModule, PhysicalModuleRealizesLogical,
+    // `Realizes` (realizing/concrete element → realized/abstract element) is
+    // native `#refinement dependency` (R10-S6): write
+    // `#refinement dependency <realizing> to <realized>;` instead. It used to
+    // unify RealizesInterface, RealizesComponentExchange,
+    // RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical,
+    // ComponentRealizesModule, PhysicalModuleRealizesLogical,
     // Implements{Component,Procedure}, UIRealizesFunctional,
-    // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase.
-    connection def Realizes :> MemoRelationship {
-        // Realization crosses structural and behavioral metaclasses (for
-        // example a FunctionalFlow route realizing a functional MemoScenario).
-        end realizing :>> source;
-        end realized :>> target;
-    }
-    abstract connection realizesLinks : Realizes[*];
-    metadata def <realizes> RealizesMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = realizesLinks meta SysML::Usage;
-    }
+    // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase; the
+    // native form keeps that reach, since `#refinement` places no metaclass
+    // restriction on either end.
     connection def ProducesEvidence :> MemoRelationship {
         end producer : MemoVerificationCase :>> source;
         end producedEvidence : MemoEvidence :>> target;
