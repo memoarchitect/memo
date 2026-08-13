@@ -41,8 +41,7 @@
 | [`DetectionMethod`](#detectionmethod) | `part def` | Detection method definition specializing `MemoPart`. | `MemoPart` |
 | [`FMEAAction`](#fmeaaction) | `part def` | Fmeaaction definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`FaultTree`](#faulttree) | `part def` | Fault tree definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
-| [`FaultTreeEvent`](#faulttreeevent) | `item def` | Fault tree event definition specializing `RiskItem`. | `RiskItem` |
-| [`FaultTreeGate`](#faulttreegate) | `part def` | Fault tree gate definition specializing `MemoPart`. | `MemoPart` |
+| [`FaultTreeNode`](#faulttreenode) | `part def` | Fault tree node definition specializing `MemoPart`. | `MemoPart` |
 | [`MinimalCutSet`](#minimalcutset) | `item def` | Minimal cut set definition specializing `RiskItem`. | `RiskItem` |
 | [`HAZOPStudy`](#hazopstudy) | `part def` | Hazopstudy definition specializing `AnalysisArtifact`. | `AnalysisArtifact` |
 | [`HAZOPNode`](#hazopnode) | `part def` | Hazopnode definition specializing `MemoPart`. | `MemoPart` |
@@ -161,30 +160,15 @@ part def FaultTree specializes AnalysisArtifact
 | Owning package | `memo_assurance_safety_risk_analysis` |
 
 
-## FaultTreeEvent
+## FaultTreeNode
 
 ```sysml
-item def FaultTreeEvent specializes RiskItem
+part def FaultTreeNode specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Fault tree event definition specializing `RiskItem`. |
-| Kind | `item def` |
-| Abstract | No |
-| Specializes | `RiskItem` |
-| Owning package | `memo_assurance_safety_risk_analysis` |
-
-
-## FaultTreeGate
-
-```sysml
-part def FaultTreeGate specializes MemoPart
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Fault tree gate definition specializing `MemoPart`. |
+| Description | Fault tree node definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -447,14 +431,12 @@ connection def HasFailureMode :> MemoRelationship
             attribute cutSetSummary : String;
             attribute revisionDate : String;
         }
-        item def FaultTreeEvent specializes RiskItem {
+        part def FaultTreeNode specializes MemoPart {
             attribute eventKind : FaultTreeEventKind;
             attribute probability : Real;
             attribute failureRate : Real;
             attribute exposureTime : Real;
             attribute :>> description : String;
-        }
-        part def FaultTreeGate specializes MemoPart {
             attribute gateKind : FaultTreeGateKind;
             attribute kValue : Integer;
             attribute nValue : Integer;
@@ -524,8 +506,8 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = detectedByLinks meta SysML::Usage;
         }
         connection def InputToGate :> MemoRelationship {
-            end input : FaultTreeEvent :>> source;
-            end gate : FaultTreeGate :>> target;
+            end input : FaultTreeNode :>> source;
+            end gate : FaultTreeNode :>> target;
         }
         abstract connection inputToGateLinks : InputToGate[*];
         metadata def <inputToGate> InputToGateMetadata :> SemanticMetadata {
@@ -534,8 +516,8 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = inputToGateLinks meta SysML::Usage;
         }
         connection def ProducesEvent :> MemoRelationship {
-            end gate : FaultTreeGate :>> source;
-            end eventElement : FaultTreeEvent :>> target;
+            end gate : FaultTreeNode :>> source;
+            end eventElement : FaultTreeNode :>> target;
         }
         abstract connection producesEventLinks : ProducesEvent[*];
         metadata def <producesEvent> ProducesEventMetadata :> SemanticMetadata {
@@ -545,7 +527,7 @@ connection def HasFailureMode :> MemoRelationship
         }
         connection def ContainsEvent :> MemoRelationship {
             end cutSet : MinimalCutSet :>> source;
-            end eventElement : FaultTreeEvent :>> target;
+            end eventElement : FaultTreeNode :>> target;
         }
         abstract connection containsEventLinks : ContainsEvent[*];
         metadata def <containsEvent> ContainsEventMetadata :> SemanticMetadata {

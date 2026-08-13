@@ -118,6 +118,14 @@ SysML `enum def` declarations in `src/`.
 | [`CauseKind`](assurance/safety_risk/analysis/memo_fmea.md#causekind) | `enum def` | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. | [`assurance/safety_risk/analysis/memo_fmea.sysml`](assurance/safety_risk/analysis/memo_fmea.md) |
 
 
+## `memo::core::common`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`EvidenceKind`](core/common/memo_common.md#evidencekind) | `enum def` | Controlled values for evidence: `testArtifact`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+| [`StateKind`](core/common/memo_common.md#statekind) | `enum def` | Controlled values for state: `mode`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+
+
 ## `memo::core::dimensions`
 
 | Name | SysML kind | Description | Source |

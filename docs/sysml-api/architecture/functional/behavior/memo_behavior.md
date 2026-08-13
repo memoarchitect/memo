@@ -32,9 +32,9 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`FunctionalAction`](#functionalaction) | `action def` | Functional action definition specializing `MemoAction`. | `MemoAction` |
-| [`StateMachine`](#statemachine) | `state def` | State machine definition specializing `MemoState`. | `MemoState` |
-| [`ModeState`](#modestate) | `state def` | Mode state definition specializing `MemoState`. | `MemoState` |
+| [`StateMachine`](#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based ArchitectureElement. Transitions stay part-based (below) to keep their traceable safety attributes.… | `MemoState` |
 | [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… | `ArchitectureElement` |
+| [`TransitionRecord`](#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… | — |
 | [`BehaviorProperty`](#behaviorproperty) | `part def` | A verifiable behavioural constraint, such as an invariant, transition rule, temporal claim, assumption, or guarantee. | `VerifiableElement` |
 | [`Contract`](#contract) | `part def` | Contract definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`ActivityAction`](#activityaction) | `part def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `ArchitectureElement` |
@@ -64,22 +64,7 @@ state def StateMachine :> MemoState
 
 | Property | Value |
 | --- | --- |
-| Description | State machine definition specializing `MemoState`. |
-| Kind | `state def` |
-| Abstract | No |
-| Specializes | `MemoState` |
-| Owning package | `memo_architecture_functional_behavior` |
-
-
-## ModeState
-
-```sysml
-state def ModeState :> MemoState
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Mode state definition specializing `MemoState`. |
+| Description | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based ArchitectureElement. Transitions stay part-based (below) to keep their traceable safety attributes.… |
 | Kind | `state def` |
 | Abstract | No |
 | Specializes | `MemoState` |
@@ -98,6 +83,21 @@ part def ModeConfiguration specializes ArchitectureElement
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `ArchitectureElement` |
+| Owning package | `memo_architecture_functional_behavior` |
+
+
+## TransitionRecord
+
+```sysml
+metadata def TransitionRecord
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | — |
 | Owning package | `memo_architecture_functional_behavior` |
 
 
@@ -195,24 +195,39 @@ part def TimingConstraint specializes VerifiableElement
         // they derive from the MemoState foundation, not the part-based
         // ArchitectureElement. Transitions stay part-based (below) to keep their
         // traceable safety attributes.
-        // State-machine vocabulary. ModeState denotes a state owned by this model.
+        // State machines retain their own execution semantics; individual modes
+        // are MemoState usages selected by stateKind.
         state def StateMachine :> MemoState {
             attribute machineKind : String;
             attribute executionSemantics : String;
         }
-        state def ModeState :> MemoState {
-            attribute modeKind : String;
-            attribute entryCondition : String;
-            attribute exitCondition : String;
-        }
         // A configuration is the concrete selection made at a `variation` choice
         // point. It remains separate from a mode state: it says which mode and
         // elements are active in one selectable arrangement.
-        // The reference is typed to the existing native state family so a consumer
+        // The reference is typed to the shared native state family so a consumer
         // can navigate from the selected configuration to its governing mode.
         part def ModeConfiguration specializes ArchitectureElement {
-            ref activeMode : ModeState[1];
+            ref activeMode : MemoState[1];
             ref activeElement : MemoPart[0..*];
+        }
+        // Transitions are native SysML v2 `transition` usages inside the owning
+        // state — there is no `part def Transition`, and its `transition` keyword
+        // collision is why. A transition usage's definition is always implicit, so
+        // it has no MEMO supertype to carry the identification core; this record
+        // carries it instead, applied with `@TransitionRecord`.
+        //
+        // `trigger`, `guardSummary`, and `effectSummary` are prose summaries, not
+        // executable semantics: a guard reading "none in source (MEMO extension
+        // REQ-X-02 additionally gates therapy on POST)" is a citation. Formal
+        // triggers and guards belong in native `accept` and `if`; these stay
+        // records so the two are not confused.
+        metadata def TransitionRecord {
+            attribute id : String;
+            attribute name : String;
+            attribute trigger : String;
+            attribute guardSummary : String;
+            attribute effectSummary : String;
+            attribute sourceReference : String;
         }
 
         // A verifiable behavioural constraint, such as an invariant, transition

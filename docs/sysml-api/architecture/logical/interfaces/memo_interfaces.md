@@ -232,7 +232,12 @@ port def SoftwarePort specializes MemoPort
         // family. Concrete technologies add their protocol roles and message
         // flows; ports remain the endpoints that components actually own.
         abstract interface def SoftwareInterface specializes Interface {
-            attribute :>> direction = DirectionKind::inputOutput;
+            // `default`, not `=`. A bare `=` in a definition BINDS the value, and
+            // a binding cannot be overridden by a usage — which asserted that
+            // every software interface is bidirectional and made a directional one
+            // inexpressible. A ROS topic publisher → subscriber is the obvious
+            // counterexample, and it is the common case rather than an exotic one.
+            attribute :>> direction default DirectionKind::inputOutput;
         }
 
         // A typed thing exchanged at a boundary. Concrete items such as
