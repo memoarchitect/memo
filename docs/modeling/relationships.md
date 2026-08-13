@@ -39,6 +39,14 @@ trees, lifecycle change, interaction, and document views — every one is a
 `connection def` specializing `MemoRelationship` with typed ends, so the full
 inventory is discoverable in `src/core/relationships` and each domain package.
 
+Before you reach for a new `connection def`, check that SysML v2 does not
+already supply the construct: many relationships (`flow`, `bind`, `actor`,
+`succession`, nesting) are native, and a reinvented edge suppresses the checking
+the native one performs. See
+[Naming and native constructs](../reference/naming-and-native-constructs.md) for
+the corpus-first rule, the native-construct lookup table, and the
+`allocation … : DeploysTo allocate …` extension pattern.
+
 ## Direction matters
 
 Write the relationship so its endpoint roles read as a sentence:

@@ -13,8 +13,7 @@ Elements are SysML definitions used to create model content.
 | Implementation | Software, hardware, and user-interface definitions | [Architecture](areas/architecture.md#implementation) |
 | Realization | Physical nodes, runtime environments, deployment units, and deployed flows | [Architecture](areas/architecture.md#realization) |
 | Assurance | Requirements, risk, cybersecurity, human factors, verification, validation, and evidence | [Assurance](areas/assurance.md#elements) |
-| Artifacts | Artifact classifications | [Artifacts](areas/artifacts.md#elements) |
-| Compliance | Controlled records and document-oriented model content | [Compliance](areas/compliance.md#elements) |
+| Artifacts | Artifact classifications and controlled records | [Artifacts](areas/artifacts.md#elements) |
 | Viewpoints | Viewpoint contracts, selection definitions, and views | [Viewpoints](areas/viewpoints.md#elements) |
 | Methodology | Scope, profiles, patterns, workflow, gates, usage rules, and project bindings | [Methodology](areas/methodology.md#elements) |
 
