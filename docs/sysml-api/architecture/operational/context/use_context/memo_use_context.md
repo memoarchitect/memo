@@ -38,8 +38,7 @@
 | [`UseEnvironment`](#useenvironment) | `part def` | The physical/organizational environment of use (IEC 62366-1 3.20), separable from the care-setting context so environments are reusable. | `MemoPart` |
 | [`InteractsInContext`](#interactsincontext) | `connection def` | Typed relationship for interacts in context. | `MemoRelationship` |
 | [`InteractsWith`](#interactswith) | `connection def` | Typed relationship for interacts with. | `MemoRelationship` |
-| [`ConnectsPhysically`](#connectsphysically) | `connection def` | Physical connection between boundary entities (fluid path, mounting). | `MemoRelationship` |
-| [`AppliesInContext`](#appliesincontext) | `connection def` | Typed relationship for applies in context. | `MemoRelationship` |
+| [`AppliesInContext`](#appliesincontext) | `connection def` | `ConnectsPhysically` is native `connect` (R10-S6): write `connection connect source ::> <a> to target ::> <b>;` — the ordinary untyped binary connection — instead of a connection def for it. | `MemoRelationship` |
 | [`SituatedIn`](#situatedin) | `connection def` | Typed relationship for situated in. | `MemoRelationship` |
 
 ## UseContext
@@ -102,21 +101,6 @@ connection def InteractsWith :> MemoRelationship
 | Owning package | `memo_architecture_operational_context_use_context` |
 
 
-## ConnectsPhysically
-
-```sysml
-connection def ConnectsPhysically :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Physical connection between boundary entities (fluid path, mounting). |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_context_use_context` |
-
-
 ## AppliesInContext
 
 ```sysml
@@ -125,7 +109,7 @@ connection def AppliesInContext :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for applies in context. |
+| Description | `ConnectsPhysically` is native `connect` (R10-S6): write `connection connect source ::> <a> to target ::> <b>;` — the ordinary untyped binary connection — instead of a connection def for it. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -232,17 +216,9 @@ connection def SituatedIn :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = interactsWithLinks meta SysML::Usage;
         }
-        // Physical connection between boundary entities (fluid path, mounting).
-        connection def ConnectsPhysically :> MemoRelationship {
-            end source : ArchitectureElement;
-            end target : ArchitectureElement;
-        }
-        abstract connection connectsPhysicallyLinks : ConnectsPhysically[*];
-        metadata def <connectsPhysically> ConnectsPhysicallyMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = connectsPhysicallyLinks meta SysML::Usage;
-        }
+        // `ConnectsPhysically` is native `connect` (R10-S6): write
+        // `connection connect source ::> <a> to target ::> <b>;` — the ordinary
+        // untyped binary connection — instead of a connection def for it.
         connection def AppliesInContext :> MemoRelationship {
             end useContext : UseContext :>> source;
             end subjectElement : MemoPart :>> target;

@@ -39,9 +39,6 @@
 | [`UseCaseKind`](#usecasekind) | `enum def` | Controlled values for use case: `clinical`, `service`, `manufacturing`, `development`. | — |
 | [`UseCase`](#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. | `MemoUseCase` |
 | [`Motivates`](#motivates) | `connection def` | Typed relationship for motivates. | `MemoRelationship` |
-| [`Initiates`](#initiates) | `connection def` | Typed relationship for initiates. | `MemoRelationship` |
-| [`ParticipatesIn`](#participatesin) | `connection def` | Typed relationship for participates in. | `MemoRelationship` |
-| [`Includes`](#includes) | `connection def` | UML use-case relationships. Includes establishes a decomposition level; extends remains a cross-cutting relationship and is always presented. | `MemoRelationship` |
 | [`Extends`](#extends) | `connection def` | Typed relationship for extends. | `MemoRelationship` |
 
 ## UseCaseKind
@@ -83,51 +80,6 @@ connection def Motivates :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship for motivates. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_use_cases` |
-
-
-## Initiates
-
-```sysml
-connection def Initiates :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for initiates. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_use_cases` |
-
-
-## ParticipatesIn
-
-```sysml
-connection def ParticipatesIn :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for participates in. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_use_cases` |
-
-
-## Includes
-
-```sysml
-connection def Includes :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | UML use-case relationships. Includes establishes a decomposition level; extends remains a cross-cutting relationship and is always presented. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -186,8 +138,13 @@ connection def Extends :> MemoRelationship
             // clinical / service / manufacturing / development
             attribute useCaseKind : UseCaseKind;
 
-            // The device or system under consideration supports the goal.
-            ref supportingSystem : MemoPart[0..1];
+            // The device or system under consideration supports the goal. Native
+            // `subject`, not `ref` (R10-S6): SysIDE requires an explicit subject
+            // before a use case can declare `actor` — `case-usage-subject-
+            // parameter-position` — and "the device/system under consideration"
+            // is exactly what a case's subject means, so this was a duplicate
+            // waiting to surface once `actor` needed a subject to attach to.
+            subject supportingSystem : MemoPart[0..1];
             ref primaryUser : User[0..1];
             ref supportingActors : OperationalParticipant[0..*];
             ref useContext : UseContext[0..1];
@@ -204,38 +161,16 @@ connection def Extends :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = motivatesLinks meta SysML::Usage;
         }
-        connection def Initiates :> MemoRelationship {
-            end initiatingUser : User :>> source;
-            end initiatedUseCase : UseCase :>> target;
-        }
-        abstract connection initiatesLinks : Initiates[*];
-        metadata def <initiates> InitiatesMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = initiatesLinks meta SysML::Usage;
-        }
-        connection def ParticipatesIn :> MemoRelationship {
-            end participatingActor : OperationalParticipant :>> source;
-            end useCase : UseCase :>> target;
-        }
-        abstract connection participatesInLinks : ParticipatesIn[*];
-        metadata def <participatesIn> ParticipatesInMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = participatesInLinks meta SysML::Usage;
-        }
-        // UML use-case relationships. Includes establishes a decomposition level;
-        // extends remains a cross-cutting relationship and is always presented.
-        connection def Includes :> MemoRelationship {
-            end includingUseCase : UseCase :>> source;
-            end includedUseCase : UseCase :>> target;
-        }
-        abstract connection includesLinks : Includes[*];
-        metadata def <includes> IncludesMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = includesLinks meta SysML::Usage;
-        }
+        // `Initiates` and `ParticipatesIn` are native `actor` (R10-S6): both were
+        // a bare typed edge onto UseCase with no attributes of their own, and
+        // native `actor` does not distinguish an initiating actor from a
+        // participating one — that distinction now lives in how the actor is
+        // named on the use case, not in a relationship type. Write
+        // `actor <role> = <existingElement>;` inside the use case instead.
+        // UML use-case decomposition (`Includes`) is native `include use case` /
+        // `include` (R10-S6); write that instead of a connection here. `extends`
+        // has 0 hits in the corpus for a use-case `extend` production, so it stays
+        // a MEMO construct: a cross-cutting relationship that is always presented.
         connection def Extends :> MemoRelationship {
             end extendingUseCase : UseCase :>> source;
             end extendedUseCase : UseCase :>> target;
