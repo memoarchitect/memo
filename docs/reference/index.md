@@ -16,8 +16,7 @@ src/
 ├── core/                  shared ontology foundations
 ├── architecture/          system description from operation to deployment
 ├── assurance/             requirements and assurance disciplines
-├── artifacts/             artifact classifications
-├── compliance/            controlled records and document-oriented content
+├── artifacts/             artifact classifications and controlled records
 ├── viewpoints/            selection and presentation of model content
 ├── methodology/           project scope, workflow, gates, and bindings
 └── rules/                 selectable model constraints

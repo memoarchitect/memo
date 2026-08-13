@@ -82,11 +82,11 @@ nav:
   - Reference:
       - Source layout: reference/index.md
       - Native project format: reference/native-project-format.md
+      - Naming and native constructs: reference/naming-and-native-constructs.md
       - Core: reference/areas/core.md
       - Architecture: reference/areas/architecture.md
       - Assurance: reference/areas/assurance.md
       - Artifacts: reference/areas/artifacts.md
-      - Compliance: reference/areas/compliance.md
       - Viewpoints: reference/areas/viewpoints.md
       - Methodology: reference/areas/methodology.md
       - Rules: reference/areas/rules.md
