@@ -25,11 +25,13 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         attribute :>> id = "UC-SAMPLE-001";
         attribute :>> name = "Review Device Status";
         attribute :>> useCaseKind = UseCaseKind::clinical;
+        include validateTherapySettings;
     }
     use case configureTherapy : UseCase {
         attribute :>> id = "UC-SAMPLE-002";
         attribute :>> name = "Configure Therapy";
         attribute :>> useCaseKind = UseCaseKind::clinical;
+        include reviewStatus;
     }
     use case maintainDevice : UseCase {
         attribute :>> id = "UC-SAMPLE-003";
@@ -55,8 +57,6 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     connection : ParticipatesIn connect participatingActor ::> patient to useCase ::> configureTherapy;
     connection : ParticipatesIn connect participatingActor ::> serviceTechnician to useCase ::> maintainDevice;
     connection : ParticipatesIn connect participatingActor ::> clinician to useCase ::> validateTherapySettings;
-    connection : Includes connect includingUseCase ::> configureTherapy to includedUseCase ::> reviewStatus;
-    connection : Includes connect includingUseCase ::> reviewStatus to includedUseCase ::> validateTherapySettings;
     connection : Extends connect extendingUseCase ::> documentTreatment to extendedUseCase ::> reviewStatus;
 
     view sampleUseCaseView : MemoDiagramView {
@@ -75,7 +75,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         part :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("User", "UseCase");
-            attribute :>> includeRelationshipKinds = ("Initiates", "ParticipatesIn", "Includes", "Extends");
+            attribute :>> includeRelationshipKinds = ("Initiates", "ParticipatesIn", "IncludesStep", "Extends");
         }
         // Presentation is owned by the model view, rather than a canvas control.
         attribute :>> layoutHint = "usecase:level=all;edge=rounded";
