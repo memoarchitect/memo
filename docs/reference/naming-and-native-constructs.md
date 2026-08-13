@@ -81,13 +81,87 @@ construct in the left column duplicates the native form on its right.
 | `ConnectsPhysically` | `connect` |
 
 Base-type duplication lands on every relationship at once, because all of them
-specialize `MemoRelationship`:
+specialize `MemoRelationship`. Deleted in R10-S5 (2026-08-13):
 
 | `MemoRelationship` attribute | Native form |
 |---|---|
 | `status` | standard `StatusInfo` metadata with `StatusKind` |
 | `rationale` | standard `Rationale` metadata |
 | `name`, `description` | native element name and `doc` |
+
+**Measured, not assumed:** the epic estimated 147 usages of `status` across
+`src/`/`examples/` before deleting it. A tree measurement scoped to connection
+usages specifically (876 of them, 77 with a body) found the 147 were all on
+`requirement`/`verification` usages — an unrelated `status : ElementStatusKind`
+declared per-family in `memo_core_common.sysml`, out of scope for this change.
+On an actual relationship, the count was 0 for `status`, `name`, `description`,
+and 1 for `rationale`. Trust a scoped grep over an epic's carried-forward
+number — this is the same lesson AGENTS.md already states about plan status
+lines.
+
+**`name`/`description`:** no relationship anywhere sets them, so the decision
+is a straight deletion, not a migration. Use the connection usage's own
+declared name (`connection linkFoo : Bar …`) and a `doc` comment — both were
+already available on every usage before this change; nothing native was
+missing.
+
+**`rationale` → `@Rationale { :>> text = "…"; }`:**
+
+```sysml
+private import ModelingMetadata::*;
+
+connection linkFoo : SomeRelation connect a to b {
+    @Rationale {
+        :>> text = "…";
+    }
+}
+```
+
+`private import ModelingMetadata::*;` (already the exact form used for
+`#refinement`, see above) brings `Rationale` into scope. Inside a metadata
+body, member redefinition is `:>> name = value;`, never `attribute :>> name =
+value;` — the reverse of every other body in this grammar (comment at
+`memo-sysml.langium:160`, measured against `syside check`). `builder.ts`'s
+`extractRelationshipMetadata` reads `Rationale.text` into
+`rel.attributes.rationale`, the same key the deleted attribute used to
+occupy — a downstream reader (e.g. `dhf/query-executor.ts`'s generic
+`rel.attributes?.status` fallback) does not need to change.
+
+**`status` → `@StatusInfo { :>> status = StatusKind::…; }`:** `StatusKind`
+(`open`/`tbd`/`tbr`/`tbc`/`done`/`closed`) is a **different vocabulary** from
+MEMO's `ElementStatusKind`
+(`proposed`/`draft`/`inReview`/`approved`/`released`/`deprecated`/`retired`) —
+one is issue-resolution state, the other editorial lifecycle. There is no
+lossless translation; a relationship that needs `status` today writes a
+`StatusKind` value directly; there is no legacy value anywhere in this
+workspace to convert (0 usages, above), so no conversion code exists or was
+added. For anyone who does need to carry an `ElementStatusKind` judgement over,
+this is the explicit correspondence — every member has one, so nothing is
+silently dropped, and the "fail loudly on no counterpart" the epic asked for is
+now enforced by SysIDE's own type checker: writing a value `StatusKind` does
+not declare is a compile error, not a silent miss.
+
+| `ElementStatusKind` | `StatusKind` | Why |
+|---|---|---|
+| `proposed` | `tbd` | not yet decided — "to be determined" is the literal reading |
+| `draft` | `open` | actively being authored |
+| `inReview` | `tbr` | under review — open comments "to be resolved" |
+| `approved` | `tbc` | signed off, but release is pending — "to be confirmed" |
+| `released` | `done` | shipped — but see the grammar note below |
+| `deprecated` | `closed` | no longer the active answer |
+| `retired` | `closed` | out of service |
+
+**Grammar note:** `StatusKind::done` does not parse in MEMO source today.
+`done` is a reserved keyword — the terminal marker in a succession (`first x
+then done;`, `memo-sysml.langium:527`) — and at the position after `::` the
+grammar's token set does not accept it as a member name (measured: `syside`
+and the Langium parser both reject `status = StatusKind::done;`, expecting an
+`ID`). This is a grammar limitation, not a modelling one; if `released` status
+is ever actually needed on a relationship, either fix the grammar production to
+accept `done` there (the same class of fix R10-S1's short-name productions
+made) or use `closed` as a practical stand-in and say so at the call site. No
+example in this workspace currently needs it, so the story does not fix the
+grammar.
 
 ### `flow` transports, `bind` delegates — they are not interchangeable
 
