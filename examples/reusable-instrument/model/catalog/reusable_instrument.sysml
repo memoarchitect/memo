@@ -24,8 +24,9 @@ package memo_examples_reusable_instrument {
         attribute :>> goalStatement = "Return a used instrument to sterile, functional condition for the next case.";
         attribute :>> preCondition = "instrument collected from the OR; gross soil removed at point of use";
         attribute :>> successOutcome = "instrument cleaned, inspected, sterilized, and released to sterile storage";
+        subject supportingSystem;
+        actor sterileProcessingTechActor = sterileProcessingTech;
     }
-    connection : Initiates connect initiatingUser ::> sterileProcessingTech to initiatedUseCase ::> ucSterilize;
 
     // Reprocessing workflow: exists independently of any single instrument.
     action wfReprocess : OperationalWorkflow {

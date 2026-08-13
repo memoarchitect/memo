@@ -54,9 +54,10 @@ package memo_examples_surgical_closure_workflow {
         ref :>> primaryUser = bariatricSurgeon;
         ref :>> supportingActors = (scrubNurse, anesthetist);
         ref :>> useContext = bariatricOr;
+        subject supportingSystem;
+        actor bariatricSurgeonInitiator = bariatricSurgeon;
     }
     connection : Motivates connect motivatingNeed ::> needControlledGastricResection to motivatedUseCase ::> ucPerformSleeveGastrectomy;
-    connection : Initiates connect initiatingUser ::> bariatricSurgeon to initiatedUseCase ::> ucPerformSleeveGastrectomy;
 
     // ── Procedure workflow ──────────────────────────────────────
     action actTimeOutAndPosition : OperationalActivity { attribute :>> id = "LSG-ACT-001"; attribute :>> name = "ConfirmTimeOutAndPosition"; }

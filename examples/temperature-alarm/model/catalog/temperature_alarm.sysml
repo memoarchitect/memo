@@ -35,6 +35,8 @@ package memo_examples_temperature_alarm {
         attribute :>> id = "TA-UC-001";
         attribute :>> name = "MonitorPatientTemperature";
         attribute :>> goalStatement = "Continuously monitor core temperature and be alerted when it leaves the safe range.";
+        subject supportingSystem;
+        actor icuNurseInitiator = icuNurse;
     }
     action actAcknowledgeAlarm : OperationalActivity {
         attribute :>> id = "TA-ACT-001"; attribute :>> name = "ReviewAndAcknowledgeAlarm";
@@ -47,7 +49,6 @@ package memo_examples_temperature_alarm {
         attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
         attribute :>> severityIfFailed = SeverityKind::serious;
     }
-    connection : Initiates connect initiatingUser ::> icuNurse to initiatedUseCase ::> ucMonitorTemp;
     connection : Composes connect parent ::> actAcknowledgeAlarm to child ::> taskAckAlarm;
 
     // ── Functional and logical slices ───────────────────────────

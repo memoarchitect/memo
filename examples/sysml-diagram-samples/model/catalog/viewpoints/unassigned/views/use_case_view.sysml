@@ -26,17 +26,24 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         attribute :>> name = "Review Device Status";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include validateTherapySettings;
+        subject supportingSystem;
+        actor patientActor = patient;
     }
     use case configureTherapy : UseCase {
         attribute :>> id = "UC-SAMPLE-002";
         attribute :>> name = "Configure Therapy";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include reviewStatus;
+        subject supportingSystem;
+        actor clinicianInitiator = clinician;
+        actor patientActor = patient;
     }
     use case maintainDevice : UseCase {
         attribute :>> id = "UC-SAMPLE-003";
         attribute :>> name = "Maintain Device";
         attribute :>> useCaseKind = UseCaseKind::service;
+        subject supportingSystem;
+        actor serviceTechnicianActor = serviceTechnician;
     }
 
     use case documentTreatment : UseCase {
@@ -50,13 +57,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         attribute :>> id = "UC-SAMPLE-005";
         attribute :>> name = "Validate Therapy Settings";
         attribute :>> useCaseKind = UseCaseKind::clinical;
+        subject supportingSystem;
+        actor clinicianActor = clinician;
     }
 
-    connection : Initiates connect initiatingUser ::> clinician to initiatedUseCase ::> configureTherapy;
-    connection : ParticipatesIn connect participatingActor ::> patient to useCase ::> reviewStatus;
-    connection : ParticipatesIn connect participatingActor ::> patient to useCase ::> configureTherapy;
-    connection : ParticipatesIn connect participatingActor ::> serviceTechnician to useCase ::> maintainDevice;
-    connection : ParticipatesIn connect participatingActor ::> clinician to useCase ::> validateTherapySettings;
     connection : Extends connect extendingUseCase ::> documentTreatment to extendedUseCase ::> reviewStatus;
 
     view sampleUseCaseView : MemoDiagramView {
@@ -75,7 +79,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         part :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("User", "UseCase");
-            attribute :>> includeRelationshipKinds = ("Initiates", "ParticipatesIn", "IncludesStep", "Extends");
+            attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Extends");
         }
         // Presentation is owned by the model view, rather than a canvas control.
         attribute :>> layoutHint = "usecase:level=all;edge=rounded";
