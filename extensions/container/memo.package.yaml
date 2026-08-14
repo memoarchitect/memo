@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/extension-container'
-version: 0.8.1
+version: 0.8.22
 description: OCI container images and container runtimes as deployment content
 license: MIT
 tags:
