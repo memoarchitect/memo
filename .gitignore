@@ -4,6 +4,9 @@ node_modules/
 .venv/
 venv/
 
+# Local npm config (e.g. left behind by npm publish)
+.npmrc
+
 # SysAnd local cache + generated build metadata
 # .meta.json is regenerated deterministically by scripts/build-kpar.sh
 *.meta.json
