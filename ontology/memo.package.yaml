@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/ontology'
-version: 0.8.1
+version: 0.8.22
 description: "MEMO \u2014 the single canonical medical-device ontology: core semantics, the Arcadia-inspired architecture layers (context, requirements, behavior, structure, interfaces, risk, cybersecurity,\
   \ assurance, \u2026), compliance, viewpoints, views, and invariant rules. One namespace (memo::), one src/ tree."
 license: MIT
