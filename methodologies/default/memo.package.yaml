@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/methodology-default'
-version: 0.8.1
+version: 0.8.22
 description: "MEMO default medical-device methodology \u2014 selects viewpoints/views/DHF documents from @memoarchitect/ontology and adds rules, gates, patterns, profiles, and workflow."
 license: MIT
 tags:
