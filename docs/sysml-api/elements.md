@@ -202,7 +202,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`OperativeScenario`](architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `action def` | Shared scenario foundation. Fields that apply only to one scenario kind remain optional here; this keeps the taxonomy queryable without six otherwise redundant action definitions. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| [`OperativeScenario`](architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `action def` | Operative scenario definition specializing `MemoAction`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 
 ## `memo::architecture::operational::structure`
