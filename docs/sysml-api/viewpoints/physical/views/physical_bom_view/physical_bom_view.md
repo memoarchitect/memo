@@ -52,7 +52,6 @@
                         attribute depth = 2;
         attribute :>> id = "VIEW-PHY-001";
         attribute :>> name = "PhysicalBOMView";
-        attribute :>> title = "Physical Bill of Materials View";
         attribute :>> shortDescription = "Physical and hardware components with their decomposition.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -66,7 +65,7 @@
             attribute :>> includeLayers = ("hardware_structure", "physical");
             attribute :>> rationaleText = "Auto-populate the physical BOM view from the hardware and physical layers.";
         }
-        part :>> viewpointDefinition = physicalViewpoint;
+        ref :>> viewpointDefinition = physicalViewpoint;
                     }
     }
 

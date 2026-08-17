@@ -45,10 +45,9 @@
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
 
-        part contextViewpoint : Viewpoint {
+        viewpoint contextViewpoint : MemoViewpoint {
             attribute :>> id = "VP-CTX";
             attribute :>> name = "ContextViewpoint";
-            attribute :>> title = "System Context Viewpoint";
             attribute :>> shortDescription = "Shows actors, use context, and system boundary.";
             attribute :>> description = "Default viewpoint derived from the context layer to communicate who interacts with the device, under which use conditions, and where trust or safety boundaries exist.";
             attribute :>> purpose = "Communicate operational context and boundaries.";

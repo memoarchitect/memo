@@ -6,7 +6,6 @@ package memo_examples_reusable_instrument_viewpoints_unassigned_views_reusable_i
     view reusableInstrumentOverview : MemoDiagramView {
         expose memo_examples_reusable_instrument::*;
         attribute depth = 2;
-        attribute :>> title = "Reusable Instrument Overview";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ofd";
     }

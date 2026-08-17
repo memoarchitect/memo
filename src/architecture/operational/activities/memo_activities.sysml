@@ -15,6 +15,7 @@ package memo_architecture_operational_activities {
     private import memo_core_relationships::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_context_use_context::*;
+    private import memo_architecture_operational_structure::*;
 
     enum def DemandLevelKind {
         enum minimal;
@@ -30,13 +31,18 @@ package memo_architecture_operational_activities {
         attribute postCondition : String;
         attribute criticality : CriticalityKind;
         ref performedBy : OperationalParticipant[0..*];
+        // Operational capabilities this activity contributes to (ARCADIA: an
+        // operational process/activity implements a capability).
+        ref contributesToCapabilities : OperationalCapability[0..*];
     }
 
     // A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a
     // UserTask whose criticality is high or catastrophic — a use error could
     // cause serious harm. potentialHarm/severityIfFailed are set only for such
     // tasks. Modeled as an attribute, like SystemFunction.criticality.
-    action def UserTask specializes MemoAction {
+    // A scenario step performed by a human actor (as opposed to a SystemAction
+    // performed by the system). Both specialize ScenarioStep.
+    action def UserTask specializes ScenarioStep {
         attribute taskGoal : String;
         attribute preCondition : String;
         attribute postCondition : String;
@@ -46,6 +52,14 @@ package memo_architecture_operational_activities {
         attribute potentialHarm : String[0..1];
         attribute severityIfFailed : SeverityKind[0..1];
         ref performingUser : User[0..1];
+    }
+
+    // A scenario step performed by the system. May realize a SystemFunction
+    // (the functional-layer capability it exercises).
+    action def SystemAction specializes ScenarioStep {
+        attribute preCondition : String;
+        attribute postCondition : String;
+        attribute automated : Boolean;
     }
 
     // An elementary perceptual/cognitive/motor step within a user task

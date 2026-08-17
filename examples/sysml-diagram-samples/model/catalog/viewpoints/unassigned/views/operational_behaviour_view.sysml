@@ -100,10 +100,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         expose opSetupFlow::**;
         expose opCareSystem::**;
         attribute depth = 2;
-        attribute :>> title = "Sample · Clinical PCA Setup (Operational)";
         attribute :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step.";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ofd";
-        part :>> viewpointDefinition = operationalViewpoint;
+        ref :>> viewpointDefinition = operationalViewpoint;
     }
 }

@@ -40,8 +40,9 @@
 | [`EvidenceKind`](#evidencekind) | `enum def` | Controlled values for evidence: `testArtifact`. | — |
 | [`MemoEvidence`](#memoevidence) | `part def` | Memo evidence definition specializing `MemoPart`. | `MemoPart` |
 | [`AnalysisArtifact`](#analysisartifact) | `part def` | Analysis artifact definition specializing `MemoPart`. | `MemoPart` |
-| [`DocumentedElement`](#documentedelement) | `part def` | Documented element definition specializing `MemoPart`. | `MemoPart` |
+| [`MemoMission`](#memomission) | `part def` | Memo mission definition specializing `MemoPart`. | `MemoPart` |
 | [`MemoAction`](#memoaction) | `action def` | Behavioral foundation: operational activities, tasks, system actions, and interaction steps specialize MemoAction. | — |
+| [`ScenarioStep`](#scenariostep) | `action def` | Abstract step base: one step of a scenario. Concrete steps are a UserTask (performed by an actor) or a SystemAction (performed by the system). | `MemoAction` |
 | [`MemoPort`](#memoport) | `port def` | Boundary feature foundation for typed ports. | — |
 | [`MemoInterface`](#memointerface) | `interface def` | Interaction-contract foundation for interface definitions between ports. | — |
 | [`MemoItem`](#memoitem) | `item def` | Single item foundation. Standards, hazards, stored software data, and message payloads are all item-native concepts. Whether an item is exchanged is expressed by its use in a port or flow, not by a second ontology root. | — |
@@ -175,17 +176,17 @@ abstract part def AnalysisArtifact specializes MemoPart
 | Owning package | `memo_core_common` |
 
 
-## DocumentedElement
+## MemoMission
 
 ```sysml
-part def DocumentedElement specializes MemoPart
+abstract part def MemoMission specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Documented element definition specializing `MemoPart`. |
+| Description | Memo mission definition specializing `MemoPart`. |
 | Kind | `part def` |
-| Abstract | No |
+| Abstract | Yes |
 | Specializes | `MemoPart` |
 | Owning package | `memo_core_common` |
 
@@ -202,6 +203,21 @@ action def MemoAction
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | — |
+| Owning package | `memo_core_common` |
+
+
+## ScenarioStep
+
+```sysml
+abstract action def ScenarioStep specializes MemoAction
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Abstract step base: one step of a scenario. Concrete steps are a UserTask (performed by an actor) or a SystemAction (performed by the system). |
+| Kind | `action def` |
+| Abstract | Yes |
+| Specializes | `MemoAction` |
 | Owning package | `memo_core_common` |
 
 
@@ -500,10 +516,15 @@ part def Citation specializes MemoPart
         // description registers every MemoPart now carries: a title and its place
         // in a document. The former `shortDescription`/`longDescription` pair is
         // gone — short is inherited, and `description` IS the long form.
-        part def DocumentedElement specializes MemoPart {
-            attribute title : String;
-            attribute documentUsage : String[*];
-            attribute sectionIdentifier : String;
+        // Top-level goal a system or operation exists to fulfil, with its success
+        // criteria and context. Domain layers specialize it; the medical-device
+        // intended use (memo_architecture_operational_structure::IntendedUse) is a
+        // MemoMission. Specializes MemoPart directly — name/description/rationale
+        // already live there, so no DocumentedElement layer is needed.
+        abstract part def MemoMission specializes MemoPart {
+            attribute missionKind : String;
+            attribute successCriteria : String;
+            attribute operationalContext : String;
         }
 
         // ─── Construct-specific foundations (non-part metaclasses) ───────
@@ -520,6 +541,10 @@ part def Citation specializes MemoPart
             attribute sourceReference : String;
             attribute status : ElementStatusKind;
         }
+
+        // Abstract step base: one step of a scenario. Concrete steps are a UserTask
+        // (performed by an actor) or a SystemAction (performed by the system).
+        abstract action def ScenarioStep specializes MemoAction;
 
         // Boundary feature foundation for typed ports.
         port def MemoPort {

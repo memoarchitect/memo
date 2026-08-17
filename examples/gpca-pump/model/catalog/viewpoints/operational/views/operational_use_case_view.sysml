@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_use_cas
         attribute depth = 2;
         attribute :>> id = "VIEW-OPS-101";
         attribute :>> name = "GPCA_UseCaseView";
-        attribute :>> title = "GPCA Use Case View";
         attribute :>> shortDescription = "Actors connected to the patient-controlled analgesia use case.";
         attribute :>> description = "Connects the nurse, patient, prescriber, and pharmacist to the patient-controlled analgesia use case.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -28,7 +27,6 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_use_cas
         attribute :>> dataSourceDescription = "GPCA use case and participating context actors";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include actors, use cases, and their participation relationships.";
-        attribute :>> documentUsage = ("Usability Engineering File", "Architecture Description");
         part :>> selectionQuery {
             attribute :>> id = "QRY-OPS-101";
             attribute :>> name = "GPCA_UseCaseQuery";
@@ -38,6 +36,6 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_use_cas
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the GPCA use case view from the operational layer.";
         }
-        part :>> viewpointDefinition = operationalViewpoint;
+        ref :>> viewpointDefinition = operationalViewpoint;
     }
 }

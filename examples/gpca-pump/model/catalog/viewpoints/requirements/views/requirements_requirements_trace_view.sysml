@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_requirements_requi
         attribute depth = 2;
         attribute :>> id = "VIEW-REQ-101";
         attribute :>> name = "GPCA_RequirementsTraceabilityView";
-        attribute :>> title = "GPCA Requirements Traceability View";
         attribute :>> shortDescription = "Needs to system/software/hardware requirements to satisfying components and verification.";
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
@@ -27,7 +26,6 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_requirements_requi
         attribute :>> dataSourceDescription = "GPCA requirements with DerivesFrom, SatisfiedBy, and VerifiedBy links";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include all needs and requirements with derivation, satisfaction, and verification links.";
-        attribute :>> documentUsage = ("Requirements Traceability Matrix", "DHF", "QMSR");
         part :>> selectionQuery {
             attribute :>> id = "QRY-REQ-101";
             attribute :>> name = "GPCA_RequirementsTraceQuery";
@@ -37,6 +35,6 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_requirements_requi
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Full derivation-to-verification traceability for design reviews.";
         }
-        part :>> viewpointDefinition = requirementsViewpoint;
+        ref :>> viewpointDefinition = requirementsViewpoint;
     }
 }

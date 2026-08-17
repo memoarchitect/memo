@@ -29,6 +29,7 @@
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
 | private | `memo_architecture_operational_context_actors::*` |
+| private | `memo_architecture_operational_structure::*` |
 
 ## Declarations
 
@@ -155,13 +156,16 @@ connection def SituatedIn :> MemoRelationship
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_operational_context_actors::*;
+        private import memo_architecture_operational_structure::*;
 
         part def UseContext specializes MemoPart {
             attribute careSetting : String;
             attribute environment : String;
             attribute jurisdiction : String;
             attribute connectedUse : Boolean;
-            attribute intendedUseReference : String;
+            // The intended use this context applies to (a typed ref, not a
+            // free-text id).
+            ref intendedUse : IntendedUse[0..1];
         }
 
         // The physical/organizational environment of use (IEC 62366-1 3.20),

@@ -6,7 +6,6 @@ package memo_examples_surgical_closure_workflow_viewpoints_unassigned_views_surg
     view surgicalClosureWorkflowOverview : MemoDiagramView {
         expose memo_examples_surgical_closure_workflow::*;
         attribute depth = 2;
-        attribute :>> title = "Laparoscopic Sleeve Gastrectomy Workflow";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ofd";
     }

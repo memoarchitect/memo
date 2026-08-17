@@ -9,15 +9,9 @@ package memo_examples_gpca_pump_gpca_system {
     private import memo_architecture_operational_use_cases::*;
     private import memo_core_common::*;
 
-    part gpcaMission : Mission {
-        attribute :>> id = "MSN-001";
-        attribute :>> name = "GPCA_Mission";
-        attribute :>> title = "Safe Patient-Controlled Analgesia";
-        attribute :>> shortDescription = "Deliver prescribed analgesia with patient-controlled boluses, never exceeding safe dose limits.";
-        attribute :>> missionKind = "therapeutic device mission";
-        attribute :>> successCriteria = "Drug delivered per prescription; no overdose or undetected under-infusion; every hazardous condition annunciated within its alarm latency budget.";
-        attribute :>> operationalContext = "Acute-care hospital ward, fixed (non-ambulatory) location (UC-001).";
-    }
+    // The device's top-level goal is its IntendedUse (gpcaIntendedUse in
+    // gpca_context) — a MemoMission. The former separate gpcaMission was
+    // retired: "mission" duplicated the regulated intended-use statement.
 
     // ── Functional chains ───────────────────────────────────────
     part fcPatientBolus : FunctionalFlow {

@@ -72,11 +72,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         expose maintainDevice;
         expose documentTreatment;
         expose validateTherapySettings;
-        attribute :>> title = "Sample · Device Use Cases";
         attribute :>> shortDescription = "Actors outside a device boundary with include, extend, hierarchy-level, and orthogonal-routing presentation.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "ucd";
-        part :>> viewpointDefinition = operationalViewpoint;
+        ref :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("User", "UseCase");
             attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Extends");

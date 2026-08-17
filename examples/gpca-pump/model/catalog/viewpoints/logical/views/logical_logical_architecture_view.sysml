@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_logical_archite
         attribute depth = 2;
         attribute :>> id = "VIEW-LOG-001";
         attribute :>> name = "GPCA_LogicalArchitectureView";
-        attribute :>> title = "GPCA Logical Architecture View";
         attribute :>> shortDescription = "Logical decomposition of the GPCA system.";
         attribute :>> description = "Product-specific logical architecture view that references the default logical architecture viewpoint and is intended for design description and architecture communication.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -28,7 +27,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_logical_archite
         attribute :>> dataSourceDescription = "GPCA architecture and interface model elements";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include GPCA logical components and key interfaces relevant to therapy control.";
-        attribute :>> documentUsage = ("SDD", "Architecture Description", "QMSR");
         part :>> selectionQuery {
             attribute :>> id = "QRY-LOG-001";
             attribute :>> name = "GPCA_LogicalArchitectureQuery";
@@ -37,6 +35,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_logical_archite
             attribute :>> selectionExpression = "product == 'GPCA' and concern contains therapy control";
             attribute :>> rationaleText = "Auto-populate the GPCA logical architecture view from the core product model.";
         }
-        part :>> viewpointDefinition = logicalArchitectureViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
     }
 }

@@ -51,7 +51,6 @@ package memo_examples_ui_screen_regions_viewpoints_ui_layout_views_main_screen_l
         expose memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
         expose memo_examples_ui_screen_regions_traces::*;
         attribute :>> id = "UIE-001";
-        attribute :>> title = "Main Infusion Screen — Region Layout";
-        part :>> viewpointDefinition = uiLayoutViewpoint;
+        ref :>> viewpointDefinition = uiLayoutViewpoint;
     }
 }
