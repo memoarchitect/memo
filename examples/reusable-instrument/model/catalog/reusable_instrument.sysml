@@ -35,8 +35,11 @@ package memo_examples_reusable_instrument {
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";
 
-        action wsClean : WorkflowStep { ref :>> performedActivity = actClean; }
-        first wsClean then wsInspect;
+        perform actClean;
+        perform actInspect;
+        perform actSterilizeLoad;
+        first actClean then actInspect;
+        first actInspect then actSterilizeLoad;
     }
     action actClean : OperativeAction {
         attribute :>> id = "RI-ACT-001"; attribute :>> name = "CleanAndDisinfect";
@@ -50,9 +53,6 @@ package memo_examples_reusable_instrument {
         attribute :>> id = "RI-ACT-003"; attribute :>> name = "PackAndAutoclave";
         attribute :>> criticality = CriticalityKind::high;
     }
-    action wsInspect : WorkflowStep { ref :>> performedActivity = actInspect; }
-    action wsSterilize : WorkflowStep { ref :>> performedActivity = actSterilizeLoad; }
-    first wsInspect then wsSterilize;
 
     action scNominalCycle : OperativeScenario {
         attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";

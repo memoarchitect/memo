@@ -40,7 +40,6 @@
 | [`StepTransformationKind`](#steptransformationkind) | `enum def` | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. | — |
 | [`OperationalWorkflow`](#operationalworkflow) | `action def` | Operational workflow definition specializing `MemoAction`. | `MemoAction` |
 | [`RealizesUseCase`](#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | `MemoRelationship` |
-| [`WorkflowStep`](#workflowstep) | `action def` | A step in a workflow references the operative action it performs — the same action may appear in several workflows. Who performs the action (user or system) is the action's own `perform` relationship. | `MemoAction` |
 | [`ControlNodeKind`](#controlnodekind) | `enum def` | decision / fork / join / handoff. | — |
 | [`WorkflowControlNode`](#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | `MemoAction` |
 | [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. | `MemoPart` |
@@ -106,21 +105,6 @@ connection def RealizesUseCase :> MemoRelationship
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_workflows` |
-
-
-## WorkflowStep
-
-```sysml
-action def WorkflowStep specializes MemoAction
-```
-
-| Property | Value |
-| --- | --- |
-| Description | A step in a workflow references the operative action it performs — the same action may appear in several workflows. Who performs the action (user or system) is the action's own `perform` relationship. |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoAction` |
 | Owning package | `memo_architecture_operational_workflows` |
 
 
@@ -291,15 +275,6 @@ connection def Transforms :> MemoRelationship
             :>> baseType = realizesUseCaseLinks meta SysML::Usage;
         }
 
-        // A step in a workflow references the operative action it performs — the
-        // same action may appear in several workflows. Who performs the action
-        // (user or system) is the action's own `perform` relationship.
-        action def WorkflowStep specializes MemoAction {
-            attribute entryCondition : String;
-            attribute exitCondition : String;
-            ref performedActivity : OperativeAction[0..1];
-            ref responsibleRole : OperationalParticipant[0..1];
-        }
 
         // decision / fork / join / handoff.
         enum def ControlNodeKind {

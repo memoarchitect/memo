@@ -55,15 +55,6 @@ package memo_architecture_operational_workflows {
         :>> baseType = realizesUseCaseLinks meta SysML::Usage;
     }
 
-    // A step in a workflow references the operative action it performs — the
-    // same action may appear in several workflows. Who performs the action
-    // (user or system) is the action's own `perform` relationship.
-    action def WorkflowStep specializes MemoAction {
-        attribute entryCondition : String;
-        attribute exitCondition : String;
-        ref performedActivity : OperativeAction[0..1];
-        ref responsibleRole : OperationalParticipant[0..1];
-    }
 
     // decision / fork / join / handoff.
     enum def ControlNodeKind {
