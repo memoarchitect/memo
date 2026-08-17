@@ -230,7 +230,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "therapy completed and stopped by clinician";
         attribute :>> pathSummary = "Prescribe > load reservoir > program and confirm > start basal > patient boluses within limits > stop therapy > review log.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.2 Main GPCA System Functions";
-        ref :>> parentWorkflow = wfManageActiveTherapy;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaCompleteNominalTherapy;
 
@@ -251,7 +250,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "request ignored, logged; basal continues unchanged";
         attribute :>> pathSummary = "Patient presses bolus button during lockout > infusion manager rejects request > event logged > no additional drug delivered.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 PATIENT BOLUS mode (lockout requirements)";
-        ref :>> parentWorkflow = wfManageActiveTherapy;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRejectBolusDuringLockout;
@@ -273,7 +271,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "infusion paused, alarm annunciated, clinician clears occlusion and resumes";
         attribute :>> pathSummary = "Occlusion sensor exceeds pressure threshold > alarm raised same step > infusion paused > audible and visual annunciation > clinician resolves and resumes.";
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms and Alerts (occlusion)";
-        ref :>> parentWorkflow = wfRespondToTherapyAlarm;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToOcclusion;
@@ -295,7 +292,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "infusion stopped before air reaches patient; alarm annunciated";
         attribute :>> pathSummary = "Air-in-line sensor detects bubble above threshold > transition to PAUSED (KVO flow) > High-priority Air embolism notification > clinician re-primes line and restarts.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Air embolism)";
-        ref :>> parentWorkflow = wfRespondToTherapyAlarm;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToAirInLine;
@@ -317,7 +313,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "infusion stopped, alarm raised, reservoir replaced";
         attribute :>> pathSummary = "Reservoir-empty condition detected > transition to PAUSED (KVO flow) > High-priority Empty Reservoir notification > clinician loads new reservoir > therapy resumed with saved prescription.";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Empty Reservoir)";
-        ref :>> parentWorkflow = wfRespondToTherapyAlarm;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaReplaceEmptyReservoir;
@@ -339,7 +334,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "therapy continues on battery; prescription preserved across full power loss";
         attribute :>> pathSummary = "Mains lost > battery takes over with notification > if battery depletes, pump stops safely > on power restore, saved prescription recovered and therapy resumed only after clinician confirmation.";
         attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.3 Electrical Hazards (battery failure)";
-        ref :>> parentWorkflow = wfRespondToTherapyAlarm;
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRecoverAfterPowerLoss;
@@ -366,4 +360,11 @@ package memo_examples_gpca_pump_gpca_operational {
     connection : RequiresCapability connect requiringIntendedUse ::> gpcaIntendedUse to requiredCapability ::> ocTitratedAnalgesia;
     connection : RequiresCapability connect requiringIntendedUse ::> gpcaIntendedUse to requiredCapability ::> ocFailSafeTherapy;
 
+
+    connection : HasScenario connect owningWorkflow ::> wfManageActiveTherapy to pathScenario ::> osNominalTherapy;
+    connection : HasScenario connect owningWorkflow ::> wfManageActiveTherapy to pathScenario ::> osLockoutBolus;
+    connection : HasScenario connect owningWorkflow ::> wfRespondToTherapyAlarm to pathScenario ::> osOcclusionAlarm;
+    connection : HasScenario connect owningWorkflow ::> wfRespondToTherapyAlarm to pathScenario ::> osAirInLine;
+    connection : HasScenario connect owningWorkflow ::> wfRespondToTherapyAlarm to pathScenario ::> osEmptyReservoir;
+    connection : HasScenario connect owningWorkflow ::> wfRespondToTherapyAlarm to pathScenario ::> osPowerLoss;
 }
