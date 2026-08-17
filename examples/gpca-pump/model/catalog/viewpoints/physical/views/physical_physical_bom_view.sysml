@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_physical_views_physical_physical_bom_
         attribute depth = 2;
         attribute :>> id = "VIEW-PHY-101";
         attribute :>> name = "GPCA_PhysicalBomView";
-        attribute :>> title = "GPCA Physical Architecture and BOM View";
         attribute :>> shortDescription = "Hardware assemblies, processing node, physical ports, and part numbers.";
         attribute :>> outputKind = (ViewOutputKind::table);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -27,7 +26,6 @@ package memo_examples_gpca_pump_viewpoints_physical_views_physical_physical_bom_
         attribute :>> dataSourceDescription = "GPCA hardware assemblies, processing node, and physical ports";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include hardware assemblies with part numbers, the MCU node, and external ports.";
-        attribute :>> documentUsage = ("Architecture Description", "DHF");
         part :>> selectionQuery {
             attribute :>> id = "QRY-PHY-101";
             attribute :>> name = "GPCA_PhysicalBomQuery";
@@ -36,6 +34,6 @@ package memo_examples_gpca_pump_viewpoints_physical_views_physical_physical_bom_
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the physical BOM from the hardware and physical layers.";
         }
-        part :>> viewpointDefinition = physicalViewpoint;
+        ref :>> viewpointDefinition = physicalViewpoint;
     }
 }

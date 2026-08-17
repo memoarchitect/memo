@@ -46,9 +46,8 @@ package memo_examples_ui_screen_regions_viewpoints_ui_layout_views_ui_region_tra
         expose memo_examples_ui_screen_regions_traces::*;
         attribute :>> id = "UIV-001";
         attribute depth = 3;
-        attribute :>> title = "UI Region Traceability";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
-        part :>> viewpointDefinition = uiLayoutViewpoint;
+        ref :>> viewpointDefinition = uiLayoutViewpoint;
     }
 }

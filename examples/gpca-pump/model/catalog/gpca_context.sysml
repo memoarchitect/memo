@@ -3,6 +3,7 @@ package memo_examples_gpca_pump_gpca_context {
 
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_context_use_context::*;
+    private import memo_architecture_operational_structure::*;
     private import memo_assurance_requirements::*;
     private import memo_assurance_human_factors::*;
     private import memo_core_enumerations::*;
@@ -12,7 +13,6 @@ package memo_examples_gpca_pump_gpca_context {
     part gpcaIntendedUse : IntendedUse {
         attribute :>> id = "IU-001";
         attribute :>> name = "GPCA_IntendedUse";
-        attribute :>> title = "GPCA Pump Intended Use";
         attribute :>> shortDescription = "Patient-controlled analgesia infusion of prescribed opioid analgesics.";
         attribute :>> description = "The GPCA pump delivers a prescribed analgesic drug intravenously at a programmed basal rate, supplemented by square boluses delivered automatically at programmed intervals and by patient-requested bolus doses, subject to lockout intervals and maximum-dose limits.";
         attribute :>> indication = "Management of acute post-operative or chronic pain requiring titrated intravenous opioid analgesia.";
@@ -20,12 +20,14 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> patientPopulation = "Adult in-patients under clinical supervision.";
         attribute :>> clinicalBenefit = "Timely, patient-titrated analgesia with lower total opioid consumption than fixed-schedule dosing.";
         attribute :>> regulatoryClassification = "FDA Class II infusion pump (21 CFR 880.5725); IEC 62304 software safety class C.";
+        attribute :>> missionKind = "therapeutic device mission";
+        attribute :>> successCriteria = "Drug delivered per prescription; no overdose or undetected under-infusion; every hazardous condition annunciated within its alarm latency budget.";
+        attribute :>> operationalContext = "Acute-care hospital ward, fixed (non-ambulatory) location (UC-001).";
         attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1-2.3 (GPCA overview, system functions, user characteristics)";
     }
     part bolusByProxyMisuse : ReasonablyForeseeableMisuse {
         attribute :>> id = "RFM-001";
         attribute :>> name = "BolusRequestBySomeoneOtherThanPatient";
-        attribute :>> title = "Bolus by proxy";
         attribute :>> shortDescription = "A caregiver or visitor presses the patient bolus control.";
         attribute :>> description = "A person other than the patient activates the bolus request control, bypassing the intended patient self-limiting behavior.";
         attribute :>> misuseContext = "Patient-controlled analgesia in a supervised hospital setting.";
@@ -42,7 +44,7 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> environment = "indoor clinical environment, mains power with battery backup, pole or bed-rail mounted";
         attribute :>> jurisdiction = "generic (FDA/EU reference model)";
         attribute :>> connectedUse = true;
-        attribute :>> intendedUseReference = "IU-001";
+        ref :>> intendedUse = gpcaIntendedUse;
     }
     // UC-002 (intra-hospital transport) removed: CriSys §2.4 states the
     // system is used in a fixed location and is not ambulatory.

@@ -28,6 +28,93 @@ const node = (x, y, width, height, label, accent, fill = '#ffffff') => `
   <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="14" fill="${fill}" stroke="${accent}" stroke-width="2"/>
   ${text(x + width / 2, y + height / 2 + 7, label, { size: 19, weight: 750 })}`;
 
+// Nunito at the given size/weight, in px per character — measured against
+// this font's own metrics, not assumed. A hand-picked pixel width silently
+// overflows the moment a label is longer than whoever wrote it expected;
+// every box in this file is sized from this instead.
+const charWidth = (size, weight) => size * (weight >= 850 ? 0.62 : weight >= 750 ? 0.58 : weight >= 700 ? 0.55 : 0.5);
+const measureText = (label, size, weight) => Math.max(...String(label).split('\n').map((line) => line.length)) * charWidth(size, weight);
+
+// A leaf element box, width computed from its own label so it can never
+// overflow into a neighbor. Returns { svg, width } so callers can flow
+// several in a row.
+const autoNode = (x, y, label, accent, { height = 64, minWidth = 120, fill = '#ffffff', size = 19, weight = 750, padding = 36 } = {}) => {
+  const width = Math.max(minWidth, Math.ceil(measureText(label, size, weight) + padding));
+  return { svg: node(x, y, width, height, label, accent, fill), width, height };
+};
+
+// Flow a row of leaf elements left to right with a fixed gap, each auto-
+// sized to its own label. Returns { svg, right, bottom } — `right` is where
+// the next thing may start, `bottom` is y + height, so a group box can be
+// sized to its own content instead of guessed.
+const layoutRow = (x, y, labels, accent, opts = {}) => {
+  const { gap = 22, ...nodeOpts } = opts;
+  let cx = x;
+  let svg = '';
+  let height = nodeOpts.height ?? 64;
+  for (const label of labels) {
+    const result = autoNode(cx, y, label, accent, nodeOpts);
+    svg += result.svg;
+    cx += result.width + gap;
+    height = result.height;
+  }
+  return { svg, right: cx - gap, bottom: y + height };
+};
+
+// A parent→children containment tree, the same elbow-connector convention
+// ARCADIA breakdown diagrams use (see DiagBreakdown.png in the MBSE method
+// summary this page is modeled on): a trunk down from the parent, a bar, a
+// branch down into each child. No box drawn around the group — the tree
+// itself is what says "contained by".
+const treeDown = (parentCx, parentBottom, children, accent) => {
+  if (children.length === 0) return '';
+  const midY = parentBottom + 26;
+  const cxs = children.map((c) => c.x + c.width / 2);
+  const left = Math.min(...cxs);
+  const right = Math.max(...cxs);
+  let svg = `<path d="M ${parentCx} ${parentBottom} L ${parentCx} ${midY}" fill="none" stroke="${accent}" stroke-width="2"/>`;
+  if (left !== right) svg += `<path d="M ${left} ${midY} L ${right} ${midY}" fill="none" stroke="${accent}" stroke-width="2"/>`;
+  for (const c of children) svg += `<path d="M ${c.x + c.width / 2} ${midY} L ${c.x + c.width / 2} ${c.y}" fill="none" stroke="${accent}" stroke-width="2"/>`;
+  return svg;
+};
+
+// One relation per row: source box, labeled arrow, target box, every box
+// auto-sized to its own label (see autoNode) so nothing can silently
+// overflow into its neighbor. Stacking rows instead of one crossing-heavy
+// diagram keeps each relation legible.
+//
+// Three end styles, never conflated:
+//   - solid ${accent} box  = a type this page's own area owns.
+//   - dashed lavender box  = untyped end (the relation accepts any element).
+//   - solid grey box + a second, smaller line giving its real SysML package
+//                       = a type a DIFFERENT area owns (most often
+//                         `memo::core::common`). This area does not own that
+//                         type, so it is never drawn as if it belongs here.
+const relationRow = (y, accent, sourceLabel, relationLabel, targetLabel, { untypedSource = false, untypedTarget = false, sourcePackage, targetPackage } = {}) => {
+  const rowHeight = 64;
+  const endBox = (x, label, untyped, pkg) => {
+    const width = pkg
+      ? Math.ceil(Math.max(measureText(label, 16, 750), measureText(pkg, 10, 650)) + 36)
+      : Math.ceil(measureText(label, 17, 700) + 36);
+    const svg = pkg
+      ? `<rect x="${x}" y="${y}" width="${width}" height="${rowHeight}" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      ${text(x + width / 2, y + 27, label, { size: 16, weight: 750 })}
+      ${text(x + width / 2, y + 46, pkg, { size: 10, weight: 650, fill: '#7c8798' })}`
+      : `<rect x="${x}" y="${y}" width="${width}" height="${rowHeight}" rx="12" fill="${untyped ? '#f3f2fb' : '#ffffff'}" stroke="${accent}" stroke-width="2" ${untyped ? 'stroke-dasharray="6 5"' : ''}/>
+      ${text(x + width / 2, y + rowHeight / 2 + 6, label, { size: 17, weight: 700 })}`;
+    return { svg, width };
+  };
+  const sx = 60;
+  const source = endBox(sx, sourceLabel, untypedSource, sourcePackage);
+  const targetWidth = endBox(0, targetLabel, untypedTarget, targetPackage).width;
+  const tx = 1600 - 60 - targetWidth;
+  const target = endBox(tx, targetLabel, untypedTarget, targetPackage);
+  return `
+  ${source.svg}
+  ${target.svg}
+  ${edge(sx + source.width, y + rowHeight / 2, tx, y + rowHeight / 2, relationLabel, { color: accent, labelY: y + rowHeight / 2 - 20 })}`;
+};
+
 const edge = (x1, y1, x2, y2, label = '', { color = '#536b7a', dashed = false, labelX, labelY } = {}) => {
   const mx = labelX ?? (x1 + x2) / 2;
   const my = labelY ?? (y1 + y2) / 2;
@@ -58,28 +145,152 @@ const diagram = ({ title, subtitle, width = 1600, height, accent, body }) => `<?
 
 const write = (name, spec) => writeFileSync(join(output, `${name}.svg`), diagram(spec));
 
-write('architecture-operational-elements', {
-  title: 'Operational elements', subtitle: 'people, context, work, and scenarios', height: 1030, accent: '#6f42c1',
-  body: `
-    ${group(40, 120, 710, 260, 'People and context', '#6f42c1')}
-    ${node(75, 205, 190, 66, 'Stakeholder', '#6f42c1')}${node(330, 205, 170, 66, 'Concern', '#6f42c1')}${edge(265, 238, 330, 238, 'HasConcern')}
-    ${node(75, 300, 190, 66, 'User', '#6f42c1')}${node(330, 300, 170, 66, 'Actor', '#6f42c1')}${edge(265, 333, 330, 333, 'specializes')}
-    ${node(535, 205, 180, 66, 'UseContext', '#6f42c1')}${node(535, 300, 180, 66, 'UseEnvironment', '#6f42c1')}${edge(625, 271, 625, 300, 'SituatedIn', { labelX: 680 })}
+// PILOT: Operational layer, redrawn from src/architecture/operational/**
+// (2026-08-16). Three artifacts, not one: a nesting diagram with zero
+// relation arrows, then relation arrows split into two small scoped
+// diagrams, one relation per row so nothing crosses.
+//
+// Grouped by semantic role (people / context / mission / work / workflows /
+// scenarios), not by raw sub-package — the earlier package-literal grouping
+// buried the actual reading order. Containment (OperationalParticipant→User,
+// OperationalWorkflow→its steps) is drawn as a parent/child TREE, the same
+// elbow-connector convention ARCADIA breakdown diagrams use, not a box
+// nested inside a box.
+//
+// `ArchitectureDescription`/`ModelKind`/`CorrespondenceRule` are declared in
+// this area's `context::stakeholders` sub-package, but they describe the
+// MODEL (ISO/IEC/IEEE 42010 architecture-description apparatus), not the
+// device's operational world — they are set apart in their own group, in
+// grey rather than the area accent, with that distinction stated rather than
+// silently folded in as if they were operational-world content.
+{
+  const accent = '#6f42c1';
+  const modelDescAccent = '#7c8798';
+  const x0 = 40;
+  const fullWidth = 1520;
+  let y = 120;
+  let body = '';
 
-    ${group(790, 120, 770, 260, 'Goals and operational work', '#6f42c1')}
-    ${node(830, 205, 190, 66, 'UseCase', '#6f42c1')}${node(1090, 205, 210, 66, 'OperationalActivity', '#6f42c1')}${node(1340, 205, 180, 66, 'UserTask', '#6f42c1')}
-    ${node(830, 300, 210, 66, 'OperationalEntity', '#6f42c1')}${node(1090, 300, 210, 66, 'OperationalCapability', '#6f42c1')}${node(1340, 300, 180, 66, 'TaskStep', '#6f42c1')}
+  const rowGroup = (title, groupAccent, rowY, labels, opts = {}) => {
+    const row = layoutRow(x0 + 30, rowY, labels, groupAccent, opts);
+    const height = row.bottom - y + 30;
+    const width = Math.max(fullWidth, row.right - x0 + 30);
+    body += group(x0, y, width, height, title, groupAccent) + row.svg;
+    y += height + 30;
+  };
 
-    ${group(40, 420, 1520, 540, 'Workflow and scenario structure', '#6f42c1')}
-    ${node(90, 525, 245, 70, 'OperationalWorkflow', '#6f42c1')}${node(425, 525, 205, 70, 'WorkflowStep', '#6f42c1')}${node(720, 525, 230, 70, 'WorkflowControlNode', '#6f42c1')}${node(1040, 525, 220, 70, 'WorkflowResource', '#6f42c1')}
-    ${edge(335, 560, 425, 560, 'contains')}${edge(630, 560, 720, 560, 'StepPrecedes')}${edge(950, 560, 1040, 560, 'RequiresResource')}
-    ${node(90, 690, 220, 70, 'MemoScenario (operative)', '#6f42c1')}${node(410, 690, 205, 70, 'WorkflowStep', '#6f42c1')}${node(715, 690, 225, 70, 'ScenarioOccurrence', '#6f42c1')}${node(1040, 690, 220, 70, 'UseContext', '#6f42c1')}
-    ${edge(310, 725, 410, 725, 'Selects')}${edge(940, 725, 1040, 725, 'OccursDuring')}
-    ${edge(200, 690, 212, 595, 'parentWorkflow ref', { labelX: 120, labelY: 640 })}${edge(827, 690, 827, 595, 'executedScenario ref', { labelX: 925, labelY: 642 })}
-    ${node(90, 850, 200, 66, 'Actor', '#6f42c1')}${node(390, 850, 200, 66, 'UseCase', '#6f42c1')}${node(690, 850, 230, 66, 'OperationalWorkflow', '#6f42c1')}
-    ${edge(290, 883, 390, 883, 'ParticipatesIn')}${edge(590, 883, 690, 883, 'Supports')}
-  `,
-});
+  // People — who is in the operational world (native specialization: the
+  // only concrete OperationalParticipant today is User).
+  {
+    const parentY = y + 90;
+    const parent = autoNode(x0 + 30, parentY, 'OperationalParticipant (abstract)', accent);
+    const childY = parentY + parent.height + 46;
+    const child = autoNode(x0 + 30, childY, 'User', accent);
+    const height = childY + child.height - y + 30;
+    body += group(x0, y, fullWidth, height, 'People — context::actors', accent);
+    body += parent.svg + child.svg;
+    body += treeDown(x0 + 30 + parent.width / 2, parentY + parent.height, [{ x: x0 + 30, y: childY, width: child.width }], accent);
+    y += height + 30;
+  }
+
+  // Context — where, and under what conditions, work happens.
+  rowGroup('Context — context::use_context', accent, y + 90, ['UseContext', 'UseEnvironment']);
+
+  // Mission and operational architecture — the ARCADIA-style enterprise
+  // layer: what the operation is for, and who/what delivers it.
+  rowGroup('Mission and operational architecture — structure', accent, y + 90, [
+    'Mission', 'OperationalEntity', 'OperationalCapability', 'OperationalInteraction',
+  ]);
+
+  // Goals and work — what a use case, activity, or task sets out to do.
+  rowGroup('Goals and work — use_cases, activities', accent, y + 90, [
+    'UseCase', 'OperationalActivity', 'UserTask', 'TaskStep', 'TaskDifficultyAssessment',
+  ]);
+
+  // Workflows — OperationalWorkflow is composed of its steps and control
+  // nodes (tree); WorkflowResource is referenced, not contained, so it sits
+  // apart with no tree connector into it.
+  {
+    const parentY = y + 90;
+    const parent = autoNode(x0 + 30, parentY, 'OperationalWorkflow', accent);
+    const childY = parentY + parent.height + 46;
+    const stepX = x0 + 30;
+    const step = autoNode(stepX, childY, 'WorkflowStep', accent);
+    const controlX = stepX + step.width + 60;
+    const control = autoNode(controlX, childY, 'WorkflowControlNode', accent);
+    const resourceX = controlX + control.width + 120;
+    const resource = autoNode(resourceX, childY, 'WorkflowResource', accent, { fill: '#fbfbfe' });
+    const height = childY + step.height - y + 30;
+    body += group(x0, y, fullWidth, height, 'Workflows — workflows', accent);
+    body += parent.svg + step.svg + control.svg + resource.svg;
+    body += treeDown(x0 + 30 + parent.width / 2, parentY + parent.height, [
+      { x: stepX, y: childY, width: step.width },
+      { x: controlX, y: childY, width: control.width },
+    ], accent);
+    body += text(resourceX + resource.width / 2, childY - 12, 'referenced, not contained', { size: 12, weight: 650, fill: '#7c8798' });
+    y += height + 30;
+  }
+
+  // Scenarios — a selected path through a workflow, and an execution of one.
+  rowGroup('Scenarios — scenarios', accent, y + 90, ['MemoScenario (operative)', 'ScenarioOccurrence']);
+
+  // Set apart: model description, not operational-world content.
+  {
+    const rowY = y + 96;
+    const row = layoutRow(x0 + 30, rowY, ['ArchitectureDescription', 'ModelKind', 'CorrespondenceRule'], modelDescAccent);
+    const height = row.bottom - y + 34;
+    body += group(x0, y, fullWidth, height, 'Model description (ISO/IEC/IEEE 42010) — not operational-world content', modelDescAccent);
+    body += text(x0 + 30, y + 74, 'Declared in context::stakeholders, but these describe the MODEL — closer to Viewpoints than to the device\'s operational world.', { size: 13, weight: 600, fill: '#7c8798', anchor: 'start' });
+    body += row.svg;
+    y += height + 30;
+  }
+
+  write('architecture-operational-nesting', {
+    title: 'Operational elements — nesting', subtitle: 'containment and specialization only, no relation arrows', height: y - 30, accent,
+    body,
+  });
+}
+
+{
+  const accent = '#6f42c1';
+  let y = 140;
+  let body = '';
+  const addRow = (source, relation, target, opts) => {
+    body += relationRow(y, accent, source, relation, target, opts);
+    y += 80;
+  };
+  addRow('MemoPart', 'Governs', 'MemoPart', { sourcePackage: 'memo::core::common', targetPackage: 'memo::core::common' });
+  addRow('ArchitectureElement', 'InteractsInContext', 'ArchitectureElement', { sourcePackage: 'memo::core::common', targetPackage: 'memo::core::common' });
+  addRow('OperationalParticipant', 'InteractsWith', 'any element', { untypedTarget: true });
+  addRow('UseContext', 'AppliesInContext', 'MemoPart', { targetPackage: 'memo::core::common' });
+  addRow('UseContext', 'SituatedIn', 'UseEnvironment');
+  addRow('TaskDifficultyAssessment', 'AssessesDifficulty', 'UserTask');
+  write('architecture-operational-relations-context', {
+    title: 'Operational relations — context', subtitle: 'grey = owned by another area, dashed lavender = untyped (any element)', height: y - 16, accent,
+    body,
+  });
+}
+
+{
+  const accent = '#6f42c1';
+  let y = 140;
+  let body = '';
+  const addRow = (source, relation, target, opts) => {
+    body += relationRow(y, accent, source, relation, target, opts);
+    y += 80;
+  };
+  addRow('Need', 'Motivates', 'UseCase', { sourcePackage: 'memo::assurance::requirements::needs' });
+  addRow('UseCase', 'Extends', 'UseCase');
+  addRow('any action', 'Supports', 'MemoAction', { untypedSource: true, targetPackage: 'memo::core::common' });
+  addRow('OperationalWorkflow', 'RequiresResource', 'WorkflowResource');
+  addRow('MemoAction', 'Transforms', 'MemoAction', { sourcePackage: 'memo::core::common', targetPackage: 'memo::core::common' });
+  addRow('MemoScenario', 'Selects', 'step or flow (any)', { untypedTarget: true });
+  addRow('ScenarioOccurrence', 'OccursDuring', 'UseContext');
+  write('architecture-operational-relations-work', {
+    title: 'Operational relations — use cases, workflows, scenarios', subtitle: 'grey = owned by another area, dashed lavender = untyped (any element)', height: y - 16, accent,
+    body,
+  });
+}
 
 write('architecture-functional-elements', {
   title: 'Functional elements', subtitle: 'required behavior without implementation choices', height: 880, accent: '#1769d2',

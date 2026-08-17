@@ -9,7 +9,6 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
         expose memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view::*;
         attribute :>> id = "DOC-004";
         attribute :>> name = "SoftwareDesignDescriptionView";
-        attribute :>> title = "GPCA Software Design Description View";
         attribute :>> shortDescription = "IEC 62304 software design description for the GPCA software system.";
         attribute :>> description = "Aggregates the software system, its six components with safety classes and scheduling attributes, mode machine and transitions, interfaces, and function allocations for the SDD.";
         attribute :>> version = "0.1";
@@ -17,9 +16,7 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
         attribute :>> viewKind = DocumentViewKind::SDD;
         attribute :>> generationRule = "Include software structure, behavior machine with transitions, software interfaces, allocations, and timing constraints";
         attribute :>> marketScope = "generic";
-        attribute :>> documentUsage = ("SDD", "QMSR");
-        attribute :>> sectionIdentifier = "SDD";
-        part :>> viewpointDefinition = softwareViewpoint;
+        ref :>> viewpointDefinition = softwareViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-004";
             attribute :>> name = "sddViewQuery";

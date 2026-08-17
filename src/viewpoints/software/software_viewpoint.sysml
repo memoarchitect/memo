@@ -4,10 +4,9 @@ package memo_viewpoints_software_software_viewpoint {
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
-    part softwareViewpoint : Viewpoint {
+    viewpoint softwareViewpoint : MemoViewpoint {
         attribute :>> id = "VP-SW";
         attribute :>> name = "SoftwareViewpoint";
-        attribute :>> title = "Software Viewpoint";
         attribute :>> shortDescription = "Shows software systems, components, SOUP, and software interfaces.";
         attribute :>> description = "Default viewpoint derived from the software structure layer for IEC 62304 software architecture description — software item decomposition, SOUP inventory, and software-to-software interfaces, distinct from system-level logical decomposition.";
         attribute :>> purpose = "Describe the software architecture for IEC 62304 design documentation.";

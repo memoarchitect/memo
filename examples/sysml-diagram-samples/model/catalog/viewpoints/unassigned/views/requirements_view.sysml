@@ -50,11 +50,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
         expose reqOcclusionAlarm;
         expose reqAlarmLoudness;
         attribute depth = 1;
-        attribute :>> title = "Sample · Requirements";
         attribute :>> shortDescription = "Stakeholder needs deriving into system requirements, wired by DerivesFrom trace edges.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "req";
-        part :>> viewpointDefinition = requirementsViewpoint;
+        ref :>> viewpointDefinition = requirementsViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("DerivesFrom");
         }

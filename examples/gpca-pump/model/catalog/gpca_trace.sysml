@@ -72,9 +72,6 @@ package memo_examples_gpca_pump_gpca_trace {
     first oaLoadReservoir then oaProgram;
     first oaProgram then oaStartTherapy;
     first oaStartTherapy then oaRequestBolus;
-    connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaStartTherapy to supported ::> ocTitratedAnalgesia; }
-    connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaRequestBolus to supported ::> ocTitratedAnalgesia; }
-    connection : Supports { attribute :>> supportKind = SupportKind::capability; connect supporter ::> oaRespondAlarm to supported ::> ocFailSafeTherapy; }
     connection : DerivesFrom connect sourceDriver ::> oaProgram to targetRequirement ::> reqDrugLibraryLimits;
     connection : DerivesFrom connect sourceDriver ::> oaRequestBolus to targetRequirement ::> reqCs25;
     connection : DerivesFrom connect sourceDriver ::> oaRespondAlarm to targetRequirement ::> reqCs59;
