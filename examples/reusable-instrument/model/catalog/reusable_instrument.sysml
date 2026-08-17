@@ -38,15 +38,15 @@ package memo_examples_reusable_instrument {
         action wsClean : WorkflowStep { ref :>> performedActivity = actClean; }
         first wsClean then wsInspect;
     }
-    action actClean : OperationalActivity {
+    action actClean : OperativeAction {
         attribute :>> id = "RI-ACT-001"; attribute :>> name = "CleanAndDisinfect";
         attribute :>> criticality = CriticalityKind::high;
     }
-    action actInspect : OperationalActivity {
+    action actInspect : OperativeAction {
         attribute :>> id = "RI-ACT-002"; attribute :>> name = "InspectAndFunctionTest";
         attribute :>> criticality = CriticalityKind::high;
     }
-    action actSterilizeLoad : OperationalActivity {
+    action actSterilizeLoad : OperativeAction {
         attribute :>> id = "RI-ACT-003"; attribute :>> name = "PackAndAutoclave";
         attribute :>> criticality = CriticalityKind::high;
     }

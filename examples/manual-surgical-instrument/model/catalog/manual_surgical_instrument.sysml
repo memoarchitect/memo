@@ -35,7 +35,7 @@ package memo_examples_manual_surgical_instrument {
 
     // A task may be traced to the architecture later when the project has a
     // specific allocation or interaction claim to make.
-    action taskPlaceSutures : UserTask {
+    action taskPlaceSutures : OperativeAction {
         attribute :>> id = "MSI-TASK-001";
         attribute :>> name = "PlaceSutures";
         attribute :>> taskGoal = "place interrupted sutures";

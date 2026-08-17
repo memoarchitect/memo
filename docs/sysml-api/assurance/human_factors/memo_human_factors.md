@@ -128,7 +128,7 @@ connection def TestedByUsability :> MemoRelationship
         }
 
         connection def CommitsUseError :> MemoRelationship {
-            end task : UserTask :>> source;
+            end task : OperativeAction :>> source;
             end useError : UseError :>> target;
         }
         abstract connection commitsUseErrorLinks : CommitsUseError[*];
@@ -139,7 +139,7 @@ connection def TestedByUsability :> MemoRelationship
         }
         connection def EvaluatesTask :> MemoRelationship {
             end evaluation : MemoEvidence :>> source;
-            end task : UserTask :>> target;
+            end task : OperativeAction :>> target;
         }
         abstract connection evaluatesTaskLinks : EvaluatesTask[*];
         metadata def <evaluatesTask> EvaluatesTaskMetadata :> SemanticMetadata {

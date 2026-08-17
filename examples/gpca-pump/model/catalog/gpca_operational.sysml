@@ -78,7 +78,7 @@ package memo_examples_gpca_pump_gpca_operational {
     }
 
     // ── Operational activities (therapy lifecycle) ──────────────
-    action oaPrescribe : OperationalActivity {
+    action oaPrescribe : OperativeAction {
         attribute :>> id = "OA-001";
         attribute :>> name = "PrescribeTherapy";
         attribute :>> trigger = "patient requires titrated analgesia";
@@ -86,7 +86,7 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "prescription with basal rate, bolus volume, lockout, and max dose limits exists";
         attribute :>> criticality = CriticalityKind::high;
     }
-    action oaLoadReservoir : OperationalActivity {
+    action oaLoadReservoir : OperativeAction {
         attribute :>> id = "OA-002";
         attribute :>> name = "LoadDrugReservoir";
         attribute :>> trigger = "prescription issued or reservoir empty";
@@ -94,7 +94,7 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "reservoir mounted, door closed and latched";
         attribute :>> criticality = CriticalityKind::high;
     }
-    action oaProgram : OperationalActivity {
+    action oaProgram : OperativeAction {
         attribute :>> id = "OA-003";
         attribute :>> name = "ProgramPrescription";
         attribute :>> trigger = "reservoir loaded";
@@ -102,7 +102,7 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "prescription entered, checked against pharmacy-database safe values (I 9-I 11), and confirmed by second review";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    action oaStartTherapy : OperationalActivity {
+    action oaStartTherapy : OperativeAction {
         attribute :>> id = "OA-004";
         attribute :>> name = "StartInfusion";
         attribute :>> trigger = "prescription confirmed";
@@ -110,7 +110,7 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "basal infusion running";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    action oaRequestBolus : OperationalActivity {
+    action oaRequestBolus : OperativeAction {
         attribute :>> id = "OA-005";
         attribute :>> name = "RequestPatientBolus";
         attribute :>> trigger = "patient presses bolus request button";
@@ -118,7 +118,7 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "bolus delivered, or request ignored when lockout or max-dose limits apply";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    action oaRespondAlarm : OperationalActivity {
+    action oaRespondAlarm : OperativeAction {
         attribute :>> id = "OA-006";
         attribute :>> name = "RespondToAlarm";
         attribute :>> trigger = "audible or visual alarm annunciated";
@@ -126,7 +126,7 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "cause resolved and therapy resumed, or therapy stopped";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    action oaReviewLog : OperationalActivity {
+    action oaReviewLog : OperativeAction {
         attribute :>> id = "OA-007";
         attribute :>> name = "ReviewEventLog";
         attribute :>> trigger = "shift change, incident review, or dose audit";
@@ -134,7 +134,7 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> postCondition = "delivered doses and alarm history reviewed";
         attribute :>> criticality = CriticalityKind::medium;
     }
-    action oaMaintain : OperationalActivity {
+    action oaMaintain : OperativeAction {
         attribute :>> id = "OA-008";
         attribute :>> name = "MaintainDevice";
         attribute :>> trigger = "scheduled maintenance or fault";
@@ -233,7 +233,7 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> parentUseCase = ucDeliverPcaTherapy;
         ref :>> activities = oaCompleteNominalTherapy;
 
-        action oaCompleteNominalTherapy : OperationalActivity {
+        action oaCompleteNominalTherapy : OperativeAction {
             attribute :>> name = "CompleteNominalTherapy";
             action deliverWithinLimits; action recordTherapyEvent;
             first start then deliverWithinLimits; first deliverWithinLimits then recordTherapyEvent; first recordTherapyEvent then done;
@@ -254,7 +254,7 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRejectBolusDuringLockout;
 
-        action oaRejectBolusDuringLockout : OperationalActivity {
+        action oaRejectBolusDuringLockout : OperativeAction {
             attribute :>> name = "RejectBolusDuringLockout";
             action checkLockout; action rejectAndLog;
             first start then checkLockout; first checkLockout then rejectAndLog; first rejectAndLog then done;
@@ -275,7 +275,7 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToOcclusion;
 
-        action oaRespondToOcclusion : OperationalActivity {
+        action oaRespondToOcclusion : OperativeAction {
             attribute :>> name = "RespondToOcclusion";
             action pauseInfusion; action annunciateOcclusion; action resolveAndResume;
             first start then pauseInfusion; first pauseInfusion then annunciateOcclusion; first annunciateOcclusion then resolveAndResume; first resolveAndResume then done;
@@ -296,7 +296,7 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRespondToAirInLine;
 
-        action oaRespondToAirInLine : OperationalActivity {
+        action oaRespondToAirInLine : OperativeAction {
             attribute :>> name = "RespondToAirInLine";
             action stopOrKvo; action annunciateAir; action reprimeAndRestart;
             first start then stopOrKvo; first stopOrKvo then annunciateAir; first annunciateAir then reprimeAndRestart; first reprimeAndRestart then done;
@@ -317,7 +317,7 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaReplaceEmptyReservoir;
 
-        action oaReplaceEmptyReservoir : OperationalActivity {
+        action oaReplaceEmptyReservoir : OperativeAction {
             attribute :>> name = "ReplaceEmptyReservoir";
             action stopAndAnnunciate; action replaceReservoir; action resumeTherapy;
             first start then stopAndAnnunciate; first stopAndAnnunciate then replaceReservoir; first replaceReservoir then resumeTherapy; first resumeTherapy then done;
@@ -338,7 +338,7 @@ package memo_examples_gpca_pump_gpca_operational {
         ref :>> baseScenario = osNominalTherapy;
         ref :>> activities = oaRecoverAfterPowerLoss;
 
-        action oaRecoverAfterPowerLoss : OperationalActivity {
+        action oaRecoverAfterPowerLoss : OperativeAction {
             attribute :>> name = "RecoverAfterPowerLoss";
             action switchToBattery; action restorePrescription; action confirmRestart;
             first start then switchToBattery; first switchToBattery then restorePrescription; first restorePrescription then confirmRestart; first confirmRestart then done;

@@ -42,7 +42,7 @@
 | [`AnalysisArtifact`](#analysisartifact) | `part def` | Analysis artifact definition specializing `MemoPart`. | `MemoPart` |
 | [`MemoMission`](#memomission) | `part def` | Memo mission definition specializing `MemoPart`. | `MemoPart` |
 | [`MemoAction`](#memoaction) | `action def` | Behavioral foundation: operational activities, tasks, system actions, and interaction steps specialize MemoAction. | — |
-| [`ScenarioStep`](#scenariostep) | `action def` | Abstract step base: one step of a scenario. Concrete steps are a UserTask (performed by an actor) or a SystemAction (performed by the system). | `MemoAction` |
+| [`ScenarioStep`](#scenariostep) | `action def` | Abstract step base: one step of a scenario. The concrete step is an OperativeAction; whether an actor or the system performs it is a native `perform` relationship, not a subtype. | `MemoAction` |
 | [`MemoPort`](#memoport) | `port def` | Boundary feature foundation for typed ports. | — |
 | [`MemoInterface`](#memointerface) | `interface def` | Interaction-contract foundation for interface definitions between ports. | — |
 | [`MemoItem`](#memoitem) | `item def` | Single item foundation. Standards, hazards, stored software data, and message payloads are all item-native concepts. Whether an item is exchanged is expressed by its use in a port or flow, not by a second ontology root. | — |
@@ -214,7 +214,7 @@ abstract action def ScenarioStep specializes MemoAction
 
 | Property | Value |
 | --- | --- |
-| Description | Abstract step base: one step of a scenario. Concrete steps are a UserTask (performed by an actor) or a SystemAction (performed by the system). |
+| Description | Abstract step base: one step of a scenario. The concrete step is an OperativeAction; whether an actor or the system performs it is a native `perform` relationship, not a subtype. |
 | Kind | `action def` |
 | Abstract | Yes |
 | Specializes | `MemoAction` |
@@ -542,8 +542,9 @@ part def Citation specializes MemoPart
             attribute status : ElementStatusKind;
         }
 
-        // Abstract step base: one step of a scenario. Concrete steps are a UserTask
-        // (performed by an actor) or a SystemAction (performed by the system).
+        // Abstract step base: one step of a scenario. The concrete step is an
+        // OperativeAction; whether an actor or the system performs it is a native
+        // `perform` relationship, not a subtype.
         abstract action def ScenarioStep specializes MemoAction;
 
         // Boundary feature foundation for typed ports.
