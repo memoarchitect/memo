@@ -43,10 +43,9 @@
 | [`ScenarioPurposeKind`](#scenariopurposekind) | `enum def` | `memoAnalysis` and `memoVerification` keep the regulated terms `analysis` and `verification` intact but prefixed, because both are SysML v2 reserved words and cannot be bare enum names. `validation` is not reserved. | — |
 | [`ScenarioKind`](#scenariokind) | `enum def` | Controlled values for scenario: `functional`, `operative`, `ui`, `threat`, `memoVerification`, `hazardRelatedUse`. | — |
 | [`OperativeScenario`](#operativescenario) | `action def` | Shared scenario foundation. Fields that apply only to one scenario kind remain optional here; this keeps the taxonomy queryable without six otherwise redundant action definitions. | `MemoAction` |
-| [`ScenarioOccurrence`](#scenariooccurrence) | `part def` | An actual or hypothetical execution of a scenario (usability test run, postmarket incident reconstruction, simulated-use session). | `MemoPart` |
+| [`HasScenario`](#hasscenario) | `connection def` | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. | `MemoRelationship` |
 | [`SelectsKind`](#selectskind) | `enum def` | Controlled values for selects: `step`. | — |
 | [`Selects`](#selects) | `connection def` | Typed relationship for selects. | `MemoRelationship` |
-| [`OccursDuring`](#occursduring) | `connection def` | Typed relationship for occurs during. | `MemoRelationship` |
 
 ## ScenarioVariantKind
 
@@ -123,18 +122,18 @@ action def OperativeScenario specializes MemoAction
 | Owning package | `memo_architecture_operational_scenarios` |
 
 
-## ScenarioOccurrence
+## HasScenario
 
 ```sysml
-part def ScenarioOccurrence specializes MemoPart
+connection def HasScenario :> MemoRelationship
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | An actual or hypothetical execution of a scenario (usability test run, postmarket incident reconstruction, simulated-use session). |
-| Kind | `part def` |
+| Description | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. |
+| Kind | `connection def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_operational_scenarios` |
 
 
@@ -162,21 +161,6 @@ connection def Selects :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship for selects. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_scenarios` |
-
-
-## OccursDuring
-
-```sysml
-connection def OccursDuring :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for occurs during. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -275,8 +259,8 @@ connection def OccursDuring :> MemoRelationship
 
             // functional scenario
             ref selectedFlow : MemoAction[0..1];
-            // operative scenario
-            ref parentWorkflow : OperationalWorkflow[0..1];
+            // operative scenario (the workflow this scenario is a path of is
+            // expressed by the workflow via HasScenario, not a back-ref here)
             ref parentUseCase : UseCase[0..1];
             ref activities : OperationalActivity[0..*];
             // UI scenario
@@ -296,13 +280,18 @@ connection def OccursDuring :> MemoRelationship
             attribute selectionRationale : String;
         }
 
-        // An actual or hypothetical execution of a scenario (usability test run,
-        // postmarket incident reconstruction, simulated-use session).
-        part def ScenarioOccurrence specializes MemoPart {
-            attribute occurredAt : String;
-            attribute hypothetical : Boolean;
-            attribute outcomeSummary : String;
-            ref executedScenario : OperativeScenario[1];
+        // A workflow is composed of one or more scenarios (nominal + alternate
+        // paths). ScenarioOccurrence/Executes were removed: an actual execution is
+        // a native SysML *usage* of the scenario, not a separate def + relation.
+        connection def HasScenario :> MemoRelationship {
+            end owningWorkflow : OperationalWorkflow :>> source;
+            end pathScenario : OperativeScenario :>> target;
+        }
+        abstract connection hasScenarioLinks : HasScenario[*];
+        metadata def <hasScenario> HasScenarioMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = hasScenarioLinks meta SysML::Usage;
         }
 
         // Ordered selection of a workflow step into a scenario path.
@@ -326,16 +315,6 @@ connection def OccursDuring :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = selectsLinks meta SysML::Usage;
-        }
-        connection def OccursDuring :> MemoRelationship {
-            end occurrence : ScenarioOccurrence :>> source;
-            end context : UseContext :>> target;
-        }
-        abstract connection occursDuringLinks : OccursDuring[*];
-        metadata def <occursDuring> OccursDuringMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = occursDuringLinks meta SysML::Usage;
         }
     }
 
