@@ -148,7 +148,6 @@ connection def Extends :> MemoRelationship
             ref primaryUser : User[0..1];
             ref supportingActors : OperationalParticipant[0..*];
             ref useContext : UseContext[0..1];
-            ref originatingNeeds : Need[0..*];
         }
 
         connection def Motivates :> MemoRelationship {

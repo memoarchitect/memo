@@ -40,7 +40,6 @@ package memo_architecture_operational_use_cases {
         ref primaryUser : User[0..1];
         ref supportingActors : OperationalParticipant[0..*];
         ref useContext : UseContext[0..1];
-        ref originatingNeeds : Need[0..*];
     }
 
     connection def Motivates :> MemoRelationship {

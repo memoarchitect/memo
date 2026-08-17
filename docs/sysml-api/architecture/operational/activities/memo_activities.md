@@ -171,7 +171,6 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute assessor : String;
             attribute assessmentMethod : String;
 
-            ref assessedTask : OperativeAction[0..1];
             ref userPopulation : User[0..1];
             ref useEnvironment : UseEnvironment[0..1];
             ref instrument : MemoPart[0..1];
