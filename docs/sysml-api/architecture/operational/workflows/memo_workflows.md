@@ -257,7 +257,6 @@ connection def Transforms :> MemoRelationship
             attribute completionCondition : String;
             attribute recoveryPathSummary : String;
             attribute timingConstraints : String;
-            ref involvedActors : OperationalParticipant[0..*];
             attribute environmentSummary : String;
         }
 
@@ -294,8 +293,6 @@ connection def Transforms :> MemoRelationship
             attribute parallelismRationale : String[0..1];
             attribute joinCondition : String[0..1];
             attribute informationTransferred : String[0..1];
-            ref fromRole : OperationalParticipant[0..1];
-            ref toRole : OperationalParticipant[0..1];
         }
 
         // Resources a workflow requires: information, materials, or equipment by
