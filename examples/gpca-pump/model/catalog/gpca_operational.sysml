@@ -169,8 +169,8 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
         attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
 
-        action wsProgram : WorkflowStep { ref :>> performedActivity = oaProgram; }
-        action wsStart : WorkflowStep { ref :>> performedActivity = oaStartTherapy; }
+        perform oaProgram;
+        perform oaStartTherapy;
     }
     action wfManageActiveTherapy : OperationalWorkflow {
         attribute :>> name = "ManageActiveTherapy";
@@ -178,16 +178,16 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> entryCondition = "Basal therapy is active.";
         attribute :>> completionCondition = "A bolus is handled or active therapy continues safely.";
 
-        action wsRequestBolus : WorkflowStep { ref :>> performedActivity = oaRequestBolus; }
+        perform oaRequestBolus;
         // Refinement targets a nested step by its local name — the shorthand's
         // `to` end does not accept a qualified path — so this is written
         // inside wsRequestBolus's own owning scope rather than at package
         // level.
-        #refinement dependency fcsBolusSense to wsRequestBolus;
-        #refinement dependency fcsBolusValidate to wsRequestBolus;
-        #refinement dependency fcsBolusCommand to wsRequestBolus;
-        #refinement dependency fcsBolusActuate to wsRequestBolus;
-        #refinement dependency fcsBolusLog to wsRequestBolus;
+        #refinement dependency fcsBolusSense to oaRequestBolus;
+        #refinement dependency fcsBolusValidate to oaRequestBolus;
+        #refinement dependency fcsBolusCommand to oaRequestBolus;
+        #refinement dependency fcsBolusActuate to oaRequestBolus;
+        #refinement dependency fcsBolusLog to oaRequestBolus;
     }
     action wfRespondToTherapyAlarm : OperationalWorkflow {
         attribute :>> name = "RespondToTherapyAlarm";
@@ -195,11 +195,11 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
         attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";
 
-        action wsRespondAlarm : WorkflowStep { ref :>> performedActivity = oaRespondAlarm; }
-        #refinement dependency fcsAlarmSense to wsRespondAlarm;
-        #refinement dependency fcsAlarmEvaluate to wsRespondAlarm;
-        #refinement dependency fcsAlarmStopInfusion to wsRespondAlarm;
-        #refinement dependency fcsAlarmAnnunciate to wsRespondAlarm;
+        perform oaRespondAlarm;
+        #refinement dependency fcsAlarmSense to oaRespondAlarm;
+        #refinement dependency fcsAlarmEvaluate to oaRespondAlarm;
+        #refinement dependency fcsAlarmStopInfusion to oaRespondAlarm;
+        #refinement dependency fcsAlarmAnnunciate to oaRespondAlarm;
     }
 
 
