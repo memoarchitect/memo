@@ -169,8 +169,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
         attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
 
-        perform oaProgram;
-        perform oaStartTherapy;
     }
     action wfManageActiveTherapy : OperationalWorkflow {
         attribute :>> name = "ManageActiveTherapy";
@@ -178,7 +176,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> entryCondition = "Basal therapy is active.";
         attribute :>> completionCondition = "A bolus is handled or active therapy continues safely.";
 
-        perform oaRequestBolus;
         // Refinement targets a nested step by its local name — the shorthand's
         // `to` end does not accept a qualified path — so this is written
         // inside wsRequestBolus's own owning scope rather than at package
@@ -195,7 +192,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
         attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";
 
-        perform oaRespondAlarm;
         #refinement dependency fcsAlarmSense to oaRespondAlarm;
         #refinement dependency fcsAlarmEvaluate to oaRespondAlarm;
         #refinement dependency fcsAlarmStopInfusion to oaRespondAlarm;
