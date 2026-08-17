@@ -331,8 +331,8 @@ connection def BindsToInterface :> MemoRelationship
         // MemoPart but not an ArchitectureElement.
         //
         // Several of the relaxed ends were ALREADY being violated by real content
-        // before they were relaxed: `composes` links parts to WorkflowStep and
-        // OperativeAction (action defs) and to SoftwarePort/PhysicalPort;
+        // before they were relaxed: `composes` links parts to OperativeAction
+        // (an action def) and to SoftwarePort/PhysicalPort;
         // `precedes` links OperativeAction to OperativeAction; `allocatedTo`
         // has ActionUsage sources; `bindsToInterface` targets an `interface def`,
         // which an InterfaceElement-typed end cannot hold. The types were not

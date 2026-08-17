@@ -31,7 +31,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`MethodologyWorkflowStep`](#methodologyworkflowstep) | `action def` | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from memo_architecture_operational_workflows::WorkflowStep, which is a step in an OPERATIONAL workflow performed by users.… | `MemoAction` |
+| [`MethodologyWorkflowStep`](#methodologyworkflowstep) | `action def` | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from an OPERATIONAL workflow's steps, which are OperativeActions performed by users or the system.… | `MemoAction` |
 
 ## MethodologyWorkflowStep
 
@@ -41,7 +41,7 @@ action def MethodologyWorkflowStep :> MemoAction
 
 | Property | Value |
 | --- | --- |
-| Description | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from memo_architecture_operational_workflows::WorkflowStep, which is a step in an OPERATIONAL workflow performed by users.… |
+| Description | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from an OPERATIONAL workflow's steps, which are OperativeActions performed by users or the system.… |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
@@ -60,11 +60,11 @@ action def MethodologyWorkflowStep :> MemoAction
         private import memo_core_enumerations::*;
 
         // Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle
-        // stage with entry/exit criteria), distinct from
-        // memo_architecture_operational_workflows::WorkflowStep, which is a step in
-        // an OPERATIONAL workflow performed by users. The two carry different
-        // attributes and must not share a short name — an overloaded name resolves
-        // by load order and silently validates a usage against the wrong type.
+        // stage with entry/exit criteria), distinct from an OPERATIONAL workflow's
+        // steps, which are OperativeActions performed by users or the system. The
+        // two carry different attributes and must not share a short name — an
+        // overloaded name resolves by load order and silently validates a usage
+        // against the wrong type.
         action def MethodologyWorkflowStep :> MemoAction {
             attribute stage : WorkflowStageKind;
             attribute objectiveDescription : String;

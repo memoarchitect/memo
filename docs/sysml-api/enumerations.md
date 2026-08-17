@@ -59,7 +59,6 @@ SysML `enum def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ScenarioKind`](architecture/operational/scenarios/memo_scenarios.md#scenariokind) | `enum def` | A scenario is a nominal path or an alternate (exception/recovery) path. Defaults to nominal. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
-| [`SelectsKind`](architecture/operational/scenarios/memo_scenarios.md#selectskind) | `enum def` | Controlled values for selects: `step`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 
 ## `memo::architecture::operational::use_cases`

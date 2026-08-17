@@ -552,7 +552,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // Several of these are WIDER than the end they replace, and deliberately so:
         // the ends were being violated by content that already shipped. `composes`
         // was typed MemoPart/MemoPart and links StateMachine (a state def) to
-        // WorkflowStep (an action def); `verifiedBy`'s source was typed MemoPart and
+        // OperativeAction (an action def); `verifiedBy`'s source was typed MemoPart and
         // most of its sources are requirement defs; `precedes` was typed
         // ArchitectureElement and joins OperativeAction to OperativeAction.
         // A rule that reproduced the old type exactly would have failed on the
