@@ -117,7 +117,6 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
         attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
-        ref :>> parentWorkflow = wfSleeveGastrectomy;
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaCompleteSleeveProcedure;
 
@@ -135,7 +134,6 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> variationPoint = "bleeding observed during staple-line assessment";
         attribute :>> pathSummary = "Recognize bleeding, apply the selected control, reassess the staple line, and escalate if the condition remains unresolved.";
         ref :>> baseScenario = scNominalSleeveProcedure;
-        ref :>> parentWorkflow = wfSleeveGastrectomy;
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaControlStapleLineBleeding;
 
@@ -150,4 +148,7 @@ package memo_examples_surgical_closure_workflow {
 
     connection : RealizesUseCase connect realizingWorkflow ::> wfSleeveGastrectomy to realizedUseCase ::> ucPerformSleeveGastrectomy;
 
+
+    connection : HasScenario connect owningWorkflow ::> wfSleeveGastrectomy to pathScenario ::> scNominalSleeveProcedure;
+    connection : HasScenario connect owningWorkflow ::> wfSleeveGastrectomy to pathScenario ::> scStapleLineBleeding;
 }

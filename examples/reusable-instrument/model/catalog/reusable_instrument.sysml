@@ -59,18 +59,10 @@ package memo_examples_reusable_instrument {
         attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::nominal;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
-        ref :>> parentWorkflow = wfReprocess;
-    }
-    // One modeled occurrence of the workflow. External operational systems
-    // may associate this occurrence with their asset or batch record.
-    part occCycle113 : ScenarioOccurrence {
-        attribute :>> id = "RI-OCC-113"; attribute :>> name = "ReprocessingCycle113";
-        attribute :>> occurredAt = "2026-07-15T14:02:00Z";
-        attribute :>> hypothetical = false;
-        attribute :>> outcomeSummary = "cycle completed; biological indicator passed";
-        ref :>> executedScenario = scNominalCycle;
     }
 
     connection : RealizesUseCase connect realizingWorkflow ::> wfReprocess to realizedUseCase ::> ucSterilize;
 
+
+    connection : HasScenario connect owningWorkflow ::> wfReprocess to pathScenario ::> scNominalCycle;
 }

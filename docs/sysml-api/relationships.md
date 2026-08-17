@@ -76,7 +76,7 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`OccursDuring`](architecture/operational/scenarios/memo_scenarios.md#occursduring) | `connection def` | Typed relationship for occurs during. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| [`HasScenario`](architecture/operational/scenarios/memo_scenarios.md#hasscenario) | `connection def` | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 | [`Selects`](architecture/operational/scenarios/memo_scenarios.md#selects) | `connection def` | Typed relationship for selects. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 

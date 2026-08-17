@@ -85,8 +85,8 @@ package memo_architecture_operational_scenarios {
 
         // functional scenario
         ref selectedFlow : MemoAction[0..1];
-        // operative scenario
-        ref parentWorkflow : OperationalWorkflow[0..1];
+        // operative scenario (the workflow this scenario is a path of is
+        // expressed by the workflow via HasScenario, not a back-ref here)
         ref parentUseCase : UseCase[0..1];
         ref activities : OperationalActivity[0..*];
         // UI scenario
@@ -106,13 +106,18 @@ package memo_architecture_operational_scenarios {
         attribute selectionRationale : String;
     }
 
-    // An actual or hypothetical execution of a scenario (usability test run,
-    // postmarket incident reconstruction, simulated-use session).
-    part def ScenarioOccurrence specializes MemoPart {
-        attribute occurredAt : String;
-        attribute hypothetical : Boolean;
-        attribute outcomeSummary : String;
-        ref executedScenario : OperativeScenario[1];
+    // A workflow is composed of one or more scenarios (nominal + alternate
+    // paths). ScenarioOccurrence/Executes were removed: an actual execution is
+    // a native SysML *usage* of the scenario, not a separate def + relation.
+    connection def HasScenario :> MemoRelationship {
+        end owningWorkflow : OperationalWorkflow :>> source;
+        end pathScenario : OperativeScenario :>> target;
+    }
+    abstract connection hasScenarioLinks : HasScenario[*];
+    metadata def <hasScenario> HasScenarioMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = hasScenarioLinks meta SysML::Usage;
     }
 
     // Ordered selection of a workflow step into a scenario path.
@@ -136,15 +141,5 @@ package memo_architecture_operational_scenarios {
         :> annotatedElement : SysML::ConnectionDefinition;
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = selectsLinks meta SysML::Usage;
-    }
-    connection def OccursDuring :> MemoRelationship {
-        end occurrence : ScenarioOccurrence :>> source;
-        end context : UseContext :>> target;
-    }
-    abstract connection occursDuringLinks : OccursDuring[*];
-    metadata def <occursDuring> OccursDuringMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = occursDuringLinks meta SysML::Usage;
     }
 }
