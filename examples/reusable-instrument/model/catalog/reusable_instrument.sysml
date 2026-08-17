@@ -34,12 +34,6 @@ package memo_examples_reusable_instrument {
         attribute :>> workflowState = WorkflowStateKind::asIs;
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";
-
-        perform actClean;
-        perform actInspect;
-        perform actSterilizeLoad;
-        first actClean then actInspect;
-        first actInspect then actSterilizeLoad;
     }
     action actClean : OperativeAction {
         attribute :>> id = "RI-ACT-001"; attribute :>> name = "CleanAndDisinfect";
@@ -56,6 +50,12 @@ package memo_examples_reusable_instrument {
 
     action scNominalCycle : OperativeScenario {
         attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";
+
+        perform actClean;
+        perform actInspect;
+        perform actSterilizeLoad;
+        first actClean then actInspect;
+        first actInspect then actSterilizeLoad;
     }
 
     connection : RealizesUseCase connect realizingWorkflow ::> wfReprocess to realizedUseCase ::> ucSterilize;

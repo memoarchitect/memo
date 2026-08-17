@@ -94,6 +94,12 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> entryCondition = "patient prepared; time-out ready";
         attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
+    }
+
+    // ── Scenario paths, each with its own activity/action flow ──
+    action scNominalSleeveProcedure : OperativeScenario {
+        attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
+        attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
 
         perform actTimeOutAndPosition;
         perform actEstablishAccess;
@@ -108,18 +114,6 @@ package memo_examples_surgical_closure_workflow {
         first actSizeAndCreateSleeve then actAssessStapleLine;
         first actAssessStapleLine then actExtractSpecimenAndClose;
         first actExtractSpecimenAndClose then actHandover;
-    }
-
-    // ── Scenario paths, each with its own activity/action flow ──
-    action scNominalSleeveProcedure : OperativeScenario {
-        attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
-        attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
-
-        action oaCompleteSleeveProcedure : OperativeAction {
-            attribute :>> name = "CompleteNominalSleeveProcedure";
-            action prepare; action createSleeve; action assess; action handover;
-            first start then prepare; first prepare then createSleeve; first createSleeve then assess; first assess then handover; first handover then done;
-        }
     }
     action scStapleLineBleeding : OperativeScenario {
         attribute :>> scenarioKind = ScenarioKind::alternate;
