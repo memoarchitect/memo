@@ -23,7 +23,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`FunctionalAction`](architecture/functional/behavior/memo_behavior.md#functionalaction) | `action def` | Functional action definition specializing `MemoAction`. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
 | [`ModeConfiguration`](architecture/functional/behavior/memo_behavior.md#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
 | [`StateMachine`](architecture/functional/behavior/memo_behavior.md#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based ArchitectureElement. Transitions stay part-based (below) to keep their traceable safety attributes.… | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
-| [`TimingConstraint`](architecture/functional/behavior/memo_behavior.md#timingconstraint) | `part def` | UI scenarios are MemoScenario usages with scenarioKind `ui`. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
+| [`TimingConstraint`](architecture/functional/behavior/memo_behavior.md#timingconstraint) | `part def` | UI scenarios are OperativeScenario usages with scenarioKind `ui`. | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
 | [`TransitionRecord`](architecture/functional/behavior/memo_behavior.md#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… | [`architecture/functional/behavior/memo_behavior.sysml`](architecture/functional/behavior/memo_behavior.md) |
 
 
@@ -122,7 +122,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`InteractionElement`](architecture/implementation/ui/memo_ui.md#interactionelement) | `part def` | Interaction element definition specializing `ArchitectureElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`InteractionFlow`](architecture/implementation/ui/memo_ui.md#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a MemoScenario with scenarioKind `ui`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`InteractionFlow`](architecture/implementation/ui/memo_ui.md#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a OperativeScenario with scenarioKind `ui`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`OperatorInterfaceElement`](architecture/implementation/ui/memo_ui.md#operatorinterfaceelement) | `part def` | Operator interface element definition specializing `PhysicalComponent,`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`RegionBounds`](architecture/implementation/ui/memo_ui.md#regionbounds) | `attribute def` | Region bounds definition. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`ScreenCapture`](architecture/implementation/ui/memo_ui.md#screencapture) | `part def` | Screen capture definition specializing `MemoEvidence`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
@@ -205,7 +205,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`MemoScenario`](architecture/operational/scenarios/memo_scenarios.md#memoscenario) | `action def` | Shared scenario foundation. Fields that apply only to one scenario kind remain optional here; this keeps the taxonomy queryable without six otherwise redundant action definitions. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| [`OperativeScenario`](architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `action def` | Shared scenario foundation. Fields that apply only to one scenario kind remain optional here; this keeps the taxonomy queryable without six otherwise redundant action definitions. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 | [`ScenarioOccurrence`](architecture/operational/scenarios/memo_scenarios.md#scenariooccurrence) | `part def` | An actual or hypothetical execution of a scenario (usability test run, postmarket incident reconstruction, simulated-use session). | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 

@@ -81,7 +81,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> cweReference = "CWE-798";
     }
 
-    action tamperedConfigurationScenario : MemoScenario {
+    action tamperedConfigurationScenario : OperativeScenario {
         attribute :>> id = "SCN-001";
         attribute :>> name = "TamperedTherapyConfigurationScenario";
         attribute :>> scenarioKind = ScenarioKind::threat;

@@ -39,7 +39,7 @@
 | [`Contract`](#contract) | `part def` | Contract definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`ActivityAction`](#activityaction) | `part def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `ArchitectureElement` |
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
-| [`TimingConstraint`](#timingconstraint) | `part def` | UI scenarios are MemoScenario usages with scenarioKind `ui`. | `VerifiableElement` |
+| [`TimingConstraint`](#timingconstraint) | `part def` | UI scenarios are OperativeScenario usages with scenarioKind `ui`. | `VerifiableElement` |
 
 ## FunctionalAction
 
@@ -169,7 +169,7 @@ part def TimingConstraint specializes VerifiableElement
 
 | Property | Value |
 | --- | --- |
-| Description | UI scenarios are MemoScenario usages with scenarioKind `ui`. |
+| Description | UI scenarios are OperativeScenario usages with scenarioKind `ui`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `VerifiableElement` |
@@ -265,7 +265,7 @@ part def TimingConstraint specializes VerifiableElement
             attribute guardCondition : String;
             attribute weight : String;
         }
-        // UI scenarios are MemoScenario usages with scenarioKind `ui`.
+        // UI scenarios are OperativeScenario usages with scenarioKind `ui`.
 
         part def TimingConstraint specializes VerifiableElement {
             attribute constraintKind : TimingConstraintKind;

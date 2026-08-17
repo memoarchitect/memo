@@ -207,7 +207,7 @@ part def DiagramIntentMapping specializes MemoPart
         }
         // A software sequence diagram is a VIEW conforming to this viewpoint
         // (ISO/IEC/IEEE 42010): it frames the runtime message ordering between
-        // SoftwareComponents realizing a functional MemoScenario. The viewpoint is the
+        // SoftwareComponents realizing a functional OperativeScenario. The viewpoint is the
         // reusable spec; the diagram of a specific model is the view.
         viewpoint vpSoftwareSequence : MemoViewpoint {
             attribute :>> id = "VP-CAT-027"; attribute :>> name = "SoftwareSequenceViewpoint";

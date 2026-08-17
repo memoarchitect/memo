@@ -99,7 +99,7 @@ package memo_examples_gpca_pump_gpca_system {
     }
 
     // ── System scenarios ────────────────────────────────────────
-    action ssBolusDuringBasal : MemoScenario {
+    action ssBolusDuringBasal : OperativeScenario {
         attribute :>> id = "SS-001";
         attribute :>> name = "PatientBolusDuringBasal";
         attribute :>> scenarioKind = ScenarioKind::functional;
@@ -108,7 +108,7 @@ package memo_examples_gpca_pump_gpca_system {
         attribute :>> preCondition = "BASAL mode active; no REQ 25 ignore condition holds";
         attribute :>> postCondition = "PATIENT_BOLUS mode entered, bolus delivered, return to BASAL";
     }
-    action ssAlarmPause : MemoScenario {
+    action ssAlarmPause : OperativeScenario {
         attribute :>> id = "SS-002";
         attribute :>> name = "InhibitingNotificationPausesInfusion";
         attribute :>> scenarioKind = ScenarioKind::functional;

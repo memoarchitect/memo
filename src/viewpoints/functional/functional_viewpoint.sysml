@@ -19,7 +19,7 @@ package memo_viewpoints_functional_functional_viewpoint {
         attribute :>> includedLayers = ("functions");
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 2;
-        attribute :>> allowedElementKinds = ("SystemFunction", "ComponentFunction", "FunctionalFlow", "FunctionalFlowStep", "MemoScenario[scenarioKind=functional]", "FunctionalExchange");
+        attribute :>> allowedElementKinds = ("SystemFunction", "ComponentFunction", "FunctionalFlow", "FunctionalFlowStep", "OperativeScenario[scenarioKind=functional]", "FunctionalExchange");
         attribute :>> userExtensible = true;
     }
 }
