@@ -512,7 +512,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`MethodologyWorkflowStep`](methodology/workflow/memo_workflow.md#methodologyworkflowstep) | `action def` | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from memo_architecture_operational_workflows::WorkflowStep, which is a step in an OPERATIONAL workflow performed by users.… | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`MethodologyWorkflowStep`](methodology/workflow/memo_workflow.md#methodologyworkflowstep) | `action def` | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from an OPERATIONAL workflow's steps, which are OperativeActions performed by users or the system.… | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 
 
 ## `memo::viewpoints::catalog`
