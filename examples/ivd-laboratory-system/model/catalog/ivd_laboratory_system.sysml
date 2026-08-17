@@ -51,7 +51,7 @@ package memo_examples_ivd_laboratory_system {
     }
 
     // Operating activity for the analyzer.
-    action actRunPanel : OperationalActivity {
+    action actRunPanel : OperativeAction {
         attribute :>> id = "IVD-ACT-001"; attribute :>> name = "RunChemistryPanel";
         attribute :>> criticality = CriticalityKind::high;
     }

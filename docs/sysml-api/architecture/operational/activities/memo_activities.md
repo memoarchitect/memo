@@ -36,10 +36,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`DemandLevelKind`](#demandlevelkind) | `enum def` | Controlled values for demand level: `minimal`, `low`, `moderate`, `high`, `extreme`. | — |
-| [`OperationalActivity`](#operationalactivity) | `action def` | Operational activity definition specializing `MemoAction`. | `MemoAction` |
-| [`UserTask`](#usertask) | `action def` | User task definition specializing `ScenarioStep`. | `ScenarioStep` |
-| [`SystemAction`](#systemaction) | `action def` | A scenario step performed by the system. May realize a SystemFunction (the functional-layer capability it exercises). | `ScenarioStep` |
-| [`TaskStep`](#taskstep) | `action def` | An elementary perceptual/cognitive/motor step within a user task (task analysis granularity: grasp needle, drive needle, tie knot …). | `MemoAction` |
+| [`OperativeAction`](#operativeaction) | `action def` | Operative action definition specializing `ScenarioStep`. | `ScenarioStep` |
 | [`TaskDifficultyAssessment`](#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | `MemoPart` |
 | [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship for assesses difficulty. | `MemoRelationship` |
 
@@ -58,63 +55,18 @@ enum def DemandLevelKind
 | Owning package | `memo_architecture_operational_activities` |
 
 
-## OperationalActivity
+## OperativeAction
 
 ```sysml
-action def OperationalActivity specializes MemoAction
+action def OperativeAction specializes ScenarioStep
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Operational activity definition specializing `MemoAction`. |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoAction` |
-| Owning package | `memo_architecture_operational_activities` |
-
-
-## UserTask
-
-```sysml
-action def UserTask specializes ScenarioStep
-```
-
-| Property | Value |
-| --- | --- |
-| Description | User task definition specializing `ScenarioStep`. |
+| Description | Operative action definition specializing `ScenarioStep`. |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `ScenarioStep` |
-| Owning package | `memo_architecture_operational_activities` |
-
-
-## SystemAction
-
-```sysml
-action def SystemAction specializes ScenarioStep
-```
-
-| Property | Value |
-| --- | --- |
-| Description | A scenario step performed by the system. May realize a SystemFunction (the functional-layer capability it exercises). |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `ScenarioStep` |
-| Owning package | `memo_architecture_operational_activities` |
-
-
-## TaskStep
-
-```sysml
-action def TaskStep specializes MemoAction
-```
-
-| Property | Value |
-| --- | --- |
-| Description | An elementary perceptual/cognitive/motor step within a user task (task analysis granularity: grasp needle, drive needle, tie knot …). |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoAction` |
 | Owning package | `memo_architecture_operational_activities` |
 
 
@@ -153,14 +105,14 @@ connection def AssessesDifficulty :> MemoRelationship
 ??? code "architecture/operational/activities/memo_activities.sysml"
 
     ```sysml
-    // Operational activities and user tasks (§7, §17). Activities are behavioral
-    // concepts (action defs on MemoAction). An OperationalActivity is work
-    // performed in the operational world; a UserTask is a unit of user work within
-    // an activity (IEC 62366-1); a critical task is a UserTask whose criticality is
-    // high/catastrophic — its failure could cause serious harm (FDA HF guidance) and
-    // it must trace to usability validation.
-    // Task difficulty belongs to a task performed in a context — never to an
-    // instrument (TaskDifficultyAssessment).
+    // Operational actions (§7, §17). One `OperativeAction` (action def on
+    // MemoAction, via ScenarioStep) is a unit of operational work; whether a User
+    // or the system performs it is a native `perform` relationship, not a subtype.
+    // A critical task is an OperativeAction with high/catastrophic criticality that
+    // a User performs — its failure could cause serious harm (IEC 62366-1 / FDA HF
+    // guidance) and it must trace to usability validation. Task difficulty belongs
+    // to an action performed in a context (TaskDifficultyAssessment), never to an
+    // instrument.
     package memo_architecture_operational_activities {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
@@ -179,43 +131,25 @@ connection def AssessesDifficulty :> MemoRelationship
             enum extreme;
         }
 
-        action def OperationalActivity specializes MemoAction {
+        // One operational action / step. Who performs it — a human actor or the
+        // system — is a relationship (native `perform`), not a subtype, so an
+        // action can migrate from user- to system-performed (automation, as-is →
+        // to-be) without changing type. This one type merges the former
+        // OperationalActivity, UserTask, SystemAction and TaskStep: a "user task"
+        // is simply an OperativeAction a User performs; finer steps are nested
+        // OperativeActions. Human-factors fields (potentialHarm, severityIfFailed,
+        // perceptualCue …) are optional, meaningful when a User is the performer.
+        action def OperativeAction specializes ScenarioStep {
             attribute trigger : String;
             attribute preCondition : String;
             attribute postCondition : String;
             attribute criticality : CriticalityKind;
-            ref performedBy : OperationalParticipant[0..*];
-        }
-
-        // A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a
-        // UserTask whose criticality is high or catastrophic — a use error could
-        // cause serious harm. potentialHarm/severityIfFailed are set only for such
-        // tasks. Modeled as an attribute, like SystemFunction.criticality.
-        // A scenario step performed by a human actor (as opposed to a SystemAction
-        // performed by the system). Both specialize ScenarioStep.
-        action def UserTask specializes ScenarioStep {
             attribute taskGoal : String;
-            attribute preCondition : String;
-            attribute postCondition : String;
             attribute expectedDuration : String;
             attribute frequencyOfUse : String;
-            attribute criticality : CriticalityKind;
             attribute potentialHarm : String[0..1];
             attribute severityIfFailed : SeverityKind[0..1];
-            ref performingUser : User[0..1];
-        }
-
-        // A scenario step performed by the system. May realize a SystemFunction
-        // (the functional-layer capability it exercises).
-        action def SystemAction specializes ScenarioStep {
-            attribute preCondition : String;
-            attribute postCondition : String;
             attribute automated : Boolean;
-        }
-
-        // An elementary perceptual/cognitive/motor step within a user task
-        // (task analysis granularity: grasp needle, drive needle, tie knot …).
-        action def TaskStep specializes MemoAction {
             attribute perceptualCue : String;
             attribute feedbackExpected : String;
         }
@@ -237,7 +171,7 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute assessor : String;
             attribute assessmentMethod : String;
 
-            ref assessedTask : UserTask[0..1];
+            ref assessedTask : OperativeAction[0..1];
             ref userPopulation : User[0..1];
             ref useEnvironment : UseEnvironment[0..1];
             ref instrument : MemoPart[0..1];
@@ -246,7 +180,7 @@ connection def AssessesDifficulty :> MemoRelationship
 
         connection def AssessesDifficulty :> MemoRelationship {
             end assessment : TaskDifficultyAssessment :>> source;
-            end task : UserTask :>> target;
+            end task : OperativeAction :>> target;
         }
         abstract connection assessesDifficultyLinks : AssessesDifficulty[*];
         metadata def <assessesDifficulty> AssessesDifficultyMetadata :> SemanticMetadata {
