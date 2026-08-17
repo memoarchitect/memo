@@ -1,6 +1,6 @@
 // Operational actions (§7, §17). One `OperativeAction` (action def on
-// MemoAction, via ScenarioStep) is a unit of operational work; whether a User
-// or the system performs it is a native `perform` relationship, not a subtype.
+// MemoAction) is a unit of operational work; whether a User or the system
+// performs it is a native `perform` relationship, not a subtype.
 // A critical task is an OperativeAction with high/catastrophic criticality that
 // a User performs — its failure could cause serious harm (IEC 62366-1 / FDA HF
 // guidance) and it must trace to usability validation. Task difficulty belongs
@@ -32,7 +32,7 @@ package memo_architecture_operational_activities {
     // is simply an OperativeAction a User performs; finer steps are nested
     // OperativeActions. Human-factors fields (potentialHarm, severityIfFailed,
     // perceptualCue …) are optional, meaningful when a User is the performer.
-    action def OperativeAction specializes ScenarioStep {
+    action def OperativeAction specializes MemoAction {
         attribute trigger : String;
         attribute preCondition : String;
         attribute postCondition : String;
