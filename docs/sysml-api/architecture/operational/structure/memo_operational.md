@@ -23,10 +23,12 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
+| private | `memo_architecture_operational_use_cases::*` |
 
 ## Declarations
 
@@ -36,6 +38,8 @@
 | [`OperationalEntity`](#operationalentity) | `part def` | Operational entity definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`OperationalCapability`](#operationalcapability) | `part def` | Operational capability definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`OperationalInteraction`](#operationalinteraction) | `part def` | Operational interaction definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`RequiresCapability`](#requirescapability) | `connection def` | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). | `MemoRelationship` |
+| [`EnablesUseCase`](#enablesusecase) | `connection def` | An operational capability enables a use case (the ability the actor draws on to accomplish the goal). Capability is tied to the use case, not to individual activities. | `MemoRelationship` |
 
 ## IntendedUse
 
@@ -97,17 +101,49 @@ part def OperationalInteraction specializes ArchitectureElement
 | Owning package | `memo_architecture_operational_structure` |
 
 
+## RequiresCapability
+
+```sysml
+connection def RequiresCapability :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_operational_structure` |
+
+
+## EnablesUseCase
+
+```sysml
+connection def EnablesUseCase :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | An operational capability enables a use case (the ability the actor draws on to accomplish the goal). Capability is tied to the use case, not to individual activities. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_operational_structure` |
+
+
 ## Source
 
 ??? code "architecture/operational/structure/memo_operational.sysml"
 
     ```sysml
     package memo_architecture_operational_structure {
+        private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
+        private import memo_architecture_operational_use_cases::*;
 
         // IEC 62366-1 / ISO 14971 intended use: the medical device's declared
         // purpose and the root of the operational spine. A MemoMission, because
@@ -135,6 +171,33 @@ part def OperationalInteraction specializes ArchitectureElement
             attribute exchangeKind : FlowKind;
             attribute direction : DirectionKind;
             attribute latencyConstraint : String;
+        }
+
+        // The intended use requires these operational capabilities (ARCADIA:
+        // Mission Requires Capability).
+        connection def RequiresCapability :> MemoRelationship {
+            end requiringIntendedUse : IntendedUse :>> source;
+            end requiredCapability : OperationalCapability :>> target;
+        }
+        abstract connection requiresCapabilityLinks : RequiresCapability[*];
+        metadata def <requiresCapability> RequiresCapabilityMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = requiresCapabilityLinks meta SysML::Usage;
+        }
+
+        // An operational capability enables a use case (the ability the actor draws
+        // on to accomplish the goal). Capability is tied to the use case, not to
+        // individual activities.
+        connection def EnablesUseCase :> MemoRelationship {
+            end enablingCapability : OperationalCapability :>> source;
+            end enabledUseCase : UseCase :>> target;
+        }
+        abstract connection enablesUseCaseLinks : EnablesUseCase[*];
+        metadata def <enablesUseCase> EnablesUseCaseMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = enablesUseCaseLinks meta SysML::Usage;
         }
 
     }

@@ -39,6 +39,7 @@
 | [`WorkflowStateKind`](#workflowstatekind) | `enum def` | As-is vs. to-be vs. contingency is a typed dimension of the workflow, not a name suffix. | — |
 | [`StepTransformationKind`](#steptransformationkind) | `enum def` | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. | — |
 | [`OperationalWorkflow`](#operationalworkflow) | `action def` | Operational workflow definition specializing `MemoAction`. | `MemoAction` |
+| [`RealizesUseCase`](#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | `MemoRelationship` |
 | [`WorkflowStep`](#workflowstep) | `action def` | A step in a workflow wraps an operational activity or user task by reference — the same activity may appear in several workflows. | `MemoAction` |
 | [`ControlNodeKind`](#controlnodekind) | `enum def` | decision / fork / join / handoff. | — |
 | [`WorkflowControlNode`](#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | `MemoAction` |
@@ -90,6 +91,21 @@ action def OperationalWorkflow specializes MemoAction
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
+| Owning package | `memo_architecture_operational_workflows` |
+
+
+## RealizesUseCase
+
+```sysml
+connection def RealizesUseCase :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_operational_workflows` |
 
 
@@ -259,10 +275,20 @@ connection def Transforms :> MemoRelationship
             attribute timingConstraints : String;
             ref involvedActors : OperationalParticipant[0..*];
             attribute environmentSummary : String;
-            // The use case this workflow realizes. Many workflows may trace to one
-            // use case; the use case does not own its workflows (the trace points
-            // upward, workflow → use case).
-            ref useCase : UseCase[0..1];
+        }
+
+        // The use case a workflow realizes. Many workflows may trace to one use
+        // case; the use case does not own its workflows (the trace points upward,
+        // workflow → use case).
+        connection def RealizesUseCase :> MemoRelationship {
+            end realizingWorkflow : OperationalWorkflow :>> source;
+            end realizedUseCase : UseCase :>> target;
+        }
+        abstract connection realizesUseCaseLinks : RealizesUseCase[*];
+        metadata def <realizesUseCase> RealizesUseCaseMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = realizesUseCaseLinks meta SysML::Usage;
         }
 
         // A step in a workflow wraps an operational activity or user task by
