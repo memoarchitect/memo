@@ -32,21 +32,11 @@ package memo_architecture_operational_scenarios {
         attribute postCondition : String;
         attribute pathSummary : String;
 
-        ref involvedActors : OperationalParticipant[0..*];
+        // The workflow this scenario belongs to is expressed by the workflow
+        // (HasScenario); a nominal/alternate pair are scenarios of the same
+        // workflow, distinguished by scenarioKind — no baseScenario back-ref.
+        // Actors are derived from `perform` on the nested steps, not listed.
         ref useContext : UseContext[0..1];
-        // Alternate/exception/recovery scenarios reference their base and the
-        // point at which behavior diverges — never a copied workflow.
-        ref baseScenario : OperativeScenario[0..1];
-        attribute variationPoint : String;
-
-        // functional scenario
-        ref selectedFlow : MemoAction[0..1];
-        // operative scenario (the workflow this scenario is a path of is
-        // expressed by the workflow via HasScenario; the scenario's steps by
-        // HasStep — neither is a back-ref here)
-        ref parentUseCase : UseCase[0..1];
-        // UI scenario
-        ref parentFlow : MemoAction[0..1];
         // threat scenario
         attribute actorDescription : String;
         attribute assumptionSummary : String;

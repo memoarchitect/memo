@@ -44,7 +44,6 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> environment = "indoor clinical environment, mains power with battery backup, pole or bed-rail mounted";
         attribute :>> jurisdiction = "generic (FDA/EU reference model)";
         attribute :>> connectedUse = true;
-        ref :>> intendedUse = gpcaIntendedUse;
     }
     // UC-002 (intra-hospital transport) removed: CriSys §2.4 states the
     // system is used in a fixed location and is not ambulatory.
