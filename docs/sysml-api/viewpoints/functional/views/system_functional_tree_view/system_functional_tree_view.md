@@ -52,7 +52,6 @@
                         attribute depth = 2;
         attribute :>> id = "VIEW-FUNC-001";
         attribute :>> name = "SystemFunctionalTreeView";
-        attribute :>> title = "System Functional Tree";
         attribute :>> shortDescription = "Hierarchical decomposition of system functions.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);
@@ -66,7 +65,7 @@
             attribute :>> includeLayers = ("functions");
             attribute :>> rationaleText = "Auto-populate the functional tree from the functions layer.";
         }
-        part :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
                     }
     }
 

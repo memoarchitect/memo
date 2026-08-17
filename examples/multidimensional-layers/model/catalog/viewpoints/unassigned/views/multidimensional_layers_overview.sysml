@@ -6,7 +6,6 @@ package memo_examples_multidimensional_layers_viewpoints_unassigned_views_multid
     view multidimensionalLayersOverview : MemoDiagramView {
         expose memo_examples_multidimensional_layers::*;
         attribute depth = 2;
-        attribute :>> title = "Multidimensional Layers Overview";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
     }

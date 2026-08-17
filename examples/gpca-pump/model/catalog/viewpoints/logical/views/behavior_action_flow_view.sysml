@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
         attribute depth = 2;
         attribute :>> id = "VIEW-BHV-003";
         attribute :>> name = "GPCA_InfusionDeliveryActionFlowView";
-        attribute :>> title = "GPCA Infusion Delivery Action Flow";
         attribute :>> shortDescription = "The 20 ms execution-step pipeline from sensor acquisition through alarm evaluation and dose limiting to pump actuation and event logging.";
         attribute :>> description = "Action flow over the infusionDeliveryFlow composite action: typed action steps with in/out parameters, item flows carrying the DD/CD exchange items, succession ordering from start to done, and swimlane allocation onto the logical architecture (sensors, alarm, infusion manager, pump motor, logging).";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -28,7 +27,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
         attribute :>> dataSourceDescription = "GPCA infusion delivery composite action, item flows, and successions";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include the nested action usages of the infusion delivery flow with their flows and successions.";
-        attribute :>> documentUsage = ("SDD");
         part :>> selectionQuery {
             attribute :>> id = "QRY-BHV-103";
             attribute :>> name = "GPCA_ActionFlowQuery";
@@ -36,6 +34,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the action flow view from the behavior layer's action usages.";
         }
-        part :>> viewpointDefinition = logicalArchitectureViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
     }
 }

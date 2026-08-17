@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_system_decompos
         attribute depth = 2;
         attribute :>> id = "VIEW-LOG-002";
         attribute :>> name = "GPCA_SystemDecompositionView";
-        attribute :>> title = "GPCA System Decomposition View";
         attribute :>> shortDescription = "Nested containment of the GPCA device: hardware assemblies and the software system.";
         attribute :>> description = "General-kind membership structure of the GPCA device per the AADL GPCA_Device.Impl decomposition: sensor and actuator assemblies with their subcomponents, supporting hardware, and the GPCA software system with its eight AADL subcomponents. Rendered through the KK-2 General view template in containment mode (nested blocks with expand/collapse; the tree mode shows the same hierarchy as a decomposition tree).";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -29,7 +28,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_system_decompos
         attribute :>> dataSourceDescription = "GPCA hardware assemblies, software system, and software components with their Composes hierarchy";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include hardware assemblies, the software system, and software components; the Composes topology supplies the nesting.";
-        attribute :>> documentUsage = ("SDD", "Architecture Description");
         part :>> selectionQuery {
             attribute :>> id = "QRY-LOG-002";
             attribute :>> name = "GPCA_SystemDecompositionQuery";
@@ -39,6 +37,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_system_decompos
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Populate the decomposition from the device structure; composition edges drive the containment nesting.";
         }
-        part :>> viewpointDefinition = logicalArchitectureViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
     }
 }

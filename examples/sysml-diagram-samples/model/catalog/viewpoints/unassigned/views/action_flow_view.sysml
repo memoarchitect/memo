@@ -84,10 +84,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
         expose laneA;
         expose laneB;
         attribute depth = 2;
-        attribute :>> title = "Sample · Action Flow";
         attribute :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development.";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
-        part :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 }

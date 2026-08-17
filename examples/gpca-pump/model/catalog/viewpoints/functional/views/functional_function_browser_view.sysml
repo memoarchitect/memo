@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
         attribute depth = 2;
         attribute :>> id = "VIEW-FUN-103";
         attribute :>> name = "GPCA_FunctionBrowserView";
-        attribute :>> title = "GPCA Function Browser";
         attribute :>> shortDescription = "Membership tree over the functions layer: logical functions, flows, and the exchange item definitions, grouped by kind.";
         attribute :>> description = "Browser view (SysML v2 browser view kind) exposing the functions-layer membership hierarchy as a first-class view: the eleven logical functions, the logical flows connecting them, and the data/control definitions they exchange — with kind icons, expand/collapse, and filtering.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -27,7 +26,6 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
         attribute :>> dataSourceDescription = "GPCA logical functions, flows, and exchange item definitions";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include the functions layer's functions, flows, and exchange item definitions.";
-        attribute :>> documentUsage = ("SDD");
         part :>> selectionQuery {
             attribute :>> id = "QRY-FUN-103";
             attribute :>> name = "GPCA_FunctionBrowserQuery";
@@ -36,6 +34,6 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the function browser from the functions layer.";
         }
-        part :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 }

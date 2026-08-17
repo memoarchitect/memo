@@ -43,11 +43,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
         expose pharmacySystem;
         expose homeContext;
         attribute depth = 1;
-        attribute :>> title = "Sample · System Context";
         attribute :>> shortDescription = "Operational system context: one black-box system boundary, its external people, peer systems, operating environment, and named boundary-crossing interactions.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "context";
-        part :>> viewpointDefinition = contextViewpoint;
+        ref :>> viewpointDefinition = contextViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("InteractsWith", "flow", "AppliesInContext");
         }

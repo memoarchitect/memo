@@ -52,7 +52,6 @@
                         attribute depth = 2;
         attribute :>> id = "VIEW-RISK-001";
         attribute :>> name = "RiskChainView";
-        attribute :>> title = "Risk Mitigation Chain View";
         attribute :>> shortDescription = "Hazards through harms with controls and verification.";
         attribute :>> outputKind = (ViewOutputKind::table);
         attribute :>> presentationKind = (PresentationKind::riskTable);
@@ -67,7 +66,7 @@
             attribute :>> includeConcerns = (ConcernKind::safety);
             attribute :>> rationaleText = "Auto-populate the risk chain view from the risk and assurance layers.";
         }
-        part :>> viewpointDefinition = riskViewpoint;
+        ref :>> viewpointDefinition = riskViewpoint;
                     }
     }
 

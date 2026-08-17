@@ -34,6 +34,7 @@ package memo_examples_reusable_instrument {
         attribute :>> workflowState = WorkflowStateKind::asIs;
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";
+        ref :>> useCase = ucSterilize;
 
         action wsClean : WorkflowStep { ref :>> performedActivity = actClean; }
         first wsClean then wsInspect;
@@ -53,7 +54,6 @@ package memo_examples_reusable_instrument {
     action wsInspect : WorkflowStep { ref :>> performedActivity = actInspect; }
     action wsSterilize : WorkflowStep { ref :>> performedActivity = actSterilizeLoad; }
     first wsInspect then wsSterilize;
-    connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfReprocess to supported ::> ucSterilize; }
 
     action scNominalCycle : MemoScenario {
         attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";

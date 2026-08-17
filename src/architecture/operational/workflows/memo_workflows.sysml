@@ -39,6 +39,10 @@ package memo_architecture_operational_workflows {
         attribute timingConstraints : String;
         ref involvedActors : OperationalParticipant[0..*];
         attribute environmentSummary : String;
+        // The use case this workflow realizes. Many workflows may trace to one
+        // use case; the use case does not own its workflows (the trace points
+        // upward, workflow → use case).
+        ref useCase : UseCase[0..1];
     }
 
     // A step in a workflow wraps an operational activity or user task by
@@ -82,18 +86,14 @@ package memo_architecture_operational_workflows {
     }
 
     // ── Workflow-level relationships ─────────────────────────────
-    // Supports unifies SupportsUseCase / SupportsTask / ContributesToCapability
-    // (an element supports a goal/task/capability), keyed by supportKind.
-    enum def SupportKind {
-        enum useCase;
-        enum task;
-        enum capability;
-    }
+    // An element supports (affords, enables) an action — e.g. a UI element
+    // that affords a user task. Use-case and capability tracing are direct
+    // refs now (OperationalWorkflow.useCase,
+    // OperationalActivity.contributesToCapabilities), so the former
+    // SupportKind discriminator is gone: what used to be three enum values
+    // that each implied a different target type are now two typed refs plus
+    // this one plain relation.
     connection def Supports :> MemoRelationship {
-        attribute supportKind : SupportKind;
-        // The accepted endpoints span SysML metaclasses: an operational
-        // workflow or other action may support a use case, task, or
-        // capability. They therefore have no single MEMO base type.
         end supporter :>> source;
         end supported : MemoAction :>> target;
     }

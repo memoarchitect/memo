@@ -44,7 +44,6 @@ package memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain {
         expose memo_examples_ui_screen_regions_traces::*;
         attribute depth = 3;
         attribute :>> id = "RSK-101";
-        attribute :>> title = "UI Risk and Control Chains";
         attribute :>> shortDescription = "Use errors through UI hazards to implemented controls and requirements.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "risk";
@@ -57,6 +56,6 @@ package memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain {
             attribute :>> includeLayers = ("human_factors", "risk", "requirements", "implementation", "functions", "assurance");
             attribute :>> rationaleText = "Show both misread-rate and wrong-drug UI risk-control chains.";
         }
-        part :>> viewpointDefinition = riskViewpoint;
+        ref :>> viewpointDefinition = riskViewpoint;
     }
 }

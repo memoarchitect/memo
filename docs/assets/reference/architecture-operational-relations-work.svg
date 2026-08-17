@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="684" viewBox="0 0 1600 684" role="img" aria-labelledby="title desc">
+  <title id="title">Operational relations — use cases, workflows, scenarios</title>
+  <desc id="desc">grey = owned by another area, dashed lavender = untyped (any element)</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="684" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Operational relations — use cases, workflows, scenarios</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">grey = owned by another area, dashed lavender = untyped (any element)</tspan></text>
+  <g filter="url(#shadow)">
+  <rect x="60" y="140" width="216" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="168" y="167" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="168" dy="0">Need</tspan></text>
+      <text x="168" y="186" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="168" dy="0">memo::assurance::requirements::needs</tspan></text>
+  <rect x="1438" y="140" width="102" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="1489" y="178" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1489" dy="0">UseCase</tspan></text>
+  
+  <path d="M 276 172 L 1438 172" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="804.6" y="134" width="104.8" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="857" y="154" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Motivates</text>
+  <rect x="60" y="220" width="102" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="111" y="258" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="111" dy="0">UseCase</tspan></text>
+  <rect x="1438" y="220" width="102" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="1489" y="258" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1489" dy="0">UseCase</tspan></text>
+  
+  <path d="M 162 252 L 1438 252" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="756.8" y="214" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="800" y="234" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Extends</text>
+  <rect x="60" y="300" width="130" height="64" rx="12" fill="#f3f2fb" stroke="#6f42c1" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="125" y="338" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="125" dy="0">any action</tspan></text>
+  <rect x="1411" y="300" width="129" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="1475.5" y="327" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="1475.5" dy="0">MemoAction</tspan></text>
+      <text x="1475.5" y="346" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="1475.5" dy="0">memo::core::common</tspan></text>
+  
+  <path d="M 190 332 L 1411 332" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="752.7" y="294" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="800.5" y="314" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Supports</text>
+  <rect x="60" y="380" width="214" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="167" y="418" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="167" dy="0">OperationalWorkflow</tspan></text>
+  <rect x="1354" y="380" width="186" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="1447" y="418" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1447" dy="0">WorkflowResource</tspan></text>
+  
+  <path d="M 274 412 L 1354 412" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="729.4" y="374" width="169.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="814" y="394" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">RequiresResource</text>
+  <rect x="60" y="460" width="129" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="124.5" y="487" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="124.5" dy="0">MemoAction</tspan></text>
+      <text x="124.5" y="506" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="124.5" dy="0">memo::core::common</tspan></text>
+  <rect x="1411" y="460" width="129" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="1475.5" y="487" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="1475.5" dy="0">MemoAction</tspan></text>
+      <text x="1475.5" y="506" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="1475.5" dy="0">memo::core::common</tspan></text>
+  
+  <path d="M 189 492 L 1411 492" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="743" y="454" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="800" y="474" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Transforms</text>
+  <rect x="60" y="540" width="149" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="134.5" y="578" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="134.5" dy="0">MemoScenario</tspan></text>
+  <rect x="1335" y="540" width="205" height="64" rx="12" fill="#f3f2fb" stroke="#6f42c1" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="1437.5" y="578" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1437.5" dy="0">step or flow (any)</tspan></text>
+  
+  <path d="M 209 572 L 1335 572" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="728.8" y="534" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="772" y="554" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Selects</text>
+  <rect x="60" y="620" width="205" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="162.5" y="658" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="162.5" dy="0">ScenarioOccurrence</tspan></text>
+  <rect x="1410" y="620" width="130" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="1475" y="658" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1475" dy="0">UseContext</tspan></text>
+  
+  <path d="M 265 652 L 1410 652" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="771.3" y="614" width="132.39999999999998" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="837.5" y="634" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">OccursDuring</text></g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#6f42c1"/>
+</svg>

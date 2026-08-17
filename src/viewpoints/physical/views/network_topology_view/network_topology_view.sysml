@@ -10,7 +10,6 @@ package memo_viewpoints_physical_views_network_topology_view {
                     attribute depth = 2;
     attribute :>> id = "VIEW-PHY-002";
     attribute :>> name = "NetworkTopologyView";
-    attribute :>> title = "Network Topology View";
     attribute :>> shortDescription = "Physical interconnections and network ports between components.";
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::internalDiagram);
@@ -24,6 +23,6 @@ package memo_viewpoints_physical_views_network_topology_view {
         attribute :>> includeLayers = ("physical");
         attribute :>> rationaleText = "Auto-populate the network topology view from the physical interfaces layer.";
     }
-    part :>> viewpointDefinition = physicalViewpoint;
+    ref :>> viewpointDefinition = physicalViewpoint;
                 }
 }

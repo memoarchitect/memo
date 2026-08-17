@@ -10,7 +10,6 @@ package memo_viewpoints_functional_views_function_allocation_view {
                     attribute depth = 2;
     attribute :>> id = "VIEW-FUNC-002";
     attribute :>> name = "FunctionAllocationView";
-    attribute :>> title = "Function Allocation View";
     attribute :>> shortDescription = "Functions allocated to logical components.";
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -24,6 +23,6 @@ package memo_viewpoints_functional_views_function_allocation_view {
         attribute :>> includeLayers = ("functions", "logical_structure");
         attribute :>> rationaleText = "Auto-populate function-to-component allocation from the functions and logical structure layers.";
     }
-    part :>> viewpointDefinition = functionalViewpoint;
+    ref :>> viewpointDefinition = functionalViewpoint;
                 }
 }

@@ -24,10 +24,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard
     view standardActivityView : MemoDiagramView {
         expose CustomerProcess::**;
         attribute depth = 2;
-        attribute :>> title = "Sample · Customer Purchase Process";
         attribute :>> shortDescription = "Customer login, guarded validation, shopping loop, checkout, credit approval, and explicit completion outcomes.";
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
-        part :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 }

@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_verification_views_verification_verif
         attribute depth = 2;
         attribute :>> id = "VIEW-VER-101";
         attribute :>> name = "GPCA_VerificationCoverageView";
-        attribute :>> title = "GPCA Verification and Validation Coverage View";
         attribute :>> shortDescription = "Requirements and risk controls against verification cases, validation cases, and evidence.";
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
@@ -27,7 +26,6 @@ package memo_examples_gpca_pump_viewpoints_verification_views_verification_verif
         attribute :>> dataSourceDescription = "VerifiedBy, Validates, and ProducesEvidence links in the GPCA model";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include every requirement and risk control with its verification/validation status and produced evidence.";
-        attribute :>> documentUsage = ("VV", "DHF", "QMSR");
         part :>> selectionQuery {
             attribute :>> id = "QRY-VER-101";
             attribute :>> name = "GPCA_VerificationCoverageQuery";
@@ -37,6 +35,6 @@ package memo_examples_gpca_pump_viewpoints_verification_views_verification_verif
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Coverage gaps surface as requirements or controls without linked cases or evidence.";
         }
-        part :>> viewpointDefinition = verificationViewpoint;
+        ref :>> viewpointDefinition = verificationViewpoint;
     }
 }

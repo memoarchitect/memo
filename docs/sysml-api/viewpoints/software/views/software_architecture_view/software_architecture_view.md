@@ -52,7 +52,6 @@
                         attribute depth = 2;
         attribute :>> id = "VIEW-SW-001";
         attribute :>> name = "SoftwareArchitectureView";
-        attribute :>> title = "Software Architecture View";
         attribute :>> shortDescription = "Software systems, components, and SOUP with their decomposition.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -66,7 +65,7 @@
             attribute :>> includeLayers = ("software_structure");
             attribute :>> rationaleText = "Auto-populate the software architecture view from the software structure layer.";
         }
-        part :>> viewpointDefinition = softwareViewpoint;
+        ref :>> viewpointDefinition = softwareViewpoint;
                     }
     }
 

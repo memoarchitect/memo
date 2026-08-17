@@ -64,11 +64,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
     view sampleStateTransitionView : MemoDiagramView {
         expose pumpModes::**;
         attribute depth = 2;
-        attribute :>> title = "Sample · State Transition";
         attribute :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding.";
         attribute :>> viewKind = DiagramViewKind::statetransition;
         attribute :>> diagramType = "stm";
-        part :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("StateMachine", "MemoState");
         }

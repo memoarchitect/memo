@@ -45,10 +45,9 @@
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
 
-        part physicalViewpoint : Viewpoint {
+        viewpoint physicalViewpoint : MemoViewpoint {
             attribute :>> id = "VP-PHY";
             attribute :>> name = "PhysicalViewpoint";
-            attribute :>> title = "Physical Viewpoint";
             attribute :>> shortDescription = "Shows physical components, hardware structure, and their interconnections.";
             attribute :>> description = "Default viewpoint derived from the physical and hardware structure layers for bill-of-materials, hardware decomposition, physical interfaces, and network/connectivity topology.";
             attribute :>> purpose = "Describe the system's physical realization and interconnections.";

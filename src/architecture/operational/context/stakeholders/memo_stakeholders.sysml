@@ -1,9 +1,9 @@
-// ISO/IEC/IEEE 42010 architecture-description core (§4). A stakeholder has
-// interests in the system; a Viewpoint frames concerns; a View
-// (memo_viewpoints_definitions::MemoView) is governed by a viewpoint within an
-// ArchitectureDescription. The same real-world entity may play both the
-// Stakeholder and operational-participant concerns stay distinct from the
-// architecture-description types below.
+// ISO/IEC/IEEE 42010 architecture-description core (§4): ArchitectureDescription,
+// ModelKind, and CorrespondenceRule below. Stakeholders and concerns — 42010's
+// other cornerstones — are native SysML v2 constructs (stakeholder memberships
+// and `concern def`), used directly rather than reinvented as MEMO types. A
+// View (memo_viewpoints_definitions::MemoView) conforms to a Viewpoint within
+// an ArchitectureDescription.
 package memo_architecture_operational_context_stakeholders {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
@@ -12,7 +12,7 @@ package memo_architecture_operational_context_stakeholders {
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_architecture_operational_context_actors::*;
-    part def ArchitectureDescription specializes DocumentedElement {
+    part def ArchitectureDescription specializes MemoPart {
         attribute systemOfInterest : String;
         attribute version : String;
     }

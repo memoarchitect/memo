@@ -6,7 +6,6 @@ package memo_examples_ros_mobile_robot_viewpoints_unassigned_views_ros_mobile_ro
     view rosMobileRobotOverview : MemoDiagramView {
         expose memo_examples_ros_mobile_robot::*;
         attribute depth = 2;
-        attribute :>> title = "ROS Mobile Robot Overview";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
     }

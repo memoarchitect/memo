@@ -52,7 +52,6 @@
                         attribute depth = 2;
         attribute :>> id = "VIEW-VER-001";
         attribute :>> name = "VerificationCoverageView";
-        attribute :>> title = "Verification & Validation Coverage View";
         attribute :>> shortDescription = "Requirements with their verification cases, validation cases, and evidence.";
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
@@ -66,7 +65,7 @@
             attribute :>> includeLayers = ("requirements", "assurance");
             attribute :>> rationaleText = "Auto-populate V&V coverage from the requirements and assurance layers.";
         }
-        part :>> viewpointDefinition = verificationViewpoint;
+        ref :>> viewpointDefinition = verificationViewpoint;
                     }
     }
 

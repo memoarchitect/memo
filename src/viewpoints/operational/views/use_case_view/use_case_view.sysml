@@ -10,7 +10,6 @@ package memo_viewpoints_operational_views_use_case_view {
                     attribute depth = 2;
     attribute :>> id = "VIEW-OPS-001";
     attribute :>> name = "UseCaseView";
-    attribute :>> title = "Use Case Overview";
     attribute :>> shortDescription = "Actors connected to the operational scenarios and capabilities they invoke.";
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::custom);
@@ -24,6 +23,6 @@ package memo_viewpoints_operational_views_use_case_view {
         attribute :>> includeLayers = ("context", "operational");
         attribute :>> rationaleText = "Auto-populate the use case view from the context and operational layers.";
     }
-    part :>> viewpointDefinition = operationalViewpoint;
+    ref :>> viewpointDefinition = operationalViewpoint;
                 }
 }
