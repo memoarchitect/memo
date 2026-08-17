@@ -39,10 +39,20 @@ package memo_architecture_operational_workflows {
         attribute timingConstraints : String;
         ref involvedActors : OperationalParticipant[0..*];
         attribute environmentSummary : String;
-        // The use case this workflow realizes. Many workflows may trace to one
-        // use case; the use case does not own its workflows (the trace points
-        // upward, workflow → use case).
-        ref useCase : UseCase[0..1];
+    }
+
+    // The use case a workflow realizes. Many workflows may trace to one use
+    // case; the use case does not own its workflows (the trace points upward,
+    // workflow → use case).
+    connection def RealizesUseCase :> MemoRelationship {
+        end realizingWorkflow : OperationalWorkflow :>> source;
+        end realizedUseCase : UseCase :>> target;
+    }
+    abstract connection realizesUseCaseLinks : RealizesUseCase[*];
+    metadata def <realizesUseCase> RealizesUseCaseMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = realizesUseCaseLinks meta SysML::Usage;
     }
 
     // A step in a workflow wraps an operational activity or user task by

@@ -109,7 +109,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> preCondition = "confirmed prescription saved; no active alarm";
         attribute :>> postCondition = "basal infusion running";
         attribute :>> criticality = CriticalityKind::catastrophic;
-        ref :>> contributesToCapabilities = ocTitratedAnalgesia;
     }
     action oaRequestBolus : OperationalActivity {
         attribute :>> id = "OA-005";
@@ -118,7 +117,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> preCondition = "therapy active";
         attribute :>> postCondition = "bolus delivered, or request ignored when lockout or max-dose limits apply";
         attribute :>> criticality = CriticalityKind::catastrophic;
-        ref :>> contributesToCapabilities = ocTitratedAnalgesia;
     }
     action oaRespondAlarm : OperationalActivity {
         attribute :>> id = "OA-006";
@@ -127,7 +125,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> preCondition = "alarm condition raised by the pump";
         attribute :>> postCondition = "cause resolved and therapy resumed, or therapy stopped";
         attribute :>> criticality = CriticalityKind::catastrophic;
-        ref :>> contributesToCapabilities = ocFailSafeTherapy;
     }
     action oaReviewLog : OperationalActivity {
         attribute :>> id = "OA-007";
@@ -171,7 +168,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
         attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
-        ref :>> useCase = ucDeliverPcaTherapy;
 
         action wsProgram : WorkflowStep { ref :>> performedActivity = oaProgram; }
         action wsStart : WorkflowStep { ref :>> performedActivity = oaStartTherapy; }
@@ -181,7 +177,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "Basal therapy is active.";
         attribute :>> completionCondition = "A bolus is handled or active therapy continues safely.";
-        ref :>> useCase = ucDeliverPcaTherapy;
 
         action wsRequestBolus : WorkflowStep { ref :>> performedActivity = oaRequestBolus; }
         // Refinement targets a nested step by its local name — the shorthand's
@@ -199,7 +194,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
         attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";
-        ref :>> useCase = ucDeliverPcaTherapy;
 
         action wsRespondAlarm : WorkflowStep { ref :>> performedActivity = oaRespondAlarm; }
         #refinement dependency fcsAlarmSense to wsRespondAlarm;
@@ -362,4 +356,14 @@ package memo_examples_gpca_pump_gpca_operational {
     #refinement dependency osAirInLine to ucDeliverPcaTherapy;
     #refinement dependency osEmptyReservoir to ucDeliverPcaTherapy;
     #refinement dependency osPowerLoss to ucDeliverPcaTherapy;
+
+    // ── Operational trace relations ─────────────────────────────
+    connection : RealizesUseCase connect realizingWorkflow ::> wfPrepareAndStartTherapy to realizedUseCase ::> ucDeliverPcaTherapy;
+    connection : RealizesUseCase connect realizingWorkflow ::> wfManageActiveTherapy to realizedUseCase ::> ucDeliverPcaTherapy;
+    connection : RealizesUseCase connect realizingWorkflow ::> wfRespondToTherapyAlarm to realizedUseCase ::> ucDeliverPcaTherapy;
+    connection : EnablesUseCase connect enablingCapability ::> ocTitratedAnalgesia to enabledUseCase ::> ucDeliverPcaTherapy;
+    connection : EnablesUseCase connect enablingCapability ::> ocFailSafeTherapy to enabledUseCase ::> ucDeliverPcaTherapy;
+    connection : RequiresCapability connect requiringIntendedUse ::> gpcaIntendedUse to requiredCapability ::> ocTitratedAnalgesia;
+    connection : RequiresCapability connect requiringIntendedUse ::> gpcaIntendedUse to requiredCapability ::> ocFailSafeTherapy;
+
 }
