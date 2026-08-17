@@ -109,9 +109,7 @@ package memo_examples_gpca_pump_gpca_system {
         attribute :>> scenarioKind = ScenarioKind::alternate;
         attribute :>> id = "SS-002";
         attribute :>> name = "InhibitingNotificationPausesInfusion";
-        attribute :>> variationPoint = "an infusion-inhibiting notification interrupts active therapy";
         attribute :>> preCondition = "any ACTIVE therapy mode; infusion-inhibiting notification detected (REQ 59)";
         attribute :>> postCondition = "PAUSED mode entered in same execution step at FlowRate_kvo_hd keep-vein-open flow; notification annunciated per REQ 59";
-        ref :>> baseScenario = ssBolusDuringBasal;
     }
 }
