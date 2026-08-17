@@ -42,7 +42,7 @@
 | [`OperationalConditionKind`](#operationalconditionkind) | `enum def` | Controlled values for operational condition: `normal`, `degraded`, `emergency`, `maintenance`, `startup`, `shutdown`, `timeout`, `misuse`, `foreseeableMisuse`. | — |
 | [`ScenarioPurposeKind`](#scenariopurposekind) | `enum def` | `memoAnalysis` and `memoVerification` keep the regulated terms `analysis` and `verification` intact but prefixed, because both are SysML v2 reserved words and cannot be bare enum names. `validation` is not reserved. | — |
 | [`ScenarioKind`](#scenariokind) | `enum def` | Controlled values for scenario: `functional`, `operative`, `ui`, `threat`, `memoVerification`, `hazardRelatedUse`. | — |
-| [`MemoScenario`](#memoscenario) | `action def` | Shared scenario foundation. Fields that apply only to one scenario kind remain optional here; this keeps the taxonomy queryable without six otherwise redundant action definitions. | `MemoAction` |
+| [`OperativeScenario`](#operativescenario) | `action def` | Shared scenario foundation. Fields that apply only to one scenario kind remain optional here; this keeps the taxonomy queryable without six otherwise redundant action definitions. | `MemoAction` |
 | [`ScenarioOccurrence`](#scenariooccurrence) | `part def` | An actual or hypothetical execution of a scenario (usability test run, postmarket incident reconstruction, simulated-use session). | `MemoPart` |
 | [`SelectsKind`](#selectskind) | `enum def` | Controlled values for selects: `step`. | — |
 | [`Selects`](#selects) | `connection def` | Typed relationship for selects. | `MemoRelationship` |
@@ -108,10 +108,10 @@ enum def ScenarioKind
 | Owning package | `memo_architecture_operational_scenarios` |
 
 
-## MemoScenario
+## OperativeScenario
 
 ```sysml
-action def MemoScenario specializes MemoAction
+action def OperativeScenario specializes MemoAction
 ```
 
 | Property | Value |
@@ -254,7 +254,7 @@ connection def OccursDuring :> MemoRelationship
         // Shared scenario foundation. Fields that apply only to one scenario kind
         // remain optional here; this keeps the taxonomy queryable without six
         // otherwise redundant action definitions.
-        action def MemoScenario specializes MemoAction {
+        action def OperativeScenario specializes MemoAction {
             attribute scenarioKind : ScenarioKind;
             attribute variantKind : ScenarioVariantKind;
             attribute operationalCondition : OperationalConditionKind;
@@ -270,7 +270,7 @@ connection def OccursDuring :> MemoRelationship
             ref useContext : UseContext[0..1];
             // Alternate/exception/recovery scenarios reference their base and the
             // point at which behavior diverges — never a copied workflow.
-            ref baseScenario : MemoScenario[0..1];
+            ref baseScenario : OperativeScenario[0..1];
             attribute variationPoint : String;
 
             // functional scenario
@@ -302,7 +302,7 @@ connection def OccursDuring :> MemoRelationship
             attribute occurredAt : String;
             attribute hypothetical : Boolean;
             attribute outcomeSummary : String;
-            ref executedScenario : MemoScenario[1];
+            ref executedScenario : OperativeScenario[1];
         }
 
         // Ordered selection of a workflow step into a scenario path.
@@ -316,7 +316,7 @@ connection def OccursDuring :> MemoRelationship
             attribute selectsKind : SelectsKind;
             attribute pathOrder : Integer[0..1];
             attribute decisionTaken : String[0..1];
-            end scenario : MemoScenario :>> source;
+            end scenario : OperativeScenario :>> source;
             // A selected path element may be a WorkflowStep action or a flow
             // element. Those constructs do not share a MEMO base metaclass.
             end selected :>> target;

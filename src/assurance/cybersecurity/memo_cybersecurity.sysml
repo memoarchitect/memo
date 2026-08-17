@@ -99,7 +99,7 @@ package memo_assurance_cybersecurity {
     }
     connection def RealizedByScenario :> MemoRelationship {
         end realizedThreat : RequirementDriver :>> source;
-        end scenario : MemoScenario :>> target;
+        end scenario : OperativeScenario :>> target;
     }
     abstract connection realizedByScenarioLinks : RealizedByScenario[*];
     metadata def <realizedByScenario> RealizedByScenarioMetadata :> SemanticMetadata {

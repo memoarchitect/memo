@@ -55,7 +55,7 @@ package memo_examples_reusable_instrument {
     action wsSterilize : WorkflowStep { ref :>> performedActivity = actSterilizeLoad; }
     first wsInspect then wsSterilize;
 
-    action scNominalCycle : MemoScenario {
+    action scNominalCycle : OperativeScenario {
         attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";
         attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::nominal;

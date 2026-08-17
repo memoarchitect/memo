@@ -31,7 +31,7 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
         part :>> selectionQuery {
             attribute :>> id = "QRY-CYB-001";
             attribute :>> name = "GPCA_CybersecurityQuery";
-            attribute :>> includeElementKinds = ("CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "MemoScenario[scenarioKind=threat]");
+            attribute :>> includeElementKinds = ("CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "OperativeScenario[scenarioKind=threat]");
             attribute :>> includeLayers = ("cybersecurity", "risk", "assurance");
             attribute :>> includeConcerns = (ConcernKind::cybersecurity, ConcernKind::privacy, ConcernKind::safety);
             attribute :>> selectionExpression = "product == 'GPCA'";

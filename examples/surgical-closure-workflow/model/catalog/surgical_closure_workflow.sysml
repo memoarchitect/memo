@@ -112,7 +112,7 @@ package memo_examples_surgical_closure_workflow {
     }
 
     // ── Scenario paths, each with its own activity/action flow ──
-    action scNominalSleeveProcedure : MemoScenario {
+    action scNominalSleeveProcedure : OperativeScenario {
         attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
         attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::nominal;
@@ -128,7 +128,7 @@ package memo_examples_surgical_closure_workflow {
             first start then prepare; first prepare then createSleeve; first createSleeve then assess; first assess then handover; first handover then done;
         }
     }
-    action scStapleLineBleeding : MemoScenario {
+    action scStapleLineBleeding : OperativeScenario {
         attribute :>> id = "LSG-SC-002"; attribute :>> name = "StapleLineBleedingRecovery";
         attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::recovery;
