@@ -19,7 +19,6 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
         attribute depth = 2;
         attribute :>> id = "VIEW-CYB-001";
         attribute :>> name = "GPCA_CybersecurityView";
-        attribute :>> title = "GPCA Cybersecurity View";
         attribute :>> shortDescription = "Shows GPCA assets, trust boundaries, threats, vulnerabilities, and mitigations.";
         attribute :>> description = "Product-specific cybersecurity view intended for secure product development and cross-reference into cybersecurity risk documentation.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -29,7 +28,6 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
         attribute :>> dataSourceDescription = "GPCA cyber assets, threat scenarios, and trace links";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include cyber assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, mitigations, security requirements, and verification.";
-        attribute :>> documentUsage = ("Threat Model", "Cybersecurity Risk Assessment", "QMSR");
         part :>> selectionQuery {
             attribute :>> id = "QRY-CYB-001";
             attribute :>> name = "GPCA_CybersecurityQuery";
@@ -39,6 +37,6 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the GPCA cybersecurity view from the cyber layer and cross-layer trace model.";
         }
-        part :>> viewpointDefinition = cybersecurityViewpoint;
+        ref :>> viewpointDefinition = cybersecurityViewpoint;
     }
 }

@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_software_views_software_software_arch
         attribute depth = 2;
         attribute :>> id = "VIEW-SW-101";
         attribute :>> name = "GPCA_SoftwareArchitectureView";
-        attribute :>> title = "GPCA Software Architecture View";
         attribute :>> shortDescription = "The eight AADL GPCA_SW.Impl subcomponents, top-level ports, and the full inter-component connection topology.";
         attribute :>> description = "Top_Level_Mode, System_Status, Alarm, Config, Infusion_Manager, System_Monitor, Logging, and OutputBus inside the GPCA_Software system, wired per GPCA_SW.Impl with the seven top-level ports (OP_CMD_IN, PRES_IN, PATIENT_IN, SENSOR_IN, CONST_IN, DB_IN, GPCA_SW_OUT). Connections are synchronous with AADL immediate port semantics.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -28,7 +27,6 @@ package memo_examples_gpca_pump_viewpoints_software_views_software_software_arch
         attribute :>> dataSourceDescription = "GPCA software structure, top-level ports, and the GPCA_SW.Impl connection set (CE-101..CE-142)";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include the software system, its eight components, its boundary ports, and the flow and delegation topology between them.";
-        attribute :>> documentUsage = ("SDD", "QMSR");
         part :>> selectionQuery {
             attribute :>> id = "QRY-SW-101";
             attribute :>> name = "GPCA_SoftwareArchitectureQuery";
@@ -38,6 +36,6 @@ package memo_examples_gpca_pump_viewpoints_software_views_software_software_arch
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Render the real GPCA_SW.Impl topology: components and boundary ports as nodes, AADL connections as edges.";
         }
-        part :>> viewpointDefinition = softwareViewpoint;
+        ref :>> viewpointDefinition = softwareViewpoint;
     }
 }

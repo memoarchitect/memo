@@ -34,11 +34,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
     view sampleTreeView : MemoDiagramView {
         expose rootA::**;
         attribute depth = 2;
-        attribute :>> title = "Sample · Tree";
         attribute :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
-        part :>> viewpointDefinition = physicalViewpoint;
+        ref :>> viewpointDefinition = physicalViewpoint;
         attribute :>> layoutHint = "tree";
         attribute :>> styleHint = "expanded:rootA,rootB,branchA1,branchB1";
         part :>> selectionQuery {

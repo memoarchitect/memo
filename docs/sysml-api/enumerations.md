@@ -78,7 +78,6 @@ SysML `enum def` declarations in `src/`.
 | --- | --- | --- | --- |
 | [`ControlNodeKind`](architecture/operational/workflows/memo_workflows.md#controlnodekind) | `enum def` | decision / fork / join / handoff. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`StepTransformationKind`](architecture/operational/workflows/memo_workflows.md#steptransformationkind) | `enum def` | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`SupportKind`](architecture/operational/workflows/memo_workflows.md#supportkind) | `enum def` | Controlled values for support: `useCase`, `task`, `capability`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`TransformKind`](architecture/operational/workflows/memo_workflows.md#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowStateKind`](architecture/operational/workflows/memo_workflows.md#workflowstatekind) | `enum def` | As-is vs. to-be vs. contingency is a typed dimension of the workflow, not a name suffix. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 

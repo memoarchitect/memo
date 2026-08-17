@@ -33,8 +33,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`RiskDriver`](#riskdriver) | `part def` | Risk driver definition specializing `RequirementDriver`. | `RequirementDriver` |
-| [`IntendedUse`](#intendeduse) | `part def` | ISO 14971 risk-analysis inputs. These are model elements so hazards, scenarios, requirements, and DHF records can trace to the exact use definition or foreseeable misuse that motivated them. | `DocumentedElement` |
-| [`ReasonablyForeseeableMisuse`](#reasonablyforeseeablemisuse) | `part def` | Reasonably foreseeable misuse definition specializing `DocumentedElement`. | `DocumentedElement` |
+| [`ReasonablyForeseeableMisuse`](#reasonablyforeseeablemisuse) | `part def` | ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards, scenarios, requirements, and DHF records can trace to the foreseeable misuse that motivated them.… | `MemoPart` |
 | [`RequirementKind`](#requirementkind) | `enum def` | The kind of requirement. Was a subclass branch (SystemRequirement / SoftwareRequirement / HardwareRequirement) plus a parallel design-control specification hierarchy (DesignControlSpecification / System- / Software- / HardwareSpecification); now one attribute.… | — |
 | [`Requirement`](#requirement) | `requirement def` | Requirement definition specializing `MemoRequirement`. | `MemoRequirement` |
 | [`SystemConstant`](#systemconstant) | `part def` | Named constant defined by a source requirements document (e.g. CriSys GPCA App. A.4) and referenced from requirement statements. | `MemoPart` |
@@ -55,33 +54,18 @@ part def RiskDriver specializes RequirementDriver
 | Owning package | `memo_assurance_requirements` |
 
 
-## IntendedUse
-
-```sysml
-part def IntendedUse specializes DocumentedElement
-```
-
-| Property | Value |
-| --- | --- |
-| Description | ISO 14971 risk-analysis inputs. These are model elements so hazards, scenarios, requirements, and DHF records can trace to the exact use definition or foreseeable misuse that motivated them. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `DocumentedElement` |
-| Owning package | `memo_assurance_requirements` |
-
-
 ## ReasonablyForeseeableMisuse
 
 ```sysml
-part def ReasonablyForeseeableMisuse specializes DocumentedElement
+part def ReasonablyForeseeableMisuse specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Reasonably foreseeable misuse definition specializing `DocumentedElement`. |
+| Description | ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards, scenarios, requirements, and DHF records can trace to the foreseeable misuse that motivated them.… |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `DocumentedElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_assurance_requirements` |
 
 
@@ -159,17 +143,12 @@ part def NotificationSpec specializes MemoPart
         private import memo_assurance_requirements_needs::*;
         part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
 
-        // ISO 14971 risk-analysis inputs. These are model elements so hazards,
-        // scenarios, requirements, and DHF records can trace to the exact use
-        // definition or foreseeable misuse that motivated them.
-        part def IntendedUse specializes DocumentedElement {
-            attribute indication : String;
-            attribute contraindication : String;
-            attribute patientPopulation : String;
-            attribute clinicalBenefit : String;
-            attribute regulatoryClassification : String;
-        }
-        part def ReasonablyForeseeableMisuse specializes DocumentedElement {
+        // ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards,
+        // scenarios, requirements, and DHF records can trace to the foreseeable
+        // misuse that motivated them. Its counterpart, IntendedUse, is now the
+        // operational-world root (memo_architecture_operational_structure::IntendedUse,
+        // a MemoMission).
+        part def ReasonablyForeseeableMisuse specializes MemoPart {
             attribute misuseContext : String;
             attribute foreseeableBasis : String;
             attribute affectedUseContext : String;

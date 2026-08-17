@@ -108,10 +108,15 @@ package memo_core_common {
     // description registers every MemoPart now carries: a title and its place
     // in a document. The former `shortDescription`/`longDescription` pair is
     // gone — short is inherited, and `description` IS the long form.
-    part def DocumentedElement specializes MemoPart {
-        attribute title : String;
-        attribute documentUsage : String[*];
-        attribute sectionIdentifier : String;
+    // Top-level goal a system or operation exists to fulfil, with its success
+    // criteria and context. Domain layers specialize it; the medical-device
+    // intended use (memo_architecture_operational_structure::IntendedUse) is a
+    // MemoMission. Specializes MemoPart directly — name/description/rationale
+    // already live there, so no DocumentedElement layer is needed.
+    abstract part def MemoMission specializes MemoPart {
+        attribute missionKind : String;
+        attribute successCriteria : String;
+        attribute operationalContext : String;
     }
 
     // ─── Construct-specific foundations (non-part metaclasses) ───────
@@ -128,6 +133,10 @@ package memo_core_common {
         attribute sourceReference : String;
         attribute status : ElementStatusKind;
     }
+
+    // Abstract step base: one step of a scenario. Concrete steps are a UserTask
+    // (performed by an actor) or a SystemAction (performed by the system).
+    abstract action def ScenarioStep specializes MemoAction;
 
     // Boundary feature foundation for typed ports.
     port def MemoPort {

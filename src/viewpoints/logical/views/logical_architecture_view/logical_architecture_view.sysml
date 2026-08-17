@@ -10,7 +10,6 @@ package memo_viewpoints_logical_views_logical_architecture_view {
                     attribute depth = 2;
     attribute :>> id = "VIEW-LOG-001";
     attribute :>> name = "LogicalArchitectureView";
-    attribute :>> title = "Logical Architecture View";
     attribute :>> shortDescription = "Logical components and their interfaces.";
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -24,6 +23,6 @@ package memo_viewpoints_logical_views_logical_architecture_view {
         attribute :>> includeLayers = ("logical_structure", "interfaces");
         attribute :>> rationaleText = "Auto-populate the logical architecture view from the logical structure and interfaces layers.";
     }
-    part :>> viewpointDefinition = logicalArchitectureViewpoint;
+    ref :>> viewpointDefinition = logicalArchitectureViewpoint;
                 }
 }

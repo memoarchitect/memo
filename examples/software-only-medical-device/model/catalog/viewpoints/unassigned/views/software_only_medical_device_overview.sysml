@@ -6,7 +6,6 @@ package memo_examples_software_only_medical_device_viewpoints_unassigned_views_s
     view softwareOnlyMedicalDeviceOverview : MemoDiagramView {
         expose memo_examples_software_only_medical_device::*;
         attribute depth = 2;
-        attribute :>> title = "Software-only Medical Device Overview";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
     }

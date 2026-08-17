@@ -46,7 +46,6 @@ package memo_examples_ui_screen_regions_viewpoints_ui_layout_views_settings_scre
         expose memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
         expose memo_examples_ui_screen_regions_traces::*;
         attribute :>> id = "UIE-008";
-        attribute :>> title = "Infusion Settings Screen — Region Layout";
-        part :>> viewpointDefinition = uiLayoutViewpoint;
+        ref :>> viewpointDefinition = uiLayoutViewpoint;
     }
 }

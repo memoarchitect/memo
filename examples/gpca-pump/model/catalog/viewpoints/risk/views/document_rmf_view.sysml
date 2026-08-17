@@ -11,7 +11,6 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
         expose evidenceLockout;
         attribute :>> id = "DOC-001";
         attribute :>> name = "RiskManagementFileView";
-        attribute :>> title = "GPCA Risk Management File View";
         attribute :>> shortDescription = "Document-backed risk view for GPCA.";
         attribute :>> description = "Aggregates the risk chain, controls, verification, residual risk, and cybersecurity links needed for the GPCA risk management file.";
         attribute :>> version = "0.2";
@@ -19,9 +18,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
         attribute :>> viewKind = DocumentViewKind::RMF;
         attribute :>> generationRule = "Include risk chain, controls, verification, residual risk, and cybersecurity traceability";
         attribute :>> marketScope = "generic";
-        attribute :>> documentUsage = ("RMF", "QMSR");
-        attribute :>> sectionIdentifier = "RMF";
-        part :>> viewpointDefinition = riskViewpoint;
+        ref :>> viewpointDefinition = riskViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-001";
             attribute :>> name = "rmfViewQuery";

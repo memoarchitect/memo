@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1818" viewBox="0 0 1600 1818" role="img" aria-labelledby="title desc">
+  <title id="title">Operational elements — nesting</title>
+  <desc id="desc">containment and specialization only, no relation arrows</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="1818" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Operational elements — nesting</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">containment and specialization only, no relation arrows</tspan></text>
+  <g filter="url(#shadow)">
+  <rect x="40" y="120" width="1520" height="294" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="120" width="1520" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="40" y="154" width="1520" height="24" fill="#6f42c1"/>
+  <text x="64" y="158" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">People — context::actors</tspan></text>
+  <rect x="70" y="210" width="400" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="270" y="249" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="270" dy="0">OperationalParticipant (abstract)</tspan></text>
+  <rect x="70" y="320" width="120" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="130" y="359" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="130" dy="0">User</tspan></text><path d="M 270 274 L 270 300" fill="none" stroke="#6f42c1" stroke-width="2"/><path d="M 130 300 L 130 320" fill="none" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="444" width="1520" height="184" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="444" width="1520" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="40" y="478" width="1520" height="24" fill="#6f42c1"/>
+  <text x="64" y="482" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Context — context::use_context</tspan></text>
+  <rect x="70" y="534" width="147" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="143.5" y="573" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="143.5" dy="0">UseContext</tspan></text>
+  <rect x="239" y="534" width="191" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="334.5" y="573" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="334.5" dy="0">UseEnvironment</tspan></text>
+  <rect x="40" y="658" width="1520" height="184" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="658" width="1520" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="40" y="692" width="1520" height="24" fill="#6f42c1"/>
+  <text x="64" y="696" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Mission and operational architecture — structure</tspan></text>
+  <rect x="70" y="748" width="120" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="130" y="787" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="130" dy="0">Mission</tspan></text>
+  <rect x="212" y="748" width="224" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="324" y="787" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="324" dy="0">OperationalEntity</tspan></text>
+  <rect x="458" y="748" width="268" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="592" y="787" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="592" dy="0">OperationalCapability</tspan></text>
+  <rect x="748" y="748" width="279" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="887.5" y="787" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="887.5" dy="0">OperationalInteraction</tspan></text>
+  <rect x="40" y="872" width="1520" height="184" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="872" width="1520" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="40" y="906" width="1520" height="24" fill="#6f42c1"/>
+  <text x="64" y="910" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Goals and work — use_cases, activities</tspan></text>
+  <rect x="70" y="962" width="120" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="130" y="1001" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="130" dy="0">UseCase</tspan></text>
+  <rect x="212" y="962" width="246" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="335" y="1001" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="335" dy="0">OperationalActivity</tspan></text>
+  <rect x="480" y="962" width="125" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="542.5" y="1001" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="542.5" dy="0">UserTask</tspan></text>
+  <rect x="627" y="962" width="125" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="689.5" y="1001" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="689.5" dy="0">TaskStep</tspan></text>
+  <rect x="774" y="962" width="301" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="924.5" y="1001" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="924.5" dy="0">TaskDifficultyAssessment</tspan></text>
+  <rect x="40" y="1086" width="1520" height="294" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="1086" width="1520" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="40" y="1120" width="1520" height="24" fill="#6f42c1"/>
+  <text x="64" y="1124" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Workflows — workflows</tspan></text>
+  <rect x="70" y="1176" width="246" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="193" y="1215" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="193" dy="0">OperationalWorkflow</tspan></text>
+  <rect x="70" y="1286" width="169" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="154.5" y="1325" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="154.5" dy="0">WorkflowStep</tspan></text>
+  <rect x="299" y="1286" width="246" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="422" y="1325" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="422" dy="0">WorkflowControlNode</tspan></text>
+  <rect x="665" y="1286" width="213" height="64" rx="14" fill="#fbfbfe" stroke="#6f42c1" stroke-width="2"/>
+  <text x="771.5" y="1325" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="771.5" dy="0">WorkflowResource</tspan></text><path d="M 193 1240 L 193 1266" fill="none" stroke="#6f42c1" stroke-width="2"/><path d="M 154.5 1266 L 422 1266" fill="none" stroke="#6f42c1" stroke-width="2"/><path d="M 154.5 1266 L 154.5 1286" fill="none" stroke="#6f42c1" stroke-width="2"/><path d="M 422 1266 L 422 1286" fill="none" stroke="#6f42c1" stroke-width="2"/><text x="771.5" y="1274" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="12" font-weight="650" fill="#7c8798"><tspan x="771.5" dy="0">referenced, not contained</tspan></text>
+  <rect x="40" y="1410" width="1520" height="184" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
+  <rect x="40" y="1410" width="1520" height="58" rx="24" fill="#6f42c1"/>
+  <rect x="40" y="1444" width="1520" height="24" fill="#6f42c1"/>
+  <text x="64" y="1448" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Scenarios — scenarios</tspan></text>
+  <rect x="70" y="1500" width="301" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="220.5" y="1539" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="220.5" dy="0">MemoScenario (operative)</tspan></text>
+  <rect x="393" y="1500" width="235" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="510.5" y="1539" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="510.5" dy="0">ScenarioOccurrence</tspan></text>
+  <rect x="40" y="1624" width="1520" height="194" rx="24" fill="#f7fafc" stroke="#7c8798" stroke-width="2"/>
+  <rect x="40" y="1624" width="1520" height="58" rx="24" fill="#7c8798"/>
+  <rect x="40" y="1658" width="1520" height="24" fill="#7c8798"/>
+  <text x="64" y="1662" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Model description (ISO/IEC/IEEE 42010) — not operational-world content</tspan></text><text x="70" y="1698" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="13" font-weight="600" fill="#7c8798"><tspan x="70" dy="0">Declared in context::stakeholders, but these describe the MODEL — closer to Viewpoints than to the device's operational world.</tspan></text>
+  <rect x="70" y="1720" width="290" height="64" rx="14" fill="#ffffff" stroke="#7c8798" stroke-width="2"/>
+  <text x="215" y="1759" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="215" dy="0">ArchitectureDescription</tspan></text>
+  <rect x="382" y="1720" width="136" height="64" rx="14" fill="#ffffff" stroke="#7c8798" stroke-width="2"/>
+  <text x="450" y="1759" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="450" dy="0">ModelKind</tspan></text>
+  <rect x="540" y="1720" width="235" height="64" rx="14" fill="#ffffff" stroke="#7c8798" stroke-width="2"/>
+  <text x="657.5" y="1759" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="657.5" dy="0">CorrespondenceRule</tspan></text></g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#6f42c1"/>
+</svg>

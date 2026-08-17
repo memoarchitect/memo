@@ -52,7 +52,6 @@
                         attribute depth = 2;
         attribute :>> id = "VIEW-REQ-001";
         attribute :>> name = "RequirementsTraceabilityView";
-        attribute :>> title = "Requirements Traceability View";
         attribute :>> shortDescription = "Stakeholder needs traced through system, software, and hardware requirements.";
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
@@ -66,7 +65,7 @@
             attribute :>> includeLayers = ("requirements");
             attribute :>> rationaleText = "Auto-populate requirements traceability from the requirements layer.";
         }
-        part :>> viewpointDefinition = requirementsViewpoint;
+        ref :>> viewpointDefinition = requirementsViewpoint;
                     }
     }
 

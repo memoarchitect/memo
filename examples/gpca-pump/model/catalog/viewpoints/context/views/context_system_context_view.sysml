@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_context_views_context_system_context_
         attribute depth = 2;
         attribute :>> id = "VIEW-CTX-101";
         attribute :>> name = "GPCA_SystemContextView";
-        attribute :>> title = "GPCA System Context View";
         attribute :>> shortDescription = "Actors, use contexts, and external entities at the GPCA system boundary.";
         attribute :>> description = "Shows the CriSys Fig 2.1 boundary: patient, clinician, prescription, drug reservoir, needle, hospital pharmacy database, and hospital environment around the pump, with directional data flows, physical drug-path connections, and the intended use anchoring the boundary.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -28,7 +27,6 @@ package memo_examples_gpca_pump_viewpoints_context_views_context_system_context_
         attribute :>> dataSourceDescription = "GPCA context layer: actors, use contexts, intended use, operational entities";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include actors, use contexts, intended use, and external operational entities.";
-        attribute :>> documentUsage = ("Architecture Description", "Usability Engineering File");
         part :>> selectionQuery {
             attribute :>> id = "QRY-CTX-101";
             attribute :>> name = "GPCA_SystemContextQuery";
@@ -38,6 +36,6 @@ package memo_examples_gpca_pump_viewpoints_context_views_context_system_context_
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the GPCA context view from the context layer.";
         }
-        part :>> viewpointDefinition = contextViewpoint;
+        ref :>> viewpointDefinition = contextViewpoint;
     }
 }

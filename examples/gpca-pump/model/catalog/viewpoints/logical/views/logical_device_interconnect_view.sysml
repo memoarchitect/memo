@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_device_intercon
         attribute depth = 2;
         attribute :>> id = "VIEW-LOG-003";
         attribute :>> name = "GPCA_DeviceInterconnectView";
-        attribute :>> title = "GPCA Device Interconnect View";
         attribute :>> shortDescription = "AADL device-level interconnection: GPCA_HW_Sensors, GPCA_SW, and GPCA_HW_Actuators with their declared boundary features.";
         attribute :>> description = "Source-faithful interconnection view of GPCA_Device.Impl: exactly the three AADL subcomponents (GPCA_HW_Sensors, GPCA_SW, GPCA_HW_Actuators), the device and subsystem boundary ports, and the twelve declared port connections. MEMO physical-design additions such as the controller board, power sources, enclosure, and individual sensors/actuators are intentionally excluded because the published AADL v2.0 model does not declare them as GPCA_Device.Impl subcomponents. Drill into GPCA_SW to inspect its eight subcomponents and 42 internal connections; use the connection-density control to switch between bundled summary and full fidelity.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -28,7 +27,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_device_intercon
         attribute :>> dataSourceDescription = "GPCA hardware assemblies, software system, software components, boundary ports, and the flow/bind/Composes topology";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include hardware assemblies, the software system with its components and boundary ports, and the exchange topology between them.";
-        attribute :>> documentUsage = ("SDD", "Architecture Description", "QMSR");
         part :>> selectionQuery {
             attribute :>> id = "QRY-LOG-003";
             attribute :>> name = "GPCA_DeviceInterconnectQuery";
@@ -38,6 +36,6 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_device_intercon
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Render the device interconnect: parts with boundary ports as nodes, AADL connections as typed connectors, composition as nesting.";
         }
-        part :>> viewpointDefinition = logicalArchitectureViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
     }
 }

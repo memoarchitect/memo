@@ -1,7 +1,8 @@
-// Operational participants (§4) interact with the system; they are distinct
-// from stakeholders (memo_architecture_operational_context_stakeholders), who have concerns about the
-// system but need not interact with it. "User" is reserved for a human who
-// interacts with the medical device.
+// Operational participants (§4) interact with the system. A stakeholder —
+// someone with a concern about the system who need not interact with it — is
+// a native SysML notion (a Part in a stakeholder membership on a concern or
+// viewpoint), not a separate MEMO type; the same Part may fill both roles.
+// "User" is reserved for a human who interacts with the medical device.
 package memo_architecture_operational_context_actors {
     private import ScalarValues::*;
 

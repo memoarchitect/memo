@@ -4,13 +4,18 @@ package memo_architecture_operational_structure {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
-    private import memo_architecture_operational_activities::*;
-    // OperationalActivity now lives in memo_architecture_operational_activities (action def) and
-    // Operational scenarios are defined in memo_architecture_operational_scenarios.
-    part def Mission specializes DocumentedElement {
-        attribute missionKind : String;
-        attribute successCriteria : String;
-        attribute operationalContext : String;
+
+    // IEC 62366-1 / ISO 14971 intended use: the medical device's declared
+    // purpose and the root of the operational spine. A MemoMission, because
+    // "mission" has no medical-device meaning — intended use is what a device
+    // exists to do. Was in memo_assurance_requirements; moved here as the
+    // operational-world root.
+    part def IntendedUse specializes MemoMission {
+        attribute indication : String;
+        attribute contraindication : String;
+        attribute patientPopulation : String;
+        attribute clinicalBenefit : String;
+        attribute regulatoryClassification : String;
     }
     part def OperationalEntity specializes ArchitectureElement {
         attribute entityKind : OperationalEntityKind;

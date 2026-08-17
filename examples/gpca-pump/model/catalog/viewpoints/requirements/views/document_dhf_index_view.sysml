@@ -11,7 +11,6 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index
         expose memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index_view::*;
         attribute :>> id = "DOC-007";
         attribute :>> name = "DesignHistoryFileIndexView";
-        attribute :>> title = "GPCA Design History File Index View";
         attribute :>> shortDescription = "Index of design inputs, outputs, reviews, and V&V records for the DHF.";
         attribute :>> description = "Collects the document-backed views (requirements, architecture, SDD, RMF, VV, usability, cybersecurity) into the design history file index required by 21 CFR 820.30(j).";
         attribute :>> version = "0.1";
@@ -19,11 +18,9 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index
         attribute :>> viewKind = DocumentViewKind::DHF;
         attribute :>> generationRule = "Index every document-backed view with version and lifecycle state";
         attribute :>> marketScope = "generic";
-        attribute :>> documentUsage = ("DHF");
-        attribute :>> sectionIdentifier = "DHF";
-        part vpRequirements :> viewpointDefinition = requirementsViewpoint;
-        part vpRisk :> viewpointDefinition = riskViewpoint;
-        part vpVerification :> viewpointDefinition = verificationViewpoint;
+        ref vpRequirements :> viewpointDefinition = requirementsViewpoint;
+        ref vpRisk :> viewpointDefinition = riskViewpoint;
+        ref vpVerification :> viewpointDefinition = verificationViewpoint;
         part :>> selectionQuery {
             attribute :>> id = "QRY-DOC-007";
             attribute :>> name = "dhfIndexViewQuery";

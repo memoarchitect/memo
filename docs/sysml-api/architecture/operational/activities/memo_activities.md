@@ -30,6 +30,7 @@
 | private | `memo_core_relationships::*` |
 | private | `memo_architecture_operational_context_actors::*` |
 | private | `memo_architecture_operational_context_use_context::*` |
+| private | `memo_architecture_operational_structure::*` |
 
 ## Declarations
 
@@ -37,7 +38,8 @@
 | --- | --- | --- | --- |
 | [`DemandLevelKind`](#demandlevelkind) | `enum def` | Controlled values for demand level: `minimal`, `low`, `moderate`, `high`, `extreme`. | — |
 | [`OperationalActivity`](#operationalactivity) | `action def` | Operational activity definition specializing `MemoAction`. | `MemoAction` |
-| [`UserTask`](#usertask) | `action def` | A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a UserTask whose criticality is high or catastrophic — a use error could cause serious harm. potentialHarm/severityIfFailed are set only for such tasks. Modeled as an attribute, like SystemFunction.criticality. | `MemoAction` |
+| [`UserTask`](#usertask) | `action def` | User task definition specializing `ScenarioStep`. | `ScenarioStep` |
+| [`SystemAction`](#systemaction) | `action def` | A scenario step performed by the system. May realize a SystemFunction (the functional-layer capability it exercises). | `ScenarioStep` |
 | [`TaskStep`](#taskstep) | `action def` | An elementary perceptual/cognitive/motor step within a user task (task analysis granularity: grasp needle, drive needle, tie knot …). | `MemoAction` |
 | [`TaskDifficultyAssessment`](#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | `MemoPart` |
 | [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship for assesses difficulty. | `MemoRelationship` |
@@ -75,15 +77,30 @@ action def OperationalActivity specializes MemoAction
 ## UserTask
 
 ```sysml
-action def UserTask specializes MemoAction
+action def UserTask specializes ScenarioStep
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a UserTask whose criticality is high or catastrophic — a use error could cause serious harm. potentialHarm/severityIfFailed are set only for such tasks. Modeled as an attribute, like SystemFunction.criticality. |
+| Description | User task definition specializing `ScenarioStep`. |
 | Kind | `action def` |
 | Abstract | No |
-| Specializes | `MemoAction` |
+| Specializes | `ScenarioStep` |
+| Owning package | `memo_architecture_operational_activities` |
+
+
+## SystemAction
+
+```sysml
+action def SystemAction specializes ScenarioStep
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A scenario step performed by the system. May realize a SystemFunction (the functional-layer capability it exercises). |
+| Kind | `action def` |
+| Abstract | No |
+| Specializes | `ScenarioStep` |
 | Owning package | `memo_architecture_operational_activities` |
 
 
@@ -154,6 +171,7 @@ connection def AssessesDifficulty :> MemoRelationship
         private import memo_core_relationships::*;
         private import memo_architecture_operational_context_actors::*;
         private import memo_architecture_operational_context_use_context::*;
+        private import memo_architecture_operational_structure::*;
 
         enum def DemandLevelKind {
             enum minimal;
@@ -169,13 +187,18 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute postCondition : String;
             attribute criticality : CriticalityKind;
             ref performedBy : OperationalParticipant[0..*];
+            // Operational capabilities this activity contributes to (ARCADIA: an
+            // operational process/activity implements a capability).
+            ref contributesToCapabilities : OperationalCapability[0..*];
         }
 
         // A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a
         // UserTask whose criticality is high or catastrophic — a use error could
         // cause serious harm. potentialHarm/severityIfFailed are set only for such
         // tasks. Modeled as an attribute, like SystemFunction.criticality.
-        action def UserTask specializes MemoAction {
+        // A scenario step performed by a human actor (as opposed to a SystemAction
+        // performed by the system). Both specialize ScenarioStep.
+        action def UserTask specializes ScenarioStep {
             attribute taskGoal : String;
             attribute preCondition : String;
             attribute postCondition : String;
@@ -185,6 +208,14 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute potentialHarm : String[0..1];
             attribute severityIfFailed : SeverityKind[0..1];
             ref performingUser : User[0..1];
+        }
+
+        // A scenario step performed by the system. May realize a SystemFunction
+        // (the functional-layer capability it exercises).
+        action def SystemAction specializes ScenarioStep {
+            attribute preCondition : String;
+            attribute postCondition : String;
+            attribute automated : Boolean;
         }
 
         // An elementary perceptual/cognitive/motor step within a user task

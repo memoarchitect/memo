@@ -94,6 +94,7 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> entryCondition = "patient prepared; time-out ready";
         attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
+        ref :>> useCase = ucPerformSleeveGastrectomy;
 
         action wsTimeOut : WorkflowStep { ref :>> performedActivity = actTimeOutAndPosition; }
         action wsAccess : WorkflowStep { ref :>> performedActivity = actEstablishAccess; }
@@ -109,7 +110,6 @@ package memo_examples_surgical_closure_workflow {
         first wsAssess then wsClose;
         first wsClose then wsHandover;
     }
-    connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfSleeveGastrectomy to supported ::> ucPerformSleeveGastrectomy; }
 
     // ── Scenario paths, each with its own activity/action flow ──
     action scNominalSleeveProcedure : MemoScenario {

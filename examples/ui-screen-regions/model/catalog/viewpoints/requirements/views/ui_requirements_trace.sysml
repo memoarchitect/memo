@@ -44,7 +44,6 @@ package memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_require
         expose memo_examples_ui_screen_regions_traces::*;
         attribute depth = 3;
         attribute :>> id = "REQ-101";
-        attribute :>> title = "UI Requirements Traceability";
         attribute :>> shortDescription = "Clinical need through UI requirements to satisfying regions and functions.";
         attribute :>> viewKind = DiagramViewKind::grid;
         attribute :>> diagramType = "req";
@@ -57,6 +56,6 @@ package memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_require
             attribute :>> includeLayers = ("requirements", "implementation", "functions", "assurance");
             attribute :>> rationaleText = "Show the example's requirement derivation and satisfaction chain.";
         }
-        part :>> viewpointDefinition = requirementsViewpoint;
+        ref :>> viewpointDefinition = requirementsViewpoint;
     }
 }

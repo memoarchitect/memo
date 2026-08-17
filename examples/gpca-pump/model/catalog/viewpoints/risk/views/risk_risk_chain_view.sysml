@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_risk_chain_view {
         attribute depth = 2;
         attribute :>> id = "VIEW-RISK-101";
         attribute :>> name = "GPCA_RiskChainView";
-        attribute :>> title = "GPCA Risk Mitigation Chain View";
         attribute :>> shortDescription = "All seven hazard causal trees from categorized cause through harm with controls and residual risk.";
         attribute :>> description = "Opioid over-infusion, under-infusion, air embolism, misprogramming, free-flow, reverse-delivery, and VTBI over-infusion causal trees (GIIP cause-source structure): categorized causes converging on each hazard, sequences of events, hazardous situations, harms, risk estimates, controls, and residual evaluations.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
@@ -28,7 +27,6 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_risk_chain_view {
         attribute :>> dataSourceDescription = "GPCA risk layer and TracesRisk/MitigatesHazard links";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include hazards, sequences, situations, harms, risks before/after, controls, and residual evaluation.";
-        attribute :>> documentUsage = ("RMF", "Hazard Analysis Report", "QMSR");
         part :>> selectionQuery {
             attribute :>> id = "QRY-RISK-101";
             attribute :>> name = "GPCA_RiskChainQuery";
@@ -39,6 +37,6 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_risk_chain_view {
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the risk chain diagram from the risk layer.";
         }
-        part :>> viewpointDefinition = riskViewpoint;
+        ref :>> viewpointDefinition = riskViewpoint;
     }
 }

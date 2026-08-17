@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="604" viewBox="0 0 1600 604" role="img" aria-labelledby="title desc">
+  <title id="title">Operational relations — context</title>
+  <desc id="desc">grey = owned by another area, dashed lavender = untyped (any element)</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#536b7a"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0b2b49" flood-opacity=".09"/></filter>
+  </defs>
+  <rect width="1600" height="604" rx="28" fill="#ffffff"/>
+  <rect x="0" y="0" width="1600" height="92" rx="28" fill="#0b2b49"/>
+  <rect x="0" y="64" width="1600" height="28" fill="#0b2b49"/>
+  <text x="44" y="48" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="30" font-weight="900" fill="#ffffff"><tspan x="44" dy="0">Operational relations — context</tspan></text>
+  <text x="1556" y="48" text-anchor="end" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="650" fill="#bcd1df"><tspan x="1556" dy="0">grey = owned by another area, dashed lavender = untyped (any element)</tspan></text>
+  <g filter="url(#shadow)">
+  <rect x="60" y="140" width="126" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="123" y="167" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="123" dy="0">MemoPart</tspan></text>
+      <text x="123" y="186" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="123" dy="0">memo::core::common</tspan></text>
+  <rect x="1414" y="140" width="126" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="1477" y="167" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="1477" dy="0">MemoPart</tspan></text>
+      <text x="1477" y="186" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="1477" dy="0">memo::core::common</tspan></text>
+  
+  <path d="M 186 172 L 1414 172" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="756.8" y="134" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="800" y="154" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Governs</text>
+  <rect x="60" y="220" width="213" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="166.5" y="247" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="166.5" dy="0">ArchitectureElement</tspan></text>
+      <text x="166.5" y="266" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="166.5" dy="0">memo::core::common</tspan></text>
+  <rect x="1327" y="220" width="213" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="1433.5" y="247" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="1433.5" dy="0">ArchitectureElement</tspan></text>
+      <text x="1433.5" y="266" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="1433.5" dy="0">memo::core::common</tspan></text>
+  
+  <path d="M 273 252 L 1327 252" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="706.2" y="214" width="187.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="800" y="234" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">InteractsInContext</text>
+  <rect x="60" y="300" width="242" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="181" y="338" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="181" dy="0">OperationalParticipant</tspan></text>
+  <rect x="1401" y="300" width="139" height="64" rx="12" fill="#f3f2fb" stroke="#6f42c1" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="1470.5" y="338" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1470.5" dy="0">any element</tspan></text>
+  
+  <path d="M 302 332 L 1401 332" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="780.7" y="294" width="141.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="851.5" y="314" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">InteractsWith</text>
+  <rect x="60" y="380" width="130" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="125" y="418" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="125" dy="0">UseContext</tspan></text>
+  <rect x="1414" y="380" width="126" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="1477" y="407" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="1477" dy="0">MemoPart</tspan></text>
+      <text x="1477" y="426" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="1477" dy="0">memo::core::common</tspan></text>
+  
+  <path d="M 190 412 L 1414 412" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="717.4" y="374" width="169.2" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="802" y="394" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">AppliesInContext</text>
+  <rect x="60" y="460" width="130" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="125" y="498" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="125" dy="0">UseContext</tspan></text>
+  <rect x="1373" y="460" width="167" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="1456.5" y="498" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1456.5" dy="0">UseEnvironment</tspan></text>
+  
+  <path d="M 190 492 L 1373 492" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="724.5" y="454" width="114" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="781.5" y="474" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">SituatedIn</text>
+  <rect x="60" y="540" width="261" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="190.5" y="578" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="190.5" dy="0">TaskDifficultyAssessment</tspan></text>
+  <rect x="1429" y="540" width="111" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
+      <text x="1484.5" y="578" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1484.5" dy="0">UserTask</tspan></text>
+  
+  <path d="M 321 572 L 1429 572" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="781.2" y="534" width="187.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="875" y="554" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">AssessesDifficulty</text></g>
+  <rect x="24" y="24" width="12" height="44" rx="6" fill="#6f42c1"/>
+</svg>

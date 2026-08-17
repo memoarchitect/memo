@@ -75,11 +75,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
         expose waterSupply::**;
         expose cup::**;
         attribute depth = 2;
-        attribute :>> title = "Coffee Machine · Thermal & Fluid IBD";
         attribute :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
-        part :>> viewpointDefinition = logicalArchitectureViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }

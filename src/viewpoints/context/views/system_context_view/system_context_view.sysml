@@ -10,7 +10,6 @@ package memo_viewpoints_context_views_system_context_view {
                     attribute depth = 2;
     attribute :>> id = "VIEW-CTX-001";
     attribute :>> name = "SystemContextView";
-    attribute :>> title = "System Context View";
     attribute :>> shortDescription = "Actors, use context, and system boundary.";
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -24,6 +23,6 @@ package memo_viewpoints_context_views_system_context_view {
         attribute :>> includeLayers = ("context");
         attribute :>> rationaleText = "Auto-populate the system context view from the context layer.";
     }
-    part :>> viewpointDefinition = contextViewpoint;
+    ref :>> viewpointDefinition = contextViewpoint;
                 }
 }

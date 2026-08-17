@@ -44,7 +44,6 @@ package memo_examples_ui_screen_regions_viewpoints_functional_views_ui_functiona
         expose memo_examples_ui_screen_regions_traces::*;
         attribute depth = 3;
         attribute :>> id = "FUN-101";
-        attribute :>> title = "Infusion UI Functional Tree";
         attribute :>> shortDescription = "Display-management functions, invoked actions, and UI allocation.";
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
@@ -57,6 +56,6 @@ package memo_examples_ui_screen_regions_viewpoints_functional_views_ui_functiona
             attribute :>> includeLayers = ("functions", "implementation");
             attribute :>> rationaleText = "Show function decomposition from interaction to allocated user interface.";
         }
-        part :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 }
