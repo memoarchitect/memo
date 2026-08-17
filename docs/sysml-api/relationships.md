@@ -80,6 +80,14 @@ SysML `connection def` declarations in `src/`.
 | [`Selects`](architecture/operational/scenarios/memo_scenarios.md#selects) | `connection def` | Typed relationship for selects. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 
+## `memo::architecture::operational::structure`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`EnablesUseCase`](architecture/operational/structure/memo_operational.md#enablesusecase) | `connection def` | An operational capability enables a use case (the ability the actor draws on to accomplish the goal). Capability is tied to the use case, not to individual activities. | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
+| [`RequiresCapability`](architecture/operational/structure/memo_operational.md#requirescapability) | `connection def` | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
+
+
 ## `memo::architecture::operational::use_cases`
 
 | Name | SysML kind | Description | Source |
@@ -92,6 +100,7 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
+| [`RealizesUseCase`](architecture/operational/workflows/memo_workflows.md#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`RequiresResource`](architecture/operational/workflows/memo_workflows.md#requiresresource) | `connection def` | Typed relationship for requires resource. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`Supports`](architecture/operational/workflows/memo_workflows.md#supports) | `connection def` | Typed relationship for supports. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`Transforms`](architecture/operational/workflows/memo_workflows.md#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |

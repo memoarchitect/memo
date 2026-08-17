@@ -94,7 +94,6 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> entryCondition = "patient prepared; time-out ready";
         attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
-        ref :>> useCase = ucPerformSleeveGastrectomy;
 
         action wsTimeOut : WorkflowStep { ref :>> performedActivity = actTimeOutAndPosition; }
         action wsAccess : WorkflowStep { ref :>> performedActivity = actEstablishAccess; }
@@ -148,4 +147,7 @@ package memo_examples_surgical_closure_workflow {
     }
     #refinement dependency scNominalSleeveProcedure to ucPerformSleeveGastrectomy;
     #refinement dependency scStapleLineBleeding to ucPerformSleeveGastrectomy;
+
+    connection : RealizesUseCase connect realizingWorkflow ::> wfSleeveGastrectomy to realizedUseCase ::> ucPerformSleeveGastrectomy;
+
 }

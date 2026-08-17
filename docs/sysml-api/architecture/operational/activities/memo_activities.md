@@ -30,7 +30,6 @@
 | private | `memo_core_relationships::*` |
 | private | `memo_architecture_operational_context_actors::*` |
 | private | `memo_architecture_operational_context_use_context::*` |
-| private | `memo_architecture_operational_structure::*` |
 
 ## Declarations
 
@@ -171,7 +170,6 @@ connection def AssessesDifficulty :> MemoRelationship
         private import memo_core_relationships::*;
         private import memo_architecture_operational_context_actors::*;
         private import memo_architecture_operational_context_use_context::*;
-        private import memo_architecture_operational_structure::*;
 
         enum def DemandLevelKind {
             enum minimal;
@@ -187,9 +185,6 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute postCondition : String;
             attribute criticality : CriticalityKind;
             ref performedBy : OperationalParticipant[0..*];
-            // Operational capabilities this activity contributes to (ARCADIA: an
-            // operational process/activity implements a capability).
-            ref contributesToCapabilities : OperationalCapability[0..*];
         }
 
         // A human task. A critical task (IEC 62366-1 / FDA HF guidance §3) is a

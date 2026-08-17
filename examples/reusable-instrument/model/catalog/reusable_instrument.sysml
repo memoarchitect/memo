@@ -34,7 +34,6 @@ package memo_examples_reusable_instrument {
         attribute :>> workflowState = WorkflowStateKind::asIs;
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";
-        ref :>> useCase = ucSterilize;
 
         action wsClean : WorkflowStep { ref :>> performedActivity = actClean; }
         first wsClean then wsInspect;
@@ -71,4 +70,7 @@ package memo_examples_reusable_instrument {
         attribute :>> outcomeSummary = "cycle completed; biological indicator passed";
         ref :>> executedScenario = scNominalCycle;
     }
+
+    connection : RealizesUseCase connect realizingWorkflow ::> wfReprocess to realizedUseCase ::> ucSterilize;
+
 }
