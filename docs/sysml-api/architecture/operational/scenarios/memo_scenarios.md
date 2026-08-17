@@ -38,59 +38,11 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`ScenarioVariantKind`](#scenariovariantkind) | `enum def` | Controlled values for scenario variant: `nominal`, `alternate`, `exception`, `recovery`. | — |
-| [`OperationalConditionKind`](#operationalconditionkind) | `enum def` | Controlled values for operational condition: `normal`, `degraded`, `emergency`, `maintenance`, `startup`, `shutdown`, `timeout`, `misuse`, `foreseeableMisuse`. | — |
-| [`ScenarioPurposeKind`](#scenariopurposekind) | `enum def` | `memoAnalysis` and `memoVerification` keep the regulated terms `analysis` and `verification` intact but prefixed, because both are SysML v2 reserved words and cannot be bare enum names. `validation` is not reserved. | — |
-| [`ScenarioKind`](#scenariokind) | `enum def` | Controlled values for scenario: `functional`, `operative`, `ui`, `threat`, `memoVerification`, `hazardRelatedUse`. | — |
-| [`OperativeScenario`](#operativescenario) | `action def` | Shared scenario foundation. Fields that apply only to one scenario kind remain optional here; this keeps the taxonomy queryable without six otherwise redundant action definitions. | `MemoAction` |
+| [`ScenarioKind`](#scenariokind) | `enum def` | A scenario is a nominal path or an alternate (exception/recovery) path. Defaults to nominal. | — |
+| [`OperativeScenario`](#operativescenario) | `action def` | Operative scenario definition specializing `MemoAction`. | `MemoAction` |
 | [`HasScenario`](#hasscenario) | `connection def` | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. | `MemoRelationship` |
 | [`SelectsKind`](#selectskind) | `enum def` | Controlled values for selects: `step`. | — |
 | [`Selects`](#selects) | `connection def` | Typed relationship for selects. | `MemoRelationship` |
-
-## ScenarioVariantKind
-
-```sysml
-enum def ScenarioVariantKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for scenario variant: `nominal`, `alternate`, `exception`, `recovery`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_architecture_operational_scenarios` |
-
-
-## OperationalConditionKind
-
-```sysml
-enum def OperationalConditionKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for operational condition: `normal`, `degraded`, `emergency`, `maintenance`, `startup`, `shutdown`, `timeout`, `misuse`, `foreseeableMisuse`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_architecture_operational_scenarios` |
-
-
-## ScenarioPurposeKind
-
-```sysml
-enum def ScenarioPurposeKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | `memoAnalysis` and `memoVerification` keep the regulated terms `analysis` and `verification` intact but prefixed, because both are SysML v2 reserved words and cannot be bare enum names. `validation` is not reserved. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_architecture_operational_scenarios` |
-
 
 ## ScenarioKind
 
@@ -100,7 +52,7 @@ enum def ScenarioKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for scenario: `functional`, `operative`, `ui`, `threat`, `memoVerification`, `hazardRelatedUse`. |
+| Description | A scenario is a nominal path or an alternate (exception/recovery) path. Defaults to nominal. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -115,7 +67,7 @@ action def OperativeScenario specializes MemoAction
 
 | Property | Value |
 | --- | --- |
-| Description | Shared scenario foundation. Fields that apply only to one scenario kind remain optional here; this keeps the taxonomy queryable without six otherwise redundant action definitions. |
+| Description | Operative scenario definition specializing `MemoAction`. |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
@@ -190,59 +142,15 @@ connection def Selects :> MemoRelationship
         private import memo_architecture_operational_workflows::*;
         private import memo_architecture_operational_use_cases::*;
 
-        enum def ScenarioVariantKind {
+        // A scenario is a nominal path or an alternate (exception/recovery) path.
+        // Defaults to nominal.
+        enum def ScenarioKind {
             enum nominal;
             enum alternate;
-            enum exception;
-            enum recovery;
         }
 
-        enum def OperationalConditionKind {
-            enum normal;
-            enum degraded;
-            enum emergency;
-            enum maintenance;
-            enum startup;
-            enum shutdown;
-            enum timeout;
-            enum misuse;
-            enum foreseeableMisuse;
-        }
-
-        // `memoAnalysis` and `memoVerification` keep the regulated terms `analysis`
-        // and `verification` intact but prefixed, because both are SysML v2 reserved
-        // words and cannot be bare enum names. `validation` is not reserved.
-        enum def ScenarioPurposeKind {
-            enum memoAnalysis;
-            enum design;
-            enum memoVerification;
-            enum validation;
-            enum risk;
-            enum cybersecurity;
-        }
-
-        // The architecture/assurance role a scenario plays. These values preserve
-        // the former named scenario specializations without turning a taxonomy into
-        // six action definitions.
-        enum def ScenarioKind {
-            enum functional;
-            enum operative;
-            enum ui;
-            enum threat;
-            // `verification` is a SysML v2 reserved word; retain the regulated
-            // term with the same `memo` prefix used by ScenarioPurposeKind.
-            enum memoVerification;
-            enum hazardRelatedUse;
-        }
-
-        // Shared scenario foundation. Fields that apply only to one scenario kind
-        // remain optional here; this keeps the taxonomy queryable without six
-        // otherwise redundant action definitions.
         action def OperativeScenario specializes MemoAction {
-            attribute scenarioKind : ScenarioKind;
-            attribute variantKind : ScenarioVariantKind;
-            attribute operationalCondition : OperationalConditionKind;
-            attribute scenarioPurpose : ScenarioPurposeKind[0..*];
+            attribute scenarioKind : ScenarioKind default ScenarioKind::nominal;
             attribute initialState : String;
             attribute trigger : String;
             attribute preCondition : String;
@@ -260,9 +168,9 @@ connection def Selects :> MemoRelationship
             // functional scenario
             ref selectedFlow : MemoAction[0..1];
             // operative scenario (the workflow this scenario is a path of is
-            // expressed by the workflow via HasScenario, not a back-ref here)
+            // expressed by the workflow via HasScenario; the scenario's steps by
+            // HasStep — neither is a back-ref here)
             ref parentUseCase : UseCase[0..1];
-            ref activities : OperativeAction[0..*];
             // UI scenario
             ref parentFlow : MemoAction[0..1];
             // threat scenario

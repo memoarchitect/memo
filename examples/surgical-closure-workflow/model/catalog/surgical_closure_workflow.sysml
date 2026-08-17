@@ -113,12 +113,8 @@ package memo_examples_surgical_closure_workflow {
     // ── Scenario paths, each with its own activity/action flow ──
     action scNominalSleeveProcedure : OperativeScenario {
         attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
-        attribute :>> scenarioKind = ScenarioKind::operative;
-        attribute :>> variantKind = ScenarioVariantKind::nominal;
-        attribute :>> operationalCondition = OperationalConditionKind::normal;
         attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
-        ref :>> activities = oaCompleteSleeveProcedure;
 
         action oaCompleteSleeveProcedure : OperativeAction {
             attribute :>> name = "CompleteNominalSleeveProcedure";
@@ -127,15 +123,12 @@ package memo_examples_surgical_closure_workflow {
         }
     }
     action scStapleLineBleeding : OperativeScenario {
+        attribute :>> scenarioKind = ScenarioKind::alternate;
         attribute :>> id = "LSG-SC-002"; attribute :>> name = "StapleLineBleedingRecovery";
-        attribute :>> scenarioKind = ScenarioKind::operative;
-        attribute :>> variantKind = ScenarioVariantKind::recovery;
-        attribute :>> operationalCondition = OperationalConditionKind::degraded;
         attribute :>> variationPoint = "bleeding observed during staple-line assessment";
         attribute :>> pathSummary = "Recognize bleeding, apply the selected control, reassess the staple line, and escalate if the condition remains unresolved.";
         ref :>> baseScenario = scNominalSleeveProcedure;
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
-        ref :>> activities = oaControlStapleLineBleeding;
 
         action oaControlStapleLineBleeding : OperativeAction {
             attribute :>> name = "ControlStapleLineBleeding";
@@ -151,4 +144,5 @@ package memo_examples_surgical_closure_workflow {
 
     connection : HasScenario connect owningWorkflow ::> wfSleeveGastrectomy to pathScenario ::> scNominalSleeveProcedure;
     connection : HasScenario connect owningWorkflow ::> wfSleeveGastrectomy to pathScenario ::> scStapleLineBleeding;
+
 }

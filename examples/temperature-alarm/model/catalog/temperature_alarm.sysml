@@ -116,10 +116,6 @@ package memo_examples_temperature_alarm {
     // ── Verification, validation, evidence ──────────────────────
     action vsAlarmLatency : OperativeScenario {
         attribute :>> id = "TA-VS-001"; attribute :>> name = "AlarmLatencyScenario";
-        attribute :>> scenarioKind = ScenarioKind::memoVerification;
-        attribute :>> variantKind = ScenarioVariantKind::nominal;
-        attribute :>> operationalCondition = OperationalConditionKind::normal;
-        attribute :>> scenarioPurpose = ScenarioPurposeKind::memoVerification;
         attribute :>> pathSummary = "Induce out-of-range temperature; measure detection-to-annunciation latency.";
     }
     verification vcAlarmLatency : VerificationCase {
