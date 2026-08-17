@@ -12,10 +12,10 @@
 // removed the reason: relation ends were typed on MemoPart/ArchitectureElement,
 // KerML forbids a behaviour from specializing a part-based type, and a function
 // has to be satisfiable, verifiable, and allocatable. So a function was declared
-// a part, and a separate `action def SystemAction` carried the behaviour with a
+// a part, and a separate `action def OperativeAction` carried the behaviour with a
 // `ref performedFunction` stapling the two back together — a reference used in
 // ZERO example files. The ends are metaclass-neutral now (CR-ONT-060..073), so
-// the split has no cause and is gone: SystemAction is merged into the function
+// the split has no cause and is gone: OperativeAction is merged into the function
 // family, and its `actionKind` moved onto MemoFunction where it was always
 // describing the function anyway.
 //

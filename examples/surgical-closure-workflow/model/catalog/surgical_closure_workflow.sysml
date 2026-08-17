@@ -60,13 +60,13 @@ package memo_examples_surgical_closure_workflow {
     connection : Motivates connect motivatingNeed ::> needControlledGastricResection to motivatedUseCase ::> ucPerformSleeveGastrectomy;
 
     // ── Procedure workflow ──────────────────────────────────────
-    action actTimeOutAndPosition : OperationalActivity { attribute :>> id = "LSG-ACT-001"; attribute :>> name = "ConfirmTimeOutAndPosition"; }
-    action actEstablishAccess : OperationalActivity { attribute :>> id = "LSG-ACT-002"; attribute :>> name = "EstablishLaparoscopicAccess"; }
-    action actMobilizeStomach : OperationalActivity { attribute :>> id = "LSG-ACT-003"; attribute :>> name = "MobilizeStomach"; }
-    action actSizeAndCreateSleeve : OperationalActivity {
+    action actTimeOutAndPosition : OperativeAction { attribute :>> id = "LSG-ACT-001"; attribute :>> name = "ConfirmTimeOutAndPosition"; }
+    action actEstablishAccess : OperativeAction { attribute :>> id = "LSG-ACT-002"; attribute :>> name = "EstablishLaparoscopicAccess"; }
+    action actMobilizeStomach : OperativeAction { attribute :>> id = "LSG-ACT-003"; attribute :>> name = "MobilizeStomach"; }
+    action actSizeAndCreateSleeve : OperativeAction {
         attribute :>> id = "LSG-ACT-004"; attribute :>> name = "SizeAndCreateSleeve"; attribute :>> criticality = CriticalityKind::high;
 
-        action taskCreateStapleLine : UserTask {
+        action taskCreateStapleLine : OperativeAction {
             attribute :>> criticality = CriticalityKind::high;
             attribute :>> id = "LSG-TASK-001";
             attribute :>> name = "CreateAndInspectStapleLine";
@@ -74,18 +74,18 @@ package memo_examples_surgical_closure_workflow {
             attribute :>> potentialHarm = "bleeding or staple-line complication not recognized before handover";
             attribute :>> severityIfFailed = SeverityKind::serious;
 
-            action stConfirmAnatomy : TaskStep { attribute :>> id = "LSG-ST-001"; attribute :>> name = "ConfirmAnatomy"; }
-            action stCreateStapleLine : TaskStep { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; }
-            action stInspectBleeding : TaskStep { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; }
-            action stAssessIntegrity : TaskStep { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; }
+            action stConfirmAnatomy : OperativeAction { attribute :>> id = "LSG-ST-001"; attribute :>> name = "ConfirmAnatomy"; }
+            action stCreateStapleLine : OperativeAction { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; }
+            action stInspectBleeding : OperativeAction { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; }
+            action stAssessIntegrity : OperativeAction { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; }
             first stConfirmAnatomy then stCreateStapleLine;
             first stCreateStapleLine then stInspectBleeding;
             first stInspectBleeding then stAssessIntegrity;
         }
     }
-    action actAssessStapleLine : OperationalActivity { attribute :>> id = "LSG-ACT-005"; attribute :>> name = "AssessStapleLine"; attribute :>> criticality = CriticalityKind::high; }
-    action actExtractSpecimenAndClose : OperationalActivity { attribute :>> id = "LSG-ACT-006"; attribute :>> name = "ExtractSpecimenAndClosePorts"; }
-    action actHandover : OperationalActivity { attribute :>> id = "LSG-ACT-007"; attribute :>> name = "CompletePostoperativeHandover"; }
+    action actAssessStapleLine : OperativeAction { attribute :>> id = "LSG-ACT-005"; attribute :>> name = "AssessStapleLine"; attribute :>> criticality = CriticalityKind::high; }
+    action actExtractSpecimenAndClose : OperativeAction { attribute :>> id = "LSG-ACT-006"; attribute :>> name = "ExtractSpecimenAndClosePorts"; }
+    action actHandover : OperativeAction { attribute :>> id = "LSG-ACT-007"; attribute :>> name = "CompletePostoperativeHandover"; }
 
     action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
         attribute :>> id = "LSG-WF-001";
@@ -120,7 +120,7 @@ package memo_examples_surgical_closure_workflow {
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaCompleteSleeveProcedure;
 
-        action oaCompleteSleeveProcedure : OperationalActivity {
+        action oaCompleteSleeveProcedure : OperativeAction {
             attribute :>> name = "CompleteNominalSleeveProcedure";
             action prepare; action createSleeve; action assess; action handover;
             first start then prepare; first prepare then createSleeve; first createSleeve then assess; first assess then handover; first handover then done;
@@ -137,7 +137,7 @@ package memo_examples_surgical_closure_workflow {
         ref :>> parentUseCase = ucPerformSleeveGastrectomy;
         ref :>> activities = oaControlStapleLineBleeding;
 
-        action oaControlStapleLineBleeding : OperationalActivity {
+        action oaControlStapleLineBleeding : OperativeAction {
             attribute :>> name = "ControlStapleLineBleeding";
             action recognizeBleeding; action controlBleeding; action reassessStapleLine; action escalateIfNeeded;
             first start then recognizeBleeding; first recognizeBleeding then controlBleeding; first controlBleeding then reassessStapleLine; first reassessStapleLine then escalateIfNeeded; first escalateIfNeeded then done;

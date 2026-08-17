@@ -38,11 +38,11 @@ package memo_examples_temperature_alarm {
         subject supportingSystem;
         actor icuNurseInitiator = icuNurse;
     }
-    action actAcknowledgeAlarm : OperationalActivity {
+    action actAcknowledgeAlarm : OperativeAction {
         attribute :>> id = "TA-ACT-001"; attribute :>> name = "ReviewAndAcknowledgeAlarm";
         attribute :>> criticality = CriticalityKind::high;
 
-        action taskAckAlarm : UserTask {
+        action taskAckAlarm : OperativeAction {
             attribute :>> criticality = CriticalityKind::high;
             attribute :>> id = "TA-TASK-001"; attribute :>> name = "AcknowledgeTemperatureAlarm";
             attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";

@@ -262,7 +262,7 @@ connection def Selects :> MemoRelationship
             // operative scenario (the workflow this scenario is a path of is
             // expressed by the workflow via HasScenario, not a back-ref here)
             ref parentUseCase : UseCase[0..1];
-            ref activities : OperationalActivity[0..*];
+            ref activities : OperativeAction[0..*];
             // UI scenario
             ref parentFlow : MemoAction[0..1];
             // threat scenario

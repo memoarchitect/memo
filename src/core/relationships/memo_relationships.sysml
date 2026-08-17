@@ -83,8 +83,8 @@ package memo_core_relationships {
     //
     // Several of the relaxed ends were ALREADY being violated by real content
     // before they were relaxed: `composes` links parts to WorkflowStep and
-    // OperationalActivity (action defs) and to SoftwarePort/PhysicalPort;
-    // `precedes` links OperationalActivity to OperationalActivity; `allocatedTo`
+    // OperativeAction (action defs) and to SoftwarePort/PhysicalPort;
+    // `precedes` links OperativeAction to OperativeAction; `allocatedTo`
     // has ActionUsage sources; `bindsToInterface` targets an `interface def`,
     // which an InterfaceElement-typed end cannot hold. The types were not
     // buying the strictness they appeared to buy.

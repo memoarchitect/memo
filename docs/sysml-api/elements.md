@@ -169,11 +169,8 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`OperationalActivity`](architecture/operational/activities/memo_activities.md#operationalactivity) | `action def` | Operational activity definition specializing `MemoAction`. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
-| [`SystemAction`](architecture/operational/activities/memo_activities.md#systemaction) | `action def` | A scenario step performed by the system. May realize a SystemFunction (the functional-layer capability it exercises). | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
+| [`OperativeAction`](architecture/operational/activities/memo_activities.md#operativeaction) | `action def` | Operative action definition specializing `ScenarioStep`. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
 | [`TaskDifficultyAssessment`](architecture/operational/activities/memo_activities.md#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
-| [`TaskStep`](architecture/operational/activities/memo_activities.md#taskstep) | `action def` | An elementary perceptual/cognitive/motor step within a user task (task analysis granularity: grasp needle, drive needle, tie knot …). | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
-| [`UserTask`](architecture/operational/activities/memo_activities.md#usertask) | `action def` | User task definition specializing `ScenarioStep`. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
 
 
 ## `memo::architecture::operational::context::actors`
@@ -232,7 +229,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `action def` | Operational workflow definition specializing `MemoAction`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowControlNode`](architecture/operational/workflows/memo_workflows.md#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowResource`](architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`WorkflowStep`](architecture/operational/workflows/memo_workflows.md#workflowstep) | `action def` | A step in a workflow wraps an operational activity or user task by reference — the same activity may appear in several workflows. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`WorkflowStep`](architecture/operational/workflows/memo_workflows.md#workflowstep) | `action def` | A step in a workflow references the operative action it performs — the same action may appear in several workflows. Who performs the action (user or system) is the action's own `perform` relationship. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 
 ## `memo::architecture::realization::deployment`
@@ -431,7 +428,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`MemoUseCase`](core/common/memo_common.md#memousecase) | `use case def` | Use-case foundation. The domain UseCase adds its goal and actor references; identity is carried here so use cases do not maintain a partial hand-written copy of the MEMO identification core. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoVerificationCase`](core/common/memo_common.md#memoverificationcase) | `verification def` | Memo verification case definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`RequirementDriver`](core/common/memo_common.md#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
-| [`ScenarioStep`](core/common/memo_common.md#scenariostep) | `action def` | Abstract step base: one step of a scenario. Concrete steps are a UserTask (performed by an actor) or a SystemAction (performed by the system). | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+| [`ScenarioStep`](core/common/memo_common.md#scenariostep) | `action def` | Abstract step base: one step of a scenario. The concrete step is an OperativeAction; whether an actor or the system performs it is a native `perform` relationship, not a subtype. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`VerifiableElement`](core/common/memo_common.md#verifiableelement) | `part def` | Verifiable element definition specializing `MemoPart`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 
 
