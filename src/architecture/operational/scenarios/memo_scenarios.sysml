@@ -75,27 +75,4 @@ package memo_architecture_operational_scenarios {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = hasScenarioLinks meta SysML::Usage;
     }
-
-    // Ordered selection of a workflow step into a scenario path.
-    // Selects unifies SelectsStep / SelectsFlow (a scenario selects its path
-    // element), keyed by selectsKind.
-    enum def SelectsKind {
-        enum step;
-        enum 'flow';
-    }
-    connection def Selects :> MemoRelationship {
-        attribute selectsKind : SelectsKind;
-        attribute pathOrder : Integer[0..1];
-        attribute decisionTaken : String[0..1];
-        end scenario : OperativeScenario :>> source;
-        // A selected path element may be a WorkflowStep action or a flow
-        // element. Those constructs do not share a MEMO base metaclass.
-        end selected :>> target;
-    }
-    abstract connection selectsLinks : Selects[*];
-    metadata def <selects> SelectsMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = selectsLinks meta SysML::Usage;
-    }
 }
