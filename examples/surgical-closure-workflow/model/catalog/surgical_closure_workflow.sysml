@@ -95,19 +95,19 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
 
-        action wsTimeOut : WorkflowStep { ref :>> performedActivity = actTimeOutAndPosition; }
-        action wsAccess : WorkflowStep { ref :>> performedActivity = actEstablishAccess; }
-        action wsMobilize : WorkflowStep { ref :>> performedActivity = actMobilizeStomach; }
-        action wsSleeve : WorkflowStep { ref :>> performedActivity = actSizeAndCreateSleeve; }
-        action wsAssess : WorkflowStep { ref :>> performedActivity = actAssessStapleLine; }
-        action wsClose : WorkflowStep { ref :>> performedActivity = actExtractSpecimenAndClose; }
-        action wsHandover : WorkflowStep { ref :>> performedActivity = actHandover; }
-        first wsTimeOut then wsAccess;
-        first wsAccess then wsMobilize;
-        first wsMobilize then wsSleeve;
-        first wsSleeve then wsAssess;
-        first wsAssess then wsClose;
-        first wsClose then wsHandover;
+        perform actTimeOutAndPosition;
+        perform actEstablishAccess;
+        perform actMobilizeStomach;
+        perform actSizeAndCreateSleeve;
+        perform actAssessStapleLine;
+        perform actExtractSpecimenAndClose;
+        perform actHandover;
+        first actTimeOutAndPosition then actEstablishAccess;
+        first actEstablishAccess then actMobilizeStomach;
+        first actMobilizeStomach then actSizeAndCreateSleeve;
+        first actSizeAndCreateSleeve then actAssessStapleLine;
+        first actAssessStapleLine then actExtractSpecimenAndClose;
+        first actExtractSpecimenAndClose then actHandover;
     }
 
     // ── Scenario paths, each with its own activity/action flow ──
