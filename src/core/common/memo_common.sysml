@@ -134,8 +134,9 @@ package memo_core_common {
         attribute status : ElementStatusKind;
     }
 
-    // Abstract step base: one step of a scenario. Concrete steps are a UserTask
-    // (performed by an actor) or a SystemAction (performed by the system).
+    // Abstract step base: one step of a scenario. The concrete step is an
+    // OperativeAction; whether an actor or the system performs it is a native
+    // `perform` relationship, not a subtype.
     abstract action def ScenarioStep specializes MemoAction;
 
     // Boundary feature foundation for typed ports.

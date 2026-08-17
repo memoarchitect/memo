@@ -15,7 +15,7 @@ package memo_examples_functional_logical_physical {
     private import memo_architecture_implementation_hardware_structure::*;
 
     // Operational world: what the clinician does.
-    action actOcclusionResponse : OperationalActivity {
+    action actOcclusionResponse : OperativeAction {
         attribute :>> id = "FLP-ACT-001"; attribute :>> name = "RespondToLineOcclusion";
         attribute :>> criticality = CriticalityKind::high;
     }

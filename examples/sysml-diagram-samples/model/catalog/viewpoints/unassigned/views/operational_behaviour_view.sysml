@@ -18,10 +18,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         attribute :>> itemKind = InterfaceItemKind::signal;
     }
 
-    action def OpPrescribeTherapy specializes OperationalActivity { out item prescription : OpPrescription; }
-    action def OpVerifyPrescription specializes OperationalActivity { in item prescription : OpPrescription; }
-    action def OpRequestBolus specializes OperationalActivity { out item bolusRequest : OpBolusRequest; }
-    action def OpCheckLockout specializes OperationalActivity { in item bolusRequest : OpBolusRequest; }
+    action def OpPrescribeTherapy specializes OperativeAction { out item prescription : OpPrescription; }
+    action def OpVerifyPrescription specializes OperativeAction { in item prescription : OpPrescription; }
+    action def OpRequestBolus specializes OperativeAction { out item bolusRequest : OpBolusRequest; }
+    action def OpCheckLockout specializes OperativeAction { in item bolusRequest : OpBolusRequest; }
 
     // Use the canonical MEMO operational system type—never a sample-local
     // placeholder—so ontology-driven Explorer grouping remains authoritative.
@@ -45,22 +45,22 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         }
     }
 
-    action opSetupFlow : OperationalActivity {
+    action opSetupFlow : OperativeAction {
         action opPrescribe : OpPrescribeTherapy { attribute :>> name = "Prescribe Therapy"; }
         action opVerify : OpVerifyPrescription { attribute :>> name = "Verify Prescription"; }
         fork opForkPrep;
-        action opPrime : OperationalActivity { attribute :>> name = "Prime Pump & Load Reservoir"; }
-        action opSelfTest : OperationalActivity { attribute :>> name = "Run Device Self-Test"; }
+        action opPrime : OperativeAction { attribute :>> name = "Prime Pump & Load Reservoir"; }
+        action opSelfTest : OperativeAction { attribute :>> name = "Run Device Self-Test"; }
         join opJoinPrep;
-        action opProgram : OperationalActivity { attribute :>> name = "Program Pump Parameters"; }
-        action opConnect : OperationalActivity { attribute :>> name = "Connect to Patient"; }
-        action opStart : OperationalActivity { attribute :>> name = "Start Infusion"; }
-        action opAdminister : OperationalActivity {
+        action opProgram : OperativeAction { attribute :>> name = "Program Pump Parameters"; }
+        action opConnect : OperativeAction { attribute :>> name = "Connect to Patient"; }
+        action opStart : OperativeAction { attribute :>> name = "Start Infusion"; }
+        action opAdminister : OperativeAction {
             attribute :>> name = "Administer PCA Therapy";
             action opRequestBolus : OpRequestBolus { attribute :>> name = "Request Bolus"; }
             action opCheckLockout : OpCheckLockout { attribute :>> name = "Check Lockout"; }
-            action opDeliverDose : OperationalActivity { attribute :>> name = "Deliver Dose"; }
-            action opLogEvent : OperationalActivity { attribute :>> name = "Log Dose Event"; }
+            action opDeliverDose : OperativeAction { attribute :>> name = "Deliver Dose"; }
+            action opLogEvent : OperativeAction { attribute :>> name = "Log Dose Event"; }
             flow of OpBolusRequest from opRequestBolus.bolusRequest to opCheckLockout.bolusRequest;
             first start then opRequestBolus;
             first opRequestBolus then opCheckLockout;

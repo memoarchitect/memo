@@ -515,7 +515,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
             attribute id = "CR-ONT-041";
             attribute tailoring = RuleTailoringKind::invariant;
-            attribute appliesTo = "UserTask[criticality=high]";
+            attribute appliesTo = "OperativeAction[criticality=high]";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Critical tasks (criticality high or catastrophic) must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
             attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or validates->size() >= 1";
@@ -554,7 +554,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // was typed MemoPart/MemoPart and links StateMachine (a state def) to
         // WorkflowStep (an action def); `verifiedBy`'s source was typed MemoPart and
         // most of its sources are requirement defs; `precedes` was typed
-        // ArchitectureElement and joins OperationalActivity to OperationalActivity.
+        // ArchitectureElement and joins OperativeAction to OperativeAction.
         // A rule that reproduced the old type exactly would have failed on the
         // flagship example on the day it landed. What each rule asserts is the
         // constraint the end MEANT, stated so it can be checked.

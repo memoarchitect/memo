@@ -55,13 +55,13 @@ package memo_architecture_operational_workflows {
         :>> baseType = realizesUseCaseLinks meta SysML::Usage;
     }
 
-    // A step in a workflow wraps an operational activity or user task by
-    // reference — the same activity may appear in several workflows.
+    // A step in a workflow references the operative action it performs — the
+    // same action may appear in several workflows. Who performs the action
+    // (user or system) is the action's own `perform` relationship.
     action def WorkflowStep specializes MemoAction {
         attribute entryCondition : String;
         attribute exitCondition : String;
-        ref performedActivity : OperationalActivity[0..1];
-        ref performedTask : UserTask[0..1];
+        ref performedActivity : OperativeAction[0..1];
         ref responsibleRole : OperationalParticipant[0..1];
     }
 
@@ -99,7 +99,7 @@ package memo_architecture_operational_workflows {
     // An element supports (affords, enables) an action — e.g. a UI element
     // that affords a user task. Use-case and capability tracing are direct
     // refs now (OperationalWorkflow.useCase,
-    // OperationalActivity.contributesToCapabilities), so the former
+    // OperativeAction.contributesToCapabilities), so the former
     // SupportKind discriminator is gone: what used to be three enum values
     // that each implied a different target type are now two typed refs plus
     // this one plain relation.
