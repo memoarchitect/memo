@@ -58,10 +58,7 @@ SysML `enum def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`OperationalConditionKind`](architecture/operational/scenarios/memo_scenarios.md#operationalconditionkind) | `enum def` | Controlled values for operational condition: `normal`, `degraded`, `emergency`, `maintenance`, `startup`, `shutdown`, `timeout`, `misuse`, `foreseeableMisuse`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
-| [`ScenarioKind`](architecture/operational/scenarios/memo_scenarios.md#scenariokind) | `enum def` | Controlled values for scenario: `functional`, `operative`, `ui`, `threat`, `memoVerification`, `hazardRelatedUse`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
-| [`ScenarioPurposeKind`](architecture/operational/scenarios/memo_scenarios.md#scenariopurposekind) | `enum def` | `memoAnalysis` and `memoVerification` keep the regulated terms `analysis` and `verification` intact but prefixed, because both are SysML v2 reserved words and cannot be bare enum names. `validation` is not reserved. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
-| [`ScenarioVariantKind`](architecture/operational/scenarios/memo_scenarios.md#scenariovariantkind) | `enum def` | Controlled values for scenario variant: `nominal`, `alternate`, `exception`, `recovery`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| [`ScenarioKind`](architecture/operational/scenarios/memo_scenarios.md#scenariokind) | `enum def` | A scenario is a nominal path or an alternate (exception/recovery) path. Defaults to nominal. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 | [`SelectsKind`](architecture/operational/scenarios/memo_scenarios.md#selectskind) | `enum def` | Controlled values for selects: `step`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 
