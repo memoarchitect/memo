@@ -41,8 +41,6 @@
 | [`ScenarioKind`](#scenariokind) | `enum def` | A scenario is a nominal path or an alternate (exception/recovery) path. Defaults to nominal. | — |
 | [`OperativeScenario`](#operativescenario) | `action def` | Operative scenario definition specializing `MemoAction`. | `MemoAction` |
 | [`HasScenario`](#hasscenario) | `connection def` | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. | `MemoRelationship` |
-| [`SelectsKind`](#selectskind) | `enum def` | Controlled values for selects: `step`. | — |
-| [`Selects`](#selects) | `connection def` | Typed relationship for selects. | `MemoRelationship` |
 
 ## ScenarioKind
 
@@ -83,36 +81,6 @@ connection def HasScenario :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_scenarios` |
-
-
-## SelectsKind
-
-```sysml
-enum def SelectsKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for selects: `step`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_architecture_operational_scenarios` |
-
-
-## Selects
-
-```sysml
-connection def Selects :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for selects. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -200,29 +168,6 @@ connection def Selects :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = hasScenarioLinks meta SysML::Usage;
-        }
-
-        // Ordered selection of a workflow step into a scenario path.
-        // Selects unifies SelectsStep / SelectsFlow (a scenario selects its path
-        // element), keyed by selectsKind.
-        enum def SelectsKind {
-            enum step;
-            enum 'flow';
-        }
-        connection def Selects :> MemoRelationship {
-            attribute selectsKind : SelectsKind;
-            attribute pathOrder : Integer[0..1];
-            attribute decisionTaken : String[0..1];
-            end scenario : OperativeScenario :>> source;
-            // A selected path element may be a WorkflowStep action or a flow
-            // element. Those constructs do not share a MEMO base metaclass.
-            end selected :>> target;
-        }
-        abstract connection selectsLinks : Selects[*];
-        metadata def <selects> SelectsMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = selectsLinks meta SysML::Usage;
         }
     }
 
