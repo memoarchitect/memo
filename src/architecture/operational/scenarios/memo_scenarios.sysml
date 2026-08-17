@@ -64,7 +64,7 @@ package memo_architecture_operational_scenarios {
     // Shared scenario foundation. Fields that apply only to one scenario kind
     // remain optional here; this keeps the taxonomy queryable without six
     // otherwise redundant action definitions.
-    action def MemoScenario specializes MemoAction {
+    action def OperativeScenario specializes MemoAction {
         attribute scenarioKind : ScenarioKind;
         attribute variantKind : ScenarioVariantKind;
         attribute operationalCondition : OperationalConditionKind;
@@ -80,7 +80,7 @@ package memo_architecture_operational_scenarios {
         ref useContext : UseContext[0..1];
         // Alternate/exception/recovery scenarios reference their base and the
         // point at which behavior diverges — never a copied workflow.
-        ref baseScenario : MemoScenario[0..1];
+        ref baseScenario : OperativeScenario[0..1];
         attribute variationPoint : String;
 
         // functional scenario
@@ -112,7 +112,7 @@ package memo_architecture_operational_scenarios {
         attribute occurredAt : String;
         attribute hypothetical : Boolean;
         attribute outcomeSummary : String;
-        ref executedScenario : MemoScenario[1];
+        ref executedScenario : OperativeScenario[1];
     }
 
     // Ordered selection of a workflow step into a scenario path.
@@ -126,7 +126,7 @@ package memo_architecture_operational_scenarios {
         attribute selectsKind : SelectsKind;
         attribute pathOrder : Integer[0..1];
         attribute decisionTaken : String[0..1];
-        end scenario : MemoScenario :>> source;
+        end scenario : OperativeScenario :>> source;
         // A selected path element may be a WorkflowStep action or a flow
         // element. Those constructs do not share a MEMO base metaclass.
         end selected :>> target;

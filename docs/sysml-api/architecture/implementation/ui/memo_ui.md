@@ -55,13 +55,13 @@
 | [`UIState`](#uistate) | `part def` | UI state is presentation state — distinct from system/device state. | `ArchitectureElement` |
 | [`UIEvent`](#uievent) | `part def` | Uievent definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`UIAction`](#uiaction) | `action def` | Uiaction definition specializing `MemoAction`. | `MemoAction` |
-| [`InteractionFlow`](#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a MemoScenario with scenarioKind `ui`. | `MemoAction` |
+| [`InteractionFlow`](#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a OperativeScenario with scenarioKind `ui`. | `MemoAction` |
 | [`DataBinding`](#databinding) | `connection def` | Typed relationship for data binding. | `MemoRelationship` |
 | [`CapturesScreen`](#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | `MemoRelationship` |
 | [`NavigatesTo`](#navigatesto) | `connection def` | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… | `MemoRelationship` |
 | [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship for element triggers action. | `MemoRelationship` |
 | [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | `MemoRelationship` |
-| [`ErrorAtElement`](#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a MemoScenario selected by scenarioKind rather than a separate definition. | `MemoRelationship` |
+| [`ErrorAtElement`](#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. | `MemoRelationship` |
 | [`ControlImplementedBy`](#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | `MemoRelationship` |
 
 ## UIElementFormKind
@@ -282,7 +282,7 @@ action def InteractionFlow specializes MemoAction
 
 | Property | Value |
 | --- | --- |
-| Description | A reusable dialogue structure through the UI; a selected path through it is a MemoScenario with scenarioKind `ui`. |
+| Description | A reusable dialogue structure through the UI; a selected path through it is a OperativeScenario with scenarioKind `ui`. |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
@@ -372,7 +372,7 @@ connection def ErrorAtElement :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | A UI scenario realizes a functional scenario one layer up: each is a MemoScenario selected by scenarioKind rather than a separate definition. |
+| Description | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -675,7 +675,7 @@ connection def ControlImplementedBy :> MemoRelationship
         }
 
         // A reusable dialogue structure through the UI; a selected path through
-        // it is a MemoScenario with scenarioKind `ui`.
+        // it is a OperativeScenario with scenarioKind `ui`.
         action def InteractionFlow specializes MemoAction {
             attribute entryPoint : String;
             attribute exitPoint : String;
@@ -757,7 +757,7 @@ connection def ControlImplementedBy :> MemoRelationship
             :>> baseType = flowServesUseCaseLinks meta SysML::Usage;
         }
         // A UI scenario realizes a functional scenario one layer up: each is a
-        // MemoScenario selected by scenarioKind rather than a separate definition.
+        // OperativeScenario selected by scenarioKind rather than a separate definition.
         connection def ErrorAtElement :> MemoRelationship {
             end useError : UseError :>> source;
             end element : InteractionElement :>> target;

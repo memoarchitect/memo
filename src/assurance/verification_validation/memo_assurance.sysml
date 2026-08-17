@@ -34,7 +34,7 @@ package memo_assurance_verification_validation {
     // Safety-critical functions must trace to verification (rules/coverage).
     connection def ExecutesScenario :> MemoRelationship {
         end verificationCase : VerificationCase :>> source;
-        end scenario : MemoScenario :>> target;
+        end scenario : OperativeScenario :>> target;
     }
     abstract connection executesScenarioLinks : ExecutesScenario[*];
     metadata def <executesScenario> ExecutesScenarioMetadata :> SemanticMetadata {

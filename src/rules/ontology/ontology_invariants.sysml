@@ -306,7 +306,7 @@ package memo_rules_ontology {
     constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
         attribute id = "CR-ONT-043";
         attribute tailoring = RuleTailoringKind::invariant;
-        attribute appliesTo = "MemoScenario";
+        attribute appliesTo = "OperativeScenario";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Alternate, exception, and recovery scenarios must identify their base scenario or variation point — never duplicate the workflow.";
         attribute predicateExpression = "not(variantKind == 'alternate' or variantKind == 'exception' or variantKind == 'recovery') or baseScenario->size() == 1 or variationPoint != ''";

@@ -226,7 +226,7 @@ package memo_examples_gpca_pump_gpca_operational {
     }
 
     // ── Operational scenarios ───────────────────────────────────
-    action osNominalTherapy : MemoScenario {
+    action osNominalTherapy : OperativeScenario {
         attribute :>> id = "OS-001";
         attribute :>> name = "NominalTherapySession";
         attribute :>> scenarioKind = ScenarioKind::operative;
@@ -246,7 +246,7 @@ package memo_examples_gpca_pump_gpca_operational {
             first start then deliverWithinLimits; first deliverWithinLimits then recordTherapyEvent; first recordTherapyEvent then done;
         }
     }
-    action osLockoutBolus : MemoScenario {
+    action osLockoutBolus : OperativeScenario {
         attribute :>> id = "OS-002";
         attribute :>> name = "BolusRequestDuringLockout";
         attribute :>> scenarioKind = ScenarioKind::operative;
@@ -268,7 +268,7 @@ package memo_examples_gpca_pump_gpca_operational {
             first start then checkLockout; first checkLockout then rejectAndLog; first rejectAndLog then done;
         }
     }
-    action osOcclusionAlarm : MemoScenario {
+    action osOcclusionAlarm : OperativeScenario {
         attribute :>> id = "OS-003";
         attribute :>> name = "OcclusionDetectedDuringInfusion";
         attribute :>> scenarioKind = ScenarioKind::operative;
@@ -290,7 +290,7 @@ package memo_examples_gpca_pump_gpca_operational {
             first start then pauseInfusion; first pauseInfusion then annunciateOcclusion; first annunciateOcclusion then resolveAndResume; first resolveAndResume then done;
         }
     }
-    action osAirInLine : MemoScenario {
+    action osAirInLine : OperativeScenario {
         attribute :>> id = "OS-004";
         attribute :>> name = "AirInLineDetected";
         attribute :>> scenarioKind = ScenarioKind::operative;
@@ -312,7 +312,7 @@ package memo_examples_gpca_pump_gpca_operational {
             first start then stopOrKvo; first stopOrKvo then annunciateAir; first annunciateAir then reprimeAndRestart; first reprimeAndRestart then done;
         }
     }
-    action osEmptyReservoir : MemoScenario {
+    action osEmptyReservoir : OperativeScenario {
         attribute :>> id = "OS-005";
         attribute :>> name = "ReservoirEmptyDuringTherapy";
         attribute :>> scenarioKind = ScenarioKind::operative;
@@ -334,7 +334,7 @@ package memo_examples_gpca_pump_gpca_operational {
             first start then stopAndAnnunciate; first stopAndAnnunciate then replaceReservoir; first replaceReservoir then resumeTherapy; first resumeTherapy then done;
         }
     }
-    action osPowerLoss : MemoScenario {
+    action osPowerLoss : OperativeScenario {
         attribute :>> id = "OS-006";
         attribute :>> name = "MainsPowerLossAndRecovery";
         attribute :>> scenarioKind = ScenarioKind::operative;
