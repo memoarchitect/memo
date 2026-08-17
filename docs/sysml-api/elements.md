@@ -169,7 +169,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`OperativeAction`](architecture/operational/activities/memo_activities.md#operativeaction) | `action def` | Operative action definition specializing `ScenarioStep`. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
+| [`OperativeAction`](architecture/operational/activities/memo_activities.md#operativeaction) | `action def` | Operative action definition specializing `MemoAction`. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
 | [`TaskDifficultyAssessment`](architecture/operational/activities/memo_activities.md#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
 
 
@@ -427,7 +427,6 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`MemoUseCase`](core/common/memo_common.md#memousecase) | `use case def` | Use-case foundation. The domain UseCase adds its goal and actor references; identity is carried here so use cases do not maintain a partial hand-written copy of the MEMO identification core. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoVerificationCase`](core/common/memo_common.md#memoverificationcase) | `verification def` | Memo verification case definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`RequirementDriver`](core/common/memo_common.md#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
-| [`ScenarioStep`](core/common/memo_common.md#scenariostep) | `action def` | Abstract step base: one step of a scenario. The concrete step is an OperativeAction; whether an actor or the system performs it is a native `perform` relationship, not a subtype. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`VerifiableElement`](core/common/memo_common.md#verifiableelement) | `part def` | Verifiable element definition specializing `MemoPart`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 
 

@@ -36,7 +36,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`DemandLevelKind`](#demandlevelkind) | `enum def` | Controlled values for demand level: `minimal`, `low`, `moderate`, `high`, `extreme`. | — |
-| [`OperativeAction`](#operativeaction) | `action def` | Operative action definition specializing `ScenarioStep`. | `ScenarioStep` |
+| [`OperativeAction`](#operativeaction) | `action def` | Operative action definition specializing `MemoAction`. | `MemoAction` |
 | [`TaskDifficultyAssessment`](#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | `MemoPart` |
 | [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship for assesses difficulty. | `MemoRelationship` |
 
@@ -58,15 +58,15 @@ enum def DemandLevelKind
 ## OperativeAction
 
 ```sysml
-action def OperativeAction specializes ScenarioStep
+action def OperativeAction specializes MemoAction
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Operative action definition specializing `ScenarioStep`. |
+| Description | Operative action definition specializing `MemoAction`. |
 | Kind | `action def` |
 | Abstract | No |
-| Specializes | `ScenarioStep` |
+| Specializes | `MemoAction` |
 | Owning package | `memo_architecture_operational_activities` |
 
 
@@ -106,8 +106,8 @@ connection def AssessesDifficulty :> MemoRelationship
 
     ```sysml
     // Operational actions (§7, §17). One `OperativeAction` (action def on
-    // MemoAction, via ScenarioStep) is a unit of operational work; whether a User
-    // or the system performs it is a native `perform` relationship, not a subtype.
+    // MemoAction) is a unit of operational work; whether a User or the system
+    // performs it is a native `perform` relationship, not a subtype.
     // A critical task is an OperativeAction with high/catastrophic criticality that
     // a User performs — its failure could cause serious harm (IEC 62366-1 / FDA HF
     // guidance) and it must trace to usability validation. Task difficulty belongs
@@ -139,7 +139,7 @@ connection def AssessesDifficulty :> MemoRelationship
         // is simply an OperativeAction a User performs; finer steps are nested
         // OperativeActions. Human-factors fields (potentialHarm, severityIfFailed,
         // perceptualCue …) are optional, meaningful when a User is the performer.
-        action def OperativeAction specializes ScenarioStep {
+        action def OperativeAction specializes MemoAction {
             attribute trigger : String;
             attribute preCondition : String;
             attribute postCondition : String;
