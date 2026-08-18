@@ -12,11 +12,11 @@ package memo_extension_container {
 
     private import memo_architecture_realization_deployment::*;
 
-    // The built artifact. `BuildsInto` (SoftwareModule -> DeploymentUnit)
+    // The built artifact. `BuildsInto` (SoftwareModule -> SoftwareDeploymentUnit)
     // reaches it unchanged, which is the test that the base is factored
     // correctly: a whole packaging technology lands without touching a base
     // relation.
-    part def ContainerImage specializes DeploymentUnit {
+    part def ContainerImage specializes SoftwareDeploymentUnit {
         // The pullable reference, e.g. "registry.example.com/screening:1.4.0".
         attribute imageReference : String;
         attribute registry : String;

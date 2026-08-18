@@ -50,7 +50,7 @@ package memo_examples_software_only_medical_device {
     }
     #refinement dependency svcGrading to swGradingModule;
 
-    part duContainerImage : DeploymentUnit {
+    part duContainerImage : SoftwareDeploymentUnit {
         attribute :>> id = "SMD-DU-001"; attribute :>> name = "ScreeningServiceImage";
         attribute :>> unitKind = "OCI container image";
         attribute :>> integrityProtection = "image signature + SBOM attestation";

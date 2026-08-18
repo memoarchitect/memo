@@ -234,7 +234,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`DeploymentUnit`](architecture/realization/deployment/memo_deployment.md#deploymentunit) | `part def` | Deployment unit definition specializing `MemoPart`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
+| [`SoftwareDeploymentUnit`](architecture/realization/deployment/memo_deployment.md#deploymentunit) | `part def` | Deployment unit definition specializing `MemoPart`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`EndToEndFlow`](architecture/realization/deployment/memo_deployment.md#endtoendflow) | `part def` | A complete source→sink flow traced across the layers and the software→ hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose` (latency \| fault-propagation \| security) drive the AADL-style analysis. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`FlowSpecification`](architecture/realization/deployment/memo_deployment.md#flowspecification) | `part def` | A flow declared at a logical component boundary (in-port → out-port). | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`RuntimeEnvironment`](architecture/realization/deployment/memo_deployment.md#runtimeenvironment) | `part def` | Runtime environment definition specializing `MemoPart`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
