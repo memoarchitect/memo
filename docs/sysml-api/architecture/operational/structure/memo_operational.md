@@ -37,7 +37,6 @@
 | [`IntendedUse`](#intendeduse) | `part def` | IEC 62366-1 / ISO 14971 intended use: the medical device's declared purpose and the root of the operational spine. A MemoMission, because "mission" has no medical-device meaning — intended use is what a device exists to do.… | `MemoMission` |
 | [`OperationalEntity`](#operationalentity) | `part def` | Operational entity definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`OperationalCapability`](#operationalcapability) | `part def` | Operational capability definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`OperationalInteraction`](#operationalinteraction) | `part def` | Operational interaction definition specializing `ArchitectureElement`. | `ArchitectureElement` |
 | [`RequiresCapability`](#requirescapability) | `connection def` | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). | `MemoRelationship` |
 | [`EnablesUseCase`](#enablesusecase) | `connection def` | An operational capability enables a use case (the ability the actor draws on to accomplish the goal). Capability is tied to the use case, not to individual activities. | `MemoRelationship` |
 
@@ -80,21 +79,6 @@ part def OperationalCapability specializes ArchitectureElement
 | Property | Value |
 | --- | --- |
 | Description | Operational capability definition specializing `ArchitectureElement`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `ArchitectureElement` |
-| Owning package | `memo_architecture_operational_structure` |
-
-
-## OperationalInteraction
-
-```sysml
-part def OperationalInteraction specializes ArchitectureElement
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Operational interaction definition specializing `ArchitectureElement`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `ArchitectureElement` |
@@ -166,11 +150,6 @@ connection def EnablesUseCase :> MemoRelationship
             attribute capabilityLevel : String;
             attribute preCondition : String;
             attribute postCondition : String;
-        }
-        part def OperationalInteraction specializes ArchitectureElement {
-            attribute exchangeKind : FlowKind;
-            attribute direction : DirectionKind;
-            attribute latencyConstraint : String;
         }
 
         // The intended use requires these operational capabilities (ARCADIA:
