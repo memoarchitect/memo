@@ -4,8 +4,10 @@ package memo_extension_aadl_methodology {
     private import memo_methodology_profiles::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part aadlExtensionMethod : MethodologyDefinition {
-        attribute :>> id = "EXT-AADL-001";
+        @MemoIdentity { :>> providedId = "EXT-AADL-001"; }
         attribute :>> name = "AadlCorrespondenceExtension";
         attribute :>> version = "0.7.0";
         attribute :>> domain = "AADL (SAE AS5506) software runtime";

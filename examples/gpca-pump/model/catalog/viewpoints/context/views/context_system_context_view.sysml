@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_context_views_context_system_context_
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaSystemContextView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_context_views_context_system_context_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-CTX-101";
+        @MemoIdentity { :>> providedId = "VIEW-CTX-101"; }
         attribute :>> name = "GPCA_SystemContextView";
-        attribute :>> shortDescription = "Actors, use contexts, and external entities at the GPCA system boundary.";
+        @MemoIdentity { :>> shortDescription = "Actors, use contexts, and external entities at the GPCA system boundary."; }
         attribute :>> description = "Shows the CriSys Fig 2.1 boundary: patient, clinician, prescription, drug reservoir, needle, hospital pharmacy database, and hospital environment around the pump, with directional data flows, physical drug-path connections, and the intended use anchoring the boundary.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -28,7 +30,7 @@ package memo_examples_gpca_pump_viewpoints_context_views_context_system_context_
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include actors, use contexts, intended use, and external operational entities.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-CTX-101";
+            @MemoIdentity { :>> providedId = "QRY-CTX-101"; }
             attribute :>> name = "GPCA_SystemContextQuery";
             attribute :>> includeElementKinds = ("Actor", "UseContext", "IntendedUse", "ReasonablyForeseeableMisuse", "OperationalEntity");
             attribute :>> includeRelationshipKinds = ("InteractsWith", "flow", "connect", "Governs", "AppliesInContext");

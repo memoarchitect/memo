@@ -14,8 +14,10 @@ package memo_examples_connected_patient_monitor_project {
     private import memo_examples_connected_patient_monitor_viewpoints_unassigned::*;
     private import memo_examples_connected_patient_monitor_viewpoints_unassigned_views_connected_patient_monitor_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-PATIENT-MONITOR-001";
+        @MemoIdentity { :>> providedId = "PMB-PATIENT-MONITOR-001"; }
         attribute :>> name = "ConnectedPatientMonitorProjectMethodBinding";
         attribute :>> projectName = "Connected Patient Monitor";
         ref :>> selectedMethodology = mdDefaultDefinition;

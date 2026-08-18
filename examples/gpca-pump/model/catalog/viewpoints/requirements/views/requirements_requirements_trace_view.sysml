@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_requirements_requi
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaRequirementsTraceView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_requirements_views_requirements_requirements_trace_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-REQ-101";
+        @MemoIdentity { :>> providedId = "VIEW-REQ-101"; }
         attribute :>> name = "GPCA_RequirementsTraceabilityView";
-        attribute :>> shortDescription = "Needs to system/software/hardware requirements to satisfying components and verification.";
+        @MemoIdentity { :>> shortDescription = "Needs to system/software/hardware requirements to satisfying components and verification."; }
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
         attribute :>> viewKind = DiagramViewKind::grid;
@@ -27,7 +29,7 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_requirements_requi
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include all needs and requirements with derivation, satisfaction, and verification links.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-REQ-101";
+            @MemoIdentity { :>> providedId = "QRY-REQ-101"; }
             attribute :>> name = "GPCA_RequirementsTraceQuery";
             attribute :>> includeElementKinds = ("Need", "Requirement", "VerificationCase");
             attribute :>> includeRelationshipKinds = ("DerivesFrom", "SatisfiedBy", "VerifiedBy");

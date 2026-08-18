@@ -12,8 +12,10 @@ package memo_artifacts_standards_iso_iec_ieee_42010 {
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     item isoIecIeee42010 : RegulatoryStandard {
-        attribute :>> id = "STD-ISO-IEC-IEEE-42010";
+        @MemoIdentity { :>> providedId = "STD-ISO-IEC-IEEE-42010"; }
         attribute :>> name = "ISOIECIEEE42010";
         attribute :>> designation = "ISO/IEC/IEEE 42010:2022";
         attribute :>> edition = "2022";
@@ -25,13 +27,13 @@ package memo_artifacts_standards_iso_iec_ieee_42010 {
     }
 
     item isoIecIeee42010Clause5 : StandardClause {
-        attribute :>> id = "STD-ISO-IEC-IEEE-42010-5";
+        @MemoIdentity { :>> providedId = "STD-ISO-IEC-IEEE-42010-5"; }
         attribute :>> name = "ISOIECIEEE42010Clause5";
         attribute :>> clauseNumber = "5";
         attribute :>> normativeStrength = "shall";
     }
     item isoIecIeee42010Clause6 : StandardClause {
-        attribute :>> id = "STD-ISO-IEC-IEEE-42010-6";
+        @MemoIdentity { :>> providedId = "STD-ISO-IEC-IEEE-42010-6"; }
         attribute :>> name = "ISOIECIEEE42010Clause6";
         attribute :>> clauseNumber = "6";
         attribute :>> normativeStrength = "shall";

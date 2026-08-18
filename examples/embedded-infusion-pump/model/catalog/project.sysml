@@ -14,8 +14,10 @@ package memo_examples_embedded_infusion_pump_project {
     private import memo_examples_embedded_infusion_pump_viewpoints_unassigned::*;
     private import memo_examples_embedded_infusion_pump_viewpoints_unassigned_views_embedded_infusion_pump_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-INFUSION-PUMP-001";
+        @MemoIdentity { :>> providedId = "PMB-INFUSION-PUMP-001"; }
         attribute :>> name = "EmbeddedInfusionPumpProjectMethodBinding";
         attribute :>> projectName = "Embedded Infusion Pump";
         ref :>> selectedMethodology = mdDefaultDefinition;

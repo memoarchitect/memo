@@ -18,8 +18,10 @@ package memo_examples_nested_architecture_dsm_project {
     private import memo_examples_nested_architecture_dsm_assurance_verification_validation::*;
     private import memo_examples_nested_architecture_dsm_traces::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-NESTED-DSM-001";
+        @MemoIdentity { :>> providedId = "PMB-NESTED-DSM-001"; }
         attribute :>> name = "NestedArchitectureDsmProjectMethodBinding";
         attribute :>> projectName = "Nested Architecture DSM";
         ref :>> selectedMethodology = mdDefaultDefinition;

@@ -12,6 +12,8 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
     private import memo_viewpoints_context_context_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // The operational system of interest is intentionally represented as one
     // black box. Context diagrams show its environment and interfaces, not its
     // internal decomposition.
@@ -43,7 +45,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
         expose pharmacySystem;
         expose homeContext;
         attribute depth = 1;
-        attribute :>> shortDescription = "Operational system context: one black-box system boundary, its external people, peer systems, operating environment, and named boundary-crossing interactions.";
+        @MemoIdentity { :>> shortDescription = "Operational system context: one black-box system boundary, its external people, peer systems, operating environment, and named boundary-crossing interactions."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "context";
         ref :>> viewpointDefinition = contextViewpoint;

@@ -9,13 +9,14 @@ package memo_examples_gpca_pump_gpca_system {
     private import memo_architecture_operational_use_cases::*;
     private import memo_core_common::*;
 
+    private import memo_core_common::MemoIdentity;
     // The device's top-level goal is its IntendedUse (gpcaIntendedUse in
     // gpca_context) — a MemoMission. The former separate gpcaMission was
     // retired: "mission" duplicated the regulated intended-use statement.
 
     // ── Functional chains ───────────────────────────────────────
     part fcPatientBolus : FunctionalFlow {
-        attribute :>> id = "FC-001";
+        @MemoIdentity { :>> providedId = "FC-001"; }
         attribute :>> name = "PatientBolusChain";
         attribute :>> flowCategory = FunctionalFlowKind::nominal;
         attribute :>> endToEndLatencyBudgetMs = "100";
@@ -29,23 +30,23 @@ package memo_examples_gpca_pump_gpca_system {
         perform fcsBolusLog;
     }
     action fcsBolusSense : FunctionalFlowStep {
-        attribute :>> id = "FCS-001"; attribute :>> name = "SenseBolusRequest";
+        @MemoIdentity { :>> providedId = "FCS-001"; } attribute :>> name = "SenseBolusRequest";
         ref :>> function = fnAcquireSensors; ref :>> exchangedItem = ddBolusRequest;
     }
     action fcsBolusValidate : FunctionalFlowStep {
-        attribute :>> id = "FCS-002"; attribute :>> name = "CheckLockoutAndMaxDose";
+        @MemoIdentity { :>> providedId = "FCS-002"; } attribute :>> name = "CheckLockoutAndMaxDose";
         ref :>> function = fnEnforceLimits; ref :>> exchangedItem = ddPrescription;
     }
     action fcsBolusCommand : FunctionalFlowStep {
-        attribute :>> id = "FCS-003"; attribute :>> name = "CommandBolusFlow";
+        @MemoIdentity { :>> providedId = "FCS-003"; } attribute :>> name = "CommandBolusFlow";
         ref :>> function = fnManageInfusion; ref :>> exchangedItem = cdFlowCommand;
     }
     action fcsBolusActuate : FunctionalFlowStep {
-        attribute :>> id = "FCS-004"; attribute :>> name = "ActuatePumpMotor";
+        @MemoIdentity { :>> providedId = "FCS-004"; } attribute :>> name = "ActuatePumpMotor";
         ref :>> function = fnCommandPump; ref :>> exchangedItem = cdFlowCommand;
     }
     action fcsBolusLog : FunctionalFlowStep {
-        attribute :>> id = "FCS-005"; attribute :>> name = "LogBolusOutcome";
+        @MemoIdentity { :>> providedId = "FCS-005"; } attribute :>> name = "LogBolusOutcome";
         ref :>> function = fnLogEvents; ref :>> exchangedItem = ddEventRecord;
     }
     first fcsBolusSense then fcsBolusValidate;
@@ -54,7 +55,7 @@ package memo_examples_gpca_pump_gpca_system {
     first fcsBolusActuate then fcsBolusLog;
 
     part fcAlarmStop : FunctionalFlow {
-        attribute :>> id = "FC-002";
+        @MemoIdentity { :>> providedId = "FC-002"; }
         attribute :>> name = "AlarmDetectionToSafeStateChain";
         attribute :>> flowCategory = FunctionalFlowKind::alarm;
         attribute :>> endToEndLatencyBudgetMs = "20";
@@ -67,19 +68,19 @@ package memo_examples_gpca_pump_gpca_system {
         perform fcsAlarmAnnunciate;
     }
     action fcsAlarmSense : FunctionalFlowStep {
-        attribute :>> id = "FCS-006"; attribute :>> name = "SenseAlarmCondition";
+        @MemoIdentity { :>> providedId = "FCS-006"; } attribute :>> name = "SenseAlarmCondition";
         ref :>> function = fnAcquireSensors; ref :>> exchangedItem = ddSensorVector;
     }
     action fcsAlarmEvaluate : FunctionalFlowStep {
-        attribute :>> id = "FCS-007"; attribute :>> name = "EvaluateAlarmCondition";
+        @MemoIdentity { :>> providedId = "FCS-007"; } attribute :>> name = "EvaluateAlarmCondition";
         ref :>> function = fnMonitorAlarm; ref :>> exchangedItem = ddSensorVector;
     }
     action fcsAlarmStopInfusion : FunctionalFlowStep {
-        attribute :>> id = "FCS-008"; attribute :>> name = "LimitFlowToKvoSameStep";
+        @MemoIdentity { :>> providedId = "FCS-008"; } attribute :>> name = "LimitFlowToKvoSameStep";
         ref :>> function = fnManageInfusion; ref :>> exchangedItem = cdAlarmSignal;
     }
     action fcsAlarmAnnunciate : FunctionalFlowStep {
-        attribute :>> id = "FCS-009"; attribute :>> name = "AnnunciateAudibleVisual";
+        @MemoIdentity { :>> providedId = "FCS-009"; } attribute :>> name = "AnnunciateAudibleVisual";
         ref :>> function = fnAnnunciate; ref :>> exchangedItem = cdAlarmSignal;
     }
     first fcsAlarmSense then fcsAlarmEvaluate;
@@ -87,7 +88,7 @@ package memo_examples_gpca_pump_gpca_system {
     first fcsAlarmStopInfusion then fcsAlarmAnnunciate;
 
     part fcStartup : FunctionalFlow {
-        attribute :>> id = "FC-003";
+        @MemoIdentity { :>> providedId = "FC-003"; }
         attribute :>> name = "PowerOnSelfTestChain";
         attribute :>> flowCategory = FunctionalFlowKind::startup;
         attribute :>> endToEndLatencyBudgetMs = "5000";
@@ -100,14 +101,14 @@ package memo_examples_gpca_pump_gpca_system {
 
     // ── System scenarios ────────────────────────────────────────
     action ssBolusDuringBasal : OperativeScenario {
-        attribute :>> id = "SS-001";
+        @MemoIdentity { :>> providedId = "SS-001"; }
         attribute :>> name = "PatientBolusDuringBasal";
         attribute :>> preCondition = "BASAL mode active; no REQ 25 ignore condition holds";
         attribute :>> postCondition = "PATIENT_BOLUS mode entered, bolus delivered, return to BASAL";
     }
     action ssAlarmPause : OperativeScenario {
         attribute :>> scenarioKind = ScenarioKind::alternate;
-        attribute :>> id = "SS-002";
+        @MemoIdentity { :>> providedId = "SS-002"; }
         attribute :>> name = "InhibitingNotificationPausesInfusion";
         attribute :>> preCondition = "any ACTIVE therapy mode; infusion-inhibiting notification detected (REQ 59)";
         attribute :>> postCondition = "PAUSED mode entered in same execution step at FlowRate_kvo_hd keep-vein-open flow; notification annunciated per REQ 59";

@@ -14,8 +14,10 @@ package memo_examples_ros_mobile_robot_project {
     private import memo_examples_ros_mobile_robot_viewpoints_unassigned::*;
     private import memo_examples_ros_mobile_robot_viewpoints_unassigned_views_ros_mobile_robot_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-ROS-MOBILE-ROBOT-001";
+        @MemoIdentity { :>> providedId = "PMB-ROS-MOBILE-ROBOT-001"; }
         attribute :>> name = "RosMobileRobotProjectMethodBinding";
         attribute :>> projectName = "ROS Mobile Robot";
         ref :>> selectedMethodology = mdDefaultDefinition;

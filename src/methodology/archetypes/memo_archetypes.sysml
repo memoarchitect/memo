@@ -3,8 +3,10 @@ package memo_methodology_archetypes {
 
     private import memo_methodology_core::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part minimal : Archetype {
-        attribute :>> id = "ARCH-MINIMAL";
+        @MemoIdentity { :>> providedId = "ARCH-MINIMAL"; }
         attribute :>> name = "Minimal";
         attribute :>> label = "Minimal";
         attribute :>> description = "Core ontology only — requirements, hazards, basic architecture (~53 kinds)";
@@ -15,7 +17,7 @@ package memo_methodology_archetypes {
     }
 
     part standardArchetype : Archetype {
-        attribute :>> id = "ARCH-STANDARD";
+        @MemoIdentity { :>> providedId = "ARCH-STANDARD"; }
         attribute :>> name = "Standard";
         attribute :>> label = "Standard";
         attribute :>> description = "Core + risk + software + DHF — covers most Class II devices (~120 kinds)";
@@ -26,7 +28,7 @@ package memo_methodology_archetypes {
     }
 
     part full : Archetype {
-        attribute :>> id = "ARCH-FULL";
+        @MemoIdentity { :>> providedId = "ARCH-FULL"; }
         attribute :>> name = "Full";
         attribute :>> label = "Full";
         attribute :>> description = "All architecture layers, standards, and extensions (~200+ kinds)";
@@ -37,7 +39,7 @@ package memo_methodology_archetypes {
     }
 
     part samd : Archetype {
-        attribute :>> id = "ARCH-SAMD";
+        @MemoIdentity { :>> providedId = "ARCH-SAMD"; }
         attribute :>> name = "SaMD";
         attribute :>> label = "Software as Medical Device (SaMD)";
         attribute :>> description = "Clinical decision support, diagnostic algorithm, AI/ML tool, mobile medical app";
@@ -48,7 +50,7 @@ package memo_methodology_archetypes {
     }
 
     part connected : Archetype {
-        attribute :>> id = "ARCH-CONNECTED";
+        @MemoIdentity { :>> providedId = "ARCH-CONNECTED"; }
         attribute :>> name = "Connected";
         attribute :>> label = "Connected / IoT Device";
         attribute :>> description = "Remote monitoring, wearable, smart device with cloud connectivity and cybersecurity requirements";
@@ -59,7 +61,7 @@ package memo_methodology_archetypes {
     }
 
     part monitoring : Archetype {
-        attribute :>> id = "ARCH-MONITORING";
+        @MemoIdentity { :>> providedId = "ARCH-MONITORING"; }
         attribute :>> name = "Monitoring";
         attribute :>> label = "Monitoring / Diagnostic Device";
         attribute :>> description = "Patient monitor, ECG, SpO2, vital signs, bedside diagnostic equipment";
@@ -70,7 +72,7 @@ package memo_methodology_archetypes {
     }
 
     part infusion_pump : Archetype {
-        attribute :>> id = "ARCH-INFUSION";
+        @MemoIdentity { :>> providedId = "ARCH-INFUSION"; }
         attribute :>> name = "InfusionPump";
         attribute :>> label = "Infusion / Drug Delivery Device";
         attribute :>> description = "Infusion pump, syringe driver, implantable drug delivery, dosing device";
@@ -81,7 +83,7 @@ package memo_methodology_archetypes {
     }
 
     part blank : Archetype {
-        attribute :>> id = "ARCH-BLANK";
+        @MemoIdentity { :>> providedId = "ARCH-BLANK"; }
         attribute :>> name = "Blank";
         attribute :>> label = "Blank Project";
         attribute :>> description = "Start from scratch with a minimal SysML shell";

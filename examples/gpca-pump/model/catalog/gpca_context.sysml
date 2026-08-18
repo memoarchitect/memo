@@ -10,11 +10,13 @@ package memo_examples_gpca_pump_gpca_context {
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_operational::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // ── Intended use (ISO 14971 §5.2, IEC 62366-1) ──────────────
     part gpcaIntendedUse : IntendedUse {
-        attribute :>> id = "IU-001";
+        @MemoIdentity { :>> providedId = "IU-001"; }
         attribute :>> name = "GPCA_IntendedUse";
-        attribute :>> shortDescription = "Patient-controlled analgesia infusion of prescribed opioid analgesics.";
+        @MemoIdentity { :>> shortDescription = "Patient-controlled analgesia infusion of prescribed opioid analgesics."; }
         attribute :>> description = "The GPCA pump delivers a prescribed analgesic drug intravenously at a programmed basal rate, supplemented by square boluses delivered automatically at programmed intervals and by patient-requested bolus doses, subject to lockout intervals and maximum-dose limits.";
         attribute :>> indication = "Management of acute post-operative or chronic pain requiring titrated intravenous opioid analgesia.";
         attribute :>> contraindication = "Patients unable to comprehend or operate the bolus request mechanism; drugs without safe-value records in the hospital pharmacy database.";
@@ -24,22 +26,22 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> missionKind = "therapeutic device mission";
         attribute :>> successCriteria = "Drug delivered per prescription; no overdose or undetected under-infusion; every hazardous condition annunciated within its alarm latency budget.";
         attribute :>> operationalContext = "Acute-care hospital ward, fixed (non-ambulatory) location (UC-001).";
-        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1-2.3 (GPCA overview, system functions, user characteristics)";
+        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1-2.3 (GPCA overview, system functions, user characteristics)"; }
     }
     part bolusByProxyMisuse : ReasonablyForeseeableMisuse {
-        attribute :>> id = "RFM-001";
+        @MemoIdentity { :>> providedId = "RFM-001"; }
         attribute :>> name = "BolusRequestBySomeoneOtherThanPatient";
-        attribute :>> shortDescription = "A caregiver or visitor presses the patient bolus control.";
+        @MemoIdentity { :>> shortDescription = "A caregiver or visitor presses the patient bolus control."; }
         attribute :>> description = "A person other than the patient activates the bolus request control, bypassing the intended patient self-limiting behavior.";
         attribute :>> misuseContext = "Patient-controlled analgesia in a supervised hospital setting.";
         attribute :>> foreseeableBasis = "Known PCA use pattern represented in the GPCA hazard analysis.";
         attribute :>> affectedUseContext = "UC-001";
-        attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8; CITE-005: Open PCA ISO 14971 risk analysis, bolus-by-proxy event";
+        @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8; CITE-005: Open PCA ISO 14971 risk analysis, bolus-by-proxy event"; }
     }
 
     // ── Use contexts ────────────────────────────────────────────
     part hospitalWardContext : UseContext {
-        attribute :>> id = "UC-001";
+        @MemoIdentity { :>> providedId = "UC-001"; }
         attribute :>> name = "HospitalWardUseContext";
         attribute :>> careSetting = "acute-care hospital ward and post-anesthesia care unit";
         attribute :>> environment = "indoor clinical environment, mains power with battery backup, pole or bed-rail mounted";
@@ -52,7 +54,7 @@ package memo_examples_gpca_pump_gpca_context {
     // ── Actors ──────────────────────────────────────────────────
     part actorPatient : User {
         attribute :>> actorKind = ActorKind::patient;
-        attribute :>> id = "ACT-001";
+        @MemoIdentity { :>> providedId = "ACT-001"; }
         attribute :>> name = "Patient";
         attribute :>> trainingLevel = "instructed by clinician on bolus request button only";
         attribute :>> description = "Receives the infusion and requests bolus doses via the patient pendant.";
@@ -60,7 +62,7 @@ package memo_examples_gpca_pump_gpca_context {
     }
     part actorNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> id = "ACT-002";
+        @MemoIdentity { :>> providedId = "ACT-002"; }
         attribute :>> name = "ClinicianNurse";
         attribute :>> trainingLevel = "trained clinical user; programs prescriptions and responds to alarms";
         attribute :>> description = "Loads the drug reservoir, programs and confirms the prescription, starts/stops therapy, and responds to alarms.";
@@ -71,7 +73,7 @@ package memo_examples_gpca_pump_gpca_context {
     }
     part actorPrescriber : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> id = "ACT-003";
+        @MemoIdentity { :>> providedId = "ACT-003"; }
         attribute :>> name = "PrescribingPhysician";
         attribute :>> trainingLevel = "licensed prescriber";
         attribute :>> description = "Prescribes drug, concentration, basal rate, bolus volume, lockout interval, and maximum dose limits.";
@@ -79,7 +81,7 @@ package memo_examples_gpca_pump_gpca_context {
     }
     part actorPharmacist : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> id = "ACT-004";
+        @MemoIdentity { :>> providedId = "ACT-004"; }
         attribute :>> name = "Pharmacist";
         attribute :>> trainingLevel = "licensed pharmacist";
         attribute :>> description = "Prepares the drug reservoir and verifies drug and concentration against the prescription.";
@@ -87,7 +89,7 @@ package memo_examples_gpca_pump_gpca_context {
     }
     part actorTechnician : User {
         attribute :>> actorKind = ActorKind::technician;
-        attribute :>> id = "ACT-005";
+        @MemoIdentity { :>> providedId = "ACT-005"; }
         attribute :>> name = "BiomedicalTechnician";
         attribute :>> trainingLevel = "service-trained; authenticated service access";
         attribute :>> description = "Performs maintenance, battery replacement, and calibration through the service interface.";
@@ -96,43 +98,43 @@ package memo_examples_gpca_pump_gpca_context {
 
     // ── Foreseeable use errors (IEC 62366-1, AAMI TIR PCA) ──────
     part ueMisprogrammedRate : UseError {
-        attribute :>> id = "UE-001";
+        @MemoIdentity { :>> providedId = "UE-001"; }
         attribute :>> name = "MisprogrammedInfusionParameters";
         attribute :>> errorCategory = UseErrorCategoryKind::actionCategory;
         attribute :>> taskReference = "OA-003: Program prescription";
         attribute :>> severity = SeverityKind::catastrophic;
         attribute :>> rootCauseType = "decimal-point / unit entry slip during prescription programming";
         attribute :>> description = "Clinician enters a basal rate or bolus volume an order of magnitude off (e.g. mg vs mL, misplaced decimal).";
-        attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8 Use Hazards (incorrect dose settings)";
+        @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8 Use Hazards (incorrect dose settings)"; }
     }
     part ueBolusByProxy : UseError {
-        attribute :>> id = "UE-002";
+        @MemoIdentity { :>> providedId = "UE-002"; }
         attribute :>> name = "PCAByProxy";
         attribute :>> errorCategory = UseErrorCategoryKind::cognition;
         attribute :>> taskReference = "OA-005: Request patient bolus";
         attribute :>> severity = SeverityKind::catastrophic;
         attribute :>> rootCauseType = "family member or caregiver presses bolus button on behalf of a sedated patient";
         attribute :>> description = "Bolus doses requested by someone other than the patient defeat the inherent safety of patient-limited dosing.";
-        attribute :>> sourceReference = "illustrative — no source";
+        @MemoIdentity { :>> sourceReference = "illustrative — no source"; }
     }
     part ueWrongDrugLoaded : UseError {
-        attribute :>> id = "UE-003";
+        @MemoIdentity { :>> providedId = "UE-003"; }
         attribute :>> name = "WrongDrugOrConcentrationLoaded";
         attribute :>> errorCategory = UseErrorCategoryKind::cognition;
         attribute :>> taskReference = "OA-002: Load drug reservoir";
         attribute :>> severity = SeverityKind::catastrophic;
         attribute :>> rootCauseType = "reservoir containing wrong drug or concentration mounted without verification";
         attribute :>> description = "Loaded drug or concentration differs from the programmed prescription, so delivered dose differs from intended dose.";
-        attribute :>> sourceReference = "illustrative — no source";
+        @MemoIdentity { :>> sourceReference = "illustrative — no source"; }
     }
     part ueAlarmDisregard : UseError {
-        attribute :>> id = "UE-004";
+        @MemoIdentity { :>> providedId = "UE-004"; }
         attribute :>> name = "AlarmSilencedAndForgotten";
         attribute :>> errorCategory = UseErrorCategoryKind::memoryRecall;
         attribute :>> taskReference = "OA-006: Respond to alarm";
         attribute :>> severity = SeverityKind::serious;
         attribute :>> rootCauseType = "alarm silenced during high workload and the underlying condition never resolved";
         attribute :>> description = "Clinician silences an alarm and does not return to resolve the underlying condition (e.g. occlusion), interrupting therapy.";
-        attribute :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8 Use Hazards (attentional/memory failure)";
+        @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8 Use Hazards (attentional/memory failure)"; }
     }
 }

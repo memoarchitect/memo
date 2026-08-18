@@ -15,8 +15,10 @@ package infusion_pump_catalog {
     private import infusion_pump_assurance::*;
     private import infusion_pump_artifacts::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectMethodBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-001";
+        @MemoIdentity { :>> providedId = "PMB-001"; }
         attribute :>> name = "{{name}}ProjectMethodBinding";
         attribute :>> projectName = "{{name}}";
         ref :>> selectedMethodology = mdDefaultDefinition;

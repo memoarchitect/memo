@@ -10,8 +10,10 @@ package memo_artifacts_standards_iso_13485 {
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     item iso13485 : RegulatoryStandard {
-        attribute :>> id = "STD-ISO-13485";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485"; }
         attribute :>> name = "ISO13485";
         attribute :>> designation = "ISO 13485:2016";
         attribute :>> edition = "2016";
@@ -20,77 +22,77 @@ package memo_artifacts_standards_iso_13485 {
     }
 
     item iso13485Clause4 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-4";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-4"; }
         attribute :>> name = "ISO13485Clause4";
         attribute :>> clauseNumber = "4";
         attribute :>> title = "quality management system";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause4_2 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-4-2";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-4-2"; }
         attribute :>> name = "ISO13485Clause4_2";
         attribute :>> clauseNumber = "4.2";
         attribute :>> title = "quality management system documentation";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause4_2_4 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-4-2-4";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-4-2-4"; }
         attribute :>> name = "ISO13485Clause4_2_4";
         attribute :>> clauseNumber = "4.2.4";
         attribute :>> title = "control of documents";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause7 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-7";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-7"; }
         attribute :>> name = "ISO13485Clause7";
         attribute :>> clauseNumber = "7";
         attribute :>> title = "product realization";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause7_3 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-7-3";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-7-3"; }
         attribute :>> name = "ISO13485Clause7_3";
         attribute :>> clauseNumber = "7.3";
         attribute :>> title = "design and development";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause7_3_3 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-7-3-3";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-7-3-3"; }
         attribute :>> name = "ISO13485Clause7_3_3";
         attribute :>> clauseNumber = "7.3.3";
         attribute :>> title = "design and development inputs";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause7_3_4 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-7-3-4";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-7-3-4"; }
         attribute :>> name = "ISO13485Clause7_3_4";
         attribute :>> clauseNumber = "7.3.4";
         attribute :>> title = "design and development outputs";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause7_3_6 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-7-3-6";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-7-3-6"; }
         attribute :>> name = "ISO13485Clause7_3_6";
         attribute :>> clauseNumber = "7.3.6";
         attribute :>> title = "design and development verification";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause7_3_7 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-7-3-7";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-7-3-7"; }
         attribute :>> name = "ISO13485Clause7_3_7";
         attribute :>> clauseNumber = "7.3.7";
         attribute :>> title = "design and development validation";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause7_3_9 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-7-3-9";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-7-3-9"; }
         attribute :>> name = "ISO13485Clause7_3_9";
         attribute :>> clauseNumber = "7.3.9";
         attribute :>> title = "control of design and development changes";
         attribute :>> normativeStrength = "shall";
     }
     item iso13485Clause7_3_10 : StandardClause {
-        attribute :>> id = "STD-ISO-13485-7-3-10";
+        @MemoIdentity { :>> providedId = "STD-ISO-13485-7-3-10"; }
         attribute :>> name = "ISO13485Clause7_3_10";
         attribute :>> clauseNumber = "7.3.10";
         attribute :>> title = "design and development files";

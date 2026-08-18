@@ -4,8 +4,10 @@ package memo_extension_container_methodology {
     private import memo_methodology_profiles::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part containerExtensionMethod : MethodologyDefinition {
-        attribute :>> id = "EXT-CONTAINER-001";
+        @MemoIdentity { :>> providedId = "EXT-CONTAINER-001"; }
         attribute :>> name = "ContainerDeploymentExtension";
         attribute :>> version = "0.7.0";
         attribute :>> domain = "containerized deployment";

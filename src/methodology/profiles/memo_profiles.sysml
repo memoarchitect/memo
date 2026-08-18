@@ -9,8 +9,10 @@ package memo_methodology_profiles {
     private import memo_core_enumerations::*;
     private import memo_core_methodology_scope::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part mdCoreLibrary : MethodologyLibrary {
-        attribute :>> id = "METHLIB-001";
+        @MemoIdentity { :>> providedId = "METHLIB-001"; }
         attribute :>> name = "MedicalDeviceMethodologyLibrary";
         attribute :>> version = "0.1";
         attribute :>> domain = "medical device modeling";
@@ -31,7 +33,7 @@ package memo_methodology_profiles {
     // that into `allAvailable` preserves the effective result and removes the
     // second scope authority.
     part mdDefaultDefinition : MethodologyDefinition {
-        attribute :>> id = "METH-MD-DEFAULT";
+        @MemoIdentity { :>> providedId = "METH-MD-DEFAULT"; }
         attribute :>> name = "MedicalDeviceDefault";
         attribute :>> version = "0.6.5";
         attribute :>> domain = "medical device modeling";
@@ -40,7 +42,7 @@ package memo_methodology_profiles {
     }
 
     part useRiskAndResidualRule : ElementUsageRule {
-        attribute :>> id = "RULE-001";
+        @MemoIdentity { :>> providedId = "RULE-001"; }
         attribute :>> name = "UseRiskAndResidualRisk";
         attribute :>> elementTypeName = "Risk,ResidualRisk,RiskMatrix";
         attribute :>> strength = RuleStrengthKind::recommended;
@@ -48,7 +50,7 @@ package memo_methodology_profiles {
     }
 
     part requireVerifiedByRule : RelationUsageRule {
-        attribute :>> id = "RULE-002";
+        @MemoIdentity { :>> providedId = "RULE-002"; }
         attribute :>> name = "VerifiedBysRequired";
         attribute :>> relationTypeName = "verify";
         attribute :>> strength = RuleStrengthKind::required;
@@ -56,7 +58,7 @@ package memo_methodology_profiles {
     }
 
     part lightRiskPattern : ModelingPattern {
-        attribute :>> id = "PAT-001";
+        @MemoIdentity { :>> providedId = "PAT-001"; }
         attribute :>> name = "LightRiskBeforeAfterPattern";
         attribute :>> intent = "Model hazard chain, before/after mitigation risk, controls, and residual evaluation in a lightweight way.";
         attribute :>> stage = WorkflowStageKind::risk;
@@ -64,7 +66,7 @@ package memo_methodology_profiles {
     }
 
     part lightTracePattern : ModelingPattern {
-        attribute :>> id = "PAT-002";
+        @MemoIdentity { :>> providedId = "PAT-002"; }
         attribute :>> name = "CoreTracePattern";
         attribute :>> intent = "Need or risk to requirement, requirement to architecture, requirement/control to verification.";
         attribute :>> stage = WorkflowStageKind::requirements;
@@ -72,7 +74,7 @@ package memo_methodology_profiles {
     }
 
     action stepRequirements : MethodologyWorkflowStep {
-        attribute :>> id = "STEP-001";
+        @MemoIdentity { :>> providedId = "STEP-001"; }
         attribute :>> name = "CaptureRequirements";
         attribute :>> stage = WorkflowStageKind::requirements;
         attribute :>> objectiveDescription = "Capture stakeholder needs and derive requirements.";
@@ -81,7 +83,7 @@ package memo_methodology_profiles {
     }
 
     action stepArchitecture : MethodologyWorkflowStep {
-        attribute :>> id = "STEP-002";
+        @MemoIdentity { :>> providedId = "STEP-002"; }
         attribute :>> name = "DefineArchitecture";
         attribute :>> stage = WorkflowStageKind::architecture;
         attribute :>> objectiveDescription = "Define key software and hardware architecture elements and interfaces.";
@@ -90,7 +92,7 @@ package memo_methodology_profiles {
     }
 
     action stepRisk : MethodologyWorkflowStep {
-        attribute :>> id = "STEP-003";
+        @MemoIdentity { :>> providedId = "STEP-003"; }
         attribute :>> name = "PerformRiskAnalysis";
         attribute :>> stage = WorkflowStageKind::risk;
         attribute :>> objectiveDescription = "Create core risk chain and controls.";
@@ -99,7 +101,7 @@ package memo_methodology_profiles {
     }
 
     action stepVerification : MethodologyWorkflowStep {
-        attribute :>> id = "STEP-004";
+        @MemoIdentity { :>> providedId = "STEP-004"; }
         attribute :>> name = "PlanVerification";
         attribute :>> stage = WorkflowStageKind::verificationStage;
         attribute :>> objectiveDescription = "Define verification and evidence expectations.";
@@ -111,7 +113,7 @@ package memo_methodology_profiles {
     first stepRisk then stepVerification;
 
     part gateLightComplete : QualityGate {
-        attribute :>> id = "GATE-001";
+        @MemoIdentity { :>> providedId = "GATE-001"; }
         attribute :>> name = "LightMethodReady";
         attribute :>> gateStage = WorkflowStageKind::verificationStage;
         attribute :>> passCriteria = "Core traceability, risk, verification, and RMF view support are present.";
@@ -123,7 +125,7 @@ package memo_methodology_profiles {
     // references its methodology with a typed SysML reference.
 
     part rmpDoc : DhfDocumentBinding {
-        attribute :>> id = "DHF-001";
+        @MemoIdentity { :>> providedId = "DHF-001"; }
         attribute :>> name = "RiskManagementPlan";
         attribute :>> documentTitle = "Risk Management Plan";
         attribute :>> groupLabel = "Risk Management";
@@ -135,7 +137,7 @@ package memo_methodology_profiles {
     }
 
     part harDoc : DhfDocumentBinding {
-        attribute :>> id = "DHF-002";
+        @MemoIdentity { :>> providedId = "DHF-002"; }
         attribute :>> name = "HazardAnalysisReport";
         attribute :>> documentTitle = "Hazard Analysis Report";
         attribute :>> groupLabel = "Risk Management";
@@ -147,7 +149,7 @@ package memo_methodology_profiles {
     }
 
     part sadDoc : DhfDocumentBinding {
-        attribute :>> id = "DHF-003";
+        @MemoIdentity { :>> providedId = "DHF-003"; }
         attribute :>> name = "SoftwareArchitectureDescription";
         attribute :>> documentTitle = "Software Architecture Description";
         attribute :>> groupLabel = "Software";
@@ -159,7 +161,7 @@ package memo_methodology_profiles {
     }
 
     part threatModelDoc : DhfDocumentBinding {
-        attribute :>> id = "DHF-004";
+        @MemoIdentity { :>> providedId = "DHF-004"; }
         attribute :>> name = "CybersecurityThreatModel";
         attribute :>> documentTitle = "Threat Model";
         attribute :>> groupLabel = "Cybersecurity";
@@ -171,7 +173,7 @@ package memo_methodology_profiles {
     }
 
     part vvPlanDoc : DhfDocumentBinding {
-        attribute :>> id = "DHF-005";
+        @MemoIdentity { :>> providedId = "DHF-005"; }
         attribute :>> name = "VerificationValidationPlan";
         attribute :>> documentTitle = "V&V Plan";
         attribute :>> groupLabel = "Verification & Validation";
