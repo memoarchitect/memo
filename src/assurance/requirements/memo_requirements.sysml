@@ -7,17 +7,6 @@ package memo_assurance_requirements {
     private import memo_assurance_requirements_needs::*;
     part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
 
-    // ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards,
-    // scenarios, requirements, and DHF records can trace to the foreseeable
-    // misuse that motivated them. Its counterpart, IntendedUse, is now the
-    // operational-world root (memo_architecture_operational_structure::IntendedUse,
-    // a MemoMission).
-    part def ReasonablyForeseeableMisuse specializes MemoPart {
-        attribute misuseContext : String;
-        attribute foreseeableBasis : String;
-        attribute affectedUseContext : String;
-    }
-
     // The kind of requirement. Was a subclass branch (SystemRequirement /
     // SoftwareRequirement / HardwareRequirement) plus a parallel design-control
     // specification hierarchy (DesignControlSpecification / System- / Software- /
