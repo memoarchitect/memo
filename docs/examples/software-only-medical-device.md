@@ -17,7 +17,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Implementation and realization | `Algorithm`, `DeploymentUnit`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Implementation and realization | `Algorithm`, `SoftwareDeploymentUnit`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `DeploysTo`, `HostedBy`, `ModuleUses`, `Realizes` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.

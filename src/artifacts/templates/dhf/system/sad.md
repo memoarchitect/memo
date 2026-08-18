@@ -75,7 +75,7 @@ Runtime behaviour: the components executing in the system and the connectors thr
 #### 3.2.1 Runtime Environments
 
 ```memo-query
-kind: [RuntimeEnvironment, DeploymentUnit]
+kind: [RuntimeEnvironment, SoftwareDeploymentUnit]
 display: table
 columns: name, layer, doc
 sort: name
@@ -101,12 +101,12 @@ Software elements mapped to their execution environments.
 #### 3.3.1 Deployment Units
 
 ```memo-query
-kind: DeploymentUnit
+kind: SoftwareDeploymentUnit
 traverse: outgoing deploysTo
 display: table
 columns: name, kind, layer, doc
 sort: name
-empty: "No deployments defined. Add DeploysTo links from DeploymentUnit to the processing node."
+empty: "No deployments defined. Add DeploysTo links from SoftwareDeploymentUnit to the processing node."
 ```
 
 ---
