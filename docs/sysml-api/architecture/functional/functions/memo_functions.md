@@ -38,8 +38,8 @@
 | [`MemoFunction`](#memofunction) | `action def` | Memo function definition specializing `MemoAction`. | `MemoAction` |
 | [`SystemFunction`](#systemfunction) | `action def` | A responsibility of the system as a whole. Allocation is optional: a system function that no single component owns is a normal intermediate state of the functional chain, not a defect. | `MemoFunction` |
 | [`ComponentFunction`](#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. | `MemoFunction` |
-| [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… | `ArchitectureElement` |
-| [`FunctionalFlow`](#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | `ArchitectureElement` |
+| [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… | `MemoPart` |
+| [`FunctionalFlow`](#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | `MemoPart` |
 | [`FunctionalFlowStep`](#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | `MemoAction` |
 
 ## MemoFunction
@@ -90,7 +90,7 @@ action def ComponentFunction specializes MemoFunction
 ## FunctionalExchange
 
 ```sysml
-part def FunctionalExchange specializes ArchitectureElement
+part def FunctionalExchange specializes MemoPart
 ```
 
 | Property | Value |
@@ -98,14 +98,14 @@ part def FunctionalExchange specializes ArchitectureElement
 | Description | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_functional_functions` |
 
 
 ## FunctionalFlow
 
 ```sysml
-part def FunctionalFlow specializes ArchitectureElement
+part def FunctionalFlow specializes MemoPart
 ```
 
 | Property | Value |
@@ -113,7 +113,7 @@ part def FunctionalFlow specializes ArchitectureElement
 | Description | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_functional_functions` |
 
 
@@ -147,8 +147,8 @@ action def FunctionalFlowStep specializes MemoAction
     // ─── A function is a behaviour ───────────────────────────────────────────
     //
     // `MemoFunction` and both its specializations are `action def`s. They were
-    // `part def SystemFunction specializes ArchitectureElement` until Track A0
-    // removed the reason: relation ends were typed on MemoPart/ArchitectureElement,
+    // `part def SystemFunction specializes MemoPart` until Track A0
+    // removed the reason: relation ends were typed on part-based types,
     // KerML forbids a behaviour from specializing a part-based type, and a function
     // has to be satisfiable, verifiable, and allocatable. So a function was declared
     // a part, and a separate `action def OperativeAction` carried the behaviour with a
@@ -236,7 +236,7 @@ action def FunctionalFlowStep specializes MemoAction
         // So this part def is a workaround for a MEMO gap, not a design MEMO is
         // entitled to. Restoring the two dropped clauses is what would let it
         // collapse into the flow it stands in for.
-        part def FunctionalExchange specializes ArchitectureElement {
+        part def FunctionalExchange specializes MemoPart {
             attribute flowKind : FlowKind;
             attribute latencyBudgetMs : Real;
             attribute staleAfterMs : Real;
@@ -251,7 +251,7 @@ action def FunctionalFlowStep specializes MemoAction
 
         // A reusable functional route through system responsibilities. Functional
         // flows are part of functional architecture, never logical structure.
-        part def FunctionalFlow specializes ArchitectureElement {
+        part def FunctionalFlow specializes MemoPart {
             attribute flowCategory : FunctionalFlowKind;
             attribute endToEndLatencyBudgetMs : String;
             attribute safetyRelevant : Boolean;

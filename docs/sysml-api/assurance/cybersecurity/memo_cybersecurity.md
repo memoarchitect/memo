@@ -37,7 +37,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`CybersecurityAsset`](#cybersecurityasset) | `part def` | Cybersecurity asset definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`CybersecurityAsset`](#cybersecurityasset) | `part def` | Cybersecurity asset definition specializing `MemoPart`. | `MemoPart` |
 | [`AttackSurface`](#attacksurface) | `part def` | Attack surface definition specializing `MemoPart`. | `MemoPart` |
 | [`Threat`](#threat) | `part def` | Threat definition specializing `RiskDriver`. | `RiskDriver` |
 | [`Vulnerability`](#vulnerability) | `item def` | Vulnerability definition specializing `RiskItem`. | `RiskItem` |
@@ -53,15 +53,15 @@
 ## CybersecurityAsset
 
 ```sysml
-part def CybersecurityAsset specializes ArchitectureElement
+part def CybersecurityAsset specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Cybersecurity asset definition specializing `ArchitectureElement`. |
+| Description | Cybersecurity asset definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_assurance_cybersecurity` |
 
 
@@ -247,7 +247,7 @@ connection def ImpactsSafety :> MemoRelationship
         private import memo_assurance_verification_validation::*;
         private import memo_architecture_operational_scenarios::*;
 
-        part def CybersecurityAsset specializes ArchitectureElement {
+        part def CybersecurityAsset specializes MemoPart {
             attribute assetKind : AssetKind;
             attribute confidentialityNeed : String;
             attribute integrityNeed : String;

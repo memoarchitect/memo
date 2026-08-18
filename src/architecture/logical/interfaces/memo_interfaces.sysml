@@ -85,7 +85,7 @@ package memo_architecture_logical_interfaces {
     port def SensorPort specializes DataPort { attribute sensorDomain : String; }
     port def CommandPort specializes DataPort { attribute commandDomain : String; }
 
-    part def ComponentExchange specializes ArchitectureElement {
+    part def ComponentExchange specializes MemoPart {
         attribute exchangeKind : FlowKind;
         // Metaclass-neutral endpoints. CR-ONT-002 used to read: "Typed
         // endpoints. A component or a boundary port may terminate an exchange,

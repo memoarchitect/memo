@@ -10,7 +10,7 @@ package memo_architecture_functional_behavior {
     abstract action def FunctionalAction specializes MemoAction;
     // State machines and their mode states are SysML v2 states (behaviours), so
     // they derive from the MemoState foundation, not the part-based
-    // ArchitectureElement. Transitions stay part-based (below) to keep their
+    // MemoPart family. Transitions stay part-based (below) to keep their
     // traceable safety attributes.
     // State machines retain their own execution semantics; individual modes
     // are MemoState usages selected by stateKind.
@@ -23,7 +23,7 @@ package memo_architecture_functional_behavior {
     // elements are active in one selectable arrangement.
     // The reference is typed to the shared native state family so a consumer
     // can navigate from the selected configuration to its governing mode.
-    part def ModeConfiguration specializes ArchitectureElement {
+    part def ModeConfiguration specializes MemoPart {
         ref activeMode : MemoState[1];
         ref activeElement : MemoPart[0..*];
     }
@@ -70,7 +70,7 @@ package memo_architecture_functional_behavior {
     // annotate a BASE element rather than declare its own type, the SysML-
     // native answer is `metadata def` + `Metaobjects::SemanticMetadata`, which
     // is what every MEMO relation already carries since A4.
-    part def ActivityAction specializes ArchitectureElement {
+    part def ActivityAction specializes MemoPart {
         attribute actionKind : ActionKind;
         attribute inputSummary : String;
         attribute outputSummary : String;

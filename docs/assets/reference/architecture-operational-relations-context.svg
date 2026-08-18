@@ -23,15 +23,14 @@
   
   <path d="M 186 172 L 1414 172" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
   <rect x="756.8" y="134" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="800" y="154" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">Governs</text>
-  <rect x="60" y="220" width="213" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
-      <text x="166.5" y="247" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="166.5" dy="0">ArchitectureElement</tspan></text>
-      <text x="166.5" y="266" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="166.5" dy="0">memo::core::common</tspan></text>
-  <rect x="1327" y="220" width="213" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
-      <text x="1433.5" y="247" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="1433.5" dy="0">ArchitectureElement</tspan></text>
-      <text x="1433.5" y="266" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="1433.5" dy="0">memo::core::common</tspan></text>
+  <rect x="60" y="220" width="126" height="64" rx="12" fill="#f1f2f5" stroke="#7c8798" stroke-width="2"/>
+      <text x="123" y="247" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" font-weight="750" fill="#0b2b49"><tspan x="123" dy="0">MemoPart</tspan></text>
+      <text x="123" y="266" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="10" font-weight="650" fill="#7c8798"><tspan x="123" dy="0">memo::core::common</tspan></text>
+  <rect x="1401" y="220" width="139" height="64" rx="12" fill="#f3f2fb" stroke="#6f42c1" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="1470.5" y="258" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="1470.5" dy="0">any element</tspan></text>
   
-  <path d="M 273 252 L 1327 252" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
-  <rect x="706.2" y="214" width="187.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="800" y="234" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">InteractsInContext</text>
+  <path d="M 186 252 L 1401 252" fill="none" stroke="#6f42c1" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="699.7" y="214" width="187.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="793.5" y="234" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">InteractsInContext</text>
   <rect x="60" y="300" width="242" height="64" rx="12" fill="#ffffff" stroke="#6f42c1" stroke-width="2" />
       <text x="181" y="338" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" font-weight="700" fill="#0b2b49"><tspan x="181" dy="0">OperationalParticipant</tspan></text>
   <rect x="1401" y="300" width="139" height="64" rx="12" fill="#f3f2fb" stroke="#6f42c1" stroke-width="2" stroke-dasharray="6 5"/>

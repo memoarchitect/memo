@@ -32,10 +32,10 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`PhysicalAssembly`](#physicalassembly) | `part def` | Physical assembly definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`PhysicalAssembly`](#physicalassembly) | `part def` | Physical assembly definition specializing `MemoPart`. | `MemoPart` |
 | [`PhysicalSubassembly`](#physicalsubassembly) | `part def` | Physical subassembly definition specializing `PhysicalAssembly`. | `PhysicalAssembly` |
 | [`HardwareAssembly`](#hardwareassembly) | `part def` | Hardware assembly definition specializing `PhysicalAssembly`. | `PhysicalAssembly` |
-| [`PhysicalComponent`](#physicalcomponent) | `part def` | Physical component definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`PhysicalComponent`](#physicalcomponent) | `part def` | Physical component definition specializing `MemoPart`. | `MemoPart` |
 | [`HardwareComponent`](#hardwarecomponent) | `part def` | Hardware component definition specializing `PhysicalComponent`. | `PhysicalComponent` |
 | [`AcousticComponent`](#acousticcomponent) | `part def` | Acoustic component definition specializing `PhysicalComponent`. | `PhysicalComponent` |
 | [`ThermalComponent`](#thermalcomponent) | `part def` | Thermal component definition specializing `PhysicalComponent`. | `PhysicalComponent` |
@@ -43,15 +43,15 @@
 ## PhysicalAssembly
 
 ```sysml
-part def PhysicalAssembly specializes ArchitectureElement
+part def PhysicalAssembly specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Physical assembly definition specializing `ArchitectureElement`. |
+| Description | Physical assembly definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_hardware_common` |
 
 
@@ -88,15 +88,15 @@ part def HardwareAssembly specializes PhysicalAssembly
 ## PhysicalComponent
 
 ```sysml
-part def PhysicalComponent specializes ArchitectureElement
+part def PhysicalComponent specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Physical component definition specializing `ArchitectureElement`. |
+| Description | Physical component definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_hardware_common` |
 
 
@@ -165,7 +165,7 @@ part def ThermalComponent specializes PhysicalComponent
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
 
-        part def PhysicalAssembly specializes ArchitectureElement {
+        part def PhysicalAssembly specializes MemoPart {
             attribute responsibility : String;
             attribute safetyRole : String;
             attribute partNumber : String;
@@ -177,7 +177,7 @@ part def ThermalComponent specializes PhysicalComponent
         // Retained name from 0.4; an electronics-centred assembly.
         part def HardwareAssembly specializes PhysicalAssembly;
 
-        part def PhysicalComponent specializes ArchitectureElement {
+        part def PhysicalComponent specializes MemoPart {
             attribute partNumber : String;
             attribute materialSummary : String;
             // ISO 10993-1 contact characterization; required when true.
