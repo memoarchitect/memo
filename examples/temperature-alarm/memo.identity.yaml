@@ -1,0 +1,64 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_temperature_alarm::actAcknowledgeAlarm":
+    shortId: "OPR-1"
+    uuid: "ea2b4f6a-a25b-5c93-84a2-2c149dc5b870"
+  "memo_examples_temperature_alarm::chMonitor":
+    shortId: "LGC-1"
+    uuid: "0f804fdc-4ead-5205-a108-91ce7e4b4d04"
+  "memo_examples_temperature_alarm::chPrimary":
+    shortId: "LGC-2"
+    uuid: "be43f8c3-dbdc-505e-8c8e-b62571f179fb"
+  "memo_examples_temperature_alarm::elAlarmBanner":
+    shortId: "UIE-1"
+    uuid: "cb4a788e-08c4-5ac7-b68e-25fcbac3af7e"
+  "memo_examples_temperature_alarm::evLatencyReport":
+    shortId: "MMX-1"
+    uuid: "6ed38946-dcb2-5c1b-b97d-58db3d0c884c"
+  "memo_examples_temperature_alarm::fnDetectDeviation":
+    shortId: "SYS-1"
+    uuid: "b22e14c8-57b0-5ed9-8167-5a1a35e2e7e3"
+  "memo_examples_temperature_alarm::hzUndetectedDeviation":
+    shortId: "HZD-1"
+    uuid: "f7884ad4-503c-5eb1-a779-f02d4602817a"
+  "memo_examples_temperature_alarm::icuNurse":
+    shortId: "USR-1"
+    uuid: "f7b9403f-66c9-55f4-b6f5-a0f78c055260"
+  "memo_examples_temperature_alarm::rcReAnnunciate":
+    shortId: "RSK-1"
+    uuid: "6f1dbdd1-5eef-54e0-81d4-78a4001af7b3"
+  "memo_examples_temperature_alarm::taskAckAlarm":
+    shortId: "OPR-2"
+    uuid: "2a25bec5-50f6-5bef-ad59-750b277515db"
+  "memo_examples_temperature_alarm::ucMonitorTemp":
+    shortId: "USE-1"
+    uuid: "3e0d59fc-eda9-581e-a7d8-aafb2f466ea5"
+  "memo_examples_temperature_alarm::ueSilenceAndForget":
+    shortId: "USE-2"
+    uuid: "74eae9e0-1297-5ba9-b38c-b3500ce7745c"
+  "memo_examples_temperature_alarm::uiBedside":
+    shortId: "USR-2"
+    uuid: "664f0cf3-a7f3-536b-a078-470be588e6f3"
+  "memo_examples_temperature_alarm::uiaAcknowledge":
+    shortId: "UXX-1"
+    uuid: "bbcaba4d-4cb7-554c-8797-6e27f6dacfcb"
+  "memo_examples_temperature_alarm::uvAckTask":
+    shortId: "MMX-3"
+    uuid: "d268c19e-41da-5657-ac04-2f9bcdc29713"
+  "memo_examples_temperature_alarm::vcAlarmLatency":
+    shortId: "VRF-1"
+    uuid: "e4853bd5-0672-5040-af70-0c7f9177ee7a"
+  "memo_examples_temperature_alarm::vsAlarmLatency":
+    shortId: "OPR-3"
+    uuid: "a66d2a6f-8b2e-5302-a2e2-14a32f08e85e"
+  "memo_examples_temperature_alarm_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "27e78a8e-0e34-5569-8d7d-06c416fbbbd6"
+  "memo_examples_temperature_alarm_viewpoints_unassigned_views_temperature_alarm_overview::temperatureAlarmOverview":
+    shortId: "MMX-2"
+    uuid: "e9653f71-dc0b-55aa-951c-469b402afad3"
