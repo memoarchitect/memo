@@ -48,7 +48,7 @@ views (the SEI viewtypes): the **module view** (`SoftwareSystem`,
 `SoftwareComponent`, `SoftwareModule`, `SBOMEntry` — the IEC 62304
 decomposition), the **runtime view** (`RuntimeComponent`, `Process`,
 `Thread`, `Service`, `RuntimePartition` — concurrency, scheduling, WCET,
-restart policy), and the **deployment view** (`DeploymentUnit` builds from
+restart policy), and the **deployment view** (`SoftwareDeploymentUnit` builds from
 modules and deploys to a `ProcessingNode`; runtime components are hosted
 there). Physical realization spans the full taxonomy — mechanical,
 electrical, electronic, fluidic, pneumatic, optical, acoustic, thermal —
@@ -59,7 +59,7 @@ because "physical" means more than a circuit board.
 | Logical responsibility | `LogicalComponent` (componentRole: system…channel), `IsolationBoundary` |
 | Software module view | `SoftwareSystem`, `SoftwareComponent`, `SoftwareModule`, `SBOMEntry` |
 | Software runtime view | `RuntimeComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` |
-| Deployment | `DeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` |
+| Deployment | `SoftwareDeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` |
 | Physical realization | `PhysicalAssembly`, `Sensor`, `Actuator`, `FluidicComponent`, `OpticalComponent`, … |
 | Interfaces | `Interface` taxonomy, `LogicalPort`/`LogicalInterface`, `ComponentExchange` with typed endpoints |
 
@@ -69,7 +69,7 @@ flowchart LR
     Req --> Function[SystemFunction]
     Function -->|AllocatedTo| Logical[LogicalComponent]
     Logical -->|Realizes| Module[SoftwareComponent]
-    Module -->|BuildsInto| Unit[DeploymentUnit]
+    Module -->|BuildsInto| Unit[SoftwareDeploymentUnit]
     Unit -->|DeploysTo| Node[ProcessingNode]
     Logical -->|Realizes| Mech[MechanicalPart]
 ```

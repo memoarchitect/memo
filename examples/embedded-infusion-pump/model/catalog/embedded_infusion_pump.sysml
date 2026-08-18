@@ -1,6 +1,6 @@
 // Focused example: embedded programmable device — the three software views
 // (module / runtime / deployment) on a minimal infusion pump.
-// SoftwareElement buildsInto DeploymentUnit deploysTo ProcessingNode;
+// SoftwareElement buildsInto SoftwareDeploymentUnit deploysTo ProcessingNode;
 // SoftwareComponent hostedBy ProcessingNode with scheduling properties.
 package memo_examples_embedded_infusion_pump {
     private import ScalarValues::*;
@@ -43,7 +43,7 @@ package memo_examples_embedded_infusion_pump {
     #refinement dependency rtControlLoop to swInfusionControl;
 
     // Deployment view.
-    part duControlImage : DeploymentUnit {
+    part duControlImage : SoftwareDeploymentUnit {
         attribute :>> id = "EIP-DU-001"; attribute :>> name = "ControlFirmwareImage";
         attribute :>> unitKind = "signed firmware image";
         attribute :>> version = "3.1.0";

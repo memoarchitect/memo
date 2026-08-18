@@ -1,5 +1,5 @@
-// Deployment (allocation) view: SoftwareModule buildsInto DeploymentUnit;
-// DeploymentUnit deploysTo ProcessingNode. Software deploys only to capable
+// Deployment (allocation) view: SoftwareModule buildsInto SoftwareDeploymentUnit;
+// SoftwareDeploymentUnit deploysTo ProcessingNode. Software deploys only to capable
 // execution nodes (rules/crosslayer).
 //
 // `HostedBy` is NOT part of that chain, and this comment used to claim it was
@@ -26,7 +26,7 @@ package memo_architecture_realization_deployment {
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_logical_interfaces::*;                   // ComponentExchange
 
-    part def DeploymentUnit specializes MemoPart {
+    part def SoftwareDeploymentUnit specializes MemoPart {
         attribute unitKind : String;
         attribute version : String;
         attribute integrityProtection : String;
@@ -42,7 +42,7 @@ package memo_architecture_realization_deployment {
 
     connection def BuildsInto :> MemoRelationship {
         end module : SoftwareModule :>> source;
-        end deploymentUnit : DeploymentUnit :>> target;
+        end deploymentUnit : SoftwareDeploymentUnit :>> target;
     }
     abstract connection buildsIntoLinks : BuildsInto[*];
     metadata def <buildsInto> BuildsIntoMetadata :> SemanticMetadata {
@@ -52,7 +52,7 @@ package memo_architecture_realization_deployment {
     }
     connection def DeploysTo :> MemoRelationship {
         attribute deploymentKind : DeploymentKind;
-        end deploymentUnit : DeploymentUnit :>> source;
+        end deploymentUnit : SoftwareDeploymentUnit :>> source;
         end node : ProcessingNode :>> target;
     }
     abstract connection deploysToLinks : DeploysTo[*];
@@ -174,7 +174,7 @@ package memo_architecture_realization_deployment {
     // The flow traverses a software→hardware binding; latency accrues here.
     connection def FlowTraversesBinding :> MemoRelationship {
         end endToEndFlow : EndToEndFlow :>> source;
-        end deploymentUnit : DeploymentUnit :>> target;
+        end deploymentUnit : SoftwareDeploymentUnit :>> target;
     }
     abstract connection flowTraversesBindingLinks : FlowTraversesBinding[*];
     metadata def <flowTraversesBinding> FlowTraversesBindingMetadata :> SemanticMetadata {

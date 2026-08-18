@@ -41,7 +41,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`DeploymentUnit`](#deploymentunit) | `part def` | Deployment unit definition specializing `MemoPart`. | `MemoPart` |
+| [`SoftwareDeploymentUnit`](#deploymentunit) | `part def` | Deployment unit definition specializing `MemoPart`. | `MemoPart` |
 | [`RuntimeEnvironment`](#runtimeenvironment) | `part def` | Runtime environment definition specializing `MemoPart`. | `MemoPart` |
 | [`BuildsInto`](#buildsinto) | `connection def` | Typed relationship for builds into. | `MemoRelationship` |
 | [`DeploysTo`](#deploysto) | `connection def` | Typed relationship for deploys to. | `MemoRelationship` |
@@ -52,10 +52,10 @@
 | [`FlowComprisesSpec`](#flowcomprisesspec) | `connection def` | The end-to-end flow is realized by an ordered flow specification, one segment per traversed component boundary (AADL flow-spec → end-to-end). | `MemoRelationship` |
 | [`FlowTraversesBinding`](#flowtraversesbinding) | `connection def` | The flow traverses a software→hardware binding; latency accrues here. | `MemoRelationship` |
 
-## DeploymentUnit
+## SoftwareDeploymentUnit
 
 ```sysml
-part def DeploymentUnit specializes MemoPart
+part def SoftwareDeploymentUnit specializes MemoPart
 ```
 
 | Property | Value |
@@ -207,8 +207,8 @@ connection def FlowTraversesBinding :> MemoRelationship
 ??? code "architecture/realization/deployment/memo_deployment.sysml"
 
     ```sysml
-    // Deployment (allocation) view: SoftwareModule buildsInto DeploymentUnit;
-    // DeploymentUnit deploysTo ProcessingNode. Software deploys only to capable
+    // Deployment (allocation) view: SoftwareModule buildsInto SoftwareDeploymentUnit;
+    // SoftwareDeploymentUnit deploysTo ProcessingNode. Software deploys only to capable
     // execution nodes (rules/crosslayer).
     //
     // `HostedBy` is NOT part of that chain, and this comment used to claim it was
@@ -235,7 +235,7 @@ connection def FlowTraversesBinding :> MemoRelationship
         private import memo_architecture_logical_structure::*;
         private import memo_architecture_logical_interfaces::*;                   // ComponentExchange
 
-        part def DeploymentUnit specializes MemoPart {
+        part def SoftwareDeploymentUnit specializes MemoPart {
             attribute unitKind : String;
             attribute version : String;
             attribute integrityProtection : String;
@@ -251,7 +251,7 @@ connection def FlowTraversesBinding :> MemoRelationship
 
         connection def BuildsInto :> MemoRelationship {
             end module : SoftwareModule :>> source;
-            end deploymentUnit : DeploymentUnit :>> target;
+            end deploymentUnit : SoftwareDeploymentUnit :>> target;
         }
         abstract connection buildsIntoLinks : BuildsInto[*];
         metadata def <buildsInto> BuildsIntoMetadata :> SemanticMetadata {
@@ -261,7 +261,7 @@ connection def FlowTraversesBinding :> MemoRelationship
         }
         connection def DeploysTo :> MemoRelationship {
             attribute deploymentKind : DeploymentKind;
-            end deploymentUnit : DeploymentUnit :>> source;
+            end deploymentUnit : SoftwareDeploymentUnit :>> source;
             end node : ProcessingNode :>> target;
         }
         abstract connection deploysToLinks : DeploysTo[*];
@@ -383,7 +383,7 @@ connection def FlowTraversesBinding :> MemoRelationship
         // The flow traverses a software→hardware binding; latency accrues here.
         connection def FlowTraversesBinding :> MemoRelationship {
             end endToEndFlow : EndToEndFlow :>> source;
-            end deploymentUnit : DeploymentUnit :>> target;
+            end deploymentUnit : SoftwareDeploymentUnit :>> target;
         }
         abstract connection flowTraversesBindingLinks : FlowTraversesBinding[*];
         metadata def <flowTraversesBinding> FlowTraversesBindingMetadata :> SemanticMetadata {

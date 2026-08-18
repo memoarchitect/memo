@@ -137,7 +137,7 @@ clutter this page is trying to avoid:
 | Element group | Definitions |
 | --- | --- |
 | Physical execution | `ProcessingNode`, `MemoryDevice`, `PhysicalPort` |
-| Deployment | `DeploymentUnit`, `RuntimeEnvironment` |
+| Deployment | `SoftwareDeploymentUnit`, `RuntimeEnvironment` |
 | Realized flow | `FlowSpecification`, `EndToEndFlow` |
 
 `DesignDecision` records a decision that affects elements in these layers.
