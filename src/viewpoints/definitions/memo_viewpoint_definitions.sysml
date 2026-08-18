@@ -30,7 +30,6 @@ package memo_viewpoints_definitions {
         attribute lifecycleState : LifecycleStateKind;
         attribute realizationStage : RealizationStageKind[0..1];
         attribute crossCuttingConcerns : CrossCuttingConcernKind[0..*];
-        attribute concerns : ConcernKind[0..*];
         attribute applicableStandards : ExternalReference[0..*];
         attribute codes : TerminologyCode[0..*];
         attribute purpose : String;
