@@ -328,7 +328,7 @@ connection def BindsToInterface :> MemoRelationship
         // SystemFunction a part def with its behaviour stapled on through a
         // separate action def, and what makes `allocate <function> to <actor>` —
         // ARCADIA's own System Analysis mechanism — illegal, since Actor is a
-        // MemoPart but not an ArchitectureElement.
+        // MemoPart but not a narrower part subtype.
         //
         // Several of the relaxed ends were ALREADY being violated by real content
         // before they were relaxed: `composes` links parts to OperativeAction
@@ -409,7 +409,7 @@ connection def BindsToInterface :> MemoRelationship
 
         connection def ThreatenedBy :> MemoRelationship {
             attribute threatRole : String;
-            end protectedAsset : ArchitectureElement :>> source;
+            end protectedAsset : MemoPart :>> source;
             end realizedThreat : RequirementDriver :>> target;
         }
         abstract connection threatenedByLinks : ThreatenedBy[*];
@@ -467,8 +467,8 @@ connection def BindsToInterface :> MemoRelationship
         }
 
         connection def HostedBy :> MemoRelationship {
-            end processingNode : ArchitectureElement :>> source;
-            end hostAssembly : ArchitectureElement :>> target;
+            end processingNode : MemoPart :>> source;
+            end hostAssembly : MemoPart :>> target;
         }
         abstract connection hostedByLinks : HostedBy[*];
         metadata def <hostedBy> HostedByMetadata :> SemanticMetadata {
@@ -497,7 +497,7 @@ connection def BindsToInterface :> MemoRelationship
         }
 
         connection def AnalyzedBy :> MemoRelationship {
-            end element : ArchitectureElement :>> source;
+            end element : MemoPart :>> source;
             end analysisArtifact : AnalysisArtifact :>> target;
         }
         abstract connection analyzedByLinks : AnalyzedBy[*];

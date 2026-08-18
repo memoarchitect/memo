@@ -115,7 +115,7 @@ package memo_rules_ontology {
     // was typed MemoPart/MemoPart and links StateMachine (a state def) to
     // OperativeAction (an action def); `verifiedBy`'s source was typed MemoPart and
     // most of its sources are requirement defs; `precedes` was typed
-    // ArchitectureElement and joins OperativeAction to OperativeAction.
+    // a part-only type and joins OperativeAction to OperativeAction.
     // A rule that reproduced the old type exactly would have failed on the
     // flagship example on the day it landed. What each rule asserts is the
     // constraint the end MEANT, stated so it can be checked.
@@ -140,8 +140,8 @@ package memo_rules_ontology {
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "A requirement is satisfied by a designed thing: an architecture element, an actor, a behaviour, or a port. Never by another requirement or by a document.";
-        attribute predicateExpression = "targetsOf(satisfiedBy)->forAll(conformsTo(ArchitectureElement) or conformsTo(Actor) or construct == 'action' or construct == 'port')";
+        attribute rationaleText = "A requirement is satisfied by a designed part, a behaviour, or a port. Never by another requirement or by a document.";
+        attribute predicateExpression = "targetsOf(satisfiedBy)->forAll(conformsTo(MemoPart) or construct == 'action' or construct == 'port')";
         constraint { true }
     }
     constraint def VerifiedByTargetKindRule :> MemoConsistencyRule {
@@ -158,8 +158,8 @@ package memo_rules_ontology {
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Allocation runs from a function or a behaviour to where it runs. The source end of AllocatedTo is an architecture element or an action.";
-        attribute predicateExpression = "sourcesOf(allocatedTo)->forAll(conformsTo(ArchitectureElement) or construct == 'action')";
+        attribute rationaleText = "Allocation runs from a function or a behaviour to where it runs. The source end of AllocatedTo is a part or an action.";
+        attribute predicateExpression = "sourcesOf(allocatedTo)->forAll(conformsTo(MemoPart) or construct == 'action')";
         constraint { true }
     }
     constraint def AllocatedToTargetKindRule :> MemoConsistencyRule {
@@ -167,8 +167,8 @@ package memo_rules_ontology {
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "A function is allocated to an architecture element or to an actor — ARCADIA System Analysis allocates to the system OR to an actor, which the former ArchitectureElement-typed end made impossible.";
-        attribute predicateExpression = "targetsOf(allocatedTo)->forAll(conformsTo(ArchitectureElement) or conformsTo(Actor))";
+        attribute rationaleText = "A function is allocated to a part — including a system or actor — as ARCADIA System Analysis requires.";
+        attribute predicateExpression = "targetsOf(allocatedTo)->forAll(conformsTo(MemoPart))";
         constraint { true }
     }
     constraint def ComposesParentKindRule :> MemoConsistencyRule {
@@ -194,8 +194,8 @@ package memo_rules_ontology {
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Precedence orders things that happen: architecture elements or behaviours, at both ends.";
-        attribute predicateExpression = "sourcesOf(precedes)->forAll(conformsTo(ArchitectureElement) or construct == 'action') and targetsOf(precedes)->forAll(conformsTo(ArchitectureElement) or construct == 'action')";
+        attribute rationaleText = "Precedence orders things that happen: parts or behaviours, at both ends.";
+        attribute predicateExpression = "sourcesOf(precedes)->forAll(conformsTo(MemoPart) or construct == 'action') and targetsOf(precedes)->forAll(conformsTo(MemoPart) or construct == 'action')";
         constraint { true }
     }
     constraint def PerformsPerformerKindRule :> MemoConsistencyRule {
@@ -231,7 +231,7 @@ package memo_rules_ontology {
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "A boundary is a boundary element or a port; what crosses it is an asset or an exchange item.";
-        attribute predicateExpression = "sourcesOf(crossesTrustBoundary)->forAll(conformsTo(InterfaceElement) or construct == 'port') and targetsOf(crossesTrustBoundary)->forAll(conformsTo(ArchitectureElement) or construct == 'item')";
+        attribute predicateExpression = "sourcesOf(crossesTrustBoundary)->forAll(conformsTo(InterfaceElement) or construct == 'port') and targetsOf(crossesTrustBoundary)->forAll(conformsTo(MemoPart) or construct == 'item')";
         constraint { true }
     }
 
@@ -246,7 +246,7 @@ package memo_rules_ontology {
         attribute appliesTo = "ComponentExchange";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "An exchange starts at a component or at a boundary port. Stating it as a rule is what let the endpoint refs stop being MemoPart-typed, which is what lets PhysicalPort and SoftwarePort become port defs.";
-        attribute predicateExpression = "attributes.sourceEndpoint == '' or allOfKind('ArchitectureElement')->exists(id == subject.attributes.sourceEndpoint) or allOfKind('InterfaceElement')->exists(id == subject.attributes.sourceEndpoint) or allOfKind('MemoPort')->exists(id == subject.attributes.sourceEndpoint)";
+        attribute predicateExpression = "attributes.sourceEndpoint == '' or allOfKind('MemoPart')->exists(id == subject.attributes.sourceEndpoint) or allOfKind('InterfaceElement')->exists(id == subject.attributes.sourceEndpoint) or allOfKind('MemoPort')->exists(id == subject.attributes.sourceEndpoint)";
         constraint { true }
     }
     constraint def ComponentExchangeTargetEndpointKindRule :> MemoConsistencyRule {
@@ -255,7 +255,7 @@ package memo_rules_ontology {
         attribute appliesTo = "ComponentExchange";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "An exchange ends at a component or at a boundary port, on the same grounds as CR-ONT-072.";
-        attribute predicateExpression = "attributes.targetEndpoint == '' or allOfKind('ArchitectureElement')->exists(id == subject.attributes.targetEndpoint) or allOfKind('InterfaceElement')->exists(id == subject.attributes.targetEndpoint) or allOfKind('MemoPort')->exists(id == subject.attributes.targetEndpoint)";
+        attribute predicateExpression = "attributes.targetEndpoint == '' or allOfKind('MemoPart')->exists(id == subject.attributes.targetEndpoint) or allOfKind('InterfaceElement')->exists(id == subject.attributes.targetEndpoint) or allOfKind('MemoPort')->exists(id == subject.attributes.targetEndpoint)";
         constraint { true }
     }
 

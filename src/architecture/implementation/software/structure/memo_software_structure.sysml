@@ -28,7 +28,7 @@ package memo_architecture_implementation_software_structure {
     // the term "software item" for this concept, but reserving SoftwareItem
     // for the native SysML item family keeps structural parts and exchanged
     // values unambiguous in the model.
-    abstract part def SoftwareElement specializes ArchitectureElement {
+    abstract part def SoftwareElement specializes MemoPart {
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
     }
@@ -70,17 +70,17 @@ package memo_architecture_implementation_software_structure {
         attribute soupClassification : SOUPClassificationKind[0..1];
     }
 
-    part def Algorithm specializes ArchitectureElement {
+    part def Algorithm specializes MemoPart {
         attribute algorithmKind : String;
         attribute inputSummary : String;
         attribute outputSummary : String;
         attribute clinicalPerformanceClaim : String;
     }
-    part def DataModel specializes ArchitectureElement {
+    part def DataModel specializes MemoPart {
         attribute schemaReference : String;
         attribute persistenceScope : String;
     }
-    part def ConfigurationArtifact specializes ArchitectureElement {
+    part def ConfigurationArtifact specializes MemoPart {
         attribute configurationScope : String;
         attribute version : String;
     }
@@ -108,7 +108,7 @@ package memo_architecture_implementation_software_structure {
     // Moved out of memo_core_relationships: their ends are typed against
     // types declared here, and core must not depend on a domain package.
     connection def DependsOnSoup :> MemoRelationship {
-        end component : ArchitectureElement :>> source;
+        end component : MemoPart :>> source;
         end soupItem : SoftwareElement :>> target;
     }
     abstract connection dependsOnSoupLinks : DependsOnSoup[*];

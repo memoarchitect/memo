@@ -19,12 +19,12 @@ package memo_architecture_operational_structure {
         attribute clinicalBenefit : String;
         attribute regulatoryClassification : String;
     }
-    part def OperationalEntity specializes ArchitectureElement {
+    part def OperationalEntity specializes MemoPart {
         attribute entityKind : OperationalEntityKind;
         attribute operationalDomain : String;
         attribute responsibility : String;
     }
-    part def OperationalCapability specializes ArchitectureElement {
+    part def OperationalCapability specializes MemoPart {
         attribute capabilityLevel : String;
         attribute preCondition : String;
         attribute postCondition : String;
