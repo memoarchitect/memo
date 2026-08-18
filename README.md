@@ -23,7 +23,7 @@ pin an exact release; the package has no repository or runtime dependency on Mem
 Tools or Memo Architect.
 
 ```bash
-pnpm add @memoarchitect/ontology@0.8.23
+pnpm add @memoarchitect/ontology@0.8.24
 ```
 
 > **Pre-1.0 notice:** ontology names, relationships, and package layout may
