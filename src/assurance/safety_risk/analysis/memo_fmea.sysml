@@ -184,7 +184,7 @@ package memo_assurance_safety_risk_analysis {
         :>> baseType = identifiesHazardLinks meta SysML::Usage;
     }
     connection def HasFailureMode :> MemoRelationship {
-        end element : ArchitectureElement :>> source;
+        end element : MemoPart :>> source;
         end failureMode : FailureMode :>> target;
     }
     abstract connection hasFailureModeLinks : HasFailureMode[*];

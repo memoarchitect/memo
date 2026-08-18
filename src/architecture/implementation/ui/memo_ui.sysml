@@ -110,7 +110,7 @@ package memo_architecture_implementation_ui {
         enum recovery;
     }
 
-    part def UserInterface specializes ArchitectureElement {
+    part def UserInterface specializes MemoPart {
         attribute modality : String;
         attribute uiTechnology : String;
     }
@@ -121,7 +121,7 @@ package memo_architecture_implementation_ui {
     // "something the user interacts with" rather than against software
     // specifically. Without it a use error on a knob would be unmodellable,
     // because ErrorAtElement would only accept a UIElement.
-    abstract part def InteractionElement specializes ArchitectureElement {
+    abstract part def InteractionElement specializes MemoPart {
         attribute labelText : String;
         attribute accessibilitySummary : String;
         // alarm annunciation (optional; IEC 60601-1-8)
@@ -235,7 +235,7 @@ package memo_architecture_implementation_ui {
     }
 
     // ─── Captured evidence ───────────────────────────────────────
-    // One image of one screen. MemoEvidence, not ArchitectureElement: it
+    // One image of one screen. MemoEvidence, not a design element: it
     // records what a specific build actually displayed at a specific time,
     // which is the provenance a design review or a usability engineering file
     // needs before it can rely on the picture. The screen it depicts is an
@@ -258,11 +258,11 @@ package memo_architecture_implementation_ui {
     }
 
     // UI state is presentation state — distinct from system/device state.
-    part def UIState specializes ArchitectureElement {
+    part def UIState specializes MemoPart {
         attribute displayedInformation : String;
         attribute availableActions : String;
     }
-    part def UIEvent specializes ArchitectureElement {
+    part def UIEvent specializes MemoPart {
         attribute eventSource : String;
         attribute intent : InteractionIntentKind;
     }
@@ -371,7 +371,7 @@ package memo_architecture_implementation_ui {
     // (confirmation dialog, lockout, guarded control).
     connection def ControlImplementedBy :> MemoRelationship {
         end riskControl : RiskControlMeasure :>> source;
-        end implementingElement : ArchitectureElement :>> target;
+        end implementingElement :>> target;
     }
     abstract connection controlImplementedByLinks : ControlImplementedBy[*];
     metadata def <controlImplementedBy> ControlImplementedByMetadata :> SemanticMetadata {

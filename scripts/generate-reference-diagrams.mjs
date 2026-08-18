@@ -260,7 +260,7 @@ const write = (name, spec) => writeFileSync(join(output, `${name}.svg`), diagram
     y += 80;
   };
   addRow('MemoPart', 'Governs', 'MemoPart', { sourcePackage: 'memo::core::common', targetPackage: 'memo::core::common' });
-  addRow('ArchitectureElement', 'InteractsInContext', 'ArchitectureElement', { sourcePackage: 'memo::core::common', targetPackage: 'memo::core::common' });
+  addRow('MemoPart', 'InteractsInContext', 'any element', { sourcePackage: 'memo::core::common', untypedTarget: true });
   addRow('OperationalParticipant', 'InteractsWith', 'any element', { untypedTarget: true });
   addRow('UseContext', 'AppliesInContext', 'MemoPart', { targetPackage: 'memo::core::common' });
   addRow('UseContext', 'SituatedIn', 'UseEnvironment');
@@ -371,7 +371,7 @@ write('core-elements', {
   body: `
     ${group(40, 120, 1520, 280, 'Common foundations', '#0a9b83')}
     ${node(75, 215, 190, 68, 'MemoPart', '#0a9b83')}${node(330, 215, 190, 68, 'MemoAction', '#0a9b83')}${node(585, 215, 220, 68, 'MemoRequirement', '#0a9b83')}${node(870, 215, 190, 68, 'MemoEvidence', '#0a9b83')}${node(1125, 215, 200, 68, 'MemoInterface', '#0a9b83')}${node(1385, 215, 140, 68, 'MemoPort', '#0a9b83')}
-    ${node(75, 315, 220, 60, 'ArchitectureElement', '#0a9b83')}${node(360, 315, 220, 60, 'VerifiableElement', '#0a9b83')}${node(645, 315, 220, 60, 'DocumentedElement', '#0a9b83')}${node(930, 315, 220, 60, 'MemoExchangeItem', '#0a9b83')}${node(1215, 315, 220, 60, 'MemoVerificationCase', '#0a9b83')}
+    ${node(75, 315, 220, 60, 'VerifiableElement', '#0a9b83')}${node(360, 315, 220, 60, 'DocumentedElement', '#0a9b83')}${node(645, 315, 220, 60, 'MemoExchangeItem', '#0a9b83')}${node(930, 315, 220, 60, 'MemoVerificationCase', '#0a9b83')}
 
     ${group(40, 450, 730, 320, 'Meaning and classification', '#0a9b83')}
     ${node(80, 550, 190, 64, 'Dimensions', '#0a9b83')}${node(320, 550, 190, 64, 'Enumerations', '#0a9b83')}${node(560, 550, 170, 64, 'Semantics', '#0a9b83')}

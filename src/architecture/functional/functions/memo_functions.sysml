@@ -8,8 +8,8 @@
 // ─── A function is a behaviour ───────────────────────────────────────────
 //
 // `MemoFunction` and both its specializations are `action def`s. They were
-// `part def SystemFunction specializes ArchitectureElement` until Track A0
-// removed the reason: relation ends were typed on MemoPart/ArchitectureElement,
+// `part def SystemFunction specializes MemoPart` until Track A0
+// removed the reason: relation ends were typed on part-based types,
 // KerML forbids a behaviour from specializing a part-based type, and a function
 // has to be satisfiable, verifiable, and allocatable. So a function was declared
 // a part, and a separate `action def OperativeAction` carried the behaviour with a
@@ -97,7 +97,7 @@ package memo_architecture_functional_functions {
     // So this part def is a workaround for a MEMO gap, not a design MEMO is
     // entitled to. Restoring the two dropped clauses is what would let it
     // collapse into the flow it stands in for.
-    part def FunctionalExchange specializes ArchitectureElement {
+    part def FunctionalExchange specializes MemoPart {
         attribute flowKind : FlowKind;
         attribute latencyBudgetMs : Real;
         attribute staleAfterMs : Real;
@@ -112,7 +112,7 @@ package memo_architecture_functional_functions {
 
     // A reusable functional route through system responsibilities. Functional
     // flows are part of functional architecture, never logical structure.
-    part def FunctionalFlow specializes ArchitectureElement {
+    part def FunctionalFlow specializes MemoPart {
         attribute flowCategory : FunctionalFlowKind;
         attribute endToEndLatencyBudgetMs : String;
         attribute safetyRelevant : Boolean;

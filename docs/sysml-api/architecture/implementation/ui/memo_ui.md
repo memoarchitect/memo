@@ -46,14 +46,14 @@
 | [`UIDisclosureKind`](#uidisclosurekind) | `enum def` | How an element appears relative to its parent and siblings. It records design intent a bare rectangle cannot: an element whose box escapes its parent and covers its siblings is a defect if it is `inline` and correct if it is `overlay`, and the geometry alone does not say which… | — |
 | [`BoundsDetectionKind`](#boundsdetectionkind) | `enum def` | How the element's bounds were obtained. Automatic boundary detection PROPOSES; a reviewer DISPOSES. In a regulated review the reader must be able to see which boxes a human confirmed and which the tool guessed, so that provenance is model content and not a workbench-only flag. | — |
 | [`InteractionIntentKind`](#interactionintentkind) | `enum def` | The interaction intents a step or action can carry (§18). | — |
-| [`UserInterface`](#userinterface) | `part def` | User interface definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`InteractionElement`](#interactionelement) | `part def` | Interaction element definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`UserInterface`](#userinterface) | `part def` | User interface definition specializing `MemoPart`. | `MemoPart` |
+| [`InteractionElement`](#interactionelement) | `part def` | Interaction element definition specializing `MemoPart`. | `MemoPart` |
 | [`UIElement`](#uielement) | `part def` | Uielement definition specializing `SoftwareElement,`. | `SoftwareElement,` |
 | [`OperatorInterfaceFormKind`](#operatorinterfaceformkind) | `enum def` | Controlled values for operator interface form: `knob`, `dial`, `pushButton`, `toggleSwitch`, `rockerSwitch`, `lever`, `physicalSlider`, `keypad`, `footPedal`, `touchSurface`, `indicatorLamp`, `gauge`, `audibleIndicator`, `hapticIndicator`, `printedMarking`. | — |
 | [`OperatorInterfaceElement`](#operatorinterfaceelement) | `part def` | Operator interface element definition specializing `PhysicalComponent,`. | `PhysicalComponent,` |
 | [`ScreenCapture`](#screencapture) | `part def` | Screen capture definition specializing `MemoEvidence`. | `MemoEvidence` |
-| [`UIState`](#uistate) | `part def` | UI state is presentation state — distinct from system/device state. | `ArchitectureElement` |
-| [`UIEvent`](#uievent) | `part def` | Uievent definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`UIState`](#uistate) | `part def` | UI state is presentation state — distinct from system/device state. | `MemoPart` |
+| [`UIEvent`](#uievent) | `part def` | Uievent definition specializing `MemoPart`. | `MemoPart` |
 | [`UIAction`](#uiaction) | `action def` | Uiaction definition specializing `MemoAction`. | `MemoAction` |
 | [`InteractionFlow`](#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a OperativeScenario with scenarioKind `ui`. | `MemoAction` |
 | [`DataBinding`](#databinding) | `connection def` | Typed relationship for data binding. | `MemoRelationship` |
@@ -142,30 +142,30 @@ enum def InteractionIntentKind
 ## UserInterface
 
 ```sysml
-part def UserInterface specializes ArchitectureElement
+part def UserInterface specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | User interface definition specializing `ArchitectureElement`. |
+| Description | User interface definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
 ## InteractionElement
 
 ```sysml
-abstract part def InteractionElement specializes ArchitectureElement
+abstract part def InteractionElement specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Interaction element definition specializing `ArchitectureElement`. |
+| Description | Interaction element definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | Yes |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
@@ -232,7 +232,7 @@ part def ScreenCapture specializes MemoEvidence
 ## UIState
 
 ```sysml
-part def UIState specializes ArchitectureElement
+part def UIState specializes MemoPart
 ```
 
 | Property | Value |
@@ -240,22 +240,22 @@ part def UIState specializes ArchitectureElement
 | Description | UI state is presentation state — distinct from system/device state. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
 ## UIEvent
 
 ```sysml
-part def UIEvent specializes ArchitectureElement
+part def UIEvent specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Uievent definition specializing `ArchitectureElement`. |
+| Description | Uievent definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
@@ -511,7 +511,7 @@ connection def ControlImplementedBy :> MemoRelationship
             enum recovery;
         }
 
-        part def UserInterface specializes ArchitectureElement {
+        part def UserInterface specializes MemoPart {
             attribute modality : String;
             attribute uiTechnology : String;
         }
@@ -522,7 +522,7 @@ connection def ControlImplementedBy :> MemoRelationship
         // "something the user interacts with" rather than against software
         // specifically. Without it a use error on a knob would be unmodellable,
         // because ErrorAtElement would only accept a UIElement.
-        abstract part def InteractionElement specializes ArchitectureElement {
+        abstract part def InteractionElement specializes MemoPart {
             attribute labelText : String;
             attribute accessibilitySummary : String;
             // alarm annunciation (optional; IEC 60601-1-8)
@@ -636,7 +636,7 @@ connection def ControlImplementedBy :> MemoRelationship
         }
 
         // ─── Captured evidence ───────────────────────────────────────
-        // One image of one screen. MemoEvidence, not ArchitectureElement: it
+        // One image of one screen. MemoEvidence, not a design element: it
         // records what a specific build actually displayed at a specific time,
         // which is the provenance a design review or a usability engineering file
         // needs before it can rely on the picture. The screen it depicts is an
@@ -659,11 +659,11 @@ connection def ControlImplementedBy :> MemoRelationship
         }
 
         // UI state is presentation state — distinct from system/device state.
-        part def UIState specializes ArchitectureElement {
+        part def UIState specializes MemoPart {
             attribute displayedInformation : String;
             attribute availableActions : String;
         }
-        part def UIEvent specializes ArchitectureElement {
+        part def UIEvent specializes MemoPart {
             attribute eventSource : String;
             attribute intent : InteractionIntentKind;
         }
@@ -772,7 +772,7 @@ connection def ControlImplementedBy :> MemoRelationship
         // (confirmation dialog, lockout, guarded control).
         connection def ControlImplementedBy :> MemoRelationship {
             end riskControl : RiskControlMeasure :>> source;
-            end implementingElement : ArchitectureElement :>> target;
+            end implementingElement :>> target;
         }
         abstract connection controlImplementedByLinks : ControlImplementedBy[*];
         metadata def <controlImplementedBy> ControlImplementedByMetadata :> SemanticMetadata {

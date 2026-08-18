@@ -10,7 +10,7 @@ package memo_assurance_cybersecurity {
     private import memo_assurance_verification_validation::*;
     private import memo_architecture_operational_scenarios::*;
 
-    part def CybersecurityAsset specializes ArchitectureElement {
+    part def CybersecurityAsset specializes MemoPart {
         attribute assetKind : AssetKind;
         attribute confidentialityNeed : String;
         attribute integrityNeed : String;

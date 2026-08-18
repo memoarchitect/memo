@@ -32,12 +32,12 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`FunctionalAction`](#functionalaction) | `action def` | Functional action definition specializing `MemoAction`. | `MemoAction` |
-| [`StateMachine`](#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based ArchitectureElement. Transitions stay part-based (below) to keep their traceable safety attributes.… | `MemoState` |
-| [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… | `ArchitectureElement` |
+| [`StateMachine`](#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based MemoPart family. Transitions stay part-based (below) to keep their traceable safety attributes.… | `MemoState` |
+| [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… | `MemoPart` |
 | [`TransitionRecord`](#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… | — |
 | [`BehaviorProperty`](#behaviorproperty) | `part def` | A verifiable behavioural constraint, such as an invariant, transition rule, temporal claim, assumption, or guarantee. | `VerifiableElement` |
 | [`Contract`](#contract) | `part def` | Contract definition specializing `VerifiableElement`. | `VerifiableElement` |
-| [`ActivityAction`](#activityaction) | `part def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `ArchitectureElement` |
+| [`ActivityAction`](#activityaction) | `part def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `MemoPart` |
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
 | [`TimingConstraint`](#timingconstraint) | `part def` | UI scenarios are OperativeScenario usages with scenarioKind `ui`. | `VerifiableElement` |
 
@@ -64,7 +64,7 @@ state def StateMachine :> MemoState
 
 | Property | Value |
 | --- | --- |
-| Description | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based ArchitectureElement. Transitions stay part-based (below) to keep their traceable safety attributes.… |
+| Description | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based MemoPart family. Transitions stay part-based (below) to keep their traceable safety attributes.… |
 | Kind | `state def` |
 | Abstract | No |
 | Specializes | `MemoState` |
@@ -74,7 +74,7 @@ state def StateMachine :> MemoState
 ## ModeConfiguration
 
 ```sysml
-part def ModeConfiguration specializes ArchitectureElement
+part def ModeConfiguration specializes MemoPart
 ```
 
 | Property | Value |
@@ -82,7 +82,7 @@ part def ModeConfiguration specializes ArchitectureElement
 | Description | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_functional_behavior` |
 
 
@@ -134,7 +134,7 @@ part def Contract specializes VerifiableElement
 ## ActivityAction
 
 ```sysml
-part def ActivityAction specializes ArchitectureElement
+part def ActivityAction specializes MemoPart
 ```
 
 | Property | Value |
@@ -142,7 +142,7 @@ part def ActivityAction specializes ArchitectureElement
 | Description | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_functional_behavior` |
 
 
@@ -193,7 +193,7 @@ part def TimingConstraint specializes VerifiableElement
         abstract action def FunctionalAction specializes MemoAction;
         // State machines and their mode states are SysML v2 states (behaviours), so
         // they derive from the MemoState foundation, not the part-based
-        // ArchitectureElement. Transitions stay part-based (below) to keep their
+        // MemoPart family. Transitions stay part-based (below) to keep their
         // traceable safety attributes.
         // State machines retain their own execution semantics; individual modes
         // are MemoState usages selected by stateKind.
@@ -206,7 +206,7 @@ part def TimingConstraint specializes VerifiableElement
         // elements are active in one selectable arrangement.
         // The reference is typed to the shared native state family so a consumer
         // can navigate from the selected configuration to its governing mode.
-        part def ModeConfiguration specializes ArchitectureElement {
+        part def ModeConfiguration specializes MemoPart {
             ref activeMode : MemoState[1];
             ref activeElement : MemoPart[0..*];
         }
@@ -253,7 +253,7 @@ part def TimingConstraint specializes VerifiableElement
         // annotate a BASE element rather than declare its own type, the SysML-
         // native answer is `metadata def` + `Metaobjects::SemanticMetadata`, which
         // is what every MEMO relation already carries since A4.
-        part def ActivityAction specializes ArchitectureElement {
+        part def ActivityAction specializes MemoPart {
             attribute actionKind : ActionKind;
             attribute inputSummary : String;
             attribute outputSummary : String;

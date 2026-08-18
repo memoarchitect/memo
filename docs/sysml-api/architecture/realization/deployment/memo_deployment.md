@@ -41,44 +41,44 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`DeploymentUnit`](#deploymentunit) | `part def` | Deployment unit definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`RuntimeEnvironment`](#runtimeenvironment) | `part def` | Runtime environment definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`DeploymentUnit`](#deploymentunit) | `part def` | Deployment unit definition specializing `MemoPart`. | `MemoPart` |
+| [`RuntimeEnvironment`](#runtimeenvironment) | `part def` | Runtime environment definition specializing `MemoPart`. | `MemoPart` |
 | [`BuildsInto`](#buildsinto) | `connection def` | Typed relationship for builds into. | `MemoRelationship` |
 | [`DeploysTo`](#deploysto) | `connection def` | Typed relationship for deploys to. | `MemoRelationship` |
 | [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship for provides environment. | `MemoRelationship` |
 | [`FlowSpecKind`](#flowspeckind) | `enum def` | AADL separates a flow *specification* (declared at a component boundary as source / sink / path through ports) from a flow *implementation* (its routing through subcomponents and connectors), and traces a complete source→sink flow as an *end-to-end flow* across the assembly.… | — |
-| [`FlowSpecification`](#flowspecification) | `part def` | A flow declared at a logical component boundary (in-port → out-port). | `ArchitectureElement` |
-| [`EndToEndFlow`](#endtoendflow) | `part def` | A complete source→sink flow traced across the layers and the software→ hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose` (latency \| fault-propagation \| security) drive the AADL-style analysis. | `ArchitectureElement` |
+| [`FlowSpecification`](#flowspecification) | `part def` | A flow declared at a logical component boundary (in-port → out-port). | `MemoPart` |
+| [`EndToEndFlow`](#endtoendflow) | `part def` | A complete source→sink flow traced across the layers and the software→ hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose` (latency \| fault-propagation \| security) drive the AADL-style analysis. | `MemoPart` |
 | [`FlowComprisesSpec`](#flowcomprisesspec) | `connection def` | The end-to-end flow is realized by an ordered flow specification, one segment per traversed component boundary (AADL flow-spec → end-to-end). | `MemoRelationship` |
 | [`FlowTraversesBinding`](#flowtraversesbinding) | `connection def` | The flow traverses a software→hardware binding; latency accrues here. | `MemoRelationship` |
 
 ## DeploymentUnit
 
 ```sysml
-part def DeploymentUnit specializes ArchitectureElement
+part def DeploymentUnit specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Deployment unit definition specializing `ArchitectureElement`. |
+| Description | Deployment unit definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_realization_deployment` |
 
 
 ## RuntimeEnvironment
 
 ```sysml
-part def RuntimeEnvironment specializes ArchitectureElement
+part def RuntimeEnvironment specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Runtime environment definition specializing `ArchitectureElement`. |
+| Description | Runtime environment definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_realization_deployment` |
 
 
@@ -145,7 +145,7 @@ enum def FlowSpecKind
 ## FlowSpecification
 
 ```sysml
-part def FlowSpecification specializes ArchitectureElement
+part def FlowSpecification specializes MemoPart
 ```
 
 | Property | Value |
@@ -153,14 +153,14 @@ part def FlowSpecification specializes ArchitectureElement
 | Description | A flow declared at a logical component boundary (in-port → out-port). |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_realization_deployment` |
 
 
 ## EndToEndFlow
 
 ```sysml
-part def EndToEndFlow specializes ArchitectureElement
+part def EndToEndFlow specializes MemoPart
 ```
 
 | Property | Value |
@@ -168,7 +168,7 @@ part def EndToEndFlow specializes ArchitectureElement
 | Description | A complete source→sink flow traced across the layers and the software→ hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose` (latency \| fault-propagation \| security) drive the AADL-style analysis. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_realization_deployment` |
 
 
@@ -213,7 +213,7 @@ connection def FlowTraversesBinding :> MemoRelationship
     //
     // `HostedBy` is NOT part of that chain, and this comment used to claim it was
     // ("SoftwareComponent hostedBy ProcessingNode"). It is
-    // `processingNode : ArchitectureElement -> hostAssembly : ArchitectureElement`:
+    // `processingNode : ProcessingNode -> hostAssembly : PhysicalAssembly`:
     // physical hosting of a node by the assembly it is mounted in, running the
     // other way and between different things. Software reaches a node through
     // DeploysTo.
@@ -235,14 +235,14 @@ connection def FlowTraversesBinding :> MemoRelationship
         private import memo_architecture_logical_structure::*;
         private import memo_architecture_logical_interfaces::*;                   // ComponentExchange
 
-        part def DeploymentUnit specializes ArchitectureElement {
+        part def DeploymentUnit specializes MemoPart {
             attribute unitKind : String;
             attribute version : String;
             attribute integrityProtection : String;
             attribute installationMechanism : String;
         }
 
-        part def RuntimeEnvironment specializes ArchitectureElement {
+        part def RuntimeEnvironment specializes MemoPart {
             attribute environmentKind : String;
             attribute osOrRtos : String;
             attribute providedServices : String;
@@ -349,7 +349,7 @@ connection def FlowTraversesBinding :> MemoRelationship
             enum path;
         }
         // A flow declared at a logical component boundary (in-port → out-port).
-        part def FlowSpecification specializes ArchitectureElement {
+        part def FlowSpecification specializes MemoPart {
             attribute flowKind : FlowSpecKind;
             ref inPort : LogicalPort[0..1];
             ref outPort : LogicalPort[0..1];
@@ -357,7 +357,7 @@ connection def FlowTraversesBinding :> MemoRelationship
         // A complete source→sink flow traced across the layers and the software→
         // hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose`
         // (latency | fault-propagation | security) drive the AADL-style analysis.
-        part def EndToEndFlow specializes ArchitectureElement {
+        part def EndToEndFlow specializes MemoPart {
             attribute latencyBudgetMs : Real;
             attribute analysisPurpose : String;
             ref sourceFunction : MemoFunction[0..1];

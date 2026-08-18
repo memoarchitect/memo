@@ -40,15 +40,15 @@
 | [`SystemOfSystems`](#systemofsystems) | `part def` | Three types rather than three role values, because they differ in what they may CONTAIN — and containment legality cannot live on an attribute. The allowed children are declared as typed part features, which is how SysML v2 already states "what may be contained".… | `LogicalComponent` |
 | [`System`](#system) | `part def` | System definition specializing `LogicalComponent`. | `LogicalComponent` |
 | [`Subsystem`](#subsystem) | `part def` | Subsystem definition specializing `LogicalComponent`. | `LogicalComponent` |
-| [`LogicalComponent`](#logicalcomponent) | `part def` | Logical component definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`LogicalComponent`](#logicalcomponent) | `part def` | Logical component definition specializing `MemoPart`. | `MemoPart` |
 | [`LogicalPort`](#logicalport) | `port def` | Boundary features and contracts. | `MemoPort` |
 | [`LogicalInterface`](#logicalinterface) | `interface def` | Logical interface definition specializing `MemoInterface`. | `MemoInterface` |
 | [`LogicalExchangeItem`](#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoItem`. | `MemoItem` |
 | [`LogicalConnector`](#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | `MemoRelationship` |
-| [`LogicalExchange`](#logicalexchange) | `part def` | A transfer of a typed item across a connector. | `ArchitectureElement` |
-| [`LogicalBehavior`](#logicalbehavior) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `ArchitectureElement` |
-| [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). | `ArchitectureElement` |
-| [`FaultContainmentRegion`](#faultcontainmentregion) | `part def` | Fault containment region definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`LogicalExchange`](#logicalexchange) | `part def` | A transfer of a typed item across a connector. | `MemoPart` |
+| [`LogicalBehavior`](#logicalbehavior) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `MemoPart` |
+| [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). | `MemoPart` |
+| [`FaultContainmentRegion`](#faultcontainmentregion) | `part def` | Fault containment region definition specializing `MemoPart`. | `MemoPart` |
 | [`IndependentOf`](#independentof) | `connection def` | Claimed independence between channels (common-cause defense). | `MemoRelationship` |
 
 ## FlowContentKind
@@ -159,15 +159,15 @@ part def Subsystem specializes LogicalComponent
 ## LogicalComponent
 
 ```sysml
-part def LogicalComponent specializes ArchitectureElement
+part def LogicalComponent specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Logical component definition specializing `ArchitectureElement`. |
+| Description | Logical component definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_logical_structure` |
 
 
@@ -234,7 +234,7 @@ connection def LogicalConnector :> MemoRelationship
 ## LogicalExchange
 
 ```sysml
-part def LogicalExchange specializes ArchitectureElement
+part def LogicalExchange specializes MemoPart
 ```
 
 | Property | Value |
@@ -242,14 +242,14 @@ part def LogicalExchange specializes ArchitectureElement
 | Description | A transfer of a typed item across a connector. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_logical_structure` |
 
 
 ## LogicalBehavior
 
 ```sysml
-part def LogicalBehavior specializes ArchitectureElement
+part def LogicalBehavior specializes MemoPart
 ```
 
 | Property | Value |
@@ -257,14 +257,14 @@ part def LogicalBehavior specializes ArchitectureElement
 | Description | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_logical_structure` |
 
 
 ## IsolationBoundary
 
 ```sysml
-part def IsolationBoundary specializes ArchitectureElement
+part def IsolationBoundary specializes MemoPart
 ```
 
 | Property | Value |
@@ -272,22 +272,22 @@ part def IsolationBoundary specializes ArchitectureElement
 | Description | Isolation, fault containment, and trust boundaries (§10). |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_logical_structure` |
 
 
 ## FaultContainmentRegion
 
 ```sysml
-part def FaultContainmentRegion specializes ArchitectureElement
+part def FaultContainmentRegion specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Fault containment region definition specializing `ArchitectureElement`. |
+| Description | Fault containment region definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_logical_structure` |
 
 
@@ -429,7 +429,7 @@ connection def IndependentOf :> MemoRelationship
         // optional so a component carries only the ones its role needs. A channel
         // claiming independence must still be linked by IndependentOf with its
         // basis stated.
-        part def LogicalComponent specializes ArchitectureElement {
+        part def LogicalComponent specializes MemoPart {
             attribute componentRole : ComponentRoleKind;
             attribute systemType : SystemTypeKind[0..1];
             attribute responsibility : String;
@@ -476,7 +476,7 @@ connection def IndependentOf :> MemoRelationship
             :>> baseType = logicalConnectorLinks meta SysML::Usage;
         }
         // A transfer of a typed item across a connector.
-        part def LogicalExchange specializes ArchitectureElement {
+        part def LogicalExchange specializes MemoPart {
             attribute contentKind : FlowContentKind;
             attribute direction : DirectionKind;
             attribute latencyRequirement : String;
@@ -488,17 +488,17 @@ connection def IndependentOf :> MemoRelationship
         // States and modes of the logical solution (kept distinct from UI state
         // and from physical device configuration).
 
-        part def LogicalBehavior specializes ArchitectureElement {
+        part def LogicalBehavior specializes MemoPart {
             attribute behaviorSummary : String;
             attribute executionSemantics : String;
         }
 
         // Isolation, fault containment, and trust boundaries (§10).
-        part def IsolationBoundary specializes ArchitectureElement {
+        part def IsolationBoundary specializes MemoPart {
             attribute boundaryKind : String;
             attribute isolationMechanism : String;
         }
-        part def FaultContainmentRegion specializes ArchitectureElement {
+        part def FaultContainmentRegion specializes MemoPart {
             attribute containmentRationale : String;
         }
 
