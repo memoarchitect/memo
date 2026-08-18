@@ -1,0 +1,3 @@
+name: embedded-infusion-pump
+entrypoint: model/catalog/project.sysml
+include: [model]

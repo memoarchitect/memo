@@ -1,0 +1,3 @@
+name: surgical-robot
+entrypoint: model/catalog/project.sysml
+include: [model]
