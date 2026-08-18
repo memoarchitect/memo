@@ -29,11 +29,6 @@ package memo_architecture_operational_structure {
         attribute preCondition : String;
         attribute postCondition : String;
     }
-    part def OperationalInteraction specializes ArchitectureElement {
-        attribute exchangeKind : FlowKind;
-        attribute direction : DirectionKind;
-        attribute latencyConstraint : String;
-    }
 
     // The intended use requires these operational capabilities (ARCADIA:
     // Mission Requires Capability).

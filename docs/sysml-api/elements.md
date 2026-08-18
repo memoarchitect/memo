@@ -212,7 +212,6 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`IntendedUse`](architecture/operational/structure/memo_operational.md#intendeduse) | `part def` | IEC 62366-1 / ISO 14971 intended use: the medical device's declared purpose and the root of the operational spine. A MemoMission, because "mission" has no medical-device meaning — intended use is what a device exists to do.… | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
 | [`OperationalCapability`](architecture/operational/structure/memo_operational.md#operationalcapability) | `part def` | Operational capability definition specializing `ArchitectureElement`. | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
 | [`OperationalEntity`](architecture/operational/structure/memo_operational.md#operationalentity) | `part def` | Operational entity definition specializing `ArchitectureElement`. | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
-| [`OperationalInteraction`](architecture/operational/structure/memo_operational.md#operationalinteraction) | `part def` | Operational interaction definition specializing `ArchitectureElement`. | [`architecture/operational/structure/memo_operational.sysml`](architecture/operational/structure/memo_operational.md) |
 
 
 ## `memo::architecture::operational::use_cases`
