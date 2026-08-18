@@ -8,6 +8,8 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
     private import memo_viewpoints_physical_physical_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part rootA : HardwareAssembly {
         attribute :>> name = "Root A";
         part branchA1 : HardwareAssembly {
@@ -34,7 +36,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
     view sampleTreeView : MemoDiagramView {
         expose rootA::**;
         attribute depth = 2;
-        attribute :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development.";
+        @MemoIdentity { :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
         ref :>> viewpointDefinition = physicalViewpoint;

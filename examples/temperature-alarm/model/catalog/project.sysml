@@ -14,8 +14,10 @@ package memo_examples_temperature_alarm_project {
     private import memo_examples_temperature_alarm_viewpoints_unassigned::*;
     private import memo_examples_temperature_alarm_viewpoints_unassigned_views_temperature_alarm_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-TEMPERATURE-ALARM-001";
+        @MemoIdentity { :>> providedId = "PMB-TEMPERATURE-ALARM-001"; }
         attribute :>> name = "TemperatureAlarmProjectMethodBinding";
         attribute :>> projectName = "Temperature Alarm";
         ref :>> selectedMethodology = mdDefaultDefinition;

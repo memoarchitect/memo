@@ -4,10 +4,12 @@ package memo_viewpoints_operational_operational_viewpoint {
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     viewpoint operationalViewpoint : MemoViewpoint {
-        attribute :>> id = "VP-OPS";
+        @MemoIdentity { :>> providedId = "VP-OPS"; }
         attribute :>> name = "OperationalViewpoint";
-        attribute :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities.";
+        @MemoIdentity { :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities."; }
         attribute :>> description = "Default viewpoint derived from the context, operational, and system layers for how actors use the device — operational scenarios, capabilities, and the functional chains that realize them.";
         attribute :>> purpose = "Communicate how actors interact with the system and which capabilities they invoke.";
         attribute :>> audience = (AudienceKind::projectLead, AudienceKind::systemArchitect);

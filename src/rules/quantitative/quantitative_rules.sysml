@@ -6,8 +6,10 @@ package memo_rules_quantitative {
     private import memo_core_consistency_rules::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     constraint def HazardMaxControlsRule :> MemoConsistencyRule {
-        attribute :>> id = "QT-001";
+        @MemoIdentity { :>> providedId = "QT-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::info;
@@ -17,7 +19,7 @@ package memo_rules_quantitative {
     }
 
     constraint def SwComponentMaxInterfacesRule :> MemoConsistencyRule {
-        attribute :>> id = "QT-002";
+        @MemoIdentity { :>> providedId = "QT-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::info;

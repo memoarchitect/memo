@@ -15,8 +15,10 @@ package monitoring_device_catalog {
     private import monitoring_device_assurance::*;
     private import monitoring_device_artifacts::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectMethodBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-001";
+        @MemoIdentity { :>> providedId = "PMB-001"; }
         attribute :>> name = "{{name}}ProjectMethodBinding";
         attribute :>> projectName = "{{name}}";
         ref :>> selectedMethodology = mdDefaultDefinition;

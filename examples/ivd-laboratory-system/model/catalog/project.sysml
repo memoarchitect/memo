@@ -14,8 +14,10 @@ package memo_examples_ivd_laboratory_system_project {
     private import memo_examples_ivd_laboratory_system_viewpoints_unassigned::*;
     private import memo_examples_ivd_laboratory_system_viewpoints_unassigned_views_ivd_laboratory_system_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-LABORATORY-SYSTEM-001";
+        @MemoIdentity { :>> providedId = "PMB-LABORATORY-SYSTEM-001"; }
         attribute :>> name = "IvdLaboratorySystemProjectMethodBinding";
         attribute :>> projectName = "Ivd Laboratory System";
         ref :>> selectedMethodology = mdDefaultDefinition;

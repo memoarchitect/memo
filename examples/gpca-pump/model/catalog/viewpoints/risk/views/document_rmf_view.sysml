@@ -6,12 +6,14 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_verification::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view rmfView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view::*;
         expose evidenceLockout;
-        attribute :>> id = "DOC-001";
+        @MemoIdentity { :>> providedId = "DOC-001"; }
         attribute :>> name = "RiskManagementFileView";
-        attribute :>> shortDescription = "Document-backed risk view for GPCA.";
+        @MemoIdentity { :>> shortDescription = "Document-backed risk view for GPCA."; }
         attribute :>> description = "Aggregates the risk chain, controls, verification, residual risk, and cybersecurity links needed for the GPCA risk management file.";
         attribute :>> version = "0.2";
         attribute :>> lifecycleState = LifecycleStateKind::development;
@@ -20,7 +22,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = riskViewpoint;
         part :>> selectionQuery {
-            attribute :>> id = "QRY-DOC-001";
+            @MemoIdentity { :>> providedId = "QRY-DOC-001"; }
             attribute :>> name = "rmfViewQuery";
             attribute :>> includeElementKinds = ("IntendedUse", "ReasonablyForeseeableMisuse", "SafetyRelatedCharacteristic", "Hazard", "HazardCause", "SequenceOfEvents", "HazardousSituation", "Harm", "Risk", "RiskControlMeasure", "ResidualRisk", "Benefit", "OverallResidualRiskEvaluation", "VerificationCase", "MemoEvidence");
             attribute :>> includeRelationshipKinds = ("Causes", "Mitigates", "Mitigates", "TracesRisk", "AssessedAgainst", "VerifiedBy", "ProducesEvidence");

@@ -8,8 +8,10 @@ package memo_artifacts_standards_iec_81001_5_1 {
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     item iec81001_5_1 : RegulatoryStandard {
-        attribute :>> id = "STD-IEC-81001-5-1";
+        @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1"; }
         attribute :>> name = "IEC81001_5_1";
         attribute :>> designation = "IEC 81001-5-1:2021";
         attribute :>> edition = "2021";
@@ -18,7 +20,7 @@ package memo_artifacts_standards_iec_81001_5_1 {
     }
 
     item iec81001_5_1Clause4 : StandardClause {
-        attribute :>> id = "STD-IEC-81001-5-1-4";
+        @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1-4"; }
         attribute :>> name = "IEC81001_5_1Clause4";
         attribute :>> clauseNumber = "4";
         attribute :>> title = "general requirements";
@@ -26,7 +28,7 @@ package memo_artifacts_standards_iec_81001_5_1 {
     }
 
     item iec81001_5_1Clause5 : StandardClause {
-        attribute :>> id = "STD-IEC-81001-5-1-5";
+        @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1-5"; }
         attribute :>> name = "IEC81001_5_1Clause5";
         attribute :>> clauseNumber = "5";
         attribute :>> title = "software development process";
@@ -34,7 +36,7 @@ package memo_artifacts_standards_iec_81001_5_1 {
     }
 
     item iec81001_5_1Clause5_1 : StandardClause {
-        attribute :>> id = "STD-IEC-81001-5-1-5-1";
+        @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1-5-1"; }
         attribute :>> name = "IEC81001_5_1Clause5_1";
         attribute :>> clauseNumber = "5.1";
         attribute :>> title = "software development planning";
@@ -42,7 +44,7 @@ package memo_artifacts_standards_iec_81001_5_1 {
     }
 
     item iec81001_5_1Clause5_2 : StandardClause {
-        attribute :>> id = "STD-IEC-81001-5-1-5-2";
+        @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1-5-2"; }
         attribute :>> name = "IEC81001_5_1Clause5_2";
         attribute :>> clauseNumber = "5.2";
         attribute :>> title = "software requirements analysis";
@@ -50,7 +52,7 @@ package memo_artifacts_standards_iec_81001_5_1 {
     }
 
     item iec81001_5_1Clause5_3 : StandardClause {
-        attribute :>> id = "STD-IEC-81001-5-1-5-3";
+        @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1-5-3"; }
         attribute :>> name = "IEC81001_5_1Clause5_3";
         attribute :>> clauseNumber = "5.3";
         attribute :>> title = "software architectural design";
@@ -58,7 +60,7 @@ package memo_artifacts_standards_iec_81001_5_1 {
     }
 
     item iec81001_5_1Clause5_4 : StandardClause {
-        attribute :>> id = "STD-IEC-81001-5-1-5-4";
+        @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1-5-4"; }
         attribute :>> name = "IEC81001_5_1Clause5_4";
         attribute :>> clauseNumber = "5.4";
         attribute :>> title = "software design";
@@ -66,7 +68,7 @@ package memo_artifacts_standards_iec_81001_5_1 {
     }
 
     item iec81001_5_1Clause5_8 : StandardClause {
-        attribute :>> id = "STD-IEC-81001-5-1-5-8";
+        @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1-5-8"; }
         attribute :>> name = "IEC81001_5_1Clause5_8";
         attribute :>> clauseNumber = "5.8";
         attribute :>> title = "software release";

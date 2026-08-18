@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_physical_views_physical_physical_bom_
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaPhysicalBomView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_physical_views_physical_physical_bom_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-PHY-101";
+        @MemoIdentity { :>> providedId = "VIEW-PHY-101"; }
         attribute :>> name = "GPCA_PhysicalBomView";
-        attribute :>> shortDescription = "Hardware assemblies, processing node, physical ports, and part numbers.";
+        @MemoIdentity { :>> shortDescription = "Hardware assemblies, processing node, physical ports, and part numbers."; }
         attribute :>> outputKind = (ViewOutputKind::table);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> viewKind = DiagramViewKind::grid;
@@ -27,7 +29,7 @@ package memo_examples_gpca_pump_viewpoints_physical_views_physical_physical_bom_
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include hardware assemblies with part numbers, the MCU node, and external ports.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-PHY-101";
+            @MemoIdentity { :>> providedId = "QRY-PHY-101"; }
             attribute :>> name = "GPCA_PhysicalBomQuery";
             attribute :>> includeElementKinds = ("HardwareAssembly", "ProcessingNode", "PhysicalPort", "Interface");
             attribute :>> includeLayers = ("hardware_structure", "physical", "interfaces");

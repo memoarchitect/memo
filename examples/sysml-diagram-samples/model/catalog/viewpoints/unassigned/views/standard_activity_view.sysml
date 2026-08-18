@@ -21,10 +21,12 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard
 
     private import activity_example::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view standardActivityView : MemoDiagramView {
         expose CustomerProcess::**;
         attribute depth = 2;
-        attribute :>> shortDescription = "Customer login, guarded validation, shopping loop, checkout, credit approval, and explicit completion outcomes.";
+        @MemoIdentity { :>> shortDescription = "Customer login, guarded validation, shopping loop, checkout, credit approval, and explicit completion outcomes."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
         ref :>> viewpointDefinition = functionalViewpoint;

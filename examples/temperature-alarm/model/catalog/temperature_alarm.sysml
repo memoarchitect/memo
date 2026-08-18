@@ -25,26 +25,27 @@ package memo_examples_temperature_alarm {
     private import memo_core_relationships::*;
     private import memo_assurance_safety_risk_analysis::*;
 
+    private import memo_core_common::MemoIdentity;
     // ── Operational intent ──────────────────────────────────────
     part icuNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> id = "TA-USR-001"; attribute :>> name = "ICUNurse";
+        @MemoIdentity { :>> providedId = "TA-USR-001"; } attribute :>> name = "ICUNurse";
     }
     use case ucMonitorTemp : UseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
-        attribute :>> id = "TA-UC-001";
+        @MemoIdentity { :>> providedId = "TA-UC-001"; }
         attribute :>> name = "MonitorPatientTemperature";
         attribute :>> goalStatement = "Continuously monitor core temperature and be alerted when it leaves the safe range.";
         subject supportingSystem;
         actor icuNurseInitiator = icuNurse;
     }
     action actAcknowledgeAlarm : OperativeAction {
-        attribute :>> id = "TA-ACT-001"; attribute :>> name = "ReviewAndAcknowledgeAlarm";
+        @MemoIdentity { :>> providedId = "TA-ACT-001"; } attribute :>> name = "ReviewAndAcknowledgeAlarm";
         attribute :>> criticality = CriticalityKind::high;
 
         action taskAckAlarm : OperativeAction {
             attribute :>> criticality = CriticalityKind::high;
-            attribute :>> id = "TA-TASK-001"; attribute :>> name = "AcknowledgeTemperatureAlarm";
+            @MemoIdentity { :>> providedId = "TA-TASK-001"; } attribute :>> name = "AcknowledgeTemperatureAlarm";
             attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
             attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
             attribute :>> severityIfFailed = SeverityKind::serious;
@@ -53,18 +54,18 @@ package memo_examples_temperature_alarm {
 
     // ── Functional and logical slices ───────────────────────────
     action fnDetectDeviation : SystemFunction {
-        attribute :>> id = "TA-FN-001"; attribute :>> name = "DetectTemperatureDeviation";
+        @MemoIdentity { :>> providedId = "TA-FN-001"; } attribute :>> name = "DetectTemperatureDeviation";
         attribute :>> criticality = CriticalityKind::high;
         // This function is owned by the functional architecture layer (its
         // package). Its safety and verification character are typed
         // relationships to assurance-owned elements, not tags on the function.
     }
     part chMonitor : LogicalComponent {
-        attribute :>> id = "TA-LC-001"; attribute :>> name = "TemperatureMonitorChannel";
+        @MemoIdentity { :>> providedId = "TA-LC-001"; } attribute :>> name = "TemperatureMonitorChannel";
         attribute :>> channelRole = ChannelRoleKind::monitor;
     }
     part chPrimary : LogicalComponent {
-        attribute :>> id = "TA-LC-002"; attribute :>> name = "MeasurementChannel";
+        @MemoIdentity { :>> providedId = "TA-LC-002"; } attribute :>> name = "MeasurementChannel";
         attribute :>> channelRole = ChannelRoleKind::primary;
     }
     connection : IndependentOf connect channel ::> chMonitor to otherChannel ::> chPrimary {
@@ -73,17 +74,17 @@ package memo_examples_temperature_alarm {
     allocate fnDetectDeviation to chMonitor;
     // ── UI: alarm element and acknowledgement action ────────────
     part uiBedside : UserInterface {
-        attribute :>> id = "TA-UI-001"; attribute :>> name = "BedsideDisplay";
+        @MemoIdentity { :>> providedId = "TA-UI-001"; } attribute :>> name = "BedsideDisplay";
         attribute :>> modality = "visual + audible";
     }
     part elAlarmBanner : UIElement {
-        attribute :>> id = "TA-EL-001"; attribute :>> name = "TempAlarmBanner";
+        @MemoIdentity { :>> providedId = "TA-EL-001"; } attribute :>> name = "TempAlarmBanner";
         attribute :>> alarmPriority = NotificationPriorityKind::high;
         attribute :>> annunciationModality = "flashing banner + tone";
         attribute :>> silenceable = true;
     }
     action uiaAcknowledge : UIAction {
-        attribute :>> id = "TA-UIA-001"; attribute :>> name = "AcknowledgeAlarm";
+        @MemoIdentity { :>> providedId = "TA-UIA-001"; } attribute :>> name = "AcknowledgeAlarm";
         attribute :>> intent = InteractionIntentKind::acknowledgement;
         attribute :>> confirmationRequired = true;
         perform fnDetectDeviation;
@@ -93,18 +94,18 @@ package memo_examples_temperature_alarm {
 
     // ── Risk chain with use error ───────────────────────────────
     part ueSilenceAndForget : UseError {
-        attribute :>> id = "TA-UE-001"; attribute :>> name = "SilenceWithoutAssessment";
+        @MemoIdentity { :>> providedId = "TA-UE-001"; } attribute :>> name = "SilenceWithoutAssessment";
         attribute :>> errorCategory = UseErrorCategoryKind::memoryRecall;
         attribute :>> severity = SeverityKind::serious;
     }
     item hzUndetectedDeviation : Hazard {
-        attribute :>> id = "TA-HZ-001"; attribute :>> name = "UndetectedTemperatureDeviation";
+        @MemoIdentity { :>> providedId = "TA-HZ-001"; } attribute :>> name = "UndetectedTemperatureDeviation";
         attribute :>> hazardType = HazardTypeKind::informationError;
         attribute :>> severity = SeverityKind::serious;
         attribute :>> foreseeable = true;
     }
     part rcReAnnunciate : RiskControlMeasure {
-        attribute :>> id = "TA-RC-001"; attribute :>> name = "AutoReAnnunciationAfterSilence";
+        @MemoIdentity { :>> providedId = "TA-RC-001"; } attribute :>> name = "AutoReAnnunciationAfterSilence";
         attribute :>> controlKind = RiskControlKind::alarm;
         attribute :>> implementationKind = RiskControlImplementationKind::softwareDesign;
     }
@@ -115,11 +116,11 @@ package memo_examples_temperature_alarm {
 
     // ── Verification, validation, evidence ──────────────────────
     action vsAlarmLatency : OperativeScenario {
-        attribute :>> id = "TA-VS-001"; attribute :>> name = "AlarmLatencyScenario";
+        @MemoIdentity { :>> providedId = "TA-VS-001"; } attribute :>> name = "AlarmLatencyScenario";
         attribute :>> pathSummary = "Induce out-of-range temperature; measure detection-to-annunciation latency.";
     }
     verification vcAlarmLatency : VerificationCase {
-        attribute :>> id = "TA-VC-001"; attribute :>> name = "VerifyAlarmLatency";
+        @MemoIdentity { :>> providedId = "TA-VC-001"; } attribute :>> name = "VerifyAlarmLatency";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "annunciation within 2 s of sustained deviation";
 
@@ -127,14 +128,14 @@ package memo_examples_temperature_alarm {
     }
     part uvAckTask : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::usabilityValidation;
-        attribute :>> id = "TA-UV-001"; attribute :>> name = "SummativeAlarmAcknowledgement";
+        @MemoIdentity { :>> providedId = "TA-UV-001"; } attribute :>> name = "SummativeAlarmAcknowledgement";
         attribute :>> participantProfile = "15 ICU nurses, representative shift conditions";
         attribute :>> participantCount = 15;
         attribute :>> acceptanceCriteria = "no critical-task failures; all alarms assessed before silencing";
     }
     part evLatencyReport : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
-        attribute :>> id = "TA-EV-001"; attribute :>> name = "AlarmLatencyTestReport";
+        @MemoIdentity { :>> providedId = "TA-EV-001"; } attribute :>> name = "AlarmLatencyTestReport";
         attribute :>> evidenceType = "test report";
     }
     connection : ExecutesScenario connect verificationCase ::> vcAlarmLatency to scenario ::> vsAlarmLatency;

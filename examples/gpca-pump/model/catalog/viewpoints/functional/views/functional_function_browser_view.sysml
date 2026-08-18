@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaFunctionBrowserView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_functional_views_functional_function_browser_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-FUN-103";
+        @MemoIdentity { :>> providedId = "VIEW-FUN-103"; }
         attribute :>> name = "GPCA_FunctionBrowserView";
-        attribute :>> shortDescription = "Membership tree over the functions layer: logical functions, flows, and the exchange item definitions, grouped by kind.";
+        @MemoIdentity { :>> shortDescription = "Membership tree over the functions layer: logical functions, flows, and the exchange item definitions, grouped by kind."; }
         attribute :>> description = "Browser view (SysML v2 browser view kind) exposing the functions-layer membership hierarchy as a first-class view: the eleven logical functions, the logical flows connecting them, and the data/control definitions they exchange — with kind icons, expand/collapse, and filtering.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -27,7 +29,7 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include the functions layer's functions, flows, and exchange item definitions.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-FUN-103";
+            @MemoIdentity { :>> providedId = "QRY-FUN-103"; }
             attribute :>> name = "GPCA_FunctionBrowserQuery";
             attribute :>> includeElementKinds = ("SystemFunction", "FunctionalExchange", "InterfaceItem");
             attribute :>> includeLayers = ("functions");

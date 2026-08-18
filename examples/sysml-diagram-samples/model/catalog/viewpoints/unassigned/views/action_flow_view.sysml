@@ -10,6 +10,8 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
     private import memo_viewpoints_functional_functional_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     item def DataPacket specializes InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::data;
     }
@@ -84,7 +86,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
         expose laneA;
         expose laneB;
         attribute depth = 2;
-        attribute :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development.";
+        @MemoIdentity { :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
         ref :>> viewpointDefinition = functionalViewpoint;

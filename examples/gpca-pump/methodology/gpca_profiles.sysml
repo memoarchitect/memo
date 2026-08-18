@@ -31,8 +31,10 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
     private import memo_core_enumerations::*;
     private import memo_rules_closure::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part gpcaMethodDefinition : MethodologyDefinition {
-        attribute :>> id = "METH-GPCA-001";
+        @MemoIdentity { :>> providedId = "METH-GPCA-001"; }
         attribute :>> name = "GPCAPrototypeMethodology";
         attribute :>> version = "0.6.5";
         attribute :>> domain = "medical device modeling";

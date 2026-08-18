@@ -9,6 +9,8 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
     private import memo_viewpoints_operational_operational_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // Operational activity across clinical roles. The fixture is intentionally
     // product-neutral and belongs only to the diagram-samples project.
     item def OpPrescription specializes InterfaceItem {
@@ -100,7 +102,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
         expose opSetupFlow::**;
         expose opCareSystem::**;
         attribute depth = 2;
-        attribute :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step.";
+        @MemoIdentity { :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ofd";
         ref :>> viewpointDefinition = operationalViewpoint;

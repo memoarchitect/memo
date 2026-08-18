@@ -11,6 +11,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     private import memo_viewpoints_logical_logical_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::MemoIdentity;
     // Ports are owned by the part whose boundary they are, which is what lets
     // a delegation be written at all: SysML v2 checks a flow's source for
     // `out`-ness relative to the owner, so a boundary port only reads as a
@@ -75,7 +76,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
         expose waterSupply::**;
         expose cup::**;
         attribute depth = 2;
-        attribute :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces.";
+        @MemoIdentity { :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces."; }
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
         ref :>> viewpointDefinition = logicalArchitectureViewpoint;

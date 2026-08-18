@@ -9,6 +9,8 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     private import memo_viewpoints_functional_functional_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // ─────────────────────────────────────────────────────────────────────────
     // Sample · Functional flow — component behaviour of dose delivery
     //
@@ -134,7 +136,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
         expose fxDeliveryFlow::**;
         expose fxPumpSystem::**;
         attribute depth = 2;
-        attribute :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in).";
+        @MemoIdentity { :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in)."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ffd";
         ref :>> viewpointDefinition = functionalViewpoint;

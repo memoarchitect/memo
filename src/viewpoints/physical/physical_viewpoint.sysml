@@ -4,10 +4,12 @@ package memo_viewpoints_physical_physical_viewpoint {
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     viewpoint physicalViewpoint : MemoViewpoint {
-        attribute :>> id = "VP-PHY";
+        @MemoIdentity { :>> providedId = "VP-PHY"; }
         attribute :>> name = "PhysicalViewpoint";
-        attribute :>> shortDescription = "Shows physical components, hardware structure, and their interconnections.";
+        @MemoIdentity { :>> shortDescription = "Shows physical components, hardware structure, and their interconnections."; }
         attribute :>> description = "Default viewpoint derived from the physical and hardware structure layers for bill-of-materials, hardware decomposition, physical interfaces, and network/connectivity topology.";
         attribute :>> purpose = "Describe the system's physical realization and interconnections.";
         attribute :>> audience = (AudienceKind::hardwareEngineer);

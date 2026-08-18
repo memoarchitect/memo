@@ -9,10 +9,12 @@ package memo_rules_ontology {
     private import memo_core_consistency_rules::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // ─── Structure ───────────────────────────────────────────────────────
 
     constraint def ContainmentAcyclicRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-001";
+        @MemoIdentity { :>> providedId = "CR-ONT-001"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -21,7 +23,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def NestedPartConnectedRule :> MemoConsistencyRule {
-        attribute :>> id = "AR-IBD-001";
+        @MemoIdentity { :>> providedId = "AR-IBD-001"; }
         attribute tailoring = RuleTailoringKind::invariant;
         // Internal-block connectivity is a structural-architecture concern, so
         // the subject is the structural component — not every MemoPart. UI
@@ -44,7 +46,7 @@ package memo_rules_ontology {
     // ─── Deployment and realization ──────────────────────────────────────
 
     constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-011";
+        @MemoIdentity { :>> providedId = "CR-ONT-011"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "SoftwareComponent";
         attribute severity = RuleSeverityKind::warning;
@@ -53,7 +55,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def PatientContactCharacterizedRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-032";
+        @MemoIdentity { :>> providedId = "CR-ONT-032"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "PhysicalComponent";
         attribute severity = RuleSeverityKind::error;
@@ -65,7 +67,7 @@ package memo_rules_ontology {
     // ─── Assurance coverage ──────────────────────────────────────────────
 
     constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-040";
+        @MemoIdentity { :>> providedId = "CR-ONT-040"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "MemoFunction";
         attribute severity = RuleSeverityKind::error;
@@ -74,7 +76,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-041";
+        @MemoIdentity { :>> providedId = "CR-ONT-041"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "OperativeAction[criticality=high]";
         attribute severity = RuleSeverityKind::error;
@@ -83,7 +85,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-042";
+        @MemoIdentity { :>> providedId = "CR-ONT-042"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "UseError";
         attribute severity = RuleSeverityKind::warning;
@@ -127,7 +129,7 @@ package memo_rules_ontology {
     // and the admissible types so the report is still actionable.
 
     constraint def SatisfiedBySourceKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-060";
+        @MemoIdentity { :>> providedId = "CR-ONT-060"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -136,7 +138,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def SatisfiedByTargetKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-061";
+        @MemoIdentity { :>> providedId = "CR-ONT-061"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -145,7 +147,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def VerifiedByTargetKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-062";
+        @MemoIdentity { :>> providedId = "CR-ONT-062"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -154,7 +156,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def AllocatedToSourceKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-063";
+        @MemoIdentity { :>> providedId = "CR-ONT-063"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -163,7 +165,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def AllocatedToTargetKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-064";
+        @MemoIdentity { :>> providedId = "CR-ONT-064"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -172,7 +174,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def ComposesParentKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-065";
+        @MemoIdentity { :>> providedId = "CR-ONT-065"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -181,7 +183,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def ComposesChildKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-066";
+        @MemoIdentity { :>> providedId = "CR-ONT-066"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -190,7 +192,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def PrecedesEndKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-067";
+        @MemoIdentity { :>> providedId = "CR-ONT-067"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -199,7 +201,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def PerformsPerformerKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-068";
+        @MemoIdentity { :>> providedId = "CR-ONT-068"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -208,7 +210,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def EnablesEnablerKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-069";
+        @MemoIdentity { :>> providedId = "CR-ONT-069"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -217,7 +219,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def BindsToInterfaceEndKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-070";
+        @MemoIdentity { :>> providedId = "CR-ONT-070"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -226,7 +228,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def CrossesTrustBoundaryEndKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-071";
+        @MemoIdentity { :>> providedId = "CR-ONT-071"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "Model";
         attribute severity = RuleSeverityKind::error;
@@ -241,7 +243,7 @@ package memo_rules_ontology {
     // reached with sourcesOf/targetsOf. They are resolved here by looking the id
     // up in the kind extent, which is the same statement made the long way.
     constraint def ComponentExchangeSourceEndpointKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-072";
+        @MemoIdentity { :>> providedId = "CR-ONT-072"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "ComponentExchange";
         attribute severity = RuleSeverityKind::error;
@@ -250,7 +252,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def ComponentExchangeTargetEndpointKindRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-073";
+        @MemoIdentity { :>> providedId = "CR-ONT-073"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "ComponentExchange";
         attribute severity = RuleSeverityKind::error;
@@ -266,7 +268,7 @@ package memo_rules_ontology {
     // "answerable to exactly one component" is the whole content of the concept.
 
     constraint def ComponentFunctionAllocatedRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-074";
+        @MemoIdentity { :>> providedId = "CR-ONT-074"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "ComponentFunction";
         attribute severity = RuleSeverityKind::error;
@@ -275,7 +277,7 @@ package memo_rules_ontology {
         constraint { true }
     }
     constraint def FunctionDecomposesIntoFunctionsRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-075";
+        @MemoIdentity { :>> providedId = "CR-ONT-075"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "MemoFunction";
         attribute severity = RuleSeverityKind::error;
@@ -294,7 +296,7 @@ package memo_rules_ontology {
     // the ends and can never answer it. Naming the flow is what the grammar's
     // restored FlowDeclaration name makes possible at all.
     constraint def ExchangeHasFlowRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-076";
+        @MemoIdentity { :>> providedId = "CR-ONT-076"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "ComponentExchange";
         attribute severity = RuleSeverityKind::error;
@@ -304,7 +306,7 @@ package memo_rules_ontology {
     }
 
     constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-ONT-043";
+        @MemoIdentity { :>> providedId = "CR-ONT-043"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "OperativeScenario";
         attribute severity = RuleSeverityKind::error;

@@ -10,27 +10,29 @@ package memo_examples_nested_architecture_dsm_assurance_requirements_needs {
     private import memo_assurance_requirements_needs::*;
     private import memo_examples_nested_architecture_dsm_assurance_requirements::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     requirement needAccurateTherapy : Need {
-        attribute :>> id = "NDS-NEED-001"; attribute :>> name = "AccurateTherapyDelivery";
+        @MemoIdentity { :>> providedId = "NDS-NEED-001"; } attribute :>> name = "AccurateTherapyDelivery";
         attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> statement = "Clinicians need the delivered dose to match the prescription closely enough to be clinically safe.";
         attribute :>> priority = "high";
     }
     requirement needProtectionFromHarm : Need {
-        attribute :>> id = "NDS-NEED-002"; attribute :>> name = "ProtectionFromDeliveryFaults";
+        @MemoIdentity { :>> providedId = "NDS-NEED-002"; } attribute :>> name = "ProtectionFromDeliveryFaults";
         attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> statement = "Patients need delivery to stop before a line fault or air bolus reaches them.";
         attribute :>> priority = "high";
     }
     requirement needUninterruptedTherapy : Need {
-        attribute :>> id = "NDS-NEED-003"; attribute :>> name = "UninterruptedTherapy";
+        @MemoIdentity { :>> providedId = "NDS-NEED-003"; } attribute :>> name = "UninterruptedTherapy";
         attribute :>> needKind = NeedKind::operational;
         attribute :>> statement = "Wards need therapy to continue through transport and mains interruptions.";
         attribute :>> priority = "medium";
         attribute :>> operationalContextReference = "intra-hospital transport, up to four hours off mains";
     }
     requirement needLegibleStatus : Need {
-        attribute :>> id = "NDS-NEED-004"; attribute :>> name = "LegibleTherapyStatus";
+        @MemoIdentity { :>> providedId = "NDS-NEED-004"; } attribute :>> name = "LegibleTherapyStatus";
         attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> statement = "Clinicians need to read therapy state and alarms correctly from the bedside.";
         attribute :>> priority = "high";

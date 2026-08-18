@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_logical_archite
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaLogicalArchitectureView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_logical_logical_architecture_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-LOG-001";
+        @MemoIdentity { :>> providedId = "VIEW-LOG-001"; }
         attribute :>> name = "GPCA_LogicalArchitectureView";
-        attribute :>> shortDescription = "Logical decomposition of the GPCA system.";
+        @MemoIdentity { :>> shortDescription = "Logical decomposition of the GPCA system."; }
         attribute :>> description = "Product-specific logical architecture view that references the default logical architecture viewpoint and is intended for design description and architecture communication.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -28,7 +30,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_logical_archite
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include GPCA logical components and key interfaces relevant to therapy control.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-LOG-001";
+            @MemoIdentity { :>> providedId = "QRY-LOG-001"; }
             attribute :>> name = "GPCA_LogicalArchitectureQuery";
             attribute :>> includeElementKinds = ("LogicalComponent", "Interface", "Function");
             attribute :>> includeLayers = ("functions", "logical_structure", "interfaces");

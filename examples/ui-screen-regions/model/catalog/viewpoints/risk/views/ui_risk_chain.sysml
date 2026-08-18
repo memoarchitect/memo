@@ -29,6 +29,8 @@ package memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain {
     private import memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
     private import memo_examples_ui_screen_regions_traces::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view uiRiskChain : MemoDiagramView {
         expose memo_examples_ui_screen_regions_architecture_implementation_ui::*;
         expose memo_examples_ui_screen_regions_architecture_functional_functions::*;
@@ -43,13 +45,13 @@ package memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain {
         expose memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
         expose memo_examples_ui_screen_regions_traces::*;
         attribute depth = 3;
-        attribute :>> id = "RSK-101";
-        attribute :>> shortDescription = "Use errors through UI hazards to implemented controls and requirements.";
+        @MemoIdentity { :>> providedId = "RSK-101"; }
+        @MemoIdentity { :>> shortDescription = "Use errors through UI hazards to implemented controls and requirements."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "risk";
         attribute :>> autoPopulate = true;
         part :>> selectionQuery {
-            attribute :>> id = "QRY-103";
+            @MemoIdentity { :>> providedId = "QRY-103"; }
             attribute :>> name = "UIRiskChainQuery";
             attribute :>> includeElementKinds = ("UseError", "Hazard", "RiskControlMeasure", "Requirement", "UIElement", "SystemFunction", "VerificationCase");
             attribute :>> includeRelationshipKinds = ("ErrorAtElement", "Causes", "Mitigates", "ControlImplementedBy", "DerivesFrom", "VerifiedBy");

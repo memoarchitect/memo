@@ -27,6 +27,8 @@ package memo_examples_ros_mobile_robot {
     private import memo_extension_container::*;
     private import memo_extension_ros::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // ── Message definitions and named topic instances ──────────────────
     // The definition is the ROS message contract. A named usage is the topic
     // deployed in this system; publisher/subscriber ports reference that same
@@ -45,31 +47,31 @@ package memo_examples_ros_mobile_robot {
     }
 
     item topicScan : LaserScan {
-        attribute :>> id = "RMR-TP-001"; attribute :>> name = "ScanTopic";
+        @MemoIdentity { :>> providedId = "RMR-TP-001"; } attribute :>> name = "ScanTopic";
     }
     item topicCmdVel : VelocityCommand {
-        attribute :>> id = "RMR-TP-002"; attribute :>> name = "CmdVelTopic";
+        @MemoIdentity { :>> providedId = "RMR-TP-002"; } attribute :>> name = "CmdVelTopic";
     }
     item topicEstop : EmergencyStop {
-        attribute :>> id = "RMR-TP-003"; attribute :>> name = "EmergencyStopTopic";
+        @MemoIdentity { :>> providedId = "RMR-TP-003"; } attribute :>> name = "EmergencyStopTopic";
     }
 
     // ── Code ────────────────────────────────────────────────────────────
     part swPerception : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::unit;
-        attribute :>> id = "RMR-SW-001"; attribute :>> name = "PerceptionStack";
+        @MemoIdentity { :>> providedId = "RMR-SW-001"; } attribute :>> name = "PerceptionStack";
         attribute :>> responsibility = "Lidar driver and obstacle segmentation.";
         attribute :>> safetyClass = SafetyClassKind::B;
     }
     part swNavigation : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::unit;
-        attribute :>> id = "RMR-SW-002"; attribute :>> name = "NavigationStack";
+        @MemoIdentity { :>> providedId = "RMR-SW-002"; } attribute :>> name = "NavigationStack";
         attribute :>> responsibility = "Global and local planning; velocity command generation.";
         attribute :>> safetyClass = SafetyClassKind::B;
     }
     part swSafety : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::unit;
-        attribute :>> id = "RMR-SW-003"; attribute :>> name = "SafetyMonitor";
+        @MemoIdentity { :>> providedId = "RMR-SW-003"; } attribute :>> name = "SafetyMonitor";
         attribute :>> responsibility = "Independent watchdog: stops the base on obstacle proximity or missing heartbeat.";
         attribute :>> safetyClass = SafetyClassKind::C;
     }
@@ -82,7 +84,7 @@ package memo_examples_ros_mobile_robot {
     // is exactly what an extension type must NOT decide for the modeller.
     part nodeLidar : RosNode {
         attribute :>> runtimeKind = RuntimeKind::thread;
-        attribute :>> id = "RMR-ND-001"; attribute :>> name = "LidarDriverNode";
+        @MemoIdentity { :>> providedId = "RMR-ND-001"; } attribute :>> name = "LidarDriverNode";
         attribute :>> nodeNamespace = "/robot/perception";
         attribute :>> lifecycleManaged = true;
         attribute :>> executorModel = "single-threaded executor, composed";
@@ -104,7 +106,7 @@ package memo_examples_ros_mobile_robot {
     }
     part nodeNavigation : RosNode {
         attribute :>> runtimeKind = RuntimeKind::thread;
-        attribute :>> id = "RMR-ND-002"; attribute :>> name = "NavigationNode";
+        @MemoIdentity { :>> providedId = "RMR-ND-002"; } attribute :>> name = "NavigationNode";
         attribute :>> nodeNamespace = "/robot/navigation";
         attribute :>> lifecycleManaged = true;
         attribute :>> executorModel = "multi-threaded executor, composed";
@@ -157,7 +159,7 @@ package memo_examples_ros_mobile_robot {
     }
     part nodeSafetyMonitor : RosNode {
         attribute :>> runtimeKind = RuntimeKind::process;
-        attribute :>> id = "RMR-ND-003"; attribute :>> name = "SafetyMonitorNode";
+        @MemoIdentity { :>> providedId = "RMR-ND-003"; } attribute :>> name = "SafetyMonitorNode";
         attribute :>> nodeNamespace = "/robot/safety";
         attribute :>> lifecycleManaged = false;
         attribute :>> executorModel = "own process, real-time priority";
@@ -238,7 +240,7 @@ package memo_examples_ros_mobile_robot {
 
     // ── Deployment: base relations, unchanged ───────────────────────────
     part imageRuntime : RosContainerImage {
-        attribute :>> id = "RMR-DU-001"; attribute :>> name = "RobotRuntimeImage";
+        @MemoIdentity { :>> providedId = "RMR-DU-001"; } attribute :>> name = "RobotRuntimeImage";
         attribute :>> unitKind = "OCI container image";
         attribute :>> imageReference = "registry.example.com/robot-runtime:2.3.0";
         attribute :>> registry = "registry.example.com";
@@ -249,7 +251,7 @@ package memo_examples_ros_mobile_robot {
         attribute :>> integrityProtection = "image signature + SBOM attestation";
     }
     part imageSafety : RosContainerImage {
-        attribute :>> id = "RMR-DU-002"; attribute :>> name = "SafetyMonitorImage";
+        @MemoIdentity { :>> providedId = "RMR-DU-002"; } attribute :>> name = "SafetyMonitorImage";
         attribute :>> unitKind = "OCI container image";
         attribute :>> imageReference = "registry.example.com/safety-monitor:2.3.0";
         attribute :>> registry = "registry.example.com";
@@ -264,7 +266,7 @@ package memo_examples_ros_mobile_robot {
     connection : BuildsInto connect module ::> swSafety to deploymentUnit ::> imageSafety;
 
     part nodeComputeUnit : ProcessingNode {
-        attribute :>> id = "RMR-HW-001"; attribute :>> name = "OnboardComputeUnit";
+        @MemoIdentity { :>> providedId = "RMR-HW-001"; } attribute :>> name = "OnboardComputeUnit";
         attribute :>> nodeKind = ProcessingNodeKind::SoC;
         attribute :>> processorArchitecture = "arm64, 8 core";
         attribute :>> memoryMB = "16384";
@@ -280,7 +282,7 @@ package memo_examples_ros_mobile_robot {
     }
 
     part rosRuntime : RosContainerRuntime {
-        attribute :>> id = "RMR-RT-001"; attribute :>> name = "OnboardRosRuntime";
+        @MemoIdentity { :>> providedId = "RMR-RT-001"; } attribute :>> name = "OnboardRosRuntime";
         attribute :>> environmentKind = "container runtime";
         attribute :>> osOrRtos = "Linux with PREEMPT_RT";
         attribute :>> orchestrationPlatform = "systemd-managed compose, no cluster orchestrator";

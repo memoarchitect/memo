@@ -14,8 +14,10 @@ package memo_artifacts_standards_iec_60812 {
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     item iec60812 : RegulatoryStandard {
-        attribute :>> id = "STD-IEC-60812";
+        @MemoIdentity { :>> providedId = "STD-IEC-60812"; }
         attribute :>> name = "IEC60812";
         attribute :>> designation = "IEC 60812:2018";
         attribute :>> edition = "2018";
@@ -27,19 +29,19 @@ package memo_artifacts_standards_iec_60812 {
     }
 
     item iec60812Clause5 : StandardClause {
-        attribute :>> id = "STD-IEC-60812-5";
+        @MemoIdentity { :>> providedId = "STD-IEC-60812-5"; }
         attribute :>> name = "IEC60812Clause5";
         attribute :>> clauseNumber = "5";
         attribute :>> normativeStrength = "shall";
     }
     item iec60812Clause6 : StandardClause {
-        attribute :>> id = "STD-IEC-60812-6";
+        @MemoIdentity { :>> providedId = "STD-IEC-60812-6"; }
         attribute :>> name = "IEC60812Clause6";
         attribute :>> clauseNumber = "6";
         attribute :>> normativeStrength = "shall";
     }
     item iec60812Clause7 : StandardClause {
-        attribute :>> id = "STD-IEC-60812-7";
+        @MemoIdentity { :>> providedId = "STD-IEC-60812-7"; }
         attribute :>> name = "IEC60812Clause7";
         attribute :>> clauseNumber = "7";
         attribute :>> normativeStrength = "shall";

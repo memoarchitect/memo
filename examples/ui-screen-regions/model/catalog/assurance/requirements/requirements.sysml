@@ -16,9 +16,11 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     private import memo_core_enumerations::*;
     private import memo_assurance_requirements::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // ── The spec side ───────────────────────────────────────────
     requirement reqRateEntry : Requirement {
-        attribute :>> id = "UIR-REQ-001"; attribute :>> name = "RateEntryConfirmation";
+        @MemoIdentity { :>> providedId = "UIR-REQ-001"; } attribute :>> name = "RateEntryConfirmation";
         attribute :>> requirementKind = RequirementKind::software;
         attribute :>> statement = "When the clinician enters a new infusion rate, the pump shall display the entered rate for explicit confirmation before applying it.";
         attribute :>> notation = RequirementNotationKind::ears;
@@ -31,7 +33,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqRateLegibility : Requirement {
-        attribute :>> id = "UIR-REQ-002"; attribute :>> name = "RateLegibility";
+        @MemoIdentity { :>> providedId = "UIR-REQ-002"; } attribute :>> name = "RateLegibility";
         attribute :>> requirementKind = RequirementKind::system;
         attribute :>> statement = "The pump shall display the active infusion rate legibly at 1 m under 100–1000 lux ambient illumination.";
         attribute :>> notation = RequirementNotationKind::sophist;
@@ -45,7 +47,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqVolumeDisplay : Requirement {
-        attribute :>> id = "UIR-REQ-003"; attribute :>> name = "VolumeDeliveredDisplay";
+        @MemoIdentity { :>> providedId = "UIR-REQ-003"; } attribute :>> name = "VolumeDeliveredDisplay";
         attribute :>> requirementKind = RequirementKind::software;
         attribute :>> statement = "The pump shall display cumulative volume delivered for the active infusion, updated at least once per second.";
         attribute :>> notation = RequirementNotationKind::ears;
@@ -57,7 +59,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqDrugLibrarySelection : Requirement {
-        attribute :>> id = "UIR-REQ-004"; attribute :>> name = "DrugLibrarySelection";
+        @MemoIdentity { :>> providedId = "UIR-REQ-004"; } attribute :>> name = "DrugLibrarySelection";
         attribute :>> requirementKind = RequirementKind::software;
         attribute :>> statement = "The pump shall permit selection only from drug and concentration entries enabled for the active care area.";
         attribute :>> notation = RequirementNotationKind::ears;
@@ -70,7 +72,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqDisplayFreshness : Requirement {
-        attribute :>> id = "UIR-REQ-005"; attribute :>> name = "InfusionStatusFreshness";
+        @MemoIdentity { :>> providedId = "UIR-REQ-005"; } attribute :>> name = "InfusionStatusFreshness";
         attribute :>> requirementKind = RequirementKind::system;
         attribute :>> statement = "The pump shall refresh the displayed active rate and cumulative delivered volume at least once per second while an infusion is running.";
         attribute :>> notation = RequirementNotationKind::sophist;
@@ -84,7 +86,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqActiveRateDisplay : Requirement {
-        attribute :>> id = "UIR-REQ-006"; attribute :>> name = "ActiveInfusionRateDisplay";
+        @MemoIdentity { :>> providedId = "UIR-REQ-006"; } attribute :>> name = "ActiveInfusionRateDisplay";
         attribute :>> requirementKind = RequirementKind::software;
         attribute :>> statement = "While an infusion is running, the pump shall display the active infusion rate value and its mL/h unit.";
         attribute :>> notation = RequirementNotationKind::ears;
@@ -97,7 +99,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqDrugIdentityDisplay : Requirement {
-        attribute :>> id = "UIR-REQ-007"; attribute :>> name = "ActiveDrugIdentityDisplay";
+        @MemoIdentity { :>> providedId = "UIR-REQ-007"; } attribute :>> name = "ActiveDrugIdentityDisplay";
         attribute :>> requirementKind = RequirementKind::software;
         attribute :>> statement = "Where a drug-library entry is active, the pump shall display the selected drug name and concentration on the running-infusion screen.";
         attribute :>> notation = RequirementNotationKind::ears;
@@ -110,7 +112,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqTimeDisplay : Requirement {
-        attribute :>> id = "UIR-REQ-008"; attribute :>> name = "LocalTimeDisplay";
+        @MemoIdentity { :>> providedId = "UIR-REQ-008"; } attribute :>> name = "LocalTimeDisplay";
         attribute :>> requirementKind = RequirementKind::software;
         attribute :>> statement = "While the running-infusion screen is visible, the pump shall display synchronized local time in 24-hour HH:mm format.";
         attribute :>> notation = RequirementNotationKind::ears;
@@ -122,7 +124,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqTimeAccuracy : Requirement {
-        attribute :>> id = "UIR-REQ-009"; attribute :>> name = "DisplayedTimeAccuracy";
+        @MemoIdentity { :>> providedId = "UIR-REQ-009"; } attribute :>> name = "DisplayedTimeAccuracy";
         attribute :>> requirementKind = RequirementKind::system;
         attribute :>> statement = "The running-infusion display shall present local time within 2 seconds of the synchronized device clock and refresh the visible minute within 1 second of rollover.";
         attribute :>> notation = RequirementNotationKind::sophist;
@@ -136,7 +138,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqBatteryStatusDisplay : Requirement {
-        attribute :>> id = "UIR-REQ-010"; attribute :>> name = "BatteryStatusDisplay";
+        @MemoIdentity { :>> providedId = "UIR-REQ-010"; } attribute :>> name = "BatteryStatusDisplay";
         attribute :>> requirementKind = RequirementKind::software;
         attribute :>> statement = "While the pump is operating, the pump shall display battery state of charge as a percentage and graphical icon.";
         attribute :>> notation = RequirementNotationKind::ears;
@@ -149,7 +151,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqBatteryWarningPerformance : Requirement {
-        attribute :>> id = "UIR-REQ-011"; attribute :>> name = "LowBatteryStatusLatency";
+        @MemoIdentity { :>> providedId = "UIR-REQ-011"; } attribute :>> name = "LowBatteryStatusLatency";
         attribute :>> requirementKind = RequirementKind::system;
         attribute :>> statement = "When estimated battery operating time falls below 30 minutes, the pump shall present a visually prominent low-battery state within 1 second.";
         attribute :>> notation = RequirementNotationKind::sophist;
@@ -163,7 +165,7 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqDrugSelectionPerformance : Requirement {
-        attribute :>> id = "UIR-REQ-012"; attribute :>> name = "DrugSelectorResponseTime";
+        @MemoIdentity { :>> providedId = "UIR-REQ-012"; } attribute :>> name = "DrugSelectorResponseTime";
         attribute :>> requirementKind = RequirementKind::software;
         attribute :>> statement = "When the clinician activates the drug selector, the pump shall display the enabled drug list within 250 milliseconds.";
         attribute :>> notation = RequirementNotationKind::ears;

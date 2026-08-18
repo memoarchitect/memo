@@ -4,8 +4,10 @@ package memo_extension_messaging_methodology {
     private import memo_methodology_profiles::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part messagingExtensionMethod : MethodologyDefinition {
-        attribute :>> id = "EXT-MESSAGING-001";
+        @MemoIdentity { :>> providedId = "EXT-MESSAGING-001"; }
         attribute :>> name = "MessagingExtension";
         attribute :>> version = "0.7.0";
         attribute :>> domain = "publish/subscribe messaging";

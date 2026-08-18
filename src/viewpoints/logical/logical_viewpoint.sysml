@@ -4,10 +4,12 @@ package memo_viewpoints_logical_logical_viewpoint {
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     viewpoint logicalArchitectureViewpoint : MemoViewpoint {
-        attribute :>> id = "VP-LOG";
+        @MemoIdentity { :>> providedId = "VP-LOG"; }
         attribute :>> name = "LogicalArchitectureViewpoint";
-        attribute :>> shortDescription = "Shows logical decomposition and interfaces.";
+        @MemoIdentity { :>> shortDescription = "Shows logical decomposition and interfaces."; }
         attribute :>> description = "Default viewpoint derived from the logical architecture layer for subsystem structure, responsibilities, and major interactions, independent of physical realization.";
         attribute :>> purpose = "Describe the system's logical decomposition.";
         attribute :>> audience = (AudienceKind::systemArchitect);

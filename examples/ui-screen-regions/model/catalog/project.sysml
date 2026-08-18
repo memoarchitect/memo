@@ -31,8 +31,10 @@ package memo_examples_ui_screen_regions_project {
     private import memo_examples_ui_screen_regions_viewpoints_functional::*;
     private import memo_examples_ui_screen_regions_viewpoints_risk::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part uiScreenRegionsBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-UIR-001";
+        @MemoIdentity { :>> providedId = "PMB-UIR-001"; }
         attribute :>> name = "UIScreenRegionsProjectMethodBinding";
         attribute :>> projectName = "UI Screen Regions";
         // The default methodology selects everything the resolved ontology

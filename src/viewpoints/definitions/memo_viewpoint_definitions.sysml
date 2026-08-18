@@ -15,17 +15,12 @@ package memo_viewpoints_definitions {
 
     // Extends the native SysML viewpoint (Views::ViewpointCheck, a
     // RequirementCheck whose subject is a View) with MEMO's catalog
-    // attributes. The MEMO identity core is re-declared here because a
-    // viewpoint is native requirement-family, not a MemoPart — the same
-    // per-metaclass pattern MemoView and the other bases use.
+    // attributes. Identity comes from the `@MemoIdentity` metadata carrier
+    // rather than a re-declared core: a viewpoint is native requirement-family,
+    // not a MemoPart, and metadata crosses metaclasses where inheritance cannot.
     viewpoint def MemoViewpoint :> Views::ViewpointCheck {
-        attribute id : String;
-        attribute uuid : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute rationale : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
         attribute realizationStage : RealizationStageKind[0..1];
@@ -74,16 +69,11 @@ package memo_viewpoints_definitions {
     }
 
     view def MemoView :> Views::View {
-        // MEMO identity core, re-declared here rather than inherited: a view is
-        // native SysML and must stay one, so it does not mix in the MemoPart
-        // part hierarchy — same per-metaclass pattern the other MEMO bases use.
-        attribute id : String;
-        attribute uuid : String;
+        // Identity comes from the `@MemoIdentity` metadata carrier, which
+        // annotates any metaclass — so a view stays native SysML without
+        // re-declaring the identification core the other bases used to copy.
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute rationale : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
         attribute realizationStage : RealizationStageKind[0..1];

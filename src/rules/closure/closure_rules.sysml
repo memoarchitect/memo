@@ -7,10 +7,12 @@ package memo_rules_closure {
     private import memo_core_consistency_rules::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // ─── Risk Layer Rules ────────────────────────────────────────────────
 
     constraint def HazardMitigationRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-001";
+        @MemoIdentity { :>> providedId = "CR-MED-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
@@ -20,7 +22,7 @@ package memo_rules_closure {
     }
 
     constraint def HazardSeverityRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-002";
+        @MemoIdentity { :>> providedId = "CR-MED-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
@@ -30,7 +32,7 @@ package memo_rules_closure {
     }
 
     constraint def RiskControlVerificationRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-003";
+        @MemoIdentity { :>> providedId = "CR-MED-003"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "RiskControlMeasure";
         attribute severity = RuleSeverityKind::error;
@@ -40,7 +42,7 @@ package memo_rules_closure {
     }
 
     constraint def InitialRiskMatrixRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-004";
+        @MemoIdentity { :>> providedId = "CR-MED-004"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Risk";
         attribute severity = RuleSeverityKind::warning;
@@ -52,7 +54,7 @@ package memo_rules_closure {
     // ─── Requirements Layer Rules ────────────────────────────────────────
 
     constraint def SysReqTraceRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-010";
+        @MemoIdentity { :>> providedId = "CR-MED-010"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::error;
@@ -62,7 +64,7 @@ package memo_rules_closure {
     }
 
     constraint def SwReqTraceRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-011";
+        @MemoIdentity { :>> providedId = "CR-MED-011"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Requirement[requirementKind=software]";
         attribute severity = RuleSeverityKind::error;
@@ -80,7 +82,7 @@ package memo_rules_closure {
     // ─── Architecture Layer Rules ────────────────────────────────────────
 
     constraint def SwComponentSafetyClassRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-020";
+        @MemoIdentity { :>> providedId = "CR-MED-020"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
@@ -90,7 +92,7 @@ package memo_rules_closure {
     }
 
     constraint def SwComponentReqRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-021";
+        @MemoIdentity { :>> providedId = "CR-MED-021"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
@@ -100,7 +102,7 @@ package memo_rules_closure {
     }
 
     constraint def LogicalFunctionAllocationRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-022";
+        @MemoIdentity { :>> providedId = "CR-MED-022"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::warning;
@@ -112,7 +114,7 @@ package memo_rules_closure {
     // ─── Verification Layer Rules ────────────────────────────────────────
 
     constraint def VerificationCaseMethodRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-030";
+        @MemoIdentity { :>> providedId = "CR-MED-030"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::error;
@@ -122,7 +124,7 @@ package memo_rules_closure {
     }
 
     constraint def VerificationCaseTargetRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-031";
+        @MemoIdentity { :>> providedId = "CR-MED-031"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::error;
@@ -132,7 +134,7 @@ package memo_rules_closure {
     }
 
     constraint def EvidenceProductionRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-032";
+        @MemoIdentity { :>> providedId = "CR-MED-032"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::warning;
@@ -144,7 +146,7 @@ package memo_rules_closure {
     // ─── Cybersecurity Layer Rules ───────────────────────────────────────
 
     constraint def ThreatMitigationRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-040";
+        @MemoIdentity { :>> providedId = "CR-MED-040"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Threat";
         attribute severity = RuleSeverityKind::error;
@@ -154,7 +156,7 @@ package memo_rules_closure {
     }
 
     constraint def AssetThreatLinkRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-041";
+        @MemoIdentity { :>> providedId = "CR-MED-041"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "CybersecurityAsset";
         attribute severity = RuleSeverityKind::warning;
@@ -166,7 +168,7 @@ package memo_rules_closure {
     // ─── Interface Rules ─────────────────────────────────────────────────
 
     constraint def LogicalInterfaceDirectionRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-050";
+        @MemoIdentity { :>> providedId = "CR-MED-050"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Interface";
         attribute severity = RuleSeverityKind::error;
@@ -178,7 +180,7 @@ package memo_rules_closure {
     // ─── Conditional Rules ───────────────────────────────────────────────
 
     constraint def SafetyClassCVerificationRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-101";
+        @MemoIdentity { :>> providedId = "CR-MED-101"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
@@ -203,7 +205,7 @@ package memo_rules_closure {
     // triggers. Chrome must be DECLARED `decoration`; an element left
     // unclassified fails rather than passing as scenery.
     constraint def UiElementDesignRecordRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-110";
+        @MemoIdentity { :>> providedId = "CR-MED-110"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::error;
@@ -217,7 +219,7 @@ package memo_rules_closure {
     // The interactive-form restriction lives in the predicate because it spans
     // several enum values.
     constraint def ControlInvokesFunctionRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-111";
+        @MemoIdentity { :>> providedId = "CR-MED-111"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::warning;
@@ -230,7 +232,7 @@ package memo_rules_closure {
     // unconfirmed machine guess must never reach a design review looking like
     // an engineering decision.
     constraint def BoundsDetectionConfirmedRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-112";
+        @MemoIdentity { :>> providedId = "CR-MED-112"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::warning;
@@ -242,7 +244,7 @@ package memo_rules_closure {
     // A screenshot with no build behind it is undated design intent, not
     // evidence of what the device does.
     constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule {
-        attribute :>> id = "CR-MED-113";
+        @MemoIdentity { :>> providedId = "CR-MED-113"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "ScreenCapture";
         attribute severity = RuleSeverityKind::error;

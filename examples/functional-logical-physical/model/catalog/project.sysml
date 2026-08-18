@@ -14,8 +14,10 @@ package memo_examples_functional_logical_physical_project {
     private import memo_examples_functional_logical_physical_viewpoints_unassigned::*;
     private import memo_examples_functional_logical_physical_viewpoints_unassigned_views_functional_logical_physical_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-LOGICAL-PHYSICAL-001";
+        @MemoIdentity { :>> providedId = "PMB-LOGICAL-PHYSICAL-001"; }
         attribute :>> name = "FunctionalLogicalPhysicalProjectMethodBinding";
         attribute :>> projectName = "Functional Logical Physical";
         ref :>> selectedMethodology = mdDefaultDefinition;

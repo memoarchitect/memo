@@ -10,8 +10,10 @@ package memo_examples_gpca_pump_project {
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_methodology_gpca_profiles::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part gpcaProjectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-GPCA-001";
+        @MemoIdentity { :>> providedId = "PMB-GPCA-001"; }
         attribute :>> name = "GPCAProjectMethodBinding";
         attribute :>> projectName = "GPCA Infusion Pump";
         ref :>> selectedMethodology = gpcaMethodDefinition;

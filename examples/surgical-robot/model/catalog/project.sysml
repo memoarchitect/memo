@@ -14,8 +14,10 @@ package memo_examples_surgical_robot_project {
     private import memo_examples_surgical_robot_viewpoints_unassigned::*;
     private import memo_examples_surgical_robot_viewpoints_unassigned_views_surgical_robot_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-SURGICAL-ROBOT-001";
+        @MemoIdentity { :>> providedId = "PMB-SURGICAL-ROBOT-001"; }
         attribute :>> name = "SurgicalRobotProjectMethodBinding";
         attribute :>> projectName = "Surgical Robot";
         ref :>> selectedMethodology = mdDefaultDefinition;

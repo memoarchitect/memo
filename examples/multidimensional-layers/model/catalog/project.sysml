@@ -14,8 +14,10 @@ package memo_examples_multidimensional_layers_project {
     private import memo_examples_multidimensional_layers_viewpoints_unassigned::*;
     private import memo_examples_multidimensional_layers_viewpoints_unassigned_views_multidimensional_layers_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-MULTIDIMENSIONAL-LAYERS-001";
+        @MemoIdentity { :>> providedId = "PMB-MULTIDIMENSIONAL-LAYERS-001"; }
         attribute :>> name = "MultidimensionalLayersProjectMethodBinding";
         attribute :>> projectName = "Multidimensional Layers";
         ref :>> selectedMethodology = mdDefaultDefinition;

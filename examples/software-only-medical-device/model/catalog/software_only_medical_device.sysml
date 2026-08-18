@@ -18,31 +18,33 @@ package memo_examples_software_only_medical_device {
     // the mechanism working as designed rather than a cost of the move.
     private import memo_extension_cloud::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part swScreeningApp : SoftwareSystem {
-        attribute :>> id = "SMD-SW-001"; attribute :>> name = "ScreeningApplication";
+        @MemoIdentity { :>> providedId = "SMD-SW-001"; } attribute :>> name = "ScreeningApplication";
         attribute :>> safetyClass = SafetyClassKind::B;
         attribute :>> version = "1.4.0";
     }
     part algGrading : Algorithm {
-        attribute :>> id = "SMD-ALG-001"; attribute :>> name = "RetinopathyGradingModel";
+        @MemoIdentity { :>> providedId = "SMD-ALG-001"; } attribute :>> name = "RetinopathyGradingModel";
         attribute :>> algorithmKind = "convolutional neural network, locked (non-adaptive)";
         attribute :>> clinicalPerformanceClaim = "sensitivity >= 87%, specificity >= 90% vs. reference standard";
     }
     part soupInference : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::soup;
-        attribute :>> id = "SMD-SOUP-001"; attribute :>> name = "InferenceRuntimeLibrary";
+        @MemoIdentity { :>> providedId = "SMD-SOUP-001"; } attribute :>> name = "InferenceRuntimeLibrary";
         attribute :>> soupVendor = "third-party OSS";
         attribute :>> soupClassification = SOUPClassificationKind::classB;
     }
     part swGradingModule : SoftwareModule {
-        attribute :>> id = "SMD-SW-002"; attribute :>> name = "GradingModule";
+        @MemoIdentity { :>> providedId = "SMD-SW-002"; } attribute :>> name = "GradingModule";
         attribute :>> responsibility = "Wraps the grading model behind the service API; owns input validation and result structuring.";
         attribute :>> safetyClass = SafetyClassKind::B;
     }
     dependency swGradingModule to soupInference;
 
     part svcGrading : CloudService {
-        attribute :>> id = "SMD-RT-001"; attribute :>> name = "GradingService";
+        @MemoIdentity { :>> providedId = "SMD-RT-001"; } attribute :>> name = "GradingService";
         attribute :>> serviceContract = "REST /grade: image in, structured finding out";
         attribute :>> discoveryMechanism = "DNS name behind the cluster ingress";
         attribute :>> updatePolicy = "blue/green rollout";
@@ -51,12 +53,12 @@ package memo_examples_software_only_medical_device {
     #refinement dependency svcGrading to swGradingModule;
 
     part duContainerImage : SoftwareDeploymentUnit {
-        attribute :>> id = "SMD-DU-001"; attribute :>> name = "ScreeningServiceImage";
+        @MemoIdentity { :>> providedId = "SMD-DU-001"; } attribute :>> name = "ScreeningServiceImage";
         attribute :>> unitKind = "OCI container image";
         attribute :>> integrityProtection = "image signature + SBOM attestation";
     }
     part nodeCloud : ProcessingNode {
-        attribute :>> id = "SMD-HW-001"; attribute :>> name = "CloudComputeNode";
+        @MemoIdentity { :>> providedId = "SMD-HW-001"; } attribute :>> name = "CloudComputeNode";
         attribute :>> nodeKind = ProcessingNodeKind::cloudServer;
         attribute :>> supportsContainerization = true;
         attribute :>> realTimeCapable = false;

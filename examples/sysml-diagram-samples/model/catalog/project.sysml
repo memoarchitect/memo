@@ -23,8 +23,10 @@ package memo_examples_sysml_diagram_samples_project {
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-DIAGRAM-SAMPLES-001";
+        @MemoIdentity { :>> providedId = "PMB-DIAGRAM-SAMPLES-001"; }
         attribute :>> name = "SysmlDiagramSamplesProjectMethodBinding";
         attribute :>> projectName = "Sysml Diagram Samples";
         ref :>> selectedMethodology = mdDefaultDefinition;

@@ -6,13 +6,15 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_v
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_analysis::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view hazardAnalysisView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_view::*;
         expose fmeaDelivery;
         expose ftaOverdose;
-        attribute :>> id = "DOC-009";
+        @MemoIdentity { :>> providedId = "DOC-009"; }
         attribute :>> name = "HazardAnalysisReportView";
-        attribute :>> shortDescription = "Hazard analysis report aligned to the UMN CriSys GPCA hazard tables.";
+        @MemoIdentity { :>> shortDescription = "Hazard analysis report aligned to the UMN CriSys GPCA hazard tables."; }
         attribute :>> description = "Aggregates the five hazard chains, the FMEA worksheet, and the overdose fault tree with their controls and verification pointers.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
@@ -21,7 +23,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_v
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = riskViewpoint;
         part :>> selectionQuery {
-            attribute :>> id = "QRY-DOC-003";
+            @MemoIdentity { :>> providedId = "QRY-DOC-003"; }
             attribute :>> name = "hazardAnalysisViewQuery";
             attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureCause", "FailureEffect", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeNode", "MinimalCutSet", "Hazard", "HazardCause", "SequenceOfEvents");
             attribute :>> includeRelationshipKinds = ("HasFailureMode", "Causes", "DetectedBy", "Mitigates", "InputToGate", "ContainsEvent", "Mitigates");

@@ -21,8 +21,10 @@ package memo_extension_template {
     private import memo_methodology_core::*;
     private import memo_methodology_profiles::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part extensionMethod : MethodologyDefinition {
-        attribute :>> id = "EXT-METH-001";
+        @MemoIdentity { :>> providedId = "EXT-METH-001"; }
         attribute :>> name = "ExtensionMethod";
         attribute :>> version = "0.1.0";
         attribute :>> domain = "project extension";

@@ -18,8 +18,10 @@ package memo_artifacts_standards_fda_cybersecurity_2023 {
     private import memo_core_relationships::*;
     private import memo_artifacts_standards_traceability::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     item fdaCybersecurity2023 : RegulatoryStandard {
-        attribute :>> id = "STD-FDA-CYBER-2023";
+        @MemoIdentity { :>> providedId = "STD-FDA-CYBER-2023"; }
         attribute :>> name = "FDACybersecurity2023";
         attribute :>> designation = "FDA Cybersecurity Guidance 2023";
         attribute :>> edition = "2023-09";
@@ -28,42 +30,42 @@ package memo_artifacts_standards_fda_cybersecurity_2023 {
     }
 
     item fdaCyberSection4 : StandardClause {
-        attribute :>> id = "STD-FDA-CYBER-2023-IV";
+        @MemoIdentity { :>> providedId = "STD-FDA-CYBER-2023-IV"; }
         attribute :>> name = "FDACyberSectionIV";
         attribute :>> clauseNumber = "IV";
         attribute :>> title = "general cybersecurity principles";
         attribute :>> normativeStrength = "informative";
     }
     item fdaCyberSection5 : StandardClause {
-        attribute :>> id = "STD-FDA-CYBER-2023-V";
+        @MemoIdentity { :>> providedId = "STD-FDA-CYBER-2023-V"; }
         attribute :>> name = "FDACyberSectionV";
         attribute :>> clauseNumber = "V";
         attribute :>> title = "secure product development framework";
         attribute :>> normativeStrength = "informative";
     }
     item fdaCyberSection5A : StandardClause {
-        attribute :>> id = "STD-FDA-CYBER-2023-V-A";
+        @MemoIdentity { :>> providedId = "STD-FDA-CYBER-2023-V-A"; }
         attribute :>> name = "FDACyberSectionVA";
         attribute :>> clauseNumber = "V.A";
         attribute :>> title = "security risk management";
         attribute :>> normativeStrength = "informative";
     }
     item fdaCyberSection5B : StandardClause {
-        attribute :>> id = "STD-FDA-CYBER-2023-V-B";
+        @MemoIdentity { :>> providedId = "STD-FDA-CYBER-2023-V-B"; }
         attribute :>> name = "FDACyberSectionVB";
         attribute :>> clauseNumber = "V.B";
         attribute :>> title = "security architecture";
         attribute :>> normativeStrength = "informative";
     }
     item fdaCyberSection5C : StandardClause {
-        attribute :>> id = "STD-FDA-CYBER-2023-V-C";
+        @MemoIdentity { :>> providedId = "STD-FDA-CYBER-2023-V-C"; }
         attribute :>> name = "FDACyberSectionVC";
         attribute :>> clauseNumber = "V.C";
         attribute :>> title = "cybersecurity testing";
         attribute :>> normativeStrength = "informative";
     }
     item fdaCyberSection6 : StandardClause {
-        attribute :>> id = "STD-FDA-CYBER-2023-VI";
+        @MemoIdentity { :>> providedId = "STD-FDA-CYBER-2023-VI"; }
         attribute :>> name = "FDACyberSectionVI";
         attribute :>> clauseNumber = "VI";
         attribute :>> title = "cybersecurity transparency and vulnerability management";

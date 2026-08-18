@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_device_intercon
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaDeviceInterconnectView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_logical_device_interconnect_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-LOG-003";
+        @MemoIdentity { :>> providedId = "VIEW-LOG-003"; }
         attribute :>> name = "GPCA_DeviceInterconnectView";
-        attribute :>> shortDescription = "AADL device-level interconnection: GPCA_HW_Sensors, GPCA_SW, and GPCA_HW_Actuators with their declared boundary features.";
+        @MemoIdentity { :>> shortDescription = "AADL device-level interconnection: GPCA_HW_Sensors, GPCA_SW, and GPCA_HW_Actuators with their declared boundary features."; }
         attribute :>> description = "Source-faithful interconnection view of GPCA_Device.Impl: exactly the three AADL subcomponents (GPCA_HW_Sensors, GPCA_SW, GPCA_HW_Actuators), the device and subsystem boundary ports, and the twelve declared port connections. MEMO physical-design additions such as the controller board, power sources, enclosure, and individual sensors/actuators are intentionally excluded because the published AADL v2.0 model does not declare them as GPCA_Device.Impl subcomponents. Drill into GPCA_SW to inspect its eight subcomponents and 42 internal connections; use the connection-density control to switch between bundled summary and full fidelity.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::internalDiagram);
@@ -28,7 +30,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_device_intercon
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include hardware assemblies, the software system with its components and boundary ports, and the exchange topology between them.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-LOG-003";
+            @MemoIdentity { :>> providedId = "QRY-LOG-003"; }
             attribute :>> name = "GPCA_DeviceInterconnectQuery";
             attribute :>> includeElementIds = ("gpcaDevice", "gpcaDeviceSensors", "gpcaSoftware", "gpcaActuators", "devOpCmdIn", "devDbIn", "devPresIn", "devPatientIn", "devGpcaOut", "snsOpCmdIn", "snsDbIn", "snsPresIn", "snsPatientIn", "snsOpCmdOut", "snsPresOut", "snsPatientOut", "snsSensorOut", "snsConstOut", "snsDbOut", "portOpCmdIn", "portPresIn", "portPatientIn", "portSensorIn", "portConstIn", "portDbIn", "portGpcaSwOut", "actGpcaSwIn", "actGpcaOut", "tlm", "systemStatus", "alarm", "config", "infusionMgr", "systemMonitor", "logging", "outputBus");
             attribute :>> includeRelationshipKinds = ("flow", "bind", "Composes");
