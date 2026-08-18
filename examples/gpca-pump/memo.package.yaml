@@ -1,0 +1,3 @@
+name: gpca-pump
+entrypoint: model/catalog/project.sysml
+include: [model]
