@@ -1,6 +1,6 @@
 [project]
 name = "memo-ontology-docs"
-version = "0.8.23"
+version = "0.8.24"
 description = "Documentation for the MEMO medical engineering modeling ontology"
 requires-python = ">=3.10"
 dependencies = [

@@ -6,6 +6,18 @@ package memo_assurance_safety_risk {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_assurance_requirements::*;
+
+    // ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards,
+    // scenarios, requirements, and DHF records can trace to the foreseeable
+    // misuse that motivated them. Its counterpart, IntendedUse, is now the
+    // operational-world root (memo_architecture_operational_structure::IntendedUse,
+    // a MemoMission).
+    part def ReasonablyForeseeableMisuse specializes MemoPart {
+        attribute misuseContext : String;
+        attribute foreseeableBasis : String;
+        attribute affectedUseContext : String;
+    }
+
     part def Risk specializes RiskDriver {
         attribute probabilityEstimate : ProbabilityKind;
         attribute severityEstimate : SeverityKind;
