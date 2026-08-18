@@ -62,23 +62,32 @@ attributes is either a domain concept the language lacks — in which case it
 belongs to MEMO — or a re-spelling of one the language already has, in which
 case it must not exist.
 
-The audit below was measured on 2026-08-12 against that corpus. Each MEMO
-construct in the left column duplicates the native form on its right.
+The audit below was measured on 2026-08-12 against that corpus and **re-measured
+2026-08-18**. Each MEMO construct in the left column duplicates the native form
+on its right. The status column is the point: without it the table read as a
+backlog long after most of it had been done, and 12 of the 17 rows were stale.
 
-| MEMO construct | Native form |
-|---|---|
-| `Composes` | nesting (native containment) |
-| `IncludedIn` | `expose` |
-| `Initiates`, `ParticipatesIn` | `actor` |
-| `Includes` | `include use case` |
-| `PresentsState` | `exhibit state` |
-| `InvolvesFunction`, `ActionInvokesFunction` | `perform action` |
-| `Precedes` | `succession` / `first … then` |
-| `ModuleUses`, `MonitorsChannel` | `dependency` |
-| `Realizes` | `#refinement` metadata |
-| `DerivesFrom` | `#derivation` metadata |
-| `CommentsOn`, `NotesOn`, `RationaleFor` | `comment` / `doc` + standard `Rationale`, `Issue` metadata |
-| `ConnectsPhysically` | `connect` |
+| MEMO construct | Native form | Status (2026-08-18) |
+|---|---|---|
+| `Composes` | nesting (native containment) | **present** |
+| `IncludedIn` | `expose` | removed |
+| `Initiates`, `ParticipatesIn` | `actor` | removed |
+| `Includes` | `include use case` | removed |
+| `PresentsState` | `exhibit state` | removed |
+| `InvolvesFunction`, `ActionInvokesFunction` | `perform action` | removed |
+| `Precedes` | `succession` / `first … then` | removed |
+| `ModuleUses`, `MonitorsChannel` | `dependency` | removed |
+| `Realizes` | `#refinement` metadata | removed |
+| `DerivesFrom` | `#derivation` metadata | **present** |
+| `CommentsOn`, `NotesOn`, `RationaleFor` | `comment` / `doc` + standard `Rationale`, `Issue` metadata | **present** |
+| `ConnectsPhysically` | `connect` | removed |
+
+**This table is prose and therefore drifts in both directions** — rows stay after
+they are done, and duplicates found later never reach it. A full audit of all 73
+relation definitions and all 360 element definitions against the corpus is in
+`plans/reference/memo-vs-sysml-audit-2026-08-18.md`; it identifies roughly 24
+relations to delete and 23 to convert to typed native constructs, of which only
+the five marked *present* above were previously written down.
 
 Base-type duplication lands on every relationship at once, because all of them
 specialize `MemoRelationship`. Deleted in R10-S5 (2026-08-13):
@@ -104,6 +113,16 @@ is a straight deletion, not a migration. Use the connection usage's own
 declared name (`connection linkFoo : Bar …`) and a `doc` comment — both were
 already available on every usage before this change; nothing native was
 missing.
+
+> **This reasoning is specific to relationships and does NOT generalise.**
+> Measured 2026-08-18: parts set `name` **1311** times, and there the MEMO
+> attribute and the native name are different strings carrying different
+> information — `part entityPharmacy` (lowerCamelCase identifier) versus
+> `attribute :>> name = "HospitalPharmacy"` (display label). The casing
+> convention above guarantees they differ. On parts, `name` is a display label,
+> not a duplicate; deleting it would destroy the labels or force every
+> identifier to become its label. Treat the relationship row as closed and the
+> part case as a separate, open question.
 
 **`rationale` → `@Rationale { :>> text = "…"; }`:**
 
