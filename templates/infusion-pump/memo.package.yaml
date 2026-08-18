@@ -7,5 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '{{name}}'
+entrypoint: model/catalog/project.sysml
+include: [model]
 version: 0.1.0
 description: MEMO infusion pump model

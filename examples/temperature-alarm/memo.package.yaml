@@ -1,0 +1,3 @@
+name: temperature-alarm
+entrypoint: model/catalog/project.sysml
+include: [model]
