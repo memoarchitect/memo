@@ -1,8 +1,8 @@
 {
   "name": "@memoarchitect/ontology",
-  "version": "0.8.24",
+  "version": "0.9.0",
   "packageManager": "pnpm@9.15.0",
-  "description": "MEMO \u2014 Medical Engineering Modelling Ontology. Pure SysML v2 medical-device ontology with native constraints, portable to any conformant SysML v2 tool (SysIDE, SysON, sysand).",
+  "description": "MEMO — Medical Engineering Modelling Ontology. Pure SysML v2 medical-device ontology with native constraints, portable to any conformant SysML v2 tool (SysIDE, SysON, sysand).",
   "scripts": {
     "build": "bash scripts/build-kpar.sh",
     "check": "bash scripts/build-kpar.sh && npm run lint",

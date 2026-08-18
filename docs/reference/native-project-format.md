@@ -37,19 +37,40 @@ model/
       reviews/      comments.sysml, notes.sysml, rationales.sysml
       documents/    templates/  analyses/  configuration_management/
     traces.sysml                        cross-namespace relationships
-memo.package.yaml                       optional locator (identity + sysmlDir)
+memo.package.yaml                       REQUIRED locator (identity + entrypoint + include)
 memo.lock.yaml                          optional generated resolution record
 .memo/architect/                        optional transient workspace state
 ```
 
-Only the `model/catalog/` root and the namespace mirroring are normative.
-Filenames are a default starting layout; parsed package ownership decides
-origin, so nothing depends on a file being called `activities.sysml`.
+Only the namespace mirroring is normative. Filenames and directories are a
+default starting layout; parsed package ownership decides origin, so nothing
+depends on a file being called `activities.sysml` — or on the entrypoint being
+called `model/catalog/project.sysml`.
 
 ## The entrypoint
 
-`model/catalog/project.sysml` imports what the project uses and declares its
-binding:
+The entrypoint is named by `entrypoint` in `memo.package.yaml`. It is a
+locator, not semantics: it says WHERE identity and import scope start, and the
+SysML file it names still says WHAT they are.
+
+```yaml
+name: my-project
+entrypoint: model/catalog/project.sysml
+include: [model]
+```
+
+**There is no conventional fallback.** A directory holding a
+`model/catalog/project.sysml` with no `entrypoint` naming it is not a project,
+and MEMO commands report a missing locator rather than a missing file — the
+file is usually present. `model/catalog/project.sysml` is what `memo init`
+scaffolds and what most projects keep, but it is a default, not a rule; a
+project rooted at `src/project.sysml` is equally valid and is found the same
+way.
+
+`include` names the directories holding model source. A project that omits it
+resolves no packages of its own.
+
+The entrypoint file imports what the project uses and declares its binding:
 
 ```sysml
 package infusion_pump_catalog {
@@ -191,7 +212,7 @@ Permitted, and read only for these purposes:
 
 | File | Purpose |
 | --- | --- |
-| `memo.package.yaml` | Locator: `name`, `version`, `description`, `license`, `tags`, `sysmlDir` |
+| `memo.package.yaml` | Locator: `name`, `entrypoint`, `include`, `version`, `description`, `license`, `tags`, `sysmlDir`. `entrypoint` and `include` are required for a project; `sysmlDir` is the library-package equivalent |
 | `memo.tools.yaml` | Compiler/packager selection, executable paths, watch and export behaviour |
 | `memo.architect.yaml` | Server, browser lifecycle, UI, renderer defaults |
 | `memo.lock.yaml` | Generated: the packages, versions, and hashes the imports resolved to |

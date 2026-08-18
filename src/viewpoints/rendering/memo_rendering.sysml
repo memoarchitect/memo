@@ -31,6 +31,26 @@ package memo_viewpoints_rendering {
         attribute explorerGroup : String;
     }
 
+    // The display identity of one enumeration value.
+    //
+    // `enumValue` is the FULLY QUALIFIED value as the model stores it
+    // ("StatusKind::tbd"), which is the only spelling that identifies a member
+    // unambiguously. A consumer matches on that and reads the label; it must
+    // never parse the string, because a suffix test like `endsWith("resolved")`
+    // silently mismatches the moment a member is renamed or a new member ends
+    // in the same word.
+    //
+    // Labels live here rather than in an application for the same reason layer
+    // colours do: a consumer that received the ontology without them would
+    // render different text for the same model. The static HTML export, the DHF
+    // workbench and a report generator all resolve the same label from here.
+    part def EnumRendering :> MemoPart {
+        attribute enumValue : String;
+        attribute label : String;
+        attribute shortLabel : String[0..1];
+        attribute enumColor : String[0..1];
+    }
+
     part layerOperationalRendering : LayerRendering {
         attribute :>> id = "LAYER-OPERATIONAL";
         attribute :>> name = "OperationalLayerRendering";
@@ -351,4 +371,163 @@ package memo_viewpoints_rendering {
         attribute :>> explorerGroup = "methodology";
     }
 
+    // ── Enumeration labels ───────────────────────────────────────
+    // Seeded with the three status enums. `StatusKind` is the standard
+    // ModelingMetadata one and is seeded first because its members are
+    // abbreviations no reader expands on sight; it tracks whether a
+    // question about an element is settled, which is orthogonal to
+    // `ElementStatusKind` tracking where the element sits in its
+    // controlled lifecycle. An element can be released and still carry a
+    // tbr on one unresolved value.
+
+
+    part enumStatusOpen : EnumRendering {
+        attribute :>> id = "ENUM-STATUS-001";
+        attribute :>> name = "EnumStatusOpen";
+        attribute :>> enumValue = "StatusKind::open";
+        attribute :>> label = "Open";
+        attribute :>> shortLabel = "Open";
+        attribute :>> enumColor = "#6B7280";
+    }
+
+    part enumStatusTbd : EnumRendering {
+        attribute :>> id = "ENUM-STATUS-002";
+        attribute :>> name = "EnumStatusTbd";
+        attribute :>> enumValue = "StatusKind::tbd";
+        attribute :>> label = "To Be Determined";
+        attribute :>> shortLabel = "TBD";
+        attribute :>> enumColor = "#D97706";
+    }
+
+    part enumStatusTbr : EnumRendering {
+        attribute :>> id = "ENUM-STATUS-003";
+        attribute :>> name = "EnumStatusTbr";
+        attribute :>> enumValue = "StatusKind::tbr";
+        attribute :>> label = "To Be Resolved";
+        attribute :>> shortLabel = "TBR";
+        attribute :>> enumColor = "#D97706";
+    }
+
+    part enumStatusTbc : EnumRendering {
+        attribute :>> id = "ENUM-STATUS-004";
+        attribute :>> name = "EnumStatusTbc";
+        attribute :>> enumValue = "StatusKind::tbc";
+        attribute :>> label = "To Be Confirmed";
+        attribute :>> shortLabel = "TBC";
+        attribute :>> enumColor = "#D97706";
+    }
+
+    part enumStatusDone : EnumRendering {
+        attribute :>> id = "ENUM-STATUS-005";
+        attribute :>> name = "EnumStatusDone";
+        attribute :>> enumValue = "StatusKind::done";
+        attribute :>> label = "Done";
+        attribute :>> shortLabel = "Done";
+        attribute :>> enumColor = "#0F766E";
+    }
+
+    part enumStatusClosed : EnumRendering {
+        attribute :>> id = "ENUM-STATUS-006";
+        attribute :>> name = "EnumStatusClosed";
+        attribute :>> enumValue = "StatusKind::closed";
+        attribute :>> label = "Closed";
+        attribute :>> shortLabel = "Closed";
+        attribute :>> enumColor = "#0F766E";
+    }
+
+    part enumElementProposed : EnumRendering {
+        attribute :>> id = "ENUM-ELEM-001";
+        attribute :>> name = "EnumElementProposed";
+        attribute :>> enumValue = "ElementStatusKind::proposed";
+        attribute :>> label = "Proposed";
+        attribute :>> enumColor = "#6B7280";
+    }
+
+    part enumElementDraft : EnumRendering {
+        attribute :>> id = "ENUM-ELEM-002";
+        attribute :>> name = "EnumElementDraft";
+        attribute :>> enumValue = "ElementStatusKind::draft";
+        attribute :>> label = "Draft";
+        attribute :>> enumColor = "#6B7280";
+    }
+
+    part enumElementInReview : EnumRendering {
+        attribute :>> id = "ENUM-ELEM-003";
+        attribute :>> name = "EnumElementInReview";
+        attribute :>> enumValue = "ElementStatusKind::inReview";
+        attribute :>> label = "In Review";
+        attribute :>> enumColor = "#D97706";
+    }
+
+    part enumElementApproved : EnumRendering {
+        attribute :>> id = "ENUM-ELEM-004";
+        attribute :>> name = "EnumElementApproved";
+        attribute :>> enumValue = "ElementStatusKind::approved";
+        attribute :>> label = "Approved";
+        attribute :>> enumColor = "#0F766E";
+    }
+
+    part enumElementReleased : EnumRendering {
+        attribute :>> id = "ENUM-ELEM-005";
+        attribute :>> name = "EnumElementReleased";
+        attribute :>> enumValue = "ElementStatusKind::released";
+        attribute :>> label = "Released";
+        attribute :>> enumColor = "#0F766E";
+    }
+
+    part enumElementDeprecated : EnumRendering {
+        attribute :>> id = "ENUM-ELEM-006";
+        attribute :>> name = "EnumElementDeprecated";
+        attribute :>> enumValue = "ElementStatusKind::deprecated";
+        attribute :>> label = "Deprecated";
+        attribute :>> enumColor = "#B45309";
+    }
+
+    part enumElementRetired : EnumRendering {
+        attribute :>> id = "ENUM-ELEM-007";
+        attribute :>> name = "EnumElementRetired";
+        attribute :>> enumValue = "ElementStatusKind::retired";
+        attribute :>> label = "Retired";
+        attribute :>> enumColor = "#991B1B";
+    }
+
+    part enumCommentOpen : EnumRendering {
+        attribute :>> id = "ENUM-CMT-001";
+        attribute :>> name = "EnumCommentOpen";
+        attribute :>> enumValue = "CommentStatusKind::open";
+        attribute :>> label = "Open";
+        attribute :>> enumColor = "#2563EB";
+    }
+
+    part enumCommentAcknowledged : EnumRendering {
+        attribute :>> id = "ENUM-CMT-002";
+        attribute :>> name = "EnumCommentAcknowledged";
+        attribute :>> enumValue = "CommentStatusKind::acknowledged";
+        attribute :>> label = "Acknowledged";
+        attribute :>> enumColor = "#2563EB";
+    }
+
+    part enumCommentAddressed : EnumRendering {
+        attribute :>> id = "ENUM-CMT-003";
+        attribute :>> name = "EnumCommentAddressed";
+        attribute :>> enumValue = "CommentStatusKind::addressed";
+        attribute :>> label = "Addressed";
+        attribute :>> enumColor = "#0F766E";
+    }
+
+    part enumCommentResolved : EnumRendering {
+        attribute :>> id = "ENUM-CMT-004";
+        attribute :>> name = "EnumCommentResolved";
+        attribute :>> enumValue = "CommentStatusKind::resolved";
+        attribute :>> label = "Resolved";
+        attribute :>> enumColor = "#0F766E";
+    }
+
+    part enumCommentRejected : EnumRendering {
+        attribute :>> id = "ENUM-CMT-005";
+        attribute :>> name = "EnumCommentRejected";
+        attribute :>> enumValue = "CommentStatusKind::rejected";
+        attribute :>> label = "Rejected";
+        attribute :>> enumColor = "#991B1B";
+    }
 }
