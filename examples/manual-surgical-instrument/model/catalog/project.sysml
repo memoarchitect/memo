@@ -14,8 +14,10 @@ package memo_examples_manual_surgical_instrument_project {
     private import memo_examples_manual_surgical_instrument_viewpoints_unassigned::*;
     private import memo_examples_manual_surgical_instrument_viewpoints_unassigned_views_manual_surgical_instrument_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-SURGICAL-INSTRUMENT-001";
+        @MemoIdentity { :>> providedId = "PMB-SURGICAL-INSTRUMENT-001"; }
         attribute :>> name = "ManualSurgicalInstrumentProjectMethodBinding";
         attribute :>> projectName = "Manual Surgical Instrument";
         ref :>> selectedMethodology = mdDefaultDefinition;

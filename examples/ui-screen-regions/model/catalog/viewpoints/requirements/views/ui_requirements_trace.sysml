@@ -29,6 +29,8 @@ package memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_require
     private import memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
     private import memo_examples_ui_screen_regions_traces::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view uiRequirementsTrace : MemoDiagramView {
         expose memo_examples_ui_screen_regions_architecture_implementation_ui::*;
         expose memo_examples_ui_screen_regions_architecture_functional_functions::*;
@@ -43,13 +45,13 @@ package memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_require
         expose memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
         expose memo_examples_ui_screen_regions_traces::*;
         attribute depth = 3;
-        attribute :>> id = "REQ-101";
-        attribute :>> shortDescription = "Clinical need through UI requirements to satisfying regions and functions.";
+        @MemoIdentity { :>> providedId = "REQ-101"; }
+        @MemoIdentity { :>> shortDescription = "Clinical need through UI requirements to satisfying regions and functions."; }
         attribute :>> viewKind = DiagramViewKind::grid;
         attribute :>> diagramType = "req";
         attribute :>> autoPopulate = true;
         part :>> selectionQuery {
-            attribute :>> id = "QRY-101";
+            @MemoIdentity { :>> providedId = "QRY-101"; }
             attribute :>> name = "UIRequirementsTraceQuery";
             attribute :>> includeElementKinds = ("Need", "Requirement", "UIElement", "SystemFunction", "VerificationCase");
             attribute :>> includeRelationshipKinds = ("DerivesFrom", "SatisfiedBy", "VerifiedBy");

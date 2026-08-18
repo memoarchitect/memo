@@ -5,19 +5,21 @@ package memo_viewpoints_context_views_system_context_view {
                 private import memo_core_enumerations::*;
     private import memo_viewpoints_context_context_viewpoint::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
                 view systemContextView : MemoDiagramView {
                     expose memo_viewpoints_context_views_system_context_view::*;
                     attribute depth = 2;
-    attribute :>> id = "VIEW-CTX-001";
+    @MemoIdentity { :>> providedId = "VIEW-CTX-001"; }
     attribute :>> name = "SystemContextView";
-    attribute :>> shortDescription = "Actors, use context, and system boundary.";
+    @MemoIdentity { :>> shortDescription = "Actors, use context, and system boundary."; }
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::blockDiagram);
     attribute :>> diagramType = "bdd";
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include actors, use contexts, and trust boundaries at the system boundary.";
     part :>> selectionQuery {
-        attribute :>> id = "QRY-CTX-001";
+        @MemoIdentity { :>> providedId = "QRY-CTX-001"; }
         attribute :>> name = "SystemContextQuery";
         attribute :>> includeElementKinds = ("Actor", "UseContext", "TrustBoundary");
         attribute :>> includeLayers = ("context");

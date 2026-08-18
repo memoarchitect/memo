@@ -4,10 +4,12 @@ package memo_viewpoints_clinical_clinical_viewpoint {
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     viewpoint clinicalViewpoint : MemoViewpoint {
-        attribute :>> id = "VP-CLIN";
+        @MemoIdentity { :>> providedId = "VP-CLIN"; }
         attribute :>> name = "ClinicalViewpoint";
-        attribute :>> shortDescription = "Shows clinical context, users, use environment, and clinical evidence.";
+        @MemoIdentity { :>> shortDescription = "Shows clinical context, users, use environment, and clinical evidence."; }
         attribute :>> description = "Default viewpoint derived from the context and assurance layers for clinical stakeholders — intended use, patient/clinician interaction, clinical evidence, and clinical safety claims.";
         attribute :>> purpose = "Communicate clinical use context and clinical evidence for the device.";
         attribute :>> audience = (AudienceKind::clinicalEngineer, AudienceKind::regulatoryEngineer);

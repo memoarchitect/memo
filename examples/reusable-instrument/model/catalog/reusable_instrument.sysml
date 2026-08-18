@@ -12,15 +12,17 @@ package memo_examples_reusable_instrument {
     private import memo_architecture_operational_workflows::*;
     private import memo_architecture_operational_scenarios::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part sterileProcessingTech : User {
         attribute :>> actorKind = ActorKind::technician;
-        attribute :>> id = "RI-USR-001"; attribute :>> name = "SterileProcessingTechnician";
+        @MemoIdentity { :>> providedId = "RI-USR-001"; } attribute :>> name = "SterileProcessingTechnician";
         attribute :>> serviceScope = "central sterile services department";
     }
 
     use case ucSterilize : UseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
-        attribute :>> id = "RI-UC-001"; attribute :>> name = "SterilizeReusableInstrument";
+        @MemoIdentity { :>> providedId = "RI-UC-001"; } attribute :>> name = "SterilizeReusableInstrument";
         attribute :>> goalStatement = "Return a used instrument to sterile, functional condition for the next case.";
         attribute :>> preCondition = "instrument collected from the OR; gross soil removed at point of use";
         attribute :>> successOutcome = "instrument cleaned, inspected, sterilized, and released to sterile storage";
@@ -30,26 +32,26 @@ package memo_examples_reusable_instrument {
 
     // Reprocessing workflow: exists independently of any single instrument.
     action wfReprocess : OperationalWorkflow {
-        attribute :>> id = "RI-WF-001"; attribute :>> name = "InstrumentReprocessingWorkflow";
+        @MemoIdentity { :>> providedId = "RI-WF-001"; } attribute :>> name = "InstrumentReprocessingWorkflow";
         attribute :>> workflowState = WorkflowStateKind::asIs;
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";
     }
     action actClean : OperativeAction {
-        attribute :>> id = "RI-ACT-001"; attribute :>> name = "CleanAndDisinfect";
+        @MemoIdentity { :>> providedId = "RI-ACT-001"; } attribute :>> name = "CleanAndDisinfect";
         attribute :>> criticality = CriticalityKind::high;
     }
     action actInspect : OperativeAction {
-        attribute :>> id = "RI-ACT-002"; attribute :>> name = "InspectAndFunctionTest";
+        @MemoIdentity { :>> providedId = "RI-ACT-002"; } attribute :>> name = "InspectAndFunctionTest";
         attribute :>> criticality = CriticalityKind::high;
     }
     action actSterilizeLoad : OperativeAction {
-        attribute :>> id = "RI-ACT-003"; attribute :>> name = "PackAndAutoclave";
+        @MemoIdentity { :>> providedId = "RI-ACT-003"; } attribute :>> name = "PackAndAutoclave";
         attribute :>> criticality = CriticalityKind::high;
     }
 
     action scNominalCycle : OperativeScenario {
-        attribute :>> id = "RI-SC-001"; attribute :>> name = "NominalReprocessingCycle";
+        @MemoIdentity { :>> providedId = "RI-SC-001"; } attribute :>> name = "NominalReprocessingCycle";
 
         perform actClean;
         perform actInspect;

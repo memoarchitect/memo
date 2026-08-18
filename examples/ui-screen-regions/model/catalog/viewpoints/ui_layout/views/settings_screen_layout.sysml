@@ -29,6 +29,8 @@ package memo_examples_ui_screen_regions_viewpoints_ui_layout_views_settings_scre
     private import memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
     private import memo_examples_ui_screen_regions_traces::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // The settings screen reached by NavigatesTo, rendered on its own capture.
     // One layout view per captured screen, and the view's name is the folder
     // its images live in — `model/assets/settingsScreenLayout/`.
@@ -45,7 +47,7 @@ package memo_examples_ui_screen_regions_viewpoints_ui_layout_views_settings_scre
         expose memo_examples_ui_screen_regions_artifacts_reviews_rationales::*;
         expose memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
         expose memo_examples_ui_screen_regions_traces::*;
-        attribute :>> id = "UIE-008";
+        @MemoIdentity { :>> providedId = "UIE-008"; }
         ref :>> viewpointDefinition = uiLayoutViewpoint;
     }
 }

@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaFunctionAllocationView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_functional_views_functional_function_allocation_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-FUN-102";
+        @MemoIdentity { :>> providedId = "VIEW-FUN-102"; }
         attribute :>> name = "GPCA_FunctionAllocationView";
-        attribute :>> shortDescription = "Allocation of logical functions to software components and hardware assemblies.";
+        @MemoIdentity { :>> shortDescription = "Allocation of logical functions to software components and hardware assemblies."; }
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
         attribute :>> viewKind = DiagramViewKind::grid;
@@ -27,7 +29,7 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include logical functions with their AllocatedTo targets.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-FUN-102";
+            @MemoIdentity { :>> providedId = "QRY-FUN-102"; }
             attribute :>> name = "GPCA_FunctionAllocationQuery";
             attribute :>> includeElementKinds = ("SystemFunction", "SoftwareModule", "HardwareAssembly");
             attribute :>> includeRelationshipKinds = ("AllocatedTo");

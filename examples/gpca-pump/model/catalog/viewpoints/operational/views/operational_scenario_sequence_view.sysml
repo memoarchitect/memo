@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_scenari
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaScenarioSequenceView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_operational_views_operational_scenario_sequence_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-BHV-002";
+        @MemoIdentity { :>> providedId = "VIEW-BHV-002"; }
         attribute :>> name = "GPCA_ScenarioSequenceView";
-        attribute :>> shortDescription = "Key therapy and alarm scenarios rendered as sequences over the functional chains.";
+        @MemoIdentity { :>> shortDescription = "Key therapy and alarm scenarios rendered as sequences over the functional chains."; }
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);
         attribute :>> viewKind = DiagramViewKind::sequence;
@@ -27,7 +29,7 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_scenari
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include system scenarios with the functional chains and steps that realize them.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-BHV-102";
+            @MemoIdentity { :>> providedId = "QRY-BHV-102"; }
             attribute :>> name = "GPCA_ScenarioSequenceQuery";
             attribute :>> includeElementKinds = ("OperativeScenario[scenarioKind=functional]", "OperativeScenario[scenarioKind=operative]", "FunctionalFlow", "FunctionalFlowStep");
             attribute :>> includeLayers = ("operational", "system");

@@ -14,30 +14,32 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
     private import memo_architecture_functional_functions::*;
     private import memo_architecture_operational_context_use_context::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // ── Deliver therapy ──────────────────────────────────────────
     action fnDeliverTherapy : SystemFunction {
-        attribute :>> id = "NDS-FN-001"; attribute :>> name = "DeliverTherapy";
+        @MemoIdentity { :>> providedId = "NDS-FN-001"; } attribute :>> name = "DeliverTherapy";
         attribute :>> functionCategory = "therapy";
         attribute :>> criticality = CriticalityKind::catastrophic;
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> outputSummary = "fluid delivered to the patient line at the prescribed rate";
 
         action fnMeterFluid : SystemFunction {
-            attribute :>> id = "NDS-FN-002"; attribute :>> name = "MeterFluid";
+            @MemoIdentity { :>> providedId = "NDS-FN-002"; } attribute :>> name = "MeterFluid";
             attribute :>> functionCategory = "therapy";
             attribute :>> criticality = CriticalityKind::catastrophic;
             attribute :>> concernKind = ConcernKind::safety;
             attribute :>> outputSummary = "measured volume displaced per control period";
 
             action fnDriveActuator : SystemFunction {
-                attribute :>> id = "NDS-FN-003"; attribute :>> name = "DriveActuator";
+                @MemoIdentity { :>> providedId = "NDS-FN-003"; } attribute :>> name = "DriveActuator";
                 attribute :>> functionCategory = "therapy";
                 attribute :>> criticality = CriticalityKind::catastrophic;
                 attribute :>> trigger = "rate command from the dose control loop";
                 attribute :>> concernKind = ConcernKind::safety;
             }
             action fnMeasureDelivered : SystemFunction {
-                attribute :>> id = "NDS-FN-004"; attribute :>> name = "MeasureDeliveredVolume";
+                @MemoIdentity { :>> providedId = "NDS-FN-004"; } attribute :>> name = "MeasureDeliveredVolume";
                 attribute :>> functionCategory = "therapy";
                 attribute :>> criticality = CriticalityKind::high;
                 attribute :>> concernKind = ConcernKind::safety;
@@ -45,20 +47,20 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
             }
         }
         action fnControlDose : SystemFunction {
-            attribute :>> id = "NDS-FN-005"; attribute :>> name = "ControlDose";
+            @MemoIdentity { :>> providedId = "NDS-FN-005"; } attribute :>> name = "ControlDose";
             attribute :>> functionCategory = "therapy";
             attribute :>> criticality = CriticalityKind::catastrophic;
             attribute :>> concernKind = ConcernKind::safety;
 
             action fnComputeRate : SystemFunction {
-                attribute :>> id = "NDS-FN-006"; attribute :>> name = "ComputeInfusionRate";
+                @MemoIdentity { :>> providedId = "NDS-FN-006"; } attribute :>> name = "ComputeInfusionRate";
                 attribute :>> functionCategory = "therapy";
                 attribute :>> criticality = CriticalityKind::catastrophic;
                 attribute :>> concernKind = ConcernKind::safety;
                 attribute :>> outputSummary = "rate command, saturated at the prescribed ceiling";
             }
             action fnValidatePrescription : SystemFunction {
-                attribute :>> id = "NDS-FN-007"; attribute :>> name = "ValidatePrescription";
+                @MemoIdentity { :>> providedId = "NDS-FN-007"; } attribute :>> name = "ValidatePrescription";
                 attribute :>> functionCategory = "therapy";
                 attribute :>> criticality = CriticalityKind::high;
                 attribute :>> concernKind = ConcernKind::clinical;
@@ -69,27 +71,27 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
 
     // ── Ensure safety ────────────────────────────────────────────
     action fnEnsureSafety : SystemFunction {
-        attribute :>> id = "NDS-FN-008"; attribute :>> name = "EnsureSafety";
+        @MemoIdentity { :>> providedId = "NDS-FN-008"; } attribute :>> name = "EnsureSafety";
         attribute :>> functionCategory = "protection";
         attribute :>> criticality = CriticalityKind::catastrophic;
         attribute :>> concernKind = ConcernKind::safety;
 
         action fnDetectOcclusion : SystemFunction {
-            attribute :>> id = "NDS-FN-009"; attribute :>> name = "DetectOcclusion";
+            @MemoIdentity { :>> providedId = "NDS-FN-009"; } attribute :>> name = "DetectOcclusion";
             attribute :>> functionCategory = "protection";
             attribute :>> criticality = CriticalityKind::catastrophic;
             attribute :>> trigger = "line pressure above the occlusion threshold";
             attribute :>> concernKind = ConcernKind::safety;
         }
         action fnDetectAirInLine : SystemFunction {
-            attribute :>> id = "NDS-FN-010"; attribute :>> name = "DetectAirInLine";
+            @MemoIdentity { :>> providedId = "NDS-FN-010"; } attribute :>> name = "DetectAirInLine";
             attribute :>> functionCategory = "protection";
             attribute :>> criticality = CriticalityKind::catastrophic;
             attribute :>> trigger = "air bolus detected in the patient line";
             attribute :>> concernKind = ConcernKind::safety;
         }
         action fnEnforceDoseLimits : SystemFunction {
-            attribute :>> id = "NDS-FN-011"; attribute :>> name = "EnforceDoseLimits";
+            @MemoIdentity { :>> providedId = "NDS-FN-011"; } attribute :>> name = "EnforceDoseLimits";
             attribute :>> functionCategory = "protection";
             attribute :>> criticality = CriticalityKind::catastrophic;
             attribute :>> concernKind = ConcernKind::safety;
@@ -99,27 +101,27 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
 
     // ── Inform the user ──────────────────────────────────────────
     action fnInformUser : SystemFunction {
-        attribute :>> id = "NDS-FN-012"; attribute :>> name = "InformUser";
+        @MemoIdentity { :>> providedId = "NDS-FN-012"; } attribute :>> name = "InformUser";
         attribute :>> functionCategory = "interaction";
         attribute :>> criticality = CriticalityKind::high;
         attribute :>> concernKind = ConcernKind::usability;
 
         action fnRenderStatus : SystemFunction {
-            attribute :>> id = "NDS-FN-013"; attribute :>> name = "RenderTherapyStatus";
+            @MemoIdentity { :>> providedId = "NDS-FN-013"; } attribute :>> name = "RenderTherapyStatus";
             attribute :>> functionCategory = "interaction";
             attribute :>> criticality = CriticalityKind::high;
             attribute :>> concernKind = ConcernKind::usability;
             attribute :>> outputSummary = "rate, volume delivered and time remaining";
         }
         action fnAnnunciateAlarm : SystemFunction {
-            attribute :>> id = "NDS-FN-014"; attribute :>> name = "AnnunciateAlarm";
+            @MemoIdentity { :>> providedId = "NDS-FN-014"; } attribute :>> name = "AnnunciateAlarm";
             attribute :>> functionCategory = "interaction";
             attribute :>> criticality = CriticalityKind::catastrophic;
             attribute :>> trigger = "any active alarm condition";
             attribute :>> concernKind = ConcernKind::safety;
         }
         action fnAcceptInput : SystemFunction {
-            attribute :>> id = "NDS-FN-015"; attribute :>> name = "AcceptClinicianInput";
+            @MemoIdentity { :>> providedId = "NDS-FN-015"; } attribute :>> name = "AcceptClinicianInput";
             attribute :>> functionCategory = "interaction";
             attribute :>> criticality = CriticalityKind::high;
             attribute :>> concernKind = ConcernKind::usability;
@@ -129,20 +131,20 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
 
     // ── Manage power ─────────────────────────────────────────────
     action fnManagePower : SystemFunction {
-        attribute :>> id = "NDS-FN-016"; attribute :>> name = "ManagePower";
+        @MemoIdentity { :>> providedId = "NDS-FN-016"; } attribute :>> name = "ManagePower";
         attribute :>> functionCategory = "platform";
         attribute :>> criticality = CriticalityKind::high;
         attribute :>> concernKind = ConcernKind::reliability;
 
         action fnMonitorBattery : SystemFunction {
-            attribute :>> id = "NDS-FN-017"; attribute :>> name = "MonitorBatteryState";
+            @MemoIdentity { :>> providedId = "NDS-FN-017"; } attribute :>> name = "MonitorBatteryState";
             attribute :>> functionCategory = "platform";
             attribute :>> criticality = CriticalityKind::high;
             attribute :>> concernKind = ConcernKind::reliability;
             attribute :>> outputSummary = "state of charge and remaining run time";
         }
         action fnSelectPowerSource : SystemFunction {
-            attribute :>> id = "NDS-FN-018"; attribute :>> name = "SelectPowerSource";
+            @MemoIdentity { :>> providedId = "NDS-FN-018"; } attribute :>> name = "SelectPowerSource";
             attribute :>> functionCategory = "platform";
             attribute :>> criticality = CriticalityKind::high;
             attribute :>> trigger = "mains loss or rail brownout";

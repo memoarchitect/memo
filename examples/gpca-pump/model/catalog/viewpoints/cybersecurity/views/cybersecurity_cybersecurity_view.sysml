@@ -14,12 +14,14 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
     private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaCybersecurityView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cybersecurity_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-CYB-001";
+        @MemoIdentity { :>> providedId = "VIEW-CYB-001"; }
         attribute :>> name = "GPCA_CybersecurityView";
-        attribute :>> shortDescription = "Shows GPCA assets, trust boundaries, threats, vulnerabilities, and mitigations.";
+        @MemoIdentity { :>> shortDescription = "Shows GPCA assets, trust boundaries, threats, vulnerabilities, and mitigations."; }
         attribute :>> description = "Product-specific cybersecurity view intended for secure product development and cross-reference into cybersecurity risk documentation.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);
@@ -29,7 +31,7 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include cyber assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, mitigations, security requirements, and verification.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-CYB-001";
+            @MemoIdentity { :>> providedId = "QRY-CYB-001"; }
             attribute :>> name = "GPCA_CybersecurityQuery";
             attribute :>> includeElementKinds = ("CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "OperativeScenario[scenarioKind=threat]");
             attribute :>> includeLayers = ("cybersecurity", "risk", "assurance");

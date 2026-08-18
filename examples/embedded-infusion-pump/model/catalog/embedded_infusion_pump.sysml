@@ -13,16 +13,18 @@ package memo_examples_embedded_infusion_pump {
     private import memo_architecture_realization_deployment::*;
     private import memo_architecture_realization_physical::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // Module view (IEC 62304).
     part swInfusionControl : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::'item';
-        attribute :>> id = "EIP-SW-001"; attribute :>> name = "InfusionControlItem";
+        @MemoIdentity { :>> providedId = "EIP-SW-001"; } attribute :>> name = "InfusionControlItem";
         attribute :>> iec62304Role = "software item, class C";
         attribute :>> safetyClass = SafetyClassKind::C;
     }
     part swMotorDriver : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::unit;
-        attribute :>> id = "EIP-SW-002"; attribute :>> name = "MotorDriverUnit";
+        @MemoIdentity { :>> providedId = "EIP-SW-002"; } attribute :>> name = "MotorDriverUnit";
         attribute :>> implementationLanguage = "C";
         attribute :>> safetyClass = SafetyClassKind::C;
     }
@@ -31,7 +33,7 @@ package memo_examples_embedded_infusion_pump {
     // Runtime view.
     part rtControlLoop : SoftwareComponent {
         attribute :>> runtimeKind = RuntimeKind::task;
-        attribute :>> id = "EIP-RT-001"; attribute :>> name = "ControlLoopTask";
+        @MemoIdentity { :>> providedId = "EIP-RT-001"; } attribute :>> name = "ControlLoopTask";
         attribute :>> periodMs = 10.0;
         attribute :>> deadlineMs = 10.0;
         attribute :>> wcetMs = 2.5;
@@ -44,19 +46,19 @@ package memo_examples_embedded_infusion_pump {
 
     // Deployment view.
     part duControlImage : SoftwareDeploymentUnit {
-        attribute :>> id = "EIP-DU-001"; attribute :>> name = "ControlFirmwareImage";
+        @MemoIdentity { :>> providedId = "EIP-DU-001"; } attribute :>> name = "ControlFirmwareImage";
         attribute :>> unitKind = "signed firmware image";
         attribute :>> version = "3.1.0";
         attribute :>> integrityProtection = "signature verified by boot loader";
     }
     part mcuSafety : ProcessingNode {
-        attribute :>> id = "EIP-HW-001"; attribute :>> name = "SafetyMCU";
+        @MemoIdentity { :>> providedId = "EIP-HW-001"; } attribute :>> name = "SafetyMCU";
         attribute :>> nodeKind = ProcessingNodeKind::microcontroller;
         attribute :>> realTimeCapable = true;
         attribute :>> supportsContainerization = false;
     }
     part rteBareMetal : RuntimeEnvironment {
-        attribute :>> id = "EIP-RTE-001"; attribute :>> name = "StaticRTOS";
+        @MemoIdentity { :>> providedId = "EIP-RTE-001"; } attribute :>> name = "StaticRTOS";
         attribute :>> osOrRtos = "static-priority RTOS, no dynamic allocation";
     }
     allocation swInfusionControlBuild : BuildsInto allocate swInfusionControl to duControlImage;
