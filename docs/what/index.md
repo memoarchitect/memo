@@ -127,7 +127,7 @@ the clinical intent and scenario established above it.
 | **Functional** | What must the system accomplish on that scenario path? | `SystemFunction`, `FunctionalFlow`, `MemoScenario[scenarioKind=functional]`, `FunctionalExchange` |
 | **Logical** | How are responsibilities, interactions, interfaces, and modes organized? | `LogicalComponent`, channels, ports, interfaces, modes |
 | **Implementation** | Which technology implements those responsibilities? | `SoftwareComponent`, `SoftwareModule`, `ElectronicComponent`, `MechanicalPart`, `UserInterface` |
-| **Realization** | How is the design assembled, hosted, and deployed? | `DeploymentUnit`, `RuntimeEnvironment`, `ProcessingNode`, `HardwareAssembly`, `PhysicalAssembly` |
+| **Realization** | How is the design assembled, hosted, and deployed? | `SoftwareDeploymentUnit`, `RuntimeEnvironment`, `ProcessingNode`, `HardwareAssembly`, `PhysicalAssembly` |
 
 The layers preserve a chain of decisions: user and clinical intent establish
 the scenario; the scenario establishes required functions; functions are
