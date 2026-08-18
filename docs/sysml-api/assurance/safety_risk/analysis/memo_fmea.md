@@ -546,7 +546,7 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = identifiesHazardLinks meta SysML::Usage;
         }
         connection def HasFailureMode :> MemoRelationship {
-            end element : ArchitectureElement :>> source;
+            end element : MemoPart :>> source;
             end failureMode : FailureMode :>> target;
         }
         abstract connection hasFailureModeLinks : HasFailureMode[*];

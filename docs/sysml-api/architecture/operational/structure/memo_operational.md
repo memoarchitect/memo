@@ -35,8 +35,8 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`IntendedUse`](#intendeduse) | `part def` | IEC 62366-1 / ISO 14971 intended use: the medical device's declared purpose and the root of the operational spine. A MemoMission, because "mission" has no medical-device meaning — intended use is what a device exists to do.… | `MemoMission` |
-| [`OperationalEntity`](#operationalentity) | `part def` | Operational entity definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`OperationalCapability`](#operationalcapability) | `part def` | Operational capability definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`OperationalEntity`](#operationalentity) | `part def` | Operational entity definition specializing `MemoPart`. | `MemoPart` |
+| [`OperationalCapability`](#operationalcapability) | `part def` | Operational capability definition specializing `MemoPart`. | `MemoPart` |
 | [`RequiresCapability`](#requirescapability) | `connection def` | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). | `MemoRelationship` |
 | [`EnablesUseCase`](#enablesusecase) | `connection def` | An operational capability enables a use case (the ability the actor draws on to accomplish the goal). Capability is tied to the use case, not to individual activities. | `MemoRelationship` |
 
@@ -58,30 +58,30 @@ part def IntendedUse specializes MemoMission
 ## OperationalEntity
 
 ```sysml
-part def OperationalEntity specializes ArchitectureElement
+part def OperationalEntity specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Operational entity definition specializing `ArchitectureElement`. |
+| Description | Operational entity definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_operational_structure` |
 
 
 ## OperationalCapability
 
 ```sysml
-part def OperationalCapability specializes ArchitectureElement
+part def OperationalCapability specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Operational capability definition specializing `ArchitectureElement`. |
+| Description | Operational capability definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_operational_structure` |
 
 
@@ -141,12 +141,12 @@ connection def EnablesUseCase :> MemoRelationship
             attribute clinicalBenefit : String;
             attribute regulatoryClassification : String;
         }
-        part def OperationalEntity specializes ArchitectureElement {
+        part def OperationalEntity specializes MemoPart {
             attribute entityKind : OperationalEntityKind;
             attribute operationalDomain : String;
             attribute responsibility : String;
         }
-        part def OperationalCapability specializes ArchitectureElement {
+        part def OperationalCapability specializes MemoPart {
             attribute capabilityLevel : String;
             attribute preCondition : String;
             attribute postCondition : String;

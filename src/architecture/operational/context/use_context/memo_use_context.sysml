@@ -55,9 +55,9 @@ package memo_architecture_operational_context_use_context {
         attribute contextSide : ContextSideKind;
         // The verb, as it should read on the edge ("Directs procedure").
         attribute interactionLabel : String[0..1];
-        end contextParticipant : ArchitectureElement :>> source;
+        end contextParticipant : MemoPart :>> source;
         // Untyped: the system of interest may be a part or an operational activity.
-        end systemOfInterest : ArchitectureElement :>> target;
+        end systemOfInterest :>> target;
     }
     abstract connection interactsInContextLinks : InteractsInContext[*];
     metadata def <interactsInContext> InteractsInContextMetadata :> SemanticMetadata {

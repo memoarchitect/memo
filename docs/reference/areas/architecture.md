@@ -62,7 +62,7 @@ naming one type.
 | Relation | Declared in | Source → Target | Purpose |
 | --- | --- | --- | --- |
 | `Governs` | `context::stakeholders` | [`memo::core::common::MemoPart`](../../sysml-api/core/common/memo_common.md#memopart) → [`memo::core::common::MemoPart`](../../sysml-api/core/common/memo_common.md#memopart) | 42010 governance: one element governs another by correspondence or use. |
-| `InteractsInContext` | `context::use_context` | [`memo::core::common::ArchitectureElement`](../../sysml-api/core/common/memo_common.md#architectureelement) → [`memo::core::common::ArchitectureElement`](../../sysml-api/core/common/memo_common.md#architectureelement) | The one relation a context diagram draws; the boundary side is fixed by `contextSide`, the verb is free text. |
+| `InteractsInContext` | `context::use_context` | [`memo::core::common::MemoPart`](../../sysml-api/core/common/memo_common.md#memopart) → *any element* | The one relation a context diagram draws; the boundary side is fixed by `contextSide`, the verb is free text. |
 | `InteractsWith` | `context::use_context` | `OperationalParticipant` → *any element* | A participant interacts with something in the operational world — target is untyped so operational activities qualify too. |
 | `AppliesInContext` | `context::use_context` | `UseContext` → [`memo::core::common::MemoPart`](../../sysml-api/core/common/memo_common.md#memopart) | A use context applies to a subject element. |
 | `SituatedIn` | `context::use_context` | `UseContext` → `UseEnvironment` | A use context is situated in a physical/organizational environment. |

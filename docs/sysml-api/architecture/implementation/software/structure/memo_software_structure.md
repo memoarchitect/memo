@@ -34,13 +34,13 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`SoftwareElement`](#softwareelement) | `part def` | Software element definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`SoftwareElement`](#softwareelement) | `part def` | Software element definition specializing `MemoPart`. | `MemoPart` |
 | [`SoftwareSystem`](#softwaresystem) | `part def` | Software system definition specializing `SoftwareElement`. | `SoftwareElement` |
 | [`ModuleKind`](#modulekind) | `enum def` | Module-view element (design responsibility). Runtime properties (period, WCET, scheduling) moved to SoftwareComponent. item / unit / package / library / code / firmware / soup (IEC 62304). | — |
 | [`SoftwareModule`](#softwaremodule) | `part def` | Software module definition specializing `SoftwareElement`. | `SoftwareElement` |
-| [`Algorithm`](#algorithm) | `part def` | Algorithm definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`DataModel`](#datamodel) | `part def` | Data model definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`ConfigurationArtifact`](#configurationartifact) | `part def` | Configuration artifact definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`Algorithm`](#algorithm) | `part def` | Algorithm definition specializing `MemoPart`. | `MemoPart` |
+| [`DataModel`](#datamodel) | `part def` | Data model definition specializing `MemoPart`. | `MemoPart` |
+| [`ConfigurationArtifact`](#configurationartifact) | `part def` | Configuration artifact definition specializing `MemoPart`. | `MemoPart` |
 | [`SoftwareItem`](#softwareitem) | `item def` | Software data/content that may be stored or exchanged through ports. | `MemoItem` |
 | [`SBOMEntry`](#sbomentry) | `item def` | Sbomentry definition specializing `SoftwareItem`. | `SoftwareItem` |
 | [`DependsOnSoup`](#dependsonsoup) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
@@ -48,15 +48,15 @@
 ## SoftwareElement
 
 ```sysml
-abstract part def SoftwareElement specializes ArchitectureElement
+abstract part def SoftwareElement specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software element definition specializing `ArchitectureElement`. |
+| Description | Software element definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | Yes |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
@@ -108,45 +108,45 @@ part def SoftwareModule specializes SoftwareElement
 ## Algorithm
 
 ```sysml
-part def Algorithm specializes ArchitectureElement
+part def Algorithm specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Algorithm definition specializing `ArchitectureElement`. |
+| Description | Algorithm definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
 ## DataModel
 
 ```sysml
-part def DataModel specializes ArchitectureElement
+part def DataModel specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Data model definition specializing `ArchitectureElement`. |
+| Description | Data model definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
 ## ConfigurationArtifact
 
 ```sysml
-part def ConfigurationArtifact specializes ArchitectureElement
+part def ConfigurationArtifact specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Configuration artifact definition specializing `ArchitectureElement`. |
+| Description | Configuration artifact definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
@@ -230,7 +230,7 @@ connection def DependsOnSoup :> MemoRelationship
         // the term "software item" for this concept, but reserving SoftwareItem
         // for the native SysML item family keeps structural parts and exchanged
         // values unambiguous in the model.
-        abstract part def SoftwareElement specializes ArchitectureElement {
+        abstract part def SoftwareElement specializes MemoPart {
             attribute safetyClass : SafetyClassKind;
             attribute complexity : ComplexityKind;
         }
@@ -272,17 +272,17 @@ connection def DependsOnSoup :> MemoRelationship
             attribute soupClassification : SOUPClassificationKind[0..1];
         }
 
-        part def Algorithm specializes ArchitectureElement {
+        part def Algorithm specializes MemoPart {
             attribute algorithmKind : String;
             attribute inputSummary : String;
             attribute outputSummary : String;
             attribute clinicalPerformanceClaim : String;
         }
-        part def DataModel specializes ArchitectureElement {
+        part def DataModel specializes MemoPart {
             attribute schemaReference : String;
             attribute persistenceScope : String;
         }
-        part def ConfigurationArtifact specializes ArchitectureElement {
+        part def ConfigurationArtifact specializes MemoPart {
             attribute configurationScope : String;
             attribute version : String;
         }
@@ -310,7 +310,7 @@ connection def DependsOnSoup :> MemoRelationship
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
         connection def DependsOnSoup :> MemoRelationship {
-            end component : ArchitectureElement :>> source;
+            end component : MemoPart :>> source;
             end soupItem : SoftwareElement :>> target;
         }
         abstract connection dependsOnSoupLinks : DependsOnSoup[*];

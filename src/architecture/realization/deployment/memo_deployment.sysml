@@ -4,7 +4,7 @@
 //
 // `HostedBy` is NOT part of that chain, and this comment used to claim it was
 // ("SoftwareComponent hostedBy ProcessingNode"). It is
-// `processingNode : ArchitectureElement -> hostAssembly : ArchitectureElement`:
+// `processingNode : ProcessingNode -> hostAssembly : PhysicalAssembly`:
 // physical hosting of a node by the assembly it is mounted in, running the
 // other way and between different things. Software reaches a node through
 // DeploysTo.
@@ -26,14 +26,14 @@ package memo_architecture_realization_deployment {
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_logical_interfaces::*;                   // ComponentExchange
 
-    part def DeploymentUnit specializes ArchitectureElement {
+    part def DeploymentUnit specializes MemoPart {
         attribute unitKind : String;
         attribute version : String;
         attribute integrityProtection : String;
         attribute installationMechanism : String;
     }
 
-    part def RuntimeEnvironment specializes ArchitectureElement {
+    part def RuntimeEnvironment specializes MemoPart {
         attribute environmentKind : String;
         attribute osOrRtos : String;
         attribute providedServices : String;
@@ -140,7 +140,7 @@ package memo_architecture_realization_deployment {
         enum path;
     }
     // A flow declared at a logical component boundary (in-port → out-port).
-    part def FlowSpecification specializes ArchitectureElement {
+    part def FlowSpecification specializes MemoPart {
         attribute flowKind : FlowSpecKind;
         ref inPort : LogicalPort[0..1];
         ref outPort : LogicalPort[0..1];
@@ -148,7 +148,7 @@ package memo_architecture_realization_deployment {
     // A complete source→sink flow traced across the layers and the software→
     // hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose`
     // (latency | fault-propagation | security) drive the AADL-style analysis.
-    part def EndToEndFlow specializes ArchitectureElement {
+    part def EndToEndFlow specializes MemoPart {
         attribute latencyBudgetMs : Real;
         attribute analysisPurpose : String;
         ref sourceFunction : MemoFunction[0..1];

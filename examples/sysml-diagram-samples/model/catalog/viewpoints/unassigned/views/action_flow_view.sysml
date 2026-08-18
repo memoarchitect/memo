@@ -62,7 +62,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
     allocate sampleActionFlow.record to laneB;
 
     // MemoLink sample — the universal relation, exercised where nothing else
-    // reaches. laneB is a `part` (LogicalComponent :> ArchitectureElement) and
+    // reaches. laneB is a `part` (LogicalComponent :> MemoPart) and
     // `sampleActionFlow.process` is an action usage (:> MemoAction). Those
     // foundations share no supertype, so every typed relation in the ontology
     // is unavailable here: legalRelationshipTypes returns MemoLink and nothing

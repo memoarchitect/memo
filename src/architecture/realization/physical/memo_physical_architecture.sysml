@@ -6,7 +6,7 @@ package memo_architecture_realization_physical {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
-    part def ProcessingNode specializes ArchitectureElement {
+    part def ProcessingNode specializes MemoPart {
         attribute nodeKind : ProcessingNodeKind;
         attribute processorArchitecture : String;
         attribute memoryMB : String;
@@ -17,7 +17,7 @@ package memo_architecture_realization_physical {
         attribute supportsContainerization : Boolean;
         attribute realTimeCapable : Boolean;
     }
-    part def MemoryDevice specializes ArchitectureElement {
+    part def MemoryDevice specializes MemoPart {
         attribute memoryKind : String;
         attribute capacityMB : String;
         attribute nonVolatile : Boolean;

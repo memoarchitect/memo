@@ -39,7 +39,7 @@
 | [`DataPort`](#dataport) | `port def` | Data port definition specializing `MemoPort`. | `MemoPort` |
 | [`SensorPort`](#sensorport) | `port def` | Sensor port definition specializing `DataPort`. | `DataPort` |
 | [`CommandPort`](#commandport) | `port def` | Command port definition specializing `DataPort`. | `DataPort` |
-| [`ComponentExchange`](#componentexchange) | `part def` | Component exchange definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`ComponentExchange`](#componentexchange) | `part def` | Component exchange definition specializing `MemoPart`. | `MemoPart` |
 | [`SoftwarePort`](#softwareport) | `port def` | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary.… | `MemoPort` |
 
 ## Interface
@@ -150,15 +150,15 @@ port def CommandPort specializes DataPort
 ## ComponentExchange
 
 ```sysml
-part def ComponentExchange specializes ArchitectureElement
+part def ComponentExchange specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Component exchange definition specializing `ArchitectureElement`. |
+| Description | Component exchange definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_logical_interfaces` |
 
 
@@ -269,7 +269,7 @@ port def SoftwarePort specializes MemoPort
         port def SensorPort specializes DataPort { attribute sensorDomain : String; }
         port def CommandPort specializes DataPort { attribute commandDomain : String; }
 
-        part def ComponentExchange specializes ArchitectureElement {
+        part def ComponentExchange specializes MemoPart {
             attribute exchangeKind : FlowKind;
             // Metaclass-neutral endpoints. CR-ONT-002 used to read: "Typed
             // endpoints. A component or a boundary port may terminate an exchange,

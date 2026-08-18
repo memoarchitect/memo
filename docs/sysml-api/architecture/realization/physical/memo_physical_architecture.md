@@ -31,37 +31,37 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`ProcessingNode`](#processingnode) | `part def` | Processing node definition specializing `ArchitectureElement`. | `ArchitectureElement` |
-| [`MemoryDevice`](#memorydevice) | `part def` | Memory device definition specializing `ArchitectureElement`. | `ArchitectureElement` |
+| [`ProcessingNode`](#processingnode) | `part def` | Processing node definition specializing `MemoPart`. | `MemoPart` |
+| [`MemoryDevice`](#memorydevice) | `part def` | Memory device definition specializing `MemoPart`. | `MemoPart` |
 | [`PhysicalPort`](#physicalport) | `port def` | A physical boundary feature: the connector the outside world plugs into. A `port def` (Track A1), not a part.… | `MemoPort` |
 
 ## ProcessingNode
 
 ```sysml
-part def ProcessingNode specializes ArchitectureElement
+part def ProcessingNode specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Processing node definition specializing `ArchitectureElement`. |
+| Description | Processing node definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_realization_physical` |
 
 
 ## MemoryDevice
 
 ```sysml
-part def MemoryDevice specializes ArchitectureElement
+part def MemoryDevice specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Memory device definition specializing `ArchitectureElement`. |
+| Description | Memory device definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `ArchitectureElement` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_realization_physical` |
 
 
@@ -93,7 +93,7 @@ port def PhysicalPort specializes MemoPort
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
-        part def ProcessingNode specializes ArchitectureElement {
+        part def ProcessingNode specializes MemoPart {
             attribute nodeKind : ProcessingNodeKind;
             attribute processorArchitecture : String;
             attribute memoryMB : String;
@@ -104,7 +104,7 @@ port def PhysicalPort specializes MemoPort
             attribute supportsContainerization : Boolean;
             attribute realTimeCapable : Boolean;
         }
-        part def MemoryDevice specializes ArchitectureElement {
+        part def MemoryDevice specializes MemoPart {
             attribute memoryKind : String;
             attribute capacityMB : String;
             attribute nonVolatile : Boolean;

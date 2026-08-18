@@ -78,7 +78,6 @@ package memo_core_common {
     //     MemoPart so all existing content inherits the dimensions. ───
     part def RequirementDriver specializes MemoPart;
     abstract part def VerifiableElement specializes MemoPart;
-    abstract part def ArchitectureElement specializes MemoPart;
     part def InterfaceElement specializes MemoPart;
     enum def EvidenceKind { enum testArtifact; enum evidence; enum formativeEvaluation; enum usabilityValidation; enum securityClaim; }
     part def MemoEvidence specializes MemoPart {

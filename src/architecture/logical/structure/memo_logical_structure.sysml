@@ -116,7 +116,7 @@ package memo_architecture_logical_structure {
     // optional so a component carries only the ones its role needs. A channel
     // claiming independence must still be linked by IndependentOf with its
     // basis stated.
-    part def LogicalComponent specializes ArchitectureElement {
+    part def LogicalComponent specializes MemoPart {
         attribute componentRole : ComponentRoleKind;
         attribute systemType : SystemTypeKind[0..1];
         attribute responsibility : String;
@@ -163,7 +163,7 @@ package memo_architecture_logical_structure {
         :>> baseType = logicalConnectorLinks meta SysML::Usage;
     }
     // A transfer of a typed item across a connector.
-    part def LogicalExchange specializes ArchitectureElement {
+    part def LogicalExchange specializes MemoPart {
         attribute contentKind : FlowContentKind;
         attribute direction : DirectionKind;
         attribute latencyRequirement : String;
@@ -175,17 +175,17 @@ package memo_architecture_logical_structure {
     // States and modes of the logical solution (kept distinct from UI state
     // and from physical device configuration).
 
-    part def LogicalBehavior specializes ArchitectureElement {
+    part def LogicalBehavior specializes MemoPart {
         attribute behaviorSummary : String;
         attribute executionSemantics : String;
     }
 
     // Isolation, fault containment, and trust boundaries (§10).
-    part def IsolationBoundary specializes ArchitectureElement {
+    part def IsolationBoundary specializes MemoPart {
         attribute boundaryKind : String;
         attribute isolationMechanism : String;
     }
-    part def FaultContainmentRegion specializes ArchitectureElement {
+    part def FaultContainmentRegion specializes MemoPart {
         attribute containmentRationale : String;
     }
 

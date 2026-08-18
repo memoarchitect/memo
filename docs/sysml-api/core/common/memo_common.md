@@ -35,7 +35,6 @@
 | [`MemoPart`](#memopart) | `part def` | Every structural MEMO concept specializes MemoPart. Identity and traceability are attributes of this one root — MEMO has no separate IdentifiedElement/TraceableElement classes, because *everything* is identifiable and traceable by definition; that is not a type a modeler picks… | — |
 | [`RequirementDriver`](#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. | `MemoPart` |
 | [`VerifiableElement`](#verifiableelement) | `part def` | Verifiable element definition specializing `MemoPart`. | `MemoPart` |
-| [`ArchitectureElement`](#architectureelement) | `part def` | Architecture element definition specializing `MemoPart`. | `MemoPart` |
 | [`InterfaceElement`](#interfaceelement) | `part def` | Interface element definition specializing `MemoPart`. | `MemoPart` |
 | [`EvidenceKind`](#evidencekind) | `enum def` | Controlled values for evidence: `testArtifact`. | — |
 | [`MemoEvidence`](#memoevidence) | `part def` | Memo evidence definition specializing `MemoPart`. | `MemoPart` |
@@ -94,21 +93,6 @@ abstract part def VerifiableElement specializes MemoPart
 | Property | Value |
 | --- | --- |
 | Description | Verifiable element definition specializing `MemoPart`. |
-| Kind | `part def` |
-| Abstract | Yes |
-| Specializes | `MemoPart` |
-| Owning package | `memo_core_common` |
-
-
-## ArchitectureElement
-
-```sysml
-abstract part def ArchitectureElement specializes MemoPart
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Architecture element definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | Yes |
 | Specializes | `MemoPart` |
@@ -470,7 +454,6 @@ part def Citation specializes MemoPart
         //     MemoPart so all existing content inherits the dimensions. ───
         part def RequirementDriver specializes MemoPart;
         abstract part def VerifiableElement specializes MemoPart;
-        abstract part def ArchitectureElement specializes MemoPart;
         part def InterfaceElement specializes MemoPart;
         enum def EvidenceKind { enum testArtifact; enum evidence; enum formativeEvaluation; enum usabilityValidation; enum securityClaim; }
         part def MemoEvidence specializes MemoPart {
