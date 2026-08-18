@@ -37,14 +37,14 @@ package memo_assurance_requirements {
 
     requirement def Requirement specializes MemoRequirement {
         attribute requirementKind : RequirementKind;
-        attribute statement : String;
+        attribute :>> statement : String;
         attribute sourceKind : RequirementSourceKind;
         attribute concernKind : ConcernKind;
         // Editorial state is the inherited `status : ElementStatusKind` — the
         // one status vocabulary in MEMO. Whether a requirement is implemented,
         // verified, or validated is read from its Realizes / VerifiedBy /
         // Validates links, not restated here.
-        attribute acceptanceCriteria : String;
+        attribute :>> acceptanceCriteria : String;
         attribute subjectDescription : String;
         attribute actorDescription : String;
         attribute assumptionSummary : String;

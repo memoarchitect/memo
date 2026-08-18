@@ -89,8 +89,8 @@ package memo_architecture_implementation_software_structure {
     abstract item def SoftwareItem specializes MemoItem {
         attribute schemaIdentifier : String;
         attribute schemaVersion : String;
-        attribute encoding : String;
-        attribute timestampRequired : Boolean;
+        attribute :>> encoding : String;
+        attribute :>> timestampRequired : Boolean;
     }
 
     item def SBOMEntry specializes SoftwareItem {
