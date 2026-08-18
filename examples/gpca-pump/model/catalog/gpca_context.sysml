@@ -5,6 +5,7 @@ package memo_examples_gpca_pump_gpca_context {
     private import memo_architecture_operational_context_use_context::*;
     private import memo_architecture_operational_structure::*;
     private import memo_assurance_requirements::*;
+    private import memo_assurance_safety_risk::*;
     private import memo_assurance_human_factors::*;
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_operational::*;

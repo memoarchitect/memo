@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/extension-messaging'
-version: 0.8.23
+version: 0.8.24
 description: Publish/subscribe messaging — topics, brokers, and delivery semantics
 license: MIT
 tags:
