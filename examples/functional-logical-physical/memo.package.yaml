@@ -1,0 +1,3 @@
+name: functional-logical-physical
+entrypoint: model/catalog/project.sysml
+include: [model]

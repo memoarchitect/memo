@@ -7,5 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: sysml-diagram-samples
+entrypoint: model/catalog/project.sysml
+include: [model]
 version: 0.1.0
 description: "MEMO Architect diagram rendering samples \u2014 one openable view per standard SysML v2 diagram type. Open with: memo-architect --example standard-sysml-diagrams"
