@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_system_decompos
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaSystemDecompositionView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_logical_system_decomposition_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-LOG-002";
+        @MemoIdentity { :>> providedId = "VIEW-LOG-002"; }
         attribute :>> name = "GPCA_SystemDecompositionView";
-        attribute :>> shortDescription = "Nested containment of the GPCA device: hardware assemblies and the software system.";
+        @MemoIdentity { :>> shortDescription = "Nested containment of the GPCA device: hardware assemblies and the software system."; }
         attribute :>> description = "General-kind membership structure of the GPCA device per the AADL GPCA_Device.Impl decomposition: sensor and actuator assemblies with their subcomponents, supporting hardware, and the GPCA software system with its eight AADL subcomponents. Rendered through the KK-2 General view template in containment mode (nested blocks with expand/collapse; the tree mode shows the same hierarchy as a decomposition tree).";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -29,7 +31,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_system_decompos
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include hardware assemblies, the software system, and software components; the Composes topology supplies the nesting.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-LOG-002";
+            @MemoIdentity { :>> providedId = "QRY-LOG-002"; }
             attribute :>> name = "GPCA_SystemDecompositionQuery";
             attribute :>> includeElementKinds = ("HardwareAssembly", "SoftwareSystem", "SoftwareModule");
             attribute :>> includeRelationshipKinds = ("Composes");

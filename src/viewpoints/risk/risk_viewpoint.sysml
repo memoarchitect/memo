@@ -4,10 +4,12 @@ package memo_viewpoints_risk_risk_viewpoint {
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     viewpoint riskViewpoint : MemoViewpoint {
-        attribute :>> id = "VP-RISK";
+        @MemoIdentity { :>> providedId = "VP-RISK"; }
         attribute :>> name = "RiskViewpoint";
-        attribute :>> shortDescription = "Shows hazards, risks, controls, and assurance links.";
+        @MemoIdentity { :>> shortDescription = "Shows hazards, risks, controls, and assurance links."; }
         attribute :>> description = "Default viewpoint derived from the risk layer for ISO 14971-style reasoning across hazard, hazardous situation, harm, control, and verification evidence.";
         attribute :>> purpose = "Communicate safety risk chains and controls.";
         attribute :>> audience = (AudienceKind::safetyEngineer);

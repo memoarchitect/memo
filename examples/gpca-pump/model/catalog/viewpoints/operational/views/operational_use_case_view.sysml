@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_use_cas
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaUseCaseView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_operational_views_operational_use_case_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-OPS-101";
+        @MemoIdentity { :>> providedId = "VIEW-OPS-101"; }
         attribute :>> name = "GPCA_UseCaseView";
-        attribute :>> shortDescription = "Actors connected to the patient-controlled analgesia use case.";
+        @MemoIdentity { :>> shortDescription = "Actors connected to the patient-controlled analgesia use case."; }
         attribute :>> description = "Connects the nurse, patient, prescriber, and pharmacist to the patient-controlled analgesia use case.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);
@@ -28,7 +30,7 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_use_cas
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include actors, use cases, and their participation relationships.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-OPS-101";
+            @MemoIdentity { :>> providedId = "QRY-OPS-101"; }
             attribute :>> name = "GPCA_UseCaseQuery";
             attribute :>> includeElementKinds = ("Actor", "User", "UseCase");
             attribute :>> includeRelationshipKinds = ("ParticipatesIn");

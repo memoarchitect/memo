@@ -11,6 +11,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
     private import memo_core_enumerations::*;
     private import memo_core_common::*;
 
+    private import memo_core_common::MemoIdentity;
     state pumpModes : StateMachine {
         attribute :>> name = "Pump Operating Modes";
 
@@ -64,7 +65,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
     view sampleStateTransitionView : MemoDiagramView {
         expose pumpModes::**;
         attribute depth = 2;
-        attribute :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding.";
+        @MemoIdentity { :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding."; }
         attribute :>> viewKind = DiagramViewKind::statetransition;
         attribute :>> diagramType = "stm";
         ref :>> viewpointDefinition = functionalViewpoint;

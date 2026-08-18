@@ -4,8 +4,10 @@ package memo_extension_cloud_methodology {
     private import memo_methodology_profiles::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part cloudExtensionMethod : MethodologyDefinition {
-        attribute :>> id = "EXT-CLOUD-001";
+        @MemoIdentity { :>> providedId = "EXT-CLOUD-001"; }
         attribute :>> name = "CloudRuntimeExtension";
         attribute :>> version = "0.7.0";
         attribute :>> domain = "networked services and managed data stores";

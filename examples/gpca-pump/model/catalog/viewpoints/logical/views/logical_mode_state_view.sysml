@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_mode_state_view
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaModeStateView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_logical_mode_state_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-BHV-001";
+        @MemoIdentity { :>> providedId = "VIEW-BHV-001"; }
         attribute :>> name = "GPCA_ModeStateView";
-        attribute :>> shortDescription = "The CriSys Fig 4.1 mode hierarchy (OFF, ON, IDLE, THERAPY, PAUSED, ACTIVE, BASAL, SQUARE_BOLUS, PATIENT_BOLUS) and all guarded transitions.";
+        @MemoIdentity { :>> shortDescription = "The CriSys Fig 4.1 mode hierarchy (OFF, ON, IDLE, THERAPY, PAUSED, ACTIVE, BASAL, SQUARE_BOLUS, PATIENT_BOLUS) and all guarded transitions."; }
         attribute :>> description = "Hierarchical state diagram per CriSys §4.1 Fig 4.1: OFF and ON at top level, IDLE and THERAPY under ON, PAUSED (KVO delivery) and ACTIVE under THERAPY, and BASAL / SQUARE_BOLUS (auto-scheduled) / PATIENT_BOLUS under ACTIVE — with the REQ 4-47 transitions, Inhibited_* macro guards, and same-step-critical markings.";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::stateDiagram);
@@ -28,7 +30,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_mode_state_view
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include the mode machine, the Fig 4.1 mode tree (Composes edges), transitions, and safety properties.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-BHV-101";
+            @MemoIdentity { :>> providedId = "QRY-BHV-101"; }
             attribute :>> name = "GPCA_ModeStateQuery";
             attribute :>> includeElementKinds = ("StateMachine", "MemoState[stateKind=mode]", "Transition", "BehaviorProperty", "TimingConstraint");
             attribute :>> includeLayers = ("behavior");

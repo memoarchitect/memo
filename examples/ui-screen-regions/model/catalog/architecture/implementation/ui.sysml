@@ -19,13 +19,15 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
     private import memo_core_enumerations::*;
     private import memo_architecture_implementation_ui::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // Every UIElement carries safetyClass C. Per IEC 62304 §4.3 items inherit
     // the software system's class; an item is classified lower only where
     // segregation is documented, and nothing here is segregated — one UI
     // process draws the lot, so the chrome inherits C like the rate field.
     part uiPumpPanel : UserInterface {
-        attribute :>> id = "UIR-UI-001"; attribute :>> name = "PumpFrontPanel";
-        attribute :>> shortDescription = "Front-panel touchscreen.";
+        @MemoIdentity { :>> providedId = "UIR-UI-001"; } attribute :>> name = "PumpFrontPanel";
+        @MemoIdentity { :>> shortDescription = "Front-panel touchscreen."; }
         attribute :>> description = "The 7-inch capacitive touchscreen on the pump front panel, the sole interface for programming and monitoring an infusion at the bedside.";
         attribute :>> modality = "visual + touch";
         attribute :>> uiTechnology = "embedded Qt";
@@ -35,8 +37,8 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
     // A screen is a UIElement whose formKind is `screen`. Its bounds are the
     // full frame; every descendant's bounds are relative to ITS parent.
     part elMainScreen : UIElement {
-        attribute :>> id = "UIE-001"; attribute :>> name = "MainInfusionScreen";
-        attribute :>> shortDescription = "Primary running-infusion screen.";
+        @MemoIdentity { :>> providedId = "UIE-001"; } attribute :>> name = "MainInfusionScreen";
+        @MemoIdentity { :>> shortDescription = "Primary running-infusion screen."; }
         attribute :>> description = "The screen shown while an infusion is running: current rate, volume delivered, and access to settings. The default view the clinician comes back to after any subordinate task.";
         attribute :>> formKind = UIElementFormKind::screen;
         attribute :>> safetyClass = SafetyClassKind::C;
@@ -58,8 +60,8 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
         // recurse into its children.
         part elDrugSelectorRegion : UIElement {
             attribute redefines name = "DrugSelectorRegion";
-            attribute redefines id = "UIE-005";
-            attribute redefines shortDescription = "Reusable region containing drug-selector states.";
+            @MemoIdentity { :>> providedId = "UIE-005"; }
+            @MemoIdentity { :>> shortDescription = "Reusable region containing drug-selector states."; }
             attribute redefines description = "Parent geometry region for the drug selector. Its state presentations are sibling UI elements, permitting the same region definition to be reused in flat, spatial, or 3-D renderings.";
             attribute redefines formKind = UIElementFormKind::panel;
             attribute redefines safetyClass = SafetyClassKind::C;
@@ -77,8 +79,8 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
             }
 
             part elDrugSelectorClosed : UIElement {
-                attribute :>> id = "UIE-010"; attribute :>> name = "ClosedDrugSelector";
-                attribute :>> shortDescription = "Closed drug selector shown on the main screen.";
+                @MemoIdentity { :>> providedId = "UIE-010"; } attribute :>> name = "ClosedDrugSelector";
+                @MemoIdentity { :>> shortDescription = "Closed drug selector shown on the main screen."; }
                 attribute :>> description = "The compact, normal-state selector. It is a sibling of the expanded menu rather than a different identity for the parent region.";
                 attribute :>> formKind = UIElementFormKind::selector;
                 attribute :>> safetyClass = SafetyClassKind::C;
@@ -98,8 +100,8 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
             // behaviour, not a defect.
             part elDrugMenuExpanded : UIElement {
                 attribute redefines name = "ExpandedDrugMenu";
-                attribute redefines id = "UIE-011";
-                attribute redefines shortDescription = "Expanded drug library choices.";
+                @MemoIdentity { :>> providedId = "UIE-011"; }
+                @MemoIdentity { :>> shortDescription = "Expanded drug library choices."; }
                 attribute redefines description = "Expanded state listing Norepinephrine, Dopamine, and Heparin. It shares the DrugSelectorRegion parent with the closed state and can extend beyond that parent's normal inline allocation.";
                 attribute redefines formKind = UIElementFormKind::selector;
                 attribute redefines safetyClass = SafetyClassKind::C;
@@ -120,8 +122,8 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
 
     // ── The settings screen: a sibling root, not a child ────────
     part elSettingsScreen : UIElement {
-        attribute :>> id = "UIE-008"; attribute :>> name = "InfusionSettingsScreen";
-        attribute :>> shortDescription = "Settings screen reached from the main screen.";
+        @MemoIdentity { :>> providedId = "UIE-008"; } attribute :>> name = "InfusionSettingsScreen";
+        @MemoIdentity { :>> shortDescription = "Settings screen reached from the main screen."; }
         attribute :>> description = "Secondary screen for changing infusion parameters mid-run. It is a root in its own right with its own capture and its own coordinate frame — it is not laid out inside the main screen, so no geometric rule relates the two.";
         attribute :>> formKind = UIElementFormKind::screen;
         attribute :>> safetyClass = SafetyClassKind::C;
@@ -138,8 +140,8 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
         // pending rate change awaits explicit confirmation and intentionally
         // covers the settings form beneath it.
         part elRateConfirmDialog : UIElement {
-            attribute :>> id = "UIE-009"; attribute :>> name = "RateChangeConfirmationDialog";
-            attribute :>> shortDescription = "Modal confirmation popup for a new infusion rate.";
+            @MemoIdentity { :>> providedId = "UIE-009"; } attribute :>> name = "RateChangeConfirmationDialog";
+            @MemoIdentity { :>> shortDescription = "Modal confirmation popup for a new infusion rate."; }
             attribute :>> description = "Restates the pending infusion rate above the settings screen and requires an explicit confirm or cancel disposition before the value can reach the controller.";
             attribute :>> formKind = UIElementFormKind::dialog;
             attribute :>> safetyClass = SafetyClassKind::C;
@@ -159,7 +161,7 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
 
     // ── UI actions and the functions they invoke ────────────────
     action uiaEditRate : UIAction {
-        attribute :>> id = "UIR-UIA-001"; attribute :>> name = "EditInfusionRate";
+        @MemoIdentity { :>> providedId = "UIR-UIA-001"; } attribute :>> name = "EditInfusionRate";
         attribute :>> intent = InteractionIntentKind::userInput;
         attribute :>> confirmationRequired = true;
         attribute :>> feedbackProvided = "new rate echoed on a confirmation dialog before it is applied";
@@ -167,14 +169,14 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
     }
 
     action uiaOpenSettings : UIAction {
-        attribute :>> id = "UIR-UIA-002"; attribute :>> name = "OpenInfusionSettings";
+        @MemoIdentity { :>> providedId = "UIR-UIA-002"; } attribute :>> name = "OpenInfusionSettings";
         attribute :>> intent = InteractionIntentKind::navigation;
         attribute :>> confirmationRequired = false;
         perform fnManageInfusionDisplay;
     }
 
     action uiaSelectDrug : UIAction {
-        attribute :>> id = "UIR-UIA-003"; attribute :>> name = "SelectDrug";
+        @MemoIdentity { :>> providedId = "UIR-UIA-003"; } attribute :>> name = "SelectDrug";
         attribute :>> intent = InteractionIntentKind::userInput;
         attribute :>> confirmationRequired = true;
         perform fnManageInfusionDisplay.fnValidateDrugSelection;
@@ -182,7 +184,7 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
 
     part uiElement12 : UIElement {
         attribute redefines name = "Region UIE-012";
-        attribute redefines id = "UIE-012";
+        @MemoIdentity { :>> providedId = "UIE-012"; }
         attribute redefines formKind = UIElementFormKind::panel;
         attribute redefines disclosureKind = UIDisclosureKind::inline;
         attribute redefines detectionMethod = BoundsDetectionKind::manual;

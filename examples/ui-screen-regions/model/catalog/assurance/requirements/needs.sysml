@@ -15,8 +15,10 @@ package memo_examples_ui_screen_regions_assurance_requirements_needs {
     private import memo_core_enumerations::*;
     private import memo_assurance_requirements_needs::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     requirement needReadableProgramming : Need {
-        attribute :>> id = "UIR-NEED-001"; attribute :>> name = "ReadableAndConfirmableProgramming";
+        @MemoIdentity { :>> providedId = "UIR-NEED-001"; } attribute :>> name = "ReadableAndConfirmableProgramming";
         attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> statement = "Clinicians need infusion programming to be readable and explicitly confirmed before therapy changes.";
         attribute :>> priority = "high";

@@ -14,8 +14,10 @@ package memo_examples_software_only_medical_device_project {
     private import memo_examples_software_only_medical_device_viewpoints_unassigned::*;
     private import memo_examples_software_only_medical_device_viewpoints_unassigned_views_software_only_medical_device_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-MEDICAL-DEVICE-001";
+        @MemoIdentity { :>> providedId = "PMB-MEDICAL-DEVICE-001"; }
         attribute :>> name = "SoftwareOnlyMedicalDeviceProjectMethodBinding";
         attribute :>> projectName = "Software Only Medical Device";
         ref :>> selectedMethodology = mdDefaultDefinition;

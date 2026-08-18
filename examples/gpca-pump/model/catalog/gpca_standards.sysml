@@ -29,12 +29,13 @@ package memo_examples_gpca_pump_gpca_standards {
     private import memo_examples_gpca_pump_gpca_physical::*;
     private import memo_examples_gpca_pump_gpca_risk::*;
 
+    private import memo_core_common::MemoIdentity;
     // ── The controlled documents clause evidence lands in ────────────────
     // TracesToDocument targets ControlledArtifact, so the DHF documents are
     // modelled as the artifacts they are rather than as a second document type.
 
     part docSrs : MarkdownDocumentSource {
-        attribute :>> id = "DOC-SRS";
+        @MemoIdentity { :>> providedId = "DOC-SRS"; }
         attribute :>> name = "SoftwareRequirementsSpecification";
         attribute :>> version = "1.0";
         attribute :>> artifactKind = ArtifactKind::requirementSpecification;
@@ -46,7 +47,7 @@ package memo_examples_gpca_pump_gpca_standards {
         attribute :>> generated = true;
     }
     part docSad : MarkdownDocumentSource {
-        attribute :>> id = "DOC-SAD";
+        @MemoIdentity { :>> providedId = "DOC-SAD"; }
         attribute :>> name = "SoftwareArchitectureDescription";
         attribute :>> version = "1.0";
         attribute :>> artifactKind = ArtifactKind::architectureDescription;
@@ -58,7 +59,7 @@ package memo_examples_gpca_pump_gpca_standards {
         attribute :>> generated = true;
     }
     part docHrs : MarkdownDocumentSource {
-        attribute :>> id = "DOC-HRS";
+        @MemoIdentity { :>> providedId = "DOC-HRS"; }
         attribute :>> name = "HardwareRequirementsSpecification";
         attribute :>> version = "1.0";
         attribute :>> artifactKind = ArtifactKind::requirementSpecification;
@@ -70,7 +71,7 @@ package memo_examples_gpca_pump_gpca_standards {
         attribute :>> generated = true;
     }
     part docRmf : MarkdownDocumentSource {
-        attribute :>> id = "DOC-RMF";
+        @MemoIdentity { :>> providedId = "DOC-RMF"; }
         attribute :>> name = "RiskManagementFile";
         attribute :>> version = "1.0";
         attribute :>> artifactKind = ArtifactKind::riskRecord;

@@ -7,6 +7,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     private import memo_examples_gpca_pump_gpca_system::*;
     private import memo_examples_gpca_pump_gpca_architecture::*;
 
+    private import memo_core_common::MemoIdentity;
     // ═════════════════════════════════════════════════════════════
     // GPCA mode machine per CriSys Ch.4 Fig 4.1 mode hierarchy:
     //   OFF, ON { IDLE, THERAPY { PAUSED, ACTIVE { BASAL,
@@ -23,108 +24,108 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     // outside this compact mode view.
     // ═════════════════════════════════════════════════════════════
     state topLevelModeMachine : StateMachine {
-        attribute :>> id = "BM-001";
+        @MemoIdentity { :>> providedId = "BM-001"; }
         attribute :>> name = "TopLevelModeMachine";
         attribute :>> machineKind = "hierarchical state machine";
         attribute :>> executionSemantics = "single-step synchronous; sub-modes inherit all parent-mode requirements";
         attribute fidelityScope = "Requirements-derived therapy mode hierarchy; partial abstraction of CITE-009, not a state-for-state Stateflow transcription";
-        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1 Fig 4.1; CITE-009: CriSys PCA Pump Software Model";
+        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1 Fig 4.1; CITE-009: CriSys PCA Pump Software Model"; }
 
         // ── Mode states (Fig 4.1) ───────────────────────────
         state modeOFF : MemoState {
-            attribute :>> id = "MODE-000";
+            @MemoIdentity { :>> providedId = "MODE-000"; }
             attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "OFF";
             attribute :>> modeKind = "top (default)";
             attribute :>> description = "No functionality; the GPCA is turned off. FlowRate_output = 0 (REQ 6).";
             attribute :>> entryCondition = "System_stop_prog commanded while ON (REQ 5); default mode";
             attribute :>> exitCondition = "System_start_prog commanded (REQ 4)";
-        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.2";
+        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.2"; }
         }
 
         state modeON : MemoState {
-            attribute :>> id = "MODE-001";
+            @MemoIdentity { :>> providedId = "MODE-001"; }
             attribute :>> stateKind = StateKind::mode;
         attribute :>> name = "ON";
             attribute :>> modeKind = "operational parent";
             attribute :>> description = "Topmost operational mode: prescription configuration (REQ 8), infusion initiation gating (REQ 7, 9), notification (REQ 10) and logging (REQ 11) are available.";
             attribute :>> entryCondition = "System_start_prog from OFF; A.4 variables set to defaults (REQ 4)";
             attribute :>> exitCondition = "System_stop_prog: stop infusion, cancel all notifications (REQ 5)";
-        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.3";
+        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.3"; }
 
             state modeIDLE : MemoState {
-                attribute :>> id = "MODE-002";
+                @MemoIdentity { :>> providedId = "MODE-002"; }
                 attribute :>> stateKind = StateKind::mode;
                 attribute :>> name = "ON.IDLE";
                 attribute :>> modeKind = "idle";
                 attribute :>> description = "Default sub-mode on entry to ON; no infusion, FlowRate_output = 0 (REQ 14); prescription set-up happens here. 'IDLE Time' actions after Max_IDLE_Duration_const (REQ 15).";
                 attribute :>> entryCondition = "OFF -> ON transition (REQ 4); infusion complete (REQ 28); PAUSED inhibit (REQ 47)";
                 attribute :>> exitCondition = "confirmed second Infusion_initiate_prog (REQ 12/13)";
-                attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.4";
+                @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.4"; }
             }
 
             state modeTHERAPY : MemoState {
-                attribute :>> id = "MODE-003";
+                @MemoIdentity { :>> providedId = "MODE-003"; }
                 attribute :>> stateKind = StateKind::mode;
                 attribute :>> name = "ON.THERAPY";
                 attribute :>> modeKind = "therapy parent";
                 attribute :>> description = "Parent of all drug-delivering sub-modes. Delivers FlowRate_Mode_macro within Tolerance_Max_const (REQ 16); monitors under-infusion (REQ 17), low reservoir (REQ 18), over-infusion, VTBI, air, reverse delivery, empty reservoir (REQ 19-23).";
                 attribute :>> entryCondition = "infusion initiated (REQ 12/13)";
                 attribute :>> exitCondition = "infusion complete to IDLE (REQ 28); manual stop from PAUSED (REQ 47); system stop (REQ 5)";
-                attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5";
+                @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5"; }
 
                 state modePAUSED : MemoState {
-                    attribute :>> id = "MODE-004";
+                    @MemoIdentity { :>> providedId = "MODE-004"; }
                     attribute :>> stateKind = StateKind::mode;
                     attribute :>> name = "ON.THERAPY.PAUSED";
                     attribute :>> modeKind = "paused (KVO delivery)";
                     attribute :>> description = "Infusion paused by notification actions or manual inhibit. FlowRate_Mode_macro = FlowRate_kvo_hd — keep-vein-open flow within Tolerance_Max_const, NOT zero (REQ 43). 'PAUSED Time' actions after Max_PAUSED_Duration_const (REQ 44). Infusion_initiate_prog while Inhibited_Infusion_macro = TRUE causes no transition (REQ 45).";
                     attribute :>> entryCondition = "REQ 19-23 alarm transitions, REQ 29 manual inhibit, REQ 30 all-inhibited, REQ 37-39 sub-mode inhibits, REQ 13 initiate-while-inhibited";
                     attribute :>> exitCondition = "Infusion_initiate_prog with Inhibited_Infusion_macro = FALSE (REQ 46); Infusion_inhibit_prog to IDLE (REQ 47)";
-                    attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10 (REQ 43-47)";
+                    @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10 (REQ 43-47)"; }
                 }
 
                 state modeACTIVE : MemoState {
-                    attribute :>> id = "MODE-005";
+                    @MemoIdentity { :>> providedId = "MODE-005"; }
                     attribute :>> stateKind = StateKind::mode;
                     attribute :>> name = "ON.THERAPY.ACTIVE";
                     attribute :>> modeKind = "active parent";
                     attribute :>> description = "Actual infusion through BASAL, SQUARE BOLUS or PATIENT BOLUS. Only mode where a patient bolus may be requested (REQ 25). Square boluses are scheduled automatically every Interval_sbolus_prog for Duration_sbolus_prog (REQ 24). Actual_Infusion_Duration_macro accumulates here.";
                     attribute :>> entryCondition = "infusion initiated (REQ 12) or resumed (REQ 46)";
                     attribute :>> exitCondition = "infusion complete (REQ 28); PAUSED via REQ 29/30/37-39";
-                    attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6";
+                    @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.6"; }
 
                     state modeBASAL : MemoState {
-                        attribute :>> id = "MODE-006";
+                        @MemoIdentity { :>> providedId = "MODE-006"; }
                         attribute :>> stateKind = StateKind::mode;
                         attribute :>> name = "ON.THERAPY.ACTIVE.BASAL";
                         attribute :>> modeKind = "active-basal";
                         attribute :>> description = "Constant-rate delivery at FlowRate_basal_prog within Tolerance_Max_const (REQ 40). FlowRate_Mode_macro = FlowRate_basal_prog.";
                         attribute :>> entryCondition = "infusion initiated/resumed (REQ 12/46); square bolus ended (REQ 34); patient bolus ended (REQ 35)";
                         attribute :>> exitCondition = "scheduled square bolus (REQ 31); patient bolus granted (REQ 32); Inhibited_Infusion_macro (REQ 37)";
-                        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.7";
+                        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.7"; }
                     }
 
                     state modeSQUARE : MemoState {
-                        attribute :>> id = "MODE-007";
+                        @MemoIdentity { :>> providedId = "MODE-007"; }
                         attribute :>> stateKind = StateKind::mode;
                         attribute :>> name = "ON.THERAPY.ACTIVE.SQUARE_BOLUS";
                         attribute :>> modeKind = "active-square-bolus (auto-scheduled)";
                         attribute :>> description = "Prescribed extra delivery at FlowRate_sbolus_prog within Tolerance_Max_const (REQ 41). Auto-initiates at the prescribed frequency and ends after the prescribed duration — no external trigger (§4.1.8, REQ 24). FlowRate_Mode_macro = FlowRate_sbolus_prog.";
                         attribute :>> entryCondition = "scheduled start per REQ 24 with REQ 31 guards; patient bolus end with square scheduled (REQ 36)";
                         attribute :>> exitCondition = "scheduled end or Inhibited_Bolus_macro (REQ 34); patient bolus granted (REQ 33); inhibits (REQ 39)";
-                        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.8";
+                        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.8"; }
                     }
 
                     state modePBOLUS : MemoState {
-                        attribute :>> id = "MODE-008";
+                        @MemoIdentity { :>> providedId = "MODE-008"; }
                         attribute :>> stateKind = StateKind::mode;
                         attribute :>> name = "ON.THERAPY.ACTIVE.PATIENT_BOLUS";
                         attribute :>> modeKind = "active-patient-bolus";
                         attribute :>> description = "Patient-requested delivery at FlowRate_pbolus_prog within Tolerance_Max_const (REQ 42). Granted only when no REQ 25 ignore condition holds. FlowRate_Mode_macro = FlowRate_pbolus_prog.";
                         attribute :>> entryCondition = "BolusRequest_prog with no REQ 25 ignore condition (REQ 32/33)";
                         attribute :>> exitCondition = "Inhibited_PatientBolus_macro or duration >= Duration_pbolus_prog (REQ 35/36); inhibits (REQ 38)";
-                        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9";
+                        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9"; }
                     }
                 }
             }
@@ -330,22 +331,22 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     // The individual configurations remain ordinary model elements, so their
     // active mode is navigable as well as visible in the choice-point edge.
     part basalConfiguration : ModeConfiguration {
-        attribute :>> id = "CFG-001";
+        @MemoIdentity { :>> providedId = "CFG-001"; }
         attribute :>> name = "BasalTherapyConfiguration";
         ref :>> activeMode = topLevelModeMachine.modeON.modeTHERAPY.modeACTIVE.modeBASAL;
     }
     part squareBolusConfiguration : ModeConfiguration {
-        attribute :>> id = "CFG-002";
+        @MemoIdentity { :>> providedId = "CFG-002"; }
         attribute :>> name = "SquareBolusConfiguration";
         ref :>> activeMode = topLevelModeMachine.modeON.modeTHERAPY.modeACTIVE.modeSQUARE;
     }
     part patientBolusConfiguration : ModeConfiguration {
-        attribute :>> id = "CFG-003";
+        @MemoIdentity { :>> providedId = "CFG-003"; }
         attribute :>> name = "PatientBolusConfiguration";
         ref :>> activeMode = topLevelModeMachine.modeON.modeTHERAPY.modeACTIVE.modePBOLUS;
     }
     part pausedConfiguration : ModeConfiguration {
-        attribute :>> id = "CFG-004";
+        @MemoIdentity { :>> providedId = "CFG-004"; }
         attribute :>> name = "PausedKvoConfiguration";
         ref :>> activeMode = topLevelModeMachine.modeON.modeTHERAPY.modePAUSED;
     }
@@ -358,59 +359,59 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
 
     // ── Behavior properties and timing constraints ──────────────
     part propAlarmStopsSameStep : BehaviorProperty {
-        attribute :>> id = "BP-002";
+        @MemoIdentity { :>> providedId = "BP-002"; }
         attribute :>> name = "AlarmResponseSameStepKvo";
         attribute :>> propertyKind = BehaviorPropertyKind::safetyProperty;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "ALARM.ALARM_OUT -> IM.ALARM_IN is an AADL immediate connection: when an infusion-inhibiting notification asserts, Infusion_Manager limits Commanded_Flow_Rate <= FlowRate_kvo_hd in the same execution step";
-        attribute :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl (ALARM_to_IM immediate) and AGREE flow <= KVO guarantees";
+        @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl (ALARM_to_IM immediate) and AGREE flow <= KVO guarantees"; }
     }
     part propPausedNoResumeWhileInhibited : BehaviorProperty {
-        attribute :>> id = "BP-004";
+        @MemoIdentity { :>> providedId = "BP-004"; }
         attribute :>> name = "PausedNoTransitionWhileInhibited";
         attribute :>> propertyKind = BehaviorPropertyKind::stateInvariant;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "in PAUSED: Infusion_initiate_prog AND Inhibited_Infusion_macro = TRUE => mode unchanged";
-        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10.1 (REQ 45)";
+        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10.1 (REQ 45)"; }
     }
     part propModeTimeoutActions : BehaviorProperty {
-        attribute :>> id = "BP-005";
+        @MemoIdentity { :>> providedId = "BP-005"; }
         attribute :>> name = "IdleAndPausedTimeoutActions";
         attribute :>> propertyKind = BehaviorPropertyKind::transitionRule;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "time in IDLE > Max_IDLE_Duration_const => REQ 59 'IDLE Time' actions; time in PAUSED > Max_PAUSED_Duration_const => REQ 59 'PAUSED Time' actions (notification actions, not mode transitions)";
-        attribute :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.4.1 (REQ 15) and §4.1.10.1 (REQ 44)";
+        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.4.1 (REQ 15) and §4.1.10.1 (REQ 44)"; }
     }
     part propLockoutTimerMonotonic : BehaviorProperty {
-        attribute :>> id = "BP-003";
+        @MemoIdentity { :>> providedId = "BP-003"; }
         attribute :>> name = "LockoutTimerNeverShortened";
         attribute :>> propertyKind = BehaviorPropertyKind::stateInvariant;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "lockout_remaining decreases only with elapsed time; no input path resets it early";
-        attribute :>> sourceReference = "MEMO extension — supports the REQ 25.3 lockout ignore condition; invariant not stated by the source";
+        @MemoIdentity { :>> sourceReference = "MEMO extension — supports the REQ 25.3 lockout ignore condition; invariant not stated by the source"; }
     }
     part tcAlarmLatency : TimingConstraint {
-        attribute :>> id = "TC-001";
+        @MemoIdentity { :>> providedId = "TC-001"; }
         attribute :>> name = "AlarmToSafeStateLatency";
         attribute :>> constraintKind = TimingConstraintKind::latency;
         attribute :>> minMs = "0";
         attribute :>> maxMs = "20";
         ref :>> referenceElement = fcAlarmStop;
         attribute :>> verificationMethod = VerificationMethodKind::modelChecking;
-        attribute :>> sourceReference = "MEMO extension — illustrative wall-clock budget; the source specifies synchronous same-step (immediate) semantics with no timing figures";
+        @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; the source specifies synchronous same-step (immediate) semantics with no timing figures"; }
     }
     part tcBolusResponse : TimingConstraint {
-        attribute :>> id = "TC-002";
+        @MemoIdentity { :>> providedId = "TC-002"; }
         attribute :>> name = "BolusRequestResponseLatency";
         attribute :>> constraintKind = TimingConstraintKind::latency;
         attribute :>> minMs = "0";
         attribute :>> maxMs = "100";
         ref :>> referenceElement = fcPatientBolus;
         attribute :>> verificationMethod = VerificationMethodKind::test;
-        attribute :>> sourceReference = "MEMO extension — illustrative wall-clock budget; not specified by the source";
+        @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; not specified by the source"; }
     }
     part tcWatchdogTimeout : TimingConstraint {
-        attribute :>> id = "TC-003";
+        @MemoIdentity { :>> providedId = "TC-003"; }
         attribute :>> name = "WatchdogTimeout";
         attribute :>> constraintKind = TimingConstraintKind::deadline;
         attribute :>> minMs = "40";
@@ -421,6 +422,6 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         // and does not conform to it — that link is REQ-X-08's own trace.
         ref :>> referenceElement = gpcaDevice.gpcaSoftware.systemMonitor;
         attribute :>> verificationMethod = VerificationMethodKind::test;
-        attribute :>> sourceReference = "MEMO extension — supports extension requirement REQ-X-08; watchdog not specified by the source";
+        @MemoIdentity { :>> sourceReference = "MEMO extension — supports extension requirement REQ-X-08; watchdog not specified by the source"; }
     }
 }

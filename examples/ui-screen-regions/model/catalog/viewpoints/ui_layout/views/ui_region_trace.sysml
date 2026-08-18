@@ -29,6 +29,8 @@ package memo_examples_ui_screen_regions_viewpoints_ui_layout_views_ui_region_tra
     private import memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
     private import memo_examples_ui_screen_regions_traces::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // The same content as a graph, for reviewers who want to read the trace
     // chain rather than look at the screen.
     view uiRegionTrace : MemoDiagramView {
@@ -44,7 +46,7 @@ package memo_examples_ui_screen_regions_viewpoints_ui_layout_views_ui_region_tra
         expose memo_examples_ui_screen_regions_artifacts_reviews_rationales::*;
         expose memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
         expose memo_examples_ui_screen_regions_traces::*;
-        attribute :>> id = "UIV-001";
+        @MemoIdentity { :>> providedId = "UIV-001"; }
         attribute depth = 3;
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";

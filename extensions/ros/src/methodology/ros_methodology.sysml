@@ -4,12 +4,14 @@ package memo_extension_ros_methodology {
     private import memo_methodology_profiles::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // An extension that builds on other extensions names them all here.
     // `baseMethodology` is [0..1] — single inheritance, deliberate — but
     // `includedModule` is [0..*], so this is how a dependency between
     // extensions is expressed. There is no chaining and no second base.
     part rosExtensionMethod : MethodologyDefinition {
-        attribute :>> id = "EXT-ROS-001";
+        @MemoIdentity { :>> providedId = "EXT-ROS-001"; }
         attribute :>> name = "Ros2Extension";
         attribute :>> version = "0.7.0";
         attribute :>> domain = "ROS 2 robotics middleware";

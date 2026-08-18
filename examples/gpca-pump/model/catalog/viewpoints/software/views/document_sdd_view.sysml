@@ -5,11 +5,13 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
     private import memo_viewpoints_software_software_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view sddView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view::*;
-        attribute :>> id = "DOC-004";
+        @MemoIdentity { :>> providedId = "DOC-004"; }
         attribute :>> name = "SoftwareDesignDescriptionView";
-        attribute :>> shortDescription = "IEC 62304 software design description for the GPCA software system.";
+        @MemoIdentity { :>> shortDescription = "IEC 62304 software design description for the GPCA software system."; }
         attribute :>> description = "Aggregates the software system, its six components with safety classes and scheduling attributes, mode machine and transitions, interfaces, and function allocations for the SDD.";
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
@@ -18,7 +20,7 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = softwareViewpoint;
         part :>> selectionQuery {
-            attribute :>> id = "QRY-DOC-004";
+            @MemoIdentity { :>> providedId = "QRY-DOC-004"; }
             attribute :>> name = "sddViewQuery";
             attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "MemoState[stateKind=mode]", "Transition", "Interface", "SystemFunction", "TimingConstraint", "SoftwareModule[moduleKind=soup]");
             attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "BindsToInterface", "Realizes", "DependsOnSoup", "Changes");

@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_fmea_view {
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaFmeaView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_risk_views_risk_fmea_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-RISK-102";
+        @MemoIdentity { :>> providedId = "VIEW-RISK-102"; }
         attribute :>> name = "GPCA_FmeaView";
-        attribute :>> shortDescription = "Failure modes with causes, effects, detection, RPN, and the overdose fault tree.";
+        @MemoIdentity { :>> shortDescription = "Failure modes with causes, effects, detection, RPN, and the overdose fault tree."; }
         attribute :>> outputKind = (ViewOutputKind::table);
         attribute :>> presentationKind = (PresentationKind::riskTable);
         attribute :>> viewKind = DiagramViewKind::grid;
@@ -27,7 +29,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_fmea_view {
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include FMEA worksheet rows and the overdose fault tree structure.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-RISK-102";
+            @MemoIdentity { :>> providedId = "QRY-RISK-102"; }
             attribute :>> name = "GPCA_FmeaQuery";
             attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureEffect", "FailureCause", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeNode", "MinimalCutSet");
             attribute :>> includeLayers = ("analysis", "risk");

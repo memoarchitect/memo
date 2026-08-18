@@ -98,7 +98,6 @@ package memo_core_common {
     // cross-cutting concern, and editorial status.
     abstract part def MemoPart {
         // identity
-        attribute id : String;
         attribute name : String;
         // Two description registers on every MEMO element, because views have
         // two densities. `shortDescription` is the one-line form a table cell,
@@ -107,10 +106,8 @@ package memo_core_common {
         // renders. A view picks the register that fits — it never truncates
         // the long one, because a silently clipped sentence in a DHF table is
         // a defect, not a layout choice.
-        attribute shortDescription : String;
         attribute description : String;
         // traceability
-        attribute sourceReference : String;
         // editorial status and lifecycle
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
@@ -171,21 +168,15 @@ package memo_core_common {
     // Behavioral foundation: operational activities, tasks, system actions,
     // and interaction steps specialize MemoAction.
     action def MemoAction {
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
     }
 
     // Boundary feature foundation for typed ports.
     port def MemoPort {
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
     }
 
@@ -193,11 +184,8 @@ package memo_core_common {
     abstract interface def MemoInterface {
         end source;
         end target;
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
     }
 
     // Single item foundation. Standards, hazards, stored software data, and
@@ -205,11 +193,8 @@ package memo_core_common {
     // exchanged is expressed by its use in a port or flow, not by a second
     // ontology root.
     abstract item def MemoItem {
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
         // What the item CARRIES, as distinct from what it is called. Removed
         // by `595bfac` while modelling native wrappers; nothing replaced them,
@@ -230,22 +215,16 @@ package memo_core_common {
     // references; identity is carried here so use cases do not maintain a
     // partial hand-written copy of the MEMO identification core.
     abstract use case def MemoUseCase {
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
     }
 
     // General constraint foundation. Executable consistency rules and
     // reusable quantitative constraints are both native constraint defs.
     abstract constraint def MemoConstraint {
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
     }
 
@@ -256,11 +235,8 @@ package memo_core_common {
     // say "a need or a requirement" with one type name — before it, every end
     // that had to accept both was left untyped.
     abstract requirement def MemoRequirementElement {
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
         attribute statement : String;
     }
@@ -279,11 +255,8 @@ package memo_core_common {
     // the part-based MemoPart — so, like MemoAction, it re-declares the small
     // identification core rather than inheriting it.
     verification def MemoVerificationCase {
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
     }
 
@@ -296,11 +269,8 @@ package memo_core_common {
 
     state def MemoState {
         attribute stateKind : StateKind;
-        attribute id : String;
         attribute name : String;
-        attribute shortDescription : String;
         attribute description : String;
-        attribute sourceReference : String;
         attribute status : ElementStatusKind;
         attribute modeKind : String;
         attribute entryCondition : String;

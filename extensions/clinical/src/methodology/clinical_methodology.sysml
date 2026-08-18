@@ -4,8 +4,10 @@ package memo_extension_clinical_methodology {
     private import memo_methodology_profiles::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part clinicalExtensionMethod : MethodologyDefinition {
-        attribute :>> id = "EXT-CLINICAL-001";
+        @MemoIdentity { :>> providedId = "EXT-CLINICAL-001"; }
         attribute :>> name = "ClinicalProcedureExtension";
         attribute :>> version = "0.6.5";
         attribute :>> domain = "clinical procedures";

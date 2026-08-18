@@ -15,9 +15,11 @@ package memo_examples_ui_screen_regions_artifacts_reviews_rationales {
     private import memo_core_enumerations::*;
     private import memo_core_annotations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part ratOverlayGeometry : ModelRationale {
-        attribute :>> id = "UIR-RAT-001"; attribute :>> name = "OverlayGeometryRationale";
-        attribute :>> shortDescription = "The drug menu intentionally escapes its parent bounds.";
+        @MemoIdentity { :>> providedId = "UIR-RAT-001"; } attribute :>> name = "OverlayGeometryRationale";
+        @MemoIdentity { :>> shortDescription = "The drug menu intentionally escapes its parent bounds."; }
         attribute :>> body = "The open drug selector overlays adjacent content, so disclosureKind carries the intended behavior and the renderer must not clip it to RatePanel.";
         attribute :>> author = "j.okafor";
         attribute :>> createdAt = "2026-07-16T12:00:00Z";

@@ -17,8 +17,10 @@ package memo_examples_multidimensional_layers {
     private import memo_assurance_verification_validation::*;
     private import memo_core_relationships::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part doseLimitChecker : SoftwareModule {
-        attribute :>> id = "MDL-SW-001";
+        @MemoIdentity { :>> providedId = "MDL-SW-001"; }
         attribute :>> name = "DoseLimitChecker";
         attribute :>> responsibility = "Reject therapy parameters outside the drug library's hard limits.";
         attribute :>> safetyClass = SafetyClassKind::C;
@@ -33,7 +35,7 @@ package memo_examples_multidimensional_layers {
     // The SAME identity progresses through realization stages — a deployed
     // configuration is a stage of the element, not a second element.
     part doseLimitCheckerRuntime : SoftwareComponent {
-        attribute :>> id = "MDL-RT-001";
+        @MemoIdentity { :>> providedId = "MDL-RT-001"; }
         attribute :>> name = "DoseLimitCheckerTask";
         attribute :>> periodMs = 50.0;
         attribute :>> deadlineMs = 50.0;
@@ -45,7 +47,7 @@ package memo_examples_multidimensional_layers {
     #refinement dependency doseLimitCheckerRuntime to doseLimitChecker;
 
     verification vcLimitEnforcement : VerificationCase {
-        attribute :>> id = "MDL-VC-001"; attribute :>> name = "VerifyHardLimitEnforcement";
+        @MemoIdentity { :>> providedId = "MDL-VC-001"; } attribute :>> name = "VerifyHardLimitEnforcement";
         attribute :>> methodKind = VerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "all out-of-limit programs rejected across the equivalence classes";
 

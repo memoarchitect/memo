@@ -11,22 +11,24 @@ package memo_examples_connected_patient_monitor {
     private import memo_architecture_logical_interfaces::*;
     private import memo_assurance_cybersecurity::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part lcMonitor : LogicalComponent {
-        attribute :>> id = "CPM-LC-001"; attribute :>> name = "BedsideMonitor";
+        @MemoIdentity { :>> providedId = "CPM-LC-001"; } attribute :>> name = "BedsideMonitor";
         attribute :>> responsibility = "Acquire and display vitals; publish measurements.";
     }
     part lcGateway : LogicalComponent {
-        attribute :>> id = "CPM-LC-002"; attribute :>> name = "WardGateway";
+        @MemoIdentity { :>> providedId = "CPM-LC-002"; } attribute :>> name = "WardGateway";
         attribute :>> responsibility = "Aggregate device data; bridge device LAN to hospital network.";
     }
     part lcCdrService : LogicalComponent {
-        attribute :>> id = "CPM-LC-003"; attribute :>> name = "ClinicalDataRepository";
+        @MemoIdentity { :>> providedId = "CPM-LC-003"; } attribute :>> name = "ClinicalDataRepository";
         attribute :>> externalOwner = "hospital IT";
     }
 
     // Typed measurement item, coded against ISO/IEEE 11073-10101.
     item spo2Item : LogicalExchangeItem {
-        attribute :>> id = "CPM-IT-001"; attribute :>> name = "SpO2Measurement";
+        @MemoIdentity { :>> providedId = "CPM-IT-001"; } attribute :>> name = "SpO2Measurement";
         attribute :>> contentKind = FlowContentKind::measurement;
         attribute :>> unit = "%";
         attribute :>> timestampRequired = true;
@@ -39,7 +41,7 @@ package memo_examples_connected_patient_monitor {
     }
 
     part exSpo2ToGateway : LogicalExchange {
-        attribute :>> id = "CPM-EX-001"; attribute :>> name = "SpO2ToGateway";
+        @MemoIdentity { :>> providedId = "CPM-EX-001"; } attribute :>> name = "SpO2ToGateway";
         attribute :>> contentKind = FlowContentKind::measurement;
         attribute :>> direction = DirectionKind::output;
         ref :>> exchangedItem = spo2Item;
@@ -56,13 +58,13 @@ package memo_examples_connected_patient_monitor {
     // Network interface with cybersecurity properties; trust boundary at the
     // hospital network edge.
     interface ifHl7Feed : Interface {
-        attribute :>> id = "CPM-IF-001"; attribute :>> name = "GatewayToCdrFeed";
+        @MemoIdentity { :>> providedId = "CPM-IF-001"; } attribute :>> name = "GatewayToCdrFeed";
         attribute :>> protocol = "HL7 FHIR REST over TLS 1.3";
         attribute :>> securityCriticality = CriticalityKind::high;
         attribute :>> patientContactInterface = false;
     }
     part tbHospitalEdge : TrustBoundary {
-        attribute :>> id = "CPM-TB-001"; attribute :>> name = "DeviceLanToHospitalNetwork";
+        @MemoIdentity { :>> providedId = "CPM-TB-001"; } attribute :>> name = "DeviceLanToHospitalNetwork";
     }
     connection : CrossesTrustBoundary connect boundary ::> tbHospitalEdge to crossingItem ::> ifHl7Feed {
         attribute :>> crossingKind = InterfaceKind::network;

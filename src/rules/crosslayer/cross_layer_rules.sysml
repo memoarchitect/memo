@@ -6,8 +6,10 @@ package memo_rules_crosslayer {
     private import memo_core_consistency_rules::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     constraint def RiskToReqTraceRule :> MemoConsistencyRule {
-        attribute :>> id = "XL-001";
+        @MemoIdentity { :>> providedId = "XL-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::warning;
@@ -17,7 +19,7 @@ package memo_rules_crosslayer {
     }
 
     constraint def ReqToArchTraceRule :> MemoConsistencyRule {
-        attribute :>> id = "XL-002";
+        @MemoIdentity { :>> providedId = "XL-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "Requirement[requirementKind=system]";
         attribute severity = RuleSeverityKind::warning;

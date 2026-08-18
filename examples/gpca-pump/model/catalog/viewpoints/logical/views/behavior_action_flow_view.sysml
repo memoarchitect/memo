@@ -13,12 +13,14 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
     private import memo_viewpoints_verification_verification_viewpoint::*;
     private import memo_core_enumerations::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     view gpcaActionFlowView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_view::*;
         attribute depth = 2;
-        attribute :>> id = "VIEW-BHV-003";
+        @MemoIdentity { :>> providedId = "VIEW-BHV-003"; }
         attribute :>> name = "GPCA_InfusionDeliveryActionFlowView";
-        attribute :>> shortDescription = "The 20 ms execution-step pipeline from sensor acquisition through alarm evaluation and dose limiting to pump actuation and event logging.";
+        @MemoIdentity { :>> shortDescription = "The 20 ms execution-step pipeline from sensor acquisition through alarm evaluation and dose limiting to pump actuation and event logging."; }
         attribute :>> description = "Action flow over the infusionDeliveryFlow composite action: typed action steps with in/out parameters, item flows carrying the DD/CD exchange items, succession ordering from start to done, and swimlane allocation onto the logical architecture (sensors, alarm, infusion manager, pump motor, logging).";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);
@@ -28,7 +30,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include the nested action usages of the infusion delivery flow with their flows and successions.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-BHV-103";
+            @MemoIdentity { :>> providedId = "QRY-BHV-103"; }
             attribute :>> name = "GPCA_ActionFlowQuery";
             attribute :>> includeElementKinds = ("ActionUsage");
             attribute :>> selectionExpression = "product == 'GPCA'";

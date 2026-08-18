@@ -14,8 +14,10 @@ package memo_examples_reusable_instrument_project {
     private import memo_examples_reusable_instrument_viewpoints_unassigned::*;
     private import memo_examples_reusable_instrument_viewpoints_unassigned_views_reusable_instrument_overview::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        attribute :>> id = "PMB-REUSABLE-INSTRUMENT-001";
+        @MemoIdentity { :>> providedId = "PMB-REUSABLE-INSTRUMENT-001"; }
         attribute :>> name = "ReusableInstrumentProjectMethodBinding";
         attribute :>> projectName = "Reusable Instrument";
         ref :>> selectedMethodology = mdDefaultDefinition;

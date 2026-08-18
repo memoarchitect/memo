@@ -16,36 +16,38 @@ package memo_examples_surgical_closure_workflow {
     private import memo_architecture_operational_workflows::*;
     private import memo_architecture_operational_scenarios::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // ── Clinical setting and goal ───────────────────────────────
     part bariatricSurgeon : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> id = "LSG-USR-001"; attribute :>> name = "BariatricSurgeon";
+        @MemoIdentity { :>> providedId = "LSG-USR-001"; } attribute :>> name = "BariatricSurgeon";
         attribute :>> clinicalRole = "primary operating surgeon";
     }
     part scrubNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> id = "LSG-USR-002"; attribute :>> name = "ScrubNurse";
+        @MemoIdentity { :>> providedId = "LSG-USR-002"; } attribute :>> name = "ScrubNurse";
         attribute :>> clinicalRole = "sterile instrumentation and count";
     }
     part anesthetist : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> id = "LSG-USR-003"; attribute :>> name = "Anesthetist";
+        @MemoIdentity { :>> providedId = "LSG-USR-003"; } attribute :>> name = "Anesthetist";
         attribute :>> clinicalRole = "anaesthesia and physiologic monitoring";
     }
     part bariatricOr : UseContext {
-        attribute :>> id = "LSG-CTX-001"; attribute :>> name = "BariatricOperatingRoom";
+        @MemoIdentity { :>> providedId = "LSG-CTX-001"; } attribute :>> name = "BariatricOperatingRoom";
         attribute :>> careSetting = "hospital operating room";
         attribute :>> environment = "sterile laparoscopic operating field";
         attribute :>> connectedUse = false;
     }
     requirement needControlledGastricResection : Need {
         attribute :>> needKind = NeedKind::clinicalUser;
-        attribute :>> id = "LSG-N-001";
+        @MemoIdentity { :>> providedId = "LSG-N-001"; }
         attribute :>> statement = "The surgical team needs to perform gastric resection with controlled anatomy, haemostasis, and a checked staple line.";
     }
     use case ucPerformSleeveGastrectomy : UseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
-        attribute :>> id = "LSG-UC-001";
+        @MemoIdentity { :>> providedId = "LSG-UC-001"; }
         attribute :>> name = "PerformLaparoscopicSleeveGastrectomy";
         attribute :>> goalStatement = "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
         attribute :>> trigger = "patient prepared and surgical time-out complete";
@@ -60,35 +62,35 @@ package memo_examples_surgical_closure_workflow {
     connection : Motivates connect motivatingNeed ::> needControlledGastricResection to motivatedUseCase ::> ucPerformSleeveGastrectomy;
 
     // ── Procedure workflow ──────────────────────────────────────
-    action actTimeOutAndPosition : OperativeAction { attribute :>> id = "LSG-ACT-001"; attribute :>> name = "ConfirmTimeOutAndPosition"; }
-    action actEstablishAccess : OperativeAction { attribute :>> id = "LSG-ACT-002"; attribute :>> name = "EstablishLaparoscopicAccess"; }
-    action actMobilizeStomach : OperativeAction { attribute :>> id = "LSG-ACT-003"; attribute :>> name = "MobilizeStomach"; }
+    action actTimeOutAndPosition : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-001"; } attribute :>> name = "ConfirmTimeOutAndPosition"; }
+    action actEstablishAccess : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-002"; } attribute :>> name = "EstablishLaparoscopicAccess"; }
+    action actMobilizeStomach : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-003"; } attribute :>> name = "MobilizeStomach"; }
     action actSizeAndCreateSleeve : OperativeAction {
-        attribute :>> id = "LSG-ACT-004"; attribute :>> name = "SizeAndCreateSleeve"; attribute :>> criticality = CriticalityKind::high;
+        @MemoIdentity { :>> providedId = "LSG-ACT-004"; } attribute :>> name = "SizeAndCreateSleeve"; attribute :>> criticality = CriticalityKind::high;
 
         action taskCreateStapleLine : OperativeAction {
             attribute :>> criticality = CriticalityKind::high;
-            attribute :>> id = "LSG-TASK-001";
+            @MemoIdentity { :>> providedId = "LSG-TASK-001"; }
             attribute :>> name = "CreateAndInspectStapleLine";
             attribute :>> taskGoal = "create the planned sleeve and identify bleeding or integrity concerns before completion";
             attribute :>> potentialHarm = "bleeding or staple-line complication not recognized before handover";
             attribute :>> severityIfFailed = SeverityKind::serious;
 
-            action stConfirmAnatomy : OperativeAction { attribute :>> id = "LSG-ST-001"; attribute :>> name = "ConfirmAnatomy"; }
-            action stCreateStapleLine : OperativeAction { attribute :>> id = "LSG-ST-002"; attribute :>> name = "CreateStapleLine"; }
-            action stInspectBleeding : OperativeAction { attribute :>> id = "LSG-ST-003"; attribute :>> name = "InspectForBleeding"; }
-            action stAssessIntegrity : OperativeAction { attribute :>> id = "LSG-ST-004"; attribute :>> name = "AssessStapleLineIntegrity"; }
+            action stConfirmAnatomy : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ST-001"; } attribute :>> name = "ConfirmAnatomy"; }
+            action stCreateStapleLine : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ST-002"; } attribute :>> name = "CreateStapleLine"; }
+            action stInspectBleeding : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ST-003"; } attribute :>> name = "InspectForBleeding"; }
+            action stAssessIntegrity : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ST-004"; } attribute :>> name = "AssessStapleLineIntegrity"; }
             first stConfirmAnatomy then stCreateStapleLine;
             first stCreateStapleLine then stInspectBleeding;
             first stInspectBleeding then stAssessIntegrity;
         }
     }
-    action actAssessStapleLine : OperativeAction { attribute :>> id = "LSG-ACT-005"; attribute :>> name = "AssessStapleLine"; attribute :>> criticality = CriticalityKind::high; }
-    action actExtractSpecimenAndClose : OperativeAction { attribute :>> id = "LSG-ACT-006"; attribute :>> name = "ExtractSpecimenAndClosePorts"; }
-    action actHandover : OperativeAction { attribute :>> id = "LSG-ACT-007"; attribute :>> name = "CompletePostoperativeHandover"; }
+    action actAssessStapleLine : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-005"; } attribute :>> name = "AssessStapleLine"; attribute :>> criticality = CriticalityKind::high; }
+    action actExtractSpecimenAndClose : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-006"; } attribute :>> name = "ExtractSpecimenAndClosePorts"; }
+    action actHandover : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-007"; } attribute :>> name = "CompletePostoperativeHandover"; }
 
     action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
-        attribute :>> id = "LSG-WF-001";
+        @MemoIdentity { :>> providedId = "LSG-WF-001"; }
         attribute :>> name = "LaparoscopicSleeveGastrectomyWorkflow";
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "patient prepared; time-out ready";
@@ -98,7 +100,7 @@ package memo_examples_surgical_closure_workflow {
 
     // ── Scenario paths, each with its own activity/action flow ──
     action scNominalSleeveProcedure : OperativeScenario {
-        attribute :>> id = "LSG-SC-001"; attribute :>> name = "NominalSleeveGastrectomy";
+        @MemoIdentity { :>> providedId = "LSG-SC-001"; } attribute :>> name = "NominalSleeveGastrectomy";
         attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
 
         perform actTimeOutAndPosition;
@@ -117,7 +119,7 @@ package memo_examples_surgical_closure_workflow {
     }
     action scStapleLineBleeding : OperativeScenario {
         attribute :>> scenarioKind = ScenarioKind::alternate;
-        attribute :>> id = "LSG-SC-002"; attribute :>> name = "StapleLineBleedingRecovery";
+        @MemoIdentity { :>> providedId = "LSG-SC-002"; } attribute :>> name = "StapleLineBleedingRecovery";
         attribute :>> pathSummary = "Recognize bleeding, apply the selected control, reassess the staple line, and escalate if the condition remains unresolved.";
 
         action oaControlStapleLineBleeding : OperativeAction {

@@ -10,13 +10,15 @@ package memo_examples_surgical_robot {
     private import memo_architecture_implementation_hardware_structure::*;
     private import memo_architecture_implementation_ui::*;
 
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
     // Control channels: primary + diverse monitor, with declared independence.
     part chMotionPrimary : LogicalComponent {
-        attribute :>> id = "SR-LC-001"; attribute :>> name = "MotionControlChannel";
+        @MemoIdentity { :>> providedId = "SR-LC-001"; } attribute :>> name = "MotionControlChannel";
         attribute :>> channelRole = ChannelRoleKind::primary;
     }
     part chMotionMonitor : LogicalComponent {
-        attribute :>> id = "SR-LC-002"; attribute :>> name = "MotionMonitorChannel";
+        @MemoIdentity { :>> providedId = "SR-LC-002"; } attribute :>> name = "MotionMonitorChannel";
         attribute :>> channelRole = ChannelRoleKind::monitor;
         attribute :>> diversityBasis = "independent encoder set and diverse processor family";
     }
@@ -27,22 +29,22 @@ package memo_examples_surgical_robot {
 
     // Interlock: instrument exchange blocked while arm is in motion.
     part chExchangeInterlock : LogicalComponent {
-        attribute :>> id = "SR-LC-003"; attribute :>> name = "InstrumentExchangeInterlock";
+        @MemoIdentity { :>> providedId = "SR-LC-003"; } attribute :>> name = "InstrumentExchangeInterlock";
         attribute :>> channelRole = ChannelRoleKind::interlock;
     }
 
     // Mechanical-force flow from actuator to instrument tip.
     part exTipForce : LogicalExchange {
-        attribute :>> id = "SR-EX-001"; attribute :>> name = "TipForceTransmission";
+        @MemoIdentity { :>> providedId = "SR-EX-001"; } attribute :>> name = "TipForceTransmission";
         attribute :>> contentKind = FlowContentKind::mechanicalForce;
         attribute :>> direction = DirectionKind::output;
     }
     part actJointDrive : Actuator {
-        attribute :>> id = "SR-HW-001"; attribute :>> name = "JointDriveActuator";
+        @MemoIdentity { :>> providedId = "SR-HW-001"; } attribute :>> name = "JointDriveActuator";
         attribute :>> actuationKind = "brushless DC servo with harmonic drive";
     }
     part instrShaft : MechanicalPart {
-        attribute :>> id = "SR-HW-002"; attribute :>> name = "InstrumentShaft";
+        @MemoIdentity { :>> providedId = "SR-HW-002"; } attribute :>> name = "InstrumentShaft";
         attribute :>> mechanicalFunction = "transmits actuation to end effector";
         attribute :>> patientContact = true;
         attribute :>> contactNature = "internal tissue, direct";
@@ -53,7 +55,7 @@ package memo_examples_surgical_robot {
     // surgeon holds, so it is an OperatorInterfaceElement (a PhysicalComponent)
     // rather than a UIElement — UIElement is software.
     part elHapticGrip : OperatorInterfaceElement {
-        attribute :>> id = "SR-UI-001"; attribute :>> name = "HapticMasterGrip";
+        @MemoIdentity { :>> providedId = "SR-UI-001"; } attribute :>> name = "HapticMasterGrip";
         attribute :>> formKind = OperatorInterfaceFormKind::hapticIndicator;
         attribute :>> guardedAgainstInadvertentActuation = true;
     }
