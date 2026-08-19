@@ -96,45 +96,43 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> entryCondition = "patient prepared; time-out ready";
         attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
+        action scNominalSleeveProcedure : OperativeScenario {
+            @MemoIdentity { :>> providedId = "LSG-SC-001"; } attribute :>> name = "NominalSleeveGastrectomy";
+            attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
+
+            perform actTimeOutAndPosition;
+            perform actEstablishAccess;
+            perform actMobilizeStomach;
+            perform actSizeAndCreateSleeve;
+            perform actAssessStapleLine;
+            perform actExtractSpecimenAndClose;
+            perform actHandover;
+            first actTimeOutAndPosition then actEstablishAccess;
+            first actEstablishAccess then actMobilizeStomach;
+            first actMobilizeStomach then actSizeAndCreateSleeve;
+            first actSizeAndCreateSleeve then actAssessStapleLine;
+            first actAssessStapleLine then actExtractSpecimenAndClose;
+            first actExtractSpecimenAndClose then actHandover;
+        }
+        action scStapleLineBleeding : OperativeScenario {
+            attribute :>> scenarioKind = ScenarioKind::alternate;
+            @MemoIdentity { :>> providedId = "LSG-SC-002"; } attribute :>> name = "StapleLineBleedingRecovery";
+            attribute :>> pathSummary = "Recognize bleeding, apply the selected control, reassess the staple line, and escalate if the condition remains unresolved.";
+
+            action oaControlStapleLineBleeding : OperativeAction {
+                attribute :>> name = "ControlStapleLineBleeding";
+                action recognizeBleeding; action controlBleeding; action reassessStapleLine; action escalateIfNeeded;
+                first start then recognizeBleeding; first recognizeBleeding then controlBleeding; first controlBleeding then reassessStapleLine; first reassessStapleLine then escalateIfNeeded; first escalateIfNeeded then done;
+            }
+        }
     }
 
     // ── Scenario paths, each with its own activity/action flow ──
-    action scNominalSleeveProcedure : OperativeScenario {
-        @MemoIdentity { :>> providedId = "LSG-SC-001"; } attribute :>> name = "NominalSleeveGastrectomy";
-        attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
-
-        perform actTimeOutAndPosition;
-        perform actEstablishAccess;
-        perform actMobilizeStomach;
-        perform actSizeAndCreateSleeve;
-        perform actAssessStapleLine;
-        perform actExtractSpecimenAndClose;
-        perform actHandover;
-        first actTimeOutAndPosition then actEstablishAccess;
-        first actEstablishAccess then actMobilizeStomach;
-        first actMobilizeStomach then actSizeAndCreateSleeve;
-        first actSizeAndCreateSleeve then actAssessStapleLine;
-        first actAssessStapleLine then actExtractSpecimenAndClose;
-        first actExtractSpecimenAndClose then actHandover;
-    }
-    action scStapleLineBleeding : OperativeScenario {
-        attribute :>> scenarioKind = ScenarioKind::alternate;
-        @MemoIdentity { :>> providedId = "LSG-SC-002"; } attribute :>> name = "StapleLineBleedingRecovery";
-        attribute :>> pathSummary = "Recognize bleeding, apply the selected control, reassess the staple line, and escalate if the condition remains unresolved.";
-
-        action oaControlStapleLineBleeding : OperativeAction {
-            attribute :>> name = "ControlStapleLineBleeding";
-            action recognizeBleeding; action controlBleeding; action reassessStapleLine; action escalateIfNeeded;
-            first start then recognizeBleeding; first recognizeBleeding then controlBleeding; first controlBleeding then reassessStapleLine; first reassessStapleLine then escalateIfNeeded; first escalateIfNeeded then done;
-        }
-    }
-    #refinement dependency scNominalSleeveProcedure to ucPerformSleeveGastrectomy;
-    #refinement dependency scStapleLineBleeding to ucPerformSleeveGastrectomy;
+    #refinement dependency wfSleeveGastrectomy::scNominalSleeveProcedure to ucPerformSleeveGastrectomy;
+    #refinement dependency wfSleeveGastrectomy::scStapleLineBleeding to ucPerformSleeveGastrectomy;
 
     connection : RealizesUseCase connect realizingWorkflow ::> wfSleeveGastrectomy to realizedUseCase ::> ucPerformSleeveGastrectomy;
 
 
-    connection : HasScenario connect owningWorkflow ::> wfSleeveGastrectomy to pathScenario ::> scNominalSleeveProcedure;
-    connection : HasScenario connect owningWorkflow ::> wfSleeveGastrectomy to pathScenario ::> scStapleLineBleeding;
 
 }

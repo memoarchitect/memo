@@ -68,14 +68,4 @@ package memo_architecture_operational_use_cases {
     // `include` (R10-S6); write that instead of a connection here. `extends`
     // has 0 hits in the corpus for a use-case `extend` production, so it stays
     // a MEMO construct: a cross-cutting relationship that is always presented.
-    connection def Extends :> MemoRelationship {
-        end extendingUseCase : UseCase :>> source;
-        end extendedUseCase : UseCase :>> target;
-    }
-    abstract connection extendsLinks : Extends[*];
-    metadata def <extends> ExtendsMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = extendsLinks meta SysML::Usage;
-    }
 }
