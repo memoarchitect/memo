@@ -73,13 +73,13 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
     // The target is the action *usage*, not the `ProcessInput` definition.
     // Binding a value to a definition is not portable — SysIDE rejects it,
     // because a value must be a feature and a definition is not.
-    connection linkLaneBProcessesInput : MemoLink
-        connect linkSource ::> laneB to linkTarget ::> sampleActionFlow.process {
-        @Rationale {
-            :>> text =
-                "Lane B is the swimlane that carries the ProcessInput behaviour. The association crosses the part/action metaclass boundary, so no typed relation can express it.";
-        }
-    }
+    doc /* Lane B is the swimlane that carries the ProcessInput behaviour. The
+         * association crosses the part/action metaclass boundary, so no typed
+         * relation can express it — which is precisely what a bare `dependency`
+         * means. It was a `MemoLink`, the ontology's own weakest relation, and
+         * that is a duplicate of `dependency` rather than something more.
+         */
+    dependency linkLaneBProcessesInput from laneB to sampleActionFlow::process;
 
     view sampleActionFlowView : MemoDiagramView {
         expose sampleActionFlow::**;

@@ -91,26 +91,6 @@ package memo_architecture_operational_workflows {
     // SupportKind discriminator is gone: what used to be three enum values
     // that each implied a different target type are now two typed refs plus
     // this one plain relation.
-    connection def Supports :> MemoRelationship {
-        end supporter :>> source;
-        end supported : MemoAction :>> target;
-    }
-    abstract connection supportsLinks : Supports[*];
-    metadata def <supports> SupportsMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = supportsLinks meta SysML::Usage;
-    }
-    connection def RequiresResource :> MemoRelationship {
-        end workflow : OperationalWorkflow :>> source;
-        end resource : WorkflowResource :>> target;
-    }
-    abstract connection requiresResourceLinks : RequiresResource[*];
-    metadata def <requiresResource> RequiresResourceMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = requiresResourceLinks meta SysML::Usage;
-    }
 
     // ── Workflow transformation (as-is → to-be) ──────────────────
     // Transforms unifies TransformsStep / TransformsWorkflow / ReplacesWorkflow

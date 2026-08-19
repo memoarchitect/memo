@@ -107,17 +107,6 @@ package memo_core_relationships {
     // only when no specific relation carries the meaning, and say why in the
     // inherited `rationale` — an untyped link with no stated reason is an
     // audit gap, not a model fact.
-    connection def MemoLink :> MemoRelationship {
-        doc /* Generic association between any two model elements. */
-        end linkSource :>> source;
-        end linkTarget :>> target;
-    }
-    abstract connection memoLinkLinks : MemoLink[*];
-    metadata def <memoLink> MemoLinkMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = memoLinkLinks meta SysML::Usage;
-    }
 
     connection def DerivesFrom :> MemoRelationship {
         // Drivers span metaclasses — a need is a requirement def, a hazard an

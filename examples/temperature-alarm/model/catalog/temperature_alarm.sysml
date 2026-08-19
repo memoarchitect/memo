@@ -90,7 +90,9 @@ package memo_examples_temperature_alarm {
         perform fnDetectDeviation;
     }
     connection : ElementTriggersAction connect element ::> elAlarmBanner to triggeredAction ::> uiaAcknowledge;
-    connection : Supports { connect supporter ::> uiBedside to supported ::> actAcknowledgeAlarm.taskAckAlarm; }
+    // Was `Supports`, a zero-attribute duplicate of both `Enables` and the
+    // native `dependency`.
+    dependency from uiBedside to actAcknowledgeAlarm::taskAckAlarm;
 
     // ── Risk chain with use error ───────────────────────────────
     part ueSilenceAndForget : UseError {

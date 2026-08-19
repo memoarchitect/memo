@@ -113,14 +113,4 @@ package memo_methodology_core {
     // ── Relations owned by this package ─────────────────────────────
     // Moved out of memo_core_relationships: their ends are typed against
     // types declared here, and core must not depend on a domain package.
-    connection def ResolvesToMethodology :> MemoRelationship {
-        end boundModelElement : MemoPart :>> source;
-        end resolvedMethodology : MethodologyDefinition :>> target;
-    }
-    abstract connection resolvesToMethodologyLinks : ResolvesToMethodology[*];
-    metadata def <resolvesToMethodology> ResolvesToMethodologyMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = resolvesToMethodologyLinks meta SysML::Usage;
-    }
 }
