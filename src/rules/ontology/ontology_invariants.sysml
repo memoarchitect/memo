@@ -209,15 +209,6 @@ package memo_rules_ontology {
         attribute predicateExpression = "sourcesOf(performs)->forAll(conformsTo(MemoPart) or construct == 'action')";
         constraint { true }
     }
-    constraint def EnablesEnablerKindRule :> MemoConsistencyRule {
-        @MemoIdentity { :>> providedId = "CR-ONT-069"; }
-        attribute tailoring = RuleTailoringKind::invariant;
-        attribute appliesTo = "Model";
-        attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "An enabling system or function enables a workflow: the enabling end is a part or a behaviour.";
-        attribute predicateExpression = "sourcesOf(enables)->forAll(conformsTo(MemoPart) or construct == 'action')";
-        constraint { true }
-    }
     constraint def BindsToInterfaceEndKindRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-070"; }
         attribute tailoring = RuleTailoringKind::invariant;

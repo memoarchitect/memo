@@ -78,9 +78,37 @@ backlog long after most of it had been done, and 12 of the 17 rows were stale.
 | `Precedes` | `succession` / `first … then` | removed |
 | `ModuleUses`, `MonitorsChannel` | `dependency` | removed |
 | `Realizes` | `#refinement` metadata | removed |
-| `DerivesFrom` | `#derivation` metadata | **present** |
+| `InteractsWith` | `connect` | removed |
+| `Enables` | `dependency` | removed |
+| `ExecutesScenario` | `perform` (`OperativeScenario` is an `action def`) | removed |
 | `CommentsOn`, `NotesOn`, `RationaleFor` | `comment` / `doc` + standard `Rationale`, `Issue` metadata | **present** |
 | `ConnectsPhysically` | `connect` | removed |
+
+**Four rows left this table on per-row scrutiny (2026-08-18) — they are NOT
+duplicates.** A family-level judgement is a hypothesis; the per-row grep is the
+measurement, and four of them failed it:
+
+| Kept | Why the native form does not cover it |
+|---|---|
+| `DerivesFrom` | The standard `Derivation` connection requires **requirement usages on both ends**. 22 of 37 distinct source drivers are parts, items or actions — hazards, threats, components. Migrating produced 143 type errors. |
+| `Validates` | Native `verify` requires a requirement usage as the verified element, and IEC 62304 separates validation from verification. Renaming would paraphrase a regulated term. |
+| `Causes` | Carries `causeKind : CauseKind`, which `#cause` drops. |
+| `TracesToDocument` | Carries `sectionReference` — the granularity that makes the trace auditable. |
+
+**Migrating to `dependency` costs the end typing.** `Enables` had
+`CR-ONT-069` constraining its source end; a generic `dependency` cannot be
+selected without firing on every dependency in the model, so the rule was
+deleted with the relation rather than left to pass vacuously. This is the real
+price of the native form, and it is the same trade already made for `Supports`,
+`ModuleUses` and `MonitorsChannel`.
+
+**A deleted relation leaves stale filters behind.** Removing these three broke
+nothing that failed loudly — but four view `includeRelationshipKinds` lists, a
+DHF document query, and the Architect `CONTEXT_RELATIONSHIPS` set all still
+named them, and a filter that matches nothing looks exactly like a filter with
+nothing to match. Two of those (`exchangesWith`, `connectsPhysically`) had been
+dead since 2026-08-12 and nobody noticed. **Grep the view filters, the DHF
+queries and the Architect templates every time a relation is deleted.**
 
 **This table is prose and therefore drifts in both directions** — rows stay after
 they are done, and duplicates found later never reach it. A full audit of all 73
@@ -205,6 +233,25 @@ from the model.** This has happened three times in this codebase: `BindingUsage`
 works, grep the memo-tools `builder.ts`
 (`packages/tools/src/model/builder.ts`) for a handler that consumes it. A green
 parse is not a built model.
+
+## The grammar bends to SysML, never the reverse
+
+Migrating `InteractsWith` produced `connection connect a to b;` — the normative
+binary-connector shorthand. SysIDE accepted it; the Langium grammar rejected it,
+because `ConnectionEnd` required `endName '::>' ref`. The fix is **always** to
+widen the grammar, not to re-spell the model into whatever the grammar happens
+to accept. `endName` is now optional, and the builder defaults an omitted end to
+the inherited `source`/`target` participants.
+
+Two things this exposed, both worth repeating:
+
+- **The spawned `sysmlc` transport runs the compiled build.** After a grammar
+  change, `sysmlc-transport.test.ts` fails with the in-process and spawned IRs
+  disagreeing — six edges present in one and absent in the other. That is a
+  stale `lib/`, not a logic bug. Run the build before believing the diff.
+- **Diff the IRs structurally.** The raw assertion output is an 11MB string
+  comparison that says nothing. A ten-line first-difference walk named the
+  exact six relationships in one run.
 
 ## The extension pattern: type a native relationship
 

@@ -40,12 +40,12 @@ package memo_examples_gpca_pump_gpca_trace {
     private import memo_viewpoints_definitions::*;
 
     // ── System context interactions (context view) ──────────────
-    connection : InteractsWith connect contextParticipant ::> actorPatient to target ::> entityGpcaPump;
-    connection : InteractsWith connect contextParticipant ::> actorNurse to target ::> entityGpcaPump;
-    connection : InteractsWith connect contextParticipant ::> actorPrescriber to target ::> entityGpcaPump;
-    connection : InteractsWith connect contextParticipant ::> actorPharmacist to target ::> entityGpcaPump;
-    connection : InteractsWith connect contextParticipant ::> actorTechnician to target ::> entityGpcaPump;
-    connection : InteractsWith connect contextParticipant ::> actorPharmacist to target ::> entityPharmacy;
+    connection connect actorPatient to entityGpcaPump;
+    connection connect actorNurse to entityGpcaPump;
+    connection connect actorPrescriber to entityGpcaPump;
+    connection connect actorPharmacist to entityGpcaPump;
+    connection connect actorTechnician to entityGpcaPump;
+    connection connect actorPharmacist to entityPharmacy;
 
     // ── Fig 2.1 context flows (CriSys §2.1) ─────────────────────
     // Data flows

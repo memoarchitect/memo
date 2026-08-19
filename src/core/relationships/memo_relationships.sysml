@@ -195,16 +195,9 @@ package memo_core_relationships {
 
     // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms
     // (an enabling system/function enables a workflow/activity).
-    connection def Enables :> MemoRelationship {
-        end enabling :>> source;
-        end enabled : MemoAction :>> target;
-    }
-    abstract connection enablesLinks : Enables[*];
-    metadata def <enables> EnablesMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = enablesLinks meta SysML::Usage;
-    }
+    // `Enables` is native `dependency` (2026-08-18): write
+    // `dependency from <enabling> to <enabled>;`. Same call as `Supports`,
+    // which was deleted as a duplicate of both `dependency` and `Enables`.
 
     connection def HostedBy :> MemoRelationship {
         end processingNode : MemoPart :>> source;
