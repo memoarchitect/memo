@@ -39,15 +39,14 @@ package memo_examples_ui_screen_regions_artifacts_reviews_comments {
         attribute :>> author = "j.okafor";
         attribute :>> createdAt = "2026-07-16T09:05:00Z";
         attribute :>> commentStatus = CommentStatusKind::acknowledged;
-    }
-
-    part cmtStatusBarReply : ModelComment {
-        @MemoIdentity { :>> providedId = "UIR-CMT-003"; } attribute :>> name = "StatusBarScopeReply";
-        @MemoIdentity { :>> shortDescription = "Agreed — split in the next markup pass."; }
-        attribute :>> body = "Agreed. Battery indication is in the alarm system's scope and will become its own indicator element once that requirement lands. Keeping the strip as decoration until then rather than classifying it as something it is not.";
-        attribute :>> author = "r.mehta";
-        attribute :>> createdAt = "2026-07-16T11:40:00Z";
-        attribute :>> commentStatus = CommentStatusKind::addressed;
+        part cmtStatusBarReply : ModelComment {
+            @MemoIdentity { :>> providedId = "UIR-CMT-003"; } attribute :>> name = "StatusBarScopeReply";
+            @MemoIdentity { :>> shortDescription = "Agreed — split in the next markup pass."; }
+            attribute :>> body = "Agreed. Battery indication is in the alarm system's scope and will become its own indicator element once that requirement lands. Keeping the strip as decoration until then rather than classifying it as something it is not.";
+            attribute :>> author = "r.mehta";
+            attribute :>> createdAt = "2026-07-16T11:40:00Z";
+            attribute :>> commentStatus = CommentStatusKind::addressed;
+        }
     }
 
 }
