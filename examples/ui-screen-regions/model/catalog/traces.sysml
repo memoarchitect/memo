@@ -172,8 +172,6 @@ package memo_examples_ui_screen_regions_traces {
 
     // A reply is a child of the comment it answers — ordinary Composes, so
     // thread cycles are already forbidden by CR-ONT-001.
-    connection : Composes connect parent ::> cmtStatusBarScope to child ::> cmtStatusBarReply;
 
-    connection rel_composes_elMainScreen_uiElement12 : Composes connect parent ::> elMainScreen to child ::> uiElement12;
 
 }

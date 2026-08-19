@@ -85,78 +85,78 @@ package memo_examples_gpca_pump_gpca_standards {
 
     // ── IEC 62304 — software lifecycle ───────────────────────────────────
     // §5.2.2 software requirements content: every software requirement.
-    connection : ConformsTo connect conformingElement ::> reqOcclusion to clause ::> iec62304Clause5_2_2;
-    connection : ConformsTo connect conformingElement ::> reqDoorOpen to clause ::> iec62304Clause5_2_2;
-    connection : ConformsTo connect conformingElement ::> reqMaxHourlyDose to clause ::> iec62304Clause5_2_2;
-    connection : ConformsTo connect conformingElement ::> reqEventLogging to clause ::> iec62304Clause5_2_2;
-    connection : ConformsTo connect conformingElement ::> reqWatchdogSafeState to clause ::> iec62304Clause5_2_2;
-    connection : ConformsTo connect conformingElement ::> reqStuckButton to clause ::> iec62304Clause5_2_2;
-    connection : ConformsTo connect conformingElement ::> reqFlowCrossCheck to clause ::> iec62304Clause5_2_2;
+    connection : ConformsTo connect conformingElement ::> reqOcclusion to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_2;
+    connection : ConformsTo connect conformingElement ::> reqDoorOpen to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_2;
+    connection : ConformsTo connect conformingElement ::> reqMaxHourlyDose to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_2;
+    connection : ConformsTo connect conformingElement ::> reqEventLogging to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_2;
+    connection : ConformsTo connect conformingElement ::> reqWatchdogSafeState to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_2;
+    connection : ConformsTo connect conformingElement ::> reqStuckButton to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_2;
+    connection : ConformsTo connect conformingElement ::> reqFlowCrossCheck to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_2;
 
     // §5.2.3 risk control measures carried into software requirements.
-    connection : ConformsTo connect conformingElement ::> reqWatchdogSafeState to clause ::> iec62304Clause5_2_3;
-    connection : ConformsTo connect conformingElement ::> reqFlowCrossCheck to clause ::> iec62304Clause5_2_3;
+    connection : ConformsTo connect conformingElement ::> reqWatchdogSafeState to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_3;
+    connection : ConformsTo connect conformingElement ::> reqFlowCrossCheck to clause ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_3;
 
     // §5.3 software architectural design: the software decomposition.
-    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware to clause ::> iec62304Clause5_3;
-    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.tlm to clause ::> iec62304Clause5_3;
-    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.infusionMgr to clause ::> iec62304Clause5_3;
-    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.systemMonitor to clause ::> iec62304Clause5_3;
-    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.config to clause ::> iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware to clause ::> iec62304::iec62304Clause5::iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.tlm to clause ::> iec62304::iec62304Clause5::iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.infusionMgr to clause ::> iec62304::iec62304Clause5::iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.systemMonitor to clause ::> iec62304::iec62304Clause5::iec62304Clause5_3;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware.config to clause ::> iec62304::iec62304Clause5::iec62304Clause5_3;
 
     // ── IEC 60601-1 — basic safety and essential performance ─────────────
     // §8 protection against electrical hazards.
-    connection : ConformsTo connect conformingElement ::> reqBatteryBackup to clause ::> iec60601_1Clause8;
-    connection : ConformsTo connect conformingElement ::> powerSupply to clause ::> iec60601_1Clause8;
-    connection : ConformsTo connect conformingElement ::> batteryPack to clause ::> iec60601_1Clause8;
+    connection : ConformsTo connect conformingElement ::> reqBatteryBackup to clause ::> iec60601_1::iec60601_1Clause8;
+    connection : ConformsTo connect conformingElement ::> powerSupply to clause ::> iec60601_1::iec60601_1Clause8;
+    connection : ConformsTo connect conformingElement ::> batteryPack to clause ::> iec60601_1::iec60601_1Clause8;
 
     // §9 protection against mechanical hazards.
-    connection : ConformsTo connect conformingElement ::> reqFreeFlowPrevention to clause ::> iec60601_1Clause9;
-    connection : ConformsTo connect conformingElement ::> antiFreeFlowValve to clause ::> iec60601_1Clause9;
-    connection : ConformsTo connect conformingElement ::> enclosure to clause ::> iec60601_1Clause9;
+    connection : ConformsTo connect conformingElement ::> reqFreeFlowPrevention to clause ::> iec60601_1::iec60601_1Clause9;
+    connection : ConformsTo connect conformingElement ::> antiFreeFlowValve to clause ::> iec60601_1::iec60601_1Clause9;
+    connection : ConformsTo connect conformingElement ::> enclosure to clause ::> iec60601_1::iec60601_1Clause9;
 
     // §14 programmable electrical medical systems.
-    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware to clause ::> iec60601_1Clause14;
+    connection : ConformsTo connect conformingElement ::> gpcaDevice.gpcaSoftware to clause ::> iec60601_1::iec60601_1Clause14;
 
     // ── IEC 60601-1-2 — electromagnetic compatibility ────────────────────
-    connection : ConformsTo connect conformingElement ::> controllerBoard to clause ::> iec60601_1_2Clause7;
-    connection : ConformsTo connect conformingElement ::> controllerBoard to clause ::> iec60601_1_2Clause8;
-    connection : ConformsTo connect conformingElement ::> reqPost to clause ::> iec60601_1_2Clause8;
+    connection : ConformsTo connect conformingElement ::> controllerBoard to clause ::> iec60601_1_2::iec60601_1_2Clause7;
+    connection : ConformsTo connect conformingElement ::> controllerBoard to clause ::> iec60601_1_2::iec60601_1_2Clause8;
+    connection : ConformsTo connect conformingElement ::> reqPost to clause ::> iec60601_1_2::iec60601_1_2Clause8;
 
     // ── ISO 14971 — risk management ──────────────────────────────────────
     // §7 risk control: the risk control measures themselves.
-    connection : ConformsTo connect conformingElement ::> lockoutControl to clause ::> iso14971Clause7;
-    connection : ConformsTo connect conformingElement ::> occlusionAlarmControl to clause ::> iso14971Clause7;
-    connection : ConformsTo connect conformingElement ::> airDetectionControl to clause ::> iso14971Clause7;
-    connection : ConformsTo connect conformingElement ::> freeFlowValveControl to clause ::> iso14971Clause7;
-    connection : ConformsTo connect conformingElement ::> doorInterlockControl to clause ::> iso14971Clause7;
-    connection : ConformsTo connect conformingElement ::> watchdogControl to clause ::> iso14971Clause7;
-    connection : ConformsTo connect conformingElement ::> flowCrossCheckControl to clause ::> iso14971Clause7;
+    connection : ConformsTo connect conformingElement ::> lockoutControl to clause ::> iso14971::iso14971Clause7;
+    connection : ConformsTo connect conformingElement ::> occlusionAlarmControl to clause ::> iso14971::iso14971Clause7;
+    connection : ConformsTo connect conformingElement ::> airDetectionControl to clause ::> iso14971::iso14971Clause7;
+    connection : ConformsTo connect conformingElement ::> freeFlowValveControl to clause ::> iso14971::iso14971Clause7;
+    connection : ConformsTo connect conformingElement ::> doorInterlockControl to clause ::> iso14971::iso14971Clause7;
+    connection : ConformsTo connect conformingElement ::> watchdogControl to clause ::> iso14971::iso14971Clause7;
+    connection : ConformsTo connect conformingElement ::> flowCrossCheckControl to clause ::> iso14971::iso14971Clause7;
 
     // ── Where the evidence for each claim is written down ────────────────
     // The section reference rides on the link, not on a duplicate section type.
-    connection : TracesToDocument connect tracedElement ::> iec62304Clause5_2_2 to artifact ::> docSrs {
+    connection : TracesToDocument connect tracedElement ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_2 to artifact ::> docSrs {
         attribute :>> sectionReference = "3";
     }
-    connection : TracesToDocument connect tracedElement ::> iec62304Clause5_2_3 to artifact ::> docSrs {
+    connection : TracesToDocument connect tracedElement ::> iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_3 to artifact ::> docSrs {
         attribute :>> sectionReference = "3.2";
     }
-    connection : TracesToDocument connect tracedElement ::> iec62304Clause5_3 to artifact ::> docSad {
+    connection : TracesToDocument connect tracedElement ::> iec62304::iec62304Clause5::iec62304Clause5_3 to artifact ::> docSad {
         attribute :>> sectionReference = "4";
     }
-    connection : TracesToDocument connect tracedElement ::> iec60601_1Clause8 to artifact ::> docHrs {
+    connection : TracesToDocument connect tracedElement ::> iec60601_1::iec60601_1Clause8 to artifact ::> docHrs {
         attribute :>> sectionReference = "4";
     }
-    connection : TracesToDocument connect tracedElement ::> iec60601_1Clause9 to artifact ::> docHrs {
+    connection : TracesToDocument connect tracedElement ::> iec60601_1::iec60601_1Clause9 to artifact ::> docHrs {
         attribute :>> sectionReference = "6";
     }
-    connection : TracesToDocument connect tracedElement ::> iec60601_1Clause14 to artifact ::> docSad {
+    connection : TracesToDocument connect tracedElement ::> iec60601_1::iec60601_1Clause14 to artifact ::> docSad {
         attribute :>> sectionReference = "6.2";
     }
-    connection : TracesToDocument connect tracedElement ::> iec60601_1_2Clause7 to artifact ::> docHrs {
+    connection : TracesToDocument connect tracedElement ::> iec60601_1_2::iec60601_1_2Clause7 to artifact ::> docHrs {
         attribute :>> sectionReference = "5";
     }
-    connection : TracesToDocument connect tracedElement ::> iso14971Clause7 to artifact ::> docRmf {
+    connection : TracesToDocument connect tracedElement ::> iso14971::iso14971Clause7 to artifact ::> docRmf {
         attribute :>> sectionReference = "5";
     }
 }

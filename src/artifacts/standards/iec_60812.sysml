@@ -26,28 +26,25 @@ package memo_artifacts_standards_iec_60812 {
         // reference standard, cited by documents rather than required by a
         // market. Empty is the authored value, not an omission — see
         // appliesToRegime in memo_artifacts_standards_traceability.
+        item iec60812Clause5 : StandardClause {
+            @MemoIdentity { :>> providedId = "STD-IEC-60812-5"; }
+            attribute :>> name = "IEC60812Clause5";
+            attribute :>> clauseNumber = "5";
+            attribute :>> normativeStrength = "shall";
+        }
+        item iec60812Clause6 : StandardClause {
+            @MemoIdentity { :>> providedId = "STD-IEC-60812-6"; }
+            attribute :>> name = "IEC60812Clause6";
+            attribute :>> clauseNumber = "6";
+            attribute :>> normativeStrength = "shall";
+        }
+        item iec60812Clause7 : StandardClause {
+            @MemoIdentity { :>> providedId = "STD-IEC-60812-7"; }
+            attribute :>> name = "IEC60812Clause7";
+            attribute :>> clauseNumber = "7";
+            attribute :>> normativeStrength = "shall";
+        }
     }
 
-    item iec60812Clause5 : StandardClause {
-        @MemoIdentity { :>> providedId = "STD-IEC-60812-5"; }
-        attribute :>> name = "IEC60812Clause5";
-        attribute :>> clauseNumber = "5";
-        attribute :>> normativeStrength = "shall";
-    }
-    item iec60812Clause6 : StandardClause {
-        @MemoIdentity { :>> providedId = "STD-IEC-60812-6"; }
-        attribute :>> name = "IEC60812Clause6";
-        attribute :>> clauseNumber = "6";
-        attribute :>> normativeStrength = "shall";
-    }
-    item iec60812Clause7 : StandardClause {
-        @MemoIdentity { :>> providedId = "STD-IEC-60812-7"; }
-        attribute :>> name = "IEC60812Clause7";
-        attribute :>> clauseNumber = "7";
-        attribute :>> normativeStrength = "shall";
-    }
 
-    connection iec60812Has5 : Composes connect parent ::> iec60812 to child ::> iec60812Clause5;
-    connection iec60812Has6 : Composes connect parent ::> iec60812 to child ::> iec60812Clause6;
-    connection iec60812Has7 : Composes connect parent ::> iec60812 to child ::> iec60812Clause7;
 }
