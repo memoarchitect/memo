@@ -308,7 +308,7 @@ package memo_rules_ontology {
         attribute appliesTo = "SoftwareElement";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Software contains software. A software element containing a logical or physical one is realization, not containment — that is a refinement dependency.";
-        attribute predicateExpression = "composes->forAll(construct == 'port' or conformsTo(SoftwareElement))";
+        attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(SoftwareElement))";
         constraint { true }
     }
     constraint def LogicalContainsLogicalRule :> MemoConsistencyRule {
@@ -317,7 +317,7 @@ package memo_rules_ontology {
         attribute appliesTo = "LogicalComponent";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "The logical hierarchy decomposes into logical components. A logical component containing a software module or a physical part is realization — the implementation element refines the logical one, it is not part of it.";
-        attribute predicateExpression = "composes->forAll(construct == 'port' or conformsTo(LogicalComponent))";
+        attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(LogicalComponent))";
         constraint { true }
     }
     constraint def PhysicalContainsPhysicalRule :> MemoConsistencyRule {
@@ -326,7 +326,7 @@ package memo_rules_ontology {
         attribute appliesTo = "PhysicalElement";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "An assembly contains physical things. PhysicalElement is the shared root the family gained for this rule — PhysicalAssembly and PhysicalComponent previously specialized MemoPart separately, which left no type meaning 'a physical thing' to name here.";
-        attribute predicateExpression = "composes->forAll(construct == 'port' or conformsTo(PhysicalElement))";
+        attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(PhysicalElement))";
         constraint { true }
     }
 
