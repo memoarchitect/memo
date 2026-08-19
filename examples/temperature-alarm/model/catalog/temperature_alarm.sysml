@@ -121,7 +121,7 @@ package memo_examples_temperature_alarm {
     }
     verification vcAlarmLatency : VerificationCase {
         @MemoIdentity { :>> providedId = "TA-VC-001"; } attribute :>> name = "VerifyAlarmLatency";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "annunciation within 2 s of sustained deviation";
 
         subject verified : Base::Anything[*] = (fnDetectDeviation);

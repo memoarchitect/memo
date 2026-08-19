@@ -89,6 +89,6 @@ package memo_architecture_functional_behavior {
         attribute minMs : String;
         attribute maxMs : String;
         ref referenceElement : MemoPart[1];
-        attribute verificationMethod : VerificationMethodKind;
+        attribute verificationMethod : MemoVerificationMethodKind;
     }
 }

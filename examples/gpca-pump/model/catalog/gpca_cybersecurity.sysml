@@ -147,7 +147,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     verification vcAuthenticatedServiceAccess : VerificationCase {
         @MemoIdentity { :>> providedId = "CVER-001"; }
         attribute :>> name = "VerifyAuthenticatedServiceAccess";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Only authenticated and authorized service sessions may modify therapy configuration; all attempts are logged.";
         attribute :>> status = ElementStatusKind::approved;
 

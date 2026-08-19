@@ -15,7 +15,9 @@ package memo_architecture_logical_interfaces {
     // DigitalInterface / SPIInterface / RestInterface … hierarchy: those were
     // 20+ classes that differed only in the value of `protocol`.
 
-    interface def Interface specializes MemoInterface {
+    // Specializes the standard library interface as well as MEMO's base,
+    // rather than shadowing it — see the note on UseCase.
+    interface def Interface specializes MemoInterface, Interfaces::Interface {
         attribute interfaceKind : InterfaceKind;   // semantic + signaling family
         attribute direction : DirectionKind;
         attribute protocol : String;               // "SPI", "CAN", "Ethernet", "REST", "4-20mA"
