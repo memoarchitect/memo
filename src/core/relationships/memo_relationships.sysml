@@ -231,21 +231,17 @@ package memo_core_relationships {
 
 
 
-    // Composes is the single whole/part decomposition relation. It unifies the
-    // former ComposesLogical / AssemblyComprises / Contains{Component,Element} /
-    // {Workflow,Task,Activity,Scenario}Comprises* / FlowComprisesSpec /
-    // Collection membership is carried by the end instance.
-    // types, so the ends are generic MemoPart.
-    connection def Composes :> MemoRelationship {
-        end parent :>> source;
-        end child :>> target;
-    }
-    abstract connection composesLinks : Composes[*];
-    metadata def <composes> ComposesMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = composesLinks meta SysML::Usage;
-    }
+    // `Composes` is deleted (R10-S7). Containment is NESTING — the child is
+    // declared inside the parent — which is how SysML v2 models composition:
+    // composite feature ownership, not a link. The relation specialized
+    // `Connections::BinaryConnection`, "a link between two things WITHIN some
+    // containing structure", so it was the wrong category for the containment
+    // itself, and the corpus has no composition connection to specialize.
+    //
+    // Nothing is lost: the builder synthesizes a `composes` edge from every
+    // nested part and item, so rules, the DSM and traceability read exactly the
+    // graph they read before. The edge type is registered natively in
+    // memo-tools' relationship registry.
 
     connection def AnalyzedBy :> MemoRelationship {
         end element : MemoPart :>> source;
