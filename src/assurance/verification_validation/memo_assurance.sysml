@@ -19,8 +19,10 @@ package memo_assurance_verification_validation {
     // EXECUTION state, not an editorial one; execution state belongs in an
     // attribute of its own (see RiskControlMeasure.verificationStatus), not in
     // a second spelling of `status`.
-    verification def VerificationCase :> MemoVerificationCase {
-        attribute methodKind : VerificationMethodKind;
+    // Specializes the standard library verification case as well as MEMO's
+    // base, rather than shadowing it — see the note on UseCase.
+    verification def VerificationCase :> MemoVerificationCase, VerificationCases::VerificationCase {
+        attribute methodKind : MemoVerificationMethodKind;
         attribute acceptanceCriteria : String;
     }
     verification def ValidationCase :> MemoVerificationCase {
