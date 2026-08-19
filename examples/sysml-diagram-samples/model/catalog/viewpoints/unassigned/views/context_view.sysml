@@ -31,9 +31,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
     }
     part homeContext : UseContext { attribute :>> name = "Home Care Environment"; }
 
-    connection : InteractsWith connect contextParticipant ::> clinician to target ::> infusionSystem;
-    connection : InteractsWith connect contextParticipant ::> patient to target ::> infusionSystem;
-    connection : InteractsWith connect contextParticipant ::> biomedTech to target ::> infusionSystem;
+    connection connect clinician to infusionSystem;
+    connection connect patient to infusionSystem;
+    connection connect biomedTech to infusionSystem;
     flow from infusionSystem to pharmacySystem;
     connection : AppliesInContext connect useContext ::> homeContext to subjectElement ::> infusionSystem;
 
@@ -50,7 +50,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
         attribute :>> diagramType = "context";
         ref :>> viewpointDefinition = contextViewpoint;
         part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("InteractsWith", "flow", "AppliesInContext");
+            attribute :>> includeRelationshipKinds = ("connect", "flow", "AppliesInContext");
         }
     }
 }
