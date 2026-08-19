@@ -78,15 +78,4 @@ package memo_architecture_implementation_software_runtime {
         // a component belongs to without claiming to describe it.
     }
 
-    connection def ComponentConnects :> MemoRelationship {
-        attribute protocolSummary : String;
-        end sourceComponent : SoftwareComponent :>> source;
-        end targetComponent : SoftwareComponent :>> target;
-    }
-    abstract connection componentConnectsLinks : ComponentConnects[*];
-    metadata def <componentConnects> ComponentConnectsMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = componentConnectsLinks meta SysML::Usage;
-    }
 }
