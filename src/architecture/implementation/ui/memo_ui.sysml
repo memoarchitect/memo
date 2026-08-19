@@ -280,18 +280,6 @@ package memo_architecture_implementation_ui {
         attribute exitPoint : String;
     }
 
-    connection def DataBinding :> MemoRelationship {
-        attribute bindingExpression : String;
-        attribute refreshPolicy : String;
-        end boundElement : InteractionElement :>> source;
-        end dataSource : MemoItem :>> target;
-    }
-    abstract connection dataBindingLinks : DataBinding[*];
-    metadata def <dataBinding> DataBindingMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = dataBindingLinks meta SysML::Usage;
-    }
     // `PresentsState` had zero usages anywhere in the tree (R10-S6). Its
     // audited native form, `exhibit state`, does not actually fit: `UIState`
     // is a `part def` with plain string attributes, not a `state def`, and
@@ -320,17 +308,6 @@ package memo_architecture_implementation_ui {
     // Conflating the two was the mistake that made "clicking takes you to a
     // child view" look like spatial nesting; it is a separate frame reached
     // from here, and only this relation says so.
-    connection def NavigatesTo :> MemoRelationship {
-        attribute triggerGesture : String;
-        end sourceElement : UIElement :>> source;
-        end targetScreen : UIElement :>> target;
-    }
-    abstract connection navigatesToLinks : NavigatesTo[*];
-    metadata def <navigatesTo> NavigatesToMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = navigatesToLinks meta SysML::Usage;
-    }
 
     // ── §18 traceability ─────────────────────────────────────────
     connection def ElementTriggersAction :> MemoRelationship {
