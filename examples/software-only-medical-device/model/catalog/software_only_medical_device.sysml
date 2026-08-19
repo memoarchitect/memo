@@ -66,5 +66,5 @@ package memo_examples_software_only_medical_device {
     allocation duContainerImageDeployment : DeploysTo allocate duContainerImage to nodeCloud {
         attribute :>> deploymentKind = DeploymentKind::containerized;
     }
-    connection : HostedBy connect hostAssembly ::> nodeCloud to processingNode ::> svcGrading;
+    allocation : HostedBy allocate svcGrading to nodeCloud;
 }
