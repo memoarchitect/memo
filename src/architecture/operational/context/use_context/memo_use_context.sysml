@@ -66,17 +66,9 @@ package memo_architecture_operational_context_use_context {
         :>> baseType = interactsInContextLinks meta SysML::Usage;
     }
 
-    connection def InteractsWith :> MemoRelationship {
-        end contextParticipant : OperationalParticipant :>> source;
-        // Untyped so operational activities (action def) can be targets as well as parts.
-        end target;
-    }
-    abstract connection interactsWithLinks : InteractsWith[*];
-    metadata def <interactsWith> InteractsWithMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = interactsWithLinks meta SysML::Usage;
-    }
+    // `InteractsWith` is native `connect` (2026-08-18): write
+    // `connection connect <participant> to <target>;`. It carried no
+    // attributes, and the operational-context package already scopes the ends.
     // `ConnectsPhysically` is native `connect` (R10-S6): write
     // `connection connect source ::> <a> to target ::> <b>;` — the ordinary
     // untyped binary connection — instead of a connection def for it.

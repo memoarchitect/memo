@@ -27,7 +27,7 @@ package memo_examples_functional_logical_physical {
         @MemoIdentity { :>> providedId = "FLP-FN-001"; } attribute :>> name = "LimitLinePressure";
         attribute :>> criticality = CriticalityKind::high;
     }
-    connection : Enables connect enabling ::> fnLimitLinePressure to enabled ::> actOcclusionResponse;
+    dependency from fnLimitLinePressure to actOcclusionResponse;
 
     // Logical: solution structure, still technology-independent.
     part lcPressureProtection : LogicalComponent {

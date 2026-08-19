@@ -34,14 +34,7 @@ package memo_assurance_verification_validation {
     // Operational validation confirms the user's goal is achieved in the
     // use environment (§5): ValidationCase validates a UseCase.
     // Safety-critical functions must trace to verification (rules/coverage).
-    connection def ExecutesScenario :> MemoRelationship {
-        end verificationCase : VerificationCase :>> source;
-        end scenario : OperativeScenario :>> target;
-    }
-    abstract connection executesScenarioLinks : ExecutesScenario[*];
-    metadata def <executesScenario> ExecutesScenarioMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = executesScenarioLinks meta SysML::Usage;
-    }
+    // `ExecutesScenario` is native `perform` (2026-08-18): OperativeScenario
+    // is an `action def`, so write `perform <scenario>;` inside the
+    // verification case, as `InvolvesFunction` already does.
 }

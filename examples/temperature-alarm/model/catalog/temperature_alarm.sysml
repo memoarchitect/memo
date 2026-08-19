@@ -127,6 +127,10 @@ package memo_examples_temperature_alarm {
         attribute :>> acceptanceCriteria = "annunciation within 2 s of sustained deviation";
 
         subject verified : Base::Anything[*] = (fnDetectDeviation);
+
+        // Native `perform`: OperativeScenario is an action def, so executing a
+        // scenario is the language's own perform-action, not a MEMO relation.
+        perform vsAlarmLatency;
     }
     part uvAckTask : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::usabilityValidation;
@@ -140,8 +144,6 @@ package memo_examples_temperature_alarm {
         @MemoIdentity { :>> providedId = "TA-EV-001"; } attribute :>> name = "AlarmLatencyTestReport";
         attribute :>> evidenceType = "test report";
     }
-    connection : ExecutesScenario connect verificationCase ::> vcAlarmLatency to scenario ::> vsAlarmLatency;
-
     connection : Validates connect validationCase ::> uvAckTask to validationTarget ::> actAcknowledgeAlarm.taskAckAlarm;
     connection : ProducesEvidence connect producer ::> vcAlarmLatency to producedEvidence ::> evLatencyReport;
 }
