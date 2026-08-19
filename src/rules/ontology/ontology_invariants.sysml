@@ -286,6 +286,59 @@ package memo_rules_ontology {
         constraint { true }
     }
 
+    // ── Containment stays inside one family ─────────────────────────────
+    //
+    // CR-ONT-075 above is this rule for functions; these are the same shape for
+    // the other families. The invariant is FAMILY homogeneity, not type
+    // homogeneity: a System containing a Subsystem containing a LogicalComponent
+    // is correct decomposition even though all three types differ, and measured
+    // 2026-08-18 only 1 of 68 containment edges had identical types at both
+    // ends — a same-type rule would have rejected 98.5% of the corpus, the
+    // ontology's own templates included.
+    //
+    // What they catch is containment CROSSING a family: a logical component
+    // "containing" a software module is realization, and a hardware assembly
+    // "containing" a function is allocation. Both have their own relation, and
+    // writing them as containment loses the distinction.
+    //
+    // They read the `composes` edge, which the builder synthesizes from native
+    // nesting, so they cover the nesting spelling and the retired connection
+    // form identically.
+    //
+    // Ports are exempt. A port is a boundary FEATURE of its owner, not a member
+    // of its owner's family, and any element may carry one whatever family it
+    // is in — CR-ONT-065/066 already govern what may sit at a containment end.
+    // Without the exemption these rules reject `SoftwareModule composes
+    // PhysicalPort`, which those rules accept, and the ontology contradicts
+    // itself about a single edge.
+    constraint def SoftwareContainsSoftwareRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-077"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "SoftwareElement";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Software contains software. A software element containing a logical or physical one is realization, not containment — that is a refinement dependency.";
+        attribute predicateExpression = "composes->forAll(construct == 'port' or conformsTo(SoftwareElement))";
+        constraint { true }
+    }
+    constraint def LogicalContainsLogicalRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-078"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "LogicalComponent";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "The logical hierarchy decomposes into logical components. A logical component containing a software module or a physical part is realization — the implementation element refines the logical one, it is not part of it.";
+        attribute predicateExpression = "composes->forAll(construct == 'port' or conformsTo(LogicalComponent))";
+        constraint { true }
+    }
+    constraint def PhysicalContainsPhysicalRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-079"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "PhysicalElement";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "An assembly contains physical things. PhysicalElement is the shared root the family gained for this rule — PhysicalAssembly and PhysicalComponent previously specialized MemoPart separately, which left no type meaning 'a physical thing' to name here.";
+        attribute predicateExpression = "composes->forAll(construct == 'port' or conformsTo(PhysicalElement))";
+        constraint { true }
+    }
+
     // Track A3. The flow is the edge; the exchange part carries the budget and
     // assurance attributes. The two halves are bound by a SHARED NAME — the flow
     // usage is named with its exchange — and this is what makes that binding a
