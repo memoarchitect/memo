@@ -55,14 +55,4 @@ package memo_architecture_operational_scenarios {
     // A workflow is composed of one or more scenarios (nominal + alternate
     // paths). ScenarioOccurrence/Executes were removed: an actual execution is
     // a native SysML *usage* of the scenario, not a separate def + relation.
-    connection def HasScenario :> MemoRelationship {
-        end owningWorkflow : OperationalWorkflow :>> source;
-        end pathScenario : OperativeScenario :>> target;
-    }
-    abstract connection hasScenarioLinks : HasScenario[*];
-    metadata def <hasScenario> HasScenarioMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = hasScenarioLinks meta SysML::Usage;
-    }
 }
