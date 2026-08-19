@@ -358,4 +358,31 @@ package memo_rules_ontology {
         attribute predicateExpression = "not(variantKind == 'alternate' or variantKind == 'exception' or variantKind == 'recovery') or baseScenario->size() == 1 or variationPoint != ''";
         constraint { true }
     }
+
+    // ─── Assurance-trace warnings ────────────────────────────────────────
+    // Both are WARNINGS, not errors: each describes a trace graph that is
+    // suspicious rather than invalid, and a regulated model has legitimate
+    // exceptions to both. They needed `upstream` / `downstream` — the bare
+    // relation name is bidirectional, so before those existed no rule could
+    // ask which way a derivation ran.
+
+    constraint def DerivationGapRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-080"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "MemoRequirementElement";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A requirement that others derive from should itself be justified. If nothing is upstream of it and it is not a stakeholder need, the derivation chain dead-ends at an unexplained requirement — the gap an assessor asks about first. Needs are the legitimate roots, so they are exempt by type rather than by convention.";
+        attribute predicateExpression = "downstream(derivesFrom)->isEmpty() or upstream(derivesFrom)->notEmpty() or conformsTo(MemoNeed)";
+        constraint { true }
+    }
+
+    constraint def RedundantAncestorTraceRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-081"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "MemoRequirementElement";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "When one element satisfies both a requirement and something derived from that requirement, the trace to the ancestor is already implied by the derivation and adds no coverage. Two elements satisfying the two ends is ordinary decomposition and is not reported.";
+        attribute predicateExpression = "not satisfiedBy->intersects(downstream(derivesFrom).satisfiedBy)";
+        constraint { true }
+    }
 }
