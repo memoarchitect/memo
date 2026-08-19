@@ -6,7 +6,13 @@ package memo_architecture_realization_physical {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
-    part def ProcessingNode specializes MemoPart {
+    // For PhysicalElement: a processing node and a memory device ARE physical
+    // things — a board and a chip — and specialized MemoPart directly only
+    // because the physical family had no shared root until CR-ONT-079 needed
+    // one. Their home package reflects their ROLE (deployment target), not
+    // their nature.
+    private import memo_architecture_implementation_hardware_common::PhysicalElement;
+    part def ProcessingNode specializes PhysicalElement {
         attribute nodeKind : ProcessingNodeKind;
         attribute processorArchitecture : String;
         attribute memoryMB : String;
@@ -17,7 +23,7 @@ package memo_architecture_realization_physical {
         attribute supportsContainerization : Boolean;
         attribute realTimeCapable : Boolean;
     }
-    part def MemoryDevice specializes MemoPart {
+    part def MemoryDevice specializes PhysicalElement {
         attribute memoryKind : String;
         attribute capacityMB : String;
         attribute nonVolatile : Boolean;
