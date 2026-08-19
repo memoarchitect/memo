@@ -264,10 +264,39 @@ allocation runtimeImageDeployment : DeploysTo allocate swImage to node;
 ```
 
 Here `allocation` is native — the language provides the relationship and its
-direction checking — and `DeploysTo` is a MEMO `connection def` that carries the
-regulated semantics and attributes. Every duplicate in the table above should
-end up either deleted in favour of its native form, or rewritten into this
-shape.
+direction checking — and `DeploysTo` is a MEMO **`allocation def`** rooted on
+`Allocations::Allocation` that carries the regulated semantics and attributes.
+Every duplicate in the table above should end up either deleted in favour of its
+native form, or rewritten into this shape.
+
+**`connection : LogicalConnector connect a to b;` is already this pattern.** It
+is the `connect` case of it, not a "bare connection". A 2026-08-18 audit
+listed 23 relations as needing conversion; 17 of them were already in the
+pattern and had nothing to convert. Read the spelling before scheduling work.
+
+**Only `allocate` and `connect` can carry a MEMO `def` today.** `BindingUsage`
+is `'bind' ref '=' ref ';'` and `SuccessionUsage` takes no `: Type`, so a
+relation whose semantics need `bind`, `succession` or `flow` stays a
+`connection def` until the grammar gains the production. Do not "convert" it by
+dropping to the untyped native form — that trades the definition's attributes
+and end typing for nothing.
+
+### End names are decoration; position is the edge
+
+```sysml
+connection : HostedBy connect hostAssembly ::> a to processingNode ::> b;
+```
+
+This reads as if each reference binds to the end it names. **It does not.** The
+builder binds by position, and `HostedBy` declares `processingNode` as its
+source — so this usage produces an edge pointing the opposite way from how it
+reads. Nothing catches it on its own: the type is right, both references
+resolve, and `syside check` passes because SysML has no opinion about which end
+you write first.
+
+Measured 2026-08-18: 3 of ~880 usages were reversed this way — two `HostedBy`,
+one `Validates`. `reversed-end-names.test.ts` in memo-tools now fails the build
+on a fourth. **Write the ends in declaration order.**
 
 ## What is genuinely MEMO's
 

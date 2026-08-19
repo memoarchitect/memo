@@ -7,6 +7,7 @@ package memo_core_relationships {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
 
+    private import Allocations::Allocation;
     // All MEMO relations are native SysML v2 `connection def`s (each is a
     // Connection/Association), specializing the MemoRelationship base. The
     // relationship name is the verb; the RelationshipRegistry derives the
@@ -199,14 +200,18 @@ package memo_core_relationships {
     // `dependency from <enabling> to <enabled>;`. Same call as `Supports`,
     // which was deleted as a duplicate of both `dependency` and `Enables`.
 
-    connection def HostedBy :> MemoRelationship {
+        // A processing node hosted by an assembly is allocated to it. The end
+    // NAMES were already right; two of the three usages wrote them in reverse
+    // order, and the builder binds by position, so those two edges pointed the
+    // wrong way. See the reversed-end-name lint in memo-tools.
+    allocation def HostedBy :> MemoRelationship, Allocations::Allocation {
         end processingNode : MemoPart :>> source;
         end hostAssembly : MemoPart :>> target;
     }
     abstract connection hostedByLinks : HostedBy[*];
     metadata def <hostedBy> HostedByMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
+        :> annotatedElement : SysML::AllocationDefinition;
+        :> annotatedElement : SysML::AllocationUsage;
         :>> baseType = hostedByLinks meta SysML::Usage;
     }
 
