@@ -397,7 +397,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> minMs = "0";
         attribute :>> maxMs = "20";
         ref :>> referenceElement = fcAlarmStop;
-        attribute :>> verificationMethod = VerificationMethodKind::modelChecking;
+        attribute :>> verificationMethod = MemoVerificationMethodKind::modelChecking;
         @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; the source specifies synchronous same-step (immediate) semantics with no timing figures"; }
     }
     part tcBolusResponse : TimingConstraint {
@@ -407,7 +407,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> minMs = "0";
         attribute :>> maxMs = "100";
         ref :>> referenceElement = fcPatientBolus;
-        attribute :>> verificationMethod = VerificationMethodKind::test;
+        attribute :>> verificationMethod = MemoVerificationMethodKind::test;
         @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; not specified by the source"; }
     }
     part tcWatchdogTimeout : TimingConstraint {
@@ -421,7 +421,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         // `referenceElement` is a MemoPart; a requirement is a requirement def
         // and does not conform to it — that link is REQ-X-08's own trace.
         ref :>> referenceElement = gpcaDevice.gpcaSoftware.systemMonitor;
-        attribute :>> verificationMethod = VerificationMethodKind::test;
+        attribute :>> verificationMethod = MemoVerificationMethodKind::test;
         @MemoIdentity { :>> sourceReference = "MEMO extension — supports extension requirement REQ-X-08; watchdog not specified by the source"; }
     }
 }

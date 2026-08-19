@@ -142,7 +142,7 @@ package memo_core_enumerations {
         enum maintenance;
         enum obsolete;
     }
-    enum def VerificationMethodKind {
+    enum def MemoVerificationMethodKind {
         enum inspection;
         enum analytical;
         enum demonstration;
