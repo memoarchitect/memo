@@ -187,6 +187,35 @@ package memo_examples_gpca_pump_gpca_operational {
         #refinement dependency fcsBolusCommand to oaRequestBolus;
         #refinement dependency fcsBolusActuate to oaRequestBolus;
         #refinement dependency fcsBolusLog to oaRequestBolus;
+        action osNominalTherapy : OperativeScenario {
+            @MemoIdentity { :>> providedId = "OS-001"; }
+            attribute :>> name = "NominalTherapySession";
+            attribute :>> preCondition = "prescription issued, reservoir loaded";
+            attribute :>> postCondition = "therapy completed and stopped by clinician";
+            attribute :>> pathSummary = "Prescribe > load reservoir > program and confirm > start basal > patient boluses within limits > stop therapy > review log.";
+            @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.2 Main GPCA System Functions"; }
+
+            action oaCompleteNominalTherapy : OperativeAction {
+                attribute :>> name = "CompleteNominalTherapy";
+                action deliverWithinLimits; action recordTherapyEvent;
+                first start then deliverWithinLimits; first deliverWithinLimits then recordTherapyEvent; first recordTherapyEvent then done;
+            }
+        }
+        action osLockoutBolus : OperativeScenario {
+            attribute :>> scenarioKind = ScenarioKind::alternate;
+            @MemoIdentity { :>> providedId = "OS-002"; }
+            attribute :>> name = "BolusRequestDuringLockout";
+            attribute :>> preCondition = "basal infusion active; lockout interval running";
+            attribute :>> postCondition = "request ignored, logged; basal continues unchanged";
+            attribute :>> pathSummary = "Patient presses bolus button during lockout > infusion manager rejects request > event logged > no additional drug delivered.";
+            @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 PATIENT BOLUS mode (lockout requirements)"; }
+
+            action oaRejectBolusDuringLockout : OperativeAction {
+                attribute :>> name = "RejectBolusDuringLockout";
+                action checkLockout; action rejectAndLog;
+                first start then checkLockout; first checkLockout then rejectAndLog; first rejectAndLog then done;
+            }
+        }
     }
     action wfRespondToTherapyAlarm : OperationalWorkflow {
         attribute :>> name = "RespondToTherapyAlarm";
@@ -198,6 +227,66 @@ package memo_examples_gpca_pump_gpca_operational {
         #refinement dependency fcsAlarmEvaluate to oaRespondAlarm;
         #refinement dependency fcsAlarmStopInfusion to oaRespondAlarm;
         #refinement dependency fcsAlarmAnnunciate to oaRespondAlarm;
+        action osOcclusionAlarm : OperativeScenario {
+            attribute :>> scenarioKind = ScenarioKind::alternate;
+            @MemoIdentity { :>> providedId = "OS-003"; }
+            attribute :>> name = "OcclusionDetectedDuringInfusion";
+            attribute :>> preCondition = "therapy active; downstream line becomes blocked";
+            attribute :>> postCondition = "infusion paused, alarm annunciated, clinician clears occlusion and resumes";
+            attribute :>> pathSummary = "Occlusion sensor exceeds pressure threshold > alarm raised same step > infusion paused > audible and visual annunciation > clinician resolves and resumes.";
+            @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms and Alerts (occlusion)"; }
+
+            action oaRespondToOcclusion : OperativeAction {
+                attribute :>> name = "RespondToOcclusion";
+                action pauseInfusion; action annunciateOcclusion; action resolveAndResume;
+                first start then pauseInfusion; first pauseInfusion then annunciateOcclusion; first annunciateOcclusion then resolveAndResume; first resolveAndResume then done;
+            }
+        }
+        action osAirInLine : OperativeScenario {
+            attribute :>> scenarioKind = ScenarioKind::alternate;
+            @MemoIdentity { :>> providedId = "OS-004"; }
+            attribute :>> name = "AirInLineDetected";
+            attribute :>> preCondition = "therapy active; air bubble enters tubing";
+            attribute :>> postCondition = "infusion stopped before air reaches patient; alarm annunciated";
+            attribute :>> pathSummary = "Air-in-line sensor detects bubble above threshold > transition to PAUSED (KVO flow) > High-priority Air embolism notification > clinician re-primes line and restarts.";
+            @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Air embolism)"; }
+
+            action oaRespondToAirInLine : OperativeAction {
+                attribute :>> name = "RespondToAirInLine";
+                action stopOrKvo; action annunciateAir; action reprimeAndRestart;
+                first start then stopOrKvo; first stopOrKvo then annunciateAir; first annunciateAir then reprimeAndRestart; first reprimeAndRestart then done;
+            }
+        }
+        action osEmptyReservoir : OperativeScenario {
+            attribute :>> scenarioKind = ScenarioKind::alternate;
+            @MemoIdentity { :>> providedId = "OS-005"; }
+            attribute :>> name = "ReservoirEmptyDuringTherapy";
+            attribute :>> preCondition = "therapy active; reservoir volume reaches empty threshold";
+            attribute :>> postCondition = "infusion stopped, alarm raised, reservoir replaced";
+            attribute :>> pathSummary = "Reservoir-empty condition detected > transition to PAUSED (KVO flow) > High-priority Empty Reservoir notification > clinician loads new reservoir > therapy resumed with saved prescription.";
+            @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Empty Reservoir)"; }
+
+            action oaReplaceEmptyReservoir : OperativeAction {
+                attribute :>> name = "ReplaceEmptyReservoir";
+                action stopAndAnnunciate; action replaceReservoir; action resumeTherapy;
+                first start then stopAndAnnunciate; first stopAndAnnunciate then replaceReservoir; first replaceReservoir then resumeTherapy; first resumeTherapy then done;
+            }
+        }
+        action osPowerLoss : OperativeScenario {
+            attribute :>> scenarioKind = ScenarioKind::alternate;
+            @MemoIdentity { :>> providedId = "OS-006"; }
+            attribute :>> name = "MainsPowerLossAndRecovery";
+            attribute :>> preCondition = "therapy active on mains power";
+            attribute :>> postCondition = "therapy continues on battery; prescription preserved across full power loss";
+            attribute :>> pathSummary = "Mains lost > battery takes over with notification > if battery depletes, pump stops safely > on power restore, saved prescription recovered and therapy resumed only after clinician confirmation.";
+            @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.3 Electrical Hazards (battery failure)"; }
+
+            action oaRecoverAfterPowerLoss : OperativeAction {
+                attribute :>> name = "RecoverAfterPowerLoss";
+                action switchToBattery; action restorePrescription; action confirmRestart;
+                first start then switchToBattery; first switchToBattery then restorePrescription; first restorePrescription then confirmRestart; first confirmRestart then done;
+            }
+        }
     }
 
 
@@ -218,101 +307,12 @@ package memo_examples_gpca_pump_gpca_operational {
     }
 
     // ── Operational scenarios ───────────────────────────────────
-    action osNominalTherapy : OperativeScenario {
-        @MemoIdentity { :>> providedId = "OS-001"; }
-        attribute :>> name = "NominalTherapySession";
-        attribute :>> preCondition = "prescription issued, reservoir loaded";
-        attribute :>> postCondition = "therapy completed and stopped by clinician";
-        attribute :>> pathSummary = "Prescribe > load reservoir > program and confirm > start basal > patient boluses within limits > stop therapy > review log.";
-        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.2 Main GPCA System Functions"; }
-
-        action oaCompleteNominalTherapy : OperativeAction {
-            attribute :>> name = "CompleteNominalTherapy";
-            action deliverWithinLimits; action recordTherapyEvent;
-            first start then deliverWithinLimits; first deliverWithinLimits then recordTherapyEvent; first recordTherapyEvent then done;
-        }
-    }
-    action osLockoutBolus : OperativeScenario {
-        attribute :>> scenarioKind = ScenarioKind::alternate;
-        @MemoIdentity { :>> providedId = "OS-002"; }
-        attribute :>> name = "BolusRequestDuringLockout";
-        attribute :>> preCondition = "basal infusion active; lockout interval running";
-        attribute :>> postCondition = "request ignored, logged; basal continues unchanged";
-        attribute :>> pathSummary = "Patient presses bolus button during lockout > infusion manager rejects request > event logged > no additional drug delivered.";
-        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 PATIENT BOLUS mode (lockout requirements)"; }
-
-        action oaRejectBolusDuringLockout : OperativeAction {
-            attribute :>> name = "RejectBolusDuringLockout";
-            action checkLockout; action rejectAndLog;
-            first start then checkLockout; first checkLockout then rejectAndLog; first rejectAndLog then done;
-        }
-    }
-    action osOcclusionAlarm : OperativeScenario {
-        attribute :>> scenarioKind = ScenarioKind::alternate;
-        @MemoIdentity { :>> providedId = "OS-003"; }
-        attribute :>> name = "OcclusionDetectedDuringInfusion";
-        attribute :>> preCondition = "therapy active; downstream line becomes blocked";
-        attribute :>> postCondition = "infusion paused, alarm annunciated, clinician clears occlusion and resumes";
-        attribute :>> pathSummary = "Occlusion sensor exceeds pressure threshold > alarm raised same step > infusion paused > audible and visual annunciation > clinician resolves and resumes.";
-        @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms and Alerts (occlusion)"; }
-
-        action oaRespondToOcclusion : OperativeAction {
-            attribute :>> name = "RespondToOcclusion";
-            action pauseInfusion; action annunciateOcclusion; action resolveAndResume;
-            first start then pauseInfusion; first pauseInfusion then annunciateOcclusion; first annunciateOcclusion then resolveAndResume; first resolveAndResume then done;
-        }
-    }
-    action osAirInLine : OperativeScenario {
-        attribute :>> scenarioKind = ScenarioKind::alternate;
-        @MemoIdentity { :>> providedId = "OS-004"; }
-        attribute :>> name = "AirInLineDetected";
-        attribute :>> preCondition = "therapy active; air bubble enters tubing";
-        attribute :>> postCondition = "infusion stopped before air reaches patient; alarm annunciated";
-        attribute :>> pathSummary = "Air-in-line sensor detects bubble above threshold > transition to PAUSED (KVO flow) > High-priority Air embolism notification > clinician re-primes line and restarts.";
-        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Air embolism)"; }
-
-        action oaRespondToAirInLine : OperativeAction {
-            attribute :>> name = "RespondToAirInLine";
-            action stopOrKvo; action annunciateAir; action reprimeAndRestart;
-            first start then stopOrKvo; first stopOrKvo then annunciateAir; first annunciateAir then reprimeAndRestart; first reprimeAndRestart then done;
-        }
-    }
-    action osEmptyReservoir : OperativeScenario {
-        attribute :>> scenarioKind = ScenarioKind::alternate;
-        @MemoIdentity { :>> providedId = "OS-005"; }
-        attribute :>> name = "ReservoirEmptyDuringTherapy";
-        attribute :>> preCondition = "therapy active; reservoir volume reaches empty threshold";
-        attribute :>> postCondition = "infusion stopped, alarm raised, reservoir replaced";
-        attribute :>> pathSummary = "Reservoir-empty condition detected > transition to PAUSED (KVO flow) > High-priority Empty Reservoir notification > clinician loads new reservoir > therapy resumed with saved prescription.";
-        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Empty Reservoir)"; }
-
-        action oaReplaceEmptyReservoir : OperativeAction {
-            attribute :>> name = "ReplaceEmptyReservoir";
-            action stopAndAnnunciate; action replaceReservoir; action resumeTherapy;
-            first start then stopAndAnnunciate; first stopAndAnnunciate then replaceReservoir; first replaceReservoir then resumeTherapy; first resumeTherapy then done;
-        }
-    }
-    action osPowerLoss : OperativeScenario {
-        attribute :>> scenarioKind = ScenarioKind::alternate;
-        @MemoIdentity { :>> providedId = "OS-006"; }
-        attribute :>> name = "MainsPowerLossAndRecovery";
-        attribute :>> preCondition = "therapy active on mains power";
-        attribute :>> postCondition = "therapy continues on battery; prescription preserved across full power loss";
-        attribute :>> pathSummary = "Mains lost > battery takes over with notification > if battery depletes, pump stops safely > on power restore, saved prescription recovered and therapy resumed only after clinician confirmation.";
-        @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.3 Electrical Hazards (battery failure)"; }
-
-        action oaRecoverAfterPowerLoss : OperativeAction {
-            attribute :>> name = "RecoverAfterPowerLoss";
-            action switchToBattery; action restorePrescription; action confirmRestart;
-            first start then switchToBattery; first switchToBattery then restorePrescription; first restorePrescription then confirmRestart; first confirmRestart then done;
-        }
-    }
-    #refinement dependency osNominalTherapy to ucDeliverPcaTherapy;
-    #refinement dependency osLockoutBolus to ucDeliverPcaTherapy;
-    #refinement dependency osOcclusionAlarm to ucDeliverPcaTherapy;
-    #refinement dependency osAirInLine to ucDeliverPcaTherapy;
-    #refinement dependency osEmptyReservoir to ucDeliverPcaTherapy;
-    #refinement dependency osPowerLoss to ucDeliverPcaTherapy;
+    #refinement dependency wfManageActiveTherapy::osNominalTherapy to ucDeliverPcaTherapy;
+    #refinement dependency wfManageActiveTherapy::osLockoutBolus to ucDeliverPcaTherapy;
+    #refinement dependency wfRespondToTherapyAlarm::osOcclusionAlarm to ucDeliverPcaTherapy;
+    #refinement dependency wfRespondToTherapyAlarm::osAirInLine to ucDeliverPcaTherapy;
+    #refinement dependency wfRespondToTherapyAlarm::osEmptyReservoir to ucDeliverPcaTherapy;
+    #refinement dependency wfRespondToTherapyAlarm::osPowerLoss to ucDeliverPcaTherapy;
 
     // ── Operational trace relations ─────────────────────────────
     connection : RealizesUseCase connect realizingWorkflow ::> wfPrepareAndStartTherapy to realizedUseCase ::> ucDeliverPcaTherapy;
@@ -324,11 +324,5 @@ package memo_examples_gpca_pump_gpca_operational {
     connection : RequiresCapability connect requiringIntendedUse ::> gpcaIntendedUse to requiredCapability ::> ocFailSafeTherapy;
 
 
-    connection : HasScenario connect owningWorkflow ::> wfManageActiveTherapy to pathScenario ::> osNominalTherapy;
-    connection : HasScenario connect owningWorkflow ::> wfManageActiveTherapy to pathScenario ::> osLockoutBolus;
-    connection : HasScenario connect owningWorkflow ::> wfRespondToTherapyAlarm to pathScenario ::> osOcclusionAlarm;
-    connection : HasScenario connect owningWorkflow ::> wfRespondToTherapyAlarm to pathScenario ::> osAirInLine;
-    connection : HasScenario connect owningWorkflow ::> wfRespondToTherapyAlarm to pathScenario ::> osEmptyReservoir;
-    connection : HasScenario connect owningWorkflow ::> wfRespondToTherapyAlarm to pathScenario ::> osPowerLoss;
 
 }

@@ -531,7 +531,9 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> ueAlarmDisregard to targetRiskElement ::> seqOcclusion;
 
     // ── FMEA and fault tree integration ─────────────────────────
-    connection : AnalyzedBy connect element ::> pumpMotorAssembly to analysisArtifact ::> fmeaDelivery;
+    // Was `AnalyzedBy`: a zero-attribute edge from an element to the
+    // artifact analysing it, which is what a bare dependency states.
+    dependency from pumpMotorAssembly to fmeaDelivery;
     connection : HasFailureMode connect element ::> pumpMotorAssembly to failureMode ::> fmMotorRunaway;
     connection : HasFailureMode connect element ::> airInLineSensor to failureMode ::> fmAirSensorSilent;
     connection : HasFailureMode connect element ::> occlusionSensor to failureMode ::> fmOcclusionDrift;
