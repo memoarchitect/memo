@@ -232,16 +232,6 @@ package memo_core_relationships {
     // graph they read before. The edge type is registered natively in
     // memo-tools' relationship registry.
 
-    connection def AnalyzedBy :> MemoRelationship {
-        end element : MemoPart :>> source;
-        end analysisArtifact : AnalysisArtifact :>> target;
-    }
-    abstract connection analyzedByLinks : AnalyzedBy[*];
-    metadata def <analyzedBy> AnalyzedByMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = analyzedByLinks meta SysML::Usage;
-    }
 
     connection def BindsToInterface :> MemoRelationship {
         end portElement :>> source;

@@ -63,7 +63,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         actor clinicianActor = clinician;
     }
 
-    connection : Extends connect extendingUseCase ::> documentTreatment to extendedUseCase ::> reviewStatus;
+    // Was an `Extends` connection; a use case extending another is
+    // specialization, and `:>` inherits the base's subject and actors.
+    dependency from documentTreatment to reviewStatus;
 
     view sampleUseCaseView : MemoDiagramView {
         expose patient;
