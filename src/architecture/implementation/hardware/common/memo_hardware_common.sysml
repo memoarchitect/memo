@@ -13,7 +13,17 @@ package memo_architecture_implementation_hardware_common {
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
 
-    part def PhysicalAssembly specializes MemoPart {
+    // The shared root of the physical family.
+    //
+    // `PhysicalAssembly` and `PhysicalComponent` each specialized `MemoPart`
+    // directly, so the family had two roots and no single type that means
+    // "a physical thing". A containment rule has to name one type, and
+    // `conformsTo(MemoPart)` is far too wide — it admits a requirement or a
+    // hazard. This is that type, and it carries nothing of its own: the split
+    // between an assembly and a component is what the two subtypes are for.
+    abstract part def PhysicalElement specializes MemoPart { }
+
+    part def PhysicalAssembly specializes PhysicalElement {
         attribute responsibility : String;
         attribute safetyRole : String;
         attribute partNumber : String;
@@ -25,7 +35,7 @@ package memo_architecture_implementation_hardware_common {
     // Retained name from 0.4; an electronics-centred assembly.
     part def HardwareAssembly specializes PhysicalAssembly;
 
-    part def PhysicalComponent specializes MemoPart {
+    part def PhysicalComponent specializes PhysicalElement {
         attribute partNumber : String;
         attribute materialSummary : String;
         // ISO 10993-1 contact characterization; required when true.
