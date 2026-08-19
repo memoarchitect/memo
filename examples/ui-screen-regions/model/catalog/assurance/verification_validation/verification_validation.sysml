@@ -23,7 +23,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
     private import memo_core_common::MemoIdentity;
     verification vcRateChange : VerificationCase {
         @MemoIdentity { :>> providedId = "UIR-VER-001"; } attribute :>> name = "VerifyRateChangeConfirmation";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "A rate change cannot reach the controller until the displayed value is explicitly confirmed.";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -40,7 +40,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
 
     verification vcDrugLibrarySelection : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-002"; } attribute :>> name = "VerifyCareAreaDrugLibrarySelection";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Only enabled care-area drug and concentration records are selectable, and every selection supplies the matching dosing limits.";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -57,7 +57,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
 
     verification vcInfusionStatusContent : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-003"; } attribute :>> name = "VerifyInfusionStatusContentAndFreshness";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Time, battery, active rate, drug identity, and total delivered volume satisfy their content, accuracy, and latency criteria under normal and threshold-transition conditions.";
         attribute :>> status = ElementStatusKind::approved;
 

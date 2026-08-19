@@ -19,7 +19,13 @@ package memo_architecture_operational_use_cases {
         enum development;
     }
 
-    use case def UseCase :> MemoUseCase {
+    // Specializes the STANDARD library use case as well as MEMO's base. Before
+    // this it specialized only `MemoUseCase` and so shadowed `UseCases::UseCase`
+    // — same name, same metaclass, none of the semantics — which is why the
+    // subject/actor features below had to be re-declared by hand instead of
+    // being inherited. The wrapper survives only to carry the display label and
+    // lifecycle status; identity comes from `@MemoIdentity`.
+    use case def UseCase :> MemoUseCase, UseCases::UseCase {
         // Text of this use case's goal; this is not a separate Goal element.
         attribute goalStatement : String;
         attribute trigger : String;

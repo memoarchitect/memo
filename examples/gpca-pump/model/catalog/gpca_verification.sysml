@@ -17,7 +17,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcModeRange : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-001"; }
         attribute :>> name = "VerifyModeRange";
-        attribute :>> methodKind = VerificationMethodKind::formalProof;
+        attribute :>> methodKind = MemoVerificationMethodKind::formalProof;
         attribute :>> acceptanceCriteria = "Current_System_mode only takes valid exclusive values";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -27,7 +27,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcLockout : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-002"; }
         attribute :>> name = "VerifyBolusLockout";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "No patient bolus initiated when lockout or max bolus constraints active";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -37,7 +37,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcSameStepAlarm : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-003"; }
         attribute :>> name = "VerifySameStepAlarmStop";
-        attribute :>> methodKind = VerificationMethodKind::modelChecking;
+        attribute :>> methodKind = MemoVerificationMethodKind::modelChecking;
         attribute :>> acceptanceCriteria = "Alarm output affects infusion in same execution step";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -47,7 +47,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcTemporalModeSafety : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-004"; }
         attribute :>> name = "VerifyTemporalModeSafety";
-        attribute :>> methodKind = VerificationMethodKind::modelChecking;
+        attribute :>> methodKind = MemoVerificationMethodKind::modelChecking;
         attribute :>> acceptanceCriteria = "No invalid transitions and pause on critical alarms";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -57,7 +57,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcAirInLine : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-005"; }
         attribute :>> name = "VerifyAirInLineStop";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Injected air above threshold pauses infusion and annunciates per the REQ 59 High-priority actions (REQ-CS-21)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -67,7 +67,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcOcclusion : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-006"; }
         attribute :>> name = "VerifyOcclusionDetection";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Clamped line above pressure threshold pauses infusion and annunciates (REQ-X-04)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -77,7 +77,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcEmptyReservoir : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-007"; }
         attribute :>> name = "VerifyEmptyReservoirStop";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Reservoir-empty assertion transitions to PAUSED (KVO flow) and annunciates per the REQ 59 High-priority actions (REQ-CS-23)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -87,7 +87,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcPost : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-008"; }
         attribute :>> name = "VerifyPowerOnSelfTest";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Each injected POST fault (CPU, RAM, ROM, watchdog, sensors) blocks therapy and alarms (REQ-X-02)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -97,7 +97,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcPowerLoss : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-009"; }
         attribute :>> name = "VerifyPowerLossRetentionAndResume";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Prescription and log intact after power cycle; therapy resumes only after confirmation (REQ-X-03)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -106,7 +106,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcWatchdog : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-010"; }
         attribute :>> name = "VerifyWatchdogSafeState";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Induced CPU hang forces zero flow and continuous alarm within 60 ms (REQ-X-08, TC-003)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -116,7 +116,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcHourlyMax : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-011"; }
         attribute :>> name = "VerifyHourlyDoseCeiling";
-        attribute :>> methodKind = VerificationMethodKind::simulation;
+        attribute :>> methodKind = MemoVerificationMethodKind::simulation;
         attribute :>> acceptanceCriteria = "Randomized bolus/basal schedules never exceed hourly maximum in sliding window (REQ-X-06)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -125,7 +125,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcPumpAccuracy : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-012"; }
         attribute :>> name = "VerifyDeliveryAccuracy";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Gravimetric bench measurement within ±5% (Tolerance_Min_const) across rate range (REQ-X-11)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -134,7 +134,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcAlarmLoudness : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-013"; }
         attribute :>> name = "VerifyAlarmSoundPressure";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Each priority tone meets Audio_level_const, 50 db for 2 s per I 8 (REQ-X-12)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -143,7 +143,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcFreeFlow : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-014"; }
         attribute :>> name = "VerifyAntiFreeFlowValve";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "No gravity flow with set disengaged under worst-case head height (REQ-X-14)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -153,7 +153,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcStuckButton : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-015"; }
         attribute :>> name = "VerifyStuckButtonDetection";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Shorted pendant input yields no bolus and Medium-priority notification after 60 s (REQ-X-09)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -162,7 +162,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcFlowCrossCheck : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-016"; }
         attribute :>> name = "VerifyFlowCrossCheck";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Injected deviation beyond Tolerance_Min_const sustained past Max_Duration_OverInfusion_const pauses therapy and annunciates (REQ-X-10)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -173,7 +173,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcDrugLibrary : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-017"; }
         attribute :>> name = "VerifyDrugLibraryEnforcement";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Hard-limit entries rejected, soft-limit entries require confirmation, both logged (REQ-X-01)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -183,7 +183,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcPrescriptionConfirm : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-018"; }
         attribute :>> name = "VerifyPrescriptionConfirmation";
-        attribute :>> methodKind = VerificationMethodKind::demonstration;
+        attribute :>> methodKind = MemoVerificationMethodKind::demonstration;
         attribute :>> acceptanceCriteria = "Therapy cannot start without distinct confirmation; displayed values equal stored values (REQ-CS-09)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -192,7 +192,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcEventLog : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-019"; }
         attribute :>> name = "VerifyEventLogIntegrity";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Operational/error log entries per REQ-CS-78..81; tampering detectable (REQ-X-07)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -202,7 +202,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcReverseDeliveryPause : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-020"; }
         attribute :>> name = "VerifyReverseDeliveryPause";
-        attribute :>> methodKind = VerificationMethodKind::modelChecking;
+        attribute :>> methodKind = MemoVerificationMethodKind::modelChecking;
         attribute :>> acceptanceCriteria = "Continuous or cumulative reverse delivery beyond the REQ-CS-22 duration limits transitions to PAUSED and raises the Reverse Delivery notification (NOTIF-04)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -211,7 +211,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcAntiRefluxMechanism : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-021"; }
         attribute :>> name = "VerifyContinuousReverseDeliveryPrevention";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "During normal use and single fault condition, continuous reverse delivery is not possible (IEC 601-2-24 basis per GPCA safety requirements)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -220,7 +220,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcVtbiCeiling : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-022"; }
         attribute :>> name = "VerifyVtbiCeilingPause";
-        attribute :>> methodKind = VerificationMethodKind::modelChecking;
+        attribute :>> methodKind = MemoVerificationMethodKind::modelChecking;
         attribute :>> acceptanceCriteria = "Actual volume infused above the drug-database maximum VTBI transitions to PAUSED with flow at most KVO (REQ-CS-20, AGREE GP-008) and raises NOTIF-06";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -229,7 +229,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcInfusionComplete : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-023"; }
         attribute :>> name = "VerifyInfusionCompleteStop";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Reaching prescribed total duration or maximum VTBI transitions ACTIVE to IDLE with Infusion Complete actions (REQ-CS-28)";
         attribute :>> status = ElementStatusKind::approved;
 
@@ -238,7 +238,7 @@ package memo_examples_gpca_pump_gpca_verification {
     verification vcDoorInterlock : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-024"; }
         attribute :>> name = "VerifyDoorOpenDeliveryInhibit";
-        attribute :>> methodKind = VerificationMethodKind::test;
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Door open during THERAPY limits flow to at most KVO and raises a notification (AGREE GP-011; REQ-X-05)";
         attribute :>> status = ElementStatusKind::approved;
 
