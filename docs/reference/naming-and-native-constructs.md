@@ -69,7 +69,7 @@ backlog long after most of it had been done, and 12 of the 17 rows were stale.
 
 | MEMO construct | Native form | Status (2026-08-18) |
 |---|---|---|
-| `Composes` | nesting (native containment) | **present** |
+| `Composes` | nesting (native containment) | removed |
 | `IncludedIn` | `expose` | removed |
 | `Initiates`, `ParticipatesIn` | `actor` | removed |
 | `Includes` | `include use case` | removed |

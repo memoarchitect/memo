@@ -118,6 +118,22 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
                 }
             }
         }
+        part uiElement12 : UIElement {
+            attribute redefines name = "Region UIE-012";
+            @MemoIdentity { :>> providedId = "UIE-012"; }
+            attribute redefines formKind = UIElementFormKind::panel;
+            attribute redefines disclosureKind = UIDisclosureKind::inline;
+            attribute redefines detectionMethod = BoundsDetectionKind::manual;
+            attribute redefines boundaryColor = "#14B8A6";
+            attribute redefines boundaryOpacity = 0.12;
+            attribute redefines boundaryWidth = 5;
+            attribute redefines bounds {
+                attribute redefines x = 0.52234;
+                attribute redefines y = 0.11311;
+                attribute redefines width = 0.45242;
+                attribute redefines height = 0.53172;
+            }
+        }
     }
 
     // ── The settings screen: a sibling root, not a child ────────
@@ -182,22 +198,6 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
         perform fnManageInfusionDisplay.fnValidateDrugSelection;
     }
 
-    part uiElement12 : UIElement {
-        attribute redefines name = "Region UIE-012";
-        @MemoIdentity { :>> providedId = "UIE-012"; }
-        attribute redefines formKind = UIElementFormKind::panel;
-        attribute redefines disclosureKind = UIDisclosureKind::inline;
-        attribute redefines detectionMethod = BoundsDetectionKind::manual;
-        attribute redefines boundaryColor = "#14B8A6";
-        attribute redefines boundaryOpacity = 0.12;
-        attribute redefines boundaryWidth = 5;
-        attribute redefines bounds {
-            attribute redefines x = 0.52234;
-            attribute redefines y = 0.11311;
-            attribute redefines width = 0.45242;
-            attribute redefines height = 0.53172;
-        }
-    }
 
 
     satisfy reqRateLegibility by elMainScreen;
