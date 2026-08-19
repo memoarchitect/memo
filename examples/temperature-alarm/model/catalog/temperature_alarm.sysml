@@ -144,6 +144,6 @@ package memo_examples_temperature_alarm {
         @MemoIdentity { :>> providedId = "TA-EV-001"; } attribute :>> name = "AlarmLatencyTestReport";
         attribute :>> evidenceType = "test report";
     }
-    connection : Validates connect validationCase ::> uvAckTask to validationTarget ::> actAcknowledgeAlarm.taskAckAlarm;
+    connection : Validates connect validationTarget ::> actAcknowledgeAlarm.taskAckAlarm to validationCase ::> uvAckTask;
     connection : ProducesEvidence connect producer ::> vcAlarmLatency to producedEvidence ::> evLatencyReport;
 }

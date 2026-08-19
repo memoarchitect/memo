@@ -40,25 +40,30 @@ package memo_architecture_realization_deployment {
         attribute certificationEvidence : String;
     }
 
-    connection def BuildsInto :> MemoRelationship {
+        // A module BUILDS INTO a deployment unit: that is an allocation, and the
+    // language has one. Rooted like MemoryBinding / ConnectionBinding below,
+    // so the whole deployment family spells allocation the same way.
+    allocation def BuildsInto :> MemoRelationship, Allocations::Allocation {
         end module : SoftwareModule :>> source;
         end deploymentUnit : SoftwareDeploymentUnit :>> target;
     }
     abstract connection buildsIntoLinks : BuildsInto[*];
     metadata def <buildsInto> BuildsIntoMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
+        :> annotatedElement : SysML::AllocationDefinition;
+        :> annotatedElement : SysML::AllocationUsage;
         :>> baseType = buildsIntoLinks meta SysML::Usage;
     }
-    connection def DeploysTo :> MemoRelationship {
+        // Every usage of this already writes `allocation x : DeploysTo allocate a
+    // to b;` -- the declaration was the only part still saying `connection`.
+    allocation def DeploysTo :> MemoRelationship, Allocations::Allocation {
         attribute deploymentKind : DeploymentKind;
         end deploymentUnit : SoftwareDeploymentUnit :>> source;
         end node : ProcessingNode :>> target;
     }
     abstract connection deploysToLinks : DeploysTo[*];
     metadata def <deploysTo> DeploysToMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
+        :> annotatedElement : SysML::AllocationDefinition;
+        :> annotatedElement : SysML::AllocationUsage;
         :>> baseType = deploysToLinks meta SysML::Usage;
     }
     connection def ProvidesEnvironment :> MemoRelationship {
@@ -172,14 +177,16 @@ package memo_architecture_realization_deployment {
         :>> baseType = flowComprisesSpecLinks meta SysML::Usage;
     }
     // The flow traverses a software→hardware binding; latency accrues here.
-    connection def FlowTraversesBinding :> MemoRelationship {
+        // A binding IS an allocation, exactly as MemoryBinding and
+    // ConnectionBinding already declare.
+    allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation {
         end endToEndFlow : EndToEndFlow :>> source;
         end deploymentUnit : SoftwareDeploymentUnit :>> target;
     }
     abstract connection flowTraversesBindingLinks : FlowTraversesBinding[*];
     metadata def <flowTraversesBinding> FlowTraversesBindingMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
+        :> annotatedElement : SysML::AllocationDefinition;
+        :> annotatedElement : SysML::AllocationUsage;
         :>> baseType = flowTraversesBindingLinks meta SysML::Usage;
     }
 }

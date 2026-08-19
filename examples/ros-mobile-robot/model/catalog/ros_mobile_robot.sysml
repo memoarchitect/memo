@@ -261,9 +261,9 @@ package memo_examples_ros_mobile_robot {
         attribute :>> workspaceOverlay = "/opt/safety_ws";
         attribute :>> integrityProtection = "image signature + SBOM attestation";
     }
-    connection : BuildsInto connect module ::> swPerception to deploymentUnit ::> imageRuntime;
-    connection : BuildsInto connect module ::> swNavigation to deploymentUnit ::> imageRuntime;
-    connection : BuildsInto connect module ::> swSafety to deploymentUnit ::> imageSafety;
+    allocation : BuildsInto allocate swPerception to imageRuntime;
+    allocation : BuildsInto allocate swNavigation to imageRuntime;
+    allocation : BuildsInto allocate swSafety to imageSafety;
 
     part nodeComputeUnit : ProcessingNode {
         @MemoIdentity { :>> providedId = "RMR-HW-001"; } attribute :>> name = "OnboardComputeUnit";
