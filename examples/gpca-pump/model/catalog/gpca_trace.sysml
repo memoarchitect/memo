@@ -343,7 +343,7 @@ package memo_examples_gpca_pump_gpca_trace {
     allocate fnSelfTest to gpcaDevice.gpcaSoftware.systemMonitor;
     // ── Deployment, hosting, and interface realization ──────────
     allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaDevice.gpcaSoftware to controllerBoard;
-    connection : HostedBy connect processingNode ::> mainController to hostAssembly ::> controllerBoard;
+    allocation : HostedBy allocate mainController to controllerBoard;
     #refinement dependency sensorInputInterface to hwSoftwareBus;
     #refinement dependency actuatorCommandInterface to pumpMotorDrive;
     connection : BindsToInterface connect portElement ::> portPatientPendant to boundInterface ::> bolusButtonLine;

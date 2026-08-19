@@ -65,6 +65,6 @@ package memo_examples_embedded_infusion_pump {
     allocation duControlImageDeployment : DeploysTo allocate duControlImage to mcuSafety {
         attribute :>> deploymentKind = DeploymentKind::embedded;
     }
-    connection : HostedBy connect hostAssembly ::> mcuSafety to processingNode ::> rtControlLoop;
+    allocation : HostedBy allocate rtControlLoop to mcuSafety;
     connection : ProvidesEnvironment connect node ::> mcuSafety to environment ::> rteBareMetal;
 }
