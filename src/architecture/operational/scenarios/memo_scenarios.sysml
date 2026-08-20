@@ -42,13 +42,12 @@ package memo_architecture_operational_scenarios {
         attribute assumptionSummary : String;
         attribute guaranteeSummary : String;
         attribute securityObjective : String;
-        attribute abuseCaseReference : String;
+        ref abuseCase : OperativeScenario[0..1];
         attribute defaultCategory : ThreatCategoryKind[0..1];
         // verification scenario
         attribute verificationEnvironment : String;
         attribute stimulusSummary : String;
         // hazard-related use scenario (IEC 62366-1 3.9)
-        attribute hazardReference : String;
         attribute selectionRationale : String;
     }
 

@@ -101,7 +101,6 @@ package memo_examples_gpca_pump_gpca_context {
         @MemoIdentity { :>> providedId = "UE-001"; }
         attribute :>> name = "MisprogrammedInfusionParameters";
         attribute :>> errorCategory = UseErrorCategoryKind::actionCategory;
-        attribute :>> taskReference = "OA-003: Program prescription";
         attribute :>> severity = SeverityKind::catastrophic;
         attribute :>> rootCauseType = "decimal-point / unit entry slip during prescription programming";
         attribute :>> description = "Clinician enters a basal rate or bolus volume an order of magnitude off (e.g. mg vs mL, misplaced decimal).";
@@ -111,7 +110,6 @@ package memo_examples_gpca_pump_gpca_context {
         @MemoIdentity { :>> providedId = "UE-002"; }
         attribute :>> name = "PCAByProxy";
         attribute :>> errorCategory = UseErrorCategoryKind::cognition;
-        attribute :>> taskReference = "OA-005: Request patient bolus";
         attribute :>> severity = SeverityKind::catastrophic;
         attribute :>> rootCauseType = "family member or caregiver presses bolus button on behalf of a sedated patient";
         attribute :>> description = "Bolus doses requested by someone other than the patient defeat the inherent safety of patient-limited dosing.";
@@ -121,7 +119,6 @@ package memo_examples_gpca_pump_gpca_context {
         @MemoIdentity { :>> providedId = "UE-003"; }
         attribute :>> name = "WrongDrugOrConcentrationLoaded";
         attribute :>> errorCategory = UseErrorCategoryKind::cognition;
-        attribute :>> taskReference = "OA-002: Load drug reservoir";
         attribute :>> severity = SeverityKind::catastrophic;
         attribute :>> rootCauseType = "reservoir containing wrong drug or concentration mounted without verification";
         attribute :>> description = "Loaded drug or concentration differs from the programmed prescription, so delivered dose differs from intended dose.";
@@ -131,10 +128,16 @@ package memo_examples_gpca_pump_gpca_context {
         @MemoIdentity { :>> providedId = "UE-004"; }
         attribute :>> name = "AlarmSilencedAndForgotten";
         attribute :>> errorCategory = UseErrorCategoryKind::memoryRecall;
-        attribute :>> taskReference = "OA-006: Respond to alarm";
         attribute :>> severity = SeverityKind::serious;
         attribute :>> rootCauseType = "alarm silenced during high workload and the underlying condition never resolved";
         attribute :>> description = "Clinician silences an alarm and does not return to resolve the underlying condition (e.g. occlusion), interrupting therapy.";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8 Use Hazards (attentional/memory failure)"; }
     }
+    // Which task each use error is committed during (IEC 62366-1). This was
+    // a `taskReference` string naming the task by id and title; nothing could
+    // follow it, and CommitsUseError is what the ontology declares for it.
+    connection : CommitsUseError connect task ::> oaProgram to useError ::> ueMisprogrammedRate;
+    connection : CommitsUseError connect task ::> oaRequestBolus to useError ::> ueBolusByProxy;
+    connection : CommitsUseError connect task ::> oaLoadReservoir to useError ::> ueWrongDrugLoaded;
+    connection : CommitsUseError connect task ::> oaRespondAlarm to useError ::> ueAlarmDisregard;
 }

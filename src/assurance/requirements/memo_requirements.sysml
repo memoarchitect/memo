@@ -53,9 +53,6 @@ package memo_assurance_requirements {
         // design-control specification (ISO 13485 design output)
         attribute specificationDomain : String;
         attribute sourceFolder : String;
-        attribute linkedUserNeeds : String;
-        attribute linkedRisks : String;
-        attribute linkedTests : String;
     }
     // Named constant defined by a source requirements document (e.g. CriSys
     // GPCA App. A.4) and referenced from requirement statements.
