@@ -2177,12 +2177,3 @@ elements:
   "memo_examples_gpca_pump_viewpoints_verification_views_verification_verification_coverage_view::gpcaVerificationCoverageView":
     shortId: "MMX-29"
     uuid: "eb2826ae-9070-5718-a855-da48a06e308f"
-  "memo_examples_gpca_pump_gpca_interfaces::SensorDataInterface":
-    shortId: "DTX-1"
-    uuid: "b5216019-53f8-5eb3-aba0-f878fa323e7f"
-  "memo_examples_gpca_pump_gpca_interfaces::SensorInputPort":
-    shortId: "SNS-1"
-    uuid: "770eb05c-fff6-5d25-ae0e-18523dff9c85"
-  "memo_examples_gpca_pump_gpca_requirements::reqIfuLockoutAndAlarmResponse":
-    shortId: "REQ-101"
-    uuid: "05918bbe-281e-54e0-bd4d-06ac74c6c81e"
