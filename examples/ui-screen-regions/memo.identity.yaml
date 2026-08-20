@@ -1,0 +1,205 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnManageInfusionDisplay":
+    shortId: "SYS-1"
+    uuid: "9b45772b-7d7d-53e2-97b6-f10d92dc10e4"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnPresentBatteryStatus":
+    shortId: "SYS-2"
+    uuid: "96aa292d-dbbf-514d-be51-baa7c23b4a4b"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnPresentDeliveryStatus":
+    shortId: "SYS-3"
+    uuid: "0b73c191-7803-58ab-a4d1-4630b3528825"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnPresentLocalTime":
+    shortId: "SYS-4"
+    uuid: "daa13f3a-026a-5208-bbda-c6d4ef7f4684"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnSetInfusionRate":
+    shortId: "SYS-5"
+    uuid: "84ed7035-7c68-51e5-bf83-bb64d76f2df4"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnValidateDrugSelection":
+    shortId: "SYS-6"
+    uuid: "710bc732-5946-52ab-a720-ad7284248936"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elDrugMenuExpanded":
+    shortId: "UIE-1"
+    uuid: "efcfbe2b-af48-51dc-81e2-e46c067bbf46"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elDrugSelectorClosed":
+    shortId: "UIE-2"
+    uuid: "7b27669f-d11c-5580-91cd-9353ef088458"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elDrugSelectorRegion":
+    shortId: "UIE-3"
+    uuid: "d920531b-65e4-5b63-a450-fc5c3bd33646"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elMainScreen":
+    shortId: "UIE-4"
+    uuid: "20084808-1df8-5082-a777-5630903a9d17"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elRateConfirmDialog":
+    shortId: "UIE-5"
+    uuid: "5a7e1a4a-a1af-5294-817e-2dcf64f7717e"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elSettingsScreen":
+    shortId: "UIE-6"
+    uuid: "61a7a5d8-ab25-5fc7-b41f-340ab47b7b56"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::uiElement12":
+    shortId: "UIE-7"
+    uuid: "1b7cc4c8-3e31-5ba8-b99b-5069491aeb0a"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::uiPumpPanel":
+    shortId: "USR-1"
+    uuid: "a776efd4-f0b1-5ffc-9cb7-9563989852f4"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::uiaEditRate":
+    shortId: "UXX-1"
+    uuid: "85e9cd00-5868-5cab-93df-55bb5881ab6b"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::uiaOpenSettings":
+    shortId: "UXX-2"
+    uuid: "1b15dd7d-9a53-5c2b-bb57-1635da44b618"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::uiaSelectDrug":
+    shortId: "UXX-3"
+    uuid: "5436c3d1-d76e-5546-bf50-e40e9cacf92c"
+  "memo_examples_ui_screen_regions_artifacts_assets::capDrugSelector":
+    shortId: "SCR-1"
+    uuid: "51697f54-b3f4-5341-be30-5fec7df8b3f3"
+  "memo_examples_ui_screen_regions_artifacts_assets::capMain":
+    shortId: "SCR-2"
+    uuid: "5c5debcc-b021-5d62-86d5-007fe37d427d"
+  "memo_examples_ui_screen_regions_artifacts_assets::capSettings":
+    shortId: "SCR-3"
+    uuid: "3df60945-9d9f-535e-b907-61baaf2f7f1a"
+  "memo_examples_ui_screen_regions_artifacts_reviews_comments::cmtDecimalSalience":
+    shortId: "MDL-1"
+    uuid: "aada3c56-bd18-545a-9b46-77d45a7354e5"
+  "memo_examples_ui_screen_regions_artifacts_reviews_comments::cmtStatusBarReply":
+    shortId: "MDL-2"
+    uuid: "d99e8642-f5e1-5d31-8cb0-174b25cd1249"
+  "memo_examples_ui_screen_regions_artifacts_reviews_comments::cmtStatusBarScope":
+    shortId: "MDL-3"
+    uuid: "b9b7b12d-f223-57ea-8d1b-da58b140b671"
+  "memo_examples_ui_screen_regions_artifacts_reviews_notes::noteCaptureReview":
+    shortId: "MDL-4"
+    uuid: "0e6d1f04-2e80-52dd-90f3-4eeed99b5799"
+  "memo_examples_ui_screen_regions_artifacts_reviews_rationales::ratOverlayGeometry":
+    shortId: "MDL-5"
+    uuid: "349c75a2-4041-56ab-b2c5-c5710a43d07f"
+  "memo_examples_ui_screen_regions_assurance_human_factors::ueMisreadDisplayedTime":
+    shortId: "USE-1"
+    uuid: "74100c1a-f960-54d7-a0a4-36f21a7e3d0c"
+  "memo_examples_ui_screen_regions_assurance_human_factors::ueMisreadRate":
+    shortId: "USE-2"
+    uuid: "4a2c3dbf-dc82-57c0-af10-0aae21f0880e"
+  "memo_examples_ui_screen_regions_assurance_human_factors::ueMissLowBattery":
+    shortId: "USE-3"
+    uuid: "5f57b588-20f6-5b03-b32e-6c801c10bc6e"
+  "memo_examples_ui_screen_regions_assurance_human_factors::ueRelyOnStaleVolume":
+    shortId: "USE-4"
+    uuid: "7f2c9058-0d12-5aa0-a594-5e52e8ff1dae"
+  "memo_examples_ui_screen_regions_assurance_human_factors::ueSelectWrongDrug":
+    shortId: "USE-5"
+    uuid: "4463487f-8084-590c-ac2c-2064da2614e2"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqActiveRateDisplay":
+    shortId: "REQ-1"
+    uuid: "fddda136-cdd4-5f96-8aa0-81f76d8bcc09"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqBatteryStatusDisplay":
+    shortId: "REQ-2"
+    uuid: "965058ae-7a64-5073-b1b3-623ee49b6f0b"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqBatteryWarningPerformance":
+    shortId: "REQ-3"
+    uuid: "91d47515-c10f-5973-b042-9afd1343adcc"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqDisplayFreshness":
+    shortId: "REQ-4"
+    uuid: "4315dfd6-0167-5006-b080-b2f2734de5fc"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqDrugIdentityDisplay":
+    shortId: "REQ-5"
+    uuid: "659494f6-e296-53f5-a011-a36599475ffc"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqDrugLibrarySelection":
+    shortId: "REQ-6"
+    uuid: "ad58cfc5-77c3-51cd-9232-16d32bfa7fc9"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqDrugSelectionPerformance":
+    shortId: "REQ-7"
+    uuid: "c5380f55-6d5b-51a7-bfa1-570210e80935"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqRateEntry":
+    shortId: "REQ-8"
+    uuid: "16613ed6-943d-50ed-8bcc-3849c9a78ca9"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqRateLegibility":
+    shortId: "REQ-9"
+    uuid: "4e9b6014-ddf2-546c-b6f3-de4a689889d6"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqTimeAccuracy":
+    shortId: "REQ-10"
+    uuid: "de995503-445a-5ff0-a0d5-a6516e542d1f"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqTimeDisplay":
+    shortId: "REQ-11"
+    uuid: "fa7f0890-e671-506a-9caf-39f8e00cbaea"
+  "memo_examples_ui_screen_regions_assurance_requirements::reqVolumeDisplay":
+    shortId: "REQ-12"
+    uuid: "f909d550-83d8-57b1-9922-fd0fcbf4cb0f"
+  "memo_examples_ui_screen_regions_assurance_requirements_needs::needReadableProgramming":
+    shortId: "NDX-1"
+    uuid: "6f8e78ee-e23b-5194-983f-bedcd5c907de"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hzIncorrectDeliveredVolumeAssessment":
+    shortId: "HZD-1"
+    uuid: "8e600b22-708a-53b3-900c-a3157f9357e5"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hzIncorrectEventChronology":
+    shortId: "HZD-2"
+    uuid: "8159f0e0-decf-5553-9ba6-c66bae17381c"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hzUnexpectedPowerLoss":
+    shortId: "HZD-3"
+    uuid: "fe69a889-4877-5eb2-8923-6fea425b6c6b"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hzWrongDrug":
+    shortId: "HZD-4"
+    uuid: "0d0ae248-b3c2-5385-b1aa-6d03295c9513"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hzWrongRate":
+    shortId: "HZD-5"
+    uuid: "9143ddd2-b75d-5322-9f69-7faa190f4b9e"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::rcClockFreshnessCheck":
+    shortId: "RSK-1"
+    uuid: "c680ee4e-3986-5191-97b3-4264079a38ce"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::rcDisplayFreshnessMonitor":
+    shortId: "RSK-2"
+    uuid: "b7465f4e-8466-5288-b730-c92b7e964c3b"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::rcDrugLibraryGuard":
+    shortId: "RSK-3"
+    uuid: "482ff3fb-c399-5f02-bcc2-3ec73748cb45"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::rcLowBatteryProminence":
+    shortId: "RSK-4"
+    uuid: "6b366476-463e-5195-9f04-8292b29329f5"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::rcRateConfirm":
+    shortId: "RSK-5"
+    uuid: "edbdf165-36c5-586a-9332-a33cf98a5d13"
+  "memo_examples_ui_screen_regions_assurance_verification_validation::evDrugLibrarySelection":
+    shortId: "MMX-1"
+    uuid: "c24abc81-f668-5c2c-b438-4aea2bd6bc4c"
+  "memo_examples_ui_screen_regions_assurance_verification_validation::evInfusionStatusContent":
+    shortId: "MMX-2"
+    uuid: "acbf040a-47ed-51ae-8a12-2481da8ed8d4"
+  "memo_examples_ui_screen_regions_assurance_verification_validation::evRateChange":
+    shortId: "MMX-3"
+    uuid: "0a4c6530-ec1b-512c-a7df-39fa54733778"
+  "memo_examples_ui_screen_regions_assurance_verification_validation::vcDrugLibrarySelection":
+    shortId: "VRF-1"
+    uuid: "df00c7d8-70c9-549a-aea9-f52cf201cffc"
+  "memo_examples_ui_screen_regions_assurance_verification_validation::vcInfusionStatusContent":
+    shortId: "VRF-2"
+    uuid: "13521157-c3a8-5995-8a04-e48d0f3ff05e"
+  "memo_examples_ui_screen_regions_assurance_verification_validation::vcRateChange":
+    shortId: "VRF-3"
+    uuid: "d77a8f8f-0d31-5ddb-ac70-e66b1d938ad3"
+  "memo_examples_ui_screen_regions_project::uiScreenRegionsBinding":
+    shortId: "PRJ-1"
+    uuid: "67b999a2-b982-568c-916f-16301d768a65"
+  "memo_examples_ui_screen_regions_viewpoints_functional_views_ui_functional_tree::uiFunctionalTree":
+    shortId: "MMX-6"
+    uuid: "df30b427-6009-5e2d-a30b-4d36e389f665"
+  "memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_requirements_trace::uiRequirementsTrace":
+    shortId: "MMX-8"
+    uuid: "e3ea76cd-b136-5754-9412-f6774bbbbf7a"
+  "memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain::uiRiskChain":
+    shortId: "MMX-9"
+    uuid: "b581db89-2ad3-5d3c-8b13-3d5f9cc5b023"
+  "memo_examples_ui_screen_regions_viewpoints_ui_layout_views_main_screen_layout::mainScreenLayout":
+    shortId: "MMX-4"
+    uuid: "64fdaf61-445d-532e-963b-610b52ee3690"
+  "memo_examples_ui_screen_regions_viewpoints_ui_layout_views_settings_screen_layout::settingsScreenLayout":
+    shortId: "MMX-5"
+    uuid: "a90192d8-28f8-539e-85ef-db885279a15e"
+  "memo_examples_ui_screen_regions_viewpoints_ui_layout_views_ui_region_trace::uiRegionTrace":
+    shortId: "MMX-7"
+    uuid: "942d600f-947a-5083-b43d-fae467d2d6a7"

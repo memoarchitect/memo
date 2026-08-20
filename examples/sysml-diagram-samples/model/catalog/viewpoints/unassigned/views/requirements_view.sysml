@@ -25,17 +25,17 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
     }
 
     requirement reqDoseLimit : Requirement {
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         @MemoIdentity { :>> providedId = "REQ-001"; } attribute :>> name = "DoseLimitEnforcement";
         attribute :>> statement = "The pump shall not deliver more than the prescribed maximum dose in any one-hour window.";
     }
     requirement reqOcclusionAlarm : Requirement {
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         @MemoIdentity { :>> providedId = "REQ-002"; } attribute :>> name = "OcclusionAlarm";
         attribute :>> statement = "The pump shall raise an alarm within two seconds of detecting a downstream occlusion.";
     }
     requirement reqAlarmLoudness : Requirement {
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         @MemoIdentity { :>> providedId = "REQ-003"; } attribute :>> name = "AlarmLoudness";
         attribute :>> statement = "An active alarm shall be audible at 65 dBA at one metre.";
     }
