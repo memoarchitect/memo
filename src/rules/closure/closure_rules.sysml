@@ -111,6 +111,22 @@ package memo_rules_closure {
         constraint { true }
     }
 
+    // A function that no edge reaches is not in the chain. This was a
+    // TypeScript rule (BV-002) applying to every action usage in the model,
+    // which reported a scenario and a flow step as defects for not being
+    // wired like a function. It is declared here instead: scoped by the
+    // ontology to the family it is about, tailorable by a methodology, and
+    // readable next to the rule that requires the allocation.
+    constraint def FunctionInChainRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-023"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute appliesTo = "MemoFunction";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A function participates in the functional chain through a flow or a succession. One that participates in neither is unreachable behaviour: nothing triggers it and nothing consumes what it produces.";
+        attribute predicateExpression = "flow->size() >= 1 or succession->size() >= 1";
+        constraint { true }
+    }
+
     // ─── Verification Layer Rules ────────────────────────────────────────
 
     constraint def VerificationCaseMethodRule :> MemoConsistencyRule {
