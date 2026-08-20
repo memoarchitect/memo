@@ -6,6 +6,9 @@ package memo_assurance_safety_risk {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_assurance_requirements::*;
+    // For HazardRelatedScenario below. Assurance may depend on architecture;
+    // the reverse is what the string on the scenario was avoiding.
+    private import memo_architecture_operational_scenarios::*;
 
     // ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards,
     // scenarios, requirements, and DHF records can trace to the foreseeable
@@ -134,6 +137,23 @@ package memo_assurance_safety_risk {
         :> annotatedElement : SysML::ConnectionDefinition;
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = tracesRiskLinks meta SysML::Usage;
+    }
+    // IEC 62366-1 3.9's hazard-related use scenario: the scenario a hazard can
+    // arise in. It is declared HERE rather than as a `hazardReference` string
+    // on the scenario, which is what stood in for it: a string names nothing a
+    // consumer can follow, and the layering is why it was written that way —
+    // assurance may depend on architecture, and the scenario package cannot
+    // see `Hazard`. On this side both ends are visible and the dependency runs
+    // the direction it already runs.
+    connection def HazardRelatedScenario :> MemoRelationship {
+        end hazard : RiskItem :>> source;
+        end scenario : OperativeScenario :>> target;
+    }
+    abstract connection hazardRelatedScenarioLinks : HazardRelatedScenario[*];
+    metadata def <hazardRelatedScenario> HazardRelatedScenarioMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = hazardRelatedScenarioLinks meta SysML::Usage;
     }
     connection def AssessedAgainst :> MemoRelationship {
         end risk : Risk :>> source;

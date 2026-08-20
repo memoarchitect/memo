@@ -38,6 +38,5 @@ package memo_assurance_requirements_needs {
         attribute operationalContextReference : String;
         // design-control need (ISO 13485 design input)
         attribute sourceFolder : String;
-        attribute linkedDesignControls : String;
     }
 }
