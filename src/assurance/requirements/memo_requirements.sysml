@@ -18,6 +18,16 @@ package memo_assurance_requirements {
         enum system;
         enum software;
         enum hardware;
+        // A requirement on the instructions for use — what the accompanying
+        // documentation must tell the user (EU MDR Annex I §23.4, ISO 20417,
+        // IEC 62366-1 §7.2). It is neither hardware nor software: the device
+        // satisfies it with words, not with a part or a module, and it is
+        // verified by reviewing the IFU rather than by testing a build. Left
+        // out of this enum, every such requirement carried no kind at all —
+        // an unclassifiable row is exactly what a classification attribute
+        // exists to prevent, and the DHF already keeps an `ifu` document for
+        // the content these requirements govern.
+        enum ifu;
         enum systemSpecification;
         enum softwareSpecification;
         enum hardwareSpecification;

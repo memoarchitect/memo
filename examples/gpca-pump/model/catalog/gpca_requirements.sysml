@@ -1610,4 +1610,22 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "MEMO extension — mechanical free-flow protection is not specified by the CriSys source"; }
         attribute :>> electricalSafetyRelevant = false;
     }
+
+    // ── Instructions for use ────────────────────────────────────────
+    // A requirement the device satisfies with words rather than with a part or
+    // a module, and one verified by reviewing the IFU rather than by testing a
+    // build. Its `requirementKind` is `ifu` (EU MDR Annex I §23.4, ISO 20417).
+    requirement reqIfuLockoutAndAlarmResponse : Requirement {
+        attribute :>> requirementKind = RequirementKind::ifu;
+        @MemoIdentity { :>> providedId = "REQ-X-15"; } attribute :>> name = "IfuLockoutAndAlarmResponse";
+        attribute :>> statement = "The instructions for use shall state the lockout interval and maximum dose limits the pump enforces, and what the clinician must do for each notification priority, in terms a ward nurse can act on without training material to hand.";
+        attribute :>> sourceKind = RequirementSourceKind::extension;
+        attribute :>> concernKind = ConcernKind::usability;
+        attribute :>> status = ElementStatusKind::approved;
+        attribute :>> acceptanceCriteria = "IFU review confirms the lockout interval, dose limits, and a response for every notification priority appear in the operating section, and summative evaluation shows users act correctly on each.";
+        attribute :>> subjectDescription = "instructions for use";
+        attribute :>> actorDescription = "clinician";
+        attribute :>> guaranteeSummary = "the limits the device enforces are the limits the user is told about";
+        @MemoIdentity { :>> sourceReference = "MEMO extension — accompanying documentation content, IEC 62366-1 section 7.2"; }
+    }
 }
