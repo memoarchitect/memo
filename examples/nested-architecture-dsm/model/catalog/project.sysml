@@ -11,6 +11,7 @@ package memo_examples_nested_architecture_dsm_project {
 
     // The project's own content, imported so the catalog is one reachable
     // closure from a single entrypoint.
+    private import memo_examples_nested_architecture_dsm_architecture_operational_context::*;
     private import memo_examples_nested_architecture_dsm_architecture_logical_structure::*;
     private import memo_examples_nested_architecture_dsm_architecture_functional_functions::*;
     private import memo_examples_nested_architecture_dsm_assurance_requirements::*;
