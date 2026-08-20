@@ -135,4 +135,7 @@ package memo_examples_surgical_closure_workflow {
 
 
 
+
+    // Whose need it is (CR-MED-024). The surgeon's profile is on the User.
+    connection heldResection : HeldBy connect need ::> needControlledGastricResection to holder ::> bariatricSurgeon;
 }

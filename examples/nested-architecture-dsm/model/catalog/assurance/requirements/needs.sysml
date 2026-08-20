@@ -9,6 +9,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements_needs {
     private import memo_core_relationships::*;
     private import memo_assurance_requirements_needs::*;
     private import memo_examples_nested_architecture_dsm_assurance_requirements::*;
+    private import memo_examples_nested_architecture_dsm_architecture_operational_context::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
@@ -29,14 +30,13 @@ package memo_examples_nested_architecture_dsm_assurance_requirements_needs {
         attribute :>> needKind = NeedKind::operational;
         attribute :>> statement = "Wards need therapy to continue through transport and mains interruptions.";
         attribute :>> priority = "medium";
-        attribute :>> operationalContextReference = "intra-hospital transport, up to four hours off mains";
+        ref :>> useContext = ctxIntraHospitalTransport;
     }
     requirement needLegibleStatus : Need {
         @MemoIdentity { :>> providedId = "NDS-NEED-004"; } attribute :>> name = "LegibleTherapyStatus";
         attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> statement = "Clinicians need to read therapy state and alarms correctly from the bedside.";
         attribute :>> priority = "high";
-        attribute :>> userPopulationReference = "ward nurses, including those wearing corrective lenses";
     }
 
     // Need → Requirement.
@@ -52,4 +52,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements_needs {
     // (IEC 62304), which is a second, requirement-to-requirement trace axis.
     connection derAlarmFromSystem : DerivesFrom connect sourceDriver ::> reqOcclusionDetection to targetRequirement ::> reqAlarmAnnunciation;
     connection derConfirmationFromSystem : DerivesFrom connect sourceDriver ::> reqDoseAccuracy to targetRequirement ::> reqPrescriptionConfirmation;
+    // Whose need this is. The nurse's characteristics are on the User.
+    connection heldLegible : HeldBy connect need ::> needLegibleStatus to holder ::> usrWardNurse;
+    connection heldAccurate : HeldBy connect need ::> needAccurateTherapy to holder ::> usrWardNurse;
 }
