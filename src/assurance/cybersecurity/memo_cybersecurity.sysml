@@ -53,7 +53,6 @@ package memo_assurance_cybersecurity {
         attribute safetyImpact : String;
         attribute privacyImpact : String;
         attribute operationalImpact : String;
-        attribute linkedSafetyHazardId : String;
     }
 
     part def CyberRisk specializes Risk {

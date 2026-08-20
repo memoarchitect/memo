@@ -15,7 +15,6 @@ package memo_assurance_human_factors {
 
     part def UseError specializes MemoPart {
         attribute errorCategory : UseErrorCategoryKind;
-        attribute taskReference : String;
         attribute severity : SeverityKind;
         attribute rootCauseType : String;
     }
