@@ -402,10 +402,10 @@ elements:
     shortId: "SFT-66"
     uuid: "6c31d521-06aa-5674-8188-22e57494d7b6"
   "memo_examples_gpca_pump_gpca_behavior_actions::AcquireSensorData":
-    shortId: "ACT-1"
+    shortId: "FNC-17"
     uuid: "088f8731-cf6c-593b-8886-7b00d19302ba"
   "memo_examples_gpca_pump_gpca_behavior_actions::ActuatePumpMotor":
-    shortId: "ACT-4"
+    shortId: "FNC-18"
     uuid: "f5b27094-dc12-5bca-a970-f7b126b73bbd"
   "memo_examples_gpca_pump_gpca_behavior_actions::AlarmSignal":
     shortId: "INT-2"
@@ -414,19 +414,19 @@ elements:
     shortId: "INT-5"
     uuid: "db282a7f-01d0-5f6e-b39f-efda0689eb84"
   "memo_examples_gpca_pump_gpca_behavior_actions::ComputeFlowCommand":
-    shortId: "ACT-9"
+    shortId: "FNC-19"
     uuid: "1b1bbb05-8993-5e79-9f02-2e54022dcb44"
   "memo_examples_gpca_pump_gpca_behavior_actions::EnforceDoseLimits":
-    shortId: "ACT-12"
+    shortId: "FNC-20"
     uuid: "4c7a83b9-4d80-5bce-ade6-6a40aac1e2a5"
   "memo_examples_gpca_pump_gpca_behavior_actions::EvaluateAlarmConditions":
-    shortId: "ACT-14"
+    shortId: "FNC-21"
     uuid: "76c708ca-5fae-5848-91ff-cdb6eb6fcceb"
   "memo_examples_gpca_pump_gpca_behavior_actions::FlowCommand":
     shortId: "INT-56"
     uuid: "35dda700-09a1-58bd-9190-0085ba080166"
   "memo_examples_gpca_pump_gpca_behavior_actions::LogTherapyEvent":
-    shortId: "ACT-18"
+    shortId: "FNC-22"
     uuid: "c049e2b5-53f0-5aa9-8094-7a03f652f98a"
   "memo_examples_gpca_pump_gpca_behavior_actions::SensorStatusVector":
     shortId: "INT-63"
@@ -755,6 +755,12 @@ elements:
   "memo_examples_gpca_pump_gpca_formal_behavior::topLevelContract":
     shortId: "CNT-4"
     uuid: "c9422b35-3d90-557d-ba13-b4990f83ab00"
+  "memo_examples_gpca_pump_gpca_interfaces::SensorDataInterface":
+    shortId: "DTX-1"
+    uuid: "b5216019-53f8-5eb3-aba0-f878fa323e7f"
+  "memo_examples_gpca_pump_gpca_interfaces::SensorInputPort":
+    shortId: "SNS-1"
+    uuid: "770eb05c-fff6-5d25-ae0e-18523dff9c85"
   "memo_examples_gpca_pump_gpca_interfaces::actuatorCommandInterface":
     shortId: "INT-1"
     uuid: "6a93cde9-649d-5c9f-9b89-d7a50834e07c"
