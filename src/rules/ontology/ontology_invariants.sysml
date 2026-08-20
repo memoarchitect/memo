@@ -349,13 +349,24 @@ package memo_rules_ontology {
         constraint { true }
     }
 
+    // The predicate here named three features that do not exist — `variantKind`,
+    // `baseScenario`, `variationPoint` — so it could never fail, and a rule that
+    // cannot fail is coverage on paper only. `baseScenario` is the one the
+    // scenario def deliberately refused: "a nominal/alternate pair are scenarios
+    // of the same workflow, distinguished by scenarioKind — no baseScenario
+    // back-ref". The base of an alternate IS the nominal scenario of its
+    // workflow, so the rule asks the containment that already expresses it.
     constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-043"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute appliesTo = "OperativeScenario";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Alternate, exception, and recovery scenarios must identify their base scenario or variation point — never duplicate the workflow.";
-        attribute predicateExpression = "not(variantKind == 'alternate' or variantKind == 'exception' or variantKind == 'recovery') or baseScenario->size() == 1 or variationPoint != ''";
+        attribute rationaleText = "An alternate scenario is a variation of a nominal path, so it belongs to a workflow that has one. An alternate with no nominal sibling is either a workflow with no happy path or a scenario filed under the wrong parent.";
+        // A nominal scenario usually says nothing: `nominal` is the default on
+        // the definition, and a default is not written onto every usage. So the
+        // sibling test is "not alternate", and `conformsTo` keeps it from being
+        // satisfied by an ordinary step of the same workflow.
+        attribute predicateExpression = "not(scenarioKind == 'alternate') or composes.composes->exists(conformsTo(OperativeScenario) and scenarioKind != 'alternate')";
         constraint { true }
     }
 
