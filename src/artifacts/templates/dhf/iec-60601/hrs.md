@@ -16,7 +16,7 @@ required_for: ["CE", "FDA_510k", "MDR"]
 
 This Hardware Requirements Specification (HRS) defines the safety, construction, and performance requirements for the **{{project.product}}** physical equipment, ensuring compliance with IEC 60601-1 (general safety) and applicable collateral standards (IEC 60601-1-2 for electromagnetic compatibility).
 
-Hardware requirements are identified by the model's `requirementKind` attribute. Per-topic sections — construction, electrical, EMC, mechanical — are **not** name filters: each is the set of elements claiming the clause that governs that topic, selected by traversing `ConformsTo` to that clause. A clause is named by its element id rather than by its number, because a clause number is not unique across standards: "8" is a clause of IEC 60601-1, of IEC 60601-1-2 and of IEC 62304.
+Hardware requirements are identified by the model's `requirementType` attribute. Per-topic sections — construction, electrical, EMC, mechanical — are **not** name filters: each is the set of elements claiming the clause that governs that topic, selected by traversing `ConformsTo` to that clause. A clause is named by its element id rather than by its number, because a clause number is not unique across standards: "8" is a clause of IEC 60601-1, of IEC 60601-1-2 and of IEC 62304.
 
 ---
 
@@ -26,7 +26,7 @@ Summary metrics for the hardware requirements captured in the model:
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "RequirementKind::hardware"
+where: requirementType == "RequirementTypeKind::hardware"
 display: count
 label: Total hardware requirements
 ```
@@ -35,11 +35,11 @@ label: Total hardware requirements
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "RequirementKind::hardware"
+where: requirementType == "RequirementTypeKind::hardware"
 display: table
-columns: name, requirementKind, electricalSafetyRelevant, doc
+columns: name, requirementType, electricalSafetyRelevant, doc
 sort: name
-empty: "No hardware requirements defined. Add Requirement elements with requirementKind = hardware."
+empty: "No hardware requirements defined. Add Requirement elements with requirementType = hardware."
 ```
 
 ---
@@ -142,7 +142,7 @@ Hardware requirements traced to the elements that satisfy them:
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "RequirementKind::hardware"
+where: requirementType == "RequirementTypeKind::hardware"
 traverse: outgoing satisfiedBy
 display: table
 columns: name, kind, layer, doc

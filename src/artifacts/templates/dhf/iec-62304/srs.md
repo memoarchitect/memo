@@ -16,7 +16,7 @@ required_for: ["CE", "FDA_510k", "MDR"]
 
 This Software Requirements Specification (SRS) defines the software requirements for **{{project.product}}** in accordance with IEC 62304:2006+AMD1:2015 §5.2.
 
-Software, hardware and system requirements are distinguished by the model's own `requirementKind` attribute, never by which layer directory a file sits in and never by what a requirement is called. There is no "software layer": hardware and software are sibling directories inside `implementation`.
+Software, hardware and system requirements are distinguished by the model's own `requirementType` attribute, never by which layer directory a file sits in and never by what a requirement is called. There is no "software layer": hardware and software are sibling directories inside `implementation`.
 
 ---
 
@@ -26,14 +26,14 @@ Summary metrics for the requirements captured in the model:
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "RequirementKind::software"
+where: requirementType == "RequirementTypeKind::software"
 display: count
 label: Total software requirements
 ```
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "RequirementKind::system"
+where: requirementType == "RequirementTypeKind::system"
 display: count
 label: System requirements
 ```
@@ -48,7 +48,7 @@ Requirements carrying a `shall` obligation — the binding ones:
 kind: Requirement
 where: obligation == "ObligationKind::shall"
 display: table
-columns: name, requirementKind, safetyClass, doc
+columns: name, requirementType, safetyClass, doc
 sort: name
 empty: "No requirements carry a `shall` obligation. Set `obligation` on Requirement elements."
 ```
@@ -57,11 +57,11 @@ empty: "No requirements carry a `shall` obligation. Set `obligation` on Requirem
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "RequirementKind::software"
+where: requirementType == "RequirementTypeKind::software"
 display: table
-columns: name, requirementKind, safetyClass, doc
+columns: name, requirementType, safetyClass, doc
 sort: name
-empty: "No software requirements defined. Add Requirement elements with requirementKind = software."
+empty: "No software requirements defined. Add Requirement elements with requirementType = software."
 ```
 
 ---
@@ -97,9 +97,9 @@ System requirements allocated to software per IEC 62304 §5.2, drawn from the mo
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "RequirementKind::system"
+where: requirementType == "RequirementTypeKind::system"
 display: table
-columns: name, requirementKind, safetyClass, doc
+columns: name, requirementType, safetyClass, doc
 sort: name
 empty: "No system requirements defined."
 ```
@@ -155,7 +155,7 @@ empty: "No SOUP identified. Add DependsOnSoup links from software items to the S
 
 ```memo-query
 kind: Requirement
-where: requirementKind == "RequirementKind::software"
+where: requirementType == "RequirementTypeKind::software"
 traverse: outgoing verifiedBy
 display: table
 columns: name, kind, layer, doc
