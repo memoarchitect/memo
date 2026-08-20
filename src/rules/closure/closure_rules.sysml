@@ -122,8 +122,26 @@ package memo_rules_closure {
         attribute tailoring = RuleTailoringKind::assurance;
         attribute appliesTo = "MemoFunction";
         attribute severity = RuleSeverityKind::warning;
-        attribute rationaleText = "A function participates in the functional chain through a flow or a succession. One that participates in neither is unreachable behaviour: nothing triggers it and nothing consumes what it produces.";
-        attribute predicateExpression = "flow->size() >= 1 or succession->size() >= 1";
+        attribute rationaleText = "A function participates in the functional chain through a flow or a succession, or through the functions it decomposes into. One that participates in none of them is unreachable behaviour: nothing triggers it and nothing consumes what it produces.";
+        // `downstream` and not a bare `composes`: the relation navigates both
+        // ways, so a bare name would exempt every child on the strength of
+        // having a parent. A decomposed function participates through its
+        // parts; a leaf has to be reached by an edge of its own.
+        attribute predicateExpression = "flow->size() >= 1 or succession->size() >= 1 or downstream(composes)->size() >= 1";
+        constraint { true }
+    }
+
+    // A user need names the user whose need it is. IEC 62366-1's user profile
+    // is typed on the User element — population, impairments, training,
+    // qualification — so the need points at that element rather than restating
+    // any of it in prose, which is what `userPopulationReference` was doing.
+    constraint def UserNeedIdentifiesUserRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-024"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute appliesTo = "Need";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A user need is a need someone has. Which users a device serves, and what they can be assumed to see, know and do, is the input a usability engineering file is built from (IEC 62366-1 5.1); a need that names no user leaves that input to prose.";
+        attribute predicateExpression = "not(needKind == 'user' or needKind == 'clinicalUser' or needKind == 'patientUser') or heldBy->size() >= 1";
         constraint { true }
     }
 
