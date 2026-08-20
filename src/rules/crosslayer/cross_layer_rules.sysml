@@ -21,7 +21,7 @@ package memo_rules_crosslayer {
     constraint def ReqToArchTraceRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "XL-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
-        attribute appliesTo = "Requirement[requirementKind=system]";
+        attribute appliesTo = "Requirement[requirementType=system]";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Requirements-to-architecture traceability per IEC 62304.";
         attribute predicateExpression = "satisfiedBy->size() >= 1";

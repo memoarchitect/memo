@@ -14,7 +14,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements {
     private import memo_core_common::MemoIdentity;
     requirement reqDoseAccuracy : Requirement {
         @MemoIdentity { :>> providedId = "NDS-REQ-001"; } attribute :>> name = "DoseAccuracy";
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         attribute :>> statement = "The pump shall deliver the prescribed volume within ±5% over any 60-minute window.";
         attribute :>> notation = RequirementNotationKind::sophist;
         attribute :>> obligation = ObligationKind::shall;
@@ -23,7 +23,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements {
     }
     requirement reqOcclusionDetection : Requirement {
         @MemoIdentity { :>> providedId = "NDS-REQ-002"; } attribute :>> name = "OcclusionDetection";
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         attribute :>> statement = "When line pressure exceeds the occlusion threshold, the pump shall stop delivery within 2 seconds.";
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
@@ -34,7 +34,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements {
     }
     requirement reqAirInLine : Requirement {
         @MemoIdentity { :>> providedId = "NDS-REQ-003"; } attribute :>> name = "AirInLineProtection";
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         attribute :>> statement = "When an air bolus above 0.1 mL is detected, the pump shall stop delivery and raise a high-priority alarm.";
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
@@ -45,7 +45,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements {
     }
     requirement reqAlarmAnnunciation : Requirement {
         @MemoIdentity { :>> providedId = "NDS-REQ-004"; } attribute :>> name = "AlarmAnnunciation";
-        attribute :>> requirementKind = RequirementKind::software;
+        attribute :>> requirementType = RequirementTypeKind::software;
         attribute :>> statement = "While any alarm condition is active, the pump shall present its IEC 60601-1-8 signal until the condition clears or is acknowledged.";
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::stateDriven;
@@ -57,7 +57,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements {
     }
     requirement reqBatteryEndurance : Requirement {
         @MemoIdentity { :>> providedId = "NDS-REQ-005"; } attribute :>> name = "BatteryEndurance";
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         attribute :>> statement = "On loss of mains power, the pump shall continue delivery for at least 4 hours at 25 mL/h.";
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
@@ -68,7 +68,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements {
     }
     requirement reqPrescriptionConfirmation : Requirement {
         @MemoIdentity { :>> providedId = "NDS-REQ-006"; } attribute :>> name = "PrescriptionConfirmation";
-        attribute :>> requirementKind = RequirementKind::software;
+        attribute :>> requirementType = RequirementTypeKind::software;
         attribute :>> statement = "When the clinician changes the infusion rate, the pump shall require explicit confirmation before applying it.";
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
@@ -81,7 +81,7 @@ package memo_examples_nested_architecture_dsm_assurance_requirements {
     // Untraced on purpose — the gap the traceability view is meant to find.
     requirement reqStatusVisibility : Requirement {
         @MemoIdentity { :>> providedId = "NDS-REQ-007"; } attribute :>> name = "StatusVisibility";
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         attribute :>> statement = "The pump shall display the active rate and volume delivered legibly at 1 m.";
         attribute :>> notation = RequirementNotationKind::sophist;
         attribute :>> obligation = ObligationKind::shall;
