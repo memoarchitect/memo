@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/extension-cloud'
-version: 0.11.0
+version: 0.11.1
 description: Networked services and managed data stores
 license: MIT
 tags:
