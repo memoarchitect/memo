@@ -21,9 +21,27 @@ package memo_assurance_verification_validation {
     // a second spelling of `status`.
     // Specializes the standard library verification case as well as MEMO's
     // base, rather than shadowing it — see the note on UseCase.
+    // Reusable test action, distinct from a case's pass/fail criteria.
+    action def TestStep specializes MemoAction {
+        attribute stepAction : String;
+        attribute expectedResult : String;
+        attribute referencedItem : String;
+    }
     verification def VerificationCase :> MemoVerificationCase, VerificationCases::VerificationCase {
         attribute methodKind : MemoVerificationMethodKind;
         attribute acceptanceCriteria : String;
+    }
+    // Orders a reusable TestStep within a verification or validation case.
+    connection def PerformsStep :> MemoRelationship {
+        attribute sequence : Integer;
+        end verificationCase : MemoVerificationCase :>> source;
+        end testStep : TestStep :>> target;
+    }
+    abstract connection performsStepLinks : PerformsStep[*];
+    metadata def <performsStep> PerformsStepMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = performsStepLinks meta SysML::Usage;
     }
     verification def ValidationCase :> MemoVerificationCase {
         attribute validationMethod : ValidationMethodKind;
