@@ -46,6 +46,11 @@ package memo_assurance_cybersecurity {
         attribute affectedLayer : String;
         attribute cweReference : String;
         attribute remediable : Boolean;
+        // CVSS v3.1 quantitative rating — the core output of a vulnerability
+        // analysis (e.g. RSK-00058). `cvssBaseScore` is the 0.0-10.0 numeric
+        // score; `cvssVector` the source vector string (AV:.../AC:.../...).
+        attribute cvssBaseScore : Real;
+        attribute cvssVector : String;
     }
 
     item def CyberHazard specializes Hazard {

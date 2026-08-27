@@ -39,22 +39,10 @@ package memo_assurance_safety_risk {
         attribute riskLevelMapping : String;
         attribute acceptabilityThresholds : String;
     }
-    part def DesignControlRiskRow specializes Risk {
-        attribute rowTitle : String;
-        attribute hazardAnalysis : String;
-        attribute hazardCategory : String;
-        attribute hazardSubcategory : String;
-        attribute causeSequenceOfEventsFailure : String;
-        attribute harmText : String;
-        attribute probabilityBeforeRaw : String;
-        attribute severityBeforeRaw : String;
-        attribute riskBeforeMeasureRaw : String;
-        attribute probabilityAfterRaw : String;
-        attribute severityAfterRaw : String;
-        attribute riskAfterMitigationRaw : String;
-        attribute cannotReduceFurther : Boolean;
-        attribute linkSummary : String;
-    }
+    // `DesignControlRiskRow` was a denormalized spreadsheet transcription.
+    // Risk rows now decompose into the ISO 14971 chain below: Risk owns its
+    // Hazard, SequenceOfEvents, HazardousSituation, and Harm items, linked by
+    // TracesRisk / LeadsToHarm, with ResidualRisk after mitigation.
     // A device characteristic whose implementation, failure, or misuse can
     // affect safety. This is the modelable output of ISO 14971 §5.3.
     part def SafetyRelatedCharacteristic specializes MemoPart {
@@ -102,6 +90,8 @@ package memo_assurance_safety_risk {
     item def HazardousSituation specializes RiskItem {
         attribute exposedPersons : String;
         attribute operatingCondition : String;
+        // ISO 14971 P1: probability that the hazardous situation occurs.
+        attribute probabilityOfOccurrence : ProbabilityKind;
     }
     item def Harm specializes RiskItem {
         attribute clinicalImpact : String;
@@ -137,6 +127,19 @@ package memo_assurance_safety_risk {
         :> annotatedElement : SysML::ConnectionDefinition;
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = tracesRiskLinks meta SysML::Usage;
+    }
+    // The final ISO 14971 chain edge. P2 is the conditional probability that
+    // the hazardous situation results in the harm.
+    connection def LeadsToHarm :> MemoRelationship {
+        attribute conditionalProbability : ProbabilityKind;
+        end hazardousSituation : HazardousSituation :>> source;
+        end resultingHarm : Harm :>> target;
+    }
+    abstract connection leadsToHarmLinks : LeadsToHarm[*];
+    metadata def <leadsToHarm> LeadsToHarmMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = leadsToHarmLinks meta SysML::Usage;
     }
     // IEC 62366-1 3.9's hazard-related use scenario: the scenario a hazard can
     // arise in. It is declared HERE rather than as a `hazardReference` string
