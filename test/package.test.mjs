@@ -317,11 +317,10 @@ test('migrated names do not reappear in ontology or canonical example', () => {
 });
 
 test('ISO 14971 concepts are dedicated ontology elements', () => {
-  const requirements = read('src', 'assurance', 'requirements', 'memo_requirements.sysml');
+  const operational = read('src', 'architecture', 'operational', 'structure', 'memo_operational.sysml');
   const risk = read('src', 'assurance', 'safety_risk', 'memo_risk.sysml');
-  for (const type of ['IntendedUse', 'ReasonablyForeseeableMisuse']) {
-    assert.match(requirements, new RegExp(`\\bpart def ${type}\\b`));
-  }
+  assert.match(operational, /\bpart def IntendedUse\b/);
+  assert.match(risk, /\bpart def ReasonablyForeseeableMisuse\b/);
   for (const type of [
     'SafetyRelatedCharacteristic', 'HazardCause', 'Hazard', 'SequenceOfEvents',
     'HazardousSituation', 'Harm', 'Risk', 'RiskControlMeasure', 'ResidualRisk',
