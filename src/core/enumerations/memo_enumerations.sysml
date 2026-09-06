@@ -20,11 +20,14 @@ package memo_core_enumerations {
     // renderer matches an element's construct directly rather than translating
     // a private vocabulary into one.
     enum def LegendScopeKind {
-        enum part;
-        enum item;
-        enum port;
-        enum action;
-        enum connection;
+        // Plural, because `part`, `item`, `port`, `action` and `connection` are
+        // SysML keywords and cannot name an enum literal. The renderer maps
+        // each to the construct it scopes.
+        enum parts;
+        enum items;
+        enum ports;
+        enum actions;
+        enum connections;
     }
 
     enum def ConcernKind {
