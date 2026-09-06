@@ -79,7 +79,11 @@ package memo_viewpoints_definitions {
     // thing, so the key can be stated as "this attribute, these values, these
     // colours". Colour is otherwise a property of a diagram, defined nowhere,
     // reproducible in no other view and reviewable by nobody.
-    part def MemoLegendEntry specializes MemoPart {
+    // A swatch, not an "entry": `entry` is a SysML keyword (a state's entry
+    // action), and the keyword-collision lint is right that a definition should
+    // not reach for one that means something else. A swatch is what this is —
+    // a colour with a label.
+    part def MemoLegendSwatch specializes MemoPart {
         /** The value of the legend's attribute or enumeration this entry is for. */
         attribute value : String;
         /** Shown in the key. Defaults to the value when unstated. */
@@ -108,8 +112,7 @@ package memo_viewpoints_definitions {
          * construct the legend has an entry for.
          */
         attribute appliesTo : LegendScopeKind[*];
-        attribute description : String;
-        part entries : MemoLegendEntry[*];
+        part swatches : MemoLegendSwatch[*];
     }
 
     view def MemoView :> Views::View {
