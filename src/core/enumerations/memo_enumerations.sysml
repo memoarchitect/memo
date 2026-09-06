@@ -1,6 +1,17 @@
 package memo_core_enumerations {
     private import ScalarValues::*;
 
+    // What a legend colours. The values are SysML's own usage keywords, so a
+    // renderer matches an element's construct directly rather than translating
+    // a private vocabulary into one.
+    enum def LegendScopeKind {
+        enum part;
+        enum item;
+        enum port;
+        enum action;
+        enum connection;
+    }
+
     enum def ConcernKind {
         enum safety;
         enum usability;

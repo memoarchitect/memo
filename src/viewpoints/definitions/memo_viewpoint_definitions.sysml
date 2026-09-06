@@ -68,6 +68,45 @@ package memo_viewpoints_definitions {
         attribute rationaleText : String;
     }
 
+    // ─── Legends ────────────────────────────────────────────────────────
+    //
+    // A legend gives colour a meaning, and a view picks exactly one of them —
+    // because two legends at once would put two meanings on the same channel
+    // and neither could be read.
+    //
+    // Each legend is tied to ONE attribute or enumeration, which is what makes
+    // it a legend rather than a palette: every entry is a value of that same
+    // thing, so the key can be stated as "this attribute, these values, these
+    // colours". Colour is otherwise a property of a diagram, defined nowhere,
+    // reproducible in no other view and reviewable by nobody.
+    part def MemoLegendEntry specializes MemoPart {
+        /** The value of the legend's attribute or enumeration this entry is for. */
+        attribute value : String;
+        /** Shown in the key. Defaults to the value when unstated. */
+        attribute label : String;
+        /** `#RRGGBB`. */
+        attribute color : String;
+    }
+
+    part def MemoLegend specializes MemoPart {
+        /** The attribute whose value each entry names — e.g. "realizationStage". */
+        attribute attributeName : String;
+        /**
+         * An `enum def` whose values each entry names, as an alternative to
+         * `attributeName`. Exactly one of the two is given: a legend keyed on
+         * both would be two legends.
+         */
+        attribute enumerationName : String;
+        /**
+         * Which constructs are coloured. A legend may cover parts and the
+         * connections between them, or only one of them. Empty means every
+         * construct the legend has an entry for.
+         */
+        attribute appliesTo : LegendScopeKind[*];
+        attribute description : String;
+        part entries : MemoLegendEntry[*];
+    }
+
     view def MemoView :> Views::View {
         // Identity comes from the `@MemoIdentity` metadata carrier, which
         // annotates any metaclass — so a view stays native SysML without
@@ -103,6 +142,12 @@ package memo_viewpoints_definitions {
         attribute diagramType : String;
         attribute layoutHint : String;
         attribute styleHint : String;
+        /**
+         * The one legend this view colours by. At most one: colour is a single
+         * channel, and a second legend competing for it makes both unreadable.
+         * Without one, an element keeps its layer colour.
+         */
+        ref legend : MemoLegend[0..1];
     }
 
     view def MemoDocumentBackedView :> MemoView {
