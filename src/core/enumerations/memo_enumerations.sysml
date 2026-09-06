@@ -1,6 +1,21 @@
 package memo_core_enumerations {
     private import ScalarValues::*;
 
+    // Where a legend gets the value it colours by, when that value is not
+    // stored on the element at all but derived from the model.
+    enum def LegendSourceKind {
+        // Depth in the view's own composition hierarchy: the root is 0, its
+        // parts 1, theirs 2. This is what "L0 / L1 / L2" actually means, and
+        // the tree already computes it — reading it back out of an id string
+        // would make a naming convention load-bearing and break the moment
+        // something is renamed or re-parented.
+        enum hierarchyDepth;
+        // The element's ontology kind, which is a field rather than an
+        // attribute — and on a block definition diagram it is usually the only
+        // thing worth colouring by, since definitions carry few attributes.
+        enum elementKind;
+    }
+
     // What a legend colours. The values are SysML's own usage keywords, so a
     // renderer matches an element's construct directly rather than translating
     // a private vocabulary into one.

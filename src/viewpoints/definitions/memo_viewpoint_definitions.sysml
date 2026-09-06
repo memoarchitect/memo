@@ -93,10 +93,15 @@ package memo_viewpoints_definitions {
         attribute attributeName : String;
         /**
          * An `enum def` whose values each entry names, as an alternative to
-         * `attributeName`. Exactly one of the two is given: a legend keyed on
-         * both would be two legends.
+         * `attributeName`.
          */
         attribute enumerationName : String;
+        /**
+         * A value the model derives rather than stores — hierarchy depth, or
+         * the element's kind. Use instead of `attributeName` when the thing
+         * being coloured is not written on the element.
+         */
+        attribute derivedFrom : LegendSourceKind[0..1];
         /**
          * Which constructs are coloured. A legend may cover parts and the
          * connections between them, or only one of them. Empty means every
