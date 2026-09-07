@@ -115,21 +115,15 @@ package memo_architecture_implementation_ui {
         attribute uiTechnology : String;
     }
 
-    // What a rendered control and a physical one genuinely share: a label, an
-    // accessibility story, and — when they annunciate — an alarm character.
-    // The base exists so that the §18 traceability relations can type against
-    // "something the user interacts with" rather than against software
-    // specifically. Without it a use error on a knob would be unmodellable,
-    // because ErrorAtElement would only accept a UIElement.
-    abstract part def InteractionElement specializes MemoPart {
-        attribute labelText : String;
-        attribute accessibilitySummary : String;
-        // alarm annunciation (optional; IEC 60601-1-8)
-        attribute alarmPriority : NotificationPriorityKind[0..1];
-        attribute annunciationModality : String;
-        attribute silenceable : Boolean;
-    }
-
+    // `InteractionElement` was an abstract base over UIElement and
+    // OperatorInterfaceElement, existing so the §18 relations could type
+    // against "something the user interacts with". It was both redundant and
+    // too narrow: the nearest real common ancestor is already `MemoPart`, and
+    // IEC 62366-1 puts the whole means of interaction in scope — a mis-keyed
+    // connector, a moulded marking on a housing, a tube routed backwards are
+    // use errors at parts that were never interaction elements and so could
+    // not be named. `ErrorAtElement` and `ElementTriggersAction` now take
+    // `MemoPart`; the attributes moved to whichever type actually set them.
 
     // One UIElement — the single UI part type. The widget form — holding
     // (screen/panel/dialog), acting (button/knob/slider), presenting
@@ -153,8 +147,20 @@ package memo_architecture_implementation_ui {
     // CODE, and a screen is not a source module. Runtime processes are
     // SoftwareComponent, code is SoftwareModule, and the UI is a third view of
     // the same software — a sibling of those, not a kind of either.
-    part def UIElement specializes SoftwareElement, InteractionElement {
+    part def UIElement specializes SoftwareElement {
         attribute formKind : UIElementFormKind;
+        // The visible label. Held here rather than on a shared interaction
+        // base: a physical control's label is moulded or printed, and is
+        // `legendText` on OperatorInterfaceElement.
+        attribute labelText : String;
+        // ── alarm annunciation (optional; IEC 60601-1-8) ──
+        // On the rendered element, because that is where every modelled
+        // annunciation lives. A physical annunciator that needs a priority
+        // wants an alarm concept of its own, not three attributes copied onto
+        // every front-panel part.
+        attribute alarmPriority : NotificationPriorityKind[0..1];
+        attribute annunciationModality : String;
+        attribute silenceable : Boolean;
         // ── screen layout (optional; set for elements that are laid out) ──
         // Bounds are relative to the parent element in the Composes tree; a
         // root screen's bounds are the full frame.
@@ -222,7 +228,7 @@ package memo_architecture_implementation_ui {
         enum printedMarking;
     }
 
-    part def OperatorInterfaceElement specializes PhysicalComponent, InteractionElement {
+    part def OperatorInterfaceElement specializes PhysicalComponent {
         attribute formKind : OperatorInterfaceFormKind;
         // actuation (optional; set for actuated forms)
         attribute actuationForce : String;
@@ -320,8 +326,13 @@ package memo_architecture_implementation_ui {
     // from here, and only this relation says so.
 
     // ── §18 traceability ─────────────────────────────────────────
+    // Source is `MemoPart`, not a UI-specific base: a foot pedal and a
+    // rendered button trigger the same kind of action, and the two are a
+    // PhysicalComponent and a SoftwareElement whose only common ancestor is
+    // MemoPart. CR-MED-111 still holds rendered controls to it, and it is
+    // scoped to UIElement, so the wider end does not weaken the rule.
     connection def ElementTriggersAction :> MemoRelationship {
-        end element : InteractionElement :>> source;
+        end element : MemoPart :>> source;
         end triggeredAction : UIAction :>> target;
     }
     abstract connection elementTriggersActionLinks : ElementTriggersAction[*];
@@ -344,9 +355,14 @@ package memo_architecture_implementation_ui {
     }
     // A UI scenario realizes a functional scenario one layer up: each is a
     // OperativeScenario selected by scenarioKind rather than a separate definition.
+    // Target is `MemoPart`. IEC 62366-1 scopes the user interface to every
+    // means of interaction, so a use error lands wherever the user got it
+    // wrong — a mis-keyed connector, a moulded marking, a tube routed
+    // backwards — not only on a control. Narrowing this to an interaction
+    // base made those unmodellable.
     connection def ErrorAtElement :> MemoRelationship {
         end useError : UseError :>> source;
-        end element : InteractionElement :>> target;
+        end element : MemoPart :>> target;
     }
     abstract connection errorAtElementLinks : ErrorAtElement[*];
     metadata def <errorAtElement> ErrorAtElementMetadata :> SemanticMetadata {
