@@ -47,21 +47,18 @@
 | [`BoundsDetectionKind`](#boundsdetectionkind) | `enum def` | How the element's bounds were obtained. Automatic boundary detection PROPOSES; a reviewer DISPOSES. In a regulated review the reader must be able to see which boxes a human confirmed and which the tool guessed, so that provenance is model content and not a workbench-only flag. | — |
 | [`InteractionIntentKind`](#interactionintentkind) | `enum def` | The interaction intents a step or action can carry (§18). | — |
 | [`UserInterface`](#userinterface) | `part def` | User interface definition specializing `MemoPart`. | `MemoPart` |
-| [`InteractionElement`](#interactionelement) | `part def` | Interaction element definition specializing `MemoPart`. | `MemoPart` |
-| [`UIElement`](#uielement) | `part def` | Uielement definition specializing `SoftwareElement,`. | `SoftwareElement,` |
+| [`UIElement`](#uielement) | `part def` | Uielement definition specializing `SoftwareElement`. | `SoftwareElement` |
 | [`OperatorInterfaceFormKind`](#operatorinterfaceformkind) | `enum def` | Controlled values for operator interface form: `knob`, `dial`, `pushButton`, `toggleSwitch`, `rockerSwitch`, `lever`, `physicalSlider`, `keypad`, `footPedal`, `touchSurface`, `indicatorLamp`, `gauge`, `audibleIndicator`, `hapticIndicator`, `printedMarking`. | — |
-| [`OperatorInterfaceElement`](#operatorinterfaceelement) | `part def` | Operator interface element definition specializing `PhysicalComponent,`. | `PhysicalComponent,` |
+| [`OperatorInterfaceElement`](#operatorinterfaceelement) | `part def` | Operator interface element definition specializing `PhysicalComponent`. | `PhysicalComponent` |
 | [`ScreenCapture`](#screencapture) | `part def` | Screen capture definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`UIState`](#uistate) | `part def` | UI state is presentation state — distinct from system/device state. | `MemoPart` |
 | [`UIEvent`](#uievent) | `part def` | Uievent definition specializing `MemoPart`. | `MemoPart` |
-| [`UIAction`](#uiaction) | `action def` | Uiaction definition specializing `MemoAction`. | `MemoAction` |
+| [`UIAction`](#uiaction) | `action def` | Clicking a button IS an operative action: it has a trigger, a precondition, a criticality, a potential harm and a frequency of use, exactly as turning a knob does.… | `OperativeAction` |
 | [`InteractionFlow`](#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a OperativeScenario with scenarioKind `ui`. | `MemoAction` |
-| [`DataBinding`](#databinding) | `connection def` | Typed relationship for data binding. | `MemoRelationship` |
 | [`CapturesScreen`](#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | `MemoRelationship` |
-| [`NavigatesTo`](#navigatesto) | `connection def` | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… | `MemoRelationship` |
 | [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship for element triggers action. | `MemoRelationship` |
 | [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | `MemoRelationship` |
-| [`ErrorAtElement`](#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. | `MemoRelationship` |
+| [`ErrorAtElement`](#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. Target is `MemoPart`.… | `MemoRelationship` |
 | [`ControlImplementedBy`](#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | `MemoRelationship` |
 
 ## UIElementFormKind
@@ -154,33 +151,18 @@ part def UserInterface specializes MemoPart
 | Owning package | `memo_architecture_implementation_ui` |
 
 
-## InteractionElement
-
-```sysml
-abstract part def InteractionElement specializes MemoPart
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Interaction element definition specializing `MemoPart`. |
-| Kind | `part def` |
-| Abstract | Yes |
-| Specializes | `MemoPart` |
-| Owning package | `memo_architecture_implementation_ui` |
-
-
 ## UIElement
 
 ```sysml
-part def UIElement specializes SoftwareElement, InteractionElement
+part def UIElement specializes SoftwareElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Uielement definition specializing `SoftwareElement,`. |
+| Description | Uielement definition specializing `SoftwareElement`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `SoftwareElement,` |
+| Specializes | `SoftwareElement` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
@@ -202,15 +184,15 @@ enum def OperatorInterfaceFormKind
 ## OperatorInterfaceElement
 
 ```sysml
-part def OperatorInterfaceElement specializes PhysicalComponent, InteractionElement
+part def OperatorInterfaceElement specializes PhysicalComponent
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Operator interface element definition specializing `PhysicalComponent,`. |
+| Description | Operator interface element definition specializing `PhysicalComponent`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `PhysicalComponent,` |
+| Specializes | `PhysicalComponent` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
@@ -262,15 +244,15 @@ part def UIEvent specializes MemoPart
 ## UIAction
 
 ```sysml
-action def UIAction specializes MemoAction
+action def UIAction specializes OperativeAction
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Uiaction definition specializing `MemoAction`. |
+| Description | Clicking a button IS an operative action: it has a trigger, a precondition, a criticality, a potential harm and a frequency of use, exactly as turning a knob does.… |
 | Kind | `action def` |
 | Abstract | No |
-| Specializes | `MemoAction` |
+| Specializes | `OperativeAction` |
 | Owning package | `memo_architecture_implementation_ui` |
 
 
@@ -289,21 +271,6 @@ action def InteractionFlow specializes MemoAction
 | Owning package | `memo_architecture_implementation_ui` |
 
 
-## DataBinding
-
-```sysml
-connection def DataBinding :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for data binding. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_implementation_ui` |
-
-
 ## CapturesScreen
 
 ```sysml
@@ -313,21 +280,6 @@ connection def CapturesScreen :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Which modelled screen an image is a rendering of. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_implementation_ui` |
-
-
-## NavigatesTo
-
-```sysml
-connection def NavigatesTo :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -372,7 +324,7 @@ connection def ErrorAtElement :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. |
+| Description | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. Target is `MemoPart`.… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -516,21 +468,15 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute uiTechnology : String;
         }
 
-        // What a rendered control and a physical one genuinely share: a label, an
-        // accessibility story, and — when they annunciate — an alarm character.
-        // The base exists so that the §18 traceability relations can type against
-        // "something the user interacts with" rather than against software
-        // specifically. Without it a use error on a knob would be unmodellable,
-        // because ErrorAtElement would only accept a UIElement.
-        abstract part def InteractionElement specializes MemoPart {
-            attribute labelText : String;
-            attribute accessibilitySummary : String;
-            // alarm annunciation (optional; IEC 60601-1-8)
-            attribute alarmPriority : NotificationPriorityKind[0..1];
-            attribute annunciationModality : String;
-            attribute silenceable : Boolean;
-        }
-
+        // `InteractionElement` was an abstract base over UIElement and
+        // OperatorInterfaceElement, existing so the §18 relations could type
+        // against "something the user interacts with". It was both redundant and
+        // too narrow: the nearest real common ancestor is already `MemoPart`, and
+        // IEC 62366-1 puts the whole means of interaction in scope — a mis-keyed
+        // connector, a moulded marking on a housing, a tube routed backwards are
+        // use errors at parts that were never interaction elements and so could
+        // not be named. `ErrorAtElement` and `ElementTriggersAction` now take
+        // `MemoPart`; the attributes moved to whichever type actually set them.
 
         // One UIElement — the single UI part type. The widget form — holding
         // (screen/panel/dialog), acting (button/knob/slider), presenting
@@ -554,8 +500,20 @@ connection def ControlImplementedBy :> MemoRelationship
         // CODE, and a screen is not a source module. Runtime processes are
         // SoftwareComponent, code is SoftwareModule, and the UI is a third view of
         // the same software — a sibling of those, not a kind of either.
-        part def UIElement specializes SoftwareElement, InteractionElement {
+        part def UIElement specializes SoftwareElement {
             attribute formKind : UIElementFormKind;
+            // The visible label. Held here rather than on a shared interaction
+            // base: a physical control's label is moulded or printed, and is
+            // `legendText` on OperatorInterfaceElement.
+            attribute labelText : String;
+            // ── alarm annunciation (optional; IEC 60601-1-8) ──
+            // On the rendered element, because that is where every modelled
+            // annunciation lives. A physical annunciator that needs a priority
+            // wants an alarm concept of its own, not three attributes copied onto
+            // every front-panel part.
+            attribute alarmPriority : NotificationPriorityKind[0..1];
+            attribute annunciationModality : String;
+            attribute silenceable : Boolean;
             // ── screen layout (optional; set for elements that are laid out) ──
             // Bounds are relative to the parent element in the Composes tree; a
             // root screen's bounds are the full frame.
@@ -623,7 +581,7 @@ connection def ControlImplementedBy :> MemoRelationship
             enum printedMarking;
         }
 
-        part def OperatorInterfaceElement specializes PhysicalComponent, InteractionElement {
+        part def OperatorInterfaceElement specializes PhysicalComponent {
             attribute formKind : OperatorInterfaceFormKind;
             // actuation (optional; set for actuated forms)
             attribute actuationForce : String;
@@ -668,7 +626,17 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute intent : InteractionIntentKind;
         }
 
-        action def UIAction specializes MemoAction {
+        // Clicking a button IS an operative action: it has a trigger, a
+        // precondition, a criticality, a potential harm and a frequency of use,
+        // exactly as turning a knob does. Specializing MemoAction directly made
+        // UIAction a SIBLING of OperativeAction, which cost two things — a UI
+        // action could carry none of those ten attributes, and `CommitsUseError`
+        // (source end: OperativeAction) would not accept it, so a use error
+        // committed by a click was unmodellable.
+        //
+        // The three attributes here are what a UI action adds on top: what the
+        // user meant by it, what came back, and whether it asks first.
+        action def UIAction specializes OperativeAction {
             attribute intent : InteractionIntentKind;
             attribute feedbackProvided : String;
             attribute confirmationRequired : Boolean;
@@ -681,18 +649,6 @@ connection def ControlImplementedBy :> MemoRelationship
             attribute exitPoint : String;
         }
 
-        connection def DataBinding :> MemoRelationship {
-            attribute bindingExpression : String;
-            attribute refreshPolicy : String;
-            end boundElement : InteractionElement :>> source;
-            end dataSource : MemoItem :>> target;
-        }
-        abstract connection dataBindingLinks : DataBinding[*];
-        metadata def <dataBinding> DataBindingMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = dataBindingLinks meta SysML::Usage;
-        }
         // `PresentsState` had zero usages anywhere in the tree (R10-S6). Its
         // audited native form, `exhibit state`, does not actually fit: `UIState`
         // is a `part def` with plain string attributes, not a `state def`, and
@@ -721,21 +677,15 @@ connection def ControlImplementedBy :> MemoRelationship
         // Conflating the two was the mistake that made "clicking takes you to a
         // child view" look like spatial nesting; it is a separate frame reached
         // from here, and only this relation says so.
-        connection def NavigatesTo :> MemoRelationship {
-            attribute triggerGesture : String;
-            end sourceElement : UIElement :>> source;
-            end targetScreen : UIElement :>> target;
-        }
-        abstract connection navigatesToLinks : NavigatesTo[*];
-        metadata def <navigatesTo> NavigatesToMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = navigatesToLinks meta SysML::Usage;
-        }
 
         // ── §18 traceability ─────────────────────────────────────────
+        // Source is `MemoPart`, not a UI-specific base: a foot pedal and a
+        // rendered button trigger the same kind of action, and the two are a
+        // PhysicalComponent and a SoftwareElement whose only common ancestor is
+        // MemoPart. CR-MED-111 still holds rendered controls to it, and it is
+        // scoped to UIElement, so the wider end does not weaken the rule.
         connection def ElementTriggersAction :> MemoRelationship {
-            end element : InteractionElement :>> source;
+            end element : MemoPart :>> source;
             end triggeredAction : UIAction :>> target;
         }
         abstract connection elementTriggersActionLinks : ElementTriggersAction[*];
@@ -758,9 +708,14 @@ connection def ControlImplementedBy :> MemoRelationship
         }
         // A UI scenario realizes a functional scenario one layer up: each is a
         // OperativeScenario selected by scenarioKind rather than a separate definition.
+        // Target is `MemoPart`. IEC 62366-1 scopes the user interface to every
+        // means of interaction, so a use error lands wherever the user got it
+        // wrong — a mis-keyed connector, a moulded marking, a tube routed
+        // backwards — not only on a control. Narrowing this to an interaction
+        // base made those unmodellable.
         connection def ErrorAtElement :> MemoRelationship {
             end useError : UseError :>> source;
-            end element : InteractionElement :>> target;
+            end element : MemoPart :>> target;
         }
         abstract connection errorAtElementLinks : ErrorAtElement[*];
         metadata def <errorAtElement> ErrorAtElementMetadata :> SemanticMetadata {
