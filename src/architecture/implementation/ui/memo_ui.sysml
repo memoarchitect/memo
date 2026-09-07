@@ -267,7 +267,17 @@ package memo_architecture_implementation_ui {
         attribute intent : InteractionIntentKind;
     }
 
-    action def UIAction specializes MemoAction {
+    // Clicking a button IS an operative action: it has a trigger, a
+    // precondition, a criticality, a potential harm and a frequency of use,
+    // exactly as turning a knob does. Specializing MemoAction directly made
+    // UIAction a SIBLING of OperativeAction, which cost two things — a UI
+    // action could carry none of those ten attributes, and `CommitsUseError`
+    // (source end: OperativeAction) would not accept it, so a use error
+    // committed by a click was unmodellable.
+    //
+    // The three attributes here are what a UI action adds on top: what the
+    // user meant by it, what came back, and whether it asks first.
+    action def UIAction specializes OperativeAction {
         attribute intent : InteractionIntentKind;
         attribute feedbackProvided : String;
         attribute confirmationRequired : Boolean;
