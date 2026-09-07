@@ -17,7 +17,9 @@
 // ZERO example files. The ends are metaclass-neutral now (CR-ONT-060..073), so
 // the split has no cause and is gone: OperativeAction is merged into the function
 // family, and its `actionKind` moved onto MemoFunction where it was always
-// describing the function anyway.
+// describing the function anyway. `FunctionalFlow` was the one element A0 left
+// behind on the part side; it is an `action def` now, for the same reason and
+// on the same evidence.
 //
 // `functionCategory` and `actionKind` are NOT two spellings of one axis, and
 // merging them would lose information. `actionKind` is the verb — sense,
@@ -112,7 +114,19 @@ package memo_architecture_functional_functions {
 
     // A reusable functional route through system responsibilities. Functional
     // flows are part of functional architecture, never logical structure.
-    part def FunctionalFlow specializes MemoPart {
+    //
+    // An `action def`, like every other behaviour in MEMO. It was
+    // `part def ... specializes MemoPart` for the Track A0 reason described at
+    // the top of this file — relation ends typed on part-based types, and
+    // KerML forbids a behaviour from specializing one — and it was the single
+    // element A0 did not carry across when that reason went away. A route
+    // through responsibilities is the same shape as the `OperationalWorkflow`
+    // and `OperativeScenario` it sits beside: the scenarios package calls a
+    // scenario "a selected path through a workflow (or functional flow)",
+    // naming the two as one kind of thing, and its steps are `action def`s
+    // already. A structure whose whole body is `perform` is a behaviour that
+    // has not been allowed to say so.
+    action def FunctionalFlow specializes MemoAction {
         attribute flowCategory : FunctionalFlowKind;
         attribute endToEndLatencyBudgetMs : String;
         attribute safetyRelevant : Boolean;

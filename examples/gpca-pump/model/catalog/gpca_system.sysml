@@ -15,7 +15,7 @@ package memo_examples_gpca_pump_gpca_system {
     // retired: "mission" duplicated the regulated intended-use statement.
 
     // ── Functional chains ───────────────────────────────────────
-    part fcPatientBolus : FunctionalFlow {
+    action fcPatientBolus : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-001"; }
         attribute :>> name = "PatientBolusChain";
         attribute :>> flowCategory = FunctionalFlowKind::nominal;
@@ -54,7 +54,7 @@ package memo_examples_gpca_pump_gpca_system {
     first fcsBolusCommand then fcsBolusActuate;
     first fcsBolusActuate then fcsBolusLog;
 
-    part fcAlarmStop : FunctionalFlow {
+    action fcAlarmStop : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-002"; }
         attribute :>> name = "AlarmDetectionToSafeStateChain";
         attribute :>> flowCategory = FunctionalFlowKind::alarm;
@@ -87,7 +87,7 @@ package memo_examples_gpca_pump_gpca_system {
     first fcsAlarmEvaluate then fcsAlarmStopInfusion;
     first fcsAlarmStopInfusion then fcsAlarmAnnunciate;
 
-    part fcStartup : FunctionalFlow {
+    action fcStartup : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-003"; }
         attribute :>> name = "PowerOnSelfTestChain";
         attribute :>> flowCategory = FunctionalFlowKind::startup;
