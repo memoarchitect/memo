@@ -1,0 +1,586 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "activity_example::Customer":
+    shortId: "PRT-1"
+    uuid: "2ea0a499-4f6a-5424-8a7e-4705c917f8ba"
+  "activity_example::CustomerProcess":
+    shortId: "ACT-7"
+    uuid: "c2f9fa91-ebd7-5009-af5a-242bb36f4466"
+  "activity_example::FulfillOrder":
+    shortId: "ACT-8"
+    uuid: "44ed8b59-edad-5ae2-bd2f-744817ee7307"
+  "activity_example::FulfillOrder__terminate":
+    shortId: "ACT-9"
+    uuid: "884fec7a-5f11-5d5d-ab3b-9c17c29c9f85"
+  "activity_example::Order":
+    shortId: "ITM-1"
+    uuid: "018570ce-b580-564a-8cff-a37026241d08"
+  "activity_example::ProcessOrder":
+    shortId: "ACT-15"
+    uuid: "3d8be978-2749-5405-9abf-cb125a03d14d"
+  "activity_example::Receipt":
+    shortId: "ITM-2"
+    uuid: "4d7b9bc6-234f-5b8e-b15a-60281114ec26"
+  "activity_example::addToShoppingBasket":
+    shortId: "ACT-1"
+    uuid: "49df7451-a431-52d0-bac3-f772973cfc49"
+  "activity_example::afterDecision":
+    shortId: "MRG-1"
+    uuid: "cd574c39-5ed2-5009-b9d0-93d8ff40ea34"
+  "activity_example::browseCatalog":
+    shortId: "MRG-2"
+    uuid: "6f2f9556-0261-56de-8bf5-6b7afe3fb40d"
+  "activity_example::closeOrder":
+    shortId: "ACT-2"
+    uuid: "e8cf735d-10db-5dce-ae38-5d033d2ab51c"
+  "activity_example::commitOrder":
+    shortId: "ACT-3"
+    uuid: "45e27bbd-3e75-5af6-956e-89bc5cc7ed8e"
+  "activity_example::confirmPurchase":
+    shortId: "ACT-4"
+    uuid: "9fa88344-0e15-5856-a727-184b599005f7"
+  "activity_example::createInvoice":
+    shortId: "ACT-5"
+    uuid: "1e9490e2-b77a-5bbf-9c05-504a27085eb4"
+  "activity_example::creditDecision":
+    shortId: "DCS-1"
+    uuid: "ce936c5e-4a25-51a4-a213-a7bfaf6479be"
+  "activity_example::customerLogsIn":
+    shortId: "ACT-6"
+    uuid: "428fc1d0-ab2b-595f-804e-c6237482ccdb"
+  "activity_example::itemsDelivered":
+    shortId: "ACT-10"
+    uuid: "3602c16f-9b87-59fe-8b76-26b6aafb4f2d"
+  "activity_example::notifyCustomer":
+    shortId: "ACT-11"
+    uuid: "1ea48431-fd54-5e96-a7ad-ce16783c6fe4"
+  "activity_example::orderComplete":
+    shortId: "ACT-12"
+    uuid: "4c82cc13-5184-512b-8a6c-58b6edacc73a"
+  "activity_example::parallelWork":
+    shortId: "FRK-3"
+    uuid: "54b721d8-5a11-5b1e-9c4e-b1fbd31e6637"
+  "activity_example::prepareShipment":
+    shortId: "ACT-13"
+    uuid: "28a1931f-6773-5438-a4d5-8a64385b76bc"
+  "activity_example::processOrder":
+    shortId: "ACT-14"
+    uuid: "7ef37c77-ed22-540b-b314-928608f2f5de"
+  "activity_example::readyToNotify":
+    shortId: "JNX-3"
+    uuid: "6ffe00de-b4f8-5bfe-bf2d-d3ede6139dec"
+  "activity_example::receiveOrder":
+    shortId: "ACC-1"
+    uuid: "6a43f402-d2bd-5933-ac8e-0071a3a4bebe"
+  "activity_example::rejectCreditCard":
+    shortId: "ACT-16"
+    uuid: "fc384baf-844a-54f8-8173-13bb49acbf7e"
+  "activity_example::rejectOrder":
+    shortId: "ACT-18"
+    uuid: "c00446cf-c022-5b95-aa05-9773e96c41d9"
+  "activity_example::rejected":
+    shortId: "ACT-17"
+    uuid: "cff2585b-974c-5bd4-b096-6706d061b5d3"
+  "activity_example::routeOrder":
+    shortId: "DCS-2"
+    uuid: "c4817fe7-4b33-51fa-84c8-127f82b33566"
+  "activity_example::selectBookForPurchase":
+    shortId: "ACT-19"
+    uuid: "5cc13fe5-1924-557e-ac2f-67dbdeadc354"
+  "activity_example::sendReceipt":
+    shortId: "SND-1"
+    uuid: "c4034796-1efc-5827-89bc-19bdf6df3c3d"
+  "activity_example::shoppingDecision":
+    shortId: "DCS-3"
+    uuid: "282211bf-198c-59c7-a288-364e9aca1183"
+  "activity_example::supplyCreditCardDetails":
+    shortId: "ACT-20"
+    uuid: "e7193ec1-5fde-5b97-8a61-b14ce356e3c6"
+  "activity_example::validUserDecision":
+    shortId: "DCS-4"
+    uuid: "d9bc2582-4e3a-5443-81e5-75cc4170fbb2"
+  "activity_example::validateOrder":
+    shortId: "ACT-21"
+    uuid: "201b408c-c83c-5b8f-8dca-94449f328f18"
+  "activity_example::viewBookStore":
+    shortId: "ACT-22"
+    uuid: "350470a5-598f-5228-832f-963b0f2a44b0"
+  "activity_example::viewShoppingBasket":
+    shortId: "ACT-23"
+    uuid: "375e5b93-272a-5639-8aeb-9f0ef3655368"
+  "memo_examples_sysml_diagram_samples_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "252c5053-0e68-5faa-a399-8ae269bd8bdd"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::DataPacket":
+    shortId: "INT-1"
+    uuid: "1c2455d3-444e-55e3-a835-732c6124e57c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::EnergyToken":
+    shortId: "INT-2"
+    uuid: "f6d1b934-2ec2-558b-bbda-3f2fda2a62d0"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::MaterialBatch":
+    shortId: "INT-8"
+    uuid: "6cbdff97-ccf7-5928-96b4-3b3aeca3fc8c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::ProcessInput":
+    shortId: "SYS-13"
+    uuid: "846377ed-5062-5e3c-af98-f11f5768b419"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::ReceiveInput":
+    shortId: "SYS-14"
+    uuid: "f16883bd-21e9-508a-b523-2a12a53453c9"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::RecordResult":
+    shortId: "SYS-15"
+    uuid: "08bc043e-f691-54bd-9332-8ab7050fafc2"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::ValidateInput":
+    shortId: "SYS-17"
+    uuid: "ce77f582-ea57-505d-abc0-ff2c148a1076"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::laneA":
+    shortId: "LGC-15"
+    uuid: "ab22011e-d71d-56d9-8400-34ff77b8a02c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::laneB":
+    shortId: "LGC-16"
+    uuid: "e07431e5-6225-570f-8385-0c6933244213"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::process":
+    shortId: "PRC-1"
+    uuid: "8b2581bd-6054-5b4b-a425-f54e580fc0cf"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::processStepA":
+    shortId: "VLD-1"
+    uuid: "f4d81439-dc64-5630-a09a-a60deadcbccf"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::processStepB":
+    shortId: "PRC-2"
+    uuid: "2c2d7d7a-7347-5ee5-bf22-d352cc92e96f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::processStepC":
+    shortId: "PRC-3"
+    uuid: "29d3e336-ca03-55c5-af67-ea1163dad064"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::receive":
+    shortId: "RCV-1"
+    uuid: "3310e86f-6e8b-51e3-812e-4b17b69016fa"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::record":
+    shortId: "RCR-1"
+    uuid: "5030844c-5341-565a-9646-196273c0bae9"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::sampleActionFlow":
+    shortId: "SYS-16"
+    uuid: "06281482-759e-53b0-baff-7f5a00ee6537"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::sampleActionFlowView":
+    shortId: "MMX-3"
+    uuid: "a4cec2b3-3e10-55d7-8046-3a828e361457"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::validate":
+    shortId: "VLD-2"
+    uuid: "4e3e4fae-0a48-51e3-b313-1db43548ac24"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::biomedTech":
+    shortId: "USR-1"
+    uuid: "9cc8effe-15ce-546c-9529-12584fe0a115"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::homeContext":
+    shortId: "USE-3"
+    uuid: "10e1271c-e364-5404-bc86-1b1f6967bc34"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::infusionSystem":
+    shortId: "OPR-1"
+    uuid: "f20a3d60-3a85-5c55-b902-633641fa68b5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::pharmacySystem":
+    shortId: "OPR-16"
+    uuid: "6ab0e8a4-826e-5aa8-ba59-e98dd281a640"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::sampleContextView":
+    shortId: "MMX-4"
+    uuid: "1ec903de-7c68-522a-994e-316ec1144ee3"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxAcquire":
+    shortId: "SYS-1"
+    uuid: "443e752c-9bc3-5693-9e59-35cce9c52006"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxCompute":
+    shortId: "SYS-3"
+    uuid: "038f95f8-9a17-567c-afce-6938fba005db"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxDeliverMedication":
+    shortId: "SYS-4"
+    uuid: "eafe33d8-69b3-5368-8928-6089c1595ae9"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxDetect":
+    shortId: "SYS-6"
+    uuid: "899c08d1-d825-5a90-a9c6-dd24c1fa9780"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxDrive":
+    shortId: "SYS-7"
+    uuid: "673ab173-b92a-508a-a08c-2616ab46ad30"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxEnforce":
+    shortId: "SYS-8"
+    uuid: "5e303530-6d58-5a25-ad7f-1258e825d640"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxMedicationFluid":
+    shortId: "INT-3"
+    uuid: "00592231-c146-5924-aa17-2556e2c76964"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxMonitor":
+    shortId: "SYS-11"
+    uuid: "81734b8f-35a1-57c3-a5df-b81cd3845231"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxMotorEnergy":
+    shortId: "INT-4"
+    uuid: "71edaab8-8e82-5efc-99da-68223660b610"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxOcclusionSignal":
+    shortId: "INT-5"
+    uuid: "7c3e2e75-50de-5804-89ee-c1c94dd227cd"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxRateCommand":
+    shortId: "INT-6"
+    uuid: "4a29860f-5bac-527e-97a4-4d29be4d7c75"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::FxSensorReading":
+    shortId: "INT-7"
+    uuid: "ca47b666-482f-5a8c-8159-423a81621721"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxAcquire":
+    shortId: "FXX-1"
+    uuid: "d488983c-3582-5ff8-94b6-598e3b0eb91e"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxActuator":
+    shortId: "LGC-4"
+    uuid: "09c67e2d-399b-57a0-9526-ea78ce697f7c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxCloseValve":
+    shortId: "SYS-2"
+    uuid: "cbc9e662-b620-5acb-b423-6e08aa87babc"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxCompute":
+    shortId: "FXX-2"
+    uuid: "214f536f-0260-5b90-bf00-12c1060622e5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxControlSubsystem":
+    shortId: "LGC-6"
+    uuid: "29dbaeeb-5813-5b28-9906-2a0b1e2dec0e"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxController":
+    shortId: "LGC-5"
+    uuid: "41161a57-1011-5e49-87ab-d48d8ee71890"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxDeliver":
+    shortId: "FXX-3"
+    uuid: "96ded51a-7ecd-55d5-a45a-3a9b10aad786"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxDeliveryFlow":
+    shortId: "SYS-5"
+    uuid: "7e0a285d-b18f-5d0a-a4a2-dfc6c9de4f88"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxDeliverySubsystem":
+    shortId: "LGC-7"
+    uuid: "063b3663-5cb4-5f84-95e3-fadf2fbc1827"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxDeliveryView":
+    shortId: "MMX-1"
+    uuid: "6ca8cddf-61bb-56af-9780-14e7aa264509"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxDetect":
+    shortId: "FXX-4"
+    uuid: "c6ae1ae4-d3ad-5092-9009-09b0251b557f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxDrive":
+    shortId: "FXX-5"
+    uuid: "71594bb6-db0f-5908-976f-5c4abaf6ccc8"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxEnforce":
+    shortId: "FXX-6"
+    uuid: "2c9acec7-5aa6-508d-8e58-e874d2d3783f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxForkDeliver":
+    shortId: "FRK-1"
+    uuid: "e75e2c30-45e3-58ae-a2a3-96103ae14f6d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxHoldDose":
+    shortId: "SYS-9"
+    uuid: "91a382a4-a2d4-5f06-b752-9f9b249df383"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxJoinDeliver":
+    shortId: "JNX-1"
+    uuid: "8b3dc88e-ef23-55c2-8c51-5c314080a600"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxLog":
+    shortId: "SYS-10"
+    uuid: "15262855-7741-53a6-ba76-a57ad698a783"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxMonitor":
+    shortId: "FXX-7"
+    uuid: "9bb345be-0417-50ca-a2c7-b52e43104522"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxOpenValve":
+    shortId: "SYS-12"
+    uuid: "bc6d6438-b512-5e0f-87e0-09d9b6bb9df8"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxPumpSystem":
+    shortId: "LGC-8"
+    uuid: "0b073d54-d3a5-504c-b67f-d5367a9a9434"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxSafety":
+    shortId: "LGC-9"
+    uuid: "4f7a0354-af82-5689-9417-f11761b3cd04"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxSafetySubsystem":
+    shortId: "LGC-10"
+    uuid: "32a68afe-6809-5bea-973e-fcc0fdd06efa"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxSensingSubsystem":
+    shortId: "LGC-11"
+    uuid: "270d9fdc-1d5c-5509-a287-f5bf7a34bf9c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::fxSensor":
+    shortId: "LGC-12"
+    uuid: "bde6c336-67e8-54c0-ab3b-a7a6897633b0"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view::fmAirSensorSilent":
+    shortId: "FLR-1"
+    uuid: "56e2d419-900a-593b-a639-6172bafa60a9"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view::fmMotorRunaway":
+    shortId: "FLR-2"
+    uuid: "f125cd6c-7f8b-564d-b15a-00dbc4e8fd3d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view::fmOcclusionDrift":
+    shortId: "FLR-3"
+    uuid: "9efb72a4-fc67-5d47-9c29-d108452d87f9"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view::sampleGridView":
+    shortId: "MMX-12"
+    uuid: "457ea085-c210-5506-ad2c-b7a7978fae70"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::beverageOut":
+    shortId: "DTX-1"
+    uuid: "951f5317-6e4f-55e9-bc14-0c4a545b9f54"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::brewGroup":
+    shortId: "LGC-1"
+    uuid: "df84e117-1447-5406-9e0e-bcae8e6e8f02"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::brewWaterIn":
+    shortId: "DTX-3"
+    uuid: "b21b7f01-02ff-56d8-bd2b-e842263e202f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::brewedCoffeeOut":
+    shortId: "DTX-2"
+    uuid: "22ca756d-752d-5259-a40e-746ffd2c0b7e"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::coffeeMachine":
+    shortId: "LGC-2"
+    uuid: "6ceb9503-7dc7-5b2b-8986-32a04789f386"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::cup":
+    shortId: "LGC-3"
+    uuid: "dd7c0c89-beef-5b22-919b-9c1398130a06"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::cupBeverageIn":
+    shortId: "DTX-4"
+    uuid: "5a3adf3d-f182-5958-bd24-af98a5c0c66f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::diagnostics":
+    shortId: "DTX-5"
+    uuid: "caeab6b4-e0ba-56f2-bb5d-1227215e5c28"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::heatedWaterOut":
+    shortId: "DTX-6"
+    uuid: "520cb86b-f99f-59c5-b3ac-e0aa0c55a2ce"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::heaterAssembly":
+    shortId: "LGC-13"
+    uuid: "4e60fd27-11d7-5969-adfb-bd9214a6480e"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::heaterStatusOut":
+    shortId: "DTX-7"
+    uuid: "45e9abfe-3251-5b97-bdbc-4795e2bb4132"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::heaterWaterIn":
+    shortId: "DTX-8"
+    uuid: "e931b2ea-db5a-54d4-9214-bf41620cd5ae"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::heatingElement":
+    shortId: "LGC-14"
+    uuid: "243d4e45-f6d1-5b0c-a98f-cd1e362f0213"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::mainsWaterIn":
+    shortId: "DTX-9"
+    uuid: "71792f71-e07d-586f-9925-476b07bea924"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::sampleInterconnectionView":
+    shortId: "MMX-5"
+    uuid: "65b30607-76ae-56f1-b98b-16f7740a3bcc"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::serviceInterface":
+    shortId: "DTX-10"
+    uuid: "d148d4fa-f15a-5fb5-8b39-dd6efbf4979f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::supplyWaterOut":
+    shortId: "DTX-11"
+    uuid: "5d6a5eaf-0bfb-505c-9da6-9e9267ca58de"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::tankWaterIn":
+    shortId: "DTX-12"
+    uuid: "01daca49-9c96-576b-97c9-2b8c9ab15a50"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::tankWaterOut":
+    shortId: "DTX-13"
+    uuid: "20a06a57-3671-53c0-9595-7d4f21cf964a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::waterSupply":
+    shortId: "LGC-19"
+    uuid: "241fecf6-53ca-5f86-89eb-6cad9eb071f2"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::waterTank":
+    shortId: "LGC-20"
+    uuid: "bd47e3c2-22ff-5efe-bb40-e01495a6baf6"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::OpBolusRequest":
+    shortId: "INT-9"
+    uuid: "d72efec9-2a86-56eb-b87d-08ed2401795d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::OpCheckLockout":
+    shortId: "OPR-4"
+    uuid: "adb24720-867e-57c3-ad7b-c1ec0d3adf48"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::OpPrescribeTherapy":
+    shortId: "OPR-8"
+    uuid: "d817a16e-c108-5ad2-955d-d5e43595511d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::OpPrescription":
+    shortId: "INT-10"
+    uuid: "f6741c3f-ab5f-59e6-9ab0-153d4e1dfbfd"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::OpRequestBolus":
+    shortId: "OPR-11"
+    uuid: "ffb6f375-f3f8-5b68-9eb7-e4e0bf6fa642"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::OpVerifyPrescription":
+    shortId: "OPR-15"
+    uuid: "043c3be9-34ef-56ee-8d7a-58022d2ce565"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opAdminister":
+    shortId: "OPR-2"
+    uuid: "d0402633-08f0-5e35-ab58-4d712dec1565"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opCareSystem":
+    shortId: "OPR-3"
+    uuid: "19fe5a70-8e69-5e97-bfcb-b93c4134411f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opCheckLockout":
+    shortId: "OPX-1"
+    uuid: "03a2e3c3-4322-5d32-af21-ea77e29199a9"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opClinicalTeam":
+    shortId: "USR-3"
+    uuid: "d7acb5ac-71d6-5dfd-8f9c-e16665afc824"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opConnect":
+    shortId: "OPR-5"
+    uuid: "5a60f338-8f57-5810-b8a2-d01a6d9c9c9a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opDeliverDose":
+    shortId: "OPR-6"
+    uuid: "35fa7514-271a-54c0-89c1-64e0a55c0c72"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opForkPrep":
+    shortId: "FRK-2"
+    uuid: "d5ddaada-1db4-54a7-b1df-4ae8e9788305"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opJoinPrep":
+    shortId: "JNX-2"
+    uuid: "854a3c93-75ca-546e-bbde-b1d892a1a1a4"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opLogEvent":
+    shortId: "OPR-7"
+    uuid: "d5de22b9-9a05-5b32-a2d7-465282929a49"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opPatientGroup":
+    shortId: "USR-4"
+    uuid: "3f978c1b-919d-5d90-a187-2a28afaf39bc"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opPrescribe":
+    shortId: "OPX-2"
+    uuid: "e9451404-178b-5678-bb03-a71b603268de"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opPrime":
+    shortId: "OPR-9"
+    uuid: "cf9169a5-5a0a-51d9-a28b-d122ec079d0c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opProgram":
+    shortId: "OPR-10"
+    uuid: "d160fa9f-2586-5f51-822c-d5d10e7fa670"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opRequestBolus":
+    shortId: "OPX-3"
+    uuid: "0cb0c998-a7a4-590d-bbba-705026777bc2"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opRoleBiomed":
+    shortId: "USR-5"
+    uuid: "5a5d7719-8bb7-5168-a99a-768cc61b4cb0"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opRoleNurse":
+    shortId: "USR-6"
+    uuid: "727f3052-e0d4-592b-b666-5894c43fef32"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opRolePatient":
+    shortId: "USR-7"
+    uuid: "acc8bed3-7e5d-5f26-9944-94088be08684"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opRolePhysician":
+    shortId: "USR-8"
+    uuid: "8b5a1ea6-c18b-58f1-86b1-ea5dadfb062b"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opSelfTest":
+    shortId: "OPR-12"
+    uuid: "91253c89-5c64-5b5f-8ede-db3a4a6f2e46"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opSetupFlow":
+    shortId: "OPR-13"
+    uuid: "60633c6d-b9a0-5831-abea-55eb6f98f47d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opSetupView":
+    shortId: "MMX-2"
+    uuid: "6f64ae35-2772-5b23-b922-a007a9b4dfee"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opStart":
+    shortId: "OPR-14"
+    uuid: "630d517c-34c4-5198-a27e-cadc95b41185"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opVerify":
+    shortId: "OPX-4"
+    uuid: "8cbc3a2c-d94c-5085-87db-cd4713352210"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::needSafeTherapy":
+    shortId: "NDX-1"
+    uuid: "a52df37f-873b-5172-81cf-6522c52c4e9c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::needTimelyAlarms":
+    shortId: "NDX-2"
+    uuid: "f8df4d90-2d5b-5588-83da-4a33414e6e8c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::reqAlarmLoudness":
+    shortId: "REQ-1"
+    uuid: "4421c6cd-b43f-503f-bd6f-eff8b47a60f4"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::reqDoseLimit":
+    shortId: "REQ-2"
+    uuid: "ef1c434b-e0f2-507a-83e0-e820bb64bc91"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::reqOcclusionAlarm":
+    shortId: "REQ-3"
+    uuid: "8b08a345-f0ca-5f29-afdd-1ab38c5ced70"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::sampleRequirementsView":
+    shortId: "MMX-6"
+    uuid: "57981e86-fd32-5768-85f9-8cfd5cb20712"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::pumpController":
+    shortId: "LGC-17"
+    uuid: "fb4aa0a7-58b6-55c7-840e-f322041ba181"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::pumpMechanism":
+    shortId: "LGC-18"
+    uuid: "a26a7692-9325-5a6f-be3c-530aea1da3bf"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::sampleSequenceView":
+    shortId: "MMX-7"
+    uuid: "33492b25-5977-53d3-8a0d-ef22871a2077"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::startInfusion":
+    shortId: "FNC-1"
+    uuid: "26cbb195-037d-5951-902d-7f4bca3befc1"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepCommandMotor":
+    shortId: "FNC-2"
+    uuid: "9b81e439-d254-559e-ab44-7a29804717bf"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepConfirm":
+    shortId: "FNC-3"
+    uuid: "7093e469-52d2-5ef2-ae6c-eae490590b0d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepNotify":
+    shortId: "FNC-4"
+    uuid: "178ba199-7e89-5056-98f3-7da2597816af"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepRequestStart":
+    shortId: "FNC-5"
+    uuid: "f0c08d7d-2e75-5174-aef6-619a00a9c9cd"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepValidate":
+    shortId: "FNC-6"
+    uuid: "2f962e28-d6c4-54b3-9bcb-e1aff13ba1a0"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard_activity_view::standardActivityView":
+    shortId: "MMX-11"
+    uuid: "80acc1e6-d731-5211-9988-20450f2dd9f0"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::pumpModes":
+    shortId: "STT-1"
+    uuid: "16320937-5b94-5fdd-b6a0-f74130a6ccad"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::sampleStateTransitionView":
+    shortId: "MMX-8"
+    uuid: "29111ffc-5cb8-5af6-9a53-bffd2fbb3e43"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tFault":
+    shortId: "UNK-1"
+    uuid: "0ec57129-f074-58f7-95d9-6e27ee158c76"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tPause":
+    shortId: "UNK-2"
+    uuid: "3c7fd85c-7703-5269-a171-7c66c749c6f1"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tRecover":
+    shortId: "UNK-3"
+    uuid: "07fb72f8-997a-5510-9468-d134574fbd4e"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tResume":
+    shortId: "UNK-4"
+    uuid: "6c94992d-12ac-5e73-ac83-51bbce6bf919"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tStart":
+    shortId: "UNK-5"
+    uuid: "3b634dfd-a9f1-5620-87cc-8050c1907fb7"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tStop":
+    shortId: "UNK-6"
+    uuid: "100b4384-8695-5da0-8ddb-8bf069d7cf37"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::branchA1":
+    shortId: "HRD-1"
+    uuid: "d9deb6c0-3049-56b6-9ea3-e7480a54cdcc"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::branchA2":
+    shortId: "HRD-2"
+    uuid: "69018a4d-8d3d-5d9e-aadb-8331f6903458"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::branchB1":
+    shortId: "HRD-3"
+    uuid: "22336b4d-4ce6-524d-8423-40d54aca826a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::leafA11":
+    shortId: "HRD-4"
+    uuid: "2ac468d9-cb6d-5c86-b835-8207bdab0f2e"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::leafA12":
+    shortId: "HRD-5"
+    uuid: "be785cd7-164c-5701-a557-05d2d2d81a4e"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::leafA21":
+    shortId: "HRD-6"
+    uuid: "80fafb7c-9130-5762-b1dd-8fb1f4a0ccfe"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::leafB11":
+    shortId: "HRD-7"
+    uuid: "e9bfecc0-8fca-57b4-a813-8afdad4933ec"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::rootA":
+    shortId: "HRD-8"
+    uuid: "e5bdb2f9-3e16-5758-a5cc-959465880bb6"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::rootB":
+    shortId: "HRD-9"
+    uuid: "b7964bf4-28e9-501a-9784-90f129a36cdc"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::sampleTreeView":
+    shortId: "MMX-9"
+    uuid: "48a04dca-a8c4-5cce-837f-eb0dceb543e5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::clinician":
+    shortId: "USR-2"
+    uuid: "7d12d2c7-a43c-5c42-9359-f7b080a19293"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::configureTherapy":
+    shortId: "USE-1"
+    uuid: "5ac65b8e-5b00-5147-8111-674e2f34e4d1"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::documentTreatment":
+    shortId: "USE-2"
+    uuid: "d308b6fe-b07e-5b39-8405-159228bab076"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::maintainDevice":
+    shortId: "USE-4"
+    uuid: "5c0735a5-2998-5f69-aea3-80cf2d4e6380"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::patient":
+    shortId: "USR-9"
+    uuid: "e36b3513-b40a-5a47-b092-fff19b8253d3"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::reviewStatus":
+    shortId: "USE-5"
+    uuid: "dd3b13e9-039a-57e1-b9b6-f6d6647ccfd9"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::sampleUseCaseView":
+    shortId: "MMX-10"
+    uuid: "2127be42-8d23-5d78-8e76-3b456c946b0d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::serviceTechnician":
+    shortId: "USR-10"
+    uuid: "dfd91dbd-0f3e-5725-a65e-60bf3cd16763"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::validateTherapySettings":
+    shortId: "USE-6"
+    uuid: "2503f97a-efc2-5529-b033-c0673d68283f"
