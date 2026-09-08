@@ -33,7 +33,17 @@ accepts its decision, merge, accept/send, termination and guard syntax, and
 | `requirements_view.sysml` | `req` | general | Requirements — stakeholder needs deriving into system requirements. |
 | `use_case_view.sysml` | `ucd` | general | Use case — relationship-driven actors, include/extend links, and model-owned `usecase:level` / `edge` presentation hints. |
 | `state_transition_view.sysml` | `stm` | statetransition | State machine — pump operating modes and their triggered transitions. |
+| `sequence_view.sysml` | `seq` | sequence | Sequence — a functional flow's ordered steps, each allocated to its performing lifeline. |
+| `grid_view.sysml` | `fmea` | grid | FMEA worksheet — three FailureMode rows, one table section with columns auto-derived from their attributes. |
 
 SysML v2 standardizes the model semantics; a diagram is a presentation of those
 semantics. The Architect renderer selects the template from each view's
 `viewKind`, so the same model can be re-presented in any compatible kind.
+
+Six of the eight standard view kinds are covered above (general, interconnection,
+actionflow, statetransition, sequence, grid). `browser` and `geometry` still have
+no sample here — both are reached by an explicit `viewKind` declaration with no
+legacy `diagramType` to demonstrate one against (a document-backed view resolves to
+`browser` by default; `geometry` has no legacy mapping at all — see
+memo-tools view-kinds.ts), so each needs its own small worked example rather than
+following this table's `diagramType` pattern directly.
