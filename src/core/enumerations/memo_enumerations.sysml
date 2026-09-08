@@ -261,16 +261,20 @@ package memo_core_enumerations {
     // shown. Declared on the view, because how much detail a drawing carries
     // is part of what the drawing IS — a summary IBD and a fully expanded one
     // answer different questions about the same elements.
+    // `everything` and `hidden`, not `all` and `none`: both of those are SysML
+    // keywords and a literal cannot be named one — the same reason
+    // LegendScopeKind is plural. The renderer maps each to the display mode it
+    // names.
     enum def PortDisplayKind {
-        enum all;
+        enum everything;
         enum ports;
-        enum none;
+        enum hidden;
     }
 
     enum def ConnectionDisplayKind {
         enum summary;
-        enum all;
-        enum none;
+        enum everything;
+        enum hidden;
     }
 
     enum def DiagramViewKind {
