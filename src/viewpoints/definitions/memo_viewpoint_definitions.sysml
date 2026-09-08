@@ -12,6 +12,7 @@ package memo_viewpoints_definitions {
     private import memo_core_dimensions::*;
     private import memo_core_terminology::*;
     private import memo_core_relationships::*;
+    private import memo_viewpoints_stakeholders_concerns::*;
 
     // Extends the native SysML viewpoint (Views::ViewpointCheck, a
     // RequirementCheck whose subject is a View) with MEMO's catalog
@@ -28,12 +29,20 @@ package memo_viewpoints_definitions {
         attribute applicableStandards : ExternalReference[0..*];
         attribute codes : TerminologyCode[0..*];
         attribute purpose : String;
-        attribute audience : AudienceKind[*];
+        /**
+         * Who the viewpoint is written for, and what it frames for them.
+         *
+         * References, not enum literals. A stakeholder and a concern are
+         * elements with ids — citable in a review, traceable from a
+         * requirement, and extensible by a project without editing the
+         * ontology, which `AudienceKind` and `ConcernKind` were not.
+         */
+        ref stakeholders : MemoStakeholder[*];
         attribute stage : WorkflowStageKind;
         attribute abstractionLevel : String;
         attribute outputKind : ViewOutputKind[*];
         attribute presentationKind : PresentationKind[*];
-        attribute concernKinds : ConcernKind[*];
+        ref framedConcerns : MemoConcern[*];
         // A viewpoint identifies stakeholders, the concerns it frames, and the
         // views that conform to it — ISO/IEC/IEEE 42010, and nothing further.
         // It used to also carry `includedLayers`, `allowedElementKinds`,
