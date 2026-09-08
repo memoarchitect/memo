@@ -39,6 +39,7 @@ package memo {
     public import memo_architecture_decisions::*;
 
     public import memo_viewpoints_definitions::*;
+    public import memo_viewpoints_stakeholders_concerns::*;
     public import memo_viewpoints_catalog::*;
     public import memo_viewpoints_context_context_viewpoint::*;
     public import memo_viewpoints_context_views_system_context_view::*;
@@ -530,6 +531,7 @@ package memo_namespace_viewpoints_cybersecurity {
 
 package memo_namespace_viewpoints_definitions {
     public import memo_viewpoints_definitions::*;
+    public import memo_viewpoints_stakeholders_concerns::*;
 }
 
 package memo_namespace_viewpoints_functional {

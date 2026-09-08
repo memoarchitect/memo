@@ -3,6 +3,7 @@ package memo_viewpoints_logical_logical_viewpoint {
 
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
+    private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
@@ -12,12 +13,12 @@ package memo_viewpoints_logical_logical_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows logical decomposition and interfaces."; }
         attribute :>> description = "Default viewpoint derived from the logical architecture layer for subsystem structure, responsibilities, and major interactions, independent of physical realization.";
         attribute :>> purpose = "Describe the system's logical decomposition.";
-        attribute :>> audience = (AudienceKind::systemArchitect);
+        ref :>> stakeholders = (SystemArchitect);
         attribute :>> stage = WorkflowStageKind::architecture;
         attribute :>> abstractionLevel = "logical";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
-        attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::performance);
+        ref :>> framedConcerns = (SafetyConcern, PerformanceConcern);
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 3;
         attribute :>> userExtensible = true;

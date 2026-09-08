@@ -392,19 +392,6 @@ package memo_core_enumerations {
         enum evidence;
         enum documents;
     }
-    enum def AudienceKind {
-        enum systemArchitect;
-        enum softwareArchitect;
-        enum hardwareEngineer;
-        enum safetyEngineer;
-        enum verificationEngineer;
-        enum regulatoryEngineer;
-        enum projectLead;
-        enum securityEngineer;
-        enum privacyEngineer;
-        enum clinicalEngineer;
-        enum usabilityEngineer;
-    }
     enum def ThreatCategoryKind {
         enum spoofing;
         enum tampering;
