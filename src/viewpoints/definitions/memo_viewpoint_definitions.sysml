@@ -156,6 +156,28 @@ package memo_viewpoints_definitions {
          * Without one, an element keeps its layer colour.
          */
         ref legend : MemoLegend[0..1];
+
+        // ── What the drawing SHOWS ────────────────────────────────────────
+        //
+        // These are the view's own statement about what it presents, so they
+        // are declared here and not in the layout companion beside it. That
+        // file records where boxes were dragged to; whether a drawing names
+        // its ports at all is a decision about the view, survives a layout
+        // reset, and belongs where the rest of the view's intent is written.
+        //
+        // Each is optional and the renderer keeps its default when a view says
+        // nothing, so no existing view changes meaning by their arrival.
+        attribute portDisplay : PortDisplayKind[0..1];
+        attribute connectionDisplay : ConnectionDisplayKind[0..1];
+        /** Name each port on the drawing. Off where the connector label
+         *  already carries the same string, as on a ROS pub/sub view where the
+         *  port and the topic share a name. */
+        attribute showPortText : Boolean[0..1];
+        attribute showConnectionText : Boolean[0..1];
+        /** Animate direction along connectors. */
+        attribute flowAnimation : Boolean[0..1];
+        /** The renderer profile this view opts into, by id. */
+        attribute rendererProfile : String[0..1];
     }
 
     view def MemoDocumentBackedView :> MemoView {
