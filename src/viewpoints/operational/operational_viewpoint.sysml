@@ -18,10 +18,8 @@ package memo_viewpoints_operational_operational_viewpoint {
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);
         attribute :>> concernKinds = (ConcernKind::performance, ConcernKind::interoperability);
-        attribute :>> includedLayers = ("context", "operational", "system");
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 1;
-        attribute :>> allowedElementKinds = ("Actor", "UseContext", "OperativeAction", "OperativeScenario[scenarioKind=operative]");
         attribute :>> userExtensible = true;
     }
 }

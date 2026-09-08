@@ -18,10 +18,8 @@ package memo_viewpoints_verification_verification_viewpoint {
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
         attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::regulatory);
-        attribute :>> includedLayers = ("requirements", "assurance");
         attribute :>> explorerLane = "assurance";
         attribute :>> explorerOrder = 5;
-        attribute :>> allowedElementKinds = ("Requirement", "VerificationCase", "ValidationCase", "MemoEvidence");
         attribute :>> userExtensible = true;
     }
 }
