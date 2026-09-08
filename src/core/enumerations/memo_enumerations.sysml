@@ -257,6 +257,22 @@ package memo_core_enumerations {
     }
     // The eight standard SysML v2 view kinds (spec taxonomy). Every
     // diagram view resolves to exactly one of these (Epic KK).
+    // How much of an interconnection drawing's port and connector detail is
+    // shown. Declared on the view, because how much detail a drawing carries
+    // is part of what the drawing IS — a summary IBD and a fully expanded one
+    // answer different questions about the same elements.
+    enum def PortDisplayKind {
+        enum all;
+        enum ports;
+        enum none;
+    }
+
+    enum def ConnectionDisplayKind {
+        enum summary;
+        enum all;
+        enum none;
+    }
+
     enum def DiagramViewKind {
         enum general;
         enum interconnection;
