@@ -34,10 +34,14 @@ package memo_viewpoints_definitions {
         attribute outputKind : ViewOutputKind[*];
         attribute presentationKind : PresentationKind[*];
         attribute concernKinds : ConcernKind[*];
-        attribute includedLayers : String[*];
-        attribute allowedElementKinds : String[*];
-        attribute allowedRelationshipKinds : String[*];
-        attribute filterExpression : String;
+        // A viewpoint identifies stakeholders, the concerns it frames, and the
+        // views that conform to it — ISO/IEC/IEEE 42010, and nothing further.
+        // It used to also carry `includedLayers`, `allowedElementKinds`,
+        // `allowedRelationshipKinds` and `filterExpression`: scoping rules over
+        // its views. Nothing ever read them, and the filtering that did happen
+        // came from a union the deriver accumulated out of the views
+        // themselves. What a view shows is the view's to say, through its own
+        // expose members and selectionQuery.
         attribute extendsViewpointIds : String[*];
         attribute userExtensible : Boolean;
         // Optional navigation grouping interpreted by Memo Architect.
