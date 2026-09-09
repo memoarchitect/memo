@@ -79,6 +79,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
         @MemoIdentity { :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces."; }
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
+        // The dedicated IBD renderer (Base -> Ibd class hierarchy): square
+        // wall ports, orange-in/green-out, solid grabbable nested-connector
+        // housings, orthogonal crossing-bridge routing, monochrome shading.
+        attribute :>> rendererProfile = "ibd";
         ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
