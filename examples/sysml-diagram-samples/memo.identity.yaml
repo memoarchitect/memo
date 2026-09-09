@@ -503,6 +503,27 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard_activity_view::standardActivityView":
     shortId: "MMX-11"
     uuid: "80acc1e6-d731-5211-9988-20450f2dd9f0"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::alarm":
+    shortId: "MMX-13"
+    uuid: "13cd81a6-bf16-59f4-aa82-3593b8ab7010"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::delivering":
+    shortId: "MMX-14"
+    uuid: "9bedd3f8-fbd3-554a-a8f8-e0fce859963c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::holding":
+    shortId: "MMX-15"
+    uuid: "60426279-481c-56bd-87fa-bb4a578027e2"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::idle":
+    shortId: "MMX-16"
+    uuid: "10f4ab55-7e04-57c6-92a3-482a5beb597c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::infusing":
+    shortId: "MMX-17"
+    uuid: "c411b67f-a6e1-5294-beaa-063aabad5cc0"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::paused":
+    shortId: "MMX-18"
+    uuid: "86845775-3bde-53ad-ac88-81c8d6b1f2af"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::priming":
+    shortId: "MMX-19"
+    uuid: "bb7c7d69-3f96-508b-a29d-e8f8e3ed7836"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::pumpModes":
     shortId: "STT-1"
     uuid: "16320937-5b94-5fdd-b6a0-f74130a6ccad"
@@ -512,15 +533,24 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tFault":
     shortId: "UNK-1"
     uuid: "0ec57129-f074-58f7-95d9-6e27ee158c76"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tKvo":
+    shortId: "UNK-7"
+    uuid: "d96f8f02-bb37-5a50-ad3b-c55db1cf37c3"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tPause":
     shortId: "UNK-2"
     uuid: "3c7fd85c-7703-5269-a171-7c66c749c6f1"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tPrimed":
+    shortId: "UNK-8"
+    uuid: "59f858f7-f377-5772-bd6f-59c368f3bbc1"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tRecover":
     shortId: "UNK-3"
     uuid: "07fb72f8-997a-5510-9468-d134574fbd4e"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tResume":
     shortId: "UNK-4"
     uuid: "6c94992d-12ac-5e73-ac83-51bbce6bf919"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tResumeDose":
+    shortId: "UNK-9"
+    uuid: "5e4f0647-5271-58cd-b067-b2da19696c74"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::tStart":
     shortId: "UNK-5"
     uuid: "3b634dfd-a9f1-5620-87cc-8050c1907fb7"
