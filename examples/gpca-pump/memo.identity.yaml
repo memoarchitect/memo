@@ -461,6 +461,33 @@ elements:
   "memo_examples_gpca_pump_gpca_behavior_modes::basalConfiguration":
     shortId: "MDX-2"
     uuid: "c501579e-f7cc-568a-9e83-e54046d0fb14"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modeACTIVE":
+    shortId: "MMX-38"
+    uuid: "bbbdaf77-0e92-5dbf-8a8c-02f18f0d2857"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modeBASAL":
+    shortId: "MMX-39"
+    uuid: "7b953a4f-32f9-54cc-b909-c8188115a532"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modeIDLE":
+    shortId: "MMX-40"
+    uuid: "035e94ba-3ef4-530a-8b08-d61644cab121"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modeOFF":
+    shortId: "MMX-41"
+    uuid: "34db9680-371a-5858-9065-658612f43847"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modeON":
+    shortId: "MMX-42"
+    uuid: "48516c5a-a57a-536f-8a6f-2a4be84a82dc"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modePAUSED":
+    shortId: "MMX-43"
+    uuid: "80fdccb6-6db3-51ea-935b-5d7e739a210e"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modePBOLUS":
+    shortId: "MMX-44"
+    uuid: "9fe2a51c-3088-51a9-9581-27d8a5e49561"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modeSQUARE":
+    shortId: "MMX-45"
+    uuid: "3d52c9ef-3fb3-56be-9894-114d41350103"
+  "memo_examples_gpca_pump_gpca_behavior_modes::modeTHERAPY":
+    shortId: "MMX-46"
+    uuid: "662b3289-5569-5866-9485-d16704975f12"
   "memo_examples_gpca_pump_gpca_behavior_modes::patientBolusConfiguration":
     shortId: "MDX-3"
     uuid: "8bf0ae11-2409-5e5f-9bac-02cfd2832fc0"
