@@ -81,6 +81,18 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
          */
     dependency linkLaneBProcessesInput from laneB to sampleActionFlow::process;
 
+    // Child action-flow view — the process composite action's own steps. Its
+    // subject is `sampleActionFlow.process`, so the parent action-flow shows a
+    // "navigate to view" button on the Process node.
+    view processActionFlowView : MemoDiagramView {
+        expose sampleActionFlow.process::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Internal steps of the Process action — step A through C."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
+        ref :>> viewpointDefinition = functionalViewpoint;
+    }
+
     view sampleActionFlowView : MemoDiagramView {
         expose sampleActionFlow::**;
         expose laneA;

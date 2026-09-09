@@ -71,6 +71,22 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     bind coffeeMachine.brewGroup.brewedCoffeeOut = coffeeMachine.beverageOut;
     bind coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut = coffeeMachine.serviceInterface.diagnostics;
 
+    // Child IBD view — the heater assembly's own internal wiring. Its subject
+    // is `heaterAssembly`, so the parent IBD shows a "navigate to view" button
+    // on the Thermal Control Assembly part.
+    view heaterAssemblyIbdView : MemoDiagramView {
+        expose coffeeMachine.heaterAssembly::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Internal wiring of the Thermal Control Assembly — heating element and its status output."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
     view sampleInterconnectionView : MemoDiagramView {
         expose coffeeMachine::**;
         expose waterSupply::**;
