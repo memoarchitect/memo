@@ -22,6 +22,18 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
     part pumpController : LogicalComponent { attribute :>> name = "Pump Controller"; }
     part pumpMechanism : LogicalComponent { attribute :>> name = "Pump Mechanism"; }
 
+    // Combined fragment definitions — referenced by steps' `fragment` attribute.
+    part monitorLoop {
+        attribute :>> name = "Monitor Loop";
+        attribute fragmentType = "loop";
+        attribute guard = "vitals abnormal";
+    }
+    part errorHandling {
+        attribute :>> name = "Error Handling";
+        attribute fragmentType = "alt";
+        attribute fragmentGuards = "[error recoverable]|[else]";
+    }
+
     action startInfusion : FunctionalFlow {
         attribute :>> name = "Start Infusion";
 
@@ -29,13 +41,26 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
         action stepValidate : FunctionalFlowStep { attribute :>> name = "Validate prescribed rate"; }
         action stepCommandMotor : FunctionalFlowStep { attribute :>> name = "Command motor drive"; }
         action stepConfirm : FunctionalFlowStep { attribute :>> name = "Confirm delivery started"; }
-        action stepNotify : FunctionalFlowStep { attribute :>> name = "Notify delivery started"; }
+
+        // Steps inside the monitoring loop fragment
+        action stepReadSensor : FunctionalFlowStep { attribute :>> name = "Read sensor data"; attribute stepOrder = "5"; attribute fragment = "monitorLoop"; }
+        action stepCheckVitals : FunctionalFlowStep { attribute :>> name = "Check vital signs"; attribute stepOrder = "6"; attribute fragment = "monitorLoop"; }
+
+        // Steps inside the alt (error-handling) fragment
+        action stepRetryDelivery : FunctionalFlowStep { attribute :>> name = "Retry delivery"; attribute stepOrder = "7"; attribute fragment = "errorHandling"; attribute fragmentOperand = "1"; }
+        action stepAlertUser : FunctionalFlowStep { attribute :>> name = "Alert user"; attribute stepOrder = "8"; attribute fragment = "errorHandling"; attribute fragmentOperand = "2"; }
+
+        action stepNotify : FunctionalFlowStep { attribute :>> name = "Notify delivery started"; attribute stepOrder = "9"; }
 
         first start then stepRequestStart;
         first stepRequestStart then stepValidate;
         first stepValidate then stepCommandMotor;
         first stepCommandMotor then stepConfirm;
-        first stepConfirm then stepNotify;
+        first stepConfirm then stepReadSensor;
+        first stepReadSensor then stepCheckVitals;
+        first stepCheckVitals then stepRetryDelivery;
+        first stepRetryDelivery then stepAlertUser;
+        first stepAlertUser then stepNotify;
         first stepNotify then done;
     }
 
@@ -46,6 +71,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
     allocate startInfusion.stepValidate to pumpController;
     allocate startInfusion.stepCommandMotor to pumpMechanism;
     allocate startInfusion.stepConfirm to pumpController;
+    allocate startInfusion.stepReadSensor to pumpMechanism;
+    allocate startInfusion.stepCheckVitals to pumpController;
+    allocate startInfusion.stepRetryDelivery to pumpController;
+    allocate startInfusion.stepAlertUser to clinician;
     allocate startInfusion.stepNotify to clinician;
 
     view sampleSequenceView : MemoDiagramView {
@@ -53,13 +82,15 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
         expose clinician::**;
         expose pumpController::**;
         expose pumpMechanism::**;
+        expose monitorLoop::**;
+        expose errorHandling::**;
         attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Start-infusion sequence — clinician, pump controller and pump mechanism lifelines, five steps in chronological order."; }
+        @MemoIdentity { :>> shortDescription = "Start-infusion sequence with combined fragments — loop for sensor monitoring and alt for error handling."; }
         attribute :>> viewKind = DiagramViewKind::sequence;
         attribute :>> diagramType = "seq";
         ref :>> viewpointDefinition = functionalViewpoint;
         part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("FunctionalFlowStep", "User", "LogicalComponent");
+            attribute :>> includeElementKinds = ("FunctionalFlowStep", "User", "LogicalComponent", "Part");
         }
     }
 }
