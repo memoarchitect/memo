@@ -9,6 +9,15 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+
+    // Generalization (specialization) relation for UML-style use-case diagrams.
+    // Source is the specific element, target the general one; the UCD renderer
+    // draws a solid line with a hollow triangle pointing at the general end.
+    connection def Specialization :> MemoRelationship {
+        end specialized :>> source;
+        end general :>> target;
+    }
+
     // Product-neutral fixture for the UML-style use-case presentation.
     part patient : User {
         attribute :>> actorKind = ActorKind::patient;
@@ -21,6 +30,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     part serviceTechnician : User {
         attribute :>> actorKind = ActorKind::technician;
         attribute :>> name = "Service Technician";
+    }
+    part nursingStaff : User {
+        attribute :>> actorKind = ActorKind::clinician;
+        attribute :>> name = "Nursing Staff";
     }
 
     use case reviewStatus : UseCase {
@@ -67,24 +80,34 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     // specialization, and `:>` inherits the base's subject and actors.
     dependency from documentTreatment to reviewStatus;
 
+    // Actor generalization: Nursing Staff is a specialization of Clinician.
+    // UML draws this as a solid line with a hollow triangle arrowhead pointing
+    // at the general actor.
+    connection : Specialization connect nursingStaff to clinician;
+
+    // Use-case generalization: Configure Therapy specializes Review Device
+    // Status — the general case is browsing status; configuring therapy is a
+    // more specific variant.
+    connection : Specialization connect configureTherapy to reviewStatus;
+
     view sampleUseCaseView : MemoDiagramView {
         expose patient;
         expose clinician;
         expose serviceTechnician;
+        expose nursingStaff;
         expose reviewStatus;
         expose configureTherapy;
         expose maintainDevice;
         expose documentTreatment;
         expose validateTherapySettings;
-        @MemoIdentity { :>> shortDescription = "Actors outside a device boundary with include, extend, hierarchy-level, and orthogonal-routing presentation."; }
+        @MemoIdentity { :>> shortDescription = "Actors outside a device boundary with include, extend, generalization, hierarchy-level, and orthogonal-routing presentation."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "ucd";
         ref :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("User", "UseCase");
-            attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Extends");
+            attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Extends", "Specialization");
         }
-        // Presentation is owned by the model view, rather than a canvas control.
         attribute :>> layoutHint = "usecase:level=all;edge=rounded";
     }
 }
