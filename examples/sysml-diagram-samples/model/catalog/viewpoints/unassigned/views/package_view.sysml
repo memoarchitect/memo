@@ -53,14 +53,6 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_
         }
     }
 
-    // Cross-package flows
-    flow from presentation::dashboardUI.apiCall
-         to domain::therapyEngine.incomingRequest;
-    flow from presentation::settingsUI.configRequest
-         to domain::configService.configIn;
-    flow from domain::therapyEngine.statusUpdate
-         to infrastructure::dataStore.writePort;
-
     view samplePackageView : MemoDiagramView {
         expose presentation::**;
         expose domain::**;
@@ -71,7 +63,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_
         attribute :>> diagramType = "pkg";
         ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("Composes", "flow");
+            attribute :>> includeRelationshipKinds = ("Composes");
         }
     }
 }
