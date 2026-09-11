@@ -47,21 +47,21 @@ package diagram_samples {
     }
 
     use case startSystem : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-use_case_viewsuse_case_views1"; }
+        @MemoIdentity { :>> providedId = "UC-BRW-1"; }
         attribute :>> name = "Start System";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject controlSystem;
         actor operatorActor = systemOperator;
     }
     use case runDiagnostics : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-use_case_viewsuse_case_views2"; }
+        @MemoIdentity { :>> providedId = "UC-BRW-2"; }
         attribute :>> name = "Run Diagnostics";
         attribute :>> useCaseKind = UseCaseKind::service;
         subject controlSystem;
         actor engineerActor = maintenanceEngineer;
     }
     use case monitorStatus : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-use_case_viewsuse_case_views3"; }
+        @MemoIdentity { :>> providedId = "UC-BRW-3"; }
         attribute :>> name = "Monitor Status";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject controlSystem;
