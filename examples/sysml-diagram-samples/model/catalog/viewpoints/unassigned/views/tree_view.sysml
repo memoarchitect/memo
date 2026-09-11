@@ -33,10 +33,10 @@ package diagram_samples {
         }
     }
 
-    view hierarchyTreeLayout : MemoDiagramView {
+    view blockDecomposition : MemoDiagramView {
         expose rootA::**;
         attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development."; }
+        @MemoIdentity { :>> shortDescription = "Block decomposition tree — hardware assemblies with varied branch depths."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
         ref :>> viewpointDefinition = treeViewpoint;
