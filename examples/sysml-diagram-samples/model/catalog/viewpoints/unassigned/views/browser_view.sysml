@@ -1,4 +1,4 @@
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view {
+package diagram_samples {
     private import ScalarValues::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_use_cases::*;
@@ -47,28 +47,28 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_
     }
 
     use case startSystem : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-001"; }
+        @MemoIdentity { :>> providedId = "UC-BRW-use_case_viewsuse_case_views1"; }
         attribute :>> name = "Start System";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject controlSystem;
         actor operatorActor = systemOperator;
     }
     use case runDiagnostics : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-002"; }
+        @MemoIdentity { :>> providedId = "UC-BRW-use_case_viewsuse_case_views2"; }
         attribute :>> name = "Run Diagnostics";
         attribute :>> useCaseKind = UseCaseKind::service;
         subject controlSystem;
         actor engineerActor = maintenanceEngineer;
     }
     use case monitorStatus : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-003"; }
+        @MemoIdentity { :>> providedId = "UC-BRW-use_case_viewsuse_case_views3"; }
         attribute :>> name = "Monitor Status";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject controlSystem;
         actor monitorActor = remoteMonitor;
     }
 
-    view sampleBrowserView : MemoDiagramView {
+    view operationalBrowserTree : MemoDiagramView {
         expose controlSystem::**;
         expose systemOperator;
         expose maintenanceEngineer;
@@ -79,7 +79,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_
         @MemoIdentity { :>> shortDescription = "Browser membership tree showing operational entities, actors, and use cases — demonstrates the browser view kind with mixed element types."; }
         attribute :>> viewKind = DiagramViewKind::browser;
         attribute :>> diagramType = "brw";
-        ref :>> viewpointDefinition = operationalViewpoint;
+        ref :>> viewpointDefinition = browserViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("OperationalEntity", "User", "UseCase");
             attribute :>> includeRelationshipKinds = ("Composes", "ParticipatesIn");

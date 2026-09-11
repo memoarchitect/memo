@@ -1,7 +1,7 @@
-// State transition sample (statetransition view kind, `stm` diagram type). A
-// behaviour machine owns its mode states by containing them, and each native
-// transition lives inside the state whose substates it connects.
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view {
+package diagram_samples {
+    // State transition sample (statetransition view kind, `stm` diagram type). A
+    // behaviour machine owns its mode states by containing them, and each native
+    // transition lives inside the state whose substates it connects.
     private import ScalarValues::*;
 
     private import memo_architecture_functional_behavior::*;
@@ -62,13 +62,13 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
         }
     }
 
-    view sampleStateTransitionView : MemoDiagramView {
+    view pumpModeStateMachine : MemoDiagramView {
         expose pumpModes::**;
         attribute depth = 2;
         @MemoIdentity { :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding."; }
         attribute :>> viewKind = DiagramViewKind::statetransition;
         attribute :>> diagramType = "stm";
-        ref :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = stateMachineViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("StateMachine", "MemoState");
         }

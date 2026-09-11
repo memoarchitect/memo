@@ -1,4 +1,4 @@
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view {
+package diagram_samples {
     private import ScalarValues::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_context_use_context::*;
@@ -17,7 +17,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     // `out`-ness relative to the owner, so a boundary port only reads as a
     // source from INSIDE its part. The subassemblies are nested the same way —
     // real containment, not a port-to-port `Composes` edge, which is what
-    // CR-ONT-065 used to forbid before nesting made the rule unnecessary.
+    // CR-ONT-use_case_views65 used to forbid before nesting made the rule unnecessary.
     part coffeeMachine : LogicalComponent {
         attribute :>> name = "Coffee Machine";
         in port mainsWaterIn : DataPort { in item payload : MemoItem; }
@@ -74,20 +74,20 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     // Child IBD view — the heater assembly's own internal wiring. Its subject
     // is `heaterAssembly`, so the parent IBD shows a "navigate to view" button
     // on the Thermal Control Assembly part.
-    view heaterAssemblyIbdView : MemoDiagramView {
+    view heaterAssemblyIBD : MemoDiagramView {
         expose coffeeMachine.heaterAssembly::**;
         attribute depth = 2;
         @MemoIdentity { :>> shortDescription = "Internal wiring of the Thermal Control Assembly — heating element and its status output."; }
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
         attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        ref :>> viewpointDefinition = ibdViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }
     }
 
-    view sampleInterconnectionView : MemoDiagramView {
+    view beverageMachineIBD : MemoDiagramView {
         expose coffeeMachine::**;
         expose waterSupply::**;
         expose cup::**;
@@ -99,7 +99,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
         // wall ports, orange-in/green-out, solid grabbable nested-connector
         // housings, orthogonal crossing-bridge routing, monochrome shading.
         attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        ref :>> viewpointDefinition = ibdViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }

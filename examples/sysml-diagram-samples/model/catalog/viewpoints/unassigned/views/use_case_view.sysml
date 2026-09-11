@@ -1,4 +1,4 @@
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view {
+package diagram_samples {
     private import ScalarValues::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_use_cases::*;
@@ -37,7 +37,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     }
 
     use case reviewStatus : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-001"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views1"; }
         attribute :>> name = "Review Device Status";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include validateTherapySettings;
@@ -45,7 +45,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         actor patientActor = patient;
     }
     use case configureTherapy : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-002"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views2"; }
         attribute :>> name = "Configure Therapy";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include reviewStatus;
@@ -54,7 +54,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         actor patientActor = patient;
     }
     use case maintainDevice : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-003"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views3"; }
         attribute :>> name = "Maintain Device";
         attribute :>> useCaseKind = UseCaseKind::service;
         subject supportingSystem;
@@ -62,14 +62,14 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     }
 
     use case documentTreatment : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-004"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views4"; }
         attribute :>> name = "Document Treatment";
         attribute :>> useCaseKind = UseCaseKind::clinical;
     }
 
-    // L2 child of Review Device Status: makes L0 → L1 → L2 selectable.
+    // L2 child of Review Device Status: makes Luse_case_views → L1 → L2 selectable.
     use case validateTherapySettings : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-005"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views5"; }
         attribute :>> name = "Validate Therapy Settings";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject supportingSystem;
@@ -90,7 +90,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     // more specific variant.
     connection : Specialization connect configureTherapy to reviewStatus;
 
-    view sampleUseCaseView : MemoDiagramView {
+    view deviceUseCases : MemoDiagramView {
         expose patient;
         expose clinician;
         expose serviceTechnician;
@@ -103,7 +103,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         @MemoIdentity { :>> shortDescription = "Actors outside a device boundary with include, extend, generalization, hierarchy-level, and orthogonal-routing presentation."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "ucd";
-        ref :>> viewpointDefinition = operationalViewpoint;
+        ref :>> viewpointDefinition = useCaseViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("User", "UseCase");
             attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Extends", "Specialization");
