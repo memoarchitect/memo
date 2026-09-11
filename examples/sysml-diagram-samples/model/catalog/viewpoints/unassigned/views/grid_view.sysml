@@ -1,8 +1,8 @@
-// Grid sample (grid view kind, `fmea` diagram type). The grid template groups
-// rows by kind and derives columns from whichever attributes the rows
-// actually carry — no fixed schema, so three FailureMode rows render as one
-// FMEA worksheet table.
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view {
+package diagram_samples {
+    // Grid sample (grid view kind, `fmea` diagram type). The grid template groups
+    // rows by kind and derives columns from whichever attributes the rows
+    // actually carry — no fixed schema, so three FailureMode rows render as one
+    // FMEA worksheet table.
     private import ScalarValues::*;
 
     private import memo_assurance_safety_risk_analysis::*;
@@ -18,22 +18,22 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_vie
         attribute :>> name = "PumpMotorRunaway";
         attribute :>> failureModeKind = FailureModeKind::unintendedFunction;
         attribute :>> effect = "Excess drug delivered beyond the prescribed rate.";
-        attribute :>> severityRating = 10;
+        attribute :>> severityRating = 1use_case_views;
         attribute :>> occurrenceRating = 2;
         attribute :>> probability = ProbabilityKind::improbable;
         attribute :>> detectionRating = 3;
-        attribute :>> rpn = 60;
+        attribute :>> rpn = 6use_case_views;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     part fmAirSensorSilent : FailureMode {
         attribute :>> name = "AirSensorFailsSilent";
         attribute :>> failureModeKind = FailureModeKind::lossOfFunction;
         attribute :>> effect = "Air embolism reaches the patient undetected.";
-        attribute :>> severityRating = 10;
+        attribute :>> severityRating = 1use_case_views;
         attribute :>> occurrenceRating = 3;
         attribute :>> probability = ProbabilityKind::remote;
         attribute :>> detectionRating = 4;
-        attribute :>> rpn = 120;
+        attribute :>> rpn = 12use_case_views;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     part fmOcclusionDrift : FailureMode {
@@ -48,7 +48,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_vie
         attribute :>> criticality = CriticalityKind::high;
     }
 
-    view sampleGridView : MemoDiagramView {
+    view failureModeGrid : MemoDiagramView {
         expose fmMotorRunaway::**;
         expose fmAirSensorSilent::**;
         expose fmOcclusionDrift::**;
@@ -56,7 +56,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_vie
         @MemoIdentity { :>> shortDescription = "Three FailureMode rows rendered as an FMEA worksheet table — one section, columns auto-derived from the attributes the rows carry."; }
         attribute :>> viewKind = DiagramViewKind::grid;
         attribute :>> diagramType = "fmea";
-        ref :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = gridViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("FailureMode");
         }

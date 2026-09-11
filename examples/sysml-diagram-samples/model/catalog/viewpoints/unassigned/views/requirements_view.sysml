@@ -1,7 +1,7 @@
-// Requirements sample (general view kind, `req` diagram type). Stakeholder needs
-// on the left derive into system requirements; `DerivesFrom` edges render as the
-// requirements-diagram trace lines.
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view {
+package diagram_samples {
+    // Requirements sample (general view kind, `req` diagram type). Stakeholder needs
+    // on the left derive into system requirements; `DerivesFrom` edges render as the
+    // requirements-diagram trace lines.
     private import ScalarValues::*;
 
     private import memo_assurance_requirements_needs::*;
@@ -15,28 +15,28 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
     private import memo_core_common::MemoIdentity;
     requirement needSafeTherapy : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "NEED-001"; } attribute :>> name = "SafeTherapy";
+        @MemoIdentity { :>> providedId = "NEED-use_case_viewsuse_case_views1"; } attribute :>> name = "SafeTherapy";
         attribute :>> statement = "The device shall support safe patient-controlled infusion therapy.";
     }
     requirement needTimelyAlarms : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "NEED-002"; } attribute :>> name = "TimelyAlarms";
+        @MemoIdentity { :>> providedId = "NEED-use_case_viewsuse_case_views2"; } attribute :>> name = "TimelyAlarms";
         attribute :>> statement = "Clinicians shall be notified promptly of any condition that endangers therapy.";
     }
 
     requirement reqDoseLimit : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-001"; } attribute :>> name = "DoseLimitEnforcement";
+        @MemoIdentity { :>> providedId = "REQ-use_case_viewsuse_case_views1"; } attribute :>> name = "DoseLimitEnforcement";
         attribute :>> statement = "The pump shall not deliver more than the prescribed maximum dose in any one-hour window.";
     }
     requirement reqOcclusionAlarm : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-002"; } attribute :>> name = "OcclusionAlarm";
+        @MemoIdentity { :>> providedId = "REQ-use_case_viewsuse_case_views2"; } attribute :>> name = "OcclusionAlarm";
         attribute :>> statement = "The pump shall raise an alarm within two seconds of detecting a downstream occlusion.";
     }
     requirement reqAlarmLoudness : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-003"; } attribute :>> name = "AlarmLoudness";
+        @MemoIdentity { :>> providedId = "REQ-use_case_viewsuse_case_views3"; } attribute :>> name = "AlarmLoudness";
         attribute :>> statement = "An active alarm shall be audible at 65 dBA at one metre.";
     }
 
@@ -45,7 +45,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
     connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqOcclusionAlarm;
     connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqAlarmLoudness;
 
-    view sampleRequirementsView : MemoDiagramView {
+    view needsToRequirements : MemoDiagramView {
         expose needSafeTherapy::**;
         expose needTimelyAlarms::**;
         expose reqDoseLimit;
@@ -55,7 +55,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
         @MemoIdentity { :>> shortDescription = "Stakeholder needs deriving into system requirements, wired by DerivesFrom trace edges."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "req";
-        ref :>> viewpointDefinition = requirementsViewpoint;
+        ref :>> viewpointDefinition = requirementsDiagramViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("DerivesFrom");
         }

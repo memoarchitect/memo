@@ -1,9 +1,9 @@
-// Sequence sample (sequence view kind, `seq` diagram type). A FunctionalFlow
-// owns an ordered chain of FunctionalFlowSteps; each step is `allocate`d to
-// the lifeline (an actor or component) that performs it, and the sequence
-// template lays lifelines out as columns with one row per step in
-// declaration order.
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view {
+package diagram_samples {
+    // Sequence sample (sequence view kind, `seq` diagram type). A FunctionalFlow
+    // owns an ordered chain of FunctionalFlowSteps; each step is `allocate`d to
+    // the lifeline (an actor or component) that performs it, and the sequence
+    // template lays lifelines out as columns with one row per step in
+    // declaration order.
     private import ScalarValues::*;
 
     private import memo_architecture_operational_context_actors::*;
@@ -77,7 +77,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
     allocate startInfusion.stepAlertUser to clinician;
     allocate startInfusion.stepNotify to clinician;
 
-    view sampleSequenceView : MemoDiagramView {
+    view startInfusionSequence : MemoDiagramView {
         expose startInfusion::**;
         expose clinician::**;
         expose pumpController::**;
@@ -88,7 +88,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
         @MemoIdentity { :>> shortDescription = "Start-infusion sequence with combined fragments — loop for sensor monitoring and alt for error handling."; }
         attribute :>> viewKind = DiagramViewKind::sequence;
         attribute :>> diagramType = "seq";
-        ref :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = sequenceViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("FunctionalFlowStep", "User", "LogicalComponent", "Part");
         }

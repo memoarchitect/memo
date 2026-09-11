@@ -1,4 +1,4 @@
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view {
+package diagram_samples {
     private import ScalarValues::*;
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_logical_interfaces::*;
@@ -53,7 +53,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_
         }
     }
 
-    view samplePackageView : MemoDiagramView {
+    view threeLayerPackages : MemoDiagramView {
         expose presentation::**;
         expose domain::**;
         expose infrastructure::**;
@@ -61,7 +61,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_
         @MemoIdentity { :>> shortDescription = "Three-layer package overview — presentation, domain, infrastructure — rendered as a browser membership tree."; }
         attribute :>> viewKind = DiagramViewKind::browser;
         attribute :>> diagramType = "pkg";
-        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        ref :>> viewpointDefinition = browserViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes");
         }

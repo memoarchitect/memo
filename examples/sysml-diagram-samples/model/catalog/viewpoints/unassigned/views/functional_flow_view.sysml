@@ -1,4 +1,4 @@
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view {
+package diagram_samples {
     private import ScalarValues::*;
 
     private import memo_architecture_logical_structure::*;
@@ -132,13 +132,13 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     allocate fxDeliveryFlow.fxDeliver.fxHoldDose to fxPumpSystem.fxDeliverySubsystem.fxActuator;
     allocate fxDeliveryFlow.fxDeliver.fxCloseValve to fxPumpSystem.fxDeliverySubsystem.fxActuator;
 
-    view fxDeliveryView : MemoDiagramView {
+    view medicationDeliveryFlow : MemoDiagramView {
         expose fxDeliveryFlow::**;
         expose fxPumpSystem::**;
         attribute depth = 2;
         @MemoIdentity { :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in)."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ffd";
-        ref :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = actionFlowViewpoint;
     }
 }
