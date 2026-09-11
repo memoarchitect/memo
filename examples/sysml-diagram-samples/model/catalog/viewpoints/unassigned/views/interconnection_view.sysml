@@ -17,7 +17,7 @@ package diagram_samples {
     // `out`-ness relative to the owner, so a boundary port only reads as a
     // source from INSIDE its part. The subassemblies are nested the same way —
     // real containment, not a port-to-port `Composes` edge, which is what
-    // CR-ONT-use_case_views65 used to forbid before nesting made the rule unnecessary.
+    // CR-ONT-65 used to forbid before nesting made the rule unnecessary.
     part coffeeMachine : LogicalComponent {
         attribute :>> name = "Coffee Machine";
         in port mainsWaterIn : DataPort { in item payload : MemoItem; }

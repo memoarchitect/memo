@@ -37,7 +37,7 @@ package diagram_samples {
     }
 
     use case reviewStatus : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views1"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-1"; }
         attribute :>> name = "Review Device Status";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include validateTherapySettings;
@@ -45,7 +45,7 @@ package diagram_samples {
         actor patientActor = patient;
     }
     use case configureTherapy : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views2"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-2"; }
         attribute :>> name = "Configure Therapy";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include reviewStatus;
@@ -54,7 +54,7 @@ package diagram_samples {
         actor patientActor = patient;
     }
     use case maintainDevice : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views3"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-3"; }
         attribute :>> name = "Maintain Device";
         attribute :>> useCaseKind = UseCaseKind::service;
         subject supportingSystem;
@@ -62,14 +62,14 @@ package diagram_samples {
     }
 
     use case documentTreatment : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views4"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-4"; }
         attribute :>> name = "Document Treatment";
         attribute :>> useCaseKind = UseCaseKind::clinical;
     }
 
-    // L2 child of Review Device Status: makes Luse_case_views → L1 → L2 selectable.
+    // L2 child of Review Device Status: makes L0 → L1 → L2 selectable.
     use case validateTherapySettings : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-use_case_viewsuse_case_views5"; }
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-5"; }
         attribute :>> name = "Validate Therapy Settings";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject supportingSystem;
