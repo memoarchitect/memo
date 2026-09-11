@@ -1,4 +1,4 @@
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view {
+package diagram_samples {
     private import ScalarValues::*;
     private import memo_architecture_implementation_hardware_structure::*;
 
@@ -16,7 +16,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
             attribute :>> name = "Branch A.1";
             part leafA11 : HardwareAssembly {
                 attribute :>> name = "Leaf A.1.1";
-                attribute :>> partNumber = "PN-001";
+                attribute :>> partNumber = "PN-use_case_viewsuse_case_views1";
             }
             part leafA12 : HardwareAssembly { attribute :>> name = "Leaf A.1.2"; }
         }
@@ -33,13 +33,13 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
         }
     }
 
-    view sampleTreeView : MemoDiagramView {
+    view hierarchyTreeLayout : MemoDiagramView {
         expose rootA::**;
         attribute depth = 2;
         @MemoIdentity { :>> shortDescription = "One connected dummy hierarchy with varied branch depths for tree layout development."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
-        ref :>> viewpointDefinition = physicalViewpoint;
+        ref :>> viewpointDefinition = treeViewpoint;
         attribute :>> layoutHint = "tree";
         attribute :>> styleHint = "expanded:rootA,rootB,branchA1,branchB1";
         part :>> selectionQuery {

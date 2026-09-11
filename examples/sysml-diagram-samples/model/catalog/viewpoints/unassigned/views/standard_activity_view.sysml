@@ -1,17 +1,17 @@
-// Standard SysML v2 activity sample (actionflow view kind, `afd` diagram type).
-//
-// The view over `activity_example::CustomerProcess`, the standard-SysML activity
-// fixture in `model/sysml_v2_activity_example.sysml`. It exists because the
-// fixture's whole point is the node types `action_flow_view.sysml` does not
-// have — decision, merge, fork, join, accept, send, terminate, and guarded
-// successions. Without a view exposing it the fixture parses into the model and
-// is never drawn, which is indistinguishable from a renderer that cannot draw
-// decisions.
-//
-// Nothing here specializes a MEMO kind: the fixture is plain standard SysML,
-// and that is the property under test. The renderer classifies its nodes from
-// the metamodel (`activity-notation.ts`), not from an ontology kind.
-package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard_activity_view {
+package diagram_samples {
+    // Standard SysML v2 activity sample (actionflow view kind, `afd` diagram type).
+    //
+    // The view over `activity_example::CustomerProcess`, the standard-SysML activity
+    // fixture in `model/sysml_v2_activity_example.sysml`. It exists because the
+    // fixture's whole point is the node types `action_flow_view.sysml` does not
+    // have — decision, merge, fork, join, accept, send, terminate, and guarded
+    // successions. Without a view exposing it the fixture parses into the model and
+    // is never drawn, which is indistinguishable from a renderer that cannot draw
+    // decisions.
+    //
+    // Nothing here specializes a MEMO kind: the fixture is plain standard SysML,
+    // and that is the property under test. The renderer classifies its nodes from
+    // the metamodel (`activity-notation.ts`), not from an ontology kind.
     private import ScalarValues::*;
 
     private import memo_core_relationships::*;
@@ -23,12 +23,12 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    view standardActivityView : MemoDiagramView {
+    view shoppingCheckoutActivity : MemoDiagramView {
         expose CustomerProcess::**;
         attribute depth = 2;
         @MemoIdentity { :>> shortDescription = "Customer login, guarded validation, shopping loop, checkout, credit approval, and explicit completion outcomes."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = functionalViewpoint;
+        ref :>> viewpointDefinition = actionFlowViewpoint;
     }
 }
