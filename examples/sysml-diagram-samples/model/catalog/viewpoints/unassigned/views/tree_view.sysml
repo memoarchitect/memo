@@ -16,7 +16,7 @@ package diagram_samples {
             attribute :>> name = "Branch A.1";
             part leafA11 : HardwareAssembly {
                 attribute :>> name = "Leaf A.1.1";
-                attribute :>> partNumber = "PN-use_case_viewsuse_case_views1";
+                attribute :>> partNumber = "PN-1";
             }
             part leafA12 : HardwareAssembly { attribute :>> name = "Leaf A.1.2"; }
         }
