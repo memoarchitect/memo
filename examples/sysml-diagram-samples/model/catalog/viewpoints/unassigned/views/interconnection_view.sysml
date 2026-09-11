@@ -37,9 +37,27 @@ package diagram_samples {
             in port heaterWaterIn : DataPort { in item payload : MemoItem; }
             out port heatedWaterOut : DataPort { out item payload : MemoItem; }
 
+            part thermostat : LogicalComponent {
+                attribute :>> name = "Thermostat";
+                in port tempReadingIn : DataPort { in item payload : MemoItem; }
+                out port powerCommandOut : DataPort { out item payload : MemoItem; }
+            }
+
             part heatingElement : LogicalComponent {
                 attribute :>> name = "Water Heating Element";
+                in port powerIn : DataPort { in item payload : MemoItem; }
                 out port heaterStatusOut : DataPort { out item payload : MemoItem; }
+
+                part resistiveCoil : LogicalComponent {
+                    attribute :>> name = "Resistive Coil";
+                    in port coilPowerIn : DataPort { in item payload : MemoItem; }
+                    out port heatOut : DataPort { out item payload : MemoItem; }
+                }
+                part temperatureSensor : LogicalComponent {
+                    attribute :>> name = "Temperature Sensor";
+                    in port heatIn : DataPort { in item payload : MemoItem; }
+                    out port sensorReadingOut : DataPort { out item payload : MemoItem; }
+                }
             }
         }
         part brewGroup : LogicalComponent {
@@ -71,6 +89,15 @@ package diagram_samples {
     bind coffeeMachine.brewGroup.brewedCoffeeOut = coffeeMachine.beverageOut;
     bind coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut = coffeeMachine.serviceInterface.diagnostics;
 
+    // Internal flows within the heater assembly
+    flow from coffeeMachine.heaterAssembly.thermostat.powerCommandOut to coffeeMachine.heaterAssembly.heatingElement.powerIn;
+    flow from coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut to coffeeMachine.heaterAssembly.thermostat.tempReadingIn;
+
+    // Internal flows within the heating element
+    flow from coffeeMachine.heaterAssembly.heatingElement.resistiveCoil.heatOut to coffeeMachine.heaterAssembly.heatingElement.temperatureSensor.heatIn;
+    bind coffeeMachine.heaterAssembly.heatingElement.powerIn = coffeeMachine.heaterAssembly.heatingElement.resistiveCoil.coilPowerIn;
+    bind coffeeMachine.heaterAssembly.heatingElement.temperatureSensor.sensorReadingOut = coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut;
+
     // Child IBD view — the heater assembly's own internal wiring. Its subject
     // is `heaterAssembly`, so the parent IBD shows a "navigate to view" button
     // on the Thermal Control Assembly part.
@@ -78,6 +105,19 @@ package diagram_samples {
         expose coffeeMachine.heaterAssembly::**;
         attribute depth = 2;
         @MemoIdentity { :>> shortDescription = "Internal wiring of the Thermal Control Assembly — heating element and its status output."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = ibdViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
+    view heatingElementIBD : MemoDiagramView {
+        expose coffeeMachine.heaterAssembly.heatingElement::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Third-level IBD — resistive coil and temperature sensor inside the heating element."; }
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
         attribute :>> rendererProfile = "ibd";

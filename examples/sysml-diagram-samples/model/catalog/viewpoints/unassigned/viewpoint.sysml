@@ -77,8 +77,8 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned {
 
     viewpoint treeViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-DEMO-TRE"; }
-        attribute :>> name = "Tree Layout";
-        @MemoIdentity { :>> shortDescription = "Connected hierarchy rendered as a tree."; }
+        attribute :>> name = "Decomposition Diagram";
+        @MemoIdentity { :>> shortDescription = "Block decomposition — hierarchical breakdown rendered as a tree."; }
         attribute :>> explorerOrder = 10;
     }
 }

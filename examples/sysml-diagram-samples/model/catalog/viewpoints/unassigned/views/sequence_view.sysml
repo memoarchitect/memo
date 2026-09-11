@@ -59,7 +59,8 @@ package diagram_samples {
         first stepConfirm then stepReadSensor;
         first stepReadSensor then stepCheckVitals;
         first stepCheckVitals then stepRetryDelivery;
-        first stepRetryDelivery then stepAlertUser;
+        first stepCheckVitals then stepAlertUser;
+        first stepRetryDelivery then stepNotify;
         first stepAlertUser then stepNotify;
         first stepNotify then done;
     }

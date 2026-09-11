@@ -23,10 +23,10 @@ package diagram_samples {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    view shoppingCheckoutActivity : MemoDiagramView {
-        expose CustomerProcess::**;
+    view orderFulfillmentActivity : MemoDiagramView {
+        expose FulfillOrder::**;
         attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Customer login, guarded validation, shopping loop, checkout, credit approval, and explicit completion outcomes."; }
+        @MemoIdentity { :>> shortDescription = "Order fulfilment — accept, validate, decide, fork into parallel shipment and invoice, join, notify, send receipt, and terminate."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
         ref :>> viewpointDefinition = actionFlowViewpoint;

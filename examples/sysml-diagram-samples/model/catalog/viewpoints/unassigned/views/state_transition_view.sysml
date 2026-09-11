@@ -74,6 +74,18 @@ package diagram_samples {
         }
     }
 
+    view infusingSubStates : MemoDiagramView {
+        expose pumpModes.infusing::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Sub-states of the Infusing composite state — Priming, Delivering, and Holding with their internal transitions."; }
+        attribute :>> viewKind = DiagramViewKind::statetransition;
+        attribute :>> diagramType = "stm";
+        ref :>> viewpointDefinition = stateMachineViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeElementKinds = ("MemoState");
+        }
+    }
+
     // The machine is one containment tree, so exposing its root reaches every
     // state and transition; the former per-element IncludedIn list restated
     // that tree a second time and is gone with it.
