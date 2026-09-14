@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_context_use_context::*;
@@ -97,51 +98,4 @@ package diagram_samples {
     flow from coffeeMachine.heaterAssembly.heatingElement.resistiveCoil.heatOut to coffeeMachine.heaterAssembly.heatingElement.temperatureSensor.heatIn;
     bind coffeeMachine.heaterAssembly.heatingElement.powerIn = coffeeMachine.heaterAssembly.heatingElement.resistiveCoil.coilPowerIn;
     bind coffeeMachine.heaterAssembly.heatingElement.temperatureSensor.sensorReadingOut = coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut;
-
-    // Child IBD view — the heater assembly's own internal wiring. Its subject
-    // is `heaterAssembly`, so the parent IBD shows a "navigate to view" button
-    // on the Thermal Control Assembly part.
-    view heaterAssemblyIBD : MemoDiagramView {
-        expose coffeeMachine.heaterAssembly::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Internal wiring of the Thermal Control Assembly — heating element and its status output."; }
-        attribute :>> viewKind = DiagramViewKind::interconnection;
-        attribute :>> diagramType = "ibd";
-        attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = ibdViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
-        }
-    }
-
-    view heatingElementIBD : MemoDiagramView {
-        expose coffeeMachine.heaterAssembly.heatingElement::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Third-level IBD — resistive coil and temperature sensor inside the heating element."; }
-        attribute :>> viewKind = DiagramViewKind::interconnection;
-        attribute :>> diagramType = "ibd";
-        attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = ibdViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
-        }
-    }
-
-    view beverageMachineIBD : MemoDiagramView {
-        expose coffeeMachine::**;
-        expose waterSupply::**;
-        expose cup::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces."; }
-        attribute :>> viewKind = DiagramViewKind::interconnection;
-        attribute :>> diagramType = "ibd";
-        // The dedicated IBD renderer (Base -> Ibd class hierarchy): square
-        // wall ports, orange-in/green-out, solid grabbable nested-connector
-        // housings, orthogonal crossing-bridge routing, monochrome shading.
-        attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = ibdViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
-        }
-    }
 }

@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_logical_interfaces::*;
@@ -50,20 +51,6 @@ package diagram_samples {
         part networkAdapter : LogicalComponent {
             attribute :>> name = "Network Adapter";
             inout port netIO : DataPort { inout item payload : MemoItem; }
-        }
-    }
-
-    view threeLayerPackages : MemoDiagramView {
-        expose presentation::**;
-        expose domain::**;
-        expose infrastructure::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Three-layer package overview — presentation, domain, infrastructure — rendered as a browser membership tree."; }
-        attribute :>> viewKind = DiagramViewKind::browser;
-        attribute :>> diagramType = "pkg";
-        ref :>> viewpointDefinition = browserViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("Composes");
         }
     }
 }

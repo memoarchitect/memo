@@ -13,12 +13,12 @@ package memo_viewpoints_functional_functional_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows system functions, their decomposition, and allocation."; }
         attribute :>> description = "Default viewpoint derived from the functions layer for what the system does, independent of how it is structured — function trees, function allocation, and behavior triggers.";
         attribute :>> purpose = "Describe the system's functional decomposition and behavior.";
-        ref :>> stakeholders = (SystemArchitect);
+        ref :>> stakeholders = (systemArchitect);
         attribute :>> stage = WorkflowStageKind::architecture;
         attribute :>> abstractionLevel = "functional";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);
-        ref :>> framedConcerns = (SafetyConcern, PerformanceConcern);
+        ref :>> framedConcerns = (safetyConcern, performanceConcern);
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 2;
         attribute :>> userExtensible = true;

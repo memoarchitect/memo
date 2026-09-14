@@ -13,12 +13,12 @@ package memo_viewpoints_context_context_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows actors, use context, and system boundary."; }
         attribute :>> description = "Default viewpoint derived from the context layer to communicate who interacts with the device, under which use conditions, and where trust or safety boundaries exist.";
         attribute :>> purpose = "Communicate operational context and boundaries.";
-        ref :>> stakeholders = (SystemArchitect);
+        ref :>> stakeholders = (systemArchitect);
         attribute :>> stage = WorkflowStageKind::context;
         attribute :>> abstractionLevel = "system";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
-        ref :>> framedConcerns = (SafetyConcern, InteroperabilityConcern);
+        ref :>> framedConcerns = (safetyConcern, interoperabilityConcern);
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 0;
         // UseEnvironment (IEC 62366-1 3.20) is what the device sits inside —

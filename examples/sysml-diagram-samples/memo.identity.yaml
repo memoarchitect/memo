@@ -113,9 +113,93 @@ elements:
   "activity_example::viewShoppingBasket":
     shortId: "ACT-23"
     uuid: "375e5b93-272a-5639-8aeb-9f0ef3655368"
+  "diagram_samples::beverageMachineIBD":
+    shortId: "MMX-21"
+    uuid: "9b04429d-1689-543f-be10-639808c40569"
+  "diagram_samples::blockDecomposition":
+    shortId: "MMX-22"
+    uuid: "95eec9ee-6d27-54a0-95fd-30497788a33d"
+  "diagram_samples::clinicalSetupActivity":
+    shortId: "MMX-24"
+    uuid: "d0acc030-ef99-5cd6-9c85-db68096d5b53"
+  "diagram_samples::deviceUseCases":
+    shortId: "MMX-26"
+    uuid: "d30e6814-8618-549e-acaa-1625370837c9"
+  "diagram_samples::failureModeGrid":
+    shortId: "MMX-27"
+    uuid: "b80be7c3-fb3e-5ffc-a4b9-c54bd417b840"
+  "diagram_samples::heaterAssemblyIBD":
+    shortId: "MMX-29"
+    uuid: "5d162475-4af5-59b2-a393-7fa0481b3b6e"
+  "diagram_samples::heatingElementIBD":
+    shortId: "MMX-30"
+    uuid: "4f5e81f9-d47f-5452-8f0a-3a1c4c024448"
+  "diagram_samples::infusingSubStates":
+    shortId: "MMX-32"
+    uuid: "e9404af9-a001-55a6-83b0-355b681c0449"
+  "diagram_samples::medicationDeliveryFlow":
+    shortId: "MMX-33"
+    uuid: "c5fb29bf-fc9c-5cae-8864-720dafcdd40d"
+  "diagram_samples::needsToRequirements":
+    shortId: "MMX-34"
+    uuid: "bbe12d65-e273-568f-992a-9e2c7bac650c"
+  "diagram_samples::operationalBrowserTree":
+    shortId: "MMX-35"
+    uuid: "2e2942cd-6ce6-59ef-8794-55525bf5f1a7"
+  "diagram_samples::orderFulfillmentActivity":
+    shortId: "MMX-36"
+    uuid: "ea444e28-cc50-5e38-91aa-af0e5f5d3253"
+  "diagram_samples::processStepsDetail":
+    shortId: "MMX-37"
+    uuid: "4435b2f8-f8e3-590d-9966-edae94d96784"
+  "diagram_samples::pumpModeStateMachine":
+    shortId: "MMX-38"
+    uuid: "06a88341-f717-5b9c-a49a-31963c5d1f03"
+  "diagram_samples::startInfusionSequence":
+    shortId: "MMX-42"
+    uuid: "b056c317-6716-5be4-b1b6-364881dc0dd5"
+  "diagram_samples::systemContextDiagram":
+    shortId: "MMX-44"
+    uuid: "324d59e9-f170-5d4e-9ded-09b39fbcf675"
+  "diagram_samples::therapySessionFlow":
+    shortId: "MMX-45"
+    uuid: "e19229d3-036e-5719-b542-806a824f906b"
+  "diagram_samples::threeLayerPackages":
+    shortId: "MMX-46"
+    uuid: "d4c1fa45-d4f8-5fcd-b176-2c3b39515e3e"
   "memo_examples_sysml_diagram_samples_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "252c5053-0e68-5faa-a399-8ae269bd8bdd"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::actionFlowViewpoint":
+    shortId: "MMX-20"
+    uuid: "85eb87d0-8ca5-502d-ae21-cc055710a548"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::browserViewpoint":
+    shortId: "MMX-23"
+    uuid: "dd9d059d-6c46-516f-bbdb-6e84107027a4"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::contextDiagramViewpoint":
+    shortId: "MMX-25"
+    uuid: "f2538baa-0830-5f80-92d6-e8e2d25516ee"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::gridViewpoint":
+    shortId: "MMX-28"
+    uuid: "c170be77-4da3-5c31-8af1-2857978e3372"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::ibdViewpoint":
+    shortId: "MMX-31"
+    uuid: "740b3a15-1b03-595e-947c-205a9b73d740"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::requirementsDiagramViewpoint":
+    shortId: "MMX-39"
+    uuid: "1e90cb7f-b8fd-52d1-b710-6f31dcad9dc6"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::sequenceViewpoint":
+    shortId: "MMX-40"
+    uuid: "baecca93-b58a-57ac-8ba9-fd5e158185dc"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::stateMachineViewpoint":
+    shortId: "MMX-43"
+    uuid: "1ca843df-423a-5fcb-8964-efe00bb23bef"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::treeViewpoint":
+    shortId: "MMX-47"
+    uuid: "30a7e217-3ccd-5282-bd6e-9002821463ef"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned::useCaseViewpoint":
+    shortId: "MMX-48"
+    uuid: "b910f94f-969b-59f9-a4f4-96eef8b7dd04"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::DataPacket":
     shortId: "INT-1"
     uuid: "1c2455d3-444e-55e3-a835-732c6124e57c"
@@ -170,6 +254,36 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::validate":
     shortId: "VLD-2"
     uuid: "4e3e4fae-0a48-51e3-b313-1db43548ac24"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::communicationModule":
+    shortId: "OPR-17"
+    uuid: "7389cfce-38e6-58d2-b357-6674b5949e0c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::controlSystem":
+    shortId: "OPR-18"
+    uuid: "28a0032e-0078-58c7-98f6-442cf018c7f7"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::maintenanceEngineer":
+    shortId: "USR-11"
+    uuid: "f7e613b5-0563-54d9-b40c-fe63f782f1d7"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::monitorStatus":
+    shortId: "USE-7"
+    uuid: "769e835c-fd83-52a8-b14d-4d318e870bc5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::remoteMonitor":
+    shortId: "USR-13"
+    uuid: "8f7fef14-2c10-5312-b339-9dd50b6b3c42"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::runDiagnostics":
+    shortId: "USE-8"
+    uuid: "763ede74-2eff-5e80-9406-d0057369eb0b"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::safetyModule":
+    shortId: "OPR-19"
+    uuid: "d7afb36e-ea43-57de-a128-a928bf121c1a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::startSystem":
+    shortId: "USE-9"
+    uuid: "874389c3-2888-5b29-8124-b7ae4d2a5584"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::supervisorModule":
+    shortId: "OPR-20"
+    uuid: "30574937-a0d3-57fc-8eaf-a30e5132a9d5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::systemOperator":
+    shortId: "USR-14"
+    uuid: "d39ec991-a1d4-5ef1-beaf-ca12308eb7e3"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::biomedTech":
     shortId: "USR-1"
     uuid: "9cc8effe-15ce-546c-9529-12584fe0a115"
@@ -320,6 +434,9 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::coffeeMachine":
     shortId: "LGC-2"
     uuid: "6ceb9503-7dc7-5b2b-8986-32a04789f386"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::coilPowerIn":
+    shortId: "DTX-15"
+    uuid: "521ce96f-6c85-5a16-956d-7c6040768c07"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::cup":
     shortId: "LGC-3"
     uuid: "dd7c0c89-beef-5b22-919b-9c1398130a06"
@@ -329,6 +446,12 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::diagnostics":
     shortId: "DTX-5"
     uuid: "caeab6b4-e0ba-56f2-bb5d-1227215e5c28"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::heatIn":
+    shortId: "DTX-18"
+    uuid: "fabe87d7-3b9b-5ede-b88c-dc11d083ec91"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::heatOut":
+    shortId: "DTX-19"
+    uuid: "de53c0ed-3fb6-510b-bce7-edcc7fb1defe"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::heatedWaterOut":
     shortId: "DTX-6"
     uuid: "520cb86b-f99f-59c5-b3ac-e0aa0c55a2ce"
@@ -347,9 +470,21 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::mainsWaterIn":
     shortId: "DTX-9"
     uuid: "71792f71-e07d-586f-9925-476b07bea924"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::powerCommandOut":
+    shortId: "DTX-22"
+    uuid: "c5bcb853-b580-570a-86a0-dc9d0f84d530"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::powerIn":
+    shortId: "DTX-23"
+    uuid: "0226a677-58d3-589b-a666-ab6cc9d88aa3"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::resistiveCoil":
+    shortId: "LGC-26"
+    uuid: "024907bc-e2bb-5159-9953-19cf64f23591"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::sampleInterconnectionView":
     shortId: "MMX-5"
     uuid: "65b30607-76ae-56f1-b98b-16f7740a3bcc"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::sensorReadingOut":
+    shortId: "DTX-25"
+    uuid: "45def7ed-ca6f-5b8c-b000-d73852b3f77a"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::serviceInterface":
     shortId: "DTX-10"
     uuid: "d148d4fa-f15a-5fb5-8b39-dd6efbf4979f"
@@ -362,6 +497,15 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::tankWaterOut":
     shortId: "DTX-13"
     uuid: "20a06a57-3671-53c0-9595-7d4f21cf964a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::tempReadingIn":
+    shortId: "DTX-27"
+    uuid: "2710e6e9-db8f-5f3e-9cc9-b2628c6f226a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::temperatureSensor":
+    shortId: "LGC-28"
+    uuid: "5ab7225e-2550-5005-913f-8e5c9d5ebfc5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::thermostat":
+    shortId: "LGC-30"
+    uuid: "1866075d-1565-5d89-92fd-87f635c351a5"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::waterSupply":
     shortId: "LGC-19"
     uuid: "241fecf6-53ca-5f86-89eb-6cad9eb071f2"
@@ -455,6 +599,54 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::opVerify":
     shortId: "OPX-4"
     uuid: "8cbc3a2c-d94c-5085-87db-cd4713352210"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::domain::alarmManager":
+    shortId: "LGC-21"
+    uuid: "5f8a5369-d48e-53cf-b342-2ad7892758ac"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::domain::configIn":
+    shortId: "DTX-16"
+    uuid: "f95f8523-5c3d-5e71-965f-08b44d1cba3c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::domain::configService":
+    shortId: "LGC-22"
+    uuid: "3ad3d28c-9e5a-5fb6-bf41-3af958ca6af1"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::domain::incomingRequest":
+    shortId: "DTX-20"
+    uuid: "1b150495-4310-5edf-8e24-55749b267331"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::domain::statusUpdate":
+    shortId: "DTX-26"
+    uuid: "fbe8fa54-a6fc-5ee3-9333-e486829fbb00"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::domain::therapyEngine":
+    shortId: "LGC-29"
+    uuid: "e417d913-af21-59fc-8748-3602d035229a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::domain::trigger":
+    shortId: "DTX-28"
+    uuid: "c3a16c11-a576-5a6e-922b-1f3c381c411f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::infrastructure::dataStore":
+    shortId: "LGC-24"
+    uuid: "4ad09454-07e5-59f9-b2f2-e94ac998ee55"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::infrastructure::netIO":
+    shortId: "DTX-21"
+    uuid: "37a9f80e-3a87-5898-8b42-39562e0a2327"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::infrastructure::networkAdapter":
+    shortId: "LGC-25"
+    uuid: "831f8941-3e9e-5987-a4a7-d2a674dae624"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::infrastructure::readPort":
+    shortId: "DTX-24"
+    uuid: "86b58aee-00eb-5414-812f-802ce303a78f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::infrastructure::writePort":
+    shortId: "DTX-29"
+    uuid: "1685bfe3-0113-5aec-87c2-0806fc6a757d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::presentation::apiCall":
+    shortId: "DTX-14"
+    uuid: "7c811007-e719-517f-b06f-de02e8a74ad1"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::presentation::configRequest":
+    shortId: "DTX-17"
+    uuid: "c7cb1fa0-57a1-585f-81c1-2944a29e365d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::presentation::dashboardUI":
+    shortId: "LGC-23"
+    uuid: "c6ba0ca8-c023-5282-98f9-c8c97109b044"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::presentation::settingsUI":
+    shortId: "LGC-27"
+    uuid: "ccc2f0b7-10ca-57f3-a8c7-07dbe04e3c96"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::needSafeTherapy":
     shortId: "NDX-1"
     uuid: "a52df37f-873b-5172-81cf-6522c52c4e9c"
@@ -473,6 +665,12 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::sampleRequirementsView":
     shortId: "MMX-6"
     uuid: "57981e86-fd32-5768-85f9-8cfd5cb20712"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::errorHandling":
+    shortId: "UNK-10"
+    uuid: "420a8183-3e29-59a7-abc7-f48abfeb02be"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::monitorLoop":
+    shortId: "UNK-11"
+    uuid: "095196b1-cfbe-5f0e-b8bf-fdd03f201fe5"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::pumpController":
     shortId: "LGC-17"
     uuid: "fb4aa0a7-58b6-55c7-840e-f322041ba181"
@@ -485,6 +683,12 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::startInfusion":
     shortId: "FNC-1"
     uuid: "26cbb195-037d-5951-902d-7f4bca3befc1"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepAlertUser":
+    shortId: "FNC-7"
+    uuid: "7eb77f82-8a8c-5c86-9a05-e3762234b3e1"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepCheckVitals":
+    shortId: "FNC-8"
+    uuid: "7ed80a0a-9cd4-5f28-a905-980a5d05e8a2"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepCommandMotor":
     shortId: "FNC-2"
     uuid: "9b81e439-d254-559e-ab44-7a29804717bf"
@@ -494,9 +698,15 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepNotify":
     shortId: "FNC-4"
     uuid: "178ba199-7e89-5056-98f3-7da2597816af"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepReadSensor":
+    shortId: "FNC-9"
+    uuid: "e9cd75b9-a6b9-5daa-b2e6-e79d1434c64f"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepRequestStart":
     shortId: "FNC-5"
     uuid: "f0c08d7d-2e75-5174-aef6-619a00a9c9cd"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepRetryDelivery":
+    shortId: "FNC-10"
+    uuid: "1bfcf3bd-8d9c-50bf-88c8-a9ff1ac1e193"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::stepValidate":
     shortId: "FNC-6"
     uuid: "2f962e28-d6c4-54b3-9bcb-e1aff13ba1a0"
@@ -587,6 +797,9 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::sampleTreeView":
     shortId: "MMX-9"
     uuid: "48a04dca-a8c4-5cce-837f-eb0dceb543e5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::Specialization":
+    shortId: "MMX-41"
+    uuid: "934ea403-bac5-5a4a-a016-9019fe503c9c"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::clinician":
     shortId: "USR-2"
     uuid: "7d12d2c7-a43c-5c42-9359-f7b080a19293"
@@ -599,6 +812,9 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::maintainDevice":
     shortId: "USE-4"
     uuid: "5c0735a5-2998-5f69-aea3-80cf2d4e6380"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::nursingStaff":
+    shortId: "USR-12"
+    uuid: "e27b5dc4-86fe-55b3-ade3-8373394e1d11"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::patient":
     shortId: "USR-9"
     uuid: "e36b3513-b40a-5a47-b092-fff19b8253d3"

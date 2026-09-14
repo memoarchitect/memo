@@ -13,12 +13,12 @@ package memo_viewpoints_cybersecurity_cybersecurity_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, and mitigations."; }
         attribute :>> description = "Default viewpoint derived from the cybersecurity layer, using STRIDE-style threat categories by default while allowing safety and privacy impacts to be traced into the broader model.";
         attribute :>> purpose = "Communicate cybersecurity design, threat analysis, and cyber risk posture.";
-        ref :>> stakeholders = (SecurityEngineer);
+        ref :>> stakeholders = (securityEngineer);
         attribute :>> stage = WorkflowStageKind::risk;
         attribute :>> abstractionLevel = "analysis";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);
-        ref :>> framedConcerns = (CybersecurityConcern, PrivacyConcern, SafetyConcern);
+        ref :>> framedConcerns = (cybersecurityConcern, privacyConcern, safetyConcern);
         attribute :>> explorerLane = "assurance";
         attribute :>> explorerOrder = 3;
         attribute :>> userExtensible = true;
