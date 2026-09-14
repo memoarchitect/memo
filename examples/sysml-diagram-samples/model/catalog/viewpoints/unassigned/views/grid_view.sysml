@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Grid sample (grid view kind, `fmea` diagram type). The grid template groups
     // rows by kind and derives columns from whichever attributes the rows
     // actually carry — no fixed schema, so three FailureMode rows render as one
@@ -46,19 +47,5 @@ package diagram_samples {
         attribute :>> detectionRating = 4;
         attribute :>> rpn = 112;
         attribute :>> criticality = CriticalityKind::high;
-    }
-
-    view failureModeGrid : MemoDiagramView {
-        expose fmMotorRunaway::**;
-        expose fmAirSensorSilent::**;
-        expose fmOcclusionDrift::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Three FailureMode rows rendered as an FMEA worksheet table — one section, columns auto-derived from the attributes the rows carry."; }
-        attribute :>> viewKind = DiagramViewKind::grid;
-        attribute :>> diagramType = "fmea";
-        ref :>> viewpointDefinition = gridViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("FailureMode");
-        }
     }
 }

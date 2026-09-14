@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Sequence sample (sequence view kind, `seq` diagram type). A FunctionalFlow
     // owns an ordered chain of FunctionalFlowSteps; each step is `allocate`d to
     // the lifeline (an actor or component) that performs it, and the sequence
@@ -24,12 +25,12 @@ package diagram_samples {
 
     // Combined fragment definitions — referenced by steps' `fragment` attribute.
     part monitorLoop {
-        attribute :>> name = "Monitor Loop";
+        attribute name = "Monitor Loop";
         attribute fragmentType = "loop";
         attribute guard = "vitals abnormal";
     }
     part errorHandling {
-        attribute :>> name = "Error Handling";
+        attribute name = "Error Handling";
         attribute fragmentType = "alt";
         attribute fragmentGuards = "[error recoverable]|[else]";
     }
@@ -77,21 +78,4 @@ package diagram_samples {
     allocate startInfusion.stepRetryDelivery to pumpController;
     allocate startInfusion.stepAlertUser to clinician;
     allocate startInfusion.stepNotify to clinician;
-
-    view startInfusionSequence : MemoDiagramView {
-        expose startInfusion::**;
-        expose clinician::**;
-        expose pumpController::**;
-        expose pumpMechanism::**;
-        expose monitorLoop::**;
-        expose errorHandling::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Start-infusion sequence with combined fragments — loop for sensor monitoring and alt for error handling."; }
-        attribute :>> viewKind = DiagramViewKind::sequence;
-        attribute :>> diagramType = "seq";
-        ref :>> viewpointDefinition = sequenceViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("FunctionalFlowStep", "User", "LogicalComponent", "Part");
-        }
-    }
 }

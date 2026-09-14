@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_architecture_implementation_hardware_structure::*;
 
@@ -30,20 +31,6 @@ package diagram_samples {
                 attribute :>> name = "Branch B.1";
                 part leafB11 : HardwareAssembly { attribute :>> name = "Leaf B.1.1"; }
             }
-        }
-    }
-
-    view blockDecomposition : MemoDiagramView {
-        expose rootA::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Block decomposition tree — hardware assemblies with varied branch depths."; }
-        attribute :>> viewKind = DiagramViewKind::general;
-        attribute :>> diagramType = "bdd";
-        ref :>> viewpointDefinition = treeViewpoint;
-        attribute :>> layoutHint = "tree";
-        attribute :>> styleHint = "expanded:rootA,rootB,branchA1,branchB1";
-        part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("Composes");
         }
     }
 }

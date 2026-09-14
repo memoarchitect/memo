@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_use_cases::*;
@@ -89,25 +90,4 @@ package diagram_samples {
     // Status — the general case is browsing status; configuring therapy is a
     // more specific variant.
     connection : Specialization connect configureTherapy to reviewStatus;
-
-    view deviceUseCases : MemoDiagramView {
-        expose patient;
-        expose clinician;
-        expose serviceTechnician;
-        expose nursingStaff;
-        expose reviewStatus;
-        expose configureTherapy;
-        expose maintainDevice;
-        expose documentTreatment;
-        expose validateTherapySettings;
-        @MemoIdentity { :>> shortDescription = "Actors outside a device boundary with include, extend, generalization, hierarchy-level, and orthogonal-routing presentation."; }
-        attribute :>> viewKind = DiagramViewKind::general;
-        attribute :>> diagramType = "ucd";
-        ref :>> viewpointDefinition = useCaseViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("User", "UseCase");
-            attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Extends", "Specialization");
-        }
-        attribute :>> layoutHint = "usecase:level=all;edge=rounded";
-    }
 }

@@ -13,12 +13,12 @@ package memo_viewpoints_software_software_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows software systems, components, SOUP, and software interfaces."; }
         attribute :>> description = "Default viewpoint derived from the software structure layer for IEC 62304 software architecture description — software item decomposition, SOUP inventory, and software-to-software interfaces, distinct from system-level logical decomposition.";
         attribute :>> purpose = "Describe the software architecture for IEC 62304 design documentation.";
-        ref :>> stakeholders = (SoftwareArchitect);
+        ref :>> stakeholders = (softwareArchitect);
         attribute :>> stage = WorkflowStageKind::architecture;
         attribute :>> abstractionLevel = "software";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
-        ref :>> framedConcerns = (SafetyConcern, ReliabilityConcern);
+        ref :>> framedConcerns = (safetyConcern, reliabilityConcern);
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 4;
         attribute :>> userExtensible = true;

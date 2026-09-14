@@ -13,6 +13,20 @@ package memo_examples_sysml_diagram_samples_project {
     // closure from a single entrypoint.
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import diagram_samples::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard_activity_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;

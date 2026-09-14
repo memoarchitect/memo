@@ -13,12 +13,12 @@ package memo_viewpoints_risk_risk_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows hazards, risks, controls, and assurance links."; }
         attribute :>> description = "Default viewpoint derived from the risk layer for ISO 14971-style reasoning across hazard, hazardous situation, harm, control, and verification evidence.";
         attribute :>> purpose = "Communicate safety risk chains and controls.";
-        ref :>> stakeholders = (SafetyEngineer);
+        ref :>> stakeholders = (safetyEngineer);
         attribute :>> stage = WorkflowStageKind::risk;
         attribute :>> abstractionLevel = "analysis";
         attribute :>> outputKind = (ViewOutputKind::table);
         attribute :>> presentationKind = (PresentationKind::riskTable);
-        ref :>> framedConcerns = (SafetyConcern, RegulatoryConcern);
+        ref :>> framedConcerns = (safetyConcern, regulatoryConcern);
         attribute :>> explorerLane = "assurance";
         attribute :>> explorerOrder = 2;
         attribute :>> userExtensible = true;

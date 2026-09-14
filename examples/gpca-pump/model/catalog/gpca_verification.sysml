@@ -4,7 +4,6 @@ package memo_examples_gpca_pump_gpca_verification {
     private import memo_examples_gpca_pump_gpca_architecture::*;
     private import memo_examples_gpca_pump_gpca_risk::*;
     private import memo_examples_gpca_pump_gpca_behavior_modes::*;
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::*;
     private import ScalarValues::*;
     private import memo_core_dimensions::*;   // ElementStatusKind
 

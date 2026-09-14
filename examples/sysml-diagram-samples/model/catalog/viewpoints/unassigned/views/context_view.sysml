@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // System context sample (general view kind, `context` diagram type). The system
     // under consideration is one block; every other element is an external actor,
     // neighbouring system, or use context it interacts with across its boundary.
@@ -36,21 +37,4 @@ package diagram_samples {
     connection connect biomedTech to infusionSystem;
     flow from infusionSystem to pharmacySystem;
     connection : AppliesInContext connect useContext ::> homeContext to subjectElement ::> infusionSystem;
-
-    view systemContextDiagram : MemoDiagramView {
-        expose infusionSystem::**;
-        expose clinician;
-        expose patient;
-        expose biomedTech;
-        expose pharmacySystem;
-        expose homeContext;
-        attribute depth = 1;
-        @MemoIdentity { :>> shortDescription = "Operational system context: one black-box system boundary, its external people, peer systems, operating environment, and named boundary-crossing interactions."; }
-        attribute :>> viewKind = DiagramViewKind::general;
-        attribute :>> diagramType = "context";
-        ref :>> viewpointDefinition = contextDiagramViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("connect", "flow", "AppliesInContext");
-        }
-    }
 }

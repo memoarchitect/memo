@@ -13,12 +13,12 @@ package memo_viewpoints_ui_layout_ui_layout_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows screen captures with the UI element tree laid out over them."; }
         attribute :>> description = "Frames the user interface spatially: a captured rendering of a screen, and the UIElement tree laid out over it by each element's bounds. Supports IEC 62366-1 use-related design review and the UI description in the software design specification, by making 'which control is this, and what does it do' answerable from the picture. There is one tree, not two — the elements carrying the geometry are the same elements carrying the requirements, functions, use errors, and risk controls.";
         attribute :>> purpose = "Review the interface as the user sees it, with every functional area backed by a design record.";
-        ref :>> stakeholders = (UsabilityEngineer, SoftwareArchitect, SafetyEngineer);
+        ref :>> stakeholders = (usabilityEngineer, softwareArchitect, safetyEngineer);
         attribute :>> stage = WorkflowStageKind::architecture;
         attribute :>> abstractionLevel = "implementation";
         attribute :>> outputKind = (ViewOutputKind::diagram, ViewOutputKind::documentSection);
         attribute :>> presentationKind = (PresentationKind::screenLayout);
-        ref :>> framedConcerns = (UsabilityConcern, SafetyConcern);
+        ref :>> framedConcerns = (usabilityConcern, safetyConcern);
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 4;
         attribute :>> defaultViewKind = DiagramViewKind::geometry;
