@@ -37,7 +37,9 @@ package memo_viewpoints_definitions {
          * requirement, and extensible by a project without editing the
          * ontology, which `AudienceKind` and `ConcernKind` were not.
          */
-        ref stakeholders : MemoStakeholder[*];
+        // Redefines the standard library's `RequirementCheck::stakeholders`,
+        // which a viewpoint inherits through `ViewpointCheck`.
+        ref :>> stakeholders : MemoStakeholder[0..*];
         attribute stage : WorkflowStageKind;
         attribute abstractionLevel : String;
         attribute outputKind : ViewOutputKind[*];

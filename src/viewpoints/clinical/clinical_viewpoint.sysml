@@ -13,12 +13,12 @@ package memo_viewpoints_clinical_clinical_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows clinical context, users, use environment, and clinical evidence."; }
         attribute :>> description = "Default viewpoint derived from the context and assurance layers for clinical stakeholders — intended use, patient/clinician interaction, clinical evidence, and clinical safety claims.";
         attribute :>> purpose = "Communicate clinical use context and clinical evidence for the device.";
-        ref :>> stakeholders = (ClinicalEngineer, RegulatoryEngineer);
+        ref :>> stakeholders = (clinicalEngineer, regulatoryEngineer);
         attribute :>> stage = WorkflowStageKind::context;
         attribute :>> abstractionLevel = "clinical";
         attribute :>> outputKind = (ViewOutputKind::documentSection, ViewOutputKind::table);
         attribute :>> presentationKind = (PresentationKind::narrativeSection);
-        ref :>> framedConcerns = (SafetyConcern, ClinicalConcern);
+        ref :>> framedConcerns = (safetyConcern, clinicalConcern);
         attribute :>> explorerLane = "assurance";
         attribute :>> explorerOrder = 4;
         attribute :>> userExtensible = true;

@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_core_relationships::*;
     private import memo_architecture_logical_structure::*;
@@ -78,27 +79,4 @@ package diagram_samples {
          * that is a duplicate of `dependency` rather than something more.
          */
     dependency linkLaneBProcessesInput from laneB to sampleActionFlow::process;
-
-    // Child action-flow view — the process composite action's own steps. Its
-    // subject is `sampleActionFlow.process`, so the parent action-flow shows a
-    // "navigate to view" button on the Process node.
-    view processStepsDetail : MemoDiagramView {
-        expose sampleActionFlow.process::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Internal steps of the Process action — step A through C."; }
-        attribute :>> viewKind = DiagramViewKind::actionflow;
-        attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
-    }
-
-    view therapySessionFlow : MemoDiagramView {
-        expose sampleActionFlow::**;
-        expose laneA;
-        expose laneB;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development."; }
-        attribute :>> viewKind = DiagramViewKind::actionflow;
-        attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
-    }
 }

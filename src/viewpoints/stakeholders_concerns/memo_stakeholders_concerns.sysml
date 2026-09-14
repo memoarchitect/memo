@@ -98,43 +98,43 @@ package memo_viewpoints_stakeholders_concerns {
     part def Availability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-1"; }
         attribute :>> name = "Availability";
-        ref :>> addressesConcerns = (SafetyConcern, ReliabilityConcern, ClinicalConcern);
+        ref :>> addressesConcerns = (safetyConcern, reliabilityConcern, clinicalConcern);
         attribute :>> measure = "Proportion of scheduled procedure time the function is delivered, and time to recover after a fault.";
     }
     part def Performance :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-2"; }
         attribute :>> name = "Performance";
-        ref :>> addressesConcerns = (PerformanceConcern, ClinicalConcern);
+        ref :>> addressesConcerns = (performanceConcern, clinicalConcern);
         attribute :>> measure = "Latency and throughput under the arrival pattern the procedure produces.";
     }
     part def Security :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-3"; }
         attribute :>> name = "Security";
-        ref :>> addressesConcerns = (CybersecurityConcern, PrivacyConcern, SafetyConcern);
+        ref :>> addressesConcerns = (cybersecurityConcern, privacyConcern, safetyConcern);
         attribute :>> measure = "Resistance to a stated threat, and time to detect and recover from a compromise.";
     }
     part def Modifiability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-4"; }
         attribute :>> name = "Modifiability";
-        ref :>> addressesConcerns = (RegulatoryConcern);
+        ref :>> addressesConcerns = (regulatoryConcern);
         attribute :>> measure = "Cost and blast radius of a stated change, including the re-verification it forces.";
     }
     part def Testability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-5"; }
         attribute :>> name = "Testability";
-        ref :>> addressesConcerns = (RegulatoryConcern, SafetyConcern);
+        ref :>> addressesConcerns = (regulatoryConcern, safetyConcern);
         attribute :>> measure = "Probability that a fault present is revealed by the next test, and the effort to observe it.";
     }
     part def Usability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-6"; }
         attribute :>> name = "Usability";
-        ref :>> addressesConcerns = (UsabilityConcern, SafetyConcern, ClinicalConcern);
+        ref :>> addressesConcerns = (usabilityConcern, safetyConcern, clinicalConcern);
         attribute :>> measure = "Task success and use-error rate for the intended user under use conditions (IEC 62366-1).";
     }
     part def Interoperability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-7"; }
         attribute :>> name = "Interoperability";
-        ref :>> addressesConcerns = (InteroperabilityConcern, ClinicalConcern);
+        ref :>> addressesConcerns = (interoperabilityConcern, clinicalConcern);
         attribute :>> measure = "Proportion of exchanges with a named partner system that are correctly understood.";
     }
 
@@ -189,4 +189,31 @@ package memo_viewpoints_stakeholders_concerns {
         @MemoIdentity { :>> providedId = "STK-11"; }
         attribute :>> name = "Usability Engineer";
     }
+
+    // ─── The catalog, as usages ─────────────────────────────────────────
+    //
+    // A viewpoint's `stakeholders` and `framedConcerns`, and a quality
+    // attribute's `addressesConcerns`, are features. What a feature is bound to
+    // has to be a feature as well, not a definition, so each concern and each
+    // stakeholder above has exactly one usage for those bindings to name.
+    concern safetyConcern : SafetyConcern;
+    concern usabilityConcern : UsabilityConcern;
+    concern cybersecurityConcern : CybersecurityConcern;
+    concern performanceConcern : PerformanceConcern;
+    concern interoperabilityConcern : InteroperabilityConcern;
+    concern reliabilityConcern : ReliabilityConcern;
+    concern privacyConcern : PrivacyConcern;
+    concern regulatoryConcern : RegulatoryConcern;
+    concern clinicalConcern : ClinicalConcern;
+    part systemArchitect : SystemArchitect;
+    part softwareArchitect : SoftwareArchitect;
+    part hardwareEngineer : HardwareEngineer;
+    part safetyEngineer : SafetyEngineer;
+    part verificationEngineer : VerificationEngineer;
+    part regulatoryEngineer : RegulatoryEngineer;
+    part projectLead : ProjectLead;
+    part securityEngineer : SecurityEngineer;
+    part privacyEngineer : PrivacyEngineer;
+    part clinicalEngineer : ClinicalEngineer;
+    part usabilityEngineer : UsabilityEngineer;
 }

@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_use_cases::*;
@@ -17,19 +18,15 @@ package diagram_samples {
 
     part controlSystem : OperationalEntity {
         attribute :>> name = "Control System";
-        attribute :>> entityKind = OperationalEntityKind::subsystem;
 
         part supervisorModule : OperationalEntity {
             attribute :>> name = "Supervisor Module";
-            attribute :>> entityKind = OperationalEntityKind::subsystem;
         }
         part safetyModule : OperationalEntity {
             attribute :>> name = "Safety Module";
-            attribute :>> entityKind = OperationalEntityKind::subsystem;
         }
         part communicationModule : OperationalEntity {
             attribute :>> name = "Communication Module";
-            attribute :>> entityKind = OperationalEntityKind::subsystem;
         }
     }
 
@@ -66,23 +63,5 @@ package diagram_samples {
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject controlSystem;
         actor monitorActor = remoteMonitor;
-    }
-
-    view operationalBrowserTree : MemoDiagramView {
-        expose controlSystem::**;
-        expose systemOperator;
-        expose maintenanceEngineer;
-        expose remoteMonitor;
-        expose startSystem::**;
-        expose runDiagnostics::**;
-        expose monitorStatus::**;
-        @MemoIdentity { :>> shortDescription = "Browser membership tree showing operational entities, actors, and use cases — demonstrates the browser view kind with mixed element types."; }
-        attribute :>> viewKind = DiagramViewKind::browser;
-        attribute :>> diagramType = "brw";
-        ref :>> viewpointDefinition = browserViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("OperationalEntity", "User", "UseCase");
-            attribute :>> includeRelationshipKinds = ("Composes", "ParticipatesIn");
-        }
     }
 }

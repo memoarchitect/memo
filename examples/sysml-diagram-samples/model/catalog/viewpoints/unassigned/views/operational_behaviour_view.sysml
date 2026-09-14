@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_core_relationships::*;
@@ -97,14 +98,4 @@ package diagram_samples {
     allocate opSetupFlow.opAdminister.opCheckLockout to opCareSystem.opClinicalTeam.opRoleNurse;
     allocate opSetupFlow.opAdminister.opDeliverDose to opCareSystem.opClinicalTeam.opRoleNurse;
     allocate opSetupFlow.opAdminister.opLogEvent to opCareSystem.opClinicalTeam.opRoleNurse;
-
-    view clinicalSetupActivity : MemoDiagramView {
-        expose opSetupFlow::**;
-        expose opCareSystem::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step."; }
-        attribute :>> viewKind = DiagramViewKind::actionflow;
-        attribute :>> diagramType = "ofd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
-    }
 }
