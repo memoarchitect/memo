@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Requirements sample (general view kind, `req` diagram type). Stakeholder needs
     // on the left derive into system requirements; `DerivesFrom` edges render as the
     // requirements-diagram trace lines.
@@ -44,20 +45,4 @@ package diagram_samples {
     connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqOcclusionAlarm;
     connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqOcclusionAlarm;
     connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqAlarmLoudness;
-
-    view needsToRequirements : MemoDiagramView {
-        expose needSafeTherapy::**;
-        expose needTimelyAlarms::**;
-        expose reqDoseLimit;
-        expose reqOcclusionAlarm;
-        expose reqAlarmLoudness;
-        attribute depth = 1;
-        @MemoIdentity { :>> shortDescription = "Stakeholder needs deriving into system requirements, wired by DerivesFrom trace edges."; }
-        attribute :>> viewKind = DiagramViewKind::general;
-        attribute :>> diagramType = "req";
-        ref :>> viewpointDefinition = requirementsDiagramViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeRelationshipKinds = ("DerivesFrom");
-        }
-    }
 }

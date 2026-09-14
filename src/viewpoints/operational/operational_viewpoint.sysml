@@ -13,12 +13,12 @@ package memo_viewpoints_operational_operational_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities."; }
         attribute :>> description = "Default viewpoint derived from the context, operational, and system layers for how actors use the device — operational scenarios, capabilities, and the functional chains that realize them.";
         attribute :>> purpose = "Communicate how actors interact with the system and which capabilities they invoke.";
-        ref :>> stakeholders = (ProjectLead, SystemArchitect);
+        ref :>> stakeholders = (projectLead, systemArchitect);
         attribute :>> stage = WorkflowStageKind::context;
         attribute :>> abstractionLevel = "operational";
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);
-        ref :>> framedConcerns = (PerformanceConcern, InteroperabilityConcern);
+        ref :>> framedConcerns = (performanceConcern, interoperabilityConcern);
         attribute :>> explorerLane = "architecture";
         attribute :>> explorerOrder = 1;
         attribute :>> userExtensible = true;

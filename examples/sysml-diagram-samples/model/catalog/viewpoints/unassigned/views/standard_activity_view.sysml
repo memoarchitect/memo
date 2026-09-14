@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard_activity_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Standard SysML v2 activity sample (actionflow view kind, `afd` diagram type).
     //
     // The view over `activity_example::CustomerProcess`, the standard-SysML activity
@@ -23,12 +24,4 @@ package diagram_samples {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    view orderFulfillmentActivity : MemoDiagramView {
-        expose FulfillOrder::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Order fulfilment — accept, validate, decide, fork into parallel shipment and invoice, join, notify, send receipt, and terminate."; }
-        attribute :>> viewKind = DiagramViewKind::actionflow;
-        attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
-    }
 }

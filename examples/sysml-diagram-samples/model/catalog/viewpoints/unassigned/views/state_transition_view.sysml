@@ -1,4 +1,5 @@
-package diagram_samples {
+package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view {
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // State transition sample (statetransition view kind, `stm` diagram type). A
     // behaviour machine owns its mode states by containing them, and each native
     // transition lives inside the state whose substates it connects.
@@ -59,30 +60,6 @@ package diagram_samples {
         }
         transition tStop first infusing then idle {
             @TransitionRecord { :>> name = "stop"; :>> trigger = "stopInfusion"; }
-        }
-    }
-
-    view pumpModeStateMachine : MemoDiagramView {
-        expose pumpModes::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding."; }
-        attribute :>> viewKind = DiagramViewKind::statetransition;
-        attribute :>> diagramType = "stm";
-        ref :>> viewpointDefinition = stateMachineViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("StateMachine", "MemoState");
-        }
-    }
-
-    view infusingSubStates : MemoDiagramView {
-        expose pumpModes.infusing::**;
-        attribute depth = 2;
-        @MemoIdentity { :>> shortDescription = "Sub-states of the Infusing composite state — Priming, Delivering, and Holding with their internal transitions."; }
-        attribute :>> viewKind = DiagramViewKind::statetransition;
-        attribute :>> diagramType = "stm";
-        ref :>> viewpointDefinition = stateMachineViewpoint;
-        part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("MemoState");
         }
     }
 
