@@ -169,7 +169,7 @@ package memo_examples_ros_mobile_robot {
         attribute :>> priority = 90;
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> faultContainment = "separate process; watchdog-fed; stops the base on its own timeout";
-        in port safetyScanSubscriber : RosSubscriber {
+        in port scanSubscriber : RosSubscriber {
             ref :>> topic = topicScan;
             attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
             attribute :>> lossBehaviour = "two consecutive misses assert the stop";
@@ -212,7 +212,7 @@ package memo_examples_ros_mobile_robot {
             attribute :>> direction = DirectionKind::output;
         }
     interface scanToSafety : RosTopicInterface
-        connect nodeLidar.scanPublisher to nodeSafetyMonitor.safetyScanSubscriber {
+        connect nodeLidar.scanPublisher to nodeSafetyMonitor.scanSubscriber {
             attribute :>> direction = DirectionKind::output;
         }
     interface cmdVelToSafety : RosTopicInterface
@@ -225,7 +225,7 @@ package memo_examples_ros_mobile_robot {
         }
 
     flow of LaserScan from nodeLidar.scanPublisher.payload to nodeNavigation.scanSubscriber.payload;
-    flow of LaserScan from nodeLidar.scanPublisher.payload to nodeSafetyMonitor.safetyScanSubscriber.payload;
+    flow of LaserScan from nodeLidar.scanPublisher.payload to nodeSafetyMonitor.scanSubscriber.payload;
     flow of VelocityCommand from nodeNavigation.cmdVelPublisher.payload to nodeSafetyMonitor.cmdVelSubscriber.payload;
     flow of EmergencyStop from nodeSafetyMonitor.estopPublisher.payload to nodeNavigation.estopSubscriber.payload;
 

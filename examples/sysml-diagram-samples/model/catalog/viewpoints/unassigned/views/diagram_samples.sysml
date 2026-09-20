@@ -98,8 +98,11 @@ package diagram_samples {
 
     view systemContextDiagram : MemoDiagramView {
         expose infusionSystem::**;
-        expose clinician;
-        expose patient;
+        // Qualified because three samples each declare an actor called
+        // `clinician` and two declare a `patient`: each sample is standalone,
+        // which is the point of a gallery. A bare name would name all of them.
+        expose memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::clinician;
+        expose memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::patient;
         expose biomedTech;
         expose pharmacySystem;
         expose homeContext;
@@ -240,7 +243,7 @@ package diagram_samples {
 
     view startInfusionSequence : MemoDiagramView {
         expose startInfusion::**;
-        expose clinician::**;
+        expose memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::clinician::**;
         expose pumpController::**;
         expose pumpMechanism::**;
         expose monitorLoop::**;
@@ -251,7 +254,11 @@ package diagram_samples {
         attribute :>> diagramType = "seq";
         ref :>> viewpointDefinition = sequenceViewpoint;
         part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("FunctionalFlowStep", "User", "LogicalComponent", "Part");
+            // No "User": each sample in this gallery declares its own actors,
+            // and a kind filter is model-wide, so it would draw every other
+            // sample's clinician onto this one's lifelines. The actors this
+            // view wants are the ones it exposes by name above.
+            attribute :>> includeElementKinds = ("FunctionalFlowStep", "LogicalComponent", "Part");
         }
     }
 
@@ -311,8 +318,8 @@ package diagram_samples {
     // ─── use case view ───────────────────────────────────────────────────
 
     view deviceUseCases : MemoDiagramView {
-        expose patient;
-        expose clinician;
+        expose memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::patient;
+        expose memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::clinician;
         expose serviceTechnician;
         expose nursingStaff;
         expose reviewStatus;
@@ -325,7 +332,9 @@ package diagram_samples {
         attribute :>> diagramType = "ucd";
         ref :>> viewpointDefinition = useCaseViewpoint;
         part :>> selectionQuery {
-            attribute :>> includeElementKinds = ("User", "UseCase");
+            // No "User", for the reason the sequence view gives: the actors
+            // are exposed by name, and a kind filter reaches other samples.
+            attribute :>> includeElementKinds = ("UseCase");
             attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Extends", "Specialization");
         }
         attribute :>> layoutHint = "usecase:level=all;edge=rounded";

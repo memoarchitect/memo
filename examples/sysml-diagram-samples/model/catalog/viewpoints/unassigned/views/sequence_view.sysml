@@ -19,7 +19,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
     private import memo_core_common::MemoIdentity;
 
     // Lifelines — the actor and components each step is allocated to.
-    part lifelineClinician : User { attribute :>> name = "Clinician"; }
+    part clinician : User { attribute :>> name = "Clinician"; }
     part pumpController : LogicalComponent { attribute :>> name = "Pump Controller"; }
     part pumpMechanism : LogicalComponent { attribute :>> name = "Pump Mechanism"; }
 
@@ -69,13 +69,13 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
     // Lane assignment — which lifeline performs each step, in the order the
     // sequence reads top to bottom: clinician requests, controller validates,
     // mechanism drives, controller confirms, clinician is notified.
-    allocate startInfusion.stepRequestStart to lifelineClinician;
+    allocate startInfusion.stepRequestStart to clinician;
     allocate startInfusion.stepValidate to pumpController;
     allocate startInfusion.stepCommandMotor to pumpMechanism;
     allocate startInfusion.stepConfirm to pumpController;
     allocate startInfusion.stepReadSensor to pumpMechanism;
     allocate startInfusion.stepCheckVitals to pumpController;
     allocate startInfusion.stepRetryDelivery to pumpController;
-    allocate startInfusion.stepAlertUser to lifelineClinician;
-    allocate startInfusion.stepNotify to lifelineClinician;
+    allocate startInfusion.stepAlertUser to clinician;
+    allocate startInfusion.stepNotify to clinician;
 }
