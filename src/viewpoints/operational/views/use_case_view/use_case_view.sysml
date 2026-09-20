@@ -21,7 +21,7 @@ package memo_viewpoints_operational_views_use_case_view {
     part :>> selectionQuery {
         @MemoIdentity { :>> providedId = "QRY-OPS-001"; }
         attribute :>> name = "UseCaseQuery";
-        attribute :>> includeElementKinds = ("Actor", "UseContext", "OperativeScenario[scenarioKind=operative]");
+        attribute :>> includeElementKinds = ("OperationalParticipant", "UseContext", "OperativeScenario");
         attribute :>> includeLayers = ("context", "operational");
         attribute :>> rationaleText = "Auto-populate the use case view from the context and operational layers.";
     }

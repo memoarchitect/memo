@@ -258,7 +258,7 @@ package diagram_samples {
             // and a kind filter is model-wide, so it would draw every other
             // sample's clinician onto this one's lifelines. The actors this
             // view wants are the ones it exposes by name above.
-            attribute :>> includeElementKinds = ("FunctionalFlowStep", "LogicalComponent", "Part");
+            attribute :>> includeElementKinds = ("FunctionalFlowStep", "LogicalComponent");
         }
     }
 
@@ -335,7 +335,7 @@ package diagram_samples {
             // No "User", for the reason the sequence view gives: the actors
             // are exposed by name, and a kind filter reaches other samples.
             attribute :>> includeElementKinds = ("UseCase");
-            attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Extends", "Specialization");
+            attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Specialization");
         }
         attribute :>> layoutHint = "usecase:level=all;edge=rounded";
     }
