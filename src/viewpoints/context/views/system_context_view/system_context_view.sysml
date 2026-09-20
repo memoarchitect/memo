@@ -21,7 +21,7 @@ package memo_viewpoints_context_views_system_context_view {
     part :>> selectionQuery {
         @MemoIdentity { :>> providedId = "QRY-CTX-001"; }
         attribute :>> name = "SystemContextQuery";
-        attribute :>> includeElementKinds = ("Actor", "UseContext", "TrustBoundary");
+        attribute :>> includeElementKinds = ("OperationalParticipant", "UseContext", "TrustBoundary");
         attribute :>> includeLayers = ("context");
         attribute :>> rationaleText = "Auto-populate the system context view from the context layer.";
     }

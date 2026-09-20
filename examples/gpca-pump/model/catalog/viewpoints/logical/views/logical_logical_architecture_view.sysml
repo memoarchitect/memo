@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_logical_archite
         part :>> selectionQuery {
             @MemoIdentity { :>> providedId = "QRY-LOG-001"; }
             attribute :>> name = "GPCA_LogicalArchitectureQuery";
-            attribute :>> includeElementKinds = ("LogicalComponent", "Interface", "Function");
+            attribute :>> includeElementKinds = ("LogicalComponent", "Interface", "MemoFunction");
             attribute :>> includeLayers = ("functions", "logical_structure", "interfaces");
             attribute :>> selectionExpression = "product == 'GPCA' and concern contains therapy control";
             attribute :>> rationaleText = "Auto-populate the GPCA logical architecture view from the core product model.";

@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
         part :>> selectionQuery {
             @MemoIdentity { :>> providedId = "QRY-BHV-103"; }
             attribute :>> name = "GPCA_ActionFlowQuery";
-            attribute :>> includeElementKinds = ("ActionUsage");
+            attribute :>> includeElementKinds = ("MemoAction");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the action flow view from the behavior layer's action usages.";
         }

@@ -32,7 +32,7 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_use_cas
         part :>> selectionQuery {
             @MemoIdentity { :>> providedId = "QRY-OPS-101"; }
             attribute :>> name = "GPCA_UseCaseQuery";
-            attribute :>> includeElementKinds = ("Actor", "User", "UseCase");
+            attribute :>> includeElementKinds = ("OperationalParticipant", "UseCase");
             attribute :>> includeRelationshipKinds = ("ParticipatesIn");
             attribute :>> includeLayers = ("context", "operational");
             attribute :>> selectionExpression = "product == 'GPCA'";
