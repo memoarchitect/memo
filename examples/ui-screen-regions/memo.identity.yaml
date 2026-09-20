@@ -8,6 +8,21 @@ elements:
   "memo_examples_ui_screen_regions_architecture_functional_functions::fnManageInfusionDisplay":
     shortId: "SYS-1"
     uuid: "9b45772b-7d7d-53e2-97b6-f10d92dc10e4"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnManageInfusionDisplay::fnPresentBatteryStatus":
+    shortId: "SYS-2"
+    uuid: "96aa292d-dbbf-514d-be51-baa7c23b4a4b"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnManageInfusionDisplay::fnPresentDeliveryStatus":
+    shortId: "SYS-3"
+    uuid: "0b73c191-7803-58ab-a4d1-4630b3528825"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnManageInfusionDisplay::fnPresentLocalTime":
+    shortId: "SYS-4"
+    uuid: "daa13f3a-026a-5208-bbda-c6d4ef7f4684"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnManageInfusionDisplay::fnSetInfusionRate":
+    shortId: "SYS-5"
+    uuid: "84ed7035-7c68-51e5-bf83-bb64d76f2df4"
+  "memo_examples_ui_screen_regions_architecture_functional_functions::fnManageInfusionDisplay::fnValidateDrugSelection":
+    shortId: "SYS-6"
+    uuid: "710bc732-5946-52ab-a720-ad7284248936"
   "memo_examples_ui_screen_regions_architecture_functional_functions::fnPresentBatteryStatus":
     shortId: "SYS-2"
     uuid: "96aa292d-dbbf-514d-be51-baa7c23b4a4b"
@@ -35,12 +50,27 @@ elements:
   "memo_examples_ui_screen_regions_architecture_implementation_ui::elMainScreen":
     shortId: "UIE-4"
     uuid: "20084808-1df8-5082-a777-5630903a9d17"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elMainScreen::elDrugSelectorRegion":
+    shortId: "UIE-3"
+    uuid: "d920531b-65e4-5b63-a450-fc5c3bd33646"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elMainScreen::elDrugSelectorRegion::elDrugMenuExpanded":
+    shortId: "UIE-1"
+    uuid: "efcfbe2b-af48-51dc-81e2-e46c067bbf46"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elMainScreen::elDrugSelectorRegion::elDrugSelectorClosed":
+    shortId: "UIE-2"
+    uuid: "7b27669f-d11c-5580-91cd-9353ef088458"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elMainScreen::uiElement12":
+    shortId: "UIE-7"
+    uuid: "1b7cc4c8-3e31-5ba8-b99b-5069491aeb0a"
   "memo_examples_ui_screen_regions_architecture_implementation_ui::elRateConfirmDialog":
     shortId: "UIE-5"
     uuid: "5a7e1a4a-a1af-5294-817e-2dcf64f7717e"
   "memo_examples_ui_screen_regions_architecture_implementation_ui::elSettingsScreen":
     shortId: "UIE-6"
     uuid: "61a7a5d8-ab25-5fc7-b41f-340ab47b7b56"
+  "memo_examples_ui_screen_regions_architecture_implementation_ui::elSettingsScreen::elRateConfirmDialog":
+    shortId: "UIE-5"
+    uuid: "5a7e1a4a-a1af-5294-817e-2dcf64f7717e"
   "memo_examples_ui_screen_regions_architecture_implementation_ui::uiElement12":
     shortId: "UIE-7"
     uuid: "1b7cc4c8-3e31-5ba8-b99b-5069491aeb0a"
@@ -74,6 +104,9 @@ elements:
   "memo_examples_ui_screen_regions_artifacts_reviews_comments::cmtStatusBarScope":
     shortId: "MDL-3"
     uuid: "b9b7b12d-f223-57ea-8d1b-da58b140b671"
+  "memo_examples_ui_screen_regions_artifacts_reviews_comments::cmtStatusBarScope::cmtStatusBarReply":
+    shortId: "MDL-2"
+    uuid: "d99e8642-f5e1-5d31-8cb0-174b25cd1249"
   "memo_examples_ui_screen_regions_artifacts_reviews_notes::noteCaptureReview":
     shortId: "MDL-4"
     uuid: "0e6d1f04-2e80-52dd-90f3-4eeed99b5799"
