@@ -8,6 +8,9 @@ elements:
   "memo_examples_temperature_alarm::actAcknowledgeAlarm":
     shortId: "OPR-1"
     uuid: "ea2b4f6a-a25b-5c93-84a2-2c149dc5b870"
+  "memo_examples_temperature_alarm::actAcknowledgeAlarm::taskAckAlarm":
+    shortId: "OPR-2"
+    uuid: "2a25bec5-50f6-5bef-ad59-750b277515db"
   "memo_examples_temperature_alarm::chMonitor":
     shortId: "LGC-1"
     uuid: "0f804fdc-4ead-5205-a108-91ce7e4b4d04"

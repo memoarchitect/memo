@@ -146,6 +146,258 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::gpcaDevice":
     shortId: "PHY-8"
     uuid: "d7a4fb73-4342-54ad-b33d-9046c5c017ad"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::devDbIn":
+    shortId: "PHY-3"
+    uuid: "393578eb-3b77-5805-9b14-434aba8a99f8"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::devGpcaOut":
+    shortId: "PHY-4"
+    uuid: "85c3cf17-e2ff-5bb1-bfde-4bd203f63da4"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::devOpCmdIn":
+    shortId: "PHY-5"
+    uuid: "4f792691-256f-591e-b680-96855e956233"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::devPatientIn":
+    shortId: "PHY-6"
+    uuid: "abe6bf46-2ef1-52ec-bc6c-f18112565e28"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::devPresIn":
+    shortId: "PHY-7"
+    uuid: "08a25076-c0de-58d3-b914-836ac6542090"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaActuators":
+    shortId: "HRD-10"
+    uuid: "c808ef44-f179-5b04-a24f-5b9978ae4e6f"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaActuators::actGpcaOut":
+    shortId: "PHY-1"
+    uuid: "c49ebe8c-b7c9-5a8c-9a57-1a816a248d59"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaActuators::actGpcaSwIn":
+    shortId: "PHY-2"
+    uuid: "118a7d28-6157-505b-ae40-fdd223f5e524"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors":
+    shortId: "HRD-11"
+    uuid: "cdc8e1c0-e91b-58c1-9feb-2e98b2ee9826"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsConstOut":
+    shortId: "PHY-14"
+    uuid: "f56dad84-dd81-5531-8e63-2ac63098a4aa"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsDbIn":
+    shortId: "PHY-15"
+    uuid: "1dc81c4a-e698-5a24-b224-8925d8060167"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsDbOut":
+    shortId: "PHY-16"
+    uuid: "5e60e0b0-068b-5a79-bcb3-59da0b687531"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsOpCmdIn":
+    shortId: "PHY-17"
+    uuid: "f3af0bba-b47a-5de2-8671-7abcabf24a58"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsOpCmdOut":
+    shortId: "PHY-18"
+    uuid: "47b744ee-37a4-5447-a5ed-c9505c4f137b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsPatientIn":
+    shortId: "PHY-19"
+    uuid: "446174b9-46b0-5155-a8f4-35bcaeb6c28a"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsPatientOut":
+    shortId: "PHY-20"
+    uuid: "736b0daa-63a1-57b1-b9dd-584a77ff6eb8"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsPresIn":
+    shortId: "PHY-21"
+    uuid: "2e82d98f-68b0-5dd9-9808-e69543127e44"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsPresOut":
+    shortId: "PHY-22"
+    uuid: "03d45f7b-f681-5212-bbde-0e344d0e42b2"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsSensorOut":
+    shortId: "PHY-23"
+    uuid: "3f7e9f95-e094-5f17-ab02-43daad961bf9"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware":
+    shortId: "SFT-3"
+    uuid: "08bdacae-a613-5b49-8933-89e241f55cbb"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm":
+    shortId: "SFT-1"
+    uuid: "110f17f9-be56-511e-9064-e4ff9a3c1d81"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmAlarmOut":
+    shortId: "SFT-7"
+    uuid: "0b9fdf8e-97d5-5df8-94e1-e69d83d2362d"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmConfigIn":
+    shortId: "SFT-8"
+    uuid: "d1a2d48c-ee07-55ee-b9a1-b64c5141bbcd"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmConstIn":
+    shortId: "SFT-9"
+    uuid: "738472a6-4ec2-5f41-b9c7-b3f811618c22"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmDbIn":
+    shortId: "SFT-10"
+    uuid: "1e2103dd-602d-5397-bf90-18f86010d8eb"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmImIn":
+    shortId: "SFT-11"
+    uuid: "56012c66-9181-5619-8db7-40d0e16bac91"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmOpCmdIn":
+    shortId: "SFT-12"
+    uuid: "d0fd7f35-80fe-552d-81a7-eeea4885a370"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmSensorIn":
+    shortId: "SFT-13"
+    uuid: "48acd08a-3c96-5257-b845-23ab561dc711"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmSysMonIn":
+    shortId: "SFT-14"
+    uuid: "203dd019-be6e-5c0a-a6ef-d1766354ec5e"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmSysStatIn":
+    shortId: "SFT-15"
+    uuid: "60306381-2fba-5189-9c41-804a761e6c5e"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmTlmModeIn":
+    shortId: "SFT-16"
+    uuid: "3674eb47-cc20-5802-9128-c496c309396a"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config":
+    shortId: "SFT-2"
+    uuid: "2ff77950-188f-5ad3-956b-a75e8ef8663f"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigConfigOut":
+    shortId: "SFT-17"
+    uuid: "5721d0ae-87fb-5af5-aba9-fc666a1f540b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigConstIn":
+    shortId: "SFT-18"
+    uuid: "1323b0fd-aef6-5bf0-a4f6-5938ab61ea10"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigDbIn":
+    shortId: "SFT-19"
+    uuid: "b96133a4-40d7-5ce3-b955-24a55fa92009"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigOpCmdIn":
+    shortId: "SFT-20"
+    uuid: "c68d646d-4db2-5bee-a97f-daf8660d99f9"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigPresIn":
+    shortId: "SFT-21"
+    uuid: "859b7b60-0a34-59e1-8fff-f201c202a337"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigSysStatIn":
+    shortId: "SFT-22"
+    uuid: "3d52b8b7-f163-5287-94b1-e199072d206e"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigTlmModeIn":
+    shortId: "SFT-23"
+    uuid: "99c20d9f-7da8-5ad4-ab38-6ae6d0ffba8e"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr":
+    shortId: "SFT-4"
+    uuid: "570c7d1e-7cab-58ed-a4f8-fc899db694f0"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImAlarmIn":
+    shortId: "SFT-27"
+    uuid: "966d3279-3fe4-525d-b10b-a8c8332b68c4"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImConfigIn":
+    shortId: "SFT-28"
+    uuid: "f92baa07-dec3-5e46-b400-1f9cc43ecf17"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImImOut":
+    shortId: "SFT-29"
+    uuid: "abc1e282-11aa-5299-9f68-ad2b0d9a4f53"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImOpCmdIn":
+    shortId: "SFT-30"
+    uuid: "3c406408-ba49-5e79-b857-da937e3059d1"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImPatientIn":
+    shortId: "SFT-31"
+    uuid: "3f5633f9-71ed-55fa-9c45-5f85f31bd3ff"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImSysStatIn":
+    shortId: "SFT-32"
+    uuid: "b5e91a0e-0f79-55a9-9ccc-e8fbb3426d04"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImTlmModeIn":
+    shortId: "SFT-33"
+    uuid: "58ba100c-4df1-558b-a40b-c4e97ad2ab38"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging":
+    shortId: "SFT-5"
+    uuid: "fab98ac1-8487-5d04-8e48-040f0ad60b81"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogAlarmIn":
+    shortId: "SFT-34"
+    uuid: "5fb10131-3307-5871-bc89-f25daa6b6930"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogConfigIn":
+    shortId: "SFT-35"
+    uuid: "74abe28f-8785-5697-8f92-cae13aa1525f"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogImIn":
+    shortId: "SFT-36"
+    uuid: "39d04ac0-dd64-50c3-b7e4-7797910546a1"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogLogOut":
+    shortId: "SFT-37"
+    uuid: "036f4979-131c-50a0-aace-20adecdd00bc"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogSysStatIn":
+    shortId: "SFT-38"
+    uuid: "c6dbd8b7-3017-562b-b527-9b0c6247f906"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogTlmModeIn":
+    shortId: "SFT-39"
+    uuid: "595789cc-258c-530a-ab14-ab731b4cbc34"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus":
+    shortId: "SFT-6"
+    uuid: "ec3d1795-6601-521d-a420-84c7e2609bee"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputAlarmIn":
+    shortId: "SFT-41"
+    uuid: "e943cee5-d97e-54a4-8e15-d16f7dd93f09"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputConfigIn":
+    shortId: "SFT-42"
+    uuid: "72c1e602-3cd2-571d-b472-b069803cfb7a"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputGpcaSwOut":
+    shortId: "SFT-43"
+    uuid: "568300a8-e3c3-5a88-96d3-6b4beef1c96d"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputImIn":
+    shortId: "SFT-44"
+    uuid: "f3254de9-b396-5f27-9f39-08918914540d"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputLogIn":
+    shortId: "SFT-45"
+    uuid: "764e0728-f341-5721-953d-927867256405"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputSysMonIn":
+    shortId: "SFT-46"
+    uuid: "69637700-9b17-5002-ac2c-b90218d060cb"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputSysStatIn":
+    shortId: "SFT-47"
+    uuid: "fbe7a6fb-538d-5b9d-b1e9-9538ef8031ce"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputTlmModeIn":
+    shortId: "SFT-48"
+    uuid: "5499f645-1929-5dd6-8d38-eb3b6fef268b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portConstIn":
+    shortId: "SFT-24"
+    uuid: "b143b27f-f142-5712-aa1d-55fb81aebc3a"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portDbIn":
+    shortId: "SFT-25"
+    uuid: "59b79452-c6d3-5d03-bdef-32616cb1370b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portGpcaSwOut":
+    shortId: "SFT-26"
+    uuid: "c72f371f-66b8-539a-b275-26f23839b995"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portOpCmdIn":
+    shortId: "SFT-40"
+    uuid: "1ec61ab0-01f2-5560-a76b-3404f68f7af3"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portPatientIn":
+    shortId: "SFT-49"
+    uuid: "37810df2-852d-5559-bb30-4c5b5f2671ba"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portPresIn":
+    shortId: "SFT-50"
+    uuid: "089c23c1-565b-59df-b23d-b515c5d88468"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portSensorIn":
+    shortId: "SFT-51"
+    uuid: "8eb5a80d-5fab-5df7-b00b-a67c986cb040"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemMonitor":
+    shortId: "SFT-64"
+    uuid: "ad826d0b-9a71-5ebc-8f17-b2a280c41069"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemMonitor::portSysMonSysMonOut":
+    shortId: "SFT-52"
+    uuid: "d0231597-ae2b-56c1-94e6-7eae02beb5ee"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemMonitor::portSysMonTlmModeIn":
+    shortId: "SFT-53"
+    uuid: "79c1b721-b502-5b31-a1fe-ffa7b4c8a703"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus":
+    shortId: "SFT-65"
+    uuid: "a1d8523c-3326-573b-9cd6-c73baa60ad73"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatConfigIn":
+    shortId: "SFT-54"
+    uuid: "1047a0a6-5aa2-5870-a5c6-258e685b6614"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatConstIn":
+    shortId: "SFT-55"
+    uuid: "1d6aa2f4-3d64-5a4b-b791-da97017d1e90"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatImIn":
+    shortId: "SFT-56"
+    uuid: "d059c5cc-c3a3-537e-b108-a234e113bbe7"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatSensorIn":
+    shortId: "SFT-57"
+    uuid: "1c4123ba-517a-5e2b-9983-0bc9489661d5"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatSysStatOut":
+    shortId: "SFT-58"
+    uuid: "61a7161f-42d6-5514-bc81-d3457dbeed00"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatTlmModeIn":
+    shortId: "SFT-59"
+    uuid: "a946b2e6-e43f-5dba-b275-f013a9212a37"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::tlm":
+    shortId: "SFT-66"
+    uuid: "6c31d521-06aa-5674-8188-22e57494d7b6"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::tlm::portTlmConstIn":
+    shortId: "SFT-60"
+    uuid: "b0c7e352-b2e8-5c4b-abaf-3e129d21231b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::tlm::portTlmOpCmdIn":
+    shortId: "SFT-61"
+    uuid: "45a07968-5bcb-521b-b2a1-7d0ac221d274"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::tlm::portTlmTlmModeOut":
+    shortId: "SFT-62"
+    uuid: "10622647-2bae-5c10-83e0-ff2dbbb92cc2"
   "memo_examples_gpca_pump_gpca_architecture::gpcaDeviceSensors":
     shortId: "HRD-11"
     uuid: "cdc8e1c0-e91b-58c1-9feb-2e98b2ee9826"
@@ -452,6 +704,24 @@ elements:
   "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow":
     shortId: "ACT-16"
     uuid: "a3c8d1c2-9b05-5f68-9853-3150571a55b0"
+  "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::acquireSensors":
+    shortId: "ACT-2"
+    uuid: "ca87ba1e-a66f-5ada-bb20-162099acdc1c"
+  "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::actuateMotor":
+    shortId: "ACT-3"
+    uuid: "7c5e0fbd-2c4a-530e-b1d7-f081e968d97e"
+  "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::computeFlow":
+    shortId: "ACT-8"
+    uuid: "30378bcd-5e3a-5c8b-b3b4-c161dc9e1d05"
+  "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::enforceLimits":
+    shortId: "ACT-13"
+    uuid: "069e53f7-6c9e-5320-8d58-46a100dbbb49"
+  "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::evaluateAlarms":
+    shortId: "ACT-15"
+    uuid: "c614903b-3ee1-53b9-b1eb-3642cdb47490"
+  "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::logEvent":
+    shortId: "ACT-17"
+    uuid: "7028388e-e31d-51c2-946f-44cf088f5fdd"
   "memo_examples_gpca_pump_gpca_behavior_actions::logEvent":
     shortId: "ACT-17"
     uuid: "7028388e-e31d-51c2-946f-44cf088f5fdd"
@@ -521,6 +791,90 @@ elements:
   "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine":
     shortId: "STT-1"
     uuid: "adbf2a0d-e32f-5527-898b-0d2d363d5124"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeOFF":
+    shortId: "MMX-41"
+    uuid: "34db9680-371a-5858-9065-658612f43847"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeON":
+    shortId: "MMX-42"
+    uuid: "48516c5a-a57a-536f-8a6f-2a4be84a82dc"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeON::modeIDLE":
+    shortId: "MMX-40"
+    uuid: "035e94ba-3ef4-530a-8b08-d61644cab121"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeON::modeTHERAPY":
+    shortId: "MMX-46"
+    uuid: "662b3289-5569-5866-9485-d16704975f12"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeON::modeTHERAPY::modeACTIVE":
+    shortId: "MMX-38"
+    uuid: "bbbdaf77-0e92-5dbf-8a8c-02f18f0d2857"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeON::modeTHERAPY::modeACTIVE::modeBASAL":
+    shortId: "MMX-39"
+    uuid: "7b953a4f-32f9-54cc-b909-c8188115a532"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeON::modeTHERAPY::modeACTIVE::modePBOLUS":
+    shortId: "MMX-44"
+    uuid: "9fe2a51c-3088-51a9-9581-27d8a5e49561"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeON::modeTHERAPY::modeACTIVE::modeSQUARE":
+    shortId: "MMX-45"
+    uuid: "3d52c9ef-3fb3-56be-9894-114d41350103"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::modeON::modeTHERAPY::modePAUSED":
+    shortId: "MMX-43"
+    uuid: "80fdccb6-6db3-51ea-935b-5d7e739a210e"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trAlarmPause":
+    shortId: "UNK-1"
+    uuid: "0e37d0c3-fd37-550c-bc7d-7171e16e87ba"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trAllInhibited":
+    shortId: "UNK-2"
+    uuid: "006d0c28-9af2-5c4b-b573-ba0830478121"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trBasalInhibit":
+    shortId: "UNK-3"
+    uuid: "c014a685-58ab-52c2-9419-96dc47da151e"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trInfusionComplete":
+    shortId: "UNK-4"
+    uuid: "2e2ea01b-2e5c-553b-bf48-c578430f1f3f"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trInitiateWhileInhibited":
+    shortId: "UNK-5"
+    uuid: "8d41b025-b6ad-58bf-b2ea-e5f583531674"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trManualInhibit":
+    shortId: "UNK-6"
+    uuid: "4463fdc9-80a1-5c91-9af8-f919026f5fae"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trPatientBolus":
+    shortId: "UNK-7"
+    uuid: "130c77f7-2c90-596b-86c8-79b94c609ff1"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trPatientBolusInhibit":
+    shortId: "UNK-8"
+    uuid: "5050945a-eac1-598b-8d1c-8b1400bb804b"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trPatientBolusToBasal":
+    shortId: "UNK-9"
+    uuid: "34bf81c9-bea1-56ee-8515-548576a7fb57"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trPatientBolusToSquare":
+    shortId: "UNK-10"
+    uuid: "9bae1c5a-309b-5185-a71f-e21eb3c1a64b"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trPausedStop":
+    shortId: "UNK-11"
+    uuid: "b635da37-77af-59d4-9649-6ab114ca5d7b"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trResume":
+    shortId: "UNK-12"
+    uuid: "96da1cbe-b58e-5fde-a546-3cbe7b75117a"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trSquareBolus":
+    shortId: "UNK-13"
+    uuid: "b14bb8c2-f6eb-5cc3-aaae-da8123364b88"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trSquareInhibit":
+    shortId: "UNK-14"
+    uuid: "e5623e25-ee5c-5f21-8b9e-9202e0c786fd"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trSquareToBasal":
+    shortId: "UNK-15"
+    uuid: "47a539e8-2322-5dc3-8fb8-b06255c8cd2d"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trSquareToPatientBolus":
+    shortId: "UNK-16"
+    uuid: "705f1cd5-66c1-5051-ba07-468f386a7773"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trStartTherapy":
+    shortId: "UNK-17"
+    uuid: "cacbd70c-9ba9-5eba-9df0-83f8e0d06c47"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trSystemStart":
+    shortId: "UNK-18"
+    uuid: "f6a8b537-b4a8-50d4-a320-57efbb3759a5"
+  "memo_examples_gpca_pump_gpca_behavior_modes::topLevelModeMachine::trSystemStop":
+    shortId: "UNK-19"
+    uuid: "b6b3da6f-7a82-542b-940d-c50e89238c75"
   "memo_examples_gpca_pump_gpca_behavior_modes::trAlarmPause":
     shortId: "UNK-1"
     uuid: "0e37d0c3-fd37-550c-bc7d-7171e16e87ba"
@@ -608,6 +962,15 @@ elements:
   "memo_examples_gpca_pump_gpca_behavior_subsystems::fnAcquireSensors":
     shortId: "SYS-23"
     uuid: "524aedf7-168b-5828-9c69-0111c5214154"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::fnAcquireSensors::cfnAggregateSensorStatus":
+    shortId: "CMP-43"
+    uuid: "a5af194d-7135-5480-ac0c-8a0261fcab64"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::fnAcquireSensors::cfnDetectAirInLine":
+    shortId: "CMP-44"
+    uuid: "ab356033-20ef-5bcd-8172-5740f7440c3a"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::fnAcquireSensors::cfnMeasureFlowRate":
+    shortId: "CMP-45"
+    uuid: "79073cbd-e4ec-59cb-8c16-4e9537dcc991"
   "memo_examples_gpca_pump_gpca_behavior_subsystems::fnAnnunciate":
     shortId: "SYS-24"
     uuid: "c8d59bbe-6e0b-57d1-a4e4-16a6fb30e3cb"
@@ -1241,12 +1604,96 @@ elements:
   "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy":
     shortId: "WFL-1"
     uuid: "520e1081-229e-5232-84b8-80970a65d28f"
+  "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy::osLockoutBolus":
+    shortId: "OPR-27"
+    uuid: "5e82642d-8dc6-579d-a3dc-db111b9aec2b"
+  "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy::osLockoutBolus::oaRejectBolusDuringLockout":
+    shortId: "OPR-15"
+    uuid: "0a40a930-47f6-5c4e-ab60-6142e492a1b3"
+  "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy::osLockoutBolus::oaRejectBolusDuringLockout::checkLockout":
+    shortId: "ACT-7"
+    uuid: "22c1a8f2-67f3-5505-b1c0-1fe9e340f5a8"
+  "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy::osLockoutBolus::oaRejectBolusDuringLockout::rejectAndLog":
+    shortId: "ACT-21"
+    uuid: "e7c0ea65-049b-57d6-90aa-79c3e7baf14f"
+  "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy::osNominalTherapy":
+    shortId: "OPR-28"
+    uuid: "5573ee1c-8ed1-541f-81b9-01162d28fc17"
+  "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy::osNominalTherapy::oaCompleteNominalTherapy":
+    shortId: "OPR-9"
+    uuid: "959dd30f-d3fc-5dd7-b0dd-50b691d635c4"
+  "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy::osNominalTherapy::oaCompleteNominalTherapy::deliverWithinLimits":
+    shortId: "ACT-11"
+    uuid: "5c2cdea5-f4e8-5a0c-9812-d2304c207065"
+  "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy::osNominalTherapy::oaCompleteNominalTherapy::recordTherapyEvent":
+    shortId: "ACT-20"
+    uuid: "73734475-ab40-5043-ad53-4a7b3442f8c5"
   "memo_examples_gpca_pump_gpca_operational::wfPrepareAndStartTherapy":
     shortId: "WFL-2"
     uuid: "d2a4e144-7750-51d3-b0a0-843ec8513be4"
   "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm":
     shortId: "WFL-3"
     uuid: "9872538c-004f-5310-ba49-9a6021841822"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osAirInLine":
+    shortId: "OPR-25"
+    uuid: "047fc145-e889-5272-9226-6203b2b20aa0"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osAirInLine::oaRespondToAirInLine":
+    shortId: "OPR-19"
+    uuid: "e8ff7e0b-ad54-59e2-960c-4e20af137eff"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osAirInLine::oaRespondToAirInLine::annunciateAir":
+    shortId: "ACT-5"
+    uuid: "e9ca3414-6421-57e4-b23b-68360b73cdf6"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osAirInLine::oaRespondToAirInLine::reprimeAndRestart":
+    shortId: "ACT-23"
+    uuid: "3f0fc7a8-2383-54c0-98e4-3ce25c785dd5"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osAirInLine::oaRespondToAirInLine::stopOrKvo":
+    shortId: "ACT-28"
+    uuid: "f0bc1dcd-72ae-5542-a4b9-634061405721"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osEmptyReservoir":
+    shortId: "OPR-26"
+    uuid: "e425f68f-ccd5-5781-bbcc-deffb78f238a"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osEmptyReservoir::oaReplaceEmptyReservoir":
+    shortId: "OPR-16"
+    uuid: "47839c12-6e02-5551-93ea-6dc4b89ec942"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osEmptyReservoir::oaReplaceEmptyReservoir::replaceReservoir":
+    shortId: "ACT-22"
+    uuid: "900c30a8-33e9-5a75-a480-88e1fe31980e"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osEmptyReservoir::oaReplaceEmptyReservoir::resumeTherapy":
+    shortId: "ACT-26"
+    uuid: "fbbbcfa1-eee1-5e0d-a6fd-ba0ba03b1e9d"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osEmptyReservoir::oaReplaceEmptyReservoir::stopAndAnnunciate":
+    shortId: "ACT-27"
+    uuid: "fc4cfb1a-17f3-5ce1-9d84-af9ca868d506"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osOcclusionAlarm":
+    shortId: "OPR-29"
+    uuid: "95b4a21e-3fa1-5391-a33c-668b728e13e8"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osOcclusionAlarm::oaRespondToOcclusion":
+    shortId: "OPR-20"
+    uuid: "8690bd17-e9f7-5030-adf5-15d7d1cea82e"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osOcclusionAlarm::oaRespondToOcclusion::annunciateOcclusion":
+    shortId: "ACT-6"
+    uuid: "bb348ae1-58a4-5d51-90f5-eba2722b7a16"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osOcclusionAlarm::oaRespondToOcclusion::pauseInfusion":
+    shortId: "ACT-19"
+    uuid: "49e2c914-fcf1-5f68-8f2d-c5fe7e0cbc45"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osOcclusionAlarm::oaRespondToOcclusion::resolveAndResume":
+    shortId: "ACT-24"
+    uuid: "675f7862-b7c9-5161-ba8f-f4844577e78e"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osPowerLoss":
+    shortId: "OPR-30"
+    uuid: "e75bc42f-6d08-5f0f-8958-02e207147052"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osPowerLoss::oaRecoverAfterPowerLoss":
+    shortId: "OPR-14"
+    uuid: "4fb4eebc-031d-5528-bb40-623010b47e52"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osPowerLoss::oaRecoverAfterPowerLoss::confirmRestart":
+    shortId: "ACT-10"
+    uuid: "68da24d5-8ef6-574a-bc74-f51df68ddf72"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osPowerLoss::oaRecoverAfterPowerLoss::restorePrescription":
+    shortId: "ACT-25"
+    uuid: "b8ebf6c4-61bf-50cc-bbf3-fabe80637136"
+  "memo_examples_gpca_pump_gpca_operational::wfRespondToTherapyAlarm::osPowerLoss::oaRecoverAfterPowerLoss::switchToBattery":
+    shortId: "ACT-29"
+    uuid: "18415aa2-648b-502a-bc41-235d8806f2f7"
   "memo_examples_gpca_pump_gpca_physical::mainController":
     shortId: "PRC-1"
     uuid: "bcfd8a62-2026-579b-afc0-c4c90ecb1b50"
