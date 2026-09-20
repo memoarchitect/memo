@@ -20,11 +20,11 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     }
 
     // Product-neutral fixture for the UML-style use-case presentation.
-    part patient : User {
+    part useCasePatient : User {
         attribute :>> actorKind = ActorKind::patient;
         attribute :>> name = "Patient";
     }
-    part clinician : User {
+    part useCaseClinician : User {
         attribute :>> actorKind = ActorKind::clinician;
         attribute :>> name = "Clinician";
     }
@@ -43,7 +43,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include validateTherapySettings;
         subject supportingSystem;
-        actor patientActor = patient;
+        actor patientActor = useCasePatient;
     }
     use case configureTherapy : UseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-2"; }
@@ -51,8 +51,8 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include reviewStatus;
         subject supportingSystem;
-        actor clinicianInitiator = clinician;
-        actor patientActor = patient;
+        actor clinicianInitiator = useCaseClinician;
+        actor patientActor = useCasePatient;
     }
     use case maintainDevice : UseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-3"; }
@@ -74,7 +74,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         attribute :>> name = "Validate Therapy Settings";
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject supportingSystem;
-        actor clinicianActor = clinician;
+        actor clinicianActor = useCaseClinician;
     }
 
     // Was an `Extends` connection; a use case extending another is
@@ -84,7 +84,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     // Actor generalization: Nursing Staff is a specialization of Clinician.
     // UML draws this as a solid line with a hollow triangle arrowhead pointing
     // at the general actor.
-    connection : Specialization connect nursingStaff to clinician;
+    connection : Specialization connect nursingStaff to useCaseClinician;
 
     // Use-case generalization: Configure Therapy specializes Review Device
     // Status — the general case is browsing status; configuring therapy is a
