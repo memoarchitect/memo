@@ -287,12 +287,18 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::biomedTech":
     shortId: "USR-1"
     uuid: "9cc8effe-15ce-546c-9529-12584fe0a115"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::clinician":
+    shortId: "USR-2"
+    uuid: "018ff43a-a332-5587-a64b-02931d598646"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::homeContext":
     shortId: "USE-3"
     uuid: "10e1271c-e364-5404-bc86-1b1f6967bc34"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::infusionSystem":
     shortId: "OPR-1"
     uuid: "f20a3d60-3a85-5c55-b902-633641fa68b5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::patient":
+    shortId: "USR-9"
+    uuid: "35ca5792-2580-56c2-b883-383ff6742aaa"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::pharmacySystem":
     shortId: "OPR-16"
     uuid: "6ab0e8a4-826e-5aa8-ba59-e98dd281a640"
@@ -668,6 +674,9 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::errorHandling":
     shortId: "UNK-10"
     uuid: "420a8183-3e29-59a7-abc7-f48abfeb02be"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::lifelineClinician":
+    shortId: "USR-15"
+    uuid: "66bb7ab0-e2c1-5617-85a5-e9cac9d9d5d0"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view::monitorLoop":
     shortId: "UNK-11"
     uuid: "095196b1-cfbe-5f0e-b8bf-fdd03f201fe5"
@@ -827,6 +836,12 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::serviceTechnician":
     shortId: "USR-10"
     uuid: "dfd91dbd-0f3e-5725-a65e-60bf3cd16763"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::useCaseClinician":
+    shortId: "USR-16"
+    uuid: "e0761204-b79b-5d16-86df-8ac79daf4231"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::useCasePatient":
+    shortId: "USR-17"
+    uuid: "aaf8bbd8-5845-5eb8-a301-f69bfbb4ddc4"
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::validateTherapySettings":
     shortId: "USE-6"
     uuid: "2503f97a-efc2-5529-b033-c0673d68283f"
