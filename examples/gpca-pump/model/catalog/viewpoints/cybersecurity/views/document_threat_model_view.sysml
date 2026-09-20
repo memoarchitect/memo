@@ -21,7 +21,7 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_threat_m
         part :>> selectionQuery {
             @MemoIdentity { :>> providedId = "QRY-DOC-008"; }
             attribute :>> name = "threatModelViewQuery";
-            attribute :>> includeElementKinds = ("Threat", "OperativeScenario[scenarioKind=threat]", "Vulnerability", "CybersecurityAsset", "TrustBoundary", "AttackSurface", "CyberMitigation", "SecurityRequirement");
+            attribute :>> includeElementKinds = ("Threat", "OperativeScenario", "Vulnerability", "CybersecurityAsset", "TrustBoundary", "AttackSurface", "CyberMitigation", "SecurityRequirement");
             attribute :>> includeRelationshipKinds = ("ThreatenedBy", "Exploits", "RealizedByScenario", "CrossesTrustBoundary", "Mitigates", "DerivesCyberRequirement");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
