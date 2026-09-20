@@ -20,6 +20,24 @@ elements:
   "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnDeliverTherapy":
     shortId: "SYS-5"
     uuid: "97af02c1-1869-51cd-b6a3-3d9b0803cac0"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnDeliverTherapy::fnControlDose":
+    shortId: "SYS-4"
+    uuid: "02ff5db5-4708-5084-8b09-2700ddb32faf"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnDeliverTherapy::fnControlDose::fnComputeRate":
+    shortId: "SYS-3"
+    uuid: "88ffa158-7036-55a6-910f-72ebeff80d8c"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnDeliverTherapy::fnControlDose::fnValidatePrescription":
+    shortId: "SYS-18"
+    uuid: "a8c04e09-7dfe-50ae-8b7e-184964772b59"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnDeliverTherapy::fnMeterFluid":
+    shortId: "SYS-14"
+    uuid: "ad2c6549-6cde-5d0c-972d-121765bad784"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnDeliverTherapy::fnMeterFluid::fnDriveActuator":
+    shortId: "SYS-8"
+    uuid: "cafa121a-9376-543e-b16f-3e1755ca2aa6"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnDeliverTherapy::fnMeterFluid::fnMeasureDelivered":
+    shortId: "SYS-13"
+    uuid: "e9e92f6d-4d74-5ab2-8a04-3a8a502db932"
   "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnDetectAirInLine":
     shortId: "SYS-6"
     uuid: "01cc8a11-19d1-598f-a56f-f7cf5ba0d243"
@@ -35,12 +53,36 @@ elements:
   "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnEnsureSafety":
     shortId: "SYS-10"
     uuid: "4c0057ea-363a-534f-b3cb-d939e9b9f22d"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnEnsureSafety::fnDetectAirInLine":
+    shortId: "SYS-6"
+    uuid: "01cc8a11-19d1-598f-a56f-f7cf5ba0d243"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnEnsureSafety::fnDetectOcclusion":
+    shortId: "SYS-7"
+    uuid: "a1c87fbc-9933-5b07-a7a4-faa2a1b53589"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnEnsureSafety::fnEnforceDoseLimits":
+    shortId: "SYS-9"
+    uuid: "e3f15682-175f-550c-9daa-305017c19b54"
   "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnInformUser":
     shortId: "SYS-11"
     uuid: "c0d2ae2a-c619-552c-ad94-67a87d75a5f0"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnInformUser::fnAcceptInput":
+    shortId: "SYS-1"
+    uuid: "743bc427-3611-54b4-b02f-f30d4474e8be"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnInformUser::fnAnnunciateAlarm":
+    shortId: "SYS-2"
+    uuid: "38a50787-f2bd-51ee-9b90-6e0e6695b9f6"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnInformUser::fnRenderStatus":
+    shortId: "SYS-16"
+    uuid: "2f581251-4e2e-5e0c-b937-e668d7abb1df"
   "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnManagePower":
     shortId: "SYS-12"
     uuid: "7306642f-c2c8-53ed-bf55-4369cdec0373"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnManagePower::fnMonitorBattery":
+    shortId: "SYS-15"
+    uuid: "fa001550-9cd2-5118-880b-16dcc35f11e9"
+  "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnManagePower::fnSelectPowerSource":
+    shortId: "SYS-17"
+    uuid: "96806e2b-9dad-5a25-906e-097da793517f"
   "memo_examples_nested_architecture_dsm_architecture_functional_functions::fnMeasureDelivered":
     shortId: "SYS-13"
     uuid: "e9e92f6d-4d74-5ab2-8a04-3a8a502db932"
@@ -113,6 +155,57 @@ elements:
   "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery":
     shortId: "SYS-19"
     uuid: "523429e1-0a24-5aa6-b5c0-47c7eb82f4df"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subControl":
+    shortId: "SBS-1"
+    uuid: "077d4a45-b168-52a4-9641-17c1f5b600ff"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subControl::lcDoseController":
+    shortId: "LGC-4"
+    uuid: "3b49ad97-598e-5474-aae7-e1b378be185d"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subControl::lcTherapyStateStore":
+    shortId: "LGC-11"
+    uuid: "59faa354-00b6-542a-9097-8b54c7cfa0a4"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subControl::subSafetyMonitor":
+    shortId: "SBS-4"
+    uuid: "c22054ce-e7da-5a61-8d9e-3dc1c364baba"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subControl::subSafetyMonitor::lcPressureIntegrityChannel":
+    shortId: "LGC-8"
+    uuid: "45f4a37a-5d78-5b1c-8638-e3df1bdcfedf"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subControl::subSafetyMonitor::lcWatchdogChannel":
+    shortId: "LGC-12"
+    uuid: "11ebfa38-f25a-5d86-a3fe-0daf3bbf37ae"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subFluidPath":
+    shortId: "SBS-2"
+    uuid: "43548a32-68a1-51bf-ab90-378990d36d2c"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subFluidPath::lcOcclusionChannel":
+    shortId: "LGC-6"
+    uuid: "f1964871-b8a4-510d-b946-c962847f61d4"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subFluidPath::lcPumpMechanism":
+    shortId: "LGC-9"
+    uuid: "630e869e-ef26-52f5-85a4-a9ab0e045006"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subFluidPath::lcReservoirInterface":
+    shortId: "LGC-10"
+    uuid: "8bf720eb-227b-59bc-a8bd-17597157badf"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subPower":
+    shortId: "SBS-3"
+    uuid: "aa677b1f-eddb-5436-9c6f-85221b3b77aa"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subPower::lcBatteryManager":
+    shortId: "LGC-2"
+    uuid: "d6971bce-148e-5366-ab22-f80166c10b3f"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subPower::lcPowerRailMonitor":
+    shortId: "LGC-7"
+    uuid: "4deb4ccd-b9f0-5ff4-904e-cf88beff861d"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subUserInterface":
+    shortId: "SBS-5"
+    uuid: "d549ae19-f954-5553-98bc-2aae381754ae"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subUserInterface::lcAlarmAnnunciator":
+    shortId: "LGC-1"
+    uuid: "4a3bc844-d379-53a5-bd07-45cfddbb306f"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subUserInterface::lcDisplayManager":
+    shortId: "LGC-3"
+    uuid: "429d103c-969c-53fc-a447-2a0a9bb74764"
+  "memo_examples_nested_architecture_dsm_architecture_logical_structure::sysTherapyDelivery::subUserInterface::lcKeypadHandler":
+    shortId: "LGC-5"
+    uuid: "69673dde-9347-5e7b-a896-6ee9e9069a86"
   "memo_examples_nested_architecture_dsm_architecture_operational_context::ctxIntraHospitalTransport":
     shortId: "USE-1"
     uuid: "a4ec22e7-25cb-54f8-b606-397da672af36"
