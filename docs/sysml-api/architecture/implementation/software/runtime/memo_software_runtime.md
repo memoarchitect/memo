@@ -36,7 +36,6 @@
 | --- | --- | --- | --- |
 | [`RuntimeKind`](#runtimekind) | `enum def` | process / thread / task / service / container / partition / dataStore / messageBroker. | — |
 | [`SoftwareComponent`](#softwarecomponent) | `part def` | Software component definition specializing `SoftwareElement`. | `SoftwareElement` |
-| [`ComponentConnects`](#componentconnects) | `connection def` | Typed relationship for component connects. | `MemoRelationship` |
 
 ## RuntimeKind
 
@@ -65,21 +64,6 @@ part def SoftwareComponent specializes SoftwareElement
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `SoftwareElement` |
-| Owning package | `memo_architecture_implementation_software_runtime` |
-
-
-## ComponentConnects
-
-```sysml
-connection def ComponentConnects :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for component connects. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_implementation_software_runtime` |
 
 
@@ -168,17 +152,6 @@ connection def ComponentConnects :> MemoRelationship
             // a component belongs to without claiming to describe it.
         }
 
-        connection def ComponentConnects :> MemoRelationship {
-            attribute protocolSummary : String;
-            end sourceComponent : SoftwareComponent :>> source;
-            end targetComponent : SoftwareComponent :>> target;
-        }
-        abstract connection componentConnectsLinks : ComponentConnects[*];
-        metadata def <componentConnects> ComponentConnectsMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = componentConnectsLinks meta SysML::Usage;
-        }
     }
 
     ```

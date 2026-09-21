@@ -13,7 +13,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     verification vcDoseAccuracy : VerificationCase {
-        @MemoIdentity { :>> providedId = "NDS-VER-001"; } attribute :>> name = "VerifyDoseAccuracy";
+        @MemoIdentity { :>> providedId = "NDS-VER-001"; :>> label = "VerifyDoseAccuracy"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Gravimetric delivery over 60 minutes is within ±5% of the prescribed volume at 1, 25 and 999 mL/h.";
         attribute :>> status = ElementStatusKind::approved;
@@ -22,7 +22,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         subject verified : Base::Anything[*] = (fnDeliverTherapy, fnDeliverTherapy.fnMeterFluid, fnDeliverTherapy.fnMeterFluid.fnDriveActuator, fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered, fnDeliverTherapy.fnControlDose, fnDeliverTherapy.fnControlDose.fnComputeRate);
     }
     verification vcOcclusionResponse : VerificationCase {
-        @MemoIdentity { :>> providedId = "NDS-VER-002"; } attribute :>> name = "VerifyOcclusionResponse";
+        @MemoIdentity { :>> providedId = "NDS-VER-002"; :>> label = "VerifyOcclusionResponse"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Delivery stops within 2 s of the occlusion threshold being crossed, at every supported rate.";
         attribute :>> status = ElementStatusKind::approved;
@@ -31,7 +31,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         subject verified : Base::Anything[*] = (fnEnsureSafety, fnEnsureSafety.fnDetectOcclusion, fnEnsureSafety.fnEnforceDoseLimits);
     }
     verification vcAirInLineResponse : VerificationCase {
-        @MemoIdentity { :>> providedId = "NDS-VER-003"; } attribute :>> name = "VerifyAirInLineResponse";
+        @MemoIdentity { :>> providedId = "NDS-VER-003"; :>> label = "VerifyAirInLineResponse"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "A 0.1 mL air bolus stops delivery and raises a high-priority alarm.";
         attribute :>> status = ElementStatusKind::approved;
@@ -40,7 +40,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         subject verified : Base::Anything[*] = (fnEnsureSafety.fnDetectAirInLine);
     }
     verification vcAlarmSignals : VerificationCase {
-        @MemoIdentity { :>> providedId = "NDS-VER-004"; } attribute :>> name = "VerifyAlarmSignals";
+        @MemoIdentity { :>> providedId = "NDS-VER-004"; :>> label = "VerifyAlarmSignals"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Alarm signals conform to IEC 60601-1-8 for every priority, and persist until cleared or acknowledged.";
         attribute :>> status = ElementStatusKind::approved;
@@ -49,7 +49,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         subject verified : Base::Anything[*] = (fnInformUser.fnAnnunciateAlarm);
     }
     verification vcBatteryEndurance : VerificationCase {
-        @MemoIdentity { :>> providedId = "NDS-VER-005"; } attribute :>> name = "VerifyBatteryEndurance";
+        @MemoIdentity { :>> providedId = "NDS-VER-005"; :>> label = "VerifyBatteryEndurance"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Delivery continues for at least 4 hours at 25 mL/h from a fully charged battery after mains loss.";
         attribute :>> status = ElementStatusKind::approved;
@@ -58,7 +58,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         subject verified : Base::Anything[*] = (fnManagePower, fnManagePower.fnMonitorBattery);
     }
     verification vcConfirmationFlow : VerificationCase {
-        @MemoIdentity { :>> providedId = "NDS-VER-006"; } attribute :>> name = "VerifyConfirmationFlow";
+        @MemoIdentity { :>> providedId = "NDS-VER-006"; :>> label = "VerifyConfirmationFlow"; }
         attribute :>> methodKind = MemoVerificationMethodKind::demonstration;
         attribute :>> acceptanceCriteria = "No rate change reaches the controller without an explicit confirmation step.";
         attribute :>> status = ElementStatusKind::approved;
@@ -67,7 +67,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         subject verified : Base::Anything[*] = (fnDeliverTherapy.fnControlDose.fnValidatePrescription, fnInformUser.fnAcceptInput);
     }
     verification vcStatusLegibility : VerificationCase {
-        @MemoIdentity { :>> providedId = "NDS-VER-007"; } attribute :>> name = "VerifyStatusLegibility";
+        @MemoIdentity { :>> providedId = "NDS-VER-007"; :>> label = "VerifyStatusLegibility"; }
         attribute :>> methodKind = MemoVerificationMethodKind::inspection;
         attribute :>> acceptanceCriteria = "Rate and volume delivered are readable at 1 m under 100–1000 lux.";
         attribute :>> status = ElementStatusKind::approved;
@@ -76,7 +76,7 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
         subject verified : Base::Anything[*] = (fnInformUser, fnInformUser.fnRenderStatus);
     }
     verification vcPowerSourceSwitch : VerificationCase {
-        @MemoIdentity { :>> providedId = "NDS-VER-008"; } attribute :>> name = "VerifyPowerSourceSwitch";
+        @MemoIdentity { :>> providedId = "NDS-VER-008"; :>> label = "VerifyPowerSourceSwitch"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Rail brownout switches source without interrupting delivery.";
         attribute :>> status = ElementStatusKind::approved;

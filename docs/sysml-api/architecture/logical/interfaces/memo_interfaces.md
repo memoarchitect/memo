@@ -32,7 +32,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`Interface`](#interface) | `interface def` | Realization domain (hardware vs software), signaling family (digital / analog / synchronous / asynchronous) and concrete protocol (SPI, CAN, Ethernet, 4-20mA, REST, gRPC, message-queue …) are captured by `interfaceKind` + `protocol`, NOT by a class branch.… | `MemoInterface` |
+| [`Interface`](#interface) | `interface def` | Specializes the standard library interface as well as MEMO's base, rather than shadowing it — see the note on UseCase. | `MemoInterface,` |
 | [`SoftwareInterface`](#softwareinterface) | `interface def` | Software interaction contracts specialize the native MEMO interface family. Concrete technologies add their protocol roles and message flows; ports remain the endpoints that components actually own. | `Interface` |
 | [`InterfaceItem`](#interfaceitem) | `item def` | A typed thing exchanged at a boundary. Concrete items such as AlarmSignal and FlowCommand specialize this type; they are neither functions nor generic action-flow notation.… | `MemoItem` |
 | [`DataInterface`](#datainterface) | `interface def` | Data interface definition specializing `MemoInterface`. | `MemoInterface` |
@@ -45,15 +45,15 @@
 ## Interface
 
 ```sysml
-interface def Interface specializes MemoInterface
+interface def Interface specializes MemoInterface, Interfaces::Interface
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Realization domain (hardware vs software), signaling family (digital / analog / synchronous / asynchronous) and concrete protocol (SPI, CAN, Ethernet, 4-20mA, REST, gRPC, message-queue …) are captured by `interfaceKind` + `protocol`, NOT by a class branch.… |
+| Description | Specializes the standard library interface as well as MEMO's base, rather than shadowing it — see the note on UseCase. |
 | Kind | `interface def` |
 | Abstract | No |
-| Specializes | `MemoInterface` |
+| Specializes | `MemoInterface,` |
 | Owning package | `memo_architecture_logical_interfaces` |
 
 
@@ -199,7 +199,9 @@ port def SoftwarePort specializes MemoPort
         // DigitalInterface / SPIInterface / RestInterface … hierarchy: those were
         // 20+ classes that differed only in the value of `protocol`.
 
-        interface def Interface specializes MemoInterface {
+        // Specializes the standard library interface as well as MEMO's base,
+        // rather than shadowing it — see the note on UseCase.
+        interface def Interface specializes MemoInterface, Interfaces::Interface {
             attribute interfaceKind : InterfaceKind;   // semantic + signaling family
             attribute direction : DirectionKind;
             attribute protocol : String;               // "SPI", "CAN", "Ethernet", "REST", "4-20mA"

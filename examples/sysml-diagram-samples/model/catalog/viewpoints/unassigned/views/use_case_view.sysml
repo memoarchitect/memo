@@ -22,32 +22,28 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
     // Product-neutral fixture for the UML-style use-case presentation.
     part patient : User {
         attribute :>> actorKind = ActorKind::patient;
-        attribute :>> name = "Patient";
     }
     part clinician : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> name = "Clinician";
     }
     part serviceTechnician : User {
         attribute :>> actorKind = ActorKind::technician;
-        attribute :>> name = "Service Technician";
+@MemoIdentity { :>> label = "Service Technician"; }
     }
     part nursingStaff : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> name = "Nursing Staff";
+@MemoIdentity { :>> label = "Nursing Staff"; }
     }
 
     use case reviewStatus : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-1"; }
-        attribute :>> name = "Review Device Status";
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-1"; :>> label = "Review Device Status"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include validateTherapySettings;
         subject supportingSystem;
         actor patientActor = patient;
     }
     use case configureTherapy : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-2"; }
-        attribute :>> name = "Configure Therapy";
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-2"; :>> label = "Configure Therapy"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         include reviewStatus;
         subject supportingSystem;
@@ -55,23 +51,20 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case
         actor patientActor = patient;
     }
     use case maintainDevice : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-3"; }
-        attribute :>> name = "Maintain Device";
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-3"; :>> label = "Maintain Device"; }
         attribute :>> useCaseKind = UseCaseKind::service;
         subject supportingSystem;
         actor serviceTechnicianActor = serviceTechnician;
     }
 
     use case documentTreatment : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-4"; }
-        attribute :>> name = "Document Treatment";
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-4"; :>> label = "Document Treatment"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
     }
 
     // L2 child of Review Device Status: makes L0 → L1 → L2 selectable.
     use case validateTherapySettings : UseCase {
-        @MemoIdentity { :>> providedId = "UC-SAMPLE-5"; }
-        attribute :>> name = "Validate Therapy Settings";
+        @MemoIdentity { :>> providedId = "UC-SAMPLE-5"; :>> label = "Validate Therapy Settings"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject supportingSystem;
         actor clinicianActor = clinician;

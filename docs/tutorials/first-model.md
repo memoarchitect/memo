@@ -93,14 +93,12 @@ package temperature_alarm {
     // The person who relies on the device in this scenario.
     part clinician : User {
         attribute :>> id = "ACT-001";
-        attribute :>> name = "Clinician";
         attribute :>> actorKind = ActorKind::clinician;
     }
 
     // The clinician's clinical goal for the monitored patient.
     requirement maintainSafePatientTemperature : Need {
         attribute :>> id = "NEED-001";
-        attribute :>> name = "MaintainSafePatientTemperature";
         attribute :>> needKind = NeedKind::stakeholder;
         attribute :>> statement =
             "The clinician needs to maintain the patient's temperature within a safe range.";
@@ -120,19 +118,16 @@ workflow; the scenario records the event that makes the workflow relevant.
     // The clinician observes the patient's current temperature.
     action monitorTemperatureStatus : OperationalActivity {
         attribute :>> id = "OA-001";
-        attribute :>> name = "MonitorTemperatureStatus";
     }
 
     // The clinician responds when an alert is raised.
     action respondToTemperatureAlert : OperationalActivity {
         attribute :>> id = "OA-002";
-        attribute :>> name = "RespondToTemperatureAlert";
     }
 
     // The operational event that frames this slice of work.
     action highTemperatureScenario : MemoScenario {
         attribute :>> id = "OS-001";
-        attribute :>> name = "HighTemperatureScenario";
         attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
@@ -159,13 +154,11 @@ analysis challenges them, and verification checks them.
     // Determines whether the measured temperature is inside the safe range.
     part evaluateTemperature : SystemFunction {
         attribute :>> id = "LF-001";
-        attribute :>> name = "EvaluateTemperature";
     }
 
     // Produces the system alert that supports the clinician's response.
     part notifyClinician : SystemFunction {
         attribute :>> id = "LF-002";
-        attribute :>> name = "NotifyClinician";
     }
 ```
 
@@ -188,7 +181,6 @@ Add this snippet above the closing `}`. It uses the **event-driven EARS** form:
     // A testable EARS requirement extracted from the evaluation function.
     requirement alarmAboveLimit : Requirement {
         attribute :>> id = "REQ-001";
-        attribute :>> name = "AlarmAboveLimit";
         attribute :>> requirementKind = RequirementKind::system;
         attribute :>> statement =
             "When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds.";
@@ -231,25 +223,21 @@ to the function that they concern.
     // The software component that implements temperature evaluation.
     part temperatureEvaluationSoftware : SoftwareComponent {
         attribute :>> id = "SW-001";
-        attribute :>> name = "TemperatureEvaluationSoftware";
     }
 
     // The hardware assembly that provides the temperature measurement.
     part temperatureSensorAssembly : HardwareAssembly {
         attribute :>> id = "HW-001";
-        attribute :>> name = "TemperatureSensorAssembly";
     }
 
     // A potential source of harm that must be considered.
     item missedHighTemperature : Hazard {
         attribute :>> id = "HAZ-001";
-        attribute :>> name = "MissedHighTemperature";
     }
 
     // A distinct measure intended to reduce the missed-alert hazard.
     item independentAlarmCheck : RiskControlMeasure {
         attribute :>> id = "RC-001";
-        attribute :>> name = "IndependentAlarmCheck";
     }
 
     // Allocate the evaluation function to its software realization.
@@ -295,7 +283,6 @@ planned check and connects it to the requirement it evaluates.
     // The planned check and its observable pass condition.
     part highTemperatureAlarmTest : VerificationCase {
         attribute :>> id = "VER-001";
-        attribute :>> name = "HighTemperatureAlarmTest";
         attribute :>> acceptanceCriteria =
             "With a simulated temperature of 38.1 °C, an audible alert starts within 2 seconds.";
     }
@@ -323,14 +310,12 @@ package temperature_alarm {
     // The person who relies on the device in this scenario.
     part clinician : User {
         attribute :>> id = "ACT-001";
-        attribute :>> name = "Clinician";
         attribute :>> actorKind = ActorKind::clinician;
     }
 
     // The clinician's clinical goal for the monitored patient.
     requirement maintainSafePatientTemperature : Need {
         attribute :>> id = "NEED-001";
-        attribute :>> name = "MaintainSafePatientTemperature";
         attribute :>> needKind = NeedKind::stakeholder;
         attribute :>> statement =
             "The clinician needs to maintain the patient's temperature within a safe range.";
@@ -339,19 +324,16 @@ package temperature_alarm {
     // The clinician observes the patient's current temperature.
     action monitorTemperatureStatus : OperationalActivity {
         attribute :>> id = "OA-001";
-        attribute :>> name = "MonitorTemperatureStatus";
     }
 
     // The clinician responds when an alert is raised.
     action respondToTemperatureAlert : OperationalActivity {
         attribute :>> id = "OA-002";
-        attribute :>> name = "RespondToTemperatureAlert";
     }
 
     // The operational event that frames this slice of work.
     action highTemperatureScenario : MemoScenario {
         attribute :>> id = "OS-001";
-        attribute :>> name = "HighTemperatureScenario";
         attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
         attribute :>> operationalCondition = OperationalConditionKind::normal;
@@ -367,19 +349,16 @@ package temperature_alarm {
     // Determines whether the measured temperature is inside the safe range.
     part evaluateTemperature : SystemFunction {
         attribute :>> id = "LF-001";
-        attribute :>> name = "EvaluateTemperature";
     }
 
     // Produces the system alert that supports the clinician's response.
     part notifyClinician : SystemFunction {
         attribute :>> id = "LF-002";
-        attribute :>> name = "NotifyClinician";
     }
 
     // A testable EARS requirement extracted from the evaluation function.
     requirement alarmAboveLimit : Requirement {
         attribute :>> id = "REQ-001";
-        attribute :>> name = "AlarmAboveLimit";
         attribute :>> requirementKind = RequirementKind::system;
         attribute :>> statement =
             "When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds.";
@@ -395,31 +374,26 @@ package temperature_alarm {
     // The software component that implements temperature evaluation.
     part temperatureEvaluationSoftware : SoftwareComponent {
         attribute :>> id = "SW-001";
-        attribute :>> name = "TemperatureEvaluationSoftware";
     }
 
     // The hardware assembly that provides the temperature measurement.
     part temperatureSensorAssembly : HardwareAssembly {
         attribute :>> id = "HW-001";
-        attribute :>> name = "TemperatureSensorAssembly";
     }
 
     // A potential source of harm that must be considered.
     item missedHighTemperature : Hazard {
         attribute :>> id = "HAZ-001";
-        attribute :>> name = "MissedHighTemperature";
     }
 
     // A distinct measure intended to reduce the missed-alert hazard.
     item independentAlarmCheck : RiskControlMeasure {
         attribute :>> id = "RC-001";
-        attribute :>> name = "IndependentAlarmCheck";
     }
 
     // The planned check and its observable pass condition.
     part highTemperatureAlarmTest : VerificationCase {
         attribute :>> id = "VER-001";
-        attribute :>> name = "HighTemperatureAlarmTest";
         attribute :>> acceptanceCriteria =
             "With a simulated temperature of 38.1 °C, an audible alert starts within 2 seconds.";
     }

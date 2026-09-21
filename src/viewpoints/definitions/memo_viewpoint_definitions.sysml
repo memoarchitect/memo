@@ -20,8 +20,6 @@ package memo_viewpoints_definitions {
     // rather than a re-declared core: a viewpoint is native requirement-family,
     // not a MemoPart, and metadata crosses metaclasses where inheritance cannot.
     viewpoint def MemoViewpoint :> Views::ViewpointCheck {
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
         attribute realizationStage : RealizationStageKind[0..1];
@@ -134,8 +132,6 @@ package memo_viewpoints_definitions {
         // Identity comes from the `@MemoIdentity` metadata carrier, which
         // annotates any metaclass — so a view stays native SysML without
         // re-declaring the identification core the other bases used to copy.
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
         attribute realizationStage : RealizationStageKind[0..1];

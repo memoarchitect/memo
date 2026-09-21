@@ -10,8 +10,7 @@ package memo_viewpoints_risk_views_risk_chain_view {
                 view riskChainView : MemoDiagramView {
                     expose memo_viewpoints_risk_views_risk_chain_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-RISK-001"; }
-    attribute :>> name = "RiskChainView";
+    @MemoIdentity { :>> providedId = "VIEW-RISK-001"; :>> label = "RiskChainView"; }
     @MemoIdentity { :>> shortDescription = "Hazards through harms with controls and verification."; }
     attribute :>> outputKind = (ViewOutputKind::table);
     attribute :>> presentationKind = (PresentationKind::riskTable);
@@ -19,8 +18,7 @@ package memo_viewpoints_risk_views_risk_chain_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include the explicit ISO 14971 chain, risk controls, residual risks, benefits, and verification evidence.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-RISK-001"; }
-        attribute :>> name = "RiskChainQuery";
+        @MemoIdentity { :>> providedId = "QRY-RISK-001"; :>> label = "RiskChainQuery"; }
         attribute :>> includeElementKinds = ("SafetyRelatedCharacteristic", "HazardCause", "Hazard", "SequenceOfEvents", "HazardousSituation", "Harm", "Risk", "RiskControlMeasure", "ResidualRisk", "Benefit", "OverallResidualRiskEvaluation", "VerificationCase");
         attribute :>> includeLayers = ("risk", "assurance");
         attribute :>> includeConcerns = (ConcernKind::safety);

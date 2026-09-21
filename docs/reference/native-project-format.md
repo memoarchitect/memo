@@ -85,7 +85,7 @@ package infusion_pump_catalog {
 
     part projectMethodBinding : ProjectMethodBinding {
         attribute :>> id = "PMB-001";
-        attribute :>> name = "InfusionPumpProjectMethodBinding";
+        @MemoIdentity { :>> label = "InfusionPumpProjectMethodBinding"; }
         attribute :>> projectName = "Infusion Pump";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

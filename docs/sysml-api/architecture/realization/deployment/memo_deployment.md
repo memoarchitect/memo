@@ -41,16 +41,13 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`SoftwareDeploymentUnit`](#deploymentunit) | `part def` | Deployment unit definition specializing `MemoPart`. | `MemoPart` |
+| [`SoftwareDeploymentUnit`](#softwaredeploymentunit) | `part def` | Software deployment unit definition specializing `MemoPart`. | `MemoPart` |
 | [`RuntimeEnvironment`](#runtimeenvironment) | `part def` | Runtime environment definition specializing `MemoPart`. | `MemoPart` |
-| [`BuildsInto`](#buildsinto) | `connection def` | Typed relationship for builds into. | `MemoRelationship` |
-| [`DeploysTo`](#deploysto) | `connection def` | Typed relationship for deploys to. | `MemoRelationship` |
 | [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship for provides environment. | `MemoRelationship` |
 | [`FlowSpecKind`](#flowspeckind) | `enum def` | AADL separates a flow *specification* (declared at a component boundary as source / sink / path through ports) from a flow *implementation* (its routing through subcomponents and connectors), and traces a complete source→sink flow as an *end-to-end flow* across the assembly.… | — |
 | [`FlowSpecification`](#flowspecification) | `part def` | A flow declared at a logical component boundary (in-port → out-port). | `MemoPart` |
 | [`EndToEndFlow`](#endtoendflow) | `part def` | A complete source→sink flow traced across the layers and the software→ hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose` (latency \| fault-propagation \| security) drive the AADL-style analysis. | `MemoPart` |
 | [`FlowComprisesSpec`](#flowcomprisesspec) | `connection def` | The end-to-end flow is realized by an ordered flow specification, one segment per traversed component boundary (AADL flow-spec → end-to-end). | `MemoRelationship` |
-| [`FlowTraversesBinding`](#flowtraversesbinding) | `connection def` | The flow traverses a software→hardware binding; latency accrues here. | `MemoRelationship` |
 
 ## SoftwareDeploymentUnit
 
@@ -60,7 +57,7 @@ part def SoftwareDeploymentUnit specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | Deployment unit definition specializing `MemoPart`. |
+| Description | Software deployment unit definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -79,36 +76,6 @@ part def RuntimeEnvironment specializes MemoPart
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
-| Owning package | `memo_architecture_realization_deployment` |
-
-
-## BuildsInto
-
-```sysml
-connection def BuildsInto :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for builds into. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_realization_deployment` |
-
-
-## DeploysTo
-
-```sysml
-connection def DeploysTo :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for deploys to. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_realization_deployment` |
 
 
@@ -187,21 +154,6 @@ connection def FlowComprisesSpec :> MemoRelationship
 | Owning package | `memo_architecture_realization_deployment` |
 
 
-## FlowTraversesBinding
-
-```sysml
-connection def FlowTraversesBinding :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | The flow traverses a software→hardware binding; latency accrues here. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_realization_deployment` |
-
-
 ## Source
 
 ??? code "architecture/realization/deployment/memo_deployment.sysml"
@@ -249,25 +201,30 @@ connection def FlowTraversesBinding :> MemoRelationship
             attribute certificationEvidence : String;
         }
 
-        connection def BuildsInto :> MemoRelationship {
+            // A module BUILDS INTO a deployment unit: that is an allocation, and the
+        // language has one. Rooted like MemoryBinding / ConnectionBinding below,
+        // so the whole deployment family spells allocation the same way.
+        allocation def BuildsInto :> MemoRelationship, Allocations::Allocation {
             end module : SoftwareModule :>> source;
             end deploymentUnit : SoftwareDeploymentUnit :>> target;
         }
         abstract connection buildsIntoLinks : BuildsInto[*];
         metadata def <buildsInto> BuildsIntoMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
+            :> annotatedElement : SysML::AllocationDefinition;
+            :> annotatedElement : SysML::AllocationUsage;
             :>> baseType = buildsIntoLinks meta SysML::Usage;
         }
-        connection def DeploysTo :> MemoRelationship {
+            // Every usage of this already writes `allocation x : DeploysTo allocate a
+        // to b;` -- the declaration was the only part still saying `connection`.
+        allocation def DeploysTo :> MemoRelationship, Allocations::Allocation {
             attribute deploymentKind : DeploymentKind;
             end deploymentUnit : SoftwareDeploymentUnit :>> source;
             end node : ProcessingNode :>> target;
         }
         abstract connection deploysToLinks : DeploysTo[*];
         metadata def <deploysTo> DeploysToMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
+            :> annotatedElement : SysML::AllocationDefinition;
+            :> annotatedElement : SysML::AllocationUsage;
             :>> baseType = deploysToLinks meta SysML::Usage;
         }
         connection def ProvidesEnvironment :> MemoRelationship {
@@ -381,14 +338,16 @@ connection def FlowTraversesBinding :> MemoRelationship
             :>> baseType = flowComprisesSpecLinks meta SysML::Usage;
         }
         // The flow traverses a software→hardware binding; latency accrues here.
-        connection def FlowTraversesBinding :> MemoRelationship {
+            // A binding IS an allocation, exactly as MemoryBinding and
+        // ConnectionBinding already declare.
+        allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation {
             end endToEndFlow : EndToEndFlow :>> source;
             end deploymentUnit : SoftwareDeploymentUnit :>> target;
         }
         abstract connection flowTraversesBindingLinks : FlowTraversesBinding[*];
         metadata def <flowTraversesBinding> FlowTraversesBindingMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
+            :> annotatedElement : SysML::AllocationDefinition;
+            :> annotatedElement : SysML::AllocationUsage;
             :>> baseType = flowTraversesBindingLinks meta SysML::Usage;
         }
     }

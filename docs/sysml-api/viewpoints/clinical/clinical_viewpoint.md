@@ -26,6 +26,9 @@
 | private | `ScalarValues::*` |
 | private | `memo_viewpoints_definitions::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_viewpoints_stakeholders_concerns::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -44,23 +47,23 @@
 
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
+        private import memo_viewpoints_stakeholders_concerns::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         viewpoint clinicalViewpoint : MemoViewpoint {
-            attribute :>> id = "VP-CLIN";
-            attribute :>> name = "ClinicalViewpoint";
-            attribute :>> shortDescription = "Shows clinical context, users, use environment, and clinical evidence.";
-            attribute :>> description = "Default viewpoint derived from the context and assurance layers for clinical stakeholders — intended use, patient/clinician interaction, clinical evidence, and clinical safety claims.";
+            @MemoIdentity { :>> providedId = "VP-CLIN"; :>> label = "ClinicalViewpoint"; }
+            @MemoIdentity { :>> shortDescription = "Shows clinical context, users, use environment, and clinical evidence."; }
+            doc /* Default viewpoint derived from the context and assurance layers for clinical stakeholders — intended use, patient/clinician interaction, clinical evidence, and clinical safety claims. */
             attribute :>> purpose = "Communicate clinical use context and clinical evidence for the device.";
-            attribute :>> audience = (AudienceKind::clinicalEngineer, AudienceKind::regulatoryEngineer);
+            ref :>> stakeholders = (clinicalEngineer, regulatoryEngineer);
             attribute :>> stage = WorkflowStageKind::context;
             attribute :>> abstractionLevel = "clinical";
             attribute :>> outputKind = (ViewOutputKind::documentSection, ViewOutputKind::table);
             attribute :>> presentationKind = (PresentationKind::narrativeSection);
-            attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::clinical);
-            attribute :>> includedLayers = ("context", "assurance");
+            ref :>> framedConcerns = (safetyConcern, clinicalConcern);
             attribute :>> explorerLane = "assurance";
             attribute :>> explorerOrder = 4;
-            attribute :>> allowedElementKinds = ("Actor", "UseContext", "MemoEvidence");
             attribute :>> userExtensible = true;
         }
     }

@@ -18,8 +18,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_fmea_view {
     view gpcaFmeaView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_risk_views_risk_fmea_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-RISK-102"; }
-        attribute :>> name = "GPCA_FmeaView";
+        @MemoIdentity { :>> providedId = "VIEW-RISK-102"; :>> label = "GPCA_FmeaView"; }
         @MemoIdentity { :>> shortDescription = "Failure modes with causes, effects, detection, RPN, and the overdose fault tree."; }
         attribute :>> outputKind = (ViewOutputKind::table);
         attribute :>> presentationKind = (PresentationKind::riskTable);
@@ -29,8 +28,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_risk_fmea_view {
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include FMEA worksheet rows and the overdose fault tree structure.";
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-RISK-102"; }
-            attribute :>> name = "GPCA_FmeaQuery";
+            @MemoIdentity { :>> providedId = "QRY-RISK-102"; :>> label = "GPCA_FmeaQuery"; }
             attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureEffect", "FailureCause", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeNode", "MinimalCutSet");
             attribute :>> includeLayers = ("analysis", "risk");
             attribute :>> includeConcerns = (ConcernKind::safety, ConcernKind::reliability);

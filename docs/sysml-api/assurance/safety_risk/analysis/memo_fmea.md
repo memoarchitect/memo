@@ -436,7 +436,6 @@ connection def HasFailureMode :> MemoRelationship
             attribute probability : Real;
             attribute failureRate : Real;
             attribute exposureTime : Real;
-            attribute :>> description : String;
             attribute gateKind : FaultTreeGateKind;
             attribute kValue : Integer;
             attribute nValue : Integer;

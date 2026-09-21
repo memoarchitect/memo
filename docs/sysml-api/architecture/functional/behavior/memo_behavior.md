@@ -223,7 +223,6 @@ part def TimingConstraint specializes VerifiableElement
         // records so the two are not confused.
         metadata def TransitionRecord {
             attribute id : String;
-            attribute name : String;
             attribute trigger : String;
             attribute guardSummary : String;
             attribute effectSummary : String;
@@ -271,8 +270,15 @@ part def TimingConstraint specializes VerifiableElement
             attribute constraintKind : TimingConstraintKind;
             attribute minMs : String;
             attribute maxMs : String;
-            ref referenceElement : MemoPart[1];
-            attribute verificationMethod : VerificationMethodKind;
+            // Untyped, the way `InteractsInContext::systemOfInterest` is: what a
+            // latency or period is measured against is a behaviour at least as
+            // often as it is a structure — a functional flow, an action, a port.
+            // `MemoPart[1]` said otherwise and could only ever have held the
+            // structural half, which is the same A0 residue that kept
+            // `FunctionalFlow` a part def. MEMO has no root above the metaclasses
+            // by design, so spanning them means naming none.
+            ref referenceElement[1];
+            attribute verificationMethod : MemoVerificationMethodKind;
         }
     }
 

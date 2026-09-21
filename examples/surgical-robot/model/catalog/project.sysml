@@ -17,8 +17,7 @@ package memo_examples_surgical_robot_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-SURGICAL-ROBOT-001"; }
-        attribute :>> name = "SurgicalRobotProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-SURGICAL-ROBOT-001"; :>> label = "SurgicalRobotProjectMethodBinding"; }
         attribute :>> projectName = "Surgical Robot";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

@@ -15,8 +15,7 @@ package memo_examples_nested_architecture_dsm_architecture_operational_context {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part usrWardNurse : User {
-        @MemoIdentity { :>> providedId = "NDS-USR-001"; }
-        attribute :>> name = "WardNurse";
+        @MemoIdentity { :>> providedId = "NDS-USR-001"; :>> label = "WardNurse"; }
         attribute :>> userPopulation = "ward nurses";
         attribute :>> impairmentConsiderations = "some wear corrective lenses; display legibility at bedside distance";
         attribute :>> intendedTraining = "device orientation at ward induction";
@@ -25,8 +24,7 @@ package memo_examples_nested_architecture_dsm_architecture_operational_context {
     }
 
     part ctxIntraHospitalTransport : UseContext {
-        @MemoIdentity { :>> providedId = "NDS-CTX-001"; }
-        attribute :>> name = "IntraHospitalTransport";
+        @MemoIdentity { :>> providedId = "NDS-CTX-001"; :>> label = "IntraHospitalTransport"; }
         attribute :>> careSetting = "inpatient ward and transfer between wards";
         attribute :>> environment = "moving bed, up to four hours away from mains power";
         attribute :>> connectedUse = false;

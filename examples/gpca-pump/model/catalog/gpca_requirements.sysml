@@ -28,202 +28,202 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── Stakeholder needs ───────────────────────────────────────
     requirement needSafeTherapy : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "NEED-001"; } attribute :>> name = "SafePatientControlledTherapy";
+        @MemoIdentity { :>> providedId = "NEED-001"; :>> label = "SafePatientControlledTherapy"; }
         attribute :>> statement = "The device shall support safe patient controlled analgesic infusion therapy.";
         attribute :>> priority = "high";
     }
     requirement needEffectiveAnalgesia : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "NEED-002"; } attribute :>> name = "EffectivePainManagement";
+        @MemoIdentity { :>> providedId = "NEED-002"; :>> label = "EffectivePainManagement"; }
         attribute :>> statement = "The device shall deliver the prescribed basal and bolus doses accurately so the patient receives effective analgesia.";
         attribute :>> priority = "high";
     }
     requirement needTimelyAlarms : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "NEED-003"; } attribute :>> name = "TimelyAlarmNotification";
+        @MemoIdentity { :>> providedId = "NEED-003"; :>> label = "TimelyAlarmNotification"; }
         attribute :>> statement = "Clinicians shall be notified promptly and unambiguously of any condition that interrupts or endangers therapy.";
         attribute :>> priority = "high";
     }
     requirement needAuditableRecord : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "NEED-004"; } attribute :>> name = "AuditableTherapyRecord";
+        @MemoIdentity { :>> providedId = "NEED-004"; :>> label = "AuditableTherapyRecord"; }
         attribute :>> statement = "All delivered doses, alarms, and prescription changes shall be reviewable after the fact.";
         attribute :>> priority = "medium";
     }
 
     // ── System constants (CriSys App. A.4; I 8; Ch.5) ───────────
     part constMaxRateofFlowChange : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-01"; } attribute :>> name = "Max_Rateof_Flow_Change";
+        @MemoIdentity { :>> providedId = "CONST-01"; :>> label = "Max_Rateof_Flow_Change"; }
         attribute :>> symbol = "Max_Rateof_Flow_Change_const";
-        attribute :>> description = "Maximum rate of change of flow of drug in the hose.";
+        doc /* Maximum rate of change of flow of drug in the hose. */
         attribute :>> unit = "ml/sec2"; attribute :>> valueType = "Numeric";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constMaxModeChangeDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-02"; } attribute :>> name = "Max_Mode_Change_Duration";
+        @MemoIdentity { :>> providedId = "CONST-02"; :>> label = "Max_Mode_Change_Duration"; }
         attribute :>> symbol = "Max_Mode_Change_Duration_const";
-        attribute :>> description = "Maximum time to be taken for mode transition.";
+        doc /* Maximum time to be taken for mode transition. */
         attribute :>> unit = "sec"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constConfigWarningDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-03"; } attribute :>> name = "Config_Warning_Duration";
+        @MemoIdentity { :>> providedId = "CONST-03"; :>> label = "Config_Warning_Duration"; }
         attribute :>> symbol = "Config_Warning_Duration_const";
-        attribute :>> description = "Recommended duration of prescription values configuration.";
+        doc /* Recommended duration of prescription values configuration. */
         attribute :>> unit = "sec"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constMaxConfigDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-04"; } attribute :>> name = "Max_Config_Duration";
+        @MemoIdentity { :>> providedId = "CONST-04"; :>> label = "Max_Config_Duration"; }
         attribute :>> symbol = "Max_Config_Duration_const";
-        attribute :>> description = "Maximum time allowed for configuration.";
+        doc /* Maximum time allowed for configuration. */
         attribute :>> unit = "sec"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constMaxIdleDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-05"; } attribute :>> name = "Max_IDLE_Duration";
+        @MemoIdentity { :>> providedId = "CONST-05"; :>> label = "Max_IDLE_Duration"; }
         attribute :>> symbol = "Max_IDLE_Duration_const";
-        attribute :>> description = "Maximum duration the system is allowed to be in IDLE mode continuously.";
+        doc /* Maximum duration the system is allowed to be in IDLE mode continuously. */
         attribute :>> unit = "sec"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constMaxDurationUnderInfusion : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-06"; } attribute :>> name = "Max_Duration_UnderInfusion";
+        @MemoIdentity { :>> providedId = "CONST-06"; :>> label = "Max_Duration_UnderInfusion"; }
         attribute :>> symbol = "Max_Duration_UnderInfusion_const";
-        attribute :>> description = "Maximum cumulative duration the system can infuse below the respective mode's flow rate minus Tolerance_Min_const in any delta time interval.";
+        doc /* Maximum cumulative duration the system can infuse below the respective mode's flow rate minus Tolerance_Min_const in any delta time interval. */
         attribute :>> unit = "sec"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constMaxDurationOverInfusion : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-07"; } attribute :>> name = "Max_Duration_OverInfusion";
+        @MemoIdentity { :>> providedId = "CONST-07"; :>> label = "Max_Duration_OverInfusion"; }
         attribute :>> symbol = "Max_Duration_OverInfusion_const";
-        attribute :>> description = "Maximum cumulative duration the system can infuse above the respective mode's flow rate plus Tolerance_Min_const in any delta time interval.";
+        doc /* Maximum cumulative duration the system can infuse above the respective mode's flow rate plus Tolerance_Min_const in any delta time interval. */
         attribute :>> unit = "sec"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constLowReservoir : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-08"; } attribute :>> name = "Low_Reservoir";
+        @MemoIdentity { :>> providedId = "CONST-08"; :>> label = "Low_Reservoir"; }
         attribute :>> symbol = "Low_Reservoir_const";
-        attribute :>> description = "Volume in the drug reservoir that needs notification for Low Reservoir.";
+        doc /* Volume in the drug reservoir that needs notification for Low Reservoir. */
         attribute :>> unit = "ml"; attribute :>> valueType = "Numeric";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "should be greater than Empty_Reservoir_const";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constEmptyReservoir : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-09"; } attribute :>> name = "Empty_Reservoir";
+        @MemoIdentity { :>> providedId = "CONST-09"; :>> label = "Empty_Reservoir"; }
         attribute :>> symbol = "Empty_Reservoir_const";
-        attribute :>> description = "Volume in the drug reservoir that needs notification for Empty Reservoir.";
+        doc /* Volume in the drug reservoir that needs notification for Empty Reservoir. */
         attribute :>> unit = "ml"; attribute :>> valueType = "Numeric";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "should be greater than FlowRate_kvo_hd (as written in the source)";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constSingleAirBubbleVolume : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-10"; } attribute :>> name = "Single_AirBubble_Volume";
+        @MemoIdentity { :>> providedId = "CONST-10"; :>> label = "Single_AirBubble_Volume"; }
         attribute :>> symbol = "Single_AirBubble_Volume_const";
-        attribute :>> description = "Maximum volume of a single air bubble that is safe to be infused.";
+        doc /* Maximum volume of a single air bubble that is safe to be infused. */
         attribute :>> unit = "ml"; attribute :>> valueType = "Numeric";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constCumulativeAirBubbleVolume : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-11"; } attribute :>> name = "Cumulative_AirBubble_Volume";
+        @MemoIdentity { :>> providedId = "CONST-11"; :>> label = "Cumulative_AirBubble_Volume"; }
         attribute :>> symbol = "Cumulative_AirBubble_Volume_const";
-        attribute :>> description = "Maximum volume of air bubbles cumulatively in a delta time interval that is safe to be infused.";
+        doc /* Maximum volume of air bubbles cumulatively in a delta time interval that is safe to be infused. */
         attribute :>> unit = "ml"; attribute :>> valueType = "Numeric";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constRevDeliveryContinuousDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-12"; } attribute :>> name = "Rev_Delivery_Continuous_Duration";
+        @MemoIdentity { :>> providedId = "CONST-12"; :>> label = "Rev_Delivery_Continuous_Duration"; }
         attribute :>> symbol = "Rev_Delivery_Continuous_Duration_const";
-        attribute :>> description = "Maximum duration the system is acceptable to be in reverse delivery continuously.";
+        doc /* Maximum duration the system is acceptable to be in reverse delivery continuously. */
         attribute :>> unit = "minutes"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constRevDeliveryCumulativeDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-13"; } attribute :>> name = "Rev_Delivery_Cumulative_Duration";
+        @MemoIdentity { :>> providedId = "CONST-13"; :>> label = "Rev_Delivery_Cumulative_Duration"; }
         attribute :>> symbol = "Rev_Delivery_Cumulative_Duration_const";
-        attribute :>> description = "Maximum duration the system is acceptable to be in reverse delivery cumulatively in a delta time interval.";
+        doc /* Maximum duration the system is acceptable to be in reverse delivery cumulatively in a delta time interval. */
         attribute :>> unit = "minutes"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constMaxPausedDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-14"; } attribute :>> name = "Max_PAUSED_Duration";
+        @MemoIdentity { :>> providedId = "CONST-14"; :>> label = "Max_PAUSED_Duration"; }
         attribute :>> symbol = "Max_PAUSED_Duration_const";
-        attribute :>> description = "Maximum duration the system is allowed to be in PAUSED mode continuously.";
+        doc /* Maximum duration the system is allowed to be in PAUSED mode continuously. */
         attribute :>> unit = "sec"; attribute :>> valueType = "Time";
         attribute :>> constantValue = ""; attribute :>> valueCondition = "value left open by the source";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constToleranceMax : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-15"; } attribute :>> name = "Tolerance_Max";
+        @MemoIdentity { :>> providedId = "CONST-15"; :>> label = "Tolerance_Max"; }
         attribute :>> symbol = "Tolerance_Max_const";
-        attribute :>> description = "Maximum acceptable variation in flow rate in any mode, specified as a percentage of the respective mode's flow rate.";
+        doc /* Maximum acceptable variation in flow rate in any mode, specified as a percentage of the respective mode's flow rate. */
         attribute :>> unit = "%"; attribute :>> valueType = "Positive Integer";
         attribute :>> constantValue = "20 %"; attribute :>> valueCondition = "";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constToleranceMin : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-16"; } attribute :>> name = "Tolerance_Min";
+        @MemoIdentity { :>> providedId = "CONST-16"; :>> label = "Tolerance_Min"; }
         attribute :>> symbol = "Tolerance_Min_const";
-        attribute :>> description = "Tolerance in flow rate variation that is acceptable for a certain duration of time (Max_Duration_OverInfusion_const, Max_Duration_UnderInfusion_const); computed like Tolerance_Max_const.";
+        doc /* Tolerance in flow rate variation that is acceptable for a certain duration of time (Max_Duration_OverInfusion_const, Max_Duration_UnderInfusion_const); computed like Tolerance_Max_const. */
         attribute :>> unit = "%"; attribute :>> valueType = "Positive Integer";
         attribute :>> constantValue = "5 %"; attribute :>> valueCondition = "";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constAudioLevel : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-17"; } attribute :>> name = "Audio_level";
+        @MemoIdentity { :>> providedId = "CONST-17"; :>> label = "Audio_level"; }
         attribute :>> symbol = "Audio_level_const";
-        attribute :>> description = "Acceptable level of sound for audio notification. Interface spec I 8 states 50 db for 2 seconds per notification; the App. A.4 value cell is inconsistent in the source (lists '5 %').";
+        doc /* Acceptable level of sound for audio notification. Interface spec I 8 states 50 db for 2 seconds per notification; the App. A.4 value cell is inconsistent in the source (lists '5 %'). */
         attribute :>> unit = "decibels"; attribute :>> valueType = "Positive Integer";
         attribute :>> constantValue = "50 db for 2 seconds per notification"; attribute :>> valueCondition = "";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.4 (I 8) and App. A.4"; }
     }
     part constAudioEnableDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-18"; } attribute :>> name = "Audio_Enable_Duration";
+        @MemoIdentity { :>> providedId = "CONST-18"; :>> label = "Audio_Enable_Duration"; }
         attribute :>> symbol = "Audio_Enable_Duration_const";
-        attribute :>> description = "Audio notification temporary silencing duration.";
+        doc /* Audio notification temporary silencing duration. */
         attribute :>> unit = "minutes"; attribute :>> valueType = "Positive Integer";
         attribute :>> constantValue = "30"; attribute :>> valueCondition = "";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constLogInterval : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-19"; } attribute :>> name = "Log_Interval";
+        @MemoIdentity { :>> providedId = "CONST-19"; :>> label = "Log_Interval"; }
         attribute :>> symbol = "Log_Interval_const";
-        attribute :>> description = "Interval at which operational information should be recorded.";
+        doc /* Interval at which operational information should be recorded. */
         attribute :>> unit = "minutes"; attribute :>> valueType = "Positive Integer";
         attribute :>> constantValue = "5"; attribute :>> valueCondition = "";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), App. A.4"; }
     }
     part constErrorLogRetention : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-20"; } attribute :>> name = "Error_Log_Retention";
+        @MemoIdentity { :>> providedId = "CONST-20"; :>> label = "Error_Log_Retention"; }
         attribute :>> symbol = "Error_Log_Retention";
-        attribute :>> description = "Duration for which the most recent error log data shall persist (REQ 85).";
+        doc /* Duration for which the most recent error log data shall persist (REQ 85). */
         attribute :>> unit = "days"; attribute :>> valueType = "Time";
         attribute :>> constantValue = "30"; attribute :>> valueCondition = "";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §5.1 (REQ 85)"; }
     }
     part constOperationalLogRetention : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-21"; } attribute :>> name = "Operational_Log_Retention";
+        @MemoIdentity { :>> providedId = "CONST-21"; :>> label = "Operational_Log_Retention"; }
         attribute :>> symbol = "Operational_Log_Retention";
-        attribute :>> description = "Duration for which the most recent operational log data shall persist (REQ 85).";
+        doc /* Duration for which the most recent operational log data shall persist (REQ 85). */
         attribute :>> unit = "days"; attribute :>> valueType = "Time";
         attribute :>> constantValue = "15"; attribute :>> valueCondition = "";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §5.1 (REQ 85)"; }
     }
     part constPrescriptionPersistDuration : SystemConstant {
-        @MemoIdentity { :>> providedId = "CONST-22"; } attribute :>> name = "Prescription_Persist_Duration";
+        @MemoIdentity { :>> providedId = "CONST-22"; :>> label = "Prescription_Persist_Duration"; }
         attribute :>> symbol = "Prescription_Persist_Duration";
-        attribute :>> description = "Duration for which the last saved prescription data shall persist (REQ 86).";
+        doc /* Duration for which the last saved prescription data shall persist (REQ 86). */
         attribute :>> unit = "days"; attribute :>> valueType = "Time";
         attribute :>> constantValue = "15"; attribute :>> valueCondition = "";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §5.1 (REQ 86)"; }
@@ -236,7 +236,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // restriction: Inhibit All Infusion > Inhibit Square Bolus >
     // Inhibit Patient Bolus.
     part notifLowReservoir : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-01"; } attribute :>> name = "Low_Reservoir";
+        @MemoIdentity { :>> providedId = "NOTIF-01"; :>> label = "Low_Reservoir"; }
         attribute :>> priority = NotificationPriorityKind::high;
         attribute :>> visualNotification = true; attribute :>> audioNotification = false;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = true;
@@ -244,7 +244,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifEmptyReservoir : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-02"; } attribute :>> name = "Empty_Reservoir";
+        @MemoIdentity { :>> providedId = "NOTIF-02"; :>> label = "Empty_Reservoir"; }
         attribute :>> priority = NotificationPriorityKind::high;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = true; attribute :>> inhibitSquareBolus = true;
@@ -252,7 +252,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifAirEmbolism : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-03"; } attribute :>> name = "Air_embolism";
+        @MemoIdentity { :>> providedId = "NOTIF-03"; :>> label = "Air_embolism"; }
         attribute :>> priority = NotificationPriorityKind::high;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = true; attribute :>> inhibitSquareBolus = true;
@@ -260,7 +260,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifReverseDelivery : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-04"; } attribute :>> name = "Reverse_Delivery";
+        @MemoIdentity { :>> providedId = "NOTIF-04"; :>> label = "Reverse_Delivery"; }
         attribute :>> priority = NotificationPriorityKind::high;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = true; attribute :>> inhibitSquareBolus = true;
@@ -268,7 +268,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifOverInfusionFlowRate : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-05"; } attribute :>> name = "Over_Infusion_FlowRate";
+        @MemoIdentity { :>> providedId = "NOTIF-05"; :>> label = "Over_Infusion_FlowRate"; }
         attribute :>> priority = NotificationPriorityKind::high;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = true; attribute :>> inhibitSquareBolus = true;
@@ -276,7 +276,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifOverInfusionVtbi : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-06"; } attribute :>> name = "Over_Infusion_VTBI";
+        @MemoIdentity { :>> providedId = "NOTIF-06"; :>> label = "Over_Infusion_VTBI"; }
         attribute :>> priority = NotificationPriorityKind::high;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = true; attribute :>> inhibitSquareBolus = true;
@@ -284,7 +284,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifBolusExceeded : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-07"; } attribute :>> name = "Bolus_Exceeded";
+        @MemoIdentity { :>> providedId = "NOTIF-07"; :>> label = "Bolus_Exceeded"; }
         attribute :>> priority = NotificationPriorityKind::medium;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -292,7 +292,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifInfusionInhibited : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-08"; } attribute :>> name = "Infusion_Inhibited";
+        @MemoIdentity { :>> providedId = "NOTIF-08"; :>> label = "Infusion_Inhibited"; }
         attribute :>> priority = NotificationPriorityKind::medium;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = true; attribute :>> inhibitSquareBolus = false;
@@ -300,7 +300,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifInfusionManuallyInhibited : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-09"; } attribute :>> name = "Infusion_Manually_Inhibited";
+        @MemoIdentity { :>> providedId = "NOTIF-09"; :>> label = "Infusion_Manually_Inhibited"; }
         attribute :>> priority = NotificationPriorityKind::medium;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = true; attribute :>> inhibitSquareBolus = false;
@@ -308,7 +308,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifInfusionStoppedManually : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-10"; } attribute :>> name = "Infusion_Stopped_Manually";
+        @MemoIdentity { :>> providedId = "NOTIF-10"; :>> label = "Infusion_Stopped_Manually"; }
         attribute :>> priority = NotificationPriorityKind::medium;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = true; attribute :>> inhibitSquareBolus = false;
@@ -316,7 +316,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifUnderInfusionFlowRate : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-11"; } attribute :>> name = "Under_Infusion_FlowRate";
+        @MemoIdentity { :>> providedId = "NOTIF-11"; :>> label = "Under_Infusion_FlowRate"; }
         attribute :>> priority = NotificationPriorityKind::medium;
         attribute :>> visualNotification = true; attribute :>> audioNotification = false;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -324,7 +324,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifUnderInfusionVtbi : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-12"; } attribute :>> name = "Under_Infusion_VTBI";
+        @MemoIdentity { :>> providedId = "NOTIF-12"; :>> label = "Under_Infusion_VTBI"; }
         attribute :>> priority = NotificationPriorityKind::medium;
         attribute :>> visualNotification = true; attribute :>> audioNotification = false;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -332,7 +332,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifInfusionComplete : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-13"; } attribute :>> name = "Infusion_Complete";
+        @MemoIdentity { :>> providedId = "NOTIF-13"; :>> label = "Infusion_Complete"; }
         attribute :>> priority = NotificationPriorityKind::low;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -340,7 +340,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifFrequentBolusRequests : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-14"; } attribute :>> name = "Frequent_Bolus_Requests";
+        @MemoIdentity { :>> providedId = "NOTIF-14"; :>> label = "Frequent_Bolus_Requests"; }
         attribute :>> priority = NotificationPriorityKind::low;
         attribute :>> visualNotification = true; attribute :>> audioNotification = false;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -348,7 +348,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifIdleTime : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-15"; } attribute :>> name = "IDLE_Time";
+        @MemoIdentity { :>> providedId = "NOTIF-15"; :>> label = "IDLE_Time"; }
         attribute :>> priority = NotificationPriorityKind::low;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -356,7 +356,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifPausedTime : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-16"; } attribute :>> name = "PAUSED_Time";
+        @MemoIdentity { :>> providedId = "NOTIF-16"; :>> label = "PAUSED_Time"; }
         attribute :>> priority = NotificationPriorityKind::low;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -364,7 +364,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifConfigTime : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-17"; } attribute :>> name = "Config_Time";
+        @MemoIdentity { :>> providedId = "NOTIF-17"; :>> label = "Config_Time"; }
         attribute :>> priority = NotificationPriorityKind::low;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -372,7 +372,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifValidationFailed : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-18"; } attribute :>> name = "Validation_Failed";
+        @MemoIdentity { :>> providedId = "NOTIF-18"; :>> label = "Validation_Failed"; }
         attribute :>> priority = NotificationPriorityKind::low;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -380,8 +380,8 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifDrugSafeValueNotPresent : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-19"; } attribute :>> name = "Drug_safe_value_not_present";
-        attribute :>> description = "Raised with the missing field names appended.";
+        @MemoIdentity { :>> providedId = "NOTIF-19"; :>> label = "Drug_safe_value_not_present"; }
+        doc /* Raised with the missing field names appended. */
         attribute :>> priority = NotificationPriorityKind::low;
         attribute :>> visualNotification = true; attribute :>> audioNotification = false;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -389,7 +389,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 REQ 59 table"; }
     }
     part notifDrugDatabaseNotReachable : NotificationSpec {
-        @MemoIdentity { :>> providedId = "NOTIF-20"; } attribute :>> name = "Drug_database_not_reachable";
+        @MemoIdentity { :>> providedId = "NOTIF-20"; :>> label = "Drug_database_not_reachable"; }
         attribute :>> priority = NotificationPriorityKind::low;
         attribute :>> visualNotification = true; attribute :>> audioNotification = true;
         attribute :>> inhibitInfusion = false; attribute :>> inhibitSquareBolus = false;
@@ -400,7 +400,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ═════ CriSys system requirements — §4.1.1 GPCA System ══════
     requirement reqCs01 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-01"; } attribute :>> name = "SingleActiveMode";
+        @MemoIdentity { :>> providedId = "REQ-CS-01"; :>> label = "SingleActiveMode"; }
         attribute :>> statement = "The system shall always be in only one of the following modes: OFF (default mode), IDLE, PAUSED, BASAL, SQUARE BOLUS or PATIENT BOLUS.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -411,7 +411,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs02 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-02"; } attribute :>> name = "ModeChangeDurationWithoutFlowChange";
+        @MemoIdentity { :>> providedId = "REQ-CS-02"; :>> label = "ModeChangeDurationWithoutFlowChange"; }
         attribute :>> statement = "If there are mode transitions without change in flow rates between the two modes, the system shall transition within Max_Mode_Change_Duration_const.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::performance;
@@ -422,7 +422,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs03 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-03"; } attribute :>> name = "ModeChangeFlowRamp";
+        @MemoIdentity { :>> providedId = "REQ-CS-03"; :>> label = "ModeChangeFlowRamp"; }
         attribute :>> statement = "If there are mode transitions with change in flow rates between the two modes, the system shall change from the current mode flow rate to the new mode flow rate at a rate not more than Max_Rateof_Flow_Change_const or within Max_Mode_Change_Duration_const, whichever achieves the new desired flow rate the quickest.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::performance;
@@ -433,7 +433,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs04 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-04"; } attribute :>> name = "OffToIdleOnSystemStart";
+        @MemoIdentity { :>> providedId = "REQ-CS-04"; :>> label = "OffToIdleOnSystemStart"; }
         attribute :>> statement = "The system shall transition from OFF mode to ON > IDLE mode when System_start_prog is commanded. At this transition, the variables in App. A.4 shall be set to their default values.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -444,7 +444,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs05 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-05"; } attribute :>> name = "OnToOffOnSystemStop";
+        @MemoIdentity { :>> providedId = "REQ-CS-05"; :>> label = "OnToOffOnSystemStop"; }
         attribute :>> statement = "While in ON mode, when System_stop_prog is commanded, the system shall stop infusion, cancel all notifications and transition to OFF mode.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -457,7 +457,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.1.2 OFF mode ─────────────────────────────────────────
     requirement reqCs06 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-06"; } attribute :>> name = "OffModeNoDelivery";
+        @MemoIdentity { :>> providedId = "REQ-CS-06"; :>> label = "OffModeNoDelivery"; }
         attribute :>> statement = "While in OFF mode, the system shall not deliver any drug.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -470,7 +470,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.1.3 ON mode ──────────────────────────────────────────
     requirement reqCs07 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-07"; } attribute :>> name = "InfusionRequiresSavedPrescription";
+        @MemoIdentity { :>> providedId = "REQ-CS-07"; :>> label = "InfusionRequiresSavedPrescription"; }
         attribute :>> statement = "While in ON mode, the system shall allow initiation of infusion only when a saved prescription is available.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -481,7 +481,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs08 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-08"; } attribute :>> name = "AllowDataConfigurationInOn";
+        @MemoIdentity { :>> providedId = "REQ-CS-08"; :>> label = "AllowDataConfigurationInOn"; }
         attribute :>> statement = "While in ON mode, the system shall allow configuring (DataConfig_prog) new or saved prescription data and reservoir initial volume, as described in the Data Configuration Requirements (§4.2).";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -492,7 +492,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs09 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-09"; } attribute :>> name = "PrescriptionDisplayAndConfirm";
+        @MemoIdentity { :>> providedId = "REQ-CS-09"; :>> label = "PrescriptionDisplayAndConfirm"; }
         attribute :>> statement = "While in ON mode, if Infusion_initiate_prog, the system shall display the saved prescription values and allow the clinician to confirm the prescription with another Infusion_initiate_prog.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -503,7 +503,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs10 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-10"; } attribute :>> name = "AllowNotificationsInOn";
+        @MemoIdentity { :>> providedId = "REQ-CS-10"; :>> label = "AllowNotificationsInOn"; }
         attribute :>> statement = "While in ON mode, the system shall allow visual and audio notification as described in §4.3.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -514,7 +514,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs11 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-11"; } attribute :>> name = "AllowLoggingInOn";
+        @MemoIdentity { :>> providedId = "REQ-CS-11"; :>> label = "AllowLoggingInOn"; }
         attribute :>> statement = "While in ON mode, the system shall allow logging as described in §4.4.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -525,7 +525,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs12 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-12"; } attribute :>> name = "ConfirmedInitiateStartsBasal";
+        @MemoIdentity { :>> providedId = "REQ-CS-12"; :>> label = "ConfirmedInitiateStartsBasal"; }
         attribute :>> statement = "While in ON mode, when the second Infusion_initiate_prog is commanded as per REQ 9 and Inhibited_Infusion_macro = FALSE, the system shall reset Actual_Infusion_Duration_macro = 0 and Actual_Volume_Infused_macro = 0 and shall transition to ON > THERAPY > ACTIVE > BASAL mode.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -536,7 +536,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs13 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-13"; } attribute :>> name = "ConfirmedInitiateWhileInhibitedPauses";
+        @MemoIdentity { :>> providedId = "REQ-CS-13"; :>> label = "ConfirmedInitiateWhileInhibitedPauses"; }
         attribute :>> statement = "While in ON mode, when the second Infusion_initiate_prog is commanded as per REQ 9 and Inhibited_Infusion_macro = TRUE, the system shall reset Actual_Infusion_Duration_macro = 0 and Actual_Volume_Infused_macro = 0, shall transition to ON > THERAPY > PAUSED mode and perform actions as described in REQ 59 for 'Infusion Inhibited'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -549,7 +549,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.1.4 ON > IDLE mode ───────────────────────────────────
     requirement reqCs14 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-14"; } attribute :>> name = "IdleModeNoDelivery";
+        @MemoIdentity { :>> providedId = "REQ-CS-14"; :>> label = "IdleModeNoDelivery"; }
         attribute :>> statement = "While in IDLE mode, the system shall not deliver any drug.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -560,7 +560,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs15 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-15"; } attribute :>> name = "IdleTimeNotification";
+        @MemoIdentity { :>> providedId = "REQ-CS-15"; :>> label = "IdleTimeNotification"; }
         attribute :>> statement = "While in IDLE mode for more than Max_IDLE_Duration_const, the system shall take actions as defined in REQ 59 for 'IDLE Time'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -573,7 +573,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.1.5 ON > THERAPY mode ────────────────────────────────
     requirement reqCs16 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-16"; } attribute :>> name = "TherapyDeliveryWithinTolerance";
+        @MemoIdentity { :>> providedId = "REQ-CS-16"; :>> label = "TherapyDeliveryWithinTolerance"; }
         attribute :>> statement = "While in THERAPY mode, the system shall deliver the drug as per the respective sub-mode's programmed flow rate, FlowRate_Mode_macro, within a tolerance of Tolerance_Max_const.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -584,7 +584,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs17 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-17"; } attribute :>> name = "UnderInfusionFlowRateNotification";
+        @MemoIdentity { :>> providedId = "REQ-CS-17"; :>> label = "UnderInfusionFlowRateNotification"; }
         attribute :>> statement = "While in THERAPY mode, the system shall take actions as defined in REQ 59 for 'Under Infusion FlowRate' if the output flow rate falls below the mode flow rate beyond the tolerance windows.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -595,7 +595,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs18 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-18"; } attribute :>> name = "LowReservoirNotification";
+        @MemoIdentity { :>> providedId = "REQ-CS-18"; :>> label = "LowReservoirNotification"; }
         attribute :>> statement = "While in THERAPY mode, when the current volume of drug in the reservoir is less than Low_Reservoir_const, the system shall perform the actions defined in REQ 59 for 'Low Reservoir'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -606,7 +606,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs19 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-19"; } attribute :>> name = "OverInfusionFlowRatePause";
+        @MemoIdentity { :>> providedId = "REQ-CS-19"; :>> label = "OverInfusionFlowRatePause"; }
         attribute :>> statement = "While in THERAPY mode, the system shall transition to PAUSED mode and perform the actions described in REQ 59 for 'Over Infusion FlowRate' if the output flow rate exceeds the mode flow rate beyond the tolerance windows.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -617,7 +617,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs20 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-20"; } attribute :>> name = "OverInfusionVtbiPause";
+        @MemoIdentity { :>> providedId = "REQ-CS-20"; :>> label = "OverInfusionVtbiPause"; }
         attribute :>> statement = "While in THERAPY mode, the system shall transition to PAUSED mode and take the actions described in REQ 59 for 'Over Infusion VTBI' if the actual volume infused exceeds the drug-database maximum VTBI.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -628,7 +628,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs21 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-21"; } attribute :>> name = "AirEmbolismPause";
+        @MemoIdentity { :>> providedId = "REQ-CS-21"; :>> label = "AirEmbolismPause"; }
         attribute :>> statement = "While in THERAPY mode, the system shall transition to PAUSED mode and perform the actions defined in REQ 59 for 'Air embolism' if an air bubble of a volume larger than Single_AirBubble_Volume_const flows through the hose, or the sum of volume of all air bubbles flowing through the hose exceeds Cumulative_AirBubble_Volume_const for the same time interval defined for Cumulative_AirBubble_Volume_const.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -639,7 +639,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs22 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-22"; } attribute :>> name = "ReverseDeliveryPause";
+        @MemoIdentity { :>> providedId = "REQ-CS-22"; :>> label = "ReverseDeliveryPause"; }
         attribute :>> statement = "While in THERAPY mode, the system shall transition to PAUSED mode and perform actions defined in REQ 59 for 'Reverse Delivery' if there is continuous reverse delivery for more than Rev_Delivery_Continuous_Duration_const, or the cumulative time of all reverse delivery episodes exceeds Rev_Delivery_Cumulative_Duration_const.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -650,7 +650,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs23 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-23"; } attribute :>> name = "EmptyReservoirPause";
+        @MemoIdentity { :>> providedId = "REQ-CS-23"; :>> label = "EmptyReservoirPause"; }
         attribute :>> statement = "While in THERAPY mode and if the volume of drug in the reservoir is less than Empty_Reservoir_const, the system shall transition to PAUSED mode and perform actions as listed in REQ 59 for 'Empty Reservoir'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -663,7 +663,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.1.6 ON > THERAPY > ACTIVE mode ───────────────────────
     requirement reqCs24 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-24"; } attribute :>> name = "SquareBolusAutoSchedule";
+        @MemoIdentity { :>> providedId = "REQ-CS-24"; :>> label = "SquareBolusAutoSchedule"; }
         attribute :>> statement = "While in ACTIVE mode, the system shall schedule to start a SQUARE BOLUS every Interval_sbolus_prog and end after Duration_sbolus_prog during the Duration_total_prog.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -674,7 +674,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs25 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-25"; } attribute :>> name = "IgnorePatientBolusRequestConditions";
+        @MemoIdentity { :>> providedId = "REQ-CS-25"; :>> label = "IgnorePatientBolusRequestConditions"; }
         attribute :>> statement = "While in ACTIVE mode, when BolusRequest_prog, the system shall ignore the patient bolus request (BolusRequest_prog = FALSE) if: (1) Inhibited_Infusion_macro = TRUE, OR (2) Inhibited_PatientBolus_macro = TRUE, OR (3) the interval between the most recent PATIENT BOLUS mode end time and the current BolusRequest_prog time violates LockOutPeriod_pbolus_prog, OR (4) the total number of delivered patient boluses for the current prescription violates the programmed maximum number of patient boluses, OR (5) the system is currently in PATIENT BOLUS mode.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -685,7 +685,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs26 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-26"; } attribute :>> name = "FrequentBolusRequestsNotification";
+        @MemoIdentity { :>> providedId = "REQ-CS-26"; :>> label = "FrequentBolusRequestsNotification"; }
         attribute :>> statement = "While in ACTIVE mode, the system shall perform the actions described in REQ 59 for 'Frequent Bolus Requests' if the condition described in REQ 25.3 or REQ 25.5 occurs.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -696,7 +696,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs27 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-27"; } attribute :>> name = "BolusExceededNotification";
+        @MemoIdentity { :>> providedId = "REQ-CS-27"; :>> label = "BolusExceededNotification"; }
         attribute :>> statement = "While in ACTIVE mode, the system shall perform the actions described in REQ 59 for 'Bolus Exceeded' if the condition described in REQ 25.4 occurs.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -707,7 +707,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs28 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-28"; } attribute :>> name = "InfusionCompleteToIdle";
+        @MemoIdentity { :>> providedId = "REQ-CS-28"; :>> label = "InfusionCompleteToIdle"; }
         attribute :>> statement = "While in ACTIVE mode, the system shall transition to IDLE and perform actions described in REQ 59 for 'Infusion Complete' if the actual duration of infusion is greater than or equal to the programmed prescription total duration, or the total volume infused is greater than or equal to the programmed prescription maximum VTBI.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -718,7 +718,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs29 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-29"; } attribute :>> name = "ManualInhibitToPaused";
+        @MemoIdentity { :>> providedId = "REQ-CS-29"; :>> label = "ManualInhibitToPaused"; }
         attribute :>> statement = "While in ACTIVE mode, when Infusion_inhibit_prog, the system shall transition to PAUSED mode and perform actions described in REQ 59 for 'Infusion Manually Inhibited'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -729,7 +729,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs30 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-30"; } attribute :>> name = "AllInhibitedToPaused";
+        @MemoIdentity { :>> providedId = "REQ-CS-30"; :>> label = "AllInhibitedToPaused"; }
         attribute :>> statement = "While in ACTIVE mode, when Inhibited_Infusion_macro = TRUE, Inhibited_Bolus_macro = TRUE and Inhibited_PatientBolus_macro = TRUE, the system shall transition to PAUSED mode.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -740,7 +740,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs31 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-31"; } attribute :>> name = "BasalToSquareBolus";
+        @MemoIdentity { :>> providedId = "REQ-CS-31"; :>> label = "BasalToSquareBolus"; }
         attribute :>> statement = "While in BASAL mode, when SQUARE BOLUS is initiated as described in REQ 24, the system shall transition to SQUARE BOLUS mode if (1) Inhibited_Bolus_macro = FALSE, AND (2) Inhibited_Infusion_macro = FALSE, AND (3) either there is no BolusRequest_prog, or there is a BolusRequest_prog and at least one of the conditions listed in REQ 25 is true.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -751,7 +751,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs32 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-32"; } attribute :>> name = "BasalToPatientBolus";
+        @MemoIdentity { :>> providedId = "REQ-CS-32"; :>> label = "BasalToPatientBolus"; }
         attribute :>> statement = "While in BASAL mode, the system shall transition to PATIENT BOLUS mode when BolusRequest_prog and none of the conditions listed in REQ 25 are true.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -762,7 +762,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs33 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-33"; } attribute :>> name = "SquareBolusToPatientBolus";
+        @MemoIdentity { :>> providedId = "REQ-CS-33"; :>> label = "SquareBolusToPatientBolus"; }
         attribute :>> statement = "While in SQUARE BOLUS mode, the system shall transition to PATIENT BOLUS mode if BolusRequest_prog and none of the conditions listed in REQ 25 are true.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -773,7 +773,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs34 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-34"; } attribute :>> name = "SquareBolusToBasal";
+        @MemoIdentity { :>> providedId = "REQ-CS-34"; :>> label = "SquareBolusToBasal"; }
         attribute :>> statement = "While in SQUARE BOLUS mode, if Inhibited_Bolus_macro = TRUE or the SQUARE BOLUS is scheduled to end (as described in REQ 24), the system shall transition to BASAL mode if (1) Inhibited_Infusion_macro = FALSE, AND (2) there is no BolusRequest_prog, or BolusRequest_prog and at least one of the conditions listed in REQ 25 is true.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -784,7 +784,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs35 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-35"; } attribute :>> name = "PatientBolusToBasal";
+        @MemoIdentity { :>> providedId = "REQ-CS-35"; :>> label = "PatientBolusToBasal"; }
         attribute :>> statement = "While in PATIENT BOLUS mode, when Inhibited_PatientBolus_macro = TRUE or the total duration in the current PATIENT BOLUS mode is greater than or equal to Duration_pbolus_prog, the system shall stop the PATIENT BOLUS delivery and transition to BASAL mode if (1) Inhibited_Infusion_macro = FALSE, AND (2) no SQUARE BOLUS is scheduled to be in progress at the time of transition, OR (3) a SQUARE BOLUS is scheduled to be in progress at the time of transition and Inhibited_Bolus_macro = TRUE.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -795,7 +795,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs36 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-36"; } attribute :>> name = "PatientBolusToSquareBolus";
+        @MemoIdentity { :>> providedId = "REQ-CS-36"; :>> label = "PatientBolusToSquareBolus"; }
         attribute :>> statement = "While in PATIENT BOLUS mode, when Inhibited_PatientBolus_macro = TRUE or the total duration in the current PATIENT BOLUS mode is greater than or equal to Duration_pbolus_prog, the system shall stop the PATIENT BOLUS delivery and transition to SQUARE BOLUS mode if (1) Inhibited_Infusion_macro = FALSE, AND (2) a SQUARE BOLUS is scheduled to be in progress at the time of transition, AND (3) Inhibited_Bolus_macro = FALSE.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -806,7 +806,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs37 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-37"; } attribute :>> name = "BasalToPauseOnInhibit";
+        @MemoIdentity { :>> providedId = "REQ-CS-37"; :>> label = "BasalToPauseOnInhibit"; }
         attribute :>> statement = "While in BASAL mode, if Inhibited_Infusion_macro = TRUE, the system shall transition to PAUSE mode.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -817,7 +817,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs38 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-38"; } attribute :>> name = "PatientBolusToPauseOnInhibit";
+        @MemoIdentity { :>> providedId = "REQ-CS-38"; :>> label = "PatientBolusToPauseOnInhibit"; }
         attribute :>> statement = "While in PATIENT BOLUS mode, the system shall transition to PAUSE mode if Inhibited_PatientBolus_macro = TRUE and Inhibited_Infusion_macro = TRUE.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -828,7 +828,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs39 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-39"; } attribute :>> name = "SquareBolusToPauseOnInhibit";
+        @MemoIdentity { :>> providedId = "REQ-CS-39"; :>> label = "SquareBolusToPauseOnInhibit"; }
         attribute :>> statement = "While in SQUARE BOLUS mode, the system shall transition to PAUSE mode if Inhibited_Bolus_macro = TRUE and Inhibited_Infusion_macro = TRUE.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -841,7 +841,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.1.7–4.1.9 BASAL / SQUARE BOLUS / PATIENT BOLUS ───────
     requirement reqCs40 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-40"; } attribute :>> name = "BasalDeliveryRate";
+        @MemoIdentity { :>> providedId = "REQ-CS-40"; :>> label = "BasalDeliveryRate"; }
         attribute :>> statement = "While in BASAL mode, the system shall deliver the drug at a flow rate FlowRate_basal_prog with a variation up to Tolerance_Max_const.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -852,7 +852,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs41 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-41"; } attribute :>> name = "SquareBolusDeliveryRate";
+        @MemoIdentity { :>> providedId = "REQ-CS-41"; :>> label = "SquareBolusDeliveryRate"; }
         attribute :>> statement = "While in SQUARE BOLUS mode, the system shall deliver the drug at a flow rate FlowRate_sbolus_prog with a variation up to Tolerance_Max_const.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -863,7 +863,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs42 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-42"; } attribute :>> name = "PatientBolusDeliveryRate";
+        @MemoIdentity { :>> providedId = "REQ-CS-42"; :>> label = "PatientBolusDeliveryRate"; }
         attribute :>> statement = "While in PATIENT BOLUS mode, the system shall deliver the drug at a flow rate FlowRate_pbolus_prog with a variation up to Tolerance_Max_const.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -876,7 +876,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.1.10 ON > THERAPY > PAUSED mode ──────────────────────
     requirement reqCs43 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-43"; } attribute :>> name = "PausedKvoDelivery";
+        @MemoIdentity { :>> providedId = "REQ-CS-43"; :>> label = "PausedKvoDelivery"; }
         attribute :>> statement = "While in PAUSED mode, the system shall allow drug infusion at a flow rate FlowRate_kvo_hd with a variation up to Tolerance_Max_const, to keep the vein open when infusion is paused.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -887,7 +887,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs44 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-44"; } attribute :>> name = "PausedTimeNotification";
+        @MemoIdentity { :>> providedId = "REQ-CS-44"; :>> label = "PausedTimeNotification"; }
         attribute :>> statement = "While in PAUSED mode for more than Max_PAUSED_Duration_const, the system shall perform actions as described in REQ 59 for 'PAUSED Time'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -898,7 +898,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs45 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-45"; } attribute :>> name = "PausedInitiateWhileInhibitedNoTransition";
+        @MemoIdentity { :>> providedId = "REQ-CS-45"; :>> label = "PausedInitiateWhileInhibitedNoTransition"; }
         attribute :>> statement = "While in PAUSED mode, when Infusion_initiate_prog and Inhibited_Infusion_macro = TRUE, the system shall not perform any transition.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -909,7 +909,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs46 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-46"; } attribute :>> name = "PausedResumeToBasal";
+        @MemoIdentity { :>> providedId = "REQ-CS-46"; :>> label = "PausedResumeToBasal"; }
         attribute :>> statement = "While in PAUSED mode, when Infusion_initiate_prog and Inhibited_Infusion_macro = FALSE, the system shall transition to ON > THERAPY > ACTIVE > BASAL mode.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -920,7 +920,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs47 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-47"; } attribute :>> name = "PausedInhibitToIdle";
+        @MemoIdentity { :>> providedId = "REQ-CS-47"; :>> label = "PausedInhibitToIdle"; }
         attribute :>> statement = "While in PAUSED mode, when Infusion_inhibit_prog, the system shall transition to ON > IDLE mode and perform actions as described in REQ 59 for 'Infusion Stopped Manually'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -933,7 +933,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ═════ §4.2 Data Configuration Requirements ═════════════════
     requirement reqCs48 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-48"; } attribute :>> name = "DisplaySavedPrescriptionOnConfig";
+        @MemoIdentity { :>> providedId = "REQ-CS-48"; :>> label = "DisplaySavedPrescriptionOnConfig"; }
         attribute :>> statement = "When in ON mode, if DataConfig_prog as described in REQ 8, the system shall display the saved prescription and reservoir initial volume values or their default values (if there are no saved prescription and reservoir initial volume values) in the order listed in §3.1.1 and §3.1.3.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -944,7 +944,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs49 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-49"; } attribute :>> name = "EditValuesOneAtATime";
+        @MemoIdentity { :>> providedId = "REQ-CS-49"; :>> label = "EditValuesOneAtATime"; }
         attribute :>> statement = "When the prescription and reservoir initial volume data are displayed as described in REQ 48, the system shall allow editing the values one at a time in the order they are displayed.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -955,7 +955,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs50 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-50"; } attribute :>> name = "AllowInitiateWithNewValues";
+        @MemoIdentity { :>> providedId = "REQ-CS-50"; :>> label = "AllowInitiateWithNewValues"; }
         attribute :>> statement = "When the values are modified as described in REQ 49, the system shall allow infusion initiation with the new set of values (Infusion_initiate_prog).";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -966,7 +966,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs51 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-51"; } attribute :>> name = "ValidateValuesOnInitiate";
+        @MemoIdentity { :>> providedId = "REQ-CS-51"; :>> label = "ValidateValuesOnInitiate"; }
         attribute :>> statement = "When Infusion_initiate_prog as described in REQ 50, the system shall validate if all the values are consistent with the conditions specified in their respective Type Condition fields in §3.1.1 and §3.1.3.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -977,7 +977,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs52 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-52"; } attribute :>> name = "DrugDatabaseNotReachable";
+        @MemoIdentity { :>> providedId = "REQ-CS-52"; :>> label = "DrugDatabaseNotReachable"; }
         attribute :>> statement = "When the system is validating data as described in REQ 51, if the system is unable to access the drug database safe values, the system shall not save the values and perform actions as described in REQ 59 for 'Drug database not reachable'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -988,7 +988,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs53 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-53"; } attribute :>> name = "DrugSafeValueNotPresent";
+        @MemoIdentity { :>> providedId = "REQ-CS-53"; :>> label = "DrugSafeValueNotPresent"; }
         attribute :>> statement = "When the system is validating data as described in REQ 51, if any of the drug database safe values listed in §3.5 is not present, the system shall not perform the validation with respect to that missing field, perform actions as described in REQ 59 for 'Drug safe value not present' and continue validation.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -999,7 +999,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs54 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-54"; } attribute :>> name = "SaveValidatedPrescription";
+        @MemoIdentity { :>> providedId = "REQ-CS-54"; :>> label = "SaveValidatedPrescription"; }
         attribute :>> statement = "If there are no notifications from REQ 51 and REQ 52, the system shall save the prescription values, clear all the notifications previously generated by REQ 51, REQ 52 and REQ 53 if any, and allow initiate infusion with the new values as described in REQ 9.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1010,7 +1010,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs55 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-55"; } attribute :>> name = "RejectInvalidPrescription";
+        @MemoIdentity { :>> providedId = "REQ-CS-55"; :>> label = "RejectInvalidPrescription"; }
         attribute :>> statement = "If REQ 51 or REQ 52 had generated a notification, the system shall not save the prescription values, allow the clinician to edit the values of the fields as described in REQ 49 and then repeat steps from REQ 50 until all validations are passed as described in REQ 54.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1021,7 +1021,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs56 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-56"; } attribute :>> name = "RemainInModeDuringConfig";
+        @MemoIdentity { :>> providedId = "REQ-CS-56"; :>> label = "RemainInModeDuringConfig"; }
         attribute :>> statement = "While data configuration is in progress, the system shall remain in its current mode with the currently active prescription values, until infusion is initiated with the new prescription values as described in REQ 54.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1032,7 +1032,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs57 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-57"; } attribute :>> name = "ConfigWarningNotification";
+        @MemoIdentity { :>> providedId = "REQ-CS-57"; :>> label = "ConfigWarningNotification"; }
         attribute :>> statement = "When the clinician has attempted to configure the data for more than Config_Warning_Duration_const continuously, the system shall perform actions as described in REQ 59 for 'Config Time'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1043,7 +1043,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs58 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-58"; } attribute :>> name = "MaxConfigDurationClears";
+        @MemoIdentity { :>> providedId = "REQ-CS-58"; :>> label = "MaxConfigDurationClears"; }
         attribute :>> statement = "When the clinician has attempted to configure the data for more than Max_Config_Duration_const continuously, the system shall clear all unsaved prescription values and shall perform actions as described in REQ 59 for 'Unsaved Configuration Cleared'.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1056,7 +1056,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ═════ §4.3 Notification Requirements ═══════════════════════
     requirement reqCs59 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-59"; } attribute :>> name = "NotificationActionTable";
+        @MemoIdentity { :>> providedId = "REQ-CS-59"; :>> label = "NotificationActionTable"; }
         attribute :>> statement = "The system shall perform all the actions listed in the notification action table for the respective notification. The table defines, for each of the 20 notifications, its priority (High/Med/Low) and the actions Visual, Audio, Inhibit Infusion, Inhibit Square Bolus, Inhibit Patient Bolus, and Stop Bolus. Notification requirements have higher precedence over all other requirements in the system.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1067,7 +1067,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs60 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-60"; } attribute :>> name = "HighestPriorityActionsFirst";
+        @MemoIdentity { :>> providedId = "REQ-CS-60"; :>> label = "HighestPriorityActionsFirst"; }
         attribute :>> statement = "When more than one notification having different priorities occurs at the same time, the system shall take actions listed for the highest priority notification.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1078,7 +1078,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs61 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-61"; } attribute :>> name = "MostRestrictiveSamePriority";
+        @MemoIdentity { :>> providedId = "REQ-CS-61"; :>> label = "MostRestrictiveSamePriority"; }
         attribute :>> statement = "When more than one notification having same priorities and different set of actions occurs at the same time, the system shall take actions listed for the most restrictive notification.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1089,7 +1089,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs62 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-62"; } attribute :>> name = "MostRestrictiveTieBreak";
+        @MemoIdentity { :>> providedId = "REQ-CS-62"; :>> label = "MostRestrictiveTieBreak"; }
         attribute :>> statement = "When more than one notification having same priorities and same set of actions occurs at the same time, the system will take actions for the notification that has the most restrictive actions as listed in REQ 59.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1100,7 +1100,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs63 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-63"; } attribute :>> name = "EscalateToMoreRestrictive";
+        @MemoIdentity { :>> providedId = "REQ-CS-63"; :>> label = "EscalateToMoreRestrictive"; }
         attribute :>> statement = "While a low priority or less restrictive notification is in effect and a higher priority or more restrictive same-priority notification occurs, the system shall take actions for the high priority or more restrictive notification as listed in REQ 59.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1111,7 +1111,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs64 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-64"; } attribute :>> name = "LowPriorityListedOnly";
+        @MemoIdentity { :>> providedId = "REQ-CS-64"; :>> label = "LowPriorityListedOnly"; }
         attribute :>> statement = "While a high priority notification is in effect and a low priority notification occurs, the system shall only add the notification to the active notification list and shall not take any other actions for the low priority notification.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1122,7 +1122,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs65 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-65"; } attribute :>> name = "CancelNotificationsOneAtATime";
+        @MemoIdentity { :>> providedId = "REQ-CS-65"; :>> label = "CancelNotificationsOneAtATime"; }
         attribute :>> statement = "The system shall allow the clinician to cancel the active notifications, starting from the first in the list, one at a time (Notification_cancel_prog).";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1133,7 +1133,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs66 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-66"; } attribute :>> name = "CancelClearsRestrictions";
+        @MemoIdentity { :>> providedId = "REQ-CS-66"; :>> label = "CancelClearsRestrictions"; }
         attribute :>> statement = "When Notification_cancel_prog for a notification, the system shall cancel and clear the restrictions for that notification: Inhibited_Infusion_macro = FALSE, Inhibited_Bolus_macro = FALSE, Inhibited_PatientBolus_macro = FALSE, and cancel and clear the corresponding audio notification.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1144,7 +1144,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs67 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-67"; } attribute :>> name = "NextNotificationAfterCancel";
+        @MemoIdentity { :>> providedId = "REQ-CS-67"; :>> label = "NextNotificationAfterCancel"; }
         attribute :>> statement = "When Notification_cancel_prog for a notification, the system takes actions for the next active notification in order of priority and descending order of occurrence.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1157,7 +1157,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.3.1 Visual notification ──────────────────────────────
     requirement reqCs68 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-68"; } attribute :>> name = "DisplayActiveNotificationsOrdered";
+        @MemoIdentity { :>> providedId = "REQ-CS-68"; :>> label = "DisplayActiveNotificationsOrdered"; }
         attribute :>> statement = "The system shall display all active notifications in order of priority and descending order of occurrence (Notification_Visual_output).";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1168,7 +1168,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs69 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-69"; } attribute :>> name = "DisplayNotificationNameAndTime";
+        @MemoIdentity { :>> providedId = "REQ-CS-69"; :>> label = "DisplayNotificationNameAndTime"; }
         attribute :>> statement = "The system shall display the name of all the active notifications and the time of the occurrence.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1179,7 +1179,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs70 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-70"; } attribute :>> name = "DisplaySimultaneousNotifications";
+        @MemoIdentity { :>> providedId = "REQ-CS-70"; :>> label = "DisplaySimultaneousNotifications"; }
         attribute :>> statement = "When more than one notification occurs at the same time, the system shall display all the notifications as per REQ 68.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1190,7 +1190,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs71 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-71"; } attribute :>> name = "RemoveCancelledNotificationFromList";
+        @MemoIdentity { :>> providedId = "REQ-CS-71"; :>> label = "RemoveCancelledNotificationFromList"; }
         attribute :>> statement = "When Notification_cancel_prog for a notification, the system shall remove the notification from the list and shall display the list of remaining notifications.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1203,7 +1203,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ── §4.3.2 Audio notification ───────────────────────────────
     requirement reqCs72 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-72"; } attribute :>> name = "AudibleSoundPerNotification";
+        @MemoIdentity { :>> providedId = "REQ-CS-72"; :>> label = "AudibleSoundPerNotification"; }
         attribute :>> statement = "When each notification occurs that requires an audio alarm as listed in REQ 59, the system shall produce a single audible sound of Audio_level_const, unless the audio is disabled or silenced.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1214,7 +1214,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs73 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-73"; } attribute :>> name = "AudioDisableSilenceEnable";
+        @MemoIdentity { :>> providedId = "REQ-CS-73"; :>> label = "AudioDisableSilenceEnable"; }
         attribute :>> statement = "The system shall allow the clinician to disable audible alarm, silence the alarm temporarily and enable a disabled or silenced alarm.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1225,7 +1225,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs74 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-74"; } attribute :>> name = "NoAudioWhileDisabled";
+        @MemoIdentity { :>> providedId = "REQ-CS-74"; :>> label = "NoAudioWhileDisabled"; }
         attribute :>> statement = "If Disable_audio_prog = 'PERM' or 'TEMP', the system shall not produce audible alarm until it is enabled (Disable_audio_prog = FALSE).";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1236,7 +1236,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs75 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-75"; } attribute :>> name = "TempSilenceAutoReenable";
+        @MemoIdentity { :>> providedId = "REQ-CS-75"; :>> label = "TempSilenceAutoReenable"; }
         attribute :>> statement = "If Disable_audio_prog = 'TEMP', the system shall automatically enable it (Disable_audio_prog = FALSE) after Audio_Enable_Duration_const minutes.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1247,7 +1247,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs76 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-76"; } attribute :>> name = "ReannunciateLongActiveNotifications";
+        @MemoIdentity { :>> providedId = "REQ-CS-76"; :>> label = "ReannunciateLongActiveNotifications"; }
         attribute :>> statement = "For every notification with audio alarm that is active for more than Audio_Enable_Duration_const minutes, the system shall produce audible sound as described in REQ 72.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1260,7 +1260,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ═════ §4.4 Log Requirements ════════════════════════════════
     requirement reqCs77 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-77"; } attribute :>> name = "LogWhileOn";
+        @MemoIdentity { :>> providedId = "REQ-CS-77"; :>> label = "LogWhileOn"; }
         attribute :>> statement = "The system shall log all the operational and error data when the system is in ON mode.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -1271,7 +1271,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs78 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-78"; } attribute :>> name = "OperationalLogContent";
+        @MemoIdentity { :>> providedId = "REQ-CS-78"; :>> label = "OperationalLogContent"; }
         attribute :>> statement = "While in ON mode, every Log_Interval_const minutes or when a mode transition occurs, the system shall record the following information in an 'Operational log': (1) date in dd/MM/yy format, (2) time in HH:MM:SS GMT, (3) Patient ID, (4) prescription information, (5) current mode of the system, (6) current flow rate of the system.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -1282,7 +1282,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs79 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-79"; } attribute :>> name = "InfusionCompleteLogContent";
+        @MemoIdentity { :>> providedId = "REQ-CS-79"; :>> label = "InfusionCompleteLogContent"; }
         attribute :>> statement = "When infusion is completed as per REQ 28, the system shall record the following information in addition to the information listed in REQ 78 in the 'Operational log': (1) total volume infused for that prescription, (2) total duration of infusion for that prescription (total duration in ACTIVE mode).";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -1293,7 +1293,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs80 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-80"; } attribute :>> name = "ErrorLogContent";
+        @MemoIdentity { :>> providedId = "REQ-CS-80"; :>> label = "ErrorLogContent"; }
         attribute :>> statement = "When any notification condition listed in REQ 59 occurs, the system shall record the following information in an error log: (1) date in dd/MM/yy format, (2) time in HH:MM:SS GMT, (3) notification description, (4) current mode of the system, (5) remaining drug volume.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -1304,7 +1304,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs81 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-81"; } attribute :>> name = "NotificationCancelLogContent";
+        @MemoIdentity { :>> providedId = "REQ-CS-81"; :>> label = "NotificationCancelLogContent"; }
         attribute :>> statement = "When a notification is cancelled as described in REQ 66, the system shall record the following information in the 'Operational log': (1) date in dd/MM/yy format, (2) time in HH:MM:SS GMT, (3) description of the notification cancelled.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -1317,7 +1317,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ═════ §4.5 Security Requirements ═══════════════════════════
     requirement reqCs82 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-82"; } attribute :>> name = "AuthorizedCliniciansOnly";
+        @MemoIdentity { :>> providedId = "REQ-CS-82"; :>> label = "AuthorizedCliniciansOnly"; }
         attribute :>> statement = "The system shall allow only authorized clinicians to configure the system.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::cybersecurity;
@@ -1330,7 +1330,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // ═════ Ch.5 Non-Behavioral Requirements ═════════════════════
     requirement reqCs83 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-83"; } attribute :>> name = "DropResistance";
+        @MemoIdentity { :>> providedId = "REQ-CS-83"; :>> label = "DropResistance"; }
         attribute :>> statement = "The system shall be unbreakable if it is dropped on a laminate floor from y m of height with no additional force than gravity.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::reliability;
@@ -1341,7 +1341,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs84 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-84"; } attribute :>> name = "WaterResistance";
+        @MemoIdentity { :>> providedId = "REQ-CS-84"; :>> label = "WaterResistance"; }
         attribute :>> statement = "The system shall be waterproof to non-acidic liquid of less than x ml on any side of the pump for a maximum of 2 hours.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::reliability;
@@ -1352,7 +1352,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs85 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-85"; } attribute :>> name = "LogRetention";
+        @MemoIdentity { :>> providedId = "REQ-CS-85"; :>> label = "LogRetention"; }
         attribute :>> statement = "The system shall persist the most recent 30 days of error log data and 15 days of operational log data.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -1363,7 +1363,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqCs86 : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-CS-86"; } attribute :>> name = "PrescriptionRetention";
+        @MemoIdentity { :>> providedId = "REQ-CS-86"; :>> label = "PrescriptionRetention"; }
         attribute :>> statement = "The system shall persist the last saved prescription data for 15 days.";
         attribute :>> sourceKind = RequirementSourceKind::sourceDocument;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -1380,7 +1380,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     // them from the REQ-CS family.
     requirement reqDrugLibraryLimits : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-X-01"; } attribute :>> name = "PrescriptionWithinDrugLibraryLimits";
+        @MemoIdentity { :>> providedId = "REQ-X-01"; :>> label = "PrescriptionWithinDrugLibraryLimits"; }
         attribute :>> statement = "When a prescription parameter is entered, the system shall reject values outside drug-library hard limits and shall require explicit confirmation for values outside soft limits.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1399,7 +1399,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqPost : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-X-02"; } attribute :>> name = "PowerOnSelfTest";
+        @MemoIdentity { :>> providedId = "REQ-X-02"; :>> label = "PowerOnSelfTest"; }
         attribute :>> statement = "On power-up, the system shall complete a self test of CPU, memory, watchdog, and safety sensors before permitting therapy, and shall remain locked out of therapy if any check fails.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1418,7 +1418,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqPowerLossRetention : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-X-03"; } attribute :>> name = "PrescriptionRetainedAcrossPowerLoss";
+        @MemoIdentity { :>> providedId = "REQ-X-03"; :>> label = "PrescriptionRetainedAcrossPowerLoss"; }
         attribute :>> statement = "If all power is lost, the system shall retain the confirmed prescription and event log, and on power restoration shall resume therapy only after clinician confirmation.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1437,7 +1437,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqOcclusion : Requirement {
         attribute :>> requirementType = RequirementTypeKind::software;
-        @MemoIdentity { :>> providedId = "REQ-X-04"; } attribute :>> name = "OcclusionDetectionAndAlarm";
+        @MemoIdentity { :>> providedId = "REQ-X-04"; :>> label = "OcclusionDetectionAndAlarm"; }
         attribute :>> statement = "When downstream line pressure exceeds the occlusion threshold, the system shall pause infusion and raise a High-priority notification.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1452,7 +1452,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqDoorOpen : Requirement {
         attribute :>> requirementType = RequirementTypeKind::software;
-        @MemoIdentity { :>> providedId = "REQ-X-05"; } attribute :>> name = "DoorOpenPreventsDelivery";
+        @MemoIdentity { :>> providedId = "REQ-X-05"; :>> label = "DoorOpenPreventsDelivery"; }
         attribute :>> statement = "While the reservoir door is open or unlatched, the system shall not deliver drug and shall raise a Medium-priority notification if therapy was active.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1472,7 +1472,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqMaxHourlyDose : Requirement {
         attribute :>> requirementType = RequirementTypeKind::software;
-        @MemoIdentity { :>> providedId = "REQ-X-06"; } attribute :>> name = "MaximumHourlyDoseEnforcement";
+        @MemoIdentity { :>> providedId = "REQ-X-06"; :>> label = "MaximumHourlyDoseEnforcement"; }
         attribute :>> statement = "The system shall not deliver more than the prescribed maximum drug volume in any sliding one-hour window, counting basal, patient bolus, and square bolus contributions.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1487,7 +1487,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqEventLogging : Requirement {
         attribute :>> requirementType = RequirementTypeKind::software;
-        @MemoIdentity { :>> providedId = "REQ-X-07"; } attribute :>> name = "TamperEvidentTherapyLog";
+        @MemoIdentity { :>> providedId = "REQ-X-07"; :>> label = "TamperEvidentTherapyLog"; }
         attribute :>> statement = "The system shall record therapy events in a timestamped, tamper-evident event log such that any modification of recorded entries is detectable.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::regulatory;
@@ -1502,7 +1502,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqWatchdogSafeState : Requirement {
         attribute :>> requirementType = RequirementTypeKind::software;
-        @MemoIdentity { :>> providedId = "REQ-X-08"; } attribute :>> name = "WatchdogForcesSafeState";
+        @MemoIdentity { :>> providedId = "REQ-X-08"; :>> label = "WatchdogForcesSafeState"; }
         attribute :>> statement = "If the software fails to service the hardware watchdog within its timeout, the system shall force pump output to zero flow and raise a continuous audible alarm.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1522,7 +1522,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqStuckButton : Requirement {
         attribute :>> requirementType = RequirementTypeKind::software;
-        @MemoIdentity { :>> providedId = "REQ-X-09"; } attribute :>> name = "StuckBolusButtonDetection";
+        @MemoIdentity { :>> providedId = "REQ-X-09"; :>> label = "StuckBolusButtonDetection"; }
         attribute :>> statement = "If the patient bolus button remains asserted for more than 60 seconds, the system shall treat the input as failed, ignore it, and raise a Medium-priority notification.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1537,7 +1537,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqFlowCrossCheck : Requirement {
         attribute :>> requirementType = RequirementTypeKind::software;
-        @MemoIdentity { :>> providedId = "REQ-X-10"; } attribute :>> name = "CommandedVsMeasuredFlowCrossCheck";
+        @MemoIdentity { :>> providedId = "REQ-X-10"; :>> label = "CommandedVsMeasuredFlowCrossCheck"; }
         attribute :>> statement = "The system shall compare measured delivered flow against commanded flow using an independent flow sensor, and shall raise a High-priority notification and pause infusion when the deviation exceeds Tolerance_Min_const for more than Max_Duration_OverInfusion_const.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;
@@ -1552,7 +1552,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqPumpAccuracy : Requirement {
         attribute :>> requirementType = RequirementTypeKind::hardware;
-        @MemoIdentity { :>> providedId = "REQ-X-11"; } attribute :>> name = "DeliveryAccuracy";
+        @MemoIdentity { :>> providedId = "REQ-X-11"; :>> label = "DeliveryAccuracy"; }
         attribute :>> statement = "The pump mechanism shall deliver programmed volumes with an accuracy of plus or minus Tolerance_Min_const (5 percent) over the full rate range, so that the system-level flow tolerances of REQ-CS-16 are achievable.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::performance;
@@ -1567,7 +1567,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqAlarmLoudness : Requirement {
         attribute :>> requirementType = RequirementTypeKind::hardware;
-        @MemoIdentity { :>> providedId = "REQ-X-12"; } attribute :>> name = "AlarmSoundPressureLevel";
+        @MemoIdentity { :>> providedId = "REQ-X-12"; :>> label = "AlarmSoundPressureLevel"; }
         attribute :>> statement = "The audible annunciator shall produce notification tones at the sound level defined by Audio_level_const (50 db for 2 seconds per interface spec I 8), distinguishable by priority.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::usability;
@@ -1582,7 +1582,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqBatteryBackup : Requirement {
         attribute :>> requirementType = RequirementTypeKind::hardware;
-        @MemoIdentity { :>> providedId = "REQ-X-13"; } attribute :>> name = "BatteryBackupDuration";
+        @MemoIdentity { :>> providedId = "REQ-X-13"; :>> label = "BatteryBackupDuration"; }
         attribute :>> statement = "The battery shall sustain nominal therapy and alarm annunciation for at least 4 hours after loss of mains power.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::reliability;
@@ -1597,7 +1597,7 @@ package memo_examples_gpca_pump_gpca_requirements {
     }
     requirement reqFreeFlowPrevention : Requirement {
         attribute :>> requirementType = RequirementTypeKind::hardware;
-        @MemoIdentity { :>> providedId = "REQ-X-14"; } attribute :>> name = "MechanicalFreeFlowPrevention";
+        @MemoIdentity { :>> providedId = "REQ-X-14"; :>> label = "MechanicalFreeFlowPrevention"; }
         attribute :>> statement = "The fluid path shall include a mechanical anti-free-flow valve that blocks gravity flow whenever the administration set is disengaged from the pumping mechanism.";
         attribute :>> sourceKind = RequirementSourceKind::extension;
         attribute :>> concernKind = ConcernKind::safety;

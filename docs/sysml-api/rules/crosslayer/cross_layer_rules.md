@@ -26,6 +26,8 @@
 | private | `ScalarValues::*` |
 | private | `memo_core_consistency_rules::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -77,8 +79,10 @@ constraint def ReqToArchTraceRule :> MemoConsistencyRule
         private import memo_core_consistency_rules::*;
         private import memo_core_enumerations::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         constraint def RiskToReqTraceRule :> MemoConsistencyRule {
-            attribute id = "XL-001";
+            @MemoIdentity { :>> providedId = "XL-001"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Hazard";
             attribute severity = RuleSeverityKind::warning;
@@ -88,9 +92,9 @@ constraint def ReqToArchTraceRule :> MemoConsistencyRule
         }
 
         constraint def ReqToArchTraceRule :> MemoConsistencyRule {
-            attribute id = "XL-002";
+            @MemoIdentity { :>> providedId = "XL-002"; }
             attribute tailoring = RuleTailoringKind::assurance;
-            attribute appliesTo = "Requirement[requirementKind=system]";
+            attribute appliesTo = "Requirement[requirementType=system]";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Requirements-to-architecture traceability per IEC 62304.";
             attribute predicateExpression = "satisfiedBy->size() >= 1";

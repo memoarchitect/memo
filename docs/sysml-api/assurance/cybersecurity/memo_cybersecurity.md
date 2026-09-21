@@ -283,6 +283,11 @@ connection def ImpactsSafety :> MemoRelationship
             attribute affectedLayer : String;
             attribute cweReference : String;
             attribute remediable : Boolean;
+            // CVSS v3.1 quantitative rating — the core output of a vulnerability
+            // analysis (e.g. RSK-00058). `cvssBaseScore` is the 0.0-10.0 numeric
+            // score; `cvssVector` the source vector string (AV:.../AC:.../...).
+            attribute cvssBaseScore : Real;
+            attribute cvssVector : String;
         }
 
         item def CyberHazard specializes Hazard {
@@ -290,7 +295,6 @@ connection def ImpactsSafety :> MemoRelationship
             attribute safetyImpact : String;
             attribute privacyImpact : String;
             attribute operationalImpact : String;
-            attribute linkedSafetyHazardId : String;
         }
 
         part def CyberRisk specializes Risk {

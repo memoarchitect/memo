@@ -26,42 +26,43 @@
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_architecture_implementation_hardware_common::PhysicalElement` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`ProcessingNode`](#processingnode) | `part def` | Processing node definition specializing `MemoPart`. | `MemoPart` |
-| [`MemoryDevice`](#memorydevice) | `part def` | Memory device definition specializing `MemoPart`. | `MemoPart` |
+| [`ProcessingNode`](#processingnode) | `part def` | Processing node definition specializing `PhysicalElement`. | `PhysicalElement` |
+| [`MemoryDevice`](#memorydevice) | `part def` | Memory device definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`PhysicalPort`](#physicalport) | `port def` | A physical boundary feature: the connector the outside world plugs into. A `port def` (Track A1), not a part.… | `MemoPort` |
 
 ## ProcessingNode
 
 ```sysml
-part def ProcessingNode specializes MemoPart
+part def ProcessingNode specializes PhysicalElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Processing node definition specializing `MemoPart`. |
+| Description | Processing node definition specializing `PhysicalElement`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `PhysicalElement` |
 | Owning package | `memo_architecture_realization_physical` |
 
 
 ## MemoryDevice
 
 ```sysml
-part def MemoryDevice specializes MemoPart
+part def MemoryDevice specializes PhysicalElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Memory device definition specializing `MemoPart`. |
+| Description | Memory device definition specializing `PhysicalElement`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `PhysicalElement` |
 | Owning package | `memo_architecture_realization_physical` |
 
 
@@ -93,7 +94,13 @@ port def PhysicalPort specializes MemoPort
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
-        part def ProcessingNode specializes MemoPart {
+        // For PhysicalElement: a processing node and a memory device ARE physical
+        // things — a board and a chip — and specialized MemoPart directly only
+        // because the physical family had no shared root until CR-ONT-079 needed
+        // one. Their home package reflects their ROLE (deployment target), not
+        // their nature.
+        private import memo_architecture_implementation_hardware_common::PhysicalElement;
+        part def ProcessingNode specializes PhysicalElement {
             attribute nodeKind : ProcessingNodeKind;
             attribute processorArchitecture : String;
             attribute memoryMB : String;
@@ -104,7 +111,7 @@ port def PhysicalPort specializes MemoPort
             attribute supportsContainerization : Boolean;
             attribute realTimeCapable : Boolean;
         }
-        part def MemoryDevice specializes MemoPart {
+        part def MemoryDevice specializes PhysicalElement {
             attribute memoryKind : String;
             attribute capacityMB : String;
             attribute nonVolatile : Boolean;

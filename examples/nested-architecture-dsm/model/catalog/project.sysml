@@ -22,8 +22,7 @@ package memo_examples_nested_architecture_dsm_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-NESTED-DSM-001"; }
-        attribute :>> name = "NestedArchitectureDsmProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-NESTED-DSM-001"; :>> label = "NestedArchitectureDsmProjectMethodBinding"; }
         attribute :>> projectName = "Nested Architecture DSM";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

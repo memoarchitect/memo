@@ -12,24 +12,24 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_tree_vie
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part rootA : HardwareAssembly {
-        attribute :>> name = "Root A";
+@MemoIdentity { :>> label = "Root A"; }
         part branchA1 : HardwareAssembly {
-            attribute :>> name = "Branch A.1";
+@MemoIdentity { :>> label = "Branch A.1"; }
             part leafA11 : HardwareAssembly {
-                attribute :>> name = "Leaf A.1.1";
+@MemoIdentity { :>> label = "Leaf A.1.1"; }
                 attribute :>> partNumber = "PN-1";
             }
-            part leafA12 : HardwareAssembly { attribute :>> name = "Leaf A.1.2"; }
+            part leafA12 : HardwareAssembly {@MemoIdentity { :>> label = "Leaf A.1.2"; } }
         }
         part branchA2 : HardwareAssembly {
-            attribute :>> name = "Branch A.2 With A Deliberately Long Label";
-            part leafA21 : HardwareAssembly { attribute :>> name = "Leaf A.2.1"; }
+@MemoIdentity { :>> label = "Branch A.2 With A Deliberately Long Label"; }
+            part leafA21 : HardwareAssembly {@MemoIdentity { :>> label = "Leaf A.2.1"; } }
         }
         part rootB : HardwareAssembly {
-            attribute :>> name = "Root B";
+@MemoIdentity { :>> label = "Root B"; }
             part branchB1 : HardwareAssembly {
-                attribute :>> name = "Branch B.1";
-                part leafB11 : HardwareAssembly { attribute :>> name = "Leaf B.1.1"; }
+@MemoIdentity { :>> label = "Branch B.1"; }
+                part leafB11 : HardwareAssembly {@MemoIdentity { :>> label = "Leaf B.1.1"; } }
             }
         }
     }

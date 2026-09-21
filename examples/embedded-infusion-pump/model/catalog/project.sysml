@@ -17,8 +17,7 @@ package memo_examples_embedded_infusion_pump_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-INFUSION-PUMP-001"; }
-        attribute :>> name = "EmbeddedInfusionPumpProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-INFUSION-PUMP-001"; :>> label = "EmbeddedInfusionPumpProjectMethodBinding"; }
         attribute :>> projectName = "Embedded Infusion Pump";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
