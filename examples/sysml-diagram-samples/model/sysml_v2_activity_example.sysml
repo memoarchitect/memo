@@ -25,7 +25,7 @@ package activity_example {
 
         succession first start then receiveOrder;
         succession first receiveOrder then validateOrder;
-        flow of Order from receiveOrder.order to validateOrder.order;
+        flow orderFlow of Order from receiveOrder.order to validateOrder.order;
         succession first validateOrder then routeOrder;
         succession first routeOrder if true then processOrder;
         succession first routeOrder if false then rejectOrder;
