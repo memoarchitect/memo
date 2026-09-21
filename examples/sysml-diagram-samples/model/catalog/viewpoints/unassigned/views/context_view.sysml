@@ -35,6 +35,6 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
     connection connect clinician to infusionSystem;
     connection connect patient to infusionSystem;
     connection connect biomedTech to infusionSystem;
-    flow from infusionSystem to pharmacySystem;
+    flow infusionSystemToPharmacySystem from infusionSystem to pharmacySystem;
     connection : AppliesInContext connect useContext ::> homeContext to subjectElement ::> infusionSystem;
 }

@@ -75,10 +75,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     }
 
     // Transport between two components: `out` to `in`, one item moving.
-    flow from waterSupply.supplyWaterOut to coffeeMachine.mainsWaterIn;
-    flow from coffeeMachine.waterTank.tankWaterOut to coffeeMachine.heaterAssembly.heaterWaterIn;
-    flow from coffeeMachine.heaterAssembly.heatedWaterOut to coffeeMachine.brewGroup.brewWaterIn;
-    flow from coffeeMachine.beverageOut to cup.cupBeverageIn;
+    flow supplyWaterOutToMainsWaterIn from waterSupply.supplyWaterOut to coffeeMachine.mainsWaterIn;
+    flow tankWaterOutToHeaterWaterIn from coffeeMachine.waterTank.tankWaterOut to coffeeMachine.heaterAssembly.heaterWaterIn;
+    flow heatedWaterOutToBrewWaterIn from coffeeMachine.heaterAssembly.heatedWaterOut to coffeeMachine.brewGroup.brewWaterIn;
+    flow beverageOutToCupBeverageIn from coffeeMachine.beverageOut to cup.cupBeverageIn;
 
     // Delegation between a boundary port and the interior it stands for. These
     // are `in`-to-`in` and `out`-to-`out`, because nothing travels: the two
@@ -89,11 +89,11 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_intercon
     bind coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut = coffeeMachine.serviceInterface.diagnostics;
 
     // Internal flows within the heater assembly
-    flow from coffeeMachine.heaterAssembly.thermostat.powerCommandOut to coffeeMachine.heaterAssembly.heatingElement.powerIn;
-    flow from coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut to coffeeMachine.heaterAssembly.thermostat.tempReadingIn;
+    flow powerCommandOutToPowerIn from coffeeMachine.heaterAssembly.thermostat.powerCommandOut to coffeeMachine.heaterAssembly.heatingElement.powerIn;
+    flow heaterStatusOutToTempReadingIn from coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut to coffeeMachine.heaterAssembly.thermostat.tempReadingIn;
 
     // Internal flows within the heating element
-    flow from coffeeMachine.heaterAssembly.heatingElement.resistiveCoil.heatOut to coffeeMachine.heaterAssembly.heatingElement.temperatureSensor.heatIn;
+    flow heatOutToHeatIn from coffeeMachine.heaterAssembly.heatingElement.resistiveCoil.heatOut to coffeeMachine.heaterAssembly.heatingElement.temperatureSensor.heatIn;
     bind coffeeMachine.heaterAssembly.heatingElement.powerIn = coffeeMachine.heaterAssembly.heatingElement.resistiveCoil.coilPowerIn;
     bind coffeeMachine.heaterAssembly.heatingElement.temperatureSensor.sensorReadingOut = coffeeMachine.heaterAssembly.heatingElement.heaterStatusOut;
 }

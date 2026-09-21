@@ -91,7 +91,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
             action fxHoldDose : SystemFunction {@MemoIdentity { :>> label = "Hold Metered Dose"; } }
             action fxCloseValve : SystemFunction {@MemoIdentity { :>> label = "Close Valve"; } }
 
-            flow of FxMedicationFluid from fxDeliveryFlow.fxDeliver.fxHoldDose to fxCloseValve;
+            flow fxHoldDoseToFxCloseValve of FxMedicationFluid from fxDeliveryFlow.fxDeliver.fxHoldDose to fxCloseValve;
 
             first start then fxOpenValve;
             first fxOpenValve then fxHoldDose;
@@ -101,10 +101,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
 
         action fxLog : SystemFunction {@MemoIdentity { :>> label = "Log Delivery"; } }
 
-        flow of FxSensorReading from fxAcquire.reading to fxCompute.reading;
-        flow of FxRateCommand from fxEnforce.safeCommand to fxDrive.command;
-        flow of FxMotorEnergy from fxDrive.energy to fxDeliver.energy;
-        flow of FxOcclusionSignal from fxMonitor.signal to fxDetect.signal;
+        flow fxSensorReadingFlow of FxSensorReading from fxAcquire.reading to fxCompute.reading;
+        flow safeCommandToCommand of FxRateCommand from fxEnforce.safeCommand to fxDrive.command;
+        flow fxMotorEnergyFlow of FxMotorEnergy from fxDrive.energy to fxDeliver.energy;
+        flow fxOcclusionSignalFlow of FxOcclusionSignal from fxMonitor.signal to fxDetect.signal;
 
         first start then fxAcquire;
         first fxAcquire then fxCompute;

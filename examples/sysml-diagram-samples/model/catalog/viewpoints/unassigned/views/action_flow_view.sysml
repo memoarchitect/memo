@@ -43,9 +43,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
         }
         action record : RecordResult;
 
-        flow of DataPacket from receive.received to validate.received;
-        flow of EnergyToken from validate.validated to process.validated;
-        flow of MaterialBatch from process.result to record.result;
+        flow dataPacketFlow of DataPacket from receive.received to validate.received;
+        flow energyTokenFlow of EnergyToken from validate.validated to process.validated;
+        flow materialBatchFlow of MaterialBatch from process.result to record.result;
 
         first start then receive;
         first receive then validate;

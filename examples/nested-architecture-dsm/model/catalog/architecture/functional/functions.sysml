@@ -155,18 +155,18 @@ package memo_examples_nested_architecture_dsm_architecture_functional_functions 
     // ── Functional exchange ──────────────────────────────────────
     // Cross-tree marks are the interesting ones: they are what a collapsed DSM
     // rolls up into a single number between two capabilities.
-    flow from fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered to fnDeliverTherapy.fnControlDose.fnComputeRate;
-    flow from fnDeliverTherapy.fnControlDose.fnComputeRate to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
-    flow from fnDeliverTherapy.fnMeterFluid.fnDriveActuator to fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered;
-    flow from fnDeliverTherapy.fnControlDose.fnValidatePrescription to fnDeliverTherapy.fnControlDose.fnComputeRate;
-    flow from fnInformUser.fnAcceptInput to fnDeliverTherapy.fnControlDose.fnValidatePrescription;
-    flow from fnEnsureSafety.fnDetectOcclusion to fnEnsureSafety.fnEnforceDoseLimits;
-    flow from fnEnsureSafety.fnDetectAirInLine to fnInformUser.fnAnnunciateAlarm;
-    flow from fnEnsureSafety.fnEnforceDoseLimits to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
-    flow from fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered to fnInformUser.fnRenderStatus;
-    flow from fnManagePower.fnMonitorBattery to fnInformUser.fnAnnunciateAlarm;
-    flow from fnManagePower.fnSelectPowerSource to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
-    flow from fnEnsureSafety.fnDetectOcclusion to fnInformUser.fnAnnunciateAlarm;
+    flow fnMeasureDeliveredToFnComputeRate from fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered to fnDeliverTherapy.fnControlDose.fnComputeRate;
+    flow fnComputeRateToFnDriveActuator from fnDeliverTherapy.fnControlDose.fnComputeRate to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
+    flow fnDriveActuatorToFnMeasureDelivered from fnDeliverTherapy.fnMeterFluid.fnDriveActuator to fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered;
+    flow fnValidatePrescriptionToFnComputeRate from fnDeliverTherapy.fnControlDose.fnValidatePrescription to fnDeliverTherapy.fnControlDose.fnComputeRate;
+    flow fnAcceptInputToFnValidatePrescription from fnInformUser.fnAcceptInput to fnDeliverTherapy.fnControlDose.fnValidatePrescription;
+    flow fnDetectOcclusionToFnEnforceDoseLimits from fnEnsureSafety.fnDetectOcclusion to fnEnsureSafety.fnEnforceDoseLimits;
+    flow fnDetectAirInLineToFnAnnunciateAlarm from fnEnsureSafety.fnDetectAirInLine to fnInformUser.fnAnnunciateAlarm;
+    flow fnEnforceDoseLimitsToFnDriveActuator from fnEnsureSafety.fnEnforceDoseLimits to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
+    flow fnMeasureDeliveredToFnRenderStatus from fnDeliverTherapy.fnMeterFluid.fnMeasureDelivered to fnInformUser.fnRenderStatus;
+    flow fnMonitorBatteryToFnAnnunciateAlarm from fnManagePower.fnMonitorBattery to fnInformUser.fnAnnunciateAlarm;
+    flow fnSelectPowerSourceToFnDriveActuator from fnManagePower.fnSelectPowerSource to fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
+    flow fnDetectOcclusionToFnAnnunciateAlarm from fnEnsureSafety.fnDetectOcclusion to fnInformUser.fnAnnunciateAlarm;
     satisfy reqDoseAccuracy by fnDeliverTherapy.fnControlDose.fnComputeRate;
     satisfy reqDoseAccuracy by fnDeliverTherapy.fnMeterFluid.fnDriveActuator;
     satisfy reqOcclusionDetection by fnEnsureSafety.fnDetectOcclusion;

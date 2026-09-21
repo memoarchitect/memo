@@ -224,10 +224,10 @@ package memo_examples_ros_mobile_robot {
             attribute :>> direction = DirectionKind::output;
         }
 
-    flow of LaserScan from nodeLidar.scanPublisher.payload to nodeNavigation.scanSubscriber.payload;
-    flow of LaserScan from nodeLidar.scanPublisher.payload to nodeSafetyMonitor.scanSubscriber.payload;
-    flow of VelocityCommand from nodeNavigation.cmdVelPublisher.payload to nodeSafetyMonitor.cmdVelSubscriber.payload;
-    flow of EmergencyStop from nodeSafetyMonitor.estopPublisher.payload to nodeNavigation.estopSubscriber.payload;
+    flow laserScanToNodeNavigation of LaserScan from nodeLidar.scanPublisher.payload to nodeNavigation.scanSubscriber.payload;
+    flow laserScanToNodeSafetyMonitor of LaserScan from nodeLidar.scanPublisher.payload to nodeSafetyMonitor.scanSubscriber.payload;
+    flow velocityCommandFlow of VelocityCommand from nodeNavigation.cmdVelPublisher.payload to nodeSafetyMonitor.cmdVelSubscriber.payload;
+    flow emergencyStopFlow of EmergencyStop from nodeSafetyMonitor.estopPublisher.payload to nodeNavigation.estopSubscriber.payload;
 
     interface setModeService : RosServiceInterface
         connect nodeNavigation.setModeClient to nodeSafetyMonitor.setModeServer {
