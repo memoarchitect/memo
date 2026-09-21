@@ -17,8 +17,7 @@ package memo_examples_manual_surgical_instrument_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-SURGICAL-INSTRUMENT-001"; }
-        attribute :>> name = "ManualSurgicalInstrumentProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-SURGICAL-INSTRUMENT-001"; :>> label = "ManualSurgicalInstrumentProjectMethodBinding"; }
         attribute :>> projectName = "Manual Surgical Instrument";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

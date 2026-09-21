@@ -40,7 +40,6 @@ package memo_architecture_functional_behavior {
     // records so the two are not confused.
     metadata def TransitionRecord {
         attribute id : String;
-        attribute name : String;
         attribute trigger : String;
         attribute guardSummary : String;
         attribute effectSummary : String;

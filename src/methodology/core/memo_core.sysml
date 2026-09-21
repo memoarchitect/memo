@@ -10,7 +10,6 @@ package memo_methodology_core {
     part def MethodologyLibrary :> MemoPart {
         attribute version : String;
         attribute domain : String;
-        attribute :>> description : String;
     }
 
     // A rule's disposition under one methodology or project binding.
@@ -39,7 +38,6 @@ package memo_methodology_core {
     part def MethodologyDefinition :> MemoPart {
         attribute version : String;
         attribute domain : String;
-        attribute :>> description : String;
         // Exactly one base methodology at most. Multiple inheritance is not a
         // multiplicity the resolver has conflict semantics for, so the model
         // does not permit expressing it.
@@ -103,7 +101,6 @@ package memo_methodology_core {
 
     part def Archetype :> MemoPart {
         attribute label : String;
-        attribute :>> description : String;
         attribute category : String;
         attribute includedLayer : String;
         attribute includedStandard : String;

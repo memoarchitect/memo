@@ -8,10 +8,9 @@ package memo_viewpoints_functional_functional_viewpoint {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     viewpoint functionalViewpoint : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-FUNC"; }
-        attribute :>> name = "FunctionalViewpoint";
+        @MemoIdentity { :>> providedId = "VP-FUNC"; :>> label = "FunctionalViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows system functions, their decomposition, and allocation."; }
-        attribute :>> description = "Default viewpoint derived from the functions layer for what the system does, independent of how it is structured — function trees, function allocation, and behavior triggers.";
+        doc /* Default viewpoint derived from the functions layer for what the system does, independent of how it is structured — function trees, function allocation, and behavior triggers. */
         attribute :>> purpose = "Describe the system's functional decomposition and behavior.";
         ref :>> stakeholders = (systemArchitect);
         attribute :>> stage = WorkflowStageKind::architecture;

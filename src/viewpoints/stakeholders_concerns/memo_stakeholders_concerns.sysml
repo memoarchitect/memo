@@ -97,43 +97,36 @@ package memo_viewpoints_stakeholders_concerns {
 
     part def Availability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-1"; }
-        attribute :>> name = "Availability";
         ref :>> addressesConcerns = (safetyConcern, reliabilityConcern, clinicalConcern);
         attribute :>> measure = "Proportion of scheduled procedure time the function is delivered, and time to recover after a fault.";
     }
     part def Performance :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-2"; }
-        attribute :>> name = "Performance";
         ref :>> addressesConcerns = (performanceConcern, clinicalConcern);
         attribute :>> measure = "Latency and throughput under the arrival pattern the procedure produces.";
     }
     part def Security :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-3"; }
-        attribute :>> name = "Security";
         ref :>> addressesConcerns = (cybersecurityConcern, privacyConcern, safetyConcern);
         attribute :>> measure = "Resistance to a stated threat, and time to detect and recover from a compromise.";
     }
     part def Modifiability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-4"; }
-        attribute :>> name = "Modifiability";
         ref :>> addressesConcerns = (regulatoryConcern);
         attribute :>> measure = "Cost and blast radius of a stated change, including the re-verification it forces.";
     }
     part def Testability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-5"; }
-        attribute :>> name = "Testability";
         ref :>> addressesConcerns = (regulatoryConcern, safetyConcern);
         attribute :>> measure = "Probability that a fault present is revealed by the next test, and the effort to observe it.";
     }
     part def Usability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-6"; }
-        attribute :>> name = "Usability";
         ref :>> addressesConcerns = (usabilityConcern, safetyConcern, clinicalConcern);
         attribute :>> measure = "Task success and use-error rate for the intended user under use conditions (IEC 62366-1).";
     }
     part def Interoperability :> MemoQualityAttribute {
         @MemoIdentity { :>> providedId = "QA-7"; }
-        attribute :>> name = "Interoperability";
         ref :>> addressesConcerns = (interoperabilityConcern, clinicalConcern);
         attribute :>> measure = "Proportion of exchanges with a named partner system that are correctly understood.";
     }
@@ -146,48 +139,37 @@ package memo_viewpoints_stakeholders_concerns {
     abstract part def MemoStakeholder :> MemoPart;
 
     part def SystemArchitect :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-1"; }
-        attribute :>> name = "System Architect";
+        @MemoIdentity { :>> providedId = "STK-1"; :>> label = "System Architect"; }
     }
     part def SoftwareArchitect :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-2"; }
-        attribute :>> name = "Software Architect";
+        @MemoIdentity { :>> providedId = "STK-2"; :>> label = "Software Architect"; }
     }
     part def HardwareEngineer :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-3"; }
-        attribute :>> name = "Hardware Engineer";
+        @MemoIdentity { :>> providedId = "STK-3"; :>> label = "Hardware Engineer"; }
     }
     part def SafetyEngineer :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-4"; }
-        attribute :>> name = "Safety Engineer";
+        @MemoIdentity { :>> providedId = "STK-4"; :>> label = "Safety Engineer"; }
     }
     part def VerificationEngineer :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-5"; }
-        attribute :>> name = "Verification Engineer";
+        @MemoIdentity { :>> providedId = "STK-5"; :>> label = "Verification Engineer"; }
     }
     part def RegulatoryEngineer :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-6"; }
-        attribute :>> name = "Regulatory Engineer";
+        @MemoIdentity { :>> providedId = "STK-6"; :>> label = "Regulatory Engineer"; }
     }
     part def ProjectLead :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-7"; }
-        attribute :>> name = "Project Lead";
+        @MemoIdentity { :>> providedId = "STK-7"; :>> label = "Project Lead"; }
     }
     part def SecurityEngineer :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-8"; }
-        attribute :>> name = "Security Engineer";
+        @MemoIdentity { :>> providedId = "STK-8"; :>> label = "Security Engineer"; }
     }
     part def PrivacyEngineer :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-9"; }
-        attribute :>> name = "Privacy Engineer";
+        @MemoIdentity { :>> providedId = "STK-9"; :>> label = "Privacy Engineer"; }
     }
     part def ClinicalEngineer :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-10"; }
-        attribute :>> name = "Clinical Engineer";
+        @MemoIdentity { :>> providedId = "STK-10"; :>> label = "Clinical Engineer"; }
     }
     part def UsabilityEngineer :> MemoStakeholder {
-        @MemoIdentity { :>> providedId = "STK-11"; }
-        attribute :>> name = "Usability Engineer";
+        @MemoIdentity { :>> providedId = "STK-11"; :>> label = "Usability Engineer"; }
     }
 
     // ─── The catalog, as usages ─────────────────────────────────────────

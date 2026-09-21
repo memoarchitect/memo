@@ -17,8 +17,7 @@ package memo_examples_connected_patient_monitor_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-PATIENT-MONITOR-001"; }
-        attribute :>> name = "ConnectedPatientMonitorProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-PATIENT-MONITOR-001"; :>> label = "ConnectedPatientMonitorProjectMethodBinding"; }
         attribute :>> projectName = "Connected Patient Monitor";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

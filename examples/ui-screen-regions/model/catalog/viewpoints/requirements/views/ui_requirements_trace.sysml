@@ -51,8 +51,7 @@ package memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_require
         attribute :>> diagramType = "req";
         attribute :>> autoPopulate = true;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-101"; }
-            attribute :>> name = "UIRequirementsTraceQuery";
+            @MemoIdentity { :>> providedId = "QRY-101"; :>> label = "UIRequirementsTraceQuery"; }
             attribute :>> includeElementKinds = ("Need", "Requirement", "UIElement", "SystemFunction", "VerificationCase");
             attribute :>> includeRelationshipKinds = ("DerivesFrom", "SatisfiedBy", "VerifiedBy");
             attribute :>> includeLayers = ("requirements", "implementation", "functions", "assurance");

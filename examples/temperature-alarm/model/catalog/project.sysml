@@ -17,8 +17,7 @@ package memo_examples_temperature_alarm_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-TEMPERATURE-ALARM-001"; }
-        attribute :>> name = "TemperatureAlarmProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-TEMPERATURE-ALARM-001"; :>> label = "TemperatureAlarmProjectMethodBinding"; }
         attribute :>> projectName = "Temperature Alarm";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

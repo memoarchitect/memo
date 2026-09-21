@@ -18,8 +18,7 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_scenari
     view gpcaScenarioSequenceView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_operational_views_operational_scenario_sequence_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-BHV-002"; }
-        attribute :>> name = "GPCA_ScenarioSequenceView";
+        @MemoIdentity { :>> providedId = "VIEW-BHV-002"; :>> label = "GPCA_ScenarioSequenceView"; }
         @MemoIdentity { :>> shortDescription = "Key therapy and alarm scenarios rendered as sequences over the functional chains."; }
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);
@@ -29,8 +28,7 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_scenari
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include system scenarios with the functional chains and steps that realize them.";
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-BHV-102"; }
-            attribute :>> name = "GPCA_ScenarioSequenceQuery";
+            @MemoIdentity { :>> providedId = "QRY-BHV-102"; :>> label = "GPCA_ScenarioSequenceQuery"; }
             attribute :>> includeElementKinds = ("OperativeScenario", "FunctionalFlow", "FunctionalFlowStep");
             attribute :>> includeLayers = ("operational", "system");
             attribute :>> selectionExpression = "product == 'GPCA'";

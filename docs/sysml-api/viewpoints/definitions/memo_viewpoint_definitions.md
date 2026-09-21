@@ -29,14 +29,17 @@
 | private | `memo_core_dimensions::*` |
 | private | `memo_core_terminology::*` |
 | private | `memo_core_relationships::*` |
+| private | `memo_viewpoints_stakeholders_concerns::*` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`MemoViewpoint`](#memoviewpoint) | `viewpoint def` | Memo viewpoint definition specializing `Views::ViewpointCheck`. | `Views::ViewpointCheck` |
+| [`MemoViewpoint`](#memoviewpoint) | `viewpoint def` | Extends the native SysML viewpoint (Views::ViewpointCheck, a RequirementCheck whose subject is a View) with MEMO's catalog attributes.… | `Views::ViewpointCheck` |
 | [`ViewRule`](#viewrule) | `part def` | View rule definition specializing `MemoPart`. | `MemoPart` |
 | [`ViewSelectionQuery`](#viewselectionquery) | `part def` | View selection query definition specializing `MemoPart`. | `MemoPart` |
+| [`MemoLegendSwatch`](#memolegendswatch) | `part def` | A legend gives colour a meaning, and a view picks exactly one of them — because two legends at once would put two meanings on the same channel and neither could be read.… | `MemoPart` |
+| [`MemoLegend`](#memolegend) | `part def` | Memo legend definition specializing `MemoPart`. | `MemoPart` |
 | [`MemoView`](#memoview) | `view def` | Memo view definition specializing `Views::View`. | `Views::View` |
 | [`MemoDiagramView`](#memodiagramview) | `view def` | Memo diagram view definition specializing `MemoView`. | `MemoView` |
 | [`MemoDocumentBackedView`](#memodocumentbackedview) | `view def` | Memo document backed view definition specializing `MemoView`. | `MemoView` |
@@ -51,7 +54,7 @@ viewpoint def MemoViewpoint :> Views::ViewpointCheck
 
 | Property | Value |
 | --- | --- |
-| Description | Memo viewpoint definition specializing `Views::ViewpointCheck`. |
+| Description | Extends the native SysML viewpoint (Views::ViewpointCheck, a RequirementCheck whose subject is a View) with MEMO's catalog attributes.… |
 | Kind | `viewpoint def` |
 | Abstract | No |
 | Specializes | `Views::ViewpointCheck` |
@@ -82,6 +85,36 @@ part def ViewSelectionQuery specializes MemoPart
 | Property | Value |
 | --- | --- |
 | Description | View selection query definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_viewpoints_definitions` |
+
+
+## MemoLegendSwatch
+
+```sysml
+part def MemoLegendSwatch specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A legend gives colour a meaning, and a view picks exactly one of them — because two legends at once would put two meanings on the same channel and neither could be read.… |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_viewpoints_definitions` |
+
+
+## MemoLegend
+
+```sysml
+part def MemoLegend specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Memo legend definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -182,38 +215,45 @@ part def ViewInclusionRule specializes MemoPart
         private import memo_core_dimensions::*;
         private import memo_core_terminology::*;
         private import memo_core_relationships::*;
+        private import memo_viewpoints_stakeholders_concerns::*;
 
         // Extends the native SysML viewpoint (Views::ViewpointCheck, a
         // RequirementCheck whose subject is a View) with MEMO's catalog
-        // attributes. The MEMO identity core is re-declared here because a
-        // viewpoint is native requirement-family, not a MemoPart — the same
-        // per-metaclass pattern MemoView and the other bases use.
+        // attributes. Identity comes from the `@MemoIdentity` metadata carrier
+        // rather than a re-declared core: a viewpoint is native requirement-family,
+        // not a MemoPart, and metadata crosses metaclasses where inheritance cannot.
         viewpoint def MemoViewpoint :> Views::ViewpointCheck {
-            attribute id : String;
-            attribute uuid : String;
-            attribute name : String;
-            attribute shortDescription : String;
-            attribute description : String;
-            attribute rationale : String;
-            attribute sourceReference : String;
             attribute status : ElementStatusKind;
             attribute lifecycleState : LifecycleStateKind;
             attribute realizationStage : RealizationStageKind[0..1];
             attribute crossCuttingConcerns : CrossCuttingConcernKind[0..*];
-            attribute concerns : ConcernKind[0..*];
             attribute applicableStandards : ExternalReference[0..*];
             attribute codes : TerminologyCode[0..*];
             attribute purpose : String;
-            attribute audience : AudienceKind[*];
+            /**
+             * Who the viewpoint is written for, and what it frames for them.
+             *
+             * References, not enum literals. A stakeholder and a concern are
+             * elements with ids — citable in a review, traceable from a
+             * requirement, and extensible by a project without editing the
+             * ontology, which `AudienceKind` and `ConcernKind` were not.
+             */
+            // Redefines the standard library's `RequirementCheck::stakeholders`,
+            // which a viewpoint inherits through `ViewpointCheck`.
+            ref :>> stakeholders : MemoStakeholder[0..*];
             attribute stage : WorkflowStageKind;
             attribute abstractionLevel : String;
             attribute outputKind : ViewOutputKind[*];
             attribute presentationKind : PresentationKind[*];
-            attribute concernKinds : ConcernKind[*];
-            attribute includedLayers : String[*];
-            attribute allowedElementKinds : String[*];
-            attribute allowedRelationshipKinds : String[*];
-            attribute filterExpression : String;
+            ref framedConcerns : MemoConcern[*];
+            // A viewpoint identifies stakeholders, the concerns it frames, and the
+            // views that conform to it — ISO/IEC/IEEE 42010, and nothing further.
+            // It used to also carry `includedLayers`, `allowedElementKinds`,
+            // `allowedRelationshipKinds` and `filterExpression`: scoping rules over
+            // its views. Nothing ever read them, and the filtering that did happen
+            // came from a union the deriver accumulated out of the views
+            // themselves. What a view shows is the view's to say, through its own
+            // expose members and selectionQuery.
             attribute extendsViewpointIds : String[*];
             attribute userExtensible : Boolean;
             // Optional navigation grouping interpreted by Memo Architect.
@@ -244,17 +284,57 @@ part def ViewInclusionRule specializes MemoPart
             attribute rationaleText : String;
         }
 
+        // ─── Legends ────────────────────────────────────────────────────────
+        //
+        // A legend gives colour a meaning, and a view picks exactly one of them —
+        // because two legends at once would put two meanings on the same channel
+        // and neither could be read.
+        //
+        // Each legend is tied to ONE attribute or enumeration, which is what makes
+        // it a legend rather than a palette: every entry is a value of that same
+        // thing, so the key can be stated as "this attribute, these values, these
+        // colours". Colour is otherwise a property of a diagram, defined nowhere,
+        // reproducible in no other view and reviewable by nobody.
+        // A swatch, not an "entry": `entry` is a SysML keyword (a state's entry
+        // action), and the keyword-collision lint is right that a definition should
+        // not reach for one that means something else. A swatch is what this is —
+        // a colour with a label.
+        part def MemoLegendSwatch specializes MemoPart {
+            /** The value of the legend's attribute or enumeration this entry is for. */
+            attribute value : String;
+            /** Shown in the key. Defaults to the value when unstated. */
+            attribute label : String;
+            /** `#RRGGBB`. */
+            attribute color : String;
+        }
+
+        part def MemoLegend specializes MemoPart {
+            /** The attribute whose value each entry names — e.g. "realizationStage". */
+            attribute attributeName : String;
+            /**
+             * An `enum def` whose values each entry names, as an alternative to
+             * `attributeName`.
+             */
+            attribute enumerationName : String;
+            /**
+             * A value the model derives rather than stores — hierarchy depth, or
+             * the element's kind. Use instead of `attributeName` when the thing
+             * being coloured is not written on the element.
+             */
+            attribute derivedFrom : LegendSourceKind[0..1];
+            /**
+             * Which constructs are coloured. A legend may cover parts and the
+             * connections between them, or only one of them. Empty means every
+             * construct the legend has an entry for.
+             */
+            attribute appliesTo : LegendScopeKind[*];
+            part swatches : MemoLegendSwatch[*];
+        }
+
         view def MemoView :> Views::View {
-            // MEMO identity core, re-declared here rather than inherited: a view is
-            // native SysML and must stay one, so it does not mix in the MemoPart
-            // part hierarchy — same per-metaclass pattern the other MEMO bases use.
-            attribute id : String;
-            attribute uuid : String;
-            attribute name : String;
-            attribute shortDescription : String;
-            attribute description : String;
-            attribute rationale : String;
-            attribute sourceReference : String;
+            // Identity comes from the `@MemoIdentity` metadata carrier, which
+            // annotates any metaclass — so a view stays native SysML without
+            // re-declaring the identification core the other bases used to copy.
             attribute status : ElementStatusKind;
             attribute lifecycleState : LifecycleStateKind;
             attribute realizationStage : RealizationStageKind[0..1];
@@ -284,6 +364,34 @@ part def ViewInclusionRule specializes MemoPart
             attribute diagramType : String;
             attribute layoutHint : String;
             attribute styleHint : String;
+            /**
+             * The one legend this view colours by. At most one: colour is a single
+             * channel, and a second legend competing for it makes both unreadable.
+             * Without one, an element keeps its layer colour.
+             */
+            ref legend : MemoLegend[0..1];
+
+            // ── What the drawing SHOWS ────────────────────────────────────────
+            //
+            // These are the view's own statement about what it presents, so they
+            // are declared here and not in the layout companion beside it. That
+            // file records where boxes were dragged to; whether a drawing names
+            // its ports at all is a decision about the view, survives a layout
+            // reset, and belongs where the rest of the view's intent is written.
+            //
+            // Each is optional and the renderer keeps its default when a view says
+            // nothing, so no existing view changes meaning by their arrival.
+            attribute portDisplay : PortDisplayKind[0..1];
+            attribute connectionDisplay : ConnectionDisplayKind[0..1];
+            /** Name each port on the drawing. Off where the connector label
+             *  already carries the same string, as on a ROS pub/sub view where the
+             *  port and the topic share a name. */
+            attribute showPortText : Boolean[0..1];
+            attribute showConnectionText : Boolean[0..1];
+            /** Animate direction along connectors. */
+            attribute flowAnimation : Boolean[0..1];
+            /** The renderer profile this view opts into, by id. */
+            attribute rendererProfile : String[0..1];
         }
 
         view def MemoDocumentBackedView :> MemoView {

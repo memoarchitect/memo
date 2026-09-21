@@ -36,9 +36,8 @@
 | --- | --- | --- | --- |
 | [`UseContext`](#usecontext) | `part def` | Use context definition specializing `MemoPart`. | `MemoPart` |
 | [`UseEnvironment`](#useenvironment) | `part def` | The physical/organizational environment of use (IEC 62366-1 3.20), separable from the care-setting context so environments are reusable. | `MemoPart` |
-| [`InteractsInContext`](#interactsincontext) | `connection def` | Typed relationship for interacts in context. | `MemoRelationship` |
-| [`InteractsWith`](#interactswith) | `connection def` | Typed relationship for interacts with. | `MemoRelationship` |
-| [`AppliesInContext`](#appliesincontext) | `connection def` | `ConnectsPhysically` is native `connect` (R10-S6): write `connection connect source ::> <a> to target ::> <b>;` — the ordinary untyped binary connection — instead of a connection def for it. | `MemoRelationship` |
+| [`InteractsInContext`](#interactsincontext) | `connection def` | The single relation a system context view draws. A context diagram labels its edges with open-ended verbs — "directs procedure", "electrical power", "fluid supply", "environmental conditions".… | `MemoRelationship` |
+| [`AppliesInContext`](#appliesincontext) | `connection def` | `InteractsWith` is native `connect` (2026-08-18): write `connection connect <participant> to <target>;`. It carried no attributes, and the operational-context package already scopes the ends.… | `MemoRelationship` |
 | [`SituatedIn`](#situatedin) | `connection def` | Typed relationship for situated in. | `MemoRelationship` |
 
 ## UseContext
@@ -79,22 +78,7 @@ connection def InteractsInContext :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for interacts in context. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_context_use_context` |
-
-
-## InteractsWith
-
-```sysml
-connection def InteractsWith :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for interacts with. |
+| Description | The single relation a system context view draws. A context diagram labels its edges with open-ended verbs — "directs procedure", "electrical power", "fluid supply", "environmental conditions".… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -109,7 +93,7 @@ connection def AppliesInContext :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | `ConnectsPhysically` is native `connect` (R10-S6): write `connection connect source ::> <a> to target ::> <b>;` — the ordinary untyped binary connection — instead of a connection def for it. |
+| Description | `InteractsWith` is native `connect` (2026-08-18): write `connection connect <participant> to <target>;`. It carried no attributes, and the operational-context package already scopes the ends.… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -204,17 +188,9 @@ connection def SituatedIn :> MemoRelationship
             :>> baseType = interactsInContextLinks meta SysML::Usage;
         }
 
-        connection def InteractsWith :> MemoRelationship {
-            end contextParticipant : OperationalParticipant :>> source;
-            // Untyped so operational activities (action def) can be targets as well as parts.
-            end target;
-        }
-        abstract connection interactsWithLinks : InteractsWith[*];
-        metadata def <interactsWith> InteractsWithMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = interactsWithLinks meta SysML::Usage;
-        }
+        // `InteractsWith` is native `connect` (2026-08-18): write
+        // `connection connect <participant> to <target>;`. It carried no
+        // attributes, and the operational-context package already scopes the ends.
         // `ConnectsPhysically` is native `connect` (R10-S6): write
         // `connection connect source ::> <a> to target ::> <b>;` — the ordinary
         // untyped binary connection — instead of a connection def for it.

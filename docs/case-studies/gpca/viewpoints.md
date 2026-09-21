@@ -57,7 +57,6 @@ architecture" is legitimately asked about in several shapes.
 
 ```sysml
 part logicalArchitectureViewpoint : Viewpoint {
-    attribute :>> name = "LogicalArchitectureViewpoint";
     attribute :>> purpose = "Describe the system's logical decomposition.";
     attribute :>> audience = (AudienceKind::systemArchitect);
     attribute :>> stage = WorkflowStageKind::architecture;

@@ -26,6 +26,9 @@
 | private | `ScalarValues::*` |
 | private | `memo_viewpoints_definitions::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_viewpoints_stakeholders_concerns::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -44,23 +47,23 @@
 
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
+        private import memo_viewpoints_stakeholders_concerns::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         viewpoint operationalViewpoint : MemoViewpoint {
-            attribute :>> id = "VP-OPS";
-            attribute :>> name = "OperationalViewpoint";
-            attribute :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities.";
-            attribute :>> description = "Default viewpoint derived from the context, operational, and system layers for how actors use the device — operational scenarios, capabilities, and the functional chains that realize them.";
+            @MemoIdentity { :>> providedId = "VP-OPS"; :>> label = "OperationalViewpoint"; }
+            @MemoIdentity { :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities."; }
+            doc /* Default viewpoint derived from the context, operational, and system layers for how actors use the device — operational scenarios, capabilities, and the functional chains that realize them. */
             attribute :>> purpose = "Communicate how actors interact with the system and which capabilities they invoke.";
-            attribute :>> audience = (AudienceKind::projectLead, AudienceKind::systemArchitect);
+            ref :>> stakeholders = (projectLead, systemArchitect);
             attribute :>> stage = WorkflowStageKind::context;
             attribute :>> abstractionLevel = "operational";
             attribute :>> outputKind = (ViewOutputKind::diagram);
             attribute :>> presentationKind = (PresentationKind::custom);
-            attribute :>> concernKinds = (ConcernKind::performance, ConcernKind::interoperability);
-            attribute :>> includedLayers = ("context", "operational", "system");
+            ref :>> framedConcerns = (performanceConcern, interoperabilityConcern);
             attribute :>> explorerLane = "architecture";
             attribute :>> explorerOrder = 1;
-            attribute :>> allowedElementKinds = ("Actor", "UseContext", "OperativeAction", "OperativeScenario[scenarioKind=operative]");
             attribute :>> userExtensible = true;
         }
     }

@@ -26,6 +26,9 @@
 | private | `ScalarValues::*` |
 | private | `memo_viewpoints_definitions::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_viewpoints_stakeholders_concerns::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -44,23 +47,23 @@
 
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
+        private import memo_viewpoints_stakeholders_concerns::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         viewpoint physicalViewpoint : MemoViewpoint {
-            attribute :>> id = "VP-PHY";
-            attribute :>> name = "PhysicalViewpoint";
-            attribute :>> shortDescription = "Shows physical components, hardware structure, and their interconnections.";
-            attribute :>> description = "Default viewpoint derived from the physical and hardware structure layers for bill-of-materials, hardware decomposition, physical interfaces, and network/connectivity topology.";
+            @MemoIdentity { :>> providedId = "VP-PHY"; :>> label = "PhysicalViewpoint"; }
+            @MemoIdentity { :>> shortDescription = "Shows physical components, hardware structure, and their interconnections."; }
+            doc /* Default viewpoint derived from the physical and hardware structure layers for bill-of-materials, hardware decomposition, physical interfaces, and network/connectivity topology. */
             attribute :>> purpose = "Describe the system's physical realization and interconnections.";
-            attribute :>> audience = (AudienceKind::hardwareEngineer);
+            ref :>> stakeholders = (hardwareEngineer);
             attribute :>> stage = WorkflowStageKind::architecture;
             attribute :>> abstractionLevel = "physical";
             attribute :>> outputKind = (ViewOutputKind::diagram);
             attribute :>> presentationKind = (PresentationKind::blockDiagram);
-            attribute :>> concernKinds = (ConcernKind::reliability, ConcernKind::interoperability);
-            attribute :>> includedLayers = ("hardware_structure", "physical");
+            ref :>> framedConcerns = (reliabilityConcern, interoperabilityConcern);
             attribute :>> explorerLane = "architecture";
             attribute :>> explorerOrder = 5;
-            attribute :>> allowedElementKinds = ("ProcessingNode", "HardwareAssembly", "PhysicalPort");
             attribute :>> userExtensible = true;
         }
     }

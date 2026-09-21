@@ -19,9 +19,9 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
     private import memo_core_common::MemoIdentity;
 
     // Lifelines — the actor and components each step is allocated to.
-    part clinician : User { attribute :>> name = "Clinician"; }
-    part pumpController : LogicalComponent { attribute :>> name = "Pump Controller"; }
-    part pumpMechanism : LogicalComponent { attribute :>> name = "Pump Mechanism"; }
+    part clinician : User { }
+    part pumpController : LogicalComponent {@MemoIdentity { :>> label = "Pump Controller"; } }
+    part pumpMechanism : LogicalComponent {@MemoIdentity { :>> label = "Pump Mechanism"; } }
 
     // Combined fragment definitions — referenced by steps' `fragment` attribute.
     part monitorLoop {
@@ -36,22 +36,22 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
     }
 
     action startInfusion : FunctionalFlow {
-        attribute :>> name = "Start Infusion";
+@MemoIdentity { :>> label = "Start Infusion"; }
 
-        action stepRequestStart : FunctionalFlowStep { attribute :>> name = "Request start infusion"; }
-        action stepValidate : FunctionalFlowStep { attribute :>> name = "Validate prescribed rate"; }
-        action stepCommandMotor : FunctionalFlowStep { attribute :>> name = "Command motor drive"; }
-        action stepConfirm : FunctionalFlowStep { attribute :>> name = "Confirm delivery started"; }
+        action stepRequestStart : FunctionalFlowStep {@MemoIdentity { :>> label = "Request start infusion"; } }
+        action stepValidate : FunctionalFlowStep {@MemoIdentity { :>> label = "Validate prescribed rate"; } }
+        action stepCommandMotor : FunctionalFlowStep {@MemoIdentity { :>> label = "Command motor drive"; } }
+        action stepConfirm : FunctionalFlowStep {@MemoIdentity { :>> label = "Confirm delivery started"; } }
 
         // Steps inside the monitoring loop fragment
-        action stepReadSensor : FunctionalFlowStep { attribute :>> name = "Read sensor data"; attribute stepOrder = "5"; attribute fragment = "monitorLoop"; }
-        action stepCheckVitals : FunctionalFlowStep { attribute :>> name = "Check vital signs"; attribute stepOrder = "6"; attribute fragment = "monitorLoop"; }
+        action stepReadSensor : FunctionalFlowStep {@MemoIdentity { :>> label = "Read sensor data"; } attribute stepOrder = "5"; attribute fragment = "monitorLoop"; }
+        action stepCheckVitals : FunctionalFlowStep {@MemoIdentity { :>> label = "Check vital signs"; } attribute stepOrder = "6"; attribute fragment = "monitorLoop"; }
 
         // Steps inside the alt (error-handling) fragment
-        action stepRetryDelivery : FunctionalFlowStep { attribute :>> name = "Retry delivery"; attribute stepOrder = "7"; attribute fragment = "errorHandling"; attribute fragmentOperand = "1"; }
-        action stepAlertUser : FunctionalFlowStep { attribute :>> name = "Alert user"; attribute stepOrder = "8"; attribute fragment = "errorHandling"; attribute fragmentOperand = "2"; }
+        action stepRetryDelivery : FunctionalFlowStep {@MemoIdentity { :>> label = "Retry delivery"; } attribute stepOrder = "7"; attribute fragment = "errorHandling"; attribute fragmentOperand = "1"; }
+        action stepAlertUser : FunctionalFlowStep {@MemoIdentity { :>> label = "Alert user"; } attribute stepOrder = "8"; attribute fragment = "errorHandling"; attribute fragmentOperand = "2"; }
 
-        action stepNotify : FunctionalFlowStep { attribute :>> name = "Notify delivery started"; attribute stepOrder = "9"; }
+        action stepNotify : FunctionalFlowStep {@MemoIdentity { :>> label = "Notify delivery started"; } attribute stepOrder = "9"; }
 
         first start then stepRequestStart;
         first stepRequestStart then stepValidate;

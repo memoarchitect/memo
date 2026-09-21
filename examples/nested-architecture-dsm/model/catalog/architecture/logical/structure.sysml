@@ -16,7 +16,7 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
     private import memo_core_common::MemoIdentity;
     // ── Level 0: the system ──────────────────────────────────────
     part sysTherapyDelivery : System {
-        @MemoIdentity { :>> providedId = "NDS-SYS-001"; } attribute :>> name = "TherapyDeliverySystem";
+        @MemoIdentity { :>> providedId = "NDS-SYS-001"; :>> label = "TherapyDeliverySystem"; }
         attribute :>> componentRole = ComponentRoleKind::generic;
         attribute :>> systemType = SystemTypeKind::logical;
         attribute :>> systemBoundaryDescription = "Everything inside the pump enclosure, including its power path and user interface.";
@@ -24,35 +24,35 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
 
         // ── Level 1: subsystems ──────────────────────────────────
         part subFluidPath : Subsystem {
-            @MemoIdentity { :>> providedId = "NDS-SUB-001"; } attribute :>> name = "FluidPathSubsystem";
+            @MemoIdentity { :>> providedId = "NDS-SUB-001"; :>> label = "FluidPathSubsystem"; }
             attribute :>> componentRole = ComponentRoleKind::generic;
             attribute :>> systemType = SystemTypeKind::hardware;
             attribute :>> responsibility = "Move fluid from the reservoir to the patient line at a commanded rate.";
 
             // ── Level 2/3: components ─────────────────────────────
             part lcPumpMechanism : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-001"; } attribute :>> name = "PumpMechanism";
+                @MemoIdentity { :>> providedId = "NDS-LC-001"; :>> label = "PumpMechanism"; }
                 attribute :>> componentRole = ComponentRoleKind::controlElement;
                 attribute :>> systemType = SystemTypeKind::hardware;
                 attribute :>> responsibility = "Displace fluid under command.";
                 attribute :>> controlledVariable = "delivered volume per stroke";
             }
             part lcOcclusionChannel : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-002"; } attribute :>> name = "OcclusionSensingChannel";
+                @MemoIdentity { :>> providedId = "NDS-LC-002"; :>> label = "OcclusionSensingChannel"; }
                 attribute :>> componentRole = ComponentRoleKind::channel;
                 attribute :>> systemType = SystemTypeKind::hardware;
                 attribute :>> responsibility = "Sense line pressure and air in line.";
                 attribute :>> channelRole = ChannelRoleKind::primary;
             }
             part lcReservoirInterface : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-003"; } attribute :>> name = "ReservoirInterface";
+                @MemoIdentity { :>> providedId = "NDS-LC-003"; :>> label = "ReservoirInterface"; }
                 attribute :>> componentRole = ComponentRoleKind::generic;
                 attribute :>> systemType = SystemTypeKind::hardware;
                 attribute :>> responsibility = "Seat the reservoir and expose its remaining volume.";
             }
         }
         part subControl : Subsystem {
-            @MemoIdentity { :>> providedId = "NDS-SUB-002"; } attribute :>> name = "ControlSubsystem";
+            @MemoIdentity { :>> providedId = "NDS-SUB-002"; :>> label = "ControlSubsystem"; }
             attribute :>> componentRole = ComponentRoleKind::controlElement;
             attribute :>> systemType = SystemTypeKind::software;
             attribute :>> responsibility = "Decide what the fluid path should do, and hold the therapy state.";
@@ -62,14 +62,14 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
             // which is what makes a collapsed ControlSubsystem row a genuine
             // roll-up rather than a rename of its children.
             part subSafetyMonitor : Subsystem {
-                @MemoIdentity { :>> providedId = "NDS-SUB-005"; } attribute :>> name = "SafetyMonitorSubsystem";
+                @MemoIdentity { :>> providedId = "NDS-SUB-005"; :>> label = "SafetyMonitorSubsystem"; }
                 attribute :>> componentRole = ComponentRoleKind::channel;
                 attribute :>> systemType = SystemTypeKind::software;
                 attribute :>> responsibility = "Watch the control path from outside it and stop delivery on breach.";
                 attribute :>> safetyPartition = "monitor partition, separate MPU region from the control partition";
 
                 part lcWatchdogChannel : LogicalComponent {
-                    @MemoIdentity { :>> providedId = "NDS-LC-006"; } attribute :>> name = "WatchdogChannel";
+                    @MemoIdentity { :>> providedId = "NDS-LC-006"; :>> label = "WatchdogChannel"; }
                     attribute :>> componentRole = ComponentRoleKind::channel;
                     attribute :>> systemType = SystemTypeKind::software;
                     attribute :>> responsibility = "Reset to the safe state when the control loop misses its deadline.";
@@ -77,7 +77,7 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
                     attribute :>> diversityBasis = "independent time base from the control partition";
                 }
                 part lcPressureIntegrityChannel : LogicalComponent {
-                    @MemoIdentity { :>> providedId = "NDS-LC-007"; } attribute :>> name = "PressureIntegrityChannel";
+                    @MemoIdentity { :>> providedId = "NDS-LC-007"; :>> label = "PressureIntegrityChannel"; }
                     attribute :>> componentRole = ComponentRoleKind::channel;
                     attribute :>> systemType = SystemTypeKind::software;
                     attribute :>> responsibility = "Cross-check pressure against the commanded rate and stop on divergence.";
@@ -86,7 +86,7 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
                 }
             }
             part lcDoseController : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-004"; } attribute :>> name = "DoseController";
+                @MemoIdentity { :>> providedId = "NDS-LC-004"; :>> label = "DoseController"; }
                 attribute :>> componentRole = ComponentRoleKind::controlElement;
                 attribute :>> systemType = SystemTypeKind::software;
                 attribute :>> responsibility = "Turn a prescription into rate commands.";
@@ -94,7 +94,7 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
                 attribute :>> controlledVariable = "infusion rate";
             }
             part lcTherapyStateStore : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-005"; } attribute :>> name = "TherapyStateStore";
+                @MemoIdentity { :>> providedId = "NDS-LC-005"; :>> label = "TherapyStateStore"; }
                 attribute :>> componentRole = ComponentRoleKind::dataStore;
                 attribute :>> systemType = SystemTypeKind::software;
                 attribute :>> responsibility = "Hold the active therapy record across power cycles.";
@@ -103,27 +103,27 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
             }
         }
         part subUserInterface : Subsystem {
-            @MemoIdentity { :>> providedId = "NDS-SUB-003"; } attribute :>> name = "UserInterfaceSubsystem";
+            @MemoIdentity { :>> providedId = "NDS-SUB-003"; :>> label = "UserInterfaceSubsystem"; }
             attribute :>> componentRole = ComponentRoleKind::userInterface;
             attribute :>> systemType = SystemTypeKind::software;
             attribute :>> responsibility = "Present therapy state to the clinician and accept their input.";
 
             part lcDisplayManager : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-008"; } attribute :>> name = "DisplayManager";
+                @MemoIdentity { :>> providedId = "NDS-LC-008"; :>> label = "DisplayManager"; }
                 attribute :>> componentRole = ComponentRoleKind::userInterface;
                 attribute :>> systemType = SystemTypeKind::software;
                 attribute :>> responsibility = "Render therapy state on the main screen.";
                 attribute :>> interactionSummary = "read-only status surface, refreshed once per second";
             }
             part lcAlarmAnnunciator : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-009"; } attribute :>> name = "AlarmAnnunciator";
+                @MemoIdentity { :>> providedId = "NDS-LC-009"; :>> label = "AlarmAnnunciator"; }
                 attribute :>> componentRole = ComponentRoleKind::userInterface;
                 attribute :>> systemType = SystemTypeKind::software;
                 attribute :>> responsibility = "Raise audible and visible alarms by priority.";
                 attribute :>> interactionSummary = "IEC 60601-1-8 alarm signals";
             }
             part lcKeypadHandler : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-010"; } attribute :>> name = "KeypadHandler";
+                @MemoIdentity { :>> providedId = "NDS-LC-010"; :>> label = "KeypadHandler"; }
                 attribute :>> componentRole = ComponentRoleKind::userInterface;
                 attribute :>> systemType = SystemTypeKind::software;
                 attribute :>> responsibility = "Debounce and interpret key presses.";
@@ -131,19 +131,19 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
             }
         }
         part subPower : Subsystem {
-            @MemoIdentity { :>> providedId = "NDS-SUB-004"; } attribute :>> name = "PowerSubsystem";
+            @MemoIdentity { :>> providedId = "NDS-SUB-004"; :>> label = "PowerSubsystem"; }
             attribute :>> componentRole = ComponentRoleKind::generic;
             attribute :>> systemType = SystemTypeKind::hardware;
             attribute :>> responsibility = "Supply and monitor power across mains and battery operation.";
 
             part lcBatteryManager : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-011"; } attribute :>> name = "BatteryManager";
+                @MemoIdentity { :>> providedId = "NDS-LC-011"; :>> label = "BatteryManager"; }
                 attribute :>> componentRole = ComponentRoleKind::generic;
                 attribute :>> systemType = SystemTypeKind::hardware;
                 attribute :>> responsibility = "Charge, gauge and protect the battery.";
             }
             part lcPowerRailMonitor : LogicalComponent {
-                @MemoIdentity { :>> providedId = "NDS-LC-012"; } attribute :>> name = "PowerRailMonitor";
+                @MemoIdentity { :>> providedId = "NDS-LC-012"; :>> label = "PowerRailMonitor"; }
                 attribute :>> componentRole = ComponentRoleKind::channel;
                 attribute :>> systemType = SystemTypeKind::hardware;
                 attribute :>> responsibility = "Detect rail brownout and request a source switch.";

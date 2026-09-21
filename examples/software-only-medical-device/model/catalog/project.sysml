@@ -17,8 +17,7 @@ package memo_examples_software_only_medical_device_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-MEDICAL-DEVICE-001"; }
-        attribute :>> name = "SoftwareOnlyMedicalDeviceProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-MEDICAL-DEVICE-001"; :>> label = "SoftwareOnlyMedicalDeviceProjectMethodBinding"; }
         attribute :>> projectName = "Software Only Medical Device";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

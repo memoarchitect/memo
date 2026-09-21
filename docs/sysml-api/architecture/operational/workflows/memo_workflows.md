@@ -43,8 +43,6 @@
 | [`ControlNodeKind`](#controlnodekind) | `enum def` | decision / fork / join / handoff. | — |
 | [`WorkflowControlNode`](#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | `MemoAction` |
 | [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. | `MemoPart` |
-| [`Supports`](#supports) | `connection def` | Typed relationship for supports. | `MemoRelationship` |
-| [`RequiresResource`](#requiresresource) | `connection def` | Typed relationship for requires resource. | `MemoRelationship` |
 | [`TransformKind`](#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | — |
 | [`Transforms`](#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | `MemoRelationship` |
 
@@ -150,36 +148,6 @@ part def WorkflowResource specializes MemoPart
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
-| Owning package | `memo_architecture_operational_workflows` |
-
-
-## Supports
-
-```sysml
-connection def Supports :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for supports. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_workflows` |
-
-
-## RequiresResource
-
-```sysml
-connection def RequiresResource :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for requires resource. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_operational_workflows` |
 
 
@@ -311,26 +279,6 @@ connection def Transforms :> MemoRelationship
         // SupportKind discriminator is gone: what used to be three enum values
         // that each implied a different target type are now two typed refs plus
         // this one plain relation.
-        connection def Supports :> MemoRelationship {
-            end supporter :>> source;
-            end supported : MemoAction :>> target;
-        }
-        abstract connection supportsLinks : Supports[*];
-        metadata def <supports> SupportsMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = supportsLinks meta SysML::Usage;
-        }
-        connection def RequiresResource :> MemoRelationship {
-            end workflow : OperationalWorkflow :>> source;
-            end resource : WorkflowResource :>> target;
-        }
-        abstract connection requiresResourceLinks : RequiresResource[*];
-        metadata def <requiresResource> RequiresResourceMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = requiresResourceLinks meta SysML::Usage;
-        }
 
         // ── Workflow transformation (as-is → to-be) ──────────────────
         // Transforms unifies TransformsStep / TransformsWorkflow / ReplacesWorkflow

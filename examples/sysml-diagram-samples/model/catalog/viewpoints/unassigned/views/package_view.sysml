@@ -17,39 +17,39 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_
 
     package presentation {
         part dashboardUI : LogicalComponent {
-            attribute :>> name = "Dashboard UI";
+@MemoIdentity { :>> label = "Dashboard UI"; }
             out port apiCall : DataPort { out item payload : MemoItem; }
         }
         part settingsUI : LogicalComponent {
-            attribute :>> name = "Settings UI";
+@MemoIdentity { :>> label = "Settings UI"; }
             out port configRequest : DataPort { out item payload : MemoItem; }
         }
     }
 
     package domain {
         part therapyEngine : LogicalComponent {
-            attribute :>> name = "Therapy Engine";
+@MemoIdentity { :>> label = "Therapy Engine"; }
             in port incomingRequest : DataPort { in item payload : MemoItem; }
             out port statusUpdate : DataPort { out item payload : MemoItem; }
         }
         part alarmManager : LogicalComponent {
-            attribute :>> name = "Alarm Manager";
+@MemoIdentity { :>> label = "Alarm Manager"; }
             in port trigger : DataPort { in item payload : MemoItem; }
         }
         part configService : LogicalComponent {
-            attribute :>> name = "Configuration Service";
+@MemoIdentity { :>> label = "Configuration Service"; }
             in port configIn : DataPort { in item payload : MemoItem; }
         }
     }
 
     package infrastructure {
         part dataStore : LogicalComponent {
-            attribute :>> name = "Data Store";
+@MemoIdentity { :>> label = "Data Store"; }
             in port writePort : DataPort { in item payload : MemoItem; }
             out port readPort : DataPort { out item payload : MemoItem; }
         }
         part networkAdapter : LogicalComponent {
-            attribute :>> name = "Network Adapter";
+@MemoIdentity { :>> label = "Network Adapter"; }
             inout port netIO : DataPort { inout item payload : MemoItem; }
         }
     }

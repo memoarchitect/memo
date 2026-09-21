@@ -24,8 +24,12 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `Metaobjects::SemanticMetadata` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_core_relationships::*` |
+| private | `memo_architecture_operational_context_actors::*` |
+| private | `memo_architecture_operational_context_use_context::*` |
 
 ## Declarations
 
@@ -33,6 +37,7 @@
 | --- | --- | --- | --- |
 | [`NeedKind`](#needkind) | `enum def` | Controlled values for need: `user`, `clinicalUser`, `patientUser`, `business`, `service`, `regulatory`, `operational`, `designControl`. | — |
 | [`Need`](#need) | `requirement def` | Need definition specializing `MemoNeed`. | `MemoNeed` |
+| [`HeldBy`](#heldby) | `connection def` | Whose need this is. The holder is a modelled participant — a User, with the profile IEC 62366-1 asks for, or another operational participant — so "which users does this need serve" is a question the model answers rather than a sentence a reader interprets. | `MemoRelationship` |
 
 ## NeedKind
 
@@ -64,6 +69,21 @@ requirement def Need specializes MemoNeed
 | Owning package | `memo_assurance_requirements_needs` |
 
 
+## HeldBy
+
+```sysml
+connection def HeldBy :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Whose need this is. The holder is a modelled participant — a User, with the profile IEC 62366-1 asks for, or another operational participant — so "which users does this need serve" is a question the model answers rather than a sentence a reader interprets. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_requirements_needs` |
+
+
 ## Source
 
 ??? code "assurance/requirements/needs/memo_needs.sysml"
@@ -77,8 +97,15 @@ requirement def Need specializes MemoNeed
     package memo_assurance_requirements_needs {
         private import ScalarValues::*;
 
+        private import Metaobjects::SemanticMetadata;
+
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
+        private import memo_core_relationships::*;
+        // A need is held by someone and arises in a context, and both are modelled
+        // elements. Assurance may depend on architecture; the reverse may not.
+        private import memo_architecture_operational_context_actors::*;
+        private import memo_architecture_operational_context_use_context::*;
 
         // The kind of need. Was a subclass branch (StakeholderNeed / UserNeed /
         // ClinicalUserNeed / PatientUserNeed / BusinessNeed / ServiceNeed /
@@ -100,16 +127,37 @@ requirement def Need specializes MemoNeed
 
         requirement def Need specializes MemoNeed {
             attribute needKind : NeedKind;
-            // user need (IEC 62366-1)
-            attribute userPopulationReference : String;
+            // A user need (IEC 62366-1) says WHOSE need it is with HeldBy, and the
+            // user's characteristics live on the User: `userPopulation`,
+            // `impairmentConsiderations`, `intendedTraining`, `intendedQualification`.
+            // A `userPopulationReference` string stood here and held prose — "ward
+            // nurses, including those wearing corrective lenses" — which is two
+            // typed attributes of a user profile written as one sentence nothing
+            // could read, on the wrong element.
             // regulatory need
             attribute jurisdiction : String;
             attribute regulationReference : String;
-            // operational need
-            attribute operationalContextReference : String;
+            // The context an operational need arises in. Typed, because UseContext
+            // carries the care setting, environment and jurisdiction that an
+            // `operationalContextReference` string could only describe.
+            ref useContext : UseContext[0..1];
             // design-control need (ISO 13485 design input)
             attribute sourceFolder : String;
-            attribute linkedDesignControls : String;
+        }
+
+        // Whose need this is. The holder is a modelled participant — a User, with
+        // the profile IEC 62366-1 asks for, or another operational participant —
+        // so "which users does this need serve" is a question the model answers
+        // rather than a sentence a reader interprets.
+        connection def HeldBy :> MemoRelationship {
+            end need : MemoNeed :>> source;
+            end holder : OperationalParticipant :>> target;
+        }
+        abstract connection heldByLinks : HeldBy[*];
+        metadata def <heldBy> HeldByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = heldByLinks meta SysML::Usage;
         }
     }
 

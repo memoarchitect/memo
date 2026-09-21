@@ -19,10 +19,9 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
     view gpcaCybersecurityView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cybersecurity_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-CYB-001"; }
-        attribute :>> name = "GPCA_CybersecurityView";
+        @MemoIdentity { :>> providedId = "VIEW-CYB-001"; :>> label = "GPCA_CybersecurityView"; }
         @MemoIdentity { :>> shortDescription = "Shows GPCA assets, trust boundaries, threats, vulnerabilities, and mitigations."; }
-        attribute :>> description = "Product-specific cybersecurity view intended for secure product development and cross-reference into cybersecurity risk documentation.";
+        doc /* Product-specific cybersecurity view intended for secure product development and cross-reference into cybersecurity risk documentation. */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);
         attribute :>> viewKind = DiagramViewKind::general;
@@ -31,8 +30,7 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cyb
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include cyber assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, mitigations, security requirements, and verification.";
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-CYB-001"; }
-            attribute :>> name = "GPCA_CybersecurityQuery";
+            @MemoIdentity { :>> providedId = "QRY-CYB-001"; :>> label = "GPCA_CybersecurityQuery"; }
             attribute :>> includeElementKinds = ("CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "OperativeScenario");
             attribute :>> includeLayers = ("cybersecurity", "risk", "assurance");
             attribute :>> includeConcerns = (ConcernKind::cybersecurity, ConcernKind::privacy, ConcernKind::safety);

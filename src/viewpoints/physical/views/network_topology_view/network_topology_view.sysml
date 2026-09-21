@@ -10,8 +10,7 @@ package memo_viewpoints_physical_views_network_topology_view {
                 view networkTopologyView : MemoDiagramView {
                     expose memo_viewpoints_physical_views_network_topology_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-PHY-002"; }
-    attribute :>> name = "NetworkTopologyView";
+    @MemoIdentity { :>> providedId = "VIEW-PHY-002"; :>> label = "NetworkTopologyView"; }
     @MemoIdentity { :>> shortDescription = "Physical interconnections and network ports between components."; }
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::internalDiagram);
@@ -19,8 +18,7 @@ package memo_viewpoints_physical_views_network_topology_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include physical ports and connections that make up the device's network topology.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-PHY-002"; }
-        attribute :>> name = "NetworkTopologyQuery";
+        @MemoIdentity { :>> providedId = "QRY-PHY-002"; :>> label = "NetworkTopologyQuery"; }
         attribute :>> includeElementKinds = ("PhysicalPort", "ProcessingNode");
         attribute :>> includeLayers = ("physical");
         attribute :>> rationaleText = "Auto-populate the network topology view from the physical interfaces layer.";

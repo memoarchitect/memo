@@ -10,8 +10,7 @@ package memo_viewpoints_verification_views_verification_coverage_view {
                 view verificationCoverageView : MemoDiagramView {
                     expose memo_viewpoints_verification_views_verification_coverage_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-VER-001"; }
-    attribute :>> name = "VerificationCoverageView";
+    @MemoIdentity { :>> providedId = "VIEW-VER-001"; :>> label = "VerificationCoverageView"; }
     @MemoIdentity { :>> shortDescription = "Requirements with their verification cases, validation cases, and evidence."; }
     attribute :>> outputKind = (ViewOutputKind::matrix);
     attribute :>> presentationKind = (PresentationKind::traceMatrix);
@@ -19,8 +18,7 @@ package memo_viewpoints_verification_views_verification_coverage_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include requirements and their linked verification/validation cases and evidence.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-VER-001"; }
-        attribute :>> name = "VerificationCoverageQuery";
+        @MemoIdentity { :>> providedId = "QRY-VER-001"; :>> label = "VerificationCoverageQuery"; }
         attribute :>> includeElementKinds = ("Requirement", "VerificationCase", "ValidationCase", "MemoEvidence");
         attribute :>> includeLayers = ("requirements", "assurance");
         attribute :>> rationaleText = "Auto-populate V&V coverage from the requirements and assurance layers.";

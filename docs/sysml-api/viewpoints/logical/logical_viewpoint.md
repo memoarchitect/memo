@@ -26,6 +26,9 @@
 | private | `ScalarValues::*` |
 | private | `memo_viewpoints_definitions::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_viewpoints_stakeholders_concerns::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -44,23 +47,23 @@
 
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
+        private import memo_viewpoints_stakeholders_concerns::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         viewpoint logicalArchitectureViewpoint : MemoViewpoint {
-            attribute :>> id = "VP-LOG";
-            attribute :>> name = "LogicalArchitectureViewpoint";
-            attribute :>> shortDescription = "Shows logical decomposition and interfaces.";
-            attribute :>> description = "Default viewpoint derived from the logical architecture layer for subsystem structure, responsibilities, and major interactions, independent of physical realization.";
+            @MemoIdentity { :>> providedId = "VP-LOG"; :>> label = "LogicalArchitectureViewpoint"; }
+            @MemoIdentity { :>> shortDescription = "Shows logical decomposition and interfaces."; }
+            doc /* Default viewpoint derived from the logical architecture layer for subsystem structure, responsibilities, and major interactions, independent of physical realization. */
             attribute :>> purpose = "Describe the system's logical decomposition.";
-            attribute :>> audience = (AudienceKind::systemArchitect);
+            ref :>> stakeholders = (systemArchitect);
             attribute :>> stage = WorkflowStageKind::architecture;
             attribute :>> abstractionLevel = "logical";
             attribute :>> outputKind = (ViewOutputKind::diagram);
             attribute :>> presentationKind = (PresentationKind::blockDiagram);
-            attribute :>> concernKinds = (ConcernKind::safety, ConcernKind::performance);
-            attribute :>> includedLayers = ("logical_structure", "interfaces");
+            ref :>> framedConcerns = (safetyConcern, performanceConcern);
             attribute :>> explorerLane = "architecture";
             attribute :>> explorerOrder = 3;
-            attribute :>> allowedElementKinds = ("LogicalComponent", "Interface");
             attribute :>> userExtensible = true;
         }
     }

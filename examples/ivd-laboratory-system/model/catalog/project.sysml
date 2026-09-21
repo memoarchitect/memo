@@ -17,8 +17,7 @@ package memo_examples_ivd_laboratory_system_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-LABORATORY-SYSTEM-001"; }
-        attribute :>> name = "IvdLaboratorySystemProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-LABORATORY-SYSTEM-001"; :>> label = "IvdLaboratorySystemProjectMethodBinding"; }
         attribute :>> projectName = "Ivd Laboratory System";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

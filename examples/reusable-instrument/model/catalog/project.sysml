@@ -17,8 +17,7 @@ package memo_examples_reusable_instrument_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-REUSABLE-INSTRUMENT-001"; }
-        attribute :>> name = "ReusableInstrumentProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-REUSABLE-INSTRUMENT-001"; :>> label = "ReusableInstrumentProjectMethodBinding"; }
         attribute :>> projectName = "Reusable Instrument";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

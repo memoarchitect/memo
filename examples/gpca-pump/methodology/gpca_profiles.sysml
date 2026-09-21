@@ -34,11 +34,10 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part gpcaMethodDefinition : MethodologyDefinition {
-        @MemoIdentity { :>> providedId = "METH-GPCA-001"; }
-        attribute :>> name = "GPCAPrototypeMethodology";
+        @MemoIdentity { :>> providedId = "METH-GPCA-001"; :>> label = "GPCAPrototypeMethodology"; }
         attribute :>> version = "0.6.5";
         attribute :>> domain = "medical device modeling";
-        attribute :>> description = "GPCA infusion pump methodology for the non-networked prototype variant. Explicitly selects the five architecture layers and four of the five assurance disciplines; cybersecurity is out of scope because the prototype has no network interface. The prototype uses no SOUP.";
+        doc /* GPCA infusion pump methodology for the non-networked prototype variant. Explicitly selects the five architecture layers and four of the five assurance disciplines; cybersecurity is out of scope because the prototype has no network interface. The prototype uses no SOUP. */
         ref :>> baseMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
 
