@@ -153,15 +153,15 @@ package memo_examples_nested_architecture_dsm_architecture_logical_structure {
 
         // ── Component-to-component dependency ─────────────────────
         // What the DSM plots when both axes are architecture: who needs whom.
-        flow from subFluidPath.lcOcclusionChannel to subControl.lcDoseController;
-        flow from subControl.lcDoseController to subFluidPath.lcPumpMechanism;
-        flow from subFluidPath.lcPumpMechanism to subControl.lcTherapyStateStore;
-        flow from subControl.lcTherapyStateStore to subUserInterface.lcDisplayManager;
-        flow from subControl.subSafetyMonitor.lcWatchdogChannel to subControl.lcDoseController;
-        flow from subControl.subSafetyMonitor.lcPressureIntegrityChannel to subUserInterface.lcAlarmAnnunciator;
-        flow from subUserInterface.lcKeypadHandler to subControl.lcDoseController;
-        flow from subFluidPath.lcReservoirInterface to subFluidPath.lcPumpMechanism;
-        flow from subPower.lcBatteryManager to subPower.lcPowerRailMonitor;
-        flow from subPower.lcPowerRailMonitor to subUserInterface.lcAlarmAnnunciator;
+        flow lcOcclusionChannelToLcDoseController from subFluidPath.lcOcclusionChannel to subControl.lcDoseController;
+        flow lcDoseControllerToLcPumpMechanism from subControl.lcDoseController to subFluidPath.lcPumpMechanism;
+        flow lcPumpMechanismToLcTherapyStateStore from subFluidPath.lcPumpMechanism to subControl.lcTherapyStateStore;
+        flow lcTherapyStateStoreToLcDisplayManager from subControl.lcTherapyStateStore to subUserInterface.lcDisplayManager;
+        flow lcWatchdogChannelToLcDoseController from subControl.subSafetyMonitor.lcWatchdogChannel to subControl.lcDoseController;
+        flow lcPressureIntegrityChannelToLcAlarmAnnunciator from subControl.subSafetyMonitor.lcPressureIntegrityChannel to subUserInterface.lcAlarmAnnunciator;
+        flow lcKeypadHandlerToLcDoseController from subUserInterface.lcKeypadHandler to subControl.lcDoseController;
+        flow lcReservoirInterfaceToLcPumpMechanism from subFluidPath.lcReservoirInterface to subFluidPath.lcPumpMechanism;
+        flow lcBatteryManagerToLcPowerRailMonitor from subPower.lcBatteryManager to subPower.lcPowerRailMonitor;
+        flow lcPowerRailMonitorToLcAlarmAnnunciator from subPower.lcPowerRailMonitor to subUserInterface.lcAlarmAnnunciator;
     }
 }

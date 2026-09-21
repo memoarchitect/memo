@@ -118,8 +118,8 @@ package memo_extension_ros {
     interface def RosServiceInterface specializes SoftwareInterface {
         end client : RosServiceClient :>> source;
         end server : RosServiceServer :>> target;
-        flow of RosServiceRequest from client.request to server.request;
-        flow of RosServiceResponse from server.response to client.response;
+        flow rosServiceRequestFlow of RosServiceRequest from client.request to server.request;
+        flow rosServiceResponseFlow of RosServiceResponse from server.response to client.response;
     }
 
     // ── Actions: long-running goal protocol ─────────────────────────────
@@ -156,12 +156,12 @@ package memo_extension_ros {
     interface def RosActionInterface specializes SoftwareInterface {
         end client : RosActionClient :>> source;
         end server : RosActionServer :>> target;
-        flow of RosActionGoal from client.goal to server.goal;
-        flow of RosActionAcceptance from server.acceptance to client.acceptance;
-        flow of RosActionFeedback from server.feedback to client.feedback;
-        flow of RosActionCancel from client.cancel to server.cancel;
-        flow of RosActionResult from server.result to client.result;
-        flow of RosActionStatus from server.actionStatus to client.actionStatus;
+        flow rosActionGoalFlow of RosActionGoal from client.goal to server.goal;
+        flow rosActionAcceptanceFlow of RosActionAcceptance from server.acceptance to client.acceptance;
+        flow rosActionFeedbackFlow of RosActionFeedback from server.feedback to client.feedback;
+        flow rosActionCancelFlow of RosActionCancel from client.cancel to server.cancel;
+        flow rosActionResultFlow of RosActionResult from server.result to client.result;
+        flow rosActionStatusFlow of RosActionStatus from server.actionStatus to client.actionStatus;
     }
 
     abstract state def RosActionExecution specializes MemoState;

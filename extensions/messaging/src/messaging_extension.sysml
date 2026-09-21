@@ -52,7 +52,7 @@ package memo_extension_messaging {
     interface def MessagingTopicInterface specializes SoftwareInterface {
         end publisher : MessagingPublisher :>> source;
         end subscriber : MessagingSubscriber :>> target;
-        flow of MessagingMessage from publisher.payload to subscriber.payload;
+        flow messagingMessageFlow of MessagingMessage from publisher.payload to subscriber.payload;
     }
 
     part def MessagingBroker specializes SoftwareComponent {

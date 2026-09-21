@@ -64,14 +64,14 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operatio
             action opCheckLockout : OpCheckLockout {@MemoIdentity { :>> label = "Check Lockout"; } }
             action opDeliverDose : OperativeAction {@MemoIdentity { :>> label = "Deliver Dose"; } }
             action opLogEvent : OperativeAction {@MemoIdentity { :>> label = "Log Dose Event"; } }
-            flow of OpBolusRequest from opRequestBolus.bolusRequest to opCheckLockout.bolusRequest;
+            flow opBolusRequestFlow of OpBolusRequest from opRequestBolus.bolusRequest to opCheckLockout.bolusRequest;
             first start then opRequestBolus;
             first opRequestBolus then opCheckLockout;
             first opCheckLockout then opDeliverDose;
             first opDeliverDose then opLogEvent;
             first opLogEvent then done;
         }
-        flow of OpPrescription from opPrescribe.prescription to opVerify.prescription;
+        flow opPrescriptionFlow of OpPrescription from opPrescribe.prescription to opVerify.prescription;
         first start then opPrescribe;
         first opPrescribe then opVerify;
         first opVerify then opForkPrep;

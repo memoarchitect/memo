@@ -70,11 +70,11 @@ package memo_examples_gpca_pump_gpca_behavior_actions {
         action actuateMotor : ActuatePumpMotor;
         action logEvent : LogTherapyEvent;
 
-        flow of SensorStatusVector from acquireSensors.sensorStatus to evaluateAlarms.sensorStatus;
-        flow of AlarmSignal from evaluateAlarms.alarmSignal to computeFlow.alarmSignal;
-        flow of BolusRequestSignal from enforceLimits.authorizedBolus to computeFlow.authorizedBolus;
-        flow of FlowCommand from computeFlow.flowCommand to actuateMotor.flowCommand;
-        flow of FlowCommand from actuateMotor.actuation to logEvent.actuation;
+        flow sensorStatusVectorFlow of SensorStatusVector from acquireSensors.sensorStatus to evaluateAlarms.sensorStatus;
+        flow alarmSignalFlow of AlarmSignal from evaluateAlarms.alarmSignal to computeFlow.alarmSignal;
+        flow bolusRequestSignalFlow of BolusRequestSignal from enforceLimits.authorizedBolus to computeFlow.authorizedBolus;
+        flow flowCommandToActuateMotor of FlowCommand from computeFlow.flowCommand to actuateMotor.flowCommand;
+        flow flowCommandToLogEvent of FlowCommand from actuateMotor.actuation to logEvent.actuation;
 
         first start then acquireSensors;
         first acquireSensors then evaluateAlarms;
