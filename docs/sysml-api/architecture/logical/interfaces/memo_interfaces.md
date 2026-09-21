@@ -312,7 +312,25 @@ port def SoftwarePort specializes MemoPort
             // declared as real ports now and the endpoint refs point straight at
             // them, which is what Track A1 making SoftwarePort a `port def` is for.
             // The AADL round-trip is better served by an element than by its name.
-            ref allocatedExchanges : FunctionalExchange[0..*];
+            //
+            // `allocatedExchanges` is GONE. The functional-to-component
+            // realization mapping is a native allocation from the functional
+            // exchange to the component exchange — `allocate lfSensorAcquisition
+            // to exSensorVector;` — and this ref list was the same fact written a
+            // second time, on the other end, where nothing kept the two in step.
+            //
+            // Both were present in the GPCA example for all four mappings, so the
+            // duplication was total and the disagreement was only ever one edit
+            // away. A reader had two places to look and no rule saying which one
+            // wins; a writer had two places to update and a lint that checked
+            // neither against the other.
+            //
+            // Navigation is a query now, not a stored field: the allocation edges
+            // are `allocatedTo` in the built model, so a component exchange's
+            // allocated functional exchanges are `upstream(allocatedTo)` from it,
+            // and the reverse is `downstream(allocatedTo)`. That is a read-only
+            // projection over the canonical relation, which is what the plan's §8
+            // calls for — never a second authoring field.
             attribute direction : DirectionKind;
             // Connection timing discipline from the source architecture
             // (e.g. AADL Communication_Properties::Timing — immediate
