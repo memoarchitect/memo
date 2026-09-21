@@ -1,12 +1,6 @@
 # Dependencies
 node_modules/
 .pnpm-store/
-.venv/
-venv/
-
-# pdm's pointer at this machine's interpreter — an absolute path, so it is
-# never shareable. pdm.lock and .python-version ARE committed.
-.pdm-python
 
 # Local npm config (e.g. left behind by npm publish)
 .npmrc
@@ -24,7 +18,6 @@ sysand_env/
 # Package and compiler output
 build/
 dist/
-*.egg-info/
 *.whl
 *.tar.gz
 *.tgz
@@ -39,7 +32,6 @@ dist/
 *.wasm
 
 # Python bytecode and tool caches
-__pycache__/
 *.py[cod]
 .pytest_cache/
 .mypy_cache/
@@ -59,7 +51,17 @@ __pycache__/
 # OS
 .DS_Store
 
-# Documentation builds
+# Python (pdm / mkdocs) — the docs site toolchain, identical in memo,
+# memo-tools and memo-architect. pdm.lock and .python-version ARE committed;
+# .pdm-python is not, because it holds an absolute path to one machine.
+.venv/
+venv/
+__pypackages__/
+__pycache__/
+*.egg-info/
+.pdm-python
+
+# Generated documentation site
 site/
 public/
 _site/
