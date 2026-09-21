@@ -301,6 +301,36 @@ Measured 2026-08-18: 3 of ~880 usages were reversed this way — two `HostedBy`,
 one `Validates`. `reversed-end-names.test.ts` in memo-tools now fails the build
 on a fourth. **Write the ends in declaration order.**
 
+### The relationship is the authority; an end must not mirror it
+
+A relationship is authored **once, as the relationship**. The elements it joins
+do not also carry a `ref` list naming the other side.
+
+```sysml
+allocate lfSensorAcquisition to exSensorVector;   // the mapping, once
+```
+
+`ComponentExchange` also declared `ref allocatedExchanges : FunctionalExchange[0..*]`
+until 2026-09-20 — the same mapping written a second time, from the component
+exchange's side. In the GPCA example all four mappings were written both ways,
+so the duplication was total; nothing checked one against the other, and the
+two could disagree after any single edit. A reader had two places to look with
+no rule saying which one wins.
+
+**Reverse navigation is a query, not a stored field.** The allocation reaches
+the built model as an `allocatedTo` edge from the functional exchange to the
+component exchange. A rule or selector reads it in either direction:
+`upstream(allocatedTo)` from the component exchange gives the functional
+exchanges allocated to it, and `downstream(allocatedTo)` from a functional
+exchange gives what it is allocated to. A projection computed from the
+canonical relation cannot drift from it; a second writable field always can.
+
+This applies to any inverse or roll-up list — a realization inverse, an
+allocated-exchange list, an involved-component list. Accepting one as *input*
+during a migration is fine as long as it normalizes to the canonical
+relationship and a conflict is rejected rather than silently resolved. The
+authoring surface writes one representation.
+
 ## What is genuinely MEMO's
 
 Roughly forty relationships encode ISO 14971 / IEC 62304 / IEC 62366 semantics
