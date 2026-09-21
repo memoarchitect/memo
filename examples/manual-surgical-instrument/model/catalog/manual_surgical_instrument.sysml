@@ -15,12 +15,10 @@ package memo_examples_manual_surgical_instrument {
     // ── Modeled product and physical structure ──────────────────
     part needleHolder : PhysicalAssembly {
         @MemoIdentity { :>> providedId = "MSI-DEV-001"; }
-        attribute :>> name = "NeedleHolder";
         attribute :>> responsibility = "grasp and drive a suture needle";
     }
     part jawAssembly : MechanicalPart {
-        @MemoIdentity { :>> providedId = "MSI-PART-001"; }
-        attribute :>> name = "TungstenCarbideJaws";
+        @MemoIdentity { :>> providedId = "MSI-PART-001"; :>> label = "TungstenCarbideJaws"; }
         attribute :>> mechanicalFunction = "serrated needle grip";
         attribute :>> patientContact = true;
         attribute :>> contactNature = "intact tissue / surgical site, indirect";
@@ -28,7 +26,6 @@ package memo_examples_manual_surgical_instrument {
     }
     part ratchetLock : MechanicalPart {
         @MemoIdentity { :>> providedId = "MSI-PART-002"; }
-        attribute :>> name = "RatchetLock";
         attribute :>> mechanicalFunction = "maintains jaw clamping force without continuous grip";
         attribute :>> patientContact = false;
     }
@@ -38,8 +35,7 @@ package memo_examples_manual_surgical_instrument {
     // A task may be traced to the architecture later when the project has a
     // specific allocation or interaction claim to make.
     action taskPlaceSutures : OperativeAction {
-        @MemoIdentity { :>> providedId = "MSI-TASK-001"; }
-        attribute :>> name = "PlaceSutures";
+        @MemoIdentity { :>> providedId = "MSI-TASK-001"; :>> label = "PlaceSutures"; }
         attribute :>> taskGoal = "place interrupted sutures";
     }
 }

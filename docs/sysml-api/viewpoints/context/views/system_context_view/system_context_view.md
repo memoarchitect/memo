@@ -27,6 +27,8 @@
 | private | `memo_viewpoints_definitions::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_viewpoints_context_context_viewpoint::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -47,21 +49,21 @@
                     private import memo_core_enumerations::*;
         private import memo_viewpoints_context_context_viewpoint::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
                     view systemContextView : MemoDiagramView {
                         expose memo_viewpoints_context_views_system_context_view::*;
                         attribute depth = 2;
-        attribute :>> id = "VIEW-CTX-001";
-        attribute :>> name = "SystemContextView";
-        attribute :>> shortDescription = "Actors, use context, and system boundary.";
+        @MemoIdentity { :>> providedId = "VIEW-CTX-001"; :>> label = "SystemContextView"; }
+        @MemoIdentity { :>> shortDescription = "Actors, use context, and system boundary."; }
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);
         attribute :>> diagramType = "bdd";
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include actors, use contexts, and trust boundaries at the system boundary.";
         part :>> selectionQuery {
-            attribute :>> id = "QRY-CTX-001";
-            attribute :>> name = "SystemContextQuery";
-            attribute :>> includeElementKinds = ("Actor", "UseContext", "TrustBoundary");
+            @MemoIdentity { :>> providedId = "QRY-CTX-001"; :>> label = "SystemContextQuery"; }
+            attribute :>> includeElementKinds = ("OperationalParticipant", "UseContext", "TrustBoundary");
             attribute :>> includeLayers = ("context");
             attribute :>> rationaleText = "Auto-populate the system context view from the context layer.";
         }

@@ -7,11 +7,10 @@ package memo_extension_clinical_methodology {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part clinicalExtensionMethod : MethodologyDefinition {
-        @MemoIdentity { :>> providedId = "EXT-CLINICAL-001"; }
-        attribute :>> name = "ClinicalProcedureExtension";
+        @MemoIdentity { :>> providedId = "EXT-CLINICAL-001"; :>> label = "ClinicalProcedureExtension"; }
         attribute :>> version = "0.6.5";
         attribute :>> domain = "clinical procedures";
-        attribute :>> description = "Adds optional clinical-procedure vocabulary to a MEMO project.";
+        doc /* Adds optional clinical-procedure vocabulary to a MEMO project. */
         // The base is a typed SysML reference, not a name to keep in sync with
         // another file. `baseMethodName` was the pre-flip spelling and no
         // longer resolves.

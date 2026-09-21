@@ -26,6 +26,9 @@
 | private | `ScalarValues::*` |
 | private | `memo_viewpoints_definitions::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_viewpoints_stakeholders_concerns::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -44,24 +47,23 @@
 
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
+        private import memo_viewpoints_stakeholders_concerns::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         viewpoint cybersecurityViewpoint : MemoViewpoint {
-            attribute :>> id = "VP-CYB";
-            attribute :>> name = "CybersecurityViewpoint";
-            attribute :>> shortDescription = "Shows assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, and mitigations.";
-            attribute :>> description = "Default viewpoint derived from the cybersecurity layer, using STRIDE-style threat categories by default while allowing safety and privacy impacts to be traced into the broader model.";
+            @MemoIdentity { :>> providedId = "VP-CYB"; :>> label = "CybersecurityViewpoint"; }
+            @MemoIdentity { :>> shortDescription = "Shows assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, and mitigations."; }
+            doc /* Default viewpoint derived from the cybersecurity layer, using STRIDE-style threat categories by default while allowing safety and privacy impacts to be traced into the broader model. */
             attribute :>> purpose = "Communicate cybersecurity design, threat analysis, and cyber risk posture.";
-            attribute :>> audience = (AudienceKind::securityEngineer);
+            ref :>> stakeholders = (securityEngineer);
             attribute :>> stage = WorkflowStageKind::risk;
             attribute :>> abstractionLevel = "analysis";
             attribute :>> outputKind = (ViewOutputKind::diagram);
             attribute :>> presentationKind = (PresentationKind::custom);
-            attribute :>> concernKinds = (ConcernKind::cybersecurity, ConcernKind::privacy, ConcernKind::safety);
-            attribute :>> includedLayers = ("cybersecurity", "software_structure", "hardware_structure", "interfaces", "risk", "assurance");
+            ref :>> framedConcerns = (cybersecurityConcern, privacyConcern, safetyConcern);
             attribute :>> explorerLane = "assurance";
             attribute :>> explorerOrder = 3;
-            attribute :>> allowedElementKinds = ("CybersecurityAsset", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "OperativeScenario[scenarioKind=threat]");
-            attribute :>> allowedRelationshipKinds = ("ThreatenedBy", "Exploits", "RealizedByScenario", "Mitigates", "DerivesCyberRequirement", "ImpactsSafety", "CrossesTrustBoundary");
             attribute :>> userExtensible = true;
         }
     }

@@ -142,15 +142,18 @@ declared name (`connection linkFoo : Bar …`) and a `doc` comment — both were
 already available on every usage before this change; nothing native was
 missing.
 
-> **This reasoning is specific to relationships and does NOT generalise.**
-> Measured 2026-08-18: parts set `name` **1311** times, and there the MEMO
-> attribute and the native name are different strings carrying different
-> information — `part entityPharmacy` (lowerCamelCase identifier) versus
-> `attribute :>> name = "HospitalPharmacy"` (display label). The casing
-> convention above guarantees they differ. On parts, `name` is a display label,
-> not a duplicate; deleting it would destroy the labels or force every
-> identifier to become its label. Treat the relationship row as closed and the
-> part case as a separate, open question.
+> **The part case was settled separately, and differently.** Measured
+> 2026-08-18, parts set `name` **1311** times, and there the MEMO attribute and
+> the native name carried different strings — `part entityPharmacy`
+> (lowerCamelCase identifier) versus `"HospitalPharmacy"` (display label). The
+> casing convention above guarantees they differ, so on a part `name` was a
+> label rather than a duplicate, and a straight deletion would have destroyed
+> the labels. The label was therefore MOVED, not deleted: it lives on
+> `@MemoIdentity { :>> label = "HospitalPharmacy"; }`, one carrier that
+> annotates any metaclass, and the bases no longer declare `name` at all. The
+> 188 elements whose `name` only restated the identifier they were already
+> declared under were dropped in the same pass. Narrative prose moved the
+> other way, onto native `doc`.
 
 **`rationale` → `@Rationale { :>> text = "…"; }`:**
 

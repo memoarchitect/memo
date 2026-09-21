@@ -17,8 +17,7 @@ package memo_examples_ros_mobile_robot_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-ROS-MOBILE-ROBOT-001"; }
-        attribute :>> name = "RosMobileRobotProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-ROS-MOBILE-ROBOT-001"; :>> label = "RosMobileRobotProjectMethodBinding"; }
         attribute :>> projectName = "ROS Mobile Robot";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

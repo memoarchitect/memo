@@ -51,8 +51,7 @@ package memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain {
         attribute :>> diagramType = "risk";
         attribute :>> autoPopulate = true;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-103"; }
-            attribute :>> name = "UIRiskChainQuery";
+            @MemoIdentity { :>> providedId = "QRY-103"; :>> label = "UIRiskChainQuery"; }
             attribute :>> includeElementKinds = ("UseError", "Hazard", "RiskControlMeasure", "Requirement", "UIElement", "SystemFunction", "VerificationCase");
             attribute :>> includeRelationshipKinds = ("ErrorAtElement", "Causes", "Mitigates", "ControlImplementedBy", "DerivesFrom", "VerifiedBy");
             attribute :>> includeLayers = ("human_factors", "risk", "requirements", "implementation", "functions", "assurance");

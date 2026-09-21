@@ -16,13 +16,13 @@ package memo_examples_reusable_instrument {
     private import memo_core_common::MemoIdentity;
     part sterileProcessingTech : User {
         attribute :>> actorKind = ActorKind::technician;
-        @MemoIdentity { :>> providedId = "RI-USR-001"; } attribute :>> name = "SterileProcessingTechnician";
+        @MemoIdentity { :>> providedId = "RI-USR-001"; :>> label = "SterileProcessingTechnician"; }
         attribute :>> serviceScope = "central sterile services department";
     }
 
     use case ucSterilize : UseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
-        @MemoIdentity { :>> providedId = "RI-UC-001"; } attribute :>> name = "SterilizeReusableInstrument";
+        @MemoIdentity { :>> providedId = "RI-UC-001"; :>> label = "SterilizeReusableInstrument"; }
         attribute :>> goalStatement = "Return a used instrument to sterile, functional condition for the next case.";
         attribute :>> preCondition = "instrument collected from the OR; gross soil removed at point of use";
         attribute :>> successOutcome = "instrument cleaned, inspected, sterilized, and released to sterile storage";
@@ -32,12 +32,12 @@ package memo_examples_reusable_instrument {
 
     // Reprocessing workflow: exists independently of any single instrument.
     action wfReprocess : OperationalWorkflow {
-        @MemoIdentity { :>> providedId = "RI-WF-001"; } attribute :>> name = "InstrumentReprocessingWorkflow";
+        @MemoIdentity { :>> providedId = "RI-WF-001"; :>> label = "InstrumentReprocessingWorkflow"; }
         attribute :>> workflowState = WorkflowStateKind::asIs;
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";
         action scNominalCycle : OperativeScenario {
-            @MemoIdentity { :>> providedId = "RI-SC-001"; } attribute :>> name = "NominalReprocessingCycle";
+            @MemoIdentity { :>> providedId = "RI-SC-001"; :>> label = "NominalReprocessingCycle"; }
 
             perform actClean;
             perform actInspect;
@@ -47,15 +47,15 @@ package memo_examples_reusable_instrument {
         }
     }
     action actClean : OperativeAction {
-        @MemoIdentity { :>> providedId = "RI-ACT-001"; } attribute :>> name = "CleanAndDisinfect";
+        @MemoIdentity { :>> providedId = "RI-ACT-001"; :>> label = "CleanAndDisinfect"; }
         attribute :>> criticality = CriticalityKind::high;
     }
     action actInspect : OperativeAction {
-        @MemoIdentity { :>> providedId = "RI-ACT-002"; } attribute :>> name = "InspectAndFunctionTest";
+        @MemoIdentity { :>> providedId = "RI-ACT-002"; :>> label = "InspectAndFunctionTest"; }
         attribute :>> criticality = CriticalityKind::high;
     }
     action actSterilizeLoad : OperativeAction {
-        @MemoIdentity { :>> providedId = "RI-ACT-003"; } attribute :>> name = "PackAndAutoclave";
+        @MemoIdentity { :>> providedId = "RI-ACT-003"; :>> label = "PackAndAutoclave"; }
         attribute :>> criticality = CriticalityKind::high;
     }
 

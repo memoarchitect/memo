@@ -22,7 +22,7 @@ its scenarios.
 
 ```sysml
 use case ucPerformSleeveGastrectomy : UseCase {
-    attribute :>> name = "PerformLaparoscopicSleeveGastrectomy";
+    @MemoIdentity { :>> label = "PerformLaparoscopicSleeveGastrectomy"; }
     attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement =
         "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
@@ -41,7 +41,7 @@ activities, so the order is inspectable without embedding it in prose.
 
 ```sysml
 action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
-    attribute :>> name = "LaparoscopicSleeveGastrectomyWorkflow";
+    @MemoIdentity { :>> label = "LaparoscopicSleeveGastrectomyWorkflow"; }
     attribute :>> entryCondition = "patient prepared; time-out ready";
     attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
 }
@@ -61,7 +61,7 @@ create the staple line, inspect for bleeding, and assess integrity.
 
 ```sysml
 action taskCreateStapleLine : CriticalTask {
-    attribute :>> name = "CreateAndInspectStapleLine";
+    @MemoIdentity { :>> label = "CreateAndInspectStapleLine"; }
     attribute :>> taskGoal =
         "create the planned sleeve and identify bleeding or integrity concerns before completion";
     attribute :>> potentialHarm =
@@ -81,7 +81,7 @@ escalate if needed. It is not a copy of the full surgical workflow.
 
 ```sysml
 action oaControlStapleLineBleeding : OperationalActivity {
-    attribute :>> name = "ControlStapleLineBleeding";
+    @MemoIdentity { :>> label = "ControlStapleLineBleeding"; }
     action recognizeBleeding; action controlBleeding;
     action reassessStapleLine; action escalateIfNeeded;
     first start then recognizeBleeding;
@@ -90,7 +90,7 @@ action oaControlStapleLineBleeding : OperationalActivity {
 }
 
 action scStapleLineBleeding : MemoScenario {
-    attribute :>> name = "StapleLineBleedingRecovery";
+    @MemoIdentity { :>> label = "StapleLineBleedingRecovery"; }
     attribute :>> scenarioKind = ScenarioKind::operative;
     attribute :>> variantKind = ScenarioVariantKind::recovery;
     attribute :>> variationPoint = "bleeding observed during staple-line assessment";

@@ -34,8 +34,7 @@ package memo_examples_ui_screen_regions_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part uiScreenRegionsBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-UIR-001"; }
-        attribute :>> name = "UIScreenRegionsProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-UIR-001"; :>> label = "UIScreenRegionsProjectMethodBinding"; }
         attribute :>> projectName = "UI Screen Regions";
         // The default methodology selects everything the resolved ontology
         // provides, which is what makes the UI layout rules CR-MED-110…113

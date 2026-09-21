@@ -10,8 +10,7 @@ package memo_viewpoints_context_views_system_context_view {
                 view systemContextView : MemoDiagramView {
                     expose memo_viewpoints_context_views_system_context_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-CTX-001"; }
-    attribute :>> name = "SystemContextView";
+    @MemoIdentity { :>> providedId = "VIEW-CTX-001"; :>> label = "SystemContextView"; }
     @MemoIdentity { :>> shortDescription = "Actors, use context, and system boundary."; }
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -19,8 +18,7 @@ package memo_viewpoints_context_views_system_context_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include actors, use contexts, and trust boundaries at the system boundary.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-CTX-001"; }
-        attribute :>> name = "SystemContextQuery";
+        @MemoIdentity { :>> providedId = "QRY-CTX-001"; :>> label = "SystemContextQuery"; }
         attribute :>> includeElementKinds = ("OperationalParticipant", "UseContext", "TrustBoundary");
         attribute :>> includeLayers = ("context");
         attribute :>> rationaleText = "Auto-populate the system context view from the context layer.";

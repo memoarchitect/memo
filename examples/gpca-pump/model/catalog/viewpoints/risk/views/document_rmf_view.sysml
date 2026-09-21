@@ -11,10 +11,9 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
     view rmfView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view::*;
         expose evidenceLockout;
-        @MemoIdentity { :>> providedId = "DOC-001"; }
-        attribute :>> name = "RiskManagementFileView";
+        @MemoIdentity { :>> providedId = "DOC-001"; :>> label = "RiskManagementFileView"; }
         @MemoIdentity { :>> shortDescription = "Document-backed risk view for GPCA."; }
-        attribute :>> description = "Aggregates the risk chain, controls, verification, residual risk, and cybersecurity links needed for the GPCA risk management file.";
+        doc /* Aggregates the risk chain, controls, verification, residual risk, and cybersecurity links needed for the GPCA risk management file. */
         attribute :>> version = "0.2";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::RMF;
@@ -22,8 +21,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = riskViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-001"; }
-            attribute :>> name = "rmfViewQuery";
+            @MemoIdentity { :>> providedId = "QRY-DOC-001"; :>> label = "rmfViewQuery"; }
             attribute :>> includeElementKinds = ("IntendedUse", "ReasonablyForeseeableMisuse", "SafetyRelatedCharacteristic", "Hazard", "HazardCause", "SequenceOfEvents", "HazardousSituation", "Harm", "Risk", "RiskControlMeasure", "ResidualRisk", "Benefit", "OverallResidualRiskEvaluation", "VerificationCase", "MemoEvidence");
             attribute :>> includeRelationshipKinds = ("Causes", "Mitigates", "Mitigates", "TracesRisk", "AssessedAgainst", "VerifiedBy", "ProducesEvidence");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";

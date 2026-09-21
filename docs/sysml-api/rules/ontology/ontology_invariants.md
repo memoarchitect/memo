@@ -26,6 +26,8 @@
 | private | `ScalarValues::*` |
 | private | `memo_core_consistency_rules::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -47,15 +49,19 @@
 | [`ComposesChildKindRule`](#composeschildkindrule) | `constraint def` | Constraint that checks composes child kind rule. | `MemoConsistencyRule` |
 | [`PrecedesEndKindRule`](#precedesendkindrule) | `constraint def` | Constraint that checks precedes end kind rule. | `MemoConsistencyRule` |
 | [`PerformsPerformerKindRule`](#performsperformerkindrule) | `constraint def` | Constraint that checks performs performer kind rule. | `MemoConsistencyRule` |
-| [`EnablesEnablerKindRule`](#enablesenablerkindrule) | `constraint def` | Constraint that checks enables enabler kind rule. | `MemoConsistencyRule` |
 | [`BindsToInterfaceEndKindRule`](#bindstointerfaceendkindrule) | `constraint def` | Constraint that checks binds to interface end kind rule. | `MemoConsistencyRule` |
 | [`CrossesTrustBoundaryEndKindRule`](#crossestrustboundaryendkindrule) | `constraint def` | Constraint that checks crosses trust boundary end kind rule. | `MemoConsistencyRule` |
 | [`ComponentExchangeSourceEndpointKindRule`](#componentexchangesourceendpointkindrule) | `constraint def` | CR-ONT-002's replacement. ComponentExchange's endpoints are `ref` features, not links, and the builder projects them as element-ID STRINGS in the attribute map (a §13.3 string pseudo-reference) — so they cannot be reached with sourcesOf/targetsOf.… | `MemoConsistencyRule` |
 | [`ComponentExchangeTargetEndpointKindRule`](#componentexchangetargetendpointkindrule) | `constraint def` | Constraint that checks component exchange target endpoint kind rule. | `MemoConsistencyRule` |
 | [`ComponentFunctionAllocatedRule`](#componentfunctionallocatedrule) | `constraint def` | What makes ComponentFunction a definition of its own rather than an enum member on SystemFunction. An enum value cannot change a multiplicity, and "answerable to exactly one component" is the whole content of the concept. | `MemoConsistencyRule` |
 | [`FunctionDecomposesIntoFunctionsRule`](#functiondecomposesintofunctionsrule) | `constraint def` | Constraint that checks function decomposes into functions rule. | `MemoConsistencyRule` |
+| [`SoftwareContainsSoftwareRule`](#softwarecontainssoftwarerule) | `constraint def` | CR-ONT-075 above is this rule for functions; these are the same shape for the other families. The invariant is FAMILY homogeneity, not type homogeneity: a System containing a Subsystem containing a LogicalComponent is correct decomposition even though all three types differ, a… | `MemoConsistencyRule` |
+| [`LogicalContainsLogicalRule`](#logicalcontainslogicalrule) | `constraint def` | Constraint that checks logical contains logical rule. | `MemoConsistencyRule` |
+| [`PhysicalContainsPhysicalRule`](#physicalcontainsphysicalrule) | `constraint def` | Constraint that checks physical contains physical rule. | `MemoConsistencyRule` |
 | [`ExchangeHasFlowRule`](#exchangehasflowrule) | `constraint def` | Track A3. The flow is the edge; the exchange part carries the budget and assurance attributes. The two halves are bound by a SHARED NAME — the flow usage is named with its exchange — and this is what makes that binding a checked fact rather than a convention someone can quietl… | `MemoConsistencyRule` |
-| [`AlternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | Constraint that checks alternate scenario has base rule. | `MemoConsistencyRule` |
+| [`AlternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | The predicate here named three features that do not exist — `variantKind`, `baseScenario`, `variationPoint` — so it could never fail, and a rule that cannot fail is coverage on paper only.… | `MemoConsistencyRule` |
+| [`DerivationGapRule`](#derivationgaprule) | `constraint def` | Both are WARNINGS, not errors: each describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions to both.… | `MemoConsistencyRule` |
+| [`RedundantAncestorTraceRule`](#redundantancestortracerule) | `constraint def` | Constraint that checks redundant ancestor trace rule. | `MemoConsistencyRule` |
 
 ## ContainmentAcyclicRule
 
@@ -297,21 +303,6 @@ constraint def PerformsPerformerKindRule :> MemoConsistencyRule
 | Owning package | `memo_rules_ontology` |
 
 
-## EnablesEnablerKindRule
-
-```sysml
-constraint def EnablesEnablerKindRule :> MemoConsistencyRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Constraint that checks enables enabler kind rule. |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | `MemoConsistencyRule` |
-| Owning package | `memo_rules_ontology` |
-
-
 ## BindsToInterfaceEndKindRule
 
 ```sysml
@@ -402,6 +393,51 @@ constraint def FunctionDecomposesIntoFunctionsRule :> MemoConsistencyRule
 | Owning package | `memo_rules_ontology` |
 
 
+## SoftwareContainsSoftwareRule
+
+```sysml
+constraint def SoftwareContainsSoftwareRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | CR-ONT-075 above is this rule for functions; these are the same shape for the other families. The invariant is FAMILY homogeneity, not type homogeneity: a System containing a Subsystem containing a LogicalComponent is correct decomposition even though all three types differ, a… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## LogicalContainsLogicalRule
+
+```sysml
+constraint def LogicalContainsLogicalRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks logical contains logical rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## PhysicalContainsPhysicalRule
+
+```sysml
+constraint def PhysicalContainsPhysicalRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks physical contains physical rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
 ## ExchangeHasFlowRule
 
 ```sysml
@@ -425,7 +461,37 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | Constraint that checks alternate scenario has base rule. |
+| Description | The predicate here named three features that do not exist — `variantKind`, `baseScenario`, `variationPoint` — so it could never fail, and a rule that cannot fail is coverage on paper only.… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## DerivationGapRule
+
+```sysml
+constraint def DerivationGapRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Both are WARNINGS, not errors: each describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions to both.… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## RedundantAncestorTraceRule
+
+```sysml
+constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks redundant ancestor trace rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -448,10 +514,12 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         private import memo_core_consistency_rules::*;
         private import memo_core_enumerations::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         // ─── Structure ───────────────────────────────────────────────────────
 
         constraint def ContainmentAcyclicRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-001";
+            @MemoIdentity { :>> providedId = "CR-ONT-001"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -460,7 +528,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def NestedPartConnectedRule :> MemoConsistencyRule {
-            attribute id = "AR-IBD-001";
+            @MemoIdentity { :>> providedId = "AR-IBD-001"; }
             attribute tailoring = RuleTailoringKind::invariant;
             // Internal-block connectivity is a structural-architecture concern, so
             // the subject is the structural component — not every MemoPart. UI
@@ -483,7 +551,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // ─── Deployment and realization ──────────────────────────────────────
 
         constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-011";
+            @MemoIdentity { :>> providedId = "CR-ONT-011"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "SoftwareComponent";
             attribute severity = RuleSeverityKind::warning;
@@ -492,7 +560,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def PatientContactCharacterizedRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-032";
+            @MemoIdentity { :>> providedId = "CR-ONT-032"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "PhysicalComponent";
             attribute severity = RuleSeverityKind::error;
@@ -504,7 +572,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // ─── Assurance coverage ──────────────────────────────────────────────
 
         constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-040";
+            @MemoIdentity { :>> providedId = "CR-ONT-040"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "MemoFunction";
             attribute severity = RuleSeverityKind::error;
@@ -513,7 +581,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-041";
+            @MemoIdentity { :>> providedId = "CR-ONT-041"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "OperativeAction[criticality=high]";
             attribute severity = RuleSeverityKind::error;
@@ -522,7 +590,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-042";
+            @MemoIdentity { :>> providedId = "CR-ONT-042"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "UseError";
             attribute severity = RuleSeverityKind::warning;
@@ -566,7 +634,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // and the admissible types so the report is still actionable.
 
         constraint def SatisfiedBySourceKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-060";
+            @MemoIdentity { :>> providedId = "CR-ONT-060"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -575,7 +643,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def SatisfiedByTargetKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-061";
+            @MemoIdentity { :>> providedId = "CR-ONT-061"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -584,7 +652,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def VerifiedByTargetKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-062";
+            @MemoIdentity { :>> providedId = "CR-ONT-062"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -593,7 +661,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def AllocatedToSourceKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-063";
+            @MemoIdentity { :>> providedId = "CR-ONT-063"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -602,7 +670,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def AllocatedToTargetKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-064";
+            @MemoIdentity { :>> providedId = "CR-ONT-064"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -611,7 +679,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def ComposesParentKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-065";
+            @MemoIdentity { :>> providedId = "CR-ONT-065"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -620,7 +688,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def ComposesChildKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-066";
+            @MemoIdentity { :>> providedId = "CR-ONT-066"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -629,7 +697,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def PrecedesEndKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-067";
+            @MemoIdentity { :>> providedId = "CR-ONT-067"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -638,7 +706,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def PerformsPerformerKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-068";
+            @MemoIdentity { :>> providedId = "CR-ONT-068"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -646,17 +714,8 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             attribute predicateExpression = "sourcesOf(performs)->forAll(conformsTo(MemoPart) or construct == 'action')";
             constraint { true }
         }
-        constraint def EnablesEnablerKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-069";
-            attribute tailoring = RuleTailoringKind::invariant;
-            attribute appliesTo = "Model";
-            attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "An enabling system or function enables a workflow: the enabling end is a part or a behaviour.";
-            attribute predicateExpression = "sourcesOf(enables)->forAll(conformsTo(MemoPart) or construct == 'action')";
-            constraint { true }
-        }
         constraint def BindsToInterfaceEndKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-070";
+            @MemoIdentity { :>> providedId = "CR-ONT-070"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -665,7 +724,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def CrossesTrustBoundaryEndKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-071";
+            @MemoIdentity { :>> providedId = "CR-ONT-071"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
@@ -680,7 +739,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // reached with sourcesOf/targetsOf. They are resolved here by looking the id
         // up in the kind extent, which is the same statement made the long way.
         constraint def ComponentExchangeSourceEndpointKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-072";
+            @MemoIdentity { :>> providedId = "CR-ONT-072"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
@@ -689,7 +748,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def ComponentExchangeTargetEndpointKindRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-073";
+            @MemoIdentity { :>> providedId = "CR-ONT-073"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
@@ -705,7 +764,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // "answerable to exactly one component" is the whole content of the concept.
 
         constraint def ComponentFunctionAllocatedRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-074";
+            @MemoIdentity { :>> providedId = "CR-ONT-074"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "ComponentFunction";
             attribute severity = RuleSeverityKind::error;
@@ -714,12 +773,65 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
         constraint def FunctionDecomposesIntoFunctionsRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-075";
+            @MemoIdentity { :>> providedId = "CR-ONT-075"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "MemoFunction";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "The functional chain decomposes functions into functions. A function composed of a component, or owned by one, is confusing allocation with decomposition — the component is named by AllocatedTo, never by Composes.";
             attribute predicateExpression = "composes->forAll(conformsTo(MemoFunction))";
+            constraint { true }
+        }
+
+        // ── Containment stays inside one family ─────────────────────────────
+        //
+        // CR-ONT-075 above is this rule for functions; these are the same shape for
+        // the other families. The invariant is FAMILY homogeneity, not type
+        // homogeneity: a System containing a Subsystem containing a LogicalComponent
+        // is correct decomposition even though all three types differ, and measured
+        // 2026-08-18 only 1 of 68 containment edges had identical types at both
+        // ends — a same-type rule would have rejected 98.5% of the corpus, the
+        // ontology's own templates included.
+        //
+        // What they catch is containment CROSSING a family: a logical component
+        // "containing" a software module is realization, and a hardware assembly
+        // "containing" a function is allocation. Both have their own relation, and
+        // writing them as containment loses the distinction.
+        //
+        // They read the `composes` edge, which the builder synthesizes from native
+        // nesting, so they cover the nesting spelling and the retired connection
+        // form identically.
+        //
+        // Ports are exempt. A port is a boundary FEATURE of its owner, not a member
+        // of its owner's family, and any element may carry one whatever family it
+        // is in — CR-ONT-065/066 already govern what may sit at a containment end.
+        // Without the exemption these rules reject `SoftwareModule composes
+        // PhysicalPort`, which those rules accept, and the ontology contradicts
+        // itself about a single edge.
+        constraint def SoftwareContainsSoftwareRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-077"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute appliesTo = "SoftwareElement";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "Software contains software. A software element containing a logical or physical one is realization, not containment — that is a refinement dependency.";
+            attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(SoftwareElement))";
+            constraint { true }
+        }
+        constraint def LogicalContainsLogicalRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-078"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute appliesTo = "LogicalComponent";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "The logical hierarchy decomposes into logical components. A logical component containing a software module or a physical part is realization — the implementation element refines the logical one, it is not part of it.";
+            attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(LogicalComponent))";
+            constraint { true }
+        }
+        constraint def PhysicalContainsPhysicalRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-079"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute appliesTo = "PhysicalElement";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "An assembly contains physical things. PhysicalElement is the shared root the family gained for this rule — PhysicalAssembly and PhysicalComponent previously specialized MemoPart separately, which left no type meaning 'a physical thing' to name here.";
+            attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(PhysicalElement))";
             constraint { true }
         }
 
@@ -733,7 +845,7 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
         // the ends and can never answer it. Naming the flow is what the grammar's
         // restored FlowDeclaration name makes possible at all.
         constraint def ExchangeHasFlowRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-076";
+            @MemoIdentity { :>> providedId = "CR-ONT-076"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
@@ -742,13 +854,51 @@ constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule
             constraint { true }
         }
 
+        // The predicate here named three features that do not exist — `variantKind`,
+        // `baseScenario`, `variationPoint` — so it could never fail, and a rule that
+        // cannot fail is coverage on paper only. `baseScenario` is the one the
+        // scenario def deliberately refused: "a nominal/alternate pair are scenarios
+        // of the same workflow, distinguished by scenarioKind — no baseScenario
+        // back-ref". The base of an alternate IS the nominal scenario of its
+        // workflow, so the rule asks the containment that already expresses it.
         constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
-            attribute id = "CR-ONT-043";
+            @MemoIdentity { :>> providedId = "CR-ONT-043"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "OperativeScenario";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "Alternate, exception, and recovery scenarios must identify their base scenario or variation point — never duplicate the workflow.";
-            attribute predicateExpression = "not(variantKind == 'alternate' or variantKind == 'exception' or variantKind == 'recovery') or baseScenario->size() == 1 or variationPoint != ''";
+            attribute rationaleText = "An alternate scenario is a variation of a nominal path, so it belongs to a workflow that has one. An alternate with no nominal sibling is either a workflow with no happy path or a scenario filed under the wrong parent.";
+            // A nominal scenario usually says nothing: `nominal` is the default on
+            // the definition, and a default is not written onto every usage. So the
+            // sibling test is "not alternate", and `conformsTo` keeps it from being
+            // satisfied by an ordinary step of the same workflow.
+            attribute predicateExpression = "not(scenarioKind == 'alternate') or composes.composes->exists(conformsTo(OperativeScenario) and scenarioKind != 'alternate')";
+            constraint { true }
+        }
+
+        // ─── Assurance-trace warnings ────────────────────────────────────────
+        // Both are WARNINGS, not errors: each describes a trace graph that is
+        // suspicious rather than invalid, and a regulated model has legitimate
+        // exceptions to both. They needed `upstream` / `downstream` — the bare
+        // relation name is bidirectional, so before those existed no rule could
+        // ask which way a derivation ran.
+
+        constraint def DerivationGapRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-080"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute appliesTo = "MemoRequirementElement";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A requirement that others derive from should itself be justified. If nothing is upstream of it and it is not a stakeholder need, the derivation chain dead-ends at an unexplained requirement — the gap an assessor asks about first. Needs are the legitimate roots, so they are exempt by type rather than by convention.";
+            attribute predicateExpression = "downstream(derivesFrom)->isEmpty() or upstream(derivesFrom)->notEmpty() or conformsTo(MemoNeed)";
+            constraint { true }
+        }
+
+        constraint def RedundantAncestorTraceRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-081"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute appliesTo = "MemoRequirementElement";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "When one element satisfies both a requirement and something derived from that requirement, the trace to the ancestor is already implied by the derivation and adds no coverage. Two elements satisfying the two ends is ordinary decomposition and is not reported.";
+            attribute predicateExpression = "not satisfiedBy->intersects(downstream(derivesFrom).satisfiedBy)";
             constraint { true }
         }
     }

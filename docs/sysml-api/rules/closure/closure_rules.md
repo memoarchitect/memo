@@ -26,6 +26,8 @@
 | private | `ScalarValues::*` |
 | private | `memo_core_consistency_rules::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -40,6 +42,8 @@
 | [`SwComponentSafetyClassRule`](#swcomponentsafetyclassrule) | `constraint def` | Constraint that checks sw component safety class rule. | `MemoConsistencyRule` |
 | [`SwComponentReqRule`](#swcomponentreqrule) | `constraint def` | Constraint that checks sw component req rule. | `MemoConsistencyRule` |
 | [`LogicalFunctionAllocationRule`](#logicalfunctionallocationrule) | `constraint def` | Constraint that checks logical function allocation rule. | `MemoConsistencyRule` |
+| [`FunctionInChainRule`](#functioninchainrule) | `constraint def` | A function that no edge reaches is not in the chain. This was a TypeScript rule (BV-002) applying to every action usage in the model, which reported a scenario and a flow step as defects for not being wired like a function.… | `MemoConsistencyRule` |
+| [`UserNeedIdentifiesUserRule`](#userneedidentifiesuserrule) | `constraint def` | A user need names the user whose need it is. IEC 62366-1's user profile is typed on the User element — population, impairments, training, qualification — so the need points at that element rather than restating any of it in prose, which is what `userPopulationReference` was do… | `MemoConsistencyRule` |
 | [`VerificationCaseMethodRule`](#verificationcasemethodrule) | `constraint def` | Constraint that checks verification case method rule. | `MemoConsistencyRule` |
 | [`VerificationCaseTargetRule`](#verificationcasetargetrule) | `constraint def` | Constraint that checks verification case target rule. | `MemoConsistencyRule` |
 | [`EvidenceProductionRule`](#evidenceproductionrule) | `constraint def` | Constraint that checks evidence production rule. | `MemoConsistencyRule` |
@@ -181,6 +185,36 @@ constraint def LogicalFunctionAllocationRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks logical function allocation rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## FunctionInChainRule
+
+```sysml
+constraint def FunctionInChainRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A function that no edge reaches is not in the chain. This was a TypeScript rule (BV-002) applying to every action usage in the model, which reported a scenario and a flow step as defects for not being wired like a function.… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## UserNeedIdentifiesUserRule
+
+```sysml
+constraint def UserNeedIdentifiesUserRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A user need names the user whose need it is. IEC 62366-1's user profile is typed on the User element — population, impairments, training, qualification — so the need points at that element rather than restating any of it in prose, which is what `userPopulationReference` was do… |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -366,10 +400,12 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         private import memo_core_consistency_rules::*;
         private import memo_core_enumerations::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         // ─── Risk Layer Rules ────────────────────────────────────────────────
 
         constraint def HazardMitigationRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-001";
+            @MemoIdentity { :>> providedId = "CR-MED-001"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Hazard";
             attribute severity = RuleSeverityKind::error;
@@ -379,7 +415,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def HazardSeverityRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-002";
+            @MemoIdentity { :>> providedId = "CR-MED-002"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Hazard";
             attribute severity = RuleSeverityKind::error;
@@ -389,7 +425,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def RiskControlVerificationRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-003";
+            @MemoIdentity { :>> providedId = "CR-MED-003"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "RiskControlMeasure";
             attribute severity = RuleSeverityKind::error;
@@ -399,7 +435,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def InitialRiskMatrixRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-004";
+            @MemoIdentity { :>> providedId = "CR-MED-004"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Risk";
             attribute severity = RuleSeverityKind::warning;
@@ -411,9 +447,9 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // ─── Requirements Layer Rules ────────────────────────────────────────
 
         constraint def SysReqTraceRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-010";
+            @MemoIdentity { :>> providedId = "CR-MED-010"; }
             attribute tailoring = RuleTailoringKind::assurance;
-            attribute appliesTo = "Requirement[requirementKind=system]";
+            attribute appliesTo = "Requirement[requirementType=system]";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Requirements shall be traceable to stakeholder needs per ISO 13485.";
             attribute predicateExpression = "derivesFrom->size() >= 1";
@@ -421,9 +457,9 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def SwReqTraceRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-011";
+            @MemoIdentity { :>> providedId = "CR-MED-011"; }
             attribute tailoring = RuleTailoringKind::assurance;
-            attribute appliesTo = "Requirement[requirementKind=software]";
+            attribute appliesTo = "Requirement[requirementType=software]";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Software requirements derive from system requirements per IEC 62304.";
             attribute predicateExpression = "derivesFrom->size() >= 1";
@@ -439,7 +475,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // ─── Architecture Layer Rules ────────────────────────────────────────
 
         constraint def SwComponentSafetyClassRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-020";
+            @MemoIdentity { :>> providedId = "CR-MED-020"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SoftwareModule";
             attribute severity = RuleSeverityKind::error;
@@ -449,7 +485,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def SwComponentReqRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-021";
+            @MemoIdentity { :>> providedId = "CR-MED-021"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SoftwareModule";
             attribute severity = RuleSeverityKind::warning;
@@ -459,7 +495,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def LogicalFunctionAllocationRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-022";
+            @MemoIdentity { :>> providedId = "CR-MED-022"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SystemFunction";
             attribute severity = RuleSeverityKind::warning;
@@ -468,10 +504,44 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             constraint { true }
         }
 
+        // A function that no edge reaches is not in the chain. This was a
+        // TypeScript rule (BV-002) applying to every action usage in the model,
+        // which reported a scenario and a flow step as defects for not being
+        // wired like a function. It is declared here instead: scoped by the
+        // ontology to the family it is about, tailorable by a methodology, and
+        // readable next to the rule that requires the allocation.
+        constraint def FunctionInChainRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-MED-023"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute appliesTo = "MemoFunction";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A function participates in the functional chain through a flow or a succession, or through the functions it decomposes into. One that participates in none of them is unreachable behaviour: nothing triggers it and nothing consumes what it produces.";
+            // `downstream` and not a bare `composes`: the relation navigates both
+            // ways, so a bare name would exempt every child on the strength of
+            // having a parent. A decomposed function participates through its
+            // parts; a leaf has to be reached by an edge of its own.
+            attribute predicateExpression = "flow->size() >= 1 or succession->size() >= 1 or downstream(composes)->size() >= 1";
+            constraint { true }
+        }
+
+        // A user need names the user whose need it is. IEC 62366-1's user profile
+        // is typed on the User element — population, impairments, training,
+        // qualification — so the need points at that element rather than restating
+        // any of it in prose, which is what `userPopulationReference` was doing.
+        constraint def UserNeedIdentifiesUserRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-MED-024"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute appliesTo = "Need";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A user need is a need someone has. Which users a device serves, and what they can be assumed to see, know and do, is the input a usability engineering file is built from (IEC 62366-1 5.1); a need that names no user leaves that input to prose.";
+            attribute predicateExpression = "not(needKind == 'user' or needKind == 'clinicalUser' or needKind == 'patientUser') or heldBy->size() >= 1";
+            constraint { true }
+        }
+
         // ─── Verification Layer Rules ────────────────────────────────────────
 
         constraint def VerificationCaseMethodRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-030";
+            @MemoIdentity { :>> providedId = "CR-MED-030"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "VerificationCase";
             attribute severity = RuleSeverityKind::error;
@@ -481,7 +551,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def VerificationCaseTargetRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-031";
+            @MemoIdentity { :>> providedId = "CR-MED-031"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "VerificationCase";
             attribute severity = RuleSeverityKind::error;
@@ -491,7 +561,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def EvidenceProductionRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-032";
+            @MemoIdentity { :>> providedId = "CR-MED-032"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "VerificationCase";
             attribute severity = RuleSeverityKind::warning;
@@ -503,7 +573,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // ─── Cybersecurity Layer Rules ───────────────────────────────────────
 
         constraint def ThreatMitigationRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-040";
+            @MemoIdentity { :>> providedId = "CR-MED-040"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Threat";
             attribute severity = RuleSeverityKind::error;
@@ -513,7 +583,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         }
 
         constraint def AssetThreatLinkRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-041";
+            @MemoIdentity { :>> providedId = "CR-MED-041"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "CybersecurityAsset";
             attribute severity = RuleSeverityKind::warning;
@@ -525,7 +595,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // ─── Interface Rules ─────────────────────────────────────────────────
 
         constraint def LogicalInterfaceDirectionRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-050";
+            @MemoIdentity { :>> providedId = "CR-MED-050"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "Interface";
             attribute severity = RuleSeverityKind::error;
@@ -537,7 +607,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // ─── Conditional Rules ───────────────────────────────────────────────
 
         constraint def SafetyClassCVerificationRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-101";
+            @MemoIdentity { :>> providedId = "CR-MED-101"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "SoftwareModule";
             attribute severity = RuleSeverityKind::error;
@@ -562,7 +632,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // triggers. Chrome must be DECLARED `decoration`; an element left
         // unclassified fails rather than passing as scenery.
         constraint def UiElementDesignRecordRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-110";
+            @MemoIdentity { :>> providedId = "CR-MED-110"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "UIElement";
             attribute severity = RuleSeverityKind::error;
@@ -576,7 +646,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // The interactive-form restriction lives in the predicate because it spans
         // several enum values.
         constraint def ControlInvokesFunctionRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-111";
+            @MemoIdentity { :>> providedId = "CR-MED-111"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "UIElement";
             attribute severity = RuleSeverityKind::warning;
@@ -589,7 +659,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // unconfirmed machine guess must never reach a design review looking like
         // an engineering decision.
         constraint def BoundsDetectionConfirmedRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-112";
+            @MemoIdentity { :>> providedId = "CR-MED-112"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "UIElement";
             attribute severity = RuleSeverityKind::warning;
@@ -601,7 +671,7 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
         // A screenshot with no build behind it is undated design intent, not
         // evidence of what the device does.
         constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule {
-            attribute id = "CR-MED-113";
+            @MemoIdentity { :>> providedId = "CR-MED-113"; }
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "ScreenCapture";
             attribute severity = RuleSeverityKind::error;

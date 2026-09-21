@@ -11,10 +11,9 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index
     private import memo_core_common::MemoIdentity;
     view dhfIndexView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index_view::*;
-        @MemoIdentity { :>> providedId = "DOC-007"; }
-        attribute :>> name = "DesignHistoryFileIndexView";
+        @MemoIdentity { :>> providedId = "DOC-007"; :>> label = "DesignHistoryFileIndexView"; }
         @MemoIdentity { :>> shortDescription = "Index of design inputs, outputs, reviews, and V&V records for the DHF."; }
-        attribute :>> description = "Collects the document-backed views (requirements, architecture, SDD, RMF, VV, usability, cybersecurity) into the design history file index required by 21 CFR 820.30(j).";
+        doc /* Collects the document-backed views (requirements, architecture, SDD, RMF, VV, usability, cybersecurity) into the design history file index required by 21 CFR 820.30(j). */
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::DHF;
@@ -24,8 +23,7 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index
         ref vpRisk :> viewpointDefinition = riskViewpoint;
         ref vpVerification :> viewpointDefinition = verificationViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-007"; }
-            attribute :>> name = "dhfIndexViewQuery";
+            @MemoIdentity { :>> providedId = "QRY-DOC-007"; :>> label = "dhfIndexViewQuery"; }
             attribute :>> includeElementKinds = ("MemoDocumentView", "MemoDiagramView", "MemoUsabilityEngineeringView", "MemoCybersecurityThreatModelView", "MemoCybersecurityAssessmentView", "MemoEvidence", "Citation");
             attribute :>> includeRelationshipKinds = ("ProducesEvidence");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";

@@ -17,49 +17,46 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_
     // to demonstrate the browser view's hierarchical grouping by kind.
 
     part controlSystem : OperationalEntity {
-        attribute :>> name = "Control System";
+@MemoIdentity { :>> label = "Control System"; }
 
         part supervisorModule : OperationalEntity {
-            attribute :>> name = "Supervisor Module";
+@MemoIdentity { :>> label = "Supervisor Module"; }
         }
         part safetyModule : OperationalEntity {
-            attribute :>> name = "Safety Module";
+@MemoIdentity { :>> label = "Safety Module"; }
         }
         part communicationModule : OperationalEntity {
-            attribute :>> name = "Communication Module";
+@MemoIdentity { :>> label = "Communication Module"; }
         }
     }
 
     part systemOperator : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> name = "Operator";
+@MemoIdentity { :>> label = "Operator"; }
     }
     part maintenanceEngineer : User {
         attribute :>> actorKind = ActorKind::technician;
-        attribute :>> name = "Maintenance Engineer";
+@MemoIdentity { :>> label = "Maintenance Engineer"; }
     }
     part remoteMonitor : User {
         attribute :>> actorKind = ActorKind::clinician;
-        attribute :>> name = "Remote Monitor";
+@MemoIdentity { :>> label = "Remote Monitor"; }
     }
 
     use case startSystem : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-1"; }
-        attribute :>> name = "Start System";
+        @MemoIdentity { :>> providedId = "UC-BRW-1"; :>> label = "Start System"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject controlSystem;
         actor operatorActor = systemOperator;
     }
     use case runDiagnostics : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-2"; }
-        attribute :>> name = "Run Diagnostics";
+        @MemoIdentity { :>> providedId = "UC-BRW-2"; :>> label = "Run Diagnostics"; }
         attribute :>> useCaseKind = UseCaseKind::service;
         subject controlSystem;
         actor engineerActor = maintenanceEngineer;
     }
     use case monitorStatus : UseCase {
-        @MemoIdentity { :>> providedId = "UC-BRW-3"; }
-        attribute :>> name = "Monitor Status";
+        @MemoIdentity { :>> providedId = "UC-BRW-3"; :>> label = "Monitor Status"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject controlSystem;
         actor monitorActor = remoteMonitor;

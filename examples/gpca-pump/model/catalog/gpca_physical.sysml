@@ -7,8 +7,7 @@ package memo_examples_gpca_pump_gpca_physical {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part mainController : ProcessingNode {
-        @MemoIdentity { :>> providedId = "PN-001"; }
-        attribute :>> name = "MainControllerMCU";
+        @MemoIdentity { :>> providedId = "PN-001"; :>> label = "MainControllerMCU"; }
         attribute :>> nodeKind = ProcessingNodeKind::microcontroller;
         attribute :>> processorArchitecture = "ARM Cortex-M4, lockstep-capable";
         attribute :>> memoryMB = "1 MB flash / 256 KB SRAM with ECC";
@@ -18,32 +17,27 @@ package memo_examples_gpca_pump_gpca_physical {
     }
 
     in port portSensorHarness : PhysicalPort {
-        @MemoIdentity { :>> providedId = "PP-001"; }
-        attribute :>> name = "SensorHarnessConnector";
+        @MemoIdentity { :>> providedId = "PP-001"; :>> label = "SensorHarnessConnector"; }
         attribute :>> portKind = InterfaceKind::digitalSignal;
         attribute :>> connectorType = "keyed 12-pin locking header";
     }
     out port portMotorDrive : PhysicalPort {
-        @MemoIdentity { :>> providedId = "PP-002"; }
-        attribute :>> name = "MotorDriveConnector";
+        @MemoIdentity { :>> providedId = "PP-002"; :>> label = "MotorDriveConnector"; }
         attribute :>> portKind = InterfaceKind::digitalSignal;
         attribute :>> connectorType = "keyed 6-pin locking header with enable interlock";
     }
     in port portPatientPendant : PhysicalPort {
-        @MemoIdentity { :>> providedId = "PP-003"; }
-        attribute :>> name = "PatientPendantJack";
+        @MemoIdentity { :>> providedId = "PP-003"; :>> label = "PatientPendantJack"; }
         attribute :>> portKind = InterfaceKind::digitalSignal;
         attribute :>> connectorType = "latching 3.5 mm pendant jack";
     }
     inout port portServiceAccess : PhysicalPort {
-        @MemoIdentity { :>> providedId = "PP-004"; }
-        attribute :>> name = "ServiceMaintenancePort";
+        @MemoIdentity { :>> providedId = "PP-004"; :>> label = "ServiceMaintenancePort"; }
         attribute :>> portKind = InterfaceKind::api;
         attribute :>> connectorType = "covered UART/USB service connector";
     }
     in port portMainsInlet : PhysicalPort {
-        @MemoIdentity { :>> providedId = "PP-005"; }
-        attribute :>> name = "MainsPowerInlet";
+        @MemoIdentity { :>> providedId = "PP-005"; :>> label = "MainsPowerInlet"; }
         attribute :>> portKind = InterfaceKind::power;
         attribute :>> connectorType = "IEC 60320 C8 inlet";
     }

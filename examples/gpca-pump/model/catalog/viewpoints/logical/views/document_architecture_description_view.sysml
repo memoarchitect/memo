@@ -11,10 +11,9 @@ package memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_d
     private import memo_core_common::MemoIdentity;
     view architectureDescriptionView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_description_view::*;
-        @MemoIdentity { :>> providedId = "DOC-005"; }
-        attribute :>> name = "ArchitectureDescriptionView";
+        @MemoIdentity { :>> providedId = "DOC-005"; :>> label = "ArchitectureDescriptionView"; }
         @MemoIdentity { :>> shortDescription = "ISO/IEC/IEEE 42010 architecture description across all layers."; }
-        attribute :>> description = "Aggregates context, operational, functional, logical, software, and physical layers with their views and correspondences for the system architecture description.";
+        doc /* Aggregates context, operational, functional, logical, software, and physical layers with their views and correspondences for the system architecture description. */
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::architectureDescription;
@@ -24,8 +23,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_d
         ref vpSoftware :> viewpointDefinition = softwareViewpoint;
         ref vpPhysical :> viewpointDefinition = physicalViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-005"; }
-            attribute :>> name = "architectureDescriptionViewQuery";
+            @MemoIdentity { :>> providedId = "QRY-DOC-005"; :>> label = "architectureDescriptionViewQuery"; }
             attribute :>> includeElementKinds = ("LogicalComponent", "SystemFunction", "ComponentExchange", "SoftwareSystem", "SoftwareModule", "HardwareAssembly", "ProcessingNode", "PhysicalPort", "FunctionalFlow", "FunctionalFlowStep");
             attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "Realizes", "BindsToInterface", "Performs", "Succession", "DeploysTo", "HostedBy");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";

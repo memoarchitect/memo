@@ -33,8 +33,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`RiskDriver`](#riskdriver) | `part def` | Risk driver definition specializing `RequirementDriver`. | `RequirementDriver` |
-| [`ReasonablyForeseeableMisuse`](#reasonablyforeseeablemisuse) | `part def` | ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards, scenarios, requirements, and DHF records can trace to the foreseeable misuse that motivated them.… | `MemoPart` |
-| [`RequirementKind`](#requirementkind) | `enum def` | The kind of requirement. Was a subclass branch (SystemRequirement / SoftwareRequirement / HardwareRequirement) plus a parallel design-control specification hierarchy (DesignControlSpecification / System- / Software- / HardwareSpecification); now one attribute.… | — |
+| [`RequirementTypeKind`](#requirementtypekind) | `enum def` | What a requirement is about: the system, the software, the hardware, or the instructions for use. One axis, and the members are its values. It carried a second axis until now.… | — |
 | [`Requirement`](#requirement) | `requirement def` | Requirement definition specializing `MemoRequirement`. | `MemoRequirement` |
 | [`SystemConstant`](#systemconstant) | `part def` | Named constant defined by a source requirements document (e.g. CriSys GPCA App. A.4) and referenced from requirement statements. | `MemoPart` |
 | [`NotificationSpec`](#notificationspec) | `part def` | One row of a notification/alarm action table (e.g. CriSys GPCA REQ 59): a named notification, its priority, and the actions the system must take. | `MemoPart` |
@@ -54,30 +53,15 @@ part def RiskDriver specializes RequirementDriver
 | Owning package | `memo_assurance_requirements` |
 
 
-## ReasonablyForeseeableMisuse
+## RequirementTypeKind
 
 ```sysml
-part def ReasonablyForeseeableMisuse specializes MemoPart
+enum def RequirementTypeKind
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards, scenarios, requirements, and DHF records can trace to the foreseeable misuse that motivated them.… |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `MemoPart` |
-| Owning package | `memo_assurance_requirements` |
-
-
-## RequirementKind
-
-```sysml
-enum def RequirementKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | The kind of requirement. Was a subclass branch (SystemRequirement / SoftwareRequirement / HardwareRequirement) plus a parallel design-control specification hierarchy (DesignControlSpecification / System- / Software- / HardwareSpecification); now one attribute.… |
+| Description | What a requirement is about: the system, the software, the hardware, or the instructions for use. One axis, and the members are its values. It carried a second axis until now.… |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -143,44 +127,40 @@ part def NotificationSpec specializes MemoPart
         private import memo_assurance_requirements_needs::*;
         part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
 
-        // ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards,
-        // scenarios, requirements, and DHF records can trace to the foreseeable
-        // misuse that motivated them. Its counterpart, IntendedUse, is now the
-        // operational-world root (memo_architecture_operational_structure::IntendedUse,
-        // a MemoMission).
-        part def ReasonablyForeseeableMisuse specializes MemoPart {
-            attribute misuseContext : String;
-            attribute foreseeableBasis : String;
-            attribute affectedUseContext : String;
-        }
-
-        // The kind of requirement. Was a subclass branch (SystemRequirement /
-        // SoftwareRequirement / HardwareRequirement) plus a parallel design-control
-        // specification hierarchy (DesignControlSpecification / System- / Software- /
-        // HardwareSpecification); now one attribute. The role-specific attributes
-        // below are all optional so a requirement carries only the ones its kind
-        // needs. IEC 62304 / design-control classification is preserved as the
-        // enum value, not lost.
-        enum def RequirementKind {
+        // What a requirement is about: the system, the software, the hardware, or
+        // the instructions for use. One axis, and the members are its values.
+        //
+        // It carried a second axis until now. `systemSpecification`,
+        // `softwareSpecification`, `hardwareSpecification` and `designControl` are
+        // the design-control ROLE — input versus output, 21 CFR 820.30(c)/(d) and
+        // ISO 13485 §7.3.3/§7.3.4 — multiplied into the subject. A requirement then
+        // could not say "software" without also committing to a role, the grid was
+        // incomplete by construction (there is no `ifuSpecification`, and there
+        // would have to be one for every future pairing), and nothing ever used the
+        // four: 250 requirements across the examples say system, software or
+        // hardware. A role, if a project needs one, is its own attribute.
+        //
+        // The instructions for use are neither hardware nor software: the device
+        // satisfies such a requirement with words rather than with a part or a
+        // module, and it is verified by reviewing the IFU rather than by testing a
+        // build (EU MDR Annex I §23.4, ISO 20417, IEC 62366-1 §7.2).
+        enum def RequirementTypeKind {
             enum system;
             enum software;
             enum hardware;
-            enum systemSpecification;
-            enum softwareSpecification;
-            enum hardwareSpecification;
-            enum designControl;
+            enum ifu;
         }
 
         requirement def Requirement specializes MemoRequirement {
-            attribute requirementKind : RequirementKind;
-            attribute statement : String;
+            attribute requirementType : RequirementTypeKind;
+            attribute :>> statement : String;
             attribute sourceKind : RequirementSourceKind;
             attribute concernKind : ConcernKind;
             // Editorial state is the inherited `status : ElementStatusKind` — the
             // one status vocabulary in MEMO. Whether a requirement is implemented,
             // verified, or validated is read from its Realizes / VerifiedBy /
             // Validates links, not restated here.
-            attribute acceptanceCriteria : String;
+            attribute :>> acceptanceCriteria : String;
             attribute subjectDescription : String;
             attribute actorDescription : String;
             attribute assumptionSummary : String;
@@ -200,9 +180,6 @@ part def NotificationSpec specializes MemoPart
             // design-control specification (ISO 13485 design output)
             attribute specificationDomain : String;
             attribute sourceFolder : String;
-            attribute linkedUserNeeds : String;
-            attribute linkedRisks : String;
-            attribute linkedTests : String;
         }
         // Named constant defined by a source requirements document (e.g. CriSys
         // GPCA App. A.4) and referenced from requirement statements.

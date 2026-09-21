@@ -18,7 +18,7 @@ package memo_examples_ui_screen_regions_artifacts_reviews_notes {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part noteCaptureReview : ModelNote {
-        @MemoIdentity { :>> providedId = "UIR-NOTE-001"; } attribute :>> name = "CaptureReviewNote";
+        @MemoIdentity { :>> providedId = "UIR-NOTE-001"; :>> label = "CaptureReviewNote"; }
         @MemoIdentity { :>> shortDescription = "Reconfirm automatic regions after every capture replacement."; }
         attribute :>> body = "Normalized manual bounds migrate between captures; automatically detected regions require renewed reviewer confirmation.";
         attribute :>> author = "r.mehta";

@@ -28,24 +28,20 @@
 | private | `Connections::BinaryConnection` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
+| private | `Allocations::Allocation` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
-| [`MemoLink`](#memolink) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | `MemoRelationship` |
-| [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship for derives from. | `MemoRelationship` |
+| [`DerivesFrom`](#derivesfrom) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | `MemoRelationship` |
 | [`ProducesEvidence`](#producesevidence) | `connection def` | `Realizes` (realizing/concrete element → realized/abstract element) is native `#refinement dependency` (R10-S6): write `#refinement dependency <realizing> to <realized>;` instead.… | `MemoRelationship` |
 | [`ThreatenedBy`](#threatenedby) | `connection def` | `Precedes` is native `succession` (`first a then b;`), R10-S6. `sameStepRequired`/`precedenceRationale` had zero usages anywhere in the tree (same free-deletion shape R10-S5 found for `rationale`), so there was no content to carry forward. | `MemoRelationship` |
 | [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship for derives cyber requirement. | `MemoRelationship` |
 | [`CrossesTrustBoundary`](#crossestrustboundary) | `connection def` | Typed relationship for crosses trust boundary. | `MemoRelationship` |
 | [`Validates`](#validates) | `connection def` | Typed relationship for validates. | `MemoRelationship` |
-| [`Enables`](#enables) | `connection def` | Typed relationship for enables. | `MemoRelationship` |
-| [`HostedBy`](#hostedby) | `connection def` | Typed relationship for hosted by. | `MemoRelationship` |
-| [`Composes`](#composes) | `connection def` | Typed relationship for composes. | `MemoRelationship` |
-| [`AnalyzedBy`](#analyzedby) | `connection def` | Typed relationship for analyzed by. | `MemoRelationship` |
-| [`BindsToInterface`](#bindstointerface) | `connection def` | Typed relationship for binds to interface. | `MemoRelationship` |
+| [`BindsToInterface`](#bindstointerface) | `connection def` | `Composes` is deleted (R10-S7). Containment is NESTING — the child is declared inside the parent — which is how SysML v2 models composition: composite feature ownership, not a link.… | `MemoRelationship` |
 
 ## MemoRelationship
 
@@ -62,21 +58,6 @@ abstract connection def MemoRelationship :> Connections::BinaryConnection
 | Owning package | `memo_core_relationships` |
 
 
-## MemoLink
-
-```sysml
-connection def MemoLink :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
 ## DerivesFrom
 
 ```sysml
@@ -85,7 +66,7 @@ connection def DerivesFrom :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for derives from. |
+| Description | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -167,66 +148,6 @@ connection def Validates :> MemoRelationship
 | Owning package | `memo_core_relationships` |
 
 
-## Enables
-
-```sysml
-connection def Enables :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for enables. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## HostedBy
-
-```sysml
-connection def HostedBy :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for hosted by. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## Composes
-
-```sysml
-connection def Composes :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for composes. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## AnalyzedBy
-
-```sysml
-connection def AnalyzedBy :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for analyzed by. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
 ## BindsToInterface
 
 ```sysml
@@ -235,7 +156,7 @@ connection def BindsToInterface :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for binds to interface. |
+| Description | `Composes` is deleted (R10-S7). Containment is NESTING — the child is declared inside the parent — which is how SysML v2 models composition: composite feature ownership, not a link.… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -256,6 +177,7 @@ connection def BindsToInterface :> MemoRelationship
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
 
+        private import Allocations::Allocation;
         // All MEMO relations are native SysML v2 `connection def`s (each is a
         // Connection/Association), specializing the MemoRelationship base. The
         // relationship name is the verb; the RelationshipRegistry derives the
@@ -356,17 +278,6 @@ connection def BindsToInterface :> MemoRelationship
         // only when no specific relation carries the meaning, and say why in the
         // inherited `rationale` — an untyped link with no stated reason is an
         // audit gap, not a model fact.
-        connection def MemoLink :> MemoRelationship {
-            doc /* Generic association between any two model elements. */
-            end linkSource :>> source;
-            end linkTarget :>> target;
-        }
-        abstract connection memoLinkLinks : MemoLink[*];
-        metadata def <memoLink> MemoLinkMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = memoLinkLinks meta SysML::Usage;
-        }
 
         connection def DerivesFrom :> MemoRelationship {
             // Drivers span metaclasses — a need is a requirement def, a hazard an
@@ -455,57 +366,40 @@ connection def BindsToInterface :> MemoRelationship
 
         // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms
         // (an enabling system/function enables a workflow/activity).
-        connection def Enables :> MemoRelationship {
-            end enabling :>> source;
-            end enabled : MemoAction :>> target;
-        }
-        abstract connection enablesLinks : Enables[*];
-        metadata def <enables> EnablesMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = enablesLinks meta SysML::Usage;
-        }
+        // `Enables` is native `dependency` (2026-08-18): write
+        // `dependency from <enabling> to <enabled>;`. Same call as `Supports`,
+        // which was deleted as a duplicate of both `dependency` and `Enables`.
 
-        connection def HostedBy :> MemoRelationship {
+            // A processing node hosted by an assembly is allocated to it. The end
+        // NAMES were already right; two of the three usages wrote them in reverse
+        // order, and the builder binds by position, so those two edges pointed the
+        // wrong way. See the reversed-end-name lint in memo-tools.
+        allocation def HostedBy :> MemoRelationship, Allocations::Allocation {
             end processingNode : MemoPart :>> source;
             end hostAssembly : MemoPart :>> target;
         }
         abstract connection hostedByLinks : HostedBy[*];
         metadata def <hostedBy> HostedByMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
+            :> annotatedElement : SysML::AllocationDefinition;
+            :> annotatedElement : SysML::AllocationUsage;
             :>> baseType = hostedByLinks meta SysML::Usage;
         }
 
 
 
 
-        // Composes is the single whole/part decomposition relation. It unifies the
-        // former ComposesLogical / AssemblyComprises / Contains{Component,Element} /
-        // {Workflow,Task,Activity,Scenario}Comprises* / FlowComprisesSpec /
-        // Collection membership is carried by the end instance.
-        // types, so the ends are generic MemoPart.
-        connection def Composes :> MemoRelationship {
-            end parent :>> source;
-            end child :>> target;
-        }
-        abstract connection composesLinks : Composes[*];
-        metadata def <composes> ComposesMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = composesLinks meta SysML::Usage;
-        }
+        // `Composes` is deleted (R10-S7). Containment is NESTING — the child is
+        // declared inside the parent — which is how SysML v2 models composition:
+        // composite feature ownership, not a link. The relation specialized
+        // `Connections::BinaryConnection`, "a link between two things WITHIN some
+        // containing structure", so it was the wrong category for the containment
+        // itself, and the corpus has no composition connection to specialize.
+        //
+        // Nothing is lost: the builder synthesizes a `composes` edge from every
+        // nested part and item, so rules, the DSM and traceability read exactly the
+        // graph they read before. The edge type is registered natively in
+        // memo-tools' relationship registry.
 
-        connection def AnalyzedBy :> MemoRelationship {
-            end element : MemoPart :>> source;
-            end analysisArtifact : AnalysisArtifact :>> target;
-        }
-        abstract connection analyzedByLinks : AnalyzedBy[*];
-        metadata def <analyzedBy> AnalyzedByMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = analyzedByLinks meta SysML::Usage;
-        }
 
         connection def BindsToInterface :> MemoRelationship {
             end portElement :>> source;

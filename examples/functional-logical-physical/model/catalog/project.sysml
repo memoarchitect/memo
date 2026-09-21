@@ -17,8 +17,7 @@ package memo_examples_functional_logical_physical_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-LOGICAL-PHYSICAL-001"; }
-        attribute :>> name = "FunctionalLogicalPhysicalProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-LOGICAL-PHYSICAL-001"; :>> label = "FunctionalLogicalPhysicalProjectMethodBinding"; }
         attribute :>> projectName = "Functional Logical Physical";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

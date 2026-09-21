@@ -32,26 +32,42 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`PhysicalAssembly`](#physicalassembly) | `part def` | Physical assembly definition specializing `MemoPart`. | `MemoPart` |
+| [`PhysicalElement`](#physicalelement) | `part def` | Physical element definition specializing `MemoPart`. | `MemoPart` |
+| [`PhysicalAssembly`](#physicalassembly) | `part def` | Physical assembly definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`PhysicalSubassembly`](#physicalsubassembly) | `part def` | Physical subassembly definition specializing `PhysicalAssembly`. | `PhysicalAssembly` |
 | [`HardwareAssembly`](#hardwareassembly) | `part def` | Hardware assembly definition specializing `PhysicalAssembly`. | `PhysicalAssembly` |
-| [`PhysicalComponent`](#physicalcomponent) | `part def` | Physical component definition specializing `MemoPart`. | `MemoPart` |
+| [`PhysicalComponent`](#physicalcomponent) | `part def` | Physical component definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`HardwareComponent`](#hardwarecomponent) | `part def` | Hardware component definition specializing `PhysicalComponent`. | `PhysicalComponent` |
 | [`AcousticComponent`](#acousticcomponent) | `part def` | Acoustic component definition specializing `PhysicalComponent`. | `PhysicalComponent` |
 | [`ThermalComponent`](#thermalcomponent) | `part def` | Thermal component definition specializing `PhysicalComponent`. | `PhysicalComponent` |
 
-## PhysicalAssembly
+## PhysicalElement
 
 ```sysml
-part def PhysicalAssembly specializes MemoPart
+abstract part def PhysicalElement specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Physical assembly definition specializing `MemoPart`. |
+| Description | Physical element definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | Yes |
+| Specializes | `MemoPart` |
+| Owning package | `memo_architecture_implementation_hardware_common` |
+
+
+## PhysicalAssembly
+
+```sysml
+part def PhysicalAssembly specializes PhysicalElement
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Physical assembly definition specializing `PhysicalElement`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `PhysicalElement` |
 | Owning package | `memo_architecture_implementation_hardware_common` |
 
 
@@ -88,15 +104,15 @@ part def HardwareAssembly specializes PhysicalAssembly
 ## PhysicalComponent
 
 ```sysml
-part def PhysicalComponent specializes MemoPart
+part def PhysicalComponent specializes PhysicalElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Physical component definition specializing `MemoPart`. |
+| Description | Physical component definition specializing `PhysicalElement`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `PhysicalElement` |
 | Owning package | `memo_architecture_implementation_hardware_common` |
 
 
@@ -165,7 +181,17 @@ part def ThermalComponent specializes PhysicalComponent
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
 
-        part def PhysicalAssembly specializes MemoPart {
+        // The shared root of the physical family.
+        //
+        // `PhysicalAssembly` and `PhysicalComponent` each specialized `MemoPart`
+        // directly, so the family had two roots and no single type that means
+        // "a physical thing". A containment rule has to name one type, and
+        // `conformsTo(MemoPart)` is far too wide — it admits a requirement or a
+        // hazard. This is that type, and it carries nothing of its own: the split
+        // between an assembly and a component is what the two subtypes are for.
+        abstract part def PhysicalElement specializes MemoPart { }
+
+        part def PhysicalAssembly specializes PhysicalElement {
             attribute responsibility : String;
             attribute safetyRole : String;
             attribute partNumber : String;
@@ -177,7 +203,7 @@ part def ThermalComponent specializes PhysicalComponent
         // Retained name from 0.4; an electronics-centred assembly.
         part def HardwareAssembly specializes PhysicalAssembly;
 
-        part def PhysicalComponent specializes MemoPart {
+        part def PhysicalComponent specializes PhysicalElement {
             attribute partNumber : String;
             attribute materialSummary : String;
             // ISO 10993-1 contact characterization; required when true.

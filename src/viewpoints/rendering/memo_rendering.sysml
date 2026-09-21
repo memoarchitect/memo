@@ -53,320 +53,280 @@ package memo_viewpoints_rendering {
     }
 
     part layerOperationalRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-OPERATIONAL"; }
-        attribute :>> name = "OperationalLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-OPERATIONAL"; :>> label = "OperationalLayerRendering"; }
         attribute :>> layerId = "operational";
         attribute :>> layerLabel = "Operational";
         attribute :>> layerColor = "#C0392B";
     }
 
     part layerBehavioralRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-BEHAVIORAL"; }
-        attribute :>> name = "BehavioralLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-BEHAVIORAL"; :>> label = "BehavioralLayerRendering"; }
         attribute :>> layerId = "behavioral";
         attribute :>> layerLabel = "Behavioral";
         attribute :>> layerColor = "#E74C3C";
     }
 
     part layerFunctionalRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-FUNCTIONAL"; }
-        attribute :>> name = "FunctionalLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-FUNCTIONAL"; :>> label = "FunctionalLayerRendering"; }
         attribute :>> layerId = "functional";
         attribute :>> layerLabel = "Functional";
         attribute :>> layerColor = "#E67E22";
     }
 
     part layerLogicalRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-LOGICAL"; }
-        attribute :>> name = "LogicalLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-LOGICAL"; :>> label = "LogicalLayerRendering"; }
         attribute :>> layerId = "logical";
         attribute :>> layerLabel = "Logical";
         attribute :>> layerColor = "#7B68EE";
     }
 
     part layerSoftwareRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-SOFTWARE"; }
-        attribute :>> name = "SoftwareLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-SOFTWARE"; :>> label = "SoftwareLayerRendering"; }
         attribute :>> layerId = "software";
         attribute :>> layerLabel = "Software";
         attribute :>> layerColor = "#F39C12";
     }
 
     part layerSoftwareExtensionRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-SOFTWARE-EXTENSION"; }
-        attribute :>> name = "Software Extension (ROS)LayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-SOFTWARE-EXTENSION"; :>> label = "Software Extension (ROS)LayerRendering"; }
         attribute :>> layerId = "software-extension";
         attribute :>> layerLabel = "Software Extension (ROS)";
         attribute :>> layerColor = "#D4AC0D";
     }
 
     part layerHardwareRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-HARDWARE"; }
-        attribute :>> name = "HardwareLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-HARDWARE"; :>> label = "HardwareLayerRendering"; }
         attribute :>> layerId = "hardware";
         attribute :>> layerLabel = "Hardware";
         attribute :>> layerColor = "#95A5A6";
     }
 
     part layerSafetyRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-SAFETY"; }
-        attribute :>> name = "SafetyLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-SAFETY"; :>> label = "SafetyLayerRendering"; }
         attribute :>> layerId = "safety";
         attribute :>> layerLabel = "Safety";
         attribute :>> layerColor = "#E74C3C";
     }
 
     part layerSecurityRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-SECURITY"; }
-        attribute :>> name = "SecurityLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-SECURITY"; :>> label = "SecurityLayerRendering"; }
         attribute :>> layerId = "security";
         attribute :>> layerLabel = "Security";
         attribute :>> layerColor = "#2C3E50";
     }
 
     part layerPrivacyRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-PRIVACY"; }
-        attribute :>> name = "PrivacyLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-PRIVACY"; :>> label = "PrivacyLayerRendering"; }
         attribute :>> layerId = "privacy";
         attribute :>> layerLabel = "Privacy";
         attribute :>> layerColor = "#8E44AD";
     }
 
     part layerVerificationRendering : LayerRendering {
-        @MemoIdentity { :>> providedId = "LAYER-VERIFICATION"; }
-        attribute :>> name = "VerificationLayerRendering";
+        @MemoIdentity { :>> providedId = "LAYER-VERIFICATION"; :>> label = "VerificationLayerRendering"; }
         attribute :>> layerId = "verification";
         attribute :>> layerLabel = "Verification";
         attribute :>> layerColor = "#2ECC71";
     }
 
     part explorerActivitiesClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-001"; }
-        attribute :>> name = "activitiesExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-001"; :>> label = "activitiesExplorerClassification"; }
         attribute :>> sourceNamespace = "activities";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerContextClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-002"; }
-        attribute :>> name = "contextExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-002"; :>> label = "contextExplorerClassification"; }
         attribute :>> sourceNamespace = "context";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerActorsClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-003"; }
-        attribute :>> name = "actorsExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-003"; :>> label = "actorsExplorerClassification"; }
         attribute :>> sourceNamespace = "actors";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerUseContextClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-004"; }
-        attribute :>> name = "use_contextExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-004"; :>> label = "use_contextExplorerClassification"; }
         attribute :>> sourceNamespace = "use_context";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerWorkflowsClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-005"; }
-        attribute :>> name = "workflowsExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-005"; :>> label = "workflowsExplorerClassification"; }
         attribute :>> sourceNamespace = "workflows";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerScenariosClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-006"; }
-        attribute :>> name = "scenariosExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-006"; :>> label = "scenariosExplorerClassification"; }
         attribute :>> sourceNamespace = "scenarios";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerUseCasesClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-007"; }
-        attribute :>> name = "use_casesExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-007"; :>> label = "use_casesExplorerClassification"; }
         attribute :>> sourceNamespace = "use_cases";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerInteractionClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-008"; }
-        attribute :>> name = "interactionExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-008"; :>> label = "interactionExplorerClassification"; }
         attribute :>> sourceNamespace = "interaction";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerOperationalClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-009"; }
-        attribute :>> name = "operationalExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-009"; :>> label = "operationalExplorerClassification"; }
         attribute :>> sourceNamespace = "operational";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "operational";
     }
 
     part explorerFunctionsClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-010"; }
-        attribute :>> name = "functionsExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-010"; :>> label = "functionsExplorerClassification"; }
         attribute :>> sourceNamespace = "functions";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "functional";
     }
 
     part explorerBehaviorClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-011"; }
-        attribute :>> name = "behaviorExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-011"; :>> label = "behaviorExplorerClassification"; }
         attribute :>> sourceNamespace = "behavior";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "functional";
     }
 
     part explorerConstraintsClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-012"; }
-        attribute :>> name = "constraintsExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-012"; :>> label = "constraintsExplorerClassification"; }
         attribute :>> sourceNamespace = "constraints";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "functional";
     }
 
     part explorerLogicalStructureClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-013"; }
-        attribute :>> name = "logical_structureExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-013"; :>> label = "logical_structureExplorerClassification"; }
         attribute :>> sourceNamespace = "logical_structure";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "logical";
     }
 
     part explorerInterfacesClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-014"; }
-        attribute :>> name = "interfacesExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-014"; :>> label = "interfacesExplorerClassification"; }
         attribute :>> sourceNamespace = "interfaces";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "logical";
     }
 
     part explorerHardwareStructureClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-015"; }
-        attribute :>> name = "hardware_structureExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-015"; :>> label = "hardware_structureExplorerClassification"; }
         attribute :>> sourceNamespace = "hardware_structure";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "implementation";
     }
 
     part explorerImplementationClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-016"; }
-        attribute :>> name = "implementationExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-016"; :>> label = "implementationExplorerClassification"; }
         attribute :>> sourceNamespace = "implementation";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "implementation";
     }
 
     part explorerSoftwareStructureClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-017"; }
-        attribute :>> name = "software_structureExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-017"; :>> label = "software_structureExplorerClassification"; }
         attribute :>> sourceNamespace = "software_structure";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "implementation";
     }
 
     part explorerSoftwareRuntimeClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-018"; }
-        attribute :>> name = "software_runtimeExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-018"; :>> label = "software_runtimeExplorerClassification"; }
         attribute :>> sourceNamespace = "software_runtime";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "implementation";
     }
 
     part explorerPhysicalClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-019"; }
-        attribute :>> name = "physicalExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-019"; :>> label = "physicalExplorerClassification"; }
         attribute :>> sourceNamespace = "physical";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "realization";
     }
 
     part explorerDeploymentClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-020"; }
-        attribute :>> name = "deploymentExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-020"; :>> label = "deploymentExplorerClassification"; }
         attribute :>> sourceNamespace = "deployment";
         attribute :>> explorerDomain = "architecture";
         attribute :>> explorerGroup = "realization";
     }
 
     part explorerNeedsClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-021"; }
-        attribute :>> name = "needsExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-021"; :>> label = "needsExplorerClassification"; }
         attribute :>> sourceNamespace = "needs";
         attribute :>> explorerDomain = "assurance";
         attribute :>> explorerGroup = "requirements";
     }
 
     part explorerRequirementsClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-022"; }
-        attribute :>> name = "requirementsExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-022"; :>> label = "requirementsExplorerClassification"; }
         attribute :>> sourceNamespace = "requirements";
         attribute :>> explorerDomain = "assurance";
         attribute :>> explorerGroup = "requirements";
     }
 
     part explorerSafetyClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-023"; }
-        attribute :>> name = "safetyExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-023"; :>> label = "safetyExplorerClassification"; }
         attribute :>> sourceNamespace = "safety";
         attribute :>> explorerDomain = "assurance";
         attribute :>> explorerGroup = "safety-risk";
     }
 
     part explorerSafetyAnalysisClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-024"; }
-        attribute :>> name = "safety_analysisExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-024"; :>> label = "safety_analysisExplorerClassification"; }
         attribute :>> sourceNamespace = "safety_analysis";
         attribute :>> explorerDomain = "assurance";
         attribute :>> explorerGroup = "safety-risk";
     }
 
     part explorerCybersecurityClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-025"; }
-        attribute :>> name = "cybersecurityExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-025"; :>> label = "cybersecurityExplorerClassification"; }
         attribute :>> sourceNamespace = "cybersecurity";
         attribute :>> explorerDomain = "assurance";
         attribute :>> explorerGroup = "cybersecurity";
     }
 
     part explorerHumanFactorsClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-026"; }
-        attribute :>> name = "human_factorsExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-026"; :>> label = "human_factorsExplorerClassification"; }
         attribute :>> sourceNamespace = "human_factors";
         attribute :>> explorerDomain = "assurance";
         attribute :>> explorerGroup = "human-factors";
     }
 
     part explorerVerificationClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-027"; }
-        attribute :>> name = "verificationExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-027"; :>> label = "verificationExplorerClassification"; }
         attribute :>> sourceNamespace = "verification";
         attribute :>> explorerDomain = "assurance";
         attribute :>> explorerGroup = "verification-validation";
     }
 
     part explorerCoreClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-028"; }
-        attribute :>> name = "coreExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-028"; :>> label = "coreExplorerClassification"; }
         attribute :>> sourceNamespace = "core";
         attribute :>> explorerDomain = "assurance";
         attribute :>> explorerGroup = "evidence";
     }
 
     part explorerMethodologyClassification : ExplorerClassification {
-        @MemoIdentity { :>> providedId = "EXPL-029"; }
-        attribute :>> name = "methodologyExplorerClassification";
+        @MemoIdentity { :>> providedId = "EXPL-029"; :>> label = "methodologyExplorerClassification"; }
         attribute :>> sourceNamespace = "methodology";
         attribute :>> explorerDomain = "methodology";
         attribute :>> explorerGroup = "methodology";
@@ -384,7 +344,6 @@ package memo_viewpoints_rendering {
 
     part enumStatusOpen : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-STATUS-001"; }
-        attribute :>> name = "EnumStatusOpen";
         attribute :>> enumValue = "StatusKind::open";
         attribute :>> label = "Open";
         attribute :>> shortLabel = "Open";
@@ -393,7 +352,6 @@ package memo_viewpoints_rendering {
 
     part enumStatusTbd : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-STATUS-002"; }
-        attribute :>> name = "EnumStatusTbd";
         attribute :>> enumValue = "StatusKind::tbd";
         attribute :>> label = "To Be Determined";
         attribute :>> shortLabel = "TBD";
@@ -402,7 +360,6 @@ package memo_viewpoints_rendering {
 
     part enumStatusTbr : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-STATUS-003"; }
-        attribute :>> name = "EnumStatusTbr";
         attribute :>> enumValue = "StatusKind::tbr";
         attribute :>> label = "To Be Resolved";
         attribute :>> shortLabel = "TBR";
@@ -411,7 +368,6 @@ package memo_viewpoints_rendering {
 
     part enumStatusTbc : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-STATUS-004"; }
-        attribute :>> name = "EnumStatusTbc";
         attribute :>> enumValue = "StatusKind::tbc";
         attribute :>> label = "To Be Confirmed";
         attribute :>> shortLabel = "TBC";
@@ -420,7 +376,6 @@ package memo_viewpoints_rendering {
 
     part enumStatusDone : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-STATUS-005"; }
-        attribute :>> name = "EnumStatusDone";
         attribute :>> enumValue = "StatusKind::done";
         attribute :>> label = "Done";
         attribute :>> shortLabel = "Done";
@@ -429,7 +384,6 @@ package memo_viewpoints_rendering {
 
     part enumStatusClosed : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-STATUS-006"; }
-        attribute :>> name = "EnumStatusClosed";
         attribute :>> enumValue = "StatusKind::closed";
         attribute :>> label = "Closed";
         attribute :>> shortLabel = "Closed";
@@ -438,7 +392,6 @@ package memo_viewpoints_rendering {
 
     part enumElementProposed : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-ELEM-001"; }
-        attribute :>> name = "EnumElementProposed";
         attribute :>> enumValue = "ElementStatusKind::proposed";
         attribute :>> label = "Proposed";
         attribute :>> enumColor = "#6B7280";
@@ -446,7 +399,6 @@ package memo_viewpoints_rendering {
 
     part enumElementDraft : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-ELEM-002"; }
-        attribute :>> name = "EnumElementDraft";
         attribute :>> enumValue = "ElementStatusKind::draft";
         attribute :>> label = "Draft";
         attribute :>> enumColor = "#6B7280";
@@ -454,7 +406,6 @@ package memo_viewpoints_rendering {
 
     part enumElementInReview : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-ELEM-003"; }
-        attribute :>> name = "EnumElementInReview";
         attribute :>> enumValue = "ElementStatusKind::inReview";
         attribute :>> label = "In Review";
         attribute :>> enumColor = "#D97706";
@@ -462,7 +413,6 @@ package memo_viewpoints_rendering {
 
     part enumElementApproved : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-ELEM-004"; }
-        attribute :>> name = "EnumElementApproved";
         attribute :>> enumValue = "ElementStatusKind::approved";
         attribute :>> label = "Approved";
         attribute :>> enumColor = "#0F766E";
@@ -470,7 +420,6 @@ package memo_viewpoints_rendering {
 
     part enumElementReleased : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-ELEM-005"; }
-        attribute :>> name = "EnumElementReleased";
         attribute :>> enumValue = "ElementStatusKind::released";
         attribute :>> label = "Released";
         attribute :>> enumColor = "#0F766E";
@@ -478,7 +427,6 @@ package memo_viewpoints_rendering {
 
     part enumElementDeprecated : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-ELEM-006"; }
-        attribute :>> name = "EnumElementDeprecated";
         attribute :>> enumValue = "ElementStatusKind::deprecated";
         attribute :>> label = "Deprecated";
         attribute :>> enumColor = "#B45309";
@@ -486,7 +434,6 @@ package memo_viewpoints_rendering {
 
     part enumElementRetired : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-ELEM-007"; }
-        attribute :>> name = "EnumElementRetired";
         attribute :>> enumValue = "ElementStatusKind::retired";
         attribute :>> label = "Retired";
         attribute :>> enumColor = "#991B1B";
@@ -494,7 +441,6 @@ package memo_viewpoints_rendering {
 
     part enumCommentOpen : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-CMT-001"; }
-        attribute :>> name = "EnumCommentOpen";
         attribute :>> enumValue = "CommentStatusKind::open";
         attribute :>> label = "Open";
         attribute :>> enumColor = "#2563EB";
@@ -502,7 +448,6 @@ package memo_viewpoints_rendering {
 
     part enumCommentAcknowledged : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-CMT-002"; }
-        attribute :>> name = "EnumCommentAcknowledged";
         attribute :>> enumValue = "CommentStatusKind::acknowledged";
         attribute :>> label = "Acknowledged";
         attribute :>> enumColor = "#2563EB";
@@ -510,7 +455,6 @@ package memo_viewpoints_rendering {
 
     part enumCommentAddressed : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-CMT-003"; }
-        attribute :>> name = "EnumCommentAddressed";
         attribute :>> enumValue = "CommentStatusKind::addressed";
         attribute :>> label = "Addressed";
         attribute :>> enumColor = "#0F766E";
@@ -518,7 +462,6 @@ package memo_viewpoints_rendering {
 
     part enumCommentResolved : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-CMT-004"; }
-        attribute :>> name = "EnumCommentResolved";
         attribute :>> enumValue = "CommentStatusKind::resolved";
         attribute :>> label = "Resolved";
         attribute :>> enumColor = "#0F766E";
@@ -526,7 +469,6 @@ package memo_viewpoints_rendering {
 
     part enumCommentRejected : EnumRendering {
         @MemoIdentity { :>> providedId = "ENUM-CMT-005"; }
-        attribute :>> name = "EnumCommentRejected";
         attribute :>> enumValue = "CommentStatusKind::rejected";
         attribute :>> label = "Rejected";
         attribute :>> enumColor = "#991B1B";

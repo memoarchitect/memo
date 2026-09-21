@@ -37,9 +37,8 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`UseCaseKind`](#usecasekind) | `enum def` | Controlled values for use case: `clinical`, `service`, `manufacturing`, `development`. | — |
-| [`UseCase`](#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. | `MemoUseCase` |
+| [`UseCase`](#usecase) | `use case def` | Specializes the STANDARD library use case as well as MEMO's base. Before this it specialized only `MemoUseCase` and so shadowed `UseCases::UseCase` — same name, same metaclass, none of the semantics — which is why the subject/actor features below had to be re-declared by hand … | `MemoUseCase,` |
 | [`Motivates`](#motivates) | `connection def` | Typed relationship for motivates. | `MemoRelationship` |
-| [`Extends`](#extends) | `connection def` | Typed relationship for extends. | `MemoRelationship` |
 
 ## UseCaseKind
 
@@ -59,15 +58,15 @@ enum def UseCaseKind
 ## UseCase
 
 ```sysml
-use case def UseCase :> MemoUseCase
+use case def UseCase :> MemoUseCase, UseCases::UseCase
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Use case definition specializing `MemoUseCase`. |
+| Description | Specializes the STANDARD library use case as well as MEMO's base. Before this it specialized only `MemoUseCase` and so shadowed `UseCases::UseCase` — same name, same metaclass, none of the semantics — which is why the subject/actor features below had to be re-declared by hand … |
 | Kind | `use case def` |
 | Abstract | No |
-| Specializes | `MemoUseCase` |
+| Specializes | `MemoUseCase,` |
 | Owning package | `memo_architecture_operational_use_cases` |
 
 
@@ -80,21 +79,6 @@ connection def Motivates :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship for motivates. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_architecture_operational_use_cases` |
-
-
-## Extends
-
-```sysml
-connection def Extends :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for extends. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -127,7 +111,13 @@ connection def Extends :> MemoRelationship
             enum development;
         }
 
-        use case def UseCase :> MemoUseCase {
+        // Specializes the STANDARD library use case as well as MEMO's base. Before
+        // this it specialized only `MemoUseCase` and so shadowed `UseCases::UseCase`
+        // — same name, same metaclass, none of the semantics — which is why the
+        // subject/actor features below had to be re-declared by hand instead of
+        // being inherited. The wrapper survives only to carry the display label and
+        // lifecycle status; identity comes from `@MemoIdentity`.
+        use case def UseCase :> MemoUseCase, UseCases::UseCase {
             // Text of this use case's goal; this is not a separate Goal element.
             attribute goalStatement : String;
             attribute trigger : String;
@@ -170,16 +160,6 @@ connection def Extends :> MemoRelationship
         // `include` (R10-S6); write that instead of a connection here. `extends`
         // has 0 hits in the corpus for a use-case `extend` production, so it stays
         // a MEMO construct: a cross-cutting relationship that is always presented.
-        connection def Extends :> MemoRelationship {
-            end extendingUseCase : UseCase :>> source;
-            end extendedUseCase : UseCase :>> target;
-        }
-        abstract connection extendsLinks : Extends[*];
-        metadata def <extends> ExtendsMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = extendsLinks meta SysML::Usage;
-        }
     }
 
     ```

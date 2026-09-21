@@ -13,8 +13,7 @@ package memo_examples_gpca_pump_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part gpcaProjectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-GPCA-001"; }
-        attribute :>> name = "GPCAProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-GPCA-001"; :>> label = "GPCAProjectMethodBinding"; }
         attribute :>> projectName = "GPCA Infusion Pump";
         ref :>> selectedMethodology = gpcaMethodDefinition;
         // The project adds nothing to the methodology's selection.

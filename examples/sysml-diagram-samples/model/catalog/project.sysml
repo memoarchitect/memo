@@ -31,8 +31,7 @@ package memo_examples_sysml_diagram_samples_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-DIAGRAM-SAMPLES-1"; }
-        attribute :>> name = "SysmlDiagramSamplesProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-DIAGRAM-SAMPLES-1"; :>> label = "SysmlDiagramSamplesProjectMethodBinding"; }
         attribute :>> projectName = "Sysml Diagram Samples";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

@@ -14,33 +14,33 @@ package memo_examples_ivd_laboratory_system {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part analyzer : PhysicalAssembly {
-        @MemoIdentity { :>> providedId = "IVD-DEV-001"; } attribute :>> name = "ChemAnalyzer";
+        @MemoIdentity { :>> providedId = "IVD-DEV-001"; :>> label = "ChemAnalyzer"; }
         attribute :>> responsibility = "automate clinical chemistry measurements";
     }
 
     // Specimen path: material flow through fluidic hardware.
     part fluidSampleProbe : FluidicComponent {
-        @MemoIdentity { :>> providedId = "IVD-HW-001"; } attribute :>> name = "SampleProbe";
+        @MemoIdentity { :>> providedId = "IVD-HW-001"; :>> label = "SampleProbe"; }
         attribute :>> fluidPathRole = "aspirates specimen from primary tube";
     }
     part fluidReactionCuvette : FluidicComponent {
-        @MemoIdentity { :>> providedId = "IVD-HW-002"; } attribute :>> name = "ReactionCuvette";
+        @MemoIdentity { :>> providedId = "IVD-HW-002"; :>> label = "ReactionCuvette"; }
         attribute :>> fluidPathRole = "holds specimen-reagent reaction mix";
     }
     part optPhotometer : OpticalComponent {
-        @MemoIdentity { :>> providedId = "IVD-HW-003"; } attribute :>> name = "PhotometerAssembly";
+        @MemoIdentity { :>> providedId = "IVD-HW-003"; :>> label = "PhotometerAssembly"; }
         attribute :>> opticalFunction = "absorbance measurement";
         attribute :>> wavelengthRange = "340-800 nm";
     }
     part exSpecimenFlow : LogicalExchange {
-        @MemoIdentity { :>> providedId = "IVD-EX-001"; } attribute :>> name = "SpecimenTransfer";
+        @MemoIdentity { :>> providedId = "IVD-EX-001"; :>> label = "SpecimenTransfer"; }
         attribute :>> contentKind = FlowContentKind::material;
         attribute :>> direction = DirectionKind::output;
     }
 
     // Result item coded with LOINC.
     item glucoseResult : LogicalExchangeItem {
-        @MemoIdentity { :>> providedId = "IVD-IT-001"; } attribute :>> name = "GlucoseResult";
+        @MemoIdentity { :>> providedId = "IVD-IT-001"; }
         attribute :>> contentKind = FlowContentKind::measurement;
         attribute :>> unit = "mg/dL";
         attribute :>> timestampRequired = true;
@@ -54,7 +54,7 @@ package memo_examples_ivd_laboratory_system {
 
     // Operating activity for the analyzer.
     action actRunPanel : OperativeAction {
-        @MemoIdentity { :>> providedId = "IVD-ACT-001"; } attribute :>> name = "RunChemistryPanel";
+        @MemoIdentity { :>> providedId = "IVD-ACT-001"; :>> label = "RunChemistryPanel"; }
         attribute :>> criticality = CriticalityKind::high;
     }
 }
