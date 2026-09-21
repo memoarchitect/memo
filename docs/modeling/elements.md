@@ -35,6 +35,10 @@ requirement reqOcclusionAlarm : Requirement {
 }
 ```
 
+When to declare a definition of your own rather than a usage — and where it
+belongs — is settled by
+[Definition, usage, and context](../reference/definition-usage-and-context.md).
+
 ## Naming pattern
 
 Use three complementary names:
