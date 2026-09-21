@@ -4,6 +4,10 @@ node_modules/
 .venv/
 venv/
 
+# pdm's pointer at this machine's interpreter — an absolute path, so it is
+# never shareable. pdm.lock and .python-version ARE committed.
+.pdm-python
+
 # Local npm config (e.g. left behind by npm publish)
 .npmrc
 
