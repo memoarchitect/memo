@@ -124,6 +124,35 @@ the same name *under the same owner*, which SysML forbids, SysIDE rejects, and
 `ElementIndex` reports as an `ElementCollision` rather than silently keeping
 one.
 
+### A named relationship is identified the same way
+
+A `flow`, a `connect` or any other named connection usage carries the **same
+qualified id an element of that name would get** — `package::exDose`, or the
+owner chain when it is declared inside an action body. It used to be the bare
+declared name, so two packages that each declared `exDose` produced two
+relationships under one identity and a reference meant for one reached the
+other.
+
+That id is also what a named relationship is **targeted** by. An `allocate`, a
+`satisfy`, a `verify` or a risk-control connection may name a flow, and it
+resolves to the flow:
+
+```sysml
+flow exDose of Data from emit.p to recv.q;
+allocate exDose to linkCanBus;
+satisfy reqDoseAccuracy by exDose;
+```
+
+The declared name stays on the relationship's `shortName`, because that is what
+the source file says and what a writer editing or deleting the declaration
+matches on; the qualified id appears in no file.
+
+A flow is an **edge**, not an element, and it is not in the elements map — so
+nothing that counts parts counts it as one. Two named relationships competing
+for one qualified name are reported as a `relationship-name-collision`: both
+edges stay in the model, because an edge is a fact about its endpoints, but
+only the first answers to the name.
+
 ## 5. A repeated step is two usages of one definition
 
 Never one usage reached twice. Two scenario positions are two coverage targets,
