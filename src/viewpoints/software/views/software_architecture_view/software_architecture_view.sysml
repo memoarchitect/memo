@@ -10,8 +10,7 @@ package memo_viewpoints_software_views_software_architecture_view {
                 view softwareArchitectureView : MemoDiagramView {
                     expose memo_viewpoints_software_views_software_architecture_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-SW-001"; }
-    attribute :>> name = "SoftwareArchitectureView";
+    @MemoIdentity { :>> providedId = "VIEW-SW-001"; :>> label = "SoftwareArchitectureView"; }
     @MemoIdentity { :>> shortDescription = "Software systems, components, and SOUP with their decomposition."; }
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -19,8 +18,7 @@ package memo_viewpoints_software_views_software_architecture_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include software systems, components, and SOUP components with their decomposition.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-SW-001"; }
-        attribute :>> name = "SoftwareArchitectureQuery";
+        @MemoIdentity { :>> providedId = "QRY-SW-001"; :>> label = "SoftwareArchitectureQuery"; }
         attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule");
         attribute :>> includeLayers = ("software_structure");
         attribute :>> rationaleText = "Auto-populate the software architecture view from the software structure layer.";

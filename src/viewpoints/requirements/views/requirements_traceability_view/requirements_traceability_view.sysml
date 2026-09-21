@@ -10,8 +10,7 @@ package memo_viewpoints_requirements_views_requirements_traceability_view {
                 view requirementsTraceabilityView : MemoDiagramView {
                     expose memo_viewpoints_requirements_views_requirements_traceability_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-REQ-001"; }
-    attribute :>> name = "RequirementsTraceabilityView";
+    @MemoIdentity { :>> providedId = "VIEW-REQ-001"; :>> label = "RequirementsTraceabilityView"; }
     @MemoIdentity { :>> shortDescription = "Stakeholder needs traced through system, software, and hardware requirements."; }
     attribute :>> outputKind = (ViewOutputKind::matrix);
     attribute :>> presentationKind = (PresentationKind::traceMatrix);
@@ -19,8 +18,7 @@ package memo_viewpoints_requirements_views_requirements_traceability_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include stakeholder needs and requirements with their derivation chain.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-REQ-001"; }
-        attribute :>> name = "RequirementsTraceabilityQuery";
+        @MemoIdentity { :>> providedId = "QRY-REQ-001"; :>> label = "RequirementsTraceabilityQuery"; }
         attribute :>> includeElementKinds = ("Need", "Requirement");
         attribute :>> includeLayers = ("requirements");
         attribute :>> rationaleText = "Auto-populate requirements traceability from the requirements layer.";

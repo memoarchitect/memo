@@ -16,28 +16,28 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirem
     private import memo_core_common::MemoIdentity;
     requirement needSafeTherapy : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "NEED-1"; } attribute :>> name = "SafeTherapy";
+        @MemoIdentity { :>> providedId = "NEED-1"; :>> label = "SafeTherapy"; }
         attribute :>> statement = "The device shall support safe patient-controlled infusion therapy.";
     }
     requirement needTimelyAlarms : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "NEED-2"; } attribute :>> name = "TimelyAlarms";
+        @MemoIdentity { :>> providedId = "NEED-2"; :>> label = "TimelyAlarms"; }
         attribute :>> statement = "Clinicians shall be notified promptly of any condition that endangers therapy.";
     }
 
     requirement reqDoseLimit : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-1"; } attribute :>> name = "DoseLimitEnforcement";
+        @MemoIdentity { :>> providedId = "REQ-1"; :>> label = "DoseLimitEnforcement"; }
         attribute :>> statement = "The pump shall not deliver more than the prescribed maximum dose in any one-hour window.";
     }
     requirement reqOcclusionAlarm : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-2"; } attribute :>> name = "OcclusionAlarm";
+        @MemoIdentity { :>> providedId = "REQ-2"; :>> label = "OcclusionAlarm"; }
         attribute :>> statement = "The pump shall raise an alarm within two seconds of detecting a downstream occlusion.";
     }
     requirement reqAlarmLoudness : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "REQ-3"; } attribute :>> name = "AlarmLoudness";
+        @MemoIdentity { :>> providedId = "REQ-3"; :>> label = "AlarmLoudness"; }
         attribute :>> statement = "An active alarm shall be audible at 65 dBA at one metre.";
     }
 

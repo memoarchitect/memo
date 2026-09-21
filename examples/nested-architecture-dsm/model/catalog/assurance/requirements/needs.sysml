@@ -14,26 +14,26 @@ package memo_examples_nested_architecture_dsm_assurance_requirements_needs {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     requirement needAccurateTherapy : Need {
-        @MemoIdentity { :>> providedId = "NDS-NEED-001"; } attribute :>> name = "AccurateTherapyDelivery";
+        @MemoIdentity { :>> providedId = "NDS-NEED-001"; :>> label = "AccurateTherapyDelivery"; }
         attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> statement = "Clinicians need the delivered dose to match the prescription closely enough to be clinically safe.";
         attribute :>> priority = "high";
     }
     requirement needProtectionFromHarm : Need {
-        @MemoIdentity { :>> providedId = "NDS-NEED-002"; } attribute :>> name = "ProtectionFromDeliveryFaults";
+        @MemoIdentity { :>> providedId = "NDS-NEED-002"; :>> label = "ProtectionFromDeliveryFaults"; }
         attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> statement = "Patients need delivery to stop before a line fault or air bolus reaches them.";
         attribute :>> priority = "high";
     }
     requirement needUninterruptedTherapy : Need {
-        @MemoIdentity { :>> providedId = "NDS-NEED-003"; } attribute :>> name = "UninterruptedTherapy";
+        @MemoIdentity { :>> providedId = "NDS-NEED-003"; :>> label = "UninterruptedTherapy"; }
         attribute :>> needKind = NeedKind::operational;
         attribute :>> statement = "Wards need therapy to continue through transport and mains interruptions.";
         attribute :>> priority = "medium";
         ref :>> useContext = ctxIntraHospitalTransport;
     }
     requirement needLegibleStatus : Need {
-        @MemoIdentity { :>> providedId = "NDS-NEED-004"; } attribute :>> name = "LegibleTherapyStatus";
+        @MemoIdentity { :>> providedId = "NDS-NEED-004"; :>> label = "LegibleTherapyStatus"; }
         attribute :>> needKind = NeedKind::'stakeholder';
         attribute :>> statement = "Clinicians need to read therapy state and alarms correctly from the bedside.";
         attribute :>> priority = "high";

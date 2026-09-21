@@ -120,7 +120,7 @@ element. Three workflows support that one goal.
 
 ```sysml
 use case ucDeliverPcaTherapy : UseCase {
-    attribute :>> name = "DeliverPatientControlledAnalgesia";
+    @MemoIdentity { :>> label = "DeliverPatientControlledAnalgesia"; }
     attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
     ref :>> primaryUser = actorNurse;
@@ -141,7 +141,7 @@ scenario has a different activity; it is not one shared generic activity.
 
 ```sysml
 action oaRejectBolusDuringLockout : OperationalActivity {
-    attribute :>> name = "RejectBolusDuringLockout";
+    @MemoIdentity { :>> label = "RejectBolusDuringLockout"; }
     action checkLockout; action rejectAndLog;
     first start then checkLockout;
     first checkLockout then rejectAndLog;
@@ -149,7 +149,7 @@ action oaRejectBolusDuringLockout : OperationalActivity {
 }
 
 action osLockoutBolus : MemoScenario {
-    attribute :>> name = "BolusRequestDuringLockout";
+    @MemoIdentity { :>> label = "BolusRequestDuringLockout"; }
     attribute :>> scenarioKind = ScenarioKind::operative;
     attribute :>> variantKind = ScenarioVariantKind::alternate;
     ref :>> parentWorkflow = wfManageActiveTherapy;
@@ -166,7 +166,7 @@ without making the scenarios identical.
 
 ```sysml
 part fcPatientBolus : FunctionalFlow {
-    attribute :>> name = "PatientBolusChain";
+    @MemoIdentity { :>> label = "PatientBolusChain"; }
     ref :>> startFunction = fnAcquireSensors;
     ref :>> endFunction = fnCommandPump;
     attribute :>> endToEndLatencyBudgetMs = "100";

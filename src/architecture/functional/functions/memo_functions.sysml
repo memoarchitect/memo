@@ -84,21 +84,26 @@ package memo_architecture_functional_functions {
     // the transported item; this element exists for the budgets and assurance
     // attributes below.
     //
-    // The reason is MEMO's grammar, NOT the language — the earlier wording here
-    // said "attributes that a flow usage cannot own", and that was a false
-    // claim about SysML v2. The standard's `FlowUsage` is
+    // The reason is MEMO's tooling, NOT the language — and no longer MEMO's
+    // grammar either. The standard's `FlowUsage` is
     // `OccurrenceUsagePrefix 'flow' FlowDeclaration DefinitionBody`
     // (SysML-textual-bnf.kebnf:829), so a conforming flow usage takes a name
     // from its `UsageDeclaration` and owns attributes in its body like any
-    // other usage. MEMO's own production is
-    // `'flow' 'of' itemType 'from' … 'to' … ';'` — no name, no body — so a
-    // MEMO flow can carry neither an `id` nor a latency budget, and nothing
-    // can refer to it. Every MEMO element rests on the identification core in
-    // memo_core_common, and an anonymous attribute-less edge cannot join it.
+    // other usage. MEMO's `FlowConnectionUsage` production now reads
+    // `'flow' name? ('of' itemType)? 'from' … 'to' … ('{' body '}' | ';')`,
+    // and `resolveFlowConnection` keeps both the name and the body — so the
+    // "no name, no body" claim this comment used to make is settled and must
+    // not be re-opened as work.
     //
-    // So this part def is a workaround for a MEMO gap, not a design MEMO is
-    // entitled to. Restoring the two dropped clauses is what would let it
-    // collapse into the flow it stands in for.
+    // What is still missing is one step further on: a flow reaches the model
+    // as a `MemoRelationship`, not as an entry in the elements map. A latency
+    // budget can be written in its body, but nothing can allocate to the flow,
+    // trace risk to it, verify it, or resolve a reference to it, because there
+    // is no element there to target.
+    //
+    // So this part def remains a workaround, and what would retire it is
+    // referenceable flow identity, not more grammar. That is the board's
+    // "Native exchanges" row.
     part def FunctionalExchange specializes MemoPart {
         attribute flowKind : FlowKind;
         attribute latencyBudgetMs : Real;

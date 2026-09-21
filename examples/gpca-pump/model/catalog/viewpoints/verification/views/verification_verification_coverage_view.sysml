@@ -18,8 +18,7 @@ package memo_examples_gpca_pump_viewpoints_verification_views_verification_verif
     view gpcaVerificationCoverageView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_verification_views_verification_verification_coverage_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-VER-101"; }
-        attribute :>> name = "GPCA_VerificationCoverageView";
+        @MemoIdentity { :>> providedId = "VIEW-VER-101"; :>> label = "GPCA_VerificationCoverageView"; }
         @MemoIdentity { :>> shortDescription = "Requirements and risk controls against verification cases, validation cases, and evidence."; }
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
@@ -29,8 +28,7 @@ package memo_examples_gpca_pump_viewpoints_verification_views_verification_verif
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include every requirement and risk control with its verification/validation status and produced evidence.";
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-VER-101"; }
-            attribute :>> name = "GPCA_VerificationCoverageQuery";
+            @MemoIdentity { :>> providedId = "QRY-VER-101"; :>> label = "GPCA_VerificationCoverageQuery"; }
             attribute :>> includeElementKinds = ("Requirement", "RiskControlMeasure", "VerificationCase", "ValidationCase", "MemoEvidence");
             attribute :>> includeRelationshipKinds = ("VerifiedBy", "Validates", "ProducesEvidence");
             attribute :>> includeLayers = ("requirements", "risk", "assurance");

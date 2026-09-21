@@ -18,10 +18,9 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_mode_state_view
     view gpcaModeStateView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_logical_mode_state_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-BHV-001"; }
-        attribute :>> name = "GPCA_ModeStateView";
+        @MemoIdentity { :>> providedId = "VIEW-BHV-001"; :>> label = "GPCA_ModeStateView"; }
         @MemoIdentity { :>> shortDescription = "The CriSys Fig 4.1 mode hierarchy (OFF, ON, IDLE, THERAPY, PAUSED, ACTIVE, BASAL, SQUARE_BOLUS, PATIENT_BOLUS) and all guarded transitions."; }
-        attribute :>> description = "Hierarchical state diagram per CriSys §4.1 Fig 4.1: OFF and ON at top level, IDLE and THERAPY under ON, PAUSED (KVO delivery) and ACTIVE under THERAPY, and BASAL / SQUARE_BOLUS (auto-scheduled) / PATIENT_BOLUS under ACTIVE — with the REQ 4-47 transitions, Inhibited_* macro guards, and same-step-critical markings.";
+        doc /* Hierarchical state diagram per CriSys §4.1 Fig 4.1: OFF and ON at top level, IDLE and THERAPY under ON, PAUSED (KVO delivery) and ACTIVE under THERAPY, and BASAL / SQUARE_BOLUS (auto-scheduled) / PATIENT_BOLUS under ACTIVE — with the REQ 4-47 transitions, Inhibited_* macro guards, and same-step-critical markings. */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::stateDiagram);
         attribute :>> viewKind = DiagramViewKind::statetransition;
@@ -30,8 +29,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_logical_mode_state_view
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include the mode machine, the Fig 4.1 mode tree (Composes edges), transitions, and safety properties.";
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-BHV-101"; }
-            attribute :>> name = "GPCA_ModeStateQuery";
+            @MemoIdentity { :>> providedId = "QRY-BHV-101"; :>> label = "GPCA_ModeStateQuery"; }
             attribute :>> includeElementKinds = ("StateMachine", "MemoState", "BehaviorProperty", "TimingConstraint");
             attribute :>> includeLayers = ("behavior");
             attribute :>> selectionExpression = "product == 'GPCA'";

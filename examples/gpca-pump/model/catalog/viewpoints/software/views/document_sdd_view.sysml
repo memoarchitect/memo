@@ -9,10 +9,9 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
     private import memo_core_common::MemoIdentity;
     view sddView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view::*;
-        @MemoIdentity { :>> providedId = "DOC-004"; }
-        attribute :>> name = "SoftwareDesignDescriptionView";
+        @MemoIdentity { :>> providedId = "DOC-004"; :>> label = "SoftwareDesignDescriptionView"; }
         @MemoIdentity { :>> shortDescription = "IEC 62304 software design description for the GPCA software system."; }
-        attribute :>> description = "Aggregates the software system, its six components with safety classes and scheduling attributes, mode machine and transitions, interfaces, and function allocations for the SDD.";
+        doc /* Aggregates the software system, its six components with safety classes and scheduling attributes, mode machine and transitions, interfaces, and function allocations for the SDD. */
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::SDD;
@@ -20,8 +19,7 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = softwareViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-004"; }
-            attribute :>> name = "sddViewQuery";
+            @MemoIdentity { :>> providedId = "QRY-DOC-004"; :>> label = "sddViewQuery"; }
             attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "MemoState", "Interface", "SystemFunction", "TimingConstraint");
             attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "BindsToInterface", "Realizes", "DependsOnSoup", "Changes");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";

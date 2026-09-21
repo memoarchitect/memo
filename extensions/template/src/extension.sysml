@@ -25,10 +25,9 @@ package memo_extension_template {
     private import memo_core_common::MemoIdentity;
     part extensionMethod : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "EXT-METH-001"; }
-        attribute :>> name = "ExtensionMethod";
         attribute :>> version = "0.1.0";
         attribute :>> domain = "project extension";
-        attribute :>> description = "Adds a project or domain package to the selected MEMO methodology.";
+        doc /* Adds a project or domain package to the selected MEMO methodology. */
         // The base is a typed SysML reference, not a name held in sync by hand.
         ref :>> baseMethodology = mdDefaultDefinition;
         // An extension adds its own module to whatever its base selected;

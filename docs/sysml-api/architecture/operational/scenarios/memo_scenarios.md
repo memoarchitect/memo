@@ -40,7 +40,6 @@
 | --- | --- | --- | --- |
 | [`ScenarioKind`](#scenariokind) | `enum def` | A scenario is a nominal path or an alternate (exception/recovery) path. Defaults to nominal. | — |
 | [`OperativeScenario`](#operativescenario) | `action def` | Operative scenario definition specializing `MemoAction`. | `MemoAction` |
-| [`HasScenario`](#hasscenario) | `connection def` | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. | `MemoRelationship` |
 
 ## ScenarioKind
 
@@ -69,21 +68,6 @@ action def OperativeScenario specializes MemoAction
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
-| Owning package | `memo_architecture_operational_scenarios` |
-
-
-## HasScenario
-
-```sysml
-connection def HasScenario :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_operational_scenarios` |
 
 
@@ -136,29 +120,18 @@ connection def HasScenario :> MemoRelationship
             attribute assumptionSummary : String;
             attribute guaranteeSummary : String;
             attribute securityObjective : String;
-            attribute abuseCaseReference : String;
+            ref abuseCase : OperativeScenario[0..1];
             attribute defaultCategory : ThreatCategoryKind[0..1];
             // verification scenario
             attribute verificationEnvironment : String;
             attribute stimulusSummary : String;
             // hazard-related use scenario (IEC 62366-1 3.9)
-            attribute hazardReference : String;
             attribute selectionRationale : String;
         }
 
         // A workflow is composed of one or more scenarios (nominal + alternate
         // paths). ScenarioOccurrence/Executes were removed: an actual execution is
         // a native SysML *usage* of the scenario, not a separate def + relation.
-        connection def HasScenario :> MemoRelationship {
-            end owningWorkflow : OperationalWorkflow :>> source;
-            end pathScenario : OperativeScenario :>> target;
-        }
-        abstract connection hasScenarioLinks : HasScenario[*];
-        metadata def <hasScenario> HasScenarioMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = hasScenarioLinks meta SysML::Usage;
-        }
     }
 
     ```

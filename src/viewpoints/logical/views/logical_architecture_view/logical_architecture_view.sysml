@@ -10,8 +10,7 @@ package memo_viewpoints_logical_views_logical_architecture_view {
                 view logicalArchitectureView : MemoDiagramView {
                     expose memo_viewpoints_logical_views_logical_architecture_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-LOG-001"; }
-    attribute :>> name = "LogicalArchitectureView";
+    @MemoIdentity { :>> providedId = "VIEW-LOG-001"; :>> label = "LogicalArchitectureView"; }
     @MemoIdentity { :>> shortDescription = "Logical components and their interfaces."; }
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::blockDiagram);
@@ -19,8 +18,7 @@ package memo_viewpoints_logical_views_logical_architecture_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include logical components and the interfaces that connect them.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-LOG-001"; }
-        attribute :>> name = "LogicalArchitectureQuery";
+        @MemoIdentity { :>> providedId = "QRY-LOG-001"; :>> label = "LogicalArchitectureQuery"; }
         attribute :>> includeElementKinds = ("LogicalComponent", "Interface");
         attribute :>> includeLayers = ("logical_structure", "interfaces");
         attribute :>> rationaleText = "Auto-populate the logical architecture view from the logical structure and interfaces layers.";

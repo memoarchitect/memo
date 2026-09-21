@@ -18,10 +18,9 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
     view gpcaActionFlowView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-BHV-003"; }
-        attribute :>> name = "GPCA_InfusionDeliveryActionFlowView";
+        @MemoIdentity { :>> providedId = "VIEW-BHV-003"; :>> label = "GPCA_InfusionDeliveryActionFlowView"; }
         @MemoIdentity { :>> shortDescription = "The 20 ms execution-step pipeline from sensor acquisition through alarm evaluation and dose limiting to pump actuation and event logging."; }
-        attribute :>> description = "Action flow over the infusionDeliveryFlow composite action: typed action steps with in/out parameters, item flows carrying the DD/CD exchange items, succession ordering from start to done, and swimlane allocation onto the logical architecture (sensors, alarm, infusion manager, pump motor, logging).";
+        doc /* Action flow over the infusionDeliveryFlow composite action: typed action steps with in/out parameters, item flows carrying the DD/CD exchange items, succession ordering from start to done, and swimlane allocation onto the logical architecture (sensors, alarm, infusion manager, pump motor, logging). */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);
         attribute :>> viewKind = DiagramViewKind::actionflow;
@@ -30,8 +29,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include the nested action usages of the infusion delivery flow with their flows and successions.";
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-BHV-103"; }
-            attribute :>> name = "GPCA_ActionFlowQuery";
+            @MemoIdentity { :>> providedId = "QRY-BHV-103"; :>> label = "GPCA_ActionFlowQuery"; }
             attribute :>> includeElementKinds = ("MemoAction");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the action flow view from the behavior layer's action usages.";

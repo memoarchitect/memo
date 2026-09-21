@@ -29,16 +29,17 @@
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_assurance_requirements::*` |
+| private | `memo_architecture_operational_scenarios::*` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
+| [`ReasonablyForeseeableMisuse`](#reasonablyforeseeablemisuse) | `part def` | ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards, scenarios, requirements, and DHF records can trace to the foreseeable misuse that motivated them.… | `MemoPart` |
 | [`Risk`](#risk) | `part def` | Risk definition specializing `RiskDriver`. | `RiskDriver` |
 | [`ResidualRisk`](#residualrisk) | `part def` | Residual risk definition specializing `Risk`. | `Risk` |
 | [`RiskMatrix`](#riskmatrix) | `part def` | Risk matrix definition specializing `MemoPart`. | `MemoPart` |
-| [`DesignControlRiskRow`](#designcontrolriskrow) | `part def` | Design control risk row definition specializing `Risk`. | `Risk` |
-| [`SafetyRelatedCharacteristic`](#safetyrelatedcharacteristic) | `part def` | A device characteristic whose implementation, failure, or misuse can affect safety. This is the modelable output of ISO 14971 §5.3. | `MemoPart` |
+| [`SafetyRelatedCharacteristic`](#safetyrelatedcharacteristic) | `part def` | Safety related characteristic definition specializing `MemoPart`. | `MemoPart` |
 | [`RiskItem`](#riskitem) | `item def` | Risk item definition specializing `MemoItem`. | `MemoItem` |
 | [`Hazard`](#hazard) | `item def` | Hazard definition specializing `RiskItem`. | `RiskItem` |
 | [`SequenceOfEvents`](#sequenceofevents) | `item def` | Sequence of events definition specializing `RiskItem`. | `RiskItem` |
@@ -49,9 +50,26 @@
 | [`Benefit`](#benefit) | `part def` | Benefit definition specializing `MemoPart`. | `MemoPart` |
 | [`OverallResidualRiskEvaluation`](#overallresidualriskevaluation) | `part def` | Overall residual risk evaluation definition specializing `MemoPart`. | `MemoPart` |
 | [`TracesRisk`](#tracesrisk) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | `MemoRelationship` |
+| [`LeadsToHarm`](#leadstoharm) | `connection def` | The final ISO 14971 chain edge. P2 is the conditional probability that the hazardous situation results in the harm. | `MemoRelationship` |
+| [`HazardRelatedScenario`](#hazardrelatedscenario) | `connection def` | Typed relationship for hazard related scenario. | `MemoRelationship` |
 | [`AssessedAgainst`](#assessedagainst) | `connection def` | Typed relationship for assessed against. | `MemoRelationship` |
 | [`MitigationKind`](#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | — |
 | [`Mitigates`](#mitigates) | `connection def` | Typed relationship for mitigates. | `MemoRelationship` |
+
+## ReasonablyForeseeableMisuse
+
+```sysml
+part def ReasonablyForeseeableMisuse specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards, scenarios, requirements, and DHF records can trace to the foreseeable misuse that motivated them.… |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_assurance_safety_risk` |
+
 
 ## Risk
 
@@ -98,21 +116,6 @@ part def RiskMatrix specializes MemoPart
 | Owning package | `memo_assurance_safety_risk` |
 
 
-## DesignControlRiskRow
-
-```sysml
-part def DesignControlRiskRow specializes Risk
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Design control risk row definition specializing `Risk`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `Risk` |
-| Owning package | `memo_assurance_safety_risk` |
-
-
 ## SafetyRelatedCharacteristic
 
 ```sysml
@@ -121,7 +124,7 @@ part def SafetyRelatedCharacteristic specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | A device characteristic whose implementation, failure, or misuse can affect safety. This is the modelable output of ISO 14971 §5.3. |
+| Description | Safety related characteristic definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -278,6 +281,36 @@ connection def TracesRisk :> MemoRelationship
 | Owning package | `memo_assurance_safety_risk` |
 
 
+## LeadsToHarm
+
+```sysml
+connection def LeadsToHarm :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The final ISO 14971 chain edge. P2 is the conditional probability that the hazardous situation results in the harm. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
+## HazardRelatedScenario
+
+```sysml
+connection def HazardRelatedScenario :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for hazard related scenario. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
 ## AssessedAgainst
 
 ```sysml
@@ -336,6 +369,21 @@ connection def Mitigates :> MemoRelationship
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_assurance_requirements::*;
+        // For HazardRelatedScenario below. Assurance may depend on architecture;
+        // the reverse is what the string on the scenario was avoiding.
+        private import memo_architecture_operational_scenarios::*;
+
+        // ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards,
+        // scenarios, requirements, and DHF records can trace to the foreseeable
+        // misuse that motivated them. Its counterpart, IntendedUse, is now the
+        // operational-world root (memo_architecture_operational_structure::IntendedUse,
+        // a MemoMission).
+        part def ReasonablyForeseeableMisuse specializes MemoPart {
+            attribute misuseContext : String;
+            attribute foreseeableBasis : String;
+            attribute affectedUseContext : String;
+        }
+
         part def Risk specializes RiskDriver {
             attribute probabilityEstimate : ProbabilityKind;
             attribute severityEstimate : SeverityKind;
@@ -354,22 +402,10 @@ connection def Mitigates :> MemoRelationship
             attribute riskLevelMapping : String;
             attribute acceptabilityThresholds : String;
         }
-        part def DesignControlRiskRow specializes Risk {
-            attribute rowTitle : String;
-            attribute hazardAnalysis : String;
-            attribute hazardCategory : String;
-            attribute hazardSubcategory : String;
-            attribute causeSequenceOfEventsFailure : String;
-            attribute harmText : String;
-            attribute probabilityBeforeRaw : String;
-            attribute severityBeforeRaw : String;
-            attribute riskBeforeMeasureRaw : String;
-            attribute probabilityAfterRaw : String;
-            attribute severityAfterRaw : String;
-            attribute riskAfterMitigationRaw : String;
-            attribute cannotReduceFurther : Boolean;
-            attribute linkSummary : String;
-        }
+        // `DesignControlRiskRow` was a denormalized spreadsheet transcription.
+        // Risk rows now decompose into the ISO 14971 chain below: Risk owns its
+        // Hazard, SequenceOfEvents, HazardousSituation, and Harm items, linked by
+        // TracesRisk / LeadsToHarm, with ResidualRisk after mitigation.
         // A device characteristic whose implementation, failure, or misuse can
         // affect safety. This is the modelable output of ISO 14971 §5.3.
         part def SafetyRelatedCharacteristic specializes MemoPart {
@@ -417,6 +453,8 @@ connection def Mitigates :> MemoRelationship
         item def HazardousSituation specializes RiskItem {
             attribute exposedPersons : String;
             attribute operatingCondition : String;
+            // ISO 14971 P1: probability that the hazardous situation occurs.
+            attribute probabilityOfOccurrence : ProbabilityKind;
         }
         item def Harm specializes RiskItem {
             attribute clinicalImpact : String;
@@ -452,6 +490,36 @@ connection def Mitigates :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = tracesRiskLinks meta SysML::Usage;
+        }
+        // The final ISO 14971 chain edge. P2 is the conditional probability that
+        // the hazardous situation results in the harm.
+        connection def LeadsToHarm :> MemoRelationship {
+            attribute conditionalProbability : ProbabilityKind;
+            end hazardousSituation : HazardousSituation :>> source;
+            end resultingHarm : Harm :>> target;
+        }
+        abstract connection leadsToHarmLinks : LeadsToHarm[*];
+        metadata def <leadsToHarm> LeadsToHarmMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = leadsToHarmLinks meta SysML::Usage;
+        }
+        // IEC 62366-1 3.9's hazard-related use scenario: the scenario a hazard can
+        // arise in. It is declared HERE rather than as a `hazardReference` string
+        // on the scenario, which is what stood in for it: a string names nothing a
+        // consumer can follow, and the layering is why it was written that way —
+        // assurance may depend on architecture, and the scenario package cannot
+        // see `Hazard`. On this side both ends are visible and the dependency runs
+        // the direction it already runs.
+        connection def HazardRelatedScenario :> MemoRelationship {
+            end hazard : RiskItem :>> source;
+            end scenario : OperativeScenario :>> target;
+        }
+        abstract connection hazardRelatedScenarioLinks : HazardRelatedScenario[*];
+        metadata def <hazardRelatedScenario> HazardRelatedScenarioMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = hazardRelatedScenarioLinks meta SysML::Usage;
         }
         connection def AssessedAgainst :> MemoRelationship {
             end risk : Risk :>> source;

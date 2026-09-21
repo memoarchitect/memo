@@ -26,8 +26,8 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
     action def ProcessInput specializes SystemFunction { in item validated : EnergyToken; out item result : MaterialBatch; }
     action def RecordResult specializes SystemFunction { in item result : MaterialBatch; }
 
-    part laneA : LogicalComponent { attribute :>> name = "Lane A"; }
-    part laneB : LogicalComponent { attribute :>> name = "Lane B"; }
+    part laneA : LogicalComponent {@MemoIdentity { :>> label = "Lane A"; } }
+    part laneB : LogicalComponent {@MemoIdentity { :>> label = "Lane B"; } }
 
     action sampleActionFlow : SystemFunction {
         action receive : ReceiveInput;

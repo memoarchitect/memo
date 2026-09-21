@@ -10,8 +10,7 @@ package memo_viewpoints_operational_views_use_case_view {
                 view useCaseView : MemoDiagramView {
                     expose memo_viewpoints_operational_views_use_case_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-OPS-001"; }
-    attribute :>> name = "UseCaseView";
+    @MemoIdentity { :>> providedId = "VIEW-OPS-001"; :>> label = "UseCaseView"; }
     @MemoIdentity { :>> shortDescription = "Actors connected to the operational scenarios and capabilities they invoke."; }
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::custom);
@@ -19,8 +18,7 @@ package memo_viewpoints_operational_views_use_case_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include actors, use contexts, and the operational scenarios they participate in.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-OPS-001"; }
-        attribute :>> name = "UseCaseQuery";
+        @MemoIdentity { :>> providedId = "QRY-OPS-001"; :>> label = "UseCaseQuery"; }
         attribute :>> includeElementKinds = ("OperationalParticipant", "UseContext", "OperativeScenario");
         attribute :>> includeLayers = ("context", "operational");
         attribute :>> rationaleText = "Auto-populate the use case view from the context and operational layers.";

@@ -36,22 +36,53 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`VerificationCase`](#verificationcase) | `verification def` | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. `status` is NOT redeclared here.… | `MemoVerificationCase` |
+| [`TestStep`](#teststep) | `action def` | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. `status` is NOT redeclared here.… | `MemoAction` |
+| [`VerificationCase`](#verificationcase) | `verification def` | Verification case definition specializing `MemoVerificationCase,`. | `MemoVerificationCase,` |
+| [`PerformsStep`](#performsstep) | `connection def` | Typed relationship for performs step. | `MemoRelationship` |
 | [`ValidationCase`](#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. | `MemoVerificationCase` |
-| [`ExecutesScenario`](#executesscenario) | `connection def` | Typed relationship for executes scenario. | `MemoRelationship` |
 
-## VerificationCase
+## TestStep
 
 ```sysml
-verification def VerificationCase :> MemoVerificationCase
+action def TestStep specializes MemoAction
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. `status` is NOT redeclared here.… |
+| Kind | `action def` |
+| Abstract | No |
+| Specializes | `MemoAction` |
+| Owning package | `memo_assurance_verification_validation` |
+
+
+## VerificationCase
+
+```sysml
+verification def VerificationCase :> MemoVerificationCase, VerificationCases::VerificationCase
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Verification case definition specializing `MemoVerificationCase,`. |
 | Kind | `verification def` |
 | Abstract | No |
-| Specializes | `MemoVerificationCase` |
+| Specializes | `MemoVerificationCase,` |
+| Owning package | `memo_assurance_verification_validation` |
+
+
+## PerformsStep
+
+```sysml
+connection def PerformsStep :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for performs step. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
 | Owning package | `memo_assurance_verification_validation` |
 
 
@@ -67,21 +98,6 @@ verification def ValidationCase :> MemoVerificationCase
 | Kind | `verification def` |
 | Abstract | No |
 | Specializes | `MemoVerificationCase` |
-| Owning package | `memo_assurance_verification_validation` |
-
-
-## ExecutesScenario
-
-```sysml
-connection def ExecutesScenario :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship for executes scenario. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_assurance_verification_validation` |
 
 
@@ -111,9 +127,29 @@ connection def ExecutesScenario :> MemoRelationship
         // EXECUTION state, not an editorial one; execution state belongs in an
         // attribute of its own (see RiskControlMeasure.verificationStatus), not in
         // a second spelling of `status`.
-        verification def VerificationCase :> MemoVerificationCase {
-            attribute methodKind : VerificationMethodKind;
+        // Specializes the standard library verification case as well as MEMO's
+        // base, rather than shadowing it — see the note on UseCase.
+        // Reusable test action, distinct from a case's pass/fail criteria.
+        action def TestStep specializes MemoAction {
+            attribute stepAction : String;
+            attribute expectedResult : String;
+            attribute referencedItem : String;
+        }
+        verification def VerificationCase :> MemoVerificationCase, VerificationCases::VerificationCase {
+            attribute methodKind : MemoVerificationMethodKind;
             attribute acceptanceCriteria : String;
+        }
+        // Orders a reusable TestStep within a verification or validation case.
+        connection def PerformsStep :> MemoRelationship {
+            attribute sequence : Integer;
+            end verificationCase : MemoVerificationCase :>> source;
+            end testStep : TestStep :>> target;
+        }
+        abstract connection performsStepLinks : PerformsStep[*];
+        metadata def <performsStep> PerformsStepMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = performsStepLinks meta SysML::Usage;
         }
         verification def ValidationCase :> MemoVerificationCase {
             attribute validationMethod : ValidationMethodKind;
@@ -124,16 +160,9 @@ connection def ExecutesScenario :> MemoRelationship
         // Operational validation confirms the user's goal is achieved in the
         // use environment (§5): ValidationCase validates a UseCase.
         // Safety-critical functions must trace to verification (rules/coverage).
-        connection def ExecutesScenario :> MemoRelationship {
-            end verificationCase : VerificationCase :>> source;
-            end scenario : OperativeScenario :>> target;
-        }
-        abstract connection executesScenarioLinks : ExecutesScenario[*];
-        metadata def <executesScenario> ExecutesScenarioMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = executesScenarioLinks meta SysML::Usage;
-        }
+        // `ExecutesScenario` is native `perform` (2026-08-18): OperativeScenario
+        // is an `action def`, so write `perform <scenario>;` inside the
+        // verification case, as `InvolvesFunction` already does.
     }
 
     ```

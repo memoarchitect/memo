@@ -22,7 +22,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
 
     private import memo_core_common::MemoIdentity;
     verification vcRateChange : VerificationCase {
-        @MemoIdentity { :>> providedId = "UIR-VER-001"; } attribute :>> name = "VerifyRateChangeConfirmation";
+        @MemoIdentity { :>> providedId = "UIR-VER-001"; :>> label = "VerifyRateChangeConfirmation"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "A rate change cannot reach the controller until the displayed value is explicitly confirmed.";
         attribute :>> status = ElementStatusKind::approved;
@@ -32,14 +32,14 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
 
     part evRateChange : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
-        @MemoIdentity { :>> providedId = "UIR-EV-001"; } attribute :>> name = "RateChangeConfirmationTestRecord";
+        @MemoIdentity { :>> providedId = "UIR-EV-001"; :>> label = "RateChangeConfirmationTestRecord"; }
         attribute :>> version = "planned";
         attribute :>> evidenceType = "test record";
         attribute :>> integrityStatus = "planned";
     }
 
     verification vcDrugLibrarySelection : VerificationCase {
-        @MemoIdentity { :>> providedId = "VER-002"; } attribute :>> name = "VerifyCareAreaDrugLibrarySelection";
+        @MemoIdentity { :>> providedId = "VER-002"; :>> label = "VerifyCareAreaDrugLibrarySelection"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Only enabled care-area drug and concentration records are selectable, and every selection supplies the matching dosing limits.";
         attribute :>> status = ElementStatusKind::approved;
@@ -49,14 +49,14 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
 
     part evDrugLibrarySelection : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
-        @MemoIdentity { :>> providedId = "EVD-002"; } attribute :>> name = "DrugLibrarySelectionTestRecord";
+        @MemoIdentity { :>> providedId = "EVD-002"; :>> label = "DrugLibrarySelectionTestRecord"; }
         attribute :>> version = "planned";
         attribute :>> evidenceType = "test record";
         attribute :>> integrityStatus = "planned";
     }
 
     verification vcInfusionStatusContent : VerificationCase {
-        @MemoIdentity { :>> providedId = "VER-003"; } attribute :>> name = "VerifyInfusionStatusContentAndFreshness";
+        @MemoIdentity { :>> providedId = "VER-003"; :>> label = "VerifyInfusionStatusContentAndFreshness"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Time, battery, active rate, drug identity, and total delivered volume satisfy their content, accuracy, and latency criteria under normal and threshold-transition conditions.";
         attribute :>> status = ElementStatusKind::approved;
@@ -67,7 +67,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
 
     part evInfusionStatusContent : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
-        @MemoIdentity { :>> providedId = "EVD-003"; } attribute :>> name = "InfusionStatusDisplayTestRecord";
+        @MemoIdentity { :>> providedId = "EVD-003"; :>> label = "InfusionStatusDisplayTestRecord"; }
         attribute :>> version = "planned";
         attribute :>> evidenceType = "test record";
         attribute :>> integrityStatus = "planned";

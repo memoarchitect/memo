@@ -26,6 +26,9 @@
 | private | `ScalarValues::*` |
 | private | `memo_viewpoints_definitions::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_viewpoints_stakeholders_concerns::*` |
+| private | `memo_core_common::*` |
+| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -44,23 +47,23 @@
 
         private import memo_viewpoints_definitions::*;
         private import memo_core_enumerations::*;
+        private import memo_viewpoints_stakeholders_concerns::*;
 
+        private import memo_core_common::*;
+        private import memo_core_common::MemoIdentity;
         viewpoint usabilityViewpoint : MemoViewpoint {
-            attribute :>> id = "VP-USE";
-            attribute :>> name = "UsabilityViewpoint";
-            attribute :>> shortDescription = "Shows use contexts, actors, use errors, and usability requirements.";
-            attribute :>> description = "Default viewpoint derived from the context and requirements layers for IEC 62366-1 usability engineering — actors, use contexts, identified use errors, and requirements tagged with the usability concern. Reuses existing context-layer elements (Actor, UseContext, UseError) rather than a separate usability layer.";
+            @MemoIdentity { :>> providedId = "VP-USE"; :>> label = "UsabilityViewpoint"; }
+            @MemoIdentity { :>> shortDescription = "Shows use contexts, actors, use errors, and usability requirements."; }
+            doc /* Default viewpoint derived from the context and requirements layers for IEC 62366-1 usability engineering — actors, use contexts, identified use errors, and requirements tagged with the usability concern. Reuses existing context-layer elements (Actor, UseContext, UseError) rather than a separate usability layer. */
             attribute :>> purpose = "Communicate use-related hazards and usability requirements for the device.";
-            attribute :>> audience = (AudienceKind::usabilityEngineer, AudienceKind::safetyEngineer);
+            ref :>> stakeholders = (usabilityEngineer, safetyEngineer);
             attribute :>> stage = WorkflowStageKind::requirements;
             attribute :>> abstractionLevel = "usability";
             attribute :>> outputKind = (ViewOutputKind::documentSection);
             attribute :>> presentationKind = (PresentationKind::narrativeSection);
-            attribute :>> concernKinds = (ConcernKind::usability, ConcernKind::safety);
-            attribute :>> includedLayers = ("context", "requirements");
+            ref :>> framedConcerns = (usabilityConcern, safetyConcern);
             attribute :>> explorerLane = "assurance";
             attribute :>> explorerOrder = 4;
-            attribute :>> allowedElementKinds = ("Actor", "UseContext", "UseError", "Requirement");
             attribute :>> userExtensible = true;
         }
     }

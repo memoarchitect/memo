@@ -35,8 +35,7 @@ package memo_examples_gpca_pump_gpca_standards {
     // modelled as the artifacts they are rather than as a second document type.
 
     part docSrs : MarkdownDocumentSource {
-        @MemoIdentity { :>> providedId = "DOC-SRS"; }
-        attribute :>> name = "SoftwareRequirementsSpecification";
+        @MemoIdentity { :>> providedId = "DOC-SRS"; :>> label = "SoftwareRequirementsSpecification"; }
         attribute :>> version = "1.0";
         attribute :>> artifactKind = ArtifactKind::requirementSpecification;
         attribute :>> owner = "Software Lead";
@@ -47,8 +46,7 @@ package memo_examples_gpca_pump_gpca_standards {
         attribute :>> generated = true;
     }
     part docSad : MarkdownDocumentSource {
-        @MemoIdentity { :>> providedId = "DOC-SAD"; }
-        attribute :>> name = "SoftwareArchitectureDescription";
+        @MemoIdentity { :>> providedId = "DOC-SAD"; :>> label = "SoftwareArchitectureDescription"; }
         attribute :>> version = "1.0";
         attribute :>> artifactKind = ArtifactKind::architectureDescription;
         attribute :>> owner = "Systems Architect";
@@ -59,8 +57,7 @@ package memo_examples_gpca_pump_gpca_standards {
         attribute :>> generated = true;
     }
     part docHrs : MarkdownDocumentSource {
-        @MemoIdentity { :>> providedId = "DOC-HRS"; }
-        attribute :>> name = "HardwareRequirementsSpecification";
+        @MemoIdentity { :>> providedId = "DOC-HRS"; :>> label = "HardwareRequirementsSpecification"; }
         attribute :>> version = "1.0";
         attribute :>> artifactKind = ArtifactKind::requirementSpecification;
         attribute :>> owner = "Hardware Lead";
@@ -71,8 +68,7 @@ package memo_examples_gpca_pump_gpca_standards {
         attribute :>> generated = true;
     }
     part docRmf : MarkdownDocumentSource {
-        @MemoIdentity { :>> providedId = "DOC-RMF"; }
-        attribute :>> name = "RiskManagementFile";
+        @MemoIdentity { :>> providedId = "DOC-RMF"; :>> label = "RiskManagementFile"; }
         attribute :>> version = "1.0";
         attribute :>> artifactKind = ArtifactKind::riskRecord;
         attribute :>> owner = "Risk Manager";

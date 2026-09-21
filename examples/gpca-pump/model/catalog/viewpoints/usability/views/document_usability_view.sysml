@@ -12,17 +12,15 @@ package memo_examples_gpca_pump_viewpoints_usability_views_document_usability_vi
     view usabilityView : MemoUsabilityEngineeringView {
         expose memo_examples_gpca_pump_viewpoints_usability_views_document_usability_view::*;
         expose evidenceUsability;
-        @MemoIdentity { :>> providedId = "DOC-008"; }
-        attribute :>> name = "UsabilityEngineeringFileView";
+        @MemoIdentity { :>> providedId = "DOC-008"; :>> label = "UsabilityEngineeringFileView"; }
         @MemoIdentity { :>> shortDescription = "IEC 62366-1 usability engineering file content for GPCA."; }
-        attribute :>> description = "Aggregates intended use, use contexts, actors, foreseeable use errors, related risk chains, usability requirements, and the summative usability validation case.";
+        doc /* Aggregates intended use, use contexts, actors, foreseeable use errors, related risk chains, usability requirements, and the summative usability validation case. */
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = usabilityViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-002"; }
-            attribute :>> name = "usabilityViewQuery";
+            @MemoIdentity { :>> providedId = "QRY-DOC-002"; :>> label = "usabilityViewQuery"; }
             attribute :>> includeElementKinds = ("UseError", "UseContext", "OperationalParticipant", "ValidationCase", "OperativeScenario", "IntendedUse", "ReasonablyForeseeableMisuse");
             attribute :>> includeRelationshipKinds = ("TestedByUsability", "RealizedByScenario", "connect");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";

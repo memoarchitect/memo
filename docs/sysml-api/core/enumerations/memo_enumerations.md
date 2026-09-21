@@ -29,6 +29,8 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
+| [`LegendSourceKind`](#legendsourcekind) | `enum def` | Where a legend gets the value it colours by, when that value is not stored on the element at all but derived from the model. | — |
+| [`LegendScopeKind`](#legendscopekind) | `enum def` | What a legend colours. The values are SysML's own usage keywords, so a renderer matches an element's construct directly rather than translating a private vocabulary into one. | — |
 | [`ConcernKind`](#concernkind) | `enum def` | Controlled values for concern: `safety`, `usability`, `cybersecurity`, `performance`, `interoperability`, `reliability`, `privacy`, `regulatory`, `clinical`. | — |
 | [`RequirementSourceKind`](#requirementsourcekind) | `enum def` | Controlled values for requirement source: `stakeholderNeed`, `risk`, `designDecision`, `changeRequest`, `sourceDocument`, `extension`. | — |
 | [`NotificationPriorityKind`](#notificationprioritykind) | `enum def` | Notification/alarm priority as used by source requirement documents (e.g. CriSys GPCA REQ 59 action table: High/Med/Low). | — |
@@ -43,13 +45,15 @@
 | [`SafetyClassKind`](#safetyclasskind) | `enum def` | Controlled values for safety class: `none`, `A`, `B`, `C`. | — |
 | [`ComplexityKind`](#complexitykind) | `enum def` | Controlled values for complexity: `low`, `medium`, `high`, `complex`. | — |
 | [`LifecycleStateKind`](#lifecyclestatekind) | `enum def` | Controlled values for lifecycle state: `concept`, `development`, `released`, `maintenance`, `obsolete`. | — |
-| [`VerificationMethodKind`](#verificationmethodkind) | `enum def` | Controlled values for verification method: `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking`. | — |
+| [`MemoVerificationMethodKind`](#memoverificationmethodkind) | `enum def` | Controlled values for memo verification method: `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking`. | — |
 | [`RegulatoryRegimeKind`](#regulatoryregimekind) | `enum def` | The submission regime a project targets, and the regimes a standard has standing in. This is the axis that decides which clauses a project is required to claim: `required(project)` is the clauses of every standard whose `appliesToRegime` intersects the regimes the project's Pr… | — |
 | [`ArtifactKind`](#artifactkind) | `enum def` | Controlled values for artifact: `plan`, `requirementSpecification`, `architectureDescription`, `softwareDesignDescription`, `riskRecord`, `traceMatrix`, `testProtocol`, `testReport`, `evidenceRecord`, `cybersecurityAssessment`, `threatModel`, `usabilityEngineeringReport`, `clinicalSafetyReport`, `failureModeEffectsAnalysis`, `soupList`, `designInputPlan`, `designOutputPlan`, `softwareDevelopmentPlan`, `labelingSpecification`, `designHistoryFileIndex`, `designChangeLog`. | — |
 | [`RiskControlKind`](#riskcontrolkind) | `enum def` | Controlled values for risk control: `inherentSafeDesign`, `protectiveMeasure`, `informationForSafety`, `alarm`, `interlock`, `monitoring`, `plausibilityCheck`. | — |
 | [`HazardTypeKind`](#hazardtypekind) | `enum def` | Controlled values for hazard type: `drugDeliveryError`, `energyExposure`, `informationError`, `mechanicalFailure`, `biologicalContamination`, `softwareAnomaly`, `useError`, `environmentalHazard`. | — |
 | [`CauseSourceKind`](#causesourcekind) | `enum def` | Cause-source categories for hazard causal trees. Mirrors the cause-source tables of the FDA GIIP hazard taxonomy (Zhang et al. 2010, Tables 2-9) and the section headings of the GIP Hazard Analysis v1.0 (Arney et al. 2009, section 2.4.1-2.4.8). | — |
-| [`DiagramViewKind`](#diagramviewkind) | `enum def` | The eight standard SysML v2 view kinds (spec taxonomy). Every diagram view resolves to exactly one of these (Epic KK). | — |
+| [`PortDisplayKind`](#portdisplaykind) | `enum def` | Controlled values for port display: `everything`, `ports`, `hidden`. | — |
+| [`ConnectionDisplayKind`](#connectiondisplaykind) | `enum def` | Controlled values for connection display: `summary`, `everything`, `hidden`. | — |
+| [`DiagramViewKind`](#diagramviewkind) | `enum def` | Controlled values for diagram view: `general`, `interconnection`, `actionflow`, `statetransition`, `sequence`, `grid`, `browser`, `geometry`. | — |
 | [`DocumentViewKind`](#documentviewkind) | `enum def` | Controlled values for document view: `DHF`, `SDD`, `RMF`, `VV`, `architectureDescription`, `cybersecurityAssessment`, `threatModel`, `clinical`, `usability`. | — |
 | [`SchedulingPolicyKind`](#schedulingpolicykind) | `enum def` | Controlled values for scheduling policy: `nonRealTime`, `roundRobin`, `fixedPriorityPreemptive`, `rateMonotonic`, `deadlineMonotonic`, `EDF`. | — |
 | [`BehaviorPropertyKind`](#behaviorpropertykind) | `enum def` | Controlled values for behavior property: `stateInvariant`, `transitionRule`, `temporalProperty`, `safetyProperty`, `livenessProperty`, `assumption`, `guarantee`. | — |
@@ -63,7 +67,6 @@
 | [`RuleDispositionKind`](#ruledispositionkind) | `enum def` | Controlled values for rule disposition: `enabled`, `disabled`, `replaced`. | — |
 | [`ScopeModeKind`](#scopemodekind) | `enum def` | Whether a methodology's inclusion lists are the whole selection or a deliberate subset. An empty list under `explicit` selects nothing; it never means "everything". `allAvailable` is the only way to say "all", and it is always deliberate.… | — |
 | [`WorkflowStageKind`](#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`. | — |
-| [`AudienceKind`](#audiencekind) | `enum def` | Controlled values for audience: `systemArchitect`, `softwareArchitect`, `hardwareEngineer`, `safetyEngineer`, `verificationEngineer`, `regulatoryEngineer`, `projectLead`, `securityEngineer`, `privacyEngineer`, `clinicalEngineer`, `usabilityEngineer`. | — |
 | [`ThreatCategoryKind`](#threatcategorykind) | `enum def` | Controlled values for threat category: `spoofing`, `tampering`, `repudiation`, `informationDisclosure`, `denialOfService`, `elevationOfPrivilege`, `privacyLoss`, `supplyChain`. | — |
 | [`CyberControlKind`](#cybercontrolkind) | `enum def` | Controlled values for cyber control: `prevent`, `detect`, `respond`, `recover`, `hardening`, `monitoring`, `authentication`, `authorization`, `encryption`, `integrityProtection`, `audit`, `updateMechanism`. | — |
 | [`AssetKind`](#assetkind) | `enum def` | Controlled values for asset: `data`, `credential`, `configuration`, `software`, `hardware`, `networkConnection`, `auditRecord`, `safetyCriticalFunction`. | — |
@@ -98,6 +101,36 @@
 | [`ChangeTypeKind`](#changetypekind) | `enum def` | Controlled values for change type: `corrective`, `preventive`, `enhancement`, `regulatoryDriven`. | — |
 | [`UseErrorCategoryKind`](#useerrorcategorykind) | `enum def` | Controlled values for use error category: `perception`, `cognition`, `actionCategory`, `memoryRecall`. | — |
 | [`CommentStatusKind`](#commentstatuskind) | `enum def` | Lifecycle of a review remark on a model element. `rejected` is a closed state with a stated reason, not a deletion: a design review that considered a point and declined it is a record the DHF wants to keep. | — |
+
+## LegendSourceKind
+
+```sysml
+enum def LegendSourceKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Where a legend gets the value it colours by, when that value is not stored on the element at all but derived from the model. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## LegendScopeKind
+
+```sysml
+enum def LegendScopeKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | What a legend colours. The values are SysML's own usage keywords, so a renderer matches an element's construct directly rather than translating a private vocabulary into one. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
 
 ## ConcernKind
 
@@ -309,15 +342,15 @@ enum def LifecycleStateKind
 | Owning package | `memo_core_enumerations` |
 
 
-## VerificationMethodKind
+## MemoVerificationMethodKind
 
 ```sysml
-enum def VerificationMethodKind
+enum def MemoVerificationMethodKind
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for verification method: `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking`. |
+| Description | Controlled values for memo verification method: `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -399,6 +432,36 @@ enum def CauseSourceKind
 | Owning package | `memo_core_enumerations` |
 
 
+## PortDisplayKind
+
+```sysml
+enum def PortDisplayKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for port display: `everything`, `ports`, `hidden`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## ConnectionDisplayKind
+
+```sysml
+enum def ConnectionDisplayKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for connection display: `summary`, `everything`, `hidden`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
 ## DiagramViewKind
 
 ```sysml
@@ -407,7 +470,7 @@ enum def DiagramViewKind
 
 | Property | Value |
 | --- | --- |
-| Description | The eight standard SysML v2 view kinds (spec taxonomy). Every diagram view resolves to exactly one of these (Epic KK). |
+| Description | Controlled values for diagram view: `general`, `interconnection`, `actionflow`, `statetransition`, `sequence`, `grid`, `browser`, `geometry`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -603,21 +666,6 @@ enum def WorkflowStageKind
 | Property | Value |
 | --- | --- |
 | Description | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_core_enumerations` |
-
-
-## AudienceKind
-
-```sysml
-enum def AudienceKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for audience: `systemArchitect`, `softwareArchitect`, `hardwareEngineer`, `safetyEngineer`, `verificationEngineer`, `regulatoryEngineer`, `projectLead`, `securityEngineer`, `privacyEngineer`, `clinicalEngineer`, `usabilityEngineer`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1142,6 +1190,35 @@ enum def CommentStatusKind
     package memo_core_enumerations {
         private import ScalarValues::*;
 
+        // Where a legend gets the value it colours by, when that value is not
+        // stored on the element at all but derived from the model.
+        enum def LegendSourceKind {
+            // Depth in the view's own composition hierarchy: the root is 0, its
+            // parts 1, theirs 2. This is what "L0 / L1 / L2" actually means, and
+            // the tree already computes it — reading it back out of an id string
+            // would make a naming convention load-bearing and break the moment
+            // something is renamed or re-parented.
+            enum hierarchyDepth;
+            // The element's ontology kind, which is a field rather than an
+            // attribute — and on a block definition diagram it is usually the only
+            // thing worth colouring by, since definitions carry few attributes.
+            enum elementKind;
+        }
+
+        // What a legend colours. The values are SysML's own usage keywords, so a
+        // renderer matches an element's construct directly rather than translating
+        // a private vocabulary into one.
+        enum def LegendScopeKind {
+            // Plural, because `part`, `item`, `port`, `action` and `connection` are
+            // SysML keywords and cannot name an enum literal. The renderer maps
+            // each to the construct it scopes.
+            enum parts;
+            enum items;
+            enum ports;
+            enum actions;
+            enum connections;
+        }
+
         enum def ConcernKind {
             enum safety;
             enum usability;
@@ -1283,7 +1360,7 @@ enum def CommentStatusKind
             enum maintenance;
             enum obsolete;
         }
-        enum def VerificationMethodKind {
+        enum def MemoVerificationMethodKind {
             enum inspection;
             enum analytical;
             enum demonstration;
@@ -1369,6 +1446,26 @@ enum def CommentStatusKind
         }
         // The eight standard SysML v2 view kinds (spec taxonomy). Every
         // diagram view resolves to exactly one of these (Epic KK).
+        // How much of an interconnection drawing's port and connector detail is
+        // shown. Declared on the view, because how much detail a drawing carries
+        // is part of what the drawing IS — a summary IBD and a fully expanded one
+        // answer different questions about the same elements.
+        // `everything` and `hidden`, not `all` and `none`: both of those are SysML
+        // keywords and a literal cannot be named one — the same reason
+        // LegendScopeKind is plural. The renderer maps each to the display mode it
+        // names.
+        enum def PortDisplayKind {
+            enum everything;
+            enum ports;
+            enum hidden;
+        }
+
+        enum def ConnectionDisplayKind {
+            enum summary;
+            enum everything;
+            enum hidden;
+        }
+
         enum def DiagramViewKind {
             enum general;
             enum interconnection;
@@ -1483,19 +1580,6 @@ enum def CommentStatusKind
             enum verificationStage;
             enum evidence;
             enum documents;
-        }
-        enum def AudienceKind {
-            enum systemArchitect;
-            enum softwareArchitect;
-            enum hardwareEngineer;
-            enum safetyEngineer;
-            enum verificationEngineer;
-            enum regulatoryEngineer;
-            enum projectLead;
-            enum securityEngineer;
-            enum privacyEngineer;
-            enum clinicalEngineer;
-            enum usabilityEngineer;
         }
         enum def ThreatCategoryKind {
             enum spoofing;

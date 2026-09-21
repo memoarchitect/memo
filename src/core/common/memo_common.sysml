@@ -1,26 +1,29 @@
 // MEMO base hierarchy. Construct-specific foundations: one base per
 // SysML v2 metaclass family (part, action, port, interface, item, use case,
 // requirement, constraint, verification, state, connection), each carrying
-// the shared MEMO semantics. Common inheritance
-// across metaclasses is not portable, so non-part bases re-declare the small
-// identification core and share classification through the metadata defs in
-// memo_core_dimensions.
+// the shared MEMO semantics. Common inheritance across metaclasses is not
+// portable, so classification is shared through the metadata defs in
+// memo_core_dimensions rather than through a superclass.
 //
-// ─── The identification core ────────────────────────────────────────────
-// Every MEMO base below declares the SAME attributes, in the same order,
-// with no exceptions:
+// ─── Where identity lives ───────────────────────────────────────────────
+// Not in these bases. `@MemoIdentity`, below, is the one carrier: a
+// `metadata def` annotates an element of ANY metaclass, so it reaches the
+// action, port, item, requirement and connection families that KerML will
+// not let inherit from a part def. The bases used to re-declare an
+// "identification core" ten times over for exactly that reason, and ten
+// copies of one fact drifted every time (MemoPort carried no sourceReference
+// and no status; MemoRequirement and MemoNeed each invented their own status
+// attribute). One declaration replaced ten.
 //
-//     id, uuid, name, shortDescription, description,
-//     rationale, sourceReference, status
+// `name` and `description` were the last two to go. Neither was ever MEMO's
+// to declare: every SysML element already has a native name, and `doc` is
+// already the native slot for prose. What the bases added was a second place
+// to write the same fact, and 188 of the 1373 elements that set `name` set it
+// to the identifier they were already declared under. Display text is now
+// `@MemoIdentity { label }` and prose is `doc`.
 //
-// They are re-declared per metaclass only because KerML will not let an
-// action, port, item, requirement, or connection inherit from a part def.
-// The duplication is a language constraint, not a design choice — so treat
-// the block as one unit: anything added or removed here is added or removed
-// in all of them. The drift this replaces was real (MemoPort carried no
-// sourceReference and no status; MemoRequirement and MemoNeed each invented
-// their own status attribute), and drift here shows up as an element whose
-// properties panel is missing fields its neighbours have.
+// What remains on a base is domain semantics — `status`, and whatever that
+// metaclass family genuinely needs.
 //
 // `uuid` is the stable technical identity: never displayed, never used as a
 // label, never reused. Authors normally leave it unset and let the compiler
@@ -40,8 +43,8 @@ package memo_core_common {
     // opt-in through `annotatedElement`, and this one declares none. That is
     // what the per-metaclass base definitions below cannot do: KerML will not
     // let an action, port, item, requirement or connection inherit from a part
-    // def, which is why the identification core is currently declared ten
-    // times. Metadata has no such limit, so one declaration replaces ten.
+    // def, which is why the identification core was once declared ten times
+    // over. Metadata has no such limit, so one declaration replaced ten.
     //
     // An element has five identities and they are not interchangeable:
     //
@@ -96,18 +99,18 @@ package memo_core_common {
     // (memo_architecture_* xor memo_assurance_*), enforced by CR-ONT-045.
     // The remaining dimensions are orthogonal to the axis: realization stage,
     // cross-cutting concern, and editorial status.
+    // Deliberately NOT declared here: `name` and `description`. A name slot on
+    // a MEMO base is a second spelling of the native name every SysML element
+    // already has, and a description slot is a second spelling of `doc`. Both
+    // were carried for years and both drifted: 1373 elements set `name`, and
+    // 188 of them set it to the identifier they were already declared under.
+    // The display label — free text, legitimately repeating — lives on
+    // `@MemoIdentity { label }`, which annotates any metaclass and so reaches
+    // the behaviours and views that cannot specialize a part. The long prose
+    // lives in `doc`. `shortDescription` on `@MemoIdentity` remains the
+    // one-line register a table cell or chip shows whole; it is a different
+    // density, not a different authority.
     abstract part def MemoPart {
-        // identity
-        attribute name : String;
-        // Two description registers on every MEMO element, because views have
-        // two densities. `shortDescription` is the one-line form a table cell,
-        // matrix header, chip, or diagram node can show whole; `description` is
-        // the full prose a properties panel or a generated document section
-        // renders. A view picks the register that fits — it never truncates
-        // the long one, because a silently clipped sentence in a DHF table is
-        // a defect, not a layout choice.
-        attribute description : String;
-        // traceability
         // editorial status and lifecycle
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
@@ -148,15 +151,13 @@ package memo_core_common {
     }
     abstract part def AnalysisArtifact specializes MemoPart;
 
-    // Document-bound elements add only what a document needs beyond the two
-    // description registers every MemoPart now carries: a title and its place
-    // in a document. The former `shortDescription`/`longDescription` pair is
-    // gone — short is inherited, and `description` IS the long form.
     // Top-level goal a system or operation exists to fulfil, with its success
     // criteria and context. Domain layers specialize it; the medical-device
     // intended use (memo_architecture_operational_structure::IntendedUse) is a
-    // MemoMission. Specializes MemoPart directly — name/description/rationale
-    // already live there, so no DocumentedElement layer is needed.
+    // MemoMission. Specializes MemoPart directly and adds only what a mission
+    // needs beyond it — the prose a document renders is `doc`, and the
+    // one-line register a table cell shows is `@MemoIdentity`'s
+    // `shortDescription`, so no DocumentedElement layer is needed.
     abstract part def MemoMission specializes MemoPart {
         attribute missionKind : String;
         attribute successCriteria : String;
@@ -168,15 +169,11 @@ package memo_core_common {
     // Behavioral foundation: operational activities, tasks, system actions,
     // and interaction steps specialize MemoAction.
     action def MemoAction {
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
     }
 
     // Boundary feature foundation for typed ports.
     port def MemoPort {
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
     }
 
@@ -184,8 +181,6 @@ package memo_core_common {
     abstract interface def MemoInterface {
         end source;
         end target;
-        attribute name : String;
-        attribute description : String;
     }
 
     // Single item foundation. Standards, hazards, stored software data, and
@@ -193,8 +188,6 @@ package memo_core_common {
     // exchanged is expressed by its use in a port or flow, not by a second
     // ontology root.
     abstract item def MemoItem {
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
         // What the item CARRIES, as distinct from what it is called. Removed
         // by `595bfac` while modelling native wrappers; nothing replaced them,
@@ -212,19 +205,14 @@ package memo_core_common {
     }
 
     // Use-case foundation. The domain UseCase adds its goal and actor
-    // references; identity is carried here so use cases do not maintain a
-    // partial hand-written copy of the MEMO identification core.
+    // references; identity is `@MemoIdentity`, as everywhere else.
     abstract use case def MemoUseCase {
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
     }
 
     // General constraint foundation. Executable consistency rules and
     // reusable quantitative constraints are both native constraint defs.
     abstract constraint def MemoConstraint {
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
     }
 
@@ -235,8 +223,6 @@ package memo_core_common {
     // say "a need or a requirement" with one type name — before it, every end
     // that had to accept both was left untyped.
     abstract requirement def MemoRequirementElement {
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
         attribute statement : String;
     }
@@ -252,25 +238,21 @@ package memo_core_common {
 
     // Verification-case foundation. A SysML v2 verification case is a behaviour
     // (it checks requirements), and KerML forbids a behaviour from specializing
-    // the part-based MemoPart — so, like MemoAction, it re-declares the small
-    // identification core rather than inheriting it.
+    // the part-based MemoPart — so, like MemoAction, it stands on its own and
+    // takes its identity from `@MemoIdentity`.
     verification def MemoVerificationCase {
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
     }
 
     // State foundation. SysML v2 states (state machines and their mode states)
     // are behaviours, so — like MemoAction and MemoVerificationCase — they
-    // re-declare the identification core instead of specializing MemoPart
+    // cannot specialize MemoPart and are annotated instead.
     // Transitions stay part-based to keep their traceable safety
     // attributes (id, sourceReference, priority, sameStepCritical).
     enum def StateKind { enum mode; enum logical; }
 
     state def MemoState {
         attribute stateKind : StateKind;
-        attribute name : String;
-        attribute description : String;
         attribute status : ElementStatusKind;
         attribute modeKind : String;
         attribute entryCondition : String;

@@ -18,8 +18,7 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
     view gpcaFunctionAllocationView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_functional_views_functional_function_allocation_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-FUN-102"; }
-        attribute :>> name = "GPCA_FunctionAllocationView";
+        @MemoIdentity { :>> providedId = "VIEW-FUN-102"; :>> label = "GPCA_FunctionAllocationView"; }
         @MemoIdentity { :>> shortDescription = "Allocation of logical functions to software components and hardware assemblies."; }
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
@@ -29,8 +28,7 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
         attribute :>> autoPopulate = true;
         attribute :>> queryDescription = "Include logical functions with their AllocatedTo targets.";
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-FUN-102"; }
-            attribute :>> name = "GPCA_FunctionAllocationQuery";
+            @MemoIdentity { :>> providedId = "QRY-FUN-102"; :>> label = "GPCA_FunctionAllocationQuery"; }
             attribute :>> includeElementKinds = ("SystemFunction", "SoftwareModule", "HardwareAssembly");
             attribute :>> includeRelationshipKinds = ("AllocatedTo");
             attribute :>> includeLayers = ("functions", "software_structure", "hardware_structure");

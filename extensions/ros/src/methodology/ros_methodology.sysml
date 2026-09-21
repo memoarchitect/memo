@@ -11,11 +11,10 @@ package memo_extension_ros_methodology {
     // `includedModule` is [0..*], so this is how a dependency between
     // extensions is expressed. There is no chaining and no second base.
     part rosExtensionMethod : MethodologyDefinition {
-        @MemoIdentity { :>> providedId = "EXT-ROS-001"; }
-        attribute :>> name = "Ros2Extension";
+        @MemoIdentity { :>> providedId = "EXT-ROS-001"; :>> label = "Ros2Extension"; }
         attribute :>> version = "0.7.0";
         attribute :>> domain = "ROS 2 robotics middleware";
-        attribute :>> description = "Adds ROS 2 nodes, messages, directional ports, topic/service/action interfaces, QoS, and containerized deployment.";
+        doc /* Adds ROS 2 nodes, messages, directional ports, topic/service/action interfaces, QoS, and containerized deployment. */
         ref :>> baseMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
         attribute :>> includedModule = (

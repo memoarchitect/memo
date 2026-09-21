@@ -18,7 +18,6 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     private import memo_core_common::MemoIdentity;
     part therapyConfigurationAsset : CybersecurityAsset {
         @MemoIdentity { :>> providedId = "AST-CYB-001"; }
-        attribute :>> name = "TherapyConfigurationAsset";
         attribute :>> assetKind = AssetKind::configuration;
         attribute :>> confidentialityNeed = "medium";
         attribute :>> integrityNeed = "very high";
@@ -30,7 +29,6 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
 
     part patientEventLogAsset : CybersecurityAsset {
         @MemoIdentity { :>> providedId = "AST-CYB-002"; }
-        attribute :>> name = "PatientEventLogAsset";
         attribute :>> assetKind = AssetKind::auditRecord;
         attribute :>> confidentialityNeed = "high";
         attribute :>> integrityNeed = "high";
@@ -42,15 +40,13 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
 
     part maintenancePortBoundary : TrustBoundary {
         @MemoIdentity { :>> providedId = "TB-001"; }
-        attribute :>> name = "MaintenancePortBoundary";
         attribute :>> boundaryType = "service-access";
         attribute :>> crossingConstraint = "Boundary between service tooling and therapy controller runtime.";
         attribute :>> trustAssumption = "Service tooling on the untrusted side requires authentication before any crossing is permitted.";
     }
 
     part unauthorizedConfigChangeThreat : Threat {
-        @MemoIdentity { :>> providedId = "TH-001"; }
-        attribute :>> name = "UnauthorizedTherapyConfigurationChange";
+        @MemoIdentity { :>> providedId = "TH-001"; :>> label = "UnauthorizedTherapyConfigurationChange"; }
         attribute :>> driverKind = "cybersecurity";
         attribute :>> threatCategory = ThreatCategoryKind::tampering;
         attribute :>> attackVector = "maintenance port";
@@ -61,8 +57,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     }
 
     part eventLogTamperingThreat : Threat {
-        @MemoIdentity { :>> providedId = "TH-002"; }
-        attribute :>> name = "PatientEventLogTampering";
+        @MemoIdentity { :>> providedId = "TH-002"; :>> label = "PatientEventLogTampering"; }
         attribute :>> driverKind = "cybersecurity";
         attribute :>> threatCategory = ThreatCategoryKind::repudiation;
         attribute :>> attackVector = "maintenance port";
@@ -74,7 +69,6 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
 
     part weakServiceAuthentication : Vulnerability {
         @MemoIdentity { :>> providedId = "VULN-001"; }
-        attribute :>> name = "WeakServiceAuthentication";
         attribute :>> weakness = "service mode relies on shared default credential";
         attribute :>> exploitability = "moderate";
         attribute :>> discoveryMethod = "architecture review";
@@ -83,16 +77,14 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     }
 
     action tamperedConfigurationScenario : OperativeScenario {
-        @MemoIdentity { :>> providedId = "SCN-001"; }
-        attribute :>> name = "TamperedTherapyConfigurationScenario";
-        attribute :>> description = "An attacker with local access to the maintenance port alters lockout or dose parameters, aiming to bypass safety limits; may enable unsafe therapy delivery or bypass safeguards.";
+        @MemoIdentity { :>> providedId = "SCN-001"; :>> label = "TamperedTherapyConfigurationScenario"; }
+        doc /* An attacker with local access to the maintenance port alters lockout or dose parameters, aiming to bypass safety limits; may enable unsafe therapy delivery or bypass safeguards. */
         attribute :>> actorDescription = "unauthorized actor with local access to the maintenance port";
         attribute :>> defaultCategory = ThreatCategoryKind::tampering;
     }
 
     part unsafeDoseCyberHazard : CyberHazard {
-        @MemoIdentity { :>> providedId = "CHZ-001"; }
-        attribute :>> name = "UnsafeTherapyConfigurationHazard";
+        @MemoIdentity { :>> providedId = "CHZ-001"; :>> label = "UnsafeTherapyConfigurationHazard"; }
         attribute :>> hazardType = HazardTypeKind::drugDeliveryError;
         attribute :>> foreseeable = true;
         attribute :>> securityImpact = "loss of configuration integrity";
@@ -103,7 +95,6 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
 
     part configurationTamperingRisk : CyberRisk {
         @MemoIdentity { :>> providedId = "CRISK-001"; }
-        attribute :>> name = "ConfigurationTamperingRisk";
         attribute :>> driverKind = "cyber risk";
         attribute :>> probabilityEstimate = ProbabilityKind::occasional;
         attribute :>> severityEstimate = SeverityKind::catastrophic;
@@ -116,8 +107,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     }
 
     part strongServiceAuthentication : CyberMitigation {
-        @MemoIdentity { :>> providedId = "CMIT-001"; }
-        attribute :>> name = "StrongServiceAuthenticationAndAudit";
+        @MemoIdentity { :>> providedId = "CMIT-001"; :>> label = "StrongServiceAuthenticationAndAudit"; }
         attribute :>> controlKind = RiskControlKind::protectiveMeasure;
         attribute :>> implementationKind = RiskControlImplementationKind::softwareDesign;
         attribute :>> verificationStatus = "planned";
@@ -127,8 +117,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     }
 
     requirement reqAuthenticatedServiceAccess : SecurityRequirement {
-        @MemoIdentity { :>> providedId = "SREQ-001"; }
-        attribute :>> name = "AuthenticatedServiceAccess";
+        @MemoIdentity { :>> providedId = "SREQ-001"; :>> label = "AuthenticatedServiceAccess"; }
         attribute :>> statement = "The system shall require authenticated and authorized service access before any therapy configuration parameter can be modified.";
         attribute :>> sourceKind = RequirementSourceKind::risk;
         attribute :>> concernKind = ConcernKind::cybersecurity;
@@ -145,8 +134,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     }
 
     verification vcAuthenticatedServiceAccess : VerificationCase {
-        @MemoIdentity { :>> providedId = "CVER-001"; }
-        attribute :>> name = "VerifyAuthenticatedServiceAccess";
+        @MemoIdentity { :>> providedId = "CVER-001"; :>> label = "VerifyAuthenticatedServiceAccess"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "Only authenticated and authorized service sessions may modify therapy configuration; all attempts are logged.";
         attribute :>> status = ElementStatusKind::approved;

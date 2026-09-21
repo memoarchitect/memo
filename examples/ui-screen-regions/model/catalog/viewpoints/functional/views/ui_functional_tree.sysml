@@ -51,8 +51,7 @@ package memo_examples_ui_screen_regions_viewpoints_functional_views_ui_functiona
         attribute :>> diagramType = "bdd";
         attribute :>> autoPopulate = true;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-102"; }
-            attribute :>> name = "UIFunctionalTreeQuery";
+            @MemoIdentity { :>> providedId = "QRY-102"; :>> label = "UIFunctionalTreeQuery"; }
             attribute :>> includeElementKinds = ("SystemFunction", "UIAction", "UIElement", "UserInterface");
             attribute :>> includeRelationshipKinds = ("Composes", "ElementTriggersAction", "Performs", "AllocatedTo");
             attribute :>> includeLayers = ("functions", "implementation");

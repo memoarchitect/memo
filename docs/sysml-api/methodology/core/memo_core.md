@@ -41,7 +41,6 @@
 | [`ProjectMethodBinding`](#projectmethodbinding) | `part def` | Project method binding definition specializing `MemoPart`. | `MemoPart` |
 | [`DhfDocumentBinding`](#dhfdocumentbinding) | `part def` | Dhf document binding definition specializing `MemoPart`. | `MemoPart` |
 | [`Archetype`](#archetype) | `part def` | Archetype definition specializing `MemoPart`. | `MemoPart` |
-| [`ResolvesToMethodology`](#resolvestomethodology) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
 
 ## MethodologyLibrary
 
@@ -148,21 +147,6 @@ part def Archetype :> MemoPart
 | Owning package | `memo_methodology_core` |
 
 
-## ResolvesToMethodology
-
-```sysml
-connection def ResolvesToMethodology :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_methodology_core` |
-
-
 ## Source
 
 ??? code "methodology/core/memo_core.sysml"
@@ -180,7 +164,6 @@ connection def ResolvesToMethodology :> MemoRelationship
         part def MethodologyLibrary :> MemoPart {
             attribute version : String;
             attribute domain : String;
-            attribute :>> description : String;
         }
 
         // A rule's disposition under one methodology or project binding.
@@ -209,7 +192,6 @@ connection def ResolvesToMethodology :> MemoRelationship
         part def MethodologyDefinition :> MemoPart {
             attribute version : String;
             attribute domain : String;
-            attribute :>> description : String;
             // Exactly one base methodology at most. Multiple inheritance is not a
             // multiplicity the resolver has conflict semantics for, so the model
             // does not permit expressing it.
@@ -273,7 +255,6 @@ connection def ResolvesToMethodology :> MemoRelationship
 
         part def Archetype :> MemoPart {
             attribute label : String;
-            attribute :>> description : String;
             attribute category : String;
             attribute includedLayer : String;
             attribute includedStandard : String;
@@ -283,16 +264,6 @@ connection def ResolvesToMethodology :> MemoRelationship
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
-        connection def ResolvesToMethodology :> MemoRelationship {
-            end boundModelElement : MemoPart :>> source;
-            end resolvedMethodology : MethodologyDefinition :>> target;
-        }
-        abstract connection resolvesToMethodologyLinks : ResolvesToMethodology[*];
-        metadata def <resolvesToMethodology> ResolvesToMethodologyMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = resolvesToMethodologyLinks meta SysML::Usage;
-        }
     }
 
     ```

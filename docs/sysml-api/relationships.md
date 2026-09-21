@@ -13,13 +13,6 @@ SysML `connection def` declarations in `src/`.
 | [`DecisionRecordedInADR`](architecture/decisions/memo_decisions.md#decisionrecordedinadr) | `connection def` | Typed relationship for decision recorded in adr. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
 
 
-## `memo::architecture::implementation::software::runtime`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`ComponentConnects`](architecture/implementation/software/runtime/memo_software_runtime.md#componentconnects) | `connection def` | Typed relationship for component connects. | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
-
-
 ## `memo::architecture::implementation::software::structure`
 
 | Name | SysML kind | Description | Source |
@@ -33,11 +26,9 @@ SysML `connection def` declarations in `src/`.
 | --- | --- | --- | --- |
 | [`CapturesScreen`](architecture/implementation/ui/memo_ui.md#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`ControlImplementedBy`](architecture/implementation/ui/memo_ui.md#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`DataBinding`](architecture/implementation/ui/memo_ui.md#databinding) | `connection def` | Typed relationship for data binding. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`ElementTriggersAction`](architecture/implementation/ui/memo_ui.md#elementtriggersaction) | `connection def` | Typed relationship for element triggers action. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`ErrorAtElement`](architecture/implementation/ui/memo_ui.md#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`ErrorAtElement`](architecture/implementation/ui/memo_ui.md#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. Target is `MemoPart`.… | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`FlowServesUseCase`](architecture/implementation/ui/memo_ui.md#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`NavigatesTo`](architecture/implementation/ui/memo_ui.md#navigatesto) | `connection def` | Activating this element opens another screen. This is NAVIGATION, not containment — the opened screen is not laid out inside the element, so it is not a Composes child and the geometric rules do not relate them.… | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 
 
 ## `memo::architecture::logical::structure`
@@ -66,17 +57,9 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`AppliesInContext`](architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | `connection def` | `ConnectsPhysically` is native `connect` (R10-S6): write `connection connect source ::> <a> to target ::> <b>;` — the ordinary untyped binary connection — instead of a connection def for it. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
-| [`InteractsInContext`](architecture/operational/context/use_context/memo_use_context.md#interactsincontext) | `connection def` | Typed relationship for interacts in context. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
-| [`InteractsWith`](architecture/operational/context/use_context/memo_use_context.md#interactswith) | `connection def` | Typed relationship for interacts with. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
+| [`AppliesInContext`](architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | `connection def` | `InteractsWith` is native `connect` (2026-08-18): write `connection connect <participant> to <target>;`. It carried no attributes, and the operational-context package already scopes the ends.… | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
+| [`InteractsInContext`](architecture/operational/context/use_context/memo_use_context.md#interactsincontext) | `connection def` | The single relation a system context view draws. A context diagram labels its edges with open-ended verbs — "directs procedure", "electrical power", "fluid supply", "environmental conditions".… | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 | [`SituatedIn`](architecture/operational/context/use_context/memo_use_context.md#situatedin) | `connection def` | Typed relationship for situated in. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
-
-
-## `memo::architecture::operational::scenarios`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`HasScenario`](architecture/operational/scenarios/memo_scenarios.md#hasscenario) | `connection def` | A workflow is composed of one or more scenarios (nominal + alternate paths). ScenarioOccurrence/Executes were removed: an actual execution is a native SysML *usage* of the scenario, not a separate def + relation. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 
 ## `memo::architecture::operational::structure`
@@ -91,7 +74,6 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`Extends`](architecture/operational/use_cases/memo_use_cases.md#extends) | `connection def` | Typed relationship for extends. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 | [`Motivates`](architecture/operational/use_cases/memo_use_cases.md#motivates) | `connection def` | Typed relationship for motivates. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 
 
@@ -100,8 +82,6 @@ SysML `connection def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`RealizesUseCase`](architecture/operational/workflows/memo_workflows.md#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`RequiresResource`](architecture/operational/workflows/memo_workflows.md#requiresresource) | `connection def` | Typed relationship for requires resource. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`Supports`](architecture/operational/workflows/memo_workflows.md#supports) | `connection def` | Typed relationship for supports. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`Transforms`](architecture/operational/workflows/memo_workflows.md#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 
@@ -109,10 +89,7 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`BuildsInto`](architecture/realization/deployment/memo_deployment.md#buildsinto) | `connection def` | Typed relationship for builds into. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
-| [`DeploysTo`](architecture/realization/deployment/memo_deployment.md#deploysto) | `connection def` | Typed relationship for deploys to. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`FlowComprisesSpec`](architecture/realization/deployment/memo_deployment.md#flowcomprisesspec) | `connection def` | The end-to-end flow is realized by an ordered flow specification, one segment per traversed component boundary (AADL flow-spec → end-to-end). | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
-| [`FlowTraversesBinding`](architecture/realization/deployment/memo_deployment.md#flowtraversesbinding) | `connection def` | The flow traverses a software→hardware binding; latency accrues here. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`ProvidesEnvironment`](architecture/realization/deployment/memo_deployment.md#providesenvironment) | `connection def` | Typed relationship for provides environment. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 
 
@@ -149,11 +126,20 @@ SysML `connection def` declarations in `src/`.
 | [`TestedByUsability`](assurance/human_factors/memo_human_factors.md#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
 
 
+## `memo::assurance::requirements::needs`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`HeldBy`](assurance/requirements/needs/memo_needs.md#heldby) | `connection def` | Whose need this is. The holder is a modelled participant — a User, with the profile IEC 62366-1 asks for, or another operational participant — so "which users does this need serve" is a question the model answers rather than a sentence a reader interprets. | [`assurance/requirements/needs/memo_needs.sysml`](assurance/requirements/needs/memo_needs.md) |
+
+
 ## `memo::assurance::safety_risk`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`AssessedAgainst`](assurance/safety_risk/memo_risk.md#assessedagainst) | `connection def` | Typed relationship for assessed against. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`HazardRelatedScenario`](assurance/safety_risk/memo_risk.md#hazardrelatedscenario) | `connection def` | Typed relationship for hazard related scenario. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`LeadsToHarm`](assurance/safety_risk/memo_risk.md#leadstoharm) | `connection def` | The final ISO 14971 chain edge. P2 is the conditional probability that the hazardous situation results in the harm. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`Mitigates`](assurance/safety_risk/memo_risk.md#mitigates) | `connection def` | Typed relationship for mitigates. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`TracesRisk`](assurance/safety_risk/memo_risk.md#tracesrisk) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 
@@ -182,7 +168,7 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ExecutesScenario`](assurance/verification_validation/memo_assurance.md#executesscenario) | `connection def` | Typed relationship for executes scenario. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
+| [`PerformsStep`](assurance/verification_validation/memo_assurance.md#performsstep) | `connection def` | Typed relationship for performs step. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 
 
 ## `memo::core::annotations`
@@ -198,24 +184,12 @@ SysML `connection def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`AnalyzedBy`](core/relationships/memo_relationships.md#analyzedby) | `connection def` | Typed relationship for analyzed by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`BindsToInterface`](core/relationships/memo_relationships.md#bindstointerface) | `connection def` | Typed relationship for binds to interface. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Composes`](core/relationships/memo_relationships.md#composes) | `connection def` | Typed relationship for composes. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`BindsToInterface`](core/relationships/memo_relationships.md#bindstointerface) | `connection def` | `Composes` is deleted (R10-S7). Containment is NESTING — the child is declared inside the parent — which is how SysML v2 models composition: composite feature ownership, not a link.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`CrossesTrustBoundary`](core/relationships/memo_relationships.md#crossestrustboundary) | `connection def` | Typed relationship for crosses trust boundary. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`DerivesCyberRequirement`](core/relationships/memo_relationships.md#derivescyberrequirement) | `connection def` | Typed relationship for derives cyber requirement. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`DerivesFrom`](core/relationships/memo_relationships.md#derivesfrom) | `connection def` | Typed relationship for derives from. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`Enables`](core/relationships/memo_relationships.md#enables) | `connection def` | Typed relationship for enables. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`HostedBy`](core/relationships/memo_relationships.md#hostedby) | `connection def` | Typed relationship for hosted by. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`MemoLink`](core/relationships/memo_relationships.md#memolink) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| [`DerivesFrom`](core/relationships/memo_relationships.md#derivesfrom) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`MemoRelationship`](core/relationships/memo_relationships.md#memorelationship) | `connection def` | Typed relationship for memo relationship. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`ProducesEvidence`](core/relationships/memo_relationships.md#producesevidence) | `connection def` | `Realizes` (realizing/concrete element → realized/abstract element) is native `#refinement dependency` (R10-S6): write `#refinement dependency <realizing> to <realized>;` instead.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`ThreatenedBy`](core/relationships/memo_relationships.md#threatenedby) | `connection def` | `Precedes` is native `succession` (`first a then b;`), R10-S6. `sameStepRequired`/`precedenceRationale` had zero usages anywhere in the tree (same free-deletion shape R10-S5 found for `rationale`), so there was no content to carry forward. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Validates`](core/relationships/memo_relationships.md#validates) | `connection def` | Typed relationship for validates. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-
-
-## `memo::methodology::core`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`ResolvesToMethodology`](methodology/core/memo_core.md#resolvestomethodology) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 

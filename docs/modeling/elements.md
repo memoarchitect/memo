@@ -28,7 +28,7 @@ definitions and set the kind attribute that records the level of the claim:
 ```sysml
 requirement reqOcclusionAlarm : Requirement {
     attribute :>> id = "REQ-042";
-    attribute :>> name = "OcclusionAlarm";
+    @MemoIdentity { :>> label = "OcclusionAlarm"; }
     attribute :>> requirementKind = RequirementKind::system;
     attribute :>> statement =
         "The pump shall issue a high-priority alarm after detecting occlusion.";

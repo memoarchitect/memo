@@ -53,43 +53,43 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     // Component hierarchy used by the Level control:
     // L1 system → L2 subsystems → L3 allocated components.
     part fxPumpSystem : LogicalComponent {
-        attribute :>> name = "Infusion Pump System";
+@MemoIdentity { :>> label = "Infusion Pump System"; }
         part fxSensingSubsystem : LogicalComponent {
-            attribute :>> name = "Sensing Subsystem";
-            part fxSensor : LogicalComponent { attribute :>> name = "Sensor Subsystem"; }
+@MemoIdentity { :>> label = "Sensing Subsystem"; }
+            part fxSensor : LogicalComponent {@MemoIdentity { :>> label = "Sensor Subsystem"; } }
         }
         part fxControlSubsystem : LogicalComponent {
-            attribute :>> name = "Control Subsystem";
-            part fxController : LogicalComponent { attribute :>> name = "Infusion Controller"; }
+@MemoIdentity { :>> label = "Control Subsystem"; }
+            part fxController : LogicalComponent {@MemoIdentity { :>> label = "Infusion Controller"; } }
         }
         part fxDeliverySubsystem : LogicalComponent {
-            attribute :>> name = "Delivery Subsystem";
-            part fxActuator : LogicalComponent { attribute :>> name = "Pump Actuator"; }
+@MemoIdentity { :>> label = "Delivery Subsystem"; }
+            part fxActuator : LogicalComponent {@MemoIdentity { :>> label = "Pump Actuator"; } }
         }
         part fxSafetySubsystem : LogicalComponent {
-            attribute :>> name = "Safety Subsystem";
-            part fxSafety : LogicalComponent { attribute :>> name = "Safety Monitor"; }
+@MemoIdentity { :>> label = "Safety Subsystem"; }
+            part fxSafety : LogicalComponent {@MemoIdentity { :>> label = "Safety Monitor"; } }
         }
     }
 
     action fxDeliveryFlow : SystemFunction {
-        action fxAcquire : FxAcquire { attribute :>> name = "Acquire Sensor Data"; }
-        action fxCompute : FxCompute { attribute :>> name = "Compute Infusion Rate"; }
+        action fxAcquire : FxAcquire {@MemoIdentity { :>> label = "Acquire Sensor Data"; } }
+        action fxCompute : FxCompute {@MemoIdentity { :>> label = "Compute Infusion Rate"; } }
 
         // Split: enforce/drive/deliver runs concurrently with occlusion monitoring
         fork fxForkDeliver;
-        action fxEnforce : FxEnforce { attribute :>> name = "Enforce Dose Limits"; }
-        action fxDrive : FxDrive { attribute :>> name = "Drive Pump Motor"; }
-        action fxMonitor : FxMonitor { attribute :>> name = "Monitor Occlusion"; }
-        action fxDetect : FxDetect { attribute :>> name = "Detect Occlusion"; }
+        action fxEnforce : FxEnforce {@MemoIdentity { :>> label = "Enforce Dose Limits"; } }
+        action fxDrive : FxDrive {@MemoIdentity { :>> label = "Drive Pump Motor"; } }
+        action fxMonitor : FxMonitor {@MemoIdentity { :>> label = "Monitor Occlusion"; } }
+        action fxDetect : FxDetect {@MemoIdentity { :>> label = "Detect Occlusion"; } }
         join fxJoinDeliver;
 
         // Composite function — valve sub-flow (drill-in)
         action fxDeliver : FxDeliverMedication {
-            attribute :>> name = "Deliver Medication";
-            action fxOpenValve : SystemFunction { attribute :>> name = "Open Valve"; }
-            action fxHoldDose : SystemFunction { attribute :>> name = "Hold Metered Dose"; }
-            action fxCloseValve : SystemFunction { attribute :>> name = "Close Valve"; }
+@MemoIdentity { :>> label = "Deliver Medication"; }
+            action fxOpenValve : SystemFunction {@MemoIdentity { :>> label = "Open Valve"; } }
+            action fxHoldDose : SystemFunction {@MemoIdentity { :>> label = "Hold Metered Dose"; } }
+            action fxCloseValve : SystemFunction {@MemoIdentity { :>> label = "Close Valve"; } }
 
             flow of FxMedicationFluid from fxDeliveryFlow.fxDeliver.fxHoldDose to fxCloseValve;
 
@@ -99,7 +99,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
             first fxCloseValve then done;
         }
 
-        action fxLog : SystemFunction { attribute :>> name = "Log Delivery"; }
+        action fxLog : SystemFunction {@MemoIdentity { :>> label = "Log Delivery"; } }
 
         flow of FxSensorReading from fxAcquire.reading to fxCompute.reading;
         flow of FxRateCommand from fxEnforce.safeCommand to fxDrive.command;

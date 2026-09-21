@@ -10,8 +10,7 @@ package memo_viewpoints_functional_views_system_functional_tree_view {
                 view systemFunctionalTreeView : MemoDiagramView {
                     expose memo_viewpoints_functional_views_system_functional_tree_view::*;
                     attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-FUNC-001"; }
-    attribute :>> name = "SystemFunctionalTreeView";
+    @MemoIdentity { :>> providedId = "VIEW-FUNC-001"; :>> label = "SystemFunctionalTreeView"; }
     @MemoIdentity { :>> shortDescription = "Hierarchical decomposition of system functions."; }
     attribute :>> outputKind = (ViewOutputKind::diagram);
     attribute :>> presentationKind = (PresentationKind::activityDiagram);
@@ -19,8 +18,7 @@ package memo_viewpoints_functional_views_system_functional_tree_view {
     attribute :>> autoPopulate = true;
     attribute :>> queryDescription = "Include functions and their decomposition into subfunctions.";
     part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-FUNC-001"; }
-        attribute :>> name = "SystemFunctionalTreeQuery";
+        @MemoIdentity { :>> providedId = "QRY-FUNC-001"; :>> label = "SystemFunctionalTreeQuery"; }
         attribute :>> includeElementKinds = ("SystemFunction", "ComponentFunction");
         attribute :>> includeLayers = ("functions");
         attribute :>> rationaleText = "Auto-populate the functional tree from the functions layer.";

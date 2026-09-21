@@ -122,7 +122,6 @@ connection def TestedByUsability :> MemoRelationship
 
         part def UseError specializes MemoPart {
             attribute errorCategory : UseErrorCategoryKind;
-            attribute taskReference : String;
             attribute severity : SeverityKind;
             attribute rootCauseType : String;
         }

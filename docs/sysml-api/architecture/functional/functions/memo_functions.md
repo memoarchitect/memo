@@ -38,8 +38,8 @@
 | [`MemoFunction`](#memofunction) | `action def` | Memo function definition specializing `MemoAction`. | `MemoAction` |
 | [`SystemFunction`](#systemfunction) | `action def` | A responsibility of the system as a whole. Allocation is optional: a system function that no single component owns is a normal intermediate state of the functional chain, not a defect. | `MemoFunction` |
 | [`ComponentFunction`](#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. | `MemoFunction` |
-| [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… | `MemoPart` |
-| [`FunctionalFlow`](#functionalflow) | `part def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. | `MemoPart` |
+| [`FunctionalExchange`](#functionalexchange) | `part def` | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below. The reason is MEMO's tooling, NOT the language — and no longer MEMO's grammar either.… | `MemoPart` |
+| [`FunctionalFlow`](#functionalflow) | `action def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. An `action def`, like every other behaviour in MEMO. It was `part def ...… | `MemoAction` |
 | [`FunctionalFlowStep`](#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | `MemoAction` |
 
 ## MemoFunction
@@ -95,7 +95,7 @@ part def FunctionalExchange specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below.… |
+| Description | Named traceable route between functions. Native `flow of` usages carry the transported item; this element exists for the budgets and assurance attributes below. The reason is MEMO's tooling, NOT the language — and no longer MEMO's grammar either.… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -105,15 +105,15 @@ part def FunctionalExchange specializes MemoPart
 ## FunctionalFlow
 
 ```sysml
-part def FunctionalFlow specializes MemoPart
+action def FunctionalFlow specializes MemoAction
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. |
-| Kind | `part def` |
+| Description | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. An `action def`, like every other behaviour in MEMO. It was `part def ...… |
+| Kind | `action def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoAction` |
 | Owning package | `memo_architecture_functional_functions` |
 
 
@@ -156,7 +156,9 @@ action def FunctionalFlowStep specializes MemoAction
     // ZERO example files. The ends are metaclass-neutral now (CR-ONT-060..073), so
     // the split has no cause and is gone: OperativeAction is merged into the function
     // family, and its `actionKind` moved onto MemoFunction where it was always
-    // describing the function anyway.
+    // describing the function anyway. `FunctionalFlow` was the one element A0 left
+    // behind on the part side; it is an `action def` now, for the same reason and
+    // on the same evidence.
     //
     // `functionCategory` and `actionKind` are NOT two spellings of one axis, and
     // merging them would lose information. `actionKind` is the verb — sense,
@@ -221,21 +223,26 @@ action def FunctionalFlowStep specializes MemoAction
         // the transported item; this element exists for the budgets and assurance
         // attributes below.
         //
-        // The reason is MEMO's grammar, NOT the language — the earlier wording here
-        // said "attributes that a flow usage cannot own", and that was a false
-        // claim about SysML v2. The standard's `FlowUsage` is
+        // The reason is MEMO's tooling, NOT the language — and no longer MEMO's
+        // grammar either. The standard's `FlowUsage` is
         // `OccurrenceUsagePrefix 'flow' FlowDeclaration DefinitionBody`
         // (SysML-textual-bnf.kebnf:829), so a conforming flow usage takes a name
         // from its `UsageDeclaration` and owns attributes in its body like any
-        // other usage. MEMO's own production is
-        // `'flow' 'of' itemType 'from' … 'to' … ';'` — no name, no body — so a
-        // MEMO flow can carry neither an `id` nor a latency budget, and nothing
-        // can refer to it. Every MEMO element rests on the identification core in
-        // memo_core_common, and an anonymous attribute-less edge cannot join it.
+        // other usage. MEMO's `FlowConnectionUsage` production now reads
+        // `'flow' name? ('of' itemType)? 'from' … 'to' … ('{' body '}' | ';')`,
+        // and `resolveFlowConnection` keeps both the name and the body — so the
+        // "no name, no body" claim this comment used to make is settled and must
+        // not be re-opened as work.
         //
-        // So this part def is a workaround for a MEMO gap, not a design MEMO is
-        // entitled to. Restoring the two dropped clauses is what would let it
-        // collapse into the flow it stands in for.
+        // What is still missing is one step further on: a flow reaches the model
+        // as a `MemoRelationship`, not as an entry in the elements map. A latency
+        // budget can be written in its body, but nothing can allocate to the flow,
+        // trace risk to it, verify it, or resolve a reference to it, because there
+        // is no element there to target.
+        //
+        // So this part def remains a workaround, and what would retire it is
+        // referenceable flow identity, not more grammar. That is the board's
+        // "Native exchanges" row.
         part def FunctionalExchange specializes MemoPart {
             attribute flowKind : FlowKind;
             attribute latencyBudgetMs : Real;
@@ -251,7 +258,19 @@ action def FunctionalFlowStep specializes MemoAction
 
         // A reusable functional route through system responsibilities. Functional
         // flows are part of functional architecture, never logical structure.
-        part def FunctionalFlow specializes MemoPart {
+        //
+        // An `action def`, like every other behaviour in MEMO. It was
+        // `part def ... specializes MemoPart` for the Track A0 reason described at
+        // the top of this file — relation ends typed on part-based types, and
+        // KerML forbids a behaviour from specializing one — and it was the single
+        // element A0 did not carry across when that reason went away. A route
+        // through responsibilities is the same shape as the `OperationalWorkflow`
+        // and `OperativeScenario` it sits beside: the scenarios package calls a
+        // scenario "a selected path through a workflow (or functional flow)",
+        // naming the two as one kind of thing, and its steps are `action def`s
+        // already. A structure whose whole body is `perform` is a behaviour that
+        // has not been allowed to say so.
+        action def FunctionalFlow specializes MemoAction {
             attribute flowCategory : FunctionalFlowKind;
             attribute endToEndLatencyBudgetMs : String;
             attribute safetyRelevant : Boolean;

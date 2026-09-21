@@ -17,8 +17,7 @@ package memo_examples_surgical_closure_workflow_project {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-CLOSURE-WORKFLOW-001"; }
-        attribute :>> name = "SurgicalClosureWorkflowProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-CLOSURE-WORKFLOW-001"; :>> label = "SurgicalClosureWorkflowProjectMethodBinding"; }
         attribute :>> projectName = "Surgical Closure Workflow";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

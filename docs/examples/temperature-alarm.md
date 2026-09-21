@@ -35,12 +35,11 @@ the human work can be traced to its possible harm and validation.
 ```sysml
 part icuNurse : User {
     attribute :>> id = "TA-USR-001";
-    attribute :>> name = "ICUNurse";
     attribute :>> actorKind = ActorKind::clinician;
 }
 use case ucMonitorTemp : UseCase {
     attribute :>> id = "TA-UC-001";
-    attribute :>> name = "MonitorPatientTemperature";
+    @MemoIdentity { :>> label = "MonitorPatientTemperature"; }
     attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement =
         "Continuously monitor core temperature and be alerted when it leaves the safe range.";
@@ -49,7 +48,7 @@ connection : Initiates connect initiatingUser ::> icuNurse
     to initiatedUseCase ::> ucMonitorTemp;
 
 action taskAckAlarm : CriticalTask {
-    attribute :>> name = "AcknowledgeTemperatureAlarm";
+    @MemoIdentity { :>> label = "AcknowledgeTemperatureAlarm"; }
     attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
     attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
 }
@@ -66,13 +65,13 @@ channel to software or hardware without changing the functional claim.
 ```sysml
 part fnDetectDeviation : SystemFunction {
     attribute :>> id = "TA-FN-001";
-    attribute :>> name = "DetectTemperatureDeviation";
+    @MemoIdentity { :>> label = "DetectTemperatureDeviation"; }
     attribute :>> perspective = ArchitecturePerspectiveKind::functional;
     attribute :>> disciplines =
         (EngineeringDisciplineKind::safety, EngineeringDisciplineKind::'verification');
 }
 part chMonitor : LogicalComponent {
-    attribute :>> name = "TemperatureMonitorChannel";
+    @MemoIdentity { :>> label = "TemperatureMonitorChannel"; }
     attribute :>> componentRole = ComponentRoleKind::channel;
     attribute :>> channelRole = ChannelRoleKind::monitor;
 }
@@ -89,7 +88,7 @@ risk control → the element that implements it.
 
 ```sysml
 part elAlarmBanner : UIElement {
-    attribute :>> name = "TempAlarmBanner";
+    @MemoIdentity { :>> label = "TempAlarmBanner"; }
     attribute :>> alarmPriority = NotificationPriorityKind::high;
     attribute :>> annunciationModality = "flashing banner + tone";
     attribute :>> silenceable = true;
@@ -117,12 +116,12 @@ different model elements. The verification case produces a test report.
 
 ```sysml
 part vcAlarmLatency : VerificationCase {
-    attribute :>> name = "VerifyAlarmLatency";
+    @MemoIdentity { :>> label = "VerifyAlarmLatency"; }
     attribute :>> methodKind = VerificationMethodKind::test;
     attribute :>> acceptanceCriteria = "annunciation within 2 s of sustained deviation";
 }
 part uvAckTask : UsabilityValidation {
-    attribute :>> name = "SummativeAlarmAcknowledgement";
+    @MemoIdentity { :>> label = "SummativeAlarmAcknowledgement"; }
     attribute :>> acceptanceCriteria =
         "no critical-task failures; all alarms assessed before silencing";
 }

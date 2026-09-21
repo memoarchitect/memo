@@ -19,18 +19,18 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
     // black box. Context diagrams show its environment and interfaces, not its
     // internal decomposition.
     part infusionSystem : OperationalEntity {
-        attribute :>> name = "Infusion Pump System";
+@MemoIdentity { :>> label = "Infusion Pump System"; }
         attribute :>> entityKind = OperationalEntityKind::device;
         attribute :>> responsibility = "System of interest for this context view.";
     }
-    part clinician : User { attribute :>> name = "Clinician"; }
-    part patient : User { attribute :>> name = "Patient"; }
-    part biomedTech : User { attribute :>> name = "Biomedical Technician"; }
+    part clinician : User { }
+    part patient : User { }
+    part biomedTech : User {@MemoIdentity { :>> label = "Biomedical Technician"; } }
     part pharmacySystem : OperationalEntity {
-        attribute :>> name = "Pharmacy Information System";
+@MemoIdentity { :>> label = "Pharmacy Information System"; }
         attribute :>> entityKind = OperationalEntityKind::externalSystem;
     }
-    part homeContext : UseContext { attribute :>> name = "Home Care Environment"; }
+    part homeContext : UseContext {@MemoIdentity { :>> label = "Home Care Environment"; } }
 
     connection connect clinician to infusionSystem;
     connection connect patient to infusionSystem;

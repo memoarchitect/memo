@@ -14,52 +14,51 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_tr
 
     private import memo_core_common::MemoIdentity;
     state pumpModes : StateMachine {
-        attribute :>> name = "Pump Operating Modes";
+@MemoIdentity { :>> label = "Pump Operating Modes"; }
 
-        state idle : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Idle"; }
+        state idle : MemoState { attribute :>> stateKind = StateKind::mode; }
 
         // Infusing is a composite state: its substates show what the pump is
         // doing while it is infusing, and containment is the nesting itself —
         // not a parallel set of Composes edges.
         state infusing : MemoState {
             attribute :>> stateKind = StateKind::mode;
-            attribute :>> name = "Infusing";
 
-            state priming : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Priming"; }
-            state delivering : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Delivering"; }
-            state holding : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Holding (KVO)"; }
+            state priming : MemoState { attribute :>> stateKind = StateKind::mode; }
+            state delivering : MemoState { attribute :>> stateKind = StateKind::mode; }
+            state holding : MemoState { attribute :>> stateKind = StateKind::mode; @MemoIdentity { :>> label = "Holding (KVO)"; } }
 
             transition tPrimed first priming then delivering {
-                @TransitionRecord { :>> name = "primed"; :>> trigger = "primeComplete"; }
+                @MemoIdentity { :>> label = "primed"; } @TransitionRecord { :>> trigger = "primeComplete"; }
             }
             transition tKvo first delivering then holding {
-                @TransitionRecord { :>> name = "keepVeinOpen"; :>> trigger = "doseComplete"; }
+                @MemoIdentity { :>> label = "keepVeinOpen"; } @TransitionRecord { :>> trigger = "doseComplete"; }
             }
             transition tResumeDose first holding then delivering {
-                @TransitionRecord { :>> name = "resumeDose"; :>> trigger = "doseScheduled"; }
+                @MemoIdentity { :>> label = "resumeDose"; } @TransitionRecord { :>> trigger = "doseScheduled"; }
             }
         }
 
-        state paused : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Paused"; }
-        state alarm : MemoState { attribute :>> stateKind = StateKind::mode; attribute :>> name = "Alarm"; }
+        state paused : MemoState { attribute :>> stateKind = StateKind::mode; }
+        state alarm : MemoState { attribute :>> stateKind = StateKind::mode; }
 
         transition tStart first idle then infusing {
-            @TransitionRecord { :>> name = "start"; :>> trigger = "startInfusion"; }
+            @MemoIdentity { :>> label = "start"; } @TransitionRecord { :>> trigger = "startInfusion"; }
         }
         transition tPause first infusing then paused {
-            @TransitionRecord { :>> name = "pause"; :>> trigger = "pauseRequested"; }
+            @MemoIdentity { :>> label = "pause"; } @TransitionRecord { :>> trigger = "pauseRequested"; }
         }
         transition tResume first paused then infusing {
-            @TransitionRecord { :>> name = "resume"; :>> trigger = "resumeRequested"; }
+            @MemoIdentity { :>> label = "resume"; } @TransitionRecord { :>> trigger = "resumeRequested"; }
         }
         transition tFault first infusing then alarm {
-            @TransitionRecord { :>> name = "fault"; :>> trigger = "occlusionDetected"; }
+            @MemoIdentity { :>> label = "fault"; } @TransitionRecord { :>> trigger = "occlusionDetected"; }
         }
         transition tRecover first alarm then idle {
-            @TransitionRecord { :>> name = "acknowledge"; :>> trigger = "alarmCleared"; }
+            @MemoIdentity { :>> label = "acknowledge"; } @TransitionRecord { :>> trigger = "alarmCleared"; }
         }
         transition tStop first infusing then idle {
-            @TransitionRecord { :>> name = "stop"; :>> trigger = "stopInfusion"; }
+            @MemoIdentity { :>> label = "stop"; } @TransitionRecord { :>> trigger = "stopInfusion"; }
         }
     }
 

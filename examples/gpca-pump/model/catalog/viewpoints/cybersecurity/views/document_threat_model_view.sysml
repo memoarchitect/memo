@@ -10,17 +10,15 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_threat_m
     private import memo_core_common::MemoIdentity;
     view threatModelView : MemoCybersecurityThreatModelView {
         expose memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_threat_model_view::*;
-        @MemoIdentity { :>> providedId = "DOC-002"; }
-        attribute :>> name = "GPCACyberThreatModelView";
+        @MemoIdentity { :>> providedId = "DOC-002"; :>> label = "GPCACyberThreatModelView"; }
         @MemoIdentity { :>> shortDescription = "Threat-model-oriented document view for GPCA."; }
-        attribute :>> description = "Captures GPCA cyber assets, trust boundaries, threats, threat scenarios, vulnerabilities, and mitigations for secure product development records.";
+        doc /* Captures GPCA cyber assets, trust boundaries, threats, threat scenarios, vulnerabilities, and mitigations for secure product development records. */
         attribute :>> version = "0.1";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = cybersecurityViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-008"; }
-            attribute :>> name = "threatModelViewQuery";
+            @MemoIdentity { :>> providedId = "QRY-DOC-008"; :>> label = "threatModelViewQuery"; }
             attribute :>> includeElementKinds = ("Threat", "OperativeScenario", "Vulnerability", "CybersecurityAsset", "TrustBoundary", "AttackSurface", "CyberMitigation", "SecurityRequirement");
             attribute :>> includeRelationshipKinds = ("ThreatenedBy", "Exploits", "RealizedByScenario", "CrossesTrustBoundary", "Mitigates", "DerivesCyberRequirement");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
