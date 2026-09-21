@@ -528,12 +528,16 @@ package memo_examples_gpca_pump_gpca_interfaces {
     // These four exchanges summarize requirements-derived physical design
     // intent. They are not the named port connections in GPCA_Device.aadl;
     // the exact AADL feature topology is authored below and in gpca_trace.
+    //
+    // Which functional exchange each one realizes is NOT written here. It is
+    // the `allocate lf... to ex...` line in gpca_trace, which is the one
+    // authority for the mapping; these parts carried a duplicate
+    // `allocatedExchanges` ref saying the same thing until it was retired.
     part exSensorVector : ComponentExchange {
         @MemoIdentity { :>> providedId = "CE-001"; :>> label = "SensorStatusVectorExchange"; }
         attribute :>> exchangeKind = FlowKind::measurement;
         ref :>> sourceEndpoint = gpcaDevice.gpcaDeviceSensors;
         ref :>> targetEndpoint = gpcaDevice.gpcaSoftware.portSensorIn;
-        ref :>> allocatedExchanges = lfSensorAcquisition;
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-001; not a GPCA_Device.aadl connection"; }
@@ -543,7 +547,6 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> exchangeKind = FlowKind::command;
         ref :>> sourceEndpoint = gpcaDevice.gpcaSoftware.portGpcaSwOut;
         ref :>> targetEndpoint = pumpMotorAssembly;
-        ref :>> allocatedExchanges = lfFlowCommand;
         attribute :>> direction = DirectionKind::output;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-002; not a GPCA_Device.aadl connection"; }
@@ -553,7 +556,6 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> exchangeKind = FlowKind::alarm;
         ref :>> sourceEndpoint = gpcaDevice.gpcaSoftware.portGpcaSwOut;
         ref :>> targetEndpoint = audibleAlarm;
-        ref :>> allocatedExchanges = lfAlarmSignal;
         attribute :>> direction = DirectionKind::output;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-003; not a GPCA_Device.aadl connection"; }
@@ -563,7 +565,6 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> exchangeKind = FlowKind::configuration;
         ref :>> sourceEndpoint = operatorKeypad;
         ref :>> targetEndpoint = gpcaDevice.gpcaSoftware.portPresIn;
-        ref :>> allocatedExchanges = lfPrescriptionEntry;
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-004; not a GPCA_Device.aadl connection"; }
