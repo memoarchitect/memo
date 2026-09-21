@@ -83,6 +83,7 @@ nav:
       - Source layout: reference/index.md
       - Native project format: reference/native-project-format.md
       - Naming and native constructs: reference/naming-and-native-constructs.md
+      - Definition, usage, and context: reference/definition-usage-and-context.md
       - Core: reference/areas/core.md
       - Architecture: reference/areas/architecture.md
       - Assurance: reference/areas/assurance.md
