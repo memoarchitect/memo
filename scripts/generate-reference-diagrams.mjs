@@ -296,8 +296,8 @@ write('architecture-functional-elements', {
   title: 'Functional elements', subtitle: 'required behavior without implementation choices', height: 880, accent: '#1769d2',
   body: `
     ${group(40, 120, 1520, 390, 'Functions, exchanges, flows, and scenarios', '#1769d2')}
-    ${node(85, 205, 200, 68, 'SystemFunction', '#1769d2')}${node(380, 205, 220, 68, 'FunctionalExchange', '#1769d2')}${node(695, 205, 200, 68, 'SystemFunction', '#1769d2')}
-    ${edge(285, 239, 380, 239, 'sourceFunction ref')}${edge(600, 239, 695, 239, 'targetFunction ref')}
+    ${node(85, 205, 200, 68, 'SystemFunction', '#1769d2')}${node(695, 205, 200, 68, 'SystemFunction', '#1769d2')}
+    ${edge(285, 239, 695, 239, 'flow : FunctionalExchange (out → in)')}
     ${node(85, 330, 200, 68, 'SystemAction', '#1769d2')}${edge(185, 330, 185, 273, 'performedFunction ref', { labelX: 295, labelY: 305 })}
     ${node(970, 205, 200, 68, 'FunctionalFlow', '#1769d2')}${node(1270, 205, 225, 68, 'FunctionalFlowStep', '#1769d2')}${edge(1170, 239, 1270, 239, 'IncludesStep')}
     ${node(970, 330, 220, 68, 'MemoScenario (functional)', '#1769d2')}${edge(1080, 330, 1080, 273, 'selectedFlow ref', { labelX: 1170, labelY: 305 })}
