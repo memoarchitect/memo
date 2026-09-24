@@ -210,7 +210,7 @@ test('ontology V-model names canonical types and remains structurally valid SVG'
 
   const ontology = walkSysml('src').map((file) => read(file)).join('\n');
   for (const type of declared) {
-    const definition = new RegExp(`\\b(?:part|item|action|requirement|use case|port|interface|state|verification) def ${type}\\b`);
+    const definition = new RegExp(`\\b(?:part|item|action|requirement|use case|port|interface|flow|state|verification) def ${type}\\b`);
     assert.match(ontology, definition, `${type} shown in the V-model must exist in the ontology`);
   }
 

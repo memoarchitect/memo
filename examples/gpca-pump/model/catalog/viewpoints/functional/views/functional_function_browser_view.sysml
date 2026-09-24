@@ -29,7 +29,10 @@ package memo_examples_gpca_pump_viewpoints_functional_views_functional_function_
         attribute :>> queryDescription = "Include the functions layer's functions, flows, and exchange item definitions.";
         part :>> selectionQuery {
             @MemoIdentity { :>> providedId = "QRY-FUN-103"; :>> label = "GPCA_FunctionBrowserQuery"; }
-            attribute :>> includeElementKinds = ("SystemFunction", "FunctionalExchange", "InterfaceItem");
+            // No "FunctionalExchange": an exchange is a flow between two
+            // functions, not an element, so it is drawn as the edge between
+            // the selected functions rather than selected by kind.
+            attribute :>> includeElementKinds = ("SystemFunction", "InterfaceItem");
             attribute :>> includeLayers = ("functions");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate the function browser from the functions layer.";

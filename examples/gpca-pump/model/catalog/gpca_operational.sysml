@@ -14,6 +14,7 @@ package memo_examples_gpca_pump_gpca_operational {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    private import memo_architecture_logical_interfaces::InterfaceItem;
     // ── Operational entities beyond the human actors ────────────
     part entityPharmacy : OperationalEntity {
         @MemoIdentity { :>> providedId = "OE-001"; :>> label = "HospitalPharmacy"; }
@@ -88,6 +89,7 @@ package memo_examples_gpca_pump_gpca_operational {
     }
     action oaProgram : OperativeAction {
         @MemoIdentity { :>> providedId = "OA-003"; :>> label = "ProgramPrescription"; }
+        out prescriptionOut : InterfaceItem;
         attribute :>> trigger = "reservoir loaded";
         attribute :>> preCondition = "pump in IDLE; clinician authenticated by key or code";
         attribute :>> postCondition = "prescription entered, checked against pharmacy-database safe values (I 9-I 11), and confirmed by second review";

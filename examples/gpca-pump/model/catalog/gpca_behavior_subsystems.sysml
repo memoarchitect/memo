@@ -12,6 +12,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     // ── Logical functions ───────────────────────────────────────
     action fnAcquireSensors : SystemFunction {
         @MemoIdentity { :>> providedId = "FUNC-001"; :>> label = "AcquireSensorData"; }
+        out sensorVectorOut : InterfaceItem;
         attribute :>> functionCategory = "sensing";
         attribute :>> trigger = "every 20 ms execution step";
         attribute :>> outputSummary = "Debounced, range-checked sensor status vector";
@@ -58,6 +59,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
 
     action fnValidatePrescription : SystemFunction {
         @MemoIdentity { :>> providedId = "FUNC-002"; :>> label = "ValidatePrescription"; }
+        in prescriptionIn : InterfaceItem;
         attribute :>> functionCategory = "configuration";
         attribute :>> trigger = "prescription entry or edit";
         attribute :>> outputSummary = "Prescription accepted (within drug-library hard/soft limits) or rejected with reason";
@@ -66,6 +68,8 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     action fnMonitorAlarm : SystemFunction {
         @MemoIdentity { :>> providedId = "FUNC-003"; :>> label = "MonitorExceptionalConditions"; }
+        in sensorVectorIn : InterfaceItem;
+        out alarmSignalOut : InterfaceItem;
         attribute :>> functionCategory = "alarm";
         attribute :>> trigger = "every 20 ms execution step";
         attribute :>> outputSummary = "Alarm outputs and inhibition conditions";
@@ -74,6 +78,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     action fnAnnunciate : SystemFunction {
         @MemoIdentity { :>> providedId = "FUNC-004"; :>> label = "AnnunciateAlarms"; }
+        in alarmSignalIn : InterfaceItem;
         attribute :>> functionCategory = "alarm";
         attribute :>> trigger = "alarm raised, escalated, or cleared";
         attribute :>> outputSummary = "Priority-coded audible tone and visual message";
@@ -82,6 +87,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     action fnManageInfusion : SystemFunction {
         @MemoIdentity { :>> providedId = "FUNC-005"; :>> label = "ManageInfusion"; }
+        out flowCommandOut : InterfaceItem;
         attribute :>> functionCategory = "infusion";
         attribute :>> trigger = "mode transitions and each execution step while therapy active";
         attribute :>> outputSummary = "Commanded flow and mode transitions";
@@ -98,6 +104,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     action fnCommandPump : SystemFunction {
         @MemoIdentity { :>> providedId = "FUNC-007"; :>> label = "CommandPumpMotor"; }
+        in flowCommandIn : InterfaceItem;
         attribute :>> functionCategory = "actuation";
         attribute :>> trigger = "flow command update";
         attribute :>> outputSummary = "Motor step rate with enable interlock; FlowRate_Mode_macro per mode, KVO floor in PAUSED (REQ 43), zero flow in OFF/IDLE (REQ 6/14)";
@@ -138,40 +145,42 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
 
     // ── Logical flows ───────────────────────────────────────────
-    part lfSensorAcquisition : FunctionalExchange {
+    // Each exchange is the flow itself, from one function's `out` parameter
+    // to another's `in`. LF-004 starts outside the system: the prescription is
+    // what the clinician's ProgramPrescription activity (OA-003) produces, and
+    // CE-004 carries it from the operator keypad.
+    flow lfSensorAcquisition : FunctionalExchange
+        from fnAcquireSensors.sensorVectorOut to fnMonitorAlarm.sensorVectorIn {
         @MemoIdentity { :>> providedId = "LF-001"; :>> label = "SensorAcquisitionFlow"; }
         attribute :>> flowKind = FlowKind::measurement;
         attribute :>> latencyBudgetMs = 20.0;
         attribute :>> staleAfterMs = 40.0;
         attribute :>> integrityLevel = "class C data path";
-        ref :>> sourceFunction = fnAcquireSensors;
-        ref :>> targetFunction = fnMonitorAlarm;
     }
-    part lfFlowCommand : FunctionalExchange {
+    flow lfFlowCommand : FunctionalExchange
+        from fnManageInfusion.flowCommandOut to fnCommandPump.flowCommandIn {
         @MemoIdentity { :>> providedId = "LF-002"; :>> label = "FlowCommandFlow"; }
         attribute :>> flowKind = FlowKind::command;
         attribute :>> latencyBudgetMs = 20.0;
         attribute :>> staleAfterMs = 20.0;
         attribute :>> integrityLevel = "class C command path";
-        ref :>> sourceFunction = fnManageInfusion;
-        ref :>> targetFunction = fnCommandPump;
     }
-    part lfAlarmSignal : FunctionalExchange {
+    flow lfAlarmSignal : FunctionalExchange
+        from fnMonitorAlarm.alarmSignalOut to fnAnnunciate.alarmSignalIn {
         @MemoIdentity { :>> providedId = "LF-003"; :>> label = "AlarmSignalFlow"; }
         attribute :>> flowKind = FlowKind::alarm;
         attribute :>> latencyBudgetMs = 20.0;
         attribute :>> staleAfterMs = 20.0;
         attribute :>> integrityLevel = "class C alarm path; same-step delivery to infusion manager";
-        ref :>> sourceFunction = fnMonitorAlarm;
-        ref :>> targetFunction = fnAnnunciate;
     }
-    part lfPrescriptionEntry : FunctionalExchange {
+    flow lfPrescriptionEntry : FunctionalExchange
+        from memo_examples_gpca_pump_gpca_operational::oaProgram.prescriptionOut
+        to fnValidatePrescription.prescriptionIn {
         @MemoIdentity { :>> providedId = "LF-004"; :>> label = "PrescriptionEntryFlow"; }
         attribute :>> flowKind = FlowKind::configuration;
         attribute :>> latencyBudgetMs = 500.0;
         attribute :>> staleAfterMs = 0.0;
         attribute :>> integrityLevel = "confirmed double-entry path";
-        ref :>> targetFunction = fnValidatePrescription;
     }
 
     // ── Exchange item definitions ───────────────────────────────
