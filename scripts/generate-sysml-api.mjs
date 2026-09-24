@@ -76,7 +76,7 @@ const declarationBody = (source, match) => {
   return '';
 };
 
-const declarationPattern = /^\s*(abstract\s+)?(use case|part|item|action|requirement|verification|constraint|connection|interface|port|attribute|viewpoint|view|metadata|enum|state)\s+def\s+([A-Za-z_][A-Za-z0-9_]*)([^\n{;]*)/gm;
+const declarationPattern = /^\s*(abstract\s+)?(use case|part|item|action|requirement|verification|constraint|connection|interface|flow|port|attribute|viewpoint|view|metadata|enum|state)\s+def\s+([A-Za-z_][A-Za-z0-9_]*)([^\n{;]*)/gm;
 const packagePattern = /^\s*package\s+([A-Za-z_][A-Za-z0-9_]*)\s*\{/gm;
 const importPattern = /^\s*(public|private)?\s*import\s+([^;]+);/gm;
 
