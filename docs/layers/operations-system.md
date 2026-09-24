@@ -20,8 +20,21 @@ work, responsibility, behavior, organization, and path are different claims:
 | `MemoScenario[scenarioKind=functional]` | A selected path through a functional flow |
 
 `FunctionalExchange` is a typed transfer (measurement, command, alarm, …)
-between functions. An action flow may call a function, but it is diagram
-behaviour rather than another functional-architecture element.
+between functions. It is a `flow def`, and an exchange is a named flow from
+one function's `out` parameter to another's `in`, carrying its latency,
+staleness and integrity attributes in its body:
+
+```sysml
+flow lfFlowCommand : FunctionalExchange
+    from fnManageInfusion.flowCommandOut to fnCommandPump.flowCommandIn {
+    attribute :>> latencyBudgetMs = 20.0;
+}
+```
+
+The flow is the exchange — there is no separate element beside it — and its
+qualified name is what `allocate lfFlowCommand to exFlowCommand;` names. An
+action flow may call a function, but it is diagram behaviour rather than
+another functional-architecture element.
 
 ## Core relationships
 

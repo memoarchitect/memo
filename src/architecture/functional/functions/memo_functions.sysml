@@ -27,6 +27,23 @@
 // project argues in — therapy, alarm, platform, protection. A function can be
 // `sense` in the `protection` category, and a safety case reasons about both.
 //
+// ─── A functional exchange is a flow ─────────────────────────────────────
+//
+// `FunctionalExchange` is an `abstract flow def`, and an exchange is a typed
+// named `flow` between function parameters: the edge IS the exchange. It was
+// a `part def` beside a separate `flow`, with its ends stored as
+// `sourceFunction`/`targetFunction` refs, because a flow could not be the
+// target of an allocation or a trace. A named flow now carries a qualified id
+// that `allocate`, `satisfy` and the rest resolve, so the part reached no
+// rule, query or diagram and existed only to be kept in step with its edge.
+//
+// It is `abstract` because a flow definition specializes the association
+// `Flows::MessageAction`, and a concrete association must declare its two
+// ends (`association-related-types`); here the ends are the usage's
+// parameters. A usage says what it carries through the item type of those
+// parameters, not with `of`: `of` and `: FunctionalExchange` together declare
+// a second `payload`, and SysIDE rejects the pair.
+//
 // ─── System function vs. component function ──────────────────────────────
 //
 // ARCADIA's functional chain does not stop at the system boundary: system
@@ -80,39 +97,20 @@ package memo_architecture_functional_functions {
     // component is a responsibility nobody has accepted.
     action def ComponentFunction specializes MemoFunction;
 
-    // Named traceable route between functions. Native `flow of` usages carry
-    // the transported item; this element exists for the budgets and assurance
-    // attributes below.
+    // A transfer between two functions, carrying the budgets and assurance
+    // attributes a reader needs on the transfer itself. Authored as a typed
+    // named flow from an `out` parameter of one function to an `in` parameter
+    // of another:
     //
-    // The reason is MEMO's tooling, NOT the language — and no longer MEMO's
-    // grammar either. The standard's `FlowUsage` is
-    // `OccurrenceUsagePrefix 'flow' FlowDeclaration DefinitionBody`
-    // (SysML-textual-bnf.kebnf:829), so a conforming flow usage takes a name
-    // from its `UsageDeclaration` and owns attributes in its body like any
-    // other usage. MEMO's `FlowConnectionUsage` production now reads
-    // `'flow' name? ('of' itemType)? 'from' … 'to' … ('{' body '}' | ';')`,
-    // and `resolveFlowConnection` keeps both the name and the body — so the
-    // "no name, no body" claim this comment used to make is settled and must
-    // not be re-opened as work.
-    //
-    // What is still missing is one step further on: a flow reaches the model
-    // as a `MemoRelationship`, not as an entry in the elements map. A latency
-    // budget can be written in its body, but nothing can allocate to the flow,
-    // trace risk to it, verify it, or resolve a reference to it, because there
-    // is no element there to target.
-    //
-    // So this part def remains a workaround, and what would retire it is
-    // referenceable flow identity, not more grammar. That is the board's
-    // "Native exchanges" row.
-    part def FunctionalExchange specializes MemoPart {
+    //     flow lfFlowCommand : FunctionalExchange
+    //         from fnManageInfusion.flowCommandOut to fnCommandPump.flowCommandIn {
+    //         attribute :>> latencyBudgetMs = 20.0;
+    //     }
+    abstract flow def FunctionalExchange {
         attribute flowKind : FlowKind;
         attribute latencyBudgetMs : Real;
         attribute staleAfterMs : Real;
         attribute integrityLevel : String;
-        // MemoFunction, not SystemFunction: an exchange between two component
-        // functions is the ordinary case once the chain is decomposed.
-        ref sourceFunction : MemoFunction[0..1];
-        ref targetFunction : MemoFunction[0..1];
     }
 
     // A system function enables operational work; it does not perform it.

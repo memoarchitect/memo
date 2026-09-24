@@ -60,7 +60,7 @@ of a software, electronics, or mechanical choice.
 | `SystemFunction` | A technology-independent responsibility | `Enables`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
 | `FunctionalFlow`, `FunctionalFlowStep` | Reusable organization and order of functions | `InvolvesFunction`, `IncludesStep` |
 | `MemoScenario[scenarioKind=functional]` | The function path for one operational scenario | `selectedFlow`, `Realizes` |
-| `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | connects function endpoints |
+| `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | a named `flow` from one function's `out` parameter to another's `in`; `allocate` to a component exchange |
 | `SystemAction` | Executable behavior realizing a function | `Performs` |
 
 A function can be allocated to software, hardware, a mechanical part, or a
