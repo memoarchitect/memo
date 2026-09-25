@@ -46,14 +46,28 @@ package memo_architecture_functional_behavior {
         attribute sourceReference : String;
     }
 
-    // A verifiable behavioural constraint, such as an invariant, transition
-    // rule, temporal claim, assumption, or guarantee.
-    part def BehaviorProperty specializes VerifiableElement {
+    // A behavioural obligation, such as an invariant, transition rule,
+    // temporal claim, assumption, or guarantee. It is a `requirement def`
+    // because that is what it is: a claim the design must meet and a
+    // verification case can `verify`. It was a `part def` under
+    // VerifiableElement, which made a property a structural thing and left
+    // native `verify` unable to name it.
+    requirement def BehaviorProperty :> MemoRequirementElement {
         attribute propertyKind : BehaviorPropertyKind;
         attribute languageKind : PropertyLanguageKind;
         attribute formalExpression : String;
     }
-    part def Contract specializes VerifiableElement { attribute contractScope : String; }
+    // An assume/guarantee contract on one component, AGREE's shape one to one:
+    // the component is the `subject`, each assumption an `assume` member and
+    // each guarantee a `require` member naming a BehaviorProperty. The subject
+    // replaces `contractScope : String`, which named the component in prose
+    // and could not be navigated.
+    //
+    // This is not the procurement contract of a deliverable; that is a
+    // different definition.
+    requirement def Contract :> MemoRequirementElement {
+        subject component : MemoPart;
+    }
     // `part def PropertySet specializes VerifiableElement { attribute
     // propertySetScope : String; }` stood here and is DELETED (plan C3,
     // open question §14.6). It was AADL's property-set idea imported as a
@@ -88,7 +102,9 @@ package memo_architecture_functional_behavior {
     }
     // UI scenarios are OperativeScenario usages with scenarioKind `ui`.
 
-    part def TimingConstraint specializes VerifiableElement {
+    // A timing budget is an obligation on what it measures, so it is a
+    // requirement like BehaviorProperty.
+    requirement def TimingConstraint :> MemoRequirementElement {
         attribute constraintKind : TimingConstraintKind;
         attribute minMs : String;
         attribute maxMs : String;
