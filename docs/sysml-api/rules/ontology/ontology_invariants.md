@@ -51,14 +51,14 @@
 | [`PerformsPerformerKindRule`](#performsperformerkindrule) | `constraint def` | Constraint that checks performs performer kind rule. | `MemoConsistencyRule` |
 | [`BindsToInterfaceEndKindRule`](#bindstointerfaceendkindrule) | `constraint def` | Constraint that checks binds to interface end kind rule. | `MemoConsistencyRule` |
 | [`CrossesTrustBoundaryEndKindRule`](#crossestrustboundaryendkindrule) | `constraint def` | Constraint that checks crosses trust boundary end kind rule. | `MemoConsistencyRule` |
-| [`ComponentExchangeSourceEndpointKindRule`](#componentexchangesourceendpointkindrule) | `constraint def` | CR-ONT-002's replacement. ComponentExchange's endpoints are `ref` features, not links, and the builder projects them as element-ID STRINGS in the attribute map (a §13.3 string pseudo-reference) — so they cannot be reached with sourcesOf/targetsOf.… | `MemoConsistencyRule` |
+| [`ComponentExchangeSourceEndpointKindRule`](#componentexchangesourceendpointkindrule) | `constraint def` | CR-ONT-002's replacement, now asked of the edge. A ComponentExchange is an interface, so its ends are the ports it connects, and `sourceEnd` / `targetEnd` are those elements.… | `MemoConsistencyRule` |
 | [`ComponentExchangeTargetEndpointKindRule`](#componentexchangetargetendpointkindrule) | `constraint def` | Constraint that checks component exchange target endpoint kind rule. | `MemoConsistencyRule` |
 | [`ComponentFunctionAllocatedRule`](#componentfunctionallocatedrule) | `constraint def` | What makes ComponentFunction a definition of its own rather than an enum member on SystemFunction. An enum value cannot change a multiplicity, and "answerable to exactly one component" is the whole content of the concept. | `MemoConsistencyRule` |
 | [`FunctionDecomposesIntoFunctionsRule`](#functiondecomposesintofunctionsrule) | `constraint def` | Constraint that checks function decomposes into functions rule. | `MemoConsistencyRule` |
 | [`SoftwareContainsSoftwareRule`](#softwarecontainssoftwarerule) | `constraint def` | CR-ONT-075 above is this rule for functions; these are the same shape for the other families. The invariant is FAMILY homogeneity, not type homogeneity: a System containing a Subsystem containing a LogicalComponent is correct decomposition even though all three types differ, a… | `MemoConsistencyRule` |
 | [`LogicalContainsLogicalRule`](#logicalcontainslogicalrule) | `constraint def` | Constraint that checks logical contains logical rule. | `MemoConsistencyRule` |
 | [`PhysicalContainsPhysicalRule`](#physicalcontainsphysicalrule) | `constraint def` | Constraint that checks physical contains physical rule. | `MemoConsistencyRule` |
-| [`ExchangeHasFlowRule`](#exchangehasflowrule) | `constraint def` | Track A3. The flow is the edge; the exchange part carries the budget and assurance attributes. The two halves are bound by a SHARED NAME — the flow usage is named with its exchange — and this is what makes that binding a checked fact rather than a convention someone can quietl… | `MemoConsistencyRule` |
+| [`ExchangeHasFlowRule`](#exchangehasflowrule) | `constraint def` | An interface is the path between two ports; the flow over it is what moves. This rule asks that a component exchange carries one: a flow whose ends are the exchange's own two ports. The ends are compared as elements (`intersects` matches exact ids), not as names.… | `MemoConsistencyRule` |
 | [`AlternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | The predicate here named three features that do not exist — `variantKind`, `baseScenario`, `variationPoint` — so it could never fail, and a rule that cannot fail is coverage on paper only.… | `MemoConsistencyRule` |
 | [`DerivationGapRule`](#derivationgaprule) | `constraint def` | Both are WARNINGS, not errors: each describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions to both.… | `MemoConsistencyRule` |
 | [`RedundantAncestorTraceRule`](#redundantancestortracerule) | `constraint def` | Constraint that checks redundant ancestor trace rule. | `MemoConsistencyRule` |
@@ -341,7 +341,7 @@ constraint def ComponentExchangeSourceEndpointKindRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | CR-ONT-002's replacement. ComponentExchange's endpoints are `ref` features, not links, and the builder projects them as element-ID STRINGS in the attribute map (a §13.3 string pseudo-reference) — so they cannot be reached with sourcesOf/targetsOf.… |
+| Description | CR-ONT-002's replacement, now asked of the edge. A ComponentExchange is an interface, so its ends are the ports it connects, and `sourceEnd` / `targetEnd` are those elements.… |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -446,7 +446,7 @@ constraint def ExchangeHasFlowRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | Track A3. The flow is the edge; the exchange part carries the budget and assurance attributes. The two halves are bound by a SHARED NAME — the flow usage is named with its exchange — and this is what makes that binding a checked fact rather than a convention someone can quietl… |
+| Description | An interface is the path between two ports; the flow over it is what moves. This rule asks that a component exchange carries one: a flow whose ends are the exchange's own two ports. The ends are compared as elements (`intersects` matches exact ids), not as names.… |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -733,18 +733,23 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
             constraint { true }
         }
 
-        // CR-ONT-002's replacement. ComponentExchange's endpoints are `ref`
-        // features, not links, and the builder projects them as element-ID STRINGS
-        // in the attribute map (a §13.3 string pseudo-reference) — so they cannot be
-        // reached with sourcesOf/targetsOf. They are resolved here by looking the id
-        // up in the kind extent, which is the same statement made the long way.
+        // CR-ONT-002's replacement, now asked of the edge. A ComponentExchange is
+        // an interface, so its ends are the ports it connects, and `sourceEnd` /
+        // `targetEnd` are those elements. The compiler does not check this:
+        // SysIDE accepts a part at an interface end even when the definition types
+        // the ends.
+        //
+        // It used to read `sourceEndpoint` refs, whose dotted values the builder
+        // cut to their first segment, and compare them as strings, which drop
+        // everything up to the last `::`. On gpca-pump that matched the enclosing
+        // device for 44 of 46 exchanges and passed.
         constraint def ComponentExchangeSourceEndpointKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-072"; }
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "An exchange starts at a component or at a boundary port. Stating it as a rule is what let the endpoint refs stop being MemoPart-typed, which is what lets PhysicalPort and SoftwarePort become port defs.";
-            attribute predicateExpression = "attributes.sourceEndpoint == '' or allOfKind('MemoPart')->exists(id == subject.attributes.sourceEndpoint) or allOfKind('InterfaceElement')->exists(id == subject.attributes.sourceEndpoint) or allOfKind('MemoPort')->exists(id == subject.attributes.sourceEndpoint)";
+            attribute rationaleText = "A component exchange starts at a port. An exchange that starts at a component names no boundary, so nothing says where on the component it enters or leaves, and no port can carry its item type or direction.";
+            attribute predicateExpression = "sourceEnd->size() == 1 and sourceEnd->forAll(construct == 'port')";
             constraint { true }
         }
         constraint def ComponentExchangeTargetEndpointKindRule :> MemoConsistencyRule {
@@ -752,8 +757,8 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "An exchange ends at a component or at a boundary port, on the same grounds as CR-ONT-072.";
-            attribute predicateExpression = "attributes.targetEndpoint == '' or allOfKind('MemoPart')->exists(id == subject.attributes.targetEndpoint) or allOfKind('InterfaceElement')->exists(id == subject.attributes.targetEndpoint) or allOfKind('MemoPort')->exists(id == subject.attributes.targetEndpoint)";
+            attribute rationaleText = "A component exchange ends at a port, on the same grounds as CR-ONT-072.";
+            attribute predicateExpression = "targetEnd->size() == 1 and targetEnd->forAll(construct == 'port')";
             constraint { true }
         }
 
@@ -835,22 +840,28 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
             constraint { true }
         }
 
-        // Track A3. The flow is the edge; the exchange part carries the budget and
-        // assurance attributes. The two halves are bound by a SHARED NAME — the flow
-        // usage is named with its exchange — and this is what makes that binding a
-        // checked fact rather than a convention someone can quietly break.
+        // An interface is the path between two ports; the flow over it is what
+        // moves. This rule asks that a component exchange carries one: a flow
+        // whose ends are the exchange's own two ports. The ends are compared as
+        // elements (`intersects` matches exact ids), not as names.
         //
-        // It needs `linksOf`, because the question is about a link's IDENTITY, not
-        // about what sits at its ends: `sourcesOf`/`targetsOf` yield the elements at
-        // the ends and can never answer it. Naming the flow is what the grammar's
-        // restored FlowDeclaration name makes possible at all.
+        // It replaces the same-name coupling this id used to check, which tied a
+        // ComponentExchange PART to a flow of the same name. That was unsatisfiable
+        // once the model compiled: two members of one namespace may not share a
+        // name (`namespace-distinguishability`), and a `bind` could not be named at
+        // all. With the exchange an interface there is no second record to keep in
+        // step, and what is left to check is transport.
+        //
+        // `assurance`, not `invariant`: whether every interface must declare its
+        // transport is a method's call (§9.2 of the architecture plan), and a
+        // method that models interfaces before their flows may tailor it.
         constraint def ExchangeHasFlowRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-076"; }
-            attribute tailoring = RuleTailoringKind::invariant;
+            attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "An exchange states that something crosses a boundary, which is an EDGE, and the edge is a native flow. The part def exists for the budget and assurance attributes a reader has to find from the edge, so the two are named alike and this rule holds them together. An exchange with no flow is a budget attached to nothing.";
-            attribute predicateExpression = "linksOf(flow)->exists(id == subject.id)";
+            attribute rationaleText = "A component exchange is the connection between two ports; the flow is what crosses it. An exchange with no flow between its ports declares a path that nothing uses, so its timing and kind describe no transfer.";
+            attribute predicateExpression = "linksOf(flow)->exists(sourceEnd->intersects(subject.sourceEnd) and targetEnd->intersects(subject.targetEnd))";
             constraint { true }
         }
 

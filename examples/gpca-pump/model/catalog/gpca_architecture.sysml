@@ -311,6 +311,7 @@ package memo_examples_gpca_pump_gpca_architecture {
     }
     part operatorKeypad : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-012"; }
+        out port portPrescriptionOut : PhysicalPort { @MemoIdentity { :>> providedId = "PORT-KEY-01"; :>> label = "PRESCRIPTION_OUT"; } @MemoIdentity { :>> sourceReference = "MEMO design extension; not a GPCA_Device.aadl feature: the boundary CE-004 (PrescriptionEntryExchange) leaves the keypad by"; } }
         attribute :>> responsibility = "Clinician input for prescription programming and alarm handling.";
         attribute :>> safetyRole = "prescription entry path; key-lock guarded";
         attribute :>> partNumber = "GPCA-INP-KEY";
@@ -319,6 +320,7 @@ package memo_examples_gpca_pump_gpca_architecture {
     // ── Hardware: actuator and output suite ─────────────────────
     part pumpMotorAssembly : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-003"; }
+        in port portFlowCommandIn : PhysicalPort { @MemoIdentity { :>> providedId = "PORT-PMP-01"; :>> label = "FLOW_CMD_IN"; } @MemoIdentity { :>> sourceReference = "MEMO design extension; not a GPCA_Device.aadl feature: the boundary CE-002 (FlowCommandExchange) reaches the pump motor by"; } }
         attribute :>> responsibility = "Peristaltic pump mechanism and stepper motor driving drug delivery.";
         attribute :>> safetyRole = "single point of drug delivery; rotation monitored by flow sensor";
         attribute :>> partNumber = "GPCA-ACT-PMP";
@@ -332,6 +334,7 @@ package memo_examples_gpca_pump_gpca_architecture {
     }
     part audibleAlarm : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-004"; :>> label = "AudibleAlarmAnnunciator"; }
+        in port portAlarmIn : PhysicalPort { @MemoIdentity { :>> providedId = "PORT-BZR-01"; :>> label = "ALARM_IN"; } @MemoIdentity { :>> sourceReference = "MEMO design extension; not a GPCA_Device.aadl feature: the boundary CE-003 (AlarmAnnunciationExchange) reaches the buzzer by"; } }
         attribute :>> responsibility = "Buzzer producing multi-priority alarm tones at or above 45 dB(A) at 1 m.";
         attribute :>> safetyRole = "primary alarm annunciation path";
         attribute :>> partNumber = "GPCA-ACT-BZR";

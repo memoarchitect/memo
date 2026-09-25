@@ -104,6 +104,9 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::audibleAlarm":
     shortId: "HRD-3"
     uuid: "4010f760-d7e2-5ffa-b68c-64bc9b4ec484"
+  "memo_examples_gpca_pump_gpca_architecture::audibleAlarm::portAlarmIn":
+    shortId: "PHY-24"
+    uuid: "fe206589-a35a-5d2c-9fff-677b6fdced5e"
   "memo_examples_gpca_pump_gpca_architecture::batteryPack":
     shortId: "HRD-4"
     uuid: "5da15cd0-b1b5-50a3-98f5-f567c4ba8ba4"
@@ -434,6 +437,9 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::operatorKeypad":
     shortId: "HRD-14"
     uuid: "d9c94440-ff2b-56b5-b3c9-9494d4729c9e"
+  "memo_examples_gpca_pump_gpca_architecture::operatorKeypad::portPrescriptionOut":
+    shortId: "PHY-25"
+    uuid: "d5633406-6f18-5afa-b811-5ae81b5951a3"
   "memo_examples_gpca_pump_gpca_architecture::outputBus":
     shortId: "SFT-6"
     uuid: "ec3d1795-6601-521d-a420-84c7e2609bee"
@@ -611,6 +617,9 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::pumpMotorAssembly":
     shortId: "HRD-16"
     uuid: "f235af0a-9b68-58ba-9551-9bdf25e790b2"
+  "memo_examples_gpca_pump_gpca_architecture::pumpMotorAssembly::portFlowCommandIn":
+    shortId: "PHY-26"
+    uuid: "2975cf9d-d919-5bc4-840b-1ec1580f5771"
   "memo_examples_gpca_pump_gpca_architecture::reservoirSensor":
     shortId: "HRD-17"
     uuid: "510b5f2f-ec35-52ba-a891-a71259a3dc53"
