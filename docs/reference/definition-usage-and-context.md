@@ -203,7 +203,7 @@ nowhere to go.
 An untyped usage says *this has no reusable contract*. That is often true and
 is a legitimate thing to write.
 
-Measured 2026-09-20 across `examples/*/model`: 36 of 218 action usages are bare
+Across `examples/*/model`, a share of the action usages are bare
 `action <name>;` steps — the scenario bodies in `gpca_operational.sysml` and
 friends. Each of those says the step is one-off.
 

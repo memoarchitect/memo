@@ -21,9 +21,8 @@ kind of name; there are no accepted variants.
 | Usages and features | `lowerCamelCase` | `fuelTankPort`, `takePicture` |
 | Keywords | `lowercase` | `flow`, `bind`, `connect` |
 
-**No `snake_case`.** The tree was measured on 2026-08-12: 859 PascalCase
-definitions against 2 exceptions, and 398 lowerCamelCase usages against 26
-`snake_case` names — and those 26 are variant suffixes such as `driver_a`, a
+**No `snake_case`.** The tree follows the convention almost without exception;
+the few `snake_case` names left are variant suffixes such as `driver_a`, a
 disambiguating tag on a single element, not a naming convention. Do not add to
 them.
 
@@ -65,7 +64,7 @@ case it must not exist.
 The audit below was measured on 2026-08-12 against that corpus and **re-measured
 2026-08-18**. Each MEMO construct in the left column duplicates the native form
 on its right. The status column is the point: without it the table read as a
-backlog long after most of it had been done, and 12 of the 17 rows were stale.
+backlog long after most of it had been done, and most of its rows were stale.
 
 | MEMO construct | Native form | Status (2026-08-18) |
 |---|---|---|
@@ -90,7 +89,7 @@ measurement, and four of them failed it:
 
 | Kept | Why the native form does not cover it |
 |---|---|
-| `DerivesFrom` | The standard `Derivation` connection requires **requirement usages on both ends**. 22 of 37 distinct source drivers are parts, items or actions — hazards, threats, components. Migrating produced 143 type errors. |
+| `DerivesFrom` | The standard `Derivation` connection requires **requirement usages on both ends**. Most of its source drivers are parts, items or actions — hazards, threats, components. Migrating produced type errors. |
 | `Validates` | Native `verify` requires a requirement usage as the verified element, and IEC 62304 separates validation from verification. Renaming would paraphrase a regulated term. |
 | `Causes` | Carries `causeKind : CauseKind`, which `#cause` drops. |
 | `TracesToDocument` | Carries `sectionReference` — the granularity that makes the trace auditable. |
@@ -111,11 +110,11 @@ dead since 2026-08-12 and nobody noticed. **Grep the view filters, the DHF
 queries and the Architect templates every time a relation is deleted.**
 
 **This table is prose and therefore drifts in both directions** — rows stay after
-they are done, and duplicates found later never reach it. A full audit of all 73
-relation definitions and all 360 element definitions against the corpus is in
-`plans/reference/memo-vs-sysml-audit-2026-08-18.md`; it identifies roughly 24
-relations to delete and 23 to convert to typed native constructs, of which only
-the five marked *present* above were previously written down.
+they are done, and duplicates found later never reach it. A full audit of every
+relation definition and element definition against the corpus is in
+`plans/reference/memo-vs-sysml-audit-2026-08-18.md`; it identifies relations to
+delete and relations to convert to typed native constructs, of which only the
+ones marked *present* above were previously written down.
 
 Base-type duplication lands on every relationship at once, because all of them
 specialize `MemoRelationship`. Deleted in R10-S5 (2026-08-13):
@@ -126,13 +125,12 @@ specialize `MemoRelationship`. Deleted in R10-S5 (2026-08-13):
 | `rationale` | standard `Rationale` metadata |
 | `name`, `description` | native element name and `doc` |
 
-**Measured, not assumed:** the epic estimated 147 usages of `status` across
-`src/`/`examples/` before deleting it. A tree measurement scoped to connection
-usages specifically (876 of them, 77 with a body) found the 147 were all on
-`requirement`/`verification` usages — an unrelated `status : ElementStatusKind`
-declared per-family in `memo_core_common.sysml`, out of scope for this change.
-On an actual relationship, the count was 0 for `status`, `name`, `description`,
-and 1 for `rationale`. Trust a scoped grep over an epic's carried-forward
+**Measured, not assumed:** the epic counted usages of `status` across
+`src/`/`examples/` before deleting it. A measurement scoped to connection usages
+specifically found every one of those was on a `requirement`/`verification`
+usage — an unrelated `status : ElementStatusKind` declared per-family in
+`memo_core_common.sysml`, out of scope for this change. No actual relationship
+set `status`, `name` or `description`, and only one set `rationale`. Trust a scoped grep over an epic's carried-forward
 number — this is the same lesson AGENTS.md already states about plan status
 lines.
 
@@ -142,16 +140,16 @@ declared name (`connection linkFoo : Bar …`) and a `doc` comment — both were
 already available on every usage before this change; nothing native was
 missing.
 
-> **The part case was settled separately, and differently.** Measured
-> 2026-08-18, parts set `name` **1311** times, and there the MEMO attribute and
-> the native name carried different strings — `part entityPharmacy`
+> **The part case was settled separately, and differently.** Parts set `name`
+> throughout the tree, and there the MEMO attribute and the native name carried
+> different strings — `part entityPharmacy`
 > (lowerCamelCase identifier) versus `"HospitalPharmacy"` (display label). The
 > casing convention above guarantees they differ, so on a part `name` was a
 > label rather than a duplicate, and a straight deletion would have destroyed
 > the labels. The label was therefore MOVED, not deleted: it lives on
 > `@MemoIdentity { :>> label = "HospitalPharmacy"; }`, one carrier that
 > annotates any metaclass, and the bases no longer declare `name` at all. The
-> 188 elements whose `name` only restated the identifier they were already
+> elements whose `name` only restated the identifier they were already
 > declared under were dropped in the same pass. Narrative prose moved the
 > other way, onto native `doc`.
 
@@ -184,7 +182,7 @@ MEMO's `ElementStatusKind`
 one is issue-resolution state, the other editorial lifecycle. There is no
 lossless translation; a relationship that needs `status` today writes a
 `StatusKind` value directly; there is no legacy value anywhere in this
-workspace to convert (0 usages, above), so no conversion code exists or was
+workspace to convert (none, above), so no conversion code exists or was
 added. For anyone who does need to carry an `ElementStatusKind` judgement over,
 this is the explicit correspondence — every member has one, so nothing is
 silently dropped, and the "fail loudly on no counterpart" the epic asked for is
@@ -250,7 +248,7 @@ binding ceOpCmdToTlm bind gpcaSoftware.portOpCmdIn = gpcaSoftware.tlm.portTlmOpC
 }
 ```
 
-gpca-pump's 15 GPCA_SW boundary connections are written this way: each is
+gpca-pump's GPCA_SW boundary connections are written this way: each is
 `immediate`, with nothing between the two ports.
 
 ### Constructs parse but do not build
@@ -299,7 +297,7 @@ native form, or rewritten into this shape.
 
 **`connection : LogicalConnector connect a to b;` is already this pattern.** It
 is the `connect` case of it, not a "bare connection". A 2026-08-18 audit
-listed 23 relations as needing conversion; 17 of them were already in the
+listed relations as needing conversion; most of them were already in the
 pattern and had nothing to convert. Read the spelling before scheduling work.
 
 **`allocate`, `connect`, `flow` and `interface` can carry a MEMO `def`.** A
@@ -325,9 +323,9 @@ reads. Nothing catches it on its own: the type is right, both references
 resolve, and `syside check` passes because SysML has no opinion about which end
 you write first.
 
-Measured 2026-08-18: 3 of ~880 usages were reversed this way — two `HostedBy`,
-one `Validates`. `reversed-end-names.test.ts` in memo-tools now fails the build
-on a fourth. **Write the ends in declaration order.**
+Measured 2026-08-18: a handful of usages were reversed this way, on `HostedBy`
+and `Validates`. `reversed-end-names.test.ts` in memo-tools now fails the build
+on any new one. **Write the ends in declaration order.**
 
 ### The relationship is the authority; an end must not mirror it
 
