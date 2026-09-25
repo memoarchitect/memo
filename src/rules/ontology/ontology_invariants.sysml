@@ -389,16 +389,31 @@ package memo_rules_ontology {
         // the definition, and a default is not written onto every usage. So the
         // sibling test is "not alternate", and `conformsTo` keeps it from being
         // satisfied by an ordinary step of the same workflow.
-        attribute predicateExpression = "not(scenarioKind == 'alternate') or composes.composes->exists(conformsTo(OperativeScenario) and scenarioKind != 'alternate')";
+        //
+        // The base may be found three ways, and the workflow sibling is only
+        // the first. A use case is what a main scenario and its extensions
+        // vary from, so an alternate realizing a use case that a nominal
+        // scenario also realizes has its base, whichever workflow holds each
+        // (gpca-pump files its alarm responses in a workflow of their own). A
+        // scenario with no workflow at all has its package as its parent, so
+        // its siblings are the package's other workflow-less scenarios.
+        attribute predicateExpression = "not(scenarioKind == 'alternate') or composes.composes->exists(conformsTo(OperativeScenario) and scenarioKind != 'alternate') or downstream(realizes).realizes->exists(conformsTo(OperativeScenario) and scenarioKind != 'alternate') or (upstream(composes)->isEmpty() and allOfKind('OperativeScenario')->exists(package == subject.package and scenarioKind != 'alternate' and upstream(composes)->isEmpty()))";
         constraint { true }
     }
 
     // ─── Assurance-trace warnings ────────────────────────────────────────
-    // Both are WARNINGS, not errors: each describes a trace graph that is
-    // suspicious rather than invalid, and a regulated model has legitimate
-    // exceptions to both. They needed `upstream` / `downstream` — the bare
-    // relation name is bidirectional, so before those existed no rule could
-    // ask which way a derivation ran.
+    // A WARNING, not an error: it describes a trace graph that is suspicious
+    // rather than invalid, and a regulated model has legitimate exceptions.
+    // It needed `upstream` / `downstream` — the bare relation name is
+    // bidirectional, so before those existed no rule could ask which way a
+    // derivation ran.
+    //
+    // CR-ONT-081 (RedundantAncestorTraceRule) was deleted 2026-09-25. It called
+    // a trace redundant when one element satisfied both a requirement and one
+    // derived from it, "already implied by the derivation". It is not: a
+    // `derive` does not make its source satisfied, and a response-time
+    // requirement derived from "select a drug from the library" says nothing
+    // about whether the selector lets you select one.
 
     constraint def DerivationGapRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-080"; }
@@ -407,16 +422,6 @@ package memo_rules_ontology {
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "A requirement that others derive from should itself be justified. If nothing is upstream of it and it is not a stakeholder need, the derivation chain dead-ends at an unexplained requirement — the gap an assessor asks about first. Needs are the legitimate roots, so they are exempt by type rather than by convention.";
         attribute predicateExpression = "downstream(derivesFrom)->isEmpty() or upstream(derivesFrom)->notEmpty() or conformsTo(MemoNeed)";
-        constraint { true }
-    }
-
-    constraint def RedundantAncestorTraceRule :> MemoConsistencyRule {
-        @MemoIdentity { :>> providedId = "CR-ONT-081"; }
-        attribute tailoring = RuleTailoringKind::invariant;
-        attribute appliesTo = "MemoRequirementElement";
-        attribute severity = RuleSeverityKind::warning;
-        attribute rationaleText = "When one element satisfies both a requirement and something derived from that requirement, the trace to the ancestor is already implied by the derivation and adds no coverage. Two elements satisfying the two ends is ordinary decomposition and is not reported.";
-        attribute predicateExpression = "not satisfiedBy->intersects(downstream(derivesFrom).satisfiedBy)";
         constraint { true }
     }
 }

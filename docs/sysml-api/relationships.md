@@ -123,7 +123,7 @@ SysML `connection def` declarations in `src/`.
 | --- | --- | --- | --- |
 | [`CommitsUseError`](assurance/human_factors/memo_human_factors.md#commitsuseerror) | `connection def` | Typed relationship for commits use error. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
 | [`EvaluatesTask`](assurance/human_factors/memo_human_factors.md#evaluatestask) | `connection def` | Typed relationship for evaluates task. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
-| [`TestedByUsability`](assurance/human_factors/memo_human_factors.md#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
+| [`TestedByUsability`](assurance/human_factors/memo_human_factors.md#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package.… | [`assurance/human_factors/memo_human_factors.sysml`](assurance/human_factors/memo_human_factors.md) |
 
 
 ## `memo::assurance::requirements::needs`
