@@ -28,8 +28,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> acceptanceCriteria = "Current_System_mode only takes valid exclusive values";
         attribute :>> status = ElementStatusKind::approved;
 
-        objective { verify reqCs01; }
-        subject verified : Base::Anything[*] = (guaranteeExclusiveMode, gpcaSoftware.tlm, gpcaSoftware.outputBus, fnManageInfusion);
+        objective { verify reqCs01; verify guaranteeExclusiveMode; }
+        subject verified : Base::Anything[*] = (gpcaSoftware.tlm, gpcaSoftware.outputBus, fnManageInfusion);
     }
     verification vcLockout : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-002"; :>> label = "VerifyBolusLockout"; }
@@ -37,8 +37,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> acceptanceCriteria = "No patient bolus initiated when lockout or max bolus constraints active";
         attribute :>> status = ElementStatusKind::approved;
 
-        objective { verify reqCs25; }
-        subject verified : Base::Anything[*] = (lockoutControl, guaranteeLockoutPreventsBolus, tcBolusResponse, gpcaSoftware.infusionMgr, fnEnforceLimits);
+        objective { verify reqCs25; verify guaranteeLockoutPreventsBolus; verify tcBolusResponse; }
+        subject verified : Base::Anything[*] = (lockoutControl, gpcaSoftware.infusionMgr, fnEnforceLimits);
     }
     verification vcSameStepAlarm : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-003"; :>> label = "VerifySameStepAlarmStop"; }
@@ -46,8 +46,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> acceptanceCriteria = "Alarm output affects infusion in same execution step";
         attribute :>> status = ElementStatusKind::approved;
 
-        objective { verify reqCs19; }
-        subject verified : Base::Anything[*] = (propAlarmStopsSameStep, guaranteeAlarmStopsSameStep, tcAlarmLatency, gpcaSoftware.alarm, fnMonitorAlarm);
+        objective { verify reqCs19; verify propAlarmStopsSameStep; verify guaranteeAlarmStopsSameStep; verify tcAlarmLatency; }
+        subject verified : Base::Anything[*] = (gpcaSoftware.alarm, fnMonitorAlarm);
     }
     verification vcTemporalModeSafety : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-004"; :>> label = "VerifyTemporalModeSafety"; }
@@ -55,8 +55,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> acceptanceCriteria = "No invalid transitions and pause on critical alarms";
         attribute :>> status = ElementStatusKind::approved;
 
-        objective { verify reqCs75; verify reqDoorOpen; }
-        subject verified : Base::Anything[*] = (propLockoutTimerMonotonic, temporalNoInvalidTransition);
+        objective { verify reqCs75; verify reqDoorOpen; verify propLockoutTimerMonotonic; verify temporalNoInvalidTransition; }
     }
     verification vcAirInLine : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-005"; :>> label = "VerifyAirInLineStop"; }
@@ -109,8 +108,8 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> acceptanceCriteria = "Induced CPU hang forces zero flow and continuous alarm within 60 ms (REQ-X-08, TC-003)";
         attribute :>> status = ElementStatusKind::approved;
 
-        objective { verify reqWatchdogSafeState; }
-        subject verified : Base::Anything[*] = (watchdogControl, tcWatchdogTimeout);
+        objective { verify reqWatchdogSafeState; verify tcWatchdogTimeout; }
+        subject verified : Base::Anything[*] = watchdogControl;
     }
     verification vcHourlyMax : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-011"; :>> label = "VerifyHourlyDoseCeiling"; }

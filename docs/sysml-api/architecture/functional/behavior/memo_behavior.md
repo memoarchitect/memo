@@ -35,11 +35,11 @@
 | [`StateMachine`](#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based MemoPart family. Transitions stay part-based (below) to keep their traceable safety attributes.… | `MemoState` |
 | [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… | `MemoPart` |
 | [`TransitionRecord`](#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… | — |
-| [`BehaviorProperty`](#behaviorproperty) | `part def` | A verifiable behavioural constraint, such as an invariant, transition rule, temporal claim, assumption, or guarantee. | `VerifiableElement` |
-| [`Contract`](#contract) | `part def` | Contract definition specializing `VerifiableElement`. | `VerifiableElement` |
+| [`BehaviorProperty`](#behaviorproperty) | `requirement def` | A behavioural obligation, such as an invariant, transition rule, temporal claim, assumption, or guarantee. It is a `requirement def` because that is what it is: a claim the design must meet and a verification case can `verify`.… | `MemoRequirementElement` |
+| [`Contract`](#contract) | `requirement def` | Contract definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`ActivityAction`](#activityaction) | `action def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `FunctionalAction` |
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
-| [`TimingConstraint`](#timingconstraint) | `part def` | UI scenarios are OperativeScenario usages with scenarioKind `ui`. | `VerifiableElement` |
+| [`TimingConstraint`](#timingconstraint) | `requirement def` | Timing constraint definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 
 ## FunctionalAction
 
@@ -104,30 +104,30 @@ metadata def TransitionRecord
 ## BehaviorProperty
 
 ```sysml
-part def BehaviorProperty specializes VerifiableElement
+requirement def BehaviorProperty :> MemoRequirementElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | A verifiable behavioural constraint, such as an invariant, transition rule, temporal claim, assumption, or guarantee. |
-| Kind | `part def` |
+| Description | A behavioural obligation, such as an invariant, transition rule, temporal claim, assumption, or guarantee. It is a `requirement def` because that is what it is: a claim the design must meet and a verification case can `verify`.… |
+| Kind | `requirement def` |
 | Abstract | No |
-| Specializes | `VerifiableElement` |
+| Specializes | `MemoRequirementElement` |
 | Owning package | `memo_architecture_functional_behavior` |
 
 
 ## Contract
 
 ```sysml
-part def Contract specializes VerifiableElement
+requirement def Contract :> MemoRequirementElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Contract definition specializing `VerifiableElement`. |
-| Kind | `part def` |
+| Description | Contract definition specializing `MemoRequirementElement`. |
+| Kind | `requirement def` |
 | Abstract | No |
-| Specializes | `VerifiableElement` |
+| Specializes | `MemoRequirementElement` |
 | Owning package | `memo_architecture_functional_behavior` |
 
 
@@ -164,15 +164,15 @@ action def ActivityFlow specializes MemoAction
 ## TimingConstraint
 
 ```sysml
-part def TimingConstraint specializes VerifiableElement
+requirement def TimingConstraint :> MemoRequirementElement
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | UI scenarios are OperativeScenario usages with scenarioKind `ui`. |
-| Kind | `part def` |
+| Description | Timing constraint definition specializing `MemoRequirementElement`. |
+| Kind | `requirement def` |
 | Abstract | No |
-| Specializes | `VerifiableElement` |
+| Specializes | `MemoRequirementElement` |
 | Owning package | `memo_architecture_functional_behavior` |
 
 
@@ -229,14 +229,28 @@ part def TimingConstraint specializes VerifiableElement
             attribute sourceReference : String;
         }
 
-        // A verifiable behavioural constraint, such as an invariant, transition
-        // rule, temporal claim, assumption, or guarantee.
-        part def BehaviorProperty specializes VerifiableElement {
+        // A behavioural obligation, such as an invariant, transition rule,
+        // temporal claim, assumption, or guarantee. It is a `requirement def`
+        // because that is what it is: a claim the design must meet and a
+        // verification case can `verify`. It was a `part def` under
+        // VerifiableElement, which made a property a structural thing and left
+        // native `verify` unable to name it.
+        requirement def BehaviorProperty :> MemoRequirementElement {
             attribute propertyKind : BehaviorPropertyKind;
             attribute languageKind : PropertyLanguageKind;
             attribute formalExpression : String;
         }
-        part def Contract specializes VerifiableElement { attribute contractScope : String; }
+        // An assume/guarantee contract on one component, AGREE's shape one to one:
+        // the component is the `subject`, each assumption an `assume` member and
+        // each guarantee a `require` member naming a BehaviorProperty. The subject
+        // replaces `contractScope : String`, which named the component in prose
+        // and could not be navigated.
+        //
+        // This is not the procurement contract of a deliverable; that is a
+        // different definition.
+        requirement def Contract :> MemoRequirementElement {
+            subject component : MemoPart;
+        }
         // `part def PropertySet specializes VerifiableElement { attribute
         // propertySetScope : String; }` stood here and is DELETED (plan C3,
         // open question §14.6). It was AADL's property-set idea imported as a
@@ -271,7 +285,9 @@ part def TimingConstraint specializes VerifiableElement
         }
         // UI scenarios are OperativeScenario usages with scenarioKind `ui`.
 
-        part def TimingConstraint specializes VerifiableElement {
+        // A timing budget is an obligation on what it measures, so it is a
+        // requirement like BehaviorProperty.
+        requirement def TimingConstraint :> MemoRequirementElement {
             attribute constraintKind : TimingConstraintKind;
             attribute minMs : String;
             attribute maxMs : String;
