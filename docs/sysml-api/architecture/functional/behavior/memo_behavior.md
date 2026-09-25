@@ -37,7 +37,7 @@
 | [`TransitionRecord`](#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… | — |
 | [`BehaviorProperty`](#behaviorproperty) | `part def` | A verifiable behavioural constraint, such as an invariant, transition rule, temporal claim, assumption, or guarantee. | `VerifiableElement` |
 | [`Contract`](#contract) | `part def` | Contract definition specializing `VerifiableElement`. | `VerifiableElement` |
-| [`ActivityAction`](#activityaction) | `part def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `MemoPart` |
+| [`ActivityAction`](#activityaction) | `action def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `FunctionalAction` |
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
 | [`TimingConstraint`](#timingconstraint) | `part def` | UI scenarios are OperativeScenario usages with scenarioKind `ui`. | `VerifiableElement` |
 
@@ -134,15 +134,15 @@ part def Contract specializes VerifiableElement
 ## ActivityAction
 
 ```sysml
-part def ActivityAction specializes MemoPart
+action def ActivityAction specializes FunctionalAction
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… |
-| Kind | `part def` |
+| Kind | `action def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `FunctionalAction` |
 | Owning package | `memo_architecture_functional_behavior` |
 
 
@@ -252,7 +252,12 @@ part def TimingConstraint specializes VerifiableElement
         // annotate a BASE element rather than declare its own type, the SysML-
         // native answer is `metadata def` + `Metaobjects::SemanticMetadata`, which
         // is what every MEMO relation already carries since A4.
-        part def ActivityAction specializes MemoPart {
+        // An `action def`: every field it carries — what it does, what goes in and
+        // out, its worst-case execution time — describes behaviour. It was a
+        // `part def specializes MemoPart`, the same A0 residue `FunctionalFlow`
+        // carried, and a behaviour cannot specialize a structure, so nothing could
+        // have performed one.
+        action def ActivityAction specializes FunctionalAction {
             attribute actionKind : ActionKind;
             attribute inputSummary : String;
             attribute outputSummary : String;
