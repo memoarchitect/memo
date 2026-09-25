@@ -162,14 +162,33 @@ package memo_architecture_logical_structure {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = logicalConnectorLinks meta SysML::Usage;
     }
-    // A transfer of a typed item across a connector.
-    part def LogicalExchange specializes MemoPart {
+    // A transfer between two ports, carrying what a reader needs to know about
+    // the transfer itself. Authored as a typed named flow between the item
+    // features the two ports declare, the way `FunctionalExchange` is between
+    // function parameters:
+    //
+    //     part lcMonitor { out port pSpo2Out : LogicalPort { out item spo2 :> spo2Item; } }
+    //     flow exSpo2ToGateway : LogicalExchange
+    //         from lcMonitor.pSpo2Out.spo2 to lcGateway.pSpo2In.spo2 {
+    //         attribute :>> contentKind = FlowContentKind::measurement;
+    //     }
+    //
+    // It was a `part def` holding `sourcePort`, `targetPort` and
+    // `exchangedItem` refs. No example set either port, so no exchange said
+    // what it connected. The flow's ends are those ports now,
+    // and its payload the item feature on them. `direction` is not carried
+    // over: the ports say `in` and `out`, and a second writable direction is
+    // the duplicate §8 of the architecture plan forbids.
+    //
+    // The ends are not restricted to `LogicalPort`. Two of the three examples
+    // move a specimen or a force between hardware parts, and a flow def that
+    // named `LogicalPort` ends would have refused them. `payload` is not
+    // declared either: `of <type>` on a usage of a flow def that declares a
+    // feature trips SysIDE's `namespace-distinguishability` against the
+    // library's own `payload`, so the payload lives on the ports.
+    abstract flow def LogicalExchange {
         attribute contentKind : FlowContentKind;
-        attribute direction : DirectionKind;
         attribute latencyRequirement : String;
-        ref exchangedItem : LogicalExchangeItem[0..1];
-        ref sourcePort : LogicalPort[0..1];
-        ref targetPort : LogicalPort[0..1];
     }
 
     // States and modes of the logical solution (kept distinct from UI state

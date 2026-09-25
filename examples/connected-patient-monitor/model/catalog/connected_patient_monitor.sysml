@@ -16,10 +16,12 @@ package memo_examples_connected_patient_monitor {
     part lcMonitor : LogicalComponent {
         @MemoIdentity { :>> providedId = "CPM-LC-001"; :>> label = "BedsideMonitor"; }
         attribute :>> responsibility = "Acquire and display vitals; publish measurements.";
+        out port pSpo2Out : LogicalPort { out item spo2 :> spo2Item; }
     }
     part lcGateway : LogicalComponent {
         @MemoIdentity { :>> providedId = "CPM-LC-002"; :>> label = "WardGateway"; }
         attribute :>> responsibility = "Aggregate device data; bridge device LAN to hospital network.";
+        in port pSpo2In : LogicalPort { in item spo2 :> spo2Item; }
     }
     part lcCdrService : LogicalComponent {
         @MemoIdentity { :>> providedId = "CPM-LC-003"; :>> label = "ClinicalDataRepository"; }
@@ -40,11 +42,11 @@ package memo_examples_connected_patient_monitor {
         attribute :>> display = "MDC_PULS_OXIM_SAT_O2";
     }
 
-    part exSpo2ToGateway : LogicalExchange {
+    // The measurement crosses from the monitor's out port to the gateway's in
+    // port; the item feature on each port is what it carries.
+    flow exSpo2ToGateway : LogicalExchange from lcMonitor.pSpo2Out.spo2 to lcGateway.pSpo2In.spo2 {
         @MemoIdentity { :>> providedId = "CPM-EX-001"; :>> label = "SpO2ToGateway"; }
         attribute :>> contentKind = FlowContentKind::measurement;
-        attribute :>> direction = DirectionKind::output;
-        ref :>> exchangedItem = spo2Item;
     }
     connection : LogicalConnector connect sourceComponent ::> lcMonitor to targetComponent ::> lcGateway {
         attribute :>> contentKind = FlowContentKind::measurement;

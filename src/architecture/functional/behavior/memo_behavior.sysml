@@ -69,7 +69,12 @@ package memo_architecture_functional_behavior {
     // annotate a BASE element rather than declare its own type, the SysML-
     // native answer is `metadata def` + `Metaobjects::SemanticMetadata`, which
     // is what every MEMO relation already carries since A4.
-    part def ActivityAction specializes MemoPart {
+    // An `action def`: every field it carries — what it does, what goes in and
+    // out, its worst-case execution time — describes behaviour. It was a
+    // `part def specializes MemoPart`, the same A0 residue `FunctionalFlow`
+    // carried, and a behaviour cannot specialize a structure, so nothing could
+    // have performed one.
+    action def ActivityAction specializes FunctionalAction {
         attribute actionKind : ActionKind;
         attribute inputSummary : String;
         attribute outputSummary : String;

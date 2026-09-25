@@ -1324,12 +1324,12 @@ enum def CommentStatusKind
         //
         //   Interface.direction / .directionality   (interface def)
         //   LogicalConnector.direction              (connection def)
-        //   LogicalExchange.direction               (part def)
         //   ComponentExchange.direction             (interface def)
         //   OperationalInteraction.direction        (part def)
         //
-        // Deleting it would have cost those five their direction; the reinvention
-        // was only ever the port case.
+        // Deleting it would have cost those four their direction; the reinvention
+        // was only ever the port case. `LogicalExchange.direction` was a fifth and
+        // went when the exchange became a flow between ports (2026-09-25).
         enum def DirectionKind {
             enum input;
             enum output;

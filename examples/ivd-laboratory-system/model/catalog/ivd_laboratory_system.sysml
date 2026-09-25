@@ -10,6 +10,7 @@ package memo_examples_ivd_laboratory_system {
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_implementation_hardware_structure::*;
+    private import memo_architecture_realization_physical::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
@@ -22,20 +23,22 @@ package memo_examples_ivd_laboratory_system {
     part fluidSampleProbe : FluidicComponent {
         @MemoIdentity { :>> providedId = "IVD-HW-001"; :>> label = "SampleProbe"; }
         attribute :>> fluidPathRole = "aspirates specimen from primary tube";
+        out port pSpecimenOut : PhysicalPort;
     }
     part fluidReactionCuvette : FluidicComponent {
         @MemoIdentity { :>> providedId = "IVD-HW-002"; :>> label = "ReactionCuvette"; }
         attribute :>> fluidPathRole = "holds specimen-reagent reaction mix";
+        in port pSpecimenIn : PhysicalPort;
     }
     part optPhotometer : OpticalComponent {
         @MemoIdentity { :>> providedId = "IVD-HW-003"; :>> label = "PhotometerAssembly"; }
         attribute :>> opticalFunction = "absorbance measurement";
         attribute :>> wavelengthRange = "340-800 nm";
     }
-    part exSpecimenFlow : LogicalExchange {
+    // The probe dispenses the aspirated specimen into the cuvette.
+    flow exSpecimenFlow : LogicalExchange from fluidSampleProbe.pSpecimenOut to fluidReactionCuvette.pSpecimenIn {
         @MemoIdentity { :>> providedId = "IVD-EX-001"; :>> label = "SpecimenTransfer"; }
         attribute :>> contentKind = FlowContentKind::material;
-        attribute :>> direction = DirectionKind::output;
     }
 
     // Result item coded with LOINC.
