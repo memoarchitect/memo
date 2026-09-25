@@ -1325,7 +1325,7 @@ enum def CommentStatusKind
         //   Interface.direction / .directionality   (interface def)
         //   LogicalConnector.direction              (connection def)
         //   LogicalExchange.direction               (part def)
-        //   ComponentExchange.direction             (part def)
+        //   ComponentExchange.direction             (interface def)
         //   OperationalInteraction.direction        (part def)
         //
         // Deleting it would have cost those five their direction; the reinvention
