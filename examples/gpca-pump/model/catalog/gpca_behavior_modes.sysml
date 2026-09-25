@@ -353,35 +353,35 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     }
 
     // ── Behavior properties and timing constraints ──────────────
-    part propAlarmStopsSameStep : BehaviorProperty {
+    requirement propAlarmStopsSameStep : BehaviorProperty {
         @MemoIdentity { :>> providedId = "BP-002"; :>> label = "AlarmResponseSameStepKvo"; }
         attribute :>> propertyKind = BehaviorPropertyKind::safetyProperty;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "ALARM.ALARM_OUT -> IM.ALARM_IN is an AADL immediate connection: when an infusion-inhibiting notification asserts, Infusion_Manager limits Commanded_Flow_Rate <= FlowRate_kvo_hd in the same execution step";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl (ALARM_to_IM immediate) and AGREE flow <= KVO guarantees"; }
     }
-    part propPausedNoResumeWhileInhibited : BehaviorProperty {
+    requirement propPausedNoResumeWhileInhibited : BehaviorProperty {
         @MemoIdentity { :>> providedId = "BP-004"; :>> label = "PausedNoTransitionWhileInhibited"; }
         attribute :>> propertyKind = BehaviorPropertyKind::stateInvariant;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "in PAUSED: Infusion_initiate_prog AND Inhibited_Infusion_macro = TRUE => mode unchanged";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10.1 (REQ 45)"; }
     }
-    part propModeTimeoutActions : BehaviorProperty {
+    requirement propModeTimeoutActions : BehaviorProperty {
         @MemoIdentity { :>> providedId = "BP-005"; :>> label = "IdleAndPausedTimeoutActions"; }
         attribute :>> propertyKind = BehaviorPropertyKind::transitionRule;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "time in IDLE > Max_IDLE_Duration_const => REQ 59 'IDLE Time' actions; time in PAUSED > Max_PAUSED_Duration_const => REQ 59 'PAUSED Time' actions (notification actions, not mode transitions)";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.4.1 (REQ 15) and §4.1.10.1 (REQ 44)"; }
     }
-    part propLockoutTimerMonotonic : BehaviorProperty {
+    requirement propLockoutTimerMonotonic : BehaviorProperty {
         @MemoIdentity { :>> providedId = "BP-003"; :>> label = "LockoutTimerNeverShortened"; }
         attribute :>> propertyKind = BehaviorPropertyKind::stateInvariant;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "lockout_remaining decreases only with elapsed time; no input path resets it early";
         @MemoIdentity { :>> sourceReference = "MEMO extension — supports the REQ 25.3 lockout ignore condition; invariant not stated by the source"; }
     }
-    part tcAlarmLatency : TimingConstraint {
+    requirement tcAlarmLatency : TimingConstraint {
         @MemoIdentity { :>> providedId = "TC-001"; :>> label = "AlarmToSafeStateLatency"; }
         attribute :>> constraintKind = TimingConstraintKind::latency;
         attribute :>> minMs = "0";
@@ -390,7 +390,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> verificationMethod = MemoVerificationMethodKind::modelChecking;
         @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; the source specifies synchronous same-step (immediate) semantics with no timing figures"; }
     }
-    part tcBolusResponse : TimingConstraint {
+    requirement tcBolusResponse : TimingConstraint {
         @MemoIdentity { :>> providedId = "TC-002"; :>> label = "BolusRequestResponseLatency"; }
         attribute :>> constraintKind = TimingConstraintKind::latency;
         attribute :>> minMs = "0";
@@ -399,15 +399,14 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         attribute :>> verificationMethod = MemoVerificationMethodKind::test;
         @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; not specified by the source"; }
     }
-    part tcWatchdogTimeout : TimingConstraint {
+    requirement tcWatchdogTimeout : TimingConstraint {
         @MemoIdentity { :>> providedId = "TC-003"; :>> label = "WatchdogTimeout"; }
         attribute :>> constraintKind = TimingConstraintKind::deadline;
         attribute :>> minMs = "40";
         attribute :>> maxMs = "60";
         // The deadline is a claim about the element that kicks the watchdog, so
-        // the reference is the software module, not the requirement it supports.
-        // `referenceElement` is a MemoPart; a requirement is a requirement def
-        // and does not conform to it — that link is REQ-X-08's own trace.
+        // the reference is the software module, not the requirement it supports;
+        // that link is REQ-X-08's own trace.
         ref :>> referenceElement = gpcaSoftware.systemMonitor;
         attribute :>> verificationMethod = MemoVerificationMethodKind::test;
         @MemoIdentity { :>> sourceReference = "MEMO extension — supports extension requirement REQ-X-08; watchdog not specified by the source"; }
