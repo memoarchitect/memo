@@ -51,10 +51,12 @@ package memo_examples_gpca_pump_gpca_architecture {
 
     // ── Device (UMN AADL architectural model) ───────────────────
     // The AADL top-level `GPCA_Device` system. GPCA_Device.Impl declares only
-    // GPCA_HW_Sensors, GPCA_SW, and GPCA_HW_Actuators as subcomponents.
+    // GPCA_HW_Sensors, GPCA_SW, and GPCA_HW_Actuators as subcomponents; the two
+    // hardware wrappers are nested here and GPCA_SW is deployed onto it (see
+    // gpcaSoftware below).
     part gpcaDevice : PhysicalAssembly {
         @MemoIdentity { :>> providedId = "HW-000"; }
-        attribute :>> responsibility = "AADL device boundary containing the sensor wrapper, GPCA software, and actuator wrapper.";
+        attribute :>> responsibility = "AADL device boundary containing the sensor and actuator wrappers; the GPCA software is deployed onto it.";
         attribute :>> safetyRole = "device boundary carrying the intended use and the risk-control architecture";
         attribute :>> partNumber = "GPCA-DEV-001";
 
@@ -89,180 +91,189 @@ package memo_examples_gpca_pump_gpca_architecture {
             in port actGpcaSwIn : PhysicalPort { @MemoIdentity { :>> providedId = "PORT-ACT-01"; :>> label = "GPCA_SW_IN"; } @MemoIdentity { :>> sourceReference = "CITE-002: GPCA_HW_Actuators.aadl"; } }
             out port actGpcaOut : PhysicalPort { @MemoIdentity { :>> providedId = "PORT-ACT-02"; :>> label = "GPCA_OUT"; } @MemoIdentity { :>> sourceReference = "CITE-002: GPCA_HW_Actuators.aadl"; } }
         }
+    }
 
-        part gpcaSoftware : SoftwareSystem {
-            @MemoIdentity { :>> providedId = "SWS-001"; }
-            attribute :>> version = "2.0";
-            attribute :>> lifecycleState = LifecycleStateKind::development;
-            attribute :>> safetyClass = SafetyClassKind::C;
-            attribute :>> complexity = ComplexityKind::high;
-            attribute :>> operatingSystem = "synchronous data-flow execution; AADL immediate port semantics (source specifies no timing)";
+    // ── Software (UMN AADL architectural model) ─────────────────
+    // AADL's GPCA_Device.Impl lists GPCA_SW as a subcomponent beside the
+    // sensor and actuator wrappers. MEMO does not nest it there: gpcaDevice is
+    // a PhysicalAssembly, and software on hardware is DEPLOYMENT, which
+    // gpcaSoftwareDeployment (gpca_trace) records against controllerBoard. A
+    // physical assembly containing the software system says the same thing a
+    // second time as containment, which CR-ONT-079 rejects. The AADL port
+    // wiring is unchanged: the sensor-to-software and software-to-actuator
+    // flows were always written at package level.
+    part gpcaSoftware : SoftwareSystem {
+        @MemoIdentity { :>> providedId = "SWS-001"; }
+        attribute :>> version = "2.0";
+        attribute :>> lifecycleState = LifecycleStateKind::development;
+        attribute :>> safetyClass = SafetyClassKind::C;
+        attribute :>> complexity = ComplexityKind::high;
+        attribute :>> operatingSystem = "synchronous data-flow execution; AADL immediate port semantics (source specifies no timing)";
 
-            in port portOpCmdIn : SoftwarePort {
-                @MemoIdentity { :>> providedId = "PORT-01"; :>> label = "OP_CMD_IN"; }
-                doc /* Operator commands (System_Start/Stop, Infusion_Initiate/Inhibit, Notification_Cancel, Disable/Enable_Audio, DataConfig) from the data entry interface (I 2). */
-                attribute :>> portKind = InterfaceKind::control;
-                attribute :>> dataTypeName = "DATATYPES::Operator_Commands.Impl";
-                @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
-            }
-            in port portPresIn : SoftwarePort {
-                @MemoIdentity { :>> providedId = "PORT-02"; :>> label = "PRES_IN"; }
-                doc /* Prescription data entry fields (I 1, 13 fields PatientID_prog..NumberMax_pbolus_prog). */
-                attribute :>> portKind = InterfaceKind::data;
-                attribute :>> dataTypeName = "DATATYPES::Prescription_Inputs.Impl";
-                @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
-            }
-            in port portPatientIn : SoftwarePort {
-                @MemoIdentity { :>> providedId = "PORT-03"; :>> label = "PATIENT_IN"; }
-                doc /* Patient bolus request (I 4, BolusRequest_prog). */
-                attribute :>> portKind = InterfaceKind::userInteraction;
-                attribute :>> dataTypeName = "DATATYPES::Patient_Inputs.Impl";
-                @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
-            }
-            in port portSensorIn : SoftwarePort {
-                @MemoIdentity { :>> providedId = "PORT-04"; :>> label = "SENSOR_IN"; }
-                doc /* Device sensor inputs (air-in-line, occlusion, door, reservoir, flow). */
-                attribute :>> portKind = InterfaceKind::digitalSignal;
-                attribute :>> dataTypeName = "DATATYPES::Device_Sensor_Inputs.Impl";
-                @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
-            }
-            in port portConstIn : SoftwarePort {
-                @MemoIdentity { :>> providedId = "PORT-05"; :>> label = "CONST_IN"; }
-                doc /* Device configuration constants (App. A.4 values such as Empty_Reservoir, tolerances). */
-                attribute :>> portKind = InterfaceKind::data;
-                attribute :>> dataTypeName = "DATATYPES::Device_Configuration_Inputs.Impl";
-                @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
-            }
-            in port portDbIn : SoftwarePort {
-                @MemoIdentity { :>> providedId = "PORT-06"; :>> label = "DB_IN"; }
-                doc /* Hospital pharmacy database safe values (I 9-I 11); realizes SI-005 HospitalPharmacyDatabaseInterface. */
-                attribute :>> portKind = InterfaceKind::data;
-                attribute :>> dataTypeName = "DATATYPES::Drug_Database_Inputs.Impl";
-                @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
-            }
-            out port portGpcaSwOut : SoftwarePort {
-                @MemoIdentity { :>> providedId = "PORT-07"; :>> label = "GPCA_SW_OUT"; }
-                doc /* Aggregated software output vector (Current_System_Mode, Commanded_Flow_Rate, notifications, prescription echo, status). */
-                attribute :>> portKind = InterfaceKind::data;
-                attribute :>> dataTypeName = "DATATYPES::GPCA_SW_Outputs.Impl";
-                @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
-            }
-
-        part tlm : SoftwareModule {
-            @MemoIdentity { :>> providedId = "SW-001"; :>> label = "Top_Level_Mode"; }
-            attribute :>> responsibility = "Ensure system ON/OFF behavior and startup/shutdown checks.";
-            attribute :>> safetyClass = SafetyClassKind::C;
-            attribute :>> complexity = ComplexityKind::medium;
-
-            in port portTlmConstIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-TLM-01"; :>> label = "CONST_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (TLM)"; } }
-            in port portTlmOpCmdIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-TLM-02"; :>> label = "OP_CMD_IN"; } attribute :>> portKind = InterfaceKind::control; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (TLM)"; } }
-            out port portTlmTlmModeOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-TLM-03"; :>> label = "TLM_MODE_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (TLM)"; } }
+        in port portOpCmdIn : SoftwarePort {
+            @MemoIdentity { :>> providedId = "PORT-01"; :>> label = "OP_CMD_IN"; }
+            doc /* Operator commands (System_Start/Stop, Infusion_Initiate/Inhibit, Notification_Cancel, Disable/Enable_Audio, DataConfig) from the data entry interface (I 2). */
+            attribute :>> portKind = InterfaceKind::control;
+            attribute :>> dataTypeName = "DATATYPES::Operator_Commands.Impl";
+            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
+        }
+        in port portPresIn : SoftwarePort {
+            @MemoIdentity { :>> providedId = "PORT-02"; :>> label = "PRES_IN"; }
+            doc /* Prescription data entry fields (I 1, 13 fields PatientID_prog..NumberMax_pbolus_prog). */
+            attribute :>> portKind = InterfaceKind::data;
+            attribute :>> dataTypeName = "DATATYPES::Prescription_Inputs.Impl";
+            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
+        }
+        in port portPatientIn : SoftwarePort {
+            @MemoIdentity { :>> providedId = "PORT-03"; :>> label = "PATIENT_IN"; }
+            doc /* Patient bolus request (I 4, BolusRequest_prog). */
+            attribute :>> portKind = InterfaceKind::userInteraction;
+            attribute :>> dataTypeName = "DATATYPES::Patient_Inputs.Impl";
+            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
+        }
+        in port portSensorIn : SoftwarePort {
+            @MemoIdentity { :>> providedId = "PORT-04"; :>> label = "SENSOR_IN"; }
+            doc /* Device sensor inputs (air-in-line, occlusion, door, reservoir, flow). */
+            attribute :>> portKind = InterfaceKind::digitalSignal;
+            attribute :>> dataTypeName = "DATATYPES::Device_Sensor_Inputs.Impl";
+            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
+        }
+        in port portConstIn : SoftwarePort {
+            @MemoIdentity { :>> providedId = "PORT-05"; :>> label = "CONST_IN"; }
+            doc /* Device configuration constants (App. A.4 values such as Empty_Reservoir, tolerances). */
+            attribute :>> portKind = InterfaceKind::data;
+            attribute :>> dataTypeName = "DATATYPES::Device_Configuration_Inputs.Impl";
+            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
+        }
+        in port portDbIn : SoftwarePort {
+            @MemoIdentity { :>> providedId = "PORT-06"; :>> label = "DB_IN"; }
+            doc /* Hospital pharmacy database safe values (I 9-I 11); realizes SI-005 HospitalPharmacyDatabaseInterface. */
+            attribute :>> portKind = InterfaceKind::data;
+            attribute :>> dataTypeName = "DATATYPES::Drug_Database_Inputs.Impl";
+            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
+        }
+        out port portGpcaSwOut : SoftwarePort {
+            @MemoIdentity { :>> providedId = "PORT-07"; :>> label = "GPCA_SW_OUT"; }
+            doc /* Aggregated software output vector (Current_System_Mode, Commanded_Flow_Rate, notifications, prescription echo, status). */
+            attribute :>> portKind = InterfaceKind::data;
+            attribute :>> dataTypeName = "DATATYPES::GPCA_SW_Outputs.Impl";
+            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
         }
 
-        part config : SoftwareModule {
-            @MemoIdentity { :>> providedId = "SW-002"; }
-            attribute :>> responsibility = "Prescription entry, drug-library limit checking, confirmation, and persistent storage.";
-            attribute :>> safetyClass = SafetyClassKind::C;
-            attribute :>> complexity = ComplexityKind::high;
+    part tlm : SoftwareModule {
+        @MemoIdentity { :>> providedId = "SW-001"; :>> label = "Top_Level_Mode"; }
+        attribute :>> responsibility = "Ensure system ON/OFF behavior and startup/shutdown checks.";
+        attribute :>> safetyClass = SafetyClassKind::C;
+        attribute :>> complexity = ComplexityKind::medium;
 
-            out port portConfigConfigOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-01"; :>> label = "CONFIG_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
-            in port portConfigConstIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-02"; :>> label = "CONST_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
-            in port portConfigDbIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-03"; :>> label = "DB_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
-            in port portConfigOpCmdIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-04"; :>> label = "OP_CMD_IN"; } attribute :>> portKind = InterfaceKind::control; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
-            in port portConfigPresIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-05"; :>> label = "PRES_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
-            in port portConfigSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-06"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
-            in port portConfigTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-07"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
-        }
+        in port portTlmConstIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-TLM-01"; :>> label = "CONST_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (TLM)"; } }
+        in port portTlmOpCmdIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-TLM-02"; :>> label = "OP_CMD_IN"; } attribute :>> portKind = InterfaceKind::control; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (TLM)"; } }
+        out port portTlmTlmModeOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-TLM-03"; :>> label = "TLM_MODE_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (TLM)"; } }
+    }
 
-        part alarm : SoftwareModule {
-            @MemoIdentity { :>> providedId = "SW-003"; }
-            attribute :>> responsibility = "Monitor and notify exceptional conditions.";
-            attribute :>> safetyClass = SafetyClassKind::C;
-            attribute :>> complexity = ComplexityKind::high;
+    part config : SoftwareModule {
+        @MemoIdentity { :>> providedId = "SW-002"; }
+        attribute :>> responsibility = "Prescription entry, drug-library limit checking, confirmation, and persistent storage.";
+        attribute :>> safetyClass = SafetyClassKind::C;
+        attribute :>> complexity = ComplexityKind::high;
 
-            out port portAlarmAlarmOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-01"; :>> label = "ALARM_OUT"; } attribute :>> portKind = InterfaceKind::notification; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-02"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmConstIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-03"; :>> label = "CONST_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmDbIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-04"; :>> label = "DB_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmImIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-05"; :>> label = "IM_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmOpCmdIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-06"; :>> label = "OP_CMD_IN"; } attribute :>> portKind = InterfaceKind::control; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmSensorIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-07"; :>> label = "SENSOR_IN"; } attribute :>> portKind = InterfaceKind::digitalSignal; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmSysMonIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-08"; :>> label = "SYS_MON_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-09"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-            in port portAlarmTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-10"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
-        }
+        out port portConfigConfigOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-01"; :>> label = "CONFIG_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
+        in port portConfigConstIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-02"; :>> label = "CONST_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
+        in port portConfigDbIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-03"; :>> label = "DB_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
+        in port portConfigOpCmdIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-04"; :>> label = "OP_CMD_IN"; } attribute :>> portKind = InterfaceKind::control; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
+        in port portConfigPresIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-05"; :>> label = "PRES_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
+        in port portConfigSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-06"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
+        in port portConfigTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-CFG-07"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (CONFIG)"; } }
+    }
 
-        part logging : SoftwareModule {
-            @MemoIdentity { :>> providedId = "SW-004"; }
-            attribute :>> responsibility = "Append-only event log of doses, mode changes, alarms, and configuration changes.";
-            attribute :>> safetyClass = SafetyClassKind::B;
-            attribute :>> complexity = ComplexityKind::medium;
+    part alarm : SoftwareModule {
+        @MemoIdentity { :>> providedId = "SW-003"; }
+        attribute :>> responsibility = "Monitor and notify exceptional conditions.";
+        attribute :>> safetyClass = SafetyClassKind::C;
+        attribute :>> complexity = ComplexityKind::high;
 
-            in port portLogAlarmIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-01"; :>> label = "ALARM_IN"; } attribute :>> portKind = InterfaceKind::notification; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
-            in port portLogConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-02"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
-            in port portLogImIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-03"; :>> label = "IM_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
-            out port portLogLogOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-04"; :>> label = "LOG_OUT"; } attribute :>> portKind = InterfaceKind::logging; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
-            in port portLogSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-05"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
-            in port portLogTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-06"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
-        }
+        out port portAlarmAlarmOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-01"; :>> label = "ALARM_OUT"; } attribute :>> portKind = InterfaceKind::notification; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-02"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmConstIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-03"; :>> label = "CONST_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmDbIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-04"; :>> label = "DB_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmImIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-05"; :>> label = "IM_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmOpCmdIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-06"; :>> label = "OP_CMD_IN"; } attribute :>> portKind = InterfaceKind::control; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmSensorIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-07"; :>> label = "SENSOR_IN"; } attribute :>> portKind = InterfaceKind::digitalSignal; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmSysMonIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-08"; :>> label = "SYS_MON_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-09"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+        in port portAlarmTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-ALM-10"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (ALARM)"; } }
+    }
 
-        part infusionMgr : SoftwareModule {
-            @MemoIdentity { :>> providedId = "SW-005"; :>> label = "Infusion_Manager"; }
-            attribute :>> responsibility = "Handle drug infusion commands and therapy parameters.";
-            attribute :>> safetyClass = SafetyClassKind::C;
-            attribute :>> complexity = ComplexityKind::high;
+    part logging : SoftwareModule {
+        @MemoIdentity { :>> providedId = "SW-004"; }
+        attribute :>> responsibility = "Append-only event log of doses, mode changes, alarms, and configuration changes.";
+        attribute :>> safetyClass = SafetyClassKind::B;
+        attribute :>> complexity = ComplexityKind::medium;
 
-            in port portImAlarmIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-01"; :>> label = "ALARM_IN"; } attribute :>> portKind = InterfaceKind::notification; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
-            in port portImConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-02"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
-            out port portImImOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-03"; :>> label = "IM_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
-            in port portImOpCmdIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-04"; :>> label = "OP_CMD_IN"; } attribute :>> portKind = InterfaceKind::control; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
-            in port portImPatientIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-05"; :>> label = "PATIENT_IN"; } attribute :>> portKind = InterfaceKind::userInteraction; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
-            in port portImSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-06"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
-            in port portImTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-07"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
-        }
+        in port portLogAlarmIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-01"; :>> label = "ALARM_IN"; } attribute :>> portKind = InterfaceKind::notification; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
+        in port portLogConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-02"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
+        in port portLogImIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-03"; :>> label = "IM_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
+        out port portLogLogOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-04"; :>> label = "LOG_OUT"; } attribute :>> portKind = InterfaceKind::logging; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
+        in port portLogSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-05"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
+        in port portLogTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-LOG-06"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (LOG)"; } }
+    }
 
-        part systemMonitor : SoftwareModule {
-            @MemoIdentity { :>> providedId = "SW-006"; }
-            attribute :>> responsibility = "POST, periodic CPU/RAM/ROM checks, watchdog kicking, and battery supervision.";
-            attribute :>> safetyClass = SafetyClassKind::C;
-            attribute :>> complexity = ComplexityKind::medium;
+    part infusionMgr : SoftwareModule {
+        @MemoIdentity { :>> providedId = "SW-005"; :>> label = "Infusion_Manager"; }
+        attribute :>> responsibility = "Handle drug infusion commands and therapy parameters.";
+        attribute :>> safetyClass = SafetyClassKind::C;
+        attribute :>> complexity = ComplexityKind::high;
 
-            out port portSysMonSysMonOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-MON-01"; :>> label = "SYS_MON_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_MON)"; } }
-            in port portSysMonTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-MON-02"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_MON)"; } }
-        }
+        in port portImAlarmIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-01"; :>> label = "ALARM_IN"; } attribute :>> portKind = InterfaceKind::notification; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
+        in port portImConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-02"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
+        out port portImImOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-03"; :>> label = "IM_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
+        in port portImOpCmdIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-04"; :>> label = "OP_CMD_IN"; } attribute :>> portKind = InterfaceKind::control; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
+        in port portImPatientIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-05"; :>> label = "PATIENT_IN"; } attribute :>> portKind = InterfaceKind::userInteraction; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
+        in port portImSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-06"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
+        in port portImTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-IM-07"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (IM)"; } }
+    }
 
-        part systemStatus : SoftwareModule {
-            @MemoIdentity { :>> providedId = "SW-007"; }
-            attribute :>> responsibility = "Maintain the shared system status vector (Reservoir_Volume, Volume_Infused, Reservoir_Empty, In_Therapy) consumed by Alarm, Config, and Infusion_Manager.";
-            attribute :>> safetyClass = SafetyClassKind::C;
-            attribute :>> complexity = ComplexityKind::medium;
-            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/System_Status.aadl"; }
+    part systemMonitor : SoftwareModule {
+        @MemoIdentity { :>> providedId = "SW-006"; }
+        attribute :>> responsibility = "POST, periodic CPU/RAM/ROM checks, watchdog kicking, and battery supervision.";
+        attribute :>> safetyClass = SafetyClassKind::C;
+        attribute :>> complexity = ComplexityKind::medium;
 
-            in port portSysStatConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-01"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
-            in port portSysStatConstIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-02"; :>> label = "CONST_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
-            in port portSysStatImIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-03"; :>> label = "IM_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
-            in port portSysStatSensorIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-04"; :>> label = "SENSOR_IN"; } attribute :>> portKind = InterfaceKind::digitalSignal; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
-            out port portSysStatSysStatOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-05"; :>> label = "SYS_STAT_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
-            in port portSysStatTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-06"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
-        }
+        out port portSysMonSysMonOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-MON-01"; :>> label = "SYS_MON_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_MON)"; } }
+        in port portSysMonTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-MON-02"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_MON)"; } }
+    }
 
-        part outputBus : SoftwareModule {
-            @MemoIdentity { :>> providedId = "SW-008"; }
-            attribute :>> responsibility = "Aggregate all subsystem outputs into the single GPCA_SW_OUT output vector (mode, commanded flow rate, notifications, prescription echo, status).";
-            attribute :>> safetyClass = SafetyClassKind::C;
-            attribute :>> complexity = ComplexityKind::low;
-            @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/OutputBus.aadl"; }
+    part systemStatus : SoftwareModule {
+        @MemoIdentity { :>> providedId = "SW-007"; }
+        attribute :>> responsibility = "Maintain the shared system status vector (Reservoir_Volume, Volume_Infused, Reservoir_Empty, In_Therapy) consumed by Alarm, Config, and Infusion_Manager.";
+        attribute :>> safetyClass = SafetyClassKind::C;
+        attribute :>> complexity = ComplexityKind::medium;
+        @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/System_Status.aadl"; }
 
-            in port portOutputAlarmIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-01"; :>> label = "ALARM_IN"; } attribute :>> portKind = InterfaceKind::notification; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
-            in port portOutputConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-02"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
-            out port portOutputGpcaSwOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-03"; :>> label = "GPCA_SW_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
-            in port portOutputImIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-04"; :>> label = "IM_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
-            in port portOutputLogIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-05"; :>> label = "LOG_IN"; } attribute :>> portKind = InterfaceKind::logging; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
-            in port portOutputSysMonIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-06"; :>> label = "SYS_MON_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
-            in port portOutputSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-07"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
-            in port portOutputTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-08"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
-        }
-        }
+        in port portSysStatConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-01"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
+        in port portSysStatConstIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-02"; :>> label = "CONST_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
+        in port portSysStatImIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-03"; :>> label = "IM_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
+        in port portSysStatSensorIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-04"; :>> label = "SENSOR_IN"; } attribute :>> portKind = InterfaceKind::digitalSignal; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
+        out port portSysStatSysStatOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-05"; :>> label = "SYS_STAT_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
+        in port portSysStatTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-STAT-06"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (SYS_STAT)"; } }
+    }
+
+    part outputBus : SoftwareModule {
+        @MemoIdentity { :>> providedId = "SW-008"; }
+        attribute :>> responsibility = "Aggregate all subsystem outputs into the single GPCA_SW_OUT output vector (mode, commanded flow rate, notifications, prescription echo, status).";
+        attribute :>> safetyClass = SafetyClassKind::C;
+        attribute :>> complexity = ComplexityKind::low;
+        @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/OutputBus.aadl"; }
+
+        in port portOutputAlarmIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-01"; :>> label = "ALARM_IN"; } attribute :>> portKind = InterfaceKind::notification; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
+        in port portOutputConfigIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-02"; :>> label = "CONFIG_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
+        out port portOutputGpcaSwOut : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-03"; :>> label = "GPCA_SW_OUT"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
+        in port portOutputImIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-04"; :>> label = "IM_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
+        in port portOutputLogIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-05"; :>> label = "LOG_IN"; } attribute :>> portKind = InterfaceKind::logging; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
+        in port portOutputSysMonIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-06"; :>> label = "SYS_MON_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
+        in port portOutputSysStatIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-07"; :>> label = "SYS_STAT_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
+        in port portOutputTlmModeIn : SoftwarePort { @MemoIdentity { :>> providedId = "PORT-OUT-08"; :>> label = "TLM_MODE_IN"; } attribute :>> portKind = InterfaceKind::data; @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (OUTPUT)"; } }
+    }
     }
 
     // ── Hardware: aggregates (UMN AADL architectural model) ─────
@@ -377,117 +388,118 @@ package memo_examples_gpca_pump_gpca_architecture {
     }
 
     // ── Structural composition ──────────────────────────────────
-    // Device level (GPCA_Device.aadl): the assemblies and the software system
-    // are nested directly in gpcaDevice's body above, native containment
-    // instead of a Composes edge. The software modules (MEMO design
+    // Device level (GPCA_Device.aadl): the two assemblies are nested directly
+    // in gpcaDevice's body above, native containment instead of a Composes
+    // edge; the software system is a package-level part deployed onto the
+    // controller board. The software modules (MEMO design
     // extensions derived from system requirements and hazard analysis, not
     // subcomponents in the published AADL packages) are nested the same way,
     // inside gpcaSoftware's own body.
-    satisfy reqCs01 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs01 by gpcaDevice.gpcaSoftware.outputBus;
-    satisfy reqCs18 by gpcaDevice.gpcaSoftware.systemStatus;
-    satisfy reqCs23 by gpcaDevice.gpcaSoftware.systemStatus;
-    satisfy reqCs25 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs19 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqDrugLibraryLimits by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs09 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqPowerLossRetention by gpcaDevice.gpcaSoftware.config;
-    satisfy reqPost by gpcaDevice.gpcaSoftware.systemMonitor;
-    satisfy reqWatchdogSafeState by gpcaDevice.gpcaSoftware.systemMonitor;
+    satisfy reqCs01 by gpcaSoftware.tlm;
+    satisfy reqCs01 by gpcaSoftware.outputBus;
+    satisfy reqCs18 by gpcaSoftware.systemStatus;
+    satisfy reqCs23 by gpcaSoftware.systemStatus;
+    satisfy reqCs25 by gpcaSoftware.infusionMgr;
+    satisfy reqCs19 by gpcaSoftware.alarm;
+    satisfy reqDrugLibraryLimits by gpcaSoftware.config;
+    satisfy reqCs09 by gpcaSoftware.config;
+    satisfy reqPowerLossRetention by gpcaSoftware.config;
+    satisfy reqPost by gpcaSoftware.systemMonitor;
+    satisfy reqWatchdogSafeState by gpcaSoftware.systemMonitor;
     satisfy reqWatchdogSafeState by controllerBoard;
-    satisfy reqCs59 by gpcaDevice.gpcaSoftware.alarm;
+    satisfy reqCs59 by gpcaSoftware.alarm;
     satisfy reqCs72 by audibleAlarm;
-    satisfy reqCs73 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs75 by gpcaDevice.gpcaSoftware.alarm;
+    satisfy reqCs73 by gpcaSoftware.alarm;
+    satisfy reqCs75 by gpcaSoftware.alarm;
     satisfy reqCs21 by airInLineSensor;
-    satisfy reqCs21 by gpcaDevice.gpcaSoftware.alarm;
+    satisfy reqCs21 by gpcaSoftware.alarm;
     satisfy reqOcclusion by occlusionSensor;
-    satisfy reqOcclusion by gpcaDevice.gpcaSoftware.alarm;
+    satisfy reqOcclusion by gpcaSoftware.alarm;
     satisfy reqCs23 by reservoirSensor;
-    satisfy reqCs23 by gpcaDevice.gpcaSoftware.infusionMgr;
+    satisfy reqCs23 by gpcaSoftware.infusionMgr;
     satisfy reqDoorOpen by doorSensor;
-    satisfy reqDoorOpen by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqMaxHourlyDose by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqStuckButton by gpcaDevice.gpcaSoftware.infusionMgr;
+    satisfy reqDoorOpen by gpcaSoftware.infusionMgr;
+    satisfy reqMaxHourlyDose by gpcaSoftware.infusionMgr;
+    satisfy reqStuckButton by gpcaSoftware.infusionMgr;
     satisfy reqFlowCrossCheck by flowSensor;
-    satisfy reqFlowCrossCheck by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs77 by gpcaDevice.gpcaSoftware.logging;
-    satisfy reqCs78 by gpcaDevice.gpcaSoftware.logging;
-    satisfy reqEventLogging by gpcaDevice.gpcaSoftware.logging;
-    satisfy reqCs02 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs03 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs04 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs05 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs06 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs07 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs08 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs10 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs11 by gpcaDevice.gpcaSoftware.logging;
-    satisfy reqCs12 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs13 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs14 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs15 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs16 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs17 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs18 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs20 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs22 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs24 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs26 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs27 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs28 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs29 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs30 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs31 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs32 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs33 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs34 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs35 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs36 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs37 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs38 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs39 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs40 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs41 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs42 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs43 by gpcaDevice.gpcaSoftware.infusionMgr;
-    satisfy reqCs44 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs45 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs46 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs47 by gpcaDevice.gpcaSoftware.tlm;
-    satisfy reqCs48 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs49 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs50 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs51 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs52 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs53 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs54 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs55 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs56 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs57 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs58 by gpcaDevice.gpcaSoftware.config;
-    satisfy reqCs60 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs61 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs62 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs63 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs64 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs65 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs66 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs67 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs68 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs69 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs70 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs71 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs74 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs76 by gpcaDevice.gpcaSoftware.alarm;
-    satisfy reqCs79 by gpcaDevice.gpcaSoftware.logging;
-    satisfy reqCs80 by gpcaDevice.gpcaSoftware.logging;
-    satisfy reqCs81 by gpcaDevice.gpcaSoftware.logging;
-    satisfy reqCs82 by gpcaDevice.gpcaSoftware.config;
+    satisfy reqFlowCrossCheck by gpcaSoftware.alarm;
+    satisfy reqCs77 by gpcaSoftware.logging;
+    satisfy reqCs78 by gpcaSoftware.logging;
+    satisfy reqEventLogging by gpcaSoftware.logging;
+    satisfy reqCs02 by gpcaSoftware.tlm;
+    satisfy reqCs03 by gpcaSoftware.infusionMgr;
+    satisfy reqCs04 by gpcaSoftware.tlm;
+    satisfy reqCs05 by gpcaSoftware.tlm;
+    satisfy reqCs06 by gpcaSoftware.infusionMgr;
+    satisfy reqCs07 by gpcaSoftware.tlm;
+    satisfy reqCs08 by gpcaSoftware.config;
+    satisfy reqCs10 by gpcaSoftware.alarm;
+    satisfy reqCs11 by gpcaSoftware.logging;
+    satisfy reqCs12 by gpcaSoftware.tlm;
+    satisfy reqCs13 by gpcaSoftware.tlm;
+    satisfy reqCs14 by gpcaSoftware.infusionMgr;
+    satisfy reqCs15 by gpcaSoftware.alarm;
+    satisfy reqCs16 by gpcaSoftware.infusionMgr;
+    satisfy reqCs17 by gpcaSoftware.alarm;
+    satisfy reqCs18 by gpcaSoftware.alarm;
+    satisfy reqCs20 by gpcaSoftware.alarm;
+    satisfy reqCs22 by gpcaSoftware.alarm;
+    satisfy reqCs24 by gpcaSoftware.infusionMgr;
+    satisfy reqCs26 by gpcaSoftware.alarm;
+    satisfy reqCs27 by gpcaSoftware.alarm;
+    satisfy reqCs28 by gpcaSoftware.tlm;
+    satisfy reqCs29 by gpcaSoftware.tlm;
+    satisfy reqCs30 by gpcaSoftware.tlm;
+    satisfy reqCs31 by gpcaSoftware.tlm;
+    satisfy reqCs32 by gpcaSoftware.tlm;
+    satisfy reqCs33 by gpcaSoftware.tlm;
+    satisfy reqCs34 by gpcaSoftware.tlm;
+    satisfy reqCs35 by gpcaSoftware.tlm;
+    satisfy reqCs36 by gpcaSoftware.tlm;
+    satisfy reqCs37 by gpcaSoftware.tlm;
+    satisfy reqCs38 by gpcaSoftware.tlm;
+    satisfy reqCs39 by gpcaSoftware.tlm;
+    satisfy reqCs40 by gpcaSoftware.infusionMgr;
+    satisfy reqCs41 by gpcaSoftware.infusionMgr;
+    satisfy reqCs42 by gpcaSoftware.infusionMgr;
+    satisfy reqCs43 by gpcaSoftware.infusionMgr;
+    satisfy reqCs44 by gpcaSoftware.alarm;
+    satisfy reqCs45 by gpcaSoftware.tlm;
+    satisfy reqCs46 by gpcaSoftware.tlm;
+    satisfy reqCs47 by gpcaSoftware.tlm;
+    satisfy reqCs48 by gpcaSoftware.config;
+    satisfy reqCs49 by gpcaSoftware.config;
+    satisfy reqCs50 by gpcaSoftware.config;
+    satisfy reqCs51 by gpcaSoftware.config;
+    satisfy reqCs52 by gpcaSoftware.config;
+    satisfy reqCs53 by gpcaSoftware.config;
+    satisfy reqCs54 by gpcaSoftware.config;
+    satisfy reqCs55 by gpcaSoftware.config;
+    satisfy reqCs56 by gpcaSoftware.config;
+    satisfy reqCs57 by gpcaSoftware.config;
+    satisfy reqCs58 by gpcaSoftware.config;
+    satisfy reqCs60 by gpcaSoftware.alarm;
+    satisfy reqCs61 by gpcaSoftware.alarm;
+    satisfy reqCs62 by gpcaSoftware.alarm;
+    satisfy reqCs63 by gpcaSoftware.alarm;
+    satisfy reqCs64 by gpcaSoftware.alarm;
+    satisfy reqCs65 by gpcaSoftware.alarm;
+    satisfy reqCs66 by gpcaSoftware.alarm;
+    satisfy reqCs67 by gpcaSoftware.alarm;
+    satisfy reqCs68 by gpcaSoftware.alarm;
+    satisfy reqCs69 by gpcaSoftware.alarm;
+    satisfy reqCs70 by gpcaSoftware.alarm;
+    satisfy reqCs71 by gpcaSoftware.alarm;
+    satisfy reqCs74 by gpcaSoftware.alarm;
+    satisfy reqCs76 by gpcaSoftware.alarm;
+    satisfy reqCs79 by gpcaSoftware.logging;
+    satisfy reqCs80 by gpcaSoftware.logging;
+    satisfy reqCs81 by gpcaSoftware.logging;
+    satisfy reqCs82 by gpcaSoftware.config;
     satisfy reqCs83 by enclosure;
     satisfy reqCs84 by enclosure;
-    satisfy reqCs85 by gpcaDevice.gpcaSoftware.logging;
-    satisfy reqCs86 by gpcaDevice.gpcaSoftware.config;
+    satisfy reqCs85 by gpcaSoftware.logging;
+    satisfy reqCs86 by gpcaSoftware.config;
     satisfy reqPumpAccuracy by pumpMotorAssembly;
     satisfy reqAlarmLoudness by audibleAlarm;
     satisfy reqBatteryBackup by batteryPack;
