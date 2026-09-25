@@ -639,6 +639,12 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TestedByUsability connect uiElementOrTask ::> ueWrongDrugLoaded to usabilityTest ::> valSummativeUsability;
     connection : TestedByUsability connect uiElementOrTask ::> ueAlarmDisregard to usabilityTest ::> valSummativeUsability;
     connection : TestedByUsability connect uiElementOrTask ::> oaProgram to usabilityTest ::> valSummativeUsability;
+    // VAL-002's acceptance criteria name UE-001..UE-004, and each of those is
+    // committed during one task (CommitsUseError, gpca_context). Only the
+    // programming task was linked; the other three are the same evaluation.
+    connection : TestedByUsability connect uiElementOrTask ::> oaRequestBolus to usabilityTest ::> valSummativeUsability;
+    connection : TestedByUsability connect uiElementOrTask ::> oaLoadReservoir to usabilityTest ::> valSummativeUsability;
+    connection : TestedByUsability connect uiElementOrTask ::> oaRespondAlarm to usabilityTest ::> valSummativeUsability;
 
     // ── Evidence production and document inclusion ──────────────
     connection : ProducesEvidence connect producer ::> vcLockout to producedEvidence ::> evidenceLockout;
