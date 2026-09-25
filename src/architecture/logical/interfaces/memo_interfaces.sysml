@@ -1,3 +1,39 @@
+// Logical interfaces: the Interface definition, ports, exchange items, and
+// the component exchange.
+//
+// ─── A component exchange is an interface ────────────────────────────────
+//
+// `ComponentExchange` is an `interface def`: the edge between two ports IS
+// the exchange. It was a `part def` whose `sourceEndpoint`/`targetEndpoint`
+// refs named the ports, beside a separate `flow` or `bind` naming them again,
+// and CR-ONT-076 existed only to keep the two representations in step. It
+// also lost information: the builder stored a dotted ref value as its first
+// segment only, so every endpoint read as the enclosing device, and
+// CR-ONT-072/073 checked the device instead of the port.
+//
+// Its ends are the ports, and they are ports, never components: §6.2 of the
+// architecture plan requires an actual boundary port, and a rule
+// (CR-ONT-072/073) says so because the compiler does not — SysIDE accepts a
+// part at an interface end even when the definition types its ends.
+//
+// ─── Transport, delegation, and the choice between them ──────────────────
+//
+// Two ports joined by an interface still need a statement of what moves:
+// the `flow` between the same two ports. The interface is the path, and the
+// flow is the transfer over it.
+//
+// An enclosing part's boundary port and the port of a part inside it are a
+// different case, decided per hop:
+//
+//   flow     when the hop has something of its own to model: a delay, a
+//            queue, a timing or latency budget, a protocol. Write it inside
+//            the enclosing part's body, where the boundary port is a source.
+//   binding  when the boundary port is the inner port exposed and nothing
+//            happens between them: `binding name bind outer = inner { … }`,
+//            carrying the connection's identity and citation in its body.
+//
+// A delegation that is a binding is not a ComponentExchange: nothing
+// interacts, and one feature is seen from both sides.
 package memo_architecture_logical_interfaces {
     private import ScalarValues::*;
 
@@ -87,66 +123,19 @@ package memo_architecture_logical_interfaces {
     port def SensorPort specializes DataPort { attribute sensorDomain : String; }
     port def CommandPort specializes DataPort { attribute commandDomain : String; }
 
-    part def ComponentExchange specializes MemoPart {
+    // An interaction between two component ports, and the properties of that
+    // connection itself: what kind of thing it carries and its timing
+    // discipline. Authored as a typed named interface between the two ports,
+    // with the transport over it as a `flow` between the same ports:
+    //
+    //     interface ceTlmOutToOutput : ComponentExchange
+    //         connect tlm.portTlmModeOut to outputBus.portOutputTlmModeIn {
+    //         attribute :>> exchangeKind = FlowKind::status;
+    //     }
+    //     flow ceTlmOutToOutputFlow of InterfaceItem
+    //         from tlm.portTlmModeOut to outputBus.portOutputTlmModeIn;
+    interface def ComponentExchange specializes MemoInterface {
         attribute exchangeKind : FlowKind;
-        // Metaclass-neutral endpoints. CR-ONT-002 used to read: "Typed
-        // endpoints. A component or a boundary port may terminate an exchange,
-        // so the ends are MemoPart-typed." That reasoning was circular —
-        // PhysicalPort and SoftwarePort are part defs precisely SO THAT they
-        // could satisfy this typing, and the typing was justified by their
-        // being parts. Track A0 cut the circle at the ends, which is the side
-        // that has to move first: A1 turns those two into `port def`s, and a
-        // port cannot specialize a part-based type.
-        //
-        // The constraint the type was carrying — an endpoint is a component or
-        // a boundary port, never a requirement or a document — is now stated
-        // where it can be checked across metaclasses, as CR-ONT-072/073 in
-        // src/rules/ontology/ontology_invariants.sysml.
-        //
-        // `Base::Anything` rather than no type at all — the only place in this
-        // change that reaches for it. The 36 untyped ends in
-        // memo_core_relationships are `end` declarations, and an untyped `end`
-        // is established practice; an untyped `ref` with a multiplicity is not
-        // something MEMO's own grammar accepts (`Expecting token of type ';'
-        // but found '['`), and the grammar is not in this session's scope.
-        // `Base::Anything` is what the standard's `Allocations::Allocation`
-        // types its own ends with, so it is the conforming spelling of "any
-        // element", not a workaround.
-        ref sourceEndpoint : Base::Anything[0..1];
-        ref targetEndpoint : Base::Anything[0..1];
-        // `sourcePortPath` / `targetPortPath` are GONE. They were String
-        // "descriptive port paths (e.g. TLM.TLM_MODE_OUT) for AADL round-trips;
-        // labels only — never references", which is §13.3's string
-        // pseudo-reference: nothing can follow a string to an element, so
-        // anything built on them produced no traceability.
-        //
-        // Measured across the 92 sites in the GPCA example before removing
-        // them: 23 merely restated the endpoint the ref already named (15 gave
-        // the port's own display name, 8 were prose like "HW-001:
-        // GPCA_HW_Sensors"), and the other 69 named a port ON the endpoint
-        // component, resolving to 49 distinct AADL features. Those 49 are
-        // declared as real ports now and the endpoint refs point straight at
-        // them, which is what Track A1 making SoftwarePort a `port def` is for.
-        // The AADL round-trip is better served by an element than by its name.
-        //
-        // `allocatedExchanges` is GONE. The functional-to-component
-        // realization mapping is a native allocation from the functional
-        // exchange to the component exchange — `allocate lfSensorAcquisition
-        // to exSensorVector;` — and this ref list was the same fact written a
-        // second time, on the other end, where nothing kept the two in step.
-        //
-        // Both were present in the GPCA example for all four mappings, so the
-        // duplication was total and the disagreement was only ever one edit
-        // away. A reader had two places to look and no rule saying which one
-        // wins; a writer had two places to update and a lint that checked
-        // neither against the other.
-        //
-        // Navigation is a query now, not a stored field: the allocation edges
-        // are `allocatedTo` in the built model, so a component exchange's
-        // allocated functional exchanges are `upstream(allocatedTo)` from it,
-        // and the reverse is `downstream(allocatedTo)`. That is a read-only
-        // projection over the canonical relation, which is what the plan's §8
-        // calls for — never a second authoring field.
         attribute direction : DirectionKind;
         // Connection timing discipline from the source architecture
         // (e.g. AADL Communication_Properties::Timing — immediate

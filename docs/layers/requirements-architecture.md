@@ -61,7 +61,7 @@ because "physical" means more than a circuit board.
 | Software runtime view | `RuntimeComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` |
 | Deployment | `SoftwareDeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` |
 | Physical realization | `PhysicalAssembly`, `Sensor`, `Actuator`, `FluidicComponent`, `OpticalComponent`, … |
-| Interfaces | `Interface` taxonomy, `LogicalPort`/`LogicalInterface`, `ComponentExchange` with typed endpoints |
+| Interfaces | `Interface` taxonomy, `LogicalPort`/`LogicalInterface`, `ComponentExchange`, an interface between two ports |
 
 ```mermaid
 flowchart LR

@@ -221,12 +221,37 @@ them is a modelling error:
 - **`flow`** says *what moves* between two points. `of <ItemDef>` names the item
   that flows; two untyped connection ends cannot, which is why `flow` is
   strictly stronger than a bare typed edge.
-- **`bind`** delegates a port to a nested port — it makes an outer boundary and
-  an inner port the same thing. A delegation is not a transport, so **a
-  delegation cannot be a `flow`.**
+- **`bind`** says two features are *the same thing* — typically an enclosing
+  part's boundary port and the port of the part inside it that it stands for.
+  Nothing travels between them; it is one feature seen from outside and from
+  inside.
 
 The normative statement is chapters 12 and 13 of
 `memo-tools/corpus/sysml-v2-release/sysml/src/training/`.
+
+**A boundary hop can be either, and the model decides per hop.** A flow from
+an enclosing part's `in` port to its subpart's `in` port is legal SysML v2 when
+it is written *inside* the enclosing part's body — from inside, the boundary
+port is where things come from. Written at package level it is
+`redefinition-direction-conformance` (measured 2026-09-24). So:
+
+| The hop | Write |
+| --- | --- |
+| has something of its own — a delay, a queue, a timing or latency budget, a protocol | a `flow`, inside the enclosing part |
+| is the inner port exposed, with nothing between | a `binding` |
+
+A binding may be **named and carry a body**, which is how a delegation keeps
+an identity and a citation without a separate part beside it:
+
+```sysml
+binding ceOpCmdToTlm bind gpcaSoftware.portOpCmdIn = gpcaSoftware.tlm.portTlmOpCmdIn {
+    @MemoIdentity { :>> providedId = "CE-101"; }
+    attribute timingSemantics : String = "immediate (same-step delivery)";
+}
+```
+
+gpca-pump's 15 GPCA_SW boundary connections are written this way: each is
+`immediate`, with nothing between the two ports.
 
 ### Constructs parse but do not build
 
@@ -277,9 +302,12 @@ is the `connect` case of it, not a "bare connection". A 2026-08-18 audit
 listed 23 relations as needing conversion; 17 of them were already in the
 pattern and had nothing to convert. Read the spelling before scheduling work.
 
-**Only `allocate` and `connect` can carry a MEMO `def` today.** `BindingUsage`
-is `'bind' ref '=' ref ';'` and `SuccessionUsage` takes no `: Type`, so a
-relation whose semantics need `bind`, `succession` or `flow` stays a
+**`allocate`, `connect`, `flow` and `interface` can carry a MEMO `def`.** A
+named `flow x : FunctionalExchange from … to …` and a named
+`interface x : ComponentExchange connect … to …` are edges of their declared
+kind, and rules scoped to that kind reach them. A `binding` can be named and
+have a body but takes no `: Type`, and `SuccessionUsage` takes no `: Type`, so
+a relation whose semantics need a typed binding or succession stays a
 `connection def` until the grammar gains the production. Do not "convert" it by
 dropping to the untyped native form — that trades the definition's attributes
 and end typing for nothing.
