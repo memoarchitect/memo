@@ -87,11 +87,11 @@ package memo_examples_gpca_pump_gpca_behavior_actions {
 
     // ── Swimlane allocation to the logical architecture ─────────
     allocate infusionDeliveryFlow.acquireSensors to gpcaDevice.gpcaDeviceSensors;
-    allocate infusionDeliveryFlow.evaluateAlarms to gpcaDevice.gpcaSoftware.alarm;
-    allocate infusionDeliveryFlow.enforceLimits to gpcaDevice.gpcaSoftware.infusionMgr;
-    allocate infusionDeliveryFlow.computeFlow to gpcaDevice.gpcaSoftware.infusionMgr;
+    allocate infusionDeliveryFlow.evaluateAlarms to gpcaSoftware.alarm;
+    allocate infusionDeliveryFlow.enforceLimits to gpcaSoftware.infusionMgr;
+    allocate infusionDeliveryFlow.computeFlow to gpcaSoftware.infusionMgr;
     allocate infusionDeliveryFlow.actuateMotor to pumpMotorAssembly;
-    allocate infusionDeliveryFlow.logEvent to gpcaDevice.gpcaSoftware.logging;
+    allocate infusionDeliveryFlow.logEvent to gpcaSoftware.logging;
 
     // ── Functional decomposition and component allocation ───────
     // FUNC-001 "AcquireSensorData" is what the SYSTEM is answerable for.

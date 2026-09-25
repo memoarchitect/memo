@@ -329,20 +329,20 @@ package memo_examples_gpca_pump_gpca_trace {
 
     // ── Function allocation ─────────────────────────────────────
     allocate fnAcquireSensors to gpcaDevice.gpcaDeviceSensors;
-    allocate fnAcquireSensors to gpcaDevice.gpcaSoftware.systemStatus;
-    allocate fnPresentStatus to gpcaDevice.gpcaSoftware.outputBus;
-    allocate fnValidatePrescription to gpcaDevice.gpcaSoftware.config;
-    allocate fnMonitorAlarm to gpcaDevice.gpcaSoftware.alarm;
+    allocate fnAcquireSensors to gpcaSoftware.systemStatus;
+    allocate fnPresentStatus to gpcaSoftware.outputBus;
+    allocate fnValidatePrescription to gpcaSoftware.config;
+    allocate fnMonitorAlarm to gpcaSoftware.alarm;
     allocate fnAnnunciate to audibleAlarm;
-    allocate fnManageInfusion to gpcaDevice.gpcaSoftware.infusionMgr;
-    allocate fnEnforceLimits to gpcaDevice.gpcaSoftware.infusionMgr;
+    allocate fnManageInfusion to gpcaSoftware.infusionMgr;
+    allocate fnEnforceLimits to gpcaSoftware.infusionMgr;
     allocate fnCommandPump to pumpMotorAssembly;
-    allocate fnLogEvents to gpcaDevice.gpcaSoftware.logging;
-    allocate fnManagePower to gpcaDevice.gpcaSoftware.systemMonitor;
+    allocate fnLogEvents to gpcaSoftware.logging;
+    allocate fnManagePower to gpcaSoftware.systemMonitor;
     allocate fnPresentStatus to operatorDisplay;
-    allocate fnSelfTest to gpcaDevice.gpcaSoftware.systemMonitor;
+    allocate fnSelfTest to gpcaSoftware.systemMonitor;
     // ── Deployment, hosting, and interface realization ──────────
-    allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaDevice.gpcaSoftware to controllerBoard;
+    allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaSoftware to controllerBoard;
     allocation : HostedBy allocate mainController to controllerBoard;
     #refinement dependency sensorInputInterface to hwSoftwareBus;
     #refinement dependency actuatorCommandInterface to pumpMotorDrive;
@@ -369,33 +369,33 @@ package memo_examples_gpca_pump_gpca_trace {
     // recorded exactly, at port granularity, as `bind` statements in
     // gpca_interfaces.sysml — so nothing is lost by not restating them
     // here in a granularity that cannot express them.
-    flow tlmToOutputBus from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.outputBus;
-    flow infusionMgrToSystemStatus from gpcaDevice.gpcaSoftware.infusionMgr to gpcaDevice.gpcaSoftware.systemStatus;
-    flow tlmToSystemStatus from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.systemStatus;
-    flow configToSystemStatus from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.systemStatus;
-    flow systemStatusToOutputBus from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.outputBus;
-    flow infusionMgrToAlarm from gpcaDevice.gpcaSoftware.infusionMgr to gpcaDevice.gpcaSoftware.alarm;
-    flow tlmToAlarm from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.alarm;
-    flow systemMonitorToAlarm from gpcaDevice.gpcaSoftware.systemMonitor to gpcaDevice.gpcaSoftware.alarm;
-    flow systemStatusToAlarm from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.alarm;
-    flow configToAlarm from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.alarm;
-    flow alarmToOutputBus from gpcaDevice.gpcaSoftware.alarm to gpcaDevice.gpcaSoftware.outputBus;
-    flow tlmToConfig from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.config;
-    flow systemStatusToConfig from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.config;
-    flow configToOutputBus from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.outputBus;
-    flow tlmToInfusionMgr from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.infusionMgr;
-    flow configToInfusionMgr from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.infusionMgr;
-    flow alarmToInfusionMgr from gpcaDevice.gpcaSoftware.alarm to gpcaDevice.gpcaSoftware.infusionMgr;
-    flow systemStatusToInfusionMgr from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.infusionMgr;
-    flow infusionMgrToOutputBus from gpcaDevice.gpcaSoftware.infusionMgr to gpcaDevice.gpcaSoftware.outputBus;
-    flow tlmToSystemMonitor from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.systemMonitor;
-    flow systemMonitorToOutputBus from gpcaDevice.gpcaSoftware.systemMonitor to gpcaDevice.gpcaSoftware.outputBus;
-    flow tlmToLogging from gpcaDevice.gpcaSoftware.tlm to gpcaDevice.gpcaSoftware.logging;
-    flow configToLogging from gpcaDevice.gpcaSoftware.config to gpcaDevice.gpcaSoftware.logging;
-    flow alarmToLogging from gpcaDevice.gpcaSoftware.alarm to gpcaDevice.gpcaSoftware.logging;
-    flow systemStatusToLogging from gpcaDevice.gpcaSoftware.systemStatus to gpcaDevice.gpcaSoftware.logging;
-    flow infusionMgrToLogging from gpcaDevice.gpcaSoftware.infusionMgr to gpcaDevice.gpcaSoftware.logging;
-    flow loggingToOutputBus from gpcaDevice.gpcaSoftware.logging to gpcaDevice.gpcaSoftware.outputBus;
+    flow tlmToOutputBus from gpcaSoftware.tlm to gpcaSoftware.outputBus;
+    flow infusionMgrToSystemStatus from gpcaSoftware.infusionMgr to gpcaSoftware.systemStatus;
+    flow tlmToSystemStatus from gpcaSoftware.tlm to gpcaSoftware.systemStatus;
+    flow configToSystemStatus from gpcaSoftware.config to gpcaSoftware.systemStatus;
+    flow systemStatusToOutputBus from gpcaSoftware.systemStatus to gpcaSoftware.outputBus;
+    flow infusionMgrToAlarm from gpcaSoftware.infusionMgr to gpcaSoftware.alarm;
+    flow tlmToAlarm from gpcaSoftware.tlm to gpcaSoftware.alarm;
+    flow systemMonitorToAlarm from gpcaSoftware.systemMonitor to gpcaSoftware.alarm;
+    flow systemStatusToAlarm from gpcaSoftware.systemStatus to gpcaSoftware.alarm;
+    flow configToAlarm from gpcaSoftware.config to gpcaSoftware.alarm;
+    flow alarmToOutputBus from gpcaSoftware.alarm to gpcaSoftware.outputBus;
+    flow tlmToConfig from gpcaSoftware.tlm to gpcaSoftware.config;
+    flow systemStatusToConfig from gpcaSoftware.systemStatus to gpcaSoftware.config;
+    flow configToOutputBus from gpcaSoftware.config to gpcaSoftware.outputBus;
+    flow tlmToInfusionMgr from gpcaSoftware.tlm to gpcaSoftware.infusionMgr;
+    flow configToInfusionMgr from gpcaSoftware.config to gpcaSoftware.infusionMgr;
+    flow alarmToInfusionMgr from gpcaSoftware.alarm to gpcaSoftware.infusionMgr;
+    flow systemStatusToInfusionMgr from gpcaSoftware.systemStatus to gpcaSoftware.infusionMgr;
+    flow infusionMgrToOutputBus from gpcaSoftware.infusionMgr to gpcaSoftware.outputBus;
+    flow tlmToSystemMonitor from gpcaSoftware.tlm to gpcaSoftware.systemMonitor;
+    flow systemMonitorToOutputBus from gpcaSoftware.systemMonitor to gpcaSoftware.outputBus;
+    flow tlmToLogging from gpcaSoftware.tlm to gpcaSoftware.logging;
+    flow configToLogging from gpcaSoftware.config to gpcaSoftware.logging;
+    flow alarmToLogging from gpcaSoftware.alarm to gpcaSoftware.logging;
+    flow systemStatusToLogging from gpcaSoftware.systemStatus to gpcaSoftware.logging;
+    flow infusionMgrToLogging from gpcaSoftware.infusionMgr to gpcaSoftware.logging;
+    flow loggingToOutputBus from gpcaSoftware.logging to gpcaSoftware.outputBus;
 
     // ── GPCA_SW boundary features (AADL GPCA_SW.aadl; CITE-002) ──
     // The seven top-level ports are features of GPCA_Software, so
@@ -409,13 +409,13 @@ package memo_examples_gpca_pump_gpca_trace {
     bind gpcaDevice.devDbIn = gpcaDevice.gpcaDeviceSensors.snsDbIn;
     bind gpcaDevice.devPresIn = gpcaDevice.gpcaDeviceSensors.snsPresIn;
     bind gpcaDevice.devPatientIn = gpcaDevice.gpcaDeviceSensors.snsPatientIn;
-    flow snsOpCmdOutToPortOpCmdIn from gpcaDevice.gpcaDeviceSensors.snsOpCmdOut to gpcaDevice.gpcaSoftware.portOpCmdIn;
-    flow snsPresOutToPortPresIn from gpcaDevice.gpcaDeviceSensors.snsPresOut to gpcaDevice.gpcaSoftware.portPresIn;
-    flow snsPatientOutToPortPatientIn from gpcaDevice.gpcaDeviceSensors.snsPatientOut to gpcaDevice.gpcaSoftware.portPatientIn;
-    flow snsSensorOutToPortSensorIn from gpcaDevice.gpcaDeviceSensors.snsSensorOut to gpcaDevice.gpcaSoftware.portSensorIn;
-    flow snsConstOutToPortConstIn from gpcaDevice.gpcaDeviceSensors.snsConstOut to gpcaDevice.gpcaSoftware.portConstIn;
-    flow snsDbOutToPortDbIn from gpcaDevice.gpcaDeviceSensors.snsDbOut to gpcaDevice.gpcaSoftware.portDbIn;
-    flow portGpcaSwOutToActGpcaSwIn from gpcaDevice.gpcaSoftware.portGpcaSwOut to gpcaDevice.gpcaActuators.actGpcaSwIn;
+    flow snsOpCmdOutToPortOpCmdIn from gpcaDevice.gpcaDeviceSensors.snsOpCmdOut to gpcaSoftware.portOpCmdIn;
+    flow snsPresOutToPortPresIn from gpcaDevice.gpcaDeviceSensors.snsPresOut to gpcaSoftware.portPresIn;
+    flow snsPatientOutToPortPatientIn from gpcaDevice.gpcaDeviceSensors.snsPatientOut to gpcaSoftware.portPatientIn;
+    flow snsSensorOutToPortSensorIn from gpcaDevice.gpcaDeviceSensors.snsSensorOut to gpcaSoftware.portSensorIn;
+    flow snsConstOutToPortConstIn from gpcaDevice.gpcaDeviceSensors.snsConstOut to gpcaSoftware.portConstIn;
+    flow snsDbOutToPortDbIn from gpcaDevice.gpcaDeviceSensors.snsDbOut to gpcaSoftware.portDbIn;
+    flow portGpcaSwOutToActGpcaSwIn from gpcaSoftware.portGpcaSwOut to gpcaDevice.gpcaActuators.actGpcaSwIn;
     bind gpcaDevice.gpcaActuators.actGpcaOut = gpcaDevice.devGpcaOut;
 
     // ── Risk chains (ISO 14971, GIIP causal-tree structure) ─────
