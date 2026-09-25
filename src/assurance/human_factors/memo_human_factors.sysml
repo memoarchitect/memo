@@ -43,9 +43,13 @@ package memo_assurance_human_factors {
     // ── Relations owned by this package ─────────────────────────────
     // Moved out of memo_core_relationships: their ends are typed against
     // types declared here, and core must not depend on a domain package.
+    // The source end is untyped for the reason `Validates`' is: a UI element
+    // is a part and a task is an action (Track A0), so no one type spans both.
+    // The target is the usability TEST — a validation case — and not the
+    // evidence it produces; `ProducesEvidence` links the two.
     connection def TestedByUsability :> MemoRelationship {
-        end uiElementOrTask : MemoPart :>> source;
-        end usabilityTest : MemoEvidence :>> target;
+        end uiElementOrTask :>> source;
+        end usabilityTest : MemoVerificationCase :>> target;
     }
     abstract connection testedByUsabilityLinks : TestedByUsability[*];
     metadata def <testedByUsability> TestedByUsabilityMetadata :> SemanticMetadata {
