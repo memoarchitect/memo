@@ -38,7 +38,7 @@
 | [`UseError`](#useerror) | `part def` | Use error definition specializing `MemoPart`. | `MemoPart` |
 | [`CommitsUseError`](#commitsuseerror) | `connection def` | Typed relationship for commits use error. | `MemoRelationship` |
 | [`EvaluatesTask`](#evaluatestask) | `connection def` | Typed relationship for evaluates task. | `MemoRelationship` |
-| [`TestedByUsability`](#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
+| [`TestedByUsability`](#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package.… | `MemoRelationship` |
 
 ## UseError
 
@@ -93,7 +93,7 @@ connection def TestedByUsability :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package.… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -150,9 +150,13 @@ connection def TestedByUsability :> MemoRelationship
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
+        // The source end is untyped for the reason `Validates`' is: a UI element
+        // is a part and a task is an action (Track A0), so no one type spans both.
+        // The target is the usability TEST — a validation case — and not the
+        // evidence it produces; `ProducesEvidence` links the two.
         connection def TestedByUsability :> MemoRelationship {
-            end uiElementOrTask : MemoPart :>> source;
-            end usabilityTest : MemoEvidence :>> target;
+            end uiElementOrTask :>> source;
+            end usabilityTest : MemoVerificationCase :>> target;
         }
         abstract connection testedByUsabilityLinks : TestedByUsability[*];
         metadata def <testedByUsability> TestedByUsabilityMetadata :> SemanticMetadata {

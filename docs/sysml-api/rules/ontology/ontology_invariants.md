@@ -60,8 +60,7 @@
 | [`PhysicalContainsPhysicalRule`](#physicalcontainsphysicalrule) | `constraint def` | Constraint that checks physical contains physical rule. | `MemoConsistencyRule` |
 | [`ExchangeHasFlowRule`](#exchangehasflowrule) | `constraint def` | An interface is the path between two ports; the flow over it is what moves. This rule asks that a component exchange carries one: a flow whose ends are the exchange's own two ports. The ends are compared as elements (`intersects` matches exact ids), not as names.… | `MemoConsistencyRule` |
 | [`AlternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | The predicate here named three features that do not exist — `variantKind`, `baseScenario`, `variationPoint` — so it could never fail, and a rule that cannot fail is coverage on paper only.… | `MemoConsistencyRule` |
-| [`DerivationGapRule`](#derivationgaprule) | `constraint def` | Both are WARNINGS, not errors: each describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions to both.… | `MemoConsistencyRule` |
-| [`RedundantAncestorTraceRule`](#redundantancestortracerule) | `constraint def` | Constraint that checks redundant ancestor trace rule. | `MemoConsistencyRule` |
+| [`DerivationGapRule`](#derivationgaprule) | `constraint def` | A WARNING, not an error: it describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions.… | `MemoConsistencyRule` |
 
 ## ContainmentAcyclicRule
 
@@ -476,22 +475,7 @@ constraint def DerivationGapRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | Both are WARNINGS, not errors: each describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions to both.… |
-| Kind | `constraint def` |
-| Abstract | No |
-| Specializes | `MemoConsistencyRule` |
-| Owning package | `memo_rules_ontology` |
-
-
-## RedundantAncestorTraceRule
-
-```sysml
-constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Constraint that checks redundant ancestor trace rule. |
+| Description | A WARNING, not an error: it describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions.… |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -583,10 +567,17 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
         constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-041"; }
             attribute tailoring = RuleTailoringKind::invariant;
-            attribute appliesTo = "OperativeAction[criticality=high]";
+            // The selector used to be `[criticality=high]`, which left the
+            // catastrophic tasks — the most critical — outside the rule while the
+            // predicate still spelled out the catastrophic case. The criticality
+            // test lives in the predicate alone now. `testedByUsability` is the
+            // relation the human-factors package declares for exactly this link;
+            // reading only `validates` meant a task linked the way the ontology
+            // asks was still reported.
+            attribute appliesTo = "OperativeAction";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Critical tasks (criticality high or catastrophic) must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
-            attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or validates->size() >= 1";
+            attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or testedByUsability->size() >= 1 or validates->size() >= 1";
             constraint { true }
         }
         constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule {
@@ -804,7 +795,12 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
         //
         // They read the `composes` edge, which the builder synthesizes from native
         // nesting, so they cover the nesting spelling and the retired connection
-        // form identically.
+        // form identically. They read it DOWNSTREAM: a bare relation name navigates
+        // both ways, so `composes` alone also reached the subject's own parent and
+        // judged a software system by the assembly it sat in. That reported one
+        // cross-family nesting twice, once on each side, and the child's copy
+        // blamed the element that was not doing the containing. `downstream` is
+        // transitive, so the rule reads as "the subtree stays in the family".
         //
         // Ports are exempt. A port is a boundary FEATURE of its owner, not a member
         // of its owner's family, and any element may carry one whatever family it
@@ -818,7 +814,7 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
             attribute appliesTo = "SoftwareElement";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Software contains software. A software element containing a logical or physical one is realization, not containment — that is a refinement dependency.";
-            attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(SoftwareElement))";
+            attribute predicateExpression = "downstream(composes)->forAll(construct == 'port' or construct == 'package' or conformsTo(SoftwareElement))";
             constraint { true }
         }
         constraint def LogicalContainsLogicalRule :> MemoConsistencyRule {
@@ -827,7 +823,7 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
             attribute appliesTo = "LogicalComponent";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "The logical hierarchy decomposes into logical components. A logical component containing a software module or a physical part is realization — the implementation element refines the logical one, it is not part of it.";
-            attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(LogicalComponent))";
+            attribute predicateExpression = "downstream(composes)->forAll(construct == 'port' or construct == 'package' or conformsTo(LogicalComponent))";
             constraint { true }
         }
         constraint def PhysicalContainsPhysicalRule :> MemoConsistencyRule {
@@ -836,7 +832,7 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
             attribute appliesTo = "PhysicalElement";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "An assembly contains physical things. PhysicalElement is the shared root the family gained for this rule — PhysicalAssembly and PhysicalComponent previously specialized MemoPart separately, which left no type meaning 'a physical thing' to name here.";
-            attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(PhysicalElement))";
+            attribute predicateExpression = "downstream(composes)->forAll(construct == 'port' or construct == 'package' or conformsTo(PhysicalElement))";
             constraint { true }
         }
 
@@ -882,16 +878,31 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
             // the definition, and a default is not written onto every usage. So the
             // sibling test is "not alternate", and `conformsTo` keeps it from being
             // satisfied by an ordinary step of the same workflow.
-            attribute predicateExpression = "not(scenarioKind == 'alternate') or composes.composes->exists(conformsTo(OperativeScenario) and scenarioKind != 'alternate')";
+            //
+            // The base may be found three ways, and the workflow sibling is only
+            // the first. A use case is what a main scenario and its extensions
+            // vary from, so an alternate realizing a use case that a nominal
+            // scenario also realizes has its base, whichever workflow holds each
+            // (gpca-pump files its alarm responses in a workflow of their own). A
+            // scenario with no workflow at all has its package as its parent, so
+            // its siblings are the package's other workflow-less scenarios.
+            attribute predicateExpression = "not(scenarioKind == 'alternate') or composes.composes->exists(conformsTo(OperativeScenario) and scenarioKind != 'alternate') or downstream(realizes).realizes->exists(conformsTo(OperativeScenario) and scenarioKind != 'alternate') or (upstream(composes)->isEmpty() and allOfKind('OperativeScenario')->exists(package == subject.package and scenarioKind != 'alternate' and upstream(composes)->isEmpty()))";
             constraint { true }
         }
 
         // ─── Assurance-trace warnings ────────────────────────────────────────
-        // Both are WARNINGS, not errors: each describes a trace graph that is
-        // suspicious rather than invalid, and a regulated model has legitimate
-        // exceptions to both. They needed `upstream` / `downstream` — the bare
-        // relation name is bidirectional, so before those existed no rule could
-        // ask which way a derivation ran.
+        // A WARNING, not an error: it describes a trace graph that is suspicious
+        // rather than invalid, and a regulated model has legitimate exceptions.
+        // It needed `upstream` / `downstream` — the bare relation name is
+        // bidirectional, so before those existed no rule could ask which way a
+        // derivation ran.
+        //
+        // CR-ONT-081 (RedundantAncestorTraceRule) was deleted 2026-09-25. It called
+        // a trace redundant when one element satisfied both a requirement and one
+        // derived from it, "already implied by the derivation". It is not: a
+        // `derive` does not make its source satisfied, and a response-time
+        // requirement derived from "select a drug from the library" says nothing
+        // about whether the selector lets you select one.
 
         constraint def DerivationGapRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-080"; }
@@ -900,16 +911,6 @@ constraint def RedundantAncestorTraceRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "A requirement that others derive from should itself be justified. If nothing is upstream of it and it is not a stakeholder need, the derivation chain dead-ends at an unexplained requirement — the gap an assessor asks about first. Needs are the legitimate roots, so they are exempt by type rather than by convention.";
             attribute predicateExpression = "downstream(derivesFrom)->isEmpty() or upstream(derivesFrom)->notEmpty() or conformsTo(MemoNeed)";
-            constraint { true }
-        }
-
-        constraint def RedundantAncestorTraceRule :> MemoConsistencyRule {
-            @MemoIdentity { :>> providedId = "CR-ONT-081"; }
-            attribute tailoring = RuleTailoringKind::invariant;
-            attribute appliesTo = "MemoRequirementElement";
-            attribute severity = RuleSeverityKind::warning;
-            attribute rationaleText = "When one element satisfies both a requirement and something derived from that requirement, the trace to the ancestor is already implied by the derivation and adds no coverage. Two elements satisfying the two ends is ordinary decomposition and is not reported.";
-            attribute predicateExpression = "not satisfiedBy->intersects(downstream(derivesFrom).satisfiedBy)";
             constraint { true }
         }
     }

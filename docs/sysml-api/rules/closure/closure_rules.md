@@ -515,12 +515,18 @@ constraint def ScreenCaptureProvenanceRule :> MemoConsistencyRule
             attribute tailoring = RuleTailoringKind::assurance;
             attribute appliesTo = "MemoFunction";
             attribute severity = RuleSeverityKind::warning;
-            attribute rationaleText = "A function participates in the functional chain through a flow or a succession, or through the functions it decomposes into. One that participates in none of them is unreachable behaviour: nothing triggers it and nothing consumes what it produces.";
+            attribute rationaleText = "A function participates in the functional chain through a flow or a succession, through the functions it decomposes into, or by being performed — by a functional chain, or by the action that triggers it. One that participates in none of them is unreachable behaviour: nothing triggers it and nothing consumes what it produces.";
             // `downstream` and not a bare `composes`: the relation navigates both
             // ways, so a bare name would exempt every child on the strength of
             // having a parent. A decomposed function participates through its
             // parts; a leaf has to be reached by an edge of its own.
-            attribute predicateExpression = "flow->size() >= 1 or succession->size() >= 1 or downstream(composes)->size() >= 1";
+            //
+            // `upstream(performs)`: a `perform` IS participation. A functional
+            // chain names its steps that way, and a UI action performing a
+            // function is what triggers it. Without it the rule reported gpca-pump's
+            // startup chain's own two steps, and ui-screen-regions' two functions
+            // that a control invokes, as reached by nothing.
+            attribute predicateExpression = "flow->size() >= 1 or succession->size() >= 1 or downstream(composes)->size() >= 1 or upstream(performs)->size() >= 1";
             constraint { true }
         }
 
