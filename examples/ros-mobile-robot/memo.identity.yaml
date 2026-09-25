@@ -1,0 +1,94 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_ros_mobile_robot::EmergencyStop":
+    shortId: "ROS-1"
+    uuid: "bb569605-71bd-558a-8d8f-5d02597a42c0"
+  "memo_examples_ros_mobile_robot::LaserScan":
+    shortId: "ROS-4"
+    uuid: "35aa37b0-540e-5fe9-b8dc-0e5bfec683fe"
+  "memo_examples_ros_mobile_robot::VelocityCommand":
+    shortId: "ROS-20"
+    uuid: "9ed2d72e-6ff7-58c9-9d68-3fe453d67aca"
+  "memo_examples_ros_mobile_robot::imageRuntime":
+    shortId: "ROS-2"
+    uuid: "0ae81bfb-b63c-5182-b8bf-163448a2c10f"
+  "memo_examples_ros_mobile_robot::imageSafety":
+    shortId: "ROS-3"
+    uuid: "8e5cbd7a-e974-5770-b310-1ef0a5b5a365"
+  "memo_examples_ros_mobile_robot::nodeComputeUnit":
+    shortId: "PRC-1"
+    uuid: "f012f4cf-3bbc-5e13-a921-be8b084f81ee"
+  "memo_examples_ros_mobile_robot::nodeLidar":
+    shortId: "ROS-5"
+    uuid: "21dc80f4-ce6c-570a-a5da-bf508e98ef73"
+  "memo_examples_ros_mobile_robot::nodeLidar::scanPublisher":
+    shortId: "ROS-6"
+    uuid: "d8a1e19c-72b5-5cce-a10f-874f3a5dc02f"
+  "memo_examples_ros_mobile_robot::nodeNavigation":
+    shortId: "ROS-7"
+    uuid: "d9f9dcbd-f4c2-5dcf-836b-948fdbbe9629"
+  "memo_examples_ros_mobile_robot::nodeNavigation::cmdVelPublisher":
+    shortId: "ROS-8"
+    uuid: "bfcde2bd-2223-5840-b518-8e8716230ee5"
+  "memo_examples_ros_mobile_robot::nodeNavigation::estopSubscriber":
+    shortId: "ROS-9"
+    uuid: "44c5472a-ec14-58f6-9563-33af35e4b53b"
+  "memo_examples_ros_mobile_robot::nodeNavigation::navigateActionServer":
+    shortId: "ROS-10"
+    uuid: "11f058bf-c4c9-5c25-a8be-d2e0b20ba9bd"
+  "memo_examples_ros_mobile_robot::nodeNavigation::scanSubscriber":
+    shortId: "ROS-11"
+    uuid: "0b57eed5-6185-51f0-9506-cfe20bd61119"
+  "memo_examples_ros_mobile_robot::nodeNavigation::setModeClient":
+    shortId: "ROS-12"
+    uuid: "8bd0f7ca-9ed1-5060-b68a-5c5a8ceb8d12"
+  "memo_examples_ros_mobile_robot::nodeSafetyMonitor":
+    shortId: "ROS-13"
+    uuid: "fadad110-7e55-57ee-b8cd-2f72daae72d4"
+  "memo_examples_ros_mobile_robot::nodeSafetyMonitor::cmdVelSubscriber":
+    shortId: "ROS-14"
+    uuid: "34228a62-3284-5cd5-8889-2defd6592e74"
+  "memo_examples_ros_mobile_robot::nodeSafetyMonitor::estopPublisher":
+    shortId: "ROS-15"
+    uuid: "37e91073-360b-5396-8e55-866abd8e0008"
+  "memo_examples_ros_mobile_robot::nodeSafetyMonitor::navigateActionClient":
+    shortId: "ROS-16"
+    uuid: "62b35d0e-c601-538e-93c0-8da00b29c46d"
+  "memo_examples_ros_mobile_robot::nodeSafetyMonitor::scanSubscriber":
+    shortId: "ROS-17"
+    uuid: "49c042fd-58d3-5cd8-82b0-1757476cf833"
+  "memo_examples_ros_mobile_robot::nodeSafetyMonitor::setModeServer":
+    shortId: "ROS-18"
+    uuid: "f04940de-0500-58bd-8c71-3e5d66196d2a"
+  "memo_examples_ros_mobile_robot::rosRuntime":
+    shortId: "ROS-19"
+    uuid: "a3ba9180-e001-5638-8694-5919ef5d2d77"
+  "memo_examples_ros_mobile_robot::swNavigation":
+    shortId: "SFT-1"
+    uuid: "12d88ff9-af9f-5ecb-b5bd-bc08258c1c5a"
+  "memo_examples_ros_mobile_robot::swPerception":
+    shortId: "SFT-2"
+    uuid: "fc44adfc-23e0-5659-b3e3-f8b9f7a72613"
+  "memo_examples_ros_mobile_robot::swSafety":
+    shortId: "SFT-3"
+    uuid: "874c7b51-bef4-50df-b6d0-9709705fd19d"
+  "memo_examples_ros_mobile_robot::topicCmdVel":
+    shortId: "VLC-1"
+    uuid: "1ba4eaf0-6bff-5dab-bbe0-66ed67239c77"
+  "memo_examples_ros_mobile_robot::topicEstop":
+    shortId: "EMR-1"
+    uuid: "1e1f00fe-d949-5a94-afa2-5c6a1137bfb9"
+  "memo_examples_ros_mobile_robot::topicScan":
+    shortId: "LSR-1"
+    uuid: "c8ac13a6-8e7c-54d6-ab31-8df0f9dfefb5"
+  "memo_examples_ros_mobile_robot_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "9069eae9-45bc-55b1-a346-fe1526be939e"
+  "memo_examples_ros_mobile_robot_viewpoints_unassigned_views_ros_mobile_robot_overview::rosMobileRobotOverview":
+    shortId: "MMX-1"
+    uuid: "2f4b2bc1-7d42-51a8-912b-28cabe8b6615"
