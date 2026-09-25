@@ -78,10 +78,17 @@ package memo_rules_ontology {
     constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-041"; }
         attribute tailoring = RuleTailoringKind::invariant;
-        attribute appliesTo = "OperativeAction[criticality=high]";
+        // The selector used to be `[criticality=high]`, which left the
+        // catastrophic tasks — the most critical — outside the rule while the
+        // predicate still spelled out the catastrophic case. The criticality
+        // test lives in the predicate alone now. `testedByUsability` is the
+        // relation the human-factors package declares for exactly this link;
+        // reading only `validates` meant a task linked the way the ontology
+        // asks was still reported.
+        attribute appliesTo = "OperativeAction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Critical tasks (criticality high or catastrophic) must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
-        attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or validates->size() >= 1";
+        attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or testedByUsability->size() >= 1 or validates->size() >= 1";
         constraint { true }
     }
     constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule {
@@ -299,7 +306,12 @@ package memo_rules_ontology {
     //
     // They read the `composes` edge, which the builder synthesizes from native
     // nesting, so they cover the nesting spelling and the retired connection
-    // form identically.
+    // form identically. They read it DOWNSTREAM: a bare relation name navigates
+    // both ways, so `composes` alone also reached the subject's own parent and
+    // judged a software system by the assembly it sat in. That reported one
+    // cross-family nesting twice, once on each side, and the child's copy
+    // blamed the element that was not doing the containing. `downstream` is
+    // transitive, so the rule reads as "the subtree stays in the family".
     //
     // Ports are exempt. A port is a boundary FEATURE of its owner, not a member
     // of its owner's family, and any element may carry one whatever family it
@@ -313,7 +325,7 @@ package memo_rules_ontology {
         attribute appliesTo = "SoftwareElement";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Software contains software. A software element containing a logical or physical one is realization, not containment — that is a refinement dependency.";
-        attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(SoftwareElement))";
+        attribute predicateExpression = "downstream(composes)->forAll(construct == 'port' or construct == 'package' or conformsTo(SoftwareElement))";
         constraint { true }
     }
     constraint def LogicalContainsLogicalRule :> MemoConsistencyRule {
@@ -322,7 +334,7 @@ package memo_rules_ontology {
         attribute appliesTo = "LogicalComponent";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "The logical hierarchy decomposes into logical components. A logical component containing a software module or a physical part is realization — the implementation element refines the logical one, it is not part of it.";
-        attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(LogicalComponent))";
+        attribute predicateExpression = "downstream(composes)->forAll(construct == 'port' or construct == 'package' or conformsTo(LogicalComponent))";
         constraint { true }
     }
     constraint def PhysicalContainsPhysicalRule :> MemoConsistencyRule {
@@ -331,7 +343,7 @@ package memo_rules_ontology {
         attribute appliesTo = "PhysicalElement";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "An assembly contains physical things. PhysicalElement is the shared root the family gained for this rule — PhysicalAssembly and PhysicalComponent previously specialized MemoPart separately, which left no type meaning 'a physical thing' to name here.";
-        attribute predicateExpression = "composes->forAll(construct == 'port' or construct == 'package' or conformsTo(PhysicalElement))";
+        attribute predicateExpression = "downstream(composes)->forAll(construct == 'port' or construct == 'package' or conformsTo(PhysicalElement))";
         constraint { true }
     }
 
