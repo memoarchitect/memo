@@ -8,6 +8,7 @@ package memo_examples_surgical_robot {
     private import memo_core_relationships::*;
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_implementation_hardware_structure::*;
+    private import memo_architecture_realization_physical::*;
     private import memo_architecture_implementation_ui::*;
 
     private import memo_core_common::*;
@@ -33,22 +34,23 @@ package memo_examples_surgical_robot {
         attribute :>> channelRole = ChannelRoleKind::interlock;
     }
 
-    // Mechanical-force flow from actuator to instrument tip.
-    part exTipForce : LogicalExchange {
-        @MemoIdentity { :>> providedId = "SR-EX-001"; :>> label = "TipForceTransmission"; }
-        attribute :>> contentKind = FlowContentKind::mechanicalForce;
-        attribute :>> direction = DirectionKind::output;
-    }
     part actJointDrive : Actuator {
         @MemoIdentity { :>> providedId = "SR-HW-001"; :>> label = "JointDriveActuator"; }
         attribute :>> actuationKind = "brushless DC servo with harmonic drive";
+        out port pDriveOut : PhysicalPort;
     }
     part instrShaft : MechanicalPart {
+        in port pDriveIn : PhysicalPort;
         @MemoIdentity { :>> providedId = "SR-HW-002"; :>> label = "InstrumentShaft"; }
         attribute :>> mechanicalFunction = "transmits actuation to end effector";
         attribute :>> patientContact = true;
         attribute :>> contactNature = "internal tissue, direct";
         attribute :>> contactDuration = "limited (<24 h)";
+    }
+    // Mechanical-force flow from actuator to instrument tip.
+    flow exTipForce : LogicalExchange from actJointDrive.pDriveOut to instrShaft.pDriveIn {
+        @MemoIdentity { :>> providedId = "SR-EX-001"; :>> label = "TipForceTransmission"; }
+        attribute :>> contentKind = FlowContentKind::mechanicalForce;
     }
 
     // Surgeon console: haptic feedback element. The grip is hardware the
