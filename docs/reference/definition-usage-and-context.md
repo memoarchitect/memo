@@ -26,12 +26,12 @@ uses that are not in the tree — see
 argument applied to relationships. The test is whether the contract is
 *sayable* about more than one thing.
 
-Measured 2026-09-20 across `src/` and `examples/`:
+Definitions live in two places, and both are legitimate:
 
-| Where | Definitions | What that means |
-|---|---|---|
-| `src/` | 543 | the medical-device library — the public contract |
-| `examples/` | 48 | project-owned contracts, which is legitimate |
+| Where | What its definitions are |
+|---|---|
+| `src/` | the medical-device library — the public contract |
+| `examples/` | project-owned contracts, declared by the project that reuses them |
 
 A project declaring its own `def` is not a smell. `gpca-pump` declares
 `action def AcquireSensorData :> FunctionalAction` because the GPCA pump's
@@ -67,15 +67,13 @@ and derived. Do not add a second authority for it.
 A view selects and presents. It does not declare definitions, and it does not
 declare the usages it draws.
 
-**Measured 2026-09-20 — this is being violated now.** 26 definitions are
-declared inside view files in one bundled example:
+**Measured 2026-09-20 — this is being violated now.** One bundled example,
+`sysml-diagram-samples`, declares definitions inside its view files:
 
-| File | `def`s declared |
-|---|---|
-| `sysml-diagram-samples/…/views/functional_flow_view.sysml` | 12 |
-| `sysml-diagram-samples/…/views/action_flow_view.sysml` | 7 |
-| `sysml-diagram-samples/…/views/operational_behaviour_view.sysml` | 6 |
-| `sysml-diagram-samples/…/views/use_case_view.sysml` | 1 |
+- `…/views/functional_flow_view.sysml`
+- `…/views/action_flow_view.sysml`
+- `…/views/operational_behaviour_view.sysml`
+- `…/views/use_case_view.sysml`
 
 Two distinct failures are mixed in there. The `use_case_view.sysml` one is a
 genuine reusable contract in the wrong place —
@@ -90,7 +88,7 @@ connection def Specialization :> MemoRelationship {
 — a relationship definition any use-case model could want, stranded in a
 presentation file where nothing else can import it sensibly.
 
-The other 25 are worse: they are **per-layer copies of one behaviour**. The
+The rest are worse: they are **per-layer copies of one behaviour**. The
 same acquire/compute/enforce chain appears as `FxAcquire`, `FxCompute`,
 `FxEnforce` in the functional view and again as `ReceiveInput`,
 `ValidateInput`, `ProcessInput` in the action view, with parallel `Fx*`/`Op*`
