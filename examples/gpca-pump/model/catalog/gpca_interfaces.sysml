@@ -538,7 +538,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
     // pump motor and buzzer, which the AADL does not model and this design
     // extension declares for the exchange that needs it.
     interface exSensorVector : ComponentExchange
-        connect gpcaDevice.gpcaDeviceSensors.snsSensorOut to gpcaDevice.gpcaSoftware.portSensorIn {
+        connect gpcaDevice.gpcaDeviceSensors.snsSensorOut to gpcaSoftware.portSensorIn {
         @MemoIdentity { :>> providedId = "CE-001"; :>> label = "SensorStatusVectorExchange"; }
         attribute :>> exchangeKind = FlowKind::measurement;
         attribute :>> direction = DirectionKind::input;
@@ -546,7 +546,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-001; not a GPCA_Device.aadl connection"; }
     }
     interface exFlowCommand : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.portGpcaSwOut to pumpMotorAssembly.portFlowCommandIn {
+        connect gpcaSoftware.portGpcaSwOut to pumpMotorAssembly.portFlowCommandIn {
         @MemoIdentity { :>> providedId = "CE-002"; :>> label = "FlowCommandExchange"; }
         attribute :>> exchangeKind = FlowKind::command;
         attribute :>> direction = DirectionKind::output;
@@ -554,7 +554,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-002; not a GPCA_Device.aadl connection"; }
     }
     interface exAlarmAnnunciation : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.portGpcaSwOut to audibleAlarm.portAlarmIn {
+        connect gpcaSoftware.portGpcaSwOut to audibleAlarm.portAlarmIn {
         @MemoIdentity { :>> providedId = "CE-003"; :>> label = "AlarmAnnunciationExchange"; }
         attribute :>> exchangeKind = FlowKind::alarm;
         attribute :>> direction = DirectionKind::output;
@@ -562,7 +562,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-003; not a GPCA_Device.aadl connection"; }
     }
     interface exPrescriptionEntry : ComponentExchange
-        connect operatorKeypad.portPrescriptionOut to gpcaDevice.gpcaSoftware.portPresIn {
+        connect operatorKeypad.portPrescriptionOut to gpcaSoftware.portPresIn {
         @MemoIdentity { :>> providedId = "CE-004"; :>> label = "PrescriptionEntryExchange"; }
         attribute :>> exchangeKind = FlowKind::configuration;
         attribute :>> direction = DirectionKind::input;
@@ -598,14 +598,14 @@ package memo_examples_gpca_pump_gpca_interfaces {
     // with nothing between the two ports, so they are one feature seen from
     // both sides (see memo_interfaces.sysml). ALARM_to_IM immediate is the
     // same-step alarm-response mechanism the formal properties rely on.
-    binding ceOpCmdToTlm bind gpcaDevice.gpcaSoftware.portOpCmdIn = gpcaDevice.gpcaSoftware.tlm.portTlmOpCmdIn {
+    binding ceOpCmdToTlm bind gpcaSoftware.portOpCmdIn = gpcaSoftware.tlm.portTlmOpCmdIn {
         @MemoIdentity { :>> providedId = "CE-101"; :>> label = "OP_CMDtoTLM"; }
         attribute exchangeKind : FlowKind = FlowKind::command;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceConstToTlm bind gpcaDevice.gpcaSoftware.portConstIn = gpcaDevice.gpcaSoftware.tlm.portTlmConstIn {
+    binding ceConstToTlm bind gpcaSoftware.portConstIn = gpcaSoftware.tlm.portTlmConstIn {
         @MemoIdentity { :>> providedId = "CE-102"; :>> label = "CONSTtoTLM"; }
         attribute exchangeKind : FlowKind = FlowKind::configuration;
         attribute direction : DirectionKind = DirectionKind::input;
@@ -613,34 +613,34 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceTlmOutToOutput : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.outputBus.portOutputTlmModeIn {
+        connect gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.outputBus.portOutputTlmModeIn {
         @MemoIdentity { :>> providedId = "CE-103"; :>> label = "TLM_OUT_toOUTPUT"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceImToSysStat : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.infusionMgr.portImImOut to gpcaDevice.gpcaSoftware.systemStatus.portSysStatImIn {
+        connect gpcaSoftware.infusionMgr.portImImOut to gpcaSoftware.systemStatus.portSysStatImIn {
         @MemoIdentity { :>> providedId = "CE-104"; :>> label = "IM_to_SYS_STAT"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceTlmToSysStat : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.systemStatus.portSysStatTlmModeIn {
+        connect gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.systemStatus.portSysStatTlmModeIn {
         @MemoIdentity { :>> providedId = "CE-105"; :>> label = "TLM_to_SYS_STAT"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceSensorToSysStat bind gpcaDevice.gpcaSoftware.portSensorIn = gpcaDevice.gpcaSoftware.systemStatus.portSysStatSensorIn {
+    binding ceSensorToSysStat bind gpcaSoftware.portSensorIn = gpcaSoftware.systemStatus.portSysStatSensorIn {
         @MemoIdentity { :>> providedId = "CE-106"; :>> label = "SENSOR_to_SYS_STAT"; }
         attribute exchangeKind : FlowKind = FlowKind::measurement;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceConstToSysStat bind gpcaDevice.gpcaSoftware.portConstIn = gpcaDevice.gpcaSoftware.systemStatus.portSysStatConstIn {
+    binding ceConstToSysStat bind gpcaSoftware.portConstIn = gpcaSoftware.systemStatus.portSysStatConstIn {
         @MemoIdentity { :>> providedId = "CE-107"; :>> label = "CONST_to_SYS_STAT"; }
         attribute exchangeKind : FlowKind = FlowKind::configuration;
         attribute direction : DirectionKind = DirectionKind::input;
@@ -648,62 +648,62 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceConfigToSysStat : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.systemStatus.portSysStatConfigIn {
+        connect gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.systemStatus.portSysStatConfigIn {
         @MemoIdentity { :>> providedId = "CE-108"; :>> label = "CONFIG_to_SYS_STAT"; }
         attribute :>> exchangeKind = FlowKind::configuration;
         attribute :>> timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceSysStatOutToOutput : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.outputBus.portOutputSysStatIn {
+        connect gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.outputBus.portOutputSysStatIn {
         @MemoIdentity { :>> providedId = "CE-109"; :>> label = "SYS_STAT_OUT_toOUTPUT"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceImToAlarm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.infusionMgr.portImImOut to gpcaDevice.gpcaSoftware.alarm.portAlarmImIn {
+        connect gpcaSoftware.infusionMgr.portImImOut to gpcaSoftware.alarm.portAlarmImIn {
         @MemoIdentity { :>> providedId = "CE-110"; :>> label = "IM_to_ALARM"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceTlmToAlarm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.alarm.portAlarmTlmModeIn {
+        connect gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.alarm.portAlarmTlmModeIn {
         @MemoIdentity { :>> providedId = "CE-111"; :>> label = "TLM_to_ALARM"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceSysMonToAlarm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.systemMonitor.portSysMonSysMonOut to gpcaDevice.gpcaSoftware.alarm.portAlarmSysMonIn {
+        connect gpcaSoftware.systemMonitor.portSysMonSysMonOut to gpcaSoftware.alarm.portAlarmSysMonIn {
         @MemoIdentity { :>> providedId = "CE-112"; :>> label = "SYS_MON_to_ALARM"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceOpCmdToAlarm bind gpcaDevice.gpcaSoftware.portOpCmdIn = gpcaDevice.gpcaSoftware.alarm.portAlarmOpCmdIn {
+    binding ceOpCmdToAlarm bind gpcaSoftware.portOpCmdIn = gpcaSoftware.alarm.portAlarmOpCmdIn {
         @MemoIdentity { :>> providedId = "CE-113"; :>> label = "OP_CMD_to_ALARM"; }
         attribute exchangeKind : FlowKind = FlowKind::command;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceDbToAlarm bind gpcaDevice.gpcaSoftware.portDbIn = gpcaDevice.gpcaSoftware.alarm.portAlarmDbIn {
+    binding ceDbToAlarm bind gpcaSoftware.portDbIn = gpcaSoftware.alarm.portAlarmDbIn {
         @MemoIdentity { :>> providedId = "CE-114"; :>> label = "DB_to_ALARM"; }
         attribute exchangeKind : FlowKind = FlowKind::configuration;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceSensorToAlarm bind gpcaDevice.gpcaSoftware.portSensorIn = gpcaDevice.gpcaSoftware.alarm.portAlarmSensorIn {
+    binding ceSensorToAlarm bind gpcaSoftware.portSensorIn = gpcaSoftware.alarm.portAlarmSensorIn {
         @MemoIdentity { :>> providedId = "CE-115"; :>> label = "SENSOR_to_ALARM"; }
         attribute exchangeKind : FlowKind = FlowKind::measurement;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceConstToAlarm bind gpcaDevice.gpcaSoftware.portConstIn = gpcaDevice.gpcaSoftware.alarm.portAlarmConstIn {
+    binding ceConstToAlarm bind gpcaSoftware.portConstIn = gpcaSoftware.alarm.portAlarmConstIn {
         @MemoIdentity { :>> providedId = "CE-116"; :>> label = "CONST_to_ALARM"; }
         attribute exchangeKind : FlowKind = FlowKind::configuration;
         attribute direction : DirectionKind = DirectionKind::input;
@@ -711,55 +711,55 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceSysStatToAlarm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.alarm.portAlarmSysStatIn {
+        connect gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.alarm.portAlarmSysStatIn {
         @MemoIdentity { :>> providedId = "CE-117"; :>> label = "SYS_STAT_to_ALARM"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceConfigToAlarm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.alarm.portAlarmConfigIn {
+        connect gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.alarm.portAlarmConfigIn {
         @MemoIdentity { :>> providedId = "CE-118"; :>> label = "CONFIG_to_ALARM"; }
         attribute :>> exchangeKind = FlowKind::configuration;
         attribute :>> timingSemantics = "sampled (no timing property in source; AADL default breaks the feedback cycle)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceAlarmOutToOutput : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.alarm.portAlarmAlarmOut to gpcaDevice.gpcaSoftware.outputBus.portOutputAlarmIn {
+        connect gpcaSoftware.alarm.portAlarmAlarmOut to gpcaSoftware.outputBus.portOutputAlarmIn {
         @MemoIdentity { :>> providedId = "CE-119"; :>> label = "ALARM_OUT_toOUTPUT"; }
         attribute :>> exchangeKind = FlowKind::alarm;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceTlmToConfig : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.config.portConfigTlmModeIn {
+        connect gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.config.portConfigTlmModeIn {
         @MemoIdentity { :>> providedId = "CE-120"; :>> label = "TLM_to_CONFIG"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding cePresToConfig bind gpcaDevice.gpcaSoftware.portPresIn = gpcaDevice.gpcaSoftware.config.portConfigPresIn {
+    binding cePresToConfig bind gpcaSoftware.portPresIn = gpcaSoftware.config.portConfigPresIn {
         @MemoIdentity { :>> providedId = "CE-121"; :>> label = "PRES_to_CONFIG"; }
         attribute exchangeKind : FlowKind = FlowKind::configuration;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceOpCmdToConfig bind gpcaDevice.gpcaSoftware.portOpCmdIn = gpcaDevice.gpcaSoftware.config.portConfigOpCmdIn {
+    binding ceOpCmdToConfig bind gpcaSoftware.portOpCmdIn = gpcaSoftware.config.portConfigOpCmdIn {
         @MemoIdentity { :>> providedId = "CE-122"; :>> label = "OP_CMD_to_CONFIG"; }
         attribute exchangeKind : FlowKind = FlowKind::command;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceDbToConfig bind gpcaDevice.gpcaSoftware.portDbIn = gpcaDevice.gpcaSoftware.config.portConfigDbIn {
+    binding ceDbToConfig bind gpcaSoftware.portDbIn = gpcaSoftware.config.portConfigDbIn {
         @MemoIdentity { :>> providedId = "CE-123"; :>> label = "DB_to_CONFIG"; }
         attribute exchangeKind : FlowKind = FlowKind::configuration;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceConsToConfig bind gpcaDevice.gpcaSoftware.portConstIn = gpcaDevice.gpcaSoftware.config.portConfigConstIn {
+    binding ceConsToConfig bind gpcaSoftware.portConstIn = gpcaSoftware.config.portConfigConstIn {
         @MemoIdentity { :>> providedId = "CE-124"; :>> label = "CONS_to_CONFIG"; }
         attribute exchangeKind : FlowKind = FlowKind::configuration;
         attribute direction : DirectionKind = DirectionKind::input;
@@ -767,34 +767,34 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceSysStatToConfig : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.config.portConfigSysStatIn {
+        connect gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.config.portConfigSysStatIn {
         @MemoIdentity { :>> providedId = "CE-125"; :>> label = "SYS_STAT_to_CONFIG"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceConfigToOutput : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.outputBus.portOutputConfigIn {
+        connect gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.outputBus.portOutputConfigIn {
         @MemoIdentity { :>> providedId = "CE-126"; :>> label = "CONFIG_toOUTPUT"; }
         attribute :>> exchangeKind = FlowKind::configuration;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceTlmToIm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.infusionMgr.portImTlmModeIn {
+        connect gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.infusionMgr.portImTlmModeIn {
         @MemoIdentity { :>> providedId = "CE-127"; :>> label = "TLM_to_IM"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceOpCmdToIm bind gpcaDevice.gpcaSoftware.portOpCmdIn = gpcaDevice.gpcaSoftware.infusionMgr.portImOpCmdIn {
+    binding ceOpCmdToIm bind gpcaSoftware.portOpCmdIn = gpcaSoftware.infusionMgr.portImOpCmdIn {
         @MemoIdentity { :>> providedId = "CE-128"; :>> label = "OP_CMD_to_IM"; }
         attribute exchangeKind : FlowKind = FlowKind::command;
         attribute direction : DirectionKind = DirectionKind::input;
         attribute timingSemantics : String = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding cePatientToIm bind gpcaDevice.gpcaSoftware.portPatientIn = gpcaDevice.gpcaSoftware.infusionMgr.portImPatientIn {
+    binding cePatientToIm bind gpcaSoftware.portPatientIn = gpcaSoftware.infusionMgr.portImPatientIn {
         @MemoIdentity { :>> providedId = "CE-129"; :>> label = "PATIENT_to_IM"; }
         attribute exchangeKind : FlowKind = FlowKind::command;
         attribute direction : DirectionKind = DirectionKind::input;
@@ -802,90 +802,90 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceConfigToIm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.infusionMgr.portImConfigIn {
+        connect gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.infusionMgr.portImConfigIn {
         @MemoIdentity { :>> providedId = "CE-130"; :>> label = "CONFIG_to_IM"; }
         attribute :>> exchangeKind = FlowKind::configuration;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceAlarmToIm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.alarm.portAlarmAlarmOut to gpcaDevice.gpcaSoftware.infusionMgr.portImAlarmIn {
+        connect gpcaSoftware.alarm.portAlarmAlarmOut to gpcaSoftware.infusionMgr.portImAlarmIn {
         @MemoIdentity { :>> providedId = "CE-131"; :>> label = "ALARM_to_IM"; }
         attribute :>> exchangeKind = FlowKind::alarm;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceSysStatToIm : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.infusionMgr.portImSysStatIn {
+        connect gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.infusionMgr.portImSysStatIn {
         @MemoIdentity { :>> providedId = "CE-132"; :>> label = "SYS_STAT_to_IM"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceImToOutput : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.infusionMgr.portImImOut to gpcaDevice.gpcaSoftware.outputBus.portOutputImIn {
+        connect gpcaSoftware.infusionMgr.portImImOut to gpcaSoftware.outputBus.portOutputImIn {
         @MemoIdentity { :>> providedId = "CE-133"; :>> label = "IM_toOUTPUT"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceTlmToSysMon : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.systemMonitor.portSysMonTlmModeIn {
+        connect gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.systemMonitor.portSysMonTlmModeIn {
         @MemoIdentity { :>> providedId = "CE-134"; :>> label = "TLM_to_SYS_MON"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceSysMonToOutput : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.systemMonitor.portSysMonSysMonOut to gpcaDevice.gpcaSoftware.outputBus.portOutputSysMonIn {
+        connect gpcaSoftware.systemMonitor.portSysMonSysMonOut to gpcaSoftware.outputBus.portOutputSysMonIn {
         @MemoIdentity { :>> providedId = "CE-135"; :>> label = "SYS_MON_toOUTPUT"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceTlmToLog : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.logging.portLogTlmModeIn {
+        connect gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.logging.portLogTlmModeIn {
         @MemoIdentity { :>> providedId = "CE-136"; :>> label = "TLM_to_LOG"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceConfigToLog : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.logging.portLogConfigIn {
+        connect gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.logging.portLogConfigIn {
         @MemoIdentity { :>> providedId = "CE-137"; :>> label = "CONFIG_to_LOG"; }
         attribute :>> exchangeKind = FlowKind::configuration;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceAlarmToLog : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.alarm.portAlarmAlarmOut to gpcaDevice.gpcaSoftware.logging.portLogAlarmIn {
+        connect gpcaSoftware.alarm.portAlarmAlarmOut to gpcaSoftware.logging.portLogAlarmIn {
         @MemoIdentity { :>> providedId = "CE-138"; :>> label = "ALARM_to_LOG"; }
         attribute :>> exchangeKind = FlowKind::alarm;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceSysStatToLog : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.logging.portLogSysStatIn {
+        connect gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.logging.portLogSysStatIn {
         @MemoIdentity { :>> providedId = "CE-139"; :>> label = "SYS_STAT_to_LOG"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceImToLog : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.infusionMgr.portImImOut to gpcaDevice.gpcaSoftware.logging.portLogImIn {
+        connect gpcaSoftware.infusionMgr.portImImOut to gpcaSoftware.logging.portLogImIn {
         @MemoIdentity { :>> providedId = "CE-140"; :>> label = "IM_to_LOG"; }
         attribute :>> exchangeKind = FlowKind::status;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
     interface ceLogToOutput : ComponentExchange
-        connect gpcaDevice.gpcaSoftware.logging.portLogLogOut to gpcaDevice.gpcaSoftware.outputBus.portOutputLogIn {
+        connect gpcaSoftware.logging.portLogLogOut to gpcaSoftware.outputBus.portOutputLogIn {
         @MemoIdentity { :>> providedId = "CE-141"; :>> label = "LOG_toOUTPUT"; }
         attribute :>> exchangeKind = FlowKind::audit;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, packages/GPCA_SW.aadl (GPCA_SW.Impl)"; }
     }
-    binding ceOutputToGpcaOut bind gpcaDevice.gpcaSoftware.outputBus.portOutputGpcaSwOut = gpcaDevice.gpcaSoftware.portGpcaSwOut {
+    binding ceOutputToGpcaOut bind gpcaSoftware.outputBus.portOutputGpcaSwOut = gpcaSoftware.portGpcaSwOut {
         @MemoIdentity { :>> providedId = "CE-142"; :>> label = "OUTPUT_to_GPCA_OUT"; }
         attribute exchangeKind : FlowKind = FlowKind::status;
         attribute direction : DirectionKind = DirectionKind::output;
@@ -964,35 +964,35 @@ package memo_examples_gpca_pump_gpca_interfaces {
     // the exchanges above: each is `immediate (same-step delivery)` with no
     // delay, queue or budget of its own, so the boundary port IS the inner
     // port seen from outside and nothing travels between them.
-    flow exSensorVectorFlow of InterfaceItem from gpcaDevice.gpcaDeviceSensors.snsSensorOut to gpcaDevice.gpcaSoftware.portSensorIn;
-    flow exFlowCommandFlow of InterfaceItem from gpcaDevice.gpcaSoftware.portGpcaSwOut to pumpMotorAssembly.portFlowCommandIn;
-    flow exAlarmAnnunciationFlow of InterfaceItem from gpcaDevice.gpcaSoftware.portGpcaSwOut to audibleAlarm.portAlarmIn;
-    flow exPrescriptionEntryFlow of InterfaceItem from operatorKeypad.portPrescriptionOut to gpcaDevice.gpcaSoftware.portPresIn;
-    flow ceTlmOutToOutputFlow of InterfaceItem from gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.outputBus.portOutputTlmModeIn;
-    flow ceImToSysStatFlow of InterfaceItem from gpcaDevice.gpcaSoftware.infusionMgr.portImImOut to gpcaDevice.gpcaSoftware.systemStatus.portSysStatImIn;
-    flow ceTlmToSysStatFlow of InterfaceItem from gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.systemStatus.portSysStatTlmModeIn;
-    flow ceConfigToSysStatFlow of InterfaceItem from gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.systemStatus.portSysStatConfigIn;
-    flow ceSysStatOutToOutputFlow of InterfaceItem from gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.outputBus.portOutputSysStatIn;
-    flow ceImToAlarmFlow of InterfaceItem from gpcaDevice.gpcaSoftware.infusionMgr.portImImOut to gpcaDevice.gpcaSoftware.alarm.portAlarmImIn;
-    flow ceTlmToAlarmFlow of InterfaceItem from gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.alarm.portAlarmTlmModeIn;
-    flow ceSysMonToAlarmFlow of InterfaceItem from gpcaDevice.gpcaSoftware.systemMonitor.portSysMonSysMonOut to gpcaDevice.gpcaSoftware.alarm.portAlarmSysMonIn;
-    flow ceSysStatToAlarmFlow of InterfaceItem from gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.alarm.portAlarmSysStatIn;
-    flow ceConfigToAlarmFlow of InterfaceItem from gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.alarm.portAlarmConfigIn;
-    flow ceAlarmOutToOutputFlow of InterfaceItem from gpcaDevice.gpcaSoftware.alarm.portAlarmAlarmOut to gpcaDevice.gpcaSoftware.outputBus.portOutputAlarmIn;
-    flow ceTlmToConfigFlow of InterfaceItem from gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.config.portConfigTlmModeIn;
-    flow ceSysStatToConfigFlow of InterfaceItem from gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.config.portConfigSysStatIn;
-    flow ceConfigToOutputFlow of InterfaceItem from gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.outputBus.portOutputConfigIn;
-    flow ceTlmToImFlow of InterfaceItem from gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.infusionMgr.portImTlmModeIn;
-    flow ceConfigToImFlow of InterfaceItem from gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.infusionMgr.portImConfigIn;
-    flow ceAlarmToImFlow of InterfaceItem from gpcaDevice.gpcaSoftware.alarm.portAlarmAlarmOut to gpcaDevice.gpcaSoftware.infusionMgr.portImAlarmIn;
-    flow ceSysStatToImFlow of InterfaceItem from gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.infusionMgr.portImSysStatIn;
-    flow ceImToOutputFlow of InterfaceItem from gpcaDevice.gpcaSoftware.infusionMgr.portImImOut to gpcaDevice.gpcaSoftware.outputBus.portOutputImIn;
-    flow ceTlmToSysMonFlow of InterfaceItem from gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.systemMonitor.portSysMonTlmModeIn;
-    flow ceSysMonToOutputFlow of InterfaceItem from gpcaDevice.gpcaSoftware.systemMonitor.portSysMonSysMonOut to gpcaDevice.gpcaSoftware.outputBus.portOutputSysMonIn;
-    flow ceTlmToLogFlow of InterfaceItem from gpcaDevice.gpcaSoftware.tlm.portTlmTlmModeOut to gpcaDevice.gpcaSoftware.logging.portLogTlmModeIn;
-    flow ceConfigToLogFlow of InterfaceItem from gpcaDevice.gpcaSoftware.config.portConfigConfigOut to gpcaDevice.gpcaSoftware.logging.portLogConfigIn;
-    flow ceAlarmToLogFlow of InterfaceItem from gpcaDevice.gpcaSoftware.alarm.portAlarmAlarmOut to gpcaDevice.gpcaSoftware.logging.portLogAlarmIn;
-    flow ceSysStatToLogFlow of InterfaceItem from gpcaDevice.gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaDevice.gpcaSoftware.logging.portLogSysStatIn;
-    flow ceImToLogFlow of InterfaceItem from gpcaDevice.gpcaSoftware.infusionMgr.portImImOut to gpcaDevice.gpcaSoftware.logging.portLogImIn;
-    flow ceLogToOutputFlow of InterfaceItem from gpcaDevice.gpcaSoftware.logging.portLogLogOut to gpcaDevice.gpcaSoftware.outputBus.portOutputLogIn;
+    flow exSensorVectorFlow of InterfaceItem from gpcaDevice.gpcaDeviceSensors.snsSensorOut to gpcaSoftware.portSensorIn;
+    flow exFlowCommandFlow of InterfaceItem from gpcaSoftware.portGpcaSwOut to pumpMotorAssembly.portFlowCommandIn;
+    flow exAlarmAnnunciationFlow of InterfaceItem from gpcaSoftware.portGpcaSwOut to audibleAlarm.portAlarmIn;
+    flow exPrescriptionEntryFlow of InterfaceItem from operatorKeypad.portPrescriptionOut to gpcaSoftware.portPresIn;
+    flow ceTlmOutToOutputFlow of InterfaceItem from gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.outputBus.portOutputTlmModeIn;
+    flow ceImToSysStatFlow of InterfaceItem from gpcaSoftware.infusionMgr.portImImOut to gpcaSoftware.systemStatus.portSysStatImIn;
+    flow ceTlmToSysStatFlow of InterfaceItem from gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.systemStatus.portSysStatTlmModeIn;
+    flow ceConfigToSysStatFlow of InterfaceItem from gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.systemStatus.portSysStatConfigIn;
+    flow ceSysStatOutToOutputFlow of InterfaceItem from gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.outputBus.portOutputSysStatIn;
+    flow ceImToAlarmFlow of InterfaceItem from gpcaSoftware.infusionMgr.portImImOut to gpcaSoftware.alarm.portAlarmImIn;
+    flow ceTlmToAlarmFlow of InterfaceItem from gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.alarm.portAlarmTlmModeIn;
+    flow ceSysMonToAlarmFlow of InterfaceItem from gpcaSoftware.systemMonitor.portSysMonSysMonOut to gpcaSoftware.alarm.portAlarmSysMonIn;
+    flow ceSysStatToAlarmFlow of InterfaceItem from gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.alarm.portAlarmSysStatIn;
+    flow ceConfigToAlarmFlow of InterfaceItem from gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.alarm.portAlarmConfigIn;
+    flow ceAlarmOutToOutputFlow of InterfaceItem from gpcaSoftware.alarm.portAlarmAlarmOut to gpcaSoftware.outputBus.portOutputAlarmIn;
+    flow ceTlmToConfigFlow of InterfaceItem from gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.config.portConfigTlmModeIn;
+    flow ceSysStatToConfigFlow of InterfaceItem from gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.config.portConfigSysStatIn;
+    flow ceConfigToOutputFlow of InterfaceItem from gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.outputBus.portOutputConfigIn;
+    flow ceTlmToImFlow of InterfaceItem from gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.infusionMgr.portImTlmModeIn;
+    flow ceConfigToImFlow of InterfaceItem from gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.infusionMgr.portImConfigIn;
+    flow ceAlarmToImFlow of InterfaceItem from gpcaSoftware.alarm.portAlarmAlarmOut to gpcaSoftware.infusionMgr.portImAlarmIn;
+    flow ceSysStatToImFlow of InterfaceItem from gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.infusionMgr.portImSysStatIn;
+    flow ceImToOutputFlow of InterfaceItem from gpcaSoftware.infusionMgr.portImImOut to gpcaSoftware.outputBus.portOutputImIn;
+    flow ceTlmToSysMonFlow of InterfaceItem from gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.systemMonitor.portSysMonTlmModeIn;
+    flow ceSysMonToOutputFlow of InterfaceItem from gpcaSoftware.systemMonitor.portSysMonSysMonOut to gpcaSoftware.outputBus.portOutputSysMonIn;
+    flow ceTlmToLogFlow of InterfaceItem from gpcaSoftware.tlm.portTlmTlmModeOut to gpcaSoftware.logging.portLogTlmModeIn;
+    flow ceConfigToLogFlow of InterfaceItem from gpcaSoftware.config.portConfigConfigOut to gpcaSoftware.logging.portLogConfigIn;
+    flow ceAlarmToLogFlow of InterfaceItem from gpcaSoftware.alarm.portAlarmAlarmOut to gpcaSoftware.logging.portLogAlarmIn;
+    flow ceSysStatToLogFlow of InterfaceItem from gpcaSoftware.systemStatus.portSysStatSysStatOut to gpcaSoftware.logging.portLogSysStatIn;
+    flow ceImToLogFlow of InterfaceItem from gpcaSoftware.infusionMgr.portImImOut to gpcaSoftware.logging.portLogImIn;
+    flow ceLogToOutputFlow of InterfaceItem from gpcaSoftware.logging.portLogLogOut to gpcaSoftware.outputBus.portOutputLogIn;
 }

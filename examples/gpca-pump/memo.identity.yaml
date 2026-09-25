@@ -206,207 +206,204 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaDeviceSensors::snsSensorOut":
     shortId: "PHY-23"
     uuid: "3f7e9f95-e094-5f17-ab02-43daad961bf9"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware":
-    shortId: "SFT-3"
-    uuid: "08bdacae-a613-5b49-8933-89e241f55cbb"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm":
-    shortId: "SFT-1"
-    uuid: "110f17f9-be56-511e-9064-e4ff9a3c1d81"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmAlarmOut":
-    shortId: "SFT-7"
-    uuid: "0b9fdf8e-97d5-5df8-94e1-e69d83d2362d"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmConfigIn":
-    shortId: "SFT-8"
-    uuid: "d1a2d48c-ee07-55ee-b9a1-b64c5141bbcd"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmConstIn":
-    shortId: "SFT-9"
-    uuid: "738472a6-4ec2-5f41-b9c7-b3f811618c22"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmDbIn":
-    shortId: "SFT-10"
-    uuid: "1e2103dd-602d-5397-bf90-18f86010d8eb"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmImIn":
-    shortId: "SFT-11"
-    uuid: "56012c66-9181-5619-8db7-40d0e16bac91"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmOpCmdIn":
-    shortId: "SFT-12"
-    uuid: "d0fd7f35-80fe-552d-81a7-eeea4885a370"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmSensorIn":
-    shortId: "SFT-13"
-    uuid: "48acd08a-3c96-5257-b845-23ab561dc711"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmSysMonIn":
-    shortId: "SFT-14"
-    uuid: "203dd019-be6e-5c0a-a6ef-d1766354ec5e"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmSysStatIn":
-    shortId: "SFT-15"
-    uuid: "60306381-2fba-5189-9c41-804a761e6c5e"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::alarm::portAlarmTlmModeIn":
-    shortId: "SFT-16"
-    uuid: "3674eb47-cc20-5802-9128-c496c309396a"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config":
-    shortId: "SFT-2"
-    uuid: "2ff77950-188f-5ad3-956b-a75e8ef8663f"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigConfigOut":
-    shortId: "SFT-17"
-    uuid: "5721d0ae-87fb-5af5-aba9-fc666a1f540b"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigConstIn":
-    shortId: "SFT-18"
-    uuid: "1323b0fd-aef6-5bf0-a4f6-5938ab61ea10"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigDbIn":
-    shortId: "SFT-19"
-    uuid: "b96133a4-40d7-5ce3-b955-24a55fa92009"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigOpCmdIn":
-    shortId: "SFT-20"
-    uuid: "c68d646d-4db2-5bee-a97f-daf8660d99f9"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigPresIn":
-    shortId: "SFT-21"
-    uuid: "859b7b60-0a34-59e1-8fff-f201c202a337"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigSysStatIn":
-    shortId: "SFT-22"
-    uuid: "3d52b8b7-f163-5287-94b1-e199072d206e"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::config::portConfigTlmModeIn":
-    shortId: "SFT-23"
-    uuid: "99c20d9f-7da8-5ad4-ab38-6ae6d0ffba8e"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr":
-    shortId: "SFT-4"
-    uuid: "570c7d1e-7cab-58ed-a4f8-fc899db694f0"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImAlarmIn":
-    shortId: "SFT-27"
-    uuid: "966d3279-3fe4-525d-b10b-a8c8332b68c4"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImConfigIn":
-    shortId: "SFT-28"
-    uuid: "f92baa07-dec3-5e46-b400-1f9cc43ecf17"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImImOut":
-    shortId: "SFT-29"
-    uuid: "abc1e282-11aa-5299-9f68-ad2b0d9a4f53"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImOpCmdIn":
-    shortId: "SFT-30"
-    uuid: "3c406408-ba49-5e79-b857-da937e3059d1"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImPatientIn":
-    shortId: "SFT-31"
-    uuid: "3f5633f9-71ed-55fa-9c45-5f85f31bd3ff"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImSysStatIn":
-    shortId: "SFT-32"
-    uuid: "b5e91a0e-0f79-55a9-9ccc-e8fbb3426d04"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::infusionMgr::portImTlmModeIn":
-    shortId: "SFT-33"
-    uuid: "58ba100c-4df1-558b-a40b-c4e97ad2ab38"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging":
-    shortId: "SFT-5"
-    uuid: "fab98ac1-8487-5d04-8e48-040f0ad60b81"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogAlarmIn":
-    shortId: "SFT-34"
-    uuid: "5fb10131-3307-5871-bc89-f25daa6b6930"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogConfigIn":
-    shortId: "SFT-35"
-    uuid: "74abe28f-8785-5697-8f92-cae13aa1525f"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogImIn":
-    shortId: "SFT-36"
-    uuid: "39d04ac0-dd64-50c3-b7e4-7797910546a1"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogLogOut":
-    shortId: "SFT-37"
-    uuid: "036f4979-131c-50a0-aace-20adecdd00bc"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogSysStatIn":
-    shortId: "SFT-38"
-    uuid: "c6dbd8b7-3017-562b-b527-9b0c6247f906"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::logging::portLogTlmModeIn":
-    shortId: "SFT-39"
-    uuid: "595789cc-258c-530a-ab14-ab731b4cbc34"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus":
-    shortId: "SFT-6"
-    uuid: "ec3d1795-6601-521d-a420-84c7e2609bee"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputAlarmIn":
-    shortId: "SFT-41"
-    uuid: "e943cee5-d97e-54a4-8e15-d16f7dd93f09"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputConfigIn":
-    shortId: "SFT-42"
-    uuid: "72c1e602-3cd2-571d-b472-b069803cfb7a"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputGpcaSwOut":
-    shortId: "SFT-43"
-    uuid: "568300a8-e3c3-5a88-96d3-6b4beef1c96d"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputImIn":
-    shortId: "SFT-44"
-    uuid: "f3254de9-b396-5f27-9f39-08918914540d"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputLogIn":
-    shortId: "SFT-45"
-    uuid: "764e0728-f341-5721-953d-927867256405"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputSysMonIn":
-    shortId: "SFT-46"
-    uuid: "69637700-9b17-5002-ac2c-b90218d060cb"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputSysStatIn":
-    shortId: "SFT-47"
-    uuid: "fbe7a6fb-538d-5b9d-b1e9-9538ef8031ce"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::outputBus::portOutputTlmModeIn":
-    shortId: "SFT-48"
-    uuid: "5499f645-1929-5dd6-8d38-eb3b6fef268b"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portConstIn":
-    shortId: "SFT-24"
-    uuid: "b143b27f-f142-5712-aa1d-55fb81aebc3a"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portDbIn":
-    shortId: "SFT-25"
-    uuid: "59b79452-c6d3-5d03-bdef-32616cb1370b"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portGpcaSwOut":
-    shortId: "SFT-26"
-    uuid: "c72f371f-66b8-539a-b275-26f23839b995"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portOpCmdIn":
-    shortId: "SFT-40"
-    uuid: "1ec61ab0-01f2-5560-a76b-3404f68f7af3"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portPatientIn":
-    shortId: "SFT-49"
-    uuid: "37810df2-852d-5559-bb30-4c5b5f2671ba"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portPresIn":
-    shortId: "SFT-50"
-    uuid: "089c23c1-565b-59df-b23d-b515c5d88468"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::portSensorIn":
-    shortId: "SFT-51"
-    uuid: "8eb5a80d-5fab-5df7-b00b-a67c986cb040"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemMonitor":
-    shortId: "SFT-64"
-    uuid: "ad826d0b-9a71-5ebc-8f17-b2a280c41069"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemMonitor::portSysMonSysMonOut":
-    shortId: "SFT-52"
-    uuid: "d0231597-ae2b-56c1-94e6-7eae02beb5ee"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemMonitor::portSysMonTlmModeIn":
-    shortId: "SFT-53"
-    uuid: "79c1b721-b502-5b31-a1fe-ffa7b4c8a703"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus":
-    shortId: "SFT-65"
-    uuid: "a1d8523c-3326-573b-9cd6-c73baa60ad73"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatConfigIn":
-    shortId: "SFT-54"
-    uuid: "1047a0a6-5aa2-5870-a5c6-258e685b6614"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatConstIn":
-    shortId: "SFT-55"
-    uuid: "1d6aa2f4-3d64-5a4b-b791-da97017d1e90"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatImIn":
-    shortId: "SFT-56"
-    uuid: "d059c5cc-c3a3-537e-b108-a234e113bbe7"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatSensorIn":
-    shortId: "SFT-57"
-    uuid: "1c4123ba-517a-5e2b-9983-0bc9489661d5"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatSysStatOut":
-    shortId: "SFT-58"
-    uuid: "61a7161f-42d6-5514-bc81-d3457dbeed00"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::systemStatus::portSysStatTlmModeIn":
-    shortId: "SFT-59"
-    uuid: "a946b2e6-e43f-5dba-b275-f013a9212a37"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::tlm":
-    shortId: "SFT-66"
-    uuid: "6c31d521-06aa-5674-8188-22e57494d7b6"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::tlm::portTlmConstIn":
-    shortId: "SFT-60"
-    uuid: "b0c7e352-b2e8-5c4b-abaf-3e129d21231b"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::tlm::portTlmOpCmdIn":
-    shortId: "SFT-61"
-    uuid: "45a07968-5bcb-521b-b2a1-7d0ac221d274"
-  "memo_examples_gpca_pump_gpca_architecture::gpcaDevice::gpcaSoftware::tlm::portTlmTlmModeOut":
-    shortId: "SFT-62"
-    uuid: "10622647-2bae-5c10-83e0-ff2dbbb92cc2"
   "memo_examples_gpca_pump_gpca_architecture::gpcaDeviceSensors":
     shortId: "HRD-11"
     uuid: "cdc8e1c0-e91b-58c1-9feb-2e98b2ee9826"
   "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware":
     shortId: "SFT-3"
     uuid: "08bdacae-a613-5b49-8933-89e241f55cbb"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm":
+    shortId: "SFT-1"
+    uuid: "110f17f9-be56-511e-9064-e4ff9a3c1d81"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmAlarmOut":
+    shortId: "SFT-7"
+    uuid: "0b9fdf8e-97d5-5df8-94e1-e69d83d2362d"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmConfigIn":
+    shortId: "SFT-8"
+    uuid: "d1a2d48c-ee07-55ee-b9a1-b64c5141bbcd"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmConstIn":
+    shortId: "SFT-9"
+    uuid: "738472a6-4ec2-5f41-b9c7-b3f811618c22"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmDbIn":
+    shortId: "SFT-10"
+    uuid: "1e2103dd-602d-5397-bf90-18f86010d8eb"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmImIn":
+    shortId: "SFT-11"
+    uuid: "56012c66-9181-5619-8db7-40d0e16bac91"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmOpCmdIn":
+    shortId: "SFT-12"
+    uuid: "d0fd7f35-80fe-552d-81a7-eeea4885a370"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmSensorIn":
+    shortId: "SFT-13"
+    uuid: "48acd08a-3c96-5257-b845-23ab561dc711"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmSysMonIn":
+    shortId: "SFT-14"
+    uuid: "203dd019-be6e-5c0a-a6ef-d1766354ec5e"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmSysStatIn":
+    shortId: "SFT-15"
+    uuid: "60306381-2fba-5189-9c41-804a761e6c5e"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::alarm::portAlarmTlmModeIn":
+    shortId: "SFT-16"
+    uuid: "3674eb47-cc20-5802-9128-c496c309396a"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::config":
+    shortId: "SFT-2"
+    uuid: "2ff77950-188f-5ad3-956b-a75e8ef8663f"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::config::portConfigConfigOut":
+    shortId: "SFT-17"
+    uuid: "5721d0ae-87fb-5af5-aba9-fc666a1f540b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::config::portConfigConstIn":
+    shortId: "SFT-18"
+    uuid: "1323b0fd-aef6-5bf0-a4f6-5938ab61ea10"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::config::portConfigDbIn":
+    shortId: "SFT-19"
+    uuid: "b96133a4-40d7-5ce3-b955-24a55fa92009"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::config::portConfigOpCmdIn":
+    shortId: "SFT-20"
+    uuid: "c68d646d-4db2-5bee-a97f-daf8660d99f9"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::config::portConfigPresIn":
+    shortId: "SFT-21"
+    uuid: "859b7b60-0a34-59e1-8fff-f201c202a337"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::config::portConfigSysStatIn":
+    shortId: "SFT-22"
+    uuid: "3d52b8b7-f163-5287-94b1-e199072d206e"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::config::portConfigTlmModeIn":
+    shortId: "SFT-23"
+    uuid: "99c20d9f-7da8-5ad4-ab38-6ae6d0ffba8e"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::infusionMgr":
+    shortId: "SFT-4"
+    uuid: "570c7d1e-7cab-58ed-a4f8-fc899db694f0"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::infusionMgr::portImAlarmIn":
+    shortId: "SFT-27"
+    uuid: "966d3279-3fe4-525d-b10b-a8c8332b68c4"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::infusionMgr::portImConfigIn":
+    shortId: "SFT-28"
+    uuid: "f92baa07-dec3-5e46-b400-1f9cc43ecf17"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::infusionMgr::portImImOut":
+    shortId: "SFT-29"
+    uuid: "abc1e282-11aa-5299-9f68-ad2b0d9a4f53"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::infusionMgr::portImOpCmdIn":
+    shortId: "SFT-30"
+    uuid: "3c406408-ba49-5e79-b857-da937e3059d1"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::infusionMgr::portImPatientIn":
+    shortId: "SFT-31"
+    uuid: "3f5633f9-71ed-55fa-9c45-5f85f31bd3ff"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::infusionMgr::portImSysStatIn":
+    shortId: "SFT-32"
+    uuid: "b5e91a0e-0f79-55a9-9ccc-e8fbb3426d04"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::infusionMgr::portImTlmModeIn":
+    shortId: "SFT-33"
+    uuid: "58ba100c-4df1-558b-a40b-c4e97ad2ab38"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::logging":
+    shortId: "SFT-5"
+    uuid: "fab98ac1-8487-5d04-8e48-040f0ad60b81"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::logging::portLogAlarmIn":
+    shortId: "SFT-34"
+    uuid: "5fb10131-3307-5871-bc89-f25daa6b6930"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::logging::portLogConfigIn":
+    shortId: "SFT-35"
+    uuid: "74abe28f-8785-5697-8f92-cae13aa1525f"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::logging::portLogImIn":
+    shortId: "SFT-36"
+    uuid: "39d04ac0-dd64-50c3-b7e4-7797910546a1"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::logging::portLogLogOut":
+    shortId: "SFT-37"
+    uuid: "036f4979-131c-50a0-aace-20adecdd00bc"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::logging::portLogSysStatIn":
+    shortId: "SFT-38"
+    uuid: "c6dbd8b7-3017-562b-b527-9b0c6247f906"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::logging::portLogTlmModeIn":
+    shortId: "SFT-39"
+    uuid: "595789cc-258c-530a-ab14-ab731b4cbc34"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus":
+    shortId: "SFT-6"
+    uuid: "ec3d1795-6601-521d-a420-84c7e2609bee"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus::portOutputAlarmIn":
+    shortId: "SFT-41"
+    uuid: "e943cee5-d97e-54a4-8e15-d16f7dd93f09"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus::portOutputConfigIn":
+    shortId: "SFT-42"
+    uuid: "72c1e602-3cd2-571d-b472-b069803cfb7a"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus::portOutputGpcaSwOut":
+    shortId: "SFT-43"
+    uuid: "568300a8-e3c3-5a88-96d3-6b4beef1c96d"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus::portOutputImIn":
+    shortId: "SFT-44"
+    uuid: "f3254de9-b396-5f27-9f39-08918914540d"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus::portOutputLogIn":
+    shortId: "SFT-45"
+    uuid: "764e0728-f341-5721-953d-927867256405"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus::portOutputSysMonIn":
+    shortId: "SFT-46"
+    uuid: "69637700-9b17-5002-ac2c-b90218d060cb"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus::portOutputSysStatIn":
+    shortId: "SFT-47"
+    uuid: "fbe7a6fb-538d-5b9d-b1e9-9538ef8031ce"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::outputBus::portOutputTlmModeIn":
+    shortId: "SFT-48"
+    uuid: "5499f645-1929-5dd6-8d38-eb3b6fef268b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::portConstIn":
+    shortId: "SFT-24"
+    uuid: "b143b27f-f142-5712-aa1d-55fb81aebc3a"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::portDbIn":
+    shortId: "SFT-25"
+    uuid: "59b79452-c6d3-5d03-bdef-32616cb1370b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::portGpcaSwOut":
+    shortId: "SFT-26"
+    uuid: "c72f371f-66b8-539a-b275-26f23839b995"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::portOpCmdIn":
+    shortId: "SFT-40"
+    uuid: "1ec61ab0-01f2-5560-a76b-3404f68f7af3"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::portPatientIn":
+    shortId: "SFT-49"
+    uuid: "37810df2-852d-5559-bb30-4c5b5f2671ba"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::portPresIn":
+    shortId: "SFT-50"
+    uuid: "089c23c1-565b-59df-b23d-b515c5d88468"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::portSensorIn":
+    shortId: "SFT-51"
+    uuid: "8eb5a80d-5fab-5df7-b00b-a67c986cb040"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemMonitor":
+    shortId: "SFT-64"
+    uuid: "ad826d0b-9a71-5ebc-8f17-b2a280c41069"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemMonitor::portSysMonSysMonOut":
+    shortId: "SFT-52"
+    uuid: "d0231597-ae2b-56c1-94e6-7eae02beb5ee"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemMonitor::portSysMonTlmModeIn":
+    shortId: "SFT-53"
+    uuid: "79c1b721-b502-5b31-a1fe-ffa7b4c8a703"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemStatus":
+    shortId: "SFT-65"
+    uuid: "a1d8523c-3326-573b-9cd6-c73baa60ad73"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemStatus::portSysStatConfigIn":
+    shortId: "SFT-54"
+    uuid: "1047a0a6-5aa2-5870-a5c6-258e685b6614"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemStatus::portSysStatConstIn":
+    shortId: "SFT-55"
+    uuid: "1d6aa2f4-3d64-5a4b-b791-da97017d1e90"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemStatus::portSysStatImIn":
+    shortId: "SFT-56"
+    uuid: "d059c5cc-c3a3-537e-b108-a234e113bbe7"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemStatus::portSysStatSensorIn":
+    shortId: "SFT-57"
+    uuid: "1c4123ba-517a-5e2b-9983-0bc9489661d5"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemStatus::portSysStatSysStatOut":
+    shortId: "SFT-58"
+    uuid: "61a7161f-42d6-5514-bc81-d3457dbeed00"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::systemStatus::portSysStatTlmModeIn":
+    shortId: "SFT-59"
+    uuid: "a946b2e6-e43f-5dba-b275-f013a9212a37"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::tlm":
+    shortId: "SFT-66"
+    uuid: "6c31d521-06aa-5674-8188-22e57494d7b6"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::tlm::portTlmConstIn":
+    shortId: "SFT-60"
+    uuid: "b0c7e352-b2e8-5c4b-abaf-3e129d21231b"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::tlm::portTlmOpCmdIn":
+    shortId: "SFT-61"
+    uuid: "45a07968-5bcb-521b-b2a1-7d0ac221d274"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware::tlm::portTlmTlmModeOut":
+    shortId: "SFT-62"
+    uuid: "10622647-2bae-5c10-83e0-ff2dbbb92cc2"
   "memo_examples_gpca_pump_gpca_architecture::infusionMgr":
     shortId: "SFT-4"
     uuid: "570c7d1e-7cab-58ed-a4f8-fc899db694f0"

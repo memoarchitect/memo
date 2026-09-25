@@ -2,6 +2,7 @@ package memo_examples_gpca_pump_gpca_verification {
     private import memo_examples_gpca_pump_gpca_requirements::*;
     private import memo_examples_gpca_pump_gpca_formal_behavior::*;
     private import memo_examples_gpca_pump_gpca_architecture::*;
+    private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
     private import memo_examples_gpca_pump_gpca_risk::*;
     private import memo_examples_gpca_pump_gpca_behavior_modes::*;
     private import ScalarValues::*;
@@ -13,6 +14,14 @@ package memo_examples_gpca_pump_gpca_verification {
 
     private import memo_core_common::MemoIdentity;
     // ── Verification cases ──────────────────────────────────────
+    // A safety-critical function is verified when a test traces to it
+    // (CR-ONT-040), which is not the same as the requirement it satisfies being
+    // verified or the module it is allocated to being tested. Each function is
+    // named as a subject of the case whose acceptance criteria exercise the
+    // output its `outputSummary` describes. AcquireSensorData and
+    // AggregateSensorStatus are not: no case here tests the debounced,
+    // range-checked status vector, and naming one would claim a test that
+    // does not exist.
     verification vcModeRange : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-001"; :>> label = "VerifyModeRange"; }
         attribute :>> methodKind = MemoVerificationMethodKind::formalProof;
@@ -20,7 +29,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs01; }
-        subject verified : Base::Anything[*] = (guaranteeExclusiveMode, gpcaDevice.gpcaSoftware.tlm, gpcaDevice.gpcaSoftware.outputBus);
+        subject verified : Base::Anything[*] = (guaranteeExclusiveMode, gpcaSoftware.tlm, gpcaSoftware.outputBus, fnManageInfusion);
     }
     verification vcLockout : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-002"; :>> label = "VerifyBolusLockout"; }
@@ -29,7 +38,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs25; }
-        subject verified : Base::Anything[*] = (lockoutControl, guaranteeLockoutPreventsBolus, tcBolusResponse, gpcaDevice.gpcaSoftware.infusionMgr);
+        subject verified : Base::Anything[*] = (lockoutControl, guaranteeLockoutPreventsBolus, tcBolusResponse, gpcaSoftware.infusionMgr, fnEnforceLimits);
     }
     verification vcSameStepAlarm : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-003"; :>> label = "VerifySameStepAlarmStop"; }
@@ -38,7 +47,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs19; }
-        subject verified : Base::Anything[*] = (propAlarmStopsSameStep, guaranteeAlarmStopsSameStep, tcAlarmLatency, gpcaDevice.gpcaSoftware.alarm);
+        subject verified : Base::Anything[*] = (propAlarmStopsSameStep, guaranteeAlarmStopsSameStep, tcAlarmLatency, gpcaSoftware.alarm, fnMonitorAlarm);
     }
     verification vcTemporalModeSafety : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-004"; :>> label = "VerifyTemporalModeSafety"; }
@@ -56,7 +65,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs21; }
-        subject verified : Base::Anything[*] = (airDetectionControl);
+        subject verified : Base::Anything[*] = (airDetectionControl, fnAcquireSensors.cfnDetectAirInLine);
     }
     verification vcOcclusion : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-006"; :>> label = "VerifyOcclusionDetection"; }
@@ -74,7 +83,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs23; }
-        subject verified : Base::Anything[*] = (reservoirMonitorControl, gpcaDevice.gpcaSoftware.systemStatus);
+        subject verified : Base::Anything[*] = (reservoirMonitorControl, gpcaSoftware.systemStatus);
     }
     verification vcPost : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-008"; :>> label = "VerifyPowerOnSelfTest"; }
@@ -83,7 +92,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqPost; }
-        subject verified : Base::Anything[*] = (gpcaDevice.gpcaSoftware.systemMonitor);
+        subject verified : Base::Anything[*] = (gpcaSoftware.systemMonitor, fnSelfTest);
     }
     verification vcPowerLoss : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-009"; :>> label = "VerifyPowerLossRetentionAndResume"; }
@@ -92,6 +101,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqPowerLossRetention; verify reqBatteryBackup; }
+        subject verified : Base::Anything[*] = (fnManagePower);
     }
     verification vcWatchdog : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-010"; :>> label = "VerifyWatchdogSafeState"; }
@@ -117,6 +127,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqPumpAccuracy; }
+        subject verified : Base::Anything[*] = (fnCommandPump);
     }
     verification vcAlarmLoudness : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-013"; :>> label = "VerifyAlarmSoundPressure"; }
@@ -125,6 +136,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs72; verify reqAlarmLoudness; }
+        subject verified : Base::Anything[*] = (fnAnnunciate);
     }
     verification vcFreeFlow : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-014"; :>> label = "VerifyAntiFreeFlowValve"; }
@@ -150,7 +162,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqFlowCrossCheck; }
-        subject verified : Base::Anything[*] = (flowCrossCheckControl);
+        subject verified : Base::Anything[*] = (flowCrossCheckControl, fnAcquireSensors.cfnMeasureFlowRate);
     }
 
     verification vcDrugLibrary : VerificationCase {
@@ -160,7 +172,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqDrugLibraryLimits; }
-        subject verified : Base::Anything[*] = (drugLibraryControl, gpcaDevice.gpcaSoftware.config);
+        subject verified : Base::Anything[*] = (drugLibraryControl, gpcaSoftware.config, fnValidatePrescription);
     }
     verification vcPrescriptionConfirm : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-018"; :>> label = "VerifyPrescriptionConfirmation"; }
@@ -169,6 +181,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs09; }
+        subject verified : Base::Anything[*] = (fnPresentStatus);
     }
     verification vcEventLog : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-019"; :>> label = "VerifyEventLogIntegrity"; }
@@ -177,7 +190,7 @@ package memo_examples_gpca_pump_gpca_verification {
         attribute :>> status = ElementStatusKind::approved;
 
         objective { verify reqCs78; verify reqEventLogging; }
-        subject verified : Base::Anything[*] = (gpcaDevice.gpcaSoftware.logging);
+        subject verified : Base::Anything[*] = (gpcaSoftware.logging);
     }
     verification vcReverseDeliveryPause : VerificationCase {
         @MemoIdentity { :>> providedId = "VER-020"; :>> label = "VerifyReverseDeliveryPause"; }
