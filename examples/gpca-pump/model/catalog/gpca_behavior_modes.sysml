@@ -408,7 +408,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         // the reference is the software module, not the requirement it supports.
         // `referenceElement` is a MemoPart; a requirement is a requirement def
         // and does not conform to it — that link is REQ-X-08's own trace.
-        ref :>> referenceElement = gpcaDevice.gpcaSoftware.systemMonitor;
+        ref :>> referenceElement = gpcaSoftware.systemMonitor;
         attribute :>> verificationMethod = MemoVerificationMethodKind::test;
         @MemoIdentity { :>> sourceReference = "MEMO extension — supports extension requirement REQ-X-08; watchdog not specified by the source"; }
     }
