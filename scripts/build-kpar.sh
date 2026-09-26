@@ -121,24 +121,25 @@ fi
 # `sysand build` packages files; it does NOT resolve names. A package whose
 # supertypes do not exist anywhere — `:> MemoItem` when the real base is
 # `MemoPart` — packaged happily and reported "zero errors", so an ontology that
-# no tool could load shipped green. SysIDE is the compatibility check, so the
-# build asks it whether every reference resolves.
+# no tool could load shipped green. So the build asks the validator — SysIDE,
+# the compatibility check, unless another is selected — whether every
+# reference resolves.
 # ─────────────────────────────────────────────────────────────────────────────
-echo "── name resolution: syside check ──"
-if ! command -v syside >/dev/null 2>&1; then
-  echo "✖ syside not found on PATH — required to resolve names (https://sensmetry.com/syside)" >&2
-  exit 127
-fi
+echo "── name resolution: memo toolchain check ──"
+# shellcheck source=memo-cli.sh
+. "$REPO_ROOT/scripts/memo-cli.sh"
+resolve_memo_cli "$REPO_ROOT" || exit 127
 
 # SCOPE: src + extensions + examples — everything MEMO ships, not just the three
 # kpar packages this script builds. `examples/` reaches users via
 # `memo init --example`, so a green build that skipped it said nothing about
 # what users actually run. R8-S4 added it here and to check-syside-gate.mjs.
-# `syside-check.mjs` runs the full diagnostic set (`--diagnose all
-# --warnings-as-errors`) and excepts only what `syside-exceptions.json` lists —
-# SysIDE gaps against the OMG specification, one diagnostic at a time.
-if ! (cd "$REPO_ROOT" && node scripts/syside-check.mjs --exceptions syside-exceptions.json src extensions examples); then
-  echo "✖ build FAILED — SysIDE reports a diagnostic the exceptions register does not cover."
+#
+# The validator is memo-tools' selected provider (SysIDE by default; switch
+# with MEMO_VALIDATOR), less the gaps `validator-exceptions.json` lists.
+if ! "${MEMO_CMD[@]}" toolchain check --project "$REPO_ROOT" \
+    --toolchain.validator="$MEMO_VALIDATOR" src extensions examples; then
+  echo "✖ build FAILED — the $MEMO_VALIDATOR validator reports a diagnostic validator-exceptions.json does not cover."
   exit 1
 fi
 echo "  ✔ every reference resolves"

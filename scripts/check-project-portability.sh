@@ -5,12 +5,14 @@
 # configuration to mean what it means:
 #
 #   1. no semantic YAML is present in the project,
-#   2. SysIDE (`syside check`) reports zero errors over the project plus the
-#      reusable source it imports,
+#   2. the SysML validator — SysIDE by default, through `memo toolchain check`
+#      — reports nothing the project's `validator-exceptions.json` does not
+#      list, over the project plus the reusable source it imports,
 #   3. Sensmetry `sysand` builds the same closure into a KPAR with zero errors.
 #
 # Usage:  ./scripts/check-project-portability.sh <project-dir>
-# Requires: syside and sysand on PATH.
+# Requires: sysand on PATH, the memo-tools CLI (see memo-cli.sh), and the
+#           selected validator (MEMO_VALIDATOR, default syside).
 # ─────────────────────────────────────────────────────────────────────────────
 set -uo pipefail
 
@@ -24,9 +26,10 @@ fi
 PROJECT_DIR="$(cd "$PROJECT_DIR" && pwd)"
 PROJECT_NAME="$(basename "$PROJECT_DIR")"
 
-for tool in syside sysand; do
-  command -v "$tool" >/dev/null 2>&1 || { echo "✖ $tool not found on PATH" >&2; exit 127; }
-done
+command -v sysand >/dev/null 2>&1 || { echo "✖ sysand not found on PATH" >&2; exit 127; }
+# shellcheck source=memo-cli.sh
+. "$REPO_ROOT/scripts/memo-cli.sh"
+resolve_memo_cli "$REPO_ROOT" || exit 127
 
 echo "── portability gate: $PROJECT_NAME ──"
 fail=0
@@ -73,15 +76,18 @@ for pkg in $imported_extensions; do
   done
 done
 
-# ── 2. SysIDE ────────────────────────────────────────────────────────────────
-syside_out="$(syside check "$PROJECT_DIR" "${REUSABLE_ROOTS[@]}" 2>&1)"
-if [ -n "$syside_out" ]; then
-  echo "  ✖ syside check reported:"
-  echo "$syside_out" | sed 's/^/      /'
-  fail=1
+# ── 2. SysIDE (through memo toolchain check) ─────────────────────────────────
+staging_log="$(mktemp)"
+# Through memo-tools' validator provider, never a spawned tool — see memo-cli.sh.
+if "${MEMO_CMD[@]}" toolchain check --project "$PROJECT_DIR" \
+    --toolchain.validator="$MEMO_VALIDATOR" "$PROJECT_DIR" "${REUSABLE_ROOTS[@]}" >"$staging_log" 2>&1; then
+  echo "  ✔ $MEMO_VALIDATOR check clean"
 else
-  echo "  ✔ syside check clean"
+  echo "  ✖ $MEMO_VALIDATOR check reported:"
+  sed 's/^/      /' "$staging_log"
+  fail=1
 fi
+rm -f "$staging_log"
 
 # ── 3. Sysand ────────────────────────────────────────────────────────────────
 # The project and the reusable source it imports are staged as one sysand
