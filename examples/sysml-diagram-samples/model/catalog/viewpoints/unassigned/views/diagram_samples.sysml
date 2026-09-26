@@ -258,7 +258,7 @@ package diagram_samples {
             // and a kind filter is model-wide, so it would draw every other
             // sample's clinician onto this one's lifelines. The actors this
             // view wants are the ones it exposes by name above.
-            attribute :>> includeElementKinds = ("FunctionalFlowStep", "LogicalComponent");
+            attribute :>> includeElementKinds = ("FunctionalFlow", "LogicalComponent");
         }
     }
 

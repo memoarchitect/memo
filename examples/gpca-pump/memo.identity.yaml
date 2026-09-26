@@ -2429,9 +2429,36 @@ elements:
   "memo_examples_gpca_pump_gpca_system::fcAlarmStop":
     shortId: "FNC-1"
     uuid: "8237cea3-1d96-5082-9594-12bf58cb562f"
+  "memo_examples_gpca_pump_gpca_system::fcAlarmStop::fcsAlarmAnnunciate":
+    shortId: "ACT-30"
+    uuid: "7c1304d9-8385-5899-8ec5-cc234c3af221"
+  "memo_examples_gpca_pump_gpca_system::fcAlarmStop::fcsAlarmEvaluate":
+    shortId: "ACT-31"
+    uuid: "39df34ec-8c1c-537c-967f-4e4d269a8f48"
+  "memo_examples_gpca_pump_gpca_system::fcAlarmStop::fcsAlarmSense":
+    shortId: "ACT-32"
+    uuid: "eb76ed8a-2ed5-553d-92bb-14dbec36944d"
+  "memo_examples_gpca_pump_gpca_system::fcAlarmStop::fcsAlarmStopInfusion":
+    shortId: "ACT-33"
+    uuid: "607ccbd5-8dc8-55d8-87eb-03415f4ab518"
   "memo_examples_gpca_pump_gpca_system::fcPatientBolus":
     shortId: "FNC-2"
     uuid: "cd2c7a11-22ce-51a6-9aea-88e268696546"
+  "memo_examples_gpca_pump_gpca_system::fcPatientBolus::fcsBolusActuate":
+    shortId: "ACT-34"
+    uuid: "eb530717-da20-539f-9b3f-215d0b63136d"
+  "memo_examples_gpca_pump_gpca_system::fcPatientBolus::fcsBolusCommand":
+    shortId: "ACT-35"
+    uuid: "588ac589-5e73-5973-b537-d768663dd08f"
+  "memo_examples_gpca_pump_gpca_system::fcPatientBolus::fcsBolusLog":
+    shortId: "ACT-36"
+    uuid: "46e6a088-1a8e-5d5b-aa95-0b4fb9628dac"
+  "memo_examples_gpca_pump_gpca_system::fcPatientBolus::fcsBolusSense":
+    shortId: "ACT-37"
+    uuid: "c35db49d-24bd-54d8-a4a4-7f4d8869e85e"
+  "memo_examples_gpca_pump_gpca_system::fcPatientBolus::fcsBolusValidate":
+    shortId: "ACT-38"
+    uuid: "4a4bf388-63a5-5c26-8e2e-398edc0917f6"
   "memo_examples_gpca_pump_gpca_system::fcStartup":
     shortId: "FNC-12"
     uuid: "c476bb32-8eb2-525f-9f30-5e0e05fdd4a2"
