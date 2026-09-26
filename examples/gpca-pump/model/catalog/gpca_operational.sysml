@@ -167,11 +167,11 @@ package memo_examples_gpca_pump_gpca_operational {
         // `to` end does not accept a qualified path — so this is written
         // inside wsRequestBolus's own owning scope rather than at package
         // level.
-        #refinement dependency fcsBolusSense to oaRequestBolus;
-        #refinement dependency fcsBolusValidate to oaRequestBolus;
-        #refinement dependency fcsBolusCommand to oaRequestBolus;
-        #refinement dependency fcsBolusActuate to oaRequestBolus;
-        #refinement dependency fcsBolusLog to oaRequestBolus;
+        #refinement dependency fcPatientBolus::fcsBolusSense to oaRequestBolus;
+        #refinement dependency fcPatientBolus::fcsBolusValidate to oaRequestBolus;
+        #refinement dependency fcPatientBolus::fcsBolusCommand to oaRequestBolus;
+        #refinement dependency fcPatientBolus::fcsBolusActuate to oaRequestBolus;
+        #refinement dependency fcPatientBolus::fcsBolusLog to oaRequestBolus;
         action osNominalTherapy : OperativeScenario {
             @MemoIdentity { :>> providedId = "OS-001"; :>> label = "NominalTherapySession"; }
             attribute :>> preCondition = "prescription issued, reservoir loaded";
@@ -206,10 +206,10 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
         attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";
 
-        #refinement dependency fcsAlarmSense to oaRespondAlarm;
-        #refinement dependency fcsAlarmEvaluate to oaRespondAlarm;
-        #refinement dependency fcsAlarmStopInfusion to oaRespondAlarm;
-        #refinement dependency fcsAlarmAnnunciate to oaRespondAlarm;
+        #refinement dependency fcAlarmStop::fcsAlarmSense to oaRespondAlarm;
+        #refinement dependency fcAlarmStop::fcsAlarmEvaluate to oaRespondAlarm;
+        #refinement dependency fcAlarmStop::fcsAlarmStopInfusion to oaRespondAlarm;
+        #refinement dependency fcAlarmStop::fcsAlarmAnnunciate to oaRespondAlarm;
         action osOcclusionAlarm : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;
             @MemoIdentity { :>> providedId = "OS-003"; :>> label = "OcclusionDetectedDuringInfusion"; }
