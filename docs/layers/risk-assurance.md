@@ -28,10 +28,11 @@ flowchart LR
     Hazard --> Events[SequenceOfEvents]
     Events --> Situation[HazardousSituation]
     Situation --> Harm[Harm]
-    Harm --> Risk[Risk]
+    Risk[Risk] -->|EstimatedFor| Harm
     Control[RiskControlMeasure] -->|Mitigates · hazard| Hazard
     Risk --> Control
-    Control --> Residual[ResidualRisk]
+    Residual[ResidualRisk] -->|ReducedBy| Control
+    Residual -->|EvaluatedIn| Overall[OverallResidualRiskEvaluation]
     Benefit[Benefit] --> Residual
     Control -->|VerifiedBy| Test[VerificationCase]
     Test -->|ProducesEvidence| Evidence[Evidence]

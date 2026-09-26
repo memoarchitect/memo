@@ -123,8 +123,13 @@ package memo_assurance_safety_risk_analysis {
     }
     connection def Causes :> MemoRelationship {
         attribute causeKind : CauseKind;
-        end cause : MemoPart :>> source;
-        end effect : RiskItem :>> target;
+        // Untyped both ways, because CauseKind spans metaclasses: a failure
+        // mode or cause (items) causes an effect, a component or use error
+        // (parts) originates one, and `originatesFrom` ends at a fault-tree
+        // node, which is a part. No single type covers either end; the
+        // admissible kinds are CR-ONT-082 and CR-ONT-083.
+        end cause :>> source;
+        end effect :>> target;
     }
     abstract connection causesLinks : Causes[*];
     metadata def <causes> CausesMetadata :> SemanticMetadata {
