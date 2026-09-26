@@ -77,10 +77,10 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : DerivesFrom connect sourceDriver ::> oaRespondAlarm to targetRequirement ::> reqCs59;
 
     // ── Functional chains ───────────────────────────────────────
-    // fcPatientBolus/fcAlarmStop already name every one of these functions
-    // via their step chain (perform fcsBolusSense; ... ref :>> function =
-    // fnAcquireSensors;) in gpca_system.sysml — InvolvesFunction was a
-    // flattened restatement of that two-hop path, not new information.
+    // fcPatientBolus/fcAlarmStop already name every one of these functions:
+    // each step subsets the function it performs (`action fcsBolusSense :>
+    // fnAcquireSensors`) in gpca_system.sysml — InvolvesFunction was a
+    // flattened restatement of that, not new information.
     // fcStartup declares no steps, so its two functions are native `perform`
     // statements directly on fcStartup in gpca_system.sysml instead.
     #refinement dependency fcPatientBolus to ssBolusDuringBasal;
@@ -92,7 +92,7 @@ package memo_examples_gpca_pump_gpca_trace {
     // The nine refinement statements themselves live in gpca_operational.sysml,
     // inside wsRequestBolus's/wsRespondAlarm's own owning scope — the
     // `#refinement dependency ... to ...` shorthand's target end does not
-    // accept a qualified path, and both steps are nested now.
+    // accept a qualified path, and the operative actions are nested.
 
     // ── Requirement derivation ──────────────────────────────────
     // MEMO extension requirements (REQ-X) derive from needs and risks.

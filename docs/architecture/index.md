@@ -58,7 +58,7 @@ of a software, electronics, or mechanical choice.
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
 | `SystemFunction` | A technology-independent responsibility | `Enables`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
-| `FunctionalFlow`, `FunctionalFlowStep` | Reusable organization and order of functions | `InvolvesFunction`, `IncludesStep` |
+| `FunctionalFlow` | Reusable organization and order of functions; a step is `action <step> :> <function>` nested in the flow | `perform`, `flow`, `succession` |
 | `MemoScenario[scenarioKind=functional]` | The function path for one operational scenario | `selectedFlow`, `Realizes` |
 | `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | a named `flow` from one function's `out` parameter to another's `in`; `allocate` to a component exchange |
 | `SystemAction` | Executable behavior realizing a function | `Performs` |

@@ -15,6 +15,13 @@ package memo_examples_gpca_pump_gpca_system {
     // retired: "mission" duplicated the regulated intended-use statement.
 
     // ── Functional chains ───────────────────────────────────────
+    // A step is its function performed at one position in the chain:
+    // `action <step> :> <function>`, nested in the flow, so each position keeps
+    // its own identity and evidence scope. The item a step handles is a
+    // step-local parameter subsetting it, and a `flow` joins two steps wherever
+    // one's output is the next one's input. A step's parameters redefine its
+    // function's in declaration order, whatever their names, so each narrows
+    // the function's parameter at that position to this step's item.
     action fcPatientBolus : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-001"; :>> label = "PatientBolusChain"; }
         attribute :>> flowCategory = FunctionalFlowKind::nominal;
@@ -22,36 +29,32 @@ package memo_examples_gpca_pump_gpca_system {
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         doc /* Bolus button press through lockout/max-dose check to pump actuation and logging. */
-        perform fcsBolusSense;
-        perform fcsBolusValidate;
-        perform fcsBolusCommand;
-        perform fcsBolusActuate;
-        perform fcsBolusLog;
+        action fcsBolusSense :> fnAcquireSensors {
+            @MemoIdentity { :>> providedId = "FCS-001"; :>> label = "SenseBolusRequest"; }
+            out item bolusRequest :> ddBolusRequest;
+        }
+        action fcsBolusValidate :> fnEnforceLimits {
+            @MemoIdentity { :>> providedId = "FCS-002"; :>> label = "CheckLockoutAndMaxDose"; }
+            in item prescription :> ddPrescription;
+        }
+        action fcsBolusCommand :> fnManageInfusion {
+            @MemoIdentity { :>> providedId = "FCS-003"; :>> label = "CommandBolusFlow"; }
+            out item flowCommand :> cdFlowCommand;
+        }
+        action fcsBolusActuate :> fnCommandPump {
+            @MemoIdentity { :>> providedId = "FCS-004"; :>> label = "ActuatePumpMotor"; }
+            in item flowCommand :> cdFlowCommand;
+        }
+        action fcsBolusLog :> fnLogEvents {
+            @MemoIdentity { :>> providedId = "FCS-005"; :>> label = "LogBolusOutcome"; }
+            out item eventRecord :> ddEventRecord;
+        }
+        first fcsBolusSense then fcsBolusValidate;
+        first fcsBolusValidate then fcsBolusCommand;
+        first fcsBolusCommand then fcsBolusActuate;
+        first fcsBolusActuate then fcsBolusLog;
+        flow from fcsBolusCommand.flowCommand to fcsBolusActuate.flowCommand;
     }
-    action fcsBolusSense : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-001"; :>> label = "SenseBolusRequest"; }
-        ref :>> function = fnAcquireSensors; ref :>> exchangedItem = ddBolusRequest;
-    }
-    action fcsBolusValidate : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-002"; :>> label = "CheckLockoutAndMaxDose"; }
-        ref :>> function = fnEnforceLimits; ref :>> exchangedItem = ddPrescription;
-    }
-    action fcsBolusCommand : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-003"; :>> label = "CommandBolusFlow"; }
-        ref :>> function = fnManageInfusion; ref :>> exchangedItem = cdFlowCommand;
-    }
-    action fcsBolusActuate : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-004"; :>> label = "ActuatePumpMotor"; }
-        ref :>> function = fnCommandPump; ref :>> exchangedItem = cdFlowCommand;
-    }
-    action fcsBolusLog : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-005"; :>> label = "LogBolusOutcome"; }
-        ref :>> function = fnLogEvents; ref :>> exchangedItem = ddEventRecord;
-    }
-    first fcsBolusSense then fcsBolusValidate;
-    first fcsBolusValidate then fcsBolusCommand;
-    first fcsBolusCommand then fcsBolusActuate;
-    first fcsBolusActuate then fcsBolusLog;
 
     action fcAlarmStop : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-002"; :>> label = "AlarmDetectionToSafeStateChain"; }
@@ -60,30 +63,35 @@ package memo_examples_gpca_pump_gpca_system {
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         doc /* Sensor condition through alarm evaluation to same-step transition to PAUSED (KVO flow, REQ 43) and annunciation. */
-        perform fcsAlarmSense;
-        perform fcsAlarmEvaluate;
-        perform fcsAlarmStopInfusion;
-        perform fcsAlarmAnnunciate;
+        action fcsAlarmSense :> fnAcquireSensors {
+            @MemoIdentity { :>> providedId = "FCS-006"; :>> label = "SenseAlarmCondition"; }
+            out item sensorVector :> ddSensorVector;
+        }
+        action fcsAlarmEvaluate :> fnMonitorAlarm {
+            @MemoIdentity { :>> providedId = "FCS-007"; :>> label = "EvaluateAlarmCondition"; }
+            in item sensorVector :> ddSensorVector;
+        }
+        action fcsAlarmStopInfusion :> fnManageInfusion {
+            @MemoIdentity { :>> providedId = "FCS-008"; :>> label = "LimitFlowToKvoSameStep"; }
+            // A step's parameters redefine its function's by position, so the
+            // KVO-limited flow command it emits comes first (fnManageInfusion's
+            // `flowCommandOut`); the alarm signal is the input this position adds.
+            out item flowCommand :> cdFlowCommand;
+            in item alarmSignal :> cdAlarmSignal;
+        }
+        action fcsAlarmAnnunciate :> fnAnnunciate {
+            @MemoIdentity { :>> providedId = "FCS-009"; :>> label = "AnnunciateAudibleVisual"; }
+            in item alarmSignal :> cdAlarmSignal;
+        }
+        first fcsAlarmSense then fcsAlarmEvaluate;
+        first fcsAlarmEvaluate then fcsAlarmStopInfusion;
+        first fcsAlarmStopInfusion then fcsAlarmAnnunciate;
+        flow from fcsAlarmSense.sensorVector to fcsAlarmEvaluate.sensorVector;
+        // The alarm signal leaves evaluation through fnMonitorAlarm's own
+        // `alarmSignalOut`, which the step inherits by subsetting it.
+        flow from fcsAlarmEvaluate.alarmSignalOut to fcsAlarmStopInfusion.alarmSignal;
+        flow from fcsAlarmEvaluate.alarmSignalOut to fcsAlarmAnnunciate.alarmSignal;
     }
-    action fcsAlarmSense : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-006"; :>> label = "SenseAlarmCondition"; }
-        ref :>> function = fnAcquireSensors; ref :>> exchangedItem = ddSensorVector;
-    }
-    action fcsAlarmEvaluate : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-007"; :>> label = "EvaluateAlarmCondition"; }
-        ref :>> function = fnMonitorAlarm; ref :>> exchangedItem = ddSensorVector;
-    }
-    action fcsAlarmStopInfusion : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-008"; :>> label = "LimitFlowToKvoSameStep"; }
-        ref :>> function = fnManageInfusion; ref :>> exchangedItem = cdAlarmSignal;
-    }
-    action fcsAlarmAnnunciate : FunctionalFlowStep {
-        @MemoIdentity { :>> providedId = "FCS-009"; :>> label = "AnnunciateAudibleVisual"; }
-        ref :>> function = fnAnnunciate; ref :>> exchangedItem = cdAlarmSignal;
-    }
-    first fcsAlarmSense then fcsAlarmEvaluate;
-    first fcsAlarmEvaluate then fcsAlarmStopInfusion;
-    first fcsAlarmStopInfusion then fcsAlarmAnnunciate;
 
     action fcStartup : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-003"; :>> label = "PowerOnSelfTestChain"; }

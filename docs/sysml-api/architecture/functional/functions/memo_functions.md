@@ -40,7 +40,6 @@
 | [`ComponentFunction`](#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. | `MemoFunction` |
 | [`FunctionalExchange`](#functionalexchange) | `flow def` | A transfer between two functions, carrying the budgets and assurance attributes a reader needs on the transfer itself.… | — |
 | [`FunctionalFlow`](#functionalflow) | `action def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. An `action def`, like every other behaviour in MEMO. It was `part def ...… | `MemoAction` |
-| [`FunctionalFlowStep`](#functionalflowstep) | `action def` | Functional flow step definition specializing `MemoAction`. | `MemoAction` |
 
 ## MemoFunction
 
@@ -111,21 +110,6 @@ action def FunctionalFlow specializes MemoAction
 | Property | Value |
 | --- | --- |
 | Description | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. An `action def`, like every other behaviour in MEMO. It was `part def ...… |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoAction` |
-| Owning package | `memo_architecture_functional_functions` |
-
-
-## FunctionalFlowStep
-
-```sysml
-action def FunctionalFlowStep specializes MemoAction
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Functional flow step definition specializing `MemoAction`. |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
@@ -274,16 +258,27 @@ action def FunctionalFlowStep specializes MemoAction
             attribute safetyRelevant : Boolean;
             attribute securityRelevant : Boolean;
         }
-        action def FunctionalFlowStep specializes MemoAction {
-            ref function : MemoFunction[0..1];
-            ref exchange : FunctionalExchange[0..1];
-            ref item exchangedItem : MemoItem[0..1];
-        }
+        // A step is not a definition. `action def FunctionalFlowStep` stood here
+        // with `ref function`, `ref exchange` and `ref item exchangedItem`: a
+        // wrapper that pointed at the function it stood for. A step is that
+        // function performed at one position in the flow, which SysML says
+        // directly as an action usage nested in the flow that subsets it:
+        //
+        //   action fcPatientBolus : FunctionalFlow {
+        //       action fcsBolusCommand :> fnManageInfusion { out item flowCommand :> cdFlowCommand; }
+        //       action fcsBolusActuate :> fnCommandPump { in item flowCommand :> cdFlowCommand; }
+        //       first fcsBolusCommand then fcsBolusActuate;
+        //       flow from fcsBolusCommand.flowCommand to fcsBolusActuate.flowCommand;
+        //   }
+        //
+        // Each position keeps its own identity and evidence scope. The exchanged
+        // item is a directed parameter of the step, and the exchange a `flow`
+        // between two steps' parameters. A step's parameters redefine its
+        // function's by position.
 
         // `InvolvesFunction` is native `perform` (R10-S6): a `FunctionalFlow`
-        // already names its functions via its step chain
-        // (`perform <step>;` + the step's own `ref function`), and a flow with no
-        // step chain performs its functions directly.
+        // performs the function each of its steps subsets, and a flow with no
+        // steps performs its functions directly.
     }
 
     ```

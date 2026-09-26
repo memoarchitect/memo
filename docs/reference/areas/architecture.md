@@ -98,7 +98,7 @@ clutter this page is trying to avoid:
 
 | Element group | Definitions |
 | --- | --- |
-| Functions and flows | `SystemFunction`, `SystemAction`, `FunctionalExchange`, `FunctionalFlow`, `FunctionalFlowStep`, `MemoScenario[scenarioKind=functional]` |
+| Functions and flows | `SystemFunction`, `SystemAction`, `FunctionalExchange`, `FunctionalFlow`, `MemoScenario[scenarioKind=functional]` |
 | Behavior | `StateMachine`, `ModeState`, `Transition`, `ActivityAction`, `ActivityFlow`, `InteractionMessage` |
 | Verifiable behavior | `BehaviorProperty`, `Contract`, `TimingConstraint` and functional constraints |
 

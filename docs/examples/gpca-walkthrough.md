@@ -193,7 +193,7 @@ view gpcaScenarioSequenceView : MemoDiagramView {
     attribute :>> viewKind = DiagramViewKind::sequence;
     part :>> selectionQuery {
         attribute :>> includeElementKinds =
-            ("MemoScenario[scenarioKind=functional]", "MemoScenario[scenarioKind=operative]", "FunctionalFlow", "FunctionalFlowStep");
+            ("MemoScenario[scenarioKind=functional]", "MemoScenario[scenarioKind=operative]", "FunctionalFlow");
         attribute :>> includeLayers = ("operational", "system");
         attribute :>> selectionExpression = "product == 'GPCA'";
     }
@@ -302,7 +302,7 @@ Unlike the focused tutorials, this model is populated all the way through. It is
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
 | Operational | `ArchitectureDescription`, `OperationalActivity`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `WorkflowStep` | [Operational](../reference/areas/architecture.md#operational) |
-| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `FunctionalFlowStep`, `MemoScenario[scenarioKind=functional]`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../reference/areas/architecture.md#functional) |
+| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `MemoScenario[scenarioKind=functional]`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../reference/areas/architecture.md#functional) |
 | Logical | `ComponentExchange`, `Interface`, `InterfaceItem`, `LogicalComponent`, `SoftwarePort` | [Logical](../reference/areas/architecture.md#logical) |
 | Implementation and realization | `HardwareAssembly`, `PhysicalPort`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
 | Assurance | `Benefit`, `CyberHazard`, `CyberMitigation`, `CyberRisk`, `CybersecurityAsset`, `DetectionMethod`, `Evidence`, `FMEAAction`, `FMEAWorksheet`, `FailureCause` … +32 | [Assurance](../reference/areas/assurance.md) |
