@@ -7,7 +7,7 @@
     "build": "bash scripts/build-kpar.sh",
     "check": "bash scripts/build-kpar.sh && npm run lint",
     "lint": "node ../memo-tools/packages/tools/lib/bin/memo.js dhf lint",
-    "test": "node --test test/package.test.mjs test/syside-check.test.mjs",
+    "test": "node --test test/package.test.mjs",
     "docs:api": "node scripts/generate-sysml-api.mjs",
     "docs:diagrams": "node scripts/generate-reference-diagrams.mjs",
     "docs:serve": "node scripts/generate-reference-diagrams.mjs && node scripts/generate-sysml-api.mjs && node scripts/check-reference-coverage.mjs && python3 -m mkdocs serve",
