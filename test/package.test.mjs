@@ -406,7 +406,7 @@ test('extensions are ontology, beside src — not examples', () => {
   assert.ok(JSON.parse(read('package.json')).files.includes('extensions/'));
   const buildScript = read('scripts', 'build-kpar.sh');
   assert.match(buildScript, /PROJECTS=\("\." "src\/methodology" "extensions"\)/);
-  assert.match(buildScript, /syside-check\.mjs --exceptions syside-exceptions\.json src extensions/);
+  assert.match(buildScript, /toolchain check --project "\$REPO_ROOT" \\\n    --toolchain\.validator="\$MEMO_VALIDATOR" src extensions examples/);
   assert.match(buildScript, /source_root = os\.path\.join\(root, 'src'\) if project == '\.' else root/);
 });
 
