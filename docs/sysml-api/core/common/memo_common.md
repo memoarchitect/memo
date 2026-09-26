@@ -40,7 +40,6 @@
 | [`EvidenceKind`](#evidencekind) | `enum def` | Controlled values for evidence: `testArtifact`. | — |
 | [`MemoEvidence`](#memoevidence) | `part def` | Memo evidence definition specializing `MemoPart`. | `MemoPart` |
 | [`AnalysisArtifact`](#analysisartifact) | `part def` | Analysis artifact definition specializing `MemoPart`. | `MemoPart` |
-| [`MemoMission`](#memomission) | `part def` | Memo mission definition specializing `MemoPart`. | `MemoPart` |
 | [`MemoAction`](#memoaction) | `action def` | Behavioral foundation: operational activities, tasks, system actions, and interaction steps specialize MemoAction. | — |
 | [`MemoPort`](#memoport) | `port def` | Boundary feature foundation for typed ports. | — |
 | [`MemoInterface`](#memointerface) | `interface def` | Interaction-contract foundation for interface definitions between ports. | — |
@@ -50,6 +49,7 @@
 | [`MemoRequirementElement`](#memorequirementelement) | `requirement def` | Memo requirement element definition. | — |
 | [`MemoNeed`](#memoneed) | `requirement def` | Memo need definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`MemoRequirement`](#memorequirement) | `requirement def` | Memo requirement definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
+| [`MemoMission`](#memomission) | `requirement def` | Memo mission definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`MemoVerificationCase`](#memoverificationcase) | `verification def` | Memo verification case definition. | — |
 | [`StateKind`](#statekind) | `enum def` | Controlled values for state: `mode`. | — |
 | [`MemoState`](#memostate) | `state def` | Memo state definition. | — |
@@ -169,21 +169,6 @@ abstract part def AnalysisArtifact specializes MemoPart
 | Property | Value |
 | --- | --- |
 | Description | Analysis artifact definition specializing `MemoPart`. |
-| Kind | `part def` |
-| Abstract | Yes |
-| Specializes | `MemoPart` |
-| Owning package | `memo_core_common` |
-
-
-## MemoMission
-
-```sysml
-abstract part def MemoMission specializes MemoPart
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Memo mission definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | Yes |
 | Specializes | `MemoPart` |
@@ -321,6 +306,21 @@ requirement def MemoRequirement :> MemoRequirementElement
 | Description | Memo requirement definition specializing `MemoRequirementElement`. |
 | Kind | `requirement def` |
 | Abstract | No |
+| Specializes | `MemoRequirementElement` |
+| Owning package | `memo_core_common` |
+
+
+## MemoMission
+
+```sysml
+abstract requirement def MemoMission :> MemoRequirementElement
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Memo mission definition specializing `MemoRequirementElement`. |
+| Kind | `requirement def` |
+| Abstract | Yes |
 | Specializes | `MemoRequirementElement` |
 | Owning package | `memo_core_common` |
 
@@ -543,19 +543,6 @@ part def Citation specializes MemoPart
         }
         abstract part def AnalysisArtifact specializes MemoPart;
 
-        // Top-level goal a system or operation exists to fulfil, with its success
-        // criteria and context. Domain layers specialize it; the medical-device
-        // intended use (memo_architecture_operational_structure::IntendedUse) is a
-        // MemoMission. Specializes MemoPart directly and adds only what a mission
-        // needs beyond it — the prose a document renders is `doc`, and the
-        // one-line register a table cell shows is `@MemoIdentity`'s
-        // `shortDescription`, so no DocumentedElement layer is needed.
-        abstract part def MemoMission specializes MemoPart {
-            attribute missionKind : String;
-            attribute successCriteria : String;
-            attribute operationalContext : String;
-        }
-
         // ─── Construct-specific foundations (non-part metaclasses) ───────
 
         // Behavioral foundation: operational activities, tasks, system actions,
@@ -626,6 +613,20 @@ part def Citation specializes MemoPart
 
         requirement def MemoRequirement :> MemoRequirementElement {
             attribute acceptanceCriteria : String;
+        }
+
+        // Top-level goal a system or operation exists to fulfil, with its success
+        // criteria and context. Domain layers specialize it; the medical-device
+        // intended use (memo_architecture_operational_structure::IntendedUse) is a
+        // MemoMission. It is a `requirement def` because a mission is the top
+        // obligation everything below it derives from, not a structural thing —
+        // it was a `part def` under MemoPart. The prose a document renders is
+        // `doc`, and the one-line register a table cell shows is
+        // `@MemoIdentity`'s `shortDescription`.
+        abstract requirement def MemoMission :> MemoRequirementElement {
+            attribute missionKind : String;
+            attribute successCriteria : String;
+            attribute operationalContext : String;
         }
 
         // Verification-case foundation. A SysML v2 verification case is a behaviour

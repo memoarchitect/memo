@@ -11,8 +11,11 @@ package memo_architecture_operational_structure {
     // purpose and the root of the operational spine. A MemoMission, because
     // "mission" has no medical-device meaning — intended use is what a device
     // exists to do. Was in memo_assurance_requirements; moved here as the
-    // operational-world root.
-    part def IntendedUse specializes MemoMission {
+    // operational-world root. It is a `requirement def`: the intended use is
+    // the top obligation the device's design inputs derive from, and ISO 14971
+    // 5.2 asks for it to be documented as the starting point of risk analysis.
+    // It was a `part def`, which made it a structural thing.
+    requirement def IntendedUse :> MemoMission {
         attribute indication : String;
         attribute contraindication : String;
         attribute patientPopulation : String;

@@ -13,7 +13,7 @@ package memo_examples_gpca_pump_gpca_context {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     // ── Intended use (ISO 14971 §5.2, IEC 62366-1) ──────────────
-    part gpcaIntendedUse : IntendedUse {
+    requirement gpcaIntendedUse : IntendedUse {
         @MemoIdentity { :>> providedId = "IU-001"; }
         @MemoIdentity { :>> shortDescription = "Patient-controlled analgesia infusion of prescribed opioid analgesics."; }
         doc /* The GPCA pump delivers a prescribed analgesic drug intravenously at a programmed basal rate, supplemented by square boluses delivered automatically at programmed intervals and by patient-requested bolus doses, subject to lockout intervals and maximum-dose limits. */
