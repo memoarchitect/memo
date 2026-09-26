@@ -101,7 +101,10 @@ package memo_artifacts_standards_traceability {
         doc /* Any model element claims conformance to a standard clause.
              * This is the edge the standards traceability matrix and the
              * clause coverage report are computed over. */
-        end conformingElement : MemoPart :>> source;
+        // Untyped, as the doc above says. A requirement conforming to a
+        // clause is the commonest case and is not a part, so `MemoPart` here
+        // rejected most of what the matrix exists to show.
+        end conformingElement :>> source;
         end clause : StandardClause :>> target;
     }
     abstract connection conformsToLinks : ConformsTo[*];

@@ -2495,6 +2495,9 @@ elements:
   "memo_examples_gpca_pump_gpca_system::ssBolusDuringBasal":
     shortId: "OPR-32"
     uuid: "9a14e154-8de5-55b2-b156-496a2d8450de"
+  "memo_examples_gpca_pump_gpca_trace::gpcaFirmwareImage":
+    shortId: "SFT-67"
+    uuid: "d55677e1-5e23-546d-8ba0-9d5ff92062ed"
   "memo_examples_gpca_pump_gpca_verification::evidenceDeliveryAccuracy":
     shortId: "MMX-4"
     uuid: "632f219e-6d0c-590f-9108-bd78d80af78c"

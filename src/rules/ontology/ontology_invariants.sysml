@@ -424,4 +424,28 @@ package memo_rules_ontology {
         attribute predicateExpression = "downstream(derivesFrom)->isEmpty() or upstream(derivesFrom)->notEmpty() or conformsTo(MemoNeed)";
         constraint { true }
     }
+
+    // ─── Causes ─────────────────────────────────────────────────────────
+    //
+    // Causes' ends are untyped because its CauseKind spans parts and items
+    // (memo_fmea.sysml). These carry what the types cannot.
+
+    constraint def CausesCauseKindRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-082"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "Model";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A cause is a risk-chain element (a failure mode, failure cause, hazard cause or fault-tree event) or a part that originates one (a component, a use error). A requirement or a behaviour causes nothing.";
+        attribute predicateExpression = "sourcesOf(causes)->forAll(conformsTo(RiskItem) or conformsTo(MemoPart))";
+        constraint { true }
+    }
+    constraint def CausesEffectKindRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-083"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute appliesTo = "Model";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "An effect is a link in a risk chain, or the fault-tree event a component originates. Not a component, not a requirement.";
+        attribute predicateExpression = "targetsOf(causes)->forAll(conformsTo(RiskItem) or conformsTo(FaultTreeNode))";
+        constraint { true }
+    }
 }

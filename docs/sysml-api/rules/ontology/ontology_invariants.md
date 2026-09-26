@@ -61,6 +61,8 @@
 | [`ExchangeHasFlowRule`](#exchangehasflowrule) | `constraint def` | An interface is the path between two ports; the flow over it is what moves. This rule asks that a component exchange carries one: a flow whose ends are the exchange's own two ports. The ends are compared as elements (`intersects` matches exact ids), not as names.… | `MemoConsistencyRule` |
 | [`AlternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | The predicate here named three features that do not exist — `variantKind`, `baseScenario`, `variationPoint` — so it could never fail, and a rule that cannot fail is coverage on paper only.… | `MemoConsistencyRule` |
 | [`DerivationGapRule`](#derivationgaprule) | `constraint def` | A WARNING, not an error: it describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions.… | `MemoConsistencyRule` |
+| [`CausesCauseKindRule`](#causescausekindrule) | `constraint def` | Causes' ends are untyped because its CauseKind spans parts and items (memo_fmea.sysml). These carry what the types cannot. | `MemoConsistencyRule` |
+| [`CausesEffectKindRule`](#causeseffectkindrule) | `constraint def` | Constraint that checks causes effect kind rule. | `MemoConsistencyRule` |
 
 ## ContainmentAcyclicRule
 
@@ -476,6 +478,36 @@ constraint def DerivationGapRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | A WARNING, not an error: it describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions.… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## CausesCauseKindRule
+
+```sysml
+constraint def CausesCauseKindRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Causes' ends are untyped because its CauseKind spans parts and items (memo_fmea.sysml). These carry what the types cannot. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## CausesEffectKindRule
+
+```sysml
+constraint def CausesEffectKindRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks causes effect kind rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -911,6 +943,30 @@ constraint def DerivationGapRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "A requirement that others derive from should itself be justified. If nothing is upstream of it and it is not a stakeholder need, the derivation chain dead-ends at an unexplained requirement — the gap an assessor asks about first. Needs are the legitimate roots, so they are exempt by type rather than by convention.";
             attribute predicateExpression = "downstream(derivesFrom)->isEmpty() or upstream(derivesFrom)->notEmpty() or conformsTo(MemoNeed)";
+            constraint { true }
+        }
+
+        // ─── Causes ─────────────────────────────────────────────────────────
+        //
+        // Causes' ends are untyped because its CauseKind spans parts and items
+        // (memo_fmea.sysml). These carry what the types cannot.
+
+        constraint def CausesCauseKindRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-082"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute appliesTo = "Model";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "A cause is a risk-chain element (a failure mode, failure cause, hazard cause or fault-tree event) or a part that originates one (a component, a use error). A requirement or a behaviour causes nothing.";
+            attribute predicateExpression = "sourcesOf(causes)->forAll(conformsTo(RiskItem) or conformsTo(MemoPart))";
+            constraint { true }
+        }
+        constraint def CausesEffectKindRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-083"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute appliesTo = "Model";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "An effect is a link in a risk chain, or the fault-tree event a component originates. Not a component, not a requirement.";
+            attribute predicateExpression = "targetsOf(causes)->forAll(conformsTo(RiskItem) or conformsTo(FaultTreeNode))";
             constraint { true }
         }
     }
