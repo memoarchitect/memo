@@ -151,19 +151,6 @@ package memo_core_common {
     }
     abstract part def AnalysisArtifact specializes MemoPart;
 
-    // Top-level goal a system or operation exists to fulfil, with its success
-    // criteria and context. Domain layers specialize it; the medical-device
-    // intended use (memo_architecture_operational_structure::IntendedUse) is a
-    // MemoMission. Specializes MemoPart directly and adds only what a mission
-    // needs beyond it — the prose a document renders is `doc`, and the
-    // one-line register a table cell shows is `@MemoIdentity`'s
-    // `shortDescription`, so no DocumentedElement layer is needed.
-    abstract part def MemoMission specializes MemoPart {
-        attribute missionKind : String;
-        attribute successCriteria : String;
-        attribute operationalContext : String;
-    }
-
     // ─── Construct-specific foundations (non-part metaclasses) ───────
 
     // Behavioral foundation: operational activities, tasks, system actions,
@@ -234,6 +221,20 @@ package memo_core_common {
 
     requirement def MemoRequirement :> MemoRequirementElement {
         attribute acceptanceCriteria : String;
+    }
+
+    // Top-level goal a system or operation exists to fulfil, with its success
+    // criteria and context. Domain layers specialize it; the medical-device
+    // intended use (memo_architecture_operational_structure::IntendedUse) is a
+    // MemoMission. It is a `requirement def` because a mission is the top
+    // obligation everything below it derives from, not a structural thing —
+    // it was a `part def` under MemoPart. The prose a document renders is
+    // `doc`, and the one-line register a table cell shows is
+    // `@MemoIdentity`'s `shortDescription`.
+    abstract requirement def MemoMission :> MemoRequirementElement {
+        attribute missionKind : String;
+        attribute successCriteria : String;
+        attribute operationalContext : String;
     }
 
     // Verification-case foundation. A SysML v2 verification case is a behaviour
