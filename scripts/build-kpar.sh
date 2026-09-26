@@ -121,7 +121,7 @@ fi
 # `sysand build` packages files; it does NOT resolve names. A package whose
 # supertypes do not exist anywhere — `:> MemoItem` when the real base is
 # `MemoPart` — packaged happily and reported "zero errors", so an ontology that
-# no tool could load shipped green. SysIDE is the compiler of record, so the
+# no tool could load shipped green. SysIDE is the compatibility check, so the
 # build asks it whether every reference resolves.
 # ─────────────────────────────────────────────────────────────────────────────
 echo "── name resolution: syside check ──"
@@ -134,12 +134,11 @@ fi
 # kpar packages this script builds. `examples/` reaches users via
 # `memo init --example`, so a green build that skipped it said nothing about
 # what users actually run. R8-S4 added it here and to check-syside-gate.mjs.
-check_out="$(cd "$REPO_ROOT" && syside check src extensions examples 2>&1)" || true
-if echo "$check_out" | grep -q 'error'; then
-  echo "$check_out" | grep -A2 'error' | sed 's/^/  /'
-  echo ""
-  echo "  ✖ $(echo "$check_out" | grep -c 'error') unresolved reference(s)"
-  echo "✖ build FAILED — ontology packages, but does not resolve."
+# `syside-check.mjs` runs the full diagnostic set (`--diagnose all
+# --warnings-as-errors`) and excepts only what `syside-exceptions.json` lists —
+# SysIDE gaps against the OMG specification, one diagnostic at a time.
+if ! (cd "$REPO_ROOT" && node scripts/syside-check.mjs --exceptions syside-exceptions.json src extensions examples); then
+  echo "✖ build FAILED — SysIDE reports a diagnostic the exceptions register does not cover."
   exit 1
 fi
 echo "  ✔ every reference resolves"
