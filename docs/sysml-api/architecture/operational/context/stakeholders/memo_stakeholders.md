@@ -155,9 +155,12 @@ connection def Governs :> MemoRelationship
             enum correspondence;
             enum 'use';
         }
+        // The governor spans metaclasses — a CorrespondenceRule is a part, an
+        // IntendedUse a requirement — so that end stays untyped, as DerivesFrom's
+        // driver does. What is governed is always a structural element.
         connection def Governs :> MemoRelationship {
             attribute governKind : GovernKind;
-            end governor : MemoPart :>> source;
+            end governor :>> source;
             end governedElement : MemoPart :>> target;
         }
         abstract connection governsLinks : Governs[*];

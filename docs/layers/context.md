@@ -57,10 +57,11 @@ cases alters them here, not in the architecture.
 ### Intended use
 
 `IntendedUse` states what the device is for. It is a single element from which
-several standards read.
+several standards read, and a requirement rather than a part: it is the top
+obligation the device's design inputs derive from, not a structural thing.
 
 ```sysml
-part gpcaIntendedUse : IntendedUse {
+requirement gpcaIntendedUse : IntendedUse {
     attribute :>> id = "IU-001";
     attribute :>> indication =
         "Management of acute post-operative or chronic pain requiring "
