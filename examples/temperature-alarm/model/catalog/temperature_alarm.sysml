@@ -143,6 +143,15 @@ package memo_examples_temperature_alarm {
         @MemoIdentity { :>> providedId = "TA-EV-001"; :>> label = "AlarmLatencyTestReport"; }
         attribute :>> evidenceType = "test report";
     }
-    connection : Validates connect validationTarget ::> actAcknowledgeAlarm.taskAckAlarm to validationCase ::> uvAckTask;
+    // The summative test is the validation case; uvAckTask is the record it
+    // produced. Validates ends at a case, never at the evidence itself.
+    verification valAckTask : ValidationCase {
+        @MemoIdentity { :>> providedId = "TA-VAL-001"; :>> label = "SummativeAlarmAcknowledgementTest"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "15 ICU nurses, representative shift conditions";
+        attribute :>> acceptanceCriteria = "no critical-task failures; all alarms assessed before silencing";
+    }
+    connection : Validates connect validationTarget ::> actAcknowledgeAlarm.taskAckAlarm to validationCase ::> valAckTask;
+    connection : ProducesEvidence connect producer ::> valAckTask to producedEvidence ::> uvAckTask;
     connection : ProducesEvidence connect producer ::> vcAlarmLatency to producedEvidence ::> evLatencyReport;
 }

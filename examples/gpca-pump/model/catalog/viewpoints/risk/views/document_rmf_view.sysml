@@ -23,7 +23,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
         part :>> selectionQuery {
             @MemoIdentity { :>> providedId = "QRY-DOC-001"; :>> label = "rmfViewQuery"; }
             attribute :>> includeElementKinds = ("IntendedUse", "ReasonablyForeseeableMisuse", "SafetyRelatedCharacteristic", "Hazard", "HazardCause", "SequenceOfEvents", "HazardousSituation", "Harm", "Risk", "RiskControlMeasure", "ResidualRisk", "Benefit", "OverallResidualRiskEvaluation", "VerificationCase", "MemoEvidence");
-            attribute :>> includeRelationshipKinds = ("Causes", "Mitigates", "Mitigates", "TracesRisk", "AssessedAgainst", "VerifiedBy", "ProducesEvidence");
+            attribute :>> includeRelationshipKinds = ("Causes", "Mitigates", "Mitigates", "TracesRisk", "EstimatedFor", "ReducedBy", "EvaluatedIn", "AssessedAgainst", "VerifiedBy", "ProducesEvidence");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
     }

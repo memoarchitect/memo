@@ -361,7 +361,8 @@ authoring surface writes one representation.
 
 Roughly forty relationships encode ISO 14971 / IEC 62304 / IEC 62366 semantics
 with no SysML v2 equivalent — `Mitigates`, `Causes`, `HasFailureMode`,
-`IdentifiesHazard`, `TracesRisk`, `AssessedAgainst`, `ProducesEvidence`,
+`IdentifiesHazard`, `TracesRisk`, `EstimatedFor`, `ReducedBy`, `EvaluatedIn`,
+`AssessedAgainst`, `ProducesEvidence`,
 `ConformsTo`, `ImpactsSafety`, `CommitsUseError`, and so on. These are the
 reason MEMO exists. The corpus check protects them: a construct that survives it
 is one the language genuinely lacks.

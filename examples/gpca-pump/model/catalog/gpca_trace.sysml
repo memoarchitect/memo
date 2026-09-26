@@ -34,6 +34,8 @@ package memo_examples_gpca_pump_gpca_trace {
     private import memo_architecture_operational_use_cases::*;
     private import memo_architecture_operational_workflows::*;
     private import memo_architecture_realization_deployment::*;
+    private import memo_core_enumerations::DeploymentKind;
+    private import memo_core_common::MemoIdentity;
     private import memo_assurance_human_factors::*;
     private import memo_assurance_safety_risk::*;
     private import memo_assurance_safety_risk_analysis::*;
@@ -342,7 +344,25 @@ package memo_examples_gpca_pump_gpca_trace {
     allocate fnPresentStatus to operatorDisplay;
     allocate fnSelfTest to gpcaSoftware.systemMonitor;
     // ── Deployment, hosting, and interface realization ──────────
-    allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaSoftware to controllerBoard;
+    // Software reaches the hardware as a built image on the processor that
+    // runs it: modules build into the image, the image deploys to the MCU.
+    // This edge used to deploy the software system onto the circuit board,
+    // which DeploysTo's ends reject — a system is not a deployment unit and a
+    // board is not a processing node (mainController, hosted by the board).
+    part gpcaFirmwareImage : SoftwareDeploymentUnit {
+        @MemoIdentity { :>> providedId = "DU-001"; :>> label = "GPCAFirmwareImage"; }
+        attribute :>> unitKind = "firmware image";
+        attribute :>> version = "2.0";
+    }
+    allocation : BuildsInto allocate gpcaSoftware.tlm to gpcaFirmwareImage;
+    allocation : BuildsInto allocate gpcaSoftware.config to gpcaFirmwareImage;
+    allocation : BuildsInto allocate gpcaSoftware.alarm to gpcaFirmwareImage;
+    allocation : BuildsInto allocate gpcaSoftware.logging to gpcaFirmwareImage;
+    allocation : BuildsInto allocate gpcaSoftware.infusionMgr to gpcaFirmwareImage;
+    allocation : BuildsInto allocate gpcaSoftware.systemMonitor to gpcaFirmwareImage;
+    allocation gpcaSoftwareDeployment : DeploysTo allocate gpcaFirmwareImage to mainController {
+        attribute :>> deploymentKind = DeploymentKind::embedded;
+    }
     allocation : HostedBy allocate mainController to controllerBoard;
     #refinement dependency sensorInputInterface to hwSoftwareBus;
     #refinement dependency actuatorCommandInterface to pumpMotorDrive;
@@ -429,15 +449,15 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> overdoseHazard to targetRiskElement ::> seqFrequentBolus;
     connection : TracesRisk connect sourceRiskElement ::> seqFrequentBolus to targetRiskElement ::> hsExcessInfusion;
     connection : TracesRisk connect sourceRiskElement ::> hsExcessInfusion to targetRiskElement ::> harmRespiratoryDepression;
-    connection : TracesRisk connect sourceRiskElement ::> harmRespiratoryDepression to targetRiskElement ::> riskBefore;
+    connection : EstimatedFor connect risk ::> riskBefore to riskElement ::> harmRespiratoryDepression;
     connection : AssessedAgainst connect risk ::> riskBefore to riskMatrix ::> riskMatrix;
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> lockoutControl to mitigatedElement ::> overdoseHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> drugLibraryControl to mitigatedElement ::> overdoseHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> watchdogControl to mitigatedElement ::> overdoseHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> flowCrossCheckControl to mitigatedElement ::> overdoseHazard; }
-    connection : TracesRisk connect sourceRiskElement ::> lockoutControl to targetRiskElement ::> riskAfter;
+    connection : ReducedBy connect residualRisk ::> riskAfter to control ::> lockoutControl;
     connection : AssessedAgainst connect risk ::> riskAfter to riskMatrix ::> riskMatrix;
-    connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfter;
+    connection : EvaluatedIn connect residualRisk ::> riskAfter to evaluation ::> residualEval;
     // HZ-002 under-infusion
     connection : TracesRisk connect sourceRiskElement ::> causeOcclusion to targetRiskElement ::> underdoseHazard;
     connection : TracesRisk connect sourceRiskElement ::> causeReservoirEmpty to targetRiskElement ::> underdoseHazard;
@@ -447,14 +467,14 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> underdoseHazard to targetRiskElement ::> seqOcclusion;
     connection : TracesRisk connect sourceRiskElement ::> seqOcclusion to targetRiskElement ::> hsInterruptedTherapy;
     connection : TracesRisk connect sourceRiskElement ::> hsInterruptedTherapy to targetRiskElement ::> harmUntreatedPain;
-    connection : TracesRisk connect sourceRiskElement ::> harmUntreatedPain to targetRiskElement ::> riskBeforeUnderdose;
+    connection : EstimatedFor connect risk ::> riskBeforeUnderdose to riskElement ::> harmUntreatedPain;
     connection : AssessedAgainst connect risk ::> riskBeforeUnderdose to riskMatrix ::> riskMatrix;
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> occlusionAlarmControl to mitigatedElement ::> underdoseHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> reservoirMonitorControl to mitigatedElement ::> underdoseHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> flowCrossCheckControl to mitigatedElement ::> underdoseHazard; }
-    connection : TracesRisk connect sourceRiskElement ::> occlusionAlarmControl to targetRiskElement ::> riskAfterUnderdose;
+    connection : ReducedBy connect residualRisk ::> riskAfterUnderdose to control ::> occlusionAlarmControl;
     connection : AssessedAgainst connect risk ::> riskAfterUnderdose to riskMatrix ::> riskMatrix;
-    connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterUnderdose;
+    connection : EvaluatedIn connect residualRisk ::> riskAfterUnderdose to evaluation ::> residualEval;
     // HZ-003 air embolism (shares the air-in-line and empty-reservoir causes)
     connection : TracesRisk connect sourceRiskElement ::> causeAirInLine to targetRiskElement ::> airEmbolismHazard;
     connection : TracesRisk connect sourceRiskElement ::> causeReservoirEmpty to targetRiskElement ::> airEmbolismHazard;
@@ -464,12 +484,12 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> airEmbolismHazard to targetRiskElement ::> seqAirInLine;
     connection : TracesRisk connect sourceRiskElement ::> seqAirInLine to targetRiskElement ::> hsAirTowardPatient;
     connection : TracesRisk connect sourceRiskElement ::> hsAirTowardPatient to targetRiskElement ::> harmAirEmbolism;
-    connection : TracesRisk connect sourceRiskElement ::> harmAirEmbolism to targetRiskElement ::> riskBeforeAir;
+    connection : EstimatedFor connect risk ::> riskBeforeAir to riskElement ::> harmAirEmbolism;
     connection : AssessedAgainst connect risk ::> riskBeforeAir to riskMatrix ::> riskMatrix;
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> airDetectionControl to mitigatedElement ::> airEmbolismHazard; }
-    connection : TracesRisk connect sourceRiskElement ::> airDetectionControl to targetRiskElement ::> riskAfterAir;
+    connection : ReducedBy connect residualRisk ::> riskAfterAir to control ::> airDetectionControl;
     connection : AssessedAgainst connect risk ::> riskAfterAir to riskMatrix ::> riskMatrix;
-    connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterAir;
+    connection : EvaluatedIn connect residualRisk ::> riskAfterAir to evaluation ::> residualEval;
     // HZ-004 misprogramming / wrong drug
     connection : TracesRisk connect sourceRiskElement ::> causeWrongPrescriptionEntered to targetRiskElement ::> wrongDoseHazard;
     connection : TracesRisk connect sourceRiskElement ::> causeWrongDoseUnits to targetRiskElement ::> wrongDoseHazard;
@@ -479,56 +499,56 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> wrongDoseHazard to targetRiskElement ::> seqMisprogram;
     connection : TracesRisk connect sourceRiskElement ::> seqMisprogram to targetRiskElement ::> hsWrongTherapy;
     connection : TracesRisk connect sourceRiskElement ::> hsWrongTherapy to targetRiskElement ::> harmRespiratoryDepression;
-    connection : TracesRisk connect sourceRiskElement ::> hsWrongTherapy to targetRiskElement ::> riskBeforeWrongDose;
+    connection : EstimatedFor connect risk ::> riskBeforeWrongDose to riskElement ::> hsWrongTherapy;
     connection : AssessedAgainst connect risk ::> riskBeforeWrongDose to riskMatrix ::> riskMatrix;
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> drugLibraryControl to mitigatedElement ::> wrongDoseHazard; }
-    connection : TracesRisk connect sourceRiskElement ::> drugLibraryControl to targetRiskElement ::> riskAfterWrongDose;
+    connection : ReducedBy connect residualRisk ::> riskAfterWrongDose to control ::> drugLibraryControl;
     connection : AssessedAgainst connect risk ::> riskAfterWrongDose to riskMatrix ::> riskMatrix;
-    connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterWrongDose;
+    connection : EvaluatedIn connect residualRisk ::> riskAfterWrongDose to evaluation ::> residualEval;
     // HZ-005 free flow
     connection : TracesRisk connect sourceRiskElement ::> causeSetDisengaged to targetRiskElement ::> freeFlowHazard;
     connection : TracesRisk connect sourceRiskElement ::> causeDoorOpenedDuringInfusion to targetRiskElement ::> freeFlowHazard;
     connection : TracesRisk connect sourceRiskElement ::> freeFlowHazard to targetRiskElement ::> seqFreeFlow;
     connection : TracesRisk connect sourceRiskElement ::> seqFreeFlow to targetRiskElement ::> hsFreeFlow;
     connection : TracesRisk connect sourceRiskElement ::> hsFreeFlow to targetRiskElement ::> harmRespiratoryDepression;
-    connection : TracesRisk connect sourceRiskElement ::> hsFreeFlow to targetRiskElement ::> riskBeforeFreeFlow;
+    connection : EstimatedFor connect risk ::> riskBeforeFreeFlow to riskElement ::> hsFreeFlow;
     connection : AssessedAgainst connect risk ::> riskBeforeFreeFlow to riskMatrix ::> riskMatrix;
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> freeFlowValveControl to mitigatedElement ::> freeFlowHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> doorInterlockControl to mitigatedElement ::> freeFlowHazard; }
-    connection : TracesRisk connect sourceRiskElement ::> freeFlowValveControl to targetRiskElement ::> riskAfterFreeFlow;
+    connection : ReducedBy connect residualRisk ::> riskAfterFreeFlow to control ::> freeFlowValveControl;
     connection : AssessedAgainst connect risk ::> riskAfterFreeFlow to riskMatrix ::> riskMatrix;
-    connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterFreeFlow;
+    connection : EvaluatedIn connect residualRisk ::> riskAfterFreeFlow to evaluation ::> residualEval;
     // HZ-006 reverse delivery (CriSys REQ 22; GIP HID 1.14)
     connection : TracesRisk connect sourceRiskElement ::> causeBleedBack to targetRiskElement ::> reverseDeliveryHazard;
     connection : TracesRisk connect sourceRiskElement ::> reverseDeliveryHazard to targetRiskElement ::> seqReverseDelivery;
     connection : TracesRisk connect sourceRiskElement ::> seqReverseDelivery to targetRiskElement ::> hsReverseFlow;
     connection : TracesRisk connect sourceRiskElement ::> hsReverseFlow to targetRiskElement ::> harmUntreatedPain;
-    connection : TracesRisk connect sourceRiskElement ::> harmUntreatedPain to targetRiskElement ::> riskBeforeReverse;
+    connection : EstimatedFor connect risk ::> riskBeforeReverse to riskElement ::> harmUntreatedPain;
     connection : AssessedAgainst connect risk ::> riskBeforeReverse to riskMatrix ::> riskMatrix;
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> reverseDeliveryPauseControl to mitigatedElement ::> reverseDeliveryHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> antiRefluxDesignControl to mitigatedElement ::> reverseDeliveryHazard; }
-    connection : TracesRisk connect sourceRiskElement ::> reverseDeliveryPauseControl to targetRiskElement ::> riskAfterReverse;
+    connection : ReducedBy connect residualRisk ::> riskAfterReverse to control ::> reverseDeliveryPauseControl;
     connection : AssessedAgainst connect risk ::> riskAfterReverse to riskMatrix ::> riskMatrix;
-    connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterReverse;
+    connection : EvaluatedIn connect residualRisk ::> riskAfterReverse to evaluation ::> residualEval;
     // HZ-007 VTBI over-infusion (CriSys REQ 20/28; GIP use hazard 8.1)
     connection : TracesRisk connect sourceRiskElement ::> causeVtbiTooHigh to targetRiskElement ::> vtbiOverInfusionHazard;
     connection : TracesRisk connect sourceRiskElement ::> causeStaleDrugLibrary to targetRiskElement ::> vtbiOverInfusionHazard;
     connection : TracesRisk connect sourceRiskElement ::> vtbiOverInfusionHazard to targetRiskElement ::> seqVtbiExceeded;
     connection : TracesRisk connect sourceRiskElement ::> seqVtbiExceeded to targetRiskElement ::> hsVtbiExceeded;
     connection : TracesRisk connect sourceRiskElement ::> hsVtbiExceeded to targetRiskElement ::> harmRespiratoryDepression;
-    connection : TracesRisk connect sourceRiskElement ::> harmRespiratoryDepression to targetRiskElement ::> riskBeforeVtbi;
+    connection : EstimatedFor connect risk ::> riskBeforeVtbi to riskElement ::> harmRespiratoryDepression;
     connection : AssessedAgainst connect risk ::> riskBeforeVtbi to riskMatrix ::> riskMatrix;
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> vtbiLimitPauseControl to mitigatedElement ::> vtbiOverInfusionHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> infusionCompleteControl to mitigatedElement ::> vtbiOverInfusionHazard; }
     connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> drugLibraryControl to mitigatedElement ::> vtbiOverInfusionHazard; }
-    connection : TracesRisk connect sourceRiskElement ::> vtbiLimitPauseControl to targetRiskElement ::> riskAfterVtbi;
+    connection : ReducedBy connect residualRisk ::> riskAfterVtbi to control ::> vtbiLimitPauseControl;
     connection : AssessedAgainst connect risk ::> riskAfterVtbi to riskMatrix ::> riskMatrix;
-    connection : TracesRisk connect sourceRiskElement ::> residualEval to targetRiskElement ::> riskAfterVtbi;
+    connection : EvaluatedIn connect residualRisk ::> riskAfterVtbi to evaluation ::> residualEval;
     // Use errors feeding the risk chains (IEC 62366-1 §5.3)
-    connection : TracesRisk connect sourceRiskElement ::> ueMisprogrammedRate to targetRiskElement ::> seqMisprogram;
-    connection : TracesRisk connect sourceRiskElement ::> ueWrongDrugLoaded to targetRiskElement ::> seqMisprogram;
-    connection : TracesRisk connect sourceRiskElement ::> ueBolusByProxy to targetRiskElement ::> causeFrequentBolus;
-    connection : TracesRisk connect sourceRiskElement ::> ueAlarmDisregard to targetRiskElement ::> seqOcclusion;
+    connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueMisprogrammedRate to effect ::> seqMisprogram; }
+    connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueWrongDrugLoaded to effect ::> seqMisprogram; }
+    connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueBolusByProxy to effect ::> causeFrequentBolus; }
+    connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueAlarmDisregard to effect ::> seqOcclusion; }
 
     // ── FMEA and fault tree integration ─────────────────────────
     // Was `AnalyzedBy`: a zero-attribute edge from an element to the

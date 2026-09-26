@@ -138,9 +138,12 @@ SysML `connection def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`AssessedAgainst`](assurance/safety_risk/memo_risk.md#assessedagainst) | `connection def` | Typed relationship for assessed against. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`EstimatedFor`](assurance/safety_risk/memo_risk.md#estimatedfor) | `connection def` | Typed relationship for estimated for. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`EvaluatedIn`](assurance/safety_risk/memo_risk.md#evaluatedin) | `connection def` | Typed relationship for evaluated in. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`HazardRelatedScenario`](assurance/safety_risk/memo_risk.md#hazardrelatedscenario) | `connection def` | Typed relationship for hazard related scenario. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`LeadsToHarm`](assurance/safety_risk/memo_risk.md#leadstoharm) | `connection def` | The final ISO 14971 chain edge. P2 is the conditional probability that the hazardous situation results in the harm. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`Mitigates`](assurance/safety_risk/memo_risk.md#mitigates) | `connection def` | Typed relationship for mitigates. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`ReducedBy`](assurance/safety_risk/memo_risk.md#reducedby) | `connection def` | Typed relationship for reduced by. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`TracesRisk`](assurance/safety_risk/memo_risk.md#tracesrisk) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 
 

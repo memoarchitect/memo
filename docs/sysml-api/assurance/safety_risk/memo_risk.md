@@ -53,6 +53,9 @@
 | [`LeadsToHarm`](#leadstoharm) | `connection def` | The final ISO 14971 chain edge. P2 is the conditional probability that the hazardous situation results in the harm. | `MemoRelationship` |
 | [`HazardRelatedScenario`](#hazardrelatedscenario) | `connection def` | Typed relationship for hazard related scenario. | `MemoRelationship` |
 | [`AssessedAgainst`](#assessedagainst) | `connection def` | Typed relationship for assessed against. | `MemoRelationship` |
+| [`EstimatedFor`](#estimatedfor) | `connection def` | Typed relationship for estimated for. | `MemoRelationship` |
+| [`ReducedBy`](#reducedby) | `connection def` | Typed relationship for reduced by. | `MemoRelationship` |
+| [`EvaluatedIn`](#evaluatedin) | `connection def` | Typed relationship for evaluated in. | `MemoRelationship` |
 | [`MitigationKind`](#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | — |
 | [`Mitigates`](#mitigates) | `connection def` | Typed relationship for mitigates. | `MemoRelationship` |
 
@@ -326,6 +329,51 @@ connection def AssessedAgainst :> MemoRelationship
 | Owning package | `memo_assurance_safety_risk` |
 
 
+## EstimatedFor
+
+```sysml
+connection def EstimatedFor :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for estimated for. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
+## ReducedBy
+
+```sysml
+connection def ReducedBy :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for reduced by. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
+## EvaluatedIn
+
+```sysml
+connection def EvaluatedIn :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship for evaluated in. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
 ## MitigationKind
 
 ```sysml
@@ -405,7 +453,8 @@ connection def Mitigates :> MemoRelationship
         // `DesignControlRiskRow` was a denormalized spreadsheet transcription.
         // Risk rows now decompose into the ISO 14971 chain below: Risk owns its
         // Hazard, SequenceOfEvents, HazardousSituation, and Harm items, linked by
-        // TracesRisk / LeadsToHarm, with ResidualRisk after mitigation.
+        // TracesRisk / LeadsToHarm, with ResidualRisk after mitigation. The risk
+        // itself is reached by EstimatedFor / ReducedBy / EvaluatedIn below.
         // A device characteristic whose implementation, failure, or misuse can
         // affect safety. This is the modelable output of ISO 14971 §5.3.
         part def SafetyRelatedCharacteristic specializes MemoPart {
@@ -530,6 +579,43 @@ connection def Mitigates :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = assessedAgainstLinks meta SysML::Usage;
+        }
+        // A risk is not a link in the chain (see RiskItem), so TracesRisk cannot
+        // reach it — and until these three nothing else could either. A model had
+        // no way to say which hazardous situation or harm a risk was estimated for
+        // (ISO 14971 §5.5), which control reduced it to a residual risk (§7), or
+        // which overall evaluation covered that residual (§8), so gpca-pump wrote
+        // all three as TracesRisk into a Risk and the builder rejected every one.
+        // Named from the risk's side, like AssessedAgainst.
+        connection def EstimatedFor :> MemoRelationship {
+            end risk : Risk :>> source;
+            end riskElement : RiskItem :>> target;
+        }
+        abstract connection estimatedForLinks : EstimatedFor[*];
+        metadata def <estimatedFor> EstimatedForMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = estimatedForLinks meta SysML::Usage;
+        }
+        connection def ReducedBy :> MemoRelationship {
+            end residualRisk : ResidualRisk :>> source;
+            end control : RiskControlMeasure :>> target;
+        }
+        abstract connection reducedByLinks : ReducedBy[*];
+        metadata def <reducedBy> ReducedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = reducedByLinks meta SysML::Usage;
+        }
+        connection def EvaluatedIn :> MemoRelationship {
+            end residualRisk : ResidualRisk :>> source;
+            end evaluation : OverallResidualRiskEvaluation :>> target;
+        }
+        abstract connection evaluatedInLinks : EvaluatedIn[*];
+        metadata def <evaluatedIn> EvaluatedInMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = evaluatedInLinks meta SysML::Usage;
         }
         // Mitigates unifies the control/action → risk-element edges of the
         // ISO 14971 / FMEA / FTA / cyber chains — MitigatesHazard,
