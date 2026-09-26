@@ -1,7 +1,7 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view {
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Sequence sample (sequence view kind, `seq` diagram type). A FunctionalFlow
-    // owns an ordered chain of FunctionalFlowSteps; each step is `allocate`d to
+    // owns an ordered chain of nested actions (its steps); each step is `allocate`d to
     // the lifeline (an actor or component) that performs it, and the sequence
     // template lays lifelines out as columns with one row per step in
     // declaration order.
@@ -38,20 +38,20 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence
     action startInfusion : FunctionalFlow {
 @MemoIdentity { :>> label = "Start Infusion"; }
 
-        action stepRequestStart : FunctionalFlowStep {@MemoIdentity { :>> label = "Request start infusion"; } }
-        action stepValidate : FunctionalFlowStep {@MemoIdentity { :>> label = "Validate prescribed rate"; } }
-        action stepCommandMotor : FunctionalFlowStep {@MemoIdentity { :>> label = "Command motor drive"; } }
-        action stepConfirm : FunctionalFlowStep {@MemoIdentity { :>> label = "Confirm delivery started"; } }
+        action stepRequestStart {@MemoIdentity { :>> label = "Request start infusion"; } }
+        action stepValidate {@MemoIdentity { :>> label = "Validate prescribed rate"; } }
+        action stepCommandMotor {@MemoIdentity { :>> label = "Command motor drive"; } }
+        action stepConfirm {@MemoIdentity { :>> label = "Confirm delivery started"; } }
 
         // Steps inside the monitoring loop fragment
-        action stepReadSensor : FunctionalFlowStep {@MemoIdentity { :>> label = "Read sensor data"; } attribute stepOrder = "5"; attribute fragment = "monitorLoop"; }
-        action stepCheckVitals : FunctionalFlowStep {@MemoIdentity { :>> label = "Check vital signs"; } attribute stepOrder = "6"; attribute fragment = "monitorLoop"; }
+        action stepReadSensor {@MemoIdentity { :>> label = "Read sensor data"; } attribute stepOrder = "5"; attribute fragment = "monitorLoop"; }
+        action stepCheckVitals {@MemoIdentity { :>> label = "Check vital signs"; } attribute stepOrder = "6"; attribute fragment = "monitorLoop"; }
 
         // Steps inside the alt (error-handling) fragment
-        action stepRetryDelivery : FunctionalFlowStep {@MemoIdentity { :>> label = "Retry delivery"; } attribute stepOrder = "7"; attribute fragment = "errorHandling"; attribute fragmentOperand = "1"; }
-        action stepAlertUser : FunctionalFlowStep {@MemoIdentity { :>> label = "Alert user"; } attribute stepOrder = "8"; attribute fragment = "errorHandling"; attribute fragmentOperand = "2"; }
+        action stepRetryDelivery {@MemoIdentity { :>> label = "Retry delivery"; } attribute stepOrder = "7"; attribute fragment = "errorHandling"; attribute fragmentOperand = "1"; }
+        action stepAlertUser {@MemoIdentity { :>> label = "Alert user"; } attribute stepOrder = "8"; attribute fragment = "errorHandling"; attribute fragmentOperand = "2"; }
 
-        action stepNotify : FunctionalFlowStep {@MemoIdentity { :>> label = "Notify delivery started"; } attribute stepOrder = "9"; }
+        action stepNotify {@MemoIdentity { :>> label = "Notify delivery started"; } attribute stepOrder = "9"; }
 
         first start then stepRequestStart;
         first stepRequestStart then stepValidate;

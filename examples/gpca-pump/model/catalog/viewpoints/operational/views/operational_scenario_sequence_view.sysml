@@ -29,7 +29,7 @@ package memo_examples_gpca_pump_viewpoints_operational_views_operational_scenari
         attribute :>> queryDescription = "Include system scenarios with the functional chains and steps that realize them.";
         part :>> selectionQuery {
             @MemoIdentity { :>> providedId = "QRY-BHV-102"; :>> label = "GPCA_ScenarioSequenceQuery"; }
-            attribute :>> includeElementKinds = ("OperativeScenario", "FunctionalFlow", "FunctionalFlowStep");
+            attribute :>> includeElementKinds = ("OperativeScenario", "FunctionalFlow");
             attribute :>> includeLayers = ("operational", "system");
             attribute :>> selectionExpression = "product == 'GPCA'";
             attribute :>> rationaleText = "Auto-populate scenario sequences from the system layer.";
