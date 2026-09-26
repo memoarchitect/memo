@@ -97,7 +97,8 @@ package memo_examples_gpca_pump_gpca_architecture {
     // AADL's GPCA_Device.Impl lists GPCA_SW as a subcomponent beside the
     // sensor and actuator wrappers. MEMO does not nest it there: gpcaDevice is
     // a PhysicalAssembly, and software on hardware is DEPLOYMENT, which
-    // gpcaSoftwareDeployment (gpca_trace) records against controllerBoard. A
+    // gpcaSoftwareDeployment (gpca_trace) records: the firmware image deploys
+    // to mainController, which controllerBoard hosts. A
     // physical assembly containing the software system says the same thing a
     // second time as containment, which CR-ONT-079 rejects. The AADL port
     // wiring is unchanged: the sensor-to-software and software-to-actuator

@@ -156,7 +156,10 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
 
     connection : DerivesCyberRequirement connect sourceThreatOrRisk ::> eventLogTamperingThreat to targetRequirement ::> reqAuthenticatedServiceAccess;
 
-    connection : ImpactsSafety connect cyberElement ::> configurationTamperingRisk to safetyElement ::> riskBefore;
+    // A security risk feeds safety risk management at the hazard it can
+    // cause (AAMI TIR57), not at another risk's estimate: tampered therapy
+    // configuration is a route to over-infusion.
+    connection : ImpactsSafety connect cyberElement ::> configurationTamperingRisk to safetyElement ::> overdoseHazard;
 
     connection : CrossesTrustBoundary connect boundary ::> maintenancePortBoundary to crossingItem ::> therapyConfigurationAsset;
 

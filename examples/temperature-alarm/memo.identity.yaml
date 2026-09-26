@@ -53,6 +53,9 @@ elements:
   "memo_examples_temperature_alarm::uvAckTask":
     shortId: "MMX-3"
     uuid: "d268c19e-41da-5657-ac04-2f9bcdc29713"
+  "memo_examples_temperature_alarm::valAckTask":
+    shortId: "VLD-1"
+    uuid: "0cf87665-ade5-5bb2-9fd5-081e946aeb07"
   "memo_examples_temperature_alarm::vcAlarmLatency":
     shortId: "VRF-1"
     uuid: "e4853bd5-0672-5040-af70-0c7f9177ee7a"
