@@ -262,10 +262,10 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | --- | --- | --- | --- |
 | [`ADRArtifact`](artifacts/core/memo_controlled_artifacts.md#adrartifact) | `part def` | Adrartifact definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
 | [`AnalysisNotebook`](artifacts/core/memo_controlled_artifacts.md#analysisnotebook) | `part def` | Analysis notebook definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
-| [`ControlledArtifact`](artifacts/core/memo_controlled_artifacts.md#controlledartifact) | `item def` | Controlled artifact definition specializing `MemoArtifactItem`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`ControlledArtifact`](artifacts/core/memo_controlled_artifacts.md#controlledartifact) | `part def` | Controlled artifact definition specializing `MemoArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
 | [`GeneratedReport`](artifacts/core/memo_controlled_artifacts.md#generatedreport) | `part def` | Generated report definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
 | [`MarkdownDocumentSource`](artifacts/core/memo_controlled_artifacts.md#markdowndocumentsource) | `part def` | Markdown document source definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
-| [`MemoArtifactItem`](artifacts/core/memo_controlled_artifacts.md#memoartifactitem) | `item def` | Memo artifact item definition specializing `MemoItem`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
+| [`MemoArtifact`](artifacts/core/memo_controlled_artifacts.md#memoartifact) | `part def` | An artifact is a part: a document, a standard, a clause of one. A relationship end typed MemoArtifact (TracesToDocument) takes all of them. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
 | [`ModelDataset`](artifacts/core/memo_controlled_artifacts.md#modeldataset) | `part def` | Model dataset definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
 | [`ModelOwnedArtifact`](artifacts/core/memo_controlled_artifacts.md#modelownedartifact) | `part def` | Model owned artifact definition specializing `ControlledArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
 | [`ModelQueryScript`](artifacts/core/memo_controlled_artifacts.md#modelqueryscript) | `part def` | Model query script definition specializing `ModelOwnedArtifact`. | [`artifacts/core/memo_controlled_artifacts.sysml`](artifacts/core/memo_controlled_artifacts.md) |
@@ -289,8 +289,8 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`RegulatoryStandard`](artifacts/standards/memo_artifacts_standards_traceability.md#regulatorystandard) | `item def` | Standards and clauses | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
-| [`StandardClause`](artifacts/standards/memo_artifacts_standards_traceability.md#standardclause) | `item def` | Standard clause definition specializing `MemoArtifactItem`. | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
+| [`RegulatoryStandard`](artifacts/standards/memo_artifacts_standards_traceability.md#regulatorystandard) | `part def` | Standards and clauses | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
+| [`StandardClause`](artifacts/standards/memo_artifacts_standards_traceability.md#standardclause) | `part def` | Standard clause definition specializing `MemoArtifact`. | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
 
 
 ## `memo::assurance::cybersecurity`

@@ -4,9 +4,11 @@ package memo_artifacts_core {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
 
-    abstract item def MemoArtifactItem :> MemoItem;
+    // An artifact is a part: a document, a standard, a clause of one. A
+    // relationship end typed MemoArtifact (TracesToDocument) takes all of them.
+    abstract part def MemoArtifact :> MemoPart;
 
-    item def ControlledArtifact :> MemoArtifactItem {
+    part def ControlledArtifact :> MemoArtifact {
         attribute version : String;
         attribute artifactKind : ArtifactKind;
         attribute owner : String;
