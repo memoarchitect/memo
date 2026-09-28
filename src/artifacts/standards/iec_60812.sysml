@@ -16,7 +16,7 @@ package memo_artifacts_standards_iec_60812 {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    item iec60812 : RegulatoryStandard {
+    part iec60812 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-IEC-60812"; }
         attribute :>> designation = "IEC 60812:2018";
         attribute :>> edition = "2018";
@@ -25,17 +25,17 @@ package memo_artifacts_standards_iec_60812 {
         // reference standard, cited by documents rather than required by a
         // market. Empty is the authored value, not an omission — see
         // appliesToRegime in memo_artifacts_standards_traceability.
-        item iec60812Clause5 : StandardClause {
+        part iec60812Clause5 : StandardClause {
             @MemoIdentity { :>> providedId = "STD-IEC-60812-5"; }
             attribute :>> clauseNumber = "5";
             attribute :>> normativeStrength = "shall";
         }
-        item iec60812Clause6 : StandardClause {
+        part iec60812Clause6 : StandardClause {
             @MemoIdentity { :>> providedId = "STD-IEC-60812-6"; }
             attribute :>> clauseNumber = "6";
             attribute :>> normativeStrength = "shall";
         }
-        item iec60812Clause7 : StandardClause {
+        part iec60812Clause7 : StandardClause {
             @MemoIdentity { :>> providedId = "STD-IEC-60812-7"; }
             attribute :>> clauseNumber = "7";
             attribute :>> normativeStrength = "shall";
