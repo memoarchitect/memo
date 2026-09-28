@@ -31,8 +31,8 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`MemoArtifactItem`](#memoartifactitem) | `item def` | Memo artifact item definition specializing `MemoItem`. | `MemoItem` |
-| [`ControlledArtifact`](#controlledartifact) | `item def` | Controlled artifact definition specializing `MemoArtifactItem`. | `MemoArtifactItem` |
+| [`MemoArtifact`](#memoartifact) | `part def` | An artifact is a part: a document, a standard, a clause of one. A relationship end typed MemoArtifact (TracesToDocument) takes all of them. | `MemoPart` |
+| [`ControlledArtifact`](#controlledartifact) | `part def` | Controlled artifact definition specializing `MemoArtifact`. | `MemoArtifact` |
 | [`ModelOwnedArtifact`](#modelownedartifact) | `part def` | Model owned artifact definition specializing `ControlledArtifact`. | `ControlledArtifact` |
 | [`ADRArtifact`](#adrartifact) | `part def` | Adrartifact definition specializing `ModelOwnedArtifact`. | `ModelOwnedArtifact` |
 | [`MarkdownDocumentSource`](#markdowndocumentsource) | `part def` | Markdown document source definition specializing `ModelOwnedArtifact`. | `ModelOwnedArtifact` |
@@ -41,33 +41,33 @@
 | [`ModelDataset`](#modeldataset) | `part def` | Model dataset definition specializing `ModelOwnedArtifact`. | `ModelOwnedArtifact` |
 | [`GeneratedReport`](#generatedreport) | `part def` | Generated report definition specializing `ModelOwnedArtifact`. | `ModelOwnedArtifact` |
 
-## MemoArtifactItem
+## MemoArtifact
 
 ```sysml
-abstract item def MemoArtifactItem :> MemoItem
+abstract part def MemoArtifact :> MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Memo artifact item definition specializing `MemoItem`. |
-| Kind | `item def` |
+| Description | An artifact is a part: a document, a standard, a clause of one. A relationship end typed MemoArtifact (TracesToDocument) takes all of them. |
+| Kind | `part def` |
 | Abstract | Yes |
-| Specializes | `MemoItem` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_artifacts_core` |
 
 
 ## ControlledArtifact
 
 ```sysml
-item def ControlledArtifact :> MemoArtifactItem
+part def ControlledArtifact :> MemoArtifact
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled artifact definition specializing `MemoArtifactItem`. |
-| Kind | `item def` |
+| Description | Controlled artifact definition specializing `MemoArtifact`. |
+| Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoArtifactItem` |
+| Specializes | `MemoArtifact` |
 | Owning package | `memo_artifacts_core` |
 
 
@@ -187,9 +187,11 @@ part def GeneratedReport :> ModelOwnedArtifact
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
 
-        abstract item def MemoArtifactItem :> MemoItem;
+        // An artifact is a part: a document, a standard, a clause of one. A
+        // relationship end typed MemoArtifact (TracesToDocument) takes all of them.
+        abstract part def MemoArtifact :> MemoPart;
 
-        item def ControlledArtifact :> MemoArtifactItem {
+        part def ControlledArtifact :> MemoArtifact {
             attribute version : String;
             attribute artifactKind : ArtifactKind;
             attribute owner : String;
