@@ -17,71 +17,71 @@ package memo_artifacts_standards_cfr_21_820 {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    item cfr21Part820 : RegulatoryStandard {
+    part cfr21Part820 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-21-CFR-820"; }
         attribute :>> designation = "21 CFR Part 820";
         attribute :>> issuer = "FDA";
         attribute :>> appliesToRegime = (RegulatoryRegimeKind::FDA_510k, RegulatoryRegimeKind::FDA_PMA);
-        item cfr820_30 : StandardClause {
+        part cfr820_30 : StandardClause {
             @MemoIdentity { :>> providedId = "STD-21-CFR-820-30"; }
             attribute :>> clauseNumber = "820.30";
             attribute :>> title = "design controls";
             attribute :>> normativeStrength = "shall";
-            item cfr820_30a : StandardClause {
+            part cfr820_30a : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-A"; }
                 attribute :>> clauseNumber = "820.30(a)";
                 attribute :>> title = "general design control applicability";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30b : StandardClause {
+            part cfr820_30b : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-B"; }
                 attribute :>> clauseNumber = "820.30(b)";
                 attribute :>> title = "design and development planning";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30c : StandardClause {
+            part cfr820_30c : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-C"; }
                 attribute :>> clauseNumber = "820.30(c)";
                 attribute :>> title = "design input";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30d : StandardClause {
+            part cfr820_30d : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-D"; }
                 attribute :>> clauseNumber = "820.30(d)";
                 attribute :>> title = "design output";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30e : StandardClause {
+            part cfr820_30e : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-E"; }
                 attribute :>> clauseNumber = "820.30(e)";
                 attribute :>> title = "design review";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30f : StandardClause {
+            part cfr820_30f : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-F"; }
                 attribute :>> clauseNumber = "820.30(f)";
                 attribute :>> title = "design verification";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30g : StandardClause {
+            part cfr820_30g : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-G"; }
                 attribute :>> clauseNumber = "820.30(g)";
                 attribute :>> title = "design validation";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30h : StandardClause {
+            part cfr820_30h : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-H"; }
                 attribute :>> clauseNumber = "820.30(h)";
                 attribute :>> title = "design transfer";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30i : StandardClause {
+            part cfr820_30i : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-I"; }
                 attribute :>> clauseNumber = "820.30(i)";
                 attribute :>> title = "design changes";
                 attribute :>> normativeStrength = "shall";
             }
-            item cfr820_30j : StandardClause {
+            part cfr820_30j : StandardClause {
                 @MemoIdentity { :>> providedId = "STD-21-CFR-820-30-J"; }
                 attribute :>> clauseNumber = "820.30(j)";
                 attribute :>> title = "design history file";
