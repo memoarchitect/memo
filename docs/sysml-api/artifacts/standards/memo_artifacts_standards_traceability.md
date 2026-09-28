@@ -34,38 +34,38 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`RegulatoryStandard`](#regulatorystandard) | `item def` | Standards and clauses | `MemoArtifactItem` |
-| [`StandardClause`](#standardclause) | `item def` | Standard clause definition specializing `MemoArtifactItem`. | `MemoArtifactItem` |
+| [`RegulatoryStandard`](#regulatorystandard) | `part def` | Standards and clauses | `MemoArtifact` |
+| [`StandardClause`](#standardclause) | `part def` | Standard clause definition specializing `MemoArtifact`. | `MemoArtifact` |
 | [`ConformsTo`](#conformsto) | `connection def` | Relationships | `MemoRelationship` |
 | [`TracesToDocument`](#tracestodocument) | `connection def` | Typed relationship for traces to document. | `MemoRelationship` |
 
 ## RegulatoryStandard
 
 ```sysml
-item def RegulatoryStandard :> MemoArtifactItem
+part def RegulatoryStandard :> MemoArtifact
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Standards and clauses |
-| Kind | `item def` |
+| Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoArtifactItem` |
+| Specializes | `MemoArtifact` |
 | Owning package | `memo_artifacts_standards_traceability` |
 
 
 ## StandardClause
 
 ```sysml
-item def StandardClause :> MemoArtifactItem
+part def StandardClause :> MemoArtifact
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Standard clause definition specializing `MemoArtifactItem`. |
-| Kind | `item def` |
+| Description | Standard clause definition specializing `MemoArtifact`. |
+| Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoArtifactItem` |
+| Specializes | `MemoArtifact` |
 | Owning package | `memo_artifacts_standards_traceability` |
 
 
@@ -154,7 +154,7 @@ connection def TracesToDocument :> MemoRelationship
         // Standards and clauses
         // =========================================================================
 
-        item def RegulatoryStandard :> MemoArtifactItem {
+        part def RegulatoryStandard :> MemoArtifact {
             doc /* A regulatory or consensus standard a project claims conformance
                  * to, identified by its full designation including edition and
                  * amendments (e.g. "IEC 62366-1:2015+AMD1:2020"). Dropping the
@@ -179,7 +179,7 @@ connection def TracesToDocument :> MemoRelationship
             attribute appliesToRegime : RegulatoryRegimeKind[0..*];
         }
 
-        item def StandardClause :> MemoArtifactItem {
+        part def StandardClause :> MemoArtifact {
             doc /* One normative clause of a RegulatoryStandard, at the depth at
                  * which the standard makes a distinct requirement a MEMO document
                  * actually claims. `title` is a MEMO-authored scope phrase — a
@@ -229,7 +229,7 @@ connection def TracesToDocument :> MemoRelationship
                  * granularity rides on the link as a reference string rather than
                  * as a duplicate element type. */
             attribute sectionReference : String[0..1];
-            end tracedElement : MemoPart :>> source;
+            end tracedElement : MemoArtifact :>> source;
             end artifact : ControlledArtifact :>> target;
         }
         abstract connection tracesToDocumentLinks : TracesToDocument[*];

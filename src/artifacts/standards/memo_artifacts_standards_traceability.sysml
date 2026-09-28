@@ -48,7 +48,7 @@ package memo_artifacts_standards_traceability {
     // Standards and clauses
     // =========================================================================
 
-    item def RegulatoryStandard :> MemoArtifactItem {
+    part def RegulatoryStandard :> MemoArtifact {
         doc /* A regulatory or consensus standard a project claims conformance
              * to, identified by its full designation including edition and
              * amendments (e.g. "IEC 62366-1:2015+AMD1:2020"). Dropping the
@@ -73,7 +73,7 @@ package memo_artifacts_standards_traceability {
         attribute appliesToRegime : RegulatoryRegimeKind[0..*];
     }
 
-    item def StandardClause :> MemoArtifactItem {
+    part def StandardClause :> MemoArtifact {
         doc /* One normative clause of a RegulatoryStandard, at the depth at
              * which the standard makes a distinct requirement a MEMO document
              * actually claims. `title` is a MEMO-authored scope phrase — a
@@ -123,7 +123,7 @@ package memo_artifacts_standards_traceability {
              * granularity rides on the link as a reference string rather than
              * as a duplicate element type. */
         attribute sectionReference : String[0..1];
-        end tracedElement : MemoPart :>> source;
+        end tracedElement : MemoArtifact :>> source;
         end artifact : ControlledArtifact :>> target;
     }
     abstract connection tracesToDocumentLinks : TracesToDocument[*];
