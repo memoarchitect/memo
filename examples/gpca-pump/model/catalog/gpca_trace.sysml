@@ -62,7 +62,7 @@ package memo_examples_gpca_pump_gpca_trace {
     connection connect source ::> entityNeedle to target ::> actorPatient;
     connection connect source ::> entityPowerInfrastructure to target ::> entityGpcaPump;
     // Intended use and use context anchoring (no floating context nodes)
-    connection : Governs { attribute :>> governKind = GovernKind::'use'; connect governor ::> gpcaIntendedUse to governedElement ::> entityGpcaPump; }
+    connection : Governs connect governor ::> gpcaIntendedUse to governedElement ::> entityGpcaPump { attribute :>> governKind = GovernKind::'use'; }
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityGpcaPump;
     connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
 
@@ -451,10 +451,10 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> hsExcessInfusion to targetRiskElement ::> harmRespiratoryDepression;
     connection : EstimatedFor connect risk ::> riskBefore to riskElement ::> harmRespiratoryDepression;
     connection : AssessedAgainst connect risk ::> riskBefore to riskMatrix ::> riskMatrix;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> lockoutControl to mitigatedElement ::> overdoseHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> drugLibraryControl to mitigatedElement ::> overdoseHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> watchdogControl to mitigatedElement ::> overdoseHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> flowCrossCheckControl to mitigatedElement ::> overdoseHazard; }
+    connection : Mitigates connect control ::> lockoutControl to mitigatedElement ::> overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> drugLibraryControl to mitigatedElement ::> overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> watchdogControl to mitigatedElement ::> overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> flowCrossCheckControl to mitigatedElement ::> overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ReducedBy connect residualRisk ::> riskAfter to control ::> lockoutControl;
     connection : AssessedAgainst connect risk ::> riskAfter to riskMatrix ::> riskMatrix;
     connection : EvaluatedIn connect residualRisk ::> riskAfter to evaluation ::> residualEval;
@@ -469,9 +469,9 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> hsInterruptedTherapy to targetRiskElement ::> harmUntreatedPain;
     connection : EstimatedFor connect risk ::> riskBeforeUnderdose to riskElement ::> harmUntreatedPain;
     connection : AssessedAgainst connect risk ::> riskBeforeUnderdose to riskMatrix ::> riskMatrix;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> occlusionAlarmControl to mitigatedElement ::> underdoseHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> reservoirMonitorControl to mitigatedElement ::> underdoseHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> flowCrossCheckControl to mitigatedElement ::> underdoseHazard; }
+    connection : Mitigates connect control ::> occlusionAlarmControl to mitigatedElement ::> underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> reservoirMonitorControl to mitigatedElement ::> underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> flowCrossCheckControl to mitigatedElement ::> underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ReducedBy connect residualRisk ::> riskAfterUnderdose to control ::> occlusionAlarmControl;
     connection : AssessedAgainst connect risk ::> riskAfterUnderdose to riskMatrix ::> riskMatrix;
     connection : EvaluatedIn connect residualRisk ::> riskAfterUnderdose to evaluation ::> residualEval;
@@ -486,7 +486,7 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> hsAirTowardPatient to targetRiskElement ::> harmAirEmbolism;
     connection : EstimatedFor connect risk ::> riskBeforeAir to riskElement ::> harmAirEmbolism;
     connection : AssessedAgainst connect risk ::> riskBeforeAir to riskMatrix ::> riskMatrix;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> airDetectionControl to mitigatedElement ::> airEmbolismHazard; }
+    connection : Mitigates connect control ::> airDetectionControl to mitigatedElement ::> airEmbolismHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ReducedBy connect residualRisk ::> riskAfterAir to control ::> airDetectionControl;
     connection : AssessedAgainst connect risk ::> riskAfterAir to riskMatrix ::> riskMatrix;
     connection : EvaluatedIn connect residualRisk ::> riskAfterAir to evaluation ::> residualEval;
@@ -501,7 +501,7 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> hsWrongTherapy to targetRiskElement ::> harmRespiratoryDepression;
     connection : EstimatedFor connect risk ::> riskBeforeWrongDose to riskElement ::> hsWrongTherapy;
     connection : AssessedAgainst connect risk ::> riskBeforeWrongDose to riskMatrix ::> riskMatrix;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> drugLibraryControl to mitigatedElement ::> wrongDoseHazard; }
+    connection : Mitigates connect control ::> drugLibraryControl to mitigatedElement ::> wrongDoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ReducedBy connect residualRisk ::> riskAfterWrongDose to control ::> drugLibraryControl;
     connection : AssessedAgainst connect risk ::> riskAfterWrongDose to riskMatrix ::> riskMatrix;
     connection : EvaluatedIn connect residualRisk ::> riskAfterWrongDose to evaluation ::> residualEval;
@@ -513,8 +513,8 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> hsFreeFlow to targetRiskElement ::> harmRespiratoryDepression;
     connection : EstimatedFor connect risk ::> riskBeforeFreeFlow to riskElement ::> hsFreeFlow;
     connection : AssessedAgainst connect risk ::> riskBeforeFreeFlow to riskMatrix ::> riskMatrix;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> freeFlowValveControl to mitigatedElement ::> freeFlowHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> doorInterlockControl to mitigatedElement ::> freeFlowHazard; }
+    connection : Mitigates connect control ::> freeFlowValveControl to mitigatedElement ::> freeFlowHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> doorInterlockControl to mitigatedElement ::> freeFlowHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ReducedBy connect residualRisk ::> riskAfterFreeFlow to control ::> freeFlowValveControl;
     connection : AssessedAgainst connect risk ::> riskAfterFreeFlow to riskMatrix ::> riskMatrix;
     connection : EvaluatedIn connect residualRisk ::> riskAfterFreeFlow to evaluation ::> residualEval;
@@ -525,8 +525,8 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> hsReverseFlow to targetRiskElement ::> harmUntreatedPain;
     connection : EstimatedFor connect risk ::> riskBeforeReverse to riskElement ::> harmUntreatedPain;
     connection : AssessedAgainst connect risk ::> riskBeforeReverse to riskMatrix ::> riskMatrix;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> reverseDeliveryPauseControl to mitigatedElement ::> reverseDeliveryHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> antiRefluxDesignControl to mitigatedElement ::> reverseDeliveryHazard; }
+    connection : Mitigates connect control ::> reverseDeliveryPauseControl to mitigatedElement ::> reverseDeliveryHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> antiRefluxDesignControl to mitigatedElement ::> reverseDeliveryHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ReducedBy connect residualRisk ::> riskAfterReverse to control ::> reverseDeliveryPauseControl;
     connection : AssessedAgainst connect risk ::> riskAfterReverse to riskMatrix ::> riskMatrix;
     connection : EvaluatedIn connect residualRisk ::> riskAfterReverse to evaluation ::> residualEval;
@@ -538,17 +538,17 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : TracesRisk connect sourceRiskElement ::> hsVtbiExceeded to targetRiskElement ::> harmRespiratoryDepression;
     connection : EstimatedFor connect risk ::> riskBeforeVtbi to riskElement ::> harmRespiratoryDepression;
     connection : AssessedAgainst connect risk ::> riskBeforeVtbi to riskMatrix ::> riskMatrix;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> vtbiLimitPauseControl to mitigatedElement ::> vtbiOverInfusionHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> infusionCompleteControl to mitigatedElement ::> vtbiOverInfusionHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard; connect control ::> drugLibraryControl to mitigatedElement ::> vtbiOverInfusionHazard; }
+    connection : Mitigates connect control ::> vtbiLimitPauseControl to mitigatedElement ::> vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> infusionCompleteControl to mitigatedElement ::> vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect control ::> drugLibraryControl to mitigatedElement ::> vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ReducedBy connect residualRisk ::> riskAfterVtbi to control ::> vtbiLimitPauseControl;
     connection : AssessedAgainst connect risk ::> riskAfterVtbi to riskMatrix ::> riskMatrix;
     connection : EvaluatedIn connect residualRisk ::> riskAfterVtbi to evaluation ::> residualEval;
     // Use errors feeding the risk chains (IEC 62366-1 §5.3)
-    connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueMisprogrammedRate to effect ::> seqMisprogram; }
-    connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueWrongDrugLoaded to effect ::> seqMisprogram; }
-    connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueBolusByProxy to effect ::> causeFrequentBolus; }
-    connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; connect cause ::> ueAlarmDisregard to effect ::> seqOcclusion; }
+    connection : Causes connect cause ::> ueMisprogrammedRate to effect ::> seqMisprogram { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
+    connection : Causes connect cause ::> ueWrongDrugLoaded to effect ::> seqMisprogram { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
+    connection : Causes connect cause ::> ueBolusByProxy to effect ::> causeFrequentBolus { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
+    connection : Causes connect cause ::> ueAlarmDisregard to effect ::> seqOcclusion { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
 
     // ── FMEA and fault tree integration ─────────────────────────
     // Was `AnalyzedBy`: a zero-attribute edge from an element to the
@@ -559,23 +559,23 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : HasFailureMode connect element ::> occlusionSensor to failureMode ::> fmOcclusionDrift;
     connection : HasFailureMode connect element ::> bolusButton to failureMode ::> fmStuckBolusButton;
     connection : HasFailureMode connect element ::> batteryPack to failureMode ::> fmBatteryEarlyDepletion;
-    connection : Causes { attribute :>> causeKind = CauseKind::failureCausesEffect; connect cause ::> fmMotorRunaway to effect ::> feOverdose; }
-    connection : Causes { attribute :>> causeKind = CauseKind::failureCausesEffect; connect cause ::> fmStuckBolusButton to effect ::> feOverdose; }
-    connection : Causes { attribute :>> causeKind = CauseKind::failureCausesEffect; connect cause ::> fmAirSensorSilent to effect ::> feAirDelivered; }
-    connection : Causes { attribute :>> causeKind = CauseKind::failureCausesEffect; connect cause ::> fmOcclusionDrift to effect ::> feTherapyInterrupted; }
-    connection : Causes { attribute :>> causeKind = CauseKind::failureCausedBy; connect cause ::> fcMotorDriverFault to effect ::> fmMotorRunaway; }
-    connection : Causes { attribute :>> causeKind = CauseKind::failureCausedBy; connect cause ::> fcTransducerAging to effect ::> fmAirSensorSilent; }
-    connection : Causes { attribute :>> causeKind = CauseKind::failureCausedBy; connect cause ::> fcPendantAbuse to effect ::> fmStuckBolusButton; }
+    connection : Causes connect cause ::> fmMotorRunaway to effect ::> feOverdose { attribute :>> causeKind = CauseKind::failureCausesEffect; }
+    connection : Causes connect cause ::> fmStuckBolusButton to effect ::> feOverdose { attribute :>> causeKind = CauseKind::failureCausesEffect; }
+    connection : Causes connect cause ::> fmAirSensorSilent to effect ::> feAirDelivered { attribute :>> causeKind = CauseKind::failureCausesEffect; }
+    connection : Causes connect cause ::> fmOcclusionDrift to effect ::> feTherapyInterrupted { attribute :>> causeKind = CauseKind::failureCausesEffect; }
+    connection : Causes connect cause ::> fcMotorDriverFault to effect ::> fmMotorRunaway { attribute :>> causeKind = CauseKind::failureCausedBy; }
+    connection : Causes connect cause ::> fcTransducerAging to effect ::> fmAirSensorSilent { attribute :>> causeKind = CauseKind::failureCausedBy; }
+    connection : Causes connect cause ::> fcPendantAbuse to effect ::> fmStuckBolusButton { attribute :>> causeKind = CauseKind::failureCausedBy; }
     connection : DetectedBy connect failureMode ::> fmMotorRunaway to detectionMethod ::> dmFlowCrossCheck;
     connection : DetectedBy connect failureMode ::> fmAirSensorSilent to detectionMethod ::> dmPostSensorCheck;
     connection : DetectedBy connect failureMode ::> fmStuckBolusButton to detectionMethod ::> dmStuckInputMonitor;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::fmeaAction; connect control ::> fmeaActionAirSensor to mitigatedElement ::> fmAirSensorSilent; }
-    connection : Causes { attribute :>> causeKind = CauseKind::contributesToHazard; connect cause ::> fmMotorRunaway to effect ::> overdoseHazard; }
-    connection : Causes { attribute :>> causeKind = CauseKind::contributesToHazard; connect cause ::> fmStuckBolusButton to effect ::> overdoseHazard; }
-    connection : Causes { attribute :>> causeKind = CauseKind::contributesToHazard; connect cause ::> fmAirSensorSilent to effect ::> airEmbolismHazard; }
-    connection : Causes { attribute :>> causeKind = CauseKind::contributesToHazard; connect cause ::> fmOcclusionDrift to effect ::> underdoseHazard; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::failureMode; connect control ::> flowCrossCheckControl to mitigatedElement ::> fmMotorRunaway; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::failureMode; connect control ::> lockoutControl to mitigatedElement ::> fmStuckBolusButton; }
+    connection : Mitigates connect control ::> fmeaActionAirSensor to mitigatedElement ::> fmAirSensorSilent { attribute :>> mitigationKind = MitigationKind::fmeaAction; }
+    connection : Causes connect cause ::> fmMotorRunaway to effect ::> overdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
+    connection : Causes connect cause ::> fmStuckBolusButton to effect ::> overdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
+    connection : Causes connect cause ::> fmAirSensorSilent to effect ::> airEmbolismHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
+    connection : Causes connect cause ::> fmOcclusionDrift to effect ::> underdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
+    connection : Mitigates connect control ::> flowCrossCheckControl to mitigatedElement ::> fmMotorRunaway { attribute :>> mitigationKind = MitigationKind::failureMode; }
+    connection : Mitigates connect control ::> lockoutControl to mitigatedElement ::> fmStuckBolusButton { attribute :>> mitigationKind = MitigationKind::failureMode; }
     connection : InputToGate connect input ::> fteMotorRunaway to gate ::> ftgMotorAnd;
     connection : InputToGate connect input ::> fteCrossCheckFails to gate ::> ftgMotorAnd;
     connection : InputToGate connect input ::> fteLockoutFault to gate ::> ftgBolusAnd;
@@ -583,15 +583,15 @@ package memo_examples_gpca_pump_gpca_trace {
     connection : InputToGate connect input ::> ftgMotorAnd to gate ::> ftgOverdoseOr;
     connection : InputToGate connect input ::> ftgBolusAnd to gate ::> ftgOverdoseOr;
     connection : ProducesEvent connect gate ::> ftgOverdoseOr to eventElement ::> fteOverdoseTop;
-    connection : Causes { attribute :>> causeKind = CauseKind::leadsToHazard; connect cause ::> fteOverdoseTop to effect ::> overdoseHazard; }
-    connection : Causes { attribute :>> causeKind = CauseKind::originatesFrom; connect cause ::> pumpMotorAssembly to effect ::> fteMotorRunaway; }
-    connection : Causes { attribute :>> causeKind = CauseKind::originatesFrom; connect cause ::> bolusButton to effect ::> fteStuckButtonUndetected; }
+    connection : Causes connect cause ::> fteOverdoseTop to effect ::> overdoseHazard { attribute :>> causeKind = CauseKind::leadsToHazard; }
+    connection : Causes connect cause ::> pumpMotorAssembly to effect ::> fteMotorRunaway { attribute :>> causeKind = CauseKind::originatesFrom; }
+    connection : Causes connect cause ::> bolusButton to effect ::> fteStuckButtonUndetected { attribute :>> causeKind = CauseKind::originatesFrom; }
     connection : ContainsEvent connect cutSet ::> mcsMotorPath to eventElement ::> fteMotorRunaway;
     connection : ContainsEvent connect cutSet ::> mcsMotorPath to eventElement ::> fteCrossCheckFails;
     connection : ContainsEvent connect cutSet ::> mcsBolusPath to eventElement ::> fteLockoutFault;
     connection : ContainsEvent connect cutSet ::> mcsBolusPath to eventElement ::> fteStuckButtonUndetected;
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::cutSet; connect control ::> flowCrossCheckControl to mitigatedElement ::> mcsMotorPath; }
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::cutSet; connect control ::> lockoutControl to mitigatedElement ::> mcsBolusPath; }
+    connection : Mitigates connect control ::> flowCrossCheckControl to mitigatedElement ::> mcsMotorPath { attribute :>> mitigationKind = MitigationKind::cutSet; }
+    connection : Mitigates connect control ::> lockoutControl to mitigatedElement ::> mcsBolusPath { attribute :>> mitigationKind = MitigationKind::cutSet; }
 
     // ── Verification coverage (IEC 62304 §5.7) ──────────────────
 
