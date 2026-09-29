@@ -67,7 +67,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> defaultTechnique = "STRIDE repudiation";
     }
 
-    part weakServiceAuthentication : Vulnerability {
+    item weakServiceAuthentication : Vulnerability {
         @MemoIdentity { :>> providedId = "VULN-001"; }
         attribute :>> weakness = "service mode relies on shared default credential";
         attribute :>> exploitability = "moderate";
@@ -83,7 +83,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> defaultCategory = ThreatCategoryKind::tampering;
     }
 
-    part unsafeDoseCyberHazard : CyberHazard {
+    item unsafeDoseCyberHazard : CyberHazard {
         @MemoIdentity { :>> providedId = "CHZ-001"; :>> label = "UnsafeTherapyConfigurationHazard"; }
         attribute :>> hazardType = HazardTypeKind::drugDeliveryError;
         attribute :>> foreseeable = true;

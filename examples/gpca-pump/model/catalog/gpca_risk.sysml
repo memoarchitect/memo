@@ -102,7 +102,7 @@ package memo_examples_gpca_pump_gpca_risk {
     // Primary hazard 1 of the Open PCA ISO 14971 analysis; GIP
     // operational-hazard rows HID 1.1-1.3. Causal tree per GIIP
     // pattern: categorized causes converge on the hazard.
-    part overdoseHazard : Hazard {
+    item overdoseHazard : Hazard {
         @MemoIdentity { :>> providedId = "HZ-001"; :>> label = "OpioidOverInfusion"; }
         attribute :>> hazardType = HazardTypeKind::drugDeliveryError;
         attribute :>> severity = SeverityKind::catastrophic;
@@ -110,43 +110,43 @@ package memo_examples_gpca_pump_gpca_risk {
         doc /* Drug delivered at a rate above the prescription (overinfusion). */
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 Operational Hazards HID 1.1-1.3 (overinfusion); CITE-005: Open PCA ISO 14971 risk analysis, §4 (primary hazard: opioid over-infusion)"; }
     }
-    part causeFlowRateTooHigh : HazardCause {
+    item causeFlowRateTooHigh : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-001"; :>> label = "ProgrammedFlowRateTooHigh"; }
         attribute :>> causeSource = CauseSourceKind::operational;
         attribute :>> contributingFactors = "Programmed value not checked against drug-database hard limits";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.1 (programmed flow rate too high; mitigated by drug library)"; }
     }
-    part causeFrequentBolus : HazardCause {
+    item causeFrequentBolus : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-002"; :>> label = "BolusRequestsTooFrequent"; }
         attribute :>> causeSource = CauseSourceKind::usageCause;
         attribute :>> contributingFactors = "Patient bolus button pressed too often, or pressed by someone other than the patient (bolus by proxy)";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.2 (dose limit exceeded due to too many bolus requests); CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (bolus button pressed too frequent) and §5 (TooSoonPress, ThirdPartyPress error types)"; }
     }
-    part causeBolusVolumeTooHigh : HazardCause {
+    item causeBolusVolumeTooHigh : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-003"; :>> label = "ProgrammedBolusVolumeTooHigh"; }
         attribute :>> causeSource = CauseSourceKind::operational;
         attribute :>> contributingFactors = "Bolus volume or drug concentration programmed above safe limits";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.3 ((programmed) bolus volume/concentration too high; mitigated by drug library)"; }
     }
-    part causePumpCalibration : HazardCause {
+    item causePumpCalibration : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-004"; :>> label = "IncorrectPumpCalibrationOrMotorRunaway"; }
         attribute :>> causeSource = CauseSourceKind::hardware;
         attribute :>> contributingFactors = "Uncalibrated pumping mechanism or motor-driver fault drives flow above the commanded rate";
         @MemoIdentity { :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (incorrect pump calibration) and §5 (calibration_over error source on drug_outlet); CITE-004: §2.4.1 HID 1.21 (increased pump speed)"; }
     }
-    part seqFrequentBolus : SequenceOfEvents {
+    item seqFrequentBolus : SequenceOfEvents {
         @MemoIdentity { :>> providedId = "SEQ-001"; :>> label = "RepeatedBolusOverDeliverySequence"; }
         attribute :>> initiatingEvent = "Repeated patient bolus presses over time propagate through button-press detection and control logic to increased motor flow commands";
         attribute :>> contributingFactors = "Lockout or max-dose filtering fails or is misconfigured";
         @MemoIdentity { :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 (bottom-up causality walk of Fig. 3, right side); CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 PATIENT BOLUS mode (REQ 25/26 lockout and max-dose filtering)"; }
     }
-    part hsExcessInfusion : HazardousSituation {
+    item hsExcessInfusion : HazardousSituation {
         @MemoIdentity { :>> providedId = "HS-001"; :>> label = "PatientExposedToOpioidOverDelivery"; }
         attribute :>> exposedPersons = "patient";
         attribute :>> operatingCondition = "ACTIVE therapy; opioid infused while the patient's respiration is deteriorating";
         @MemoIdentity { :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (infusing opioid when patient's respiration is deteriorating) and §6 (OverInfusion hazardous-situation instance)"; }
     }
-    part harmRespiratoryDepression : Harm {
+    item harmRespiratoryDepression : Harm {
         @MemoIdentity { :>> providedId = "HM-001"; :>> label = "RespiratoryDepression"; }
         attribute :>> clinicalImpact = "respiratory depression progressing to cardiac arrest";
         attribute :>> reversibility = "potentially irreversible";
@@ -184,7 +184,7 @@ package memo_examples_gpca_pump_gpca_risk {
     }
 
     // ═══ HZ-002: Under-infusion / therapy interruption ══════════════
-    part underdoseHazard : Hazard {
+    item underdoseHazard : Hazard {
         @MemoIdentity { :>> providedId = "HZ-002"; :>> label = "UnderInfusion"; }
         attribute :>> hazardType = HazardTypeKind::drugDeliveryError;
         attribute :>> severity = SeverityKind::serious;
@@ -192,49 +192,49 @@ package memo_examples_gpca_pump_gpca_risk {
         doc /* Delivered dose falls below prescription (underinfusion). */
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 Operational Hazards HID 1.5-1.10 (underinfusion); CITE-005: Open PCA ISO 14971 risk analysis, §5 (under-infusion captured as functional-safety hazard)"; }
     }
-    part causeOcclusion : HazardCause {
+    item causeOcclusion : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-005"; :>> label = "LineOcclusion"; }
         attribute :>> causeSource = CauseSourceKind::operational;
         attribute :>> contributingFactors = "Supply-side or patient-side occlusion; kinked or clamped administration set";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.7 (occlusion, supply side and patient side; mitigated by flow sensor)"; }
     }
-    part causeReservoirEmpty : HazardCause {
+    item causeReservoirEmpty : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-006"; :>> label = "ReservoirEmptyOrLow"; }
         attribute :>> causeSource = CauseSourceKind::operational;
         attribute :>> contributingFactors = "Reservoir exhausted during therapy without timely replacement";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.8/1.9 (reservoir empty, reservoir low; mitigated by flow sensor and drug library)"; }
     }
-    part causeAirInLine : HazardCause {
+    item causeAirInLine : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-007"; :>> label = "AirInLine"; }
         attribute :>> causeSource = CauseSourceKind::operational;
         attribute :>> contributingFactors = "Air enters the administration set and displaces drug delivery";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.6 (underinfusion: air in line) and HID 1.27 (air bubble introduced in blood stream; mitigated by flow sensor)"; }
     }
-    part causePumpMechanismFails : HazardCause {
+    item causePumpMechanismFails : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-008"; :>> label = "PumpMotorFailsToStroke"; }
         attribute :>> causeSource = CauseSourceKind::mechanical;
         attribute :>> contributingFactors = "Motor failure or mechanism unable to stroke stops infusion";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.6 Mechanical Hazards HID 6.6 (pump stops infusion: pump motor fails, pump unable to stroke; mitigated by flow sensor)"; }
     }
-    part causeFlowRateTooLow : HazardCause {
+    item causeFlowRateTooLow : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-009"; :>> label = "ProgrammedFlowRateTooLow"; }
         attribute :>> causeSource = CauseSourceKind::operational;
         attribute :>> contributingFactors = "Programmed value below therapeutic range and not caught by drug-database limits";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.5 (programmed flow rate too low; mitigated by drug library)"; }
     }
-    part seqOcclusion : SequenceOfEvents {
+    item seqOcclusion : SequenceOfEvents {
         @MemoIdentity { :>> providedId = "SEQ-002"; :>> label = "UndetectedOcclusionSequence"; }
         attribute :>> initiatingEvent = "Downstream line kinked or clamped during active therapy";
         attribute :>> contributingFactors = "Occlusion not detected or alarm not annunciated; post-occlusion bolus released when the occlusion clears";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms (occlusion); CITE-008: GPCA Safety Requirements (2009), Occlusion alarm (stop and alarm within max delay; bounded post-occlusion bolus volume)"; }
     }
-    part hsInterruptedTherapy : HazardousSituation {
+    item hsInterruptedTherapy : HazardousSituation {
         @MemoIdentity { :>> providedId = "HS-002"; :>> label = "PatientReceivingLessThanPrescribedDose"; }
         attribute :>> exposedPersons = "patient";
         attribute :>> operatingCondition = "ACTIVE therapy with blocked, exhausted, or failed fluid path";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.5-1.10 (underinfusion)"; }
     }
-    part harmUntreatedPain : Harm {
+    item harmUntreatedPain : Harm {
         @MemoIdentity { :>> providedId = "HM-002"; :>> label = "UntreatedPainAndClinicalDeterioration"; }
         attribute :>> clinicalImpact = "uncontrolled pain, delayed recovery, post-occlusion bolus injury";
         attribute :>> reversibility = "reversible with intervention";
@@ -280,7 +280,7 @@ package memo_examples_gpca_pump_gpca_risk {
 
     // ═══ HZ-003: Air embolism ═══════════════════════════════════════
     // Primary hazard 2 of the Open PCA ISO 14971 analysis.
-    part airEmbolismHazard : Hazard {
+    item airEmbolismHazard : Hazard {
         @MemoIdentity { :>> providedId = "HZ-003"; :>> label = "AirEmbolism"; }
         attribute :>> hazardType = HazardTypeKind::drugDeliveryError;
         attribute :>> severity = SeverityKind::catastrophic;
@@ -288,37 +288,37 @@ package memo_examples_gpca_pump_gpca_risk {
         doc /* Air infused into the patient line above the clinically tolerable volume. */
         @MemoIdentity { :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (primary hazard: air embolism); CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.27 (air bubble introduced in blood stream); CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 21)"; }
     }
-    part causeImproperPriming : HazardCause {
+    item causeImproperPriming : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-010"; :>> label = "InappropriatePriming"; }
         attribute :>> causeSource = CauseSourceKind::usageCause;
         attribute :>> contributingFactors = "Infusion continued after set primed incompletely";
         @MemoIdentity { :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (continue infusion after inappropriate priming); CITE-004: §2.4.1 HID 1.24 (failure to prime: air in line)"; }
     }
-    part causeTubingLeak : HazardCause {
+    item causeTubingLeak : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-011"; :>> label = "TubingLeakageAdmitsAir"; }
         attribute :>> causeSource = CauseSourceKind::mechanical;
         attribute :>> contributingFactors = "Infusion continued under tubing leakage";
         @MemoIdentity { :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (continue infusion under tubing leakage)"; }
     }
-    part causeAirSensorSilent : HazardCause {
+    item causeAirSensorSilent : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-012"; :>> label = "AirSensorFailureSuppressesAlarm"; }
         attribute :>> causeSource = CauseSourceKind::hardware;
         attribute :>> contributingFactors = "Air sensor failed, disabled, or threshold miscalibrated so air passes undetected";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.4 Hardware Hazards HID 4.13 (failure to alarm: sensor failure)"; }
     }
-    part seqAirInLine : SequenceOfEvents {
+    item seqAirInLine : SequenceOfEvents {
         @MemoIdentity { :>> providedId = "SEQ-003"; :>> label = "AirEntersLineSequence"; }
         attribute :>> initiatingEvent = "Infusion continues after inappropriate priming, with an empty reservoir, or under tubing leakage";
         attribute :>> contributingFactors = "Air-in-line detection failed or thresholds miscalibrated";
         @MemoIdentity { :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (initiating causes for air embolism); CITE-004: §2.2 Alarms (air-in-line)"; }
     }
-    part hsAirTowardPatient : HazardousSituation {
+    item hsAirTowardPatient : HazardousSituation {
         @MemoIdentity { :>> providedId = "HS-003"; :>> label = "AirInfusedIntoPatientBloodStream"; }
         attribute :>> exposedPersons = "patient";
         attribute :>> operatingCondition = "ACTIVE therapy with air in the administration set";
         @MemoIdentity { :>> sourceReference = "CITE-005: Open PCA ISO 14971 risk analysis, §4 Table 1 (infusing air bubbles into the patient's blood stream)"; }
     }
-    part harmAirEmbolism : Harm {
+    item harmAirEmbolism : Harm {
         @MemoIdentity { :>> providedId = "HM-003"; :>> label = "TissueOrOrganDamage"; }
         attribute :>> clinicalImpact = "tissue or organ damage from vascular air embolism, potentially fatal";
         attribute :>> reversibility = "potentially irreversible";
@@ -356,7 +356,7 @@ package memo_examples_gpca_pump_gpca_risk {
     }
 
     // ═══ HZ-004: Incorrect therapy programmed (use error) ═══════════
-    part wrongDoseHazard : Hazard {
+    item wrongDoseHazard : Hazard {
         @MemoIdentity { :>> providedId = "HZ-004"; :>> label = "IncorrectDrugOrDoseProgrammed"; }
         attribute :>> hazardType = HazardTypeKind::useError;
         attribute :>> severity = SeverityKind::catastrophic;
@@ -364,43 +364,43 @@ package memo_examples_gpca_pump_gpca_risk {
         doc /* Prescription programmed or reservoir loaded so delivered therapy differs from the intended prescription. */
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8 Use Hazards and §2.4.1 HID 1.25 (prescription/dosage values out of default range); CITE-007: GPCA Hazard Analysis doc (2009), Use Hazards HID 8.6/8.10/8.14"; }
     }
-    part causeWrongPrescriptionEntered : HazardCause {
+    item causeWrongPrescriptionEntered : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-013"; :>> label = "IncorrectPrescriptionEntered"; }
         attribute :>> causeSource = CauseSourceKind::usageCause;
         attribute :>> contributingFactors = "Attentional failure during prescription entry";
         @MemoIdentity { :>> sourceReference = "CITE-004/CITE-007: GIP/GPCA hazard analysis (2009), Use Hazards HID 8.10 (attentional failure: incorrect prescription entered)"; }
     }
-    part causeWrongDoseUnits : HazardCause {
+    item causeWrongDoseUnits : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-014"; :>> label = "IncorrectDoseUnits"; }
         attribute :>> causeSource = CauseSourceKind::usageCause;
         attribute :>> contributingFactors = "Incorrect units used for dose parameters (e.g., ml/hr instead of mcg/hr)";
         @MemoIdentity { :>> sourceReference = "CITE-004/CITE-007: GIP/GPCA hazard analysis (2009), Use Hazards HID 8.14 (incorrect dose mode; mitigated by barcode scanner)"; }
     }
-    part causeWrongDrugLoaded : HazardCause {
+    item causeWrongDrugLoaded : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-015"; :>> label = "WrongPrescriptionOrDrugConcentration"; }
         attribute :>> causeSource = CauseSourceKind::usageCause;
         attribute :>> contributingFactors = "Incorrect prescription given to patient; incorrect drug concentration specified; look-alike packaging";
         @MemoIdentity { :>> sourceReference = "CITE-004/CITE-007: GIP/GPCA hazard analysis (2009), Use Hazards HID 8.6 (incorrect prescription; incorrect drug library) and §2.4.1 HID 1.4 (incorrect drug concentration specified; mitigated by barcode scanner)"; }
     }
-    part causeSettingsChangedInadvertently : HazardCause {
+    item causeSettingsChangedInadvertently : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-016"; :>> label = "SettingsChangedInadvertently"; }
         attribute :>> causeSource = CauseSourceKind::usageCause;
         attribute :>> contributingFactors = "User or patient changes infusion settings inadvertently during therapy";
         @MemoIdentity { :>> sourceReference = "CITE-004/CITE-007: GIP/GPCA hazard analysis (2009), Use Hazards HID 8.7/8.8 (user/patient change infusion settings inadvertently; mitigated by drug library)"; }
     }
-    part causePumpRevertsToDefaults : HazardCause {
+    item causePumpRevertsToDefaults : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-017"; :>> label = "PumpRevertsToDefaultDoseValues"; }
         attribute :>> causeSource = CauseSourceKind::software;
         attribute :>> contributingFactors = "Programmed dose set incorrectly; inappropriate reset to default values";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.5 Software Hazards HID 5.11 (pump reverts to default dose values; mitigated by drug library)"; }
     }
-    part seqMisprogram : SequenceOfEvents {
+    item seqMisprogram : SequenceOfEvents {
         @MemoIdentity { :>> providedId = "SEQ-004"; :>> label = "MisprogrammingSequence"; }
         attribute :>> initiatingEvent = "Prescription entered with wrong value, units, or drug and accepted for delivery";
         attribute :>> contributingFactors = "Safe-value check against the pharmacy database skipped or unavailable; confirmation bypassed";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.25 (prescription/dosage values fall out of default value range; mitigated by drug library and barcode scanner)"; }
     }
-    part hsWrongTherapy : HazardousSituation {
+    item hsWrongTherapy : HazardousSituation {
         @MemoIdentity { :>> providedId = "HS-004"; :>> label = "PatientReceivingUnintendedTherapy"; }
         attribute :>> exposedPersons = "patient";
         attribute :>> operatingCondition = "therapy started from an unverified prescription";
@@ -437,7 +437,7 @@ package memo_examples_gpca_pump_gpca_risk {
     }
 
     // ═══ HZ-005: Free flow ══════════════════════════════════════════
-    part freeFlowHazard : Hazard {
+    item freeFlowHazard : Hazard {
         @MemoIdentity { :>> providedId = "HZ-005"; :>> label = "GravityFreeFlow"; }
         attribute :>> hazardType = HazardTypeKind::mechanicalFailure;
         attribute :>> severity = SeverityKind::catastrophic;
@@ -445,25 +445,25 @@ package memo_examples_gpca_pump_gpca_risk {
         doc /* Unregulated gravity flow of drug when the set is disengaged from the pumping mechanism. */
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.13 (improper flow: free flow of drug; mitigated by flow sensor)"; }
     }
-    part causeSetDisengaged : HazardCause {
+    item causeSetDisengaged : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-018"; :>> label = "AdministrationSetDisengaged"; }
         attribute :>> causeSource = CauseSourceKind::mechanical;
         attribute :>> contributingFactors = "Set removed or loaded improperly with reservoir above patient level";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.13 (free flow of drug) and §2.2 Alerts (infusion set not loaded properly)"; }
     }
-    part causeDoorOpenedDuringInfusion : HazardCause {
+    item causeDoorOpenedDuringInfusion : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-019"; :>> label = "DoorOpenedDuringInfusion"; }
         attribute :>> causeSource = CauseSourceKind::environmental;
         attribute :>> contributingFactors = "Panel/door opened during infusion, or infusion started when door open";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.2 Environmental Hazards HID 2.9 (panel/door opened during infusion; alert and log)"; }
     }
-    part seqFreeFlow : SequenceOfEvents {
+    item seqFreeFlow : SequenceOfEvents {
         @MemoIdentity { :>> providedId = "SEQ-005"; :>> label = "SetDisengagedSequence"; }
         attribute :>> initiatingEvent = "Door opened / set removed with reservoir above patient level";
         attribute :>> contributingFactors = "Anti-free-flow protection absent, defeated, or failed";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.13 and §2.4.2 HID 2.9"; }
     }
-    part hsFreeFlow : HazardousSituation {
+    item hsFreeFlow : HazardousSituation {
         @MemoIdentity { :>> providedId = "HS-005"; :>> label = "PatientConnectedToUnregulatedFluidPath"; }
         attribute :>> exposedPersons = "patient";
         attribute :>> operatingCondition = "set change or door open with line still connected";
@@ -507,7 +507,7 @@ package memo_examples_gpca_pump_gpca_risk {
     }
 
     // ═══ HZ-006: Reverse delivery ═══════════════════════════════════
-    part reverseDeliveryHazard : Hazard {
+    item reverseDeliveryHazard : Hazard {
         @MemoIdentity { :>> providedId = "HZ-006"; :>> label = "ReverseDelivery"; }
         attribute :>> hazardType = HazardTypeKind::drugDeliveryError;
         attribute :>> severity = SeverityKind::serious;
@@ -515,19 +515,19 @@ package memo_examples_gpca_pump_gpca_risk {
         doc /* Drug or body fluid drawn backwards through the administration set (bleed back / reflux). */
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.14 (improper flow: bleed back, reflux within device); CITE-008: GPCA Safety Requirements (2009), Reverse delivery (continuous reverse delivery shall not be possible, from IEC 601-2-24); CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 22)"; }
     }
-    part causeBleedBack : HazardCause {
+    item causeBleedBack : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-020"; :>> label = "BleedBackRefluxWithinDevice"; }
         attribute :>> causeSource = CauseSourceKind::operational;
         attribute :>> contributingFactors = "Pressure gradient or mechanism fault reverses flow through the set";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.1 HID 1.14 (bleed back; reflux within device; mitigated by flow sensor, safety requirement 1.8)"; }
     }
-    part seqReverseDelivery : SequenceOfEvents {
+    item seqReverseDelivery : SequenceOfEvents {
         @MemoIdentity { :>> providedId = "SEQ-006"; :>> label = "SustainedReverseFlowSequence"; }
         attribute :>> initiatingEvent = "Reflux within the device draws drug or blood back through the administration set";
         attribute :>> contributingFactors = "Reverse flow undetected; continuous episode or cumulative episodes exceed the permitted duration limits";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 22: continuous and cumulative reverse-delivery duration limits, App. A.4 Rev_Delivery constants); CITE-004: §2.4.1 HID 1.14"; }
     }
-    part hsReverseFlow : HazardousSituation {
+    item hsReverseFlow : HazardousSituation {
         @MemoIdentity { :>> providedId = "HS-006"; :>> label = "PatientLineFlowReversed"; }
         attribute :>> exposedPersons = "patient";
         attribute :>> operatingCondition = "THERAPY with reverse flow past the continuous or cumulative duration limits";
@@ -571,7 +571,7 @@ package memo_examples_gpca_pump_gpca_risk {
     }
 
     // ═══ HZ-007: VTBI over-infusion ═════════════════════════════════
-    part vtbiOverInfusionHazard : Hazard {
+    item vtbiOverInfusionHazard : Hazard {
         @MemoIdentity { :>> providedId = "HZ-007"; :>> label = "VtbiOverInfusion"; }
         attribute :>> hazardType = HazardTypeKind::drugDeliveryError;
         attribute :>> severity = SeverityKind::catastrophic;
@@ -579,25 +579,25 @@ package memo_examples_gpca_pump_gpca_risk {
         doc /* Total volume infused exceeds the prescribed or drug-database maximum VTBI (volume to be infused). */
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 20: Over Infusion VTBI); CITE-008: GPCA Safety Requirements (2009), VTBI (range and increments) and Dose Error Reduction (hard/soft VTBI limits); CITE-004/CITE-007: Use Hazards HID 8.1 (overfill: incorrect fill volume specified)"; }
     }
-    part causeVtbiTooHigh : HazardCause {
+    item causeVtbiTooHigh : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-021"; :>> label = "IncorrectVtbiOrFillVolumeSpecified"; }
         attribute :>> causeSource = CauseSourceKind::usageCause;
         attribute :>> contributingFactors = "Overfill: incorrect fill volume or VTBI specified at programming time";
         @MemoIdentity { :>> sourceReference = "CITE-004/CITE-007: GIP/GPCA hazard analysis (2009), Use Hazards HID 8.1 (overfill: incorrect fill volume specified; mitigated by barcode scanner)"; }
     }
-    part causeStaleDrugLibrary : HazardCause {
+    item causeStaleDrugLibrary : HazardCause {
         @MemoIdentity { :>> providedId = "CAUSE-022"; :>> label = "IncorrectOrOutdatedDrugLibraryLimits"; }
         attribute :>> causeSource = CauseSourceKind::software;
         attribute :>> contributingFactors = "Incorrect drug library or old version leaves VTBI limits wrong or missing";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.5 Software Hazards HID 5.6 (incorrect dose administered: incorrect drug library, old version of drug library)"; }
     }
-    part seqVtbiExceeded : SequenceOfEvents {
+    item seqVtbiExceeded : SequenceOfEvents {
         @MemoIdentity { :>> providedId = "SEQ-007"; :>> label = "VtbiCeilingExceededSequence"; }
         attribute :>> initiatingEvent = "Volume infused accumulates past the drug-database maximum VTBI during THERAPY";
         attribute :>> contributingFactors = "Infusion-complete transition missed; VTBI limit misprogrammed or outdated";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.5.2 (REQ 20) and §4.1.6 (REQ 28: infusion complete at prescribed duration or maximum VTBI)"; }
     }
-    part hsVtbiExceeded : HazardousSituation {
+    item hsVtbiExceeded : HazardousSituation {
         @MemoIdentity { :>> providedId = "HS-007"; :>> label = "PatientReceivingVolumeBeyondPrescribedVtbi"; }
         attribute :>> exposedPersons = "patient";
         attribute :>> operatingCondition = "ACTIVE therapy continuing past the prescribed total volume";

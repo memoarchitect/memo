@@ -15,7 +15,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> revisionDate = "2026-07-03";
         attribute :>> reviewer = "Safety review board";
     }
-    part fmMotorRunaway : FailureMode {
+    item fmMotorRunaway : FailureMode {
         @MemoIdentity { :>> providedId = "FM-001"; :>> label = "PumpMotorRunaway"; }
         attribute :>> failureModeKind = FailureModeKind::unintendedFunction;
         attribute :>> effect = "Excess drug delivered to the patient beyond the prescribed rate.";
@@ -27,7 +27,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> criticality = CriticalityKind::catastrophic;
         doc /* Motor steps faster than commanded, delivering more drug than prescribed. */
     }
-    part fmAirSensorSilent : FailureMode {
+    item fmAirSensorSilent : FailureMode {
         @MemoIdentity { :>> providedId = "FM-002"; :>> label = "AirSensorFailsSilent"; }
         attribute :>> failureModeKind = FailureModeKind::lossOfFunction;
         attribute :>> effect = "Air embolism reaches the patient undetected.";
@@ -39,7 +39,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> criticality = CriticalityKind::catastrophic;
         doc /* Air-in-line sensor reports 'no air' regardless of actual line state. */
     }
-    part fmOcclusionDrift : FailureMode {
+    item fmOcclusionDrift : FailureMode {
         @MemoIdentity { :>> providedId = "FM-003"; :>> label = "OcclusionSensorDrift"; }
         attribute :>> failureModeKind = FailureModeKind::degradedFunction;
         attribute :>> effect = "Occluded line is detected late or not at all, interrupting therapy.";
@@ -51,7 +51,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> criticality = CriticalityKind::high;
         doc /* Pressure sensor drifts so occlusions are detected late or not at all. */
     }
-    part fmStuckBolusButton : FailureMode {
+    item fmStuckBolusButton : FailureMode {
         @MemoIdentity { :>> providedId = "FM-004"; :>> label = "BolusButtonStuckClosed"; }
         attribute :>> failureModeKind = FailureModeKind::unintendedFunction;
         attribute :>> effect = "Repeated unrequested boluses are delivered.";
@@ -63,7 +63,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> criticality = CriticalityKind::high;
         doc /* Pendant switch shorted, continuously asserting bolus requests. */
     }
-    part fmBatteryEarlyDepletion : FailureMode {
+    item fmBatteryEarlyDepletion : FailureMode {
         @MemoIdentity { :>> providedId = "FM-005"; :>> label = "BatteryDepletesEarly"; }
         attribute :>> failureModeKind = FailureModeKind::prematureFunction;
         attribute :>> effect = "Pump loses power during transport, stopping therapy.";
@@ -75,7 +75,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> criticality = CriticalityKind::medium;
         doc /* Aged battery sustains less than the specified backup duration during transport. */
     }
-    part feOverdose : FailureEffect {
+    item feOverdose : FailureEffect {
         @MemoIdentity { :>> providedId = "FE-001"; :>> label = "ExcessDrugDelivered"; }
         attribute :>> effectLevel = FailureEffectLevelKind::endEffect;
         attribute :>> effectOnPatient = "opioid overdose, respiratory depression";
@@ -83,7 +83,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> effectOnSystem = "therapy stopped by cross-check or clinician";
         attribute :>> severity = SeverityKind::catastrophic;
     }
-    part feAirDelivered : FailureEffect {
+    item feAirDelivered : FailureEffect {
         @MemoIdentity { :>> providedId = "FE-002"; :>> label = "AirReachesPatientLine"; }
         attribute :>> effectLevel = FailureEffectLevelKind::endEffect;
         attribute :>> effectOnPatient = "risk of vascular air embolism";
@@ -91,7 +91,7 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> effectOnSystem = "undetected hazardous state";
         attribute :>> severity = SeverityKind::catastrophic;
     }
-    part feTherapyInterrupted : FailureEffect {
+    item feTherapyInterrupted : FailureEffect {
         @MemoIdentity { :>> providedId = "FE-003"; :>> label = "TherapyInterruptedUnnoticed"; }
         attribute :>> effectLevel = FailureEffectLevelKind::endEffect;
         attribute :>> effectOnPatient = "untreated pain; possible post-occlusion bolus";
@@ -99,21 +99,21 @@ package memo_examples_gpca_pump_gpca_analysis {
         attribute :>> effectOnSystem = "under-delivery until detected";
         attribute :>> severity = SeverityKind::serious;
     }
-    part fcMotorDriverFault : FailureCause {
+    item fcMotorDriverFault : FailureCause {
         @MemoIdentity { :>> providedId = "FCA-001"; :>> label = "MotorDriverElectronicsFault"; }
         attribute :>> causeCategory = FailureCauseCategoryKind::design;
         attribute :>> causeDescription = "Driver stage latch-up or firmware step-rate computation fault";
         attribute :>> occurrenceRating = ProbabilityKind::remote;
         attribute :>> preventionMethod = "independent flow cross-check; watchdog";
     }
-    part fcTransducerAging : FailureCause {
+    item fcTransducerAging : FailureCause {
         @MemoIdentity { :>> providedId = "FCA-002"; :>> label = "UltrasonicTransducerAging"; }
         attribute :>> causeCategory = FailureCauseCategoryKind::wear;
         attribute :>> causeDescription = "Air sensor transducer sensitivity degrades with age";
         attribute :>> occurrenceRating = ProbabilityKind::occasional;
         attribute :>> preventionMethod = "POST sensor plausibility check; periodic maintenance";
     }
-    part fcPendantAbuse : FailureCause {
+    item fcPendantAbuse : FailureCause {
         @MemoIdentity { :>> providedId = "FCA-003"; :>> label = "PendantCableAbuse"; }
         attribute :>> causeCategory = FailureCauseCategoryKind::misuse;
         attribute :>> causeDescription = "Cable crushed in bed rail shorts the switch line";
@@ -201,13 +201,13 @@ package memo_examples_gpca_pump_gpca_analysis {
         @MemoIdentity { :>> providedId = "FTG-003"; :>> label = "UnauthorizedBolusAndGate"; }
         attribute :>> gateKind = FaultTreeGateKind::andGate;
     }
-    part mcsMotorPath : MinimalCutSet {
+    item mcsMotorPath : MinimalCutSet {
         @MemoIdentity { :>> providedId = "MCS-001"; :>> label = "MotorRunawayWithLostCrossCheck"; }
         attribute :>> cutSetOrder = 2;
         attribute :>> involvedEvents = "FTE-002, FTE-003";
         attribute :>> significance = "dominant contributor; controlled by RC-008 independence";
     }
-    part mcsBolusPath : MinimalCutSet {
+    item mcsBolusPath : MinimalCutSet {
         @MemoIdentity { :>> providedId = "MCS-002"; :>> label = "StuckButtonWithLockoutFault"; }
         attribute :>> cutSetOrder = 2;
         attribute :>> involvedEvents = "FTE-004, FTE-005";
