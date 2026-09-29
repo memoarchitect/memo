@@ -6,6 +6,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
     private import memo_architecture_functional_functions::*;
     private import memo_core_common::*;
     private import memo_examples_gpca_pump_gpca_architecture::*;
+    private import memo_examples_gpca_pump_gpca_physical::*;
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
     private import memo_core_enumerations::*;
     private import memo_core_dimensions::*;
@@ -19,35 +20,35 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> interfaceType = "SensorDataInterface";
         attribute :>> sensorDomain = "physiological and device state";
     }
-    interface sensorInputInterface : Interface {
+    abstract interface sensorInputInterface : Interface {
         @MemoIdentity { :>> providedId = "LI-005"; }
         attribute :>> interfaceKind = InterfaceKind::data;
         attribute :>> direction = DirectionKind::input;
         attribute :>> interactionPattern = "sensor feed";
         attribute :>> protocolSemantics = "flow, air, occlusion, door, battery, cpu, memory, pump state";
     }
-    interface actuatorCommandInterface : Interface {
+    abstract interface actuatorCommandInterface : Interface {
         @MemoIdentity { :>> providedId = "LI-006"; }
         attribute :>> interfaceKind = InterfaceKind::control;
         attribute :>> direction = DirectionKind::output;
         attribute :>> interactionPattern = "commanded flow and annunciation outputs";
         attribute :>> protocolSemantics = "pump flow command, buzzer tone select, display content";
     }
-    interface operatorEntryInterface : Interface {
+    abstract interface operatorEntryInterface : Interface {
         @MemoIdentity { :>> providedId = "LI-007"; }
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
         attribute :>> direction = DirectionKind::input;
         attribute :>> interactionPattern = "keypad entry with confirmation readback";
         attribute :>> protocolSemantics = "prescription fields, alarm silence, start/stop commands";
     }
-    interface eventLogInterface : Interface {
+    abstract interface eventLogInterface : Interface {
         @MemoIdentity { :>> providedId = "LI-008"; }
         attribute :>> interfaceKind = InterfaceKind::logging;
         attribute :>> direction = DirectionKind::output;
         attribute :>> interactionPattern = "append-only audit records";
         attribute :>> protocolSemantics = "timestamped therapy, alarm, and configuration events";
     }
-    interface hwSoftwareBus : Interface {
+    abstract interface hwSoftwareBus : Interface {
         @MemoIdentity { :>> providedId = "PI-001"; :>> label = "HW_SW_DataBus"; }
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> protocol = "immediate data port mapping";
@@ -58,7 +59,9 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> nominalVoltageV = 3.3;
         attribute :>> nominalCurrentA = 0.02;
     }
-    interface pumpMotorDrive : Interface {
+    // Wired: the three physical interfaces whose controller-side connector is
+    // modelled (gpca_physical). The rest are abstract until their ends are.
+    interface pumpMotorDrive : Interface connect portMotorDrive to pumpMotorAssembly.portFlowCommandIn {
         @MemoIdentity { :>> providedId = "PI-002"; :>> label = "PumpMotorStepDrive"; }
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> protocol = "step/direction pulse train";
@@ -69,7 +72,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> nominalCurrentA = 0.5;
         attribute :>> signaling = "step/dir with enable interlock";
     }
-    interface bolusButtonLine : Interface {
+    interface bolusButtonLine : Interface connect bolusButton.portPendantOut to portPatientPendant {
         @MemoIdentity { :>> providedId = "PI-003"; :>> label = "BolusButtonInputLine"; }
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> protocol = "debounced discrete input";
@@ -79,7 +82,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> nominalVoltageV = 3.3;
         attribute :>> nominalCurrentA = 0.001;
     }
-    interface occlusionAnalogLine : Interface {
+    interface occlusionAnalogLine : Interface connect occlusionSensor.portOcclusionOut to portSensorHarness {
         @MemoIdentity { :>> providedId = "PI-004"; :>> label = "OcclusionPressureAnalogLine"; }
         attribute :>> interfaceKind = InterfaceKind::analogSignal;
         attribute :>> directionality = DirectionKind::input;
@@ -88,7 +91,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> nominalCurrentA = 0.01;
         attribute :>> signalRange = "0 to 30 psi line pressure";
     }
-    interface batteryMonitorLine : Interface {
+    abstract interface batteryMonitorLine : Interface {
         @MemoIdentity { :>> providedId = "PI-005"; :>> label = "BatteryVoltageMonitorLine"; }
         attribute :>> interfaceKind = InterfaceKind::power;
         attribute :>> directionality = DirectionKind::input;
@@ -99,7 +102,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
     }
 
     // ── System-level interfaces (CriSys Ch.3, I 1-I 11) ─────────
-    interface siDataEntry : Interface {
+    abstract interface siDataEntry : Interface {
         @MemoIdentity { :>> providedId = "SI-001"; :>> label = "DataEntryInterface"; }
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
         attribute :>> direction = DirectionKind::input;
@@ -108,7 +111,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> interactionPattern = "clinician enter/edit/save with mode-gated commands";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1 Data Entry Interface"; }
     }
-    interface siBolusRequest : Interface {
+    abstract interface siBolusRequest : Interface {
         @MemoIdentity { :>> providedId = "SI-002"; :>> label = "BolusRequestInterface"; }
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
         attribute :>> direction = DirectionKind::input;
@@ -117,7 +120,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> interactionPattern = "patient pendant button press";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.2 Bolus Request Interface"; }
     }
-    interface siDrugFlow : Interface {
+    abstract interface siDrugFlow : Interface {
         @MemoIdentity { :>> providedId = "SI-003"; :>> label = "DrugFlowInterface"; }
         attribute :>> interfaceKind = InterfaceKind::fluidic;
         attribute :>> direction = DirectionKind::output;
@@ -126,7 +129,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> interactionPattern = "continuous fluid path while infusing";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.3 Drug Flow Interface"; }
     }
-    interface siNotification : Interface {
+    abstract interface siNotification : Interface {
         @MemoIdentity { :>> providedId = "SI-004"; :>> label = "NotificationInterface"; }
         attribute :>> interfaceKind = InterfaceKind::notification;
         attribute :>> direction = DirectionKind::output;
@@ -135,7 +138,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> interactionPattern = "visual list with per-notification audio annunciation";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.4 Notification Interface"; }
     }
-    interface siPharmacyDb : Interface {
+    abstract interface siPharmacyDb : Interface {
         @MemoIdentity { :>> providedId = "SI-005"; :>> label = "HospitalPharmacyDatabaseInterface"; }
         attribute :>> interfaceKind = InterfaceKind::data;
         attribute :>> direction = DirectionKind::inputOutput;
