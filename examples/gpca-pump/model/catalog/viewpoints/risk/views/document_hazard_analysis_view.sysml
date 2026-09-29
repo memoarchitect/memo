@@ -24,7 +24,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_v
         part :>> selectionQuery {
             @MemoIdentity { :>> providedId = "QRY-DOC-003"; :>> label = "hazardAnalysisViewQuery"; }
             attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureCause", "FailureEffect", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeNode", "MinimalCutSet", "Hazard", "HazardCause", "SequenceOfEvents");
-            attribute :>> includeRelationshipKinds = ("HasFailureMode", "Causes", "DetectedBy", "Mitigates", "InputToGate", "ContainsEvent", "Mitigates");
+            attribute :>> includeRelationshipKinds = ("HasFailureMode", "Causes", "DetectedBy", "Mitigates", "InputToGate", "ContainsEvent");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
         }
     }
