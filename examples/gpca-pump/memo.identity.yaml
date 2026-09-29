@@ -113,6 +113,9 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::bolusButton":
     shortId: "HRD-5"
     uuid: "1e574bbc-61df-5713-ba7c-33ca6420f071"
+  "memo_examples_gpca_pump_gpca_architecture::bolusButton::portPendantOut":
+    shortId: "PHY-27"
+    uuid: "bc7e2f73-ba7a-570e-ad7f-4a047f77b279"
   "memo_examples_gpca_pump_gpca_architecture::config":
     shortId: "SFT-2"
     uuid: "2ff77950-188f-5ad3-956b-a75e8ef8663f"
@@ -428,6 +431,9 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::occlusionSensor":
     shortId: "HRD-12"
     uuid: "4f56b31a-9b47-5f9b-ba48-ed4137111c2e"
+  "memo_examples_gpca_pump_gpca_architecture::occlusionSensor::portOcclusionOut":
+    shortId: "PHY-28"
+    uuid: "c4936e92-a377-51b6-89df-90aa89e4e568"
   "memo_examples_gpca_pump_gpca_architecture::operatorDisplay":
     shortId: "HRD-13"
     uuid: "03b280e6-c5d7-5204-8196-86ac40218c86"
