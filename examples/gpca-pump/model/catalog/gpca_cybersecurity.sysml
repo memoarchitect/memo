@@ -150,7 +150,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
 
     connection : RealizedByScenario connect realizedThreat ::> unauthorizedConfigChangeThreat to scenario ::> tamperedConfigurationScenario;
 
-    connection : Mitigates { attribute :>> mitigationKind = MitigationKind::vulnerability; connect control ::> strongServiceAuthentication to mitigatedElement ::> weakServiceAuthentication; }
+    connection : Mitigates connect control ::> strongServiceAuthentication to mitigatedElement ::> weakServiceAuthentication { attribute :>> mitigationKind = MitigationKind::vulnerability; }
 
     connection : DerivesCyberRequirement connect sourceThreatOrRisk ::> unauthorizedConfigChangeThreat to targetRequirement ::> reqAuthenticatedServiceAccess;
 
