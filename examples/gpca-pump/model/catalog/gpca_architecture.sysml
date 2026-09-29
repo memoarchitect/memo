@@ -288,6 +288,7 @@ package memo_examples_gpca_pump_gpca_architecture {
     }
     part occlusionSensor : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-007"; :>> label = "OcclusionPressureSensor"; }
+        out port portOcclusionOut : PhysicalPort { @MemoIdentity { :>> providedId = "PORT-OCC-01"; :>> label = "OCCLUSION_PRESSURE_OUT"; } }
         attribute :>> responsibility = "Measures downstream line pressure to detect occlusion.";
         attribute :>> safetyRole = "detects blocked line (under-infusion, post-occlusion bolus)";
         attribute :>> partNumber = "GPCA-SNS-OCC";
@@ -316,6 +317,7 @@ package memo_examples_gpca_pump_gpca_architecture {
     }
     part bolusButton : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-011"; :>> label = "PatientBolusButton"; }
+        out port portPendantOut : PhysicalPort { @MemoIdentity { :>> providedId = "PORT-BOL-01"; :>> label = "PENDANT_OUT"; } }
         attribute :>> responsibility = "Debounced patient pendant switch for bolus requests.";
         attribute :>> safetyRole = "sole patient input; stuck-button detection required";
         attribute :>> partNumber = "GPCA-INP-BOL";
