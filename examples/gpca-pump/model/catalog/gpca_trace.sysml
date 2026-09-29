@@ -50,12 +50,13 @@ package memo_examples_gpca_pump_gpca_trace {
     connection connect actorPharmacist to entityPharmacy;
 
     // ── Fig 2.1 context flows (CriSys §2.1) ─────────────────────
-    // Data flows
-    flow entityPrescriptionToActorNurse from entityPrescription to actorNurse;
-    flow actorNurseToEntityGpcaPump from actorNurse to entityGpcaPump;
-    flow entityGpcaPumpToActorNurse from entityGpcaPump to actorNurse;
-    flow actorPatientToEntityGpcaPump from actorPatient to entityGpcaPump;
-    flow entityPharmacyDbToEntityGpcaPump from entityPharmacyDb to entityGpcaPump;
+    // Data exchanges: who exchanges data with whom (the figure names no item),
+    // so each is a connection from the source to the receiver.
+    connection entityPrescriptionToActorNurse connect entityPrescription to actorNurse;
+    connection actorNurseToEntityGpcaPump connect actorNurse to entityGpcaPump;
+    connection entityGpcaPumpToActorNurse connect entityGpcaPump to actorNurse;
+    connection actorPatientToEntityGpcaPump connect actorPatient to entityGpcaPump;
+    connection entityPharmacyDbToEntityGpcaPump connect entityPharmacyDb to entityGpcaPump;
     // Physical connections (drug path)
     connection connect source ::> entityDrugReservoir to target ::> entityGpcaPump;
     connection connect source ::> entityGpcaPump to target ::> entityNeedle;
