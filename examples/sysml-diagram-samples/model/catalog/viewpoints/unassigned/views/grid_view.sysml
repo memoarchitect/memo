@@ -15,7 +15,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_vie
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
 
-    part fmMotorRunaway : FailureMode {
+    item fmMotorRunaway : FailureMode {
 @MemoIdentity { :>> label = "PumpMotorRunaway"; }
         attribute :>> failureModeKind = FailureModeKind::unintendedFunction;
         attribute :>> effect = "Excess drug delivered beyond the prescribed rate.";
@@ -26,7 +26,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_vie
         attribute :>> rpn = 6;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part fmAirSensorSilent : FailureMode {
+    item fmAirSensorSilent : FailureMode {
 @MemoIdentity { :>> label = "AirSensorFailsSilent"; }
         attribute :>> failureModeKind = FailureModeKind::lossOfFunction;
         attribute :>> effect = "Air embolism reaches the patient undetected.";
@@ -37,7 +37,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_vie
         attribute :>> rpn = 12;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
-    part fmOcclusionDrift : FailureMode {
+    item fmOcclusionDrift : FailureMode {
 @MemoIdentity { :>> label = "OcclusionSensorDrift"; }
         attribute :>> failureModeKind = FailureModeKind::degradedFunction;
         attribute :>> effect = "Occlusion is detected late, interrupting therapy.";

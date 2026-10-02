@@ -22,10 +22,12 @@ package memo_examples_connected_patient_monitor {
         @MemoIdentity { :>> providedId = "CPM-LC-002"; :>> label = "WardGateway"; }
         attribute :>> responsibility = "Aggregate device data; bridge device LAN to hospital network.";
         in port pSpo2In : LogicalPort { in item spo2 :> spo2Item; }
+        out port pHl7Out : LogicalPort;
     }
     part lcCdrService : LogicalComponent {
         @MemoIdentity { :>> providedId = "CPM-LC-003"; :>> label = "ClinicalDataRepository"; }
         attribute :>> externalOwner = "hospital IT";
+        in port pHl7In : LogicalPort;
     }
 
     // Typed measurement item, coded against ISO/IEEE 11073-10101.
@@ -57,9 +59,10 @@ package memo_examples_connected_patient_monitor {
         attribute :>> direction = DirectionKind::output;
     }
 
-    // Network interface with cybersecurity properties; trust boundary at the
+    // Network interface with cybersecurity properties: it connects the
+    // gateway's HL7 port to the repository's across the trust boundary at the
     // hospital network edge.
-    interface ifHl7Feed : Interface {
+    interface ifHl7Feed : Interface connect lcGateway.pHl7Out to lcCdrService.pHl7In {
         @MemoIdentity { :>> providedId = "CPM-IF-001"; :>> label = "GatewayToCdrFeed"; }
         attribute :>> protocol = "HL7 FHIR REST over TLS 1.3";
         attribute :>> securityCriticality = CriticalityKind::high;
