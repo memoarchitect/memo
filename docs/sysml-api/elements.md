@@ -592,13 +592,6 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`VerificationEngineer`](viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#verificationengineer) | `part def` | Verification engineer definition specializing `MemoStakeholder`. | [`viewpoints/stakeholders_concerns/memo_stakeholders_concerns.sysml`](viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md) |
 
 
-## `memo::viewpoints::ui_layout::screen_layout_view`
-
-| Name | SysML kind | Description | Source |
-| --- | --- | --- | --- |
-| [`MemoScreenLayoutView`](viewpoints/ui_layout/screen_layout_view/screen_layout_view.md#memoscreenlayoutview) | `view def` | Memo screen layout view definition specializing `MemoDiagramView`. | [`viewpoints/ui_layout/screen_layout_view/screen_layout_view.sysml`](viewpoints/ui_layout/screen_layout_view/screen_layout_view.md) |
-
-
 ## `memo::viewpoints::ui_layout::views::screen_layout_view`
 
 | Name | SysML kind | Description | Source |
