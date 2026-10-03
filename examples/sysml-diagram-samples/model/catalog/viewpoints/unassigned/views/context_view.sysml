@@ -22,6 +22,7 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
 @MemoIdentity { :>> label = "Infusion Pump System"; }
         attribute :>> entityKind = OperationalEntityKind::device;
         attribute :>> responsibility = "System of interest for this context view.";
+        out port pPharmacyOut : MemoPort;
     }
     part clinician : User { }
     part patient : User { }
@@ -29,12 +30,15 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_
     part pharmacySystem : OperationalEntity {
 @MemoIdentity { :>> label = "Pharmacy Information System"; }
         attribute :>> entityKind = OperationalEntityKind::externalSystem;
+        in port pInfusionIn : MemoPort;
     }
     part homeContext : UseContext {@MemoIdentity { :>> label = "Home Care Environment"; } }
 
     connection connect clinician to infusionSystem;
     connection connect patient to infusionSystem;
     connection connect biomedTech to infusionSystem;
-    flow infusionSystemToPharmacySystem from infusionSystem to pharmacySystem;
+    // A flow end names a feature of its participant (`part.feature`): the black
+    // boxes exchange across their boundary, at these ports.
+    flow infusionSystemToPharmacySystem from infusionSystem.pPharmacyOut to pharmacySystem.pInfusionIn;
     connection : AppliesInContext connect useContext ::> homeContext to subjectElement ::> infusionSystem;
 }
