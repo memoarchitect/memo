@@ -11,3 +11,9 @@ entrypoint: model/catalog/project.sysml
 include: [model]
 version: 0.1.0
 description: MEMO connected device model
+# The SysML compiler every MEMO command uses (internal, syside or opensysml), and
+# the packager `memo pack` uses (internal or sysand).
+# Required; MEMO chooses none for a project that does not.
+toolchain:
+  compiler: internal
+  packager: internal
