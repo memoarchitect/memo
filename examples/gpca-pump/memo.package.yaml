@@ -1,3 +1,6 @@
 name: gpca-pump
 entrypoint: model/catalog/project.sysml
 include: [model]
+toolchain:
+  compiler: internal
+  packager: internal
