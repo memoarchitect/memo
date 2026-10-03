@@ -88,10 +88,10 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
         action fxDeliver : FxDeliverMedication {
 @MemoIdentity { :>> label = "Deliver Medication"; }
             action fxOpenValve : SystemFunction {@MemoIdentity { :>> label = "Open Valve"; } }
-            action fxHoldDose : SystemFunction {@MemoIdentity { :>> label = "Hold Metered Dose"; } }
-            action fxCloseValve : SystemFunction {@MemoIdentity { :>> label = "Close Valve"; } }
+            action fxHoldDose : SystemFunction {@MemoIdentity { :>> label = "Hold Metered Dose"; } out item fluid : FxMedicationFluid; }
+            action fxCloseValve : SystemFunction {@MemoIdentity { :>> label = "Close Valve"; } in item fluid : FxMedicationFluid; }
 
-            flow fxHoldDoseToFxCloseValve of FxMedicationFluid from fxDeliveryFlow.fxDeliver.fxHoldDose to fxCloseValve;
+            flow fxHoldDoseToFxCloseValve of FxMedicationFluid from fxHoldDose.fluid to fxCloseValve.fluid;
 
             first start then fxOpenValve;
             first fxOpenValve then fxHoldDose;
