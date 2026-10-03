@@ -1,3 +1,6 @@
 name: functional-logical-physical
 entrypoint: model/catalog/project.sysml
 include: [model]
+toolchain:
+  compiler: internal
+  packager: internal
