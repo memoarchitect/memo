@@ -299,7 +299,7 @@ package memo_architecture_implementation_ui {
     // `PresentsState` had zero usages anywhere in the tree (R10-S6). Its
     // audited native form, `exhibit state`, does not actually fit: `UIState`
     // is a `part def` with plain string attributes, not a `state def`, and
-    // SysIDE rejects `exhibit` referencing anything that does not conform to
+    // a SysML v2 compiler rejects `exhibit` referencing anything that does not conform to
     // `States::StateAction` ("An exhibit state must reference another
     // state"). Free deletion rather than a migration — nothing referenced
     // it, so nothing to preserve. If `UIState` is ever restructured onto a

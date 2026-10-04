@@ -54,10 +54,13 @@ a documented modeling rule, not a quiet exception:
 
 ## Validate before you open a pull request
 
+Check the SysML with any supported compiler (`<compiler>` below; the
+[toolchain reference](https://memoarchitect.com/memo-tools/reference/configuration/)
+lists them and what each needs installed):
+
 ```bash
-syside check --warnings-as-errors src/memo_namespaces.sysml
-syside check --warnings-as-errors src
-syside check --warnings-as-errors examples
+node ../memo-tools/packages/tools/lib/bin/memo.js toolchain check --toolchain.validator=<compiler> src
+node ../memo-tools/packages/tools/lib/bin/memo.js toolchain check --toolchain.validator=<compiler> examples
 node --test test/package.test.mjs
 bash scripts/build-kpar.sh          # external portability gate
 python3 -m mkdocs build --strict    # if you touched docs
