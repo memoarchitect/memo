@@ -34,7 +34,7 @@
 | --- | --- | --- | --- |
 | [`ProcessingNode`](#processingnode) | `part def` | Processing node definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`MemoryDevice`](#memorydevice) | `part def` | Memory device definition specializing `PhysicalElement`. | `PhysicalElement` |
-| [`PhysicalPort`](#physicalport) | `port def` | A physical boundary feature: the connector the outside world plugs into. A `port def` (Track A1), not a part.… | `MemoPort` |
+| [`PhysicalPort`](#physicalport) | `port def` | Physical port definition specializing `MemoPort`. | `MemoPort` |
 
 ## ProcessingNode
 
@@ -74,7 +74,7 @@ port def PhysicalPort specializes MemoPort
 
 | Property | Value |
 | --- | --- |
-| Description | A physical boundary feature: the connector the outside world plugs into. A `port def` (Track A1), not a part.… |
+| Description | Physical port definition specializing `MemoPort`. |
 | Kind | `port def` |
 | Abstract | No |
 | Specializes | `MemoPort` |

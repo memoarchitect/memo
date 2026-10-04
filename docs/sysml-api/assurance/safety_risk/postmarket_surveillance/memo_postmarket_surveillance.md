@@ -33,7 +33,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`PostMarketSurveillance`](#postmarketsurveillance) | `part def` | Post market surveillance definition specializing `MemoPart`. | `MemoPart` |
-| [`FeedsBackTo`](#feedsbackto) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
+| [`FeedsBackTo`](#feedsbackto) | `connection def` | Typed relationship from `PostMarketSurveillance` to `MemoPart`. | `MemoRelationship` |
 
 ## PostMarketSurveillance
 
@@ -58,7 +58,7 @@ connection def FeedsBackTo :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Description | Typed relationship from `PostMarketSurveillance` to `MemoPart`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

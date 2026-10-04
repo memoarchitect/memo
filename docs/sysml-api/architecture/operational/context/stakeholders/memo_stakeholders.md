@@ -36,9 +36,9 @@
 | --- | --- | --- | --- |
 | [`ArchitectureDescription`](#architecturedescription) | `part def` | Architecture description definition specializing `MemoPart`. | `MemoPart` |
 | [`ModelKind`](#modelkind) | `part def` | Model definition specializing `MemoPart`. | `MemoPart` |
-| [`CorrespondenceRule`](#correspondencerule) | `part def` | 42010 correspondence: a rule that must hold between architecture description elements (e.g. consistency between two views). | `MemoPart` |
+| [`CorrespondenceRule`](#correspondencerule) | `part def` | Correspondence rule definition specializing `MemoPart`. | `MemoPart` |
 | [`GovernKind`](#governkind) | `enum def` | Controlled values for govern: `correspondence`. | — |
-| [`Governs`](#governs) | `connection def` | Typed relationship for governs. | `MemoRelationship` |
+| [`Governs`](#governs) | `connection def` | Typed relationship from `any element` to `MemoPart`. | `MemoRelationship` |
 
 ## ArchitectureDescription
 
@@ -78,7 +78,7 @@ part def CorrespondenceRule specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | 42010 correspondence: a rule that must hold between architecture description elements (e.g. consistency between two views). |
+| Description | Correspondence rule definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -108,7 +108,7 @@ connection def Governs :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for governs. |
+| Description | Typed relationship from `any element` to `MemoPart`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

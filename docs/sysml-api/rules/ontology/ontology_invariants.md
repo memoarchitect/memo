@@ -40,7 +40,7 @@
 | [`SafetyCriticalFunctionVerifiedRule`](#safetycriticalfunctionverifiedrule) | `constraint def` | Constraint that checks safety critical function verified rule. | `MemoConsistencyRule` |
 | [`CriticalTaskValidatedRule`](#criticaltaskvalidatedrule) | `constraint def` | Constraint that checks critical task validated rule. | `MemoConsistencyRule` |
 | [`UseErrorTracesToHazardRule`](#useerrortracestohazardrule) | `constraint def` | Constraint that checks use error traces to hazard rule. | `MemoConsistencyRule` |
-| [`SatisfiedBySourceKindRule`](#satisfiedbysourcekindrule) | `constraint def` | These rules carry the constraints that `connection def` end TYPES used to carry in memo_core_relationships.… | `MemoConsistencyRule` |
+| [`SatisfiedBySourceKindRule`](#satisfiedbysourcekindrule) | `constraint def` | Constraint that checks satisfied by source kind rule. | `MemoConsistencyRule` |
 | [`SatisfiedByTargetKindRule`](#satisfiedbytargetkindrule) | `constraint def` | Constraint that checks satisfied by target kind rule. | `MemoConsistencyRule` |
 | [`VerifiedByTargetKindRule`](#verifiedbytargetkindrule) | `constraint def` | Constraint that checks verified by target kind rule. | `MemoConsistencyRule` |
 | [`AllocatedToSourceKindRule`](#allocatedtosourcekindrule) | `constraint def` | Constraint that checks allocated to source kind rule. | `MemoConsistencyRule` |
@@ -51,16 +51,16 @@
 | [`PerformsPerformerKindRule`](#performsperformerkindrule) | `constraint def` | Constraint that checks performs performer kind rule. | `MemoConsistencyRule` |
 | [`BindsToInterfaceEndKindRule`](#bindstointerfaceendkindrule) | `constraint def` | Constraint that checks binds to interface end kind rule. | `MemoConsistencyRule` |
 | [`CrossesTrustBoundaryEndKindRule`](#crossestrustboundaryendkindrule) | `constraint def` | Constraint that checks crosses trust boundary end kind rule. | `MemoConsistencyRule` |
-| [`ComponentExchangeSourceEndpointKindRule`](#componentexchangesourceendpointkindrule) | `constraint def` | CR-ONT-002's replacement, now asked of the edge. A ComponentExchange is an interface, so its ends are the ports it connects, and `sourceEnd` / `targetEnd` are those elements.… | `MemoConsistencyRule` |
+| [`ComponentExchangeSourceEndpointKindRule`](#componentexchangesourceendpointkindrule) | `constraint def` | Constraint that checks component exchange source endpoint kind rule. | `MemoConsistencyRule` |
 | [`ComponentExchangeTargetEndpointKindRule`](#componentexchangetargetendpointkindrule) | `constraint def` | Constraint that checks component exchange target endpoint kind rule. | `MemoConsistencyRule` |
 | [`ComponentFunctionAllocatedRule`](#componentfunctionallocatedrule) | `constraint def` | What makes ComponentFunction a definition of its own rather than an enum member on SystemFunction. An enum value cannot change a multiplicity, and "answerable to exactly one component" is the whole content of the concept. | `MemoConsistencyRule` |
 | [`FunctionDecomposesIntoFunctionsRule`](#functiondecomposesintofunctionsrule) | `constraint def` | Constraint that checks function decomposes into functions rule. | `MemoConsistencyRule` |
 | [`SoftwareContainsSoftwareRule`](#softwarecontainssoftwarerule) | `constraint def` | CR-ONT-075 above is this rule for functions; these are the same shape for the other families. The invariant is FAMILY homogeneity, not type homogeneity: a System containing a Subsystem containing a LogicalComponent is correct decomposition even though all three types differ, a… | `MemoConsistencyRule` |
 | [`LogicalContainsLogicalRule`](#logicalcontainslogicalrule) | `constraint def` | Constraint that checks logical contains logical rule. | `MemoConsistencyRule` |
 | [`PhysicalContainsPhysicalRule`](#physicalcontainsphysicalrule) | `constraint def` | Constraint that checks physical contains physical rule. | `MemoConsistencyRule` |
-| [`ExchangeHasFlowRule`](#exchangehasflowrule) | `constraint def` | An interface is the path between two ports; the flow over it is what moves. This rule asks that a component exchange carries one: a flow whose ends are the exchange's own two ports. The ends are compared as elements (`intersects` matches exact ids), not as names.… | `MemoConsistencyRule` |
+| [`ExchangeHasFlowRule`](#exchangehasflowrule) | `constraint def` | Constraint that checks exchange has flow rule. | `MemoConsistencyRule` |
 | [`AlternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | The predicate here named three features that do not exist — `variantKind`, `baseScenario`, `variationPoint` — so it could never fail, and a rule that cannot fail is coverage on paper only.… | `MemoConsistencyRule` |
-| [`DerivationGapRule`](#derivationgaprule) | `constraint def` | A WARNING, not an error: it describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions.… | `MemoConsistencyRule` |
+| [`DerivationGapRule`](#derivationgaprule) | `constraint def` | Constraint that checks derivation gap rule. | `MemoConsistencyRule` |
 | [`CausesCauseKindRule`](#causescausekindrule) | `constraint def` | Causes' ends are untyped because its CauseKind spans parts and items (memo_fmea.sysml). These carry what the types cannot. | `MemoConsistencyRule` |
 | [`CausesEffectKindRule`](#causeseffectkindrule) | `constraint def` | Constraint that checks causes effect kind rule. | `MemoConsistencyRule` |
 
@@ -177,7 +177,7 @@ constraint def SatisfiedBySourceKindRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | These rules carry the constraints that `connection def` end TYPES used to carry in memo_core_relationships.… |
+| Description | Constraint that checks satisfied by source kind rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -342,7 +342,7 @@ constraint def ComponentExchangeSourceEndpointKindRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | CR-ONT-002's replacement, now asked of the edge. A ComponentExchange is an interface, so its ends are the ports it connects, and `sourceEnd` / `targetEnd` are those elements.… |
+| Description | Constraint that checks component exchange source endpoint kind rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -447,7 +447,7 @@ constraint def ExchangeHasFlowRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | An interface is the path between two ports; the flow over it is what moves. This rule asks that a component exchange carries one: a flow whose ends are the exchange's own two ports. The ends are compared as elements (`intersects` matches exact ids), not as names.… |
+| Description | Constraint that checks exchange has flow rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -477,7 +477,7 @@ constraint def DerivationGapRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | A WARNING, not an error: it describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions.… |
+| Description | Constraint that checks derivation gap rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |

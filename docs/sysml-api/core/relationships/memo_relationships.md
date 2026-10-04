@@ -35,13 +35,14 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
-| [`DerivesFrom`](#derivesfrom) | `connection def` | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… | `MemoRelationship` |
-| [`ProducesEvidence`](#producesevidence) | `connection def` | `Realizes` (realizing/concrete element → realized/abstract element) is native `#refinement dependency` (R10-S6): write `#refinement dependency <realizing> to <realized>;` instead.… | `MemoRelationship` |
-| [`ThreatenedBy`](#threatenedby) | `connection def` | `Precedes` is native `succession` (`first a then b;`), R10-S6. `sameStepRequired`/`precedenceRationale` had zero usages anywhere in the tree (same free-deletion shape R10-S5 found for `rationale`), so there was no content to carry forward. | `MemoRelationship` |
-| [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship for derives cyber requirement. | `MemoRelationship` |
-| [`CrossesTrustBoundary`](#crossestrustboundary) | `connection def` | Typed relationship for crosses trust boundary. | `MemoRelationship` |
-| [`Validates`](#validates) | `connection def` | Typed relationship for validates. | `MemoRelationship` |
-| [`BindsToInterface`](#bindstointerface) | `connection def` | `Composes` is deleted (R10-S7). Containment is NESTING — the child is declared inside the parent — which is how SysML v2 models composition: composite feature ownership, not a link.… | `MemoRelationship` |
+| [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship from `any element` to `MemoRequirementElement`. | `MemoRelationship` |
+| [`ProducesEvidence`](#producesevidence) | `connection def` | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. | `MemoRelationship` |
+| [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship from `MemoPart` to `RequirementDriver`. | `MemoRelationship` |
+| [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship from `RequirementDriver` to `MemoRequirementElement`. | `MemoRelationship` |
+| [`CrossesTrustBoundary`](#crossestrustboundary) | `connection def` | Typed relationship from `any element` to `any element`. | `MemoRelationship` |
+| [`Validates`](#validates) | `connection def` | Typed relationship from `any element` to `MemoVerificationCase`. | `MemoRelationship` |
+| [`HostedBy`](#hostedby) | `allocation def` | A processing node hosted by an assembly is allocated to it. The end NAMES were already right; two of the three usages wrote them in reverse order, and the builder binds by position, so those two edges pointed the wrong way. See the reversed-end-name lint in memo-tools. | `MemoRelationship` |
+| [`BindsToInterface`](#bindstointerface) | `connection def` | Typed relationship from `any element` to `any element`. | `MemoRelationship` |
 
 ## MemoRelationship
 
@@ -66,7 +67,7 @@ connection def DerivesFrom :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | An end is left UNTYPED (`:>> source` / `:>> target`) wherever its legitimate endpoints do not share a MEMO base, and a rule in memo_rules_ontology states the constraint the type used to state. The reason is structural, not stylistic.… |
+| Description | Typed relationship from `any element` to `MemoRequirementElement`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -81,7 +82,7 @@ connection def ProducesEvidence :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | `Realizes` (realizing/concrete element → realized/abstract element) is native `#refinement dependency` (R10-S6): write `#refinement dependency <realizing> to <realized>;` instead.… |
+| Description | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -96,7 +97,7 @@ connection def ThreatenedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | `Precedes` is native `succession` (`first a then b;`), R10-S6. `sameStepRequired`/`precedenceRationale` had zero usages anywhere in the tree (same free-deletion shape R10-S5 found for `rationale`), so there was no content to carry forward. |
+| Description | Typed relationship from `MemoPart` to `RequirementDriver`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -111,7 +112,7 @@ connection def DerivesCyberRequirement :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for derives cyber requirement. |
+| Description | Typed relationship from `RequirementDriver` to `MemoRequirementElement`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -126,7 +127,7 @@ connection def CrossesTrustBoundary :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for crosses trust boundary. |
+| Description | Typed relationship from `any element` to `any element`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -141,8 +142,23 @@ connection def Validates :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for validates. |
+| Description | Typed relationship from `any element` to `MemoVerificationCase`. |
 | Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_core_relationships` |
+
+
+## HostedBy
+
+```sysml
+allocation def HostedBy :> MemoRelationship, Allocations::Allocation
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A processing node hosted by an assembly is allocated to it. The end NAMES were already right; two of the three usages wrote them in reverse order, and the builder binds by position, so those two edges pointed the wrong way. See the reversed-end-name lint in memo-tools. |
+| Kind | `allocation def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
 | Owning package | `memo_core_relationships` |
@@ -156,7 +172,7 @@ connection def BindsToInterface :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | `Composes` is deleted (R10-S7). Containment is NESTING — the child is declared inside the parent — which is how SysML v2 models composition: composite feature ownership, not a link.… |
+| Description | Typed relationship from `any element` to `any element`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

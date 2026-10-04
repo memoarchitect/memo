@@ -31,7 +31,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`MemoConsistencyRule`](#memoconsistencyrule) | `constraint def` | Common supertype of every executable MEMO rule. It carries no members of its own: a rule's metadata is declared on the rule, and a shared member here would be shadowed by every rule that sets it.… | `MemoConstraint` |
+| [`MemoConsistencyRule`](#memoconsistencyrule) | `constraint def` | Constraint that checks memo consistency rule. | `MemoConstraint` |
 | [`ConsistencyRule`](#consistencyrule) | `part def` | Consistency rule definition specializing `MemoPart`. | `MemoPart` |
 | [`RelationshipConsistencyRule`](#relationshipconsistencyrule) | `part def` | Relationship consistency rule definition specializing `ConsistencyRule`. | `ConsistencyRule` |
 | [`AttributeConsistencyRule`](#attributeconsistencyrule) | `part def` | Attribute consistency rule definition specializing `ConsistencyRule`. | `ConsistencyRule` |
@@ -46,7 +46,7 @@ abstract constraint def MemoConsistencyRule :> MemoConstraint
 
 | Property | Value |
 | --- | --- |
-| Description | Common supertype of every executable MEMO rule. It carries no members of its own: a rule's metadata is declared on the rule, and a shared member here would be shadowed by every rule that sets it.… |
+| Description | Constraint that checks memo consistency rule. |
 | Kind | `constraint def` |
 | Abstract | Yes |
 | Specializes | `MemoConstraint` |

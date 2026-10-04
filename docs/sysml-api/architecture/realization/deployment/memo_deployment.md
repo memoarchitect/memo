@@ -43,11 +43,16 @@
 | --- | --- | --- | --- |
 | [`SoftwareDeploymentUnit`](#softwaredeploymentunit) | `part def` | Software deployment unit definition specializing `MemoPart`. | `MemoPart` |
 | [`RuntimeEnvironment`](#runtimeenvironment) | `part def` | Runtime environment definition specializing `MemoPart`. | `MemoPart` |
-| [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship for provides environment. | `MemoRelationship` |
+| [`BuildsInto`](#buildsinto) | `allocation def` | Typed relationship from `SoftwareModule` to `SoftwareDeploymentUnit`. | `MemoRelationship` |
+| [`DeploysTo`](#deploysto) | `allocation def` | Typed relationship from `SoftwareDeploymentUnit` to `ProcessingNode`. | `MemoRelationship` |
+| [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | `MemoRelationship` |
+| [`MemoryBinding`](#memorybinding) | `allocation def` | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. | `MemoRelationship` |
+| [`ConnectionBinding`](#connectionbinding) | `allocation def` | AADL `actual_connection_binding`. Which physical medium carries a component exchange. The source is the ComponentExchange rather than the `ComponentConnects` link, because the exchange is the ELEMENT that owns the budget (§19.3) and a link instance is not something the graph c… | `MemoRelationship` |
 | [`FlowSpecKind`](#flowspeckind) | `enum def` | AADL separates a flow *specification* (declared at a component boundary as source / sink / path through ports) from a flow *implementation* (its routing through subcomponents and connectors), and traces a complete source→sink flow as an *end-to-end flow* across the assembly.… | — |
 | [`FlowSpecification`](#flowspecification) | `part def` | A flow declared at a logical component boundary (in-port → out-port). | `MemoPart` |
 | [`EndToEndFlow`](#endtoendflow) | `part def` | A complete source→sink flow traced across the layers and the software→ hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose` (latency \| fault-propagation \| security) drive the AADL-style analysis. | `MemoPart` |
 | [`FlowComprisesSpec`](#flowcomprisesspec) | `connection def` | The end-to-end flow is realized by an ordered flow specification, one segment per traversed component boundary (AADL flow-spec → end-to-end). | `MemoRelationship` |
+| [`FlowTraversesBinding`](#flowtraversesbinding) | `allocation def` | Typed relationship from `EndToEndFlow` to `SoftwareDeploymentUnit`. | `MemoRelationship` |
 
 ## SoftwareDeploymentUnit
 
@@ -79,6 +84,36 @@ part def RuntimeEnvironment specializes MemoPart
 | Owning package | `memo_architecture_realization_deployment` |
 
 
+## BuildsInto
+
+```sysml
+allocation def BuildsInto :> MemoRelationship, Allocations::Allocation
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `SoftwareModule` to `SoftwareDeploymentUnit`. |
+| Kind | `allocation def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_realization_deployment` |
+
+
+## DeploysTo
+
+```sysml
+allocation def DeploysTo :> MemoRelationship, Allocations::Allocation
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `SoftwareDeploymentUnit` to `ProcessingNode`. |
+| Kind | `allocation def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_realization_deployment` |
+
+
 ## ProvidesEnvironment
 
 ```sysml
@@ -87,8 +122,38 @@ connection def ProvidesEnvironment :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for provides environment. |
+| Description | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. |
 | Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_realization_deployment` |
+
+
+## MemoryBinding
+
+```sysml
+allocation def MemoryBinding :> MemoRelationship, Allocations::Allocation
+```
+
+| Property | Value |
+| --- | --- |
+| Description | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. |
+| Kind | `allocation def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_realization_deployment` |
+
+
+## ConnectionBinding
+
+```sysml
+allocation def ConnectionBinding :> MemoRelationship, Allocations::Allocation
+```
+
+| Property | Value |
+| --- | --- |
+| Description | AADL `actual_connection_binding`. Which physical medium carries a component exchange. The source is the ComponentExchange rather than the `ComponentConnects` link, because the exchange is the ELEMENT that owns the budget (§19.3) and a link instance is not something the graph c… |
+| Kind | `allocation def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_realization_deployment` |
@@ -149,6 +214,21 @@ connection def FlowComprisesSpec :> MemoRelationship
 | --- | --- |
 | Description | The end-to-end flow is realized by an ordered flow specification, one segment per traversed component boundary (AADL flow-spec → end-to-end). |
 | Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_realization_deployment` |
+
+
+## FlowTraversesBinding
+
+```sysml
+allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `EndToEndFlow` to `SoftwareDeploymentUnit`. |
+| Kind | `allocation def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_realization_deployment` |
