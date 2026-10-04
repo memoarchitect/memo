@@ -46,10 +46,10 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalEntity`, `UseCase`, `UseContext`, `User` | [Operational](../reference/areas/architecture.md#operational) |
-| Functional | `ModeState`, `StateMachine`, `Transition` | [Functional](../reference/areas/architecture.md#functional) |
-| Logical | `DataPort`, `LogicalComponent` | [Logical](../reference/areas/architecture.md#logical) |
-| Implementation and realization | `HardwareAssembly` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Operational | `OperationalEntity`, `UseCase`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
+| Functional | `ModeState`, `StateMachine`, `Transition` | [Functional](../ontology/functional.md) |
+| Logical | `DataPort`, `LogicalComponent` | [Logical](../ontology/logical.md) |
+| Implementation and realization | `HardwareAssembly` | [Implementation and realization](../ontology/implementation.md) |
 | Assurance | `Need`, `Requirement` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 

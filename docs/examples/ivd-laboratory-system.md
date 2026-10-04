@@ -17,9 +17,9 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity` | [Operational](../reference/areas/architecture.md#operational) |
-| Logical | `LogicalExchange`, `LogicalExchangeItem` | [Logical](../reference/areas/architecture.md#logical) |
-| Implementation and realization | `FluidicComponent`, `OpticalComponent`, `PhysicalAssembly` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Operational | `OperationalActivity` | [Operational](../ontology/operational.md) |
+| Logical | `LogicalExchange`, `LogicalExchangeItem` | [Logical](../ontology/logical.md) |
+| Implementation and realization | `FluidicComponent`, `OpticalComponent`, `PhysicalAssembly` | [Implementation and realization](../ontology/implementation.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 | Core | `TerminologyCode` | [Core](../reference/areas/core.md) |
 

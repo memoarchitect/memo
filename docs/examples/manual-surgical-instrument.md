@@ -17,8 +17,8 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `UserTask` | [Operational](../reference/areas/architecture.md#operational) |
-| Implementation and realization | `MechanicalPart`, `PhysicalAssembly` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Operational | `UserTask` | [Operational](../ontology/operational.md) |
+| Implementation and realization | `MechanicalPart`, `PhysicalAssembly` | [Implementation and realization](../ontology/implementation.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `Realizes`.
