@@ -21,7 +21,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
-        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7;
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7.iso14971Clause7_1;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "ISO 14971 requires each identified hazard to have risk control measures.";
@@ -33,7 +33,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
-        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5;
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5.iso14971Clause5_5;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Hazard severity is required for risk estimation per ISO 14971.";
@@ -45,11 +45,11 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-003"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
-        // To confirm: the rule text cites clause 7.4, which the library does not carry; confirm the clause.
-        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7;
+        // Note: ISO 14971:2019 puts verification of the implementation and effectiveness of a risk control measure in 7.2; the rule text used to say 7.4, which is benefit-risk analysis.
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7.iso14971Clause7_2;
         attribute appliesTo = "RiskControlMeasure";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.4.";
+        attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.2.";
         attribute predicateExpression = "verifiedBy->size() >= 1";
         constraint { true }
     }
@@ -86,7 +86,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-011"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
-        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_2;
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_2.iec62304Clause5_2_1;
         attribute appliesTo = "Requirement[requirementType=software]";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Software requirements derive from system requirements per IEC 62304.";
@@ -265,6 +265,8 @@ package memo_rules_closure {
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 requires rigorous verification for Class C software.";
         attribute predicateExpression = "not(attributes.safetyClass == 'C') or verifiedBy->size() >= 1";
+        // To confirm: inferred: 5.5.4 and 5.5.5 are the unit verification clauses that Class C adds to; confirm.
+        ref enforces : StandardClause[1..*] = (iec62304.iec62304Clause5.iec62304Clause5_5.iec62304Clause5_5_4, iec62304.iec62304Clause5.iec62304Clause5_5.iec62304Clause5_5_5);
         constraint { true }
     }
 
