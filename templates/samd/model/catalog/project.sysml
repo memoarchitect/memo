@@ -18,8 +18,7 @@ package samd_catalog {
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectMethodBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-001"; }
-        attribute :>> name = "{{name}}ProjectMethodBinding";
+        @MemoIdentity { :>> providedId = "PMB-001"; :>> label = "{{name}}ProjectMethodBinding"; }
         attribute :>> projectName = "{{name}}";
         ref :>> selectedMethodology = mdDefaultDefinition;
         // The project adds no modules of its own yet. Under `explicit` an
