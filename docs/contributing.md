@@ -1,10 +1,8 @@
 # Contribute SysML content
 
 This repository is a SysML v2 and KerML library. It contains the ontology,
-methodology, rules, viewpoints, templates, and examples. Open it directly in a
-conformant SysML v2 editor. The included
-[`syside.toml`](https://github.com/memoarchitect/memo/blob/main/syside.toml)
-defines `src/` as the library source tree.
+methodology, rules, viewpoints, templates, and examples. Open it directly in any
+conformant SysML v2 editor; `src/` is the library source tree.
 
 For a contribution, begin by identifying the engineering question the change
 should make clearer — the reasoning comes before the SysML. Then locate the
@@ -70,6 +68,15 @@ A new concept additionally needs: a row in the
 registration in `src/memo_namespaces.sysml`, an update to the
 [SysML source reference](reference/index.md), and an example that exercises
 it.
+
+### Compiler-specific setup
+
+Nothing here is required: use it only with the compiler you chose.
+
+- **SysIDE:** the included
+  [`syside.toml`](https://github.com/memoarchitect/memo/blob/main/syside.toml)
+  tells it that `src/` is the library source tree, so its editor and
+  `syside check` resolve the ontology without further setup.
 
 ## Documentation rule
 
