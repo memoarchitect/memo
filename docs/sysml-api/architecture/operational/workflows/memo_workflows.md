@@ -40,7 +40,7 @@
 | [`StepTransformationKind`](#steptransformationkind) | `enum def` | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. | — |
 | [`OperationalWorkflow`](#operationalworkflow) | `action def` | Operational workflow definition specializing `MemoAction`. | `MemoAction` |
 | [`RealizesUseCase`](#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | `MemoRelationship` |
-| [`ControlNodeKind`](#controlnodekind) | `enum def` | decision / fork / join / handoff. | — |
+| [`ControlNodeKind`](#controlnodekind) | `enum def` | Controlled values for control node: `decision`, `handoff`. | — |
 | [`WorkflowControlNode`](#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | `MemoAction` |
 | [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. | `MemoPart` |
 | [`TransformKind`](#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | — |
@@ -114,7 +114,7 @@ enum def ControlNodeKind
 
 | Property | Value |
 | --- | --- |
-| Description | decision / fork / join / handoff. |
+| Description | Controlled values for control node: `decision`, `handoff`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |

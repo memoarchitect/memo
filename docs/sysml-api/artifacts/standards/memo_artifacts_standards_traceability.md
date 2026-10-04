@@ -34,10 +34,10 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`RegulatoryStandard`](#regulatorystandard) | `part def` | Standards and clauses | `MemoArtifact` |
-| [`StandardClause`](#standardclause) | `part def` | Standard clause definition specializing `MemoArtifact`. | `MemoArtifact` |
-| [`ConformsTo`](#conformsto) | `connection def` | Relationships | `MemoRelationship` |
-| [`TracesToDocument`](#tracestodocument) | `connection def` | Typed relationship for traces to document. | `MemoRelationship` |
+| [`RegulatoryStandard`](#regulatorystandard) | `part def` | A regulatory or consensus standard a project claims conformance to, identified by its full designation including edition and amendments (e.g. "IEC 62366-1:2015+AMD1:2020").… | `MemoArtifact` |
+| [`StandardClause`](#standardclause) | `part def` | One normative clause of a RegulatoryStandard, at the depth at which the standard makes a distinct requirement a MEMO document actually claims.… | `MemoArtifact` |
+| [`ConformsTo`](#conformsto) | `connection def` | Any model element claims conformance to a standard clause. This is the edge the standards traceability matrix and the clause coverage report are computed over. | `MemoRelationship` |
+| [`TracesToDocument`](#tracestodocument) | `connection def` | Where the evidence for a clause claim is written down. The target is the existing controlled-artifact type — MEMO does not model a separate Document/DocumentSection family, because ControlledArtifact / ModelOwnedArtifact / MarkdownDocumentSource already carry version, owner an… | `MemoRelationship` |
 
 ## RegulatoryStandard
 
@@ -47,7 +47,7 @@ part def RegulatoryStandard :> MemoArtifact
 
 | Property | Value |
 | --- | --- |
-| Description | Standards and clauses |
+| Description | A regulatory or consensus standard a project claims conformance to, identified by its full designation including edition and amendments (e.g. "IEC 62366-1:2015+AMD1:2020").… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoArtifact` |
@@ -62,7 +62,7 @@ part def StandardClause :> MemoArtifact
 
 | Property | Value |
 | --- | --- |
-| Description | Standard clause definition specializing `MemoArtifact`. |
+| Description | One normative clause of a RegulatoryStandard, at the depth at which the standard makes a distinct requirement a MEMO document actually claims.… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoArtifact` |
@@ -77,7 +77,7 @@ connection def ConformsTo :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Relationships |
+| Description | Any model element claims conformance to a standard clause. This is the edge the standards traceability matrix and the clause coverage report are computed over. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -92,7 +92,7 @@ connection def TracesToDocument :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for traces to document. |
+| Description | Where the evidence for a clause claim is written down. The target is the existing controlled-artifact type — MEMO does not model a separate Document/DocumentSection family, because ControlledArtifact / ModelOwnedArtifact / MarkdownDocumentSource already carry version, owner an… |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

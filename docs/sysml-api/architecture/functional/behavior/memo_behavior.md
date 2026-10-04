@@ -35,9 +35,9 @@
 | [`StateMachine`](#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based MemoPart family. Transitions stay part-based (below) to keep their traceable safety attributes.… | `MemoState` |
 | [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… | `MemoPart` |
 | [`TransitionRecord`](#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… | — |
-| [`BehaviorProperty`](#behaviorproperty) | `requirement def` | A behavioural obligation, such as an invariant, transition rule, temporal claim, assumption, or guarantee. It is a `requirement def` because that is what it is: a claim the design must meet and a verification case can `verify`.… | `MemoRequirementElement` |
+| [`BehaviorProperty`](#behaviorproperty) | `requirement def` | Behavior property definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`Contract`](#contract) | `requirement def` | Contract definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
-| [`ActivityAction`](#activityaction) | `action def` | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… | `FunctionalAction` |
+| [`ActivityAction`](#activityaction) | `action def` | Activity action definition specializing `FunctionalAction`. | `FunctionalAction` |
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
 | [`TimingConstraint`](#timingconstraint) | `requirement def` | Timing constraint definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 
@@ -109,7 +109,7 @@ requirement def BehaviorProperty :> MemoRequirementElement
 
 | Property | Value |
 | --- | --- |
-| Description | A behavioural obligation, such as an invariant, transition rule, temporal claim, assumption, or guarantee. It is a `requirement def` because that is what it is: a claim the design must meet and a verification case can `verify`.… |
+| Description | Behavior property definition specializing `MemoRequirementElement`. |
 | Kind | `requirement def` |
 | Abstract | No |
 | Specializes | `MemoRequirementElement` |
@@ -139,7 +139,7 @@ action def ActivityAction specializes FunctionalAction
 
 | Property | Value |
 | --- | --- |
-| Description | `part def PropertySet specializes VerifiableElement { attribute propertySetScope : String; }` stood here and is DELETED (plan C3, open question §14.6).… |
+| Description | Activity action definition specializing `FunctionalAction`. |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `FunctionalAction` |

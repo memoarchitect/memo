@@ -38,7 +38,7 @@
 | [`EarsPatternKind`](#earspatternkind) | `enum def` | Controlled values for ears pattern: `ubiquitous`, `eventDriven`, `stateDriven`, `optionalFeature`, `unwantedBehavior`, `complex`. | — |
 | [`ObligationKind`](#obligationkind) | `enum def` | Controlled values for obligation: `shall`, `should`, `will`. | — |
 | [`InterfaceKind`](#interfacekind) | `enum def` | Controlled values for interface: `data`, `control`, `analogSignal`, `digitalSignal`, `power`, `network`, `api`, `userInteraction`, `notification`, `logging`, `mechanical`, `fluidic`. | — |
-| [`PortCategoryKind`](#portcategorykind) | `enum def` | Controlled values for port category: `data`, `eventData`. | — |
+| [`PortCategoryKind`](#portcategorykind) | `enum def` | Sampled. The reader sees the most recent value; a missed deadline drops a sample and never blocks. | — |
 | [`FlowKind`](#flowkind) | `enum def` | Controlled values for flow: `information`, `command`, `status`, `telemetry`, `alarm`, `configuration`, `measurement`, `audit`, `power`. | — |
 | [`DirectionKind`](#directionkind) | `enum def` | Direction of a flow across a boundary. Track A2 removed this from PORTS: a port usage says `in` / `out` / `inout` natively, which is the language's own spelling and the only one a conforming tool reads.… | — |
 | [`CriticalityKind`](#criticalitykind) | `enum def` | Controlled values for criticality: `low`, `medium`, `high`, `catastrophic`. | — |
@@ -245,7 +245,7 @@ enum def PortCategoryKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for port category: `data`, `eventData`. |
+| Description | Sampled. The reader sees the most recent value; a missed deadline drops a sample and never blocks. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |

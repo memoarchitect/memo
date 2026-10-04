@@ -36,9 +36,9 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`TestStep`](#teststep) | `action def` | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. `status` is NOT redeclared here.… | `MemoAction` |
-| [`VerificationCase`](#verificationcase) | `verification def` | Verification case definition specializing `MemoVerificationCase,`. | `MemoVerificationCase,` |
-| [`PerformsStep`](#performsstep) | `connection def` | Typed relationship for performs step. | `MemoRelationship` |
+| [`TestStep`](#teststep) | `action def` | Test step definition specializing `MemoAction`. | `MemoAction` |
+| [`VerificationCase`](#verificationcase) | `verification def` | Verification case definition specializing `MemoVerificationCase`. | `MemoVerificationCase` |
+| [`PerformsStep`](#performsstep) | `connection def` | Typed relationship from `MemoVerificationCase` to `TestStep`. | `MemoRelationship` |
 | [`ValidationCase`](#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. | `MemoVerificationCase` |
 
 ## TestStep
@@ -49,7 +49,7 @@ action def TestStep specializes MemoAction
 
 | Property | Value |
 | --- | --- |
-| Description | Verification and validation cases are SysML v2 verification cases (behaviours that check requirements), not verifiable structures — they derive from the MemoVerificationCase foundation, not MemoPart. `status` is NOT redeclared here.… |
+| Description | Test step definition specializing `MemoAction`. |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
@@ -64,10 +64,10 @@ verification def VerificationCase :> MemoVerificationCase, VerificationCases::Ve
 
 | Property | Value |
 | --- | --- |
-| Description | Verification case definition specializing `MemoVerificationCase,`. |
+| Description | Verification case definition specializing `MemoVerificationCase`. |
 | Kind | `verification def` |
 | Abstract | No |
-| Specializes | `MemoVerificationCase,` |
+| Specializes | `MemoVerificationCase` |
 | Owning package | `memo_assurance_verification_validation` |
 
 
@@ -79,7 +79,7 @@ connection def PerformsStep :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for performs step. |
+| Description | Typed relationship from `MemoVerificationCase` to `TestStep`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

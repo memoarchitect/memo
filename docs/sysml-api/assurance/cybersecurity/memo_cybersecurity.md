@@ -46,9 +46,9 @@
 | [`CyberMitigation`](#cybermitigation) | `part def` | Cyber mitigation definition specializing `RiskControlMeasure`. | `RiskControlMeasure` |
 | [`SecurityRequirement`](#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. | `Requirement` |
 | [`TrustBoundary`](#trustboundary) | `part def` | Trust boundary definition specializing `InterfaceElement`. | `InterfaceElement` |
-| [`Exploits`](#exploits) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
-| [`RealizedByScenario`](#realizedbyscenario) | `connection def` | Typed relationship for realized by scenario. | `MemoRelationship` |
-| [`ImpactsSafety`](#impactssafety) | `connection def` | Typed relationship for impacts safety. | `MemoRelationship` |
+| [`Exploits`](#exploits) | `connection def` | Typed relationship from `RequirementDriver` to `Vulnerability`. | `MemoRelationship` |
+| [`RealizedByScenario`](#realizedbyscenario) | `connection def` | Typed relationship from `RequirementDriver` to `OperativeScenario`. | `MemoRelationship` |
+| [`ImpactsSafety`](#impactssafety) | `connection def` | Typed relationship from `MemoPart` to `RiskItem`. | `MemoRelationship` |
 
 ## CybersecurityAsset
 
@@ -193,7 +193,7 @@ connection def Exploits :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Description | Typed relationship from `RequirementDriver` to `Vulnerability`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -208,7 +208,7 @@ connection def RealizedByScenario :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for realized by scenario. |
+| Description | Typed relationship from `RequirementDriver` to `OperativeScenario`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -223,7 +223,7 @@ connection def ImpactsSafety :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for impacts safety. |
+| Description | Typed relationship from `MemoPart` to `RiskItem`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

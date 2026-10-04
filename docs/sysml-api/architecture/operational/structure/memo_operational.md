@@ -34,7 +34,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`IntendedUse`](#intendeduse) | `requirement def` | IEC 62366-1 / ISO 14971 intended use: the medical device's declared purpose and the root of the operational spine. A MemoMission, because "mission" has no medical-device meaning — intended use is what a device exists to do.… | `MemoMission` |
+| [`IntendedUse`](#intendeduse) | `requirement def` | Intended use definition specializing `MemoMission`. | `MemoMission` |
 | [`OperationalEntity`](#operationalentity) | `part def` | Operational entity definition specializing `MemoPart`. | `MemoPart` |
 | [`OperationalCapability`](#operationalcapability) | `part def` | Operational capability definition specializing `MemoPart`. | `MemoPart` |
 | [`RequiresCapability`](#requirescapability) | `connection def` | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). | `MemoRelationship` |
@@ -48,7 +48,7 @@ requirement def IntendedUse :> MemoMission
 
 | Property | Value |
 | --- | --- |
-| Description | IEC 62366-1 / ISO 14971 intended use: the medical device's declared purpose and the root of the operational spine. A MemoMission, because "mission" has no medical-device meaning — intended use is what a device exists to do.… |
+| Description | Intended use definition specializing `MemoMission`. |
 | Kind | `requirement def` |
 | Abstract | No |
 | Specializes | `MemoMission` |

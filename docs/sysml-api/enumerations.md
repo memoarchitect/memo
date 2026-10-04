@@ -9,14 +9,14 @@ SysML `enum def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`RuntimeKind`](architecture/implementation/software/runtime/memo_software_runtime.md#runtimekind) | `enum def` | process / thread / task / service / container / partition / dataStore / messageBroker. | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
+| [`RuntimeKind`](architecture/implementation/software/runtime/memo_software_runtime.md#runtimekind) | `enum def` | Controlled values for runtime: `process`, `thread`, `task`, `service`, `container`, `partition`, `dataStore`, `messageBroker`. | [`architecture/implementation/software/runtime/memo_software_runtime.sysml`](architecture/implementation/software/runtime/memo_software_runtime.md) |
 
 
 ## `memo::architecture::implementation::software::structure`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ModuleKind`](architecture/implementation/software/structure/memo_software_structure.md#modulekind) | `enum def` | Module-view element (design responsibility). Runtime properties (period, WCET, scheduling) moved to SoftwareComponent. item / unit / package / library / code / firmware / soup (IEC 62304). | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
+| [`ModuleKind`](architecture/implementation/software/structure/memo_software_structure.md#modulekind) | `enum def` | Controlled values for module: `unit`, `code`, `firmware`, `soup`. | [`architecture/implementation/software/structure/memo_software_structure.sysml`](architecture/implementation/software/structure/memo_software_structure.md) |
 
 
 ## `memo::architecture::implementation::ui`
@@ -72,7 +72,7 @@ SysML `enum def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ControlNodeKind`](architecture/operational/workflows/memo_workflows.md#controlnodekind) | `enum def` | decision / fork / join / handoff. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`ControlNodeKind`](architecture/operational/workflows/memo_workflows.md#controlnodekind) | `enum def` | Controlled values for control node: `decision`, `handoff`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`StepTransformationKind`](architecture/operational/workflows/memo_workflows.md#steptransformationkind) | `enum def` | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`TransformKind`](architecture/operational/workflows/memo_workflows.md#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowStateKind`](architecture/operational/workflows/memo_workflows.md#workflowstatekind) | `enum def` | As-is vs. to-be vs. contingency is a typed dimension of the workflow, not a name suffix. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
@@ -177,7 +177,7 @@ SysML `enum def` declarations in `src/`.
 | [`NotificationPriorityKind`](core/enumerations/memo_enumerations.md#notificationprioritykind) | `enum def` | Notification/alarm priority as used by source requirement documents (e.g. CriSys GPCA REQ 59 action table: High/Med/Low). | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`ObligationKind`](core/enumerations/memo_enumerations.md#obligationkind) | `enum def` | Controlled values for obligation: `shall`, `should`, `will`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`OperationalEntityKind`](core/enumerations/memo_enumerations.md#operationalentitykind) | `enum def` | Controlled values for operational entity: `human`, `externalSystem`, `environmentalEntity`, `regulatoryBody`, `device`, `informationArtifact`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
-| [`PortCategoryKind`](core/enumerations/memo_enumerations.md#portcategorykind) | `enum def` | Controlled values for port category: `data`, `eventData`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
+| [`PortCategoryKind`](core/enumerations/memo_enumerations.md#portcategorykind) | `enum def` | Sampled. The reader sees the most recent value; a missed deadline drops a sample and never blocks. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`PortDisplayKind`](core/enumerations/memo_enumerations.md#portdisplaykind) | `enum def` | Controlled values for port display: `everything`, `ports`, `hidden`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`PresentationKind`](core/enumerations/memo_enumerations.md#presentationkind) | `enum def` | Controlled values for presentation: `blockDiagram`, `internalDiagram`, `activityDiagram`, `stateDiagram`, `riskTable`, `traceMatrix`, `narrativeSection`, `screenLayout`, `custom`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`ProbabilityKind`](core/enumerations/memo_enumerations.md#probabilitykind) | `enum def` | Qualitative likelihood of occurrence (ISO 14971 / AAMI TIR style Likert scale), used wherever a hazard, failure, or fault-tree event carries a qualitative occurrence estimate rather than a measured rate. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |

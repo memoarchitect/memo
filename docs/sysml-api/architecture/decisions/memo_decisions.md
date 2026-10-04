@@ -35,8 +35,8 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`DesignDecision`](#designdecision) | `part def` | Design decision definition specializing `MemoPart`. | `MemoPart` |
-| [`DecisionRecordedInADR`](#decisionrecordedinadr) | `connection def` | Typed relationship for decision recorded in adr. | `MemoRelationship` |
-| [`Decides`](#decides) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
+| [`DecisionRecordedInADR`](#decisionrecordedinadr) | `connection def` | Typed relationship from `DesignDecision` to `ADRArtifact`. | `MemoRelationship` |
+| [`Decides`](#decides) | `connection def` | Typed relationship from `DesignDecision` to `MemoPart`. | `MemoRelationship` |
 
 ## DesignDecision
 
@@ -61,7 +61,7 @@ connection def DecisionRecordedInADR :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for decision recorded in adr. |
+| Description | Typed relationship from `DesignDecision` to `ADRArtifact`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -76,7 +76,7 @@ connection def Decides :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Description | Typed relationship from `DesignDecision` to `MemoPart`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

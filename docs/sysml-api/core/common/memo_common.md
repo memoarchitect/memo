@@ -32,7 +32,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`MemoIdentity`](#memoidentity) | `metadata def` | The metaclass-agnostic carrier for MEMO's identity fields. A `metadata def` annotates an element of ANY metaclass — restriction is opt-in through `annotatedElement`, and this one declares none.… | — |
+| [`MemoIdentity`](#memoidentity) | `metadata def` | Memo identity definition. | — |
 | [`MemoPart`](#memopart) | `part def` | Memo part definition. | — |
 | [`RequirementDriver`](#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. | `MemoPart` |
 | [`VerifiableElement`](#verifiableelement) | `part def` | Verifiable element definition specializing `MemoPart`. | `MemoPart` |
@@ -63,7 +63,7 @@ metadata def MemoIdentity
 
 | Property | Value |
 | --- | --- |
-| Description | The metaclass-agnostic carrier for MEMO's identity fields. A `metadata def` annotates an element of ANY metaclass — restriction is opt-in through `annotatedElement`, and this one declares none.… |
+| Description | Memo identity definition. |
 | Kind | `metadata def` |
 | Abstract | No |
 | Specializes | — |

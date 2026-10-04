@@ -36,9 +36,9 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`UseError`](#useerror) | `part def` | Use error definition specializing `MemoPart`. | `MemoPart` |
-| [`CommitsUseError`](#commitsuseerror) | `connection def` | Typed relationship for commits use error. | `MemoRelationship` |
-| [`EvaluatesTask`](#evaluatestask) | `connection def` | Typed relationship for evaluates task. | `MemoRelationship` |
-| [`TestedByUsability`](#testedbyusability) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package.… | `MemoRelationship` |
+| [`CommitsUseError`](#commitsuseerror) | `connection def` | Typed relationship from `OperativeAction` to `UseError`. | `MemoRelationship` |
+| [`EvaluatesTask`](#evaluatestask) | `connection def` | Typed relationship from `MemoEvidence` to `OperativeAction`. | `MemoRelationship` |
+| [`TestedByUsability`](#testedbyusability) | `connection def` | Typed relationship from `any element` to `MemoVerificationCase`. | `MemoRelationship` |
 
 ## UseError
 
@@ -63,7 +63,7 @@ connection def CommitsUseError :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for commits use error. |
+| Description | Typed relationship from `OperativeAction` to `UseError`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -78,7 +78,7 @@ connection def EvaluatesTask :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for evaluates task. |
+| Description | Typed relationship from `MemoEvidence` to `OperativeAction`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -93,7 +93,7 @@ connection def TestedByUsability :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package.… |
+| Description | Typed relationship from `any element` to `MemoVerificationCase`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
