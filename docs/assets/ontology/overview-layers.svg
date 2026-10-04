@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 914" width="1480" height="914" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="MEMO's architecture layers, stacked, with the assurance disciplines across them">
+<defs>
+  <marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e07a1f"/></marker>
+  <marker id="red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c7433f"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="270" y="34" font-size="15" font-weight="800" fill="#123b6b">ARCHITECTURE LAYERS · the device, from purpose to deployment</text>
+  <line x1="170" y1="60" x2="170" y2="356" stroke="#2f6fc4" stroke-width="3"/>
+  <text transform="translate(154 208) rotate(-90)" text-anchor="middle" font-size="16" font-weight="800" fill="#123b6b">Understanding the need</text>
+  <line x1="170" y1="412" x2="170" y2="884" stroke="#2f6fc4" stroke-width="3"/>
+  <text transform="translate(154 648) rotate(-90)" text-anchor="middle" font-size="16" font-weight="800" fill="#123b6b">Designing the solution</text>
+  
+  <polygon points="270,60 1030,60 970,180 210,180" fill="#dbe8fb" stroke="#2f6fc4" stroke-width="1.5"/>
+  <text x="292" y="88" font-size="19" font-weight="800" fill="#123b6b">Operational</text>
+  <text x="292" y="108" font-size="14" font-style="italic" fill="#2c4f7a">Why does the device exist, for whom, in what setting?</text>
+  <rect x="292" y="120" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="372" y="142" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">UseCase</text><rect x="464" y="120" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="544" y="142" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">OperationalWorkflow</text><rect x="636" y="120" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="716" y="142" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">OperativeScenario</text><rect x="808" y="120" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="888" y="142" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">OperativeAction</text>
+  <path d="M250 184 C 220 210, 220 210, 250 232" fill="none" stroke="#e07a1f" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#orange)"/>
+  <text x="264" y="213" font-size="13" font-style="italic" fill="#b25a0c">perform · #refinement</text>
+  <polygon points="270,236 1030,236 970,356 210,356" fill="#d3e3fa" stroke="#2f6fc4" stroke-width="1.5"/>
+  <text x="292" y="264" font-size="19" font-weight="800" fill="#123b6b">Functional</text>
+  <text x="292" y="284" font-size="14" font-style="italic" fill="#2c4f7a">What must the system do?</text>
+  <rect x="292" y="296" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="372" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">SystemFunction</text><rect x="464" y="296" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="544" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">ComponentFunction</text><rect x="636" y="296" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="716" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">FunctionalFlow</text><rect x="808" y="296" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="888" y="318" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">StateMachine</text>
+  <path d="M250 360 C 220 386, 220 386, 250 408" fill="none" stroke="#e07a1f" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#orange)"/>
+  <text x="264" y="389" font-size="13" font-style="italic" fill="#b25a0c">allocate</text>
+  <polygon points="270,412 1030,412 970,532 210,532" fill="#cadcf7" stroke="#2f6fc4" stroke-width="1.5"/>
+  <text x="292" y="440" font-size="19" font-weight="800" fill="#123b6b">Logical</text>
+  <text x="292" y="460" font-size="14" font-style="italic" fill="#2c4f7a">How is the solution organised, before choosing a technology?</text>
+  <rect x="292" y="472" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="372" y="494" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">LogicalComponent</text><rect x="464" y="472" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="544" y="494" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">LogicalPort</text><rect x="636" y="472" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="716" y="494" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">ComponentExchange</text><rect x="808" y="472" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="888" y="494" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">IsolationBoundary</text>
+  <path d="M250 536 C 220 562, 220 562, 250 584" fill="none" stroke="#e07a1f" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#orange)"/>
+  <text x="264" y="565" font-size="13" font-style="italic" fill="#b25a0c">#refinement</text>
+  <polygon points="270,588 1030,588 970,708 210,708" fill="#c1d5f4" stroke="#2f6fc4" stroke-width="1.5"/>
+  <text x="292" y="616" font-size="19" font-weight="800" fill="#123b6b">Implementation</text>
+  <text x="292" y="636" font-size="14" font-style="italic" fill="#2c4f7a">What is it built from?</text>
+  <rect x="292" y="648" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="372" y="670" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">SoftwareModule</text><rect x="464" y="648" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="544" y="670" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">SoftwareComponent</text><rect x="636" y="648" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="716" y="670" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">HardwareComponent</text><rect x="808" y="648" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="888" y="670" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">UIElement</text>
+  <path d="M250 712 C 220 738, 220 738, 250 760" fill="none" stroke="#e07a1f" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#orange)"/>
+  <text x="264" y="741" font-size="13" font-style="italic" fill="#b25a0c">BuildsInto · DeploysTo</text>
+  <polygon points="270,764 1030,764 970,884 210,884" fill="#b8cef1" stroke="#2f6fc4" stroke-width="1.5"/>
+  <text x="292" y="792" font-size="19" font-weight="800" fill="#123b6b">Realization</text>
+  <text x="292" y="812" font-size="14" font-style="italic" fill="#2c4f7a">Where does it run, and how do its parts reach each other?</text>
+  <rect x="292" y="824" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="372" y="846" text-anchor="middle" font-size="12" font-weight="700" fill="#123b6b">SoftwareDeploymentUnit</text><rect x="464" y="824" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="544" y="846" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">ProcessingNode</text><rect x="636" y="824" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="716" y="846" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">RuntimeEnvironment</text><rect x="808" y="824" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="888" y="846" text-anchor="middle" font-size="14" font-weight="700" fill="#123b6b">EndToEndFlow</text>
+<rect x="1180" y="50" width="270" height="844" rx="14" fill="#c7433f"/>
+<text x="1200" y="78" font-size="15" font-weight="800" fill="#ffffff">ASSURANCE · across every layer</text>
+  <text x="1200" y="128" font-size="16" font-weight="800" fill="#ffffff">Requirements</text>
+  <text x="1200" y="148" font-size="12.5" fill="#fde7e6">Need · Requirement</text>
+  <text x="1200" y="277.6" font-size="16" font-weight="800" fill="#ffffff">Safety and risk</text>
+  <text x="1200" y="297.6" font-size="12.5" fill="#fde7e6">Hazard · Risk · RiskControlMeasure</text>
+  <text x="1200" y="427.2" font-size="16" font-weight="800" fill="#ffffff">Cybersecurity</text>
+  <text x="1200" y="447.2" font-size="12.5" fill="#fde7e6">Threat · Vulnerability · CyberMitigation</text>
+  <text x="1200" y="576.8" font-size="16" font-weight="800" fill="#ffffff">Human factors</text>
+  <text x="1200" y="596.8" font-size="12.5" fill="#fde7e6">UseError</text>
+  <text x="1200" y="726.4" font-size="16" font-weight="800" fill="#ffffff">Verification and validation</text>
+  <text x="1200" y="746.4" font-size="12.5" fill="#fde7e6">VerificationCase · ValidationCase</text>
+  <line x1="1174" y1="120" x2="1008" y2="120" stroke="#c7433f" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#red)"/>
+  <text x="1092" y="112" text-anchor="middle" font-size="12" font-style="italic" fill="#a12e2a">Motivates · Validates</text>
+  <line x1="1174" y1="296" x2="1008" y2="296" stroke="#c7433f" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#red)"/>
+  <text x="1092" y="288" text-anchor="middle" font-size="12" font-style="italic" fill="#a12e2a">satisfy · subject</text>
+  <line x1="1174" y1="472" x2="1008" y2="472" stroke="#c7433f" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#red)"/>
+  <text x="1092" y="464" text-anchor="middle" font-size="12" font-style="italic" fill="#a12e2a">satisfy</text>
+  <line x1="1174" y1="648" x2="1008" y2="648" stroke="#c7433f" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#red)"/>
+  <text x="1092" y="640" text-anchor="middle" font-size="12" font-style="italic" fill="#a12e2a">ControlImplementedBy</text>
+  <line x1="1174" y1="824" x2="1008" y2="824" stroke="#c7433f" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#red)"/>
+  <text x="1092" y="816" text-anchor="middle" font-size="12" font-style="italic" fill="#a12e2a">satisfy</text>
+</svg>

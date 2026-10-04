@@ -3,88 +3,94 @@
 !!! question "The question this layer answers"
     **Why does the device exist, for whom, and in what setting?**
 
-The operational layer models the world the device enters before it names the
-device's parts. That world contains the people who will use it, the goals they
-pursue, the settings they work in, and the work they already do. Modeling it
-first keeps the device honest about the work it claims to improve. It also
-gives every later layer something to be judged against: a function is needed
-because some work needs it, and a validation is passed because a user reached
-a goal.
+The operational layer models the work the device enters, before it names any
+part of the device. Its heart is four elements: the **goal** a user pursues
+(`UseCase`), the **workflow** that realises it, the **scenarios** that are
+paths through the workflow, and the **actions** those scenarios are made of.
+Everything else on this page supports those four.
 
-The layer never mentions the device's internals. Its subject is the work, not
-the solution.
+[![The operational layer: use case, workflow, scenario and action at the centre, with who, why and where around them](../assets/ontology/operational.svg){ .memo-presentation-graphic }](../assets/ontology/operational.svg){ title="Open full size" }
 
-**Namespace:** `memo::architecture::operational` · **Source:** `src/architecture/operational/`
+The colours say which part of MEMO an element belongs to: **blue** is
+architecture, **red** is assurance. A solid line is one of MEMO's own
+relationships, a dashed line is native SysML, a diamond is containment, and a
+dotted line is a reference. [How to read the figures](index.md#how-to-read-the-figures)
 
-## Key elements
+## Building it up
 
-**Who.** A `User` is a human who interacts with the device: the intended user of
-IEC 62366-1, and MEMO's only human actor type. `OperationalParticipant` is the
-abstract parent for anyone who takes part in the operational world.
-An `OperationalEntity` is anything else with a responsibility there, classified
-by `entityKind`: a human, an external system, an environmental entity, a
-regulatory body, a device, or an information artifact.
+### Step 1 · The work
 
-**Why.** `IntendedUse` is the device's declared purpose (IEC 62366-1, ISO 14971)
-and the root of the operational spine. It requires `OperationalCapability`s, and
-each capability enables one or more `UseCase`s. A `UseCase` is a standard SysML
-use case: a goal held by an actor, with the system as its subject.
+[![Step 1: UseCase, OperationalWorkflow, OperativeScenario, OperativeAction](../assets/ontology/operational-step1.svg){ .memo-presentation-graphic }](../assets/ontology/operational-step1.svg){ title="Open full size" }
 
-**Where.** A `UseContext` describes a setting of use: its care setting,
-jurisdiction, and whether use is connected. A `UseEnvironment` is the physical and organisational
-environment it is situated in (IEC 62366-1, 3.20). The two are kept separate so
-an environment can be reused across contexts.
+Start from the goal. A `UseCase` is a standard SysML use case: a goal held by an
+actor, with the system as its subject. An `OperationalWorkflow` is how the work
+toward that goal is organised, and it realises the use case
+(`RealizesUseCase`). Many workflows can realise one use case.
 
-**What people do.** `OperativeAction` is one operational action or step. Who
-performs it, a user or the system, is said natively with `perform` rather than
-by a subtype, so an action can move from user to system without changing type.
-A user task is simply an `OperativeAction` a `User` performs, and finer steps
-are nested actions. An `OperationalWorkflow` organises that work and realises a use case.
-An `OperativeScenario` is one concrete path through the work, with a
-`scenarioKind` that says which kind of scenario it is. A
-`TaskDifficultyAssessment` records how demanding a task is in its context.
+A workflow contains its scenarios (`OperativeScenario`): one nominal path, and alternate
+paths for exceptions and recovery, told apart by `scenarioKind`. Each scenario
+contains the actions (`OperativeAction`) it is made of, ordered natively with
+`first … then`, and an action can nest finer steps.
 
-## How it connects
+### Step 2 · Who and why
 
-**Within the layer.** An intended use requires capabilities
-(`RequiresCapability`), and capabilities enable use cases (`EnablesUseCase`). A
-workflow realises a use case (`RealizesUseCase`). A context is situated in an
-environment (`SituatedIn`). Users join a use case natively, as its `actor`.
+[![Step 2: User, Need, IntendedUse, OperationalCapability](../assets/ontology/operational-step2.svg){ .memo-presentation-graphic }](../assets/ontology/operational-step2.svg){ title="Open full size" }
 
-**To other layers and disciplines:**
+A `User` pursues the use case as its native `actor`, and performs actions
+(`perform`). Who performs an action is a relationship, not a type, so an action
+can move from the user to the system without being remodelled.
 
-- A **need** motivates a use case (`Motivates`), and is held by a participant
-  (`HeldBy`). Both come from [Requirements](requirements.md).
-- The **functional layer** answers this one: an action `perform`s the function
-  that supports the work. See [Functional](functional.md).
-- **Human factors** attaches to tasks. A task can be where a use error is
-  committed (`CommitsUseError`), and usability evidence evaluates a task
-  (`EvaluatesTask`).
-- **Safety** and **cybersecurity** tie their scenarios here. A risk item relates
-  to an operative scenario (`HazardRelatedScenario`), and a threat is realised
-  by one (`RealizedByScenario`).
-- A **validation case** validates a use case or task (`Validates`). See
-  [Verification and validation](verification-validation.md).
+The goal exists for reasons. A `Need`, from [Requirements](requirements.md),
+motivates the use case (`Motivates`). Above it all, the `IntendedUse` is the
+device's declared purpose (IEC 62366-1, ISO 14971). It requires
+operational capabilities (`OperationalCapability`, via `RequiresCapability`), and each capability enables use
+cases (`EnablesUseCase`).
+
+### Step 3 · Where
+
+[![Step 3: UseContext and UseEnvironment](../assets/ontology/operational-step3.svg){ .memo-presentation-graphic }](../assets/ontology/operational-step3.svg){ title="Open full size" }
+
+A scenario happens in a `UseContext`: its care setting, its jurisdiction, and
+whether use is connected. The context is situated in a `UseEnvironment`, the
+physical and organisational environment (IEC 62366-1, 3.20). Keeping the two
+apart lets one environment serve several contexts.
+
+### Step 4 · Supporting detail
+
+[![Step 4: WorkflowControlNode and TaskDifficultyAssessment](../assets/ontology/operational-step4.svg){ .memo-presentation-graphic }](../assets/ontology/operational-step4.svg){ title="Open full size" }
+
+A workflow's decisions, forks, joins and handoffs are control nodes inside it
+(`WorkflowControlNode`). A `TaskDifficultyAssessment` records how demanding an action is in
+its context (`AssessesDifficulty`), which feeds the human-factors analysis.
+
+## Where it leads
+
+- **Down to [Functional](functional.md):** the functional layer answers this one.
+  An action performs (`perform`) the function that carries it out, and functional steps
+  refine operational actions (`#refinement`).
+- **Across to assurance:** a task is where a use error is committed
+  (`CommitsUseError`, [Human factors](human-factors.md)); risk items and threats
+  play out in scenarios (`HazardRelatedScenario`, `RealizedByScenario`); and a
+  validation case validates a use case or task (`Validates`,
+  [Verification and validation](verification-validation.md)).
 
 ## In the running example
 
-The ICU nurse is the user. *Monitor patient temperature* is the use case she
-initiates, with the supporting system as its subject. *Acknowledge alarm* is a
+In the temperature alarm, the ICU nurse is the user. *Monitor patient
+temperature* is the use case the nurse initiates, and *acknowledge alarm* is a
 high-criticality task inside the work of reviewing an alarm.
 
 ```sysml
 --8<-- "examples/temperature-alarm/model/catalog/temperature_alarm.sysml:operational"
 ```
 
-## The full inventory
+The GPCA infusion pump shows the full shape: a workflow such as *manage active
+therapy* contains a nominal scenario and alternates such as *bolus request
+during lockout*. Read it [layer by layer](../layers/use-cases.md).
 
-Generated from `src/architecture/operational/`.
+<details markdown="1">
+<summary><strong>Every element and relationship in this layer</strong> (generated from <code>src/architecture/operational/</code>)</summary>
 
 --8<-- "docs/ontology/_generated/operational.md"
 
-## Go deeper
-
-- The GPCA infusion pump, told layer by layer:
-  [context and use](../layers/context.md), [use cases](../layers/use-cases.md),
-  and [the operational world](../layers/operational-world.md).
-- [The operational API](../sysml-api/index.md#architecture).
+</details>

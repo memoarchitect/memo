@@ -944,3 +944,11 @@
   .memo-semantic-thread { display: grid; grid-template-columns: 1fr; }
   .memo-semantic-thread i { display: none; }
 }
+.md-typeset .memo-swatch {
+  display: inline-block;
+  width: 1.1em;
+  height: 0.8em;
+  border: 2px solid;
+  border-radius: 3px;
+  vertical-align: -0.05em;
+}

@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1310 662" width="1310" height="662" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Operational layer, step 4: Supporting detail: workflow control and task difficulty">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2a37"/></marker>
+  <marker id="diamond" viewBox="0 0 14 10" refX="13" refY="5" markerWidth="14" markerHeight="10" orient="auto-start-reverse"><path d="M1,5 L7,1 L13,5 L7,9 z" fill="#1f2a37"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="40" font-size="18" font-weight="800" fill="#123b6b">Operational layer · the whole picture</text>
+<g opacity="1">
+  <line x1="825" y1="220" x2="825" y2="132" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="762.5" y="165" width="125" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="825" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">RealizesUseCase</text>
+</g>
+<g opacity="1">
+  <line x1="825" y1="282" x2="825" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="788.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="825" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+</g>
+<g opacity="1">
+  <line x1="825" y1="432" x2="825" y2="520" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="788.4" y="465" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="825" y="480" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+</g>
+<g opacity="1">
+  <line x1="860.1333333333333" y1="132" x2="1129.8666666666666" y2="370" stroke="#4b5866" stroke-width="1.6" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+  <rect x="969.5" y="240" width="51" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="995" y="255" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">actor</text>
+</g>
+<g opacity="1">
+  <line x1="1094.7333333333333" y1="432" x2="895.2666666666667" y2="520" stroke="#4b5866" stroke-width="1.6" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+  <rect x="962.1" y="465" width="65.80000000000001" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="995" y="480" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">perform</text>
+</g>
+<g opacity="1">
+  <line x1="1060" y1="101" x2="930" y2="101" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="954.7" y="90" width="80.60000000000001" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="995" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">Motivates</text>
+</g>
+<g opacity="1">
+  <line x1="250" y1="101" x2="380" y2="101" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="241.39999999999998" y="90" width="147.20000000000002" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="315" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">RequiresCapability</text>
+</g>
+<g opacity="1">
+  <line x1="590" y1="101" x2="720" y2="101" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="596.2" y="90" width="117.60000000000001" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="655" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">EnablesUseCase</text>
+</g>
+<g opacity="1">
+  <line x1="720" y1="401" x2="590" y2="401" stroke="#4b5866" stroke-width="1.6" stroke-dasharray="2 4" marker-end="url(#arrow)"/>
+  <rect x="611" y="390" width="88" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="655" y="405" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">useContext</text>
+</g>
+<g opacity="1">
+  <line x1="380" y1="401" x2="250" y2="401" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="271" y="390" width="88" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="315" y="405" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">SituatedIn</text>
+</g>
+<g opacity="1">
+  <line x1="720" y1="251" x2="590" y2="251" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="618.4" y="240" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="655" y="255" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+</g>
+<g opacity="1">
+  <line x1="590" y1="551" x2="720" y2="551" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="581.4" y="540" width="147.20000000000002" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="655" y="555" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">AssessesDifficulty</text>
+</g>
+<g opacity="1">
+  <rect x="720" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="720" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="825" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«use case»</text>
+  <text x="825" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UseCase</text>
+  
+</g>
+<g opacity="1">
+  <rect x="720" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="720" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="825" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="825" y="265" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">OperationalWorkflow</text>
+  
+</g>
+<g opacity="1">
+  <rect x="720" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="720" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="825" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="825" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">OperativeScenario</text>
+  
+</g>
+<g opacity="1">
+  <rect x="720" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="720" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="825" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="825" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">OperativeAction</text>
+  
+</g>
+<g opacity="1">
+  <rect x="1060" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1060" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1165" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1165" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">User</text>
+  
+</g>
+<g opacity="1">
+  <rect x="1060" y="70" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
+  <rect x="1060" y="70" width="6" height="62" rx="3" fill="#c7433f"/>
+  <text x="1165" y="93" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement»</text>
+  <text x="1165" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Need</text>
+  
+</g>
+<g opacity="1">
+  <rect x="40" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="40" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="145" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«requirement»</text>
+  <text x="145" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">IntendedUse</text>
+  
+</g>
+<g opacity="1">
+  <rect x="380" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="380" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="485" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="485" y="115" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">OperationalCapability</text>
+  
+</g>
+<g opacity="1">
+  <rect x="380" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="380" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="485" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="485" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UseContext</text>
+  
+</g>
+<g opacity="1">
+  <rect x="40" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="40" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="145" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UseEnvironment</text>
+  
+</g>
+<g opacity="1">
+  <rect x="380" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="380" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="485" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="485" y="265" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">WorkflowControlNode</text>
+  
+</g>
+<g opacity="1">
+  <rect x="380" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="380" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="485" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="485" y="565" text-anchor="middle" font-size="13.5" font-weight="700" fill="#123b6b">TaskDifficultyAssessment</text>
+  
+</g>
+<rect x="40" y="622" width="16" height="16" rx="3" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="2"/><text x="64" y="635" font-size="13" fill="#2c3640">Architecture</text>
+  <rect x="170" y="622" width="16" height="16" rx="3" fill="#fdebea" stroke="#c7433f" stroke-width="2"/><text x="194" y="635" font-size="13" fill="#2c3640">Assurance</text>
+  <line x1="277.5" y1="630" x2="311.5" y2="630" stroke="#1f2a37" stroke-width="2"  /><text x="319.5" y="635" font-size="13" fill="#2c3640"><tspan font-weight="700">MEMO relationship</tspan></text>
+  <line x1="476.7" y1="630" x2="510.7" y2="630" stroke="#1f2a37" stroke-width="2" stroke-dasharray="7 5" /><text x="518.7" y="635" font-size="13" fill="#2c3640"><tspan font-style="italic">native SysML</tspan></text>
+  <line x1="637.9" y1="630" x2="671.9" y2="630" stroke="#1f2a37" stroke-width="2"  marker-start="url(#diamond)"/><text x="679.9" y="635" font-size="13" fill="#2c3640">contains</text>
+  <line x1="768.7" y1="630" x2="802.7" y2="630" stroke="#1f2a37" stroke-width="2" stroke-dasharray="2 4" /><text x="810.7" y="635" font-size="13" fill="#2c3640">reference</text>
+</svg>
