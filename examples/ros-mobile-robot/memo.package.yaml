@@ -2,5 +2,4 @@ name: ros-mobile-robot
 entrypoint: model/catalog/project.sysml
 include: [model]
 toolchain:
-  compiler: internal
   packager: internal

@@ -2,5 +2,4 @@ name: software-only-medical-device
 entrypoint: model/catalog/project.sysml
 include: [model]
 toolchain:
-  compiler: internal
   packager: internal
