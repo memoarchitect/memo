@@ -6,6 +6,7 @@ package memo_methodology_core {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_consistency_rules::*;
+    private import memo_artifacts_standards_traceability::RegulatoryStandard;
 
     part def MethodologyLibrary :> MemoPart {
         attribute version : String;
@@ -21,8 +22,20 @@ package memo_methodology_core {
     // would be a MEMO-specific identifier where the language has one. The
     // stable rule ID survives on the rule itself, for audit records and
     // diagnostics — a different job from being the reference mechanism.
+    //
+    // A policy selects what it governs in ONE of three ways. A rule (`targetRule`),
+    // as above; every rule that enforces a clause of a standard
+    // (`targetStandard`, written `ref :>> targetStandard = <standard>;`); or every
+    // rule whose subject kind sits in a layer (`targetCategory`, a layer
+    // namespace as `includedLayer` spells it). A selection of several rules is
+    // still one decision with one rationale and one approval, so the tailoring
+    // record reports it once, with the rules it reached; a rule added later that
+    // the selection matches is covered by it. An invariant in the selection keeps
+    // running, as it does for a policy naming it.
     part def RulePolicy :> MemoPart {
-        ref targetRule : MemoConsistencyRule;
+        ref targetRule : MemoConsistencyRule[0..1];
+        ref targetStandard : RegulatoryStandard[0..1];
+        attribute targetCategory : String[0..1];
         // A replacement must be another native constraint. A methodology
         // cannot replace a predicate with a string expression stored here.
         ref replacementRule : MemoConsistencyRule[0..1];

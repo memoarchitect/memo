@@ -28,6 +28,9 @@
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_common::MemoIdentity` |
+| private | `memo_artifacts_standards_traceability::StandardClause` |
+| private | `memo_artifacts_standards_iec_62366_1::*` |
+| private | `memo_artifacts_standards_iso_13485::*` |
 
 ## Declarations
 
@@ -532,11 +535,15 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
 
         private import memo_core_common::*;
         private import memo_core_common::MemoIdentity;
+        private import memo_artifacts_standards_traceability::StandardClause;
+        private import memo_artifacts_standards_iec_62366_1::*;
+        private import memo_artifacts_standards_iso_13485::*;
         // ─── Structure ───────────────────────────────────────────────────────
 
         constraint def ContainmentAcyclicRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-001"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Containment/composition relations (Composes) must form no cycles.";
@@ -546,6 +553,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def NestedPartConnectedRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "AR-IBD-001"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             // Internal-block connectivity is a structural-architecture concern, so
             // the subject is the structural component — not every MemoPart. UI
             // elements, captured evidence, and review comments nest in compositions
@@ -569,6 +577,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-011"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "SoftwareComponent";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Every runtime component must trace to a module-view definition (Realizes).";
@@ -577,7 +586,8 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         }
         constraint def PatientContactCharacterizedRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-032"; }
-            attribute tailoring = RuleTailoringKind::invariant;
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::medicalDevice;
             attribute appliesTo = "PhysicalComponent";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Patient-contact components must identify contact nature and duration (ISO 10993-1).";
@@ -589,7 +599,10 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
 
         constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-040"; }
-            attribute tailoring = RuleTailoringKind::invariant;
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::medicalDevice;
+            // To confirm: inferred from the clause scope; confirm.
+            ref enforces : StandardClause[1..*] = iso13485.iso13485Clause7.iso13485Clause7_3.iso13485Clause7_3_6;
             attribute appliesTo = "MemoFunction";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Safety-critical functions (criticality high or catastrophic) must trace to at least one verification case.";
@@ -598,7 +611,10 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         }
         constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-041"; }
-            attribute tailoring = RuleTailoringKind::invariant;
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::medicalDevice;
+            // To confirm: inferred from the clause scope; the FDA human-factors guidance it also cites is not in the library yet.
+            ref enforces : StandardClause[1..*] = iec62366_1.iec62366_1Clause5.iec62366_1Clause5_9;
             // The selector used to be `[criticality=high]`, which left the
             // catastrophic tasks — the most critical — outside the rule while the
             // predicate still spelled out the catastrophic case. The criticality
@@ -614,7 +630,10 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         }
         constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-042"; }
-            attribute tailoring = RuleTailoringKind::invariant;
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::medicalDevice;
+            // To confirm: inferred from the clause scope; confirm.
+            ref enforces : StandardClause[1..*] = iec62366_1.iec62366_1Clause5.iec62366_1Clause5_3;
             attribute appliesTo = "UseError";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Safety-relevant use errors (severity serious or worse) must trace to a hazard.";
@@ -659,6 +678,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def SatisfiedBySourceKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-060"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Only a requirement or a need is satisfied by something. The source end of SatisfiedBy must conform to MemoRequirementElement.";
@@ -668,6 +688,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def SatisfiedByTargetKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-061"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A requirement is satisfied by a designed part, a behaviour, or a port. Never by another requirement or by a document.";
@@ -677,6 +698,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def VerifiedByTargetKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-062"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A verification case verifies a requirement, a risk control, an architecture element, a behaviour, or a port — something a test can be run against. Not a view, not an evidence record.";
@@ -686,6 +708,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def AllocatedToSourceKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-063"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Allocation runs from a function or a behaviour to where it runs. The source end of AllocatedTo is a part, an action, or a functional exchange (allocated to a component exchange, as ARCADIA allocates one).";
@@ -695,6 +718,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def AllocatedToTargetKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-064"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A function is allocated to a part — including a system or actor — as ARCADIA System Analysis requires; a functional exchange is allocated to a component exchange.";
@@ -704,6 +728,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def ComposesParentKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-065"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A whole in a decomposition is a part, a behaviour, or a state machine. A requirement does not compose anything.";
@@ -713,6 +738,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def ComposesChildKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-066"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A part in a decomposition is a part, a behaviour, a state, or a port — a component owns its ports, and a workflow owns its steps.";
@@ -722,6 +748,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def PrecedesEndKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-067"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Precedence orders things that happen: parts or behaviours, at both ends.";
@@ -731,6 +758,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def PerformsPerformerKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-068"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A performer is an operational entity, an actor, or a system action — a part or a behaviour. The end's own documentation said 'or system action' while its MemoPart type forbade one.";
@@ -740,6 +768,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def BindsToInterfaceEndKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-070"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A port binds to an interface. The bound end is an interface definition, which the former InterfaceElement-typed end could not hold at all — Interface specializes MemoInterface, an interface def, not a part.";
@@ -749,6 +778,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def CrossesTrustBoundaryEndKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-071"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A boundary is a boundary element or a port; what crosses it is an asset, an item, or an exchange: an interface or a flow.";
@@ -769,6 +799,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def ComponentExchangeSourceEndpointKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-072"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A component exchange starts at a port. An exchange that starts at a component names no boundary, so nothing says where on the component it enters or leaves, and no port can carry its item type or direction.";
@@ -778,6 +809,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def ComponentExchangeTargetEndpointKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-073"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A component exchange ends at a port, on the same grounds as CR-ONT-072.";
@@ -794,6 +826,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def ComponentFunctionAllocatedRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-074"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "ComponentFunction";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A component function is the responsibility of exactly one component, and AllocatedTo is what names it. A component function allocated nowhere is a responsibility nobody has accepted; one allocated twice is a responsibility nobody owns. A system-level responsibility with no single owner is a SystemFunction, which allows that.";
@@ -803,6 +836,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def FunctionDecomposesIntoFunctionsRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-075"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "MemoFunction";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "The functional chain decomposes functions into functions. A function composed of a component, or owned by one, is confusing allocation with decomposition — the component is named by AllocatedTo, never by Composes.";
@@ -843,6 +877,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def SoftwareContainsSoftwareRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-077"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "SoftwareElement";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Software contains software. A software element containing a logical or physical one is realization, not containment — that is a refinement dependency.";
@@ -852,6 +887,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def LogicalContainsLogicalRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-078"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "LogicalComponent";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "The logical hierarchy decomposes into logical components. A logical component containing a software module or a physical part is realization — the implementation element refines the logical one, it is not part of it.";
@@ -861,6 +897,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def PhysicalContainsPhysicalRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-079"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "PhysicalElement";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "An assembly contains physical things. PhysicalElement is the shared root the family gained for this rule — PhysicalAssembly and PhysicalComponent previously specialized MemoPart separately, which left no type meaning 'a physical thing' to name here.";
@@ -886,6 +923,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def ExchangeHasFlowRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-076"; }
             attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "ComponentExchange";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A component exchange is the connection between two ports; the flow is what crosses it. An exchange with no flow between its ports declares a path that nothing uses, so its timing and kind describe no transfer.";
@@ -903,6 +941,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def AlternateScenarioHasBaseRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-043"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "OperativeScenario";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "An alternate scenario is a variation of a nominal path, so it belongs to a workflow that has one. An alternate with no nominal sibling is either a workflow with no happy path or a scenario filed under the wrong parent.";
@@ -939,6 +978,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def DerivationGapRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-080"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "MemoRequirementElement";
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "A requirement that others derive from should itself be justified. If nothing is upstream of it and it is not a stakeholder need, the derivation chain dead-ends at an unexplained requirement — the gap an assessor asks about first. Needs are the legitimate roots, so they are exempt by type rather than by convention.";
@@ -954,6 +994,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def CausesCauseKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-082"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A cause is a risk-chain element (a failure mode, failure cause, hazard cause or fault-tree event) or a part that originates one (a component, a use error). A requirement or a behaviour causes nothing.";
@@ -963,6 +1004,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
         constraint def CausesEffectKindRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-083"; }
             attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "An effect is a link in a risk chain, or the fault-tree event a component originates. Not a component, not a requirement.";
