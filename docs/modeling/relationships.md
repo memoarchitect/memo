@@ -17,27 +17,34 @@ declared by the ontology:
 
 ## High-value traceability links
 
-| Relationship | From | To | Use it to say… |
+Most links between architecture layers are **native SysML v2**. MEMO adds its own
+typed relationship only where the native form would lose meaning a
+medical-device argument needs. Each layer page of
+[the ontology](../ontology/index.md) lists every relationship that touches it,
+generated from the source.
+
+| Write | From | To | Use it to say… |
 |---|---|---|---|
+| `actor` (native) | User | UseCase | This user pursues the goal |
 | `Motivates` | Need | UseCase | This need is why the goal exists |
-| `Initiates` | User | UseCase | This user pursues the goal |
-| `Supports` | OperationalWorkflow | UseCase | This organized work supports the goal |
-| `Selects` | MemoScenario | WorkflowStep | This scenario selects this path element |
-| `Enables` | SystemFunction | OperationalActivity | The system enables this work |
-| `AllocatedTo` | Function | Component | This component is responsible for this behavior |
-| `Realizes` | Software / physical element | LogicalComponent | This implementation realizes this responsibility |
-| `BuildsInto` / `DeploysTo` / `HostedBy` | Module / unit / node | Unit / node / runtime | The deployment chain |
-| `DerivesFrom` | Need, risk, or source driver | Requirement | This requirement exists because of this driver |
-| `SatisfiedBy` | Requirement | Design element | This design element satisfies the obligation |
-| `Mitigates` | Risk control | Hazard | This control reduces this hazard (`mitigationKind = hazard`) |
+| `RealizesUseCase` | OperationalWorkflow | UseCase | This organised work realises the goal |
+| `perform` (native) | Action or UI action | Function or scenario | This action carries out that behaviour |
+| `allocate` (native) | Function | Component | This component is responsible for this behaviour |
+| `#refinement dependency` (native) | Realizing element | Realized element | This implementation realises that design element |
+| `allocation … : BuildsInto` / `: DeploysTo` / `: HostedBy` | Module / unit / node | Unit / node / board | The deployment chain |
+| `DerivesFrom` | Need, risk, threat, or other driver | Requirement | This requirement exists because of this driver |
+| `satisfy` (native) | Requirement | Design element | This design element satisfies the obligation |
+| `Mitigates` | Risk control | Hazard or vulnerability | This control reduces this risk item (`mitigationKind`) |
+| `ControlImplementedBy` | Risk control | Design element | This element implements the control |
 | `CommitsUseError` / `Causes` | Task / use error | Use error / hazard | The use-related risk path |
-| `VerifiedBy` / `Validates` | Claim / use case / task | V&V case | This case checks the claim |
-| `ProducesEvidence` | V&V case | Evidence | This activity produced this evidence |
+| `subject` (native) / `Validates` | Verification case / claim, use case, or task | What it checks / validation case | This case checks the claim |
+| `ProducesEvidence` | Verification or validation case | Evidence | This activity produced this evidence |
 
 The ontology includes more specialized links for cybersecurity, FMEA, fault
-trees, lifecycle change, interaction, and document views — every one is a
-`connection def` specializing `MemoRelationship` with typed ends, so the full
-inventory is discoverable in `src/core/relationships` and each domain package.
+trees, lifecycle change, interaction, and document views. Each is a
+`connection def`, or an `allocation def` for the deployment chain, specializing
+`MemoRelationship` with typed ends, so the full inventory is discoverable in
+`src/core/relationships` and each domain package.
 
 Before you reach for a new `connection def`, check that SysML v2 does not
 already supply the construct: many relationships (`flow`, `bind`, `actor`,
@@ -52,12 +59,13 @@ the corpus-first rule, the native-construct lookup table, and the
 Write the relationship so its endpoint roles read as a sentence:
 
 ```sysml
-connection : VerifiedBy
-    connect verificationTarget ::> reqFlowAccuracy
-    to verificationCase ::> testFlowAccuracy;
+connection : Mitigates
+    connect control ::> rcReAnnunciate
+    to mitigatedElement ::> hzUndetectedDeviation;
 ```
 
-This reads: “`reqFlowAccuracy` is verified by `testFlowAccuracy`.”
+This reads: “`rcReAnnunciate` mitigates `hzUndetectedDeviation`.” A connection
+binds its ends by position, so the source end comes first.
 
 ## Typed references
 

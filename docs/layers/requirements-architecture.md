@@ -45,10 +45,10 @@ follow from the reasoning, and both are checked:
 
 Software structure answers three different questions, so MEMO gives it three
 views (the SEI viewtypes): the **module view** (`SoftwareSystem`,
-`SoftwareComponent`, `SoftwareModule`, `SBOMEntry` — the IEC 62304
-decomposition), the **runtime view** (`RuntimeComponent`, `Process`,
-`Thread`, `Service`, `RuntimePartition` — concurrency, scheduling, WCET,
-restart policy), and the **deployment view** (`SoftwareDeploymentUnit` builds from
+`SoftwareModule`, `SBOMEntry` — the IEC 62304 decomposition), the **runtime
+view** (`SoftwareComponent`, whose `runtimeKind` says process, thread, task,
+service, container, partition, data store, or message broker — concurrency,
+scheduling, WCET, restart policy), and the **deployment view** (`SoftwareDeploymentUnit` builds from
 modules and deploys to a `ProcessingNode`; runtime components are hosted
 there). Physical realization spans the full taxonomy — mechanical,
 electrical, electronic, fluidic, pneumatic, optical, acoustic, thermal —
@@ -57,8 +57,8 @@ because "physical" means more than a circuit board.
 | Concern | Element examples |
 |---|---|
 | Logical responsibility | `LogicalComponent` (componentRole: system…channel), `IsolationBoundary` |
-| Software module view | `SoftwareSystem`, `SoftwareComponent`, `SoftwareModule`, `SBOMEntry` |
-| Software runtime view | `RuntimeComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` |
+| Software module view | `SoftwareSystem`, `SoftwareModule`, `SBOMEntry` |
+| Software runtime view | `SoftwareComponent` (`runtimeKind`: process, thread, task, service, partition, …) |
 | Deployment | `SoftwareDeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` |
 | Physical realization | `PhysicalAssembly`, `Sensor`, `Actuator`, `FluidicComponent`, `OpticalComponent`, … |
 | Interfaces | `Interface` taxonomy, `LogicalPort`/`LogicalInterface`, `ComponentExchange`, an interface between two ports |
@@ -80,9 +80,9 @@ software *and* mechanics at once — the reason the layers must not collapse.
 
 ## Behavior
 
-Use `StateMachine`, `ModeState`, `Transition`, and `TimingConstraint` when
-order, state, or timing matters, and keep device modes distinct from UI states
-(`memo_architecture_ui`) — a confirmation screen is not a therapy mode.
+Use `StateMachine` (its mode states and native `transition`s) and
+`TimingConstraint` when order, state, or timing matters, and keep device modes
+distinct from UI states (`UIState`) — a confirmation screen is not a therapy mode.
 
 ## Continue the story
 

@@ -102,8 +102,8 @@ actually pursued, including the ways it goes wrong. It inherits:
   determines who acts at each step;
 - `RFM-001`, which the scenario set must cover.
 
-Consistency is expressed by `Motivates` from a need to a use case, `Initiates`
-and `ParticipatesIn` from actors, and `Supports` from a workflow to the use
-case it serves.
+Consistency is expressed by `Motivates` from a need to a use case, the native
+`actor` for the users who pursue it, and `RealizesUseCase` from a workflow to
+the use case it serves.
 
 [Next: Layer 3 — Workflows and scenarios](operational-world.md)
