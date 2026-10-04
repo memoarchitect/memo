@@ -5,6 +5,7 @@ on:
     paths:
       - "docs/**"
       - "mkdocs.yml"
+      - "overrides/**"
       - "pyproject.toml"
       - ".github/workflows/docs.yml"
   push:
