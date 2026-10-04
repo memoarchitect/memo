@@ -38,12 +38,13 @@ another functional-architecture element.
 
 ## Core relationships
 
-| Relationship | Reads as |
+| Write (native SysML) | Reads as |
 |---|---|
-| `Enables` | This function enables that operational work — it does not perform it |
-| `InvolvesFunction` / `IncludesStep` | This flow organizes these functions and steps |
-| `selectedFlow` / `Realizes` | This functional scenario selects a flow and realizes an operative scenario |
-| `AllocatedTo` | This function is the responsibility of that logical component |
+| `dependency` | This function supports that operational work, without performing it |
+| `perform` | This action, flow, or scenario carries out that function |
+| nesting | This function or flow is made of these sub-functions and steps |
+| `#refinement dependency <realizing> to <realized>` | This element realises that one |
+| `allocate` | This function is the responsibility of that logical component |
 
 [![Function-centered traceability](../assets/function-centered-traceability.png)](../assets/function-centered-traceability.png){ .memo-zoomable aria-label="Open the function-centered traceability diagram" }
 

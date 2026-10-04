@@ -59,9 +59,8 @@ here. → [Requirements and Architecture](requirements-architecture.md)
 ## The disciplines
 
 Requirements, safety, cybersecurity, human factors, and V&V run **across** the
-layers. Each owns its own model elements. For example,
-`OperationalValidation` is a V&V element that validates an operational use
-case, workflow, or scenario. Likewise, a `VerificationCase` remains a V&V
+layers. Each owns its own model elements. For example, a `ValidationCase` is a
+V&V element that validates an operational use case or task (`Validates`). Likewise, a `VerificationCase` remains a V&V
 element while checking a function or component. Requirements owns `Need` and
 `Requirement`; safety/risk owns `Hazard`, `Risk`, and `RiskControlMeasure`;
 cybersecurity owns `CybersecurityAsset`, `Threat`, `Vulnerability`, and its

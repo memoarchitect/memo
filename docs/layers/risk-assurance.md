@@ -34,33 +34,34 @@ flowchart LR
     Residual[ResidualRisk] -->|ReducedBy| Control
     Residual -->|EvaluatedIn| Overall[OverallResidualRiskEvaluation]
     Benefit[Benefit] --> Residual
-    Control -->|VerifiedBy| Test[VerificationCase]
+    Test[VerificationCase] -->|subject| Control
     Test -->|ProducesEvidence| Evidence[Evidence]
 ```
 
 These are dedicated ontology elements. Do not replace `SequenceOfEvents` with
-an operational `Scenario`, or merge `HazardCause` with the FMEA-specific
+an `OperativeScenario`, or merge `HazardCause` with the FMEA-specific
 `FailureCause`. Risk-management plans, reports, matrices, and benefit-risk
 documents are artifact views over these elements.
 
 ## Human factors (IEC 62366-1, FDA HF guidance)
 
-The usability chain runs from the operational world into risk: a `UserTask`
-can commit a `UseError`; a safety-relevant use error must trace to a `Hazard`;
-a `CriticalTask` — one whose failure could cause serious harm — must trace to
-a `UsabilityValidation`. `MemoScenario[scenarioKind=hazardRelatedUse]` selects the scenarios for
-summative evaluation, and `FormativeEvaluation` records what design iteration
-learned. A risk control implemented in the UI (a confirmation dialog, a
+The usability chain runs from the operational world into risk: a task (an
+`OperativeAction` a `User` performs) can commit a `UseError`
+(`CommitsUseError`); a safety-relevant use error must trace to a `Hazard`
+(`Causes`); a critical task, one with high `criticality`, must be validated by a
+summative usability test, a `ValidationCase` (`Validates`). Formative and
+summative results are `MemoEvidence`, with `evidenceKind` `formativeEvaluation`
+or `usabilityValidation`. A risk control implemented in the UI (a confirmation dialog, a
 guarded control, alarm re-annunciation) is linked to the implementing
 `UIElement` with `ControlImplementedBy` — the `temperature-alarm` example
 walks the entire chain.
 
 ## Cybersecurity chain
 
-Use `CybersecurityAsset`, `AttackSurface`, `Threat`, `Vulnerability`,
-`MemoScenario[scenarioKind=threat]` (a threat scenario sharing the workflow/scenario
-semantics), `CyberRisk`, `CyberMitigation`, `SecurityRequirement`,
-`TrustBoundary`, and `SecurityClaim`. Interfaces that cross a trust boundary
+Use `CybersecurityAsset`, `AttackSurface`, `Threat`, `Vulnerability`, an
+`OperativeScenario` that realises the threat (`RealizedByScenario`),
+`CyberRisk`, `CyberMitigation`, `SecurityRequirement`, `TrustBoundary`, and
+security claims as `MemoEvidence` with `evidenceKind = securityClaim`. Interfaces that cross a trust boundary
 say so (`CrossesTrustBoundary`); see `connected-patient-monitor`.
 
 Safety and security are connected. Use `ImpactsSafety` when a cyber condition
@@ -71,10 +72,9 @@ registers.
 
 | Element | Role |
 |---|---|
-| `VerificationCase` / `MemoScenario[scenarioKind=memoVerification]` | Shows a design output meets a specified input, and the path exercised |
-| `ValidationCase` | Shows the device meets user needs and intended use — `Validates` closes the loop to the operational world |
-| `UsabilityValidation` | Summative evaluation of critical tasks |
-| `Evidence` / `TestArtifact` | Reviewable support for a claim |
+| `VerificationCase` | Shows a design output meets a specified input; it names what it checks as its `subject` and `perform`s the `OperativeScenario` it exercises |
+| `ValidationCase` | Shows the device meets user needs and intended use — `Validates` closes the loop to the operational world; a summative usability test is one |
+| `MemoEvidence` | Reviewable support for a claim; `evidenceKind` says test artifact, usability validation, security claim, … |
 
 The V-model is a **view over these relationships**, not an ontology hierarchy:
 each definition-side layer is validated or verified by the matching
