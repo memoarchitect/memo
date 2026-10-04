@@ -86,18 +86,21 @@ nav:
   - The Ontology:
       - MEMO in a nutshell: ontology/index.md
       - Architecture layers:
+          - ontology/architecture/index.md
           - Operational: ontology/operational.md
           - Functional: ontology/functional.md
           - Logical: ontology/logical.md
           - Implementation: ontology/implementation.md
           - Realization: ontology/realization.md
       - Assurance disciplines:
+          - ontology/assurance/index.md
           - Requirements: ontology/requirements.md
           - Safety and risk: ontology/safety-risk.md
           - Cybersecurity: ontology/cybersecurity.md
           - Human factors: ontology/human-factors.md
           - Verification and validation: ontology/verification-validation.md
       - Foundations:
+          - ontology/foundations/index.md
           - Core: reference/areas/core.md
           - Artifacts: reference/areas/artifacts.md
           - Viewpoints: reference/areas/viewpoints.md
