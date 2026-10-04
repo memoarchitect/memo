@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1650 812" width="1650" height="812" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Assurance disciplines, step 1: Requirements: a need motivates the goal and drives the requirements the design satisfies">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2a37"/></marker>
+  <marker id="diamond" viewBox="0 0 14 10" refX="13" refY="5" markerWidth="14" markerHeight="10" orient="auto-start-reverse"><path d="M1,5 L7,1 L13,5 L7,9 z" fill="#1f2a37"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="40" font-size="18" font-weight="800" fill="#123b6b">Step 1 of 4 · Requirements: a need motivates the goal and drives the requirements the design satisfies</text>
+<g opacity="1">
+  <line x1="145" y1="220" x2="145" y2="132" stroke="#1f2a37" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="104.69999999999999" y="165" width="80.60000000000001" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="145" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">Motivates</text>
+</g>
+<g opacity="1">
+  <line x1="250" y1="251" x2="380" y2="251" stroke="#1f2a37" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="267.3" y="240" width="95.4" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="315" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">DerivesFrom</text>
+</g>
+<g opacity="1">
+  <line x1="485" y1="220" x2="485" y2="132" stroke="#4b5866" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+  <rect x="452.1" y="165" width="65.80000000000001" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="485" y="180" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">satisfy</text>
+</g>
+<g opacity="1">
+  <rect x="40" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
+  <rect x="40" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="145" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«use case»</text>
+  <text x="145" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UseCase</text>
+  <rect x="206" y="60" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="226" y="73" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
+</g>
+<g opacity="1">
+  <rect x="380" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
+  <rect x="380" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="485" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="485" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SystemFunction</text>
+  <rect x="546" y="60" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="566" y="73" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
+</g>
+<g opacity="1">
+  <rect x="40" y="220" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="3"/>
+  <rect x="40" y="220" width="6" height="62" rx="3" fill="#c7433f"/>
+  <text x="145" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement»</text>
+  <text x="145" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Need</text>
+  <rect x="206" y="210" width="40" height="18" rx="9" fill="#c7433f"/><text x="226" y="223" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
+</g>
+<g opacity="1">
+  <rect x="380" y="220" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="3"/>
+  <rect x="380" y="220" width="6" height="62" rx="3" fill="#c7433f"/>
+  <text x="485" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement»</text>
+  <text x="485" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Requirement</text>
+  <rect x="546" y="210" width="40" height="18" rx="9" fill="#c7433f"/><text x="566" y="223" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
+</g>
+<rect x="40" y="772" width="16" height="16" rx="3" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="2"/><text x="64" y="785" font-size="13" fill="#2c3640">Architecture</text>
+  <rect x="170" y="772" width="16" height="16" rx="3" fill="#fdebea" stroke="#c7433f" stroke-width="2"/><text x="194" y="785" font-size="13" fill="#2c3640">Assurance</text>
+  <rect x="277.5" y="772" width="16" height="16" rx="3" fill="#f1f3f5" stroke="#7a8794" stroke-width="2"/><text x="301.5" y="785" font-size="13" fill="#2c3640">Core and shared</text>
+  <line x1="430" y1="780" x2="464" y2="780" stroke="#1f2a37" stroke-width="2"  /><text x="472" y="785" font-size="13" fill="#2c3640"><tspan font-weight="700">MEMO relationship</tspan></text>
+  <line x1="629.2" y1="780" x2="663.2" y2="780" stroke="#1f2a37" stroke-width="2" stroke-dasharray="7 5" /><text x="671.2" y="785" font-size="13" fill="#2c3640"><tspan font-style="italic">native SysML</tspan></text>
+  <line x1="790.4000000000001" y1="780" x2="824.4000000000001" y2="780" stroke="#1f2a37" stroke-width="2"  marker-start="url(#diamond)"/><text x="832.4000000000001" y="785" font-size="13" fill="#2c3640">contains</text>
+  <line x1="921.2" y1="780" x2="955.2" y2="780" stroke="#1f2a37" stroke-width="2" stroke-dasharray="2 4" /><text x="963.2" y="785" font-size="13" fill="#2c3640">reference</text>
+  <rect x="1059.6" y="771" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="1079.6" y="784" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text><text x="1107.6" y="785" font-size="13" fill="#2c3640">added in this step</text>
+</svg>
