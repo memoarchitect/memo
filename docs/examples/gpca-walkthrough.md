@@ -301,10 +301,10 @@ Unlike the focused tutorials, this model is populated all the way through. It is
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `ArchitectureDescription`, `OperationalActivity`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `WorkflowStep` | [Operational](../reference/areas/architecture.md#operational) |
-| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `MemoScenario[scenarioKind=functional]`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../reference/areas/architecture.md#functional) |
-| Logical | `ComponentExchange`, `Interface`, `InterfaceItem`, `LogicalComponent`, `SoftwarePort` | [Logical](../reference/areas/architecture.md#logical) |
-| Implementation and realization | `HardwareAssembly`, `PhysicalPort`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Operational | `ArchitectureDescription`, `OperationalActivity`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `WorkflowStep` | [Operational](../ontology/operational.md) |
+| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `MemoScenario[scenarioKind=functional]`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../ontology/functional.md) |
+| Logical | `ComponentExchange`, `Interface`, `InterfaceItem`, `LogicalComponent`, `SoftwarePort` | [Logical](../ontology/logical.md) |
+| Implementation and realization | `HardwareAssembly`, `PhysicalPort`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../ontology/implementation.md) |
 | Assurance | `Benefit`, `CyberHazard`, `CyberMitigation`, `CyberRisk`, `CybersecurityAsset`, `DetectionMethod`, `Evidence`, `FMEAAction`, `FMEAWorksheet`, `FailureCause` … +32 | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoCybersecurityAssessmentView`, `MemoCybersecurityThreatModelView`, `MemoDiagramView`, `MemoDocumentView`, `MemoUsabilityEngineeringView`, `MethodologyDefinition`, `ResolvedMethodology` | [Views and methodology](../reference/areas/viewpoints.md) |
 | Core | `Citation`, `MethodologyScope` | [Core](../reference/areas/core.md) |

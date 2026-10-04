@@ -99,11 +99,13 @@ package memo_examples_gpca_pump_gpca_trace {
 
     // ── Requirement derivation ──────────────────────────────────
     // MEMO extension requirements (REQ-X) derive from needs and risks.
+    // --8<-- [start:derives]
     connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqPost;
     connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqPumpAccuracy;
     connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqBatteryBackup;
     connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqAlarmLoudness;
     connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqEventLogging;
+    // --8<-- [end:derives]
     connection : DerivesFrom connect sourceDriver ::> overdoseHazard to targetRequirement ::> reqCs25;
     connection : DerivesFrom connect sourceDriver ::> underdoseHazard to targetRequirement ::> reqOcclusion;
     connection : DerivesFrom connect sourceDriver ::> airEmbolismHazard to targetRequirement ::> reqCs21;
@@ -350,6 +352,7 @@ package memo_examples_gpca_pump_gpca_trace {
     // This edge used to deploy the software system onto the circuit board,
     // which DeploysTo's ends reject — a system is not a deployment unit and a
     // board is not a processing node (mainController, hosted by the board).
+    // --8<-- [start:deployment]
     part gpcaFirmwareImage : SoftwareDeploymentUnit {
         @MemoIdentity { :>> providedId = "DU-001"; :>> label = "GPCAFirmwareImage"; }
         attribute :>> unitKind = "firmware image";
@@ -367,6 +370,7 @@ package memo_examples_gpca_pump_gpca_trace {
     allocation : HostedBy allocate mainController to controllerBoard;
     #refinement dependency sensorInputInterface to hwSoftwareBus;
     #refinement dependency actuatorCommandInterface to pumpMotorDrive;
+    // --8<-- [end:deployment]
     connection : BindsToInterface connect portElement ::> portPatientPendant to boundInterface ::> bolusButtonLine;
     connection : BindsToInterface connect portElement ::> portMotorDrive to boundInterface ::> pumpMotorDrive;
     connection : BindsToInterface connect portElement ::> portSensorHarness to boundInterface ::> occlusionAnalogLine;

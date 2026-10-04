@@ -27,6 +27,7 @@ package memo_examples_temperature_alarm {
 
     private import memo_core_common::MemoIdentity;
     // ── Operational intent ──────────────────────────────────────
+    // --8<-- [start:operational]
     part icuNurse : User {
         attribute :>> actorKind = ActorKind::clinician;
         @MemoIdentity { :>> providedId = "TA-USR-001"; }
@@ -48,17 +49,21 @@ package memo_examples_temperature_alarm {
             attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
             attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
             attribute :>> severityIfFailed = SeverityKind::serious;
+    // --8<-- [end:operational]
         }
     }
 
     // ── Functional and logical slices ───────────────────────────
+    // --8<-- [start:functional]
     action fnDetectDeviation : SystemFunction {
         @MemoIdentity { :>> providedId = "TA-FN-001"; :>> label = "DetectTemperatureDeviation"; }
         attribute :>> criticality = CriticalityKind::high;
         // This function is owned by the functional architecture layer (its
         // package). Its safety and verification character are typed
         // relationships to assurance-owned elements, not tags on the function.
+    // --8<-- [end:functional]
     }
+    // --8<-- [start:logical]
     part chMonitor : LogicalComponent {
         @MemoIdentity { :>> providedId = "TA-LC-001"; :>> label = "TemperatureMonitorChannel"; }
         attribute :>> channelRole = ChannelRoleKind::monitor;
@@ -71,7 +76,9 @@ package memo_examples_temperature_alarm {
         attribute :>> independenceBasis = "separate sensing element and power rail";
     }
     allocate fnDetectDeviation to chMonitor;
+    // --8<-- [end:logical]
     // ── UI: alarm element and acknowledgement action ────────────
+    // --8<-- [start:implementation]
     part uiBedside : UserInterface {
         @MemoIdentity { :>> providedId = "TA-UI-001"; :>> label = "BedsideDisplay"; }
         attribute :>> modality = "visual + audible";
@@ -92,13 +99,16 @@ package memo_examples_temperature_alarm {
     // Was `Supports`, a zero-attribute duplicate of both `Enables` and the
     // native `dependency`.
     dependency from uiBedside to actAcknowledgeAlarm::taskAckAlarm;
+    // --8<-- [end:implementation]
 
     // ── Risk chain with use error ───────────────────────────────
+    // --8<-- [start:human-factors]
     part ueSilenceAndForget : UseError {
         @MemoIdentity { :>> providedId = "TA-UE-001"; :>> label = "SilenceWithoutAssessment"; }
         attribute :>> errorCategory = UseErrorCategoryKind::memoryRecall;
         attribute :>> severity = SeverityKind::serious;
     }
+    // --8<-- [start:safety-risk]
     item hzUndetectedDeviation : Hazard {
         @MemoIdentity { :>> providedId = "TA-HZ-001"; :>> label = "UndetectedTemperatureDeviation"; }
         attribute :>> hazardType = HazardTypeKind::informationError;
@@ -111,11 +121,14 @@ package memo_examples_temperature_alarm {
         attribute :>> implementationKind = RiskControlImplementationKind::softwareDesign;
     }
     connection : CommitsUseError connect task ::> actAcknowledgeAlarm.taskAckAlarm to useError ::> ueSilenceAndForget;
+    // --8<-- [end:human-factors]
     connection : Causes connect cause ::> ueSilenceAndForget to effect ::> hzUndetectedDeviation { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
     connection : Mitigates connect control ::> rcReAnnunciate to mitigatedElement ::> hzUndetectedDeviation { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ControlImplementedBy connect riskControl ::> rcReAnnunciate to implementingElement ::> elAlarmBanner;
+    // --8<-- [end:safety-risk]
 
     // ── Verification, validation, evidence ──────────────────────
+    // --8<-- [start:verification-validation]
     action vsAlarmLatency : OperativeScenario {
         @MemoIdentity { :>> providedId = "TA-VS-001"; :>> label = "AlarmLatencyScenario"; }
         attribute :>> pathSummary = "Induce out-of-range temperature; measure detection-to-annunciation latency.";
@@ -154,4 +167,5 @@ package memo_examples_temperature_alarm {
     connection : Validates connect validationTarget ::> actAcknowledgeAlarm.taskAckAlarm to validationCase ::> valAckTask;
     connection : ProducesEvidence connect producer ::> valAckTask to producedEvidence ::> uvAckTask;
     connection : ProducesEvidence connect producer ::> vcAlarmLatency to producedEvidence ::> evLatencyReport;
+    // --8<-- [end:verification-validation]
 }
