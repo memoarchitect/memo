@@ -367,6 +367,15 @@ package memo_core_enumerations {
         enum assurance;
         enum methodology;
     }
+    // Why a rule exists. `modelling` rules keep a model well formed whatever the
+    // product is. `medicalDevice` rules exist because a medical-device standard or
+    // guidance asks for the thing they check, and each should say which clause it
+    // enforces (`enforces`). `organisation` rules are a user's own.
+    enum def RuleDomainKind {
+        enum modelling;
+        enum medicalDevice;
+        enum organisation;
+    }
     enum def RuleDispositionKind {
         enum enabled;
         enum disabled;

@@ -8,9 +8,15 @@ package memo_rules_crosslayer {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    private import memo_artifacts_standards_traceability::StandardClause;
+    private import memo_artifacts_standards_iec_62304::*;
+    private import memo_artifacts_standards_iso_14971::*;
     constraint def RiskToReqTraceRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "XL-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        // To confirm: inferred from the clause scope; confirm.
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Risk-requirement traceability required for regulatory submissions.";
@@ -21,6 +27,9 @@ package memo_rules_crosslayer {
     constraint def ReqToArchTraceRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "XL-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        // To confirm: inferred from the clause scope; confirm.
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_3;
         attribute appliesTo = "Requirement[requirementType=system]";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Requirements-to-architecture traceability per IEC 62304.";
