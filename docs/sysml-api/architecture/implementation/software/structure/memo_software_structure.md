@@ -36,14 +36,14 @@
 | --- | --- | --- | --- |
 | [`SoftwareElement`](#softwareelement) | `part def` | Software element definition specializing `MemoPart`. | `MemoPart` |
 | [`SoftwareSystem`](#softwaresystem) | `part def` | Software system definition specializing `SoftwareElement`. | `SoftwareElement` |
-| [`ModuleKind`](#modulekind) | `enum def` | Module-view element (design responsibility). Runtime properties (period, WCET, scheduling) moved to SoftwareComponent. item / unit / package / library / code / firmware / soup (IEC 62304). | — |
+| [`ModuleKind`](#modulekind) | `enum def` | Controlled values for module: `unit`, `code`, `firmware`, `soup`. | — |
 | [`SoftwareModule`](#softwaremodule) | `part def` | Software module definition specializing `SoftwareElement`. | `SoftwareElement` |
 | [`Algorithm`](#algorithm) | `part def` | Algorithm definition specializing `MemoPart`. | `MemoPart` |
 | [`DataModel`](#datamodel) | `part def` | Data model definition specializing `MemoPart`. | `MemoPart` |
 | [`ConfigurationArtifact`](#configurationartifact) | `part def` | Configuration artifact definition specializing `MemoPart`. | `MemoPart` |
 | [`SoftwareItem`](#softwareitem) | `item def` | Software data/content that may be stored or exchanged through ports. | `MemoItem` |
 | [`SBOMEntry`](#sbomentry) | `item def` | Sbomentry definition specializing `SoftwareItem`. | `SoftwareItem` |
-| [`DependsOnSoup`](#dependsonsoup) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
+| [`DependsOnSoup`](#dependsonsoup) | `connection def` | Typed relationship from `MemoPart` to `SoftwareElement`. | `MemoRelationship` |
 
 ## SoftwareElement
 
@@ -83,7 +83,7 @@ enum def ModuleKind
 
 | Property | Value |
 | --- | --- |
-| Description | Module-view element (design responsibility). Runtime properties (period, WCET, scheduling) moved to SoftwareComponent. item / unit / package / library / code / firmware / soup (IEC 62304). |
+| Description | Controlled values for module: `unit`, `code`, `firmware`, `soup`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -188,7 +188,7 @@ connection def DependsOnSoup :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Description | Typed relationship from `MemoPart` to `SoftwareElement`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

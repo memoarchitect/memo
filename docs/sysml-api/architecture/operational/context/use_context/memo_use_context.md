@@ -37,8 +37,8 @@
 | [`UseContext`](#usecontext) | `part def` | Use context definition specializing `MemoPart`. | `MemoPart` |
 | [`UseEnvironment`](#useenvironment) | `part def` | The physical/organizational environment of use (IEC 62366-1 3.20), separable from the care-setting context so environments are reusable. | `MemoPart` |
 | [`InteractsInContext`](#interactsincontext) | `connection def` | The single relation a system context view draws. A context diagram labels its edges with open-ended verbs — "directs procedure", "electrical power", "fluid supply", "environmental conditions".… | `MemoRelationship` |
-| [`AppliesInContext`](#appliesincontext) | `connection def` | `InteractsWith` is native `connect` (2026-08-18): write `connection connect <participant> to <target>;`. It carried no attributes, and the operational-context package already scopes the ends.… | `MemoRelationship` |
-| [`SituatedIn`](#situatedin) | `connection def` | Typed relationship for situated in. | `MemoRelationship` |
+| [`AppliesInContext`](#appliesincontext) | `connection def` | Typed relationship from `UseContext` to `MemoPart`. | `MemoRelationship` |
+| [`SituatedIn`](#situatedin) | `connection def` | Typed relationship from `UseContext` to `UseEnvironment`. | `MemoRelationship` |
 
 ## UseContext
 
@@ -93,7 +93,7 @@ connection def AppliesInContext :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | `InteractsWith` is native `connect` (2026-08-18): write `connection connect <participant> to <target>;`. It carried no attributes, and the operational-context package already scopes the ends.… |
+| Description | Typed relationship from `UseContext` to `MemoPart`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -108,7 +108,7 @@ connection def SituatedIn :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for situated in. |
+| Description | Typed relationship from `UseContext` to `UseEnvironment`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

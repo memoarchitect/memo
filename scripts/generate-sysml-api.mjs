@@ -44,6 +44,13 @@ const precedingComment = (source, index, currentName, declarationNames) => {
   const namesAnotherDeclaration = [...declarationNames]
     .some((name) => name !== currentName && new RegExp(`\\b${name}\\b`).test(description));
   if (namesAnotherDeclaration || /\b(now lives|renamed from|relocated|former|compatibility|retained name)\b/i.test(description)) return '';
+  // A maintenance note (what was deleted, which plan or row moved it) is not a
+  // description of the element; the generated one is used instead.
+  if (/\b(deleted|stood here|no longer|used to|was removed|plan [A-Z]?\d|CR-ONT-\d|R\d+-S\d+|session \d|board row|open question)\b/i.test(description)) return '';
+  // A fragment (a comment continued from above) or a history note does not
+  // define the element either.
+  if (!/^[A-Z`]/.test(description)) return '';
+  if (/\b(before this|it was|was `|moved|every usage|target is|shadowed|stays part-based)\b/i.test(description)) return '';
   if (description.length <= 280) return description;
   const shortened = description.slice(0, 277);
   const sentence = shortened.lastIndexOf('. ');
@@ -55,11 +62,22 @@ const fallbackDescription = ({ name, kind, supertype, ends = [], enumValues = []
   if (kind === 'enum def') return enumValues.length
     ? `Controlled values for ${subject}: ${enumValues.map((value) => `\`${value}\``).join(', ')}.`
     : `Controlled values for ${subject}.`;
-  if (kind === 'connection def') return ends.length >= 2
+  if (RELATIONSHIP_KINDS.has(kind)) return ends.length >= 2
     ? `Typed relationship from \`${ends[0]}\` to \`${ends[1]}\`.`
     : `Typed relationship for ${subject}.`;
   if (kind === 'constraint def') return `Constraint that checks ${subject}.`;
   return `${subject[0].toUpperCase()}${subject.slice(1)} definition${supertype ? ` specializing \`${supertype}\`` : ''}.`;
+};
+
+// A definition's own `doc` comment, the native place for its prose.
+const docOf = (body) => {
+  const match = body.match(/^\s*doc\s*\/\*([\s\S]*?)\*\//);
+  if (!match) return '';
+  const text = match[1].split('\n').map((line) => line.replace(/^\s*\*\s?/, '')).join(' ').replace(/\s+/g, ' ').trim();
+  if (text.length <= 280) return text;
+  const shortened = text.slice(0, 277);
+  const sentence = shortened.lastIndexOf('. ');
+  return `${sentence > 100 ? shortened.slice(0, sentence + 1) : shortened}…`;
 };
 
 const declarationBody = (source, match) => {
@@ -76,7 +94,21 @@ const declarationBody = (source, match) => {
   return '';
 };
 
-const declarationPattern = /^\s*(abstract\s+)?(use case|part|item|action|requirement|verification|constraint|connection|interface|flow|port|attribute|viewpoint|view|metadata|enum|state)\s+def\s+([A-Za-z_][A-Za-z0-9_]*)([^\n{;]*)/gm;
+const declarationPattern = /^\s*(abstract\s+)?(use case|part|item|action|requirement|verification|constraint|connection|interface|flow|allocation|port|attribute|viewpoint|view|metadata|enum|state|concern|occurrence|calc|analysis|case)\s+def\s+([A-Za-z_][A-Za-z0-9_]*)([^\n{;]*)/gm;
+
+// The kinds of definition that relate two elements: their ends are the edge.
+const RELATIONSHIP_KINDS = new Set(['connection def', 'interface def', 'flow def', 'allocation def']);
+
+/**
+ * A relationship definition's ends, source first: `end <name> [: <Type>] :>> source;`.
+ * An end with no type accepts any element.
+ */
+const endsOf = (body) => {
+  const ends = [...body.matchAll(/^\s*end\s+(?:part\s+|item\s+|port\s+|occurrence\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*(?::\s*([A-Za-z_][A-Za-z0-9_:]*))?([^;]*);/gm)]
+    .map(([, name, type, rest]) => ({ name, type: type ? type.split('::').at(-1) : '', role: /:>>\s*source\b/.test(rest) ? 'source' : /:>>\s*target\b/.test(rest) ? 'target' : '' }));
+  const order = { source: 0, '': 1, target: 2 };
+  return ends.sort((left, right) => order[left.role] - order[right.role]);
+};
 const packagePattern = /^\s*package\s+([A-Za-z_][A-Za-z0-9_]*)\s*\{/gm;
 const importPattern = /^\s*(public|private)?\s*import\s+([^;]+);/gm;
 
@@ -102,9 +134,10 @@ const records = sourceFiles.map((path) => {
   const declarationNames = new Set(declarationMatches.map((match) => match[3]));
   const declarations = declarationMatches.map((match) => {
     const suffix = match[4].trim();
-    const supertype = suffix.match(/(?::>|specializes)\s+([^\s{;]+)/)?.[1] ?? '';
+    const supertype = (suffix.match(/(?::>|specializes)\s+([^\s{;]+)/)?.[1] ?? '').replace(/,$/, '');
     const body = declarationBody(source, match);
-    const ends = [...body.matchAll(/^\s*end\s+[A-Za-z_][A-Za-z0-9_]*\s*:\s*([^;\s]+)\s*;/gm)].map((end) => end[1]);
+    const relationEnds = endsOf(body);
+    const ends = relationEnds.map((end) => end.type || 'any element');
     const enumValues = [...body.matchAll(/^\s*enum\s+([A-Za-z_][A-Za-z0-9_]*)\s*;/gm)].map((value) => value[1]);
     const declaration = {
       abstract: Boolean(match[1]),
@@ -113,10 +146,12 @@ const records = sourceFiles.map((path) => {
       suffix,
       supertype,
       ends,
+      relationEnds,
       enumValues,
       signature: `${match[1] ?? ''}${match[2]} def ${match[3]}${suffix ? ` ${suffix}` : ''}`.trim(),
     };
-    declaration.description = precedingComment(source, match.index, declaration.name, declarationNames)
+    declaration.description = docOf(body)
+      || precedingComment(source, match.index, declaration.name, declarationNames)
       || fallbackDescription(declaration);
     return declaration;
   });
@@ -305,12 +340,12 @@ writeFileSync(join(outputRoot, 'hierarchy.md'), hierarchy);
 writeFileSync(join(outputRoot, 'elements.md'), renderDeclarationIndex(
   'Elements',
   'Element definitions declared in `src/`, excluding relationships, enumerations, and constraints.',
-  declarationRecords.filter(({ kind }) => !['connection def', 'enum def', 'constraint def'].includes(kind)),
+  declarationRecords.filter(({ kind }) => !RELATIONSHIP_KINDS.has(kind) && !['enum def', 'constraint def'].includes(kind)),
 ));
 writeFileSync(join(outputRoot, 'relationships.md'), renderDeclarationIndex(
   'Relationships',
-  'SysML `connection def` declarations in `src/`.',
-  declarationRecords.filter(({ kind }) => kind === 'connection def'),
+  'SysML `connection def`, `interface def`, `flow def` and `allocation def` declarations in `src/`.',
+  declarationRecords.filter(({ kind }) => RELATIONSHIP_KINDS.has(kind)),
 ));
 writeFileSync(join(outputRoot, 'enumerations.md'), renderDeclarationIndex(
   'Enumerations',
@@ -327,6 +362,111 @@ for (const record of records) {
   const destination = join(outputRoot, record.outputPath);
   mkdirSync(dirname(destination), { recursive: true });
   writeFileSync(destination, renderFilePage(record));
+}
+
+// ─── The ontology's layers: elements and relationships, per layer ──────────
+//
+// The hand-written layer pages (docs/ontology/*.md) include these tables, so
+// what a page says is in a layer is what the source declares there.
+
+const LAYERS = [
+  { id: 'operational', source: 'architecture/operational' },
+  { id: 'functional', source: 'architecture/functional' },
+  { id: 'logical', source: 'architecture/logical' },
+  { id: 'implementation', source: 'architecture/implementation' },
+  { id: 'realization', source: 'architecture/realization' },
+  { id: 'decisions', source: 'architecture/decisions' },
+  { id: 'requirements', source: 'assurance/requirements' },
+  { id: 'safety-risk', source: 'assurance/safety_risk' },
+  { id: 'cybersecurity', source: 'assurance/cybersecurity' },
+  { id: 'human-factors', source: 'assurance/human_factors' },
+  { id: 'verification-validation', source: 'assurance/verification_validation' },
+  { id: 'core', source: 'core' },
+  { id: 'artifacts', source: 'artifacts' },
+  { id: 'viewpoints', source: 'viewpoints' },
+];
+const layerRoot = join(root, 'docs', 'ontology', '_generated');
+const layerOf = (record) => LAYERS.find(({ source }) => record.relativeSource.startsWith(`${source}/`));
+const byName = new Map(declarationRecords.map((declaration) => [declaration.name, declaration]));
+const apiLink = (declaration) => `[\`${declaration.name}\`](../sysml-api/${linkFor(declaration.record)}#${anchor(declaration.name)})`;
+const typeLink = (type) => {
+  if (!type) return '*any element*';
+  const declaration = byName.get(type);
+  return declaration ? apiLink(declaration) : `\`${type}\``;
+};
+const subPackage = (layer, record) => {
+  const rest = record.relativeSource.slice(layer.source.length + 1).split('/');
+  return rest.length > 1 ? rest[0].replaceAll('_', ' ') : 'core concepts';
+};
+const relationRow = (declaration, withLayer) => {
+  const [from, to] = [declaration.relationEnds[0], declaration.relationEnds.at(-1)];
+  const where = withLayer ? ` ${layerOf(declaration.record)?.id ?? '—'} |` : '';
+  return `| ${apiLink(declaration)} |${where} ${typeLink(from?.type)} | ${typeLink(to?.type)} | ${escapeCell(declaration.description)} |`;
+};
+
+mkdirSync(layerRoot, { recursive: true });
+for (const layer of LAYERS) {
+  const own = declarationRecords.filter(({ record }) => layerOf(record) === layer);
+  const elements = own.filter(({ kind }) => !RELATIONSHIP_KINDS.has(kind) && !['constraint def', 'enum def'].includes(kind));
+  const groups = Map.groupBy(elements, ({ record }) => subPackage(layer, record));
+  const elementSections = [...groups.entries()].map(([group, entries]) => `
+**${group[0].toUpperCase()}${group.slice(1)}**
+
+| Element | SysML kind | What it is |
+| --- | --- | --- |
+${entries.map((declaration) => `| ${apiLink(declaration)}${declaration.abstract ? ' *(abstract)*' : ''} | \`${declaration.kind}\` | ${escapeCell(declaration.description)} |`).join('\n')}
+`).join('');
+  const declared = own.filter(({ kind }) => RELATIONSHIP_KINDS.has(kind));
+  const reaching = declarationRecords.filter((declaration) => RELATIONSHIP_KINDS.has(declaration.kind)
+    && layerOf(declaration.record) !== layer
+    && declaration.relationEnds.some(({ type }) => byName.get(type) && layerOf(byName.get(type).record) === layer));
+  const enums = own.filter(({ kind }) => kind === 'enum def');
+  // Every relationship touching the layer, drawn from its ends: a node per end
+  // type, an edge per relationship, in the direction the ends declare.
+  const drawn = [...declared, ...reaching].filter(({ relationEnds }) => relationEnds.length >= 2);
+  const nodeId = (type) => (type || 'anyElement').replaceAll(/[^A-Za-z0-9]/g, '');
+  const nodeLabel = (type) => type || 'any element';
+  const external = (type) => type && byName.get(type) && layerOf(byName.get(type).record) !== layer;
+  const nodes = new Map();
+  for (const { relationEnds } of drawn) {
+    for (const { type } of [relationEnds[0], relationEnds.at(-1)]) nodes.set(nodeId(type), type);
+  }
+  const diagram = drawn.length ? `
+### Connections at a glance
+
+Each arrow is one relationship, from its source end to its target end. A grey box belongs to another layer.
+
+\`\`\`mermaid
+flowchart LR
+${[...nodes.entries()].map(([id, type]) => `  ${id}["${nodeLabel(type)}"]${external(type) || !type ? `:::other` : ''}`).join('\n')}
+${drawn.map(({ name, relationEnds }) => `  ${nodeId(relationEnds[0].type)} -->|${name}| ${nodeId(relationEnds.at(-1).type)}`).join('\n')}
+  classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
+\`\`\`
+` : '';
+  const output = `<!-- Generated by scripts/generate-sysml-api.mjs from src/${layer.source}/. Do not edit. -->
+
+### Elements
+${elementSections || '\n_No element definitions._\n'}
+${diagram}
+### Relationships declared here
+
+${declared.length ? `| Relationship | From | To | What it says |
+| --- | --- | --- | --- |
+${declared.map((declaration) => relationRow(declaration, false)).join('\n')}` : '_None: this layer connects through native SysML relationships and those declared elsewhere._'}
+
+### Relationships from elsewhere that reach this layer
+
+${reaching.length ? `| Relationship | Declared in | From | To | What it says |
+| --- | --- | --- | --- | --- |
+${reaching.map((declaration) => relationRow(declaration, true)).join('\n')}` : '_None with an end typed in this layer._'}
+${enums.length ? `
+### Enumerations
+
+| Enumeration | Values |
+| --- | --- |
+${enums.map((declaration) => `| ${apiLink(declaration)} | ${declaration.enumValues.map((value) => `\`${value}\``).join(', ') || '—'} |`).join('\n')}
+` : ''}`;
+  writeFileSync(join(layerRoot, `${layer.id}.md`), output);
 }
 
 console.log('Generated SysML API from src/.');

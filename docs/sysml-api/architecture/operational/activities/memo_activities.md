@@ -38,7 +38,7 @@
 | [`DemandLevelKind`](#demandlevelkind) | `enum def` | Controlled values for demand level: `minimal`, `low`, `moderate`, `high`, `extreme`. | — |
 | [`OperativeAction`](#operativeaction) | `action def` | Operative action definition specializing `MemoAction`. | `MemoAction` |
 | [`TaskDifficultyAssessment`](#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | `MemoPart` |
-| [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship for assesses difficulty. | `MemoRelationship` |
+| [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship from `TaskDifficultyAssessment` to `OperativeAction`. | `MemoRelationship` |
 
 ## DemandLevelKind
 
@@ -93,7 +93,7 @@ connection def AssessesDifficulty :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for assesses difficulty. |
+| Description | Typed relationship from `TaskDifficultyAssessment` to `OperativeAction`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

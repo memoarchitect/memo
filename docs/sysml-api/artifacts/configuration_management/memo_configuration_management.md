@@ -35,7 +35,7 @@
 | --- | --- | --- | --- |
 | [`ChangeRequest`](#changerequest) | `part def` | Change request definition specializing `MemoPart`. | `MemoPart` |
 | [`ConfigurationItem`](#configurationitem) | `part def` | Configuration item definition specializing `MemoPart`. | `MemoPart` |
-| [`Changes`](#changes) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. | `MemoRelationship` |
+| [`Changes`](#changes) | `connection def` | Typed relationship from `ChangeRequest` to `MemoPart`. | `MemoRelationship` |
 
 ## ChangeRequest
 
@@ -75,7 +75,7 @@ connection def Changes :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. |
+| Description | Typed relationship from `ChangeRequest` to `MemoPart`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

@@ -49,15 +49,15 @@
 | [`RiskControlMeasure`](#riskcontrolmeasure) | `part def` | Risk control measure definition specializing `VerifiableElement`. | `VerifiableElement` |
 | [`Benefit`](#benefit) | `part def` | Benefit definition specializing `MemoPart`. | `MemoPart` |
 | [`OverallResidualRiskEvaluation`](#overallresidualriskevaluation) | `part def` | Overall residual risk evaluation definition specializing `MemoPart`. | `MemoPart` |
-| [`TracesRisk`](#tracesrisk) | `connection def` | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. | `MemoRelationship` |
+| [`TracesRisk`](#tracesrisk) | `connection def` | Typed relationship from `RiskItem` to `RiskItem`. | `MemoRelationship` |
 | [`LeadsToHarm`](#leadstoharm) | `connection def` | The final ISO 14971 chain edge. P2 is the conditional probability that the hazardous situation results in the harm. | `MemoRelationship` |
-| [`HazardRelatedScenario`](#hazardrelatedscenario) | `connection def` | Typed relationship for hazard related scenario. | `MemoRelationship` |
-| [`AssessedAgainst`](#assessedagainst) | `connection def` | Typed relationship for assessed against. | `MemoRelationship` |
-| [`EstimatedFor`](#estimatedfor) | `connection def` | Typed relationship for estimated for. | `MemoRelationship` |
-| [`ReducedBy`](#reducedby) | `connection def` | Typed relationship for reduced by. | `MemoRelationship` |
-| [`EvaluatedIn`](#evaluatedin) | `connection def` | Typed relationship for evaluated in. | `MemoRelationship` |
+| [`HazardRelatedScenario`](#hazardrelatedscenario) | `connection def` | Typed relationship from `RiskItem` to `OperativeScenario`. | `MemoRelationship` |
+| [`AssessedAgainst`](#assessedagainst) | `connection def` | Typed relationship from `Risk` to `RiskMatrix`. | `MemoRelationship` |
+| [`EstimatedFor`](#estimatedfor) | `connection def` | Typed relationship from `Risk` to `RiskItem`. | `MemoRelationship` |
+| [`ReducedBy`](#reducedby) | `connection def` | Typed relationship from `ResidualRisk` to `RiskControlMeasure`. | `MemoRelationship` |
+| [`EvaluatedIn`](#evaluatedin) | `connection def` | Typed relationship from `ResidualRisk` to `OverallResidualRiskEvaluation`. | `MemoRelationship` |
 | [`MitigationKind`](#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | — |
-| [`Mitigates`](#mitigates) | `connection def` | Typed relationship for mitigates. | `MemoRelationship` |
+| [`Mitigates`](#mitigates) | `connection def` | Typed relationship from `any element` to `RiskItem`. | `MemoRelationship` |
 
 ## ReasonablyForeseeableMisuse
 
@@ -277,7 +277,7 @@ connection def TracesRisk :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Moved out of memo_core_relationships: their ends are typed against types declared here, and core must not depend on a domain package. ISO 14971 risk chain — distinct sequence-of-events relations over risk elements. |
+| Description | Typed relationship from `RiskItem` to `RiskItem`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -307,7 +307,7 @@ connection def HazardRelatedScenario :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for hazard related scenario. |
+| Description | Typed relationship from `RiskItem` to `OperativeScenario`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -322,7 +322,7 @@ connection def AssessedAgainst :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for assessed against. |
+| Description | Typed relationship from `Risk` to `RiskMatrix`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -337,7 +337,7 @@ connection def EstimatedFor :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for estimated for. |
+| Description | Typed relationship from `Risk` to `RiskItem`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -352,7 +352,7 @@ connection def ReducedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for reduced by. |
+| Description | Typed relationship from `ResidualRisk` to `RiskControlMeasure`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -367,7 +367,7 @@ connection def EvaluatedIn :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for evaluated in. |
+| Description | Typed relationship from `ResidualRisk` to `OverallResidualRiskEvaluation`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -397,7 +397,7 @@ connection def Mitigates :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for mitigates. |
+| Description | Typed relationship from `any element` to `RiskItem`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
