@@ -2,5 +2,4 @@ name: connected-patient-monitor
 entrypoint: model/catalog/project.sysml
 include: [model]
 toolchain:
-  compiler: internal
   packager: internal
