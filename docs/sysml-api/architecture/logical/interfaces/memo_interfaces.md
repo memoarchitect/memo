@@ -197,7 +197,7 @@ port def SoftwarePort specializes MemoPort
     //
     // Its ends are the ports, and they are ports, never components: §6.2 of the
     // architecture plan requires an actual boundary port, and a rule
-    // (CR-ONT-072/073) says so because the compiler does not — SysIDE accepts a
+    // (CR-ONT-072/073) says so because the compiler does not — it accepts a
     // part at an interface end even when the definition types its ends.
     //
     // ─── Transport, delegation, and the choice between them ──────────────────

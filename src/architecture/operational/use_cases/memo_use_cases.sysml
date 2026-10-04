@@ -37,9 +37,9 @@ package memo_architecture_operational_use_cases {
         attribute useCaseKind : UseCaseKind;
 
         // The device or system under consideration supports the goal. Native
-        // `subject`, not `ref` (R10-S6): SysIDE requires an explicit subject
-        // before a use case can declare `actor` — `case-usage-subject-
-        // parameter-position` — and "the device/system under consideration"
+        // `subject`, not `ref` (R10-S6): a use case needs an explicit subject
+        // before it can declare `actor` (the subject parameter comes first),
+        // and "the device/system under consideration"
         // is exactly what a case's subject means, so this was a duplicate
         // waiting to surface once `actor` needed a subject to attach to.
         subject supportingSystem : MemoPart[0..1];

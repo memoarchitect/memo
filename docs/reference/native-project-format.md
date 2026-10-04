@@ -177,13 +177,13 @@ part disableThreatMitigation : RulePolicy :> rulePolicy {
 ```
 
 The rule is named by narrowing the reference's *type*. Session 1 verified this
-form in the MEMO grammar, SysIDE, and Sysand; there is deliberately no
+form in MEMO's grammar and the external tools; there is deliberately no
 `targetRuleId : String`, because a qualified SysML reference already identifies
 the rule and a parallel string namespace would be a MEMO-specific identifier
 where the language has one. The stable rule ID survives on the rule, for audit
 records and diagnostics — a different job from being the reference mechanism.
 
-Binding a *value* to a `constraint def` is not portable: SysIDE rejects it,
+Binding a *value* to a `constraint def` is not portable: a SysML v2 compiler rejects it,
 because a value must be a feature. Narrowing the type is the portable form.
 
 Refusals the resolver makes, all with a source diagnostic:
@@ -246,4 +246,4 @@ memo/scripts/check-project-portability.sh <project-dir>
 ```
 
 Checks that the project carries no semantic YAML, has a native entrypoint, and
-parses cleanly in both SysIDE (`syside check`) and Sensmetry `sysand`.
+parses cleanly with the selected compiler and the package manager.

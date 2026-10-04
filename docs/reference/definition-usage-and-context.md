@@ -118,7 +118,7 @@ P::touchscreenPath::evaluate
 **So do not uniquify step names by prefixing them.** The `Fx`/`Op`/`os`/`oa`
 prefixes in the examples were never needed to keep elements apart; the owner
 chain already does that. A collision is only a collision when two elements want
-the same name *under the same owner*, which SysML forbids, SysIDE rejects, and
+the same name *under the same owner*, which SysML forbids, compilers reject, and
 `ElementIndex` reports as an `ElementCollision` rather than silently keeping
 one.
 
@@ -173,10 +173,10 @@ Both usages share the contract. Both are separately addressable.
 
 ### Write the named `perform` form — the shorthand does not compile
 
-**Measured 2026-09-20 on `syside 0.10.2` and memo-tools' builder.** The two
+**Measured 2026-09-20 with a SysML v2 compiler and memo-tools' builder.** The two
 spellings do not agree, and the disagreement is the dangerous direction:
 
-| Form | memo-tools builder | `syside check --diagnose all` |
+| Form | memo-tools builder | SysML v2 compiler |
 |---|---|---|
 | `perform buttonPath.evaluate;` ×2 | exit 0, both edges correct | **exit 1**, `namespace-distinguishability` |
 | `perform action n references …;` ×2 | exit 0, both edges correct | exit 0 |
@@ -194,7 +194,7 @@ scenario-local usage.
 
 **`perform action <name> : <Type>;` is silently dropped.** With no
 `references`, `resolveOwnerRootedUsage` returns before building anything — no
-element, no edge — while `syside check` exits 0. Do not write it. This is
+element, no edge — while the compiler accepts it. Do not write it. This is
 tracked as a board row; until it is fixed, a performance without a target has
 nowhere to go.
 
