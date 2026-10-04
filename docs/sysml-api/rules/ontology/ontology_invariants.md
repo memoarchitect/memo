@@ -688,8 +688,8 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "Allocation runs from a function or a behaviour to where it runs. The source end of AllocatedTo is a part or an action.";
-            attribute predicateExpression = "sourcesOf(allocatedTo)->forAll(conformsTo(MemoPart) or construct == 'action')";
+            attribute rationaleText = "Allocation runs from a function or a behaviour to where it runs. The source end of AllocatedTo is a part, an action, or a functional exchange (allocated to a component exchange, as ARCADIA allocates one).";
+            attribute predicateExpression = "sourcesOf(allocatedTo)->forAll(conformsTo(MemoPart) or construct == 'action' or conformsTo(FunctionalExchange))";
             constraint { true }
         }
         constraint def AllocatedToTargetKindRule :> MemoConsistencyRule {
@@ -697,8 +697,8 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "A function is allocated to a part — including a system or actor — as ARCADIA System Analysis requires.";
-            attribute predicateExpression = "targetsOf(allocatedTo)->forAll(conformsTo(MemoPart))";
+            attribute rationaleText = "A function is allocated to a part — including a system or actor — as ARCADIA System Analysis requires; a functional exchange is allocated to a component exchange.";
+            attribute predicateExpression = "targetsOf(allocatedTo)->forAll(conformsTo(MemoPart) or conformsTo(ComponentExchange))";
             constraint { true }
         }
         constraint def ComposesParentKindRule :> MemoConsistencyRule {
@@ -751,15 +751,15 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute tailoring = RuleTailoringKind::invariant;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "A boundary is a boundary element or a port; what crosses it is an asset or an exchange item.";
-            attribute predicateExpression = "sourcesOf(crossesTrustBoundary)->forAll(conformsTo(InterfaceElement) or construct == 'port') and targetsOf(crossesTrustBoundary)->forAll(conformsTo(MemoPart) or construct == 'item')";
+            attribute rationaleText = "A boundary is a boundary element or a port; what crosses it is an asset, an item, or an exchange: an interface or a flow.";
+            attribute predicateExpression = "sourcesOf(crossesTrustBoundary)->forAll(conformsTo(InterfaceElement) or construct == 'port') and targetsOf(crossesTrustBoundary)->forAll(conformsTo(MemoPart) or construct == 'item' or construct == 'interface' or construct == 'flow')";
             constraint { true }
         }
 
         // CR-ONT-002's replacement, now asked of the edge. A ComponentExchange is
         // an interface, so its ends are the ports it connects, and `sourceEnd` /
         // `targetEnd` are those elements. The compiler does not check this:
-        // SysIDE accepts a part at an interface end even when the definition types
+        // a compiler accepts a part at an interface end even when the definition types
         // the ends.
         //
         // It used to read `sourceEndpoint` refs, whose dotted values the builder

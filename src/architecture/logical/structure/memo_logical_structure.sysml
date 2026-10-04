@@ -184,7 +184,7 @@ package memo_architecture_logical_structure {
     // move a specimen or a force between hardware parts, and a flow def that
     // named `LogicalPort` ends would have refused them. `payload` is not
     // declared either: `of <type>` on a usage of a flow def that declares a
-    // feature trips SysIDE's `namespace-distinguishability` against the
+    // feature is not distinguishable (namespace distinguishability) from the
     // library's own `payload`, so the payload lives on the ports.
     abstract flow def LogicalExchange {
         attribute contentKind : FlowContentKind;

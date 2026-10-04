@@ -92,7 +92,7 @@ package memo_architecture_realization_deployment {
     // language says so. The double specialization keeps MEMO's identification
     // core from `MemoRelationship` while adding the standard's allocation
     // semantics; both root on `Connections::BinaryConnection`, so this is a
-    // diamond and not a conflict. Verified under `syside check` against a
+    // diamond and not a conflict. Verified with a SysML v2 compiler against a
     // negative control (a non-existent supertype is reported), so the clean
     // result is the checker agreeing rather than the checker skipping.
 

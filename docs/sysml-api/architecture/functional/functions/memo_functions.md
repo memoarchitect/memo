@@ -165,7 +165,7 @@ action def FunctionalFlow specializes MemoAction
     // ends (`association-related-types`); here the ends are the usage's
     // parameters. A usage says what it carries through the item type of those
     // parameters, not with `of`: `of` and `: FunctionalExchange` together declare
-    // a second `payload`, and SysIDE rejects the pair.
+    // a second `payload`, and a SysML v2 compiler rejects the pair.
     //
     // ─── System function vs. component function ──────────────────────────────
     //
