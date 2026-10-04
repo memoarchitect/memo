@@ -449,10 +449,10 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity`, `UseCase`, `User`, `UserTask` | [Operational](../reference/areas/architecture.md#operational) |
-| Functional | `SystemFunction` | [Functional](../reference/areas/architecture.md#functional) |
-| Logical | `LogicalComponent` | [Logical](../reference/areas/architecture.md#logical) |
-| Implementation and realization | `HardwareAssembly`, `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Operational | `OperationalActivity`, `UseCase`, `User`, `UserTask` | [Operational](../ontology/operational.md) |
+| Functional | `SystemFunction` | [Functional](../ontology/functional.md) |
+| Logical | `LogicalComponent` | [Logical](../ontology/logical.md) |
+| Implementation and realization | `HardwareAssembly`, `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../ontology/implementation.md) |
 | Assurance | `Evidence`, `Hazard`, `Need`, `Requirement`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `MemoScenario[scenarioKind=memoVerification]` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 

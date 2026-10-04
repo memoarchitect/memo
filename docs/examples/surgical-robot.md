@@ -17,8 +17,8 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Logical | `LogicalComponent`, `LogicalExchange` | [Logical](../reference/areas/architecture.md#logical) |
-| Implementation and realization | `Actuator`, `MechanicalPart`, `UIElement` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Logical | `LogicalComponent`, `LogicalExchange` | [Logical](../ontology/logical.md) |
+| Implementation and realization | `Actuator`, `MechanicalPart`, `UIElement` | [Implementation and realization](../ontology/implementation.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `IndependentOf`, `MonitorsChannel` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.

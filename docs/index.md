@@ -15,29 +15,72 @@ architecture, risk, verification, and evidence connected as the design changes.
     change as feedback is incorporated. Use a [tagged release](https://github.com/memoarchitect/memo/releases)
     or an exact npm version rather than `main` for reproducible project work.
 
-## Project links
+## What MEMO is
 
-- [MEMO Ontology GitHub repository](https://github.com/memoarchitect/memo)
-- [MEMO Tools documentation](https://memoarchitect.com/memo-tools/) · [GitHub repository](https://github.com/memoarchitect/memo-tools)
-- [MEMO Architect documentation](https://memoarchitect.com/memo-architect/) · [GitHub repository](https://github.com/memoarchitect/memo-architect)
-- [MEMO product website](https://memoarchitect.com/)
+MEMO is a domain model for medical-device engineering, built on SysML v2. It
+describes a device in **one model**: what the device is for, what it does, how
+it is organised and built, and the argument that it is safe and effective.
+Typed relationships connect those facts, so a change can be followed through
+the model, and a reviewer can challenge each claim.
 
-## What is MEMO
+MEMO is importable SysML v2 source. Projects and SysML v2 modeling environments
+use it as a library.
 
-MEMO is a domain model for medical-device engineering. It specializes SysML v2
-with the concepts and rules needed to describe a device architecture and its
-assurance information in the same model.
+## The model at a glance
 
-Its architecture definitions cover operational context, scenarios, behavior,
-design, and realization. Its assurance definitions cover requirements, safety,
-cybersecurity, human factors, verification, validation, and evidence. Typed
-relationships connect these facts in one engineering model, and viewpoints
-select them for diagrams, tables, and documents.
+MEMO organises the model on two axes.
 
-MEMO is distributed as importable SysML v2 source for use by projects and
-SysML v2 modeling environments.
+**The architecture layers** explain the device, from purpose to deployed
+hardware. Each layer answers one question.
 
-[Read **What is MEMO** →](what/index.md)
+<div class="memo-card-grid" markdown>
+
+<div class="memo-card memo-card-purple" markdown>
+
+### [Operational](ontology/operational.md)
+
+Why does the device exist, for whom, and in what setting? Users, use cases,
+intended use, context, workflows.
+
+</div>
+
+<div class="memo-card memo-card-blue" markdown>
+
+### [Functional](ontology/functional.md)
+
+What must the system do? System and component functions, exchanges, behaviour.
+
+</div>
+
+<div class="memo-card memo-card-teal" markdown>
+
+### [Logical](ontology/logical.md)
+
+How is the solution organised, before choosing a technology? Components,
+channels, interfaces, boundaries.
+
+</div>
+
+<div class="memo-card memo-card-orange" markdown>
+
+### [Implementation](ontology/implementation.md) and [Realization](ontology/realization.md)
+
+What is it built from, and where does it run? Software, hardware, user
+interface, deployment.
+
+</div>
+
+</div>
+
+**The assurance disciplines** test that explanation across every layer:
+[Requirements](ontology/requirements.md),
+[Safety and risk](ontology/safety-risk.md),
+[Cybersecurity](ontology/cybersecurity.md),
+[Human factors](ontology/human-factors.md), and
+[Verification and validation](ontology/verification-validation.md).
+
+[Read **MEMO in a nutshell** →](ontology/index.md): the layers, how they
+connect, and one example traced through all of them.
 
 ## Problem statement
 
@@ -127,6 +170,13 @@ In this model, the requirement exists because of a known hazard, the component
 satisfies that requirement and implements the lockout control, the control
 mitigates the hazard, and the verification case produces evidence. A change can
 therefore follow the meaning of the model instead of stopping at a list of IDs.
+
+## Project links
+
+- [MEMO Ontology GitHub repository](https://github.com/memoarchitect/memo)
+- [MEMO Tools documentation](https://memoarchitect.com/memo-tools/) · [GitHub repository](https://github.com/memoarchitect/memo-tools)
+- [MEMO Architect documentation](https://memoarchitect.com/memo-architect/) · [GitHub repository](https://github.com/memoarchitect/memo-architect)
+- [MEMO product website](https://memoarchitect.com/)
 
 ---
 

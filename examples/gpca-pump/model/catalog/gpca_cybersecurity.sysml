@@ -45,6 +45,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> trustAssumption = "Service tooling on the untrusted side requires authentication before any crossing is permitted.";
     }
 
+    // --8<-- [start:threat]
     part unauthorizedConfigChangeThreat : Threat {
         @MemoIdentity { :>> providedId = "TH-001"; :>> label = "UnauthorizedTherapyConfigurationChange"; }
         attribute :>> driverKind = "cybersecurity";
@@ -54,6 +55,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> precondition = "maintenance interface exposed without strong authentication";
         attribute :>> affectedConcern = ConcernKind::cybersecurity;
         attribute :>> defaultTechnique = "STRIDE tampering";
+    // --8<-- [end:threat]
     }
 
     part eventLogTamperingThreat : Threat {
@@ -67,6 +69,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> defaultTechnique = "STRIDE repudiation";
     }
 
+    // --8<-- [start:vulnerability]
     item weakServiceAuthentication : Vulnerability {
         @MemoIdentity { :>> providedId = "VULN-001"; }
         attribute :>> weakness = "service mode relies on shared default credential";
@@ -74,6 +77,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> discoveryMethod = "architecture review";
         attribute :>> affectedLayer = "software_structure";
         attribute :>> cweReference = "CWE-798";
+    // --8<-- [end:vulnerability]
     }
 
     action tamperedConfigurationScenario : OperativeScenario {
@@ -142,6 +146,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         objective { verify reqAuthenticatedServiceAccess; }
     }
 
+    // --8<-- [start:chain]
     connection : ThreatenedBy connect protectedAsset ::> therapyConfigurationAsset to realizedThreat ::> unauthorizedConfigChangeThreat;
 
     connection : ThreatenedBy connect protectedAsset ::> patientEventLogAsset to realizedThreat ::> eventLogTamperingThreat;
@@ -149,6 +154,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     connection : Exploits connect realizedThreat ::> unauthorizedConfigChangeThreat to enablingVulnerability ::> weakServiceAuthentication;
 
     connection : RealizedByScenario connect realizedThreat ::> unauthorizedConfigChangeThreat to scenario ::> tamperedConfigurationScenario;
+    // --8<-- [end:chain]
 
     connection : Mitigates connect control ::> strongServiceAuthentication to mitigatedElement ::> weakServiceAuthentication { attribute :>> mitigationKind = MitigationKind::vulnerability; }
 

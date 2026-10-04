@@ -120,7 +120,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `TaskStep`, `OperationalActivity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `UserTask`, `WorkflowStep` | [Operational](../reference/areas/architecture.md#operational) |
+| Operational | `TaskStep`, `OperationalActivity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `UserTask`, `WorkflowStep` | [Operational](../ontology/operational.md) |
 | Clinical extension | `ClinicalProcedureWorkflow` | [Extension modules](../reference/areas/methodology.md#extensions) |
 | Assurance | `Need` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |

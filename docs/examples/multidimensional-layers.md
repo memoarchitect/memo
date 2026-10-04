@@ -17,7 +17,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Implementation and realization | `SoftwareComponent`, `SoftwareModule` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Implementation and realization | `SoftwareComponent`, `SoftwareModule` | [Implementation and realization](../ontology/implementation.md) |
 | Assurance | `VerificationCase` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
