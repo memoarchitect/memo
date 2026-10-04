@@ -65,3 +65,6 @@ __pycache__/
 site/
 public/
 _site/
+
+# A compiler's export of the library set, written at release by `memo ship-library`
+stage1/
