@@ -1,22 +1,27 @@
 # MEMO analysis samples
 
-These notebooks are created by `memo init` and are designed to work with any
-MEMO textual SysML v2 project. They locate the nearest `model/` or `src/`
-directory automatically and query it through the typed Syside API.
+These notebooks are created by `memo init` and work with any MEMO textual
+SysML v2 project. Each one reads the model through `analysis/memo_model.py`,
+which compiles the project with the compiler its settings select
+(`toolchain.compiler`), exactly as `memo compile` does. Changing the
+project's compiler changes what every notebook analyses.
 
 ## Prerequisites
 
-Use Python 3.12 or newer with JupyterLab and Syside installed and licensed:
+- Python 3.12 or newer with JupyterLab.
+- The `memo` command on `PATH`, or `MEMO_CLI` set to the command that runs it.
+- What the selected compiler needs, as `memo toolchain probe` reports. A
+  compiler that builds no SysML v2 model of its own (`internal`) cannot serve
+  the notebooks; `memo_model.load()` says so.
 
 ```bash
 python -m venv analysis/.venv
 source analysis/.venv/bin/activate
-python -m pip install jupyterlab syside
+python -m pip install jupyterlab
 cd analysis
 jupyter lab --port 8888
 ```
 
-Configure the Syside license using its supported keyring or environment setup.
 MEMO Architect's **Analysis → Jupyter Notebooks** menu opens the local server at
 `http://127.0.0.1:8888`.
 
@@ -32,6 +37,7 @@ MEMO Architect's **Analysis → Jupyter Notebooks** menu opens the local server 
 | `06-ownership-graph.ipynb` | SVG network graph of model ownership relationships. |
 | `07-model-inventory-table.ipynb` | Filterable inventory parameters, HTML table, and CSV export. |
 
-The notebooks use `syside.try_load_model()`, so partial analysis remains
-available while the project contains parser or semantic diagnostics. Review the
-reported diagnostics before treating analysis results as release evidence.
+A model loads only once the compiler accepts it: `memo_model.load()` raises
+with the compiler's errors otherwise. Compilers can differ in the elements they
+write for the same text (anonymous features in particular), so counts can
+differ slightly from one compiler to another.
