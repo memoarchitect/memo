@@ -2,6 +2,6 @@ package project_architecture {
     private import memo::*;
 
     part system : MemoPart {
-        attribute redefines name = "{{name}}";
+        @MemoIdentity { :>> label = "{{name}}"; }
     }
 }
