@@ -15,8 +15,8 @@ package memo_rules_crosslayer {
         @MemoIdentity { :>> providedId = "XL-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
-        // To confirm: inferred from the clause scope; confirm.
-        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7;
+        // To confirm: inferred from the clause scopes; confirm.
+        ref enforces : StandardClause[1..*] = (iso14971.iso14971Clause7.iso14971Clause7_2, iec62304.iec62304Clause5.iec62304Clause5_2.iec62304Clause5_2_3);
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Risk-requirement traceability required for regulatory submissions.";
@@ -29,7 +29,7 @@ package memo_rules_crosslayer {
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
         // To confirm: inferred from the clause scope; confirm.
-        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_3;
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_3.iec62304Clause5_3_1;
         attribute appliesTo = "Requirement[requirementType=system]";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Requirements-to-architecture traceability per IEC 62304.";
