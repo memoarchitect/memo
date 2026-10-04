@@ -337,4 +337,164 @@ package memo_rules_closure {
         attribute predicateExpression = "attributes.capturedBuild != '' and attributes.imageHash != ''";
         constraint { true }
     }
+
+    // ─── Risk analysis and software lifecycle rules (clause by clause) ─────
+    // Written from the classification in plans/memo-rules-domain-trace-and-editor.md
+    // (Step 5): each checks a property the model carries, and each traces to the clause it enforces.
+
+    constraint def HazardHasSituationRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-005"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5.iso14971Clause5_4;
+        attribute appliesTo = "Hazard";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A hazard is analysed through the hazardous situations it can lead to: a hazard that reaches no hazardous situation has not been analysed far enough to estimate a risk.";
+        attribute predicateExpression = "downstream(tracesRisk)->exists(conformsTo(HazardousSituation))";
+        constraint { true }
+    }
+
+    constraint def SituationLeadsToHarmRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-006"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5.iso14971Clause5_4;
+        attribute appliesTo = "HazardousSituation";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A hazardous situation is described by the harm it can cause; one that reaches no harm leaves the severity of the risk unestimated.";
+        attribute predicateExpression = "downstream(tracesRisk)->exists(conformsTo(Harm))";
+        constraint { true }
+    }
+
+    constraint def RiskEstimateRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-007"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5.iso14971Clause5_5;
+        attribute appliesTo = "Risk";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A risk is estimated from the probability of occurrence and the severity of the harm; a risk missing either has no estimate.";
+        attribute predicateExpression = "attributes.probabilityEstimate != '' and attributes.severityEstimate != ''";
+        constraint { true }
+    }
+
+    constraint def RiskAcceptabilityRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-008"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause6;
+        attribute appliesTo = "Risk";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Each estimated risk is evaluated against the acceptability criteria, so a risk states whether it is acceptable.";
+        attribute predicateExpression = "attributes.acceptability != ''";
+        constraint { true }
+    }
+
+    constraint def ResidualRiskAcceptabilityRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-009"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7.iso14971Clause7_3;
+        attribute appliesTo = "ResidualRisk";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "After risk control the residual risk is evaluated: it follows a control and states whether it is acceptable.";
+        attribute predicateExpression = "reducedBy->size() >= 1 and attributes.acceptability != ''";
+        constraint { true }
+    }
+
+    constraint def ResidualRiskEvaluatedRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-014"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iso14971.iso14971Clause8;
+        attribute appliesTo = "ResidualRisk";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "The overall residual risk is evaluated from the individual residual risks, so each residual risk is an input to that evaluation.";
+        attribute predicateExpression = "evaluatedIn->size() >= 1";
+        constraint { true }
+    }
+
+    constraint def SoupAnomaliesRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-015"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause7.iec62304Clause7_1.iec62304Clause7_1_3;
+        attribute appliesTo = "SoftwareModule";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "The published anomaly list of a SOUP item is evaluated for anomalies that could lead to a hazardous situation, and the result is recorded on the item.";
+        attribute predicateExpression = "not(attributes.moduleKind == 'soup') or attributes.knownAnomalies != ''";
+        constraint { true }
+    }
+
+    constraint def SoupIdentifiedRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-016"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause8.iec62304Clause8_1.iec62304Clause8_1_2;
+        attribute appliesTo = "SoftwareModule";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A SOUP item is identified under configuration management by its title, manufacturer and version, so a SOUP item states a vendor and a version.";
+        attribute predicateExpression = "not(attributes.moduleKind == 'soup') or (attributes.soupVersion != '' and attributes.soupVendor != '')";
+        constraint { true }
+    }
+
+    constraint def SoupRequirementRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-017"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_3.iec62304Clause5_3_3;
+        attribute appliesTo = "SoftwareModule";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "The functional and performance a software item needs from a SOUP item are stated as requirements, so a SOUP item is the subject of at least one requirement.";
+        attribute predicateExpression = "not(attributes.moduleKind == 'soup') or satisfiedBy->size() >= 1";
+        constraint { true }
+    }
+
+    constraint def UnitDecompositionRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-018"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_4.iec62304Clause5_4_1;
+        attribute appliesTo = "SoftwareModule";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A software item of safety class B or C is subdivided into software units, so such an item contains at least one module of kind unit.";
+        attribute predicateExpression = "not(attributes.moduleKind == 'item' and (attributes.safetyClass == 'B' or attributes.safetyClass == 'C')) or downstream(composes)->exists(attributes.moduleKind == 'unit')";
+        constraint { true }
+    }
+
+    constraint def ChangeImpactRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-019"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause6.iec62304Clause6_2.iec62304Clause6_2_3;
+        attribute appliesTo = "ChangeRequest";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A change request is analysed for its effect on the organisation, the released software and the systems that interface with it, and the analysis is recorded on the request.";
+        attribute predicateExpression = "attributes.impactAssessment != ''";
+        constraint { true }
+    }
+
+    constraint def ChangeApprovalRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-025"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = (iec62304.iec62304Clause6.iec62304Clause6_2.iec62304Clause6_2_4, iec62304.iec62304Clause8.iec62304Clause8_2.iec62304Clause8_2_1);
+        attribute appliesTo = "ChangeRequest";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A change request records whether it was approved before the change is made.";
+        attribute predicateExpression = "attributes.approvalStatus != ''";
+        constraint { true }
+    }
+
+    constraint def ChangeTraceRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-MED-026"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause8.iec62304Clause8_2.iec62304Clause8_2_4;
+        attribute appliesTo = "ChangeRequest";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A change request is traceable to the items it changes, so it has a changes relation to at least one element.";
+        attribute predicateExpression = "changes->size() >= 1";
+        constraint { true }
+    }
 }
