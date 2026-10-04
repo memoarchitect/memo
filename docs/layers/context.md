@@ -20,11 +20,11 @@ requirement of a device with a stated purpose. Recording the context first
 means those conditions are written once and referenced thereafter, rather than
 assumed differently by each discipline.
 
-MEMO follows ISO/IEC/IEEE 42010 in separating two roles that are often
-conflated. A *stakeholder* holds concerns that the architecture description
-must address. An *actor* interacts with the device. The same person frequently
-occupies both roles, and the model relates them by `ActsAsActor` rather than
-merging them into one element.
+MEMO separates two roles that are often conflated. Someone *holds a need* the
+device must address, and someone *interacts with* the device. A need says whose
+it is with `HeldBy`; a person who uses the device is a `User`, joined to a use
+case as its native `actor`. The same person frequently occupies both roles, and
+the model relates the two rather than merging them into one element.
 
 ## What is established before this layer
 
@@ -100,7 +100,8 @@ an alarm condition, and that assumption is inherited by the hazard analysis.
 `User` is reserved for humans, because it is the population for which IEC
 62366-1 usability engineering is accountable. Use errors, tasks, and usability
 validation attach to a `User` and never to an external system, which is
-recorded as a `NonHumanActor`.
+recorded as an `OperationalEntity` (with `entityKind` such as `externalSystem`
+or `device`).
 
 ### Reasonably foreseeable misuse
 
@@ -134,7 +135,7 @@ people are trying to achieve. It inherits:
 - `RFM-001`, as a known deviation the later scenarios must account for.
 
 Consistency between the layers is expressed by typed relationships rather than
-by narrative. An actor is bound to a use case by `Initiates` or
-`ParticipatesIn`; a use case is bound to its setting by `AppliesInContext`.
+by narrative. An actor is bound to a use case natively, as its `actor`; a use
+context applies to what it governs by `AppliesInContext`.
 
 [Next: Layer 2 — Use cases](use-cases.md)
