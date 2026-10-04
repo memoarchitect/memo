@@ -238,7 +238,7 @@ package memo_rules_ontology {
     // CR-ONT-002's replacement, now asked of the edge. A ComponentExchange is
     // an interface, so its ends are the ports it connects, and `sourceEnd` /
     // `targetEnd` are those elements. The compiler does not check this:
-    // SysIDE accepts a part at an interface end even when the definition types
+    // a compiler accepts a part at an interface end even when the definition types
     // the ends.
     //
     // It used to read `sourceEndpoint` refs, whose dotted values the builder

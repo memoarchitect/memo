@@ -169,7 +169,7 @@ connection linkFoo : SomeRelation connect a to b {
 `#refinement`, see above) brings `Rationale` into scope. Inside a metadata
 body, member redefinition is `:>> name = value;`, never `attribute :>> name =
 value;` — the reverse of every other body in this grammar (comment at
-`memo-sysml.langium:160`, measured against `syside check`). `builder.ts`'s
+`memo-sysml.langium:160`, measured against a SysML v2 compiler). `builder.ts`'s
 `extractRelationshipMetadata` reads `Rationale.text` into
 `rel.attributes.rationale`, the same key the deleted attribute used to
 occupy — a downstream reader (e.g. `dhf/query-executor.ts`'s generic
@@ -186,7 +186,7 @@ workspace to convert (none, above), so no conversion code exists or was
 added. For anyone who does need to carry an `ElementStatusKind` judgement over,
 this is the explicit correspondence — every member has one, so nothing is
 silently dropped, and the "fail loudly on no counterpart" the epic asked for is
-now enforced by SysIDE's own type checker: writing a value `StatusKind` does
+now enforced by the compiler's type checking: writing a value `StatusKind` does
 not declare is a compile error, not a silent miss.
 
 | `ElementStatusKind` | `StatusKind` | Why |
@@ -202,8 +202,8 @@ not declare is a compile error, not a silent miss.
 **Grammar note:** `StatusKind::done` does not parse in MEMO source today.
 `done` is a reserved keyword — the terminal marker in a succession (`first x
 then done;`, `memo-sysml.langium:527`) — and at the position after `::` the
-grammar's token set does not accept it as a member name (measured: `syside`
-and the Langium parser both reject `status = StatusKind::done;`, expecting an
+grammar's token set does not accept it as a member name (measured: a SysML v2
+compiler and the Langium parser both reject `status = StatusKind::done;`, expecting an
 `ID`). This is a grammar limitation, not a modelling one; if `released` status
 is ever actually needed on a relationship, either fix the grammar production to
 accept `done` there (the same class of fix R10-S1's short-name productions
@@ -263,7 +263,7 @@ parse is not a built model.
 ## The grammar bends to SysML, never the reverse
 
 Migrating `InteractsWith` produced `connection connect a to b;` — the normative
-binary-connector shorthand. SysIDE accepted it; the Langium grammar rejected it,
+binary-connector shorthand. A SysML v2 compiler accepted it; the Langium grammar rejected it,
 because `ConnectionEnd` required `endName '::>' ref`. The fix is **always** to
 widen the grammar, not to re-spell the model into whatever the grammar happens
 to accept. `endName` is now optional, and the builder defaults an omitted end to
@@ -320,7 +320,7 @@ This reads as if each reference binds to the end it names. **It does not.** The
 builder binds by position, and `HostedBy` declares `processingNode` as its
 source — so this usage produces an edge pointing the opposite way from how it
 reads. Nothing catches it on its own: the type is right, both references
-resolve, and `syside check` passes because SysML has no opinion about which end
+resolve, and the compiler accepts it because SysML has no opinion about which end
 you write first.
 
 Measured 2026-08-18: a handful of usages were reversed this way, on `HostedBy`
