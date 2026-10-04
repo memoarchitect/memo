@@ -398,10 +398,12 @@ package memo_examples_gpca_pump_gpca_architecture {
     // extensions derived from system requirements and hazard analysis, not
     // subcomponents in the published AADL packages) are nested the same way,
     // inside gpcaSoftware's own body.
+    // --8<-- [start:satisfy]
     satisfy reqCs01 by gpcaSoftware.tlm;
     satisfy reqCs01 by gpcaSoftware.outputBus;
     satisfy reqCs18 by gpcaSoftware.systemStatus;
     satisfy reqCs23 by gpcaSoftware.systemStatus;
+    // --8<-- [end:satisfy]
     satisfy reqCs25 by gpcaSoftware.infusionMgr;
     satisfy reqCs19 by gpcaSoftware.alarm;
     satisfy reqDrugLibraryLimits by gpcaSoftware.config;

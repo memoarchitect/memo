@@ -65,17 +65,44 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.snippets:
+      check_paths: true
+      dedent_subsections: true
 
 plugins:
   - search
 
 docs_dir: docs
+# Tables the layer pages include; never pages of their own.
+exclude_docs: |
+  ontology/_generated/
+
 site_dir: site
 
 nav:
   - Home:
       - index.md
       - Getting Started: getting-started.md
+  - The Ontology:
+      - MEMO in a nutshell: ontology/index.md
+      - Architecture layers:
+          - Operational: ontology/operational.md
+          - Functional: ontology/functional.md
+          - Logical: ontology/logical.md
+          - Implementation: ontology/implementation.md
+          - Realization: ontology/realization.md
+      - Assurance disciplines:
+          - Requirements: ontology/requirements.md
+          - Safety and risk: ontology/safety-risk.md
+          - Cybersecurity: ontology/cybersecurity.md
+          - Human factors: ontology/human-factors.md
+          - Verification and validation: ontology/verification-validation.md
+      - Foundations:
+          - Core: reference/areas/core.md
+          - Artifacts: reference/areas/artifacts.md
+          - Viewpoints: reference/areas/viewpoints.md
+          - Methodology: reference/areas/methodology.md
+          - Rules: reference/areas/rules.md
   - Explanation:
       - explanation/index.md
       - Why MEMO: why/index.md
@@ -85,13 +112,6 @@ nav:
       - Native project format: reference/native-project-format.md
       - Naming and native constructs: reference/naming-and-native-constructs.md
       - Definition, usage, and context: reference/definition-usage-and-context.md
-      - Core: reference/areas/core.md
-      - Architecture: reference/areas/architecture.md
-      - Assurance: reference/areas/assurance.md
-      - Artifacts: reference/areas/artifacts.md
-      - Viewpoints: reference/areas/viewpoints.md
-      - Methodology: reference/areas/methodology.md
-      - Rules: reference/areas/rules.md
       - Building blocks: reference/building-blocks.md
   - SysML API:
       - sysml-api/index.md
@@ -134,6 +154,14 @@ nav:
       - GPCA Pump:
           - case-studies/gpca/index.md
           - Narrative Walkthrough: examples/gpca-walkthrough.md
+          - Layer by layer:
+              - layers/index.md
+              - Context and use: layers/context.md
+              - Use cases: layers/use-cases.md
+              - The operational world: layers/operational-world.md
+              - Functional analysis: layers/operations-system.md
+              - Requirements and architecture: layers/requirements-architecture.md
+              - Risk, cybersecurity, and assurance: layers/risk-assurance.md
           - Stakeholders and Concerns: case-studies/gpca/stakeholders-concerns.md
           - Viewpoints: case-studies/gpca/viewpoints.md
           - Views: case-studies/gpca/views.md

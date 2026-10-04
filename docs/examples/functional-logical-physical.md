@@ -17,10 +17,10 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity` | [Operational](../reference/areas/architecture.md#operational) |
-| Functional | `SystemFunction` | [Functional](../reference/areas/architecture.md#functional) |
-| Logical | `LogicalComponent` | [Logical](../reference/areas/architecture.md#logical) |
-| Implementation and realization | `MechanicalPart`, `SoftwareModule` | [Implementation and realization](../reference/areas/architecture.md#implementation) |
+| Operational | `OperationalActivity` | [Operational](../ontology/operational.md) |
+| Functional | `SystemFunction` | [Functional](../ontology/functional.md) |
+| Logical | `LogicalComponent` | [Logical](../ontology/logical.md) |
+| Implementation and realization | `MechanicalPart`, `SoftwareModule` | [Implementation and realization](../ontology/implementation.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `AllocatedTo`, `Enables`, `Realizes` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.

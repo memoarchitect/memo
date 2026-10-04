@@ -38,11 +38,13 @@ package memo_examples_gpca_pump_gpca_requirements {
         attribute :>> statement = "The device shall deliver the prescribed basal and bolus doses accurately so the patient receives effective analgesia.";
         attribute :>> priority = "high";
     }
+    // --8<-- [start:need]
     requirement needTimelyAlarms : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
         @MemoIdentity { :>> providedId = "NEED-003"; :>> label = "TimelyAlarmNotification"; }
         attribute :>> statement = "Clinicians shall be notified promptly and unambiguously of any condition that interrupts or endangers therapy.";
         attribute :>> priority = "high";
+    // --8<-- [end:need]
     }
     requirement needAuditableRecord : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
@@ -1565,6 +1567,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         @MemoIdentity { :>> sourceReference = "MEMO extension — mechanism-level accuracy budget derived from App. A.4 Tolerance_Min_const"; }
         attribute :>> electricalSafetyRelevant = false;
     }
+    // --8<-- [start:requirement]
     requirement reqAlarmLoudness : Requirement {
         attribute :>> requirementType = RequirementTypeKind::hardware;
         @MemoIdentity { :>> providedId = "REQ-X-12"; :>> label = "AlarmSoundPressureLevel"; }
@@ -1574,6 +1577,7 @@ package memo_examples_gpca_pump_gpca_requirements {
         attribute :>> status = ElementStatusKind::approved;
         attribute :>> acceptanceCriteria = "Calibrated SPL measurement meets Audio_level_const for each priority tone.";
         attribute :>> subjectDescription = "AudibleAlarmAnnunciator";
+    // --8<-- [end:requirement]
         attribute :>> actorDescription = "clinician";
         attribute :>> assumptionSummary = "ward ambient noise per IEC 60601-1-8 baseline";
         attribute :>> guaranteeSummary = "alarms audible at the ward station";

@@ -31,7 +31,7 @@ records with the occurrence. Those record schemas are outside MEMO.
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity`, `OperationalWorkflow`, `OperationalScenario`, `ScenarioOccurrence`, `UseCase`, `User`, `WorkflowStep` | [Operational](../reference/areas/architecture.md#operational) |
+| Operational | `OperationalActivity`, `OperationalWorkflow`, `OperationalScenario`, `ScenarioOccurrence`, `UseCase`, `User`, `WorkflowStep` | [Operational](../ontology/operational.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `Composes`, `Initiates`, `StepPrecedes`, `Supports`.

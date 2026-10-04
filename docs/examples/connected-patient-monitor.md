@@ -17,7 +17,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Logical | `Interface`, `LogicalComponent`, `LogicalExchange`, `LogicalExchangeItem` | [Logical](../reference/areas/architecture.md#logical) |
+| Logical | `Interface`, `LogicalComponent`, `LogicalExchange`, `LogicalExchangeItem` | [Logical](../ontology/logical.md) |
 | Assurance | `TrustBoundary` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 | Core | `TerminologyCode` | [Core](../reference/areas/core.md) |
