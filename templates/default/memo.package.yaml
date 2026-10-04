@@ -15,5 +15,4 @@ description: MEMO architecture and assurance model
 # the packager `memo pack` uses (internal or sysand).
 # Required; MEMO chooses none for a project that does not.
 toolchain:
-  compiler: internal
   packager: internal

@@ -2,5 +2,4 @@ name: ivd-laboratory-system
 entrypoint: model/catalog/project.sysml
 include: [model]
 toolchain:
-  compiler: internal
   packager: internal
