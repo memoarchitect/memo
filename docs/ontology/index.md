@@ -11,83 +11,47 @@ MEMO organises the model on **two axes**:
 - **The assurance disciplines** test that explanation. They run across every
   layer and ask whether it is complete and supported by evidence.
 
-[![MEMO architecture and assurance V-model](../assets/memo-architecture-assurance-v-model.png)](../assets/memo-architecture-assurance-v-model.png){ .memo-zoomable aria-label="Open the architecture and assurance V-model" }
+[![MEMO's five architecture layers stacked from Operational to Realization, with the assurance disciplines running alongside every layer](../assets/ontology/overview-layers.svg){ .memo-presentation-graphic }](../assets/ontology/overview-layers.svg){ title="Open full size" }
 
-## The architecture layers
+Read the picture top to bottom. Each blue plane is an architecture layer, with
+the question it answers and its four core elements. The orange arrow between two
+planes names the relationship that carries the work down: an operational action
+`perform`s a function, a function is `allocate`d to a logical component, and so
+on. The first two layers are about **understanding the need**; the last three
+are about **designing the solution**. The red band on the right is assurance: each
+discipline reaches into every layer, and the red dashed links name how.
 
-Read the layers top to bottom. Each one answers its question without borrowing
-the answer of the layer below. For example, the operational layer never names
-the device's parts, and the functional layer never names a technology.
+## How to read the figures
 
-| Layer | The question it answers | Key elements |
-| --- | --- | --- |
-| [Operational](operational.md) | Why does the device exist, for whom, and in what setting? | `User`, `UseCase`, `IntendedUse`, `UseContext`, `OperationalWorkflow`, `OperativeAction`, `OperativeScenario` |
-| [Functional](functional.md) | What must the system do? | `SystemFunction`, `ComponentFunction`, `FunctionalFlow`, `FunctionalExchange`, `StateMachine` |
-| [Logical](logical.md) | How is the solution organised, before choosing a technology? | `LogicalComponent`, `LogicalPort`, `LogicalInterface`, `ComponentExchange`, `IsolationBoundary` |
-| [Implementation](implementation.md) | What is it built from? | `SoftwareSystem`, `SoftwareModule`, `HardwareComponent`, `Sensor`, `UserInterface`, `UIElement` |
-| [Realization](realization.md) | Where does it run, and how do its parts reach each other? | `SoftwareDeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment`, `EndToEndFlow` |
+Every figure in these pages uses the same key.
 
-A `DesignDecision` (in `memo::architecture::decisions`) records a choice that
-affects elements in any of these layers.
-
-## The assurance disciplines
-
-Each discipline owns its own elements and connects them to the architecture
-elements they are about. A hazard stays a hazard; a function stays a function.
-A relationship between them says how they meet.
-
-| Discipline | The question it answers | Key elements |
-| --- | --- | --- |
-| [Requirements](requirements.md) | What must be true, and why? | `Need`, `Requirement`, `RiskDriver`, `SystemConstant` |
-| [Safety and risk](safety-risk.md) | What could cause harm, and what keeps the risk acceptable? | `Hazard`, `HazardousSituation`, `Harm`, `Risk`, `RiskControlMeasure`, `FailureMode`, `FaultTree` |
-| [Cybersecurity](cybersecurity.md) | What could an attacker do, and what stops them? | `CybersecurityAsset`, `Threat`, `Vulnerability`, `CyberRisk`, `CyberMitigation`, `TrustBoundary` |
-| [Human factors](human-factors.md) | Where can use go wrong? | `UseError`, and the tasks it is committed in |
-| [Verification and validation](verification-validation.md) | How do we know it works, and that it is the right device? | `VerificationCase`, `ValidationCase`, `TestStep`, `ClinicalEvaluation` |
-
-Underneath both axes are the **foundations** that the layers build on:
-[Core](../reference/areas/core.md) (the base definitions and shared
-relationships), [Artifacts](../reference/areas/artifacts.md),
-[Viewpoints](../reference/areas/viewpoints.md),
-[Methodology](../reference/areas/methodology.md) and
-[Rules](../reference/areas/rules.md).
-
-## How the layers connect
-
-MEMO connects elements with **native SysML v2 relationships** wherever the
-language already has one. It defines **its own typed relationships** only where
-the native form would lose meaning that a medical-device argument needs.
-
-The native relationships do most of the connecting between architecture layers:
-
-| Native SysML | Connects | Example |
-| --- | --- | --- |
-| `actor`, `subject` | a user to the use case they pursue, and the system the use case is about | the ICU nurse initiates *Monitor patient temperature* |
-| `perform` | an action to the function or scenario it carries out | a UI action performs *Detect temperature deviation* |
-| `allocate` | a function to the component responsible for it | *Detect temperature deviation* is allocated to the monitor channel |
-| `allocation … : BuildsInto`, `: DeploysTo`, `: HostedBy` | software to the image it builds into, the node it runs on, the board that hosts it | the firmware image deploys to the main controller |
-| `#refinement dependency` | a realizing element to the element it realizes (the realizing one first) | the sensor input interface realizes the hardware-software bus interface |
-| `satisfy` | a requirement to the design element that satisfies it | a software module satisfies a system requirement |
-| `dependency` | an element that supports or uses another | the bedside display supports the acknowledgement task |
-
-The assurance disciplines mostly connect through MEMO's own relationships,
-because they carry information the native forms do not. For example, `Causes`
-records its kind of cause, and `Validates` keeps validation apart from
-verification, as IEC 62304 does.
-
-| MEMO relationship | Connects |
+| You see | It means |
 | --- | --- |
-| `Motivates` | a need to the use case it motivates |
-| `DerivesFrom` | a requirement to the need, hazard, threat or component it derives from |
-| `CommitsUseError` | a task to a use error committed while performing it |
-| `Causes` | a cause to its effect, such as a use error that leads to a hazard |
-| `Mitigates` | a risk control to the hazard or vulnerability it reduces |
-| `ControlImplementedBy` | a risk control to the design element that implements it |
-| `Exploits`, `ThreatenedBy`, `ImpactsSafety` | threats to vulnerabilities, assets to threats, and security to safety |
-| `Validates` | a use case, task or claim to the validation case that checks it |
-| `ProducesEvidence` | a verification or validation case to the evidence it produced |
+| <span class="memo-swatch" style="background:#e8f1fc;border-color:#2f6fc4"></span> blue box | an **architecture** element: it explains the device (`memo::architecture`) |
+| <span class="memo-swatch" style="background:#fdebea;border-color:#c7433f"></span> red box | an **assurance** element: it tests the explanation (`memo::assurance`) |
+| <span class="memo-swatch" style="background:#e7f5ea;border-color:#2f8a4a"></span> green box | a **methodology** element: how the work is planned and run (`memo::methodology`) |
+| <span class="memo-swatch" style="background:#f1f3f5;border-color:#7a8794"></span> grey box | a **core** element shared by everything (`memo::core`) |
+| solid line, **bold** label | one of MEMO's own relationships, such as `Motivates` |
+| dashed line, *italic* label | a native SysML v2 relationship, such as `actor` or `allocate` |
+| line with a diamond | containment: the diamond end owns the other |
+| dotted line | a reference feature, such as a scenario's `useContext` |
+| bold box with **NEW** | in a step figure, what that step adds; faded boxes came earlier |
 
-The page for each layer lists every relationship that touches it, generated
-from the ontology source.
+Each layer page opens with its whole picture and then builds it up in steps:
+first the layer's core, then the elements that support it.
+
+## The two axes
+
+- **[Architecture layers](architecture/index.md)** explain the device: Operational,
+  Functional, Logical, Implementation, Realization. They connect mostly through
+  native SysML relationships such as `perform`, `allocate` and `satisfy`.
+- **[Assurance disciplines](assurance/index.md)** test that explanation: Requirements,
+  Safety and risk, Cybersecurity, Human factors, Verification and validation.
+  They connect mostly through MEMO's own relationships, such as `Causes`,
+  `Mitigates` and `Validates`, because those carry meaning a medical-device
+  argument needs.
+- **[Foundations](foundations/index.md)** sit underneath both: Core, Artifacts,
+  Viewpoints, Methodology, Rules.
 
 ## One thread through every layer
 
@@ -125,11 +89,11 @@ flowchart TB
   task -->|Validates| val
   vc -->|ProducesEvidence| ev
   val -->|ProducesEvidence| ev
-  classDef op fill:#ece8fb,stroke:#7c6bd6,color:#1f2a44
-  classDef fn fill:#e3effb,stroke:#4a8bd6,color:#1f2a44
-  classDef lg fill:#dff4f0,stroke:#2f9e8b,color:#1f2a44
-  classDef im fill:#fdf0e2,stroke:#d98a3a,color:#1f2a44
-  classDef as fill:#f4f5f7,stroke:#8a96a3,color:#1f2a44
+  classDef op fill:#e8f1fc,stroke:#2f6fc4,color:#1f2a44
+  classDef fn fill:#e8f1fc,stroke:#2f6fc4,color:#1f2a44
+  classDef lg fill:#e8f1fc,stroke:#2f6fc4,color:#1f2a44
+  classDef im fill:#e8f1fc,stroke:#2f6fc4,color:#1f2a44
+  classDef as fill:#fdebea,stroke:#c7433f,color:#1f2a44
 ```
 
 Read the thread as one argument. The nurse must notice a deviation. The system
@@ -141,8 +105,8 @@ produce the evidence for both.
 
 ## Where to go next
 
-- Read one layer page: each opens with its question, introduces its elements,
-  shows how they connect, and lists the full inventory.
+- Read one layer page: each opens with its question and its whole picture,
+  builds the picture up step by step, and keeps the full inventory folded away.
 - [Choose an element](../modeling/elements.md) and
   [write a relationship](../modeling/relationships.md) when you model.
 - [Browse the generated API](../sysml-api/index.md) for every definition.
