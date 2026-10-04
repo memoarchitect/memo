@@ -64,6 +64,7 @@
 | [`RuleSeverityKind`](#ruleseveritykind) | `enum def` | Controlled values for rule severity: `error`, `warning`, `info`. | — |
 | [`RuleCategoryKind`](#rulecategorykind) | `enum def` | Controlled values for rule category: `closure`, `coverage`, `lifecycle`, `crossLayer`, `quantitative`. | — |
 | [`RuleTailoringKind`](#ruletailoringkind) | `enum def` | How far a methodology may tailor a rule. `invariant` rules hold the ontology's own consistency and may only change in an ontology release; `assurance` and `methodology` rules may be disabled or replaced through an explicit RulePolicy carrying rationale and authority. | — |
+| [`RuleDomainKind`](#ruledomainkind) | `enum def` | Why a rule exists. `modelling` rules keep a model well formed whatever the product is. `medicalDevice` rules exist because a medical-device standard or guidance asks for the thing they check, and each should say which clause it enforces (`enforces`).… | — |
 | [`RuleDispositionKind`](#ruledispositionkind) | `enum def` | Controlled values for rule disposition: `enabled`, `disabled`, `replaced`. | — |
 | [`ScopeModeKind`](#scopemodekind) | `enum def` | Whether a methodology's inclusion lists are the whole selection or a deliberate subset. An empty list under `explicit` selects nothing; it never means "everything". `allAvailable` is the only way to say "all", and it is always deliberate.… | — |
 | [`WorkflowStageKind`](#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`. | — |
@@ -621,6 +622,21 @@ enum def RuleTailoringKind
 | Property | Value |
 | --- | --- |
 | Description | How far a methodology may tailor a rule. `invariant` rules hold the ontology's own consistency and may only change in an ontology release; `assurance` and `methodology` rules may be disabled or replaced through an explicit RulePolicy carrying rationale and authority. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## RuleDomainKind
+
+```sysml
+enum def RuleDomainKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Why a rule exists. `modelling` rules keep a model well formed whatever the product is. `medicalDevice` rules exist because a medical-device standard or guidance asks for the thing they check, and each should say which clause it enforces (`enforces`).… |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1555,6 +1571,15 @@ enum def CommentStatusKind
             enum invariant;
             enum assurance;
             enum methodology;
+        }
+        // Why a rule exists. `modelling` rules keep a model well formed whatever the
+        // product is. `medicalDevice` rules exist because a medical-device standard or
+        // guidance asks for the thing they check, and each should say which clause it
+        // enforces (`enforces`). `organisation` rules are a user's own.
+        enum def RuleDomainKind {
+            enum modelling;
+            enum medicalDevice;
+            enum organisation;
         }
         enum def RuleDispositionKind {
             enum enabled;
