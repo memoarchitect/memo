@@ -39,7 +39,7 @@
 | [`SystemFunction`](#systemfunction) | `action def` | A responsibility of the system as a whole. Allocation is optional: a system function that no single component owns is a normal intermediate state of the functional chain, not a defect. | `MemoFunction` |
 | [`ComponentFunction`](#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. | `MemoFunction` |
 | [`FunctionalExchange`](#functionalexchange) | `flow def` | A transfer between two functions, carrying the budgets and assurance attributes a reader needs on the transfer itself.… | — |
-| [`FunctionalFlow`](#functionalflow) | `action def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. An `action def`, like every other behaviour in MEMO. It was `part def ...… | `MemoAction` |
+| [`FunctionalFlow`](#functionalflow) | `action def` | Functional flow definition specializing `MemoAction`. | `MemoAction` |
 
 ## MemoFunction
 
@@ -109,7 +109,7 @@ action def FunctionalFlow specializes MemoAction
 
 | Property | Value |
 | --- | --- |
-| Description | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. An `action def`, like every other behaviour in MEMO. It was `part def ...… |
+| Description | Functional flow definition specializing `MemoAction`. |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |

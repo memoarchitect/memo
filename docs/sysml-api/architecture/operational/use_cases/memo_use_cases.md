@@ -37,8 +37,8 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`UseCaseKind`](#usecasekind) | `enum def` | Controlled values for use case: `clinical`, `service`, `manufacturing`, `development`. | — |
-| [`UseCase`](#usecase) | `use case def` | Specializes the STANDARD library use case as well as MEMO's base. Before this it specialized only `MemoUseCase` and so shadowed `UseCases::UseCase` — same name, same metaclass, none of the semantics — which is why the subject/actor features below had to be re-declared by hand … | `MemoUseCase,` |
-| [`Motivates`](#motivates) | `connection def` | Typed relationship for motivates. | `MemoRelationship` |
+| [`UseCase`](#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. | `MemoUseCase` |
+| [`Motivates`](#motivates) | `connection def` | Typed relationship from `Need` to `UseCase`. | `MemoRelationship` |
 
 ## UseCaseKind
 
@@ -63,10 +63,10 @@ use case def UseCase :> MemoUseCase, UseCases::UseCase
 
 | Property | Value |
 | --- | --- |
-| Description | Specializes the STANDARD library use case as well as MEMO's base. Before this it specialized only `MemoUseCase` and so shadowed `UseCases::UseCase` — same name, same metaclass, none of the semantics — which is why the subject/actor features below had to be re-declared by hand … |
+| Description | Use case definition specializing `MemoUseCase`. |
 | Kind | `use case def` |
 | Abstract | No |
-| Specializes | `MemoUseCase,` |
+| Specializes | `MemoUseCase` |
 | Owning package | `memo_architecture_operational_use_cases` |
 
 
@@ -78,7 +78,7 @@ connection def Motivates :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for motivates. |
+| Description | Typed relationship from `Need` to `UseCase`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

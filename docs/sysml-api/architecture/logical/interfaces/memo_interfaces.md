@@ -32,15 +32,15 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`Interface`](#interface) | `interface def` | Specializes the standard library interface as well as MEMO's base, rather than shadowing it — see the note on UseCase. | `MemoInterface,` |
+| [`Interface`](#interface) | `interface def` | Specializes the standard library interface as well as MEMO's base, rather than shadowing it — see the note on UseCase. | `MemoInterface` |
 | [`SoftwareInterface`](#softwareinterface) | `interface def` | Software interaction contracts specialize the native MEMO interface family. Concrete technologies add their protocol roles and message flows; ports remain the endpoints that components actually own. | `Interface` |
 | [`InterfaceItem`](#interfaceitem) | `item def` | A typed thing exchanged at a boundary. Concrete items such as AlarmSignal and FlowCommand specialize this type; they are neither functions nor generic action-flow notation.… | `MemoItem` |
-| [`DataInterface`](#datainterface) | `interface def` | Data interface definition specializing `MemoInterface`. | `MemoInterface` |
+| [`DataInterface`](#datainterface) | `interface def` | Typed relationship for data interface. | `MemoInterface` |
 | [`DataPort`](#dataport) | `port def` | Data port definition specializing `MemoPort`. | `MemoPort` |
 | [`SensorPort`](#sensorport) | `port def` | Sensor port definition specializing `DataPort`. | `DataPort` |
 | [`CommandPort`](#commandport) | `port def` | Command port definition specializing `DataPort`. | `DataPort` |
-| [`ComponentExchange`](#componentexchange) | `interface def` | Component exchange definition specializing `MemoInterface`. | `MemoInterface` |
-| [`SoftwarePort`](#softwareport) | `port def` | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary.… | `MemoPort` |
+| [`ComponentExchange`](#componentexchange) | `interface def` | Typed relationship for component exchange. | `MemoInterface` |
+| [`SoftwarePort`](#softwareport) | `port def` | Software port definition specializing `MemoPort`. | `MemoPort` |
 
 ## Interface
 
@@ -53,7 +53,7 @@ interface def Interface specializes MemoInterface, Interfaces::Interface
 | Description | Specializes the standard library interface as well as MEMO's base, rather than shadowing it — see the note on UseCase. |
 | Kind | `interface def` |
 | Abstract | No |
-| Specializes | `MemoInterface,` |
+| Specializes | `MemoInterface` |
 | Owning package | `memo_architecture_logical_interfaces` |
 
 
@@ -95,7 +95,7 @@ abstract interface def DataInterface specializes MemoInterface
 
 | Property | Value |
 | --- | --- |
-| Description | Data interface definition specializing `MemoInterface`. |
+| Description | Typed relationship for data interface. |
 | Kind | `interface def` |
 | Abstract | Yes |
 | Specializes | `MemoInterface` |
@@ -155,7 +155,7 @@ interface def ComponentExchange specializes MemoInterface
 
 | Property | Value |
 | --- | --- |
-| Description | Component exchange definition specializing `MemoInterface`. |
+| Description | Typed relationship for component exchange. |
 | Kind | `interface def` |
 | Abstract | No |
 | Specializes | `MemoInterface` |
@@ -170,7 +170,7 @@ port def SoftwarePort specializes MemoPort
 
 | Property | Value |
 | --- | --- |
-| Description | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary.… |
+| Description | Software port definition specializing `MemoPort`. |
 | Kind | `port def` |
 | Abstract | No |
 | Specializes | `MemoPort` |

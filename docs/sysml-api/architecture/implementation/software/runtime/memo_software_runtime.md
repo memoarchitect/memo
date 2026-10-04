@@ -34,7 +34,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`RuntimeKind`](#runtimekind) | `enum def` | process / thread / task / service / container / partition / dataStore / messageBroker. | — |
+| [`RuntimeKind`](#runtimekind) | `enum def` | Controlled values for runtime: `process`, `thread`, `task`, `service`, `container`, `partition`, `dataStore`, `messageBroker`. | — |
 | [`SoftwareComponent`](#softwarecomponent) | `part def` | Software component definition specializing `SoftwareElement`. | `SoftwareElement` |
 
 ## RuntimeKind
@@ -45,7 +45,7 @@ enum def RuntimeKind
 
 | Property | Value |
 | --- | --- |
-| Description | process / thread / task / service / container / partition / dataStore / messageBroker. |
+| Description | Controlled values for runtime: `process`, `thread`, `task`, `service`, `container`, `partition`, `dataStore`, `messageBroker`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |

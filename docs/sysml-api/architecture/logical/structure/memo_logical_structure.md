@@ -42,10 +42,10 @@
 | [`Subsystem`](#subsystem) | `part def` | Subsystem definition specializing `LogicalComponent`. | `LogicalComponent` |
 | [`LogicalComponent`](#logicalcomponent) | `part def` | Logical component definition specializing `MemoPart`. | `MemoPart` |
 | [`LogicalPort`](#logicalport) | `port def` | Boundary features and contracts. | `MemoPort` |
-| [`LogicalInterface`](#logicalinterface) | `interface def` | Logical interface definition specializing `MemoInterface`. | `MemoInterface` |
+| [`LogicalInterface`](#logicalinterface) | `interface def` | Typed relationship from `LogicalPort` to `any element`. | `MemoInterface` |
 | [`LogicalExchangeItem`](#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoItem`. | `MemoItem` |
 | [`LogicalConnector`](#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | `MemoRelationship` |
-| [`LogicalExchange`](#logicalexchange) | `flow def` | Logical exchange definition. | — |
+| [`LogicalExchange`](#logicalexchange) | `flow def` | Typed relationship for logical exchange. | — |
 | [`LogicalBehavior`](#logicalbehavior) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `MemoPart` |
 | [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). | `MemoPart` |
 | [`FaultContainmentRegion`](#faultcontainmentregion) | `part def` | Fault containment region definition specializing `MemoPart`. | `MemoPart` |
@@ -194,7 +194,7 @@ interface def LogicalInterface specializes MemoInterface
 
 | Property | Value |
 | --- | --- |
-| Description | Logical interface definition specializing `MemoInterface`. |
+| Description | Typed relationship from `LogicalPort` to `any element`. |
 | Kind | `interface def` |
 | Abstract | No |
 | Specializes | `MemoInterface` |
@@ -239,7 +239,7 @@ abstract flow def LogicalExchange
 
 | Property | Value |
 | --- | --- |
-| Description | Logical exchange definition. |
+| Description | Typed relationship for logical exchange. |
 | Kind | `flow def` |
 | Abstract | Yes |
 | Specializes | — |

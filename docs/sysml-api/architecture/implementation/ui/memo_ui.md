@@ -56,9 +56,9 @@
 | [`UIAction`](#uiaction) | `action def` | Clicking a button IS an operative action: it has a trigger, a precondition, a criticality, a potential harm and a frequency of use, exactly as turning a knob does.… | `OperativeAction` |
 | [`InteractionFlow`](#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a OperativeScenario with scenarioKind `ui`. | `MemoAction` |
 | [`CapturesScreen`](#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | `MemoRelationship` |
-| [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship for element triggers action. | `MemoRelationship` |
-| [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship for flow serves use case. | `MemoRelationship` |
-| [`ErrorAtElement`](#erroratelement) | `connection def` | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. Target is `MemoPart`.… | `MemoRelationship` |
+| [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship from `MemoPart` to `UIAction`. | `MemoRelationship` |
+| [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship from `InteractionFlow` to `UseCase`. | `MemoRelationship` |
+| [`ErrorAtElement`](#erroratelement) | `connection def` | Typed relationship from `UseError` to `MemoPart`. | `MemoRelationship` |
 | [`ControlImplementedBy`](#controlimplementedby) | `connection def` | A risk control implemented by a UI element or by task design (confirmation dialog, lockout, guarded control). | `MemoRelationship` |
 
 ## UIElementFormKind
@@ -294,7 +294,7 @@ connection def ElementTriggersAction :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for element triggers action. |
+| Description | Typed relationship from `MemoPart` to `UIAction`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -309,7 +309,7 @@ connection def FlowServesUseCase :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for flow serves use case. |
+| Description | Typed relationship from `InteractionFlow` to `UseCase`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -324,7 +324,7 @@ connection def ErrorAtElement :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | A UI scenario realizes a functional scenario one layer up: each is a OperativeScenario selected by scenarioKind rather than a separate definition. Target is `MemoPart`.… |
+| Description | Typed relationship from `UseError` to `MemoPart`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

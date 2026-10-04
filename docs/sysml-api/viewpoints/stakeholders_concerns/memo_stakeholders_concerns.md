@@ -30,6 +30,16 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
+| [`MemoConcern`](#memoconcern) | `concern def` | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses. | — |
+| [`SafetyConcern`](#safetyconcern) | `concern def` | Safety concern definition specializing `MemoConcern`. | `MemoConcern` |
+| [`UsabilityConcern`](#usabilityconcern) | `concern def` | Usability concern definition specializing `MemoConcern`. | `MemoConcern` |
+| [`CybersecurityConcern`](#cybersecurityconcern) | `concern def` | Cybersecurity concern definition specializing `MemoConcern`. | `MemoConcern` |
+| [`PerformanceConcern`](#performanceconcern) | `concern def` | Performance concern definition specializing `MemoConcern`. | `MemoConcern` |
+| [`InteroperabilityConcern`](#interoperabilityconcern) | `concern def` | Interoperability concern definition specializing `MemoConcern`. | `MemoConcern` |
+| [`ReliabilityConcern`](#reliabilityconcern) | `concern def` | Reliability concern definition specializing `MemoConcern`. | `MemoConcern` |
+| [`PrivacyConcern`](#privacyconcern) | `concern def` | Privacy concern definition specializing `MemoConcern`. | `MemoConcern` |
+| [`RegulatoryConcern`](#regulatoryconcern) | `concern def` | Regulatory concern definition specializing `MemoConcern`. | `MemoConcern` |
+| [`ClinicalConcern`](#clinicalconcern) | `concern def` | Clinical concern definition specializing `MemoConcern`. | `MemoConcern` |
 | [`MemoQualityAttribute`](#memoqualityattribute) | `part def` | Memo quality attribute definition specializing `MemoPart`. | `MemoPart` |
 | [`Availability`](#availability) | `part def` | Availability definition specializing `MemoQualityAttribute`. | `MemoQualityAttribute` |
 | [`Performance`](#performance) | `part def` | Performance definition specializing `MemoQualityAttribute`. | `MemoQualityAttribute` |
@@ -50,6 +60,156 @@
 | [`PrivacyEngineer`](#privacyengineer) | `part def` | Privacy engineer definition specializing `MemoStakeholder`. | `MemoStakeholder` |
 | [`ClinicalEngineer`](#clinicalengineer) | `part def` | Clinical engineer definition specializing `MemoStakeholder`. | `MemoStakeholder` |
 | [`UsabilityEngineer`](#usabilityengineer) | `part def` | Usability engineer definition specializing `MemoStakeholder`. | `MemoStakeholder` |
+
+## MemoConcern
+
+```sysml
+abstract concern def MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses. |
+| Kind | `concern def` |
+| Abstract | Yes |
+| Specializes | — |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## SafetyConcern
+
+```sysml
+concern def SafetyConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Safety concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## UsabilityConcern
+
+```sysml
+concern def UsabilityConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Usability concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## CybersecurityConcern
+
+```sysml
+concern def CybersecurityConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Cybersecurity concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## PerformanceConcern
+
+```sysml
+concern def PerformanceConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Performance concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## InteroperabilityConcern
+
+```sysml
+concern def InteroperabilityConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Interoperability concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## ReliabilityConcern
+
+```sysml
+concern def ReliabilityConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Reliability concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## PrivacyConcern
+
+```sysml
+concern def PrivacyConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Privacy concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## RegulatoryConcern
+
+```sysml
+concern def RegulatoryConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Regulatory concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
+
+## ClinicalConcern
+
+```sysml
+concern def ClinicalConcern :> MemoConcern
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Clinical concern definition specializing `MemoConcern`. |
+| Kind | `concern def` |
+| Abstract | No |
+| Specializes | `MemoConcern` |
+| Owning package | `memo_viewpoints_stakeholders_concerns` |
+
 
 ## MemoQualityAttribute
 

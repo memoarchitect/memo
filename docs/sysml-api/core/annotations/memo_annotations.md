@@ -38,8 +38,8 @@
 | [`ModelRationale`](#modelrationale) | `part def` | Model rationale definition specializing `ModelAnnotation`. | `ModelAnnotation` |
 | [`ModelNote`](#modelnote) | `part def` | Model note definition specializing `ModelAnnotation`. | `ModelAnnotation` |
 | [`CommentsOn`](#commentson) | `connection def` | Replies form a thread through the ordinary Composes relation (parent comment → reply), so CR-ONT-001's acyclicity invariant already covers comment threads and no thread-specific relation is needed.… | `MemoRelationship` |
-| [`RationaleFor`](#rationalefor) | `connection def` | Typed relationship for rationale for. | `MemoRelationship` |
-| [`NotesOn`](#noteson) | `connection def` | Typed relationship for notes on. | `MemoRelationship` |
+| [`RationaleFor`](#rationalefor) | `connection def` | Typed relationship from `ModelRationale` to `any element`. | `MemoRelationship` |
+| [`NotesOn`](#noteson) | `connection def` | Typed relationship from `ModelNote` to `any element`. | `MemoRelationship` |
 
 ## ModelAnnotation
 
@@ -124,7 +124,7 @@ connection def RationaleFor :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for rationale for. |
+| Description | Typed relationship from `ModelRationale` to `any element`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -139,7 +139,7 @@ connection def NotesOn :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for notes on. |
+| Description | Typed relationship from `ModelNote` to `any element`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

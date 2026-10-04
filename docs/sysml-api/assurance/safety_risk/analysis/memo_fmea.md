@@ -47,13 +47,13 @@
 | [`HAZOPNode`](#hazopnode) | `part def` | Hazopnode definition specializing `MemoPart`. | `MemoPart` |
 | [`HAZOPDeviation`](#hazopdeviation) | `item def` | Hazopdeviation definition specializing `RiskItem`. | `RiskItem` |
 | [`CauseKind`](#causekind) | `enum def` | Controlled values for cause: `failureCausesEffect`, `failureCausedBy`, `contributesToHazard`, `leadsToHazard`, `originatesFrom`, `useErrorLeadsToHazard`. | — |
-| [`Causes`](#causes) | `connection def` | Typed relationship for causes. | `MemoRelationship` |
-| [`DetectedBy`](#detectedby) | `connection def` | Typed relationship for detected by. | `MemoRelationship` |
-| [`InputToGate`](#inputtogate) | `connection def` | Typed relationship for input to gate. | `MemoRelationship` |
-| [`ProducesEvent`](#producesevent) | `connection def` | Typed relationship for produces event. | `MemoRelationship` |
-| [`ContainsEvent`](#containsevent) | `connection def` | Typed relationship for contains event. | `MemoRelationship` |
-| [`IdentifiesHazard`](#identifieshazard) | `connection def` | Typed relationship for identifies hazard. | `MemoRelationship` |
-| [`HasFailureMode`](#hasfailuremode) | `connection def` | Typed relationship for has failure mode. | `MemoRelationship` |
+| [`Causes`](#causes) | `connection def` | Typed relationship from `any element` to `any element`. | `MemoRelationship` |
+| [`DetectedBy`](#detectedby) | `connection def` | Typed relationship from `FailureMode` to `DetectionMethod`. | `MemoRelationship` |
+| [`InputToGate`](#inputtogate) | `connection def` | Typed relationship from `FaultTreeNode` to `FaultTreeNode`. | `MemoRelationship` |
+| [`ProducesEvent`](#producesevent) | `connection def` | Typed relationship from `FaultTreeNode` to `FaultTreeNode`. | `MemoRelationship` |
+| [`ContainsEvent`](#containsevent) | `connection def` | Typed relationship from `MinimalCutSet` to `FaultTreeNode`. | `MemoRelationship` |
+| [`IdentifiesHazard`](#identifieshazard) | `connection def` | Typed relationship from `HAZOPDeviation` to `Hazard`. | `MemoRelationship` |
+| [`HasFailureMode`](#hasfailuremode) | `connection def` | Typed relationship from `MemoPart` to `FailureMode`. | `MemoRelationship` |
 
 ## FMEAWorksheet
 
@@ -258,7 +258,7 @@ connection def Causes :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for causes. |
+| Description | Typed relationship from `any element` to `any element`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -273,7 +273,7 @@ connection def DetectedBy :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for detected by. |
+| Description | Typed relationship from `FailureMode` to `DetectionMethod`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -288,7 +288,7 @@ connection def InputToGate :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for input to gate. |
+| Description | Typed relationship from `FaultTreeNode` to `FaultTreeNode`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -303,7 +303,7 @@ connection def ProducesEvent :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for produces event. |
+| Description | Typed relationship from `FaultTreeNode` to `FaultTreeNode`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -318,7 +318,7 @@ connection def ContainsEvent :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for contains event. |
+| Description | Typed relationship from `MinimalCutSet` to `FaultTreeNode`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -333,7 +333,7 @@ connection def IdentifiesHazard :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for identifies hazard. |
+| Description | Typed relationship from `HAZOPDeviation` to `Hazard`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -348,7 +348,7 @@ connection def HasFailureMode :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship for has failure mode. |
+| Description | Typed relationship from `MemoPart` to `FailureMode`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |

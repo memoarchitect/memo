@@ -17,7 +17,7 @@ const sourceFiles = walk(join(root, "src"), ".sysml");
 const apiRoot = join(root, "docs", "sysml-api");
 
 const declarationPattern =
-  /^\s*(?:abstract\s+)?(?:part|item|action|requirement|verification|constraint|connection|interface|port|attribute|view|viewpoint|metadata|enum|state)\s+def\s+([A-Za-z_][A-Za-z0-9_]*)/gm;
+  /^\s*(?:abstract\s+)?(?:use case|part|item|action|requirement|verification|constraint|connection|interface|flow|allocation|port|attribute|view|viewpoint|metadata|enum|state|concern|occurrence|calc|analysis|case)\s+def\s+([A-Za-z_][A-Za-z0-9_]*)/gm;
 
 const missingPages = [];
 const missingDeclarations = [];
