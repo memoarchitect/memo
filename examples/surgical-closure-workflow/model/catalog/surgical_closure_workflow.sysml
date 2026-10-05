@@ -52,11 +52,11 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> trigger = "patient prepared and surgical time-out complete";
         attribute :>> successOutcome = "gastric sleeve created, haemostasis and integrity assessed, patient handed over";
         attribute :>> failureOutcome = "uncontrolled bleeding, suspected staple-line issue, or conversion/escalation";
-        ref :>> primaryUser = bariatricSurgeon;
-        ref :>> supportingActors = (scrubNurse, anesthetist);
         ref :>> useContext = bariatricOr;
         subject supportingSystem;
         actor bariatricSurgeonInitiator = bariatricSurgeon;
+        actor scrubNurseActor = scrubNurse;
+        actor anesthetistActor = anesthetist;
     }
     connection : Motivates connect motivatingNeed ::> needControlledGastricResection to motivatedUseCase ::> ucPerformSleeveGastrectomy;
 
