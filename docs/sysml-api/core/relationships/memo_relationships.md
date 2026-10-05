@@ -37,7 +37,6 @@
 | [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
 | [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship from `any element` to `MemoRequirementElement`. | `MemoRelationship` |
 | [`ProducesEvidence`](#producesevidence) | `connection def` | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. | `MemoRelationship` |
-| [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship from `MemoPart` to `RequirementDriver`. | `MemoRelationship` |
 | [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship from `RequirementDriver` to `MemoRequirementElement`. | `MemoRelationship` |
 | [`CrossesTrustBoundary`](#crossestrustboundary) | `connection def` | Typed relationship from `any element` to `any element`. | `MemoRelationship` |
 | [`Validates`](#validates) | `connection def` | Typed relationship from `any element` to `MemoVerificationCase`. | `MemoRelationship` |
@@ -83,21 +82,6 @@ connection def ProducesEvidence :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_core_relationships` |
-
-
-## ThreatenedBy
-
-```sysml
-connection def ThreatenedBy :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoPart` to `RequirementDriver`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -334,17 +318,6 @@ connection def BindsToInterface :> MemoRelationship
         // the tree (same free-deletion shape R10-S5 found for `rationale`), so
         // there was no content to carry forward.
 
-        connection def ThreatenedBy :> MemoRelationship {
-            attribute threatRole : String;
-            end protectedAsset : MemoPart :>> source;
-            end realizedThreat : RequirementDriver :>> target;
-        }
-        abstract connection threatenedByLinks : ThreatenedBy[*];
-        metadata def <threatenedBy> ThreatenedByMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = threatenedByLinks meta SysML::Usage;
-        }
         connection def DerivesCyberRequirement :> MemoRelationship {
             end sourceThreatOrRisk : RequirementDriver :>> source;
             end targetRequirement : MemoRequirementElement :>> target;

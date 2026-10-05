@@ -136,9 +136,10 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`Exploits`](assurance/cybersecurity/memo_cybersecurity.md#exploits) | `connection def` | Typed relationship from `RequirementDriver` to `Vulnerability`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`Exploits`](assurance/cybersecurity/memo_cybersecurity.md#exploits) | `connection def` | Typed relationship from `Threat` to `Vulnerability`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`ImpactsSafety`](assurance/cybersecurity/memo_cybersecurity.md#impactssafety) | `connection def` | Typed relationship from `MemoPart` to `RiskItem`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`RealizedByScenario`](assurance/cybersecurity/memo_cybersecurity.md#realizedbyscenario) | `connection def` | Typed relationship from `RequirementDriver` to `OperativeScenario`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ThreatenedBy`](assurance/cybersecurity/memo_cybersecurity.md#threatenedby) | `connection def` | Typed relationship from `CybersecurityAsset` to `Threat`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 
 
 ## `memo::assurance::human_factors`
@@ -225,6 +226,5 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | [`HostedBy`](core/relationships/memo_relationships.md#hostedby) | `allocation def` | A processing node hosted by an assembly is allocated to it. The end NAMES were already right; two of the three usages wrote them in reverse order, and the builder binds by position, so those two edges pointed the wrong way. See the reversed-end-name lint in memo-tools. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`MemoRelationship`](core/relationships/memo_relationships.md#memorelationship) | `connection def` | Typed relationship for memo relationship. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`ProducesEvidence`](core/relationships/memo_relationships.md#producesevidence) | `connection def` | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
-| [`ThreatenedBy`](core/relationships/memo_relationships.md#threatenedby) | `connection def` | Typed relationship from `MemoPart` to `RequirementDriver`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`Validates`](core/relationships/memo_relationships.md#validates) | `connection def` | Typed relationship from `any element` to `MemoVerificationCase`. | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 
