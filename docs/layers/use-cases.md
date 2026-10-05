@@ -61,15 +61,18 @@ use case ucDeliverPcaTherapy : UseCase {
     attribute :>> successOutcome =
         "The patient receives prescribed analgesia without exceeding dose, "
         "lockout, or safety limits.";
-    ref :>> primaryUser = actorNurse;
-    ref :>> supportingActors = (actorPatient, actorPrescriber, actorPharmacist);
     ref :>> useContext = hospitalWardContext;
+    subject supportingSystem;
+    actor nurseInitiator = actorNurse;
+    actor patientActor = actorPatient;
+    actor prescriberActor = actorPrescriber;
+    actor pharmacistActor = actorPharmacist;
 }
 ```
 
-Three of its attributes are references to Layer 1 rather than restatements of
-it. `primaryUser` and `supportingActors` point at the actor elements;
-`useContext` points at `hospitalWardContext`. Renaming or re-scoping an actor
+Its participants are references to Layer 1 rather than restatements of it.
+Each native `actor` is bound to an actor element, and the actor's name says
+which one initiates; `useContext` points at `hospitalWardContext`. Renaming or re-scoping an actor
 therefore propagates, and cannot leave a stale copy behind in the use case.
 
 Note also `trigger` and `successOutcome`. A use case with a trigger but no
