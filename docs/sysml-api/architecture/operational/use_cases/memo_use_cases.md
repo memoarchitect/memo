@@ -135,9 +135,12 @@ connection def Motivates :> MemoRelationship
             // is exactly what a case's subject means, so this was a duplicate
             // waiting to surface once `actor` needed a subject to attach to.
             subject supportingSystem : MemoPart[0..1];
-            ref primaryUser : User[0..1];
-            ref supportingActors : OperationalParticipant[0..*];
             ref useContext : UseContext[0..1];
+            // Who takes part is native `actor` (`actor <role> = <participant>;`),
+            // inherited from `UseCases::UseCase`. `primaryUser` and
+            // `supportingActors` refs stood here as a second way of saying the
+            // same thing and were removed; which actor initiates is carried by
+            // the actor's name, as the note on `Initiates` below says.
         }
 
         connection def Motivates :> MemoRelationship {
@@ -157,9 +160,10 @@ connection def Motivates :> MemoRelationship
         // named on the use case, not in a relationship type. Write
         // `actor <role> = <existingElement>;` inside the use case instead.
         // UML use-case decomposition (`Includes`) is native `include use case` /
-        // `include` (R10-S6); write that instead of a connection here. `extends`
-        // has 0 hits in the corpus for a use-case `extend` production, so it stays
-        // a MEMO construct: a cross-cutting relationship that is always presented.
+        // `include` (R10-S6); write that instead of a connection here. SysML v2
+        // has no use-case `extend` (the textual BNF defines IncludeUseCaseUsage
+        // and nothing for extend), and MEMO does not add one: an optional path
+        // through a use case is an alternate scenario, not a second use case.
     }
 
     ```
