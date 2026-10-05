@@ -71,6 +71,7 @@
 | [`ThreatCategoryKind`](#threatcategorykind) | `enum def` | Controlled values for threat category: `spoofing`, `tampering`, `repudiation`, `informationDisclosure`, `denialOfService`, `elevationOfPrivilege`, `privacyLoss`, `supplyChain`. | — |
 | [`CyberControlKind`](#cybercontrolkind) | `enum def` | Controlled values for cyber control: `prevent`, `detect`, `respond`, `recover`, `hardening`, `monitoring`, `authentication`, `authorization`, `encryption`, `integrityProtection`, `audit`, `updateMechanism`. | — |
 | [`AssetKind`](#assetkind) | `enum def` | Controlled values for asset: `data`, `credential`, `configuration`, `software`, `hardware`, `networkConnection`, `auditRecord`, `safetyCriticalFunction`. | — |
+| [`SecurityNeedKind`](#securityneedkind) | `enum def` | How much an asset needs confidentiality, integrity or availability protection. A rating, not prose, so assets can be compared and a rule can select the ones whose integrity need is high. | — |
 | [`ViewOutputKind`](#viewoutputkind) | `enum def` | Controlled values for view output: `diagram`, `table`, `matrix`, `documentSection`, `dashboard`. | — |
 | [`PresentationKind`](#presentationkind) | `enum def` | Controlled values for presentation: `blockDiagram`, `internalDiagram`, `activityDiagram`, `stateDiagram`, `riskTable`, `traceMatrix`, `narrativeSection`, `screenLayout`, `custom`. | — |
 | [`DeploymentKind`](#deploymentkind) | `enum def` | Controlled values for deployment: `native`, `containerized`, `cloudHosted`, `embedded`, `partitioned`. | — |
@@ -727,6 +728,21 @@ enum def AssetKind
 | Property | Value |
 | --- | --- |
 | Description | Controlled values for asset: `data`, `credential`, `configuration`, `software`, `hardware`, `networkConnection`, `auditRecord`, `safetyCriticalFunction`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## SecurityNeedKind
+
+```sysml
+enum def SecurityNeedKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | How much an asset needs confidentiality, integrity or availability protection. A rating, not prose, so assets can be compared and a rule can select the ones whose integrity need is high. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1639,6 +1655,15 @@ enum def CommentStatusKind
             enum networkConnection;
             enum auditRecord;
             enum safetyCriticalFunction;
+        }
+        // How much an asset needs confidentiality, integrity or availability
+        // protection. A rating, not prose, so assets can be compared and a rule
+        // can select the ones whose integrity need is high.
+        enum def SecurityNeedKind {
+            enum low;
+            enum medium;
+            enum high;
+            enum veryHigh;
         }
         enum def ViewOutputKind {
             enum diagram;

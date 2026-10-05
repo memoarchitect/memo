@@ -46,7 +46,8 @@
 | [`CyberMitigation`](#cybermitigation) | `part def` | Cyber mitigation definition specializing `RiskControlMeasure`. | `RiskControlMeasure` |
 | [`SecurityRequirement`](#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. | `Requirement` |
 | [`TrustBoundary`](#trustboundary) | `part def` | Trust boundary definition specializing `InterfaceElement`. | `InterfaceElement` |
-| [`Exploits`](#exploits) | `connection def` | Typed relationship from `RequirementDriver` to `Vulnerability`. | `MemoRelationship` |
+| [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship from `CybersecurityAsset` to `Threat`. | `MemoRelationship` |
+| [`Exploits`](#exploits) | `connection def` | Typed relationship from `Threat` to `Vulnerability`. | `MemoRelationship` |
 | [`RealizedByScenario`](#realizedbyscenario) | `connection def` | Typed relationship from `RequirementDriver` to `OperativeScenario`. | `MemoRelationship` |
 | [`ImpactsSafety`](#impactssafety) | `connection def` | Typed relationship from `MemoPart` to `RiskItem`. | `MemoRelationship` |
 
@@ -185,6 +186,21 @@ part def TrustBoundary specializes InterfaceElement
 | Owning package | `memo_assurance_cybersecurity` |
 
 
+## ThreatenedBy
+
+```sysml
+connection def ThreatenedBy :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `CybersecurityAsset` to `Threat`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
 ## Exploits
 
 ```sysml
@@ -193,7 +209,7 @@ connection def Exploits :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `RequirementDriver` to `Vulnerability`. |
+| Description | Typed relationship from `Threat` to `Vulnerability`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -235,6 +251,14 @@ connection def ImpactsSafety :> MemoRelationship
 ??? code "assurance/cybersecurity/memo_cybersecurity.sysml"
 
     ```sysml
+    // Cybersecurity (FDA premarket cybersecurity guidance 2023, AAMI TIR57).
+    // What an element is linked to is a relation, not a string naming it: a
+    // security requirement's source threat is `DerivesCyberRequirement`, not a
+    // `derivedFromThreat` id, and an asset's threats are `ThreatenedBy`. Which
+    // layer an element belongs to is its package; an asset or a vulnerability
+    // that lives in the architecture points at that element with a typed ref.
+    // `ThreatenedBy` lives here rather than in memo_core_relationships because
+    // its ends are typed against CybersecurityAsset and Threat.
     package memo_assurance_cybersecurity {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
@@ -249,14 +273,15 @@ connection def ImpactsSafety :> MemoRelationship
 
         part def CybersecurityAsset specializes MemoPart {
             attribute assetKind : AssetKind;
-            attribute confidentialityNeed : String;
-            attribute integrityNeed : String;
-            attribute availabilityNeed : String;
+            attribute confidentialityNeed : SecurityNeedKind;
+            attribute integrityNeed : SecurityNeedKind;
+            attribute availabilityNeed : SecurityNeedKind;
             attribute privacyRelevant : Boolean;
             attribute safetyRelevant : Boolean;
-            attribute owningLayer : String;
             attribute assetOwner : String;
             attribute classification : String;
+            // The architecture elements that store, process or are this asset.
+            ref holder : MemoPart[0..*];
         }
 
         part def AttackSurface specializes MemoPart {
@@ -272,15 +297,12 @@ connection def ImpactsSafety :> MemoRelationship
             attribute threatSource : String;
             attribute precondition : String;
             attribute affectedConcern : ConcernKind;
-            attribute defaultTechnique : String;
-            attribute strideCategory : ThreatCategoryKind;
         }
 
         item def Vulnerability specializes RiskItem {
             attribute weakness : String;
             attribute exploitability : String;
             attribute discoveryMethod : String;
-            attribute affectedLayer : String;
             attribute cweReference : String;
             attribute remediable : Boolean;
             // CVSS v3.1 quantitative rating — the core output of a vulnerability
@@ -288,6 +310,8 @@ connection def ImpactsSafety :> MemoRelationship
             // score; `cvssVector` the source vector string (AV:.../AC:.../...).
             attribute cvssBaseScore : Real;
             attribute cvssVector : String;
+            // The architecture elements the weakness is in.
+            ref affectedElement : MemoPart[0..*];
         }
 
         item def CyberHazard specializes Hazard {
@@ -314,9 +338,6 @@ connection def ImpactsSafety :> MemoRelationship
 
         requirement def SecurityRequirement :> Requirement {
             attribute securityObjective : String;
-            attribute derivedFromThreat : String;
-            attribute derivedFromRisk : String;
-            attribute defaultConcern : ConcernKind;
         }
 
         part def TrustBoundary specializes InterfaceElement {
@@ -326,10 +347,19 @@ connection def ImpactsSafety :> MemoRelationship
         }
 
         // ── Relations owned by this package ─────────────────────────────
-        // Moved out of memo_core_relationships: their ends are typed against
-        // types declared here, and core must not depend on a domain package.
+        connection def ThreatenedBy :> MemoRelationship {
+            attribute threatRole : String;
+            end protectedAsset : CybersecurityAsset :>> source;
+            end threat : Threat :>> target;
+        }
+        abstract connection threatenedByLinks : ThreatenedBy[*];
+        metadata def <threatenedBy> ThreatenedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = threatenedByLinks meta SysML::Usage;
+        }
         connection def Exploits :> MemoRelationship {
-            end realizedThreat : RequirementDriver :>> source;
+            end threat : Threat :>> source;
             end enablingVulnerability : Vulnerability :>> target;
         }
         abstract connection exploitsLinks : Exploits[*];

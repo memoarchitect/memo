@@ -1,3 +1,11 @@
+// Cybersecurity (FDA premarket cybersecurity guidance 2023, AAMI TIR57).
+// What an element is linked to is a relation, not a string naming it: a
+// security requirement's source threat is `DerivesCyberRequirement`, not a
+// `derivedFromThreat` id, and an asset's threats are `ThreatenedBy`. Which
+// layer an element belongs to is its package; an asset or a vulnerability
+// that lives in the architecture points at that element with a typed ref.
+// `ThreatenedBy` lives here rather than in memo_core_relationships because
+// its ends are typed against CybersecurityAsset and Threat.
 package memo_assurance_cybersecurity {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
@@ -12,14 +20,15 @@ package memo_assurance_cybersecurity {
 
     part def CybersecurityAsset specializes MemoPart {
         attribute assetKind : AssetKind;
-        attribute confidentialityNeed : String;
-        attribute integrityNeed : String;
-        attribute availabilityNeed : String;
+        attribute confidentialityNeed : SecurityNeedKind;
+        attribute integrityNeed : SecurityNeedKind;
+        attribute availabilityNeed : SecurityNeedKind;
         attribute privacyRelevant : Boolean;
         attribute safetyRelevant : Boolean;
-        attribute owningLayer : String;
         attribute assetOwner : String;
         attribute classification : String;
+        // The architecture elements that store, process or are this asset.
+        ref holder : MemoPart[0..*];
     }
 
     part def AttackSurface specializes MemoPart {
@@ -35,15 +44,12 @@ package memo_assurance_cybersecurity {
         attribute threatSource : String;
         attribute precondition : String;
         attribute affectedConcern : ConcernKind;
-        attribute defaultTechnique : String;
-        attribute strideCategory : ThreatCategoryKind;
     }
 
     item def Vulnerability specializes RiskItem {
         attribute weakness : String;
         attribute exploitability : String;
         attribute discoveryMethod : String;
-        attribute affectedLayer : String;
         attribute cweReference : String;
         attribute remediable : Boolean;
         // CVSS v3.1 quantitative rating — the core output of a vulnerability
@@ -51,6 +57,8 @@ package memo_assurance_cybersecurity {
         // score; `cvssVector` the source vector string (AV:.../AC:.../...).
         attribute cvssBaseScore : Real;
         attribute cvssVector : String;
+        // The architecture elements the weakness is in.
+        ref affectedElement : MemoPart[0..*];
     }
 
     item def CyberHazard specializes Hazard {
@@ -77,9 +85,6 @@ package memo_assurance_cybersecurity {
 
     requirement def SecurityRequirement :> Requirement {
         attribute securityObjective : String;
-        attribute derivedFromThreat : String;
-        attribute derivedFromRisk : String;
-        attribute defaultConcern : ConcernKind;
     }
 
     part def TrustBoundary specializes InterfaceElement {
@@ -89,10 +94,19 @@ package memo_assurance_cybersecurity {
     }
 
     // ── Relations owned by this package ─────────────────────────────
-    // Moved out of memo_core_relationships: their ends are typed against
-    // types declared here, and core must not depend on a domain package.
+    connection def ThreatenedBy :> MemoRelationship {
+        attribute threatRole : String;
+        end protectedAsset : CybersecurityAsset :>> source;
+        end threat : Threat :>> target;
+    }
+    abstract connection threatenedByLinks : ThreatenedBy[*];
+    metadata def <threatenedBy> ThreatenedByMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = threatenedByLinks meta SysML::Usage;
+    }
     connection def Exploits :> MemoRelationship {
-        end realizedThreat : RequirementDriver :>> source;
+        end threat : Threat :>> source;
         end enablingVulnerability : Vulnerability :>> target;
     }
     abstract connection exploitsLinks : Exploits[*];
