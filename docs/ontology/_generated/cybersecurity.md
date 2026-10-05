@@ -23,12 +23,15 @@ Each arrow is one relationship, from its source end to its target end. A grey bo
 
 ```mermaid
 flowchart LR
-  RequirementDriver["RequirementDriver"]:::other
+  CybersecurityAsset["CybersecurityAsset"]
+  Threat["Threat"]
   Vulnerability["Vulnerability"]
+  RequirementDriver["RequirementDriver"]:::other
   OperativeScenario["OperativeScenario"]:::other
   MemoPart["MemoPart"]:::other
   RiskItem["RiskItem"]:::other
-  RequirementDriver -->|Exploits| Vulnerability
+  CybersecurityAsset -->|ThreatenedBy| Threat
+  Threat -->|Exploits| Vulnerability
   RequirementDriver -->|RealizedByScenario| OperativeScenario
   MemoPart -->|ImpactsSafety| RiskItem
   classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
@@ -38,7 +41,8 @@ flowchart LR
 
 | Relationship | From | To | What it says |
 | --- | --- | --- | --- |
-| [`Exploits`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#exploits) | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | [`Vulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | Typed relationship from `RequirementDriver` to `Vulnerability`. |
+| [`ThreatenedBy`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#threatenedby) | [`CybersecurityAsset`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cybersecurityasset) | [`Threat`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#threat) | Typed relationship from `CybersecurityAsset` to `Threat`. |
+| [`Exploits`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#exploits) | [`Threat`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#threat) | [`Vulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | Typed relationship from `Threat` to `Vulnerability`. |
 | [`RealizedByScenario`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#realizedbyscenario) | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | [`OperativeScenario`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#operativescenario) | Typed relationship from `RequirementDriver` to `OperativeScenario`. |
 | [`ImpactsSafety`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#impactssafety) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | [`RiskItem`](../sysml-api/assurance/safety_risk/memo_risk.md#riskitem) | Typed relationship from `MemoPart` to `RiskItem`. |
 

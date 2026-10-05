@@ -19,23 +19,23 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     part therapyConfigurationAsset : CybersecurityAsset {
         @MemoIdentity { :>> providedId = "AST-CYB-001"; }
         attribute :>> assetKind = AssetKind::configuration;
-        attribute :>> confidentialityNeed = "medium";
-        attribute :>> integrityNeed = "very high";
-        attribute :>> availabilityNeed = "high";
+        attribute :>> confidentialityNeed = SecurityNeedKind::medium;
+        attribute :>> integrityNeed = SecurityNeedKind::veryHigh;
+        attribute :>> availabilityNeed = SecurityNeedKind::high;
         attribute :>> privacyRelevant = false;
         attribute :>> safetyRelevant = true;
-        attribute :>> owningLayer = "software_structure";
+        ref :>> holder = gpcaSoftware.config;
     }
 
     part patientEventLogAsset : CybersecurityAsset {
         @MemoIdentity { :>> providedId = "AST-CYB-002"; }
         attribute :>> assetKind = AssetKind::auditRecord;
-        attribute :>> confidentialityNeed = "high";
-        attribute :>> integrityNeed = "high";
-        attribute :>> availabilityNeed = "medium";
+        attribute :>> confidentialityNeed = SecurityNeedKind::high;
+        attribute :>> integrityNeed = SecurityNeedKind::high;
+        attribute :>> availabilityNeed = SecurityNeedKind::medium;
         attribute :>> privacyRelevant = true;
         attribute :>> safetyRelevant = false;
-        attribute :>> owningLayer = "software_structure";
+        ref :>> holder = gpcaSoftware.logging;
     }
 
     part maintenancePortBoundary : TrustBoundary {
@@ -54,7 +54,6 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> threatSource = "unauthorized actor with local access";
         attribute :>> precondition = "maintenance interface exposed without strong authentication";
         attribute :>> affectedConcern = ConcernKind::cybersecurity;
-        attribute :>> defaultTechnique = "STRIDE tampering";
     // --8<-- [end:threat]
     }
 
@@ -66,7 +65,6 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> threatSource = "unauthorized actor with local access";
         attribute :>> precondition = "audit log writable without integrity protection";
         attribute :>> affectedConcern = ConcernKind::cybersecurity;
-        attribute :>> defaultTechnique = "STRIDE repudiation";
     }
 
     // --8<-- [start:vulnerability]
@@ -75,7 +73,7 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> weakness = "service mode relies on shared default credential";
         attribute :>> exploitability = "moderate";
         attribute :>> discoveryMethod = "architecture review";
-        attribute :>> affectedLayer = "software_structure";
+        ref :>> affectedElement = gpcaSoftware.config;
         attribute :>> cweReference = "CWE-798";
     // --8<-- [end:vulnerability]
     }
@@ -132,8 +130,6 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
         attribute :>> assumptionSummary = "cryptographic identity available";
         attribute :>> guaranteeSummary = "only authorized service access can change therapy configuration";
         attribute :>> securityObjective = "integrity";
-        attribute :>> derivedFromThreat = "TH-001";
-        attribute :>> defaultConcern = ConcernKind::cybersecurity;
         attribute :>> safetyClass = SafetyClassKind::C;
     }
 
@@ -147,11 +143,11 @@ package memo_examples_gpca_pump_gpca_cybersecurity {
     }
 
     // --8<-- [start:chain]
-    connection : ThreatenedBy connect protectedAsset ::> therapyConfigurationAsset to realizedThreat ::> unauthorizedConfigChangeThreat;
+    connection : ThreatenedBy connect protectedAsset ::> therapyConfigurationAsset to threat ::> unauthorizedConfigChangeThreat;
 
-    connection : ThreatenedBy connect protectedAsset ::> patientEventLogAsset to realizedThreat ::> eventLogTamperingThreat;
+    connection : ThreatenedBy connect protectedAsset ::> patientEventLogAsset to threat ::> eventLogTamperingThreat;
 
-    connection : Exploits connect realizedThreat ::> unauthorizedConfigChangeThreat to enablingVulnerability ::> weakServiceAuthentication;
+    connection : Exploits connect threat ::> unauthorizedConfigChangeThreat to enablingVulnerability ::> weakServiceAuthentication;
 
     connection : RealizedByScenario connect realizedThreat ::> unauthorizedConfigChangeThreat to scenario ::> tamperedConfigurationScenario;
     // --8<-- [end:chain]

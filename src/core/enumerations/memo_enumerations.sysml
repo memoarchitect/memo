@@ -435,6 +435,15 @@ package memo_core_enumerations {
         enum auditRecord;
         enum safetyCriticalFunction;
     }
+    // How much an asset needs confidentiality, integrity or availability
+    // protection. A rating, not prose, so assets can be compared and a rule
+    // can select the ones whose integrity need is high.
+    enum def SecurityNeedKind {
+        enum low;
+        enum medium;
+        enum high;
+        enum veryHigh;
+    }
     enum def ViewOutputKind {
         enum diagram;
         enum table;
