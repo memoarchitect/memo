@@ -1,8 +1,8 @@
-// Scenario foundation. A scenario is a selected path through a
-// workflow (or functional flow), classified by its kind plus three independent
-// dimensions — variant, operational condition, and purpose. An occurrence is an actual or hypothetical execution
-// of a scenario. Alternate scenarios reference their base scenario and
-// variation point instead of duplicating the workflow.
+// Scenario foundation. A scenario is a selected path through a workflow,
+// classified by its kind (nominal or alternate). It is nested in the workflow
+// it is a path through, so a nominal scenario and its alternates are siblings
+// there. An actual or hypothetical execution is a native usage of the
+// scenario, not a separate element.
 package memo_architecture_operational_scenarios {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
@@ -32,9 +32,10 @@ package memo_architecture_operational_scenarios {
         attribute postCondition : String;
         attribute pathSummary : String;
 
-        // The workflow this scenario belongs to is expressed by the workflow
-        // (HasScenario); a nominal/alternate pair are scenarios of the same
-        // workflow, distinguished by scenarioKind — no baseScenario back-ref.
+        // The workflow this scenario belongs to is the one it is nested in
+        // (a `HasScenario` relation was removed for that reason); a
+        // nominal/alternate pair are scenarios of the same workflow,
+        // distinguished by scenarioKind — no baseScenario back-ref.
         // Actors are derived from `perform` on the nested steps, not listed.
         ref useContext : UseContext[0..1];
         // threat scenario

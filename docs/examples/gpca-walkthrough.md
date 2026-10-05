@@ -123,9 +123,12 @@ use case ucDeliverPcaTherapy : UseCase {
     @MemoIdentity { :>> label = "DeliverPatientControlledAnalgesia"; }
     attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
-    ref :>> primaryUser = actorNurse;
-    ref :>> supportingActors = (actorPatient, actorPrescriber, actorPharmacist);
     ref :>> useContext = hospitalWardContext;
+    subject supportingSystem;
+    actor nurseInitiator = actorNurse;
+    actor patientActor = actorPatient;
+    actor prescriberActor = actorPrescriber;
+    actor pharmacistActor = actorPharmacist;
 }
 
 connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfPrepareAndStartTherapy to supported ::> ucDeliverPcaTherapy; }
