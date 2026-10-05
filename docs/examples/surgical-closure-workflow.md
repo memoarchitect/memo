@@ -26,9 +26,11 @@ use case ucPerformSleeveGastrectomy : UseCase {
     attribute :>> useCaseKind = UseCaseKind::clinical;
     attribute :>> goalStatement =
         "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
-    ref :>> primaryUser = bariatricSurgeon;
-    ref :>> supportingActors = (scrubNurse, anesthetist);
     ref :>> useContext = bariatricOr;
+    subject supportingSystem;
+    actor bariatricSurgeonInitiator = bariatricSurgeon;
+    actor scrubNurseActor = scrubNurse;
+    actor anesthetistActor = anesthetist;
 }
 ```
 

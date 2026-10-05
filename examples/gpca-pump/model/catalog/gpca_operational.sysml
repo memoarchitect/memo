@@ -140,8 +140,6 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
         attribute :>> trigger = "A clinician starts prescribed patient-controlled analgesia therapy.";
         attribute :>> successOutcome = "The patient receives prescribed analgesia without exceeding dose, lockout, or safety limits.";
-        ref :>> primaryUser = actorNurse;
-        ref :>> supportingActors = (actorPatient, actorPrescriber, actorPharmacist);
         ref :>> useContext = hospitalWardContext;
         subject supportingSystem;
         actor nurseInitiator = actorNurse;
