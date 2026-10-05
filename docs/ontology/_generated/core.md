@@ -86,8 +86,8 @@ flowchart LR
   MemoRequirementElement["MemoRequirementElement"]
   MemoVerificationCase["MemoVerificationCase"]
   MemoEvidence["MemoEvidence"]
-  MemoPart["MemoPart"]
   RequirementDriver["RequirementDriver"]
+  MemoPart["MemoPart"]
   DesignDecision["DesignDecision"]:::other
   SoftwareElement["SoftwareElement"]:::other
   UIAction["UIAction"]:::other
@@ -95,7 +95,6 @@ flowchart LR
   UseContext["UseContext"]:::other
   MemoAction["MemoAction"]
   ChangeRequest["ChangeRequest"]:::other
-  Vulnerability["Vulnerability"]:::other
   OperativeScenario["OperativeScenario"]:::other
   RiskItem["RiskItem"]:::other
   OperativeAction["OperativeAction"]:::other
@@ -110,7 +109,6 @@ flowchart LR
   anyElement -->|MemoInterface| anyElement
   anyElement -->|DerivesFrom| MemoRequirementElement
   MemoVerificationCase -->|ProducesEvidence| MemoEvidence
-  MemoPart -->|ThreatenedBy| RequirementDriver
   RequirementDriver -->|DerivesCyberRequirement| MemoRequirementElement
   anyElement -->|CrossesTrustBoundary| anyElement
   anyElement -->|Validates| MemoVerificationCase
@@ -125,7 +123,6 @@ flowchart LR
   UseContext -->|AppliesInContext| MemoPart
   MemoAction -->|Transforms| MemoAction
   ChangeRequest -->|Changes| MemoPart
-  RequirementDriver -->|Exploits| Vulnerability
   RequirementDriver -->|RealizedByScenario| OperativeScenario
   MemoPart -->|ImpactsSafety| RiskItem
   MemoEvidence -->|EvaluatesTask| OperativeAction
@@ -148,7 +145,6 @@ flowchart LR
 | [`MemoRelationship`](../sysml-api/core/relationships/memo_relationships.md#memorelationship) | *any element* | *any element* | Typed relationship for memo relationship. |
 | [`DerivesFrom`](../sysml-api/core/relationships/memo_relationships.md#derivesfrom) | *any element* | [`MemoRequirementElement`](../sysml-api/core/common/memo_common.md#memorequirementelement) | Typed relationship from `any element` to `MemoRequirementElement`. |
 | [`ProducesEvidence`](../sysml-api/core/relationships/memo_relationships.md#producesevidence) | [`MemoVerificationCase`](../sysml-api/core/common/memo_common.md#memoverificationcase) | [`MemoEvidence`](../sysml-api/core/common/memo_common.md#memoevidence) | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. |
-| [`ThreatenedBy`](../sysml-api/core/relationships/memo_relationships.md#threatenedby) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | Typed relationship from `MemoPart` to `RequirementDriver`. |
 | [`DerivesCyberRequirement`](../sysml-api/core/relationships/memo_relationships.md#derivescyberrequirement) | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | [`MemoRequirementElement`](../sysml-api/core/common/memo_common.md#memorequirementelement) | Typed relationship from `RequirementDriver` to `MemoRequirementElement`. |
 | [`CrossesTrustBoundary`](../sysml-api/core/relationships/memo_relationships.md#crossestrustboundary) | *any element* | *any element* | Typed relationship from `any element` to `any element`. |
 | [`Validates`](../sysml-api/core/relationships/memo_relationships.md#validates) | *any element* | [`MemoVerificationCase`](../sysml-api/core/common/memo_common.md#memoverificationcase) | Typed relationship from `any element` to `MemoVerificationCase`. |
@@ -168,7 +164,6 @@ flowchart LR
 | [`AppliesInContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | operational | [`UseContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#usecontext) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `UseContext` to `MemoPart`. |
 | [`Transforms`](../sysml-api/architecture/operational/workflows/memo_workflows.md#transforms) | operational | [`MemoAction`](../sysml-api/core/common/memo_common.md#memoaction) | [`MemoAction`](../sysml-api/core/common/memo_common.md#memoaction) | Typed relationship from `MemoAction` to `MemoAction`. |
 | [`Changes`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changes) | artifacts | [`ChangeRequest`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changerequest) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `ChangeRequest` to `MemoPart`. |
-| [`Exploits`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#exploits) | cybersecurity | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | [`Vulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | Typed relationship from `RequirementDriver` to `Vulnerability`. |
 | [`RealizedByScenario`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#realizedbyscenario) | cybersecurity | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | [`OperativeScenario`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#operativescenario) | Typed relationship from `RequirementDriver` to `OperativeScenario`. |
 | [`ImpactsSafety`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#impactssafety) | cybersecurity | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | [`RiskItem`](../sysml-api/assurance/safety_risk/memo_risk.md#riskitem) | Typed relationship from `MemoPart` to `RiskItem`. |
 | [`EvaluatesTask`](../sysml-api/assurance/human_factors/memo_human_factors.md#evaluatestask) | human-factors | [`MemoEvidence`](../sysml-api/core/common/memo_common.md#memoevidence) | [`OperativeAction`](../sysml-api/architecture/operational/activities/memo_activities.md#operativeaction) | Typed relationship from `MemoEvidence` to `OperativeAction`. |
@@ -229,6 +224,7 @@ flowchart LR
 | [`ThreatCategoryKind`](../sysml-api/core/enumerations/memo_enumerations.md#threatcategorykind) | `spoofing`, `tampering`, `repudiation`, `informationDisclosure`, `denialOfService`, `elevationOfPrivilege`, `privacyLoss`, `supplyChain` |
 | [`CyberControlKind`](../sysml-api/core/enumerations/memo_enumerations.md#cybercontrolkind) | `prevent`, `detect`, `respond`, `recover`, `hardening`, `monitoring`, `authentication`, `authorization`, `encryption`, `integrityProtection`, `audit`, `updateMechanism` |
 | [`AssetKind`](../sysml-api/core/enumerations/memo_enumerations.md#assetkind) | `data`, `credential`, `configuration`, `software`, `hardware`, `networkConnection`, `auditRecord`, `safetyCriticalFunction` |
+| [`SecurityNeedKind`](../sysml-api/core/enumerations/memo_enumerations.md#securityneedkind) | `low`, `medium`, `high`, `veryHigh` |
 | [`ViewOutputKind`](../sysml-api/core/enumerations/memo_enumerations.md#viewoutputkind) | `diagram`, `table`, `matrix`, `documentSection`, `dashboard` |
 | [`PresentationKind`](../sysml-api/core/enumerations/memo_enumerations.md#presentationkind) | `blockDiagram`, `internalDiagram`, `activityDiagram`, `stateDiagram`, `riskTable`, `traceMatrix`, `narrativeSection`, `screenLayout`, `custom` |
 | [`DeploymentKind`](../sysml-api/core/enumerations/memo_enumerations.md#deploymentkind) | `native`, `containerized`, `cloudHosted`, `embedded`, `partitioned` |

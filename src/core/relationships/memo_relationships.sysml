@@ -148,17 +148,6 @@ package memo_core_relationships {
     // the tree (same free-deletion shape R10-S5 found for `rationale`), so
     // there was no content to carry forward.
 
-    connection def ThreatenedBy :> MemoRelationship {
-        attribute threatRole : String;
-        end protectedAsset : MemoPart :>> source;
-        end realizedThreat : RequirementDriver :>> target;
-    }
-    abstract connection threatenedByLinks : ThreatenedBy[*];
-    metadata def <threatenedBy> ThreatenedByMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = threatenedByLinks meta SysML::Usage;
-    }
     connection def DerivesCyberRequirement :> MemoRelationship {
         end sourceThreatOrRisk : RequirementDriver :>> source;
         end targetRequirement : MemoRequirementElement :>> target;
