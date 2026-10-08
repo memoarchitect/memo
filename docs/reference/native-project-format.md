@@ -62,7 +62,7 @@ include: [model]
 **There is no conventional fallback.** A directory holding a
 `model/catalog/project.sysml` with no `entrypoint` naming it is not a project,
 and MEMO commands report a missing locator rather than a missing file — the
-file is usually present. `model/catalog/project.sysml` is what `memo init`
+file is usually present. `model/catalog/project.sysml` is what `memo-architect init`
 scaffolds and what most projects keep, but it is a default, not a rule; a
 project rooted at `src/project.sysml` is equally valid and is found the same
 way.

@@ -30,7 +30,7 @@ A **Gap** is not a defect in the model. Coverage is profile-dependent — that i
 
 **Scope.** The clauses below are those of the standards the project's `regulatoryRegime` declaration pulls in. Method and reference standards that no regime mandates — the FMEA method, the architecture-description standard — are listed separately in §4; their clauses are claimable but not required, so they have no gap count.
 
-`memo standards check` prints the same numbers at the command line, from the same computation.
+`memo validate --standards` prints the same numbers at the command line, from the same computation.
 
 ---
 
