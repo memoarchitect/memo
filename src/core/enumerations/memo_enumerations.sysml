@@ -376,6 +376,17 @@ package memo_core_enumerations {
         enum medicalDevice;
         enum organisation;
     }
+    // How firmly the rule's source asks for what it checks, separate from the
+    // severity a finding carries and from how far the rule may be tailored. A
+    // `required` rule enforces a clause that says "shall"; a `recommended` one a
+    // clause that says "should", or a practice the ontology holds as sound;
+    // `bestPractice` is advice with no clause behind it. A rule that states no
+    // severity takes one from this: error, warning, info.
+    enum def RuleObligationKind {
+        enum required;
+        enum recommended;
+        enum bestPractice;
+    }
     enum def RuleDispositionKind {
         enum enabled;
         enum disabled;

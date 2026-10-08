@@ -15,6 +15,7 @@ package memo_rules_crosslayer {
         @MemoIdentity { :>> providedId = "XL-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scopes; confirm.
         ref enforces : StandardClause[1..*] = (iso14971.iso14971Clause7.iso14971Clause7_2, iec62304.iec62304Clause5.iec62304Clause5_2.iec62304Clause5_2_3);
         attribute appliesTo = "Hazard";
@@ -28,6 +29,7 @@ package memo_rules_crosslayer {
         @MemoIdentity { :>> providedId = "XL-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scope; confirm.
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_3.iec62304Clause5_3_1;
         attribute appliesTo = "Requirement[requirementType=system]";
