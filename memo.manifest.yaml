@@ -7,13 +7,7 @@ packages:
 init:
   defaultExtends: "@memoarchitect/methodology-default"
   rootImport: "memo"
-  defaultTemplate: default
-templates:
-  default: ./templates/default
-  samd: ./templates/samd
-  connected-device: ./templates/connected-device
-  monitoring-device: ./templates/monitoring-device
-  infusion-pump: ./templates/infusion-pump
+  template: ./templates/default
 examples:
   gpca: ./examples/gpca-pump
   standard-sysml-diagrams: ./examples/sysml-diagram-samples
