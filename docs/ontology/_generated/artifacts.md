@@ -41,6 +41,7 @@
 | --- | --- | --- |
 | [`RegulatoryStandard`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#regulatorystandard) | `part def` | A regulatory or consensus standard a project claims conformance to, identified by its full designation including edition and amendments (e.g. "IEC 62366-1:2015+AMD1:2020").… |
 | [`StandardClause`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#standardclause) | `part def` | One normative clause of a RegulatoryStandard, at the depth at which the standard makes a distinct requirement a MEMO document actually claims.… |
+| [`EnforcesClause`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#enforcesclause) | `metadata def` | A rule's trace to the clause it enforces: `#EnforcesClause dependency from <Rule> to <clause>, <clause>;`. A rule may trace to several clauses, from several standards, or to none (a rule MEMO or a user holds for its own reasons).… |
 
 
 ### Connections at a glance

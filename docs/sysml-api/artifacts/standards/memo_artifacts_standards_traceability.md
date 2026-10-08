@@ -38,6 +38,7 @@
 | [`StandardClause`](#standardclause) | `part def` | One normative clause of a RegulatoryStandard, at the depth at which the standard makes a distinct requirement a MEMO document actually claims.… | `MemoArtifact` |
 | [`ConformsTo`](#conformsto) | `connection def` | Any model element claims conformance to a standard clause. This is the edge the standards traceability matrix and the clause coverage report are computed over. | `MemoRelationship` |
 | [`TracesToDocument`](#tracestodocument) | `connection def` | Where the evidence for a clause claim is written down. The target is the existing controlled-artifact type — MEMO does not model a separate Document/DocumentSection family, because ControlledArtifact / ModelOwnedArtifact / MarkdownDocumentSource already carry version, owner an… | `MemoRelationship` |
+| [`EnforcesClause`](#enforcesclause) | `metadata def` | A rule's trace to the clause it enforces: `#EnforcesClause dependency from <Rule> to <clause>, <clause>;`. A rule may trace to several clauses, from several standards, or to none (a rule MEMO or a user holds for its own reasons).… | — |
 
 ## RegulatoryStandard
 
@@ -96,6 +97,21 @@ connection def TracesToDocument :> MemoRelationship
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
+| Owning package | `memo_artifacts_standards_traceability` |
+
+
+## EnforcesClause
+
+```sysml
+metadata def EnforcesClause
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A rule's trace to the clause it enforces: `#EnforcesClause dependency from <Rule> to <clause>, <clause>;`. A rule may trace to several clauses, from several standards, or to none (a rule MEMO or a user holds for its own reasons).… |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | — |
 | Owning package | `memo_artifacts_standards_traceability` |
 
 
@@ -238,6 +254,13 @@ connection def TracesToDocument :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = tracesToDocumentLinks meta SysML::Usage;
         }
+
+        // A rule's trace to the clause it enforces: `#EnforcesClause dependency from
+        // <Rule> to <clause>, <clause>;`. A rule may trace to several clauses, from
+        // several standards, or to none (a rule MEMO or a user holds for its own
+        // reasons). A SysML Dependency, so it needs no MEMO grammar and any
+        // SysML v2 tool reads it as client and supplier.
+        metadata def EnforcesClause;
     }
 
     ```
