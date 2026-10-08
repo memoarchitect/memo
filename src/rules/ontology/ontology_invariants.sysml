@@ -11,7 +11,7 @@ package memo_rules_ontology {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    private import memo_artifacts_standards_traceability::StandardClause;
+    private import memo_artifacts_standards_traceability::EnforcesClause;
     private import memo_artifacts_standards_iec_62366_1::*;
     private import memo_artifacts_standards_iso_13485::*;
     // ─── Structure ───────────────────────────────────────────────────────
@@ -83,20 +83,19 @@ package memo_rules_ontology {
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scope; confirm.
-        ref enforces : StandardClause[1..*] = iso13485.iso13485Clause7.iso13485Clause7_3.iso13485Clause7_3_6;
         attribute appliesTo = "MemoFunction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Safety-critical functions (criticality high or catastrophic) must trace to at least one verification case.";
         attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or verifiedBy->size() >= 1";
         constraint { true }
     }
+    #EnforcesClause dependency from SafetyCriticalFunctionVerifiedRule to iso13485::iso13485Clause7::iso13485Clause7_3::iso13485Clause7_3_6;
     constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-041"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scope; the FDA human-factors guidance it also cites is not in the library yet.
-        ref enforces : StandardClause[1..*] = iec62366_1.iec62366_1Clause5.iec62366_1Clause5_9;
         // The selector used to be `[criticality=high]`, which left the
         // catastrophic tasks — the most critical — outside the rule while the
         // predicate still spelled out the catastrophic case. The criticality
@@ -110,19 +109,20 @@ package memo_rules_ontology {
         attribute predicateExpression = "not(criticality == 'high' or criticality == 'catastrophic') or testedByUsability->size() >= 1 or validates->size() >= 1";
         constraint { true }
     }
+    #EnforcesClause dependency from CriticalTaskValidatedRule to iec62366_1::iec62366_1Clause5::iec62366_1Clause5_9;
     constraint def UseErrorTracesToHazardRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-042"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scope; confirm.
-        ref enforces : StandardClause[1..*] = iec62366_1.iec62366_1Clause5.iec62366_1Clause5_3;
         attribute appliesTo = "UseError";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Safety-relevant use errors (severity serious or worse) must trace to a hazard.";
         attribute predicateExpression = "not(severity == 'serious' or severity == 'critical' or severity == 'catastrophic') or causes->size() >= 1 or tracesRisk->size() >= 1";
         constraint { true }
     }
+    #EnforcesClause dependency from UseErrorTracesToHazardRule to iec62366_1::iec62366_1Clause5::iec62366_1Clause5_3;
     // ─── Relation end conformance (Track A0) ─────────────────────────────
     //
     // These rules carry the constraints that `connection def` end TYPES used to

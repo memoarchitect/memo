@@ -132,4 +132,11 @@ package memo_artifacts_standards_traceability {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = tracesToDocumentLinks meta SysML::Usage;
     }
+
+    // A rule's trace to the clause it enforces: `#EnforcesClause dependency from
+    // <Rule> to <clause>, <clause>;`. A rule may trace to several clauses, from
+    // several standards, or to none (a rule MEMO or a user holds for its own
+    // reasons). A SysML Dependency, so it needs no MEMO grammar and any
+    // SysML v2 tool reads it as client and supplier.
+    metadata def EnforcesClause;
 }
