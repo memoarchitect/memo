@@ -12,6 +12,7 @@ package memo_rules_quantitative {
         @MemoIdentity { :>> providedId = "QT-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::info;
         attribute rationaleText = "Excessive controls per hazard suggests the hazard is too broad and should be decomposed.";
@@ -23,6 +24,7 @@ package memo_rules_quantitative {
         @MemoIdentity { :>> providedId = "QT-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::info;
         attribute rationaleText = "High interface count indicates excessive coupling; consider decomposition.";
