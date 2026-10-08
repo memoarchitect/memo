@@ -20,7 +20,7 @@ This Standards Traceability Matrix cross-references the requirements and archite
 
 Each section is scoped to one standard by the clause's declaring package — the standards library is one package per standard, which makes `target.package` an exact per-standard selector. A clause *number* is not one: "5" is a clause of seven of the standards MEMO ships, so a matrix filtered on clause number would silently mix IEC 62304 §5 with ISO 14971 §5.
 
-A clause with no `ConformsTo` link is a gap. Enumerating the gaps is `memo standards check`, not this document — this document shows what the project *does* claim.
+A clause with no `ConformsTo` link is a gap. Enumerating the gaps is `memo validate --standards`, not this document — this document shows what the project *does* claim.
 
 ---
 
