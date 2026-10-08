@@ -12,7 +12,7 @@ Folder paths and SysML namespaces use the same hierarchy.
 
 ```text
 src/
-├── memo_namespaces.sysml  public memo-architect package and namespace assembly
+├── memo_namespaces.sysml  public memo package and namespace assembly
 ├── core/                  shared ontology foundations
 ├── architecture/          system description from operation to deployment
 ├── assurance/             requirements and assurance disciplines
