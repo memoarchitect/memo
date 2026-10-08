@@ -55,12 +55,7 @@ test('manifest declares the four logical packages and content-owned init values'
     '"@memoarchitect/methodology-gpca": ./methodologies/gpca',
     'defaultExtends: "@memoarchitect/methodology-default"',
     'rootImport: "memo"',
-    'defaultTemplate: default',
-    'default: ./templates/default',
-    'samd: ./templates/samd',
-    'connected-device: ./templates/connected-device',
-    'monitoring-device: ./templates/monitoring-device',
-    'infusion-pump: ./templates/infusion-pump',
+    'template: ./templates/default',
     'gpca: ./examples/gpca-pump',
     'standard-sysml-diagrams: ./examples/sysml-diagram-samples',
     'ros-mobile-robot: ./examples/ros-mobile-robot',
@@ -126,8 +121,8 @@ test('content uses canonical @memoarchitect names and no packages/ mirror exists
   }
 });
 
-test('manifest templates are complete source projects using the public memo import', () => {
-  for (const dir of ['default', 'samd', 'connected-device', 'monitoring-device', 'infusion-pump']) {
+test('the manifest template is a complete source project using the public memo import', () => {
+  for (const dir of ['default']) {
     const descriptor = read('templates', dir, 'memo.package.yaml');
     assert.match(descriptor, /name: ["']{{name}}["']/);
     assert.doesNotMatch(descriptor, /^(?:type|extends|usage|ontologies|methodology|modules):/m);
@@ -594,10 +589,6 @@ test('npm pack includes all content and no JavaScript', () => {
     'templates/default/model/catalog/architecture/system.sysml',
     'templates/default/model/catalog/assurance/requirements.sysml',
     'templates/default/model/catalog/artifacts/catalog.sysml',
-    'templates/samd/memo.package.yaml',
-    'templates/connected-device/memo.package.yaml',
-    'templates/monitoring-device/memo.package.yaml',
-    'templates/infusion-pump/memo.package.yaml',
     'examples/gpca-pump/model/catalog/project.sysml',
     'examples/sysml-diagram-samples/README.md',
     'src/memo_namespaces.sysml',

@@ -69,7 +69,7 @@ ontology/                    @memoarchitect/ontology descriptor
 profile/                     @memoarchitect/medical-modeling-profile
 methodologies/default/       @memoarchitect/methodology-default descriptor
 methodologies/gpca/          @memoarchitect/methodology-gpca descriptor
-templates/                   complete starter projects selectable by memo-architect init --template
+templates/                   the empty project skeleton memo-architect init copies
 examples/gpca-pump/          reference model (not a scaffold template)
 src/                         all reusable .sysml content (namespace = directory)
   memo_namespaces.sysml          public memo-architect import and nested namespace map

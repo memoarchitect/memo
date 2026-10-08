@@ -24,7 +24,7 @@ memo/
 ├── methodologies/
 │   ├── default/           # logical @memoarchitect/methodology-default
 │   └── gpca/              # logical @memoarchitect/methodology-gpca
-├── templates/             # complete starter projects selected by `memo-architect init --template`
+├── templates/             # the one empty project skeleton `memo-architect init` copies
 └── examples/
     ├── gpca-pump/         # the complete reference model — teaching material, not a scaffold
     └── */                 # focused, domain-specific examples
@@ -51,10 +51,7 @@ packages:
 init:
   defaultExtends: "@memoarchitect/methodology-default"
   rootImport: "memo"
-  defaultTemplate: default
-templates:
-  default: ./templates/default
-  samd: ./templates/samd
+  template: ./templates/default
 examples:
   gpca: ./examples/gpca-pump
   standard-sysml-diagrams: ./examples/sysml-diagram-samples
@@ -64,8 +61,9 @@ When a project imports `@memoarchitect/methodology-default` and binds it in its
 `ProjectMethodBinding`, the tools resolve the installed ontology npm package,
 read this manifest, and map the logical name to its subpath. The manifest says
 where the source sits; the import decides that it is loaded. `memo-architect init --list` shows the manifest's
-templates and examples. `memo-architect init --template <id>` copies the selected
-template, substitutes the project name, and writes `memo.lock.yaml`.
+ontology packages and examples. `memo-architect init` copies the manifest's one
+project skeleton, substitutes the project name, and writes `memo.lock.yaml`;
+`memo-architect init --example <id>` copies an example instead.
 
 ## How the three packages relate
 
