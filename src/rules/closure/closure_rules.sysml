@@ -21,6 +21,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-001"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7.iso14971Clause7_1;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
@@ -33,6 +34,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-002"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5.iso14971Clause5_5;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::error;
@@ -45,6 +47,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-003"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         // Note: ISO 14971:2019 puts verification of the implementation and effectiveness of a risk control measure in 7.2; the rule text used to say 7.4, which is benefit-risk analysis.
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7.iso14971Clause7_2;
         attribute appliesTo = "RiskControlMeasure";
@@ -58,6 +61,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-004"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scope, the rule text names no clause; confirm.
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause6;
         attribute appliesTo = "Risk";
@@ -73,6 +77,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-010"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scope; confirm.
         ref enforces : StandardClause[1..*] = iso13485.iso13485Clause7.iso13485Clause7_3.iso13485Clause7_3_3;
         attribute appliesTo = "Requirement[requirementType=system]";
@@ -86,6 +91,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-011"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_2.iec62304Clause5_2_1;
         attribute appliesTo = "Requirement[requirementType=software]";
         attribute severity = RuleSeverityKind::error;
@@ -106,6 +112,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-020"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause4.iec62304Clause4_3;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
@@ -118,6 +125,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-021"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Software items shall be linked to their requirements per IEC 62304.";
@@ -129,6 +137,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-022"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Functions should be allocated to implementation elements.";
@@ -146,6 +155,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-023"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "MemoFunction";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "A function participates in the functional chain through a flow or a succession, through the functions it decomposes into, or by being performed — by a functional chain, or by the action that triggers it. One that participates in none of them is unreachable behaviour: nothing triggers it and nothing consumes what it produces.";
@@ -171,6 +181,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-024"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62366_1.iec62366_1Clause5.iec62366_1Clause5_1;
         attribute appliesTo = "Need";
         attribute severity = RuleSeverityKind::warning;
@@ -185,6 +196,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-030"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Verification method (test, analysis, inspection, demonstration) required per IEC 62304.";
@@ -196,6 +208,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-031"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Verification cases must be linked to verifiable items.";
@@ -207,6 +220,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-032"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "VerificationCase";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Verification results should be documented as evidence records.";
@@ -220,6 +234,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-040"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the section scope; confirm.
         ref enforces : StandardClause[1..*] = fdaCybersecurity2023.fdaCyberSection5.fdaCyberSection5A;
         attribute appliesTo = "Threat";
@@ -233,6 +248,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-041"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the section scope; confirm.
         ref enforces : StandardClause[1..*] = fdaCybersecurity2023.fdaCyberSection5.fdaCyberSection5A;
         attribute appliesTo = "CybersecurityAsset";
@@ -248,6 +264,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-050"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "Interface";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Interface direction required for integration analysis.";
@@ -261,6 +278,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-101"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "IEC 62304 requires rigorous verification for Class C software.";
@@ -289,6 +307,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-110"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Every functional UI element must have a design record — a requirement it satisfies or an action it triggers. Elements with formKind `decoration` are chrome and are exempt.";
@@ -304,6 +323,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-111"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "An interactive UI element (button, selector, slider, field) should trigger a UIAction that invokes a system function; otherwise the control's purpose is not in the model. Physical controls are OperatorInterfaceElement and are covered separately.";
@@ -318,6 +338,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-112"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "UIElement";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Automatically detected bounds are a proposal until a reviewer confirms them; released UI documentation should contain no unconfirmed automatic bounds.";
@@ -331,6 +352,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-113"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "ScreenCapture";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "A screen capture used as design or usability evidence must identify the build it was taken from and hash the image bytes, or it cannot be relied on in the DHF.";
@@ -346,6 +368,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-005"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5.iso14971Clause5_4;
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::warning;
@@ -358,6 +381,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-006"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5.iso14971Clause5_4;
         attribute appliesTo = "HazardousSituation";
         attribute severity = RuleSeverityKind::warning;
@@ -370,6 +394,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-007"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause5.iso14971Clause5_5;
         attribute appliesTo = "Risk";
         attribute severity = RuleSeverityKind::warning;
@@ -382,6 +407,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-008"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause6;
         attribute appliesTo = "Risk";
         attribute severity = RuleSeverityKind::warning;
@@ -394,6 +420,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-009"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause7.iso14971Clause7_3;
         attribute appliesTo = "ResidualRisk";
         attribute severity = RuleSeverityKind::warning;
@@ -406,6 +433,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-014"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iso14971.iso14971Clause8;
         attribute appliesTo = "ResidualRisk";
         attribute severity = RuleSeverityKind::warning;
@@ -418,6 +446,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-015"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause7.iec62304Clause7_1.iec62304Clause7_1_3;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
@@ -430,6 +459,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-016"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause8.iec62304Clause8_1.iec62304Clause8_1_2;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
@@ -442,6 +472,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-017"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_3.iec62304Clause5_3_3;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
@@ -454,6 +485,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-018"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_4.iec62304Clause5_4_1;
         attribute appliesTo = "SoftwareModule";
         attribute severity = RuleSeverityKind::warning;
@@ -466,6 +498,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-019"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause6.iec62304Clause6_2.iec62304Clause6_2_3;
         attribute appliesTo = "ChangeRequest";
         attribute severity = RuleSeverityKind::warning;
@@ -478,6 +511,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-025"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = (iec62304.iec62304Clause6.iec62304Clause6_2.iec62304Clause6_2_4, iec62304.iec62304Clause8.iec62304Clause8_2.iec62304Clause8_2_1);
         attribute appliesTo = "ChangeRequest";
         attribute severity = RuleSeverityKind::warning;
@@ -490,6 +524,7 @@ package memo_rules_closure {
         @MemoIdentity { :>> providedId = "CR-MED-026"; }
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::required;
         ref enforces : StandardClause[1..*] = iec62304.iec62304Clause8.iec62304Clause8_2.iec62304Clause8_2_4;
         attribute appliesTo = "ChangeRequest";
         attribute severity = RuleSeverityKind::warning;
