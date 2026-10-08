@@ -132,7 +132,7 @@ resolve_memo_cli "$REPO_ROOT" || exit 127
 
 # SCOPE: src + extensions + examples — everything MEMO ships, not just the three
 # kpar packages this script builds. `examples/` reaches users via
-# `memo init --example`, so a green build that skipped it said nothing about
+# `memo-architect init --example`, so a green build that skipped it said nothing about
 # what users actually run. R8-S4 added it here and to check-syside-gate.mjs.
 #
 # The validator is memo-tools' selected provider (SysIDE by default; switch

@@ -4,7 +4,7 @@
 
 ## Release 0.6.1
 
-`memo init` now selects complete ontology-owned templates. Projects created
+`memo-architect init` now selects complete ontology-owned templates. Projects created
 without a selection use the `default` template and the complete default MEMO
 methodology. The former device-archetype selection is removed.
 
