@@ -69,7 +69,7 @@ a `ref enforces` member of the rule; see the [release notes](../../release-notes
 Obligation is separate from severity (what a finding costs) and from tailoring
 class (how far a methodology may change the rule). `memo validate --rules
 --rules-obligation <obligation>` lists the rules of one obligation, and
-`memo-architect rules new --obligation <obligation>` writes it into a new rule.
+`memo-architect new rule --obligation <obligation>` writes it into a new rule.
 To change a rule's obligation, edit its `attribute obligation`.
 
 ## Enumerations
