@@ -218,6 +218,7 @@ flowchart LR
 | [`RuleCategoryKind`](../sysml-api/core/enumerations/memo_enumerations.md#rulecategorykind) | `closure`, `coverage`, `lifecycle`, `crossLayer`, `quantitative` |
 | [`RuleTailoringKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruletailoringkind) | `invariant`, `assurance`, `methodology` |
 | [`RuleDomainKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruledomainkind) | `modelling`, `medicalDevice`, `organisation` |
+| [`RuleObligationKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruleobligationkind) | `required`, `recommended`, `bestPractice` |
 | [`RuleDispositionKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruledispositionkind) | `enabled`, `disabled`, `replaced` |
 | [`ScopeModeKind`](../sysml-api/core/enumerations/memo_enumerations.md#scopemodekind) | `allAvailable`, `explicit` |
 | [`WorkflowStageKind`](../sysml-api/core/enumerations/memo_enumerations.md#workflowstagekind) | `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents` |

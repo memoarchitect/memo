@@ -8,7 +8,7 @@ package memo_rules_crosslayer {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    private import memo_artifacts_standards_traceability::StandardClause;
+    private import memo_artifacts_standards_traceability::EnforcesClause;
     private import memo_artifacts_standards_iec_62304::*;
     private import memo_artifacts_standards_iso_14971::*;
     constraint def RiskToReqTraceRule :> MemoConsistencyRule {
@@ -17,13 +17,13 @@ package memo_rules_crosslayer {
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scopes; confirm.
-        ref enforces : StandardClause[1..*] = (iso14971.iso14971Clause7.iso14971Clause7_2, iec62304.iec62304Clause5.iec62304Clause5_2.iec62304Clause5_2_3);
         attribute appliesTo = "Hazard";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Risk-requirement traceability required for regulatory submissions.";
         attribute predicateExpression = "derivesFrom->size() >= 1";
         constraint { true }
     }
+    #EnforcesClause dependency from RiskToReqTraceRule to iso14971::iso14971Clause7::iso14971Clause7_2, iec62304::iec62304Clause5::iec62304Clause5_2::iec62304Clause5_2_3;
 
     constraint def ReqToArchTraceRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "XL-002"; }
@@ -31,12 +31,12 @@ package memo_rules_crosslayer {
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
         // To confirm: inferred from the clause scope; confirm.
-        ref enforces : StandardClause[1..*] = iec62304.iec62304Clause5.iec62304Clause5_3.iec62304Clause5_3_1;
         attribute appliesTo = "Requirement[requirementType=system]";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "Requirements-to-architecture traceability per IEC 62304.";
         attribute predicateExpression = "satisfiedBy->size() >= 1";
         constraint { true }
     }
+    #EnforcesClause dependency from ReqToArchTraceRule to iec62304::iec62304Clause5::iec62304Clause5_3::iec62304Clause5_3_1;
 
 }
