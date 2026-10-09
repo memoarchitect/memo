@@ -40,6 +40,30 @@ control, of a kind such as prevent, detect, respond, recover, hardening,
 authentication, authorisation, encryption, or integrity protection. A
 `SecurityRequirement` is a requirement with a security objective.
 
+**Product security and threat intelligence.** A `ThreatActor` is who attacks:
+an insider, a service technician, an opportunist, a cybercriminal, a nation
+state or a supply-chain party, with a motivation, a capability and the way they
+get access. An `AttackTechnique` names a technique in an external framework
+(MITRE ATT&CK for ICS, EMB3D, CAPEC) by its identifier, so MEMO points at the
+framework instead of copying it. An `AttackPath` is an operative scenario that
+chains techniques from an entry point to an attack goal. A `SecurityProperty`
+is a security objective an asset must keep (confidentiality, integrity,
+availability, authenticity, accountability, privacy or safety) at an impact
+level. A `CybersecurityAssumption` is a stated assumption with an owner, a
+review date and whether it still holds. An `SBOMComponent` is a software
+component of the bill of materials, with its supplier, licence, package URL and
+the SPDX or CycloneDX reference it came from. A `PenTestFinding` is evidence
+from a penetration test, with its CVSS rating and its status. A
+`PostmarketProcess` is a monitoring, disclosure, patching or incident-response
+process and its cadence. A vulnerability also carries its CVE reference and a
+disposition (open, mitigated, accepted or closed).
+
+**Inherent and residual risk.** A `CyberRisk` stays the one identity of a risk.
+A `CyberRiskAssessment` records its state before controls (inherent) or after
+them (residual), with the probability and severity estimates, the resulting
+level, whether it is acceptable, who assessed it and who approved it, without
+copying the risk.
+
 ## How it connects
 
 - **Assets are threatened** (`ThreatenedBy`, in Core), and a threat exploits a
@@ -52,6 +76,21 @@ authentication, authorisation, encryption, or integrity protection. A
 - **Threats drive requirements.** A threat or risk derives a security
   requirement (`DerivesCyberRequirement`, in Core). See
   [Requirements](requirements.md).
+- **What is exposed and what it must keep.** An attack surface exposes an asset
+  (`ExposesAsset`), and an asset has security properties (`HasSecurityProperty`).
+- **Who, how and what follows.** A threat is attributed to an actor
+  (`AttributedToThreatActor`), uses a technique (`UsesAttackTechnique`) and
+  realises a cyber hazard (`RealizesCyberHazard`). An attack path includes the
+  techniques it chains (`IncludesAttackTechnique`).
+- **Findings and components.** A penetration-test finding identifies a
+  vulnerability (`IdentifiesVulnerability`) and demonstrates an attack path
+  (`DemonstratesAttackPath`). A vulnerability affects an SBOM component
+  (`AffectsSBOMComponent`), which a postmarket process monitors
+  (`MonitorsSBOMComponent`).
+- **Evidence and assumptions.** Evidence supports a mitigation's effectiveness
+  (`SupportsMitigationEffectiveness`), an assessment assesses a cyber risk
+  (`AssessesCyberRisk`), and an assumption conditions any cyber element
+  (`ConditionsCyberElement`).
 - **Trust boundaries sit on the architecture.** A `TrustBoundary` is an interface
   element, and an element can cross one (`CrossesTrustBoundary`, in Core). See
   [Logical](logical.md).

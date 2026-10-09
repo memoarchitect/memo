@@ -51,7 +51,9 @@ package memo_assurance_cybersecurity {
         attribute exploitability : String;
         attribute discoveryMethod : String;
         attribute cweReference : String;
+        attribute cveReference : String;
         attribute remediable : Boolean;
+        attribute vulnerabilityDisposition : VulnerabilityDispositionKind;
         // CVSS v3.1 quantitative rating — the core output of a vulnerability
         // analysis (e.g. RSK-00058). `cvssBaseScore` is the 0.0-10.0 numeric
         // score; `cvssVector` the source vector string (AV:.../AC:.../...).
@@ -91,6 +93,154 @@ package memo_assurance_cybersecurity {
         attribute boundaryType : String;
         attribute crossingConstraint : String;
         attribute trustAssumption : String;
+    }
+
+    // ── Product-security and threat-intelligence extensions ─────────
+    enum def ThreatActorKind {
+        enum insider;
+        enum serviceTechnician;
+        enum opportunistic;
+        enum cybercriminal;
+        enum nationState;
+        enum supplyChain;
+    }
+    enum def ThreatCapabilityKind {
+        enum low;
+        enum moderate;
+        enum high;
+        enum advanced;
+    }
+    enum def ThreatAccessKind {
+        enum physical;
+        enum local;
+        enum network;
+        enum remote;
+        enum supplyChain;
+    }
+    enum def AttackTechniqueFrameworkKind {
+        enum mitreAttackIcs;
+        enum mitreEmb3d;
+        enum capec;
+        enum other;
+    }
+    enum def SecurityObjectiveKind {
+        enum confidentiality;
+        enum integrity;
+        enum availability;
+        enum authenticity;
+        enum accountability;
+        enum privacy;
+        enum safety;
+    }
+    enum def CyberAssumptionValidityKind {
+        enum valid;
+        enum reviewDue;
+        enum invalid;
+        enum retired;
+    }
+    enum def SbomFormatKind {
+        enum spdx;
+        enum cycloneDx;
+        enum other;
+    }
+    enum def VulnerabilityDispositionKind {
+        enum open;
+        enum mitigated;
+        enum accepted;
+        enum closed;
+    }
+    enum def PenTestFindingStatusKind {
+        enum open;
+        enum inRemediation;
+        enum accepted;
+        enum closed;
+    }
+    enum def PostmarketProcessKind {
+        enum monitoring;
+        enum vulnerabilityDisclosure;
+        enum patching;
+        enum incidentResponse;
+    }
+    enum def CyberRiskAssessmentStageKind {
+        enum inherent;
+        enum residual;
+    }
+
+    part def ThreatActor specializes MemoPart {
+        attribute actorKind : ThreatActorKind;
+        attribute motivation : String;
+        attribute capability : ThreatCapabilityKind;
+        attribute accessMode : ThreatAccessKind;
+        attribute organization : String;
+    }
+
+    part def AttackTechnique specializes MemoPart {
+        attribute framework : AttackTechniqueFrameworkKind;
+        attribute externalId : String;
+        attribute tactic : String;
+        attribute platform : String;
+        attribute techniqueVersion : String;
+    }
+
+    part def SecurityProperty specializes MemoPart {
+        attribute objectiveKind : SecurityObjectiveKind;
+        attribute impactLevel : CriticalityKind;
+        attribute propertyRationale : String;
+    }
+
+    part def CybersecurityAssumption specializes MemoPart {
+        attribute statement : String;
+        attribute owner : String;
+        attribute reviewDate : String;
+        attribute expirationDate : String;
+        attribute validity : CyberAssumptionValidityKind;
+    }
+
+    part def SBOMComponent specializes MemoPart {
+        attribute componentName : String;
+        attribute componentVersion : String;
+        attribute supplier : String;
+        attribute licenseExpression : String;
+        attribute packageUrl : String;
+        attribute bomReference : String;
+        attribute sbomFormat : SbomFormatKind;
+    }
+
+    // The path's narrative is the inherited `pathSummary`.
+    action def AttackPath specializes OperativeScenario {
+        attribute entryPoint : String;
+        attribute attackGoal : String;
+    }
+
+    part def PenTestFinding specializes MemoEvidence {
+        attribute findingIdentifier : String;
+        attribute severity : CriticalityKind;
+        attribute cvssBaseScore : Real;
+        attribute cvssVector : String;
+        attribute findingStatus : PenTestFindingStatusKind;
+        attribute retestDate : String;
+    }
+
+    action def PostmarketProcess specializes MemoAction {
+        attribute processKind : PostmarketProcessKind;
+        attribute owner : String;
+        attribute cadence : String;
+        attribute serviceLevelTarget : String;
+    }
+
+    // A CyberRisk remains the stable risk identity. Assessments record its
+    // pre-control (inherent) and post-control (residual) states without
+    // duplicating the risk itself.
+    part def CyberRiskAssessment specializes MemoPart {
+        attribute assessmentStage : CyberRiskAssessmentStageKind;
+        attribute probabilityEstimate : ProbabilityKind;
+        attribute severityEstimate : SeverityKind;
+        attribute riskLevel : CriticalityKind;
+        attribute acceptability : RiskAcceptabilityKind;
+        attribute controlsAppliedSummary : String;
+        attribute assessmentDate : String;
+        attribute assessor : String;
+        attribute approver : String;
     }
 
     // ── Relations owned by this package ─────────────────────────────
@@ -135,5 +285,150 @@ package memo_assurance_cybersecurity {
         :> annotatedElement : SysML::ConnectionDefinition;
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = impactsSafetyLinks meta SysML::Usage;
+    }
+
+    // ── Product-security and threat-intelligence relations ──────────
+
+    connection def HasSecurityProperty :> MemoRelationship {
+        end characterizedAsset : CybersecurityAsset :>> source;
+        end securityProperty : SecurityProperty :>> target;
+    }
+    abstract connection hasSecurityPropertyLinks : HasSecurityProperty[*];
+    metadata def <hasSecurityProperty> HasSecurityPropertyMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = hasSecurityPropertyLinks meta SysML::Usage;
+    }
+
+    connection def ExposesAsset :> MemoRelationship {
+        end attackSurface : AttackSurface :>> source;
+        end exposedAsset : CybersecurityAsset :>> target;
+    }
+    abstract connection exposesAssetLinks : ExposesAsset[*];
+    metadata def <exposesAsset> ExposesAssetMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = exposesAssetLinks meta SysML::Usage;
+    }
+
+    connection def AttributedToThreatActor :> MemoRelationship {
+        end attributedThreat : Threat :>> source;
+        end threatActor : ThreatActor :>> target;
+    }
+    abstract connection attributedToThreatActorLinks : AttributedToThreatActor[*];
+    metadata def <attributedToThreatActor> AttributedToThreatActorMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = attributedToThreatActorLinks meta SysML::Usage;
+    }
+
+    connection def UsesAttackTechnique :> MemoRelationship {
+        end realizedThreat : Threat :>> source;
+        end attackTechnique : AttackTechnique :>> target;
+    }
+    abstract connection usesAttackTechniqueLinks : UsesAttackTechnique[*];
+    metadata def <usesAttackTechnique> UsesAttackTechniqueMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = usesAttackTechniqueLinks meta SysML::Usage;
+    }
+
+    connection def IncludesAttackTechnique :> MemoRelationship {
+        end attackPath : AttackPath :>> source;
+        end attackTechnique : AttackTechnique :>> target;
+    }
+    abstract connection includesAttackTechniqueLinks : IncludesAttackTechnique[*];
+    metadata def <includesAttackTechnique> IncludesAttackTechniqueMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = includesAttackTechniqueLinks meta SysML::Usage;
+    }
+
+    connection def RealizesCyberHazard :> MemoRelationship {
+        end realizedThreat : Threat :>> source;
+        end resultingCyberHazard : CyberHazard :>> target;
+    }
+    abstract connection realizesCyberHazardLinks : RealizesCyberHazard[*];
+    metadata def <realizesCyberHazard> RealizesCyberHazardMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = realizesCyberHazardLinks meta SysML::Usage;
+    }
+
+    connection def AssessesCyberRisk :> MemoRelationship {
+        end assessment : CyberRiskAssessment :>> source;
+        end assessedRisk : CyberRisk :>> target;
+    }
+    abstract connection assessesCyberRiskLinks : AssessesCyberRisk[*];
+    metadata def <assessesCyberRisk> AssessesCyberRiskMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = assessesCyberRiskLinks meta SysML::Usage;
+    }
+
+    connection def IdentifiesVulnerability :> MemoRelationship {
+        end finding : PenTestFinding :>> source;
+        end identifiedVulnerability : Vulnerability :>> target;
+    }
+    abstract connection identifiesVulnerabilityLinks : IdentifiesVulnerability[*];
+    metadata def <identifiesVulnerability> IdentifiesVulnerabilityMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = identifiesVulnerabilityLinks meta SysML::Usage;
+    }
+
+    connection def AffectsSBOMComponent :> MemoRelationship {
+        end vulnerability : Vulnerability :>> source;
+        end affectedComponent : SBOMComponent :>> target;
+    }
+    abstract connection affectsSBOMComponentLinks : AffectsSBOMComponent[*];
+    metadata def <affectsSBOMComponent> AffectsSBOMComponentMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = affectsSBOMComponentLinks meta SysML::Usage;
+    }
+
+    connection def DemonstratesAttackPath :> MemoRelationship {
+        end finding : PenTestFinding :>> source;
+        end demonstratedPath : AttackPath :>> target;
+    }
+    abstract connection demonstratesAttackPathLinks : DemonstratesAttackPath[*];
+    metadata def <demonstratesAttackPath> DemonstratesAttackPathMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = demonstratesAttackPathLinks meta SysML::Usage;
+    }
+
+    connection def SupportsMitigationEffectiveness :> MemoRelationship {
+        end supportingEvidence : MemoEvidence :>> source;
+        end supportedMitigation : CyberMitigation :>> target;
+    }
+    abstract connection supportsMitigationEffectivenessLinks : SupportsMitigationEffectiveness[*];
+    metadata def <supportsMitigationEffectiveness> SupportsMitigationEffectivenessMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = supportsMitigationEffectivenessLinks meta SysML::Usage;
+    }
+
+    connection def ConditionsCyberElement :> MemoRelationship {
+        end governingAssumption : CybersecurityAssumption :>> source;
+        end conditionedElement :>> target;
+    }
+    abstract connection conditionsCyberElementLinks : ConditionsCyberElement[*];
+    metadata def <conditionsCyberElement> ConditionsCyberElementMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = conditionsCyberElementLinks meta SysML::Usage;
+    }
+
+    connection def MonitorsSBOMComponent :> MemoRelationship {
+        end postmarketProcess : PostmarketProcess :>> source;
+        end monitoredComponent : SBOMComponent :>> target;
+    }
+    abstract connection monitorsSBOMComponentLinks : MonitorsSBOMComponent[*];
+    metadata def <monitorsSBOMComponent> MonitorsSBOMComponentMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = monitorsSBOMComponentLinks meta SysML::Usage;
     }
 }
