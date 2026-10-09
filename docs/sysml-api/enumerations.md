@@ -85,6 +85,23 @@ SysML `enum def` declarations in `src/`.
 | [`FlowSpecKind`](architecture/realization/deployment/memo_deployment.md#flowspeckind) | `enum def` | AADL separates a flow *specification* (declared at a component boundary as source / sink / path through ports) from a flow *implementation* (its routing through subcomponents and connectors), and traces a complete source→sink flow as an *end-to-end flow* across the assembly.… | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 
 
+## `memo::assurance::cybersecurity`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`AttackTechniqueFrameworkKind`](assurance/cybersecurity/memo_cybersecurity.md#attacktechniqueframeworkkind) | `enum def` | Controlled values for attack technique framework: `mitreAttackIcs`, `mitreEmb3d`, `capec`, `other`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`CyberAssumptionValidityKind`](assurance/cybersecurity/memo_cybersecurity.md#cyberassumptionvaliditykind) | `enum def` | Controlled values for cyber assumption validity: `valid`, `reviewDue`, `invalid`, `retired`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`CyberRiskAssessmentStageKind`](assurance/cybersecurity/memo_cybersecurity.md#cyberriskassessmentstagekind) | `enum def` | Controlled values for cyber risk assessment stage: `inherent`, `residual`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`PenTestFindingStatusKind`](assurance/cybersecurity/memo_cybersecurity.md#pentestfindingstatuskind) | `enum def` | Controlled values for pen test finding status: `open`, `inRemediation`, `accepted`, `closed`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`PostmarketProcessKind`](assurance/cybersecurity/memo_cybersecurity.md#postmarketprocesskind) | `enum def` | Controlled values for postmarket process: `monitoring`, `vulnerabilityDisclosure`, `patching`, `incidentResponse`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`SbomFormatKind`](assurance/cybersecurity/memo_cybersecurity.md#sbomformatkind) | `enum def` | Controlled values for sbom format: `spdx`, `cycloneDx`, `other`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`SecurityObjectiveKind`](assurance/cybersecurity/memo_cybersecurity.md#securityobjectivekind) | `enum def` | Controlled values for security objective: `confidentiality`, `integrity`, `availability`, `authenticity`, `accountability`, `privacy`, `safety`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ThreatAccessKind`](assurance/cybersecurity/memo_cybersecurity.md#threataccesskind) | `enum def` | Controlled values for threat access: `physical`, `local`, `network`, `remote`, `supplyChain`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ThreatActorKind`](assurance/cybersecurity/memo_cybersecurity.md#threatactorkind) | `enum def` | Controlled values for threat actor: `insider`, `serviceTechnician`, `opportunistic`, `cybercriminal`, `nationState`, `supplyChain`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ThreatCapabilityKind`](assurance/cybersecurity/memo_cybersecurity.md#threatcapabilitykind) | `enum def` | Controlled values for threat capability: `low`, `moderate`, `high`, `advanced`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`VulnerabilityDispositionKind`](assurance/cybersecurity/memo_cybersecurity.md#vulnerabilitydispositionkind) | `enum def` | Controlled values for vulnerability disposition: `open`, `mitigated`, `accepted`, `closed`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+
+
 ## `memo::assurance::requirements`
 
 | Name | SysML kind | Description | Source |

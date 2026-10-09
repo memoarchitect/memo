@@ -13,4 +13,5 @@ Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change 
 
 ### Added
 
+- **Cybersecurity: product security and threat intelligence.** `ThreatActor`, `AttackTechnique` (an external framework's identifier), `AttackPath`, `SecurityProperty`, `CybersecurityAssumption`, `SBOMComponent`, `PenTestFinding`, `PostmarketProcess` and `CyberRiskAssessment` (inherent or residual, without copying the risk), thirteen relations that link them (`ExposesAsset`, `UsesAttackTechnique`, `IdentifiesVulnerability`, `AssessesCyberRisk`, ...), and `cveReference` and `vulnerabilityDisposition` on a vulnerability. Additive: no existing model changes. From a proposal against 0.11.2, merged onto 0.13.2.
 - **Rule obligation.** Every rule states `required`, `recommended` or `bestPractice` (`RuleObligationKind`). Rules that trace to a clause start `required`; the rest start `recommended`. A rule that states no severity takes `error`, `warning` or `info` from it.
