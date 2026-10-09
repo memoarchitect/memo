@@ -46,10 +46,43 @@
 | [`CyberMitigation`](#cybermitigation) | `part def` | Cyber mitigation definition specializing `RiskControlMeasure`. | `RiskControlMeasure` |
 | [`SecurityRequirement`](#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. | `Requirement` |
 | [`TrustBoundary`](#trustboundary) | `part def` | Trust boundary definition specializing `InterfaceElement`. | `InterfaceElement` |
+| [`ThreatActorKind`](#threatactorkind) | `enum def` | Controlled values for threat actor: `insider`, `serviceTechnician`, `opportunistic`, `cybercriminal`, `nationState`, `supplyChain`. | — |
+| [`ThreatCapabilityKind`](#threatcapabilitykind) | `enum def` | Controlled values for threat capability: `low`, `moderate`, `high`, `advanced`. | — |
+| [`ThreatAccessKind`](#threataccesskind) | `enum def` | Controlled values for threat access: `physical`, `local`, `network`, `remote`, `supplyChain`. | — |
+| [`AttackTechniqueFrameworkKind`](#attacktechniqueframeworkkind) | `enum def` | Controlled values for attack technique framework: `mitreAttackIcs`, `mitreEmb3d`, `capec`, `other`. | — |
+| [`SecurityObjectiveKind`](#securityobjectivekind) | `enum def` | Controlled values for security objective: `confidentiality`, `integrity`, `availability`, `authenticity`, `accountability`, `privacy`, `safety`. | — |
+| [`CyberAssumptionValidityKind`](#cyberassumptionvaliditykind) | `enum def` | Controlled values for cyber assumption validity: `valid`, `reviewDue`, `invalid`, `retired`. | — |
+| [`SbomFormatKind`](#sbomformatkind) | `enum def` | Controlled values for sbom format: `spdx`, `cycloneDx`, `other`. | — |
+| [`VulnerabilityDispositionKind`](#vulnerabilitydispositionkind) | `enum def` | Controlled values for vulnerability disposition: `open`, `mitigated`, `accepted`, `closed`. | — |
+| [`PenTestFindingStatusKind`](#pentestfindingstatuskind) | `enum def` | Controlled values for pen test finding status: `open`, `inRemediation`, `accepted`, `closed`. | — |
+| [`PostmarketProcessKind`](#postmarketprocesskind) | `enum def` | Controlled values for postmarket process: `monitoring`, `vulnerabilityDisclosure`, `patching`, `incidentResponse`. | — |
+| [`CyberRiskAssessmentStageKind`](#cyberriskassessmentstagekind) | `enum def` | Controlled values for cyber risk assessment stage: `inherent`, `residual`. | — |
+| [`ThreatActor`](#threatactor) | `part def` | Threat actor definition specializing `MemoPart`. | `MemoPart` |
+| [`AttackTechnique`](#attacktechnique) | `part def` | Attack technique definition specializing `MemoPart`. | `MemoPart` |
+| [`SecurityProperty`](#securityproperty) | `part def` | Security property definition specializing `MemoPart`. | `MemoPart` |
+| [`CybersecurityAssumption`](#cybersecurityassumption) | `part def` | Cybersecurity assumption definition specializing `MemoPart`. | `MemoPart` |
+| [`SBOMComponent`](#sbomcomponent) | `part def` | Sbomcomponent definition specializing `MemoPart`. | `MemoPart` |
+| [`AttackPath`](#attackpath) | `action def` | The path's narrative is the inherited `pathSummary`. | `OperativeScenario` |
+| [`PenTestFinding`](#pentestfinding) | `part def` | Pen test finding definition specializing `MemoEvidence`. | `MemoEvidence` |
+| [`PostmarketProcess`](#postmarketprocess) | `action def` | Postmarket process definition specializing `MemoAction`. | `MemoAction` |
+| [`CyberRiskAssessment`](#cyberriskassessment) | `part def` | Cyber risk assessment definition specializing `MemoPart`. | `MemoPart` |
 | [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship from `CybersecurityAsset` to `Threat`. | `MemoRelationship` |
 | [`Exploits`](#exploits) | `connection def` | Typed relationship from `Threat` to `Vulnerability`. | `MemoRelationship` |
 | [`RealizedByScenario`](#realizedbyscenario) | `connection def` | Typed relationship from `RequirementDriver` to `OperativeScenario`. | `MemoRelationship` |
 | [`ImpactsSafety`](#impactssafety) | `connection def` | Typed relationship from `MemoPart` to `RiskItem`. | `MemoRelationship` |
+| [`HasSecurityProperty`](#hassecurityproperty) | `connection def` | Typed relationship from `CybersecurityAsset` to `SecurityProperty`. | `MemoRelationship` |
+| [`ExposesAsset`](#exposesasset) | `connection def` | Typed relationship from `AttackSurface` to `CybersecurityAsset`. | `MemoRelationship` |
+| [`AttributedToThreatActor`](#attributedtothreatactor) | `connection def` | Typed relationship from `Threat` to `ThreatActor`. | `MemoRelationship` |
+| [`UsesAttackTechnique`](#usesattacktechnique) | `connection def` | Typed relationship from `Threat` to `AttackTechnique`. | `MemoRelationship` |
+| [`IncludesAttackTechnique`](#includesattacktechnique) | `connection def` | Typed relationship from `AttackPath` to `AttackTechnique`. | `MemoRelationship` |
+| [`RealizesCyberHazard`](#realizescyberhazard) | `connection def` | Typed relationship from `Threat` to `CyberHazard`. | `MemoRelationship` |
+| [`AssessesCyberRisk`](#assessescyberrisk) | `connection def` | Typed relationship from `CyberRiskAssessment` to `CyberRisk`. | `MemoRelationship` |
+| [`IdentifiesVulnerability`](#identifiesvulnerability) | `connection def` | Typed relationship from `PenTestFinding` to `Vulnerability`. | `MemoRelationship` |
+| [`AffectsSBOMComponent`](#affectssbomcomponent) | `connection def` | Typed relationship from `Vulnerability` to `SBOMComponent`. | `MemoRelationship` |
+| [`DemonstratesAttackPath`](#demonstratesattackpath) | `connection def` | Typed relationship from `PenTestFinding` to `AttackPath`. | `MemoRelationship` |
+| [`SupportsMitigationEffectiveness`](#supportsmitigationeffectiveness) | `connection def` | Typed relationship from `MemoEvidence` to `CyberMitigation`. | `MemoRelationship` |
+| [`ConditionsCyberElement`](#conditionscyberelement) | `connection def` | Typed relationship from `CybersecurityAssumption` to `any element`. | `MemoRelationship` |
+| [`MonitorsSBOMComponent`](#monitorssbomcomponent) | `connection def` | Typed relationship from `PostmarketProcess` to `SBOMComponent`. | `MemoRelationship` |
 
 ## CybersecurityAsset
 
@@ -186,6 +219,306 @@ part def TrustBoundary specializes InterfaceElement
 | Owning package | `memo_assurance_cybersecurity` |
 
 
+## ThreatActorKind
+
+```sysml
+enum def ThreatActorKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for threat actor: `insider`, `serviceTechnician`, `opportunistic`, `cybercriminal`, `nationState`, `supplyChain`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## ThreatCapabilityKind
+
+```sysml
+enum def ThreatCapabilityKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for threat capability: `low`, `moderate`, `high`, `advanced`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## ThreatAccessKind
+
+```sysml
+enum def ThreatAccessKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for threat access: `physical`, `local`, `network`, `remote`, `supplyChain`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## AttackTechniqueFrameworkKind
+
+```sysml
+enum def AttackTechniqueFrameworkKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for attack technique framework: `mitreAttackIcs`, `mitreEmb3d`, `capec`, `other`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## SecurityObjectiveKind
+
+```sysml
+enum def SecurityObjectiveKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for security objective: `confidentiality`, `integrity`, `availability`, `authenticity`, `accountability`, `privacy`, `safety`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## CyberAssumptionValidityKind
+
+```sysml
+enum def CyberAssumptionValidityKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for cyber assumption validity: `valid`, `reviewDue`, `invalid`, `retired`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## SbomFormatKind
+
+```sysml
+enum def SbomFormatKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for sbom format: `spdx`, `cycloneDx`, `other`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## VulnerabilityDispositionKind
+
+```sysml
+enum def VulnerabilityDispositionKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for vulnerability disposition: `open`, `mitigated`, `accepted`, `closed`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## PenTestFindingStatusKind
+
+```sysml
+enum def PenTestFindingStatusKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for pen test finding status: `open`, `inRemediation`, `accepted`, `closed`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## PostmarketProcessKind
+
+```sysml
+enum def PostmarketProcessKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for postmarket process: `monitoring`, `vulnerabilityDisclosure`, `patching`, `incidentResponse`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## CyberRiskAssessmentStageKind
+
+```sysml
+enum def CyberRiskAssessmentStageKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for cyber risk assessment stage: `inherent`, `residual`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## ThreatActor
+
+```sysml
+part def ThreatActor specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Threat actor definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## AttackTechnique
+
+```sysml
+part def AttackTechnique specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Attack technique definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## SecurityProperty
+
+```sysml
+part def SecurityProperty specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Security property definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## CybersecurityAssumption
+
+```sysml
+part def CybersecurityAssumption specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Cybersecurity assumption definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## SBOMComponent
+
+```sysml
+part def SBOMComponent specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Sbomcomponent definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## AttackPath
+
+```sysml
+action def AttackPath specializes OperativeScenario
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The path's narrative is the inherited `pathSummary`. |
+| Kind | `action def` |
+| Abstract | No |
+| Specializes | `OperativeScenario` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## PenTestFinding
+
+```sysml
+part def PenTestFinding specializes MemoEvidence
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Pen test finding definition specializing `MemoEvidence`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoEvidence` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## PostmarketProcess
+
+```sysml
+action def PostmarketProcess specializes MemoAction
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Postmarket process definition specializing `MemoAction`. |
+| Kind | `action def` |
+| Abstract | No |
+| Specializes | `MemoAction` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## CyberRiskAssessment
+
+```sysml
+part def CyberRiskAssessment specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Cyber risk assessment definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
 ## ThreatenedBy
 
 ```sysml
@@ -240,6 +573,201 @@ connection def ImpactsSafety :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship from `MemoPart` to `RiskItem`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## HasSecurityProperty
+
+```sysml
+connection def HasSecurityProperty :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `CybersecurityAsset` to `SecurityProperty`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## ExposesAsset
+
+```sysml
+connection def ExposesAsset :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `AttackSurface` to `CybersecurityAsset`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## AttributedToThreatActor
+
+```sysml
+connection def AttributedToThreatActor :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `Threat` to `ThreatActor`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## UsesAttackTechnique
+
+```sysml
+connection def UsesAttackTechnique :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `Threat` to `AttackTechnique`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## IncludesAttackTechnique
+
+```sysml
+connection def IncludesAttackTechnique :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `AttackPath` to `AttackTechnique`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## RealizesCyberHazard
+
+```sysml
+connection def RealizesCyberHazard :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `Threat` to `CyberHazard`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## AssessesCyberRisk
+
+```sysml
+connection def AssessesCyberRisk :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `CyberRiskAssessment` to `CyberRisk`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## IdentifiesVulnerability
+
+```sysml
+connection def IdentifiesVulnerability :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `PenTestFinding` to `Vulnerability`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## AffectsSBOMComponent
+
+```sysml
+connection def AffectsSBOMComponent :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `Vulnerability` to `SBOMComponent`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## DemonstratesAttackPath
+
+```sysml
+connection def DemonstratesAttackPath :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `PenTestFinding` to `AttackPath`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## SupportsMitigationEffectiveness
+
+```sysml
+connection def SupportsMitigationEffectiveness :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `MemoEvidence` to `CyberMitigation`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## ConditionsCyberElement
+
+```sysml
+connection def ConditionsCyberElement :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `CybersecurityAssumption` to `any element`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_cybersecurity` |
+
+
+## MonitorsSBOMComponent
+
+```sysml
+connection def MonitorsSBOMComponent :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `PostmarketProcess` to `SBOMComponent`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -304,7 +832,9 @@ connection def ImpactsSafety :> MemoRelationship
             attribute exploitability : String;
             attribute discoveryMethod : String;
             attribute cweReference : String;
+            attribute cveReference : String;
             attribute remediable : Boolean;
+            attribute vulnerabilityDisposition : VulnerabilityDispositionKind;
             // CVSS v3.1 quantitative rating — the core output of a vulnerability
             // analysis (e.g. RSK-00058). `cvssBaseScore` is the 0.0-10.0 numeric
             // score; `cvssVector` the source vector string (AV:.../AC:.../...).
@@ -344,6 +874,154 @@ connection def ImpactsSafety :> MemoRelationship
             attribute boundaryType : String;
             attribute crossingConstraint : String;
             attribute trustAssumption : String;
+        }
+
+        // ── Product-security and threat-intelligence extensions ─────────
+        enum def ThreatActorKind {
+            enum insider;
+            enum serviceTechnician;
+            enum opportunistic;
+            enum cybercriminal;
+            enum nationState;
+            enum supplyChain;
+        }
+        enum def ThreatCapabilityKind {
+            enum low;
+            enum moderate;
+            enum high;
+            enum advanced;
+        }
+        enum def ThreatAccessKind {
+            enum physical;
+            enum local;
+            enum network;
+            enum remote;
+            enum supplyChain;
+        }
+        enum def AttackTechniqueFrameworkKind {
+            enum mitreAttackIcs;
+            enum mitreEmb3d;
+            enum capec;
+            enum other;
+        }
+        enum def SecurityObjectiveKind {
+            enum confidentiality;
+            enum integrity;
+            enum availability;
+            enum authenticity;
+            enum accountability;
+            enum privacy;
+            enum safety;
+        }
+        enum def CyberAssumptionValidityKind {
+            enum valid;
+            enum reviewDue;
+            enum invalid;
+            enum retired;
+        }
+        enum def SbomFormatKind {
+            enum spdx;
+            enum cycloneDx;
+            enum other;
+        }
+        enum def VulnerabilityDispositionKind {
+            enum open;
+            enum mitigated;
+            enum accepted;
+            enum closed;
+        }
+        enum def PenTestFindingStatusKind {
+            enum open;
+            enum inRemediation;
+            enum accepted;
+            enum closed;
+        }
+        enum def PostmarketProcessKind {
+            enum monitoring;
+            enum vulnerabilityDisclosure;
+            enum patching;
+            enum incidentResponse;
+        }
+        enum def CyberRiskAssessmentStageKind {
+            enum inherent;
+            enum residual;
+        }
+
+        part def ThreatActor specializes MemoPart {
+            attribute actorKind : ThreatActorKind;
+            attribute motivation : String;
+            attribute capability : ThreatCapabilityKind;
+            attribute accessMode : ThreatAccessKind;
+            attribute organization : String;
+        }
+
+        part def AttackTechnique specializes MemoPart {
+            attribute framework : AttackTechniqueFrameworkKind;
+            attribute externalId : String;
+            attribute tactic : String;
+            attribute platform : String;
+            attribute techniqueVersion : String;
+        }
+
+        part def SecurityProperty specializes MemoPart {
+            attribute objectiveKind : SecurityObjectiveKind;
+            attribute impactLevel : CriticalityKind;
+            attribute propertyRationale : String;
+        }
+
+        part def CybersecurityAssumption specializes MemoPart {
+            attribute statement : String;
+            attribute owner : String;
+            attribute reviewDate : String;
+            attribute expirationDate : String;
+            attribute validity : CyberAssumptionValidityKind;
+        }
+
+        part def SBOMComponent specializes MemoPart {
+            attribute componentName : String;
+            attribute componentVersion : String;
+            attribute supplier : String;
+            attribute licenseExpression : String;
+            attribute packageUrl : String;
+            attribute bomReference : String;
+            attribute sbomFormat : SbomFormatKind;
+        }
+
+        // The path's narrative is the inherited `pathSummary`.
+        action def AttackPath specializes OperativeScenario {
+            attribute entryPoint : String;
+            attribute attackGoal : String;
+        }
+
+        part def PenTestFinding specializes MemoEvidence {
+            attribute findingIdentifier : String;
+            attribute severity : CriticalityKind;
+            attribute cvssBaseScore : Real;
+            attribute cvssVector : String;
+            attribute findingStatus : PenTestFindingStatusKind;
+            attribute retestDate : String;
+        }
+
+        action def PostmarketProcess specializes MemoAction {
+            attribute processKind : PostmarketProcessKind;
+            attribute owner : String;
+            attribute cadence : String;
+            attribute serviceLevelTarget : String;
+        }
+
+        // A CyberRisk remains the stable risk identity. Assessments record its
+        // pre-control (inherent) and post-control (residual) states without
+        // duplicating the risk itself.
+        part def CyberRiskAssessment specializes MemoPart {
+            attribute assessmentStage : CyberRiskAssessmentStageKind;
+            attribute probabilityEstimate : ProbabilityKind;
+            attribute severityEstimate : SeverityKind;
+            attribute riskLevel : CriticalityKind;
+            attribute acceptability : RiskAcceptabilityKind;
+            attribute controlsAppliedSummary : String;
+            attribute assessmentDate : String;
+            attribute assessor : String;
+            attribute approver : String;
         }
 
         // ── Relations owned by this package ─────────────────────────────
@@ -388,6 +1066,151 @@ connection def ImpactsSafety :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = impactsSafetyLinks meta SysML::Usage;
+        }
+
+        // ── Product-security and threat-intelligence relations ──────────
+
+        connection def HasSecurityProperty :> MemoRelationship {
+            end characterizedAsset : CybersecurityAsset :>> source;
+            end securityProperty : SecurityProperty :>> target;
+        }
+        abstract connection hasSecurityPropertyLinks : HasSecurityProperty[*];
+        metadata def <hasSecurityProperty> HasSecurityPropertyMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = hasSecurityPropertyLinks meta SysML::Usage;
+        }
+
+        connection def ExposesAsset :> MemoRelationship {
+            end attackSurface : AttackSurface :>> source;
+            end exposedAsset : CybersecurityAsset :>> target;
+        }
+        abstract connection exposesAssetLinks : ExposesAsset[*];
+        metadata def <exposesAsset> ExposesAssetMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = exposesAssetLinks meta SysML::Usage;
+        }
+
+        connection def AttributedToThreatActor :> MemoRelationship {
+            end attributedThreat : Threat :>> source;
+            end threatActor : ThreatActor :>> target;
+        }
+        abstract connection attributedToThreatActorLinks : AttributedToThreatActor[*];
+        metadata def <attributedToThreatActor> AttributedToThreatActorMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = attributedToThreatActorLinks meta SysML::Usage;
+        }
+
+        connection def UsesAttackTechnique :> MemoRelationship {
+            end realizedThreat : Threat :>> source;
+            end attackTechnique : AttackTechnique :>> target;
+        }
+        abstract connection usesAttackTechniqueLinks : UsesAttackTechnique[*];
+        metadata def <usesAttackTechnique> UsesAttackTechniqueMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = usesAttackTechniqueLinks meta SysML::Usage;
+        }
+
+        connection def IncludesAttackTechnique :> MemoRelationship {
+            end attackPath : AttackPath :>> source;
+            end attackTechnique : AttackTechnique :>> target;
+        }
+        abstract connection includesAttackTechniqueLinks : IncludesAttackTechnique[*];
+        metadata def <includesAttackTechnique> IncludesAttackTechniqueMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = includesAttackTechniqueLinks meta SysML::Usage;
+        }
+
+        connection def RealizesCyberHazard :> MemoRelationship {
+            end realizedThreat : Threat :>> source;
+            end resultingCyberHazard : CyberHazard :>> target;
+        }
+        abstract connection realizesCyberHazardLinks : RealizesCyberHazard[*];
+        metadata def <realizesCyberHazard> RealizesCyberHazardMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = realizesCyberHazardLinks meta SysML::Usage;
+        }
+
+        connection def AssessesCyberRisk :> MemoRelationship {
+            end assessment : CyberRiskAssessment :>> source;
+            end assessedRisk : CyberRisk :>> target;
+        }
+        abstract connection assessesCyberRiskLinks : AssessesCyberRisk[*];
+        metadata def <assessesCyberRisk> AssessesCyberRiskMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = assessesCyberRiskLinks meta SysML::Usage;
+        }
+
+        connection def IdentifiesVulnerability :> MemoRelationship {
+            end finding : PenTestFinding :>> source;
+            end identifiedVulnerability : Vulnerability :>> target;
+        }
+        abstract connection identifiesVulnerabilityLinks : IdentifiesVulnerability[*];
+        metadata def <identifiesVulnerability> IdentifiesVulnerabilityMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = identifiesVulnerabilityLinks meta SysML::Usage;
+        }
+
+        connection def AffectsSBOMComponent :> MemoRelationship {
+            end vulnerability : Vulnerability :>> source;
+            end affectedComponent : SBOMComponent :>> target;
+        }
+        abstract connection affectsSBOMComponentLinks : AffectsSBOMComponent[*];
+        metadata def <affectsSBOMComponent> AffectsSBOMComponentMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = affectsSBOMComponentLinks meta SysML::Usage;
+        }
+
+        connection def DemonstratesAttackPath :> MemoRelationship {
+            end finding : PenTestFinding :>> source;
+            end demonstratedPath : AttackPath :>> target;
+        }
+        abstract connection demonstratesAttackPathLinks : DemonstratesAttackPath[*];
+        metadata def <demonstratesAttackPath> DemonstratesAttackPathMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = demonstratesAttackPathLinks meta SysML::Usage;
+        }
+
+        connection def SupportsMitigationEffectiveness :> MemoRelationship {
+            end supportingEvidence : MemoEvidence :>> source;
+            end supportedMitigation : CyberMitigation :>> target;
+        }
+        abstract connection supportsMitigationEffectivenessLinks : SupportsMitigationEffectiveness[*];
+        metadata def <supportsMitigationEffectiveness> SupportsMitigationEffectivenessMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = supportsMitigationEffectivenessLinks meta SysML::Usage;
+        }
+
+        connection def ConditionsCyberElement :> MemoRelationship {
+            end governingAssumption : CybersecurityAssumption :>> source;
+            end conditionedElement :>> target;
+        }
+        abstract connection conditionsCyberElementLinks : ConditionsCyberElement[*];
+        metadata def <conditionsCyberElement> ConditionsCyberElementMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = conditionsCyberElementLinks meta SysML::Usage;
+        }
+
+        connection def MonitorsSBOMComponent :> MemoRelationship {
+            end postmarketProcess : PostmarketProcess :>> source;
+            end monitoredComponent : SBOMComponent :>> target;
+        }
+        abstract connection monitorsSBOMComponentLinks : MonitorsSBOMComponent[*];
+        metadata def <monitorsSBOMComponent> MonitorsSBOMComponentMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = monitorsSBOMComponentLinks meta SysML::Usage;
         }
     }
 

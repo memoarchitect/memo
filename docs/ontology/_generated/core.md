@@ -97,6 +97,7 @@ flowchart LR
   ChangeRequest["ChangeRequest"]:::other
   OperativeScenario["OperativeScenario"]:::other
   RiskItem["RiskItem"]:::other
+  CyberMitigation["CyberMitigation"]:::other
   OperativeAction["OperativeAction"]:::other
   MemoNeed["MemoNeed"]
   OperationalParticipant["OperationalParticipant"]:::other
@@ -125,6 +126,7 @@ flowchart LR
   ChangeRequest -->|Changes| MemoPart
   RequirementDriver -->|RealizedByScenario| OperativeScenario
   MemoPart -->|ImpactsSafety| RiskItem
+  MemoEvidence -->|SupportsMitigationEffectiveness| CyberMitigation
   MemoEvidence -->|EvaluatesTask| OperativeAction
   anyElement -->|TestedByUsability| MemoVerificationCase
   MemoNeed -->|HeldBy| OperationalParticipant
@@ -166,6 +168,7 @@ flowchart LR
 | [`Changes`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changes) | artifacts | [`ChangeRequest`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changerequest) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `ChangeRequest` to `MemoPart`. |
 | [`RealizedByScenario`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#realizedbyscenario) | cybersecurity | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | [`OperativeScenario`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#operativescenario) | Typed relationship from `RequirementDriver` to `OperativeScenario`. |
 | [`ImpactsSafety`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#impactssafety) | cybersecurity | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | [`RiskItem`](../sysml-api/assurance/safety_risk/memo_risk.md#riskitem) | Typed relationship from `MemoPart` to `RiskItem`. |
+| [`SupportsMitigationEffectiveness`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#supportsmitigationeffectiveness) | cybersecurity | [`MemoEvidence`](../sysml-api/core/common/memo_common.md#memoevidence) | [`CyberMitigation`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cybermitigation) | Typed relationship from `MemoEvidence` to `CyberMitigation`. |
 | [`EvaluatesTask`](../sysml-api/assurance/human_factors/memo_human_factors.md#evaluatestask) | human-factors | [`MemoEvidence`](../sysml-api/core/common/memo_common.md#memoevidence) | [`OperativeAction`](../sysml-api/architecture/operational/activities/memo_activities.md#operativeaction) | Typed relationship from `MemoEvidence` to `OperativeAction`. |
 | [`TestedByUsability`](../sysml-api/assurance/human_factors/memo_human_factors.md#testedbyusability) | human-factors | *any element* | [`MemoVerificationCase`](../sysml-api/core/common/memo_common.md#memoverificationcase) | Typed relationship from `any element` to `MemoVerificationCase`. |
 | [`HeldBy`](../sysml-api/assurance/requirements/needs/memo_needs.md#heldby) | requirements | [`MemoNeed`](../sysml-api/core/common/memo_common.md#memoneed) | [`OperationalParticipant`](../sysml-api/architecture/operational/context/actors/memo_actors.md#operationalparticipant) | Whose need this is. The holder is a modelled participant — a User, with the profile IEC 62366-1 asks for, or another operational participant — so "which users does this need serve" is a question the model answers rather than a sentence a reader interprets. |
