@@ -40,8 +40,9 @@ methodology/
 ## Relationships
 
 Methodology uses references and scope bindings rather than creating a separate
-set of domain relationships. `includedModule` selects ordinary SysML packages,
-including optional extension packages outside `src/`.
+set of domain relationships. A methodology selects ordinary SysML packages by
+publicly importing them in the package that declares it, including optional
+extension packages outside `src/`.
 
 ## Enumerations
 
@@ -50,8 +51,9 @@ scope, included layers, and artifact requirements.
 
 ## Extensions
 
-An extension is an ordinary SysML package outside `src/`. A methodology selects
-it through `includedModule`.
+An extension is an ordinary SysML package outside `src/`, with one facade
+package that publicly imports the rest of it. A project or a methodology brings
+it in by publicly importing that facade.
 
 | Location | Purpose |
 | --- | --- |

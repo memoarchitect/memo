@@ -8,7 +8,10 @@ package memo_examples_gpca_pump_project {
 
     private import memo_methodology_core::*;
     private import memo_core_enumerations::*;
-    private import memo_examples_gpca_pump_methodology_gpca_profiles::*;
+    // The methodology, by the one name the binding needs. What it selects is
+    // what its package publicly imports; the resolver reads that from the
+    // package, so this import does not have to bring the selection in too.
+    private import memo_examples_gpca_pump_methodology_gpca_profiles::gpcaMethodDefinition;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
