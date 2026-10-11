@@ -42,7 +42,7 @@ A `ComponentExchange` is an `interface def` between two ports: the edge is the
 path. A `LogicalExchange` is a typed `flow` between the same two ports: what
 moves over the path, with its content kind (information, command, status,
 measurement, alarm, configuration, energy, material, fluid, or mechanical
-force). `Interface`, `DataInterface` and `SoftwareInterface`, and the port types
+force). `Interface` is the abstract common contract; `LogicalInterface`, `SoftwareInterface` and (in realization) `PhysicalInterface` specialize it, one per layer, and `DataInterface`, and the port types
 `DataPort`, `SensorPort`, `CommandPort` and `SoftwarePort`, are reusable
 building blocks for these.
 
