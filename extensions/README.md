@@ -65,9 +65,11 @@ selection — its inclusion lists, and transitively the extensions *it* includes
 to the project's scope. It does **not** follow the included methodology's
 `baseMethodology` (single inheritance, `[0..1]`, stays the only chain, and
 including an extension must not widen a narrow methodology to whatever the
-extension's base selects), and it does not apply its rule policies. A name that
-resolves to no methodology is a `missing-extension` diagnostic, which fails
-`memo validate`; extensions that include each other contribute once each.
+extension's base selects), and it does not apply its rule policies. A misspelled
+reference is a reference error from the compiler (SysIDE and OpenSysML both
+report it); a reference the resolver cannot match to a loaded methodology is a
+`missing-extension` diagnostic. Either fails `memo validate`. Extensions that
+include each other contribute once each.
 
 **A dependency between extensions is declared once and derived once, and the
 two are held equal.** `ros` declares

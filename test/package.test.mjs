@@ -466,6 +466,28 @@ test('an extension methodology lists every package the extension ships, and the 
     assert.doesNotMatch(stripComments(read(file)), /includedModule\s*=[^;]*"memo_extension_/,
       `${file} lists an extension's package as a module; name the extension with includedExtension`);
   }
+  // And an example that uses an extension's definitions selects the extension,
+  // directly or through one it includes. surgical-closure-workflow used
+  // ClinicalProcedureWorkflow with no selection for it, and nothing said so.
+  const extensionOf = new Map([...methodologyOf].map(([dir, usage]) => [usage, dir]));
+  const includesOf = (dir) => quotedList(
+    stripComments(walkSysml(join('extensions', dir)).map((f) => read(f)).join('\n')), 'includedExtension');
+  for (const example of readdirSync(join(root, 'examples'), { withFileTypes: true }).filter((e) => e.isDirectory())) {
+    const content = stripComments(walkSysml(join('examples', example.name)).map((f) => read(f)).join('\n'));
+    const used = extensionDirs().filter((dir) => new RegExp(`import memo_extension_${dir}(_(?!methodology)[a-z_]+)?(::|;)`).test(content));
+    const selected = new Set();
+    const pending = quotedList(content, 'includedExtension').map((usage) => extensionOf.get(usage));
+    while (pending.length > 0) {
+      const dir = pending.pop();
+      if (!dir || selected.has(dir)) continue;
+      selected.add(dir);
+      pending.push(...includesOf(dir).map((usage) => extensionOf.get(usage)));
+    }
+    for (const dir of used) {
+      assert.ok(selected.has(dir),
+        `examples/${example.name} imports the ${dir} extension but its binding does not include ${methodologyOf.get(dir)}`);
+    }
+  }
 });
 
 test('extension definitions collide with neither the base nor each other (D2)', () => {
