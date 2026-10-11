@@ -8,7 +8,7 @@ package memo_extension_clinical_methodology {
     private import memo_core_common::MemoIdentity;
     part clinicalExtensionMethod : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "EXT-CLINICAL-001"; :>> label = "ClinicalProcedureExtension"; }
-        attribute :>> version = "0.6.5";
+        attribute :>> version = "0.13.2";
         attribute :>> domain = "clinical procedures";
         doc /* Adds optional clinical-procedure vocabulary to a MEMO project. */
         // The base is a typed SysML reference, not a name to keep in sync with
