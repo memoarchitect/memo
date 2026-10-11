@@ -416,8 +416,7 @@ test('every extension carries identity-only descriptor, methodology, and its own
     const sources = walkSysml(join('extensions', dir));
     assert.ok(sources.length >= 1, `${dir} needs SysML source`);
     const content = sources.map((file) => read(file)).join('\n');
-    // Composition is by module list at the binding, so every extension states
-    // its own module and its single base methodology.
+    // Every extension states its packages and its single base methodology.
     assert.match(content, /includedModule = /, `${dir} must declare its included module`);
     assert.doesNotMatch(stripComments(content), /baseMethodName/,
       `${dir} uses the pre-flip baseMethodName spelling, which resolves to nothing`);
@@ -427,6 +426,46 @@ test('every extension carries identity-only descriptor, methodology, and its own
   assert.match(clinical, /action def ClinicalProcedureWorkflow specializes OperationalWorkflow/);
   assert.doesNotMatch(clinical, /\b(?:ClinicalProcedure|ClinicalTechnique|ProcedureVariant|InstrumentSet)\b/);
   assert.equal(existsSync(join(root, 'extensions', 'medical-products')), false);
+});
+
+// extensions/README.md, "An extension's packages are listed once, by the
+// extension" and "Composition". Module matching is exact, so a methodology that
+// lists only a facade leaves the packages declaring the definitions out of an
+// explicit scope; and an extension that imports another without including it
+// leaves that one's packages out too. Both lists are compared with what the
+// directory actually declares and imports.
+const quotedList = (content, attribute) => {
+  const match = stripComments(content).match(new RegExp(`${attribute}\\s*=\\s*(\\([^)]*\\)|"[^"]*"|[A-Za-z_]\\w*)`));
+  if (!match) return [];
+  return Array.from(match[1].matchAll(/"([^"]+)"|\b([A-Za-z_]\w*)\b/g), (m) => m[1] ?? m[2]).sort();
+};
+
+test('an extension methodology lists every package the extension ships, and the extensions it imports', () => {
+  const methodologyOf = new Map();
+  for (const dir of extensionDirs()) {
+    const content = stripComments(walkSysml(join('extensions', dir)).map((f) => read(f)).join('\n'));
+    const usage = content.match(/part\s+(\w+)\s*:\s*MethodologyDefinition\b/);
+    assert.ok(usage, `${dir} declares no MethodologyDefinition usage`);
+    methodologyOf.set(dir, usage[1]);
+  }
+  for (const dir of extensionDirs()) {
+    const content = stripComments(walkSysml(join('extensions', dir)).map((f) => read(f)).join('\n'));
+    const packages = Array.from(content.matchAll(/\bpackage\s+(\w+)/g), (m) => m[1])
+      .filter((name) => !name.endsWith('_methodology')).sort();
+    assert.deepEqual(quotedList(content, 'includedModule'), packages,
+      `extensions/${dir}: its methodology's includedModule must list exactly the packages it ships`);
+
+    const imported = extensionDirs().filter((other) => other !== dir
+      && new RegExp(`import memo_extension_${other}(_[a-z_]+)?(::|;)`).test(content));
+    const included = quotedList(content, 'includedExtension');
+    assert.deepEqual(included, imported.map((other) => methodologyOf.get(other)).sort(),
+      `extensions/${dir}: includedExtension must name exactly the extensions it imports, by methodology`);
+  }
+  // A project names an extension; it never retypes the extension's packages.
+  for (const file of walkSysml('examples')) {
+    assert.doesNotMatch(stripComments(read(file)), /includedModule\s*=[^;]*"memo_extension_/,
+      `${file} lists an extension's package as a module; name the extension with includedExtension`);
+  }
 });
 
 test('extension definitions collide with neither the base nor each other (D2)', () => {

@@ -13,6 +13,13 @@ package memo_extension_aadl_methodology {
         doc /* Adds the AADL correspondence profile and the process / thread / virtual-processor runtime families. */
         ref :>> baseMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
-        attribute :>> includedModule = "memo_extension_aadl";
+        // Every package the extension ships, so a project that includes the
+        // extension selects all of them. The facade alone would leave the
+        // packages that declare the definitions out of an explicit scope.
+        attribute :>> includedModule = (
+            "memo_extension_aadl",
+            "memo_extension_aadl_runtime",
+            "memo_extension_aadl_correspondence"
+        );
     }
 }

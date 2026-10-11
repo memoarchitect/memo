@@ -6,10 +6,14 @@ package memo_extension_ros_methodology {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    // An extension that builds on other extensions names them all here.
-    // `baseMethodology` is [0..1] — single inheritance, deliberate — but
-    // `includedModule` is [0..*], so this is how a dependency between
-    // extensions is expressed. There is no chaining and no second base.
+    private import memo_extension_messaging_methodology::messagingExtensionMethod;
+    private import memo_extension_container_methodology::containerExtensionMethod;
+    // An extension that builds on other extensions names them here, by their
+    // methodologies: `includedExtension` is a typed reference, so the
+    // dependency is checked by the compiler, and the import it needs is the
+    // one the KPAR build reads to record the dependency. `baseMethodology`
+    // stays [0..1] — single inheritance, deliberate — and the modules listed
+    // are this extension's own packages only.
     part rosExtensionMethod : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "EXT-ROS-001"; :>> label = "Ros2Extension"; }
         attribute :>> version = "0.13.2";
@@ -17,10 +21,7 @@ package memo_extension_ros_methodology {
         doc /* Adds ROS 2 nodes, messages, directional ports, topic/service/action interfaces, QoS, and containerized deployment. */
         ref :>> baseMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
-        attribute :>> includedModule = (
-            "memo_extension_messaging",
-            "memo_extension_container",
-            "memo_extension_ros"
-        );
+        ref :>> includedExtension = (messagingExtensionMethod, containerExtensionMethod);
+        attribute :>> includedModule = "memo_extension_ros";
     }
 }
