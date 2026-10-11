@@ -16,6 +16,7 @@ package memo_extension_ros {
     private import ScalarValues::*;
 
     private import memo_core_common::*;
+    private import memo_core_enumerations::*;
     private import memo_architecture_functional_behavior::*;
     private import memo_architecture_logical_interfaces::*;
     private import memo_architecture_implementation_software_structure::*;
@@ -33,13 +34,6 @@ package memo_extension_ros {
     // between a publisher and a subscriber, and read by a tool; a property bag
     // cannot. `PropertySet` is deleted in this session for that reason.
 
-    // ROS 2 RELIABLE resends until delivery; BEST_EFFORT does not. This is
-    // the delivery guarantee, so it maps onto MessagingDeliveryKind:
-    // bestEffort is atMostOnce, reliable is atLeastOnce.
-    enum def RosReliabilityKind {
-        enum bestEffort;
-        enum reliable;
-    }
     // TRANSIENT_LOCAL replays the last samples to a late-joining subscriber;
     // VOLATILE does not. The difference decides whether a node that restarts
     // sees the current state or waits for the next publication — which is a
@@ -49,8 +43,12 @@ package memo_extension_ros {
         enum transientLocal;
     }
 
+    // RELIABILITY is not in the profile. ROS 2 RELIABLE resends until delivery
+    // and BEST_EFFORT does not, which is the delivery guarantee the port
+    // already states as `deliverySemantics`: bestEffort is atMostOnce and
+    // reliable is atLeastOnce. Stating it a second time here let one port
+    // say both and disagree.
     attribute def RosQosProfile {
-        attribute reliability : RosReliabilityKind;
         attribute durability : RosDurabilityKind;
         // The QoS contract: a sample is expected at least this often.
         attribute deadlineMs : Real;
@@ -96,6 +94,8 @@ package memo_extension_ros {
     interface def RosTopicInterface specializes MessagingTopicInterface {
         end rosPublisher : RosPublisher :>> publisher;
         end rosSubscriber : RosSubscriber :>> subscriber;
+        // A topic goes publisher to subscriber, always.
+        attribute :>> direction default DirectionKind::output;
     }
 
     // ── Services: one correlated request/reply contract ────────────────
@@ -106,7 +106,6 @@ package memo_extension_ros {
         out item request : RosServiceRequest;
         in item response : RosServiceResponse;
         attribute serviceName : String;
-        attribute timeoutMs : Real;
     }
 
     port def RosServiceServer specializes SoftwarePort {

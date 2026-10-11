@@ -6,6 +6,8 @@ Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change 
 
 ### Breaking
 
+- **ROS: one statement of each fact.** `RosReliabilityKind` and `RosQosProfile.reliability` are gone: reliability is the port's `deliverySemantics` (best effort is at-most-once, reliable is at-least-once), which a port could previously contradict. `RosServiceClient.timeoutMs` is gone; the timeout belongs to the interface (`timeoutMs`). `RosTopicInterface` defaults `direction` to `output`, so a topic usage no longer repeats it.
+
 - **`Interface` is abstract.** Type an interface as `LogicalInterface`, `SoftwareInterface` or `PhysicalInterface`. The hardware-signal fields (`electricalStandard`, `nominalVoltageV`, `nominalCurrentA`, `bitRateBps`, `signalRange`) moved to `PhysicalInterface` and the API fields (`apiStyle`, `schemaReference`) to `SoftwareInterface`. `directionality` is gone (`direction` already said it) and the free-text `signaling` and `signalKind` are replaced by `signalingKind`. `LogicalInterface` now specializes `Interface`.
 
 - **`SoftwareItem` is `DataItem`; `SBOMComponent` is `SBOMEntry`.** The item family is exchanged or stored data, so it no longer borrows IEC 62304's term for a program part. `SBOMEntry` is now a `part def` that references a `SoftwareElement`, its `license` and `hash` are `licenseExpression` and `checksum` (the spelling `OTSSoftwareModule` uses), and `SbomFormatKind` moved with it. `SBOMComponent` is gone; `AffectsSBOMComponent` and `MonitorsSBOMComponent` are `AffectsSBOMEntry` and `MonitorsSBOMEntry`.

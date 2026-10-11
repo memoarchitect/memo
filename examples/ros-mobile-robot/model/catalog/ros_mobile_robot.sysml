@@ -96,7 +96,6 @@ package memo_examples_ros_mobile_robot {
             attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
             attribute :>> publishRateHz = 20.0;
             attribute :>> offeredQos {
-                attribute :>> reliability = RosReliabilityKind::bestEffort;
                 attribute :>> durability = RosDurabilityKind::volatile;
                 attribute :>> deadlineMs = 60.0;
                 attribute :>> livelinessLeaseMs = 200.0;
@@ -118,7 +117,6 @@ package memo_examples_ros_mobile_robot {
             attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
             attribute :>> lossBehaviour = "hold the last costmap for 200 ms, then command zero velocity";
             attribute :>> requestedQos {
-                attribute :>> reliability = RosReliabilityKind::bestEffort;
                 attribute :>> durability = RosDurabilityKind::volatile;
                 attribute :>> deadlineMs = 60.0;
                 attribute :>> livelinessLeaseMs = 200.0;
@@ -130,7 +128,6 @@ package memo_examples_ros_mobile_robot {
             attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
             attribute :>> publishRateHz = 10.0;
             attribute :>> offeredQos {
-                attribute :>> reliability = RosReliabilityKind::reliable;
                 attribute :>> durability = RosDurabilityKind::volatile;
                 attribute :>> deadlineMs = 150.0;
                 attribute :>> livelinessLeaseMs = 300.0;
@@ -142,7 +139,6 @@ package memo_examples_ros_mobile_robot {
             attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
             attribute :>> lossBehaviour = "no publisher within the liveliness lease is treated as stop asserted";
             attribute :>> requestedQos {
-                attribute :>> reliability = RosReliabilityKind::reliable;
                 attribute :>> durability = RosDurabilityKind::transientLocal;
                 attribute :>> deadlineMs = 100.0;
                 attribute :>> livelinessLeaseMs = 200.0;
@@ -151,7 +147,6 @@ package memo_examples_ros_mobile_robot {
         }
         inout port setModeClient : RosServiceClient {
             attribute :>> serviceName = "/robot/safety/set_mode";
-            attribute :>> timeoutMs = 500.0;
         }
         inout port navigateActionServer : RosActionServer {
             attribute :>> actionName = "/robot/navigation/navigate_to_pose";
@@ -173,18 +168,29 @@ package memo_examples_ros_mobile_robot {
             ref :>> topic = topicScan;
             attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
             attribute :>> lossBehaviour = "two consecutive misses assert the stop";
+            attribute :>> requestedQos {
+                attribute :>> durability = RosDurabilityKind::volatile;
+                attribute :>> deadlineMs = 60.0;
+                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> historyDepth = 5;
+            }
         }
         in port cmdVelSubscriber : RosSubscriber {
             ref :>> topic = topicCmdVel;
             attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
             attribute :>> lossBehaviour = "missing velocity commands assert the stop";
+            attribute :>> requestedQos {
+                attribute :>> durability = RosDurabilityKind::volatile;
+                attribute :>> deadlineMs = 150.0;
+                attribute :>> livelinessLeaseMs = 300.0;
+                attribute :>> historyDepth = 1;
+            }
         }
         out port estopPublisher : RosPublisher {
             ref :>> topic = topicEstop;
             attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
             attribute :>> publishRateHz = 50.0;
             attribute :>> offeredQos {
-                attribute :>> reliability = RosReliabilityKind::reliable;
                 attribute :>> durability = RosDurabilityKind::transientLocal;
                 attribute :>> deadlineMs = 100.0;
                 attribute :>> livelinessLeaseMs = 200.0;
@@ -209,33 +215,24 @@ package memo_examples_ros_mobile_robot {
     // ── Native topic, service, and action interfaces ───────────────────
     interface scanToNavigation : RosTopicInterface
         connect nodeLidar.scanPublisher to nodeNavigation.scanSubscriber {
-            attribute :>> direction = DirectionKind::output;
         }
     interface scanToSafety : RosTopicInterface
         connect nodeLidar.scanPublisher to nodeSafetyMonitor.scanSubscriber {
-            attribute :>> direction = DirectionKind::output;
         }
     interface cmdVelToSafety : RosTopicInterface
         connect nodeNavigation.cmdVelPublisher to nodeSafetyMonitor.cmdVelSubscriber {
-            attribute :>> direction = DirectionKind::output;
         }
     interface estopToNavigation : RosTopicInterface
         connect nodeSafetyMonitor.estopPublisher to nodeNavigation.estopSubscriber {
-            attribute :>> direction = DirectionKind::output;
         }
 
-    flow laserScanToNodeNavigation of LaserScan from nodeLidar.scanPublisher.payload to nodeNavigation.scanSubscriber.payload;
-    flow laserScanToNodeSafetyMonitor of LaserScan from nodeLidar.scanPublisher.payload to nodeSafetyMonitor.scanSubscriber.payload;
-    flow velocityCommandFlow of VelocityCommand from nodeNavigation.cmdVelPublisher.payload to nodeSafetyMonitor.cmdVelSubscriber.payload;
-    flow emergencyStopFlow of EmergencyStop from nodeSafetyMonitor.estopPublisher.payload to nodeNavigation.estopSubscriber.payload;
 
     interface setModeService : RosServiceInterface
         connect nodeNavigation.setModeClient to nodeSafetyMonitor.setModeServer {
-            attribute :>> direction = DirectionKind::inputOutput;
+            attribute :>> timeoutMs = 500.0;
         }
     interface navigateAction : RosActionInterface
         connect nodeSafetyMonitor.navigateActionClient to nodeNavigation.navigateActionServer {
-            attribute :>> direction = DirectionKind::inputOutput;
         }
 
     // ── Deployment: base relations, unchanged ───────────────────────────
