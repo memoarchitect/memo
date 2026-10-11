@@ -20,6 +20,10 @@ Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change 
 
 - **One project skeleton.** The manifest's `templates` map and `init.defaultTemplate` are replaced by `init.template: ./templates/default`, and the `samd`, `infusion-pump`, `monitoring-device` and `connected-device` starters are removed. Start from an example instead (`memo-architect init --example <id>`). A manifest in the old form is rejected by tools 0.14.0.
 
+### Fixed
+
+- **Versions agree.** A methodology's `version` (0.6.5, 0.7.0, 0.1) and the clinical extension's package version (0.6.1) sat far behind the 0.13 product. They carry the product version now, and `version:check` covers every methodology and extension descriptor, so they cannot drift again.
+
 ### Added
 
 - **One KPAR per extension.** `memo build` produced a single `memo-extensions` archive holding every extension, so ROS could not be shipped or depended on without clinical and AADL. Each extension is now `memo-extension-<name>`, declaring the base and the extensions its source imports (ROS declares messaging and container). `memo-extensions` is no longer built.

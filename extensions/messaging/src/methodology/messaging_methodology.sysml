@@ -8,7 +8,7 @@ package memo_extension_messaging_methodology {
     private import memo_core_common::MemoIdentity;
     part messagingExtensionMethod : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "EXT-MESSAGING-001"; :>> label = "MessagingExtension"; }
-        attribute :>> version = "0.7.0";
+        attribute :>> version = "0.13.2";
         attribute :>> domain = "publish/subscribe messaging";
         doc /* Adds message items, publisher/subscriber ports, topic interfaces, brokers, and delivery semantics. */
         ref :>> baseMethodology = mdDefaultDefinition;

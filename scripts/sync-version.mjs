@@ -29,6 +29,7 @@ if (packageName === '@memoarchitect/ontology') {
     // They ship from this repo and carry the product's version, so they belong
     // under the same check rather than under the next person's memory.
     'extensions/aadl/memo.package.yaml',
+    'extensions/clinical/memo.package.yaml',
     'extensions/cloud/memo.package.yaml',
     'extensions/container/memo.package.yaml',
     'extensions/messaging/memo.package.yaml',
@@ -39,6 +40,18 @@ if (packageName === '@memoarchitect/ontology') {
     // fails loudly instead of quietly matching nothing, which is how the
     // package versions came to be hand-edited in the first place.
   ]) replace(path, /^(version: )[^\s"']+$/m, `$1${version}`);
+  // A methodology's `version` is the product's version too: it ships from this
+  // repo and is released with it. They sat at 0.6.5 and 0.7.0 beside a 0.13
+  // product, which made `version` say nothing a reader could use.
+  for (const path of [
+    'src/methodology/profiles/memo_profiles.sysml',
+    'extensions/aadl/src/methodology/aadl_methodology.sysml',
+    'extensions/clinical/src/methodology/clinical_methodology.sysml',
+    'extensions/cloud/src/methodology/cloud_methodology.sysml',
+    'extensions/container/src/methodology/container_methodology.sysml',
+    'extensions/messaging/src/methodology/messaging_methodology.sysml',
+    'extensions/ros/src/methodology/ros_methodology.sysml',
+  ]) replace(path, /^(\s+attribute :>> version = ")[^"]+(";)$/gm, `$1${version}$2`);
   replace('README.md', /@memoarchitect\/ontology@\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?/g, `@memoarchitect/ontology@${version}`);
 } else if (packageName === '@memoarchitect/tools') {
   replace('README.md', /memo-tools \d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?/g, `memo-tools ${version}`);

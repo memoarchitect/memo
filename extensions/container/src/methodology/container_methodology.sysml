@@ -8,7 +8,7 @@ package memo_extension_container_methodology {
     private import memo_core_common::MemoIdentity;
     part containerExtensionMethod : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "EXT-CONTAINER-001"; :>> label = "ContainerDeploymentExtension"; }
-        attribute :>> version = "0.7.0";
+        attribute :>> version = "0.13.2";
         attribute :>> domain = "containerized deployment";
         doc /* Adds OCI container images and container runtimes as deployment content. */
         ref :>> baseMethodology = mdDefaultDefinition;

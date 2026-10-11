@@ -8,7 +8,7 @@ package memo_extension_cloud_methodology {
     private import memo_core_common::MemoIdentity;
     part cloudExtensionMethod : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "EXT-CLOUD-001"; :>> label = "CloudRuntimeExtension"; }
-        attribute :>> version = "0.7.0";
+        attribute :>> version = "0.13.2";
         attribute :>> domain = "networked services and managed data stores";
         doc /* Adds service and data-store runtime families with their contracts, discovery, and retention. */
         ref :>> baseMethodology = mdDefaultDefinition;
