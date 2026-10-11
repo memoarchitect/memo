@@ -48,8 +48,10 @@ path through it is an `OperativeScenario` of kind `ui`. `ScreenCapture` and
 
 **Within the layer.** A UI element triggers a UI action
 (`ElementTriggersAction`). A screen capture shows a UI element
-(`CapturesScreen`). Any element can depend on a SOUP software element
-(`DependsOnSoup`, for IEC 62304's software of unknown provenance).
+(`CapturesScreen`). A SOUP item (IEC 62304's software of unknown provenance)
+is a `SOUPSoftwareModule`; an `OTSSoftwareModule` is the off-the-shelf kind of
+SOUP and adds the license, package URL and checksum. Any element can depend on a
+SOUP software element (`DependsOnSoup`).
 
 **To other layers and disciplines:**
 

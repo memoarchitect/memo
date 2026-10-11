@@ -57,8 +57,7 @@ Identify the coding standards, review procedures, and quality gates applied duri
 ### 4.1 Software Items of Unknown Provenance (SOUP)
 
 ```memo-query
-kind: SoftwareModule
-where: moduleKind == "SoftwareModuleKind::soup"
+kind: [SOUPSoftwareModule, OTSSoftwareModule]
 display: table
 columns: name, doc, layer
 sort: name

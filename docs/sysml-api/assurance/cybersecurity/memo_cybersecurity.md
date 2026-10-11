@@ -54,7 +54,7 @@
 | [`SecurityObjectiveKind`](#securityobjectivekind) | `enum def` | Controlled values for security objective: `confidentiality`, `integrity`, `availability`, `authenticity`, `accountability`, `privacy`, `safety`. | — |
 | [`CyberAssumptionValidityKind`](#cyberassumptionvaliditykind) | `enum def` | Controlled values for cyber assumption validity: `valid`, `reviewDue`, `invalid`, `retired`. | — |
 | [`VulnerabilityDispositionKind`](#vulnerabilitydispositionkind) | `enum def` | Controlled values for vulnerability disposition: `open`, `mitigated`, `accepted`, `closed`. | — |
-| [`PenTestFindingStatusKind`](#pentestfindingstatuskind) | `enum def` | Controlled values for pen test finding status: `open`, `inRemediation`, `accepted`, `closed`. | — |
+| [`SecurityFindingStatusKind`](#securityfindingstatuskind) | `enum def` | Controlled values for security finding status: `open`, `inRemediation`, `accepted`, `closed`. | — |
 | [`PostmarketProcessKind`](#postmarketprocesskind) | `enum def` | Controlled values for postmarket process: `monitoring`, `vulnerabilityDisclosure`, `patching`, `incidentResponse`. | — |
 | [`CyberRiskAssessmentStageKind`](#cyberriskassessmentstagekind) | `enum def` | Controlled values for cyber risk assessment stage: `inherent`, `residual`. | — |
 | [`ThreatActor`](#threatactor) | `part def` | Threat actor definition specializing `MemoPart`. | `MemoPart` |
@@ -62,14 +62,10 @@
 | [`SecurityProperty`](#securityproperty) | `part def` | Security property definition specializing `MemoPart`. | `MemoPart` |
 | [`CybersecurityAssumption`](#cybersecurityassumption) | `part def` | Cybersecurity assumption definition specializing `MemoPart`. | `MemoPart` |
 | [`AttackPath`](#attackpath) | `action def` | The path's narrative is the inherited `pathSummary`. | `OperativeScenario` |
-| [`SecurityAssessmentMethodKind`](#securityassessmentmethodkind) | `enum def` | Security assessment: a case is the planned activity (penetration test, static or dynamic analysis, composition analysis), a report is what it produced, and a finding is one result. Findings stay separate objects so each can be traced to a vulnerability, a risk and a mitigation. | — |
-| [`SecurityAssessmentCase`](#securityassessmentcase) | `part def` | Security assessment case definition specializing `MemoPart`. | `MemoPart` |
-| [`SecurityAssessmentReport`](#securityassessmentreport) | `part def` | Security assessment report definition specializing `MemoEvidence`. | `MemoEvidence` |
+| [`SecurityAssessmentMethodKind`](#securityassessmentmethodkind) | `enum def` | Controlled values for security assessment method: `penetrationTest`, `sast`, `dast`, `sca`. | — |
+| [`SecurityAssessmentCase`](#securityassessmentcase) | `verification def` | Security assessment case definition specializing `VerificationCase`. | `VerificationCase` |
 | [`SecurityFinding`](#securityfinding) | `part def` | Security finding definition specializing `MemoEvidence`. | `MemoEvidence` |
-| [`PenTestFinding`](#pentestfinding) | `part def` | Pen test finding definition specializing `SecurityFinding`. | `SecurityFinding` |
-| [`SASTFinding`](#sastfinding) | `part def` | Sastfinding definition specializing `SecurityFinding`. | `SecurityFinding` |
-| [`DASTFinding`](#dastfinding) | `part def` | Dastfinding definition specializing `SecurityFinding`. | `SecurityFinding` |
-| [`SCAFinding`](#scafinding) | `part def` | Scafinding definition specializing `SecurityFinding`. | `SecurityFinding` |
+| [`SecurityAssessmentReport`](#securityassessmentreport) | `part def` | Security assessment report definition specializing `MemoEvidence`. | `MemoEvidence` |
 | [`PostmarketProcess`](#postmarketprocess) | `action def` | Postmarket process definition specializing `MemoAction`. | `MemoAction` |
 | [`CyberRiskAssessment`](#cyberriskassessment) | `part def` | Cyber risk assessment definition specializing `MemoPart`. | `MemoPart` |
 | [`ThreatenedBy`](#threatenedby) | `connection def` | Typed relationship from `CybersecurityAsset` to `Threat`. | `MemoRelationship` |
@@ -89,9 +85,6 @@
 | [`SupportsMitigationEffectiveness`](#supportsmitigationeffectiveness) | `connection def` | Typed relationship from `MemoEvidence` to `CyberMitigation`. | `MemoRelationship` |
 | [`ConditionsCyberElement`](#conditionscyberelement) | `connection def` | Typed relationship from `CybersecurityAssumption` to `any element`. | `MemoRelationship` |
 | [`MonitorsSBOMEntry`](#monitorssbomentry) | `connection def` | Typed relationship from `PostmarketProcess` to `SBOMEntry`. | `MemoRelationship` |
-| [`ProducesReport`](#producesreport) | `connection def` | Typed relationship from `SecurityAssessmentCase` to `SecurityAssessmentReport`. | `MemoRelationship` |
-| [`ReportsFinding`](#reportsfinding) | `connection def` | Typed relationship from `SecurityAssessmentReport` to `SecurityFinding`. | `MemoRelationship` |
-| [`IdentifiesAffectedEntry`](#identifiesaffectedentry) | `connection def` | Typed relationship from `SCAFinding` to `SBOMEntry`. | `MemoRelationship` |
 
 ## CybersecurityAsset
 
@@ -333,15 +326,15 @@ enum def VulnerabilityDispositionKind
 | Owning package | `memo_assurance_cybersecurity` |
 
 
-## PenTestFindingStatusKind
+## SecurityFindingStatusKind
 
 ```sysml
-enum def PenTestFindingStatusKind
+enum def SecurityFindingStatusKind
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for pen test finding status: `open`, `inRemediation`, `accepted`, `closed`. |
+| Description | Controlled values for security finding status: `open`, `inRemediation`, `accepted`, `closed`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -461,7 +454,7 @@ enum def SecurityAssessmentMethodKind
 
 | Property | Value |
 | --- | --- |
-| Description | Security assessment: a case is the planned activity (penetration test, static or dynamic analysis, composition analysis), a report is what it produced, and a finding is one result. Findings stay separate objects so each can be traced to a vulnerability, a risk and a mitigation. |
+| Description | Controlled values for security assessment method: `penetrationTest`, `sast`, `dast`, `sca`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -471,30 +464,15 @@ enum def SecurityAssessmentMethodKind
 ## SecurityAssessmentCase
 
 ```sysml
-part def SecurityAssessmentCase specializes MemoPart
+verification def SecurityAssessmentCase :> VerificationCase
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Security assessment case definition specializing `MemoPart`. |
-| Kind | `part def` |
+| Description | Security assessment case definition specializing `VerificationCase`. |
+| Kind | `verification def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
-## SecurityAssessmentReport
-
-```sysml
-part def SecurityAssessmentReport specializes MemoEvidence
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Security assessment report definition specializing `MemoEvidence`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `MemoEvidence` |
+| Specializes | `VerificationCase` |
 | Owning package | `memo_assurance_cybersecurity` |
 
 
@@ -513,63 +491,18 @@ part def SecurityFinding specializes MemoEvidence
 | Owning package | `memo_assurance_cybersecurity` |
 
 
-## PenTestFinding
+## SecurityAssessmentReport
 
 ```sysml
-part def PenTestFinding specializes SecurityFinding
+part def SecurityAssessmentReport specializes MemoEvidence
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Pen test finding definition specializing `SecurityFinding`. |
+| Description | Security assessment report definition specializing `MemoEvidence`. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `SecurityFinding` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
-## SASTFinding
-
-```sysml
-part def SASTFinding specializes SecurityFinding
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Sastfinding definition specializing `SecurityFinding`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `SecurityFinding` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
-## DASTFinding
-
-```sysml
-part def DASTFinding specializes SecurityFinding
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Dastfinding definition specializing `SecurityFinding`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `SecurityFinding` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
-## SCAFinding
-
-```sysml
-part def SCAFinding specializes SecurityFinding
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Scafinding definition specializing `SecurityFinding`. |
-| Kind | `part def` |
-| Abstract | No |
-| Specializes | `SecurityFinding` |
+| Specializes | `MemoEvidence` |
 | Owning package | `memo_assurance_cybersecurity` |
 
 
@@ -858,51 +791,6 @@ connection def MonitorsSBOMEntry :> MemoRelationship
 | Owning package | `memo_assurance_cybersecurity` |
 
 
-## ProducesReport
-
-```sysml
-connection def ProducesReport :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `SecurityAssessmentCase` to `SecurityAssessmentReport`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
-## ReportsFinding
-
-```sysml
-connection def ReportsFinding :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `SecurityAssessmentReport` to `SecurityFinding`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
-## IdentifiesAffectedEntry
-
-```sysml
-connection def IdentifiesAffectedEntry :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `SCAFinding` to `SBOMEntry`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
-| Owning package | `memo_assurance_cybersecurity` |
-
-
 ## Source
 
 ??? code "assurance/cybersecurity/memo_cybersecurity.sysml"
@@ -1055,7 +943,7 @@ connection def IdentifiesAffectedEntry :> MemoRelationship
             enum accepted;
             enum closed;
         }
-        enum def PenTestFindingStatusKind {
+        enum def SecurityFindingStatusKind {
             enum open;
             enum inRemediation;
             enum accepted;
@@ -1109,43 +997,43 @@ connection def IdentifiesAffectedEntry :> MemoRelationship
         }
 
         // Security assessment: a case is the planned activity (penetration test,
-        // static or dynamic analysis, composition analysis), a report is what it
-        // produced, and a finding is one result. Findings stay separate objects so
-        // each can be traced to a vulnerability, a risk and a mitigation.
+        // static or dynamic analysis, composition analysis), a report is the
+        // evidence it produced, and a finding is one result in the report.
+        // The case is a verification case: it checks the security requirements,
+        // and `ProducesEvidence` already links a verification case to what it
+        // produced. The method is stated once, on the case; a finding is one
+        // type whose method-specific descriptors are optional, as Interface's
+        // are. A finding is traced to its vulnerability by
+        // `IdentifiesVulnerability`, and from there to the SBOM entry by
+        // `AffectsSBOMEntry`.
         enum def SecurityAssessmentMethodKind {
             enum penetrationTest;
             enum sast;
             enum dast;
             enum sca;
         }
-        part def SecurityAssessmentCase specializes MemoPart {
+        verification def SecurityAssessmentCase :> VerificationCase {
             attribute assessmentMethod : SecurityAssessmentMethodKind;
             attribute assessmentScope : String;
             attribute toolName : String;
             attribute toolVersion : String;
-        }
-        part def SecurityAssessmentReport specializes MemoEvidence {
-            attribute reportDate : String;
-            attribute assessor : String;
         }
         part def SecurityFinding specializes MemoEvidence {
             attribute findingIdentifier : String;
             attribute severity : CriticalityKind;
             attribute cvssBaseScore : Real;
             attribute cvssVector : String;
-            attribute findingStatus : PenTestFindingStatusKind;
+            attribute findingStatus : SecurityFindingStatusKind;
             attribute retestDate : String;
+            // method-specific (optional)
+            attribute weaknessReference : String[0..1];   // CWE identifier (SAST)
+            attribute sourceLocation : String[0..1];      // file and line (SAST)
+            attribute testedEndpoint : String[0..1];      // URL or interface (DAST)
         }
-        part def PenTestFinding specializes SecurityFinding;
-        part def SASTFinding specializes SecurityFinding {
-            attribute weaknessReference : String;
-            attribute sourceLocation : String;
-        }
-        part def DASTFinding specializes SecurityFinding {
-            attribute testedEndpoint : String;
-        }
-        part def SCAFinding specializes SecurityFinding {
-            attribute affectedPackage : String;
+        part def SecurityAssessmentReport specializes MemoEvidence {
+            attribute reportDate : String;
+            attribute assessor : String;
+            part finding : SecurityFinding[0..*];
         }
 
         action def PostmarketProcess specializes MemoAction {
@@ -1357,39 +1245,6 @@ connection def IdentifiesAffectedEntry :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = monitorsSBOMEntryLinks meta SysML::Usage;
-        }
-
-        connection def ProducesReport :> MemoRelationship {
-            end assessmentCase : SecurityAssessmentCase :>> source;
-            end producedReport : SecurityAssessmentReport :>> target;
-        }
-        abstract connection producesReportLinks : ProducesReport[*];
-        metadata def <producesReport> ProducesReportMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = producesReportLinks meta SysML::Usage;
-        }
-
-        connection def ReportsFinding :> MemoRelationship {
-            end report : SecurityAssessmentReport :>> source;
-            end reportedFinding : SecurityFinding :>> target;
-        }
-        abstract connection reportsFindingLinks : ReportsFinding[*];
-        metadata def <reportsFinding> ReportsFindingMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = reportsFindingLinks meta SysML::Usage;
-        }
-
-        connection def IdentifiesAffectedEntry :> MemoRelationship {
-            end scaFinding : SCAFinding :>> source;
-            end affectedEntry : SBOMEntry :>> target;
-        }
-        abstract connection identifiesAffectedEntryLinks : IdentifiesAffectedEntry[*];
-        metadata def <identifiesAffectedEntry> IdentifiesAffectedEntryMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = identifiesAffectedEntryLinks meta SysML::Usage;
         }
     }
 

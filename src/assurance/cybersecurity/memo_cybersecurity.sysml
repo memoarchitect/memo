@@ -145,7 +145,7 @@ package memo_assurance_cybersecurity {
         enum accepted;
         enum closed;
     }
-    enum def PenTestFindingStatusKind {
+    enum def SecurityFindingStatusKind {
         enum open;
         enum inRemediation;
         enum accepted;
@@ -199,43 +199,43 @@ package memo_assurance_cybersecurity {
     }
 
     // Security assessment: a case is the planned activity (penetration test,
-    // static or dynamic analysis, composition analysis), a report is what it
-    // produced, and a finding is one result. Findings stay separate objects so
-    // each can be traced to a vulnerability, a risk and a mitigation.
+    // static or dynamic analysis, composition analysis), a report is the
+    // evidence it produced, and a finding is one result in the report.
+    // The case is a verification case: it checks the security requirements,
+    // and `ProducesEvidence` already links a verification case to what it
+    // produced. The method is stated once, on the case; a finding is one
+    // type whose method-specific descriptors are optional, as Interface's
+    // are. A finding is traced to its vulnerability by
+    // `IdentifiesVulnerability`, and from there to the SBOM entry by
+    // `AffectsSBOMEntry`.
     enum def SecurityAssessmentMethodKind {
         enum penetrationTest;
         enum sast;
         enum dast;
         enum sca;
     }
-    part def SecurityAssessmentCase specializes MemoPart {
+    verification def SecurityAssessmentCase :> VerificationCase {
         attribute assessmentMethod : SecurityAssessmentMethodKind;
         attribute assessmentScope : String;
         attribute toolName : String;
         attribute toolVersion : String;
-    }
-    part def SecurityAssessmentReport specializes MemoEvidence {
-        attribute reportDate : String;
-        attribute assessor : String;
     }
     part def SecurityFinding specializes MemoEvidence {
         attribute findingIdentifier : String;
         attribute severity : CriticalityKind;
         attribute cvssBaseScore : Real;
         attribute cvssVector : String;
-        attribute findingStatus : PenTestFindingStatusKind;
+        attribute findingStatus : SecurityFindingStatusKind;
         attribute retestDate : String;
+        // method-specific (optional)
+        attribute weaknessReference : String[0..1];   // CWE identifier (SAST)
+        attribute sourceLocation : String[0..1];      // file and line (SAST)
+        attribute testedEndpoint : String[0..1];      // URL or interface (DAST)
     }
-    part def PenTestFinding specializes SecurityFinding;
-    part def SASTFinding specializes SecurityFinding {
-        attribute weaknessReference : String;
-        attribute sourceLocation : String;
-    }
-    part def DASTFinding specializes SecurityFinding {
-        attribute testedEndpoint : String;
-    }
-    part def SCAFinding specializes SecurityFinding {
-        attribute affectedPackage : String;
+    part def SecurityAssessmentReport specializes MemoEvidence {
+        attribute reportDate : String;
+        attribute assessor : String;
+        part finding : SecurityFinding[0..*];
     }
 
     action def PostmarketProcess specializes MemoAction {
@@ -447,38 +447,5 @@ package memo_assurance_cybersecurity {
         :> annotatedElement : SysML::ConnectionDefinition;
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = monitorsSBOMEntryLinks meta SysML::Usage;
-    }
-
-    connection def ProducesReport :> MemoRelationship {
-        end assessmentCase : SecurityAssessmentCase :>> source;
-        end producedReport : SecurityAssessmentReport :>> target;
-    }
-    abstract connection producesReportLinks : ProducesReport[*];
-    metadata def <producesReport> ProducesReportMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = producesReportLinks meta SysML::Usage;
-    }
-
-    connection def ReportsFinding :> MemoRelationship {
-        end report : SecurityAssessmentReport :>> source;
-        end reportedFinding : SecurityFinding :>> target;
-    }
-    abstract connection reportsFindingLinks : ReportsFinding[*];
-    metadata def <reportsFinding> ReportsFindingMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = reportsFindingLinks meta SysML::Usage;
-    }
-
-    connection def IdentifiesAffectedEntry :> MemoRelationship {
-        end scaFinding : SCAFinding :>> source;
-        end affectedEntry : SBOMEntry :>> target;
-    }
-    abstract connection identifiesAffectedEntryLinks : IdentifiesAffectedEntry[*];
-    metadata def <identifiesAffectedEntry> IdentifiesAffectedEntryMetadata :> SemanticMetadata {
-        :> annotatedElement : SysML::ConnectionDefinition;
-        :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = identifiesAffectedEntryLinks meta SysML::Usage;
     }
 }
