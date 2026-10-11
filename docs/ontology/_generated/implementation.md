@@ -42,8 +42,8 @@
 | [`DataModel`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#datamodel) | `part def` | Data model definition specializing `MemoPart`. |
 | [`ConfigurationArtifact`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#configurationartifact) | `part def` | Configuration artifact definition specializing `MemoPart`. |
 | [`DataItem`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#dataitem) *(abstract)* | `item def` | Data item definition specializing `MemoItem`. |
-| [`OTSSoftwareModule`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#otssoftwaremodule) | `part def` | Otssoftware module definition specializing `SoftwareModule`. |
-| [`SOUPSoftwareModule`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#soupsoftwaremodule) | `part def` | Soupsoftware module definition specializing `OTSSoftwareModule`. |
+| [`SOUPSoftwareModule`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#soupsoftwaremodule) | `part def` | Soupsoftware module definition specializing `SoftwareModule`. |
+| [`OTSSoftwareModule`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#otssoftwaremodule) | `part def` | Otssoftware module definition specializing `SOUPSoftwareModule`. |
 | [`SBOMEntry`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#sbomentry) | `part def` | An SBOM is a document; its entries are inventory records. An entry names one software element and says what is known about it as shipped. Vulnerabilities, anomalies and risks are separate objects that point at the entry; they are not attributes of the document. |
 | [`SoftwareBillOfMaterials`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#softwarebillofmaterials) | `part def` | Software bill of materials definition specializing `MemoPart`. |
 
@@ -82,12 +82,11 @@ flowchart LR
   SoftwareDeploymentUnit["SoftwareDeploymentUnit"]:::other
   SoftwareComponent["SoftwareComponent"]
   MemoryDevice["MemoryDevice"]:::other
-  ComponentExchange["ComponentExchange"]:::other
-  NetworkMedium["NetworkMedium"]
+  MemoInterface["MemoInterface"]:::other
+  PhysicalComponent["PhysicalComponent"]
   Vulnerability["Vulnerability"]:::other
   SBOMEntry["SBOMEntry"]
   PostmarketProcess["PostmarketProcess"]:::other
-  SCAFinding["SCAFinding"]:::other
   MemoPart -->|DependsOnSoup| SoftwareElement
   ScreenCapture -->|CapturesScreen| UIElement
   MemoPart -->|ElementTriggersAction| UIAction
@@ -96,10 +95,9 @@ flowchart LR
   RiskControlMeasure -->|ControlImplementedBy| anyElement
   SoftwareModule -->|BuildsInto| SoftwareDeploymentUnit
   SoftwareComponent -->|MemoryBinding| MemoryDevice
-  ComponentExchange -->|ConnectionBinding| NetworkMedium
+  MemoInterface -->|ConnectionBinding| PhysicalComponent
   Vulnerability -->|AffectsSBOMEntry| SBOMEntry
   PostmarketProcess -->|MonitorsSBOMEntry| SBOMEntry
-  SCAFinding -->|IdentifiesAffectedEntry| SBOMEntry
   classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
 ```
 
@@ -120,17 +118,16 @@ flowchart LR
 | --- | --- | --- | --- | --- |
 | [`BuildsInto`](../sysml-api/architecture/realization/deployment/memo_deployment.md#buildsinto) | realization | [`SoftwareModule`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#softwaremodule) | [`SoftwareDeploymentUnit`](../sysml-api/architecture/realization/deployment/memo_deployment.md#softwaredeploymentunit) | Typed relationship from `SoftwareModule` to `SoftwareDeploymentUnit`. |
 | [`MemoryBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#memorybinding) | realization | [`SoftwareComponent`](../sysml-api/architecture/implementation/software/runtime/memo_software_runtime.md#softwarecomponent) | [`MemoryDevice`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#memorydevice) | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. |
-| [`ConnectionBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#connectionbinding) | realization | [`ComponentExchange`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#componentexchange) | [`NetworkMedium`](../sysml-api/architecture/implementation/hardware/electrical/memo_hardware_electrical.md#networkmedium) | AADL `actual_connection_binding`. Which physical medium carries a component exchange. The source is the ComponentExchange rather than the `ComponentConnects` link, because the exchange is the ELEMENT that owns the budget (§19.3) and a link instance is not something the graph c… |
+| [`ConnectionBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#connectionbinding) | realization | [`MemoInterface`](../sysml-api/core/common/memo_common.md#memointerface) | [`PhysicalComponent`](../sysml-api/architecture/implementation/hardware/common/memo_hardware_common.md#physicalcomponent) | AADL `actual_connection_binding`. Which physical thing carries an interface: a network medium under a component exchange, a cable or harness under a hardware `Interface`, a connector, a tube.… |
 | [`AffectsSBOMEntry`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#affectssbomentry) | cybersecurity | [`Vulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | [`SBOMEntry`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#sbomentry) | Typed relationship from `Vulnerability` to `SBOMEntry`. |
 | [`MonitorsSBOMEntry`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#monitorssbomentry) | cybersecurity | [`PostmarketProcess`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#postmarketprocess) | [`SBOMEntry`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#sbomentry) | Typed relationship from `PostmarketProcess` to `SBOMEntry`. |
-| [`IdentifiesAffectedEntry`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#identifiesaffectedentry) | cybersecurity | [`SCAFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#scafinding) | [`SBOMEntry`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#sbomentry) | Typed relationship from `SCAFinding` to `SBOMEntry`. |
 
 ### Enumerations
 
 | Enumeration | Values |
 | --- | --- |
 | [`RuntimeKind`](../sysml-api/architecture/implementation/software/runtime/memo_software_runtime.md#runtimekind) | `process`, `thread`, `task`, `service`, `container`, `partition`, `dataStore`, `messageBroker` |
-| [`ModuleKind`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#modulekind) | `unit`, `code`, `firmware`, `soup` |
+| [`ModuleKind`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#modulekind) | `unit`, `code`, `firmware` |
 | [`SbomFormatKind`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#sbomformatkind) | `spdx`, `cycloneDx`, `other` |
 | [`UIElementFormKind`](../sysml-api/architecture/implementation/ui/memo_ui.md#uielementformkind) | `screen`, `dialog`, `panel`, `menu`, `tab`, `drawer`, `wizardStep`, `button`, `field`, `selector`, `slider`, `table`, `chart`, `icon`, `textMessage`, `decoration` |
 | [`UIDisclosureKind`](../sysml-api/architecture/implementation/ui/memo_ui.md#uidisclosurekind) | `inline`, `overlay`, `transient`, `scrolled`, `conditional` |

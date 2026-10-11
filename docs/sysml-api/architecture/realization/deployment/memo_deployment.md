@@ -31,7 +31,7 @@
 | private | `memo_core_relationships::*` |
 | private | `memo_architecture_implementation_software_structure::*` |
 | private | `memo_architecture_implementation_software_runtime::*` |
-| private | `memo_architecture_implementation_hardware_electrical::*` |
+| private | `memo_architecture_implementation_hardware_common::PhysicalComponent` |
 | private | `memo_architecture_realization_physical::*` |
 | private | `memo_architecture_functional_functions::*` |
 | private | `memo_architecture_logical_structure::*` |
@@ -47,7 +47,7 @@
 | [`DeploysTo`](#deploysto) | `allocation def` | Typed relationship from `SoftwareDeploymentUnit` to `ProcessingNode`. | `MemoRelationship` |
 | [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | `MemoRelationship` |
 | [`MemoryBinding`](#memorybinding) | `allocation def` | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. | `MemoRelationship` |
-| [`ConnectionBinding`](#connectionbinding) | `allocation def` | AADL `actual_connection_binding`. Which physical medium carries a component exchange. The source is the ComponentExchange rather than the `ComponentConnects` link, because the exchange is the ELEMENT that owns the budget (§19.3) and a link instance is not something the graph c… | `MemoRelationship` |
+| [`ConnectionBinding`](#connectionbinding) | `allocation def` | AADL `actual_connection_binding`. Which physical thing carries an interface: a network medium under a component exchange, a cable or harness under a hardware `Interface`, a connector, a tube.… | `MemoRelationship` |
 | [`FlowSpecKind`](#flowspeckind) | `enum def` | AADL separates a flow *specification* (declared at a component boundary as source / sink / path through ports) from a flow *implementation* (its routing through subcomponents and connectors), and traces a complete source→sink flow as an *end-to-end flow* across the assembly.… | — |
 | [`FlowSpecification`](#flowspecification) | `part def` | A flow declared at a logical component boundary (in-port → out-port). | `MemoPart` |
 | [`EndToEndFlow`](#endtoendflow) | `part def` | A complete source→sink flow traced across the layers and the software→ hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose` (latency \| fault-propagation \| security) drive the AADL-style analysis. | `MemoPart` |
@@ -152,7 +152,7 @@ allocation def ConnectionBinding :> MemoRelationship, Allocations::Allocation
 
 | Property | Value |
 | --- | --- |
-| Description | AADL `actual_connection_binding`. Which physical medium carries a component exchange. The source is the ComponentExchange rather than the `ComponentConnects` link, because the exchange is the ELEMENT that owns the budget (§19.3) and a link instance is not something the graph c… |
+| Description | AADL `actual_connection_binding`. Which physical thing carries an interface: a network medium under a component exchange, a cable or harness under a hardware `Interface`, a connector, a tube.… |
 | Kind | `allocation def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -261,7 +261,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         private import memo_core_relationships::*;
         private import memo_architecture_implementation_software_structure::*;
         private import memo_architecture_implementation_software_runtime::*;
-        private import memo_architecture_implementation_hardware_electrical::*;   // NetworkMedium
+        private import memo_architecture_implementation_hardware_common::PhysicalComponent;
         private import memo_architecture_realization_physical::*;
         private import memo_architecture_functional_functions::*;
         private import memo_architecture_logical_structure::*;
@@ -352,17 +352,19 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
             :>> baseType = memoryBindingLinks meta SysML::Usage;
         }
 
-        // AADL `actual_connection_binding`. Which physical medium carries a
-        // component exchange. The source is the ComponentExchange rather than the
-        // `ComponentConnects` link, because the exchange is the ELEMENT that owns
-        // the budget (§19.3) and a link instance is not something the graph can
-        // bind to; it is also exactly where the latency the medium contributes has
-        // to be accounted.
+        // AADL `actual_connection_binding`. Which physical thing carries an
+        // interface: a network medium under a component exchange, a cable or
+        // harness under a hardware `Interface`, a connector, a tube. The source is
+        // the interface usage rather than a link, because the interface is the
+        // ELEMENT that owns the budget (§19.3) and a link instance is not
+        // something the graph can bind to; it is also exactly where the latency
+        // the medium contributes has to be accounted. Ends are the two bases
+        // (MemoInterface, PhysicalComponent) so one binding serves every layer.
         allocation def ConnectionBinding :> MemoRelationship, Allocations::Allocation {
             attribute allocatedBandwidth : String;
             attribute mediumLatencyMs : Real;
-            end boundExchange : ComponentExchange :>> source;
-            end medium : NetworkMedium :>> target;
+            end boundExchange : MemoInterface :>> source;
+            end medium : PhysicalComponent :>> target;
         }
         abstract connection connectionBindingLinks : ConnectionBinding[*];
         metadata def <connectionBinding> ConnectionBindingMetadata :> SemanticMetadata {

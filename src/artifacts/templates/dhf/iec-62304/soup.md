@@ -23,12 +23,11 @@ This document lists all Software of Unknown Provenance (SOUP) components used in
 The complete inventory of SOUP and third-party components in **{{project.product}}**, generated from the model:
 
 ```memo-query
-kind: SoftwareModule
-where: moduleKind == "SoftwareModuleKind::soup"
+kind: [SOUPSoftwareModule, OTSSoftwareModule]
 display: table
 columns: name, layer, doc
 sort: name
-empty: "No SOUP components defined. Add SOUPComponent elements to the model."
+empty: "No SOUP components defined. Add SOUPSoftwareModule or OTSSoftwareModule elements to the model."
 ```
 
 ---
@@ -38,8 +37,7 @@ empty: "No SOUP components defined. Add SOUPComponent elements to the model."
 For each SOUP component, the potential impact on device safety must be evaluated.
 
 ```memo-query
-kind: SoftwareModule
-where: moduleKind == "SoftwareModuleKind::soup"
+kind: [SOUPSoftwareModule, OTSSoftwareModule]
 display: table
 columns: name, doc
 sort: name

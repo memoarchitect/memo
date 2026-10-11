@@ -52,11 +52,13 @@ availability, authenticity, accountability, privacy or safety) at an impact
 level. A `CybersecurityAssumption` is a stated assumption with an owner, a
 review date and whether it still holds. An `SBOMEntry` is an inventory
 record of the bill of materials (`SoftwareBillOfMaterials`) that points at the
-software element it lists, with its supplier, licence, package URL and the SPDX
-or CycloneDX reference it came from. A `SecurityAssessmentCase` (penetration
-test, SAST, DAST or SCA) produces a `SecurityAssessmentReport`, which reports
-`SecurityFinding`s; `PenTestFinding`, `SASTFinding`, `DASTFinding` and
-`SCAFinding` specialize the finding, carrying its CVSS rating and its status. A
+software element it lists, with its supplier, license expression, checksum,
+package URL and the SPDX or CycloneDX reference it came from. A
+`SecurityAssessmentCase` is a verification case (penetration test, SAST, DAST or
+SCA, stated once as its method) that produces a `SecurityAssessmentReport`
+(`ProducesEvidence`); the report holds its `SecurityFinding`s, each with its
+CVSS rating, its status and, where the method gives them, the weakness, source
+location or tested endpoint. A
 `PostmarketProcess` is a monitoring, disclosure, patching or incident-response
 process and its cadence. A vulnerability also carries its CVE reference and a
 disposition (open, mitigated, accepted or closed).
@@ -85,7 +87,7 @@ copying the risk.
   (`AttributedToThreatActor`), uses a technique (`UsesAttackTechnique`) and
   realises a cyber hazard (`RealizesCyberHazard`). An attack path includes the
   techniques it chains (`IncludesAttackTechnique`).
-- **Findings and components.** A penetration-test finding identifies a
+- **Findings and components.** A security finding identifies a
   vulnerability (`IdentifiesVulnerability`) and demonstrates an attack path
   (`DemonstratesAttackPath`). A vulnerability affects an SBOM entry
   (`AffectsSBOMEntry`), which a postmarket process monitors

@@ -30,10 +30,9 @@ package memo_examples_software_only_medical_device {
         attribute :>> algorithmKind = "convolutional neural network, locked (non-adaptive)";
         attribute :>> clinicalPerformanceClaim = "sensitivity >= 87%, specificity >= 90% vs. reference standard";
     }
-    part soupInference : SoftwareModule {
-        attribute :>> moduleKind = ModuleKind::soup;
+    part soupInference : OTSSoftwareModule {
         @MemoIdentity { :>> providedId = "SMD-SOUP-001"; :>> label = "InferenceRuntimeLibrary"; }
-        attribute :>> soupVendor = "third-party OSS";
+        attribute :>> supplier = "third-party OSS";
         attribute :>> soupClassification = SOUPClassificationKind::classB;
     }
     part swGradingModule : SoftwareModule {

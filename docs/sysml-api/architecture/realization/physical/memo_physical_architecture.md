@@ -27,8 +27,6 @@
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_architecture_implementation_hardware_common::PhysicalElement` |
-| private | `memo_architecture_implementation_hardware_common::PhysicalComponent` |
-| private | `memo_architecture_logical_structure::FlowContentKind` |
 
 ## Declarations
 
@@ -37,8 +35,6 @@
 | [`ProcessingNode`](#processingnode) | `part def` | Processing node definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`MemoryDevice`](#memorydevice) | `part def` | Memory device definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`PhysicalPort`](#physicalport) | `port def` | Physical port definition specializing `MemoPort`. | `MemoPort` |
-| [`PhysicalConnection`](#physicalconnection) | `interface def` | Typed relationship from `PhysicalPort` to `PhysicalPort`. | `MemoInterface` |
-| [`PhysicalFlow`](#physicalflow) | `flow def` | What crosses a physical connection: energy, signal, fluid, force. | — |
 
 ## ProcessingNode
 
@@ -85,36 +81,6 @@ port def PhysicalPort specializes MemoPort
 | Owning package | `memo_architecture_realization_physical` |
 
 
-## PhysicalConnection
-
-```sysml
-interface def PhysicalConnection specializes MemoInterface
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `PhysicalPort` to `PhysicalPort`. |
-| Kind | `interface def` |
-| Abstract | No |
-| Specializes | `MemoInterface` |
-| Owning package | `memo_architecture_realization_physical` |
-
-
-## PhysicalFlow
-
-```sysml
-abstract flow def PhysicalFlow
-```
-
-| Property | Value |
-| --- | --- |
-| Description | What crosses a physical connection: energy, signal, fluid, force. |
-| Kind | `flow def` |
-| Abstract | Yes |
-| Specializes | — |
-| Owning package | `memo_architecture_realization_physical` |
-
-
 ## Source
 
 ??? code "architecture/realization/physical/memo_physical_architecture.sysml"
@@ -134,8 +100,6 @@ abstract flow def PhysicalFlow
         // one. Their home package reflects their ROLE (deployment target), not
         // their nature.
         private import memo_architecture_implementation_hardware_common::PhysicalElement;
-        private import memo_architecture_implementation_hardware_common::PhysicalComponent;
-        private import memo_architecture_logical_structure::FlowContentKind;
         part def ProcessingNode specializes PhysicalElement {
             attribute nodeKind : ProcessingNodeKind;
             attribute processorArchitecture : String;
@@ -185,11 +149,14 @@ abstract flow def PhysicalFlow
 
         // ─── Connecting hardware ─────────────────────────────────────────────
         //
-        // Hardware is parts with ports. A port on one part is joined to a port on
-        // another by a connection, and what moves over it is a flow. Both are the
-        // same two constructs the logical layer uses (see ComponentExchange in
-        // memo_architecture_logical_interfaces): the connection is the path and
-        // the flow is the transfer over it, between the same two ports.
+        // Hardware is parts with ports, and it wires with the same constructs as
+        // every other layer; there is no hardware-only connection or flow type.
+        // The path between two ports is an `Interface` (its hardware-signal
+        // descriptors: electricalStandard, nominalVoltageV, signalRange, ...),
+        // what crosses it is a `LogicalExchange` flow (contentKind energy,
+        // fluid, mechanicalForce, ...), and the cable, header or tube that
+        // carries the path is a part of its own, related to the interface by a
+        // ConnectionBinding allocation (memo_architecture_realization_deployment):
         //
         //     part pump {
         //         out port pMotorDrive : PhysicalPort { out item drive; }
@@ -197,33 +164,18 @@ abstract flow def PhysicalFlow
         //     part driver {
         //         in port pMotorIn : PhysicalPort { in item drive; }
         //     }
-        //     interface cnMotorDrive : PhysicalConnection
+        //     part motorHarness : Cable;
+        //     interface cnMotorDrive : Interface
         //         connect pump.pMotorDrive to driver.pMotorIn {
-        //         attribute :>> mediumKind = "shielded 6-core cable";
-        //         ref :>> carrier = motorHarness;
+        //         attribute :>> interfaceKind = InterfaceKind::power;
+        //         attribute :>> electricalStandard = "24 V DC";
         //     }
-        //     flow flMotorDrive : PhysicalFlow
+        //     flow flMotorDrive : LogicalExchange
         //         from pump.pMotorDrive.drive to driver.pMotorIn.drive {
-        //         attribute :>> flowContent = FlowContentKind::energy;
+        //         attribute :>> contentKind = FlowContentKind::energy;
         //     }
-        //
-        // The connector hardware (a cable, a header, a tube) is a part in its own
-        // right (Cable, PhysicalConnectorPart, ...); the connection points at it
-        // through `carrier` instead of becoming it.
-        interface def PhysicalConnection specializes MemoInterface {
-            attribute interfaceKind : InterfaceKind;
-            attribute mediumKind : String;
-            attribute connectorStandard : String;
-            ref carrier : PhysicalComponent[0..1];
-            end sourcePort : PhysicalPort;
-            end targetPort : PhysicalPort;
-        }
-
-        // What crosses a physical connection: energy, signal, fluid, force.
-        abstract flow def PhysicalFlow {
-            attribute flowContent : FlowContentKind;
-            attribute rating : String;
-        }
+        //     allocation cbMotorDrive : ConnectionBinding
+        //         allocate cnMotorDrive to motorHarness;
     }
 
     ```

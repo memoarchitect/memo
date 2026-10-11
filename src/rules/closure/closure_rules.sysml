@@ -447,10 +447,10 @@ package memo_rules_closure {
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
-        attribute appliesTo = "SoftwareModule";
+        attribute appliesTo = "SOUPSoftwareModule";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "The published anomaly list of a SOUP item is evaluated for anomalies that could lead to a hazardous situation, and the result is recorded on the item.";
-        attribute predicateExpression = "not(attributes.moduleKind == 'soup') or attributes.knownAnomalies != ''";
+        attribute predicateExpression = "attributes.knownAnomalies != ''";
         constraint { true }
     }
     #EnforcesClause dependency from SoupAnomaliesRule to iec62304::iec62304Clause7::iec62304Clause7_1::iec62304Clause7_1_3;
@@ -460,10 +460,10 @@ package memo_rules_closure {
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
-        attribute appliesTo = "SoftwareModule";
+        attribute appliesTo = "SOUPSoftwareModule";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "A SOUP item is identified under configuration management by its title, manufacturer and version, so a SOUP item states a vendor and a version.";
-        attribute predicateExpression = "not(attributes.moduleKind == 'soup') or (attributes.soupVersion != '' and attributes.soupVendor != '')";
+        attribute predicateExpression = "attributes.version != '' and attributes.supplier != ''";
         constraint { true }
     }
     #EnforcesClause dependency from SoupIdentifiedRule to iec62304::iec62304Clause8::iec62304Clause8_1::iec62304Clause8_1_2;
@@ -473,10 +473,10 @@ package memo_rules_closure {
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
-        attribute appliesTo = "SoftwareModule";
+        attribute appliesTo = "SOUPSoftwareModule";
         attribute severity = RuleSeverityKind::warning;
         attribute rationaleText = "The functional and performance a software item needs from a SOUP item are stated as requirements, so a SOUP item is the subject of at least one requirement.";
-        attribute predicateExpression = "not(attributes.moduleKind == 'soup') or satisfiedBy->size() >= 1";
+        attribute predicateExpression = "satisfiedBy->size() >= 1";
         constraint { true }
     }
     #EnforcesClause dependency from SoupRequirementRule to iec62304::iec62304Clause5::iec62304Clause5_3::iec62304Clause5_3_3;
