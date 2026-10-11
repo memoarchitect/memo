@@ -15,7 +15,7 @@ touch. Each element here realises something in the logical design.
 **Software.** IEC 62304 calls any identifiable part of a program a *software
 item*, and it decomposes software item by item. MEMO's base for that concept is
 `SoftwareElement`. It is named so because SysML reserves *item* for things that
-flow, which is what MEMO's `SoftwareItem` is: software data or content that is
+flow, which is what MEMO's `DataItem` is: software data or content that is
 stored or exchanged. Software is described in two views:
 
 - **The module view** (IEC 62304 5.3 to 5.4): `SoftwareSystem` is the top, and

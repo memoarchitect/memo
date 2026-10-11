@@ -117,6 +117,14 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | [`ProvidesEnvironment`](architecture/realization/deployment/memo_deployment.md#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 
 
+## `memo::architecture::realization::physical`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`PhysicalConnection`](architecture/realization/physical/memo_physical_architecture.md#physicalconnection) | `interface def` | Typed relationship from `PhysicalPort` to `PhysicalPort`. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
+| [`PhysicalFlow`](architecture/realization/physical/memo_physical_architecture.md#physicalflow) | `flow def` | What crosses a physical connection: energy, signal, fluid, force. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
+
+
 ## `memo::artifacts::configuration_management`
 
 | Name | SysML kind | Description | Source |
@@ -136,20 +144,23 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`AffectsSBOMComponent`](assurance/cybersecurity/memo_cybersecurity.md#affectssbomcomponent) | `connection def` | Typed relationship from `Vulnerability` to `SBOMComponent`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`AffectsSBOMEntry`](assurance/cybersecurity/memo_cybersecurity.md#affectssbomentry) | `connection def` | Typed relationship from `Vulnerability` to `SBOMEntry`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`AssessesCyberRisk`](assurance/cybersecurity/memo_cybersecurity.md#assessescyberrisk) | `connection def` | Typed relationship from `CyberRiskAssessment` to `CyberRisk`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`AttributedToThreatActor`](assurance/cybersecurity/memo_cybersecurity.md#attributedtothreatactor) | `connection def` | Typed relationship from `Threat` to `ThreatActor`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`ConditionsCyberElement`](assurance/cybersecurity/memo_cybersecurity.md#conditionscyberelement) | `connection def` | Typed relationship from `CybersecurityAssumption` to `any element`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
-| [`DemonstratesAttackPath`](assurance/cybersecurity/memo_cybersecurity.md#demonstratesattackpath) | `connection def` | Typed relationship from `PenTestFinding` to `AttackPath`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`DemonstratesAttackPath`](assurance/cybersecurity/memo_cybersecurity.md#demonstratesattackpath) | `connection def` | Typed relationship from `SecurityFinding` to `AttackPath`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`Exploits`](assurance/cybersecurity/memo_cybersecurity.md#exploits) | `connection def` | Typed relationship from `Threat` to `Vulnerability`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`ExposesAsset`](assurance/cybersecurity/memo_cybersecurity.md#exposesasset) | `connection def` | Typed relationship from `AttackSurface` to `CybersecurityAsset`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`HasSecurityProperty`](assurance/cybersecurity/memo_cybersecurity.md#hassecurityproperty) | `connection def` | Typed relationship from `CybersecurityAsset` to `SecurityProperty`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
-| [`IdentifiesVulnerability`](assurance/cybersecurity/memo_cybersecurity.md#identifiesvulnerability) | `connection def` | Typed relationship from `PenTestFinding` to `Vulnerability`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`IdentifiesAffectedEntry`](assurance/cybersecurity/memo_cybersecurity.md#identifiesaffectedentry) | `connection def` | Typed relationship from `SCAFinding` to `SBOMEntry`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`IdentifiesVulnerability`](assurance/cybersecurity/memo_cybersecurity.md#identifiesvulnerability) | `connection def` | Typed relationship from `SecurityFinding` to `Vulnerability`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`ImpactsSafety`](assurance/cybersecurity/memo_cybersecurity.md#impactssafety) | `connection def` | Typed relationship from `MemoPart` to `RiskItem`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`IncludesAttackTechnique`](assurance/cybersecurity/memo_cybersecurity.md#includesattacktechnique) | `connection def` | Typed relationship from `AttackPath` to `AttackTechnique`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
-| [`MonitorsSBOMComponent`](assurance/cybersecurity/memo_cybersecurity.md#monitorssbomcomponent) | `connection def` | Typed relationship from `PostmarketProcess` to `SBOMComponent`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`MonitorsSBOMEntry`](assurance/cybersecurity/memo_cybersecurity.md#monitorssbomentry) | `connection def` | Typed relationship from `PostmarketProcess` to `SBOMEntry`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ProducesReport`](assurance/cybersecurity/memo_cybersecurity.md#producesreport) | `connection def` | Typed relationship from `SecurityAssessmentCase` to `SecurityAssessmentReport`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`RealizedByScenario`](assurance/cybersecurity/memo_cybersecurity.md#realizedbyscenario) | `connection def` | Typed relationship from `RequirementDriver` to `OperativeScenario`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`RealizesCyberHazard`](assurance/cybersecurity/memo_cybersecurity.md#realizescyberhazard) | `connection def` | Typed relationship from `Threat` to `CyberHazard`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ReportsFinding`](assurance/cybersecurity/memo_cybersecurity.md#reportsfinding) | `connection def` | Typed relationship from `SecurityAssessmentReport` to `SecurityFinding`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`SupportsMitigationEffectiveness`](assurance/cybersecurity/memo_cybersecurity.md#supportsmitigationeffectiveness) | `connection def` | Typed relationship from `MemoEvidence` to `CyberMitigation`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`ThreatenedBy`](assurance/cybersecurity/memo_cybersecurity.md#threatenedby) | `connection def` | Typed relationship from `CybersecurityAsset` to `Threat`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`UsesAttackTechnique`](assurance/cybersecurity/memo_cybersecurity.md#usesattacktechnique) | `connection def` | Typed relationship from `Threat` to `AttackTechnique`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |

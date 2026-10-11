@@ -85,20 +85,58 @@ package memo_architecture_implementation_software_structure {
         attribute version : String;
     }
 
-    // Software data/content that may be stored or exchanged through ports.
-    abstract item def SoftwareItem specializes MemoItem {
+    // Data content that may be stored or exchanged through ports. Named
+    // DataItem, not SoftwareItem: IEC 62304 uses "software item" for a
+    // structural part of a program (a SoftwareElement here), and the item
+    // family is the exchanged or stored value.
+    abstract item def DataItem specializes MemoItem {
         attribute schemaIdentifier : String;
         attribute schemaVersion : String;
         attribute :>> encoding : String;
         attribute :>> timestampRequired : Boolean;
     }
 
-    item def SBOMEntry specializes SoftwareItem {
+    // Off-the-shelf software: acquired, not developed here. The identity of
+    // what was acquired is owned once, here, and SOUP (IEC 62304 §3.29, an
+    // OTS item whose development process is unknown) narrows it. SOUP is a
+    // specialization, not a module-kind value: an internally developed module
+    // is never SOUP. The `soup*` attributes and `moduleKind = soup` on
+    // SoftwareModule remain what the closure rules read until they are
+    // moved onto these types.
+    part def OTSSoftwareModule specializes SoftwareModule {
+        attribute supplier : String;
+        attribute licenseExpression : String;
+        attribute packageUrl : String;
+        attribute checksum : String;
+    }
+    part def SOUPSoftwareModule specializes OTSSoftwareModule;
+
+    enum def SbomFormatKind {
+        enum spdx;
+        enum cycloneDx;
+        enum other;
+    }
+
+    // An SBOM is a document; its entries are inventory records. An entry
+    // names one software element and says what is known about it as shipped.
+    // Vulnerabilities, anomalies and risks are separate objects that point at
+    // the entry; they are not attributes of the document.
+    part def SBOMEntry specializes MemoPart {
         attribute componentName : String;
         attribute version : String;
         attribute supplier : String;
         attribute license : String;
         attribute hash : String;
+        attribute packageUrl : String;
+        attribute bomReference : String;
+        ref inventoriedElement : SoftwareElement[0..1];
+    }
+    part def SoftwareBillOfMaterials specializes MemoPart {
+        attribute sbomFormat : SbomFormatKind;
+        attribute specVersion : String;
+        attribute generationTool : String;
+        attribute generatedOn : String;
+        part sbomEntry : SBOMEntry[0..*];
     }
 
     // `ModuleUses` is native `dependency` (R10-S6): write
