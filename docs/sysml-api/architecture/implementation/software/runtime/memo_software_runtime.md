@@ -36,6 +36,7 @@
 | --- | --- | --- | --- |
 | [`RuntimeKind`](#runtimekind) | `enum def` | Controlled values for runtime: `process`, `thread`, `task`, `service`, `container`, `partition`, `dataStore`, `messageBroker`. | — |
 | [`SoftwareComponent`](#softwarecomponent) | `part def` | Software component definition specializing `SoftwareElement`. | `SoftwareElement` |
+| [`OTSSoftwareComponent`](#otssoftwarecomponent) | `part def` | A runtime service or process that exists only because an OTS module is deployed. Optional: a library the product links normally needs only the module. | `SoftwareComponent` |
 
 ## RuntimeKind
 
@@ -64,6 +65,21 @@ part def SoftwareComponent specializes SoftwareElement
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `SoftwareElement` |
+| Owning package | `memo_architecture_implementation_software_runtime` |
+
+
+## OTSSoftwareComponent
+
+```sysml
+part def OTSSoftwareComponent specializes SoftwareComponent
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A runtime service or process that exists only because an OTS module is deployed. Optional: a library the product links normally needs only the module. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `SoftwareComponent` |
 | Owning package | `memo_architecture_implementation_software_runtime` |
 
 
@@ -150,6 +166,13 @@ part def SoftwareComponent specializes SoftwareElement
             // regulated project — the AADL thread properties above and the
             // assurance ones — plus `runtimeKind` itself, which says which family
             // a component belongs to without claiming to describe it.
+        }
+
+        // A runtime service or process that exists only because an OTS module is
+        // deployed. Optional: a library the product links normally needs only the
+        // module.
+        part def OTSSoftwareComponent specializes SoftwareComponent {
+            ref sourceModule : OTSSoftwareModule[0..1];
         }
 
     }

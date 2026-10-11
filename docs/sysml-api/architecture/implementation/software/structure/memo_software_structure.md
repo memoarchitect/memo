@@ -41,8 +41,12 @@
 | [`Algorithm`](#algorithm) | `part def` | Algorithm definition specializing `MemoPart`. | `MemoPart` |
 | [`DataModel`](#datamodel) | `part def` | Data model definition specializing `MemoPart`. | `MemoPart` |
 | [`ConfigurationArtifact`](#configurationartifact) | `part def` | Configuration artifact definition specializing `MemoPart`. | `MemoPart` |
-| [`SoftwareItem`](#softwareitem) | `item def` | Software data/content that may be stored or exchanged through ports. | `MemoItem` |
-| [`SBOMEntry`](#sbomentry) | `item def` | Sbomentry definition specializing `SoftwareItem`. | `SoftwareItem` |
+| [`DataItem`](#dataitem) | `item def` | Data item definition specializing `MemoItem`. | `MemoItem` |
+| [`OTSSoftwareModule`](#otssoftwaremodule) | `part def` | Otssoftware module definition specializing `SoftwareModule`. | `SoftwareModule` |
+| [`SOUPSoftwareModule`](#soupsoftwaremodule) | `part def` | Soupsoftware module definition specializing `OTSSoftwareModule`. | `OTSSoftwareModule` |
+| [`SbomFormatKind`](#sbomformatkind) | `enum def` | Controlled values for sbom format: `spdx`, `cycloneDx`, `other`. | — |
+| [`SBOMEntry`](#sbomentry) | `part def` | An SBOM is a document; its entries are inventory records. An entry names one software element and says what is known about it as shipped. Vulnerabilities, anomalies and risks are separate objects that point at the entry; they are not attributes of the document. | `MemoPart` |
+| [`SoftwareBillOfMaterials`](#softwarebillofmaterials) | `part def` | Software bill of materials definition specializing `MemoPart`. | `MemoPart` |
 | [`DependsOnSoup`](#dependsonsoup) | `connection def` | Typed relationship from `MemoPart` to `SoftwareElement`. | `MemoRelationship` |
 
 ## SoftwareElement
@@ -150,33 +154,93 @@ part def ConfigurationArtifact specializes MemoPart
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
-## SoftwareItem
+## DataItem
 
 ```sysml
-abstract item def SoftwareItem specializes MemoItem
+abstract item def DataItem specializes MemoItem
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Software data/content that may be stored or exchanged through ports. |
+| Description | Data item definition specializing `MemoItem`. |
 | Kind | `item def` |
 | Abstract | Yes |
 | Specializes | `MemoItem` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
-## SBOMEntry
+## OTSSoftwareModule
 
 ```sysml
-item def SBOMEntry specializes SoftwareItem
+part def OTSSoftwareModule specializes SoftwareModule
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Sbomentry definition specializing `SoftwareItem`. |
-| Kind | `item def` |
+| Description | Otssoftware module definition specializing `SoftwareModule`. |
+| Kind | `part def` |
 | Abstract | No |
-| Specializes | `SoftwareItem` |
+| Specializes | `SoftwareModule` |
+| Owning package | `memo_architecture_implementation_software_structure` |
+
+
+## SOUPSoftwareModule
+
+```sysml
+part def SOUPSoftwareModule specializes OTSSoftwareModule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Soupsoftware module definition specializing `OTSSoftwareModule`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `OTSSoftwareModule` |
+| Owning package | `memo_architecture_implementation_software_structure` |
+
+
+## SbomFormatKind
+
+```sysml
+enum def SbomFormatKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Controlled values for sbom format: `spdx`, `cycloneDx`, `other`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_architecture_implementation_software_structure` |
+
+
+## SBOMEntry
+
+```sysml
+part def SBOMEntry specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | An SBOM is a document; its entries are inventory records. An entry names one software element and says what is known about it as shipped. Vulnerabilities, anomalies and risks are separate objects that point at the entry; they are not attributes of the document. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_architecture_implementation_software_structure` |
+
+
+## SoftwareBillOfMaterials
+
+```sysml
+part def SoftwareBillOfMaterials specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Software bill of materials definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_implementation_software_structure` |
 
 
@@ -287,20 +351,58 @@ connection def DependsOnSoup :> MemoRelationship
             attribute version : String;
         }
 
-        // Software data/content that may be stored or exchanged through ports.
-        abstract item def SoftwareItem specializes MemoItem {
+        // Data content that may be stored or exchanged through ports. Named
+        // DataItem, not SoftwareItem: IEC 62304 uses "software item" for a
+        // structural part of a program (a SoftwareElement here), and the item
+        // family is the exchanged or stored value.
+        abstract item def DataItem specializes MemoItem {
             attribute schemaIdentifier : String;
             attribute schemaVersion : String;
             attribute :>> encoding : String;
             attribute :>> timestampRequired : Boolean;
         }
 
-        item def SBOMEntry specializes SoftwareItem {
+        // Off-the-shelf software: acquired, not developed here. The identity of
+        // what was acquired is owned once, here, and SOUP (IEC 62304 §3.29, an
+        // OTS item whose development process is unknown) narrows it. SOUP is a
+        // specialization, not a module-kind value: an internally developed module
+        // is never SOUP. The `soup*` attributes and `moduleKind = soup` on
+        // SoftwareModule remain what the closure rules read until they are
+        // moved onto these types.
+        part def OTSSoftwareModule specializes SoftwareModule {
+            attribute supplier : String;
+            attribute licenseExpression : String;
+            attribute packageUrl : String;
+            attribute checksum : String;
+        }
+        part def SOUPSoftwareModule specializes OTSSoftwareModule;
+
+        enum def SbomFormatKind {
+            enum spdx;
+            enum cycloneDx;
+            enum other;
+        }
+
+        // An SBOM is a document; its entries are inventory records. An entry
+        // names one software element and says what is known about it as shipped.
+        // Vulnerabilities, anomalies and risks are separate objects that point at
+        // the entry; they are not attributes of the document.
+        part def SBOMEntry specializes MemoPart {
             attribute componentName : String;
             attribute version : String;
             attribute supplier : String;
             attribute license : String;
             attribute hash : String;
+            attribute packageUrl : String;
+            attribute bomReference : String;
+            ref inventoriedElement : SoftwareElement[0..1];
+        }
+        part def SoftwareBillOfMaterials specializes MemoPart {
+            attribute sbomFormat : SbomFormatKind;
+            attribute specVersion : String;
+            attribute generationTool : String;
+            attribute generatedOn : String;
+            part sbomEntry : SBOMEntry[0..*];
         }
 
         // `ModuleUses` is native `dependency` (R10-S6): write

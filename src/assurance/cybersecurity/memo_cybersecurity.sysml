@@ -17,6 +17,7 @@ package memo_assurance_cybersecurity {
     private import memo_assurance_safety_risk::*;
     private import memo_assurance_verification_validation::*;
     private import memo_architecture_operational_scenarios::*;
+    private import memo_architecture_implementation_software_structure::SBOMEntry;
 
     part def CybersecurityAsset specializes MemoPart {
         attribute assetKind : AssetKind;
@@ -138,11 +139,6 @@ package memo_assurance_cybersecurity {
         enum invalid;
         enum retired;
     }
-    enum def SbomFormatKind {
-        enum spdx;
-        enum cycloneDx;
-        enum other;
-    }
     enum def VulnerabilityDispositionKind {
         enum open;
         enum mitigated;
@@ -196,29 +192,50 @@ package memo_assurance_cybersecurity {
         attribute validity : CyberAssumptionValidityKind;
     }
 
-    part def SBOMComponent specializes MemoPart {
-        attribute componentName : String;
-        attribute componentVersion : String;
-        attribute supplier : String;
-        attribute licenseExpression : String;
-        attribute packageUrl : String;
-        attribute bomReference : String;
-        attribute sbomFormat : SbomFormatKind;
-    }
-
     // The path's narrative is the inherited `pathSummary`.
     action def AttackPath specializes OperativeScenario {
         attribute entryPoint : String;
         attribute attackGoal : String;
     }
 
-    part def PenTestFinding specializes MemoEvidence {
+    // Security assessment: a case is the planned activity (penetration test,
+    // static or dynamic analysis, composition analysis), a report is what it
+    // produced, and a finding is one result. Findings stay separate objects so
+    // each can be traced to a vulnerability, a risk and a mitigation.
+    enum def SecurityAssessmentMethodKind {
+        enum penetrationTest;
+        enum sast;
+        enum dast;
+        enum sca;
+    }
+    part def SecurityAssessmentCase specializes MemoPart {
+        attribute assessmentMethod : SecurityAssessmentMethodKind;
+        attribute assessmentScope : String;
+        attribute toolName : String;
+        attribute toolVersion : String;
+    }
+    part def SecurityAssessmentReport specializes MemoEvidence {
+        attribute reportDate : String;
+        attribute assessor : String;
+    }
+    part def SecurityFinding specializes MemoEvidence {
         attribute findingIdentifier : String;
         attribute severity : CriticalityKind;
         attribute cvssBaseScore : Real;
         attribute cvssVector : String;
         attribute findingStatus : PenTestFindingStatusKind;
         attribute retestDate : String;
+    }
+    part def PenTestFinding specializes SecurityFinding;
+    part def SASTFinding specializes SecurityFinding {
+        attribute weaknessReference : String;
+        attribute sourceLocation : String;
+    }
+    part def DASTFinding specializes SecurityFinding {
+        attribute testedEndpoint : String;
+    }
+    part def SCAFinding specializes SecurityFinding {
+        attribute affectedPackage : String;
     }
 
     action def PostmarketProcess specializes MemoAction {
@@ -367,7 +384,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def IdentifiesVulnerability :> MemoRelationship {
-        end finding : PenTestFinding :>> source;
+        end finding : SecurityFinding :>> source;
         end identifiedVulnerability : Vulnerability :>> target;
     }
     abstract connection identifiesVulnerabilityLinks : IdentifiesVulnerability[*];
@@ -377,19 +394,19 @@ package memo_assurance_cybersecurity {
         :>> baseType = identifiesVulnerabilityLinks meta SysML::Usage;
     }
 
-    connection def AffectsSBOMComponent :> MemoRelationship {
+    connection def AffectsSBOMEntry :> MemoRelationship {
         end vulnerability : Vulnerability :>> source;
-        end affectedComponent : SBOMComponent :>> target;
+        end affectedComponent : SBOMEntry :>> target;
     }
-    abstract connection affectsSBOMComponentLinks : AffectsSBOMComponent[*];
-    metadata def <affectsSBOMComponent> AffectsSBOMComponentMetadata :> SemanticMetadata {
+    abstract connection affectsSBOMEntryLinks : AffectsSBOMEntry[*];
+    metadata def <affectsSBOMEntry> AffectsSBOMEntryMetadata :> SemanticMetadata {
         :> annotatedElement : SysML::ConnectionDefinition;
         :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = affectsSBOMComponentLinks meta SysML::Usage;
+        :>> baseType = affectsSBOMEntryLinks meta SysML::Usage;
     }
 
     connection def DemonstratesAttackPath :> MemoRelationship {
-        end finding : PenTestFinding :>> source;
+        end finding : SecurityFinding :>> source;
         end demonstratedPath : AttackPath :>> target;
     }
     abstract connection demonstratesAttackPathLinks : DemonstratesAttackPath[*];
@@ -421,14 +438,47 @@ package memo_assurance_cybersecurity {
         :>> baseType = conditionsCyberElementLinks meta SysML::Usage;
     }
 
-    connection def MonitorsSBOMComponent :> MemoRelationship {
+    connection def MonitorsSBOMEntry :> MemoRelationship {
         end postmarketProcess : PostmarketProcess :>> source;
-        end monitoredComponent : SBOMComponent :>> target;
+        end monitoredComponent : SBOMEntry :>> target;
     }
-    abstract connection monitorsSBOMComponentLinks : MonitorsSBOMComponent[*];
-    metadata def <monitorsSBOMComponent> MonitorsSBOMComponentMetadata :> SemanticMetadata {
+    abstract connection monitorsSBOMEntryLinks : MonitorsSBOMEntry[*];
+    metadata def <monitorsSBOMEntry> MonitorsSBOMEntryMetadata :> SemanticMetadata {
         :> annotatedElement : SysML::ConnectionDefinition;
         :> annotatedElement : SysML::ConnectionUsage;
-        :>> baseType = monitorsSBOMComponentLinks meta SysML::Usage;
+        :>> baseType = monitorsSBOMEntryLinks meta SysML::Usage;
+    }
+
+    connection def ProducesReport :> MemoRelationship {
+        end assessmentCase : SecurityAssessmentCase :>> source;
+        end producedReport : SecurityAssessmentReport :>> target;
+    }
+    abstract connection producesReportLinks : ProducesReport[*];
+    metadata def <producesReport> ProducesReportMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = producesReportLinks meta SysML::Usage;
+    }
+
+    connection def ReportsFinding :> MemoRelationship {
+        end report : SecurityAssessmentReport :>> source;
+        end reportedFinding : SecurityFinding :>> target;
+    }
+    abstract connection reportsFindingLinks : ReportsFinding[*];
+    metadata def <reportsFinding> ReportsFindingMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = reportsFindingLinks meta SysML::Usage;
+    }
+
+    connection def IdentifiesAffectedEntry :> MemoRelationship {
+        end scaFinding : SCAFinding :>> source;
+        end affectedEntry : SBOMEntry :>> target;
+    }
+    abstract connection identifiesAffectedEntryLinks : IdentifiesAffectedEntry[*];
+    metadata def <identifiesAffectedEntry> IdentifiesAffectedEntryMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = identifiesAffectedEntryLinks meta SysML::Usage;
     }
 }
