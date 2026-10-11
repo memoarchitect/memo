@@ -184,7 +184,8 @@ part def Archetype :> MemoPart
         // as above; every rule that enforces a clause of a standard
         // (`targetStandard`, written `ref :>> targetStandard = <standard>;`); or every
         // rule whose subject kind sits in a layer (`targetCategory`, a layer
-        // namespace as `includedLayer` spells it). A selection of several rules is
+        // namespace by name, `"memo_assurance_safety_risk"`: a value cannot
+        // reference a package, so this one stays a string). A selection of several rules is
         // still one decision with one rationale and one approval, so the tailoring
         // record reports it once, with the rules it reached; a rule added later that
         // the selection matches is covered by it. An invariant in the selection keeps
@@ -212,34 +213,34 @@ part def Archetype :> MemoPart
             // multiplicity the resolver has conflict semantics for, so the model
             // does not permit expressing it.
             ref baseMethodology : MethodologyDefinition[0..1];
-            // Whether the inclusion lists below are the whole story. Under
-            // `explicit`, an empty list selects nothing.
+            // Whether the selection below is the whole story. Under `explicit`,
+            // what is not selected is out of scope; under `allAvailable`, every
+            // package the project resolved is in scope and the methodology selects
+            // nothing itself.
             attribute scopeMode : ScopeModeKind;
-            // A methodology is an inclusion set. Layer entries normally name a
-            // public MEMO layer namespace; module entries may name any qualified
-            // package available to the project, including packages outside MEMO.
-            attribute includedLayer : String[0..*];
-            attribute includedModule : String[0..*];
-            // The extensions this methodology builds on, each named by its own
-            // methodology. An extension's methodology lists every package the
-            // extension ships, so naming the extension selects all of them; nobody
-            // retypes another extension's package names. What an included
-            // methodology contributes is its own selection — its inclusion lists
-            // and, transitively, the extensions IT includes — never its base
-            // chain (`baseMethodology` stays single inheritance, and including an
-            // extension must not widen scope to whatever its base selects) and
-            // never its rule policies (tailoring belongs to the selected chain
-            // and the project).
-            ref includedExtension : MethodologyDefinition[0..*];
+            // The packages a methodology selects are not listed here. They are
+            // what the package declaring the methodology PUBLICLY imports:
+            //
+            //     public import memo_architecture_logical::*;   // a layer
+            //     public import memo_assurance_safety_risk::*;  // one package
+            //     public import memo_extension_ros::*;          // an extension
+            //
+            // A public import is how SysML says a package passes another's members
+            // on to whoever imports it, so the selection is the import, followed
+            // transitively through public imports; a private import is the
+            // package's own business and selects nothing. A layer and an extension
+            // each have one package that publicly imports all of theirs. Because
+            // the package is the selection, a package declares one methodology.
+            // A project adds to the selection the same way, from its entrypoint
+            // package. A misspelled package is an import the compiler rejects.
+            //
             // The standards, artifact kinds and viewpoints a methodology selects
             // are TYPED: a standard is a RegulatoryStandard, an artifact kind is an
             // ArtifactKind literal, a viewpoint is a MemoViewpoint. They were
             // strings ("ISO 14155", "RiskManagementPlan", "VP-CTX"), and three
             // standards and an artifact kind in the GPCA methodology named nothing
             // the ontology declares: a string that matches nothing selects nothing,
-            // and nothing said so. Now the compiler does. (Modules and layers name
-            // packages and namespaces, which SysML cannot reference as values; the
-            // resolver reports those that match nothing.)
+            // and nothing said so. Now the compiler does.
             ref includedStandard : RegulatoryStandard[0..*];
             attribute includedArtifactKind : ArtifactKind[0..*];
             ref includedViewpoint : MemoViewpoint[0..*];
@@ -253,26 +254,18 @@ part def Archetype :> MemoPart
         // instances of it.
         part def ResolvedMethodology :> MemoPart {
             attribute version : String;
-            // The effective inclusion set after the project binding has added any
-            // project- or supplier-specific modules.
-            attribute includedLayer : String[0..*];
-            attribute includedModule : String[0..*];
         }
 
         part def ProjectMethodBinding :> MemoPart {
             attribute projectName : String;
             ref selectedMethodology : MethodologyDefinition;
-            // Additive: what the project adds on top of the selected methodology.
-            // An empty list under `explicit` means no project additions.
+            // `allAvailable` widens the project to every package it resolved,
+            // whatever the methodology selects; anything else leaves the
+            // methodology's mode in force. A project ADDS packages to the
+            // selection by importing them publicly in the package that declares
+            // this binding (`public import memo_extension_ros::*;`), the same way
+            // a methodology selects them. There is no list to keep beside it.
             attribute scopeMode : ScopeModeKind;
-            // Project bindings may add project or supplier modules to the selected
-            // methodology without requiring those packages to live under memo::.
-            // A MEMO extension is not added here by its package names: it is
-            // added by `includedExtension`, which brings every package it ships.
-            attribute includedModule : String[0..*];
-            // The extensions this project uses, each named by its methodology —
-            // a typed reference, so a misspelled extension is a reference error.
-            ref includedExtension : MethodologyDefinition[0..*];
             // The submission regimes this project targets, declared once here.
             // Everything downstream that needs to know which standards apply —
             // `memo standards check`, the standards checklist, the Architect gap

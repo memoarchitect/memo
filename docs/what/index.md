@@ -272,21 +272,20 @@ changing where those facts are defined.
 A MEMO methodology is a named inclusion set. It selects the architecture layers
 and ontology modules that a project will use.
 
-| Inclusion | What the methodology names | Example |
+| Inclusion | What the methodology's package imports | Example |
 |---|---|---|
-| **Architecture layer** | a public layer namespace and the modules collected beneath it | `memo::architecture::operational`, `memo::architecture::functional` |
-| **MEMO module** | a specific public ontology package | `memo::assurance::safety_risk` |
-| **External module** | any qualified package made available to the project alongside MEMO | `acme::infusion_extension` |
+| **Architecture layer** | the layer's package, which publicly imports every package in the layer | `public import memo_architecture_operational::*;` |
+| **MEMO module** | a specific public ontology package | `public import memo_assurance_safety_risk::*;` |
+| **Extension** | the extension's facade, which publicly imports all of its packages | `public import memo_extension_ros::*;` |
+| **External module** | any package made available to the project alongside MEMO | `public import acme_infusion_extension::*;` |
 
-The same inclusion mechanism is used for MEMO and external modules. A project
-binding selects a methodology and may add project- or supplier-specific module
-names. The resolved methodology is therefore the complete set of layer and
-module namespaces available to that project.
-
-The ontology represents these selections through the `includedLayer` and
-`includedModule` properties of `MethodologyDefinition` and
-`ResolvedMethodology`. `includedModule` accepts qualified package names both
-inside and outside the `memo::` namespace.
+There is one inclusion mechanism, and it is SysML's own: a **public import**.
+A methodology selects what the package that declares it publicly imports, and a
+public import passes on whatever the imported package publicly imports in
+turn. A project binding selects a methodology and adds to its selection the
+same way, by publicly importing packages in the package that declares the
+binding. A private import makes names visible to the importing package and
+selects nothing.
 
 ## How the parts work together
 

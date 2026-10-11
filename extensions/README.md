@@ -1,25 +1,24 @@
 # Extensions
 
 An extension is a **way to model**, not a sample. It is a reusable ontology
-package that specializes the base and is selected by a methodology or a project
-binding — so extensions live here, beside `src/`, and not under `examples/`.
+package that specializes the base and is brought into a project by importing
+it — so extensions live here, beside `src/`, and not under `examples/`.
 Examples *use* extensions; `examples/ros-mobile-robot` demonstrates one.
 
-MEMO defines no extension metaclass. An extension is a plain SysML package:
+MEMO defines no extension metaclass and no extension methodology. An extension
+is plain SysML packages:
 
 - outside `src/` and outside the `memo::` namespace;
 - with a `memo.package.yaml` carrying identity and `sysmlDir` only (the semantic
   fields `type` / `extends` / `usage` / `ontologies` / `methodology` / `modules`
   are rejected);
 - whose SysML **specializes** base types;
-- plus a `MethodologyDefinition` naming `baseMethodology`, `scopeMode`, every
-  package the extension ships in `includedModule`, and the extensions it builds
-  on in `includedExtension`.
+- with one **facade** package, `memo_extension_<directory>`, that publicly
+  imports every other package the extension ships and every extension it builds
+  on.
 
-That methodology usage **is** the extension as the model sees it: a project
-names it, another extension names it, and nothing else identifies an extension.
-A metaclass would restate what the methodology already carries — a version, a
-domain, an inclusion set — so there is none.
+The facade **is** the extension as the model sees it: a project imports it,
+another extension imports it, and nothing else identifies an extension.
 
 `template/` is the skeleton. The build round-trips every extension into its own
 KPAR (`memo-extension-<directory>`) and resolves the whole tree with `syside check`,
@@ -35,54 +34,47 @@ is read from the files, not listed twice). `ros` therefore declares
 neither. Add an `import` of another extension and the next build records the
 dependency; remove it and the dependency goes.
 
-## An extension's packages are listed once, by the extension
-
-An extension usually ships several packages — `aadl` has a facade,
-`memo_extension_aadl_runtime` and `memo_extension_aadl_correspondence`. Its
-methodology's `includedModule` lists **every one of them except the methodology
-package itself**, by exact name. Module matching is exact on purpose (a module
-may name a package outside MEMO, where a prefix test would capture a
-neighbour), so a facade alone does not select the packages it re-exports: the
-packages that declare the definitions and rules have to be listed, and the
-extension is the one place that knows them. A test holds the list equal to the
-packages the directory declares.
-
-## Composition: a project names extensions, not packages
+## One import brings an extension in
 
 ```sysml
-private import memo_extension_ros_methodology::rosExtensionMethod;
+package memo_examples_ros_mobile_robot_project {
+    public import memo_extension_ros::*;
 
-part projectBinding : ProjectMethodBinding {
-    ref :>> selectedMethodology = mdDefaultDefinition;
-    attribute :>> scopeMode = ScopeModeKind::explicit;
-    ref :>> includedExtension = rosExtensionMethod;
+    part projectBinding : ProjectMethodBinding {
+        ref :>> selectedMethodology = mdDefaultDefinition;
+    }
 }
 ```
 
-`includedExtension` is a `MethodologyDefinition[0..*]` reference on both the
-binding and a methodology. The resolver adds each included methodology's own
-selection — its inclusion lists, and transitively the extensions *it* includes —
-to the project's scope. It does **not** follow the included methodology's
-`baseMethodology` (single inheritance, `[0..1]`, stays the only chain, and
-including an extension must not widen a narrow methodology to whatever the
-extension's base selects), and it does not apply its rule policies. A misspelled
-reference is a reference error from the compiler (SysIDE and OpenSysML both
-report it); a reference the resolver cannot match to a loaded methodology is a
-`missing-extension` diagnostic. Either fails `memo validate`. Extensions that
-include each other contribute once each.
+A methodology selects the packages that the package declaring it **publicly
+imports**, followed through their public imports in turn; a project adds to that
+selection the same way, from the package that declares its binding. That is
+SysML's own meaning of a public import — it passes the imported members on to
+whoever imports the importing package — so there is no list of package names
+beside it, and a misspelled package is an import the compiler rejects. A
+private import makes the names visible to the importing package and selects
+nothing: the ROS package privately imports the architecture packages it
+specializes, and selecting ROS does not select them.
 
-**A dependency between extensions is declared once and derived once, and the
-two are held equal.** `ros` declares
-`ref :>> includedExtension = (messagingExtensionMethod, containerExtensionMethod);`.
-That reference needs an import of each methodology, and the import is what the
-KPAR build reads, so the declared dependency always appears in the KPAR usage.
-The other direction — an extension that imports another but does not include
-it, which would leave the dependency's packages out of an explicit scope — is
-caught by a test that compares the extensions a directory imports with the ones
-its methodology includes.
+So an extension's facade publicly imports what selecting the extension has to
+select:
 
-`ProjectMethodBinding.includedModule` stays, for a project's or a supplier's own
-packages outside MEMO. A MEMO extension's package names do not go there.
+- **its own packages.** `aadl`'s facade publicly imports
+  `memo_extension_aadl_runtime` and `memo_extension_aadl_correspondence`, the
+  packages that declare its definitions and rules. A facade that left one out
+  would leave it out of every project that imports the extension.
+- **the extensions it builds on.** `ros` publicly imports `memo_extension_messaging`
+  and `memo_extension_container`. The dependency is declared once, by that
+  import, and it is the same line the KPAR build reads to record the dependency,
+  so the two cannot disagree.
+
+A test holds each facade's public imports equal to the packages the directory
+declares plus the extensions it imports, and checks that every example using an
+extension's definitions publicly imports its facade from the entrypoint, or one
+whose facade imports it.
+
+A project's or a supplier's own packages outside MEMO are added the same way: a
+public import in the binding's package.
 
 ## Rule 1 — use native mechanisms first; extension relations specialize base ones
 

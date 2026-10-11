@@ -7,11 +7,13 @@
 // relation. `BuildsInto`, `DeploysTo`, and `ProvidesEnvironment` are reused
 // exactly as the base declares them.
 //
-// Composition is by MODULE LIST, not by chaining. `baseMethodology` is [0..1],
-// but `includedModule` is [0..*], so this extension's methodology names
-// `memo_extension_messaging` and `memo_extension_container` alongside its own
-// module. ROS communication specializes native MEMO item, port, and interface
-// families; it does not invent publish/subscribe relations.
+// Composition is by import. ROS builds on the messaging and container
+// extensions and imports them PUBLICLY, so a project that imports
+// `memo_extension_ros` has all three: their definitions are visible and their
+// packages are selected. The dependency is stated once, here, and the KPAR
+// build reads the same lines to record it. ROS communication specializes
+// native MEMO item, port, and interface families; it does not invent
+// publish/subscribe relations.
 package memo_extension_ros {
     private import ScalarValues::*;
 
@@ -21,8 +23,8 @@ package memo_extension_ros {
     private import memo_architecture_logical_interfaces::*;
     private import memo_architecture_implementation_software_structure::*;
     private import memo_architecture_implementation_software_runtime::*;
-    private import memo_extension_messaging::*;
-    private import memo_extension_container::*;
+    public import memo_extension_messaging::*;
+    public import memo_extension_container::*;
 
     // ── Quality of service ──────────────────────────────────────────────
     //

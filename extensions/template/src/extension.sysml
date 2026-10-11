@@ -11,30 +11,15 @@
 //   2. A relation an extension declares specializes a base relation. It never
 //      roots independently.
 //
-// This package used to bind `baseMethodName = "MedicalDeviceLightDefault"` — a
-// pre-flip spelling that resolves to nothing. It went unnoticed for as long as
-// extensions lived under `examples/`, where the build did not check them; the
-// build checks `extensions/` now, and reported it on the first run.
+//   3. This package is the extension's facade: the one package a project
+//      imports. It publicly imports every other package the extension ships
+//      (`public import memo_extension_template_<sub>::*;`) and every extension
+//      it builds on (`public import memo_extension_<other>::*;`). A public
+//      import is what passes those packages on, so importing this one selects
+//      the whole extension, and the KPAR build reads the same imports to
+//      record the dependency. There is no list of package names to keep
+//      beside it.
 package memo_extension_template {
-    private import ScalarValues::*;
-    private import memo_core_enumerations::*;
-    private import memo_methodology_core::*;
-    private import memo_methodology_profiles::*;
-
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    part extensionMethod : MethodologyDefinition {
-        @MemoIdentity { :>> providedId = "EXT-METH-001"; }
-        attribute :>> version = "0.1.0";
-        attribute :>> domain = "project extension";
-        doc /* Adds a project or domain package to the selected MEMO methodology. */
-        // The base is a typed SysML reference, not a name held in sync by hand.
-        ref :>> baseMethodology = mdDefaultDefinition;
-        attribute :>> scopeMode = ScopeModeKind::explicit;
-        // Every package the extension ships, by its exact name. A project
-        // names the extension (`includedExtension = extensionMethod`) and
-        // never these strings. An extension this one builds on is named with
-        // `ref :>> includedExtension = (...)`, beside an import of it.
-        attribute :>> includedModule = "memo_extension_template";
-    }
+    // Definitions go here, each prefixed `Template`; sub-packages and the
+    // extensions this one builds on are publicly imported here.
 }

@@ -69,9 +69,10 @@
         // The default methodology deliberately selects everything the project's
         // resolved reusable packages provide. That is what `scopeMode` exists to
         // say: `allAvailable` is an authored decision, not an empty list that the
-        // resolver silently reads as "allow everything". Under `allAvailable` the
-        // inclusion lists must stay empty — authoring both would leave two
-        // competing answers to the same question.
+        // resolver silently reads as "allow everything". Under `allAvailable` this
+        // package imports nothing publicly — a methodology selects by its
+        // package's public imports, and stating both would leave two competing
+        // answers to the same question.
         //
         // Before the flip this methodology carried a narrower `includedLayer` /
         // `includedModule` pair that nothing consumed: effective scope came from
