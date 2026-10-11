@@ -16,7 +16,18 @@ MEMO defines no extension metaclass. An extension is a plain SysML package:
   own `includedModule`.
 
 `template/` is the skeleton. The build round-trips every extension into its own
-KPAR and resolves it with `syside check`, exactly as it does the base.
+KPAR (`memo-extension-<directory>`) and resolves the whole tree with `syside check`,
+exactly as it does the base.
+
+## Each extension is its own package
+
+An extension is built, versioned and depended on by itself. Its KPAR declares
+what it uses: the base ontology and default methodology, the SysML libraries,
+and **every other extension its source imports** (`import memo_extension_<name>`
+is read from the files, not listed twice). `ros` therefore declares
+`memo-extension-messaging` and `memo-extension-container`; `clinical` declares
+neither. Add an `import` of another extension and the next build records the
+dependency; remove it and the dependency goes.
 
 ## Composition happens at the project binding
 

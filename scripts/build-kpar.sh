@@ -17,17 +17,41 @@ set -uo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-# Three independently round-tripped projects. `extensions` is one of them
-# because an extension is ontology — a reusable package that specializes the
-# base — not sample content. If an extension does not build and resolve, the
-# extension point is not real, and the build is where that has to show.
-PROJECTS=("." "src/methodology" "extensions")
-PROJECT_NAMES=("memo-ontology" "memo-methodology-default" "memo-extensions")
+# Independently round-tripped projects: the ontology, the default methodology,
+# and EACH extension as its own KPAR. An extension is ontology — a reusable
+# package that specializes the base — not sample content, and it is shipped,
+# versioned and depended on by itself. If an extension does not build and
+# resolve against only what it declares, the extension point is not real, and
+# the build is where that has to show.
+#
+# An extension's usage is the base plus the OTHER extensions it imports, read
+# from its own `import memo_extension_<name>` lines. That is the dependency
+# the source already states; it is recorded in the KPAR so a consumer pulls
+# what the extension needs and nothing it does not.
+BASE_USAGE='{"resource":"urn:kpar:memo-ontology"},{"resource":"urn:kpar:memo-methodology-default"},{"resource":"urn:kpar:semantic-library"},{"resource":"urn:kpar:systems-library"},{"resource":"urn:kpar:metadata-library"}'
+PROJECTS=("." "src/methodology")
+PROJECT_NAMES=("memo-ontology" "memo-methodology-default")
 PROJECT_USAGE=(
   '[{"resource":"urn:kpar:semantic-library"},{"resource":"urn:kpar:systems-library"},{"resource":"urn:kpar:metadata-library"}]'
   '[{"resource":"urn:kpar:memo-ontology"},{"resource":"urn:kpar:semantic-library"},{"resource":"urn:kpar:systems-library"}]'
-  '[{"resource":"urn:kpar:memo-ontology"},{"resource":"urn:kpar:memo-methodology-default"},{"resource":"urn:kpar:semantic-library"},{"resource":"urn:kpar:systems-library"},{"resource":"urn:kpar:metadata-library"}]'
 )
+EXTENSION_DIRS=()
+for d in "$REPO_ROOT"/extensions/*/; do
+  [ -d "${d}src" ] && EXTENSION_DIRS+=("$(basename "$d")")
+done
+for ext in "${EXTENSION_DIRS[@]}"; do
+  usage="$BASE_USAGE"
+  for other in "${EXTENSION_DIRS[@]}"; do
+    [ "$other" = "$ext" ] && continue
+    # `import memo_extension_<other>` or `memo_extension_<other>_<sub>`.
+    if grep -rqE "import memo_extension_${other}(_[a-z_]+)?(::|;)" "$REPO_ROOT/extensions/$ext" 2>/dev/null; then
+      usage="$usage,{\"resource\":\"urn:kpar:memo-extension-${other}\"}"
+    fi
+  done
+  PROJECTS+=("extensions/$ext")
+  PROJECT_NAMES+=("memo-extension-$ext")
+  PROJECT_USAGE+=("[$usage]")
+done
 
 if ! command -v sysand >/dev/null 2>&1; then
   echo "✖ sysand not found on PATH — install from https://docs.sysand.org/" >&2
@@ -76,7 +100,7 @@ PY
   # SysAnd resolves the project license from LICENSES/<SPDX-ID>.txt relative
   # to .project.json, so stage the repository's MIT license with the sources.
   mkdir -p "$staging/LICENSES"
-  cp "$dir/LICENSES/MIT.txt" "$staging/LICENSES/MIT.txt"
+  cp "$REPO_ROOT/LICENSES/MIT.txt" "$staging/LICENSES/MIT.txt"
 
   version="$(node -p "require('$REPO_ROOT/package.json').version")"
   printf '{\n  "name": "%s",\n  "version": "%s",\n  "license": "MIT",\n  "usage": %s\n}\n' \
