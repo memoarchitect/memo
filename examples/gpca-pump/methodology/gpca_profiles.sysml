@@ -30,6 +30,13 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
     private import memo_methodology_profiles::*;
     private import memo_core_enumerations::*;
     private import memo_rules_closure::*;
+    private import memo_artifacts_standards_iso_14971::iso14971;
+    private import memo_artifacts_standards_iec_62304::iec62304;
+    private import memo_artifacts_standards_cfr_21_820::cfr21Part820;
+    private import memo_artifacts_standards_iso_13485::iso13485;
+    private import memo_viewpoints_context_context_viewpoint::contextViewpoint;
+    private import memo_viewpoints_logical_logical_viewpoint::logicalArchitectureViewpoint;
+    private import memo_viewpoints_risk_risk_viewpoint::riskViewpoint;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
@@ -71,19 +78,22 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
             "memo_rules_ontology"
         );
 
-        attribute :>> includedStandard = (
-            "ISO 14971",
-            "IEC 62304",
-            "21 CFR 820",
-            "ISO 13485",
-            "ISO 14155",
-            "IEC 62366",
-            "IEC 60601-1"
+        // Typed. The standards GPCA also names, ISO 14155, IEC 62366 and
+        // IEC 60601-1, have no RegulatoryStandard in the ontology yet, and the
+        // artifact kind "RiskManagementPlan" is no ArtifactKind literal; as
+        // strings they selected nothing and nothing said so.
+        ref :>> includedStandard = (
+            iso14971,
+            iec62304,
+            cfr21Part820,
+            iso13485
         );
 
-        attribute :>> includedArtifactKind = ("RiskManagementPlan");
-
-        attribute :>> includedViewpoint = ("VP-CTX", "VP-LOG", "VP-RISK");
+        ref :>> includedViewpoint = (
+            contextViewpoint,
+            logicalArchitectureViewpoint,
+            riskViewpoint
+        );
 
         part disableThreatMitigation : RulePolicy :> rulePolicy {
             ref :>> targetRule : ThreatMitigationRule;
