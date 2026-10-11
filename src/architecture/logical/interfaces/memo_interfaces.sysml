@@ -51,40 +51,40 @@ package memo_architecture_logical_interfaces {
     // DigitalInterface / SPIInterface / RestInterface … hierarchy: those were
     // 20+ classes that differed only in the value of `protocol`.
 
+    // The common contract of an interface, whatever layer it is on: what
+    // crosses, which way, under what timing, and how much it matters to
+    // safety and security. It is abstract. An interface is a LOGICAL one
+    // (between components, in terms of what is exchanged), a SOFTWARE one
+    // (a contract between software items) or a PHYSICAL one (between
+    // hardware ports), and those are three different things that share
+    // attributes, not one thing with three sets of optional fields. Each
+    // specialization adds only what its layer can state: PhysicalInterface
+    // the signal and the medium, SoftwareInterface the API.
+    //
     // Specializes the standard library interface as well as MEMO's base,
     // rather than shadowing it — see the note on UseCase.
-    interface def Interface specializes MemoInterface, Interfaces::Interface {
-        attribute interfaceKind : InterfaceKind;   // semantic + signaling family
+    abstract interface def Interface specializes MemoInterface, Interfaces::Interface {
+        attribute interfaceKind : InterfaceKind;   // what crosses
         attribute direction : DirectionKind;
         attribute protocol : String;               // "SPI", "CAN", "Ethernet", "REST", "4-20mA"
         attribute protocolSemantics : String;
+        attribute timeoutMs : Real[0..1];
+        attribute retryPolicy : String[0..1];
         attribute interactionPattern : String;     // request-response, pub-sub, streaming…
-        attribute signalKind : String;
         attribute timingSummary : String;
         attribute timingConstraint : String;
         attribute bandwidth : String;
-        attribute schemaReference : String;
         attribute compatibilitySummary : String;
         attribute isolationRequirement : String;
         attribute safetyRelevant : Boolean;
         attribute securityCriticality : CriticalityKind;
         // Applied-part/patient-contact interfaces (IEC 60601-1) must state it.
         attribute patientContactInterface : Boolean;
-        // ── hardware-signal descriptors (optional) ──
-        attribute directionality : DirectionKind[0..1];
-        attribute electricalStandard : String;
-        attribute nominalVoltageV : Real[0..1];
-        attribute nominalCurrentA : Real[0..1];
-        attribute bitRateBps : String;
-        attribute signaling : String;
-        attribute signalRange : String;
-        // ── software-API descriptors (optional) ──
-        attribute apiStyle : String;
     }
 
-    // Software interaction contracts specialize the native MEMO interface
-    // family. Concrete technologies add their protocol roles and message
-    // flows; ports remain the endpoints that components actually own.
+    // Software interaction contracts. Concrete technologies add their
+    // protocol roles and message flows; ports remain the endpoints that
+    // components actually own.
     abstract interface def SoftwareInterface specializes Interface {
         // `default`, not `=`. A bare `=` in a definition BINDS the value, and
         // a binding cannot be overridden by a usage — which asserted that
@@ -92,6 +92,8 @@ package memo_architecture_logical_interfaces {
         // inexpressible. A ROS topic publisher → subscriber is the obvious
         // counterexample, and it is the common case rather than an exotic one.
         attribute :>> direction default DirectionKind::inputOutput;
+        attribute apiStyle : String;
+        attribute schemaReference : String;
     }
 
     // A typed thing exchanged at a boundary. Concrete items such as

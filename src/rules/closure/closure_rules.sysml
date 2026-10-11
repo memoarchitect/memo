@@ -268,7 +268,7 @@ package memo_rules_closure {
         attribute appliesTo = "Interface";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Interface direction required for integration analysis.";
-        attribute predicateExpression = "attributes.direction != '' or attributes.directionality != ''";
+        attribute predicateExpression = "attributes.direction != ''";
         constraint { true }
     }
 
