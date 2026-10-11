@@ -12,6 +12,8 @@ package memo_architecture_realization_physical {
     // one. Their home package reflects their ROLE (deployment target), not
     // their nature.
     private import memo_architecture_implementation_hardware_common::PhysicalElement;
+    private import memo_architecture_implementation_hardware_common::PhysicalComponent;
+    private import memo_architecture_logical_structure::FlowContentKind;
     part def ProcessingNode specializes PhysicalElement {
         attribute nodeKind : ProcessingNodeKind;
         attribute processorArchitecture : String;
@@ -57,5 +59,47 @@ package memo_architecture_realization_physical {
         // interrupt line fail differently under overload.
         attribute portCategory : PortCategoryKind;
         attribute connectorType : String;
+    }
+
+    // ─── Connecting hardware ─────────────────────────────────────────────
+    //
+    // Hardware is parts with ports. A port on one part is joined to a port on
+    // another by a connection, and what moves over it is a flow. Both are the
+    // same two constructs the logical layer uses (see ComponentExchange in
+    // memo_architecture_logical_interfaces): the connection is the path and
+    // the flow is the transfer over it, between the same two ports.
+    //
+    //     part pump {
+    //         out port pMotorDrive : PhysicalPort { out item drive; }
+    //     }
+    //     part driver {
+    //         in port pMotorIn : PhysicalPort { in item drive; }
+    //     }
+    //     interface cnMotorDrive : PhysicalConnection
+    //         connect pump.pMotorDrive to driver.pMotorIn {
+    //         attribute :>> mediumKind = "shielded 6-core cable";
+    //         ref :>> carrier = motorHarness;
+    //     }
+    //     flow flMotorDrive : PhysicalFlow
+    //         from pump.pMotorDrive.drive to driver.pMotorIn.drive {
+    //         attribute :>> flowContent = FlowContentKind::energy;
+    //     }
+    //
+    // The connector hardware (a cable, a header, a tube) is a part in its own
+    // right (Cable, PhysicalConnectorPart, ...); the connection points at it
+    // through `carrier` instead of becoming it.
+    interface def PhysicalConnection specializes MemoInterface {
+        attribute interfaceKind : InterfaceKind;
+        attribute mediumKind : String;
+        attribute connectorStandard : String;
+        ref carrier : PhysicalComponent[0..1];
+        end sourcePort : PhysicalPort;
+        end targetPort : PhysicalPort;
+    }
+
+    // What crosses a physical connection: energy, signal, fluid, force.
+    abstract flow def PhysicalFlow {
+        attribute flowContent : FlowContentKind;
+        attribute rating : String;
     }
 }

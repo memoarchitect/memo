@@ -16,7 +16,7 @@ security boundary holds in the device that actually ships.
 **The execution platform.** A `ProcessingNode` is a processor that software runs
 on, and a `MemoryDevice` is the memory it uses. Both are physical things, a chip
 and a board; they live in this layer because of their role as deployment
-targets. A `PhysicalPort` is a physical boundary feature: the connector the
+targets. Hardware is wired as parts with ports: a `PhysicalConnection` joins two `PhysicalPort`s and a `PhysicalFlow` is what crosses it. A `PhysicalPort` is a physical boundary feature: the connector the
 outside world plugs into. A `RuntimeEnvironment` is the operating system or
 runtime a node provides.
 

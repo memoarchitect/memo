@@ -78,4 +78,11 @@ package memo_architecture_implementation_software_runtime {
         // a component belongs to without claiming to describe it.
     }
 
+    // A runtime service or process that exists only because an OTS module is
+    // deployed. Optional: a library the product links normally needs only the
+    // module.
+    part def OTSSoftwareComponent specializes SoftwareComponent {
+        ref sourceModule : OTSSoftwareModule[0..1];
+    }
+
 }

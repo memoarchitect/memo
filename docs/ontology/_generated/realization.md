@@ -36,6 +36,7 @@ flowchart LR
   NetworkMedium["NetworkMedium"]:::other
   EndToEndFlow["EndToEndFlow"]
   FlowSpecification["FlowSpecification"]
+  PhysicalPort["PhysicalPort"]
   SoftwareModule -->|BuildsInto| SoftwareDeploymentUnit
   SoftwareDeploymentUnit -->|DeploysTo| ProcessingNode
   ProcessingNode -->|ProvidesEnvironment| RuntimeEnvironment
@@ -43,6 +44,7 @@ flowchart LR
   ComponentExchange -->|ConnectionBinding| NetworkMedium
   EndToEndFlow -->|FlowComprisesSpec| FlowSpecification
   EndToEndFlow -->|FlowTraversesBinding| SoftwareDeploymentUnit
+  PhysicalPort -->|PhysicalConnection| PhysicalPort
   classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
 ```
 
@@ -57,6 +59,8 @@ flowchart LR
 | [`ConnectionBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#connectionbinding) | [`ComponentExchange`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#componentexchange) | [`NetworkMedium`](../sysml-api/architecture/implementation/hardware/electrical/memo_hardware_electrical.md#networkmedium) | AADL `actual_connection_binding`. Which physical medium carries a component exchange. The source is the ComponentExchange rather than the `ComponentConnects` link, because the exchange is the ELEMENT that owns the budget (§19.3) and a link instance is not something the graph c… |
 | [`FlowComprisesSpec`](../sysml-api/architecture/realization/deployment/memo_deployment.md#flowcomprisesspec) | [`EndToEndFlow`](../sysml-api/architecture/realization/deployment/memo_deployment.md#endtoendflow) | [`FlowSpecification`](../sysml-api/architecture/realization/deployment/memo_deployment.md#flowspecification) | The end-to-end flow is realized by an ordered flow specification, one segment per traversed component boundary (AADL flow-spec → end-to-end). |
 | [`FlowTraversesBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#flowtraversesbinding) | [`EndToEndFlow`](../sysml-api/architecture/realization/deployment/memo_deployment.md#endtoendflow) | [`SoftwareDeploymentUnit`](../sysml-api/architecture/realization/deployment/memo_deployment.md#softwaredeploymentunit) | Typed relationship from `EndToEndFlow` to `SoftwareDeploymentUnit`. |
+| [`PhysicalConnection`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicalconnection) | [`PhysicalPort`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicalport) | [`PhysicalPort`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicalport) | Typed relationship from `PhysicalPort` to `PhysicalPort`. |
+| [`PhysicalFlow`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicalflow) | *any element* | *any element* | What crosses a physical connection: energy, signal, fluid, force. |
 
 ### Relationships from elsewhere that reach this layer
 
