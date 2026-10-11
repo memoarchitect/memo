@@ -408,18 +408,18 @@ test('extensions are ontology, beside src — not examples', () => {
   assert.match(buildScript, /source_root = os\.path\.join\(root, 'src'\) if project == '\.' else root/);
 });
 
-test('every extension carries identity-only descriptor, methodology, and its own module', () => {
+test('every extension carries an identity-only descriptor and its facade package', () => {
   for (const dir of extensionDirs()) {
     const descriptor = read('extensions', dir, 'memo.package.yaml');
     assert.match(descriptor, dir === 'template' ? /^name:/m : /^name: ["']@memoarchitect\//m);
     assert.doesNotMatch(descriptor, /^(?:type|extends|usage|ontologies|methodology|modules):/m);
     const sources = walkSysml(join('extensions', dir));
     assert.ok(sources.length >= 1, `${dir} needs SysML source`);
-    const content = sources.map((file) => read(file)).join('\n');
-    // Every extension states its packages and its single base methodology.
-    assert.match(content, /includedModule = /, `${dir} must declare its included module`);
-    assert.doesNotMatch(stripComments(content), /baseMethodName/,
-      `${dir} uses the pre-flip baseMethodName spelling, which resolves to nothing`);
+    const content = stripComments(sources.map((file) => read(file)).join('\n'));
+    assert.match(content, new RegExp(`\\bpackage\\s+memo_extension_${dir}\\s*\\{`), `${dir} needs its facade package`);
+    // An extension is selected by importing it. A methodology of its own
+    // carried only a list of its packages, which the facade's imports state.
+    assert.doesNotMatch(content, /:\s*MethodologyDefinition\b/, `${dir} declares a methodology; its facade selects it`);
   }
   // The clinical extension is the worked example of specializing the base.
   const clinical = read('extensions', 'clinical', 'src', 'procedures', 'memo_clinical_procedures.sysml');
@@ -428,64 +428,60 @@ test('every extension carries identity-only descriptor, methodology, and its own
   assert.equal(existsSync(join(root, 'extensions', 'medical-products')), false);
 });
 
-// extensions/README.md, "An extension's packages are listed once, by the
-// extension" and "Composition". Module matching is exact, so a methodology that
-// lists only a facade leaves the packages declaring the definitions out of an
-// explicit scope; and an extension that imports another without including it
-// leaves that one's packages out too. Both lists are compared with what the
-// directory actually declares and imports.
-const quotedList = (content, attribute) => {
-  const match = stripComments(content).match(new RegExp(`${attribute}\\s*=\\s*(\\([^)]*\\)|"[^"]*"|[A-Za-z_]\\w*)`));
-  if (!match) return [];
-  return Array.from(match[1].matchAll(/"([^"]+)"|\b([A-Za-z_]\w*)\b/g), (m) => m[1] ?? m[2]).sort();
+// extensions/README.md, "One import brings an extension in". An extension is
+// brought into a project by importing its facade, `memo_extension_<name>`, and
+// a public import is what passes packages on: so the facade publicly imports
+// every other package the extension ships, and every other extension it
+// imports anywhere — the dependency the KPAR build records from those same
+// lines. A facade that left one out would leave that package out of every
+// project that imports the extension.
+const facadeImports = (dir) => {
+  const content = stripComments(walkSysml(join('extensions', dir)).map((f) => read(f)).join('\n'));
+  const facade = content.match(new RegExp(`\\bpackage\\s+memo_extension_${dir}\\s*\\{([\\s\\S]*?)^\\}`, 'm'));
+  assert.ok(facade, `extensions/${dir} declares no facade package memo_extension_${dir}`);
+  const imports = [...facade[1].matchAll(/^\s*(public|private)\s+import\s+(\w+)::\*;/gm)];
+  return {
+    content,
+    public: imports.filter(([, visibility]) => visibility === 'public').map(([, , pkg]) => pkg).sort(),
+  };
 };
 
-test('an extension methodology lists every package the extension ships, and the extensions it imports', () => {
-  const methodologyOf = new Map();
+test('an extension facade publicly imports every package it ships, and the extensions it imports', () => {
   for (const dir of extensionDirs()) {
-    const content = stripComments(walkSysml(join('extensions', dir)).map((f) => read(f)).join('\n'));
-    const usage = content.match(/part\s+(\w+)\s*:\s*MethodologyDefinition\b/);
-    assert.ok(usage, `${dir} declares no MethodologyDefinition usage`);
-    methodologyOf.set(dir, usage[1]);
+    const { content, public: publicImports } = facadeImports(dir);
+    const own = Array.from(content.matchAll(/\bpackage\s+(\w+)/g), (m) => m[1])
+      .filter((name) => name !== `memo_extension_${dir}`);
+    const others = extensionDirs().filter((other) => other !== dir
+      && new RegExp(`import memo_extension_${other}(_[a-z_]+)?(::|;)`).test(content))
+      .map((other) => `memo_extension_${other}`);
+    assert.deepEqual(publicImports, [...own, ...others].sort(),
+      `extensions/${dir}: its facade must publicly import exactly its own packages and the extensions it imports`);
   }
-  for (const dir of extensionDirs()) {
-    const content = stripComments(walkSysml(join('extensions', dir)).map((f) => read(f)).join('\n'));
-    const packages = Array.from(content.matchAll(/\bpackage\s+(\w+)/g), (m) => m[1])
-      .filter((name) => !name.endsWith('_methodology')).sort();
-    assert.deepEqual(quotedList(content, 'includedModule'), packages,
-      `extensions/${dir}: its methodology's includedModule must list exactly the packages it ships`);
-
-    const imported = extensionDirs().filter((other) => other !== dir
-      && new RegExp(`import memo_extension_${other}(_[a-z_]+)?(::|;)`).test(content));
-    const included = quotedList(content, 'includedExtension');
-    assert.deepEqual(included, imported.map((other) => methodologyOf.get(other)).sort(),
-      `extensions/${dir}: includedExtension must name exactly the extensions it imports, by methodology`);
-  }
-  // A project names an extension; it never retypes the extension's packages.
-  for (const file of walkSysml('examples')) {
-    assert.doesNotMatch(stripComments(read(file)), /includedModule\s*=[^;]*"memo_extension_/,
-      `${file} lists an extension's package as a module; name the extension with includedExtension`);
-  }
-  // And an example that uses an extension's definitions selects the extension,
-  // directly or through one it includes. surgical-closure-workflow used
-  // ClinicalProcedureWorkflow with no selection for it, and nothing said so.
-  const extensionOf = new Map([...methodologyOf].map(([dir, usage]) => [usage, dir]));
-  const includesOf = (dir) => quotedList(
-    stripComments(walkSysml(join('extensions', dir)).map((f) => read(f)).join('\n')), 'includedExtension');
+  // A project never retypes an extension's package names, and an example that
+  // uses an extension's definitions brings the extension in: its entrypoint
+  // publicly imports the facade, or one whose facade imports it.
+  // surgical-closure-workflow used ClinicalProcedureWorkflow with no selection
+  // for it, and nothing said so.
+  const dependsOn = new Map(extensionDirs().map((dir) => [dir, facadeImports(dir).public
+    .map((pkg) => pkg.match(/^memo_extension_([a-z]+)$/)?.[1]).filter((other) => other && other !== dir)]));
   for (const example of readdirSync(join(root, 'examples'), { withFileTypes: true }).filter((e) => e.isDirectory())) {
     const content = stripComments(walkSysml(join('examples', example.name)).map((f) => read(f)).join('\n'));
-    const used = extensionDirs().filter((dir) => new RegExp(`import memo_extension_${dir}(_(?!methodology)[a-z_]+)?(::|;)`).test(content));
+    assert.doesNotMatch(content, /"memo_extension_/, `examples/${example.name} names an extension package as a string`);
+    const used = extensionDirs().filter((dir) => new RegExp(`import memo_extension_${dir}(_[a-z_]+)?(::|;)`).test(content));
+    if (used.length === 0) continue;
+    const descriptor = read('examples', example.name, 'memo.package.yaml');
+    const entrypoint = stripComments(read('examples', example.name, descriptor.match(/^entrypoint:\s*(\S+)/m)[1]));
+    const pending = extensionDirs().filter((dir) => new RegExp(`public import memo_extension_${dir}::\\*;`).test(entrypoint));
     const selected = new Set();
-    const pending = quotedList(content, 'includedExtension').map((usage) => extensionOf.get(usage));
     while (pending.length > 0) {
       const dir = pending.pop();
-      if (!dir || selected.has(dir)) continue;
+      if (selected.has(dir)) continue;
       selected.add(dir);
-      pending.push(...includesOf(dir).map((usage) => extensionOf.get(usage)));
+      pending.push(...dependsOn.get(dir));
     }
     for (const dir of used) {
       assert.ok(selected.has(dir),
-        `examples/${example.name} imports the ${dir} extension but its binding does not include ${methodologyOf.get(dir)}`);
+        `examples/${example.name} uses the ${dir} extension but its entrypoint does not publicly import memo_extension_${dir}`);
     }
   }
 });
@@ -688,4 +684,27 @@ test('every package is named for the folder it lives in', () => {
     }
   }
   assert.deepEqual(wrong, [], `packages that do not follow their folder:\n${wrong.join('\n')}`);
+});
+
+// A layer is selected by importing it: `public import memo_architecture_logical::*;`
+// in a methodology's package. The layer package is a facade that publicly
+// imports every package in the layer's namespace — every package whose name
+// begins with the layer's name and an underscore — and nothing else, so a
+// package added to a layer is selected wherever the layer is, and a facade
+// cannot quietly select a neighbour.
+test('each architecture layer facade publicly imports exactly the packages in its namespace', () => {
+  const declared = new Set(walkSysml('src').flatMap((file) =>
+    [...read(file).matchAll(/^package\s+(\w+)/gm)].map(([, name]) => name)));
+  for (const layer of ['operational', 'functional', 'logical', 'implementation', 'realization']) {
+    const name = `memo_architecture_${layer}`;
+    const source = read('src', 'architecture', layer, `${name}.sysml`);
+    assert.match(source, new RegExp(`^package ${name} \\{`, 'm'));
+    const imported = [...source.matchAll(/^\s*(public|private)\s+import\s+(\w+)::\*;/gm)];
+    assert.deepEqual(imported.filter(([, visibility]) => visibility !== 'public').map(([, , pkg]) => pkg), [],
+      `${name} selects by public import only`);
+    const expected = [...declared].filter((pkg) => pkg.startsWith(`${name}_`)).sort();
+    assert.deepEqual(imported.map(([, , pkg]) => pkg).sort(), expected, `${name} imports its namespace`);
+    assert.doesNotMatch(source.replace(/\/\/.*$/gm, ''), /\b(part|item|attribute|port|connection|action|constraint|enum)\s+def\b/,
+      `${name} declares nothing of its own`);
+  }
 });

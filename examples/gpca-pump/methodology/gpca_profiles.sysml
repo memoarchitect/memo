@@ -8,7 +8,7 @@
 //
 // Two differences from the pre-flip behaviour are deliberate and recorded:
 //
-//  1. Cybersecurity is excluded by *not* selecting `memo_assurance_cybersecurity`
+//  1. Cybersecurity is excluded by *not* importing `memo_assurance_cybersecurity`
 //     and by two explicit RulePolicy entries disabling the cybersecurity closure
 //     rules. Before, `excludedKind` named eleven cybersecurity kinds; naming the
 //     discipline once is the same selection stated at the level the methodology
@@ -28,8 +28,39 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
 
     private import memo_methodology_core::*;
     private import memo_methodology_profiles::*;
-    private import memo_core_enumerations::*;
-    private import memo_rules_closure::*;
+
+    // ── The selection ────────────────────────────────────────────────────
+    //
+    // What this methodology selects is what this package publicly imports.
+    // The five architecture layers, each through the package that publicly
+    // imports the whole layer:
+    public import memo_architecture_operational::*;
+    public import memo_architecture_functional::*;
+    public import memo_architecture_logical::*;
+    public import memo_architecture_implementation::*;
+    public import memo_architecture_realization::*;
+
+    // Explicit means explicit. A methodology that names its assurance
+    // disciplines and stops there selects no rules at all, because rules
+    // live in their own packages. Before the flip an empty list read as
+    // "everything", which hid exactly this: the selection said nothing and
+    // the tools behaved as though it said everything. Cybersecurity is the
+    // discipline not imported.
+    public import memo_core_common::*;
+    public import memo_core_enumerations::*;
+    public import memo_core_relationships::*;
+    public import memo_core_annotations::*;
+    public import memo_core_consistency_rules::*;
+    public import memo_assurance_requirements::*;
+    public import memo_assurance_requirements_needs::*;
+    public import memo_assurance_safety_risk::*;
+    public import memo_assurance_human_factors::*;
+    public import memo_assurance_verification_validation::*;
+    public import memo_rules_closure::*;
+    public import memo_rules_crosslayer::*;
+    public import memo_rules_quantitative::*;
+    public import memo_rules_ontology::*;
+
     private import memo_artifacts_standards_iso_14971::iso14971;
     private import memo_artifacts_standards_iec_62304::iec62304;
     private import memo_artifacts_standards_cfr_21_820::cfr21Part820;
@@ -38,7 +69,6 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
     private import memo_viewpoints_logical_logical_viewpoint::logicalArchitectureViewpoint;
     private import memo_viewpoints_risk_risk_viewpoint::riskViewpoint;
 
-    private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part gpcaMethodDefinition : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "METH-GPCA-001"; :>> label = "GPCAPrototypeMethodology"; }
@@ -47,36 +77,6 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
         doc /* GPCA infusion pump methodology for the non-networked prototype variant. Explicitly selects the five architecture layers and four of the five assurance disciplines; cybersecurity is out of scope because the prototype has no network interface. The prototype uses no SOUP. */
         ref :>> baseMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
-
-        attribute :>> includedLayer = (
-            "memo_architecture_operational",
-            "memo_architecture_functional",
-            "memo_architecture_logical",
-            "memo_architecture_implementation",
-            "memo_architecture_realization"
-        );
-
-        // Explicit means explicit. A methodology that names its assurance
-        // disciplines and stops there selects no rules at all, because rules
-        // live in their own packages. Before the flip an empty list read as
-        // "everything", which hid exactly this: the selection said nothing and
-        // the tools behaved as though it said everything.
-        attribute :>> includedModule = (
-            "memo_core_common",
-            "memo_core_enumerations",
-            "memo_core_relationships",
-            "memo_core_annotations",
-            "memo_core_consistency_rules",
-            "memo_assurance_requirements",
-            "memo_assurance_requirements_needs",
-            "memo_assurance_safety_risk",
-            "memo_assurance_human_factors",
-            "memo_assurance_verification_validation",
-            "memo_rules_closure",
-            "memo_rules_crosslayer",
-            "memo_rules_quantitative",
-            "memo_rules_ontology"
-        );
 
         // Typed. The standards GPCA also names, ISO 14155, IEC 62366 and
         // IEC 60601-1, have no RegulatoryStandard in the ontology yet, and the

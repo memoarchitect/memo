@@ -104,8 +104,9 @@ Two native facts decide what a project contains:
    followed transitively. A package the graph does not reach is not in the
    model, however many manifests point at it. An import naming a package no
    resolved source declares is a diagnostic.
-2. **The method binding.** It names one methodology. That methodology, and its
-   base chain, declare what is selected.
+2. **The method binding.** It names one methodology. What the packages
+   declaring that methodology and its base chain publicly import, and what the
+   binding's own package publicly imports, is what is selected.
 
 A resolved package is resolved in full: everything it supplies is loaded, and
 effective scope then decides what is *active*. Loading and selecting are
@@ -113,19 +114,54 @@ different questions with different answers.
 
 ## Scope
 
-`MethodologyDefinition` carries the selection directly:
+A methodology selects packages by **publicly importing** them in the package
+that declares it. Nothing else lists them:
 
 ```sysml
-part gpcaMethodDefinition : MethodologyDefinition {
-    attribute :>> id = "METH-GPCA-001";
-    ref :>> baseMethodology = mdDefaultDefinition;
-    attribute :>> scopeMode = ScopeModeKind::explicit;
+package gpca_methodology {
+    private import memo_methodology_core::*;
+    private import memo_methodology_profiles::*;
 
-    attribute :>> includedLayer = ("memo_architecture_operational", …);
-    attribute :>> includedModule = ("memo_assurance_safety_risk", …);
-    ref :>> includedStandard = (iso14971, iec62304, …);
-    attribute :>> includedArtifactKind = (ArtifactKind::plan, …);
-    ref :>> includedViewpoint = (contextViewpoint, riskViewpoint, …);
+    public import memo_architecture_operational::*;   // a layer
+    public import memo_assurance_safety_risk::*;      // one package
+    public import memo_rules_closure::*;              // the rules it runs
+
+    part gpcaMethodDefinition : MethodologyDefinition {
+        ref :>> baseMethodology = mdDefaultDefinition;
+        attribute :>> scopeMode = ScopeModeKind::explicit;
+        ref :>> includedStandard = (iso14971, iec62304, …);
+        attribute :>> includedArtifactKind = (ArtifactKind::plan, …);
+        ref :>> includedViewpoint = (contextViewpoint, riskViewpoint, …);
+    }
+}
+```
+
+The selection is the transitive closure of public imports from the packages
+that declare the selected methodology and its base chain. A public import is
+SysML's statement that a package passes the imported members on
+(`Import = visibility = VisibilityIndicator 'import' …`,
+`SysML-textual-bnf.kebnf` 149–153); a private import is the package's own
+business and selects nothing. Because the package is the selection, a package
+declares one methodology. A misspelled package is an import the compiler
+rejects, so a selection cannot silently name nothing.
+
+- **A layer** is selected through its layer package: each architecture layer
+  has one (`memo_architecture_operational`, `…_functional`, `…_logical`,
+  `…_implementation`, `…_realization`) that publicly imports every package in
+  the layer's namespace, and a test keeps it that way.
+- **An extension** is selected through its facade, `memo_extension_<name>`,
+  which publicly imports the extension's packages and the extensions it builds
+  on (see `extensions/README.md`).
+- **A project** adds to the selection the same way: a public import in the
+  package that declares its `ProjectMethodBinding`.
+
+```sysml
+package ros_mobile_robot_project {
+    public import memo_extension_ros::*;
+
+    part projectBinding : ProjectMethodBinding {
+        ref :>> selectedMethodology = mdDefaultDefinition;
+    }
 }
 ```
 
@@ -133,8 +169,8 @@ part gpcaMethodDefinition : MethodologyDefinition {
 
 | Mode | Meaning |
 | --- | --- |
-| `explicit` | Only what is listed. **An empty list selects nothing.** |
-| `allAvailable` | Everything the resolved packages provide. The lists must be empty. |
+| `explicit` | Only what is selected. **A package that publicly imports nothing selects nothing.** |
+| `allAvailable` | Everything the resolved packages provide. The methodology's package imports nothing publicly. |
 
 `allAvailable` is spelled that way because SysML v2 reserves `all` as a keyword.
 
@@ -143,31 +179,9 @@ MethodologyDefinition[0..1]` — so single inheritance is a multiplicity, not a
 convention. The resolver walks base-first and then applies the child; a base
 cannot widen a child's scope mode.
 
-Extensions are added with `ref includedExtension : MethodologyDefinition[0..*]`,
-on the methodology or the binding, naming each extension's own methodology:
-
-```sysml
-private import memo_extension_ros_methodology::rosExtensionMethod;
-
-part projectBinding : ProjectMethodBinding {
-    ref :>> selectedMethodology = mdDefaultDefinition;
-    attribute :>> scopeMode = ScopeModeKind::explicit;
-    ref :>> includedExtension = rosExtensionMethod;
-}
-```
-
-An included methodology contributes its own inclusion lists, and those of the
-extensions it includes in turn. Its `baseMethodology` is not followed and its
-rule policies are not applied, so including an extension never widens scope to
-what the extension's base selects. An extension's methodology lists every
-package the extension ships, so a project does not name them. A misspelled
-reference is a compiler error; one the resolver cannot match to a loaded
-methodology is `missing-extension`. Either fails `memo validate`.
-
-`includedModule` stays for packages that are not a MEMO extension's: a
-project's or a supplier's own. Module and layer entries are strings because
-SysML cannot reference a package as a value; module entries match a package
-name exactly.
+What stays a value: standards, viewpoints and artifact kinds are typed
+references, and a `RulePolicy`'s `targetCategory` names a layer namespace as a
+string, because a value cannot reference a package.
 
 ## Rule tailoring
 
@@ -255,7 +269,7 @@ Rejected, with the native replacement named in the message:
 | `memo.rendering.yaml` | `LayerRendering` and `ExplorerClassification` usages |
 | `methodology:` | `ProjectMethodBinding.selectedMethodology` |
 | `extends:`, `ontologies:` | native `private import` |
-| `modules:` | `includedModule` on the methodology or binding; an extension by `includedExtension` |
+| `modules:` | a `public import` of the package in the methodology's package or the binding's |
 | `type:`, `projectType:`, `usage:` | nothing — authority comes from the resolved root a file sits under |
 | `kinds:`, `relationshipTypes:` | ontology `part def` / `connection def` declarations |
 | `architectureLayers:` | `LayerRendering` usages |
