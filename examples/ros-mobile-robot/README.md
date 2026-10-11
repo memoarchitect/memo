@@ -6,11 +6,11 @@ a ROS 2 mobile logistics robot; the point is the mechanism.
 Extensions are a way to model, so they live in [`extensions/`](../../extensions),
 beside the ontology. This project is one of their consumers.
 
-- `model/catalog/project.sysml` — the binding. It names one extension,
-  `ref :>> includedExtension = rosExtensionMethod;`. The ROS extension's own
-  methodology lists its packages and includes the messaging and container
-  extensions it builds on, so that one typed reference selects all three. The
-  project never retypes an extension's package names.
+- `model/catalog/project.sysml` — the binding, and one import:
+  `public import memo_extension_ros::*;`. That import is how the project brings
+  the extension in. ROS publicly imports the messaging and container
+  extensions it builds on, so the one import selects all three. The project
+  never retypes an extension's package names.
 - `model/catalog/ros_mobile_robot.sysml` — the model.
 - `model/catalog/viewpoints/` — diagram views over that catalog.
 

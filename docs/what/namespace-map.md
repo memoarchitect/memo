@@ -42,7 +42,8 @@ Optional vocabulary that is not true of every project — clinical procedures,
 AADL runtime families, cloud services, containers, messaging, ROS 2 — lives in
 extension packages under `extensions/`. Extensions are a way to model, so they
 sit beside the ontology rather than under `examples/`; each remains outside
-`memo::` and is selected through `includedModule`.
+`memo::` and is brought into a project by publicly importing its facade
+package, `memo_extension_<name>`.
 
 ## Architecture namespaces expose the five layers
 

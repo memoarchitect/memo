@@ -16,16 +16,14 @@ package memo_examples_ros_mobile_robot_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    private import memo_extension_ros_methodology::rosExtensionMethod;
+    // The ROS extension, brought into the project by importing it. The import
+    // is public, so it is the project's selection as well as its vocabulary;
+    // ROS publicly imports messaging and container, which come with it.
+    public import memo_extension_ros::*;
     part projectBinding : ProjectMethodBinding {
         @MemoIdentity { :>> providedId = "PMB-ROS-MOBILE-ROBOT-001"; :>> label = "RosMobileRobotProjectMethodBinding"; }
         attribute :>> projectName = "ROS Mobile Robot";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
-        // The project names the extension, not its packages. ROS's own
-        // methodology lists its packages and includes messaging and
-        // container, so the resolver selects all three extensions from this
-        // one typed reference.
-        ref :>> includedExtension = rosExtensionMethod;
     }
 }
