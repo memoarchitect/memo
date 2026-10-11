@@ -160,8 +160,9 @@ An included methodology contributes its own inclusion lists, and those of the
 extensions it includes in turn. Its `baseMethodology` is not followed and its
 rule policies are not applied, so including an extension never widens scope to
 what the extension's base selects. An extension's methodology lists every
-package the extension ships, so a project does not name them. A reference that
-names no methodology fails `memo validate` (`missing-extension`).
+package the extension ships, so a project does not name them. A misspelled
+reference is a compiler error; one the resolver cannot match to a loaded
+methodology is `missing-extension`. Either fails `memo validate`.
 
 `includedModule` stays for packages that are not a MEMO extension's: a
 project's or a supplier's own. Module and layer entries are strings because
