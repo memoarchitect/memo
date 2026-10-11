@@ -12,7 +12,7 @@ package memo_extension_ros_methodology {
     // extensions is expressed. There is no chaining and no second base.
     part rosExtensionMethod : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "EXT-ROS-001"; :>> label = "Ros2Extension"; }
-        attribute :>> version = "0.7.0";
+        attribute :>> version = "0.13.2";
         attribute :>> domain = "ROS 2 robotics middleware";
         doc /* Adds ROS 2 nodes, messages, directional ports, topic/service/action interfaces, QoS, and containerized deployment. */
         ref :>> baseMethodology = mdDefaultDefinition;
