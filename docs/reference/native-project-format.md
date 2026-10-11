@@ -123,9 +123,9 @@ part gpcaMethodDefinition : MethodologyDefinition {
 
     attribute :>> includedLayer = ("memo_architecture_operational", …);
     attribute :>> includedModule = ("memo_assurance_safety_risk", …);
-    attribute :>> includedStandard = ("ISO 14971", …);
-    attribute :>> includedArtifactKind = ("RiskManagementPlan");
-    attribute :>> includedViewpoint = ("VP-CTX", "VP-LOG", "VP-RISK");
+    ref :>> includedStandard = (iso14971, iec62304, …);
+    attribute :>> includedArtifactKind = (ArtifactKind::plan, …);
+    ref :>> includedViewpoint = (contextViewpoint, riskViewpoint, …);
 }
 ```
 
