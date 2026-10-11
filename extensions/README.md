@@ -71,7 +71,7 @@ the prefix is what makes that check something an author can satisfy by
 construction rather than by luck.
 
 Enumeration literals are not definitions and are not prefixed —
-`RosReliabilityKind::reliable`, not `RosReliabilityKind::rosReliable`.
+`RosDurabilityKind::transientLocal`, not `RosDurabilityKind::rosTransientLocal`.
 
 ## What an extension must not do
 
