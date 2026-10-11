@@ -7,6 +7,7 @@ package memo_methodology_core {
     private import memo_core_enumerations::*;
     private import memo_core_consistency_rules::*;
     private import memo_artifacts_standards_traceability::RegulatoryStandard;
+    private import memo_viewpoints_definitions::MemoViewpoint;
 
     part def MethodologyLibrary :> MemoPart {
         attribute version : String;
@@ -63,9 +64,18 @@ package memo_methodology_core {
         // package available to the project, including packages outside MEMO.
         attribute includedLayer : String[0..*];
         attribute includedModule : String[0..*];
-        attribute includedStandard : String[0..*];
-        attribute includedArtifactKind : String[0..*];
-        attribute includedViewpoint : String[0..*];
+        // The standards, artifact kinds and viewpoints a methodology selects
+        // are TYPED: a standard is a RegulatoryStandard, an artifact kind is an
+        // ArtifactKind literal, a viewpoint is a MemoViewpoint. They were
+        // strings ("ISO 14155", "RiskManagementPlan", "VP-CTX"), and three
+        // standards and an artifact kind in the GPCA methodology named nothing
+        // the ontology declares: a string that matches nothing selects nothing,
+        // and nothing said so. Now the compiler does. (Modules and layers name
+        // packages and namespaces, which SysML cannot reference as values; the
+        // resolver reports those that match nothing.)
+        ref includedStandard : RegulatoryStandard[0..*];
+        attribute includedArtifactKind : ArtifactKind[0..*];
+        ref includedViewpoint : MemoViewpoint[0..*];
         part rulePolicy : RulePolicy[0..*];
     }
 
