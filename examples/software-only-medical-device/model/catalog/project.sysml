@@ -16,14 +16,15 @@ package memo_examples_software_only_medical_device_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    private import memo_extension_cloud_methodology::cloudExtensionMethod;
     part projectBinding : ProjectMethodBinding {
         @MemoIdentity { :>> providedId = "PMB-MEDICAL-DEVICE-001"; :>> label = "SoftwareOnlyMedicalDeviceProjectMethodBinding"; }
         attribute :>> projectName = "Software Only Medical Device";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
-        // Composition happens here, not by chaining methodologies. The cloud
-        // extension supplies CloudService, which is what the grading service
-        // is.
-        attribute :>> includedModule = "memo_extension_cloud";
+        // The cloud extension supplies CloudService, which is what the
+        // grading service is. The project names the extension; its
+        // methodology names the packages.
+        ref :>> includedExtension = cloudExtensionMethod;
     }
 }

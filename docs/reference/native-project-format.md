@@ -143,6 +143,31 @@ MethodologyDefinition[0..1]` — so single inheritance is a multiplicity, not a
 convention. The resolver walks base-first and then applies the child; a base
 cannot widen a child's scope mode.
 
+Extensions are added with `ref includedExtension : MethodologyDefinition[0..*]`,
+on the methodology or the binding, naming each extension's own methodology:
+
+```sysml
+private import memo_extension_ros_methodology::rosExtensionMethod;
+
+part projectBinding : ProjectMethodBinding {
+    ref :>> selectedMethodology = mdDefaultDefinition;
+    attribute :>> scopeMode = ScopeModeKind::explicit;
+    ref :>> includedExtension = rosExtensionMethod;
+}
+```
+
+An included methodology contributes its own inclusion lists, and those of the
+extensions it includes in turn. Its `baseMethodology` is not followed and its
+rule policies are not applied, so including an extension never widens scope to
+what the extension's base selects. An extension's methodology lists every
+package the extension ships, so a project does not name them. A reference that
+names no methodology fails `memo validate` (`missing-extension`).
+
+`includedModule` stays for packages that are not a MEMO extension's: a
+project's or a supplier's own. Module and layer entries are strings because
+SysML cannot reference a package as a value; module entries match a package
+name exactly.
+
 ## Rule tailoring
 
 Every rule is a `constraint def` specializing `MemoConsistencyRule`, carrying a
@@ -229,7 +254,7 @@ Rejected, with the native replacement named in the message:
 | `memo.rendering.yaml` | `LayerRendering` and `ExplorerClassification` usages |
 | `methodology:` | `ProjectMethodBinding.selectedMethodology` |
 | `extends:`, `ontologies:` | native `private import` |
-| `modules:` | `includedModule` on the methodology or binding |
+| `modules:` | `includedModule` on the methodology or binding; an extension by `includedExtension` |
 | `type:`, `projectType:`, `usage:` | nothing — authority comes from the resolved root a file sits under |
 | `kinds:`, `relationshipTypes:` | ontology `part def` / `connection def` declarations |
 | `architectureLayers:` | `LayerRendering` usages |
