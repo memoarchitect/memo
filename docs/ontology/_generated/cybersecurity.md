@@ -19,9 +19,14 @@
 | [`AttackTechnique`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#attacktechnique) | `part def` | Attack technique definition specializing `MemoPart`. |
 | [`SecurityProperty`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityproperty) | `part def` | Security property definition specializing `MemoPart`. |
 | [`CybersecurityAssumption`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cybersecurityassumption) | `part def` | Cybersecurity assumption definition specializing `MemoPart`. |
-| [`SBOMComponent`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#sbomcomponent) | `part def` | Sbomcomponent definition specializing `MemoPart`. |
 | [`AttackPath`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#attackpath) | `action def` | The path's narrative is the inherited `pathSummary`. |
-| [`PenTestFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#pentestfinding) | `part def` | Pen test finding definition specializing `MemoEvidence`. |
+| [`SecurityAssessmentCase`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityassessmentcase) | `part def` | Security assessment case definition specializing `MemoPart`. |
+| [`SecurityAssessmentReport`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityassessmentreport) | `part def` | Security assessment report definition specializing `MemoEvidence`. |
+| [`SecurityFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityfinding) | `part def` | Security finding definition specializing `MemoEvidence`. |
+| [`PenTestFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#pentestfinding) | `part def` | Pen test finding definition specializing `SecurityFinding`. |
+| [`SASTFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#sastfinding) | `part def` | Sastfinding definition specializing `SecurityFinding`. |
+| [`DASTFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#dastfinding) | `part def` | Dastfinding definition specializing `SecurityFinding`. |
+| [`SCAFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#scafinding) | `part def` | Scafinding definition specializing `SecurityFinding`. |
 | [`PostmarketProcess`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#postmarketprocess) | `action def` | Postmarket process definition specializing `MemoAction`. |
 | [`CyberRiskAssessment`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cyberriskassessment) | `part def` | Cyber risk assessment definition specializing `MemoPart`. |
 
@@ -47,13 +52,16 @@ flowchart LR
   CyberHazard["CyberHazard"]
   CyberRiskAssessment["CyberRiskAssessment"]
   CyberRisk["CyberRisk"]
-  PenTestFinding["PenTestFinding"]
-  SBOMComponent["SBOMComponent"]
+  SecurityFinding["SecurityFinding"]
+  SBOMEntry["SBOMEntry"]:::other
   MemoEvidence["MemoEvidence"]:::other
   CyberMitigation["CyberMitigation"]
   CybersecurityAssumption["CybersecurityAssumption"]
   anyElement["any element"]:::other
   PostmarketProcess["PostmarketProcess"]
+  SecurityAssessmentCase["SecurityAssessmentCase"]
+  SecurityAssessmentReport["SecurityAssessmentReport"]
+  SCAFinding["SCAFinding"]
   CybersecurityAsset -->|ThreatenedBy| Threat
   Threat -->|Exploits| Vulnerability
   RequirementDriver -->|RealizedByScenario| OperativeScenario
@@ -65,12 +73,15 @@ flowchart LR
   AttackPath -->|IncludesAttackTechnique| AttackTechnique
   Threat -->|RealizesCyberHazard| CyberHazard
   CyberRiskAssessment -->|AssessesCyberRisk| CyberRisk
-  PenTestFinding -->|IdentifiesVulnerability| Vulnerability
-  Vulnerability -->|AffectsSBOMComponent| SBOMComponent
-  PenTestFinding -->|DemonstratesAttackPath| AttackPath
+  SecurityFinding -->|IdentifiesVulnerability| Vulnerability
+  Vulnerability -->|AffectsSBOMEntry| SBOMEntry
+  SecurityFinding -->|DemonstratesAttackPath| AttackPath
   MemoEvidence -->|SupportsMitigationEffectiveness| CyberMitigation
   CybersecurityAssumption -->|ConditionsCyberElement| anyElement
-  PostmarketProcess -->|MonitorsSBOMComponent| SBOMComponent
+  PostmarketProcess -->|MonitorsSBOMEntry| SBOMEntry
+  SecurityAssessmentCase -->|ProducesReport| SecurityAssessmentReport
+  SecurityAssessmentReport -->|ReportsFinding| SecurityFinding
+  SCAFinding -->|IdentifiesAffectedEntry| SBOMEntry
   classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
 ```
 
@@ -89,12 +100,15 @@ flowchart LR
 | [`IncludesAttackTechnique`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#includesattacktechnique) | [`AttackPath`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#attackpath) | [`AttackTechnique`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#attacktechnique) | Typed relationship from `AttackPath` to `AttackTechnique`. |
 | [`RealizesCyberHazard`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#realizescyberhazard) | [`Threat`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#threat) | [`CyberHazard`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cyberhazard) | Typed relationship from `Threat` to `CyberHazard`. |
 | [`AssessesCyberRisk`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#assessescyberrisk) | [`CyberRiskAssessment`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cyberriskassessment) | [`CyberRisk`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cyberrisk) | Typed relationship from `CyberRiskAssessment` to `CyberRisk`. |
-| [`IdentifiesVulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#identifiesvulnerability) | [`PenTestFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#pentestfinding) | [`Vulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | Typed relationship from `PenTestFinding` to `Vulnerability`. |
-| [`AffectsSBOMComponent`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#affectssbomcomponent) | [`Vulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | [`SBOMComponent`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#sbomcomponent) | Typed relationship from `Vulnerability` to `SBOMComponent`. |
-| [`DemonstratesAttackPath`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#demonstratesattackpath) | [`PenTestFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#pentestfinding) | [`AttackPath`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#attackpath) | Typed relationship from `PenTestFinding` to `AttackPath`. |
+| [`IdentifiesVulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#identifiesvulnerability) | [`SecurityFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityfinding) | [`Vulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | Typed relationship from `SecurityFinding` to `Vulnerability`. |
+| [`AffectsSBOMEntry`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#affectssbomentry) | [`Vulnerability`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | [`SBOMEntry`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#sbomentry) | Typed relationship from `Vulnerability` to `SBOMEntry`. |
+| [`DemonstratesAttackPath`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#demonstratesattackpath) | [`SecurityFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityfinding) | [`AttackPath`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#attackpath) | Typed relationship from `SecurityFinding` to `AttackPath`. |
 | [`SupportsMitigationEffectiveness`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#supportsmitigationeffectiveness) | [`MemoEvidence`](../sysml-api/core/common/memo_common.md#memoevidence) | [`CyberMitigation`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cybermitigation) | Typed relationship from `MemoEvidence` to `CyberMitigation`. |
 | [`ConditionsCyberElement`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#conditionscyberelement) | [`CybersecurityAssumption`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cybersecurityassumption) | *any element* | Typed relationship from `CybersecurityAssumption` to `any element`. |
-| [`MonitorsSBOMComponent`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#monitorssbomcomponent) | [`PostmarketProcess`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#postmarketprocess) | [`SBOMComponent`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#sbomcomponent) | Typed relationship from `PostmarketProcess` to `SBOMComponent`. |
+| [`MonitorsSBOMEntry`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#monitorssbomentry) | [`PostmarketProcess`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#postmarketprocess) | [`SBOMEntry`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#sbomentry) | Typed relationship from `PostmarketProcess` to `SBOMEntry`. |
+| [`ProducesReport`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#producesreport) | [`SecurityAssessmentCase`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityassessmentcase) | [`SecurityAssessmentReport`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityassessmentreport) | Typed relationship from `SecurityAssessmentCase` to `SecurityAssessmentReport`. |
+| [`ReportsFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#reportsfinding) | [`SecurityAssessmentReport`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityassessmentreport) | [`SecurityFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityfinding) | Typed relationship from `SecurityAssessmentReport` to `SecurityFinding`. |
+| [`IdentifiesAffectedEntry`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#identifiesaffectedentry) | [`SCAFinding`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#scafinding) | [`SBOMEntry`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#sbomentry) | Typed relationship from `SCAFinding` to `SBOMEntry`. |
 
 ### Relationships from elsewhere that reach this layer
 
@@ -110,8 +124,8 @@ _None with an end typed in this layer._
 | [`AttackTechniqueFrameworkKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#attacktechniqueframeworkkind) | `mitreAttackIcs`, `mitreEmb3d`, `capec`, `other` |
 | [`SecurityObjectiveKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityobjectivekind) | `confidentiality`, `integrity`, `availability`, `authenticity`, `accountability`, `privacy`, `safety` |
 | [`CyberAssumptionValidityKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cyberassumptionvaliditykind) | `valid`, `reviewDue`, `invalid`, `retired` |
-| [`SbomFormatKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#sbomformatkind) | `spdx`, `cycloneDx`, `other` |
 | [`VulnerabilityDispositionKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#vulnerabilitydispositionkind) | `open`, `mitigated`, `accepted`, `closed` |
 | [`PenTestFindingStatusKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#pentestfindingstatuskind) | `open`, `inRemediation`, `accepted`, `closed` |
 | [`PostmarketProcessKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#postmarketprocesskind) | `monitoring`, `vulnerabilityDisclosure`, `patching`, `incidentResponse` |
 | [`CyberRiskAssessmentStageKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cyberriskassessmentstagekind) | `inherent`, `residual` |
+| [`SecurityAssessmentMethodKind`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityassessmentmethodkind) | `penetrationTest`, `sast`, `dast`, `sca` |

@@ -28,7 +28,7 @@ package memo_extension_messaging {
     // Message/payload definition. A named topic is an item usage of a concrete
     // message definition; the definition states the schema, while the usage
     // supplies the deployed topic identity.
-    item def MessagingMessage specializes SoftwareItem {
+    item def MessagingMessage specializes DataItem {
         attribute messageSchema : String;
     }
 
