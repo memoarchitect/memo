@@ -123,7 +123,7 @@ _[TODO: Describe how safety-critical items are segregated from non-safety-critic
 
 ## 5. SOUP Components
 
-Software of Unknown Provenance used by **{{project.product}}**, derived by traversing `dependsOnSoup` from the software items. MEMO has no `SOUPComponent` kind: SOUP is a *relationship* a project's own software item has to a third-party item, which is why it is traversed rather than typed.
+Software of Unknown Provenance used by **{{project.product}}**, derived by traversing `dependsOnSoup` from the software items. A SOUP item is typed `SOUPSoftwareModule` (an `OTSSoftwareModule` is one); this section lists the ones a project software item depends on.
 
 ```memo-query
 kind: [SoftwareSystem, SoftwareComponent, SoftwareModule]
