@@ -662,3 +662,30 @@ test('npm pack includes all content and no JavaScript', () => {
   assert.equal(files.some((path) => path.endsWith('.meta.json') || path.endsWith('.kpar')), false);
   assert.equal(files.some((path) => path.startsWith('src/examples/')), false);
 });
+
+// A package name is its folder. `src/architecture/logical/interfaces/` holds
+// `memo_architecture_logical_interfaces`, and a file inside may extend that
+// with its own name (`..._interfaces_wiring`), never depart from it. Layers and
+// extensions are selected by package name, and the folder tree is how a reader
+// finds them, so the two must not drift: a package that left its folder would
+// still resolve, and sit in the wrong layer on disk. Packages are NOT nested,
+// and the tools do not resolve by path; this only holds the two in step.
+test('every package is named for the folder it lives in', () => {
+  const expectedPrefix = (file) => {
+    const parts = file.split('/');
+    if (parts[0] === 'extensions') return `memo_extension_${parts[1]}`;
+    return ['memo', ...parts.slice(1, -1)].join('_');
+  };
+  // The facade declares the `memo::` namespace and the namespace aliases; it
+  // lives at the root and names packages from every folder.
+  const exempt = new Set(['src/memo_namespaces.sysml']);
+  const wrong = [];
+  for (const file of [...walkSysml('src'), ...walkSysml('extensions')]) {
+    if (exempt.has(file)) continue;
+    const prefix = expectedPrefix(file);
+    for (const [, name] of read(file).matchAll(/^package\s+(\w+)/gm)) {
+      if (name !== prefix && !name.startsWith(`${prefix}_`)) wrong.push(`${file}: ${name} (folder says ${prefix})`);
+    }
+  }
+  assert.deepEqual(wrong, [], `packages that do not follow their folder:\n${wrong.join('\n')}`);
+});
