@@ -15,9 +15,13 @@ package memo_extension_clinical_methodology {
         // another file. `baseMethodName` was the pre-flip spelling and no
         // longer resolves.
         ref :>> baseMethodology = mdDefaultDefinition;
-        // An extension adds its own module to whatever its base selected;
-        // saying so explicitly is required now that an empty list means empty.
         attribute :>> scopeMode = ScopeModeKind::explicit;
-        attribute :>> includedModule = "memo_extension_clinical";
+        // Every package the extension ships, so a project that includes the
+        // extension selects all of them: the facade, and the package that
+        // declares ClinicalProcedureWorkflow.
+        attribute :>> includedModule = (
+            "memo_extension_clinical",
+            "memo_extension_clinical_procedures"
+        );
     }
 }

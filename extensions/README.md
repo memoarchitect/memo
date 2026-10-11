@@ -12,8 +12,14 @@ MEMO defines no extension metaclass. An extension is a plain SysML package:
   fields `type` / `extends` / `usage` / `ontologies` / `methodology` / `modules`
   are rejected);
 - whose SysML **specializes** base types;
-- plus a `MethodologyDefinition` naming `baseMethodology`, `scopeMode`, and its
-  own `includedModule`.
+- plus a `MethodologyDefinition` naming `baseMethodology`, `scopeMode`, every
+  package the extension ships in `includedModule`, and the extensions it builds
+  on in `includedExtension`.
+
+That methodology usage **is** the extension as the model sees it: a project
+names it, another extension names it, and nothing else identifies an extension.
+A metaclass would restate what the methodology already carries — a version, a
+domain, an inclusion set — so there is none.
 
 `template/` is the skeleton. The build round-trips every extension into its own
 KPAR (`memo-extension-<directory>`) and resolves the whole tree with `syside check`,
@@ -29,14 +35,52 @@ is read from the files, not listed twice). `ros` therefore declares
 neither. Add an `import` of another extension and the next build records the
 dependency; remove it and the dependency goes.
 
-## Composition happens at the project binding
+## An extension's packages are listed once, by the extension
 
-`MethodologyDefinition.baseMethodology` is `[0..1]` — single inheritance, and
-deliberate. Extensions therefore **do not chain**. Both
-`MethodologyDefinition.includedModule` and `ProjectMethodBinding.includedModule`
-are `String[0..*]`, so a project combines any number of independent extensions
-by listing their modules in its own binding. That is *the* composition
-mechanism; nothing else is supported.
+An extension usually ships several packages — `aadl` has a facade,
+`memo_extension_aadl_runtime` and `memo_extension_aadl_correspondence`. Its
+methodology's `includedModule` lists **every one of them except the methodology
+package itself**, by exact name. Module matching is exact on purpose (a module
+may name a package outside MEMO, where a prefix test would capture a
+neighbour), so a facade alone does not select the packages it re-exports: the
+packages that declare the definitions and rules have to be listed, and the
+extension is the one place that knows them. A test holds the list equal to the
+packages the directory declares.
+
+## Composition: a project names extensions, not packages
+
+```sysml
+private import memo_extension_ros_methodology::rosExtensionMethod;
+
+part projectBinding : ProjectMethodBinding {
+    ref :>> selectedMethodology = mdDefaultDefinition;
+    attribute :>> scopeMode = ScopeModeKind::explicit;
+    ref :>> includedExtension = rosExtensionMethod;
+}
+```
+
+`includedExtension` is a `MethodologyDefinition[0..*]` reference on both the
+binding and a methodology. The resolver adds each included methodology's own
+selection — its inclusion lists, and transitively the extensions *it* includes —
+to the project's scope. It does **not** follow the included methodology's
+`baseMethodology` (single inheritance, `[0..1]`, stays the only chain, and
+including an extension must not widen a narrow methodology to whatever the
+extension's base selects), and it does not apply its rule policies. A name that
+resolves to no methodology is a `missing-extension` diagnostic, which fails
+`memo validate`; extensions that include each other contribute once each.
+
+**A dependency between extensions is declared once and derived once, and the
+two are held equal.** `ros` declares
+`ref :>> includedExtension = (messagingExtensionMethod, containerExtensionMethod);`.
+That reference needs an import of each methodology, and the import is what the
+KPAR build reads, so the declared dependency always appears in the KPAR usage.
+The other direction — an extension that imports another but does not include
+it, which would leave the dependency's packages out of an explicit scope — is
+caught by a test that compares the extensions a directory imports with the ones
+its methodology includes.
+
+`ProjectMethodBinding.includedModule` stays, for a project's or a supplier's own
+packages outside MEMO. A MEMO extension's package names do not go there.
 
 ## Rule 1 — use native mechanisms first; extension relations specialize base ones
 

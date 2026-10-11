@@ -16,10 +16,14 @@ package memo_examples_surgical_closure_workflow_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    private import memo_extension_clinical_methodology::clinicalExtensionMethod;
     part projectBinding : ProjectMethodBinding {
         @MemoIdentity { :>> providedId = "PMB-CLOSURE-WORKFLOW-001"; :>> label = "SurgicalClosureWorkflowProjectMethodBinding"; }
         attribute :>> projectName = "Surgical Closure Workflow";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
+        // The workflow is a ClinicalProcedureWorkflow, so the project uses
+        // the clinical extension and says so.
+        ref :>> includedExtension = clinicalExtensionMethod;
     }
 }

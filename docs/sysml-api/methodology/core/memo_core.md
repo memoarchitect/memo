@@ -220,6 +220,17 @@ part def Archetype :> MemoPart
             // package available to the project, including packages outside MEMO.
             attribute includedLayer : String[0..*];
             attribute includedModule : String[0..*];
+            // The extensions this methodology builds on, each named by its own
+            // methodology. An extension's methodology lists every package the
+            // extension ships, so naming the extension selects all of them; nobody
+            // retypes another extension's package names. What an included
+            // methodology contributes is its own selection — its inclusion lists
+            // and, transitively, the extensions IT includes — never its base
+            // chain (`baseMethodology` stays single inheritance, and including an
+            // extension must not widen scope to whatever its base selects) and
+            // never its rule policies (tailoring belongs to the selected chain
+            // and the project).
+            ref includedExtension : MethodologyDefinition[0..*];
             // The standards, artifact kinds and viewpoints a methodology selects
             // are TYPED: a standard is a RegulatoryStandard, an artifact kind is an
             // ArtifactKind literal, a viewpoint is a MemoViewpoint. They were
@@ -256,7 +267,12 @@ part def Archetype :> MemoPart
             attribute scopeMode : ScopeModeKind;
             // Project bindings may add project or supplier modules to the selected
             // methodology without requiring those packages to live under memo::.
+            // A MEMO extension is not added here by its package names: it is
+            // added by `includedExtension`, which brings every package it ships.
             attribute includedModule : String[0..*];
+            // The extensions this project uses, each named by its methodology —
+            // a typed reference, so a misspelled extension is a reference error.
+            ref includedExtension : MethodologyDefinition[0..*];
             // The submission regimes this project targets, declared once here.
             // Everything downstream that needs to know which standards apply —
             // `memo standards check`, the standards checklist, the Architect gap
