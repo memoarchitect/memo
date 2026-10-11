@@ -46,8 +46,8 @@ flowchart LR
 
 | Relationship | From | To | What it says |
 | --- | --- | --- | --- |
-| [`Interface`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#interface) | *any element* | *any element* | Specializes the standard library interface as well as MEMO's base, rather than shadowing it — see the note on UseCase. |
-| [`SoftwareInterface`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#softwareinterface) | *any element* | *any element* | Software interaction contracts specialize the native MEMO interface family. Concrete technologies add their protocol roles and message flows; ports remain the endpoints that components actually own. |
+| [`Interface`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#interface) | *any element* | *any element* | Typed relationship for interface. |
+| [`SoftwareInterface`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#softwareinterface) | *any element* | *any element* | Software interaction contracts. Concrete technologies add their protocol roles and message flows; ports remain the endpoints that components actually own. |
 | [`DataInterface`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#datainterface) | *any element* | *any element* | Typed relationship for data interface. |
 | [`ComponentExchange`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#componentexchange) | *any element* | *any element* | Typed relationship for component exchange. |
 | [`LogicalInterface`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalinterface) | [`LogicalPort`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalport) | *any element* | Typed relationship from `LogicalPort` to `any element`. |

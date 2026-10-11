@@ -10,6 +10,7 @@ package memo_architecture_logical_structure {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
+    private import memo_architecture_logical_interfaces::Interface;
 
     // What a logical connection carries: information and control, but also
     // energy, material, fluid, and mechanical force (§10).
@@ -139,9 +140,8 @@ package memo_architecture_logical_structure {
 
     // Boundary features and contracts.
     port def LogicalPort specializes MemoPort;
-    interface def LogicalInterface specializes MemoInterface {
+    interface def LogicalInterface specializes Interface {
         attribute contentKind : FlowContentKind;
-        attribute interactionPattern : String;
         end providerPort : LogicalPort;
         end consumerPort : ~LogicalPort;
     }

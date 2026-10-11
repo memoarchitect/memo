@@ -62,7 +62,7 @@ package memo_examples_connected_patient_monitor {
     // Network interface with cybersecurity properties: it connects the
     // gateway's HL7 port to the repository's across the trust boundary at the
     // hospital network edge.
-    interface ifHl7Feed : Interface connect lcGateway.pHl7Out to lcCdrService.pHl7In {
+    interface ifHl7Feed : SoftwareInterface connect lcGateway.pHl7Out to lcCdrService.pHl7In {
         @MemoIdentity { :>> providedId = "CPM-IF-001"; :>> label = "GatewayToCdrFeed"; }
         attribute :>> protocol = "HL7 FHIR REST over TLS 1.3";
         attribute :>> securityCriticality = CriticalityKind::high;

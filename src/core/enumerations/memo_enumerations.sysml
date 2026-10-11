@@ -89,6 +89,41 @@ package memo_core_enumerations {
         enum mechanical;
         enum fluidic;
     }
+    // How a physical interface encodes what it carries. InterfaceKind says
+    // WHAT crosses (data, control, power); this says HOW the signal is
+    // represented, which decides what has to be specified about it:
+    enum def SignalingKind {
+        doc /* Continuous value: the quantity IS the information (a 0.5-4.5 V
+             * sensor output, a 4-20 mA loop). Needs a range, accuracy and
+             * noise bound. */
+        enum analog;
+        doc /* Encoded symbols: the information is bits, serial or parallel,
+             * framed by a protocol (SPI, CAN, Ethernet). Needs a protocol,
+             * a bit rate and a logic level. */
+        enum digital;
+        doc /* One level means one of two states (a switch contact, an
+             * enable line). Needs a logic level and a debounce, not a
+             * protocol. */
+        enum discrete;
+        doc /* The information is in the timing of edges: PWM duty, step and
+             * direction, frequency output. Needs a frequency range and a
+             * resolution. */
+        enum pulse;
+        doc /* Power transfer, not signalling: the quantity is delivered for
+             * its energy. Needs a rating, not a protocol. */
+        enum powerTransfer;
+    }
+    // The physical medium a hardware connection runs over.
+    enum def PhysicalMediumKind {
+        enum electrical;
+        enum fluidic;
+        enum pneumatic;
+        enum mechanical;
+        enum optical;
+        enum acoustic;
+        enum thermal;
+        enum radioFrequency;
+    }
     // AADL (SAE AS5506) port category. Distinct from InterfaceKind, which says
     // WHAT crosses a port; this says HOW it is delivered, and the difference is
     // safety-relevant: when a deadline is missed a `data` port overwrites the

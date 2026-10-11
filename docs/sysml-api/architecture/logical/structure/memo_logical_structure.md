@@ -28,6 +28,7 @@
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
+| private | `memo_architecture_logical_interfaces::Interface` |
 
 ## Declarations
 
@@ -42,7 +43,7 @@
 | [`Subsystem`](#subsystem) | `part def` | Subsystem definition specializing `LogicalComponent`. | `LogicalComponent` |
 | [`LogicalComponent`](#logicalcomponent) | `part def` | Logical component definition specializing `MemoPart`. | `MemoPart` |
 | [`LogicalPort`](#logicalport) | `port def` | Boundary features and contracts. | `MemoPort` |
-| [`LogicalInterface`](#logicalinterface) | `interface def` | Typed relationship from `LogicalPort` to `any element`. | `MemoInterface` |
+| [`LogicalInterface`](#logicalinterface) | `interface def` | Typed relationship from `LogicalPort` to `any element`. | `Interface` |
 | [`LogicalExchangeItem`](#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoItem`. | `MemoItem` |
 | [`LogicalConnector`](#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | `MemoRelationship` |
 | [`LogicalExchange`](#logicalexchange) | `flow def` | Typed relationship for logical exchange. | — |
@@ -189,7 +190,7 @@ port def LogicalPort specializes MemoPort
 ## LogicalInterface
 
 ```sysml
-interface def LogicalInterface specializes MemoInterface
+interface def LogicalInterface specializes Interface
 ```
 
 | Property | Value |
@@ -197,7 +198,7 @@ interface def LogicalInterface specializes MemoInterface
 | Description | Typed relationship from `LogicalPort` to `any element`. |
 | Kind | `interface def` |
 | Abstract | No |
-| Specializes | `MemoInterface` |
+| Specializes | `Interface` |
 | Owning package | `memo_architecture_logical_structure` |
 
 
@@ -323,6 +324,7 @@ connection def IndependentOf :> MemoRelationship
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
+        private import memo_architecture_logical_interfaces::Interface;
 
         // What a logical connection carries: information and control, but also
         // energy, material, fluid, and mechanical force (§10).
@@ -452,9 +454,8 @@ connection def IndependentOf :> MemoRelationship
 
         // Boundary features and contracts.
         port def LogicalPort specializes MemoPort;
-        interface def LogicalInterface specializes MemoInterface {
+        interface def LogicalInterface specializes Interface {
             attribute contentKind : FlowContentKind;
-            attribute interactionPattern : String;
             end providerPort : LogicalPort;
             end consumerPort : ~LogicalPort;
         }
