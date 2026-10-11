@@ -36,12 +36,9 @@ flowchart LR
   LogicalPort["LogicalPort"]
   anyElement["any element"]:::other
   LogicalComponent["LogicalComponent"]
-  ComponentExchange["ComponentExchange"]
-  NetworkMedium["NetworkMedium"]:::other
   LogicalPort -->|LogicalInterface| anyElement
   LogicalComponent -->|LogicalConnector| LogicalComponent
   LogicalComponent -->|IndependentOf| LogicalComponent
-  ComponentExchange -->|ConnectionBinding| NetworkMedium
   classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
 ```
 
@@ -60,9 +57,7 @@ flowchart LR
 
 ### Relationships from elsewhere that reach this layer
 
-| Relationship | Declared in | From | To | What it says |
-| --- | --- | --- | --- | --- |
-| [`ConnectionBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#connectionbinding) | realization | [`ComponentExchange`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#componentexchange) | [`NetworkMedium`](../sysml-api/architecture/implementation/hardware/electrical/memo_hardware_electrical.md#networkmedium) | AADL `actual_connection_binding`. Which physical medium carries a component exchange. The source is the ComponentExchange rather than the `ComponentConnects` link, because the exchange is the ELEMENT that owns the budget (§19.3) and a link instance is not something the graph c… |
+_None with an end typed in this layer._
 
 ### Enumerations
 

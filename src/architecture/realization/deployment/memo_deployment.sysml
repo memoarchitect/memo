@@ -20,7 +20,7 @@ package memo_architecture_realization_deployment {
     private import memo_core_relationships::*;
     private import memo_architecture_implementation_software_structure::*;
     private import memo_architecture_implementation_software_runtime::*;
-    private import memo_architecture_implementation_hardware_electrical::*;   // NetworkMedium
+    private import memo_architecture_implementation_hardware_common::PhysicalComponent;
     private import memo_architecture_realization_physical::*;
     private import memo_architecture_functional_functions::*;
     private import memo_architecture_logical_structure::*;
@@ -111,17 +111,19 @@ package memo_architecture_realization_deployment {
         :>> baseType = memoryBindingLinks meta SysML::Usage;
     }
 
-    // AADL `actual_connection_binding`. Which physical medium carries a
-    // component exchange. The source is the ComponentExchange rather than the
-    // `ComponentConnects` link, because the exchange is the ELEMENT that owns
-    // the budget (§19.3) and a link instance is not something the graph can
-    // bind to; it is also exactly where the latency the medium contributes has
-    // to be accounted.
+    // AADL `actual_connection_binding`. Which physical thing carries an
+    // interface: a network medium under a component exchange, a cable or
+    // harness under a hardware `Interface`, a connector, a tube. The source is
+    // the interface usage rather than a link, because the interface is the
+    // ELEMENT that owns the budget (§19.3) and a link instance is not
+    // something the graph can bind to; it is also exactly where the latency
+    // the medium contributes has to be accounted. Ends are the two bases
+    // (MemoInterface, PhysicalComponent) so one binding serves every layer.
     allocation def ConnectionBinding :> MemoRelationship, Allocations::Allocation {
         attribute allocatedBandwidth : String;
         attribute mediumLatencyMs : Real;
-        end boundExchange : ComponentExchange :>> source;
-        end medium : NetworkMedium :>> target;
+        end boundExchange : MemoInterface :>> source;
+        end medium : PhysicalComponent :>> target;
     }
     abstract connection connectionBindingLinks : ConnectionBinding[*];
     metadata def <connectionBinding> ConnectionBindingMetadata :> SemanticMetadata {

@@ -24,10 +24,9 @@ package memo_architecture_implementation_software_structure {
     // software view inherits it rather than re-declaring it: the code view
     // (SoftwareModule), the runtime view (SoftwareComponent), the system, and
     // the user interface (memo_architecture_implementation_ui::UIElement).
-    // Structural software decomposition is part-native. IEC 62304 also uses
-    // the term "software item" for this concept, but reserving SoftwareItem
-    // for the native SysML item family keeps structural parts and exchanged
-    // values unambiguous in the model.
+    // Structural software decomposition is part-native. The standard's
+    // "software item" is this part, not an `item def`: exchanged or stored
+    // values are DataItem, below.
     abstract part def SoftwareElement specializes MemoPart {
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
@@ -40,7 +39,8 @@ package memo_architecture_implementation_software_structure {
 
     // Module-view element (design responsibility). Runtime properties
     // (period, WCET, scheduling) moved to SoftwareComponent.
-    // item / unit / package / library / code / firmware / soup (IEC 62304).
+    // item / unit / package / library / code / firmware (IEC 62304). SOUP is
+    // a type (SOUPSoftwareModule), not a value here.
     enum def ModuleKind {
         enum 'item';
         enum unit;
@@ -48,7 +48,6 @@ package memo_architecture_implementation_software_structure {
         enum 'library';
         enum code;
         enum firmware;
-        enum soup;
     }
 
     part def SoftwareModule specializes SoftwareElement {
@@ -62,12 +61,6 @@ package memo_architecture_implementation_software_structure {
         attribute internallyDeveloped : Boolean[0..1];
         attribute firmwareTarget : String[0..1];
         attribute updateMechanism : String[0..1];
-        // SOUP (IEC 62304 §8) — set only when moduleKind = soup
-        attribute soupVersion : String[0..1];
-        attribute soupVendor : String[0..1];
-        attribute knownAnomalies : String[0..1];
-        attribute riskAcceptance : String[0..1];
-        attribute soupClassification : SOUPClassificationKind[0..1];
     }
 
     part def Algorithm specializes MemoPart {
@@ -96,20 +89,30 @@ package memo_architecture_implementation_software_structure {
         attribute :>> timestampRequired : Boolean;
     }
 
-    // Off-the-shelf software: acquired, not developed here. The identity of
-    // what was acquired is owned once, here, and SOUP (IEC 62304 §3.29, an
-    // OTS item whose development process is unknown) narrows it. SOUP is a
-    // specialization, not a module-kind value: an internally developed module
-    // is never SOUP. The `soup*` attributes and `moduleKind = soup` on
-    // SoftwareModule remain what the closure rules read until they are
-    // moved onto these types.
-    part def OTSSoftwareModule specializes SoftwareModule {
-        attribute supplier : String;
+    // SOUP and OTS (IEC 62304 §3.29). The standard's SOUP definition covers
+    // off-the-shelf software and also previously developed software that
+    // lacks development records, so OTS is the narrower type: every OTS
+    // module is SOUP, and SOUP also covers legacy in-house code with no
+    // supplier, license or package to record. SOUP is a type, not a
+    // module-kind value; the CR-MED-015..017 closure rules apply to it and so
+    // to OTS.
+    //
+    // §8.1.2 (SOUP identification: supplier, version) and §7.1.3 (published
+    // anomaly lists) are SOUP obligations, so those attributes sit here; the
+    // acquisition identity of a bought or downloaded package sits on
+    // OTSSoftwareModule.
+    part def SOUPSoftwareModule specializes SoftwareModule {
+        attribute supplier : String[0..1];
+        attribute version : String[0..1];
+        attribute knownAnomalies : String[0..1];
+        attribute riskAcceptance : String[0..1];
+        attribute soupClassification : SOUPClassificationKind[0..1];
+    }
+    part def OTSSoftwareModule specializes SOUPSoftwareModule {
         attribute licenseExpression : String;
         attribute packageUrl : String;
         attribute checksum : String;
     }
-    part def SOUPSoftwareModule specializes OTSSoftwareModule;
 
     enum def SbomFormatKind {
         enum spdx;
@@ -125,8 +128,8 @@ package memo_architecture_implementation_software_structure {
         attribute componentName : String;
         attribute version : String;
         attribute supplier : String;
-        attribute license : String;
-        attribute hash : String;
+        attribute licenseExpression : String;
+        attribute checksum : String;
         attribute packageUrl : String;
         attribute bomReference : String;
         ref inventoriedElement : SoftwareElement[0..1];

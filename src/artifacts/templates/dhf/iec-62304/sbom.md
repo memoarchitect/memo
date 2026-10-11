@@ -37,8 +37,7 @@ empty: "No first-party software items defined."
 All third-party and SOUP components with their versions and origins, generated from the model:
 
 ```memo-query
-kind: SoftwareModule
-where: moduleKind == "SoftwareModuleKind::soup"
+kind: [SOUPSoftwareModule, OTSSoftwareModule]
 display: table
 columns: name, doc, layer
 sort: name

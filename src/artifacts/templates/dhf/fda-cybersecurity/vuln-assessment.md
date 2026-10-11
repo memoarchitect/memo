@@ -37,8 +37,7 @@ empty: "No software assets defined."
 Known vulnerabilities in SOUP and third-party components (e.g. from CVE/NVD monitoring) and their disposition:
 
 ```memo-query
-kind: SoftwareModule
-where: moduleKind == "SoftwareModuleKind::soup"
+kind: [SOUPSoftwareModule, OTSSoftwareModule]
 display: table
 columns: name, doc
 sort: name

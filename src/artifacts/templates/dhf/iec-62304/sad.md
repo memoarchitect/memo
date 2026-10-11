@@ -83,8 +83,7 @@ empty: "No Interface elements defined."
 Software of Unknown Provenance (SOUP) used by **{{project.product}}** is listed below per IEC 62304 §5.3.3–5.3.4. For each SOUP item, functional/performance requirements and required hardware/software must be specified:
 
 ```memo-query
-kind: SoftwareModule
-where: moduleKind == "SoftwareModuleKind::soup"
+kind: [SOUPSoftwareModule, OTSSoftwareModule]
 display: table
 columns: name, doc, layer
 sort: name
