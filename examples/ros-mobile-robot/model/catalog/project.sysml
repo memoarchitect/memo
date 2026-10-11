@@ -16,19 +16,16 @@ package memo_examples_ros_mobile_robot_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    private import memo_extension_ros_methodology::rosExtensionMethod;
     part projectBinding : ProjectMethodBinding {
         @MemoIdentity { :>> providedId = "PMB-ROS-MOBILE-ROBOT-001"; :>> label = "RosMobileRobotProjectMethodBinding"; }
         attribute :>> projectName = "ROS Mobile Robot";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
-        // This is the composition mechanism: three independent extensions,
-        // listed here. `includedModule` is [0..*] on both MethodologyDefinition
-        // and ProjectMethodBinding, while `baseMethodology` is [0..1] — so
-        // extensions combine at the binding and never by chaining.
-        attribute :>> includedModule = (
-            "memo_extension_messaging",
-            "memo_extension_container",
-            "memo_extension_ros"
-        );
+        // The project names the extension, not its packages. ROS's own
+        // methodology lists its packages and includes messaging and
+        // container, so the resolver selects all three extensions from this
+        // one typed reference.
+        ref :>> includedExtension = rosExtensionMethod;
     }
 }

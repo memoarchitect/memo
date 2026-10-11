@@ -30,9 +30,11 @@ package memo_extension_template {
         doc /* Adds a project or domain package to the selected MEMO methodology. */
         // The base is a typed SysML reference, not a name held in sync by hand.
         ref :>> baseMethodology = mdDefaultDefinition;
-        // An extension adds its own module to whatever its base selected;
-        // saying so explicitly is required now that an empty list means empty.
         attribute :>> scopeMode = ScopeModeKind::explicit;
-        attribute :>> includedModule = "replace_with_extension_package";
+        // Every package the extension ships, by its exact name. A project
+        // names the extension (`includedExtension = extensionMethod`) and
+        // never these strings. An extension this one builds on is named with
+        // `ref :>> includedExtension = (...)`, beside an import of it.
+        attribute :>> includedModule = "memo_extension_template";
     }
 }
