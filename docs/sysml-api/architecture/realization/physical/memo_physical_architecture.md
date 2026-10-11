@@ -26,6 +26,7 @@
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_architecture_logical_interfaces::Interface` |
 | private | `memo_architecture_implementation_hardware_common::PhysicalElement` |
 
 ## Declarations
@@ -35,6 +36,8 @@
 | [`ProcessingNode`](#processingnode) | `part def` | Processing node definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`MemoryDevice`](#memorydevice) | `part def` | Memory device definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`PhysicalPort`](#physicalport) | `port def` | Physical port definition specializing `MemoPort`. | `MemoPort` |
+| [`PhysicalInterface`](#physicalinterface) | `interface def` | Typed relationship from `PhysicalPort` to `PhysicalPort`. | `Interface` |
+| [`PhysicalFlow`](#physicalflow) | `flow def` | What crosses a physical interface, as a quantity: a voltage, a current, a pressure, a force, a flow of fluid. | — |
 
 ## ProcessingNode
 
@@ -81,6 +84,36 @@ port def PhysicalPort specializes MemoPort
 | Owning package | `memo_architecture_realization_physical` |
 
 
+## PhysicalInterface
+
+```sysml
+interface def PhysicalInterface specializes Interface
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `PhysicalPort` to `PhysicalPort`. |
+| Kind | `interface def` |
+| Abstract | No |
+| Specializes | `Interface` |
+| Owning package | `memo_architecture_realization_physical` |
+
+
+## PhysicalFlow
+
+```sysml
+abstract flow def PhysicalFlow
+```
+
+| Property | Value |
+| --- | --- |
+| Description | What crosses a physical interface, as a quantity: a voltage, a current, a pressure, a force, a flow of fluid. |
+| Kind | `flow def` |
+| Abstract | Yes |
+| Specializes | — |
+| Owning package | `memo_architecture_realization_physical` |
+
+
 ## Source
 
 ??? code "architecture/realization/physical/memo_physical_architecture.sysml"
@@ -94,6 +127,7 @@ port def PhysicalPort specializes MemoPort
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
+        private import memo_architecture_logical_interfaces::Interface;
         // For PhysicalElement: a processing node and a memory device ARE physical
         // things — a board and a chip — and specialized MemoPart directly only
         // because the physical family had no shared root until CR-ONT-079 needed
@@ -149,14 +183,19 @@ port def PhysicalPort specializes MemoPort
 
         // ─── Connecting hardware ─────────────────────────────────────────────
         //
-        // Hardware is parts with ports, and it wires with the same constructs as
-        // every other layer; there is no hardware-only connection or flow type.
-        // The path between two ports is an `Interface` (its hardware-signal
-        // descriptors: electricalStandard, nominalVoltageV, signalRange, ...),
-        // what crosses it is a `LogicalExchange` flow (contentKind energy,
-        // fluid, mechanicalForce, ...), and the cable, header or tube that
-        // carries the path is a part of its own, related to the interface by a
-        // ConnectionBinding allocation (memo_architecture_realization_deployment):
+        // Hardware is parts with ports. A port on one part is joined to a port on
+        // another by a PhysicalInterface, and what crosses it is a PhysicalFlow.
+        // They are the hardware-layer counterparts of LogicalInterface and
+        // LogicalExchange, and of SoftwareInterface: the same shape, but each
+        // states only what its layer can, so a hardware interface is never
+        // described in terms of a software API or a logical content kind.
+        //
+        // The interface is the CONTRACT (an `interface` usage joins two specific
+        // ports; the def says what kind of link it is). The plug, cable, header
+        // or tube that physically carries it is a part of its own (Cable,
+        // PhysicalConnectorPart, ...), related to the interface by a
+        // ConnectionBinding allocation. PhysicalPort.connectorType names what a
+        // port exposes.
         //
         //     part pump {
         //         out port pMotorDrive : PhysicalPort { out item drive; }
@@ -165,17 +204,42 @@ port def PhysicalPort specializes MemoPort
         //         in port pMotorIn : PhysicalPort { in item drive; }
         //     }
         //     part motorHarness : Cable;
-        //     interface cnMotorDrive : Interface
+        //     interface cnMotorDrive : PhysicalInterface
         //         connect pump.pMotorDrive to driver.pMotorIn {
-        //         attribute :>> interfaceKind = InterfaceKind::power;
-        //         attribute :>> electricalStandard = "24 V DC";
+        //         attribute :>> signalingKind = SignalingKind::pulse;
+        //         attribute :>> nominalVoltageV = 3.3;
         //     }
-        //     flow flMotorDrive : LogicalExchange
+        //     flow flMotorDrive : PhysicalFlow
         //         from pump.pMotorDrive.drive to driver.pMotorIn.drive {
-        //         attribute :>> contentKind = FlowContentKind::energy;
+        //         attribute :>> quantity = "step pulses";
         //     }
         //     allocation cbMotorDrive : ConnectionBinding
         //         allocate cnMotorDrive to motorHarness;
+        interface def PhysicalInterface specializes Interface {
+            // analog, digital, discrete, pulse or power transfer. Fill in the
+            // descriptors that kind needs: a range for analog, a bit rate and
+            // protocol for digital, a frequency for pulse.
+            attribute signalingKind : SignalingKind;
+            attribute mediumKind : PhysicalMediumKind;
+            attribute electricalStandard : String;
+            attribute nominalVoltageV : Real[0..1];
+            attribute nominalCurrentA : Real[0..1];
+            attribute bitRateBps : String;
+            attribute signalRange : String;
+            attribute connectorStandard : String;
+            end sourcePort : PhysicalPort;
+            end targetPort : PhysicalPort;
+        }
+
+        // What crosses a physical interface, as a quantity: a voltage, a
+        // current, a pressure, a force, a flow of fluid.
+        abstract flow def PhysicalFlow {
+            attribute quantity : String;
+            attribute unit : String;
+            attribute nominalValue : String;
+            attribute minValue : String;
+            attribute maxValue : String;
+        }
     }
 
     ```

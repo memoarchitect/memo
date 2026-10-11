@@ -44,8 +44,8 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | --- | --- | --- | --- |
 | [`ComponentExchange`](architecture/logical/interfaces/memo_interfaces.md#componentexchange) | `interface def` | Typed relationship for component exchange. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
 | [`DataInterface`](architecture/logical/interfaces/memo_interfaces.md#datainterface) | `interface def` | Typed relationship for data interface. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
-| [`Interface`](architecture/logical/interfaces/memo_interfaces.md#interface) | `interface def` | Specializes the standard library interface as well as MEMO's base, rather than shadowing it — see the note on UseCase. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
-| [`SoftwareInterface`](architecture/logical/interfaces/memo_interfaces.md#softwareinterface) | `interface def` | Software interaction contracts specialize the native MEMO interface family. Concrete technologies add their protocol roles and message flows; ports remain the endpoints that components actually own. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
+| [`Interface`](architecture/logical/interfaces/memo_interfaces.md#interface) | `interface def` | Typed relationship for interface. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
+| [`SoftwareInterface`](architecture/logical/interfaces/memo_interfaces.md#softwareinterface) | `interface def` | Software interaction contracts. Concrete technologies add their protocol roles and message flows; ports remain the endpoints that components actually own. | [`architecture/logical/interfaces/memo_interfaces.sysml`](architecture/logical/interfaces/memo_interfaces.md) |
 
 
 ## `memo::architecture::logical::structure`
@@ -115,6 +115,14 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | [`FlowTraversesBinding`](architecture/realization/deployment/memo_deployment.md#flowtraversesbinding) | `allocation def` | Typed relationship from `EndToEndFlow` to `SoftwareDeploymentUnit`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`MemoryBinding`](architecture/realization/deployment/memo_deployment.md#memorybinding) | `allocation def` | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`ProvidesEnvironment`](architecture/realization/deployment/memo_deployment.md#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
+
+
+## `memo::architecture::realization::physical`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`PhysicalFlow`](architecture/realization/physical/memo_physical_architecture.md#physicalflow) | `flow def` | What crosses a physical interface, as a quantity: a voltage, a current, a pressure, a force, a flow of fluid. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
+| [`PhysicalInterface`](architecture/realization/physical/memo_physical_architecture.md#physicalinterface) | `interface def` | Typed relationship from `PhysicalPort` to `PhysicalPort`. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
 
 
 ## `memo::artifacts::configuration_management`

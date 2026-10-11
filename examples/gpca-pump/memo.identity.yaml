@@ -1164,10 +1164,10 @@ elements:
     shortId: "SNS-1"
     uuid: "770eb05c-fff6-5d25-ae0e-18523dff9c85"
   "memo_examples_gpca_pump_gpca_interfaces::actuatorCommandInterface":
-    shortId: "INT-1"
+    shortId: "LGC-6"
     uuid: "6a93cde9-649d-5c9f-9b89-d7a50834e07c"
   "memo_examples_gpca_pump_gpca_interfaces::batteryMonitorLine":
-    shortId: "INT-3"
+    shortId: "PHY-29"
     uuid: "26e989b8-9822-5cd0-8cd1-55142c9e8413"
   "memo_examples_gpca_pump_gpca_interfaces::bolusButtonLine":
     shortId: "INT-4"
@@ -1428,7 +1428,7 @@ elements:
     shortId: "INT-54"
     uuid: "cb6dad01-cf87-5a1d-8c6d-a2728c7a69d5"
   "memo_examples_gpca_pump_gpca_interfaces::eventLogInterface":
-    shortId: "INT-55"
+    shortId: "LGC-7"
     uuid: "67c9f52c-df6d-5489-90df-070ded6b6025"
   "memo_examples_gpca_pump_gpca_interfaces::exAlarmAnnunciation":
     shortId: "CMP-46"
@@ -1443,34 +1443,34 @@ elements:
     shortId: "CMP-49"
     uuid: "0d534de1-0ef6-5395-88cd-5c530055570f"
   "memo_examples_gpca_pump_gpca_interfaces::hwSoftwareBus":
-    shortId: "INT-58"
+    shortId: "PHY-30"
     uuid: "1c686aa6-e73c-5b63-924b-f93696257370"
   "memo_examples_gpca_pump_gpca_interfaces::occlusionAnalogLine":
     shortId: "INT-59"
     uuid: "fa2cb569-bca8-5e01-9dca-18b051ae0e9c"
   "memo_examples_gpca_pump_gpca_interfaces::operatorEntryInterface":
-    shortId: "INT-60"
+    shortId: "LGC-8"
     uuid: "3853ae5a-7a06-5799-90a9-41ffb766aefc"
   "memo_examples_gpca_pump_gpca_interfaces::pumpMotorDrive":
     shortId: "INT-61"
     uuid: "d78025a7-8221-539c-8876-f7a55cfaba11"
   "memo_examples_gpca_pump_gpca_interfaces::sensorInputInterface":
-    shortId: "INT-62"
+    shortId: "LGC-9"
     uuid: "851e548d-757a-547e-bffe-d883e6e12d76"
   "memo_examples_gpca_pump_gpca_interfaces::siBolusRequest":
-    shortId: "INT-64"
+    shortId: "LGC-10"
     uuid: "13cab60c-c1e9-55df-a902-731cfced5d6a"
   "memo_examples_gpca_pump_gpca_interfaces::siDataEntry":
-    shortId: "INT-65"
+    shortId: "LGC-11"
     uuid: "d7e233df-2fdc-5ae7-9cfc-0d55697350a7"
   "memo_examples_gpca_pump_gpca_interfaces::siDrugFlow":
-    shortId: "INT-66"
+    shortId: "LGC-12"
     uuid: "7b22c396-6489-5c78-8ffb-1d884c8abf4b"
   "memo_examples_gpca_pump_gpca_interfaces::siNotification":
-    shortId: "INT-67"
+    shortId: "LGC-13"
     uuid: "0a084136-5fcf-5c4f-add5-923908be35e4"
   "memo_examples_gpca_pump_gpca_interfaces::siPharmacyDb":
-    shortId: "INT-68"
+    shortId: "LGC-14"
     uuid: "326edc98-b6e6-5857-909d-d9f5014c0446"
   "memo_examples_gpca_pump_gpca_operational::annunciateAir":
     shortId: "ACT-5"

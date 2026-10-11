@@ -198,6 +198,8 @@ flowchart LR
 | [`EarsPatternKind`](../sysml-api/core/enumerations/memo_enumerations.md#earspatternkind) | `ubiquitous`, `eventDriven`, `stateDriven`, `optionalFeature`, `unwantedBehavior`, `complex` |
 | [`ObligationKind`](../sysml-api/core/enumerations/memo_enumerations.md#obligationkind) | `shall`, `should`, `will` |
 | [`InterfaceKind`](../sysml-api/core/enumerations/memo_enumerations.md#interfacekind) | `data`, `control`, `analogSignal`, `digitalSignal`, `power`, `network`, `api`, `userInteraction`, `notification`, `logging`, `mechanical`, `fluidic` |
+| [`SignalingKind`](../sysml-api/core/enumerations/memo_enumerations.md#signalingkind) | `analog`, `digital`, `discrete`, `pulse`, `powerTransfer` |
+| [`PhysicalMediumKind`](../sysml-api/core/enumerations/memo_enumerations.md#physicalmediumkind) | `electrical`, `fluidic`, `pneumatic`, `mechanical`, `optical`, `acoustic`, `thermal`, `radioFrequency` |
 | [`PortCategoryKind`](../sysml-api/core/enumerations/memo_enumerations.md#portcategorykind) | `data`, `eventData` |
 | [`FlowKind`](../sysml-api/core/enumerations/memo_enumerations.md#flowkind) | `information`, `command`, `status`, `telemetry`, `alarm`, `configuration`, `measurement`, `audit`, `power` |
 | [`DirectionKind`](../sysml-api/core/enumerations/memo_enumerations.md#directionkind) | `input`, `output`, `inputOutput` |
