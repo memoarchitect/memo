@@ -1,0 +1,118 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "ep_lab_family_ablation::AblationGeneratorSystem":
+    shortId: "SYS-1"
+    uuid: "f3ee37db-77f4-5c9d-a889-44ec3f96e647"
+  "ep_lab_family_ablation::AblationGeneratorSystem::pAblationEventOut":
+    shortId: "ABL-1"
+    uuid: "608923f0-3bdd-5fab-82d9-e7b1aaf9a138"
+  "ep_lab_family_ablation::fnDeliverEnergy":
+    shortId: "SYS-2"
+    uuid: "1a31059e-80af-5b44-a019-a4f22db733fc"
+  "ep_lab_family_ablation::ucDeliverEnergy":
+    shortId: "USE-1"
+    uuid: "4d0e14f7-0e5c-5c5e-a616-6bf28f849c60"
+  "ep_lab_family_chains::fcMapGuidedAblation":
+    shortId: "FNC-1"
+    uuid: "11426c62-88a9-5b5d-95b5-403c43a18725"
+  "ep_lab_family_chains::fcMapGuidedAblation::stepAcquire":
+    shortId: "ACT-1"
+    uuid: "071d5639-7682-5cb0-8c18-b105c8c61143"
+  "ep_lab_family_chains::fcMapGuidedAblation::stepBuildMap":
+    shortId: "ACT-2"
+    uuid: "3dc5449d-ece5-596b-bbe8-94d349a70901"
+  "ep_lab_family_chains::fcMapGuidedAblation::stepDeliver":
+    shortId: "ACT-3"
+    uuid: "26fc3a26-6632-576f-be97-6a1f76f7f8b8"
+  "ep_lab_family_chains::fcMapGuidedAblation::stepTag":
+    shortId: "ACT-4"
+    uuid: "8c1f2d1a-d003-5d11-af4c-56fa5e24566d"
+  "ep_lab_family_clinical_use_cases::ucPerformCatheterAblation":
+    shortId: "USE-2"
+    uuid: "bd5feb41-4f01-55e5-9ac7-7100eec26b56"
+  "ep_lab_family_icds::AblationToMappingIcd":
+    shortId: "INT-1"
+    uuid: "665726b8-6b1a-5442-bd60-d2573d77cd9e"
+  "ep_lab_family_icds::AblationToMappingIcd::consumer":
+    shortId: "UNK-1"
+    uuid: "647d663b-06ed-5f35-a2c0-93abf2307423"
+  "ep_lab_family_icds::AblationToMappingIcd::provider":
+    shortId: "ABL-2"
+    uuid: "ab45eb70-e48f-5356-976a-5729cf268244"
+  "ep_lab_family_icds::RecordingToMappingIcd":
+    shortId: "INT-2"
+    uuid: "bc71340a-49e8-57ba-8068-ef6ebcf604e9"
+  "ep_lab_family_icds::RecordingToMappingIcd::consumer":
+    shortId: "UNK-2"
+    uuid: "fd39d99f-03a7-50ae-beed-24b9f294a5ab"
+  "ep_lab_family_icds::RecordingToMappingIcd::provider":
+    shortId: "ELC-1"
+    uuid: "f7383c09-7455-5c0e-a78c-e78a15df517c"
+  "ep_lab_family_mapping::CardiacMappingSystem":
+    shortId: "SYS-3"
+    uuid: "75c6ef86-dc0a-5220-936e-f88f6ae93c29"
+  "ep_lab_family_mapping::CardiacMappingSystem::pAblationEventIn":
+    shortId: "UNK-3"
+    uuid: "d2a316ea-ee54-5940-a0c8-af699efc0971"
+  "ep_lab_family_mapping::CardiacMappingSystem::pElectrogramIn":
+    shortId: "UNK-4"
+    uuid: "cecf36eb-0ba0-51c3-879e-384e0df5bdf2"
+  "ep_lab_family_mapping::fnBuildMap":
+    shortId: "SYS-4"
+    uuid: "c1ab844f-aa94-5437-957c-a56673f045d8"
+  "ep_lab_family_mapping::fnTagLesion":
+    shortId: "SYS-5"
+    uuid: "7abfbb4e-1a24-5d09-b115-dd4de4b8bfbc"
+  "ep_lab_family_mapping::ucAcquireMap":
+    shortId: "USE-3"
+    uuid: "8f1aaf29-d6f6-537d-81ba-c15abd917505"
+  "ep_lab_family_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "3ba8aa1f-b6ad-5db4-9928-922dd2535b76"
+  "ep_lab_family_recording::SignalRecordingSystem":
+    shortId: "SYS-7"
+    uuid: "8c34258f-f8aa-590e-9680-303ae847e840"
+  "ep_lab_family_recording::SignalRecordingSystem::pElectrogramOut":
+    shortId: "ELC-2"
+    uuid: "89793fb2-7c69-5a64-ab7d-f2c0adae2632"
+  "ep_lab_family_recording::fnAcquireElectrograms":
+    shortId: "SYS-6"
+    uuid: "8235503e-0131-5b82-b95e-6298757b380c"
+  "ep_lab_family_recording::ucRecordProcedure":
+    shortId: "USE-4"
+    uuid: "b4b279ec-1d6e-53d1-ab2e-105d7bdbbf80"
+  "ep_lab_family_shared::AblationEvent":
+    shortId: "INT-3"
+    uuid: "50467e6b-b2cc-5e37-8af3-f78a7fce4a6f"
+  "ep_lab_family_shared::AblationEventPort":
+    shortId: "LGC-1"
+    uuid: "0ac3aa23-f80f-55b9-9518-7d2388179bc6"
+  "ep_lab_family_shared::CatheterLocation":
+    shortId: "INT-4"
+    uuid: "6931bfa2-d348-5164-b49a-714cb5f5ee6c"
+  "ep_lab_family_shared::Electrogram":
+    shortId: "INT-5"
+    uuid: "db562f6f-90d8-5ce9-800b-97a99583eb45"
+  "ep_lab_family_shared::ElectrogramPort":
+    shortId: "LGC-2"
+    uuid: "51ba83dc-9108-508d-929c-c823138613df"
+  "ep_lab_family_shared::PatientIsolationModule":
+    shortId: "LGC-3"
+    uuid: "99c4d785-b548-5976-b8e5-b207593b442a"
+  "ep_lab_family_shared::electrophysiologist":
+    shortId: "USR-1"
+    uuid: "9ad5efd9-b766-5364-97bc-96252586361d"
+  "ep_lab_family_shared::labTechnician":
+    shortId: "USR-2"
+    uuid: "09a32dc8-0ee3-5fa5-8245-4342018bacb2"
+  "ep_lab_family_sos::ElectrophysiologyLab":
+    shortId: "SYS-8"
+    uuid: "8d904c23-92aa-5a25-9c87-172e414b3e73"
+  "ep_lab_family_sos::epLab":
+    shortId: "ELC-3"
+    uuid: "f247bb1c-7c73-56d4-980e-e2d71eac82ce"
