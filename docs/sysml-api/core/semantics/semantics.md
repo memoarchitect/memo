@@ -32,6 +32,7 @@
 | --- | --- | --- | --- |
 | [`StandardReference`](#standardreference) | `metadata def` | Tags an element with the regulatory standard it derives from (e.g. ISO 14971, IEC 62304, ISO/IEC/IEEE 42010). | — |
 | [`ExternalSource`](#externalsource) | `metadata def` | An element imported from another system (a requirements tool, a PLM, a quality system, a test-result export). It annotates an element of ANY metaclass, because imported records span them: a requirement def is not a MemoPart.… | — |
+| [`ImportSource`](#importsource) | `metadata def` | Import source definition. | — |
 | [`TraceBaseline`](#tracebaseline) | `metadata def` | Trace baseline definition. | — |
 | [`Provenance`](#provenance) | `metadata def` | Marks an element as the rationale/provenance carrier for a decision. | — |
 
@@ -59,6 +60,21 @@ metadata def ExternalSource
 | Property | Value |
 | --- | --- |
 | Description | An element imported from another system (a requirements tool, a PLM, a quality system, a test-result export). It annotates an element of ANY metaclass, because imported records span them: a requirement def is not a MemoPart.… |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_semantics` |
+
+
+## ImportSource
+
+```sysml
+metadata def ImportSource
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Import source definition. |
 | Kind | `metadata def` |
 | Abstract | No |
 | Specializes | — |
@@ -136,6 +152,16 @@ metadata def Provenance
             attribute externalReference : ExternalReference[0..1];
             attribute sourceMastered : Boolean[0..1];
             attribute sourceWithdrawn : Boolean[0..1];
+        }
+
+        // What an import wrote a package from, on the package itself. A source's
+        // records live in one package that the import owns and regenerates, so this
+        // is the record of where it came from and when it was last imported.
+        metadata def ImportSource {
+            attribute sourceSystem : String;
+            attribute importFormat : String;
+            attribute importFile : String[0..1];
+            attribute importedAt : String;
         }
 
         // The revision of an imported element a MEMO-authored link was made against.
