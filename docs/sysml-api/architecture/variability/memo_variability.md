@@ -159,8 +159,8 @@ metadata def SelectsFeature :> MemoTypedDependency
         // `Requires` is taken by the native `require` relation, so these say what they join.
         connection def RequiresFeature :> MemoRelationship {
             doc /* Selecting the source feature needs the target feature selected too. */
-            end feature : ProductFeature :>> source;
-            end required : ProductFeature :>> target;
+            end dependentFeature : ProductFeature :>> source;
+            end requiredFeature : ProductFeature :>> target;
         }
         abstract connection requiresFeatureLinks : RequiresFeature[*];
         metadata def <requiresFeature> RequiresFeatureMetadata :> SemanticMetadata {
@@ -171,8 +171,8 @@ metadata def SelectsFeature :> MemoTypedDependency
 
         connection def ExcludesFeature :> MemoRelationship {
             doc /* The two features cannot be selected together. Symmetric: either end may be written first. */
-            end feature : ProductFeature :>> source;
-            end excluded : ProductFeature :>> target;
+            end firstFeature : ProductFeature :>> source;
+            end secondFeature : ProductFeature :>> target;
         }
         abstract connection excludesFeatureLinks : ExcludesFeature[*];
         metadata def <excludesFeature> ExcludesFeatureMetadata :> SemanticMetadata {
