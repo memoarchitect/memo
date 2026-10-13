@@ -79,6 +79,10 @@ package memo_core_relationships_workspace_membership {
     part membershipTransforms : WorkspaceMembershipEntry { attribute :>> relation = "transforms"; attribute :>> direction = WorkspaceMembershipKind::neither; }
     // A module follows the deployment unit it is built into.
     part membershipBuildsInto : WorkspaceMembershipEntry { attribute :>> relation = "buildsInto"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
+    // The hardware or software follows the logical component it realizes: the logical component is
+    // what a System contains, and what implements it belongs to the same System (logical and
+    // implementation are separate structures joined by this allocation, never nested).
+    part membershipRealizedBy : WorkspaceMembershipEntry { attribute :>> relation = "realizedBy"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
     // A deployment unit follows the node it runs on.
     part membershipDeploysTo : WorkspaceMembershipEntry { attribute :>> relation = "deploysTo"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
     // A runtime environment follows the node that provides it.

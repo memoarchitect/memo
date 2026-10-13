@@ -7,6 +7,7 @@ package memo_examples_gpca_pump_gpca_architecture {
     private import memo_architecture_logical_structure::*;
     private import memo_architecture_logical_interfaces::*;
     private import memo_architecture_realization_physical::*;
+    private import memo_architecture_realization_deployment::*;
     private import memo_core_relationships::*;
     private import memo_core_enumerations::*;
     private import memo_core_common::*;
@@ -55,6 +56,12 @@ package memo_examples_gpca_pump_gpca_architecture {
     part gpcaPump : GpcaPumpSystem {
         @MemoIdentity { :>> providedId = "SYS-001"; :>> label = "GPCA Infusion Pump"; }
     }
+
+    // The logical architecture is realized by the product architecture, as a whole: the pump is
+    // realized by the device boundary (the AADL GPCA_Device) and by the software deployed onto it
+    // (GPCA_SW). Logical and product structures stay separate; this allocation joins them.
+    allocation deviceRealizesPump : RealizedBy allocate gpcaPump to gpcaDevice;
+    allocation softwareRealizesPump : RealizedBy allocate gpcaPump to gpcaSoftware;
 
     // ── Device (UMN AADL architectural model) ───────────────────
     // The AADL top-level `GPCA_Device` system. GPCA_Device.Impl declares only
