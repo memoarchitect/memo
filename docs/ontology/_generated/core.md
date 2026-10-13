@@ -69,6 +69,7 @@
 | --- | --- | --- |
 | [`StandardReference`](../sysml-api/core/semantics/semantics.md#standardreference) | `metadata def` | Tags an element with the regulatory standard it derives from (e.g. ISO 14971, IEC 62304, ISO/IEC/IEEE 42010). |
 | [`ExternalSource`](../sysml-api/core/semantics/semantics.md#externalsource) | `metadata def` | An element imported from another system (a requirements tool, a PLM, a quality system, a test-result export). It annotates an element of ANY metaclass, because imported records span them: a requirement def is not a MemoPart.… |
+| [`ImportSource`](../sysml-api/core/semantics/semantics.md#importsource) | `metadata def` | Import source definition. |
 | [`TraceBaseline`](../sysml-api/core/semantics/semantics.md#tracebaseline) | `metadata def` | Trace baseline definition. |
 | [`Provenance`](../sysml-api/core/semantics/semantics.md#provenance) | `metadata def` | Marks an element as the rationale/provenance carrier for a decision. |
 
