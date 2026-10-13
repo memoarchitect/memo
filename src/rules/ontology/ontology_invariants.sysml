@@ -40,6 +40,35 @@ package memo_rules_ontology {
         attribute predicateExpression = "allOfKind('System')->exists(isDefinition == 'true')";
         constraint { true }
     }
+    // ─── Use case scope (plan O8) ─────────────────────────────────────────
+    //
+    // A use case is at the level of its subject: one whose subject is a SystemOfSystems is a clinical
+    // procedure, one whose subject is a System is a system use case. There is no kind for either; the
+    // level is read from the subject, and the subject from `hasSubject`. A use case with no subject
+    // is at neither level and neither rule judges it.
+
+    constraint def SosUseCaseIncludesSystemUseCaseRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-085"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "UseCase";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A use case whose subject is a system of systems is made of what its systems do: it includes at least one use case whose subject is a system.";
+        attribute predicateExpression = "not(downstream(hasSubject)->exists(conformsTo(SystemOfSystems))) or downstream(includesStep)->exists(downstream(hasSubject)->exists(conformsTo(System)))";
+        constraint { true }
+    }
+    constraint def SystemUseCaseIncludedRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-086"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "UseCase";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A use case whose subject is a system is included by a use case of the system of systems, or says it stands alone (standalone = true).";
+        attribute predicateExpression = "not(downstream(hasSubject)->exists(conformsTo(System))) or upstream(includesStep)->size() >= 1 or attributes.standalone == 'true'";
+        constraint { true }
+    }
     constraint def NestedPartConnectedRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "AR-IBD-001"; }
         attribute tailoring = RuleTailoringKind::invariant;
