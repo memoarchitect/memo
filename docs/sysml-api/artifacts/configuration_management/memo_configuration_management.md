@@ -35,6 +35,7 @@
 | --- | --- | --- | --- |
 | [`ChangeRequest`](#changerequest) | `part def` | Change request definition specializing `MemoPart`. | `MemoPart` |
 | [`ConfigurationItem`](#configurationitem) | `part def` | Configuration item definition specializing `MemoPart`. | `MemoPart` |
+| [`ReleaseRecord`](#releaserecord) | `part def` | Release record definition specializing `MemoPart`. | `MemoPart` |
 | [`Changes`](#changes) | `connection def` | Typed relationship from `ChangeRequest` to `MemoPart`. | `MemoRelationship` |
 
 ## ChangeRequest
@@ -61,6 +62,21 @@ part def ConfigurationItem :> MemoPart
 | Property | Value |
 | --- | --- |
 | Description | Configuration item definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
+## ReleaseRecord
+
+```sysml
+part def ReleaseRecord :> MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Release record definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -107,6 +123,13 @@ connection def Changes :> MemoRelationship
             attribute baseline : String;
             attribute controlLevel : String;
         }
+
+        // What a release is, as far as selecting features needs it: an element with a
+        // status (inherited from MemoPart) that `#SelectsFeature` links to the features
+        // it contains. Part number, revision, what it contains and what it implements
+        // are the release model (plan O2, O3, O4) and arrive with it; this is only the
+        // shell they hang from, so there is one release concept and not two.
+        part def ReleaseRecord :> MemoPart;
 
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
