@@ -68,6 +68,7 @@
 | [`RuleTailoringKind`](#ruletailoringkind) | `enum def` | How far a methodology may tailor a rule. `invariant` rules hold the ontology's own consistency and may only change in an ontology release; `assurance` and `methodology` rules may be disabled or replaced through an explicit RulePolicy carrying rationale and authority. | — |
 | [`RuleDomainKind`](#ruledomainkind) | `enum def` | Why a rule exists. `modelling` rules keep a model well formed whatever the product is. `medicalDevice` rules exist because a medical-device standard or guidance asks for the thing they check, and each should say which clause it enforces (`#EnforcesClause dependency from <rule>… | — |
 | [`RuleObligationKind`](#ruleobligationkind) | `enum def` | How firmly the rule's source asks for what it checks, separate from the severity a finding carries and from how far the rule may be tailored.… | — |
+| [`WorkspaceMembershipKind`](#workspacemembershipkind) | `enum def` | How a relation places elements in a workspace; see memo_core_relationships_workspace_membership. | — |
 | [`RuleDispositionKind`](#ruledispositionkind) | `enum def` | Controlled values for rule disposition: `enabled`, `disabled`, `replaced`. | — |
 | [`ScopeModeKind`](#scopemodekind) | `enum def` | Whether a methodology's inclusion lists are the whole selection or a deliberate subset. An empty list under `explicit` selects nothing; it never means "everything". `allAvailable` is the only way to say "all", and it is always deliberate.… | — |
 | [`WorkflowStageKind`](#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`. | — |
@@ -686,6 +687,21 @@ enum def RuleObligationKind
 | Property | Value |
 | --- | --- |
 | Description | How firmly the rule's source asks for what it checks, separate from the severity a finding carries and from how far the rule may be tailored.… |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## WorkspaceMembershipKind
+
+```sysml
+enum def WorkspaceMembershipKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | How a relation places elements in a workspace; see memo_core_relationships_workspace_membership. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1690,6 +1706,13 @@ enum def CommentStatusKind
             enum required;
             enum recommended;
             enum bestPractice;
+        }
+        // How a relation places elements in a workspace; see
+        // memo_core_relationships_workspace_membership.
+        enum def WorkspaceMembershipKind {
+            enum sourceFollowsTarget;
+            enum targetFollowsSource;
+            enum neither;
         }
         enum def RuleDispositionKind {
             enum enabled;

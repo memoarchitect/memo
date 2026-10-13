@@ -57,6 +57,12 @@
 | --- | --- | --- |
 | [`ElementKindAlias`](../sysml-api/core/methodology_scope/methodology_scope.md#elementkindalias) | `part def` | Element kind alias definition specializing `MemoPart`. |
 
+**Relationships**
+
+| Element | SysML kind | What it is |
+| --- | --- | --- |
+| [`WorkspaceMembershipEntry`](../sysml-api/core/relationships/memo_workspace_membership.md#workspacemembershipentry) | `part def` | One relation and the direction it places elements in a workspace. |
+
 **Semantics**
 
 | Element | SysML kind | What it is |
@@ -94,6 +100,7 @@ flowchart LR
   UseError["UseError"]:::other
   UseContext["UseContext"]:::other
   MemoAction["MemoAction"]
+  LogicalComponent["LogicalComponent"]:::other
   MemoInterface["MemoInterface"]
   PhysicalComponent["PhysicalComponent"]:::other
   ChangeRequest["ChangeRequest"]:::other
@@ -125,6 +132,7 @@ flowchart LR
   MemoPart -->|InteractsInContext| anyElement
   UseContext -->|AppliesInContext| MemoPart
   MemoAction -->|Transforms| MemoAction
+  LogicalComponent -->|RealizedBy| MemoPart
   MemoInterface -->|ConnectionBinding| PhysicalComponent
   ChangeRequest -->|Changes| MemoPart
   RequirementDriver -->|RealizedByScenario| OperativeScenario
@@ -168,6 +176,7 @@ flowchart LR
 | [`InteractsInContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#interactsincontext) | operational | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | *any element* | The single relation a system context view draws. A context diagram labels its edges with open-ended verbs — "directs procedure", "electrical power", "fluid supply", "environmental conditions".… |
 | [`AppliesInContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | operational | [`UseContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#usecontext) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `UseContext` to `MemoPart`. |
 | [`Transforms`](../sysml-api/architecture/operational/workflows/memo_workflows.md#transforms) | operational | [`MemoAction`](../sysml-api/core/common/memo_common.md#memoaction) | [`MemoAction`](../sysml-api/core/common/memo_common.md#memoaction) | Typed relationship from `MemoAction` to `MemoAction`. |
+| [`RealizedBy`](../sysml-api/architecture/realization/deployment/memo_deployment.md#realizedby) | realization | [`LogicalComponent`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalcomponent) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `LogicalComponent` to `MemoPart`. |
 | [`ConnectionBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#connectionbinding) | realization | [`MemoInterface`](../sysml-api/core/common/memo_common.md#memointerface) | [`PhysicalComponent`](../sysml-api/architecture/implementation/hardware/common/memo_hardware_common.md#physicalcomponent) | AADL `actual_connection_binding`. Which physical thing carries an interface: a network medium under a component exchange, a cable or harness under a hardware `Interface`, a connector, a tube.… |
 | [`Changes`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changes) | artifacts | [`ChangeRequest`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changerequest) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `ChangeRequest` to `MemoPart`. |
 | [`RealizedByScenario`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#realizedbyscenario) | cybersecurity | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | [`OperativeScenario`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#operativescenario) | Typed relationship from `RequirementDriver` to `OperativeScenario`. |
@@ -228,6 +237,7 @@ flowchart LR
 | [`RuleTailoringKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruletailoringkind) | `invariant`, `assurance`, `methodology` |
 | [`RuleDomainKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruledomainkind) | `modelling`, `medicalDevice`, `organisation` |
 | [`RuleObligationKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruleobligationkind) | `required`, `recommended`, `bestPractice` |
+| [`WorkspaceMembershipKind`](../sysml-api/core/enumerations/memo_enumerations.md#workspacemembershipkind) | `sourceFollowsTarget`, `targetFollowsSource`, `neither` |
 | [`RuleDispositionKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruledispositionkind) | `enabled`, `disabled`, `replaced` |
 | [`ScopeModeKind`](../sysml-api/core/enumerations/memo_enumerations.md#scopemodekind) | `allAvailable`, `explicit` |
 | [`WorkflowStageKind`](../sysml-api/core/enumerations/memo_enumerations.md#workflowstagekind) | `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents` |
