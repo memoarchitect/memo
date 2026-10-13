@@ -1,4 +1,4 @@
-// ROS Mobile Robot — project identity and method binding.
+// ROS Mobile Robot — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
@@ -20,9 +20,9 @@ package memo_examples_ros_mobile_robot_project {
     // is public, so it is the project's selection as well as its vocabulary;
     // ROS publicly imports messaging and container, which come with it.
     public import memo_extension_ros::*;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-ROS-MOBILE-ROBOT-001"; :>> label = "RosMobileRobotProjectMethodBinding"; }
-        attribute :>> projectName = "ROS Mobile Robot";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-ROS-MOBILE-ROBOT-001"; :>> label = "RosMobileRobotModelMethodBinding"; }
+        attribute :>> modelName = "ROS Mobile Robot";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }

@@ -21,9 +21,9 @@ package ep_lab_family_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part projectBinding : ProjectMethodBinding {
+    part projectBinding : ModelMethodBinding {
         @MemoIdentity { :>> providedId = "EPF-PMB-001"; :>> label = "EpLabFamilyMethodBinding"; }
-        attribute :>> projectName = "EP Lab Family";
+        attribute :>> modelName = "EP Lab Family";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }

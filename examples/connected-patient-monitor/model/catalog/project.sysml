@@ -1,4 +1,4 @@
-// Connected Patient Monitor — project identity and method binding.
+// Connected Patient Monitor — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
@@ -16,9 +16,9 @@ package memo_examples_connected_patient_monitor_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-PATIENT-MONITOR-001"; :>> label = "ConnectedPatientMonitorProjectMethodBinding"; }
-        attribute :>> projectName = "Connected Patient Monitor";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-PATIENT-MONITOR-001"; :>> label = "ConnectedPatientMonitorModelMethodBinding"; }
+        attribute :>> modelName = "Connected Patient Monitor";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }

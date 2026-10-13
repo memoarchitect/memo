@@ -1,4 +1,4 @@
-// Ivd Laboratory System — project identity and method binding.
+// Ivd Laboratory System — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
@@ -16,9 +16,9 @@ package memo_examples_ivd_laboratory_system_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-LABORATORY-SYSTEM-001"; :>> label = "IvdLaboratorySystemProjectMethodBinding"; }
-        attribute :>> projectName = "Ivd Laboratory System";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-LABORATORY-SYSTEM-001"; :>> label = "IvdLaboratorySystemModelMethodBinding"; }
+        attribute :>> modelName = "Ivd Laboratory System";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }
