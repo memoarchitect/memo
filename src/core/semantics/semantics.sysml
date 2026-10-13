@@ -36,6 +36,16 @@ package memo_core_semantics {
         attribute sourceWithdrawn : Boolean[0..1];
     }
 
+    // What an import wrote a package from, on the package itself. A source's
+    // records live in one package that the import owns and regenerates, so this
+    // is the record of where it came from and when it was last imported.
+    metadata def ImportSource {
+        attribute sourceSystem : String;
+        attribute importFormat : String;
+        attribute importFile : String[0..1];
+        attribute importedAt : String;
+    }
+
     // The revision of an imported element a MEMO-authored link was made against.
     // A link is suspect when that revision is no longer the element's current
     // `externalReference.revision`, or when the element is withdrawn. The status
