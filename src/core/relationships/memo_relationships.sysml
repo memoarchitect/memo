@@ -67,6 +67,23 @@ package memo_core_relationships {
         attribute isUnique : Boolean;
     }
 
+    // ─── Typed dependencies ─────────────────────────────────────────────
+    //
+    // A link whose ends are not both usages cannot be a `connection def`: a
+    // connection joins features, and a `ref` cannot point at a definition. SysML
+    // already has the construct for a client and a supplier that are any element,
+    // the Dependency (SysML-textual-bnf.kebnf:51-59), and a metadata prefix
+    // names what kind of dependency it is (`#RealizesFeature dependency from a to
+    // b;`, PrefixMetadataAnnotation, kebnf:52). A `metadata def` that specializes
+    // this marker declares such a link as a MEMO relation: it joins the
+    // relationship registry under camelCase(name), is navigated like any other
+    // relation, and needs a row in the workspace-membership table. A metadata
+    // def that does not specialize it (`EnforcesClause`) is plain metadata on a
+    // dependency and builds no relation. Source is the client, target the
+    // supplier. Ends are untyped: what a relation may join is a rule's to say
+    // (see the note above on metaclass-neutral ends).
+    abstract metadata def MemoTypedDependency;
+
     // ─── Metaclass-neutral ends (Track A0) ──────────────────────────────
     //
     // An end is left UNTYPED (`:>> source` / `:>> target`) wherever its

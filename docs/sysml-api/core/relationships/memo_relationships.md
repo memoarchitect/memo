@@ -35,6 +35,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
+| [`MemoTypedDependency`](#memotypeddependency) | `metadata def` | A link whose ends are not both usages cannot be a `connection def`: a connection joins features, and a `ref` cannot point at a definition.… | — |
 | [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship from `any element` to `MemoRequirementElement`. | `MemoRelationship` |
 | [`ProducesEvidence`](#producesevidence) | `connection def` | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. | `MemoRelationship` |
 | [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship from `RequirementDriver` to `MemoRequirementElement`. | `MemoRelationship` |
@@ -55,6 +56,21 @@ abstract connection def MemoRelationship :> Connections::BinaryConnection
 | Kind | `connection def` |
 | Abstract | Yes |
 | Specializes | `Connections::BinaryConnection` |
+| Owning package | `memo_core_relationships` |
+
+
+## MemoTypedDependency
+
+```sysml
+abstract metadata def MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A link whose ends are not both usages cannot be a `connection def`: a connection joins features, and a `ref` cannot point at a definition.… |
+| Kind | `metadata def` |
+| Abstract | Yes |
+| Specializes | — |
 | Owning package | `memo_core_relationships` |
 
 
@@ -236,6 +252,23 @@ connection def BindsToInterface :> MemoRelationship
                  * Unset is read as true. */
             attribute isUnique : Boolean;
         }
+
+        // ─── Typed dependencies ─────────────────────────────────────────────
+        //
+        // A link whose ends are not both usages cannot be a `connection def`: a
+        // connection joins features, and a `ref` cannot point at a definition. SysML
+        // already has the construct for a client and a supplier that are any element,
+        // the Dependency (SysML-textual-bnf.kebnf:51-59), and a metadata prefix
+        // names what kind of dependency it is (`#RealizesFeature dependency from a to
+        // b;`, PrefixMetadataAnnotation, kebnf:52). A `metadata def` that specializes
+        // this marker declares such a link as a MEMO relation: it joins the
+        // relationship registry under camelCase(name), is navigated like any other
+        // relation, and needs a row in the workspace-membership table. A metadata
+        // def that does not specialize it (`EnforcesClause`) is plain metadata on a
+        // dependency and builds no relation. Source is the client, target the
+        // supplier. Ends are untyped: what a relation may join is a rule's to say
+        // (see the note above on metaclass-neutral ends).
+        abstract metadata def MemoTypedDependency;
 
         // ─── Metaclass-neutral ends (Track A0) ──────────────────────────────
         //

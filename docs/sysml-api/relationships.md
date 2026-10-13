@@ -126,6 +126,14 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | [`PhysicalInterface`](architecture/realization/physical/memo_physical_architecture.md#physicalinterface) | `interface def` | Typed relationship from `PhysicalPort` to `PhysicalPort`. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
 
 
+## `memo::architecture::variability`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`ExcludesFeature`](architecture/variability/memo_variability.md#excludesfeature) | `connection def` | The two features cannot be selected together. Symmetric: either end may be written first. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
+| [`RequiresFeature`](architecture/variability/memo_variability.md#requiresfeature) | `connection def` | Selecting the source feature needs the target feature selected too. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
+
+
 ## `memo::artifacts::configuration_management`
 
 | Name | SysML kind | Description | Source |

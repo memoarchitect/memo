@@ -8,10 +8,17 @@ package memo_architecture_decisions {
     private import memo_artifacts_core::*;
     part def DesignDecision specializes MemoPart {
         attribute decisionKind : String;
-        attribute alternatives : String;
-        attribute selectedOption : String;
         attribute decisionStatus : DesignDecisionStatusKind;
     }
+
+    // The options a decision weighs and the one it chose are links to variants, not
+    // strings: `#Alternative dependency from <decision> to <variant>, <variant>;` and
+    // `#Selected dependency from <decision> to <variant>;`. A variant is a SysML
+    // `variant` (SysML-textual-bnf.kebnf:254-256) of a variation point, so a trade
+    // study points at the thing that is being traded. Both are typed dependencies
+    // (memo_core_relationships::MemoTypedDependency).
+    metadata def Alternative :> MemoTypedDependency;
+    metadata def Selected :> MemoTypedDependency;
 
     connection def DecisionRecordedInADR :> MemoRelationship {
         end decision : DesignDecision :>> source;
