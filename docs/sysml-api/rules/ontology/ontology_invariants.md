@@ -40,6 +40,7 @@
 | [`ModelDeclaresSystemRule`](#modeldeclaressystemrule) | `constraint def` | Constraint that checks model declares system rule. | `MemoConsistencyRule` |
 | [`SosUseCaseIncludesSystemUseCaseRule`](#sosusecaseincludessystemusecaserule) | `constraint def` | A use case is at the level of its subject: one whose subject is a SystemOfSystems is a clinical procedure, one whose subject is a System is a system use case. There is no kind for either; the level is read from the subject, and the subject from `hasSubject`.… | `MemoConsistencyRule` |
 | [`SystemUseCaseIncludedRule`](#systemusecaseincludedrule) | `constraint def` | Constraint that checks system use case included rule. | `MemoConsistencyRule` |
+| [`SystemBoundaryRule`](#systemboundaryrule) | `constraint def` | A system is a boundary (plan O16). The workspace closure never reaches another system or the system of systems, and drops such a link silently; this rule reports it.… | `MemoConsistencyRule` |
 | [`NestedPartConnectedRule`](#nestedpartconnectedrule) | `constraint def` | Constraint that checks nested part connected rule. | `MemoConsistencyRule` |
 | [`RuntimeTracesToModuleRule`](#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | `MemoConsistencyRule` |
 | [`PatientContactCharacterizedRule`](#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | `MemoConsistencyRule` |
@@ -124,6 +125,21 @@ constraint def SystemUseCaseIncludedRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks system use case included rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## SystemBoundaryRule
+
+```sysml
+constraint def SystemBoundaryRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A system is a boundary (plan O16). The workspace closure never reaches another system or the system of systems, and drops such a link silently; this rule reports it.… |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -639,6 +655,23 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "A use case whose subject is a system is included by a use case of the system of systems, or says it stands alone (standalone = true).";
             attribute predicateExpression = "not(downstream(hasSubject)->exists(conformsTo(System))) or upstream(includesStep)->size() >= 1 or attributes.standalone == 'true'";
+            constraint { true }
+        }
+        // A system is a boundary (plan O16). The workspace closure never reaches another system or the
+        // system of systems, and drops such a link silently; this rule reports it. Evaluated by the
+        // workspace evaluator because it needs what each workspace holds, which no predicate can say:
+        // the subject is the element inside a system that is typed by, or relates to, a System-kind or
+        // SystemOfSystems-kind element outside it. The system of systems' own references to its systems
+        // are what it is for and are not findings.
+        constraint def SystemBoundaryRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-087"; }
+            attribute tailoring = RuleTailoringKind::methodology;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute evaluator = "workspace";
+            attribute appliesTo = "Model";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A system does not reference another system or the system of systems from inside itself. Two systems meet at an interface the system of systems owns.";
             constraint { true }
         }
         constraint def NestedPartConnectedRule :> MemoConsistencyRule {
