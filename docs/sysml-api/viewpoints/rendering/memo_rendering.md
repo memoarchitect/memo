@@ -419,6 +419,16 @@ part def EnumRendering :> MemoPart
             attribute :>> explorerGroup = "methodology";
         }
 
+        // A group name is only unique inside its layer: `core` is the controlled artifacts' evidence
+        // under artifacts/ and the method's own definitions (the model binding, a methodology, a rule
+        // policy) under methodology/. A source namespace written `layer/group` is that layer's group.
+        part explorerMethodologyCoreClassification : ExplorerClassification {
+            @MemoIdentity { :>> providedId = "EXPL-030"; :>> label = "methodologyCoreExplorerClassification"; }
+            attribute :>> sourceNamespace = "methodology/core";
+            attribute :>> explorerDomain = "methodology";
+            attribute :>> explorerGroup = "methodology";
+        }
+
         // ── Enumeration labels ───────────────────────────────────────
         // Seeded with the three status enums. `StatusKind` is the standard
         // ModelingMetadata one and is seeded first because its members are
