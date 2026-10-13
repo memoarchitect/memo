@@ -53,6 +53,24 @@ package memo_architecture_realization_deployment {
         :> annotatedElement : SysML::AllocationUsage;
         :>> baseType = buildsIntoLinks meta SysML::Usage;
     }
+    // A logical component is REALIZED BY the hardware or software that implements it. The
+    // logical and the implementation architectures are separate structures and stay
+    // separate: nothing is nested (a logical component never contains software or a
+    // physical part, CR-ONT-078); the two are joined by an allocation, as the language
+    // joins structures across domains (SysML-textual-bnf.kebnf:792-801, AllocationDefinition and AllocationUsage) and as SYSMOD
+    // does with its `logical2product` allocation, logical architecture to product
+    // architecture, logical as the source. The target is any part, as HostedBy's ends are:
+    // a hardware assembly and a software system are both MemoParts.
+    allocation def RealizedBy :> MemoRelationship, Allocations::Allocation {
+        end logicalComponent : LogicalComponent :>> source;
+        end realization : MemoPart :>> target;
+    }
+    abstract connection realizedByLinks : RealizedBy[*];
+    metadata def <realizedBy> RealizedByMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::AllocationDefinition;
+        :> annotatedElement : SysML::AllocationUsage;
+        :>> baseType = realizedByLinks meta SysML::Usage;
+    }
         // Every usage of this already writes `allocation x : DeploysTo allocate a
     // to b;` -- the declaration was the only part still saying `connection`.
     allocation def DeploysTo :> MemoRelationship, Allocations::Allocation {
