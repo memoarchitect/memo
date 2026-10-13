@@ -472,15 +472,17 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
+| [`ExternalSource`](core/semantics/semantics.md#externalsource) | `metadata def` | An element imported from another system (a requirements tool, a PLM, a quality system, a test-result export). It annotates an element of ANY metaclass, because imported records span them: a requirement def is not a MemoPart.… | [`core/semantics/semantics.sysml`](core/semantics/semantics.md) |
 | [`Provenance`](core/semantics/semantics.md#provenance) | `metadata def` | Marks an element as the rationale/provenance carrier for a decision. | [`core/semantics/semantics.sysml`](core/semantics/semantics.md) |
 | [`StandardReference`](core/semantics/semantics.md#standardreference) | `metadata def` | Tags an element with the regulatory standard it derives from (e.g. ISO 14971, IEC 62304, ISO/IEC/IEEE 42010). | [`core/semantics/semantics.sysml`](core/semantics/semantics.md) |
+| [`TraceBaseline`](core/semantics/semantics.md#tracebaseline) | `metadata def` | Trace baseline definition. | [`core/semantics/semantics.sysml`](core/semantics/semantics.md) |
 
 
 ## `memo::core::terminology`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ExternalReference`](core/terminology/terminology.md#externalreference) | `attribute def` | A reference into an external registry or document (regulatory listing, standard clause, catalog page) with enough context to resolve it. | [`core/terminology/terminology.sysml`](core/terminology/terminology.md) |
+| [`ExternalReference`](core/terminology/terminology.md#externalreference) | `attribute def` | A reference into an external registry or document (regulatory listing, standard clause, catalog page) with enough context to resolve it.… | [`core/terminology/terminology.sysml`](core/terminology/terminology.md) |
 | [`TerminologyCode`](core/terminology/terminology.md#terminologycode) | `attribute def` | One coding of a concept in one code system. Mirrors the FHIR Coding datatype (system/version/code/display) so FHIR mappings stay lossless. | [`core/terminology/terminology.sysml`](core/terminology/terminology.md) |
 | [`UdiCarrier`](core/terminology/terminology.md#udicarrier) | `attribute def` | A device-identity carrier per IMDRF UDI guidance: the DI portion belongs to the device definition, PI portions to the instance. | [`core/terminology/terminology.sysml`](core/terminology/terminology.md) |
 

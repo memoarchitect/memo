@@ -31,7 +31,7 @@
 | --- | --- | --- | --- |
 | [`TerminologyCode`](#terminologycode) | `attribute def` | One coding of a concept in one code system. Mirrors the FHIR Coding datatype (system/version/code/display) so FHIR mappings stay lossless. | — |
 | [`UdiCarrier`](#udicarrier) | `attribute def` | A device-identity carrier per IMDRF UDI guidance: the DI portion belongs to the device definition, PI portions to the instance. | — |
-| [`ExternalReference`](#externalreference) | `attribute def` | A reference into an external registry or document (regulatory listing, standard clause, catalog page) with enough context to resolve it. | — |
+| [`ExternalReference`](#externalreference) | `attribute def` | A reference into an external registry or document (regulatory listing, standard clause, catalog page) with enough context to resolve it.… | — |
 
 ## TerminologyCode
 
@@ -71,7 +71,7 @@ attribute def ExternalReference
 
 | Property | Value |
 | --- | --- |
-| Description | A reference into an external registry or document (regulatory listing, standard clause, catalog page) with enough context to resolve it. |
+| Description | A reference into an external registry or document (regulatory listing, standard clause, catalog page) with enough context to resolve it.… |
 | Kind | `attribute def` |
 | Abstract | No |
 | Specializes | — |
@@ -111,11 +111,18 @@ attribute def ExternalReference
 
         // A reference into an external registry or document (regulatory listing,
         // standard clause, catalog page) with enough context to resolve it.
+        //
+        // For an element imported from another system (see ExternalSource) it is the
+        // record in that system: `sourceSystem` names the system, `identifier` is
+        // the id the system knows the record by, and `revision` is the revision of
+        // the record as last imported.
         attribute def ExternalReference {
             attribute referenceKind : String;
             attribute identifier : String;
             attribute uri : String;
             attribute section : String;
+            attribute sourceSystem : String[0..1];
+            attribute revision : String[0..1];
         }
     }
 
