@@ -58,7 +58,7 @@ examples:
 ```
 
 When a project imports `@memoarchitect/methodology-default` and binds it in its
-`ProjectMethodBinding`, the tools resolve the installed ontology npm package,
+`ModelMethodBinding`, the tools resolve the installed ontology npm package,
 read this manifest, and map the logical name to its subpath. The manifest says
 where the source sits; the import decides that it is loaded. `memo-architect init --list` shows the manifest's
 ontology packages and examples. `memo-architect init` copies the manifest's one

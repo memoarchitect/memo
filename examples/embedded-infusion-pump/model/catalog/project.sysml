@@ -1,4 +1,4 @@
-// Embedded Infusion Pump — project identity and method binding.
+// Embedded Infusion Pump — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
@@ -16,9 +16,9 @@ package memo_examples_embedded_infusion_pump_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-INFUSION-PUMP-001"; :>> label = "EmbeddedInfusionPumpProjectMethodBinding"; }
-        attribute :>> projectName = "Embedded Infusion Pump";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-INFUSION-PUMP-001"; :>> label = "EmbeddedInfusionPumpModelMethodBinding"; }
+        attribute :>> modelName = "Embedded Infusion Pump";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }

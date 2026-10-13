@@ -40,7 +40,7 @@ dependency; remove it and the dependency goes.
 package memo_examples_ros_mobile_robot_project {
     public import memo_extension_ros::*;
 
-    part projectBinding : ProjectMethodBinding {
+    part projectBinding : ModelMethodBinding {
         ref :>> selectedMethodology = mdDefaultDefinition;
     }
 }

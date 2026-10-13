@@ -449,7 +449,7 @@ write('methodology-elements', {
     ${node(80, 220, 260, 72, 'MethodologyDefinition', '#4d9a57')}${node(450, 180, 220, 64, 'Selected modules', '#4d9a57')}${node(450, 270, 220, 64, 'Selected viewpoints', '#4d9a57')}${node(450, 360, 220, 64, 'Selected rules', '#4d9a57')}
     ${edge(340, 256, 450, 212)}${edge(340, 256, 450, 302)}${edge(340, 256, 450, 392)}
     ${node(790, 270, 260, 72, 'ResolvedMethodology', '#4d9a57')}${edge(670, 302, 790, 306, 'resolves')}
-    ${node(1170, 270, 260, 72, 'ProjectMethodBinding', '#4d9a57')}${edge(1050, 306, 1170, 306, 'applies')}
+    ${node(1170, 270, 260, 72, 'ModelMethodBinding', '#4d9a57')}${edge(1050, 306, 1170, 306, 'applies')}
     ${node(80, 520, 180, 68, 'Archetype', '#4d9a57')}${node(320, 520, 210, 68, 'ModelingPattern', '#4d9a57')}${node(590, 520, 220, 68, 'ElementUsageRule', '#4d9a57')}${node(870, 520, 210, 68, 'WorkflowStep', '#4d9a57')}${node(1140, 520, 190, 68, 'QualityGate', '#4d9a57')}${node(1370, 520, 150, 68, 'DHF binding', '#4d9a57')}
     ${node(450, 650, 260, 68, 'Extension module', '#4d9a57')}${edge(580, 650, 580, 430, 'public import', { labelX: 675, labelY: 620 })}
   `,
