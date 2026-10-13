@@ -115,6 +115,7 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | [`FlowTraversesBinding`](architecture/realization/deployment/memo_deployment.md#flowtraversesbinding) | `allocation def` | Typed relationship from `EndToEndFlow` to `SoftwareDeploymentUnit`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`MemoryBinding`](architecture/realization/deployment/memo_deployment.md#memorybinding) | `allocation def` | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 | [`ProvidesEnvironment`](architecture/realization/deployment/memo_deployment.md#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
+| [`RealizedBy`](architecture/realization/deployment/memo_deployment.md#realizedby) | `allocation def` | Typed relationship from `LogicalComponent` to `MemoPart`. | [`architecture/realization/deployment/memo_deployment.sysml`](architecture/realization/deployment/memo_deployment.md) |
 
 
 ## `memo::architecture::realization::physical`

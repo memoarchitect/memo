@@ -44,6 +44,7 @@
 | [`SoftwareDeploymentUnit`](#softwaredeploymentunit) | `part def` | Software deployment unit definition specializing `MemoPart`. | `MemoPart` |
 | [`RuntimeEnvironment`](#runtimeenvironment) | `part def` | Runtime environment definition specializing `MemoPart`. | `MemoPart` |
 | [`BuildsInto`](#buildsinto) | `allocation def` | Typed relationship from `SoftwareModule` to `SoftwareDeploymentUnit`. | `MemoRelationship` |
+| [`RealizedBy`](#realizedby) | `allocation def` | Typed relationship from `LogicalComponent` to `MemoPart`. | `MemoRelationship` |
 | [`DeploysTo`](#deploysto) | `allocation def` | Typed relationship from `SoftwareDeploymentUnit` to `ProcessingNode`. | `MemoRelationship` |
 | [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | `MemoRelationship` |
 | [`MemoryBinding`](#memorybinding) | `allocation def` | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. | `MemoRelationship` |
@@ -93,6 +94,21 @@ allocation def BuildsInto :> MemoRelationship, Allocations::Allocation
 | Property | Value |
 | --- | --- |
 | Description | Typed relationship from `SoftwareModule` to `SoftwareDeploymentUnit`. |
+| Kind | `allocation def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_realization_deployment` |
+
+
+## RealizedBy
+
+```sysml
+allocation def RealizedBy :> MemoRelationship, Allocations::Allocation
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `LogicalComponent` to `MemoPart`. |
 | Kind | `allocation def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -293,6 +309,24 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
             :> annotatedElement : SysML::AllocationDefinition;
             :> annotatedElement : SysML::AllocationUsage;
             :>> baseType = buildsIntoLinks meta SysML::Usage;
+        }
+        // A logical component is REALIZED BY the hardware or software that implements it. The
+        // logical and the implementation architectures are separate structures and stay
+        // separate: nothing is nested (a logical component never contains software or a
+        // physical part, CR-ONT-078); the two are joined by an allocation, as the language
+        // joins structures across domains (SysML-textual-bnf.kebnf:792-801, AllocationDefinition and AllocationUsage) and as SYSMOD
+        // does with its `logical2product` allocation, logical architecture to product
+        // architecture, logical as the source. The target is any part, as HostedBy's ends are:
+        // a hardware assembly and a software system are both MemoParts.
+        allocation def RealizedBy :> MemoRelationship, Allocations::Allocation {
+            end logicalComponent : LogicalComponent :>> source;
+            end realization : MemoPart :>> target;
+        }
+        abstract connection realizedByLinks : RealizedBy[*];
+        metadata def <realizedBy> RealizedByMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::AllocationDefinition;
+            :> annotatedElement : SysML::AllocationUsage;
+            :>> baseType = realizedByLinks meta SysML::Usage;
         }
             // Every usage of this already writes `allocation x : DeploysTo allocate a
         // to b;` -- the declaration was the only part still saying `connection`.

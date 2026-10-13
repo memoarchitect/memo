@@ -37,6 +37,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`ContainmentAcyclicRule`](#containmentacyclicrule) | `constraint def` | Constraint that checks containment acyclic rule. | `MemoConsistencyRule` |
+| [`ModelDeclaresSystemRule`](#modeldeclaressystemrule) | `constraint def` | Constraint that checks model declares system rule. | `MemoConsistencyRule` |
 | [`NestedPartConnectedRule`](#nestedpartconnectedrule) | `constraint def` | Constraint that checks nested part connected rule. | `MemoConsistencyRule` |
 | [`RuntimeTracesToModuleRule`](#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | `MemoConsistencyRule` |
 | [`PatientContactCharacterizedRule`](#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | `MemoConsistencyRule` |
@@ -76,6 +77,21 @@ constraint def ContainmentAcyclicRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks containment acyclic rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## ModelDeclaresSystemRule
+
+```sysml
+constraint def ModelDeclaresSystemRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks model declares system rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -549,6 +565,19 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Containment/composition relations (Composes) must form no cycles.";
             attribute predicateExpression = "acyclic(composes)";
+            constraint { true }
+        }
+        constraint def ModelDeclaresSystemRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-084"; }
+            // Tailorable, not an invariant: a library or a model that only extends another has no
+            // system of its own, and its method says so with a rationale.
+            attribute tailoring = RuleTailoringKind::methodology;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "Model";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "A model declares at least one System (a part def that specializes System). A workspace is the closure of what is linked to the definition of a System, so a model with only a usage typed by System, or none, has no workspace: nothing can be scoped, and every element is Unassigned.";
+            attribute predicateExpression = "allOfKind('System')->exists(isDefinition == 'true')";
             constraint { true }
         }
         constraint def NestedPartConnectedRule :> MemoConsistencyRule {

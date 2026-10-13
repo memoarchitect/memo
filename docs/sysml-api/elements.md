@@ -461,6 +461,13 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`ElementKindAlias`](core/methodology_scope/methodology_scope.md#elementkindalias) | `part def` | Element kind alias definition specializing `MemoPart`. | [`core/methodology_scope/methodology_scope.sysml`](core/methodology_scope/methodology_scope.md) |
 
 
+## `memo::core::relationships`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`WorkspaceMembershipEntry`](core/relationships/memo_workspace_membership.md#workspacemembershipentry) | `part def` | One relation and the direction it places elements in a workspace. | [`core/relationships/memo_workspace_membership.sysml`](core/relationships/memo_workspace_membership.md) |
+
+
 ## `memo::core::semantics`
 
 | Name | SysML kind | Description | Source |
