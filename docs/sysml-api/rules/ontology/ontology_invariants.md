@@ -38,6 +38,8 @@
 | --- | --- | --- | --- |
 | [`ContainmentAcyclicRule`](#containmentacyclicrule) | `constraint def` | Constraint that checks containment acyclic rule. | `MemoConsistencyRule` |
 | [`ModelDeclaresSystemRule`](#modeldeclaressystemrule) | `constraint def` | Constraint that checks model declares system rule. | `MemoConsistencyRule` |
+| [`SosUseCaseIncludesSystemUseCaseRule`](#sosusecaseincludessystemusecaserule) | `constraint def` | A use case is at the level of its subject: one whose subject is a SystemOfSystems is a clinical procedure, one whose subject is a System is a system use case. There is no kind for either; the level is read from the subject, and the subject from `hasSubject`.… | `MemoConsistencyRule` |
+| [`SystemUseCaseIncludedRule`](#systemusecaseincludedrule) | `constraint def` | Constraint that checks system use case included rule. | `MemoConsistencyRule` |
 | [`NestedPartConnectedRule`](#nestedpartconnectedrule) | `constraint def` | Constraint that checks nested part connected rule. | `MemoConsistencyRule` |
 | [`RuntimeTracesToModuleRule`](#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | `MemoConsistencyRule` |
 | [`PatientContactCharacterizedRule`](#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | `MemoConsistencyRule` |
@@ -92,6 +94,36 @@ constraint def ModelDeclaresSystemRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks model declares system rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## SosUseCaseIncludesSystemUseCaseRule
+
+```sysml
+constraint def SosUseCaseIncludesSystemUseCaseRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A use case is at the level of its subject: one whose subject is a SystemOfSystems is a clinical procedure, one whose subject is a System is a system use case. There is no kind for either; the level is read from the subject, and the subject from `hasSubject`.… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## SystemUseCaseIncludedRule
+
+```sysml
+constraint def SystemUseCaseIncludedRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks system use case included rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -578,6 +610,35 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A model declares at least one System (a part def that specializes System). A workspace is the closure of what is linked to the definition of a System, so a model with only a usage typed by System, or none, has no workspace: nothing can be scoped, and every element is Unassigned.";
             attribute predicateExpression = "allOfKind('System')->exists(isDefinition == 'true')";
+            constraint { true }
+        }
+        // ─── Use case scope (plan O8) ─────────────────────────────────────────
+        //
+        // A use case is at the level of its subject: one whose subject is a SystemOfSystems is a clinical
+        // procedure, one whose subject is a System is a system use case. There is no kind for either; the
+        // level is read from the subject, and the subject from `hasSubject`. A use case with no subject
+        // is at neither level and neither rule judges it.
+
+        constraint def SosUseCaseIncludesSystemUseCaseRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-085"; }
+            attribute tailoring = RuleTailoringKind::methodology;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "UseCase";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A use case whose subject is a system of systems is made of what its systems do: it includes at least one use case whose subject is a system.";
+            attribute predicateExpression = "not(downstream(hasSubject)->exists(conformsTo(SystemOfSystems))) or downstream(includesStep)->exists(downstream(hasSubject)->exists(conformsTo(System)))";
+            constraint { true }
+        }
+        constraint def SystemUseCaseIncludedRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-086"; }
+            attribute tailoring = RuleTailoringKind::methodology;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "UseCase";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A use case whose subject is a system is included by a use case of the system of systems, or says it stands alone (standalone = true).";
+            attribute predicateExpression = "not(downstream(hasSubject)->exists(conformsTo(System))) or upstream(includesStep)->size() >= 1 or attributes.standalone == 'true'";
             constraint { true }
         }
         constraint def NestedPartConnectedRule :> MemoConsistencyRule {
