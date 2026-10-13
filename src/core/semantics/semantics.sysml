@@ -38,7 +38,9 @@ package memo_core_semantics {
 
     // What an import wrote a package from, on the package itself. A source's
     // records live in one package that the import owns and regenerates, so this
-    // is the record of where it came from and when it was last imported.
+    // is the record of where it came from and when it was last imported. A
+    // metadata usage is a package member (PackageBodyElement, SysML-textual-bnf.kebnf:124 →
+    // PackageMember :133 → DefinitionElement :184 → AnnotatingElement :74 → MetadataFeature).
     metadata def ImportSource {
         attribute sourceSystem : String;
         attribute importFormat : String;
@@ -58,8 +60,14 @@ package memo_core_semantics {
     // `externalReference { … }` is MetadataBodyUsage (kebnf:1694), and the baseline sits in
     // the link's own body: a `satisfy`'s RequirementBody (kebnf:1408), a
     // connection's or a `dependency`'s DefinitionBody (kebnf:238).
+    //
+    // `sourceIdentifier` names the imported element the revision belongs to. A
+    // link between two imported elements needs it: one revision cannot be
+    // compared with two ends, so without it the link could never be cleared by
+    // review. Absent, every imported end is compared.
     metadata def TraceBaseline {
         attribute sourceRevision : String;
+        attribute sourceIdentifier : String[0..1];
     }
 
     // Marks an element as the rationale/provenance carrier for a decision.
