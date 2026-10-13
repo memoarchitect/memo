@@ -86,6 +86,56 @@ package memo_rules_ontology {
         attribute rationaleText = "A system does not reference another system or the system of systems from inside itself. Two systems meet at an interface the system of systems owns.";
         constraint { true }
     }
+    // ─── Release selections (plan O14) ────────────────────────────────────
+    //
+    // A release record selects features (`#SelectsFeature`), and through them the variants that realize
+    // them (`#RealizesFeature`, variant to feature). The rules read a record's selection by navigation;
+    // `selectRelease` (memo-tools `model/variability.ts`) is the same join in code and a test holds the
+    // two equal. `upstream` / `downstream` are transitive and directed; the bare relation name is one
+    // hop in both directions, which is what the symmetric `excludesFeature` needs (a transitive reading
+    // would make A and C exclusive because each excludes B).
+
+    constraint def ReleaseSelectsProposedVariantRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-088"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "ReleaseRecord";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "An approved or released record contains what it selects. A feature whose variant is still proposed has no approved design behind it, so a record that has passed approval cannot select it. A record with no status, or one still being drafted, is not judged.";
+        attribute predicateExpression = "not(attributes.status == 'ElementStatusKind::approved' or attributes.status == 'ElementStatusKind::released') or downstream(selectsFeature)->forAll(upstream(realizesFeature)->forAll(attributes.status != 'ElementStatusKind::proposed'))";
+        constraint { true }
+    }
+    constraint def ReleaseSelectionConsistentRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-089"; }
+        // An invariant: requires and excludes are the family's own declarations, and a selection that
+        // breaks them contradicts the model, whatever the record's status.
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "ReleaseRecord";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A record selects a set of features that satisfies the family's rules: every feature a selected feature requires is selected too, and no two selected features exclude each other.";
+        attribute predicateExpression = "downstream(selectsFeature)->forAll(downstream(requiresFeature)->forAll(upstream(selectsFeature)->exists(id == subject.id)) and excludesFeature->forAll(upstream(selectsFeature)->forAll(id != subject.id)))";
+        constraint { true }
+    }
+    // Checks that no variation point has TWO OR MORE selected variants. Whether each has one needs
+    // the item the record is a release of (`ReleaseOf`, with the release model): without it every
+    // variation point in the model would be asked of every record, including another system's.
+    // A variant that realizes no feature is never selected, so it does not count. Limit: `variant`
+    // is followed transitively, so a variant that is itself a variation point counts its own
+    // variants against its parent's.
+    constraint def ReleaseSelectsAtMostOneVariantRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-090"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "ReleaseRecord";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A variation point is one choice. A record that selects the features of two of its variants builds both, so it describes no single product.";
+        attribute predicateExpression = "downstream(selectsFeature)->forAll(upstream(realizesFeature)->forAll(upstream(variant)->forAll(downstream(variant)->select(downstream(realizesFeature)->exists(upstream(selectsFeature)->exists(id == subject.id)))->size() <= 1)))";
+        constraint { true }
+    }
     constraint def NestedPartConnectedRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "AR-IBD-001"; }
         attribute tailoring = RuleTailoringKind::invariant;
