@@ -28,7 +28,7 @@ methodology/
 
 | Namespace | Element families | Purpose |
 | --- | --- | --- |
-| `core` | `MethodologyLibrary`, `MethodologyDefinition`, `ResolvedMethodology`, `ProjectMethodBinding`, `DhfDocumentBinding` | Define and resolve a project method |
+| `core` | `MethodologyLibrary`, `MethodologyDefinition`, `ResolvedMethodology`, `ModelMethodBinding` (deprecated alias `ProjectMethodBinding` until 0.15.0), `DhfDocumentBinding` | Define and resolve a model's method |
 | `archetypes` | `Archetype` definitions | Describe reusable project shapes |
 | `profiles` | named methodology profiles | Select predefined ontology scope |
 | `patterns` | `ModelingPattern` | Describe repeatable modeling expectations |

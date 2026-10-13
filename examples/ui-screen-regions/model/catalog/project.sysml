@@ -1,4 +1,4 @@
-// UI screen regions — project identity and method binding.
+// UI screen regions — model identity and method binding.
 //
 // The native entrypoint for this project. Everything that decides what the
 // model means is here or reachable from here: the imports name the reusable
@@ -33,9 +33,9 @@ package memo_examples_ui_screen_regions_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part uiScreenRegionsBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-UIR-001"; :>> label = "UIScreenRegionsProjectMethodBinding"; }
-        attribute :>> projectName = "UI Screen Regions";
+    part uiScreenRegionsBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-UIR-001"; :>> label = "UIScreenRegionsModelMethodBinding"; }
+        attribute :>> modelName = "UI Screen Regions";
         // The default methodology selects everything the resolved ontology
         // provides, which is what makes the UI layout rules CR-MED-110…113
         // evaluable against this model.

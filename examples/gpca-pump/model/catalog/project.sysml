@@ -1,4 +1,4 @@
-// GPCA project identity and method binding.
+// GPCA model identity and method binding.
 //
 // This file is the project's native entrypoint. It imports the methodology it
 // selects and states the selection as a typed SysML reference — no YAML field
@@ -15,9 +15,9 @@ package memo_examples_gpca_pump_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part gpcaProjectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-GPCA-001"; :>> label = "GPCAProjectMethodBinding"; }
-        attribute :>> projectName = "GPCA Infusion Pump";
+    part gpcaProjectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-GPCA-001"; :>> label = "GPCAModelMethodBinding"; }
+        attribute :>> modelName = "GPCA Infusion Pump";
         ref :>> selectedMethodology = gpcaMethodDefinition;
         // The project adds nothing to the methodology's selection.
         attribute :>> scopeMode = ScopeModeKind::explicit;

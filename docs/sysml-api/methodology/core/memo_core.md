@@ -37,10 +37,11 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`MethodologyLibrary`](#methodologylibrary) | `part def` | Methodology library definition specializing `MemoPart`. | `MemoPart` |
-| [`RulePolicy`](#rulepolicy) | `part def` | A rule's disposition under one methodology or project binding. `targetRule` and `replacementRule` are typed references to the rule's own `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.… | `MemoPart` |
+| [`RulePolicy`](#rulepolicy) | `part def` | A rule's disposition under one methodology or model binding. `targetRule` and `replacementRule` are typed references to the rule's own `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.… | `MemoPart` |
 | [`MethodologyDefinition`](#methodologydefinition) | `part def` | Methodology definition definition specializing `MemoPart`. | `MemoPart` |
 | [`ResolvedMethodology`](#resolvedmethodology) | `part def` | Derived, never authored. The resolver projects this from a binding and its methodology chain. If it is serialized for review it is generated output that records its input hashes; it does not compete with the authored methodology and binding, and ontology source declares no ins… | `MemoPart` |
-| [`ProjectMethodBinding`](#projectmethodbinding) | `part def` | Project method binding definition specializing `MemoPart`. | `MemoPart` |
+| [`ModelMethodBinding`](#modelmethodbinding) | `part def` | What a model is bound to: its name, the methodology it is governed by, and the rule policies it adds. "Model" is what Architect opens, one repository and one compile; "project" means a change set in an iteration. | `MemoPart` |
+| [`ProjectMethodBinding`](#projectmethodbinding) | `part def` | Project method binding definition specializing `ModelMethodBinding`. | `ModelMethodBinding` |
 | [`DhfDocumentBinding`](#dhfdocumentbinding) | `part def` | Dhf document binding definition specializing `MemoPart`. | `MemoPart` |
 | [`Archetype`](#archetype) | `part def` | Archetype definition specializing `MemoPart`. | `MemoPart` |
 
@@ -67,7 +68,7 @@ part def RulePolicy :> MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | A rule's disposition under one methodology or project binding. `targetRule` and `replacementRule` are typed references to the rule's own `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.… |
+| Description | A rule's disposition under one methodology or model binding. `targetRule` and `replacementRule` are typed references to the rule's own `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -104,18 +105,33 @@ part def ResolvedMethodology :> MemoPart
 | Owning package | `memo_methodology_core` |
 
 
-## ProjectMethodBinding
+## ModelMethodBinding
 
 ```sysml
-part def ProjectMethodBinding :> MemoPart
+part def ModelMethodBinding :> MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Project method binding definition specializing `MemoPart`. |
+| Description | What a model is bound to: its name, the methodology it is governed by, and the rule policies it adds. "Model" is what Architect opens, one repository and one compile; "project" means a change set in an iteration. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
+| Owning package | `memo_methodology_core` |
+
+
+## ProjectMethodBinding
+
+```sysml
+part def ProjectMethodBinding :> ModelMethodBinding
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Project method binding definition specializing `ModelMethodBinding`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `ModelMethodBinding` |
 | Owning package | `memo_methodology_core` |
 
 
@@ -170,7 +186,7 @@ part def Archetype :> MemoPart
             attribute domain : String;
         }
 
-        // A rule's disposition under one methodology or project binding.
+        // A rule's disposition under one methodology or model binding.
         //
         // `targetRule` and `replacementRule` are typed references to the rule's own
         // `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.
@@ -256,25 +272,35 @@ part def Archetype :> MemoPart
             attribute version : String;
         }
 
-        part def ProjectMethodBinding :> MemoPart {
-            attribute projectName : String;
+        // What a model is bound to: its name, the methodology it is governed by,
+        // and the rule policies it adds. "Model" is what Architect opens, one
+        // repository and one compile; "project" means a change set in an iteration.
+        part def ModelMethodBinding :> MemoPart {
+            attribute modelName : String;
             ref selectedMethodology : MethodologyDefinition;
-            // `allAvailable` widens the project to every package it resolved,
+            // `allAvailable` widens the model to every package it resolved,
             // whatever the methodology selects; anything else leaves the
-            // methodology's mode in force. A project ADDS packages to the
+            // methodology's mode in force. A model ADDS packages to the
             // selection by importing them publicly in the package that declares
             // this binding (`public import memo_extension_ros::*;`), the same way
             // a methodology selects them. There is no list to keep beside it.
             attribute scopeMode : ScopeModeKind;
-            // The submission regimes this project targets, declared once here.
+            // The submission regimes this model targets, declared once here.
             // Everything downstream that needs to know which standards apply —
             // `memo standards check`, the standards checklist, the Architect gap
-            // badges — reads this, so the regime axis is a project fact stated in
+            // badges — reads this, so the regime axis is a model fact stated in
             // SysML rather than a per-document array maintained in 44 places.
-            // Empty means the project has not declared its regimes; a report that
+            // Empty means the model has not declared its regimes; a report that
             // needs them says so rather than assuming a default market.
             attribute regulatoryRegime : RegulatoryRegimeKind[0..*];
             part rulePolicy : RulePolicy[0..*];
+        }
+
+        // DEPRECATED in 0.14.0, deleted in 0.15.0: the former spelling of
+        // ModelMethodBinding, kept so a model written with it still binds. MEMO
+        // reads `projectName` when `modelName` is absent and warns on either.
+        part def ProjectMethodBinding :> ModelMethodBinding {
+            attribute projectName : String;
         }
 
         part def DhfDocumentBinding :> MemoPart {

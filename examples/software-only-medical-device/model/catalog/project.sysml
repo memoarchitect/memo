@@ -1,4 +1,4 @@
-// Software Only Medical Device — project identity and method binding.
+// Software Only Medical Device — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
@@ -20,9 +20,9 @@ package memo_examples_software_only_medical_device_project {
     // service is. Importing it publicly here is what brings it into the
     // project, its definitions and its selection alike.
     public import memo_extension_cloud::*;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-MEDICAL-DEVICE-001"; :>> label = "SoftwareOnlyMedicalDeviceProjectMethodBinding"; }
-        attribute :>> projectName = "Software Only Medical Device";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-MEDICAL-DEVICE-001"; :>> label = "SoftwareOnlyMedicalDeviceModelMethodBinding"; }
+        attribute :>> modelName = "Software Only Medical Device";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }

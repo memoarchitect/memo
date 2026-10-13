@@ -1,4 +1,4 @@
-// Nested architecture DSM — project identity and method binding.
+// Nested architecture DSM — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology governing it. No YAML file participates.
@@ -21,9 +21,9 @@ package memo_examples_nested_architecture_dsm_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-NESTED-DSM-001"; :>> label = "NestedArchitectureDsmProjectMethodBinding"; }
-        attribute :>> projectName = "Nested Architecture DSM";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-NESTED-DSM-001"; :>> label = "NestedArchitectureDsmModelMethodBinding"; }
+        attribute :>> modelName = "Nested Architecture DSM";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }

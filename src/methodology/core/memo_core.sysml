@@ -14,7 +14,7 @@ package memo_methodology_core {
         attribute domain : String;
     }
 
-    // A rule's disposition under one methodology or project binding.
+    // A rule's disposition under one methodology or model binding.
     //
     // `targetRule` and `replacementRule` are typed references to the rule's own
     // `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.
@@ -100,25 +100,35 @@ package memo_methodology_core {
         attribute version : String;
     }
 
-    part def ProjectMethodBinding :> MemoPart {
-        attribute projectName : String;
+    // What a model is bound to: its name, the methodology it is governed by,
+    // and the rule policies it adds. "Model" is what Architect opens, one
+    // repository and one compile; "project" means a change set in an iteration.
+    part def ModelMethodBinding :> MemoPart {
+        attribute modelName : String;
         ref selectedMethodology : MethodologyDefinition;
-        // `allAvailable` widens the project to every package it resolved,
+        // `allAvailable` widens the model to every package it resolved,
         // whatever the methodology selects; anything else leaves the
-        // methodology's mode in force. A project ADDS packages to the
+        // methodology's mode in force. A model ADDS packages to the
         // selection by importing them publicly in the package that declares
         // this binding (`public import memo_extension_ros::*;`), the same way
         // a methodology selects them. There is no list to keep beside it.
         attribute scopeMode : ScopeModeKind;
-        // The submission regimes this project targets, declared once here.
+        // The submission regimes this model targets, declared once here.
         // Everything downstream that needs to know which standards apply —
         // `memo standards check`, the standards checklist, the Architect gap
-        // badges — reads this, so the regime axis is a project fact stated in
+        // badges — reads this, so the regime axis is a model fact stated in
         // SysML rather than a per-document array maintained in 44 places.
-        // Empty means the project has not declared its regimes; a report that
+        // Empty means the model has not declared its regimes; a report that
         // needs them says so rather than assuming a default market.
         attribute regulatoryRegime : RegulatoryRegimeKind[0..*];
         part rulePolicy : RulePolicy[0..*];
+    }
+
+    // DEPRECATED in 0.14.0, deleted in 0.15.0: the former spelling of
+    // ModelMethodBinding, kept so a model written with it still binds. MEMO
+    // reads `projectName` when `modelName` is absent and warns on either.
+    part def ProjectMethodBinding :> ModelMethodBinding {
+        attribute projectName : String;
     }
 
     part def DhfDocumentBinding :> MemoPart {

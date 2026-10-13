@@ -1,4 +1,4 @@
-// Reusable Instrument — project identity and method binding.
+// Reusable Instrument — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
@@ -16,9 +16,9 @@ package memo_examples_reusable_instrument_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-REUSABLE-INSTRUMENT-001"; :>> label = "ReusableInstrumentProjectMethodBinding"; }
-        attribute :>> projectName = "Reusable Instrument";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-REUSABLE-INSTRUMENT-001"; :>> label = "ReusableInstrumentModelMethodBinding"; }
+        attribute :>> modelName = "Reusable Instrument";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }
