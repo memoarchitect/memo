@@ -9,7 +9,9 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
+| [`Alternative`](architecture/decisions/memo_decisions.md#alternative) | `metadata def` | Alternative definition specializing `MemoTypedDependency`. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
 | [`DesignDecision`](architecture/decisions/memo_decisions.md#designdecision) | `part def` | Design decision definition specializing `MemoPart`. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
+| [`Selected`](architecture/decisions/memo_decisions.md#selected) | `metadata def` | Selected definition specializing `MemoTypedDependency`. | [`architecture/decisions/memo_decisions.sysml`](architecture/decisions/memo_decisions.md) |
 
 
 ## `memo::architecture::functional::behavior`
@@ -245,12 +247,22 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`ProcessingNode`](architecture/realization/physical/memo_physical_architecture.md#processingnode) | `part def` | Processing node definition specializing `PhysicalElement`. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
 
 
+## `memo::architecture::variability`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`ProductFeature`](architecture/variability/memo_variability.md#productfeature) | `part def` | Named ProductFeature, not Feature: `Feature` is the KerML metaclass, and the builder falls back to a metaclass name for a kind it cannot place. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
+| [`RealizesFeature`](architecture/variability/memo_variability.md#realizesfeature) | `metadata def` | `#RealizesFeature dependency from <variant> to <feature>;` The variant exists to give the family this feature. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
+| [`SelectsFeature`](architecture/variability/memo_variability.md#selectsfeature) | `metadata def` | `#SelectsFeature dependency from <release> to <feature>, <feature>;` The release contains the variants that realize these features. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
+
+
 ## `memo::artifacts::configuration_management`
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ChangeRequest`](artifacts/configuration_management/memo_configuration_management.md#changerequest) | `part def` | Change request definition specializing `MemoPart`. | [`artifacts/configuration_management/memo_configuration_management.sysml`](artifacts/configuration_management/memo_configuration_management.md) |
 | [`ConfigurationItem`](artifacts/configuration_management/memo_configuration_management.md#configurationitem) | `part def` | Configuration item definition specializing `MemoPart`. | [`artifacts/configuration_management/memo_configuration_management.sysml`](artifacts/configuration_management/memo_configuration_management.md) |
+| [`ReleaseRecord`](artifacts/configuration_management/memo_configuration_management.md#releaserecord) | `part def` | Release record definition specializing `MemoPart`. | [`artifacts/configuration_management/memo_configuration_management.sysml`](artifacts/configuration_management/memo_configuration_management.md) |
 
 
 ## `memo::artifacts::core`
@@ -465,6 +477,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
+| [`MemoTypedDependency`](core/relationships/memo_relationships.md#memotypeddependency) | `metadata def` | A link whose ends are not both usages cannot be a `connection def`: a connection joins features, and a `ref` cannot point at a definition.… | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
 | [`WorkspaceMembershipEntry`](core/relationships/memo_workspace_membership.md#workspacemembershipentry) | `part def` | One relation and the direction it places elements in a workspace. | [`core/relationships/memo_workspace_membership.sysml`](core/relationships/memo_workspace_membership.md) |
 
 

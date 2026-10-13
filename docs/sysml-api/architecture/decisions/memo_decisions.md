@@ -35,6 +35,8 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`DesignDecision`](#designdecision) | `part def` | Design decision definition specializing `MemoPart`. | `MemoPart` |
+| [`Alternative`](#alternative) | `metadata def` | Alternative definition specializing `MemoTypedDependency`. | `MemoTypedDependency` |
+| [`Selected`](#selected) | `metadata def` | Selected definition specializing `MemoTypedDependency`. | `MemoTypedDependency` |
 | [`DecisionRecordedInADR`](#decisionrecordedinadr) | `connection def` | Typed relationship from `DesignDecision` to `ADRArtifact`. | `MemoRelationship` |
 | [`Decides`](#decides) | `connection def` | Typed relationship from `DesignDecision` to `MemoPart`. | `MemoRelationship` |
 
@@ -50,6 +52,36 @@ part def DesignDecision specializes MemoPart
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
+| Owning package | `memo_architecture_decisions` |
+
+
+## Alternative
+
+```sysml
+metadata def Alternative :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Alternative definition specializing `MemoTypedDependency`. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
+| Owning package | `memo_architecture_decisions` |
+
+
+## Selected
+
+```sysml
+metadata def Selected :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Selected definition specializing `MemoTypedDependency`. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
 | Owning package | `memo_architecture_decisions` |
 
 
@@ -98,10 +130,17 @@ connection def Decides :> MemoRelationship
         private import memo_artifacts_core::*;
         part def DesignDecision specializes MemoPart {
             attribute decisionKind : String;
-            attribute alternatives : String;
-            attribute selectedOption : String;
             attribute decisionStatus : DesignDecisionStatusKind;
         }
+
+        // The options a decision weighs and the one it chose are links to variants, not
+        // strings: `#Alternative dependency from <decision> to <variant>, <variant>;` and
+        // `#Selected dependency from <decision> to <variant>;`. A variant is a SysML
+        // `variant` (SysML-textual-bnf.kebnf:254-256) of a variation point, so a trade
+        // study points at the thing that is being traded. Both are typed dependencies
+        // (memo_core_relationships::MemoTypedDependency).
+        metadata def Alternative :> MemoTypedDependency;
+        metadata def Selected :> MemoTypedDependency;
 
         connection def DecisionRecordedInADR :> MemoRelationship {
             end decision : DesignDecision :>> source;

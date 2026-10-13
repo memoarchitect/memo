@@ -235,4 +235,18 @@ package memo_core_relationships_workspace_membership {
     part membershipSuccession : WorkspaceMembershipEntry { attribute :>> relation = "succession"; attribute :>> direction = WorkspaceMembershipKind::neither; }
     // A variant follows its variation point.
     part membershipVariant : WorkspaceMembershipEntry { attribute :>> relation = "variant"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
+
+    // A feature follows the variants that realize it: realized by variants of two systems it is
+    // shared, realized by none it is Unassigned (a feature nothing builds).
+    part membershipRealizesFeature : WorkspaceMembershipEntry { attribute :>> relation = "realizesFeature"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
+    // Neither: a release is a family-level record, and a feature it selects is placed by its variants.
+    part membershipSelectsFeature : WorkspaceMembershipEntry { attribute :>> relation = "selectsFeature"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // Neither: two features that need each other are peers, and neither is placed by the other.
+    part membershipRequiresFeature : WorkspaceMembershipEntry { attribute :>> relation = "requiresFeature"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // Neither: two features that exclude each other are peers.
+    part membershipExcludesFeature : WorkspaceMembershipEntry { attribute :>> relation = "excludesFeature"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // A design decision follows the option it weighs, as it follows the element it decides.
+    part membershipAlternative : WorkspaceMembershipEntry { attribute :>> relation = "alternative"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
+    // A design decision follows the option it chose.
+    part membershipSelected : WorkspaceMembershipEntry { attribute :>> relation = "selected"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
 }

@@ -37,6 +37,7 @@ package memo {
     public import memo_assurance_safety_risk_analysis::*;
     public import memo_assurance_safety_risk_postmarket_surveillance::*;
     public import memo_architecture_decisions::*;
+    public import memo_architecture_variability::*;
 
     public import memo_viewpoints_definitions::*;
     public import memo_viewpoints_stakeholders_concerns::*;
@@ -211,6 +212,7 @@ package memo_assurance_safety_compatibility {
 // the Diagram workspace, never as architecture layers.
 package memo_namespace_architecture {
     alias decisions for memo_namespace_architecture_decisions;
+    alias variability for memo_namespace_architecture_variability;
 
     package operational {
         alias structure for memo_namespace_architecture_operational;
@@ -333,6 +335,10 @@ package memo_namespace_assurance_cybersecurity {
 
 package memo_namespace_architecture_decisions {
     public import memo_architecture_decisions::*;
+}
+
+package memo_namespace_architecture_variability {
+    public import memo_architecture_variability::*;
 }
 
 package memo_namespace_architecture_functions {

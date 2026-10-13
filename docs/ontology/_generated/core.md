@@ -61,6 +61,7 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
+| [`MemoTypedDependency`](../sysml-api/core/relationships/memo_relationships.md#memotypeddependency) *(abstract)* | `metadata def` | A link whose ends are not both usages cannot be a `connection def`: a connection joins features, and a `ref` cannot point at a definition.… |
 | [`WorkspaceMembershipEntry`](../sysml-api/core/relationships/memo_workspace_membership.md#workspacemembershipentry) | `part def` | One relation and the direction it places elements in a workspace. |
 
 **Semantics**

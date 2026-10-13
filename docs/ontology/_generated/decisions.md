@@ -7,6 +7,8 @@
 | Element | SysML kind | What it is |
 | --- | --- | --- |
 | [`DesignDecision`](../sysml-api/architecture/decisions/memo_decisions.md#designdecision) | `part def` | Design decision definition specializing `MemoPart`. |
+| [`Alternative`](../sysml-api/architecture/decisions/memo_decisions.md#alternative) | `metadata def` | Alternative definition specializing `MemoTypedDependency`. |
+| [`Selected`](../sysml-api/architecture/decisions/memo_decisions.md#selected) | `metadata def` | Selected definition specializing `MemoTypedDependency`. |
 
 
 ### Connections at a glance
