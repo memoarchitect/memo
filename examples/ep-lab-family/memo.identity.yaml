@@ -20,21 +20,6 @@ elements:
   "ep_lab_family_ablation::ucDeliverEnergy":
     shortId: "USE-1"
     uuid: "4d0e14f7-0e5c-5c5e-a616-6bf28f849c60"
-  "ep_lab_family_chains::fcMapGuidedAblation":
-    shortId: "FNC-1"
-    uuid: "11426c62-88a9-5b5d-95b5-403c43a18725"
-  "ep_lab_family_chains::fcMapGuidedAblation::stepAcquire":
-    shortId: "ACT-1"
-    uuid: "071d5639-7682-5cb0-8c18-b105c8c61143"
-  "ep_lab_family_chains::fcMapGuidedAblation::stepBuildMap":
-    shortId: "ACT-2"
-    uuid: "3dc5449d-ece5-596b-bbe8-94d349a70901"
-  "ep_lab_family_chains::fcMapGuidedAblation::stepDeliver":
-    shortId: "ACT-3"
-    uuid: "26fc3a26-6632-576f-be97-6a1f76f7f8b8"
-  "ep_lab_family_chains::fcMapGuidedAblation::stepTag":
-    shortId: "ACT-4"
-    uuid: "8c1f2d1a-d003-5d11-af4c-56fa5e24566d"
   "ep_lab_family_clinical_use_cases::ucPerformCatheterAblation":
     shortId: "USE-2"
     uuid: "bd5feb41-4f01-55e5-9ac7-7100eec26b56"
