@@ -24,12 +24,15 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_terminology::ExternalReference` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`StandardReference`](#standardreference) | `metadata def` | Tags an element with the regulatory standard it derives from (e.g. ISO 14971, IEC 62304, ISO/IEC/IEEE 42010). | — |
+| [`ExternalSource`](#externalsource) | `metadata def` | An element imported from another system (a requirements tool, a PLM, a quality system, a test-result export). It annotates an element of ANY metaclass, because imported records span them: a requirement def is not a MemoPart.… | — |
+| [`TraceBaseline`](#tracebaseline) | `metadata def` | Trace baseline definition. | — |
 | [`Provenance`](#provenance) | `metadata def` | Marks an element as the rationale/provenance carrier for a decision. | — |
 
 ## StandardReference
@@ -41,6 +44,36 @@ metadata def StandardReference
 | Property | Value |
 | --- | --- |
 | Description | Tags an element with the regulatory standard it derives from (e.g. ISO 14971, IEC 62304, ISO/IEC/IEEE 42010). |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_semantics` |
+
+
+## ExternalSource
+
+```sysml
+metadata def ExternalSource
+```
+
+| Property | Value |
+| --- | --- |
+| Description | An element imported from another system (a requirements tool, a PLM, a quality system, a test-result export). It annotates an element of ANY metaclass, because imported records span them: a requirement def is not a MemoPart.… |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_semantics` |
+
+
+## TraceBaseline
+
+```sysml
+metadata def TraceBaseline
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Trace baseline definition. |
 | Kind | `metadata def` |
 | Abstract | No |
 | Specializes | — |
@@ -73,12 +106,52 @@ metadata def Provenance
     // applying these metadata defs with `@Name` — never by adding new grammar.
     package memo_core_semantics {
         private import ScalarValues::*;
+        private import memo_core_terminology::ExternalReference;
 
         // Tags an element with the regulatory standard it derives from
         // (e.g. ISO 14971, IEC 62304, ISO/IEC/IEEE 42010).
         metadata def StandardReference {
             attribute standardReference : String;
             attribute clause : String;
+        }
+
+        // An element imported from another system (a requirements tool, a PLM, a
+        // quality system, a test-result export). It annotates an element of ANY
+        // metaclass, because imported records span them: a requirement def is not a
+        // MemoPart. The source id is `externalReference.identifier`, NOT MemoIdentity's
+        // `providedId`: `providedId` is the id an external system knows an
+        // authored element by, whereas this records the external record an
+        // element was made from, with its revision.
+        //
+        //   @ExternalSource {
+        //       :>> externalReference { :>> sourceSystem = "..."; :>> identifier = "..."; :>> revision = "B"; }
+        //       :>> sourceMastered = true;
+        //   }
+        //
+        // `sourceMastered` is true when the source system owns the element, so a
+        // re-import overwrites it and a MEMO edit would be lost. `sourceWithdrawn`
+        // is set by a re-import when the record is gone from the source: the
+        // element is kept, so the links to it still compile and can be reviewed.
+        metadata def ExternalSource {
+            attribute externalReference : ExternalReference[0..1];
+            attribute sourceMastered : Boolean[0..1];
+            attribute sourceWithdrawn : Boolean[0..1];
+        }
+
+        // The revision of an imported element a MEMO-authored link was made against.
+        // A link is suspect when that revision is no longer the element's current
+        // `externalReference.revision`, or when the element is withdrawn. The status
+        // is derived, never stored; reviewing the link rewrites this baseline to the
+        // current revision. Only MEMO-authored links carry it: a link imported
+        // from the source is mastered there and is re-imported instead.
+        //
+        // Both are written in a body, because a prefix `#Name` cannot carry a value
+        // (PrefixMetadataUsage, SysML-textual-bnf.kebnf:1667). The nested
+        // `externalReference { … }` is MetadataBodyUsage (kebnf:1694), and the baseline sits in
+        // the link's own body: a `satisfy`'s RequirementBody (kebnf:1408), a
+        // connection's or a `dependency`'s DefinitionBody (kebnf:238).
+        metadata def TraceBaseline {
+            attribute sourceRevision : String;
         }
 
         // Marks an element as the rationale/provenance carrier for a decision.
