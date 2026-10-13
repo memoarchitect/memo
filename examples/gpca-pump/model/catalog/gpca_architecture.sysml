@@ -13,41 +13,48 @@ package memo_examples_gpca_pump_gpca_architecture {
     private import memo_core_dimensions::*;
 
     private import memo_core_common::MemoIdentity;
-    // ── Logical components ──────────────────────────────────────
-    part lcTherapyControl : LogicalComponent {
-        @MemoIdentity { :>> providedId = "LC-001"; :>> label = "TherapyControlSubsystem"; }
-        attribute :>> responsibility = "Owns therapy state, prescription execution, and dose limiting.";
-        attribute :>> decompositionLevel = "subsystem";
-        attribute :>> safetyPartition = "safety-critical partition";
-    }
-    part lcSafetyMonitoring : LogicalComponent {
-        @MemoIdentity { :>> providedId = "LC-002"; :>> label = "SafetyMonitoringSubsystem"; }
-        attribute :>> responsibility = "Detects exceptional conditions and drives the pump to a safe state.";
-        attribute :>> decompositionLevel = "subsystem";
-        attribute :>> safetyPartition = "safety-critical partition";
-    }
-    part lcOperatorInterface : LogicalComponent {
-        @MemoIdentity { :>> providedId = "LC-003"; :>> label = "OperatorInterfaceSubsystem"; }
-        attribute :>> responsibility = "Prescription entry, status display, and alarm annunciation to users.";
-        attribute :>> decompositionLevel = "subsystem";
-        attribute :>> safetyPartition = "interference-free from therapy control";
-    }
-    part lcDrugDelivery : LogicalComponent {
-        @MemoIdentity { :>> providedId = "LC-004"; :>> label = "DrugDeliverySubsystem"; }
-        attribute :>> responsibility = "Fluid path: reservoir, tubing, pump mechanism, and delivery sensors.";
-        attribute :>> decompositionLevel = "subsystem";
-        attribute :>> safetyPartition = "safety-critical partition";
-    }
-    part lcPowerSubsystem : LogicalComponent {
-        @MemoIdentity { :>> providedId = "LC-005"; :>> label = "PowerSubsystem"; }
-        attribute :>> responsibility = "Mains and battery power management with depletion warning.";
-        attribute :>> decompositionLevel = "subsystem";
-        attribute :>> safetyPartition = "supporting partition";
+    part def GpcaPumpSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The general-purpose infusion pump: its logical decomposition; the device hardware and software realize it.";
+        // ── Logical components ──────────────────────────────────────
+        part lcTherapyControl : LogicalComponent {
+            @MemoIdentity { :>> providedId = "LC-001"; :>> label = "TherapyControlSubsystem"; }
+            attribute :>> responsibility = "Owns therapy state, prescription execution, and dose limiting.";
+            attribute :>> decompositionLevel = "subsystem";
+            attribute :>> safetyPartition = "safety-critical partition";
+        }
+        part lcSafetyMonitoring : LogicalComponent {
+            @MemoIdentity { :>> providedId = "LC-002"; :>> label = "SafetyMonitoringSubsystem"; }
+            attribute :>> responsibility = "Detects exceptional conditions and drives the pump to a safe state.";
+            attribute :>> decompositionLevel = "subsystem";
+            attribute :>> safetyPartition = "safety-critical partition";
+        }
+        part lcOperatorInterface : LogicalComponent {
+            @MemoIdentity { :>> providedId = "LC-003"; :>> label = "OperatorInterfaceSubsystem"; }
+            attribute :>> responsibility = "Prescription entry, status display, and alarm annunciation to users.";
+            attribute :>> decompositionLevel = "subsystem";
+            attribute :>> safetyPartition = "interference-free from therapy control";
+        }
+        part lcDrugDelivery : LogicalComponent {
+            @MemoIdentity { :>> providedId = "LC-004"; :>> label = "DrugDeliverySubsystem"; }
+            attribute :>> responsibility = "Fluid path: reservoir, tubing, pump mechanism, and delivery sensors.";
+            attribute :>> decompositionLevel = "subsystem";
+            attribute :>> safetyPartition = "safety-critical partition";
+        }
+        part lcPowerSubsystem : LogicalComponent {
+            @MemoIdentity { :>> providedId = "LC-005"; :>> label = "PowerSubsystem"; }
+            attribute :>> responsibility = "Mains and battery power management with depletion warning.";
+            attribute :>> decompositionLevel = "subsystem";
+            attribute :>> safetyPartition = "supporting partition";
+        }
+
+        // Native SysML message: the safety monitor's alarm notification is a flow
+        // between the two logical components, not an opaque InteractionMessage.
+        message alarmNotification of LogicalExchangeItem from lcSafetyMonitoring to lcOperatorInterface;
     }
 
-    // Native SysML message: the safety monitor's alarm notification is a flow
-    // between the two logical components, not an opaque InteractionMessage.
-    message alarmNotification of LogicalExchangeItem from lcSafetyMonitoring to lcOperatorInterface;
+    part gpcaPump : GpcaPumpSystem {
+        @MemoIdentity { :>> providedId = "SYS-001"; :>> label = "GPCA Infusion Pump"; }
+    }
 
     // ── Device (UMN AADL architectural model) ───────────────────
     // The AADL top-level `GPCA_Device` system. GPCA_Device.Impl declares only
