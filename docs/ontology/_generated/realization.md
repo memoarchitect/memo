@@ -28,6 +28,8 @@ Each arrow is one relationship, from its source end to its target end. A grey bo
 flowchart LR
   SoftwareModule["SoftwareModule"]:::other
   SoftwareDeploymentUnit["SoftwareDeploymentUnit"]
+  LogicalComponent["LogicalComponent"]:::other
+  MemoPart["MemoPart"]:::other
   ProcessingNode["ProcessingNode"]
   RuntimeEnvironment["RuntimeEnvironment"]
   SoftwareComponent["SoftwareComponent"]:::other
@@ -38,6 +40,7 @@ flowchart LR
   FlowSpecification["FlowSpecification"]
   PhysicalPort["PhysicalPort"]
   SoftwareModule -->|BuildsInto| SoftwareDeploymentUnit
+  LogicalComponent -->|RealizedBy| MemoPart
   SoftwareDeploymentUnit -->|DeploysTo| ProcessingNode
   ProcessingNode -->|ProvidesEnvironment| RuntimeEnvironment
   SoftwareComponent -->|MemoryBinding| MemoryDevice
@@ -53,6 +56,7 @@ flowchart LR
 | Relationship | From | To | What it says |
 | --- | --- | --- | --- |
 | [`BuildsInto`](../sysml-api/architecture/realization/deployment/memo_deployment.md#buildsinto) | [`SoftwareModule`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#softwaremodule) | [`SoftwareDeploymentUnit`](../sysml-api/architecture/realization/deployment/memo_deployment.md#softwaredeploymentunit) | Typed relationship from `SoftwareModule` to `SoftwareDeploymentUnit`. |
+| [`RealizedBy`](../sysml-api/architecture/realization/deployment/memo_deployment.md#realizedby) | [`LogicalComponent`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalcomponent) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `LogicalComponent` to `MemoPart`. |
 | [`DeploysTo`](../sysml-api/architecture/realization/deployment/memo_deployment.md#deploysto) | [`SoftwareDeploymentUnit`](../sysml-api/architecture/realization/deployment/memo_deployment.md#softwaredeploymentunit) | [`ProcessingNode`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#processingnode) | Typed relationship from `SoftwareDeploymentUnit` to `ProcessingNode`. |
 | [`ProvidesEnvironment`](../sysml-api/architecture/realization/deployment/memo_deployment.md#providesenvironment) | [`ProcessingNode`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#processingnode) | [`RuntimeEnvironment`](../sysml-api/architecture/realization/deployment/memo_deployment.md#runtimeenvironment) | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. |
 | [`MemoryBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#memorybinding) | [`SoftwareComponent`](../sysml-api/architecture/implementation/software/runtime/memo_software_runtime.md#softwarecomponent) | [`MemoryDevice`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#memorydevice) | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. |
