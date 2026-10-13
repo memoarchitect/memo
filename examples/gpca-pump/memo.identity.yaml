@@ -86,6 +86,24 @@ elements:
   "memo_examples_gpca_pump_gpca_analysis::mcsMotorPath":
     shortId: "MNM-2"
     uuid: "99ad1d6b-af28-54dd-bca8-70448745adfd"
+  "memo_examples_gpca_pump_gpca_architecture::GpcaPumpSystem":
+    shortId: "SYS-34"
+    uuid: "e39bcea8-1cbb-5809-ae04-d38e8e4857db"
+  "memo_examples_gpca_pump_gpca_architecture::GpcaPumpSystem::lcDrugDelivery":
+    shortId: "LGC-1"
+    uuid: "1cdb97d8-4015-506c-8bce-74538ab94da5"
+  "memo_examples_gpca_pump_gpca_architecture::GpcaPumpSystem::lcOperatorInterface":
+    shortId: "LGC-2"
+    uuid: "7e283f81-e54e-594a-8783-92725cca3b2a"
+  "memo_examples_gpca_pump_gpca_architecture::GpcaPumpSystem::lcPowerSubsystem":
+    shortId: "LGC-3"
+    uuid: "b7f17842-c888-52e5-93f8-315853397942"
+  "memo_examples_gpca_pump_gpca_architecture::GpcaPumpSystem::lcSafetyMonitoring":
+    shortId: "LGC-4"
+    uuid: "bfd725ba-d8f1-53c6-b5d6-dda275d15e35"
+  "memo_examples_gpca_pump_gpca_architecture::GpcaPumpSystem::lcTherapyControl":
+    shortId: "LGC-5"
+    uuid: "c1ee13ed-3b7f-5a5a-bbf7-7062e40923f9"
   "memo_examples_gpca_pump_gpca_architecture::actGpcaOut":
     shortId: "PHY-1"
     uuid: "c49ebe8c-b7c9-5a8c-9a57-1a816a248d59"
@@ -212,6 +230,9 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::gpcaDeviceSensors":
     shortId: "HRD-11"
     uuid: "cdc8e1c0-e91b-58c1-9feb-2e98b2ee9826"
+  "memo_examples_gpca_pump_gpca_architecture::gpcaPump":
+    shortId: "GPC-1"
+    uuid: "f3e6307a-425e-5d88-94ee-94f23ae56420"
   "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware":
     shortId: "SFT-3"
     uuid: "08bdacae-a613-5b49-8933-89e241f55cbb"
@@ -410,21 +431,6 @@ elements:
   "memo_examples_gpca_pump_gpca_architecture::infusionMgr":
     shortId: "SFT-4"
     uuid: "570c7d1e-7cab-58ed-a4f8-fc899db694f0"
-  "memo_examples_gpca_pump_gpca_architecture::lcDrugDelivery":
-    shortId: "LGC-1"
-    uuid: "1cdb97d8-4015-506c-8bce-74538ab94da5"
-  "memo_examples_gpca_pump_gpca_architecture::lcOperatorInterface":
-    shortId: "LGC-2"
-    uuid: "7e283f81-e54e-594a-8783-92725cca3b2a"
-  "memo_examples_gpca_pump_gpca_architecture::lcPowerSubsystem":
-    shortId: "LGC-3"
-    uuid: "b7f17842-c888-52e5-93f8-315853397942"
-  "memo_examples_gpca_pump_gpca_architecture::lcSafetyMonitoring":
-    shortId: "LGC-4"
-    uuid: "bfd725ba-d8f1-53c6-b5d6-dda275d15e35"
-  "memo_examples_gpca_pump_gpca_architecture::lcTherapyControl":
-    shortId: "LGC-5"
-    uuid: "c1ee13ed-3b7f-5a5a-bbf7-7062e40923f9"
   "memo_examples_gpca_pump_gpca_architecture::logging":
     shortId: "SFT-5"
     uuid: "fab98ac1-8487-5d04-8e48-040f0ad60b81"
