@@ -18,6 +18,7 @@ package ep_lab_family_ablation {
             @MemoIdentity { :>> providedId = "EPF-ABL-LC-001"; :>> label = "Energy Controller"; }
             attribute :>> responsibility = "Regulate delivered power and duration, and report each delivery.";
         }
+        allocate fnDeliverEnergy to energyController;
     }
 
     action fnDeliverEnergy : SystemFunction {

@@ -20,6 +20,8 @@ package ep_lab_family_mapping {
             @MemoIdentity { :>> providedId = "EPF-MAP-LC-001"; :>> label = "Map Engine"; }
             attribute :>> responsibility = "Reconstruct chamber geometry and annotate it with activation times and lesions.";
         }
+        allocate fnBuildMap to mapEngine;
+        allocate fnTagLesion to mapEngine;
     }
 
     action fnBuildMap : SystemFunction {
