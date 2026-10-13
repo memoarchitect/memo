@@ -1,4 +1,4 @@
-// Multidimensional Layers — project identity and method binding.
+// Multidimensional Layers — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
@@ -16,9 +16,9 @@ package memo_examples_multidimensional_layers_project {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-MULTIDIMENSIONAL-LAYERS-001"; :>> label = "MultidimensionalLayersProjectMethodBinding"; }
-        attribute :>> projectName = "Multidimensional Layers";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-MULTIDIMENSIONAL-LAYERS-001"; :>> label = "MultidimensionalLayersModelMethodBinding"; }
+        attribute :>> modelName = "Multidimensional Layers";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }

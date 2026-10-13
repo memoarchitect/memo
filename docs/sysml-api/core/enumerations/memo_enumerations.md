@@ -48,7 +48,7 @@
 | [`ComplexityKind`](#complexitykind) | `enum def` | Controlled values for complexity: `low`, `medium`, `high`, `complex`. | — |
 | [`LifecycleStateKind`](#lifecyclestatekind) | `enum def` | Controlled values for lifecycle state: `concept`, `development`, `released`, `maintenance`, `obsolete`. | — |
 | [`MemoVerificationMethodKind`](#memoverificationmethodkind) | `enum def` | Controlled values for memo verification method: `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking`. | — |
-| [`RegulatoryRegimeKind`](#regulatoryregimekind) | `enum def` | The submission regime a project targets, and the regimes a standard has standing in. This is the axis that decides which clauses a project is required to claim: `required(project)` is the clauses of every standard whose `appliesToRegime` intersects the regimes the project's Pr… | — |
+| [`RegulatoryRegimeKind`](#regulatoryregimekind) | `enum def` | The submission regime a model targets, and the regimes a standard has standing in. This is the axis that decides which clauses a model is required to claim: `required(model)` is the clauses of every standard whose `appliesToRegime` intersects the regimes the model's ModelMetho… | — |
 | [`ArtifactKind`](#artifactkind) | `enum def` | Controlled values for artifact: `plan`, `requirementSpecification`, `architectureDescription`, `softwareDesignDescription`, `riskRecord`, `traceMatrix`, `testProtocol`, `testReport`, `evidenceRecord`, `cybersecurityAssessment`, `threatModel`, `usabilityEngineeringReport`, `clinicalSafetyReport`, `failureModeEffectsAnalysis`, `soupList`, `designInputPlan`, `designOutputPlan`, `softwareDevelopmentPlan`, `labelingSpecification`, `designHistoryFileIndex`, `designChangeLog`. | — |
 | [`RiskControlKind`](#riskcontrolkind) | `enum def` | Controlled values for risk control: `inherentSafeDesign`, `protectiveMeasure`, `informationForSafety`, `alarm`, `interlock`, `monitoring`, `plausibilityCheck`. | — |
 | [`HazardTypeKind`](#hazardtypekind) | `enum def` | Controlled values for hazard type: `drugDeliveryError`, `energyExposure`, `informationError`, `mechanicalFailure`, `biologicalContamination`, `softwareAnomaly`, `useError`, `environmentalHazard`. | — |
@@ -400,7 +400,7 @@ enum def RegulatoryRegimeKind
 
 | Property | Value |
 | --- | --- |
-| Description | The submission regime a project targets, and the regimes a standard has standing in. This is the axis that decides which clauses a project is required to claim: `required(project)` is the clauses of every standard whose `appliesToRegime` intersects the regimes the project's Pr… |
+| Description | The submission regime a model targets, and the regimes a standard has standing in. This is the axis that decides which clauses a model is required to claim: `required(model)` is the clauses of every standard whose `appliesToRegime` intersects the regimes the model's ModelMetho… |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1484,11 +1484,11 @@ enum def CommentStatusKind
             enum formalProof;
             enum modelChecking;
         }
-        // The submission regime a project targets, and the regimes a standard has
-        // standing in. This is the axis that decides which clauses a project is
-        // required to claim: `required(project)` is the clauses of every standard
-        // whose `appliesToRegime` intersects the regimes the project's
-        // ProjectMethodBinding declares.
+        // The submission regime a model targets, and the regimes a standard has
+        // standing in. This is the axis that decides which clauses a model is
+        // required to claim: `required(model)` is the clauses of every standard
+        // whose `appliesToRegime` intersects the regimes the model's
+        // ModelMethodBinding declares.
         //
         // The members are spelled as the regulatory designations themselves rather
         // than in the lowerCamel convention the rest of this file uses. All 44 DHF

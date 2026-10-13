@@ -17,9 +17,9 @@ package project_catalog {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    part projectMethodBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-001"; :>> label = "{{name}}ProjectMethodBinding"; }
-        attribute :>> projectName = "{{name}}";
+    part projectMethodBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-001"; :>> label = "{{name}}ModelMethodBinding"; }
+        attribute :>> modelName = "{{name}}";
         ref :>> selectedMethodology = mdDefaultDefinition;
         // The project adds no modules of its own yet. Under `explicit` an
         // empty additive list means exactly that — no additions — rather than

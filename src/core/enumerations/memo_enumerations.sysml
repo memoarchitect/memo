@@ -215,11 +215,11 @@ package memo_core_enumerations {
         enum formalProof;
         enum modelChecking;
     }
-    // The submission regime a project targets, and the regimes a standard has
-    // standing in. This is the axis that decides which clauses a project is
-    // required to claim: `required(project)` is the clauses of every standard
-    // whose `appliesToRegime` intersects the regimes the project's
-    // ProjectMethodBinding declares.
+    // The submission regime a model targets, and the regimes a standard has
+    // standing in. This is the axis that decides which clauses a model is
+    // required to claim: `required(model)` is the clauses of every standard
+    // whose `appliesToRegime` intersects the regimes the model's
+    // ModelMethodBinding declares.
     //
     // The members are spelled as the regulatory designations themselves rather
     // than in the lowerCamel convention the rest of this file uses. All 44 DHF

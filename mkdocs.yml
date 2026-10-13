@@ -112,7 +112,7 @@ nav:
       - What is MEMO: what/index.md
   - Reference:
       - Source layout: reference/index.md
-      - Native project format: reference/native-project-format.md
+      - Native model format: reference/native-model-format.md
       - Naming and native constructs: reference/naming-and-native-constructs.md
       - Definition, usage, and context: reference/definition-usage-and-context.md
       - Building blocks: reference/building-blocks.md

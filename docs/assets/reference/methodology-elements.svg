@@ -42,7 +42,7 @@
   <rect x="682.2" y="286" width="95.6" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="730" y="306" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">resolves</text>
     
   <rect x="1170" y="270" width="260" height="72" rx="14" fill="#ffffff" stroke="#4d9a57" stroke-width="2"/>
-  <text x="1300" y="313" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1300" dy="0">ProjectMethodBinding</tspan></text>
+  <text x="1300" y="313" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="1300" dy="0">ModelMethodBinding</tspan></text>
   <path d="M 1050 306 L 1170 306" fill="none" stroke="#536b7a" stroke-width="2.4"  marker-end="url(#arrow)"/>
   <rect x="1066.8" y="288" width="86.39999999999999" height="28" rx="14" fill="#ffffff" stroke="#d8e2e9"/><text x="1110" y="308" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="650" fill="#395467">applies</text>
     

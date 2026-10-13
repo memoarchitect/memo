@@ -38,7 +38,7 @@ A **Gap** is not a defect in the model. Coverage is profile-dependent — that i
 
 ```memo-standards
 display: summary
-empty: "No standards are in scope. Declare `regulatoryRegime` on the project's ProjectMethodBinding."
+empty: "No standards are in scope. Declare `regulatoryRegime` on the model's ModelMethodBinding."
 ```
 
 ---

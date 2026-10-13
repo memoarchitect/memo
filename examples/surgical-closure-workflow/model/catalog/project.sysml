@@ -1,4 +1,4 @@
-// Surgical Closure Workflow — project identity and method binding.
+// Surgical Closure Workflow — model identity and method binding.
 //
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
@@ -19,9 +19,9 @@ package memo_examples_surgical_closure_workflow_project {
     // The workflow is a ClinicalProcedureWorkflow, so the project brings in
     // the clinical extension, by importing it publicly here.
     public import memo_extension_clinical::*;
-    part projectBinding : ProjectMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-CLOSURE-WORKFLOW-001"; :>> label = "SurgicalClosureWorkflowProjectMethodBinding"; }
-        attribute :>> projectName = "Surgical Closure Workflow";
+    part projectBinding : ModelMethodBinding {
+        @MemoIdentity { :>> providedId = "PMB-CLOSURE-WORKFLOW-001"; :>> label = "SurgicalClosureWorkflowModelMethodBinding"; }
+        attribute :>> modelName = "Surgical Closure Workflow";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;
     }
