@@ -69,6 +69,23 @@ package memo_rules_ontology {
         attribute predicateExpression = "not(downstream(hasSubject)->exists(conformsTo(System))) or upstream(includesStep)->size() >= 1 or attributes.standalone == 'true'";
         constraint { true }
     }
+    // A system is a boundary (plan O16). The workspace closure never reaches another system or the
+    // system of systems, and drops such a link silently; this rule reports it. Evaluated by the
+    // workspace evaluator because it needs what each workspace holds, which no predicate can say:
+    // the subject is the element inside a system that is typed by, or relates to, a System-kind or
+    // SystemOfSystems-kind element outside it. The system of systems' own references to its systems
+    // are what it is for and are not findings.
+    constraint def SystemBoundaryRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-087"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute evaluator = "workspace";
+        attribute appliesTo = "Model";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A system does not reference another system or the system of systems from inside itself. Two systems meet at an interface the system of systems owns.";
+        constraint { true }
+    }
     constraint def NestedPartConnectedRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "AR-IBD-001"; }
         attribute tailoring = RuleTailoringKind::invariant;
