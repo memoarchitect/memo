@@ -19,6 +19,7 @@ package ep_lab_family_recording {
             @MemoIdentity { :>> providedId = "EPF-REC-LC-001"; :>> label = "Acquisition Unit"; }
             attribute :>> responsibility = "Amplify, filter and timestamp the catheter and surface signals.";
         }
+        allocate fnAcquireElectrograms to acquisitionUnit;
     }
 
     action fnAcquireElectrograms : SystemFunction {
