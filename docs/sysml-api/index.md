@@ -100,6 +100,7 @@ Generated from `src/**/*.sysml`. [Source layout](../reference/index.md)
 | `memo::core::enumerations` | `memo_core_enumerations` | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | `memo::core::methodology_scope` | `memo_core_methodology_scope` | [`core/methodology_scope/methodology_scope.sysml`](core/methodology_scope/methodology_scope.md) |
 | `memo::core::relationships` | `memo_core_relationships` | [`core/relationships/memo_relationships.sysml`](core/relationships/memo_relationships.md) |
+| `memo::core::relationships` | `memo_core_relationships_workspace_membership` | [`core/relationships/memo_workspace_membership.sysml`](core/relationships/memo_workspace_membership.md) |
 | `memo::core::semantics` | `memo_core_semantics` | [`core/semantics/semantics.sysml`](core/semantics/semantics.md) |
 | `memo::core::stdlib::collections` | `memo_core_stdlib_collections` | [`core/stdlib/collections/collections.sysml`](core/stdlib/collections/collections.md) |
 | `memo::core::stdlib::functions` | `memo_core_stdlib_functions` | [`core/stdlib/functions/functions.sysml`](core/stdlib/functions/functions.md) |

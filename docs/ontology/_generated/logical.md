@@ -36,9 +36,11 @@ flowchart LR
   LogicalPort["LogicalPort"]
   anyElement["any element"]:::other
   LogicalComponent["LogicalComponent"]
+  MemoPart["MemoPart"]:::other
   LogicalPort -->|LogicalInterface| anyElement
   LogicalComponent -->|LogicalConnector| LogicalComponent
   LogicalComponent -->|IndependentOf| LogicalComponent
+  LogicalComponent -->|RealizedBy| MemoPart
   classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
 ```
 
@@ -57,7 +59,9 @@ flowchart LR
 
 ### Relationships from elsewhere that reach this layer
 
-_None with an end typed in this layer._
+| Relationship | Declared in | From | To | What it says |
+| --- | --- | --- | --- | --- |
+| [`RealizedBy`](../sysml-api/architecture/realization/deployment/memo_deployment.md#realizedby) | realization | [`LogicalComponent`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalcomponent) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `LogicalComponent` to `MemoPart`. |
 
 ### Enumerations
 
