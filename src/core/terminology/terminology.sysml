@@ -26,10 +26,17 @@ package memo_core_terminology {
 
     // A reference into an external registry or document (regulatory listing,
     // standard clause, catalog page) with enough context to resolve it.
+    //
+    // For an element imported from another system (see ExternalSource) it is the
+    // record in that system: `sourceSystem` names the system, `identifier` is
+    // the id the system knows the record by, and `revision` is the revision of
+    // the record as last imported.
     attribute def ExternalReference {
         attribute referenceKind : String;
         attribute identifier : String;
         attribute uri : String;
         attribute section : String;
+        attribute sourceSystem : String[0..1];
+        attribute revision : String[0..1];
     }
 }
