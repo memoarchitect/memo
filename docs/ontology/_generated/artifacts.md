@@ -8,6 +8,7 @@
 | --- | --- | --- |
 | [`ChangeRequest`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changerequest) | `part def` | Change request definition specializing `MemoPart`. |
 | [`ConfigurationItem`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#configurationitem) | `part def` | Configuration item definition specializing `MemoPart`. |
+| [`ReleaseRecord`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#releaserecord) | `part def` | Release record definition specializing `MemoPart`. |
 
 **Core**
 
