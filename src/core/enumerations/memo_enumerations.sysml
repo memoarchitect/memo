@@ -422,6 +422,13 @@ package memo_core_enumerations {
         enum recommended;
         enum bestPractice;
     }
+    // How a relation places elements in a workspace; see
+    // memo_core_relationships_workspace_membership.
+    enum def WorkspaceMembershipKind {
+        enum sourceFollowsTarget;
+        enum targetFollowsSource;
+        enum neither;
+    }
     enum def RuleDispositionKind {
         enum enabled;
         enum disabled;
