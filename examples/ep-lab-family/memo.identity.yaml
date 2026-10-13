@@ -8,6 +8,9 @@ elements:
   "ep_lab_family_ablation::AblationGeneratorSystem":
     shortId: "SYS-1"
     uuid: "f3ee37db-77f4-5c9d-a889-44ec3f96e647"
+  "ep_lab_family_ablation::AblationGeneratorSystem::energyController":
+    shortId: "LGC-4"
+    uuid: "1eff0e1b-e4a9-5bdd-b96e-62f046f0ec14"
   "ep_lab_family_ablation::AblationGeneratorSystem::pAblationEventOut":
     shortId: "ABL-1"
     uuid: "608923f0-3bdd-5fab-82d9-e7b1aaf9a138"
@@ -56,6 +59,12 @@ elements:
   "ep_lab_family_mapping::CardiacMappingSystem":
     shortId: "SYS-3"
     uuid: "75c6ef86-dc0a-5220-936e-f88f6ae93c29"
+  "ep_lab_family_mapping::CardiacMappingSystem::isolation":
+    shortId: "PTN-1"
+    uuid: "aa5291f6-d85e-5656-9b8d-a5643368ae07"
+  "ep_lab_family_mapping::CardiacMappingSystem::mapEngine":
+    shortId: "LGC-5"
+    uuid: "1c4bb7c4-04a3-5e9f-90cf-3259fe9f6c2d"
   "ep_lab_family_mapping::CardiacMappingSystem::pAblationEventIn":
     shortId: "UNK-3"
     uuid: "d2a316ea-ee54-5940-a0c8-af699efc0971"
@@ -77,6 +86,12 @@ elements:
   "ep_lab_family_recording::SignalRecordingSystem":
     shortId: "SYS-7"
     uuid: "8c34258f-f8aa-590e-9680-303ae847e840"
+  "ep_lab_family_recording::SignalRecordingSystem::acquisitionUnit":
+    shortId: "LGC-6"
+    uuid: "a4e1e4e2-6695-5047-8527-0fa6c00f3b2a"
+  "ep_lab_family_recording::SignalRecordingSystem::isolation":
+    shortId: "PTN-2"
+    uuid: "c53a2e35-dbdf-51b1-914c-5aa50f4469a0"
   "ep_lab_family_recording::SignalRecordingSystem::pElectrogramOut":
     shortId: "ELC-2"
     uuid: "89793fb2-7c69-5a64-ab7d-f2c0adae2632"
@@ -113,6 +128,15 @@ elements:
   "ep_lab_family_sos::ElectrophysiologyLab":
     shortId: "SYS-8"
     uuid: "8d904c23-92aa-5a25-9c87-172e414b3e73"
+  "ep_lab_family_sos::ElectrophysiologyLab::ablation":
+    shortId: "ABL-3"
+    uuid: "b9d088cf-282a-5fd6-86e0-8684830bb964"
+  "ep_lab_family_sos::ElectrophysiologyLab::mapping":
+    shortId: "CRD-1"
+    uuid: "cdc7d0b1-b962-5e48-aacb-ad535268b05f"
+  "ep_lab_family_sos::ElectrophysiologyLab::recording":
+    shortId: "SGN-1"
+    uuid: "5fc28aef-745a-56a6-95c2-a055c92386bc"
   "ep_lab_family_sos::epLab":
     shortId: "ELC-3"
     uuid: "f247bb1c-7c73-56d4-980e-e2d71eac82ce"
