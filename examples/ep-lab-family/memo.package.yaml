@@ -3,3 +3,5 @@ entrypoint: model/catalog/project.sysml
 include: [model]
 toolchain:
   packager: internal
+dependencies:
+  ep-platform: "^1.0.0"
