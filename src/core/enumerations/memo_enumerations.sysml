@@ -453,6 +453,19 @@ package memo_core_enumerations {
         enum verificationStage;
         enum evidence;
         enum documents;
+        // The stages of the default method's steps (plan O11), beyond the six above.
+        enum operational;
+        enum functional;
+        enum logical;
+        enum physical;
+        enum humanFactors;
+        enum security;
+        enum release;
+    }
+    // The level a method step is worked at: the system of systems, or one system.
+    enum def MethodLevelKind {
+        enum systemOfSystems;
+        enum system;
     }
     enum def ThreatCategoryKind {
         enum spoofing;

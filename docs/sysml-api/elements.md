@@ -519,6 +519,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`ModelMethodBinding`](methodology/core/memo_core.md#modelmethodbinding) | `part def` | What a model is bound to: its name, the methodology it is governed by, and the rule policies it adds. "Model" is what Architect opens, one repository and one compile; "project" means a change set in an iteration. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 | [`ProjectMethodBinding`](methodology/core/memo_core.md#projectmethodbinding) | `part def` | Project method binding definition specializing `ModelMethodBinding`. | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 | [`ResolvedMethodology`](methodology/core/memo_core.md#resolvedmethodology) | `part def` | Derived, never authored. The resolver projects this from a binding and its methodology chain. If it is serialized for review it is generated output that records its input hashes; it does not compete with the authored methodology and binding, and ontology source declares no ins… | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
+| [`RoleView`](methodology/core/memo_core.md#roleview) | `part def` | Which viewpoints a role works with (plan O12). A viewpoint names the stakeholders it is written for, and that is what a role sees by default; a methodology may say otherwise for a role, and then THIS is what the role sees, an override and not an addition.… | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 | [`RulePolicy`](methodology/core/memo_core.md#rulepolicy) | `part def` | A rule's disposition under one methodology or model binding. `targetRule` and `replacementRule` are typed references to the rule's own `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.… | [`methodology/core/memo_core.sysml`](methodology/core/memo_core.md) |
 
 
@@ -548,7 +549,8 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`MethodologyWorkflowStep`](methodology/workflow/memo_workflow.md#methodologyworkflowstep) | `action def` | Named for its axis: this is a step in a METHODOLOGY workflow (a lifecycle stage with entry/exit criteria), distinct from an OPERATIONAL workflow's steps, which are OperativeActions performed by users or the system.… | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`DoneWhen`](methodology/workflow/memo_workflow.md#donewhen) | `metadata def` | `#DoneWhen dependency from <step> to <rule>, <rule>;` The step is done when each of these rules has a subject in the workspace and no finding on it. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`MethodologyWorkflowStep`](methodology/workflow/memo_workflow.md#methodologyworkflowstep) | `action def` | Methodology workflow step definition specializing `MemoAction`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 
 
 ## `memo::viewpoints::catalog`

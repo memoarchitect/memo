@@ -265,4 +265,7 @@ package memo_core_relationships_workspace_membership {
     // A device follows the releases it covers, and they follow their items: a device that covers releases of
     // two systems is shared, and one that covers none is Unassigned (an approval for nothing).
     part membershipCovers : WorkspaceMembershipEntry { attribute :>> relation = "covers"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
+
+    // Neither: a step is not placed by the rule that says when it is done.
+    part membershipDoneWhen : WorkspaceMembershipEntry { attribute :>> relation = "doneWhen"; attribute :>> direction = WorkspaceMembershipKind::neither; }
 }
