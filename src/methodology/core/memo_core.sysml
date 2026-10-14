@@ -8,6 +8,7 @@ package memo_methodology_core {
     private import memo_core_consistency_rules::*;
     private import memo_artifacts_standards_traceability::RegulatoryStandard;
     private import memo_viewpoints_definitions::MemoViewpoint;
+    private import memo_viewpoints_stakeholders_concerns::MemoStakeholder;
 
     part def MethodologyLibrary :> MemoPart {
         attribute version : String;
@@ -89,6 +90,18 @@ package memo_methodology_core {
         attribute includedArtifactKind : ArtifactKind[0..*];
         ref includedViewpoint : MemoViewpoint[0..*];
         part rulePolicy : RulePolicy[0..*];
+    }
+
+    // Which viewpoints a role works with (plan O12). A viewpoint names the stakeholders it is written for,
+    // and that is what a role sees by default; a methodology may say otherwise for a role, and then THIS is
+    // what the role sees, an override and not an addition. A method that names a base starts from its
+    // role views, and a later one for the same stakeholder replaces the earlier.
+    //
+    //   part rvSafety : RoleView { ref :>> forStakeholder = safetyEngineer; ref :>> shownViewpoint = (vpRiskChain, vpEvidenceTraceability); }
+    part def RoleView :> MemoPart {
+        // `stakeholder` and `viewpoint` are SysML keywords, so neither names a feature.
+        ref forStakeholder : MemoStakeholder;
+        ref shownViewpoint : MemoViewpoint[0..*];
     }
 
     // Derived, never authored. The resolver projects this from a binding and

@@ -71,7 +71,8 @@
 | [`WorkspaceMembershipKind`](#workspacemembershipkind) | `enum def` | How a relation places elements in a workspace; see memo_core_relationships_workspace_membership. | — |
 | [`RuleDispositionKind`](#ruledispositionkind) | `enum def` | Controlled values for rule disposition: `enabled`, `disabled`, `replaced`. | — |
 | [`ScopeModeKind`](#scopemodekind) | `enum def` | Whether a methodology's inclusion lists are the whole selection or a deliberate subset. An empty list under `explicit` selects nothing; it never means "everything". `allAvailable` is the only way to say "all", and it is always deliberate.… | — |
-| [`WorkflowStageKind`](#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`. | — |
+| [`WorkflowStageKind`](#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `humanFactors`, `security`, `release`. | — |
+| [`MethodLevelKind`](#methodlevelkind) | `enum def` | The level a method step is worked at: the system of systems, or one system. | — |
 | [`ThreatCategoryKind`](#threatcategorykind) | `enum def` | Controlled values for threat category: `spoofing`, `tampering`, `repudiation`, `informationDisclosure`, `denialOfService`, `elevationOfPrivilege`, `privacyLoss`, `supplyChain`. | — |
 | [`CyberControlKind`](#cybercontrolkind) | `enum def` | Controlled values for cyber control: `prevent`, `detect`, `respond`, `recover`, `hardening`, `monitoring`, `authentication`, `authorization`, `encryption`, `integrityProtection`, `audit`, `updateMechanism`. | — |
 | [`AssetKind`](#assetkind) | `enum def` | Controlled values for asset: `data`, `credential`, `configuration`, `software`, `hardware`, `networkConnection`, `auditRecord`, `safetyCriticalFunction`. | — |
@@ -746,7 +747,22 @@ enum def WorkflowStageKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`. |
+| Description | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `humanFactors`, `security`, `release`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## MethodLevelKind
+
+```sysml
+enum def MethodLevelKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The level a method step is worked at: the system of systems, or one system. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1738,6 +1754,19 @@ enum def CommentStatusKind
             enum verificationStage;
             enum evidence;
             enum documents;
+            // The stages of the default method's steps (plan O11), beyond the six above.
+            enum operational;
+            enum functional;
+            enum logical;
+            enum physical;
+            enum humanFactors;
+            enum security;
+            enum release;
+        }
+        // The level a method step is worked at: the system of systems, or one system.
+        enum def MethodLevelKind {
+            enum systemOfSystems;
+            enum system;
         }
         enum def ThreatCategoryKind {
             enum spoofing;
