@@ -43,6 +43,9 @@
 | [`AffectsRelease`](#affectsrelease) | `metadata def` | `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. | `MemoTypedDependency` |
 | [`RegulatedDevice`](#regulateddevice) | `part def` | Regulated device definition specializing `MemoPart`. | `MemoPart` |
 | [`Covers`](#covers) | `metadata def` | `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. | `MemoTypedDependency` |
+| [`Project`](#project) | `part def` | Project definition specializing `MemoPart`. | `MemoPart` |
+| [`Feeds`](#feeds) | `metadata def` | `#Feeds dependency from <project> to <record>, <record>;` The project's work is in these releases. | `MemoTypedDependency` |
+| [`IntroducedBy`](#introducedby) | `metadata def` | `#IntroducedBy dependency from <variant> to <project>;` The project that introduced this variant. | `MemoTypedDependency` |
 | [`Changes`](#changes) | `connection def` | Typed relationship from `ChangeRequest` to `MemoPart`. | `MemoRelationship` |
 
 ## ChangeRequest
@@ -195,6 +198,51 @@ metadata def Covers :> MemoTypedDependency
 | Owning package | `memo_artifacts_configuration_management` |
 
 
+## Project
+
+```sysml
+part def Project :> MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Project definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
+## Feeds
+
+```sysml
+metadata def Feeds :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | `#Feeds dependency from <project> to <record>, <record>;` The project's work is in these releases. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
+## IntroducedBy
+
+```sysml
+metadata def IntroducedBy :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | `#IntroducedBy dependency from <variant> to <project>;` The project that introduced this variant. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
 ## Changes
 
 ```sysml
@@ -307,6 +355,25 @@ connection def Changes :> MemoRelationship
 
         metadata def Covers :> MemoTypedDependency {
             doc /* `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. */
+        }
+
+        // A project is a change set in an iteration (plan O7): the work that produces releases. It holds a link to
+        // where the work is tracked and nothing else; the merge request is the approval. It FEEDS the release records
+        // it contributes to, and a variant records the project that introduced it, so "which work gave us this
+        // option, and which releases did it reach" is two links.
+        //
+        //   part prjIrrigatedTip : Project { attribute :>> trackerLink = "https://tracker.example/PRJ-12"; }
+        //   #Feeds dependency from prjIrrigatedTip to relGeneratorEu, relGeneratorUs;
+        //   #IntroducedBy dependency from outputStage::usOutput to prjIrrigatedTip;
+        part def Project :> MemoPart {
+            attribute trackerLink : String[0..1];
+        }
+
+        metadata def Feeds :> MemoTypedDependency {
+            doc /* `#Feeds dependency from <project> to <record>, <record>;` The project's work is in these releases. */
+        }
+        metadata def IntroducedBy :> MemoTypedDependency {
+            doc /* `#IntroducedBy dependency from <variant> to <project>;` The project that introduced this variant. */
         }
 
         // ── Relations owned by this package ─────────────────────────────
