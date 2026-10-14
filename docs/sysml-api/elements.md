@@ -251,9 +251,10 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ProductFeature`](architecture/variability/memo_variability.md#productfeature) | `part def` | Named ProductFeature, not Feature: `Feature` is the KerML metaclass, and the builder falls back to a metaclass name for a kind it cannot place. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
+| [`ProductFeature`](architecture/variability/memo_variability.md#productfeature) | `part def` | Product feature definition specializing `MemoPart`. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
 | [`RealizesFeature`](architecture/variability/memo_variability.md#realizesfeature) | `metadata def` | `#RealizesFeature dependency from <variant> to <feature>;` The variant exists to give the family this feature. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
 | [`SelectsFeature`](architecture/variability/memo_variability.md#selectsfeature) | `metadata def` | `#SelectsFeature dependency from <release> to <feature>, <feature>;` The release contains the variants that realize these features. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
+| [`ShowsView`](architecture/variability/memo_variability.md#showsview) | `metadata def` | `#ShowsView dependency from <feature> to <view>, <view>;` The views the feature's viewpoint lists: chosen for what the feature demonstrates, not found by a rule. | [`architecture/variability/memo_variability.sysml`](architecture/variability/memo_variability.md) |
 
 
 ## `memo::artifacts::configuration_management`

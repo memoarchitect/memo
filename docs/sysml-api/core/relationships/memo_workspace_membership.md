@@ -295,6 +295,8 @@ part def WorkspaceMembershipEntry
         part membershipRealizesFeature : WorkspaceMembershipEntry { attribute :>> relation = "realizesFeature"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
         // Neither: a release is a family-level record, and a feature it selects is placed by its variants.
         part membershipSelectsFeature : WorkspaceMembershipEntry { attribute :>> relation = "selectsFeature"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+        // A feature lists the views that demonstrate it; listing one places it in no workspace.
+        part membershipShowsView : WorkspaceMembershipEntry { attribute :>> relation = "showsView"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // Neither: two features that need each other are peers, and neither is placed by the other.
         part membershipRequiresFeature : WorkspaceMembershipEntry { attribute :>> relation = "requiresFeature"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // Neither: two features that exclude each other are peers.
