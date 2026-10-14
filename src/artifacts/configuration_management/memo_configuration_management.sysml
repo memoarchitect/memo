@@ -66,6 +66,32 @@ package memo_artifacts_configuration_management {
         doc /* `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. */
     }
 
+    // A regulated device is one approval in one jurisdiction (plan O6): the thing a regulator is asked to
+    // clear. It is not an item and not a release: it COVERS the system releases the approval names, so two
+    // markets can ship different releases of one system, each with its own design history and risk file.
+    //
+    //   part deviceFda : RegulatedDevice {
+    //       attribute :>> jurisdiction = RegulatoryRegimeKind::FDA_510k;
+    //       attribute :>> submissionId = "K123456";
+    //   }
+    //   #Covers dependency from deviceFda to relPumpD;
+    //
+    // The jurisdiction is a `RegulatoryRegimeKind`, the same enum the standards library and the document
+    // templates (`required_for`) are written against, so a device selects the standards it must meet and the
+    // documents it must have. It replaces `ModelMethodBinding.regulatoryRegime`, which stated one regime set
+    // for a whole model and is read only when the model declares no device.
+    //
+    // `IntendedUseOf` and `UsedWith` (plan O6) are not declared: the plan names no end for either, and an end
+    // is not invented to fill a name. `Covers` is the link every part of M5 needs.
+    part def RegulatedDevice :> MemoPart {
+        attribute jurisdiction : RegulatoryRegimeKind[1];
+        attribute submissionId : String[0..1];
+    }
+
+    metadata def Covers :> MemoTypedDependency {
+        doc /* `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. */
+    }
+
     // ── Relations owned by this package ─────────────────────────────
     // Moved out of memo_core_relationships: their ends are typed against
     // types declared here, and core must not depend on a domain package.
