@@ -16,6 +16,9 @@
 | [`AffectsRelease`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#affectsrelease) | `metadata def` | `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. |
 | [`RegulatedDevice`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#regulateddevice) | `part def` | Regulated device definition specializing `MemoPart`. |
 | [`Covers`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#covers) | `metadata def` | `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. |
+| [`Project`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#project) | `part def` | Project definition specializing `MemoPart`. |
+| [`Feeds`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#feeds) | `metadata def` | `#Feeds dependency from <project> to <record>, <record>;` The project's work is in these releases. |
+| [`IntroducedBy`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#introducedby) | `metadata def` | `#IntroducedBy dependency from <variant> to <project>;` The project that introduced this variant. |
 
 **Core**
 
