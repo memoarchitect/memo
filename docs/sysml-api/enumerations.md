@@ -232,3 +232,13 @@ SysML `enum def` declarations in `src/`.
 | [`WorkflowStageKind`](core/enumerations/memo_enumerations.md#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `humanFactors`, `security`, `release`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`WorkspaceMembershipKind`](core/enumerations/memo_enumerations.md#workspacemembershipkind) | `enum def` | How a relation places elements in a workspace; see memo_core_relationships_workspace_membership. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 
+
+## `memo::viewpoints::definitions`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MemoLayoutAlign`](viewpoints/definitions/memo_view_layout.md#memolayoutalign) | `enum def` | Controlled values for memo layout align: `left`, `center`, `right`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
+| [`MemoLayoutLineStyle`](viewpoints/definitions/memo_view_layout.md#memolayoutlinestyle) | `enum def` | Controlled values for memo layout line style: `solid`, `dashed`, `dotted`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
+| [`MemoLayoutSide`](viewpoints/definitions/memo_view_layout.md#memolayoutside) | `enum def` | Controlled values for memo layout side: `top`, `bottom`, `left`, `right`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
+| [`MemoLayoutVerticalAlign`](viewpoints/definitions/memo_view_layout.md#memolayoutverticalalign) | `enum def` | Controlled values for memo layout vertical align: `top`, `middle`, `bottom`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
+

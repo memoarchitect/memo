@@ -25,6 +25,12 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
+| [`MemoLayout`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayout) | `metadata def` | Memo layout definition. |
+| [`MemoLayoutNode`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutnode) | `metadata def` | Memo layout node definition. |
+| [`MemoLayoutPort`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutport) | `metadata def` | Memo layout port definition. |
+| [`MemoLayoutPortWall`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutportwall) | `metadata def` | Memo layout port wall definition. |
+| [`MemoLayoutEdge`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutedge) | `metadata def` | Memo layout edge definition. |
+| [`MemoLayoutNote`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutnote) | `metadata def` | Memo layout note definition. |
 | [`MemoViewpoint`](../sysml-api/viewpoints/definitions/memo_viewpoint_definitions.md#memoviewpoint) | `viewpoint def` | Extends the native SysML viewpoint (Views::ViewpointCheck, a RequirementCheck whose subject is a View) with MEMO's catalog attributes.… |
 | [`ViewRule`](../sysml-api/viewpoints/definitions/memo_viewpoint_definitions.md#viewrule) | `part def` | View rule definition specializing `MemoPart`. |
 | [`ViewSelectionQuery`](../sysml-api/viewpoints/definitions/memo_viewpoint_definitions.md#viewselectionquery) | `part def` | View selection query definition specializing `MemoPart`. |
@@ -99,3 +105,12 @@ _None: this layer connects through native SysML relationships and those declared
 ### Relationships from elsewhere that reach this layer
 
 _None with an end typed in this layer._
+
+### Enumerations
+
+| Enumeration | Values |
+| --- | --- |
+| [`MemoLayoutSide`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutside) | `top`, `bottom`, `left`, `right` |
+| [`MemoLayoutLineStyle`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutlinestyle) | `solid`, `dashed`, `dotted` |
+| [`MemoLayoutAlign`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutalign) | `left`, `center`, `right` |
+| [`MemoLayoutVerticalAlign`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutverticalalign) | `top`, `middle`, `bottom` |
