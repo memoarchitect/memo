@@ -268,4 +268,10 @@ package memo_core_relationships_workspace_membership {
 
     // Neither: a step is not placed by the rule that says when it is done.
     part membershipDoneWhen : WorkspaceMembershipEntry { attribute :>> relation = "doneWhen"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+
+    // A project follows the releases it feeds, as a device follows what it covers: a project that feeds releases
+    // of two systems is shared, and one that feeds none is Unassigned (work that reached nothing).
+    part membershipFeeds : WorkspaceMembershipEntry { attribute :>> relation = "feeds"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
+    // Neither: a variant is placed by its variation point; the project that introduced it is not drawn into it.
+    part membershipIntroducedBy : WorkspaceMembershipEntry { attribute :>> relation = "introducedBy"; attribute :>> direction = WorkspaceMembershipKind::neither; }
 }
