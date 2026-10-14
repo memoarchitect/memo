@@ -31,6 +31,7 @@
 | private | `memo_core_consistency_rules::*` |
 | private | `memo_artifacts_standards_traceability::RegulatoryStandard` |
 | private | `memo_viewpoints_definitions::MemoViewpoint` |
+| private | `memo_viewpoints_stakeholders_concerns::MemoStakeholder` |
 
 ## Declarations
 
@@ -39,6 +40,7 @@
 | [`MethodologyLibrary`](#methodologylibrary) | `part def` | Methodology library definition specializing `MemoPart`. | `MemoPart` |
 | [`RulePolicy`](#rulepolicy) | `part def` | A rule's disposition under one methodology or model binding. `targetRule` and `replacementRule` are typed references to the rule's own `constraint def`, narrowed at the usage with `ref :>> targetRule : <Rule>`.… | `MemoPart` |
 | [`MethodologyDefinition`](#methodologydefinition) | `part def` | Methodology definition definition specializing `MemoPart`. | `MemoPart` |
+| [`RoleView`](#roleview) | `part def` | Which viewpoints a role works with (plan O12). A viewpoint names the stakeholders it is written for, and that is what a role sees by default; a methodology may say otherwise for a role, and then THIS is what the role sees, an override and not an addition.… | `MemoPart` |
 | [`ResolvedMethodology`](#resolvedmethodology) | `part def` | Derived, never authored. The resolver projects this from a binding and its methodology chain. If it is serialized for review it is generated output that records its input hashes; it does not compete with the authored methodology and binding, and ontology source declares no ins… | `MemoPart` |
 | [`ModelMethodBinding`](#modelmethodbinding) | `part def` | What a model is bound to: its name, the methodology it is governed by, and the rule policies it adds. "Model" is what Architect opens, one repository and one compile; "project" means a change set in an iteration. | `MemoPart` |
 | [`ProjectMethodBinding`](#projectmethodbinding) | `part def` | Project method binding definition specializing `ModelMethodBinding`. | `ModelMethodBinding` |
@@ -84,6 +86,21 @@ part def MethodologyDefinition :> MemoPart
 | Property | Value |
 | --- | --- |
 | Description | Methodology definition definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_methodology_core` |
+
+
+## RoleView
+
+```sysml
+part def RoleView :> MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Which viewpoints a role works with (plan O12). A viewpoint names the stakeholders it is written for, and that is what a role sees by default; a methodology may say otherwise for a role, and then THIS is what the role sees, an override and not an addition.… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -180,6 +197,7 @@ part def Archetype :> MemoPart
         private import memo_core_consistency_rules::*;
         private import memo_artifacts_standards_traceability::RegulatoryStandard;
         private import memo_viewpoints_definitions::MemoViewpoint;
+        private import memo_viewpoints_stakeholders_concerns::MemoStakeholder;
 
         part def MethodologyLibrary :> MemoPart {
             attribute version : String;
@@ -261,6 +279,18 @@ part def Archetype :> MemoPart
             attribute includedArtifactKind : ArtifactKind[0..*];
             ref includedViewpoint : MemoViewpoint[0..*];
             part rulePolicy : RulePolicy[0..*];
+        }
+
+        // Which viewpoints a role works with (plan O12). A viewpoint names the stakeholders it is written for,
+        // and that is what a role sees by default; a methodology may say otherwise for a role, and then THIS is
+        // what the role sees, an override and not an addition. A method that names a base starts from its
+        // role views, and a later one for the same stakeholder replaces the earlier.
+        //
+        //   part rvSafety : RoleView { ref :>> forStakeholder = safetyEngineer; ref :>> shownViewpoint = (vpRiskChain, vpEvidenceTraceability); }
+        part def RoleView :> MemoPart {
+            // `stakeholder` and `viewpoint` are SysML keywords, so neither names a feature.
+            ref forStakeholder : MemoStakeholder;
+            ref shownViewpoint : MemoViewpoint[0..*];
         }
 
         // Derived, never authored. The resolver projects this from a binding and
