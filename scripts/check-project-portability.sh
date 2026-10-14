@@ -51,8 +51,8 @@ else
   echo "  ✔ no semantic YAML in the project"
 fi
 
-if [ ! -f "$PROJECT_DIR/model/catalog/project.sysml" ]; then
-  echo "  ✖ no model/catalog/project.sysml — the project has no native entrypoint"
+if [ ! -f "$PROJECT_DIR/model/methodology/project.sysml" ]; then
+  echo "  ✖ no model/methodology/project.sysml — the project has no native entrypoint"
   fail=1
 else
   echo "  ✔ native entrypoint present"

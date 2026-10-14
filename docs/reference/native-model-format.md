@@ -45,7 +45,7 @@ memo.lock.yaml                          optional generated resolution record
 Only the namespace mirroring is normative. Filenames and directories are a
 default starting layout; parsed package ownership decides origin, so nothing
 depends on a file being called `activities.sysml` — or on the entrypoint being
-called `model/catalog/project.sysml`.
+called `model/methodology/project.sysml`.
 
 ## The entrypoint
 
@@ -55,14 +55,14 @@ SysML file it names still says WHAT they are.
 
 ```yaml
 name: my-project
-entrypoint: model/catalog/project.sysml
+entrypoint: model/methodology/project.sysml
 include: [model]
 ```
 
 **There is no conventional fallback.** A directory holding a
-`model/catalog/project.sysml` with no `entrypoint` naming it is not a model,
+`model/methodology/project.sysml` with no `entrypoint` naming it is not a model,
 and MEMO commands report a missing locator rather than a missing file — the
-file is usually present. `model/catalog/project.sysml` is what `memo-architect init`
+file is usually present. `model/methodology/project.sysml` is what `memo-architect init`
 scaffolds and what most models keep, but it is a default, not a rule; a
 model rooted at `src/project.sysml` is equally valid and is found the same
 way.
@@ -293,7 +293,7 @@ Rejected, with the native replacement named in the message:
 
 | Removed | Replaced by |
 | --- | --- |
-| `memo.config.yaml` | `model/catalog/project.sysml` |
+| `memo.config.yaml` | `model/methodology/project.sysml` |
 | `memo.rules.yaml` | `constraint def` plus `RulePolicy` |
 | `memo.viewpoints.yaml` | native viewpoint/view packages |
 | `memo.rendering.yaml` | `LayerRendering` and `ExplorerClassification` usages |
