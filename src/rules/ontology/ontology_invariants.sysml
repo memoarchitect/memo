@@ -119,21 +119,31 @@ package memo_rules_ontology {
         attribute predicateExpression = "downstream(selectsFeature)->forAll(downstream(requiresFeature)->forAll(upstream(selectsFeature)->exists(id == subject.id)) and excludesFeature->forAll(upstream(selectsFeature)->forAll(id != subject.id)))";
         constraint { true }
     }
-    // Checks that no variation point has TWO OR MORE selected variants. Whether each has one needs
-    // the item the record is a release of (`ReleaseOf`, with the release model): without it every
-    // variation point in the model would be asked of every record, including another system's.
-    // A variant that realizes no feature is never selected, so it does not count. Limit: `variant`
-    // is followed transitively, so a variant that is itself a variation point counts its own
-    // variants against its parent's.
-    constraint def ReleaseSelectsAtMostOneVariantRule :> MemoConsistencyRule {
+    // Every variation point of the item a record is a release of is resolved to ONE variant, and no
+    // variation point anywhere has two. Two halves, one rule:
+    //   at most one  -- any record, any status: a record that selects the features of two variants
+    //                   of one point describes no product. Needs no item.
+    //   exactly one  -- an approved or released record that is `#ReleaseOf` an item: each variation
+    //                   point the item owns (`composes`, transitive, so an SoS record judges the
+    //                   points of the SoS and each system record those of its own system; ownership
+    //                   does not cross typing) has one selected variant. A draft is allowed to be
+    //                   unfinished, as in CR-ONT-088.
+    // Not asked of the exactly-one half: a point none of whose variants realizes a feature (a
+    // release can neither select nor drop its variants, so it cannot resolve it), a point owned by
+    // a variant the record does not select (it is not in the product), and a record with no
+    // `#ReleaseOf` (no item to judge, a limit; the at-most-one half still runs).
+    // `selectRelease` (memo-tools `model/variability.ts`) is the same definition in code and a test
+    // holds the two equal. Limit: `variant` is followed transitively, so a variant that is itself a
+    // variation point counts its own variants against its parent's.
+    constraint def ReleaseSelectsOneVariantRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-090"; }
         attribute tailoring = RuleTailoringKind::invariant;
         attribute domain = RuleDomainKind::modelling;
         attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "ReleaseRecord";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "A variation point is one choice. A record that selects the features of two of its variants builds both, so it describes no single product.";
-        attribute predicateExpression = "downstream(selectsFeature)->forAll(upstream(realizesFeature)->forAll(upstream(variant)->forAll(downstream(variant)->select(downstream(realizesFeature)->exists(upstream(selectsFeature)->exists(id == subject.id)))->size() <= 1)))";
+        attribute rationaleText = "A variation point is one choice. A record that selects the features of two of its variants builds both, and an approved or released record of an item that selects none of a variation point's variants builds neither, so it describes no single product.";
+        attribute predicateExpression = "downstream(selectsFeature)->forAll(upstream(realizesFeature)->forAll(upstream(variant)->forAll(downstream(variant)->select(downstream(realizesFeature)->exists(upstream(selectsFeature)->exists(id == subject.id)))->size() <= 1))) and (not(attributes.status == 'ElementStatusKind::approved' or attributes.status == 'ElementStatusKind::released') or downstream(releaseOf)->forAll(downstream(composes)->select(attributes.isVariation == 'true')->forAll(not(downstream(variant)->exists(downstream(realizesFeature)->notEmpty())) or upstream(composes)->exists(upstream(variant)->notEmpty() and downstream(realizesFeature)->notEmpty() and not(downstream(realizesFeature)->exists(upstream(selectsFeature)->exists(id == subject.id)))) or downstream(variant)->select(downstream(realizesFeature)->exists(upstream(selectsFeature)->exists(id == subject.id)))->size() == 1)))";
         constraint { true }
     }
     constraint def NestedPartConnectedRule :> MemoConsistencyRule {

@@ -249,4 +249,16 @@ package memo_core_relationships_workspace_membership {
     part membershipAlternative : WorkspaceMembershipEntry { attribute :>> relation = "alternative"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
     // A design decision follows the option it chose.
     part membershipSelected : WorkspaceMembershipEntry { attribute :>> relation = "selected"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
+
+    // A release record follows the item it releases: a release of a system is in that system's
+    // workspace. With `neither` every record is Unassigned, which is a finding.
+    part membershipReleaseOf : WorkspaceMembershipEntry { attribute :>> relation = "releaseOf"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
+    // Neither: a system of systems version contains system releases that belong to their systems.
+    part membershipContains : WorkspaceMembershipEntry { attribute :>> relation = "contains"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // Neither: an interface revision belongs to the system of systems, and the systems that implement it are peers.
+    part membershipImplements : WorkspaceMembershipEntry { attribute :>> relation = "implements"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // Neither: a verification case is placed by what it verifies, not by the release that cites it.
+    part membershipVerifiedByCase : WorkspaceMembershipEntry { attribute :>> relation = "verifiedByCase"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // Neither: a change request is not placed by the release it is raised against.
+    part membershipAffectsRelease : WorkspaceMembershipEntry { attribute :>> relation = "affectsRelease"; attribute :>> direction = WorkspaceMembershipKind::neither; }
 }

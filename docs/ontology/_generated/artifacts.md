@@ -9,6 +9,11 @@
 | [`ChangeRequest`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changerequest) | `part def` | Change request definition specializing `MemoPart`. |
 | [`ConfigurationItem`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#configurationitem) | `part def` | Configuration item definition specializing `MemoPart`. |
 | [`ReleaseRecord`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#releaserecord) | `part def` | Release record definition specializing `MemoPart`. |
+| [`ReleaseOf`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#releaseof) | `metadata def` | `#ReleaseOf dependency from <record> to <item definition>;` The record is a release of this item. One record, one item. |
+| [`Contains`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#contains) | `metadata def` | `#Contains dependency from <record> to <record>, <record>;` The release pins these releases: a system of systems version its systems, a system release its components. |
+| [`Implements`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#implements) | `metadata def` | `#Implements dependency from <record> to <interface record>;` The release implements this revision of an interface. |
+| [`VerifiedByCase`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#verifiedbycase) | `metadata def` | `#VerifiedByCase dependency from <record> to <verification case>;` The case that verified, or for a system of systems version validated, this release. `verifiedBy` is taken by the native relation from a requirement to its case. |
+| [`AffectsRelease`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#affectsrelease) | `metadata def` | `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. |
 
 **Core**
 
