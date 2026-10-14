@@ -33,11 +33,12 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`ProductFeature`](#productfeature) | `part def` | Named ProductFeature, not Feature: `Feature` is the KerML metaclass, and the builder falls back to a metaclass name for a kind it cannot place. | `MemoPart` |
+| [`ProductFeature`](#productfeature) | `part def` | Product feature definition specializing `MemoPart`. | `MemoPart` |
 | [`RequiresFeature`](#requiresfeature) | `connection def` | Selecting the source feature needs the target feature selected too. | `MemoRelationship` |
 | [`ExcludesFeature`](#excludesfeature) | `connection def` | The two features cannot be selected together. Symmetric: either end may be written first. | `MemoRelationship` |
 | [`RealizesFeature`](#realizesfeature) | `metadata def` | `#RealizesFeature dependency from <variant> to <feature>;` The variant exists to give the family this feature. | `MemoTypedDependency` |
 | [`SelectsFeature`](#selectsfeature) | `metadata def` | `#SelectsFeature dependency from <release> to <feature>, <feature>;` The release contains the variants that realize these features. | `MemoTypedDependency` |
+| [`ShowsView`](#showsview) | `metadata def` | `#ShowsView dependency from <feature> to <view>, <view>;` The views the feature's viewpoint lists: chosen for what the feature demonstrates, not found by a rule. | `MemoTypedDependency` |
 
 ## ProductFeature
 
@@ -47,7 +48,7 @@ part def ProductFeature specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | Named ProductFeature, not Feature: `Feature` is the KerML metaclass, and the builder falls back to a metaclass name for a kind it cannot place. |
+| Description | Product feature definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -114,6 +115,21 @@ metadata def SelectsFeature :> MemoTypedDependency
 | Owning package | `memo_architecture_variability` |
 
 
+## ShowsView
+
+```sysml
+metadata def ShowsView :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | `#ShowsView dependency from <feature> to <view>, <view>;` The views the feature's viewpoint lists: chosen for what the feature demonstrates, not found by a rule. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
+| Owning package | `memo_architecture_variability` |
+
+
 ## Source
 
 ??? code "architecture/variability/memo_variability.sysml"
@@ -154,7 +170,20 @@ metadata def SelectsFeature :> MemoTypedDependency
 
         // Named ProductFeature, not Feature: `Feature` is the KerML metaclass, and the
         // builder falls back to a metaclass name for a kind it cannot place.
-        part def ProductFeature specializes MemoPart;
+        //
+        // A feature's page is what is said about it: its prose is the element's `doc`, and
+        // the analysis is these four statements, each optional until someone has an answer.
+        // What the feature shows is curated: `#ShowsView` below names its views.
+        part def ProductFeature specializes MemoPart {
+            /** What the feature gives the people who use the product, in a sentence or two. */
+            attribute valueProposition : String[0..1];
+            /** Who it is for: the roles or segments that gain from it. */
+            attribute targetUsers : String[0..1];
+            /** How anyone will know it worked: the measure, and the level that counts as success. */
+            attribute successMeasure : String[0..1];
+            /** What has to hold for the value to be real, and what is not yet known. */
+            attribute assumptions : String[0..1];
+        }
 
         // `Requires` is taken by the native `require` relation, so these say what they join.
         connection def RequiresFeature :> MemoRelationship {
@@ -188,6 +217,9 @@ metadata def SelectsFeature :> MemoTypedDependency
         }
         metadata def SelectsFeature :> MemoTypedDependency {
             doc /* `#SelectsFeature dependency from <release> to <feature>, <feature>;` The release contains the variants that realize these features. */
+        }
+        metadata def ShowsView :> MemoTypedDependency {
+            doc /* `#ShowsView dependency from <feature> to <view>, <view>;` The views the feature's viewpoint lists: chosen for what the feature demonstrates, not found by a rule. */
         }
     }
 
