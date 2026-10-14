@@ -143,7 +143,7 @@ test('the manifest template is a complete source project using the public memo i
 
 test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
   assert.equal(existsSync(join(root, 'src', 'examples')), false);
-  assert.equal(existsSync(join(root, 'examples', 'gpca-pump', 'model', 'catalog', 'project.sysml')), true);
+  assert.equal(existsSync(join(root, 'examples', 'gpca-pump', 'model', 'methodology', 'project.sysml')), true);
   const examples = readdirSync(join(root, 'examples')).filter((entry) => !entry.startsWith('.')).sort();
   const expected = [
     'connected-patient-monitor', 'embedded-infusion-pump',
@@ -167,7 +167,7 @@ test('focused MEMO examples separate their parent package, catalog, and viewpoin
     const model = join(root, 'examples', example, 'model');
     assert.equal(existsSync(join(root, 'examples', example, 'README.md')), true, `${example} needs a README`);
     const catalog = join(model, 'catalog');
-    assert.equal(existsSync(join(catalog, 'project.sysml')), true, `${example} needs a native project entrypoint`);
+    assert.equal(existsSync(join(model, 'methodology', 'project.sysml')), true, `${example} needs a native project entrypoint`);
     assert.ok(readdirSync(catalog).some((entry) => entry.endsWith('.sysml')), `${example} needs catalog SysML`);
     assert.equal(existsSync(join(catalog, 'viewpoints')), true, `${example} needs catalog/viewpoints`);
   }
@@ -645,11 +645,11 @@ test('npm pack includes all content and no JavaScript', () => {
     'templates/default/memo.package.yaml',
     'templates/default/package.json',
     'templates/default/syside.toml',
-    'templates/default/model/catalog/project.sysml',
+    'templates/default/model/methodology/project.sysml',
     'templates/default/model/catalog/architecture/system.sysml',
     'templates/default/model/catalog/assurance/requirements.sysml',
     'templates/default/model/catalog/artifacts/catalog.sysml',
-    'examples/gpca-pump/model/catalog/project.sysml',
+    'examples/gpca-pump/model/methodology/project.sysml',
     'examples/sysml-diagram-samples/README.md',
     'src/memo_namespaces.sysml',
   ]) assert.ok(files.includes(expected), `missing ${expected}`);
