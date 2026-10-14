@@ -19,6 +19,7 @@ package memo_examples_sysml_diagram_samples_project {
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::*;
