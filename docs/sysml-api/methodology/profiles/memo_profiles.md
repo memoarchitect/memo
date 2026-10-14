@@ -333,7 +333,7 @@
 
         // The GPCA binding used to live here, in the reusable default methodology,
         // naming its methodology by string. A project binding is project content:
-        // it now lives in the GPCA project's own `model/catalog/project.sysml` and
+        // it now lives in the GPCA project's own `model/methodology/project.sysml` and
         // references its methodology with a typed SysML reference.
 
         part rmpDoc : DhfDocumentBinding {

@@ -1,5 +1,5 @@
 name: reusable-instrument
-entrypoint: model/catalog/project.sysml
+entrypoint: model/methodology/project.sysml
 include: [model]
 toolchain:
   packager: internal
