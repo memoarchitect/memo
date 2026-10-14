@@ -40,6 +40,7 @@ package diagram_samples {
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_functional_flow_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_interconnection_view::*;
+    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_operational_behaviour_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_package_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::*;
@@ -338,5 +339,50 @@ package diagram_samples {
             attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Specialization");
         }
         attribute :>> layoutHint = "usecase:level=all;edge=rounded";
+    }
+
+    // ─── drill-down samples: a usage typed by a definition ───────────────
+
+    view driveOverview : MemoDiagramView {
+        expose drive;
+        expose drive::gearbox;
+        expose drive::motor;
+        expose drive::controller;
+        @MemoIdentity { :>> shortDescription = "Parts typed by definitions: gearbox has its own authored view, motor drills into generated levels, controller has nothing to open."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = ibdViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
+    view gearboxInside : MemoDiagramView {
+        expose DrillGearbox::**;
+        @MemoIdentity { :>> shortDescription = "The authored view of the gearbox definition; every usage typed by it opens this one."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = ibdViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
+    view servicingFlow : MemoDiagramView {
+        expose servicing::**;
+        @MemoIdentity { :>> shortDescription = "Two composite actions typed by definitions: calibrate has an authored view, confirm drills into generated steps."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
+        ref :>> viewpointDefinition = actionFlowViewpoint;
+    }
+
+    view calibrateDetail : MemoDiagramView {
+        expose DrillCalibrate::**;
+        @MemoIdentity { :>> shortDescription = "The authored view of the calibrate definition."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
+        ref :>> viewpointDefinition = actionFlowViewpoint;
     }
 }

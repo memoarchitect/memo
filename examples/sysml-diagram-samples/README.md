@@ -23,6 +23,7 @@ accepts its decision, merge, accept/send, termination and guard syntax, and
 
 | View | Diagram type | View kind | Renders |
 | --- | --- | --- | --- |
+| `drill_down_view.sysml` | `ibd`, `afd` | interconnection, actionflow | Ways into a lower level from a usage typed by a definition: a part and an action with an authored child view (`gearboxInside`, `calibrateDetail`), a part with parts two levels deep and no view (`motor`), a part with only ports (`controller`), and an action with child steps and no view. |
 | `tree_view.sysml` | `bdd` | general | Block Definition Diagram — a decomposition hierarchy. |
 | `interconnection_view.sysml` | `ibd` | interconnection | Internal Block Diagram — nested parts, boundary ports, typed connectors. |
 | `action_flow_view.sysml` | `afd` | actionflow | Activity / action flow — actions, item flows, successions. |
