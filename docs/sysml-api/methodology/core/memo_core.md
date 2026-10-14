@@ -292,6 +292,10 @@ part def Archetype :> MemoPart
             // SysML rather than a per-document array maintained in 44 places.
             // Empty means the model has not declared its regimes; a report that
             // needs them says so rather than assuming a default market.
+            //
+            // DEPRECATED in 0.14.0 (plan O1, O6): a `RegulatedDevice` states its own
+            // jurisdiction, one approval each. This is read only when the model declares
+            // no device, and ignored with a warning when it declares both.
             attribute regulatoryRegime : RegulatoryRegimeKind[0..*];
             part rulePolicy : RulePolicy[0..*];
         }

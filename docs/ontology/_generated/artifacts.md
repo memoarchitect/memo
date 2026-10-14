@@ -14,6 +14,8 @@
 | [`Implements`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#implements) | `metadata def` | `#Implements dependency from <record> to <interface record>;` The release implements this revision of an interface. |
 | [`VerifiedByCase`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#verifiedbycase) | `metadata def` | `#VerifiedByCase dependency from <record> to <verification case>;` The case that verified, or for a system of systems version validated, this release. `verifiedBy` is taken by the native relation from a requirement to its case. |
 | [`AffectsRelease`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#affectsrelease) | `metadata def` | `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. |
+| [`RegulatedDevice`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#regulateddevice) | `part def` | Regulated device definition specializing `MemoPart`. |
+| [`Covers`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#covers) | `metadata def` | `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. |
 
 **Core**
 
