@@ -70,6 +70,31 @@ way.
 `include` names the directories holding model source. A model that omits it
 resolves no packages of its own.
 
+## Depending on another package
+
+A model can build on a package of its own, such as the parts every product of a
+family shares, and keep that package versioned apart from the model. The model
+lists it under `dependencies` in `memo.package.yaml`, with the versions it
+accepts:
+
+```yaml
+dependencies:
+  ep-platform: "^1.0.0"
+```
+
+`memo-architect install` writes the entry and puts the package under
+`memo_packages/` (cloned from git, linked from a local path, or installed by
+npm). `*`, an exact version, `^`, `~` and `>=` are understood. A listed package
+that is not found, or whose version the range does not accept, is an error.
+
+The model imports what it uses from the package as it does from its own sources,
+and that is what selects it: a dependency's package that nothing imports adds no
+element to the model. Those elements that are imported are in the model, so a
+link can name them and a part can be typed by them, but they belong to the
+package: they are read-only here, they keep the identity the package gives them,
+and the rules judge the model's own content, not theirs. To change one, change
+the package and take the new version.
+
 The entrypoint file imports what the model uses and declares its binding:
 
 ```sysml

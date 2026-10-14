@@ -37,10 +37,9 @@ package ep_lab_family_shared {
     }
 
     // ─── A component two systems both contain ───────────────────────────
-    part def PatientIsolationModule specializes LogicalComponent {
-        @MemoIdentity { :>> providedId = "EPF-LC-001"; :>> label = "Patient Isolation Module"; }
-        attribute :>> responsibility = "Isolate patient-connected electrodes from mains-referenced electronics.";
-    }
+    // It lives in the platform package, which this family depends on and does
+    // not edit. Re-exported here so a system imports this package and nothing else.
+    public import ep_platform::PatientIsolationModule;
 
     // ─── The people who use the lab ─────────────────────────────────────
     part electrophysiologist : User {
