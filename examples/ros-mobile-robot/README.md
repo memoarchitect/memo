@@ -6,7 +6,7 @@ a ROS 2 mobile logistics robot; the point is the mechanism.
 Extensions are a way to model, so they live in [`extensions/`](../../extensions),
 beside the ontology. This project is one of their consumers.
 
-- `model/catalog/project.sysml` — the binding, and one import:
+- `model/methodology/project.sysml` — the binding, and one import:
   `public import memo_extension_ros::*;`. That import is how the project brings
   the extension in. ROS publicly imports the messaging and container
   extensions it builds on, so the one import selects all three. The project

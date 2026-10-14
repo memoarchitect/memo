@@ -5,7 +5,7 @@ systems, what its systems share, and each system. The names are fictional.
 
 ```text
 model/
-  catalog/project.sysml     model identity and method binding (the entrypoint)
+  methodology/project.sysml model identity and method binding (the entrypoint)
   sos/                      the electrophysiology lab: the system of systems,
                             its interface control documents, a functional chain
                             across systems, and the clinical use cases
