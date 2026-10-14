@@ -244,7 +244,8 @@ flowchart LR
 | [`WorkspaceMembershipKind`](../sysml-api/core/enumerations/memo_enumerations.md#workspacemembershipkind) | `sourceFollowsTarget`, `targetFollowsSource`, `neither` |
 | [`RuleDispositionKind`](../sysml-api/core/enumerations/memo_enumerations.md#ruledispositionkind) | `enabled`, `disabled`, `replaced` |
 | [`ScopeModeKind`](../sysml-api/core/enumerations/memo_enumerations.md#scopemodekind) | `allAvailable`, `explicit` |
-| [`WorkflowStageKind`](../sysml-api/core/enumerations/memo_enumerations.md#workflowstagekind) | `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents` |
+| [`WorkflowStageKind`](../sysml-api/core/enumerations/memo_enumerations.md#workflowstagekind) | `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `humanFactors`, `security`, `release` |
+| [`MethodLevelKind`](../sysml-api/core/enumerations/memo_enumerations.md#methodlevelkind) | `systemOfSystems`, `system` |
 | [`ThreatCategoryKind`](../sysml-api/core/enumerations/memo_enumerations.md#threatcategorykind) | `spoofing`, `tampering`, `repudiation`, `informationDisclosure`, `denialOfService`, `elevationOfPrivilege`, `privacyLoss`, `supplyChain` |
 | [`CyberControlKind`](../sysml-api/core/enumerations/memo_enumerations.md#cybercontrolkind) | `prevent`, `detect`, `respond`, `recover`, `hardening`, `monitoring`, `authentication`, `authorization`, `encryption`, `integrityProtection`, `audit`, `updateMechanism` |
 | [`AssetKind`](../sysml-api/core/enumerations/memo_enumerations.md#assetkind) | `data`, `credential`, `configuration`, `software`, `hardware`, `networkConnection`, `auditRecord`, `safetyCriticalFunction` |
