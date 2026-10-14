@@ -211,7 +211,10 @@ part def WorkspaceMembershipEntry
         part membershipIdentifiesHazard : WorkspaceMembershipEntry { attribute :>> relation = "identifiesHazard"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
         // A failure mode follows its element.
         part membershipHasFailureMode : WorkspaceMembershipEntry { attribute :>> relation = "hasFailureMode"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
-        // Neither: a trace between risk elements places neither.
+        // Neither: a trace between risk elements places neither. Both ends are risk items (`TracesRisk` joins
+        // RiskItem to RiskItem), so the relation names no design element to anchor to; a risk item belongs to the
+        // system through the relation that ties it to one (a failure mode, a control measure's allocation).
+        // Decided 2026-10-14: a risk chain with no such tie is Unassigned, which is the finding, not a gap here.
         part membershipTracesRisk : WorkspaceMembershipEntry { attribute :>> relation = "tracesRisk"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // A harm follows the hazardous situation that leads to it.
         part membershipLeadsToHarm : WorkspaceMembershipEntry { attribute :>> relation = "leadsToHarm"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
@@ -257,7 +260,8 @@ part def WorkspaceMembershipEntry
         part membershipVerifiedBy : WorkspaceMembershipEntry { attribute :>> relation = "verifiedBy"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
         // A function follows the element it runs on.
         part membershipAllocatedTo : WorkspaceMembershipEntry { attribute :>> relation = "allocatedTo"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
-        // Neither: a chain that performs functions of three systems belongs to none of them.
+        // Neither: a chain that performs functions of three systems belongs to none of them. Decided 2026-10-14:
+        // a chain step is the system of systems' own, so `performs` places nothing in a system.
         part membershipPerforms : WorkspaceMembershipEntry { attribute :>> relation = "performs"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // Neither: a use case that includes others belongs to the system of systems; pulling it would put it in every system it includes.
         part membershipIncludesStep : WorkspaceMembershipEntry { attribute :>> relation = "includesStep"; attribute :>> direction = WorkspaceMembershipKind::neither; }
