@@ -261,4 +261,8 @@ package memo_core_relationships_workspace_membership {
     part membershipVerifiedByCase : WorkspaceMembershipEntry { attribute :>> relation = "verifiedByCase"; attribute :>> direction = WorkspaceMembershipKind::neither; }
     // Neither: a change request is not placed by the release it is raised against.
     part membershipAffectsRelease : WorkspaceMembershipEntry { attribute :>> relation = "affectsRelease"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+
+    // A device follows the releases it covers, and they follow their items: a device that covers releases of
+    // two systems is shared, and one that covers none is Unassigned (an approval for nothing).
+    part membershipCovers : WorkspaceMembershipEntry { attribute :>> relation = "covers"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
 }
