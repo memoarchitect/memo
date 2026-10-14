@@ -41,6 +41,8 @@
 | [`Implements`](#implements) | `metadata def` | `#Implements dependency from <record> to <interface record>;` The release implements this revision of an interface. | `MemoTypedDependency` |
 | [`VerifiedByCase`](#verifiedbycase) | `metadata def` | `#VerifiedByCase dependency from <record> to <verification case>;` The case that verified, or for a system of systems version validated, this release. `verifiedBy` is taken by the native relation from a requirement to its case. | `MemoTypedDependency` |
 | [`AffectsRelease`](#affectsrelease) | `metadata def` | `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. | `MemoTypedDependency` |
+| [`RegulatedDevice`](#regulateddevice) | `part def` | Regulated device definition specializing `MemoPart`. | `MemoPart` |
+| [`Covers`](#covers) | `metadata def` | `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. | `MemoTypedDependency` |
 | [`Changes`](#changes) | `connection def` | Typed relationship from `ChangeRequest` to `MemoPart`. | `MemoRelationship` |
 
 ## ChangeRequest
@@ -163,6 +165,36 @@ metadata def AffectsRelease :> MemoTypedDependency
 | Owning package | `memo_artifacts_configuration_management` |
 
 
+## RegulatedDevice
+
+```sysml
+part def RegulatedDevice :> MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Regulated device definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
+## Covers
+
+```sysml
+metadata def Covers :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
 ## Changes
 
 ```sysml
@@ -249,6 +281,32 @@ connection def Changes :> MemoRelationship
         }
         metadata def AffectsRelease :> MemoTypedDependency {
             doc /* `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. */
+        }
+
+        // A regulated device is one approval in one jurisdiction (plan O6): the thing a regulator is asked to
+        // clear. It is not an item and not a release: it COVERS the system releases the approval names, so two
+        // markets can ship different releases of one system, each with its own design history and risk file.
+        //
+        //   part deviceFda : RegulatedDevice {
+        //       attribute :>> jurisdiction = RegulatoryRegimeKind::FDA_510k;
+        //       attribute :>> submissionId = "K123456";
+        //   }
+        //   #Covers dependency from deviceFda to relPumpD;
+        //
+        // The jurisdiction is a `RegulatoryRegimeKind`, the same enum the standards library and the document
+        // templates (`required_for`) are written against, so a device selects the standards it must meet and the
+        // documents it must have. It replaces `ModelMethodBinding.regulatoryRegime`, which stated one regime set
+        // for a whole model and is read only when the model declares no device.
+        //
+        // `IntendedUseOf` and `UsedWith` (plan O6) are not declared: the plan names no end for either, and an end
+        // is not invented to fill a name. `Covers` is the link every part of M5 needs.
+        part def RegulatedDevice :> MemoPart {
+            attribute jurisdiction : RegulatoryRegimeKind[1];
+            attribute submissionId : String[0..1];
+        }
+
+        metadata def Covers :> MemoTypedDependency {
+            doc /* `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. */
         }
 
         // ── Relations owned by this package ─────────────────────────────
