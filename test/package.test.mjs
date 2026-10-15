@@ -134,10 +134,14 @@ test('the manifest template is a complete source project using the public memo i
     assert.match(syside, /"model"/);
     assert.match(syside, /"node_modules\/@memoarchitect\/ontology\/src"/);
     for (const file of [
-      ['architecture', 'system.sysml'],
       ['assurance', 'requirements.sysml'],
       ['artifacts', 'catalog.sysml'],
     ]) assert.match(read('templates', dir, 'model', 'catalog', ...file), /import memo::\*/);
+    // The starter declares a System, so it names the packages it needs: the root import is what `--ontology`
+    // swaps for another ontology's, and a System is not part of every ontology's root.
+    const starter = read('templates', dir, 'model', 'catalog', 'architecture', 'system.sysml');
+    assert.match(starter, /import memo_architecture_logical_structure::\*/);
+    assert.match(starter, /part def ProductSystem specializes System/);
   }
 });
 
