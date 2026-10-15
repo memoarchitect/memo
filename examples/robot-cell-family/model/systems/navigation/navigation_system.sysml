@@ -11,13 +11,13 @@ package robot_cell_family_navigation {
     private import robot_cell_family_shared::*;
 
     part def NavigationSystem specializes System {
-        @MemoIdentity { :>> providedId = "RCF-MAP-001"; :>> label = "Navigation System"; }
+        @MemoIdentity { :>> providedId = "RCF-NAV-001"; :>> label = "Navigation System"; }
         attribute :>> systemBoundaryDescription = "Navigation workstation, pose sensing and the operator interface unit.";
         part safetyRelay : SafetyRelayModule :> component;
         port pPointCloudIn : ~PointCloudPort;
         port pGraspEventIn : ~GraspEventPort;
         part mapEngine : LogicalComponent :> component {
-            @MemoIdentity { :>> providedId = "RCF-MAP-LC-001"; :>> label = "Map Engine"; }
+            @MemoIdentity { :>> providedId = "RCF-NAV-LC-001"; :>> label = "Map Engine"; }
             attribute :>> responsibility = "Reconstruct the cell map and annotate it with scan times and grasps.";
         }
         allocate fnBuildMap to mapEngine;
@@ -25,20 +25,20 @@ package robot_cell_family_navigation {
     }
 
     action fnBuildMap : SystemFunction {
-        @MemoIdentity { :>> providedId = "RCF-MAP-F-001"; :>> label = "Build Occupancy Map"; }
+        @MemoIdentity { :>> providedId = "RCF-NAV-F-001"; :>> label = "Build Occupancy Map"; }
         in pointCloudIn : PointCloud;
         out locationOut : RobotPose;
         attribute :>> outputSummary = "Cell map with local scan times";
     }
     action fnTagGrasp : SystemFunction {
-        @MemoIdentity { :>> providedId = "RCF-MAP-F-002"; :>> label = "Tag Grasp On Map"; }
+        @MemoIdentity { :>> providedId = "RCF-NAV-F-002"; :>> label = "Tag Grasp On Map"; }
         in graspEventIn : GraspEvent;
         attribute :>> outputSummary = "Grasp marker at the robot pose of each grasp";
     }
 
     // A system use case: its subject is this system.
     use case ucAcquireMap : UseCase {
-        @MemoIdentity { :>> providedId = "RCF-MAP-UC-001"; :>> label = "Acquire Occupancy Map"; }
+        @MemoIdentity { :>> providedId = "RCF-NAV-UC-001"; :>> label = "Acquire Occupancy Map"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject :>> supportingSystem : NavigationSystem;
         actor operator = cellOperator;
