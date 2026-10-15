@@ -20,8 +20,9 @@ fallback.
 
 ```text
 model/
-  catalog/
+  methodology/
     project.sysml                       identity and method binding — the entrypoint
+  catalog/
     architecture/
       operational/  functional/  logical/  implementation/  realization/
       decisions/
@@ -69,6 +70,13 @@ way.
 
 `include` names the directories holding model source. A model that omits it
 resolves no packages of its own.
+
+**`model/` is the default, `src/` is a choice.** A project's SysML lives under `model/`, and so does the
+source of a reusable package made from the extension template (`extensions/template/`, `sysmlDir: ./model`).
+Nothing requires it: `include` (a project) and `sysmlDir` (a package) name any directory, and the ontology
+repository itself keeps its source under `src/` by setting `sysmlDir: ./src`. When a project sits inside a
+repository that also holds an ontology, a package found in two places resolves to the first: `MEMO_ONTOLOGY_PATH`,
+then the nearest repository, then the installation. A skipped copy is reported once as `library-root-shadowed`.
 
 ## Depending on another package
 

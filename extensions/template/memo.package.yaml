@@ -14,4 +14,4 @@ tags:
 - memo
 - methodology
 - extension
-sysmlDir: ./src
+sysmlDir: ./model
