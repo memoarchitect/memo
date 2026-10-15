@@ -29,9 +29,10 @@
 // `interface`, `flow`).
 package memo_core_relationships_workspace_membership {
     private import ScalarValues::*;
+    private import memo_core_common::*;
     private import memo_core_enumerations::*;
 
-    part def WorkspaceMembershipEntry {
+    part def WorkspaceMembershipEntry specializes MemoPart {
         doc /* One relation and the direction it places elements in a workspace. */
         attribute relation : String;
         attribute direction : WorkspaceMembershipKind;
