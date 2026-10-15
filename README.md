@@ -5,6 +5,8 @@
 [GitHub repository](https://github.com/memoarchitect/memo) ·
 [npm package](https://www.npmjs.com/package/@memoarchitect/ontology)
 
+> **0.14.0 is an experimental release.** It adds support for the OpenSysML compiler alongside SysIDE; the OpenSysML path is new and has had less use. The next version will be more stable. Pin an exact version.
+
 **MEMO — Medical Engineering Modelling Ontology** — the pure SysML v2 content layer.
 
 A standalone, tool-portable SysML v2 / KerML ontology for medical-device architecture

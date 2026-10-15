@@ -9,6 +9,12 @@ architecture, risk, verification, and evidence connected as the design changes.
 
 </div>
 
+!!! warning "0.14.0 is an experimental release"
+    0.14.0 adds support for the OpenSysML compiler alongside SysIDE. The OpenSysML
+    path is new and has had less use, and some of what it enables (such as the
+    compact transport form) is not switched on yet. The next version will be more
+    stable. Pin an exact version.
+
 !!! warning "Experimental before 1.0"
     Until MEMO reaches version 1.0, the ontology and its public API are
     experimental. Namespaces, definitions, relationships, and imports may
