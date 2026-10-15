@@ -1,7 +1,7 @@
-name: ep-lab-family
+name: robot-cell-family
 entrypoint: model/methodology/project.sysml
 include: [model]
 toolchain:
   packager: internal
 dependencies:
-  ep-platform: "^1.0.0"
+  robot-platform: "^1.0.0"

@@ -87,7 +87,7 @@ accepts:
 
 ```yaml
 dependencies:
-  ep-platform: "^1.0.0"
+  robot-platform: "^1.0.0"
 ```
 
 `memo-architect install` writes the entry and puts the package under
