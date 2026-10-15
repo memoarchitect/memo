@@ -57,7 +57,7 @@ it in by publicly importing that facade.
 
 | Location | Purpose |
 | --- | --- |
-| `extensions/template/` | Extension package skeleton |
+| `extensions/template/` | Extension package skeleton (source under `model/`) |
 | `extensions/clinical/` | Clinical-procedure vocabulary |
 | `extensions/aadl/` | AADL (SAE AS5506) correspondence profile and runtime families |
 | `extensions/cloud/` | Networked services and managed data stores |
