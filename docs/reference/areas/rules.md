@@ -53,7 +53,7 @@ constraint def HazardMitigationRule :> MemoConsistencyRule { ... }
 
 A rule may trace to several clauses, from several standards, or to none; a rule
 MEMO or a user keeps for its own reasons needs no clause. `EnforcesClause` is
-declared in `memo_artifacts_standards_traceability`. Before 0.14.0 the trace was
+declared in `memo_artifacts_standards_traceability`. Before 0.15.0 the trace was
 a `ref enforces` member of the rule; see the [release notes](../../release-notes.md).
 
 ## Obligation
