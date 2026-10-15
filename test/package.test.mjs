@@ -153,8 +153,9 @@ test('gpca-pump is canonical and src contains no examples (0.5 §24)', () => {
     'connected-patient-monitor', 'embedded-infusion-pump',
     'functional-logical-physical', 'gpca-pump', 'ivd-laboratory-system',
     'manual-surgical-instrument', 'multidimensional-layers', 'nested-architecture-dsm', 'reusable-instrument',
-    'ros-mobile-robot', 'software-only-medical-device', 'surgical-closure-workflow',
-    'surgical-robot', 'sysml-diagram-samples', 'temperature-alarm', 'ui-screen-regions',
+    'robot-cell-family', 'robot-platform', 'ros-mobile-robot', 'software-only-medical-device',
+    'surgical-closure-workflow', 'surgical-robot', 'sysml-diagram-samples', 'temperature-alarm',
+    'ui-screen-regions',
   ];
   assert.deepEqual(examples, expected);
 });
