@@ -22,13 +22,13 @@ package robot_cell_family_chains {
         action scMapGuidedPick : OperativeScenario {
             action stepAcquire :> fnAcquirePointClouds;
             action stepBuildMap :> fnBuildMap;
-            action stepDeliver :> fnExecuteGrasp;
+            action stepGrasp :> fnExecuteGrasp;
             action stepTag :> fnTagGrasp;
             first stepAcquire then stepBuildMap;
-            first stepBuildMap then stepDeliver;
-            first stepDeliver then stepTag;
+            first stepBuildMap then stepGrasp;
+            first stepGrasp then stepTag;
             flow from stepAcquire.pointCloudOut to stepBuildMap.pointCloudIn;
-            flow from stepDeliver.graspEventOut to stepTag.graspEventIn;
+            flow from stepGrasp.graspEventOut to stepTag.graspEventIn;
         }
     }
 

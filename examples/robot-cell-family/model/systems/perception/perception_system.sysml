@@ -11,25 +11,25 @@ package robot_cell_family_perception {
     private import robot_cell_family_shared::*;
 
     part def PerceptionSystem specializes System {
-        @MemoIdentity { :>> providedId = "RCF-REC-001"; :>> label = "Perception System"; }
+        @MemoIdentity { :>> providedId = "RCF-PER-001"; :>> label = "Perception System"; }
         attribute :>> systemBoundaryDescription = "Amplifier, perception workstation and review display.";
         part safetyRelay : SafetyRelayModule :> component;
         port pPointCloudOut : PointCloudPort;
         part sensorHub : LogicalComponent :> component {
-            @MemoIdentity { :>> providedId = "RCF-REC-LC-001"; :>> label = "Sensor Hub"; }
+            @MemoIdentity { :>> providedId = "RCF-PER-LC-001"; :>> label = "Sensor Hub"; }
             attribute :>> responsibility = "Filter and timestamp the camera and lidar range data.";
         }
         allocate fnAcquirePointClouds to sensorHub;
     }
 
     action fnAcquirePointClouds : SystemFunction {
-        @MemoIdentity { :>> providedId = "RCF-REC-F-001"; :>> label = "Acquire Point Clouds"; }
+        @MemoIdentity { :>> providedId = "RCF-PER-F-001"; :>> label = "Acquire Point Clouds"; }
         out pointCloudOut : PointCloud;
         attribute :>> outputSummary = "Filtered, timestamped point clouds";
     }
 
     use case ucRecordRun : UseCase {
-        @MemoIdentity { :>> providedId = "RCF-REC-UC-001"; :>> label = "Record Run Data"; }
+        @MemoIdentity { :>> providedId = "RCF-PER-UC-001"; :>> label = "Record Run Data"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject :>> supportingSystem : PerceptionSystem;
         actor operator = cellTechnician;

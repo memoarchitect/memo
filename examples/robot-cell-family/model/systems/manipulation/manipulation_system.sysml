@@ -10,24 +10,24 @@ package robot_cell_family_manipulation {
     private import robot_cell_family_shared::*;
 
     part def ManipulatorSystem specializes System {
-        @MemoIdentity { :>> providedId = "RCF-ABL-001"; :>> label = "Manipulator System"; }
+        @MemoIdentity { :>> providedId = "RCF-MAN-001"; :>> label = "Manipulator System"; }
         attribute :>> systemBoundaryDescription = "Arm controller, teach pendant and the gripper drive cable.";
         port pGraspEventOut : GraspEventPort;
         part motionController : LogicalComponent :> component {
-            @MemoIdentity { :>> providedId = "RCF-ABL-LC-001"; :>> label = "Motion Controller"; }
+            @MemoIdentity { :>> providedId = "RCF-MAN-LC-001"; :>> label = "Motion Controller"; }
             attribute :>> responsibility = "Regulate delivered power and duration, and report each delivery.";
         }
         allocate fnExecuteGrasp to motionController;
     }
 
     action fnExecuteGrasp : SystemFunction {
-        @MemoIdentity { :>> providedId = "RCF-ABL-F-001"; :>> label = "Execute Grasp"; }
+        @MemoIdentity { :>> providedId = "RCF-MAN-F-001"; :>> label = "Execute Grasp"; }
         out graspEventOut : GraspEvent;
         attribute :>> outputSummary = "Grasp made within the set force and time limits, and the event that records it";
     }
 
     use case ucExecuteGrasp : UseCase {
-        @MemoIdentity { :>> providedId = "RCF-ABL-UC-001"; :>> label = "Execute Grasp"; }
+        @MemoIdentity { :>> providedId = "RCF-MAN-UC-001"; :>> label = "Execute Grasp"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject :>> supportingSystem : ManipulatorSystem;
         actor operator = cellOperator;
