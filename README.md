@@ -5,7 +5,7 @@
 [GitHub repository](https://github.com/memoarchitect/memo) ·
 [npm package](https://www.npmjs.com/package/@memoarchitect/ontology)
 
-> **0.14.0 is an experimental release.** It adds support for the OpenSysML compiler alongside SysIDE; the OpenSysML path is new and has had less use. The next version will be more stable. Pin an exact version.
+> **0.15.0 is an experimental release.** It adds support for the OpenSysML compiler alongside SysIDE; the OpenSysML path is new and has had less use. The next version will be more stable. Pin an exact version.
 
 **MEMO — Medical Engineering Modelling Ontology** — the pure SysML v2 content layer.
 
@@ -25,7 +25,7 @@ pin an exact release; the package has no repository or runtime dependency on Mem
 Tools or Memo Architect.
 
 ```bash
-pnpm add @memoarchitect/ontology@0.14.0
+pnpm add @memoarchitect/ontology@0.15.0
 ```
 
 > **Pre-1.0 notice:** ontology names, relationships, and package layout may
