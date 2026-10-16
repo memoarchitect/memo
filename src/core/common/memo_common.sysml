@@ -87,6 +87,16 @@ package memo_core_common {
         attribute sourceReference : String[0..1];
     }
 
+    // Marks a definition as a KIND — an extension of the ontology — rather than a model element.
+    // A project definition that specializes an ontology kind is, structurally, either a new kind
+    // (`AfferaStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the
+    // SysML tells the two apart, so the author says which. A marked definition, and what is typed
+    // by it, takes `idPrefix` as the family of its display ids (`<idPrefix>-1`). Anything unmarked
+    // takes the family of the ontology kind it descends from.
+    metadata def MemoKind {
+        attribute idPrefix : String;
+    }
+
     // ─── Single abstract part root ──────────────────────────────────
     // Every structural MEMO concept specializes MemoPart. Identity and
     // traceability are attributes of this one root — MEMO has no separate
