@@ -40,6 +40,7 @@ package memo {
     public import memo_architecture_variability::*;
 
     public import memo_viewpoints_definitions::*;
+    public import memo_viewpoints_matrix::*;
     public import memo_viewpoints_stakeholders_concerns::*;
     public import memo_viewpoints_catalog::*;
     public import memo_viewpoints_context_context_viewpoint::*;
