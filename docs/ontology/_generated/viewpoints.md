@@ -42,6 +42,15 @@
 | [`MemoDocumentView`](../sysml-api/viewpoints/definitions/memo_viewpoint_definitions.md#memodocumentview) | `view def` | Memo document view definition specializing `MemoDocumentBackedView`. |
 | [`ViewInclusionRule`](../sysml-api/viewpoints/definitions/memo_viewpoint_definitions.md#viewinclusionrule) | `part def` | View inclusion rule definition specializing `MemoPart`. |
 
+**Matrix**
+
+| Element | SysML kind | What it is |
+| --- | --- | --- |
+| [`MemoMatrixAxis`](../sysml-api/viewpoints/matrix/memo_matrix_views.md#memomatrixaxis) | `part def` | Memo matrix axis definition specializing `ViewSelectionQuery`. |
+| [`MemoMatrixGroup`](../sysml-api/viewpoints/matrix/memo_matrix_views.md#memomatrixgroup) | `part def` | Memo matrix group definition specializing `MemoPart`. |
+| [`MemoTraceabilityMatrixView`](../sysml-api/viewpoints/matrix/memo_matrix_views.md#memotraceabilitymatrixview) | `view def` | Memo traceability matrix view definition specializing `MemoDiagramView`. |
+| [`MemoDependencyMatrixView`](../sysml-api/viewpoints/matrix/memo_matrix_views.md#memodependencymatrixview) | `view def` | Memo dependency matrix view definition specializing `MemoDiagramView`. |
+
 **Rendering**
 
 | Element | SysML kind | What it is |
@@ -114,3 +123,5 @@ _None with an end typed in this layer._
 | [`MemoLayoutLineStyle`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutlinestyle) | `solid`, `dashed`, `dotted` |
 | [`MemoLayoutAlign`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutalign) | `left`, `center`, `right` |
 | [`MemoLayoutVerticalAlign`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutverticalalign) | `top`, `middle`, `bottom` |
+| [`MatrixOrderingKind`](../sysml-api/viewpoints/matrix/memo_matrix_views.md#matrixorderingkind) | `natural`, `kind`, `partition`, `cluster` |
+| [`MatrixGroupKind`](../sysml-api/viewpoints/matrix/memo_matrix_views.md#matrixgroupkind) | `owningPackage`, `memoQuery`, `clusterResult` |

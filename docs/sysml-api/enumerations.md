@@ -242,3 +242,11 @@ SysML `enum def` declarations in `src/`.
 | [`MemoLayoutSide`](viewpoints/definitions/memo_view_layout.md#memolayoutside) | `enum def` | Controlled values for memo layout side: `top`, `bottom`, `left`, `right`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
 | [`MemoLayoutVerticalAlign`](viewpoints/definitions/memo_view_layout.md#memolayoutverticalalign) | `enum def` | Controlled values for memo layout vertical align: `top`, `middle`, `bottom`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
 
+
+## `memo::viewpoints::matrix`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MatrixGroupKind`](viewpoints/matrix/memo_matrix_views.md#matrixgroupkind) | `enum def` | Controlled values for matrix group: `owningPackage`, `memoQuery`, `clusterResult`. | [`viewpoints/matrix/memo_matrix_views.sysml`](viewpoints/matrix/memo_matrix_views.md) |
+| [`MatrixOrderingKind`](viewpoints/matrix/memo_matrix_views.md#matrixorderingkind) | `enum def` | Controlled values for matrix ordering: `natural`, `kind`, `partition`, `cluster`. | [`viewpoints/matrix/memo_matrix_views.sysml`](viewpoints/matrix/memo_matrix_views.md) |
+
