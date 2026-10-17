@@ -445,6 +445,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`MemoEvidence`](core/common/memo_common.md#memoevidence) | `part def` | Memo evidence definition specializing `MemoPart`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoIdentity`](core/common/memo_common.md#memoidentity) | `metadata def` | Memo identity definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoItem`](core/common/memo_common.md#memoitem) | `item def` | Single item foundation. Standards, hazards, stored software data, and message payloads are all item-native concepts. Whether an item is exchanged is expressed by its use in a port or flow, not by a second ontology root. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+| [`MemoKind`](core/common/memo_common.md#memokind) | `metadata def` | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`AfferaStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sys… | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoMission`](core/common/memo_common.md#memomission) | `requirement def` | Memo mission definition specializing `MemoRequirementElement`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoNeed`](core/common/memo_common.md#memoneed) | `requirement def` | Memo need definition specializing `MemoRequirementElement`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoPart`](core/common/memo_common.md#memopart) | `part def` | Memo part definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
@@ -605,6 +606,16 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`ViewInclusionRule`](viewpoints/definitions/memo_viewpoint_definitions.md#viewinclusionrule) | `part def` | View inclusion rule definition specializing `MemoPart`. | [`viewpoints/definitions/memo_viewpoint_definitions.sysml`](viewpoints/definitions/memo_viewpoint_definitions.md) |
 | [`ViewRule`](viewpoints/definitions/memo_viewpoint_definitions.md#viewrule) | `part def` | View rule definition specializing `MemoPart`. | [`viewpoints/definitions/memo_viewpoint_definitions.sysml`](viewpoints/definitions/memo_viewpoint_definitions.md) |
 | [`ViewSelectionQuery`](viewpoints/definitions/memo_viewpoint_definitions.md#viewselectionquery) | `part def` | View selection query definition specializing `MemoPart`. | [`viewpoints/definitions/memo_viewpoint_definitions.sysml`](viewpoints/definitions/memo_viewpoint_definitions.md) |
+
+
+## `memo::viewpoints::matrix`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MemoDependencyMatrixView`](viewpoints/matrix/memo_matrix_views.md#memodependencymatrixview) | `view def` | Memo dependency matrix view definition specializing `MemoDiagramView`. | [`viewpoints/matrix/memo_matrix_views.sysml`](viewpoints/matrix/memo_matrix_views.md) |
+| [`MemoMatrixAxis`](viewpoints/matrix/memo_matrix_views.md#memomatrixaxis) | `part def` | Memo matrix axis definition specializing `ViewSelectionQuery`. | [`viewpoints/matrix/memo_matrix_views.sysml`](viewpoints/matrix/memo_matrix_views.md) |
+| [`MemoMatrixGroup`](viewpoints/matrix/memo_matrix_views.md#memomatrixgroup) | `part def` | Memo matrix group definition specializing `MemoPart`. | [`viewpoints/matrix/memo_matrix_views.sysml`](viewpoints/matrix/memo_matrix_views.md) |
+| [`MemoTraceabilityMatrixView`](viewpoints/matrix/memo_matrix_views.md#memotraceabilitymatrixview) | `view def` | Memo traceability matrix view definition specializing `MemoDiagramView`. | [`viewpoints/matrix/memo_matrix_views.sysml`](viewpoints/matrix/memo_matrix_views.md) |
 
 
 ## `memo::viewpoints::rendering`
