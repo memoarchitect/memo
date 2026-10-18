@@ -66,6 +66,15 @@ package memo_viewpoints_definitions_layout {
         attribute layoutSeed : Real[0..1];
     }
 
+    /** Renderer namespaces and forward-compatible presentation fields only.
+     * Standard geometry remains in the typed MemoLayout* records. The JSON
+     * envelope is versioned by its writer; this string creates no model links.
+     */
+    metadata def MemoLayoutExtension {
+        :> annotatedElement : SysML::ViewUsage;
+        attribute payload : String;
+    }
+
     /**
      * One box. `x` and `y` are in the frame of `parentElement` (the box it is
      * nested in), or on the board when there is none; the frame is recorded

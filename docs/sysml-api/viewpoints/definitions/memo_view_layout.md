@@ -34,6 +34,7 @@
 | [`MemoLayoutAlign`](#memolayoutalign) | `enum def` | Controlled values for memo layout align: `left`, `center`, `right`. | — |
 | [`MemoLayoutVerticalAlign`](#memolayoutverticalalign) | `enum def` | Controlled values for memo layout vertical align: `top`, `middle`, `bottom`. | — |
 | [`MemoLayout`](#memolayout) | `metadata def` | Memo layout definition. | — |
+| [`MemoLayoutExtension`](#memolayoutextension) | `metadata def` | Memo layout extension definition. | — |
 | [`MemoLayoutNode`](#memolayoutnode) | `metadata def` | Memo layout node definition. | — |
 | [`MemoLayoutPort`](#memolayoutport) | `metadata def` | Memo layout port definition. | — |
 | [`MemoLayoutPortWall`](#memolayoutportwall) | `metadata def` | Memo layout port wall definition. | — |
@@ -109,6 +110,21 @@ metadata def MemoLayout
 | Property | Value |
 | --- | --- |
 | Description | Memo layout definition. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_viewpoints_definitions_layout` |
+
+
+## MemoLayoutExtension
+
+```sysml
+metadata def MemoLayoutExtension
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Memo layout extension definition. |
 | Kind | `metadata def` |
 | Abstract | No |
 | Specializes | — |
@@ -261,6 +277,15 @@ metadata def MemoLayoutNote
             attribute layoutContractVersion : String[0..1];
             attribute layoutPreset : String[0..1];
             attribute layoutSeed : Real[0..1];
+        }
+
+        /** Renderer namespaces and forward-compatible presentation fields only.
+         * Standard geometry remains in the typed MemoLayout* records. The JSON
+         * envelope is versioned by its writer; this string creates no model links.
+         */
+        metadata def MemoLayoutExtension {
+            :> annotatedElement : SysML::ViewUsage;
+            attribute payload : String;
         }
 
         /**

@@ -26,6 +26,7 @@
 | Element | SysML kind | What it is |
 | --- | --- | --- |
 | [`MemoLayout`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayout) | `metadata def` | Memo layout definition. |
+| [`MemoLayoutExtension`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutextension) | `metadata def` | Memo layout extension definition. |
 | [`MemoLayoutNode`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutnode) | `metadata def` | Memo layout node definition. |
 | [`MemoLayoutPort`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutport) | `metadata def` | Memo layout port definition. |
 | [`MemoLayoutPortWall`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutportwall) | `metadata def` | Memo layout port wall definition. |
