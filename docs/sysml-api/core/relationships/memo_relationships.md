@@ -36,7 +36,7 @@
 | --- | --- | --- | --- |
 | [`MemoRelationship`](#memorelationship) | `connection def` | Typed relationship for memo relationship. | `Connections::BinaryConnection` |
 | [`MemoTypedDependency`](#memotypeddependency) | `metadata def` | A link whose ends are not both usages cannot be a `connection def`: a connection joins features, and a `ref` cannot point at a definition.… | — |
-| [`ScopedTo`](#scopedto) | `connection def` | Typed relationship from `any element` to `any element`. | `MemoRelationship` |
+| [`ScopedTo`](#scopedto) | `connection def` | Typed relationship from `any element` to `MemoPart`. | `MemoRelationship` |
 | [`DerivesFrom`](#derivesfrom) | `connection def` | Typed relationship from `any element` to `MemoRequirementElement`. | `MemoRelationship` |
 | [`ProducesEvidence`](#producesevidence) | `connection def` | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. | `MemoRelationship` |
 | [`DerivesCyberRequirement`](#derivescyberrequirement) | `connection def` | Typed relationship from `RequirementDriver` to `MemoRequirementElement`. | `MemoRelationship` |
@@ -83,7 +83,7 @@ connection def ScopedTo :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `any element` to `any element`. |
+| Description | Typed relationship from `any element` to `MemoPart`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -334,11 +334,12 @@ connection def BindsToInterface :> MemoRelationship
         // arrive with no design element to anchor them (a requirement is not
         // allocated to anything yet), so this is how an import says whose they are;
         // without it they are Unassigned in every workspace. The target is the
-        // system's definition, which is what a workspace is rooted at, so the end
-        // stays untyped like the other ends that name a definition or a usage.
+        // system, typed as a part (a System and a SystemOfSystems both are). The
+        // source stays untyped: the items span metaclasses (a need is a requirement
+        // def, a risk an item, a verification case an action), as for DerivesFrom.
         connection def ScopedTo :> MemoRelationship {
             end scopedItem :>> source;
-            end scopeSystem :>> target;
+            end scopeSystem : MemoPart :>> target;
         }
         abstract connection scopedToLinks : ScopedTo[*];
         metadata def <scopedTo> ScopedToMetadata :> SemanticMetadata {
