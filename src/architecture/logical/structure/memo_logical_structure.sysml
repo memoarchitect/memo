@@ -73,6 +73,18 @@ package memo_architecture_logical_structure {
         enum hardware;
     }
 
+    // Who builds a system or system of systems: this organisation, or others.
+    // Distinct from `componentRole`, which says what a logical component DOES
+    // (an `externalSystem` is a role in a context). This says whose it is to
+    // build, which decides what the project is responsible for delivering and
+    // verifying versus what it only interfaces with.
+    enum def SystemOriginKind {
+        /** Built by this organisation: the project delivers and verifies it. */
+        enum internal;
+        /** Built by others: the project interfaces with it and relies on what its maker states. */
+        enum external;
+    }
+
     // ─── System hierarchy ────────────────────────────────────────
     // Three types rather than three role values, because they differ in what
     // they may CONTAIN — and containment legality cannot live on an attribute.
@@ -91,6 +103,7 @@ package memo_architecture_logical_structure {
         // battery are not — which is why ownership is recorded here and is the
         // attribute that distinguishes an SoS from a merely large system.
         attribute systemBoundaryDescription : String;
+        attribute origin : SystemOriginKind[0..1];
         attribute constituentOwnership : String;
         // A constituent may itself coordinate systems-of-systems, or it may be
         // an independently operated system. Subsystems and components remain
@@ -101,6 +114,7 @@ package memo_architecture_logical_structure {
 
     part def System specializes LogicalComponent {
         attribute systemBoundaryDescription : String;
+        attribute origin : SystemOriginKind[0..1];
         part system : System[0..*];
         part subsystem : Subsystem[0..*];
         part component : LogicalComponent[0..*];

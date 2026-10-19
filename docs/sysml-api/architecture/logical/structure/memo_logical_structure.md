@@ -38,6 +38,7 @@
 | [`ChannelRoleKind`](#channelrolekind) | `enum def` | Controlled values for channel role: `primary`, `secondary`, `redundant`, `diverse`, `monitor`, `watchdog`, `interlock`, `independentProtection`. | — |
 | [`ComponentRoleKind`](#componentrolekind) | `enum def` | Controlled values for component role: `channel`, `dataStore`, `controlElement`, `userInterface`, `externalSystem`, `generic`. | — |
 | [`SystemTypeKind`](#systemtypekind) | `enum def` | The discipline a logical block is realized in. Orthogonal to `componentRole`: a subsystem may be software, a system may be hardware, and a block whose realization is not yet decided stays `logical`. This does NOT relocate the element.… | — |
+| [`SystemOriginKind`](#systemoriginkind) | `enum def` | Who builds a system or system of systems: this organisation, or others. Distinct from `componentRole`, which says what a logical component DOES (an `externalSystem` is a role in a context).… | — |
 | [`SystemOfSystems`](#systemofsystems) | `part def` | Three types rather than three role values, because they differ in what they may CONTAIN — and containment legality cannot live on an attribute. The allowed children are declared as typed part features, which is how SysML v2 already states "what may be contained".… | `LogicalComponent` |
 | [`System`](#system) | `part def` | System definition specializing `LogicalComponent`. | `LogicalComponent` |
 | [`Subsystem`](#subsystem) | `part def` | Subsystem definition specializing `LogicalComponent`. | `LogicalComponent` |
@@ -106,6 +107,21 @@ enum def SystemTypeKind
 | Property | Value |
 | --- | --- |
 | Description | The discipline a logical block is realized in. Orthogonal to `componentRole`: a subsystem may be software, a system may be hardware, and a block whose realization is not yet decided stays `logical`. This does NOT relocate the element.… |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_architecture_logical_structure` |
+
+
+## SystemOriginKind
+
+```sysml
+enum def SystemOriginKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Who builds a system or system of systems: this organisation, or others. Distinct from `componentRole`, which says what a logical component DOES (an `externalSystem` is a role in a context).… |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -387,6 +403,18 @@ connection def IndependentOf :> MemoRelationship
             enum hardware;
         }
 
+        // Who builds a system or system of systems: this organisation, or others.
+        // Distinct from `componentRole`, which says what a logical component DOES
+        // (an `externalSystem` is a role in a context). This says whose it is to
+        // build, which decides what the project is responsible for delivering and
+        // verifying versus what it only interfaces with.
+        enum def SystemOriginKind {
+            /** Built by this organisation: the project delivers and verifies it. */
+            enum internal;
+            /** Built by others: the project interfaces with it and relies on what its maker states. */
+            enum external;
+        }
+
         // ─── System hierarchy ────────────────────────────────────────
         // Three types rather than three role values, because they differ in what
         // they may CONTAIN — and containment legality cannot live on an attribute.
@@ -405,6 +433,7 @@ connection def IndependentOf :> MemoRelationship
             // battery are not — which is why ownership is recorded here and is the
             // attribute that distinguishes an SoS from a merely large system.
             attribute systemBoundaryDescription : String;
+            attribute origin : SystemOriginKind[0..1];
             attribute constituentOwnership : String;
             // A constituent may itself coordinate systems-of-systems, or it may be
             // an independently operated system. Subsystems and components remain
@@ -415,6 +444,7 @@ connection def IndependentOf :> MemoRelationship
 
         part def System specializes LogicalComponent {
             attribute systemBoundaryDescription : String;
+            attribute origin : SystemOriginKind[0..1];
             part system : System[0..*];
             part subsystem : Subsystem[0..*];
             part component : LogicalComponent[0..*];
