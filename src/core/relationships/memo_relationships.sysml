@@ -126,6 +126,25 @@ package memo_core_relationships {
     // inherited `rationale` — an untyped link with no stated reason is an
     // audit gap, not a model fact.
 
+    // An item belongs to the scope of one system or system of systems: a need,
+    // requirement, risk or verification case that describes, constrains or
+    // assesses that system and is its to deliver or verify. Imported records
+    // arrive with no design element to anchor them (a requirement is not
+    // allocated to anything yet), so this is how an import says whose they are;
+    // without it they are Unassigned in every workspace. The target is the
+    // system's definition, which is what a workspace is rooted at, so the end
+    // stays untyped like the other ends that name a definition or a usage.
+    connection def ScopedTo :> MemoRelationship {
+        end scopedItem :>> source;
+        end scopeSystem :>> target;
+    }
+    abstract connection scopedToLinks : ScopedTo[*];
+    metadata def <scopedTo> ScopedToMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = scopedToLinks meta SysML::Usage;
+    }
+
     connection def DerivesFrom :> MemoRelationship {
         // Drivers span metaclasses — a need is a requirement def, a hazard an
         // item, a threat an item — so the source end stays untyped. The target

@@ -163,6 +163,9 @@ package memo_core_relationships_workspace_membership {
     // system through the relation that ties it to one (a failure mode, a control measure's allocation).
     // Decided 2026-10-14: a risk chain with no such tie is Unassigned, which is the finding, not a gap here.
     part membershipTracesRisk : WorkspaceMembershipEntry { attribute :>> relation = "tracesRisk"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // An item scoped to a system follows that system: the whole purpose of the relation. The items an
+    // item owns (a risk's hazard chain) join with it by ownership, so one link anchors a chain.
+    part membershipScopedTo : WorkspaceMembershipEntry { attribute :>> relation = "scopedTo"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
     // A harm follows the hazardous situation that leads to it.
     part membershipLeadsToHarm : WorkspaceMembershipEntry { attribute :>> relation = "leadsToHarm"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
     // Neither: a scenario illustrates a hazard without being part of it.
