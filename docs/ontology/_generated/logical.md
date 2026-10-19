@@ -71,3 +71,4 @@ flowchart LR
 | [`ChannelRoleKind`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#channelrolekind) | `primary`, `secondary`, `redundant`, `diverse`, `monitor`, `watchdog`, `interlock`, `independentProtection` |
 | [`ComponentRoleKind`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#componentrolekind) | `channel`, `dataStore`, `controlElement`, `userInterface`, `externalSystem`, `generic` |
 | [`SystemTypeKind`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#systemtypekind) | `logical`, `software`, `hardware` |
+| [`SystemOriginKind`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#systemoriginkind) | `internal`, `external` |
