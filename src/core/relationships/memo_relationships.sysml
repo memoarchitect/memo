@@ -132,11 +132,12 @@ package memo_core_relationships {
     // arrive with no design element to anchor them (a requirement is not
     // allocated to anything yet), so this is how an import says whose they are;
     // without it they are Unassigned in every workspace. The target is the
-    // system's definition, which is what a workspace is rooted at, so the end
-    // stays untyped like the other ends that name a definition or a usage.
+    // system, typed as a part (a System and a SystemOfSystems both are). The
+    // source stays untyped: the items span metaclasses (a need is a requirement
+    // def, a risk an item, a verification case an action), as for DerivesFrom.
     connection def ScopedTo :> MemoRelationship {
         end scopedItem :>> source;
-        end scopeSystem :>> target;
+        end scopeSystem : MemoPart :>> target;
     }
     abstract connection scopedToLinks : ScopedTo[*];
     metadata def <scopedTo> ScopedToMetadata :> SemanticMetadata {
