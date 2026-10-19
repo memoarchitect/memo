@@ -193,6 +193,12 @@ view def MemoDependencyMatrixView :> MemoDiagramView
         view def MemoTraceabilityMatrixView :> MemoDiagramView {
             attribute :>> viewKind = DiagramViewKind::grid;
             @MemoIdentity { :>> shortDescription = "Rows traced to columns by relationships, each axis chosen by hand or by query."; }
+            /**
+             * The system or system of systems the matrix is about: the qualified name
+             * of its definition (a workspace root). Its queries run in that workspace.
+             * A string, because a `ref` cannot name a definition.
+             */
+            attribute system : String[0..1];
             part rowAxis : MemoMatrixAxis[0..1];
             part columnAxis : MemoMatrixAxis[0..1];
             /** Relationship types that count as a link; empty means any. */
@@ -207,6 +213,8 @@ view def MemoDependencyMatrixView :> MemoDiagramView
         view def MemoDependencyMatrixView :> MemoDiagramView {
             attribute :>> viewKind = DiagramViewKind::grid;
             @MemoIdentity { :>> shortDescription = "Dependencies among one set of elements, chosen by hand or by query."; }
+            /** The system or system of systems the matrix is about, as on the traceability matrix. */
+            attribute system : String[0..1];
             part axis : MemoMatrixAxis[0..1];
             /** Relationship types that put a mark in a cell; empty means any. */
             attribute dependencyTypes : String[*];
