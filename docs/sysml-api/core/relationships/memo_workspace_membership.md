@@ -24,18 +24,19 @@
 | Visibility | Target |
 | --- | --- |
 | private | `ScalarValues::*` |
+| private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 
 ## Declarations
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`WorkspaceMembershipEntry`](#workspacemembershipentry) | `part def` | One relation and the direction it places elements in a workspace. | — |
+| [`WorkspaceMembershipEntry`](#workspacemembershipentry) | `part def` | One relation and the direction it places elements in a workspace. | `MemoPart` |
 
 ## WorkspaceMembershipEntry
 
 ```sysml
-part def WorkspaceMembershipEntry
+part def WorkspaceMembershipEntry specializes MemoPart
 ```
 
 | Property | Value |
@@ -43,7 +44,7 @@ part def WorkspaceMembershipEntry
 | Description | One relation and the direction it places elements in a workspace. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | — |
+| Specializes | `MemoPart` |
 | Owning package | `memo_core_relationships_workspace_membership` |
 
 
@@ -83,9 +84,10 @@ part def WorkspaceMembershipEntry
     // `interface`, `flow`).
     package memo_core_relationships_workspace_membership {
         private import ScalarValues::*;
+        private import memo_core_common::*;
         private import memo_core_enumerations::*;
 
-        part def WorkspaceMembershipEntry {
+        part def WorkspaceMembershipEntry specializes MemoPart {
             doc /* One relation and the direction it places elements in a workspace. */
             attribute relation : String;
             attribute direction : WorkspaceMembershipKind;
@@ -216,6 +218,9 @@ part def WorkspaceMembershipEntry
         // system through the relation that ties it to one (a failure mode, a control measure's allocation).
         // Decided 2026-10-14: a risk chain with no such tie is Unassigned, which is the finding, not a gap here.
         part membershipTracesRisk : WorkspaceMembershipEntry { attribute :>> relation = "tracesRisk"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+        // An item scoped to a system follows that system: the whole purpose of the relation. The items an
+        // item owns (a risk's hazard chain) join with it by ownership, so one link anchors a chain.
+        part membershipScopedTo : WorkspaceMembershipEntry { attribute :>> relation = "scopedTo"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
         // A harm follows the hazardous situation that leads to it.
         part membershipLeadsToHarm : WorkspaceMembershipEntry { attribute :>> relation = "leadsToHarm"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
         // Neither: a scenario illustrates a hazard without being part of it.
