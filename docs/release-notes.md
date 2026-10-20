@@ -2,6 +2,11 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.15.3
+
+- **Matrix views and system scope.** Matrix view defs for traceability matrices and DSMs, with the system a matrix is about; `ScopedTo` ties an item to the scope of one system; `System` and `SystemOfSystems` state their origin (built by this organisation or by others).
+- **Risk estimates.** The ISO 14971 chain is independent elements linked by `EstimatedFor`, not owned; `Risk` states `residualProbabilityEstimate`, `residualSeverityEstimate` and `residualBenefitRiskRequired`.
+
 ## 0.15.2
 
 No change to the ontology; released with tools and Architect 0.15.2, which pin it.
