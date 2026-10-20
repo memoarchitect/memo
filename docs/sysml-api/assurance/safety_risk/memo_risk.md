@@ -451,10 +451,12 @@ connection def Mitigates :> MemoRelationship
             attribute acceptabilityThresholds : String;
         }
         // `DesignControlRiskRow` was a denormalized spreadsheet transcription.
-        // Risk rows now decompose into the ISO 14971 chain below: Risk owns its
-        // Hazard, SequenceOfEvents, HazardousSituation, and Harm items, linked by
-        // TracesRisk / LeadsToHarm, with ResidualRisk after mitigation. The risk
-        // itself is reached by EstimatedFor / ReducedBy / EvaluatedIn below.
+        // Risk rows now decompose into the ISO 14971 chain below: a Hazard,
+        // SequenceOfEvents, HazardousSituation and Harm are independent elements, not
+        // owned by a risk, because the same hazard is the hazard of many risks. A Risk
+        // is linked to each by EstimatedFor, and the chain runs through TracesRisk /
+        // LeadsToHarm, with ResidualRisk after mitigation. The risk itself is reached
+        // by EstimatedFor / ReducedBy / EvaluatedIn below.
         // A device characteristic whose implementation, failure, or misuse can
         // affect safety. This is the modelable output of ISO 14971 §5.3.
         part def SafetyRelatedCharacteristic specializes MemoPart {
