@@ -29,6 +29,12 @@ package memo_assurance_safety_risk {
         attribute estimationBasis : String;
         attribute analysisContext : String;
         attribute foreseeableMisuseIncluded : Boolean;
+        doc /* The risk that remains after the controls (ISO 14971 clause 7) is the same risk
+             * re-estimated, so a register that holds one row per risk states it here. A
+             * ResidualRisk part is for a model that evaluates it as an element of its own. */
+        attribute residualProbabilityEstimate : ProbabilityKind[0..1];
+        attribute residualSeverityEstimate : SeverityKind[0..1];
+        attribute residualBenefitRiskRequired : Boolean[0..1];
     }
     part def ResidualRisk specializes Risk {
         attribute benefitRiskRequired : Boolean;
