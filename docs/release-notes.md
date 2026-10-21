@@ -2,6 +2,10 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.16.0
+
+- No ontology change. The version moves with MEMO Tools and Architect, which now support SysIDE 1.0.
+
 ## 0.15.3
 
 - **Matrix views and system scope.** Matrix view defs for traceability matrices and DSMs, with the system a matrix is about; `ScopedTo` ties an item to the scope of one system; `System` and `SystemOfSystems` state their origin (built by this organisation or by others).
