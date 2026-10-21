@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/example-extension-clinical'
-version: 0.15.3
+version: 0.16.0
 description: Example methodology extension for clinical-procedure vocabulary
 license: MIT
 tags:
