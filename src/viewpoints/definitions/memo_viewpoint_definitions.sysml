@@ -37,7 +37,7 @@ package memo_viewpoints_definitions {
          */
         // Redefines the standard library's `RequirementCheck::stakeholders`,
         // which a viewpoint inherits through `ViewpointCheck`.
-        ref :>> stakeholders : MemoStakeholder[0..*];
+        ref memoStakeholders :>> stakeholders : MemoStakeholder[0..*];
         attribute stage : WorkflowStageKind;
         attribute abstractionLevel : String;
         attribute outputKind : ViewOutputKind[*];
