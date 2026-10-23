@@ -12,7 +12,7 @@ package memo_viewpoints_logical_logical_viewpoint {
         @MemoIdentity { :>> shortDescription = "Shows logical decomposition and interfaces."; }
         doc /* Default viewpoint derived from the logical architecture layer for subsystem structure, responsibilities, and major interactions, independent of physical realization. */
         attribute :>> purpose = "Describe the system's logical decomposition.";
-        ref :>> stakeholders = (systemArchitect);
+        ref :>> memoStakeholders = (systemArchitect);
         attribute :>> stage = WorkflowStageKind::architecture;
         attribute :>> abstractionLevel = "logical";
         attribute :>> outputKind = (ViewOutputKind::diagram);

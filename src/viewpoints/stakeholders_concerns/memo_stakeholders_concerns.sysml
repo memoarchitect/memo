@@ -30,7 +30,7 @@ package memo_viewpoints_stakeholders_concerns {
     // It extends the standard concern's `stakeholders` (the Parts interested in
     // it) to the MEMO stakeholder catalog, as a viewpoint does for its own.
     abstract concern def MemoConcern {
-        ref :>> stakeholders : MemoStakeholder[0..*];
+        ref memoStakeholders :>> stakeholders : MemoStakeholder[0..*];
     }
 
     concern def SafetyConcern :> MemoConcern {
@@ -185,7 +185,7 @@ package memo_viewpoints_stakeholders_concerns {
 
     // ─── The catalog, as usages ─────────────────────────────────────────
     //
-    // A viewpoint's `stakeholders` and `framedConcerns`, and a quality
+    // A viewpoint's `memoStakeholders` and `framedConcerns`, and a quality
     // attribute's `addressesConcerns`, are features. What a feature is bound to
     // has to be a feature as well, not a definition, so each concern and each
     // stakeholder above has exactly one usage for those bindings to name.
