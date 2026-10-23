@@ -26,7 +26,12 @@ package memo_viewpoints_stakeholders_concerns {
     // A concern is an interest in the system held by one or more stakeholders.
     // `concern def` is the native SysML construct for it; a viewpoint frames
     // the concerns it addresses.
-    abstract concern def MemoConcern;
+    //
+    // It extends the standard concern's `stakeholders` (the Parts interested in
+    // it) to the MEMO stakeholder catalog, as a viewpoint does for its own.
+    abstract concern def MemoConcern {
+        ref :>> stakeholders : MemoStakeholder[0..*];
+    }
 
     concern def SafetyConcern :> MemoConcern {
         @MemoIdentity { :>> providedId = "CNC-1"; }
