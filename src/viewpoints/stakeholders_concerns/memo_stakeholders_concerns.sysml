@@ -136,7 +136,13 @@ package memo_viewpoints_stakeholders_concerns {
     // A stakeholder holds concerns. These are the engineering and regulatory
     // roles a viewpoint is written FOR; the clinical actors who operate the
     // device are OperationalParticipants and are a different population.
-    abstract part def MemoStakeholder :> MemoPart;
+    //
+    // SysML v2 has no stakeholder definition to specialize: a stakeholder is a
+    // `Part` that a concern or viewpoint lists in `RequirementCheck::stakeholders`
+    // (declared with a `stakeholder` member). So the catalog is standard parts,
+    // not `MemoPart`s — MemoPart's lifecycle and dimension attributes describe
+    // model elements, not the people a viewpoint is written for.
+    abstract part def MemoStakeholder :> Parts::Part;
 
     part def SystemArchitect :> MemoStakeholder {
         @MemoIdentity { :>> providedId = "STK-1"; :>> label = "System Architect"; }
