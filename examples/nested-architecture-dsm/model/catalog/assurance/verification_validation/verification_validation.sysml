@@ -112,4 +112,68 @@ package memo_examples_nested_architecture_dsm_assurance_verification_validation 
 
 
 
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcDoseAccuracy : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "NAD-EV-A01"; :>> label = "VerifyDoseAccuracy report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcDoseAccuracy to producedEvidence ::> evAuthoredVcDoseAccuracy;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcOcclusionResponse : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "NAD-EV-A02"; :>> label = "VerifyOcclusionResponse report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcOcclusionResponse to producedEvidence ::> evAuthoredVcOcclusionResponse;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAirInLineResponse : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "NAD-EV-A03"; :>> label = "VerifyAirInLineResponse report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAirInLineResponse to producedEvidence ::> evAuthoredVcAirInLineResponse;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAlarmSignals : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "NAD-EV-A04"; :>> label = "VerifyAlarmSignals report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAlarmSignals to producedEvidence ::> evAuthoredVcAlarmSignals;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcBatteryEndurance : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "NAD-EV-A05"; :>> label = "VerifyBatteryEndurance report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcBatteryEndurance to producedEvidence ::> evAuthoredVcBatteryEndurance;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcConfirmationFlow : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "NAD-EV-A06"; :>> label = "VerifyConfirmationFlow report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcConfirmationFlow to producedEvidence ::> evAuthoredVcConfirmationFlow;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcStatusLegibility : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "NAD-EV-A07"; :>> label = "VerifyStatusLegibility report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcStatusLegibility to producedEvidence ::> evAuthoredVcStatusLegibility;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcPowerSourceSwitch : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "NAD-EV-A08"; :>> label = "VerifyPowerSourceSwitch report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcPowerSourceSwitch to producedEvidence ::> evAuthoredVcPowerSourceSwitch;
 }

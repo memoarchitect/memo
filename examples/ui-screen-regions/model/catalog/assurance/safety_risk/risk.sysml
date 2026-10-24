@@ -92,4 +92,64 @@ package memo_examples_ui_screen_regions_assurance_safety_risk {
         attribute :>> implementationKind = RiskControlImplementationKind::softwareDesign;
     }
 
+    // Illustrative: authored for this example.
+    item hsAuthoredHzWrongRate : HazardousSituation {
+        @MemoIdentity { :>> providedId = "USR-HS-A01"; :>> label = "InfusionAtIncorrectRate situation"; }
+        attribute :>> exposedPersons = "patient";
+        attribute :>> operatingCondition = "During use, the hazard InfusionAtIncorrectRate is present and the patient is exposed to it.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hzWrongRate to targetRiskElement ::> hsAuthoredHzWrongRate;
+    // Illustrative: authored for this example.
+    item hsAuthoredHzWrongDrug : HazardousSituation {
+        @MemoIdentity { :>> providedId = "USR-HS-A02"; :>> label = "TherapyConfiguredForWrongDrug situation"; }
+        attribute :>> exposedPersons = "patient";
+        attribute :>> operatingCondition = "During use, the hazard TherapyConfiguredForWrongDrug is present and the patient is exposed to it.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hzWrongDrug to targetRiskElement ::> hsAuthoredHzWrongDrug;
+    // Illustrative: authored for this example.
+    item hsAuthoredHzUnexpectedPowerLoss : HazardousSituation {
+        @MemoIdentity { :>> providedId = "USR-HS-A03"; :>> label = "UnexpectedTherapyInterruptionFromPowerLoss situation"; }
+        attribute :>> exposedPersons = "patient";
+        attribute :>> operatingCondition = "During use, the hazard UnexpectedTherapyInterruptionFromPowerLoss is present and the patient is exposed to it.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hzUnexpectedPowerLoss to targetRiskElement ::> hsAuthoredHzUnexpectedPowerLoss;
+    // Illustrative: authored for this example.
+    item hsAuthoredHzIncorrectDeliveredVolumeAssessment : HazardousSituation {
+        @MemoIdentity { :>> providedId = "USR-HS-A04"; :>> label = "IncorrectDeliveredVolumeAssessment situation"; }
+        attribute :>> exposedPersons = "patient";
+        attribute :>> operatingCondition = "During use, the hazard IncorrectDeliveredVolumeAssessment is present and the patient is exposed to it.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hzIncorrectDeliveredVolumeAssessment to targetRiskElement ::> hsAuthoredHzIncorrectDeliveredVolumeAssessment;
+    // Illustrative: authored for this example.
+    item hsAuthoredHzIncorrectEventChronology : HazardousSituation {
+        @MemoIdentity { :>> providedId = "USR-HS-A05"; :>> label = "IncorrectTherapyEventChronology situation"; }
+        attribute :>> exposedPersons = "patient";
+        attribute :>> operatingCondition = "During use, the hazard IncorrectTherapyEventChronology is present and the patient is exposed to it.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hzIncorrectEventChronology to targetRiskElement ::> hsAuthoredHzIncorrectEventChronology;
+    item harmAuthoredHzWrongRate : Harm {
+        @MemoIdentity { :>> providedId = "USR-HM-A01"; :>> label = "HzWrongRate harm"; }
+        attribute :>> clinicalImpact = "Illustrative: injury to the patient that needs clinical intervention.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hsAuthoredHzWrongRate to targetRiskElement ::> harmAuthoredHzWrongRate;
+    item harmAuthoredHzWrongDrug : Harm {
+        @MemoIdentity { :>> providedId = "USR-HM-A02"; :>> label = "HzWrongDrug harm"; }
+        attribute :>> clinicalImpact = "Illustrative: injury to the patient that needs clinical intervention.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hsAuthoredHzWrongDrug to targetRiskElement ::> harmAuthoredHzWrongDrug;
+    item harmAuthoredHzUnexpectedPowerLoss : Harm {
+        @MemoIdentity { :>> providedId = "USR-HM-A03"; :>> label = "HzUnexpectedPowerLoss harm"; }
+        attribute :>> clinicalImpact = "Illustrative: injury to the patient that needs clinical intervention.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hsAuthoredHzUnexpectedPowerLoss to targetRiskElement ::> harmAuthoredHzUnexpectedPowerLoss;
+    item harmAuthoredHzIncorrectDeliveredVolumeAssessment : Harm {
+        @MemoIdentity { :>> providedId = "USR-HM-A04"; :>> label = "HzIncorrectDeliveredVolumeAssessment harm"; }
+        attribute :>> clinicalImpact = "Illustrative: injury to the patient that needs clinical intervention.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hsAuthoredHzIncorrectDeliveredVolumeAssessment to targetRiskElement ::> harmAuthoredHzIncorrectDeliveredVolumeAssessment;
+    item harmAuthoredHzIncorrectEventChronology : Harm {
+        @MemoIdentity { :>> providedId = "USR-HM-A05"; :>> label = "HzIncorrectEventChronology harm"; }
+        attribute :>> clinicalImpact = "Illustrative: injury to the patient that needs clinical intervention.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hsAuthoredHzIncorrectEventChronology to targetRiskElement ::> harmAuthoredHzIncorrectEventChronology;
 }

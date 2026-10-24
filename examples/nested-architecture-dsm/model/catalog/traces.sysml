@@ -33,6 +33,12 @@ package memo_examples_nested_architecture_dsm_traces {
     // A capability allocated at subsystem level rather than to one component:
     // collapsed, it lands in the same cell as its children's allocations.
     allocate fnDeliverTherapy.fnMeterFluid to sysTherapyDelivery.subFluidPath;
+    // The composite functions go to the subsystem that hosts the functions they decompose into.
+    allocate fnDeliverTherapy to sysTherapyDelivery;
+    allocate fnDeliverTherapy.fnControlDose to sysTherapyDelivery.subControl;
+    allocate fnEnsureSafety to sysTherapyDelivery.subControl.subSafetyMonitor;
+    allocate fnInformUser to sysTherapyDelivery.subUserInterface;
+    allocate fnManagePower to sysTherapyDelivery.subPower;
     // ── Requirement → function satisfaction ──────────────────────
 
 

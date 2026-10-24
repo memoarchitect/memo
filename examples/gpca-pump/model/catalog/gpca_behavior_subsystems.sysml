@@ -258,4 +258,20 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> acceptanceCriteria = "'AcquireSensorData' meets its specified behaviour across its range, including the fault cases";
         subject verified : Base::Anything[*] = (fnAcquireSensors);
     }
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAuthoredCfnAggregateSensorStatus : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "GP-EV-A01"; :>> label = "VerifyAggregateSensorStatus report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredCfnAggregateSensorStatus to producedEvidence ::> evAuthoredVcAuthoredCfnAggregateSensorStatus;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAuthoredFnAcquireSensors : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "GP-EV-A02"; :>> label = "VerifyAcquireSensorData report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredFnAcquireSensors to producedEvidence ::> evAuthoredVcAuthoredFnAcquireSensors;
 }
