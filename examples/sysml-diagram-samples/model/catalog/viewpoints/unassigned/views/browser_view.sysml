@@ -1,5 +1,4 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view {
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_architecture_operational_context_actors::*;
     private import memo_architecture_operational_use_cases::*;

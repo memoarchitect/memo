@@ -1,5 +1,4 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_grid_view {
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Grid sample (grid view kind, `fmea` diagram type). The grid template groups
     // rows by kind and derives columns from whichever attributes the rows
     // actually carry — no fixed schema, so three FailureMode rows render as one

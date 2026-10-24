@@ -1,7 +1,6 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view {
     private import memo_core_relationships::*;
     private import memo_core_enumerations::*;
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_architecture_logical_interfaces::*;
     private import memo_architecture_logical_structure::*;

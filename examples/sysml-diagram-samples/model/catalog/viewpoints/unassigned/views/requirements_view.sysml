@@ -1,6 +1,5 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view {
     private import memo_architecture_logical_structure::*;
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Requirements sample (general view kind, `req` diagram type). Stakeholder needs
     // on the left derive into system requirements; `DerivesFrom` edges render as the
     // requirements-diagram trace lines.
