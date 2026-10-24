@@ -1,4 +1,5 @@
 // Focused example: reusable, reprocessable instrument. Centers on the
+    private import memo_assurance_verification_validation::*;
 // "Sterilize a reusable instrument" use case and its reprocessing workflow.
 // Product identity and manufacturing records remain outside this model.
 package memo_examples_reusable_instrument {
@@ -66,4 +67,28 @@ package memo_examples_reusable_instrument {
     connection : RealizesUseCase connect realizingWorkflow ::> wfReprocess to realizedUseCase ::> ucSterilize;
 
 
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredActClean : ValidationCase {
+        @MemoIdentity { :>> providedId = "RI-VC-A01"; :>> label = "VerifyCleanAndDisinfect"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'CleanAndDisinfect' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actClean to validationCase ::> valAuthoredActClean;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredActInspect : ValidationCase {
+        @MemoIdentity { :>> providedId = "RI-VC-A02"; :>> label = "VerifyInspectAndFunctionTest"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'InspectAndFunctionTest' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actInspect to validationCase ::> valAuthoredActInspect;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredActSterilizeLoad : ValidationCase {
+        @MemoIdentity { :>> providedId = "RI-VC-A03"; :>> label = "VerifyPackAndAutoclave"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'PackAndAutoclave' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actSterilizeLoad to validationCase ::> valAuthoredActSterilizeLoad;
 }

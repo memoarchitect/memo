@@ -37,6 +37,7 @@ package memo_examples_software_only_medical_device {
         @MemoIdentity { :>> providedId = "SMD-SOUP-001"; :>> label = "InferenceRuntimeLibrary"; }
         attribute :>> supplier = "third-party OSS";
         attribute :>> soupClassification = SOUPClassificationKind::classB;
+        attribute :>> safetyClass = SafetyClassKind::B;
     }
     part swGradingModule : SoftwareModule {
         @MemoIdentity { :>> providedId = "SMD-SW-002"; :>> label = "GradingModule"; }

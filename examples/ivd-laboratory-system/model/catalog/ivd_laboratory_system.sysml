@@ -1,4 +1,5 @@
 // Focused example: in-vitro diagnostic laboratory analyzer. Specimen as
+    private import memo_assurance_verification_validation::*;
 // material flow through fluidic components, a LOINC-coded measurement
 // result, and an operational activity for running a panel.
 package memo_examples_ivd_laboratory_system {
@@ -25,16 +26,19 @@ package memo_examples_ivd_laboratory_system {
     // Specimen path: material flow through fluidic hardware.
     part fluidSampleProbe : FluidicComponent {
         @MemoIdentity { :>> providedId = "IVD-HW-001"; :>> label = "SampleProbe"; }
+        attribute :>> patientContact = false;
         attribute :>> fluidPathRole = "aspirates specimen from primary tube";
         out port pSpecimenOut : PhysicalPort;
     }
     part fluidReactionCuvette : FluidicComponent {
         @MemoIdentity { :>> providedId = "IVD-HW-002"; :>> label = "ReactionCuvette"; }
+        attribute :>> patientContact = false;
         attribute :>> fluidPathRole = "holds specimen-reagent reaction mix";
         in port pSpecimenIn : PhysicalPort;
     }
     part optPhotometer : OpticalComponent {
         @MemoIdentity { :>> providedId = "IVD-HW-003"; :>> label = "PhotometerAssembly"; }
+        attribute :>> patientContact = false;
         attribute :>> opticalFunction = "absorbance measurement";
         attribute :>> wavelengthRange = "340-800 nm";
     }
@@ -63,4 +67,12 @@ package memo_examples_ivd_laboratory_system {
         @MemoIdentity { :>> providedId = "IVD-ACT-001"; :>> label = "RunChemistryPanel"; }
         attribute :>> criticality = CriticalityKind::high;
     }
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredActRunPanel : ValidationCase {
+        @MemoIdentity { :>> providedId = "ILS-VC-A01"; :>> label = "VerifyRunChemistryPanel"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'RunChemistryPanel' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actRunPanel to validationCase ::> valAuthoredActRunPanel;
 }

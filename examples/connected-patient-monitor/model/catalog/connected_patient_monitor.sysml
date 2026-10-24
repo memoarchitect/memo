@@ -69,6 +69,7 @@ package memo_examples_connected_patient_monitor {
         @MemoIdentity { :>> providedId = "CPM-IF-001"; :>> label = "GatewayToCdrFeed"; }
         attribute :>> protocol = "HL7 FHIR REST over TLS 1.3";
         attribute :>> securityCriticality = CriticalityKind::high;
+        attribute :>> direction = DirectionKind::output;
         attribute :>> patientContactInterface = false;
     }
     part tbHospitalEdge : TrustBoundary {

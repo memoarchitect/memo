@@ -95,20 +95,9 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
             riskViewpoint
         );
 
-        part disableThreatMitigation : RulePolicy :> rulePolicy {
-            ref :>> targetRule : ThreatMitigationRule;
-            attribute :>> disposition = RuleDispositionKind::disabled;
-            attribute :>> rationaleText = "CR-MED-040 requires every threat to carry a mitigation. The prototype has no network or removable-media interface, so no threat is in scope and the rule can only report on elements this variant does not model.";
-            attribute :>> authority = "GPCA Systems Engineering Lead";
-            attribute :>> approvalReference = "GPCA-DHF-CR-0007";
-        }
-
-        part disableAssetThreatLink : RulePolicy :> rulePolicy {
-            ref :>> targetRule : AssetThreatLinkRule;
-            attribute :>> disposition = RuleDispositionKind::disabled;
-            attribute :>> rationaleText = "CR-MED-041 requires every cybersecurity asset to trace to a threat. Cybersecurity is not a selected discipline for this variant, so the rule has no subjects and its absence is recorded here rather than left implicit.";
-            attribute :>> authority = "GPCA Systems Engineering Lead";
-            attribute :>> approvalReference = "GPCA-DHF-CR-0007";
-        }
+        // CR-MED-040 (every threat carries a mitigation) and CR-MED-041 (every cybersecurity asset traces to a
+        // threat) are not in this method's rule set: the prototype has no network or removable-media interface,
+        // and cybersecurity is not a selected discipline (GPCA-DHF-CR-0007, GPCA Systems Engineering Lead).
+        // A policy cannot disable a rule the method never selected, so no policy is written for them.
     }
 }

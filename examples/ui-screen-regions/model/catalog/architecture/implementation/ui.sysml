@@ -121,7 +121,8 @@ package memo_examples_ui_screen_regions_architecture_implementation_ui {
         part uiElement12 : UIElement {
             @MemoIdentity { :>> label = "Region UIE-012"; }
             @MemoIdentity { :>> providedId = "UIE-012"; }
-            attribute redefines formKind = UIElementFormKind::panel;
+            // A region drawn on the screenshot by the canvas editor to show drawing one: chrome, with no function of its own.
+            attribute redefines formKind = UIElementFormKind::decoration;
             attribute redefines disclosureKind = UIDisclosureKind::inline;
             attribute redefines detectionMethod = BoundsDetectionKind::manual;
             attribute redefines boundaryColor = "#14B8A6";

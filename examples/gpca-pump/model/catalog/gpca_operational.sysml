@@ -1,4 +1,5 @@
 package memo_examples_gpca_pump_gpca_operational {
+    private import memo_assurance_verification_validation::*;
     private import ScalarValues::*;
     private import ModelingMetadata::*;
 
@@ -300,4 +301,20 @@ package memo_examples_gpca_pump_gpca_operational {
 
 
 
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredOaPrescribe : ValidationCase {
+        @MemoIdentity { :>> providedId = "GP-VC-A03"; :>> label = "VerifyPrescribeTherapy"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'PrescribeTherapy' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> oaPrescribe to validationCase ::> valAuthoredOaPrescribe;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredOaStartTherapy : ValidationCase {
+        @MemoIdentity { :>> providedId = "GP-VC-A04"; :>> label = "VerifyStartInfusion"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'StartInfusion' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> oaStartTherapy to validationCase ::> valAuthoredOaStartTherapy;
 }

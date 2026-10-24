@@ -1,4 +1,6 @@
 package memo_examples_gpca_pump_gpca_behavior_subsystems {
+    private import memo_core_relationships::*;
+    private import memo_assurance_verification_validation::*;
     private import ScalarValues::*;
 
     private import memo_architecture_functional_functions::*;
@@ -241,5 +243,19 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> controlType = "priority-coded alarm assertion (level 1 stops infusion, level 2 warns)";
         attribute :>> timeoutMs = 20.0;
         attribute :>> retryPolicy = "latched until acknowledged and condition cleared";
+    }
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification vcAuthoredCfnAggregateSensorStatus : VerificationCase {
+        @MemoIdentity { :>> providedId = "GP-VC-A01"; :>> label = "VerifyAggregateSensorStatus"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "'AggregateSensorStatus' meets its specified behaviour across its range, including the fault cases";
+        subject verified : Base::Anything[*] = (fnAcquireSensors.cfnAggregateSensorStatus);
+    }
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification vcAuthoredFnAcquireSensors : VerificationCase {
+        @MemoIdentity { :>> providedId = "GP-VC-A02"; :>> label = "VerifyAcquireSensorData"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "'AcquireSensorData' meets its specified behaviour across its range, including the fault cases";
+        subject verified : Base::Anything[*] = (fnAcquireSensors);
     }
 }
