@@ -13,6 +13,9 @@ package memo_examples_surgical_robot {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def SurgicalRobotSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The surgical robot: the system this example models, with the software and hardware that realize it.";
+    }
     // Control channels: primary + diverse monitor, with declared independence.
     part chMotionPrimary : LogicalComponent {
         @MemoIdentity { :>> providedId = "SR-LC-001"; :>> label = "MotionControlChannel"; }

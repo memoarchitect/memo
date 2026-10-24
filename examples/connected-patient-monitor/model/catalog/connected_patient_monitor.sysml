@@ -13,6 +13,9 @@ package memo_examples_connected_patient_monitor {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def ConnectedPatientMonitorSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The connected patient monitor: the system this example models, with the software and hardware that realize it.";
+    }
     part lcMonitor : LogicalComponent {
         @MemoIdentity { :>> providedId = "CPM-LC-001"; :>> label = "BedsideMonitor"; }
         attribute :>> responsibility = "Acquire and display vitals; publish measurements.";

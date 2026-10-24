@@ -14,6 +14,9 @@ package memo_examples_ivd_laboratory_system {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def IvdLaboratorySystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The IVD laboratory system: the system this example models, with the software and hardware that realize it.";
+    }
     part analyzer : PhysicalAssembly {
         @MemoIdentity { :>> providedId = "IVD-DEV-001"; :>> label = "ChemAnalyzer"; }
         attribute :>> responsibility = "automate clinical chemistry measurements";

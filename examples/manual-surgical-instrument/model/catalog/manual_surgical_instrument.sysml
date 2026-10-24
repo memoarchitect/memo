@@ -12,6 +12,9 @@ package memo_examples_manual_surgical_instrument {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def ManualSurgicalInstrumentSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The manual surgical instrument: the system this example models, with the software and hardware that realize it.";
+    }
     // ── Modeled product and physical structure ──────────────────
     part needleHolder : PhysicalAssembly {
         @MemoIdentity { :>> providedId = "MSI-DEV-001"; }

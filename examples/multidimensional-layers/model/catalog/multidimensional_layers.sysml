@@ -19,6 +19,9 @@ package memo_examples_multidimensional_layers {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def MultidimensionalLayersSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The device this example uses to show layers and cross-cutting disciplines: the system this example models, with the software and hardware that realize it.";
+    }
     part doseLimitChecker : SoftwareModule {
         @MemoIdentity { :>> providedId = "MDL-SW-001"; }
         attribute :>> responsibility = "Reject therapy parameters outside the drug library's hard limits.";
