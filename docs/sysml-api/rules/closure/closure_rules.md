@@ -747,8 +747,8 @@ constraint def ChangeTraceRule :> MemoConsistencyRule
             attribute obligation = RuleObligationKind::recommended;
             attribute appliesTo = "SystemFunction";
             attribute severity = RuleSeverityKind::warning;
-            attribute rationaleText = "Functions should be allocated to implementation elements.";
-            attribute predicateExpression = "allocatedTo->size() >= 1";
+            attribute rationaleText = "Functions should be allocated to implementation elements. A function definition is a type and is not allocated; its usages are.";
+            attribute predicateExpression = "isDefinition == 'true' or allocatedTo->size() >= 1";
             constraint { true }
         }
 
@@ -776,7 +776,7 @@ constraint def ChangeTraceRule :> MemoConsistencyRule
             // function is what triggers it. Without it the rule reported gpca-pump's
             // startup chain's own two steps, and ui-screen-regions' two functions
             // that a control invokes, as reached by nothing.
-            attribute predicateExpression = "flow->size() >= 1 or succession->size() >= 1 or downstream(composes)->size() >= 1 or upstream(performs)->size() >= 1";
+            attribute predicateExpression = "isDefinition == 'true' or flow->size() >= 1 or succession->size() >= 1 or downstream(composes)->size() >= 1 or upstream(performs)->size() >= 1";
             constraint { true }
         }
 

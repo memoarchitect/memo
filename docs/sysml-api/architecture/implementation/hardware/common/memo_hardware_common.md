@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `memo_core_stdlib_quantities::*` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -175,6 +176,7 @@ part def ThermalComponent specializes PhysicalComponent
     // declared here; acoustic and thermal parts have no dedicated subgroup and stay
     // with the roots.
     package memo_architecture_implementation_hardware_common {
+        private import memo_core_stdlib_quantities::*;
         private import ScalarValues::*;
 
         private import memo_core_common::*;
@@ -195,7 +197,7 @@ part def ThermalComponent specializes PhysicalComponent
             attribute responsibility : String;
             attribute safetyRole : String;
             attribute partNumber : String;
-            attribute mtbfHours : String;
+            attribute mtbfHours : DurationValue;
             attribute protectionClass : String;
             attribute ipRating : String;
         }

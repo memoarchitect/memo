@@ -1,4 +1,5 @@
 package memo_examples_gpca_pump_gpca_interfaces {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_architecture_logical_interfaces::*;
@@ -59,8 +60,8 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> bandwidth = "implementation-defined";
         attribute :>> timingConstraint = "same execution step where required";
         attribute :>> electricalStandard = "logical/AADL";
-        attribute :>> nominalVoltageV = 3.3;
-        attribute :>> nominalCurrentA = 0.02;
+        attribute :>> nominalVoltageV = 3.3 [V];
+        attribute :>> nominalCurrentA = 0.02 [A];
     }
     // Wired: the three physical interfaces whose controller-side connector is
     // modelled (gpca_physical). The rest are abstract until their ends are.
@@ -73,8 +74,8 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> direction = DirectionKind::output;
         attribute :>> timingConstraint = "step rate proportional to commanded flow";
         attribute :>> electricalStandard = "3.3V CMOS";
-        attribute :>> nominalVoltageV = 3.3;
-        attribute :>> nominalCurrentA = 0.5;
+        attribute :>> nominalVoltageV = 3.3 [V];
+        attribute :>> nominalCurrentA = 0.5 [A];
         attribute :>> protocolSemantics = "step/dir with enable interlock";
     }
     interface bolusButtonLine : PhysicalInterface connect bolusButton.portPendantOut to portPatientPendant {
@@ -86,8 +87,8 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> direction = DirectionKind::input;
         attribute :>> timingConstraint = "debounce 50 ms; stuck-high detection after 60 s";
         attribute :>> electricalStandard = "3.3V CMOS, normally open";
-        attribute :>> nominalVoltageV = 3.3;
-        attribute :>> nominalCurrentA = 0.001;
+        attribute :>> nominalVoltageV = 3.3 [V];
+        attribute :>> nominalCurrentA = 0.001 [A];
     }
     interface occlusionAnalogLine : PhysicalInterface connect occlusionSensor.portOcclusionOut to portSensorHarness {
         @MemoIdentity { :>> providedId = "PI-004"; :>> label = "OcclusionPressureAnalogLine"; }
@@ -96,8 +97,8 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> mediumKind = PhysicalMediumKind::electrical;
         attribute :>> direction = DirectionKind::input;
         attribute :>> electricalStandard = "ratiometric 0.5-4.5V";
-        attribute :>> nominalVoltageV = 5.0;
-        attribute :>> nominalCurrentA = 0.01;
+        attribute :>> nominalVoltageV = 5 [V];
+        attribute :>> nominalCurrentA = 0.01 [A];
         attribute :>> signalRange = "0 to 30 psi line pressure";
     }
     abstract interface batteryMonitorLine : PhysicalInterface {
@@ -107,8 +108,8 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> mediumKind = PhysicalMediumKind::electrical;
         attribute :>> direction = DirectionKind::input;
         attribute :>> electricalStandard = "divided battery rail to ADC";
-        attribute :>> nominalVoltageV = 12.0;
-        attribute :>> nominalCurrentA = 0.001;
+        attribute :>> nominalVoltageV = 12 [V];
+        attribute :>> nominalCurrentA = 0.001 [A];
         attribute :>> signalRange = "9.0V (depleted) to 12.6V (full)";
     }
 

@@ -8,6 +8,7 @@
 // component does not have a topic, a publication does; a component does not
 // have delivery semantics, the channel it publishes over does.
 package memo_extension_messaging {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -39,7 +40,7 @@ package memo_extension_messaging {
         out item payload : MessagingMessage;
         ref item topic : MessagingMessage;
         attribute deliverySemantics : MessagingDeliveryKind;
-        attribute publishRateHz : Real;
+        attribute publishRateHz : FrequencyValue;
     }
 
     port def MessagingSubscriber specializes SoftwarePort {

@@ -1,4 +1,5 @@
 package memo_examples_gpca_pump_gpca_physical {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_architecture_realization_physical::*;
@@ -10,7 +11,7 @@ package memo_examples_gpca_pump_gpca_physical {
         @MemoIdentity { :>> providedId = "PN-001"; :>> label = "MainControllerMCU"; }
         attribute :>> nodeKind = ProcessingNodeKind::microcontroller;
         attribute :>> processorArchitecture = "ARM Cortex-M4, lockstep-capable";
-        attribute :>> memoryMB = "1 MB flash / 256 KB SRAM with ECC";
+        attribute :>> memoryMB = 1 [mega*B]; // 1 MB flash; the controller also has 256 KB SRAM with ECC.
         attribute :>> operatingSystem = "bare-metal cyclic executive, 20 ms base step";
         attribute :>> safetyPartition = true;
         attribute :>> redundancyKind = "hardware watchdog plus independent flow cross-check";

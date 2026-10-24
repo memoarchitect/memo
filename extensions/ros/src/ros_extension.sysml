@@ -15,6 +15,7 @@
 // native MEMO item, port, and interface families; it does not invent
 // publish/subscribe relations.
 package memo_extension_ros {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -53,10 +54,10 @@ package memo_extension_ros {
     attribute def RosQosProfile {
         attribute durability : RosDurabilityKind;
         // The QoS contract: a sample is expected at least this often.
-        attribute deadlineMs : Real;
+        attribute deadlineMs : DurationValue;
         // How long a publisher may be silent before subscribers treat it as
         // lost — ROS 2 liveliness lease duration.
-        attribute livelinessLeaseMs : Real;
+        attribute livelinessLeaseMs : DurationValue;
         // Depth of the history buffer, KEEP_LAST(n) / KEEP_ALL.
         attribute historyDepth : Integer;
     }

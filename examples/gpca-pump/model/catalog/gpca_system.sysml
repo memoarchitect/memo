@@ -1,4 +1,5 @@
 package memo_examples_gpca_pump_gpca_system {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_architecture_functional_functions::*;
@@ -25,7 +26,7 @@ package memo_examples_gpca_pump_gpca_system {
     action fcPatientBolus : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-001"; :>> label = "PatientBolusChain"; }
         attribute :>> flowCategory = FunctionalFlowKind::nominal;
-        attribute :>> endToEndLatencyBudgetMs = "100";
+        attribute :>> endToEndLatencyBudgetMs = 100 [milli*s];
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         doc /* Bolus button press through lockout/max-dose check to pump actuation and logging. */
@@ -59,7 +60,7 @@ package memo_examples_gpca_pump_gpca_system {
     action fcAlarmStop : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-002"; :>> label = "AlarmDetectionToSafeStateChain"; }
         attribute :>> flowCategory = FunctionalFlowKind::alarm;
-        attribute :>> endToEndLatencyBudgetMs = "20";
+        attribute :>> endToEndLatencyBudgetMs = 20 [milli*s];
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         doc /* Sensor condition through alarm evaluation to same-step transition to PAUSED (KVO flow, REQ 43) and annunciation. */
@@ -96,7 +97,7 @@ package memo_examples_gpca_pump_gpca_system {
     action fcStartup : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-003"; :>> label = "PowerOnSelfTestChain"; }
         attribute :>> flowCategory = FunctionalFlowKind::startup;
-        attribute :>> endToEndLatencyBudgetMs = "5000";
+        attribute :>> endToEndLatencyBudgetMs = 5000 [milli*s];
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         doc /* Power-on through CPU/memory/sensor self test to IDLE with status display; failed POST blocks therapy. */

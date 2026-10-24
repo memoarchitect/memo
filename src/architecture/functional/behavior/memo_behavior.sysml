@@ -1,4 +1,5 @@
 package memo_architecture_functional_behavior {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -92,7 +93,7 @@ package memo_architecture_functional_behavior {
         attribute actionKind : ActionKind;
         attribute inputSummary : String;
         attribute outputSummary : String;
-        attribute wcetMs : String;
+        attribute wcetMs : DurationValue;
         attribute safetyRelevant : Boolean;
     }
     action def ActivityFlow specializes MemoAction {
@@ -106,8 +107,8 @@ package memo_architecture_functional_behavior {
     // requirement like BehaviorProperty.
     requirement def TimingConstraint :> MemoRequirementElement {
         attribute constraintKind : TimingConstraintKind;
-        attribute minMs : String;
-        attribute maxMs : String;
+        attribute minMs : DurationValue;
+        attribute maxMs : DurationValue;
         // Untyped, the way `InteractsInContext::systemOfInterest` is: what a
         // latency or period is measured against is a behaviour at least as
         // often as it is a structure — a functional flow, an action, a port.

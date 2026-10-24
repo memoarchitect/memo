@@ -1,4 +1,5 @@
 // Focused example for CR-ONT-045 single-axis ownership.
+    private import memo_core_stdlib_quantities::*;
     private import memo_assurance_requirements_needs::*;
     private import memo_assurance_requirements::*;
 // The dose-limit checker is owned by exactly ONE axis — the implementation
@@ -40,10 +41,10 @@ package memo_examples_multidimensional_layers {
     // configuration is a stage of the element, not a second element.
     part doseLimitCheckerRuntime : SoftwareComponent {
         @MemoIdentity { :>> providedId = "MDL-RT-001"; :>> label = "DoseLimitCheckerTask"; }
-        attribute :>> periodMs = 50.0;
-        attribute :>> deadlineMs = 50.0;
-        attribute :>> wcetMs = 8.0;
-        attribute :>> memoryBudget = 64.0;
+        attribute :>> periodMs = 50 [milli*s];
+        attribute :>> deadlineMs = 50 [milli*s];
+        attribute :>> wcetMs = 8 [milli*s];
+        attribute :>> memoryBudget = 64 [mega*B];
         attribute :>> schedulingPolicy = SchedulingPolicyKind::fixedPriorityPreemptive;
         attribute :>> realizationStage = RealizationStageKind::deployed;
     }

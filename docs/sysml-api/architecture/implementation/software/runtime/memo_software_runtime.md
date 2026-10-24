@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `memo_core_stdlib_quantities::*` |
 | private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
@@ -101,6 +102,7 @@ part def OTSSoftwareComponent specializes SoftwareComponent
     // name and property. This comment pointed at `examples/aadl-mapping` for a
     // long time and that directory never existed; the pointer above resolves.
     package memo_architecture_implementation_software_runtime {
+        private import memo_core_stdlib_quantities::*;
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
 
@@ -125,9 +127,9 @@ part def OTSSoftwareComponent specializes SoftwareComponent
         part def SoftwareComponent specializes SoftwareElement {
             attribute runtimeKind : RuntimeKind;
             attribute responsibility : String;
-            attribute periodMs : Real;
-            attribute deadlineMs : Real;
-            attribute wcetMs : Real;
+            attribute periodMs : DurationValue;
+            attribute deadlineMs : DurationValue;
+            attribute wcetMs : DurationValue;
             attribute schedulingPolicy : SchedulingPolicyKind;
             attribute priority : Integer;
             attribute activation : String;
@@ -136,7 +138,7 @@ part def OTSSoftwareComponent specializes SoftwareComponent
             // Maximum resident memory allocation in megabytes.  The public name
             // predates MEMO's unit-suffixed scalar convention, so document the
             // unit here rather than silently changing the published feature name.
-            attribute memoryBudget : Real;
+            attribute memoryBudget : StorageCapacityValue;
             attribute healthMonitoring : String;
             attribute restartPolicy : String;
             attribute faultContainment : String;

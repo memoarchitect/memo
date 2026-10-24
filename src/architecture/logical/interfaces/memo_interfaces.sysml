@@ -35,6 +35,7 @@
 // A delegation that is a binding is not a ComponentExchange: nothing
 // interacts, and one feature is seen from both sides.
 package memo_architecture_logical_interfaces {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -68,7 +69,7 @@ package memo_architecture_logical_interfaces {
         attribute direction : DirectionKind;
         attribute protocol : String;               // "SPI", "CAN", "Ethernet", "REST", "4-20mA"
         attribute protocolSemantics : String;
-        attribute timeoutMs : Real[0..1];
+        attribute timeoutMs : DurationValue[0..1];
         attribute retryPolicy : String[0..1];
         attribute interactionPattern : String;     // request-response, pub-sub, streaming…
         attribute timingSummary : String;
@@ -107,7 +108,7 @@ package memo_architecture_logical_interfaces {
         attribute integrityClass : String;
         attribute availabilityClass : String;
         attribute controlType : String[0..1];
-        attribute timeoutMs : Real[0..1];
+        attribute timeoutMs : DurationValue[0..1];
         attribute retryPolicy : String[0..1];
     }
 

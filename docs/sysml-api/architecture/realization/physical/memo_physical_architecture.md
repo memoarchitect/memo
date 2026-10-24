@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `memo_core_stdlib_quantities::*` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
@@ -123,6 +124,7 @@ abstract flow def PhysicalFlow
     // software runs on and the ports the outside world plugs into. The broader
     // physical taxonomy lives in memo_architecture_implementation_hardware_structure.
     package memo_architecture_realization_physical {
+        private import memo_core_stdlib_quantities::*;
         private import ScalarValues::*;
 
         private import memo_core_common::*;
@@ -137,7 +139,7 @@ abstract flow def PhysicalFlow
         part def ProcessingNode specializes PhysicalElement {
             attribute nodeKind : ProcessingNodeKind;
             attribute processorArchitecture : String;
-            attribute memoryMB : String;
+            attribute memoryMB : StorageCapacityValue;
             attribute operatingSystem : String;
             attribute safetyPartition : Boolean;
             attribute redundancyKind : String;
@@ -147,7 +149,7 @@ abstract flow def PhysicalFlow
         }
         part def MemoryDevice specializes PhysicalElement {
             attribute memoryKind : String;
-            attribute capacityMB : String;
+            attribute capacityMB : StorageCapacityValue;
             attribute nonVolatile : Boolean;
         }
         // A physical boundary feature: the connector the outside world plugs into.
@@ -222,8 +224,8 @@ abstract flow def PhysicalFlow
             attribute signalingKind : SignalingKind;
             attribute mediumKind : PhysicalMediumKind;
             attribute electricalStandard : String;
-            attribute nominalVoltageV : Real[0..1];
-            attribute nominalCurrentA : Real[0..1];
+            attribute nominalVoltageV : ElectricPotentialDifferenceValue[0..1];
+            attribute nominalCurrentA : ElectricCurrentValue[0..1];
             attribute bitRateBps : String;
             attribute signalRange : String;
             attribute connectorStandard : String;

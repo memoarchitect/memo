@@ -455,6 +455,7 @@ package memo_namespace_core_stdlib {
     alias collections for memo_namespace_core_stdlib_collections;
     alias functions for memo_namespace_core_stdlib_functions;
     alias scalars for memo_namespace_core_stdlib_scalars;
+    alias quantities for memo_namespace_core_stdlib_quantities;
     alias time for memo_namespace_core_stdlib_time;
 }
 
@@ -607,6 +608,10 @@ package memo_namespace_core_stdlib_functions {
 
 package memo_namespace_core_stdlib_scalars {
     public import memo_core_stdlib_scalars::*;
+}
+
+package memo_namespace_core_stdlib_quantities {
+    public import memo_core_stdlib_quantities::*;
 }
 
 package memo_namespace_core_stdlib_time {
