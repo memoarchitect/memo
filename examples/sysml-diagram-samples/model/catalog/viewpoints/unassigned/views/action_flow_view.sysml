@@ -79,4 +79,5 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_f
          * that is a duplicate of `dependency` rather than something more.
          */
     dependency linkLaneBProcessesInput from laneB to sampleActionFlow::process;
+    allocate sampleActionFlow to laneA;
 }
