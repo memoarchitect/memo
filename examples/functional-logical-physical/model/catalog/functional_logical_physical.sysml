@@ -110,4 +110,14 @@ package memo_examples_functional_logical_physical {
         attribute :>> priority = "high";
     }
     connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwPressureSupervisor;
+    // Illustrative: authored for this example.
+    action fcAuthoredLimitLinePressure : FunctionalFlow {
+        @MemoIdentity { :>> providedId = "FLP-FC-A01"; :>> label = "LimitLinePressureChain"; }
+        attribute :>> flowCategory = FunctionalFlowKind::nominal;
+        attribute :>> safetyRelevant = true;
+        attribute :>> securityRelevant = false;
+        action fcsLimitLinePressure :> fnLimitLinePressure {
+            @MemoIdentity { :>> providedId = "FLP-FCS-A01"; :>> label = "LimitLinePressureChain step"; }
+        }
+    }
 }

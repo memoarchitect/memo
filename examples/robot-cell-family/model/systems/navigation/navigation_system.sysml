@@ -22,7 +22,12 @@ package robot_cell_family_navigation {
         }
         allocate fnBuildMap to mapEngine;
         allocate fnTagGrasp to mapEngine;
-    }
+            // The relay supervises the map engine.
+        connection : LogicalConnector connect sourceComponent ::> safetyRelay to targetComponent ::> mapEngine {
+            attribute :>> contentKind = FlowContentKind::status;
+            attribute :>> direction = DirectionKind::output;
+        }
+}
 
     action fnBuildMap : SystemFunction {
         @MemoIdentity { :>> providedId = "RCF-NAV-F-001"; :>> label = "Build Occupancy Map"; }

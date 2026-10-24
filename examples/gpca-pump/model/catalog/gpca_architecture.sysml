@@ -51,6 +51,19 @@ package memo_examples_gpca_pump_gpca_architecture {
         // Native SysML message: the safety monitor's alarm notification is a flow
         // between the two logical components, not an opaque InteractionMessage.
         message alarmNotification of LogicalExchangeItem from lcSafetyMonitoring to lcOperatorInterface;
+            // How the subsystems are connected to each other (internal block diagram).
+        connection : LogicalConnector connect sourceComponent ::> lcTherapyControl to targetComponent ::> lcDrugDelivery {
+            attribute :>> contentKind = FlowContentKind::command;
+            attribute :>> direction = DirectionKind::output;
+        }
+        connection : LogicalConnector connect sourceComponent ::> lcPowerSubsystem to targetComponent ::> lcTherapyControl {
+            attribute :>> contentKind = FlowContentKind::energy;
+            attribute :>> direction = DirectionKind::output;
+        }
+        connection : LogicalConnector connect sourceComponent ::> lcPowerSubsystem to targetComponent ::> lcDrugDelivery {
+            attribute :>> contentKind = FlowContentKind::energy;
+            attribute :>> direction = DirectionKind::output;
+        }
     }
 
     part gpcaPump : GpcaPumpSystem {

@@ -984,6 +984,18 @@ elements:
   "memo_examples_gpca_pump_gpca_behavior_subsystems::ddSensorVector":
     shortId: "INT-48"
     uuid: "69708e99-0436-5e7d-b928-c6ba5f047842"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::evAuthoredVcAuthoredCfnAggregateSensorStatus":
+    shortId: "MMX-47"
+    uuid: "d6083f32-f39a-5dad-81ff-cc91ee44e471"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::evAuthoredVcAuthoredFnAcquireSensors":
+    shortId: "MMX-48"
+    uuid: "0134d06e-43c9-599a-8e34-fa1f09662e5a"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::fcAuthoredManagePower":
+    shortId: "FNC-23"
+    uuid: "85cc0622-03b5-5fb8-811f-7d25f00879fc"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::fcAuthoredManagePower::fcsManagePower":
+    shortId: "ACT-39"
+    uuid: "ba9bafc5-8932-52da-af8f-c3312b9c967a"
   "memo_examples_gpca_pump_gpca_behavior_subsystems::fnAcquireSensors":
     shortId: "SYS-23"
     uuid: "524aedf7-168b-5828-9c69-0111c5214154"
@@ -1038,6 +1050,12 @@ elements:
   "memo_examples_gpca_pump_gpca_behavior_subsystems::lfSensorAcquisition":
     shortId: "FNC-16"
     uuid: "8ff0ed28-8d32-5cf5-96ab-c4c2aa08be75"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::vcAuthoredCfnAggregateSensorStatus":
+    shortId: "VRF-26"
+    uuid: "4de0c9f0-731f-5d85-8747-2cc7b504cf9e"
+  "memo_examples_gpca_pump_gpca_behavior_subsystems::vcAuthoredFnAcquireSensors":
+    shortId: "VRF-27"
+    uuid: "47f68ad2-9295-548a-98f0-749d575526f8"
   "memo_examples_gpca_pump_gpca_context::actorNurse":
     shortId: "USR-1"
     uuid: "b411d9f8-83ce-5a59-a7c8-a43598c5523a"
@@ -1635,6 +1653,12 @@ elements:
   "memo_examples_gpca_pump_gpca_operational::ucDeliverPcaTherapy":
     shortId: "USE-2"
     uuid: "2cd620ff-9f11-5436-b028-29ccdfb87dde"
+  "memo_examples_gpca_pump_gpca_operational::valAuthoredOaPrescribe":
+    shortId: "VLD-3"
+    uuid: "cfbd545b-ea02-54b7-a5f9-922a0e47a004"
+  "memo_examples_gpca_pump_gpca_operational::valAuthoredOaStartTherapy":
+    shortId: "VLD-4"
+    uuid: "18474247-ea4a-5582-b2c0-a7e29c2d2264"
   "memo_examples_gpca_pump_gpca_operational::wfManageActiveTherapy":
     shortId: "WFL-1"
     uuid: "520e1081-229e-5232-84b8-80970a65d28f"
@@ -2721,15 +2745,3 @@ elements:
   "memo_examples_gpca_pump_viewpoints_verification_views_verification_verification_coverage_view::gpcaVerificationCoverageView":
     shortId: "MMX-29"
     uuid: "eb2826ae-9070-5718-a855-da48a06e308f"
-  "memo_examples_gpca_pump_gpca_behavior_subsystems::vcAuthoredCfnAggregateSensorStatus":
-    shortId: "VRF-26"
-    uuid: "4de0c9f0-731f-5d85-8747-2cc7b504cf9e"
-  "memo_examples_gpca_pump_gpca_behavior_subsystems::vcAuthoredFnAcquireSensors":
-    shortId: "VRF-27"
-    uuid: "47f68ad2-9295-548a-98f0-749d575526f8"
-  "memo_examples_gpca_pump_gpca_operational::valAuthoredOaPrescribe":
-    shortId: "VLD-3"
-    uuid: "cfbd545b-ea02-54b7-a5f9-922a0e47a004"
-  "memo_examples_gpca_pump_gpca_operational::valAuthoredOaStartTherapy":
-    shortId: "VLD-4"
-    uuid: "18474247-ea4a-5582-b2c0-a7e29c2d2264"

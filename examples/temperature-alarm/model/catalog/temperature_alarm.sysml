@@ -1,4 +1,5 @@
 // Focused example: patient-temperature monitoring with an alarm — the
+    private import memo_assurance_requirements::*;
 // assurance chain end to end. Use case → function → logical channel → UI
 // alarm element → use error → hazard → risk control (implemented by the UI)
 // → verification + usability validation → evidence. Demonstrates Phase 4
@@ -206,4 +207,13 @@ package memo_examples_temperature_alarm {
         attribute :>> clinicalImpact = "Illustrative: injury to the patient that needs clinical intervention.";
     }
     connection : TracesRisk connect sourceRiskElement ::> hsAuthoredHzUndetectedDeviation to targetRiskElement ::> harmAuthoredHzUndetectedDeviation;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredDetectDeviation : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "TA-REQ-A01"; :>> label = "DetectTemperatureDeviation"; }
+        attribute :>> statement = "The monitor shall detect a sustained patient-temperature deviation and annunciate it.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    connection : DerivesFrom connect sourceDriver ::> hzUndetectedDeviation to targetRequirement ::> reqAuthoredDetectDeviation;
+    satisfy reqAuthoredDetectDeviation by chMonitor;
 }

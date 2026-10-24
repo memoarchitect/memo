@@ -57,6 +57,9 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
             attribute :>> concernKind = ConcernKind::safety;
             attribute :>> criticality = CriticalityKind::catastrophic;
         }
+            // The aggregate status is formed from the flow-rate and air-in-line readings.
+        succession first cfnMeasureFlowRate then cfnAggregateSensorStatus;
+        succession first cfnDetectAirInLine then cfnAggregateSensorStatus;
     }
 
     action fnValidatePrescription : SystemFunction {
@@ -274,4 +277,14 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
     }
     connection : ProducesEvidence connect producer ::> vcAuthoredFnAcquireSensors to producedEvidence ::> evAuthoredVcAuthoredFnAcquireSensors;
+    // Illustrative: authored for this example.
+    action fcAuthoredManagePower : FunctionalFlow {
+        @MemoIdentity { :>> providedId = "FC-A01"; :>> label = "ManagePowerChain"; }
+        attribute :>> flowCategory = FunctionalFlowKind::nominal;
+        attribute :>> safetyRelevant = true;
+        attribute :>> securityRelevant = false;
+        action fcsManagePower :> fnManagePower {
+            @MemoIdentity { :>> providedId = "FCS-A01"; :>> label = "ManagePowerChain step"; }
+        }
+    }
 }
