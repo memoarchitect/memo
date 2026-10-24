@@ -70,7 +70,19 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
 @MemoIdentity { :>> label = "Safety Subsystem"; }
             part fxSafety : LogicalComponent {@MemoIdentity { :>> label = "Safety Monitor"; } }
         }
-    }
+            connection : LogicalConnector connect sourceComponent ::> fxSensingSubsystem.fxSensor to targetComponent ::> fxControlSubsystem.fxController {
+            attribute :>> contentKind = FlowContentKind::measurement;
+            attribute :>> direction = DirectionKind::output;
+        }
+        connection : LogicalConnector connect sourceComponent ::> fxControlSubsystem.fxController to targetComponent ::> fxDeliverySubsystem.fxActuator {
+            attribute :>> contentKind = FlowContentKind::command;
+            attribute :>> direction = DirectionKind::output;
+        }
+        connection : LogicalConnector connect sourceComponent ::> fxSafetySubsystem.fxSafety to targetComponent ::> fxControlSubsystem.fxController {
+            attribute :>> contentKind = FlowContentKind::alarm;
+            attribute :>> direction = DirectionKind::output;
+        }
+}
 
     action fxDeliveryFlow : SystemFunction {
         action fxAcquire : FxAcquire {@MemoIdentity { :>> label = "Acquire Sensor Data"; } }
@@ -132,4 +144,5 @@ package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_function
     allocate fxDeliveryFlow.fxDeliver.fxOpenValve to fxPumpSystem.fxDeliverySubsystem.fxActuator;
     allocate fxDeliveryFlow.fxDeliver.fxHoldDose to fxPumpSystem.fxDeliverySubsystem.fxActuator;
     allocate fxDeliveryFlow.fxDeliver.fxCloseValve to fxPumpSystem.fxDeliverySubsystem.fxActuator;
+    allocate fxDeliveryFlow to fxPumpSystem;
 }

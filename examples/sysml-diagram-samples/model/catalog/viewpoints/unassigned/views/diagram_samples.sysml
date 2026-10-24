@@ -87,7 +87,6 @@ package diagram_samples {
         expose monitorStatus::**;
         @MemoIdentity { :>> shortDescription = "Browser membership tree showing operational entities, actors, and use cases — demonstrates the browser view kind with mixed element types."; }
         attribute :>> viewKind = DiagramViewKind::browser;
-        attribute :>> diagramType = "brw";
         ref :>> viewpointDefinition = browserViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("OperationalEntity", "User", "UseCase");
