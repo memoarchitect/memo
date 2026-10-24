@@ -1,4 +1,7 @@
 // Focused example: the realization graph across perspectives.
+    private import memo_assurance_requirements_needs::*;
+    private import memo_core_dimensions::*;
+    private import memo_assurance_requirements::*;
     private import memo_assurance_verification_validation::*;
 // One function is allocated to a logical component and realized by BOTH a
 // software module and a mechanical part — realization is a many-to-many
@@ -75,4 +78,36 @@ package memo_examples_functional_logical_physical {
         attribute :>> acceptanceCriteria = "a representative user completes 'RespondToLineOcclusion' without a use error, in a summative evaluation per IEC 62366-1";
     }
     connection : Validates connect validationTarget ::> actOcclusionResponse to validationCase ::> valAuthoredActOcclusionResponse;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAuthoredSwPressureSupervisor : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "FLP-EV-A01"; :>> label = "VerifyPressureSupervisor report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredSwPressureSupervisor to producedEvidence ::> evAuthoredVcAuthoredSwPressureSupervisor;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAuthoredFnLimitLinePressure : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "FLP-EV-A02"; :>> label = "VerifyLimitLinePressure report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredFnLimitLinePressure to producedEvidence ::> evAuthoredVcAuthoredFnLimitLinePressure;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredSwPressureSupervisor : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "FLP-REQ-A01"; :>> label = "PressureSupervisor requirement"; }
+        attribute :>> statement = "The software item PressureSupervisor shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredSwPressureSupervisor by swPressureSupervisor;
+    // Illustrative: authored for this example.
+    requirement needAuthoredSafeOperation : Need {
+        attribute :>> needKind = NeedKind::'stakeholder';
+        @MemoIdentity { :>> providedId = "FLP-NEED-A01"; :>> label = "SafeOperation"; }
+        attribute :>> statement = "The device shall operate safely and as intended.";
+        attribute :>> priority = "high";
+    }
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwPressureSupervisor;
 }

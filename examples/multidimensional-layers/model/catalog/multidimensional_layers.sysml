@@ -1,4 +1,6 @@
 // Focused example for CR-ONT-045 single-axis ownership.
+    private import memo_assurance_requirements_needs::*;
+    private import memo_assurance_requirements::*;
 // The dose-limit checker is owned by exactly ONE axis — the implementation
 // architecture layer, encoded by its owning package — and is never duplicated.
 // Its safety, cybersecurity, and verification character are not tags on the
@@ -55,4 +57,28 @@ package memo_examples_multidimensional_layers {
         subject verified : Base::Anything[*] = (doseLimitChecker);
     }
 
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcLimitEnforcement : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "ML-EV-A01"; :>> label = "VerifyHardLimitEnforcement report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcLimitEnforcement to producedEvidence ::> evAuthoredVcLimitEnforcement;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredDoseLimitChecker : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "ML-REQ-A01"; :>> label = "doseLimitChecker requirement"; }
+        attribute :>> statement = "The software item doseLimitChecker shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredDoseLimitChecker by doseLimitChecker;
+    // Illustrative: authored for this example.
+    requirement needAuthoredSafeOperation : Need {
+        attribute :>> needKind = NeedKind::'stakeholder';
+        @MemoIdentity { :>> providedId = "ML-NEED-A01"; :>> label = "SafeOperation"; }
+        attribute :>> statement = "The device shall operate safely and as intended.";
+        attribute :>> priority = "high";
+    }
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredDoseLimitChecker;
 }

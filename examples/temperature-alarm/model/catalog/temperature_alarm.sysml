@@ -186,4 +186,24 @@ package memo_examples_temperature_alarm {
         attribute :>> acceptanceCriteria = "a representative user completes 'ReviewAndAcknowledgeAlarm' without a use error, in a summative evaluation per IEC 62366-1";
     }
     connection : Validates connect validationTarget ::> actAcknowledgeAlarm to validationCase ::> valAuthoredActAcknowledgeAlarm;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAuthoredRcReAnnunciate : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "TA-EV-A01"; :>> label = "VerifyAutoReAnnunciationAfterSilence report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredRcReAnnunciate to producedEvidence ::> evAuthoredVcAuthoredRcReAnnunciate;
+    // Illustrative: authored for this example.
+    item hsAuthoredHzUndetectedDeviation : HazardousSituation {
+        @MemoIdentity { :>> providedId = "TA-HS-A01"; :>> label = "UndetectedTemperatureDeviation situation"; }
+        attribute :>> exposedPersons = "patient";
+        attribute :>> operatingCondition = "During use, the hazard UndetectedTemperatureDeviation is present and the patient is exposed to it.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hzUndetectedDeviation to targetRiskElement ::> hsAuthoredHzUndetectedDeviation;
+    item harmAuthoredHzUndetectedDeviation : Harm {
+        @MemoIdentity { :>> providedId = "TA-HM-A01"; :>> label = "HzUndetectedDeviation harm"; }
+        attribute :>> clinicalImpact = "Illustrative: injury to the patient that needs clinical intervention.";
+    }
+    connection : TracesRisk connect sourceRiskElement ::> hsAuthoredHzUndetectedDeviation to targetRiskElement ::> harmAuthoredHzUndetectedDeviation;
 }

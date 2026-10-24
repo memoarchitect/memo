@@ -1,4 +1,7 @@
 // Focused example: embedded programmable device — the three software views
+    private import memo_assurance_requirements_needs::*;
+    private import memo_core_dimensions::*;
+    private import memo_assurance_requirements::*;
     private import memo_assurance_verification_validation::*;
 // (module / runtime / deployment) on a minimal infusion pump.
 // SoftwareElement buildsInto SoftwareDeploymentUnit deploysTo ProcessingNode;
@@ -25,6 +28,12 @@ package memo_examples_embedded_infusion_pump {
         @MemoIdentity { :>> providedId = "EIP-SW-001"; :>> label = "InfusionControlItem"; }
         attribute :>> iec62304Role = "software item, class C";
         attribute :>> safetyClass = SafetyClassKind::C;
+        // IEC 62304 5.4.2: a class C item is subdivided into units.
+        part swDoseCommandUnit : SoftwareModule {
+            attribute :>> moduleKind = ModuleKind::unit;
+            @MemoIdentity { :>> providedId = "EIP-SW-003"; :>> label = "DoseCommandUnit"; }
+            attribute :>> safetyClass = SafetyClassKind::C;
+        }
     }
     part swMotorDriver : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::unit;
@@ -85,4 +94,60 @@ package memo_examples_embedded_infusion_pump {
         attribute :>> acceptanceCriteria = "unit, integration and system tests of 'MotorDriverUnit' with the coverage IEC 62304 requires for software safety class C";
         subject verified : Base::Anything[*] = (swMotorDriver);
     }
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAuthoredSwInfusionControl : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "EIP-EV-A01"; :>> label = "VerifyInfusionControlItem report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredSwInfusionControl to producedEvidence ::> evAuthoredVcAuthoredSwInfusionControl;
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAuthoredSwMotorDriver : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "EIP-EV-A02"; :>> label = "VerifyMotorDriverUnit report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredSwMotorDriver to producedEvidence ::> evAuthoredVcAuthoredSwMotorDriver;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredSwInfusionControl : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "EIP-REQ-A01"; :>> label = "InfusionControlItem requirement"; }
+        attribute :>> statement = "The software item InfusionControlItem shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredSwInfusionControl by swInfusionControl;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredSwMotorDriver : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "EIP-REQ-A02"; :>> label = "MotorDriverUnit requirement"; }
+        attribute :>> statement = "The software item MotorDriverUnit shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredSwMotorDriver by swMotorDriver;
+    // Illustrative: authored for this example.
+    requirement needAuthoredSafeOperation : Need {
+        attribute :>> needKind = NeedKind::'stakeholder';
+        @MemoIdentity { :>> providedId = "EIP-NEED-A01"; :>> label = "SafeOperation"; }
+        attribute :>> statement = "The device shall operate safely and as intended.";
+        attribute :>> priority = "high";
+    }
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwInfusionControl;
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwMotorDriver;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    satisfy reqAuthoredSwInfusionControl by swInfusionControl.swDoseCommandUnit;
+    verification vcAuthoredSwDoseCommandUnit : VerificationCase {
+        @MemoIdentity { :>> providedId = "EIP-VC-A03"; :>> label = "VerifyDoseCommandUnit"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "unit, integration and system tests of DoseCommandUnit with the coverage IEC 62304 requires for software safety class C";
+        subject verified : Base::Anything[*] = (swInfusionControl.swDoseCommandUnit);
+    }
+    part evAuthoredSwDoseCommandUnit : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "EIP-EV-A03"; :>> label = "VerifyDoseCommandUnit report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredSwDoseCommandUnit to producedEvidence ::> evAuthoredSwDoseCommandUnit;
 }

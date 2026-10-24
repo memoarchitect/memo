@@ -1,4 +1,7 @@
 // Focused example: software-only medical device (SaMD, IMDRF N10/N12).
+    private import memo_assurance_requirements_needs::*;
+    private import memo_core_dimensions::*;
+    private import memo_assurance_requirements::*;
 // There is deliberately no device-specific product record or physical layer.
 // Deployment targets
 // off-the-shelf infrastructure the manufacturer does not control.
@@ -38,6 +41,8 @@ package memo_examples_software_only_medical_device {
         attribute :>> supplier = "third-party OSS";
         attribute :>> soupClassification = SOUPClassificationKind::classB;
         attribute :>> safetyClass = SafetyClassKind::B;
+        attribute :>> version = "1.14.0";
+        attribute :>> knownAnomalies = "Illustrative: the supplier's published anomaly list was reviewed; none leads to a hazardous situation in this use.";
     }
     part swGradingModule : SoftwareModule {
         @MemoIdentity { :>> providedId = "SMD-SW-002"; :>> label = "GradingModule"; }
@@ -70,4 +75,29 @@ package memo_examples_software_only_medical_device {
         attribute :>> deploymentKind = DeploymentKind::containerized;
     }
     allocation : HostedBy allocate svcGrading to nodeCloud;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredSwGradingModule : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "SOMD-REQ-A01"; :>> label = "GradingModule requirement"; }
+        attribute :>> statement = "The software item GradingModule shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredSwGradingModule by swGradingModule;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredSoupInference : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "SOMD-REQ-A02"; :>> label = "InferenceRuntimeLibrary requirement"; }
+        attribute :>> statement = "The software item InferenceRuntimeLibrary shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredSoupInference by soupInference;
+    // Illustrative: authored for this example.
+    requirement needAuthoredSafeOperation : Need {
+        attribute :>> needKind = NeedKind::'stakeholder';
+        @MemoIdentity { :>> providedId = "SOMD-NEED-A01"; :>> label = "SafeOperation"; }
+        attribute :>> statement = "The device shall operate safely and as intended.";
+        attribute :>> priority = "high";
+    }
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwGradingModule;
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSoupInference;
 }

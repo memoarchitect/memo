@@ -1,4 +1,7 @@
 // Focused example: a ROS 2 mobile logistics robot, modelled with the ROS
+    private import memo_assurance_requirements_needs::*;
+    private import memo_core_dimensions::*;
+    private import memo_assurance_requirements::*;
     private import memo_assurance_verification_validation::*;
 // extension. The point of the example is the MECHANISM, not the robot — it
 // demonstrates how an extension is used, and it is deliberately the only place
@@ -309,4 +312,46 @@ package memo_examples_ros_mobile_robot {
         attribute :>> acceptanceCriteria = "unit, integration and system tests of 'SafetyMonitor' with the coverage IEC 62304 requires for software safety class C";
         subject verified : Base::Anything[*] = (swSafety);
     }
+    // Illustrative: authored for this example, not the record of a real test run.
+    part evAuthoredVcAuthoredSwSafety : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "RMR-EV-A01"; :>> label = "VerifySafetyMonitor report"; }
+        attribute :>> evidenceType = "test report";
+        attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
+    }
+    connection : ProducesEvidence connect producer ::> vcAuthoredSwSafety to producedEvidence ::> evAuthoredVcAuthoredSwSafety;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredSwPerception : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "RMR-REQ-A01"; :>> label = "PerceptionStack requirement"; }
+        attribute :>> statement = "The software item PerceptionStack shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredSwPerception by swPerception;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredSwNavigation : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "RMR-REQ-A02"; :>> label = "NavigationStack requirement"; }
+        attribute :>> statement = "The software item NavigationStack shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredSwNavigation by swNavigation;
+    // Illustrative: authored for this example.
+    requirement reqAuthoredSwSafety : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "RMR-REQ-A03"; :>> label = "SafetyMonitor requirement"; }
+        attribute :>> statement = "The software item SafetyMonitor shall perform the function allocated to it in the software architecture.";
+        attribute :>> status = ElementStatusKind::draft;
+    }
+    satisfy reqAuthoredSwSafety by swSafety;
+    // Illustrative: authored for this example.
+    requirement needAuthoredSafeOperation : Need {
+        attribute :>> needKind = NeedKind::'stakeholder';
+        @MemoIdentity { :>> providedId = "RMR-NEED-A01"; :>> label = "SafeOperation"; }
+        attribute :>> statement = "The device shall operate safely and as intended.";
+        attribute :>> priority = "high";
+    }
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwPerception;
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwNavigation;
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwSafety;
 }
