@@ -6,7 +6,6 @@
 // root package is declared once, in one file, so a shared `diagram_samples`
 // package cannot be split across the sample files themselves.
 package diagram_samples {
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import ScalarValues::*;
     private import memo_core_relationships::*;
     private import memo_architecture_logical_structure::*;
@@ -61,7 +60,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Internal steps of the Process action — step A through C."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 
     view therapySessionFlow : MemoDiagramView {
@@ -72,7 +71,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 
     // ─── browser view ────────────────────────────────────────────────────
@@ -87,7 +86,7 @@ package diagram_samples {
         expose monitorStatus::**;
         @MemoIdentity { :>> shortDescription = "Browser membership tree showing operational entities, actors, and use cases — demonstrates the browser view kind with mixed element types."; }
         attribute :>> viewKind = DiagramViewKind::browser;
-        ref :>> viewpointDefinition = browserViewpoint;
+        ref :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("OperationalEntity", "User", "UseCase");
             attribute :>> includeRelationshipKinds = ("Composes", "ParticipatesIn");
@@ -110,7 +109,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Operational system context: one black-box system boundary, its external people, peer systems, operating environment, and named boundary-crossing interactions."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "context";
-        ref :>> viewpointDefinition = contextDiagramViewpoint;
+        ref :>> viewpointDefinition = contextViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("connect", "flow", "AppliesInContext");
         }
@@ -125,7 +124,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in)."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ffd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 
     // ─── grid view ───────────────────────────────────────────────────────
@@ -138,7 +137,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Three FailureMode rows rendered as an FMEA worksheet table — one section, columns auto-derived from the attributes the rows carry."; }
         attribute :>> viewKind = DiagramViewKind::grid;
         attribute :>> diagramType = "fmea";
-        ref :>> viewpointDefinition = gridViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("FailureMode");
         }
@@ -156,7 +155,7 @@ package diagram_samples {
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
         attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = ibdViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }
@@ -169,7 +168,7 @@ package diagram_samples {
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
         attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = ibdViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }
@@ -187,7 +186,7 @@ package diagram_samples {
         // wall ports, orange-in/green-out, solid grabbable nested-connector
         // housings, orthogonal crossing-bridge routing, monochrome shading.
         attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = ibdViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }
@@ -202,7 +201,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ofd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 
     // ─── package view ────────────────────────────────────────────────────
@@ -215,7 +214,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Three-layer package overview — presentation, domain, infrastructure — rendered as a browser membership tree."; }
         attribute :>> viewKind = DiagramViewKind::browser;
         attribute :>> diagramType = "pkg";
-        ref :>> viewpointDefinition = browserViewpoint;
+        ref :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes");
         }
@@ -233,7 +232,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Stakeholder needs deriving into system requirements, wired by DerivesFrom trace edges."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "req";
-        ref :>> viewpointDefinition = requirementsDiagramViewpoint;
+        ref :>> viewpointDefinition = requirementsViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("DerivesFrom");
         }
@@ -252,7 +251,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Start-infusion sequence with combined fragments — loop for sensor monitoring and alt for error handling."; }
         attribute :>> viewKind = DiagramViewKind::sequence;
         attribute :>> diagramType = "seq";
-        ref :>> viewpointDefinition = sequenceViewpoint;
+        ref :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             // No "User": each sample in this gallery declares its own actors,
             // and a kind filter is model-wide, so it would draw every other
@@ -270,7 +269,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Order fulfilment — accept, validate, decide, fork into parallel shipment and invoice, join, notify, send receipt, and terminate."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 
     // ─── state transition view ───────────────────────────────────────────
@@ -281,7 +280,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding."; }
         attribute :>> viewKind = DiagramViewKind::statetransition;
         attribute :>> diagramType = "stm";
-        ref :>> viewpointDefinition = stateMachineViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("StateMachine", "MemoState");
         }
@@ -293,7 +292,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Sub-states of the Infusing composite state — Priming, Delivering, and Holding with their internal transitions."; }
         attribute :>> viewKind = DiagramViewKind::statetransition;
         attribute :>> diagramType = "stm";
-        ref :>> viewpointDefinition = stateMachineViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
         part :>> selectionQuery {
             attribute :>> includeElementKinds = ("MemoState");
         }
@@ -307,7 +306,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Block decomposition tree — hardware assemblies with varied branch depths."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "bdd";
-        ref :>> viewpointDefinition = treeViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         attribute :>> layoutHint = "tree";
         attribute :>> styleHint = "expanded:rootA,rootB,branchA1,branchB1";
         part :>> selectionQuery {
@@ -330,7 +329,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Actors outside a device boundary with include, extend, generalization, hierarchy-level, and orthogonal-routing presentation."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "ucd";
-        ref :>> viewpointDefinition = useCaseViewpoint;
+        ref :>> viewpointDefinition = operationalViewpoint;
         part :>> selectionQuery {
             // No "User", for the reason the sequence view gives: the actors
             // are exposed by name, and a kind filter reaches other samples.
@@ -351,7 +350,7 @@ package diagram_samples {
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
         attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = ibdViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }
@@ -363,7 +362,7 @@ package diagram_samples {
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
         attribute :>> rendererProfile = "ibd";
-        ref :>> viewpointDefinition = ibdViewpoint;
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
         part :>> selectionQuery {
             attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
         }
@@ -374,7 +373,7 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "Two composite actions typed by definitions: calibrate has an authored view, confirm drills into generated steps."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 
     view calibrateDetail : MemoDiagramView {
@@ -382,6 +381,6 @@ package diagram_samples {
         @MemoIdentity { :>> shortDescription = "The authored view of the calibrate definition."; }
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "afd";
-        ref :>> viewpointDefinition = actionFlowViewpoint;
+        ref :>> viewpointDefinition = functionalViewpoint;
     }
 }

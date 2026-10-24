@@ -11,7 +11,6 @@ package memo_examples_sysml_diagram_samples_project {
 
     // The project's own content, imported so the catalog is one reachable
     // closure from a single entrypoint.
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     private import diagram_samples::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_action_flow_view::*;
     private import memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_browser_view::*;

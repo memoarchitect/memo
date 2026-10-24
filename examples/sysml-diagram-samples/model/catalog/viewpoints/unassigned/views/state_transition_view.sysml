@@ -1,5 +1,4 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_state_transition_view {
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // State transition sample (statetransition view kind, `stm` diagram type). A
     // behaviour machine owns its mode states by containing them, and each native
     // transition lives inside the state whose substates it connects.

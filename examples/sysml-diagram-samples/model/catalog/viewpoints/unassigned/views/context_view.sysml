@@ -1,5 +1,4 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view {
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // System context sample (general view kind, `context` diagram type). The system
     // under consideration is one block; every other element is an external actor,
     // neighbouring system, or use context it interacts with across its boundary.

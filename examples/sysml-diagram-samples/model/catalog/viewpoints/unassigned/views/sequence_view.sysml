@@ -1,5 +1,4 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_sequence_view {
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Sequence sample (sequence view kind, `seq` diagram type). A FunctionalFlow
     // owns an ordered chain of nested actions (its steps); each step is `allocate`d to
     // the lifeline (an actor or component) that performs it, and the sequence

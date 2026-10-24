@@ -1,5 +1,4 @@
 package memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_standard_activity_view {
-    private import memo_examples_sysml_diagram_samples_viewpoints_unassigned::*;
     // Standard SysML v2 activity sample (actionflow view kind, `afd` diagram type).
     //
     // The view over `activity_example::CustomerProcess`, the standard-SysML activity
