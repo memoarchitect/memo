@@ -20,7 +20,12 @@ package robot_cell_family_perception {
             attribute :>> responsibility = "Filter and timestamp the camera and lidar range data.";
         }
         allocate fnAcquirePointClouds to sensorHub;
-    }
+            // The relay supervises the sensor hub.
+        connection : LogicalConnector connect sourceComponent ::> safetyRelay to targetComponent ::> sensorHub {
+            attribute :>> contentKind = FlowContentKind::status;
+            attribute :>> direction = DirectionKind::output;
+        }
+}
 
     action fnAcquirePointClouds : SystemFunction {
         @MemoIdentity { :>> providedId = "RCF-PER-F-001"; :>> label = "Acquire Point Clouds"; }

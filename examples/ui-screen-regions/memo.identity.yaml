@@ -167,6 +167,36 @@ elements:
   "memo_examples_ui_screen_regions_assurance_requirements_needs::needReadableProgramming":
     shortId: "NDX-1"
     uuid: "6f8e78ee-e23b-5194-983f-bedcd5c907de"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::harmAuthoredHzIncorrectDeliveredVolumeAssessment":
+    shortId: "HRM-1"
+    uuid: "46a45547-1a88-5a0a-a5f5-ccf383634e7c"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::harmAuthoredHzIncorrectEventChronology":
+    shortId: "HRM-2"
+    uuid: "e390fce4-6f93-5827-abfc-9b36873ca94a"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::harmAuthoredHzUnexpectedPowerLoss":
+    shortId: "HRM-3"
+    uuid: "3911f9fc-79fd-5e56-9c93-39e5d0607e05"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::harmAuthoredHzWrongDrug":
+    shortId: "HRM-4"
+    uuid: "b965d2f6-2fff-500e-ad80-7759aafd7cd5"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::harmAuthoredHzWrongRate":
+    shortId: "HRM-5"
+    uuid: "4d9a5020-2abe-5fa8-accc-5241e04020db"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hsAuthoredHzIncorrectDeliveredVolumeAssessment":
+    shortId: "HZD-6"
+    uuid: "a058c65a-b10a-58db-8293-8d24821d917d"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hsAuthoredHzIncorrectEventChronology":
+    shortId: "HZD-7"
+    uuid: "918aa5a8-faa7-5014-8c03-022252e441da"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hsAuthoredHzUnexpectedPowerLoss":
+    shortId: "HZD-8"
+    uuid: "be1d580c-1325-5745-bbe0-ea2017114c2a"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hsAuthoredHzWrongDrug":
+    shortId: "HZD-9"
+    uuid: "ca3d8bbc-1a15-5bf8-9636-7f0eb551dce8"
+  "memo_examples_ui_screen_regions_assurance_safety_risk::hsAuthoredHzWrongRate":
+    shortId: "HZD-10"
+    uuid: "7e5230c1-3181-5e60-a07d-f47c8ce8c8aa"
   "memo_examples_ui_screen_regions_assurance_safety_risk::hzIncorrectDeliveredVolumeAssessment":
     shortId: "HZD-1"
     uuid: "8e600b22-708a-53b3-900c-a3157f9357e5"

@@ -82,5 +82,8 @@ package memo_examples_ui_screen_regions_architecture_functional_functions {
         satisfy reqBatteryWarningPerformance by fnPresentBatteryStatus;
 
         satisfy reqDrugSelectionPerformance by fnValidateDrugSelection;
+            // The display refreshes its three indicators in this order each cycle.
+        succession first fnPresentDeliveryStatus then fnPresentLocalTime;
+        succession first fnPresentLocalTime then fnPresentBatteryStatus;
     }
 }
