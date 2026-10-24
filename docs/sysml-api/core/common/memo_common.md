@@ -538,6 +538,10 @@ part def Citation specializes MemoPart
             attribute concerns : ConcernKind[0..*];
             attribute applicableStandards : ExternalReference[0..*];
             attribute codes : TerminologyCode[0..*];
+            // The part's identity in the product structure, assigned by the user, not by MEMO. A revision is
+            // alphabetic: A, B, … Z, AA.
+            attribute partNumber : String[0..1];
+            attribute revision : String[0..1];
         }
 
         // ─── Role bases retained from the original kernel, re-founded on

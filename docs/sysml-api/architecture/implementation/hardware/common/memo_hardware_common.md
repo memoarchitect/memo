@@ -196,7 +196,6 @@ part def ThermalComponent specializes PhysicalComponent
         part def PhysicalAssembly specializes PhysicalElement {
             attribute responsibility : String;
             attribute safetyRole : String;
-            attribute partNumber : String;
             attribute mtbfHours : DurationValue;
             attribute protectionClass : String;
             attribute ipRating : String;
@@ -206,7 +205,6 @@ part def ThermalComponent specializes PhysicalComponent
         part def HardwareAssembly specializes PhysicalAssembly;
 
         part def PhysicalComponent specializes PhysicalElement {
-            attribute partNumber : String;
             attribute materialSummary : String;
             // ISO 10993-1 contact characterization; required when true.
             attribute patientContact : Boolean;
