@@ -1,6 +1,7 @@
 package memo_examples_surgical_robot_viewpoints_unassigned_views_surgical_robot_overview {
     private import memo_examples_surgical_robot::*;
     private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_logical_logical_viewpoint::*;
     private import memo_core_enumerations::*;
 
     view surgicalRobotOverview : MemoDiagramView {
@@ -8,5 +9,6 @@ package memo_examples_surgical_robot_viewpoints_unassigned_views_surgical_robot_
         attribute depth = 2;
         attribute :>> viewKind = DiagramViewKind::interconnection;
         attribute :>> diagramType = "ibd";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
     }
 }
