@@ -33,6 +33,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`MemoIdentity`](#memoidentity) | `metadata def` | Memo identity definition. | — |
+| [`MemoKind`](#memokind) | `metadata def` | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`AfferaStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sys… | — |
 | [`MemoPart`](#memopart) | `part def` | Memo part definition. | — |
 | [`RequirementDriver`](#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. | `MemoPart` |
 | [`VerifiableElement`](#verifiableelement) | `part def` | Verifiable element definition specializing `MemoPart`. | `MemoPart` |
@@ -64,6 +65,21 @@ metadata def MemoIdentity
 | Property | Value |
 | --- | --- |
 | Description | Memo identity definition. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_common` |
+
+
+## MemoKind
+
+```sysml
+metadata def MemoKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`AfferaStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sys… |
 | Kind | `metadata def` |
 | Abstract | No |
 | Specializes | — |
@@ -477,6 +493,16 @@ part def Citation specializes MemoPart
             attribute uuid : String[0..1];
             attribute shortDescription : String[0..1];
             attribute sourceReference : String[0..1];
+        }
+
+        // Marks a definition as a KIND — an extension of the ontology — rather than a model element.
+        // A project definition that specializes an ontology kind is, structurally, either a new kind
+        // (`AfferaStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the
+        // SysML tells the two apart, so the author says which. A marked definition, and what is typed
+        // by it, takes `idPrefix` as the family of its display ids (`<idPrefix>-1`). Anything unmarked
+        // takes the family of the ontology kind it descends from.
+        metadata def MemoKind {
+            attribute idPrefix : String;
         }
 
         // ─── Single abstract part root ──────────────────────────────────

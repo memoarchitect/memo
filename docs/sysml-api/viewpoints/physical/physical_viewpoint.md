@@ -56,7 +56,7 @@
             @MemoIdentity { :>> shortDescription = "Shows physical components, hardware structure, and their interconnections."; }
             doc /* Default viewpoint derived from the physical and hardware structure layers for bill-of-materials, hardware decomposition, physical interfaces, and network/connectivity topology. */
             attribute :>> purpose = "Describe the system's physical realization and interconnections.";
-            ref :>> stakeholders = (hardwareEngineer);
+            ref :>> memoStakeholders = (hardwareEngineer);
             attribute :>> stage = WorkflowStageKind::architecture;
             attribute :>> abstractionLevel = "physical";
             attribute :>> outputKind = (ViewOutputKind::diagram);

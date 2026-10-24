@@ -16,6 +16,7 @@
 | Element | SysML kind | What it is |
 | --- | --- | --- |
 | [`MemoIdentity`](../sysml-api/core/common/memo_common.md#memoidentity) | `metadata def` | Memo identity definition. |
+| [`MemoKind`](../sysml-api/core/common/memo_common.md#memokind) | `metadata def` | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`AfferaStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sys… |
 | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) *(abstract)* | `part def` | Memo part definition. |
 | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. |
 | [`VerifiableElement`](../sysml-api/core/common/memo_common.md#verifiableelement) *(abstract)* | `part def` | Verifiable element definition specializing `MemoPart`. |
@@ -93,11 +94,11 @@ flowchart LR
   anyElement["any element"]:::other
   ModelRationale["ModelRationale"]
   ModelNote["ModelNote"]
+  MemoPart["MemoPart"]
   MemoRequirementElement["MemoRequirementElement"]
   MemoVerificationCase["MemoVerificationCase"]
   MemoEvidence["MemoEvidence"]
   RequirementDriver["RequirementDriver"]
-  MemoPart["MemoPart"]
   DesignDecision["DesignDecision"]:::other
   SoftwareElement["SoftwareElement"]:::other
   UIAction["UIAction"]:::other
@@ -121,6 +122,7 @@ flowchart LR
   ModelRationale -->|RationaleFor| anyElement
   ModelNote -->|NotesOn| anyElement
   anyElement -->|MemoInterface| anyElement
+  anyElement -->|ScopedTo| MemoPart
   anyElement -->|DerivesFrom| MemoRequirementElement
   MemoVerificationCase -->|ProducesEvidence| MemoEvidence
   RequirementDriver -->|DerivesCyberRequirement| MemoRequirementElement
@@ -160,6 +162,7 @@ flowchart LR
 | [`NotesOn`](../sysml-api/core/annotations/memo_annotations.md#noteson) | [`ModelNote`](../sysml-api/core/annotations/memo_annotations.md#modelnote) | *any element* | Typed relationship from `ModelNote` to `any element`. |
 | [`MemoInterface`](../sysml-api/core/common/memo_common.md#memointerface) | *any element* | *any element* | Interaction-contract foundation for interface definitions between ports. |
 | [`MemoRelationship`](../sysml-api/core/relationships/memo_relationships.md#memorelationship) | *any element* | *any element* | Typed relationship for memo relationship. |
+| [`ScopedTo`](../sysml-api/core/relationships/memo_relationships.md#scopedto) | *any element* | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `any element` to `MemoPart`. |
 | [`DerivesFrom`](../sysml-api/core/relationships/memo_relationships.md#derivesfrom) | *any element* | [`MemoRequirementElement`](../sysml-api/core/common/memo_common.md#memorequirementelement) | Typed relationship from `any element` to `MemoRequirementElement`. |
 | [`ProducesEvidence`](../sysml-api/core/relationships/memo_relationships.md#producesevidence) | [`MemoVerificationCase`](../sysml-api/core/common/memo_common.md#memoverificationcase) | [`MemoEvidence`](../sysml-api/core/common/memo_common.md#memoevidence) | Typed relationship from `MemoVerificationCase` to `MemoEvidence`. |
 | [`DerivesCyberRequirement`](../sysml-api/core/relationships/memo_relationships.md#derivescyberrequirement) | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | [`MemoRequirementElement`](../sysml-api/core/common/memo_common.md#memorequirementelement) | Typed relationship from `RequirementDriver` to `MemoRequirementElement`. |
