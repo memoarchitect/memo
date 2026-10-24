@@ -305,8 +305,8 @@ connection def Changes :> MemoRelationship
         // `#Contains` the records of the system releases it pins, and is the validated configuration:
         // `#VerifiedByCase` names the verification cases that validated it.
         part def ReleaseRecord :> MemoPart {
-            attribute partNumber : String[1];
-            attribute revision : String[1];
+            attribute :>> partNumber : String[1];
+            attribute :>> revision : String[1];
             attribute softwareVersion : String[0..1];
             attribute codeTag : String[0..1];
             // The commit of the model this release was built from. A record cannot hold the hash of the

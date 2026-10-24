@@ -433,6 +433,8 @@ connection def IndependentOf :> MemoRelationship
             // battery are not — which is why ownership is recorded here and is the
             // attribute that distinguishes an SoS from a merely large system.
             attribute systemBoundaryDescription : String;
+            // A short code the system's part numbers are written under (for example GPCA). A label: nothing checks a part number against it.
+            attribute systemPrefix : String[0..1];
             attribute origin : SystemOriginKind[0..1];
             attribute constituentOwnership : String;
             // A constituent may itself coordinate systems-of-systems, or it may be
