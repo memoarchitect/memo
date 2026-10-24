@@ -26,6 +26,9 @@ package memo_examples_temperature_alarm {
     private import memo_assurance_safety_risk_analysis::*;
 
     private import memo_core_common::MemoIdentity;
+    part def TemperatureAlarmSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The patient-temperature monitor and alarm: the system this example models, with the software and hardware that realize it.";
+    }
     // ── Operational intent ──────────────────────────────────────
     // --8<-- [start:operational]
     part icuNurse : User {

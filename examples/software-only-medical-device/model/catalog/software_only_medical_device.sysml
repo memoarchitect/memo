@@ -20,6 +20,9 @@ package memo_examples_software_only_medical_device {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def SoftwareOnlyMedicalDeviceSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The software-only medical device: the system this example models, with the software and hardware that realize it.";
+    }
     part swScreeningApp : SoftwareSystem {
         @MemoIdentity { :>> providedId = "SMD-SW-001"; :>> label = "ScreeningApplication"; }
         attribute :>> safetyClass = SafetyClassKind::B;

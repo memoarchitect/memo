@@ -15,6 +15,9 @@ package memo_examples_embedded_infusion_pump {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def EmbeddedInfusionPumpSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The embedded infusion pump: the system this example models, with the software and hardware that realize it.";
+    }
     // Module view (IEC 62304).
     part swInfusionControl : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::'item';

@@ -18,6 +18,9 @@ package memo_examples_surgical_closure_workflow {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def SurgicalClosureWorkflowSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The laparoscopic sleeve closure the workflow is performed with: the system this example models, with the software and hardware that realize it.";
+    }
     // ── Clinical setting and goal ───────────────────────────────
     part bariatricSurgeon : User {
         attribute :>> actorKind = ActorKind::clinician;

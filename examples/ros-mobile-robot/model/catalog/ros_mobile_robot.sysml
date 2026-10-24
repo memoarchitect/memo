@@ -29,6 +29,9 @@ package memo_examples_ros_mobile_robot {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def RosMobileRobotSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The ROS mobile robot: the system this example models, with the software and hardware that realize it.";
+    }
     // ── Message definitions and named topic instances ──────────────────
     // The definition is the ROS message contract. A named usage is the topic
     // deployed in this system; publisher/subscriber ports reference that same

@@ -16,6 +16,9 @@ package memo_examples_functional_logical_physical {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def FunctionalLogicalPhysicalSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The device whose functional, logical and physical design this example separates: the system this example models, with the software and hardware that realize it.";
+    }
     // Operational world: what the clinician does.
     action actOcclusionResponse : OperativeAction {
         @MemoIdentity { :>> providedId = "FLP-ACT-001"; :>> label = "RespondToLineOcclusion"; }

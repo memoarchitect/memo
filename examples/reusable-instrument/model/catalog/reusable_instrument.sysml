@@ -14,6 +14,9 @@ package memo_examples_reusable_instrument {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
+    part def ReusableInstrumentSystem specializes memo_architecture_logical_structure::System {
+        attribute :>> systemBoundaryDescription = "The reusable medical instrument: the system this example models, with the software and hardware that realize it.";
+    }
     part sterileProcessingTech : User {
         attribute :>> actorKind = ActorKind::technician;
         @MemoIdentity { :>> providedId = "RI-USR-001"; :>> label = "SterileProcessingTechnician"; }
