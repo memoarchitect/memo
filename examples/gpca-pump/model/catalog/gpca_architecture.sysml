@@ -133,7 +133,6 @@ package memo_examples_gpca_pump_gpca_architecture {
     // flows were always written at package level.
     part gpcaSoftware : SoftwareSystem {
         @MemoIdentity { :>> providedId = "SWS-001"; }
-        attribute :>> version = "2.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> complexity = ComplexityKind::high;

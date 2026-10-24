@@ -252,7 +252,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part testReportLockout : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::testArtifact;
         @MemoIdentity { :>> providedId = "TEST-001"; :>> label = "BolusLockoutTestReport"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> artifactKind = ArtifactKind::testReport;
         attribute :>> resultSummary = "planned";
@@ -260,7 +260,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part testProtocolSafetySuite : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::testArtifact;
         @MemoIdentity { :>> providedId = "TEST-002"; :>> label = "SafetyAlarmTestProtocol"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> artifactKind = ArtifactKind::testProtocol;
         attribute :>> resultSummary = "covers VER-005..VER-010, VER-015, VER-016, VER-020, VER-022..VER-024";
@@ -268,7 +268,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceLockout : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-001"; :>> label = "BolusLockoutEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "verification evidence";
         attribute :>> integrityStatus = "draft";
@@ -276,7 +276,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceModeRange : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-002"; :>> label = "ModeRangeEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "formal proof evidence";
         attribute :>> integrityStatus = "draft";
@@ -284,7 +284,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceSameStepAlarm : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-003"; :>> label = "SameStepAlarmEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "model checking evidence";
         attribute :>> integrityStatus = "draft";
@@ -292,7 +292,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceTemporalModeSafety : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-004"; :>> label = "TemporalModeSafetyEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "model checking evidence";
         attribute :>> integrityStatus = "draft";
@@ -300,7 +300,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceSafetyAlarmSuite : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-005"; :>> label = "SafetyAlarmSuiteEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "bench test evidence for alarm-driven safe states";
         attribute :>> integrityStatus = "draft";
@@ -308,7 +308,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceUsability : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-006"; :>> label = "SummativeUsabilityEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "summative usability report per IEC 62366-1";
         attribute :>> integrityStatus = "draft";
@@ -316,7 +316,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceHardwareBench : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-008"; :>> label = "HardwareBenchEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "bench evidence for alarm loudness and anti-free-flow valve";
         attribute :>> integrityStatus = "draft";
@@ -324,7 +324,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceDoseProgramming : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-009"; :>> label = "DoseProgrammingEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "test evidence for prescription limits, confirmation, dose ceiling, and event log";
         attribute :>> integrityStatus = "draft";
@@ -332,7 +332,7 @@ package memo_examples_gpca_pump_gpca_verification {
     part evidenceDeliveryAccuracy : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-007"; :>> label = "DeliveryAccuracyEvidence"; }
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> evidenceType = "gravimetric bench test evidence";
         attribute :>> integrityStatus = "draft";

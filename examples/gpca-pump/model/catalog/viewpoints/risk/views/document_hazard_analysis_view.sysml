@@ -15,7 +15,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_v
         @MemoIdentity { :>> providedId = "DOC-009"; :>> label = "HazardAnalysisReportView"; }
         @MemoIdentity { :>> shortDescription = "Hazard analysis report aligned to the UMN CriSys GPCA hazard tables."; }
         doc /* Aggregates the five hazard chains, the FMEA worksheet, and the overdose fault tree with their controls and verification pointers. */
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::RMF;
         attribute :>> generationRule = "Include hazards, sequences of events, situations, harms, FMEA rows, fault tree, and controls";

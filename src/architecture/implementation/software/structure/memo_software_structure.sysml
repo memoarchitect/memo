@@ -33,7 +33,6 @@ package memo_architecture_implementation_software_structure {
     }
 
     part def SoftwareSystem specializes SoftwareElement {
-        attribute version : String;
         attribute operatingSystem : String;
     }
 

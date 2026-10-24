@@ -356,7 +356,7 @@ package memo_examples_gpca_pump_gpca_trace {
     part gpcaFirmwareImage : SoftwareDeploymentUnit {
         @MemoIdentity { :>> providedId = "DU-001"; :>> label = "GPCAFirmwareImage"; }
         attribute :>> unitKind = "firmware image";
-        attribute :>> version = "2.0";
+        attribute :>> version = "2.0.0";
     }
     allocation : BuildsInto allocate gpcaSoftware.tlm to gpcaFirmwareImage;
     allocation : BuildsInto allocate gpcaSoftware.config to gpcaFirmwareImage;

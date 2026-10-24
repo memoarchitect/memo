@@ -36,7 +36,7 @@ package memo_examples_gpca_pump_gpca_standards {
 
     part docSrs : MarkdownDocumentSource {
         @MemoIdentity { :>> providedId = "DOC-SRS"; :>> label = "SoftwareRequirementsSpecification"; }
-        attribute :>> version = "1.0";
+        attribute :>> version = "1.0.0";
         attribute :>> artifactKind = ArtifactKind::requirementSpecification;
         attribute :>> owner = "Software Lead";
         attribute :>> approvalStatus = "approved";
@@ -47,7 +47,7 @@ package memo_examples_gpca_pump_gpca_standards {
     }
     part docSad : MarkdownDocumentSource {
         @MemoIdentity { :>> providedId = "DOC-SAD"; :>> label = "SoftwareArchitectureDescription"; }
-        attribute :>> version = "1.0";
+        attribute :>> version = "1.0.0";
         attribute :>> artifactKind = ArtifactKind::architectureDescription;
         attribute :>> owner = "Systems Architect";
         attribute :>> approvalStatus = "approved";
@@ -58,7 +58,7 @@ package memo_examples_gpca_pump_gpca_standards {
     }
     part docHrs : MarkdownDocumentSource {
         @MemoIdentity { :>> providedId = "DOC-HRS"; :>> label = "HardwareRequirementsSpecification"; }
-        attribute :>> version = "1.0";
+        attribute :>> version = "1.0.0";
         attribute :>> artifactKind = ArtifactKind::requirementSpecification;
         attribute :>> owner = "Hardware Lead";
         attribute :>> approvalStatus = "approved";
@@ -69,7 +69,7 @@ package memo_examples_gpca_pump_gpca_standards {
     }
     part docRmf : MarkdownDocumentSource {
         @MemoIdentity { :>> providedId = "DOC-RMF"; :>> label = "RiskManagementFile"; }
-        attribute :>> version = "1.0";
+        attribute :>> version = "1.0.0";
         attribute :>> artifactKind = ArtifactKind::riskRecord;
         attribute :>> owner = "Risk Manager";
         attribute :>> approvalStatus = "approved";

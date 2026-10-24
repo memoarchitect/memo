@@ -14,7 +14,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view {
         @MemoIdentity { :>> providedId = "DOC-001"; :>> label = "RiskManagementFileView"; }
         @MemoIdentity { :>> shortDescription = "Document-backed risk view for GPCA."; }
         doc /* Aggregates the risk chain, controls, verification, residual risk, and cybersecurity links needed for the GPCA risk management file. */
-        attribute :>> version = "0.2";
+        attribute :>> version = "0.2.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::RMF;
         attribute :>> generationRule = "Include risk chain, controls, verification, residual risk, and cybersecurity traceability";

@@ -13,7 +13,7 @@ package memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_threat_m
         @MemoIdentity { :>> providedId = "DOC-002"; :>> label = "GPCACyberThreatModelView"; }
         @MemoIdentity { :>> shortDescription = "Threat-model-oriented document view for GPCA."; }
         doc /* Captures GPCA cyber assets, trust boundaries, threats, threat scenarios, vulnerabilities, and mitigations for secure product development records. */
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = cybersecurityViewpoint;

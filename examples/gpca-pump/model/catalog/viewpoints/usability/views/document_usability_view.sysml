@@ -15,7 +15,7 @@ package memo_examples_gpca_pump_viewpoints_usability_views_document_usability_vi
         @MemoIdentity { :>> providedId = "DOC-008"; :>> label = "UsabilityEngineeringFileView"; }
         @MemoIdentity { :>> shortDescription = "IEC 62366-1 usability engineering file content for GPCA."; }
         doc /* Aggregates intended use, use contexts, actors, foreseeable use errors, related risk chains, usability requirements, and the summative usability validation case. */
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = usabilityViewpoint;
