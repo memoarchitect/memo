@@ -245,6 +245,30 @@ elements:
   "memo_examples_nested_architecture_dsm_assurance_requirements_needs::needUninterruptedTherapy":
     shortId: "NDX-4"
     uuid: "3ffb013e-fa0d-5898-9b33-af672dbc9813"
+  "memo_examples_nested_architecture_dsm_assurance_verification_validation::evAuthoredVcAirInLineResponse":
+    shortId: "MMX-1"
+    uuid: "5643e0bf-d88b-53d3-a5b9-e00f8c75fc09"
+  "memo_examples_nested_architecture_dsm_assurance_verification_validation::evAuthoredVcAlarmSignals":
+    shortId: "MMX-2"
+    uuid: "9bd4ef4e-d5da-51c3-9a26-6dcd01d979eb"
+  "memo_examples_nested_architecture_dsm_assurance_verification_validation::evAuthoredVcBatteryEndurance":
+    shortId: "MMX-3"
+    uuid: "eaae23c3-c6d3-5f73-a5e0-721cea1094e7"
+  "memo_examples_nested_architecture_dsm_assurance_verification_validation::evAuthoredVcConfirmationFlow":
+    shortId: "MMX-4"
+    uuid: "dfda4147-de60-5731-a8cc-9077e33b44c6"
+  "memo_examples_nested_architecture_dsm_assurance_verification_validation::evAuthoredVcDoseAccuracy":
+    shortId: "MMX-5"
+    uuid: "d561b633-44ad-57a1-89ee-e82f900a3770"
+  "memo_examples_nested_architecture_dsm_assurance_verification_validation::evAuthoredVcOcclusionResponse":
+    shortId: "MMX-6"
+    uuid: "f7e8abf3-474e-5900-935b-96d63a74064d"
+  "memo_examples_nested_architecture_dsm_assurance_verification_validation::evAuthoredVcPowerSourceSwitch":
+    shortId: "MMX-7"
+    uuid: "6ec585ab-7111-51d7-abf7-d364f33394b2"
+  "memo_examples_nested_architecture_dsm_assurance_verification_validation::evAuthoredVcStatusLegibility":
+    shortId: "MMX-8"
+    uuid: "20f1876d-dcf8-5d7e-99d8-ad3baeb039fc"
   "memo_examples_nested_architecture_dsm_assurance_verification_validation::vcAirInLineResponse":
     shortId: "VRF-1"
     uuid: "e753cc07-566d-59b6-bb3c-6cc6b459352f"
@@ -272,3 +296,6 @@ elements:
   "memo_examples_nested_architecture_dsm_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "1da70d84-c917-5ab8-8c32-f293886ffe93"
+  "memo_examples_nested_architecture_dsm_system::NestedArchitectureDsmSystem":
+    shortId: "SYS-20"
+    uuid: "2a4b0c0c-f86c-55ba-9311-e52a67786fdf"

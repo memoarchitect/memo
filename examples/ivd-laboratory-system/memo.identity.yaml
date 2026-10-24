@@ -1,0 +1,43 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_ivd_laboratory_system::IvdLaboratorySystem":
+    shortId: "SYS-1"
+    uuid: "03f9722c-09a6-5927-9092-1b05cceffdbf"
+  "memo_examples_ivd_laboratory_system::actRunPanel":
+    shortId: "OPR-1"
+    uuid: "f51b3f0e-a0ea-51e1-93ac-817d55e5df38"
+  "memo_examples_ivd_laboratory_system::analyzer":
+    shortId: "PHY-1"
+    uuid: "0bb22a02-6942-586b-91e6-d0eccbbd863e"
+  "memo_examples_ivd_laboratory_system::fluidReactionCuvette":
+    shortId: "FLD-1"
+    uuid: "574a69e5-efe7-57fc-8583-3229498e3086"
+  "memo_examples_ivd_laboratory_system::fluidReactionCuvette::pSpecimenIn":
+    shortId: "PHY-2"
+    uuid: "10fb65ca-6274-5833-8109-64a4da5b9b8d"
+  "memo_examples_ivd_laboratory_system::fluidSampleProbe":
+    shortId: "FLD-2"
+    uuid: "70920576-4a8b-52f0-8baa-95320e6ad151"
+  "memo_examples_ivd_laboratory_system::fluidSampleProbe::pSpecimenOut":
+    shortId: "PHY-3"
+    uuid: "e44b9d9c-1eac-5e60-a4e7-ad8c8c636d3d"
+  "memo_examples_ivd_laboratory_system::glucoseResult":
+    shortId: "LGC-1"
+    uuid: "9dcae027-9006-5911-9a6e-4584543e95c1"
+  "memo_examples_ivd_laboratory_system::optPhotometer":
+    shortId: "OPT-1"
+    uuid: "7801b203-16ae-5f40-84e3-fdca0356f64a"
+  "memo_examples_ivd_laboratory_system::valAuthoredActRunPanel":
+    shortId: "VLD-1"
+    uuid: "3fed3ac2-38e0-50aa-a92e-c537a9d1ea82"
+  "memo_examples_ivd_laboratory_system_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "0840a521-a708-5ca1-b9f0-2a2ab208ff68"
+  "memo_examples_ivd_laboratory_system_viewpoints_unassigned_views_ivd_laboratory_system_overview::ivdLaboratorySystemOverview":
+    shortId: "MMX-1"
+    uuid: "3f9adf11-7579-53c0-a1c3-14c22633cd34"

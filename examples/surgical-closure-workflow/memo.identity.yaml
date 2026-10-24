@@ -1,0 +1,103 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_surgical_closure_workflow::SurgicalClosureWorkflowSystem":
+    shortId: "SYS-1"
+    uuid: "0258677d-2f0d-590d-a19f-0be198a43ef3"
+  "memo_examples_surgical_closure_workflow::actAssessStapleLine":
+    shortId: "OPR-1"
+    uuid: "81303160-c6ad-5e16-8976-99e1d724472b"
+  "memo_examples_surgical_closure_workflow::actEstablishAccess":
+    shortId: "OPR-2"
+    uuid: "3ad078db-7394-5de1-9f77-7c001b476085"
+  "memo_examples_surgical_closure_workflow::actExtractSpecimenAndClose":
+    shortId: "OPR-3"
+    uuid: "44974925-be9a-53dc-84c2-e11c7937762b"
+  "memo_examples_surgical_closure_workflow::actHandover":
+    shortId: "OPR-4"
+    uuid: "d5718cff-7846-55bb-a718-a3f7846fd786"
+  "memo_examples_surgical_closure_workflow::actMobilizeStomach":
+    shortId: "OPR-5"
+    uuid: "c959957b-4c97-55c8-92f8-10bf4b7560f2"
+  "memo_examples_surgical_closure_workflow::actSizeAndCreateSleeve":
+    shortId: "OPR-6"
+    uuid: "1a4660c8-8552-52b1-928d-2d1fd6970aef"
+  "memo_examples_surgical_closure_workflow::actSizeAndCreateSleeve::taskCreateStapleLine":
+    shortId: "OPR-7"
+    uuid: "bfcee295-a37b-5a9a-a580-7755a3cf9335"
+  "memo_examples_surgical_closure_workflow::actSizeAndCreateSleeve::taskCreateStapleLine::stAssessIntegrity":
+    shortId: "OPR-8"
+    uuid: "1f651b89-5ab7-539a-9df2-1f8c198ba743"
+  "memo_examples_surgical_closure_workflow::actSizeAndCreateSleeve::taskCreateStapleLine::stConfirmAnatomy":
+    shortId: "OPR-9"
+    uuid: "6607fa84-ef1a-57a4-ad45-e63ec7313c93"
+  "memo_examples_surgical_closure_workflow::actSizeAndCreateSleeve::taskCreateStapleLine::stCreateStapleLine":
+    shortId: "OPR-10"
+    uuid: "f5fe5ebe-64a3-56a1-8330-a558878d2d87"
+  "memo_examples_surgical_closure_workflow::actSizeAndCreateSleeve::taskCreateStapleLine::stInspectBleeding":
+    shortId: "OPR-11"
+    uuid: "35be3825-406b-5fc6-977f-b154ae5c9bc9"
+  "memo_examples_surgical_closure_workflow::actTimeOutAndPosition":
+    shortId: "OPR-12"
+    uuid: "7870b647-2fcd-5cae-a28b-95bb1c0ee4ac"
+  "memo_examples_surgical_closure_workflow::anesthetist":
+    shortId: "USR-1"
+    uuid: "c0e70337-34b3-5b19-9a75-d45f252cfe05"
+  "memo_examples_surgical_closure_workflow::bariatricOr":
+    shortId: "USE-1"
+    uuid: "7bbf07b6-8e92-5a0f-895a-b72c3a1a83df"
+  "memo_examples_surgical_closure_workflow::bariatricSurgeon":
+    shortId: "USR-2"
+    uuid: "275de143-6644-56ac-89e3-eb2c3fec0f87"
+  "memo_examples_surgical_closure_workflow::needControlledGastricResection":
+    shortId: "NDX-1"
+    uuid: "4207eb84-d3c5-5744-9a7e-827bed8f4abd"
+  "memo_examples_surgical_closure_workflow::scrubNurse":
+    shortId: "USR-3"
+    uuid: "e87ff36c-de0d-53b8-adcf-485bd10f340c"
+  "memo_examples_surgical_closure_workflow::ucPerformSleeveGastrectomy":
+    shortId: "USE-2"
+    uuid: "34a8f363-359c-578d-9470-ec25b713cb0a"
+  "memo_examples_surgical_closure_workflow::valAuthoredActAssessStapleLine":
+    shortId: "VLD-1"
+    uuid: "8dd97b49-f25f-5601-8da2-4903eb54f553"
+  "memo_examples_surgical_closure_workflow::valAuthoredActSizeAndCreateSleeve":
+    shortId: "VLD-2"
+    uuid: "fc421110-e23b-5c71-a22d-a2ddec90b2e1"
+  "memo_examples_surgical_closure_workflow::valAuthoredTaskCreateStapleLine":
+    shortId: "VLD-3"
+    uuid: "c78b1ecf-7354-5045-baeb-3ee5c07ea3e1"
+  "memo_examples_surgical_closure_workflow::wfSleeveGastrectomy":
+    shortId: "CLN-1"
+    uuid: "22a89baf-8e40-5d19-a64c-3629e6f38b23"
+  "memo_examples_surgical_closure_workflow::wfSleeveGastrectomy::scNominalSleeveProcedure":
+    shortId: "OPR-13"
+    uuid: "0e2ce892-b3cd-592f-9c3a-c8b2b290edaf"
+  "memo_examples_surgical_closure_workflow::wfSleeveGastrectomy::scStapleLineBleeding":
+    shortId: "OPR-14"
+    uuid: "2452d023-42df-5a6a-b91b-e09672a57306"
+  "memo_examples_surgical_closure_workflow::wfSleeveGastrectomy::scStapleLineBleeding::oaControlStapleLineBleeding":
+    shortId: "OPR-15"
+    uuid: "0cce38f5-782e-54bb-8ba4-8afaaeb43c31"
+  "memo_examples_surgical_closure_workflow::wfSleeveGastrectomy::scStapleLineBleeding::oaControlStapleLineBleeding::controlBleeding":
+    shortId: "ACT-1"
+    uuid: "e0d556dc-9f7d-5cd8-a896-1a60804c7115"
+  "memo_examples_surgical_closure_workflow::wfSleeveGastrectomy::scStapleLineBleeding::oaControlStapleLineBleeding::escalateIfNeeded":
+    shortId: "ACT-2"
+    uuid: "bee75e51-e7f7-50f7-85ac-999bbc2576e1"
+  "memo_examples_surgical_closure_workflow::wfSleeveGastrectomy::scStapleLineBleeding::oaControlStapleLineBleeding::reassessStapleLine":
+    shortId: "ACT-3"
+    uuid: "c73cd445-ce47-5e10-80ef-f1de68b8b4d5"
+  "memo_examples_surgical_closure_workflow::wfSleeveGastrectomy::scStapleLineBleeding::oaControlStapleLineBleeding::recognizeBleeding":
+    shortId: "ACT-4"
+    uuid: "1b7fd555-bb02-5e66-9ace-72c9d1ad3bc0"
+  "memo_examples_surgical_closure_workflow_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "3965cb5b-d744-5fa0-8cf5-409f45e07b0c"
+  "memo_examples_surgical_closure_workflow_viewpoints_unassigned_views_surgical_closure_workflow_overview::surgicalClosureWorkflowOverview":
+    shortId: "MMX-1"
+    uuid: "59d5c743-d667-53ed-84f6-26b88fc66510"

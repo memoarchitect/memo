@@ -1,0 +1,64 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_embedded_infusion_pump::EmbeddedInfusionPumpSystem":
+    shortId: "SYS-1"
+    uuid: "8e6e4a7a-169f-53f1-ab98-ae0dd6fbc306"
+  "memo_examples_embedded_infusion_pump::duControlImage":
+    shortId: "SFT-1"
+    uuid: "b21519f8-0e84-5559-bfde-b3957534e025"
+  "memo_examples_embedded_infusion_pump::evAuthoredSwDoseCommandUnit":
+    shortId: "MMX-2"
+    uuid: "7affc50f-926c-55f0-83b2-dba30467bf2e"
+  "memo_examples_embedded_infusion_pump::evAuthoredVcAuthoredSwInfusionControl":
+    shortId: "MMX-3"
+    uuid: "fa87714d-d4da-5c5f-b28e-49178ab059df"
+  "memo_examples_embedded_infusion_pump::evAuthoredVcAuthoredSwMotorDriver":
+    shortId: "MMX-4"
+    uuid: "f53cdefb-fcc7-509b-86cf-8ac6c7487dc4"
+  "memo_examples_embedded_infusion_pump::mcuSafety":
+    shortId: "PRC-1"
+    uuid: "6c598722-bb92-5204-9258-624247a164b1"
+  "memo_examples_embedded_infusion_pump::needAuthoredSafeOperation":
+    shortId: "NDX-1"
+    uuid: "1fba50cb-e21d-563e-bcf2-6f4642e5fa19"
+  "memo_examples_embedded_infusion_pump::reqAuthoredSwInfusionControl":
+    shortId: "REQ-1"
+    uuid: "32accece-a805-5f8b-b2fd-ce9078b1dd88"
+  "memo_examples_embedded_infusion_pump::reqAuthoredSwMotorDriver":
+    shortId: "REQ-2"
+    uuid: "b1759883-8ecf-5516-b23c-353eabb04d4b"
+  "memo_examples_embedded_infusion_pump::rtControlLoop":
+    shortId: "SFT-2"
+    uuid: "a9d1e5cf-792a-5868-9717-42326e66ba68"
+  "memo_examples_embedded_infusion_pump::rteBareMetal":
+    shortId: "RNT-1"
+    uuid: "d519930b-57d5-5f5d-af62-cdb74dcd3aec"
+  "memo_examples_embedded_infusion_pump::swInfusionControl":
+    shortId: "SFT-3"
+    uuid: "cc7c3798-5930-5316-919a-aced5c1f1da6"
+  "memo_examples_embedded_infusion_pump::swInfusionControl::swDoseCommandUnit":
+    shortId: "SFT-4"
+    uuid: "fd013725-fdd0-5fb1-82e5-2483c68dcd5c"
+  "memo_examples_embedded_infusion_pump::swMotorDriver":
+    shortId: "SFT-5"
+    uuid: "199a9918-fd4a-50bf-957d-58819952d113"
+  "memo_examples_embedded_infusion_pump::vcAuthoredSwDoseCommandUnit":
+    shortId: "VRF-1"
+    uuid: "d22ad652-a37a-51d9-aced-ccb484a2bd63"
+  "memo_examples_embedded_infusion_pump::vcAuthoredSwInfusionControl":
+    shortId: "VRF-2"
+    uuid: "95268750-f5df-5a99-a446-191bf84086d6"
+  "memo_examples_embedded_infusion_pump::vcAuthoredSwMotorDriver":
+    shortId: "VRF-3"
+    uuid: "6ce25f09-879d-5a67-86d8-ad93aba57086"
+  "memo_examples_embedded_infusion_pump_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "90ba93f2-8a29-577d-ada1-241a24256fbf"
+  "memo_examples_embedded_infusion_pump_viewpoints_unassigned_views_embedded_infusion_pump_overview::embeddedInfusionPumpOverview":
+    shortId: "MMX-1"
+    uuid: "63f7d24b-dbde-5a8a-9b32-d7f165680884"

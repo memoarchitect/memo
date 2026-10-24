@@ -68,3 +68,24 @@ elements:
   "memo_examples_temperature_alarm_viewpoints_unassigned_views_temperature_alarm_overview::temperatureAlarmOverview":
     shortId: "MMX-2"
     uuid: "e9653f71-dc0b-55aa-951c-469b402afad3"
+  "memo_examples_temperature_alarm::TemperatureAlarmSystem":
+    shortId: "SYS-2"
+    uuid: "384f752b-c14f-51b2-988e-0149b33aee6e"
+  "memo_examples_temperature_alarm::evAuthoredVcAuthoredRcReAnnunciate":
+    shortId: "MMX-4"
+    uuid: "ee371d1c-f92e-5e70-b961-aa6fb9cb01e7"
+  "memo_examples_temperature_alarm::harmAuthoredHzUndetectedDeviation":
+    shortId: "HRM-1"
+    uuid: "2a6bcf27-3252-5355-92e8-50cdddf5c9ac"
+  "memo_examples_temperature_alarm::hsAuthoredHzUndetectedDeviation":
+    shortId: "HZD-2"
+    uuid: "aa1331fb-10dd-51ff-8da3-da711da8db38"
+  "memo_examples_temperature_alarm::reqAuthoredDetectDeviation":
+    shortId: "REQ-1"
+    uuid: "81b2e0ef-5f4e-5d41-bb48-3bcf47b3ea2f"
+  "memo_examples_temperature_alarm::valAuthoredActAcknowledgeAlarm":
+    shortId: "VLD-2"
+    uuid: "2f847a18-9caf-5aaa-91de-e4338bc94c1a"
+  "memo_examples_temperature_alarm::vcAuthoredRcReAnnunciate":
+    shortId: "VRF-2"
+    uuid: "9b25e502-ef1b-511c-8b10-fb7c61e58bdf"

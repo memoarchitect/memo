@@ -92,3 +92,24 @@ elements:
   "memo_examples_ros_mobile_robot_viewpoints_unassigned_views_ros_mobile_robot_overview::rosMobileRobotOverview":
     shortId: "MMX-1"
     uuid: "2f4b2bc1-7d42-51a8-912b-28cabe8b6615"
+  "memo_examples_ros_mobile_robot::RosMobileRobotSystem":
+    shortId: "SYS-1"
+    uuid: "64c5d3e3-d390-5ac6-bb7b-e8a958e681ae"
+  "memo_examples_ros_mobile_robot::evAuthoredVcAuthoredSwSafety":
+    shortId: "MMX-2"
+    uuid: "02d6b5f4-9118-5bb3-813f-f96c19f91360"
+  "memo_examples_ros_mobile_robot::needAuthoredSafeOperation":
+    shortId: "NDX-1"
+    uuid: "0edbe2c7-d260-5425-9ce0-f6389ca72c1f"
+  "memo_examples_ros_mobile_robot::reqAuthoredSwNavigation":
+    shortId: "REQ-1"
+    uuid: "319796f3-a5cd-5e59-a2ca-8e610611f58c"
+  "memo_examples_ros_mobile_robot::reqAuthoredSwPerception":
+    shortId: "REQ-2"
+    uuid: "0c6af27a-b37e-5875-bb1a-164bcf12e75b"
+  "memo_examples_ros_mobile_robot::reqAuthoredSwSafety":
+    shortId: "REQ-3"
+    uuid: "16cf39f7-fd42-5991-a9c9-57930f3fe756"
+  "memo_examples_ros_mobile_robot::vcAuthoredSwSafety":
+    shortId: "VRF-1"
+    uuid: "fadb123b-1209-581b-a5c4-78f204f47c99"
