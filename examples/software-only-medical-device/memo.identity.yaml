@@ -1,0 +1,46 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_software_only_medical_device::SoftwareOnlyMedicalDeviceSystem":
+    shortId: "SYS-1"
+    uuid: "a2649ede-e44c-584d-8f41-4b7b7fc14d94"
+  "memo_examples_software_only_medical_device::algGrading":
+    shortId: "ALG-1"
+    uuid: "ffec4896-d3dd-5d6b-9a70-b992693d18fa"
+  "memo_examples_software_only_medical_device::duContainerImage":
+    shortId: "SFT-1"
+    uuid: "a943c78d-74c1-5d6d-a475-c962e5d95972"
+  "memo_examples_software_only_medical_device::needAuthoredSafeOperation":
+    shortId: "NDX-1"
+    uuid: "45182aa5-5880-5184-8949-1678fe5979f8"
+  "memo_examples_software_only_medical_device::nodeCloud":
+    shortId: "PRC-1"
+    uuid: "e918e362-1e21-53b7-af17-9a28b9e481b3"
+  "memo_examples_software_only_medical_device::reqAuthoredSoupInference":
+    shortId: "REQ-1"
+    uuid: "7097da17-c413-5252-80d0-81e4c24dec1d"
+  "memo_examples_software_only_medical_device::reqAuthoredSwGradingModule":
+    shortId: "REQ-2"
+    uuid: "7a554a06-3143-5129-b7b5-0a68a6130556"
+  "memo_examples_software_only_medical_device::soupInference":
+    shortId: "OXX-1"
+    uuid: "955d034f-3db5-53b6-ab7e-0e32a5c3d42e"
+  "memo_examples_software_only_medical_device::svcGrading":
+    shortId: "CLD-1"
+    uuid: "61bf7c9a-c45e-5db3-978e-369f035451c5"
+  "memo_examples_software_only_medical_device::swGradingModule":
+    shortId: "SFT-2"
+    uuid: "114b4993-012d-5f0d-8a5e-042be3529411"
+  "memo_examples_software_only_medical_device::swScreeningApp":
+    shortId: "SFT-3"
+    uuid: "f9970165-f525-5024-9b84-ab1e87c94ff9"
+  "memo_examples_software_only_medical_device_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "8a17582d-c03a-5123-8912-08915e3ffbfb"
+  "memo_examples_software_only_medical_device_viewpoints_unassigned_views_software_only_medical_device_overview::softwareOnlyMedicalDeviceOverview":
+    shortId: "MMX-1"
+    uuid: "609c5e73-aea2-51a1-af3d-73824c7bb8c0"

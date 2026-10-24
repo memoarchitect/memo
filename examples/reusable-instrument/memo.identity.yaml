@@ -1,0 +1,46 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_reusable_instrument::ReusableInstrumentSystem":
+    shortId: "SYS-1"
+    uuid: "b0092e9e-5b7f-5d48-9911-7b8d6f68b14b"
+  "memo_examples_reusable_instrument::actClean":
+    shortId: "OPR-1"
+    uuid: "4a9ed6d8-64d7-5cf4-b8b5-ac101c9230e6"
+  "memo_examples_reusable_instrument::actInspect":
+    shortId: "OPR-2"
+    uuid: "ece06214-ccdd-557a-a916-5ae2bbab6645"
+  "memo_examples_reusable_instrument::actSterilizeLoad":
+    shortId: "OPR-3"
+    uuid: "b8f36250-35ba-550b-b780-f7659da19d4a"
+  "memo_examples_reusable_instrument::sterileProcessingTech":
+    shortId: "USR-1"
+    uuid: "95052051-7668-5de4-9a1e-56f48f5c61ea"
+  "memo_examples_reusable_instrument::ucSterilize":
+    shortId: "USE-1"
+    uuid: "02230598-f203-5673-95d4-22e22d16bd50"
+  "memo_examples_reusable_instrument::valAuthoredActClean":
+    shortId: "VLD-1"
+    uuid: "c80c3491-637b-5fcf-8656-2b53688d3440"
+  "memo_examples_reusable_instrument::valAuthoredActInspect":
+    shortId: "VLD-2"
+    uuid: "efc89b1d-b83d-57af-a74a-e7bb91dbbc56"
+  "memo_examples_reusable_instrument::valAuthoredActSterilizeLoad":
+    shortId: "VLD-3"
+    uuid: "b36ab043-348d-5730-94e8-787207f44a61"
+  "memo_examples_reusable_instrument::wfReprocess":
+    shortId: "WFL-1"
+    uuid: "ea85ad5a-55df-5d56-ba77-7664e7381655"
+  "memo_examples_reusable_instrument::wfReprocess::scNominalCycle":
+    shortId: "OPR-4"
+    uuid: "e75748b1-c68f-539b-9f6d-979f24e61881"
+  "memo_examples_reusable_instrument_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "b4d7433d-8adb-555b-96f3-a8643654c17f"
+  "memo_examples_reusable_instrument_viewpoints_unassigned_views_reusable_instrument_overview::reusableInstrumentOverview":
+    shortId: "MMX-1"
+    uuid: "92a00235-24b4-5ebe-aeab-b5b43cea4eeb"

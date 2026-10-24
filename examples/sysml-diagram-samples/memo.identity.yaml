@@ -1289,3 +1289,132 @@ elements:
   "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_use_case_view::validateTherapySettings":
     shortId: "USE-6"
     uuid: "2503f97a-efc2-5529-b033-c0673d68283f"
+  "diagram_samples::calibrateDetail":
+    shortId: "MMX-49"
+    uuid: "c763920a-f517-52f7-856d-5f30fdc3b608"
+  "diagram_samples::driveOverview":
+    shortId: "MMX-50"
+    uuid: "084a41da-916d-572e-84af-825fdcc661ea"
+  "diagram_samples::gearboxInside":
+    shortId: "MMX-51"
+    uuid: "8b5928a8-013e-5113-8f81-62c0c1bb2b78"
+  "diagram_samples::servicingFlow":
+    shortId: "MMX-52"
+    uuid: "0cab2452-6e1b-5ece-a0b6-aa155f78a51e"
+  "memo_examples_sysml_diagram_samples_system::SysmlDiagramSamplesSystem":
+    shortId: "SYS-18"
+    uuid: "873090b2-adf2-5d1c-a075-04ddaf7e0f65"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::infusionSystem::pPharmacyOut":
+    shortId: "MMX-53"
+    uuid: "f18d0a8d-11ac-5ff2-a60e-d6377e57422a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_context_view::pharmacySystem::pInfusionIn":
+    shortId: "MMX-54"
+    uuid: "4301fa2b-875c-5924-b4e5-f46d477033d9"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillCalibrate":
+    shortId: "SYS-19"
+    uuid: "038a9161-203b-5c6d-9f7b-1b3da859a854"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillCalibrate::adjust":
+    shortId: "SYS-20"
+    uuid: "3bd19a3c-2135-5d0d-bed2-9be32e915783"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillCalibrate::measure":
+    shortId: "SYS-21"
+    uuid: "786119bc-36f3-57ee-bc75-664834ada607"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillController":
+    shortId: "LGC-31"
+    uuid: "847cfaec-e999-5be8-91da-7739b273d03a"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillController::commandIn":
+    shortId: "DTX-30"
+    uuid: "fb90e818-7072-594b-ad00-bed66e1fd8b5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillController::powerOut":
+    shortId: "DTX-31"
+    uuid: "a6ab2550-7adf-51a4-bd66-252a8fd1ae6c"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillDrive":
+    shortId: "LGC-32"
+    uuid: "1a8fdf7d-c0fd-5a6b-ae55-529200ef256e"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillDrive::controller":
+    shortId: "LGC-31:1"
+    uuid: "61cfc409-c304-5248-bf3e-7cff78564224"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillDrive::gearbox":
+    shortId: "LGC-33:1"
+    uuid: "14e722dd-3f4b-5513-8f6a-27a033ee4a0f"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillDrive::motor":
+    shortId: "LGC-36:1"
+    uuid: "9d34e3af-f4d9-593b-b1cf-0fb57bfae287"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox":
+    shortId: "LGC-33"
+    uuid: "fe00a52e-e73f-5b96-a8de-be64cdbbe257"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox::inputStage":
+    shortId: "LGC-34"
+    uuid: "eb47c0de-950a-5f13-bd4d-44c8906174f2"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox::inputStage::torqueIn":
+    shortId: "DTX-32"
+    uuid: "0b6ca4f2-2c2e-5196-9578-eb0df90fdd82"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox::inputStage::torqueOut":
+    shortId: "DTX-33"
+    uuid: "d7342eb8-78b0-54ff-b836-0e6278789346"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox::outputStage":
+    shortId: "LGC-35"
+    uuid: "2a0341ad-0bb0-50dc-b216-20daa2ba7211"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox::outputStage::torqueIn":
+    shortId: "DTX-34"
+    uuid: "f5c10f8e-736a-57d6-9430-3b29e1f18c13"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox::outputStage::torqueOut":
+    shortId: "DTX-35"
+    uuid: "4a076829-27f7-56da-a8a1-b3e19a3d9222"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox::shaftIn":
+    shortId: "DTX-36"
+    uuid: "26602ad7-f0af-5747-bc49-a9916fafb7a5"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillGearbox::shaftOut":
+    shortId: "DTX-37"
+    uuid: "3a4e1dd5-9765-5dc3-bb4a-10df2ca85542"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor":
+    shortId: "LGC-36"
+    uuid: "968b9543-3610-54b5-8392-2aa38daa8fe8"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor::powerIn":
+    shortId: "DTX-38"
+    uuid: "724ef3b0-bca1-53b0-90fa-07916691cb6d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor::rotor":
+    shortId: "LGC-37"
+    uuid: "6f523704-e7f1-5a9b-bd1d-791cde91ced7"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor::rotor::torqueOut":
+    shortId: "DTX-39"
+    uuid: "3ab32ebe-e57a-5801-963f-0572f827a243"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor::stator":
+    shortId: "LGC-38"
+    uuid: "87016c7c-10a9-5c26-bf34-16f6acc99420"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor::stator::powerIn":
+    shortId: "DTX-40"
+    uuid: "e44f3f06-f89b-5f50-bf21-48a346f1bb75"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor::stator::windings":
+    shortId: "LGC-39"
+    uuid: "7354115c-cc2c-58fd-9998-641501bdc751"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor::stator::windings::currentIn":
+    shortId: "DTX-41"
+    uuid: "49efee5f-4ebb-5033-be9d-269481fcc1a3"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillMotor::torqueOut":
+    shortId: "DTX-42"
+    uuid: "fa9ed245-df75-5ca6-92f5-4989eaa64243"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillVerify":
+    shortId: "SYS-22"
+    uuid: "7c28d9b9-57d7-5214-b4ec-e3bc0601ff07"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillVerify::compare":
+    shortId: "SYS-23"
+    uuid: "dddc00ef-5862-59c9-898d-448c0cdf84a4"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::DrillVerify::sign":
+    shortId: "SYS-24"
+    uuid: "0e408930-83e3-5726-89fa-b96a63c2f61d"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::drive":
+    shortId: "LGC-32:1"
+    uuid: "4799afd6-7af2-5c0a-9870-a630e07f7a56"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::servicing":
+    shortId: "SYS-25"
+    uuid: "d361a35b-9886-522f-a199-63fd04da5af3"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::servicing::calibrate":
+    shortId: "SYS-19:1"
+    uuid: "6f1bc5e2-e416-554f-a131-553439abe922"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_drill_down_view::servicing::confirm":
+    shortId: "SYS-22:1"
+    uuid: "4b52250d-1b97-556f-8938-bae4de94181b"
+  "memo_examples_sysml_diagram_samples_viewpoints_unassigned_views_requirements_view::reqHostController":
+    shortId: "LGC-40"
+    uuid: "5b5a7df7-7261-5987-8c81-8c860c4c5b05"

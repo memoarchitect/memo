@@ -1,0 +1,34 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_multidimensional_layers::MultidimensionalLayersSystem":
+    shortId: "SYS-1"
+    uuid: "37aa97aa-ec98-576d-a509-7e9fe6162454"
+  "memo_examples_multidimensional_layers::doseLimitChecker":
+    shortId: "SFT-1"
+    uuid: "b608d29e-5137-5653-8e15-4fc1abb6ac7a"
+  "memo_examples_multidimensional_layers::doseLimitCheckerRuntime":
+    shortId: "SFT-2"
+    uuid: "03a45016-a5b6-5b78-b8dc-ce796a7f5dee"
+  "memo_examples_multidimensional_layers::evAuthoredVcLimitEnforcement":
+    shortId: "MMX-2"
+    uuid: "19a8bb46-d895-52ca-b5f9-0cd45c697e05"
+  "memo_examples_multidimensional_layers::needAuthoredSafeOperation":
+    shortId: "NDX-1"
+    uuid: "3d5c7ed0-5fcf-5913-a554-0a25a4fa55e3"
+  "memo_examples_multidimensional_layers::reqAuthoredDoseLimitChecker":
+    shortId: "REQ-1"
+    uuid: "af9ea2dd-df58-5408-95f5-38eeb8af7450"
+  "memo_examples_multidimensional_layers::vcLimitEnforcement":
+    shortId: "VRF-1"
+    uuid: "a9e63fc1-8e05-5986-86da-7574c28dc6ff"
+  "memo_examples_multidimensional_layers_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "5ee17f92-84f6-5429-a16c-496dc1664cc0"
+  "memo_examples_multidimensional_layers_viewpoints_unassigned_views_multidimensional_layers_overview::multidimensionalLayersOverview":
+    shortId: "MMX-1"
+    uuid: "97a80014-996f-5a46-bdd4-6bd9cf10e53a"

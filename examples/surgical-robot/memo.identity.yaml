@@ -1,0 +1,40 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_surgical_robot::SurgicalRobotSystem":
+    shortId: "SYS-1"
+    uuid: "880f74f7-b534-5873-82e0-79f4e5ebaa6c"
+  "memo_examples_surgical_robot::actJointDrive":
+    shortId: "ACT-1"
+    uuid: "b2d79c0c-64c2-5f66-aefd-85016c11ef79"
+  "memo_examples_surgical_robot::actJointDrive::pDriveOut":
+    shortId: "PHY-1"
+    uuid: "c3ae3c2d-07dc-515d-bca6-abfe697bf107"
+  "memo_examples_surgical_robot::chExchangeInterlock":
+    shortId: "LGC-1"
+    uuid: "5c4a6423-4091-570a-ac94-6c7419ae9fba"
+  "memo_examples_surgical_robot::chMotionMonitor":
+    shortId: "LGC-2"
+    uuid: "0e286cb0-ed3b-58a3-8a09-e99e5d244263"
+  "memo_examples_surgical_robot::chMotionPrimary":
+    shortId: "LGC-3"
+    uuid: "18ef9156-9d83-587c-ac39-68e03c49b38d"
+  "memo_examples_surgical_robot::elHapticGrip":
+    shortId: "OPR-1"
+    uuid: "a581a4f9-0b4c-5e1a-b970-27b8526ad225"
+  "memo_examples_surgical_robot::instrShaft":
+    shortId: "MCH-1"
+    uuid: "74e71c25-ddc1-5a50-8b51-03a3b2eb01b3"
+  "memo_examples_surgical_robot::instrShaft::pDriveIn":
+    shortId: "PHY-2"
+    uuid: "3b1e5ccc-61fc-5b66-98ec-4029fccd98a6"
+  "memo_examples_surgical_robot_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "7c9bbd2c-b684-52fc-a145-3120297a437f"
+  "memo_examples_surgical_robot_viewpoints_unassigned_views_surgical_robot_overview::surgicalRobotOverview":
+    shortId: "MMX-1"
+    uuid: "e32518a0-d91e-507b-af55-8edc625b3b54"
