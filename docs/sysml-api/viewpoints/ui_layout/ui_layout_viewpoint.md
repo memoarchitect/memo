@@ -56,7 +56,7 @@
             @MemoIdentity { :>> shortDescription = "Shows screen captures with the UI element tree laid out over them."; }
             doc /* Frames the user interface spatially: a captured rendering of a screen, and the UIElement tree laid out over it by each element's bounds. Supports IEC 62366-1 use-related design review and the UI description in the software design specification, by making 'which control is this, and what does it do' answerable from the picture. There is one tree, not two — the elements carrying the geometry are the same elements carrying the requirements, functions, use errors, and risk controls. */
             attribute :>> purpose = "Review the interface as the user sees it, with every functional area backed by a design record.";
-            ref :>> stakeholders = (usabilityEngineer, softwareArchitect, safetyEngineer);
+            ref :>> memoStakeholders = (usabilityEngineer, softwareArchitect, safetyEngineer);
             attribute :>> stage = WorkflowStageKind::architecture;
             attribute :>> abstractionLevel = "implementation";
             attribute :>> outputKind = (ViewOutputKind::diagram, ViewOutputKind::documentSection);

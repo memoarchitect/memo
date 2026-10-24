@@ -56,7 +56,7 @@
             @MemoIdentity { :>> shortDescription = "Shows clinical context, users, use environment, and clinical evidence."; }
             doc /* Default viewpoint derived from the context and assurance layers for clinical stakeholders — intended use, patient/clinician interaction, clinical evidence, and clinical safety claims. */
             attribute :>> purpose = "Communicate clinical use context and clinical evidence for the device.";
-            ref :>> stakeholders = (clinicalEngineer, regulatoryEngineer);
+            ref :>> memoStakeholders = (clinicalEngineer, regulatoryEngineer);
             attribute :>> stage = WorkflowStageKind::context;
             attribute :>> abstractionLevel = "clinical";
             attribute :>> outputKind = (ViewOutputKind::documentSection, ViewOutputKind::table);

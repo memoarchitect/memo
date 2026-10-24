@@ -126,18 +126,8 @@ package memo_methodology_core {
         // this binding (`public import memo_extension_ros::*;`), the same way
         // a methodology selects them. There is no list to keep beside it.
         attribute scopeMode : ScopeModeKind;
-        // The submission regimes this model targets, declared once here.
-        // Everything downstream that needs to know which standards apply —
-        // `memo standards check`, the standards checklist, the Architect gap
-        // badges — reads this, so the regime axis is a model fact stated in
-        // SysML rather than a per-document array maintained in 44 places.
-        // Empty means the model has not declared its regimes; a report that
-        // needs them says so rather than assuming a default market.
-        //
-        // DEPRECATED in 0.14.0 (plan O1, O6): a `RegulatedDevice` states its own
-        // jurisdiction, one approval each. This is read only when the model declares
-        // no device, and ignored with a warning when it declares both.
-        attribute regulatoryRegime : RegulatoryRegimeKind[0..*];
+        // The approvals this model targets are `RegulatedDevice` parts (one jurisdiction each), not a setting here:
+        // `memo standards check`, the standards checklist and the Architect gap badges read their jurisdictions.
         part rulePolicy : RulePolicy[0..*];
     }
 

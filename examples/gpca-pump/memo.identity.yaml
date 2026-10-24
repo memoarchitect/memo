@@ -231,8 +231,9 @@ elements:
     shortId: "HRD-11"
     uuid: "cdc8e1c0-e91b-58c1-9feb-2e98b2ee9826"
   "memo_examples_gpca_pump_gpca_architecture::gpcaPump":
-    shortId: "GPC-1"
+    shortId: "SYS-34:1"
     uuid: "f3e6307a-425e-5d88-94ee-94f23ae56420"
+    retired: "GPC-1"
   "memo_examples_gpca_pump_gpca_architecture::gpcaSoftware":
     shortId: "SFT-3"
     uuid: "08bdacae-a613-5b49-8933-89e241f55cbb"
@@ -723,23 +724,29 @@ elements:
     shortId: "ACT-16"
     uuid: "a3c8d1c2-9b05-5f68-9853-3150571a55b0"
   "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::acquireSensors":
-    shortId: "ACT-2"
+    shortId: "FNC-17:1"
     uuid: "ca87ba1e-a66f-5ada-bb20-162099acdc1c"
+    retired: "ACT-2"
   "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::actuateMotor":
-    shortId: "ACT-3"
+    shortId: "FNC-18:1"
     uuid: "7c5e0fbd-2c4a-530e-b1d7-f081e968d97e"
+    retired: "ACT-3"
   "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::computeFlow":
-    shortId: "ACT-8"
+    shortId: "FNC-19:1"
     uuid: "30378bcd-5e3a-5c8b-b3b4-c161dc9e1d05"
+    retired: "ACT-8"
   "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::enforceLimits":
-    shortId: "ACT-13"
+    shortId: "FNC-20:1"
     uuid: "069e53f7-6c9e-5320-8d58-46a100dbbb49"
+    retired: "ACT-13"
   "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::evaluateAlarms":
-    shortId: "ACT-15"
+    shortId: "FNC-21:1"
     uuid: "c614903b-3ee1-53b9-b1eb-3642cdb47490"
+    retired: "ACT-15"
   "memo_examples_gpca_pump_gpca_behavior_actions::infusionDeliveryFlow::logEvent":
-    shortId: "ACT-17"
+    shortId: "FNC-22:1"
     uuid: "7028388e-e31d-51c2-946f-44cf088f5fdd"
+    retired: "ACT-17"
   "memo_examples_gpca_pump_gpca_behavior_actions::logEvent":
     shortId: "ACT-17"
     uuid: "7028388e-e31d-51c2-946f-44cf088f5fdd"
@@ -1103,6 +1110,15 @@ elements:
   "memo_examples_gpca_pump_gpca_cybersecurity::weakServiceAuthentication":
     shortId: "VLN-1"
     uuid: "7b44fb28-8789-581a-b6e3-83a0c71d765a"
+  "memo_examples_gpca_pump_gpca_devices::deviceCe":
+    shortId: "RGL-1"
+    uuid: "00ea4f2b-08fb-526d-ba2f-674395ab19f5"
+  "memo_examples_gpca_pump_gpca_devices::deviceFda":
+    shortId: "RGL-2"
+    uuid: "3068f61b-a8dd-5526-a4a4-83ccd2c21c4a"
+  "memo_examples_gpca_pump_gpca_devices::deviceMdr":
+    shortId: "RGL-3"
+    uuid: "43b2f0bc-e0ff-5498-989d-380465173991"
   "memo_examples_gpca_pump_gpca_formal_behavior::alarmContract":
     shortId: "CNT-1"
     uuid: "be03f501-ae1d-5258-a76e-f460e11ab1ef"

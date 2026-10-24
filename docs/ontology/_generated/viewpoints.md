@@ -63,7 +63,7 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
-| [`MemoConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#memoconcern) *(abstract)* | `concern def` | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses. |
+| [`MemoConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#memoconcern) *(abstract)* | `concern def` | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses.… |
 | [`SafetyConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#safetyconcern) | `concern def` | Safety concern definition specializing `MemoConcern`. |
 | [`UsabilityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#usabilityconcern) | `concern def` | Usability concern definition specializing `MemoConcern`. |
 | [`CybersecurityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#cybersecurityconcern) | `concern def` | Cybersecurity concern definition specializing `MemoConcern`. |
@@ -81,7 +81,7 @@
 | [`Testability`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#testability) | `part def` | Testability definition specializing `MemoQualityAttribute`. |
 | [`Usability`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#usability) | `part def` | Usability definition specializing `MemoQualityAttribute`. |
 | [`Interoperability`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#interoperability) | `part def` | Interoperability definition specializing `MemoQualityAttribute`. |
-| [`MemoStakeholder`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#memostakeholder) *(abstract)* | `part def` | A stakeholder holds concerns. These are the engineering and regulatory roles a viewpoint is written FOR; the clinical actors who operate the device are OperationalParticipants and are a different population. |
+| [`MemoStakeholder`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#memostakeholder) *(abstract)* | `part def` | A stakeholder holds concerns. These are the engineering and regulatory roles a viewpoint is written FOR; the clinical actors who operate the device are OperationalParticipants and are a different population.… |
 | [`SystemArchitect`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#systemarchitect) | `part def` | System architect definition specializing `MemoStakeholder`. |
 | [`SoftwareArchitect`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#softwarearchitect) | `part def` | Software architect definition specializing `MemoStakeholder`. |
 | [`HardwareEngineer`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#hardwareengineer) | `part def` | Hardware engineer definition specializing `MemoStakeholder`. |

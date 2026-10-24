@@ -56,7 +56,7 @@
             @MemoIdentity { :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities."; }
             doc /* Default viewpoint derived from the context, operational, and system layers for how actors use the device — operational scenarios, capabilities, and the functional chains that realize them. */
             attribute :>> purpose = "Communicate how actors interact with the system and which capabilities they invoke.";
-            ref :>> stakeholders = (projectLead, systemArchitect);
+            ref :>> memoStakeholders = (projectLead, systemArchitect);
             attribute :>> stage = WorkflowStageKind::context;
             attribute :>> abstractionLevel = "operational";
             attribute :>> outputKind = (ViewOutputKind::diagram);

@@ -56,7 +56,7 @@
             @MemoIdentity { :>> shortDescription = "Shows actors, use context, and system boundary."; }
             doc /* Default viewpoint derived from the context layer to communicate who interacts with the device, under which use conditions, and where trust or safety boundaries exist. */
             attribute :>> purpose = "Communicate operational context and boundaries.";
-            ref :>> stakeholders = (systemArchitect);
+            ref :>> memoStakeholders = (systemArchitect);
             attribute :>> stage = WorkflowStageKind::context;
             attribute :>> abstractionLevel = "system";
             attribute :>> outputKind = (ViewOutputKind::diagram);

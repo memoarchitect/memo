@@ -28,7 +28,7 @@ It replaces a hand-maintained conformance matrix. The difference that matters is
 
 A **Gap** is not a defect in the model. Coverage is profile-dependent — that is why it is a report and not a consistency rule, and why `memo_rules_coverage` is deliberately empty. A gap says the project has not claimed that clause *yet*, which is the normal state of a project in flight.
 
-**Scope.** The clauses below are those of the standards the project's `regulatoryRegime` declaration pulls in. Method and reference standards that no regime mandates — the FMEA method, the architecture-description standard — are listed separately in §4; their clauses are claimable but not required, so they have no gap count.
+**Scope.** The clauses below are those of the standards the project's regulated devices (their jurisdictions) pull in. Method and reference standards that no regime mandates — the FMEA method, the architecture-description standard — are listed separately in §4; their clauses are claimable but not required, so they have no gap count.
 
 `memo validate --standards` prints the same numbers at the command line, from the same computation.
 
@@ -38,7 +38,7 @@ A **Gap** is not a defect in the model. Coverage is profile-dependent — that i
 
 ```memo-standards
 display: summary
-empty: "No standards are in scope. Declare `regulatoryRegime` on the model's ModelMethodBinding."
+empty: "No standards are in scope. Declare a `RegulatedDevice` with a jurisdiction."
 ```
 
 ---

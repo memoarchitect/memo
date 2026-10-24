@@ -30,7 +30,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`MemoConcern`](#memoconcern) | `concern def` | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses. | — |
+| [`MemoConcern`](#memoconcern) | `concern def` | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses.… | — |
 | [`SafetyConcern`](#safetyconcern) | `concern def` | Safety concern definition specializing `MemoConcern`. | `MemoConcern` |
 | [`UsabilityConcern`](#usabilityconcern) | `concern def` | Usability concern definition specializing `MemoConcern`. | `MemoConcern` |
 | [`CybersecurityConcern`](#cybersecurityconcern) | `concern def` | Cybersecurity concern definition specializing `MemoConcern`. | `MemoConcern` |
@@ -48,7 +48,7 @@
 | [`Testability`](#testability) | `part def` | Testability definition specializing `MemoQualityAttribute`. | `MemoQualityAttribute` |
 | [`Usability`](#usability) | `part def` | Usability definition specializing `MemoQualityAttribute`. | `MemoQualityAttribute` |
 | [`Interoperability`](#interoperability) | `part def` | Interoperability definition specializing `MemoQualityAttribute`. | `MemoQualityAttribute` |
-| [`MemoStakeholder`](#memostakeholder) | `part def` | A stakeholder holds concerns. These are the engineering and regulatory roles a viewpoint is written FOR; the clinical actors who operate the device are OperationalParticipants and are a different population. | `MemoPart` |
+| [`MemoStakeholder`](#memostakeholder) | `part def` | A stakeholder holds concerns. These are the engineering and regulatory roles a viewpoint is written FOR; the clinical actors who operate the device are OperationalParticipants and are a different population.… | `Parts::Part` |
 | [`SystemArchitect`](#systemarchitect) | `part def` | System architect definition specializing `MemoStakeholder`. | `MemoStakeholder` |
 | [`SoftwareArchitect`](#softwarearchitect) | `part def` | Software architect definition specializing `MemoStakeholder`. | `MemoStakeholder` |
 | [`HardwareEngineer`](#hardwareengineer) | `part def` | Hardware engineer definition specializing `MemoStakeholder`. | `MemoStakeholder` |
@@ -69,7 +69,7 @@ abstract concern def MemoConcern
 
 | Property | Value |
 | --- | --- |
-| Description | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses. |
+| Description | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses.… |
 | Kind | `concern def` |
 | Abstract | Yes |
 | Specializes | — |
@@ -334,15 +334,15 @@ part def Interoperability :> MemoQualityAttribute
 ## MemoStakeholder
 
 ```sysml
-abstract part def MemoStakeholder :> MemoPart
+abstract part def MemoStakeholder :> Parts::Part
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | A stakeholder holds concerns. These are the engineering and regulatory roles a viewpoint is written FOR; the clinical actors who operate the device are OperationalParticipants and are a different population. |
+| Description | A stakeholder holds concerns. These are the engineering and regulatory roles a viewpoint is written FOR; the clinical actors who operate the device are OperationalParticipants and are a different population.… |
 | Kind | `part def` |
 | Abstract | Yes |
-| Specializes | `MemoPart` |
+| Specializes | `Parts::Part` |
 | Owning package | `memo_viewpoints_stakeholders_concerns` |
 
 
@@ -544,7 +544,12 @@ part def UsabilityEngineer :> MemoStakeholder
         // A concern is an interest in the system held by one or more stakeholders.
         // `concern def` is the native SysML construct for it; a viewpoint frames
         // the concerns it addresses.
-        abstract concern def MemoConcern;
+        //
+        // It extends the standard concern's `stakeholders` (the Parts interested in
+        // it) to the MEMO stakeholder catalog, as a viewpoint does for its own.
+        abstract concern def MemoConcern {
+            ref memoStakeholders :>> stakeholders : MemoStakeholder[0..*];
+        }
 
         concern def SafetyConcern :> MemoConcern {
             @MemoIdentity { :>> providedId = "CNC-1"; }
@@ -654,7 +659,13 @@ part def UsabilityEngineer :> MemoStakeholder
         // A stakeholder holds concerns. These are the engineering and regulatory
         // roles a viewpoint is written FOR; the clinical actors who operate the
         // device are OperationalParticipants and are a different population.
-        abstract part def MemoStakeholder :> MemoPart;
+        //
+        // SysML v2 has no stakeholder definition to specialize: a stakeholder is a
+        // `Part` that a concern or viewpoint lists in `RequirementCheck::stakeholders`
+        // (declared with a `stakeholder` member). So the catalog is standard parts,
+        // not `MemoPart`s — MemoPart's lifecycle and dimension attributes describe
+        // model elements, not the people a viewpoint is written for.
+        abstract part def MemoStakeholder :> Parts::Part;
 
         part def SystemArchitect :> MemoStakeholder {
             @MemoIdentity { :>> providedId = "STK-1"; :>> label = "System Architect"; }
@@ -692,7 +703,7 @@ part def UsabilityEngineer :> MemoStakeholder
 
         // ─── The catalog, as usages ─────────────────────────────────────────
         //
-        // A viewpoint's `stakeholders` and `framedConcerns`, and a quality
+        // A viewpoint's `memoStakeholders` and `framedConcerns`, and a quality
         // attribute's `addressesConcerns`, are features. What a feature is bound to
         // has to be a feature as well, not a definition, so each concern and each
         // stakeholder above has exactly one usage for those bindings to name.
