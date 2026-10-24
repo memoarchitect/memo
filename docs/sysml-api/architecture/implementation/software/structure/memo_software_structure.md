@@ -299,7 +299,6 @@ connection def DependsOnSoup :> MemoRelationship
         }
 
         part def SoftwareSystem specializes SoftwareElement {
-            attribute version : String;
             attribute operatingSystem : String;
         }
 

@@ -12,7 +12,7 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
         @MemoIdentity { :>> providedId = "DOC-004"; :>> label = "SoftwareDesignDescriptionView"; }
         @MemoIdentity { :>> shortDescription = "IEC 62304 software design description for the GPCA software system."; }
         doc /* Aggregates the software system, its six components with safety classes and scheduling attributes, mode machine and transitions, interfaces, and function allocations for the SDD. */
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::SDD;
         attribute :>> generationRule = "Include software structure, behavior machine with transitions, software interfaces, allocations, and timing constraints";

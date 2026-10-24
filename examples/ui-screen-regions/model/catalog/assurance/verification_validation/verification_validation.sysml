@@ -33,7 +33,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
     part evRateChange : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "UIR-EV-001"; :>> label = "RateChangeConfirmationTestRecord"; }
-        attribute :>> version = "planned";
+        attribute :>> version = "0.1.0";
         attribute :>> evidenceType = "test record";
         attribute :>> integrityStatus = "planned";
     }
@@ -50,7 +50,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
     part evDrugLibrarySelection : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-002"; :>> label = "DrugLibrarySelectionTestRecord"; }
-        attribute :>> version = "planned";
+        attribute :>> version = "0.1.0";
         attribute :>> evidenceType = "test record";
         attribute :>> integrityStatus = "planned";
     }
@@ -68,7 +68,7 @@ package memo_examples_ui_screen_regions_assurance_verification_validation {
     part evInfusionStatusContent : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
         @MemoIdentity { :>> providedId = "EVD-003"; :>> label = "InfusionStatusDisplayTestRecord"; }
-        attribute :>> version = "planned";
+        attribute :>> version = "0.1.0";
         attribute :>> evidenceType = "test record";
         attribute :>> integrityStatus = "planned";
     }

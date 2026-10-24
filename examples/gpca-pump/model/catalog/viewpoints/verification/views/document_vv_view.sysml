@@ -14,7 +14,7 @@ package memo_examples_gpca_pump_viewpoints_verification_views_document_vv_view {
         @MemoIdentity { :>> providedId = "DOC-006"; :>> label = "VerificationValidationView"; }
         @MemoIdentity { :>> shortDescription = "V&V plan and coverage for requirements and risk controls."; }
         doc /* Aggregates verification cases, validation cases, test artifacts, and evidence with their coverage of requirements, risk controls, behavior properties, and timing constraints. */
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::VV;
         attribute :>> generationRule = "Include all VerifiedBy, Validates, and ProducesEvidence chains with status";

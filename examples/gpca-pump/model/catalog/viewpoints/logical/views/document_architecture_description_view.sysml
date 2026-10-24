@@ -14,7 +14,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_d
         @MemoIdentity { :>> providedId = "DOC-005"; :>> label = "ArchitectureDescriptionView"; }
         @MemoIdentity { :>> shortDescription = "ISO/IEC/IEEE 42010 architecture description across all layers."; }
         doc /* Aggregates context, operational, functional, logical, software, and physical layers with their views and correspondences for the system architecture description. */
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::architectureDescription;
         attribute :>> generationRule = "Include all architecture layers, functional chains, interfaces, and the physical BOM with cross-layer allocations";

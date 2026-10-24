@@ -14,7 +14,7 @@ package memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index
         @MemoIdentity { :>> providedId = "DOC-007"; :>> label = "DesignHistoryFileIndexView"; }
         @MemoIdentity { :>> shortDescription = "Index of design inputs, outputs, reviews, and V&V records for the DHF."; }
         doc /* Collects the document-backed views (requirements, architecture, SDD, RMF, VV, usability, cybersecurity) into the design history file index required by 21 CFR 820.30(j). */
-        attribute :>> version = "0.1";
+        attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
         attribute :>> viewKind = DocumentViewKind::DHF;
         attribute :>> generationRule = "Index every document-backed view with version and lifecycle state";

@@ -29,7 +29,6 @@ package memo_examples_software_only_medical_device {
     part swScreeningApp : SoftwareSystem {
         @MemoIdentity { :>> providedId = "SMD-SW-001"; :>> label = "ScreeningApplication"; }
         attribute :>> safetyClass = SafetyClassKind::B;
-        attribute :>> version = "1.4.0";
     }
     part algGrading : Algorithm {
         @MemoIdentity { :>> providedId = "SMD-ALG-001"; :>> label = "RetinopathyGradingModel"; }
