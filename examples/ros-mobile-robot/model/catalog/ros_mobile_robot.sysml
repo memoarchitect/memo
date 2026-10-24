@@ -1,4 +1,5 @@
 // Focused example: a ROS 2 mobile logistics robot, modelled with the ROS
+    private import memo_assurance_verification_validation::*;
 // extension. The point of the example is the MECHANISM, not the robot — it
 // demonstrates how an extension is used, and it is deliberately the only place
 // ROS vocabulary appears outside `extensions/ros`.
@@ -218,24 +219,30 @@ package memo_examples_ros_mobile_robot {
     // ── Native topic, service, and action interfaces ───────────────────
     interface scanToNavigation : RosTopicInterface
         connect nodeLidar.scanPublisher to nodeNavigation.scanSubscriber {
+            attribute :>> direction = DirectionKind::output;
         }
     interface scanToSafety : RosTopicInterface
         connect nodeLidar.scanPublisher to nodeSafetyMonitor.scanSubscriber {
+            attribute :>> direction = DirectionKind::output;
         }
     interface cmdVelToSafety : RosTopicInterface
         connect nodeNavigation.cmdVelPublisher to nodeSafetyMonitor.cmdVelSubscriber {
+            attribute :>> direction = DirectionKind::output;
         }
     interface estopToNavigation : RosTopicInterface
         connect nodeSafetyMonitor.estopPublisher to nodeNavigation.estopSubscriber {
+            attribute :>> direction = DirectionKind::output;
         }
 
 
     interface setModeService : RosServiceInterface
         connect nodeNavigation.setModeClient to nodeSafetyMonitor.setModeServer {
+            attribute :>> direction = DirectionKind::inputOutput;
             attribute :>> timeoutMs = 500.0;
         }
     interface navigateAction : RosActionInterface
         connect nodeSafetyMonitor.navigateActionClient to nodeNavigation.navigateActionServer {
+            attribute :>> direction = DirectionKind::inputOutput;
         }
 
     // ── Deployment: base relations, unchanged ───────────────────────────
@@ -295,4 +302,11 @@ package memo_examples_ros_mobile_robot {
         attribute :>> rosDomainId = 42;
     }
     connection : ProvidesEnvironment connect node ::> nodeComputeUnit to environment ::> rosRuntime;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification vcAuthoredSwSafety : VerificationCase {
+        @MemoIdentity { :>> providedId = "RMR-VC-A01"; :>> label = "VerifySafetyMonitor"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "unit, integration and system tests of 'SafetyMonitor' with the coverage IEC 62304 requires for software safety class C";
+        subject verified : Base::Anything[*] = (swSafety);
+    }
 }

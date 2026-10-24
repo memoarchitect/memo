@@ -1,4 +1,5 @@
 // Focused example: the realization graph across perspectives.
+    private import memo_assurance_verification_validation::*;
 // One function is allocated to a logical component and realized by BOTH a
 // software module and a mechanical part — realization is a many-to-many
 // graph, and no layer is a mandatory pipeline stage.
@@ -52,4 +53,26 @@ package memo_examples_functional_logical_physical {
     }
     #refinement dependency swPressureSupervisor to lcPressureProtection;
     #refinement dependency mechReliefValve to lcPressureProtection;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification vcAuthoredSwPressureSupervisor : VerificationCase {
+        @MemoIdentity { :>> providedId = "FLP-VC-A01"; :>> label = "VerifyPressureSupervisor"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "unit, integration and system tests of 'PressureSupervisor' with the coverage IEC 62304 requires for software safety class C";
+        subject verified : Base::Anything[*] = (swPressureSupervisor);
+    }
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification vcAuthoredFnLimitLinePressure : VerificationCase {
+        @MemoIdentity { :>> providedId = "FLP-VC-A02"; :>> label = "VerifyLimitLinePressure"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "'LimitLinePressure' meets its specified behaviour across its range, including the fault cases";
+        subject verified : Base::Anything[*] = (fnLimitLinePressure);
+    }
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredActOcclusionResponse : ValidationCase {
+        @MemoIdentity { :>> providedId = "FLP-VC-A03"; :>> label = "VerifyRespondToLineOcclusion"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'RespondToLineOcclusion' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actOcclusionResponse to validationCase ::> valAuthoredActOcclusionResponse;
 }

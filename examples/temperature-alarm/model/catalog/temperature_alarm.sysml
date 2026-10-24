@@ -171,4 +171,19 @@ package memo_examples_temperature_alarm {
     connection : ProducesEvidence connect producer ::> valAckTask to producedEvidence ::> uvAckTask;
     connection : ProducesEvidence connect producer ::> vcAlarmLatency to producedEvidence ::> evLatencyReport;
     // --8<-- [end:verification-validation]
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification vcAuthoredRcReAnnunciate : VerificationCase {
+        @MemoIdentity { :>> providedId = "TA-VC-A01"; :>> label = "VerifyAutoReAnnunciationAfterSilence"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "'AutoReAnnunciationAfterSilence' is shown to reduce the risk it controls, per ISO 14971 clause 7.2";
+        subject verified : Base::Anything[*] = (rcReAnnunciate);
+    }
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredActAcknowledgeAlarm : ValidationCase {
+        @MemoIdentity { :>> providedId = "TA-VC-A02"; :>> label = "VerifyReviewAndAcknowledgeAlarm"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'ReviewAndAcknowledgeAlarm' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actAcknowledgeAlarm to validationCase ::> valAuthoredActAcknowledgeAlarm;
 }

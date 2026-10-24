@@ -1,4 +1,5 @@
 // Focused example: embedded programmable device — the three software views
+    private import memo_assurance_verification_validation::*;
 // (module / runtime / deployment) on a minimal infusion pump.
 // SoftwareElement buildsInto SoftwareDeploymentUnit deploysTo ProcessingNode;
 // SoftwareComponent hostedBy ProcessingNode with scheduling properties.
@@ -70,4 +71,18 @@ package memo_examples_embedded_infusion_pump {
     }
     allocation : HostedBy allocate rtControlLoop to mcuSafety;
     connection : ProvidesEnvironment connect node ::> mcuSafety to environment ::> rteBareMetal;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification vcAuthoredSwInfusionControl : VerificationCase {
+        @MemoIdentity { :>> providedId = "EIP-VC-A01"; :>> label = "VerifyInfusionControlItem"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "unit, integration and system tests of 'InfusionControlItem' with the coverage IEC 62304 requires for software safety class C";
+        subject verified : Base::Anything[*] = (swInfusionControl);
+    }
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification vcAuthoredSwMotorDriver : VerificationCase {
+        @MemoIdentity { :>> providedId = "EIP-VC-A02"; :>> label = "VerifyMotorDriverUnit"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "unit, integration and system tests of 'MotorDriverUnit' with the coverage IEC 62304 requires for software safety class C";
+        subject verified : Base::Anything[*] = (swMotorDriver);
+    }
 }

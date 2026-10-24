@@ -1,4 +1,5 @@
 // Illustrative operational model of laparoscopic sleeve gastrectomy. This is
+    private import memo_assurance_verification_validation::*;
 // a modelling example, not a clinical protocol. It shows a complete procedure
 // as context → use case → workflow → scenarios → scenario-owned activities.
 package memo_examples_surgical_closure_workflow {
@@ -138,4 +139,28 @@ package memo_examples_surgical_closure_workflow {
 
     // Whose need it is (CR-MED-024). The surgeon's profile is on the User.
     connection heldResection : HeldBy connect need ::> needControlledGastricResection to holder ::> bariatricSurgeon;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredActSizeAndCreateSleeve : ValidationCase {
+        @MemoIdentity { :>> providedId = "SCW-VC-A01"; :>> label = "VerifySizeAndCreateSleeve"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'SizeAndCreateSleeve' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actSizeAndCreateSleeve to validationCase ::> valAuthoredActSizeAndCreateSleeve;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredActAssessStapleLine : ValidationCase {
+        @MemoIdentity { :>> providedId = "SCW-VC-A02"; :>> label = "VerifyAssessStapleLine"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'AssessStapleLine' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actAssessStapleLine to validationCase ::> valAuthoredActAssessStapleLine;
+    // Illustrative: authored for this example, not the record of a real evaluation.
+    verification valAuthoredTaskCreateStapleLine : ValidationCase {
+        @MemoIdentity { :>> providedId = "LSG-VC-A01"; :>> label = "VerifyCreateAndInspectStapleLine"; }
+        attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
+        attribute :>> userParticipation = "representative users, simulated use conditions";
+        attribute :>> acceptanceCriteria = "a representative user completes 'CreateAndInspectStapleLine' without a use error, in a summative evaluation per IEC 62366-1";
+    }
+    connection : Validates connect validationTarget ::> actSizeAndCreateSleeve.taskCreateStapleLine to validationCase ::> valAuthoredTaskCreateStapleLine;
 }

@@ -39,6 +39,7 @@ package memo_examples_surgical_robot {
 
     part actJointDrive : Actuator {
         @MemoIdentity { :>> providedId = "SR-HW-001"; :>> label = "JointDriveActuator"; }
+        attribute :>> patientContact = false;
         attribute :>> actuationKind = "brushless DC servo with harmonic drive";
         out port pDriveOut : PhysicalPort;
     }
@@ -61,6 +62,7 @@ package memo_examples_surgical_robot {
     // rather than a UIElement — UIElement is software.
     part elHapticGrip : OperatorInterfaceElement {
         @MemoIdentity { :>> providedId = "SR-UI-001"; :>> label = "HapticMasterGrip"; }
+        attribute :>> patientContact = false;
         attribute :>> formKind = OperatorInterfaceFormKind::hapticIndicator;
         attribute :>> guardedAgainstInadvertentActuation = true;
     }
