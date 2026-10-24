@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `memo_core_stdlib_quantities::*` |
 | private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
@@ -192,6 +193,7 @@ action def FunctionalFlow specializes MemoAction
     // Both had part-typed ends until A0; both are metaclass-neutral now, which is
     // precisely what makes an action-def function usable at all.
     package memo_architecture_functional_functions {
+        private import memo_core_stdlib_quantities::*;
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
 
@@ -231,8 +233,8 @@ action def FunctionalFlow specializes MemoAction
         //     }
         abstract flow def FunctionalExchange {
             attribute flowKind : FlowKind;
-            attribute latencyBudgetMs : Real;
-            attribute staleAfterMs : Real;
+            attribute latencyBudgetMs : DurationValue;
+            attribute staleAfterMs : DurationValue;
             attribute integrityLevel : String;
         }
 
@@ -254,7 +256,7 @@ action def FunctionalFlow specializes MemoAction
         // has not been allowed to say so.
         action def FunctionalFlow specializes MemoAction {
             attribute flowCategory : FunctionalFlowKind;
-            attribute endToEndLatencyBudgetMs : String;
+            attribute endToEndLatencyBudgetMs : DurationValue;
             attribute safetyRelevant : Boolean;
             attribute securityRelevant : Boolean;
         }

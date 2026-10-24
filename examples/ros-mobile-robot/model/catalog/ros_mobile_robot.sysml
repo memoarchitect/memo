@@ -1,4 +1,5 @@
 // Focused example: a ROS 2 mobile logistics robot, modelled with the ROS
+    private import memo_core_stdlib_quantities::*;
     private import memo_assurance_requirements_needs::*;
     private import memo_core_dimensions::*;
     private import memo_assurance_requirements::*;
@@ -95,17 +96,17 @@ package memo_examples_ros_mobile_robot {
         attribute :>> nodeNamespace = "/robot/perception";
         attribute :>> lifecycleManaged = true;
         attribute :>> executorModel = "single-threaded executor, composed";
-        attribute :>> periodMs = 50.0;
-        attribute :>> wcetMs = 8.0;
+        attribute :>> periodMs = 50 [milli*s];
+        attribute :>> wcetMs = 8 [milli*s];
         attribute :>> safetyClass = SafetyClassKind::B;
         out port scanPublisher : RosPublisher {
             ref :>> topic = topicScan;
             attribute :>> deliverySemantics = MessagingDeliveryKind::atMostOnce;
-            attribute :>> publishRateHz = 20.0;
+            attribute :>> publishRateHz = 20 [Hz];
             attribute :>> offeredQos {
                 attribute :>> durability = RosDurabilityKind::volatile;
-                attribute :>> deadlineMs = 60.0;
-                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> deadlineMs = 60 [milli*s];
+                attribute :>> livelinessLeaseMs = 200 [milli*s];
                 attribute :>> historyDepth = 5;
             }
         }
@@ -116,8 +117,8 @@ package memo_examples_ros_mobile_robot {
         attribute :>> nodeNamespace = "/robot/navigation";
         attribute :>> lifecycleManaged = true;
         attribute :>> executorModel = "multi-threaded executor, composed";
-        attribute :>> periodMs = 100.0;
-        attribute :>> wcetMs = 35.0;
+        attribute :>> periodMs = 100 [milli*s];
+        attribute :>> wcetMs = 35 [milli*s];
         attribute :>> safetyClass = SafetyClassKind::B;
         in port scanSubscriber : RosSubscriber {
             ref :>> topic = topicScan;
@@ -125,19 +126,19 @@ package memo_examples_ros_mobile_robot {
             attribute :>> lossBehaviour = "hold the last costmap for 200 ms, then command zero velocity";
             attribute :>> requestedQos {
                 attribute :>> durability = RosDurabilityKind::volatile;
-                attribute :>> deadlineMs = 60.0;
-                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> deadlineMs = 60 [milli*s];
+                attribute :>> livelinessLeaseMs = 200 [milli*s];
                 attribute :>> historyDepth = 5;
             }
         }
         out port cmdVelPublisher : RosPublisher {
             ref :>> topic = topicCmdVel;
             attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
-            attribute :>> publishRateHz = 10.0;
+            attribute :>> publishRateHz = 10 [Hz];
             attribute :>> offeredQos {
                 attribute :>> durability = RosDurabilityKind::volatile;
-                attribute :>> deadlineMs = 150.0;
-                attribute :>> livelinessLeaseMs = 300.0;
+                attribute :>> deadlineMs = 150 [milli*s];
+                attribute :>> livelinessLeaseMs = 300 [milli*s];
                 attribute :>> historyDepth = 1;
             }
         }
@@ -147,8 +148,8 @@ package memo_examples_ros_mobile_robot {
             attribute :>> lossBehaviour = "no publisher within the liveliness lease is treated as stop asserted";
             attribute :>> requestedQos {
                 attribute :>> durability = RosDurabilityKind::transientLocal;
-                attribute :>> deadlineMs = 100.0;
-                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> deadlineMs = 100 [milli*s];
+                attribute :>> livelinessLeaseMs = 200 [milli*s];
                 attribute :>> historyDepth = 1;
             }
         }
@@ -165,9 +166,9 @@ package memo_examples_ros_mobile_robot {
         attribute :>> nodeNamespace = "/robot/safety";
         attribute :>> lifecycleManaged = false;
         attribute :>> executorModel = "own process, real-time priority";
-        attribute :>> periodMs = 20.0;
-        attribute :>> deadlineMs = 20.0;
-        attribute :>> wcetMs = 3.0;
+        attribute :>> periodMs = 20 [milli*s];
+        attribute :>> deadlineMs = 20 [milli*s];
+        attribute :>> wcetMs = 3 [milli*s];
         attribute :>> priority = 90;
         attribute :>> safetyClass = SafetyClassKind::C;
         attribute :>> faultContainment = "separate process; watchdog-fed; stops the base on its own timeout";
@@ -177,8 +178,8 @@ package memo_examples_ros_mobile_robot {
             attribute :>> lossBehaviour = "two consecutive misses assert the stop";
             attribute :>> requestedQos {
                 attribute :>> durability = RosDurabilityKind::volatile;
-                attribute :>> deadlineMs = 60.0;
-                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> deadlineMs = 60 [milli*s];
+                attribute :>> livelinessLeaseMs = 200 [milli*s];
                 attribute :>> historyDepth = 5;
             }
         }
@@ -188,19 +189,19 @@ package memo_examples_ros_mobile_robot {
             attribute :>> lossBehaviour = "missing velocity commands assert the stop";
             attribute :>> requestedQos {
                 attribute :>> durability = RosDurabilityKind::volatile;
-                attribute :>> deadlineMs = 150.0;
-                attribute :>> livelinessLeaseMs = 300.0;
+                attribute :>> deadlineMs = 150 [milli*s];
+                attribute :>> livelinessLeaseMs = 300 [milli*s];
                 attribute :>> historyDepth = 1;
             }
         }
         out port estopPublisher : RosPublisher {
             ref :>> topic = topicEstop;
             attribute :>> deliverySemantics = MessagingDeliveryKind::atLeastOnce;
-            attribute :>> publishRateHz = 50.0;
+            attribute :>> publishRateHz = 50 [Hz];
             attribute :>> offeredQos {
                 attribute :>> durability = RosDurabilityKind::transientLocal;
-                attribute :>> deadlineMs = 100.0;
-                attribute :>> livelinessLeaseMs = 200.0;
+                attribute :>> deadlineMs = 100 [milli*s];
+                attribute :>> livelinessLeaseMs = 200 [milli*s];
                 attribute :>> historyDepth = 1;
             }
         }
@@ -241,7 +242,7 @@ package memo_examples_ros_mobile_robot {
     interface setModeService : RosServiceInterface
         connect nodeNavigation.setModeClient to nodeSafetyMonitor.setModeServer {
             attribute :>> direction = DirectionKind::inputOutput;
-            attribute :>> timeoutMs = 500.0;
+            attribute :>> timeoutMs = 500 [milli*s];
         }
     interface navigateAction : RosActionInterface
         connect nodeSafetyMonitor.navigateActionClient to nodeNavigation.navigateActionServer {
@@ -279,7 +280,7 @@ package memo_examples_ros_mobile_robot {
         @MemoIdentity { :>> providedId = "RMR-HW-001"; :>> label = "OnboardComputeUnit"; }
         attribute :>> nodeKind = ProcessingNodeKind::SoC;
         attribute :>> processorArchitecture = "arm64, 8 core";
-        attribute :>> memoryMB = "16384";
+        attribute :>> memoryMB = 16384 [mega*B];
         attribute :>> operatingSystem = "Linux with PREEMPT_RT";
         attribute :>> supportsContainerization = true;
         attribute :>> realTimeCapable = true;

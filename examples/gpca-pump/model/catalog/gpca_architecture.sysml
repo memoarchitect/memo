@@ -1,4 +1,5 @@
 package memo_examples_gpca_pump_gpca_architecture {
+    private import memo_core_stdlib_quantities::*;
     private import memo_examples_gpca_pump_gpca_requirements::*;
     private import ScalarValues::*;
 
@@ -311,7 +312,7 @@ package memo_examples_gpca_pump_gpca_architecture {
         attribute :>> responsibility = "Ultrasonic detection of air bubbles in the delivery tubing.";
         attribute :>> safetyRole = "detects air embolism precursor; feeds High-priority Air embolism notification";
         attribute :>> partNumber = "GPCA-SNS-AIR";
-        attribute :>> mtbfHours = "150000";
+        attribute :>> mtbfHours = 150000 [hour];
     }
     part occlusionSensor : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-007"; :>> label = "OcclusionPressureSensor"; }
@@ -319,28 +320,28 @@ package memo_examples_gpca_pump_gpca_architecture {
         attribute :>> responsibility = "Measures downstream line pressure to detect occlusion.";
         attribute :>> safetyRole = "detects blocked line (under-infusion, post-occlusion bolus)";
         attribute :>> partNumber = "GPCA-SNS-OCC";
-        attribute :>> mtbfHours = "150000";
+        attribute :>> mtbfHours = 150000 [hour];
     }
     part reservoirSensor : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-008"; :>> label = "ReservoirVolumeSensor"; }
         attribute :>> responsibility = "Reports remaining reservoir volume and empty condition.";
         attribute :>> safetyRole = "prevents dry pumping and undetected therapy interruption";
         attribute :>> partNumber = "GPCA-SNS-RSV";
-        attribute :>> mtbfHours = "120000";
+        attribute :>> mtbfHours = 120000 [hour];
     }
     part doorSensor : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-009"; :>> label = "DoorLatchSensor"; }
         attribute :>> responsibility = "Detects open reservoir door / unlatched pumping chamber.";
         attribute :>> safetyRole = "prevents free flow and tampering with the fluid path";
         attribute :>> partNumber = "GPCA-SNS-DOR";
-        attribute :>> mtbfHours = "200000";
+        attribute :>> mtbfHours = 200000 [hour];
     }
     part flowSensor : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-010"; :>> label = "DeliveryFlowSensor"; }
         attribute :>> responsibility = "Independent measurement of delivered flow for cross-check against commanded flow.";
         attribute :>> safetyRole = "detects over/under-infusion independent of motor control";
         attribute :>> partNumber = "GPCA-SNS-FLW";
-        attribute :>> mtbfHours = "100000";
+        attribute :>> mtbfHours = 100000 [hour];
     }
     part bolusButton : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-011"; :>> label = "PatientBolusButton"; }
@@ -348,7 +349,7 @@ package memo_examples_gpca_pump_gpca_architecture {
         attribute :>> responsibility = "Debounced patient pendant switch for bolus requests.";
         attribute :>> safetyRole = "sole patient input; stuck-button detection required";
         attribute :>> partNumber = "GPCA-INP-BOL";
-        attribute :>> mtbfHours = "80000";
+        attribute :>> mtbfHours = 80000 [hour];
     }
     part operatorKeypad : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-012"; }
@@ -365,7 +366,7 @@ package memo_examples_gpca_pump_gpca_architecture {
         attribute :>> responsibility = "Peristaltic pump mechanism and stepper motor driving drug delivery.";
         attribute :>> safetyRole = "single point of drug delivery; rotation monitored by flow sensor";
         attribute :>> partNumber = "GPCA-ACT-PMP";
-        attribute :>> mtbfHours = "60000";
+        attribute :>> mtbfHours = 60000 [hour];
     }
     part antiFreeFlowValve : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-013"; }
@@ -393,14 +394,14 @@ package memo_examples_gpca_pump_gpca_architecture {
         attribute :>> responsibility = "Hosts the microcontroller, memory, and hardware watchdog executing the GPCA software.";
         attribute :>> safetyRole = "computing platform; watchdog forces safe state on CPU hang";
         attribute :>> partNumber = "GPCA-PCB-MAIN";
-        attribute :>> mtbfHours = "250000";
+        attribute :>> mtbfHours = 250000 [hour];
     }
     part batteryPack : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-015"; }
         attribute :>> responsibility = "Rechargeable backup battery sustaining at least 4 hours of therapy.";
         attribute :>> safetyRole = "keeps therapy and alarms alive during mains loss";
         attribute :>> partNumber = "GPCA-PWR-BAT";
-        attribute :>> mtbfHours = "20000";
+        attribute :>> mtbfHours = 20000 [hour];
     }
     part powerSupply : HardwareAssembly {
         @MemoIdentity { :>> providedId = "HW-016"; :>> label = "MainsPowerSupply"; }

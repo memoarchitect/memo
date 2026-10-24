@@ -1,4 +1,5 @@
 package memo_examples_gpca_pump_gpca_behavior_modes {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_architecture_functional_behavior::*;
@@ -384,8 +385,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     requirement tcAlarmLatency : TimingConstraint {
         @MemoIdentity { :>> providedId = "TC-001"; :>> label = "AlarmToSafeStateLatency"; }
         attribute :>> constraintKind = TimingConstraintKind::latency;
-        attribute :>> minMs = "0";
-        attribute :>> maxMs = "20";
+        attribute :>> minMs = 0 [milli*s];
+        attribute :>> maxMs = 20 [milli*s];
         ref :>> referenceElement = fcAlarmStop;
         attribute :>> verificationMethod = MemoVerificationMethodKind::modelChecking;
         @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; the source specifies synchronous same-step (immediate) semantics with no timing figures"; }
@@ -393,8 +394,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     requirement tcBolusResponse : TimingConstraint {
         @MemoIdentity { :>> providedId = "TC-002"; :>> label = "BolusRequestResponseLatency"; }
         attribute :>> constraintKind = TimingConstraintKind::latency;
-        attribute :>> minMs = "0";
-        attribute :>> maxMs = "100";
+        attribute :>> minMs = 0 [milli*s];
+        attribute :>> maxMs = 100 [milli*s];
         ref :>> referenceElement = fcPatientBolus;
         attribute :>> verificationMethod = MemoVerificationMethodKind::test;
         @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; not specified by the source"; }
@@ -402,8 +403,8 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     requirement tcWatchdogTimeout : TimingConstraint {
         @MemoIdentity { :>> providedId = "TC-003"; :>> label = "WatchdogTimeout"; }
         attribute :>> constraintKind = TimingConstraintKind::deadline;
-        attribute :>> minMs = "40";
-        attribute :>> maxMs = "60";
+        attribute :>> minMs = 40 [milli*s];
+        attribute :>> maxMs = 60 [milli*s];
         // The deadline is a claim about the element that kicks the watchdog, so
         // the reference is the software module, not the requirement it supports;
         // that link is REQ-X-08's own trace.

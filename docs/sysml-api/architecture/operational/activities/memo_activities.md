@@ -23,6 +23,7 @@
 
 | Visibility | Target |
 | --- | --- |
+| private | `memo_core_stdlib_quantities::*` |
 | private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
@@ -114,6 +115,7 @@ connection def AssessesDifficulty :> MemoRelationship
     // to an action performed in a context (TaskDifficultyAssessment), never to an
     // instrument.
     package memo_architecture_operational_activities {
+        private import memo_core_stdlib_quantities::*;
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
 
@@ -145,7 +147,7 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute postCondition : String;
             attribute criticality : CriticalityKind;
             attribute taskGoal : String;
-            attribute expectedDuration : String;
+            attribute expectedDuration : DurationValue;
             attribute frequencyOfUse : String;
             attribute potentialHarm : String[0..1];
             attribute severityIfFailed : SeverityKind[0..1];
@@ -167,7 +169,7 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute trainingDemand : DemandLevelKind;
             attribute ergonomicDemand : DemandLevelKind;
             attribute environmentalDemand : DemandLevelKind;
-            attribute expectedDuration : String;
+            attribute expectedDuration : DurationValue;
             attribute assessor : String;
             attribute assessmentMethod : String;
 

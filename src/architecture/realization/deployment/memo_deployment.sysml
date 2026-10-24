@@ -9,6 +9,7 @@
 // other way and between different things. Software reaches a node through
 // DeploysTo.
 package memo_architecture_realization_deployment {
+    private import memo_core_stdlib_quantities::*;
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
     // The standard's allocation base, which the two AADL bindings below root
@@ -139,7 +140,7 @@ package memo_architecture_realization_deployment {
     // (MemoInterface, PhysicalComponent) so one binding serves every layer.
     allocation def ConnectionBinding :> MemoRelationship, Allocations::Allocation {
         attribute allocatedBandwidth : String;
-        attribute mediumLatencyMs : Real;
+        attribute mediumLatencyMs : DurationValue;
         end boundExchange : MemoInterface :>> source;
         end medium : PhysicalComponent :>> target;
     }
@@ -174,7 +175,7 @@ package memo_architecture_realization_deployment {
     // hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose`
     // (latency | fault-propagation | security) drive the AADL-style analysis.
     part def EndToEndFlow specializes MemoPart {
-        attribute latencyBudgetMs : Real;
+        attribute latencyBudgetMs : DurationValue;
         attribute analysisPurpose : String;
         ref sourceFunction : MemoFunction[0..1];
         ref sinkFunction : MemoFunction[0..1];

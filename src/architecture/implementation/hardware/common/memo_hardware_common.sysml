@@ -7,6 +7,7 @@
 // declared here; acoustic and thermal parts have no dedicated subgroup and stay
 // with the roots.
 package memo_architecture_implementation_hardware_common {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_core_common::*;
@@ -27,7 +28,7 @@ package memo_architecture_implementation_hardware_common {
         attribute responsibility : String;
         attribute safetyRole : String;
         attribute partNumber : String;
-        attribute mtbfHours : String;
+        attribute mtbfHours : DurationValue;
         attribute protectionClass : String;
         attribute ipRating : String;
     }

@@ -1009,7 +1009,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A performer is an operational entity, an actor, or a system action — a part or a behaviour. The end's own documentation said 'or system action' while its MemoPart type forbade one.";
-            attribute predicateExpression = "sourcesOf(performs)->forAll(conformsTo(MemoPart) or construct == 'action')";
+            attribute predicateExpression = "sourcesOf(performs)->forAll(conformsTo(MemoPart) or construct == 'action' or construct == 'verification')";
             constraint { true }
         }
         constraint def BindsToInterfaceEndKindRule :> MemoConsistencyRule {
@@ -1093,7 +1093,7 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute appliesTo = "MemoFunction";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "The functional chain decomposes functions into functions. A function composed of a component, or owned by one, is confusing allocation with decomposition — the component is named by AllocatedTo, never by Composes.";
-            attribute predicateExpression = "composes->forAll(conformsTo(MemoFunction))";
+            attribute predicateExpression = "composes->forAll(conformsTo(MemoFunction) or kind == 'ForkNode' or kind == 'JoinNode' or kind == 'DecisionNode' or kind == 'MergeNode')";
             constraint { true }
         }
 

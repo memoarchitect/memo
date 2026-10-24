@@ -16,6 +16,7 @@
 // meaningful for one enum value cannot be checked, and a required attribute on
 // a type can.
 package memo_extension_aadl_runtime {
+    private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
@@ -48,7 +49,7 @@ package memo_extension_aadl_runtime {
         attribute :>> runtimeKind = RuntimeKind::partition;
         // Time and memory guaranteed to the partition, e.g. "2 ms window per
         // 10 ms major frame; 4 MB".
-        attribute partitionBudget : String;
+        attribute partitionBudget : DurationValue;
         // What enforces the partition — MMU, MPU, hypervisor, ARINC 653 module
         // OS. A budget nothing enforces is a plan, not a control.
         attribute isolationMechanism : String;

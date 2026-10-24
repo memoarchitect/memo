@@ -1,4 +1,5 @@
 package memo_examples_gpca_pump_gpca_behavior_subsystems {
+    private import memo_core_stdlib_quantities::*;
     private import memo_core_relationships::*;
     private import memo_assurance_verification_validation::*;
     private import ScalarValues::*;
@@ -158,24 +159,24 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         from fnAcquireSensors.sensorVectorOut to fnMonitorAlarm.sensorVectorIn {
         @MemoIdentity { :>> providedId = "LF-001"; :>> label = "SensorAcquisitionFlow"; }
         attribute :>> flowKind = FlowKind::measurement;
-        attribute :>> latencyBudgetMs = 20.0;
-        attribute :>> staleAfterMs = 40.0;
+        attribute :>> latencyBudgetMs = 20 [milli*s];
+        attribute :>> staleAfterMs = 40 [milli*s];
         attribute :>> integrityLevel = "class C data path";
     }
     flow lfFlowCommand : FunctionalExchange
         from fnManageInfusion.flowCommandOut to fnCommandPump.flowCommandIn {
         @MemoIdentity { :>> providedId = "LF-002"; :>> label = "FlowCommandFlow"; }
         attribute :>> flowKind = FlowKind::command;
-        attribute :>> latencyBudgetMs = 20.0;
-        attribute :>> staleAfterMs = 20.0;
+        attribute :>> latencyBudgetMs = 20 [milli*s];
+        attribute :>> staleAfterMs = 20 [milli*s];
         attribute :>> integrityLevel = "class C command path";
     }
     flow lfAlarmSignal : FunctionalExchange
         from fnMonitorAlarm.alarmSignalOut to fnAnnunciate.alarmSignalIn {
         @MemoIdentity { :>> providedId = "LF-003"; :>> label = "AlarmSignalFlow"; }
         attribute :>> flowKind = FlowKind::alarm;
-        attribute :>> latencyBudgetMs = 20.0;
-        attribute :>> staleAfterMs = 20.0;
+        attribute :>> latencyBudgetMs = 20 [milli*s];
+        attribute :>> staleAfterMs = 20 [milli*s];
         attribute :>> integrityLevel = "class C alarm path; same-step delivery to infusion manager";
     }
     flow lfPrescriptionEntry : FunctionalExchange
@@ -183,8 +184,8 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         to fnValidatePrescription.prescriptionIn {
         @MemoIdentity { :>> providedId = "LF-004"; :>> label = "PrescriptionEntryFlow"; }
         attribute :>> flowKind = FlowKind::configuration;
-        attribute :>> latencyBudgetMs = 500.0;
-        attribute :>> staleAfterMs = 0.0;
+        attribute :>> latencyBudgetMs = 500 [milli*s];
+        attribute :>> staleAfterMs = 0 [milli*s];
         attribute :>> integrityLevel = "confirmed double-entry path";
     }
 
@@ -237,14 +238,14 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> itemKind = InterfaceItemKind::command;
         @MemoIdentity { :>> providedId = "CD-001"; :>> label = "FlowCommand"; }
         attribute :>> controlType = "commanded flow rate with enable interlock";
-        attribute :>> timeoutMs = 40.0;
+        attribute :>> timeoutMs = 40 [milli*s];
         attribute :>> retryPolicy = "no retry; missing command forces zero flow";
     }
     item cdAlarmSignal : InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::command;
         @MemoIdentity { :>> providedId = "CD-002"; :>> label = "AlarmSignal"; }
         attribute :>> controlType = "priority-coded alarm assertion (level 1 stops infusion, level 2 warns)";
-        attribute :>> timeoutMs = 20.0;
+        attribute :>> timeoutMs = 20 [milli*s];
         attribute :>> retryPolicy = "latched until acknowledged and condition cleared";
     }
     // Illustrative: authored for this example, not the record of a real evaluation.

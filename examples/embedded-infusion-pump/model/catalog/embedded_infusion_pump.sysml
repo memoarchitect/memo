@@ -1,4 +1,5 @@
 // Focused example: embedded programmable device — the three software views
+    private import memo_core_stdlib_quantities::*;
     private import memo_assurance_requirements_needs::*;
     private import memo_core_dimensions::*;
     private import memo_assurance_requirements::*;
@@ -47,10 +48,10 @@ package memo_examples_embedded_infusion_pump {
     part rtControlLoop : SoftwareComponent {
         attribute :>> runtimeKind = RuntimeKind::task;
         @MemoIdentity { :>> providedId = "EIP-RT-001"; :>> label = "ControlLoopTask"; }
-        attribute :>> periodMs = 10.0;
-        attribute :>> deadlineMs = 10.0;
-        attribute :>> wcetMs = 2.5;
-        attribute :>> memoryBudget = 96.0;
+        attribute :>> periodMs = 10 [milli*s];
+        attribute :>> deadlineMs = 10 [milli*s];
+        attribute :>> wcetMs = 2.5 [milli*s];
+        attribute :>> memoryBudget = 96 [mega*B];
         attribute :>> schedulingPolicy = SchedulingPolicyKind::rateMonotonic;
         attribute :>> restartPolicy = "watchdog reset to safe state (pump stopped)";
         attribute :>> faultContainment = "MPU-protected region; safe-state on overrun";
