@@ -127,10 +127,6 @@ connection def Motivates :> MemoRelationship
             attribute postCondition : String;
             // clinical / service / manufacturing / development
             attribute useCaseKind : UseCaseKind;
-            // A system use case that no clinical use case includes is a finding (rule CR-ONT-086)
-            // unless it says so: set this for a use case that is deliberately carried out alone,
-            // such as a service procedure. It is not a second kind of use case.
-            attribute standalone : Boolean;
 
             // The device or system under consideration supports the goal. Native
             // `subject`, not `ref` (R10-S6): a use case needs an explicit subject
