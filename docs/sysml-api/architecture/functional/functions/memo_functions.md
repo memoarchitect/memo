@@ -46,7 +46,7 @@
 ## MemoFunction
 
 ```sysml
-abstract action def MemoFunction specializes MemoAction
+abstract action def MemoFunction specializes MemoAction, MemoConstrainedOccurrence
 ```
 
 | Property | Value |
@@ -219,7 +219,7 @@ action def FunctionalFlow specializes MemoAction
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_scenarios::*;
 
-        abstract action def MemoFunction specializes MemoAction {
+        abstract action def MemoFunction specializes MemoAction, MemoConstrainedOccurrence {
             attribute functionCategory : String;
             attribute actionKind : ActionKind;
             attribute trigger : String;
