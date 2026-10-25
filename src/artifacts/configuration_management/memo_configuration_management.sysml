@@ -81,8 +81,15 @@ package memo_artifacts_configuration_management {
     // documents it must have. It replaces `ModelMethodBinding.regulatoryRegime`, which stated one regime set
     // for a whole model and is read only when the model declares no device.
     //
-    // `IntendedUseOf` and `UsedWith` (plan O6) are not declared: the plan names no end for either, and an end
-    // is not invented to fill a name. `Covers` is the link every part of M5 needs.
+    // The device's other two links (plan O6), both typed dependencies like `Covers`:
+    //
+    //   #IntendedUseOf dependency from pumpIntendedUse to deviceFda;
+    //   #UsedWith dependency from deviceFda to deviceInfusionSet;
+    //
+    // `IntendedUseOf` runs from the intended use (a `requirement def`, `IntendedUse`) to the device, as its
+    // name reads; a device can have one per indication. `UsedWith` runs between regulated devices: the
+    // compatible devices and accessories that are themselves approved. An accessory that is not a device is
+    // not a target (decided 2026-10-25, user).
     part def RegulatedDevice :> MemoPart {
         attribute jurisdiction : RegulatoryRegimeKind[1];
         attribute submissionId : String[0..1];
@@ -90,6 +97,12 @@ package memo_artifacts_configuration_management {
 
     metadata def Covers :> MemoTypedDependency {
         doc /* `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. */
+    }
+    metadata def IntendedUseOf :> MemoTypedDependency {
+        doc /* `#IntendedUseOf dependency from <intended use> to <device>;` The intended use (a requirement) states what this device is for. */
+    }
+    metadata def UsedWith :> MemoTypedDependency {
+        doc /* `#UsedWith dependency from <device> to <device>, <device>;` The device is used with these regulated devices (compatible devices and approved accessories). */
     }
 
     // A project is a change set in an iteration (plan O7): the work that produces releases. It holds a link to
