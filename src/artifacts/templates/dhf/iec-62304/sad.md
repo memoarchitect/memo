@@ -69,7 +69,7 @@ empty: "No SoftwareUnit elements defined."
 ### 3.3 Interfaces
 
 ```memo-query
-kind: Interface
+kind: [LogicalInterface, PhysicalInterface]
 display: table
 columns: name, layer, doc
 sort: name

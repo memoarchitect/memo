@@ -6,7 +6,7 @@
   "scripts": {
     "build": "bash scripts/build-kpar.sh",
     "check": "bash scripts/build-kpar.sh && npm run lint",
-    "lint": "node ../memo-tools/packages/tools/lib/bin/memo.js dhf lint",
+    "lint": "cd examples/gpca-pump && node ../../../memo-architect/lib/bin/memo-architect.js dhf lint",
     "test": "node --test test/package.test.mjs",
     "docs:api": "node scripts/generate-sysml-api.mjs",
     "docs:figures": "node scripts/generate-ontology-figures.mjs",

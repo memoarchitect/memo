@@ -37,7 +37,7 @@ empty: "No system assets defined."
 Entry points and externally reachable interfaces constituting the attack surface, drawn from the model:
 
 ```memo-query
-kind: Interface
+kind: [LogicalInterface, PhysicalInterface]
 display: table
 columns: name, layer, doc
 sort: name
