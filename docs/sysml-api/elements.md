@@ -200,7 +200,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`OperativeScenario`](architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `action def` | Operative scenario definition specializing `MemoAction`. | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
+| [`OperativeScenario`](architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `action def` | A scenario is a `MemoConstrainedOccurrence`: it carries the native `precondition` and `postcondition` constraints a function does, redefined with an expression (`constraint :>> precondition { level >= 0 }`).… | [`architecture/operational/scenarios/memo_scenarios.sysml`](architecture/operational/scenarios/memo_scenarios.md) |
 
 
 ## `memo::architecture::operational::structure`
