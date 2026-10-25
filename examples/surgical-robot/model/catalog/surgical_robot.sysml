@@ -52,7 +52,7 @@ package memo_examples_surgical_robot {
         attribute :>> contactDuration = "limited (<24 h)";
     }
     // Mechanical-force flow from actuator to instrument tip.
-    flow exTipForce : LogicalExchange from actJointDrive.pDriveOut to instrShaft.pDriveIn {
+    flow exTipForce : LogicalTransfer from actJointDrive.pDriveOut to instrShaft.pDriveIn {
         @MemoIdentity { :>> providedId = "SR-EX-001"; :>> label = "TipForceTransmission"; }
         attribute :>> contentKind = FlowContentKind::mechanicalForce;
     }

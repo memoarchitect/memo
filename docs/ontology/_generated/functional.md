@@ -26,11 +26,23 @@
 | [`FunctionalFlow`](../sysml-api/architecture/functional/functions/memo_functions.md#functionalflow) | `action def` | Functional flow definition specializing `MemoAction`. |
 
 
+### Connections at a glance
+
+Each arrow is one relationship, from its source end to its target end. A grey box belongs to another layer.
+
+```mermaid
+flowchart LR
+  anyElement["any element"]:::other
+  anyElement -->|FunctionalTransfer| anyElement
+  classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
+```
+
 ### Relationships declared here
 
 | Relationship | From | To | What it says |
 | --- | --- | --- | --- |
-| [`FunctionalExchange`](../sysml-api/architecture/functional/functions/memo_functions.md#functionalexchange) | *any element* | *any element* | A transfer between two functions, carrying the budgets and assurance attributes a reader needs on the transfer itself.… |
+| [`FunctionalExchange`](../sysml-api/architecture/functional/functions/memo_functions.md#functionalexchange) | *any element* | *any element* | Typed relationship for functional exchange. |
+| [`FunctionalTransfer`](../sysml-api/architecture/functional/functions/memo_functions.md#functionaltransfer) | *any element* | *any element* | The concrete exchange. A concrete `flow def` must declare its two ends, so this is the member of the family a model types its flows by; the ends are left untyped, as an exchange runs from an `out` parameter of one function to an `in` parameter of another (or between ports). |
 
 ### Relationships from elsewhere that reach this layer
 

@@ -39,7 +39,8 @@
 | [`MemoFunction`](#memofunction) | `action def` | Memo function definition specializing `MemoAction`. | `MemoAction` |
 | [`SystemFunction`](#systemfunction) | `action def` | A responsibility of the system as a whole. Allocation is optional: a system function that no single component owns is a normal intermediate state of the functional chain, not a defect. | `MemoFunction` |
 | [`ComponentFunction`](#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. | `MemoFunction` |
-| [`FunctionalExchange`](#functionalexchange) | `flow def` | A transfer between two functions, carrying the budgets and assurance attributes a reader needs on the transfer itself.… | — |
+| [`FunctionalExchange`](#functionalexchange) | `flow def` | Typed relationship for functional exchange. | — |
+| [`FunctionalTransfer`](#functionaltransfer) | `flow def` | The concrete exchange. A concrete `flow def` must declare its two ends, so this is the member of the family a model types its flows by; the ends are left untyped, as an exchange runs from an `out` parameter of one function to an `in` parameter of another (or between ports). | `FunctionalExchange` |
 | [`FunctionalFlow`](#functionalflow) | `action def` | Functional flow definition specializing `MemoAction`. | `MemoAction` |
 
 ## MemoFunction
@@ -95,10 +96,25 @@ abstract flow def FunctionalExchange
 
 | Property | Value |
 | --- | --- |
-| Description | A transfer between two functions, carrying the budgets and assurance attributes a reader needs on the transfer itself.… |
+| Description | Typed relationship for functional exchange. |
 | Kind | `flow def` |
 | Abstract | Yes |
 | Specializes | — |
+| Owning package | `memo_architecture_functional_functions` |
+
+
+## FunctionalTransfer
+
+```sysml
+flow def FunctionalTransfer specializes FunctionalExchange
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The concrete exchange. A concrete `flow def` must declare its two ends, so this is the member of the family a model types its flows by; the ends are left untyped, as an exchange runs from an `out` parameter of one function to an `in` parameter of another (or between ports). |
+| Kind | `flow def` |
+| Abstract | No |
+| Specializes | `FunctionalExchange` |
 | Owning package | `memo_architecture_functional_functions` |
 
 
@@ -227,7 +243,7 @@ action def FunctionalFlow specializes MemoAction
         // named flow from an `out` parameter of one function to an `in` parameter
         // of another:
         //
-        //     flow lfFlowCommand : FunctionalExchange
+        //     flow lfFlowCommand : FunctionalTransfer
         //         from fnManageInfusion.flowCommandOut to fnCommandPump.flowCommandIn {
         //         attribute :>> latencyBudgetMs = 20.0;
         //     }
@@ -236,6 +252,14 @@ action def FunctionalFlow specializes MemoAction
             attribute latencyBudgetMs : DurationValue;
             attribute staleAfterMs : DurationValue;
             attribute integrityLevel : String;
+        }
+
+        // The concrete exchange. A concrete `flow def` must declare its two ends, so this is the member
+        // of the family a model types its flows by; the ends are left untyped, as an exchange runs from
+        // an `out` parameter of one function to an `in` parameter of another (or between ports).
+        flow def FunctionalTransfer specializes FunctionalExchange {
+            end source;
+            end target;
         }
 
         // A system function enables operational work; it does not perform it.

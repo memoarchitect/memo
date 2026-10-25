@@ -43,7 +43,7 @@ package memo_examples_ivd_laboratory_system {
         attribute :>> wavelengthRange = "340-800 nm";
     }
     // The probe dispenses the aspirated specimen into the cuvette.
-    flow exSpecimenFlow : LogicalExchange from fluidSampleProbe.pSpecimenOut to fluidReactionCuvette.pSpecimenIn {
+    flow exSpecimenFlow : LogicalTransfer from fluidSampleProbe.pSpecimenOut to fluidReactionCuvette.pSpecimenIn {
         @MemoIdentity { :>> providedId = "IVD-EX-001"; :>> label = "SpecimenTransfer"; }
         attribute :>> contentKind = FlowContentKind::material;
     }

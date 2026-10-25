@@ -103,7 +103,7 @@ package memo_architecture_functional_functions {
     // named flow from an `out` parameter of one function to an `in` parameter
     // of another:
     //
-    //     flow lfFlowCommand : FunctionalExchange
+    //     flow lfFlowCommand : FunctionalTransfer
     //         from fnManageInfusion.flowCommandOut to fnCommandPump.flowCommandIn {
     //         attribute :>> latencyBudgetMs = 20.0;
     //     }
@@ -112,6 +112,14 @@ package memo_architecture_functional_functions {
         attribute latencyBudgetMs : DurationValue;
         attribute staleAfterMs : DurationValue;
         attribute integrityLevel : String;
+    }
+
+    // The concrete exchange. A concrete `flow def` must declare its two ends, so this is the member
+    // of the family a model types its flows by; the ends are left untyped, as an exchange runs from
+    // an `out` parameter of one function to an `in` parameter of another (or between ports).
+    flow def FunctionalTransfer specializes FunctionalExchange {
+        end source;
+        end target;
     }
 
     // A system function enables operational work; it does not perform it.

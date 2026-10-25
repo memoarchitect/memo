@@ -301,7 +301,7 @@ listed relations as needing conversion; most of them were already in the
 pattern and had nothing to convert. Read the spelling before scheduling work.
 
 **`allocate`, `connect`, `flow` and `interface` can carry a MEMO `def`.** A
-named `flow x : FunctionalExchange from … to …` and a named
+named `flow x : FunctionalTransfer from … to …` and a named
 `interface x : ComponentExchange connect … to …` are edges of their declared
 kind, and rules scoped to that kind reach them. A `binding` can be named and
 have a body but takes no `: Type`, and `SuccessionUsage` takes no `: Type`, so

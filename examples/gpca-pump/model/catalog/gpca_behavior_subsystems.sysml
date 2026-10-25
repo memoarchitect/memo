@@ -155,7 +155,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     // to another's `in`. LF-004 starts outside the system: the prescription is
     // what the clinician's ProgramPrescription activity (OA-003) produces, and
     // CE-004 carries it from the operator keypad.
-    flow lfSensorAcquisition : FunctionalExchange
+    flow lfSensorAcquisition : FunctionalTransfer
         from fnAcquireSensors.sensorVectorOut to fnMonitorAlarm.sensorVectorIn {
         @MemoIdentity { :>> providedId = "LF-001"; :>> label = "SensorAcquisitionFlow"; }
         attribute :>> flowKind = FlowKind::measurement;
@@ -163,7 +163,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> staleAfterMs = 40 [milli*s];
         attribute :>> integrityLevel = "class C data path";
     }
-    flow lfFlowCommand : FunctionalExchange
+    flow lfFlowCommand : FunctionalTransfer
         from fnManageInfusion.flowCommandOut to fnCommandPump.flowCommandIn {
         @MemoIdentity { :>> providedId = "LF-002"; :>> label = "FlowCommandFlow"; }
         attribute :>> flowKind = FlowKind::command;
@@ -171,7 +171,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> staleAfterMs = 20 [milli*s];
         attribute :>> integrityLevel = "class C command path";
     }
-    flow lfAlarmSignal : FunctionalExchange
+    flow lfAlarmSignal : FunctionalTransfer
         from fnMonitorAlarm.alarmSignalOut to fnAnnunciate.alarmSignalIn {
         @MemoIdentity { :>> providedId = "LF-003"; :>> label = "AlarmSignalFlow"; }
         attribute :>> flowKind = FlowKind::alarm;
@@ -179,7 +179,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> staleAfterMs = 20 [milli*s];
         attribute :>> integrityLevel = "class C alarm path; same-step delivery to infusion manager";
     }
-    flow lfPrescriptionEntry : FunctionalExchange
+    flow lfPrescriptionEntry : FunctionalTransfer
         from memo_examples_gpca_pump_gpca_operational::oaProgram.prescriptionOut
         to fnValidatePrescription.prescriptionIn {
         @MemoIdentity { :>> providedId = "LF-004"; :>> label = "PrescriptionEntryFlow"; }

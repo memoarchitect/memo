@@ -120,4 +120,10 @@ package memo_architecture_realization_physical {
         attribute minValue : String;
         attribute maxValue : String;
     }
+
+    // The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends.
+    flow def PhysicalTransfer specializes PhysicalFlow {
+        end source;
+        end target;
+    }
 }

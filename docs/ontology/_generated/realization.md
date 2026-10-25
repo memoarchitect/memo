@@ -39,6 +39,7 @@ flowchart LR
   EndToEndFlow["EndToEndFlow"]
   FlowSpecification["FlowSpecification"]
   PhysicalPort["PhysicalPort"]
+  anyElement["any element"]:::other
   SoftwareModule -->|BuildsInto| SoftwareDeploymentUnit
   LogicalComponent -->|RealizedBy| MemoPart
   SoftwareDeploymentUnit -->|DeploysTo| ProcessingNode
@@ -48,6 +49,7 @@ flowchart LR
   EndToEndFlow -->|FlowComprisesSpec| FlowSpecification
   EndToEndFlow -->|FlowTraversesBinding| SoftwareDeploymentUnit
   PhysicalPort -->|PhysicalInterface| PhysicalPort
+  anyElement -->|PhysicalTransfer| anyElement
   classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
 ```
 
@@ -65,6 +67,7 @@ flowchart LR
 | [`FlowTraversesBinding`](../sysml-api/architecture/realization/deployment/memo_deployment.md#flowtraversesbinding) | [`EndToEndFlow`](../sysml-api/architecture/realization/deployment/memo_deployment.md#endtoendflow) | [`SoftwareDeploymentUnit`](../sysml-api/architecture/realization/deployment/memo_deployment.md#softwaredeploymentunit) | Typed relationship from `EndToEndFlow` to `SoftwareDeploymentUnit`. |
 | [`PhysicalInterface`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicalinterface) | [`PhysicalPort`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicalport) | [`PhysicalPort`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicalport) | Typed relationship from `PhysicalPort` to `PhysicalPort`. |
 | [`PhysicalFlow`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicalflow) | *any element* | *any element* | What crosses a physical interface, as a quantity: a voltage, a current, a pressure, a force, a flow of fluid. |
+| [`PhysicalTransfer`](../sysml-api/architecture/realization/physical/memo_physical_architecture.md#physicaltransfer) | *any element* | *any element* | The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends. |
 
 ### Relationships from elsewhere that reach this layer
 

@@ -48,6 +48,7 @@
 | [`LogicalExchangeItem`](#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoItem`. | `MemoItem` |
 | [`LogicalConnector`](#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | `MemoRelationship` |
 | [`LogicalExchange`](#logicalexchange) | `flow def` | Typed relationship for logical exchange. | — |
+| [`LogicalTransfer`](#logicaltransfer) | `flow def` | The concrete exchange a model types its logical flows by; the ends stay untyped for the reason above. | `LogicalExchange` |
 | [`LogicalBehavior`](#logicalbehavior) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `MemoPart` |
 | [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). | `MemoPart` |
 | [`FaultContainmentRegion`](#faultcontainmentregion) | `part def` | Fault containment region definition specializing `MemoPart`. | `MemoPart` |
@@ -260,6 +261,21 @@ abstract flow def LogicalExchange
 | Kind | `flow def` |
 | Abstract | Yes |
 | Specializes | — |
+| Owning package | `memo_architecture_logical_structure` |
+
+
+## LogicalTransfer
+
+```sysml
+flow def LogicalTransfer specializes LogicalExchange
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The concrete exchange a model types its logical flows by; the ends stay untyped for the reason above. |
+| Kind | `flow def` |
+| Abstract | No |
+| Specializes | `LogicalExchange` |
 | Owning package | `memo_architecture_logical_structure` |
 
 
@@ -535,6 +551,12 @@ connection def IndependentOf :> MemoRelationship
         abstract flow def LogicalExchange {
             attribute contentKind : FlowContentKind;
             attribute latencyRequirement : String;
+        }
+
+        // The concrete exchange a model types its logical flows by; the ends stay untyped for the reason above.
+        flow def LogicalTransfer specializes LogicalExchange {
+            end source;
+            end target;
         }
 
         // States and modes of the logical solution (kept distinct from UI state

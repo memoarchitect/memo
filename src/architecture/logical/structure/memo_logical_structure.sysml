@@ -207,6 +207,12 @@ package memo_architecture_logical_structure {
         attribute latencyRequirement : String;
     }
 
+    // The concrete exchange a model types its logical flows by; the ends stay untyped for the reason above.
+    flow def LogicalTransfer specializes LogicalExchange {
+        end source;
+        end target;
+    }
+
     // States and modes of the logical solution (kept distinct from UI state
     // and from physical device configuration).
 

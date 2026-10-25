@@ -17,7 +17,8 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`FunctionalExchange`](architecture/functional/functions/memo_functions.md#functionalexchange) | `flow def` | A transfer between two functions, carrying the budgets and assurance attributes a reader needs on the transfer itself.… | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| [`FunctionalExchange`](architecture/functional/functions/memo_functions.md#functionalexchange) | `flow def` | Typed relationship for functional exchange. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| [`FunctionalTransfer`](architecture/functional/functions/memo_functions.md#functionaltransfer) | `flow def` | The concrete exchange. A concrete `flow def` must declare its two ends, so this is the member of the family a model types its flows by; the ends are left untyped, as an exchange runs from an `out` parameter of one function to an `in` parameter of another (or between ports). | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 
 
 ## `memo::architecture::implementation::software::structure`
@@ -56,6 +57,7 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | [`LogicalConnector`](architecture/logical/structure/memo_logical_structure.md#logicalconnector) | `connection def` | A typed logical connection between two components' ports. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`LogicalExchange`](architecture/logical/structure/memo_logical_structure.md#logicalexchange) | `flow def` | Typed relationship for logical exchange. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`LogicalInterface`](architecture/logical/structure/memo_logical_structure.md#logicalinterface) | `interface def` | Typed relationship from `LogicalPort` to `any element`. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
+| [`LogicalTransfer`](architecture/logical/structure/memo_logical_structure.md#logicaltransfer) | `flow def` | The concrete exchange a model types its logical flows by; the ends stay untyped for the reason above. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 
 
 ## `memo::architecture::operational::activities`
@@ -124,6 +126,7 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | --- | --- | --- | --- |
 | [`PhysicalFlow`](architecture/realization/physical/memo_physical_architecture.md#physicalflow) | `flow def` | What crosses a physical interface, as a quantity: a voltage, a current, a pressure, a force, a flow of fluid. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
 | [`PhysicalInterface`](architecture/realization/physical/memo_physical_architecture.md#physicalinterface) | `interface def` | Typed relationship from `PhysicalPort` to `PhysicalPort`. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
+| [`PhysicalTransfer`](architecture/realization/physical/memo_physical_architecture.md#physicaltransfer) | `flow def` | The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends. | [`architecture/realization/physical/memo_physical_architecture.sysml`](architecture/realization/physical/memo_physical_architecture.md) |
 
 
 ## `memo::architecture::variability`
