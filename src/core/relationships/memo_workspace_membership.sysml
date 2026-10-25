@@ -213,6 +213,8 @@ package memo_core_relationships_workspace_membership {
     // Neither: a chain that performs functions of three systems belongs to none of them. Decided 2026-10-14:
     // a chain step is the system of systems' own, so `performs` places nothing in a system.
     part membershipPerforms : WorkspaceMembershipEntry { attribute :>> relation = "performs"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // Neither: a step subsets the function it carries out; the function is not placed by it, as `performs` places nothing.
+    part membershipSubsets : WorkspaceMembershipEntry { attribute :>> relation = "subsets"; attribute :>> direction = WorkspaceMembershipKind::neither; }
     // Neither: a use case that includes others belongs to the system of systems; pulling it would put it in every system it includes.
     part membershipIncludesStep : WorkspaceMembershipEntry { attribute :>> relation = "includesStep"; attribute :>> direction = WorkspaceMembershipKind::neither; }
     // Neither: a bare dependency says nothing about placement.

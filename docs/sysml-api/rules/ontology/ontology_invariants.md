@@ -46,6 +46,7 @@
 | [`RuntimeTracesToModuleRule`](#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | `MemoConsistencyRule` |
 | [`PatientContactCharacterizedRule`](#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | `MemoConsistencyRule` |
 | [`SafetyCriticalFunctionVerifiedRule`](#safetycriticalfunctionverifiedrule) | `constraint def` | Constraint that checks safety critical function verified rule. | `MemoConsistencyRule` |
+| [`SafetyCriticalStepVerifiedRule`](#safetycriticalstepverifiedrule) | `constraint def` | A flow's step is its own position of a function (`action step :> fn;`), and evidence is scoped to the position: a test of the function, or of another step, does not count for it. So a step whose function is safety-critical needs a verification case of its own.… | `MemoConsistencyRule` |
 | [`CriticalTaskValidatedRule`](#criticaltaskvalidatedrule) | `constraint def` | Constraint that checks critical task validated rule. | `MemoConsistencyRule` |
 | [`UseErrorTracesToHazardRule`](#useerrortracestohazardrule) | `constraint def` | Constraint that checks use error traces to hazard rule. | `MemoConsistencyRule` |
 | [`SatisfiedBySourceKindRule`](#satisfiedbysourcekindrule) | `constraint def` | Constraint that checks satisfied by source kind rule. | `MemoConsistencyRule` |
@@ -216,6 +217,21 @@ constraint def SafetyCriticalFunctionVerifiedRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks safety critical function verified rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## SafetyCriticalStepVerifiedRule
+
+```sysml
+constraint def SafetyCriticalStepVerifiedRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A flow's step is its own position of a function (`action step :> fn;`), and evidence is scoped to the position: a test of the function, or of another step, does not count for it. So a step whose function is safety-critical needs a verification case of its own.… |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -785,6 +801,22 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             constraint { true }
         }
         #EnforcesClause dependency from SafetyCriticalFunctionVerifiedRule to iso13485::iso13485Clause7::iso13485Clause7_3::iso13485Clause7_3_6;
+        // A flow's step is its own position of a function (`action step :> fn;`), and evidence is scoped to
+        // the position: a test of the function, or of another step, does not count for it. So a step whose
+        // function is safety-critical needs a verification case of its own. The step reaches its function
+        // through the `subsets` edge.
+        constraint def SafetyCriticalStepVerifiedRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-091"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::medicalDevice;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "ActionUsage";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A step of a flow whose function is safety-critical (criticality high or catastrophic) must trace to a verification case of its own; a test of the function or of another step does not cover it.";
+            attribute predicateExpression = "not(downstream(subsets)->exists(criticality == 'high' or criticality == 'catastrophic')) or verifiedBy->size() >= 1";
+            constraint { true }
+        }
+        #EnforcesClause dependency from SafetyCriticalStepVerifiedRule to iso13485::iso13485Clause7::iso13485Clause7_3::iso13485Clause7_3_6;
         constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-ONT-041"; }
             attribute tailoring = RuleTailoringKind::assurance;
