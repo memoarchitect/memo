@@ -81,6 +81,30 @@ package memo_examples_embedded_infusion_pump {
     }
     allocation : HostedBy allocate rtControlLoop to mcuSafety;
     connection : ProvidesEnvironment connect node ::> mcuSafety to environment ::> rteBareMetal;
+    // The deadline as a requirement a tool can check: a typed `require constraint` beside the statement.
+    requirement reqControlLoopDeadline : Requirement {
+        attribute :>> requirementType = RequirementTypeKind::system;
+        @MemoIdentity { :>> providedId = "EIP-REQ-A10"; :>> label = "ControlLoopWithinDeadline"; }
+        attribute :>> statement = "The control loop shall finish each cycle within 10 ms.";
+        attribute :>> status = ElementStatusKind::draft;
+        require constraint withinDeadline { rtControlLoop.wcetMs <= 10 [milli*s] }
+    }
+    satisfy reqControlLoopDeadline by rtControlLoop;
+    verification vcControlLoopDeadline : VerificationCase {
+        @MemoIdentity { :>> providedId = "EIP-VC-A10"; :>> label = "VerifyControlLoopDeadline"; }
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "worst-case execution time within the deadline";
+        assert constraint wcetWithinBudget { rtControlLoop.wcetMs <= rtControlLoop.deadlineMs }
+        subject verified : Base::Anything[*] = (rtControlLoop);
+    }
+    // Illustrative: authored for this example, not the record of a real analysis.
+    part evControlLoopDeadline : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::evidence;
+        @MemoIdentity { :>> providedId = "EIP-EV-A10"; :>> label = "VerifyControlLoopDeadline report"; }
+        attribute :>> evidenceType = "timing analysis report";
+        attribute :>> resultSummary = "Illustrative result: the worst-case execution time is within the deadline.";
+    }
+    connection : ProducesEvidence connect producer ::> vcControlLoopDeadline to producedEvidence ::> evControlLoopDeadline;
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification vcAuthoredSwInfusionControl : VerificationCase {
         @MemoIdentity { :>> providedId = "EIP-VC-A01"; :>> label = "VerifyInfusionControlItem"; }
@@ -136,6 +160,7 @@ package memo_examples_embedded_infusion_pump {
     }
     connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwInfusionControl;
     connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwMotorDriver;
+    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqControlLoopDeadline;
     // Illustrative: authored for this example, not the record of a real evaluation.
     satisfy reqAuthoredSwInfusionControl by swInfusionControl.swDoseCommandUnit;
     verification vcAuthoredSwDoseCommandUnit : VerificationCase {
