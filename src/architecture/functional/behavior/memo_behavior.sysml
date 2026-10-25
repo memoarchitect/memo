@@ -20,13 +20,18 @@ package memo_architecture_functional_behavior {
         attribute executionSemantics : String;
     }
     // A configuration is the concrete selection made at a `variation` choice
-    // point. It remains separate from a mode state: it says which mode and
-    // elements are active in one selectable arrangement.
+    // point: it says which mode is active in one selectable arrangement.
     // The reference is typed to the shared native state family so a consumer
     // can navigate from the selected configuration to its governing mode.
+    //
+    // What is available in a mode is not listed here. A state performs the
+    // functions available in it (`do fnX;` or `perform fnX;` inside the state),
+    // which is SysML's own way and is checked by the compiler; a second list of
+    // active elements on the configuration said the same thing again. ARCADIA's
+    // Configuration, the set of items available in an active mode or state, is
+    // that performing.
     part def ModeConfiguration specializes MemoPart {
         ref activeMode : MemoState[1];
-        ref activeElement : MemoPart[0..*];
     }
     // Transitions are native SysML v2 `transition` usages inside the owning
     // state — there is no `part def Transition`, and its `transition` keyword
