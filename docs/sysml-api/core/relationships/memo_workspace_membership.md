@@ -270,6 +270,8 @@ part def WorkspaceMembershipEntry specializes MemoPart
         part membershipPerforms : WorkspaceMembershipEntry { attribute :>> relation = "performs"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // Neither: a step subsets the function it carries out; the function is not placed by it, as `performs` places nothing.
         part membershipSubsets : WorkspaceMembershipEntry { attribute :>> relation = "subsets"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+        // Neither: navigation joins two screens; the screen it opens is not placed by the element that opens it.
+        part membershipNavigatesTo : WorkspaceMembershipEntry { attribute :>> relation = "navigatesTo"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // Neither: a use case that includes others belongs to the system of systems; pulling it would put it in every system it includes.
         part membershipIncludesStep : WorkspaceMembershipEntry { attribute :>> relation = "includesStep"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // Neither: a bare dependency says nothing about placement.

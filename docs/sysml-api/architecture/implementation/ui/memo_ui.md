@@ -56,6 +56,7 @@
 | [`UIAction`](#uiaction) | `action def` | Clicking a button IS an operative action: it has a trigger, a precondition, a criticality, a potential harm and a frequency of use, exactly as turning a knob does.… | `OperativeAction` |
 | [`InteractionFlow`](#interactionflow) | `action def` | A reusable dialogue structure through the UI; a selected path through it is a OperativeScenario with scenarioKind `ui`. | `MemoAction` |
 | [`CapturesScreen`](#capturesscreen) | `connection def` | Which modelled screen an image is a rendering of. | `MemoRelationship` |
+| [`NavigatesTo`](#navigatesto) | `connection def` | Typed relationship from `UIElement` to `UIElement`. | `MemoRelationship` |
 | [`ElementTriggersAction`](#elementtriggersaction) | `connection def` | Typed relationship from `MemoPart` to `UIAction`. | `MemoRelationship` |
 | [`FlowServesUseCase`](#flowservesusecase) | `connection def` | Typed relationship from `InteractionFlow` to `UseCase`. | `MemoRelationship` |
 | [`ErrorAtElement`](#erroratelement) | `connection def` | Typed relationship from `UseError` to `MemoPart`. | `MemoRelationship` |
@@ -280,6 +281,21 @@ connection def CapturesScreen :> MemoRelationship
 | Property | Value |
 | --- | --- |
 | Description | Which modelled screen an image is a rendering of. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_architecture_implementation_ui` |
+
+
+## NavigatesTo
+
+```sysml
+connection def NavigatesTo :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `UIElement` to `UIElement`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -677,6 +693,22 @@ connection def ControlImplementedBy :> MemoRelationship
         // Conflating the two was the mistake that made "clicking takes you to a
         // child view" look like spatial nesting; it is a separate frame reached
         // from here, and only this relation says so.
+        //
+        //     connection goToSettings : NavigatesTo
+        //         connect element ::> homeScreen.settingsButton to screen ::> settingsScreen;
+        //
+        // A screen is a UIElement whose `formKind` is `screen`; the end says UIElement because the form is an
+        // attribute, not a subtype.
+        connection def NavigatesTo :> MemoRelationship {
+            end element : UIElement :>> source;
+            end screen : UIElement :>> target;
+        }
+        abstract connection navigatesToLinks : NavigatesTo[*];
+        metadata def <navigatesTo> NavigatesToMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = navigatesToLinks meta SysML::Usage;
+        }
 
         // ── §18 traceability ─────────────────────────────────────────
         // Source is `MemoPart`, not a UI-specific base: a foot pedal and a

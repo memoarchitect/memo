@@ -324,6 +324,22 @@ package memo_architecture_implementation_ui {
     // Conflating the two was the mistake that made "clicking takes you to a
     // child view" look like spatial nesting; it is a separate frame reached
     // from here, and only this relation says so.
+    //
+    //     connection goToSettings : NavigatesTo
+    //         connect element ::> homeScreen.settingsButton to screen ::> settingsScreen;
+    //
+    // A screen is a UIElement whose `formKind` is `screen`; the end says UIElement because the form is an
+    // attribute, not a subtype.
+    connection def NavigatesTo :> MemoRelationship {
+        end element : UIElement :>> source;
+        end screen : UIElement :>> target;
+    }
+    abstract connection navigatesToLinks : NavigatesTo[*];
+    metadata def <navigatesTo> NavigatesToMetadata :> SemanticMetadata {
+        :> annotatedElement : SysML::ConnectionDefinition;
+        :> annotatedElement : SysML::ConnectionUsage;
+        :>> baseType = navigatesToLinks meta SysML::Usage;
+    }
 
     // ── §18 traceability ─────────────────────────────────────────
     // Source is `MemoPart`, not a UI-specific base: a foot pedal and a

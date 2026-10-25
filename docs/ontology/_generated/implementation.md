@@ -89,6 +89,7 @@ flowchart LR
   PostmarketProcess["PostmarketProcess"]:::other
   MemoPart -->|DependsOnSoup| SoftwareElement
   ScreenCapture -->|CapturesScreen| UIElement
+  UIElement -->|NavigatesTo| UIElement
   MemoPart -->|ElementTriggersAction| UIAction
   InteractionFlow -->|FlowServesUseCase| UseCase
   UseError -->|ErrorAtElement| MemoPart
@@ -107,6 +108,7 @@ flowchart LR
 | --- | --- | --- | --- |
 | [`DependsOnSoup`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#dependsonsoup) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | [`SoftwareElement`](../sysml-api/architecture/implementation/software/structure/memo_software_structure.md#softwareelement) | Typed relationship from `MemoPart` to `SoftwareElement`. |
 | [`CapturesScreen`](../sysml-api/architecture/implementation/ui/memo_ui.md#capturesscreen) | [`ScreenCapture`](../sysml-api/architecture/implementation/ui/memo_ui.md#screencapture) | [`UIElement`](../sysml-api/architecture/implementation/ui/memo_ui.md#uielement) | Which modelled screen an image is a rendering of. |
+| [`NavigatesTo`](../sysml-api/architecture/implementation/ui/memo_ui.md#navigatesto) | [`UIElement`](../sysml-api/architecture/implementation/ui/memo_ui.md#uielement) | [`UIElement`](../sysml-api/architecture/implementation/ui/memo_ui.md#uielement) | Typed relationship from `UIElement` to `UIElement`. |
 | [`ElementTriggersAction`](../sysml-api/architecture/implementation/ui/memo_ui.md#elementtriggersaction) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | [`UIAction`](../sysml-api/architecture/implementation/ui/memo_ui.md#uiaction) | Typed relationship from `MemoPart` to `UIAction`. |
 | [`FlowServesUseCase`](../sysml-api/architecture/implementation/ui/memo_ui.md#flowservesusecase) | [`InteractionFlow`](../sysml-api/architecture/implementation/ui/memo_ui.md#interactionflow) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | Typed relationship from `InteractionFlow` to `UseCase`. |
 | [`ErrorAtElement`](../sysml-api/architecture/implementation/ui/memo_ui.md#erroratelement) | [`UseError`](../sysml-api/assurance/human_factors/memo_human_factors.md#useerror) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `UseError` to `MemoPart`. |

@@ -37,6 +37,7 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | [`ElementTriggersAction`](architecture/implementation/ui/memo_ui.md#elementtriggersaction) | `connection def` | Typed relationship from `MemoPart` to `UIAction`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`ErrorAtElement`](architecture/implementation/ui/memo_ui.md#erroratelement) | `connection def` | Typed relationship from `UseError` to `MemoPart`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`FlowServesUseCase`](architecture/implementation/ui/memo_ui.md#flowservesusecase) | `connection def` | Typed relationship from `InteractionFlow` to `UseCase`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`NavigatesTo`](architecture/implementation/ui/memo_ui.md#navigatesto) | `connection def` | Typed relationship from `UIElement` to `UIElement`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 
 
 ## `memo::architecture::logical::interfaces`
