@@ -1465,7 +1465,7 @@ enum def CommentStatusKind
         //
         // Track A2 removed this from PORTS: a port usage says `in` / `out` /
         // `inout` natively, which is the language's own spelling and the only one
-        // a conforming tool reads. The enum survives because four non-port
+        // a conforming tool reads. The enum survives because three non-port
         // constructs still carry a direction and none of them is a port, so none
         // of them can use the keyword:
         //

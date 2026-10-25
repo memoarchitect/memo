@@ -33,12 +33,12 @@ package robot_cell_family_navigation {
         @MemoIdentity { :>> providedId = "RCF-NAV-F-001"; :>> label = "Build Occupancy Map"; }
         in pointCloudIn : PointCloud;
         out locationOut : RobotPose;
-        attribute :>> outputSummary = "Cell map with local scan times";
+        attribute :>> outputDescription = "Cell map with local scan times";
     }
     action fnTagGrasp : SystemFunction {
         @MemoIdentity { :>> providedId = "RCF-NAV-F-002"; :>> label = "Tag Grasp On Map"; }
         in graspEventIn : GraspEvent;
-        attribute :>> outputSummary = "Grasp marker at the robot pose of each grasp";
+        attribute :>> outputDescription = "Grasp marker at the robot pose of each grasp";
     }
 
     // A system use case: its subject is this system.

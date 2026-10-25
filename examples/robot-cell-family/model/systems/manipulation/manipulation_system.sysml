@@ -31,7 +31,7 @@ package robot_cell_family_manipulation {
     action fnExecuteGrasp : SystemFunction {
         @MemoIdentity { :>> providedId = "RCF-MAN-F-001"; :>> label = "Execute Grasp"; }
         out graspEventOut : GraspEvent;
-        attribute :>> outputSummary = "Grasp made within the set force and time limits, and the event that records it";
+        attribute :>> outputDescription = "Grasp made within the set force and time limits, and the event that records it";
     }
 
     use case ucExecuteGrasp : UseCase {
