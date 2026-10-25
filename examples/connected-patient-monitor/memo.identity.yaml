@@ -5,9 +5,6 @@
 # Entries for deleted elements are retained so their numbers stay retired.
 
 elements:
-  "memo_examples_connected_patient_monitor::ConnectedPatientMonitorSystem":
-    shortId: "SYS-1"
-    uuid: "7b1d0930-30ce-5030-addc-e59fa5d88dc4"
   "memo_examples_connected_patient_monitor::exSpo2ToGateway":
     shortId: "LGC-1"
     uuid: "d640886f-c38e-588a-9351-f30046fb2fa5"
@@ -17,24 +14,12 @@ elements:
   "memo_examples_connected_patient_monitor::lcCdrService":
     shortId: "LGC-2"
     uuid: "bdbdcd43-b6a0-5fe0-a67a-c362d022c39e"
-  "memo_examples_connected_patient_monitor::lcCdrService::pHl7In":
-    shortId: "LGC-6"
-    uuid: "4e360e6d-da81-5d44-9357-a08955efcad8"
   "memo_examples_connected_patient_monitor::lcGateway":
     shortId: "LGC-3"
     uuid: "7aca5877-f870-57ad-9f13-bdc80cb0b774"
-  "memo_examples_connected_patient_monitor::lcGateway::pHl7Out":
-    shortId: "LGC-7"
-    uuid: "fa381813-c088-5af0-a513-d80100bb9c93"
-  "memo_examples_connected_patient_monitor::lcGateway::pSpo2In":
-    shortId: "LGC-8"
-    uuid: "f6d8b547-1b9a-5647-a82e-ccf8daa6faf9"
   "memo_examples_connected_patient_monitor::lcMonitor":
     shortId: "LGC-4"
     uuid: "be6b2ac0-fdd2-5380-83cd-af21d7a8e582"
-  "memo_examples_connected_patient_monitor::lcMonitor::pSpo2Out":
-    shortId: "LGC-9"
-    uuid: "4bcb3e37-b670-5d5b-a41c-1f32cf357cad"
   "memo_examples_connected_patient_monitor::spo2Item":
     shortId: "LGC-5"
     uuid: "694709f8-5e40-51ef-b404-ef5fd980f23f"
@@ -47,3 +32,18 @@ elements:
   "memo_examples_connected_patient_monitor_viewpoints_unassigned_views_connected_patient_monitor_overview::connectedPatientMonitorOverview":
     shortId: "MMX-1"
     uuid: "846e63d1-e5e6-5f90-bfe6-143b5ce83b23"
+  "memo_examples_connected_patient_monitor::ConnectedPatientMonitorSystem":
+    shortId: "SYS-1"
+    uuid: "7b1d0930-30ce-5030-addc-e59fa5d88dc4"
+  "memo_examples_connected_patient_monitor::lcCdrService::pHl7In":
+    shortId: "LGC-6"
+    uuid: "4e360e6d-da81-5d44-9357-a08955efcad8"
+  "memo_examples_connected_patient_monitor::lcGateway::pHl7Out":
+    shortId: "LGC-7"
+    uuid: "fa381813-c088-5af0-a513-d80100bb9c93"
+  "memo_examples_connected_patient_monitor::lcGateway::pSpo2In":
+    shortId: "LGC-8"
+    uuid: "f6d8b547-1b9a-5647-a82e-ccf8daa6faf9"
+  "memo_examples_connected_patient_monitor::lcMonitor::pSpo2Out":
+    shortId: "LGC-9"
+    uuid: "4bcb3e37-b670-5d5b-a41c-1f32cf357cad"
