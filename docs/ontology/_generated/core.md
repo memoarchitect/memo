@@ -24,6 +24,7 @@
 | [`MemoEvidence`](../sysml-api/core/common/memo_common.md#memoevidence) | `part def` | Memo evidence definition specializing `MemoPart`. |
 | [`AnalysisArtifact`](../sysml-api/core/common/memo_common.md#analysisartifact) *(abstract)* | `part def` | Analysis artifact definition specializing `MemoPart`. |
 | [`MemoAction`](../sysml-api/core/common/memo_common.md#memoaction) | `action def` | Behavioral foundation: operational activities, tasks, system actions, and interaction steps specialize MemoAction. |
+| [`MemoConstrainedOccurrence`](../sysml-api/core/common/memo_common.md#memoconstrainedoccurrence) *(abstract)* | `occurrence def` | An occurrence whose start is guarded by a precondition and whose end by a postcondition: it starts only once the precondition holds and is done only once the postcondition does.… |
 | [`MemoPort`](../sysml-api/core/common/memo_common.md#memoport) | `port def` | Boundary feature foundation for typed ports. |
 | [`MemoItem`](../sysml-api/core/common/memo_common.md#memoitem) *(abstract)* | `item def` | Single item foundation. Standards, hazards, stored software data, and message payloads are all item-native concepts. Whether an item is exchanged is expressed by its use in a port or flow, not by a second ontology root. |
 | [`MemoUseCase`](../sysml-api/core/common/memo_common.md#memousecase) *(abstract)* | `use case def` | Memo use case definition. |

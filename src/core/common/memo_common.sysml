@@ -173,6 +173,24 @@ package memo_core_common {
         attribute status : ElementStatusKind;
     }
 
+    // An occurrence whose start is guarded by a precondition and whose end by a postcondition: it
+    // starts only once the precondition holds and is done only once the postcondition does. The
+    // two are native `constraint` features a usage redefines with its own expression:
+    //
+    //     action fnDose : SystemFunction {
+    //         in rate : Real;
+    //         constraint :>> precondition { rate >= 0 }
+    //     }
+    //
+    // The shape is the SYSMOD method's `ConstrainedOccurrence`. It is declared on an `occurrence def`
+    // because `startShot` and `endShot` are found through one; `MemoFunction` specializes it.
+    abstract occurrence def MemoConstrainedOccurrence {
+        constraint precondition;
+        constraint postcondition;
+        ref occurrence :>> startShot { assert constraint :> precondition; }
+        ref occurrence :>> endShot { assert constraint :> postcondition; }
+    }
+
     // Boundary feature foundation for typed ports.
     port def MemoPort {
         attribute status : ElementStatusKind;

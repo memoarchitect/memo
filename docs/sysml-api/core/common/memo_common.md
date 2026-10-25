@@ -42,6 +42,7 @@
 | [`MemoEvidence`](#memoevidence) | `part def` | Memo evidence definition specializing `MemoPart`. | `MemoPart` |
 | [`AnalysisArtifact`](#analysisartifact) | `part def` | Analysis artifact definition specializing `MemoPart`. | `MemoPart` |
 | [`MemoAction`](#memoaction) | `action def` | Behavioral foundation: operational activities, tasks, system actions, and interaction steps specialize MemoAction. | — |
+| [`MemoConstrainedOccurrence`](#memoconstrainedoccurrence) | `occurrence def` | An occurrence whose start is guarded by a precondition and whose end by a postcondition: it starts only once the precondition holds and is done only once the postcondition does.… | — |
 | [`MemoPort`](#memoport) | `port def` | Boundary feature foundation for typed ports. | — |
 | [`MemoInterface`](#memointerface) | `interface def` | Interaction-contract foundation for interface definitions between ports. | — |
 | [`MemoItem`](#memoitem) | `item def` | Single item foundation. Standards, hazards, stored software data, and message payloads are all item-native concepts. Whether an item is exchanged is expressed by its use in a port or flow, not by a second ontology root. | — |
@@ -202,6 +203,21 @@ action def MemoAction
 | Description | Behavioral foundation: operational activities, tasks, system actions, and interaction steps specialize MemoAction. |
 | Kind | `action def` |
 | Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_common` |
+
+
+## MemoConstrainedOccurrence
+
+```sysml
+abstract occurrence def MemoConstrainedOccurrence
+```
+
+| Property | Value |
+| --- | --- |
+| Description | An occurrence whose start is guarded by a precondition and whose end by a postcondition: it starts only once the precondition holds and is done only once the postcondition does.… |
+| Kind | `occurrence def` |
+| Abstract | Yes |
 | Specializes | — |
 | Owning package | `memo_core_common` |
 
@@ -579,6 +595,24 @@ part def Citation specializes MemoPart
         // and interaction steps specialize MemoAction.
         action def MemoAction {
             attribute status : ElementStatusKind;
+        }
+
+        // An occurrence whose start is guarded by a precondition and whose end by a postcondition: it
+        // starts only once the precondition holds and is done only once the postcondition does. The
+        // two are native `constraint` features a usage redefines with its own expression:
+        //
+        //     action fnDose : SystemFunction {
+        //         in rate : Real;
+        //         constraint :>> precondition { rate >= 0 }
+        //     }
+        //
+        // The shape is the SYSMOD method's `ConstrainedOccurrence`. It is declared on an `occurrence def`
+        // because `startShot` and `endShot` are found through one; `MemoFunction` specializes it.
+        abstract occurrence def MemoConstrainedOccurrence {
+            constraint precondition;
+            constraint postcondition;
+            ref occurrence :>> startShot { assert constraint :> precondition; }
+            ref occurrence :>> endShot { assert constraint :> postcondition; }
         }
 
         // Boundary feature foundation for typed ports.
