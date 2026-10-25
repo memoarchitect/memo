@@ -137,9 +137,14 @@ package memo_architecture_logical_interfaces {
     //     }
     //     flow ceTlmOutToOutputFlow of InterfaceItem
     //         from tlm.portTlmModeOut to outputBus.portOutputTlmModeIn;
+    //
+    // It carries no direction. The ports at its two ends say `in`, `out` or `inout`, and a transfer runs from
+    // the one that sends to the one that receives (SysML-textual-bnf.kebnf:276, `FeatureDirection`); a second,
+    // writable direction is the same fact stated twice, and nothing could check the two agreed. Rule
+    // AR-EXCH-002 holds the exchange to its ports instead. "Input to X" is relative to a system of interest the
+    // model does not have, so it is a question to ask with X given, not a value on the exchange.
     interface def ComponentExchange specializes MemoInterface {
         attribute exchangeKind : FlowKind;
-        attribute direction : DirectionKind;
         // Connection timing discipline from the source architecture
         // (e.g. AADL Communication_Properties::Timing — immediate
         // connections deliver in the same execution step).

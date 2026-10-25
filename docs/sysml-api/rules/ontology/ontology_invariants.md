@@ -43,6 +43,8 @@
 | [`ReleaseSelectionConsistentRule`](#releaseselectionconsistentrule) | `constraint def` | Constraint that checks release selection consistent rule. | `MemoConsistencyRule` |
 | [`ReleaseSelectsOneVariantRule`](#releaseselectsonevariantrule) | `constraint def` | Every variation point of the item a record is a release of is resolved to ONE variant, and no variation point anywhere has two. Two halves, one rule: at most one -- any record, any status: a record that selects the features of two variants of one point describes no product.… | `MemoConsistencyRule` |
 | [`NestedPartConnectedRule`](#nestedpartconnectedrule) | `constraint def` | Constraint that checks nested part connected rule. | `MemoConsistencyRule` |
+| [`BindingEndsAgreeInDirectionRule`](#bindingendsagreeindirectionrule) | `constraint def` | A port says `in` or `out` (or `inout`), and a `~` conjugates it. That is the only place direction is written: an exchange's own direction was the same fact a second time, and nothing checked the two agreed.… | `MemoConsistencyRule` |
+| [`ExchangeLeavesOutEntersInRule`](#exchangeleavesoutentersinrule) | `constraint def` | Constraint that checks exchange leaves out enters in rule. | `MemoConsistencyRule` |
 | [`RuntimeTracesToModuleRule`](#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | `MemoConsistencyRule` |
 | [`PatientContactCharacterizedRule`](#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | `MemoConsistencyRule` |
 | [`SafetyCriticalFunctionVerifiedRule`](#safetycriticalfunctionverifiedrule) | `constraint def` | Constraint that checks safety critical function verified rule. | `MemoConsistencyRule` |
@@ -172,6 +174,36 @@ constraint def NestedPartConnectedRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks nested part connected rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## BindingEndsAgreeInDirectionRule
+
+```sysml
+constraint def BindingEndsAgreeInDirectionRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A port says `in` or `out` (or `inout`), and a `~` conjugates it. That is the only place direction is written: an exchange's own direction was the same fact a second time, and nothing checked the two agreed.… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## ExchangeLeavesOutEntersInRule
+
+```sysml
+constraint def ExchangeLeavesOutEntersInRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks exchange leaves out enters in rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -759,6 +791,39 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             // composition/trace/deployment links, and includes a connected child's
             // containing assemblies. The generic KerML expression evaluator cannot
             // represent that transitive containment query.
+            constraint { true }
+        }
+
+        // ─── Direction is written on the ports, and an exchange has to agree with them ──
+        //
+        // A port says `in` or `out` (or `inout`), and a `~` conjugates it. That is the only place direction is
+        // written: an exchange's own direction was the same fact a second time, and nothing checked the two
+        // agreed. These two rules check the exchange against its ports, so a contradiction cannot be written.
+        // Both judge only ends that are ports with a stated direction; a port that says none is not judged.
+        constraint def BindingEndsAgreeInDirectionRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "AR-EXCH-001"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "MemoPort";
+            attribute evaluator = "architecture";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "A binding makes its two ports one connection point, so they have the direction between them: a boundary port bound to a port of a nested part passes the same direction through. A binding of an in port to an out port joins things that cannot be the same point.";
+            attribute predicateExpression = "bindEndsAgreeInDirection";
+            // The generic expression evaluator reads a port's attributes, not its stated direction and
+            // conjugation, so a function computes the predicate (as for AR-IBD-001).
+            constraint { true }
+        }
+        constraint def ExchangeLeavesOutEntersInRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "AR-EXCH-002"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "MemoPort";
+            attribute evaluator = "architecture";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "An interface or a flow between two ports carries its content from the one to the other, so it leaves a port that sends (out or inout) and enters one that receives (in or inout). An exchange that leaves an in port or enters an out port contradicts the ports it joins.";
+            attribute predicateExpression = "exchangeLeavesOutEntersIn";
             constraint { true }
         }
         // ─── Deployment and realization ──────────────────────────────────────
