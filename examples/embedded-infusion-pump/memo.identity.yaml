@@ -20,6 +20,9 @@ elements:
   "memo_examples_embedded_infusion_pump::evAuthoredVcAuthoredSwMotorDriver":
     shortId: "MMX-4"
     uuid: "f53cdefb-fcc7-509b-86cf-8ac6c7487dc4"
+  "memo_examples_embedded_infusion_pump::evControlLoopDeadline":
+    shortId: "MMX-5"
+    uuid: "b9e5eec3-1e49-51ae-9167-f2cb8c3e1c21"
   "memo_examples_embedded_infusion_pump::mcuSafety":
     shortId: "PRC-1"
     uuid: "6c598722-bb92-5204-9258-624247a164b1"
@@ -32,6 +35,12 @@ elements:
   "memo_examples_embedded_infusion_pump::reqAuthoredSwMotorDriver":
     shortId: "REQ-2"
     uuid: "b1759883-8ecf-5516-b23c-353eabb04d4b"
+  "memo_examples_embedded_infusion_pump::reqControlLoopDeadline":
+    shortId: "REQ-3"
+    uuid: "dc0e6c06-3e67-572b-8d8a-22a198ece71c"
+  "memo_examples_embedded_infusion_pump::reqControlLoopDeadline::withinDeadline":
+    shortId: "CNS-1"
+    uuid: "ae9e2258-2f81-5bb0-8f2c-93c150ce660b"
   "memo_examples_embedded_infusion_pump::rtControlLoop":
     shortId: "SFT-2"
     uuid: "a9d1e5cf-792a-5868-9717-42326e66ba68"
@@ -56,6 +65,12 @@ elements:
   "memo_examples_embedded_infusion_pump::vcAuthoredSwMotorDriver":
     shortId: "VRF-3"
     uuid: "6ce25f09-879d-5a67-86d8-ad93aba57086"
+  "memo_examples_embedded_infusion_pump::vcControlLoopDeadline":
+    shortId: "VRF-4"
+    uuid: "51112e2a-ba42-5580-a9c9-baf32dfc95ff"
+  "memo_examples_embedded_infusion_pump::vcControlLoopDeadline::wcetWithinBudget":
+    shortId: "ASS-1"
+    uuid: "3d5de5fa-503d-58c6-9511-4a59968e62d9"
   "memo_examples_embedded_infusion_pump_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "90ba93f2-8a29-577d-ada1-241a24256fbf"
