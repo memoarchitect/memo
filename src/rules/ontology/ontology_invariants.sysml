@@ -141,6 +141,39 @@ package memo_rules_ontology {
         // represent that transitive containment query.
         constraint { true }
     }
+
+    // ─── Direction is written on the ports, and an exchange has to agree with them ──
+    //
+    // A port says `in` or `out` (or `inout`), and a `~` conjugates it. That is the only place direction is
+    // written: an exchange's own direction was the same fact a second time, and nothing checked the two
+    // agreed. These two rules check the exchange against its ports, so a contradiction cannot be written.
+    // Both judge only ends that are ports with a stated direction; a port that says none is not judged.
+    constraint def BindingEndsAgreeInDirectionRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "AR-EXCH-001"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "MemoPort";
+        attribute evaluator = "architecture";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A binding makes its two ports one connection point, so they have the direction between them: a boundary port bound to a port of a nested part passes the same direction through. A binding of an in port to an out port joins things that cannot be the same point.";
+        attribute predicateExpression = "bindEndsAgreeInDirection";
+        // The generic expression evaluator reads a port's attributes, not its stated direction and
+        // conjugation, so a function computes the predicate (as for AR-IBD-001).
+        constraint { true }
+    }
+    constraint def ExchangeLeavesOutEntersInRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "AR-EXCH-002"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "MemoPort";
+        attribute evaluator = "architecture";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "An interface or a flow between two ports carries its content from the one to the other, so it leaves a port that sends (out or inout) and enters one that receives (in or inout). An exchange that leaves an in port or enters an out port contradicts the ports it joins.";
+        attribute predicateExpression = "exchangeLeavesOutEntersIn";
+        constraint { true }
+    }
     // ─── Deployment and realization ──────────────────────────────────────
 
     constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule {
