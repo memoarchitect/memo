@@ -83,7 +83,10 @@ package memo_architecture_functional_functions {
         attribute functionCategory : String;
         attribute actionKind : ActionKind;
         attribute trigger : String;
-        attribute outputSummary : String;
+        // What the function produces, in words: the part the typed `out` parameters cannot say (their type
+        // names the item, not that it is debounced, range-checked or timestamped). It does not restate the
+        // parameters, and what goes in is the `in` parameters alone (decided 2026-10-25, user).
+        attribute outputDescription : String;
         attribute concernKind : ConcernKind;
         attribute criticality : CriticalityKind;
     }

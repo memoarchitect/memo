@@ -18,7 +18,7 @@ package memo_examples_gpca_pump_gpca_verification {
     // (CR-ONT-040), which is not the same as the requirement it satisfies being
     // verified or the module it is allocated to being tested. Each function is
     // named as a subject of the case whose acceptance criteria exercise the
-    // output its `outputSummary` describes. AcquireSensorData and
+    // output its `outputDescription` describes. AcquireSensorData and
     // AggregateSensorStatus are not: no case here tests the debounced,
     // range-checked status vector, and naming one would claim a test that
     // does not exist.

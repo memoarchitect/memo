@@ -18,7 +18,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         out sensorVectorOut : InterfaceItem;
         attribute :>> functionCategory = "sensing";
         attribute :>> trigger = "every 20 ms execution step";
-        attribute :>> outputSummary = "Debounced, range-checked sensor status vector";
+        attribute :>> outputDescription = "Debounced, range-checked sensor status vector";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
 
@@ -35,7 +35,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
             attribute :>> functionCategory = "sensing";
             attribute :>> actionKind = ActionKind::sense;
             attribute :>> trigger = "continuous, sampled every 20 ms execution step";
-            attribute :>> outputSummary = "Measured delivered flow rate in mL/h, with a validity flag";
+            attribute :>> outputDescription = "Measured delivered flow rate in mL/h, with a validity flag";
             attribute :>> concernKind = ConcernKind::safety;
             attribute :>> criticality = CriticalityKind::catastrophic;
         }
@@ -44,7 +44,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
             attribute :>> functionCategory = "protection";
             attribute :>> actionKind = ActionKind::sense;
             attribute :>> trigger = "continuous, sampled every 20 ms execution step";
-            attribute :>> outputSummary = "Air-in-line present or absent, with accumulated bolus volume";
+            attribute :>> outputDescription = "Air-in-line present or absent, with accumulated bolus volume";
             attribute :>> concernKind = ConcernKind::safety;
             attribute :>> criticality = CriticalityKind::catastrophic;
         }
@@ -54,7 +54,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
             attribute :>> functionCategory = "sensing";
             attribute :>> actionKind = ActionKind::transform;
             attribute :>> trigger = "every 20 ms execution step";
-            attribute :>> outputSummary = "Debounced, range-checked sensor status vector for the controller";
+            attribute :>> outputDescription = "Debounced, range-checked sensor status vector for the controller";
             attribute :>> concernKind = ConcernKind::safety;
             attribute :>> criticality = CriticalityKind::catastrophic;
         }
@@ -68,7 +68,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         in prescriptionIn : InterfaceItem;
         attribute :>> functionCategory = "configuration";
         attribute :>> trigger = "prescription entry or edit";
-        attribute :>> outputSummary = "Prescription accepted (within drug-library hard/soft limits) or rejected with reason";
+        attribute :>> outputDescription = "Prescription accepted (within drug-library hard/soft limits) or rejected with reason";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
@@ -78,7 +78,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         out alarmSignalOut : InterfaceItem;
         attribute :>> functionCategory = "alarm";
         attribute :>> trigger = "every 20 ms execution step";
-        attribute :>> outputSummary = "Alarm outputs and inhibition conditions";
+        attribute :>> outputDescription = "Alarm outputs and inhibition conditions";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
@@ -87,7 +87,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         in alarmSignalIn : InterfaceItem;
         attribute :>> functionCategory = "alarm";
         attribute :>> trigger = "alarm raised, escalated, or cleared";
-        attribute :>> outputSummary = "Priority-coded audible tone and visual message";
+        attribute :>> outputDescription = "Priority-coded audible tone and visual message";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::high;
     }
@@ -96,7 +96,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         out flowCommandOut : InterfaceItem;
         attribute :>> functionCategory = "infusion";
         attribute :>> trigger = "mode transitions and each execution step while therapy active";
-        attribute :>> outputSummary = "Commanded flow and mode transitions";
+        attribute :>> outputDescription = "Commanded flow and mode transitions";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
@@ -104,7 +104,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         @MemoIdentity { :>> providedId = "FUNC-006"; :>> label = "EnforceDoseLimits"; }
         attribute :>> functionCategory = "infusion";
         attribute :>> trigger = "patient bolus request or clinician square bolus command";
-        attribute :>> outputSummary = "Bolus authorized or rejected against lockout interval and hourly maximum";
+        attribute :>> outputDescription = "Bolus authorized or rejected against lockout interval and hourly maximum";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
@@ -113,7 +113,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         in flowCommandIn : InterfaceItem;
         attribute :>> functionCategory = "actuation";
         attribute :>> trigger = "flow command update";
-        attribute :>> outputSummary = "Motor step rate with enable interlock; FlowRate_Mode_macro per mode, KVO floor in PAUSED (REQ 43), zero flow in OFF/IDLE (REQ 6/14)";
+        attribute :>> outputDescription = "Motor step rate with enable interlock; FlowRate_Mode_macro per mode, KVO floor in PAUSED (REQ 43), zero flow in OFF/IDLE (REQ 6/14)";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
@@ -121,7 +121,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         @MemoIdentity { :>> providedId = "FUNC-008"; :>> label = "LogTherapyEvents"; }
         attribute :>> functionCategory = "logging";
         attribute :>> trigger = "dose delivered, mode change, alarm, or configuration change";
-        attribute :>> outputSummary = "Timestamped append-only event records";
+        attribute :>> outputDescription = "Timestamped append-only event records";
         attribute :>> concernKind = ConcernKind::regulatory;
         attribute :>> criticality = CriticalityKind::medium;
     }
@@ -129,7 +129,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         @MemoIdentity { :>> providedId = "FUNC-009"; :>> label = "ManagePower"; }
         attribute :>> functionCategory = "platform";
         attribute :>> trigger = "mains-loss signal or battery level change";
-        attribute :>> outputSummary = "Power source selection, low/depleted battery conditions";
+        attribute :>> outputDescription = "Power source selection, low/depleted battery conditions";
         attribute :>> concernKind = ConcernKind::reliability;
         attribute :>> criticality = CriticalityKind::high;
     }
@@ -137,7 +137,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         @MemoIdentity { :>> providedId = "FUNC-010"; :>> label = "PresentStatus"; }
         attribute :>> functionCategory = "user-interface";
         attribute :>> trigger = "state or prescription change";
-        attribute :>> outputSummary = "Mode, prescription, delivered dose, and alarm text on display";
+        attribute :>> outputDescription = "Mode, prescription, delivered dose, and alarm text on display";
         attribute :>> concernKind = ConcernKind::usability;
         attribute :>> criticality = CriticalityKind::high;
     }
@@ -145,7 +145,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         @MemoIdentity { :>> providedId = "FUNC-011"; :>> label = "ExecuteSelfTest"; }
         attribute :>> functionCategory = "platform";
         attribute :>> trigger = "power-on and periodic in-service checks";
-        attribute :>> outputSummary = "POST pass/fail; CPU, RAM, ROM, and sensor plausibility results";
+        attribute :>> outputDescription = "POST pass/fail; CPU, RAM, ROM, and sensor plausibility results";
         attribute :>> concernKind = ConcernKind::safety;
         attribute :>> criticality = CriticalityKind::catastrophic;
     }

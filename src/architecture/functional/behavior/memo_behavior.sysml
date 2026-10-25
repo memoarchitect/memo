@@ -102,8 +102,7 @@ package memo_architecture_functional_behavior {
     // have performed one.
     action def ActivityAction specializes FunctionalAction {
         attribute actionKind : ActionKind;
-        attribute inputSummary : String;
-        attribute outputSummary : String;
+        attribute outputDescription : String;
         attribute wcetMs : DurationValue;
         attribute safetyRelevant : Boolean;
     }

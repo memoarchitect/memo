@@ -30,7 +30,7 @@ package robot_cell_family_perception {
     action fnAcquirePointClouds : SystemFunction {
         @MemoIdentity { :>> providedId = "RCF-PER-F-001"; :>> label = "Acquire Point Clouds"; }
         out pointCloudOut : PointCloud;
-        attribute :>> outputSummary = "Filtered, timestamped point clouds";
+        attribute :>> outputDescription = "Filtered, timestamped point clouds";
     }
 
     use case ucRecordRun : UseCase {
