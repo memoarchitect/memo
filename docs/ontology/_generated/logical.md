@@ -39,6 +39,7 @@ flowchart LR
   MemoPart["MemoPart"]:::other
   LogicalPort -->|LogicalInterface| anyElement
   LogicalComponent -->|LogicalConnector| LogicalComponent
+  anyElement -->|LogicalTransfer| anyElement
   LogicalComponent -->|IndependentOf| LogicalComponent
   LogicalComponent -->|RealizedBy| MemoPart
   classDef other fill:#eef1f4,stroke:#9aa7b2,color:#4a5a66
@@ -55,6 +56,7 @@ flowchart LR
 | [`LogicalInterface`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalinterface) | [`LogicalPort`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalport) | *any element* | Typed relationship from `LogicalPort` to `any element`. |
 | [`LogicalConnector`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalconnector) | [`LogicalComponent`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalcomponent) | [`LogicalComponent`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalcomponent) | A typed logical connection between two components' ports. |
 | [`LogicalExchange`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalexchange) | *any element* | *any element* | Typed relationship for logical exchange. |
+| [`LogicalTransfer`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicaltransfer) | *any element* | *any element* | The concrete exchange a model types its logical flows by; the ends stay untyped for the reason above. |
 | [`IndependentOf`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#independentof) | [`LogicalComponent`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalcomponent) | [`LogicalComponent`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalcomponent) | Claimed independence between channels (common-cause defense). |
 
 ### Relationships from elsewhere that reach this layer

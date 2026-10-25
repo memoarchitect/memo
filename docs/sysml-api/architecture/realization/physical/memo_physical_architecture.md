@@ -39,6 +39,7 @@
 | [`PhysicalPort`](#physicalport) | `port def` | Physical port definition specializing `MemoPort`. | `MemoPort` |
 | [`PhysicalInterface`](#physicalinterface) | `interface def` | Typed relationship from `PhysicalPort` to `PhysicalPort`. | `Interface` |
 | [`PhysicalFlow`](#physicalflow) | `flow def` | What crosses a physical interface, as a quantity: a voltage, a current, a pressure, a force, a flow of fluid. | — |
+| [`PhysicalTransfer`](#physicaltransfer) | `flow def` | The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends. | `PhysicalFlow` |
 
 ## ProcessingNode
 
@@ -112,6 +113,21 @@ abstract flow def PhysicalFlow
 | Kind | `flow def` |
 | Abstract | Yes |
 | Specializes | — |
+| Owning package | `memo_architecture_realization_physical` |
+
+
+## PhysicalTransfer
+
+```sysml
+flow def PhysicalTransfer specializes PhysicalFlow
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends. |
+| Kind | `flow def` |
+| Abstract | No |
+| Specializes | `PhysicalFlow` |
 | Owning package | `memo_architecture_realization_physical` |
 
 
@@ -241,6 +257,12 @@ abstract flow def PhysicalFlow
             attribute nominalValue : String;
             attribute minValue : String;
             attribute maxValue : String;
+        }
+
+        // The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends.
+        flow def PhysicalTransfer specializes PhysicalFlow {
+            end source;
+            end target;
         }
     }
 

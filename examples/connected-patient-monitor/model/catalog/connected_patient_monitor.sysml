@@ -49,7 +49,7 @@ package memo_examples_connected_patient_monitor {
 
     // The measurement crosses from the monitor's out port to the gateway's in
     // port; the item feature on each port is what it carries.
-    flow exSpo2ToGateway : LogicalExchange from lcMonitor.pSpo2Out.spo2 to lcGateway.pSpo2In.spo2 {
+    flow exSpo2ToGateway : LogicalTransfer from lcMonitor.pSpo2Out.spo2 to lcGateway.pSpo2In.spo2 {
         @MemoIdentity { :>> providedId = "CPM-EX-001"; :>> label = "SpO2ToGateway"; }
         attribute :>> contentKind = FlowContentKind::measurement;
     }
