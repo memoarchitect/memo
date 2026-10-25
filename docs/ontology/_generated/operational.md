@@ -25,7 +25,7 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
-| [`OperativeScenario`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `action def` | Operative scenario definition specializing `MemoAction`. |
+| [`OperativeScenario`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#operativescenario) | `action def` | A scenario is a `MemoConstrainedOccurrence`: it carries the native `precondition` and `postcondition` constraints a function does, redefined with an expression (`constraint :>> precondition { level >= 0 }`).… |
 
 **Structure**
 

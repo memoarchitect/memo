@@ -23,7 +23,12 @@ package memo_architecture_operational_scenarios {
         enum alternate;
     }
 
-    action def OperativeScenario specializes MemoAction {
+    // A scenario is a `MemoConstrainedOccurrence`: it carries the native `precondition` and
+    // `postcondition` constraints a function does, redefined with an expression
+    // (`constraint :>> precondition { level >= 0 }`). `preCondition` and `postCondition` below are the
+    // same two conditions in words, for what no expression says ("patient assessed"); the constraint
+    // is for one that can be checked.
+    action def OperativeScenario specializes MemoAction, MemoConstrainedOccurrence {
         attribute scenarioKind : ScenarioKind default ScenarioKind::nominal;
         attribute initialState : String;
         attribute trigger : String;

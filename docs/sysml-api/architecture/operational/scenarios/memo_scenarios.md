@@ -39,7 +39,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`ScenarioKind`](#scenariokind) | `enum def` | A scenario is a nominal path or an alternate (exception/recovery) path. Defaults to nominal. | — |
-| [`OperativeScenario`](#operativescenario) | `action def` | Operative scenario definition specializing `MemoAction`. | `MemoAction` |
+| [`OperativeScenario`](#operativescenario) | `action def` | A scenario is a `MemoConstrainedOccurrence`: it carries the native `precondition` and `postcondition` constraints a function does, redefined with an expression (`constraint :>> precondition { level >= 0 }`).… | `MemoAction` |
 
 ## ScenarioKind
 
@@ -59,12 +59,12 @@ enum def ScenarioKind
 ## OperativeScenario
 
 ```sysml
-action def OperativeScenario specializes MemoAction
+action def OperativeScenario specializes MemoAction, MemoConstrainedOccurrence
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Operative scenario definition specializing `MemoAction`. |
+| Description | A scenario is a `MemoConstrainedOccurrence`: it carries the native `precondition` and `postcondition` constraints a function does, redefined with an expression (`constraint :>> precondition { level >= 0 }`).… |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `MemoAction` |
@@ -101,7 +101,12 @@ action def OperativeScenario specializes MemoAction
             enum alternate;
         }
 
-        action def OperativeScenario specializes MemoAction {
+        // A scenario is a `MemoConstrainedOccurrence`: it carries the native `precondition` and
+        // `postcondition` constraints a function does, redefined with an expression
+        // (`constraint :>> precondition { level >= 0 }`). `preCondition` and `postCondition` below are the
+        // same two conditions in words, for what no expression says ("patient assessed"); the constraint
+        // is for one that can be checked.
+        action def OperativeScenario specializes MemoAction, MemoConstrainedOccurrence {
             attribute scenarioKind : ScenarioKind default ScenarioKind::nominal;
             attribute initialState : String;
             attribute trigger : String;
