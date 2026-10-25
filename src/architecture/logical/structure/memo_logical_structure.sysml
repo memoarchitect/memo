@@ -167,6 +167,7 @@ package memo_architecture_logical_structure {
 
     // A typed logical connection between two components' ports.
     connection def LogicalConnector :> MemoRelationship {
+        attribute :>> isConnector = true;
         attribute contentKind : FlowContentKind;
         attribute direction : DirectionKind;
         end sourceComponent : LogicalComponent :>> source;

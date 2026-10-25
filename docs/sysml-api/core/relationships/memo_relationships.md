@@ -267,6 +267,11 @@ connection def BindsToInterface :> MemoRelationship
                  * pair of elements — KerML Feature::isUnique over the relation.
                  * Unset is read as true. */
             attribute isUnique : Boolean;
+            doc /* True when this relation is a connector between two parts, the kind of link that makes a part
+                 * count as wired in an internal block diagram (rule AR-IBD-001). Trace, allocation, deployment and
+                 * satisfaction links are not. Unset is read as false. Interface and flow usages are connectors by
+                 * their language construct and need no value. */
+            attribute isConnector : Boolean;
         }
 
         // ─── Typed dependencies ─────────────────────────────────────────────
