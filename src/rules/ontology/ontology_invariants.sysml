@@ -181,6 +181,22 @@ package memo_rules_ontology {
         constraint { true }
     }
     #EnforcesClause dependency from SafetyCriticalFunctionVerifiedRule to iso13485::iso13485Clause7::iso13485Clause7_3::iso13485Clause7_3_6;
+    // A flow's step is its own position of a function (`action step :> fn;`), and evidence is scoped to
+    // the position: a test of the function, or of another step, does not count for it. So a step whose
+    // function is safety-critical needs a verification case of its own. The step reaches its function
+    // through the `subsets` edge.
+    constraint def SafetyCriticalStepVerifiedRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-091"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::medicalDevice;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "ActionUsage";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A step of a flow whose function is safety-critical (criticality high or catastrophic) must trace to a verification case of its own; a test of the function or of another step does not cover it.";
+        attribute predicateExpression = "not(downstream(subsets)->exists(criticality == 'high' or criticality == 'catastrophic')) or verifiedBy->size() >= 1";
+        constraint { true }
+    }
+    #EnforcesClause dependency from SafetyCriticalStepVerifiedRule to iso13485::iso13485Clause7::iso13485Clause7_3::iso13485Clause7_3_6;
     constraint def CriticalTaskValidatedRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-041"; }
         attribute tailoring = RuleTailoringKind::assurance;
