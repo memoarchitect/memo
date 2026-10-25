@@ -32,6 +32,18 @@ package memo_rules_quantitative {
         constraint { true }
     }
 
+    constraint def SoftwareComponentWcetWithinDeadlineRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "QT-004"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "SoftwareComponent";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A component whose worst-case execution time exceeds its deadline cannot meet it. Both are durations, compared in one unit whatever each was written in.";
+        attribute predicateExpression = "attributes.wcetMs == '' or attributes.deadlineMs == '' or wcetMs <= deadlineMs";
+        constraint { true }
+    }
+
     // QT-003 (RequirementVerificationRatio, "≥80% of requirements verified") is an
     // aggregate coverage metric over the whole requirement set, not a per-subject
     // predicate, so it has no `constraint { … }` form. It remains a
