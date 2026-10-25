@@ -34,7 +34,7 @@
 | --- | --- | --- | --- |
 | [`FunctionalAction`](#functionalaction) | `action def` | Functional action definition specializing `MemoAction`. | `MemoAction` |
 | [`StateMachine`](#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based MemoPart family. Transitions stay part-based (below) to keep their traceable safety attributes.… | `MemoState` |
-| [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… | `MemoPart` |
+| [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point: it says which mode is active in one selectable arrangement. The reference is typed to the shared native state family so a consumer can navigate from the selected configuration to its governing mode.… | `MemoPart` |
 | [`TransitionRecord`](#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… | — |
 | [`BehaviorProperty`](#behaviorproperty) | `requirement def` | Behavior property definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 | [`Contract`](#contract) | `requirement def` | Contract definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
@@ -80,7 +80,7 @@ part def ModeConfiguration specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | A configuration is the concrete selection made at a `variation` choice point. It remains separate from a mode state: it says which mode and elements are active in one selectable arrangement.… |
+| Description | A configuration is the concrete selection made at a `variation` choice point: it says which mode is active in one selectable arrangement. The reference is typed to the shared native state family so a consumer can navigate from the selected configuration to its governing mode.… |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -204,13 +204,18 @@ requirement def TimingConstraint :> MemoRequirementElement
             attribute executionSemantics : String;
         }
         // A configuration is the concrete selection made at a `variation` choice
-        // point. It remains separate from a mode state: it says which mode and
-        // elements are active in one selectable arrangement.
+        // point: it says which mode is active in one selectable arrangement.
         // The reference is typed to the shared native state family so a consumer
         // can navigate from the selected configuration to its governing mode.
+        //
+        // What is available in a mode is not listed here. A state performs the
+        // functions available in it (`do fnX;` or `perform fnX;` inside the state),
+        // which is SysML's own way and is checked by the compiler; a second list of
+        // active elements on the configuration said the same thing again. ARCADIA's
+        // Configuration, the set of items available in an active mode or state, is
+        // that performing.
         part def ModeConfiguration specializes MemoPart {
             ref activeMode : MemoState[1];
-            ref activeElement : MemoPart[0..*];
         }
         // Transitions are native SysML v2 `transition` usages inside the owning
         // state — there is no `part def Transition`, and its `transition` keyword
