@@ -242,6 +242,12 @@ requirement def TimingConstraint :> MemoRequirementElement
         // verification case can `verify`. It was a `part def` under
         // VerifiableElement, which made a property a structural thing and left
         // native `verify` unable to name it.
+        //
+        // `formalExpression` holds the property in the language `languageKind` names: natural language,
+        // a pseudo-formal text, AGREE, LTL or CTL. None of those is a SysML expression (the expression
+        // grammar has no temporal operators), so it is text the model carries and a tool of that language
+        // reads. A property that IS a boolean expression over features is written as a native
+        // `require constraint { … }` in the body, which this requirement def allows, and not here.
         requirement def BehaviorProperty :> MemoRequirementElement {
             attribute propertyKind : BehaviorPropertyKind;
             attribute languageKind : PropertyLanguageKind;
