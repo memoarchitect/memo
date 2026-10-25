@@ -44,6 +44,23 @@ package memo_rules_quantitative {
         constraint { true }
     }
 
+    // The `require`, `assume` and `assert constraint`s a model declares are claims about its own values. A
+    // function evaluates them (`validator/model-constraints.ts`): names resolve from the owning element, its
+    // package, then a unique short name, and a quantity compares as a quantity. A constraint it cannot
+    // resolve is reported as not evaluated, which is information, never a pass.
+    constraint def ModelConstraintHoldsRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "MC-001"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "Model";
+        attribute evaluator = "constraints";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A constraint a model declares is a claim about its own values; one that does not hold is a defect in the model or in the claim.";
+        attribute predicateExpression = "modelConstraintsHold";
+        constraint { true }
+    }
+
     // QT-003 (RequirementVerificationRatio, "≥80% of requirements verified") is an
     // aggregate coverage metric over the whole requirement set, not a per-subject
     // predicate, so it has no `constraint { … }` form. It remains a
