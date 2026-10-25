@@ -43,6 +43,8 @@
 | [`AffectsRelease`](#affectsrelease) | `metadata def` | `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. | `MemoTypedDependency` |
 | [`RegulatedDevice`](#regulateddevice) | `part def` | Regulated device definition specializing `MemoPart`. | `MemoPart` |
 | [`Covers`](#covers) | `metadata def` | `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. | `MemoTypedDependency` |
+| [`IntendedUseOf`](#intendeduseof) | `metadata def` | `#IntendedUseOf dependency from <intended use> to <device>;` The intended use (a requirement) states what this device is for. | `MemoTypedDependency` |
+| [`UsedWith`](#usedwith) | `metadata def` | `#UsedWith dependency from <device> to <device>, <device>;` The device is used with these regulated devices (compatible devices and approved accessories). | `MemoTypedDependency` |
 | [`Project`](#project) | `part def` | Project definition specializing `MemoPart`. | `MemoPart` |
 | [`Feeds`](#feeds) | `metadata def` | `#Feeds dependency from <project> to <record>, <record>;` The project's work is in these releases. | `MemoTypedDependency` |
 | [`IntroducedBy`](#introducedby) | `metadata def` | `#IntroducedBy dependency from <variant> to <project>;` The project that introduced this variant. | `MemoTypedDependency` |
@@ -198,6 +200,36 @@ metadata def Covers :> MemoTypedDependency
 | Owning package | `memo_artifacts_configuration_management` |
 
 
+## IntendedUseOf
+
+```sysml
+metadata def IntendedUseOf :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | `#IntendedUseOf dependency from <intended use> to <device>;` The intended use (a requirement) states what this device is for. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
+## UsedWith
+
+```sysml
+metadata def UsedWith :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | `#UsedWith dependency from <device> to <device>, <device>;` The device is used with these regulated devices (compatible devices and approved accessories). |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
+| Owning package | `memo_artifacts_configuration_management` |
+
+
 ## Project
 
 ```sysml
@@ -346,8 +378,15 @@ connection def Changes :> MemoRelationship
         // documents it must have. It replaces `ModelMethodBinding.regulatoryRegime`, which stated one regime set
         // for a whole model and is read only when the model declares no device.
         //
-        // `IntendedUseOf` and `UsedWith` (plan O6) are not declared: the plan names no end for either, and an end
-        // is not invented to fill a name. `Covers` is the link every part of M5 needs.
+        // The device's other two links (plan O6), both typed dependencies like `Covers`:
+        //
+        //   #IntendedUseOf dependency from pumpIntendedUse to deviceFda;
+        //   #UsedWith dependency from deviceFda to deviceInfusionSet;
+        //
+        // `IntendedUseOf` runs from the intended use (a `requirement def`, `IntendedUse`) to the device, as its
+        // name reads; a device can have one per indication. `UsedWith` runs between regulated devices: the
+        // compatible devices and accessories that are themselves approved. An accessory that is not a device is
+        // not a target (decided 2026-10-25, user).
         part def RegulatedDevice :> MemoPart {
             attribute jurisdiction : RegulatoryRegimeKind[1];
             attribute submissionId : String[0..1];
@@ -355,6 +394,12 @@ connection def Changes :> MemoRelationship
 
         metadata def Covers :> MemoTypedDependency {
             doc /* `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. */
+        }
+        metadata def IntendedUseOf :> MemoTypedDependency {
+            doc /* `#IntendedUseOf dependency from <intended use> to <device>;` The intended use (a requirement) states what this device is for. */
+        }
+        metadata def UsedWith :> MemoTypedDependency {
+            doc /* `#UsedWith dependency from <device> to <device>, <device>;` The device is used with these regulated devices (compatible devices and approved accessories). */
         }
 
         // A project is a change set in an iteration (plan O7): the work that produces releases. It holds a link to
