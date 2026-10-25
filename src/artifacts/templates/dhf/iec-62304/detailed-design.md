@@ -47,7 +47,7 @@ _[TODO: Document state machine diagrams for stateful components]_
 ### 3.3 Interface Specifications
 
 ```memo-query
-kind: Interface
+kind: [LogicalInterface, PhysicalInterface]
 display: table
 columns: name, layer, doc
 sort: name

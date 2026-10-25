@@ -23,7 +23,7 @@ This Use-Related Risk Analysis (URRA) identifies use errors and use-related haza
 This section is generated from the system model. The table below lists the **Use Scenarios** elements currently defined:
 
 ```memo-query
-kind: [UseCase, UserTask]
+kind: [UseCase, OperativeAction]
 display: table
 columns: name, layer, doc
 sort: name

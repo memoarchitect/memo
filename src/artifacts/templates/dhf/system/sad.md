@@ -87,7 +87,7 @@ empty: "No runtime environments or deployment units defined."
 Cyber-physical interactions and data flows between components:
 
 ```memo-query
-kind: [Interface, LogicalInterface, ComponentExchange, InterfaceElement, MemoPort, DataPort, SensorPort, CommandPort, SoftwarePort, PhysicalPort, LogicalPort]
+kind: [LogicalInterface, PhysicalInterface, ComponentExchange, InterfaceElement, MemoPort, DataPort, SensorPort, CommandPort, SoftwarePort, PhysicalPort, LogicalPort]
 display: table
 columns: name, kind, layer, doc
 sort: name

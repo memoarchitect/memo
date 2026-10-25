@@ -31,7 +31,7 @@ This section describes the security architecture of **{{project.product}}**. The
 Define the trusted zones, the communication paths crossing zone boundaries, and the protection applied at each crossing.
 
 ```memo-query
-kind: Interface
+kind: [LogicalInterface, PhysicalInterface]
 display: table
 columns: name, layer, doc
 sort: name
