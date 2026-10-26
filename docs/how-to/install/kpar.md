@@ -38,7 +38,7 @@ sysand --version
 From a source checkout, run:
 
 ```bash
-./scripts/build-kpar.sh
+node scripts/build-kpar.mjs
 ```
 
 The script writes versioned archives below `output/kpar/memo-ontology/` and
