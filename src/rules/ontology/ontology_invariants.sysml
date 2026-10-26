@@ -657,4 +657,20 @@ package memo_rules_ontology {
         attribute predicateExpression = "targetsOf(causes)->forAll(conformsTo(RiskItem) or conformsTo(FaultTreeNode))";
         constraint { true }
     }
+
+    // ─── Views and viewpoints ───────────────────────────────────────────
+
+    // ISO 42010 conformance is many-to-many, but never empty: `MemoView.viewpointDefinition` is `[1..*]`. A view
+    // that traces to a viewpoint is filed under it in Architect; one that traces to none has nowhere to be found.
+    constraint def ViewTracesToViewpointRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-092"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "MemoView";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "Every view traces to at least one viewpoint (ISO/IEC/IEEE 42010): the viewpoint says what the view is for and who reads it. A view with none cannot be filed under a viewpoint, so Architect lists it as uncategorised.";
+        attribute predicateExpression = "attributes.viewpointDefinition != ''";
+        constraint { true }
+    }
 }
