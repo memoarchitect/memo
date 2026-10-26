@@ -110,6 +110,8 @@ package memo_core_relationships_workspace_membership {
     part membershipRealizedByScenario : WorkspaceMembershipEntry { attribute :>> relation = "realizedByScenario"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
     // Neither: a cyber element and a safety item are each placed on their own.
     part membershipImpactsSafety : WorkspaceMembershipEntry { attribute :>> relation = "impactsSafety"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+    // Neither: a benefit and the risk it is weighed against are each placed on their own.
+    part membershipWeighedAgainst : WorkspaceMembershipEntry { attribute :>> relation = "weighedAgainst"; attribute :>> direction = WorkspaceMembershipKind::neither; }
     // A security property follows its asset.
     part membershipHasSecurityProperty : WorkspaceMembershipEntry { attribute :>> relation = "hasSecurityProperty"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
     // An attack surface follows the asset it exposes.
