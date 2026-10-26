@@ -35,6 +35,6 @@ elements:
   "memo_examples_surgical_robot_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "7c9bbd2c-b684-52fc-a145-3120297a437f"
-  "memo_examples_surgical_robot_viewpoints_unassigned_views_surgical_robot_overview::surgicalRobotOverview":
+  "memo_examples_surgical_robot_viewpoints_logical_views_surgical_robot_overview::surgicalRobotOverview":
     shortId: "MMX-1"
     uuid: "e32518a0-d91e-507b-af55-8edc625b3b54"

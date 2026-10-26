@@ -41,6 +41,6 @@ elements:
   "memo_examples_software_only_medical_device_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "8a17582d-c03a-5123-8912-08915e3ffbfb"
-  "memo_examples_software_only_medical_device_viewpoints_unassigned_views_software_only_medical_device_overview::softwareOnlyMedicalDeviceOverview":
+  "memo_examples_software_only_medical_device_viewpoints_logical_views_software_only_medical_device_overview::softwareOnlyMedicalDeviceOverview":
     shortId: "MMX-1"
     uuid: "609c5e73-aea2-51a1-af3d-73824c7bb8c0"

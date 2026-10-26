@@ -11,8 +11,7 @@ package memo_examples_functional_logical_physical_project {
 
     // The project's own content, imported so the catalog is one reachable
     // closure from a single entrypoint.
-    private import memo_examples_functional_logical_physical_viewpoints_unassigned::*;
-    private import memo_examples_functional_logical_physical_viewpoints_unassigned_views_functional_logical_physical_overview::*;
+    private import memo_examples_functional_logical_physical_viewpoints_logical_views_functional_logical_physical_overview::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;

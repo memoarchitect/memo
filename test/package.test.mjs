@@ -540,7 +540,7 @@ test('MEMO definitions use their native metaclass wrapper', () => {
   // The standalone SysML activity sample intentionally demonstrates the
   // language without MEMO. Every ontology, extension, and ordinary MEMO
   // example definition must instead specialize a construct-specific root.
-  const nativeSample = join('examples', 'sysml-diagram-samples', 'model', 'sysml_v2_activity_example.sysml');
+  const nativeSample = join('examples', 'sysml-diagram-samples', 'model', 'catalog', 'sysml_v2_activity_example.sysml');
   const files = [...walkSysml('src'), ...walkSysml('extensions'), ...walkSysml('examples')]
     .filter((file) => file !== nativeSample && !file.includes('/.venv/'));
   const roots = new Set([
@@ -561,7 +561,7 @@ test('MEMO definitions use their native metaclass wrapper', () => {
 });
 
 test('every MEMO item definition reaches MemoItem', () => {
-  const nativeSample = join('examples', 'sysml-diagram-samples', 'model', 'sysml_v2_activity_example.sysml');
+  const nativeSample = join('examples', 'sysml-diagram-samples', 'model', 'catalog', 'sysml_v2_activity_example.sysml');
   const files = [...walkSysml('src'), ...walkSysml('extensions'), ...walkSysml('examples')]
     .filter((file) => file !== nativeSample && !file.includes('/.venv/'));
   const parents = new Map([['MemoItem', undefined]]);

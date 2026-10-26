@@ -1,0 +1,82 @@
+package memo_examples_sysml_diagram_samples_samples_action_flow_view {
+    private import ScalarValues::*;
+    private import memo_core_relationships::*;
+    private import memo_architecture_logical_structure::*;
+    private import memo_architecture_logical_interfaces::*;
+    private import memo_architecture_functional_functions::*;
+    private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_functional_functional_viewpoint::*;
+    private import memo_core_enumerations::*;
+
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
+    item def DataPacket specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::data;
+    }
+    item def EnergyToken specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::energy;
+    }
+    item def MaterialBatch specializes InterfaceItem {
+        attribute :>> itemKind = InterfaceItemKind::material;
+    }
+
+    action def ReceiveInput specializes SystemFunction { out item received : DataPacket; }
+    action def ValidateInput specializes SystemFunction { in item received : DataPacket; out item validated : EnergyToken; }
+    action def ProcessInput specializes SystemFunction { in item validated : EnergyToken; out item result : MaterialBatch; }
+    action def RecordResult specializes SystemFunction { in item result : MaterialBatch; }
+
+    part laneA : LogicalComponent {@MemoIdentity { :>> label = "Lane A"; } }
+    part laneB : LogicalComponent {@MemoIdentity { :>> label = "Lane B"; } }
+
+    action sampleActionFlow : SystemFunction {
+        action receive : ReceiveInput;
+        action validate : ValidateInput;
+        action process : ProcessInput {
+            action processStepA : ValidateInput;
+            action processStepB : ProcessInput;
+            action processStepC : ProcessInput;
+            first start then processStepA;
+            first processStepA then processStepB;
+            first processStepB then processStepC;
+            first processStepC then done;
+        }
+        action record : RecordResult;
+
+        flow dataPacketFlow of DataPacket from receive.received to validate.received;
+        flow energyTokenFlow of EnergyToken from validate.validated to process.validated;
+        flow materialBatchFlow of MaterialBatch from process.result to record.result;
+
+        first start then receive;
+        first receive then validate;
+        first validate then process;
+        first process then record;
+        first record then done;
+    }
+
+    allocate sampleActionFlow.receive to laneA;
+    allocate sampleActionFlow.validate to laneA;
+    allocate sampleActionFlow.process to laneB;
+    allocate sampleActionFlow.process.processStepA to laneB;
+    allocate sampleActionFlow.process.processStepB to laneB;
+    allocate sampleActionFlow.process.processStepC to laneB;
+    allocate sampleActionFlow.record to laneB;
+
+    // MemoLink sample — the universal relation, exercised where nothing else
+    // reaches. laneB is a `part` (LogicalComponent :> MemoPart) and
+    // `sampleActionFlow.process` is an action usage (:> MemoAction). Those
+    // foundations share no supertype, so every typed relation in the ontology
+    // is unavailable here: legalRelationshipTypes returns MemoLink and nothing
+    // else.
+    //
+    // The target is the action *usage*, not the `ProcessInput` definition.
+    // Binding a value to a definition is not portable — SysIDE rejects it,
+    // because a value must be a feature and a definition is not.
+    doc /* Lane B is the swimlane that carries the ProcessInput behaviour. The
+         * association crosses the part/action metaclass boundary, so no typed
+         * relation can express it — which is precisely what a bare `dependency`
+         * means. It was a `MemoLink`, the ontology's own weakest relation, and
+         * that is a duplicate of `dependency` rather than something more.
+         */
+    dependency linkLaneBProcessesInput from laneB to sampleActionFlow::process;
+    allocate sampleActionFlow to laneA;
+}

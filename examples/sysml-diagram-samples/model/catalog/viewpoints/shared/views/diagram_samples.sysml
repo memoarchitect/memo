@@ -1,0 +1,422 @@
+// Every view of the diagram gallery, in one package.
+//
+// Each sample's model content lives in its own file and package, next to
+// this one, and is imported below. The views are gathered here so the
+// explorer lists them together under each diagram-type viewpoint: a SysML
+// root package is declared once, in one file, so a shared `diagram_samples`
+// package cannot be split across the sample files themselves.
+package diagram_samples {
+    private import ScalarValues::*;
+    private import memo_core_relationships::*;
+    private import memo_architecture_logical_structure::*;
+    private import memo_architecture_logical_interfaces::*;
+    private import memo_architecture_functional_functions::*;
+    private import memo_viewpoints_definitions::*;
+    private import memo_viewpoints_functional_functional_viewpoint::*;
+    private import memo_core_enumerations::*;
+    private import memo_core_common::*;
+    private import memo_core_common::MemoIdentity;
+    private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_use_cases::*;
+    private import memo_architecture_operational_structure::*;
+    private import memo_viewpoints_operational_operational_viewpoint::*;
+    private import memo_architecture_operational_context_use_context::*;
+    private import memo_viewpoints_context_context_viewpoint::*;
+    private import memo_assurance_safety_risk_analysis::*;
+    private import memo_viewpoints_logical_logical_viewpoint::*;
+    private import memo_architecture_operational_activities::*;
+    private import memo_assurance_requirements_needs::*;
+    private import memo_assurance_requirements::*;
+    private import memo_viewpoints_requirements_requirements_viewpoint::*;
+    private import activity_example::*;
+    private import memo_architecture_functional_behavior::*;
+    private import memo_architecture_implementation_hardware_structure::*;
+    private import memo_architecture_realization_physical::*;
+    private import memo_viewpoints_physical_physical_viewpoint::*;
+    private import memo_examples_sysml_diagram_samples_samples_action_flow_view::laneA;
+    private import memo_examples_sysml_diagram_samples_samples_action_flow_view::laneB;
+    private import memo_examples_sysml_diagram_samples_samples_action_flow_view::sampleActionFlow;
+    private import memo_examples_sysml_diagram_samples_samples_browser_view::controlSystem;
+    private import memo_examples_sysml_diagram_samples_samples_browser_view::maintenanceEngineer;
+    private import memo_examples_sysml_diagram_samples_samples_browser_view::monitorStatus;
+    private import memo_examples_sysml_diagram_samples_samples_browser_view::remoteMonitor;
+    private import memo_examples_sysml_diagram_samples_samples_browser_view::runDiagnostics;
+    private import memo_examples_sysml_diagram_samples_samples_browser_view::startSystem;
+    private import memo_examples_sysml_diagram_samples_samples_browser_view::systemOperator;
+    private import memo_examples_sysml_diagram_samples_samples_context_view::biomedTech;
+    private import memo_examples_sysml_diagram_samples_samples_context_view::homeContext;
+    private import memo_examples_sysml_diagram_samples_samples_context_view::infusionSystem;
+    private import memo_examples_sysml_diagram_samples_samples_context_view::pharmacySystem;
+    private import memo_examples_sysml_diagram_samples_samples_functional_flow_view::fxDeliveryFlow;
+    private import memo_examples_sysml_diagram_samples_samples_functional_flow_view::fxPumpSystem;
+    private import memo_examples_sysml_diagram_samples_samples_grid_view::fmAirSensorSilent;
+    private import memo_examples_sysml_diagram_samples_samples_grid_view::fmMotorRunaway;
+    private import memo_examples_sysml_diagram_samples_samples_grid_view::fmOcclusionDrift;
+    private import memo_examples_sysml_diagram_samples_samples_interconnection_view::coffeeMachine;
+    private import memo_examples_sysml_diagram_samples_samples_interconnection_view::cup;
+    private import memo_examples_sysml_diagram_samples_samples_interconnection_view::waterSupply;
+    private import memo_examples_sysml_diagram_samples_samples_drill_down_view::DrillCalibrate;
+    private import memo_examples_sysml_diagram_samples_samples_drill_down_view::DrillGearbox;
+    private import memo_examples_sysml_diagram_samples_samples_drill_down_view::drive;
+    private import memo_examples_sysml_diagram_samples_samples_drill_down_view::servicing;
+    private import memo_examples_sysml_diagram_samples_samples_operational_behaviour_view::opCareSystem;
+    private import memo_examples_sysml_diagram_samples_samples_operational_behaviour_view::opSetupFlow;
+    private import memo_examples_sysml_diagram_samples_samples_package_view::domain;
+    private import memo_examples_sysml_diagram_samples_samples_package_view::infrastructure;
+    private import memo_examples_sysml_diagram_samples_samples_package_view::presentation;
+    private import memo_examples_sysml_diagram_samples_samples_requirements_view::needSafeTherapy;
+    private import memo_examples_sysml_diagram_samples_samples_requirements_view::needTimelyAlarms;
+    private import memo_examples_sysml_diagram_samples_samples_requirements_view::reqAlarmLoudness;
+    private import memo_examples_sysml_diagram_samples_samples_requirements_view::reqDoseLimit;
+    private import memo_examples_sysml_diagram_samples_samples_requirements_view::reqOcclusionAlarm;
+    private import memo_examples_sysml_diagram_samples_samples_sequence_view::errorHandling;
+    private import memo_examples_sysml_diagram_samples_samples_sequence_view::monitorLoop;
+    private import memo_examples_sysml_diagram_samples_samples_sequence_view::pumpController;
+    private import memo_examples_sysml_diagram_samples_samples_sequence_view::pumpMechanism;
+    private import memo_examples_sysml_diagram_samples_samples_sequence_view::startInfusion;
+    private import memo_examples_sysml_diagram_samples_samples_state_transition_view::pumpModes;
+    private import memo_examples_sysml_diagram_samples_samples_tree_view::rootA;
+    private import memo_examples_sysml_diagram_samples_samples_use_case_view::Specialization;
+    private import memo_examples_sysml_diagram_samples_samples_use_case_view::configureTherapy;
+    private import memo_examples_sysml_diagram_samples_samples_use_case_view::documentTreatment;
+    private import memo_examples_sysml_diagram_samples_samples_use_case_view::maintainDevice;
+    private import memo_examples_sysml_diagram_samples_samples_use_case_view::nursingStaff;
+    private import memo_examples_sysml_diagram_samples_samples_use_case_view::reviewStatus;
+    private import memo_examples_sysml_diagram_samples_samples_use_case_view::serviceTechnician;
+    private import memo_examples_sysml_diagram_samples_samples_use_case_view::validateTherapySettings;
+
+    // ─── action flow view ────────────────────────────────────────────────
+
+    // Child action-flow view — the process composite action's own steps. Its
+    // subject is `sampleActionFlow.process`, so the parent action-flow shows a
+    // "navigate to view" button on the Process node.
+    view processStepsDetail : MemoDiagramView {
+        expose sampleActionFlow::process::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Internal steps of the Process action — step A through C."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
+        ref :>> viewpointDefinition = functionalViewpoint;
+    }
+
+    view therapySessionFlow : MemoDiagramView {
+        expose sampleActionFlow::**;
+        expose laneA;
+        expose laneB;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Dummy actions, typed item flows, successions, and a composite action for renderer development."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
+        ref :>> viewpointDefinition = functionalViewpoint;
+    }
+
+    // ─── browser view ────────────────────────────────────────────────────
+
+    view operationalBrowserTree : MemoDiagramView {
+        expose controlSystem::**;
+        expose systemOperator;
+        expose maintenanceEngineer;
+        expose remoteMonitor;
+        expose startSystem::**;
+        expose runDiagnostics::**;
+        expose monitorStatus::**;
+        @MemoIdentity { :>> shortDescription = "Browser membership tree showing operational entities, actors, and use cases — demonstrates the browser view kind with mixed element types."; }
+        attribute :>> viewKind = DiagramViewKind::browser;
+        ref :>> viewpointDefinition = operationalViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeElementKinds = ("OperationalEntity", "User", "UseCase");
+            attribute :>> includeRelationshipKinds = ("Composes", "ParticipatesIn");
+        }
+    }
+
+    // ─── context view ────────────────────────────────────────────────────
+
+    view systemContextDiagram : MemoDiagramView {
+        expose infusionSystem::**;
+        // Qualified because three samples each declare an actor called
+        // `clinician` and two declare a `patient`: each sample is standalone,
+        // which is the point of a gallery. A bare name would name all of them.
+        expose memo_examples_sysml_diagram_samples_samples_context_view::clinician;
+        expose memo_examples_sysml_diagram_samples_samples_context_view::patient;
+        expose biomedTech;
+        expose pharmacySystem;
+        expose homeContext;
+        attribute depth = 1;
+        @MemoIdentity { :>> shortDescription = "Operational system context: one black-box system boundary, its external people, peer systems, operating environment, and named boundary-crossing interactions."; }
+        attribute :>> viewKind = DiagramViewKind::general;
+        attribute :>> diagramType = "context";
+        ref :>> viewpointDefinition = contextViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("connect", "flow", "AppliesInContext");
+        }
+    }
+
+    // ─── functional flow view ────────────────────────────────────────────
+
+    view medicationDeliveryFlow : MemoDiagramView {
+        expose fxDeliveryFlow::**;
+        expose fxPumpSystem::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Component behaviour: functions in swimlanes per realising component, typed data/energy/material flows, a fork/join for concurrent occlusion monitoring, and a composite 'Deliver Medication' valve sub-flow (double-click to drill in)."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "ffd";
+        ref :>> viewpointDefinition = functionalViewpoint;
+    }
+
+    // ─── grid view ───────────────────────────────────────────────────────
+
+    view failureModeGrid : MemoDiagramView {
+        expose fmMotorRunaway::**;
+        expose fmAirSensorSilent::**;
+        expose fmOcclusionDrift::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Three FailureMode rows rendered as an FMEA worksheet table — one section, columns auto-derived from the attributes the rows carry."; }
+        attribute :>> viewKind = DiagramViewKind::grid;
+        attribute :>> diagramType = "fmea";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeElementKinds = ("FailureMode");
+        }
+    }
+
+    // ─── interconnection view ────────────────────────────────────────────
+
+    // Child IBD view — the heater assembly's own internal wiring. Its subject
+    // is `heaterAssembly`, so the parent IBD shows a "navigate to view" button
+    // on the Thermal Control Assembly part.
+    view heaterAssemblyIBD : MemoDiagramView {
+        expose coffeeMachine::heaterAssembly::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Internal wiring of the Thermal Control Assembly — heating element and its status output."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
+    view heatingElementIBD : MemoDiagramView {
+        expose coffeeMachine::heaterAssembly::heatingElement::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Third-level IBD — resistive coil and temperature sensor inside the heating element."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
+    view beverageMachineIBD : MemoDiagramView {
+        expose coffeeMachine::**;
+        expose waterSupply::**;
+        expose cup::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Balanced internal architecture with readable boundary ports, nested service diagnostics, and external water and beverage interfaces."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        // The dedicated IBD renderer (Base -> Ibd class hierarchy): square
+        // wall ports, orange-in/green-out, solid grabbable nested-connector
+        // housings, orthogonal crossing-bridge routing, monochrome shading.
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
+    // ─── operational behaviour view ──────────────────────────────────────
+
+    view clinicalSetupActivity : MemoDiagramView {
+        expose opSetupFlow::**;
+        expose opCareSystem::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Operational activity across clinical roles with concurrent preparation and a composite therapy step."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "ofd";
+        ref :>> viewpointDefinition = functionalViewpoint;
+    }
+
+    // ─── package view ────────────────────────────────────────────────────
+
+    view threeLayerPackages : MemoDiagramView {
+        expose presentation::**;
+        expose domain::**;
+        expose infrastructure::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Three-layer package overview — presentation, domain, infrastructure — rendered as a browser membership tree."; }
+        attribute :>> viewKind = DiagramViewKind::browser;
+        attribute :>> diagramType = "pkg";
+        ref :>> viewpointDefinition = operationalViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes");
+        }
+    }
+
+    // ─── requirements view ───────────────────────────────────────────────
+
+    view needsToRequirements : MemoDiagramView {
+        expose needSafeTherapy::**;
+        expose needTimelyAlarms::**;
+        expose reqDoseLimit;
+        expose reqOcclusionAlarm;
+        expose reqAlarmLoudness;
+        attribute depth = 1;
+        @MemoIdentity { :>> shortDescription = "Stakeholder needs deriving into system requirements, wired by DerivesFrom trace edges."; }
+        attribute :>> viewKind = DiagramViewKind::general;
+        attribute :>> diagramType = "req";
+        ref :>> viewpointDefinition = requirementsViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("DerivesFrom");
+        }
+    }
+
+    // ─── sequence view ───────────────────────────────────────────────────
+
+    view startInfusionSequence : MemoDiagramView {
+        expose startInfusion::**;
+        expose memo_examples_sysml_diagram_samples_samples_sequence_view::clinician::**;
+        expose pumpController::**;
+        expose pumpMechanism::**;
+        expose monitorLoop::**;
+        expose errorHandling::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Start-infusion sequence with combined fragments — loop for sensor monitoring and alt for error handling."; }
+        attribute :>> viewKind = DiagramViewKind::sequence;
+        attribute :>> diagramType = "seq";
+        ref :>> viewpointDefinition = operationalViewpoint;
+        part :>> selectionQuery {
+            // No "User": each sample in this gallery declares its own actors,
+            // and a kind filter is model-wide, so it would draw every other
+            // sample's clinician onto this one's lifelines. The actors this
+            // view wants are the ones it exposes by name above.
+            attribute :>> includeElementKinds = ("FunctionalFlow", "LogicalComponent");
+        }
+    }
+
+    // ─── standard activity view ──────────────────────────────────────────
+
+    view orderFulfillmentActivity : MemoDiagramView {
+        expose FulfillOrder::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Order fulfilment — accept, validate, decide, fork into parallel shipment and invoice, join, notify, send receipt, and terminate."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
+        ref :>> viewpointDefinition = functionalViewpoint;
+    }
+
+    // ─── state transition view ───────────────────────────────────────────
+
+    view pumpModeStateMachine : MemoDiagramView {
+        expose pumpModes::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "A pump-mode state machine — Idle, Infusing, Paused, Alarm — where Infusing is a composite state nesting Priming, Delivering and Holding."; }
+        attribute :>> viewKind = DiagramViewKind::statetransition;
+        attribute :>> diagramType = "stm";
+        ref :>> viewpointDefinition = functionalViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeElementKinds = ("StateMachine", "MemoState");
+        }
+    }
+
+    view infusingSubStates : MemoDiagramView {
+        expose pumpModes::infusing::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Sub-states of the Infusing composite state — Priming, Delivering, and Holding with their internal transitions."; }
+        attribute :>> viewKind = DiagramViewKind::statetransition;
+        attribute :>> diagramType = "stm";
+        ref :>> viewpointDefinition = functionalViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeElementKinds = ("MemoState");
+        }
+    }
+
+    // ─── tree view ───────────────────────────────────────────────────────
+
+    view blockDecomposition : MemoDiagramView {
+        expose rootA::**;
+        attribute depth = 2;
+        @MemoIdentity { :>> shortDescription = "Block decomposition tree — hardware assemblies with varied branch depths."; }
+        attribute :>> viewKind = DiagramViewKind::general;
+        attribute :>> diagramType = "bdd";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        attribute :>> layoutHint = "tree";
+        attribute :>> styleHint = "expanded:rootA,rootB,branchA1,branchB1";
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes");
+        }
+    }
+
+    // ─── use case view ───────────────────────────────────────────────────
+
+    view deviceUseCases : MemoDiagramView {
+        expose memo_examples_sysml_diagram_samples_samples_use_case_view::patient;
+        expose memo_examples_sysml_diagram_samples_samples_use_case_view::clinician;
+        expose serviceTechnician;
+        expose nursingStaff;
+        expose reviewStatus;
+        expose configureTherapy;
+        expose maintainDevice;
+        expose documentTreatment;
+        expose validateTherapySettings;
+        @MemoIdentity { :>> shortDescription = "Actors outside a device boundary with include, extend, generalization, hierarchy-level, and orthogonal-routing presentation."; }
+        attribute :>> viewKind = DiagramViewKind::general;
+        attribute :>> diagramType = "ucd";
+        ref :>> viewpointDefinition = operationalViewpoint;
+        part :>> selectionQuery {
+            // No "User", for the reason the sequence view gives: the actors
+            // are exposed by name, and a kind filter reaches other samples.
+            attribute :>> includeElementKinds = ("UseCase");
+            attribute :>> includeRelationshipKinds = ("ParticipatesIn", "IncludesStep", "Specialization");
+        }
+        attribute :>> layoutHint = "usecase:level=all;edge=rounded";
+    }
+
+    // ─── drill-down samples: a usage typed by a definition ───────────────
+
+    view driveOverview : MemoDiagramView {
+        expose drive;
+        expose drive::gearbox;
+        expose drive::motor;
+        expose drive::controller;
+        @MemoIdentity { :>> shortDescription = "Parts typed by definitions: gearbox has its own authored view, motor drills into generated levels, controller has nothing to open."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
+    view gearboxInside : MemoDiagramView {
+        expose DrillGearbox::**;
+        @MemoIdentity { :>> shortDescription = "The authored view of the gearbox definition; every usage typed by it opens this one."; }
+        attribute :>> viewKind = DiagramViewKind::interconnection;
+        attribute :>> diagramType = "ibd";
+        attribute :>> rendererProfile = "ibd";
+        ref :>> viewpointDefinition = logicalArchitectureViewpoint;
+        part :>> selectionQuery {
+            attribute :>> includeRelationshipKinds = ("Composes", "flow", "bind");
+        }
+    }
+
+    view servicingFlow : MemoDiagramView {
+        expose servicing::**;
+        @MemoIdentity { :>> shortDescription = "Two composite actions typed by definitions: calibrate has an authored view, confirm drills into generated steps."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
+        ref :>> viewpointDefinition = functionalViewpoint;
+    }
+
+    view calibrateDetail : MemoDiagramView {
+        expose DrillCalibrate::**;
+        @MemoIdentity { :>> shortDescription = "The authored view of the calibrate definition."; }
+        attribute :>> viewKind = DiagramViewKind::actionflow;
+        attribute :>> diagramType = "afd";
+        ref :>> viewpointDefinition = functionalViewpoint;
+    }
+}

@@ -86,6 +86,6 @@ elements:
   "memo_examples_temperature_alarm_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "27e78a8e-0e34-5569-8d7d-06c416fbbbd6"
-  "memo_examples_temperature_alarm_viewpoints_unassigned_views_temperature_alarm_overview::temperatureAlarmOverview":
+  "memo_examples_temperature_alarm_viewpoints_logical_views_temperature_alarm_overview::temperatureAlarmOverview":
     shortId: "MMX-2"
     uuid: "e9653f71-dc0b-55aa-951c-469b402afad3"

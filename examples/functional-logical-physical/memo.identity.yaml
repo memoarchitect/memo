@@ -5,30 +5,12 @@
 # Entries for deleted elements are retained so their numbers stay retired.
 
 elements:
-  "memo_examples_functional_logical_physical::actOcclusionResponse":
-    shortId: "OPR-1"
-    uuid: "b125f1ef-a553-5e75-9aa3-f2b07ad587e6"
-  "memo_examples_functional_logical_physical::fnLimitLinePressure":
-    shortId: "SYS-1"
-    uuid: "1d2de2e8-5dd5-5e86-bbd1-b6d34a7ee95f"
-  "memo_examples_functional_logical_physical::lcPressureProtection":
-    shortId: "LGC-1"
-    uuid: "adea4909-d1f7-5c5d-afa8-a70ac45909cb"
-  "memo_examples_functional_logical_physical::mechReliefValve":
-    shortId: "MCH-1"
-    uuid: "f202f294-558d-5bd9-9e98-3cce9261d8f0"
-  "memo_examples_functional_logical_physical::swPressureSupervisor":
-    shortId: "SFT-1"
-    uuid: "3ffb775c-86e8-5e69-a029-38a317528393"
-  "memo_examples_functional_logical_physical_project::projectBinding":
-    shortId: "PRJ-1"
-    uuid: "a0e9e185-58c8-51db-a3b9-c66d362e4558"
-  "memo_examples_functional_logical_physical_viewpoints_unassigned_views_functional_logical_physical_overview::functionalLogicalPhysicalOverview":
-    shortId: "MMX-1"
-    uuid: "810a4521-b81d-5d2e-9399-df8d15295fd0"
   "memo_examples_functional_logical_physical::FunctionalLogicalPhysicalSystem":
     shortId: "SYS-2"
     uuid: "8f70ffc9-8c03-549a-8668-b350c6706d84"
+  "memo_examples_functional_logical_physical::actOcclusionResponse":
+    shortId: "OPR-1"
+    uuid: "b125f1ef-a553-5e75-9aa3-f2b07ad587e6"
   "memo_examples_functional_logical_physical::evAuthoredVcAuthoredFnLimitLinePressure":
     shortId: "MMX-2"
     uuid: "c3dde846-0212-560d-b9fe-e7ef7eb52633"
@@ -41,12 +23,24 @@ elements:
   "memo_examples_functional_logical_physical::fcAuthoredLimitLinePressure::fcsLimitLinePressure":
     shortId: "ACT-1"
     uuid: "0dbba0b6-0dd9-5cf9-bace-a0ff66bec445"
+  "memo_examples_functional_logical_physical::fnLimitLinePressure":
+    shortId: "SYS-1"
+    uuid: "1d2de2e8-5dd5-5e86-bbd1-b6d34a7ee95f"
+  "memo_examples_functional_logical_physical::lcPressureProtection":
+    shortId: "LGC-1"
+    uuid: "adea4909-d1f7-5c5d-afa8-a70ac45909cb"
+  "memo_examples_functional_logical_physical::mechReliefValve":
+    shortId: "MCH-1"
+    uuid: "f202f294-558d-5bd9-9e98-3cce9261d8f0"
   "memo_examples_functional_logical_physical::needAuthoredSafeOperation":
     shortId: "NDX-1"
     uuid: "cb08ca5e-84dc-5102-a3ae-6808679d128e"
   "memo_examples_functional_logical_physical::reqAuthoredSwPressureSupervisor":
     shortId: "REQ-1"
     uuid: "52cd0e99-ff05-531c-a68e-1cfcada750f6"
+  "memo_examples_functional_logical_physical::swPressureSupervisor":
+    shortId: "SFT-1"
+    uuid: "3ffb775c-86e8-5e69-a029-38a317528393"
   "memo_examples_functional_logical_physical::valAuthoredActOcclusionResponse":
     shortId: "VLD-1"
     uuid: "c7797650-3d56-5572-afb9-15beb3a0a056"
@@ -56,3 +50,9 @@ elements:
   "memo_examples_functional_logical_physical::vcAuthoredSwPressureSupervisor":
     shortId: "VRF-2"
     uuid: "bfb05d67-2a47-541c-a5ef-fb244a943af5"
+  "memo_examples_functional_logical_physical_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "a0e9e185-58c8-51db-a3b9-c66d362e4558"
+  "memo_examples_functional_logical_physical_viewpoints_logical_views_functional_logical_physical_overview::functionalLogicalPhysicalOverview":
+    shortId: "MMX-1"
+    uuid: "810a4521-b81d-5d2e-9399-df8d15295fd0"

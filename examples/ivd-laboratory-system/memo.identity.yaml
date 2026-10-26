@@ -38,6 +38,6 @@ elements:
   "memo_examples_ivd_laboratory_system_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "0840a521-a708-5ca1-b9f0-2a2ab208ff68"
-  "memo_examples_ivd_laboratory_system_viewpoints_unassigned_views_ivd_laboratory_system_overview::ivdLaboratorySystemOverview":
+  "memo_examples_ivd_laboratory_system_viewpoints_logical_views_ivd_laboratory_system_overview::ivdLaboratorySystemOverview":
     shortId: "MMX-1"
     uuid: "3f9adf11-7579-53c0-a1c3-14c22633cd34"

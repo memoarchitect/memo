@@ -29,6 +29,6 @@ elements:
   "memo_examples_multidimensional_layers_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "5ee17f92-84f6-5429-a16c-496dc1664cc0"
-  "memo_examples_multidimensional_layers_viewpoints_unassigned_views_multidimensional_layers_overview::multidimensionalLayersOverview":
+  "memo_examples_multidimensional_layers_viewpoints_logical_views_multidimensional_layers_overview::multidimensionalLayersOverview":
     shortId: "MMX-1"
     uuid: "97a80014-996f-5a46-bdd4-6bd9cf10e53a"

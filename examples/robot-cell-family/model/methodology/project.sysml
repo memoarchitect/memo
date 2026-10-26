@@ -11,13 +11,13 @@ package robot_cell_family_project {
     private import memo_methodology_profiles::*;
 
     private import robot_cell_family_shared::*;
-    private import robot_cell_family_navigation::*;
-    private import robot_cell_family_manipulation::*;
-    private import robot_cell_family_perception::*;
-    private import robot_cell_family_icds::*;
+    private import robot_cell_family_systems_navigation_navigation_system::*;
+    private import robot_cell_family_systems_manipulation_manipulation_system::*;
+    private import robot_cell_family_systems_perception_perception_system::*;
+    private import robot_cell_family_sos_icds::*;
     private import robot_cell_family_sos::*;
-    private import robot_cell_family_chains::*;
-    private import robot_cell_family_operational_use_cases::*;
+    private import robot_cell_family_sos_chains::*;
+    private import robot_cell_family_sos_use_cases::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;

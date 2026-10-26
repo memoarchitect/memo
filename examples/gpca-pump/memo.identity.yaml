@@ -2688,9 +2688,6 @@ elements:
   "memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_view::gpcaActionFlowView":
     shortId: "MMX-13"
     uuid: "444e8254-44ca-5790-a979-959729bfc04f"
-  "memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_description_view::architectureDescriptionView":
-    shortId: "MMX-1"
-    uuid: "712fe494-498e-5722-bf7c-e3297e11f262"
   "memo_examples_gpca_pump_viewpoints_logical_views_logical_device_interconnect_view::gpcaDeviceInterconnectView":
     shortId: "MMX-15"
     uuid: "303f4e4b-a7ed-5980-b7b2-426dc69bdc42"
@@ -2712,9 +2709,6 @@ elements:
   "memo_examples_gpca_pump_viewpoints_physical_views_physical_physical_bom_view::gpcaPhysicalBomView":
     shortId: "MMX-21"
     uuid: "e20468e1-2832-572e-9f94-be5ce2c8b097"
-  "memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index_view::dhfIndexView":
-    shortId: "MMX-3"
-    uuid: "81d14c3d-f08e-5268-9813-6c5bc7ff8b8d"
   "memo_examples_gpca_pump_viewpoints_requirements_views_requirements_requirements_trace_view::gpcaRequirementsTraceView":
     shortId: "MMX-22"
     uuid: "0a9753e7-1063-53a7-95f1-f61c1eff6035"
@@ -2730,6 +2724,12 @@ elements:
   "memo_examples_gpca_pump_viewpoints_risk_views_risk_risk_chain_view::gpcaRiskChainView":
     shortId: "MMX-23"
     uuid: "8679f0a2-4240-550c-904d-ccfc08436b7f"
+  "memo_examples_gpca_pump_viewpoints_shared_views_document_architecture_description_view::architectureDescriptionView":
+    shortId: "MMX-1"
+    uuid: "712fe494-498e-5722-bf7c-e3297e11f262"
+  "memo_examples_gpca_pump_viewpoints_shared_views_document_dhf_index_view::dhfIndexView":
+    shortId: "MMX-3"
+    uuid: "81d14c3d-f08e-5268-9813-6c5bc7ff8b8d"
   "memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view::sddView":
     shortId: "MMX-32"
     uuid: "6bb4a2ae-d2ee-5db5-9176-389d76a99bc6"

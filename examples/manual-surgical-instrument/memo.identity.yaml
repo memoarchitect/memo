@@ -23,6 +23,6 @@ elements:
   "memo_examples_manual_surgical_instrument_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "f6656e8a-994c-5ccb-9ff7-c817bea4cb71"
-  "memo_examples_manual_surgical_instrument_viewpoints_unassigned_views_manual_surgical_instrument_overview::manualSurgicalInstrumentOverview":
+  "memo_examples_manual_surgical_instrument_viewpoints_logical_views_manual_surgical_instrument_overview::manualSurgicalInstrumentOverview":
     shortId: "MMX-1"
     uuid: "4783f980-43ad-5705-93ae-1e28b6b8572f"
