@@ -9,11 +9,14 @@ stages:
 # portability gate is reproducible.
 variables:
   SYSAND_VERSION: "0.0.9"
+  # GitLab runs OpenSysML only: SysIDE needs a licence this runner does not have.
+  MEMO_TOOLCHAIN_COMPILER: opensysml
+  MEMO_TEST_COMPILER: opensysml
+  MEMO_VALIDATOR: opensysml
 
 .sysand_setup: &sysand_setup
   image: python:3.12-slim
   before_script:
-    - apt-get update && apt-get install -y --no-install-recommends unzip >/dev/null
     - pip install --quiet "sysand==${SYSAND_VERSION}"
     - sysand --version
 
@@ -49,6 +52,8 @@ test:
     - ln -s "$CI_PROJECT_DIR" /tmp/memo-tools/memo
     - cd /tmp/memo-tools && pnpm install --frozen-lockfile
     - pnpm run build
+    - export OPENSYSML_BINARY="$(find "/tmp/memo-tools/node_modules/.pnpm" -path '*opensysml-sysml-grpc-linux-*/bin/sysml-grpc' | head -1)"
+    - test -x "$OPENSYSML_BINARY" || { echo "sysml-grpc for this platform was not installed"; exit 1; }
   script:
     - cd "$CI_PROJECT_DIR"
     - pnpm run version:check
