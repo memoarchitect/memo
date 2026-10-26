@@ -2,6 +2,14 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.16.2
+
+- **Every view traces to a viewpoint.** New rule `CR-ONT-092`: a view that traces to no viewpoint is an error. The shipped examples keep a view under the viewpoint it traces to, or under `viewpoints/shared/` when it traces to several.
+- **ISO 14971.** Rules over clauses 5.2, 5.3 and 7.4; `WeighedAgainst` links a benefit to a risk and places neither in a workspace of its own. `TestRun` records one execution of a verification case. `MC-001` makes a model's own constraints a tailorable rule.
+- **Added.** `NavigatesTo` (a UI element to the screen it opens); a function and a scenario carry a precondition and a postcondition; `isConnector` on a relation; a regulated device has an intended use and is used with other devices; `partNumber` and `revision` on a part.
+- **Changed.** Measurable attributes are ISQ quantities (durations, frequencies, storage capacity, voltage, current); a function's output summary is `outputDescription`; an exchange has no direction of its own, and `AR-EXCH-001` and `AR-EXCH-002` hold it to its ports.
+- **Removed.** `SoftwareSystem.version`, `ModeConfiguration.activeElement`, `regulatoryRegime` (a model's regimes are its `RegulatedDevice` jurisdictions), `UseCase.standalone`, and the rules `CR-ONT-086` and `CR-ONT-087`.
+
 ## 0.16.0
 
 - No ontology change. The version moves with MEMO Tools and Architect, which now support SysIDE 1.0.
