@@ -5,6 +5,9 @@
 # Entries for deleted elements are retained so their numbers stay retired.
 
 elements:
+  "memo_examples_temperature_alarm::TemperatureAlarmSystem":
+    shortId: "SYS-2"
+    uuid: "384f752b-c14f-51b2-988e-0149b33aee6e"
   "memo_examples_temperature_alarm::actAcknowledgeAlarm":
     shortId: "OPR-1"
     uuid: "ea2b4f6a-a25b-5c93-84a2-2c149dc5b870"
@@ -20,12 +23,21 @@ elements:
   "memo_examples_temperature_alarm::elAlarmBanner":
     shortId: "UIE-1"
     uuid: "cb4a788e-08c4-5ac7-b68e-25fcbac3af7e"
+  "memo_examples_temperature_alarm::evAuthoredVcAuthoredRcReAnnunciate":
+    shortId: "MMX-4"
+    uuid: "ee371d1c-f92e-5e70-b961-aa6fb9cb01e7"
   "memo_examples_temperature_alarm::evLatencyReport":
     shortId: "MMX-1"
     uuid: "6ed38946-dcb2-5c1b-b97d-58db3d0c884c"
   "memo_examples_temperature_alarm::fnDetectDeviation":
     shortId: "SYS-1"
     uuid: "b22e14c8-57b0-5ed9-8167-5a1a35e2e7e3"
+  "memo_examples_temperature_alarm::harmAuthoredHzUndetectedDeviation":
+    shortId: "HRM-1"
+    uuid: "2a6bcf27-3252-5355-92e8-50cdddf5c9ac"
+  "memo_examples_temperature_alarm::hsAuthoredHzUndetectedDeviation":
+    shortId: "HZD-2"
+    uuid: "aa1331fb-10dd-51ff-8da3-da711da8db38"
   "memo_examples_temperature_alarm::hzUndetectedDeviation":
     shortId: "HZD-1"
     uuid: "f7884ad4-503c-5eb1-a779-f02d4602817a"
@@ -35,6 +47,9 @@ elements:
   "memo_examples_temperature_alarm::rcReAnnunciate":
     shortId: "RSK-1"
     uuid: "6f1dbdd1-5eef-54e0-81d4-78a4001af7b3"
+  "memo_examples_temperature_alarm::reqAuthoredDetectDeviation":
+    shortId: "REQ-1"
+    uuid: "81b2e0ef-5f4e-5d41-bb48-3bcf47b3ea2f"
   "memo_examples_temperature_alarm::taskAckAlarm":
     shortId: "OPR-2"
     uuid: "2a25bec5-50f6-5bef-ad59-750b277515db"
@@ -56,9 +71,15 @@ elements:
   "memo_examples_temperature_alarm::valAckTask":
     shortId: "VLD-1"
     uuid: "0cf87665-ade5-5bb2-9fd5-081e946aeb07"
+  "memo_examples_temperature_alarm::valAuthoredActAcknowledgeAlarm":
+    shortId: "VLD-2"
+    uuid: "2f847a18-9caf-5aaa-91de-e4338bc94c1a"
   "memo_examples_temperature_alarm::vcAlarmLatency":
     shortId: "VRF-1"
     uuid: "e4853bd5-0672-5040-af70-0c7f9177ee7a"
+  "memo_examples_temperature_alarm::vcAuthoredRcReAnnunciate":
+    shortId: "VRF-2"
+    uuid: "9b25e502-ef1b-511c-8b10-fb7c61e58bdf"
   "memo_examples_temperature_alarm::vsAlarmLatency":
     shortId: "OPR-3"
     uuid: "a66d2a6f-8b2e-5302-a2e2-14a32f08e85e"
@@ -68,24 +89,3 @@ elements:
   "memo_examples_temperature_alarm_viewpoints_unassigned_views_temperature_alarm_overview::temperatureAlarmOverview":
     shortId: "MMX-2"
     uuid: "e9653f71-dc0b-55aa-951c-469b402afad3"
-  "memo_examples_temperature_alarm::TemperatureAlarmSystem":
-    shortId: "SYS-2"
-    uuid: "384f752b-c14f-51b2-988e-0149b33aee6e"
-  "memo_examples_temperature_alarm::evAuthoredVcAuthoredRcReAnnunciate":
-    shortId: "MMX-4"
-    uuid: "ee371d1c-f92e-5e70-b961-aa6fb9cb01e7"
-  "memo_examples_temperature_alarm::harmAuthoredHzUndetectedDeviation":
-    shortId: "HRM-1"
-    uuid: "2a6bcf27-3252-5355-92e8-50cdddf5c9ac"
-  "memo_examples_temperature_alarm::hsAuthoredHzUndetectedDeviation":
-    shortId: "HZD-2"
-    uuid: "aa1331fb-10dd-51ff-8da3-da711da8db38"
-  "memo_examples_temperature_alarm::reqAuthoredDetectDeviation":
-    shortId: "REQ-1"
-    uuid: "81b2e0ef-5f4e-5d41-bb48-3bcf47b3ea2f"
-  "memo_examples_temperature_alarm::valAuthoredActAcknowledgeAlarm":
-    shortId: "VLD-2"
-    uuid: "2f847a18-9caf-5aaa-91de-e4338bc94c1a"
-  "memo_examples_temperature_alarm::vcAuthoredRcReAnnunciate":
-    shortId: "VRF-2"
-    uuid: "9b25e502-ef1b-511c-8b10-fb7c61e58bdf"
