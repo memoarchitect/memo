@@ -94,7 +94,7 @@ extensions/                      reusable ontology packages that specialize the 
 Requires [`sysand`](https://docs.sysand.org/) on `PATH`.
 
 ```bash
-pnpm run build        # or: ./scripts/build-kpar.sh
+pnpm run build        # or: node scripts/build-kpar.mjs
 ```
 
 Builds transient SysAnd projects for the core ontology and methodology into `.kpar`

@@ -60,7 +60,7 @@ lists them and what each needs installed):
 node ../memo-tools/packages/tools/lib/bin/memo.js toolchain check --toolchain.validator=<compiler> src
 node ../memo-tools/packages/tools/lib/bin/memo.js toolchain check --toolchain.validator=<compiler> examples
 node --test test/package.test.mjs
-bash scripts/build-kpar.sh          # external portability gate
+node scripts/build-kpar.mjs          # external portability gate
 python3 -m mkdocs build --strict    # if you touched docs
 ```
 

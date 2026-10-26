@@ -6,7 +6,7 @@ node_modules/
 .npmrc
 
 # SysAnd local cache + generated build metadata
-# .meta.json is regenerated deterministically by scripts/build-kpar.sh
+# .meta.json is regenerated deterministically by scripts/build-kpar.mjs
 *.meta.json
 output/
 .sysand/

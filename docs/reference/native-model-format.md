@@ -320,7 +320,7 @@ semantic module and fails the build if one reaches the settings layer.
 ## Verifying a model
 
 ```bash
-memo/scripts/check-project-portability.sh <model-dir>
+node memo/scripts/check-project-portability.mjs <model-dir>
 ```
 
 Checks that the model carries no semantic YAML, has a native entrypoint, and

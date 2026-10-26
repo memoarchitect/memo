@@ -404,13 +404,13 @@ test('extensions are ontology, beside src — not examples', () => {
 
   // Extensions ship, build, and resolve exactly as the base does.
   assert.ok(JSON.parse(read('package.json')).files.includes('extensions/'));
-  const buildScript = read('scripts', 'build-kpar.sh');
+  const buildScript = read('scripts', 'build-kpar.mjs');
   // Each extension is its own KPAR, and its usage is read from its imports.
-  assert.match(buildScript, /PROJECTS=\("\." "src\/methodology"\)/);
-  assert.match(buildScript, /PROJECT_NAMES\+=\("memo-extension-\$ext"\)/);
+  assert.match(buildScript, /proj: 'src\/methodology'/);
+  assert.match(buildScript, /name: `memo-extension-\$\{ext\}`/);
   assert.match(buildScript, /import memo_extension_\$\{other\}/);
-  assert.match(buildScript, /toolchain check --project "\$REPO_ROOT" \\\n    --toolchain\.validator="\$MEMO_VALIDATOR" src extensions examples/);
-  assert.match(buildScript, /source_root = os\.path\.join\(root, 'src'\) if project == '\.' else root/);
+  assert.match(buildScript, /toolchainCheck\(cli, REPO_ROOT, \['src', 'extensions', 'examples'\]\)/);
+  assert.match(buildScript, /proj === '\.' \? join\(dir, 'src'\) : dir/);
 });
 
 test('every extension carries an identity-only descriptor and its facade package', () => {
