@@ -248,7 +248,7 @@ elements:
   "memo_examples_ui_screen_regions_project::uiScreenRegionsBinding":
     shortId: "PRJ-1"
     uuid: "67b999a2-b982-568c-916f-16301d768a65"
-  "memo_examples_ui_screen_regions_system::UiScreenRegionsSystem":
+  "memo_examples_ui_screen_regions_ui_screen_regions_system::UiScreenRegionsSystem":
     shortId: "SYS-7"
     uuid: "41ead7d0-3f60-5bd6-a8b2-4031a8b68d4f"
   "memo_examples_ui_screen_regions_viewpoints_functional_views_ui_functional_tree::uiFunctionalTree":

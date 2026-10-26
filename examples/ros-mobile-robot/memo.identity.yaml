@@ -89,7 +89,7 @@ elements:
   "memo_examples_ros_mobile_robot_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "9069eae9-45bc-55b1-a346-fe1526be939e"
-  "memo_examples_ros_mobile_robot_viewpoints_unassigned_views_ros_mobile_robot_overview::rosMobileRobotOverview":
+  "memo_examples_ros_mobile_robot_viewpoints_logical_views_ros_mobile_robot_overview::rosMobileRobotOverview":
     shortId: "MMX-1"
     uuid: "2f4b2bc1-7d42-51a8-912b-28cabe8b6615"
   "memo_examples_ros_mobile_robot::RosMobileRobotSystem":

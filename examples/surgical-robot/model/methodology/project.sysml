@@ -11,8 +11,7 @@ package memo_examples_surgical_robot_project {
 
     // The project's own content, imported so the catalog is one reachable
     // closure from a single entrypoint.
-    private import memo_examples_surgical_robot_viewpoints_unassigned::*;
-    private import memo_examples_surgical_robot_viewpoints_unassigned_views_surgical_robot_overview::*;
+    private import memo_examples_surgical_robot_viewpoints_logical_views_surgical_robot_overview::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;

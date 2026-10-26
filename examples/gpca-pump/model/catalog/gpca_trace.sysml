@@ -20,9 +20,9 @@ package memo_examples_gpca_pump_gpca_trace {
     private import memo_examples_gpca_pump_gpca_risk::*;
     private import memo_examples_gpca_pump_gpca_analysis::*;
     private import memo_examples_gpca_pump_gpca_verification::*;
-    private import memo_examples_gpca_pump_viewpoints_logical_views_document_architecture_description_view::*;
+    private import memo_examples_gpca_pump_viewpoints_shared_views_document_architecture_description_view::*;
     private import memo_examples_gpca_pump_viewpoints_cybersecurity_views_document_cyber_assessment_view::*;
-    private import memo_examples_gpca_pump_viewpoints_requirements_views_document_dhf_index_view::*;
+    private import memo_examples_gpca_pump_viewpoints_shared_views_document_dhf_index_view::*;
     private import memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_view::*;
     private import memo_examples_gpca_pump_viewpoints_risk_views_document_rmf_view::*;
     private import memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view::*;

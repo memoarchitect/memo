@@ -293,9 +293,9 @@ elements:
   "memo_examples_nested_architecture_dsm_assurance_verification_validation::vcStatusLegibility":
     shortId: "VRF-8"
     uuid: "c9ca55b3-684d-5d15-ab5d-2f9afd4e88e3"
+  "memo_examples_nested_architecture_dsm_nested_architecture_dsm_system::NestedArchitectureDsmSystem":
+    shortId: "SYS-20"
+    uuid: "2a4b0c0c-f86c-55ba-9311-e52a67786fdf"
   "memo_examples_nested_architecture_dsm_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "1da70d84-c917-5ab8-8c32-f293886ffe93"
-  "memo_examples_nested_architecture_dsm_system::NestedArchitectureDsmSystem":
-    shortId: "SYS-20"
-    uuid: "2a4b0c0c-f86c-55ba-9311-e52a67786fdf"

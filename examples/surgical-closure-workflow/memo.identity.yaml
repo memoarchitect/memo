@@ -98,6 +98,6 @@ elements:
   "memo_examples_surgical_closure_workflow_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "3965cb5b-d744-5fa0-8cf5-409f45e07b0c"
-  "memo_examples_surgical_closure_workflow_viewpoints_unassigned_views_surgical_closure_workflow_overview::surgicalClosureWorkflowOverview":
+  "memo_examples_surgical_closure_workflow_viewpoints_logical_views_surgical_closure_workflow_overview::surgicalClosureWorkflowOverview":
     shortId: "MMX-1"
     uuid: "59d5c743-d667-53ed-84f6-26b88fc66510"

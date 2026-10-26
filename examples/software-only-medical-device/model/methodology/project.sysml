@@ -11,8 +11,7 @@ package memo_examples_software_only_medical_device_project {
 
     // The project's own content, imported so the catalog is one reachable
     // closure from a single entrypoint.
-    private import memo_examples_software_only_medical_device_viewpoints_unassigned::*;
-    private import memo_examples_software_only_medical_device_viewpoints_unassigned_views_software_only_medical_device_overview::*;
+    private import memo_examples_software_only_medical_device_viewpoints_logical_views_software_only_medical_device_overview::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;

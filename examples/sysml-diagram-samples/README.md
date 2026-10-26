@@ -11,11 +11,13 @@ Open it read-only in the Architect UI:
 memo-architect --example standard-sysml-diagrams
 ```
 
-Each view is a `MemoDiagramView` declared in `model/samples/`, exposing its own
-dummy elements. The Architect explorer groups each authored view by the layer
+Each view is a `MemoDiagramView` declared in
+`model/catalog/viewpoints/shared/views/diagram_samples.sysml` (the samples trace to
+different viewpoints, so they are filed under `shared`), exposing its own dummy
+elements, which live in `model/catalog/samples/`. The Architect explorer groups each authored view by the layer
 of its model content.
 
-`model/sysml_v2_activity_example.sysml` is the SysML v2 activity-diagram
+`model/catalog/sysml_v2_activity_example.sysml` is the SysML v2 activity-diagram
 acceptance fixture, and is the single copy — it sits with the rest of the
 model's SysML rather than in a parallel `reference/` tree. The bundled parser
 accepts its decision, merge, accept/send, termination and guard syntax, and

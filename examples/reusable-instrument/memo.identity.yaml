@@ -41,6 +41,6 @@ elements:
   "memo_examples_reusable_instrument_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "b4d7433d-8adb-555b-96f3-a8643654c17f"
-  "memo_examples_reusable_instrument_viewpoints_unassigned_views_reusable_instrument_overview::reusableInstrumentOverview":
+  "memo_examples_reusable_instrument_viewpoints_logical_views_reusable_instrument_overview::reusableInstrumentOverview":
     shortId: "MMX-1"
     uuid: "92a00235-24b4-5ebe-aeab-b5b43cea4eeb"

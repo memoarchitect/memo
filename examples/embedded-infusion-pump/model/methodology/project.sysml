@@ -11,8 +11,7 @@ package memo_examples_embedded_infusion_pump_project {
 
     // The project's own content, imported so the catalog is one reachable
     // closure from a single entrypoint.
-    private import memo_examples_embedded_infusion_pump_viewpoints_unassigned::*;
-    private import memo_examples_embedded_infusion_pump_viewpoints_unassigned_views_embedded_infusion_pump_overview::*;
+    private import memo_examples_embedded_infusion_pump_viewpoints_logical_views_embedded_infusion_pump_overview::*;
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;

@@ -74,6 +74,6 @@ elements:
   "memo_examples_embedded_infusion_pump_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "90ba93f2-8a29-577d-ada1-241a24256fbf"
-  "memo_examples_embedded_infusion_pump_viewpoints_unassigned_views_embedded_infusion_pump_overview::embeddedInfusionPumpOverview":
+  "memo_examples_embedded_infusion_pump_viewpoints_logical_views_embedded_infusion_pump_overview::embeddedInfusionPumpOverview":
     shortId: "MMX-1"
     uuid: "63f7d24b-dbde-5a8a-9b32-d7f165680884"

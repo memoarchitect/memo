@@ -5,113 +5,6 @@
 # Entries for deleted elements are retained so their numbers stay retired.
 
 elements:
-  "robot_cell_family_chains::wfMapGuidedPick":
-    shortId: "WFL-1"
-    uuid: "713583a3-7ac7-5248-82ed-4e8f4e6e9e9b"
-  "robot_cell_family_chains::wfMapGuidedPick::scMapGuidedPick":
-    shortId: "OPR-1"
-    uuid: "4d9847fb-1f64-58f1-9356-1c005b31b023"
-  "robot_cell_family_chains::wfMapGuidedPick::scMapGuidedPick::stepAcquire":
-    shortId: "ACT-1"
-    uuid: "d2dc1e61-52d5-58ab-a59b-74f48539a351"
-  "robot_cell_family_chains::wfMapGuidedPick::scMapGuidedPick::stepBuildMap":
-    shortId: "ACT-2"
-    uuid: "af2e726f-d76b-504d-b19d-f1900c79b724"
-  "robot_cell_family_chains::wfMapGuidedPick::scMapGuidedPick::stepGrasp":
-    shortId: "ACT-3"
-    uuid: "cde92060-28d2-5d96-a8ec-02321acfbe07"
-  "robot_cell_family_chains::wfMapGuidedPick::scMapGuidedPick::stepTag":
-    shortId: "ACT-4"
-    uuid: "352ea0e4-f42f-5d1d-9574-634aaa887d9c"
-  "robot_cell_family_icds::ManipulationToNavigationIcd":
-    shortId: "INT-1"
-    uuid: "9b2236d4-4d72-596c-8573-219a92fe86b2"
-  "robot_cell_family_icds::ManipulationToNavigationIcd::consumer":
-    shortId: "LGC-4:1"
-    uuid: "159885be-8457-5b8a-9b17-0e48b0aab101"
-    retired: "GRS-1"
-  "robot_cell_family_icds::ManipulationToNavigationIcd::provider":
-    shortId: "LGC-4:2"
-    uuid: "fae45eb9-5718-5818-8af8-fc51dc86b8df"
-    retired: "GRS-2"
-  "robot_cell_family_icds::PerceptionToNavigationIcd":
-    shortId: "INT-2"
-    uuid: "25296ccf-1311-596e-af95-201383e09b5d"
-  "robot_cell_family_icds::PerceptionToNavigationIcd::consumer":
-    shortId: "LGC-5:1"
-    uuid: "201d7327-4b2a-5428-b68a-dfe725663778"
-    retired: "PNT-1"
-  "robot_cell_family_icds::PerceptionToNavigationIcd::provider":
-    shortId: "LGC-5:2"
-    uuid: "cfa6155d-78eb-5918-9e24-ef650aa40ecb"
-    retired: "PNT-2"
-  "robot_cell_family_manipulation::ManipulatorSystem":
-    shortId: "SYS-2"
-    uuid: "cd712374-2dff-5e4d-8209-8113ecc24025"
-  "robot_cell_family_manipulation::ManipulatorSystem::gripperDrive":
-    shortId: "LGC-6"
-    uuid: "083ca5e8-a210-5d68-b82f-1b4601307d92"
-  "robot_cell_family_manipulation::ManipulatorSystem::motionController":
-    shortId: "LGC-1"
-    uuid: "e42137bd-da25-5982-a8cf-26e031c81811"
-  "robot_cell_family_manipulation::ManipulatorSystem::pGraspEventOut":
-    shortId: "LGC-4:3"
-    uuid: "41c1abc5-8e4b-58b8-8ac9-e11ddb157886"
-    retired: "GRS-3"
-  "robot_cell_family_manipulation::fnExecuteGrasp":
-    shortId: "SYS-1"
-    uuid: "7295f77d-5d97-5fee-9c7b-f1b4a56bac31"
-  "robot_cell_family_manipulation::ucExecuteGrasp":
-    shortId: "USE-1"
-    uuid: "24de2ed8-8daa-584d-9d26-9a04486ac411"
-  "robot_cell_family_navigation::NavigationSystem":
-    shortId: "SYS-5"
-    uuid: "37d96a1d-c9e4-5509-a126-b015353a222b"
-  "robot_cell_family_navigation::NavigationSystem::mapEngine":
-    shortId: "LGC-2"
-    uuid: "11915261-083d-5c7d-87cf-faf40e77743b"
-  "robot_cell_family_navigation::NavigationSystem::pGraspEventIn":
-    shortId: "LGC-4:4"
-    uuid: "f3eecd4a-c700-5fc3-9fc5-05b6834149ae"
-    retired: "GRS-4"
-  "robot_cell_family_navigation::NavigationSystem::pPointCloudIn":
-    shortId: "LGC-5:3"
-    uuid: "1a07c5ee-1f4a-5af1-9946-654cadfc1d37"
-    retired: "PNT-3"
-  "robot_cell_family_navigation::NavigationSystem::safetyRelay":
-    shortId: "SFT-1"
-    uuid: "b07edb4b-823a-5666-b984-dfd60cfcf382"
-  "robot_cell_family_navigation::fnBuildMap":
-    shortId: "SYS-3"
-    uuid: "feaa0b74-80c8-534d-827b-4a91735b0732"
-  "robot_cell_family_navigation::fnTagGrasp":
-    shortId: "SYS-4"
-    uuid: "15ad4be9-f7e0-5679-ab59-3d83034bdb01"
-  "robot_cell_family_navigation::ucAcquireMap":
-    shortId: "USE-2"
-    uuid: "c5e5ba0c-9931-581d-973f-06771194bd5d"
-  "robot_cell_family_operational_use_cases::ucPerformPickAndPlace":
-    shortId: "USE-3"
-    uuid: "123bdce0-cc65-5f96-8314-015c040b0c44"
-  "robot_cell_family_perception::PerceptionSystem":
-    shortId: "SYS-7"
-    uuid: "6df2db5b-33af-572a-a508-5920c172ebd6"
-  "robot_cell_family_perception::PerceptionSystem::pPointCloudOut":
-    shortId: "LGC-5:4"
-    uuid: "f25021f5-4d77-5bab-a02f-67a44e13c9ff"
-    retired: "PNT-4"
-  "robot_cell_family_perception::PerceptionSystem::safetyRelay":
-    shortId: "SFT-2"
-    uuid: "91b6697d-b81d-5f12-908d-36630bc4f12a"
-  "robot_cell_family_perception::PerceptionSystem::sensorHub":
-    shortId: "LGC-3"
-    uuid: "1ea7ccaa-19e9-5832-87ca-0fa090bd5d41"
-  "robot_cell_family_perception::fnAcquirePointClouds":
-    shortId: "SYS-6"
-    uuid: "b5526ffb-b286-51f3-8d37-bd85ccd39fed"
-  "robot_cell_family_perception::ucRecordRun":
-    shortId: "USE-4"
-    uuid: "7f1e7505-93cf-5ca9-8b0b-bb6e84c1c6b0"
   "robot_cell_family_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "90eedd56-862d-5c37-9e25-1de54d95e271"
@@ -155,3 +48,110 @@ elements:
     shortId: "SYS-8:1"
     uuid: "1ffe24b9-8326-5e45-9d84-0bd24aa26c4f"
     retired: "RBT-1"
+  "robot_cell_family_sos_chains::wfMapGuidedPick":
+    shortId: "WFL-1"
+    uuid: "713583a3-7ac7-5248-82ed-4e8f4e6e9e9b"
+  "robot_cell_family_sos_chains::wfMapGuidedPick::scMapGuidedPick":
+    shortId: "OPR-1"
+    uuid: "4d9847fb-1f64-58f1-9356-1c005b31b023"
+  "robot_cell_family_sos_chains::wfMapGuidedPick::scMapGuidedPick::stepAcquire":
+    shortId: "ACT-1"
+    uuid: "d2dc1e61-52d5-58ab-a59b-74f48539a351"
+  "robot_cell_family_sos_chains::wfMapGuidedPick::scMapGuidedPick::stepBuildMap":
+    shortId: "ACT-2"
+    uuid: "af2e726f-d76b-504d-b19d-f1900c79b724"
+  "robot_cell_family_sos_chains::wfMapGuidedPick::scMapGuidedPick::stepGrasp":
+    shortId: "ACT-3"
+    uuid: "cde92060-28d2-5d96-a8ec-02321acfbe07"
+  "robot_cell_family_sos_chains::wfMapGuidedPick::scMapGuidedPick::stepTag":
+    shortId: "ACT-4"
+    uuid: "352ea0e4-f42f-5d1d-9574-634aaa887d9c"
+  "robot_cell_family_sos_icds::ManipulationToNavigationIcd":
+    shortId: "INT-1"
+    uuid: "9b2236d4-4d72-596c-8573-219a92fe86b2"
+  "robot_cell_family_sos_icds::ManipulationToNavigationIcd::consumer":
+    shortId: "LGC-4:1"
+    uuid: "159885be-8457-5b8a-9b17-0e48b0aab101"
+    retired: "GRS-1"
+  "robot_cell_family_sos_icds::ManipulationToNavigationIcd::provider":
+    shortId: "LGC-4:2"
+    uuid: "fae45eb9-5718-5818-8af8-fc51dc86b8df"
+    retired: "GRS-2"
+  "robot_cell_family_sos_icds::PerceptionToNavigationIcd":
+    shortId: "INT-2"
+    uuid: "25296ccf-1311-596e-af95-201383e09b5d"
+  "robot_cell_family_sos_icds::PerceptionToNavigationIcd::consumer":
+    shortId: "LGC-5:1"
+    uuid: "201d7327-4b2a-5428-b68a-dfe725663778"
+    retired: "PNT-1"
+  "robot_cell_family_sos_icds::PerceptionToNavigationIcd::provider":
+    shortId: "LGC-5:2"
+    uuid: "cfa6155d-78eb-5918-9e24-ef650aa40ecb"
+    retired: "PNT-2"
+  "robot_cell_family_sos_use_cases::ucPerformPickAndPlace":
+    shortId: "USE-3"
+    uuid: "123bdce0-cc65-5f96-8314-015c040b0c44"
+  "robot_cell_family_systems_manipulation_manipulation_system::ManipulatorSystem":
+    shortId: "SYS-2"
+    uuid: "cd712374-2dff-5e4d-8209-8113ecc24025"
+  "robot_cell_family_systems_manipulation_manipulation_system::ManipulatorSystem::gripperDrive":
+    shortId: "LGC-6"
+    uuid: "083ca5e8-a210-5d68-b82f-1b4601307d92"
+  "robot_cell_family_systems_manipulation_manipulation_system::ManipulatorSystem::motionController":
+    shortId: "LGC-1"
+    uuid: "e42137bd-da25-5982-a8cf-26e031c81811"
+  "robot_cell_family_systems_manipulation_manipulation_system::ManipulatorSystem::pGraspEventOut":
+    shortId: "LGC-4:3"
+    uuid: "41c1abc5-8e4b-58b8-8ac9-e11ddb157886"
+    retired: "GRS-3"
+  "robot_cell_family_systems_manipulation_manipulation_system::fnExecuteGrasp":
+    shortId: "SYS-1"
+    uuid: "7295f77d-5d97-5fee-9c7b-f1b4a56bac31"
+  "robot_cell_family_systems_manipulation_manipulation_system::ucExecuteGrasp":
+    shortId: "USE-1"
+    uuid: "24de2ed8-8daa-584d-9d26-9a04486ac411"
+  "robot_cell_family_systems_navigation_navigation_system::NavigationSystem":
+    shortId: "SYS-5"
+    uuid: "37d96a1d-c9e4-5509-a126-b015353a222b"
+  "robot_cell_family_systems_navigation_navigation_system::NavigationSystem::mapEngine":
+    shortId: "LGC-2"
+    uuid: "11915261-083d-5c7d-87cf-faf40e77743b"
+  "robot_cell_family_systems_navigation_navigation_system::NavigationSystem::pGraspEventIn":
+    shortId: "LGC-4:4"
+    uuid: "f3eecd4a-c700-5fc3-9fc5-05b6834149ae"
+    retired: "GRS-4"
+  "robot_cell_family_systems_navigation_navigation_system::NavigationSystem::pPointCloudIn":
+    shortId: "LGC-5:3"
+    uuid: "1a07c5ee-1f4a-5af1-9946-654cadfc1d37"
+    retired: "PNT-3"
+  "robot_cell_family_systems_navigation_navigation_system::NavigationSystem::safetyRelay":
+    shortId: "SFT-1"
+    uuid: "b07edb4b-823a-5666-b984-dfd60cfcf382"
+  "robot_cell_family_systems_navigation_navigation_system::fnBuildMap":
+    shortId: "SYS-3"
+    uuid: "feaa0b74-80c8-534d-827b-4a91735b0732"
+  "robot_cell_family_systems_navigation_navigation_system::fnTagGrasp":
+    shortId: "SYS-4"
+    uuid: "15ad4be9-f7e0-5679-ab59-3d83034bdb01"
+  "robot_cell_family_systems_navigation_navigation_system::ucAcquireMap":
+    shortId: "USE-2"
+    uuid: "c5e5ba0c-9931-581d-973f-06771194bd5d"
+  "robot_cell_family_systems_perception_perception_system::PerceptionSystem":
+    shortId: "SYS-7"
+    uuid: "6df2db5b-33af-572a-a508-5920c172ebd6"
+  "robot_cell_family_systems_perception_perception_system::PerceptionSystem::pPointCloudOut":
+    shortId: "LGC-5:4"
+    uuid: "f25021f5-4d77-5bab-a02f-67a44e13c9ff"
+    retired: "PNT-4"
+  "robot_cell_family_systems_perception_perception_system::PerceptionSystem::safetyRelay":
+    shortId: "SFT-2"
+    uuid: "91b6697d-b81d-5f12-908d-36630bc4f12a"
+  "robot_cell_family_systems_perception_perception_system::PerceptionSystem::sensorHub":
+    shortId: "LGC-3"
+    uuid: "1ea7ccaa-19e9-5832-87ca-0fa090bd5d41"
+  "robot_cell_family_systems_perception_perception_system::fnAcquirePointClouds":
+    shortId: "SYS-6"
+    uuid: "b5526ffb-b286-51f3-8d37-bd85ccd39fed"
+  "robot_cell_family_systems_perception_perception_system::ucRecordRun":
+    shortId: "USE-4"
+    uuid: "7f1e7505-93cf-5ca9-8b0b-bb6e84c1c6b0"
