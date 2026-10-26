@@ -35,6 +35,8 @@
 | --- | --- | --- | --- |
 | [`HazardMaxControlsRule`](#hazardmaxcontrolsrule) | `constraint def` | Constraint that checks hazard max controls rule. | `MemoConsistencyRule` |
 | [`SwComponentMaxInterfacesRule`](#swcomponentmaxinterfacesrule) | `constraint def` | Constraint that checks sw component max interfaces rule. | `MemoConsistencyRule` |
+| [`SoftwareComponentWcetWithinDeadlineRule`](#softwarecomponentwcetwithindeadlinerule) | `constraint def` | Constraint that checks software component wcet within deadline rule. | `MemoConsistencyRule` |
+| [`ModelConstraintHoldsRule`](#modelconstraintholdsrule) | `constraint def` | The `require`, `assume` and `assert constraint`s a model declares are claims about its own values. A function evaluates them (`validator/model-constraints.ts`): names resolve from the owning element, its package, then a unique short name, and a quantity compares as a quantity.… | `MemoConsistencyRule` |
 
 ## HazardMaxControlsRule
 
@@ -60,6 +62,36 @@ constraint def SwComponentMaxInterfacesRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks sw component max interfaces rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_quantitative` |
+
+
+## SoftwareComponentWcetWithinDeadlineRule
+
+```sysml
+constraint def SoftwareComponentWcetWithinDeadlineRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks software component wcet within deadline rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_quantitative` |
+
+
+## ModelConstraintHoldsRule
+
+```sysml
+constraint def ModelConstraintHoldsRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The `require`, `assume` and `assert constraint`s a model declares are claims about its own values. A function evaluates them (`validator/model-constraints.ts`): names resolve from the owning element, its package, then a unique short name, and a quantity compares as a quantity.… |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -102,6 +134,35 @@ constraint def SwComponentMaxInterfacesRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::info;
             attribute rationaleText = "High interface count indicates excessive coupling; consider decomposition.";
             attribute predicateExpression = "threatenedBy->size() <= 8";
+            constraint { true }
+        }
+
+        constraint def SoftwareComponentWcetWithinDeadlineRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "QT-004"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "SoftwareComponent";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A component whose worst-case execution time exceeds its deadline cannot meet it. Both are durations, compared in one unit whatever each was written in.";
+            attribute predicateExpression = "attributes.wcetMs == '' or attributes.deadlineMs == '' or wcetMs <= deadlineMs";
+            constraint { true }
+        }
+
+        // The `require`, `assume` and `assert constraint`s a model declares are claims about its own values. A
+        // function evaluates them (`validator/model-constraints.ts`): names resolve from the owning element, its
+        // package, then a unique short name, and a quantity compares as a quantity. A constraint it cannot
+        // resolve is reported as not evaluated, which is information, never a pass.
+        constraint def ModelConstraintHoldsRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "MC-001"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "Model";
+            attribute evaluator = "constraints";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "A constraint a model declares is a claim about its own values; one that does not hold is a defect in the model or in the claim.";
+            attribute predicateExpression = "modelConstraintsHold";
             constraint { true }
         }
 

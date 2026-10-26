@@ -204,6 +204,7 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | [`Mitigates`](assurance/safety_risk/memo_risk.md#mitigates) | `connection def` | Typed relationship from `any element` to `RiskItem`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`ReducedBy`](assurance/safety_risk/memo_risk.md#reducedby) | `connection def` | Typed relationship from `ResidualRisk` to `RiskControlMeasure`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 | [`TracesRisk`](assurance/safety_risk/memo_risk.md#tracesrisk) | `connection def` | Typed relationship from `RiskItem` to `RiskItem`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
+| [`WeighedAgainst`](assurance/safety_risk/memo_risk.md#weighedagainst) | `connection def` | Typed relationship from `Benefit` to `Risk`. | [`assurance/safety_risk/memo_risk.sysml`](assurance/safety_risk/memo_risk.md) |
 
 
 ## `memo::assurance::safety_risk::analysis`
