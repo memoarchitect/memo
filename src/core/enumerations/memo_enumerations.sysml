@@ -207,6 +207,23 @@ package memo_core_enumerations {
         enum maintenance;
         enum obsolete;
     }
+    // How much of the product a test exercises, and where it is carried out: the protocol of a
+    // verification case (FDA's recommended performance-testing information), not a record of a run.
+    enum def TestLevelKind {
+        enum unit;
+        enum integration;
+        enum subassembly;
+        enum system;
+        enum systemWithAccessories;
+    }
+    enum def TestEnvironmentKind {
+        enum bench;
+        enum inSilico;
+        enum exVivo;
+        enum cadaver;
+        enum animal;
+        enum clinical;
+    }
     enum def MemoVerificationMethodKind {
         enum inspection;
         enum analytical;
