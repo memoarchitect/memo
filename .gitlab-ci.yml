@@ -26,7 +26,7 @@ variables:
     - /tmp/sysand-venv/bin/pip install --quiet "sysand==${SYSAND_VERSION}"
     - export PATH="/tmp/sysand-venv/bin:$PATH"
     - sysand --version
-    - corepack enable
+    - npm install --global pnpm@9.15.0
     - git clone --depth 1 https://github.com/memoarchitect/memo-tools.git /tmp/memo-tools
     - rm -rf /tmp/memo-tools/memo
     - ln -s "$CI_PROJECT_DIR" /tmp/memo-tools/memo
@@ -61,7 +61,7 @@ test:
   image: node:26-bookworm-slim
   before_script:
     - apt-get update && apt-get install -y --no-install-recommends git >/dev/null
-    - corepack enable
+    - npm install --global pnpm@9.15.0
     - git clone --depth 1 https://github.com/memoarchitect/memo-tools.git /tmp/memo-tools
     - rm -rf /tmp/memo-tools/memo
     - ln -s "$CI_PROJECT_DIR" /tmp/memo-tools/memo
