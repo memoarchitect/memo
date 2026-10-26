@@ -67,6 +67,9 @@
 | [`RiskAcceptabilityRule`](#riskacceptabilityrule) | `constraint def` | Constraint that checks risk acceptability rule. | `MemoConsistencyRule` |
 | [`ResidualRiskAcceptabilityRule`](#residualriskacceptabilityrule) | `constraint def` | Constraint that checks residual risk acceptability rule. | `MemoConsistencyRule` |
 | [`ResidualRiskEvaluatedRule`](#residualriskevaluatedrule) | `constraint def` | Constraint that checks residual risk evaluated rule. | `MemoConsistencyRule` |
+| [`MisuseReachesSituationRule`](#misusereachessituationrule) | `constraint def` | ISO 14971 clauses 5.2, 5.3 and 7.4 on the links the model already has: a misuse is not an item of the risk chain, so it reaches the chain by `causes` (the risk can start at any element: an operational flow, an FMEA row, a use error, a misuse); a safety-related characteristic r… | `MemoConsistencyRule` |
+| [`CharacteristicReachesHazardRule`](#characteristicreacheshazardrule) | `constraint def` | Constraint that checks characteristic reaches hazard rule. | `MemoConsistencyRule` |
+| [`BenefitRiskWeighedRule`](#benefitriskweighedrule) | `constraint def` | Constraint that checks benefit risk weighed rule. | `MemoConsistencyRule` |
 | [`SoupAnomaliesRule`](#soupanomaliesrule) | `constraint def` | Constraint that checks soup anomalies rule. | `MemoConsistencyRule` |
 | [`SoupIdentifiedRule`](#soupidentifiedrule) | `constraint def` | Constraint that checks soup identified rule. | `MemoConsistencyRule` |
 | [`SoupRequirementRule`](#souprequirementrule) | `constraint def` | Constraint that checks soup requirement rule. | `MemoConsistencyRule` |
@@ -489,6 +492,51 @@ constraint def ResidualRiskEvaluatedRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks residual risk evaluated rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## MisuseReachesSituationRule
+
+```sysml
+constraint def MisuseReachesSituationRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | ISO 14971 clauses 5.2, 5.3 and 7.4 on the links the model already has: a misuse is not an item of the risk chain, so it reaches the chain by `causes` (the risk can start at any element: an operational flow, an FMEA row, a use error, a misuse); a safety-related characteristic r… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## CharacteristicReachesHazardRule
+
+```sysml
+constraint def CharacteristicReachesHazardRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks characteristic reaches hazard rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_closure` |
+
+
+## BenefitRiskWeighedRule
+
+```sysml
+constraint def BenefitRiskWeighedRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks benefit risk weighed rule. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -1048,6 +1096,49 @@ constraint def ChangeTraceRule :> MemoConsistencyRule
             constraint { true }
         }
         #EnforcesClause dependency from ResidualRiskEvaluatedRule to iso14971::iso14971Clause8;
+
+        // ISO 14971 clauses 5.2, 5.3 and 7.4 on the links the model already has: a misuse is not an item of the risk
+        // chain, so it reaches the chain by `causes` (the risk can start at any element: an operational flow, an
+        // FMEA row, a use error, a misuse); a safety-related characteristic reaches a hazard by `impactsSafety`; a
+        // benefit is weighed against a risk by `weighedAgainst`.
+        constraint def MisuseReachesSituationRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-MED-027"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::medicalDevice;
+            attribute obligation = RuleObligationKind::required;
+            attribute appliesTo = "ReasonablyForeseeableMisuse";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "Reasonably foreseeable misuse is an input to the risk analysis: a misuse that leads to no hazardous situation has not been analysed, and one that is not recorded as leading anywhere cannot be shown to have been considered.";
+            attribute predicateExpression = "downstream(causes)->exists(conformsTo(HazardousSituation) or downstream(tracesRisk)->exists(conformsTo(HazardousSituation)))";
+            constraint { true }
+        }
+        #EnforcesClause dependency from MisuseReachesSituationRule to iso14971::iso14971Clause5::iso14971Clause5_2;
+
+        constraint def CharacteristicReachesHazardRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-MED-028"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::medicalDevice;
+            attribute obligation = RuleObligationKind::required;
+            attribute appliesTo = "SafetyRelatedCharacteristic";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "A characteristic that could affect safety is identified so that the hazards it bears on are analysed: one linked to no hazard has been identified and then left unused.";
+            attribute predicateExpression = "downstream(impactsSafety)->exists(conformsTo(RiskItem))";
+            constraint { true }
+        }
+        #EnforcesClause dependency from CharacteristicReachesHazardRule to iso14971::iso14971Clause5::iso14971Clause5_3;
+
+        constraint def BenefitRiskWeighedRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-MED-029"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::medicalDevice;
+            attribute obligation = RuleObligationKind::required;
+            attribute appliesTo = "ResidualRisk";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "Where a residual risk calls for a benefit-risk analysis, the benefit it is weighed against is stated.";
+            attribute predicateExpression = "attributes.benefitRiskRequired != 'true' or upstream(weighedAgainst)->exists(conformsTo(Benefit))";
+            constraint { true }
+        }
+        #EnforcesClause dependency from BenefitRiskWeighedRule to iso14971::iso14971Clause7::iso14971Clause7_4;
 
         constraint def SoupAnomaliesRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-MED-015"; }

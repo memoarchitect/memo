@@ -58,6 +58,7 @@
 | [`EvaluatedIn`](#evaluatedin) | `connection def` | Typed relationship from `ResidualRisk` to `OverallResidualRiskEvaluation`. | `MemoRelationship` |
 | [`MitigationKind`](#mitigationkind) | `enum def` | Controlled values for mitigation: `hazard`, `vulnerability`, `failureMode`, `cutSet`, `fmeaAction`. | — |
 | [`Mitigates`](#mitigates) | `connection def` | Typed relationship from `any element` to `RiskItem`. | `MemoRelationship` |
+| [`WeighedAgainst`](#weighedagainst) | `connection def` | Typed relationship from `Benefit` to `Risk`. | `MemoRelationship` |
 
 ## ReasonablyForeseeableMisuse
 
@@ -404,6 +405,21 @@ connection def Mitigates :> MemoRelationship
 | Owning package | `memo_assurance_safety_risk` |
 
 
+## WeighedAgainst
+
+```sysml
+connection def WeighedAgainst :> MemoRelationship
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Typed relationship from `Benefit` to `Risk`. |
+| Kind | `connection def` |
+| Abstract | No |
+| Specializes | `MemoRelationship` |
+| Owning package | `memo_assurance_safety_risk` |
+
+
 ## Source
 
 ??? code "assurance/safety_risk/memo_risk.sysml"
@@ -648,6 +664,21 @@ connection def Mitigates :> MemoRelationship
             :> annotatedElement : SysML::ConnectionDefinition;
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = mitigatesLinks meta SysML::Usage;
+        }
+
+        // ISO 14971 clause 7.4: where the residual risk is judged unacceptable, the benefit of the intended use is
+        // weighed against it. Nothing in the chain reached a Benefit, which is a part and not a RiskItem, and the
+        // generic relations that accept the pair say something else (`causes` between a benefit and a risk would say
+        // the benefit gives rise to it). Named from the benefit's side, the way AssessedAgainst is from the risk's.
+        connection def WeighedAgainst :> MemoRelationship {
+            end benefit : Benefit :>> source;
+            end risk : Risk :>> target;
+        }
+        abstract connection weighedAgainstLinks : WeighedAgainst[*];
+        metadata def <weighedAgainst> WeighedAgainstMetadata :> SemanticMetadata {
+            :> annotatedElement : SysML::ConnectionDefinition;
+            :> annotatedElement : SysML::ConnectionUsage;
+            :>> baseType = weighedAgainstLinks meta SysML::Usage;
         }
     }
 

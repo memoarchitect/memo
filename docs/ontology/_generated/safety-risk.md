@@ -68,6 +68,7 @@ flowchart LR
   ResidualRisk["ResidualRisk"]
   RiskControlMeasure["RiskControlMeasure"]
   OverallResidualRiskEvaluation["OverallResidualRiskEvaluation"]
+  Benefit["Benefit"]
   PostMarketSurveillance["PostMarketSurveillance"]
   anyElement -->|Causes| anyElement
   FailureMode -->|DetectedBy| DetectionMethod
@@ -84,6 +85,7 @@ flowchart LR
   ResidualRisk -->|ReducedBy| RiskControlMeasure
   ResidualRisk -->|EvaluatedIn| OverallResidualRiskEvaluation
   anyElement -->|Mitigates| RiskItem
+  Benefit -->|WeighedAgainst| Risk
   PostMarketSurveillance -->|FeedsBackTo| MemoPart
   RiskControlMeasure -->|ControlImplementedBy| anyElement
   MemoPart -->|ImpactsSafety| RiskItem
@@ -109,6 +111,7 @@ flowchart LR
 | [`ReducedBy`](../sysml-api/assurance/safety_risk/memo_risk.md#reducedby) | [`ResidualRisk`](../sysml-api/assurance/safety_risk/memo_risk.md#residualrisk) | [`RiskControlMeasure`](../sysml-api/assurance/safety_risk/memo_risk.md#riskcontrolmeasure) | Typed relationship from `ResidualRisk` to `RiskControlMeasure`. |
 | [`EvaluatedIn`](../sysml-api/assurance/safety_risk/memo_risk.md#evaluatedin) | [`ResidualRisk`](../sysml-api/assurance/safety_risk/memo_risk.md#residualrisk) | [`OverallResidualRiskEvaluation`](../sysml-api/assurance/safety_risk/memo_risk.md#overallresidualriskevaluation) | Typed relationship from `ResidualRisk` to `OverallResidualRiskEvaluation`. |
 | [`Mitigates`](../sysml-api/assurance/safety_risk/memo_risk.md#mitigates) | *any element* | [`RiskItem`](../sysml-api/assurance/safety_risk/memo_risk.md#riskitem) | Typed relationship from `any element` to `RiskItem`. |
+| [`WeighedAgainst`](../sysml-api/assurance/safety_risk/memo_risk.md#weighedagainst) | [`Benefit`](../sysml-api/assurance/safety_risk/memo_risk.md#benefit) | [`Risk`](../sysml-api/assurance/safety_risk/memo_risk.md#risk) | Typed relationship from `Benefit` to `Risk`. |
 | [`FeedsBackTo`](../sysml-api/assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.md#feedsbackto) | [`PostMarketSurveillance`](../sysml-api/assurance/safety_risk/postmarket_surveillance/memo_postmarket_surveillance.md#postmarketsurveillance) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `PostMarketSurveillance` to `MemoPart`. |
 
 ### Relationships from elsewhere that reach this layer

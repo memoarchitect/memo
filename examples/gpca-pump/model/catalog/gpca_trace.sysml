@@ -39,6 +39,7 @@ package memo_examples_gpca_pump_gpca_trace {
     private import memo_assurance_human_factors::*;
     private import memo_assurance_safety_risk::*;
     private import memo_assurance_safety_risk_analysis::*;
+    private import memo_assurance_cybersecurity::*;
     private import memo_viewpoints_definitions::*;
 
     // ── System context interactions (context view) ──────────────
@@ -447,6 +448,13 @@ package memo_examples_gpca_pump_gpca_trace {
     // Categorized causes converge on each hazard (GIIP Tables 2-9
     // pattern); hazard -> sequence -> hazardous situation -> harm.
     // HZ-001 opioid over-infusion
+    // ISO 14971 5.2, 5.3 and 7.4: a foreseeable misuse leads to a hazardous situation, a safety-related
+    // characteristic bears on a hazard, and the benefit is weighed against the residual risk that needs it.
+    connection : Causes connect cause ::> bolusByProxyMisuse to effect ::> hsExcessInfusion {
+        attribute :>> causeKind = CauseKind::useErrorLeadsToHazard;
+    }
+    connection : ImpactsSafety connect cyberElement ::> programmedDoseCharacteristic to safetyElement ::> overdoseHazard;
+    connection : WeighedAgainst connect benefit ::> analgesiaBenefit to risk ::> riskAfterWrongDose;
     connection : TracesRisk connect sourceRiskElement ::> causeFlowRateTooHigh to targetRiskElement ::> overdoseHazard;
     connection : TracesRisk connect sourceRiskElement ::> causeFrequentBolus to targetRiskElement ::> overdoseHazard;
     connection : TracesRisk connect sourceRiskElement ::> causeBolusVolumeTooHigh to targetRiskElement ::> overdoseHazard;
