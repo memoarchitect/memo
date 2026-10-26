@@ -94,6 +94,9 @@ package memo_examples_embedded_infusion_pump {
         @MemoIdentity { :>> providedId = "EIP-VC-A10"; :>> label = "VerifyControlLoopDeadline"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
         attribute :>> acceptanceCriteria = "worst-case execution time within the deadline";
+        attribute :>> testLevel = TestLevelKind::unit;
+        attribute :>> testEnvironment = TestEnvironmentKind::bench;
+        attribute :>> worstCaseCondition = "all three pump channels active with the display refreshing";
         assert constraint wcetWithinBudget { rtControlLoop.wcetMs <= rtControlLoop.deadlineMs }
         subject verified : Base::Anything[*] = (rtControlLoop);
     }
@@ -105,6 +108,21 @@ package memo_examples_embedded_infusion_pump {
         attribute :>> resultSummary = "Illustrative result: the worst-case execution time is within the deadline.";
     }
     connection : ProducesEvidence connect producer ::> vcControlLoopDeadline to producedEvidence ::> evControlLoopDeadline;
+    // Illustrative: authored for this example, not the record of a real run.
+    part runControlLoopDeadline1 : TestRun {
+        attribute :>> evidenceKind = EvidenceKind::testArtifact;
+        @MemoIdentity { :>> providedId = "EIP-RUN-A10-1"; :>> label = "VerifyControlLoopDeadline, run 1"; }
+        attribute :>> verdict = VerificationCases::VerdictKind::pass;
+        attribute :>> executedAt { :>> val = "2026-10-20T09:30:00Z" as Time::Iso8601DateTimeEncoding; }
+        attribute :>> softwareVersion = "1.4.2";
+        attribute measuredWcet : MeasuredValue {
+            :>> criterion = "control loop WCET";
+            :>> value = 2.4 [milli*s];
+        }
+        attribute :>> measuredValues = (measuredWcet);
+        ref :>> testedItem = (rtControlLoop);
+    }
+    connection : ProducesEvidence connect producer ::> vcControlLoopDeadline to producedEvidence ::> runControlLoopDeadline1;
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification vcAuthoredSwInfusionControl : VerificationCase {
         @MemoIdentity { :>> providedId = "EIP-VC-A01"; :>> label = "VerifyInfusionControlItem"; }
