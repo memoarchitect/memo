@@ -21,6 +21,7 @@ examples:
 extensions:
   template: ./extensions/template
   clinical: ./extensions/clinical
+  anatomy: ./extensions/anatomy
   aadl: ./extensions/aadl
   cloud: ./extensions/cloud
   container: ./extensions/container
