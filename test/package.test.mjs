@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
+import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -411,6 +412,36 @@ test('extensions are ontology, beside src — not examples', () => {
   assert.match(buildScript, /import memo_extension_\$\{other\}/);
   assert.match(buildScript, /toolchainCheck\(cli, REPO_ROOT, \['src', 'extensions', 'examples'\]\)/);
   assert.match(buildScript, /proj === '\.' \? join\(dir, 'src'\) : dir/);
+});
+
+// The anatomy extension ships no anatomy classes: a project generates its own from
+// the FMA index (`memo anatomy generate`). So the index is the extension's content,
+// and what it carries is FMA's, under CC BY 4.0: it must be whole and attributed.
+test('the anatomy extension ships a whole, attributed FMA index and no anatomy classes', () => {
+  const index = JSON.parse(gunzipSync(readFileSync(join(root, 'extensions', 'anatomy', 'data', 'fma-index.json.gz'))).toString('utf8'));
+  assert.match(index.source.licence, /CC BY 4\.0/);
+  assert.ok(index.classes[index.root], 'the root class is in the index');
+  for (const [id, [name, parent, home, , relations]] of Object.entries(index.classes)) {
+    assert.match(name, /^[A-Za-z]\w*$/, `${id} has a SysML basic name`);
+    assert.match(home, /^[a-z][a-z0-9_]*$/, `${id} has a home file`);
+    if (id !== index.root) assert.ok(index.classes[parent], `${id}'s parent ${parent} is in the index`);
+    for (const [relation, target] of relations) {
+      assert.ok(index.relations[relation], `${id} names relation ${relation}, which the index declares`);
+      assert.ok(index.classes[target], `${id} names ${target}, which is in the index`);
+    }
+  }
+  const names = Object.values(index.classes).map(([name]) => name);
+  assert.equal(new Set(names).size, names.length, 'class names are unique');
+
+  // Every relation the index uses has its feature on AnatomyEntity.
+  const vocabulary = read('extensions', 'anatomy', 'src', 'vocabulary', 'memo_extension_anatomy_vocabulary.sysml');
+  assert.match(vocabulary, /CC BY 4\.0/);
+  for (const { feature } of Object.values(index.relations)) assert.match(vocabulary, new RegExp(`\\b${feature} :`));
+
+  assert.ok(existsSync(join(root, 'extensions', 'anatomy', 'LICENSES', 'CC-BY-4.0.txt')));
+  assert.match(read('extensions', 'anatomy', 'memo.package.yaml'), /^license: MIT AND CC-BY-4\.0$/m);
+  const sources = walkSysml(join('extensions', 'anatomy')).map((file) => stripComments(read(file))).join('\n');
+  assert.doesNotMatch(sources, /part def <fma\d+>/, 'no FMA class is declared in the extension itself');
 });
 
 test('every extension carries an identity-only descriptor and its facade package', () => {

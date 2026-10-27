@@ -78,10 +78,18 @@ for (const { proj, name, usage } of projects) {
             cpSync(join(dir, source), join(staging, source));
         }
         // SysAnd resolves the project license from LICENSES/<SPDX-ID>.txt relative to .project.json.
+        // A package whose descriptor names more than MIT (the anatomy extension carries FMA's
+        // CC BY 4.0 content) ships its own LICENSES/ beside the descriptor, and its expression.
         mkdirSync(join(staging, 'LICENSES'), { recursive: true });
         cpSync(join(REPO_ROOT, 'LICENSES', 'MIT.txt'), join(staging, 'LICENSES', 'MIT.txt'));
+        const ownLicenses = join(dir, 'LICENSES');
+        if (proj !== '.' && existsSync(ownLicenses)) {
+            for (const file of readdirSync(ownLicenses)) cpSync(join(ownLicenses, file), join(staging, 'LICENSES', file));
+        }
+        const descriptor = proj !== '.' && existsSync(join(dir, 'memo.package.yaml')) ? readFileSync(join(dir, 'memo.package.yaml'), 'utf8') : '';
+        const license = /^license:\s*(.+)$/m.exec(descriptor)?.[1].trim().replace(/^['"]|['"]$/g, '') ?? 'MIT';
         writeFileSync(join(staging, '.project.json'),
-            `{\n  "name": "${name}",\n  "version": "${version}",\n  "license": "MIT",\n  "usage": ${usage}\n}\n`);
+            `{\n  "name": "${name}",\n  "version": "${version}",\n  "license": "${license}",\n  "usage": ${usage}\n}\n`);
 
         // Index sources in batches: a command line has a length limit, and Windows' is the smallest.
         for (let i = 0; i < files.length; i += 100) {
