@@ -35,7 +35,7 @@ package memo_examples_reusable_instrument {
     }
 
     // Reprocessing workflow: exists independently of any single instrument.
-    action wfReprocess : OperationalWorkflow {
+    part wfReprocess : OperationalWorkflow {
         @MemoIdentity { :>> providedId = "RI-WF-001"; :>> label = "InstrumentReprocessingWorkflow"; }
         attribute :>> workflowState = WorkflowStateKind::asIs;
         attribute :>> entryCondition = "used instrument received in decontamination";

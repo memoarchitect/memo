@@ -428,7 +428,7 @@ test('every extension carries an identity-only descriptor and its facade package
   }
   // The clinical extension is the worked example of specializing the base.
   const clinical = read('extensions', 'clinical', 'src', 'procedures', 'memo_clinical_procedures.sysml');
-  assert.match(clinical, /action def ClinicalProcedureWorkflow specializes OperationalWorkflow/);
+  assert.match(clinical, /part def ClinicalProcedureWorkflow specializes OperationalWorkflow/);
   assert.doesNotMatch(clinical, /\b(?:ClinicalProcedure|ClinicalTechnique|ProcedureVariant|InstrumentSet)\b/);
   assert.equal(existsSync(join(root, 'extensions', 'medical-products')), false);
 });

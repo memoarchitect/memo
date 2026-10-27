@@ -223,9 +223,9 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `action def` | Operational workflow definition specializing `MemoAction`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowControlNode`](architecture/operational/workflows/memo_workflows.md#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`WorkflowResource`](architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`WorkflowResource`](architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. Owned by the workflow as its parts. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 
 ## `memo::architecture::realization::deployment`

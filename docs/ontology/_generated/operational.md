@@ -45,9 +45,9 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
-| [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `action def` | Operational workflow definition specializing `MemoAction`. |
+| [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. |
 | [`WorkflowControlNode`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). |
-| [`WorkflowResource`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. |
+| [`WorkflowResource`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. Owned by the workflow as its parts. |
 
 
 ### Connections at a glance
