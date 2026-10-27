@@ -224,6 +224,8 @@ flowchart LR
 | [`SafetyClassKind`](../sysml-api/core/enumerations/memo_enumerations.md#safetyclasskind) | `none`, `A`, `B`, `C` |
 | [`ComplexityKind`](../sysml-api/core/enumerations/memo_enumerations.md#complexitykind) | `low`, `medium`, `high`, `complex` |
 | [`LifecycleStateKind`](../sysml-api/core/enumerations/memo_enumerations.md#lifecyclestatekind) | `concept`, `development`, `released`, `maintenance`, `obsolete` |
+| [`TestLevelKind`](../sysml-api/core/enumerations/memo_enumerations.md#testlevelkind) | `unit`, `integration`, `subassembly`, `system`, `systemWithAccessories` |
+| [`TestEnvironmentKind`](../sysml-api/core/enumerations/memo_enumerations.md#testenvironmentkind) | `bench`, `inSilico`, `exVivo`, `cadaver`, `animal`, `clinical` |
 | [`MemoVerificationMethodKind`](../sysml-api/core/enumerations/memo_enumerations.md#memoverificationmethodkind) | `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking` |
 | [`RegulatoryRegimeKind`](../sysml-api/core/enumerations/memo_enumerations.md#regulatoryregimekind) | `CE`, `MDR`, `UKCA`, `FDA_510k`, `FDA_PMA` |
 | [`ArtifactKind`](../sysml-api/core/enumerations/memo_enumerations.md#artifactkind) | `plan`, `requirementSpecification`, `architectureDescription`, `softwareDesignDescription`, `riskRecord`, `traceMatrix`, `testProtocol`, `testReport`, `evidenceRecord`, `cybersecurityAssessment`, `threatModel`, `usabilityEngineeringReport`, `clinicalSafetyReport`, `failureModeEffectsAnalysis`, `soupList`, `designInputPlan`, `designOutputPlan`, `softwareDevelopmentPlan`, `labelingSpecification`, `designHistoryFileIndex`, `designChangeLog` |

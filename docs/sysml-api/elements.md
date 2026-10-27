@@ -414,6 +414,8 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
+| [`MeasuredValue`](assurance/verification_validation/memo_assurance.md#measuredvalue) | `attribute def` | A measured result: the criterion it answers, and the value as a quantity with its unit. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
+| [`TestRun`](assurance/verification_validation/memo_assurance.md#testrun) | `part def` | One execution of a verification case, and what came of it. A case is the plan and a run is the record, so a run is evidence the case produces (`ProducesEvidence`), one case to many runs. The verdict is the standard library's (VerificationCases.sysml:58), not a string. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 | [`TestStep`](assurance/verification_validation/memo_assurance.md#teststep) | `action def` | Test step definition specializing `MemoAction`. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 | [`ValidationCase`](assurance/verification_validation/memo_assurance.md#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
 | [`VerificationCase`](assurance/verification_validation/memo_assurance.md#verificationcase) | `verification def` | Verification case definition specializing `MemoVerificationCase`. | [`assurance/verification_validation/memo_assurance.sysml`](assurance/verification_validation/memo_assurance.md) |
@@ -557,7 +559,8 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`DoneWhen`](methodology/workflow/memo_workflow.md#donewhen) | `metadata def` | `#DoneWhen dependency from <step> to <rule>, <rule>;` The step is done when each of these rules has a subject in the workspace and no finding on it. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`DoneWhen`](methodology/workflow/memo_workflow.md#donewhen) | `metadata def` | `#DoneWhen dependency from <step> to <rule>, <rule>;` The step's own work is done when each of these rules has a subject in the workspace and no finding on it. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`LinkedWhen`](methodology/workflow/memo_workflow.md#linkedwhen) | `metadata def` | `#LinkedWhen dependency from <step> to <rule>, <rule>;` Each rule is a link from this step's work to another layer's. The links are made when each rule has no finding; a rule with no subject yet is waiting for the step that produces them. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 | [`MethodologyWorkflowStep`](methodology/workflow/memo_workflow.md#methodologyworkflowstep) | `action def` | Methodology workflow step definition specializing `MemoAction`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 
 

@@ -165,6 +165,8 @@ part def WorkspaceMembershipEntry specializes MemoPart
         part membershipRealizedByScenario : WorkspaceMembershipEntry { attribute :>> relation = "realizedByScenario"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
         // Neither: a cyber element and a safety item are each placed on their own.
         part membershipImpactsSafety : WorkspaceMembershipEntry { attribute :>> relation = "impactsSafety"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+        // Neither: a benefit and the risk it is weighed against are each placed on their own.
+        part membershipWeighedAgainst : WorkspaceMembershipEntry { attribute :>> relation = "weighedAgainst"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // A security property follows its asset.
         part membershipHasSecurityProperty : WorkspaceMembershipEntry { attribute :>> relation = "hasSecurityProperty"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
         // An attack surface follows the asset it exposes.
@@ -342,6 +344,7 @@ part def WorkspaceMembershipEntry specializes MemoPart
 
         // Neither: a step is not placed by the rule that says when it is done.
         part membershipDoneWhen : WorkspaceMembershipEntry { attribute :>> relation = "doneWhen"; attribute :>> direction = WorkspaceMembershipKind::neither; }
+        part membershipLinkedWhen : WorkspaceMembershipEntry { attribute :>> relation = "linkedWhen"; attribute :>> direction = WorkspaceMembershipKind::neither; }
 
         // A project follows the releases it feeds, as a device follows what it covers: a project that feeds releases
         // of two systems is shared, and one that feeds none is Unassigned (work that reached nothing).

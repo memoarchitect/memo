@@ -14,6 +14,8 @@
 | --- | --- | --- |
 | [`TestStep`](../sysml-api/assurance/verification_validation/memo_assurance.md#teststep) | `action def` | Test step definition specializing `MemoAction`. |
 | [`VerificationCase`](../sysml-api/assurance/verification_validation/memo_assurance.md#verificationcase) | `verification def` | Verification case definition specializing `MemoVerificationCase`. |
+| [`MeasuredValue`](../sysml-api/assurance/verification_validation/memo_assurance.md#measuredvalue) | `attribute def` | A measured result: the criterion it answers, and the value as a quantity with its unit. |
+| [`TestRun`](../sysml-api/assurance/verification_validation/memo_assurance.md#testrun) | `part def` | One execution of a verification case, and what came of it. A case is the plan and a run is the record, so a run is evidence the case produces (`ProducesEvidence`), one case to many runs. The verdict is the standard library's (VerificationCases.sysml:58), not a string. |
 | [`ValidationCase`](../sysml-api/assurance/verification_validation/memo_assurance.md#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. |
 
 

@@ -28,6 +28,8 @@
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
+| private | `memo_core_stdlib_time::*` |
+| private | `memo_artifacts_configuration_management::*` |
 | private | `memo_architecture_operational_scenarios::*` |
 | private | `memo_architecture_operational_use_cases::*` |
 | private | `memo_architecture_functional_functions::*` |
@@ -38,6 +40,8 @@
 | --- | --- | --- | --- |
 | [`TestStep`](#teststep) | `action def` | Test step definition specializing `MemoAction`. | `MemoAction` |
 | [`VerificationCase`](#verificationcase) | `verification def` | Verification case definition specializing `MemoVerificationCase`. | `MemoVerificationCase` |
+| [`MeasuredValue`](#measuredvalue) | `attribute def` | A measured result: the criterion it answers, and the value as a quantity with its unit. | — |
+| [`TestRun`](#testrun) | `part def` | One execution of a verification case, and what came of it. A case is the plan and a run is the record, so a run is evidence the case produces (`ProducesEvidence`), one case to many runs. The verdict is the standard library's (VerificationCases.sysml:58), not a string. | `MemoEvidence` |
 | [`PerformsStep`](#performsstep) | `connection def` | Typed relationship from `MemoVerificationCase` to `TestStep`. | `MemoRelationship` |
 | [`ValidationCase`](#validationcase) | `verification def` | Validation case definition specializing `MemoVerificationCase`. | `MemoVerificationCase` |
 
@@ -68,6 +72,36 @@ verification def VerificationCase :> MemoVerificationCase, VerificationCases::Ve
 | Kind | `verification def` |
 | Abstract | No |
 | Specializes | `MemoVerificationCase` |
+| Owning package | `memo_assurance_verification_validation` |
+
+
+## MeasuredValue
+
+```sysml
+attribute def MeasuredValue
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A measured result: the criterion it answers, and the value as a quantity with its unit. |
+| Kind | `attribute def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_assurance_verification_validation` |
+
+
+## TestRun
+
+```sysml
+part def TestRun specializes MemoEvidence
+```
+
+| Property | Value |
+| --- | --- |
+| Description | One execution of a verification case, and what came of it. A case is the plan and a run is the record, so a run is evidence the case produces (`ProducesEvidence`), one case to many runs. The verdict is the standard library's (VerificationCases.sysml:58), not a string. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoEvidence` |
 | Owning package | `memo_assurance_verification_validation` |
 
 
@@ -113,6 +147,8 @@ verification def ValidationCase :> MemoVerificationCase
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
+        private import memo_core_stdlib_time::*;
+        private import memo_artifacts_configuration_management::*;   // ReleaseRecord
         private import memo_architecture_operational_scenarios::*;
         private import memo_architecture_operational_use_cases::*;
         private import memo_architecture_functional_functions::*;
@@ -138,6 +174,29 @@ verification def ValidationCase :> MemoVerificationCase
         verification def VerificationCase :> MemoVerificationCase, VerificationCases::VerificationCase {
             attribute methodKind : MemoVerificationMethodKind;
             attribute acceptanceCriteria : String;
+            // The protocol: what is tested and how, before any run. A run records what happened (TestRun).
+            attribute testLevel : TestLevelKind[0..1];
+            attribute testEnvironment : TestEnvironmentKind[0..1];
+            attribute sampleSize : Integer[0..1];
+            attribute sampleSizeRationale : String[0..1];
+            attribute worstCaseCondition : String[0..1];
+        }
+        // A measured result: the criterion it answers, and the value as a quantity with its unit.
+        attribute def MeasuredValue {
+            attribute criterion : String;
+            attribute value : Quantities::ScalarQuantityValue;
+        }
+        // One execution of a verification case, and what came of it. A case is the plan and a run is the
+        // record, so a run is evidence the case produces (`ProducesEvidence`), one case to many runs. The
+        // verdict is the standard library's (VerificationCases.sysml:58), not a string.
+        part def TestRun specializes MemoEvidence {
+            attribute verdict : VerificationCases::VerdictKind;
+            attribute executedAt : Iso8601DateTime[0..1];
+            attribute softwareVersion : String[0..1];
+            attribute measuredValues : MeasuredValue[0..*];
+            // What was tested, and the release or variant it was tested in.
+            ref testedItem : Base::Anything[0..*];
+            ref testedConfiguration : ReleaseRecord[0..*];
         }
         // Orders a reusable TestStep within a verification or validation case.
         connection def PerformsStep :> MemoRelationship {
