@@ -67,7 +67,7 @@
         private import memo_core_common::MemoIdentity;
         part mdCoreLibrary : MethodologyLibrary {
             @MemoIdentity { :>> providedId = "METHLIB-001"; :>> label = "MedicalDeviceMethodologyLibrary"; }
-            attribute :>> version = "0.16.0";
+            attribute :>> version = "0.16.2";
             attribute :>> domain = "medical device modeling";
             doc /* Methodology layer for selecting, restricting, sequencing, tailoring, and lightly extending use of the medical-device ontology. */
         }
@@ -88,7 +88,7 @@
         // second scope authority.
         part mdDefaultDefinition : MethodologyDefinition {
             @MemoIdentity { :>> providedId = "METH-MD-DEFAULT"; :>> label = "MedicalDeviceDefault"; }
-            attribute :>> version = "0.16.0";
+            attribute :>> version = "0.16.2";
             attribute :>> domain = "medical device modeling";
             doc /* MEMO default medical-device methodology. Selects every layer, discipline, standard, artifact kind, and viewpoint the resolved ontology and extension packages provide. */
             attribute :>> scopeMode = ScopeModeKind::allAvailable;
@@ -123,7 +123,8 @@
         }
 
         // The default method (plan O11): the steps a family works through, at the system of systems
-        // and at each system. `outputKinds` and the rules a step is `#DoneWhen` say when it is done.
+        // and at each system. `outputKinds` and the rules a step is `#DoneWhen` say when its own work is done; the rules it is
+        // `#LinkedWhen` say when it is linked to the other layers.
 
         action stepSosContext : MethodologyWorkflowStep {
             @MemoIdentity { :>> providedId = "STEP-SOS-01"; :>> label = "SosContext"; }
@@ -184,7 +185,7 @@
             attribute :>> entryCriteria = "The architecture and its interfaces exist.";
             attribute :>> exitCriteria = "Each hazard of the combination has a control.";
         }
-        #DoneWhen dependency from stepSosHazards to memo_rules_closure::HazardMitigationRule;
+        #LinkedWhen dependency from stepSosHazards to memo_rules_closure::HazardMitigationRule;
 
         action stepSysOperational : MethodologyWorkflowStep {
             @MemoIdentity { :>> providedId = "STEP-SYS-01"; :>> label = "SystemOperational"; }
@@ -221,7 +222,7 @@
             attribute :>> entryCriteria = "The system functions exist.";
             attribute :>> exitCriteria = "Every function is allocated to a component.";
         }
-        #DoneWhen dependency from stepSysLogical to memo_rules_closure::LogicalFunctionAllocationRule;
+        #LinkedWhen dependency from stepSysLogical to memo_rules_closure::LogicalFunctionAllocationRule;
 
         action stepSysHardware : MethodologyWorkflowStep {
             @MemoIdentity { :>> providedId = "STEP-SYS-04"; :>> label = "SystemHardware"; }
@@ -270,7 +271,7 @@
             attribute :>> entryCriteria = "The system functions exist.";
             attribute :>> exitCriteria = "Each hazard has a control.";
         }
-        #DoneWhen dependency from stepSysRisk to memo_rules_closure::HazardMitigationRule;
+        #LinkedWhen dependency from stepSysRisk to memo_rules_closure::HazardMitigationRule;
 
         action stepSysSecurity : MethodologyWorkflowStep {
             @MemoIdentity { :>> providedId = "STEP-SYS-08"; :>> label = "SystemSecurity"; }
@@ -283,7 +284,7 @@
             attribute :>> entryCriteria = "The system functions exist.";
             attribute :>> exitCriteria = "Each threat is mitigated.";
         }
-        #DoneWhen dependency from stepSysSecurity to memo_rules_closure::ThreatMitigationRule;
+        #LinkedWhen dependency from stepSysSecurity to memo_rules_closure::ThreatMitigationRule;
 
         action stepSysVerification : MethodologyWorkflowStep {
             @MemoIdentity { :>> providedId = "STEP-SYS-09"; :>> label = "SystemVerification"; }
@@ -296,7 +297,7 @@
             attribute :>> entryCriteria = "Risks and their controls exist.";
             attribute :>> exitCriteria = "Each verification case has a target.";
         }
-        #DoneWhen dependency from stepSysVerification to memo_rules_closure::VerificationCaseTargetRule;
+        #LinkedWhen dependency from stepSysVerification to memo_rules_closure::VerificationCaseTargetRule;
 
         action stepSysRelease : MethodologyWorkflowStep {
             @MemoIdentity { :>> providedId = "STEP-SYS-10"; :>> label = "SystemRelease"; }
@@ -309,7 +310,7 @@
             attribute :>> exitCriteria = "The release has a record.";
         }
 
-        // Order, within a level.
+        // Recommended order, within a level: which step feeds which. It never holds a step back.
         first stepSosContext then stepSosOperational;
         first stepSosOperational then stepSosFunctions;
         first stepSosFunctions then stepSosArchitecture;

@@ -121,6 +121,7 @@ SysML `constraint def` declarations in `src/`.
 | [`SosUseCaseIncludesSystemUseCaseRule`](rules/ontology/ontology_invariants.md#sosusecaseincludessystemusecaserule) | `constraint def` | A use case is at the level of its subject: one whose subject is a SystemOfSystems is a clinical procedure, one whose subject is a System is a system use case. There is no kind for either; the level is read from the subject, and the subject from `hasSubject`.… | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
 | [`UseErrorTracesToHazardRule`](rules/ontology/ontology_invariants.md#useerrortracestohazardrule) | `constraint def` | Constraint that checks use error traces to hazard rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
 | [`VerifiedByTargetKindRule`](rules/ontology/ontology_invariants.md#verifiedbytargetkindrule) | `constraint def` | Constraint that checks verified by target kind rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`ViewTracesToViewpointRule`](rules/ontology/ontology_invariants.md#viewtracestoviewpointrule) | `constraint def` | ISO 42010 conformance is many-to-many, but never empty: `MemoView.viewpointDefinition` is `[1..*]`. A view that traces to a viewpoint is filed under it in Architect; one that traces to none has nowhere to be found. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
 
 
 ## `memo::rules::quantitative`

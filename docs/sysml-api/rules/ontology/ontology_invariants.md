@@ -74,6 +74,7 @@
 | [`DerivationGapRule`](#derivationgaprule) | `constraint def` | Constraint that checks derivation gap rule. | `MemoConsistencyRule` |
 | [`CausesCauseKindRule`](#causescausekindrule) | `constraint def` | Causes' ends are untyped because its CauseKind spans parts and items (memo_fmea.sysml). These carry what the types cannot. | `MemoConsistencyRule` |
 | [`CausesEffectKindRule`](#causeseffectkindrule) | `constraint def` | Constraint that checks causes effect kind rule. | `MemoConsistencyRule` |
+| [`ViewTracesToViewpointRule`](#viewtracestoviewpointrule) | `constraint def` | ISO 42010 conformance is many-to-many, but never empty: `MemoView.viewpointDefinition` is `[1..*]`. A view that traces to a viewpoint is filed under it in Architect; one that traces to none has nowhere to be found. | `MemoConsistencyRule` |
 
 ## ContainmentAcyclicRule
 
@@ -639,6 +640,21 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks causes effect kind rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## ViewTracesToViewpointRule
+
+```sysml
+constraint def ViewTracesToViewpointRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | ISO 42010 conformance is many-to-many, but never empty: `MemoView.viewpointDefinition` is `[1..*]`. A view that traces to a viewpoint is filed under it in Architect; one that traces to none has nowhere to be found. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -1307,6 +1323,22 @@ constraint def CausesEffectKindRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "An effect is a link in a risk chain, or the fault-tree event a component originates. Not a component, not a requirement.";
             attribute predicateExpression = "targetsOf(causes)->forAll(conformsTo(RiskItem) or conformsTo(FaultTreeNode))";
+            constraint { true }
+        }
+
+        // ─── Views and viewpoints ───────────────────────────────────────────
+
+        // ISO 42010 conformance is many-to-many, but never empty: `MemoView.viewpointDefinition` is `[1..*]`. A view
+        // that traces to a viewpoint is filed under it in Architect; one that traces to none has nowhere to be found.
+        constraint def ViewTracesToViewpointRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-092"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "MemoView";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "Every view traces to at least one viewpoint (ISO/IEC/IEEE 42010): the viewpoint says what the view is for and who reads it. A view with none cannot be filed under a viewpoint, so Architect lists it as uncategorised.";
+            attribute predicateExpression = "attributes.viewpointDefinition != ''";
             constraint { true }
         }
     }
