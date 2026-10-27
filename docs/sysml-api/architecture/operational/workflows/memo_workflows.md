@@ -29,6 +29,7 @@
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
 | private | `memo_architecture_operational_context_actors::*` |
+| private | `memo_architecture_operational_context_use_context::*` |
 | private | `memo_architecture_operational_activities::*` |
 | private | `memo_architecture_operational_use_cases::*` |
 
@@ -38,11 +39,11 @@
 | --- | --- | --- | --- |
 | [`WorkflowStateKind`](#workflowstatekind) | `enum def` | As-is vs. to-be vs. contingency is a typed dimension of the workflow, not a name suffix. | — |
 | [`StepTransformationKind`](#steptransformationkind) | `enum def` | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. | — |
-| [`OperationalWorkflow`](#operationalworkflow) | `action def` | Operational workflow definition specializing `MemoAction`. | `MemoAction` |
+| [`OperationalWorkflow`](#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. | `MemoPart` |
 | [`RealizesUseCase`](#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | `MemoRelationship` |
 | [`ControlNodeKind`](#controlnodekind) | `enum def` | Controlled values for control node: `decision`, `handoff`. | — |
 | [`WorkflowControlNode`](#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | `MemoAction` |
-| [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. | `MemoPart` |
+| [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. Owned by the workflow as its parts. | `MemoPart` |
 | [`TransformKind`](#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | — |
 | [`Transforms`](#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | `MemoRelationship` |
 
@@ -79,15 +80,15 @@ enum def StepTransformationKind
 ## OperationalWorkflow
 
 ```sysml
-action def OperationalWorkflow specializes MemoAction
+part def OperationalWorkflow specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Operational workflow definition specializing `MemoAction`. |
-| Kind | `action def` |
+| Description | Operational workflow definition specializing `MemoPart`. |
+| Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoAction` |
+| Specializes | `MemoPart` |
 | Owning package | `memo_architecture_operational_workflows` |
 
 
@@ -144,7 +145,7 @@ part def WorkflowResource specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | Resources a workflow requires: information, materials, or equipment by reference. |
+| Description | Resources a workflow requires: information, materials, or equipment by reference. Owned by the workflow as its parts. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -186,12 +187,24 @@ connection def Transforms :> MemoRelationship
 ??? code "architecture/operational/workflows/memo_workflows.sysml"
 
     ```sysml
-    // First-class operational workflows. An OperationalWorkflow is
-    // a reusable definition of how clinical or service work is performed — it may
-    // exist before any device is selected. A scenario (memo_architecture_operational_scenarios) is a
-    // selected path through a workflow; an occurrence is an execution of a
-    // scenario. Workflows are action defs: steps, decisions, forks/joins, and
-    // successions use native SysML v2 action semantics where portable.
+    // First-class operational workflows. A use case is the user's goal; an
+    // OperationalWorkflow is the ANALYSIS of one body of work that pursues it: who
+    // does it, where, with what equipment, between which entry and completion
+    // conditions, and (from the needs that point at it) what is needed and what
+    // is not yet met. It may exist before any device is selected. It is not a
+    // sequence of steps: the steps are its scenarios' (memo_architecture_operational_scenarios),
+    // each one stepwise path with pre- and post-conditions, and an occurrence is
+    // one execution of a scenario.
+    //
+    // IEC 62366-1 is the guide: the workflow is the use specification (5.1) scoped
+    // to one body of work, with the UI characteristics related to safety (5.2) and
+    // the known use-related hazards (5.3) its analysis draws on; a scenario is the
+    // standard's use scenario, a sequence of tasks by a user in a use environment.
+    // The standard has no "workflow"; this is MEMO's.
+    //
+    // So a workflow is a part, not an action: an action's nested actions are all
+    // performed, and a workflow's scenarios are alternatives. It owns its scenarios
+    // as nested actions, the way a part owns what it can do.
     package memo_architecture_operational_workflows {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
@@ -200,6 +213,7 @@ connection def Transforms :> MemoRelationship
         private import memo_core_enumerations::*;
         private import memo_core_relationships::*;
         private import memo_architecture_operational_context_actors::*;
+        private import memo_architecture_operational_context_use_context::*;
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_use_cases::*;
 
@@ -219,13 +233,24 @@ connection def Transforms :> MemoRelationship
             enum eliminates;
         }
 
-        action def OperationalWorkflow specializes MemoAction {
+        part def OperationalWorkflow specializes MemoPart {
             attribute workflowState : WorkflowStateKind;
+            // Where the body of work starts and ends. A scenario's pre- and
+            // post-conditions are its own path's, inside these.
             attribute entryCondition : String;
             attribute completionCondition : String;
             attribute recoveryPathSummary : String;
             attribute timingConstraints : String;
-            attribute environmentSummary : String;
+            // The context and environment of use (IEC 62366-1 5.1), as modelled
+            // elements rather than a sentence: the care setting, jurisdiction and
+            // connected use are UseContext's, lighting and noise UseEnvironment's.
+            ref useContext : UseContext[0..1];
+            ref useEnvironment : UseEnvironment[0..1];
+            // The equipment and other resources the work needs are the workflow's
+            // own `WorkflowResource` parts. Users are not listed: they are who
+            // `perform`s its scenarios' steps. Needs point here (Need.workflow);
+            // the workflow does not list them, because assurance may depend on
+            // architecture and not the reverse.
         }
 
         // The use case a workflow realizes. Many workflows may trace to one use
@@ -264,7 +289,7 @@ connection def Transforms :> MemoRelationship
         }
 
         // Resources a workflow requires: information, materials, or equipment by
-        // reference.
+        // reference. Owned by the workflow as its parts.
         part def WorkflowResource specializes MemoPart {
             attribute resourceKind : String;
             attribute quantity : String;

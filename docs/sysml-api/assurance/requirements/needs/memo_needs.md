@@ -30,6 +30,7 @@
 | private | `memo_core_relationships::*` |
 | private | `memo_architecture_operational_context_actors::*` |
 | private | `memo_architecture_operational_context_use_context::*` |
+| private | `memo_architecture_operational_workflows::*` |
 
 ## Declarations
 
@@ -106,6 +107,7 @@ connection def HeldBy :> MemoRelationship
         // elements. Assurance may depend on architecture; the reverse may not.
         private import memo_architecture_operational_context_actors::*;
         private import memo_architecture_operational_context_use_context::*;
+        private import memo_architecture_operational_workflows::*;
 
         // The kind of need. Was a subclass branch (StakeholderNeed / UserNeed /
         // ClinicalUserNeed / PatientUserNeed / BusinessNeed / ServiceNeed /
@@ -141,6 +143,13 @@ connection def HeldBy :> MemoRelationship
             // carries the care setting, environment and jurisdiction that an
             // `operationalContextReference` string could only describe.
             ref useContext : UseContext[0..1];
+            // The body of work the need arises in: its workflow, the analysis of
+            // that work (IEC 62366-1 5.1). The need points at the workflow, never
+            // the reverse, so a workflow's needs are found upstream of it.
+            ref workflow : OperationalWorkflow[0..1];
+            // Whether current practice meets the need. False is an unmet need, the
+            // gap a device is for; unset is not yet assessed.
+            attribute metByCurrentPractice : Boolean[0..1];
             // design-control need (ISO 13485 design input)
             attribute sourceFolder : String;
         }

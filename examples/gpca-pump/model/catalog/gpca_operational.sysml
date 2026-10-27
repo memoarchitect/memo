@@ -149,14 +149,14 @@ package memo_examples_gpca_pump_gpca_operational {
         actor pharmacistActor = actorPharmacist;
     }
 
-    action wfPrepareAndStartTherapy : OperationalWorkflow {
+    part wfPrepareAndStartTherapy : OperationalWorkflow {
 @MemoIdentity { :>> label = "PrepareAndStartTherapy"; }
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
         attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
 
     }
-    action wfManageActiveTherapy : OperationalWorkflow {
+    part wfManageActiveTherapy : OperationalWorkflow {
 @MemoIdentity { :>> label = "ManageActiveTherapy"; }
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "Basal therapy is active.";
@@ -199,7 +199,7 @@ package memo_examples_gpca_pump_gpca_operational {
             }
         }
     }
-    action wfRespondToTherapyAlarm : OperationalWorkflow {
+    part wfRespondToTherapyAlarm : OperationalWorkflow {
 @MemoIdentity { :>> label = "RespondToTherapyAlarm"; }
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";

@@ -76,11 +76,15 @@ action def OperativeScenario specializes MemoAction, MemoConstrainedOccurrence
 ??? code "architecture/operational/scenarios/memo_scenarios.sysml"
 
     ```sysml
-    // Scenario foundation. A scenario is a selected path through a workflow,
-    // classified by its kind (nominal or alternate). It is nested in the workflow
-    // it is a path through, so a nominal scenario and its alternates are siblings
-    // there. An actual or hypothetical execution is a native usage of the
-    // scenario, not a separate element.
+    // Scenario foundation. A scenario is the stepwise sequence of actions that
+    // completes a workflow's body of work, with its pre- and post-conditions: IEC
+    // 62366-1's use scenario, a sequence of tasks by a user in a use environment
+    // and the device's responses. It is where the steps are; the workflow it is
+    // nested in is the analysis of that work. A scenario is nominal or alternate,
+    // so a nominal scenario and its alternates are siblings in their workflow. A
+    // step used in several scenarios is one action def used in each, never copied.
+    // An actual or hypothetical execution is a native usage of the scenario, not a
+    // separate element.
     package memo_architecture_operational_scenarios {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;

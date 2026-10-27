@@ -91,7 +91,7 @@ package memo_examples_surgical_closure_workflow {
     action actExtractSpecimenAndClose : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-006"; :>> label = "ExtractSpecimenAndClosePorts"; } }
     action actHandover : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-007"; :>> label = "CompletePostoperativeHandover"; } }
 
-    action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
+    part wfSleeveGastrectomy : ClinicalProcedureWorkflow {
         @MemoIdentity { :>> providedId = "LSG-WF-001"; :>> label = "LaparoscopicSleeveGastrectomyWorkflow"; }
         attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "patient prepared; time-out ready";

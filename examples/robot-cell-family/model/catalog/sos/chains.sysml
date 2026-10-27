@@ -15,7 +15,7 @@ package robot_cell_family_sos_chains {
     private import robot_cell_family_systems_manipulation_manipulation_system::*;
     private import robot_cell_family_systems_perception_perception_system::*;
 
-    action wfMapGuidedPick : OperationalWorkflow {
+    part wfMapGuidedPick : OperationalWorkflow {
         @MemoIdentity { :>> providedId = "RCF-FC-001"; :>> label = "Map-Guided Pick"; }
         attribute :>> workflowState = WorkflowStateKind::toBe;
         doc /* Point clouds acquired by the perception system build the occupancy map; each grasp by the manipulator is tagged on that map. */

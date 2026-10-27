@@ -1,9 +1,21 @@
-// First-class operational workflows. An OperationalWorkflow is
-// a reusable definition of how clinical or service work is performed — it may
-// exist before any device is selected. A scenario (memo_architecture_operational_scenarios) is a
-// selected path through a workflow; an occurrence is an execution of a
-// scenario. Workflows are action defs: steps, decisions, forks/joins, and
-// successions use native SysML v2 action semantics where portable.
+// First-class operational workflows. A use case is the user's goal; an
+// OperationalWorkflow is the ANALYSIS of one body of work that pursues it: who
+// does it, where, with what equipment, between which entry and completion
+// conditions, and (from the needs that point at it) what is needed and what
+// is not yet met. It may exist before any device is selected. It is not a
+// sequence of steps: the steps are its scenarios' (memo_architecture_operational_scenarios),
+// each one stepwise path with pre- and post-conditions, and an occurrence is
+// one execution of a scenario.
+//
+// IEC 62366-1 is the guide: the workflow is the use specification (5.1) scoped
+// to one body of work, with the UI characteristics related to safety (5.2) and
+// the known use-related hazards (5.3) its analysis draws on; a scenario is the
+// standard's use scenario, a sequence of tasks by a user in a use environment.
+// The standard has no "workflow"; this is MEMO's.
+//
+// So a workflow is a part, not an action: an action's nested actions are all
+// performed, and a workflow's scenarios are alternatives. It owns its scenarios
+// as nested actions, the way a part owns what it can do.
 package memo_architecture_operational_workflows {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
@@ -12,6 +24,7 @@ package memo_architecture_operational_workflows {
     private import memo_core_enumerations::*;
     private import memo_core_relationships::*;
     private import memo_architecture_operational_context_actors::*;
+    private import memo_architecture_operational_context_use_context::*;
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_use_cases::*;
 
@@ -31,13 +44,24 @@ package memo_architecture_operational_workflows {
         enum eliminates;
     }
 
-    action def OperationalWorkflow specializes MemoAction {
+    part def OperationalWorkflow specializes MemoPart {
         attribute workflowState : WorkflowStateKind;
+        // Where the body of work starts and ends. A scenario's pre- and
+        // post-conditions are its own path's, inside these.
         attribute entryCondition : String;
         attribute completionCondition : String;
         attribute recoveryPathSummary : String;
         attribute timingConstraints : String;
-        attribute environmentSummary : String;
+        // The context and environment of use (IEC 62366-1 5.1), as modelled
+        // elements rather than a sentence: the care setting, jurisdiction and
+        // connected use are UseContext's, lighting and noise UseEnvironment's.
+        ref useContext : UseContext[0..1];
+        ref useEnvironment : UseEnvironment[0..1];
+        // The equipment and other resources the work needs are the workflow's
+        // own `WorkflowResource` parts. Users are not listed: they are who
+        // `perform`s its scenarios' steps. Needs point here (Need.workflow);
+        // the workflow does not list them, because assurance may depend on
+        // architecture and not the reverse.
     }
 
     // The use case a workflow realizes. Many workflows may trace to one use
@@ -76,7 +100,7 @@ package memo_architecture_operational_workflows {
     }
 
     // Resources a workflow requires: information, materials, or equipment by
-    // reference.
+    // reference. Owned by the workflow as its parts.
     part def WorkflowResource specializes MemoPart {
         attribute resourceKind : String;
         attribute quantity : String;

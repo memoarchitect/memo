@@ -16,6 +16,18 @@ or what happens when conditions depart from the nominal path.
 This layer adds that missing behavior without assigning responsibility to
 software, hardware, or mechanics yet.
 
+## Use case, workflow, scenario
+
+Three elements, each with one job:
+
+| Element | What it is | IEC 62366-1 |
+| --- | --- | --- |
+| **Use case** | The user's goal. | — |
+| **Workflow** | The analysis of one body of work that pursues the goal: who does it, where, with what equipment, between which entry and completion conditions, and what is needed and not yet met. It holds no steps. | The use specification (5.1) for that body of work, drawing on the user interface characteristics related to safety (5.2) and the known use-related hazards (5.3). |
+| **Scenario** | The stepwise actions that complete the workflow, with pre- and post-conditions. | The use scenario: a sequence of tasks by a user in a use environment, and the device's responses. |
+
+The standard has no "workflow"; MEMO's workflow is the use specification scoped to one body of work.
+
 ## From one goal to several workflows
 
 A use case can be supported by more than one workflow. The GPCA model separates
@@ -31,15 +43,21 @@ The separation matters. Preparing therapy, managing active delivery, and
 responding to an alarm have different actors, preconditions, and success
 criteria. Combining them into one large flow would hide those boundaries.
 
-## A scenario selects one path
+Each workflow is an `OperationalWorkflow` part. Its analysis is modelled, not
+written as prose: the use context and environment are `UseContext` and
+`UseEnvironment` references, the equipment is its own `WorkflowResource` parts,
+and a `Need` names the workflow it arises in, with `metByCurrentPractice` false
+for an unmet need. The users are whoever performs its scenarios' steps.
 
-A workflow describes reusable work. A **scenario** selects one path through
-that work under stated conditions. An **occurrence** is one actual execution of
-that scenario.
+## A scenario is the steps
+
+A workflow analyses the work. A **scenario** is that work done, step by step,
+under stated conditions. An **occurrence** is one actual execution of a
+scenario.
 
 [![Scenario-driven operational modeling](../assets/scenario-driven-modeling.png)](../assets/scenario-driven-modeling.png){ .memo-zoomable aria-label="Open the scenario-driven modeling diagram" }
 
-The GPCA model selects six paths:
+The GPCA model has six scenarios:
 
 | Scenario | Kind | What changes the path |
 | --- | --- | --- |
@@ -50,9 +68,9 @@ The GPCA model selects six paths:
 | `osEmptyReservoir` | Exception | The reservoir reaches its empty threshold |
 | `osPowerLoss` | Recovery | Mains power is lost and therapy transfers or recovers safely |
 
-These are not six copies of the workflow. Each scenario refers to its parent
-workflow and records only the selected path, its precondition, its expected
-outcome, and the activities performed on that path.
+Each is nested in its workflow and records its trigger, precondition, steps,
+postcondition and expected outcome. A step that occurs in several scenarios is
+one action definition used in each, never a copy.
 
 ## The lockout path
 
