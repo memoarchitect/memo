@@ -90,8 +90,9 @@ elements:
     shortId: "SYS-3"
     uuid: "70549144-ec4e-507e-8b2e-cf8ed07304ae"
   "memo_examples_gastric_bypass_variants::jejunum":
-    shortId: "MMX-1:1"
+    shortId: "JJN-1"
     uuid: "ae47a530-4180-5e62-8d45-26af4e5fbaf4"
+    retired: "MMX-1:1"
   "memo_examples_gastric_bypass_variants::platform":
     shortId: "SYS-4:1"
     uuid: "61c0e9e4-17c0-5ad3-8bbe-76c51c85ab29"
@@ -123,8 +124,9 @@ elements:
     shortId: "OPR-20"
     uuid: "3e06597b-1d8e-5711-a51f-de766aab5abc"
   "memo_examples_gastric_bypass_variants::stomach":
-    shortId: "MMX-1:2"
+    shortId: "STM-1"
     uuid: "b87f86ce-63e1-5347-a702-c0fafb32535a"
+    retired: "MMX-1:2"
   "memo_examples_gastric_bypass_variants::successCmp":
     shortId: "FNC-7"
     uuid: "7d348a35-21b9-5710-af0a-0a1a24903b54"
@@ -153,8 +155,9 @@ elements:
     shortId: "USE-4"
     uuid: "8ee9055c-caf5-59c2-98f6-7ad4ce4ea491"
   "memo_examples_gastric_bypass_variants::wfRouxEnY":
-    shortId: "WFL-1"
+    shortId: "CLN-1"
     uuid: "053623f4-71b3-5e9e-bc05-6339e2da182e"
+    retired: "WFL-1"
   "memo_examples_gastric_bypass_variants::wfRouxEnY::scConversion":
     shortId: "OPR-22"
     uuid: "d13cf94b-b047-581c-b1ff-0dd00a339fa6"
@@ -200,3 +203,6 @@ elements:
   "memo_examples_gastric_bypass_variants_project::projectBinding":
     shortId: "PRJ-1"
     uuid: "c138a616-f09d-53fd-9b46-0edd47b60e91"
+  "memo_examples_gastric_bypass_variants_project::upperGi":
+    shortId: "UNK-1"
+    uuid: "c999ccf2-0fe8-5257-9344-14f34de28d39"
