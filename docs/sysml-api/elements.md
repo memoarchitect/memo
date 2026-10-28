@@ -509,6 +509,16 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`TraceBaseline`](core/semantics/semantics.md#tracebaseline) | `metadata def` | Trace baseline definition. | [`core/semantics/semantics.sysml`](core/semantics/semantics.md) |
 
 
+## `memo::core::stdlib::money`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`CostRateUnit`](core/stdlib/money/money.md#costrateunit) | `attribute def` | Cost rate unit definition specializing `DerivedUnit`. | [`core/stdlib/money/money.sysml`](core/stdlib/money/money.md) |
+| [`CostRateValue`](core/stdlib/money/money.md#costratevalue) | `attribute def` | Cost rate value definition specializing `ScalarQuantityValue`. | [`core/stdlib/money/money.sysml`](core/stdlib/money/money.md) |
+| [`CurrencyUnit`](core/stdlib/money/money.md#currencyunit) | `attribute def` | Currency unit definition specializing `SimpleUnit`. | [`core/stdlib/money/money.sysml`](core/stdlib/money/money.md) |
+| [`MoneyValue`](core/stdlib/money/money.md#moneyvalue) | `attribute def` | Money value definition specializing `ScalarQuantityValue`. | [`core/stdlib/money/money.sysml`](core/stdlib/money/money.md) |
+
+
 ## `memo::core::terminology`
 
 | Name | SysML kind | Description | Source |
