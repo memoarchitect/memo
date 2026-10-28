@@ -83,6 +83,7 @@
 | [`ProjectDeclaresOneCurrencyRule`](#projectdeclaresonecurrencyrule) | `constraint def` | Constraint that checks project declares one currency rule. | `MemoConsistencyRule` |
 | [`LevelOneScenarioCarriesNoLikelihoodRule`](#levelonescenariocarriesnolikelihoodrule) | `constraint def` | Constraint that checks level one scenario carries no likelihood rule. | `MemoConsistencyRule` |
 | [`LevelOneWorkflowCarriesNoCostRule`](#leveloneworkflowcarriesnocostrule) | `constraint def` | Constraint that checks level one workflow carries no cost rule. | `MemoConsistencyRule` |
+| [`TradeStudyVariantRefinesEveryStepRule`](#tradestudyvariantrefineseverysteprule) | `constraint def` | Constraint that checks trade study variant refines every step rule. | `MemoConsistencyRule` |
 
 ## ContainmentAcyclicRule
 
@@ -789,6 +790,21 @@ constraint def LevelOneWorkflowCarriesNoCostRule :> MemoConsistencyRule
 | Owning package | `memo_rules_ontology` |
 
 
+## TradeStudyVariantRefinesEveryStepRule
+
+```sysml
+constraint def TradeStudyVariantRefinesEveryStepRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks trade study variant refines every step rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
 ## Source
 
 ??? code "rules/ontology/ontology_invariants.sysml"
@@ -800,7 +816,7 @@ constraint def LevelOneWorkflowCarriesNoCostRule :> MemoConsistencyRule
     // Structural invariants (endpoint existence, cycle freedom) are expressed over
     // the typed relations introduced in 0.5 — typed references make them checkable.
     //
-    // Operational levels (CR-ONT-093..100). A use case is at the level of its subject: an
+    // Operational levels (CR-ONT-093..101). A use case is at the level of its subject: an
     // `OperationalEntity` is level 1 (clinical, no product, no number), a `System` or `SystemOfSystems`
     // is level 2 (one variant of a platform, which carries every number). The level of a step is the
     // level of the use case its workflow `realizesUseCase`. The workflow is reached from the step by
@@ -808,9 +824,8 @@ constraint def LevelOneWorkflowCarriesNoCostRule :> MemoConsistencyRule
     // declared once and used in several); a step outside any workflow has no level and is judged by
     // no level rule.
     // Nothing here is a kind list: each rule reads the subject's type and the `performs` and
-    // `realizes` edges the builder already produces. Rule 6 of the plan, that every variant of a
-    // `TradeStudy` refines every step compared, is not written: the builder does not yet surface a
-    // trade study's alternatives (board row "Operational levels: the `TradeStudy` is not a model element, so plan rule 6 is unwritten").
+    // `realizes` edges the builder already produces. Rule 6 of the plan, that every variant of a `TradeStudy` refines every step compared (101),
+    // reads the study's `hasSubject` edges: its subject is the alternatives it analyses.
     // The one-currency rule (098) counts the project's `CurrencyUnit` declarations: a unit declared at
     // package level is built as a model element, as ISQ and SI declare theirs.
     package memo_rules_ontology {
@@ -1573,6 +1588,17 @@ constraint def LevelOneWorkflowCarriesNoCostRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "What a procedure costs apart from its activities (set-up, capital per case) depends on the platform, so a level-1 workflow carries no per-procedure cost; it is set on the workflow of each level-2 variant.";
             attribute predicateExpression = "attributes.perProcedureCost == '' or not(downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))";
+            constraint { true }
+        }
+        constraint def TradeStudyVariantRefinesEveryStepRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-101"; }
+            attribute tailoring = RuleTailoringKind::methodology;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "OperationalWorkflow";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "Every alternative of a trade study refines every level-1 step that any alternative of it refines, whether its activities are nested in its scenarios or performed by them. An alternative with a step missing reads as zero time and zero cost for it, so the study would prefer it for doing less.";
+            attribute predicateExpression = "not(upstream(hasSubject)->exists(attributes.usageType == 'TradeStudy')) or upstream(hasSubject)->select(attributes.usageType == 'TradeStudy')->forAll(downstream(hasSubject)->forAll(downstream(composes)->forAll(downstream(realizes)->forAll(upstream(realizes)->exists(upstream(composes)->exists(id == subject.id) or upstream(performs)->exists(upstream(composes)->exists(id == subject.id))))) and downstream(composes)->forAll(downstream(performs)->forAll(downstream(realizes)->forAll(upstream(realizes)->exists(upstream(composes)->exists(id == subject.id) or upstream(performs)->exists(upstream(composes)->exists(id == subject.id))))))))";
             constraint { true }
         }
     }
