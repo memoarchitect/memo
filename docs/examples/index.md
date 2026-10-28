@@ -34,6 +34,7 @@ answer, not in order.
 **Connecting behavior to structure**
 
 - [Reusable Instrument](reusable-instrument.md) — cleaning, inspection, and reprocessing.
+- [Gastric Bypass Variants](gastric-bypass-variants.md) — one goal on three platforms: levels, variants, roll-ups and a trade study.
 - [Functional, Logical, Physical](functional-logical-physical.md) — realization as a graph, not a pipeline.
 - [Software-Only Medical Device](software-only-medical-device.md) — omits physical layers where they do not apply.
 

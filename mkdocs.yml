@@ -144,6 +144,7 @@ nav:
           - Temperature Alarm: examples/temperature-alarm.md
           - Manual Surgical Instrument: examples/manual-surgical-instrument.md
           - Reusable Instrument: examples/reusable-instrument.md
+          - Gastric Bypass Variants: examples/gastric-bypass-variants.md
           - Functional, Logical, Physical: examples/functional-logical-physical.md
           - Software-Only Medical Device: examples/software-only-medical-device.md
           - Embedded Infusion Pump: examples/embedded-infusion-pump.md
