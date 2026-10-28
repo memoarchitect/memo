@@ -3,9 +3,10 @@
 Use this example to see the two operational levels, and how three platforms are compared on one
 clinical baseline.
 
-- Level 1 is one use case whose subject is the surgical team, one workflow, and steps that carry no number.
-- Level 2 is one use case, workflow and set of activities for each platform: laparoscopic instruments (current practice), a robot of ours, and a competitor's robot.
-- Each activity refines the level-1 step it carries out, and carries the time, success probability and instruments.
+- The clinical workflow (level 1) uses each clinical action once, in order, and carries no number.
+- A system workflow (level 2) per platform uses the same action definitions again as usages, and sets the time, success probability and instruments on its own usage. Who does the action is a `perform` from the platform, never a copy of the action.
+- The functional workflow (level 3) is a functional flow of our robot's functions, which a level-2 usage performs.
+- Every occurrence of an action is a usage, so how often a step is repeated is the number of its usages.
 - Resources carry a capacity cost rate and a unit cost, in the one currency the project declares.
 - The platforms are the variants of one `variation`, and a `TradeStudy` scores their workflows by the derived cost.
 

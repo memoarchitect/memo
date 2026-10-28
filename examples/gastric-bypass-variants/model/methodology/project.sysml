@@ -8,6 +8,7 @@ package memo_examples_gastric_bypass_variants_project {
 
     private import memo_examples_gastric_bypass_variants::*;
     private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_baseline::*;
+    private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_functional::*;
     private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_laparoscopic::*;
     private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_our_robot::*;
     private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_competitor_robot::*;
