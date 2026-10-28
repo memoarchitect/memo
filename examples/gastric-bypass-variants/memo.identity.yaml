@@ -296,6 +296,21 @@ elements:
   "memo_examples_gastric_bypass_variants_project::upperGi":
     shortId: "UNK-1"
     uuid: "c999ccf2-0fe8-5257-9344-14f34de28d39"
+  "memo_examples_gastric_bypass_variants_viewpoints_operational_views::bypassFlowClinical":
+    shortId: "MMX-7"
+    uuid: "725383b1-e31a-518f-8ecf-319f9c596e2d"
+  "memo_examples_gastric_bypass_variants_viewpoints_operational_views::bypassFlowCompetitorRobot":
+    shortId: "MMX-8"
+    uuid: "64442dd5-39b9-5cb7-a226-f1ef87b1eb37"
+  "memo_examples_gastric_bypass_variants_viewpoints_operational_views::bypassFlowFunctional":
+    shortId: "MMX-9"
+    uuid: "afd2e728-dbb4-592a-a420-160f7e35aa30"
+  "memo_examples_gastric_bypass_variants_viewpoints_operational_views::bypassFlowLaparoscopic":
+    shortId: "MMX-10"
+    uuid: "128ddbd0-07fc-5f47-a78a-4eae34e582d9"
+  "memo_examples_gastric_bypass_variants_viewpoints_operational_views::bypassFlowOurRobot":
+    shortId: "MMX-11"
+    uuid: "bc641fdb-2e36-5b7a-a009-1f96f23c6bde"
   "memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_baseline::bypassFlowBaseline":
     shortId: "MMX-2"
     uuid: "1e93fcd5-74df-52ca-8a40-f6e6ec218699"

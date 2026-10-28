@@ -52,23 +52,23 @@ package memo_examples_gastric_bypass_variants {
         @MemoIdentity { :>> label = "Jejunum"; }
     }
     action def EstablishPneumoperitoneumAndAccess specializes OperativeAction {
-        @MemoIdentity { :>> label = "Establish pneumoperitoneum and access"; }
+        @MemoIdentity { :>> label = "Establish access"; }
         ref :>> targets = stomach;
     }
     action def CreateGastricPouch specializes OperativeAction {
-        @MemoIdentity { :>> label = "Create gastric pouch"; }
+        @MemoIdentity { :>> label = "Create pouch"; }
         ref :>> targets = stomach;
     }
     action def CreateGastrojejunostomy specializes OperativeAction {
-        @MemoIdentity { :>> label = "Create gastrojejunostomy"; }
+        @MemoIdentity { :>> label = "Gastrojejunostomy"; }
         ref :>> targets = jejunum;
     }
     action def PerformLeakTest specializes OperativeAction {
-        @MemoIdentity { :>> label = "Perform leak test"; }
+        @MemoIdentity { :>> label = "Leak test"; }
         ref :>> targets = stomach;
     }
     action def ConvertToOpenSurgery specializes OperativeAction {
-        @MemoIdentity { :>> label = "Convert to open surgery"; }
+        @MemoIdentity { :>> label = "Convert to open"; }
         ref :>> targets = stomach;
     }
 
@@ -86,16 +86,16 @@ package memo_examples_gastric_bypass_variants {
         action scNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Nominal path"; }
             action establishAccess : EstablishPneumoperitoneumAndAccess {
-                @MemoIdentity { :>> label = "Establish pneumoperitoneum and access"; }
+                @MemoIdentity { :>> label = "Establish access"; }
             }
             action createPouch : CreateGastricPouch {
-                @MemoIdentity { :>> label = "Create gastric pouch"; }
+                @MemoIdentity { :>> label = "Create pouch"; }
             }
             action createGastrojejunostomy : CreateGastrojejunostomy {
-                @MemoIdentity { :>> label = "Create gastrojejunostomy"; }
+                @MemoIdentity { :>> label = "Gastrojejunostomy"; }
             }
             action performLeakTest : PerformLeakTest {
-                @MemoIdentity { :>> label = "Perform leak test"; }
+                @MemoIdentity { :>> label = "Leak test"; }
             }
             first establishAccess then createPouch;
             first createPouch then createGastrojejunostomy;
@@ -105,7 +105,7 @@ package memo_examples_gastric_bypass_variants {
             attribute :>> scenarioKind = ScenarioKind::alternate;
             @MemoIdentity { :>> label = "Conversion to open"; }
             action convertToOpen : ConvertToOpenSurgery {
-                @MemoIdentity { :>> label = "Convert to open surgery"; }
+                @MemoIdentity { :>> label = "Convert to open"; }
             }
         }
     }
@@ -203,25 +203,25 @@ package memo_examples_gastric_bypass_variants {
         action scLapNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Nominal path (laparoscopic)"; }
             action establishAccess : EstablishPneumoperitoneumAndAccess {
-                @MemoIdentity { :>> label = "Establish pneumoperitoneum and access"; }
+                @MemoIdentity { :>> label = "Establish access"; }
                 attribute :>> expectedDuration = 20 [min];
                 attribute :>> plannedSuccessProbability = 0.99 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.laparoscopicTower);
             }
             action createPouch : CreateGastricPouch {
-                @MemoIdentity { :>> label = "Create gastric pouch"; }
+                @MemoIdentity { :>> label = "Create pouch"; }
                 attribute :>> expectedDuration = 25 [min];
                 attribute :>> plannedSuccessProbability = 0.97 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.laparoscopicTower, staplerLap);
             }
             action createGastrojejunostomy : CreateGastrojejunostomy {
-                @MemoIdentity { :>> label = "Create gastrojejunostomy"; }
+                @MemoIdentity { :>> label = "Gastrojejunostomy"; }
                 attribute :>> expectedDuration = 45 [min];
                 attribute :>> plannedSuccessProbability = 0.94 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.laparoscopicTower, staplerLap);
             }
             action performLeakTest : PerformLeakTest {
-                @MemoIdentity { :>> label = "Perform leak test"; }
+                @MemoIdentity { :>> label = "Leak test"; }
                 attribute :>> expectedDuration = 10 [min];
                 attribute :>> plannedSuccessProbability = 0.99 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.laparoscopicTower);
@@ -235,7 +235,7 @@ package memo_examples_gastric_bypass_variants {
             @MemoIdentity { :>> label = "Conversion to open (laparoscopic)"; }
             attribute :>> likelihood = 0.06 [one];
             action convertToOpen : ConvertToOpenSurgery {
-                @MemoIdentity { :>> label = "Convert to open surgery"; }
+                @MemoIdentity { :>> label = "Convert to open"; }
                 attribute :>> expectedDuration = 35 [min];
                 attribute :>> plannedSuccessProbability = 0.99 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse);
@@ -268,14 +268,14 @@ package memo_examples_gastric_bypass_variants {
         action scOurNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Nominal path (our robot)"; }
             action establishAccess : EstablishPneumoperitoneumAndAccess {
-                @MemoIdentity { :>> label = "Establish pneumoperitoneum and access"; }
+                @MemoIdentity { :>> label = "Establish access"; }
                 attribute :>> expectedDuration = 30 [min];
                 attribute :>> plannedSuccessProbability = 0.99 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.ourRobot);
                 perform fnDockPlatform;
             }
             action createPouch : CreateGastricPouch {
-                @MemoIdentity { :>> label = "Create gastric pouch"; }
+                @MemoIdentity { :>> label = "Create pouch"; }
                 attribute :>> expectedDuration = 18 [min];
                 attribute :>> plannedSuccessProbability = 0.98 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.ourRobot, staplerOur);
@@ -283,7 +283,7 @@ package memo_examples_gastric_bypass_variants {
                 perform fnFireStapler;
             }
             action createGastrojejunostomy : CreateGastrojejunostomy {
-                @MemoIdentity { :>> label = "Create gastrojejunostomy"; }
+                @MemoIdentity { :>> label = "Gastrojejunostomy"; }
                 attribute :>> expectedDuration = 30 [min];
                 attribute :>> plannedSuccessProbability = 0.97 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.ourRobot, staplerOur);
@@ -291,7 +291,7 @@ package memo_examples_gastric_bypass_variants {
                 perform fnFireStapler;
             }
             action performLeakTest : PerformLeakTest {
-                @MemoIdentity { :>> label = "Perform leak test"; }
+                @MemoIdentity { :>> label = "Leak test"; }
                 attribute :>> expectedDuration = 10 [min];
                 attribute :>> plannedSuccessProbability = 0.99 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.ourRobot);
@@ -305,7 +305,7 @@ package memo_examples_gastric_bypass_variants {
             @MemoIdentity { :>> label = "Conversion to open (our robot)"; }
             attribute :>> likelihood = 0.03 [one];
             action convertToOpen : ConvertToOpenSurgery {
-                @MemoIdentity { :>> label = "Convert to open surgery"; }
+                @MemoIdentity { :>> label = "Convert to open"; }
                 attribute :>> expectedDuration = 35 [min];
                 attribute :>> plannedSuccessProbability = 0.99 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse);
@@ -338,25 +338,25 @@ package memo_examples_gastric_bypass_variants {
         action scCmpNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Nominal path (competitor robot)"; }
             action establishAccess : EstablishPneumoperitoneumAndAccess {
-                @MemoIdentity { :>> label = "Establish pneumoperitoneum and access"; }
+                @MemoIdentity { :>> label = "Establish access"; }
                 attribute :>> expectedDuration = 35 [min];
                 attribute :>> plannedSuccessProbability = 0.98 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.competitorRobot);
             }
             action createPouch : CreateGastricPouch {
-                @MemoIdentity { :>> label = "Create gastric pouch"; }
+                @MemoIdentity { :>> label = "Create pouch"; }
                 attribute :>> expectedDuration = 22 [min];
                 attribute :>> plannedSuccessProbability = 0.97 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.competitorRobot, staplerCmp);
             }
             action createGastrojejunostomy : CreateGastrojejunostomy {
-                @MemoIdentity { :>> label = "Create gastrojejunostomy"; }
+                @MemoIdentity { :>> label = "Gastrojejunostomy"; }
                 attribute :>> expectedDuration = 35 [min];
                 attribute :>> plannedSuccessProbability = 0.96 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.competitorRobot, staplerCmp);
             }
             action performLeakTest : PerformLeakTest {
-                @MemoIdentity { :>> label = "Perform leak test"; }
+                @MemoIdentity { :>> label = "Leak test"; }
                 attribute :>> expectedDuration = 10 [min];
                 attribute :>> plannedSuccessProbability = 0.99 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse, platform.competitorRobot);
@@ -370,7 +370,7 @@ package memo_examples_gastric_bypass_variants {
             @MemoIdentity { :>> label = "Conversion to open (competitor robot)"; }
             attribute :>> likelihood = 0.04 [one];
             action convertToOpen : ConvertToOpenSurgery {
-                @MemoIdentity { :>> label = "Convert to open surgery"; }
+                @MemoIdentity { :>> label = "Convert to open"; }
                 attribute :>> expectedDuration = 35 [min];
                 attribute :>> plannedSuccessProbability = 0.99 [one];
                 ref :>> instruments = (surgeon, assistant, scrubNurse);
