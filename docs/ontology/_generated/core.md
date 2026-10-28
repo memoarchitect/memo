@@ -18,6 +18,7 @@
 | [`MemoIdentity`](../sysml-api/core/common/memo_common.md#memoidentity) | `metadata def` | Memo identity definition. |
 | [`MemoKind`](../sysml-api/core/common/memo_common.md#memokind) | `metadata def` | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`AfferaStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sys… |
 | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) *(abstract)* | `part def` | Memo part definition. |
+| [`MemoResource`](../sysml-api/core/common/memo_common.md#memoresource) *(abstract)* | `part def` | A resource a body of work spends: an instrument, a person, a consumable or the platform. It carries what an hour of its capacity costs and what one use of it costs. |
 | [`RequirementDriver`](../sysml-api/core/common/memo_common.md#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. |
 | [`VerifiableElement`](../sysml-api/core/common/memo_common.md#verifiableelement) *(abstract)* | `part def` | Verifiable element definition specializing `MemoPart`. |
 | [`InterfaceElement`](../sysml-api/core/common/memo_common.md#interfaceelement) | `part def` | Interface element definition specializing `MemoPart`. |

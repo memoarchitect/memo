@@ -22,6 +22,17 @@
 // to the identifier they were already declared under. Display text is now
 // `@MemoIdentity { label }` and prose is `doc`.
 //
+// ─── Resources ──────────────────────────────────────────────────────────
+// `MemoResource` is here, beside `MemoPart`, because the operational layer's actors
+// (`User`) and workflows (`WorkflowResource`) both specialize it, and so can the
+// logical layer's platform (`part def SurgicalRobot :> System, MemoResource`); core is the one
+// layer all of them import. Time-driven activity-based costing needs two numbers per
+// resource: what an hour of its capacity costs (staff pay, or an instrument's purchase,
+// service and practical capacity) and what one use costs (a consumable). The activity
+// that uses the resource supplies the time. Both are money in the project's one currency
+// (memo_core_stdlib_money) and, by the principle that level 1 carries no numbers, are set
+// per variant on level 2.
+//
 // What remains on a base is domain semantics — `status`, and whatever that
 // metaclass family genuinely needs.
 //
@@ -36,6 +47,7 @@ package memo_core_common {
     private import memo_core_dimensions::*;
     private import memo_core_terminology::*;
     private import memo_core_enumerations::*;
+    private import memo_core_stdlib_money::*;
 
     // The metaclass-agnostic carrier for MEMO's identity fields.
     //
@@ -134,6 +146,13 @@ package memo_core_common {
         // alphabetic: A, B, … Z, AA.
         attribute partNumber : String[0..1];
         attribute revision : String[0..1];
+    }
+
+    // A resource a body of work spends: an instrument, a person, a consumable or the platform. It
+    // carries what an hour of its capacity costs and what one use of it costs.
+    abstract part def MemoResource specializes MemoPart {
+        attribute capacityCostRate : CostRateValue[0..1];
+        attribute unitCost : MoneyValue[0..1];
     }
 
     // ─── Role bases retained from the original kernel, re-founded on

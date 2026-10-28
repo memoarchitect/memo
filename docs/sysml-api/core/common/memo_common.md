@@ -27,6 +27,7 @@
 | private | `memo_core_dimensions::*` |
 | private | `memo_core_terminology::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_core_stdlib_money::*` |
 
 ## Declarations
 
@@ -35,6 +36,7 @@
 | [`MemoIdentity`](#memoidentity) | `metadata def` | Memo identity definition. | — |
 | [`MemoKind`](#memokind) | `metadata def` | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`AfferaStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sys… | — |
 | [`MemoPart`](#memopart) | `part def` | Memo part definition. | — |
+| [`MemoResource`](#memoresource) | `part def` | A resource a body of work spends: an instrument, a person, a consumable or the platform. It carries what an hour of its capacity costs and what one use of it costs. | `MemoPart` |
 | [`RequirementDriver`](#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. | `MemoPart` |
 | [`VerifiableElement`](#verifiableelement) | `part def` | Verifiable element definition specializing `MemoPart`. | `MemoPart` |
 | [`InterfaceElement`](#interfaceelement) | `part def` | Interface element definition specializing `MemoPart`. | `MemoPart` |
@@ -99,6 +101,21 @@ abstract part def MemoPart
 | Kind | `part def` |
 | Abstract | Yes |
 | Specializes | — |
+| Owning package | `memo_core_common` |
+
+
+## MemoResource
+
+```sysml
+abstract part def MemoResource specializes MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A resource a body of work spends: an instrument, a person, a consumable or the platform. It carries what an hour of its capacity costs and what one use of it costs. |
+| Kind | `part def` |
+| Abstract | Yes |
+| Specializes | `MemoPart` |
 | Owning package | `memo_core_common` |
 
 
@@ -446,6 +463,17 @@ part def Citation specializes MemoPart
     // to the identifier they were already declared under. Display text is now
     // `@MemoIdentity { label }` and prose is `doc`.
     //
+    // ─── Resources ──────────────────────────────────────────────────────────
+    // `MemoResource` is here, beside `MemoPart`, because the operational layer's actors
+    // (`User`) and workflows (`WorkflowResource`) both specialize it, and so can the
+    // logical layer's platform (`part def SurgicalRobot :> System, MemoResource`); core is the one
+    // layer all of them import. Time-driven activity-based costing needs two numbers per
+    // resource: what an hour of its capacity costs (staff pay, or an instrument's purchase,
+    // service and practical capacity) and what one use costs (a consumable). The activity
+    // that uses the resource supplies the time. Both are money in the project's one currency
+    // (memo_core_stdlib_money) and, by the principle that level 1 carries no numbers, are set
+    // per variant on level 2.
+    //
     // What remains on a base is domain semantics — `status`, and whatever that
     // metaclass family genuinely needs.
     //
@@ -460,6 +488,7 @@ part def Citation specializes MemoPart
         private import memo_core_dimensions::*;
         private import memo_core_terminology::*;
         private import memo_core_enumerations::*;
+        private import memo_core_stdlib_money::*;
 
         // The metaclass-agnostic carrier for MEMO's identity fields.
         //
@@ -558,6 +587,13 @@ part def Citation specializes MemoPart
             // alphabetic: A, B, … Z, AA.
             attribute partNumber : String[0..1];
             attribute revision : String[0..1];
+        }
+
+        // A resource a body of work spends: an instrument, a person, a consumable or the platform. It
+        // carries what an hour of its capacity costs and what one use of it costs.
+        abstract part def MemoResource specializes MemoPart {
+            attribute capacityCostRate : CostRateValue[0..1];
+            attribute unitCost : MoneyValue[0..1];
         }
 
         // ─── Role bases retained from the original kernel, re-founded on
