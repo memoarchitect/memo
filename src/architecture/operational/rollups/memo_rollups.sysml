@@ -5,12 +5,14 @@
 //
 // ─── Traversal ──────────────────────────────────────────────────────────
 // `ActivitiesOf` is the one place that decides which activities count, and every roll-up reads
-// it. It descends through the composite `subactions` of a step and through the `includedUseCases`
-// of a use case, which are `enclosedPerformances` and not `subactions`, so a walk over
-// `subactions` alone would miss every reusable system use case. It stops at a `perform`: a
-// `perform` of a `SystemFunction` is a reference, not a composite subaction, so the function's
-// own chain is never entered. That is the point of the stop: level 3 is how the system does its
-// share, not more time, and following it would count the same work twice.
+// it. It reads `enclosedPerformances`, which holds a step's composite `subactions`, the activities
+// it `perform`s by reference (a scenario that performs activities declared once and used in
+// several), and the `includedUseCases` of a use case, which are `enclosedPerformances` and not
+// `subactions`, so a walk over `subactions` alone would miss every reusable system use case. It
+// descends only into what can hold activities: an activity, a scenario or a use case. A
+// `perform` of a `SystemFunction` is therefore never entered, which is the point of the stop:
+// level 3 is how the system does its share, not more time, and following it would count the
+// same work twice.
 //
 // ─── Sums ───────────────────────────────────────────────────────────────
 // Sums and products use `QuantityCalculations`, so a cost, a duration and a probability stay
@@ -36,9 +38,11 @@ package memo_architecture_operational_rollups {
     calc def ActivitiesOf {
         in step : MemoAction[1];
         return activities : OperativeAction[0..*] = (
-            step.subactions->select { in inner : MemoAction[1]; inner istype OperativeAction },
-            step.subactions->collect { in inner : MemoAction[1]; ActivitiesOf(inner) },
-            (step as UseCase).includedUseCases->collect { in inner : MemoAction[1]; ActivitiesOf(inner) });
+            step.enclosedPerformances->select { in inner : MemoAction[1]; inner istype OperativeAction },
+            step.enclosedPerformances
+                ->select { in inner : MemoAction[1];
+                    inner istype OperativeAction or inner istype OperativeScenario or inner istype UseCase }
+                ->collect { in inner : MemoAction[1]; ActivitiesOf(inner) });
     }
 
     calc def ActivityCost {

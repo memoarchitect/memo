@@ -463,6 +463,7 @@ package memo_namespace_core_stdlib {
     alias scalars for memo_namespace_core_stdlib_scalars;
     alias quantities for memo_namespace_core_stdlib_quantities;
     alias money for memo_namespace_core_stdlib_money;
+    alias 'analysis' for memo_namespace_core_stdlib_analysis;
     alias time for memo_namespace_core_stdlib_time;
 }
 
@@ -619,6 +620,10 @@ package memo_namespace_core_stdlib_scalars {
 
 package memo_namespace_core_stdlib_quantities {
     public import memo_core_stdlib_quantities::*;
+}
+
+package memo_namespace_core_stdlib_analysis {
+    public import memo_core_stdlib_analysis::*;
 }
 
 package memo_namespace_core_stdlib_money {

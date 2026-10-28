@@ -1,0 +1,202 @@
+# memo.identity.yaml — element identity registry (auto-generated)
+# Assigned once and never reassigned. COMMIT THIS FILE: deleting it does
+# not regenerate the same identities, it mints new ones, and every
+# external reference to a shortId or uuid then points at nothing.
+# Entries for deleted elements are retained so their numbers stay retired.
+
+elements:
+  "memo_examples_gastric_bypass_variants::AnatomicalSite":
+    shortId: "MMX-1"
+    uuid: "5630d3b3-85dd-55cf-8be0-314a52f2ded9"
+  "memo_examples_gastric_bypass_variants::Stapler":
+    shortId: "WRK-1"
+    uuid: "0067118b-7ce7-58b9-8e7b-c16211080e2f"
+  "memo_examples_gastric_bypass_variants::SurgicalPlatform":
+    shortId: "SYS-4"
+    uuid: "75d64a47-148a-524a-b9ea-7d2b89ba5eb1"
+  "memo_examples_gastric_bypass_variants::actAccessCmp":
+    shortId: "OPR-1"
+    uuid: "8f09833f-a104-5a6c-bbff-55630e796a4f"
+  "memo_examples_gastric_bypass_variants::actAccessLap":
+    shortId: "OPR-2"
+    uuid: "bddeb532-2f9d-5bcc-968a-5dbc622aa5a1"
+  "memo_examples_gastric_bypass_variants::actAccessOur":
+    shortId: "OPR-3"
+    uuid: "55665d82-877e-5420-ae06-eb55c10503db"
+  "memo_examples_gastric_bypass_variants::actConvertCmp":
+    shortId: "OPR-4"
+    uuid: "10b9add9-12dc-5f1f-8865-af9b7eddd15a"
+  "memo_examples_gastric_bypass_variants::actConvertLap":
+    shortId: "OPR-5"
+    uuid: "6b4d09c0-7e53-51a1-a025-89e8c1ad3fc0"
+  "memo_examples_gastric_bypass_variants::actConvertOur":
+    shortId: "OPR-6"
+    uuid: "1f6601c1-2441-5700-acc6-b4d3ab1ff08a"
+  "memo_examples_gastric_bypass_variants::actGastrojejunostomyCmp":
+    shortId: "OPR-7"
+    uuid: "2233a50a-0e8b-5c02-8cff-405630911581"
+  "memo_examples_gastric_bypass_variants::actGastrojejunostomyLap":
+    shortId: "OPR-8"
+    uuid: "153be4da-7657-53c1-a853-15102f9659ae"
+  "memo_examples_gastric_bypass_variants::actGastrojejunostomyOur":
+    shortId: "OPR-9"
+    uuid: "a1a4eff8-b33b-5a77-8a4e-b6181b48e0dc"
+  "memo_examples_gastric_bypass_variants::actLeakTestCmp":
+    shortId: "OPR-10"
+    uuid: "433acc70-75af-50f7-91f4-0c9f3e093818"
+  "memo_examples_gastric_bypass_variants::actLeakTestLap":
+    shortId: "OPR-11"
+    uuid: "6a4b7460-be9b-5d35-a8c2-1446b8202551"
+  "memo_examples_gastric_bypass_variants::actLeakTestOur":
+    shortId: "OPR-12"
+    uuid: "9ae528e6-b6a2-5024-becf-ce675c38605b"
+  "memo_examples_gastric_bypass_variants::actPouchCmp":
+    shortId: "OPR-13"
+    uuid: "483af0a1-b501-52b5-8dd8-a917aa77a36f"
+  "memo_examples_gastric_bypass_variants::actPouchLap":
+    shortId: "OPR-14"
+    uuid: "9710a00d-830c-577e-9f3e-7202e3e4ff98"
+  "memo_examples_gastric_bypass_variants::actPouchOur":
+    shortId: "OPR-15"
+    uuid: "fe77d34b-6335-5d5e-889d-45c24d745971"
+  "memo_examples_gastric_bypass_variants::assistant":
+    shortId: "USR-1"
+    uuid: "23869c72-e929-56d9-abc2-41906a52bfc4"
+  "memo_examples_gastric_bypass_variants::costCmp":
+    shortId: "FNC-1"
+    uuid: "37a28ab3-3a82-5fe3-99ec-17fbbc935c2f"
+  "memo_examples_gastric_bypass_variants::costLap":
+    shortId: "FNC-2"
+    uuid: "9d617a45-6e24-5d70-99a3-e70ad2d58cf4"
+  "memo_examples_gastric_bypass_variants::costOur":
+    shortId: "FNC-3"
+    uuid: "5e96690c-f57b-585b-8a87-efbfb0ef8de8"
+  "memo_examples_gastric_bypass_variants::durationCmp":
+    shortId: "FNC-4"
+    uuid: "98e2822d-243d-57cb-a356-7d4fc4225a4d"
+  "memo_examples_gastric_bypass_variants::durationLap":
+    shortId: "FNC-5"
+    uuid: "00707165-bfed-5247-910c-64ff15b308c8"
+  "memo_examples_gastric_bypass_variants::durationOur":
+    shortId: "FNC-6"
+    uuid: "d991ef60-5747-5fee-86b5-37b38b4655f0"
+  "memo_examples_gastric_bypass_variants::fnDockPlatform":
+    shortId: "SYS-1"
+    uuid: "c89abc57-e10a-5a6a-a143-558f3728b15d"
+  "memo_examples_gastric_bypass_variants::fnFireStapler":
+    shortId: "SYS-2"
+    uuid: "2d7f21c7-97f3-588c-a607-24c93c275245"
+  "memo_examples_gastric_bypass_variants::fnTransectTissue":
+    shortId: "SYS-3"
+    uuid: "70549144-ec4e-507e-8b2e-cf8ed07304ae"
+  "memo_examples_gastric_bypass_variants::jejunum":
+    shortId: "MMX-1:1"
+    uuid: "ae47a530-4180-5e62-8d45-26af4e5fbaf4"
+  "memo_examples_gastric_bypass_variants::platform":
+    shortId: "SYS-4:1"
+    uuid: "61c0e9e4-17c0-5ad3-8bbe-76c51c85ab29"
+  "memo_examples_gastric_bypass_variants::platform::competitorRobot":
+    shortId: "SYS-4:2"
+    uuid: "11a85dc2-cd86-5623-be2b-8d6347e9ce6c"
+  "memo_examples_gastric_bypass_variants::platform::laparoscopicTower":
+    shortId: "SYS-4:3"
+    uuid: "f21ed772-792e-519b-b5aa-ec5ac499ea89"
+  "memo_examples_gastric_bypass_variants::platform::ourRobot":
+    shortId: "SYS-4:4"
+    uuid: "febc2855-234e-5e55-a469-807db4dc62d5"
+  "memo_examples_gastric_bypass_variants::scrubNurse":
+    shortId: "USR-2"
+    uuid: "b705803e-4b9c-51e2-bcc7-319db8b9a977"
+  "memo_examples_gastric_bypass_variants::stepAccess":
+    shortId: "OPR-16"
+    uuid: "ac2b4106-a9e4-51db-9f80-a27d7b68502c"
+  "memo_examples_gastric_bypass_variants::stepConvertToOpen":
+    shortId: "OPR-17"
+    uuid: "b3b65e35-ea1c-5757-8711-34b8384ccaea"
+  "memo_examples_gastric_bypass_variants::stepGastrojejunostomy":
+    shortId: "OPR-18"
+    uuid: "5acef352-eba3-5d37-8365-21869d87ff17"
+  "memo_examples_gastric_bypass_variants::stepLeakTest":
+    shortId: "OPR-19"
+    uuid: "674cc505-3c53-5ee1-b7ff-485196c70439"
+  "memo_examples_gastric_bypass_variants::stepPouch":
+    shortId: "OPR-20"
+    uuid: "3e06597b-1d8e-5711-a51f-de766aab5abc"
+  "memo_examples_gastric_bypass_variants::stomach":
+    shortId: "MMX-1:2"
+    uuid: "b87f86ce-63e1-5347-a702-c0fafb32535a"
+  "memo_examples_gastric_bypass_variants::successCmp":
+    shortId: "FNC-7"
+    uuid: "7d348a35-21b9-5710-af0a-0a1a24903b54"
+  "memo_examples_gastric_bypass_variants::successLap":
+    shortId: "FNC-8"
+    uuid: "565b1ec3-1861-5ec1-b83d-21d1b839a7bf"
+  "memo_examples_gastric_bypass_variants::successOur":
+    shortId: "FNC-9"
+    uuid: "4eae8ccd-b9dc-5c7a-9dad-30405b631eeb"
+  "memo_examples_gastric_bypass_variants::surgeon":
+    shortId: "USR-3"
+    uuid: "f3099cb6-1882-54f8-8e52-0306ee318678"
+  "memo_examples_gastric_bypass_variants::surgicalTeam":
+    shortId: "OPR-21"
+    uuid: "6031fb2d-a81d-5a5a-bb40-b913e4015db7"
+  "memo_examples_gastric_bypass_variants::ucRouxEnY":
+    shortId: "USE-1"
+    uuid: "6987f458-1dfb-5c32-b46d-a12c8051dcd9"
+  "memo_examples_gastric_bypass_variants::ucRouxEnYCmp":
+    shortId: "USE-2"
+    uuid: "284c77d4-2cde-5f09-a167-fc378e7ce4db"
+  "memo_examples_gastric_bypass_variants::ucRouxEnYLap":
+    shortId: "USE-3"
+    uuid: "16322025-147a-5697-b004-df39b420b973"
+  "memo_examples_gastric_bypass_variants::ucRouxEnYOur":
+    shortId: "USE-4"
+    uuid: "8ee9055c-caf5-59c2-98f6-7ad4ce4ea491"
+  "memo_examples_gastric_bypass_variants::wfRouxEnY":
+    shortId: "WFL-1"
+    uuid: "053623f4-71b3-5e9e-bc05-6339e2da182e"
+  "memo_examples_gastric_bypass_variants::wfRouxEnY::scConversion":
+    shortId: "OPR-22"
+    uuid: "d13cf94b-b047-581c-b1ff-0dd00a339fa6"
+  "memo_examples_gastric_bypass_variants::wfRouxEnY::scNominal":
+    shortId: "OPR-23"
+    uuid: "1258bf37-36f4-5a2c-886a-14e7e1eeb743"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYCmp":
+    shortId: "WFL-2"
+    uuid: "9f6dbd36-d2a9-577b-a67c-6b8cff572cfd"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYCmp::scCmpConversion":
+    shortId: "OPR-24"
+    uuid: "cc0e69b3-4013-5fd3-a1c4-75dfcccb22db"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYCmp::scCmpNominal":
+    shortId: "OPR-25"
+    uuid: "9358f6b1-9b20-5cfe-923c-153fd45f2285"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYCmp::staplerCmp":
+    shortId: "WRK-1:1"
+    uuid: "445dc884-1a78-5450-84b6-7047c7217d79"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYLap":
+    shortId: "WFL-3"
+    uuid: "2102fada-1e2f-5698-8989-51fa362fe277"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYLap::scLapConversion":
+    shortId: "OPR-26"
+    uuid: "56c4e4e1-f5ab-5f4c-a92e-bdd0eb81ad4b"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYLap::scLapNominal":
+    shortId: "OPR-27"
+    uuid: "abed404a-00e7-56de-9d65-689adcfa5144"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYLap::staplerLap":
+    shortId: "WRK-1:2"
+    uuid: "7d1e6a36-244b-5219-ad2f-a5606334988f"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYOur":
+    shortId: "WFL-4"
+    uuid: "6043c04e-aa40-5514-842a-7581fb728cc4"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYOur::scOurConversion":
+    shortId: "OPR-28"
+    uuid: "4c5a8018-f65f-5484-aa0f-bfc7cade2956"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYOur::scOurNominal":
+    shortId: "OPR-29"
+    uuid: "c77c9584-6650-5d39-9bcb-c8d51ea2cae6"
+  "memo_examples_gastric_bypass_variants::wfRouxEnYOur::staplerOur":
+    shortId: "WRK-1:3"
+    uuid: "6902e717-d8cf-5943-955e-5c3e4f1903a9"
+  "memo_examples_gastric_bypass_variants_project::projectBinding":
+    shortId: "PRJ-1"
+    uuid: "c138a616-f09d-53fd-9b46-0edd47b60e91"

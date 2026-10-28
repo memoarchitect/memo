@@ -1,0 +1,5 @@
+name: gastric-bypass-variants
+entrypoint: model/methodology/project.sysml
+include: [model]
+toolchain:
+  packager: internal
