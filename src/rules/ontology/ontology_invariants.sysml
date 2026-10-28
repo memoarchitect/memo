@@ -4,7 +4,7 @@
 // Structural invariants (endpoint existence, cycle freedom) are expressed over
 // the typed relations introduced in 0.5 — typed references make them checkable.
 //
-// Operational levels (CR-ONT-093..097). A use case is at the level of its subject: an
+// Operational levels (CR-ONT-093..098). A use case is at the level of its subject: an
 // `OperationalEntity` is level 1 (clinical, no product, no number), a `System` or `SystemOfSystems`
 // is level 2 (one variant of a platform, which carries every number). The level of a step is the
 // level of the use case its workflow `realizesUseCase`. The workflow is reached from the step by
@@ -15,9 +15,8 @@
 // `realizes` edges the builder already produces. Rule 6 of the plan, that every variant of a
 // `TradeStudy` refines every step compared, is not written: the builder does not yet surface a
 // trade study's alternatives (board row "Operational levels: the `TradeStudy` is not a model element, so plan rule 6 is unwritten").
-// Nor is the rule that a project declares one currency: a currency unit is a package-level attribute
-// usage, which the builder does not build as an element, and a money value reaches a rule only as
-// text such as "5 [euro]" (board row "Operational levels: the one-currency rule cannot see the currency unit").
+// The one-currency rule (098) counts the project's `CurrencyUnit` declarations: a unit declared at
+// package level is built as a model element, as ISQ and SI declare theirs.
 package memo_rules_ontology {
     private import ScalarValues::*;
 
@@ -745,6 +744,17 @@ package memo_rules_ontology {
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "A system function is performed from a level-2 activity or from a step of a functional flow, never from a level-1 step: level 1 names no product, and a function is what a product does.";
         attribute predicateExpression = "upstream(performs)->forAll(not(conformsTo(OperativeAction) and (upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity)))) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity)))))))))";
+        constraint { true }
+    }
+    constraint def ProjectDeclaresOneCurrencyRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-098"; }
+        attribute tailoring = RuleTailoringKind::invariant;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "Model";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A project states every amount in one currency, declared once as a currency unit. No conversion between currencies is modelled, so two currency units make every sum across them meaningless.";
+        attribute predicateExpression = "allOfKind('CurrencyUnit')->size() <= 1";
         constraint { true }
     }
 }
