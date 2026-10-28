@@ -1,6 +1,17 @@
 // Use cases (§5). A UseCase is a goal a person or organization wants to
 // achieve with system support — there is no separate Goal class. Clinical,
 // service, manufacturing, and development use cases specialize the same base.
+//
+// A use case is at one of two levels, and the level is its subject's type, not a field.
+// Level 1 is clinical: the subject is an `OperationalEntity` (the care team, the setting), the
+// use case names no product, and nothing on its workflow, scenarios or steps carries a number.
+// Level 2 is a black box: the subject is a `System` or `SystemOfSystems`, one variant of a
+// platform, and its procedure flow carries every number (time, cost, success, likelihood) for
+// that variant. A level-2 activity refines the level-1 step it carries out by upward
+// `#refinement`, so one level-1 use case is the shared baseline of every variant. Reusable
+// services of the system (dock, teleoperate) are level-2 use cases that a procedure flow
+// `include`s, never copies. The level below, how the system does its share, is the Functional
+// layer, reached by `perform`.
 package memo_architecture_operational_use_cases {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;

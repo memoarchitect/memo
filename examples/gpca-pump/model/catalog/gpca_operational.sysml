@@ -109,6 +109,11 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> preCondition = "therapy active";
         attribute :>> postCondition = "bolus delivered, or request ignored when lockout or max-dose limits apply";
         attribute :>> criticality = CriticalityKind::catastrophic;
+        perform fcPatientBolus.fcsBolusSense;
+        perform fcPatientBolus.fcsBolusValidate;
+        perform fcPatientBolus.fcsBolusCommand;
+        perform fcPatientBolus.fcsBolusActuate;
+        perform fcPatientBolus.fcsBolusLog;
     }
     action oaRespondAlarm : OperativeAction {
         @MemoIdentity { :>> providedId = "OA-006"; :>> label = "RespondToAlarm"; }
@@ -116,6 +121,10 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> preCondition = "alarm condition raised by the pump";
         attribute :>> postCondition = "cause resolved and therapy resumed, or therapy stopped";
         attribute :>> criticality = CriticalityKind::catastrophic;
+        perform fcAlarmStop.fcsAlarmSense;
+        perform fcAlarmStop.fcsAlarmEvaluate;
+        perform fcAlarmStop.fcsAlarmStopInfusion;
+        perform fcAlarmStop.fcsAlarmAnnunciate;
     }
     action oaReviewLog : OperativeAction {
         @MemoIdentity { :>> providedId = "OA-007"; :>> label = "ReviewEventLog"; }
@@ -151,26 +160,14 @@ package memo_examples_gpca_pump_gpca_operational {
 
     part wfPrepareAndStartTherapy : OperationalWorkflow {
 @MemoIdentity { :>> label = "PrepareAndStartTherapy"; }
-        attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
         attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
 
     }
     part wfManageActiveTherapy : OperationalWorkflow {
 @MemoIdentity { :>> label = "ManageActiveTherapy"; }
-        attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "Basal therapy is active.";
         attribute :>> completionCondition = "A bolus is handled or active therapy continues safely.";
-
-        // Refinement targets a nested step by its local name — the shorthand's
-        // `to` end does not accept a qualified path — so this is written
-        // inside wsRequestBolus's own owning scope rather than at package
-        // level.
-        #refinement dependency fcPatientBolus::fcsBolusSense to oaRequestBolus;
-        #refinement dependency fcPatientBolus::fcsBolusValidate to oaRequestBolus;
-        #refinement dependency fcPatientBolus::fcsBolusCommand to oaRequestBolus;
-        #refinement dependency fcPatientBolus::fcsBolusActuate to oaRequestBolus;
-        #refinement dependency fcPatientBolus::fcsBolusLog to oaRequestBolus;
         action osNominalTherapy : OperativeScenario {
             @MemoIdentity { :>> providedId = "OS-001"; :>> label = "NominalTherapySession"; }
             attribute :>> preCondition = "prescription issued, reservoir loaded";
@@ -201,14 +198,9 @@ package memo_examples_gpca_pump_gpca_operational {
     }
     part wfRespondToTherapyAlarm : OperationalWorkflow {
 @MemoIdentity { :>> label = "RespondToTherapyAlarm"; }
-        attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
         attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";
 
-        #refinement dependency fcAlarmStop::fcsAlarmSense to oaRespondAlarm;
-        #refinement dependency fcAlarmStop::fcsAlarmEvaluate to oaRespondAlarm;
-        #refinement dependency fcAlarmStop::fcsAlarmStopInfusion to oaRespondAlarm;
-        #refinement dependency fcAlarmStop::fcsAlarmAnnunciate to oaRespondAlarm;
         action osOcclusionAlarm : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;
             @MemoIdentity { :>> providedId = "OS-003"; :>> label = "OcclusionDetectedDuringInfusion"; }

@@ -22,6 +22,21 @@
 | [`UseContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#usecontext) | `part def` | Use context definition specializing `MemoPart`. |
 | [`UseEnvironment`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#useenvironment) | `part def` | The physical/organizational environment of use (IEC 62366-1 3.20), separable from the care-setting context so environments are reusable. |
 
+**Rollups**
+
+| Element | SysML kind | What it is |
+| --- | --- | --- |
+| [`ActivitiesOf`](../sysml-api/architecture/operational/rollups/memo_rollups.md#activitiesof) | `calc def` | Activities of definition. |
+| [`ActivityCost`](../sysml-api/architecture/operational/rollups/memo_rollups.md#activitycost) | `calc def` | Activity cost definition. |
+| [`ScenarioCost`](../sysml-api/architecture/operational/rollups/memo_rollups.md#scenariocost) | `calc def` | Scenario cost definition. |
+| [`ScenarioDuration`](../sysml-api/architecture/operational/rollups/memo_rollups.md#scenarioduration) | `calc def` | Scenario duration definition. |
+| [`ScenarioSuccess`](../sysml-api/architecture/operational/rollups/memo_rollups.md#scenariosuccess) | `calc def` | Scenario success definition. |
+| [`ProcedureCost`](../sysml-api/architecture/operational/rollups/memo_rollups.md#procedurecost) | `calc def` | Procedure cost definition. |
+| [`ProcedureDuration`](../sysml-api/architecture/operational/rollups/memo_rollups.md#procedureduration) | `calc def` | Procedure duration definition. |
+| [`ScenarioWeight`](../sysml-api/architecture/operational/rollups/memo_rollups.md#scenarioweight) | `calc def` | Scenario weight definition. |
+| [`HighDemandCount`](../sysml-api/architecture/operational/rollups/memo_rollups.md#highdemandcount) | `calc def` | High demand count definition. |
+| [`HighestDemand`](../sysml-api/architecture/operational/rollups/memo_rollups.md#highestdemand) | `calc def` | Highest demand definition. |
+
 **Scenarios**
 
 | Element | SysML kind | What it is |
@@ -130,7 +145,6 @@ flowchart LR
 | [`GovernKind`](../sysml-api/architecture/operational/context/stakeholders/memo_stakeholders.md#governkind) | `correspondence` |
 | [`ScenarioKind`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#scenariokind) | `nominal`, `alternate` |
 | [`UseCaseKind`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecasekind) | `clinical`, `service`, `manufacturing`, `development` |
-| [`WorkflowStateKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowstatekind) | `asIs`, `toBe`, `contingency`, `deprecated` |
 | [`StepTransformationKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#steptransformationkind) | `preserves`, `automates`, `augments`, `eliminates` |
 | [`ControlNodeKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#controlnodekind) | `decision`, `handoff` |
 | [`ResourceKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#resourcekind) | `instrument`, `equipment`, `consumable`, `material`, `information`, `space` |

@@ -7,6 +7,10 @@
 // step used in several scenarios is one action def used in each, never copied.
 // An actual or hypothetical execution is a native usage of the scenario, not a
 // separate element.
+//
+// A scenario of a level-1 use case lists steps; a scenario of a level-2 use case lists activities
+// (memo_architecture_operational_activities), and `likelihood` is per variant, so a robot and a
+// laparoscopic tower have different conversion rates for the same alternate scenario.
 package memo_architecture_operational_scenarios {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;

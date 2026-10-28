@@ -27,6 +27,7 @@ package memo_examples_functional_logical_physical {
     action actOcclusionResponse : OperativeAction {
         @MemoIdentity { :>> providedId = "FLP-ACT-001"; :>> label = "RespondToLineOcclusion"; }
         attribute :>> criticality = CriticalityKind::high;
+        perform fnLimitLinePressure;
     }
 
     // Functional: technology-independent responsibility.
@@ -34,7 +35,6 @@ package memo_examples_functional_logical_physical {
         @MemoIdentity { :>> providedId = "FLP-FN-001"; :>> label = "LimitLinePressure"; }
         attribute :>> criticality = CriticalityKind::high;
     }
-    dependency from fnLimitLinePressure to actOcclusionResponse;
 
     // Logical: solution structure, still technology-independent.
     part lcPressureProtection : LogicalComponent {

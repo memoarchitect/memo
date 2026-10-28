@@ -197,6 +197,22 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`UseEnvironment`](architecture/operational/context/use_context/memo_use_context.md#useenvironment) | `part def` | The physical/organizational environment of use (IEC 62366-1 3.20), separable from the care-setting context so environments are reusable. | [`architecture/operational/context/use_context/memo_use_context.sysml`](architecture/operational/context/use_context/memo_use_context.md) |
 
 
+## `memo::architecture::operational::rollups`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`ActivitiesOf`](architecture/operational/rollups/memo_rollups.md#activitiesof) | `calc def` | Activities of definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`ActivityCost`](architecture/operational/rollups/memo_rollups.md#activitycost) | `calc def` | Activity cost definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`HighDemandCount`](architecture/operational/rollups/memo_rollups.md#highdemandcount) | `calc def` | High demand count definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`HighestDemand`](architecture/operational/rollups/memo_rollups.md#highestdemand) | `calc def` | Highest demand definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`ProcedureCost`](architecture/operational/rollups/memo_rollups.md#procedurecost) | `calc def` | Procedure cost definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`ProcedureDuration`](architecture/operational/rollups/memo_rollups.md#procedureduration) | `calc def` | Procedure duration definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`ScenarioCost`](architecture/operational/rollups/memo_rollups.md#scenariocost) | `calc def` | Scenario cost definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`ScenarioDuration`](architecture/operational/rollups/memo_rollups.md#scenarioduration) | `calc def` | Scenario duration definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`ScenarioSuccess`](architecture/operational/rollups/memo_rollups.md#scenariosuccess) | `calc def` | Scenario success definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`ScenarioWeight`](architecture/operational/rollups/memo_rollups.md#scenarioweight) | `calc def` | Scenario weight definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+
+
 ## `memo::architecture::operational::scenarios`
 
 | Name | SysML kind | Description | Source |
