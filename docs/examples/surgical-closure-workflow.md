@@ -38,8 +38,8 @@ use case ucPerformSleeveGastrectomy : UseCase {
 
 The workflow names the normal work of the operation: confirm time-out and
 position, establish access, mobilise the stomach, create the sleeve, assess the
-staple line, close, and hand over. `WorkflowStep`s refer to operational
-activities, so the order is inspectable without embedding it in prose.
+staple line, close, and hand over. The scenario's steps are `OperativeAction` usages
+with successions between them, so the order is inspectable without embedding it in prose.
 
 ```sysml
 action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
@@ -82,7 +82,7 @@ The recovery activity is an action flow: recognize, control, reassess, then
 escalate if needed. It is not a copy of the full surgical workflow.
 
 ```sysml
-action oaControlStapleLineBleeding : OperationalActivity {
+action oaControlStapleLineBleeding : OperativeAction {
     @MemoIdentity { :>> label = "ControlStapleLineBleeding"; }
     action recognizeBleeding; action controlBleeding;
     action reassessStapleLine; action escalateIfNeeded;
@@ -91,7 +91,7 @@ action oaControlStapleLineBleeding : OperationalActivity {
     first controlBleeding then reassessStapleLine;
 }
 
-action scStapleLineBleeding : MemoScenario {
+action scStapleLineBleeding : OperativeScenario {
     @MemoIdentity { :>> label = "StapleLineBleedingRecovery"; }
     attribute :>> scenarioKind = ScenarioKind::operative;
     attribute :>> variantKind = ScenarioVariantKind::recovery;
@@ -122,7 +122,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `TaskStep`, `OperationalActivity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `UserTask`, `WorkflowStep` | [Operational](../ontology/operational.md) |
+| Operational | `OperativeAction`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
 | Clinical extension | `ClinicalProcedureWorkflow` | [Extension modules](../reference/areas/methodology.md#extensions) |
 | Assurance | `Need` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |

@@ -7,8 +7,8 @@ asset history.
 The model separates three operational concepts:
 
 - `OperationalWorkflow` defines the reusable sequence of work.
-- `OperationalScenario` selects the nominal path.
-- `ScenarioOccurrence` records one modeled execution of that scenario.
+- `OperativeScenario` selects the nominal path.
+- An actual or hypothetical execution of a scenario is a native usage of it, not a separate element.
 
 ```sysml
 use case ucSterilize : UseCase {
@@ -31,7 +31,7 @@ records with the occurrence. Those record schemas are outside MEMO.
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity`, `OperationalWorkflow`, `OperationalScenario`, `ScenarioOccurrence`, `UseCase`, `User`, `WorkflowStep` | [Operational](../ontology/operational.md) |
+| Operational | `OperativeAction`, `OperationalWorkflow`, `OperativeScenario`, `UseCase`, `User` | [Operational](../ontology/operational.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `Composes`, `Initiates`, `StepPrecedes`, `Supports`.

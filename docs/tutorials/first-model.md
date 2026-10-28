@@ -116,17 +116,17 @@ workflow; the scenario records the event that makes the workflow relevant.
 
 ```sysml
     // The clinician observes the patient's current temperature.
-    action monitorTemperatureStatus : OperationalActivity {
+    action monitorTemperatureStatus : OperativeAction {
         attribute :>> id = "OA-001";
     }
 
     // The clinician responds when an alert is raised.
-    action respondToTemperatureAlert : OperationalActivity {
+    action respondToTemperatureAlert : OperativeAction {
         attribute :>> id = "OA-002";
     }
 
     // The operational event that frames this slice of work.
-    action highTemperatureScenario : MemoScenario {
+    action highTemperatureScenario : OperativeScenario {
         attribute :>> id = "OS-001";
         attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
@@ -322,17 +322,17 @@ package temperature_alarm {
     }
 
     // The clinician observes the patient's current temperature.
-    action monitorTemperatureStatus : OperationalActivity {
+    action monitorTemperatureStatus : OperativeAction {
         attribute :>> id = "OA-001";
     }
 
     // The clinician responds when an alert is raised.
-    action respondToTemperatureAlert : OperationalActivity {
+    action respondToTemperatureAlert : OperativeAction {
         attribute :>> id = "OA-002";
     }
 
     // The operational event that frames this slice of work.
-    action highTemperatureScenario : MemoScenario {
+    action highTemperatureScenario : OperativeScenario {
         attribute :>> id = "OS-001";
         attribute :>> scenarioKind = ScenarioKind::operative;
         attribute :>> variantKind = ScenarioVariantKind::exception;
@@ -449,11 +449,11 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity`, `UseCase`, `User`, `UserTask` | [Operational](../ontology/operational.md) |
+| Operational | `OperativeAction`, `UseCase`, `User` | [Operational](../ontology/operational.md) |
 | Functional | `SystemFunction` | [Functional](../ontology/functional.md) |
 | Logical | `LogicalComponent` | [Logical](../ontology/logical.md) |
 | Implementation and realization | `HardwareAssembly`, `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../ontology/implementation.md) |
-| Assurance | `Evidence`, `Hazard`, `Need`, `Requirement`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase`, `MemoScenario[scenarioKind=memoVerification]` | [Assurance](../reference/areas/assurance.md) |
+| Assurance | `Evidence`, `Hazard`, `Need`, `Requirement`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase` | [Assurance](../reference/areas/assurance.md) |
 | Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
 
 **Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `DerivesFrom`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates` … +6 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.

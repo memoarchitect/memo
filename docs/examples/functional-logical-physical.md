@@ -17,7 +17,7 @@ Every tutorial is one slice of the same structure. This example populates these 
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalActivity` | [Operational](../ontology/operational.md) |
+| Operational | `OperativeAction` | [Operational](../ontology/operational.md) |
 | Functional | `SystemFunction` | [Functional](../ontology/functional.md) |
 | Logical | `LogicalComponent` | [Logical](../ontology/logical.md) |
 | Implementation and realization | `MechanicalPart`, `SoftwareModule` | [Implementation and realization](../ontology/implementation.md) |

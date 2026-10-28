@@ -111,9 +111,9 @@ functions required on that path.
 | Concept | MEMO definition | Package |
 |---|---|---|
 | Use case | `UseCase` | `use_cases` |
-| Workflow | `OperationalWorkflow`, `WorkflowStep` | `workflows` |
-| Scenario | `MemoScenario` (selected by `scenarioKind`), `ScenarioOccurrence` | `scenarios` |
-| Activity on a path | `OperationalActivity`, `TaskStep`, `UserTask` | `activities` |
+| Workflow | `OperationalWorkflow` | `workflows` |
+| Scenario | `OperativeScenario` | `scenarios` |
+| Activity on a path | `OperativeAction` | `activities` |
 
 ## Architecture layers: from intent to realization
 
@@ -123,8 +123,8 @@ the clinical intent and scenario established above it.
 
 | Layer | Engineering question | Representative MEMO definitions |
 |---|---|---|
-| **Operational** | Who uses the device, for what goal, in which context and scenario? | `User`, `UseContext`, `Need`, `UseCase`, `OperationalWorkflow`, `MemoScenario[scenarioKind=operative]`, `UserTask` |
-| **Functional** | What must the system accomplish on that scenario path? | `SystemFunction`, `FunctionalFlow`, `MemoScenario[scenarioKind=functional]`, `FunctionalExchange` |
+| **Operational** | Who uses the device, for what goal, in which context and scenario? | `User`, `UseContext`, `Need`, `UseCase`, `OperationalWorkflow`, `OperativeScenario` |
+| **Functional** | What must the system accomplish on that scenario path? | `SystemFunction`, `FunctionalFlow`, `FunctionalExchange` |
 | **Logical** | How are responsibilities, interactions, interfaces, and modes organized? | `LogicalComponent`, channels, ports, interfaces, modes |
 | **Implementation** | Which technology implements those responsibilities? | `SoftwareComponent`, `SoftwareModule`, `ElectronicComponent`, `MechanicalPart`, `UserInterface` |
 | **Realization** | How is the design assembled, hosted, and deployed? | `SoftwareDeploymentUnit`, `RuntimeEnvironment`, `ProcessingNode`, `HardwareAssembly`, `PhysicalAssembly` |
@@ -148,7 +148,7 @@ elements through typed relationships.
 | **Requirements** | Which needs and obligations govern the device and its behavior? | `Need`, `Requirement` |
 | **Safety / risk** | Which hazardous situations, risks, and controls require management? | `Hazard`, `Risk`, `RiskControlMeasure`, FMEA and fault-tree elements |
 | **Cybersecurity** | Which assets, threats, vulnerabilities, and controls affect the device? | `CybersecurityAsset`, `Threat`, `Vulnerability`, cybersecurity controls |
-| **Human factors** | Which users, tasks, use errors, and evaluations shape safe and effective use? | `UserTask` with its `criticality`, `UseError`, `FormativeEvaluation`, `UsabilityValidation` |
+| **Human factors** | Which users, tasks, use errors, and evaluations shape safe and effective use? | `OperativeAction` with its `criticality`, `UseError`, `FormativeEvaluation`, `UsabilityValidation` |
 | **Verification & validation** | Which cases and evidence establish that engineering claims are met? | `VerificationCase`, `ValidationCase`, `Evidence` |
 
 Architecture definitions and assurance definitions retain their own package
@@ -208,7 +208,7 @@ A project develops a scenario-driven vertical slice in three steps:
     <span class="memo-step-number">1</span>
     <div class="memo-step-content">
       <h3>Model the operational scenario</h3>
-      <p>Define the <code>Need</code> and <code>UseCase</code>, the <code>OperationalWorkflow</code> that supports the use case, and a <code>MemoScenario</code> with <code>scenarioKind=operative</code> that selects the applicable <code>WorkflowStep</code> path.</p>
+      <p>Define the <code>Need</code> and <code>UseCase</code>, the <code>OperationalWorkflow</code> that supports the use case, and an <code>OperativeScenario</code> whose <code>OperativeAction</code> steps are the path.</p>
     </div>
     <a href="../reference/elements/operational/">Operational definitions →</a>
   </article>
@@ -216,7 +216,7 @@ A project develops a scenario-driven vertical slice in three steps:
     <span class="memo-step-number">2</span>
     <div class="memo-step-content">
       <h3>Describe system behavior and architecture</h3>
-      <p>Use a <code>MemoScenario</code> with <code>scenarioKind=functional</code> and a <code>FunctionalFlow</code> to identify the required <code>SystemFunction</code> sequence, then allocate those functions to the responsible <code>LogicalComponent</code> elements.</p>
+      <p>Use a <code>FunctionalFlow</code> to identify the required <code>SystemFunction</code> sequence, then allocate those functions to the responsible <code>LogicalComponent</code> elements.</p>
     </div>
     <a href="../reference/elements/functional/">Functional definitions →</a>
   </article>
