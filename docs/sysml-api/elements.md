@@ -225,7 +225,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | --- | --- | --- | --- |
 | [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowControlNode`](architecture/operational/workflows/memo_workflows.md#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`WorkflowResource`](architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. Owned by the workflow as its parts. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`WorkflowResource`](architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 
 ## `memo::architecture::realization::deployment`
@@ -457,6 +457,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`MemoPort`](core/common/memo_common.md#memoport) | `port def` | Boundary feature foundation for typed ports. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoRequirement`](core/common/memo_common.md#memorequirement) | `requirement def` | Memo requirement definition specializing `MemoRequirementElement`. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoRequirementElement`](core/common/memo_common.md#memorequirementelement) | `requirement def` | Memo requirement element definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
+| [`MemoResource`](core/common/memo_common.md#memoresource) | `part def` | A resource a body of work spends: an instrument, a person, a consumable or the platform. It carries what an hour of its capacity costs and what one use of it costs. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoState`](core/common/memo_common.md#memostate) | `state def` | Memo state definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoUseCase`](core/common/memo_common.md#memousecase) | `use case def` | Memo use case definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |
 | [`MemoVerificationCase`](core/common/memo_common.md#memoverificationcase) | `verification def` | Memo verification case definition. | [`core/common/memo_common.sysml`](core/common/memo_common.md) |

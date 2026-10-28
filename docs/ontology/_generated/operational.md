@@ -47,7 +47,7 @@
 | --- | --- | --- |
 | [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. |
 | [`WorkflowControlNode`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). |
-| [`WorkflowResource`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. Owned by the workflow as its parts. |
+| [`WorkflowResource`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. |
 
 
 ### Connections at a glance
@@ -132,4 +132,5 @@ flowchart LR
 | [`WorkflowStateKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowstatekind) | `asIs`, `toBe`, `contingency`, `deprecated` |
 | [`StepTransformationKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#steptransformationkind) | `preserves`, `automates`, `augments`, `eliminates` |
 | [`ControlNodeKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#controlnodekind) | `decision`, `handoff` |
+| [`ResourceKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#resourcekind) | `instrument`, `equipment`, `consumable`, `material`, `information`, `space` |
 | [`TransformKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#transformkind) | `step`, `workflow`, `replacesWorkflow` |

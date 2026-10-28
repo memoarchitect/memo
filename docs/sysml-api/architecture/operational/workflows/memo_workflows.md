@@ -25,6 +25,7 @@
 | --- | --- |
 | private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
+| private | `memo_core_stdlib_quantities::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
@@ -43,7 +44,8 @@
 | [`RealizesUseCase`](#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | `MemoRelationship` |
 | [`ControlNodeKind`](#controlnodekind) | `enum def` | Controlled values for control node: `decision`, `handoff`. | — |
 | [`WorkflowControlNode`](#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | `MemoAction` |
-| [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: information, materials, or equipment by reference. Owned by the workflow as its parts. | `MemoPart` |
+| [`ResourceKind`](#resourcekind) | `enum def` | Controlled values for resource: `instrument`, `equipment`, `consumable`, `material`, `information`, `space`. | — |
+| [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. | `MemoResource` |
 | [`TransformKind`](#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | — |
 | [`Transforms`](#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | `MemoRelationship` |
 
@@ -137,18 +139,33 @@ action def WorkflowControlNode specializes MemoAction
 | Owning package | `memo_architecture_operational_workflows` |
 
 
-## WorkflowResource
+## ResourceKind
 
 ```sysml
-part def WorkflowResource specializes MemoPart
+enum def ResourceKind
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Resources a workflow requires: information, materials, or equipment by reference. Owned by the workflow as its parts. |
+| Description | Controlled values for resource: `instrument`, `equipment`, `consumable`, `material`, `information`, `space`. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_architecture_operational_workflows` |
+
+
+## WorkflowResource
+
+```sysml
+part def WorkflowResource specializes MemoResource
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoResource` |
 | Owning package | `memo_architecture_operational_workflows` |
 
 
@@ -205,9 +222,15 @@ connection def Transforms :> MemoRelationship
     // So a workflow is a part, not an action: an action's nested actions are all
     // performed, and a workflow's scenarios are alternatives. It owns its scenarios
     // as nested actions, the way a part owns what it can do.
+    //
+    // A workflow's equipment is `WorkflowResource` parts, each a `MemoResource` with its cost rate.
+    // A generic resource is specialized by the product that fills it (`part def ProductXStapler :>
+    // Stapler`), which is why there is no `resolvedProduct` reference: native specialization says it.
     package memo_architecture_operational_workflows {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
+
+        private import memo_core_stdlib_quantities::*;
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
@@ -288,12 +311,22 @@ connection def Transforms :> MemoRelationship
             attribute informationTransferred : String[0..1];
         }
 
-        // Resources a workflow requires: information, materials, or equipment by
-        // reference. Owned by the workflow as its parts.
-        part def WorkflowResource specializes MemoPart {
-            attribute resourceKind : String;
-            attribute quantity : String;
-            ref resolvedProduct : MemoPart[0..1];
+        enum def ResourceKind {
+            enum instrument;
+            enum equipment;
+            enum consumable;
+            enum material;
+            enum information;
+            enum space;
+        }
+
+        // Resources a workflow requires: instruments, equipment, consumables, materials, information
+        // or space, by reference. Owned by the workflow as its parts. A staff member is not one: that
+        // is a `User`, which is a `MemoResource` of its own.
+        part def WorkflowResource specializes MemoResource {
+            attribute resourceKind : ResourceKind;
+            attribute quantity : Natural;
+            attribute reprocessingDuration : DurationValue[0..1];
         }
 
         // ── Workflow-level relationships ─────────────────────────────

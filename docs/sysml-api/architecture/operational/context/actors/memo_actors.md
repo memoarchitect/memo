@@ -52,7 +52,7 @@ abstract part def OperationalParticipant specializes MemoPart
 ## User
 
 ```sysml
-part def User specializes OperationalParticipant
+part def User specializes OperationalParticipant, MemoResource
 ```
 
 | Property | Value |
@@ -74,6 +74,8 @@ part def User specializes OperationalParticipant
     // a native SysML notion (a Part in a stakeholder membership on a concern or
     // viewpoint), not a separate MEMO type; the same Part may fill both roles.
     // "User" is reserved for a human who interacts with the medical device.
+    // A User is also a `MemoResource`: staff are a resource with a capacity cost rate, and are already the
+    // performers, so there is no "personnel" resource kind, which would be a second spelling of User.
     package memo_architecture_operational_context_actors {
         private import ScalarValues::*;
 
@@ -90,7 +92,7 @@ part def User specializes OperationalParticipant
         // The human actor. The specific role is given by actorKind
         // (patient / clinician / caregiver / technician / administrator); the
         // role-specific fields below are set only for the relevant actorKind.
-        part def User specializes OperationalParticipant {
+        part def User specializes OperationalParticipant, MemoResource {
             attribute userPopulation : String;
             attribute impairmentConsiderations : String;
             attribute intendedTraining : String;

@@ -16,9 +16,15 @@
 // So a workflow is a part, not an action: an action's nested actions are all
 // performed, and a workflow's scenarios are alternatives. It owns its scenarios
 // as nested actions, the way a part owns what it can do.
+//
+// A workflow's equipment is `WorkflowResource` parts, each a `MemoResource` with its cost rate.
+// A generic resource is specialized by the product that fills it (`part def ProductXStapler :>
+// Stapler`), which is why there is no `resolvedProduct` reference: native specialization says it.
 package memo_architecture_operational_workflows {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
+
+    private import memo_core_stdlib_quantities::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
@@ -99,12 +105,22 @@ package memo_architecture_operational_workflows {
         attribute informationTransferred : String[0..1];
     }
 
-    // Resources a workflow requires: information, materials, or equipment by
-    // reference. Owned by the workflow as its parts.
-    part def WorkflowResource specializes MemoPart {
-        attribute resourceKind : String;
-        attribute quantity : String;
-        ref resolvedProduct : MemoPart[0..1];
+    enum def ResourceKind {
+        enum instrument;
+        enum equipment;
+        enum consumable;
+        enum material;
+        enum information;
+        enum space;
+    }
+
+    // Resources a workflow requires: instruments, equipment, consumables, materials, information
+    // or space, by reference. Owned by the workflow as its parts. A staff member is not one: that
+    // is a `User`, which is a `MemoResource` of its own.
+    part def WorkflowResource specializes MemoResource {
+        attribute resourceKind : ResourceKind;
+        attribute quantity : Natural;
+        attribute reprocessingDuration : DurationValue[0..1];
     }
 
     // ── Workflow-level relationships ─────────────────────────────
