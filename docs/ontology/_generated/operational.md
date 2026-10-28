@@ -6,6 +6,7 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
+| [`ProbabilityValue`](../sysml-api/architecture/operational/activities/memo_activities.md#probabilityvalue) | `attribute def` | A probability: a dimensionless quantity between 0 and 1. |
 | [`OperativeAction`](../sysml-api/architecture/operational/activities/memo_activities.md#operativeaction) | `action def` | Operative action definition specializing `MemoAction`. |
 | [`TaskDifficultyAssessment`](../sysml-api/architecture/operational/activities/memo_activities.md#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. |
 

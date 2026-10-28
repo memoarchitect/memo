@@ -26,6 +26,7 @@
 | private | `memo_core_stdlib_quantities::*` |
 | private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
+| private | `MeasurementReferences::DimensionOneValue` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
@@ -37,6 +38,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`DemandLevelKind`](#demandlevelkind) | `enum def` | Controlled values for demand level: `minimal`, `low`, `moderate`, `high`, `extreme`. | — |
+| [`ProbabilityValue`](#probabilityvalue) | `attribute def` | A probability: a dimensionless quantity between 0 and 1. | `DimensionOneValue` |
 | [`OperativeAction`](#operativeaction) | `action def` | Operative action definition specializing `MemoAction`. | `MemoAction` |
 | [`TaskDifficultyAssessment`](#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | `MemoPart` |
 | [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship from `TaskDifficultyAssessment` to `OperativeAction`. | `MemoRelationship` |
@@ -53,6 +55,21 @@ enum def DemandLevelKind
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
+| Owning package | `memo_architecture_operational_activities` |
+
+
+## ProbabilityValue
+
+```sysml
+attribute def ProbabilityValue :> DimensionOneValue
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A probability: a dimensionless quantity between 0 and 1. |
+| Kind | `attribute def` |
+| Abstract | No |
+| Specializes | `DimensionOneValue` |
 | Owning package | `memo_architecture_operational_activities` |
 
 
@@ -118,6 +135,7 @@ connection def AssessesDifficulty :> MemoRelationship
         private import memo_core_stdlib_quantities::*;
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
+        private import MeasurementReferences::DimensionOneValue;
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
@@ -131,6 +149,11 @@ connection def AssessesDifficulty :> MemoRelationship
             enum moderate;
             enum high;
             enum extreme;
+        }
+
+        // A probability: a dimensionless quantity between 0 and 1.
+        attribute def ProbabilityValue :> DimensionOneValue {
+            assert constraint { self >= 0 and self <= 1 }
         }
 
         // One operational action / step. Who performs it — a human actor or the
@@ -148,6 +171,12 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute criticality : CriticalityKind;
             attribute taskGoal : String;
             attribute expectedDuration : DurationValue;
+            // The planned chance the step succeeds; a number, so level 2 only.
+            attribute plannedSuccessProbability : ProbabilityValue[0..1];
+            // With what, and on what: the resources the step uses and the parts it acts on, whatever
+            // they are (anatomy, a needle, a specimen, the instrument itself).
+            ref instruments : MemoResource[0..*];
+            ref targets : MemoPart[0..*];
             attribute frequencyOfUse : String;
             attribute potentialHarm : String[0..1];
             attribute severityIfFailed : SeverityKind[0..1];

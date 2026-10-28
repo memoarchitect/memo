@@ -14,6 +14,7 @@ Follow a type link to its source-file landing page.
 | `ControlledArtifact` | [`ModelOwnedArtifact`](artifacts/core/memo_controlled_artifacts.md#modelownedartifact) |
 | `DataPort` | [`CommandPort`](architecture/logical/interfaces/memo_interfaces.md#commandport), [`SensorPort`](architecture/logical/interfaces/memo_interfaces.md#sensorport) |
 | `DerivedUnit` | [`CostRateUnit`](core/stdlib/money/money.md#costrateunit) |
+| `DimensionOneValue` | [`ProbabilityValue`](architecture/operational/activities/memo_activities.md#probabilityvalue) |
 | `ElectricalComponent` | [`Battery`](architecture/implementation/hardware/electrical/memo_hardware_electrical.md#battery), [`PowerSupply`](architecture/implementation/hardware/electrical/memo_hardware_electrical.md#powersupply) |
 | `FunctionalAction` | [`ActivityAction`](architecture/functional/behavior/memo_behavior.md#activityaction) |
 | `FunctionalExchange` | [`FunctionalTransfer`](architecture/functional/functions/memo_functions.md#functionaltransfer) |

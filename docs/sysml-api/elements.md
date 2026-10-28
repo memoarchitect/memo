@@ -168,6 +168,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`OperativeAction`](architecture/operational/activities/memo_activities.md#operativeaction) | `action def` | Operative action definition specializing `MemoAction`. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
+| [`ProbabilityValue`](architecture/operational/activities/memo_activities.md#probabilityvalue) | `attribute def` | A probability: a dimensionless quantity between 0 and 1. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
 | [`TaskDifficultyAssessment`](architecture/operational/activities/memo_activities.md#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | [`architecture/operational/activities/memo_activities.sysml`](architecture/operational/activities/memo_activities.md) |
 
 
