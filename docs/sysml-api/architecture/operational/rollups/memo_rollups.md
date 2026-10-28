@@ -227,8 +227,9 @@ calc def HighestDemand
     // paid for. Time is the sum along the path; a fork whose branches overlap in time is not yet
     // reduced to its longest branch here.
     //
-    // Nothing evaluates these yet: they are declared, type-check under the compiler of record, and
-    // are the contract an evaluator implements.
+    // `memo evaluate` runs them from these bodies over the built model (memo-tools, analysis/calc), and a
+    // `TradeStudy` reads the results, so no figure is written twice. Units follow the SysML library's own
+    // conversions, so minutes and hours add and a rate times a duration is an amount.
     package memo_architecture_operational_rollups {
         private import ScalarValues::*;
         private import memo_core_stdlib_functions::*;
