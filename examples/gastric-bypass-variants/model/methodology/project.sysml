@@ -7,6 +7,10 @@ package memo_examples_gastric_bypass_variants_project {
     private import memo_methodology_profiles::*;
 
     private import memo_examples_gastric_bypass_variants::*;
+    private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_baseline::*;
+    private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_laparoscopic::*;
+    private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_our_robot::*;
+    private import memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypass_flow_competitor_robot::*;
 
     // The clinical extension brings the anatomy extension with it. The anatomy the model uses is
     // generated from FMA into a library of its own (`memo anatomy generate`), from the selector below.
