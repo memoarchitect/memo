@@ -28,6 +28,7 @@
 | public | `SI::*` |
 | public | `SIPrefixes::*` |
 | public | `MeasurementReferences::DimensionOneValue` |
+| public | `MeasurementReferences::one` |
 
 ## Declarations
 
@@ -63,6 +64,7 @@
         public import SI::*;
         public import SIPrefixes::*;
         public import MeasurementReferences::DimensionOneValue;
+        public import MeasurementReferences::one;
     }
 
     ```
