@@ -8,13 +8,8 @@ package memo_examples_gastric_bypass_variants_viewpoints_operational_views_bypas
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     view bypassFlowCompetitorRobot : MemoDiagramView {
-        @MemoIdentity { :>> label = "Competitor robot: scenarios and activities (level 2)"; }
-        expose memo_examples_gastric_bypass_variants::wfRouxEnYCmp::*;
-        expose memo_examples_gastric_bypass_variants::actAccessCmp;
-        expose memo_examples_gastric_bypass_variants::actPouchCmp;
-        expose memo_examples_gastric_bypass_variants::actGastrojejunostomyCmp;
-        expose memo_examples_gastric_bypass_variants::actLeakTestCmp;
-        expose memo_examples_gastric_bypass_variants::actConvertCmp;
+        @MemoIdentity { :>> label = "System workflow: competitor robot"; }
+        expose memo_examples_gastric_bypass_variants::wfRouxEnYCmp::**;
         attribute depth = 2;
         attribute :>> viewKind = DiagramViewKind::actionflow;
         attribute :>> diagramType = "ofd";
