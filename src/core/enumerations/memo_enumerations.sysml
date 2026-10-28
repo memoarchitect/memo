@@ -467,6 +467,7 @@ package memo_core_enumerations {
         enum operational;
         enum functional;
         enum logical;
+        enum physical;
         // How the system is built, in software, hardware and its user interface.
         enum implementation;
         // How it is assembled and deployed.
