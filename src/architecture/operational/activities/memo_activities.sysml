@@ -10,6 +10,7 @@ package memo_architecture_operational_activities {
     private import memo_core_stdlib_quantities::*;
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
+    private import MeasurementReferences::DimensionOneValue;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
@@ -23,6 +24,11 @@ package memo_architecture_operational_activities {
         enum moderate;
         enum high;
         enum extreme;
+    }
+
+    // A probability: a dimensionless quantity between 0 and 1.
+    attribute def ProbabilityValue :> DimensionOneValue {
+        assert constraint { self >= 0 and self <= 1 }
     }
 
     // One operational action / step. Who performs it — a human actor or the
@@ -40,6 +46,12 @@ package memo_architecture_operational_activities {
         attribute criticality : CriticalityKind;
         attribute taskGoal : String;
         attribute expectedDuration : DurationValue;
+        // The planned chance the step succeeds; a number, so level 2 only.
+        attribute plannedSuccessProbability : ProbabilityValue[0..1];
+        // With what, and on what: the resources the step uses and the parts it acts on, whatever
+        // they are (anatomy, a needle, a specimen, the instrument itself).
+        ref instruments : MemoResource[0..*];
+        ref targets : MemoPart[0..*];
         attribute frequencyOfUse : String;
         attribute potentialHarm : String[0..1];
         attribute severityIfFailed : SeverityKind[0..1];

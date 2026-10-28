@@ -40,6 +40,9 @@ package memo_architecture_operational_scenarios {
         attribute expectedResult : String;
         attribute postCondition : String;
         attribute pathSummary : String;
+        // How likely this path is, among the workflow's scenarios, for the variant it belongs to
+        // (a robot and a laparoscopic tower do not convert to open at the same rate); level 2 only.
+        attribute likelihood : ProbabilityValue[0..1];
 
         // The workflow this scenario belongs to is the one it is nested in
         // (a `HasScenario` relation was removed for that reason); a
