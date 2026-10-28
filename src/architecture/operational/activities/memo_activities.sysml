@@ -19,7 +19,6 @@ package memo_architecture_operational_activities {
     private import memo_core_stdlib_quantities::*;
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
-    private import MeasurementReferences::DimensionOneValue;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;

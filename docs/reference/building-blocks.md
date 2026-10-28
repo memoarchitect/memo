@@ -46,7 +46,7 @@ Enumerations are SysML `enum def` declarations that define controlled values.
 | Used by | Examples |
 | --- | --- |
 | Core identity and classification | `ElementStatusKind`, `LifecycleStateKind`, `RealizationStageKind`, `CrossCuttingConcernKind` |
-| Operational | `UseCaseKind`, `WorkflowStateKind`, `ScenarioKind`, `DemandLevelKind` |
+| Operational | `UseCaseKind`, `ResourceKind`, `ScenarioKind`, `DemandLevelKind` |
 | Functional and logical | `ActionKind`, `FunctionalFlowKind`, `TimingConstraintKind`, `InterfaceKind`, `DirectionKind`, `ComponentRoleKind` |
 | Implementation and realization | `ModuleKind`, `RuntimeKind`, `SafetyClassKind`, `UIElementFormKind`, `DeploymentKind`, `ProcessingNodeKind` |
 | Assurance | `RequirementTypeKind`, `SeverityKind`, `ProbabilityKind`, `RiskControlKind`, `ThreatCategoryKind`, `MemoVerificationMethodKind` |

@@ -11,6 +11,7 @@ package memo_examples_gpca_pump_gpca_operational {
     private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_context::*;
     private import memo_examples_gpca_pump_gpca_system::*;
+    private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
     private import memo_core_relationships::*;
 
     private import memo_core_common::*;
@@ -109,11 +110,11 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> preCondition = "therapy active";
         attribute :>> postCondition = "bolus delivered, or request ignored when lockout or max-dose limits apply";
         attribute :>> criticality = CriticalityKind::catastrophic;
-        perform fcPatientBolus.fcsBolusSense;
-        perform fcPatientBolus.fcsBolusValidate;
-        perform fcPatientBolus.fcsBolusCommand;
-        perform fcPatientBolus.fcsBolusActuate;
-        perform fcPatientBolus.fcsBolusLog;
+        perform fnAcquireSensors;
+        perform fnEnforceLimits;
+        perform fnManageInfusion;
+        perform fnCommandPump;
+        perform fnLogEvents;
     }
     action oaRespondAlarm : OperativeAction {
         @MemoIdentity { :>> providedId = "OA-006"; :>> label = "RespondToAlarm"; }
@@ -121,10 +122,10 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> preCondition = "alarm condition raised by the pump";
         attribute :>> postCondition = "cause resolved and therapy resumed, or therapy stopped";
         attribute :>> criticality = CriticalityKind::catastrophic;
-        perform fcAlarmStop.fcsAlarmSense;
-        perform fcAlarmStop.fcsAlarmEvaluate;
-        perform fcAlarmStop.fcsAlarmStopInfusion;
-        perform fcAlarmStop.fcsAlarmAnnunciate;
+        perform fnAcquireSensors;
+        perform fnMonitorAlarm;
+        perform fnManageInfusion;
+        perform fnAnnunciate;
     }
     action oaReviewLog : OperativeAction {
         @MemoIdentity { :>> providedId = "OA-007"; :>> label = "ReviewEventLog"; }

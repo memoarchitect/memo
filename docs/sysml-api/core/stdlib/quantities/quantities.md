@@ -27,6 +27,7 @@
 | public | `ISQ::*` |
 | public | `SI::*` |
 | public | `SIPrefixes::*` |
+| public | `MeasurementReferences::DimensionOneValue` |
 
 ## Declarations
 
@@ -61,6 +62,7 @@
         public import ISQ::*;
         public import SI::*;
         public import SIPrefixes::*;
+        public import MeasurementReferences::DimensionOneValue;
     }
 
     ```

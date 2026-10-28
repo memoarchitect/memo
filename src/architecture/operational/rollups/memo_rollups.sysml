@@ -24,23 +24,21 @@
 // are the contract an evaluator implements.
 package memo_architecture_operational_rollups {
     private import ScalarValues::*;
-    private import Actions::Action;
-    private import ControlFunctions::*;
-    private import SequenceFunctions::*;
-
+    private import memo_core_stdlib_functions::*;
     private import memo_core_stdlib_quantities::*;
     private import memo_core_stdlib_money::*;
+    private import memo_core_common::*;
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_scenarios::*;
     private import memo_architecture_operational_workflows::*;
     private import memo_architecture_operational_use_cases::*;
 
     calc def ActivitiesOf {
-        in step : Action[1];
+        in step : MemoAction[1];
         return activities : OperativeAction[0..*] = (
-            step.subactions->select { in inner : Action[1]; inner istype OperativeAction },
-            step.subactions->collect { in inner : Action[1]; ActivitiesOf(inner) },
-            (step as UseCase).includedUseCases->collect { in inner : Action[1]; ActivitiesOf(inner) });
+            step.subactions->select { in inner : MemoAction[1]; inner istype OperativeAction },
+            step.subactions->collect { in inner : MemoAction[1]; ActivitiesOf(inner) },
+            (step as UseCase).includedUseCases->collect { in inner : MemoAction[1]; ActivitiesOf(inner) });
     }
 
     calc def ActivityCost {
@@ -51,19 +49,19 @@ package memo_architecture_operational_rollups {
     }
 
     calc def ScenarioCost {
-        in scenario : Action[1];
+        in scenario : MemoAction[1];
         return cost : MoneyValue[1] = QuantityCalculations::sum(
             ActivitiesOf(scenario)->collect { in activity : OperativeAction[1]; ActivityCost(activity) });
     }
 
     calc def ScenarioDuration {
-        in scenario : Action[1];
+        in scenario : MemoAction[1];
         return duration : DurationValue[1] = QuantityCalculations::sum(
             ActivitiesOf(scenario)->collect { in activity : OperativeAction[1]; activity.expectedDuration });
     }
 
     calc def ScenarioSuccess {
-        in scenario : Action[1];
+        in scenario : MemoAction[1];
         return success : ProbabilityValue[1] = QuantityCalculations::product(
             ActivitiesOf(scenario).plannedSuccessProbability);
     }
@@ -71,7 +69,7 @@ package memo_architecture_operational_rollups {
     calc def ProcedureCost {
         in workflow : OperationalWorkflow[1];
         return cost : MoneyValue[1] = QuantityCalculations::sum((
-            workflow.ownedActions->select { in s : Action[1]; s istype OperativeScenario }
+            workflow.ownedActions->select { in s : MemoAction[1]; s istype OperativeScenario }
                 ->collect { in s : OperativeScenario[1]; (ScenarioWeight(s) * ScenarioCost(s)) as MoneyValue },
             workflow.perProcedureCost));
     }
@@ -79,7 +77,7 @@ package memo_architecture_operational_rollups {
     calc def ProcedureDuration {
         in workflow : OperationalWorkflow[1];
         return duration : DurationValue[1] = QuantityCalculations::sum(
-            workflow.ownedActions->select { in s : Action[1]; s istype OperativeScenario }
+            workflow.ownedActions->select { in s : MemoAction[1]; s istype OperativeScenario }
                 ->collect { in s : OperativeScenario[1]; (ScenarioWeight(s) * ScenarioDuration(s)) as DurationValue });
     }
 

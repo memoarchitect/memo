@@ -3,4 +3,6 @@ package memo_core_stdlib_functions {
     private import ScalarValues::*;
 
     public import BaseFunctions::*;
+    public import ControlFunctions::*;
+    public import SequenceFunctions::*;
 }
