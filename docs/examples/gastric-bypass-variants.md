@@ -10,7 +10,7 @@ clinical baseline.
 - Resources carry a capacity cost rate and a unit cost, in the one currency the project declares.
 - The platforms are the variants of one `variation`, and a `TradeStudy` scores their workflows by the derived cost.
 
-The numbers are invented for illustration; this is a modelling example, not a cost study.
+The numbers are invented for illustration; this is a modelling example, not a cost study. Run `memo evaluate` in the example to see each platform's derived cost, duration and success, and which platform the trade study selects.
 
 [Open the source model](https://github.com/memoarchitect/memo/tree/main/examples/gastric-bypass-variants).
 
