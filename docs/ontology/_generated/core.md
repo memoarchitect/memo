@@ -76,6 +76,15 @@
 | [`TraceBaseline`](../sysml-api/core/semantics/semantics.md#tracebaseline) | `metadata def` | Trace baseline definition. |
 | [`Provenance`](../sysml-api/core/semantics/semantics.md#provenance) | `metadata def` | Marks an element as the rationale/provenance carrier for a decision. |
 
+**Stdlib**
+
+| Element | SysML kind | What it is |
+| --- | --- | --- |
+| [`MoneyValue`](../sysml-api/core/stdlib/money/money.md#moneyvalue) | `attribute def` | Money value definition specializing `ScalarQuantityValue`. |
+| [`CurrencyUnit`](../sysml-api/core/stdlib/money/money.md#currencyunit) | `attribute def` | Currency unit definition specializing `SimpleUnit`. |
+| [`CostRateValue`](../sysml-api/core/stdlib/money/money.md#costratevalue) | `attribute def` | Cost rate value definition specializing `ScalarQuantityValue`. |
+| [`CostRateUnit`](../sysml-api/core/stdlib/money/money.md#costrateunit) | `attribute def` | Cost rate unit definition specializing `DerivedUnit`. |
+
 **Terminology**
 
 | Element | SysML kind | What it is |
