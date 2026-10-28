@@ -26,12 +26,12 @@ The operational perspective answers **why, for whom, and in what context**.
 | `Actor`, `User`, `Stakeholder` | Who has a goal or responsibility | `Initiates`, `Performs`, `HasConcern` |
 | `IntendedUse`, `ReasonablyForeseeableMisuse`, `UseContext`, `Need` (needKind: stakeholder) | Purpose, foreseeable misuse, setting, and desired outcome | `Motivates`, `DerivesFrom` |
 | `UseCase` with `UseCaseKind` | A clinical, service, manufacturing, or development goal | `Motivates`, `Supports`, `Validates` |
-| `OperationalWorkflow`, `WorkflowStep` | Reusable organization of work | `Supports`, `StepPrecedes` |
-| `MemoScenario[scenarioKind=operative]` | A nominal, alternate, or exception path | `Selects`, `Realizes` |
-| `OperationalActivity`, `UserTask` | Work performed along a path | `Performs`, `Enables`; optional extensions may add resource details |
+| `OperationalWorkflow` | Reusable organization of work | `Supports`, `StepPrecedes` |
+| `OperativeScenario` | A nominal, alternate, or exception path | `Selects`, `Realizes` |
+| `OperativeAction` | Work performed along a path | `Performs`, `Enables`; optional extensions may add resource details |
 
-**Core split:** `UseCase → OperationalWorkflow → MemoScenario[scenarioKind=operative] →
-OperationalActivity → action flow → SystemFunction`. A scenario owns the
+**Core split:** `UseCase → OperationalWorkflow → OperativeScenario →
+OperativeAction → action flow → SystemFunction`. A scenario owns the
 activity and action flow for its selected path; it is not a copy of the
 workflow.
 
@@ -59,7 +59,7 @@ of a software, electronics, or mechanical choice.
 | --- | --- | --- |
 | `SystemFunction` | A technology-independent responsibility | `Enables`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
 | `FunctionalFlow` | Reusable organization and order of functions; a step is `action <step> :> <function>` nested in the flow | `perform`, `flow`, `succession` |
-| `MemoScenario[scenarioKind=functional]` | The function path for one operational scenario | `selectedFlow`, `Realizes` |
+| `FunctionalFlow` | The function path that carries out one operational scenario | `Realizes` |
 | `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | a named `flow` from one function's `out` parameter to another's `in`; `allocate` to a component exchange |
 | `SystemAction` | Executable behavior realizing a function | `Performs` |
 
@@ -123,9 +123,9 @@ implemented units; system and validation cases verify claims and use context.
 | --- | --- | --- | --- |
 | `Need` (needKind: stakeholder) | `Motivates` | `UseCase` | Why does this goal matter? |
 | `OperationalWorkflow` | `Supports` | `UseCase` | How is work organized? |
-| `MemoScenario[scenarioKind=operative]` | `Selects` | `WorkflowStep` | Which path is considered? |
-| `MemoScenario[scenarioKind=functional]` | `Realizes` | `MemoScenario[scenarioKind=operative]` | What functional path realizes it? |
-| `SystemFunction` | `Enables` | `OperationalActivity` | What enables the work? |
+| `OperativeScenario` | `Selects` | `OperationalWorkflow` | Which path is considered? |
+| `FunctionalFlow` | `Realizes` | `OperativeScenario` | What functional path realizes it? |
+| `SystemFunction` | `Enables` | `OperativeAction` | What enables the work? |
 | `SystemFunction` | `AllocatedTo` | logical or implementation element | Who is responsible? |
 | software / physical element | `Realizes` / `Realizes` | `LogicalComponent` | How is it realized? |
 | requirement or control | `VerifiedBy` | `VerificationCase` | How is it checked? |

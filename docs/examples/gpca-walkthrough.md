@@ -97,8 +97,8 @@ question through the layers:
 
 ```mermaid
 flowchart LR
-    Patient[PatientUser] --> Request[OperationalActivity: request bolus]
-    Request --> Scenario[MemoScenario (operative): bolus during lockout]
+    Patient[PatientUser] --> Request[OperativeAction: request bolus]
+    Request --> Scenario[OperativeScenario: bolus during lockout]
     Scenario --> Chain[FunctionalFlow: patient bolus]
     Chain --> Limit[SystemFunction: enforce limits]
     Limit --> IM[SoftwareComponent: Infusion_Manager]
@@ -143,7 +143,7 @@ action flow with the operational steps for this particular path. A different
 scenario has a different activity; it is not one shared generic activity.
 
 ```sysml
-action oaRejectBolusDuringLockout : OperationalActivity {
+action oaRejectBolusDuringLockout : OperativeAction {
     @MemoIdentity { :>> label = "RejectBolusDuringLockout"; }
     action checkLockout; action rejectAndLog;
     first start then checkLockout;
@@ -151,7 +151,7 @@ action oaRejectBolusDuringLockout : OperationalActivity {
     first rejectAndLog then done;
 }
 
-action osLockoutBolus : MemoScenario {
+action osLockoutBolus : OperativeScenario {
     @MemoIdentity { :>> label = "BolusRequestDuringLockout"; }
     attribute :>> scenarioKind = ScenarioKind::operative;
     attribute :>> variantKind = ScenarioVariantKind::alternate;
@@ -196,7 +196,7 @@ view gpcaScenarioSequenceView : MemoDiagramView {
     attribute :>> viewKind = DiagramViewKind::sequence;
     part :>> selectionQuery {
         attribute :>> includeElementKinds =
-            ("MemoScenario[scenarioKind=functional]", "MemoScenario[scenarioKind=operative]", "FunctionalFlow");
+            ("OperativeScenario", "FunctionalFlow");
         attribute :>> includeLayers = ("operational", "system");
         attribute :>> selectionExpression = "product == 'GPCA'";
     }
@@ -304,8 +304,8 @@ Unlike the focused tutorials, this model is populated all the way through. It is
 
 | Layer | Element types it uses | Reference |
 | --- | --- | --- |
-| Operational | `ArchitectureDescription`, `OperationalActivity`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User`, `WorkflowStep` | [Operational](../ontology/operational.md) |
-| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `MemoScenario[scenarioKind=functional]`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../ontology/functional.md) |
+| Operational | `ArchitectureDescription`, `OperativeAction`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
+| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../ontology/functional.md) |
 | Logical | `ComponentExchange`, `Interface`, `InterfaceItem`, `LogicalComponent`, `SoftwarePort` | [Logical](../ontology/logical.md) |
 | Implementation and realization | `HardwareAssembly`, `PhysicalPort`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../ontology/implementation.md) |
 | Assurance | `Benefit`, `CyberHazard`, `CyberMitigation`, `CyberRisk`, `CybersecurityAsset`, `DetectionMethod`, `Evidence`, `FMEAAction`, `FMEAWorksheet`, `FailureCause` … +32 | [Assurance](../reference/areas/assurance.md) |
