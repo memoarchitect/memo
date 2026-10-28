@@ -153,7 +153,7 @@ package memo_examples_gastric_bypass_variants {
     part def Stapler specializes WorkflowResource;
     variation part platform : SurgicalPlatform {
         @MemoIdentity { :>> label = "Surgical platform"; }
-        variant part laparoscopicTower : SurgicalPlatform {
+        variant part laparoscopicTower {
             @MemoIdentity { :>> label = "Laparoscopic"; }
             perform wfRouxEnYLap.scLapNominal.establishAccess;
             perform wfRouxEnYLap.scLapNominal.createPouch;
@@ -162,7 +162,7 @@ package memo_examples_gastric_bypass_variants {
             attribute :>> origin = SystemOriginKind::external;
             attribute :>> capacityCostRate = 120 [EUR/h];
         }
-        variant part ourRobot : SurgicalPlatform {
+        variant part ourRobot {
             @MemoIdentity { :>> label = "Our robot"; }
             perform wfRouxEnYOur.scOurNominal.establishAccess;
             perform wfRouxEnYOur.scOurNominal.createPouch;
@@ -170,7 +170,7 @@ package memo_examples_gastric_bypass_variants {
             attribute :>> origin = SystemOriginKind::internal;
             attribute :>> capacityCostRate = 650 [EUR/h];
         }
-        variant part competitorRobot : SurgicalPlatform {
+        variant part competitorRobot {
             @MemoIdentity { :>> label = "Competitor robot"; }
             perform wfRouxEnYCmp.scCmpNominal.establishAccess;
             perform wfRouxEnYCmp.scCmpNominal.createPouch;
