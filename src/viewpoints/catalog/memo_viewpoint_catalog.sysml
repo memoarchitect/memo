@@ -14,138 +14,138 @@ package memo_viewpoints_catalog {
 
     // ── Content and context ─────────────────────────────────────
     viewpoint vpModelContent : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-001"; :>> label = "ModelContentViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-001"; :>> label = "Model content"; }
         attribute :>> purpose = "Browse the model tree and package structure.";
         attribute :>> defaultViewKind = DiagramViewKind::browser;
     }
     viewpoint vpSystemContext : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-002"; :>> label = "SystemContextViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-002"; :>> label = "System context"; }
         attribute :>> purpose = "System of interest, actors, external systems, and context exchanges.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     // ── Operational world ───────────────────────────────────────
     viewpoint vpUseCase : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-003"; :>> label = "UseCaseViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-003"; :>> label = "Use case"; }
         attribute :>> purpose = "Use cases, initiating users, supporting actors, and motivating needs.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     viewpoint vpClinicalWorkflow : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-004"; :>> label = "ClinicalWorkflowViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-004"; :>> label = "Clinical workflow"; }
         attribute :>> purpose = "Workflow steps, decisions, parallel work, handoffs, and roles.";
         attribute :>> defaultViewKind = DiagramViewKind::actionflow;
     }
     viewpoint vpScenario : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-005"; :>> label = "ScenarioViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-005"; :>> label = "Scenario"; }
         attribute :>> purpose = "Selected paths through workflows: variants, conditions, variation points.";
         attribute :>> defaultViewKind = DiagramViewKind::actionflow;
     }
     // ── Functional ──────────────────────────────────────────────
     viewpoint vpFunctionalArchitecture : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-006"; :>> label = "FunctionalArchitectureViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-006"; :>> label = "Functional architecture"; }
         attribute :>> purpose = "System functions, capabilities, and functional exchanges.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     viewpoint vpFunctionalFlow : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-007"; :>> label = "FunctionalFlowViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-007"; :>> label = "Functional flow"; }
         attribute :>> purpose = "Ordered functional flows and their steps.";
         attribute :>> defaultViewKind = DiagramViewKind::actionflow;
     }
     // ── Logical ─────────────────────────────────────────────────
     viewpoint vpLogicalArchitecture : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-008"; :>> label = "LogicalArchitectureViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-008"; :>> label = "Logical architecture"; }
         attribute :>> purpose = "Logical components, channels, and allocations.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     viewpoint vpSystemDecomposition : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-009"; :>> label = "SystemDecompositionViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-009"; :>> label = "System decomposition"; }
         attribute :>> purpose = "Composition hierarchy of the system of interest.";
         attribute :>> defaultViewKind = DiagramViewKind::browser;
     }
     viewpoint vpInternalInterconnection : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-010"; :>> label = "InternalInterconnectionViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-010"; :>> label = "Internal interconnection"; }
         attribute :>> purpose = "Ports, connectors, and exchanges inside a component boundary.";
         attribute :>> defaultViewKind = DiagramViewKind::interconnection;
     }
     // ── Implementation ──────────────────────────────────────────
     viewpoint vpSoftwareModule : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-011"; :>> label = "SoftwareModuleViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-011"; :>> label = "Software module"; }
         attribute :>> purpose = "IEC 62304 module structure: systems, items, units, SOUP.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     viewpoint vpSoftwareComponents : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-012"; :>> label = "SoftwareComponentViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-012"; :>> label = "Software components"; }
         attribute :>> purpose = "Runtime component-and-connector structure with concurrency and scheduling.";
         attribute :>> defaultViewKind = DiagramViewKind::interconnection;
     }
     viewpoint vpHardwareArchitecture : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-013"; :>> label = "HardwareArchitectureViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-013"; :>> label = "Hardware architecture"; }
         attribute :>> purpose = "Electronic/electrical structure and processing platform.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     viewpoint vpPhysicalArchitecture : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-014"; :>> label = "PhysicalArchitectureViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-014"; :>> label = "Physical architecture"; }
         attribute :>> purpose = "Mechanical, fluidic, optical, and other physical realization.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     viewpoint vpDeviceComposition : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-015"; :>> label = "DeviceCompositionViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-015"; :>> label = "Device composition"; }
         attribute :>> purpose = "Device definitions, instances, accessories, and consumables.";
         attribute :>> defaultViewKind = DiagramViewKind::browser;
     }
     viewpoint vpNetworkDeployment : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-016"; :>> label = "NetworkDeploymentViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-016"; :>> label = "Network deployment"; }
         attribute :>> purpose = "Deployment units on processing nodes and network topology.";
         attribute :>> defaultViewKind = DiagramViewKind::interconnection;
     }
     // ── Interaction and behavior ────────────────────────────────
     viewpoint vpUiFlow : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-017"; :>> label = "UiFlowViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-017"; :>> label = "UI flow"; }
         attribute :>> purpose = "Interaction flows, UI states, and transitions.";
         attribute :>> defaultViewKind = DiagramViewKind::statetransition;
     }
     viewpoint vpStateMode : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-018"; :>> label = "StateModeViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-018"; :>> label = "State and mode"; }
         attribute :>> purpose = "System states, device modes, and transitions.";
         attribute :>> defaultViewKind = DiagramViewKind::statetransition;
     }
     viewpoint vpSequenceInteraction : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-019"; :>> label = "SequenceInteractionViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-019"; :>> label = "Sequence interaction"; }
         attribute :>> purpose = "Ordered message exchanges between participants in a scenario.";
         attribute :>> defaultViewKind = DiagramViewKind::sequence;
     }
     // ── Assurance ───────────────────────────────────────────────
     viewpoint vpRequirementsTraceability : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-020"; :>> label = "RequirementsTraceabilityViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-020"; :>> label = "Requirements traceability"; }
         attribute :>> purpose = "Needs → requirements → architecture → verification trace matrix.";
         attribute :>> defaultViewKind = DiagramViewKind::grid;
     }
     viewpoint vpRiskChain : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-021"; :>> label = "RiskChainViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-021"; :>> label = "Risk chain"; }
         attribute :>> purpose = "ISO 14971 chain: hazard → hazardous situation → harm with controls.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     viewpoint vpCybersecurity : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-022"; :>> label = "CybersecurityViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-022"; :>> label = "Cybersecurity"; }
         attribute :>> purpose = "Assets, threats, trust boundaries, and security controls.";
         attribute :>> defaultViewKind = DiagramViewKind::general;
     }
     viewpoint vpHumanFactors : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-023"; :>> label = "HumanFactorsViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-023"; :>> label = "Human factors"; }
         attribute :>> purpose = "Users, tasks, use errors, and hazard-related use scenarios.";
         attribute :>> defaultViewKind = DiagramViewKind::grid;
     }
     viewpoint vpVerificationCoverage : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-024"; :>> label = "VerificationCoverageViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-024"; :>> label = "Verification coverage"; }
         attribute :>> purpose = "Verification cases against requirements and functions.";
         attribute :>> defaultViewKind = DiagramViewKind::grid;
     }
     viewpoint vpValidationCoverage : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-025"; :>> label = "ValidationCoverageViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-025"; :>> label = "Validation coverage"; }
         attribute :>> purpose = "Validation cases against use cases and critical tasks.";
         attribute :>> defaultViewKind = DiagramViewKind::grid;
     }
     viewpoint vpEvidenceTraceability : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-026"; :>> label = "EvidenceTraceabilityViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-026"; :>> label = "Evidence traceability"; }
         attribute :>> purpose = "Evidence records back to the cases and elements they support.";
         attribute :>> defaultViewKind = DiagramViewKind::grid;
     }
@@ -154,14 +154,14 @@ package memo_viewpoints_catalog {
     // SoftwareComponents realizing a functional OperativeScenario. The viewpoint is the
     // reusable spec; the diagram of a specific model is the view.
     viewpoint vpSoftwareSequence : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-027"; :>> label = "SoftwareSequenceViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-027"; :>> label = "Software sequence"; }
         attribute :>> purpose = "Runtime message ordering between software components along a functional scenario.";
         attribute :>> defaultViewKind = DiagramViewKind::sequence;
     }
     // The first cataloged viewpoint to resolve to `geometry`: screen regions
     // carry authored RegionBounds, so a geometry view draws modelled facts.
     viewpoint vpUILayout : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CAT-028"; :>> label = "UILayoutViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CAT-028"; :>> label = "UI layout"; }
         attribute :>> purpose = "Captured screens with their marked regions and the UI elements those regions present.";
         attribute :>> defaultViewKind = DiagramViewKind::geometry;
     }

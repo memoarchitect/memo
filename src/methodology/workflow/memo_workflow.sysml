@@ -21,13 +21,18 @@ package memo_methodology_workflow {
     // order and says which step feeds which; it never holds a step back. Teams work
     // each layer independently and link their work as the other side appears.
     //
-    // What makes a step DONE is stated, not assumed, in two parts judged apart:
-    // own work  every `outputKinds` kind has an element in the workspace, and
-    // every rule the step `#DoneWhen`s has a subject there and no finding on
-    // it; links     every rule the step `#LinkedWhen`s has no finding. A link
-    // rule with no subject yet waits for the step that produces its subjects:
-    // that is another team's work, not this one's. A step that states none of
-    // these has no done criterion and is never reported as done.
+    // What makes a step DONE is stated, not assumed, in two parts
+    // judged apart:
+    //   own work  every `outputKinds` kind has an element in the workspace, and every
+    //             rule the step `#DoneWhen`s has a subject there and no finding on it;
+    //   links     every rule the step `#LinkedWhen`s has no finding. A link rule with
+    //             no subject yet waits for the step that produces its subjects: that
+    //             is another team's work, not this one's.
+    // A step that states none of these has no done criterion and is never reported as done.
+    //
+    // A step is read by people as its `@MemoIdentity` label, a verb phrase ("Connect the components");
+    // `objectiveDescription` says how it is done and `exitCriteria` when. Its row on the method map is
+    // the `MethodLayer` that names its `stage`.
     action def MethodologyWorkflowStep :> MemoAction {
         @MemoIdentity { :>> label = "Methodology workflow step"; }
         attribute stage : WorkflowStageKind;
@@ -45,6 +50,25 @@ package memo_methodology_workflow {
         attribute outputKinds : String[0..*];
         // The viewpoint that opens this step in the Guide. (`viewpoint` is a SysML keyword.)
         ref guideViewpoint : MemoViewpoint[0..1];
+    }
+
+    // A row of the method map: a layer of the architecture, or an assurance discipline. Its label is
+    // what the map calls it ("Logical"), its doc the question it answers ("How the system will work").
+    // Rows are listed in the order the methodology declares them, each side apart. A row holds the steps
+    // whose `stage` it names, at whichever level is being worked, numbered in the methodology's order: a
+    // step names its stage, never its row, so the grouping has one authority. The row's viewpoints are
+    // the ones its views are made in, in the order they are offered.
+    part def MethodLayer :> MemoPart {
+        attribute axis : MethodAxisKind;
+        attribute stages : WorkflowStageKind[1..*];
+        ref layerViewpoints : MemoViewpoint[0..*];
+        // For a discipline: the standard it is worked to, as the map writes it ("ISO 14971").
+        attribute standardReference : String[0..1];
+        // For a discipline: how its work links to the layers, as one line.
+        attribute linkDescription : String[0..1];
+        // True when its work often exists already in another tool and is imported (CSV, ReqIF), per system;
+        // a re-import flags the links to review.
+        attribute importable : Boolean[0..1];
     }
 
     metadata def DoneWhen :> MemoTypedDependency {
