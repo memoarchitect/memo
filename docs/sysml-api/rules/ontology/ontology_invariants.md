@@ -762,10 +762,10 @@ constraint def FunctionIsNotPerformedFromLevelOneRule :> MemoConsistencyRule
     // Nothing here is a kind list: each rule reads the subject's type and the `performs` and
     // `realizes` edges the builder already produces. Rule 6 of the plan, that every variant of a
     // `TradeStudy` refines every step compared, is not written: the builder does not yet surface a
-    // trade study's alternatives (board row "Operational levels: TradeStudy completeness rule").
+    // trade study's alternatives (board row "Operational levels: the `TradeStudy` is not a model element, so plan rule 6 is unwritten").
     // Nor is the rule that a project declares one currency: a currency unit is a package-level attribute
     // usage, which the builder does not build as an element, and a money value reaches a rule only as
-    // text such as "5 [euro]" (board row "Operational levels: one-currency rule cannot see the unit").
+    // text such as "5 [euro]" (board row "Operational levels: the one-currency rule cannot see the currency unit").
     package memo_rules_ontology {
         private import ScalarValues::*;
 
