@@ -26,7 +26,6 @@
 | private | `memo_core_stdlib_quantities::*` |
 | private | `Metaobjects::SemanticMetadata` |
 | private | `ScalarValues::*` |
-| private | `MeasurementReferences::DimensionOneValue` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_relationships::*` |
@@ -144,7 +143,6 @@ connection def AssessesDifficulty :> MemoRelationship
         private import memo_core_stdlib_quantities::*;
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
-        private import MeasurementReferences::DimensionOneValue;
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;

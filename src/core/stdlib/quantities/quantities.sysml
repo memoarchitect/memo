@@ -19,4 +19,5 @@ package memo_core_stdlib_quantities {
     public import ISQ::*;
     public import SI::*;
     public import SIPrefixes::*;
+    public import MeasurementReferences::DimensionOneValue;
 }

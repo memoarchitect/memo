@@ -25,6 +25,8 @@
 | --- | --- |
 | private | `ScalarValues::*` |
 | public | `BaseFunctions::*` |
+| public | `ControlFunctions::*` |
+| public | `SequenceFunctions::*` |
 
 ## Declarations
 
@@ -43,6 +45,8 @@
         private import ScalarValues::*;
 
         public import BaseFunctions::*;
+        public import ControlFunctions::*;
+        public import SequenceFunctions::*;
     }
 
     ```
