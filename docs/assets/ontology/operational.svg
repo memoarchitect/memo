@@ -75,7 +75,7 @@
 <g opacity="1">
   <rect x="720" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="720" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="825" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="825" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
   <text x="825" y="265" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">OperationalWorkflow</text>
   
 </g>

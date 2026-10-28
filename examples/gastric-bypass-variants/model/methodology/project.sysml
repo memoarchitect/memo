@@ -8,6 +8,12 @@ package memo_examples_gastric_bypass_variants_project {
 
     private import memo_examples_gastric_bypass_variants::*;
 
+    // The clinical extension brings the anatomy extension with it. The anatomy the model uses is
+    // generated from FMA into a library of its own (`memo anatomy generate`), from the selector below.
+    public import memo_extension_clinical::*;
+    public import gastric_bypass_variants_anatomy_fma::*;
+    part upperGi :> upperGastrointestinal;
+
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
     part projectBinding : ModelMethodBinding {

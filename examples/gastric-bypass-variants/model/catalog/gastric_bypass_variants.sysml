@@ -8,7 +8,8 @@
 // it carries out and carries the time, success probability and instruments. The platforms are the
 // variants of one variation, so "current", "ours" and "a competitor's" are variants and not a state.
 // The roll-ups of memo_architecture_operational_rollups derive each workflow's cost and duration,
-// and `bypassTradeStudy` scores the three by them.
+// and `bypassTradeStudy` scores the three by them. A platform is a resource too, so its rate is
+// built from capital, service and practical capacity, as time-driven activity-based costing does.
 package memo_examples_gastric_bypass_variants {
     private import ScalarValues::*;
     private import ModelingMetadata::*;
@@ -25,6 +26,8 @@ package memo_examples_gastric_bypass_variants {
     private import memo_architecture_operational_scenarios::*;
     private import memo_architecture_operational_rollups::*;
     private import memo_architecture_logical_structure::*;
+    private import memo_extension_clinical::*;
+    private import gastric_bypass_variants_anatomy_fma::*;
     private import memo_architecture_functional_functions::*;
 
     private import memo_core_common::*;
@@ -37,9 +40,9 @@ package memo_examples_gastric_bypass_variants {
     part surgicalTeam : OperationalEntity {
         @MemoIdentity { :>> label = "BariatricSurgicalTeam"; }
     }
-    part def AnatomicalSite specializes MemoPart;
-    part stomach : AnatomicalSite;
-    part jejunum : AnatomicalSite;
+    // The anatomy is FMA's, generated into the project's anatomy library (see the project file).
+    part stomach : Stomach;
+    part jejunum : Jejunum;
 
     use case ucRouxEnY : UseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
@@ -68,7 +71,7 @@ package memo_examples_gastric_bypass_variants {
         ref :>> targets = stomach;
     }
 
-    part wfRouxEnY : OperationalWorkflow {
+    part wfRouxEnY : ClinicalProcedureWorkflow {
         @MemoIdentity { :>> label = "RouxEnYGastricBypassWorkflow"; }
         attribute :>> entryCondition = "patient prepared; time-out complete";
         attribute :>> completionCondition = "pouch and anastomosis created and leak-tested";
@@ -109,7 +112,6 @@ package memo_examples_gastric_bypass_variants {
     action fnFireStapler : SystemFunction;
 
     // ── The platforms: variants of one variation ─────────────────
-    // A platform is a resource: its rate is built from capital, service and practical capacity.
     abstract part def SurgicalPlatform specializes System, MemoResource;
     part def Stapler specializes WorkflowResource;
     variation part platform : SurgicalPlatform {
