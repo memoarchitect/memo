@@ -81,6 +81,8 @@
 | [`InternalSystemActivityPerformsAFunctionRule`](#internalsystemactivityperformsafunctionrule) | `constraint def` | Constraint that checks internal system activity performs afunction rule. | `MemoConsistencyRule` |
 | [`FunctionIsNotPerformedFromLevelOneRule`](#functionisnotperformedfromlevelonerule) | `constraint def` | Constraint that checks function is not performed from level one rule. | `MemoConsistencyRule` |
 | [`ProjectDeclaresOneCurrencyRule`](#projectdeclaresonecurrencyrule) | `constraint def` | Constraint that checks project declares one currency rule. | `MemoConsistencyRule` |
+| [`LevelOneScenarioCarriesNoLikelihoodRule`](#levelonescenariocarriesnolikelihoodrule) | `constraint def` | Constraint that checks level one scenario carries no likelihood rule. | `MemoConsistencyRule` |
+| [`LevelOneWorkflowCarriesNoCostRule`](#leveloneworkflowcarriesnocostrule) | `constraint def` | Constraint that checks level one workflow carries no cost rule. | `MemoConsistencyRule` |
 
 ## ContainmentAcyclicRule
 
@@ -757,6 +759,36 @@ constraint def ProjectDeclaresOneCurrencyRule :> MemoConsistencyRule
 | Owning package | `memo_rules_ontology` |
 
 
+## LevelOneScenarioCarriesNoLikelihoodRule
+
+```sysml
+constraint def LevelOneScenarioCarriesNoLikelihoodRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks level one scenario carries no likelihood rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## LevelOneWorkflowCarriesNoCostRule
+
+```sysml
+constraint def LevelOneWorkflowCarriesNoCostRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Constraint that checks level one workflow carries no cost rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
 ## Source
 
 ??? code "rules/ontology/ontology_invariants.sysml"
@@ -768,7 +800,7 @@ constraint def ProjectDeclaresOneCurrencyRule :> MemoConsistencyRule
     // Structural invariants (endpoint existence, cycle freedom) are expressed over
     // the typed relations introduced in 0.5 — typed references make them checkable.
     //
-    // Operational levels (CR-ONT-093..098). A use case is at the level of its subject: an
+    // Operational levels (CR-ONT-093..100). A use case is at the level of its subject: an
     // `OperationalEntity` is level 1 (clinical, no product, no number), a `System` or `SystemOfSystems`
     // is level 2 (one variant of a platform, which carries every number). The level of a step is the
     // level of the use case its workflow `realizesUseCase`. The workflow is reached from the step by
@@ -1519,6 +1551,28 @@ constraint def ProjectDeclaresOneCurrencyRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A project states every amount in one currency, declared once as a currency unit. No conversion between currencies is modelled, so two currency units make every sum across them meaningless.";
             attribute predicateExpression = "allOfKind('CurrencyUnit')->size() <= 1";
+            constraint { true }
+        }
+        constraint def LevelOneScenarioCarriesNoLikelihoodRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-099"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "OperativeScenario";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "How likely a path is differs by platform (a robot and a laparoscopic tower do not convert to open at the same rate), so a scenario of a level-1 workflow carries no likelihood; it is set on the level-2 scenario of each variant.";
+            attribute predicateExpression = "attributes.likelihood == '' or not(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity)))))";
+            constraint { true }
+        }
+        constraint def LevelOneWorkflowCarriesNoCostRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-100"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "OperationalWorkflow";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "What a procedure costs apart from its activities (set-up, capital per case) depends on the platform, so a level-1 workflow carries no per-procedure cost; it is set on the workflow of each level-2 variant.";
+            attribute predicateExpression = "attributes.perProcedureCost == '' or not(downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))";
             constraint { true }
         }
     }
