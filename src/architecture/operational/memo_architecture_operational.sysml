@@ -12,6 +12,7 @@ package memo_architecture_operational {
     public import memo_architecture_operational_context_actors::*;
     public import memo_architecture_operational_context_stakeholders::*;
     public import memo_architecture_operational_context_use_context::*;
+    public import memo_architecture_operational_rollups::*;
     public import memo_architecture_operational_scenarios::*;
     public import memo_architecture_operational_structure::*;
     public import memo_architecture_operational_use_cases::*;

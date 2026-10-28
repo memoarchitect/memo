@@ -25,6 +25,7 @@ package memo_architecture_operational_workflows {
     private import ScalarValues::*;
 
     private import memo_core_stdlib_quantities::*;
+    private import memo_core_stdlib_money::*;
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
@@ -34,15 +35,6 @@ package memo_architecture_operational_workflows {
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_use_cases::*;
 
-    // As-is vs. to-be vs. contingency is a typed dimension of the workflow,
-    // not a name suffix.
-    enum def WorkflowStateKind {
-        enum asIs;
-        enum toBe;
-        enum contingency;
-        enum deprecated;
-    }
-
     enum def StepTransformationKind {
         enum preserves;
         enum automates;
@@ -51,13 +43,15 @@ package memo_architecture_operational_workflows {
     }
 
     part def OperationalWorkflow specializes MemoPart {
-        attribute workflowState : WorkflowStateKind;
         // Where the body of work starts and ends. A scenario's pre- and
         // post-conditions are its own path's, inside these.
         attribute entryCondition : String;
         attribute completionCondition : String;
         attribute recoveryPathSummary : String;
         attribute timingConstraints : String;
+        // What one procedure costs apart from its activities (set-up, capital per case); a number,
+        // so it is set on a level-2 variant's workflow, never on level 1.
+        attribute perProcedureCost : MoneyValue[0..1];
         // The context and environment of use (IEC 62366-1 5.1), as modelled
         // elements rather than a sentence: the care setting, jurisdiction and
         // connected use are UseContext's, lighting and noise UseEnvironment's.
@@ -132,9 +126,10 @@ package memo_architecture_operational_workflows {
     // that each implied a different target type are now two typed refs plus
     // this one plain relation.
 
-    // ── Workflow transformation (as-is → to-be) ──────────────────
-    // Transforms unifies TransformsStep / TransformsWorkflow / ReplacesWorkflow
-    // (tailoring of workflow structure: as-is → to-be), keyed by transformKind.
+    // ── Technique change ─────────────────────────────────────────
+    // Transforms relates a step of one level-1 technique variant of a workflow to the step of
+    // the other that preserves, automates, augments or eliminates it. Two platforms' activities
+    // correspond through the level-1 step both refine, not through this.
     enum def TransformKind {
         enum step;
         enum workflow;

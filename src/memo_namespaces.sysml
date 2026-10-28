@@ -16,6 +16,7 @@ package memo {
     public import memo_architecture_operational_activities::*;
     public import memo_architecture_operational_workflows::*;
     public import memo_architecture_operational_scenarios::*;
+    public import memo_architecture_operational_rollups::*;
     public import memo_assurance_human_factors::*;
     public import memo_architecture_implementation_ui::*;
     public import memo_architecture_operational_structure::*;
@@ -155,6 +156,10 @@ package memo_namespace_assurance_requirements_needs {
     public import memo_assurance_requirements_needs::*;
 }
 
+package memo_namespace_rollups {
+    public import memo_architecture_operational_rollups::*;
+}
+
 package memo_namespace_scenarios {
     public import memo_architecture_operational_scenarios::*;
 }
@@ -219,6 +224,7 @@ package memo_namespace_architecture {
         alias structure for memo_namespace_architecture_operational;
         alias activities for memo_namespace_activities;
         alias context for memo_namespace_context;
+        alias rollups for memo_namespace_rollups;
         alias scenarios for memo_namespace_scenarios;
         alias use_cases for memo_namespace_use_cases;
         alias workflows for memo_namespace_workflows;

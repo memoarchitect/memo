@@ -6,6 +6,15 @@
 // guidance) and it must trace to usability validation. Task difficulty belongs
 // to an action performed in a context (TaskDifficultyAssessment), never to an
 // instrument.
+//
+// An `OperativeAction` is a step at level 1 or an activity at level 2, by the use case whose
+// scenario it is in (memo_architecture_operational_use_cases). A level-1 step is structure: what
+// must happen to the patient, with `targets` at most, and no number. A level-2 activity is the
+// tuple surgical process modelling attaches to an activity: who (native `perform` from a role or
+// system part), what (the action), with what (`instruments`), on what (`targets`), and when
+// (`expectedDuration`, `plannedSuccessProbability`). What the system does to carry out an
+// activity is the `SystemFunction` it `perform`s. Measured values are evidence, not attributes
+// here. The roll-ups of these numbers are in memo_architecture_operational_rollups.
 package memo_architecture_operational_activities {
     private import memo_core_stdlib_quantities::*;
     private import Metaobjects::SemanticMetadata;
@@ -73,7 +82,6 @@ package memo_architecture_operational_activities {
         attribute trainingDemand : DemandLevelKind;
         attribute ergonomicDemand : DemandLevelKind;
         attribute environmentalDemand : DemandLevelKind;
-        attribute expectedDuration : DurationValue;
         attribute assessor : String;
         attribute assessmentMethod : String;
 

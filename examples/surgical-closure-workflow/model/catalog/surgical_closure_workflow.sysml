@@ -93,7 +93,6 @@ package memo_examples_surgical_closure_workflow {
 
     part wfSleeveGastrectomy : ClinicalProcedureWorkflow {
         @MemoIdentity { :>> providedId = "LSG-WF-001"; :>> label = "LaparoscopicSleeveGastrectomyWorkflow"; }
-        attribute :>> workflowState = WorkflowStateKind::toBe;
         attribute :>> entryCondition = "patient prepared; time-out ready";
         attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";

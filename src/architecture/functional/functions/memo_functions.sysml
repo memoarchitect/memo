@@ -15,11 +15,16 @@
 // a part, and a separate `action def OperativeAction` carried the behaviour with a
 // `ref performedFunction` stapling the two back together — a reference used in
 // ZERO example files. The ends are metaclass-neutral now (CR-ONT-060..073), so
-// the split has no cause and is gone: OperativeAction is merged into the function
-// family, and its `actionKind` moved onto MemoFunction where it was always
-// describing the function anyway. `FunctionalFlow` was the one element A0 left
-// behind on the part side; it is an `action def` now, for the same reason and
-// on the same evidence.
+// the function's split from a part has no cause and is gone: `MemoFunction` is an `action def`,
+// and `actionKind` sits on it, where it was always describing the function. `FunctionalFlow`
+// was the one element A0 left behind on the part side; it is an `action def` now, for the same
+// reason and on the same evidence.
+//
+// `OperativeAction` was NOT merged into the function family. It is a separate `action def` in
+// the operational layer (memo_architecture_operational_activities): a step of the work, which a
+// person or the system performs. The two are joined by native `perform`, not by a type: a
+// system-performed level-2 activity `perform`s the `SystemFunction` that carries it out, and
+// a function is performed only from such an activity or from a `FunctionalFlow` step.
 //
 // `functionCategory` and `actionKind` are NOT two spellings of one axis, and
 // merging them would lose information. `actionKind` is the verb — sense,
