@@ -16,7 +16,7 @@ package memo_methodology_profiles {
     private import memo_core_common::MemoIdentity;
     part mdCoreLibrary : MethodologyLibrary {
         @MemoIdentity { :>> providedId = "METHLIB-001"; :>> label = "MedicalDeviceMethodologyLibrary"; }
-        attribute :>> version = "0.16.3";
+        attribute :>> version = "0.16.4";
         attribute :>> domain = "medical device modeling";
         doc /* Methodology layer for selecting, restricting, sequencing, tailoring, and lightly extending use of the medical-device ontology. */
     }
@@ -37,7 +37,7 @@ package memo_methodology_profiles {
     // second scope authority.
     part mdDefaultDefinition : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "METH-MD-DEFAULT"; :>> label = "MedicalDeviceDefault"; }
-        attribute :>> version = "0.16.3";
+        attribute :>> version = "0.16.4";
         attribute :>> domain = "medical device modeling";
         doc /* MEMO default medical-device methodology. Selects every layer, discipline, standard, artifact kind, and viewpoint the resolved ontology and extension packages provide. */
         attribute :>> scopeMode = ScopeModeKind::allAvailable;
