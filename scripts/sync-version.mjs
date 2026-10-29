@@ -29,6 +29,7 @@ if (packageName === '@memoarchitect/ontology') {
     // They ship from this repo and carry the product's version, so they belong
     // under the same check rather than under the next person's memory.
     'extensions/aadl/memo.package.yaml',
+    'extensions/anatomy/memo.package.yaml',
     'extensions/clinical/memo.package.yaml',
     'extensions/cloud/memo.package.yaml',
     'extensions/container/memo.package.yaml',
