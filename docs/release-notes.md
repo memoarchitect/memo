@@ -2,6 +2,10 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.16.5
+
+- No change to the ontology. The version is raised so the three products keep one number: `@memoarchitect/tools` 0.16.5 and `@memoarchitect/architect` 0.16.5 pin this release.
+
 ## 0.16.4
 
 - **Operational levels.** A use case is at the level of its subject: an operational entity is level 1 (clinical, no number), a system or system of systems is level 2 (one variant of a platform, which carries every number). Rules `CR-ONT-093` to `101`: a use case's subject is at a level; a level-1 step, scenario and workflow carry no planned number, likelihood or cost; whatever refines a level-1 step is level 2; an activity an internal system performs performs a function; a function is not performed from level 1; a project declares one currency; every alternative of a trade study refines every step the others refine.
