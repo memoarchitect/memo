@@ -77,6 +77,15 @@ elements:
   "memo_examples_gastric_bypass_variants::assistant":
     shortId: "USR-1"
     uuid: "23869c72-e929-56d9-abc2-41906a52bfc4"
+  "memo_examples_gastric_bypass_variants::bypassTradeStudy":
+    shortId: "ACT-4"
+    uuid: "1c17c4d9-3f59-5329-804b-203726509cf0"
+  "memo_examples_gastric_bypass_variants::bypassTradeStudy::evaluationFunction":
+    shortId: "FNC-11"
+    uuid: "69aa9b12-18ed-5930-9f3e-58633bbb8826"
+  "memo_examples_gastric_bypass_variants::bypassTradeStudy::evaluationFunction::procedureCost":
+    shortId: "FNC-12"
+    uuid: "9b8b2461-d6aa-5472-885a-653630337758"
   "memo_examples_gastric_bypass_variants::costCmp":
     shortId: "FNC-1"
     uuid: "37a28ab3-3a82-5fe3-99ec-17fbbc935c2f"
