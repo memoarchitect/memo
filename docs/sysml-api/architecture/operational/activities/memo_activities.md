@@ -160,7 +160,7 @@ connection def AssessesDifficulty :> MemoRelationship
 
         // A probability: a dimensionless quantity between 0 and 1.
         attribute def ProbabilityValue :> DimensionOneValue {
-            assert constraint { self >= 0 and self <= 1 }
+            assert constraint { self >= 0 [one] and self <= 1 [one] }
         }
 
         // One operational action / step. Who performs it — a human actor or the

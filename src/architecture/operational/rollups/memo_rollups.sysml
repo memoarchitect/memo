@@ -37,10 +37,10 @@ package memo_architecture_operational_rollups {
     private import memo_architecture_operational_use_cases::*;
 
     calc def ActivitiesOf {
-        in step : MemoAction[1];
+        in owner : MemoAction[1];
         return activities : OperativeAction[0..*] = (
-            step.enclosedPerformances->select { in inner : MemoAction[1]; inner istype OperativeAction },
-            step.enclosedPerformances
+            owner.enclosedPerformances->select { in inner : MemoAction[1]; inner istype OperativeAction },
+            owner.enclosedPerformances
                 ->select { in inner : MemoAction[1];
                     inner istype OperativeAction or inner istype OperativeScenario or inner istype UseCase }
                 ->collect { in inner : MemoAction[1]; ActivitiesOf(inner) });
