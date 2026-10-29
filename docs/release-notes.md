@@ -2,6 +2,16 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.16.3
+
+- **Operational levels.** A use case is at the level of its subject: an operational entity is level 1 (clinical, no number), a system or system of systems is level 2 (one variant of a platform, which carries every number). Rules `CR-ONT-093` to `101`: a use case's subject is at a level; a level-1 step, scenario and workflow carry no planned number, likelihood or cost; whatever refines a level-1 step is level 2; an activity an internal system performs performs a function; a function is not performed from level 1; a project declares one currency; every alternative of a trade study refines every step the others refine.
+- **Money and resources.** `memo_core_stdlib_money` (`MoneyValue`, `CurrencyUnit`, `CostRateValue`): money is a quantity, in the one currency a project declares. `MemoResource` (abstract) carries `capacityCostRate` and `unitCost`; `User` and `WorkflowResource` specialize it. `WorkflowResource` has a `ResourceKind` and a numeric `quantity`, and `reprocessingDuration`.
+- **Activities and roll-ups.** `OperativeAction` gains `instruments`, `targets` and `plannedSuccessProbability`; `OperativeScenario` gains `likelihood`; `OperationalWorkflow` gains `perProcedureCost`. `memo_architecture_operational_rollups` derives cost, duration and success of a scenario and a procedure from them. `memo_core_stdlib_analysis` re-exports the trade-study library.
+- **Workflow, scenario, use case.** An operational workflow is a part, the analysis of one body of work (use context, environment, entry and completion); its scenarios hold the steps. A `Need` names the workflow it arises in and whether current practice meets it.
+- **Anatomy.** The anatomy extension: human anatomy from FMA 5.1.0, selected per project and generated into the project's own library. The clinical extension brings it in.
+- **Removed.** `WorkflowStateKind` and `workflowState` (variants and a trade study say it), `WorkflowResource.resolvedProduct` (specialization says which product), `TaskDifficultyAssessment.expectedDuration` (planned time is on the activity), and the clinical extension's `bodySiteCode` and `typicalDuration`. A model that sets one fails to compile.
+- **Changed.** A function link from a chain step to an operational activity is a `perform` in the activity. The retired operational names are out of the docs.
+
 ## 0.16.2
 
 - **Every view traces to a viewpoint.** New rule `CR-ONT-092`: a view that traces to no viewpoint is an error. The shipped examples keep a view under the viewpoint it traces to, or under `viewpoints/shared/` when it traces to several.
