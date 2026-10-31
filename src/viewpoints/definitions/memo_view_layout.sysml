@@ -133,6 +133,8 @@ package memo_viewpoints_definitions_layout {
         attribute labelVisible : Boolean[0..1];
         attribute lineStyle : MemoLayoutLineStyle[0..1];
         attribute route : Real[0..*] ordered;
+        /** A short token for the connector's ends, so a route is kept only while it still joins what it was drawn between. */
+        attribute attachment : String[0..1];
         attribute sourceElement : String[0..1];
         attribute targetElement : String[0..1];
         attribute sourcePortId : String[0..1];
