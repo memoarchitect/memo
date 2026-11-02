@@ -70,7 +70,7 @@ function checkEdge(where, edge, nodes) {
 const esc = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const W = 210;
 const H = 62;
-const COL = 340;
+const COL = 410;
 const ROW = 150;
 const PAD = 40;
 const position = ({ col, row }) => ({ x: PAD + col * COL, y: PAD + 30 + row * ROW });

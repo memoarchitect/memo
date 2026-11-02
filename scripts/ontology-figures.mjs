@@ -120,6 +120,429 @@ export const LAYER_FIGURES = [
     ],
   },
   {
+    id: 'functional',
+    title: 'Functional layer',
+    steps: [
+      {
+        title: 'The chain: a system function decomposes into component functions',
+        nodes: [
+          { id: 'sf', type: 'SystemFunction', col: 1, row: 0 },
+          { id: 'cf', type: 'ComponentFunction', col: 1, row: 1 },
+        ],
+        edges: [{ from: 'sf', to: 'cf', contains: true }],
+      },
+      {
+        title: 'Exchanges: a function passes something to another through a typed flow',
+        nodes: [{ id: 'cf2', type: 'ComponentFunction', col: 2, row: 1 }],
+        edges: [{ from: 'cf', to: 'cf2', native: 'flow' }],
+      },
+      {
+        title: 'Obligations: behaviour properties and timing constraints are requirements the functions meet',
+        nodes: [
+          { id: 'bp', type: 'BehaviorProperty', col: 0, row: 2 },
+          { id: 'tc', type: 'TimingConstraint', col: 2, row: 2 },
+        ],
+        edges: [
+          { from: 'bp', to: 'sf', native: 'satisfy' },
+          { from: 'tc', to: 'cf2', native: 'satisfy' },
+        ],
+      },
+      {
+        title: 'Behaviour and reuse: states and modes, a reusable route through responsibilities',
+        nodes: [
+          { id: 'sm', type: 'StateMachine', col: 0, row: 0 },
+          { id: 'mc', type: 'ModeConfiguration', col: 0, row: 1 },
+          { id: 'ff', type: 'FunctionalFlow', col: 2, row: 0 },
+        ],
+        edges: [
+          { from: 'sm', to: 'mc', contains: true },
+          { from: 'ff', to: 'sf', native: 'include' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'logical',
+    title: 'Logical layer',
+    steps: [
+      {
+        title: 'The hierarchy: a system, its subsystems, the components that make them up',
+        nodes: [
+          { id: 'sys', type: 'System', col: 1, row: 0 },
+          { id: 'sub', type: 'Subsystem', col: 1, row: 1 },
+          { id: 'lc', type: 'LogicalComponent', col: 1, row: 2 },
+        ],
+        edges: [
+          { from: 'sys', to: 'sub', contains: true },
+          { from: 'sub', to: 'lc', contains: true },
+        ],
+      },
+      {
+        title: 'Interfaces: components meet at their ports, over an exchange',
+        nodes: [
+          { id: 'lp', type: 'LogicalPort', col: 2, row: 2 },
+          { id: 'lp2', type: 'LogicalPort', col: 3, row: 2 },
+          { id: 'lc2', type: 'LogicalComponent', col: 3, row: 3 },
+        ],
+        edges: [
+          { from: 'lc', to: 'lp', contains: true },
+          { from: 'lc2', to: 'lp2', contains: true },
+          { from: 'lp', to: 'lp2', rel: 'ComponentExchange' },
+        ],
+      },
+      {
+        title: 'Independence and boundaries: channels that claim independence, and where faults must stop',
+        nodes: [
+          { id: 'ib', type: 'IsolationBoundary', col: 0, row: 2 },
+          { id: 'fcr', type: 'FaultContainmentRegion', col: 0, row: 3 },
+        ],
+        edges: [
+          { from: 'lc2', to: 'lc', rel: 'IndependentOf' },
+          { from: 'ib', to: 'lc', contains: true },
+          { from: 'fcr', to: 'lc2', contains: true },
+        ],
+      },
+      {
+        title: 'State: the modes of the logical solution',
+        nodes: [{ id: 'lb', type: 'LogicalBehavior', col: 2, row: 1 }],
+        edges: [{ from: 'lc', to: 'lb', contains: true }],
+      },
+    ],
+  },
+  {
+    id: 'implementation',
+    title: 'Implementation layer',
+    steps: [
+      {
+        title: 'Software: a system of modules, and what the modules contain',
+        nodes: [
+          { id: 'ss', type: 'SoftwareSystem', col: 1, row: 0 },
+          { id: 'sm', type: 'SoftwareModule', col: 1, row: 1 },
+          { id: 'alg', type: 'Algorithm', col: 0, row: 2 },
+          { id: 'dm', type: 'DataModel', col: 1, row: 2 },
+        ],
+        edges: [
+          { from: 'ss', to: 'sm', contains: true },
+          { from: 'sm', to: 'alg', contains: true },
+          { from: 'sm', to: 'dm', contains: true },
+        ],
+      },
+      {
+        title: 'Hardware: assemblies, the components inside them, the parts that meet the physical world',
+        nodes: [
+          { id: 'ha', type: 'HardwareAssembly', col: 3, row: 0 },
+          { id: 'hc', type: 'HardwareComponent', col: 3, row: 1 },
+          { id: 'sen', type: 'Sensor', col: 3, row: 2 },
+          { id: 'act', type: 'Actuator', col: 4, row: 2 },
+        ],
+        edges: [
+          { from: 'ha', to: 'hc', contains: true },
+          { from: 'hc', to: 'sen', contains: true },
+          { from: 'hc', to: 'act', contains: true },
+        ],
+      },
+      {
+        title: 'User interface: what the user operates, and the actions its elements trigger',
+        nodes: [
+          { id: 'ui', type: 'UserInterface', col: 1, row: 3 },
+          { id: 'uie', type: 'UIElement', col: 1, row: 4 },
+          { id: 'uia', type: 'UIAction', col: 2, row: 4 },
+        ],
+        edges: [
+          { from: 'ui', to: 'uie', contains: true },
+          { from: 'uie', to: 'uia', rel: 'ElementTriggersAction' },
+        ],
+      },
+      {
+        title: 'Third-party software: a module depends on SOUP',
+        nodes: [{ id: 'soup', type: 'SOUPSoftwareModule', col: 2, row: 1 }],
+        edges: [{ from: 'sm', to: 'soup', rel: 'DependsOnSoup' }],
+      },
+    ],
+  },
+  {
+    id: 'realization',
+    title: 'Realization layer',
+    steps: [
+      {
+        title: 'The deployment chain: modules build into a unit, the unit deploys to a node, the node is hosted by its board',
+        nodes: [
+          { id: 'sm', type: 'SoftwareModule', col: 0, row: 1 },
+          { id: 'sdu', type: 'SoftwareDeploymentUnit', col: 1, row: 1 },
+          { id: 'pn', type: 'ProcessingNode', col: 2, row: 1 },
+          { id: 'hc', type: 'HardwareComponent', col: 3, row: 1 },
+        ],
+        edges: [
+          { from: 'sm', to: 'sdu', rel: 'BuildsInto' },
+          { from: 'sdu', to: 'pn', rel: 'DeploysTo' },
+          { from: 'pn', to: 'hc', rel: 'HostedBy' },
+        ],
+      },
+      {
+        title: 'What the node provides: a runtime environment, and the memory it uses',
+        nodes: [
+          { id: 're', type: 'RuntimeEnvironment', col: 2, row: 2 },
+          { id: 'md', type: 'MemoryDevice', col: 1, row: 2 },
+        ],
+        edges: [
+          { from: 'pn', to: 're', rel: 'ProvidesEnvironment' },
+          { from: 'pn', to: 'md', contains: true },
+        ],
+      },
+      {
+        title: 'End to end: a flow traced across the layers, from specification to the units it crosses',
+        nodes: [
+          { id: 'e2e', type: 'EndToEndFlow', col: 1, row: 0 },
+          { id: 'fs', type: 'FlowSpecification', col: 2, row: 0 },
+        ],
+        edges: [
+          { from: 'e2e', to: 'fs', rel: 'FlowComprisesSpec' },
+          { from: 'e2e', to: 'sdu', rel: 'FlowTraversesBinding' },
+        ],
+      },
+      {
+        title: 'The physical boundary: the connector the outside world plugs into',
+        nodes: [{ id: 'pp', type: 'PhysicalPort', col: 4, row: 1 }],
+        edges: [{ from: 'hc', to: 'pp', contains: true }],
+      },
+    ],
+  },
+  {
+    id: 'requirements',
+    title: 'Requirements',
+    steps: [
+      {
+        title: 'The pair: a requirement derives from a need',
+        nodes: [
+          { id: 'need', type: 'Need', col: 0, row: 1 },
+          { id: 'req', type: 'Requirement', col: 2, row: 1 },
+        ],
+        edges: [{ from: 'need', to: 'req', rel: 'DerivesFrom' }],
+      },
+      {
+        title: 'Whose need, and what it motivates',
+        nodes: [
+          { id: 'user', type: 'User', col: 0, row: 0 },
+          { id: 'uc', type: 'UseCase', col: 1, row: 0 },
+        ],
+        edges: [
+          { from: 'need', to: 'user', rel: 'HeldBy' },
+          { from: 'need', to: 'uc', rel: 'Motivates' },
+        ],
+      },
+      {
+        title: 'Other drivers: risk and threat are drivers a requirement derives from',
+        nodes: [
+          { id: 'risk', type: 'Risk', col: 3, row: 0 },
+          { id: 'threat', type: 'Threat', col: 3, row: 1 },
+        ],
+        edges: [
+          { from: 'risk', to: 'req', rel: 'DerivesFrom' },
+          { from: 'threat', to: 'req', rel: 'DerivesFrom' },
+        ],
+      },
+      {
+        title: 'Satisfaction and supporting definitions',
+        nodes: [
+          { id: 'fn', type: 'SystemFunction', col: 2, row: 2 },
+          { id: 'sc', type: 'SystemConstant', col: 1, row: 2 },
+        ],
+        edges: [
+          { from: 'req', to: 'fn', native: 'satisfy' },
+          { from: 'req', to: 'sc', native: 'dependency' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'safety-risk',
+    title: 'Safety and risk',
+    steps: [
+      {
+        title: 'The chain: a hazard, the situation it creates, the harm that can follow',
+        nodes: [
+          { id: 'hz', type: 'Hazard', col: 2, row: 0 },
+          { id: 'hs', type: 'HazardousSituation', col: 2, row: 1 },
+          { id: 'harm', type: 'Harm', col: 2, row: 2 },
+        ],
+        edges: [
+          { from: 'hz', to: 'hs', rel: 'TracesRisk' },
+          { from: 'hs', to: 'harm', rel: 'LeadsToHarm' },
+        ],
+      },
+      {
+        title: 'Estimation: a risk is estimated for the hazard, against a matrix',
+        nodes: [
+          { id: 'risk', type: 'Risk', col: 1, row: 1 },
+          { id: 'rm', type: 'RiskMatrix', col: 0, row: 1 },
+        ],
+        edges: [
+          { from: 'risk', to: 'hz', rel: 'EstimatedFor' },
+          { from: 'risk', to: 'rm', rel: 'AssessedAgainst' },
+        ],
+      },
+      {
+        title: 'Control: a measure mitigates the hazard, leaving a residual risk weighed against a benefit',
+        nodes: [
+          { id: 'rcm', type: 'RiskControlMeasure', col: 3, row: 0 },
+          { id: 'rr', type: 'ResidualRisk', col: 3, row: 1 },
+          { id: 'ben', type: 'Benefit', col: 0, row: 2 },
+        ],
+        edges: [
+          { from: 'rcm', to: 'hz', rel: 'Mitigates' },
+          { from: 'rr', to: 'rcm', rel: 'ReducedBy' },
+          { from: 'ben', to: 'risk', rel: 'WeighedAgainst' },
+        ],
+      },
+      {
+        title: 'Analysis methods: failure modes, hazard studies and fault trees feed the chain',
+        nodes: [
+          { id: 'part', type: 'HardwareComponent', col: 4, row: 0 },
+          { id: 'fm', type: 'FailureMode', col: 4, row: 1 },
+          { id: 'dm', type: 'DetectionMethod', col: 4, row: 2 },
+          { id: 'hd', type: 'HAZOPDeviation', col: 1, row: 0 },
+          { id: 'mcs', type: 'MinimalCutSet', col: 2, row: 3 },
+          { id: 'ftn', type: 'FaultTreeNode', col: 3, row: 3 },
+        ],
+        edges: [
+          { from: 'part', to: 'fm', rel: 'HasFailureMode' },
+          { from: 'fm', to: 'dm', rel: 'DetectedBy' },
+          { from: 'hd', to: 'hz', rel: 'IdentifiesHazard' },
+          { from: 'mcs', to: 'ftn', rel: 'ContainsEvent' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'cybersecurity',
+    title: 'Cybersecurity',
+    steps: [
+      {
+        title: 'The core: a threat to an asset exploits a vulnerability, a mitigation reduces it',
+        nodes: [
+          { id: 'asset', type: 'CybersecurityAsset', col: 2, row: 0 },
+          { id: 'threat', type: 'Threat', col: 2, row: 1 },
+          { id: 'vuln', type: 'Vulnerability', col: 2, row: 2 },
+          { id: 'cm', type: 'CyberMitigation', col: 1, row: 2 },
+        ],
+        edges: [
+          { from: 'asset', to: 'threat', rel: 'ThreatenedBy' },
+          { from: 'threat', to: 'vuln', rel: 'Exploits' },
+          { from: 'cm', to: 'vuln', rel: 'Mitigates' },
+        ],
+      },
+      {
+        title: 'Who and how: the threat actor, the techniques, the path through them',
+        nodes: [
+          { id: 'ta', type: 'ThreatActor', col: 3, row: 1 },
+          { id: 'tech', type: 'AttackTechnique', col: 3, row: 2 },
+          { id: 'path', type: 'AttackPath', col: 4, row: 2 },
+        ],
+        edges: [
+          { from: 'threat', to: 'ta', rel: 'AttributedToThreatActor' },
+          { from: 'threat', to: 'tech', rel: 'UsesAttackTechnique' },
+          { from: 'path', to: 'tech', rel: 'IncludesAttackTechnique' },
+        ],
+      },
+      {
+        title: 'The asset: what must be protected, and where it is exposed',
+        nodes: [
+          { id: 'sp', type: 'SecurityProperty', col: 1, row: 0 },
+          { id: 'as', type: 'AttackSurface', col: 3, row: 0 },
+        ],
+        edges: [
+          { from: 'asset', to: 'sp', rel: 'HasSecurityProperty' },
+          { from: 'as', to: 'asset', rel: 'ExposesAsset' },
+        ],
+      },
+      {
+        title: 'Consequence and findings: the hazard a threat realises, the requirement it drives, the findings against a vulnerability',
+        nodes: [
+          { id: 'ch', type: 'CyberHazard', col: 0, row: 0 },
+          { id: 'sr', type: 'SecurityRequirement', col: 1, row: 1 },
+          { id: 'sf', type: 'SecurityFinding', col: 4, row: 3 },
+          { id: 'sbom', type: 'SBOMEntry', col: 3, row: 3 },
+        ],
+        edges: [
+          { from: 'threat', to: 'ch', rel: 'RealizesCyberHazard' },
+          { from: 'threat', to: 'sr', rel: 'DerivesCyberRequirement' },
+          { from: 'sf', to: 'vuln', rel: 'IdentifiesVulnerability' },
+          { from: 'vuln', to: 'sbom', rel: 'AffectsSBOMEntry' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'human-factors',
+    title: 'Human factors',
+    steps: [
+      {
+        title: 'The core: an operative action is where a use error is committed',
+        nodes: [
+          { id: 'ac', type: 'OperativeAction', col: 1, row: 0 },
+          { id: 'ue', type: 'UseError', col: 1, row: 1 },
+        ],
+        edges: [{ from: 'ac', to: 'ue', rel: 'CommitsUseError' }],
+      },
+      {
+        title: 'Where and what follows: the element it happens at, the hazard it causes',
+        nodes: [
+          { id: 'uie', type: 'UIElement', col: 2, row: 1 },
+          { id: 'hz', type: 'Hazard', col: 1, row: 2 },
+        ],
+        edges: [
+          { from: 'ue', to: 'uie', rel: 'ErrorAtElement' },
+          { from: 'ue', to: 'hz', rel: 'Causes' },
+        ],
+      },
+      {
+        title: 'Evidence: how demanding the task is, and what an evaluation found',
+        nodes: [
+          { id: 'tda', type: 'TaskDifficultyAssessment', col: 0, row: 0 },
+          { id: 'ev', type: 'MemoEvidence', col: 2, row: 0 },
+        ],
+        edges: [
+          { from: 'tda', to: 'ac', rel: 'AssessesDifficulty' },
+          { from: 'ev', to: 'ac', rel: 'EvaluatesTask' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'verification-validation',
+    title: 'Verification and validation',
+    steps: [
+      {
+        title: 'Verification: a case checks a requirement and produces evidence',
+        nodes: [
+          { id: 'vc', type: 'VerificationCase', col: 1, row: 1 },
+          { id: 'req', type: 'Requirement', col: 0, row: 1 },
+          { id: 'ev', type: 'MemoEvidence', col: 2, row: 1 },
+        ],
+        edges: [
+          { from: 'vc', to: 'req', native: 'subject' },
+          { from: 'vc', to: 'ev', rel: 'ProducesEvidence' },
+        ],
+      },
+      {
+        title: 'The steps a case performs',
+        nodes: [{ id: 'ts', type: 'TestStep', col: 1, row: 2 }],
+        edges: [{ from: 'vc', to: 'ts', rel: 'PerformsStep' }],
+      },
+      {
+        title: 'Validation: a case validates the use, and produces evidence too',
+        nodes: [
+          { id: 'ac', type: 'OperativeAction', col: 0, row: 0 },
+          { id: 'val', type: 'ValidationCase', col: 1, row: 0 },
+        ],
+        edges: [
+          { from: 'ac', to: 'val', rel: 'Validates' },
+          { from: 'val', to: 'ev', rel: 'ProducesEvidence' },
+        ],
+      },
+    ],
+  },
+  {
     id: 'assurance',
     title: 'Assurance disciplines',
     steps: [

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 512" width="1110" height="512" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Human factors, step 3: Evidence: how demanding the task is, and what an evaluation found">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2a37"/></marker>
+  <marker id="diamond" viewBox="0 0 14 10" refX="13" refY="5" markerWidth="14" markerHeight="10" orient="auto-start-reverse"><path d="M1,5 L7,1 L13,5 L7,9 z" fill="#1f2a37"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="40" font-size="18" font-weight="800" fill="#123b6b">Step 3 of 3 · Evidence: how demanding the task is, and what an evaluation found</text>
+<g opacity="0.62">
+  <line x1="555" y1="132" x2="555" y2="220" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="492.5" y="165" width="125" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="555" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">CommitsUseError</text>
+</g>
+<g opacity="0.62">
+  <line x1="660" y1="251" x2="860" y2="251" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="701.2" y="240" width="117.60000000000001" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="760" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">ErrorAtElement</text>
+</g>
+<g opacity="0.62">
+  <line x1="555" y1="282" x2="555" y2="370" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="525.8" y="315" width="58.400000000000006" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="555" y="330" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">Causes</text>
+</g>
+<g opacity="1">
+  <line x1="250" y1="101" x2="450" y2="101" stroke="#1f2a37" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="276.4" y="90" width="147.20000000000002" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="350" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">AssessesDifficulty</text>
+</g>
+<g opacity="1">
+  <line x1="860" y1="101" x2="660" y2="101" stroke="#1f2a37" stroke-width="2.4"  marker-end="url(#arrow)"/>
+  <rect x="704.9" y="90" width="110.2" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="760" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">EvaluatesTask</text>
+</g>
+<g opacity="0.62">
+  <rect x="450" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="450" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="555" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="555" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">OperativeAction</text>
+  
+</g>
+<g opacity="0.62">
+  <rect x="450" y="220" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
+  <rect x="450" y="220" width="6" height="62" rx="3" fill="#c7433f"/>
+  <text x="555" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part»</text>
+  <text x="555" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">UseError</text>
+  
+</g>
+<g opacity="0.62">
+  <rect x="860" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="860" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="965" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="965" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UIElement</text>
+  
+</g>
+<g opacity="0.62">
+  <rect x="450" y="370" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
+  <rect x="450" y="370" width="6" height="62" rx="3" fill="#c7433f"/>
+  <text x="555" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item»</text>
+  <text x="555" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Hazard</text>
+  
+</g>
+<g opacity="1">
+  <rect x="40" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
+  <rect x="40" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="145" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="115" text-anchor="middle" font-size="13.5" font-weight="700" fill="#123b6b">TaskDifficultyAssessment</text>
+  <rect x="206" y="60" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="226" y="73" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
+</g>
+<g opacity="1">
+  <rect x="860" y="70" width="210" height="62" rx="10" fill="#f1f3f5" stroke="#7a8794" stroke-width="3"/>
+  <rect x="860" y="70" width="6" height="62" rx="3" fill="#7a8794"/>
+  <text x="965" y="93" text-anchor="middle" font-size="12" fill="#2c3640" font-style="italic">«part»</text>
+  <text x="965" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#2c3640">MemoEvidence</text>
+  <rect x="1026" y="60" width="40" height="18" rx="9" fill="#7a8794"/><text x="1046" y="73" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
+</g>
+<rect x="40" y="472" width="16" height="16" rx="3" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="2"/><text x="64" y="485" font-size="13" fill="#2c3640">Architecture</text>
+  <rect x="170" y="472" width="16" height="16" rx="3" fill="#fdebea" stroke="#c7433f" stroke-width="2"/><text x="194" y="485" font-size="13" fill="#2c3640">Assurance</text>
+  <rect x="277.5" y="472" width="16" height="16" rx="3" fill="#f1f3f5" stroke="#7a8794" stroke-width="2"/><text x="301.5" y="485" font-size="13" fill="#2c3640">Core and shared</text>
+  <line x1="430" y1="480" x2="464" y2="480" stroke="#1f2a37" stroke-width="2"  /><text x="472" y="485" font-size="13" fill="#2c3640"><tspan font-weight="700">MEMO relationship</tspan></text>
+  <line x1="629.2" y1="480" x2="663.2" y2="480" stroke="#1f2a37" stroke-width="2" stroke-dasharray="7 5" /><text x="671.2" y="485" font-size="13" fill="#2c3640"><tspan font-style="italic">native SysML</tspan></text>
+  <line x1="790.4000000000001" y1="480" x2="824.4000000000001" y2="480" stroke="#1f2a37" stroke-width="2"  marker-start="url(#diamond)"/><text x="832.4000000000001" y="485" font-size="13" fill="#2c3640">contains</text>
+  <line x1="921.2" y1="480" x2="955.2" y2="480" stroke="#1f2a37" stroke-width="2" stroke-dasharray="2 4" /><text x="963.2" y="485" font-size="13" fill="#2c3640">reference</text>
+  <rect x="1059.6" y="471" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="1079.6" y="484" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text><text x="1107.6" y="485" font-size="13" fill="#2c3640">added in this step</text>
+</svg>

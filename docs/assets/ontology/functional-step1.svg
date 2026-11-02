@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 512" width="1110" height="512" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Functional layer, step 1: The chain: a system function decomposes into component functions">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2a37"/></marker>
+  <marker id="diamond" viewBox="0 0 14 10" refX="13" refY="5" markerWidth="14" markerHeight="10" orient="auto-start-reverse"><path d="M1,5 L7,1 L13,5 L7,9 z" fill="#1f2a37"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="40" y="40" font-size="18" font-weight="800" fill="#123b6b">Step 1 of 4 · The chain: a system function decomposes into component functions</text>
+<g opacity="1">
+  <line x1="555" y1="132" x2="555" y2="220" stroke="#4b5866" stroke-width="2.4"  marker-start="url(#diamond)"/>
+  <rect x="518.4" y="165" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="555" y="180" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+</g>
+<g opacity="1">
+  <rect x="450" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
+  <rect x="450" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="555" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="555" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SystemFunction</text>
+  <rect x="616" y="60" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="636" y="73" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
+</g>
+<g opacity="1">
+  <rect x="450" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
+  <rect x="450" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="555" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="555" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">ComponentFunction</text>
+  <rect x="616" y="210" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="636" y="223" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
+</g>
+<rect x="40" y="472" width="16" height="16" rx="3" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="2"/><text x="64" y="485" font-size="13" fill="#2c3640">Architecture</text>
+  <line x1="170" y1="480" x2="204" y2="480" stroke="#1f2a37" stroke-width="2"  /><text x="212" y="485" font-size="13" fill="#2c3640"><tspan font-weight="700">MEMO relationship</tspan></text>
+  <line x1="369.2" y1="480" x2="403.2" y2="480" stroke="#1f2a37" stroke-width="2" stroke-dasharray="7 5" /><text x="411.2" y="485" font-size="13" fill="#2c3640"><tspan font-style="italic">native SysML</tspan></text>
+  <line x1="530.4" y1="480" x2="564.4" y2="480" stroke="#1f2a37" stroke-width="2"  marker-start="url(#diamond)"/><text x="572.4" y="485" font-size="13" fill="#2c3640">contains</text>
+  <line x1="661.2" y1="480" x2="695.2" y2="480" stroke="#1f2a37" stroke-width="2" stroke-dasharray="2 4" /><text x="703.2" y="485" font-size="13" fill="#2c3640">reference</text>
+  <rect x="799.6" y="471" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="819.6" y="484" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text><text x="847.6" y="485" font-size="13" fill="#2c3640">added in this step</text>
+</svg>
