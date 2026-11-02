@@ -40,6 +40,7 @@
 | [`ActivitiesOf`](#activitiesof) | `calc def` | Activities of definition. | — |
 | [`ActivityCost`](#activitycost) | `calc def` | Activity cost definition. | — |
 | [`ScenarioCost`](#scenariocost) | `calc def` | Scenario cost definition. | — |
+| [`FinishTime`](#finishtime) | `calc def` | The time at which a step is done: its own duration after the latest of the steps before it. `predecessors` is the kernel library's (every earlier occurrence along the successions, not only the adjacent ones), which is enough because a step's finish time never falls short of th… | — |
 | [`ScenarioDuration`](#scenarioduration) | `calc def` | Scenario duration definition. | — |
 | [`ScenarioSuccess`](#scenariosuccess) | `calc def` | Scenario success definition. | — |
 | [`ProcedureCost`](#procedurecost) | `calc def` | Procedure cost definition. | — |
@@ -87,6 +88,21 @@ calc def ScenarioCost
 | Property | Value |
 | --- | --- |
 | Description | Scenario cost definition. |
+| Kind | `calc def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_architecture_operational_rollups` |
+
+
+## FinishTime
+
+```sysml
+calc def FinishTime
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The time at which a step is done: its own duration after the latest of the steps before it. `predecessors` is the kernel library's (every earlier occurrence along the successions, not only the adjacent ones), which is enough because a step's finish time never falls short of th… |
 | Kind | `calc def` |
 | Abstract | No |
 | Specializes | — |
@@ -224,8 +240,8 @@ calc def HighestDemand
     // quantities with units; money is `memo_core_stdlib_money`, in the project's one currency.
     // A cost is the activity's duration times each instrument's capacity cost rate, plus each
     // instrument's unit cost. Parallel branches are each paid for, because each resource used is
-    // paid for. Time is the sum along the path; a fork whose branches overlap in time is not yet
-    // reduced to its longest branch here.
+    // paid for. Time is the longest path (`ScenarioDuration`), so a fork whose branches
+    // overlap takes its longest branch; a cost is still the sum, because each branch is paid for.
     //
     // `memo evaluate` runs them from these bodies over the built model (memo-tools, analysis/calc), and a
     // `TradeStudy` reads the results, so no figure is written twice. Units follow the SysML library's own
@@ -264,10 +280,25 @@ calc def HighestDemand
                 ActivitiesOf(scenario)->collect { in activity : OperativeAction[1]; ActivityCost(activity) });
         }
 
+        // The time at which a step is done: its own duration after the latest of the steps before it.
+        // `predecessors` is the kernel library's (every earlier occurrence along the successions, not
+        // only the adjacent ones), which is enough because a step's finish time never falls short of
+        // the finish time of anything before it. A step with no succession to another is concurrent
+        // with it, as in the language, so two branches of a fork overlap and a scenario takes as long
+        // as its longest path, not the sum of its steps.
+        calc def FinishTime {
+            in step : OperativeAction[1];
+            return finish : DurationValue[1] = QuantityCalculations::sum((
+                step.expectedDuration,
+                step.predecessors->collect { in before : OperativeAction[1]; FinishTime(before) }
+                    ->reduce { in x : DurationValue[1]; in y : DurationValue[1]; NumericalFunctions::max(x, y) }));
+        }
+
         calc def ScenarioDuration {
             in scenario : MemoAction[1];
-            return duration : DurationValue[1] = QuantityCalculations::sum(
-                ActivitiesOf(scenario)->collect { in activity : OperativeAction[1]; activity.expectedDuration });
+            return duration : DurationValue[1] = ActivitiesOf(scenario)
+                ->collect { in activity : OperativeAction[1]; FinishTime(activity) }
+                ->reduce { in x : DurationValue[1]; in y : DurationValue[1]; NumericalFunctions::max(x, y) };
         }
 
         calc def ScenarioSuccess {
