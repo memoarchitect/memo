@@ -131,6 +131,7 @@ SysML `constraint def` declarations in `src/`.
 | [`UseErrorTracesToHazardRule`](rules/ontology/ontology_invariants.md#useerrortracestohazardrule) | `constraint def` | Constraint that checks use error traces to hazard rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
 | [`VerifiedByTargetKindRule`](rules/ontology/ontology_invariants.md#verifiedbytargetkindrule) | `constraint def` | Constraint that checks verified by target kind rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
 | [`ViewTracesToViewpointRule`](rules/ontology/ontology_invariants.md#viewtracestoviewpointrule) | `constraint def` | ISO 42010 conformance is many-to-many, but never empty: `MemoView.viewpointDefinition` is `[1..*]`. A view that traces to a viewpoint is filed under it in Architect; one that traces to none has nowhere to be found. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
+| [`WorkflowOwnsNoStepsOutsideScenariosRule`](rules/ontology/ontology_invariants.md#workflowownsnostepsoutsidescenariosrule) | `constraint def` | Constraint that checks workflow owns no steps outside scenarios rule. | [`rules/ontology/ontology_invariants.sysml`](rules/ontology/ontology_invariants.md) |
 
 
 ## `memo::rules::quantitative`

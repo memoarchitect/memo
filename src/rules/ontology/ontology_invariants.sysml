@@ -4,7 +4,7 @@
 // Structural invariants (endpoint existence, cycle freedom) are expressed over
 // the typed relations introduced in 0.5 — typed references make them checkable.
 //
-// Operational levels (CR-ONT-093..101). A use case is at the level of its subject: an
+// Operational levels (CR-ONT-093..102). A use case is at the level of its subject: an
 // `OperationalEntity` is level 1 (clinical, no product, no number), a `System` or `SystemOfSystems`
 // is level 2 (one variant of a platform, which carries every number). The level of a step is the
 // level of the use case its workflow `realizesUseCase`. The workflow is reached from the step by
@@ -789,4 +789,16 @@ package memo_rules_ontology {
         attribute predicateExpression = "not(upstream(hasSubject)->exists(attributes.usageType == 'TradeStudy')) or upstream(hasSubject)->select(attributes.usageType == 'TradeStudy')->forAll(downstream(hasSubject)->forAll(downstream(composes)->forAll(downstream(realizes)->forAll(upstream(realizes)->exists(upstream(composes)->exists(id == subject.id) or upstream(performs)->exists(upstream(composes)->exists(id == subject.id))))) and downstream(composes)->forAll(downstream(performs)->forAll(downstream(realizes)->forAll(upstream(realizes)->exists(upstream(composes)->exists(id == subject.id) or upstream(performs)->exists(upstream(composes)->exists(id == subject.id))))))))";
         constraint { true }
     }
+    constraint def WorkflowOwnsNoStepsOutsideScenariosRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-102"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "OperativeAction";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A workflow is the analysis of a use case (its equipment, environment and needs); the steps that carry it out are the tasks of a use scenario (IEC 62366-1 5.4). A step owned by the workflow itself belongs to no scenario, so it has no pre- or post-condition and no path it is on.";
+        attribute predicateExpression = "not(upstream(composes)->exists(conformsTo(OperationalWorkflow))) or upstream(composes)->exists(conformsTo(OperativeScenario))";
+        constraint { true }
+    }
+    #EnforcesClause dependency from WorkflowOwnsNoStepsOutsideScenariosRule to iec62366_1::iec62366_1Clause5::iec62366_1Clause5_4;
 }
