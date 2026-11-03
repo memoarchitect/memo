@@ -107,13 +107,11 @@ export const LAYER_FIGURES = [
         ],
       },
       {
-        title: 'Supporting detail: workflow control and task difficulty',
+        title: 'Supporting detail: task difficulty',
         nodes: [
-          { id: 'cn', type: 'WorkflowControlNode', col: 1, row: 1 },
           { id: 'tda', type: 'TaskDifficultyAssessment', col: 1, row: 3 },
         ],
         edges: [
-          { from: 'wf', to: 'cn', contains: true },
           { from: 'tda', to: 'ac', rel: 'AssessesDifficulty' },
         ],
       },

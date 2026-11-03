@@ -74,10 +74,7 @@ SysML `enum def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ControlNodeKind`](architecture/operational/workflows/memo_workflows.md#controlnodekind) | `enum def` | Controlled values for control node: `decision`, `handoff`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`ResourceKind`](architecture/operational/workflows/memo_workflows.md#resourcekind) | `enum def` | Controlled values for resource: `instrument`, `equipment`, `consumable`, `material`, `information`, `space`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`StepTransformationKind`](architecture/operational/workflows/memo_workflows.md#steptransformationkind) | `enum def` | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`TransformKind`](architecture/operational/workflows/memo_workflows.md#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 
 ## `memo::architecture::realization::deployment`

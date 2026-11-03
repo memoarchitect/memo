@@ -57,10 +57,10 @@ apart lets one environment serve several contexts.
 
 ### Step 4 · Supporting detail
 
-[![Step 4: WorkflowControlNode and TaskDifficultyAssessment](../assets/ontology/operational-step4.svg){ .memo-presentation-graphic }](../assets/ontology/operational-step4.svg){ title="Open full size" }
+[![Step 4: TaskDifficultyAssessment](../assets/ontology/operational-step4.svg){ .memo-presentation-graphic }](../assets/ontology/operational-step4.svg){ title="Open full size" }
 
-A workflow's decisions, forks, joins and handoffs are control nodes inside it
-(`WorkflowControlNode`). A `TaskDifficultyAssessment` records how demanding an action is in
+A scenario's decisions, forks, joins and merges are SysML's own control nodes inside it, not an
+ontology type. A `TaskDifficultyAssessment` records how demanding an action is in
 its context (`AssessesDifficulty`), which feeds the human-factors analysis.
 
 ## Where it leads

@@ -39,30 +39,10 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`StepTransformationKind`](#steptransformationkind) | `enum def` | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. | — |
 | [`OperationalWorkflow`](#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. | `MemoPart` |
 | [`RealizesUseCase`](#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | `MemoRelationship` |
-| [`ControlNodeKind`](#controlnodekind) | `enum def` | Controlled values for control node: `decision`, `handoff`. | — |
-| [`WorkflowControlNode`](#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | `MemoAction` |
 | [`ResourceKind`](#resourcekind) | `enum def` | Controlled values for resource: `instrument`, `equipment`, `consumable`, `material`, `information`, `space`. | — |
 | [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. | `MemoResource` |
-| [`TransformKind`](#transformkind) | `enum def` | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. | — |
-| [`Transforms`](#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | `MemoRelationship` |
-
-## StepTransformationKind
-
-```sysml
-enum def StepTransformationKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for step transformation: `preserves`, `automates`, `augments`, `eliminates`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_architecture_operational_workflows` |
-
 
 ## OperationalWorkflow
 
@@ -94,36 +74,6 @@ connection def RealizesUseCase :> MemoRelationship
 | Owning package | `memo_architecture_operational_workflows` |
 
 
-## ControlNodeKind
-
-```sysml
-enum def ControlNodeKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for control node: `decision`, `handoff`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_architecture_operational_workflows` |
-
-
-## WorkflowControlNode
-
-```sysml
-action def WorkflowControlNode specializes MemoAction
-```
-
-| Property | Value |
-| --- | --- |
-| Description | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). |
-| Kind | `action def` |
-| Abstract | No |
-| Specializes | `MemoAction` |
-| Owning package | `memo_architecture_operational_workflows` |
-
-
 ## ResourceKind
 
 ```sysml
@@ -151,36 +101,6 @@ part def WorkflowResource specializes MemoResource
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoResource` |
-| Owning package | `memo_architecture_operational_workflows` |
-
-
-## TransformKind
-
-```sysml
-enum def TransformKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for transform: `step`, `workflow`, `replacesWorkflow`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_architecture_operational_workflows` |
-
-
-## Transforms
-
-```sysml
-connection def Transforms :> MemoRelationship
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Typed relationship from `MemoAction` to `MemoAction`. |
-| Kind | `connection def` |
-| Abstract | No |
-| Specializes | `MemoRelationship` |
 | Owning package | `memo_architecture_operational_workflows` |
 
 
@@ -226,20 +146,11 @@ connection def Transforms :> MemoRelationship
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_use_cases::*;
 
-        enum def StepTransformationKind {
-            enum preserves;
-            enum automates;
-            enum augments;
-            enum eliminates;
-        }
-
         part def OperationalWorkflow specializes MemoPart {
             // Where the body of work starts and ends. A scenario's pre- and
             // post-conditions are its own path's, inside these.
             attribute entryCondition : String;
             attribute completionCondition : String;
-            attribute recoveryPathSummary : String;
-            attribute timingConstraints : String;
             // What one procedure costs apart from its activities (set-up, capital per case); a number,
             // so it is set on a level-2 variant's workflow, never on level 1.
             attribute perProcedureCost : MoneyValue[0..1];
@@ -270,26 +181,6 @@ connection def Transforms :> MemoRelationship
         }
 
 
-        // decision / fork / join / handoff.
-        enum def ControlNodeKind {
-            enum decision;
-            enum 'fork';
-            enum 'join';
-            enum handoff;
-        }
-
-        // A workflow control node. The role is given by controlKind; the
-        // kind-specific fields below are set only for the relevant controlKind.
-        // handoff = transfer of responsibility between roles (shift change, room-to-lab).
-        action def WorkflowControlNode specializes MemoAction {
-            attribute controlKind : ControlNodeKind;
-            attribute decisionQuestion : String[0..1];
-            attribute decisionCriteria : String[0..1];
-            attribute parallelismRationale : String[0..1];
-            attribute joinCondition : String[0..1];
-            attribute informationTransferred : String[0..1];
-        }
-
         enum def ResourceKind {
             enum instrument;
             enum equipment;
@@ -317,29 +208,6 @@ connection def Transforms :> MemoRelationship
         // that each implied a different target type are now two typed refs plus
         // this one plain relation.
 
-        // ── Technique change ─────────────────────────────────────────
-        // Transforms relates a step of one level-1 technique variant of a workflow to the step of
-        // the other that preserves, automates, augments or eliminates it. Two platforms' activities
-        // correspond through the level-1 step both refine, not through this.
-        enum def TransformKind {
-            enum step;
-            enum workflow;
-            enum replacesWorkflow;
-        }
-        connection def Transforms :> MemoRelationship {
-            attribute transformKind : TransformKind;
-            attribute transformation : StepTransformationKind[0..1];
-            attribute transformationRationale : String[0..1];
-            end source : MemoAction;
-            end target : MemoAction;
-        }
-        abstract connection transformsLinks : Transforms[*];
-        metadata def <transforms> TransformsMetadata :> SemanticMetadata {
-            :> annotatedElement : SysML::ConnectionDefinition;
-            :> annotatedElement : SysML::ConnectionUsage;
-            :>> baseType = transformsLinks meta SysML::Usage;
-        }
-        // The device or system whose introduction enables a workflow.
     }
 
     ```

@@ -104,7 +104,6 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`RealizesUseCase`](architecture/operational/workflows/memo_workflows.md#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`Transforms`](architecture/operational/workflows/memo_workflows.md#transforms) | `connection def` | Typed relationship from `MemoAction` to `MemoAction`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 
 ## `memo::architecture::realization::deployment`

@@ -29,6 +29,7 @@
 | [`ActivitiesOf`](../sysml-api/architecture/operational/rollups/memo_rollups.md#activitiesof) | `calc def` | Activities of definition. |
 | [`ActivityCost`](../sysml-api/architecture/operational/rollups/memo_rollups.md#activitycost) | `calc def` | Activity cost definition. |
 | [`ScenarioCost`](../sysml-api/architecture/operational/rollups/memo_rollups.md#scenariocost) | `calc def` | Scenario cost definition. |
+| [`FinishTime`](../sysml-api/architecture/operational/rollups/memo_rollups.md#finishtime) | `calc def` | The time at which a step is done: its own duration after the latest of the steps before it. `predecessors` is the kernel library's (every earlier occurrence along the successions, not only the adjacent ones), which is enough because a step's finish time never falls short of th… |
 | [`ScenarioDuration`](../sysml-api/architecture/operational/rollups/memo_rollups.md#scenarioduration) | `calc def` | Scenario duration definition. |
 | [`ScenarioSuccess`](../sysml-api/architecture/operational/rollups/memo_rollups.md#scenariosuccess) | `calc def` | Scenario success definition. |
 | [`ProcedureCost`](../sysml-api/architecture/operational/rollups/memo_rollups.md#procedurecost) | `calc def` | Procedure cost definition. |
@@ -62,7 +63,6 @@
 | Element | SysML kind | What it is |
 | --- | --- | --- |
 | [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. |
-| [`WorkflowControlNode`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). |
 | [`WorkflowResource`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. |
 
 
@@ -83,7 +83,6 @@ flowchart LR
   UseCase["UseCase"]
   Need["Need"]:::other
   OperationalWorkflow["OperationalWorkflow"]
-  MemoAction["MemoAction"]:::other
   InteractionFlow["InteractionFlow"]:::other
   RequirementDriver["RequirementDriver"]:::other
   OperativeScenario["OperativeScenario"]
@@ -101,7 +100,6 @@ flowchart LR
   OperationalCapability -->|EnablesUseCase| UseCase
   Need -->|Motivates| UseCase
   OperationalWorkflow -->|RealizesUseCase| UseCase
-  MemoAction -->|Transforms| MemoAction
   InteractionFlow -->|FlowServesUseCase| UseCase
   RequirementDriver -->|RealizedByScenario| OperativeScenario
   OperativeAction -->|CommitsUseError| UseError
@@ -124,7 +122,6 @@ flowchart LR
 | [`EnablesUseCase`](../sysml-api/architecture/operational/structure/memo_operational.md#enablesusecase) | [`OperationalCapability`](../sysml-api/architecture/operational/structure/memo_operational.md#operationalcapability) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | An operational capability enables a use case (the ability the actor draws on to accomplish the goal). Capability is tied to the use case, not to individual activities. |
 | [`Motivates`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#motivates) | [`Need`](../sysml-api/assurance/requirements/needs/memo_needs.md#need) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | Typed relationship from `Need` to `UseCase`. |
 | [`RealizesUseCase`](../sysml-api/architecture/operational/workflows/memo_workflows.md#realizesusecase) | [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). |
-| [`Transforms`](../sysml-api/architecture/operational/workflows/memo_workflows.md#transforms) | [`MemoAction`](../sysml-api/core/common/memo_common.md#memoaction) | [`MemoAction`](../sysml-api/core/common/memo_common.md#memoaction) | Typed relationship from `MemoAction` to `MemoAction`. |
 
 ### Relationships from elsewhere that reach this layer
 
@@ -145,7 +142,4 @@ flowchart LR
 | [`GovernKind`](../sysml-api/architecture/operational/context/stakeholders/memo_stakeholders.md#governkind) | `correspondence` |
 | [`ScenarioKind`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#scenariokind) | `nominal`, `alternate` |
 | [`UseCaseKind`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecasekind) | `clinical`, `service`, `manufacturing`, `development` |
-| [`StepTransformationKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#steptransformationkind) | `preserves`, `automates`, `augments`, `eliminates` |
-| [`ControlNodeKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#controlnodekind) | `decision`, `handoff` |
 | [`ResourceKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#resourcekind) | `instrument`, `equipment`, `consumable`, `material`, `information`, `space` |
-| [`TransformKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#transformkind) | `step`, `workflow`, `replacesWorkflow` |

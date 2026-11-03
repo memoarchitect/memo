@@ -203,6 +203,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | --- | --- | --- | --- |
 | [`ActivitiesOf`](architecture/operational/rollups/memo_rollups.md#activitiesof) | `calc def` | Activities of definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
 | [`ActivityCost`](architecture/operational/rollups/memo_rollups.md#activitycost) | `calc def` | Activity cost definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
+| [`FinishTime`](architecture/operational/rollups/memo_rollups.md#finishtime) | `calc def` | The time at which a step is done: its own duration after the latest of the steps before it. `predecessors` is the kernel library's (every earlier occurrence along the successions, not only the adjacent ones), which is enough because a step's finish time never falls short of th… | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
 | [`HighDemandCount`](architecture/operational/rollups/memo_rollups.md#highdemandcount) | `calc def` | High demand count definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
 | [`HighestDemand`](architecture/operational/rollups/memo_rollups.md#highestdemand) | `calc def` | Highest demand definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
 | [`ProcedureCost`](architecture/operational/rollups/memo_rollups.md#procedurecost) | `calc def` | Procedure cost definition. | [`architecture/operational/rollups/memo_rollups.sysml`](architecture/operational/rollups/memo_rollups.md) |
@@ -241,7 +242,6 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`WorkflowControlNode`](architecture/operational/workflows/memo_workflows.md#workflowcontrolnode) | `action def` | A workflow control node. The role is given by controlKind; the kind-specific fields below are set only for the relevant controlKind. handoff = transfer of responsibility between roles (shift change, room-to-lab). | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowResource`](architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 

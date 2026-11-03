@@ -131,8 +131,6 @@ part def WorkspaceMembershipEntry specializes MemoPart
         part membershipMotivates : WorkspaceMembershipEntry { attribute :>> relation = "motivates"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
         // A workflow follows the use case it realizes.
         part membershipRealizesUseCase : WorkspaceMembershipEntry { attribute :>> relation = "realizesUseCase"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
-        // Neither: a transformation joins two actions.
-        part membershipTransforms : WorkspaceMembershipEntry { attribute :>> relation = "transforms"; attribute :>> direction = WorkspaceMembershipKind::neither; }
         // A module follows the deployment unit it is built into.
         part membershipBuildsInto : WorkspaceMembershipEntry { attribute :>> relation = "buildsInto"; attribute :>> direction = WorkspaceMembershipKind::sourceFollowsTarget; }
         // The hardware or software follows the logical component it realizes: the logical component is

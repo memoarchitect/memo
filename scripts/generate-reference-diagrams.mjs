@@ -207,8 +207,7 @@ const write = (name, spec) => writeFileSync(join(output, `${name}.svg`), diagram
     'UseCase', 'OperationalActivity', 'UserTask', 'TaskStep', 'TaskDifficultyAssessment',
   ]);
 
-  // Workflows — OperationalWorkflow is composed of its steps and control
-  // nodes (tree); WorkflowResource is referenced, not contained, so it sits
+  // Workflows — OperationalWorkflow is composed of its steps (tree); WorkflowResource is referenced, not contained, so it sits
   // apart with no tree connector into it.
   {
     const parentY = y + 90;
@@ -216,16 +215,13 @@ const write = (name, spec) => writeFileSync(join(output, `${name}.svg`), diagram
     const childY = parentY + parent.height + 46;
     const stepX = x0 + 30;
     const step = autoNode(stepX, childY, 'WorkflowStep', accent);
-    const controlX = stepX + step.width + 60;
-    const control = autoNode(controlX, childY, 'WorkflowControlNode', accent);
-    const resourceX = controlX + control.width + 120;
+    const resourceX = stepX + step.width + 120;
     const resource = autoNode(resourceX, childY, 'WorkflowResource', accent, { fill: '#fbfbfe' });
     const height = childY + step.height - y + 30;
     body += group(x0, y, fullWidth, height, 'Workflows — workflows', accent);
-    body += parent.svg + step.svg + control.svg + resource.svg;
+    body += parent.svg + step.svg + resource.svg;
     body += treeDown(x0 + 30 + parent.width / 2, parentY + parent.height, [
       { x: stepX, y: childY, width: step.width },
-      { x: controlX, y: childY, width: control.width },
     ], accent);
     body += text(resourceX + resource.width / 2, childY - 12, 'referenced, not contained', { size: 12, weight: 650, fill: '#7c8798' });
     y += height + 30;
