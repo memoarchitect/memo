@@ -45,7 +45,7 @@ empty: "No user need elements defined. Add Need or Requirement elements."
 Use cases describing how intended users interact with **{{project.product}}**, drawn from the model:
 
 ```memo-query
-kind: UseCase
+kind: [ClinicalUseCase, SystemUseCase]
 display: table
 columns: name, layer, doc
 sort: name

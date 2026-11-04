@@ -39,7 +39,7 @@ _[TODO: Describe physical, social, technical environments where the device will 
 Use cases describing how intended users interact with **{{project.product}}**, drawn from the model:
 
 ```memo-query
-kind: UseCase
+kind: [ClinicalUseCase, SystemUseCase]
 display: table
 columns: name, layer, doc
 sort: name

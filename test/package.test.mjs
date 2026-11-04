@@ -184,13 +184,15 @@ test('ontology namespace facade references no example packages', () => {
   assert.doesNotMatch(facade, /memo_examples/);
 });
 
-test('use cases use one standard type with a context kind', () => {
+test('use cases use one standard type with a context kind, and two level types', () => {
   const useCases = read(
     'src', 'architecture', 'operational', 'use_cases', 'memo_use_cases.sysml',
   );
   assert.match(useCases, /use case def UseCase/);
+  assert.match(useCases, /use case def ClinicalUseCase :> UseCase/);
+  assert.match(useCases, /use case def SystemUseCase :> UseCase/);
   assert.match(useCases, /attribute useCaseKind : UseCaseKind/);
-  assert.doesNotMatch(useCases, /(?:Clinical|Service|Manufacturing|Development|Medical)UseCase/);
+  assert.doesNotMatch(useCases, /(?:Service|Manufacturing|Development|Medical)UseCase/);
 });
 
 test('logical hierarchy declares recursive system containment explicitly', () => {
@@ -459,7 +461,7 @@ test('every extension carries an identity-only descriptor and its facade package
   }
   // The clinical extension is the worked example of specializing the base.
   const clinical = read('extensions', 'clinical', 'src', 'procedures', 'memo_clinical_procedures.sysml');
-  assert.match(clinical, /part def ClinicalProcedureWorkflow specializes OperationalWorkflow/);
+  assert.match(clinical, /part def ClinicalProcedureWorkflow specializes ClinicalWorkflow/);
   assert.doesNotMatch(clinical, /\b(?:ClinicalProcedure|ClinicalTechnique|ProcedureVariant|InstrumentSet)\b/);
   assert.equal(existsSync(join(root, 'extensions', 'medical-products')), false);
 });
