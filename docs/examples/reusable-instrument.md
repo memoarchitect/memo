@@ -12,7 +12,7 @@ The model separates three operational concepts:
 
 ```sysml
 use case ucSterilize : UseCase {
-    attribute :>> useCaseKind = UseCaseKind::clinical;
+    attribute :>> useCaseKind = UseCaseKind::care;
     attribute :>> goalStatement =
         "Return a used instrument to sterile, functional condition for the next case.";
 }

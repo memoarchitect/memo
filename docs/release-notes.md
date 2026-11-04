@@ -5,6 +5,8 @@ Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change 
 ## Unreleased
 
 - **Operational levels are declared types.** `ClinicalUseCase` and `SystemUseCase` specialize `UseCase`; `ClinicalWorkflow` and `SystemWorkflow` specialize `OperationalWorkflow`; both bases are now abstract, so a model that types a use case or workflow by the base must pick a level. `CR-ONT-093` now keeps a use case's type and subject in agreement, `CR-ONT-094` to `100` read the workflow's type, and new `CR-ONT-103` keeps a workflow at the level of the use case it realizes. A new Clinical workflow viewpoint (`VP-CLINWF`) holds the level-1 flows; the Clinical viewpoint stays clinical evidence. The clinical extension's `ClinicalProcedureWorkflow` specializes `ClinicalWorkflow`. Short ids keep their families.
+- **`UseCaseKind::clinical` is now `UseCaseKind::care`.** The domain member shared a word with the new `ClinicalUseCase` level type. A model that sets `useCaseKind = UseCaseKind::clinical` must say `UseCaseKind::care`.
+
 
 ## 0.16.5
 

@@ -13,7 +13,7 @@ package robot_cell_family_sos_use_cases {
 
     use case ucPerformPickAndPlace : SystemUseCase {
         @MemoIdentity { :>> providedId = "RCF-UC-001"; :>> label = "Perform Pick And Place"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         attribute :>> goalStatement = "Move a workpiece by mapping the cell and grasping it.";
         subject :>> supportingSystem = robotCell;
         actor operator = cellOperator;

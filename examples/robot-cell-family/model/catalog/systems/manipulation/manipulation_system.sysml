@@ -36,7 +36,7 @@ package robot_cell_family_systems_manipulation_manipulation_system {
 
     use case ucExecuteGrasp : SystemUseCase {
         @MemoIdentity { :>> providedId = "RCF-MAN-UC-001"; :>> label = "Execute Grasp"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         subject :>> supportingSystem : ManipulatorSystem;
         actor operator = cellOperator;
     }

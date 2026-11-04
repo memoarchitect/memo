@@ -36,14 +36,14 @@ package memo_examples_sysml_diagram_samples_samples_use_case_view {
 
     use case reviewStatus : SystemUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-1"; :>> label = "Review Device Status"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         include validateTherapySettings;
         subject supportingSystem;
         actor patientActor = patient;
     }
     use case configureTherapy : SystemUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-2"; :>> label = "Configure Therapy"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         include reviewStatus;
         subject supportingSystem;
         actor clinicianInitiator = clinician;
@@ -58,13 +58,13 @@ package memo_examples_sysml_diagram_samples_samples_use_case_view {
 
     use case documentTreatment : SystemUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-4"; :>> label = "Document Treatment"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
     }
 
     // L2 child of Review Device Status: makes L0 → L1 → L2 selectable.
     use case validateTherapySettings : SystemUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-5"; :>> label = "Validate Therapy Settings"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         subject supportingSystem;
         actor clinicianActor = clinician;
     }

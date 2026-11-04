@@ -149,7 +149,7 @@ connection def Motivates :> MemoRelationship
         private import memo_assurance_requirements_needs::*;
 
         enum def UseCaseKind {
-            enum clinical;
+            enum care;
             enum service;
             enum manufacturing;
             enum development;

@@ -146,7 +146,7 @@ package memo_examples_gpca_pump_gpca_operational {
     // The use case is the patient and clinician goal. It is supported by
     // several workflows, each of which owns multiple selected scenarios.
     use case ucDeliverPcaTherapy : SystemUseCase {
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> providedId = "UC-001"; :>> label = "DeliverPatientControlledAnalgesia"; }
         attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
         attribute :>> trigger = "A clinician starts prescribed patient-controlled analgesia therapy.";

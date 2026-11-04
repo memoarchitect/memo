@@ -44,7 +44,7 @@ package memo_examples_sysml_diagram_samples_samples_browser_view {
 
     use case startSystem : SystemUseCase {
         @MemoIdentity { :>> providedId = "UC-BRW-1"; :>> label = "Start System"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         subject controlSystem;
         actor operatorActor = systemOperator;
     }
@@ -56,7 +56,7 @@ package memo_examples_sysml_diagram_samples_samples_browser_view {
     }
     use case monitorStatus : SystemUseCase {
         @MemoIdentity { :>> providedId = "UC-BRW-3"; :>> label = "Monitor Status"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         subject controlSystem;
         actor monitorActor = remoteMonitor;
     }

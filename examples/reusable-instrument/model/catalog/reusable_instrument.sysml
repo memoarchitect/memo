@@ -25,7 +25,7 @@ package memo_examples_reusable_instrument {
     }
 
     use case ucSterilize : ClinicalUseCase {
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> providedId = "RI-UC-001"; :>> label = "SterilizeReusableInstrument"; }
         attribute :>> goalStatement = "Return a used instrument to sterile, functional condition for the next case.";
         attribute :>> preCondition = "instrument collected from the OR; gross soil removed at point of use";

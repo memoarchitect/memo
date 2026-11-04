@@ -44,7 +44,7 @@ package robot_cell_family_systems_navigation_navigation_system {
     // A system use case: its subject is this system.
     use case ucAcquireMap : SystemUseCase {
         @MemoIdentity { :>> providedId = "RCF-NAV-UC-001"; :>> label = "Acquire Occupancy Map"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         subject :>> supportingSystem : NavigationSystem;
         actor operator = cellOperator;
     }

@@ -40,7 +40,7 @@ part icuNurse : User {
 use case ucMonitorTemp : UseCase {
     attribute :>> id = "TA-UC-001";
     @MemoIdentity { :>> label = "MonitorPatientTemperature"; }
-    attribute :>> useCaseKind = UseCaseKind::clinical;
+    attribute :>> useCaseKind = UseCaseKind::care;
     attribute :>> goalStatement =
         "Continuously monitor core temperature and be alerted when it leaves the safe range.";
 }

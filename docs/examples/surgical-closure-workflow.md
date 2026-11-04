@@ -23,7 +23,7 @@ its scenarios.
 ```sysml
 use case ucPerformSleeveGastrectomy : UseCase {
     @MemoIdentity { :>> label = "PerformLaparoscopicSleeveGastrectomy"; }
-    attribute :>> useCaseKind = UseCaseKind::clinical;
+    attribute :>> useCaseKind = UseCaseKind::care;
     attribute :>> goalStatement =
         "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
     ref :>> useContext = bariatricOr;

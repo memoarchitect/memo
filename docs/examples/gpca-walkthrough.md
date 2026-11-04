@@ -121,7 +121,7 @@ element. Three workflows support that one goal.
 ```sysml
 use case ucDeliverPcaTherapy : UseCase {
     @MemoIdentity { :>> label = "DeliverPatientControlledAnalgesia"; }
-    attribute :>> useCaseKind = UseCaseKind::clinical;
+    attribute :>> useCaseKind = UseCaseKind::care;
     attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
     ref :>> useContext = hospitalWardContext;
     subject supportingSystem;

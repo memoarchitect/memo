@@ -74,7 +74,7 @@ package memo_examples_gastric_bypass_variants {
 
     // ── Tier 1: the clinical workflow ───────────────────────────
     use case ucRouxEnY : ClinicalUseCase {
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass"; }
         attribute :>> goalStatement = "Create the gastric pouch and its anastomosis and confirm that it does not leak, whatever the platform.";
         subject :>> supportingSystem = surgicalTeam;
@@ -186,7 +186,7 @@ package memo_examples_gastric_bypass_variants {
 
     // ── Tier 2: the system workflow, laparoscopic ──────────────────────
     use case ucRouxEnYLap : SystemUseCase {
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (laparoscopic)"; }
         subject :>> supportingSystem = platform.laparoscopicTower;
     }
@@ -251,7 +251,7 @@ package memo_examples_gastric_bypass_variants {
 
     // ── Tier 2: the system workflow, our robot ──────────────────────
     use case ucRouxEnYOur : SystemUseCase {
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (our robot)"; }
         subject :>> supportingSystem = platform.ourRobot;
     }
@@ -321,7 +321,7 @@ package memo_examples_gastric_bypass_variants {
 
     // ── Tier 2: the system workflow, competitor robot ──────────────────────
     use case ucRouxEnYCmp : SystemUseCase {
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (competitor robot)"; }
         subject :>> supportingSystem = platform.competitorRobot;
     }

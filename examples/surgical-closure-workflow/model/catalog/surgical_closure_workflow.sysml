@@ -50,7 +50,7 @@ package memo_examples_surgical_closure_workflow {
         attribute :>> statement = "The surgical team needs to perform gastric resection with controlled anatomy, haemostasis, and a checked staple line.";
     }
     use case ucPerformSleeveGastrectomy : ClinicalUseCase {
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> providedId = "LSG-UC-001"; :>> label = "PerformLaparoscopicSleeveGastrectomy"; }
         attribute :>> goalStatement = "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
         attribute :>> trigger = "patient prepared and surgical time-out complete";

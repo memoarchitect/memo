@@ -37,7 +37,7 @@ package memo_examples_temperature_alarm {
         @MemoIdentity { :>> providedId = "TA-USR-001"; }
     }
     use case ucMonitorTemp : SystemUseCase {
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> providedId = "TA-UC-001"; :>> label = "MonitorPatientTemperature"; }
         attribute :>> goalStatement = "Continuously monitor core temperature and be alerted when it leaves the safe range.";
         subject supportingSystem;

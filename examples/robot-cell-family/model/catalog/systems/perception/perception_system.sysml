@@ -35,7 +35,7 @@ package robot_cell_family_systems_perception_perception_system {
 
     use case ucRecordRun : SystemUseCase {
         @MemoIdentity { :>> providedId = "RCF-PER-UC-001"; :>> label = "Record Run Data"; }
-        attribute :>> useCaseKind = UseCaseKind::clinical;
+        attribute :>> useCaseKind = UseCaseKind::care;
         subject :>> supportingSystem : PerceptionSystem;
         actor operator = cellTechnician;
     }
