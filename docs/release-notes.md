@@ -2,11 +2,14 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
-## Unreleased
+## 0.17.0
 
 - **Operational levels are declared types.** `ClinicalUseCase` and `SystemUseCase` specialize `UseCase`; `ClinicalWorkflow` and `SystemWorkflow` specialize `OperationalWorkflow`; both bases are now abstract, so a model that types a use case or workflow by the base must pick a level. `CR-ONT-093` now keeps a use case's type and subject in agreement, `CR-ONT-094` to `100` read the workflow's type, and new `CR-ONT-103` keeps a workflow at the level of the use case it realizes. A new Clinical workflow viewpoint (`VP-CLINWF`) holds the level-1 flows; the Clinical viewpoint stays clinical evidence. The clinical extension's `ClinicalProcedureWorkflow` specializes `ClinicalWorkflow`. Short ids keep their families.
 - **`UseCaseKind::clinical` is now `UseCaseKind::care`.** The domain member shared a word with the new `ClinicalUseCase` level type. A model that sets `useCaseKind = UseCaseKind::clinical` must say `UseCaseKind::care`.
-
+- **Removed.** `recoveryPathSummary`, `timingConstraints`, `WorkflowControlNode` and `Transforms` leave the workflow ontology. A scenario's control flow is SysML's own, an alternate scenario states a recovery path, and an ISQ duration sits on the step. A model that uses one fails to compile.
+- **Added.** `CR-ONT-102`: a step under a workflow must sit in a scenario (IEC 62366-1 5.4). `MemoLayoutEdge.attachment` is one token for a connector's ends; a saved route is good only for the ends it was drawn between.
+- **Changed.** A scenario's time in the operational roll-up is its longest path, so a fork takes its longest branch. The clinical extension's procedure workflow is placed in the Model Explorer's operational group. The gastric-bypass functional workflow view moves to the functional viewpoint.
+- **Docs.** Step-by-step figures for the nine remaining ontology layer pages.
 
 ## 0.16.5
 
