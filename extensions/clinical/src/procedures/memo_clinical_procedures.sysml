@@ -14,10 +14,21 @@ package memo_extension_clinical_procedures {
 
     private import memo_core_terminology::*;
     private import memo_architecture_operational_workflows::*;
+    private import memo_viewpoints_rendering::*;
+    private import memo_core_common::MemoIdentity;
 
     part def ClinicalProcedureWorkflow specializes ClinicalWorkflow {
         attribute procedureCode : TerminologyCode[0..1];
         attribute clinicalObjective : String;
         attribute anesthesiaRequirement : String;
+    }
+
+    // A package places its own kinds in the Model Explorer (the core ontology's classifications apply to the
+    // core's). Without this the procedure workflow is listed in no domain, outside the level it is declared at.
+    part explorerProceduresClassification : ExplorerClassification {
+        @MemoIdentity { :>> providedId = "EXPL-031"; :>> label = "proceduresExplorerClassification"; }
+        attribute :>> sourceNamespace = "procedures";
+        attribute :>> explorerDomain = "architecture";
+        attribute :>> explorerGroup = "operational";
     }
 }
