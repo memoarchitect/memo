@@ -15,7 +15,7 @@ package memo_extension_clinical_procedures {
     private import memo_core_terminology::*;
     private import memo_architecture_operational_workflows::*;
 
-    part def ClinicalProcedureWorkflow specializes OperationalWorkflow {
+    part def ClinicalProcedureWorkflow specializes ClinicalWorkflow {
         attribute procedureCode : TerminologyCode[0..1];
         attribute clinicalObjective : String;
         attribute anesthesiaRequirement : String;

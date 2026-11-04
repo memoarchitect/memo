@@ -73,7 +73,7 @@ package memo_examples_gastric_bypass_variants {
     }
 
     // ── Tier 1: the clinical workflow ───────────────────────────
-    use case ucRouxEnY : UseCase {
+    use case ucRouxEnY : ClinicalUseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass"; }
         attribute :>> goalStatement = "Create the gastric pouch and its anastomosis and confirm that it does not leak, whatever the platform.";
@@ -185,12 +185,12 @@ package memo_examples_gastric_bypass_variants {
     allocate fnFireStapler to platform.ourRobot;
 
     // ── Tier 2: the system workflow, laparoscopic ──────────────────────
-    use case ucRouxEnYLap : UseCase {
+    use case ucRouxEnYLap : SystemUseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (laparoscopic)"; }
         subject :>> supportingSystem = platform.laparoscopicTower;
     }
-    part wfRouxEnYLap : OperationalWorkflow {
+    part wfRouxEnYLap : SystemWorkflow {
         @MemoIdentity { :>> label = "System workflow: Roux-en-Y gastric bypass (laparoscopic)"; }
         attribute :>> entryCondition = "patient prepared; time-out complete";
         attribute :>> completionCondition = "pouch and anastomosis created and leak-tested";
@@ -250,12 +250,12 @@ package memo_examples_gastric_bypass_variants {
     #refinement dependency wfRouxEnYLap::scLapConversion::convertToOpen to wfRouxEnY::scConversion::convertToOpen;
 
     // ── Tier 2: the system workflow, our robot ──────────────────────
-    use case ucRouxEnYOur : UseCase {
+    use case ucRouxEnYOur : SystemUseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (our robot)"; }
         subject :>> supportingSystem = platform.ourRobot;
     }
-    part wfRouxEnYOur : OperationalWorkflow {
+    part wfRouxEnYOur : SystemWorkflow {
         @MemoIdentity { :>> label = "System workflow: Roux-en-Y gastric bypass (our robot)"; }
         attribute :>> entryCondition = "patient prepared; time-out complete";
         attribute :>> completionCondition = "pouch and anastomosis created and leak-tested";
@@ -320,12 +320,12 @@ package memo_examples_gastric_bypass_variants {
     #refinement dependency wfRouxEnYOur::scOurConversion::convertToOpen to wfRouxEnY::scConversion::convertToOpen;
 
     // ── Tier 2: the system workflow, competitor robot ──────────────────────
-    use case ucRouxEnYCmp : UseCase {
+    use case ucRouxEnYCmp : SystemUseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (competitor robot)"; }
         subject :>> supportingSystem = platform.competitorRobot;
     }
-    part wfRouxEnYCmp : OperationalWorkflow {
+    part wfRouxEnYCmp : SystemWorkflow {
         @MemoIdentity { :>> label = "System workflow: Roux-en-Y gastric bypass (competitor robot)"; }
         attribute :>> entryCondition = "patient prepared; time-out complete";
         attribute :>> completionCondition = "pouch and anastomosis created and leak-tested";

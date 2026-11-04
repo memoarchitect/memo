@@ -24,7 +24,7 @@ package memo_examples_reusable_instrument {
         attribute :>> serviceScope = "central sterile services department";
     }
 
-    use case ucSterilize : UseCase {
+    use case ucSterilize : ClinicalUseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
         @MemoIdentity { :>> providedId = "RI-UC-001"; :>> label = "SterilizeReusableInstrument"; }
         attribute :>> goalStatement = "Return a used instrument to sterile, functional condition for the next case.";
@@ -35,7 +35,7 @@ package memo_examples_reusable_instrument {
     }
 
     // Reprocessing workflow: exists independently of any single instrument.
-    part wfReprocess : OperationalWorkflow {
+    part wfReprocess : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "RI-WF-001"; :>> label = "InstrumentReprocessingWorkflow"; }
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";

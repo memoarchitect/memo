@@ -56,13 +56,17 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
-| [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. |
+| [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) *(abstract)* | `use case def` | Use case definition specializing `MemoUseCase`. |
+| [`ClinicalUseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#clinicalusecase) | `use case def` | Clinical use case definition specializing `UseCase`. |
+| [`SystemUseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#systemusecase) | `use case def` | System use case definition specializing `UseCase`. |
 
 **Workflows**
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
-| [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. |
+| [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) *(abstract)* | `part def` | Operational workflow definition specializing `MemoPart`. |
+| [`ClinicalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#clinicalworkflow) | `part def` | Clinical workflow definition specializing `OperationalWorkflow`. |
+| [`SystemWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#systemworkflow) | `part def` | System workflow definition specializing `OperationalWorkflow`. |
 | [`WorkflowResource`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. |
 
 

@@ -34,7 +34,7 @@ package robot_cell_family_systems_manipulation_manipulation_system {
         attribute :>> outputDescription = "Grasp made within the set force and time limits, and the event that records it";
     }
 
-    use case ucExecuteGrasp : UseCase {
+    use case ucExecuteGrasp : SystemUseCase {
         @MemoIdentity { :>> providedId = "RCF-MAN-UC-001"; :>> label = "Execute Grasp"; }
         attribute :>> useCaseKind = UseCaseKind::clinical;
         subject :>> supportingSystem : ManipulatorSystem;

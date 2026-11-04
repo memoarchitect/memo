@@ -4,15 +4,16 @@
 // Structural invariants (endpoint existence, cycle freedom) are expressed over
 // the typed relations introduced in 0.5 — typed references make them checkable.
 //
-// Operational levels (CR-ONT-093..102). A use case is at the level of its subject: an
-// `OperationalEntity` is level 1 (clinical, no product, no number), a `System` or `SystemOfSystems`
-// is level 2 (one variant of a platform, which carries every number). The level of a step is the
-// level of the use case its workflow `realizesUseCase`. The workflow is reached from the step by
-// `composes` (a step nested in a scenario) or through the scenario that `performs` it (a step
-// declared once and used in several); a step outside any workflow has no level and is judged by
-// no level rule.
-// Nothing here is a kind list: each rule reads the subject's type and the `performs` and
-// `realizes` edges the builder already produces. Rule 6 of the plan, that every variant of a `TradeStudy` refines every step compared (101),
+// Operational levels (CR-ONT-093..103). A use case and a workflow are each declared at a level by
+// their type: `ClinicalUseCase` and `ClinicalWorkflow` are level 1 (clinical, no product, no
+// number), `SystemUseCase` and `SystemWorkflow` level 2 (one variant of a platform, which carries
+// every number). 093 keeps a use case's type and subject in agreement, 103 a workflow's type and
+// the use case it `realizesUseCase`. The level of a step is the type of the workflow it sits in,
+// reached from the step by `composes` (a step nested in a scenario) or through the scenario that
+// `performs` it (a step declared once and used in several); a step outside any workflow has no
+// level and is judged by no level rule.
+// Each rule reads a type and the `performs` and `realizes` edges the builder already produces.
+// Rule 6 of the plan, that every variant of a `TradeStudy` refines every step compared (101),
 // reads the study's `hasSubject` edges: its subject is the alternatives it analyses.
 // The one-currency rule (098) counts the project's `CurrencyUnit` declarations: a unit declared at
 // package level is built as a model element, as ISQ and SI declare theirs.
@@ -55,10 +56,10 @@ package memo_rules_ontology {
     }
     // ─── Use case scope (plan O8) ─────────────────────────────────────────
     //
-    // A use case is at the level of its subject: one whose subject is a SystemOfSystems is a clinical
-    // procedure, one whose subject is a System is a system use case. There is no kind for either; the
-    // level is read from the subject, and the subject from `hasSubject`. A use case with no subject
-    // is at neither level and neither rule judges it.
+    // The level of a use case is its declared type (`ClinicalUseCase`, `SystemUseCase`), and
+    // CR-ONT-093 keeps it in agreement with the subject (`hasSubject`). Rule 085 reads the subject
+    // for what it says about composition, not for the level. A use case with no subject
+    // is judged by no rule on the subject.
 
     constraint def SosUseCaseIncludesSystemUseCaseRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-085"; }
@@ -697,8 +698,8 @@ package memo_rules_ontology {
         attribute obligation = RuleObligationKind::recommended;
         attribute appliesTo = "UseCase";
         attribute severity = RuleSeverityKind::error;
-        attribute rationaleText = "A use case is at the level of its subject: an operational entity (the care team, the setting) is level 1, a system or a system of systems is level 2. A subject of any other type is at neither level, so the use case cannot say whether it may name a product or carry a number.";
-        attribute predicateExpression = "downstream(hasSubject)->forAll(conformsTo(OperationalEntity) or conformsTo(System) or conformsTo(SystemOfSystems))";
+        attribute rationaleText = "A use case is declared at a level, and its subject agrees: a clinical use case has an operational entity (the care team, the setting) as its subject, a system use case a system or a system of systems. A use case of neither type does not say whether it may name a product or carry a number, and a subject of the other level makes the declared type false.";
+        attribute predicateExpression = "(conformsTo(ClinicalUseCase) and downstream(hasSubject)->forAll(conformsTo(OperationalEntity))) or (conformsTo(SystemUseCase) and downstream(hasSubject)->forAll(conformsTo(System) or conformsTo(SystemOfSystems)))";
         constraint { true }
     }
     constraint def LevelOneStepCarriesNoNumberRule :> MemoConsistencyRule {
@@ -709,7 +710,7 @@ package memo_rules_ontology {
         attribute appliesTo = "OperativeAction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "A step of a level-1 workflow is the shared baseline of every variant and carries no planned number: a gastric pouch takes a different time and succeeds at a different rate on each platform, so a number on the step would belong to no variant. Time and success are set on the level-2 activity that refines it.";
-        attribute predicateExpression = "(attributes.expectedDuration == '' and attributes.plannedSuccessProbability == '') or not((upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity)))) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))))))";
+        attribute predicateExpression = "(attributes.expectedDuration == '' and attributes.plannedSuccessProbability == '') or not((upstream(composes)->exists(conformsTo(ClinicalWorkflow)) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(ClinicalWorkflow))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(ClinicalWorkflow))))))";
         constraint { true }
     }
     constraint def RealizerOfLevelOneStepIsLevelTwoRule :> MemoConsistencyRule {
@@ -720,7 +721,7 @@ package memo_rules_ontology {
         attribute appliesTo = "OperativeAction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Whatever refines a level-1 step is itself at level 2: a level-1 step refined by another level-1 step, or by an activity of no workflow at all, skips the level that names the variant.";
-        attribute predicateExpression = "not(downstream(realizes)->exists((upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity)))) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))))))) or (upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(System) or conformsTo(SystemOfSystems)))) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(System) or conformsTo(SystemOfSystems))))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(System) or conformsTo(SystemOfSystems)))))))";
+        attribute predicateExpression = "not(downstream(realizes)->exists((upstream(composes)->exists(conformsTo(ClinicalWorkflow)) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(ClinicalWorkflow))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(ClinicalWorkflow))))))) or (upstream(composes)->exists(conformsTo(SystemWorkflow)) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(SystemWorkflow))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(SystemWorkflow)))))";
         constraint { true }
     }
     constraint def InternalSystemActivityPerformsAFunctionRule :> MemoConsistencyRule {
@@ -742,7 +743,7 @@ package memo_rules_ontology {
         attribute appliesTo = "SystemFunction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "A system function is performed from a level-2 activity or from a step of a functional flow, never from a level-1 step: level 1 names no product, and a function is what a product does.";
-        attribute predicateExpression = "upstream(performs)->forAll(not(conformsTo(OperativeAction) and (upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity)))) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity)))))))))";
+        attribute predicateExpression = "upstream(performs)->forAll(not(conformsTo(OperativeAction) and (upstream(composes)->exists(conformsTo(ClinicalWorkflow)) or upstream(performs)->exists(upstream(composes)->exists(conformsTo(ClinicalWorkflow))) or upstream(composes)->exists(upstream(performs)->exists(upstream(composes)->exists(conformsTo(ClinicalWorkflow)))))))";
         constraint { true }
     }
     constraint def ProjectDeclaresOneCurrencyRule :> MemoConsistencyRule {
@@ -764,7 +765,7 @@ package memo_rules_ontology {
         attribute appliesTo = "OperativeScenario";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "How likely a path is differs by platform (a robot and a laparoscopic tower do not convert to open at the same rate), so a scenario of a level-1 workflow carries no likelihood; it is set on the level-2 scenario of each variant.";
-        attribute predicateExpression = "attributes.likelihood == '' or not(upstream(composes)->exists(conformsTo(OperationalWorkflow) and downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity)))))";
+        attribute predicateExpression = "attributes.likelihood == '' or not(upstream(composes)->exists(conformsTo(ClinicalWorkflow)))";
         constraint { true }
     }
     constraint def LevelOneWorkflowCarriesNoCostRule :> MemoConsistencyRule {
@@ -775,7 +776,7 @@ package memo_rules_ontology {
         attribute appliesTo = "OperationalWorkflow";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "What a procedure costs apart from its activities (set-up, capital per case) depends on the platform, so a level-1 workflow carries no per-procedure cost; it is set on the workflow of each level-2 variant.";
-        attribute predicateExpression = "attributes.perProcedureCost == '' or not(downstream(realizesUseCase)->exists(downstream(hasSubject)->exists(conformsTo(OperationalEntity))))";
+        attribute predicateExpression = "attributes.perProcedureCost == '' or not(conformsTo(ClinicalWorkflow))";
         constraint { true }
     }
     constraint def TradeStudyVariantRefinesEveryStepRule :> MemoConsistencyRule {
@@ -798,6 +799,17 @@ package memo_rules_ontology {
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "A workflow is the analysis of a use case (its equipment, environment and needs); the steps that carry it out are the tasks of a use scenario (IEC 62366-1 5.4). A step owned by the workflow itself belongs to no scenario, so it has no pre- or post-condition and no path it is on.";
         attribute predicateExpression = "not(upstream(composes)->exists(conformsTo(OperationalWorkflow))) or upstream(composes)->exists(conformsTo(OperativeScenario))";
+        constraint { true }
+    }
+    constraint def WorkflowRealizesUseCaseOfItsLevelRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-103"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "OperationalWorkflow";
+        attribute severity = RuleSeverityKind::error;
+        attribute rationaleText = "A workflow is the analysis of a use case and is at its level: a clinical workflow realizes a clinical use case, a system workflow a system use case. A workflow of the wrong level would carry a number the use case it serves may not, or hide a product from the baseline every variant is compared against.";
+        attribute predicateExpression = "(conformsTo(ClinicalWorkflow) and downstream(realizesUseCase)->forAll(conformsTo(ClinicalUseCase))) or (conformsTo(SystemWorkflow) and downstream(realizesUseCase)->forAll(conformsTo(SystemUseCase)))";
         constraint { true }
     }
     #EnforcesClause dependency from WorkflowOwnsNoStepsOutsideScenariosRule to iec62366_1::iec62366_1Clause5::iec62366_1Clause5_4;

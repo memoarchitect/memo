@@ -40,6 +40,8 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`OperationalWorkflow`](#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. | `MemoPart` |
+| [`ClinicalWorkflow`](#clinicalworkflow) | `part def` | Clinical workflow definition specializing `OperationalWorkflow`. | `OperationalWorkflow` |
+| [`SystemWorkflow`](#systemworkflow) | `part def` | System workflow definition specializing `OperationalWorkflow`. | `OperationalWorkflow` |
 | [`RealizesUseCase`](#realizesusecase) | `connection def` | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). | `MemoRelationship` |
 | [`ResourceKind`](#resourcekind) | `enum def` | Controlled values for resource: `instrument`, `equipment`, `consumable`, `material`, `information`, `space`. | — |
 | [`WorkflowResource`](#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. | `MemoResource` |
@@ -47,15 +49,45 @@
 ## OperationalWorkflow
 
 ```sysml
-part def OperationalWorkflow specializes MemoPart
+abstract part def OperationalWorkflow specializes MemoPart
 ```
 
 | Property | Value |
 | --- | --- |
 | Description | Operational workflow definition specializing `MemoPart`. |
 | Kind | `part def` |
-| Abstract | No |
+| Abstract | Yes |
 | Specializes | `MemoPart` |
+| Owning package | `memo_architecture_operational_workflows` |
+
+
+## ClinicalWorkflow
+
+```sysml
+part def ClinicalWorkflow specializes OperationalWorkflow
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Clinical workflow definition specializing `OperationalWorkflow`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `OperationalWorkflow` |
+| Owning package | `memo_architecture_operational_workflows` |
+
+
+## SystemWorkflow
+
+```sysml
+part def SystemWorkflow specializes OperationalWorkflow
+```
+
+| Property | Value |
+| --- | --- |
+| Description | System workflow definition specializing `OperationalWorkflow`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `OperationalWorkflow` |
 | Owning package | `memo_architecture_operational_workflows` |
 
 
@@ -146,7 +178,7 @@ part def WorkflowResource specializes MemoResource
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_use_cases::*;
 
-        part def OperationalWorkflow specializes MemoPart {
+        abstract part def OperationalWorkflow specializes MemoPart {
             // Where the body of work starts and ends. A scenario's pre- and
             // post-conditions are its own path's, inside these.
             attribute entryCondition : String;
@@ -164,6 +196,14 @@ part def WorkflowResource specializes MemoResource
             // `perform`s its scenarios' steps. Needs point here (Need.workflow);
             // the workflow does not list them, because assurance may depend on
             // architecture and not the reverse.
+        }
+
+        // A workflow is at the level of the use case it realizes, and says so by its type: a
+        // `ClinicalWorkflow` realizes a `ClinicalUseCase` (no product, no number); a `SystemWorkflow`
+        // realizes a `SystemUseCase` (one variant, every number). CR-ONT-103 keeps the two in step.
+        part def ClinicalWorkflow specializes OperationalWorkflow {
+        }
+        part def SystemWorkflow specializes OperationalWorkflow {
         }
 
         // The use case a workflow realizes. Many workflows may trace to one use

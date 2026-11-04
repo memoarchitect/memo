@@ -35,7 +35,7 @@ package memo_architecture_operational_workflows {
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_use_cases::*;
 
-    part def OperationalWorkflow specializes MemoPart {
+    abstract part def OperationalWorkflow specializes MemoPart {
         // Where the body of work starts and ends. A scenario's pre- and
         // post-conditions are its own path's, inside these.
         attribute entryCondition : String;
@@ -53,6 +53,14 @@ package memo_architecture_operational_workflows {
         // `perform`s its scenarios' steps. Needs point here (Need.workflow);
         // the workflow does not list them, because assurance may depend on
         // architecture and not the reverse.
+    }
+
+    // A workflow is at the level of the use case it realizes, and says so by its type: a
+    // `ClinicalWorkflow` realizes a `ClinicalUseCase` (no product, no number); a `SystemWorkflow`
+    // realizes a `SystemUseCase` (one variant, every number). CR-ONT-103 keeps the two in step.
+    part def ClinicalWorkflow specializes OperationalWorkflow {
+    }
+    part def SystemWorkflow specializes OperationalWorkflow {
     }
 
     // The use case a workflow realizes. Many workflows may trace to one use

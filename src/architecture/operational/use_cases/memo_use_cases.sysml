@@ -2,7 +2,8 @@
 // achieve with system support — there is no separate Goal class. Clinical,
 // service, manufacturing, and development use cases specialize the same base.
 //
-// A use case is at one of two levels, and the level is its subject's type, not a field.
+// A use case is at one of two levels, and the level is its own type (`ClinicalUseCase` or
+// `SystemUseCase`), kept in agreement with its subject by CR-ONT-093.
 // Level 1 is clinical: the subject is an `OperationalEntity` (the care team, the setting), the
 // use case names no product, and nothing on its workflow, scenarios or steps carries a number.
 // Level 2 is a black box: the subject is a `System` or `SystemOfSystems`, one variant of a
@@ -36,7 +37,7 @@ package memo_architecture_operational_use_cases {
     // subject/actor features below had to be re-declared by hand instead of
     // being inherited. The wrapper survives only to carry the display label and
     // lifecycle status; identity comes from `@MemoIdentity`.
-    use case def UseCase :> MemoUseCase, UseCases::UseCase {
+    abstract use case def UseCase :> MemoUseCase, UseCases::UseCase {
         // Text of this use case's goal; this is not a separate Goal element.
         attribute goalStatement : String;
         attribute trigger : String;
@@ -60,6 +61,16 @@ package memo_architecture_operational_use_cases {
         // `supportingActors` refs stood here as a second way of saying the
         // same thing and were removed; which actor initiates is carried by
         // the actor's name, as the note on `Initiates` below says.
+    }
+
+    // The two levels are types, declared and not derived. A clinical use case has an
+    // `OperationalEntity` (the care team, the setting) as its subject, names no product and carries
+    // no number; a system use case has a `System` or `SystemOfSystems`, one variant of a platform.
+    // CR-ONT-093 keeps the declared type and the subject in agreement. `UseCase` is abstract: a
+    // project states which level each use case is at.
+    use case def ClinicalUseCase :> UseCase {
+    }
+    use case def SystemUseCase :> UseCase {
     }
 
     connection def Motivates :> MemoRelationship {

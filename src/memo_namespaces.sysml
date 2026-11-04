@@ -69,6 +69,7 @@ package memo {
     public import memo_viewpoints_cybersecurity_views_cybersecurity_assessment_view::*;
     public import memo_viewpoints_clinical_clinical_viewpoint::*;
     public import memo_viewpoints_clinical_views_clinical_evidence_view::*;
+    public import memo_viewpoints_clinical_workflow_clinical_workflow_viewpoint::*;
     public import memo_viewpoints_usability_usability_viewpoint::*;
     public import memo_viewpoints_usability_views_usability_engineering_view::*;
     public import memo_viewpoints_ui_layout_ui_layout_viewpoint::*;
@@ -304,6 +305,7 @@ package memo_namespace_rules {
 package memo_namespace_viewpoints {
     alias catalog for memo_namespace_viewpoints_catalog;
     alias clinical for memo_namespace_viewpoints_clinical;
+    alias clinical_workflow for memo_namespace_viewpoints_clinical_workflow;
     alias context for memo_namespace_viewpoints_context;
     alias cybersecurity for memo_namespace_viewpoints_cybersecurity;
     alias definitions for memo_namespace_viewpoints_definitions;
@@ -530,6 +532,10 @@ package memo_namespace_viewpoints_catalog {
 package memo_namespace_viewpoints_clinical {
     public import memo_viewpoints_clinical_clinical_viewpoint::*;
     package views { alias clinical_evidence_view for memo_namespace_viewpoints_clinical_clinical_evidence_view; }
+}
+
+package memo_namespace_viewpoints_clinical_workflow {
+    public import memo_viewpoints_clinical_workflow_clinical_workflow_viewpoint::*;
 }
 
 package memo_namespace_viewpoints_context {

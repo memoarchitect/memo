@@ -145,7 +145,7 @@ package memo_examples_gpca_pump_gpca_operational {
     // ── Scenario-driven operational model ──────────────────────
     // The use case is the patient and clinician goal. It is supported by
     // several workflows, each of which owns multiple selected scenarios.
-    use case ucDeliverPcaTherapy : UseCase {
+    use case ucDeliverPcaTherapy : SystemUseCase {
         attribute :>> useCaseKind = UseCaseKind::clinical;
         @MemoIdentity { :>> providedId = "UC-001"; :>> label = "DeliverPatientControlledAnalgesia"; }
         attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
@@ -159,13 +159,13 @@ package memo_examples_gpca_pump_gpca_operational {
         actor pharmacistActor = actorPharmacist;
     }
 
-    part wfPrepareAndStartTherapy : OperationalWorkflow {
+    part wfPrepareAndStartTherapy : SystemWorkflow {
 @MemoIdentity { :>> label = "PrepareAndStartTherapy"; }
         attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
         attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
 
     }
-    part wfManageActiveTherapy : OperationalWorkflow {
+    part wfManageActiveTherapy : SystemWorkflow {
 @MemoIdentity { :>> label = "ManageActiveTherapy"; }
         attribute :>> entryCondition = "Basal therapy is active.";
         attribute :>> completionCondition = "A bolus is handled or active therapy continues safely.";
@@ -197,7 +197,7 @@ package memo_examples_gpca_pump_gpca_operational {
             }
         }
     }
-    part wfRespondToTherapyAlarm : OperationalWorkflow {
+    part wfRespondToTherapyAlarm : SystemWorkflow {
 @MemoIdentity { :>> label = "RespondToTherapyAlarm"; }
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
         attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";

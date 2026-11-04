@@ -1,5 +1,5 @@
-// The four operational flow views of the gastric-bypass example: the clinical workflow and the
-// system workflow of each platform. Operational stays a black box, so no function appears here;
+// The three operational flow views of the gastric-bypass example: the system workflow of each
+// platform (the clinical workflow is in the clinical workflow viewpoint). Operational stays a black box, so no function appears here;
 // our robot's functional workflow is in the functional viewpoint. Each shows its nominal
 // scenario; the alternate scenario is one step and has no flow to draw.
 package memo_examples_gastric_bypass_variants_viewpoints_operational_views {
@@ -11,14 +11,6 @@ package memo_examples_gastric_bypass_variants_viewpoints_operational_views {
 
     private import memo_core_common::*;
     private import memo_core_common::MemoIdentity;
-    view bypassFlowClinical : MemoDiagramView {
-        @MemoIdentity { :>> label = "Clinical workflow: Roux-en-Y gastric bypass"; }
-        expose memo_examples_gastric_bypass_variants::wfRouxEnY::scNominal::**;
-        attribute depth = 2;
-        attribute :>> viewKind = DiagramViewKind::actionflow;
-        attribute :>> diagramType = "ofd";
-        ref :>> viewpointDefinition = operationalViewpoint;
-    }
     view bypassFlowLaparoscopic : MemoDiagramView {
         @MemoIdentity { :>> label = "System workflow: laparoscopic"; }
         expose memo_examples_gastric_bypass_variants::wfRouxEnYLap::scLapNominal::**;

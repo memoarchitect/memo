@@ -30,15 +30,23 @@ The standard has no "workflow"; MEMO's workflow is the use specification scoped 
 
 ## Two levels
 
-A use case is at the level of its subject, and the level decides what it may say.
+A use case and a workflow are each declared at a level by their type, and the level decides what
+they may say. `UseCase` and `OperationalWorkflow` are abstract: a project states which level each
+one is at.
 
 | | Level 1: clinical | Level 2: black box |
 | --- | --- | --- |
 | Question | What must happen to the patient? | Who and what does it, with what, how long, at what cost? |
+| Use case and workflow | `ClinicalUseCase`, `ClinicalWorkflow` | `SystemUseCase`, `SystemWorkflow` |
 | Subject | An `OperationalEntity`: the care team, the setting | A `System` or `SystemOfSystems`: one variant of a platform |
 | Names a product? | Never | Yes, the variant's |
 | Numbers | None | Time, cost, success and likelihood, per variant |
 | Varies by | Clinical technique only | Platform: current, ours, a competitor's |
+
+The type and the subject must agree (`CR-ONT-093`), and a workflow realizes a use case of its own
+level (`CR-ONT-103`). The Architect groups use cases, the explorer and the viewpoints by the type:
+the clinical workflow is in the Clinical workflow viewpoint, the system workflows in the
+Operational viewpoint.
 
 Level 1 is the structure that is compared, and every number lives on a variant's level 2,
 because the same step takes a different time, uses different instruments and succeeds at a
