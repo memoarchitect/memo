@@ -287,10 +287,10 @@ calc def HighestDemand
         // with it, as in the language, so two branches of a fork overlap and a scenario takes as long
         // as its longest path, not the sum of its steps.
         calc def FinishTime {
-            in step : OperativeAction[1];
+            in activity : OperativeAction[1];
             return finish : DurationValue[1] = QuantityCalculations::sum((
-                step.expectedDuration,
-                step.predecessors->collect { in before : OperativeAction[1]; FinishTime(before) }
+                activity.expectedDuration,
+                activity.predecessors->collect { in before : OperativeAction[1]; FinishTime(before) }
                     ->reduce { in x : DurationValue[1]; in y : DurationValue[1]; NumericalFunctions::max(x, y) }));
         }
 

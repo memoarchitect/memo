@@ -2,6 +2,10 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.17.1
+
+- **Fixed.** `FinishTime`'s parameter is `activity`, not the KerML keyword `step`, which OpenSysML read as the keyword and so could not compile the ontology. Every project failed to build under OpenSysML on 0.17.0.
+
 ## 0.17.0
 
 - **Operational levels are declared types.** `ClinicalUseCase` and `SystemUseCase` specialize `UseCase`; `ClinicalWorkflow` and `SystemWorkflow` specialize `OperationalWorkflow`; both bases are now abstract, so a model that types a use case or workflow by the base must pick a level. `CR-ONT-093` now keeps a use case's type and subject in agreement, `CR-ONT-094` to `100` read the workflow's type, and new `CR-ONT-103` keeps a workflow at the level of the use case it realizes. A new Clinical workflow viewpoint (`VP-CLINWF`) holds the level-1 flows; the Clinical viewpoint stays clinical evidence. The clinical extension's `ClinicalProcedureWorkflow` specializes `ClinicalWorkflow`. Short ids keep their families.
