@@ -46,7 +46,8 @@ one is at.
 The type and the subject must agree (`CR-ONT-093`), and a workflow realizes a use case of its own
 level (`CR-ONT-103`). The Architect groups use cases, the explorer and the viewpoints by the type:
 the clinical workflow is in the Clinical workflow viewpoint, the system workflows in the
-Operational viewpoint.
+Operational viewpoint. A step written once as an action definition and used from both levels is at
+neither, and the explorer lists it outside both groups.
 
 Level 1 is the structure that is compared, and every number lives on a variant's level 2,
 because the same step takes a different time, uses different instruments and succeeds at a
