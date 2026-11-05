@@ -34,7 +34,7 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`MemoIdentity`](#memoidentity) | `metadata def` | The metaclass-agnostic carrier for MEMO's identity fields. A `metadata def` annotates an element of ANY metaclass — restriction is opt-in through `annotatedElement`, and this one declares none.… | — |
-| [`MemoKind`](#memokind) | `metadata def` | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`Stakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sys… | — |
+| [`MemoKind`](#memokind) | `metadata def` | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`ProjectStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sy… | — |
 | [`MemoPart`](#memopart) | `part def` | Memo part definition. | — |
 | [`MemoResource`](#memoresource) | `part def` | A resource a body of work spends: an instrument, a person, a consumable or the platform. It carries what an hour of its capacity costs and what one use of it costs. | `MemoPart` |
 | [`RequirementDriver`](#requirementdriver) | `part def` | Requirement driver definition specializing `MemoPart`. | `MemoPart` |
@@ -82,7 +82,7 @@ metadata def MemoKind
 
 | Property | Value |
 | --- | --- |
-| Description | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`Stakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sys… |
+| Description | Marks a definition as a KIND — an extension of the ontology — rather than a model element. A project definition that specializes an ontology kind is, structurally, either a new kind (`ProjectStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the Sy… |
 | Kind | `metadata def` |
 | Abstract | No |
 | Specializes | — |
@@ -533,7 +533,7 @@ part def Citation specializes MemoPart
 
         // Marks a definition as a KIND — an extension of the ontology — rather than a model element.
         // A project definition that specializes an ontology kind is, structurally, either a new kind
-        // (`Stakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the
+        // (`ProjectStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the
         // SysML tells the two apart, so the author says which. A marked definition, and what is typed
         // by it, takes `idPrefix` as the family of its display ids (`<idPrefix>-1`). Anything unmarked
         // takes the family of the ontology kind it descends from.

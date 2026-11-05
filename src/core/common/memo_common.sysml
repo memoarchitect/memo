@@ -92,7 +92,7 @@ package memo_core_common {
 
     // Marks a definition as a KIND — an extension of the ontology — rather than a model element.
     // A project definition that specializes an ontology kind is, structurally, either a new kind
-    // (`Stakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the
+    // (`ProjectStakeholder`) or one particular thing (`HospitalEpRecordingSystem`); nothing in the
     // SysML tells the two apart, so the author says which. A marked definition, and what is typed
     // by it, takes `idPrefix` as the family of its display ids (`<idPrefix>-1`). Anything unmarked
     // takes the family of the ontology kind it descends from.

@@ -1304,8 +1304,8 @@ constraint def WorkflowRealizesUseCaseOfItsLevelRule :> MemoConsistencyRule
             attribute obligation = RuleObligationKind::recommended;
             attribute appliesTo = "ComponentFunction";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "A component function is the responsibility of exactly one component, and AllocatedTo is what names it. A component function allocated nowhere is a responsibility nobody has accepted; one allocated twice is a responsibility nobody owns. A system-level responsibility with no single owner is a SystemFunction, which allows that.";
-            attribute predicateExpression = "allocatedTo->size() == 1";
+            attribute rationaleText = "A component function is the responsibility of exactly one component, and AllocatedTo is what names it. A component function allocated nowhere is a responsibility nobody has accepted; one allocated twice is a responsibility nobody owns. A system-level responsibility with no single owner is a SystemFunction, which allows that. A definition is a type and is not allocated; its usages are.";
+            attribute predicateExpression = "isDefinition == 'true' or allocatedTo->size() == 1";
             constraint { true }
         }
         constraint def FunctionDecomposesIntoFunctionsRule :> MemoConsistencyRule {
