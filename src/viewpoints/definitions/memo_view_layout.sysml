@@ -63,6 +63,9 @@ package memo_viewpoints_definitions_layout {
         attribute layoutContractVersion : String[0..1];
         attribute layoutPreset : String[0..1];
         attribute layoutSeed : Real[0..1];
+        /** How this view's connectors are drawn, and whether they follow the router or a person. */
+        attribute routingType : String[0..1];
+        attribute routingMode : String[0..1];
     }
 
     /** Renderer namespaces and forward-compatible presentation fields only.
@@ -107,6 +110,9 @@ package memo_viewpoints_definitions_layout {
         attribute y : Real;
         attribute side : MemoLayoutSide[0..1];
         attribute size : Real[0..1];
+        /** A port nested in a port: how far along its parent, and whether it faces out. */
+        attribute alongOffset : Real[0..1];
+        attribute faceOuter : Boolean[0..1];
     }
 
     /**
@@ -143,6 +149,23 @@ package memo_viewpoints_definitions_layout {
         attribute sourceT : Real[0..1];
         attribute targetSide : MemoLayoutSide[0..1];
         attribute targetT : Real[0..1];
+        /**
+         * False when the router computed `route`, so the next routing may replace it.
+         * A route is stored because routing a whole board on every open is too slow.
+         */
+        attribute manualRoute : Boolean[0..1];
+        attribute routingType : String[0..1];
+        attribute routingOverride : String[0..1];
+        /** Where the connector's label sits, on the board. */
+        attribute labelX : Real[0..1];
+        attribute labelY : Real[0..1];
+        /** Where each end leaves its box, relative to the box, and on which wall. */
+        attribute sourceOffsetX : Real[0..1];
+        attribute sourceOffsetY : Real[0..1];
+        attribute sourceOffsetSide : MemoLayoutSide[0..1];
+        attribute targetOffsetX : Real[0..1];
+        attribute targetOffsetY : Real[0..1];
+        attribute targetOffsetSide : MemoLayoutSide[0..1];
     }
 
     /** A note, text label or constraint box that belongs to the drawing and not to the model. */

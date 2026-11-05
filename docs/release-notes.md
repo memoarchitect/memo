@@ -6,6 +6,8 @@ Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change 
 
 - **Removed.** `statement` leaves `MemoRequirementElement`, so requirements and needs no longer have it. A requirement's text is native `doc`, which SysML defines as its text. A model that sets `attribute :>> statement` stops compiling: write `doc /* … */` instead, and where an element has both, compare them first. ReqIF imports write `doc`.
 - **Changed.** `memo::*` also brings in `memo_core_stdlib_quantities`, `memo_core_stdlib_money` and `memo_core_stdlib_analysis`.
+- **Added.** An automatic route is stored in typed fields on `MemoLayoutEdge` and `MemoLayoutPort`, and routing settings on `MemoLayout`, so routing a diagram no longer writes JSON into the view. An anonymous connection's id comes from what it connects, so adding a connection does not move a saved route. A layout saved earlier keeps its anonymous routes only if re-keyed; automatic routing replaces them otherwise.
+- **Fixed.** `CR-ONT-074` no longer asks a definition to be allocated: its usages are.
 - **Docs.** Examples and tutorials write a connection as `connect a to b`, which binds by position, and are tidied. Ontology comments state what is true now and no longer narrate what changed.
 
 ## 0.17.1
