@@ -127,6 +127,7 @@ package memo_assurance_safety_risk {
     // types declared here, and core must not depend on a domain package.
     // ISO 14971 risk chain — distinct sequence-of-events relations over risk elements.
     connection def TracesRisk :> MemoRelationship {
+        attribute :>> isTrace = true;
         end sourceRiskElement : RiskItem :>> source;
         end targetRiskElement : RiskItem :>> target;
     }
@@ -154,6 +155,7 @@ package memo_assurance_safety_risk {
     // architecture, and the scenario package cannot see `Hazard`. On this side
     // both ends are visible.
     connection def HazardRelatedScenario :> MemoRelationship {
+        attribute :>> isTrace = true;
         end hazard : RiskItem :>> source;
         end scenario : OperativeScenario :>> target;
     }
@@ -221,6 +223,7 @@ package memo_assurance_safety_risk {
         enum fmeaAction;
     }
     connection def Mitigates :> MemoRelationship {
+        attribute :>> isTrace = true;
         attribute mitigationKind : MitigationKind;
         // Untyped: controls/hazards may be item defs (RiskControlMeasure, Hazard, …).
         end control :>> source;

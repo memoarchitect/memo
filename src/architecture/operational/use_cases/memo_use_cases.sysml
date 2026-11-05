@@ -71,6 +71,7 @@ package memo_architecture_operational_use_cases {
     }
 
     connection def Motivates :> MemoRelationship {
+        attribute :>> isTrace = true;
         end motivatingNeed : Need :>> source;
         end motivatedUseCase : UseCase :>> target;
     }

@@ -36,8 +36,8 @@
 | --- | --- | --- | --- |
 | [`RegulatoryStandard`](#regulatorystandard) | `part def` | A regulatory or consensus standard a project claims conformance to, identified by its full designation including edition and amendments (e.g. "IEC 62366-1:2015+AMD1:2020").… | `MemoArtifact` |
 | [`StandardClause`](#standardclause) | `part def` | One normative clause of a RegulatoryStandard, at the depth at which the standard makes a distinct requirement a MEMO document actually claims.… | `MemoArtifact` |
-| [`ConformsTo`](#conformsto) | `connection def` | Any model element claims conformance to a standard clause. This is the edge the standards traceability matrix and the clause coverage report are computed over. | `MemoRelationship` |
-| [`TracesToDocument`](#tracestodocument) | `connection def` | Where the evidence for a clause claim is written down. The target is the existing controlled-artifact type — MEMO does not model a separate Document/DocumentSection family, because ControlledArtifact / ModelOwnedArtifact / MarkdownDocumentSource already carry version, owner an… | `MemoRelationship` |
+| [`ConformsTo`](#conformsto) | `connection def` | Relationships | `MemoRelationship` |
+| [`TracesToDocument`](#tracestodocument) | `connection def` | Typed relationship from `MemoArtifact` to `ControlledArtifact`. | `MemoRelationship` |
 | [`EnforcesClause`](#enforcesclause) | `metadata def` | A rule's trace to the clause it enforces: `#EnforcesClause dependency from <Rule> to <clause>, <clause>;`. A rule may trace to several clauses, from several standards, or to none (a rule MEMO or a user holds for its own reasons).… | — |
 
 ## RegulatoryStandard
@@ -78,7 +78,7 @@ connection def ConformsTo :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Any model element claims conformance to a standard clause. This is the edge the standards traceability matrix and the clause coverage report are computed over. |
+| Description | Relationships |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -93,7 +93,7 @@ connection def TracesToDocument :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Where the evidence for a clause claim is written down. The target is the existing controlled-artifact type — MEMO does not model a separate Document/DocumentSection family, because ControlledArtifact / ModelOwnedArtifact / MarkdownDocumentSource already carry version, owner an… |
+| Description | Typed relationship from `MemoArtifact` to `ControlledArtifact`. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -220,6 +220,7 @@ metadata def EnforcesClause
         // =========================================================================
 
         connection def ConformsTo :> MemoRelationship {
+            attribute :>> isTrace = true;
             doc /* Any model element claims conformance to a standard clause.
                  * This is the edge the standards traceability matrix and the
                  * clause coverage report are computed over. */
@@ -237,6 +238,7 @@ metadata def EnforcesClause
         }
 
         connection def TracesToDocument :> MemoRelationship {
+            attribute :>> isTrace = true;
             doc /* Where the evidence for a clause claim is written down. The target
                  * is the existing controlled-artifact type — MEMO does not model a
                  * separate Document/DocumentSection family, because

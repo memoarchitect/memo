@@ -195,6 +195,7 @@ connection def Motivates :> MemoRelationship
         }
 
         connection def Motivates :> MemoRelationship {
+            attribute :>> isTrace = true;
             end motivatingNeed : Need :>> source;
             end motivatedUseCase : UseCase :>> target;
         }

@@ -550,6 +550,7 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = identifiesHazardLinks meta SysML::Usage;
         }
         connection def HasFailureMode :> MemoRelationship {
+            attribute :>> isTrace = true;
             end element : MemoPart :>> source;
             end failureMode : FailureMode :>> target;
         }

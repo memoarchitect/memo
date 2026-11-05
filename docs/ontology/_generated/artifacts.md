@@ -83,8 +83,8 @@ flowchart LR
 | Relationship | From | To | What it says |
 | --- | --- | --- | --- |
 | [`Changes`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changes) | [`ChangeRequest`](../sysml-api/artifacts/configuration_management/memo_configuration_management.md#changerequest) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `ChangeRequest` to `MemoPart`. |
-| [`ConformsTo`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#conformsto) | *any element* | [`StandardClause`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#standardclause) | Any model element claims conformance to a standard clause. This is the edge the standards traceability matrix and the clause coverage report are computed over. |
-| [`TracesToDocument`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#tracestodocument) | [`MemoArtifact`](../sysml-api/artifacts/core/memo_controlled_artifacts.md#memoartifact) | [`ControlledArtifact`](../sysml-api/artifacts/core/memo_controlled_artifacts.md#controlledartifact) | Where the evidence for a clause claim is written down. The target is the existing controlled-artifact type — MEMO does not model a separate Document/DocumentSection family, because ControlledArtifact / ModelOwnedArtifact / MarkdownDocumentSource already carry version, owner an… |
+| [`ConformsTo`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#conformsto) | *any element* | [`StandardClause`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#standardclause) | Relationships |
+| [`TracesToDocument`](../sysml-api/artifacts/standards/memo_artifacts_standards_traceability.md#tracestodocument) | [`MemoArtifact`](../sysml-api/artifacts/core/memo_controlled_artifacts.md#memoartifact) | [`ControlledArtifact`](../sysml-api/artifacts/core/memo_controlled_artifacts.md#controlledartifact) | Typed relationship from `MemoArtifact` to `ControlledArtifact`. |
 
 ### Relationships from elsewhere that reach this layer
 

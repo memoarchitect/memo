@@ -293,6 +293,7 @@ package memo_assurance_cybersecurity {
         :>> baseType = realizedByScenarioLinks meta SysML::Usage;
     }
     connection def ImpactsSafety :> MemoRelationship {
+        attribute :>> isTrace = true;
         attribute tracePurpose : String;
         end cyberElement : MemoPart :>> source;
         end safetyElement : RiskItem :>> target;

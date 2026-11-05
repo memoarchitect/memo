@@ -98,6 +98,7 @@ package memo_artifacts_standards_traceability {
     // =========================================================================
 
     connection def ConformsTo :> MemoRelationship {
+        attribute :>> isTrace = true;
         doc /* Any model element claims conformance to a standard clause.
              * This is the edge the standards traceability matrix and the
              * clause coverage report are computed over. */
@@ -115,6 +116,7 @@ package memo_artifacts_standards_traceability {
     }
 
     connection def TracesToDocument :> MemoRelationship {
+        attribute :>> isTrace = true;
         doc /* Where the evidence for a clause claim is written down. The target
              * is the existing controlled-artifact type — MEMO does not model a
              * separate Document/DocumentSection family, because

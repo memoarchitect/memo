@@ -20,6 +20,7 @@ package memo_assurance_human_factors {
     }
 
     connection def CommitsUseError :> MemoRelationship {
+        attribute :>> isTrace = true;
         end task : OperativeAction :>> source;
         end useError : UseError :>> target;
     }
@@ -30,6 +31,7 @@ package memo_assurance_human_factors {
         :>> baseType = commitsUseErrorLinks meta SysML::Usage;
     }
     connection def EvaluatesTask :> MemoRelationship {
+        attribute :>> isTrace = true;
         end evaluation : MemoEvidence :>> source;
         end task : OperativeAction :>> target;
     }
@@ -48,6 +50,7 @@ package memo_assurance_human_factors {
     // target is the usability TEST — a validation case — and not the evidence
     // it produces; `ProducesEvidence` links the two.
     connection def TestedByUsability :> MemoRelationship {
+        attribute :>> isTrace = true;
         end uiElementOrTask :>> source;
         end usabilityTest : MemoVerificationCase :>> target;
     }

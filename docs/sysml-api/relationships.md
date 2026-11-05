@@ -148,8 +148,8 @@ SysML `connection def`, `interface def`, `flow def` and `allocation def` declara
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ConformsTo`](artifacts/standards/memo_artifacts_standards_traceability.md#conformsto) | `connection def` | Any model element claims conformance to a standard clause. This is the edge the standards traceability matrix and the clause coverage report are computed over. | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
-| [`TracesToDocument`](artifacts/standards/memo_artifacts_standards_traceability.md#tracestodocument) | `connection def` | Where the evidence for a clause claim is written down. The target is the existing controlled-artifact type — MEMO does not model a separate Document/DocumentSection family, because ControlledArtifact / ModelOwnedArtifact / MarkdownDocumentSource already carry version, owner an… | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
+| [`ConformsTo`](artifacts/standards/memo_artifacts_standards_traceability.md#conformsto) | `connection def` | Relationships | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
+| [`TracesToDocument`](artifacts/standards/memo_artifacts_standards_traceability.md#tracestodocument) | `connection def` | Typed relationship from `MemoArtifact` to `ControlledArtifact`. | [`artifacts/standards/memo_artifacts_standards_traceability.sysml`](artifacts/standards/memo_artifacts_standards_traceability.md) |
 
 
 ## `memo::assurance::cybersecurity`

@@ -734,6 +734,7 @@ connection def ControlImplementedBy :> MemoRelationship
         // backwards — not only on a control. Narrowing this to an interaction
         // base made those unmodellable.
         connection def ErrorAtElement :> MemoRelationship {
+            attribute :>> isTrace = true;
             end useError : UseError :>> source;
             end element : MemoPart :>> target;
         }
@@ -746,6 +747,7 @@ connection def ControlImplementedBy :> MemoRelationship
         // A risk control implemented by a UI element or by task design
         // (confirmation dialog, lockout, guarded control).
         connection def ControlImplementedBy :> MemoRelationship {
+            attribute :>> isTrace = true;
             end riskControl : RiskControlMeasure :>> source;
             end implementingElement :>> target;
         }

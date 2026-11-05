@@ -63,6 +63,11 @@ package memo_core_relationships {
              * satisfaction links are not. Unset is read as false. Interface and flow usages are connectors by
              * their language construct and need no value. */
         attribute isConnector : Boolean;
+        doc /* True when this relation records where an element's obligation comes from or how it is answered:
+             * a link to a requirement, a risk, a verification, a standard or a controlled document. Authoring
+             * surfaces offer these as traces, and a coverage report reads them as traceability. Structure,
+             * allocation, deployment and context links are not. Unset is read as false. */
+        attribute isTrace : Boolean;
     }
 
     // ─── Typed dependencies ─────────────────────────────────────────────
@@ -132,6 +137,7 @@ package memo_core_relationships {
     }
 
     connection def DerivesFrom :> MemoRelationship {
+        attribute :>> isTrace = true;
         // Drivers span metaclasses — a need is a requirement def, a hazard an
         // item, a threat an item — so the source end stays untyped. The target
         // is now typed: since Requirement re-rooted onto MemoRequirement, one
@@ -150,6 +156,7 @@ package memo_core_relationships {
     // <realizing> to <realized>;`. `#refinement` places no metaclass
     // restriction on either end.
     connection def ProducesEvidence :> MemoRelationship {
+        attribute :>> isTrace = true;
         end producer : MemoVerificationCase :>> source;
         end producedEvidence : MemoEvidence :>> target;
     }
@@ -162,6 +169,7 @@ package memo_core_relationships {
     // Precedence is native `succession` (`first a then b;`).
 
     connection def DerivesCyberRequirement :> MemoRelationship {
+        attribute :>> isTrace = true;
         end sourceThreatOrRisk : RequirementDriver :>> source;
         end targetRequirement : MemoRequirementElement :>> target;
     }
@@ -184,6 +192,7 @@ package memo_core_relationships {
     }
 
     connection def Validates :> MemoRelationship {
+        attribute :>> isTrace = true;
         // Validation targets include use cases and other behavioural elements,
         // so the target remains untyped across SysML metaclass families.
         end validationTarget :>> source;
