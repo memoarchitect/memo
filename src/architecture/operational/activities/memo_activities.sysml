@@ -68,8 +68,8 @@ package memo_architecture_operational_activities {
         attribute feedbackExpected : String;
     }
 
-    // Difficulty of a task in a particular context (§17). Associated by
-    // typed references, not inheritance; assessments are evidence-bearing.
+    // Difficulty of a task in a particular context. Associated by typed
+    // references, not inheritance; assessments are evidence-bearing.
     part def TaskDifficultyAssessment specializes MemoPart {
         attribute overallDifficulty : DemandLevelKind;
         attribute physicalDemand : DemandLevelKind;

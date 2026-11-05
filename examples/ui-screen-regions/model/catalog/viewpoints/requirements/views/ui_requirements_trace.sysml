@@ -1,20 +1,8 @@
 package memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_requirements_trace {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_relationships::*;
-    private import memo_core_annotations::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_architecture_implementation_ui::*;
-    private import memo_assurance_requirements::*;
-    private import memo_assurance_requirements_needs::*;
-    private import memo_assurance_human_factors::*;
-    private import memo_assurance_safety_risk::*;
-    private import memo_assurance_verification_validation::*;
-    private import memo_artifacts_core::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_core_enumerations::*;
-    private import memo_viewpoints_ui_layout_views_screen_layout_view::*;
     private import memo_examples_ui_screen_regions_viewpoints_requirements::*;
     private import memo_examples_ui_screen_regions_architecture_implementation_ui::*;
     private import memo_examples_ui_screen_regions_architecture_functional_functions::*;
@@ -29,8 +17,6 @@ package memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_require
     private import memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
     private import memo_examples_ui_screen_regions_traces::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view uiRequirementsTrace : MemoDiagramView {
         expose memo_examples_ui_screen_regions_architecture_implementation_ui::*;
         expose memo_examples_ui_screen_regions_architecture_functional_functions::*;
@@ -45,8 +31,7 @@ package memo_examples_ui_screen_regions_viewpoints_requirements_views_ui_require
         expose memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
         expose memo_examples_ui_screen_regions_traces::*;
         attribute depth = 3;
-        @MemoIdentity { :>> providedId = "REQ-101"; }
-        @MemoIdentity { :>> shortDescription = "Clinical need through UI requirements to satisfying regions and functions."; }
+        @MemoIdentity { :>> providedId = "REQ-101"; :>> shortDescription = "Clinical need through UI requirements to satisfying regions and functions."; }
         attribute :>> viewKind = DiagramViewKind::grid;
         attribute :>> diagramType = "req";
         attribute :>> autoPopulate = true;

@@ -24,10 +24,9 @@
 // methodology is derived from the binding and the methodology chain; authoring
 // one by hand created a second answer that no resolver produced.
 package memo_examples_gpca_pump_methodology_gpca_profiles {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_methodology_core::*;
-    private import memo_methodology_profiles::*;
 
     // ── The selection ────────────────────────────────────────────────────
     //
@@ -61,15 +60,7 @@ package memo_examples_gpca_pump_methodology_gpca_profiles {
     public import memo_rules_quantitative::*;
     public import memo_rules_ontology::*;
 
-    private import memo_artifacts_standards_iso_14971::iso14971;
-    private import memo_artifacts_standards_iec_62304::iec62304;
-    private import memo_artifacts_standards_cfr_21_820::cfr21Part820;
-    private import memo_artifacts_standards_iso_13485::iso13485;
-    private import memo_viewpoints_context_context_viewpoint::contextViewpoint;
-    private import memo_viewpoints_logical_logical_viewpoint::logicalArchitectureViewpoint;
-    private import memo_viewpoints_risk_risk_viewpoint::riskViewpoint;
 
-    private import memo_core_common::MemoIdentity;
     part gpcaMethodDefinition : MethodologyDefinition {
         @MemoIdentity { :>> providedId = "METH-GPCA-001"; :>> label = "GPCAPrototypeMethodology"; }
         attribute :>> version = "0.6.5";

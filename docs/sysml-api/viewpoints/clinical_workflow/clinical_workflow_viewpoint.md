@@ -28,7 +28,6 @@
 | private | `memo_core_enumerations::*` |
 | private | `memo_viewpoints_stakeholders_concerns::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -50,7 +49,6 @@
         private import memo_viewpoints_stakeholders_concerns::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         viewpoint clinicalWorkflowViewpoint : MemoViewpoint {
             @MemoIdentity { :>> providedId = "VP-CLINWF"; :>> label = "ClinicalWorkflowViewpoint"; }
             @MemoIdentity { :>> shortDescription = "Shows clinical use cases, workflows and scenarios: what must happen to the patient, with no product and no number."; }

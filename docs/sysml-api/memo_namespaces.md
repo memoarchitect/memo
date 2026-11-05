@@ -166,6 +166,9 @@
 | public | `memo_core_common::*` |
 | public | `memo_core_relationships::*` |
 | public | `memo_core_annotations::*` |
+| public | `memo_core_stdlib_quantities::*` |
+| public | `memo_core_stdlib_money::*` |
+| public | `memo_core_stdlib_analysis::*` |
 | public | `memo_architecture_operational_context_actors::*` |
 | public | `memo_architecture_operational_context_stakeholders::*` |
 | public | `memo_architecture_operational_context_use_context::*` |
@@ -394,6 +397,9 @@
         public import memo_core_common::*;
         public import memo_core_relationships::*;
         public import memo_core_annotations::*;
+        public import memo_core_stdlib_quantities::*;
+        public import memo_core_stdlib_money::*;
+        public import memo_core_stdlib_analysis::*;
 
         public import memo_architecture_operational_context_actors::*;
         public import memo_architecture_operational_context_stakeholders::*;

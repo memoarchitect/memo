@@ -1,16 +1,8 @@
 package memo_examples_sysml_diagram_samples_samples_functional_flow_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_core_relationships::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     // ─────────────────────────────────────────────────────────────────────────
     // Sample · Functional flow — component behaviour of dose delivery
     //
@@ -52,36 +44,36 @@ package memo_examples_sysml_diagram_samples_samples_functional_flow_view {
     // Component hierarchy used by the Level control:
     // L1 system → L2 subsystems → L3 allocated components.
     part fxPumpSystem : LogicalComponent {
-@MemoIdentity { :>> label = "Infusion Pump System"; }
+        @MemoIdentity { :>> label = "Infusion Pump System"; }
         part fxSensingSubsystem : LogicalComponent {
-@MemoIdentity { :>> label = "Sensing Subsystem"; }
+            @MemoIdentity { :>> label = "Sensing Subsystem"; }
             part fxSensor : LogicalComponent {@MemoIdentity { :>> label = "Sensor Subsystem"; } }
         }
         part fxControlSubsystem : LogicalComponent {
-@MemoIdentity { :>> label = "Control Subsystem"; }
+            @MemoIdentity { :>> label = "Control Subsystem"; }
             part fxController : LogicalComponent {@MemoIdentity { :>> label = "Infusion Controller"; } }
         }
         part fxDeliverySubsystem : LogicalComponent {
-@MemoIdentity { :>> label = "Delivery Subsystem"; }
+            @MemoIdentity { :>> label = "Delivery Subsystem"; }
             part fxActuator : LogicalComponent {@MemoIdentity { :>> label = "Pump Actuator"; } }
         }
         part fxSafetySubsystem : LogicalComponent {
-@MemoIdentity { :>> label = "Safety Subsystem"; }
+            @MemoIdentity { :>> label = "Safety Subsystem"; }
             part fxSafety : LogicalComponent {@MemoIdentity { :>> label = "Safety Monitor"; } }
         }
-            connection : LogicalConnector connect sourceComponent ::> fxSensingSubsystem.fxSensor to targetComponent ::> fxControlSubsystem.fxController {
+        connection : LogicalConnector connect fxSensingSubsystem.fxSensor to fxControlSubsystem.fxController {
             attribute :>> contentKind = FlowContentKind::measurement;
             attribute :>> direction = DirectionKind::output;
         }
-        connection : LogicalConnector connect sourceComponent ::> fxControlSubsystem.fxController to targetComponent ::> fxDeliverySubsystem.fxActuator {
+        connection : LogicalConnector connect fxControlSubsystem.fxController to fxDeliverySubsystem.fxActuator {
             attribute :>> contentKind = FlowContentKind::command;
             attribute :>> direction = DirectionKind::output;
         }
-        connection : LogicalConnector connect sourceComponent ::> fxSafetySubsystem.fxSafety to targetComponent ::> fxControlSubsystem.fxController {
+        connection : LogicalConnector connect fxSafetySubsystem.fxSafety to fxControlSubsystem.fxController {
             attribute :>> contentKind = FlowContentKind::alarm;
             attribute :>> direction = DirectionKind::output;
         }
-}
+    }
 
     action fxDeliveryFlow : SystemFunction {
         action fxAcquire : FxAcquire {@MemoIdentity { :>> label = "Acquire Sensor Data"; } }
@@ -97,7 +89,7 @@ package memo_examples_sysml_diagram_samples_samples_functional_flow_view {
 
         // Composite function — valve sub-flow (drill-in)
         action fxDeliver : FxDeliverMedication {
-@MemoIdentity { :>> label = "Deliver Medication"; }
+            @MemoIdentity { :>> label = "Deliver Medication"; }
             action fxOpenValve : SystemFunction {@MemoIdentity { :>> label = "Open Valve"; } }
             action fxHoldDose : SystemFunction {@MemoIdentity { :>> label = "Hold Metered Dose"; } out item fluid : FxMedicationFluid; }
             action fxCloseValve : SystemFunction {@MemoIdentity { :>> label = "Close Valve"; } in item fluid : FxMedicationFluid; }

@@ -37,7 +37,7 @@
 | [`UseContext`](#usecontext) | `part def` | Use context definition specializing `MemoPart`. | `MemoPart` |
 | [`UseEnvironment`](#useenvironment) | `part def` | The physical/organizational environment of use (IEC 62366-1 3.20), separable from the care-setting context so environments are reusable. | `MemoPart` |
 | [`InteractsInContext`](#interactsincontext) | `connection def` | The single relation a system context view draws. A context diagram labels its edges with open-ended verbs — "directs procedure", "electrical power", "fluid supply", "environmental conditions".… | `MemoRelationship` |
-| [`AppliesInContext`](#appliesincontext) | `connection def` | Typed relationship from `UseContext` to `MemoPart`. | `MemoRelationship` |
+| [`AppliesInContext`](#appliesincontext) | `connection def` | An interaction between participants, or a physical connection, is native `connect`: write `connection connect <a> to <b>;`, the ordinary untyped binary connection. | `MemoRelationship` |
 | [`SituatedIn`](#situatedin) | `connection def` | Typed relationship from `UseContext` to `UseEnvironment`. | `MemoRelationship` |
 
 ## UseContext
@@ -93,7 +93,7 @@ connection def AppliesInContext :> MemoRelationship
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `UseContext` to `MemoPart`. |
+| Description | An interaction between participants, or a physical connection, is native `connect`: write `connection connect <a> to <b>;`, the ordinary untyped binary connection. |
 | Kind | `connection def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -124,13 +124,12 @@ connection def SituatedIn :> MemoRelationship
     // reasonably foreseeable misuse are assurance requirements/risk inputs and
     // live in memo_assurance_requirements.
     //
-    // This package once defined `ExchangesWith` for directional context-level data
-    // flow between boundary entities. It is deleted: SysML v2's own `flow` covers
-    // every case and is strictly stronger, because `of <ItemDef>` says WHAT moves
-    // and two untyped connection ends cannot. Delegation between a boundary port
-    // and the interior it stands for is `bind` — identity, not transport. SysML v2
-    // keeps the two apart the same way: training ch. 13 wires components with
-    // `flow`, ch. 12 delegates across a boundary with `bind`.
+    // Directional context-level data flow between boundary entities is SysML v2's
+    // own `flow`, because `of <ItemDef>` says WHAT moves and two untyped connection
+    // ends cannot. Delegation between a boundary port and the interior it stands
+    // for is `bind` — identity, not transport. SysML v2 keeps the two apart the
+    // same way: training ch. 13 wires components with `flow`, ch. 12 delegates
+    // across a boundary with `bind`.
     package memo_architecture_operational_context_use_context {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;
@@ -188,12 +187,9 @@ connection def SituatedIn :> MemoRelationship
             :>> baseType = interactsInContextLinks meta SysML::Usage;
         }
 
-        // `InteractsWith` is native `connect` (2026-08-18): write
-        // `connection connect <participant> to <target>;`. It carried no
-        // attributes, and the operational-context package already scopes the ends.
-        // `ConnectsPhysically` is native `connect` (R10-S6): write
-        // `connection connect source ::> <a> to target ::> <b>;` — the ordinary
-        // untyped binary connection — instead of a connection def for it.
+        // An interaction between participants, or a physical connection, is native
+        // `connect`: write `connection connect <a> to <b>;`, the ordinary untyped
+        // binary connection.
         connection def AppliesInContext :> MemoRelationship {
             end useContext : UseContext :>> source;
             end subjectElement : MemoPart :>> target;

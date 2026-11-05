@@ -28,10 +28,9 @@ definitions and set the kind attribute that records the level of the claim:
 ```sysml
 requirement reqOcclusionAlarm : Requirement {
     attribute :>> id = "REQ-042";
-    @MemoIdentity { :>> label = "OcclusionAlarm"; }
+    @MemoIdentity { :>> label = "Occlusion alarm"; }
     attribute :>> requirementKind = RequirementKind::system;
-    attribute :>> statement =
-        "The pump shall issue a high-priority alarm after detecting occlusion.";
+    doc /* The pump shall issue a high-priority alarm after detecting occlusion. */
 }
 ```
 
@@ -47,7 +46,7 @@ Use three complementary names:
 - a stable engineering identifier (`REQ-042`) for lifecycle continuity;
 - a short human name (`OcclusionAlarm`) for views and tables.
 
-Keep the full normative claim in `statement` or the appropriate descriptive
+Keep the full normative claim in `doc` or the appropriate descriptive
 attribute. Do not force a sentence into the usage name.
 
 ## One element, one principal meaning

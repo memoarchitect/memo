@@ -1,30 +1,24 @@
-// Functional architecture (§9). A function is a responsibility: what the
-// system, or one of its components, is answerable for. A FunctionalExchange is
-// a typed transfer between functions. A function may be realized by human
-// action, mechanical design, electrical hardware, software, or a combination —
+// Functional architecture. A function is a responsibility: what the system, or
+// one of its components, is answerable for. A FunctionalExchange is a typed
+// transfer between functions. A function may be realized by human action,
+// mechanical design, electrical hardware, software, or a combination —
 // allocation to the system's own parts is what ComponentFunction records, and
 // it never assumes software.
 //
 // ─── A function is a behaviour ───────────────────────────────────────────
 //
-// `MemoFunction` and both its specializations are `action def`s. They were
-// `part def SystemFunction specializes MemoPart` until Track A0
-// removed the reason: relation ends were typed on part-based types,
-// KerML forbids a behaviour from specializing a part-based type, and a function
-// has to be satisfiable, verifiable, and allocatable. So a function was declared
-// a part, and a separate `action def OperativeAction` carried the behaviour with a
-// `ref performedFunction` stapling the two back together — a reference used in
-// ZERO example files. The ends are metaclass-neutral now (CR-ONT-060..073), so
-// the function's split from a part has no cause and is gone: `MemoFunction` is an `action def`,
-// and `actionKind` sits on it, where it was always describing the function. `FunctionalFlow`
-// was the one element A0 left behind on the part side; it is an `action def` now, for the same
-// reason and on the same evidence.
+// `MemoFunction` and both its specializations are `action def`s: a function is
+// a behaviour. Relation ends are metaclass-neutral (CR-ONT-060..073), so a
+// function can be satisfied, verified and allocated as one. `actionKind` sits
+// on it because it describes the function. `FunctionalFlow` is an `action def`
+// for the same reason.
 //
-// `OperativeAction` was NOT merged into the function family. It is a separate `action def` in
-// the operational layer (memo_architecture_operational_activities): a step of the work, which a
-// person or the system performs. The two are joined by native `perform`, not by a type: a
-// system-performed level-2 activity `perform`s the `SystemFunction` that carries it out, and
-// a function is performed only from such an activity or from a `FunctionalFlow` step.
+// `OperativeAction` is NOT in the function family. It is a separate `action
+// def` in the operational layer (memo_architecture_operational_activities): a
+// step of the work, which a person or the system performs. The two are joined
+// by native `perform`, not by a type: a system-performed level-2 activity
+// `perform`s the `SystemFunction` that carries it out, and a function is
+// performed only from such an activity or from a `FunctionalFlow` step.
 //
 // `functionCategory` and `actionKind` are NOT two spellings of one axis, and
 // merging them would lose information. `actionKind` is the verb — sense,
@@ -35,12 +29,9 @@
 // ─── A functional exchange is a flow ─────────────────────────────────────
 //
 // `FunctionalExchange` is an `abstract flow def`, and an exchange is a typed
-// named `flow` between function parameters: the edge IS the exchange. It was
-// a `part def` beside a separate `flow`, with its ends stored as
-// `sourceFunction`/`targetFunction` refs, because a flow could not be the
-// target of an allocation or a trace. A named flow now carries a qualified id
-// that `allocate`, `satisfy` and the rest resolve, so the part reached no
-// rule, query or diagram and existed only to be kept in step with its edge.
+// named `flow` between function parameters: the edge IS the exchange. A named
+// flow carries a qualified id that `allocate`, `satisfy` and the rest resolve,
+// so no separate part is needed.
 //
 // It is `abstract` because a flow definition specializes the association
 // `Flows::MessageAction`, and a concrete association must declare its two
@@ -71,8 +62,8 @@
 //
 // Decomposition and allocation reuse the existing relations and need no new
 // ones — `Composes` for the function tree, `AllocatedTo` for the component.
-// Both had part-typed ends until A0; both are metaclass-neutral now, which is
-// precisely what makes an action-def function usable at all.
+// Both are metaclass-neutral, which is what makes an action-def function
+// usable.
 package memo_architecture_functional_functions {
     private import memo_core_stdlib_quantities::*;
     private import Metaobjects::SemanticMetadata;
@@ -88,9 +79,10 @@ package memo_architecture_functional_functions {
         attribute functionCategory : String;
         attribute actionKind : ActionKind;
         attribute trigger : String;
-        // What the function produces, in words: the part the typed `out` parameters cannot say (their type
-        // names the item, not that it is debounced, range-checked or timestamped). It does not restate the
-        // parameters, and what goes in is the `in` parameters alone (decided 2026-10-25, user).
+        // What the function produces, in words: the part the typed `out`
+        // parameters cannot say (their type names the item, not that it is
+        // debounced, range-checked or timestamped). It does not restate the
+        // parameters, and what goes in is the `in` parameters alone.
         attribute outputDescription : String;
         attribute concernKind : ConcernKind;
         attribute criticality : CriticalityKind;
@@ -135,17 +127,12 @@ package memo_architecture_functional_functions {
     // A reusable functional route through system responsibilities. Functional
     // flows are part of functional architecture, never logical structure.
     //
-    // An `action def`, like every other behaviour in MEMO. It was
-    // `part def ... specializes MemoPart` for the Track A0 reason described at
-    // the top of this file — relation ends typed on part-based types, and
-    // KerML forbids a behaviour from specializing one — and it was the single
-    // element A0 did not carry across when that reason went away. A route
-    // through responsibilities is the same shape as the `OperationalWorkflow`
-    // and `OperativeScenario` it sits beside: the scenarios package calls a
+    // An `action def`, like every other behaviour in MEMO. A route through
+    // responsibilities is the same shape as the `OperationalWorkflow` and
+    // `OperativeScenario` it sits beside: the scenarios package calls a
     // scenario "a selected path through a workflow (or functional flow)",
     // naming the two as one kind of thing, and its steps are `action def`s
-    // already. A structure whose whole body is `perform` is a behaviour that
-    // has not been allowed to say so.
+    // already.
     action def FunctionalFlow specializes MemoAction {
         attribute flowCategory : FunctionalFlowKind;
         attribute endToEndLatencyBudgetMs : DurationValue;
@@ -170,7 +157,7 @@ package memo_architecture_functional_functions {
     // between two steps' parameters. A step's parameters redefine its
     // function's by position.
 
-    // `InvolvesFunction` is native `perform` (R10-S6): a `FunctionalFlow`
-    // performs the function each of its steps subsets, and a flow with no
-    // steps performs its functions directly.
+    // A `FunctionalFlow` involves a function by native `perform`: it performs
+    // the function each of its steps subsets, and a flow with no steps performs
+    // its functions directly.
 }

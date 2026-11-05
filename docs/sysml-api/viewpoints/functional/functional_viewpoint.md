@@ -28,7 +28,6 @@
 | private | `memo_core_enumerations::*` |
 | private | `memo_viewpoints_stakeholders_concerns::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -50,7 +49,6 @@
         private import memo_viewpoints_stakeholders_concerns::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         viewpoint functionalViewpoint : MemoViewpoint {
             @MemoIdentity { :>> providedId = "VP-FUNC"; :>> label = "FunctionalViewpoint"; }
             @MemoIdentity { :>> shortDescription = "Shows system functions, their decomposition, and allocation."; }

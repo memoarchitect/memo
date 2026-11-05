@@ -2,10 +2,8 @@
 // software-only medical device (SaMD) deploys onto infrastructure the
 // manufacturer does not control.
 //
-// This is where `serviceContract`, `discoveryMechanism`, `storageKind`, and
-// `retentionPolicy` live now. All four were optional attributes on
-// `SoftwareComponent` documented "set only for the relevant runtimeKind";
-// here each is unconditional on the type that owns it.
+// `serviceContract`, `discoveryMechanism`, `storageKind`, and `retentionPolicy`
+// are here because each is unconditional on the type that owns it.
 package memo_extension_cloud {
     private import ScalarValues::*;
 

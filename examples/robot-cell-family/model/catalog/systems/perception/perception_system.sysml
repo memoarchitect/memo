@@ -2,12 +2,7 @@
 // signals, and marks procedure events on the perception. It imports the
 // family's shared package only.
 package robot_cell_family_systems_perception_perception_system {
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    private import memo_core_enumerations::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_architecture_operational_use_cases::*;
+    private import memo::*;
     private import robot_cell_family_shared::*;
 
     part def PerceptionSystem specializes System {
@@ -20,12 +15,12 @@ package robot_cell_family_systems_perception_perception_system {
             attribute :>> responsibility = "Filter and timestamp the camera and lidar range data.";
         }
         allocate fnAcquirePointClouds to sensorHub;
-            // The relay supervises the sensor hub.
-        connection : LogicalConnector connect sourceComponent ::> safetyRelay to targetComponent ::> sensorHub {
+        // The relay supervises the sensor hub.
+        connection : LogicalConnector connect safetyRelay to sensorHub {
             attribute :>> contentKind = FlowContentKind::status;
             attribute :>> direction = DirectionKind::output;
         }
-}
+    }
 
     action fnAcquirePointClouds : SystemFunction {
         @MemoIdentity { :>> providedId = "RCF-PER-F-001"; :>> label = "Acquire Point Clouds"; }

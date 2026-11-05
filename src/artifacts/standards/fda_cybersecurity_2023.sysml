@@ -8,10 +8,8 @@
 // the traceability question is identical, only the enforceability differs, and
 // that difference is data on the clause rather than a second mechanism.
 //
-// Reference granularity is the guidance's own lettered section structure
-// (IV, V.A, …), not a decimal clause numbering — this document has none. The
-// templates previously cited decimal numbers ("3.2", "5.2") that match no
-// section of the published guidance; those were replaced when this pack landed.
+// Reference granularity is the guidance's own lettered section structure (IV,
+// V.A, …), not a decimal clause numbering — this document has none.
 package memo_artifacts_standards_fda_cybersecurity_2023 {
     private import ScalarValues::*;
     private import memo_core_enumerations::*;
@@ -19,7 +17,6 @@ package memo_artifacts_standards_fda_cybersecurity_2023 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part fdaCybersecurity2023 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-FDA-CYBER-2023"; }
         attribute :>> designation = "FDA Cybersecurity Guidance 2023";

@@ -36,9 +36,9 @@
 | [`StateMachine`](#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based MemoPart family. Transitions stay part-based (below) to keep their traceable safety attributes.… | `MemoState` |
 | [`ModeConfiguration`](#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point: it says which mode is active in one selectable arrangement. The reference is typed to the shared native state family so a consumer can navigate from the selected configuration to its governing mode.… | `MemoPart` |
 | [`TransitionRecord`](#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… | — |
-| [`BehaviorProperty`](#behaviorproperty) | `requirement def` | Behavior property definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
+| [`BehaviorProperty`](#behaviorproperty) | `requirement def` | A behavioural obligation, such as an invariant, transition rule, temporal claim, assumption, or guarantee. It is a `requirement def` because that is what it is: a claim the design must meet and a verification case can `verify`.… | `MemoRequirementElement` |
 | [`Contract`](#contract) | `requirement def` | Contract definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
-| [`ActivityAction`](#activityaction) | `action def` | Activity action definition specializing `FunctionalAction`. | `FunctionalAction` |
+| [`ActivityAction`](#activityaction) | `action def` | Per-technology properties belong on the extension type that owns them, typed. ROS QoS shows the shape: `attribute def RosQosProfile` has reliability, durability, deadline, liveliness and history depth as typed fields, so a publisher's offer and a subscriber's request can be co… | `FunctionalAction` |
 | [`ActivityFlow`](#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. | `MemoAction` |
 | [`TimingConstraint`](#timingconstraint) | `requirement def` | Timing constraint definition specializing `MemoRequirementElement`. | `MemoRequirementElement` |
 
@@ -110,7 +110,7 @@ requirement def BehaviorProperty :> MemoRequirementElement
 
 | Property | Value |
 | --- | --- |
-| Description | Behavior property definition specializing `MemoRequirementElement`. |
+| Description | A behavioural obligation, such as an invariant, transition rule, temporal claim, assumption, or guarantee. It is a `requirement def` because that is what it is: a claim the design must meet and a verification case can `verify`.… |
 | Kind | `requirement def` |
 | Abstract | No |
 | Specializes | `MemoRequirementElement` |
@@ -140,7 +140,7 @@ action def ActivityAction specializes FunctionalAction
 
 | Property | Value |
 | --- | --- |
-| Description | Activity action definition specializing `FunctionalAction`. |
+| Description | Per-technology properties belong on the extension type that owns them, typed. ROS QoS shows the shape: `attribute def RosQosProfile` has reliability, durability, deadline, liveliness and history depth as typed fields, so a publisher's offer and a subscriber's request can be co… |
 | Kind | `action def` |
 | Abstract | No |
 | Specializes | `FunctionalAction` |
@@ -236,12 +236,10 @@ requirement def TimingConstraint :> MemoRequirementElement
             attribute sourceReference : String;
         }
 
-        // A behavioural obligation, such as an invariant, transition rule,
-        // temporal claim, assumption, or guarantee. It is a `requirement def`
-        // because that is what it is: a claim the design must meet and a
-        // verification case can `verify`. It was a `part def` under
-        // VerifiableElement, which made a property a structural thing and left
-        // native `verify` unable to name it.
+        // A behavioural obligation, such as an invariant, transition rule, temporal
+        // claim, assumption, or guarantee. It is a `requirement def` because that
+        // is what it is: a claim the design must meet and a verification case can
+        // `verify`.
         //
         // `formalExpression` holds the property in the language `languageKind` names: natural language,
         // a pseudo-formal text, AGREE, LTL or CTL. None of those is a SysML expression (the expression
@@ -256,34 +254,24 @@ requirement def TimingConstraint :> MemoRequirementElement
         // An assume/guarantee contract on one component, AGREE's shape one to one:
         // the component is the `subject`, each assumption an `assume` member and
         // each guarantee a `require` member naming a BehaviorProperty. The subject
-        // replaces `contractScope : String`, which named the component in prose
-        // and could not be navigated.
+        // is a reference, so a contract can be navigated to its component.
         //
         // This is not the procurement contract of a deliverable; that is a
         // different definition.
         requirement def Contract :> MemoRequirementElement {
             subject component : MemoPart;
         }
-        // `part def PropertySet specializes VerifiableElement { attribute
-        // propertySetScope : String; }` stood here and is DELETED (plan C3,
-        // open question §14.6). It was AADL's property-set idea imported as a
-        // name: one String field, no typed content, no binding to whatever it
-        // annotated, and zero usages anywhere in the tree.
-        //
         // Per-technology properties belong on the extension type that owns them,
-        // typed. ROS QoS was the first real customer and settled it:
-        // `attribute def RosQosProfile` has reliability, durability, deadline,
-        // liveliness and history depth as typed fields, so a publisher's offer and
-        // a subscriber's request can be compared. A `propertySetScope` String
-        // could not have expressed one of them. Where an extension needs to
-        // annotate a BASE element rather than declare its own type, the SysML-
-        // native answer is `metadata def` + `Metaobjects::SemanticMetadata`, which
-        // is what every MEMO relation already carries since A4.
-        // An `action def`: every field it carries — what it does, what goes in and
-        // out, its worst-case execution time — describes behaviour. It was a
-        // `part def specializes MemoPart`, the same A0 residue `FunctionalFlow`
-        // carried, and a behaviour cannot specialize a structure, so nothing could
-        // have performed one.
+        // typed. ROS QoS shows the shape: `attribute def RosQosProfile` has
+        // reliability, durability, deadline, liveliness and history depth as typed
+        // fields, so a publisher's offer and a subscriber's request can be
+        // compared. Where an extension needs to annotate a BASE element rather than
+        // declare its own type, the SysML- native answer is `metadata def` +
+        // `Metaobjects::SemanticMetadata`, which is what every MEMO relation
+        // carries. An `action def`: every field it carries — what it does, what
+        // goes in and out, its worst-case execution time — describes behaviour. A
+        // behaviour cannot specialize a structure, so as a part nothing could
+        // perform one.
         action def ActivityAction specializes FunctionalAction {
             attribute actionKind : ActionKind;
             attribute outputDescription : String;

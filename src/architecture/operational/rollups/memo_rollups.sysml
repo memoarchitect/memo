@@ -1,7 +1,8 @@
-// Roll-ups of a level-2 procedure flow (plan decision 9). A number is entered once, on an
-// activity (`expectedDuration`, `plannedSuccessProbability`, the cost rates of its `instruments`),
-// and every figure above it is derived here: a scenario, a procedure, a variant. A `TradeStudy`
-// compares variants by these, so nothing a study reads is typed in twice.
+// Roll-ups of a level-2 procedure flow. A number is entered once, on an
+// activity (`expectedDuration`, `plannedSuccessProbability`, the cost rates of
+// its `instruments`), and every figure above it is derived here: a scenario, a
+// procedure, a variant. A `TradeStudy` compares variants by these, so nothing a
+// study reads is typed in twice.
 //
 // ─── Traversal ──────────────────────────────────────────────────────────
 // `ActivitiesOf` is the one place that decides which activities count, and every roll-up reads

@@ -518,23 +518,14 @@ part def UsabilityEngineer :> MemoStakeholder
     ```sysml
     // Stakeholders and concerns, as elements.
     //
-    // ISO/IEC/IEEE 42010 gives a viewpoint three jobs: name the stakeholders,
-    // frame their concerns, and be what a view conforms to. MEMO used to do the
-    // first two with enumerations — `AudienceKind` and `ConcernKind` — which meant
-    // a stakeholder was a literal from a closed list of eleven and a concern was a
-    // literal from nine. You could tag a viewpoint with one; you could not declare
-    // a concern, give it an id, say who holds it, trace a requirement to it, or
-    // add one without editing the ontology.
+    // ISO/IEC/IEEE 42010 gives a viewpoint three jobs: name the stakeholders, frame
+    // their concerns, and be what a view conforms to.
     //
-    // They are elements now. SysML v2 already models both — `ConcernDefinition`
-    // and `StakeholderMembership` are in the metamodel, and MEMO's grammar has
-    // carried `concern def`, `concern`, `frame` and `stakeholder` all along — so
-    // nothing new is invented here. Each carries `@MemoIdentity`, which is what
-    // makes it citable in a review the way every other MEMO element is.
-    //
-    // The literals they replace are kept verbatim as names, so a project reading
-    // `AudienceKind::safetyEngineer` finds `SafetyEngineer` and nothing is lost in
-    // the move.
+    // They are elements, so a concern can have an id, a holder and a trace. SysML
+    // v2 already models both — `ConcernDefinition` and `StakeholderMembership` are
+    // in the metamodel — so nothing new is invented here. Each carries
+    // `@MemoIdentity`, which is what makes it citable in a review the way every
+    // other MEMO element is.
     package memo_viewpoints_stakeholders_concerns {
         private import ScalarValues::*;
         private import memo_core_common::*;

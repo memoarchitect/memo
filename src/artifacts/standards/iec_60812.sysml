@@ -15,7 +15,6 @@ package memo_artifacts_standards_iec_60812 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part iec60812 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-IEC-60812"; }
         attribute :>> designation = "IEC 60812:2018";

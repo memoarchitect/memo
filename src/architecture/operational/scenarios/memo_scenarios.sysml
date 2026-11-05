@@ -48,11 +48,10 @@ package memo_architecture_operational_scenarios {
         // (a robot and a laparoscopic tower do not convert to open at the same rate); level 2 only.
         attribute likelihood : ProbabilityValue[0..1];
 
-        // The workflow this scenario belongs to is the one it is nested in
-        // (a `HasScenario` relation was removed for that reason); a
+        // The workflow this scenario belongs to is the one it is nested in; a
         // nominal/alternate pair are scenarios of the same workflow,
-        // distinguished by scenarioKind — no baseScenario back-ref.
-        // Actors are derived from `perform` on the nested steps, not listed.
+        // distinguished by scenarioKind — no baseScenario back-ref. Actors are
+        // derived from `perform` on the nested steps, not listed.
         ref useContext : UseContext[0..1];
         // threat scenario
         attribute actorDescription : String;
@@ -69,6 +68,6 @@ package memo_architecture_operational_scenarios {
     }
 
     // A workflow is composed of one or more scenarios (nominal + alternate
-    // paths). ScenarioOccurrence/Executes were removed: an actual execution is
-    // a native SysML *usage* of the scenario, not a separate def + relation.
+    // paths). An actual execution is a native SysML *usage* of the scenario,
+    // not a separate def + relation.
 }

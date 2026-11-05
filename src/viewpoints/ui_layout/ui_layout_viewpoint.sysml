@@ -6,7 +6,6 @@ package memo_viewpoints_ui_layout_ui_layout_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint uiLayoutViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-UIL"; :>> label = "UILayoutViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows screen captures with the UI element tree laid out over them."; }

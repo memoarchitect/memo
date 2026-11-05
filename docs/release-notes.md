@@ -2,6 +2,12 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## Unreleased
+
+- **Removed.** `statement` leaves `MemoRequirementElement`, so requirements and needs no longer have it. A requirement's text is native `doc`, which SysML defines as its text. A model that sets `attribute :>> statement` stops compiling: write `doc /* … */` instead, and where an element has both, compare them first. ReqIF imports write `doc`.
+- **Changed.** `memo::*` also brings in `memo_core_stdlib_quantities`, `memo_core_stdlib_money` and `memo_core_stdlib_analysis`.
+- **Docs.** Examples and tutorials write a connection as `connect a to b`, which binds by position, and are tidied. Ontology comments state what is true now and no longer narrate what changed.
+
 ## 0.17.1
 
 - **Fixed.** `FinishTime`'s parameter is `activity`, not the KerML keyword `step`, which OpenSysML read as the keyword and so could not compile the ontology. Every project failed to build under OpenSysML on 0.17.0.

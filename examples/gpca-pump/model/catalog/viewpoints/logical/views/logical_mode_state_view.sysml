@@ -1,25 +1,12 @@
 package memo_examples_gpca_pump_viewpoints_logical_views_logical_mode_state_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_context_context_viewpoint::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_viewpoints_software_software_viewpoint::*;
-    private import memo_viewpoints_physical_physical_viewpoint::*;
-    private import memo_viewpoints_requirements_requirements_viewpoint::*;
-    private import memo_viewpoints_risk_risk_viewpoint::*;
-    private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view gpcaModeStateView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_logical_mode_state_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-BHV-001"; :>> label = "GPCA_ModeStateView"; }
-        @MemoIdentity { :>> shortDescription = "The CriSys Fig 4.1 mode hierarchy (OFF, ON, IDLE, THERAPY, PAUSED, ACTIVE, BASAL, SQUARE_BOLUS, PATIENT_BOLUS) and all guarded transitions."; }
+        @MemoIdentity { :>> providedId = "VIEW-BHV-001"; :>> label = "GPCA_ModeStateView"; :>> shortDescription = "The CriSys Fig 4.1 mode hierarchy (OFF, ON, IDLE, THERAPY, PAUSED, ACTIVE, BASAL, SQUARE_BOLUS, PATIENT_BOLUS) and all guarded transitions."; }
         doc /* Hierarchical state diagram per CriSys §4.1 Fig 4.1: OFF and ON at top level, IDLE and THERAPY under ON, PAUSED (KVO delivery) and ACTIVE under THERAPY, and BASAL / SQUARE_BOLUS (auto-scheduled) / PATIENT_BOLUS under ACTIVE — with the REQ 4-47 transitions, Inhibited_* macro guards, and same-step-critical markings. */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::stateDiagram);

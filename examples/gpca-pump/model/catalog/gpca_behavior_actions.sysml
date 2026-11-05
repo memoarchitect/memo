@@ -1,13 +1,9 @@
 package memo_examples_gpca_pump_gpca_behavior_actions {
+    private import memo::*;
     private import ScalarValues::*;
     private import memo_examples_gpca_pump_gpca_architecture::*;
 
-    private import memo_architecture_functional_behavior::*;
-    private import memo_core_common::*;
-    private import memo_core_relationships::*;
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_core_enumerations::*;
 
     // ═════════════════════════════════════════════════════════════
     // GPCA infusion delivery action flow (KK-4 exemplar).

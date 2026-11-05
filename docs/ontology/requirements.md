@@ -20,7 +20,7 @@ dotted line is a reference. [How to read the figures](index.md#how-to-read-the-f
 
 [![Step 1: Need, Requirement](../assets/ontology/requirements-step1.svg){ .memo-presentation-graphic }](../assets/ontology/requirements-step1.svg){ title="Open full size" }
 
-A `Need` is a problem-space expectation stated in stakeholder language. Its `needKind` classifies it as a design input in ISO 13485 and IEC 62366-1 terms: stakeholder, user, clinical user, patient user, business, service, regulatory, operational, or design control. A `Requirement` is a solution-space obligation, and it derives from its driver (`DerivesFrom`). It records `requirementType` (the system, the software, the hardware, or the instructions for use), `sourceKind` and `concernKind`, a `statement` with an authoring `notation` such as EARS and an `obligation` (shall, should, will), a `safetyClass` for a software requirement (IEC 62304), and `acceptanceCriteria`, which a verification case checks.
+A `Need` is a problem-space expectation stated in stakeholder language. Its `needKind` classifies it as a design input in ISO 13485 and IEC 62366-1 terms: stakeholder, user, clinical user, patient user, business, service, regulatory, operational, or design control. A `Requirement` is a solution-space obligation, and it derives from its driver (`DerivesFrom`). It records `requirementType` (the system, the software, the hardware, or the instructions for use), `sourceKind` and `concernKind`, a `doc` with an authoring `notation` such as EARS and an `obligation` (shall, should, will), a `safetyClass` for a software requirement (IEC 62304), and `acceptanceCriteria`, which a verification case checks.
 
 ### Step 2 · Whose need, and what it motivates
 
@@ -92,7 +92,7 @@ restated on the need.
 - `requirementType`: what it is about, which is the system, the software, the
   hardware, or the instructions for use (EU MDR Annex I §23.4, ISO 20417).
 - `sourceKind` and `concernKind`: where it came from and which concern it serves.
-- `statement`, with an authoring `notation` such as EARS, an `obligation`
+- the requirement text in native `doc`, with an authoring `notation` such as EARS, an `obligation`
   (shall, should, will), and the parsed condition and response clauses, so
   tools can check the pattern.
 - `safetyClass` for a software requirement (IEC 62304).

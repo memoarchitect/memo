@@ -6,7 +6,6 @@ package memo_viewpoints_cybersecurity_cybersecurity_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint cybersecurityViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-CYB"; :>> label = "CybersecurityViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, and mitigations."; }

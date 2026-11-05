@@ -162,21 +162,13 @@ package memo_core_enumerations {
     }
     // Direction of a flow across a boundary.
     //
-    // Track A2 removed this from PORTS: a port usage says `in` / `out` /
-    // `inout` natively, which is the language's own spelling and the only one
-    // a conforming tool reads. The enum survives because three non-port
-    // constructs still carry a direction and none of them is a port, so none
-    // of them can use the keyword:
+    // A port usage says `in` / `out` / `inout` natively, which is the
+    // language's own spelling and the only one a conforming tool reads. This
+    // enum is for constructs that are not ports and so cannot use the keyword:
     //
     //   Interface.direction / .directionality   (interface def)
     //   LogicalConnector.direction              (connection def)
     //   OperationalInteraction.direction        (part def)
-    //
-    // Deleting it would have cost those three their direction; the reinvention
-    // was only ever the port case. `LogicalExchange.direction` was a fourth and
-    // went when the exchange became a flow between ports (2026-09-25), and
-    // `ComponentExchange.direction` a fifth when the ports at its ends were held to
-    // say it (2026-10-25, rule AR-EXCH-002).
     enum def DirectionKind {
         enum input;
         enum output;
@@ -471,7 +463,7 @@ package memo_core_enumerations {
         enum verificationStage;
         enum evidence;
         enum documents;
-        // The stages of the default method's steps (plan O11), beyond the six above.
+        // The stages of the default method's steps, beyond the six above.
         enum operational;
         enum functional;
         enum logical;

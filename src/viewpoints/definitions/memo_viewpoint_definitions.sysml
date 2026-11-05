@@ -45,12 +45,8 @@ package memo_viewpoints_definitions {
         ref framedConcerns : MemoConcern[*];
         // A viewpoint identifies stakeholders, the concerns it frames, and the
         // views that conform to it — ISO/IEC/IEEE 42010, and nothing further.
-        // It used to also carry `includedLayers`, `allowedElementKinds`,
-        // `allowedRelationshipKinds` and `filterExpression`: scoping rules over
-        // its views. Nothing ever read them, and the filtering that did happen
-        // came from a union the deriver accumulated out of the views
-        // themselves. What a view shows is the view's to say, through its own
-        // expose members and selectionQuery.
+        // What a view shows is the view's to say, through its own expose
+        // members and selectionQuery.
         attribute extendsViewpointIds : String[*];
         attribute userExtensible : Boolean;
         // Optional navigation grouping interpreted by Memo Architect.
@@ -131,7 +127,7 @@ package memo_viewpoints_definitions {
     view def MemoView :> Views::View {
         // Identity comes from the `@MemoIdentity` metadata carrier, which
         // annotates any metaclass — so a view stays native SysML without
-        // re-declaring the identification core the other bases used to copy.
+        // re-declaring an identification core.
         attribute status : ElementStatusKind;
         attribute lifecycleState : LifecycleStateKind;
         attribute realizationStage : RealizationStageKind[0..1];
@@ -171,13 +167,13 @@ package memo_viewpoints_definitions {
         // ── What the drawing SHOWS ────────────────────────────────────────
         //
         // These are the view's own statement about what it presents, so they
-        // are declared here and not in the layout companion beside it. That
-        // file records where boxes were dragged to; whether a drawing names
-        // its ports at all is a decision about the view, survives a layout
-        // reset, and belongs where the rest of the view's intent is written.
+        // are declared here and not in the layout statements. Those record
+        // where boxes were dragged to; whether a drawing names its ports at all
+        // is a decision about the view, survives a layout reset, and belongs
+        // where the rest of the view's intent is written.
         //
         // Each is optional and the renderer keeps its default when a view says
-        // nothing, so no existing view changes meaning by their arrival.
+        // nothing.
         attribute portDisplay : PortDisplayKind[0..1];
         attribute connectionDisplay : ConnectionDisplayKind[0..1];
         /** Name each port on the drawing. Off where the connector label

@@ -52,12 +52,10 @@ package memo_architecture_functional_behavior {
         attribute sourceReference : String;
     }
 
-    // A behavioural obligation, such as an invariant, transition rule,
-    // temporal claim, assumption, or guarantee. It is a `requirement def`
-    // because that is what it is: a claim the design must meet and a
-    // verification case can `verify`. It was a `part def` under
-    // VerifiableElement, which made a property a structural thing and left
-    // native `verify` unable to name it.
+    // A behavioural obligation, such as an invariant, transition rule, temporal
+    // claim, assumption, or guarantee. It is a `requirement def` because that
+    // is what it is: a claim the design must meet and a verification case can
+    // `verify`.
     //
     // `formalExpression` holds the property in the language `languageKind` names: natural language,
     // a pseudo-formal text, AGREE, LTL or CTL. None of those is a SysML expression (the expression
@@ -72,34 +70,24 @@ package memo_architecture_functional_behavior {
     // An assume/guarantee contract on one component, AGREE's shape one to one:
     // the component is the `subject`, each assumption an `assume` member and
     // each guarantee a `require` member naming a BehaviorProperty. The subject
-    // replaces `contractScope : String`, which named the component in prose
-    // and could not be navigated.
+    // is a reference, so a contract can be navigated to its component.
     //
     // This is not the procurement contract of a deliverable; that is a
     // different definition.
     requirement def Contract :> MemoRequirementElement {
         subject component : MemoPart;
     }
-    // `part def PropertySet specializes VerifiableElement { attribute
-    // propertySetScope : String; }` stood here and is DELETED (plan C3,
-    // open question §14.6). It was AADL's property-set idea imported as a
-    // name: one String field, no typed content, no binding to whatever it
-    // annotated, and zero usages anywhere in the tree.
-    //
     // Per-technology properties belong on the extension type that owns them,
-    // typed. ROS QoS was the first real customer and settled it:
-    // `attribute def RosQosProfile` has reliability, durability, deadline,
-    // liveliness and history depth as typed fields, so a publisher's offer and
-    // a subscriber's request can be compared. A `propertySetScope` String
-    // could not have expressed one of them. Where an extension needs to
-    // annotate a BASE element rather than declare its own type, the SysML-
-    // native answer is `metadata def` + `Metaobjects::SemanticMetadata`, which
-    // is what every MEMO relation already carries since A4.
-    // An `action def`: every field it carries — what it does, what goes in and
-    // out, its worst-case execution time — describes behaviour. It was a
-    // `part def specializes MemoPart`, the same A0 residue `FunctionalFlow`
-    // carried, and a behaviour cannot specialize a structure, so nothing could
-    // have performed one.
+    // typed. ROS QoS shows the shape: `attribute def RosQosProfile` has
+    // reliability, durability, deadline, liveliness and history depth as typed
+    // fields, so a publisher's offer and a subscriber's request can be
+    // compared. Where an extension needs to annotate a BASE element rather than
+    // declare its own type, the SysML- native answer is `metadata def` +
+    // `Metaobjects::SemanticMetadata`, which is what every MEMO relation
+    // carries. An `action def`: every field it carries — what it does, what
+    // goes in and out, its worst-case execution time — describes behaviour. A
+    // behaviour cannot specialize a structure, so as a part nothing could
+    // perform one.
     action def ActivityAction specializes FunctionalAction {
         attribute actionKind : ActionKind;
         attribute outputDescription : String;

@@ -6,7 +6,6 @@ package memo_viewpoints_requirements_requirements_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint requirementsViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-REQ"; :>> label = "RequirementsViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows stakeholder needs and their decomposition into system, software, and hardware requirements."; }

@@ -1,4 +1,4 @@
-// Physical realization taxonomy (§12) — shared roots. "Physical" encompasses
+// Physical realization taxonomy — shared roots. "Physical" encompasses
 // hardware, mechanical, fluidic, pneumatic, optical, acoustic, and thermal
 // realization — not only electronics. Assemblies compose components; patient-
 // contacting parts must declare contact characteristics (ISO 10993-1;

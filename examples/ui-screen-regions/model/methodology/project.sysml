@@ -6,11 +6,9 @@
 // reference. No YAML file participates. Removing every application setting
 // from this directory leaves the model unchanged.
 package memo_examples_ui_screen_regions_project {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_methodology_core::*;
-    private import memo_methodology_profiles::*;
 
     // The project's own content. Importing it here makes the catalog a single
     // reachable closure from one entrypoint.
@@ -31,8 +29,6 @@ package memo_examples_ui_screen_regions_project {
     private import memo_examples_ui_screen_regions_viewpoints_functional::*;
     private import memo_examples_ui_screen_regions_viewpoints_risk::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part uiScreenRegionsBinding : ModelMethodBinding {
         @MemoIdentity { :>> providedId = "PMB-UIR-001"; :>> label = "UIScreenRegionsModelMethodBinding"; }
         attribute :>> modelName = "UI Screen Regions";

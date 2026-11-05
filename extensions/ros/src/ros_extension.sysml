@@ -1,8 +1,7 @@
 // ROS 2 (Robot Operating System 2).
 //
-// The acceptance test for MEMO's extension point (plan §10.3): a whole
-// technology stack — nodes, messages, topics, quality of service, services,
-// actions, and
+// The acceptance test for MEMO's extension point: a whole technology stack —
+// nodes, messages, topics, quality of service, services, actions, and
 // containerized deployment — landing without a single change to a base
 // relation. `BuildsInto`, `DeploysTo`, and `ProvidesEnvironment` are reused
 // exactly as the base declares them.
@@ -29,13 +28,9 @@ package memo_extension_ros {
 
     // ── Quality of service ──────────────────────────────────────────────
     //
-    // QoS is the first real customer for "where do per-technology properties
-    // live" (plan C3, open question §14.6). The answer is a typed
-    // `attribute def` on the extension's own types — NOT the base's
-    // `PropertySet` stub, which was one String field and could not say what a
-    // reliability setting is. A typed profile can be validated, compared
-    // between a publisher and a subscriber, and read by a tool; a property bag
-    // cannot. `PropertySet` is deleted in this session for that reason.
+    // Per-technology properties live in a typed `attribute def` on the
+    // extension's own types. A typed profile can be validated, compared between
+    // a publisher and a subscriber, and read by a tool; a property bag cannot.
 
     // TRANSIENT_LOCAL replays the last samples to a late-joining subscriber;
     // VOLATILE does not. The difference decides whether a node that restarts

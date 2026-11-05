@@ -6,7 +6,6 @@ package memo_viewpoints_clinical_workflow_clinical_workflow_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint clinicalWorkflowViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-CLINWF"; :>> label = "ClinicalWorkflowViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows clinical use cases, workflows and scenarios: what must happen to the patient, with no product and no number."; }

@@ -4,11 +4,9 @@
 // systems (`sos/`), what its systems share (`shared/`) and each system
 // (`systems/<system>/`). The names are fictional.
 package robot_cell_family_project {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_methodology_core::*;
-    private import memo_methodology_profiles::*;
 
     private import robot_cell_family_shared::*;
     private import robot_cell_family_systems_navigation_navigation_system::*;
@@ -19,10 +17,8 @@ package robot_cell_family_project {
     private import robot_cell_family_sos_chains::*;
     private import robot_cell_family_sos_use_cases::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part projectBinding : ModelMethodBinding {
-        @MemoIdentity { :>> providedId = "RCF-PMB-001"; :>> label = "RobotCellFamilyMethodBinding"; }
+        @MemoIdentity { :>> providedId = "RCF-PMB-001"; :>> label = "Robot cell family method binding"; }
         attribute :>> modelName = "Robot Cell Family";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

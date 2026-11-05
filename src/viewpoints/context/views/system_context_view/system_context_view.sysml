@@ -1,28 +1,27 @@
 package memo_viewpoints_context_views_system_context_view {
     private import ScalarValues::*;
 
-                private import memo_viewpoints_definitions::*;
-                private import memo_core_enumerations::*;
+    private import memo_viewpoints_definitions::*;
+    private import memo_core_enumerations::*;
     private import memo_viewpoints_context_context_viewpoint::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-                view systemContextView : MemoDiagramView {
-                    expose memo_viewpoints_context_views_system_context_view::*;
-                    attribute depth = 2;
-    @MemoIdentity { :>> providedId = "VIEW-CTX-001"; :>> label = "SystemContextView"; }
-    @MemoIdentity { :>> shortDescription = "Actors, use context, and system boundary."; }
-    attribute :>> outputKind = (ViewOutputKind::diagram);
-    attribute :>> presentationKind = (PresentationKind::blockDiagram);
-    attribute :>> diagramType = "bdd";
-    attribute :>> autoPopulate = true;
-    attribute :>> queryDescription = "Include actors, use contexts, and trust boundaries at the system boundary.";
-    part :>> selectionQuery {
-        @MemoIdentity { :>> providedId = "QRY-CTX-001"; :>> label = "SystemContextQuery"; }
-        attribute :>> includeElementKinds = ("OperationalParticipant", "UseContext", "TrustBoundary");
-        attribute :>> includeLayers = ("context");
-        attribute :>> rationaleText = "Auto-populate the system context view from the context layer.";
+    view systemContextView : MemoDiagramView {
+        expose memo_viewpoints_context_views_system_context_view::*;
+        attribute depth = 2;
+        @MemoIdentity { :>> providedId = "VIEW-CTX-001"; :>> label = "SystemContextView"; }
+        @MemoIdentity { :>> shortDescription = "Actors, use context, and system boundary."; }
+        attribute :>> outputKind = (ViewOutputKind::diagram);
+        attribute :>> presentationKind = (PresentationKind::blockDiagram);
+        attribute :>> diagramType = "bdd";
+        attribute :>> autoPopulate = true;
+        attribute :>> queryDescription = "Include actors, use contexts, and trust boundaries at the system boundary.";
+        part :>> selectionQuery {
+            @MemoIdentity { :>> providedId = "QRY-CTX-001"; :>> label = "SystemContextQuery"; }
+            attribute :>> includeElementKinds = ("OperationalParticipant", "UseContext", "TrustBoundary");
+            attribute :>> includeLayers = ("context");
+            attribute :>> rationaleText = "Auto-populate the system context view from the context layer.";
+        }
+        ref :>> viewpointDefinition = contextViewpoint;
     }
-    ref :>> viewpointDefinition = contextViewpoint;
-                }
 }

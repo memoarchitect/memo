@@ -1,9 +1,9 @@
-// User interface and interaction (§18). A small semantic hierarchy: concrete
-// widget forms (button, knob, chart …) are enum classifications, not classes.
-// UI state is distinct from system state (memo_architecture_functional_behavior) and
-// from device modes (memo_architecture_logical_structure::LogicalMode).
-// UI is an implementation concern (rendered UI is software; physical controls
-// are hardware), so it lives in the implementation layer, not operational.
+// User interface and interaction. A small semantic hierarchy: concrete widget
+// forms (button, knob, chart …) are enum classifications, not classes. UI state
+// is distinct from system state (memo_architecture_functional_behavior) and
+// from device modes (memo_architecture_logical_structure::LogicalMode). UI is
+// an implementation concern (rendered UI is software; physical controls are
+// hardware), so it lives in the implementation layer, not operational.
 package memo_architecture_implementation_ui {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
@@ -93,7 +93,7 @@ package memo_architecture_implementation_ui {
         enum imported;
     }
 
-    // The interaction intents a step or action can carry (§18).
+    // The interaction intents a step or action can carry.
     enum def InteractionIntentKind {
         enum userInput;
         enum feedback;
@@ -115,15 +115,10 @@ package memo_architecture_implementation_ui {
         attribute uiTechnology : String;
     }
 
-    // `InteractionElement` was an abstract base over UIElement and
-    // OperatorInterfaceElement, existing so the §18 relations could type
-    // against "something the user interacts with". It was both redundant and
-    // too narrow: the nearest real common ancestor is already `MemoPart`, and
-    // IEC 62366-1 puts the whole means of interaction in scope — a mis-keyed
-    // connector, a moulded marking on a housing, a tube routed backwards are
-    // use errors at parts that were never interaction elements and so could
-    // not be named. `ErrorAtElement` and `ElementTriggersAction` now take
-    // `MemoPart`; the attributes moved to whichever type actually set them.
+    // `ErrorAtElement` and `ElementTriggersAction` take `MemoPart`: IEC 62366-1
+    // puts the whole means of interaction in scope, and a mis-keyed connector,
+    // a moulded marking on a housing, a tube routed backwards are use errors at
+    // parts that are not interface elements.
 
     // One UIElement — the single UI part type. The widget form — holding
     // (screen/panel/dialog), acting (button/knob/slider), presenting
@@ -204,10 +199,9 @@ package memo_architecture_implementation_ui {
     // device shows back — because a front panel is one interface, not two.
     //
     // It is a PhysicalComponent, so it inherits part number, material, and the
-    // ISO 10993-1 patient-contact characterization that a touched surface
-    // needs and that software can never have. That inheritance is the reason
-    // these forms had to leave UIElement: as UIElementFormKind members they
-    // were software items with no way to state any of it.
+    // ISO 10993-1 patient-contact characterization that a touched surface needs
+    // and that software can never have. That inheritance is why these forms are
+    // not UIElement forms: a UIElement is software and cannot state any of it.
     enum def OperatorInterfaceFormKind {
         // ── actuated by the operator ──
         enum knob;
@@ -275,11 +269,9 @@ package memo_architecture_implementation_ui {
 
     // Clicking a button IS an operative action: it has a trigger, a
     // precondition, a criticality, a potential harm and a frequency of use,
-    // exactly as turning a knob does. Specializing MemoAction directly made
-    // UIAction a SIBLING of OperativeAction, which cost two things — a UI
-    // action could carry none of those ten attributes, and `CommitsUseError`
-    // (source end: OperativeAction) would not accept it, so a use error
-    // committed by a click was unmodellable.
+    // exactly as turning a knob does. So UIAction specializes OperativeAction:
+    // it carries those attributes, and `CommitsUseError` (source end:
+    // OperativeAction) accepts a use error committed by a click.
     //
     // The three attributes here are what a UI action adds on top: what the
     // user meant by it, what came back, and whether it asks first.
@@ -296,14 +288,11 @@ package memo_architecture_implementation_ui {
         attribute exitPoint : String;
     }
 
-    // `PresentsState` had zero usages anywhere in the tree (R10-S6). Its
-    // audited native form, `exhibit state`, does not actually fit: `UIState`
-    // is a `part def` with plain string attributes, not a `state def`, and
-    // a SysML v2 compiler rejects `exhibit` referencing anything that does not conform to
-    // `States::StateAction` ("An exhibit state must reference another
-    // state"). Free deletion rather than a migration — nothing referenced
-    // it, so nothing to preserve. If `UIState` is ever restructured onto a
-    // real state machine, `exhibit state` becomes available then.
+    // `UIState` is a `part def` with plain string attributes, not a `state
+    // def`, so `exhibit state` cannot name it: a SysML v2 compiler rejects
+    // `exhibit` referencing anything that does not conform to
+    // `States::StateAction`. If `UIState` is restructured onto a real state
+    // machine, `exhibit state` becomes available.
 
     // ── Screen layout relations ──────────────────────────────────
     // Which modelled screen an image is a rendering of.
@@ -319,14 +308,13 @@ package memo_architecture_implementation_ui {
     }
 
     // Activating this element opens another screen. This is NAVIGATION, not
-    // containment — the opened screen is not laid out inside the element, so
-    // it is not a Composes child and the geometric rules do not relate them.
-    // Conflating the two was the mistake that made "clicking takes you to a
-    // child view" look like spatial nesting; it is a separate frame reached
-    // from here, and only this relation says so.
+    // containment — the opened screen is not laid out inside the element, so it
+    // is not a Composes child and the geometric rules do not relate them.
+    // "Clicking takes you to a child view" is not spatial nesting: it is a
+    // separate frame reached from here, and only this relation says so.
     //
-    //     connection goToSettings : NavigatesTo
-    //         connect element ::> homeScreen.settingsButton to screen ::> settingsScreen;
+    // connection goToSettings : NavigatesTo connect homeScreen.settingsButton
+    // to settingsScreen;
     //
     // A screen is a UIElement whose `formKind` is `screen`; the end says UIElement because the form is an
     // attribute, not a subtype.
@@ -341,7 +329,7 @@ package memo_architecture_implementation_ui {
         :>> baseType = navigatesToLinks meta SysML::Usage;
     }
 
-    // ── §18 traceability ─────────────────────────────────────────
+    // ── Traceability ─────────────────────────────────────────
     // Source is `MemoPart`, not a UI-specific base: a foot pedal and a
     // rendered button trigger the same kind of action, and the two are a
     // PhysicalComponent and a SoftwareElement whose only common ancestor is
@@ -357,8 +345,8 @@ package memo_architecture_implementation_ui {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = elementTriggersActionLinks meta SysML::Usage;
     }
-    // `ActionInvokesFunction` is native `perform` (R10-S6): write
-    // `perform <systemFunction>;` inside the `UIAction` usage instead.
+    // A UI action invokes a function by native `perform`: write `perform
+    // <systemFunction>;` inside the `UIAction` usage.
     connection def FlowServesUseCase :> MemoRelationship {
         end interactionFlow : InteractionFlow :>> source;
         end useCase : UseCase :>> target;

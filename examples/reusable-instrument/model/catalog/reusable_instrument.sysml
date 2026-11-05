@@ -1,32 +1,23 @@
 // Focused example: reusable, reprocessable instrument. Centers on the
-    private import memo_assurance_verification_validation::*;
 // "Sterilize a reusable instrument" use case and its reprocessing workflow.
 // Product identity and manufacturing records remain outside this model.
 package memo_examples_reusable_instrument {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_core_relationships::*;
-    private import memo_architecture_operational_context_actors::*;
-    private import memo_architecture_operational_use_cases::*;
-    private import memo_architecture_operational_activities::*;
-    private import memo_architecture_operational_workflows::*;
-    private import memo_architecture_operational_scenarios::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part def ReusableInstrumentSystem specializes memo_architecture_logical_structure::System {
         attribute :>> systemBoundaryDescription = "The reusable medical instrument: the system this example models, with the software and hardware that realize it.";
     }
     part sterileProcessingTech : User {
         attribute :>> actorKind = ActorKind::technician;
-        @MemoIdentity { :>> providedId = "RI-USR-001"; :>> label = "SterileProcessingTechnician"; }
+        @MemoIdentity { :>> providedId = "RI-USR-001"; :>> label = "Sterile processing technician"; }
         attribute :>> serviceScope = "central sterile services department";
     }
 
     use case ucSterilize : ClinicalUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
-        @MemoIdentity { :>> providedId = "RI-UC-001"; :>> label = "SterilizeReusableInstrument"; }
+        @MemoIdentity { :>> providedId = "RI-UC-001"; :>> label = "Sterilize reusable instrument"; }
         attribute :>> goalStatement = "Return a used instrument to sterile, functional condition for the next case.";
         attribute :>> preCondition = "instrument collected from the OR; gross soil removed at point of use";
         attribute :>> successOutcome = "instrument cleaned, inspected, sterilized, and released to sterile storage";
@@ -36,11 +27,11 @@ package memo_examples_reusable_instrument {
 
     // Reprocessing workflow: exists independently of any single instrument.
     part wfReprocess : ClinicalWorkflow {
-        @MemoIdentity { :>> providedId = "RI-WF-001"; :>> label = "InstrumentReprocessingWorkflow"; }
+        @MemoIdentity { :>> providedId = "RI-WF-001"; :>> label = "Instrument reprocessing workflow"; }
         attribute :>> entryCondition = "used instrument received in decontamination";
         attribute :>> completionCondition = "sterile pack released to storage";
         action scNominalCycle : OperativeScenario {
-            @MemoIdentity { :>> providedId = "RI-SC-001"; :>> label = "NominalReprocessingCycle"; }
+            @MemoIdentity { :>> providedId = "RI-SC-001"; :>> label = "Nominal reprocessing cycle"; }
 
             perform actClean;
             perform actInspect;
@@ -50,44 +41,44 @@ package memo_examples_reusable_instrument {
         }
     }
     action actClean : OperativeAction {
-        @MemoIdentity { :>> providedId = "RI-ACT-001"; :>> label = "CleanAndDisinfect"; }
+        @MemoIdentity { :>> providedId = "RI-ACT-001"; :>> label = "Clean and disinfect"; }
         attribute :>> criticality = CriticalityKind::high;
     }
     action actInspect : OperativeAction {
-        @MemoIdentity { :>> providedId = "RI-ACT-002"; :>> label = "InspectAndFunctionTest"; }
+        @MemoIdentity { :>> providedId = "RI-ACT-002"; :>> label = "Inspect and function test"; }
         attribute :>> criticality = CriticalityKind::high;
     }
     action actSterilizeLoad : OperativeAction {
-        @MemoIdentity { :>> providedId = "RI-ACT-003"; :>> label = "PackAndAutoclave"; }
+        @MemoIdentity { :>> providedId = "RI-ACT-003"; :>> label = "Pack and autoclave"; }
         attribute :>> criticality = CriticalityKind::high;
     }
 
 
-    connection : RealizesUseCase connect realizingWorkflow ::> wfReprocess to realizedUseCase ::> ucSterilize;
+    connection : RealizesUseCase connect wfReprocess to ucSterilize;
 
 
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification valAuthoredActClean : ValidationCase {
-        @MemoIdentity { :>> providedId = "RI-VC-A01"; :>> label = "VerifyCleanAndDisinfect"; }
+        @MemoIdentity { :>> providedId = "RI-VC-A01"; :>> label = "Verify clean and disinfect"; }
         attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
         attribute :>> userParticipation = "representative users, simulated use conditions";
-        attribute :>> acceptanceCriteria = "a representative user completes 'CleanAndDisinfect' without a use error, in a summative evaluation per IEC 62366-1";
+        attribute :>> acceptanceCriteria = "a representative user completes 'Clean and disinfect' without a use error, in a summative evaluation per IEC 62366-1";
     }
-    connection : Validates connect validationTarget ::> actClean to validationCase ::> valAuthoredActClean;
+    connection : Validates connect actClean to valAuthoredActClean;
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification valAuthoredActInspect : ValidationCase {
-        @MemoIdentity { :>> providedId = "RI-VC-A02"; :>> label = "VerifyInspectAndFunctionTest"; }
+        @MemoIdentity { :>> providedId = "RI-VC-A02"; :>> label = "Verify inspect and function test"; }
         attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
         attribute :>> userParticipation = "representative users, simulated use conditions";
-        attribute :>> acceptanceCriteria = "a representative user completes 'InspectAndFunctionTest' without a use error, in a summative evaluation per IEC 62366-1";
+        attribute :>> acceptanceCriteria = "a representative user completes 'Inspect and function test' without a use error, in a summative evaluation per IEC 62366-1";
     }
-    connection : Validates connect validationTarget ::> actInspect to validationCase ::> valAuthoredActInspect;
+    connection : Validates connect actInspect to valAuthoredActInspect;
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification valAuthoredActSterilizeLoad : ValidationCase {
-        @MemoIdentity { :>> providedId = "RI-VC-A03"; :>> label = "VerifyPackAndAutoclave"; }
+        @MemoIdentity { :>> providedId = "RI-VC-A03"; :>> label = "Verify pack and autoclave"; }
         attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
         attribute :>> userParticipation = "representative users, simulated use conditions";
-        attribute :>> acceptanceCriteria = "a representative user completes 'PackAndAutoclave' without a use error, in a summative evaluation per IEC 62366-1";
+        attribute :>> acceptanceCriteria = "a representative user completes 'Pack and autoclave' without a use error, in a summative evaluation per IEC 62366-1";
     }
-    connection : Validates connect validationTarget ::> actSterilizeLoad to validationCase ::> valAuthoredActSterilizeLoad;
+    connection : Validates connect actSterilizeLoad to valAuthoredActSterilizeLoad;
 }

@@ -111,14 +111,13 @@ metadata def LinkedWhen :> MemoTypedDependency
         // order and says which step feeds which; it never holds a step back. Teams work
         // each layer independently and link their work as the other side appears.
         //
-        // What makes a step DONE is stated, not assumed (plan O11, T10), in two parts
-        // judged apart:
-        //   own work  every `outputKinds` kind has an element in the workspace, and every
-        //             rule the step `#DoneWhen`s has a subject there and no finding on it;
-        //   links     every rule the step `#LinkedWhen`s has no finding. A link rule with
-        //             no subject yet waits for the step that produces its subjects: that
-        //             is another team's work, not this one's.
-        // A step that states none of these has no done criterion and is never reported as done.
+        // What makes a step DONE is stated, not assumed, in two parts judged apart:
+        // own work  every `outputKinds` kind has an element in the workspace, and
+        // every rule the step `#DoneWhen`s has a subject there and no finding on
+        // it; links     every rule the step `#LinkedWhen`s has no finding. A link
+        // rule with no subject yet waits for the step that produces its subjects:
+        // that is another team's work, not this one's. A step that states none of
+        // these has no done criterion and is never reported as done.
         action def MethodologyWorkflowStep :> MemoAction {
             attribute stage : WorkflowStageKind;
             attribute objectiveDescription : String;

@@ -27,7 +27,6 @@
 | private | `memo_viewpoints_definitions::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -68,7 +67,6 @@ view def MemoScreenLayoutView :> MemoDiagramView
         private import memo_core_enumerations::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         view def MemoScreenLayoutView :> MemoDiagramView {
             attribute :>> viewKind = DiagramViewKind::geometry;
             @MemoIdentity { :>> shortDescription = "Screen capture overlaid with its UI element tree."; }

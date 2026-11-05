@@ -7,6 +7,9 @@ package memo {
     public import memo_core_common::*;
     public import memo_core_relationships::*;
     public import memo_core_annotations::*;
+    public import memo_core_stdlib_quantities::*;
+    public import memo_core_stdlib_money::*;
+    public import memo_core_stdlib_analysis::*;
 
     public import memo_architecture_operational_context_actors::*;
     public import memo_architecture_operational_context_stakeholders::*;

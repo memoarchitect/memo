@@ -34,7 +34,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`IntendedUse`](#intendeduse) | `requirement def` | Intended use definition specializing `MemoMission`. | `MemoMission` |
+| [`IntendedUse`](#intendeduse) | `requirement def` | IEC 62366-1 / ISO 14971 intended use: the medical device's declared purpose and the root of the operational spine. A MemoMission, because "mission" has no medical-device meaning — intended use is what a device exists to do.… | `MemoMission` |
 | [`OperationalEntity`](#operationalentity) | `part def` | Operational entity definition specializing `MemoPart`. | `MemoPart` |
 | [`OperationalCapability`](#operationalcapability) | `part def` | Operational capability definition specializing `MemoPart`. | `MemoPart` |
 | [`RequiresCapability`](#requirescapability) | `connection def` | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). | `MemoRelationship` |
@@ -48,7 +48,7 @@ requirement def IntendedUse :> MemoMission
 
 | Property | Value |
 | --- | --- |
-| Description | Intended use definition specializing `MemoMission`. |
+| Description | IEC 62366-1 / ISO 14971 intended use: the medical device's declared purpose and the root of the operational spine. A MemoMission, because "mission" has no medical-device meaning — intended use is what a device exists to do.… |
 | Kind | `requirement def` |
 | Abstract | No |
 | Specializes | `MemoMission` |
@@ -132,11 +132,9 @@ connection def EnablesUseCase :> MemoRelationship
         // IEC 62366-1 / ISO 14971 intended use: the medical device's declared
         // purpose and the root of the operational spine. A MemoMission, because
         // "mission" has no medical-device meaning — intended use is what a device
-        // exists to do. Was in memo_assurance_requirements; moved here as the
-        // operational-world root. It is a `requirement def`: the intended use is
-        // the top obligation the device's design inputs derive from, and ISO 14971
-        // 5.2 asks for it to be documented as the starting point of risk analysis.
-        // It was a `part def`, which made it a structural thing.
+        // exists to do. It is a `requirement def`: the intended use is the top
+        // obligation the device's design inputs derive from, and ISO 14971 5.2 asks
+        // for it to be documented as the starting point of risk analysis.
         requirement def IntendedUse :> MemoMission {
             attribute indication : String;
             attribute contraindication : String;

@@ -2,16 +2,11 @@
 // It demonstrates physical decomposition and patient-contact declarations
 // without adding functional, logical, or software layers.
 package memo_examples_manual_surgical_instrument {
+    private import memo::*;
     private import ScalarValues::*;
     private import ModelingMetadata::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_core_relationships::*;
-    private import memo_architecture_operational_activities::*;
-    private import memo_architecture_implementation_hardware_structure::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part def ManualSurgicalInstrumentSystem specializes memo_architecture_logical_structure::System {
         attribute :>> systemBoundaryDescription = "The manual surgical instrument: the system this example models, with the software and hardware that realize it.";
     }
@@ -21,7 +16,7 @@ package memo_examples_manual_surgical_instrument {
         attribute :>> responsibility = "grasp and drive a suture needle";
     }
     part jawAssembly : MechanicalPart {
-        @MemoIdentity { :>> providedId = "MSI-PART-001"; :>> label = "TungstenCarbideJaws"; }
+        @MemoIdentity { :>> providedId = "MSI-PART-001"; :>> label = "Tungsten carbide jaws"; }
         attribute :>> mechanicalFunction = "serrated needle grip";
         attribute :>> patientContact = true;
         attribute :>> contactNature = "intact tissue / surgical site, indirect";
@@ -38,7 +33,7 @@ package memo_examples_manual_surgical_instrument {
     // A task may be traced to the architecture later when the project has a
     // specific allocation or interaction claim to make.
     action taskPlaceSutures : OperativeAction {
-        @MemoIdentity { :>> providedId = "MSI-TASK-001"; :>> label = "PlaceSutures"; }
+        @MemoIdentity { :>> providedId = "MSI-TASK-001"; :>> label = "Place sutures"; }
         attribute :>> taskGoal = "place interrupted sutures";
     }
 }

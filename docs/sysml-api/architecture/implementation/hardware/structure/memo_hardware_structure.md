@@ -42,10 +42,11 @@
 ??? code "architecture/implementation/hardware/structure/memo_hardware_structure.sysml"
 
     ```sysml
-    // Physical realization taxonomy (§12) — aggregator. The hardware subgroup is
-    // split by technology domain into nested packages; this package re-exports the
-    // shared roots plus every domain subgroup under the historical name
-    // `memo_architecture_implementation_hardware_structure`, so importers see one flat surface.
+    // Physical realization taxonomy — aggregator. The hardware subgroup is split by
+    // technology domain into nested packages; this package re-exports the shared
+    // roots plus every domain subgroup under the historical name
+    // `memo_architecture_implementation_hardware_structure`, so importers see one
+    // flat surface.
     package memo_architecture_implementation_hardware_structure {
         public import memo_architecture_implementation_hardware_common::*;
         public import memo_architecture_implementation_hardware_electrical::*;

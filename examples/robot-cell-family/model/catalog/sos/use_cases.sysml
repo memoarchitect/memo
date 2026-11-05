@@ -1,10 +1,7 @@
 // Clinical use cases: their subject is the system of systems, and each
 // includes the system use cases it is made of.
 package robot_cell_family_sos_use_cases {
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    private import memo_core_enumerations::*;
-    private import memo_architecture_operational_use_cases::*;
+    private import memo::*;
     private import robot_cell_family_shared::*;
     private import robot_cell_family_sos::*;
     private import robot_cell_family_systems_navigation_navigation_system::*;

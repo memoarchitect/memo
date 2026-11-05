@@ -1,20 +1,8 @@
 package memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_relationships::*;
-    private import memo_core_annotations::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_architecture_implementation_ui::*;
-    private import memo_assurance_requirements::*;
-    private import memo_assurance_requirements_needs::*;
-    private import memo_assurance_human_factors::*;
-    private import memo_assurance_safety_risk::*;
-    private import memo_assurance_verification_validation::*;
-    private import memo_artifacts_core::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_core_enumerations::*;
-    private import memo_viewpoints_ui_layout_views_screen_layout_view::*;
     private import memo_examples_ui_screen_regions_viewpoints_risk::*;
     private import memo_examples_ui_screen_regions_architecture_implementation_ui::*;
     private import memo_examples_ui_screen_regions_architecture_functional_functions::*;
@@ -29,8 +17,6 @@ package memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain {
     private import memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
     private import memo_examples_ui_screen_regions_traces::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view uiRiskChain : MemoDiagramView {
         expose memo_examples_ui_screen_regions_architecture_implementation_ui::*;
         expose memo_examples_ui_screen_regions_architecture_functional_functions::*;
@@ -45,8 +31,7 @@ package memo_examples_ui_screen_regions_viewpoints_risk_views_ui_risk_chain {
         expose memo_examples_ui_screen_regions_artifacts_reviews_notes::*;
         expose memo_examples_ui_screen_regions_traces::*;
         attribute depth = 3;
-        @MemoIdentity { :>> providedId = "RSK-101"; }
-        @MemoIdentity { :>> shortDescription = "Use errors through UI hazards to implemented controls and requirements."; }
+        @MemoIdentity { :>> providedId = "RSK-101"; :>> shortDescription = "Use errors through UI hazards to implemented controls and requirements."; }
         attribute :>> viewKind = DiagramViewKind::general;
         attribute :>> diagramType = "risk";
         attribute :>> autoPopulate = true;

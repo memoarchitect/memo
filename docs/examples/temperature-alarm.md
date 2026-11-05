@@ -39,21 +39,19 @@ part icuNurse : User {
 }
 use case ucMonitorTemp : UseCase {
     attribute :>> id = "TA-UC-001";
-    @MemoIdentity { :>> label = "MonitorPatientTemperature"; }
+    @MemoIdentity { :>> label = "Monitor patient temperature"; }
     attribute :>> useCaseKind = UseCaseKind::care;
     attribute :>> goalStatement =
         "Continuously monitor core temperature and be alerted when it leaves the safe range.";
 }
-connection : Initiates connect initiatingUser ::> icuNurse
-    to initiatedUseCase ::> ucMonitorTemp;
+connection : Initiates connect icuNurse to ucMonitorTemp;
 
 action taskAckAlarm : CriticalTask {
-    @MemoIdentity { :>> label = "AcknowledgeTemperatureAlarm"; }
+    @MemoIdentity { :>> label = "Acknowledge temperature alarm"; }
     attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
     attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
 }
-connection : Composes connect parent ::> actAcknowledgeAlarm
-    to child ::> taskAckAlarm;
+connection : Composes connect actAcknowledgeAlarm to taskAckAlarm;
 ```
 
 ## System responsibility and logical channel
@@ -65,18 +63,17 @@ channel to software or hardware without changing the functional claim.
 ```sysml
 part fnDetectDeviation : SystemFunction {
     attribute :>> id = "TA-FN-001";
-    @MemoIdentity { :>> label = "DetectTemperatureDeviation"; }
+    @MemoIdentity { :>> label = "Detect temperature deviation"; }
     attribute :>> perspective = ArchitecturePerspectiveKind::functional;
     attribute :>> disciplines =
         (EngineeringDisciplineKind::safety, EngineeringDisciplineKind::'verification');
 }
 part chMonitor : LogicalComponent {
-    @MemoIdentity { :>> label = "TemperatureMonitorChannel"; }
+    @MemoIdentity { :>> label = "Temperature monitor channel"; }
     attribute :>> componentRole = ComponentRoleKind::channel;
     attribute :>> channelRole = ChannelRoleKind::monitor;
 }
-connection : AllocatedTo connect function ::> fnDetectDeviation
-    to allocatedElement ::> chMonitor;
+connection : AllocatedTo connect fnDetectDeviation to chMonitor;
 ```
 
 ## Alarm interaction and safety control
@@ -88,24 +85,21 @@ risk control → the element that implements it.
 
 ```sysml
 part elAlarmBanner : UIElement {
-    @MemoIdentity { :>> label = "TempAlarmBanner"; }
+    @MemoIdentity { :>> label = "Temp alarm banner"; }
     attribute :>> alarmPriority = NotificationPriorityKind::high;
     attribute :>> annunciationModality = "flashing banner + tone";
     attribute :>> silenceable = true;
 }
-connection : ElementTriggersAction connect element ::> elAlarmBanner
-    to triggeredAction ::> uiaAcknowledge;
+connection : ElementTriggersAction connect elAlarmBanner to uiaAcknowledge;
 connection : Supports { attribute :>> supportKind = SupportKind::task;
-    connect supporter ::> uiBedside to supported ::> taskAckAlarm; }
+    connect uiBedside to taskAckAlarm; }
 
-connection : CommitsUseError connect task ::> taskAckAlarm
-    to useError ::> ueSilenceAndForget;
+connection : CommitsUseError connect taskAckAlarm to ueSilenceAndForget;
 connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard;
-    connect cause ::> ueSilenceAndForget to effect ::> hzUndetectedDeviation; }
+    connect ueSilenceAndForget to hzUndetectedDeviation; }
 connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard;
-    connect control ::> rcReAnnunciate to mitigatedElement ::> hzUndetectedDeviation; }
-connection : ControlImplementedBy connect riskControl ::> rcReAnnunciate
-    to implementingElement ::> elAlarmBanner;
+    connect rcReAnnunciate to hzUndetectedDeviation; }
+connection : ControlImplementedBy connect rcReAnnunciate to elAlarmBanner;
 ```
 
 ## Evidence is separate from the design
@@ -116,21 +110,18 @@ different model elements. The verification case produces a test report.
 
 ```sysml
 part vcAlarmLatency : VerificationCase {
-    @MemoIdentity { :>> label = "VerifyAlarmLatency"; }
+    @MemoIdentity { :>> label = "Verify alarm latency"; }
     attribute :>> methodKind = VerificationMethodKind::test;
     attribute :>> acceptanceCriteria = "annunciation within 2 s of sustained deviation";
 }
 part uvAckTask : UsabilityValidation {
-    @MemoIdentity { :>> label = "SummativeAlarmAcknowledgement"; }
+    @MemoIdentity { :>> label = "Summative alarm acknowledgement"; }
     attribute :>> acceptanceCriteria =
         "no critical-task failures; all alarms assessed before silencing";
 }
-connection : VerifiedBy connect verificationCase ::> vcAlarmLatency
-    to verificationTarget ::> fnDetectDeviation;
-connection : Validates connect validationCase ::> uvAckTask
-    to validationTarget ::> taskAckAlarm;
-connection : ProducesEvidence connect producer ::> vcAlarmLatency
-    to producedEvidence ::> evLatencyReport;
+connection : VerifiedBy connect vcAlarmLatency to fnDetectDeviation;
+connection : Validates connect uvAckTask to taskAckAlarm;
+connection : ProducesEvidence connect vcAlarmLatency to evLatencyReport;
 ```
 
 ## The viewpoint does not duplicate the model

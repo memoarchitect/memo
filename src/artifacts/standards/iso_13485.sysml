@@ -11,7 +11,6 @@ package memo_artifacts_standards_iso_13485 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part iso13485 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-ISO-13485"; }
         attribute :>> designation = "ISO 13485:2016";

@@ -240,13 +240,10 @@ part def WorkflowResource specializes MemoResource
         }
 
         // ── Workflow-level relationships ─────────────────────────────
-        // An element supports (affords, enables) an action — e.g. a UI element
-        // that affords a user task. Use-case and capability tracing are direct
-        // refs now (OperationalWorkflow.useCase,
-        // OperativeAction.contributesToCapabilities), so the former
-        // SupportKind discriminator is gone: what used to be three enum values
-        // that each implied a different target type are now two typed refs plus
-        // this one plain relation.
+        // An element supports (affords, enables) an action — e.g. a UI element that
+        // affords a user task. Use-case and capability tracing are direct refs
+        // (OperationalWorkflow.useCase, OperativeAction.contributesToCapabilities),
+        // so this is one plain relation.
 
     }
 

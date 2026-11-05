@@ -26,7 +26,6 @@
 | private | `ScalarValues::*` |
 | private | `memo_methodology_core::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -46,7 +45,6 @@
         private import memo_methodology_core::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         part minimal : Archetype {
             @MemoIdentity { :>> providedId = "ARCH-MINIMAL"; }
             attribute :>> label = "Minimal";

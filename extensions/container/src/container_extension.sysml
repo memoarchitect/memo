@@ -2,11 +2,8 @@
 // a project that containerizes anything can include this module on its own;
 // `memo_extension_ros` specializes both types rather than restating them.
 //
-// This is where `imageReference` and `orchestrationPlatform` live now. They
-// were optional attributes on `SoftwareComponent` documented "set only when
-// runtimeKind = container" — a subtype family in disguise, and a technology
-// choice the base ontology had no business asserting. On the types below they
-// are unconditional, which is what makes them checkable.
+// `imageReference` and `orchestrationPlatform` are on the types below, where
+// they are unconditional, which is what makes them checkable.
 package memo_extension_container {
     private import ScalarValues::*;
 

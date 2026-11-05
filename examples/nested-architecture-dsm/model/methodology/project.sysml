@@ -3,11 +3,9 @@
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology governing it. No YAML file participates.
 package memo_examples_nested_architecture_dsm_project {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_methodology_core::*;
-    private import memo_methodology_profiles::*;
 
     // The project's own content, imported so the catalog is one reachable
     // closure from a single entrypoint.
@@ -19,10 +17,8 @@ package memo_examples_nested_architecture_dsm_project {
     private import memo_examples_nested_architecture_dsm_assurance_verification_validation::*;
     private import memo_examples_nested_architecture_dsm_traces::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part projectBinding : ModelMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-NESTED-DSM-001"; :>> label = "NestedArchitectureDsmModelMethodBinding"; }
+        @MemoIdentity { :>> providedId = "PMB-NESTED-DSM-001"; :>> label = "Nested architecture DSM model method binding"; }
         attribute :>> modelName = "Nested Architecture DSM";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

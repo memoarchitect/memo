@@ -1,60 +1,42 @@
 // Functional architecture: the display-management function tree.
 package memo_examples_ui_screen_regions_architecture_functional_functions {
+    private import memo::*;
     private import memo_examples_ui_screen_regions_assurance_requirements::*;
     private import ScalarValues::*;
 
-    private import memo_core_relationships::*;
-    private import memo_core_annotations::*;
-    private import memo_architecture_implementation_ui::*;
-    private import memo_assurance_requirements::*;
-    private import memo_assurance_requirements_needs::*;
-    private import memo_assurance_human_factors::*;
-    private import memo_assurance_safety_risk::*;
-    private import memo_assurance_verification_validation::*;
-    private import memo_artifacts_core::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_architecture_functional_functions::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     action fnManageInfusionDisplay : SystemFunction {
-        @MemoIdentity { :>> providedId = "UIR-FN-002"; :>> label = "ManageInfusionDisplay"; }
-        @MemoIdentity { :>> shortDescription = "Coordinate the running-infusion display and its interactive regions."; }
+        @MemoIdentity { :>> providedId = "UIR-FN-002"; :>> label = "Manage infusion display"; :>> shortDescription = "Coordinate the running-infusion display and its interactive regions."; }
         doc /* Maintains the clinician-facing infusion state and delegates rate programming, drug selection, and status presentation to focused child functions. */
         attribute :>> criticality = CriticalityKind::high;
 
         action fnSetInfusionRate : SystemFunction {
-            @MemoIdentity { :>> providedId = "UIR-FN-001"; :>> label = "SetInfusionRate"; }
-            @MemoIdentity { :>> shortDescription = "Apply a clinician-entered rate to the pump controller."; }
+            @MemoIdentity { :>> providedId = "UIR-FN-001"; :>> label = "Set infusion rate"; :>> shortDescription = "Apply a clinician-entered rate to the pump controller."; }
             doc /* Validates a requested infusion rate against the drug library limits and the pump's mechanical range, then commits it to the controller as the active setpoint. */
             attribute :>> criticality = CriticalityKind::high;
         }
 
         action fnValidateDrugSelection : SystemFunction {
-            @MemoIdentity { :>> providedId = "UIR-FN-003"; :>> label = "ValidateDrugSelection"; }
-            @MemoIdentity { :>> shortDescription = "Validate a selected drug and concentration against the active care-area library."; }
+            @MemoIdentity { :>> providedId = "UIR-FN-003"; :>> label = "Validate drug selection"; :>> shortDescription = "Validate a selected drug and concentration against the active care-area library."; }
             doc /* Accepts only a drug and concentration present in the active drug library, then supplies its dosing limits to rate validation. */
             attribute :>> criticality = CriticalityKind::high;
         }
 
         action fnPresentDeliveryStatus : SystemFunction {
-            @MemoIdentity { :>> providedId = "UIR-FN-004"; :>> label = "PresentDeliveryStatus"; }
-            @MemoIdentity { :>> shortDescription = "Present current rate and cumulative delivered volume."; }
+            @MemoIdentity { :>> providedId = "UIR-FN-004"; :>> label = "Present delivery status"; :>> shortDescription = "Present current rate and cumulative delivered volume."; }
             doc /* Refreshes the rate and volume-delivered indicators from controller state at the specified display update interval. */
             attribute :>> criticality = CriticalityKind::medium;
         }
 
         action fnPresentLocalTime : SystemFunction {
-            @MemoIdentity { :>> providedId = "UIR-FN-005"; :>> label = "PresentLocalTime"; }
-            @MemoIdentity { :>> shortDescription = "Read the synchronized clock and present local time."; }
+            @MemoIdentity { :>> providedId = "UIR-FN-005"; :>> label = "Present local time"; :>> shortDescription = "Read the synchronized clock and present local time."; }
             doc /* Formats the device clock as local 24-hour time and refreshes the status-bar value once per second. */
             attribute :>> criticality = CriticalityKind::medium;
         }
 
         action fnPresentBatteryStatus : SystemFunction {
-            @MemoIdentity { :>> providedId = "UIR-FN-006"; :>> label = "PresentBatteryStatus"; }
-            @MemoIdentity { :>> shortDescription = "Present battery state of charge and low-battery status."; }
+            @MemoIdentity { :>> providedId = "UIR-FN-006"; :>> label = "Present battery status"; :>> shortDescription = "Present battery state of charge and low-battery status."; }
             doc /* Converts battery telemetry into percentage, icon state, and low-battery prominence for the running-infusion screen. */
             attribute :>> criticality = CriticalityKind::medium;
         }
@@ -82,7 +64,7 @@ package memo_examples_ui_screen_regions_architecture_functional_functions {
         satisfy reqBatteryWarningPerformance by fnPresentBatteryStatus;
 
         satisfy reqDrugSelectionPerformance by fnValidateDrugSelection;
-            // The display refreshes its three indicators in this order each cycle.
+        // The display refreshes its three indicators in this order each cycle.
         succession first fnPresentDeliveryStatus then fnPresentLocalTime;
         succession first fnPresentLocalTime then fnPresentBatteryStatus;
     }

@@ -1,25 +1,15 @@
 package memo_examples_sysml_diagram_samples_samples_interconnection_view {
+    private import memo::*;
     private import ScalarValues::*;
-    private import memo_architecture_operational_context_actors::*;
-    private import memo_architecture_operational_context_use_context::*;
 
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_core_common::*;
-    private import memo_core_relationships::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::MemoIdentity;
     // Ports are owned by the part whose boundary they are, which is what lets
     // a delegation be written at all: SysML v2 checks a flow's source for
     // `out`-ness relative to the owner, so a boundary port only reads as a
     // source from INSIDE its part. The subassemblies are nested the same way —
-    // real containment, not a port-to-port `Composes` edge, which is what
-    // CR-ONT-65 used to forbid before nesting made the rule unnecessary.
+    // real containment, not a port-to-port `Composes` edge.
     part coffeeMachine : LogicalComponent {
-@MemoIdentity { :>> label = "Coffee Machine"; }
+        @MemoIdentity { :>> label = "Coffee Machine"; }
         in port mainsWaterIn : DataPort { in item payload : MemoItem; }
         out port beverageOut : DataPort { out item payload : MemoItem; }
         inout port serviceInterface : DataPort {
@@ -28,12 +18,12 @@ package memo_examples_sysml_diagram_samples_samples_interconnection_view {
         }
 
         part waterTank : LogicalComponent {
-@MemoIdentity { :>> label = "Water Reservoir"; }
+            @MemoIdentity { :>> label = "Water Reservoir"; }
             out port tankWaterOut : DataPort { out item payload : MemoItem; }
             in port tankWaterIn : DataPort { in item payload : MemoItem; }
         }
         part heaterAssembly : LogicalComponent {
-@MemoIdentity { :>> label = "Thermal Control Assembly"; }
+            @MemoIdentity { :>> label = "Thermal Control Assembly"; }
             in port heaterWaterIn : DataPort { in item payload : MemoItem; }
             out port heatedWaterOut : DataPort { out item payload : MemoItem; }
 
@@ -43,30 +33,30 @@ package memo_examples_sysml_diagram_samples_samples_interconnection_view {
             }
 
             part heatingElement : LogicalComponent {
-@MemoIdentity { :>> label = "Water Heating Element"; }
+                @MemoIdentity { :>> label = "Water Heating Element"; }
                 in port powerIn : DataPort { in item payload : MemoItem; }
                 out port heaterStatusOut : DataPort { out item payload : MemoItem; }
 
                 part resistiveCoil : LogicalComponent {
-@MemoIdentity { :>> label = "Resistive Coil"; }
+                    @MemoIdentity { :>> label = "Resistive Coil"; }
                     in port coilPowerIn : DataPort { in item payload : MemoItem; }
                     out port heatOut : DataPort { out item payload : MemoItem; }
                 }
                 part temperatureSensor : LogicalComponent {
-@MemoIdentity { :>> label = "Temperature Sensor"; }
+                    @MemoIdentity { :>> label = "Temperature Sensor"; }
                     in port heatIn : DataPort { in item payload : MemoItem; }
                     out port sensorReadingOut : DataPort { out item payload : MemoItem; }
                 }
             }
         }
         part brewGroup : LogicalComponent {
-@MemoIdentity { :>> label = "Brew Group"; }
+            @MemoIdentity { :>> label = "Brew Group"; }
             in port brewWaterIn : DataPort { in item payload : MemoItem; }
             out port brewedCoffeeOut : DataPort { out item payload : MemoItem; }
         }
     }
     part waterSupply : LogicalComponent {
-@MemoIdentity { :>> label = "Water Supply"; }
+        @MemoIdentity { :>> label = "Water Supply"; }
         out port supplyWaterOut : DataPort { out item payload : MemoItem; }
     }
     part cup : LogicalComponent {

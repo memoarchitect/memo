@@ -27,7 +27,6 @@
 | private | `memo_core_relationships::*` |
 | private | `memo_artifacts_standards_traceability::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -56,7 +55,6 @@
         private import memo_artifacts_standards_traceability::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         part isoIecIeee42010 : RegulatoryStandard {
             @MemoIdentity { :>> providedId = "STD-ISO-IEC-IEEE-42010"; }
             attribute :>> designation = "ISO/IEC/IEEE 42010:2022";

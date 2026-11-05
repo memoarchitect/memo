@@ -1,25 +1,12 @@
 package memo_examples_gpca_pump_viewpoints_risk_views_risk_risk_chain_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_context_context_viewpoint::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_viewpoints_software_software_viewpoint::*;
-    private import memo_viewpoints_physical_physical_viewpoint::*;
-    private import memo_viewpoints_requirements_requirements_viewpoint::*;
-    private import memo_viewpoints_risk_risk_viewpoint::*;
-    private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view gpcaRiskChainView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_risk_views_risk_risk_chain_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-RISK-101"; :>> label = "GPCA_RiskChainView"; }
-        @MemoIdentity { :>> shortDescription = "All seven hazard causal trees from categorized cause through harm with controls and residual risk."; }
+        @MemoIdentity { :>> providedId = "VIEW-RISK-101"; :>> label = "GPCA_RiskChainView"; :>> shortDescription = "All seven hazard causal trees from categorized cause through harm with controls and residual risk."; }
         doc /* Opioid over-infusion, under-infusion, air embolism, misprogramming, free-flow, reverse-delivery, and VTBI over-infusion causal trees (GIIP cause-source structure): categorized causes converging on each hazard, sequences of events, hazardous situations, harms, risk estimates, controls, and residual evaluations. */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::blockDiagram);

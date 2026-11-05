@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | [`ProbabilityValue`](../sysml-api/architecture/operational/activities/memo_activities.md#probabilityvalue) | `attribute def` | A probability: a dimensionless quantity between 0 and 1. |
 | [`OperativeAction`](../sysml-api/architecture/operational/activities/memo_activities.md#operativeaction) | `action def` | Operative action definition specializing `MemoAction`. |
-| [`TaskDifficultyAssessment`](../sysml-api/architecture/operational/activities/memo_activities.md#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. |
+| [`TaskDifficultyAssessment`](../sysml-api/architecture/operational/activities/memo_activities.md#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context. Associated by typed references, not inheritance; assessments are evidence-bearing. |
 
 **Context**
 
@@ -48,7 +48,7 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
-| [`IntendedUse`](../sysml-api/architecture/operational/structure/memo_operational.md#intendeduse) | `requirement def` | Intended use definition specializing `MemoMission`. |
+| [`IntendedUse`](../sysml-api/architecture/operational/structure/memo_operational.md#intendeduse) | `requirement def` | IEC 62366-1 / ISO 14971 intended use: the medical device's declared purpose and the root of the operational spine. A MemoMission, because "mission" has no medical-device meaning — intended use is what a device exists to do.… |
 | [`OperationalEntity`](../sysml-api/architecture/operational/structure/memo_operational.md#operationalentity) | `part def` | Operational entity definition specializing `MemoPart`. |
 | [`OperationalCapability`](../sysml-api/architecture/operational/structure/memo_operational.md#operationalcapability) | `part def` | Operational capability definition specializing `MemoPart`. |
 
@@ -120,7 +120,7 @@ flowchart LR
 | [`AssessesDifficulty`](../sysml-api/architecture/operational/activities/memo_activities.md#assessesdifficulty) | [`TaskDifficultyAssessment`](../sysml-api/architecture/operational/activities/memo_activities.md#taskdifficultyassessment) | [`OperativeAction`](../sysml-api/architecture/operational/activities/memo_activities.md#operativeaction) | Typed relationship from `TaskDifficultyAssessment` to `OperativeAction`. |
 | [`Governs`](../sysml-api/architecture/operational/context/stakeholders/memo_stakeholders.md#governs) | *any element* | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `any element` to `MemoPart`. |
 | [`InteractsInContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#interactsincontext) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | *any element* | The single relation a system context view draws. A context diagram labels its edges with open-ended verbs — "directs procedure", "electrical power", "fluid supply", "environmental conditions".… |
-| [`AppliesInContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | [`UseContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#usecontext) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | Typed relationship from `UseContext` to `MemoPart`. |
+| [`AppliesInContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#appliesincontext) | [`UseContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#usecontext) | [`MemoPart`](../sysml-api/core/common/memo_common.md#memopart) | An interaction between participants, or a physical connection, is native `connect`: write `connection connect <a> to <b>;`, the ordinary untyped binary connection. |
 | [`SituatedIn`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#situatedin) | [`UseContext`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#usecontext) | [`UseEnvironment`](../sysml-api/architecture/operational/context/use_context/memo_use_context.md#useenvironment) | Typed relationship from `UseContext` to `UseEnvironment`. |
 | [`RequiresCapability`](../sysml-api/architecture/operational/structure/memo_operational.md#requirescapability) | [`IntendedUse`](../sysml-api/architecture/operational/structure/memo_operational.md#intendeduse) | [`OperationalCapability`](../sysml-api/architecture/operational/structure/memo_operational.md#operationalcapability) | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). |
 | [`EnablesUseCase`](../sysml-api/architecture/operational/structure/memo_operational.md#enablesusecase) | [`OperationalCapability`](../sysml-api/architecture/operational/structure/memo_operational.md#operationalcapability) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | An operational capability enables a use case (the ability the actor draws on to accomplish the goal). Capability is tied to the use case, not to individual activities. |
@@ -145,5 +145,5 @@ flowchart LR
 | [`DemandLevelKind`](../sysml-api/architecture/operational/activities/memo_activities.md#demandlevelkind) | `minimal`, `low`, `moderate`, `high`, `extreme` |
 | [`GovernKind`](../sysml-api/architecture/operational/context/stakeholders/memo_stakeholders.md#governkind) | `correspondence` |
 | [`ScenarioKind`](../sysml-api/architecture/operational/scenarios/memo_scenarios.md#scenariokind) | `nominal`, `alternate` |
-| [`UseCaseKind`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecasekind) | `clinical`, `service`, `manufacturing`, `development` |
+| [`UseCaseKind`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecasekind) | `care`, `service`, `manufacturing`, `development` |
 | [`ResourceKind`](../sysml-api/architecture/operational/workflows/memo_workflows.md#resourcekind) | `instrument`, `equipment`, `consumable`, `material`, `information`, `space` |

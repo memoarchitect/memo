@@ -148,9 +148,9 @@ part def NetworkMedium specializes PhysicalComponent
 ??? code "architecture/implementation/hardware/electrical/memo_hardware_electrical.sysml"
 
     ```sysml
-    // Electrical / electronic realization subgroup (§12). Electrical power and
-    // signal parts, plus cabling and connectivity media, specialize the physical
-    // roots in memo_architecture_implementation_hardware_common.
+    // Electrical / electronic realization subgroup. Electrical power and signal
+    // parts, plus cabling and connectivity media, specialize the physical roots in
+    // memo_architecture_implementation_hardware_common.
     package memo_architecture_implementation_hardware_electrical {
         private import ScalarValues::*;
         private import memo_architecture_implementation_hardware_common::*;

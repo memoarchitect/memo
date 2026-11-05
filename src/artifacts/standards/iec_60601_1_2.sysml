@@ -11,7 +11,6 @@ package memo_artifacts_standards_iec_60601_1_2 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part iec60601_1_2 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-IEC-60601-1-2-COLLATERAL"; }
         attribute :>> designation = "IEC 60601-1-2:2014+AMD1:2020";

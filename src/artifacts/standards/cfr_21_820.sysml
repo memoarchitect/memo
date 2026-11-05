@@ -16,7 +16,6 @@ package memo_artifacts_standards_cfr_21_820 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part cfr21Part820 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-21-CFR-820"; }
         attribute :>> designation = "21 CFR Part 820";

@@ -6,7 +6,6 @@ package memo_viewpoints_operational_operational_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint operationalViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-OPS"; :>> label = "OperationalViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities."; }

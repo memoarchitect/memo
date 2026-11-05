@@ -7,7 +7,6 @@ package memo_rules_quantitative {
     private import memo_core_enumerations::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     constraint def HazardMaxControlsRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "QT-001"; }
         attribute tailoring = RuleTailoringKind::assurance;

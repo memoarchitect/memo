@@ -6,7 +6,6 @@ package memo_viewpoints_software_software_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint softwareViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-SW"; :>> label = "SoftwareViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows software systems, components, SOUP, and software interfaces."; }

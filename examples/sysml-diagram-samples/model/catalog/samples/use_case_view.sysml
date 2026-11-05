@@ -1,14 +1,7 @@
 package memo_examples_sysml_diagram_samples_samples_use_case_view {
+    private import memo::*;
     private import ScalarValues::*;
-    private import memo_architecture_operational_context_actors::*;
-    private import memo_architecture_operational_use_cases::*;
-    private import memo_core_relationships::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
 
     // Generalization (specialization) relation for UML-style use-case diagrams.
     // Source is the specific element, target the general one; the UCD renderer
@@ -27,11 +20,11 @@ package memo_examples_sysml_diagram_samples_samples_use_case_view {
     }
     part serviceTechnician : User {
         attribute :>> actorKind = ActorKind::technician;
-@MemoIdentity { :>> label = "Service Technician"; }
+        @MemoIdentity { :>> label = "Service Technician"; }
     }
     part nursingStaff : User {
         attribute :>> actorKind = ActorKind::clinician;
-@MemoIdentity { :>> label = "Nursing Staff"; }
+        @MemoIdentity { :>> label = "Nursing Staff"; }
     }
 
     use case reviewStatus : SystemUseCase {
@@ -69,8 +62,8 @@ package memo_examples_sysml_diagram_samples_samples_use_case_view {
         actor clinicianActor = clinician;
     }
 
-    // Was an `Extends` connection; a use case extending another is
-    // specialization, and `:>` inherits the base's subject and actors.
+    // A use case extending another is specialization, and `:>` inherits
+    // the base's subject and actors.
     dependency from documentTreatment to reviewStatus;
 
     // Actor generalization: Nursing Staff is a specialization of Clinician.

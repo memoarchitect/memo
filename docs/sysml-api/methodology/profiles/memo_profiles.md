@@ -35,7 +35,6 @@
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_methodology_scope::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -64,10 +63,9 @@
         private import memo_core_methodology_scope::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         part mdCoreLibrary : MethodologyLibrary {
             @MemoIdentity { :>> providedId = "METHLIB-001"; :>> label = "MedicalDeviceMethodologyLibrary"; }
-            attribute :>> version = "0.16.5";
+            attribute :>> version = "0.17.1";
             attribute :>> domain = "medical device modeling";
             doc /* Methodology layer for selecting, restricting, sequencing, tailoring, and lightly extending use of the medical-device ontology. */
         }
@@ -88,7 +86,7 @@
         // second scope authority.
         part mdDefaultDefinition : MethodologyDefinition {
             @MemoIdentity { :>> providedId = "METH-MD-DEFAULT"; :>> label = "MedicalDeviceDefault"; }
-            attribute :>> version = "0.16.5";
+            attribute :>> version = "0.17.1";
             attribute :>> domain = "medical device modeling";
             doc /* MEMO default medical-device methodology. Selects every layer, discipline, standard, artifact kind, and viewpoint the resolved ontology and extension packages provide. */
             attribute :>> scopeMode = ScopeModeKind::allAvailable;
@@ -122,9 +120,10 @@
             attribute :>> strength = RuleStrengthKind::required;
         }
 
-        // The default method (plan O11): the steps a family works through, at the system of systems
-        // and at each system. `outputKinds` and the rules a step is `#DoneWhen` say when its own work is done; the rules it is
-        // `#LinkedWhen` say when it is linked to the other layers.
+        // The default method: the steps a family works through, at the system of
+        // systems and at each system. `outputKinds` and the rules a step is
+        // `#DoneWhen` say when its own work is done; the rules it is `#LinkedWhen`
+        // say when it is linked to the other layers.
 
         action stepSosContext : MethodologyWorkflowStep {
             @MemoIdentity { :>> providedId = "STEP-SOS-01"; :>> label = "SosContext"; }
@@ -332,10 +331,9 @@
             attribute :>> passCriteria = "Core traceability, risk, verification, and RMF view support are present.";
         }
 
-        // The GPCA binding used to live here, in the reusable default methodology,
-        // naming its methodology by string. A project binding is project content:
-        // it now lives in the GPCA project's own `model/methodology/project.sysml` and
-        // references its methodology with a typed SysML reference.
+        // A project binding is project content: it lives in the project's own
+        // `model/methodology/project.sysml` and references its methodology with a
+        // typed SysML reference.
 
         part rmpDoc : DhfDocumentBinding {
             @MemoIdentity { :>> providedId = "DHF-001"; :>> label = "RiskManagementPlan"; }

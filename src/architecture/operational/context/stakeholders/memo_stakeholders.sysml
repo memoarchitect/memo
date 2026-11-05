@@ -1,4 +1,4 @@
-// ISO/IEC/IEEE 42010 architecture-description core (§4): ArchitectureDescription,
+// ISO/IEC/IEEE 42010 architecture-description core: ArchitectureDescription,
 // ModelKind, and CorrespondenceRule below. Stakeholders and concerns — 42010's
 // other cornerstones — are native SysML v2 constructs (stakeholder memberships
 // and `concern def`), used directly rather than reinvented as MEMO types. A

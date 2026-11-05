@@ -36,7 +36,7 @@
 | --- | --- | --- | --- |
 | [`ProcessingNode`](#processingnode) | `part def` | Processing node definition specializing `PhysicalElement`. | `PhysicalElement` |
 | [`MemoryDevice`](#memorydevice) | `part def` | Memory device definition specializing `PhysicalElement`. | `PhysicalElement` |
-| [`PhysicalPort`](#physicalport) | `port def` | Physical port definition specializing `MemoPort`. | `MemoPort` |
+| [`PhysicalPort`](#physicalport) | `port def` | A physical boundary feature: the connector the outside world plugs into. A `port def`, not a part. Exchange ends are metaclass-neutral, and KerML forbids a port from specializing a part-based type, so it specializes `MemoPort`.… | `MemoPort` |
 | [`PhysicalInterface`](#physicalinterface) | `interface def` | Typed relationship from `PhysicalPort` to `PhysicalPort`. | `Interface` |
 | [`PhysicalFlow`](#physicalflow) | `flow def` | What crosses a physical interface, as a quantity: a voltage, a current, a pressure, a force, a flow of fluid. | — |
 | [`PhysicalTransfer`](#physicaltransfer) | `flow def` | The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends. | `PhysicalFlow` |
@@ -79,7 +79,7 @@ port def PhysicalPort specializes MemoPort
 
 | Property | Value |
 | --- | --- |
-| Description | Physical port definition specializing `MemoPort`. |
+| Description | A physical boundary feature: the connector the outside world plugs into. A `port def`, not a part. Exchange ends are metaclass-neutral, and KerML forbids a port from specializing a part-based type, so it specializes `MemoPort`.… |
 | Kind | `port def` |
 | Abstract | No |
 | Specializes | `MemoPort` |
@@ -136,9 +136,9 @@ flow def PhysicalTransfer specializes PhysicalFlow
 ??? code "architecture/realization/physical/memo_physical_architecture.sysml"
 
     ```sysml
-    // Execution-platform elements of the physical architecture (§12): the nodes
-    // software runs on and the ports the outside world plugs into. The broader
-    // physical taxonomy lives in memo_architecture_implementation_hardware_structure.
+    // Execution-platform elements of the physical architecture: the nodes software
+    // runs on and the ports the outside world plugs into. The broader physical
+    // taxonomy lives in memo_architecture_implementation_hardware_structure.
     package memo_architecture_realization_physical {
         private import memo_core_stdlib_quantities::*;
         private import ScalarValues::*;
@@ -170,31 +170,28 @@ flow def PhysicalTransfer specializes PhysicalFlow
         }
         // A physical boundary feature: the connector the outside world plugs into.
         //
-        // A `port def` (Track A1), not a part. It was `part def PhysicalPort
-        // specializes InterfaceElement` for one reason — the exchange endpoints
-        // were `MemoPart`-typed, so anything that terminated an exchange had to be
-        // a part (CR-ONT-002, since rewritten). Track A0 made those ends
-        // metaclass-neutral, and KerML forbids a port from specializing a
-        // part-based type, so the specialization moves to `MemoPort`.
+        // A `port def`, not a part. Exchange ends are metaclass-neutral, and KerML
+        // forbids a port from specializing a part-based type, so it specializes
+        // `MemoPort`.
         //
-        // `direction` is gone: the port usage carries `in` / `out` / `inout`
-        // natively (Track A2). `DirectionKind` survives for the non-port
-        // constructs that still need it — see memo_core_enumerations.
+        // It declares no `direction`: the port usage carries `in` / `out` / `inout`
+        // natively. `DirectionKind` is for the non-port constructs that need one —
+        // see memo_core_enumerations.
         //
         // `portKind` is declared here AND on SoftwarePort rather than on a shared
         // base. `MemoPort` is the identification core and nothing else — the block
-        // comment in memo_core_common makes that a stated invariant across all
-        // five bases — and pushing `portKind` down onto DataPort, SensorPort,
+        // comment in memo_core_common makes that a stated invariant across all five
+        // bases — and pushing `portKind` down onto DataPort, SensorPort,
         // CommandPort, and LogicalPort would give them a second classifier beside
         // the ones they already carry (`interfaceType`, `sensorDomain`,
         // `commandDomain`, `contentKind`). An intermediate `abstract port def`
-        // holding one attribute is a class standing in for an attribute, which is
-        // what the lean direction removes. One attribute, two sites, no new type.
+        // holding one attribute is a class standing in for an attribute. One
+        // attribute, two sites, no new type.
         port def PhysicalPort specializes MemoPort {
             attribute portKind : InterfaceKind;
-            // AADL port category (plan C2) — see SoftwarePort. A physical port
-            // carries it for the same reason: a sampled sensor line and a queued
-            // interrupt line fail differently under overload.
+            // AADL port category — see SoftwarePort. A physical port carries it for
+            // the same reason: a sampled sensor line and a queued interrupt line
+            // fail differently under overload.
             attribute portCategory : PortCategoryKind;
             attribute connectorType : String;
         }

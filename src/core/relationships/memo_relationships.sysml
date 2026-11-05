@@ -21,31 +21,24 @@ package memo_core_relationships {
     //
     // A relation is a MEMO element like any other, so it carries the same
     // identification core as the part/action/item/requirement bases in
-    // memo_core_common — with four exceptions, R10-S5 (2026-08-13). `name`,
-    // `description`, `rationale` and `status` were declared here too, and a
-    // tree measurement found them dead weight: across every connection usage
-    // in src/ and examples/ (876 of them, 77 with a body at all), exactly one
-    // ever set `rationale` and none ever set `name`, `description` or
-    // `status`. The former `linkStatus` (planned/active/verified/obsolete) is
-    // already gone for the same reason: a link being "verified" was never an
-    // editorial state.
+    // memo_core_common — with four exceptions: `name`, `description`,
+    // `rationale` and `status` are native.
     //
-    // The replacement is native, not a MEMO-authored substitute:
-    //   - `name`        → the connection usage's own declared name
-    //     (`connection linkFoo : Bar …`), which every usage already has.
-    //   - `description` → `doc /* … */` on the usage.
-    //   - `rationale`   → standard `Rationale` metadata: `@Rationale { :>> text
-    //     = "…"; }` (ModelingMetadata.sysml:95). `text` is exported into
-    //     `rel.attributes.rationale` by the builder, same key as before.
-    //   - `status`      → standard `StatusInfo` metadata: `@StatusInfo { :>>
-    //     status = StatusKind::…; }` (ModelingMetadata.sysml:60). StatusKind
-    //     (open/tbd/tbr/tbc/done/closed) is NOT ElementStatusKind
-    //     (proposed/draft/inReview/approved/released/deprecated/retired) — the
-    //     mapping between them, and why no MEMO-side conversion code exists, is
-    //     recorded in docs/reference/naming-and-native-constructs.md. Exported
-    //     into `rel.attributes.status`.
-    // Both metadata defs live in the standard `ModelingMetadata` package;
-    // `private import ModelingMetadata::*;` wherever they are applied.
+    // Their native forms: - `name`        → the connection usage's own declared
+    // name (`connection linkFoo : Bar …`), which every usage already has. -
+    // `description` → `doc /* … */` on the usage. - `rationale`   → standard
+    // `Rationale` metadata: `@Rationale { :>> text = "…"; }`
+    // (ModelingMetadata.sysml:95). `text` is exported into
+    // `rel.attributes.rationale` by the builder. - `status`      → standard
+    // `StatusInfo` metadata: `@StatusInfo { :>> status = StatusKind::…; }`
+    // (ModelingMetadata.sysml:60). StatusKind (open/tbd/tbr/tbc/done/closed) is
+    // NOT ElementStatusKind
+    // (proposed/draft/inReview/approved/released/deprecated/retired) — the
+    // mapping between them, and why no MEMO-side conversion code exists, is
+    // recorded in docs/reference/naming-and-native-constructs.md. Exported into
+    // `rel.attributes.status`. Both metadata defs live in the standard
+    // `ModelingMetadata` package; `private import ModelingMetadata::*;`
+    // wherever they are applied.
     //
     // isReflexive/isUnique are structural properties of the relation itself,
     // declared here so authoring and validation read them from the ontology
@@ -89,38 +82,25 @@ package memo_core_relationships {
     // (see the note above on metaclass-neutral ends).
     abstract metadata def MemoTypedDependency;
 
-    // ─── Metaclass-neutral ends (Track A0) ──────────────────────────────
+    // ─── Metaclass-neutral ends ──────────────────────────────
     //
     // An end is left UNTYPED (`:>> source` / `:>> target`) wherever its
     // legitimate endpoints do not share a MEMO base, and a rule in
-    // memo_rules_ontology states the constraint the type used to state.
+    // memo_rules_ontology states the constraint.
     //
     // The reason is structural, not stylistic. KerML will not let a port or a
     // behaviour specialize a part-based type, so a `MemoPart`-typed end forces
-    // everything it accepts to be a part. That is what made PhysicalPort and
-    // SoftwarePort part defs (so they could terminate exchanges), what made
-    // SystemFunction a part def with its behaviour stapled on through a
-    // separate action def, and what makes `allocate <function> to <actor>` —
-    // ARCADIA's own System Analysis mechanism — illegal, since Actor is a
-    // MemoPart but not a narrower part subtype.
+    // everything it accepts to be a part. It would also make `allocate
+    // <function> to <actor>` — ARCADIA's own System Analysis mechanism —
+    // illegal, since Actor is a MemoPart but not a narrower part subtype.
     //
-    // Several of the relaxed ends were ALREADY being violated by real content
-    // before they were relaxed: `composes` links parts to OperativeAction
-    // (an action def) and to SoftwarePort/PhysicalPort;
-    // `precedes` links OperativeAction to OperativeAction; `allocatedTo`
-    // has ActionUsage sources; `bindsToInterface` targets an `interface def`,
-    // which an InterfaceElement-typed end cannot hold. The types were not
-    // buying the strictness they appeared to buy.
-    //
-    // What is NOT relaxed stays typed on purpose: `verificationCase` and
+    // Ends that are typed are typed on purpose: `verificationCase` and
     // `validationCase` are verification defs, `performed` and `enabled` are
     // MemoActions, `targetRequirement` is a MemoRequirementElement. Those ends
     // name one metaclass and mean it.
     //
-    // The strictness did not evaporate — see CR-ONT-060..CR-ONT-071 in
-    // src/rules/ontology/ontology_invariants.sysml. Relaxing the ends without
-    // those rules would have been a silent loss of every constraint the ends
-    // were carrying.
+    // The constraints on untyped ends are rules: see CR-ONT-060..CR-ONT-071 in
+    // src/rules/ontology/ontology_invariants.sysml.
     //
     // The general relation that can join any two model elements, whatever
     // their metaclass. MemoLink leaves both ends untyped and adds no
@@ -165,15 +145,9 @@ package memo_core_relationships {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = derivesFromLinks meta SysML::Usage;
     }
-    // `Realizes` (realizing/concrete element → realized/abstract element) is
-    // native `#refinement dependency` (R10-S6): write
-    // `#refinement dependency <realizing> to <realized>;` instead. It used to
-    // unify RealizesInterface, RealizesComponentExchange,
-    // RealizedByArchitecture, RealizesScenario, ModuleRealizesLogical,
-    // ComponentRealizesModule, PhysicalModuleRealizesLogical,
-    // Implements{Component,Procedure}, UIRealizesFunctional,
-    // FunctionalRealizesOper{ative,ational} and ScenarioRealizesUseCase; the
-    // native form keeps that reach, since `#refinement` places no metaclass
+    // A realization (realizing/concrete element → realized/abstract element) is
+    // native `#refinement dependency`: write `#refinement dependency
+    // <realizing> to <realized>;`. `#refinement` places no metaclass
     // restriction on either end.
     connection def ProducesEvidence :> MemoRelationship {
         end producer : MemoVerificationCase :>> source;
@@ -185,10 +159,7 @@ package memo_core_relationships {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = producesEvidenceLinks meta SysML::Usage;
     }
-    // `Precedes` is native `succession` (`first a then b;`), R10-S6.
-    // `sameStepRequired`/`precedenceRationale` had zero usages anywhere in
-    // the tree (same free-deletion shape R10-S5 found for `rationale`), so
-    // there was no content to carry forward.
+    // Precedence is native `succession` (`first a then b;`).
 
     connection def DerivesCyberRequirement :> MemoRelationship {
         end sourceThreatOrRisk : RequirementDriver :>> source;
@@ -225,16 +196,12 @@ package memo_core_relationships {
         :>> baseType = validatesLinks meta SysML::Usage;
     }
 
-    // Enables unifies the former EnablesWorkflow / EnablesActivity synonyms
-    // (an enabling system/function enables a workflow/activity).
-    // `Enables` is native `dependency` (2026-08-18): write
-    // `dependency from <enabling> to <enabled>;`. Same call as `Supports`,
-    // which was deleted as a duplicate of both `dependency` and `Enables`.
+    // An enabling system or function enabling a workflow or activity is a
+    // native `dependency`: write `dependency from <enabling> to <enabled>;`.
 
-        // A processing node hosted by an assembly is allocated to it. The end
-    // NAMES were already right; two of the three usages wrote them in reverse
-    // order, and the builder binds by position, so those two edges pointed the
-    // wrong way. See the reversed-end-name lint in memo-tools.
+    // A processing node hosted by an assembly is allocated to it. The builder
+    // binds ends by position, so write them in this order. See the
+    // reversed-end-name lint in memo-tools.
     allocation def HostedBy :> MemoRelationship, Allocations::Allocation {
         end processingNode : MemoPart :>> source;
         end hostAssembly : MemoPart :>> target;
@@ -249,17 +216,13 @@ package memo_core_relationships {
 
 
 
-    // `Composes` is deleted (R10-S7). Containment is NESTING — the child is
-    // declared inside the parent — which is how SysML v2 models composition:
-    // composite feature ownership, not a link. The relation specialized
-    // `Connections::BinaryConnection`, "a link between two things WITHIN some
-    // containing structure", so it was the wrong category for the containment
-    // itself, and the corpus has no composition connection to specialize.
+    // Containment is NESTING — the child is declared inside the parent — which
+    // is how SysML v2 models composition: composite feature ownership, not a
+    // link.
     //
-    // Nothing is lost: the builder synthesizes a `composes` edge from every
-    // nested part and item, so rules, the DSM and traceability read exactly the
-    // graph they read before. The edge type is registered natively in
-    // memo-tools' relationship registry.
+    // The builder synthesizes a `composes` edge from every nested part and
+    // item, so rules, the DSM and traceability read containment as a graph. The
+    // edge type is registered natively in memo-tools' relationship registry.
 
 
     connection def BindsToInterface :> MemoRelationship {

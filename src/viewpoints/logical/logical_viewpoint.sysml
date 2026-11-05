@@ -6,7 +6,6 @@ package memo_viewpoints_logical_logical_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint logicalArchitectureViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-LOG"; :>> label = "LogicalArchitectureViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows logical decomposition and interfaces."; }

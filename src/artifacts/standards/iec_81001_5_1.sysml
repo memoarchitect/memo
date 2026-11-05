@@ -9,7 +9,6 @@ package memo_artifacts_standards_iec_81001_5_1 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part iec81001_5_1 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-IEC-81001-5-1"; }
         attribute :>> designation = "IEC 81001-5-1:2021";
@@ -67,5 +66,5 @@ package memo_artifacts_standards_iec_81001_5_1 {
 
 
 
-    
+
 }

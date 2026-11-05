@@ -6,7 +6,6 @@ package memo_viewpoints_clinical_clinical_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint clinicalViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-CLIN"; :>> label = "ClinicalViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows clinical context, users, use environment, and clinical evidence."; }

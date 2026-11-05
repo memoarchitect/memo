@@ -1,4 +1,5 @@
 package memo_examples_sysml_diagram_samples_samples_standard_activity_view {
+    private import memo::*;
     // Standard SysML v2 activity sample (actionflow view kind, `afd` diagram type).
     //
     // The view over `activity_example::CustomerProcess`, the standard-SysML activity
@@ -14,13 +15,7 @@ package memo_examples_sysml_diagram_samples_samples_standard_activity_view {
     // the metamodel (`activity-notation.ts`), not from an ontology kind.
     private import ScalarValues::*;
 
-    private import memo_core_relationships::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_core_enumerations::*;
 
     private import activity_example::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
 }

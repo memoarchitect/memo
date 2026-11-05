@@ -1,5 +1,5 @@
-// Logical architecture (§10). Technology-independent structure: what parts of
-// the solution exist and how they interact, before committing to software,
+// Logical architecture. Technology-independent structure: what parts of the
+// solution exist and how they interact, before committing to software,
 // electronics, or mechanics. Redundancy is expressed by typed channel roles
 // plus independence constraints — never by duplicating identically named
 // components.
@@ -13,7 +13,7 @@ package memo_architecture_logical_structure {
     private import memo_architecture_logical_interfaces::Interface;
 
     // What a logical connection carries: information and control, but also
-    // energy, material, fluid, and mechanical force (§10).
+    // energy, material, fluid, and mechanical force.
     enum def FlowContentKind {
         enum information;
         enum command;
@@ -190,19 +190,16 @@ package memo_architecture_logical_structure {
     //         attribute :>> contentKind = FlowContentKind::measurement;
     //     }
     //
-    // It was a `part def` holding `sourcePort`, `targetPort` and
-    // `exchangedItem` refs. No example set either port, so no exchange said
-    // what it connected. The flow's ends are those ports now,
-    // and its payload the item feature on them. `direction` is not carried
-    // over: the ports say `in` and `out`, and a second writable direction is
-    // the duplicate §8 of the architecture plan forbids.
+    // The flow's ends are those ports, and its payload the item feature on
+    // them. It declares no `direction`: the ports say `in` and `out`, and a
+    // second writable direction would be a duplicate.
     //
-    // The ends are not restricted to `LogicalPort`. Two of the three examples
-    // move a specimen or a force between hardware parts, and a flow def that
-    // named `LogicalPort` ends would have refused them. `payload` is not
-    // declared either: `of <type>` on a usage of a flow def that declares a
-    // feature is not distinguishable (namespace distinguishability) from the
-    // library's own `payload`, so the payload lives on the ports.
+    // The ends are not restricted to `LogicalPort`. A flow may move a specimen
+    // or a force between hardware parts, and a flow def that named
+    // `LogicalPort` ends would refuse it. `payload` is not declared either: `of
+    // <type>` on a usage of a flow def that declares a feature is not
+    // distinguishable (namespace distinguishability) from the library's own
+    // `payload`, so the payload lives on the ports.
     abstract flow def LogicalExchange {
         attribute contentKind : FlowContentKind;
         attribute latencyRequirement : String;
@@ -222,7 +219,7 @@ package memo_architecture_logical_structure {
         attribute executionSemantics : String;
     }
 
-    // Isolation, fault containment, and trust boundaries (§10).
+    // Isolation, fault containment, and trust boundaries.
     part def IsolationBoundary specializes MemoPart {
         attribute boundaryKind : String;
         attribute isolationMechanism : String;
@@ -243,7 +240,7 @@ package memo_architecture_logical_structure {
         :> annotatedElement : SysML::ConnectionUsage;
         :>> baseType = independentOfLinks meta SysML::Usage;
     }
-    // `MonitorsChannel` is native `dependency` (R10-S6): write
-    // `dependency <monitorChannel> to <monitoredComponent>;` instead.
+    // A channel monitoring a component is a native `dependency`: write
+    // `dependency <monitorChannel> to <monitoredComponent>;`.
 
 }

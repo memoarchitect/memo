@@ -3,14 +3,10 @@
 // our robot's functional workflow is in the functional viewpoint. Each shows its nominal
 // scenario; the alternate scenario is one step and has no flow to draw.
 package memo_examples_gastric_bypass_variants_viewpoints_operational_views {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view bypassFlowLaparoscopic : MemoDiagramView {
         @MemoIdentity { :>> label = "System workflow: laparoscopic"; }
         expose memo_examples_gastric_bypass_variants::wfRouxEnYLap::scLapNominal::**;

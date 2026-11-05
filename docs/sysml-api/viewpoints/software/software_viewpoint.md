@@ -28,7 +28,6 @@
 | private | `memo_core_enumerations::*` |
 | private | `memo_viewpoints_stakeholders_concerns::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -50,7 +49,6 @@
         private import memo_viewpoints_stakeholders_concerns::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         viewpoint softwareViewpoint : MemoViewpoint {
             @MemoIdentity { :>> providedId = "VP-SW"; :>> label = "SoftwareViewpoint"; }
             @MemoIdentity { :>> shortDescription = "Shows software systems, components, SOUP, and software interfaces."; }

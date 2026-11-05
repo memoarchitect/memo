@@ -1,8 +1,7 @@
-// Needs (§4). A Need is a problem-space expectation stated in stakeholder
-// language; requirements (memo_assurance_requirements) are the solution-space
-// obligations derived from needs. Need specializes the part-based
-// RequirementDriver so it can serve as a typed end of trace relations
-// (DerivesFrom, Motivates).
+// Needs. A Need is a problem-space expectation stated in stakeholder language;
+// requirements (memo_assurance_requirements) are the solution-space obligations
+// derived from needs. Need specializes the part-based RequirementDriver so it
+// can serve as a typed end of trace relations (DerivesFrom, Motivates).
 package memo_assurance_requirements_needs {
     private import ScalarValues::*;
 

@@ -1,4 +1,5 @@
 package memo_examples_sysml_diagram_samples_samples_sequence_view {
+    private import memo::*;
     // Sequence sample (sequence view kind, `seq` diagram type). A FunctionalFlow
     // owns an ordered chain of nested actions (its steps); each step is `allocate`d to
     // the lifeline (an actor or component) that performs it, and the sequence
@@ -6,16 +7,7 @@ package memo_examples_sysml_diagram_samples_samples_sequence_view {
     // declaration order.
     private import ScalarValues::*;
 
-    private import memo_architecture_operational_context_actors::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_core_relationships::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
 
     // Lifelines — the actor and components each step is allocated to.
     part clinician : User { }
@@ -35,7 +27,7 @@ package memo_examples_sysml_diagram_samples_samples_sequence_view {
     }
 
     action startInfusion : FunctionalFlow {
-@MemoIdentity { :>> label = "Start Infusion"; }
+        @MemoIdentity { :>> label = "Start Infusion"; }
 
         action stepRequestStart {@MemoIdentity { :>> label = "Request start infusion"; } }
         action stepValidate {@MemoIdentity { :>> label = "Validate prescribed rate"; } }

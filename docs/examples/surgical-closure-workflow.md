@@ -22,7 +22,7 @@ its scenarios.
 
 ```sysml
 use case ucPerformSleeveGastrectomy : UseCase {
-    @MemoIdentity { :>> label = "PerformLaparoscopicSleeveGastrectomy"; }
+    @MemoIdentity { :>> label = "Perform laparoscopic sleeve gastrectomy"; }
     attribute :>> useCaseKind = UseCaseKind::care;
     attribute :>> goalStatement =
         "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
@@ -43,16 +43,15 @@ with successions between them, so the order is inspectable without embedding it 
 
 ```sysml
 action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
-    @MemoIdentity { :>> label = "LaparoscopicSleeveGastrectomyWorkflow"; }
+    @MemoIdentity { :>> label = "Laparoscopic sleeve gastrectomy workflow"; }
     attribute :>> entryCondition = "patient prepared; time-out ready";
     attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
 }
-connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsMobilize;
-connection : Composes connect parent ::> wfSleeveGastrectomy to child ::> wsSleeve;
-connection : StepPrecedes connect predecessor ::> wsMobilize to successor ::> wsSleeve;
+connection : Composes connect wfSleeveGastrectomy to wsMobilize;
+connection : Composes connect wfSleeveGastrectomy to wsSleeve;
+connection : StepPrecedes connect wsMobilize to wsSleeve;
 connection : Supports { attribute :>> supportKind = SupportKind::useCase;
-    connect supporter ::> wfSleeveGastrectomy
-    to supported ::> ucPerformSleeveGastrectomy; }
+    connect wfSleeveGastrectomy to ucPerformSleeveGastrectomy; }
 ```
 
 ## A critical task inside the operation
@@ -63,15 +62,14 @@ create the staple line, inspect for bleeding, and assess integrity.
 
 ```sysml
 action taskCreateStapleLine : CriticalTask {
-    @MemoIdentity { :>> label = "CreateAndInspectStapleLine"; }
+    @MemoIdentity { :>> label = "Create and inspect staple line"; }
     attribute :>> taskGoal =
         "create the planned sleeve and identify bleeding or integrity concerns before completion";
     attribute :>> potentialHarm =
         "bleeding or staple-line complication not recognized before handover";
 }
-connection : Composes connect parent ::> actSizeAndCreateSleeve
-    to child ::> taskCreateStapleLine;
-connection : Composes connect parent ::> taskCreateStapleLine to child ::> stInspectBleeding;
+connection : Composes connect actSizeAndCreateSleeve to taskCreateStapleLine;
+connection : Composes connect taskCreateStapleLine to stInspectBleeding;
 ```
 
 ## Scenarios own their operational activity
@@ -83,7 +81,7 @@ escalate if needed. It is not a copy of the full surgical workflow.
 
 ```sysml
 action oaControlStapleLineBleeding : OperativeAction {
-    @MemoIdentity { :>> label = "ControlStapleLineBleeding"; }
+    @MemoIdentity { :>> label = "Control staple line bleeding"; }
     action recognizeBleeding; action controlBleeding;
     action reassessStapleLine; action escalateIfNeeded;
     first start then recognizeBleeding;
@@ -92,7 +90,7 @@ action oaControlStapleLineBleeding : OperativeAction {
 }
 
 action scStapleLineBleeding : OperativeScenario {
-    @MemoIdentity { :>> label = "StapleLineBleedingRecovery"; }
+    @MemoIdentity { :>> label = "Staple line bleeding recovery"; }
     attribute :>> scenarioKind = ScenarioKind::operative;
     attribute :>> variantKind = ScenarioVariantKind::recovery;
     attribute :>> variationPoint = "bleeding observed during staple-line assessment";
@@ -100,8 +98,7 @@ action scStapleLineBleeding : OperativeScenario {
     ref :>> parentWorkflow = wfSleeveGastrectomy;
     ref :>> activities = oaControlStapleLineBleeding;
 }
-connection : Composes connect parent ::> scStapleLineBleeding
-    to child ::> oaControlStapleLineBleeding;
+connection : Composes connect scStapleLineBleeding to oaControlStapleLineBleeding;
 ```
 
 ## What this example deliberately does not model

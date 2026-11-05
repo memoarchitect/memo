@@ -1,16 +1,7 @@
 package memo_examples_sysml_diagram_samples_samples_operational_behaviour_view {
+    private import memo::*;
     private import ScalarValues::*;
-    private import memo_architecture_operational_context_actors::*;
-    private import memo_core_relationships::*;
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_operational_structure::*;
-    private import memo_architecture_operational_activities::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     // Operational activity across clinical roles. The fixture is intentionally
     // product-neutral and belongs only to the diagram-samples project.
     item def OpPrescription specializes InterfaceItem {
@@ -28,7 +19,7 @@ package memo_examples_sysml_diagram_samples_samples_operational_behaviour_view {
     // Use the canonical MEMO operational system type—never a sample-local
     // placeholder—so ontology-driven Explorer grouping remains authoritative.
     part opCareSystem : OperationalEntity {
-@MemoIdentity { :>> label = "PCA Care System"; }
+        @MemoIdentity { :>> label = "PCA Care System"; }
         attribute :>> entityKind = OperationalEntityKind::device;
         attribute :>> responsibility = "System of interest for this context view.";
         part opClinicalTeam : User {
@@ -58,7 +49,7 @@ package memo_examples_sysml_diagram_samples_samples_operational_behaviour_view {
         action opConnect : OperativeAction {@MemoIdentity { :>> label = "Connect to Patient"; } }
         action opStart : OperativeAction {@MemoIdentity { :>> label = "Start Infusion"; } }
         action opAdminister : OperativeAction {
-@MemoIdentity { :>> label = "Administer PCA Therapy"; }
+            @MemoIdentity { :>> label = "Administer PCA Therapy"; }
             action opRequestBolus : OpRequestBolus {@MemoIdentity { :>> label = "Request Bolus"; } }
             action opCheckLockout : OpCheckLockout {@MemoIdentity { :>> label = "Check Lockout"; } }
             action opDeliverDose : OperativeAction {@MemoIdentity { :>> label = "Deliver Dose"; } }

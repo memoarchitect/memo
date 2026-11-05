@@ -2,11 +2,10 @@
 // It specializes native item, port, and interface families; publication and
 // subscription are expressed by port direction plus native flows/messages.
 //
-// This is where `deliverySemantics` and `topicStructure` live now, and moving
-// them fixed a metaclass error as well as a layering one. Both were attributes
-// on `SoftwareComponent`, and neither is a property of a component: a
-// component does not have a topic, a publication does; a component does not
-// have delivery semantics, the channel it publishes over does.
+// `deliverySemantics` and `topicStructure` are here because neither is a
+// property of a component: a component does not have a topic, a publication
+// does; a component does not have delivery semantics, the channel it publishes
+// over does.
 package memo_extension_messaging {
     private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;

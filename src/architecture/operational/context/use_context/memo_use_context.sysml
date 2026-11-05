@@ -2,13 +2,12 @@
 // reasonably foreseeable misuse are assurance requirements/risk inputs and
 // live in memo_assurance_requirements.
 //
-// This package once defined `ExchangesWith` for directional context-level data
-// flow between boundary entities. It is deleted: SysML v2's own `flow` covers
-// every case and is strictly stronger, because `of <ItemDef>` says WHAT moves
-// and two untyped connection ends cannot. Delegation between a boundary port
-// and the interior it stands for is `bind` — identity, not transport. SysML v2
-// keeps the two apart the same way: training ch. 13 wires components with
-// `flow`, ch. 12 delegates across a boundary with `bind`.
+// Directional context-level data flow between boundary entities is SysML v2's
+// own `flow`, because `of <ItemDef>` says WHAT moves and two untyped connection
+// ends cannot. Delegation between a boundary port and the interior it stands
+// for is `bind` — identity, not transport. SysML v2 keeps the two apart the
+// same way: training ch. 13 wires components with `flow`, ch. 12 delegates
+// across a boundary with `bind`.
 package memo_architecture_operational_context_use_context {
     private import Metaobjects::SemanticMetadata;
     private import ScalarValues::*;
@@ -66,12 +65,9 @@ package memo_architecture_operational_context_use_context {
         :>> baseType = interactsInContextLinks meta SysML::Usage;
     }
 
-    // `InteractsWith` is native `connect` (2026-08-18): write
-    // `connection connect <participant> to <target>;`. It carried no
-    // attributes, and the operational-context package already scopes the ends.
-    // `ConnectsPhysically` is native `connect` (R10-S6): write
-    // `connection connect source ::> <a> to target ::> <b>;` — the ordinary
-    // untyped binary connection — instead of a connection def for it.
+    // An interaction between participants, or a physical connection, is native
+    // `connect`: write `connection connect <a> to <b>;`, the ordinary untyped
+    // binary connection.
     connection def AppliesInContext :> MemoRelationship {
         end useContext : UseContext :>> source;
         end subjectElement : MemoPart :>> target;

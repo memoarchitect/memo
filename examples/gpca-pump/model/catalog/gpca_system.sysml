@@ -1,16 +1,9 @@
 package memo_examples_gpca_pump_gpca_system {
-    private import memo_core_stdlib_quantities::*;
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_architecture_functional_functions::*;
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
-    private import memo_architecture_operational_scenarios::*;
-    private import memo_core_enumerations::*;
-    private import memo_architecture_operational_structure::*;
-    private import memo_architecture_operational_use_cases::*;
-    private import memo_core_common::*;
 
-    private import memo_core_common::MemoIdentity;
     // The device's top-level goal is its IntendedUse (gpcaIntendedUse in
     // gpca_context) — a MemoMission. The former separate gpcaMission was
     // retired: "mission" duplicated the regulated intended-use statement.
@@ -24,30 +17,30 @@ package memo_examples_gpca_pump_gpca_system {
     // function's in declaration order, whatever their names, so each narrows
     // the function's parameter at that position to this step's item.
     action fcPatientBolus : FunctionalFlow {
-        @MemoIdentity { :>> providedId = "FC-001"; :>> label = "PatientBolusChain"; }
+        @MemoIdentity { :>> providedId = "FC-001"; :>> label = "Patient bolus chain"; }
         attribute :>> flowCategory = FunctionalFlowKind::nominal;
         attribute :>> endToEndLatencyBudgetMs = 100 [milli*s];
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         doc /* Bolus button press through lockout/max-dose check to pump actuation and logging. */
         action fcsBolusSense :> fnAcquireSensors {
-            @MemoIdentity { :>> providedId = "FCS-001"; :>> label = "SenseBolusRequest"; }
+            @MemoIdentity { :>> providedId = "FCS-001"; :>> label = "Sense bolus request"; }
             out item bolusRequest :> ddBolusRequest;
         }
         action fcsBolusValidate :> fnEnforceLimits {
-            @MemoIdentity { :>> providedId = "FCS-002"; :>> label = "CheckLockoutAndMaxDose"; }
+            @MemoIdentity { :>> providedId = "FCS-002"; :>> label = "Check lockout and max dose"; }
             in item prescription :> ddPrescription;
         }
         action fcsBolusCommand :> fnManageInfusion {
-            @MemoIdentity { :>> providedId = "FCS-003"; :>> label = "CommandBolusFlow"; }
+            @MemoIdentity { :>> providedId = "FCS-003"; :>> label = "Command bolus flow"; }
             out item flowCommand :> cdFlowCommand;
         }
         action fcsBolusActuate :> fnCommandPump {
-            @MemoIdentity { :>> providedId = "FCS-004"; :>> label = "ActuatePumpMotor"; }
+            @MemoIdentity { :>> providedId = "FCS-004"; :>> label = "Actuate pump motor"; }
             in item flowCommand :> cdFlowCommand;
         }
         action fcsBolusLog :> fnLogEvents {
-            @MemoIdentity { :>> providedId = "FCS-005"; :>> label = "LogBolusOutcome"; }
+            @MemoIdentity { :>> providedId = "FCS-005"; :>> label = "Log bolus outcome"; }
             out item eventRecord :> ddEventRecord;
         }
         first fcsBolusSense then fcsBolusValidate;
@@ -58,22 +51,22 @@ package memo_examples_gpca_pump_gpca_system {
     }
 
     action fcAlarmStop : FunctionalFlow {
-        @MemoIdentity { :>> providedId = "FC-002"; :>> label = "AlarmDetectionToSafeStateChain"; }
+        @MemoIdentity { :>> providedId = "FC-002"; :>> label = "Alarm detection to safe state chain"; }
         attribute :>> flowCategory = FunctionalFlowKind::alarm;
         attribute :>> endToEndLatencyBudgetMs = 20 [milli*s];
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         doc /* Sensor condition through alarm evaluation to same-step transition to PAUSED (KVO flow, REQ 43) and annunciation. */
         action fcsAlarmSense :> fnAcquireSensors {
-            @MemoIdentity { :>> providedId = "FCS-006"; :>> label = "SenseAlarmCondition"; }
+            @MemoIdentity { :>> providedId = "FCS-006"; :>> label = "Sense alarm condition"; }
             out item sensorVector :> ddSensorVector;
         }
         action fcsAlarmEvaluate :> fnMonitorAlarm {
-            @MemoIdentity { :>> providedId = "FCS-007"; :>> label = "EvaluateAlarmCondition"; }
+            @MemoIdentity { :>> providedId = "FCS-007"; :>> label = "Evaluate alarm condition"; }
             in item sensorVector :> ddSensorVector;
         }
         action fcsAlarmStopInfusion :> fnManageInfusion {
-            @MemoIdentity { :>> providedId = "FCS-008"; :>> label = "LimitFlowToKvoSameStep"; }
+            @MemoIdentity { :>> providedId = "FCS-008"; :>> label = "Limit flow to KVO same step"; }
             // A step's parameters redefine its function's by position, so the
             // KVO-limited flow command it emits comes first (fnManageInfusion's
             // `flowCommandOut`); the alarm signal is the input this position adds.
@@ -81,7 +74,7 @@ package memo_examples_gpca_pump_gpca_system {
             in item alarmSignal :> cdAlarmSignal;
         }
         action fcsAlarmAnnunciate :> fnAnnunciate {
-            @MemoIdentity { :>> providedId = "FCS-009"; :>> label = "AnnunciateAudibleVisual"; }
+            @MemoIdentity { :>> providedId = "FCS-009"; :>> label = "Annunciate audible visual"; }
             in item alarmSignal :> cdAlarmSignal;
         }
         first fcsAlarmSense then fcsAlarmEvaluate;
@@ -95,7 +88,7 @@ package memo_examples_gpca_pump_gpca_system {
     }
 
     action fcStartup : FunctionalFlow {
-        @MemoIdentity { :>> providedId = "FC-003"; :>> label = "PowerOnSelfTestChain"; }
+        @MemoIdentity { :>> providedId = "FC-003"; :>> label = "Power on self test chain"; }
         attribute :>> flowCategory = FunctionalFlowKind::startup;
         attribute :>> endToEndLatencyBudgetMs = 5000 [milli*s];
         attribute :>> safetyRelevant = true;
@@ -107,13 +100,13 @@ package memo_examples_gpca_pump_gpca_system {
 
     // ── System scenarios ────────────────────────────────────────
     action ssBolusDuringBasal : OperativeScenario {
-        @MemoIdentity { :>> providedId = "SS-001"; :>> label = "PatientBolusDuringBasal"; }
+        @MemoIdentity { :>> providedId = "SS-001"; :>> label = "Patient bolus during basal"; }
         attribute :>> preCondition = "BASAL mode active; no REQ 25 ignore condition holds";
         attribute :>> postCondition = "PATIENT_BOLUS mode entered, bolus delivered, return to BASAL";
     }
     action ssAlarmPause : OperativeScenario {
         attribute :>> scenarioKind = ScenarioKind::alternate;
-        @MemoIdentity { :>> providedId = "SS-002"; :>> label = "InhibitingNotificationPausesInfusion"; }
+        @MemoIdentity { :>> providedId = "SS-002"; :>> label = "Inhibiting notification pauses infusion"; }
         attribute :>> preCondition = "any ACTIVE therapy mode; infusion-inhibiting notification detected (REQ 59)";
         attribute :>> postCondition = "PAUSED mode entered in same execution step at FlowRate_kvo_hd keep-vein-open flow; notification annunciated per REQ 59";
     }

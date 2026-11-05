@@ -41,7 +41,7 @@
 | [`SensorPort`](#sensorport) | `port def` | Sensor port definition specializing `DataPort`. | `DataPort` |
 | [`CommandPort`](#commandport) | `port def` | Command port definition specializing `DataPort`. | `DataPort` |
 | [`ComponentExchange`](#componentexchange) | `interface def` | Typed relationship for component exchange. | `MemoInterface` |
-| [`SoftwarePort`](#softwareport) | `port def` | Software port definition specializing `MemoPort`. | `MemoPort` |
+| [`SoftwarePort`](#softwareport) | `port def` | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary.… | `MemoPort` |
 
 ## Interface
 
@@ -171,7 +171,7 @@ port def SoftwarePort specializes MemoPort
 
 | Property | Value |
 | --- | --- |
-| Description | Software port definition specializing `MemoPort`. |
+| Description | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary.… |
 | Kind | `port def` |
 | Abstract | No |
 | Specializes | `MemoPort` |
@@ -188,18 +188,13 @@ port def SoftwarePort specializes MemoPort
     //
     // ─── A component exchange is an interface ────────────────────────────────
     //
-    // `ComponentExchange` is an `interface def`: the edge between two ports IS
-    // the exchange. It was a `part def` whose `sourceEndpoint`/`targetEndpoint`
-    // refs named the ports, beside a separate `flow` or `bind` naming them again,
-    // and CR-ONT-076 existed only to keep the two representations in step. It
-    // also lost information: the builder stored a dotted ref value as its first
-    // segment only, so every endpoint read as the enclosing device, and
-    // CR-ONT-072/073 checked the device instead of the port.
+    // `ComponentExchange` is an `interface def`: the edge between two ports IS the
+    // exchange.
     //
-    // Its ends are the ports, and they are ports, never components: §6.2 of the
-    // architecture plan requires an actual boundary port, and a rule
-    // (CR-ONT-072/073) says so because the compiler does not — it accepts a
-    // part at an interface end even when the definition types its ends.
+    // Its ends are the ports, and they are ports, never components: an exchange
+    // needs an actual boundary port, and a rule (CR-ONT-072/073) says so because
+    // the compiler does not — it accepts a part at an interface end even when the
+    // definition types its ends.
     //
     // ─── Transport, delegation, and the choice between them ──────────────────
     //
@@ -228,14 +223,14 @@ port def SoftwarePort specializes MemoPort
         private import memo_architecture_functional_functions::*;
 
         // ─── One Interface definition ────────────────────────────────────
-        // Realization domain (hardware vs software), signaling family
-        // (digital / analog / synchronous / asynchronous) and concrete protocol
-        // (SPI, CAN, Ethernet, 4-20mA, REST, gRPC, message-queue …) are captured
-        // by `interfaceKind` + `protocol`, NOT by a class branch. Every
-        // descriptive attribute below is optional, so an interface carries only
-        // the ones that apply to it. There is no HardwareInterface /
-        // DigitalInterface / SPIInterface / RestInterface … hierarchy: those were
-        // 20+ classes that differed only in the value of `protocol`.
+        // Realization domain (hardware vs software), signaling family (digital /
+        // analog / synchronous / asynchronous) and concrete protocol (SPI, CAN,
+        // Ethernet, 4-20mA, REST, gRPC, message-queue …) are captured by
+        // `interfaceKind` + `protocol`, NOT by a class branch. Every descriptive
+        // attribute below is optional, so an interface carries only the ones that
+        // apply to it. There is no HardwareInterface / DigitalInterface /
+        // SPIInterface / RestInterface … hierarchy: such classes would differ only
+        // in the value of `protocol`.
 
         // The common contract of an interface, whatever layer it is on: what
         // crosses, which way, under what timing, and how much it matters to
@@ -339,16 +334,15 @@ port def SoftwarePort specializes MemoPort
         // data port), modeled as a first-class element so exchanges can
         // reference it and views can render the system boundary.
         //
-        // A `port def` (Track A1) — see PhysicalPort in
-        // memo_architecture_realization_physical for why the specialization moved
-        // off InterfaceElement, why `direction` is native now (Track A2), and why
-        // `portKind` is duplicated on both ports instead of hoisted onto a base.
+        // A `port def` — see PhysicalPort in memo_architecture_realization_physical
+        // for why `direction` is native and why `portKind` is declared on both
+        // ports instead of on a base.
         port def SoftwarePort specializes MemoPort {
             attribute portKind : InterfaceKind;
-            // AADL port category (plan C2). Sampled vs. queued delivery decides
-            // whether a missed deadline drops a sample or grows a queue, which the
-            // timing analysis and the safety case both need and neither could ask
-            // the model for. `portKind` says what crosses; this says how.
+            // AADL port category. Sampled vs. queued delivery decides whether a
+            // missed deadline drops a sample or grows a queue, which the timing
+            // analysis and the safety case both need. `portKind` says what crosses;
+            // this says how.
             attribute portCategory : PortCategoryKind;
             attribute dataTypeName : String;
         }

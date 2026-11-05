@@ -1,18 +1,13 @@
 package memo_examples_gpca_pump_viewpoints_verification_views_document_vv_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_verification::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view vvView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_verification_views_document_vv_view::*;
         expose evidenceSafetyAlarmSuite;
-        @MemoIdentity { :>> providedId = "DOC-006"; :>> label = "VerificationValidationView"; }
-        @MemoIdentity { :>> shortDescription = "V&V plan and coverage for requirements and risk controls."; }
+        @MemoIdentity { :>> providedId = "DOC-006"; :>> label = "Verification validation view"; :>> shortDescription = "V&V plan and coverage for requirements and risk controls."; }
         doc /* Aggregates verification cases, validation cases, test artifacts, and evidence with their coverage of requirements, risk controls, behavior properties, and timing constraints. */
         attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
@@ -21,7 +16,7 @@ package memo_examples_gpca_pump_viewpoints_verification_views_document_vv_view {
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = verificationViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-006"; :>> label = "vvViewQuery"; }
+            @MemoIdentity { :>> providedId = "QRY-DOC-006"; :>> label = "V&V view query"; }
             attribute :>> includeElementKinds = ("VerificationCase", "ValidationCase", "MemoEvidence", "Requirement", "RiskControlMeasure");
             attribute :>> includeRelationshipKinds = ("VerifiedBy", "Validates", "TestedByUsability", "ProducesEvidence");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";

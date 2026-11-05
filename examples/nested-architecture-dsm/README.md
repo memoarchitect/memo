@@ -17,10 +17,10 @@ the model rather than from a naming convention.
 
 ## What it is set up to show
 
-- **Roll-up.** `SafetyMonitorSubsystem` sits one level deeper than its peers, so
-  a collapsed `ControlSubsystem` row genuinely sums its descendants instead of
+- **Roll-up.** `Safety monitor subsystem` sits one level deeper than its peers, so
+  a collapsed `Control subsystem` row genuinely sums its descendants instead of
   standing in for a single child.
-- **Feedback.** `DriveActuator` and `MeasureDeliveredVolume` exchange in both
+- **Feedback.** `Drive actuator` and `Measure delivered volume` exchange in both
   directions, so a partitioned DSM still shows one real feedback mark rather
   than an empty lower triangle.
 - **Cross-tree dependency.** `EnforceDoseLimits → DriveActuator` and
@@ -29,7 +29,7 @@ the model rather than from a naming convention.
 - **Asymmetric axes.** Functions on the rows and blocks on the columns, joined
   by `AllocatedTo` — including `MeterFluid → FluidPathSubsystem`, an allocation
   made at subsystem level rather than to one component.
-- **A traceability gap.** `StatusVisibility` is satisfied by nothing, so
+- **A traceability gap.** `Status visibility` is satisfied by nothing, so
   coverage reads under 100% and there is an empty row to author a link into.
 
 ## Suggested run
@@ -44,6 +44,6 @@ feedback count drops and one mark stays below the diagonal. Then set columns to
 the logical kinds and dependency to `allocatedTo` for the allocation view.
 
 In **Traceability**: rows `Requirement`, columns `SystemFunction`, trace via
-`satisfiedBy`. Turn on **Edit links** and click the empty `StatusVisibility` row
+`satisfiedBy`. Turn on **Edit links** and click the empty `Status visibility` row
 to author the missing trace; it is written back to
 `model/catalog/traces.sysml`.

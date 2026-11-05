@@ -52,7 +52,7 @@ The GPCA model records one clinical use case.
 use case ucDeliverPcaTherapy : UseCase {
     attribute :>> useCaseKind = UseCaseKind::care;
     attribute :>> id = "UC-001";
-    @MemoIdentity { :>> label = "DeliverPatientControlledAnalgesia"; }
+    @MemoIdentity { :>> label = "Deliver patient controlled analgesia"; }
     attribute :>> goalStatement =
         "Deliver prescribed analgesia safely while allowing patient-controlled "
         "bolus requests within configured limits.";

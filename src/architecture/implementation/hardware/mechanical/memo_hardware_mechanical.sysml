@@ -1,5 +1,5 @@
-// Mechanical realization subgroup (§12). Structural and housing parts
-// specialize the physical roots in memo_architecture_implementation_hardware_common.
+// Mechanical realization subgroup. Structural and housing parts specialize the
+// physical roots in memo_architecture_implementation_hardware_common.
 package memo_architecture_implementation_hardware_mechanical {
     private import ScalarValues::*;
     private import memo_architecture_implementation_hardware_common::*;

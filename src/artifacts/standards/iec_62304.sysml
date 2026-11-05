@@ -17,7 +17,6 @@ package memo_artifacts_standards_iec_62304 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part iec62304 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-IEC-62304"; }
         attribute :>> designation = "IEC 62304:2006+AMD1:2015";

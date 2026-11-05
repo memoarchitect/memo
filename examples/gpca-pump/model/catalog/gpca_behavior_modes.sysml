@@ -1,14 +1,10 @@
 package memo_examples_gpca_pump_gpca_behavior_modes {
-    private import memo_core_stdlib_quantities::*;
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_architecture_functional_behavior::*;
-    private import memo_core_enumerations::*;
-    private import memo_core_common::*;
     private import memo_examples_gpca_pump_gpca_system::*;
     private import memo_examples_gpca_pump_gpca_architecture::*;
 
-    private import memo_core_common::MemoIdentity;
     // ═════════════════════════════════════════════════════════════
     // GPCA mode machine per CriSys Ch.4 Fig 4.1 mode hierarchy:
     //   OFF, ON { IDLE, THERAPY { PAUSED, ACTIVE { BASAL,
@@ -35,28 +31,28 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         state modeOFF : MemoState {
             @MemoIdentity { :>> providedId = "MODE-000"; }
             attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "OFF"; }
+            @MemoIdentity { :>> label = "OFF"; }
             attribute :>> modeKind = "top (default)";
             doc /* No functionality; the GPCA is turned off. FlowRate_output = 0 (REQ 6). */
             attribute :>> entryCondition = "System_stop_prog commanded while ON (REQ 5); default mode";
             attribute :>> exitCondition = "System_start_prog commanded (REQ 4)";
-        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.2"; }
+            @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.2"; }
         }
 
         state modeON : MemoState {
             @MemoIdentity { :>> providedId = "MODE-001"; }
             attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "ON"; }
+            @MemoIdentity { :>> label = "ON"; }
             attribute :>> modeKind = "operational parent";
             doc /* Topmost operational mode: prescription configuration (REQ 8), infusion initiation gating (REQ 7, 9), notification (REQ 10) and logging (REQ 11) are available. */
             attribute :>> entryCondition = "System_start_prog from OFF; A.4 variables set to defaults (REQ 4)";
             attribute :>> exitCondition = "System_stop_prog: stop infusion, cancel all notifications (REQ 5)";
-        @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.3"; }
+            @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.3"; }
 
             state modeIDLE : MemoState {
                 @MemoIdentity { :>> providedId = "MODE-002"; }
                 attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "ON.IDLE"; }
+                @MemoIdentity { :>> label = "ON.IDLE"; }
                 attribute :>> modeKind = "idle";
                 doc /* Default sub-mode on entry to ON; no infusion, FlowRate_output = 0 (REQ 14); prescription set-up happens here. 'IDLE Time' actions after Max_IDLE_Duration_const (REQ 15). */
                 attribute :>> entryCondition = "OFF -> ON transition (REQ 4); infusion complete (REQ 28); PAUSED inhibit (REQ 47)";
@@ -67,7 +63,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             state modeTHERAPY : MemoState {
                 @MemoIdentity { :>> providedId = "MODE-003"; }
                 attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "ON.THERAPY"; }
+                @MemoIdentity { :>> label = "ON.THERAPY"; }
                 attribute :>> modeKind = "therapy parent";
                 doc /* Parent of all drug-delivering sub-modes. Delivers FlowRate_Mode_macro within Tolerance_Max_const (REQ 16); monitors under-infusion (REQ 17), low reservoir (REQ 18), over-infusion, VTBI, air, reverse delivery, empty reservoir (REQ 19-23). */
                 attribute :>> entryCondition = "infusion initiated (REQ 12/13)";
@@ -77,7 +73,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
                 state modePAUSED : MemoState {
                     @MemoIdentity { :>> providedId = "MODE-004"; }
                     attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "ON.THERAPY.PAUSED"; }
+                    @MemoIdentity { :>> label = "ON.THERAPY.PAUSED"; }
                     attribute :>> modeKind = "paused (KVO delivery)";
                     doc /* Infusion paused by notification actions or manual inhibit. FlowRate_Mode_macro = FlowRate_kvo_hd — keep-vein-open flow within Tolerance_Max_const, NOT zero (REQ 43). 'PAUSED Time' actions after Max_PAUSED_Duration_const (REQ 44). Infusion_initiate_prog while Inhibited_Infusion_macro = TRUE causes no transition (REQ 45). */
                     attribute :>> entryCondition = "REQ 19-23 alarm transitions, REQ 29 manual inhibit, REQ 30 all-inhibited, REQ 37-39 sub-mode inhibits, REQ 13 initiate-while-inhibited";
@@ -88,7 +84,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
                 state modeACTIVE : MemoState {
                     @MemoIdentity { :>> providedId = "MODE-005"; }
                     attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "ON.THERAPY.ACTIVE"; }
+                    @MemoIdentity { :>> label = "ON.THERAPY.ACTIVE"; }
                     attribute :>> modeKind = "active parent";
                     doc /* Actual infusion through BASAL, SQUARE BOLUS or PATIENT BOLUS. Only mode where a patient bolus may be requested (REQ 25). Square boluses are scheduled automatically every Interval_sbolus_prog for Duration_sbolus_prog (REQ 24). Actual_Infusion_Duration_macro accumulates here. */
                     attribute :>> entryCondition = "infusion initiated (REQ 12) or resumed (REQ 46)";
@@ -98,7 +94,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
                     state modeBASAL : MemoState {
                         @MemoIdentity { :>> providedId = "MODE-006"; }
                         attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "ON.THERAPY.ACTIVE.BASAL"; }
+                        @MemoIdentity { :>> label = "ON.THERAPY.ACTIVE.BASAL"; }
                         attribute :>> modeKind = "active-basal";
                         doc /* Constant-rate delivery at FlowRate_basal_prog within Tolerance_Max_const (REQ 40). FlowRate_Mode_macro = FlowRate_basal_prog. */
                         attribute :>> entryCondition = "infusion initiated/resumed (REQ 12/46); square bolus ended (REQ 34); patient bolus ended (REQ 35)";
@@ -109,7 +105,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
                     state modeSQUARE : MemoState {
                         @MemoIdentity { :>> providedId = "MODE-007"; }
                         attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "ON.THERAPY.ACTIVE.SQUARE_BOLUS"; }
+                        @MemoIdentity { :>> label = "ON.THERAPY.ACTIVE.SQUARE_BOLUS"; }
                         attribute :>> modeKind = "active-square-bolus (auto-scheduled)";
                         doc /* Prescribed extra delivery at FlowRate_sbolus_prog within Tolerance_Max_const (REQ 41). Auto-initiates at the prescribed frequency and ends after the prescribed duration — no external trigger (§4.1.8, REQ 24). FlowRate_Mode_macro = FlowRate_sbolus_prog. */
                         attribute :>> entryCondition = "scheduled start per REQ 24 with REQ 31 guards; patient bolus end with square scheduled (REQ 36)";
@@ -120,7 +116,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
                     state modePBOLUS : MemoState {
                         @MemoIdentity { :>> providedId = "MODE-008"; }
                         attribute :>> stateKind = StateKind::mode;
-@MemoIdentity { :>> label = "ON.THERAPY.ACTIVE.PATIENT_BOLUS"; }
+                        @MemoIdentity { :>> label = "ON.THERAPY.ACTIVE.PATIENT_BOLUS"; }
                         attribute :>> modeKind = "active-patient-bolus";
                         doc /* Patient-requested delivery at FlowRate_pbolus_prog within Tolerance_Max_const (REQ 42). Granted only when no REQ 25 ignore condition holds. FlowRate_Mode_macro = FlowRate_pbolus_prog. */
                         attribute :>> entryCondition = "BolusRequest_prog with no REQ 25 ignore condition (REQ 32/33)";
@@ -133,7 +129,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
 
         // ── Mode transitions (CriSys §4.1, 1:1 with source REQs) ──
         transition trSystemStart first modeOFF then modeON.modeIDLE {
-            @MemoIdentity { :>> label = "SystemStartToIdle"; }
+            @MemoIdentity { :>> label = "System start to idle"; }
             @TransitionRecord {
                 :>> id = "TR-001";
                 :>> trigger = "System_start_prog commanded";
@@ -143,7 +139,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trSystemStop first modeON then modeOFF {
-            @MemoIdentity { :>> label = "SystemStopToOff"; }
+            @MemoIdentity { :>> label = "System stop to off"; }
             @TransitionRecord {
                 :>> id = "TR-002";
                 :>> trigger = "System_stop_prog commanded";
@@ -153,7 +149,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trStartTherapy first modeON.modeIDLE then modeON.modeTHERAPY.modeACTIVE.modeBASAL {
-            @MemoIdentity { :>> label = "ConfirmedInitiateToBasal"; }
+            @MemoIdentity { :>> label = "Confirmed initiate to basal"; }
             @TransitionRecord {
                 :>> id = "TR-003";
                 :>> trigger = "second Infusion_initiate_prog (confirmation per REQ 9)";
@@ -163,7 +159,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trInitiateWhileInhibited first modeON.modeIDLE then modeON.modeTHERAPY.modePAUSED {
-            @MemoIdentity { :>> label = "ConfirmedInitiateWhileInhibitedToPaused"; }
+            @MemoIdentity { :>> label = "Confirmed initiate while inhibited to paused"; }
             @TransitionRecord {
                 :>> id = "TR-004";
                 :>> trigger = "second Infusion_initiate_prog (confirmation per REQ 9)";
@@ -173,7 +169,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trAlarmPause first modeON.modeTHERAPY then modeON.modeTHERAPY.modePAUSED {
-            @MemoIdentity { :>> label = "TherapyAlarmToPausedKvo"; }
+            @MemoIdentity { :>> label = "Therapy alarm to paused KVO"; }
             @TransitionRecord {
                 :>> id = "TR-005";
                 :>> trigger = "over-infusion flow rate (REQ 19), over-infusion VTBI (REQ 20), air embolism (REQ 21), reverse delivery (REQ 22), or empty reservoir (REQ 23) condition";
@@ -183,7 +179,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trInfusionComplete first modeON.modeTHERAPY.modeACTIVE then modeON.modeIDLE {
-            @MemoIdentity { :>> label = "InfusionCompleteToIdle"; }
+            @MemoIdentity { :>> label = "Infusion complete to idle"; }
             @TransitionRecord {
                 :>> id = "TR-006";
                 :>> trigger = "Actual_Infusion_Duration_macro >= Duration_total_prog OR Actual_Volume_Infused_macro >= VTBI_total_prog";
@@ -193,7 +189,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trManualInhibit first modeON.modeTHERAPY.modeACTIVE then modeON.modeTHERAPY.modePAUSED {
-            @MemoIdentity { :>> label = "ManualInhibitToPaused"; }
+            @MemoIdentity { :>> label = "Manual inhibit to paused"; }
             @TransitionRecord {
                 :>> id = "TR-007";
                 :>> trigger = "Infusion_inhibit_prog commanded";
@@ -203,7 +199,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trAllInhibited first modeON.modeTHERAPY.modeACTIVE then modeON.modeTHERAPY.modePAUSED {
-            @MemoIdentity { :>> label = "AllInhibitedToPaused"; }
+            @MemoIdentity { :>> label = "All inhibited to paused"; }
             @TransitionRecord {
                 :>> id = "TR-008";
                 :>> trigger = "Inhibited_Infusion_macro AND Inhibited_Bolus_macro AND Inhibited_PatientBolus_macro all TRUE";
@@ -213,7 +209,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trSquareBolus first modeON.modeTHERAPY.modeACTIVE.modeBASAL then modeON.modeTHERAPY.modeACTIVE.modeSQUARE {
-            @MemoIdentity { :>> label = "ScheduledSquareBolusStart"; }
+            @MemoIdentity { :>> label = "Scheduled square bolus start"; }
             @TransitionRecord {
                 :>> id = "TR-009";
                 :>> trigger = "scheduled SQUARE BOLUS start — auto-initiates every Interval_sbolus_prog for Duration_sbolus_prog during Duration_total_prog (REQ 24); no external trigger";
@@ -223,7 +219,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trPatientBolus first modeON.modeTHERAPY.modeACTIVE.modeBASAL then modeON.modeTHERAPY.modeACTIVE.modePBOLUS {
-            @MemoIdentity { :>> label = "BasalToPatientBolus"; }
+            @MemoIdentity { :>> label = "Basal to patient bolus"; }
             @TransitionRecord {
                 :>> id = "TR-010";
                 :>> trigger = "BolusRequest_prog";
@@ -233,7 +229,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trSquareToPatientBolus first modeON.modeTHERAPY.modeACTIVE.modeSQUARE then modeON.modeTHERAPY.modeACTIVE.modePBOLUS {
-            @MemoIdentity { :>> label = "SquareBolusToPatientBolus"; }
+            @MemoIdentity { :>> label = "Square bolus to patient bolus"; }
             @TransitionRecord {
                 :>> id = "TR-011";
                 :>> trigger = "BolusRequest_prog";
@@ -243,7 +239,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trSquareToBasal first modeON.modeTHERAPY.modeACTIVE.modeSQUARE then modeON.modeTHERAPY.modeACTIVE.modeBASAL {
-            @MemoIdentity { :>> label = "SquareBolusEndToBasal"; }
+            @MemoIdentity { :>> label = "Square bolus end to basal"; }
             @TransitionRecord {
                 :>> id = "TR-012";
                 :>> trigger = "Inhibited_Bolus_macro = TRUE or scheduled square bolus end (REQ 24)";
@@ -253,7 +249,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trPatientBolusToBasal first modeON.modeTHERAPY.modeACTIVE.modePBOLUS then modeON.modeTHERAPY.modeACTIVE.modeBASAL {
-            @MemoIdentity { :>> label = "PatientBolusEndToBasal"; }
+            @MemoIdentity { :>> label = "Patient bolus end to basal"; }
             @TransitionRecord {
                 :>> id = "TR-013";
                 :>> trigger = "Inhibited_PatientBolus_macro = TRUE or patient-bolus duration >= Duration_pbolus_prog";
@@ -263,7 +259,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trPatientBolusToSquare first modeON.modeTHERAPY.modeACTIVE.modePBOLUS then modeON.modeTHERAPY.modeACTIVE.modeSQUARE {
-            @MemoIdentity { :>> label = "PatientBolusEndToSquareBolus"; }
+            @MemoIdentity { :>> label = "Patient bolus end to square bolus"; }
             @TransitionRecord {
                 :>> id = "TR-014";
                 :>> trigger = "Inhibited_PatientBolus_macro = TRUE or patient-bolus duration >= Duration_pbolus_prog";
@@ -273,7 +269,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trBasalInhibit first modeON.modeTHERAPY.modeACTIVE.modeBASAL then modeON.modeTHERAPY.modePAUSED {
-            @MemoIdentity { :>> label = "BasalInhibitToPaused"; }
+            @MemoIdentity { :>> label = "Basal inhibit to paused"; }
             @TransitionRecord {
                 :>> id = "TR-015";
                 :>> trigger = "Inhibited_Infusion_macro = TRUE";
@@ -283,7 +279,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trPatientBolusInhibit first modeON.modeTHERAPY.modeACTIVE.modePBOLUS then modeON.modeTHERAPY.modePAUSED {
-            @MemoIdentity { :>> label = "PatientBolusInhibitToPaused"; }
+            @MemoIdentity { :>> label = "Patient bolus inhibit to paused"; }
             @TransitionRecord {
                 :>> id = "TR-016";
                 :>> trigger = "Inhibited_PatientBolus_macro = TRUE AND Inhibited_Infusion_macro = TRUE";
@@ -293,7 +289,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trSquareInhibit first modeON.modeTHERAPY.modeACTIVE.modeSQUARE then modeON.modeTHERAPY.modePAUSED {
-            @MemoIdentity { :>> label = "SquareBolusInhibitToPaused"; }
+            @MemoIdentity { :>> label = "Square bolus inhibit to paused"; }
             @TransitionRecord {
                 :>> id = "TR-017";
                 :>> trigger = "Inhibited_Bolus_macro = TRUE AND Inhibited_Infusion_macro = TRUE";
@@ -303,7 +299,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trResume first modeON.modeTHERAPY.modePAUSED then modeON.modeTHERAPY.modeACTIVE.modeBASAL {
-            @MemoIdentity { :>> label = "PausedResumeToBasal"; }
+            @MemoIdentity { :>> label = "Paused resume to basal"; }
             @TransitionRecord {
                 :>> id = "TR-018";
                 :>> trigger = "Infusion_initiate_prog";
@@ -313,7 +309,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
             }
         }
         transition trPausedStop first modeON.modeTHERAPY.modePAUSED then modeON.modeIDLE {
-            @MemoIdentity { :>> label = "PausedInhibitToIdle"; }
+            @MemoIdentity { :>> label = "Paused inhibit to idle"; }
             @TransitionRecord {
                 :>> id = "TR-019";
                 :>> trigger = "Infusion_inhibit_prog commanded";
@@ -331,7 +327,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
     // The individual configurations remain ordinary model elements, so their
     // active mode is navigable as well as visible in the choice-point edge.
     part basalConfiguration : ModeConfiguration {
-        @MemoIdentity { :>> providedId = "CFG-001"; :>> label = "BasalTherapyConfiguration"; }
+        @MemoIdentity { :>> providedId = "CFG-001"; :>> label = "Basal therapy configuration"; }
         ref :>> activeMode = topLevelModeMachine.modeON.modeTHERAPY.modeACTIVE.modeBASAL;
     }
     part squareBolusConfiguration : ModeConfiguration {
@@ -343,7 +339,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         ref :>> activeMode = topLevelModeMachine.modeON.modeTHERAPY.modeACTIVE.modePBOLUS;
     }
     part pausedConfiguration : ModeConfiguration {
-        @MemoIdentity { :>> providedId = "CFG-004"; :>> label = "PausedKvoConfiguration"; }
+        @MemoIdentity { :>> providedId = "CFG-004"; :>> label = "Paused KVO configuration"; }
         ref :>> activeMode = topLevelModeMachine.modeON.modeTHERAPY.modePAUSED;
     }
     variation part activeTherapyConfiguration : ModeConfiguration[1] {
@@ -355,35 +351,35 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
 
     // ── Behavior properties and timing constraints ──────────────
     requirement propAlarmStopsSameStep : BehaviorProperty {
-        @MemoIdentity { :>> providedId = "BP-002"; :>> label = "AlarmResponseSameStepKvo"; }
+        @MemoIdentity { :>> providedId = "BP-002"; :>> label = "Alarm response same step KVO"; }
         attribute :>> propertyKind = BehaviorPropertyKind::safetyProperty;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "ALARM.ALARM_OUT -> IM.ALARM_IN is an AADL immediate connection: when an infusion-inhibiting notification asserts, Infusion_Manager limits Commanded_Flow_Rate <= FlowRate_kvo_hd in the same execution step";
         @MemoIdentity { :>> sourceReference = "CITE-002: CriSys GPCA AADL v2.0, GPCA_SW.aadl (ALARM_to_IM immediate) and AGREE flow <= KVO guarantees"; }
     }
     requirement propPausedNoResumeWhileInhibited : BehaviorProperty {
-        @MemoIdentity { :>> providedId = "BP-004"; :>> label = "PausedNoTransitionWhileInhibited"; }
+        @MemoIdentity { :>> providedId = "BP-004"; :>> label = "Paused no transition while inhibited"; }
         attribute :>> propertyKind = BehaviorPropertyKind::stateInvariant;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "in PAUSED: Infusion_initiate_prog AND Inhibited_Infusion_macro = TRUE => mode unchanged";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.10.1 (REQ 45)"; }
     }
     requirement propModeTimeoutActions : BehaviorProperty {
-        @MemoIdentity { :>> providedId = "BP-005"; :>> label = "IdleAndPausedTimeoutActions"; }
+        @MemoIdentity { :>> providedId = "BP-005"; :>> label = "Idle and paused timeout actions"; }
         attribute :>> propertyKind = BehaviorPropertyKind::transitionRule;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "time in IDLE > Max_IDLE_Duration_const => REQ 59 'IDLE Time' actions; time in PAUSED > Max_PAUSED_Duration_const => REQ 59 'PAUSED Time' actions (notification actions, not mode transitions)";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.4.1 (REQ 15) and §4.1.10.1 (REQ 44)"; }
     }
     requirement propLockoutTimerMonotonic : BehaviorProperty {
-        @MemoIdentity { :>> providedId = "BP-003"; :>> label = "LockoutTimerNeverShortened"; }
+        @MemoIdentity { :>> providedId = "BP-003"; :>> label = "Lockout timer never shortened"; }
         attribute :>> propertyKind = BehaviorPropertyKind::stateInvariant;
         attribute :>> languageKind = PropertyLanguageKind::pseudoFormal;
         attribute :>> formalExpression = "lockout_remaining decreases only with elapsed time; no input path resets it early";
         @MemoIdentity { :>> sourceReference = "MEMO extension — supports the REQ 25.3 lockout ignore condition; invariant not stated by the source"; }
     }
     requirement tcAlarmLatency : TimingConstraint {
-        @MemoIdentity { :>> providedId = "TC-001"; :>> label = "AlarmToSafeStateLatency"; }
+        @MemoIdentity { :>> providedId = "TC-001"; :>> label = "Alarm to safe state latency"; }
         attribute :>> constraintKind = TimingConstraintKind::latency;
         attribute :>> minMs = 0 [milli*s];
         attribute :>> maxMs = 20 [milli*s];
@@ -392,7 +388,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; the source specifies synchronous same-step (immediate) semantics with no timing figures"; }
     }
     requirement tcBolusResponse : TimingConstraint {
-        @MemoIdentity { :>> providedId = "TC-002"; :>> label = "BolusRequestResponseLatency"; }
+        @MemoIdentity { :>> providedId = "TC-002"; :>> label = "Bolus request response latency"; }
         attribute :>> constraintKind = TimingConstraintKind::latency;
         attribute :>> minMs = 0 [milli*s];
         attribute :>> maxMs = 100 [milli*s];
@@ -401,7 +397,7 @@ package memo_examples_gpca_pump_gpca_behavior_modes {
         @MemoIdentity { :>> sourceReference = "MEMO extension — illustrative wall-clock budget; not specified by the source"; }
     }
     requirement tcWatchdogTimeout : TimingConstraint {
-        @MemoIdentity { :>> providedId = "TC-003"; :>> label = "WatchdogTimeout"; }
+        @MemoIdentity { :>> providedId = "TC-003"; :>> label = "Watchdog timeout"; }
         attribute :>> constraintKind = TimingConstraintKind::deadline;
         attribute :>> minMs = 40 [milli*s];
         attribute :>> maxMs = 60 [milli*s];

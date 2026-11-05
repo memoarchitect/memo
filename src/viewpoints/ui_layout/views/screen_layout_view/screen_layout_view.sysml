@@ -11,7 +11,6 @@ package memo_viewpoints_ui_layout_views_screen_layout_view {
     private import memo_core_enumerations::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view def MemoScreenLayoutView :> MemoDiagramView {
         attribute :>> viewKind = DiagramViewKind::geometry;
         @MemoIdentity { :>> shortDescription = "Screen capture overlaid with its UI element tree."; }

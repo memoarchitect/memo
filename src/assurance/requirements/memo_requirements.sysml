@@ -10,15 +10,11 @@ package memo_assurance_requirements {
     // What a requirement is about: the system, the software, the hardware, or
     // the instructions for use. One axis, and the members are its values.
     //
-    // It carried a second axis until now. `systemSpecification`,
-    // `softwareSpecification`, `hardwareSpecification` and `designControl` are
-    // the design-control ROLE — input versus output, 21 CFR 820.30(c)/(d) and
-    // ISO 13485 §7.3.3/§7.3.4 — multiplied into the subject. A requirement then
-    // could not say "software" without also committing to a role, the grid was
-    // incomplete by construction (there is no `ifuSpecification`, and there
-    // would have to be one for every future pairing), and nothing ever used the
-    // four: 250 requirements across the examples say system, software or
-    // hardware. A role, if a project needs one, is its own attribute.
+    // The design-control ROLE — input versus output, 21 CFR 820.30(c)/(d) and
+    // ISO 13485 §7.3.3/§7.3.4 — is a different axis and is not here: multiplied
+    // into the subject, a requirement could not say "software" without also
+    // committing to a role. A role, if a project needs one, is its own
+    // attribute.
     //
     // The instructions for use are neither hardware nor software: the device
     // satisfies such a requirement with words rather than with a part or a
@@ -33,7 +29,6 @@ package memo_assurance_requirements {
 
     requirement def Requirement specializes MemoRequirement {
         attribute requirementType : RequirementTypeKind;
-        attribute :>> statement : String;
         attribute sourceKind : RequirementSourceKind;
         attribute concernKind : ConcernKind;
         // Editorial state is the inherited `status : ElementStatusKind` — the
@@ -46,7 +41,7 @@ package memo_assurance_requirements {
         attribute assumptionSummary : String;
         attribute guaranteeSummary : String;
         // Authoring notation. `notation` selects the syntactic discipline the
-        // `statement` follows; the slot attributes below carry the parsed clauses
+        // `doc` follows; the slot attributes below carry the parsed clauses
         // so tools can lint pattern conformance and render either style.
         attribute notation : RequirementNotationKind;
         attribute earsPattern : EarsPatternKind;   // applies when notation = ears

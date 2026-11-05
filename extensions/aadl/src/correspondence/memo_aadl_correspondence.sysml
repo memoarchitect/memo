@@ -1,4 +1,4 @@
-// The AADL correspondence profile (plan §C5).
+// The AADL correspondence profile.
 //
 // `memo_software_runtime.sysml` pointed at `examples/aadl-mapping` for a long
 // time, and that directory never existed. A dangling pointer to a profile is
@@ -57,7 +57,7 @@ package memo_extension_aadl_correspondence {
 
     // ── Bindings. AADL's analytic power is that everything is bound to
     // something, and the binding is where latency, bandwidth, and fault
-    // propagation accrue. MEMO has all three (plan C1). ────────────────────
+    // propagation accrue. MEMO has all three. ────────────────────
     part aadlCorrProcessorBinding : CorrespondenceRule {
         @MemoIdentity { :>> providedId = "EXT-AADL-C-010"; :>> label = "ActualProcessorBindingCorrespondence"; }
         attribute :>> ruleExpression = "memo_architecture_realization_deployment::DeploysTo <-> AADL property `Actual_Processor_Binding`";

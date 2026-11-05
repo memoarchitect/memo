@@ -1,7 +1,7 @@
-// Ontology-level viewpoint catalog (§22). Rendering-independent: each
-// viewpoint states the concern it frames and the SysML v2 standard view kind
-// it resolves to (general | interconnection | actionflow | statetransition |
-// sequence | grid | browser | geometry). No renderer semantics here.
+// Ontology-level viewpoint catalog. Rendering-independent: each viewpoint
+// states the concern it frames and the SysML v2 standard view kind it resolves
+// to (general | interconnection | actionflow | statetransition | sequence |
+// grid | browser | geometry). No renderer semantics here.
 package memo_viewpoints_catalog {
     private import ScalarValues::*;
 
@@ -9,7 +9,6 @@ package memo_viewpoints_catalog {
     private import memo_core_enumerations::*;
     private import memo_viewpoints_definitions::*;
 
-    private import memo_core_common::MemoIdentity;
     // A cataloged viewpoint: the Viewpoint descriptor plus its default
     // resolution to a standard SysML v2 view kind.
 
@@ -167,7 +166,7 @@ package memo_viewpoints_catalog {
         attribute :>> defaultViewKind = DiagramViewKind::geometry;
     }
 
-    // ── Compatibility mappings (§22): legacy diagram intents resolve to
+    // ── Compatibility mappings: legacy diagram intents resolve to
     //     standard view kinds; C4 and AADL stay in examples/ mappings. ──
     part def DiagramIntentMapping specializes MemoPart {
         attribute legacyIntent : String;

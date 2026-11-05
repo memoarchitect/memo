@@ -1,19 +1,14 @@
 package memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_risk_risk_viewpoint::*;
-    private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_analysis::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view hazardAnalysisView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_view::*;
         expose fmeaDelivery;
         expose ftaOverdose;
-        @MemoIdentity { :>> providedId = "DOC-009"; :>> label = "HazardAnalysisReportView"; }
-        @MemoIdentity { :>> shortDescription = "Hazard analysis report aligned to the UMN CriSys GPCA hazard tables."; }
+        @MemoIdentity { :>> providedId = "DOC-009"; :>> label = "Hazard analysis report view"; :>> shortDescription = "Hazard analysis report aligned to the UMN CriSys GPCA hazard tables."; }
         doc /* Aggregates the five hazard chains, the FMEA worksheet, and the overdose fault tree with their controls and verification pointers. */
         attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
@@ -22,7 +17,7 @@ package memo_examples_gpca_pump_viewpoints_risk_views_document_hazard_analysis_v
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = riskViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-003"; :>> label = "hazardAnalysisViewQuery"; }
+            @MemoIdentity { :>> providedId = "QRY-DOC-003"; :>> label = "Hazard analysis view query"; }
             attribute :>> includeElementKinds = ("FMEAWorksheet", "FailureMode", "FailureCause", "FailureEffect", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeNode", "MinimalCutSet", "Hazard", "HazardCause", "SequenceOfEvents");
             attribute :>> includeRelationshipKinds = ("HasFailureMode", "Causes", "DetectedBy", "Mitigates", "InputToGate", "ContainsEvent");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";

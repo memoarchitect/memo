@@ -1,13 +1,8 @@
 package memo_examples_gpca_pump_gpca_trace {
+    private import memo::*;
     private import ScalarValues::*;
     private import ModelingMetadata::*;
 
-    private import memo_core_relationships::*;
-    private import memo_architecture_operational_context_actors::*;
-    private import memo_architecture_operational_context_use_context::*;
-    private import memo_architecture_operational_activities::*;
-    private import memo_architecture_operational_structure::*;
-    private import memo_architecture_functional_functions::*;
     private import memo_examples_gpca_pump_gpca_context::*;
     private import memo_examples_gpca_pump_gpca_operational::*;
     private import memo_examples_gpca_pump_gpca_system::*;
@@ -30,17 +25,6 @@ package memo_examples_gpca_pump_gpca_trace {
     private import memo_examples_gpca_pump_viewpoints_usability_views_document_usability_view::*;
     private import memo_examples_gpca_pump_viewpoints_verification_views_document_vv_view::*;
     private import memo_examples_gpca_pump_gpca_formal_behavior::*;
-    private import memo_architecture_operational_context_stakeholders::*;
-    private import memo_architecture_operational_use_cases::*;
-    private import memo_architecture_operational_workflows::*;
-    private import memo_architecture_realization_deployment::*;
-    private import memo_core_enumerations::DeploymentKind;
-    private import memo_core_common::MemoIdentity;
-    private import memo_assurance_human_factors::*;
-    private import memo_assurance_safety_risk::*;
-    private import memo_assurance_safety_risk_analysis::*;
-    private import memo_assurance_cybersecurity::*;
-    private import memo_viewpoints_definitions::*;
 
     // ── System context interactions (context view) ──────────────
     connection connect actorPatient to entityGpcaPump;
@@ -59,14 +43,14 @@ package memo_examples_gpca_pump_gpca_trace {
     connection actorPatientToEntityGpcaPump connect actorPatient to entityGpcaPump;
     connection entityPharmacyDbToEntityGpcaPump connect entityPharmacyDb to entityGpcaPump;
     // Physical connections (drug path)
-    connection connect source ::> entityDrugReservoir to target ::> entityGpcaPump;
-    connection connect source ::> entityGpcaPump to target ::> entityNeedle;
-    connection connect source ::> entityNeedle to target ::> actorPatient;
-    connection connect source ::> entityPowerInfrastructure to target ::> entityGpcaPump;
+    connection connect entityDrugReservoir to entityGpcaPump;
+    connection connect entityGpcaPump to entityNeedle;
+    connection connect entityNeedle to actorPatient;
+    connection connect entityPowerInfrastructure to entityGpcaPump;
     // Intended use and use context anchoring (no floating context nodes)
-    connection : Governs connect governor ::> gpcaIntendedUse to governedElement ::> entityGpcaPump { attribute :>> governKind = GovernKind::'use'; }
-    connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityGpcaPump;
-    connection : AppliesInContext connect useContext ::> hospitalWardContext to subjectElement ::> entityHospital;
+    connection : Governs connect gpcaIntendedUse to entityGpcaPump { attribute :>> governKind = GovernKind::'use'; }
+    connection : AppliesInContext connect hospitalWardContext to entityGpcaPump;
+    connection : AppliesInContext connect hospitalWardContext to entityHospital;
 
     // Actor participation (use case view): native `actor`, nested in
     // ucDeliverPcaTherapy's own body in gpca_operational.sysml (R10-S6).
@@ -76,9 +60,9 @@ package memo_examples_gpca_pump_gpca_trace {
     first oaLoadReservoir then oaProgram;
     first oaProgram then oaStartTherapy;
     first oaStartTherapy then oaRequestBolus;
-    connection : DerivesFrom connect sourceDriver ::> oaProgram to targetRequirement ::> reqDrugLibraryLimits;
-    connection : DerivesFrom connect sourceDriver ::> oaRequestBolus to targetRequirement ::> reqCs25;
-    connection : DerivesFrom connect sourceDriver ::> oaRespondAlarm to targetRequirement ::> reqCs59;
+    connection : DerivesFrom connect oaProgram to reqDrugLibraryLimits;
+    connection : DerivesFrom connect oaRequestBolus to reqCs25;
+    connection : DerivesFrom connect oaRespondAlarm to reqCs59;
 
     // ── Functional chains ───────────────────────────────────────
     // fcPatientBolus/fcAlarmStop already name every one of these functions:
@@ -101,122 +85,122 @@ package memo_examples_gpca_pump_gpca_trace {
     // ── Requirement derivation ──────────────────────────────────
     // MEMO extension requirements (REQ-X) derive from needs and risks.
     // --8<-- [start:derives]
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqPost;
-    connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqPumpAccuracy;
-    connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqBatteryBackup;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqAlarmLoudness;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqEventLogging;
+    connection : DerivesFrom connect needSafeTherapy to reqPost;
+    connection : DerivesFrom connect needEffectiveAnalgesia to reqPumpAccuracy;
+    connection : DerivesFrom connect needEffectiveAnalgesia to reqBatteryBackup;
+    connection : DerivesFrom connect needTimelyAlarms to reqAlarmLoudness;
+    connection : DerivesFrom connect needAuditableRecord to reqEventLogging;
     // --8<-- [end:derives]
-    connection : DerivesFrom connect sourceDriver ::> overdoseHazard to targetRequirement ::> reqCs25;
-    connection : DerivesFrom connect sourceDriver ::> underdoseHazard to targetRequirement ::> reqOcclusion;
-    connection : DerivesFrom connect sourceDriver ::> airEmbolismHazard to targetRequirement ::> reqCs21;
-    connection : DerivesFrom connect sourceDriver ::> wrongDoseHazard to targetRequirement ::> reqDrugLibraryLimits;
-    connection : DerivesFrom connect sourceDriver ::> freeFlowHazard to targetRequirement ::> reqFreeFlowPrevention;
-    connection : DerivesFrom connect sourceDriver ::> reverseDeliveryHazard to targetRequirement ::> reqCs22;
-    connection : DerivesFrom connect sourceDriver ::> vtbiOverInfusionHazard to targetRequirement ::> reqCs20;
-    connection : DerivesFrom connect sourceDriver ::> vtbiOverInfusionHazard to targetRequirement ::> reqCs28;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeReverse to targetRequirement ::> reqCs22;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeVtbi to targetRequirement ::> reqCs20;
-    connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqCs25;
-    connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqCs19;
-    connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqMaxHourlyDose;
-    connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqStuckButton;
-    connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqWatchdogSafeState;
-    connection : DerivesFrom connect sourceDriver ::> riskBefore to targetRequirement ::> reqFlowCrossCheck;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeAir to targetRequirement ::> reqCs21;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeUnderdose to targetRequirement ::> reqOcclusion;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeUnderdose to targetRequirement ::> reqCs23;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeUnderdose to targetRequirement ::> reqPowerLossRetention;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeWrongDose to targetRequirement ::> reqDrugLibraryLimits;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeWrongDose to targetRequirement ::> reqCs09;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeFreeFlow to targetRequirement ::> reqFreeFlowPrevention;
-    connection : DerivesFrom connect sourceDriver ::> riskBeforeFreeFlow to targetRequirement ::> reqDoorOpen;
+    connection : DerivesFrom connect overdoseHazard to reqCs25;
+    connection : DerivesFrom connect underdoseHazard to reqOcclusion;
+    connection : DerivesFrom connect airEmbolismHazard to reqCs21;
+    connection : DerivesFrom connect wrongDoseHazard to reqDrugLibraryLimits;
+    connection : DerivesFrom connect freeFlowHazard to reqFreeFlowPrevention;
+    connection : DerivesFrom connect reverseDeliveryHazard to reqCs22;
+    connection : DerivesFrom connect vtbiOverInfusionHazard to reqCs20;
+    connection : DerivesFrom connect vtbiOverInfusionHazard to reqCs28;
+    connection : DerivesFrom connect riskBeforeReverse to reqCs22;
+    connection : DerivesFrom connect riskBeforeVtbi to reqCs20;
+    connection : DerivesFrom connect riskBefore to reqCs25;
+    connection : DerivesFrom connect riskBefore to reqCs19;
+    connection : DerivesFrom connect riskBefore to reqMaxHourlyDose;
+    connection : DerivesFrom connect riskBefore to reqStuckButton;
+    connection : DerivesFrom connect riskBefore to reqWatchdogSafeState;
+    connection : DerivesFrom connect riskBefore to reqFlowCrossCheck;
+    connection : DerivesFrom connect riskBeforeAir to reqCs21;
+    connection : DerivesFrom connect riskBeforeUnderdose to reqOcclusion;
+    connection : DerivesFrom connect riskBeforeUnderdose to reqCs23;
+    connection : DerivesFrom connect riskBeforeUnderdose to reqPowerLossRetention;
+    connection : DerivesFrom connect riskBeforeWrongDose to reqDrugLibraryLimits;
+    connection : DerivesFrom connect riskBeforeWrongDose to reqCs09;
+    connection : DerivesFrom connect riskBeforeFreeFlow to reqFreeFlowPrevention;
+    connection : DerivesFrom connect riskBeforeFreeFlow to reqDoorOpen;
     // CriSys source requirements (REQ-CS) trace to the stakeholder
     // needs they serve. §4.1 GPCA system + OFF/ON/IDLE modes.
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs01;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs02;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs03;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs04;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs05;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs06;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs07;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs08;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs10;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs11;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs12;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs13;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs14;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs15;
+    connection : DerivesFrom connect needSafeTherapy to reqCs01;
+    connection : DerivesFrom connect needSafeTherapy to reqCs02;
+    connection : DerivesFrom connect needSafeTherapy to reqCs03;
+    connection : DerivesFrom connect needSafeTherapy to reqCs04;
+    connection : DerivesFrom connect needSafeTherapy to reqCs05;
+    connection : DerivesFrom connect needSafeTherapy to reqCs06;
+    connection : DerivesFrom connect needSafeTherapy to reqCs07;
+    connection : DerivesFrom connect needSafeTherapy to reqCs08;
+    connection : DerivesFrom connect needSafeTherapy to reqCs10;
+    connection : DerivesFrom connect needAuditableRecord to reqCs11;
+    connection : DerivesFrom connect needSafeTherapy to reqCs12;
+    connection : DerivesFrom connect needSafeTherapy to reqCs13;
+    connection : DerivesFrom connect needSafeTherapy to reqCs14;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs15;
     // §4.1 THERAPY/ACTIVE/BASAL/bolus/PAUSED modes.
-    connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqCs16;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs17;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs18;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs20;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs22;
-    connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqCs24;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs26;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs27;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs28;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs29;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs30;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs31;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs32;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs33;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs34;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs35;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs36;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs37;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs38;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs39;
-    connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqCs40;
-    connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqCs41;
-    connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqCs42;
-    connection : DerivesFrom connect sourceDriver ::> needEffectiveAnalgesia to targetRequirement ::> reqCs43;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs44;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs45;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs46;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs47;
+    connection : DerivesFrom connect needEffectiveAnalgesia to reqCs16;
+    connection : DerivesFrom connect needSafeTherapy to reqCs17;
+    connection : DerivesFrom connect needSafeTherapy to reqCs18;
+    connection : DerivesFrom connect needSafeTherapy to reqCs20;
+    connection : DerivesFrom connect needSafeTherapy to reqCs22;
+    connection : DerivesFrom connect needEffectiveAnalgesia to reqCs24;
+    connection : DerivesFrom connect needSafeTherapy to reqCs26;
+    connection : DerivesFrom connect needSafeTherapy to reqCs27;
+    connection : DerivesFrom connect needSafeTherapy to reqCs28;
+    connection : DerivesFrom connect needSafeTherapy to reqCs29;
+    connection : DerivesFrom connect needSafeTherapy to reqCs30;
+    connection : DerivesFrom connect needSafeTherapy to reqCs31;
+    connection : DerivesFrom connect needSafeTherapy to reqCs32;
+    connection : DerivesFrom connect needSafeTherapy to reqCs33;
+    connection : DerivesFrom connect needSafeTherapy to reqCs34;
+    connection : DerivesFrom connect needSafeTherapy to reqCs35;
+    connection : DerivesFrom connect needSafeTherapy to reqCs36;
+    connection : DerivesFrom connect needSafeTherapy to reqCs37;
+    connection : DerivesFrom connect needSafeTherapy to reqCs38;
+    connection : DerivesFrom connect needSafeTherapy to reqCs39;
+    connection : DerivesFrom connect needEffectiveAnalgesia to reqCs40;
+    connection : DerivesFrom connect needEffectiveAnalgesia to reqCs41;
+    connection : DerivesFrom connect needEffectiveAnalgesia to reqCs42;
+    connection : DerivesFrom connect needEffectiveAnalgesia to reqCs43;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs44;
+    connection : DerivesFrom connect needSafeTherapy to reqCs45;
+    connection : DerivesFrom connect needSafeTherapy to reqCs46;
+    connection : DerivesFrom connect needSafeTherapy to reqCs47;
     // §4.2 data configuration.
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs48;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs49;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs50;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs51;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs52;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs53;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs54;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs55;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs56;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs57;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs58;
+    connection : DerivesFrom connect needSafeTherapy to reqCs48;
+    connection : DerivesFrom connect needSafeTherapy to reqCs49;
+    connection : DerivesFrom connect needSafeTherapy to reqCs50;
+    connection : DerivesFrom connect needSafeTherapy to reqCs51;
+    connection : DerivesFrom connect needSafeTherapy to reqCs52;
+    connection : DerivesFrom connect needSafeTherapy to reqCs53;
+    connection : DerivesFrom connect needSafeTherapy to reqCs54;
+    connection : DerivesFrom connect needSafeTherapy to reqCs55;
+    connection : DerivesFrom connect needSafeTherapy to reqCs56;
+    connection : DerivesFrom connect needSafeTherapy to reqCs57;
+    connection : DerivesFrom connect needSafeTherapy to reqCs58;
     // §4.3 notification, §4.4 logs, §4.5 security, Ch.5 non-behavioral.
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs59;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs60;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs61;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs62;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs63;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs64;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs65;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs66;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs67;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs68;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs69;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs70;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs71;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs72;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs73;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs74;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs75;
-    connection : DerivesFrom connect sourceDriver ::> needTimelyAlarms to targetRequirement ::> reqCs76;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs77;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs78;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs79;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs80;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs81;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs82;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs83;
-    connection : DerivesFrom connect sourceDriver ::> needSafeTherapy to targetRequirement ::> reqCs84;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs85;
-    connection : DerivesFrom connect sourceDriver ::> needAuditableRecord to targetRequirement ::> reqCs86;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs59;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs60;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs61;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs62;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs63;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs64;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs65;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs66;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs67;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs68;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs69;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs70;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs71;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs72;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs73;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs74;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs75;
+    connection : DerivesFrom connect needTimelyAlarms to reqCs76;
+    connection : DerivesFrom connect needAuditableRecord to reqCs77;
+    connection : DerivesFrom connect needAuditableRecord to reqCs78;
+    connection : DerivesFrom connect needAuditableRecord to reqCs79;
+    connection : DerivesFrom connect needAuditableRecord to reqCs80;
+    connection : DerivesFrom connect needAuditableRecord to reqCs81;
+    connection : DerivesFrom connect needSafeTherapy to reqCs82;
+    connection : DerivesFrom connect needSafeTherapy to reqCs83;
+    connection : DerivesFrom connect needSafeTherapy to reqCs84;
+    connection : DerivesFrom connect needAuditableRecord to reqCs85;
+    connection : DerivesFrom connect needAuditableRecord to reqCs86;
 
     // ── Requirement satisfaction ────────────────────────────────
 
@@ -350,9 +334,6 @@ package memo_examples_gpca_pump_gpca_trace {
     // ── Deployment, hosting, and interface realization ──────────
     // Software reaches the hardware as a built image on the processor that
     // runs it: modules build into the image, the image deploys to the MCU.
-    // This edge used to deploy the software system onto the circuit board,
-    // which DeploysTo's ends reject — a system is not a deployment unit and a
-    // board is not a processing node (mainController, hosted by the board).
     // --8<-- [start:deployment]
     part gpcaFirmwareImage : SoftwareDeploymentUnit {
         @MemoIdentity { :>> providedId = "DU-001"; :>> label = "GPCAFirmwareImage"; }
@@ -372,9 +353,9 @@ package memo_examples_gpca_pump_gpca_trace {
     #refinement dependency sensorInputInterface to hwSoftwareBus;
     #refinement dependency actuatorCommandInterface to pumpMotorDrive;
     // --8<-- [end:deployment]
-    connection : BindsToInterface connect portElement ::> portPatientPendant to boundInterface ::> bolusButtonLine;
-    connection : BindsToInterface connect portElement ::> portMotorDrive to boundInterface ::> pumpMotorDrive;
-    connection : BindsToInterface connect portElement ::> portSensorHarness to boundInterface ::> occlusionAnalogLine;
+    connection : BindsToInterface connect portPatientPendant to bolusButtonLine;
+    connection : BindsToInterface connect portMotorDrive to pumpMotorDrive;
+    connection : BindsToInterface connect portSensorHarness to occlusionAnalogLine;
     allocate lfSensorAcquisition to exSensorVector;
     allocate lfFlowCommand to exFlowCommand;
     allocate lfAlarmSignal to exAlarmAnnunciation;
@@ -450,161 +431,159 @@ package memo_examples_gpca_pump_gpca_trace {
     // HZ-001 opioid over-infusion
     // ISO 14971 5.2, 5.3 and 7.4: a foreseeable misuse leads to a hazardous situation, a safety-related
     // characteristic bears on a hazard, and the benefit is weighed against the residual risk that needs it.
-    connection : Causes connect cause ::> bolusByProxyMisuse to effect ::> hsExcessInfusion {
+    connection : Causes connect bolusByProxyMisuse to hsExcessInfusion {
         attribute :>> causeKind = CauseKind::useErrorLeadsToHazard;
     }
-    connection : ImpactsSafety connect cyberElement ::> programmedDoseCharacteristic to safetyElement ::> overdoseHazard;
-    connection : WeighedAgainst connect benefit ::> analgesiaBenefit to risk ::> riskAfterWrongDose;
-    connection : TracesRisk connect sourceRiskElement ::> causeFlowRateTooHigh to targetRiskElement ::> overdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeFrequentBolus to targetRiskElement ::> overdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeBolusVolumeTooHigh to targetRiskElement ::> overdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causePumpCalibration to targetRiskElement ::> overdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> overdoseHazard to targetRiskElement ::> seqFrequentBolus;
-    connection : TracesRisk connect sourceRiskElement ::> seqFrequentBolus to targetRiskElement ::> hsExcessInfusion;
-    connection : TracesRisk connect sourceRiskElement ::> hsExcessInfusion to targetRiskElement ::> harmRespiratoryDepression;
-    connection : EstimatedFor connect risk ::> riskBefore to riskElement ::> harmRespiratoryDepression;
-    connection : AssessedAgainst connect risk ::> riskBefore to riskMatrix ::> riskMatrix;
-    connection : Mitigates connect control ::> lockoutControl to mitigatedElement ::> overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> drugLibraryControl to mitigatedElement ::> overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> watchdogControl to mitigatedElement ::> overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> flowCrossCheckControl to mitigatedElement ::> overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : ReducedBy connect residualRisk ::> riskAfter to control ::> lockoutControl;
-    connection : AssessedAgainst connect risk ::> riskAfter to riskMatrix ::> riskMatrix;
-    connection : EvaluatedIn connect residualRisk ::> riskAfter to evaluation ::> residualEval;
+    connection : ImpactsSafety connect programmedDoseCharacteristic to overdoseHazard;
+    connection : WeighedAgainst connect analgesiaBenefit to riskAfterWrongDose;
+    connection : TracesRisk connect causeFlowRateTooHigh to overdoseHazard;
+    connection : TracesRisk connect causeFrequentBolus to overdoseHazard;
+    connection : TracesRisk connect causeBolusVolumeTooHigh to overdoseHazard;
+    connection : TracesRisk connect causePumpCalibration to overdoseHazard;
+    connection : TracesRisk connect overdoseHazard to seqFrequentBolus;
+    connection : TracesRisk connect seqFrequentBolus to hsExcessInfusion;
+    connection : TracesRisk connect hsExcessInfusion to harmRespiratoryDepression;
+    connection : EstimatedFor connect riskBefore to harmRespiratoryDepression;
+    connection : AssessedAgainst connect riskBefore to riskMatrix;
+    connection : Mitigates connect lockoutControl to overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect drugLibraryControl to overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect watchdogControl to overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect flowCrossCheckControl to overdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : ReducedBy connect riskAfter to lockoutControl;
+    connection : AssessedAgainst connect riskAfter to riskMatrix;
+    connection : EvaluatedIn connect riskAfter to residualEval;
     // HZ-002 under-infusion
-    connection : TracesRisk connect sourceRiskElement ::> causeOcclusion to targetRiskElement ::> underdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeReservoirEmpty to targetRiskElement ::> underdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeAirInLine to targetRiskElement ::> underdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causePumpMechanismFails to targetRiskElement ::> underdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeFlowRateTooLow to targetRiskElement ::> underdoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> underdoseHazard to targetRiskElement ::> seqOcclusion;
-    connection : TracesRisk connect sourceRiskElement ::> seqOcclusion to targetRiskElement ::> hsInterruptedTherapy;
-    connection : TracesRisk connect sourceRiskElement ::> hsInterruptedTherapy to targetRiskElement ::> harmUntreatedPain;
-    connection : EstimatedFor connect risk ::> riskBeforeUnderdose to riskElement ::> harmUntreatedPain;
-    connection : AssessedAgainst connect risk ::> riskBeforeUnderdose to riskMatrix ::> riskMatrix;
-    connection : Mitigates connect control ::> occlusionAlarmControl to mitigatedElement ::> underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> reservoirMonitorControl to mitigatedElement ::> underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> flowCrossCheckControl to mitigatedElement ::> underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : ReducedBy connect residualRisk ::> riskAfterUnderdose to control ::> occlusionAlarmControl;
-    connection : AssessedAgainst connect risk ::> riskAfterUnderdose to riskMatrix ::> riskMatrix;
-    connection : EvaluatedIn connect residualRisk ::> riskAfterUnderdose to evaluation ::> residualEval;
+    connection : TracesRisk connect causeOcclusion to underdoseHazard;
+    connection : TracesRisk connect causeReservoirEmpty to underdoseHazard;
+    connection : TracesRisk connect causeAirInLine to underdoseHazard;
+    connection : TracesRisk connect causePumpMechanismFails to underdoseHazard;
+    connection : TracesRisk connect causeFlowRateTooLow to underdoseHazard;
+    connection : TracesRisk connect underdoseHazard to seqOcclusion;
+    connection : TracesRisk connect seqOcclusion to hsInterruptedTherapy;
+    connection : TracesRisk connect hsInterruptedTherapy to harmUntreatedPain;
+    connection : EstimatedFor connect riskBeforeUnderdose to harmUntreatedPain;
+    connection : AssessedAgainst connect riskBeforeUnderdose to riskMatrix;
+    connection : Mitigates connect occlusionAlarmControl to underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect reservoirMonitorControl to underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect flowCrossCheckControl to underdoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : ReducedBy connect riskAfterUnderdose to occlusionAlarmControl;
+    connection : AssessedAgainst connect riskAfterUnderdose to riskMatrix;
+    connection : EvaluatedIn connect riskAfterUnderdose to residualEval;
     // HZ-003 air embolism (shares the air-in-line and empty-reservoir causes)
-    connection : TracesRisk connect sourceRiskElement ::> causeAirInLine to targetRiskElement ::> airEmbolismHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeReservoirEmpty to targetRiskElement ::> airEmbolismHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeImproperPriming to targetRiskElement ::> airEmbolismHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeTubingLeak to targetRiskElement ::> airEmbolismHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeAirSensorSilent to targetRiskElement ::> airEmbolismHazard;
-    connection : TracesRisk connect sourceRiskElement ::> airEmbolismHazard to targetRiskElement ::> seqAirInLine;
-    connection : TracesRisk connect sourceRiskElement ::> seqAirInLine to targetRiskElement ::> hsAirTowardPatient;
-    connection : TracesRisk connect sourceRiskElement ::> hsAirTowardPatient to targetRiskElement ::> harmAirEmbolism;
-    connection : EstimatedFor connect risk ::> riskBeforeAir to riskElement ::> harmAirEmbolism;
-    connection : AssessedAgainst connect risk ::> riskBeforeAir to riskMatrix ::> riskMatrix;
-    connection : Mitigates connect control ::> airDetectionControl to mitigatedElement ::> airEmbolismHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : ReducedBy connect residualRisk ::> riskAfterAir to control ::> airDetectionControl;
-    connection : AssessedAgainst connect risk ::> riskAfterAir to riskMatrix ::> riskMatrix;
-    connection : EvaluatedIn connect residualRisk ::> riskAfterAir to evaluation ::> residualEval;
+    connection : TracesRisk connect causeAirInLine to airEmbolismHazard;
+    connection : TracesRisk connect causeReservoirEmpty to airEmbolismHazard;
+    connection : TracesRisk connect causeImproperPriming to airEmbolismHazard;
+    connection : TracesRisk connect causeTubingLeak to airEmbolismHazard;
+    connection : TracesRisk connect causeAirSensorSilent to airEmbolismHazard;
+    connection : TracesRisk connect airEmbolismHazard to seqAirInLine;
+    connection : TracesRisk connect seqAirInLine to hsAirTowardPatient;
+    connection : TracesRisk connect hsAirTowardPatient to harmAirEmbolism;
+    connection : EstimatedFor connect riskBeforeAir to harmAirEmbolism;
+    connection : AssessedAgainst connect riskBeforeAir to riskMatrix;
+    connection : Mitigates connect airDetectionControl to airEmbolismHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : ReducedBy connect riskAfterAir to airDetectionControl;
+    connection : AssessedAgainst connect riskAfterAir to riskMatrix;
+    connection : EvaluatedIn connect riskAfterAir to residualEval;
     // HZ-004 misprogramming / wrong drug
-    connection : TracesRisk connect sourceRiskElement ::> causeWrongPrescriptionEntered to targetRiskElement ::> wrongDoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeWrongDoseUnits to targetRiskElement ::> wrongDoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeWrongDrugLoaded to targetRiskElement ::> wrongDoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeSettingsChangedInadvertently to targetRiskElement ::> wrongDoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causePumpRevertsToDefaults to targetRiskElement ::> wrongDoseHazard;
-    connection : TracesRisk connect sourceRiskElement ::> wrongDoseHazard to targetRiskElement ::> seqMisprogram;
-    connection : TracesRisk connect sourceRiskElement ::> seqMisprogram to targetRiskElement ::> hsWrongTherapy;
-    connection : TracesRisk connect sourceRiskElement ::> hsWrongTherapy to targetRiskElement ::> harmRespiratoryDepression;
-    connection : EstimatedFor connect risk ::> riskBeforeWrongDose to riskElement ::> hsWrongTherapy;
-    connection : AssessedAgainst connect risk ::> riskBeforeWrongDose to riskMatrix ::> riskMatrix;
-    connection : Mitigates connect control ::> drugLibraryControl to mitigatedElement ::> wrongDoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : ReducedBy connect residualRisk ::> riskAfterWrongDose to control ::> drugLibraryControl;
-    connection : AssessedAgainst connect risk ::> riskAfterWrongDose to riskMatrix ::> riskMatrix;
-    connection : EvaluatedIn connect residualRisk ::> riskAfterWrongDose to evaluation ::> residualEval;
+    connection : TracesRisk connect causeWrongPrescriptionEntered to wrongDoseHazard;
+    connection : TracesRisk connect causeWrongDoseUnits to wrongDoseHazard;
+    connection : TracesRisk connect causeWrongDrugLoaded to wrongDoseHazard;
+    connection : TracesRisk connect causeSettingsChangedInadvertently to wrongDoseHazard;
+    connection : TracesRisk connect causePumpRevertsToDefaults to wrongDoseHazard;
+    connection : TracesRisk connect wrongDoseHazard to seqMisprogram;
+    connection : TracesRisk connect seqMisprogram to hsWrongTherapy;
+    connection : TracesRisk connect hsWrongTherapy to harmRespiratoryDepression;
+    connection : EstimatedFor connect riskBeforeWrongDose to hsWrongTherapy;
+    connection : AssessedAgainst connect riskBeforeWrongDose to riskMatrix;
+    connection : Mitigates connect drugLibraryControl to wrongDoseHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : ReducedBy connect riskAfterWrongDose to drugLibraryControl;
+    connection : AssessedAgainst connect riskAfterWrongDose to riskMatrix;
+    connection : EvaluatedIn connect riskAfterWrongDose to residualEval;
     // HZ-005 free flow
-    connection : TracesRisk connect sourceRiskElement ::> causeSetDisengaged to targetRiskElement ::> freeFlowHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeDoorOpenedDuringInfusion to targetRiskElement ::> freeFlowHazard;
-    connection : TracesRisk connect sourceRiskElement ::> freeFlowHazard to targetRiskElement ::> seqFreeFlow;
-    connection : TracesRisk connect sourceRiskElement ::> seqFreeFlow to targetRiskElement ::> hsFreeFlow;
-    connection : TracesRisk connect sourceRiskElement ::> hsFreeFlow to targetRiskElement ::> harmRespiratoryDepression;
-    connection : EstimatedFor connect risk ::> riskBeforeFreeFlow to riskElement ::> hsFreeFlow;
-    connection : AssessedAgainst connect risk ::> riskBeforeFreeFlow to riskMatrix ::> riskMatrix;
-    connection : Mitigates connect control ::> freeFlowValveControl to mitigatedElement ::> freeFlowHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> doorInterlockControl to mitigatedElement ::> freeFlowHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : ReducedBy connect residualRisk ::> riskAfterFreeFlow to control ::> freeFlowValveControl;
-    connection : AssessedAgainst connect risk ::> riskAfterFreeFlow to riskMatrix ::> riskMatrix;
-    connection : EvaluatedIn connect residualRisk ::> riskAfterFreeFlow to evaluation ::> residualEval;
+    connection : TracesRisk connect causeSetDisengaged to freeFlowHazard;
+    connection : TracesRisk connect causeDoorOpenedDuringInfusion to freeFlowHazard;
+    connection : TracesRisk connect freeFlowHazard to seqFreeFlow;
+    connection : TracesRisk connect seqFreeFlow to hsFreeFlow;
+    connection : TracesRisk connect hsFreeFlow to harmRespiratoryDepression;
+    connection : EstimatedFor connect riskBeforeFreeFlow to hsFreeFlow;
+    connection : AssessedAgainst connect riskBeforeFreeFlow to riskMatrix;
+    connection : Mitigates connect freeFlowValveControl to freeFlowHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect doorInterlockControl to freeFlowHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : ReducedBy connect riskAfterFreeFlow to freeFlowValveControl;
+    connection : AssessedAgainst connect riskAfterFreeFlow to riskMatrix;
+    connection : EvaluatedIn connect riskAfterFreeFlow to residualEval;
     // HZ-006 reverse delivery (CriSys REQ 22; GIP HID 1.14)
-    connection : TracesRisk connect sourceRiskElement ::> causeBleedBack to targetRiskElement ::> reverseDeliveryHazard;
-    connection : TracesRisk connect sourceRiskElement ::> reverseDeliveryHazard to targetRiskElement ::> seqReverseDelivery;
-    connection : TracesRisk connect sourceRiskElement ::> seqReverseDelivery to targetRiskElement ::> hsReverseFlow;
-    connection : TracesRisk connect sourceRiskElement ::> hsReverseFlow to targetRiskElement ::> harmUntreatedPain;
-    connection : EstimatedFor connect risk ::> riskBeforeReverse to riskElement ::> harmUntreatedPain;
-    connection : AssessedAgainst connect risk ::> riskBeforeReverse to riskMatrix ::> riskMatrix;
-    connection : Mitigates connect control ::> reverseDeliveryPauseControl to mitigatedElement ::> reverseDeliveryHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> antiRefluxDesignControl to mitigatedElement ::> reverseDeliveryHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : ReducedBy connect residualRisk ::> riskAfterReverse to control ::> reverseDeliveryPauseControl;
-    connection : AssessedAgainst connect risk ::> riskAfterReverse to riskMatrix ::> riskMatrix;
-    connection : EvaluatedIn connect residualRisk ::> riskAfterReverse to evaluation ::> residualEval;
+    connection : TracesRisk connect causeBleedBack to reverseDeliveryHazard;
+    connection : TracesRisk connect reverseDeliveryHazard to seqReverseDelivery;
+    connection : TracesRisk connect seqReverseDelivery to hsReverseFlow;
+    connection : TracesRisk connect hsReverseFlow to harmUntreatedPain;
+    connection : EstimatedFor connect riskBeforeReverse to harmUntreatedPain;
+    connection : AssessedAgainst connect riskBeforeReverse to riskMatrix;
+    connection : Mitigates connect reverseDeliveryPauseControl to reverseDeliveryHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect antiRefluxDesignControl to reverseDeliveryHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : ReducedBy connect riskAfterReverse to reverseDeliveryPauseControl;
+    connection : AssessedAgainst connect riskAfterReverse to riskMatrix;
+    connection : EvaluatedIn connect riskAfterReverse to residualEval;
     // HZ-007 VTBI over-infusion (CriSys REQ 20/28; GIP use hazard 8.1)
-    connection : TracesRisk connect sourceRiskElement ::> causeVtbiTooHigh to targetRiskElement ::> vtbiOverInfusionHazard;
-    connection : TracesRisk connect sourceRiskElement ::> causeStaleDrugLibrary to targetRiskElement ::> vtbiOverInfusionHazard;
-    connection : TracesRisk connect sourceRiskElement ::> vtbiOverInfusionHazard to targetRiskElement ::> seqVtbiExceeded;
-    connection : TracesRisk connect sourceRiskElement ::> seqVtbiExceeded to targetRiskElement ::> hsVtbiExceeded;
-    connection : TracesRisk connect sourceRiskElement ::> hsVtbiExceeded to targetRiskElement ::> harmRespiratoryDepression;
-    connection : EstimatedFor connect risk ::> riskBeforeVtbi to riskElement ::> harmRespiratoryDepression;
-    connection : AssessedAgainst connect risk ::> riskBeforeVtbi to riskMatrix ::> riskMatrix;
-    connection : Mitigates connect control ::> vtbiLimitPauseControl to mitigatedElement ::> vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> infusionCompleteControl to mitigatedElement ::> vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : Mitigates connect control ::> drugLibraryControl to mitigatedElement ::> vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
-    connection : ReducedBy connect residualRisk ::> riskAfterVtbi to control ::> vtbiLimitPauseControl;
-    connection : AssessedAgainst connect risk ::> riskAfterVtbi to riskMatrix ::> riskMatrix;
-    connection : EvaluatedIn connect residualRisk ::> riskAfterVtbi to evaluation ::> residualEval;
+    connection : TracesRisk connect causeVtbiTooHigh to vtbiOverInfusionHazard;
+    connection : TracesRisk connect causeStaleDrugLibrary to vtbiOverInfusionHazard;
+    connection : TracesRisk connect vtbiOverInfusionHazard to seqVtbiExceeded;
+    connection : TracesRisk connect seqVtbiExceeded to hsVtbiExceeded;
+    connection : TracesRisk connect hsVtbiExceeded to harmRespiratoryDepression;
+    connection : EstimatedFor connect riskBeforeVtbi to harmRespiratoryDepression;
+    connection : AssessedAgainst connect riskBeforeVtbi to riskMatrix;
+    connection : Mitigates connect vtbiLimitPauseControl to vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect infusionCompleteControl to vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : Mitigates connect drugLibraryControl to vtbiOverInfusionHazard { attribute :>> mitigationKind = MitigationKind::hazard; }
+    connection : ReducedBy connect riskAfterVtbi to vtbiLimitPauseControl;
+    connection : AssessedAgainst connect riskAfterVtbi to riskMatrix;
+    connection : EvaluatedIn connect riskAfterVtbi to residualEval;
     // Use errors feeding the risk chains (IEC 62366-1 §5.3)
-    connection : Causes connect cause ::> ueMisprogrammedRate to effect ::> seqMisprogram { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
-    connection : Causes connect cause ::> ueWrongDrugLoaded to effect ::> seqMisprogram { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
-    connection : Causes connect cause ::> ueBolusByProxy to effect ::> causeFrequentBolus { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
-    connection : Causes connect cause ::> ueAlarmDisregard to effect ::> seqOcclusion { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
+    connection : Causes connect ueMisprogrammedRate to seqMisprogram { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
+    connection : Causes connect ueWrongDrugLoaded to seqMisprogram { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
+    connection : Causes connect ueBolusByProxy to causeFrequentBolus { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
+    connection : Causes connect ueAlarmDisregard to seqOcclusion { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard; }
 
     // ── FMEA and fault tree integration ─────────────────────────
-    // Was `AnalyzedBy`: a zero-attribute edge from an element to the
-    // artifact analysing it, which is what a bare dependency states.
     dependency from pumpMotorAssembly to fmeaDelivery;
-    connection : HasFailureMode connect element ::> pumpMotorAssembly to failureMode ::> fmMotorRunaway;
-    connection : HasFailureMode connect element ::> airInLineSensor to failureMode ::> fmAirSensorSilent;
-    connection : HasFailureMode connect element ::> occlusionSensor to failureMode ::> fmOcclusionDrift;
-    connection : HasFailureMode connect element ::> bolusButton to failureMode ::> fmStuckBolusButton;
-    connection : HasFailureMode connect element ::> batteryPack to failureMode ::> fmBatteryEarlyDepletion;
-    connection : Causes connect cause ::> fmMotorRunaway to effect ::> feOverdose { attribute :>> causeKind = CauseKind::failureCausesEffect; }
-    connection : Causes connect cause ::> fmStuckBolusButton to effect ::> feOverdose { attribute :>> causeKind = CauseKind::failureCausesEffect; }
-    connection : Causes connect cause ::> fmAirSensorSilent to effect ::> feAirDelivered { attribute :>> causeKind = CauseKind::failureCausesEffect; }
-    connection : Causes connect cause ::> fmOcclusionDrift to effect ::> feTherapyInterrupted { attribute :>> causeKind = CauseKind::failureCausesEffect; }
-    connection : Causes connect cause ::> fcMotorDriverFault to effect ::> fmMotorRunaway { attribute :>> causeKind = CauseKind::failureCausedBy; }
-    connection : Causes connect cause ::> fcTransducerAging to effect ::> fmAirSensorSilent { attribute :>> causeKind = CauseKind::failureCausedBy; }
-    connection : Causes connect cause ::> fcPendantAbuse to effect ::> fmStuckBolusButton { attribute :>> causeKind = CauseKind::failureCausedBy; }
-    connection : DetectedBy connect failureMode ::> fmMotorRunaway to detectionMethod ::> dmFlowCrossCheck;
-    connection : DetectedBy connect failureMode ::> fmAirSensorSilent to detectionMethod ::> dmPostSensorCheck;
-    connection : DetectedBy connect failureMode ::> fmStuckBolusButton to detectionMethod ::> dmStuckInputMonitor;
-    connection : Mitigates connect control ::> fmeaActionAirSensor to mitigatedElement ::> fmAirSensorSilent { attribute :>> mitigationKind = MitigationKind::fmeaAction; }
-    connection : Causes connect cause ::> fmMotorRunaway to effect ::> overdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
-    connection : Causes connect cause ::> fmStuckBolusButton to effect ::> overdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
-    connection : Causes connect cause ::> fmAirSensorSilent to effect ::> airEmbolismHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
-    connection : Causes connect cause ::> fmOcclusionDrift to effect ::> underdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
-    connection : Mitigates connect control ::> flowCrossCheckControl to mitigatedElement ::> fmMotorRunaway { attribute :>> mitigationKind = MitigationKind::failureMode; }
-    connection : Mitigates connect control ::> lockoutControl to mitigatedElement ::> fmStuckBolusButton { attribute :>> mitigationKind = MitigationKind::failureMode; }
-    connection : InputToGate connect input ::> fteMotorRunaway to gate ::> ftgMotorAnd;
-    connection : InputToGate connect input ::> fteCrossCheckFails to gate ::> ftgMotorAnd;
-    connection : InputToGate connect input ::> fteLockoutFault to gate ::> ftgBolusAnd;
-    connection : InputToGate connect input ::> fteStuckButtonUndetected to gate ::> ftgBolusAnd;
-    connection : InputToGate connect input ::> ftgMotorAnd to gate ::> ftgOverdoseOr;
-    connection : InputToGate connect input ::> ftgBolusAnd to gate ::> ftgOverdoseOr;
-    connection : ProducesEvent connect gate ::> ftgOverdoseOr to eventElement ::> fteOverdoseTop;
-    connection : Causes connect cause ::> fteOverdoseTop to effect ::> overdoseHazard { attribute :>> causeKind = CauseKind::leadsToHazard; }
-    connection : Causes connect cause ::> pumpMotorAssembly to effect ::> fteMotorRunaway { attribute :>> causeKind = CauseKind::originatesFrom; }
-    connection : Causes connect cause ::> bolusButton to effect ::> fteStuckButtonUndetected { attribute :>> causeKind = CauseKind::originatesFrom; }
-    connection : ContainsEvent connect cutSet ::> mcsMotorPath to eventElement ::> fteMotorRunaway;
-    connection : ContainsEvent connect cutSet ::> mcsMotorPath to eventElement ::> fteCrossCheckFails;
-    connection : ContainsEvent connect cutSet ::> mcsBolusPath to eventElement ::> fteLockoutFault;
-    connection : ContainsEvent connect cutSet ::> mcsBolusPath to eventElement ::> fteStuckButtonUndetected;
-    connection : Mitigates connect control ::> flowCrossCheckControl to mitigatedElement ::> mcsMotorPath { attribute :>> mitigationKind = MitigationKind::cutSet; }
-    connection : Mitigates connect control ::> lockoutControl to mitigatedElement ::> mcsBolusPath { attribute :>> mitigationKind = MitigationKind::cutSet; }
+    connection : HasFailureMode connect pumpMotorAssembly to fmMotorRunaway;
+    connection : HasFailureMode connect airInLineSensor to fmAirSensorSilent;
+    connection : HasFailureMode connect occlusionSensor to fmOcclusionDrift;
+    connection : HasFailureMode connect bolusButton to fmStuckBolusButton;
+    connection : HasFailureMode connect batteryPack to fmBatteryEarlyDepletion;
+    connection : Causes connect fmMotorRunaway to feOverdose { attribute :>> causeKind = CauseKind::failureCausesEffect; }
+    connection : Causes connect fmStuckBolusButton to feOverdose { attribute :>> causeKind = CauseKind::failureCausesEffect; }
+    connection : Causes connect fmAirSensorSilent to feAirDelivered { attribute :>> causeKind = CauseKind::failureCausesEffect; }
+    connection : Causes connect fmOcclusionDrift to feTherapyInterrupted { attribute :>> causeKind = CauseKind::failureCausesEffect; }
+    connection : Causes connect fcMotorDriverFault to fmMotorRunaway { attribute :>> causeKind = CauseKind::failureCausedBy; }
+    connection : Causes connect fcTransducerAging to fmAirSensorSilent { attribute :>> causeKind = CauseKind::failureCausedBy; }
+    connection : Causes connect fcPendantAbuse to fmStuckBolusButton { attribute :>> causeKind = CauseKind::failureCausedBy; }
+    connection : DetectedBy connect fmMotorRunaway to dmFlowCrossCheck;
+    connection : DetectedBy connect fmAirSensorSilent to dmPostSensorCheck;
+    connection : DetectedBy connect fmStuckBolusButton to dmStuckInputMonitor;
+    connection : Mitigates connect fmeaActionAirSensor to fmAirSensorSilent { attribute :>> mitigationKind = MitigationKind::fmeaAction; }
+    connection : Causes connect fmMotorRunaway to overdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
+    connection : Causes connect fmStuckBolusButton to overdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
+    connection : Causes connect fmAirSensorSilent to airEmbolismHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
+    connection : Causes connect fmOcclusionDrift to underdoseHazard { attribute :>> causeKind = CauseKind::contributesToHazard; }
+    connection : Mitigates connect flowCrossCheckControl to fmMotorRunaway { attribute :>> mitigationKind = MitigationKind::failureMode; }
+    connection : Mitigates connect lockoutControl to fmStuckBolusButton { attribute :>> mitigationKind = MitigationKind::failureMode; }
+    connection : InputToGate connect fteMotorRunaway to ftgMotorAnd;
+    connection : InputToGate connect fteCrossCheckFails to ftgMotorAnd;
+    connection : InputToGate connect fteLockoutFault to ftgBolusAnd;
+    connection : InputToGate connect fteStuckButtonUndetected to ftgBolusAnd;
+    connection : InputToGate connect ftgMotorAnd to ftgOverdoseOr;
+    connection : InputToGate connect ftgBolusAnd to ftgOverdoseOr;
+    connection : ProducesEvent connect ftgOverdoseOr to fteOverdoseTop;
+    connection : Causes connect fteOverdoseTop to overdoseHazard { attribute :>> causeKind = CauseKind::leadsToHazard; }
+    connection : Causes connect pumpMotorAssembly to fteMotorRunaway { attribute :>> causeKind = CauseKind::originatesFrom; }
+    connection : Causes connect bolusButton to fteStuckButtonUndetected { attribute :>> causeKind = CauseKind::originatesFrom; }
+    connection : ContainsEvent connect mcsMotorPath to fteMotorRunaway;
+    connection : ContainsEvent connect mcsMotorPath to fteCrossCheckFails;
+    connection : ContainsEvent connect mcsBolusPath to fteLockoutFault;
+    connection : ContainsEvent connect mcsBolusPath to fteStuckButtonUndetected;
+    connection : Mitigates connect flowCrossCheckControl to mcsMotorPath { attribute :>> mitigationKind = MitigationKind::cutSet; }
+    connection : Mitigates connect lockoutControl to mcsBolusPath { attribute :>> mitigationKind = MitigationKind::cutSet; }
 
     // ── Verification coverage (IEC 62304 §5.7) ──────────────────
 
@@ -664,45 +643,45 @@ package memo_examples_gpca_pump_gpca_trace {
 
 
     // ── Validation and usability testing ────────────────────────
-    connection : Validates connect validationTarget ::> reqCs59 to validationCase ::> valSimulatedWard;
-    connection : Validates connect validationTarget ::> reqCs09 to validationCase ::> valSummativeUsability;
-    connection : Validates connect validationTarget ::> reqCs73 to validationCase ::> valSummativeUsability;
-    connection : TestedByUsability connect uiElementOrTask ::> ueMisprogrammedRate to usabilityTest ::> valSummativeUsability;
-    connection : TestedByUsability connect uiElementOrTask ::> ueBolusByProxy to usabilityTest ::> valSummativeUsability;
-    connection : TestedByUsability connect uiElementOrTask ::> ueWrongDrugLoaded to usabilityTest ::> valSummativeUsability;
-    connection : TestedByUsability connect uiElementOrTask ::> ueAlarmDisregard to usabilityTest ::> valSummativeUsability;
-    connection : TestedByUsability connect uiElementOrTask ::> oaProgram to usabilityTest ::> valSummativeUsability;
+    connection : Validates connect reqCs59 to valSimulatedWard;
+    connection : Validates connect reqCs09 to valSummativeUsability;
+    connection : Validates connect reqCs73 to valSummativeUsability;
+    connection : TestedByUsability connect ueMisprogrammedRate to valSummativeUsability;
+    connection : TestedByUsability connect ueBolusByProxy to valSummativeUsability;
+    connection : TestedByUsability connect ueWrongDrugLoaded to valSummativeUsability;
+    connection : TestedByUsability connect ueAlarmDisregard to valSummativeUsability;
+    connection : TestedByUsability connect oaProgram to valSummativeUsability;
     // VAL-002's acceptance criteria name UE-001..UE-004, and each of those is
     // committed during one task (CommitsUseError, gpca_context). Only the
     // programming task was linked; the other three are the same evaluation.
-    connection : TestedByUsability connect uiElementOrTask ::> oaRequestBolus to usabilityTest ::> valSummativeUsability;
-    connection : TestedByUsability connect uiElementOrTask ::> oaLoadReservoir to usabilityTest ::> valSummativeUsability;
-    connection : TestedByUsability connect uiElementOrTask ::> oaRespondAlarm to usabilityTest ::> valSummativeUsability;
+    connection : TestedByUsability connect oaRequestBolus to valSummativeUsability;
+    connection : TestedByUsability connect oaLoadReservoir to valSummativeUsability;
+    connection : TestedByUsability connect oaRespondAlarm to valSummativeUsability;
 
     // ── Evidence production and document inclusion ──────────────
-    connection : ProducesEvidence connect producer ::> vcLockout to producedEvidence ::> evidenceLockout;
-    connection : ProducesEvidence connect producer ::> vcModeRange to producedEvidence ::> evidenceModeRange;
-    connection : ProducesEvidence connect producer ::> vcSameStepAlarm to producedEvidence ::> evidenceSameStepAlarm;
-    connection : ProducesEvidence connect producer ::> vcTemporalModeSafety to producedEvidence ::> evidenceTemporalModeSafety;
-    connection : ProducesEvidence connect producer ::> vcAirInLine to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcOcclusion to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcEmptyReservoir to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcWatchdog to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcPost to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcPowerLoss to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcStuckButton to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcFlowCrossCheck to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcReverseDeliveryPause to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcVtbiCeiling to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcInfusionComplete to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcDoorInterlock to producedEvidence ::> evidenceSafetyAlarmSuite;
-    connection : ProducesEvidence connect producer ::> vcAntiRefluxMechanism to producedEvidence ::> evidenceHardwareBench;
-    connection : ProducesEvidence connect producer ::> vcAlarmLoudness to producedEvidence ::> evidenceHardwareBench;
-    connection : ProducesEvidence connect producer ::> vcFreeFlow to producedEvidence ::> evidenceHardwareBench;
-    connection : ProducesEvidence connect producer ::> vcHourlyMax to producedEvidence ::> evidenceDoseProgramming;
-    connection : ProducesEvidence connect producer ::> vcDrugLibrary to producedEvidence ::> evidenceDoseProgramming;
-    connection : ProducesEvidence connect producer ::> vcPrescriptionConfirm to producedEvidence ::> evidenceDoseProgramming;
-    connection : ProducesEvidence connect producer ::> vcEventLog to producedEvidence ::> evidenceDoseProgramming;
-    connection : ProducesEvidence connect producer ::> vcPumpAccuracy to producedEvidence ::> evidenceDeliveryAccuracy;
-    connection : ProducesEvidence connect producer ::> valSummativeUsability to producedEvidence ::> evidenceUsability;
+    connection : ProducesEvidence connect vcLockout to evidenceLockout;
+    connection : ProducesEvidence connect vcModeRange to evidenceModeRange;
+    connection : ProducesEvidence connect vcSameStepAlarm to evidenceSameStepAlarm;
+    connection : ProducesEvidence connect vcTemporalModeSafety to evidenceTemporalModeSafety;
+    connection : ProducesEvidence connect vcAirInLine to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcOcclusion to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcEmptyReservoir to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcWatchdog to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcPost to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcPowerLoss to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcStuckButton to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcFlowCrossCheck to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcReverseDeliveryPause to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcVtbiCeiling to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcInfusionComplete to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcDoorInterlock to evidenceSafetyAlarmSuite;
+    connection : ProducesEvidence connect vcAntiRefluxMechanism to evidenceHardwareBench;
+    connection : ProducesEvidence connect vcAlarmLoudness to evidenceHardwareBench;
+    connection : ProducesEvidence connect vcFreeFlow to evidenceHardwareBench;
+    connection : ProducesEvidence connect vcHourlyMax to evidenceDoseProgramming;
+    connection : ProducesEvidence connect vcDrugLibrary to evidenceDoseProgramming;
+    connection : ProducesEvidence connect vcPrescriptionConfirm to evidenceDoseProgramming;
+    connection : ProducesEvidence connect vcEventLog to evidenceDoseProgramming;
+    connection : ProducesEvidence connect vcPumpAccuracy to evidenceDeliveryAccuracy;
+    connection : ProducesEvidence connect valSummativeUsability to evidenceUsability;
 }

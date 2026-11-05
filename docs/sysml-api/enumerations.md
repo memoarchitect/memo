@@ -25,7 +25,7 @@ SysML `enum def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`BoundsDetectionKind`](architecture/implementation/ui/memo_ui.md#boundsdetectionkind) | `enum def` | How the element's bounds were obtained. Automatic boundary detection PROPOSES; a reviewer DISPOSES. In a regulated review the reader must be able to see which boxes a human confirmed and which the tool guessed, so that provenance is model content and not a workbench-only flag. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
-| [`InteractionIntentKind`](architecture/implementation/ui/memo_ui.md#interactionintentkind) | `enum def` | The interaction intents a step or action can carry (§18). | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
+| [`InteractionIntentKind`](architecture/implementation/ui/memo_ui.md#interactionintentkind) | `enum def` | The interaction intents a step or action can carry. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`OperatorInterfaceFormKind`](architecture/implementation/ui/memo_ui.md#operatorinterfaceformkind) | `enum def` | Controlled values for operator interface form: `knob`, `dial`, `pushButton`, `toggleSwitch`, `rockerSwitch`, `lever`, `physicalSlider`, `keypad`, `footPedal`, `touchSurface`, `indicatorLamp`, `gauge`, `audibleIndicator`, `hapticIndicator`, `printedMarking`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`UIDisclosureKind`](architecture/implementation/ui/memo_ui.md#uidisclosurekind) | `enum def` | How an element appears relative to its parent and siblings. It records design intent a bare rectangle cannot: an element whose box escapes its parent and covers its siblings is a defect if it is `inline` and correct if it is `overlay`, and the geometry alone does not say which… | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
 | [`UIElementFormKind`](architecture/implementation/ui/memo_ui.md#uielementformkind) | `enum def` | Controlled values for uielement form: `screen`, `dialog`, `panel`, `menu`, `tab`, `drawer`, `wizardStep`, `button`, `field`, `selector`, `slider`, `table`, `chart`, `icon`, `textMessage`, `decoration`. | [`architecture/implementation/ui/memo_ui.sysml`](architecture/implementation/ui/memo_ui.md) |
@@ -37,7 +37,7 @@ SysML `enum def` declarations in `src/`.
 | --- | --- | --- | --- |
 | [`ChannelRoleKind`](architecture/logical/structure/memo_logical_structure.md#channelrolekind) | `enum def` | Controlled values for channel role: `primary`, `secondary`, `redundant`, `diverse`, `monitor`, `watchdog`, `interlock`, `independentProtection`. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`ComponentRoleKind`](architecture/logical/structure/memo_logical_structure.md#componentrolekind) | `enum def` | Controlled values for component role: `channel`, `dataStore`, `controlElement`, `userInterface`, `externalSystem`, `generic`. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
-| [`FlowContentKind`](architecture/logical/structure/memo_logical_structure.md#flowcontentkind) | `enum def` | What a logical connection carries: information and control, but also energy, material, fluid, and mechanical force (§10). | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
+| [`FlowContentKind`](architecture/logical/structure/memo_logical_structure.md#flowcontentkind) | `enum def` | What a logical connection carries: information and control, but also energy, material, fluid, and mechanical force. | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`SystemOriginKind`](architecture/logical/structure/memo_logical_structure.md#systemoriginkind) | `enum def` | Who builds a system or system of systems: this organisation, or others. Distinct from `componentRole`, which says what a logical component DOES (an `externalSystem` is a role in a context).… | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 | [`SystemTypeKind`](architecture/logical/structure/memo_logical_structure.md#systemtypekind) | `enum def` | The discipline a logical block is realized in. Orthogonal to `componentRole`: a subsystem may be software, a system may be hardware, and a block whose realization is not yet decided stays `logical`. This does NOT relocate the element.… | [`architecture/logical/structure/memo_logical_structure.sysml`](architecture/logical/structure/memo_logical_structure.md) |
 
@@ -67,7 +67,7 @@ SysML `enum def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`UseCaseKind`](architecture/operational/use_cases/memo_use_cases.md#usecasekind) | `enum def` | Controlled values for use case: `clinical`, `service`, `manufacturing`, `development`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
+| [`UseCaseKind`](architecture/operational/use_cases/memo_use_cases.md#usecasekind) | `enum def` | Controlled values for use case: `care`, `service`, `manufacturing`, `development`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 
 
 ## `memo::architecture::operational::workflows`
@@ -105,7 +105,7 @@ SysML `enum def` declarations in `src/`.
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`RequirementTypeKind`](assurance/requirements/memo_requirements.md#requirementtypekind) | `enum def` | What a requirement is about: the system, the software, the hardware, or the instructions for use. One axis, and the members are its values. It carried a second axis until now.… | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
+| [`RequirementTypeKind`](assurance/requirements/memo_requirements.md#requirementtypekind) | `enum def` | What a requirement is about: the system, the software, the hardware, or the instructions for use. One axis, and the members are its values.… | [`assurance/requirements/memo_requirements.sysml`](assurance/requirements/memo_requirements.md) |
 
 
 ## `memo::assurance::requirements::needs`
@@ -142,7 +142,7 @@ SysML `enum def` declarations in `src/`.
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`CrossCuttingConcernKind`](core/dimensions/dimensions.md#crosscuttingconcernkind) | `enum def` | Cross-cutting concerns orthogonal to the axis. | [`core/dimensions/dimensions.sysml`](core/dimensions/dimensions.md) |
-| [`ElementStatusKind`](core/dimensions/dimensions.md#elementstatuskind) | `enum def` | Controlled values for element status: `proposed`, `draft`, `inReview`, `approved`, `released`, `deprecated`, `retired`. | [`core/dimensions/dimensions.sysml`](core/dimensions/dimensions.md) |
+| [`ElementStatusKind`](core/dimensions/dimensions.md#elementstatuskind) | `enum def` | Editorial status of the model element itself (distinct from the lifecycle of the thing the element describes). This is the ONE status vocabulary in MEMO: every element carries `status : ElementStatusKind`, whatever its metaclass.… | [`core/dimensions/dimensions.sysml`](core/dimensions/dimensions.md) |
 | [`RealizationStageKind`](core/dimensions/dimensions.md#realizationstagekind) | `enum def` | Realization stages of one element identity across the product lifecycle (proposal through retirement). Orthogonal to the axis: a single identity progresses through stages without changing its owner. | [`core/dimensions/dimensions.sysml`](core/dimensions/dimensions.md) |
 
 
@@ -170,7 +170,7 @@ SysML `enum def` declarations in `src/`.
 | [`DetectionKind`](core/enumerations/memo_enumerations.md#detectionkind) | `enum def` | Qualitative ability to detect a failure/threat before it causes harm — used for FMEA detection ratings and cybersecurity detectability. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`DetectionMethodKind`](core/enumerations/memo_enumerations.md#detectionmethodkind) | `enum def` | Controlled values for detection method: `inspection`, `testing`, `monitoring`, `alarm`, `userReport`, `selfDiagnostic`, `periodicMaintenance`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`DiagramViewKind`](core/enumerations/memo_enumerations.md#diagramviewkind) | `enum def` | Controlled values for diagram view: `general`, `interconnection`, `actionflow`, `statetransition`, `sequence`, `grid`, `browser`, `geometry`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
-| [`DirectionKind`](core/enumerations/memo_enumerations.md#directionkind) | `enum def` | Direction of a flow across a boundary. Track A2 removed this from PORTS: a port usage says `in` / `out` / `inout` natively, which is the language's own spelling and the only one a conforming tool reads.… | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
+| [`DirectionKind`](core/enumerations/memo_enumerations.md#directionkind) | `enum def` | Direction of a flow across a boundary. A port usage says `in` / `out` / `inout` natively, which is the language's own spelling and the only one a conforming tool reads.… | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`DocumentViewKind`](core/enumerations/memo_enumerations.md#documentviewkind) | `enum def` | Controlled values for document view: `DHF`, `SDD`, `RMF`, `VV`, `architectureDescription`, `cybersecurityAssessment`, `threatModel`, `clinical`, `usability`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`EarsPatternKind`](core/enumerations/memo_enumerations.md#earspatternkind) | `enum def` | Controlled values for ears pattern: `ubiquitous`, `eventDriven`, `stateDriven`, `optionalFeature`, `unwantedBehavior`, `complex`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`FailureCauseCategoryKind`](core/enumerations/memo_enumerations.md#failurecausecategorykind) | `enum def` | Controlled values for failure cause category: `design`, `manufacturing`, `material`, `wear`, `misuse`, `environmental`, `software`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |

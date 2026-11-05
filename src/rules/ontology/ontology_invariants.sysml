@@ -1,21 +1,23 @@
-// Ontology conformance invariants (§25, 0.5 rework). Same native pattern as
-// memo_rules_closure: `constraint def` bodies with declarative rule metadata
+// Ontology conformance invariants. Same native pattern as memo_rules_closure:
+// `constraint def` bodies with declarative rule metadata
 // (`predicateExpression`) evaluated by the external constraint engine.
 // Structural invariants (endpoint existence, cycle freedom) are expressed over
-// the typed relations introduced in 0.5 — typed references make them checkable.
+// the typed relations — typed references make them checkable.
 //
-// Operational levels (CR-ONT-093..103). A use case and a workflow are each declared at a level by
-// their type: `ClinicalUseCase` and `ClinicalWorkflow` are level 1 (clinical, no product, no
-// number), `SystemUseCase` and `SystemWorkflow` level 2 (one variant of a platform, which carries
-// every number). 093 keeps a use case's type and subject in agreement, 103 a workflow's type and
-// the use case it `realizesUseCase`. The level of a step is the type of the workflow it sits in,
-// reached from the step by `composes` (a step nested in a scenario) or through the scenario that
-// `performs` it (a step declared once and used in several); a step outside any workflow has no
-// level and is judged by no level rule.
-// Each rule reads a type and the `performs` and `realizes` edges the builder already produces.
-// Rule 6 of the plan, that every variant of a `TradeStudy` refines every step compared (101),
-// reads the study's `hasSubject` edges: its subject is the alternatives it analyses.
-// The one-currency rule (098) counts the project's `CurrencyUnit` declarations: a unit declared at
+// Operational levels (CR-ONT-093..103). A use case and a workflow are each
+// declared at a level by their type: `ClinicalUseCase` and `ClinicalWorkflow`
+// are level 1 (clinical, no product, no number), `SystemUseCase` and
+// `SystemWorkflow` level 2 (one variant of a platform, which carries every
+// number). 093 keeps a use case's type and subject in agreement, 103 a
+// workflow's type and the use case it `realizesUseCase`. The level of a step is
+// the type of the workflow it sits in, reached from the step by `composes` (a
+// step nested in a scenario) or through the scenario that `performs` it (a step
+// declared once and used in several); a step outside any workflow has no level
+// and is judged by no level rule. Each rule reads a type and the `performs` and
+// `realizes` edges the builder already produces. Rule 101, that every variant
+// of a `TradeStudy` refines every step compared, reads the study's `hasSubject`
+// edges: its subject is the alternatives it analyses. The one-currency rule
+// (098) counts the project's `CurrencyUnit` declarations: a unit declared at
 // package level is built as a model element, as ISQ and SI declare theirs.
 package memo_rules_ontology {
     private import ScalarValues::*;
@@ -24,7 +26,6 @@ package memo_rules_ontology {
     private import memo_core_enumerations::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     private import memo_artifacts_standards_traceability::EnforcesClause;
     private import memo_artifacts_standards_iec_62366_1::*;
     private import memo_artifacts_standards_iso_13485::*;
@@ -54,7 +55,7 @@ package memo_rules_ontology {
         attribute predicateExpression = "allOfKind('System')->exists(isDefinition == 'true')";
         constraint { true }
     }
-    // ─── Use case scope (plan O8) ─────────────────────────────────────────
+    // ─── Use case scope ─────────────────────────────────────────
     //
     // The level of a use case is its declared type (`ClinicalUseCase`, `SystemUseCase`), and
     // CR-ONT-093 keeps it in agreement with the subject (`hasSubject`). Rule 085 reads the subject
@@ -72,7 +73,7 @@ package memo_rules_ontology {
         attribute predicateExpression = "not(downstream(hasSubject)->exists(conformsTo(SystemOfSystems))) or downstream(includesStep)->exists(downstream(hasSubject)->exists(conformsTo(System)))";
         constraint { true }
     }
-    // ─── Release selections (plan O14) ────────────────────────────────────
+    // ─── Release selections ────────────────────────────────────
     //
     // A release record selects features (`#SelectsFeature`), and through them the variants that realize
     // them (`#RealizesFeature`, variant to feature). The rules read a record's selection by navigation;
@@ -158,10 +159,11 @@ package memo_rules_ontology {
 
     // ─── Direction is written on the ports, and an exchange has to agree with them ──
     //
-    // A port says `in` or `out` (or `inout`), and a `~` conjugates it. That is the only place direction is
-    // written: an exchange's own direction was the same fact a second time, and nothing checked the two
-    // agreed. These two rules check the exchange against its ports, so a contradiction cannot be written.
-    // Both judge only ends that are ports with a stated direction; a port that says none is not judged.
+    // A port says `in` or `out` (or `inout`), and a `~` conjugates it. That is
+    // the only place direction is written. These two rules check the exchange
+    // against its ports, so a contradiction cannot be written. Both judge only
+    // ends that are ports with a stated direction; a port that says none is not
+    // judged.
     constraint def BindingEndsAgreeInDirectionRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "AR-EXCH-001"; }
         attribute tailoring = RuleTailoringKind::invariant;
@@ -249,14 +251,11 @@ package memo_rules_ontology {
         attribute tailoring = RuleTailoringKind::assurance;
         attribute domain = RuleDomainKind::medicalDevice;
         attribute obligation = RuleObligationKind::required;
-        // To confirm: inferred from the clause scope; the FDA human-factors guidance it also cites is not in the library yet.
-        // The selector used to be `[criticality=high]`, which left the
-        // catastrophic tasks — the most critical — outside the rule while the
-        // predicate still spelled out the catastrophic case. The criticality
-        // test lives in the predicate alone now. `testedByUsability` is the
-        // relation the human-factors package declares for exactly this link;
-        // reading only `validates` meant a task linked the way the ontology
-        // asks was still reported.
+        // To confirm: inferred from the clause scope; the FDA human-factors
+        // guidance it also cites is not in the library yet. The criticality
+        // test lives in the predicate alone, so catastrophic tasks are in
+        // scope. `testedByUsability` is the relation the human-factors package
+        // declares for exactly this link.
         attribute appliesTo = "OperativeAction";
         attribute severity = RuleSeverityKind::error;
         attribute rationaleText = "Critical tasks (criticality high or catastrophic) must trace to usability validation (FDA HF guidance; IEC 62366-1 summative evaluation).";
@@ -277,34 +276,22 @@ package memo_rules_ontology {
         constraint { true }
     }
     #EnforcesClause dependency from UseErrorTracesToHazardRule to iec62366_1::iec62366_1Clause5::iec62366_1Clause5_3;
-    // ─── Relation end conformance (Track A0) ─────────────────────────────
+    // ─── Relation end conformance ─────────────────────────────
     //
-    // These rules carry the constraints that `connection def` end TYPES used to
-    // carry in memo_core_relationships. The types had to go: KerML forbids a
-    // port or a behaviour from specializing a part-based type, so a
-    // `MemoPart`-typed end forced every endpoint to be a part — which is why
-    // ports are part defs, why a function is a part with its behaviour stapled
-    // on, and why `allocate <function> to <actor>` is rejected. See the Track A0
-    // note at the top of memo_core_relationships.
+    // These rules carry the constraints on `connection def` ends that a type
+    // cannot state: KerML forbids a port or a behaviour from specializing a
+    // part-based type, so a `MemoPart`-typed end would force every endpoint to
+    // be a part. See the note on metaclass-neutral ends in
+    // memo_core_relationships.
     //
-    // Each rule states what its end stated, in the one vocabulary that survives
-    // the metaclass split:
+    // Each rule states its end's constraint, in the one vocabulary that spans
+    // the metaclasses:
     //
-    //   * `conformsTo(Base)` — SysML specialization against a MEMO base. This is
-    //     the part the end type expressed, and it still works within a metaclass.
-    //   * `construct == 'action' | 'port' | 'state' | …` — the SysML METACLASS.
-    //     No MEMO base can say this, because the bases are per-metaclass by
-    //     construction; a type-based end could only ever admit one of them.
-    //
-    // Several of these are WIDER than the end they replace, and deliberately so:
-    // the ends were being violated by content that already shipped. `composes`
-    // was typed MemoPart/MemoPart and links StateMachine (a state def) to
-    // OperativeAction (an action def); `verifiedBy`'s source was typed MemoPart and
-    // most of its sources are requirement defs; `precedes` was typed
-    // a part-only type and joins OperativeAction to OperativeAction.
-    // A rule that reproduced the old type exactly would have failed on the
-    // flagship example on the day it landed. What each rule asserts is the
-    // constraint the end MEANT, stated so it can be checked.
+    // * `conformsTo(Base)` — SysML specialization against a MEMO base. This
+    // works within a metaclass. * `construct == 'action' | 'port' | 'state' |
+    // …` — the SysML METACLASS. No MEMO base can say this, because the bases
+    // are per-metaclass by construction; a type-based end could only ever admit
+    // one of them.
     //
     // Subject scope is `Model`, following CR-ONT-001: a statement about the ends
     // of a relation quantifies over its LINKS, not over elements of one kind, so
@@ -434,16 +421,10 @@ package memo_rules_ontology {
         constraint { true }
     }
 
-    // CR-ONT-002's replacement, now asked of the edge. A ComponentExchange is
-    // an interface, so its ends are the ports it connects, and `sourceEnd` /
-    // `targetEnd` are those elements. The compiler does not check this:
-    // a compiler accepts a part at an interface end even when the definition types
-    // the ends.
-    //
-    // It used to read `sourceEndpoint` refs, whose dotted values the builder
-    // cut to their first segment, and compare them as strings, which drop
-    // everything up to the last `::`. On gpca-pump that matched the enclosing
-    // device for 44 of 46 exchanges and passed.
+    // A ComponentExchange is an interface, so its ends are the ports it
+    // connects, and `sourceEnd` / `targetEnd` are those elements. The compiler
+    // does not check this: a compiler accepts a part at an interface end even
+    // when the definition types the ends.
     constraint def ComponentExchangeSourceEndpointKindRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-072"; }
         attribute tailoring = RuleTailoringKind::invariant;
@@ -512,13 +493,10 @@ package memo_rules_ontology {
     // writing them as containment loses the distinction.
     //
     // They read the `composes` edge, which the builder synthesizes from native
-    // nesting, so they cover the nesting spelling and the retired connection
-    // form identically. They read it DOWNSTREAM: a bare relation name navigates
-    // both ways, so `composes` alone also reached the subject's own parent and
-    // judged a software system by the assembly it sat in. That reported one
-    // cross-family nesting twice, once on each side, and the child's copy
-    // blamed the element that was not doing the containing. `downstream` is
-    // transitive, so the rule reads as "the subtree stays in the family".
+    // nesting. They read it DOWNSTREAM: a bare relation name navigates both
+    // ways, so `composes` alone would reach the subject's own parent and report
+    // one cross-family nesting twice. `downstream` is transitive, so the rule
+    // reads as "the subtree stays in the family".
     //
     // Ports are exempt. A port is a boundary FEATURE of its owner, not a member
     // of its owner's family, and any element may carry one whatever family it
@@ -565,16 +543,9 @@ package memo_rules_ontology {
     // whose ends are the exchange's own two ports. The ends are compared as
     // elements (`intersects` matches exact ids), not as names.
     //
-    // It replaces the same-name coupling this id used to check, which tied a
-    // ComponentExchange PART to a flow of the same name. That was unsatisfiable
-    // once the model compiled: two members of one namespace may not share a
-    // name (`namespace-distinguishability`), and a `bind` could not be named at
-    // all. With the exchange an interface there is no second record to keep in
-    // step, and what is left to check is transport.
-    //
     // `assurance`, not `invariant`: whether every interface must declare its
-    // transport is a method's call (§9.2 of the architecture plan), and a
-    // method that models interfaces before their flows may tailor it.
+    // transport is a method's call, and a method that models interfaces before
+    // their flows may tailor it.
     constraint def ExchangeHasFlowRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-076"; }
         attribute tailoring = RuleTailoringKind::assurance;
@@ -620,17 +591,14 @@ package memo_rules_ontology {
 
     // ─── Assurance-trace warnings ────────────────────────────────────────
     // A WARNING, not an error: it describes a trace graph that is suspicious
-    // rather than invalid, and a regulated model has legitimate exceptions.
-    // It needed `upstream` / `downstream` — the bare relation name is
-    // bidirectional, so before those existed no rule could ask which way a
-    // derivation ran.
+    // rather than invalid, and a regulated model has legitimate exceptions. It
+    // reads `upstream` / `downstream` because the bare relation name is
+    // bidirectional.
     //
-    // CR-ONT-081 (RedundantAncestorTraceRule) was deleted 2026-09-25. It called
-    // a trace redundant when one element satisfied both a requirement and one
-    // derived from it, "already implied by the derivation". It is not: a
-    // `derive` does not make its source satisfied, and a response-time
-    // requirement derived from "select a drug from the library" says nothing
-    // about whether the selector lets you select one.
+    // A trace is not redundant when one element satisfies both a requirement
+    // and one derived from it: a `derive` does not make its source satisfied,
+    // and a response-time requirement derived from "select a drug from the
+    // library" says nothing about whether the selector lets you select one.
 
     constraint def DerivationGapRule :> MemoConsistencyRule {
         @MemoIdentity { :>> providedId = "CR-ONT-080"; }

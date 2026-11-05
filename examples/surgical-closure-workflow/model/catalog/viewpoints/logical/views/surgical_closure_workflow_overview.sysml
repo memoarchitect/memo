@@ -1,8 +1,6 @@
 package memo_examples_surgical_closure_workflow_viewpoints_logical_views_surgical_closure_workflow_overview {
+    private import memo::*;
     private import memo_examples_surgical_closure_workflow::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_core_enumerations::*;
 
     view surgicalClosureWorkflowOverview : MemoDiagramView {
         expose memo_examples_surgical_closure_workflow::*;

@@ -6,7 +6,6 @@ package memo_viewpoints_usability_usability_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint usabilityViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-USE"; :>> label = "UsabilityViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows use contexts, actors, use errors, and usability requirements."; }

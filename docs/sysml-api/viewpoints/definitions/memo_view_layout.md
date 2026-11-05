@@ -214,9 +214,8 @@ metadata def MemoLayoutNote
     // Where a view's boxes sit. A drawing's layout is presentation, and it is
     // written in the view that owns it: `@MemoLayout` and its `@MemoLayout*`
     // siblings annotate a `view` usage (their `annotatedElement` is never anything
-    // else), inside the view's own body. It used to live in a `.viewlayout`
-    // companion beside the file, which the compiler, review and the pinned build
-    // could not see.
+    // else), inside the view's own body. That way the compiler, review and a pinned
+    // build can all see it.
     //
     // Flat on purpose. Each box, port, connector route and note is one metadata
     // usage with primitive values, because a metadata body can redefine an

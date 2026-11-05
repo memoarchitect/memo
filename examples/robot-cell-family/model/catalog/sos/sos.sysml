@@ -2,9 +2,7 @@
 // developed and released systems working together for a procedure none of
 // them performs alone. Only this level names the systems together.
 package robot_cell_family_sos {
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    private import memo_architecture_logical_structure::*;
+    private import memo::*;
     private import robot_cell_family_sos_icds::*;
     private import robot_cell_family_systems_navigation_navigation_system::*;
     private import robot_cell_family_systems_manipulation_manipulation_system::*;

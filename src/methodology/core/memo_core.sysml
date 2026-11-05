@@ -81,21 +81,21 @@ package memo_methodology_core {
         //
         // The standards, artifact kinds and viewpoints a methodology selects
         // are TYPED: a standard is a RegulatoryStandard, an artifact kind is an
-        // ArtifactKind literal, a viewpoint is a MemoViewpoint. They were
-        // strings ("ISO 14155", "RiskManagementPlan", "VP-CTX"), and three
-        // standards and an artifact kind in the GPCA methodology named nothing
-        // the ontology declares: a string that matches nothing selects nothing,
-        // and nothing said so. Now the compiler does.
+        // ArtifactKind literal, a viewpoint is a MemoViewpoint. A string that
+        // matches nothing selects nothing and nothing says so; a typed
+        // reference the compiler checks.
         ref includedStandard : RegulatoryStandard[0..*];
         attribute includedArtifactKind : ArtifactKind[0..*];
         ref includedViewpoint : MemoViewpoint[0..*];
         part rulePolicy : RulePolicy[0..*];
     }
 
-    // Which viewpoints a role works with (plan O12). A viewpoint names the stakeholders it is written for,
-    // and that is what a role sees by default; a methodology may say otherwise for a role, and then THIS is
-    // what the role sees, an override and not an addition. A method that names a base starts from its
-    // role views, and a later one for the same stakeholder replaces the earlier.
+    // Which viewpoints a role works with. A viewpoint names the stakeholders it
+    // is written for, and that is what a role sees by default; a methodology
+    // may say otherwise for a role, and then THIS is what the role sees, an
+    // override and not an addition. A method that names a base starts from its
+    // role views, and a later one for the same stakeholder replaces the
+    // earlier.
     //
     //   part rvSafety : RoleView { ref :>> forStakeholder = safetyEngineer; ref :>> shownViewpoint = (vpRiskChain, vpEvidenceTraceability); }
     part def RoleView :> MemoPart {
@@ -131,9 +131,9 @@ package memo_methodology_core {
         part rulePolicy : RulePolicy[0..*];
     }
 
-    // DEPRECATED in 0.14.0, deleted in 0.15.0: the former spelling of
-    // ModelMethodBinding, kept so a model written with it still binds. MEMO
-    // reads `projectName` when `modelName` is absent and warns on either.
+    // The deprecated spelling of ModelMethodBinding, kept so a model written
+    // with it still binds. MEMO reads `projectName` when `modelName` is absent
+    // and warns on either.
     part def ProjectMethodBinding :> ModelMethodBinding {
         attribute projectName : String;
     }

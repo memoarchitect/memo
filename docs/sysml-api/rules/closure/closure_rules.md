@@ -27,7 +27,6 @@
 | private | `memo_core_consistency_rules::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 | private | `memo_artifacts_standards_traceability::EnforcesClause` |
 | private | `memo_artifacts_standards_fda_cybersecurity_2023::*` |
 | private | `memo_artifacts_standards_iec_62304::*` |
@@ -48,8 +47,8 @@
 | [`SwComponentSafetyClassRule`](#swcomponentsafetyclassrule) | `constraint def` | Constraint that checks sw component safety class rule. | `MemoConsistencyRule` |
 | [`SwComponentReqRule`](#swcomponentreqrule) | `constraint def` | Constraint that checks sw component req rule. | `MemoConsistencyRule` |
 | [`LogicalFunctionAllocationRule`](#logicalfunctionallocationrule) | `constraint def` | Constraint that checks logical function allocation rule. | `MemoConsistencyRule` |
-| [`FunctionInChainRule`](#functioninchainrule) | `constraint def` | A function that no edge reaches is not in the chain. This was a TypeScript rule (BV-002) applying to every action usage in the model, which reported a scenario and a flow step as defects for not being wired like a function.… | `MemoConsistencyRule` |
-| [`UserNeedIdentifiesUserRule`](#userneedidentifiesuserrule) | `constraint def` | A user need names the user whose need it is. IEC 62366-1's user profile is typed on the User element — population, impairments, training, qualification — so the need points at that element rather than restating any of it in prose, which is what `userPopulationReference` was do… | `MemoConsistencyRule` |
+| [`FunctionInChainRule`](#functioninchainrule) | `constraint def` | A function that no edge reaches is not in the chain. It is declared here: scoped by the ontology to the family it is about, tailorable by a methodology, and readable next to the rule that requires the allocation. | `MemoConsistencyRule` |
+| [`UserNeedIdentifiesUserRule`](#userneedidentifiesuserrule) | `constraint def` | A user need names the user whose need it is. IEC 62366-1's user profile is typed on the User element — population, impairments, training, qualification — so the need points at that element rather than restating any of it in prose. | `MemoConsistencyRule` |
 | [`VerificationCaseMethodRule`](#verificationcasemethodrule) | `constraint def` | Constraint that checks verification case method rule. | `MemoConsistencyRule` |
 | [`VerificationCaseTargetRule`](#verificationcasetargetrule) | `constraint def` | Constraint that checks verification case target rule. | `MemoConsistencyRule` |
 | [`EvidenceProductionRule`](#evidenceproductionrule) | `constraint def` | Constraint that checks evidence production rule. | `MemoConsistencyRule` |
@@ -221,7 +220,7 @@ constraint def FunctionInChainRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | A function that no edge reaches is not in the chain. This was a TypeScript rule (BV-002) applying to every action usage in the model, which reported a scenario and a flow step as defects for not being wired like a function.… |
+| Description | A function that no edge reaches is not in the chain. It is declared here: scoped by the ontology to the family it is about, tailorable by a methodology, and readable next to the rule that requires the allocation. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -236,7 +235,7 @@ constraint def UserNeedIdentifiesUserRule :> MemoConsistencyRule
 
 | Property | Value |
 | --- | --- |
-| Description | A user need names the user whose need it is. IEC 62366-1's user profile is typed on the User element — population, impairments, training, qualification — so the need points at that element rather than restating any of it in prose, which is what `userPopulationReference` was do… |
+| Description | A user need names the user whose need it is. IEC 62366-1's user profile is typed on the User element — population, impairments, training, qualification — so the need points at that element rather than restating any of it in prose. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -663,7 +662,6 @@ constraint def ChangeTraceRule :> MemoConsistencyRule
         private import memo_core_enumerations::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         private import memo_artifacts_standards_traceability::EnforcesClause;
         private import memo_artifacts_standards_fda_cybersecurity_2023::*;
         private import memo_artifacts_standards_iec_62304::*;
@@ -703,7 +701,9 @@ constraint def ChangeTraceRule :> MemoConsistencyRule
             attribute tailoring = RuleTailoringKind::assurance;
             attribute domain = RuleDomainKind::medicalDevice;
             attribute obligation = RuleObligationKind::required;
-            // Note: ISO 14971:2019 puts verification of the implementation and effectiveness of a risk control measure in 7.2; the rule text used to say 7.4, which is benefit-risk analysis.
+            // Note: ISO 14971:2019 puts verification of the implementation and
+            // effectiveness of a risk control measure in 7.2; 7.4 is benefit-risk
+            // analysis.
             attribute appliesTo = "RiskControlMeasure";
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "Risk controls shall be verified per ISO 14971 clause 7.2.";
@@ -800,12 +800,9 @@ constraint def ChangeTraceRule :> MemoConsistencyRule
             constraint { true }
         }
 
-        // A function that no edge reaches is not in the chain. This was a
-        // TypeScript rule (BV-002) applying to every action usage in the model,
-        // which reported a scenario and a flow step as defects for not being
-        // wired like a function. It is declared here instead: scoped by the
-        // ontology to the family it is about, tailorable by a methodology, and
-        // readable next to the rule that requires the allocation.
+        // A function that no edge reaches is not in the chain. It is declared here:
+        // scoped by the ontology to the family it is about, tailorable by a
+        // methodology, and readable next to the rule that requires the allocation.
         constraint def FunctionInChainRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-MED-023"; }
             attribute tailoring = RuleTailoringKind::assurance;
@@ -831,7 +828,7 @@ constraint def ChangeTraceRule :> MemoConsistencyRule
         // A user need names the user whose need it is. IEC 62366-1's user profile
         // is typed on the User element — population, impairments, training,
         // qualification — so the need points at that element rather than restating
-        // any of it in prose, which is what `userPopulationReference` was doing.
+        // any of it in prose.
         constraint def UserNeedIdentifiesUserRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "CR-MED-024"; }
             attribute tailoring = RuleTailoringKind::assurance;

@@ -4,10 +4,7 @@
 // system of systems because each one is an agreement between two systems,
 // owned by neither.
 package robot_cell_family_sos_icds {
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    private import memo_core_enumerations::*;
-    private import memo_architecture_logical_interfaces::*;
+    private import memo::*;
     private import robot_cell_family_shared::*;
 
     interface def PerceptionToNavigationIcd specializes Interface {

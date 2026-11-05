@@ -1,8 +1,6 @@
 package memo_examples_temperature_alarm_viewpoints_logical_views_temperature_alarm_overview {
+    private import memo::*;
     private import memo_examples_temperature_alarm::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_core_enumerations::*;
 
     view temperatureAlarmOverview : MemoDiagramView {
         expose memo_examples_temperature_alarm::*;

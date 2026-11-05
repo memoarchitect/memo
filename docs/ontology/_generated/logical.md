@@ -10,7 +10,7 @@
 | [`DataPort`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#dataport) | `port def` | Data port definition specializing `MemoPort`. |
 | [`SensorPort`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#sensorport) | `port def` | Sensor port definition specializing `DataPort`. |
 | [`CommandPort`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#commandport) | `port def` | Command port definition specializing `DataPort`. |
-| [`SoftwarePort`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#softwareport) | `port def` | Software port definition specializing `MemoPort`. |
+| [`SoftwarePort`](../sysml-api/architecture/logical/interfaces/memo_interfaces.md#softwareport) | `port def` | Boundary data port of a software system (e.g. an AADL top-level data port), modeled as a first-class element so exchanges can reference it and views can render the system boundary.… |
 
 **Structure**
 
@@ -23,7 +23,7 @@
 | [`LogicalPort`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalport) | `port def` | Boundary features and contracts. |
 | [`LogicalExchangeItem`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalexchangeitem) | `item def` | Logical exchange item definition specializing `MemoItem`. |
 | [`LogicalBehavior`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#logicalbehavior) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). |
-| [`IsolationBoundary`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). |
+| [`IsolationBoundary`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries. |
 | [`FaultContainmentRegion`](../sysml-api/architecture/logical/structure/memo_logical_structure.md#faultcontainmentregion) | `part def` | Fault containment region definition specializing `MemoPart`. |
 
 

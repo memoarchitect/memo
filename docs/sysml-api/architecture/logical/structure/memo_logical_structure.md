@@ -34,7 +34,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`FlowContentKind`](#flowcontentkind) | `enum def` | What a logical connection carries: information and control, but also energy, material, fluid, and mechanical force (§10). | — |
+| [`FlowContentKind`](#flowcontentkind) | `enum def` | What a logical connection carries: information and control, but also energy, material, fluid, and mechanical force. | — |
 | [`ChannelRoleKind`](#channelrolekind) | `enum def` | Controlled values for channel role: `primary`, `secondary`, `redundant`, `diverse`, `monitor`, `watchdog`, `interlock`, `independentProtection`. | — |
 | [`ComponentRoleKind`](#componentrolekind) | `enum def` | Controlled values for component role: `channel`, `dataStore`, `controlElement`, `userInterface`, `externalSystem`, `generic`. | — |
 | [`SystemTypeKind`](#systemtypekind) | `enum def` | The discipline a logical block is realized in. Orthogonal to `componentRole`: a subsystem may be software, a system may be hardware, and a block whose realization is not yet decided stays `logical`. This does NOT relocate the element.… | — |
@@ -50,7 +50,7 @@
 | [`LogicalExchange`](#logicalexchange) | `flow def` | Typed relationship for logical exchange. | — |
 | [`LogicalTransfer`](#logicaltransfer) | `flow def` | The concrete exchange a model types its logical flows by; the ends stay untyped for the reason above. | `LogicalExchange` |
 | [`LogicalBehavior`](#logicalbehavior) | `part def` | States and modes of the logical solution (kept distinct from UI state and from physical device configuration). | `MemoPart` |
-| [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries (§10). | `MemoPart` |
+| [`IsolationBoundary`](#isolationboundary) | `part def` | Isolation, fault containment, and trust boundaries. | `MemoPart` |
 | [`FaultContainmentRegion`](#faultcontainmentregion) | `part def` | Fault containment region definition specializing `MemoPart`. | `MemoPart` |
 | [`IndependentOf`](#independentof) | `connection def` | Claimed independence between channels (common-cause defense). | `MemoRelationship` |
 
@@ -62,7 +62,7 @@ enum def FlowContentKind
 
 | Property | Value |
 | --- | --- |
-| Description | What a logical connection carries: information and control, but also energy, material, fluid, and mechanical force (§10). |
+| Description | What a logical connection carries: information and control, but also energy, material, fluid, and mechanical force. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -302,7 +302,7 @@ part def IsolationBoundary specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | Isolation, fault containment, and trust boundaries (§10). |
+| Description | Isolation, fault containment, and trust boundaries. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -344,8 +344,8 @@ connection def IndependentOf :> MemoRelationship
 ??? code "architecture/logical/structure/memo_logical_structure.sysml"
 
     ```sysml
-    // Logical architecture (§10). Technology-independent structure: what parts of
-    // the solution exist and how they interact, before committing to software,
+    // Logical architecture. Technology-independent structure: what parts of the
+    // solution exist and how they interact, before committing to software,
     // electronics, or mechanics. Redundancy is expressed by typed channel roles
     // plus independence constraints — never by duplicating identically named
     // components.
@@ -359,7 +359,7 @@ connection def IndependentOf :> MemoRelationship
         private import memo_architecture_logical_interfaces::Interface;
 
         // What a logical connection carries: information and control, but also
-        // energy, material, fluid, and mechanical force (§10).
+        // energy, material, fluid, and mechanical force.
         enum def FlowContentKind {
             enum information;
             enum command;
@@ -536,19 +536,16 @@ connection def IndependentOf :> MemoRelationship
         //         attribute :>> contentKind = FlowContentKind::measurement;
         //     }
         //
-        // It was a `part def` holding `sourcePort`, `targetPort` and
-        // `exchangedItem` refs. No example set either port, so no exchange said
-        // what it connected. The flow's ends are those ports now,
-        // and its payload the item feature on them. `direction` is not carried
-        // over: the ports say `in` and `out`, and a second writable direction is
-        // the duplicate §8 of the architecture plan forbids.
+        // The flow's ends are those ports, and its payload the item feature on
+        // them. It declares no `direction`: the ports say `in` and `out`, and a
+        // second writable direction would be a duplicate.
         //
-        // The ends are not restricted to `LogicalPort`. Two of the three examples
-        // move a specimen or a force between hardware parts, and a flow def that
-        // named `LogicalPort` ends would have refused them. `payload` is not
-        // declared either: `of <type>` on a usage of a flow def that declares a
-        // feature is not distinguishable (namespace distinguishability) from the
-        // library's own `payload`, so the payload lives on the ports.
+        // The ends are not restricted to `LogicalPort`. A flow may move a specimen
+        // or a force between hardware parts, and a flow def that named
+        // `LogicalPort` ends would refuse it. `payload` is not declared either: `of
+        // <type>` on a usage of a flow def that declares a feature is not
+        // distinguishable (namespace distinguishability) from the library's own
+        // `payload`, so the payload lives on the ports.
         abstract flow def LogicalExchange {
             attribute contentKind : FlowContentKind;
             attribute latencyRequirement : String;
@@ -568,7 +565,7 @@ connection def IndependentOf :> MemoRelationship
             attribute executionSemantics : String;
         }
 
-        // Isolation, fault containment, and trust boundaries (§10).
+        // Isolation, fault containment, and trust boundaries.
         part def IsolationBoundary specializes MemoPart {
             attribute boundaryKind : String;
             attribute isolationMechanism : String;
@@ -589,8 +586,8 @@ connection def IndependentOf :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = independentOfLinks meta SysML::Usage;
         }
-        // `MonitorsChannel` is native `dependency` (R10-S6): write
-        // `dependency <monitorChannel> to <monitoredComponent>;` instead.
+        // A channel monitoring a component is a native `dependency`: write
+        // `dependency <monitorChannel> to <monitoredComponent>;`.
 
     }
 

@@ -1,9 +1,4 @@
 // Focused example: a ROS 2 mobile logistics robot, modelled with the ROS
-    private import memo_core_stdlib_quantities::*;
-    private import memo_assurance_requirements_needs::*;
-    private import memo_core_dimensions::*;
-    private import memo_assurance_requirements::*;
-    private import memo_assurance_verification_validation::*;
 // extension. The point of the example is the MECHANISM, not the robot — it
 // demonstrates how an extension is used, and it is deliberately the only place
 // ROS vocabulary appears outside `extensions/ros`.
@@ -18,22 +13,14 @@
 //      `DeploysTo`, `ProvidesEnvironment` — with no ROS-specific relation
 //      anywhere in the chain.
 package memo_examples_ros_mobile_robot {
+    private import memo::*;
     private import ScalarValues::*;
     private import ModelingMetadata::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_core_relationships::*;
-    private import memo_architecture_implementation_software_structure::*;
-    private import memo_architecture_implementation_software_runtime::*;
-    private import memo_architecture_functional_behavior::*;
-    private import memo_architecture_realization_deployment::*;
-    private import memo_architecture_realization_physical::*;
     private import memo_extension_messaging::*;
     private import memo_extension_container::*;
     private import memo_extension_ros::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part def RosMobileRobotSystem specializes memo_architecture_logical_structure::System {
         attribute :>> systemBoundaryDescription = "The ROS mobile robot: the system this example models, with the software and hardware that realize it.";
     }
@@ -55,31 +42,31 @@ package memo_examples_ros_mobile_robot {
     }
 
     item topicScan : LaserScan {
-        @MemoIdentity { :>> providedId = "RMR-TP-001"; :>> label = "ScanTopic"; }
+        @MemoIdentity { :>> providedId = "RMR-TP-001"; :>> label = "Scan topic"; }
     }
     item topicCmdVel : VelocityCommand {
-        @MemoIdentity { :>> providedId = "RMR-TP-002"; :>> label = "CmdVelTopic"; }
+        @MemoIdentity { :>> providedId = "RMR-TP-002"; :>> label = "Cmd vel topic"; }
     }
     item topicEstop : EmergencyStop {
-        @MemoIdentity { :>> providedId = "RMR-TP-003"; :>> label = "EmergencyStopTopic"; }
+        @MemoIdentity { :>> providedId = "RMR-TP-003"; :>> label = "Emergency stop topic"; }
     }
 
     // ── Code ────────────────────────────────────────────────────────────
     part swPerception : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::unit;
-        @MemoIdentity { :>> providedId = "RMR-SW-001"; :>> label = "PerceptionStack"; }
+        @MemoIdentity { :>> providedId = "RMR-SW-001"; :>> label = "Perception stack"; }
         attribute :>> responsibility = "Lidar driver and obstacle segmentation.";
         attribute :>> safetyClass = SafetyClassKind::B;
     }
     part swNavigation : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::unit;
-        @MemoIdentity { :>> providedId = "RMR-SW-002"; :>> label = "NavigationStack"; }
+        @MemoIdentity { :>> providedId = "RMR-SW-002"; :>> label = "Navigation stack"; }
         attribute :>> responsibility = "Global and local planning; velocity command generation.";
         attribute :>> safetyClass = SafetyClassKind::B;
     }
     part swSafety : SoftwareModule {
         attribute :>> moduleKind = ModuleKind::unit;
-        @MemoIdentity { :>> providedId = "RMR-SW-003"; :>> label = "SafetyMonitor"; }
+        @MemoIdentity { :>> providedId = "RMR-SW-003"; :>> label = "Safety monitor"; }
         attribute :>> responsibility = "Independent watchdog: stops the base on obstacle proximity or missing heartbeat.";
         attribute :>> safetyClass = SafetyClassKind::C;
     }
@@ -92,7 +79,7 @@ package memo_examples_ros_mobile_robot {
     // is exactly what an extension type must NOT decide for the modeller.
     part nodeLidar : RosNode {
         attribute :>> runtimeKind = RuntimeKind::thread;
-        @MemoIdentity { :>> providedId = "RMR-ND-001"; :>> label = "LidarDriverNode"; }
+        @MemoIdentity { :>> providedId = "RMR-ND-001"; :>> label = "LiDAR driver node"; }
         attribute :>> nodeNamespace = "/robot/perception";
         attribute :>> lifecycleManaged = true;
         attribute :>> executorModel = "single-threaded executor, composed";
@@ -113,7 +100,7 @@ package memo_examples_ros_mobile_robot {
     }
     part nodeNavigation : RosNode {
         attribute :>> runtimeKind = RuntimeKind::thread;
-        @MemoIdentity { :>> providedId = "RMR-ND-002"; :>> label = "NavigationNode"; }
+        @MemoIdentity { :>> providedId = "RMR-ND-002"; :>> label = "Navigation node"; }
         attribute :>> nodeNamespace = "/robot/navigation";
         attribute :>> lifecycleManaged = true;
         attribute :>> executorModel = "multi-threaded executor, composed";
@@ -162,7 +149,7 @@ package memo_examples_ros_mobile_robot {
     }
     part nodeSafetyMonitor : RosNode {
         attribute :>> runtimeKind = RuntimeKind::process;
-        @MemoIdentity { :>> providedId = "RMR-ND-003"; :>> label = "SafetyMonitorNode"; }
+        @MemoIdentity { :>> providedId = "RMR-ND-003"; :>> label = "Safety monitor node"; }
         attribute :>> nodeNamespace = "/robot/safety";
         attribute :>> lifecycleManaged = false;
         attribute :>> executorModel = "own process, real-time priority";
@@ -223,35 +210,35 @@ package memo_examples_ros_mobile_robot {
     // ── Native topic, service, and action interfaces ───────────────────
     interface scanToNavigation : RosTopicInterface
         connect nodeLidar.scanPublisher to nodeNavigation.scanSubscriber {
-            attribute :>> direction = DirectionKind::output;
-        }
+        attribute :>> direction = DirectionKind::output;
+    }
     interface scanToSafety : RosTopicInterface
         connect nodeLidar.scanPublisher to nodeSafetyMonitor.scanSubscriber {
-            attribute :>> direction = DirectionKind::output;
-        }
+        attribute :>> direction = DirectionKind::output;
+    }
     interface cmdVelToSafety : RosTopicInterface
         connect nodeNavigation.cmdVelPublisher to nodeSafetyMonitor.cmdVelSubscriber {
-            attribute :>> direction = DirectionKind::output;
-        }
+        attribute :>> direction = DirectionKind::output;
+    }
     interface estopToNavigation : RosTopicInterface
         connect nodeSafetyMonitor.estopPublisher to nodeNavigation.estopSubscriber {
-            attribute :>> direction = DirectionKind::output;
-        }
+        attribute :>> direction = DirectionKind::output;
+    }
 
 
     interface setModeService : RosServiceInterface
         connect nodeNavigation.setModeClient to nodeSafetyMonitor.setModeServer {
-            attribute :>> direction = DirectionKind::inputOutput;
-            attribute :>> timeoutMs = 500 [milli*s];
-        }
+        attribute :>> direction = DirectionKind::inputOutput;
+        attribute :>> timeoutMs = 500 [milli*s];
+    }
     interface navigateAction : RosActionInterface
         connect nodeSafetyMonitor.navigateActionClient to nodeNavigation.navigateActionServer {
-            attribute :>> direction = DirectionKind::inputOutput;
-        }
+        attribute :>> direction = DirectionKind::inputOutput;
+    }
 
     // ── Deployment: base relations, unchanged ───────────────────────────
     part imageRuntime : RosContainerImage {
-        @MemoIdentity { :>> providedId = "RMR-DU-001"; :>> label = "RobotRuntimeImage"; }
+        @MemoIdentity { :>> providedId = "RMR-DU-001"; :>> label = "Robot runtime image"; }
         attribute :>> unitKind = "OCI container image";
         attribute :>> imageReference = "registry.example.com/robot-runtime:2.3.0";
         attribute :>> registry = "registry.example.com";
@@ -262,7 +249,7 @@ package memo_examples_ros_mobile_robot {
         attribute :>> integrityProtection = "image signature + SBOM attestation";
     }
     part imageSafety : RosContainerImage {
-        @MemoIdentity { :>> providedId = "RMR-DU-002"; :>> label = "SafetyMonitorImage"; }
+        @MemoIdentity { :>> providedId = "RMR-DU-002"; :>> label = "Safety monitor image"; }
         attribute :>> unitKind = "OCI container image";
         attribute :>> imageReference = "registry.example.com/safety-monitor:2.3.0";
         attribute :>> registry = "registry.example.com";
@@ -277,7 +264,7 @@ package memo_examples_ros_mobile_robot {
     allocation : BuildsInto allocate swSafety to imageSafety;
 
     part nodeComputeUnit : ProcessingNode {
-        @MemoIdentity { :>> providedId = "RMR-HW-001"; :>> label = "OnboardComputeUnit"; }
+        @MemoIdentity { :>> providedId = "RMR-HW-001"; :>> label = "Onboard compute unit"; }
         attribute :>> nodeKind = ProcessingNodeKind::SoC;
         attribute :>> processorArchitecture = "arm64, 8 core";
         attribute :>> memoryMB = 16384 [mega*B];
@@ -293,7 +280,7 @@ package memo_examples_ros_mobile_robot {
     }
 
     part rosRuntime : RosContainerRuntime {
-        @MemoIdentity { :>> providedId = "RMR-RT-001"; :>> label = "OnboardRosRuntime"; }
+        @MemoIdentity { :>> providedId = "RMR-RT-001"; :>> label = "Onboard ROS runtime"; }
         attribute :>> environmentKind = "container runtime";
         attribute :>> osOrRtos = "Linux with PREEMPT_RT";
         attribute :>> orchestrationPlatform = "systemd-managed compose, no cluster orchestrator";
@@ -305,54 +292,54 @@ package memo_examples_ros_mobile_robot {
         // single node.
         attribute :>> rosDomainId = 42;
     }
-    connection : ProvidesEnvironment connect node ::> nodeComputeUnit to environment ::> rosRuntime;
+    connection : ProvidesEnvironment connect nodeComputeUnit to rosRuntime;
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification vcAuthoredSwSafety : VerificationCase {
-        @MemoIdentity { :>> providedId = "RMR-VC-A01"; :>> label = "VerifySafetyMonitor"; }
+        @MemoIdentity { :>> providedId = "RMR-VC-A01"; :>> label = "Verify safety monitor"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
-        attribute :>> acceptanceCriteria = "unit, integration and system tests of 'SafetyMonitor' with the coverage IEC 62304 requires for software safety class C";
+        attribute :>> acceptanceCriteria = "unit, integration and system tests of 'Safety monitor' with the coverage IEC 62304 requires for software safety class C";
         subject verified : Base::Anything[*] = (swSafety);
     }
     // Illustrative: authored for this example, not the record of a real test run.
     part evAuthoredVcAuthoredSwSafety : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
-        @MemoIdentity { :>> providedId = "RMR-EV-A01"; :>> label = "VerifySafetyMonitor report"; }
+        @MemoIdentity { :>> providedId = "RMR-EV-A01"; :>> label = "Verify safety monitor report"; }
         attribute :>> evidenceType = "test report";
         attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
     }
-    connection : ProducesEvidence connect producer ::> vcAuthoredSwSafety to producedEvidence ::> evAuthoredVcAuthoredSwSafety;
+    connection : ProducesEvidence connect vcAuthoredSwSafety to evAuthoredVcAuthoredSwSafety;
     // Illustrative: authored for this example.
     requirement reqAuthoredSwPerception : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "RMR-REQ-A01"; :>> label = "PerceptionStack requirement"; }
-        attribute :>> statement = "The software item PerceptionStack shall perform the function allocated to it in the software architecture.";
+        @MemoIdentity { :>> providedId = "RMR-REQ-A01"; :>> label = "Perception stack requirement"; }
+        doc /* The software item PerceptionStack shall perform the function allocated to it in the software architecture. */
         attribute :>> status = ElementStatusKind::draft;
     }
     satisfy reqAuthoredSwPerception by swPerception;
     // Illustrative: authored for this example.
     requirement reqAuthoredSwNavigation : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "RMR-REQ-A02"; :>> label = "NavigationStack requirement"; }
-        attribute :>> statement = "The software item NavigationStack shall perform the function allocated to it in the software architecture.";
+        @MemoIdentity { :>> providedId = "RMR-REQ-A02"; :>> label = "Navigation stack requirement"; }
+        doc /* The software item NavigationStack shall perform the function allocated to it in the software architecture. */
         attribute :>> status = ElementStatusKind::draft;
     }
     satisfy reqAuthoredSwNavigation by swNavigation;
     // Illustrative: authored for this example.
     requirement reqAuthoredSwSafety : Requirement {
         attribute :>> requirementType = RequirementTypeKind::system;
-        @MemoIdentity { :>> providedId = "RMR-REQ-A03"; :>> label = "SafetyMonitor requirement"; }
-        attribute :>> statement = "The software item SafetyMonitor shall perform the function allocated to it in the software architecture.";
+        @MemoIdentity { :>> providedId = "RMR-REQ-A03"; :>> label = "Safety monitor requirement"; }
+        doc /* The software item SafetyMonitor shall perform the function allocated to it in the software architecture. */
         attribute :>> status = ElementStatusKind::draft;
     }
     satisfy reqAuthoredSwSafety by swSafety;
     // Illustrative: authored for this example.
     requirement needAuthoredSafeOperation : Need {
         attribute :>> needKind = NeedKind::'stakeholder';
-        @MemoIdentity { :>> providedId = "RMR-NEED-A01"; :>> label = "SafeOperation"; }
-        attribute :>> statement = "The device shall operate safely and as intended.";
+        @MemoIdentity { :>> providedId = "RMR-NEED-A01"; :>> label = "Safe operation"; }
+        doc /* The device shall operate safely and as intended. */
         attribute :>> priority = "high";
     }
-    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwPerception;
-    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwNavigation;
-    connection : DerivesFrom connect sourceDriver ::> needAuthoredSafeOperation to targetRequirement ::> reqAuthoredSwSafety;
+    connection : DerivesFrom connect needAuthoredSafeOperation to reqAuthoredSwPerception;
+    connection : DerivesFrom connect needAuthoredSafeOperation to reqAuthoredSwNavigation;
+    connection : DerivesFrom connect needAuthoredSafeOperation to reqAuthoredSwSafety;
 }

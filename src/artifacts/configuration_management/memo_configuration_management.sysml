@@ -15,15 +15,17 @@ package memo_artifacts_configuration_management {
     }
 
     part def ConfigurationItem :> MemoPart {
-        // No version and no baseline: both belong to a release of the item, not to the item
-        // (plan O2). A `ReleaseRecord` whose `#ReleaseOf` is this item carries them.
+        // No version and no baseline: both belong to a release of the item, not
+        // to the item. A `ReleaseRecord` whose `#ReleaseOf` is this item
+        // carries them.
         attribute controlLevel : String;
     }
 
-    // A release record is one release of one item: rev D and rev E of a part, or its EU and its US
-    // release, are separate records, each with its own part number and revision (plan O2). The
-    // definition of the item is held once and carries no revision. The record is an element with a
-    // status (inherited from MemoPart: proposed, draft, ... released), so a release moves through
+    // A release record is one release of one item: rev D and rev E of a part,
+    // or its EU and its US release, are separate records, each with its own
+    // part number and revision. The definition of the item is held once and
+    // carries no revision. The record is an element with a status (inherited
+    // from MemoPart: proposed, draft, ... released), so a release moves through
     // the lifecycle the way any element does.
     //
     //   part relPumpD : ReleaseRecord {
@@ -66,9 +68,11 @@ package memo_artifacts_configuration_management {
         doc /* `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. */
     }
 
-    // A regulated device is one approval in one jurisdiction (plan O6): the thing a regulator is asked to
-    // clear. It is not an item and not a release: it COVERS the system releases the approval names, so two
-    // markets can ship different releases of one system, each with its own design history and risk file.
+    // A regulated device is one approval in one jurisdiction: the thing a
+    // regulator is asked to clear. It is not an item and not a release: it
+    // COVERS the system releases the approval names, so two markets can ship
+    // different releases of one system, each with its own design history and
+    // risk file.
     //
     //   part deviceFda : RegulatedDevice {
     //       attribute :>> jurisdiction = RegulatoryRegimeKind::FDA_510k;
@@ -76,20 +80,22 @@ package memo_artifacts_configuration_management {
     //   }
     //   #Covers dependency from deviceFda to relPumpD;
     //
-    // The jurisdiction is a `RegulatoryRegimeKind`, the same enum the standards library and the document
-    // templates (`required_for`) are written against, so a device selects the standards it must meet and the
-    // documents it must have. It replaces `ModelMethodBinding.regulatoryRegime`, which stated one regime set
-    // for a whole model and is read only when the model declares no device.
+    // The jurisdiction is a `RegulatoryRegimeKind`, the same enum the standards
+    // library and the document templates (`required_for`) are written against,
+    // so a device selects the standards it must meet and the documents it must
+    // have. `ModelMethodBinding.regulatoryRegime` states one regime set for a
+    // whole model and is read only when the model declares no device.
     //
-    // The device's other two links (plan O6), both typed dependencies like `Covers`:
+    // The device's other two links, both typed dependencies like `Covers`:
     //
     //   #IntendedUseOf dependency from pumpIntendedUse to deviceFda;
     //   #UsedWith dependency from deviceFda to deviceInfusionSet;
     //
-    // `IntendedUseOf` runs from the intended use (a `requirement def`, `IntendedUse`) to the device, as its
-    // name reads; a device can have one per indication. `UsedWith` runs between regulated devices: the
-    // compatible devices and accessories that are themselves approved. An accessory that is not a device is
-    // not a target (decided 2026-10-25, user).
+    // `IntendedUseOf` runs from the intended use (a `requirement def`,
+    // `IntendedUse`) to the device, as its name reads; a device can have one
+    // per indication. `UsedWith` runs between regulated devices: the compatible
+    // devices and accessories that are themselves approved. An accessory that
+    // is not a device is not a target.
     part def RegulatedDevice :> MemoPart {
         attribute jurisdiction : RegulatoryRegimeKind[1];
         attribute submissionId : String[0..1];
@@ -105,10 +111,12 @@ package memo_artifacts_configuration_management {
         doc /* `#UsedWith dependency from <device> to <device>, <device>;` The device is used with these regulated devices (compatible devices and approved accessories). */
     }
 
-    // A project is a change set in an iteration (plan O7): the work that produces releases. It holds a link to
-    // where the work is tracked and nothing else; the merge request is the approval. It FEEDS the release records
-    // it contributes to, and a variant records the project that introduced it, so "which work gave us this
-    // option, and which releases did it reach" is two links.
+    // A project is a change set in an iteration: the work that produces
+    // releases. It holds a link to where the work is tracked and nothing else;
+    // the merge request is the approval. It FEEDS the release records it
+    // contributes to, and a variant records the project that introduced it, so
+    // "which work gave us this option, and which releases did it reach" is two
+    // links.
     //
     //   part prjIrrigatedTip : Project { attribute :>> trackerLink = "https://tracker.example/PRJ-12"; }
     //   #Feeds dependency from prjIrrigatedTip to relGeneratorEu, relGeneratorUs;

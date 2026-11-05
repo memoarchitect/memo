@@ -52,8 +52,8 @@ part def OpticalComponent specializes PhysicalComponent
 ??? code "architecture/implementation/hardware/optical/memo_hardware_optical.sysml"
 
     ```sysml
-    // Optical realization subgroup (§12). Light-path parts specialize the physical
-    // roots in memo_architecture_implementation_hardware_common.
+    // Optical realization subgroup. Light-path parts specialize the physical roots
+    // in memo_architecture_implementation_hardware_common.
     package memo_architecture_implementation_hardware_optical {
         private import ScalarValues::*;
         private import memo_architecture_implementation_hardware_common::*;

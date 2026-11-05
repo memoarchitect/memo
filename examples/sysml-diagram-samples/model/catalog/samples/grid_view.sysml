@@ -1,21 +1,15 @@
 package memo_examples_sysml_diagram_samples_samples_grid_view {
+    private import memo::*;
     // Grid sample (grid view kind, `fmea` diagram type). The grid template groups
     // rows by kind and derives columns from whichever attributes the rows
     // actually carry — no fixed schema, so three FailureMode rows render as one
     // FMEA worksheet table.
     private import ScalarValues::*;
 
-    private import memo_assurance_safety_risk_analysis::*;
-    private import memo_core_relationships::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
 
     item fmMotorRunaway : FailureMode {
-@MemoIdentity { :>> label = "PumpMotorRunaway"; }
+        @MemoIdentity { :>> label = "Pump motor runaway"; }
         attribute :>> failureModeKind = FailureModeKind::unintendedFunction;
         attribute :>> effect = "Excess drug delivered beyond the prescribed rate.";
         attribute :>> severityRating = 1;
@@ -26,7 +20,7 @@ package memo_examples_sysml_diagram_samples_samples_grid_view {
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     item fmAirSensorSilent : FailureMode {
-@MemoIdentity { :>> label = "AirSensorFailsSilent"; }
+        @MemoIdentity { :>> label = "Air sensor fails silent"; }
         attribute :>> failureModeKind = FailureModeKind::lossOfFunction;
         attribute :>> effect = "Air embolism reaches the patient undetected.";
         attribute :>> severityRating = 1;
@@ -37,7 +31,7 @@ package memo_examples_sysml_diagram_samples_samples_grid_view {
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     item fmOcclusionDrift : FailureMode {
-@MemoIdentity { :>> label = "OcclusionSensorDrift"; }
+        @MemoIdentity { :>> label = "Occlusion sensor drift"; }
         attribute :>> failureModeKind = FailureModeKind::degradedFunction;
         attribute :>> effect = "Occlusion is detected late, interrupting therapy.";
         attribute :>> severityRating = 7;

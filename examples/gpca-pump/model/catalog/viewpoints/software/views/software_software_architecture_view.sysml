@@ -1,25 +1,12 @@
 package memo_examples_gpca_pump_viewpoints_software_views_software_software_architecture_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_context_context_viewpoint::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_viewpoints_software_software_viewpoint::*;
-    private import memo_viewpoints_physical_physical_viewpoint::*;
-    private import memo_viewpoints_requirements_requirements_viewpoint::*;
-    private import memo_viewpoints_risk_risk_viewpoint::*;
-    private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view gpcaSoftwareArchitectureView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_software_views_software_software_architecture_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-SW-101"; :>> label = "GPCA_SoftwareArchitectureView"; }
-        @MemoIdentity { :>> shortDescription = "The eight AADL GPCA_SW.Impl subcomponents, top-level ports, and the full inter-component connection topology."; }
+        @MemoIdentity { :>> providedId = "VIEW-SW-101"; :>> label = "GPCA_SoftwareArchitectureView"; :>> shortDescription = "The eight AADL GPCA_SW.Impl subcomponents, top-level ports, and the full inter-component connection topology."; }
         doc /* Top_Level_Mode, System_Status, Alarm, Config, Infusion_Manager, System_Monitor, Logging, and OutputBus inside the GPCA_Software system, wired per GPCA_SW.Impl with the seven top-level ports (OP_CMD_IN, PRES_IN, PATIENT_IN, SENSOR_IN, CONST_IN, DB_IN, GPCA_SW_OUT). Connections are synchronous with AADL immediate port semantics. */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::internalDiagram);

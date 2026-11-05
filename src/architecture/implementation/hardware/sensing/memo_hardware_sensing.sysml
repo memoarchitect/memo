@@ -1,5 +1,5 @@
-// Sensing / actuation realization subgroup (§12). Transducers that measure or
-// act on the physical world specialize the physical roots in
+// Sensing / actuation realization subgroup. Transducers that measure or act on
+// the physical world specialize the physical roots in
 // memo_architecture_implementation_hardware_common.
 package memo_architecture_implementation_hardware_sensing {
     private import ScalarValues::*;

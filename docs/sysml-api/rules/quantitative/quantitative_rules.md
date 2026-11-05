@@ -27,7 +27,6 @@
 | private | `memo_core_consistency_rules::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -112,7 +111,6 @@ constraint def ModelConstraintHoldsRule :> MemoConsistencyRule
         private import memo_core_enumerations::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         constraint def HazardMaxControlsRule :> MemoConsistencyRule {
             @MemoIdentity { :>> providedId = "QT-001"; }
             attribute tailoring = RuleTailoringKind::assurance;

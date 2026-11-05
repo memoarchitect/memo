@@ -6,33 +6,9 @@
 // root package is declared once, in one file, so a shared `diagram_samples`
 // package cannot be split across the sample files themselves.
 package diagram_samples {
+    private import memo::*;
     private import ScalarValues::*;
-    private import memo_core_relationships::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_core_enumerations::*;
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    private import memo_architecture_operational_context_actors::*;
-    private import memo_architecture_operational_use_cases::*;
-    private import memo_architecture_operational_structure::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_architecture_operational_context_use_context::*;
-    private import memo_viewpoints_context_context_viewpoint::*;
-    private import memo_assurance_safety_risk_analysis::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_architecture_operational_activities::*;
-    private import memo_assurance_requirements_needs::*;
-    private import memo_assurance_requirements::*;
-    private import memo_viewpoints_requirements_requirements_viewpoint::*;
     private import activity_example::*;
-    private import memo_architecture_functional_behavior::*;
-    private import memo_architecture_implementation_hardware_structure::*;
-    private import memo_architecture_realization_physical::*;
-    private import memo_viewpoints_physical_physical_viewpoint::*;
     private import memo_examples_sysml_diagram_samples_samples_action_flow_view::laneA;
     private import memo_examples_sysml_diagram_samples_samples_action_flow_view::laneB;
     private import memo_examples_sysml_diagram_samples_samples_action_flow_view::sampleActionFlow;

@@ -6,10 +6,9 @@
 // of a requirement. Keeping both in one file makes the cross-axis story easy
 // to read, and easy to extend from the traceability view's editor.
 package memo_examples_nested_architecture_dsm_traces {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_core_relationships::*;
     private import memo_examples_nested_architecture_dsm_architecture_functional_functions::*;
     private import memo_examples_nested_architecture_dsm_architecture_logical_structure::*;
     private import memo_examples_nested_architecture_dsm_assurance_requirements::*;

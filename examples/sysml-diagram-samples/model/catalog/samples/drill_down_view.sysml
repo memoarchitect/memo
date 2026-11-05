@@ -1,12 +1,6 @@
 package memo_examples_sysml_diagram_samples_samples_drill_down_view {
-    private import memo_core_relationships::*;
-    private import memo_core_enumerations::*;
+    private import memo::*;
     private import ScalarValues::*;
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
 
     // Parts and actions that are TYPED by a definition, so each way into a
     // lower level can be tried on its own. The overview draws only the usages;
@@ -30,11 +24,11 @@ package memo_examples_sysml_diagram_samples_samples_drill_down_view {
             in port torqueIn : DataPort { in item payload : MemoItem; }
             out port torqueOut : DataPort { out item payload : MemoItem; }
         }
-            connection : LogicalConnector connect sourceComponent ::> inputStage to targetComponent ::> outputStage {
+        connection : LogicalConnector connect inputStage to outputStage {
             attribute :>> contentKind = FlowContentKind::energy;
             attribute :>> direction = DirectionKind::output;
         }
-}
+    }
 
     part def DrillMotor specializes LogicalComponent {
         in port powerIn : DataPort { in item payload : MemoItem; }
@@ -48,11 +42,11 @@ package memo_examples_sysml_diagram_samples_samples_drill_down_view {
                 in port currentIn : DataPort { in item payload : MemoItem; }
             }
         }
-            connection : LogicalConnector connect sourceComponent ::> stator.windings to targetComponent ::> rotor {
+        connection : LogicalConnector connect stator.windings to rotor {
             attribute :>> contentKind = FlowContentKind::energy;
             attribute :>> direction = DirectionKind::output;
         }
-}
+    }
 
     part def DrillController specializes LogicalComponent {
         in port commandIn : DataPort { in item payload : MemoItem; }
@@ -63,18 +57,18 @@ package memo_examples_sysml_diagram_samples_samples_drill_down_view {
         part gearbox : DrillGearbox;
         part motor : DrillMotor;
         part controller : DrillController;
-            connection : LogicalConnector connect sourceComponent ::> controller to targetComponent ::> motor {
+        connection : LogicalConnector connect controller to motor {
             attribute :>> contentKind = FlowContentKind::command;
             attribute :>> direction = DirectionKind::output;
         }
-        connection : LogicalConnector connect sourceComponent ::> motor to targetComponent ::> gearbox {
+        connection : LogicalConnector connect motor to gearbox {
             attribute :>> contentKind = FlowContentKind::energy;
             attribute :>> direction = DirectionKind::output;
         }
-}
+    }
 
     part drive : DrillDrive {
-@MemoIdentity { :>> label = "Drive"; }
+        @MemoIdentity { :>> label = "Drive"; }
     }
 
     // The same two cases for an action flow: calibrate has an authored child

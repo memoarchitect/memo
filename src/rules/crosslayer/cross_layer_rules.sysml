@@ -7,7 +7,6 @@ package memo_rules_crosslayer {
     private import memo_core_enumerations::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     private import memo_artifacts_standards_traceability::EnforcesClause;
     private import memo_artifacts_standards_iec_62304::*;
     private import memo_artifacts_standards_iso_14971::*;

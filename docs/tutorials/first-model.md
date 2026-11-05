@@ -100,8 +100,7 @@ package temperature_alarm {
     requirement maintainSafePatientTemperature : Need {
         attribute :>> id = "NEED-001";
         attribute :>> needKind = NeedKind::stakeholder;
-        attribute :>> statement =
-            "The clinician needs to maintain the patient's temperature within a safe range.";
+        doc /* The clinician needs to maintain the patient's temperature within a safe range. */
     }
 }
 ```
@@ -137,8 +136,7 @@ workflow; the scenario records the event that makes the workflow relevant.
 
     // The workflow direction: observe status, then respond to the alert.
     connection : Precedes
-        connect predecessor ::> monitorTemperatureStatus
-        to successor ::> respondToTemperatureAlert;
+        connect monitorTemperatureStatus to respondToTemperatureAlert;
 ```
 
 This workflow describes people and clinical work. It gives the next layer a
@@ -182,8 +180,7 @@ Add this snippet above the closing `}`. It uses the **event-driven EARS** form:
     requirement alarmAboveLimit : Requirement {
         attribute :>> id = "REQ-001";
         attribute :>> requirementKind = RequirementKind::system;
-        attribute :>> statement =
-            "When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds.";
+        doc /* When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
         attribute :>> obligation = ObligationKind::shall;
@@ -195,13 +192,11 @@ Add this snippet above the closing `}`. It uses the **event-driven EARS** form:
 
     // Preserve the clinical rationale for this requirement.
     connection : DerivesFrom
-        connect sourceDriver ::> maintainSafePatientTemperature
-        to targetRequirement ::> alarmAboveLimit;
+        connect maintainSafePatientTemperature to alarmAboveLimit;
 
     // The functional response that satisfies the system requirement.
     connection : SatisfiedBy
-        connect requiredElement ::> alarmAboveLimit
-        to satisfyingElement ::> evaluateTemperature;
+        connect alarmAboveLimit to evaluateTemperature;
 ```
 
 EARS creates a consistent sentence pattern. SOPHIST adds a quality check:
@@ -242,25 +237,21 @@ to the function that they concern.
 
     // Allocate the evaluation function to its software realization.
     connection : AllocatedTo
-        connect function ::> evaluateTemperature
-        to allocatedElement ::> temperatureEvaluationSoftware;
+        connect evaluateTemperature to temperatureEvaluationSoftware;
 
     // Allocate the evaluation function to its sensing hardware.
     connection : AllocatedTo
-        connect function ::> evaluateTemperature
-        to allocatedElement ::> temperatureSensorAssembly;
+        connect evaluateTemperature to temperatureSensorAssembly;
 
     // State which control reduces this particular hazard.
     connection : Mitigates {
         attribute :>> mitigationKind = MitigationKind::hazard;
-        connect control ::> independentAlarmCheck
-        to mitigatedElement ::> missedHighTemperature;
+        connect independentAlarmCheck to missedHighTemperature;
     }
 
     // State which function implements the risk-control behavior.
     connection : ControlImplementedBy
-        connect riskControl ::> independentAlarmCheck
-        to implementingElement ::> evaluateTemperature;
+        connect independentAlarmCheck to evaluateTemperature;
 ```
 
 The function, hazard, and control are separate model elements because they
@@ -289,8 +280,7 @@ planned check and connects it to the requirement it evaluates.
 
     // Connect the function to the test that will verify its behavior.
     connection : VerifiedBy
-        connect verificationTarget ::> evaluateTemperature
-        to verificationCase ::> highTemperatureAlarmTest;
+        connect evaluateTemperature to highTemperatureAlarmTest;
 ```
 
 Verification turns the requirement into a checkable engineering claim. The
@@ -317,8 +307,7 @@ package temperature_alarm {
     requirement maintainSafePatientTemperature : Need {
         attribute :>> id = "NEED-001";
         attribute :>> needKind = NeedKind::stakeholder;
-        attribute :>> statement =
-            "The clinician needs to maintain the patient's temperature within a safe range.";
+        doc /* The clinician needs to maintain the patient's temperature within a safe range. */
     }
 
     // The clinician observes the patient's current temperature.
@@ -343,8 +332,7 @@ package temperature_alarm {
 
     // The workflow direction: observe status, then respond to the alert.
     connection : Precedes
-        connect predecessor ::> monitorTemperatureStatus
-        to successor ::> respondToTemperatureAlert;
+        connect monitorTemperatureStatus to respondToTemperatureAlert;
 
     // Determines whether the measured temperature is inside the safe range.
     part evaluateTemperature : SystemFunction {
@@ -360,8 +348,7 @@ package temperature_alarm {
     requirement alarmAboveLimit : Requirement {
         attribute :>> id = "REQ-001";
         attribute :>> requirementKind = RequirementKind::system;
-        attribute :>> statement =
-            "When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds.";
+        doc /* When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
         attribute :>> obligation = ObligationKind::shall;
@@ -400,39 +387,32 @@ package temperature_alarm {
 
     // Preserve the clinical rationale for this requirement.
     connection : DerivesFrom
-        connect sourceDriver ::> maintainSafePatientTemperature
-        to targetRequirement ::> alarmAboveLimit;
+        connect maintainSafePatientTemperature to alarmAboveLimit;
 
     // The functional response that satisfies the system requirement.
     connection : SatisfiedBy
-        connect requiredElement ::> alarmAboveLimit
-        to satisfyingElement ::> evaluateTemperature;
+        connect alarmAboveLimit to evaluateTemperature;
 
     // Allocate the evaluation function to its software realization.
     connection : AllocatedTo
-        connect function ::> evaluateTemperature
-        to allocatedElement ::> temperatureEvaluationSoftware;
+        connect evaluateTemperature to temperatureEvaluationSoftware;
 
     // Allocate the evaluation function to its sensing hardware.
     connection : AllocatedTo
-        connect function ::> evaluateTemperature
-        to allocatedElement ::> temperatureSensorAssembly;
+        connect evaluateTemperature to temperatureSensorAssembly;
 
     // State which control reduces this particular hazard.
     connection : Mitigates {
         attribute :>> mitigationKind = MitigationKind::hazard;
-        connect control ::> independentAlarmCheck
-        to mitigatedElement ::> missedHighTemperature;
+        connect independentAlarmCheck to missedHighTemperature;
     }
 
     connection : ControlImplementedBy
-        connect riskControl ::> independentAlarmCheck
-        to implementingElement ::> evaluateTemperature;
+        connect independentAlarmCheck to evaluateTemperature;
 
     // Connect the function to the test that will verify its behavior.
     connection : VerifiedBy
-        connect verificationTarget ::> evaluateTemperature
-        to verificationCase ::> highTemperatureAlarmTest;
+        connect evaluateTemperature to highTemperatureAlarmTest;
 }
 ```
 

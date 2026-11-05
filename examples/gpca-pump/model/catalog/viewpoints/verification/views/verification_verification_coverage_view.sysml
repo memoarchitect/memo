@@ -1,25 +1,12 @@
 package memo_examples_gpca_pump_viewpoints_verification_views_verification_verification_coverage_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_context_context_viewpoint::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_viewpoints_software_software_viewpoint::*;
-    private import memo_viewpoints_physical_physical_viewpoint::*;
-    private import memo_viewpoints_requirements_requirements_viewpoint::*;
-    private import memo_viewpoints_risk_risk_viewpoint::*;
-    private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view gpcaVerificationCoverageView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_verification_views_verification_verification_coverage_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-VER-101"; :>> label = "GPCA_VerificationCoverageView"; }
-        @MemoIdentity { :>> shortDescription = "Requirements and risk controls against verification cases, validation cases, and evidence."; }
+        @MemoIdentity { :>> providedId = "VIEW-VER-101"; :>> label = "GPCA_VerificationCoverageView"; :>> shortDescription = "Requirements and risk controls against verification cases, validation cases, and evidence."; }
         attribute :>> outputKind = (ViewOutputKind::matrix);
         attribute :>> presentationKind = (PresentationKind::traceMatrix);
         attribute :>> viewKind = DiagramViewKind::grid;

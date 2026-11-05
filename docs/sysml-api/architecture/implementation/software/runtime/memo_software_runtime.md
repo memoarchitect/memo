@@ -89,18 +89,18 @@ part def OTSSoftwareComponent specializes SoftwareComponent
 ??? code "architecture/implementation/software/runtime/memo_software_runtime.sysml"
 
     ```sysml
-    // Software runtime (component-and-connector) view (§11), matching the SEI
-    // Views and Beyond distinction between runtime components and implementation
-    // modules. Runtime structure carries concurrency, scheduling, health
-    // monitoring, fault containment, and update/rollback semantics. Module structure lives in
+    // Software runtime (component-and-connector) view, matching the SEI Views and
+    // Beyond distinction between runtime components and implementation modules.
+    // Runtime structure carries concurrency, scheduling, health monitoring, fault
+    // containment, and update/rollback semantics. Module structure lives in
     // memo_architecture_implementation_software_structure; allocation in
     // memo_architecture_realization_deployment.
     //
-    // Detailed AADL categories live in the AADL correspondence profile, which is
-    // an extension package: `extensions/aadl` (plan §C5). It carries the process /
-    // thread / virtual-processor families and a correspondence rule per mapped
-    // name and property. This comment pointed at `examples/aadl-mapping` for a
-    // long time and that directory never existed; the pointer above resolves.
+    // Detailed AADL categories live in the AADL correspondence profile, which is an
+    // extension package: `extensions/aadl`. It carries the process / thread /
+    // virtual-processor families and a correspondence rule per mapped name and
+    // property. This comment pointed at `examples/aadl-mapping` for a long time and
+    // that directory never existed; the pointer above resolves.
     package memo_architecture_implementation_software_runtime {
         private import memo_core_stdlib_quantities::*;
         private import Metaobjects::SemanticMetadata;
@@ -147,12 +147,9 @@ part def OTSSoftwareComponent specializes SoftwareComponent
             attribute auditable : Boolean;
             attribute updatePolicy : String;
             attribute rollbackPolicy : String;
-            // Twelve runtime-kind-conditional attributes used to follow, each
-            // documented "set only for the relevant runtimeKind" — which is a
-            // subtype family in disguise, and a technology the base ontology had
-            // no business asserting. They are gone; every one of them now lives on
-            // a type in an extension, where it is unconditional and therefore
-            // checkable (plan §10.3 D3, extensions/README.md):
+            // An attribute that applies to only one `runtimeKind` lives on a type
+            // in an extension, where it is unconditional and therefore checkable
+            // (extensions/README.md):
             //
             //   addressSpaceIsolated, owningProcessName,
             //   partitionBudget, isolationMechanism          -> extensions/aadl
@@ -161,13 +158,13 @@ part def OTSSoftwareComponent specializes SoftwareComponent
             //   imageReference, orchestrationPlatform        -> extensions/container
             //   deliverySemantics, topicStructure            -> extensions/messaging
             //
-            // The last two were also on the wrong metaclass: a component does not
-            // have a topic, a publication does.
+            // The last two are not component properties at all: a component does
+            // not have a topic, a publication does.
             //
-            // What stays is what is true of EVERY runtime component in every
+            // What is here is what is true of EVERY runtime component in every
             // regulated project — the AADL thread properties above and the
-            // assurance ones — plus `runtimeKind` itself, which says which family
-            // a component belongs to without claiming to describe it.
+            // assurance ones — plus `runtimeKind` itself, which says which family a
+            // component belongs to without claiming to describe it.
         }
 
         // A runtime service or process that exists only because an OTS module is

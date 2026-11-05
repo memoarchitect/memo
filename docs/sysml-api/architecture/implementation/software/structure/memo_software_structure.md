@@ -407,8 +407,8 @@ connection def DependsOnSoup :> MemoRelationship
             part sbomEntry : SBOMEntry[0..*];
         }
 
-        // `ModuleUses` is native `dependency` (R10-S6): write
-        // `dependency <usingModule> to <usedModule>;` instead of a connection.
+        // One module using another is a native `dependency`: write `dependency
+        // <usingModule> to <usedModule>;`.
 
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against

@@ -1,28 +1,16 @@
 // Assurance requirements. A requirement that constrains UI behaviour is still
 // an assurance requirement; the behaviour it constrains stays in architecture.
 package memo_examples_ui_screen_regions_assurance_requirements {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_relationships::*;
-    private import memo_core_annotations::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_architecture_implementation_ui::*;
-    private import memo_assurance_requirements_needs::*;
-    private import memo_assurance_human_factors::*;
-    private import memo_assurance_safety_risk::*;
-    private import memo_assurance_verification_validation::*;
-    private import memo_artifacts_core::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_assurance_requirements::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     // ── The spec side ───────────────────────────────────────────
     requirement reqRateEntry : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-001"; :>> label = "RateEntryConfirmation"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-001"; :>> label = "Rate entry confirmation"; }
         attribute :>> requirementType = RequirementTypeKind::software;
-        attribute :>> statement = "When the clinician enters a new infusion rate, the pump shall display the entered rate for explicit confirmation before applying it.";
+        doc /* When the clinician enters a new infusion rate, the pump shall display the entered rate for explicit confirmation before applying it. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
         attribute :>> obligation = ObligationKind::shall;
@@ -33,9 +21,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqRateLegibility : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-002"; :>> label = "RateLegibility"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-002"; :>> label = "Rate legibility"; }
         attribute :>> requirementType = RequirementTypeKind::system;
-        attribute :>> statement = "The pump shall display the active infusion rate legibly at 1 m under 100–1000 lux ambient illumination.";
+        doc /* The pump shall display the active infusion rate legibly at 1 m under 100–1000 lux ambient illumination. */
         attribute :>> notation = RequirementNotationKind::sophist;
         attribute :>> obligation = ObligationKind::shall;
         attribute :>> conditionClause = "Under 100–1000 lux ambient illumination at a 1 m viewing distance";
@@ -47,9 +35,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqVolumeDisplay : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-003"; :>> label = "VolumeDeliveredDisplay"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-003"; :>> label = "Volume delivered display"; }
         attribute :>> requirementType = RequirementTypeKind::software;
-        attribute :>> statement = "The pump shall display cumulative volume delivered for the active infusion, updated at least once per second.";
+        doc /* The pump shall display cumulative volume delivered for the active infusion, updated at least once per second. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::stateDriven;
         attribute :>> obligation = ObligationKind::shall;
@@ -59,9 +47,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqDrugLibrarySelection : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-004"; :>> label = "DrugLibrarySelection"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-004"; :>> label = "Drug library selection"; }
         attribute :>> requirementType = RequirementTypeKind::software;
-        attribute :>> statement = "The pump shall permit selection only from drug and concentration entries enabled for the active care area.";
+        doc /* The pump shall permit selection only from drug and concentration entries enabled for the active care area. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::stateDriven;
         attribute :>> obligation = ObligationKind::shall;
@@ -72,9 +60,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqDisplayFreshness : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-005"; :>> label = "InfusionStatusFreshness"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-005"; :>> label = "Infusion status freshness"; }
         attribute :>> requirementType = RequirementTypeKind::system;
-        attribute :>> statement = "The pump shall refresh the displayed active rate and cumulative delivered volume at least once per second while an infusion is running.";
+        doc /* The pump shall refresh the displayed active rate and cumulative delivered volume at least once per second while an infusion is running. */
         attribute :>> notation = RequirementNotationKind::sophist;
         attribute :>> obligation = ObligationKind::shall;
         attribute :>> conditionClause = "While an infusion is running";
@@ -86,9 +74,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqActiveRateDisplay : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-006"; :>> label = "ActiveInfusionRateDisplay"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-006"; :>> label = "Active infusion rate display"; }
         attribute :>> requirementType = RequirementTypeKind::software;
-        attribute :>> statement = "While an infusion is running, the pump shall display the active infusion rate value and its mL/h unit.";
+        doc /* While an infusion is running, the pump shall display the active infusion rate value and its mL/h unit. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::stateDriven;
         attribute :>> obligation = ObligationKind::shall;
@@ -99,9 +87,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqDrugIdentityDisplay : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-007"; :>> label = "ActiveDrugIdentityDisplay"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-007"; :>> label = "Active drug identity display"; }
         attribute :>> requirementType = RequirementTypeKind::software;
-        attribute :>> statement = "Where a drug-library entry is active, the pump shall display the selected drug name and concentration on the running-infusion screen.";
+        doc /* Where a drug-library entry is active, the pump shall display the selected drug name and concentration on the running-infusion screen. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::optionalFeature;
         attribute :>> obligation = ObligationKind::shall;
@@ -112,9 +100,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqTimeDisplay : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-008"; :>> label = "LocalTimeDisplay"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-008"; :>> label = "Local time display"; }
         attribute :>> requirementType = RequirementTypeKind::software;
-        attribute :>> statement = "While the running-infusion screen is visible, the pump shall display synchronized local time in 24-hour HH:mm format.";
+        doc /* While the running-infusion screen is visible, the pump shall display synchronized local time in 24-hour HH:mm format. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::stateDriven;
         attribute :>> obligation = ObligationKind::shall;
@@ -124,9 +112,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqTimeAccuracy : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-009"; :>> label = "DisplayedTimeAccuracy"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-009"; :>> label = "Displayed time accuracy"; }
         attribute :>> requirementType = RequirementTypeKind::system;
-        attribute :>> statement = "The running-infusion display shall present local time within 2 seconds of the synchronized device clock and refresh the visible minute within 1 second of rollover.";
+        doc /* The running-infusion display shall present local time within 2 seconds of the synchronized device clock and refresh the visible minute within 1 second of rollover. */
         attribute :>> notation = RequirementNotationKind::sophist;
         attribute :>> obligation = ObligationKind::shall;
         attribute :>> conditionClause = "During normal operation after clock synchronization";
@@ -138,9 +126,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqBatteryStatusDisplay : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-010"; :>> label = "BatteryStatusDisplay"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-010"; :>> label = "Battery status display"; }
         attribute :>> requirementType = RequirementTypeKind::software;
-        attribute :>> statement = "While the pump is operating, the pump shall display battery state of charge as a percentage and graphical icon.";
+        doc /* While the pump is operating, the pump shall display battery state of charge as a percentage and graphical icon. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::stateDriven;
         attribute :>> obligation = ObligationKind::shall;
@@ -151,9 +139,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqBatteryWarningPerformance : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-011"; :>> label = "LowBatteryStatusLatency"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-011"; :>> label = "Low battery status latency"; }
         attribute :>> requirementType = RequirementTypeKind::system;
-        attribute :>> statement = "When estimated battery operating time falls below 30 minutes, the pump shall present a visually prominent low-battery state within 1 second.";
+        doc /* When estimated battery operating time falls below 30 minutes, the pump shall present a visually prominent low-battery state within 1 second. */
         attribute :>> notation = RequirementNotationKind::sophist;
         attribute :>> obligation = ObligationKind::shall;
         attribute :>> conditionClause = "When estimated battery operating time falls below 30 minutes";
@@ -165,9 +153,9 @@ package memo_examples_ui_screen_regions_assurance_requirements {
     }
 
     requirement reqDrugSelectionPerformance : Requirement {
-        @MemoIdentity { :>> providedId = "UIR-REQ-012"; :>> label = "DrugSelectorResponseTime"; }
+        @MemoIdentity { :>> providedId = "UIR-REQ-012"; :>> label = "Drug selector response time"; }
         attribute :>> requirementType = RequirementTypeKind::software;
-        attribute :>> statement = "When the clinician activates the drug selector, the pump shall display the enabled drug list within 250 milliseconds.";
+        doc /* When the clinician activates the drug selector, the pump shall display the enabled drug list within 250 milliseconds. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
         attribute :>> obligation = ObligationKind::shall;

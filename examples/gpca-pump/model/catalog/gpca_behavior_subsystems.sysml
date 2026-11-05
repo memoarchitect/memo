@@ -1,20 +1,11 @@
 package memo_examples_gpca_pump_gpca_behavior_subsystems {
-    private import memo_core_stdlib_quantities::*;
-    private import memo_core_relationships::*;
-    private import memo_assurance_verification_validation::*;
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_architecture_functional_functions::*;
-    private import memo_core_enumerations::*;
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_operational_use_cases::*;
-    private import memo_assurance_requirements::*;
-    private import memo_core_common::*;
 
-    private import memo_core_common::MemoIdentity;
     // ── Logical functions ───────────────────────────────────────
     action fnAcquireSensors : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-001"; :>> label = "AcquireSensorData"; }
+        @MemoIdentity { :>> providedId = "FUNC-001"; :>> label = "Acquire sensor data"; }
         out sensorVectorOut : InterfaceItem;
         attribute :>> functionCategory = "sensing";
         attribute :>> trigger = "every 20 ms execution step";
@@ -31,7 +22,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         // requires — a component function allocated nowhere is a
         // responsibility nobody has accepted.
         action cfnMeasureFlowRate : ComponentFunction {
-            @MemoIdentity { :>> providedId = "CFUN-001"; :>> label = "MeasureFlowRate"; }
+            @MemoIdentity { :>> providedId = "CFUN-001"; :>> label = "Measure flow rate"; }
             attribute :>> functionCategory = "sensing";
             attribute :>> actionKind = ActionKind::sense;
             attribute :>> trigger = "continuous, sampled every 20 ms execution step";
@@ -40,7 +31,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
             attribute :>> criticality = CriticalityKind::catastrophic;
         }
         action cfnDetectAirInLine : ComponentFunction {
-            @MemoIdentity { :>> providedId = "CFUN-002"; :>> label = "DetectAirInLine"; }
+            @MemoIdentity { :>> providedId = "CFUN-002"; :>> label = "Detect air in line"; }
             attribute :>> functionCategory = "protection";
             attribute :>> actionKind = ActionKind::sense;
             attribute :>> trigger = "continuous, sampled every 20 ms execution step";
@@ -50,7 +41,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         }
         // The subassembly case: a component function need not sit on a leaf part.
         action cfnAggregateSensorStatus : ComponentFunction {
-            @MemoIdentity { :>> providedId = "CFUN-003"; :>> label = "AggregateSensorStatus"; }
+            @MemoIdentity { :>> providedId = "CFUN-003"; :>> label = "Aggregate sensor status"; }
             attribute :>> functionCategory = "sensing";
             attribute :>> actionKind = ActionKind::transform;
             attribute :>> trigger = "every 20 ms execution step";
@@ -58,13 +49,13 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
             attribute :>> concernKind = ConcernKind::safety;
             attribute :>> criticality = CriticalityKind::catastrophic;
         }
-            // The aggregate status is formed from the flow-rate and air-in-line readings.
+        // The aggregate status is formed from the flow-rate and air-in-line readings.
         succession first cfnMeasureFlowRate then cfnAggregateSensorStatus;
         succession first cfnDetectAirInLine then cfnAggregateSensorStatus;
     }
 
     action fnValidatePrescription : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-002"; :>> label = "ValidatePrescription"; }
+        @MemoIdentity { :>> providedId = "FUNC-002"; :>> label = "Validate prescription"; }
         in prescriptionIn : InterfaceItem;
         attribute :>> functionCategory = "configuration";
         attribute :>> trigger = "prescription entry or edit";
@@ -73,7 +64,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     action fnMonitorAlarm : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-003"; :>> label = "MonitorExceptionalConditions"; }
+        @MemoIdentity { :>> providedId = "FUNC-003"; :>> label = "Monitor exceptional conditions"; }
         in sensorVectorIn : InterfaceItem;
         out alarmSignalOut : InterfaceItem;
         attribute :>> functionCategory = "alarm";
@@ -83,7 +74,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     action fnAnnunciate : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-004"; :>> label = "AnnunciateAlarms"; }
+        @MemoIdentity { :>> providedId = "FUNC-004"; :>> label = "Annunciate alarms"; }
         in alarmSignalIn : InterfaceItem;
         attribute :>> functionCategory = "alarm";
         attribute :>> trigger = "alarm raised, escalated, or cleared";
@@ -92,7 +83,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::high;
     }
     action fnManageInfusion : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-005"; :>> label = "ManageInfusion"; }
+        @MemoIdentity { :>> providedId = "FUNC-005"; :>> label = "Manage infusion"; }
         out flowCommandOut : InterfaceItem;
         attribute :>> functionCategory = "infusion";
         attribute :>> trigger = "mode transitions and each execution step while therapy active";
@@ -101,7 +92,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     action fnEnforceLimits : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-006"; :>> label = "EnforceDoseLimits"; }
+        @MemoIdentity { :>> providedId = "FUNC-006"; :>> label = "Enforce dose limits"; }
         attribute :>> functionCategory = "infusion";
         attribute :>> trigger = "patient bolus request or clinician square bolus command";
         attribute :>> outputDescription = "Bolus authorized or rejected against lockout interval and hourly maximum";
@@ -109,7 +100,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     action fnCommandPump : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-007"; :>> label = "CommandPumpMotor"; }
+        @MemoIdentity { :>> providedId = "FUNC-007"; :>> label = "Command pump motor"; }
         in flowCommandIn : InterfaceItem;
         attribute :>> functionCategory = "actuation";
         attribute :>> trigger = "flow command update";
@@ -118,7 +109,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     action fnLogEvents : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-008"; :>> label = "LogTherapyEvents"; }
+        @MemoIdentity { :>> providedId = "FUNC-008"; :>> label = "Log therapy events"; }
         attribute :>> functionCategory = "logging";
         attribute :>> trigger = "dose delivered, mode change, alarm, or configuration change";
         attribute :>> outputDescription = "Timestamped append-only event records";
@@ -126,7 +117,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::medium;
     }
     action fnManagePower : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-009"; :>> label = "ManagePower"; }
+        @MemoIdentity { :>> providedId = "FUNC-009"; :>> label = "Manage power"; }
         attribute :>> functionCategory = "platform";
         attribute :>> trigger = "mains-loss signal or battery level change";
         attribute :>> outputDescription = "Power source selection, low/depleted battery conditions";
@@ -134,7 +125,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::high;
     }
     action fnPresentStatus : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-010"; :>> label = "PresentStatus"; }
+        @MemoIdentity { :>> providedId = "FUNC-010"; :>> label = "Present status"; }
         attribute :>> functionCategory = "user-interface";
         attribute :>> trigger = "state or prescription change";
         attribute :>> outputDescription = "Mode, prescription, delivered dose, and alarm text on display";
@@ -142,7 +133,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
         attribute :>> criticality = CriticalityKind::high;
     }
     action fnSelfTest : SystemFunction {
-        @MemoIdentity { :>> providedId = "FUNC-011"; :>> label = "ExecuteSelfTest"; }
+        @MemoIdentity { :>> providedId = "FUNC-011"; :>> label = "Execute self test"; }
         attribute :>> functionCategory = "platform";
         attribute :>> trigger = "power-on and periodic in-service checks";
         attribute :>> outputDescription = "POST pass/fail; CPU, RAM, ROM, and sensor plausibility results";
@@ -157,7 +148,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     // CE-004 carries it from the operator keypad.
     flow lfSensorAcquisition : FunctionalTransfer
         from fnAcquireSensors.sensorVectorOut to fnMonitorAlarm.sensorVectorIn {
-        @MemoIdentity { :>> providedId = "LF-001"; :>> label = "SensorAcquisitionFlow"; }
+        @MemoIdentity { :>> providedId = "LF-001"; :>> label = "Sensor acquisition flow"; }
         attribute :>> flowKind = FlowKind::measurement;
         attribute :>> latencyBudgetMs = 20 [milli*s];
         attribute :>> staleAfterMs = 40 [milli*s];
@@ -165,7 +156,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     flow lfFlowCommand : FunctionalTransfer
         from fnManageInfusion.flowCommandOut to fnCommandPump.flowCommandIn {
-        @MemoIdentity { :>> providedId = "LF-002"; :>> label = "FlowCommandFlow"; }
+        @MemoIdentity { :>> providedId = "LF-002"; :>> label = "Flow command flow"; }
         attribute :>> flowKind = FlowKind::command;
         attribute :>> latencyBudgetMs = 20 [milli*s];
         attribute :>> staleAfterMs = 20 [milli*s];
@@ -173,7 +164,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     flow lfAlarmSignal : FunctionalTransfer
         from fnMonitorAlarm.alarmSignalOut to fnAnnunciate.alarmSignalIn {
-        @MemoIdentity { :>> providedId = "LF-003"; :>> label = "AlarmSignalFlow"; }
+        @MemoIdentity { :>> providedId = "LF-003"; :>> label = "Alarm signal flow"; }
         attribute :>> flowKind = FlowKind::alarm;
         attribute :>> latencyBudgetMs = 20 [milli*s];
         attribute :>> staleAfterMs = 20 [milli*s];
@@ -182,7 +173,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     flow lfPrescriptionEntry : FunctionalTransfer
         from memo_examples_gpca_pump_gpca_operational::oaProgram.prescriptionOut
         to fnValidatePrescription.prescriptionIn {
-        @MemoIdentity { :>> providedId = "LF-004"; :>> label = "PrescriptionEntryFlow"; }
+        @MemoIdentity { :>> providedId = "LF-004"; :>> label = "Prescription entry flow"; }
         attribute :>> flowKind = FlowKind::configuration;
         attribute :>> latencyBudgetMs = 500 [milli*s];
         attribute :>> staleAfterMs = 0 [milli*s];
@@ -192,7 +183,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     // ── Exchange item definitions ───────────────────────────────
     item ddPrescription : InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::data;
-        @MemoIdentity { :>> providedId = "DD-001"; :>> label = "PrescriptionRecord"; }
+        @MemoIdentity { :>> providedId = "DD-001"; :>> label = "Prescription record"; }
         attribute :>> semantics = "patient id, drug name, concentration, VTBI total, duration total, basal flow rate, square bolus rate/duration/interval, patient bolus rate/duration/lockout period, max boluses per hour (DD-005..DD-017)";
         attribute :>> unit = "ml/hr, ml, minutes, mg/ml, per hour";
         attribute :>> minValue = "pharmacy-database safe-value lower bounds (lo_hd)";
@@ -206,7 +197,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     item ddBolusRequest : InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::data;
-        @MemoIdentity { :>> providedId = "DD-002"; :>> label = "BolusRequestSignal"; }
+        @MemoIdentity { :>> providedId = "DD-002"; :>> label = "Bolus request signal"; }
         attribute :>> semantics = "debounced patient pendant press event";
         attribute :>> encoding = "edge event with 50 ms debounce";
         attribute :>> timestampRequired = true;
@@ -216,7 +207,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     item ddSensorVector : InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::data;
-        @MemoIdentity { :>> providedId = "DD-003"; :>> label = "SensorStatusVector"; }
+        @MemoIdentity { :>> providedId = "DD-003"; :>> label = "Sensor status vector"; }
         attribute :>> semantics = "air-in-line, occlusion pressure, reservoir volume, door state, flow measurement, battery level, CPU/memory status";
         attribute :>> encoding = "fixed-layout status word per 20 ms step";
         attribute :>> timestampRequired = true;
@@ -226,7 +217,7 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     item ddEventRecord : InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::data;
-        @MemoIdentity { :>> providedId = "DD-004"; :>> label = "TherapyEventRecord"; }
+        @MemoIdentity { :>> providedId = "DD-004"; :>> label = "Therapy event record"; }
         attribute :>> semantics = "timestamped dose, alarm, mode, and configuration events";
         attribute :>> encoding = "append-only sequenced records";
         attribute :>> timestampRequired = true;
@@ -236,56 +227,56 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     }
     item cdFlowCommand : InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::command;
-        @MemoIdentity { :>> providedId = "CD-001"; :>> label = "FlowCommand"; }
+        @MemoIdentity { :>> providedId = "CD-001"; :>> label = "Flow command"; }
         attribute :>> controlType = "commanded flow rate with enable interlock";
         attribute :>> timeoutMs = 40 [milli*s];
         attribute :>> retryPolicy = "no retry; missing command forces zero flow";
     }
     item cdAlarmSignal : InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::command;
-        @MemoIdentity { :>> providedId = "CD-002"; :>> label = "AlarmSignal"; }
+        @MemoIdentity { :>> providedId = "CD-002"; :>> label = "Alarm signal"; }
         attribute :>> controlType = "priority-coded alarm assertion (level 1 stops infusion, level 2 warns)";
         attribute :>> timeoutMs = 20 [milli*s];
         attribute :>> retryPolicy = "latched until acknowledged and condition cleared";
     }
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification vcAuthoredCfnAggregateSensorStatus : VerificationCase {
-        @MemoIdentity { :>> providedId = "GP-VC-A01"; :>> label = "VerifyAggregateSensorStatus"; }
+        @MemoIdentity { :>> providedId = "GP-VC-A01"; :>> label = "Verify aggregate sensor status"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
-        attribute :>> acceptanceCriteria = "'AggregateSensorStatus' meets its specified behaviour across its range, including the fault cases";
+        attribute :>> acceptanceCriteria = "'Aggregate sensor status' meets its specified behaviour across its range, including the fault cases";
         subject verified : Base::Anything[*] = (fnAcquireSensors.cfnAggregateSensorStatus);
     }
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification vcAuthoredFnAcquireSensors : VerificationCase {
-        @MemoIdentity { :>> providedId = "GP-VC-A02"; :>> label = "VerifyAcquireSensorData"; }
+        @MemoIdentity { :>> providedId = "GP-VC-A02"; :>> label = "Verify acquire sensor data"; }
         attribute :>> methodKind = MemoVerificationMethodKind::test;
-        attribute :>> acceptanceCriteria = "'AcquireSensorData' meets its specified behaviour across its range, including the fault cases";
+        attribute :>> acceptanceCriteria = "'Acquire sensor data' meets its specified behaviour across its range, including the fault cases";
         subject verified : Base::Anything[*] = (fnAcquireSensors);
     }
     // Illustrative: authored for this example, not the record of a real test run.
     part evAuthoredVcAuthoredCfnAggregateSensorStatus : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
-        @MemoIdentity { :>> providedId = "GP-EV-A01"; :>> label = "VerifyAggregateSensorStatus report"; }
+        @MemoIdentity { :>> providedId = "GP-EV-A01"; :>> label = "Verify aggregate sensor status report"; }
         attribute :>> evidenceType = "test report";
         attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
     }
-    connection : ProducesEvidence connect producer ::> vcAuthoredCfnAggregateSensorStatus to producedEvidence ::> evAuthoredVcAuthoredCfnAggregateSensorStatus;
+    connection : ProducesEvidence connect vcAuthoredCfnAggregateSensorStatus to evAuthoredVcAuthoredCfnAggregateSensorStatus;
     // Illustrative: authored for this example, not the record of a real test run.
     part evAuthoredVcAuthoredFnAcquireSensors : MemoEvidence {
         attribute :>> evidenceKind = EvidenceKind::evidence;
-        @MemoIdentity { :>> providedId = "GP-EV-A02"; :>> label = "VerifyAcquireSensorData report"; }
+        @MemoIdentity { :>> providedId = "GP-EV-A02"; :>> label = "Verify acquire sensor data report"; }
         attribute :>> evidenceType = "test report";
         attribute :>> resultSummary = "Illustrative result: the acceptance criteria are met.";
     }
-    connection : ProducesEvidence connect producer ::> vcAuthoredFnAcquireSensors to producedEvidence ::> evAuthoredVcAuthoredFnAcquireSensors;
+    connection : ProducesEvidence connect vcAuthoredFnAcquireSensors to evAuthoredVcAuthoredFnAcquireSensors;
     // Illustrative: authored for this example.
     action fcAuthoredManagePower : FunctionalFlow {
-        @MemoIdentity { :>> providedId = "FC-A01"; :>> label = "ManagePowerChain"; }
+        @MemoIdentity { :>> providedId = "FC-A01"; :>> label = "Manage power chain"; }
         attribute :>> flowCategory = FunctionalFlowKind::nominal;
         attribute :>> safetyRelevant = true;
         attribute :>> securityRelevant = false;
         action fcsManagePower :> fnManagePower {
-            @MemoIdentity { :>> providedId = "FCS-A01"; :>> label = "ManagePowerChain step"; }
+            @MemoIdentity { :>> providedId = "FCS-A01"; :>> label = "Manage power chain step"; }
         }
     }
 }

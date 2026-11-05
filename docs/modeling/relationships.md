@@ -60,8 +60,7 @@ Write the relationship so its endpoint roles read as a sentence:
 
 ```sysml
 connection : Mitigates
-    connect control ::> rcReAnnunciate
-    to mitigatedElement ::> hzUndetectedDeviation;
+    connect rcReAnnunciate to hzUndetectedDeviation;
 ```
 
 This reads: “`rcReAnnunciate` mitigates `hzUndetectedDeviation`.” A connection

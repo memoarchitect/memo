@@ -1,31 +1,21 @@
 package memo_examples_gpca_pump_gpca_operational {
-    private import memo_assurance_verification_validation::*;
+    private import memo::*;
     private import ScalarValues::*;
     private import ModelingMetadata::*;
 
-    private import memo_architecture_operational_structure::*;
-    private import memo_architecture_operational_activities::*;
-    private import memo_architecture_operational_scenarios::*;
-    private import memo_architecture_operational_use_cases::*;
-    private import memo_architecture_operational_workflows::*;
-    private import memo_core_enumerations::*;
     private import memo_examples_gpca_pump_gpca_context::*;
     private import memo_examples_gpca_pump_gpca_system::*;
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
-    private import memo_core_relationships::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    private import memo_architecture_logical_interfaces::InterfaceItem;
     // ── Operational entities beyond the human actors ────────────
     part entityPharmacy : OperationalEntity {
-        @MemoIdentity { :>> providedId = "OE-001"; :>> label = "HospitalPharmacy"; }
+        @MemoIdentity { :>> providedId = "OE-001"; :>> label = "Hospital pharmacy"; }
         attribute :>> entityKind = OperationalEntityKind::externalSystem;
         attribute :>> operationalDomain = "medication management";
         attribute :>> responsibility = "Prepares labeled drug reservoirs and maintains the hospital pharmacy database of drug safe values.";
     }
     part entityPowerInfrastructure : OperationalEntity {
-        @MemoIdentity { :>> providedId = "OE-002"; :>> label = "WardPowerInfrastructure"; }
+        @MemoIdentity { :>> providedId = "OE-002"; :>> label = "Ward power infrastructure"; }
         attribute :>> entityKind = OperationalEntityKind::environmentalEntity;
         attribute :>> operationalDomain = "facility power";
         attribute :>> responsibility = "Provides mains power; outages are a foreseeable operational condition.";
@@ -39,21 +29,21 @@ package memo_examples_gpca_pump_gpca_operational {
 
     // ── External entities per CriSys Fig 2.1 ────────────────────
     part entityPharmacyDb : OperationalEntity {
-        @MemoIdentity { :>> providedId = "OE-004"; :>> label = "HospitalPharmacyDatabase"; }
+        @MemoIdentity { :>> providedId = "OE-004"; :>> label = "Hospital pharmacy database"; }
         attribute :>> entityKind = OperationalEntityKind::externalSystem;
         attribute :>> operationalDomain = "medication safety data";
         attribute :>> responsibility = "Repository of drug information from manufacturers; stores the safe value ranges for all drugs usable for infusion, retrieved by the GPCA for the programmed drug.";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1 and §3.5"; }
     }
     part entityDrugReservoir : OperationalEntity {
-        @MemoIdentity { :>> providedId = "OE-005"; :>> label = "DrugReservoir"; }
+        @MemoIdentity { :>> providedId = "OE-005"; :>> label = "Drug reservoir"; }
         attribute :>> entityKind = OperationalEntityKind::device;
         attribute :>> operationalDomain = "drug storage";
         attribute :>> responsibility = "Apparatus storing the liquid analgesic drug to be infused; filled according to the prescription and connected to the GPCA by the clinician.";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1"; }
     }
     part entityNeedle : OperationalEntity {
-        @MemoIdentity { :>> providedId = "OE-006"; :>> label = "InfusionNeedle"; }
+        @MemoIdentity { :>> providedId = "OE-006"; :>> label = "Infusion needle"; }
         attribute :>> entityKind = OperationalEntityKind::device;
         attribute :>> operationalDomain = "drug delivery path";
         attribute :>> responsibility = "Intravenous needle inserted into the patient by the clinician and connected to the GPCA standard CCC connection point (I 5) to infuse the drug.";
@@ -76,21 +66,21 @@ package memo_examples_gpca_pump_gpca_operational {
 
     // ── Operational activities (therapy lifecycle) ──────────────
     action oaPrescribe : OperativeAction {
-        @MemoIdentity { :>> providedId = "OA-001"; :>> label = "PrescribeTherapy"; }
+        @MemoIdentity { :>> providedId = "OA-001"; :>> label = "Prescribe therapy"; }
         attribute :>> trigger = "patient requires titrated analgesia";
         attribute :>> preCondition = "patient assessed; drug has safe-value records in the hospital pharmacy database";
         attribute :>> postCondition = "prescription with basal rate, bolus volume, lockout, and max dose limits exists";
         attribute :>> criticality = CriticalityKind::high;
     }
     action oaLoadReservoir : OperativeAction {
-        @MemoIdentity { :>> providedId = "OA-002"; :>> label = "LoadDrugReservoir"; }
+        @MemoIdentity { :>> providedId = "OA-002"; :>> label = "Load drug reservoir"; }
         attribute :>> trigger = "prescription issued or reservoir empty";
         attribute :>> preCondition = "labeled reservoir prepared by pharmacy";
         attribute :>> postCondition = "reservoir mounted, door closed and latched";
         attribute :>> criticality = CriticalityKind::high;
     }
     action oaProgram : OperativeAction {
-        @MemoIdentity { :>> providedId = "OA-003"; :>> label = "ProgramPrescription"; }
+        @MemoIdentity { :>> providedId = "OA-003"; :>> label = "Program prescription"; }
         out prescriptionOut : InterfaceItem;
         attribute :>> trigger = "reservoir loaded";
         attribute :>> preCondition = "pump in IDLE; clinician authenticated by key or code";
@@ -98,14 +88,14 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     action oaStartTherapy : OperativeAction {
-        @MemoIdentity { :>> providedId = "OA-004"; :>> label = "StartInfusion"; }
+        @MemoIdentity { :>> providedId = "OA-004"; :>> label = "Start infusion"; }
         attribute :>> trigger = "prescription confirmed";
         attribute :>> preCondition = "confirmed prescription saved; no active alarm";
         attribute :>> postCondition = "basal infusion running";
         attribute :>> criticality = CriticalityKind::catastrophic;
     }
     action oaRequestBolus : OperativeAction {
-        @MemoIdentity { :>> providedId = "OA-005"; :>> label = "RequestPatientBolus"; }
+        @MemoIdentity { :>> providedId = "OA-005"; :>> label = "Request patient bolus"; }
         attribute :>> trigger = "patient presses bolus request button";
         attribute :>> preCondition = "therapy active";
         attribute :>> postCondition = "bolus delivered, or request ignored when lockout or max-dose limits apply";
@@ -117,7 +107,7 @@ package memo_examples_gpca_pump_gpca_operational {
         perform fnLogEvents;
     }
     action oaRespondAlarm : OperativeAction {
-        @MemoIdentity { :>> providedId = "OA-006"; :>> label = "RespondToAlarm"; }
+        @MemoIdentity { :>> providedId = "OA-006"; :>> label = "Respond to alarm"; }
         attribute :>> trigger = "audible or visual alarm annunciated";
         attribute :>> preCondition = "alarm condition raised by the pump";
         attribute :>> postCondition = "cause resolved and therapy resumed, or therapy stopped";
@@ -128,14 +118,14 @@ package memo_examples_gpca_pump_gpca_operational {
         perform fnAnnunciate;
     }
     action oaReviewLog : OperativeAction {
-        @MemoIdentity { :>> providedId = "OA-007"; :>> label = "ReviewEventLog"; }
+        @MemoIdentity { :>> providedId = "OA-007"; :>> label = "Review event log"; }
         attribute :>> trigger = "shift change, incident review, or dose audit";
         attribute :>> preCondition = "event log populated during therapy";
         attribute :>> postCondition = "delivered doses and alarm history reviewed";
         attribute :>> criticality = CriticalityKind::medium;
     }
     action oaMaintain : OperativeAction {
-        @MemoIdentity { :>> providedId = "OA-008"; :>> label = "MaintainDevice"; }
+        @MemoIdentity { :>> providedId = "OA-008"; :>> label = "Maintain device"; }
         attribute :>> trigger = "scheduled maintenance or fault";
         attribute :>> preCondition = "pump out of clinical use; technician authenticated";
         attribute :>> postCondition = "battery, calibration, and pharmacy-database connection verified";
@@ -147,7 +137,7 @@ package memo_examples_gpca_pump_gpca_operational {
     // several workflows, each of which owns multiple selected scenarios.
     use case ucDeliverPcaTherapy : SystemUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
-        @MemoIdentity { :>> providedId = "UC-001"; :>> label = "DeliverPatientControlledAnalgesia"; }
+        @MemoIdentity { :>> providedId = "UC-001"; :>> label = "Deliver patient controlled analgesia"; }
         attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
         attribute :>> trigger = "A clinician starts prescribed patient-controlled analgesia therapy.";
         attribute :>> successOutcome = "The patient receives prescribed analgesia without exceeding dose, lockout, or safety limits.";
@@ -160,100 +150,100 @@ package memo_examples_gpca_pump_gpca_operational {
     }
 
     part wfPrepareAndStartTherapy : SystemWorkflow {
-@MemoIdentity { :>> label = "PrepareAndStartTherapy"; }
+        @MemoIdentity { :>> label = "Prepare and start therapy"; }
         attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
         attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
 
     }
     part wfManageActiveTherapy : SystemWorkflow {
-@MemoIdentity { :>> label = "ManageActiveTherapy"; }
+        @MemoIdentity { :>> label = "Manage active therapy"; }
         attribute :>> entryCondition = "Basal therapy is active.";
         attribute :>> completionCondition = "A bolus is handled or active therapy continues safely.";
         action osNominalTherapy : OperativeScenario {
-            @MemoIdentity { :>> providedId = "OS-001"; :>> label = "NominalTherapySession"; }
+            @MemoIdentity { :>> providedId = "OS-001"; :>> label = "Nominal therapy session"; }
             attribute :>> preCondition = "prescription issued, reservoir loaded";
             attribute :>> postCondition = "therapy completed and stopped by clinician";
             attribute :>> pathSummary = "Prescribe > load reservoir > program and confirm > start basal > patient boluses within limits > stop therapy > review log.";
             @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.2 Main GPCA System Functions"; }
 
             action oaCompleteNominalTherapy : OperativeAction {
-@MemoIdentity { :>> label = "CompleteNominalTherapy"; }
+                @MemoIdentity { :>> label = "Complete nominal therapy"; }
                 action deliverWithinLimits; action recordTherapyEvent;
                 first start then deliverWithinLimits; first deliverWithinLimits then recordTherapyEvent; first recordTherapyEvent then done;
             }
         }
         action osLockoutBolus : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;
-            @MemoIdentity { :>> providedId = "OS-002"; :>> label = "BolusRequestDuringLockout"; }
+            @MemoIdentity { :>> providedId = "OS-002"; :>> label = "Bolus request during lockout"; }
             attribute :>> preCondition = "basal infusion active; lockout interval running";
             attribute :>> postCondition = "request ignored, logged; basal continues unchanged";
             attribute :>> pathSummary = "Patient presses bolus button during lockout > infusion manager rejects request > event logged > no additional drug delivered.";
             @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.1.9 PATIENT BOLUS mode (lockout requirements)"; }
 
             action oaRejectBolusDuringLockout : OperativeAction {
-@MemoIdentity { :>> label = "RejectBolusDuringLockout"; }
+                @MemoIdentity { :>> label = "Reject bolus during lockout"; }
                 action checkLockout; action rejectAndLog;
                 first start then checkLockout; first checkLockout then rejectAndLog; first rejectAndLog then done;
             }
         }
     }
     part wfRespondToTherapyAlarm : SystemWorkflow {
-@MemoIdentity { :>> label = "RespondToTherapyAlarm"; }
+        @MemoIdentity { :>> label = "Respond to therapy alarm"; }
         attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
         attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";
 
         action osOcclusionAlarm : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;
-            @MemoIdentity { :>> providedId = "OS-003"; :>> label = "OcclusionDetectedDuringInfusion"; }
+            @MemoIdentity { :>> providedId = "OS-003"; :>> label = "Occlusion detected during infusion"; }
             attribute :>> preCondition = "therapy active; downstream line becomes blocked";
             attribute :>> postCondition = "infusion paused, alarm annunciated, clinician clears occlusion and resumes";
             attribute :>> pathSummary = "Occlusion sensor exceeds pressure threshold > alarm raised same step > infusion paused > audible and visual annunciation > clinician resolves and resumes.";
             @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.2 Alarms and Alerts (occlusion)"; }
 
             action oaRespondToOcclusion : OperativeAction {
-@MemoIdentity { :>> label = "RespondToOcclusion"; }
+                @MemoIdentity { :>> label = "Respond to occlusion"; }
                 action pauseInfusion; action annunciateOcclusion; action resolveAndResume;
                 first start then pauseInfusion; first pauseInfusion then annunciateOcclusion; first annunciateOcclusion then resolveAndResume; first resolveAndResume then done;
             }
         }
         action osAirInLine : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;
-            @MemoIdentity { :>> providedId = "OS-004"; :>> label = "AirInLineDetected"; }
+            @MemoIdentity { :>> providedId = "OS-004"; :>> label = "Air in line detected"; }
             attribute :>> preCondition = "therapy active; air bubble enters tubing";
             attribute :>> postCondition = "infusion stopped before air reaches patient; alarm annunciated";
             attribute :>> pathSummary = "Air-in-line sensor detects bubble above threshold > transition to PAUSED (KVO flow) > High-priority Air embolism notification > clinician re-primes line and restarts.";
             @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Air embolism)"; }
 
             action oaRespondToAirInLine : OperativeAction {
-@MemoIdentity { :>> label = "RespondToAirInLine"; }
+                @MemoIdentity { :>> label = "Respond to air in line"; }
                 action stopOrKvo; action annunciateAir; action reprimeAndRestart;
                 first start then stopOrKvo; first stopOrKvo then annunciateAir; first annunciateAir then reprimeAndRestart; first reprimeAndRestart then done;
             }
         }
         action osEmptyReservoir : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;
-            @MemoIdentity { :>> providedId = "OS-005"; :>> label = "ReservoirEmptyDuringTherapy"; }
+            @MemoIdentity { :>> providedId = "OS-005"; :>> label = "Reservoir empty during therapy"; }
             attribute :>> preCondition = "therapy active; reservoir volume reaches empty threshold";
             attribute :>> postCondition = "infusion stopped, alarm raised, reservoir replaced";
             attribute :>> pathSummary = "Reservoir-empty condition detected > transition to PAUSED (KVO flow) > High-priority Empty Reservoir notification > clinician loads new reservoir > therapy resumed with saved prescription.";
             @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §4.3 Notification Requirements (REQ 59: Empty Reservoir)"; }
 
             action oaReplaceEmptyReservoir : OperativeAction {
-@MemoIdentity { :>> label = "ReplaceEmptyReservoir"; }
+                @MemoIdentity { :>> label = "Replace empty reservoir"; }
                 action stopAndAnnunciate; action replaceReservoir; action resumeTherapy;
                 first start then stopAndAnnunciate; first stopAndAnnunciate then replaceReservoir; first replaceReservoir then resumeTherapy; first resumeTherapy then done;
             }
         }
         action osPowerLoss : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;
-            @MemoIdentity { :>> providedId = "OS-006"; :>> label = "MainsPowerLossAndRecovery"; }
+            @MemoIdentity { :>> providedId = "OS-006"; :>> label = "Mains power loss and recovery"; }
             attribute :>> preCondition = "therapy active on mains power";
             attribute :>> postCondition = "therapy continues on battery; prescription preserved across full power loss";
             attribute :>> pathSummary = "Mains lost > battery takes over with notification > if battery depletes, pump stops safely > on power restore, saved prescription recovered and therapy resumed only after clinician confirmation.";
             @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.3 Electrical Hazards (battery failure)"; }
 
             action oaRecoverAfterPowerLoss : OperativeAction {
-@MemoIdentity { :>> label = "RecoverAfterPowerLoss"; }
+                @MemoIdentity { :>> label = "Recover after power loss"; }
                 action switchToBattery; action restorePrescription; action confirmRestart;
                 first start then switchToBattery; first switchToBattery then restorePrescription; first restorePrescription then confirmRestart; first confirmRestart then done;
             }
@@ -263,13 +253,13 @@ package memo_examples_gpca_pump_gpca_operational {
 
     // ── Operational capabilities ────────────────────────────────
     part ocTitratedAnalgesia : OperationalCapability {
-        @MemoIdentity { :>> providedId = "OC-001"; :>> label = "DeliverTitratedAnalgesia"; }
+        @MemoIdentity { :>> providedId = "OC-001"; :>> label = "Deliver titrated analgesia"; }
         attribute :>> capabilityLevel = "primary";
         attribute :>> preCondition = "confirmed prescription and loaded reservoir";
         attribute :>> postCondition = "drug delivered within prescribed limits at all times";
     }
     part ocFailSafeTherapy : OperationalCapability {
-        @MemoIdentity { :>> providedId = "OC-002"; :>> label = "FailSafeTherapyManagement"; }
+        @MemoIdentity { :>> providedId = "OC-002"; :>> label = "Fail safe therapy management"; }
         attribute :>> capabilityLevel = "safety";
         attribute :>> preCondition = "any single failure or foreseeable misuse";
         attribute :>> postCondition = "pump reaches a safe state (infusion stopped or paused) and the operator is alerted";
@@ -284,30 +274,30 @@ package memo_examples_gpca_pump_gpca_operational {
     #refinement dependency wfRespondToTherapyAlarm::osPowerLoss to ucDeliverPcaTherapy;
 
     // ── Operational trace relations ─────────────────────────────
-    connection : RealizesUseCase connect realizingWorkflow ::> wfPrepareAndStartTherapy to realizedUseCase ::> ucDeliverPcaTherapy;
-    connection : RealizesUseCase connect realizingWorkflow ::> wfManageActiveTherapy to realizedUseCase ::> ucDeliverPcaTherapy;
-    connection : RealizesUseCase connect realizingWorkflow ::> wfRespondToTherapyAlarm to realizedUseCase ::> ucDeliverPcaTherapy;
-    connection : EnablesUseCase connect enablingCapability ::> ocTitratedAnalgesia to enabledUseCase ::> ucDeliverPcaTherapy;
-    connection : EnablesUseCase connect enablingCapability ::> ocFailSafeTherapy to enabledUseCase ::> ucDeliverPcaTherapy;
-    connection : RequiresCapability connect requiringIntendedUse ::> gpcaIntendedUse to requiredCapability ::> ocTitratedAnalgesia;
-    connection : RequiresCapability connect requiringIntendedUse ::> gpcaIntendedUse to requiredCapability ::> ocFailSafeTherapy;
+    connection : RealizesUseCase connect wfPrepareAndStartTherapy to ucDeliverPcaTherapy;
+    connection : RealizesUseCase connect wfManageActiveTherapy to ucDeliverPcaTherapy;
+    connection : RealizesUseCase connect wfRespondToTherapyAlarm to ucDeliverPcaTherapy;
+    connection : EnablesUseCase connect ocTitratedAnalgesia to ucDeliverPcaTherapy;
+    connection : EnablesUseCase connect ocFailSafeTherapy to ucDeliverPcaTherapy;
+    connection : RequiresCapability connect gpcaIntendedUse to ocTitratedAnalgesia;
+    connection : RequiresCapability connect gpcaIntendedUse to ocFailSafeTherapy;
 
 
 
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification valAuthoredOaPrescribe : ValidationCase {
-        @MemoIdentity { :>> providedId = "GP-VC-A03"; :>> label = "VerifyPrescribeTherapy"; }
+        @MemoIdentity { :>> providedId = "GP-VC-A03"; :>> label = "Verify prescribe therapy"; }
         attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
         attribute :>> userParticipation = "representative users, simulated use conditions";
-        attribute :>> acceptanceCriteria = "a representative user completes 'PrescribeTherapy' without a use error, in a summative evaluation per IEC 62366-1";
+        attribute :>> acceptanceCriteria = "a representative user completes 'Prescribe therapy' without a use error, in a summative evaluation per IEC 62366-1";
     }
-    connection : Validates connect validationTarget ::> oaPrescribe to validationCase ::> valAuthoredOaPrescribe;
+    connection : Validates connect oaPrescribe to valAuthoredOaPrescribe;
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification valAuthoredOaStartTherapy : ValidationCase {
-        @MemoIdentity { :>> providedId = "GP-VC-A04"; :>> label = "VerifyStartInfusion"; }
+        @MemoIdentity { :>> providedId = "GP-VC-A04"; :>> label = "Verify start infusion"; }
         attribute :>> validationMethod = ValidationMethodKind::summativeUsabilityTest;
         attribute :>> userParticipation = "representative users, simulated use conditions";
-        attribute :>> acceptanceCriteria = "a representative user completes 'StartInfusion' without a use error, in a summative evaluation per IEC 62366-1";
+        attribute :>> acceptanceCriteria = "a representative user completes 'Start infusion' without a use error, in a summative evaluation per IEC 62366-1";
     }
-    connection : Validates connect validationTarget ::> oaStartTherapy to validationCase ::> valAuthoredOaStartTherapy;
+    connection : Validates connect oaStartTherapy to valAuthoredOaStartTherapy;
 }

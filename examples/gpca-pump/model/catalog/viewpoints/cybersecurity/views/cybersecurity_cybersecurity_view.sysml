@@ -1,26 +1,12 @@
 package memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cybersecurity_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_context_context_viewpoint::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_viewpoints_software_software_viewpoint::*;
-    private import memo_viewpoints_physical_physical_viewpoint::*;
-    private import memo_viewpoints_requirements_requirements_viewpoint::*;
-    private import memo_viewpoints_risk_risk_viewpoint::*;
-    private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view gpcaCybersecurityView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_cybersecurity_views_cybersecurity_cybersecurity_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-CYB-001"; :>> label = "GPCA_CybersecurityView"; }
-        @MemoIdentity { :>> shortDescription = "Shows GPCA assets, trust boundaries, threats, vulnerabilities, and mitigations."; }
+        @MemoIdentity { :>> providedId = "VIEW-CYB-001"; :>> label = "GPCA_CybersecurityView"; :>> shortDescription = "Shows GPCA assets, trust boundaries, threats, vulnerabilities, and mitigations."; }
         doc /* Product-specific cybersecurity view intended for secure product development and cross-reference into cybersecurity risk documentation. */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::custom);

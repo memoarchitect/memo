@@ -27,7 +27,6 @@
 | private | `memo_core_consistency_rules::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 | private | `memo_artifacts_standards_traceability::EnforcesClause` |
 | private | `memo_artifacts_standards_iec_62304::*` |
 | private | `memo_artifacts_standards_iso_14971::*` |
@@ -83,7 +82,6 @@ constraint def ReqToArchTraceRule :> MemoConsistencyRule
         private import memo_core_enumerations::*;
 
         private import memo_core_common::*;
-        private import memo_core_common::MemoIdentity;
         private import memo_artifacts_standards_traceability::EnforcesClause;
         private import memo_artifacts_standards_iec_62304::*;
         private import memo_artifacts_standards_iso_14971::*;

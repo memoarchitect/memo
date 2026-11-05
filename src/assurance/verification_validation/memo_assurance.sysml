@@ -12,18 +12,14 @@ package memo_assurance_verification_validation {
     private import memo_architecture_functional_functions::*;
     // Verification and validation cases are SysML v2 verification cases
     // (behaviours that check requirements), not verifiable structures — they
-    // derive from the MemoVerificationCase foundation, not MemoPart.
-    // `status` is NOT redeclared here. It used to be re-declared as a String,
-    // which shadowed the `status : ElementStatusKind` every MEMO base carries
-    // and let a verification case hold an editorial status no other element
-    // could hold — against the "one status vocabulary in MEMO" rule stated in
-    // memo_requirements.sysml. The values it actually held ("planned") were an
-    // EXECUTION state, not an editorial one; execution state belongs in an
-    // attribute of its own (see RiskControlMeasure.verificationStatus), not in
-    // a second spelling of `status`.
-    // Specializes the standard library verification case as well as MEMO's
-    // base, rather than shadowing it — see the note on UseCase.
-    // Reusable test action, distinct from a case's pass/fail criteria.
+    // derive from the MemoVerificationCase foundation, not MemoPart. `status`
+    // is NOT redeclared here: every MEMO base carries `status :
+    // ElementStatusKind`, the one status vocabulary in MEMO. An EXECUTION state
+    // such as "planned" belongs in an attribute of its own (see
+    // RiskControlMeasure.verificationStatus). Specializes the standard library
+    // verification case as well as MEMO's base, rather than shadowing it — see
+    // the note on UseCase. Reusable test action, distinct from a case's
+    // pass/fail criteria.
     action def TestStep specializes MemoAction {
         attribute stepAction : String;
         attribute expectedResult : String;
@@ -74,10 +70,10 @@ package memo_assurance_verification_validation {
         attribute acceptanceCriteria : String;
         attribute clinicalContext : String;
     }
-    // Operational validation confirms the user's goal is achieved in the
-    // use environment (§5): ValidationCase validates a UseCase.
-    // Safety-critical functions must trace to verification (rules/coverage).
-    // `ExecutesScenario` is native `perform` (2026-08-18): OperativeScenario
-    // is an `action def`, so write `perform <scenario>;` inside the
-    // verification case, as `InvolvesFunction` already does.
+    // Operational validation confirms the user's goal is achieved in the use
+    // environment: ValidationCase validates a UseCase. Safety-critical
+    // functions must trace to verification (rules/coverage). `ExecutesScenario`
+    // is native `perform`: OperativeScenario is an `action def`, so write
+    // `perform <scenario>;` inside the verification case, as `InvolvesFunction`
+    // already does.
 }

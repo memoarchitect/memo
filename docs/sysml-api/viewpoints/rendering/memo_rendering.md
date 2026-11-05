@@ -25,7 +25,6 @@
 | --- | --- |
 | private | `ScalarValues::*` |
 | private | `memo_core_common::*` |
-| private | `memo_core_common::MemoIdentity` |
 
 ## Declarations
 
@@ -87,21 +86,18 @@ part def EnumRendering :> MemoPart
     ```sysml
     // Architecture-layer rendering and Model Explorer taxonomy.
     //
-    // This content used to live in `ontology/memo.rendering.yaml`. Both halves of
-    // that file decided how MEMO's own kinds are grouped and presented, which makes
-    // them ontology metadata, not application settings: a project that received the
-    // ontology without the YAML got a different Explorer. They are SysML here so
-    // that the ontology carries its own taxonomy wherever it is resolved.
+    // How MEMO's own kinds are grouped and presented is ontology metadata, not an
+    // application setting, so it is SysML here and the ontology carries its own
+    // taxonomy wherever it is resolved.
     //
     // The colours are the v12 Visual Map palette. They are the ontology's authored
-    // default; an application may still theme over them, but it no longer has to
-    // supply them for the model to be complete.
+    // default; an application may theme over them, and need not supply them for the
+    // model to be complete.
     package memo_viewpoints_rendering {
         private import ScalarValues::*;
 
         private import memo_core_common::*;
 
-        private import memo_core_common::MemoIdentity;
         // The presentation identity of one architecture layer.
         part def LayerRendering :> MemoPart {
             attribute layerId : String;

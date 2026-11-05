@@ -6,7 +6,6 @@ package memo_viewpoints_functional_functional_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint functionalViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-FUNC"; :>> label = "FunctionalViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows system functions, their decomposition, and allocation."; }

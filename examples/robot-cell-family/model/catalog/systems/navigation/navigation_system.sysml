@@ -2,12 +2,7 @@
 // robot's pose and paints the recorded range data onto it. It imports the
 // family's shared package only.
 package robot_cell_family_systems_navigation_navigation_system {
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    private import memo_core_enumerations::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_architecture_operational_use_cases::*;
+    private import memo::*;
     private import robot_cell_family_shared::*;
 
     part def NavigationSystem specializes System {
@@ -22,12 +17,12 @@ package robot_cell_family_systems_navigation_navigation_system {
         }
         allocate fnBuildMap to mapEngine;
         allocate fnTagGrasp to mapEngine;
-            // The relay supervises the map engine.
-        connection : LogicalConnector connect sourceComponent ::> safetyRelay to targetComponent ::> mapEngine {
+        // The relay supervises the map engine.
+        connection : LogicalConnector connect safetyRelay to mapEngine {
             attribute :>> contentKind = FlowContentKind::status;
             attribute :>> direction = DirectionKind::output;
         }
-}
+    }
 
     action fnBuildMap : SystemFunction {
         @MemoIdentity { :>> providedId = "RCF-NAV-F-001"; :>> label = "Build Occupancy Map"; }

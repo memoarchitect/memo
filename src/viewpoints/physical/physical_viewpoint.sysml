@@ -6,7 +6,6 @@ package memo_viewpoints_physical_physical_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint physicalViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-PHY"; :>> label = "PhysicalViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows physical components, hardware structure, and their interconnections."; }

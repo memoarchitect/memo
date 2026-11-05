@@ -46,7 +46,7 @@
 | [`RuntimeEnvironment`](#runtimeenvironment) | `part def` | Runtime environment definition specializing `MemoPart`. | `MemoPart` |
 | [`BuildsInto`](#buildsinto) | `allocation def` | Typed relationship from `SoftwareModule` to `SoftwareDeploymentUnit`. | `MemoRelationship` |
 | [`RealizedBy`](#realizedby) | `allocation def` | Typed relationship from `LogicalComponent` to `MemoPart`. | `MemoRelationship` |
-| [`DeploysTo`](#deploysto) | `allocation def` | Typed relationship from `SoftwareDeploymentUnit` to `ProcessingNode`. | `MemoRelationship` |
+| [`DeploysTo`](#deploysto) | `allocation def` | Written `allocation x : DeploysTo allocate a to b;`. | `MemoRelationship` |
 | [`ProvidesEnvironment`](#providesenvironment) | `connection def` | Typed relationship from `ProcessingNode` to `RuntimeEnvironment`. | `MemoRelationship` |
 | [`MemoryBinding`](#memorybinding) | `allocation def` | AADL `actual_memory_binding`. Which memory a software component's code and data occupy — what makes a memory budget a claim about a device rather than a string. | `MemoRelationship` |
 | [`ConnectionBinding`](#connectionbinding) | `allocation def` | AADL `actual_connection_binding`. Which physical thing carries an interface: a network medium under a component exchange, a cable or harness under a hardware `Interface`, a connector, a tube.… | `MemoRelationship` |
@@ -124,7 +124,7 @@ allocation def DeploysTo :> MemoRelationship, Allocations::Allocation
 
 | Property | Value |
 | --- | --- |
-| Description | Typed relationship from `SoftwareDeploymentUnit` to `ProcessingNode`. |
+| Description | Written `allocation x : DeploysTo allocate a to b;`. |
 | Kind | `allocation def` |
 | Abstract | No |
 | Specializes | `MemoRelationship` |
@@ -260,12 +260,10 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
     // SoftwareDeploymentUnit deploysTo ProcessingNode. Software deploys only to capable
     // execution nodes (rules/crosslayer).
     //
-    // `HostedBy` is NOT part of that chain, and this comment used to claim it was
-    // ("SoftwareComponent hostedBy ProcessingNode"). It is
-    // `processingNode : ProcessingNode -> hostAssembly : PhysicalAssembly`:
-    // physical hosting of a node by the assembly it is mounted in, running the
-    // other way and between different things. Software reaches a node through
-    // DeploysTo.
+    // `HostedBy` is NOT part of that chain. It is `processingNode : ProcessingNode
+    // -> hostAssembly : PhysicalAssembly`: physical hosting of a node by the
+    // assembly it is mounted in, running the other way and between different
+    // things. Software reaches a node through DeploysTo.
     package memo_architecture_realization_deployment {
         private import memo_core_stdlib_quantities::*;
         private import Metaobjects::SemanticMetadata;
@@ -299,7 +297,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
             attribute certificationEvidence : String;
         }
 
-            // A module BUILDS INTO a deployment unit: that is an allocation, and the
+        // A module BUILDS INTO a deployment unit: that is an allocation, and the
         // language has one. Rooted like MemoryBinding / ConnectionBinding below,
         // so the whole deployment family spells allocation the same way.
         allocation def BuildsInto :> MemoRelationship, Allocations::Allocation {
@@ -330,8 +328,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
             :> annotatedElement : SysML::AllocationUsage;
             :>> baseType = realizedByLinks meta SysML::Usage;
         }
-            // Every usage of this already writes `allocation x : DeploysTo allocate a
-        // to b;` -- the declaration was the only part still saying `connection`.
+        // Written `allocation x : DeploysTo allocate a to b;`.
         allocation def DeploysTo :> MemoRelationship, Allocations::Allocation {
             attribute deploymentKind : DeploymentKind;
             end deploymentUnit : SoftwareDeploymentUnit :>> source;
@@ -354,24 +351,21 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
             :>> baseType = providesEnvironmentLinks meta SysML::Usage;
         }
 
-        // ─── AADL bindings (SAE AS5506) — plan C1 ────────────────────────────
+        // ─── AADL bindings (SAE AS5506) ────────────────────────────
         //
         // AADL's analytic power is that EVERYTHING is bound to something, and the
-        // binding is where latency, bandwidth and fault propagation accrue. MEMO
-        // had one binding of three: `DeploysTo` is `actual_processor_binding`.
-        // Without the other two, `SoftwareComponent.memoryBudget` is unanalysable
-        // and `EndToEndFlow.latencyBudgetMs` cannot be checked against the media
-        // the flow traverses — the analysis the flow comment below describes and
-        // the model could not perform.
+        // binding is where latency, bandwidth and fault propagation accrue.
+        // `DeploysTo` is `actual_processor_binding`. Without the other two,
+        // `SoftwareComponent.memoryBudget` is unanalysable and
+        // `EndToEndFlow.latencyBudgetMs` cannot be checked against the media the
+        // flow traverses.
         //
         // Both are `allocation def`s rooted on the standard's
         // `Allocations::Allocation`, because a binding IS an allocation and the
         // language says so. The double specialization keeps MEMO's identification
         // core from `MemoRelationship` while adding the standard's allocation
         // semantics; both root on `Connections::BinaryConnection`, so this is a
-        // diamond and not a conflict. Verified with a SysML v2 compiler against a
-        // negative control (a non-existent supertype is reported), so the clean
-        // result is the checker agreeing rather than the checker skipping.
+        // diamond and not a conflict.
 
         // AADL `actual_memory_binding`. Which memory a software component's code
         // and data occupy — what makes a memory budget a claim about a device
@@ -392,10 +386,10 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         // interface: a network medium under a component exchange, a cable or
         // harness under a hardware `Interface`, a connector, a tube. The source is
         // the interface usage rather than a link, because the interface is the
-        // ELEMENT that owns the budget (§19.3) and a link instance is not
-        // something the graph can bind to; it is also exactly where the latency
-        // the medium contributes has to be accounted. Ends are the two bases
-        // (MemoInterface, PhysicalComponent) so one binding serves every layer.
+        // ELEMENT that owns the budget and a link instance is not something the
+        // graph can bind to; it is also exactly where the latency the medium
+        // contributes has to be accounted. Ends are the two bases (MemoInterface,
+        // PhysicalComponent) so one binding serves every layer.
         allocation def ConnectionBinding :> MemoRelationship, Allocations::Allocation {
             attribute allocatedBandwidth : String;
             attribute mediumLatencyMs : DurationValue;
@@ -456,7 +450,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
             :>> baseType = flowComprisesSpecLinks meta SysML::Usage;
         }
         // The flow traverses a software→hardware binding; latency accrues here.
-            // A binding IS an allocation, exactly as MemoryBinding and
+        // A binding IS an allocation, exactly as MemoryBinding and
         // ConnectionBinding already declare.
         allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation {
             end endToEndFlow : EndToEndFlow :>> source;

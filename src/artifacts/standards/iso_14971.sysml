@@ -9,7 +9,6 @@ package memo_artifacts_standards_iso_14971 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part iso14971 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-ISO-14971"; }
         attribute :>> designation = "ISO 14971:2019";

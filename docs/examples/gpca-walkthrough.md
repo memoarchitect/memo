@@ -120,7 +120,7 @@ element. Three workflows support that one goal.
 
 ```sysml
 use case ucDeliverPcaTherapy : UseCase {
-    @MemoIdentity { :>> label = "DeliverPatientControlledAnalgesia"; }
+    @MemoIdentity { :>> label = "Deliver patient controlled analgesia"; }
     attribute :>> useCaseKind = UseCaseKind::care;
     attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
     ref :>> useContext = hospitalWardContext;
@@ -131,9 +131,9 @@ use case ucDeliverPcaTherapy : UseCase {
     actor pharmacistActor = actorPharmacist;
 }
 
-connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfPrepareAndStartTherapy to supported ::> ucDeliverPcaTherapy; }
-connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfManageActiveTherapy to supported ::> ucDeliverPcaTherapy; }
-connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect supporter ::> wfRespondToTherapyAlarm to supported ::> ucDeliverPcaTherapy; }
+connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect wfPrepareAndStartTherapy to ucDeliverPcaTherapy; }
+connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect wfManageActiveTherapy to ucDeliverPcaTherapy; }
+connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect wfRespondToTherapyAlarm to ucDeliverPcaTherapy; }
 ```
 
 ### 2. A workflow has scenarios; each scenario owns its operational activity
@@ -144,7 +144,7 @@ scenario has a different activity; it is not one shared generic activity.
 
 ```sysml
 action oaRejectBolusDuringLockout : OperativeAction {
-    @MemoIdentity { :>> label = "RejectBolusDuringLockout"; }
+    @MemoIdentity { :>> label = "Reject bolus during lockout"; }
     action checkLockout; action rejectAndLog;
     first start then checkLockout;
     first checkLockout then rejectAndLog;
@@ -152,7 +152,7 @@ action oaRejectBolusDuringLockout : OperativeAction {
 }
 
 action osLockoutBolus : OperativeScenario {
-    @MemoIdentity { :>> label = "BolusRequestDuringLockout"; }
+    @MemoIdentity { :>> label = "Bolus request during lockout"; }
     attribute :>> scenarioKind = ScenarioKind::operative;
     attribute :>> variantKind = ScenarioVariantKind::alternate;
     ref :>> parentWorkflow = wfManageActiveTherapy;
@@ -169,17 +169,17 @@ without making the scenarios identical.
 
 ```sysml
 part fcPatientBolus : FunctionalFlow {
-    @MemoIdentity { :>> label = "PatientBolusChain"; }
+    @MemoIdentity { :>> label = "Patient bolus chain"; }
     ref :>> startFunction = fnAcquireSensors;
     ref :>> endFunction = fnCommandPump;
     attribute :>> endToEndLatencyBudgetMs = "100";
 }
 
-connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnAcquireSensors;
-connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnEnforceLimits;
-connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnManageInfusion;
-connection : InvolvesFunction connect functionalChain ::> fcPatientBolus to function ::> fnCommandPump;
-connection : IncludesStep connect functionalChain ::> fcPatientBolus to step ::> fcsBolusValidate;
+connection : InvolvesFunction connect fcPatientBolus to fnAcquireSensors;
+connection : InvolvesFunction connect fcPatientBolus to fnEnforceLimits;
+connection : InvolvesFunction connect fcPatientBolus to fnManageInfusion;
+connection : InvolvesFunction connect fcPatientBolus to fnCommandPump;
+connection : IncludesStep connect fcPatientBolus to fcsBolusValidate;
 ```
 
 ### 4. A viewpoint selects the model for a review

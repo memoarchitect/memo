@@ -39,7 +39,7 @@
 | [`DemandLevelKind`](#demandlevelkind) | `enum def` | Controlled values for demand level: `minimal`, `low`, `moderate`, `high`, `extreme`. | — |
 | [`ProbabilityValue`](#probabilityvalue) | `attribute def` | A probability: a dimensionless quantity between 0 and 1. | `DimensionOneValue` |
 | [`OperativeAction`](#operativeaction) | `action def` | Operative action definition specializing `MemoAction`. | `MemoAction` |
-| [`TaskDifficultyAssessment`](#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. | `MemoPart` |
+| [`TaskDifficultyAssessment`](#taskdifficultyassessment) | `part def` | Difficulty of a task in a particular context. Associated by typed references, not inheritance; assessments are evidence-bearing. | `MemoPart` |
 | [`AssessesDifficulty`](#assessesdifficulty) | `connection def` | Typed relationship from `TaskDifficultyAssessment` to `OperativeAction`. | `MemoRelationship` |
 
 ## DemandLevelKind
@@ -95,7 +95,7 @@ part def TaskDifficultyAssessment specializes MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | Difficulty of a task in a particular context (§17). Associated by typed references, not inheritance; assessments are evidence-bearing. |
+| Description | Difficulty of a task in a particular context. Associated by typed references, not inheritance; assessments are evidence-bearing. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -192,8 +192,8 @@ connection def AssessesDifficulty :> MemoRelationship
             attribute feedbackExpected : String;
         }
 
-        // Difficulty of a task in a particular context (§17). Associated by
-        // typed references, not inheritance; assessments are evidence-bearing.
+        // Difficulty of a task in a particular context. Associated by typed
+        // references, not inheritance; assessments are evidence-bearing.
         part def TaskDifficultyAssessment specializes MemoPart {
             attribute overallDifficulty : DemandLevelKind;
             attribute physicalDemand : DemandLevelKind;

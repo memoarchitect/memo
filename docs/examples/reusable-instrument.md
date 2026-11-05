@@ -20,8 +20,8 @@ action wfReprocess : OperationalWorkflow {
     attribute :>> entryCondition = "used instrument received in decontamination";
     attribute :>> completionCondition = "sterile pack released to storage";
 }
-connection : StepPrecedes connect predecessor ::> wsClean to successor ::> wsInspect;
-connection : StepPrecedes connect predecessor ::> wsInspect to successor ::> wsSterilize;
+connection : StepPrecedes connect wsClean to wsInspect;
+connection : StepPrecedes connect wsInspect to wsSterilize;
 ```
 
 External manufacturing, QMS, or asset-management systems may associate their

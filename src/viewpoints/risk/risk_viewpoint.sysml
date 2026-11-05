@@ -6,7 +6,6 @@ package memo_viewpoints_risk_risk_viewpoint {
     private import memo_viewpoints_stakeholders_concerns::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     viewpoint riskViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-RISK"; :>> label = "RiskViewpoint"; }
         @MemoIdentity { :>> shortDescription = "Shows hazards, risks, controls, and assurance links."; }

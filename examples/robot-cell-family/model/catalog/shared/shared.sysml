@@ -4,12 +4,7 @@
 // nothing else of the family; it never names the system of systems or another
 // system.
 package robot_cell_family_shared {
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
-    private import memo_core_enumerations::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_operational_context_actors::*;
+    private import memo::*;
 
     // ─── Signals that cross a system boundary ───────────────────────────
     item def PointCloud specializes InterfaceItem {

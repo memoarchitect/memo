@@ -1,25 +1,12 @@
 package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_context_context_viewpoint::*;
-    private import memo_viewpoints_operational_operational_viewpoint::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_viewpoints_logical_logical_viewpoint::*;
-    private import memo_viewpoints_software_software_viewpoint::*;
-    private import memo_viewpoints_physical_physical_viewpoint::*;
-    private import memo_viewpoints_requirements_requirements_viewpoint::*;
-    private import memo_viewpoints_risk_risk_viewpoint::*;
-    private import memo_viewpoints_verification_verification_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view gpcaActionFlowView : MemoDiagramView {
         expose memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_view::*;
         attribute depth = 2;
-        @MemoIdentity { :>> providedId = "VIEW-BHV-003"; :>> label = "GPCA_InfusionDeliveryActionFlowView"; }
-        @MemoIdentity { :>> shortDescription = "The 20 ms execution-step pipeline from sensor acquisition through alarm evaluation and dose limiting to pump actuation and event logging."; }
+        @MemoIdentity { :>> providedId = "VIEW-BHV-003"; :>> label = "GPCA_InfusionDeliveryActionFlowView"; :>> shortDescription = "The 20 ms execution-step pipeline from sensor acquisition through alarm evaluation and dose limiting to pump actuation and event logging."; }
         doc /* Action flow over the infusionDeliveryFlow composite action: typed action steps with in/out parameters, item flows carrying the DD/CD exchange items, succession ordering from start to done, and swimlane allocation onto the logical architecture (sensors, alarm, infusion manager, pump motor, logging). */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);

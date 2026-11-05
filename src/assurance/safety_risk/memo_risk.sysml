@@ -7,7 +7,7 @@ package memo_assurance_safety_risk {
     private import memo_core_enumerations::*;
     private import memo_assurance_requirements::*;
     // For HazardRelatedScenario below. Assurance may depend on architecture;
-    // the reverse is what the string on the scenario was avoiding.
+    // the reverse is not allowed.
     private import memo_architecture_operational_scenarios::*;
 
     // ISO 14971 / IEC 62366-1 risk-analysis input. A model element so hazards,
@@ -45,15 +45,14 @@ package memo_assurance_safety_risk {
         attribute riskLevelMapping : String;
         attribute acceptabilityThresholds : String;
     }
-    // `DesignControlRiskRow` was a denormalized spreadsheet transcription.
-    // Risk rows now decompose into the ISO 14971 chain below: a Hazard,
-    // SequenceOfEvents, HazardousSituation and Harm are independent elements, not
-    // owned by a risk, because the same hazard is the hazard of many risks. A Risk
-    // is linked to each by EstimatedFor, and the chain runs through TracesRisk /
-    // LeadsToHarm, with ResidualRisk after mitigation. The risk itself is reached
-    // by EstimatedFor / ReducedBy / EvaluatedIn below.
-    // A device characteristic whose implementation, failure, or misuse can
-    // affect safety. This is the modelable output of ISO 14971 §5.3.
+    // A risk decomposes into the ISO 14971 chain below: a Hazard,
+    // SequenceOfEvents, HazardousSituation and Harm are independent elements,
+    // not owned by a risk, because the same hazard is the hazard of many risks.
+    // A Risk is linked to each by EstimatedFor, and the chain runs through
+    // TracesRisk / LeadsToHarm, with ResidualRisk after mitigation. The risk
+    // itself is reached by EstimatedFor / ReducedBy / EvaluatedIn below. A
+    // device characteristic whose implementation, failure, or misuse can affect
+    // safety. This is the modelable output of ISO 14971 §5.3.
     part def SafetyRelatedCharacteristic specializes MemoPart {
         attribute characteristic : String;
         attribute safetyImpact : String;
@@ -151,12 +150,9 @@ package memo_assurance_safety_risk {
         :>> baseType = leadsToHarmLinks meta SysML::Usage;
     }
     // IEC 62366-1 3.9's hazard-related use scenario: the scenario a hazard can
-    // arise in. It is declared HERE rather than as a `hazardReference` string
-    // on the scenario, which is what stood in for it: a string names nothing a
-    // consumer can follow, and the layering is why it was written that way —
-    // assurance may depend on architecture, and the scenario package cannot
-    // see `Hazard`. On this side both ends are visible and the dependency runs
-    // the direction it already runs.
+    // arise in. It is declared HERE because assurance may depend on
+    // architecture, and the scenario package cannot see `Hazard`. On this side
+    // both ends are visible.
     connection def HazardRelatedScenario :> MemoRelationship {
         end hazard : RiskItem :>> source;
         end scenario : OperativeScenario :>> target;
@@ -178,12 +174,10 @@ package memo_assurance_safety_risk {
         :>> baseType = assessedAgainstLinks meta SysML::Usage;
     }
     // A risk is not a link in the chain (see RiskItem), so TracesRisk cannot
-    // reach it — and until these three nothing else could either. A model had
-    // no way to say which hazardous situation or harm a risk was estimated for
-    // (ISO 14971 §5.5), which control reduced it to a residual risk (§7), or
-    // which overall evaluation covered that residual (§8), so gpca-pump wrote
-    // all three as TracesRisk into a Risk and the builder rejected every one.
-    // Named from the risk's side, like AssessedAgainst.
+    // reach it. These three say which hazardous situation or harm a risk was
+    // estimated for (ISO 14971 §5.5), which control reduced it to a residual
+    // risk (§7), and which overall evaluation covered that residual (§8). Named
+    // from the risk's side, like AssessedAgainst.
     connection def EstimatedFor :> MemoRelationship {
         end risk : Risk :>> source;
         end riskElement : RiskItem :>> target;

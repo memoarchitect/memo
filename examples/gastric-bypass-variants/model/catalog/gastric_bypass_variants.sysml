@@ -16,27 +16,13 @@
 // resource too, so its rate is built from capital, service and practical capacity, as
 // time-driven activity-based costing does.
 package memo_examples_gastric_bypass_variants {
+    private import memo::*;
     private import ScalarValues::*;
     private import ModelingMetadata::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_core_stdlib_quantities::*;
-    private import memo_core_stdlib_money::*;
-    private import memo_core_stdlib_analysis::*;
-    private import memo_architecture_operational_context_actors::*;
-    private import memo_architecture_operational_structure::*;
-    private import memo_architecture_operational_use_cases::*;
-    private import memo_architecture_operational_activities::*;
-    private import memo_architecture_operational_workflows::*;
-    private import memo_architecture_operational_scenarios::*;
-    private import memo_architecture_operational_rollups::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_functional_functions::*;
     private import memo_extension_clinical::*;
     private import gastric_bypass_variants_anatomy_fma::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
 
     // ── The project's one currency ──────────────────────────────
     attribute <EUR> euro : CurrencyUnit;
@@ -109,7 +95,7 @@ package memo_examples_gastric_bypass_variants {
             }
         }
     }
-    connection : RealizesUseCase connect realizingWorkflow ::> wfRouxEnY to realizedUseCase ::> ucRouxEnY;
+    connection : RealizesUseCase connect wfRouxEnY to ucRouxEnY;
 
     // ── Staff and functions ──────────────────────────────────────
     // Illustrative rates, authored for this example.
@@ -242,7 +228,7 @@ package memo_examples_gastric_bypass_variants {
             }
         }
     }
-    connection : RealizesUseCase connect realizingWorkflow ::> wfRouxEnYLap to realizedUseCase ::> ucRouxEnYLap;
+    connection : RealizesUseCase connect wfRouxEnYLap to ucRouxEnYLap;
     #refinement dependency wfRouxEnYLap::scLapNominal::establishAccess to wfRouxEnY::scNominal::establishAccess;
     #refinement dependency wfRouxEnYLap::scLapNominal::createPouch to wfRouxEnY::scNominal::createPouch;
     #refinement dependency wfRouxEnYLap::scLapNominal::createGastrojejunostomy to wfRouxEnY::scNominal::createGastrojejunostomy;
@@ -312,7 +298,7 @@ package memo_examples_gastric_bypass_variants {
             }
         }
     }
-    connection : RealizesUseCase connect realizingWorkflow ::> wfRouxEnYOur to realizedUseCase ::> ucRouxEnYOur;
+    connection : RealizesUseCase connect wfRouxEnYOur to ucRouxEnYOur;
     #refinement dependency wfRouxEnYOur::scOurNominal::establishAccess to wfRouxEnY::scNominal::establishAccess;
     #refinement dependency wfRouxEnYOur::scOurNominal::createPouch to wfRouxEnY::scNominal::createPouch;
     #refinement dependency wfRouxEnYOur::scOurNominal::createGastrojejunostomy to wfRouxEnY::scNominal::createGastrojejunostomy;
@@ -377,7 +363,7 @@ package memo_examples_gastric_bypass_variants {
             }
         }
     }
-    connection : RealizesUseCase connect realizingWorkflow ::> wfRouxEnYCmp to realizedUseCase ::> ucRouxEnYCmp;
+    connection : RealizesUseCase connect wfRouxEnYCmp to ucRouxEnYCmp;
     #refinement dependency wfRouxEnYCmp::scCmpNominal::establishAccess to wfRouxEnY::scNominal::establishAccess;
     #refinement dependency wfRouxEnYCmp::scCmpNominal::createPouch to wfRouxEnY::scNominal::createPouch;
     #refinement dependency wfRouxEnYCmp::scCmpNominal::createGastrojejunostomy to wfRouxEnY::scNominal::createGastrojejunostomy;

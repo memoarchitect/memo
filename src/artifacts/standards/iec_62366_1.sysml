@@ -11,7 +11,6 @@ package memo_artifacts_standards_iec_62366_1 {
     private import memo_artifacts_standards_traceability::*;
 
     private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     part iec62366_1 : RegulatoryStandard {
         @MemoIdentity { :>> providedId = "STD-IEC-62366-1"; }
         attribute :>> designation = "IEC 62366-1:2015+AMD1:2020";

@@ -1,5 +1,6 @@
-// Fluidic / pneumatic realization subgroup (§12). Fluid- and gas-path parts
-// specialize the physical roots in memo_architecture_implementation_hardware_common.
+// Fluidic / pneumatic realization subgroup. Fluid- and gas-path parts
+// specialize the physical roots in
+// memo_architecture_implementation_hardware_common.
 package memo_architecture_implementation_hardware_fluidic {
     private import ScalarValues::*;
     private import memo_architecture_implementation_hardware_common::*;

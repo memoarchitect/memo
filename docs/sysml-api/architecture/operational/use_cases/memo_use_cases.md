@@ -36,7 +36,7 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
-| [`UseCaseKind`](#usecasekind) | `enum def` | Controlled values for use case: `clinical`, `service`, `manufacturing`, `development`. | — |
+| [`UseCaseKind`](#usecasekind) | `enum def` | Controlled values for use case: `care`, `service`, `manufacturing`, `development`. | — |
 | [`UseCase`](#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. | `MemoUseCase` |
 | [`ClinicalUseCase`](#clinicalusecase) | `use case def` | Clinical use case definition specializing `UseCase`. | `UseCase` |
 | [`SystemUseCase`](#systemusecase) | `use case def` | System use case definition specializing `UseCase`. | `UseCase` |
@@ -50,7 +50,7 @@ enum def UseCaseKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for use case: `clinical`, `service`, `manufacturing`, `development`. |
+| Description | Controlled values for use case: `care`, `service`, `manufacturing`, `development`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -122,9 +122,9 @@ connection def Motivates :> MemoRelationship
 ??? code "architecture/operational/use_cases/memo_use_cases.sysml"
 
     ```sysml
-    // Use cases (§5). A UseCase is a goal a person or organization wants to
-    // achieve with system support — there is no separate Goal class. Clinical,
-    // service, manufacturing, and development use cases specialize the same base.
+    // Use cases. A UseCase is a goal a person or organization wants to achieve with
+    // system support — there is no separate Goal class. Clinical, service,
+    // manufacturing, and development use cases specialize the same base.
     //
     // A use case is at one of two levels, and the level is its own type (`ClinicalUseCase` or
     // `SystemUseCase`), kept in agreement with its subject by CR-ONT-093.
@@ -173,18 +173,15 @@ connection def Motivates :> MemoRelationship
             attribute useCaseKind : UseCaseKind;
 
             // The device or system under consideration supports the goal. Native
-            // `subject`, not `ref` (R10-S6): a use case needs an explicit subject
-            // before it can declare `actor` (the subject parameter comes first),
-            // and "the device/system under consideration"
-            // is exactly what a case's subject means, so this was a duplicate
-            // waiting to surface once `actor` needed a subject to attach to.
+            // `subject`, not `ref`: a use case needs an explicit subject before it
+            // can declare `actor` (the subject parameter comes first), and "the
+            // device/system under consideration" is exactly what a case's subject
+            // means.
             subject supportingSystem : MemoPart[0..1];
             ref useContext : UseContext[0..1];
             // Who takes part is native `actor` (`actor <role> = <participant>;`),
-            // inherited from `UseCases::UseCase`. `primaryUser` and
-            // `supportingActors` refs stood here as a second way of saying the
-            // same thing and were removed; which actor initiates is carried by
-            // the actor's name, as the note on `Initiates` below says.
+            // inherited from `UseCases::UseCase`. Which actor initiates is carried
+            // by the actor's name, as the note below says.
         }
 
         // The two levels are types, declared and not derived. A clinical use case has an
@@ -207,17 +204,14 @@ connection def Motivates :> MemoRelationship
             :> annotatedElement : SysML::ConnectionUsage;
             :>> baseType = motivatesLinks meta SysML::Usage;
         }
-        // `Initiates` and `ParticipatesIn` are native `actor` (R10-S6): both were
-        // a bare typed edge onto UseCase with no attributes of their own, and
-        // native `actor` does not distinguish an initiating actor from a
-        // participating one — that distinction now lives in how the actor is
-        // named on the use case, not in a relationship type. Write
-        // `actor <role> = <existingElement>;` inside the use case instead.
-        // UML use-case decomposition (`Includes`) is native `include use case` /
-        // `include` (R10-S6); write that instead of a connection here. SysML v2
-        // has no use-case `extend` (the textual BNF defines IncludeUseCaseUsage
-        // and nothing for extend), and MEMO does not add one: an optional path
-        // through a use case is an alternate scenario, not a second use case.
+        // Who initiates or takes part in a use case is native `actor`: write `actor
+        // <role> = <existingElement>;` inside the use case. Native `actor` does not
+        // distinguish an initiating actor from a participating one; that is in how
+        // the actor is named on the use case. UML use-case decomposition is native
+        // `include use case` / `include`. SysML v2 has no use-case `extend` (the
+        // textual BNF defines IncludeUseCaseUsage and nothing for extend), and MEMO
+        // does not add one: an optional path through a use case is an alternate
+        // scenario, not a second use case.
     }
 
     ```

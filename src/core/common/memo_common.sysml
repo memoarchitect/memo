@@ -6,20 +6,13 @@
 // memo_core_dimensions rather than through a superclass.
 //
 // ─── Where identity lives ───────────────────────────────────────────────
-// Not in these bases. `@MemoIdentity`, below, is the one carrier: a
-// `metadata def` annotates an element of ANY metaclass, so it reaches the
-// action, port, item, requirement and connection families that KerML will
-// not let inherit from a part def. The bases used to re-declare an
-// "identification core" ten times over for exactly that reason, and ten
-// copies of one fact drifted every time (MemoPort carried no sourceReference
-// and no status; MemoRequirement and MemoNeed each invented their own status
-// attribute). One declaration replaced ten.
+// Not in these bases. `@MemoIdentity`, below, is the one carrier: a `metadata
+// def` annotates an element of ANY metaclass, so it reaches the action, port,
+// item, requirement and connection families that KerML will not let inherit
+// from a part def.
 //
-// `name` and `description` were the last two to go. Neither was ever MEMO's
-// to declare: every SysML element already has a native name, and `doc` is
-// already the native slot for prose. What the bases added was a second place
-// to write the same fact, and 188 of the 1373 elements that set `name` set it
-// to the identifier they were already declared under. Display text is now
+// The bases declare no `name` or `description`: every SysML element already has
+// a native name, and `doc` is the native slot for prose. Display text is
 // `@MemoIdentity { label }` and prose is `doc`.
 //
 // ─── Resources ──────────────────────────────────────────────────────────
@@ -55,8 +48,7 @@ package memo_core_common {
     // opt-in through `annotatedElement`, and this one declares none. That is
     // what the per-metaclass base definitions below cannot do: KerML will not
     // let an action, port, item, requirement or connection inherit from a part
-    // def, which is why the identification core was once declared ten times
-    // over. Metadata has no such limit, so one declaration replaced ten.
+    // def. Metadata has no such limit, so one declaration serves them all.
     //
     // An element has five identities and they are not interchangeable:
     //
@@ -70,13 +62,12 @@ package memo_core_common {
     // recorded in `memo.identity.yaml`: it is monotonic, gaps are kept, and a
     // retired number is never reused, so nothing authors it by hand.
     //
-    // `label` is NOT a duplicate of the native name, which is the reading that
-    // nearly deleted it: the native name is a lowerCamelCase identifier and
-    // must be unique in its namespace, while a label is free text that
-    // legitimately repeats — measured 2026-08-18, 1278 labels across the
-    // ontology and examples share only 1216 distinct values, because seven
-    // different ports are all correctly labelled "TLM_MODE_IN". A label
-    // therefore cannot live in a name slot, native or otherwise.
+    // `label` is NOT a duplicate of the native name: the native name is a
+    // lowerCamelCase identifier and must be unique in its namespace, while a
+    // label is free text that legitimately repeats — measured 2026-08-18, 1278
+    // labels across the ontology and examples share only 1216 distinct values,
+    // because seven different ports are all correctly labelled "TLM_MODE_IN". A
+    // label therefore cannot live in a name slot, native or otherwise.
     //
     // `providedId` is the identifier an EXTERNAL system knows the element by,
     // and it exists because that system's scheme is not MEMO's: a customer
@@ -86,11 +77,11 @@ package memo_core_common {
     //
     // `uuid` is machine identity. Authored values win over the registry, which
     // wins over derivation — so an element whose file must move can pin its own
-    // uuid, which is what the attribute always advertised.
+    // uuid.
     //
     // Deliberately absent: `name` and `description` (native name and `doc`),
-    // `rationale` (standard `@Rationale`), and `id` — superseded by the
-    // generated number id and by `providedId`.
+    // `rationale` (standard `@Rationale`), and `id` (the generated number id
+    // and `providedId`).
     metadata def MemoIdentity {
         attribute label : String[0..1];
         attribute providedId : String[0..1];
@@ -118,20 +109,18 @@ package memo_core_common {
     //
     // Axis ownership (horizontal architecture layer vs. vertical assurance
     // discipline) is NOT an attribute — it is the element's owning package
-    // (memo_architecture_* xor memo_assurance_*), enforced by CR-ONT-045.
-    // The remaining dimensions are orthogonal to the axis: realization stage,
-    // cross-cutting concern, and editorial status.
-    // Deliberately NOT declared here: `name` and `description`. A name slot on
-    // a MEMO base is a second spelling of the native name every SysML element
-    // already has, and a description slot is a second spelling of `doc`. Both
-    // were carried for years and both drifted: 1373 elements set `name`, and
-    // 188 of them set it to the identifier they were already declared under.
-    // The display label — free text, legitimately repeating — lives on
-    // `@MemoIdentity { label }`, which annotates any metaclass and so reaches
-    // the behaviours and views that cannot specialize a part. The long prose
-    // lives in `doc`. `shortDescription` on `@MemoIdentity` remains the
-    // one-line register a table cell or chip shows whole; it is a different
-    // density, not a different authority.
+    // (memo_architecture_* xor memo_assurance_*), enforced by CR-ONT-045. The
+    // remaining dimensions are orthogonal to the axis: realization stage,
+    // cross-cutting concern, and editorial status. Deliberately NOT declared
+    // here: `name` and `description`. A name slot on a MEMO base is a second
+    // spelling of the native name every SysML element already has, and a
+    // description slot is a second spelling of `doc`. The display label — free
+    // text, legitimately repeating — lives on `@MemoIdentity { label }`, which
+    // annotates any metaclass and so reaches the behaviours and views that
+    // cannot specialize a part. The long prose lives in `doc`.
+    // `shortDescription` on `@MemoIdentity` remains the one-line register a
+    // table cell or chip shows whole; it is a different density, not a
+    // different authority.
     abstract part def MemoPart {
         // editorial status and lifecycle
         attribute status : ElementStatusKind;
@@ -168,13 +157,10 @@ package memo_core_common {
         attribute resultSummary : String;
         attribute evidenceType : String;
         attribute integrityStatus : String;
-        // Promoted from the retired `UsabilityValidation` and
-        // `FormativeEvaluation` specializations. The collapse in `02083c5`
-        // deleted both subclasses without carrying their fields up, so an
-        // IEC 62366-1 evaluation record lost what it actually reports.
-        // Promoted on the standard's terms, not on in-tree usage: MEMO is a
-        // library, so what its own examples happen to set says nothing about
-        // what an adopter's usability file needs.
+        // What an IEC 62366-1 evaluation record reports. These are on the
+        // standard's terms, not on in-tree usage: MEMO is a library, so what
+        // its own examples happen to set says nothing about what an adopter's
+        // usability file needs.
         attribute participantProfile : String;
         attribute participantCount : Integer;
         attribute acceptanceCriteria : String;
@@ -256,13 +242,12 @@ package memo_core_common {
 
     // Requirement-family foundations. MemoNeed captures a problem-space
     // expectation in stakeholder language; MemoRequirement a testable
-    // solution-space obligation.
-    // Shared base of the requirement family. It exists so a relation end can
-    // say "a need or a requirement" with one type name — before it, every end
-    // that had to accept both was left untyped.
+    // solution-space obligation. Shared base of the requirement family. It
+    // exists so a relation end can say "a need or a requirement" with one type
+    // name. The text of a need or a requirement is its native `doc`, which SysML
+    // defines as the requirement's text.
     abstract requirement def MemoRequirementElement {
         attribute status : ElementStatusKind;
-        attribute statement : String;
     }
 
     requirement def MemoNeed :> MemoRequirementElement {
@@ -278,10 +263,9 @@ package memo_core_common {
     // criteria and context. Domain layers specialize it; the medical-device
     // intended use (memo_architecture_operational_structure::IntendedUse) is a
     // MemoMission. It is a `requirement def` because a mission is the top
-    // obligation everything below it derives from, not a structural thing —
-    // it was a `part def` under MemoPart. The prose a document renders is
-    // `doc`, and the one-line register a table cell shows is
-    // `@MemoIdentity`'s `shortDescription`.
+    // obligation everything below it derives from, not a structural thing. The
+    // prose a document renders is `doc`, and the one-line register a table cell
+    // shows is `@MemoIdentity`'s `shortDescription`.
     abstract requirement def MemoMission :> MemoRequirementElement {
         attribute missionKind : String;
         attribute successCriteria : String;

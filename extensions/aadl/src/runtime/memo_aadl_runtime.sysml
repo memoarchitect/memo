@@ -6,15 +6,12 @@
 // restart policy, fault containment) are true of every runtime component in
 // every regulated project, so they stay on the base.
 //
-// What the base used to carry as well was a set of attributes documented "set
-// only for the relevant runtimeKind" — a subtype family in disguise, and one
-// with a specific technology behind it. `addressSpaceIsolated` and
-// `owningProcessName` are AADL's process/thread distinction; `partitionBudget`
-// and `isolationMechanism` are AADL's virtual processor, which is what an
-// ARINC 653 partition is modelled as. Each is unconditional on the type that
-// owns it here, which is the whole point: an optional attribute that is only
-// meaningful for one enum value cannot be checked, and a required attribute on
-// a type can.
+// `addressSpaceIsolated` and `owningProcessName` are AADL's process/thread
+// distinction; `partitionBudget` and `isolationMechanism` are AADL's virtual
+// processor, which is what an ARINC 653 partition is modelled as. Each is
+// unconditional on the type that owns it here, which is the whole point: an
+// optional attribute that is only meaningful for one enum value cannot be
+// checked, and a required attribute on a type can.
 package memo_extension_aadl_runtime {
     private import memo_core_stdlib_quantities::*;
     private import ScalarValues::*;
@@ -33,10 +30,9 @@ package memo_extension_aadl_runtime {
         attribute addressSpaceIsolated : Boolean;
     }
 
-    // AADL `thread`: a schedulable unit of concurrency, always executing
-    // within exactly one process. The base's period / deadline / WCET /
-    // priority are AADL thread properties already; what was missing was the
-    // containing process.
+    // AADL `thread`: a schedulable unit of concurrency, always executing within
+    // exactly one process. The base's period / deadline / WCET / priority are
+    // AADL thread properties already; this adds the containing process.
     part def AadlThread specializes SoftwareComponent {
         attribute :>> runtimeKind = RuntimeKind::thread;
         attribute owningProcessName : String;

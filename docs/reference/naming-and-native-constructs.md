@@ -147,7 +147,7 @@ missing.
 > casing convention above guarantees they differ, so on a part `name` was a
 > label rather than a duplicate, and a straight deletion would have destroyed
 > the labels. The label was therefore MOVED, not deleted: it lives on
-> `@MemoIdentity { :>> label = "HospitalPharmacy"; }`, one carrier that
+> `@MemoIdentity { :>> label = "Hospital pharmacy"; }`, one carrier that
 > annotates any metaclass, and the bases no longer declare `name` at all. The
 > elements whose `name` only restated the identifier they were already
 > declared under were dropped in the same pass. Narrative prose moved the

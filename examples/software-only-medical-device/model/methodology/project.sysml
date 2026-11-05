@@ -3,24 +3,20 @@
 // The native entrypoint. The imports name what this project contains and the
 // binding names the methodology it is governed by. No YAML file participates.
 package memo_examples_software_only_medical_device_project {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_core_enumerations::*;
-    private import memo_methodology_core::*;
-    private import memo_methodology_profiles::*;
 
     // The project's own content, imported so the catalog is one reachable
     // closure from a single entrypoint.
     private import memo_examples_software_only_medical_device_viewpoints_logical_views_software_only_medical_device_overview::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     // The cloud extension supplies CloudService, which is what the grading
     // service is. Importing it publicly here is what brings it into the
     // project, its definitions and its selection alike.
     public import memo_extension_cloud::*;
     part projectBinding : ModelMethodBinding {
-        @MemoIdentity { :>> providedId = "PMB-MEDICAL-DEVICE-001"; :>> label = "SoftwareOnlyMedicalDeviceModelMethodBinding"; }
+        @MemoIdentity { :>> providedId = "PMB-MEDICAL-DEVICE-001"; :>> label = "Software only medical device model method binding"; }
         attribute :>> modelName = "Software Only Medical Device";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

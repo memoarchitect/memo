@@ -1,15 +1,7 @@
 package memo_examples_sysml_diagram_samples_samples_action_flow_view {
+    private import memo::*;
     private import ScalarValues::*;
-    private import memo_core_relationships::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_functional_functional_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     item def DataPacket specializes InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::data;
     }

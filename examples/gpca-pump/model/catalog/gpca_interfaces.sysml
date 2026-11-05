@@ -1,18 +1,10 @@
 package memo_examples_gpca_pump_gpca_interfaces {
-    private import memo_core_stdlib_quantities::*;
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_architecture_logical_interfaces::*;
-    private import memo_architecture_logical_structure::*;
-    private import memo_architecture_realization_physical::*;
-    private import memo_architecture_functional_functions::*;
-    private import memo_core_common::*;
     private import memo_examples_gpca_pump_gpca_architecture::*;
     private import memo_examples_gpca_pump_gpca_physical::*;
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
-    private import memo_core_enumerations::*;
-    private import memo_core_dimensions::*;
-    private import memo_core_common::MemoIdentity;
     abstract interface def SensorDataInterface :> DataInterface {
         attribute :>> interfaceKind = InterfaceKind::data;
         attribute :>> protocolSemantics = "flow, air, occlusion, door, battery, cpu, memory, pump state";
@@ -66,7 +58,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
     // Wired: the three physical interfaces whose controller-side connector is
     // modelled (gpca_physical). The rest are abstract until their ends are.
     interface pumpMotorDrive : PhysicalInterface connect portMotorDrive to pumpMotorAssembly.portFlowCommandIn {
-        @MemoIdentity { :>> providedId = "PI-002"; :>> label = "PumpMotorStepDrive"; }
+        @MemoIdentity { :>> providedId = "PI-002"; :>> label = "Pump motor step drive"; }
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> signalingKind = SignalingKind::pulse;
         attribute :>> mediumKind = PhysicalMediumKind::electrical;
@@ -79,7 +71,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> protocolSemantics = "step/dir with enable interlock";
     }
     interface bolusButtonLine : PhysicalInterface connect bolusButton.portPendantOut to portPatientPendant {
-        @MemoIdentity { :>> providedId = "PI-003"; :>> label = "BolusButtonInputLine"; }
+        @MemoIdentity { :>> providedId = "PI-003"; :>> label = "Bolus button input line"; }
         attribute :>> interfaceKind = InterfaceKind::digitalSignal;
         attribute :>> signalingKind = SignalingKind::discrete;
         attribute :>> mediumKind = PhysicalMediumKind::electrical;
@@ -91,7 +83,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> nominalCurrentA = 0.001 [A];
     }
     interface occlusionAnalogLine : PhysicalInterface connect occlusionSensor.portOcclusionOut to portSensorHarness {
-        @MemoIdentity { :>> providedId = "PI-004"; :>> label = "OcclusionPressureAnalogLine"; }
+        @MemoIdentity { :>> providedId = "PI-004"; :>> label = "Occlusion pressure analog line"; }
         attribute :>> interfaceKind = InterfaceKind::analogSignal;
         attribute :>> signalingKind = SignalingKind::analog;
         attribute :>> mediumKind = PhysicalMediumKind::electrical;
@@ -102,7 +94,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> signalRange = "0 to 30 psi line pressure";
     }
     abstract interface batteryMonitorLine : PhysicalInterface {
-        @MemoIdentity { :>> providedId = "PI-005"; :>> label = "BatteryVoltageMonitorLine"; }
+        @MemoIdentity { :>> providedId = "PI-005"; :>> label = "Battery voltage monitor line"; }
         attribute :>> interfaceKind = InterfaceKind::power;
         attribute :>> signalingKind = SignalingKind::analog;
         attribute :>> mediumKind = PhysicalMediumKind::electrical;
@@ -115,7 +107,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
 
     // ── System-level interfaces (CriSys Ch.3, I 1-I 11) ─────────
     abstract interface siDataEntry : LogicalInterface {
-        @MemoIdentity { :>> providedId = "SI-001"; :>> label = "DataEntryInterface"; }
+        @MemoIdentity { :>> providedId = "SI-001"; :>> label = "Data entry interface"; }
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
         attribute :>> direction = DirectionKind::input;
         attribute :>> protocol = "CriSys I 1, I 2, I 3";
@@ -124,7 +116,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1 Data Entry Interface"; }
     }
     abstract interface siBolusRequest : LogicalInterface {
-        @MemoIdentity { :>> providedId = "SI-002"; :>> label = "BolusRequestInterface"; }
+        @MemoIdentity { :>> providedId = "SI-002"; :>> label = "Bolus request interface"; }
         attribute :>> interfaceKind = InterfaceKind::userInteraction;
         attribute :>> direction = DirectionKind::input;
         attribute :>> protocol = "CriSys I 4";
@@ -133,7 +125,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.2 Bolus Request Interface"; }
     }
     abstract interface siDrugFlow : LogicalInterface {
-        @MemoIdentity { :>> providedId = "SI-003"; :>> label = "DrugFlowInterface"; }
+        @MemoIdentity { :>> providedId = "SI-003"; :>> label = "Drug flow interface"; }
         attribute :>> interfaceKind = InterfaceKind::fluidic;
         attribute :>> direction = DirectionKind::output;
         attribute :>> protocol = "CriSys I 5, I 6";
@@ -142,7 +134,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.3 Drug Flow Interface"; }
     }
     abstract interface siNotification : LogicalInterface {
-        @MemoIdentity { :>> providedId = "SI-004"; :>> label = "NotificationInterface"; }
+        @MemoIdentity { :>> providedId = "SI-004"; :>> label = "Notification interface"; }
         attribute :>> interfaceKind = InterfaceKind::notification;
         attribute :>> direction = DirectionKind::output;
         attribute :>> protocol = "CriSys I 7, I 8";
@@ -151,7 +143,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.4 Notification Interface"; }
     }
     abstract interface siPharmacyDb : LogicalInterface {
-        @MemoIdentity { :>> providedId = "SI-005"; :>> label = "HospitalPharmacyDatabaseInterface"; }
+        @MemoIdentity { :>> providedId = "SI-005"; :>> label = "Hospital pharmacy database interface"; }
         attribute :>> interfaceKind = InterfaceKind::data;
         attribute :>> direction = DirectionKind::inputOutput;
         attribute :>> protocol = "CriSys I 9, I 10, I 11";
@@ -554,28 +546,28 @@ package memo_examples_gpca_pump_gpca_interfaces {
     // extension declares for the exchange that needs it.
     interface exSensorVector : ComponentExchange
         connect gpcaDevice.gpcaDeviceSensors.snsSensorOut to gpcaSoftware.portSensorIn {
-        @MemoIdentity { :>> providedId = "CE-001"; :>> label = "SensorStatusVectorExchange"; }
+        @MemoIdentity { :>> providedId = "CE-001"; :>> label = "Sensor status vector exchange"; }
         attribute :>> exchangeKind = FlowKind::measurement;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-001; not a GPCA_Device.aadl connection"; }
     }
     interface exFlowCommand : ComponentExchange
         connect gpcaSoftware.portGpcaSwOut to pumpMotorAssembly.portFlowCommandIn {
-        @MemoIdentity { :>> providedId = "CE-002"; :>> label = "FlowCommandExchange"; }
+        @MemoIdentity { :>> providedId = "CE-002"; :>> label = "Flow command exchange"; }
         attribute :>> exchangeKind = FlowKind::command;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-002; not a GPCA_Device.aadl connection"; }
     }
     interface exAlarmAnnunciation : ComponentExchange
         connect gpcaSoftware.portGpcaSwOut to audibleAlarm.portAlarmIn {
-        @MemoIdentity { :>> providedId = "CE-003"; :>> label = "AlarmAnnunciationExchange"; }
+        @MemoIdentity { :>> providedId = "CE-003"; :>> label = "Alarm annunciation exchange"; }
         attribute :>> exchangeKind = FlowKind::alarm;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-003; not a GPCA_Device.aadl connection"; }
     }
     interface exPrescriptionEntry : ComponentExchange
         connect operatorKeypad.portPrescriptionOut to gpcaSoftware.portPresIn {
-        @MemoIdentity { :>> providedId = "CE-004"; :>> label = "PrescriptionEntryExchange"; }
+        @MemoIdentity { :>> providedId = "CE-004"; :>> label = "Prescription entry exchange"; }
         attribute :>> exchangeKind = FlowKind::configuration;
         attribute :>> timingSemantics = "immediate (same-step delivery, Communication_Properties::Timing => immediate)";
         @MemoIdentity { :>> sourceReference = "MEMO design extension allocated from LF-004; not a GPCA_Device.aadl connection"; }

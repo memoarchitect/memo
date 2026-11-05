@@ -1,16 +1,11 @@
 package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
+    private import memo::*;
     private import ScalarValues::*;
 
-    private import memo_viewpoints_definitions::*;
-    private import memo_viewpoints_software_software_viewpoint::*;
-    private import memo_core_enumerations::*;
 
-    private import memo_core_common::*;
-    private import memo_core_common::MemoIdentity;
     view sddView : MemoDocumentView {
         expose memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view::*;
-        @MemoIdentity { :>> providedId = "DOC-004"; :>> label = "SoftwareDesignDescriptionView"; }
-        @MemoIdentity { :>> shortDescription = "IEC 62304 software design description for the GPCA software system."; }
+        @MemoIdentity { :>> providedId = "DOC-004"; :>> label = "Software design description view"; :>> shortDescription = "IEC 62304 software design description for the GPCA software system."; }
         doc /* Aggregates the software system, its six components with safety classes and scheduling attributes, mode machine and transitions, interfaces, and function allocations for the SDD. */
         attribute :>> version = "0.1.0";
         attribute :>> lifecycleState = LifecycleStateKind::development;
@@ -19,7 +14,7 @@ package memo_examples_gpca_pump_viewpoints_software_views_document_sdd_view {
         attribute :>> marketScope = "generic";
         ref :>> viewpointDefinition = softwareViewpoint;
         part :>> selectionQuery {
-            @MemoIdentity { :>> providedId = "QRY-DOC-004"; :>> label = "sddViewQuery"; }
+            @MemoIdentity { :>> providedId = "QRY-DOC-004"; :>> label = "SDD view query"; }
             attribute :>> includeElementKinds = ("SoftwareSystem", "SoftwareModule", "MemoState", "Interface", "SystemFunction", "TimingConstraint");
             attribute :>> includeRelationshipKinds = ("Composes", "AllocatedTo", "BindsToInterface", "Realizes", "DependsOnSoup", "Changes");
             attribute :>> rationaleText = "Declares what this document-backed view renders; the web renderer is presentation-only.";
