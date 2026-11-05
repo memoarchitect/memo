@@ -93,8 +93,8 @@ The constraint is on where they root:
 > **A relation declared by an extension specializes a base MEMO relation. It
 > never roots independently.**
 
-For a genuinely new relation, `connection def DomainRelation :> MemoLink` is
-correct; `connection def DomainRelation { … }` is not. Rooting independently would give
+For a genuinely new relation, `connection def DomainRelation :> MemoRelationship`
+(or a more specific base relation) is correct; `connection def DomainRelation { … }` is not. Rooting independently would give
 the relation no identification core, no place in the relationship registry, and
 no ends the base can reason about — a conforming tool would read it as opaque,
 which is the same defect §2 of the plan names in the base itself. Give each one
