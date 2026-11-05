@@ -53,12 +53,11 @@ package memo_examples_sysml_diagram_samples_samples_action_flow_view {
     allocate sampleActionFlow.process.processStepC to laneB;
     allocate sampleActionFlow.record to laneB;
 
-    // MemoLink sample — the universal relation, exercised where nothing else
-    // reaches. laneB is a `part` (LogicalComponent :> MemoPart) and
-    // `sampleActionFlow.process` is an action usage (:> MemoAction). Those
-    // foundations share no supertype, so every typed relation in the ontology
-    // is unavailable here: legalRelationshipTypes returns MemoLink and nothing
-    // else.
+    // Native dependency sample — the universal relation, exercised where
+    // nothing else reaches. laneB is a `part` (LogicalComponent :> MemoPart)
+    // and `sampleActionFlow.process` is an action usage (:> MemoAction). Those
+    // foundations share no supertype, so no typed MEMO relation applies here,
+    // and a plain `dependency` is the right construct.
     //
     // The target is the action *usage*, not the `ProcessInput` definition.
     // Binding a value to a definition is not portable — SysIDE rejects it,

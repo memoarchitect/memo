@@ -374,7 +374,7 @@ write('core-elements', {
     ${node(80, 660, 200, 64, 'TerminologyCode', '#0a9b83')}${node(330, 660, 200, 64, 'StandardReference', '#0a9b83')}${node(580, 660, 150, 64, 'Provenance', '#0a9b83')}
 
     ${group(820, 450, 740, 320, 'Shared connections and project support', '#0a9b83')}
-    ${node(860, 550, 210, 64, 'MemoRelationship', '#0a9b83')}${node(1120, 550, 180, 64, 'MemoLink', '#0a9b83')}${node(1350, 550, 170, 64, 'Citation', '#0a9b83')}
+    ${node(860, 550, 210, 64, 'MemoRelationship', '#0a9b83')}${node(1100, 550, 250, 64, 'MemoTypedDependency', '#0a9b83')}${node(1375, 550, 150, 64, 'Citation', '#0a9b83')}
     ${node(860, 660, 210, 64, 'MethodologyScope', '#0a9b83')}${node(1120, 660, 210, 64, 'ConsistencyRule', '#0a9b83')}${node(1380, 660, 140, 64, 'stdlib', '#0a9b83')}
   `,
 });

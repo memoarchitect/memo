@@ -164,8 +164,8 @@ connection def NotesOn :> MemoRelationship
     //
     // Annotations attach to every metaclass — parts, actions, requirements, views,
     // connections, and MEMO specializations — so CommentsOn, RationaleFor, and
-    // NotesOn leave their subject ends untyped, following the MemoLink precedent in
-    // memo_core_relationships.
+    // NotesOn leave their subject ends untyped, as SysML's native `dependency`
+    // does (see memo_core_relationships).
     package memo_core_annotations {
         private import Metaobjects::SemanticMetadata;
         private import ScalarValues::*;

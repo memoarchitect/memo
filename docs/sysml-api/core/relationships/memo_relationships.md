@@ -309,14 +309,12 @@ connection def BindsToInterface :> MemoRelationship
         // The constraints on untyped ends are rules: see CR-ONT-060..CR-ONT-071 in
         // src/rules/ontology/ontology_invariants.sysml.
         //
-        // The general relation that can join any two model elements, whatever
-        // their metaclass. MemoLink leaves both ends untyped and adds no
-        // domain-specific semantics, which is what makes it universal.
-        //
-        // It is deliberately the weakest relation in the ontology. Reach for it
-        // only when no specific relation carries the meaning, and say why in the
-        // inherited `rationale` — an untyped link with no stated reason is an
-        // audit gap, not a model fact.
+        // There is no general MEMO relation joining any two elements whatever
+        // their metaclass. The former MemoLink did exactly that with untyped ends
+        // and no domain semantics, which made it a duplicate of SysML's native
+        // `dependency`; use `dependency` when no specific relation carries the
+        // meaning, and say why in a comment — an
+        // untyped link with no stated reason is an audit gap, not a model fact.
 
         // An item belongs to the scope of one system or system of systems: a need,
         // requirement, risk or verification case that describes, constrains or
