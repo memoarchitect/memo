@@ -16,6 +16,7 @@
 | --- | --- | --- |
 | [`OperationalParticipant`](../sysml-api/architecture/operational/context/actors/memo_actors.md#operationalparticipant) *(abstract)* | `part def` | Operational participant definition specializing `MemoPart`. |
 | [`User`](../sysml-api/architecture/operational/context/actors/memo_actors.md#user) | `part def` | A human who interacts with the medical device (IEC 62366-1 intended user). User is the only human actor type: do not add an alternative type name. The human actor.… |
+| [`MemoActor`](../sysml-api/architecture/operational/context/actors/memo_actors.md#memoactor) | `part def` | An actor that is not the device's user, such as a threat or a person present who does not use the device. An organization, an external system or a device is an OperationalEntity. `actor` is a SysML keyword, hence the prefix. |
 | [`ArchitectureDescription`](../sysml-api/architecture/operational/context/stakeholders/memo_stakeholders.md#architecturedescription) | `part def` | Architecture description definition specializing `MemoPart`. |
 | [`ModelKind`](../sysml-api/architecture/operational/context/stakeholders/memo_stakeholders.md#modelkind) | `part def` | Model definition specializing `MemoPart`. |
 | [`CorrespondenceRule`](../sysml-api/architecture/operational/context/stakeholders/memo_stakeholders.md#correspondencerule) | `part def` | Correspondence rule definition specializing `MemoPart`. |

@@ -101,7 +101,9 @@ an alarm condition, and that assumption is inherited by the hazard analysis.
 62366-1 usability engineering is accountable. Use errors, tasks, and usability
 validation attach to a `User` and never to an external system, which is
 recorded as an `OperationalEntity` (with `entityKind` such as `externalSystem`
-or `device`).
+or `device`), as is an organization such as the hospital or a regulator
+(`regulatoryBody`). An actor that is neither the device's user nor an entity,
+such as a threat, is a `MemoActor`.
 
 ### Reasonably foreseeable misuse
 

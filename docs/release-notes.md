@@ -2,6 +2,11 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## Unreleased
+
+- **Added.** `MemoActor`, a concrete actor that specializes `OperationalParticipant`, for an actor that is not the device's user, such as a threat. `actor` is a SysML keyword, hence the prefix. An organization, an external system or a device stays an `OperationalEntity`.
+- **Changed.** `ThreatActor` specializes `MemoActor`. Its own `actorKind : ThreatActorKind` is renamed `threatActorKind`, because the inherited `actorKind` names a user role. A model that sets `actorKind` on a threat actor must write `threatActorKind`.
+
 ## 0.18.0
 
 - **Removed.** `statement` leaves `MemoRequirementElement`, so requirements and needs no longer have it. A requirement's text is native `doc`, which SysML defines as its text. A model that sets `attribute :>> statement` stops compiling: write `doc /* … */` instead, and where an element has both, compare them first. ReqIF imports write `doc`.

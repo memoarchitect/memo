@@ -15,7 +15,7 @@
 | [`CyberMitigation`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cybermitigation) | `part def` | Cyber mitigation definition specializing `RiskControlMeasure`. |
 | [`SecurityRequirement`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. |
 | [`TrustBoundary`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#trustboundary) | `part def` | Trust boundary definition specializing `InterfaceElement`. |
-| [`ThreatActor`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#threatactor) | `part def` | Threat actor definition specializing `MemoPart`. |
+| [`ThreatActor`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#threatactor) | `part def` | A threat is an actor of its own: it takes part from outside the system, as MemoActor says. What kind of threat it is goes in threatActorKind; the inherited actorKind names a user role and is not set on a threat. |
 | [`AttackTechnique`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#attacktechnique) | `part def` | Attack technique definition specializing `MemoPart`. |
 | [`SecurityProperty`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#securityproperty) | `part def` | Security property definition specializing `MemoPart`. |
 | [`CybersecurityAssumption`](../sysml-api/assurance/cybersecurity/memo_cybersecurity.md#cybersecurityassumption) | `part def` | Cybersecurity assumption definition specializing `MemoPart`. |

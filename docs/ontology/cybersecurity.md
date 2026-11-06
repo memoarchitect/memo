@@ -103,7 +103,8 @@ control, of a kind such as prevent, detect, respond, recover, hardening,
 authentication, authorisation, encryption, or integrity protection. A
 `SecurityRequirement` is a requirement with a security objective.
 
-**Product security and threat intelligence.** A `ThreatActor` is who attacks:
+**Product security and threat intelligence.** A `ThreatActor` is who attacks, a
+`MemoActor` whose `threatActorKind` says which:
 an insider, a service technician, an opportunist, a cybercriminal, a nation
 state or a supply-chain party, with a motivation, a capability and the way they
 get access. An `AttackTechnique` names a technique in an external framework

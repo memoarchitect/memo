@@ -28,6 +28,7 @@
 | private | `memo_core_relationships::*` |
 | private | `memo_core_common::*` |
 | private | `memo_core_enumerations::*` |
+| private | `memo_architecture_operational_context_actors::*` |
 | private | `memo_assurance_requirements::*` |
 | private | `memo_assurance_safety_risk::*` |
 | private | `memo_assurance_verification_validation::*` |
@@ -57,7 +58,7 @@
 | [`SecurityFindingStatusKind`](#securityfindingstatuskind) | `enum def` | Controlled values for security finding status: `open`, `inRemediation`, `accepted`, `closed`. | — |
 | [`PostmarketProcessKind`](#postmarketprocesskind) | `enum def` | Controlled values for postmarket process: `monitoring`, `vulnerabilityDisclosure`, `patching`, `incidentResponse`. | — |
 | [`CyberRiskAssessmentStageKind`](#cyberriskassessmentstagekind) | `enum def` | Controlled values for cyber risk assessment stage: `inherent`, `residual`. | — |
-| [`ThreatActor`](#threatactor) | `part def` | Threat actor definition specializing `MemoPart`. | `MemoPart` |
+| [`ThreatActor`](#threatactor) | `part def` | A threat is an actor of its own: it takes part from outside the system, as MemoActor says. What kind of threat it is goes in threatActorKind; the inherited actorKind names a user role and is not set on a threat. | `MemoActor` |
 | [`AttackTechnique`](#attacktechnique) | `part def` | Attack technique definition specializing `MemoPart`. | `MemoPart` |
 | [`SecurityProperty`](#securityproperty) | `part def` | Security property definition specializing `MemoPart`. | `MemoPart` |
 | [`CybersecurityAssumption`](#cybersecurityassumption) | `part def` | Cybersecurity assumption definition specializing `MemoPart`. | `MemoPart` |
@@ -374,15 +375,15 @@ enum def CyberRiskAssessmentStageKind
 ## ThreatActor
 
 ```sysml
-part def ThreatActor specializes MemoPart
+part def ThreatActor specializes MemoActor
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | Threat actor definition specializing `MemoPart`. |
+| Description | A threat is an actor of its own: it takes part from outside the system, as MemoActor says. What kind of threat it is goes in threatActorKind; the inherited actorKind names a user role and is not set on a threat. |
 | Kind | `part def` |
 | Abstract | No |
-| Specializes | `MemoPart` |
+| Specializes | `MemoActor` |
 | Owning package | `memo_assurance_cybersecurity` |
 
 
@@ -811,6 +812,7 @@ connection def MonitorsSBOMEntry :> MemoRelationship
 
         private import memo_core_common::*;
         private import memo_core_enumerations::*;
+        private import memo_architecture_operational_context_actors::*;
         private import memo_assurance_requirements::*;
         private import memo_assurance_safety_risk::*;
         private import memo_assurance_verification_validation::*;
@@ -960,8 +962,11 @@ connection def MonitorsSBOMEntry :> MemoRelationship
             enum residual;
         }
 
-        part def ThreatActor specializes MemoPart {
-            attribute actorKind : ThreatActorKind;
+        // A threat is an actor of its own: it takes part from outside the system, as
+        // MemoActor says. What kind of threat it is goes in threatActorKind; the
+        // inherited actorKind names a user role and is not set on a threat.
+        part def ThreatActor specializes MemoActor {
+            attribute threatActorKind : ThreatActorKind;
             attribute motivation : String;
             attribute capability : ThreatCapabilityKind;
             attribute accessMode : ThreatAccessKind;

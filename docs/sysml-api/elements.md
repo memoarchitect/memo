@@ -176,6 +176,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
+| [`MemoActor`](architecture/operational/context/actors/memo_actors.md#memoactor) | `part def` | An actor that is not the device's user, such as a threat or a person present who does not use the device. An organization, an external system or a device is an OperationalEntity. `actor` is a SysML keyword, hence the prefix. | [`architecture/operational/context/actors/memo_actors.sysml`](architecture/operational/context/actors/memo_actors.md) |
 | [`OperationalParticipant`](architecture/operational/context/actors/memo_actors.md#operationalparticipant) | `part def` | Operational participant definition specializing `MemoPart`. | [`architecture/operational/context/actors/memo_actors.sysml`](architecture/operational/context/actors/memo_actors.md) |
 | [`User`](architecture/operational/context/actors/memo_actors.md#user) | `part def` | A human who interacts with the medical device (IEC 62366-1 intended user). User is the only human actor type: do not add an alternative type name. The human actor.… | [`architecture/operational/context/actors/memo_actors.sysml`](architecture/operational/context/actors/memo_actors.md) |
 
@@ -357,7 +358,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | [`SecurityProperty`](assurance/cybersecurity/memo_cybersecurity.md#securityproperty) | `part def` | Security property definition specializing `MemoPart`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`SecurityRequirement`](assurance/cybersecurity/memo_cybersecurity.md#securityrequirement) | `requirement def` | Security requirement definition specializing `Requirement`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`Threat`](assurance/cybersecurity/memo_cybersecurity.md#threat) | `part def` | Threat definition specializing `RiskDriver`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
-| [`ThreatActor`](assurance/cybersecurity/memo_cybersecurity.md#threatactor) | `part def` | Threat actor definition specializing `MemoPart`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
+| [`ThreatActor`](assurance/cybersecurity/memo_cybersecurity.md#threatactor) | `part def` | A threat is an actor of its own: it takes part from outside the system, as MemoActor says. What kind of threat it is goes in threatActorKind; the inherited actorKind names a user role and is not set on a threat. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`TrustBoundary`](assurance/cybersecurity/memo_cybersecurity.md#trustboundary) | `part def` | Trust boundary definition specializing `InterfaceElement`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 | [`Vulnerability`](assurance/cybersecurity/memo_cybersecurity.md#vulnerability) | `item def` | Vulnerability definition specializing `RiskItem`. | [`assurance/cybersecurity/memo_cybersecurity.sysml`](assurance/cybersecurity/memo_cybersecurity.md) |
 

@@ -33,6 +33,7 @@
 | --- | --- | --- | --- |
 | [`OperationalParticipant`](#operationalparticipant) | `part def` | Operational participant definition specializing `MemoPart`. | `MemoPart` |
 | [`User`](#user) | `part def` | A human who interacts with the medical device (IEC 62366-1 intended user). User is the only human actor type: do not add an alternative type name. The human actor.… | `OperationalParticipant` |
+| [`MemoActor`](#memoactor) | `part def` | An actor that is not the device's user, such as a threat or a person present who does not use the device. An organization, an external system or a device is an OperationalEntity. `actor` is a SysML keyword, hence the prefix. | `OperationalParticipant` |
 
 ## OperationalParticipant
 
@@ -58,6 +59,21 @@ part def User specializes OperationalParticipant, MemoResource
 | Property | Value |
 | --- | --- |
 | Description | A human who interacts with the medical device (IEC 62366-1 intended user). User is the only human actor type: do not add an alternative type name. The human actor.… |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `OperationalParticipant` |
+| Owning package | `memo_architecture_operational_context_actors` |
+
+
+## MemoActor
+
+```sysml
+part def MemoActor specializes OperationalParticipant
+```
+
+| Property | Value |
+| --- | --- |
+| Description | An actor that is not the device's user, such as a threat or a person present who does not use the device. An organization, an external system or a device is an OperationalEntity. `actor` is a SysML keyword, hence the prefix. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `OperationalParticipant` |
@@ -104,9 +120,10 @@ part def User specializes OperationalParticipant, MemoResource
             attribute serviceScope : String[0..1];
         }
 
-        // A non-human actor (external system, external device, or environmental
-        // agent). The specific kind is described by externalKind.
-
+        // An actor that is not the device's user, such as a threat or a person present
+        // who does not use the device. An organization, an external system or a device is
+        // an OperationalEntity. `actor` is a SysML keyword, hence the prefix.
+        part def MemoActor specializes OperationalParticipant;
     }
 
     ```

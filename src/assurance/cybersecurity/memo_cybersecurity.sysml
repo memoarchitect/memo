@@ -13,6 +13,7 @@ package memo_assurance_cybersecurity {
 
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
+    private import memo_architecture_operational_context_actors::*;
     private import memo_assurance_requirements::*;
     private import memo_assurance_safety_risk::*;
     private import memo_assurance_verification_validation::*;
@@ -162,8 +163,11 @@ package memo_assurance_cybersecurity {
         enum residual;
     }
 
-    part def ThreatActor specializes MemoPart {
-        attribute actorKind : ThreatActorKind;
+    // A threat is an actor of its own: it takes part from outside the system, as
+    // MemoActor says. What kind of threat it is goes in threatActorKind; the
+    // inherited actorKind names a user role and is not set on a threat.
+    part def ThreatActor specializes MemoActor {
+        attribute threatActorKind : ThreatActorKind;
         attribute motivation : String;
         attribute capability : ThreatCapabilityKind;
         attribute accessMode : ThreatAccessKind;

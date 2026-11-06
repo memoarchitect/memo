@@ -33,7 +33,8 @@ package memo_architecture_operational_context_actors {
         attribute serviceScope : String[0..1];
     }
 
-    // A non-human actor (external system, external device, or environmental
-    // agent). The specific kind is described by externalKind.
-
+    // An actor that is not the device's user, such as a threat or a person present
+    // who does not use the device. An organization, an external system or a device is
+    // an OperationalEntity. `actor` is a SysML keyword, hence the prefix.
+    part def MemoActor specializes OperationalParticipant;
 }
