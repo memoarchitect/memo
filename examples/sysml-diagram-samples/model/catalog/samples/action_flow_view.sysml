@@ -65,8 +65,7 @@ package memo_examples_sysml_diagram_samples_samples_action_flow_view {
     doc /* Lane B is the swimlane that carries the ProcessInput behaviour. The
          * association crosses the part/action metaclass boundary, so no typed
          * relation can express it — which is precisely what a bare `dependency`
-         * means. It was a `MemoLink`, the ontology's own weakest relation, and
-         * that is a duplicate of `dependency` rather than something more.
+         * means.
          */
     dependency linkLaneBProcessesInput from laneB to sampleActionFlow::process;
     allocate sampleActionFlow to laneA;

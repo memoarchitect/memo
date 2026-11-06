@@ -310,11 +310,10 @@ connection def BindsToInterface :> MemoRelationship
         // src/rules/ontology/ontology_invariants.sysml.
         //
         // There is no general MEMO relation joining any two elements whatever
-        // their metaclass. The former MemoLink did exactly that with untyped ends
-        // and no domain semantics, which made it a duplicate of SysML's native
-        // `dependency`; use `dependency` when no specific relation carries the
-        // meaning, and say why in a comment — an
-        // untyped link with no stated reason is an audit gap, not a model fact.
+        // their metaclass: SysML's native `dependency` already is one. Use
+        // `dependency` when no specific relation carries the meaning, and say why
+        // in a comment — an untyped link with no stated reason is an audit gap,
+        // not a model fact.
 
         // An item belongs to the scope of one system or system of systems: a need,
         // requirement, risk or verification case that describes, constrains or
