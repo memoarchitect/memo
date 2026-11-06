@@ -1315,8 +1315,8 @@ constraint def WorkflowRealizesUseCaseOfItsLevelRule :> MemoConsistencyRule
             attribute obligation = RuleObligationKind::recommended;
             attribute appliesTo = "MemoFunction";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "The functional chain decomposes functions into functions. A function composed of a component, or owned by one, is confusing allocation with decomposition — the component is named by AllocatedTo, never by Composes.";
-            attribute predicateExpression = "composes->forAll(conformsTo(MemoFunction) or kind == 'ForkNode' or kind == 'JoinNode' or kind == 'DecisionNode' or kind == 'MergeNode')";
+            attribute rationaleText = "The functional chain decomposes functions into functions. A function composed of a component, or owned by one, is confusing allocation with decomposition — the component is named by AllocatedTo, never by Composes. A functional flow is a behaviour, not a component: a function step inside one is decomposition.";
+            attribute predicateExpression = "composes->forAll(conformsTo(MemoFunction) or conformsTo(FunctionalFlow) or kind == 'ForkNode' or kind == 'JoinNode' or kind == 'DecisionNode' or kind == 'MergeNode')";
             constraint { true }
         }
 
