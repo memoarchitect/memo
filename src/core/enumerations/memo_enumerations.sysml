@@ -588,6 +588,8 @@ package memo_core_enumerations {
         enum externalSystem;
         enum environmentalEntity;
         enum regulatoryBody;
+        // An organization that is not a regulator: a hospital, a care team, a manufacturer.
+        enum organization;
         enum device;
         enum informationArtifact;
     }

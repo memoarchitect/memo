@@ -5,6 +5,7 @@ Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change 
 ## Unreleased
 
 - **Added.** `MemoActor`, a concrete actor that specializes `OperationalParticipant`, for an actor that is not the device's user, such as a threat. `actor` is a SysML keyword, hence the prefix. An organization, an external system or a device stays an `OperationalEntity`.
+- **Added.** `OperationalEntityKind::organization`, for an organization that is not a regulator, such as a hospital or a manufacturer.
 - **Changed.** `ThreatActor` specializes `MemoActor`. Its own `actorKind : ThreatActorKind` is renamed `threatActorKind`, because the inherited `actorKind` names a user role. A model that sets `actorKind` on a threat actor must write `threatActorKind`.
 
 ## 0.18.0

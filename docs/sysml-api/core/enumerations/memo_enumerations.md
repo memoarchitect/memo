@@ -86,7 +86,7 @@
 | [`ActorKind`](#actorkind) | `enum def` | Controlled values for actor: `patient`, `clinician`, `caregiver`, `technician`, `administrator`. | — |
 | [`ValidationMethodKind`](#validationmethodkind) | `enum def` | Controlled values for validation method: `clinicalTrial`, `summativeUsabilityTest`, `comparativeStudy`, `benchmarkTest`, `simulatedUse`. | — |
 | [`SOUPClassificationKind`](#soupclassificationkind) | `enum def` | Controlled values for soupclassification: `classA`, `classB`, `classC`, `unclassified`. | — |
-| [`OperationalEntityKind`](#operationalentitykind) | `enum def` | Controlled values for operational entity: `human`, `externalSystem`, `environmentalEntity`, `regulatoryBody`, `device`, `informationArtifact`. | — |
+| [`OperationalEntityKind`](#operationalentitykind) | `enum def` | Controlled values for operational entity: `human`, `externalSystem`, `environmentalEntity`, `regulatoryBody`, `organization`, `device`, `informationArtifact`. | — |
 | [`FunctionalFlowKind`](#functionalflowkind) | `enum def` | Controlled values for functional flow: `nominal`, `error`, `degraded`, `alarm`, `startup`, `shutdown`, `calibration`. | — |
 | [`ProcessingNodeKind`](#processingnodekind) | `enum def` | Controlled values for processing node: `microcontroller`, `FPGA`, `SoC`, `gateway`, `cloudServer`, `edgeDevice`, `DSP`. | — |
 | [`FailureModeKind`](#failuremodekind) | `enum def` | Controlled values for failure mode: `lossOfFunction`, `degradedFunction`, `unintendedFunction`, `intermittentFunction`, `prematureFunction`, `delayedFunction`. | — |
@@ -974,7 +974,7 @@ enum def OperationalEntityKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for operational entity: `human`, `externalSystem`, `environmentalEntity`, `regulatoryBody`, `device`, `informationArtifact`. |
+| Description | Controlled values for operational entity: `human`, `externalSystem`, `environmentalEntity`, `regulatoryBody`, `organization`, `device`, `informationArtifact`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1921,6 +1921,8 @@ enum def CommentStatusKind
             enum externalSystem;
             enum environmentalEntity;
             enum regulatoryBody;
+            // An organization that is not a regulator: a hospital, a care team, a manufacturer.
+            enum organization;
             enum device;
             enum informationArtifact;
         }

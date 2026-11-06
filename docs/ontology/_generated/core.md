@@ -270,7 +270,7 @@ flowchart LR
 | [`ActorKind`](../sysml-api/core/enumerations/memo_enumerations.md#actorkind) | `patient`, `clinician`, `caregiver`, `technician`, `administrator` |
 | [`ValidationMethodKind`](../sysml-api/core/enumerations/memo_enumerations.md#validationmethodkind) | `clinicalTrial`, `summativeUsabilityTest`, `comparativeStudy`, `benchmarkTest`, `simulatedUse` |
 | [`SOUPClassificationKind`](../sysml-api/core/enumerations/memo_enumerations.md#soupclassificationkind) | `classA`, `classB`, `classC`, `unclassified` |
-| [`OperationalEntityKind`](../sysml-api/core/enumerations/memo_enumerations.md#operationalentitykind) | `human`, `externalSystem`, `environmentalEntity`, `regulatoryBody`, `device`, `informationArtifact` |
+| [`OperationalEntityKind`](../sysml-api/core/enumerations/memo_enumerations.md#operationalentitykind) | `human`, `externalSystem`, `environmentalEntity`, `regulatoryBody`, `organization`, `device`, `informationArtifact` |
 | [`FunctionalFlowKind`](../sysml-api/core/enumerations/memo_enumerations.md#functionalflowkind) | `nominal`, `error`, `degraded`, `alarm`, `startup`, `shutdown`, `calibration` |
 | [`ProcessingNodeKind`](../sysml-api/core/enumerations/memo_enumerations.md#processingnodekind) | `microcontroller`, `FPGA`, `SoC`, `gateway`, `cloudServer`, `edgeDevice`, `DSP` |
 | [`FailureModeKind`](../sysml-api/core/enumerations/memo_enumerations.md#failuremodekind) | `lossOfFunction`, `degradedFunction`, `unintendedFunction`, `intermittentFunction`, `prematureFunction`, `delayedFunction` |
