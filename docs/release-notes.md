@@ -2,7 +2,7 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a change that breaks a model, a command or a setting raises the minor number; a fix or addition that breaks nothing raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
-## Unreleased
+## 0.19.0
 
 - **Fixed.** `MemoLayoutEdge::route` is `nonunique`. A right-angle route repeats a coordinate at every bend, which a compiler that enforces uniqueness rejected, so a saved connector route could stop the model compiling.
 - **Added.** `MemoActor`, a concrete actor that specializes `OperationalParticipant`, for an actor that is not the device's user, such as a threat. `actor` is a SysML keyword, hence the prefix. An organization, an external system or a device stays an `OperationalEntity`.

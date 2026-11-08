@@ -101,3 +101,4 @@ elements:
   "memo_examples_surgical_closure_workflow_viewpoints_logical_views_surgical_closure_workflow_overview::surgicalClosureWorkflowOverview":
     shortId: "MMX-1"
     uuid: "59d5c743-d667-53ed-84f6-26b88fc66510"
+    viewShortId: "ACT-1"
