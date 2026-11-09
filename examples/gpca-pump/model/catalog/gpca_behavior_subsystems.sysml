@@ -184,10 +184,8 @@ package memo_examples_gpca_pump_gpca_behavior_subsystems {
     item ddPrescription : InterfaceItem {
         attribute :>> itemKind = InterfaceItemKind::data;
         @MemoIdentity { :>> providedId = "DD-001"; :>> label = "Prescription record"; }
-        attribute :>> semantics = "patient id, drug name, concentration, VTBI total, duration total, basal flow rate, square bolus rate/duration/interval, patient bolus rate/duration/lockout period, max boluses per hour (DD-005..DD-017)";
+        attribute :>> semantics = "patient id, drug name, concentration, VTBI total, duration total, basal flow rate, square bolus rate/duration/interval, patient bolus rate/duration/lockout period, max boluses per hour (DD-005..DD-017) Each value is bounded by the pharmacy database's safe values, lo_hd to hi_hd.";
         attribute :>> unit = "ml/hr, ml, minutes, mg/ml, per hour";
-        attribute :>> minValue = "pharmacy-database safe-value lower bounds (lo_hd)";
-        attribute :>> maxValue = "pharmacy-database safe-value upper bounds (hi_hd)";
         attribute :>> encoding = "checksummed persistent record";
         attribute :>> timestampRequired = true;
         attribute :>> integrityClass = "class C";

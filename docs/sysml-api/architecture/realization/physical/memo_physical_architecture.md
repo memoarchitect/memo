@@ -252,8 +252,6 @@ flow def PhysicalTransfer specializes PhysicalFlow
             attribute quantity : String;
             attribute unit : String;
             attribute nominalValue : String;
-            attribute minValue : String;
-            attribute maxValue : String;
         }
 
         // The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends.

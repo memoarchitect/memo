@@ -88,6 +88,26 @@ package memo_examples_gpca_pump_gpca_interfaces {
     attribute def MonitoredBatteryVoltage :> ElectricPotentialDifferenceValue {
         assert constraint { self >= 9.0 [V] and self <= 12.6 [V] }
     }
+    // The ranges the data dictionary gives programmed values, each on the quantity it limits.
+    attribute def DrugConcentrationSetting :> MassConcentrationValue {
+        // kg/m^3 is numerically the mg/ml a prescription states.
+        assert constraint { self >= 0 [kg/m^3] and self <= 999 [kg/m^3] }
+    }
+    attribute def InfusionRateSetting :> VolumeFlowRateValue {
+        assert constraint { self >= 0 [mL/h] and self <= 999 [mL/h] }
+    }
+    attribute def KvoRateSetting :> VolumeFlowRateValue {
+        assert constraint { self >= 0 [mL/h] and self <= 5 [mL/h] }
+    }
+    attribute def InfusionVolumeSetting :> VolumeValue {
+        assert constraint { self >= 0 [mL] and self <= 999 [mL] }
+    }
+    attribute def InfusionDurationSetting :> DurationValue {
+        assert constraint { self >= 0 [min] and self <= 999 [min] }
+    }
+    attribute def BolusFrequencySetting :> FrequencyValue {
+        assert constraint { self >= 0 [1/h] and self <= 999 [1/h] }
+    }
 
     interface occlusionAnalogLine : PhysicalInterface connect occlusionSensor.portOcclusionOut to portSensorHarness {
         @MemoIdentity { :>> providedId = "PI-004"; :>> label = "Occlusion pressure analog line"; }
@@ -186,8 +206,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Concentration of the drug in the solution prescribed for infusion. */
         attribute :>> semantics = "Must be between DrugConcentration_lo_hd and DrugConcentration_hi_hd for DrugName_prog in the hospital database.";
         attribute :>> unit = "mg/ml";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : DrugConcentrationSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -197,8 +216,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Maximum total volume of the drug solution that can be infused for the prescription. */
         attribute :>> semantics = "Must be between VTBI_lo_hd and VTBI_hi_hd for DrugName_prog in the hospital database.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -208,8 +226,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Prescribed total duration of drug infusion across all delivery modes (BASAL, SQUARE BOLUS, PATIENT BOLUS). */
         attribute :>> semantics = "Cannot be empty; should be >= 0.";
         attribute :>> unit = "minutes";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionDurationSetting;
         attribute :>> encoding = "Time";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -219,8 +236,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Prescribed rate of flow of drug during BASAL delivery mode; default FlowRate_lo_hd. */
         attribute :>> semantics = "Between FlowRate_lo_hd and FlowRate_hi_hd for DrugName_prog; should be < VTBI_total_prog / Duration_total_prog.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -230,8 +246,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Prescribed flow rate of drug during SQUARE bolus delivery. */
         attribute :>> semantics = ">= 0; if Duration_sbolus_prog or Interval_sbolus_prog > 0, must be between FlowRate_lo_hd and FlowRate_hi_hd.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -241,8 +256,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Maximum duration of a single uninterrupted square bolus delivery. */
         attribute :>> semantics = ">= 0; if FlowRate_sbolus_prog or Interval_sbolus_prog > 0, must be < Interval_sbolus_prog and Duration_total_prog.";
         attribute :>> unit = "minutes";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionDurationSetting;
         attribute :>> encoding = "Time";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -252,8 +266,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Minimum interval between two consecutive square bolus initiations; the first square bolus starts Interval_sbolus_prog minutes after infusion initiation. */
         attribute :>> semantics = ">= 0; if FlowRate_sbolus_prog or Duration_sbolus_prog > 0, must be > Duration_sbolus_prog.";
         attribute :>> unit = "minutes";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionDurationSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -263,8 +276,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Prescribed flow rate of drug during patient bolus delivery. */
         attribute :>> semantics = ">= 0; if Duration_pbolus_prog or LockOutPeriod_pbolus_prog > 0, must be between FlowRate_lo_hd and FlowRate_hi_hd.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -274,8 +286,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Maximum duration of a single uninterrupted patient bolus delivery. */
         attribute :>> semantics = ">= 0; if FlowRate_pbolus_prog or LockOutPeriod_pbolus_prog > 0, must be < LockOutPeriod_pbolus_prog and Duration_total_prog.";
         attribute :>> unit = "minutes";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionDurationSetting;
         attribute :>> encoding = "Time";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -285,8 +296,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Minimum interval between two consecutive patient bolus initiations (the lockout period), irrespective of interruption or completion. */
         attribute :>> semantics = ">= 0; if FlowRate_pbolus_prog or Duration_pbolus_prog > 0, must be > Duration_pbolus_prog.";
         attribute :>> unit = "minutes";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionDurationSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -296,8 +306,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Maximum total number of patient boluses that may be initiated during Duration_total_prog. */
         attribute :>> semantics = ">= 0; must be <= NumberMax_pbolus_hd for DrugName_prog in the hospital database.";
         attribute :>> unit = "per hour";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : BolusFrequencySetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.1 Prescription Data"; }
     }
@@ -388,8 +397,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Initial volume of drug in the reservoir at the time of entering the prescription; read from the reservoir label. */
         attribute :>> semantics = "Mandatory; shall be >= X ml (threshold left unspecified in the source draft).";
         attribute :>> unit = "ml";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionVolumeSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.1.3 Drug Reservoir Data"; }
     }
@@ -408,8 +416,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Flow rate of the drug through the hose delivering the drug, measured every X seconds when the system is in ON mode. */
         attribute :>> semantics = "None stated.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.3 Drug Flow Interface"; }
     }
@@ -446,8 +453,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Maximum concentration of the drug in a solution that can safely be used for infusion for DrugName_hd. */
         attribute :>> semantics = "None stated.";
         attribute :>> unit = "mg/ml";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : DrugConcentrationSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }
@@ -457,8 +463,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Minimum concentration of the drug in a solution that can safely be used for infusion for DrugName_hd. */
         attribute :>> semantics = "None stated.";
         attribute :>> unit = "mg/ml";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : DrugConcentrationSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }
@@ -468,8 +473,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Maximum volume of drug that is safe to be infused for DrugName_hd. */
         attribute :>> semantics = "None stated.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }
@@ -479,8 +483,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Minimum volume of drug that is safe to be infused for DrugName_hd. */
         attribute :>> semantics = "Mandatory.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }
@@ -490,8 +493,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Maximum safe flow rate of the drug for DrugName_hd. */
         attribute :>> semantics = "Mandatory.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }
@@ -501,8 +503,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Minimum safe flow rate of the drug for DrugName_hd. */
         attribute :>> semantics = "Mandatory.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }
@@ -512,8 +513,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Minimum safe interval between two consecutive patient bolus initiations for DrugName_hd. */
         attribute :>> semantics = "Mandatory.";
         attribute :>> unit = "minutes";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : InfusionDurationSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }
@@ -523,8 +523,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Maximum number of patient bolus initiations safe to be self-administered for DrugName_hd. */
         attribute :>> semantics = "Mandatory.";
         attribute :>> unit = "per hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "999";
+        attribute quantity : BolusFrequencySetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }
@@ -534,8 +533,7 @@ package memo_examples_gpca_pump_gpca_interfaces {
         doc /* Minimum flow rate of DrugName_hd that should be maintained to keep the vein open (KVO); default 0.1. */
         attribute :>> semantics = "Mandatory.";
         attribute :>> unit = "ml/hr";
-        attribute :>> minValue = "0";
-        attribute :>> maxValue = "5";
+        attribute quantity : KvoRateSetting;
         attribute :>> encoding = "Positive Integer";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §3.5 Hospital Pharmacy Database Interface"; }
     }

@@ -1197,6 +1197,42 @@ elements:
   "memo_examples_gpca_pump_gpca_formal_behavior::topLevelContract":
     shortId: "CNT-4"
     uuid: "c9422b35-3d90-557d-ba13-b4990f83ab00"
+  "memo_examples_gpca_pump_gpca_interfaces::BolusFrequencySetting":
+    shortId: "FRQ-1"
+    uuid: "9c45d630-a383-51bc-b145-e28c7d0427f8"
+  "memo_examples_gpca_pump_gpca_interfaces::BolusFrequencySetting::constraint1":
+    shortId: "ASS-3"
+    uuid: "5b212252-b849-575f-b8e5-bf557836f795"
+  "memo_examples_gpca_pump_gpca_interfaces::DrugConcentrationSetting":
+    shortId: "MSS-1"
+    uuid: "dd082bac-50ef-5f6c-b373-41557ccb5613"
+  "memo_examples_gpca_pump_gpca_interfaces::DrugConcentrationSetting::constraint1":
+    shortId: "ASS-4"
+    uuid: "cbc196e8-a6d7-5657-98ab-065d1a844b30"
+  "memo_examples_gpca_pump_gpca_interfaces::InfusionDurationSetting":
+    shortId: "DRT-1"
+    uuid: "73b2ae25-1747-5585-84a0-1471bcaf72ad"
+  "memo_examples_gpca_pump_gpca_interfaces::InfusionDurationSetting::constraint1":
+    shortId: "ASS-5"
+    uuid: "fd96be2e-b70f-57be-bfc6-14df66f47ff6"
+  "memo_examples_gpca_pump_gpca_interfaces::InfusionRateSetting":
+    shortId: "VLM-1"
+    uuid: "bca81b5f-8d0a-538e-8ea5-fb1ad48b58d2"
+  "memo_examples_gpca_pump_gpca_interfaces::InfusionRateSetting::constraint1":
+    shortId: "ASS-6"
+    uuid: "284f6120-cf94-5323-a3c4-234eb17b1c1b"
+  "memo_examples_gpca_pump_gpca_interfaces::InfusionVolumeSetting":
+    shortId: "VLM-2"
+    uuid: "bbfc1b9b-0917-5119-b07d-1a4fc168f05c"
+  "memo_examples_gpca_pump_gpca_interfaces::InfusionVolumeSetting::constraint1":
+    shortId: "ASS-7"
+    uuid: "fb067d90-bbea-5f34-bd8e-2ce62799e79c"
+  "memo_examples_gpca_pump_gpca_interfaces::KvoRateSetting":
+    shortId: "VLM-3"
+    uuid: "cae17baf-315a-5a3d-8e72-ace0393c5876"
+  "memo_examples_gpca_pump_gpca_interfaces::KvoRateSetting::constraint1":
+    shortId: "ASS-8"
+    uuid: "ed73c8dd-2bf2-5d33-8935-1f19db345c4f"
   "memo_examples_gpca_pump_gpca_interfaces::MonitoredBatteryVoltage":
     shortId: "ELC-1"
     uuid: "931cad53-86ba-5da6-8d14-fe39e810f7a5"

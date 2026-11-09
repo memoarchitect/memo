@@ -220,9 +220,8 @@ package memo_core_common {
         // is not a regulated data item — an IVD result is "5.5 mg/dL, LOINC
         // 2345-7", not "5.5".
         attribute semantics : String;
+        // A range is not a field here: it is a constraint on the type of the attribute holding the value.
         attribute unit : String;
-        attribute minValue : String;
-        attribute maxValue : String;
         attribute encoding : String;
         attribute timestampRequired : Boolean;
         attribute codes : TerminologyCode[0..*];
