@@ -558,6 +558,25 @@ package memo_rules_ontology {
         constraint { true }
     }
 
+    // A functional exchange moves something between two functions. This asks
+    // that both ends sit in some behaviour: performed by an action or contained
+    // in one. It is weaker than "a scenario walks it", which the model cannot
+    // tell apart from a function nested in another function.
+    //
+    // `warning` and `assurance`: a method that models the exchanges first and
+    // the scenarios later tailors it.
+    constraint def ExchangeEndsInBehaviourRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-104"; }
+        attribute tailoring = RuleTailoringKind::assurance;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "FunctionalExchange";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Both ends of a functional exchange should be in a behaviour. An exchange with an end that no action performs or contains cannot be reached by walking one.";
+        attribute predicateExpression = "sourceEnd->forAll(upstream(performs)->exists(construct == 'action') or upstream(composes)->exists(construct == 'action')) and targetEnd->forAll(upstream(performs)->exists(construct == 'action') or upstream(composes)->exists(construct == 'action'))";
+        constraint { true }
+    }
+
     // The predicate here named three features that do not exist — `variantKind`,
     // `baseScenario`, `variationPoint` — so it could never fail, and a rule that
     // cannot fail is coverage on paper only. `baseScenario` is the one the

@@ -232,15 +232,15 @@ flow def PhysicalTransfer specializes PhysicalFlow
         //         allocate cnMotorDrive to motorHarness;
         interface def PhysicalInterface specializes Interface {
             // analog, digital, discrete, pulse or power transfer. Fill in the
-            // descriptors that kind needs: a range for analog, a bit rate and
-            // protocol for digital, a frequency for pulse.
+            // descriptors that kind needs: a bit rate and protocol for digital,
+            // a frequency for pulse. An analog signal's range is a constraint on
+            // the type of the attribute that holds it, as every range is.
             attribute signalingKind : SignalingKind;
             attribute mediumKind : PhysicalMediumKind;
             attribute electricalStandard : String;
             attribute nominalVoltageV : ElectricPotentialDifferenceValue[0..1];
             attribute nominalCurrentA : ElectricCurrentValue[0..1];
-            attribute bitRateBps : String;
-            attribute signalRange : String;
+            attribute bitRateBps : BinaryDigitRateValue[0..1];
             attribute connectorStandard : String;
             end sourcePort : PhysicalPort;
             end targetPort : PhysicalPort;

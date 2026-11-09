@@ -69,6 +69,7 @@
 | [`LogicalContainsLogicalRule`](#logicalcontainslogicalrule) | `constraint def` | Constraint that checks logical contains logical rule. | `MemoConsistencyRule` |
 | [`PhysicalContainsPhysicalRule`](#physicalcontainsphysicalrule) | `constraint def` | Constraint that checks physical contains physical rule. | `MemoConsistencyRule` |
 | [`ExchangeHasFlowRule`](#exchangehasflowrule) | `constraint def` | An interface is the path between two ports; the flow over it is what moves. This rule asks that a component exchange carries one: a flow whose ends are the exchange's own two ports. The ends are compared as elements (`intersects` matches exact ids), not as names.… | `MemoConsistencyRule` |
+| [`ExchangeEndsInBehaviourRule`](#exchangeendsinbehaviourrule) | `constraint def` | A functional exchange moves something between two functions. This asks that both ends sit in some behaviour: performed by an action or contained in one. It is weaker than "a scenario walks it", which the model cannot tell apart from a function nested in another function.… | `MemoConsistencyRule` |
 | [`AlternateScenarioHasBaseRule`](#alternatescenariohasbaserule) | `constraint def` | The predicate here named three features that do not exist — `variantKind`, `baseScenario`, `variationPoint` — so it could never fail, and a rule that cannot fail is coverage on paper only.… | `MemoConsistencyRule` |
 | [`DerivationGapRule`](#derivationgaprule) | `constraint def` | A WARNING, not an error: it describes a trace graph that is suspicious rather than invalid, and a regulated model has legitimate exceptions. It reads `upstream` / `downstream` because the bare relation name is bidirectional.… | `MemoConsistencyRule` |
 | [`CausesCauseKindRule`](#causescausekindrule) | `constraint def` | Causes' ends are untyped because its CauseKind spans parts and items (memo_fmea.sysml). These carry what the types cannot. | `MemoConsistencyRule` |
@@ -590,6 +591,21 @@ constraint def ExchangeHasFlowRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | An interface is the path between two ports; the flow over it is what moves. This rule asks that a component exchange carries one: a flow whose ends are the exchange's own two ports. The ends are compared as elements (`intersects` matches exact ids), not as names.… |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## ExchangeEndsInBehaviourRule
+
+```sysml
+constraint def ExchangeEndsInBehaviourRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A functional exchange moves something between two functions. This asks that both ends sit in some behaviour: performed by an action or contained in one. It is weaker than "a scenario walks it", which the model cannot tell apart from a function nested in another function.… |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -1398,6 +1414,25 @@ constraint def WorkflowRealizesUseCaseOfItsLevelRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::error;
             attribute rationaleText = "A component exchange is the connection between two ports; the flow is what crosses it. An exchange with no flow between its ports declares a path that nothing uses, so its timing and kind describe no transfer.";
             attribute predicateExpression = "linksOf(flow)->exists(sourceEnd->intersects(subject.sourceEnd) and targetEnd->intersects(subject.targetEnd))";
+            constraint { true }
+        }
+
+        // A functional exchange moves something between two functions. This asks
+        // that both ends sit in some behaviour: performed by an action or contained
+        // in one. It is weaker than "a scenario walks it", which the model cannot
+        // tell apart from a function nested in another function.
+        //
+        // `warning` and `assurance`: a method that models the exchanges first and
+        // the scenarios later tailors it.
+        constraint def ExchangeEndsInBehaviourRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-104"; }
+            attribute tailoring = RuleTailoringKind::assurance;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "FunctionalExchange";
+            attribute severity = RuleSeverityKind::warning;
+            attribute rationaleText = "Both ends of a functional exchange should be in a behaviour. An exchange with an end that no action performs or contains cannot be reached by walking one.";
+            attribute predicateExpression = "sourceEnd->forAll(upstream(performs)->exists(construct == 'action') or upstream(composes)->exists(construct == 'action')) and targetEnd->forAll(upstream(performs)->exists(construct == 'action') or upstream(composes)->exists(construct == 'action'))";
             constraint { true }
         }
 

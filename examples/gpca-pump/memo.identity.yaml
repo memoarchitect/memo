@@ -1197,6 +1197,18 @@ elements:
   "memo_examples_gpca_pump_gpca_formal_behavior::topLevelContract":
     shortId: "CNT-4"
     uuid: "c9422b35-3d90-557d-ba13-b4990f83ab00"
+  "memo_examples_gpca_pump_gpca_interfaces::MonitoredBatteryVoltage":
+    shortId: "ELC-1"
+    uuid: "931cad53-86ba-5da6-8d14-fe39e810f7a5"
+  "memo_examples_gpca_pump_gpca_interfaces::MonitoredBatteryVoltage::constraint1":
+    shortId: "ASS-1"
+    uuid: "31e7adfb-0088-57d2-92d6-933fc337c195"
+  "memo_examples_gpca_pump_gpca_interfaces::OcclusionLinePressure":
+    shortId: "PRS-1"
+    uuid: "01e73d4a-6d64-5788-8515-e39410e300da"
+  "memo_examples_gpca_pump_gpca_interfaces::OcclusionLinePressure::constraint1":
+    shortId: "ASS-2"
+    uuid: "501e2141-6786-507b-a164-fb50f952187c"
   "memo_examples_gpca_pump_gpca_interfaces::SensorDataInterface":
     shortId: "DTX-1"
     uuid: "b5216019-53f8-5eb3-aba0-f878fa323e7f"

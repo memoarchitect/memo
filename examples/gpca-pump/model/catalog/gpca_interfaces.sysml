@@ -82,6 +82,13 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> nominalVoltageV = 3.3 [V];
         attribute :>> nominalCurrentA = 0.001 [A];
     }
+    attribute def OcclusionLinePressure :> PressureValue {
+        assert constraint { self >= 0 [Pa] and self <= 206843 [Pa] }
+    }
+    attribute def MonitoredBatteryVoltage :> ElectricPotentialDifferenceValue {
+        assert constraint { self >= 9.0 [V] and self <= 12.6 [V] }
+    }
+
     interface occlusionAnalogLine : PhysicalInterface connect occlusionSensor.portOcclusionOut to portSensorHarness {
         @MemoIdentity { :>> providedId = "PI-004"; :>> label = "Occlusion pressure analog line"; }
         attribute :>> interfaceKind = InterfaceKind::analogSignal;
@@ -91,7 +98,8 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> electricalStandard = "ratiometric 0.5-4.5V";
         attribute :>> nominalVoltageV = 5 [V];
         attribute :>> nominalCurrentA = 0.01 [A];
-        attribute :>> signalRange = "0 to 30 psi line pressure";
+        // 0 to 30 psi line pressure.
+        attribute linePressure : OcclusionLinePressure;
     }
     abstract interface batteryMonitorLine : PhysicalInterface {
         @MemoIdentity { :>> providedId = "PI-005"; :>> label = "Battery voltage monitor line"; }
@@ -102,7 +110,8 @@ package memo_examples_gpca_pump_gpca_interfaces {
         attribute :>> electricalStandard = "divided battery rail to ADC";
         attribute :>> nominalVoltageV = 12 [V];
         attribute :>> nominalCurrentA = 0.001 [A];
-        attribute :>> signalRange = "9.0V (depleted) to 12.6V (full)";
+        // Depleted at the low end, full at the high end.
+        attribute batteryVoltage : MonitoredBatteryVoltage;
     }
 
     // ── System-level interfaces (CriSys Ch.3, I 1-I 11) ─────────
