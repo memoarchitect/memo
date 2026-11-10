@@ -2,6 +2,10 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a breaking change to the ontology raises the minor number; any other release raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.20.1
+
+- No ontology changes. The version moves with `@memoarchitect/tools` and `@memoarchitect/architect`, which pin it exactly.
+
 ## 0.20.0
 
 - **Removed.** `minValue` and `maxValue` leave `MemoItem` and `PhysicalFlow`. They were strings, and a range is a constraint on the type of the attribute that holds the value. A model that sets them stops compiling: give the item an attribute of a value type that asserts the range, as `gpca-pump` now does with `InfusionRateSetting`.
