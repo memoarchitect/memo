@@ -7,7 +7,7 @@
 # (`type`, `extends`, `usage`, `ontologies`, `methodology`, `modules`) were
 # removed at the native semantic flip and are now rejected if present.
 name: '@memoarchitect/extension-anatomy'
-version: 0.19.0
+version: 0.20.0
 description: Human anatomy from the Foundational Model of Anatomy (FMA), selected per project
 license: MIT AND CC-BY-4.0
 tags:

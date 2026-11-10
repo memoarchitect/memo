@@ -2,6 +2,13 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a breaking change to the ontology raises the minor number; any other release raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.20.0
+
+- **Removed.** `minValue` and `maxValue` leave `MemoItem` and `PhysicalFlow`. They were strings, and a range is a constraint on the type of the attribute that holds the value. A model that sets them stops compiling: give the item an attribute of a value type that asserts the range, as `gpca-pump` now does with `InfusionRateSetting`.
+- **Removed.** `signalRange` leaves `PhysicalInterface`, for the same reason.
+- **Changed.** `PhysicalInterface.bitRateBps` is a `BinaryDigitRateValue` and no longer a string. A model that sets it writes a quantity.
+- **Added.** `CR-ONT-104` warns when either end of a functional exchange is in no behaviour.
+
 ## 0.19.0
 
 - **Fixed.** `MemoLayoutEdge::route` is `nonunique`. A right-angle route repeats a coordinate at every bend, which a compiler that enforces uniqueness rejected, so a saved connector route could stop the model compiling.
