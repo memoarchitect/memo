@@ -2,6 +2,10 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a breaking change to the ontology raises the minor number; any other release raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## 0.20.3
+
+- No ontology changes. The version moves with `@memoarchitect/tools` and `@memoarchitect/architect`, which pin it exactly.
+
 ## 0.20.2
 
 - No ontology changes. The version moves with `@memoarchitect/tools` and `@memoarchitect/architect`, which pin it exactly.
