@@ -111,6 +111,7 @@ package memo_architecture_implementation_ui {
     }
 
     part def UserInterface specializes MemoPart {
+        @MemoIdentity { :>> label = "User interface"; }
         attribute modality : String;
         attribute uiTechnology : String;
     }
@@ -143,6 +144,7 @@ package memo_architecture_implementation_ui {
     // SoftwareComponent, code is SoftwareModule, and the UI is a third view of
     // the same software — a sibling of those, not a kind of either.
     part def UIElement specializes SoftwareElement {
+        @MemoIdentity { :>> label = "UI element"; }
         attribute formKind : UIElementFormKind;
         // The visible label. Held here rather than on a shared interaction
         // base: a physical control's label is moulded or printed, and is
@@ -223,6 +225,7 @@ package memo_architecture_implementation_ui {
     }
 
     part def OperatorInterfaceElement specializes PhysicalComponent {
+        @MemoIdentity { :>> label = "Operator interface element"; }
         attribute formKind : OperatorInterfaceFormKind;
         // actuation (optional; set for actuated forms)
         attribute actuationForce : String;
@@ -241,6 +244,7 @@ package memo_architecture_implementation_ui {
     // needs before it can rely on the picture. The screen it depicts is an
     // ordinary UIElement with formKind = screen.
     part def ScreenCapture specializes MemoEvidence {
+        @MemoIdentity { :>> label = "Screen capture"; }
         attribute imageUri : String;
         // Content hash of the image bytes. The screenshot is the evidence, so
         // it must be tamper-evident: a DHF reference to a mutable file is not
@@ -259,10 +263,12 @@ package memo_architecture_implementation_ui {
 
     // UI state is presentation state — distinct from system/device state.
     part def UIState specializes MemoPart {
+        @MemoIdentity { :>> label = "UI state"; }
         attribute displayedInformation : String;
         attribute availableActions : String;
     }
     part def UIEvent specializes MemoPart {
+        @MemoIdentity { :>> label = "UI event"; }
         attribute eventSource : String;
         attribute intent : InteractionIntentKind;
     }
@@ -276,6 +282,7 @@ package memo_architecture_implementation_ui {
     // The three attributes here are what a UI action adds on top: what the
     // user meant by it, what came back, and whether it asks first.
     action def UIAction specializes OperativeAction {
+        @MemoIdentity { :>> label = "UI action"; }
         attribute intent : InteractionIntentKind;
         attribute feedbackProvided : String;
         attribute confirmationRequired : Boolean;
@@ -284,6 +291,7 @@ package memo_architecture_implementation_ui {
     // A reusable dialogue structure through the UI; a selected path through
     // it is a OperativeScenario with scenarioKind `ui`.
     action def InteractionFlow specializes MemoAction {
+        @MemoIdentity { :>> label = "Interaction flow"; }
         attribute entryPoint : String;
         attribute exitPoint : String;
     }
@@ -297,6 +305,7 @@ package memo_architecture_implementation_ui {
     // ── Screen layout relations ──────────────────────────────────
     // Which modelled screen an image is a rendering of.
     connection def CapturesScreen :> MemoRelationship {
+        @MemoIdentity { :>> label = "Captures screen"; }
         end capture : ScreenCapture :>> source;
         end screen : UIElement :>> target;
     }
@@ -319,6 +328,7 @@ package memo_architecture_implementation_ui {
     // A screen is a UIElement whose `formKind` is `screen`; the end says UIElement because the form is an
     // attribute, not a subtype.
     connection def NavigatesTo :> MemoRelationship {
+        @MemoIdentity { :>> label = "Navigates to"; }
         end element : UIElement :>> source;
         end screen : UIElement :>> target;
     }
@@ -336,6 +346,7 @@ package memo_architecture_implementation_ui {
     // MemoPart. CR-MED-111 still holds rendered controls to it, and it is
     // scoped to UIElement, so the wider end does not weaken the rule.
     connection def ElementTriggersAction :> MemoRelationship {
+        @MemoIdentity { :>> label = "Element triggers action"; }
         end element : MemoPart :>> source;
         end triggeredAction : UIAction :>> target;
     }
@@ -348,6 +359,7 @@ package memo_architecture_implementation_ui {
     // A UI action invokes a function by native `perform`: write `perform
     // <systemFunction>;` inside the `UIAction` usage.
     connection def FlowServesUseCase :> MemoRelationship {
+        @MemoIdentity { :>> label = "Flow serves use case"; }
         end interactionFlow : InteractionFlow :>> source;
         end useCase : UseCase :>> target;
     }
@@ -365,6 +377,7 @@ package memo_architecture_implementation_ui {
     // backwards — not only on a control. Narrowing this to an interaction
     // base made those unmodellable.
     connection def ErrorAtElement :> MemoRelationship {
+        @MemoIdentity { :>> label = "Error at element"; }
         attribute :>> isTrace = true;
         end useError : UseError :>> source;
         end element : MemoPart :>> target;
@@ -378,6 +391,7 @@ package memo_architecture_implementation_ui {
     // A risk control implemented by a UI element or by task design
     // (confirmation dialog, lockout, guarded control).
     connection def ControlImplementedBy :> MemoRelationship {
+        @MemoIdentity { :>> label = "Control implemented by"; }
         attribute :>> isTrace = true;
         end riskControl : RiskControlMeasure :>> source;
         end implementingElement :>> target;

@@ -64,6 +64,7 @@ package memo_extension_ros {
     // process, and which one it is is a design decision the model should
     // record rather than a fact the type can assert.
     part def RosNode specializes SoftwareComponent {
+        @MemoIdentity { :>> label = "ROS node"; }
         attribute nodeNamespace : String;
         // Whether the node implements the managed-node lifecycle
         // (unconfigured / inactive / active / finalized). A lifecycle-managed
@@ -78,18 +79,22 @@ package memo_extension_ros {
     // Individual deliveries are native flows/messages between ports that
     // reference the same topic usage.
     abstract item def RosMessage specializes MessagingMessage {
+        @MemoIdentity { :>> label = "ROS message"; }
         attribute rosTypeName : String;
     }
 
     port def RosPublisher specializes MessagingPublisher {
+        @MemoIdentity { :>> label = "ROS publisher"; }
         attribute offeredQos : RosQosProfile;
     }
 
     port def RosSubscriber specializes MessagingSubscriber {
+        @MemoIdentity { :>> label = "ROS subscriber"; }
         attribute requestedQos : RosQosProfile;
     }
 
     interface def RosTopicInterface specializes MessagingTopicInterface {
+        @MemoIdentity { :>> label = "ROS topic interface"; }
         end rosPublisher : RosPublisher :>> publisher;
         end rosSubscriber : RosSubscriber :>> subscriber;
         // A topic goes publisher to subscriber, always.
@@ -97,22 +102,29 @@ package memo_extension_ros {
     }
 
     // ── Services: one correlated request/reply contract ────────────────
-    abstract item def RosServiceRequest specializes RosMessage;
-    abstract item def RosServiceResponse specializes RosMessage;
+    abstract item def RosServiceRequest specializes RosMessage {
+        @MemoIdentity { :>> label = "ROS service request"; }
+    }
+    abstract item def RosServiceResponse specializes RosMessage {
+        @MemoIdentity { :>> label = "ROS service response"; }
+    }
 
     port def RosServiceClient specializes SoftwarePort {
+        @MemoIdentity { :>> label = "ROS service client"; }
         out item request : RosServiceRequest;
         in item response : RosServiceResponse;
         attribute serviceName : String;
     }
 
     port def RosServiceServer specializes SoftwarePort {
+        @MemoIdentity { :>> label = "ROS service server"; }
         in item request : RosServiceRequest;
         out item response : RosServiceResponse;
         attribute serviceName : String;
     }
 
     interface def RosServiceInterface specializes SoftwareInterface {
+        @MemoIdentity { :>> label = "ROS service interface"; }
         end client : RosServiceClient :>> source;
         end server : RosServiceServer :>> target;
         flow rosServiceRequestFlow of RosServiceRequest from client.request to server.request;
@@ -123,14 +135,27 @@ package memo_extension_ros {
     // ROS 2 realizes an action through goal/result/cancel services plus
     // feedback/status topics. The port exposes those distinct native message
     // features, so an action cannot be mistaken for a two-message service.
-    abstract item def RosActionGoal specializes RosMessage;
-    abstract item def RosActionAcceptance specializes RosMessage;
-    abstract item def RosActionFeedback specializes RosMessage;
-    abstract item def RosActionResult specializes RosMessage;
-    abstract item def RosActionCancel specializes RosMessage;
-    abstract item def RosActionStatus specializes RosMessage;
+    abstract item def RosActionGoal specializes RosMessage {
+        @MemoIdentity { :>> label = "ROS action goal"; }
+    }
+    abstract item def RosActionAcceptance specializes RosMessage {
+        @MemoIdentity { :>> label = "ROS action acceptance"; }
+    }
+    abstract item def RosActionFeedback specializes RosMessage {
+        @MemoIdentity { :>> label = "ROS action feedback"; }
+    }
+    abstract item def RosActionResult specializes RosMessage {
+        @MemoIdentity { :>> label = "ROS action result"; }
+    }
+    abstract item def RosActionCancel specializes RosMessage {
+        @MemoIdentity { :>> label = "ROS action cancel"; }
+    }
+    abstract item def RosActionStatus specializes RosMessage {
+        @MemoIdentity { :>> label = "ROS action status"; }
+    }
 
     port def RosActionClient specializes SoftwarePort {
+        @MemoIdentity { :>> label = "ROS action client"; }
         out item goal : RosActionGoal;
         in item acceptance : RosActionAcceptance;
         in item feedback : RosActionFeedback;
@@ -141,6 +166,7 @@ package memo_extension_ros {
     }
 
     port def RosActionServer specializes SoftwarePort {
+        @MemoIdentity { :>> label = "ROS action server"; }
         in item goal : RosActionGoal;
         out item acceptance : RosActionAcceptance;
         out item feedback : RosActionFeedback;
@@ -151,6 +177,7 @@ package memo_extension_ros {
     }
 
     interface def RosActionInterface specializes SoftwareInterface {
+        @MemoIdentity { :>> label = "ROS action interface"; }
         end client : RosActionClient :>> source;
         end server : RosActionServer :>> target;
         flow rosActionGoalFlow of RosActionGoal from client.goal to server.goal;
@@ -161,13 +188,27 @@ package memo_extension_ros {
         flow rosActionStatusFlow of RosActionStatus from server.actionStatus to client.actionStatus;
     }
 
-    abstract state def RosActionExecution specializes MemoState;
-    state def RosActionAccepted specializes RosActionExecution;
-    state def RosActionExecuting specializes RosActionExecution;
-    state def RosActionCanceling specializes RosActionExecution;
-    state def RosActionSucceeded specializes RosActionExecution;
-    state def RosActionCanceled specializes RosActionExecution;
-    state def RosActionAborted specializes RosActionExecution;
+    abstract state def RosActionExecution specializes MemoState {
+        @MemoIdentity { :>> label = "ROS action execution"; }
+    }
+    state def RosActionAccepted specializes RosActionExecution {
+        @MemoIdentity { :>> label = "ROS action accepted"; }
+    }
+    state def RosActionExecuting specializes RosActionExecution {
+        @MemoIdentity { :>> label = "ROS action executing"; }
+    }
+    state def RosActionCanceling specializes RosActionExecution {
+        @MemoIdentity { :>> label = "ROS action canceling"; }
+    }
+    state def RosActionSucceeded specializes RosActionExecution {
+        @MemoIdentity { :>> label = "ROS action succeeded"; }
+    }
+    state def RosActionCanceled specializes RosActionExecution {
+        @MemoIdentity { :>> label = "ROS action canceled"; }
+    }
+    state def RosActionAborted specializes RosActionExecution {
+        @MemoIdentity { :>> label = "ROS action aborted"; }
+    }
 
     // ── Deployment ──────────────────────────────────────────────────────
     //
@@ -178,6 +219,7 @@ package memo_extension_ros {
     //   ProvidesEnvironment ProcessingNode -> RosContainerRuntime
     // That is the proof the base is factored correctly.
     part def RosContainerImage specializes ContainerImage {
+        @MemoIdentity { :>> label = "ROS container image"; }
         // humble, iron, jazzy, rolling.
         attribute rosDistribution : String;
         // The workspace overlay the image was built from.
@@ -185,6 +227,7 @@ package memo_extension_ros {
     }
 
     part def RosContainerRuntime specializes ContainerRuntime {
+        @MemoIdentity { :>> label = "ROS container runtime"; }
         attribute rosDistribution : String;
         // The RMW implementation below ROS 2 — rmw_fastrtps_cpp,
         // rmw_cyclonedds_cpp. QoS is enforced here, so it is part of any

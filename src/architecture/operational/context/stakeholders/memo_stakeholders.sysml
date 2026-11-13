@@ -13,11 +13,13 @@ package memo_architecture_operational_context_stakeholders {
     private import memo_core_relationships::*;
     private import memo_architecture_operational_context_actors::*;
     part def ArchitectureDescription specializes MemoPart {
+        @MemoIdentity { :>> label = "Architecture description"; }
         attribute systemOfInterest : String;
         attribute version : String;
     }
 
     part def ModelKind specializes MemoPart {
+        @MemoIdentity { :>> label = "Model kind"; }
         attribute conventions : String;
         attribute notationReference : String;
     }
@@ -25,6 +27,7 @@ package memo_architecture_operational_context_stakeholders {
     // 42010 correspondence: a rule that must hold between architecture
     // description elements (e.g. consistency between two views).
     part def CorrespondenceRule specializes MemoPart {
+        @MemoIdentity { :>> label = "Correspondence rule"; }
         attribute ruleExpression : String;
     }
 
@@ -37,6 +40,7 @@ package memo_architecture_operational_context_stakeholders {
     // IntendedUse a requirement — so that end stays untyped, as DerivesFrom's
     // driver does. What is governed is always a structural element.
     connection def Governs :> MemoRelationship {
+        @MemoIdentity { :>> label = "Governs"; }
         attribute governKind : GovernKind;
         end governor :>> source;
         end governedElement : MemoPart :>> target;

@@ -129,6 +129,7 @@ connection def Decides :> MemoRelationship
         private import memo_core_relationships::*;
         private import memo_artifacts_core::*;
         part def DesignDecision specializes MemoPart {
+            @MemoIdentity { :>> label = "Design decision"; }
             attribute decisionKind : String;
             attribute decisionStatus : DesignDecisionStatusKind;
         }
@@ -139,10 +140,15 @@ connection def Decides :> MemoRelationship
         // `variant` (SysML-textual-bnf.kebnf:254-256) of a variation point, so a trade
         // study points at the thing that is being traded. Both are typed dependencies
         // (memo_core_relationships::MemoTypedDependency).
-        metadata def Alternative :> MemoTypedDependency;
-        metadata def Selected :> MemoTypedDependency;
+        metadata def Alternative :> MemoTypedDependency {
+            @MemoIdentity { :>> label = "Alternative"; }
+        }
+        metadata def Selected :> MemoTypedDependency {
+            @MemoIdentity { :>> label = "Selected"; }
+        }
 
         connection def DecisionRecordedInADR :> MemoRelationship {
+            @MemoIdentity { :>> label = "Decision recorded in ADR"; }
             end decision : DesignDecision :>> source;
             end adr : ADRArtifact :>> target;
         }
@@ -157,6 +163,7 @@ connection def Decides :> MemoRelationship
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
         connection def Decides :> MemoRelationship {
+            @MemoIdentity { :>> label = "Decides"; }
             end decision : DesignDecision :>> source;
             end affectedElement : MemoPart :>> target;
         }

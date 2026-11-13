@@ -38,6 +38,7 @@ package memo_architecture_variability {
     // the analysis is these four statements, each optional until someone has an answer.
     // What the feature shows is curated: `#ShowsView` below names its views.
     part def ProductFeature specializes MemoPart {
+        @MemoIdentity { :>> label = "Product feature"; }
         /** What the feature gives the people who use the product, in a sentence or two. */
         attribute valueProposition : String[0..1];
         /** Who it is for: the roles or segments that gain from it. */
@@ -51,6 +52,7 @@ package memo_architecture_variability {
     // `Requires` is taken by the native `require` relation, so these say what they join.
     connection def RequiresFeature :> MemoRelationship {
         doc /* Selecting the source feature needs the target feature selected too. */
+        @MemoIdentity { :>> label = "Requires feature"; }
         end dependentFeature : ProductFeature :>> source;
         end requiredFeature : ProductFeature :>> target;
     }
@@ -63,6 +65,7 @@ package memo_architecture_variability {
 
     connection def ExcludesFeature :> MemoRelationship {
         doc /* The two features cannot be selected together. Symmetric: either end may be written first. */
+        @MemoIdentity { :>> label = "Excludes feature"; }
         end firstFeature : ProductFeature :>> source;
         end secondFeature : ProductFeature :>> target;
     }
@@ -77,11 +80,14 @@ package memo_architecture_variability {
     // is nested in its variation, so it is a dependency's client by qualified name.
     metadata def RealizesFeature :> MemoTypedDependency {
         doc /* `#RealizesFeature dependency from <variant> to <feature>;` The variant exists to give the family this feature. */
+        @MemoIdentity { :>> label = "Realizes feature"; }
     }
     metadata def SelectsFeature :> MemoTypedDependency {
         doc /* `#SelectsFeature dependency from <release> to <feature>, <feature>;` The release contains the variants that realize these features. */
+        @MemoIdentity { :>> label = "Selects feature"; }
     }
     metadata def ShowsView :> MemoTypedDependency {
         doc /* `#ShowsView dependency from <feature> to <view>, <view>;` The views the feature's viewpoint lists: chosen for what the feature demonstrates, not found by a rule. */
+        @MemoIdentity { :>> label = "Shows view"; }
     }
 }

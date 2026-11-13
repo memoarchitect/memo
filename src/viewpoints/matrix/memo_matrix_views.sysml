@@ -39,11 +39,13 @@ package memo_viewpoints_matrix {
      * query language the DHF templates use. The axis is the union of the two.
      */
     part def MemoMatrixAxis :> ViewSelectionQuery {
+        @MemoIdentity { :>> label = "Matrix axis"; }
         attribute query : String[0..1];
     }
 
     /** A named group of rows in a design structure matrix. */
     part def MemoMatrixGroup :> MemoPart {
+        @MemoIdentity { :>> label = "Matrix group"; }
         attribute groupName : String;
         attribute groupedBy : MatrixGroupKind;
         /** A package qualified name, or the text of a `memo-query`; empty for a cluster result. */
@@ -56,7 +58,7 @@ package memo_viewpoints_matrix {
      */
     view def MemoTraceabilityMatrixView :> MemoDiagramView {
         attribute :>> viewKind = DiagramViewKind::grid;
-        @MemoIdentity { :>> shortDescription = "Rows traced to columns by relationships, each axis chosen by hand or by query."; }
+        @MemoIdentity { :>> label = "Traceability matrix view"; :>> shortDescription = "Rows traced to columns by relationships, each axis chosen by hand or by query."; }
         /**
          * The system or system of systems the matrix is about: the qualified name
          * of its definition (a workspace root). Its queries run in that workspace.
@@ -76,7 +78,7 @@ package memo_viewpoints_matrix {
      */
     view def MemoDependencyMatrixView :> MemoDiagramView {
         attribute :>> viewKind = DiagramViewKind::grid;
-        @MemoIdentity { :>> shortDescription = "Dependencies among one set of elements, chosen by hand or by query."; }
+        @MemoIdentity { :>> label = "Dependency matrix view"; :>> shortDescription = "Dependencies among one set of elements, chosen by hand or by query."; }
         /** The system or system of systems the matrix is about, as on the traceability matrix. */
         attribute system : String[0..1];
         part axis : MemoMatrixAxis[0..1];

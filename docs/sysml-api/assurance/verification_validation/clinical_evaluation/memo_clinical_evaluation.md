@@ -58,6 +58,7 @@ part def ClinicalEvaluation :> MemoPart
         private import memo_core_common::*;
 
         part def ClinicalEvaluation :> MemoPart {
+            @MemoIdentity { :>> label = "Clinical evaluation"; }
             attribute evaluationStage : String;
             attribute clinicalDataSource : String;
             attribute conclusion : String;

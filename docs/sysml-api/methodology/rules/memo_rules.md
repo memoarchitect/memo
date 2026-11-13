@@ -78,10 +78,12 @@ part def RelationUsageRule :> ConsistencyRule
         private import memo_core_consistency_rules::*;
 
         part def ElementUsageRule :> ConsistencyRule {
+            @MemoIdentity { :>> label = "Element usage rule"; }
             attribute elementTypeName : String;
         }
 
         part def RelationUsageRule :> ConsistencyRule {
+            @MemoIdentity { :>> label = "Relation usage rule"; }
             attribute relationTypeName : String;
         }
     }

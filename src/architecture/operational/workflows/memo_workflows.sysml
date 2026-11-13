@@ -36,6 +36,7 @@ package memo_architecture_operational_workflows {
     private import memo_architecture_operational_use_cases::*;
 
     abstract part def OperationalWorkflow specializes MemoPart {
+        @MemoIdentity { :>> label = "Operational workflow"; }
         // Where the body of work starts and ends. A scenario's pre- and
         // post-conditions are its own path's, inside these.
         attribute entryCondition : String;
@@ -59,14 +60,17 @@ package memo_architecture_operational_workflows {
     // `ClinicalWorkflow` realizes a `ClinicalUseCase` (no product, no number); a `SystemWorkflow`
     // realizes a `SystemUseCase` (one variant, every number). CR-ONT-103 keeps the two in step.
     part def ClinicalWorkflow specializes OperationalWorkflow {
+        @MemoIdentity { :>> label = "Clinical workflow"; }
     }
     part def SystemWorkflow specializes OperationalWorkflow {
+        @MemoIdentity { :>> label = "System workflow"; }
     }
 
     // The use case a workflow realizes. Many workflows may trace to one use
     // case; the use case does not own its workflows (the trace points upward,
     // workflow → use case).
     connection def RealizesUseCase :> MemoRelationship {
+        @MemoIdentity { :>> label = "Realizes use case"; }
         end realizingWorkflow : OperationalWorkflow :>> source;
         end realizedUseCase : UseCase :>> target;
     }
@@ -91,6 +95,7 @@ package memo_architecture_operational_workflows {
     // or space, by reference. Owned by the workflow as its parts. A staff member is not one: that
     // is a `User`, which is a `MemoResource` of its own.
     part def WorkflowResource specializes MemoResource {
+        @MemoIdentity { :>> label = "Workflow resource"; }
         attribute resourceKind : ResourceKind;
         attribute quantity : Natural;
         attribute reprocessingDuration : DurationValue[0..1];

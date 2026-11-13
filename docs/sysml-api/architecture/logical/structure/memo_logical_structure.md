@@ -442,6 +442,7 @@ connection def IndependentOf :> MemoRelationship
         // which types are admissible; Composes records the actual links.
 
         part def SystemOfSystems specializes LogicalComponent {
+            @MemoIdentity { :>> label = "System of systems"; }
             // Constituent systems are independently operated and independently
             // managed, collaborating for a capability none delivers alone
             // (ISO/IEC/IEEE 21841). A connected pump talking to a hospital
@@ -461,6 +462,7 @@ connection def IndependentOf :> MemoRelationship
         }
 
         part def System specializes LogicalComponent {
+            @MemoIdentity { :>> label = "System"; }
             attribute systemBoundaryDescription : String;
             attribute origin : SystemOriginKind[0..1];
             part system : System[0..*];
@@ -469,6 +471,7 @@ connection def IndependentOf :> MemoRelationship
         }
 
         part def Subsystem specializes LogicalComponent {
+            @MemoIdentity { :>> label = "Subsystem"; }
             attribute systemBoundaryDescription : String;
             part subsystem : Subsystem[0..*];
             part component : LogicalComponent[0..*];
@@ -480,6 +483,7 @@ connection def IndependentOf :> MemoRelationship
         // claiming independence must still be linked by IndependentOf with its
         // basis stated.
         part def LogicalComponent specializes MemoPart {
+            @MemoIdentity { :>> label = "Logical component"; }
             attribute componentRole : ComponentRoleKind;
             attribute systemType : SystemTypeKind[0..1];
             attribute responsibility : String;
@@ -501,18 +505,23 @@ connection def IndependentOf :> MemoRelationship
         }
 
         // Boundary features and contracts.
-        port def LogicalPort specializes MemoPort;
+        port def LogicalPort specializes MemoPort {
+            @MemoIdentity { :>> label = "Logical port"; }
+        }
         interface def LogicalInterface specializes Interface {
+            @MemoIdentity { :>> label = "Logical interface"; }
             attribute contentKind : FlowContentKind;
             end providerPort : LogicalPort;
             end consumerPort : ~LogicalPort;
         }
         item def LogicalExchangeItem specializes MemoItem {
+            @MemoIdentity { :>> label = "Logical exchange item"; }
             attribute contentKind : FlowContentKind;
         }
 
         // A typed logical connection between two components' ports.
         connection def LogicalConnector :> MemoRelationship {
+            @MemoIdentity { :>> label = "Logical connector"; }
             attribute :>> isConnector = true;
             attribute contentKind : FlowContentKind;
             attribute direction : DirectionKind;
@@ -547,12 +556,14 @@ connection def IndependentOf :> MemoRelationship
         // distinguishable (namespace distinguishability) from the library's own
         // `payload`, so the payload lives on the ports.
         abstract flow def LogicalExchange {
+            @MemoIdentity { :>> label = "Logical exchange"; }
             attribute contentKind : FlowContentKind;
             attribute latencyRequirement : String;
         }
 
         // The concrete exchange a model types its logical flows by; the ends stay untyped for the reason above.
         flow def LogicalTransfer specializes LogicalExchange {
+            @MemoIdentity { :>> label = "Logical transfer"; }
             end source;
             end target;
         }
@@ -561,21 +572,25 @@ connection def IndependentOf :> MemoRelationship
         // and from physical device configuration).
 
         part def LogicalBehavior specializes MemoPart {
+            @MemoIdentity { :>> label = "Logical behavior"; }
             attribute behaviorSummary : String;
             attribute executionSemantics : String;
         }
 
         // Isolation, fault containment, and trust boundaries.
         part def IsolationBoundary specializes MemoPart {
+            @MemoIdentity { :>> label = "Isolation boundary"; }
             attribute boundaryKind : String;
             attribute isolationMechanism : String;
         }
         part def FaultContainmentRegion specializes MemoPart {
+            @MemoIdentity { :>> label = "Fault containment region"; }
             attribute containmentRationale : String;
         }
 
         // Claimed independence between channels (common-cause defense).
         connection def IndependentOf :> MemoRelationship {
+            @MemoIdentity { :>> label = "Independent of"; }
             attribute independenceBasis : String;
             end channel : LogicalComponent :>> source;
             end otherChannel : LogicalComponent :>> target;

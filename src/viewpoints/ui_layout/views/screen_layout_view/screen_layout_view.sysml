@@ -13,8 +13,8 @@ package memo_viewpoints_ui_layout_views_screen_layout_view {
     private import memo_core_common::*;
     view def MemoScreenLayoutView :> MemoDiagramView {
         attribute :>> viewKind = DiagramViewKind::geometry;
-        @MemoIdentity { :>> shortDescription = "Screen capture overlaid with its UI element tree."; }
         doc /* Renders one ScreenCapture as the backdrop and each UIElement composed under the captured screen as a boundary box at its authored bounds, coloured by boundaryColor. Bounds are relative to the parent element, so the renderer accumulates transforms down the Composes tree. Selecting an element isolates it: siblings recede rather than compete. Following an element's NavigatesTo edge swaps the backdrop to the target screen's capture, so the view walks the interface the way the user does. */
+        @MemoIdentity { :>> label = "Screen layout view"; :>> shortDescription = "Screen capture overlaid with its UI element tree."; }
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::screenLayout);
         attribute :>> layoutHint = "authored";

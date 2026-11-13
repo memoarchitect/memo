@@ -18,6 +18,7 @@ package memo_extension_clinical_procedures {
     private import memo_core_common::MemoIdentity;
 
     part def ClinicalProcedureWorkflow specializes ClinicalWorkflow {
+        @MemoIdentity { :>> label = "Clinical procedure workflow"; }
         attribute procedureCode : TerminologyCode[0..1];
         attribute clinicalObjective : String;
         attribute anesthesiaRequirement : String;

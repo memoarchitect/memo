@@ -21,53 +21,45 @@ package memo_viewpoints_stakeholders_concerns {
     // It extends the standard concern's `stakeholders` (the Parts interested in
     // it) to the MEMO stakeholder catalog, as a viewpoint does for its own.
     abstract concern def MemoConcern {
+        @MemoIdentity { :>> label = "Concern"; }
         ref memoStakeholders :>> stakeholders : MemoStakeholder[0..*];
     }
 
     concern def SafetyConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-1"; }
-        attribute name = "Safety";
-        attribute description = "Freedom from unacceptable risk of harm to the patient, the operator or a bystander.";
+        doc /* Freedom from unacceptable risk of harm to the patient, the operator or a bystander. */
+        @MemoIdentity { :>> label = "Safety"; :>> providedId = "CNC-1"; }
     }
     concern def UsabilityConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-2"; }
-        attribute name = "Usability";
-        attribute description = "Whether the intended user can operate the device correctly under use conditions.";
+        doc /* Whether the intended user can operate the device correctly under use conditions. */
+        @MemoIdentity { :>> label = "Usability"; :>> providedId = "CNC-2"; }
     }
     concern def CybersecurityConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-3"; }
-        attribute name = "Cybersecurity";
-        attribute description = "Resistance to compromise of the device, its data, or the network it participates in.";
+        doc /* Resistance to compromise of the device, its data, or the network it participates in. */
+        @MemoIdentity { :>> label = "Cybersecurity"; :>> providedId = "CNC-3"; }
     }
     concern def PerformanceConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-4"; }
-        attribute name = "Performance";
-        attribute description = "Timing, throughput and capacity against what the clinical procedure demands.";
+        doc /* Timing, throughput and capacity against what the clinical procedure demands. */
+        @MemoIdentity { :>> label = "Performance"; :>> providedId = "CNC-4"; }
     }
     concern def InteroperabilityConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-5"; }
-        attribute name = "Interoperability";
-        attribute description = "Correct exchange with the equipment and systems the device is used alongside.";
+        doc /* Correct exchange with the equipment and systems the device is used alongside. */
+        @MemoIdentity { :>> label = "Interoperability"; :>> providedId = "CNC-5"; }
     }
     concern def ReliabilityConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-6"; }
-        attribute name = "Reliability";
-        attribute description = "Continuity of correct service, and behaviour on failure.";
+        doc /* Continuity of correct service, and behaviour on failure. */
+        @MemoIdentity { :>> label = "Reliability"; :>> providedId = "CNC-6"; }
     }
     concern def PrivacyConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-7"; }
-        attribute name = "Privacy";
-        attribute description = "Protection of patient and operator data through its lifecycle.";
+        doc /* Protection of patient and operator data through its lifecycle. */
+        @MemoIdentity { :>> label = "Privacy"; :>> providedId = "CNC-7"; }
     }
     concern def RegulatoryConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-8"; }
-        attribute name = "Regulatory";
-        attribute description = "Evidence a submission requires, and conformance to the standards claimed.";
+        doc /* Evidence a submission requires, and conformance to the standards claimed. */
+        @MemoIdentity { :>> label = "Regulatory"; :>> providedId = "CNC-8"; }
     }
     concern def ClinicalConcern :> MemoConcern {
-        @MemoIdentity { :>> providedId = "CNC-9"; }
-        attribute name = "Clinical";
-        attribute description = "Whether the device serves the clinical procedure and its intended use.";
+        doc /* Whether the device serves the clinical procedure and its intended use. */
+        @MemoIdentity { :>> label = "Clinical"; :>> providedId = "CNC-9"; }
     }
 
     // ─── Quality attributes ──────────────────────────────────────────────
@@ -85,6 +77,7 @@ package memo_viewpoints_stakeholders_concerns {
     // it is a worry the architecture has not yet answered — both are findings
     // this mapping makes visible.
     abstract part def MemoQualityAttribute :> MemoPart {
+        @MemoIdentity { :>> label = "Quality attribute"; }
         ref addressesConcerns : MemoConcern[*];
         /** How the property is measured — the response measure of a quality
          *  attribute scenario, stated once for the attribute. */
@@ -92,37 +85,37 @@ package memo_viewpoints_stakeholders_concerns {
     }
 
     part def Availability :> MemoQualityAttribute {
-        @MemoIdentity { :>> providedId = "QA-1"; }
+        @MemoIdentity { :>> label = "Availability"; :>> providedId = "QA-1"; }
         ref :>> addressesConcerns = (safetyConcern, reliabilityConcern, clinicalConcern);
         attribute :>> measure = "Proportion of scheduled procedure time the function is delivered, and time to recover after a fault.";
     }
     part def Performance :> MemoQualityAttribute {
-        @MemoIdentity { :>> providedId = "QA-2"; }
+        @MemoIdentity { :>> label = "Performance"; :>> providedId = "QA-2"; }
         ref :>> addressesConcerns = (performanceConcern, clinicalConcern);
         attribute :>> measure = "Latency and throughput under the arrival pattern the procedure produces.";
     }
     part def Security :> MemoQualityAttribute {
-        @MemoIdentity { :>> providedId = "QA-3"; }
+        @MemoIdentity { :>> label = "Security"; :>> providedId = "QA-3"; }
         ref :>> addressesConcerns = (cybersecurityConcern, privacyConcern, safetyConcern);
         attribute :>> measure = "Resistance to a stated threat, and time to detect and recover from a compromise.";
     }
     part def Modifiability :> MemoQualityAttribute {
-        @MemoIdentity { :>> providedId = "QA-4"; }
+        @MemoIdentity { :>> label = "Modifiability"; :>> providedId = "QA-4"; }
         ref :>> addressesConcerns = (regulatoryConcern);
         attribute :>> measure = "Cost and blast radius of a stated change, including the re-verification it forces.";
     }
     part def Testability :> MemoQualityAttribute {
-        @MemoIdentity { :>> providedId = "QA-5"; }
+        @MemoIdentity { :>> label = "Testability"; :>> providedId = "QA-5"; }
         ref :>> addressesConcerns = (regulatoryConcern, safetyConcern);
         attribute :>> measure = "Probability that a fault present is revealed by the next test, and the effort to observe it.";
     }
     part def Usability :> MemoQualityAttribute {
-        @MemoIdentity { :>> providedId = "QA-6"; }
+        @MemoIdentity { :>> label = "Usability"; :>> providedId = "QA-6"; }
         ref :>> addressesConcerns = (usabilityConcern, safetyConcern, clinicalConcern);
         attribute :>> measure = "Task success and use-error rate for the intended user under use conditions (IEC 62366-1).";
     }
     part def Interoperability :> MemoQualityAttribute {
-        @MemoIdentity { :>> providedId = "QA-7"; }
+        @MemoIdentity { :>> label = "Interoperability"; :>> providedId = "QA-7"; }
         ref :>> addressesConcerns = (interoperabilityConcern, clinicalConcern);
         attribute :>> measure = "Proportion of exchanges with a named partner system that are correctly understood.";
     }
@@ -138,7 +131,9 @@ package memo_viewpoints_stakeholders_concerns {
     // (declared with a `stakeholder` member). So the catalog is standard parts,
     // not `MemoPart`s — MemoPart's lifecycle and dimension attributes describe
     // model elements, not the people a viewpoint is written for.
-    abstract part def MemoStakeholder :> Parts::Part;
+    abstract part def MemoStakeholder :> Parts::Part {
+        @MemoIdentity { :>> label = "Stakeholder"; }
+    }
 
     part def SystemArchitect :> MemoStakeholder {
         @MemoIdentity { :>> providedId = "STK-1"; :>> label = "System Architect"; }

@@ -125,7 +125,8 @@ part def NotificationSpec specializes MemoPart
         private import memo_core_enumerations::*;
         // StakeholderNeed and the needs hierarchy now live in memo_assurance_requirements_needs.
         private import memo_assurance_requirements_needs::*;
-        part def RiskDriver specializes RequirementDriver { attribute driverKind : String; }
+        part def RiskDriver specializes RequirementDriver {
+            @MemoIdentity { :>> label = "Risk driver"; } attribute driverKind : String; }
 
         // What a requirement is about: the system, the software, the hardware, or
         // the instructions for use. One axis, and the members are its values.
@@ -148,6 +149,7 @@ part def NotificationSpec specializes MemoPart
         }
 
         requirement def Requirement specializes MemoRequirement {
+            @MemoIdentity { :>> label = "Requirement"; }
             attribute requirementType : RequirementTypeKind;
             attribute sourceKind : RequirementSourceKind;
             attribute concernKind : ConcernKind;
@@ -179,6 +181,7 @@ part def NotificationSpec specializes MemoPart
         // Named constant defined by a source requirements document (e.g. CriSys
         // GPCA App. A.4) and referenced from requirement statements.
         part def SystemConstant specializes MemoPart {
+            @MemoIdentity { :>> label = "System constant"; }
             attribute symbol : String;          // identifier as written in the source, e.g. "Tolerance_Max const"
             attribute unit : String;
             attribute valueType : String;
@@ -188,6 +191,7 @@ part def NotificationSpec specializes MemoPart
         // One row of a notification/alarm action table (e.g. CriSys GPCA REQ 59):
         // a named notification, its priority, and the actions the system must take.
         part def NotificationSpec specializes MemoPart {
+            @MemoIdentity { :>> label = "Notification spec"; }
             attribute priority : NotificationPriorityKind;
             attribute visualNotification : Boolean;
             attribute audioNotification : Boolean;

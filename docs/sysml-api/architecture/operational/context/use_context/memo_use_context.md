@@ -140,6 +140,7 @@ connection def SituatedIn :> MemoRelationship
         private import memo_architecture_operational_context_actors::*;
 
         part def UseContext specializes MemoPart {
+            @MemoIdentity { :>> label = "Use context"; }
             attribute careSetting : String;
             attribute environment : String;
             attribute jurisdiction : String;
@@ -149,6 +150,7 @@ connection def SituatedIn :> MemoRelationship
         // The physical/organizational environment of use (IEC 62366-1 3.20),
         // separable from the care-setting context so environments are reusable.
         part def UseEnvironment specializes MemoPart {
+            @MemoIdentity { :>> label = "Use environment"; }
             attribute lighting : String;
             attribute noise : String;
             attribute vibration : String;
@@ -172,6 +174,7 @@ connection def SituatedIn :> MemoRelationship
         // this relation and nothing else, so a model's general-purpose edges cannot
         // leak into the boundary picture.
         connection def InteractsInContext :> MemoRelationship {
+            @MemoIdentity { :>> label = "Interacts in context"; }
             // Which side of the boundary picture the participant belongs on.
             attribute contextSide : ContextSideKind;
             // The verb, as it should read on the edge ("Directs procedure").
@@ -191,6 +194,7 @@ connection def SituatedIn :> MemoRelationship
         // `connect`: write `connection connect <a> to <b>;`, the ordinary untyped
         // binary connection.
         connection def AppliesInContext :> MemoRelationship {
+            @MemoIdentity { :>> label = "Applies in context"; }
             end useContext : UseContext :>> source;
             end subjectElement : MemoPart :>> target;
         }
@@ -201,6 +205,7 @@ connection def SituatedIn :> MemoRelationship
             :>> baseType = appliesInContextLinks meta SysML::Usage;
         }
         connection def SituatedIn :> MemoRelationship {
+            @MemoIdentity { :>> label = "Situated in"; }
             end useContext : UseContext :>> source;
             end environment : UseEnvironment :>> target;
         }

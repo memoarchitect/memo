@@ -14,12 +14,14 @@ package memo_assurance_human_factors {
     private import memo_architecture_operational_scenarios::*;
 
     part def UseError specializes MemoPart {
+        @MemoIdentity { :>> label = "Use error"; }
         attribute errorCategory : UseErrorCategoryKind;
         attribute severity : SeverityKind;
         attribute rootCauseType : String;
     }
 
     connection def CommitsUseError :> MemoRelationship {
+        @MemoIdentity { :>> label = "Commits use error"; }
         attribute :>> isTrace = true;
         end task : OperativeAction :>> source;
         end useError : UseError :>> target;
@@ -31,6 +33,7 @@ package memo_assurance_human_factors {
         :>> baseType = commitsUseErrorLinks meta SysML::Usage;
     }
     connection def EvaluatesTask :> MemoRelationship {
+        @MemoIdentity { :>> label = "Evaluates task"; }
         attribute :>> isTrace = true;
         end evaluation : MemoEvidence :>> source;
         end task : OperativeAction :>> target;
@@ -50,6 +53,7 @@ package memo_assurance_human_factors {
     // target is the usability TEST — a validation case — and not the evidence
     // it produces; `ProducesEvidence` links the two.
     connection def TestedByUsability :> MemoRelationship {
+        @MemoIdentity { :>> label = "Tested by usability"; }
         attribute :>> isTrace = true;
         end uiElementOrTask :>> source;
         end usabilityTest : MemoVerificationCase :>> target;

@@ -14,6 +14,7 @@ package memo_viewpoints_rendering {
 
     // The presentation identity of one architecture layer.
     part def LayerRendering :> MemoPart {
+        @MemoIdentity { :>> label = "Layer rendering"; }
         attribute layerId : String;
         attribute layerLabel : String;
         attribute layerColor : String;
@@ -24,6 +25,7 @@ package memo_viewpoints_rendering {
     // classification applies to; `explorerDomain` and `explorerGroup` name its
     // place in MEMO's V-model taxonomy.
     part def ExplorerClassification :> MemoPart {
+        @MemoIdentity { :>> label = "Explorer classification"; }
         attribute sourceNamespace : String;
         attribute explorerDomain : String;
         attribute explorerGroup : String;
@@ -43,6 +45,7 @@ package memo_viewpoints_rendering {
     // render different text for the same model. The static HTML export, the DHF
     // workbench and a report generator all resolve the same label from here.
     part def EnumRendering :> MemoPart {
+        @MemoIdentity { :>> label = "Enum rendering"; }
         attribute enumValue : String;
         attribute label : String;
         attribute shortLabel : String[0..1];

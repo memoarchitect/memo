@@ -16,12 +16,14 @@ package memo_assurance_safety_risk {
     // operational-world root (memo_architecture_operational_structure::IntendedUse,
     // a MemoMission).
     part def ReasonablyForeseeableMisuse specializes MemoPart {
+        @MemoIdentity { :>> label = "Reasonably foreseeable misuse"; }
         attribute misuseContext : String;
         attribute foreseeableBasis : String;
         attribute affectedUseContext : String;
     }
 
     part def Risk specializes RiskDriver {
+        @MemoIdentity { :>> label = "Risk"; }
         attribute probabilityEstimate : ProbabilityKind;
         attribute severityEstimate : SeverityKind;
         attribute riskLevel : CriticalityKind;
@@ -37,9 +39,11 @@ package memo_assurance_safety_risk {
         attribute residualBenefitRiskRequired : Boolean[0..1];
     }
     part def ResidualRisk specializes Risk {
+        @MemoIdentity { :>> label = "Residual risk"; }
         attribute benefitRiskRequired : Boolean;
     }
     part def RiskMatrix specializes MemoPart {
+        @MemoIdentity { :>> label = "Risk matrix"; }
         attribute probabilityScaleDefinition : String;
         attribute severityScaleDefinition : String;
         attribute riskLevelMapping : String;
@@ -54,6 +58,7 @@ package memo_assurance_safety_risk {
     // device characteristic whose implementation, failure, or misuse can affect
     // safety. This is the modelable output of ISO 14971 §5.3.
     part def SafetyRelatedCharacteristic specializes MemoPart {
+        @MemoIdentity { :>> label = "Safety related characteristic"; }
         attribute characteristic : String;
         attribute safetyImpact : String;
         attribute normalUseRelevant : Boolean;
@@ -77,14 +82,18 @@ package memo_assurance_safety_risk {
     // AssessedAgainst instead. One base per metaclass is the right shape here
     // — forcing the two families under one supertype would put a hazard and a
     // risk matrix back in the same picker.
-    abstract item def RiskItem specializes MemoItem;
+    abstract item def RiskItem specializes MemoItem {
+        @MemoIdentity { :>> label = "Risk item"; }
+    }
 
     item def Hazard specializes RiskItem {
+        @MemoIdentity { :>> label = "Hazard"; }
         attribute hazardType : HazardTypeKind;
         attribute severity : SeverityKind;
         attribute foreseeable : Boolean;
     }
     item def SequenceOfEvents specializes RiskItem {
+        @MemoIdentity { :>> label = "Sequence of events"; }
         attribute initiatingEvent : String;
         attribute contributingFactors : String;
     }
@@ -92,32 +101,38 @@ package memo_assurance_safety_risk {
     // taxonomy pattern: cause -> hazard -> hazardous situation -> harm;
     // several HazardCause elements may converge on one Hazard).
     item def HazardCause specializes RiskItem {
+        @MemoIdentity { :>> label = "Hazard cause"; }
         attribute causeSource : CauseSourceKind;
         attribute contributingFactors : String;
     }
     item def HazardousSituation specializes RiskItem {
+        @MemoIdentity { :>> label = "Hazardous situation"; }
         attribute exposedPersons : String;
         attribute operatingCondition : String;
         // ISO 14971 P1: probability that the hazardous situation occurs.
         attribute probabilityOfOccurrence : ProbabilityKind;
     }
     item def Harm specializes RiskItem {
+        @MemoIdentity { :>> label = "Harm"; }
         attribute clinicalImpact : String;
         attribute reversibility : String;
         attribute severity : SeverityKind;
     }
     part def RiskControlMeasure specializes VerifiableElement {
+        @MemoIdentity { :>> label = "Risk control measure"; }
         attribute controlKind : RiskControlKind;
         attribute implementationKind : RiskControlImplementationKind;
         attribute verificationStatus : String;
     }
     part def Benefit specializes MemoPart {
+        @MemoIdentity { :>> label = "Benefit"; }
         attribute beneficialOutcome : String;
         attribute beneficiary : String;
         attribute clinicalSignificance : String;
         attribute supportingEvidence : String;
     }
     part def OverallResidualRiskEvaluation specializes MemoPart {
+        @MemoIdentity { :>> label = "Overall residual risk evaluation"; }
         attribute conclusion : String;
         attribute reviewer : String;
     }
@@ -127,6 +142,7 @@ package memo_assurance_safety_risk {
     // types declared here, and core must not depend on a domain package.
     // ISO 14971 risk chain — distinct sequence-of-events relations over risk elements.
     connection def TracesRisk :> MemoRelationship {
+        @MemoIdentity { :>> label = "Traces risk"; }
         attribute :>> isTrace = true;
         end sourceRiskElement : RiskItem :>> source;
         end targetRiskElement : RiskItem :>> target;
@@ -140,6 +156,7 @@ package memo_assurance_safety_risk {
     // The final ISO 14971 chain edge. P2 is the conditional probability that
     // the hazardous situation results in the harm.
     connection def LeadsToHarm :> MemoRelationship {
+        @MemoIdentity { :>> label = "Leads to harm"; }
         attribute conditionalProbability : ProbabilityKind;
         end hazardousSituation : HazardousSituation :>> source;
         end resultingHarm : Harm :>> target;
@@ -155,6 +172,7 @@ package memo_assurance_safety_risk {
     // architecture, and the scenario package cannot see `Hazard`. On this side
     // both ends are visible.
     connection def HazardRelatedScenario :> MemoRelationship {
+        @MemoIdentity { :>> label = "Hazard related scenario"; }
         attribute :>> isTrace = true;
         end hazard : RiskItem :>> source;
         end scenario : OperativeScenario :>> target;
@@ -166,6 +184,7 @@ package memo_assurance_safety_risk {
         :>> baseType = hazardRelatedScenarioLinks meta SysML::Usage;
     }
     connection def AssessedAgainst :> MemoRelationship {
+        @MemoIdentity { :>> label = "Assessed against"; }
         end risk : Risk :>> source;
         end riskMatrix : RiskMatrix :>> target;
     }
@@ -181,6 +200,7 @@ package memo_assurance_safety_risk {
     // risk (§7), and which overall evaluation covered that residual (§8). Named
     // from the risk's side, like AssessedAgainst.
     connection def EstimatedFor :> MemoRelationship {
+        @MemoIdentity { :>> label = "Estimated for"; }
         end risk : Risk :>> source;
         end riskElement : RiskItem :>> target;
     }
@@ -191,6 +211,7 @@ package memo_assurance_safety_risk {
         :>> baseType = estimatedForLinks meta SysML::Usage;
     }
     connection def ReducedBy :> MemoRelationship {
+        @MemoIdentity { :>> label = "Reduced by"; }
         end residualRisk : ResidualRisk :>> source;
         end control : RiskControlMeasure :>> target;
     }
@@ -201,6 +222,7 @@ package memo_assurance_safety_risk {
         :>> baseType = reducedByLinks meta SysML::Usage;
     }
     connection def EvaluatedIn :> MemoRelationship {
+        @MemoIdentity { :>> label = "Evaluated in"; }
         end residualRisk : ResidualRisk :>> source;
         end evaluation : OverallResidualRiskEvaluation :>> target;
     }
@@ -223,6 +245,7 @@ package memo_assurance_safety_risk {
         enum fmeaAction;
     }
     connection def Mitigates :> MemoRelationship {
+        @MemoIdentity { :>> label = "Mitigates"; }
         attribute :>> isTrace = true;
         attribute mitigationKind : MitigationKind;
         // Untyped: controls/hazards may be item defs (RiskControlMeasure, Hazard, …).
@@ -241,6 +264,7 @@ package memo_assurance_safety_risk {
     // generic relations that accept the pair say something else (`causes` between a benefit and a risk would say
     // the benefit gives rise to it). Named from the benefit's side, the way AssessedAgainst is from the risk's.
     connection def WeighedAgainst :> MemoRelationship {
+        @MemoIdentity { :>> label = "Weighed against"; }
         end benefit : Benefit :>> source;
         end risk : Risk :>> target;
     }

@@ -22,20 +22,27 @@ package memo_architecture_implementation_hardware_common {
     // `conformsTo(MemoPart)` is far too wide — it admits a requirement or a
     // hazard. This is that type, and it carries nothing of its own: the split
     // between an assembly and a component is what the two subtypes are for.
-    abstract part def PhysicalElement specializes MemoPart { }
+    abstract part def PhysicalElement specializes MemoPart {
+        @MemoIdentity { :>> label = "Physical element"; } }
 
     part def PhysicalAssembly specializes PhysicalElement {
+        @MemoIdentity { :>> label = "Physical assembly"; }
         attribute responsibility : String;
         attribute safetyRole : String;
         attribute mtbfHours : DurationValue;
         attribute protectionClass : String;
         attribute ipRating : String;
     }
-    part def PhysicalSubassembly specializes PhysicalAssembly;
+    part def PhysicalSubassembly specializes PhysicalAssembly {
+        @MemoIdentity { :>> label = "Physical subassembly"; }
+    }
     // Retained name from 0.4; an electronics-centred assembly.
-    part def HardwareAssembly specializes PhysicalAssembly;
+    part def HardwareAssembly specializes PhysicalAssembly {
+        @MemoIdentity { :>> label = "Hardware assembly"; }
+    }
 
     part def PhysicalComponent specializes PhysicalElement {
+        @MemoIdentity { :>> label = "Physical component"; }
         attribute materialSummary : String;
         // ISO 10993-1 contact characterization; required when true.
         attribute patientContact : Boolean;
@@ -43,12 +50,16 @@ package memo_architecture_implementation_hardware_common {
         attribute contactDuration : String;
     }
 
-    part def HardwareComponent specializes PhysicalComponent;
+    part def HardwareComponent specializes PhysicalComponent {
+        @MemoIdentity { :>> label = "Hardware component"; }
+    }
 
     part def AcousticComponent specializes PhysicalComponent {
+        @MemoIdentity { :>> label = "Acoustic component"; }
         attribute acousticFunction : String;
     }
     part def ThermalComponent specializes PhysicalComponent {
+        @MemoIdentity { :>> label = "Thermal component"; }
         attribute thermalFunction : String;
         attribute operatingRange : String;
     }

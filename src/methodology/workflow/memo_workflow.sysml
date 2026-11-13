@@ -29,6 +29,7 @@ package memo_methodology_workflow {
     // that is another team's work, not this one's. A step that states none of
     // these has no done criterion and is never reported as done.
     action def MethodologyWorkflowStep :> MemoAction {
+        @MemoIdentity { :>> label = "Methodology workflow step"; }
         attribute stage : WorkflowStageKind;
         attribute objectiveDescription : String;
         attribute entryCriteria : String;
@@ -48,9 +49,11 @@ package memo_methodology_workflow {
 
     metadata def DoneWhen :> MemoTypedDependency {
         doc /* `#DoneWhen dependency from <step> to <rule>, <rule>;` The step's own work is done when each of these rules has a subject in the workspace and no finding on it. */
+        @MemoIdentity { :>> label = "Done when"; }
     }
 
     metadata def LinkedWhen :> MemoTypedDependency {
         doc /* `#LinkedWhen dependency from <step> to <rule>, <rule>;` Each rule is a link from this step's work to another layer's. The links are made when each rule has no finding; a rule with no subject yet is waiting for the step that produces them. */
+        @MemoIdentity { :>> label = "Linked when"; }
     }
 }

@@ -563,6 +563,7 @@ part def Citation specializes MemoPart
         // table cell or chip shows whole; it is a different density, not a
         // different authority.
         abstract part def MemoPart {
+            @MemoIdentity { :>> label = "Part"; }
             // editorial status and lifecycle
             attribute status : ElementStatusKind;
             attribute lifecycleState : LifecycleStateKind;
@@ -581,17 +582,25 @@ part def Citation specializes MemoPart
         // A resource a body of work spends: an instrument, a person, a consumable or the platform. It
         // carries what an hour of its capacity costs and what one use of it costs.
         abstract part def MemoResource specializes MemoPart {
+            @MemoIdentity { :>> label = "Resource"; }
             attribute capacityCostRate : CostRateValue[0..1];
             attribute unitCost : MoneyValue[0..1];
         }
 
         // ─── Role bases retained from the original kernel, re-founded on
         //     MemoPart so all existing content inherits the dimensions. ───
-        part def RequirementDriver specializes MemoPart;
-        abstract part def VerifiableElement specializes MemoPart;
-        part def InterfaceElement specializes MemoPart;
+        part def RequirementDriver specializes MemoPart {
+            @MemoIdentity { :>> label = "Requirement driver"; }
+        }
+        abstract part def VerifiableElement specializes MemoPart {
+            @MemoIdentity { :>> label = "Verifiable element"; }
+        }
+        part def InterfaceElement specializes MemoPart {
+            @MemoIdentity { :>> label = "Interface element"; }
+        }
         enum def EvidenceKind { enum testArtifact; enum evidence; enum formativeEvaluation; enum usabilityValidation; enum securityClaim; }
         part def MemoEvidence specializes MemoPart {
+            @MemoIdentity { :>> label = "Evidence"; }
             attribute evidenceKind : EvidenceKind;
             attribute version : String;
             attribute artifactKind : ArtifactKind[0..1];
@@ -609,13 +618,16 @@ part def Citation specializes MemoPart
             attribute findingsSummary : String;
             attribute designChangesTriggered : String;
         }
-        abstract part def AnalysisArtifact specializes MemoPart;
+        abstract part def AnalysisArtifact specializes MemoPart {
+            @MemoIdentity { :>> label = "Analysis artifact"; }
+        }
 
         // ─── Construct-specific foundations (non-part metaclasses) ───────
 
         // Behavioral foundation: operational activities, tasks, system actions,
         // and interaction steps specialize MemoAction.
         action def MemoAction {
+            @MemoIdentity { :>> label = "Action"; }
             attribute status : ElementStatusKind;
         }
 
@@ -631,6 +643,7 @@ part def Citation specializes MemoPart
         // The shape is the SYSMOD method's `ConstrainedOccurrence`. It is declared on an `occurrence def`
         // because `startShot` and `endShot` are found through one; `MemoFunction` specializes it.
         abstract occurrence def MemoConstrainedOccurrence {
+            @MemoIdentity { :>> label = "Constrained occurrence"; }
             constraint precondition;
             constraint postcondition;
             ref occurrence :>> startShot { assert constraint :> precondition; }
@@ -639,11 +652,13 @@ part def Citation specializes MemoPart
 
         // Boundary feature foundation for typed ports.
         port def MemoPort {
+            @MemoIdentity { :>> label = "Port"; }
             attribute status : ElementStatusKind;
         }
 
         // Interaction-contract foundation for interface definitions between ports.
         abstract interface def MemoInterface {
+            @MemoIdentity { :>> label = "MEMO interface"; }
             end source;
             end target;
         }
@@ -653,6 +668,7 @@ part def Citation specializes MemoPart
         // exchanged is expressed by its use in a port or flow, not by a second
         // ontology root.
         abstract item def MemoItem {
+            @MemoIdentity { :>> label = "Item"; }
             attribute status : ElementStatusKind;
             // What the item CARRIES, as distinct from what it is called. Removed
             // by `595bfac` while modelling native wrappers; nothing replaced them,
@@ -671,6 +687,7 @@ part def Citation specializes MemoPart
         // Use-case foundation. The domain UseCase adds its goal and actor
         // references; identity is `@MemoIdentity`, as everywhere else.
         abstract use case def MemoUseCase {
+            @MemoIdentity { :>> label = "MEMO use case"; }
             attribute status : ElementStatusKind;
         }
 
@@ -687,15 +704,18 @@ part def Citation specializes MemoPart
         // name. The text of a need or a requirement is its native `doc`, which SysML
         // defines as the requirement's text.
         abstract requirement def MemoRequirementElement {
+            @MemoIdentity { :>> label = "Requirement element"; }
             attribute status : ElementStatusKind;
         }
 
         requirement def MemoNeed :> MemoRequirementElement {
+            @MemoIdentity { :>> label = "MEMO need"; }
             attribute needSource : String;
             attribute priority : String;
         }
 
         requirement def MemoRequirement :> MemoRequirementElement {
+            @MemoIdentity { :>> label = "MEMO requirement"; }
             attribute acceptanceCriteria : String;
         }
 
@@ -707,6 +727,7 @@ part def Citation specializes MemoPart
         // prose a document renders is `doc`, and the one-line register a table cell
         // shows is `@MemoIdentity`'s `shortDescription`.
         abstract requirement def MemoMission :> MemoRequirementElement {
+            @MemoIdentity { :>> label = "Mission"; }
             attribute missionKind : String;
             attribute successCriteria : String;
             attribute operationalContext : String;
@@ -717,6 +738,7 @@ part def Citation specializes MemoPart
         // the part-based MemoPart — so, like MemoAction, it stands on its own and
         // takes its identity from `@MemoIdentity`.
         verification def MemoVerificationCase {
+            @MemoIdentity { :>> label = "MEMO verification case"; }
             attribute status : ElementStatusKind;
         }
 
@@ -728,6 +750,7 @@ part def Citation specializes MemoPart
         enum def StateKind { enum mode; enum logical; }
 
         state def MemoState {
+            @MemoIdentity { :>> label = "State"; }
             attribute stateKind : StateKind;
             attribute status : ElementStatusKind;
             attribute modeKind : String;
@@ -737,6 +760,7 @@ part def Citation specializes MemoPart
         }
 
         part def Citation specializes MemoPart {
+            @MemoIdentity { :>> label = "Citation"; }
             attribute source : String;
             attribute section : String;
             attribute uri : String;

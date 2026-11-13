@@ -12,6 +12,7 @@ package memo_architecture_operational_context_actors {
     private import memo_core_common::*;
     private import memo_core_enumerations::*;
     abstract part def OperationalParticipant specializes MemoPart {
+        @MemoIdentity { :>> label = "Operational participant"; }
         attribute actorKind : ActorKind;
         attribute trainingLevel : String;
         attribute responsibility : String;
@@ -23,6 +24,7 @@ package memo_architecture_operational_context_actors {
     // (patient / clinician / caregiver / technician / administrator); the
     // role-specific fields below are set only for the relevant actorKind.
     part def User specializes OperationalParticipant, MemoResource {
+        @MemoIdentity { :>> label = "User"; }
         attribute userPopulation : String;
         attribute impairmentConsiderations : String;
         attribute intendedTraining : String;
@@ -36,5 +38,7 @@ package memo_architecture_operational_context_actors {
     // An actor that is not the device's user, such as a threat or a person present
     // who does not use the device. An organization, an external system or a device is
     // an OperationalEntity. `actor` is a SysML keyword, hence the prefix.
-    part def MemoActor specializes OperationalParticipant;
+    part def MemoActor specializes OperationalParticipant {
+        @MemoIdentity { :>> label = "Actor"; }
+    }
 }

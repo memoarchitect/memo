@@ -14,6 +14,7 @@ package memo_core_consistency_rules {
     abstract constraint def MemoConsistencyRule :> MemoConstraint;
 
     part def ConsistencyRule specializes MemoPart {
+        @MemoIdentity { :>> label = "Consistency rule"; }
         attribute appliesTo : String;
         attribute predicate : RulePredicateKind;
         attribute strength : RuleStrengthKind;
@@ -23,6 +24,7 @@ package memo_core_consistency_rules {
     }
 
     part def RelationshipConsistencyRule specializes ConsistencyRule {
+        @MemoIdentity { :>> label = "Relationship consistency rule"; }
         attribute relationshipType : String;
         attribute minCount : String;
         attribute maxCount : String;
@@ -31,16 +33,19 @@ package memo_core_consistency_rules {
     }
 
     part def AttributeConsistencyRule specializes ConsistencyRule {
+        @MemoIdentity { :>> label = "Attribute consistency rule"; }
         attribute targetAttribute : String;
     }
 
     part def ConditionalConsistencyRule specializes RelationshipConsistencyRule {
+        @MemoIdentity { :>> label = "Conditional consistency rule"; }
         attribute conditionAttribute : String;
         attribute conditionOperator : String;
         attribute conditionValues : String;
     }
 
     part def CoverageConsistencyRule specializes ConsistencyRule {
+        @MemoIdentity { :>> label = "Coverage consistency rule"; }
         attribute standardReference : String;
         attribute clause : String;
         attribute coverageTarget : String;

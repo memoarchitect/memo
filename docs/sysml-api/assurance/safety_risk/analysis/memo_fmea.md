@@ -369,6 +369,7 @@ connection def HasFailureMode :> MemoRelationship
         private import memo_core_enumerations::*;
         private import memo_assurance_safety_risk::*;   // RiskItem
         part def FMEAWorksheet specializes AnalysisArtifact {
+            @MemoIdentity { :>> label = "FMEA worksheet"; }
             attribute analysisScope : String;
             attribute standardReference : String;
             attribute analysisBasis : String;
@@ -386,6 +387,7 @@ connection def HasFailureMode :> MemoRelationship
         // failure-mode-to-control relation; one whole/part and one mitigation
         // relation is the lean shape the rest of the ontology already uses.
         item def FailureMode specializes RiskItem {
+            @MemoIdentity { :>> label = "Failure mode"; }
             attribute failureModeKind : FailureModeKind;
             doc /* One-line statement of what this failure does, for the worksheet
                  * row. The structured form is a FailureEffect. */
@@ -401,6 +403,7 @@ connection def HasFailureMode :> MemoRelationship
             attribute criticality : CriticalityKind;
         }
         item def FailureEffect specializes RiskItem {
+            @MemoIdentity { :>> label = "Failure effect"; }
             attribute effectLevel : FailureEffectLevelKind;
             attribute effectOnPatient : String;
             attribute effectOnOperator : String;
@@ -408,23 +411,27 @@ connection def HasFailureMode :> MemoRelationship
             attribute severity : SeverityKind;
         }
         item def FailureCause specializes RiskItem {
+            @MemoIdentity { :>> label = "Failure cause"; }
             attribute causeCategory : FailureCauseCategoryKind;
             attribute causeDescription : String;
             attribute occurrenceRating : ProbabilityKind;
             attribute preventionMethod : String;
         }
         part def DetectionMethod specializes MemoPart {
+            @MemoIdentity { :>> label = "Detection method"; }
             attribute methodKind : DetectionMethodKind;
             attribute detectionPoint : String;
             attribute confidence : DetectionKind;
         }
         part def FMEAAction specializes VerifiableElement {
+            @MemoIdentity { :>> label = "FMEA action"; }
             attribute actionKind : FMEAActionKind;
             attribute responsible : String;
             attribute targetCompletionDate : String;
             attribute revisedRpn : Integer;
         }
         part def FaultTree specializes AnalysisArtifact {
+            @MemoIdentity { :>> label = "Fault tree"; }
             attribute standardReference : String;
             attribute analysisScope : String;
             attribute topEventDescription : String;
@@ -432,6 +439,7 @@ connection def HasFailureMode :> MemoRelationship
             attribute revisionDate : String;
         }
         part def FaultTreeNode specializes MemoPart {
+            @MemoIdentity { :>> label = "Fault tree node"; }
             attribute eventKind : FaultTreeEventKind;
             attribute probability : Real;
             attribute failureRate : Real;
@@ -441,23 +449,27 @@ connection def HasFailureMode :> MemoRelationship
             attribute nValue : Integer;
         }
         item def MinimalCutSet specializes RiskItem {
+            @MemoIdentity { :>> label = "Minimal cut set"; }
             attribute cutSetOrder : Integer;
             attribute probability : Real;
             attribute involvedEvents : String;
             attribute significance : String;
         }
         part def HAZOPStudy specializes AnalysisArtifact {
+            @MemoIdentity { :>> label = "HAZOP study"; }
             attribute standardReference : String;
             attribute processDescription : String;
             attribute studyScope : String;
             attribute teamComposition : String;
         }
         part def HAZOPNode specializes MemoPart {
+            @MemoIdentity { :>> label = "HAZOP node"; }
             attribute nodeDescription : String;
             attribute designIntent : String;
             attribute operatingConditions : String;
         }
         item def HAZOPDeviation specializes RiskItem {
+            @MemoIdentity { :>> label = "HAZOP deviation"; }
             attribute guideWord : HAZOPGuideWordKind;
             attribute parameter : String;
             attribute cause : String;
@@ -484,6 +496,7 @@ connection def HasFailureMode :> MemoRelationship
             enum useErrorLeadsToHazard;
         }
         connection def Causes :> MemoRelationship {
+            @MemoIdentity { :>> label = "Causes"; }
             attribute causeKind : CauseKind;
             // Untyped both ways, because CauseKind spans metaclasses: a failure
             // mode or cause (items) causes an effect, a component or use error
@@ -500,6 +513,7 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = causesLinks meta SysML::Usage;
         }
         connection def DetectedBy :> MemoRelationship {
+            @MemoIdentity { :>> label = "Detected by"; }
             end failureMode : FailureMode :>> source;
             end detectionMethod : DetectionMethod :>> target;
         }
@@ -510,6 +524,7 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = detectedByLinks meta SysML::Usage;
         }
         connection def InputToGate :> MemoRelationship {
+            @MemoIdentity { :>> label = "Input to gate"; }
             end input : FaultTreeNode :>> source;
             end gate : FaultTreeNode :>> target;
         }
@@ -520,6 +535,7 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = inputToGateLinks meta SysML::Usage;
         }
         connection def ProducesEvent :> MemoRelationship {
+            @MemoIdentity { :>> label = "Produces event"; }
             end gate : FaultTreeNode :>> source;
             end eventElement : FaultTreeNode :>> target;
         }
@@ -530,6 +546,7 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = producesEventLinks meta SysML::Usage;
         }
         connection def ContainsEvent :> MemoRelationship {
+            @MemoIdentity { :>> label = "Contains event"; }
             end cutSet : MinimalCutSet :>> source;
             end eventElement : FaultTreeNode :>> target;
         }
@@ -540,6 +557,7 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = containsEventLinks meta SysML::Usage;
         }
         connection def IdentifiesHazard :> MemoRelationship {
+            @MemoIdentity { :>> label = "Identifies hazard"; }
             end deviation : HAZOPDeviation :>> source;
             end hazard : Hazard :>> target;
         }
@@ -550,6 +568,7 @@ connection def HasFailureMode :> MemoRelationship
             :>> baseType = identifiesHazardLinks meta SysML::Usage;
         }
         connection def HasFailureMode :> MemoRelationship {
+            @MemoIdentity { :>> label = "Has failure mode"; }
             attribute :>> isTrace = true;
             end element : MemoPart :>> source;
             end failureMode : FailureMode :>> target;

@@ -35,6 +35,7 @@ package memo_assurance_requirements_needs {
     }
 
     requirement def Need specializes MemoNeed {
+        @MemoIdentity { :>> label = "Need"; }
         attribute needKind : NeedKind;
         // A user need (IEC 62366-1) says WHOSE need it is with HeldBy, and the
         // user's characteristics live on the User: `userPopulation`,
@@ -66,6 +67,7 @@ package memo_assurance_requirements_needs {
     // so "which users does this need serve" is a question the model answers
     // rather than a sentence a reader interprets.
     connection def HeldBy :> MemoRelationship {
+        @MemoIdentity { :>> label = "Held by"; }
         end need : MemoNeed :>> source;
         end holder : OperationalParticipant :>> target;
     }

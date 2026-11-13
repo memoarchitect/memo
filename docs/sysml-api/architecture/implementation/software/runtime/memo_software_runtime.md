@@ -125,6 +125,7 @@ part def OTSSoftwareComponent specializes SoftwareComponent
         }
 
         part def SoftwareComponent specializes SoftwareElement {
+            @MemoIdentity { :>> label = "Software component"; }
             attribute runtimeKind : RuntimeKind;
             attribute responsibility : String;
             attribute periodMs : DurationValue;
@@ -171,6 +172,7 @@ part def OTSSoftwareComponent specializes SoftwareComponent
         // deployed. Optional: a library the product links normally needs only the
         // module.
         part def OTSSoftwareComponent specializes SoftwareComponent {
+            @MemoIdentity { :>> label = "OTS software component"; }
             ref sourceModule : OTSSoftwareModule[0..1];
         }
 

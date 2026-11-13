@@ -60,6 +60,7 @@ part def ArtifactKindDef specializes MemoPart
         private import memo_core_enumerations::*;
 
         part def ArtifactKindDef specializes MemoPart {
+            @MemoIdentity { :>> label = "Artifact kind def"; }
             attribute documentTitle : String;
             attribute regulatoryRef : String;
             attribute artifactKind : ArtifactKind;

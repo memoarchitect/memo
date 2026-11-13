@@ -153,6 +153,7 @@ flow def PhysicalTransfer specializes PhysicalFlow
         // their nature.
         private import memo_architecture_implementation_hardware_common::PhysicalElement;
         part def ProcessingNode specializes PhysicalElement {
+            @MemoIdentity { :>> label = "Processing node"; }
             attribute nodeKind : ProcessingNodeKind;
             attribute processorArchitecture : String;
             attribute memoryMB : StorageCapacityValue;
@@ -164,6 +165,7 @@ flow def PhysicalTransfer specializes PhysicalFlow
             attribute realTimeCapable : Boolean;
         }
         part def MemoryDevice specializes PhysicalElement {
+            @MemoIdentity { :>> label = "Memory device"; }
             attribute memoryKind : String;
             attribute capacityMB : StorageCapacityValue;
             attribute nonVolatile : Boolean;
@@ -188,6 +190,7 @@ flow def PhysicalTransfer specializes PhysicalFlow
         // holding one attribute is a class standing in for an attribute. One
         // attribute, two sites, no new type.
         port def PhysicalPort specializes MemoPort {
+            @MemoIdentity { :>> label = "Physical port"; }
             attribute portKind : InterfaceKind;
             // AADL port category — see SoftwarePort. A physical port carries it for
             // the same reason: a sampled sensor line and a queued interrupt line
@@ -231,6 +234,7 @@ flow def PhysicalTransfer specializes PhysicalFlow
         //     allocation cbMotorDrive : ConnectionBinding
         //         allocate cnMotorDrive to motorHarness;
         interface def PhysicalInterface specializes Interface {
+            @MemoIdentity { :>> label = "Physical interface"; }
             // analog, digital, discrete, pulse or power transfer. Fill in the
             // descriptors that kind needs: a bit rate and protocol for digital,
             // a frequency for pulse. An analog signal's range is a constraint on
@@ -249,6 +253,7 @@ flow def PhysicalTransfer specializes PhysicalFlow
         // What crosses a physical interface, as a quantity: a voltage, a
         // current, a pressure, a force, a flow of fluid.
         abstract flow def PhysicalFlow {
+            @MemoIdentity { :>> label = "Physical flow"; }
             attribute quantity : String;
             attribute unit : String;
             attribute nominalValue : String;
@@ -256,6 +261,7 @@ flow def PhysicalTransfer specializes PhysicalFlow
 
         // The concrete flow a model types its physical flows by; a concrete `flow def` declares its two ends.
         flow def PhysicalTransfer specializes PhysicalFlow {
+            @MemoIdentity { :>> label = "Physical transfer"; }
             end source;
             end target;
         }

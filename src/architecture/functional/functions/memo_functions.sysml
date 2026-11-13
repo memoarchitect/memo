@@ -76,6 +76,7 @@ package memo_architecture_functional_functions {
     private import memo_architecture_operational_scenarios::*;
 
     abstract action def MemoFunction specializes MemoAction, MemoConstrainedOccurrence {
+        @MemoIdentity { :>> label = "Function"; }
         attribute functionCategory : String;
         attribute actionKind : ActionKind;
         attribute trigger : String;
@@ -91,12 +92,16 @@ package memo_architecture_functional_functions {
     // A responsibility of the system as a whole. Allocation is optional: a
     // system function that no single component owns is a normal intermediate
     // state of the functional chain, not a defect.
-    action def SystemFunction specializes MemoFunction;
+    action def SystemFunction specializes MemoFunction {
+        @MemoIdentity { :>> label = "System function"; }
+    }
 
     // A responsibility of exactly one component. `AllocatedTo` names that
     // component; CR-ONT-074 requires it. A component function that reaches no
     // component is a responsibility nobody has accepted.
-    action def ComponentFunction specializes MemoFunction;
+    action def ComponentFunction specializes MemoFunction {
+        @MemoIdentity { :>> label = "Component function"; }
+    }
 
     // A transfer between two functions, carrying the budgets and assurance
     // attributes a reader needs on the transfer itself. Authored as a typed
@@ -108,6 +113,7 @@ package memo_architecture_functional_functions {
     //         attribute :>> latencyBudgetMs = 20.0;
     //     }
     abstract flow def FunctionalExchange {
+        @MemoIdentity { :>> label = "Functional exchange"; }
         attribute flowKind : FlowKind;
         attribute latencyBudgetMs : DurationValue;
         attribute staleAfterMs : DurationValue;
@@ -118,6 +124,7 @@ package memo_architecture_functional_functions {
     // of the family a model types its flows by; the ends are left untyped, as an exchange runs from
     // an `out` parameter of one function to an `in` parameter of another (or between ports).
     flow def FunctionalTransfer specializes FunctionalExchange {
+        @MemoIdentity { :>> label = "Functional transfer"; }
         end source;
         end target;
     }
@@ -134,6 +141,7 @@ package memo_architecture_functional_functions {
     // naming the two as one kind of thing, and its steps are `action def`s
     // already.
     action def FunctionalFlow specializes MemoAction {
+        @MemoIdentity { :>> label = "Functional flow"; }
         attribute flowCategory : FunctionalFlowKind;
         attribute endToEndLatencyBudgetMs : DurationValue;
         attribute safetyRelevant : Boolean;

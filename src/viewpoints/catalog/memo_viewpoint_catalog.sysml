@@ -169,6 +169,7 @@ package memo_viewpoints_catalog {
     // ── Compatibility mappings: legacy diagram intents resolve to
     //     standard view kinds; C4 and AADL stay in examples/ mappings. ──
     part def DiagramIntentMapping specializes MemoPart {
+        @MemoIdentity { :>> label = "Diagram intent mapping"; }
         attribute legacyIntent : String;
         attribute resolvesTo : DiagramViewKind;
     }

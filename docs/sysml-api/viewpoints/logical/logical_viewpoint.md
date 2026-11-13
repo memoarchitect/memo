@@ -51,8 +51,8 @@
         private import memo_core_common::*;
         viewpoint logicalArchitectureViewpoint : MemoViewpoint {
             @MemoIdentity { :>> providedId = "VP-LOG"; :>> label = "LogicalArchitectureViewpoint"; }
-            @MemoIdentity { :>> shortDescription = "Shows logical decomposition and interfaces."; }
             doc /* Default viewpoint derived from the logical architecture layer for subsystem structure, responsibilities, and major interactions, independent of physical realization. */
+            @MemoIdentity { :>> shortDescription = "Shows logical decomposition and interfaces."; }
             attribute :>> purpose = "Describe the system's logical decomposition.";
             ref :>> memoStakeholders = (systemArchitect);
             attribute :>> stage = WorkflowStageKind::architecture;

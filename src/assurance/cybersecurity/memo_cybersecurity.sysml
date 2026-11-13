@@ -21,6 +21,7 @@ package memo_assurance_cybersecurity {
     private import memo_architecture_implementation_software_structure::SBOMEntry;
 
     part def CybersecurityAsset specializes MemoPart {
+        @MemoIdentity { :>> label = "Cybersecurity asset"; }
         attribute assetKind : AssetKind;
         attribute confidentialityNeed : SecurityNeedKind;
         attribute integrityNeed : SecurityNeedKind;
@@ -34,6 +35,7 @@ package memo_assurance_cybersecurity {
     }
 
     part def AttackSurface specializes MemoPart {
+        @MemoIdentity { :>> label = "Attack surface"; }
         attribute entryPointKind : InterfaceKind;
         attribute exposureLevel : String;
         attribute reachableFrom : String;
@@ -41,6 +43,7 @@ package memo_assurance_cybersecurity {
     }
 
     part def Threat specializes RiskDriver {
+        @MemoIdentity { :>> label = "Threat"; }
         attribute threatCategory : ThreatCategoryKind;
         attribute attackVector : String;
         attribute threatSource : String;
@@ -49,6 +52,7 @@ package memo_assurance_cybersecurity {
     }
 
     item def Vulnerability specializes RiskItem {
+        @MemoIdentity { :>> label = "Vulnerability"; }
         attribute weakness : String;
         attribute exploitability : String;
         attribute discoveryMethod : String;
@@ -66,6 +70,7 @@ package memo_assurance_cybersecurity {
     }
 
     item def CyberHazard specializes Hazard {
+        @MemoIdentity { :>> label = "Cyber hazard"; }
         attribute securityImpact : String;
         attribute safetyImpact : String;
         attribute privacyImpact : String;
@@ -73,6 +78,7 @@ package memo_assurance_cybersecurity {
     }
 
     part def CyberRisk specializes Risk {
+        @MemoIdentity { :>> label = "Cyber risk"; }
         attribute exploitabilityEstimate : String;
         attribute attackComplexity : String;
         attribute detectability : DetectionKind;
@@ -81,6 +87,7 @@ package memo_assurance_cybersecurity {
     }
 
     part def CyberMitigation specializes RiskControlMeasure {
+        @MemoIdentity { :>> label = "Cyber mitigation"; }
         attribute cyberControlKind : CyberControlKind;
         attribute securityMechanism : String;
         attribute verificationExpectation : String;
@@ -88,10 +95,12 @@ package memo_assurance_cybersecurity {
     }
 
     requirement def SecurityRequirement :> Requirement {
+        @MemoIdentity { :>> label = "Security requirement"; }
         attribute securityObjective : String;
     }
 
     part def TrustBoundary specializes InterfaceElement {
+        @MemoIdentity { :>> label = "Trust boundary"; }
         attribute boundaryType : String;
         attribute crossingConstraint : String;
         attribute trustAssumption : String;
@@ -167,6 +176,7 @@ package memo_assurance_cybersecurity {
     // MemoActor says. What kind of threat it is goes in threatActorKind; the
     // inherited actorKind names a user role and is not set on a threat.
     part def ThreatActor specializes MemoActor {
+        @MemoIdentity { :>> label = "Threat actor"; }
         attribute threatActorKind : ThreatActorKind;
         attribute motivation : String;
         attribute capability : ThreatCapabilityKind;
@@ -175,6 +185,7 @@ package memo_assurance_cybersecurity {
     }
 
     part def AttackTechnique specializes MemoPart {
+        @MemoIdentity { :>> label = "Attack technique"; }
         attribute framework : AttackTechniqueFrameworkKind;
         attribute externalId : String;
         attribute tactic : String;
@@ -183,12 +194,14 @@ package memo_assurance_cybersecurity {
     }
 
     part def SecurityProperty specializes MemoPart {
+        @MemoIdentity { :>> label = "Security property"; }
         attribute objectiveKind : SecurityObjectiveKind;
         attribute impactLevel : CriticalityKind;
         attribute propertyRationale : String;
     }
 
     part def CybersecurityAssumption specializes MemoPart {
+        @MemoIdentity { :>> label = "Cybersecurity assumption"; }
         attribute statement : String;
         attribute owner : String;
         attribute reviewDate : String;
@@ -198,6 +211,7 @@ package memo_assurance_cybersecurity {
 
     // The path's narrative is the inherited `pathSummary`.
     action def AttackPath specializes OperativeScenario {
+        @MemoIdentity { :>> label = "Attack path"; }
         attribute entryPoint : String;
         attribute attackGoal : String;
     }
@@ -219,12 +233,14 @@ package memo_assurance_cybersecurity {
         enum sca;
     }
     verification def SecurityAssessmentCase :> VerificationCase {
+        @MemoIdentity { :>> label = "Security assessment case"; }
         attribute assessmentMethod : SecurityAssessmentMethodKind;
         attribute assessmentScope : String;
         attribute toolName : String;
         attribute toolVersion : String;
     }
     part def SecurityFinding specializes MemoEvidence {
+        @MemoIdentity { :>> label = "Security finding"; }
         attribute findingIdentifier : String;
         attribute severity : CriticalityKind;
         attribute cvssBaseScore : Real;
@@ -237,12 +253,14 @@ package memo_assurance_cybersecurity {
         attribute testedEndpoint : String[0..1];      // URL or interface (DAST)
     }
     part def SecurityAssessmentReport specializes MemoEvidence {
+        @MemoIdentity { :>> label = "Security assessment report"; }
         attribute reportDate : String;
         attribute assessor : String;
         part finding : SecurityFinding[0..*];
     }
 
     action def PostmarketProcess specializes MemoAction {
+        @MemoIdentity { :>> label = "Postmarket process"; }
         attribute processKind : PostmarketProcessKind;
         attribute owner : String;
         attribute cadence : String;
@@ -253,6 +271,7 @@ package memo_assurance_cybersecurity {
     // pre-control (inherent) and post-control (residual) states without
     // duplicating the risk itself.
     part def CyberRiskAssessment specializes MemoPart {
+        @MemoIdentity { :>> label = "Cyber risk assessment"; }
         attribute assessmentStage : CyberRiskAssessmentStageKind;
         attribute probabilityEstimate : ProbabilityKind;
         attribute severityEstimate : SeverityKind;
@@ -266,6 +285,7 @@ package memo_assurance_cybersecurity {
 
     // ── Relations owned by this package ─────────────────────────────
     connection def ThreatenedBy :> MemoRelationship {
+        @MemoIdentity { :>> label = "Threatened by"; }
         attribute threatRole : String;
         end protectedAsset : CybersecurityAsset :>> source;
         end threat : Threat :>> target;
@@ -277,6 +297,7 @@ package memo_assurance_cybersecurity {
         :>> baseType = threatenedByLinks meta SysML::Usage;
     }
     connection def Exploits :> MemoRelationship {
+        @MemoIdentity { :>> label = "Exploits"; }
         end threat : Threat :>> source;
         end enablingVulnerability : Vulnerability :>> target;
     }
@@ -287,6 +308,7 @@ package memo_assurance_cybersecurity {
         :>> baseType = exploitsLinks meta SysML::Usage;
     }
     connection def RealizedByScenario :> MemoRelationship {
+        @MemoIdentity { :>> label = "Realized by scenario"; }
         end realizedThreat : RequirementDriver :>> source;
         end scenario : OperativeScenario :>> target;
     }
@@ -297,6 +319,7 @@ package memo_assurance_cybersecurity {
         :>> baseType = realizedByScenarioLinks meta SysML::Usage;
     }
     connection def ImpactsSafety :> MemoRelationship {
+        @MemoIdentity { :>> label = "Impacts safety"; }
         attribute :>> isTrace = true;
         attribute tracePurpose : String;
         end cyberElement : MemoPart :>> source;
@@ -312,6 +335,7 @@ package memo_assurance_cybersecurity {
     // ── Product-security and threat-intelligence relations ──────────
 
     connection def HasSecurityProperty :> MemoRelationship {
+        @MemoIdentity { :>> label = "Has security property"; }
         end characterizedAsset : CybersecurityAsset :>> source;
         end securityProperty : SecurityProperty :>> target;
     }
@@ -323,6 +347,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def ExposesAsset :> MemoRelationship {
+        @MemoIdentity { :>> label = "Exposes asset"; }
         end attackSurface : AttackSurface :>> source;
         end exposedAsset : CybersecurityAsset :>> target;
     }
@@ -334,6 +359,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def AttributedToThreatActor :> MemoRelationship {
+        @MemoIdentity { :>> label = "Attributed to threat actor"; }
         end attributedThreat : Threat :>> source;
         end threatActor : ThreatActor :>> target;
     }
@@ -345,6 +371,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def UsesAttackTechnique :> MemoRelationship {
+        @MemoIdentity { :>> label = "Uses attack technique"; }
         end realizedThreat : Threat :>> source;
         end attackTechnique : AttackTechnique :>> target;
     }
@@ -356,6 +383,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def IncludesAttackTechnique :> MemoRelationship {
+        @MemoIdentity { :>> label = "Includes attack technique"; }
         end attackPath : AttackPath :>> source;
         end attackTechnique : AttackTechnique :>> target;
     }
@@ -367,6 +395,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def RealizesCyberHazard :> MemoRelationship {
+        @MemoIdentity { :>> label = "Realizes cyber hazard"; }
         end realizedThreat : Threat :>> source;
         end resultingCyberHazard : CyberHazard :>> target;
     }
@@ -378,6 +407,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def AssessesCyberRisk :> MemoRelationship {
+        @MemoIdentity { :>> label = "Assesses cyber risk"; }
         end assessment : CyberRiskAssessment :>> source;
         end assessedRisk : CyberRisk :>> target;
     }
@@ -389,6 +419,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def IdentifiesVulnerability :> MemoRelationship {
+        @MemoIdentity { :>> label = "Identifies vulnerability"; }
         end finding : SecurityFinding :>> source;
         end identifiedVulnerability : Vulnerability :>> target;
     }
@@ -400,6 +431,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def AffectsSBOMEntry :> MemoRelationship {
+        @MemoIdentity { :>> label = "Affects SBOM entry"; }
         end vulnerability : Vulnerability :>> source;
         end affectedComponent : SBOMEntry :>> target;
     }
@@ -411,6 +443,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def DemonstratesAttackPath :> MemoRelationship {
+        @MemoIdentity { :>> label = "Demonstrates attack path"; }
         end finding : SecurityFinding :>> source;
         end demonstratedPath : AttackPath :>> target;
     }
@@ -422,6 +455,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def SupportsMitigationEffectiveness :> MemoRelationship {
+        @MemoIdentity { :>> label = "Supports mitigation effectiveness"; }
         end supportingEvidence : MemoEvidence :>> source;
         end supportedMitigation : CyberMitigation :>> target;
     }
@@ -433,6 +467,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def ConditionsCyberElement :> MemoRelationship {
+        @MemoIdentity { :>> label = "Conditions cyber element"; }
         end governingAssumption : CybersecurityAssumption :>> source;
         end conditionedElement :>> target;
     }
@@ -444,6 +479,7 @@ package memo_assurance_cybersecurity {
     }
 
     connection def MonitorsSBOMEntry :> MemoRelationship {
+        @MemoIdentity { :>> label = "Monitors SBOM entry"; }
         end postmarketProcess : PostmarketProcess :>> source;
         end monitoredComponent : SBOMEntry :>> target;
     }

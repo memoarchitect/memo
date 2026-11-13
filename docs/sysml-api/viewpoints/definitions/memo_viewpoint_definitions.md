@@ -223,6 +223,7 @@ part def ViewInclusionRule specializes MemoPart
         // rather than a re-declared core: a viewpoint is native requirement-family,
         // not a MemoPart, and metadata crosses metaclasses where inheritance cannot.
         viewpoint def MemoViewpoint :> Views::ViewpointCheck {
+            @MemoIdentity { :>> label = "Viewpoint"; }
             attribute status : ElementStatusKind;
             attribute lifecycleState : LifecycleStateKind;
             attribute realizationStage : RealizationStageKind[0..1];
@@ -263,6 +264,7 @@ part def ViewInclusionRule specializes MemoPart
         }
 
         part def ViewRule specializes MemoPart {
+            @MemoIdentity { :>> label = "View rule"; }
             attribute elementTypeName : String;
             attribute relationTypeName : String;
             attribute strength : RuleStrengthKind;
@@ -270,6 +272,7 @@ part def ViewInclusionRule specializes MemoPart
         }
 
         part def ViewSelectionQuery specializes MemoPart {
+            @MemoIdentity { :>> label = "View selection query"; }
             attribute includeElementKinds : String[*];
             attribute includeElementIds : String[*];
             attribute includeRelationshipKinds : String[*];
@@ -296,6 +299,7 @@ part def ViewInclusionRule specializes MemoPart
         // not reach for one that means something else. A swatch is what this is —
         // a colour with a label.
         part def MemoLegendSwatch specializes MemoPart {
+            @MemoIdentity { :>> label = "Legend swatch"; }
             /** The value of the legend's attribute or enumeration this entry is for. */
             attribute value : String;
             /** Shown in the key. Defaults to the value when unstated. */
@@ -305,6 +309,7 @@ part def ViewInclusionRule specializes MemoPart
         }
 
         part def MemoLegend specializes MemoPart {
+            @MemoIdentity { :>> label = "Legend"; }
             /** The attribute whose value each entry names — e.g. "realizationStage". */
             attribute attributeName : String;
             /**
@@ -328,6 +333,7 @@ part def ViewInclusionRule specializes MemoPart
         }
 
         view def MemoView :> Views::View {
+            @MemoIdentity { :>> label = "View"; }
             // Identity comes from the `@MemoIdentity` metadata carrier, which
             // annotates any metaclass — so a view stays native SysML without
             // re-declaring an identification core.
@@ -356,6 +362,7 @@ part def ViewInclusionRule specializes MemoPart
         }
 
         view def MemoDiagramView :> MemoView {
+            @MemoIdentity { :>> label = "Diagram view"; }
             attribute viewKind : DiagramViewKind;
             attribute diagramType : String;
             attribute layoutHint : String;
@@ -391,16 +398,19 @@ part def ViewInclusionRule specializes MemoPart
         }
 
         view def MemoDocumentBackedView :> MemoView {
+            @MemoIdentity { :>> label = "Document backed view"; }
             attribute version : String;
             attribute generationRule : String;
             attribute marketScope : String;
         }
 
         view def MemoDocumentView :> MemoDocumentBackedView {
+            @MemoIdentity { :>> label = "Document view"; }
             attribute viewKind : DocumentViewKind;
         }
 
         part def ViewInclusionRule specializes MemoPart {
+            @MemoIdentity { :>> label = "View inclusion rule"; }
             attribute includeElementKinds : String[*];
             attribute includeElementIds : String[*];
             attribute includeRelationshipKinds : String[*];

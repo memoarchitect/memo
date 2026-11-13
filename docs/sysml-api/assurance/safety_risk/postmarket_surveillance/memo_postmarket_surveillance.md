@@ -78,6 +78,7 @@ connection def FeedsBackTo :> MemoRelationship
         private import memo_core_common::*;
 
         part def PostMarketSurveillance :> MemoPart {
+            @MemoIdentity { :>> label = "Post market surveillance"; }
             attribute surveillanceKind : String;
             attribute dataSource : String;
             attribute reportingObligation : String;
@@ -87,6 +88,7 @@ connection def FeedsBackTo :> MemoRelationship
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
         connection def FeedsBackTo :> MemoRelationship {
+            @MemoIdentity { :>> label = "Feeds back to"; }
             end feedbackItem : PostMarketSurveillance :>> source;
             end designElement : MemoPart :>> target;
         }

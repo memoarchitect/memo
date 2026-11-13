@@ -47,6 +47,7 @@ package memo_core_relationships {
     // unless it says otherwise. A subtype opts out by redefining, e.g.
     // `attribute :>> isReflexive = true;`.
     abstract connection def MemoRelationship :> Connections::BinaryConnection {
+        @MemoIdentity { :>> label = "Relationship"; }
         attribute id : String;
         attribute uuid : String;
         attribute shortDescription : String;
@@ -123,6 +124,7 @@ package memo_core_relationships {
     // source stays untyped: the items span metaclasses (a need is a requirement
     // def, a risk an item, a verification case an action), as for DerivesFrom.
     connection def ScopedTo :> MemoRelationship {
+        @MemoIdentity { :>> label = "Scoped to"; }
         end scopedItem :>> source;
         end scopeSystem : MemoPart :>> target;
     }
@@ -134,6 +136,7 @@ package memo_core_relationships {
     }
 
     connection def DerivesFrom :> MemoRelationship {
+        @MemoIdentity { :>> label = "Derives from"; }
         attribute :>> isTrace = true;
         // Drivers span metaclasses — a need is a requirement def, a hazard an
         // item, a threat an item — so the source end stays untyped. The target
@@ -153,6 +156,7 @@ package memo_core_relationships {
     // <realizing> to <realized>;`. `#refinement` places no metaclass
     // restriction on either end.
     connection def ProducesEvidence :> MemoRelationship {
+        @MemoIdentity { :>> label = "Produces evidence"; }
         attribute :>> isTrace = true;
         end producer : MemoVerificationCase :>> source;
         end producedEvidence : MemoEvidence :>> target;
@@ -166,6 +170,7 @@ package memo_core_relationships {
     // Precedence is native `succession` (`first a then b;`).
 
     connection def DerivesCyberRequirement :> MemoRelationship {
+        @MemoIdentity { :>> label = "Derives cyber requirement"; }
         attribute :>> isTrace = true;
         end sourceThreatOrRisk : RequirementDriver :>> source;
         end targetRequirement : MemoRequirementElement :>> target;
@@ -177,6 +182,7 @@ package memo_core_relationships {
         :>> baseType = derivesCyberRequirementLinks meta SysML::Usage;
     }
     connection def CrossesTrustBoundary :> MemoRelationship {
+        @MemoIdentity { :>> label = "Crosses trust boundary"; }
         attribute crossingKind : InterfaceKind;
         end boundary :>> source;
         end crossingItem :>> target;
@@ -189,6 +195,7 @@ package memo_core_relationships {
     }
 
     connection def Validates :> MemoRelationship {
+        @MemoIdentity { :>> label = "Validates"; }
         attribute :>> isTrace = true;
         // Validation targets include use cases and other behavioural elements,
         // so the target remains untyped across SysML metaclass families.
@@ -209,6 +216,7 @@ package memo_core_relationships {
     // binds ends by position, so write them in this order. See the
     // reversed-end-name lint in memo-tools.
     allocation def HostedBy :> MemoRelationship, Allocations::Allocation {
+        @MemoIdentity { :>> label = "Hosted by"; }
         end processingNode : MemoPart :>> source;
         end hostAssembly : MemoPart :>> target;
     }
@@ -232,6 +240,7 @@ package memo_core_relationships {
 
 
     connection def BindsToInterface :> MemoRelationship {
+        @MemoIdentity { :>> label = "Binds to interface"; }
         end portElement :>> source;
         end boundInterface :>> target;
     }

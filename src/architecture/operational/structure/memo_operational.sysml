@@ -14,6 +14,7 @@ package memo_architecture_operational_structure {
     // obligation the device's design inputs derive from, and ISO 14971 5.2 asks
     // for it to be documented as the starting point of risk analysis.
     requirement def IntendedUse :> MemoMission {
+        @MemoIdentity { :>> label = "Intended use"; }
         attribute indication : String;
         attribute contraindication : String;
         attribute patientPopulation : String;
@@ -21,11 +22,13 @@ package memo_architecture_operational_structure {
         attribute regulatoryClassification : String;
     }
     part def OperationalEntity specializes MemoPart {
+        @MemoIdentity { :>> label = "Operational entity"; }
         attribute entityKind : OperationalEntityKind;
         attribute operationalDomain : String;
         attribute responsibility : String;
     }
     part def OperationalCapability specializes MemoPart {
+        @MemoIdentity { :>> label = "Operational capability"; }
         attribute capabilityLevel : String;
         attribute preCondition : String;
         attribute postCondition : String;
@@ -34,6 +37,7 @@ package memo_architecture_operational_structure {
     // The intended use requires these operational capabilities (ARCADIA:
     // Mission Requires Capability).
     connection def RequiresCapability :> MemoRelationship {
+        @MemoIdentity { :>> label = "Requires capability"; }
         end requiringIntendedUse : IntendedUse :>> source;
         end requiredCapability : OperationalCapability :>> target;
     }
@@ -48,6 +52,7 @@ package memo_architecture_operational_structure {
     // on to accomplish the goal). Capability is tied to the use case, not to
     // individual activities.
     connection def EnablesUseCase :> MemoRelationship {
+        @MemoIdentity { :>> label = "Enables use case"; }
         end enablingCapability : OperationalCapability :>> source;
         end enabledUseCase : UseCase :>> target;
     }

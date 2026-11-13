@@ -60,6 +60,7 @@ package memo_architecture_logical_interfaces {
     // Specializes the standard library interface as well as MEMO's base,
     // rather than shadowing it — see the note on UseCase.
     abstract interface def Interface specializes MemoInterface, Interfaces::Interface {
+        @MemoIdentity { :>> label = "Interface"; }
         attribute interfaceKind : InterfaceKind;   // what crosses
         attribute direction : DirectionKind;
         attribute protocol : String;               // "SPI", "CAN", "Ethernet", "REST", "4-20mA"
@@ -82,6 +83,7 @@ package memo_architecture_logical_interfaces {
     // protocol roles and message flows; ports remain the endpoints that
     // components actually own.
     abstract interface def SoftwareInterface specializes Interface {
+        @MemoIdentity { :>> label = "Software interface"; }
         // `default`, not `=`. A bare `=` in a definition BINDS the value, and
         // a binding cannot be overridden by a usage — which asserted that
         // every software interface is bidirectional and made a directional one
@@ -98,6 +100,7 @@ package memo_architecture_logical_interfaces {
     // The kind of item is given by itemKind (data / command / signal / …);
     // the control-specific fields below apply only when itemKind = command.
     item def InterfaceItem specializes MemoItem {
+        @MemoIdentity { :>> label = "Interface item"; }
         attribute itemKind : InterfaceItemKind;
         attribute confidentialityClass : String;
         attribute integrityClass : String;
@@ -112,14 +115,18 @@ package memo_architecture_logical_interfaces {
     // from the former logical_interfaces namespace.
 
     abstract interface def DataInterface specializes MemoInterface {
+        @MemoIdentity { :>> label = "Data interface"; }
         attribute interfaceKind : InterfaceKind;
         attribute protocolSemantics : String;
     }
     port def DataPort specializes MemoPort {
+        @MemoIdentity { :>> label = "Data port"; }
         attribute interfaceType : String;
     }
-    port def SensorPort specializes DataPort { attribute sensorDomain : String; }
-    port def CommandPort specializes DataPort { attribute commandDomain : String; }
+    port def SensorPort specializes DataPort {
+        @MemoIdentity { :>> label = "Sensor port"; } attribute sensorDomain : String; }
+    port def CommandPort specializes DataPort {
+        @MemoIdentity { :>> label = "Command port"; } attribute commandDomain : String; }
 
     // An interaction between two component ports, and the properties of that
     // connection itself: what kind of thing it carries and its timing
@@ -139,6 +146,7 @@ package memo_architecture_logical_interfaces {
     // AR-EXCH-002 holds the exchange to its ports instead. "Input to X" is relative to a system of interest the
     // model does not have, so it is a question to ask with X given, not a value on the exchange.
     interface def ComponentExchange specializes MemoInterface {
+        @MemoIdentity { :>> label = "Component exchange"; }
         attribute exchangeKind : FlowKind;
         // Connection timing discipline from the source architecture
         // (e.g. AADL Communication_Properties::Timing — immediate
@@ -153,6 +161,7 @@ package memo_architecture_logical_interfaces {
     // for why `direction` is native and why `portKind` is declared on both
     // ports instead of on a base.
     port def SoftwarePort specializes MemoPort {
+        @MemoIdentity { :>> label = "Software port"; }
         attribute portKind : InterfaceKind;
         // AADL port category. Sampled vs. queued delivery decides whether a
         // missed deadline drops a sample or grows a queue, which the timing

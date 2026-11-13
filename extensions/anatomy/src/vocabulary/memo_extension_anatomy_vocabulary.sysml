@@ -11,6 +11,7 @@ package memo_extension_anatomy_vocabulary {
     private import memo_core_common::*;
 
     abstract part def AnatomyEntity specializes MemoPart {
+        @MemoIdentity { :>> label = "Anatomy entity"; }
         abstract ref part adheresToFeatures : AnatomyEntity[0..*] :> connectedToFeatures;
         abstract ref part adjacentToFeatures : AnatomyEntity[0..*];
         abstract ref part afferentToFeatures : AnatomyEntity[0..*] :> connectedToFeatures;

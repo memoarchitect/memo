@@ -164,6 +164,7 @@ requirement def TimingConstraint :> MemoRequirementElement
         // State machines retain their own execution semantics; individual modes
         // are MemoState usages selected by stateKind.
         state def StateMachine :> MemoState {
+            @MemoIdentity { :>> label = "State machine"; }
             attribute machineKind : String;
             attribute executionSemantics : String;
         }
@@ -179,6 +180,7 @@ requirement def TimingConstraint :> MemoRequirementElement
         // Configuration, the set of items available in an active mode or state, is
         // that performing.
         part def ModeConfiguration specializes MemoPart {
+            @MemoIdentity { :>> label = "Mode configuration"; }
             ref activeMode : MemoState[1];
         }
         // Transitions are native SysML v2 `transition` usages inside the owning
@@ -211,6 +213,7 @@ requirement def TimingConstraint :> MemoRequirementElement
         // reads. A property that IS a boolean expression over features is written as a native
         // `require constraint { … }` in the body, which this requirement def allows, and not here.
         requirement def BehaviorProperty :> MemoRequirementElement {
+            @MemoIdentity { :>> label = "Behavior property"; }
             attribute propertyKind : BehaviorPropertyKind;
             attribute languageKind : PropertyLanguageKind;
             attribute formalExpression : String;
@@ -223,6 +226,7 @@ requirement def TimingConstraint :> MemoRequirementElement
         // This is not the procurement contract of a deliverable; that is a
         // different definition.
         requirement def Contract :> MemoRequirementElement {
+            @MemoIdentity { :>> label = "Contract"; }
             subject component : MemoPart;
         }
         // UI scenarios are OperativeScenario usages with scenarioKind `ui`.
@@ -230,6 +234,7 @@ requirement def TimingConstraint :> MemoRequirementElement
         // A timing budget is an obligation on what it measures, so it is a
         // requirement like BehaviorProperty.
         requirement def TimingConstraint :> MemoRequirementElement {
+            @MemoIdentity { :>> label = "Timing constraint"; }
             attribute constraintKind : TimingConstraintKind;
             attribute minMs : DurationValue;
             attribute maxMs : DurationValue;

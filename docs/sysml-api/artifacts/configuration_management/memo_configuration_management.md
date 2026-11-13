@@ -304,6 +304,7 @@ connection def Changes :> MemoRelationship
         private import memo_core_enumerations::*;
 
         part def ChangeRequest :> MemoPart {
+            @MemoIdentity { :>> label = "Change request"; }
             attribute changeType : ChangeTypeKind;
             attribute impactAssessment : String;
             attribute approvalStatus : String;
@@ -312,6 +313,7 @@ connection def Changes :> MemoRelationship
         }
 
         part def ConfigurationItem :> MemoPart {
+            @MemoIdentity { :>> label = "Configuration item"; }
             // No version and no baseline: both belong to a release of the item, not
             // to the item. A `ReleaseRecord` whose `#ReleaseOf` is this item
             // carries them.
@@ -339,6 +341,7 @@ connection def Changes :> MemoRelationship
         // `#Contains` the records of the system releases it pins, and is the validated configuration:
         // `#VerifiedByCase` names the verification cases that validated it.
         part def ReleaseRecord :> MemoPart {
+            @MemoIdentity { :>> label = "Release record"; }
             attribute :>> partNumber : String[1];
             attribute :>> revision : String[1];
             attribute softwareVersion : String[0..1];
@@ -351,18 +354,23 @@ connection def Changes :> MemoRelationship
 
         metadata def ReleaseOf :> MemoTypedDependency {
             doc /* `#ReleaseOf dependency from <record> to <item definition>;` The record is a release of this item. One record, one item. */
+            @MemoIdentity { :>> label = "Release of"; }
         }
         metadata def Contains :> MemoTypedDependency {
             doc /* `#Contains dependency from <record> to <record>, <record>;` The release pins these releases: a system of systems version its systems, a system release its components. */
+            @MemoIdentity { :>> label = "Contains"; }
         }
         metadata def Implements :> MemoTypedDependency {
             doc /* `#Implements dependency from <record> to <interface record>;` The release implements this revision of an interface. */
+            @MemoIdentity { :>> label = "Implements"; }
         }
         metadata def VerifiedByCase :> MemoTypedDependency {
             doc /* `#VerifiedByCase dependency from <record> to <verification case>;` The case that verified, or for a system of systems version validated, this release. `verifiedBy` is taken by the native relation from a requirement to its case. */
+            @MemoIdentity { :>> label = "Verified by case"; }
         }
         metadata def AffectsRelease :> MemoTypedDependency {
             doc /* `#AffectsRelease dependency from <change request> to <record>;` The release a change request is raised against. */
+            @MemoIdentity { :>> label = "Affects release"; }
         }
 
         // A regulated device is one approval in one jurisdiction: the thing a
@@ -394,18 +402,22 @@ connection def Changes :> MemoRelationship
         // devices and accessories that are themselves approved. An accessory that
         // is not a device is not a target.
         part def RegulatedDevice :> MemoPart {
+            @MemoIdentity { :>> label = "Regulated device"; }
             attribute jurisdiction : RegulatoryRegimeKind[1];
             attribute submissionId : String[0..1];
         }
 
         metadata def Covers :> MemoTypedDependency {
             doc /* `#Covers dependency from <device>, to <record>, <record>;` The approval covers these system releases. */
+            @MemoIdentity { :>> label = "Covers"; }
         }
         metadata def IntendedUseOf :> MemoTypedDependency {
             doc /* `#IntendedUseOf dependency from <intended use> to <device>;` The intended use (a requirement) states what this device is for. */
+            @MemoIdentity { :>> label = "Intended use of"; }
         }
         metadata def UsedWith :> MemoTypedDependency {
             doc /* `#UsedWith dependency from <device> to <device>, <device>;` The device is used with these regulated devices (compatible devices and approved accessories). */
+            @MemoIdentity { :>> label = "Used with"; }
         }
 
         // A project is a change set in an iteration: the work that produces
@@ -419,20 +431,24 @@ connection def Changes :> MemoRelationship
         //   #Feeds dependency from prjIrrigatedTip to relGeneratorEu, relGeneratorUs;
         //   #IntroducedBy dependency from outputStage::usOutput to prjIrrigatedTip;
         part def Project :> MemoPart {
+            @MemoIdentity { :>> label = "Project"; }
             attribute trackerLink : String[0..1];
         }
 
         metadata def Feeds :> MemoTypedDependency {
             doc /* `#Feeds dependency from <project> to <record>, <record>;` The project's work is in these releases. */
+            @MemoIdentity { :>> label = "Feeds"; }
         }
         metadata def IntroducedBy :> MemoTypedDependency {
             doc /* `#IntroducedBy dependency from <variant> to <project>;` The project that introduced this variant. */
+            @MemoIdentity { :>> label = "Introduced by"; }
         }
 
         // ── Relations owned by this package ─────────────────────────────
         // Moved out of memo_core_relationships: their ends are typed against
         // types declared here, and core must not depend on a domain package.
         connection def Changes :> MemoRelationship {
+            @MemoIdentity { :>> label = "Changes"; }
             end changeRequest : ChangeRequest :>> source;
             end changedElement : MemoPart :>> target;
         }

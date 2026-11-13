@@ -51,8 +51,8 @@
         private import memo_core_common::*;
         viewpoint operationalViewpoint : MemoViewpoint {
             @MemoIdentity { :>> providedId = "VP-OPS"; :>> label = "OperationalViewpoint"; }
-            @MemoIdentity { :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities."; }
             doc /* Default viewpoint derived from the context, operational, and system layers for how actors use the device — operational scenarios, capabilities, and the functional chains that realize them. */
+            @MemoIdentity { :>> shortDescription = "Shows actors, use contexts, operational scenarios, and system capabilities."; }
             attribute :>> purpose = "Communicate how actors interact with the system and which capabilities they invoke.";
             ref :>> memoStakeholders = (projectLead, systemArchitect);
             attribute :>> stage = WorkflowStageKind::context;

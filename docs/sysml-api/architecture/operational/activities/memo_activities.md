@@ -172,6 +172,7 @@ connection def AssessesDifficulty :> MemoRelationship
         // OperativeActions. Human-factors fields (potentialHarm, severityIfFailed,
         // perceptualCue …) are optional, meaningful when a User is the performer.
         action def OperativeAction specializes MemoAction {
+            @MemoIdentity { :>> label = "Operative action"; }
             attribute trigger : String;
             attribute preCondition : String;
             attribute postCondition : String;
@@ -195,6 +196,7 @@ connection def AssessesDifficulty :> MemoRelationship
         // Difficulty of a task in a particular context. Associated by typed
         // references, not inheritance; assessments are evidence-bearing.
         part def TaskDifficultyAssessment specializes MemoPart {
+            @MemoIdentity { :>> label = "Task difficulty assessment"; }
             attribute overallDifficulty : DemandLevelKind;
             attribute physicalDemand : DemandLevelKind;
             attribute cognitiveDemand : DemandLevelKind;
@@ -215,6 +217,7 @@ connection def AssessesDifficulty :> MemoRelationship
         }
 
         connection def AssessesDifficulty :> MemoRelationship {
+            @MemoIdentity { :>> label = "Assesses difficulty"; }
             end assessment : TaskDifficultyAssessment :>> source;
             end task : OperativeAction :>> target;
         }

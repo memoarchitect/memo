@@ -284,6 +284,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         private import memo_architecture_logical_interfaces::*;                   // ComponentExchange
 
         part def SoftwareDeploymentUnit specializes MemoPart {
+            @MemoIdentity { :>> label = "Software deployment unit"; }
             attribute unitKind : String;
             attribute version : String;
             attribute integrityProtection : String;
@@ -291,6 +292,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         }
 
         part def RuntimeEnvironment specializes MemoPart {
+            @MemoIdentity { :>> label = "Runtime environment"; }
             attribute environmentKind : String;
             attribute osOrRtos : String;
             attribute providedServices : String;
@@ -301,6 +303,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         // language has one. Rooted like MemoryBinding / ConnectionBinding below,
         // so the whole deployment family spells allocation the same way.
         allocation def BuildsInto :> MemoRelationship, Allocations::Allocation {
+            @MemoIdentity { :>> label = "Builds into"; }
             end module : SoftwareModule :>> source;
             end deploymentUnit : SoftwareDeploymentUnit :>> target;
         }
@@ -319,6 +322,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         // architecture, logical as the source. The target is any part, as HostedBy's ends are:
         // a hardware assembly and a software system are both MemoParts.
         allocation def RealizedBy :> MemoRelationship, Allocations::Allocation {
+            @MemoIdentity { :>> label = "Realized by"; }
             end logicalComponent : LogicalComponent :>> source;
             end realization : MemoPart :>> target;
         }
@@ -330,6 +334,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         }
         // Written `allocation x : DeploysTo allocate a to b;`.
         allocation def DeploysTo :> MemoRelationship, Allocations::Allocation {
+            @MemoIdentity { :>> label = "Deploys to"; }
             attribute deploymentKind : DeploymentKind;
             end deploymentUnit : SoftwareDeploymentUnit :>> source;
             end node : ProcessingNode :>> target;
@@ -341,6 +346,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
             :>> baseType = deploysToLinks meta SysML::Usage;
         }
         connection def ProvidesEnvironment :> MemoRelationship {
+            @MemoIdentity { :>> label = "Provides environment"; }
             end node : ProcessingNode :>> source;
             end environment : RuntimeEnvironment :>> target;
         }
@@ -371,6 +377,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         // and data occupy — what makes a memory budget a claim about a device
         // rather than a string.
         allocation def MemoryBinding :> MemoRelationship, Allocations::Allocation {
+            @MemoIdentity { :>> label = "Memory binding"; }
             attribute bindingKind : String;
             end boundComponent : SoftwareComponent :>> source;
             end memory : MemoryDevice :>> target;
@@ -391,6 +398,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         // contributes has to be accounted. Ends are the two bases (MemoInterface,
         // PhysicalComponent) so one binding serves every layer.
         allocation def ConnectionBinding :> MemoRelationship, Allocations::Allocation {
+            @MemoIdentity { :>> label = "Connection binding"; }
             attribute allocatedBandwidth : String;
             attribute mediumLatencyMs : DurationValue;
             end boundExchange : MemoInterface :>> source;
@@ -419,6 +427,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         }
         // A flow declared at a logical component boundary (in-port → out-port).
         part def FlowSpecification specializes MemoPart {
+            @MemoIdentity { :>> label = "Flow specification"; }
             attribute flowKind : FlowSpecKind;
             ref inPort : LogicalPort[0..1];
             ref outPort : LogicalPort[0..1];
@@ -427,6 +436,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         // hardware binding it traverses. `latencyBudgetMs` and `analysisPurpose`
         // (latency | fault-propagation | security) drive the AADL-style analysis.
         part def EndToEndFlow specializes MemoPart {
+            @MemoIdentity { :>> label = "End to end flow"; }
             attribute latencyBudgetMs : DurationValue;
             attribute analysisPurpose : String;
             ref sourceFunction : MemoFunction[0..1];
@@ -439,6 +449,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         // The end-to-end flow is realized by an ordered flow specification, one
         // segment per traversed component boundary (AADL flow-spec → end-to-end).
         connection def FlowComprisesSpec :> MemoRelationship {
+            @MemoIdentity { :>> label = "Flow comprises spec"; }
             attribute segmentOrder : Integer;
             end endToEndFlow : EndToEndFlow :>> source;
             end spec : FlowSpecification :>> target;
@@ -453,6 +464,7 @@ allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation
         // A binding IS an allocation, exactly as MemoryBinding and
         // ConnectionBinding already declare.
         allocation def FlowTraversesBinding :> MemoRelationship, Allocations::Allocation {
+            @MemoIdentity { :>> label = "Flow traverses binding"; }
             end endToEndFlow : EndToEndFlow :>> source;
             end deploymentUnit : SoftwareDeploymentUnit :>> target;
         }

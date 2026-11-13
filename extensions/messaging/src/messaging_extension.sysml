@@ -29,6 +29,7 @@ package memo_extension_messaging {
     // message definition; the definition states the schema, while the usage
     // supplies the deployed topic identity.
     item def MessagingMessage specializes DataItem {
+        @MemoIdentity { :>> label = "Messaging message"; }
         attribute messageSchema : String;
     }
 
@@ -36,6 +37,7 @@ package memo_extension_messaging {
     // and the port usage placed on a component. The shared `topic` reference
     // points every endpoint at the same named item usage.
     port def MessagingPublisher specializes SoftwarePort {
+        @MemoIdentity { :>> label = "Messaging publisher"; }
         out item payload : MessagingMessage;
         ref item topic : MessagingMessage;
         attribute deliverySemantics : MessagingDeliveryKind;
@@ -43,6 +45,7 @@ package memo_extension_messaging {
     }
 
     port def MessagingSubscriber specializes SoftwarePort {
+        @MemoIdentity { :>> label = "Messaging subscriber"; }
         in item payload : MessagingMessage;
         ref item topic : MessagingMessage;
         attribute deliverySemantics : MessagingDeliveryKind;
@@ -50,12 +53,14 @@ package memo_extension_messaging {
     }
 
     interface def MessagingTopicInterface specializes SoftwareInterface {
+        @MemoIdentity { :>> label = "Messaging topic interface"; }
         end publisher : MessagingPublisher :>> source;
         end subscriber : MessagingSubscriber :>> target;
         flow messagingMessageFlow of MessagingMessage from publisher.payload to subscriber.payload;
     }
 
     part def MessagingBroker specializes SoftwareComponent {
+        @MemoIdentity { :>> label = "Messaging broker"; }
         attribute :>> runtimeKind = RuntimeKind::messageBroker;
         attribute brokerProduct : String;
         attribute persistenceEnabled : Boolean;

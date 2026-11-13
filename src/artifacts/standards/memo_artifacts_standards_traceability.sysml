@@ -54,6 +54,7 @@ package memo_artifacts_standards_traceability {
              * amendments (e.g. "IEC 62366-1:2015+AMD1:2020"). Dropping the
              * amendment is a CE/MDR regression, so it is carried explicitly
              * rather than folded into the designation by convention. */
+        @MemoIdentity { :>> label = "Regulatory standard"; }
         attribute designation : String;
         attribute edition : String[0..1];
         attribute issuer : String[0..1];
@@ -88,6 +89,7 @@ package memo_artifacts_standards_traceability {
              * sub-clause as child). There is no clause-specific composition
              * type, because whole/part decomposition is already one relation
              * in MEMO. */
+        @MemoIdentity { :>> label = "Standard clause"; }
         attribute clauseNumber : String;
         attribute title : String[0..1];
         attribute normativeStrength : String[0..1];
@@ -98,6 +100,7 @@ package memo_artifacts_standards_traceability {
     // =========================================================================
 
     connection def ConformsTo :> MemoRelationship {
+        @MemoIdentity { :>> label = "Conforms to"; }
         attribute :>> isTrace = true;
         doc /* Any model element claims conformance to a standard clause.
              * This is the edge the standards traceability matrix and the
@@ -116,6 +119,7 @@ package memo_artifacts_standards_traceability {
     }
 
     connection def TracesToDocument :> MemoRelationship {
+        @MemoIdentity { :>> label = "Traces to document"; }
         attribute :>> isTrace = true;
         doc /* Where the evidence for a clause claim is written down. The target
              * is the existing controlled-artifact type — MEMO does not model a

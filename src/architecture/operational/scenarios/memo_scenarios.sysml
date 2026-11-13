@@ -37,6 +37,7 @@ package memo_architecture_operational_scenarios {
     // same two conditions in words, for what no expression says ("patient assessed"); the constraint
     // is for one that can be checked.
     action def OperativeScenario specializes MemoAction, MemoConstrainedOccurrence {
+        @MemoIdentity { :>> label = "Operative scenario"; }
         attribute scenarioKind : ScenarioKind default ScenarioKind::nominal;
         attribute initialState : String;
         attribute trigger : String;

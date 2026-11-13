@@ -22,6 +22,7 @@ package memo_core_annotations {
     private import memo_core_relationships::*;
 
     abstract part def ModelAnnotation specializes MemoPart {
+        @MemoIdentity { :>> label = "Model annotation"; }
         // `body` is the annotation content; `shortDescription` is the one-line
         // form shown in badges, tables, and generated indexes.
         attribute body : String;
@@ -35,6 +36,7 @@ package memo_core_annotations {
     }
 
     part def ModelComment specializes ModelAnnotation {
+        @MemoIdentity { :>> label = "Model comment"; }
         attribute commentStatus : CommentStatusKind;
         // Why the comment closed. Required in practice for `resolved` and
         // `rejected` — a closed review point with no stated disposition is an
@@ -45,12 +47,14 @@ package memo_core_annotations {
     }
 
     part def ModelRationale specializes ModelAnnotation {
+        @MemoIdentity { :>> label = "Model rationale"; }
         // Decision, trade-off, standard clause, or evidence that the rationale
         // rests on. The body explains the reasoning in full.
         attribute basis : String;
     }
 
     part def ModelNote specializes ModelAnnotation {
+        @MemoIdentity { :>> label = "Model note"; }
         // A lightweight category for filtering notes without constraining their
         // content (for example assumption, usage, implementation, or warning).
         attribute noteKind : String;
@@ -62,6 +66,7 @@ package memo_core_annotations {
     // The end is `remark`, not `comment`: `comment` is a reserved KerML
     // keyword and cannot name a feature.
     connection def CommentsOn :> MemoRelationship {
+        @MemoIdentity { :>> label = "Comments on"; }
         end remark : ModelComment :>> source;
         end annotatedElement :>> target;
     }
@@ -73,6 +78,7 @@ package memo_core_annotations {
     }
 
     connection def RationaleFor :> MemoRelationship {
+        @MemoIdentity { :>> label = "Rationale for"; }
         end rationaleRecord : ModelRationale :>> source;
         end justifiedElement :>> target;
     }
@@ -84,6 +90,7 @@ package memo_core_annotations {
     }
 
     connection def NotesOn :> MemoRelationship {
+        @MemoIdentity { :>> label = "Notes on"; }
         end noteRecord : ModelNote :>> source;
         end notedElement :>> target;
     }

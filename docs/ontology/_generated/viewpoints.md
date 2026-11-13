@@ -65,15 +65,15 @@
 | Element | SysML kind | What it is |
 | --- | --- | --- |
 | [`MemoConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#memoconcern) *(abstract)* | `concern def` | A concern is an interest in the system held by one or more stakeholders. `concern def` is the native SysML construct for it; a viewpoint frames the concerns it addresses.… |
-| [`SafetyConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#safetyconcern) | `concern def` | Safety concern definition specializing `MemoConcern`. |
-| [`UsabilityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#usabilityconcern) | `concern def` | Usability concern definition specializing `MemoConcern`. |
-| [`CybersecurityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#cybersecurityconcern) | `concern def` | Cybersecurity concern definition specializing `MemoConcern`. |
-| [`PerformanceConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#performanceconcern) | `concern def` | Performance concern definition specializing `MemoConcern`. |
-| [`InteroperabilityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#interoperabilityconcern) | `concern def` | Interoperability concern definition specializing `MemoConcern`. |
-| [`ReliabilityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#reliabilityconcern) | `concern def` | Reliability concern definition specializing `MemoConcern`. |
-| [`PrivacyConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#privacyconcern) | `concern def` | Privacy concern definition specializing `MemoConcern`. |
-| [`RegulatoryConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#regulatoryconcern) | `concern def` | Regulatory concern definition specializing `MemoConcern`. |
-| [`ClinicalConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#clinicalconcern) | `concern def` | Clinical concern definition specializing `MemoConcern`. |
+| [`SafetyConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#safetyconcern) | `concern def` | Freedom from unacceptable risk of harm to the patient, the operator or a bystander. |
+| [`UsabilityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#usabilityconcern) | `concern def` | Whether the intended user can operate the device correctly under use conditions. |
+| [`CybersecurityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#cybersecurityconcern) | `concern def` | Resistance to compromise of the device, its data, or the network it participates in. |
+| [`PerformanceConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#performanceconcern) | `concern def` | Timing, throughput and capacity against what the clinical procedure demands. |
+| [`InteroperabilityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#interoperabilityconcern) | `concern def` | Correct exchange with the equipment and systems the device is used alongside. |
+| [`ReliabilityConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#reliabilityconcern) | `concern def` | Continuity of correct service, and behaviour on failure. |
+| [`PrivacyConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#privacyconcern) | `concern def` | Protection of patient and operator data through its lifecycle. |
+| [`RegulatoryConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#regulatoryconcern) | `concern def` | Evidence a submission requires, and conformance to the standards claimed. |
+| [`ClinicalConcern`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#clinicalconcern) | `concern def` | Whether the device serves the clinical procedure and its intended use. |
 | [`MemoQualityAttribute`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#memoqualityattribute) *(abstract)* | `part def` | Memo quality attribute definition specializing `MemoPart`. |
 | [`Availability`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#availability) | `part def` | Availability definition specializing `MemoQualityAttribute`. |
 | [`Performance`](../sysml-api/viewpoints/stakeholders_concerns/memo_stakeholders_concerns.md#performance) | `part def` | Performance definition specializing `MemoQualityAttribute`. |

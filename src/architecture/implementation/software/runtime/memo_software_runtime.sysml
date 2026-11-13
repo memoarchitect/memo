@@ -34,6 +34,7 @@ package memo_architecture_implementation_software_runtime {
     }
 
     part def SoftwareComponent specializes SoftwareElement {
+        @MemoIdentity { :>> label = "Software component"; }
         attribute runtimeKind : RuntimeKind;
         attribute responsibility : String;
         attribute periodMs : DurationValue;
@@ -80,6 +81,7 @@ package memo_architecture_implementation_software_runtime {
     // deployed. Optional: a library the product links normally needs only the
     // module.
     part def OTSSoftwareComponent specializes SoftwareComponent {
+        @MemoIdentity { :>> label = "OTS software component"; }
         ref sourceModule : OTSSoftwareModule[0..1];
     }
 

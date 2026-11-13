@@ -28,11 +28,13 @@ package memo_architecture_implementation_software_structure {
     // "software item" is this part, not an `item def`: exchanged or stored
     // values are DataItem, below.
     abstract part def SoftwareElement specializes MemoPart {
+        @MemoIdentity { :>> label = "Software element"; }
         attribute safetyClass : SafetyClassKind;
         attribute complexity : ComplexityKind;
     }
 
     part def SoftwareSystem specializes SoftwareElement {
+        @MemoIdentity { :>> label = "Software system"; }
         attribute operatingSystem : String;
     }
 
@@ -50,6 +52,7 @@ package memo_architecture_implementation_software_structure {
     }
 
     part def SoftwareModule specializes SoftwareElement {
+        @MemoIdentity { :>> label = "Software module"; }
         attribute moduleKind : ModuleKind;
         attribute responsibility : String;
         // module-kind-specific detail (set only for the relevant moduleKind)
@@ -63,16 +66,19 @@ package memo_architecture_implementation_software_structure {
     }
 
     part def Algorithm specializes MemoPart {
+        @MemoIdentity { :>> label = "Algorithm"; }
         attribute algorithmKind : String;
         attribute inputSummary : String;
         attribute outputSummary : String;
         attribute clinicalPerformanceClaim : String;
     }
     part def DataModel specializes MemoPart {
+        @MemoIdentity { :>> label = "Data model"; }
         attribute schemaReference : String;
         attribute persistenceScope : String;
     }
     part def ConfigurationArtifact specializes MemoPart {
+        @MemoIdentity { :>> label = "Configuration artifact"; }
         attribute configurationScope : String;
         attribute version : String;
     }
@@ -82,6 +88,7 @@ package memo_architecture_implementation_software_structure {
     // structural part of a program (a SoftwareElement here), and the item
     // family is the exchanged or stored value.
     abstract item def DataItem specializes MemoItem {
+        @MemoIdentity { :>> label = "Data item"; }
         attribute schemaIdentifier : String;
         attribute schemaVersion : String;
         attribute :>> encoding : String;
@@ -101,6 +108,7 @@ package memo_architecture_implementation_software_structure {
     // acquisition identity of a bought or downloaded package sits on
     // OTSSoftwareModule.
     part def SOUPSoftwareModule specializes SoftwareModule {
+        @MemoIdentity { :>> label = "SOUP software module"; }
         attribute supplier : String[0..1];
         attribute version : String[0..1];
         attribute knownAnomalies : String[0..1];
@@ -108,6 +116,7 @@ package memo_architecture_implementation_software_structure {
         attribute soupClassification : SOUPClassificationKind[0..1];
     }
     part def OTSSoftwareModule specializes SOUPSoftwareModule {
+        @MemoIdentity { :>> label = "OTS software module"; }
         attribute licenseExpression : String;
         attribute packageUrl : String;
         attribute checksum : String;
@@ -124,6 +133,7 @@ package memo_architecture_implementation_software_structure {
     // Vulnerabilities, anomalies and risks are separate objects that point at
     // the entry; they are not attributes of the document.
     part def SBOMEntry specializes MemoPart {
+        @MemoIdentity { :>> label = "SBOM entry"; }
         attribute componentName : String;
         attribute version : String;
         attribute supplier : String;
@@ -134,6 +144,7 @@ package memo_architecture_implementation_software_structure {
         ref inventoriedElement : SoftwareElement[0..1];
     }
     part def SoftwareBillOfMaterials specializes MemoPart {
+        @MemoIdentity { :>> label = "Software bill of materials"; }
         attribute sbomFormat : SbomFormatKind;
         attribute specVersion : String;
         attribute generationTool : String;
@@ -148,6 +159,7 @@ package memo_architecture_implementation_software_structure {
     // Moved out of memo_core_relationships: their ends are typed against
     // types declared here, and core must not depend on a domain package.
     connection def DependsOnSoup :> MemoRelationship {
+        @MemoIdentity { :>> label = "Depends on soup"; }
         end component : MemoPart :>> source;
         end soupItem : SoftwareElement :>> target;
     }

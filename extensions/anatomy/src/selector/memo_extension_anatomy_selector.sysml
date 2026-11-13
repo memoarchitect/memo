@@ -11,6 +11,7 @@ package memo_extension_anatomy_selector {
     // ancestor of one, is included as well, so nothing FMA states about a
     // selected class is lost.
     part def AnatomySelector specializes MemoPart {
+        @MemoIdentity { :>> label = "Anatomy selector"; }
         attribute fmaSeeds : String[1..*];
         attribute partDepth : Integer default 2;
     }

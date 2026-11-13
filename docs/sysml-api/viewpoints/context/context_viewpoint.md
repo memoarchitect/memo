@@ -51,8 +51,8 @@
         private import memo_core_common::*;
         viewpoint contextViewpoint : MemoViewpoint {
             @MemoIdentity { :>> providedId = "VP-CTX"; :>> label = "ContextViewpoint"; }
-            @MemoIdentity { :>> shortDescription = "Shows actors, use context, and system boundary."; }
             doc /* Default viewpoint derived from the context layer to communicate who interacts with the device, under which use conditions, and where trust or safety boundaries exist. */
+            @MemoIdentity { :>> shortDescription = "Shows actors, use context, and system boundary."; }
             attribute :>> purpose = "Communicate operational context and boundaries.";
             ref :>> memoStakeholders = (systemArchitect);
             attribute :>> stage = WorkflowStageKind::context;

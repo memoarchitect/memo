@@ -1,10 +1,12 @@
 package memo_viewpoints_cybersecurity_views_cybersecurity_assessment_view {
     private import ScalarValues::*;
+    private import memo_core_common::MemoIdentity;
 
     private import memo_viewpoints_definitions::*;
     private import memo_core_enumerations::*;
 
     view def MemoCybersecurityAssessmentView :> MemoDocumentView {
+        @MemoIdentity { :>> label = "Cybersecurity assessment view"; }
         attribute :>> viewKind = DocumentViewKind::cybersecurityAssessment;
         attribute :>> generationRule = "Include cyber risks, exploitability, mitigations, security requirements, verification, residual risk, and postmarket evidence references.";
         attribute :>> outputKind = (ViewOutputKind::documentSection);

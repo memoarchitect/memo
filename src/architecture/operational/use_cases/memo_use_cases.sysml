@@ -38,6 +38,7 @@ package memo_architecture_operational_use_cases {
     // being inherited. The wrapper survives only to carry the display label and
     // lifecycle status; identity comes from `@MemoIdentity`.
     abstract use case def UseCase :> MemoUseCase, UseCases::UseCase {
+        @MemoIdentity { :>> label = "Use case"; }
         // Text of this use case's goal; this is not a separate Goal element.
         attribute goalStatement : String;
         attribute trigger : String;
@@ -66,11 +67,14 @@ package memo_architecture_operational_use_cases {
     // CR-ONT-093 keeps the declared type and the subject in agreement. `UseCase` is abstract: a
     // project states which level each use case is at.
     use case def ClinicalUseCase :> UseCase {
+        @MemoIdentity { :>> label = "Clinical use case"; }
     }
     use case def SystemUseCase :> UseCase {
+        @MemoIdentity { :>> label = "System use case"; }
     }
 
     connection def Motivates :> MemoRelationship {
+        @MemoIdentity { :>> label = "Motivates"; }
         attribute :>> isTrace = true;
         end motivatingNeed : Need :>> source;
         end motivatedUseCase : UseCase :>> target;

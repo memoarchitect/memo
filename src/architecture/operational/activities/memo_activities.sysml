@@ -48,6 +48,7 @@ package memo_architecture_operational_activities {
     // OperativeActions. Human-factors fields (potentialHarm, severityIfFailed,
     // perceptualCue …) are optional, meaningful when a User is the performer.
     action def OperativeAction specializes MemoAction {
+        @MemoIdentity { :>> label = "Operative action"; }
         attribute trigger : String;
         attribute preCondition : String;
         attribute postCondition : String;
@@ -71,6 +72,7 @@ package memo_architecture_operational_activities {
     // Difficulty of a task in a particular context. Associated by typed
     // references, not inheritance; assessments are evidence-bearing.
     part def TaskDifficultyAssessment specializes MemoPart {
+        @MemoIdentity { :>> label = "Task difficulty assessment"; }
         attribute overallDifficulty : DemandLevelKind;
         attribute physicalDemand : DemandLevelKind;
         attribute cognitiveDemand : DemandLevelKind;
@@ -91,6 +93,7 @@ package memo_architecture_operational_activities {
     }
 
     connection def AssessesDifficulty :> MemoRelationship {
+        @MemoIdentity { :>> label = "Assesses difficulty"; }
         end assessment : TaskDifficultyAssessment :>> source;
         end task : OperativeAction :>> target;
     }

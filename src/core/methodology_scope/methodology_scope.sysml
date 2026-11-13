@@ -10,6 +10,7 @@ package memo_core_methodology_scope {
     private import memo_core_dimensions::*;
 
     part def ElementKindAlias specializes MemoPart {
+        @MemoIdentity { :>> label = "Element kind alias"; }
         attribute methodTerm : String;
         attribute concreteKind : String;
         attribute concreteOntology : String;

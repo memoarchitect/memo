@@ -34,6 +34,7 @@ package memo_core_relationships_workspace_membership {
 
     part def WorkspaceMembershipEntry specializes MemoPart {
         doc /* One relation and the direction it places elements in a workspace. */
+        @MemoIdentity { :>> label = "Workspace membership entry"; }
         attribute relation : String;
         attribute direction : WorkspaceMembershipKind;
     }

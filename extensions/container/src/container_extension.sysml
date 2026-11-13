@@ -6,6 +6,7 @@
 // they are unconditional, which is what makes them checkable.
 package memo_extension_container {
     private import ScalarValues::*;
+    private import memo_core_common::MemoIdentity;
 
     private import memo_architecture_realization_deployment::*;
 
@@ -14,6 +15,7 @@ package memo_extension_container {
     // correctly: a whole packaging technology lands without touching a base
     // relation.
     part def ContainerImage specializes SoftwareDeploymentUnit {
+        @MemoIdentity { :>> label = "Container image"; }
         // The pullable reference, e.g. "registry.example.com/screening:1.4.0".
         attribute imageReference : String;
         attribute registry : String;
@@ -26,6 +28,7 @@ package memo_extension_container {
     // The environment a node provides. `ProvidesEnvironment` (ProcessingNode
     // -> RuntimeEnvironment) reaches it unchanged.
     part def ContainerRuntime specializes RuntimeEnvironment {
+        @MemoIdentity { :>> label = "Container runtime"; }
         // Kubernetes, Nomad, Docker Compose, systemd-nspawn, none.
         attribute orchestrationPlatform : String;
         // The engine below the orchestrator — containerd, CRI-O, Docker.

@@ -8,8 +8,8 @@ package memo_viewpoints_requirements_requirements_viewpoint {
     private import memo_core_common::*;
     viewpoint requirementsViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-REQ"; :>> label = "RequirementsViewpoint"; }
-        @MemoIdentity { :>> shortDescription = "Shows stakeholder needs and their decomposition into system, software, and hardware requirements."; }
         doc /* Default viewpoint derived from the requirements layer for requirements traceability — the chain from stakeholder need through system, software, and hardware requirements, supporting IEC 62304 §5.1.1 and ISO 13485 §7.3.3. */
+        @MemoIdentity { :>> shortDescription = "Shows stakeholder needs and their decomposition into system, software, and hardware requirements."; }
         attribute :>> purpose = "Communicate requirements decomposition and traceability.";
         ref :>> memoStakeholders = (regulatoryEngineer, systemArchitect);
         attribute :>> stage = WorkflowStageKind::requirements;

@@ -6,6 +6,7 @@
 // are here because each is unconditional on the type that owns it.
 package memo_extension_cloud {
     private import ScalarValues::*;
+    private import memo_core_common::MemoIdentity;
 
     private import memo_core_enumerations::*;
     private import memo_architecture_implementation_software_runtime::*;
@@ -23,6 +24,7 @@ package memo_extension_cloud {
     }
 
     part def CloudService specializes SoftwareComponent {
+        @MemoIdentity { :>> label = "Cloud service"; }
         attribute :>> runtimeKind = RuntimeKind::service;
         // The externally visible contract: protocol, endpoint, request and
         // response. This is the boundary a verification case exercises.
@@ -32,6 +34,7 @@ package memo_extension_cloud {
     }
 
     part def CloudDataStore specializes SoftwareComponent {
+        @MemoIdentity { :>> label = "Cloud data store"; }
         attribute :>> runtimeKind = RuntimeKind::dataStore;
         attribute storageKind : CloudStorageKind;
         // How long records are kept and what ends them. Regulated content:

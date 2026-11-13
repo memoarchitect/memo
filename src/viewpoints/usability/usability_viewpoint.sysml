@@ -8,8 +8,8 @@ package memo_viewpoints_usability_usability_viewpoint {
     private import memo_core_common::*;
     viewpoint usabilityViewpoint : MemoViewpoint {
         @MemoIdentity { :>> providedId = "VP-USE"; :>> label = "UsabilityViewpoint"; }
-        @MemoIdentity { :>> shortDescription = "Shows use contexts, actors, use errors, and usability requirements."; }
         doc /* Default viewpoint derived from the context and requirements layers for IEC 62366-1 usability engineering — actors, use contexts, identified use errors, and requirements tagged with the usability concern. Reuses existing context-layer elements (Actor, UseContext, UseError) rather than a separate usability layer. */
+        @MemoIdentity { :>> shortDescription = "Shows use contexts, actors, use errors, and usability requirements."; }
         attribute :>> purpose = "Communicate use-related hazards and usability requirements for the device.";
         ref :>> memoStakeholders = (usabilityEngineer, safetyEngineer);
         attribute :>> stage = WorkflowStageKind::requirements;

@@ -14,6 +14,7 @@
 // checked, and a required attribute on a type can.
 package memo_extension_aadl_runtime {
     private import memo_core_stdlib_quantities::*;
+    private import memo_core_common::MemoIdentity;
     private import ScalarValues::*;
 
     private import memo_core_enumerations::*;
@@ -23,6 +24,7 @@ package memo_extension_aadl_runtime {
     // the process itself is the fault-containment and memory-protection
     // boundary, which is why safety arguments quote it.
     part def AadlProcess specializes SoftwareComponent {
+        @MemoIdentity { :>> label = "AADL process"; }
         attribute :>> runtimeKind = RuntimeKind::process;
         // Whether the runtime enforces memory protection at this boundary.
         // A process without address-space isolation is a scheduling unit, not
@@ -34,6 +36,7 @@ package memo_extension_aadl_runtime {
     // exactly one process. The base's period / deadline / WCET / priority are
     // AADL thread properties already; this adds the containing process.
     part def AadlThread specializes SoftwareComponent {
+        @MemoIdentity { :>> label = "AADL thread"; }
         attribute :>> runtimeKind = RuntimeKind::thread;
         attribute owningProcessName : String;
     }
@@ -42,6 +45,7 @@ package memo_extension_aadl_runtime {
     // guaranteed budget. This is how an ARINC 653 partition is modelled, and
     // the budget is what a temporal-partitioning argument is made of.
     part def AadlVirtualProcessor specializes SoftwareComponent {
+        @MemoIdentity { :>> label = "AADL virtual processor"; }
         attribute :>> runtimeKind = RuntimeKind::partition;
         // Time and memory guaranteed to the partition, e.g. "2 ms window per
         // 10 ms major frame; 4 MB".

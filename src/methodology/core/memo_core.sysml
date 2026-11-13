@@ -11,6 +11,7 @@ package memo_methodology_core {
     private import memo_viewpoints_stakeholders_concerns::MemoStakeholder;
 
     part def MethodologyLibrary :> MemoPart {
+        @MemoIdentity { :>> label = "Methodology library"; }
         attribute version : String;
         attribute domain : String;
     }
@@ -36,6 +37,7 @@ package memo_methodology_core {
     // the selection matches is covered by it. An invariant in the selection keeps
     // running, as it does for a policy naming it.
     part def RulePolicy :> MemoPart {
+        @MemoIdentity { :>> label = "Rule policy"; }
         ref targetRule : MemoConsistencyRule[0..1];
         ref targetStandard : RegulatoryStandard[0..1];
         attribute targetCategory : String[0..1];
@@ -52,6 +54,7 @@ package memo_methodology_core {
     }
 
     part def MethodologyDefinition :> MemoPart {
+        @MemoIdentity { :>> label = "Methodology definition"; }
         attribute version : String;
         attribute domain : String;
         // Exactly one base methodology at most. Multiple inheritance is not a
@@ -99,6 +102,7 @@ package memo_methodology_core {
     //
     //   part rvSafety : RoleView { ref :>> forStakeholder = safetyEngineer; ref :>> shownViewpoint = (vpRiskChain, vpEvidenceTraceability); }
     part def RoleView :> MemoPart {
+        @MemoIdentity { :>> label = "Role view"; }
         // `stakeholder` and `viewpoint` are SysML keywords, so neither names a feature.
         ref forStakeholder : MemoStakeholder;
         ref shownViewpoint : MemoViewpoint[0..*];
@@ -110,6 +114,7 @@ package memo_methodology_core {
     // authored methodology and binding, and ontology source declares no
     // instances of it.
     part def ResolvedMethodology :> MemoPart {
+        @MemoIdentity { :>> label = "Resolved methodology"; }
         attribute version : String;
     }
 
@@ -117,6 +122,7 @@ package memo_methodology_core {
     // and the rule policies it adds. "Model" is what Architect opens, one
     // repository and one compile; "project" means a change set in an iteration.
     part def ModelMethodBinding :> MemoPart {
+        @MemoIdentity { :>> label = "Model method binding"; }
         attribute modelName : String;
         ref selectedMethodology : MethodologyDefinition;
         // `allAvailable` widens the model to every package it resolved,
@@ -135,10 +141,12 @@ package memo_methodology_core {
     // with it still binds. MEMO reads `projectName` when `modelName` is absent
     // and warns on either.
     part def ProjectMethodBinding :> ModelMethodBinding {
+        @MemoIdentity { :>> label = "Project method binding"; }
         attribute projectName : String;
     }
 
     part def DhfDocumentBinding :> MemoPart {
+        @MemoIdentity { :>> label = "Dhf document binding"; }
         attribute documentTitle : String;
         attribute groupLabel : String;
         attribute templateId : String;
@@ -149,6 +157,7 @@ package memo_methodology_core {
     }
 
     part def Archetype :> MemoPart {
+        @MemoIdentity { :>> label = "Archetype"; }
         attribute label : String;
         attribute category : String;
         attribute includedLayer : String;

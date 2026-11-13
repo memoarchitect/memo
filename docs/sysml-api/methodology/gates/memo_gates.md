@@ -60,6 +60,7 @@ part def QualityGate :> MemoPart
         private import memo_core_enumerations::*;
 
         part def QualityGate :> MemoPart {
+            @MemoIdentity { :>> label = "Quality gate"; }
             attribute gateStage : WorkflowStageKind;
             attribute passCriteria : String;
         }

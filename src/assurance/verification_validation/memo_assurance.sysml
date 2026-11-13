@@ -21,11 +21,13 @@ package memo_assurance_verification_validation {
     // the note on UseCase. Reusable test action, distinct from a case's
     // pass/fail criteria.
     action def TestStep specializes MemoAction {
+        @MemoIdentity { :>> label = "Test step"; }
         attribute stepAction : String;
         attribute expectedResult : String;
         attribute referencedItem : String;
     }
     verification def VerificationCase :> MemoVerificationCase, VerificationCases::VerificationCase {
+        @MemoIdentity { :>> label = "Verification case"; }
         attribute methodKind : MemoVerificationMethodKind;
         attribute acceptanceCriteria : String;
         // The protocol: what is tested and how, before any run. A run records what happened (TestRun).
@@ -44,6 +46,7 @@ package memo_assurance_verification_validation {
     // record, so a run is evidence the case produces (`ProducesEvidence`), one case to many runs. The
     // verdict is the standard library's (VerificationCases.sysml:58), not a string.
     part def TestRun specializes MemoEvidence {
+        @MemoIdentity { :>> label = "Test run"; }
         attribute verdict : VerificationCases::VerdictKind;
         attribute executedAt : Iso8601DateTime[0..1];
         attribute softwareVersion : String[0..1];
@@ -54,6 +57,7 @@ package memo_assurance_verification_validation {
     }
     // Orders a reusable TestStep within a verification or validation case.
     connection def PerformsStep :> MemoRelationship {
+        @MemoIdentity { :>> label = "Performs step"; }
         attribute sequence : Integer;
         end verificationCase : MemoVerificationCase :>> source;
         end testStep : TestStep :>> target;
@@ -65,6 +69,7 @@ package memo_assurance_verification_validation {
         :>> baseType = performsStepLinks meta SysML::Usage;
     }
     verification def ValidationCase :> MemoVerificationCase {
+        @MemoIdentity { :>> label = "Validation case"; }
         attribute validationMethod : ValidationMethodKind;
         attribute userParticipation : String;
         attribute acceptanceCriteria : String;

@@ -5,6 +5,7 @@ package memo_methodology_patterns {
     private import memo_core_enumerations::*;
 
     part def ModelingPattern :> MemoPart {
+        @MemoIdentity { :>> label = "Modeling pattern"; }
         attribute intent : String;
         attribute stage : WorkflowStageKind;
         attribute strength : RuleStrengthKind;
