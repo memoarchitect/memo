@@ -5,7 +5,6 @@
 package memo_examples_functional_logical_physical {
     private import memo::*;
     private import ScalarValues::*;
-    private import ModelingMetadata::*;
 
 
     part def FunctionalLogicalPhysicalSystem specializes memo_architecture_logical_structure::System {
@@ -42,8 +41,8 @@ package memo_examples_functional_logical_physical {
         attribute :>> mechanicalFunction = "vents line pressure above mechanical set point, independent of software";
         attribute :>> patientContact = false;
     }
-    #refinement dependency swPressureSupervisor to lcPressureProtection;
-    #refinement dependency mechReliefValve to lcPressureProtection;
+    allocation : RealizedBy allocate lcPressureProtection to swPressureSupervisor;
+    allocation : RealizedBy allocate lcPressureProtection to mechReliefValve;
     // Illustrative: authored for this example, not the record of a real evaluation.
     verification vcAuthoredSwPressureSupervisor : VerificationCase {
         @MemoIdentity { :>> providedId = "FLP-VC-A01"; :>> label = "Verify pressure supervisor"; }

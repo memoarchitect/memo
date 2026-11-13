@@ -7,7 +7,7 @@ package memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_vi
         expose memo_examples_gpca_pump_viewpoints_logical_views_behavior_action_flow_view::*;
         attribute depth = 2;
         @MemoIdentity { :>> providedId = "VIEW-BHV-003"; :>> label = "GPCA_InfusionDeliveryActionFlowView"; :>> shortDescription = "The 20 ms execution-step pipeline from sensor acquisition through alarm evaluation and dose limiting to pump actuation and event logging."; }
-        doc /* Action flow over the infusionDeliveryFlow composite action: typed action steps with in/out parameters, item flows carrying the DD/CD exchange items, succession ordering from start to done, and swimlane allocation onto the logical architecture (sensors, alarm, infusion manager, pump motor, logging). */
+        doc /* Action flow over the infusion delivery chain (FC-004): each step performs a system function at one position, item flows carry the DD/CD exchange items, succession ordering from start to done, and swimlane allocation onto the logical architecture (sensors, alarm, infusion manager, pump motor, logging). */
         attribute :>> outputKind = (ViewOutputKind::diagram);
         attribute :>> presentationKind = (PresentationKind::activityDiagram);
         attribute :>> viewKind = DiagramViewKind::actionflow;

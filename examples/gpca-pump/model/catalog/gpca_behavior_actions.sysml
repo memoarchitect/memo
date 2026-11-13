@@ -6,71 +6,52 @@ package memo_examples_gpca_pump_gpca_behavior_actions {
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
 
     // ═════════════════════════════════════════════════════════════
-    // GPCA infusion delivery action flow (KK-4 exemplar).
-    // The 20 ms execution-step pipeline from sensor acquisition
-    // through alarm evaluation and dose limiting to pump actuation
-    // and event logging — the behavioral realization of FC-001/
-    // FC-002 over FUNC-001..008. Item types reference the exchange
-    // item definitions in gpca_behavior_subsystems (DD-002/DD-003,
-    // CD-001/CD-002, DD-004).
+    // GPCA infusion delivery chain: the 20 ms execution-step pipeline from
+    // sensor acquisition through alarm evaluation and dose limiting to pump
+    // actuation and event logging. Written like the chains in gpca_system: each
+    // step is its function performed at one position (`action <step> :>
+    // <function>`), each item it handles is a step-local parameter subsetting
+    // the exchange item in gpca_behavior_subsystems, and a `flow` joins two
+    // steps where one's output is the next one's input. A step's parameters
+    // redefine its function's in declaration order.
     // ═════════════════════════════════════════════════════════════
+    action infusionDeliveryFlow : FunctionalFlow {
+        @MemoIdentity { :>> providedId = "FC-004"; :>> label = "Infusion delivery chain"; }
+        attribute :>> flowCategory = FunctionalFlowKind::nominal;
+        attribute :>> endToEndLatencyBudgetMs = 20 [milli*s];
+        attribute :>> safetyRelevant = true;
+        attribute :>> securityRelevant = false;
+        doc /* One 20 ms execution step: sensors to alarm evaluation and dose limiting, then the flow command, pump actuation and the event log. */
+        action acquireSensors :> fnAcquireSensors {
+            out item sensorVector :> ddSensorVector;
+        }
+        action evaluateAlarms :> fnMonitorAlarm {
+            in item sensorVector :> ddSensorVector;
+            out item alarmSignal :> cdAlarmSignal;
+        }
+        action enforceLimits :> fnEnforceLimits {
+            in item bolusRequest :> ddBolusRequest;
+            out item authorizedBolus :> ddBolusRequest;
+        }
+        action computeFlow :> fnManageInfusion {
+            out item flowCommand :> cdFlowCommand;
+            in item alarmSignal :> cdAlarmSignal;
+            in item authorizedBolus :> ddBolusRequest;
+        }
+        action actuateMotor :> fnCommandPump {
+            in item flowCommand :> cdFlowCommand;
+            out item actuation :> cdFlowCommand;
+        }
+        action logEvent :> fnLogEvents {
+            in item actuation :> cdFlowCommand;
+            out item eventRecord :> ddEventRecord;
+        }
 
-    // ── Action definitions (typed steps with parameters) ────────
-    item def SensorStatusVector specializes InterfaceItem {
-        attribute :>> itemKind = InterfaceItemKind::data;
-    }
-    item def AlarmSignal specializes InterfaceItem {
-        attribute :>> itemKind = InterfaceItemKind::signal;
-    }
-    item def BolusRequestSignal specializes InterfaceItem {
-        attribute :>> itemKind = InterfaceItemKind::signal;
-    }
-    item def FlowCommand specializes InterfaceItem {
-        attribute :>> itemKind = InterfaceItemKind::command;
-    }
-    item def TherapyEventRecord specializes InterfaceItem {
-        attribute :>> itemKind = InterfaceItemKind::'event';
-    }
-
-    action def AcquireSensorData :> FunctionalAction {
-        out sensorStatus : SensorStatusVector;
-    }
-    action def EvaluateAlarmConditions :> FunctionalAction {
-        in sensorStatus : SensorStatusVector;
-        out alarmSignal : AlarmSignal;
-    }
-    action def EnforceDoseLimits :> FunctionalAction {
-        in bolusRequest : BolusRequestSignal;
-        out authorizedBolus : BolusRequestSignal;
-    }
-    action def ComputeFlowCommand :> FunctionalAction {
-        in alarmSignal : AlarmSignal;
-        in authorizedBolus : BolusRequestSignal;
-        out flowCommand : FlowCommand;
-    }
-    action def ActuatePumpMotor :> FunctionalAction {
-        in flowCommand : FlowCommand;
-        out actuation : FlowCommand;
-    }
-    action def LogTherapyEvent :> FunctionalAction {
-        in actuation : FlowCommand;
-        out eventRecord : TherapyEventRecord;
-    }
-
-    // ── Infusion delivery flow (composite action) ───────────────
-    action infusionDeliveryFlow {
-        action acquireSensors : AcquireSensorData;
-        action evaluateAlarms : EvaluateAlarmConditions;
-        action enforceLimits : EnforceDoseLimits;
-        action computeFlow : ComputeFlowCommand;
-        action actuateMotor : ActuatePumpMotor;
-        action logEvent : LogTherapyEvent;
-
-        flow sensorStatusVectorFlow of SensorStatusVector from acquireSensors.sensorStatus to evaluateAlarms.sensorStatus;
-        flow alarmSignalFlow of AlarmSignal from evaluateAlarms.alarmSignal to computeFlow.alarmSignal;
-        flow bolusRequestSignalFlow of BolusRequestSignal from enforceLimits.authorizedBolus to computeFlow.authorizedBolus;
-        flow flowCommandToActuateMotor of FlowCommand from computeFlow.flowCommand to actuateMotor.flowCommand;
-        flow flowCommandToLogEvent of FlowCommand from actuateMotor.actuation to logEvent.actuation;
+        flow from acquireSensors.sensorVector to evaluateAlarms.sensorVector;
+        flow from evaluateAlarms.alarmSignal to computeFlow.alarmSignal;
+        flow from enforceLimits.authorizedBolus to computeFlow.authorizedBolus;
+        flow from computeFlow.flowCommand to actuateMotor.flowCommand;
+        flow from actuateMotor.actuation to logEvent.actuation;
 
         first start then acquireSensors;
         first acquireSensors then evaluateAlarms;

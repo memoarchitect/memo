@@ -45,6 +45,7 @@
 | [`BindingEndsAgreeInDirectionRule`](#bindingendsagreeindirectionrule) | `constraint def` | A port says `in` or `out` (or `inout`), and a `~` conjugates it. That is the only place direction is written. These two rules check the exchange against its ports, so a contradiction cannot be written.… | `MemoConsistencyRule` |
 | [`ExchangeLeavesOutEntersInRule`](#exchangeleavesoutentersinrule) | `constraint def` | Constraint that checks exchange leaves out enters in rule. | `MemoConsistencyRule` |
 | [`RuntimeTracesToModuleRule`](#runtimetracestomodulerule) | `constraint def` | Constraint that checks runtime traces to module rule. | `MemoConsistencyRule` |
+| [`LogicalRealizedByAllocationRule`](#logicalrealizedbyallocationrule) | `constraint def` | The ontology declares one relation for a logical component and what realizes it: `RealizedBy` in memo_architecture_realization_deployment. The general `#refinement` stays for every other realization, so this rule keeps the logical case to one spelling. | `MemoConsistencyRule` |
 | [`PatientContactCharacterizedRule`](#patientcontactcharacterizedrule) | `constraint def` | Constraint that checks patient contact characterized rule. | `MemoConsistencyRule` |
 | [`SafetyCriticalFunctionVerifiedRule`](#safetycriticalfunctionverifiedrule) | `constraint def` | Constraint that checks safety critical function verified rule. | `MemoConsistencyRule` |
 | [`SafetyCriticalStepVerifiedRule`](#safetycriticalstepverifiedrule) | `constraint def` | A flow's step is its own position of a function (`action step :> fn;`), and evidence is scoped to the position: a test of the function, or of another step, does not count for it. So a step whose function is safety-critical needs a verification case of its own.… | `MemoConsistencyRule` |
@@ -231,6 +232,21 @@ constraint def RuntimeTracesToModuleRule :> MemoConsistencyRule
 | Property | Value |
 | --- | --- |
 | Description | Constraint that checks runtime traces to module rule. |
+| Kind | `constraint def` |
+| Abstract | No |
+| Specializes | `MemoConsistencyRule` |
+| Owning package | `memo_rules_ontology` |
+
+
+## LogicalRealizedByAllocationRule
+
+```sysml
+constraint def LogicalRealizedByAllocationRule :> MemoConsistencyRule
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The ontology declares one relation for a logical component and what realizes it: `RealizedBy` in memo_architecture_realization_deployment. The general `#refinement` stays for every other realization, so this rule keeps the logical case to one spelling. |
 | Kind | `constraint def` |
 | Abstract | No |
 | Specializes | `MemoConsistencyRule` |
@@ -1060,6 +1076,20 @@ constraint def WorkflowRealizesUseCaseOfItsLevelRule :> MemoConsistencyRule
             attribute severity = RuleSeverityKind::warning;
             attribute rationaleText = "Every runtime component must trace to a module-view definition (Realizes).";
             attribute predicateExpression = "realizes->size() >= 1";
+            constraint { true }
+        }
+        // The ontology declares one relation for a logical component and what realizes it:
+        // `RealizedBy` in memo_architecture_realization_deployment. The general `#refinement`
+        // stays for every other realization, so this rule keeps the logical case to one spelling.
+        constraint def LogicalRealizedByAllocationRule :> MemoConsistencyRule {
+            @MemoIdentity { :>> providedId = "CR-ONT-105"; }
+            attribute tailoring = RuleTailoringKind::invariant;
+            attribute domain = RuleDomainKind::modelling;
+            attribute obligation = RuleObligationKind::recommended;
+            attribute appliesTo = "LogicalComponent";
+            attribute severity = RuleSeverityKind::error;
+            attribute rationaleText = "A logical component is allocated to the hardware or software that realizes it with RealizedBy, the logical component first. A #refinement dependency from an implementation element to a logical component says the same thing a second way, and the workspace places its ends differently.";
+            attribute predicateExpression = "upstream(realizes)->forAll(conformsTo(LogicalComponent))";
             constraint { true }
         }
         constraint def PatientContactCharacterizedRule :> MemoConsistencyRule {

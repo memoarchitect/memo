@@ -287,7 +287,6 @@ flowchart LR
 | [`DesignDecisionStatusKind`](../sysml-api/core/enumerations/memo_enumerations.md#designdecisionstatuskind) | `proposed`, `accepted`, `superseded`, `rejected` |
 | [`RiskControlImplementationKind`](../sysml-api/core/enumerations/memo_enumerations.md#riskcontrolimplementationkind) | `hardwareDesign`, `softwareDesign`, `labeling`, `training`, `proceduralControl` |
 | [`ActionKind`](../sysml-api/core/enumerations/memo_enumerations.md#actionkind) | `transform`, `validate`, `route`, `store`, `present`, `actuate`, `sense`, `compute`, `filtering`, `encrypt`, `authenticate` |
-| [`ActivityFlowKind`](../sysml-api/core/enumerations/memo_enumerations.md#activityflowkind) | `controlFlow`, `objectFlow`, `exceptionFlow` |
 | [`MessageKind`](../sysml-api/core/enumerations/memo_enumerations.md#messagekind) | `synchronous`, `asynchronous`, `reply`, `create`, `destroy`, `timeout` |
 | [`TimingConstraintKind`](../sysml-api/core/enumerations/memo_enumerations.md#timingconstraintkind) | `deadline`, `period`, `jitter`, `latency`, `separation`, `burstInterval` |
 | [`HAZOPGuideWordKind`](../sysml-api/core/enumerations/memo_enumerations.md#hazopguidewordkind) | `no`, `more`, `less`, `asWellAs`, `partOf`, `reverse`, `other`, `early`, `late`, `before`, `subsequent` |

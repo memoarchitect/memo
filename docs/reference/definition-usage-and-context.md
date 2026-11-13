@@ -33,10 +33,10 @@ Definitions live in two places, and both are legitimate:
 | `src/` | the medical-device library — the public contract |
 | `examples/` | project-owned contracts, declared by the project that reuses them |
 
-A project declaring its own `def` is not a smell. `gpca-pump` declares
-`action def AcquireSensorData :> FunctionalAction` because the GPCA pump's
-sensor-acquisition contract is not the library's business and is reused inside
-that project. That is the pattern working.
+A project declaring its own `def` is not a smell. `ros-mobile-robot` declares
+`item def LaserScan specializes RosMessage` because the robot's laser-scan
+message is not the library's business and is reused by every topic that carries
+it inside that project. That is the pattern working.
 
 ## 2. Classification follows the definition, not the usage's location
 

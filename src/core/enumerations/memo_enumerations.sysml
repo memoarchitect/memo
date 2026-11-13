@@ -727,11 +727,6 @@ package memo_core_enumerations {
         enum encrypt;
         enum authenticate;
     }
-    enum def ActivityFlowKind {
-        enum controlFlow;
-        enum objectFlow;
-        enum exceptionFlow;
-    }
     enum def MessageKind {
         enum synchronous;
         enum asynchronous;

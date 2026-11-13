@@ -103,7 +103,6 @@
 | [`DesignDecisionStatusKind`](#designdecisionstatuskind) | `enum def` | Controlled values for design decision status: `proposed`, `accepted`, `superseded`, `rejected`. | — |
 | [`RiskControlImplementationKind`](#riskcontrolimplementationkind) | `enum def` | Controlled values for risk control implementation: `hardwareDesign`, `softwareDesign`, `labeling`, `training`, `proceduralControl`. | — |
 | [`ActionKind`](#actionkind) | `enum def` | Controlled values for action: `transform`, `validate`, `route`, `store`, `present`, `actuate`, `sense`, `compute`, `filtering`, `encrypt`, `authenticate`. | — |
-| [`ActivityFlowKind`](#activityflowkind) | `enum def` | Controlled values for activity flow: `controlFlow`, `objectFlow`, `exceptionFlow`. | — |
 | [`MessageKind`](#messagekind) | `enum def` | Controlled values for message: `synchronous`, `asynchronous`, `reply`, `create`, `destroy`, `timeout`. | — |
 | [`TimingConstraintKind`](#timingconstraintkind) | `enum def` | Controlled values for timing constraint: `deadline`, `period`, `jitter`, `latency`, `separation`, `burstInterval`. | — |
 | [`HAZOPGuideWordKind`](#hazopguidewordkind) | `enum def` | Controlled values for hazopguide word: `no`, `more`, `less`, `asWellAs`, `partOf`, `reverse`, `other`, `early`, `late`, `before`, `subsequent`. | — |
@@ -1221,21 +1220,6 @@ enum def ActionKind
 | Owning package | `memo_core_enumerations` |
 
 
-## ActivityFlowKind
-
-```sysml
-enum def ActivityFlowKind
-```
-
-| Property | Value |
-| --- | --- |
-| Description | Controlled values for activity flow: `controlFlow`, `objectFlow`, `exceptionFlow`. |
-| Kind | `enum def` |
-| Abstract | No |
-| Specializes | — |
-| Owning package | `memo_core_enumerations` |
-
-
 ## MessageKind
 
 ```sysml
@@ -2059,11 +2043,6 @@ enum def CommentStatusKind
             enum filtering;
             enum encrypt;
             enum authenticate;
-        }
-        enum def ActivityFlowKind {
-            enum controlFlow;
-            enum objectFlow;
-            enum exceptionFlow;
         }
         enum def MessageKind {
             enum synchronous;

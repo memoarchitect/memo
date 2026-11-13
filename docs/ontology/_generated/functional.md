@@ -6,14 +6,11 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
-| [`FunctionalAction`](../sysml-api/architecture/functional/behavior/memo_behavior.md#functionalaction) *(abstract)* | `action def` | Functional action definition specializing `MemoAction`. |
 | [`StateMachine`](../sysml-api/architecture/functional/behavior/memo_behavior.md#statemachine) | `state def` | State machines and their mode states are SysML v2 states (behaviours), so they derive from the MemoState foundation, not the part-based MemoPart family. Transitions stay part-based (below) to keep their traceable safety attributes.… |
 | [`ModeConfiguration`](../sysml-api/architecture/functional/behavior/memo_behavior.md#modeconfiguration) | `part def` | A configuration is the concrete selection made at a `variation` choice point: it says which mode is active in one selectable arrangement. The reference is typed to the shared native state family so a consumer can navigate from the selected configuration to its governing mode.… |
 | [`TransitionRecord`](../sysml-api/architecture/functional/behavior/memo_behavior.md#transitionrecord) | `metadata def` | Transitions are native SysML v2 `transition` usages inside the owning state — there is no `part def Transition`, and its `transition` keyword collision is why.… |
 | [`BehaviorProperty`](../sysml-api/architecture/functional/behavior/memo_behavior.md#behaviorproperty) | `requirement def` | A behavioural obligation, such as an invariant, transition rule, temporal claim, assumption, or guarantee. It is a `requirement def` because that is what it is: a claim the design must meet and a verification case can `verify`.… |
 | [`Contract`](../sysml-api/architecture/functional/behavior/memo_behavior.md#contract) | `requirement def` | Contract definition specializing `MemoRequirementElement`. |
-| [`ActivityAction`](../sysml-api/architecture/functional/behavior/memo_behavior.md#activityaction) | `action def` | Per-technology properties belong on the extension type that owns them, typed. ROS QoS shows the shape: `attribute def RosQosProfile` has reliability, durability, deadline, liveliness and history depth as typed fields, so a publisher's offer and a subscriber's request can be co… |
-| [`ActivityFlow`](../sysml-api/architecture/functional/behavior/memo_behavior.md#activityflow) | `action def` | Activity flow definition specializing `MemoAction`. |
 | [`TimingConstraint`](../sysml-api/architecture/functional/behavior/memo_behavior.md#timingconstraint) | `requirement def` | Timing constraint definition specializing `MemoRequirementElement`. |
 
 **Functions**
