@@ -86,6 +86,7 @@ package memo_examples_temperature_alarm {
     // --8<-- [end:implementation]
 
     // ── Risk chain with use error ───────────────────────────────
+    // --8<-- [start:risk-chain]
     // --8<-- [start:human-factors]
     part ueSilenceAndForget : UseError {
         @MemoIdentity { :>> providedId = "TA-UE-001"; :>> label = "Silence without assessment"; }
@@ -110,6 +111,7 @@ package memo_examples_temperature_alarm {
     connection : Mitigates connect rcReAnnunciate to hzUndetectedDeviation { attribute :>> mitigationKind = MitigationKind::hazard; }
     connection : ControlImplementedBy connect rcReAnnunciate to elAlarmBanner;
     // --8<-- [end:safety-risk]
+    // --8<-- [end:risk-chain]
 
     // ── Verification, validation, evidence ──────────────────────
     // --8<-- [start:verification-validation]

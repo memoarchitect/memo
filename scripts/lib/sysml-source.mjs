@@ -143,8 +143,9 @@ export const records = sourceFiles.map((path) => {
     const relationEnds = endsOf(body);
     const ends = relationEnds.map((end) => end.type || 'any element');
     // Typed reference features (`ref name : Type`), which figures may draw.
-    const refs = [...body.matchAll(/^\s*ref\s+([A-Za-z_][A-Za-z0-9_]*)\s*:\s*([A-Za-z_][A-Za-z0-9_:]*)/gm)]
-      .map(([, name, type]) => ({ name, type: type.split('::').at(-1) }));
+    // Typed reference features (`ref name : Type`), and untyped ones (`ref name[1];`), which accept anything.
+    const refs = [...body.matchAll(/^\s*ref\s+([A-Za-z_][A-Za-z0-9_]*)\s*(?::\s*([A-Za-z_][A-Za-z0-9_:]*)|\[[^\]]*\]\s*;|;)/gm)]
+      .map(([, name, type]) => ({ name, type: type ? type.split('::').at(-1) : undefined }));
     const enumValues = [...body.matchAll(/^\s*enum\s+([A-Za-z_][A-Za-z0-9_]*)\s*;/gm)].map((value) => value[1]);
     const declaration = {
       abstract: Boolean(match[1]),

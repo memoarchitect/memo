@@ -13,16 +13,23 @@ Use this example to separate three software questions.
 
 ## Where this sits in MEMO
 
-Every tutorial is one slice of the same structure. This example populates these layers:
+Every tutorial is one slice of the same structure. This example uses these definitions, by the part of the ontology they come from:
 
-| Layer | Element types it uses | Reference |
+| Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
-| Implementation and realization | `SoftwareDeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment`, `SoftwareComponent`, `SoftwareModule` | [Implementation and realization](../ontology/implementation.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
+| Logical | `System` | [Logical](../ontology/logical.md) |
+| Implementation | `SoftwareComponent`, `SoftwareModule` | [Implementation](../ontology/implementation.md) |
+| Realization | `ProcessingNode`, `RuntimeEnvironment`, `SoftwareDeploymentUnit` | [Realization](../ontology/realization.md) |
+| Requirements | `Need`, `Requirement` | [Requirements](../ontology/requirements.md) |
+| Verification and validation | `TestRun`, `VerificationCase` | [Verification and validation](../ontology/verification-validation.md) |
+| Core | `MemoEvidence` | [Core](../reference/areas/core.md) |
+| Views and methodology | `MemoDiagramView`, `ModelMethodBinding` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `BuildsInto`, `DeploysTo`, `HostedBy`, `ProvidesEnvironment`, `Realizes` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
+**MEMO relationships it uses:** `BuildsInto`, `DeploysTo`, `DerivesFrom`, `HostedBy`, `ProducesEvidence`, `ProvidesEnvironment`. See [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
-**Layers it does not populate:** operational, functional, logical, assurance. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+**Native SysML relationships it uses:** `subject`, `allocate`, `satisfy`, `dependency`, `#refinement`, `expose`.
+
+**Architecture layers it does not populate:** operational, functional. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
 **Narrative treatment:** [Requirements and Architecture](../layers/requirements-architecture.md).
 

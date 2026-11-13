@@ -161,41 +161,48 @@ export const LAYER_FIGURES = [
   {
     id: 'functional',
     title: 'Functional layer',
+    usages: true,
+    colWidth: 440,
     steps: [
       {
         title: 'The chain: a system function decomposes into component functions',
         nodes: [
-          { id: 'sf', type: 'SystemFunction', col: 1, row: 0 },
-          { id: 'cf', type: 'ComponentFunction', col: 1, row: 1 },
+          { id: 'sf', name: 'fnMeasureSpO2', type: 'SystemFunction', col: 1, row: 0 },
+          { id: 'cf', name: 'fnSenseLight', type: 'ComponentFunction', col: 1, row: 1 },
+          { id: 'cf2', name: 'fnComputeSpO2', type: 'ComponentFunction', col: 2, row: 1 },
         ],
-        edges: [{ from: 'sf', to: 'cf', contains: true }],
+        edges: [
+          { from: 'sf', to: 'cf', contains: true },
+          { from: 'sf', to: 'cf2', contains: true },
+        ],
       },
       {
-        title: 'Exchanges: a function passes something to another through a typed flow',
-        nodes: [{ id: 'cf2', type: 'ComponentFunction', col: 2, row: 1 }],
-        edges: [{ from: 'cf', to: 'cf2', native: 'flow' }],
+        title: 'Exchanges: one function passes a typed item to the next over a flow',
+        edges: [{ from: 'cf', to: 'cf2', rel: 'FunctionalTransfer', label: 'fxSignal : FunctionalTransfer' }],
       },
       {
-        title: 'Obligations: behaviour properties and timing constraints are requirements the functions meet',
+        title: 'Obligations: a behaviour property the function satisfies, and a timing budget measured on it',
         nodes: [
-          { id: 'bp', type: 'BehaviorProperty', col: 0, row: 2 },
-          { id: 'tc', type: 'TimingConstraint', col: 2, row: 2 },
+          { id: 'bp', name: 'bpNoValueOnPoorSignal', type: 'BehaviorProperty', col: 2, row: 0 },
+          { id: 'tc', name: 'tcReadingLatency', type: 'TimingConstraint', col: 0, row: 0 },
         ],
         edges: [
           { from: 'bp', to: 'sf', native: 'satisfy' },
-          { from: 'tc', to: 'cf2', native: 'satisfy' },
+          { from: 'tc', to: 'sf', ref: 'referenceElement' },
         ],
       },
       {
-        title: 'Behaviour and reuse: states and modes, a reusable route through responsibilities',
+        title: 'Behaviour and reuse: the modes, and a route whose steps are positions of the functions',
         nodes: [
-          { id: 'sm', type: 'StateMachine', col: 0, row: 0 },
-          { id: 'mc', type: 'ModeConfiguration', col: 0, row: 1 },
-          { id: 'ff', type: 'FunctionalFlow', col: 2, row: 0 },
+          { id: 'sm', name: 'oximeterModes', type: 'StateMachine', col: 3, row: 0 },
+          { id: 'st', name: 'measuring', type: 'MemoState', col: 3, row: 1 },
+          { id: 'ff', name: 'fcSpotReading', type: 'FunctionalFlow', col: 0, row: 2 },
+          { id: 'step', name: 'sense', type: 'ComponentFunction', subsets: true, col: 1, row: 2 },
         ],
         edges: [
-          { from: 'sm', to: 'mc', contains: true },
-          { from: 'ff', to: 'sf', native: 'include' },
+          { from: 'sm', to: 'st', contains: true },
+          { from: 'ff', to: 'step', contains: true },
+          { from: 'step', to: 'cf', native: 'subsets' },
         ],
       },
     ],
@@ -203,13 +210,15 @@ export const LAYER_FIGURES = [
   {
     id: 'logical',
     title: 'Logical layer',
+    usages: true,
+    colWidth: 440,
     steps: [
       {
         title: 'The hierarchy: a system, its subsystems, the components that make them up',
         nodes: [
-          { id: 'sys', type: 'System', col: 1, row: 0 },
-          { id: 'sub', type: 'Subsystem', col: 1, row: 1 },
-          { id: 'lc', type: 'LogicalComponent', col: 1, row: 2 },
+          { id: 'sys', name: 'oximeter', type: 'System', as: 'OximeterSystem', col: 0, row: 0 },
+          { id: 'sub', name: 'measurement', type: 'Subsystem', col: 0, row: 1 },
+          { id: 'lc', name: 'sensing', type: 'LogicalComponent', col: 0, row: 2 },
         ],
         edges: [
           { from: 'sys', to: 'sub', contains: true },
@@ -219,49 +228,38 @@ export const LAYER_FIGURES = [
       {
         title: 'Interfaces: components meet at their ports, over an exchange',
         nodes: [
-          { id: 'lp', type: 'LogicalPort', col: 2, row: 2 },
-          { id: 'lp2', type: 'LogicalPort', col: 3, row: 2 },
-          { id: 'lc2', type: 'LogicalComponent', col: 3, row: 3 },
+          { id: 'lp', name: 'signalOut', type: 'LogicalPort', col: 1, row: 2 },
+          { id: 'lp2', name: 'signalIn', type: 'LogicalPort', col: 2, row: 2 },
+          { id: 'lc2', name: 'processing', type: 'LogicalComponent', col: 2, row: 3 },
         ],
         edges: [
           { from: 'lc', to: 'lp', contains: true },
           { from: 'lc2', to: 'lp2', contains: true },
-          { from: 'lp', to: 'lp2', rel: 'ComponentExchange' },
+          { from: 'lp', to: 'lp2', rel: 'ComponentExchange', label: 'ceSignal : ComponentExchange' },
         ],
       },
       {
-        title: 'Independence and boundaries: channels that claim independence, and where faults must stop',
-        nodes: [
-          { id: 'ib', type: 'IsolationBoundary', col: 0, row: 2 },
-          { id: 'fcr', type: 'FaultContainmentRegion', col: 0, row: 3 },
-        ],
-        edges: [
-          { from: 'lc2', to: 'lc', rel: 'IndependentOf' },
-          { from: 'ib', to: 'lc', contains: true },
-          { from: 'fcr', to: 'lc2', contains: true },
-        ],
-      },
-      {
-        title: 'State: the modes of the logical solution',
-        nodes: [{ id: 'lb', type: 'LogicalBehavior', col: 2, row: 1 }],
-        edges: [{ from: 'lc', to: 'lb', contains: true }],
+        title: 'Independence: a monitor channel states that it fails apart from the channel it watches',
+        nodes: [{ id: 'mon', name: 'monitor', type: 'LogicalComponent', col: 1, row: 3 }],
+        edges: [{ from: 'mon', to: 'lc2', rel: 'IndependentOf' }],
       },
     ],
   },
   {
     id: 'implementation',
     title: 'Implementation layer',
+    usages: true,
     colWidth: 330,
     steps: [
       {
         title: 'Software: a logical component is realized by a module, inside a software system, with the task that runs it',
         nodes: [
-          { id: 'ss', type: 'SoftwareSystem', col: 0, row: 0 },
-          { id: 'lcP', type: 'LogicalComponent', col: 1, row: 0 },
-          { id: 'task', type: 'SoftwareComponent', col: 0, row: 1 },
-          { id: 'item', type: 'SoftwareModule', label: 'SoftwareModule (item)', col: 1, row: 1 },
-          { id: 'req', type: 'Requirement', col: 0, row: 2 },
-          { id: 'unit', type: 'SoftwareModule', label: 'SoftwareModule (unit)', col: 1, row: 2 },
+          { id: 'ss', name: 'firmware', type: 'SoftwareSystem', col: 0, row: 0 },
+          { id: 'lcP', name: 'processing', type: 'LogicalComponent', col: 1, row: 0 },
+          { id: 'task', name: 'measurementTask', type: 'SoftwareComponent', col: 0, row: 1 },
+          { id: 'item', name: 'spo2Item', type: 'SoftwareModule', col: 1, row: 1 },
+          { id: 'req', name: 'reqComputeSpo2', type: 'Requirement', col: 0, row: 2 },
+          { id: 'unit', name: 'ratioUnit', type: 'SoftwareModule', col: 1, row: 2 },
         ],
         edges: [
           { from: 'lcP', to: 'item', rel: 'RealizedBy' },
@@ -275,11 +273,11 @@ export const LAYER_FIGURES = [
       {
         title: 'Hardware: a logical component is realized by an assembly, and the assembly holds the parts',
         nodes: [
-          { id: 'lcS', type: 'LogicalComponent', col: 2, row: 0 },
-          { id: 'ha', type: 'HardwareAssembly', col: 2, row: 1 },
-          { id: 'emitter', type: 'OpticalComponent', col: 3, row: 1 },
-          { id: 'sensor', type: 'Sensor', col: 2, row: 2 },
-          { id: 'pad', type: 'HardwareComponent', col: 3, row: 2 },
+          { id: 'lcS', name: 'sensing', type: 'LogicalComponent', col: 2, row: 0 },
+          { id: 'ha', name: 'probe', type: 'HardwareAssembly', col: 2, row: 1 },
+          { id: 'emitter', name: 'emitter', type: 'OpticalComponent', col: 3, row: 1 },
+          { id: 'sensor', name: 'photodiode', type: 'Sensor', col: 2, row: 2 },
+          { id: 'pad', name: 'fingerPad', type: 'HardwareComponent', col: 3, row: 2 },
         ],
         edges: [
           { from: 'lcS', to: 'ha', rel: 'RealizedBy' },
@@ -291,12 +289,12 @@ export const LAYER_FIGURES = [
       {
         title: 'User interface: what the user operates, and the action an element triggers',
         nodes: [
-          { id: 'lcD', type: 'LogicalComponent', col: 4, row: 0 },
-          { id: 'ui', type: 'UserInterface', col: 4, row: 1 },
-          { id: 'screen', type: 'UIElement', label: 'UIElement (screen)', col: 4, row: 2 },
-          { id: 'button', type: 'UIElement', label: 'UIElement (button)', col: 4, row: 3 },
-          { id: 'uia', type: 'UIAction', col: 4, row: 4 },
-          { id: 'fn', type: 'SystemFunction', col: 3, row: 4 },
+          { id: 'lcD', name: 'display', type: 'LogicalComponent', col: 4, row: 0 },
+          { id: 'ui', name: 'frontPanel', type: 'UserInterface', col: 4, row: 1 },
+          { id: 'screen', name: 'readingScreen', type: 'UIElement', col: 4, row: 2 },
+          { id: 'button', name: 'spotCheckButton', type: 'UIElement', col: 4, row: 3 },
+          { id: 'uia', name: 'startSpotCheck', type: 'UIAction', col: 4, row: 4 },
+          { id: 'fn', name: 'fnMeasureSpO2', type: 'SystemFunction', col: 3, row: 4 },
         ],
         edges: [
           { from: 'lcD', to: 'ui', rel: 'RealizedBy' },
@@ -309,9 +307,9 @@ export const LAYER_FIGURES = [
       {
         title: 'Third-party software: a module depends on an off-the-shelf module, which the SBOM lists',
         nodes: [
-          { id: 'ots', type: 'OTSSoftwareModule', col: 0, row: 3 },
-          { id: 'entry', type: 'SBOMEntry', col: 0, row: 4 },
-          { id: 'sbom', type: 'SoftwareBillOfMaterials', col: 1, row: 4 },
+          { id: 'ots', name: 'rtosKernel', type: 'OTSSoftwareModule', col: 0, row: 3 },
+          { id: 'entry', name: 'rtosEntry', type: 'SBOMEntry', col: 0, row: 4 },
+          { id: 'sbom', name: 'sbom', type: 'SoftwareBillOfMaterials', col: 1, row: 4 },
         ],
         edges: [
           { from: 'item', to: 'ots', rel: 'DependsOnSoup' },
@@ -324,15 +322,16 @@ export const LAYER_FIGURES = [
   {
     id: 'realization',
     title: 'Realization layer',
+    usages: true,
     colWidth: 370,
     steps: [
       {
         title: 'The deployment chain: a module builds into a unit, the unit deploys to a node, the node is hosted by its board',
         nodes: [
-          { id: 'sm', type: 'SoftwareModule', col: 0, row: 1 },
-          { id: 'sdu', type: 'SoftwareDeploymentUnit', col: 1, row: 1 },
-          { id: 'pn', type: 'ProcessingNode', col: 1, row: 2 },
-          { id: 'board', type: 'HardwareAssembly', col: 2, row: 2 },
+          { id: 'sm', name: 'spo2Item', type: 'SoftwareModule', col: 0, row: 1 },
+          { id: 'sdu', name: 'firmwareImage', type: 'SoftwareDeploymentUnit', col: 1, row: 1 },
+          { id: 'pn', name: 'mcu', type: 'ProcessingNode', col: 1, row: 2 },
+          { id: 'board', name: 'mainBoard', type: 'HardwareAssembly', col: 2, row: 2 },
         ],
         edges: [
           { from: 'sm', to: 'sdu', rel: 'BuildsInto' },
@@ -343,9 +342,9 @@ export const LAYER_FIGURES = [
       {
         title: 'What the node provides: a runtime environment, and the memory a task is bound to',
         nodes: [
-          { id: 're', type: 'RuntimeEnvironment', col: 0, row: 2 },
-          { id: 'mem', type: 'MemoryDevice', col: 0, row: 3 },
-          { id: 'task', type: 'SoftwareComponent', col: 0, row: 4 },
+          { id: 're', name: 'kernelRuntime', type: 'RuntimeEnvironment', col: 0, row: 2 },
+          { id: 'mem', name: 'sram', type: 'MemoryDevice', col: 0, row: 3 },
+          { id: 'task', name: 'measurementTask', type: 'SoftwareComponent', col: 0, row: 4 },
         ],
         edges: [
           { from: 'pn', to: 're', rel: 'ProvidesEnvironment' },
@@ -356,9 +355,9 @@ export const LAYER_FIGURES = [
       {
         title: 'End to end: a flow made of flow specifications on logical ports, traced to the unit it crosses',
         nodes: [
-          { id: 'e2e', type: 'EndToEndFlow', col: 1, row: 0 },
-          { id: 'fs', type: 'FlowSpecification', col: 2, row: 0 },
-          { id: 'lp', type: 'LogicalPort', col: 3, row: 0 },
+          { id: 'e2e', name: 'e2eReading', type: 'EndToEndFlow', col: 1, row: 0 },
+          { id: 'fs', name: 'fsSensing', type: 'FlowSpecification', col: 2, row: 0 },
+          { id: 'lp', name: 'signalOut', type: 'LogicalPort', col: 3, row: 0 },
         ],
         edges: [
           { from: 'e2e', to: 'sdu', rel: 'FlowTraversesBinding' },
@@ -369,11 +368,11 @@ export const LAYER_FIGURES = [
       {
         title: 'The physical boundary: a physical interface joins two ports, carries the flow, and is bound to the traces',
         nodes: [
-          { id: 'pIn', type: 'PhysicalPort', label: 'PhysicalPort (in)', col: 1, row: 3 },
-          { id: 'fe', type: 'ElectronicComponent', col: 3, row: 2 },
-          { id: 'pOut', type: 'PhysicalPort', label: 'PhysicalPort (out)', col: 3, row: 3 },
-          { id: 'iface', type: 'PhysicalInterface', col: 2, row: 4 },
-          { id: 'traces', type: 'HardwareComponent', col: 2, row: 5 },
+          { id: 'pIn', name: 'spiIn', type: 'PhysicalPort', col: 1, row: 3 },
+          { id: 'fe', name: 'frontEnd', type: 'ElectronicComponent', col: 3, row: 2 },
+          { id: 'pOut', name: 'spiOut', type: 'PhysicalPort', col: 3, row: 3 },
+          { id: 'iface', name: 'spiLink', type: 'PhysicalInterface', col: 2, row: 4 },
+          { id: 'traces', name: 'spiTraces', type: 'HardwareComponent', col: 2, row: 5 },
         ],
         edges: [
           { from: 'pn', to: 'pIn', contains: true },
@@ -691,5 +690,169 @@ export const LAYER_FIGURES = [
         ],
       },
     ],
+  },
+];
+
+// Single figures for the guide pages: one picture each, checked like the
+// layer figures and written to docs/assets/ontology/<id>.svg. They draw
+// definitions, so they show what the ontology allows, not one model.
+const stepOf = { native: 'subsets', label: 'step :>' };
+export const FIGURES = [
+  {
+    id: 'relationship-sentences',
+    title: 'Relationships state engineering claims',
+    colWidth: 370,
+    nodes: [
+      { id: 'need', type: 'Need', col: 0, row: 0 },
+      { id: 'uc', type: 'UseCase', col: 1, row: 0 },
+      { id: 'wf', type: 'OperationalWorkflow', col: 2, row: 0 },
+      { id: 'ff', type: 'FunctionalFlow', col: 0, row: 1 },
+      { id: 'sf', type: 'SystemFunction', col: 1, row: 1 },
+      { id: 'lc', type: 'LogicalComponent', col: 2, row: 1 },
+      { id: 'vc', type: 'VerificationCase', col: 0, row: 2 },
+      { id: 'ev', type: 'MemoEvidence', col: 1, row: 2 },
+    ],
+    edges: [
+      { from: 'need', to: 'uc', rel: 'Motivates' },
+      { from: 'wf', to: 'uc', rel: 'RealizesUseCase' },
+      { from: 'ff', to: 'sf', ...stepOf },
+      { from: 'sf', to: 'lc', native: 'allocate' },
+      { from: 'vc', to: 'sf', native: 'subject' },
+      { from: 'vc', to: 'ev', rel: 'ProducesEvidence' },
+    ],
+  },
+  {
+    id: 'traceability-backbone',
+    title: 'Representative relationships across MEMO',
+    colWidth: 370,
+    nodes: [
+      { id: 'need', type: 'Need', col: 0, row: 0 },
+      { id: 'uc', type: 'UseCase', col: 1, row: 0 },
+      { id: 'wf', type: 'OperationalWorkflow', col: 2, row: 0 },
+      { id: 'sc', type: 'OperativeScenario', col: 3, row: 0 },
+      { id: 'req', type: 'Requirement', col: 0, row: 1 },
+      { id: 'sf', type: 'SystemFunction', col: 1, row: 1 },
+      { id: 'ff', type: 'FunctionalFlow', col: 2, row: 1 },
+      { id: 'hz', type: 'Hazard', col: 0, row: 2 },
+      { id: 'lc', type: 'LogicalComponent', col: 1, row: 2 },
+      { id: 'sm', type: 'SoftwareModule', col: 2, row: 2 },
+      { id: 'rc', type: 'RiskControlMeasure', col: 1, row: 3 },
+      { id: 'vc', type: 'VerificationCase', col: 2, row: 3 },
+      { id: 'ev', type: 'MemoEvidence', col: 3, row: 3 },
+    ],
+    edges: [
+      { from: 'need', to: 'uc', rel: 'Motivates' },
+      { from: 'wf', to: 'uc', rel: 'RealizesUseCase' },
+      { from: 'wf', to: 'sc', contains: true },
+      { from: 'need', to: 'req', rel: 'DerivesFrom' },
+      { from: 'hz', to: 'req', rel: 'DerivesFrom' },
+      { from: 'req', to: 'sf', native: 'satisfy' },
+      { from: 'ff', to: 'sf', ...stepOf },
+      { from: 'sf', to: 'lc', native: 'allocate' },
+      { from: 'lc', to: 'sm', rel: 'RealizedBy' },
+      { from: 'rc', to: 'hz', rel: 'Mitigates' },
+      { from: 'rc', to: 'sm', rel: 'ControlImplementedBy' },
+      { from: 'vc', to: 'rc', native: 'subject' },
+      { from: 'vc', to: 'ev', rel: 'ProducesEvidence' },
+    ],
+  },
+  {
+    id: 'function-relationships',
+    title: 'What a system function connects to',
+    nodes: [
+      { id: 'req', type: 'Requirement', col: 0, row: 0 },
+      { id: 'ff', type: 'FunctionalFlow', col: 1, row: 0 },
+      { id: 'sf', type: 'SystemFunction', col: 1, row: 1 },
+      { id: 'lc', type: 'LogicalComponent', col: 2, row: 1 },
+      { id: 'fm', type: 'FailureMode', col: 2, row: 2 },
+      { id: 'vc', type: 'VerificationCase', col: 0, row: 2 },
+      { id: 'ev', type: 'MemoEvidence', col: 1, row: 2 },
+    ],
+    edges: [
+      { from: 'req', to: 'sf', native: 'satisfy' },
+      { from: 'ff', to: 'sf', ...stepOf },
+      { from: 'sf', to: 'lc', native: 'allocate' },
+      { from: 'lc', to: 'fm', rel: 'HasFailureMode' },
+      { from: 'vc', to: 'sf', native: 'subject' },
+      { from: 'vc', to: 'ev', rel: 'ProducesEvidence' },
+    ],
+  },
+  {
+    id: 'assurance-relationships',
+    title: 'Assurance reaches into the architecture',
+    colWidth: 370,
+    nodes: [
+      { id: 'req', type: 'Requirement', col: 0, row: 0 },
+      { id: 'lc', type: 'LogicalComponent', col: 2, row: 0 },
+      { id: 'rc', type: 'RiskControlMeasure', col: 0, row: 1 },
+      { id: 'sm', type: 'SoftwareModule', col: 2, row: 1 },
+      { id: 'cm', type: 'CyberMitigation', col: 0, row: 2 },
+      { id: 'sc', type: 'SoftwareComponent', col: 2, row: 2 },
+      { id: 'val', type: 'ValidationCase', col: 0, row: 3 },
+      { id: 'uev', type: 'MemoEvidence', col: 1, row: 3 },
+      { id: 'act', type: 'OperativeAction', col: 2, row: 3 },
+      { id: 'vc', type: 'VerificationCase', col: 0, row: 4 },
+      { id: 'sf', type: 'SystemFunction', col: 2, row: 4 },
+    ],
+    edges: [
+      { from: 'req', to: 'lc', native: 'satisfy' },
+      { from: 'rc', to: 'sm', rel: 'ControlImplementedBy' },
+      { from: 'cm', to: 'sc', rel: 'ControlImplementedBy' },
+      { from: 'val', to: 'uev', rel: 'ProducesEvidence' },
+      { from: 'uev', to: 'act', rel: 'EvaluatesTask' },
+      { from: 'vc', to: 'sf', native: 'subject' },
+    ],
+  },
+  {
+    id: 'semantic-thread',
+    title: 'The model records the claim',
+    colWidth: 370,
+    nodes: [
+      { id: 'hz', type: 'Hazard', col: 0, row: 0 },
+      { id: 'req', type: 'Requirement', col: 1, row: 0 },
+      { id: 'sm', type: 'SoftwareModule', col: 2, row: 0 },
+      { id: 'rc', type: 'RiskControlMeasure', col: 0, row: 1 },
+      { id: 'vc', type: 'VerificationCase', col: 1, row: 1 },
+      { id: 'ev', type: 'MemoEvidence', col: 2, row: 1 },
+    ],
+    edges: [
+      { from: 'hz', to: 'req', rel: 'DerivesFrom' },
+      { from: 'req', to: 'sm', native: 'satisfy' },
+      { from: 'rc', to: 'hz', rel: 'Mitigates' },
+      { from: 'rc', to: 'sm', rel: 'ControlImplementedBy' },
+      { from: 'vc', to: 'rc', native: 'subject' },
+      { from: 'vc', to: 'ev', rel: 'ProducesEvidence' },
+    ],
+  },
+];
+
+// Cards for the reference area pages, drawn from the source like the overview
+// cards: every element definition the area's folder declares, by subfolder.
+export const REFERENCE_CARDS = [
+  {
+    id: 'core',
+    name: 'Core',
+    question: 'The shared foundations every other area builds on',
+    folder: 'core',
+    area: 'core',
+    abstract: true,
+    depth: 1,
+  },
+  {
+    id: 'methodology',
+    name: 'Methodology',
+    question: 'How a project selects and governs its use of the ontology',
+    folder: 'methodology',
+    area: 'methodology',
+    depth: 1,
+  },
+  {
+    id: 'viewpoints',
+    name: 'Viewpoints',
+    question: 'Who has a concern, and which views select model content for it',
+    folder: 'viewpoints',
+    area: 'core',
+    kinds: ['view def', 'viewpoint def'],
+    depth: 1,
   },
 ];

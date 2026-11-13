@@ -2,12 +2,13 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a breaking change to the ontology raises the minor number; any other release raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
-## Unreleased
+## 0.21.0
 
-Breaking: the next release raises the minor number.
+Breaking.
 
 - **Removed.** `FunctionalAction`, `ActivityAction`, `ActivityFlow` and `ActivityFlowKind`. A step of the functional layer is a function: a `SystemFunction` or `ComponentFunction`, and in a route a step of a `FunctionalFlow` that subsets the function it performs (`action step :> fnX;`). Control flow is a native `succession` and object flow a native `flow`. `ActivityAction`'s `actionKind` and `outputDescription` are already on every function, its `wcetMs` belongs on the `SoftwareComponent` that runs it, and its `safetyRelevant` is the function's `criticality`. A model that types an action by one of them stops compiling: `gpca-pump` moved its infusion delivery steps onto its functions as chain FC-004.
 - **Added.** `CR-ONT-105`: a logical component may be the target of `realizes` only from another logical component. Logical to implementation is `allocation : RealizedBy`, logical component first.
+- **Documentation.** The first-model tutorial is rebuilt from a model that compiles, and each section says what `memo validate` reports. The ontology overview, layer figures, relationship figures and reference-area cards are generated from `src/` and checked against it, so they name only definitions and relationships the ontology declares.
 
 ## 0.20.3
 

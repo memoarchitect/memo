@@ -7,13 +7,13 @@ someone on this page.
 
 ## Stakeholders in the model
 
-MEMO records the reviewing audience on the viewpoint (`audience`), and the
+MEMO records the reviewing audience on the viewpoint (`memoStakeholders`), and the
 people and roles *in the clinical world* as model elements. The two are
 different populations and it is worth keeping them apart.
 
 ### Reviewing audience
 
-These are the `AudienceKind` values the GPCA viewpoints declare. Each one is a
+These are the stakeholders the GPCA viewpoints name, each a `MemoStakeholder` definition such as `SystemArchitect`. Each one is a
 role that reads the model and signs something.
 
 | Audience | Reads GPCA through |

@@ -23,29 +23,33 @@
 <g opacity="1">
   <rect x="40" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="40" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareModule</text>
+  <text x="145" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">spo2Item</text>
+  <text x="145" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareModule</text>
   <rect x="206" y="210" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="226" y="223" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="410" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="410" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="515" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="515" y="265" text-anchor="middle" font-size="13.5" font-weight="700" fill="#123b6b">SoftwareDeploymentUnit</text>
+  <text x="515" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="515" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">firmwareImage</text>
+  <text x="515" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareDeploymentUnit</text>
   <rect x="576" y="210" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="596" y="223" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="410" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="410" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="515" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="515" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">ProcessingNode</text>
+  <text x="515" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="515" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">mcu</text>
+  <text x="515" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: ProcessingNode</text>
   <rect x="576" y="360" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="596" y="373" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="780" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="780" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="885" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="885" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareAssembly</text>
+  <text x="885" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="885" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">mainBoard</text>
+  <text x="885" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: HardwareAssembly</text>
   <rect x="946" y="360" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="966" y="373" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <rect x="40" y="922" width="16" height="16" rx="3" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="2"/><text x="64" y="935" font-size="13" fill="#2c3640">Architecture</text>

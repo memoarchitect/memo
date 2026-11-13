@@ -20,48 +20,49 @@ of project phases or a substitute for the package source.
 ## Operational
 
 The operational perspective answers **why, for whom, and in what context**.
+[Operational](../ontology/operational.md) teaches it line by line.
 
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
-| `Actor`, `User`, `Stakeholder` | Who has a goal or responsibility | `Initiates`, `Performs`, `HasConcern` |
-| `IntendedUse`, `ReasonablyForeseeableMisuse`, `UseContext`, `Need` (needKind: stakeholder) | Purpose, foreseeable misuse, setting, and desired outcome | `Motivates`, `DerivesFrom` |
-| `UseCase` with `UseCaseKind` | A clinical, service, manufacturing, or development goal | `Motivates`, `Supports`, `Validates` |
-| `OperationalWorkflow` | Reusable organization of work | `Supports`, `StepPrecedes` |
-| `OperativeScenario` | A nominal, alternate, or exception path | `Selects`, `Realizes` |
-| `OperativeAction` | Work performed along a path | `Performs`, `Enables`; optional extensions may add resource details |
+| `User`, `MemoActor`, `OperationalEntity` | Who uses the device; another person or thing in the setting | native `actor` on a use case; `perform` |
+| `IntendedUse`, `ReasonablyForeseeableMisuse`, `UseContext`, `Need` | Purpose, foreseeable misuse, setting, and what users need | `Motivates`, `HeldBy`, `DerivesFrom` |
+| `ClinicalUseCase`, `SystemUseCase`, with `useCaseKind` | A care, service, manufacturing, or development goal | native `actor` and `subject`; `Motivates`, `Validates` |
+| `ClinicalWorkflow`, `SystemWorkflow` | Reusable organization of work | `RealizesUseCase` |
+| `OperativeScenario` (`scenarioKind`: nominal, alternate) | One path through a workflow, nested in it | `#refinement` to its use case; native `perform` and `first … then` |
+| `OperativeAction` | Work performed along a path; a critical task is one whose `criticality` is high | native `perform` of a system function; `CommitsUseError`, `Validates` |
 
-**Core split:** `UseCase → OperationalWorkflow → OperativeScenario →
-OperativeAction → action flow → SystemFunction`. A scenario owns the
-activity and action flow for its selected path; it is not a copy of the
-workflow.
+**Core split:** `UseCase → workflow → OperativeScenario → OperativeAction →
+SystemFunction`. A scenario owns the activity and action flow for its path; it
+is not a copy of the workflow.
 
 ## Use-case kinds
 
-`UseCase` stores the goal statement, trigger, preconditions, outcomes,
-participants, context, supporting system, and source needs. `UseCaseKind`
-records the domain of the goal:
+A use case stores the goal statement, trigger, preconditions, outcomes,
+participants, context, and supporting system. `useCaseKind` records the domain
+of the goal:
 
 | `useCaseKind` | Use it when the goal concerns… | Example |
 | --- | --- | --- |
-| `clinical` | patient care or clinical operation | Deliver patient-controlled analgesia |
+| `care` | patient care or clinical operation | Deliver patient-controlled analgesia |
 | `service` | installation, maintenance, repair, calibration, or support | Calibrate a pressure sensor |
 | `manufacturing` | producing, assembling, inspecting, packaging, or releasing a product | Inspect a sterile barrier seal |
 | `development` | design, analysis, verification, change, or release work | Verify an alarm latency requirement |
 
-Each goal remains a `UseCase`; the enumeration value records its domain.
+The goal stays one use case; the value records its domain.
 
 ## Functional
 
 The functional perspective answers **what the system must do**, independently
 of a software, electronics, or mechanical choice.
+[Functional](../ontology/functional.md) teaches it line by line.
 
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
-| `SystemFunction` | A technology-independent responsibility | `Enables`, `AllocatedTo`, `SatisfiedBy`, `VerifiedBy` |
-| `FunctionalFlow` | Reusable organization and order of functions; a step is `action <step> :> <function>` nested in the flow | `perform`, `flow`, `succession` |
-| `FunctionalFlow` | The function path that carries out one operational scenario | `Realizes` |
-| `FunctionalExchange` | Typed command, measurement, alarm, material, or energy transfer | a named `flow` from one function's `out` parameter to another's `in`; `allocate` to a component exchange |
-| `SystemAction` | Executable behavior realizing a function | `Performs` |
+| `SystemFunction` | A technology-independent responsibility of the system | native `allocate`, `satisfy`, and a verification case's `subject` |
+| `ComponentFunction` | The responsibility of exactly one component | native `allocate` to that component |
+| `FunctionalFlow` | A reusable route through functions; a step is `action <step> :> <function>` nested in the flow | native `flow` and `first … then` |
+| `FunctionalTransfer` | Typed command, measurement, alarm, material, or energy transfer | a named `flow` from one function's `out` parameter to another's `in` |
+| `StateMachine`, `ModeConfiguration` | Modes and the selection made at a choice point | native `state` and `transition` |
 
 A function can be allocated to software, hardware, a mechanical part, or a
 human procedure. Do not create a software component merely because a function
@@ -70,31 +71,34 @@ exists.
 ## Logical
 
 The logical perspective answers **how the solution is organized while still
-technology-independent**.
+technology-independent**. [Logical](../ontology/logical.md) teaches it line by
+line.
 
 | Element | Use it to record | Key relationships |
 | --- | --- | --- |
-| `LogicalComponent` (componentRole: system, subsystem) | Responsibility structure | `Composes`, `AllocatedTo`, `Realizes` |
-| `LogicalComponent` (componentRole: channel) | Primary, redundant, monitor, watchdog, interlock, or protection role via `channelRole` | `IndependentOf`, allocation and exchange links |
-| `LogicalComponent` (componentRole: controlElement, dataStore, userInterface) | Control, storage, and operator responsibilities | allocation and interface links |
-| `Interface`, `LogicalPort`, `LogicalInterface` | Named exchange boundaries | `Realizes`, typed exchanges |
-| `IsolationBoundary`, `FaultContainmentRegion` | Required separation and containment | `IndependentOf`, safety/risk links |
+| `System`, `Subsystem`, `LogicalComponent` | Responsibility structure | nesting; native `allocate` from functions |
+| `LogicalComponent` with `channelRole` | Primary, redundant, monitor, watchdog, interlock, or protection role | `IndependentOf` with its basis |
+| `LogicalComponent` with `componentRole` | Control, storage, user-interface, or external-system responsibility | allocation and interface links |
+| `LogicalPort`, `ComponentExchange` | Where components meet, and the exchange between two ports | `interface … connect`, native `flow` |
+| `IsolationBoundary`, `FaultContainmentRegion` | Required separation and containment | not yet relatable to what they enclose; see [Logical](../ontology/logical.md) |
 
-Use `AllocatedTo` to say who is responsible for a function. Use an
-`IndependentOf` relationship with its stated basis—not duplicated components—to
-make a redundancy or independence claim.
+Use native `allocate` to say which component is responsible for a function.
+Use an `IndependentOf` relationship with its stated basis, not duplicated
+components, to make a redundancy or independence claim.
 
 ## Implementation
 
 The implementation perspective answers **how the design is realized**.
+[Implementation](../ontology/implementation.md) and
+[Realization](../ontology/realization.md) teach it line by line.
 
 | Element group | Examples | Key relationships |
 | --- | --- | --- |
-| Software module structure | `SoftwareSystem`, `SoftwareComponent`, `SoftwareModule`, `SBOMEntry` | `Realizes`, `BuildsInto` |
-| Runtime structure | `SoftwareComponent`, `Process`, `Thread`, `Service`, `RuntimePartition` | `HostedBy`, timing and interaction links |
-| Deployment | `SoftwareDeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment` | `DeploysTo`, `HostedBy` |
-| Hardware and physical realization | `HardwareAssembly`, `Sensor`, `Actuator`, `PhysicalAssembly` | `Realizes`, `Composes` |
-| Concrete boundaries | `PhysicalPort`, `Interface` (interfaceKind: hardware, software) | `Realizes`, `ExchangesWith` |
+| Software structure | `SoftwareSystem`, `SoftwareModule`, `SOUPSoftwareModule`, `SoftwareBillOfMaterials`, `SBOMEntry` | `RealizedBy` from a logical component; `BuildsInto`; `DependsOnSoup` |
+| Runtime structure | `SoftwareComponent` with `runtimeKind` (process, thread, task, service, container, partition…) | `#refinement` to the module it runs; `MemoryBinding` |
+| Deployment | `SoftwareDeploymentUnit`, `ProcessingNode`, `RuntimeEnvironment`, `MemoryDevice` | `DeploysTo`, `HostedBy`, `ProvidesEnvironment` |
+| Hardware | `HardwareAssembly`, `HardwareComponent`, `Sensor`, `Actuator` | `RealizedBy` from a logical component; nesting |
+| Physical boundaries | `PhysicalPort`, `PhysicalInterface` | `interface … connect`, native `flow`, `ConnectionBinding` |
 
 An IBD shows parts, ports, and directed exchanges. A BDD shows definitions and
 containment. Use behavior views for actions and state.
@@ -107,11 +111,11 @@ elements.
 
 | Discipline | Core elements | Principal relationships |
 | --- | --- | --- |
-| Requirements | `Need` (needKind: stakeholder…), `Requirement` (requirementKind: system, software, hardware) | `DerivesFrom`, `SatisfiedBy`, `VerifiedBy` |
-| Safety and risk | `SafetyRelatedCharacteristic`, `HazardCause`, `Hazard`, `SequenceOfEvents`, `HazardousSituation`, `Harm`, `Risk`, `RiskControlMeasure`, `ResidualRisk`, `Benefit`, FMEA/FTA elements | `Mitigates`, risk-chain links |
-| Cybersecurity | `CybersecurityAsset`, `Threat`, `Vulnerability`, `CyberMitigation` | asset/threat/vulnerability/mitigation links |
-| Human factors | `CriticalTask`, `UseError`, UI and usability elements | `CommitsUseError`, `Causes` |
-| Verification and validation | `VerificationCase`, `ValidationCase`, `Evidence` | `VerifiedBy`, `Validates`, `ProducesEvidence` |
+| Requirements | `Need` (with `needKind`), `Requirement` (with `requirementType`: system, software, hardware, ifu) | `DerivesFrom`, `HeldBy`, native `satisfy` |
+| Safety and risk | `SafetyRelatedCharacteristic`, `HazardCause`, `Hazard`, `SequenceOfEvents`, `HazardousSituation`, `Harm`, `Risk`, `RiskControlMeasure`, `ResidualRisk`, `Benefit`, FMEA/FTA elements | `TracesRisk`, `Mitigates`, `ControlImplementedBy`, `HasFailureMode` |
+| Cybersecurity | `CybersecurityAsset`, `Threat`, `Vulnerability`, `CyberMitigation` | `ThreatenedBy`, `Exploits`, `Mitigates` |
+| Human factors | `UseError`, with the `OperativeAction` and `UIElement` it involves | `CommitsUseError`, `ErrorAtElement`, `Causes` |
+| Verification and validation | `VerificationCase`, `ValidationCase`, `MemoEvidence` | the case's native `subject`, `Validates`, `ProducesEvidence` |
 
 FMEA analyzes how a function or component can fail and identifies hazards. It
 does not turn a hazard into a successor of the function. Unit tests verify
@@ -121,15 +125,15 @@ implemented units; system and validation cases verify claims and use context.
 
 | From | Relationship | To | Review question |
 | --- | --- | --- | --- |
-| `Need` (needKind: stakeholder) | `Motivates` | `UseCase` | Why does this goal matter? |
-| `OperationalWorkflow` | `Supports` | `UseCase` | How is work organized? |
-| `OperativeScenario` | `Selects` | `OperationalWorkflow` | Which path is considered? |
-| `FunctionalFlow` | `Realizes` | `OperativeScenario` | What functional path realizes it? |
-| `SystemFunction` | `Enables` | `OperativeAction` | What enables the work? |
-| `SystemFunction` | `AllocatedTo` | logical or implementation element | Who is responsible? |
-| software / physical element | `Realizes` / `Realizes` | `LogicalComponent` | How is it realized? |
-| requirement or control | `VerifiedBy` | `VerificationCase` | How is it checked? |
-| `VerificationCase` | `ProducesEvidence` | `Evidence` | What result supports it? |
+| `Need` | `Motivates` | use case | Why does this goal matter? |
+| workflow | `RealizesUseCase` | use case | How is work organized? |
+| `OperativeScenario` | nested in, and `#refinement` to | workflow, use case | Which path is considered? |
+| `OperativeAction` | native `perform` | `SystemFunction` | What carries out the work? |
+| function | native `allocate` | `LogicalComponent` | Who is responsible? |
+| `LogicalComponent` | `RealizedBy` | software or hardware | How is it realized? |
+| `Requirement` | native `satisfy … by` | design element | What meets it? |
+| `VerificationCase` | native `subject` | requirement, function, or component | How is it checked? |
+| `VerificationCase` | `ProducesEvidence` | `MemoEvidence` | What result supports it? |
 
 The backbone is a graph: one element can participate in several paths. See
 [Elements](../modeling/elements.md) and [Relationships](../modeling/relationships.md)

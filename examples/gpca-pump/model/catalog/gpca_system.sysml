@@ -16,6 +16,7 @@ package memo_examples_gpca_pump_gpca_system {
     // one's output is the next one's input. A step's parameters redefine its
     // function's in declaration order, whatever their names, so each narrows
     // the function's parameter at that position to this step's item.
+    // --8<-- [start:patient-bolus-chain]
     action fcPatientBolus : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-001"; :>> label = "Patient bolus chain"; }
         attribute :>> flowCategory = FunctionalFlowKind::nominal;
@@ -49,6 +50,7 @@ package memo_examples_gpca_pump_gpca_system {
         first fcsBolusActuate then fcsBolusLog;
         flow from fcsBolusCommand.flowCommand to fcsBolusActuate.flowCommand;
     }
+    // --8<-- [end:patient-bolus-chain]
 
     action fcAlarmStop : FunctionalFlow {
         @MemoIdentity { :>> providedId = "FC-002"; :>> label = "Alarm detection to safe state chain"; }

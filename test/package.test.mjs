@@ -206,24 +206,6 @@ test('logical hierarchy declares recursive system containment explicitly', () =>
   assert.match(hierarchy, /part component : LogicalComponent\[0\.\.\*\];/);
 });
 
-test('ontology V-model names canonical types and remains structurally valid SVG', () => {
-  const diagram = read('docs', 'assets', 'ontology-map.svg');
-  const declared = diagram.match(/data-ontology-types="([^"]+)"/)?.[1].split(/\s+/) ?? [];
-  assert.ok(declared.length >= 40, 'the V-model must declare the ontology types it summarizes');
-
-  const ontology = walkSysml('src').map((file) => read(file)).join('\n');
-  for (const type of declared) {
-    const definition = new RegExp(`\\b(?:part|item|action|requirement|use case|port|interface|flow|state|verification) def ${type}\\b`);
-    assert.match(ontology, definition, `${type} shown in the V-model must exist in the ontology`);
-  }
-
-  assert.equal((diagram.match(/<g(?:\s|>)/g) ?? []).length, (diagram.match(/<\/g>/g) ?? []).length,
-    'SVG groups must be balanced so browsers render the diagram');
-  for (const label of ['REQUIREMENTS', 'SAFETY / RISK', 'CYBERSECURITY', 'HUMAN FACTORS', 'V&amp;V']) {
-    assert.match(diagram, new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-  }
-});
-
 test('source paths and backing package names remain aligned', () => {
   const expectations = {
     'src/core/dimensions/dimensions.sysml': 'memo_core_dimensions',

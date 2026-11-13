@@ -13,19 +13,24 @@ Use this example to see that realization is a graph, not a pipeline.
 
 ## Where this sits in MEMO
 
-Every tutorial is one slice of the same structure. This example populates these layers:
+Every tutorial is one slice of the same structure. This example uses these definitions, by the part of the ontology they come from:
 
-| Layer | Element types it uses | Reference |
+| Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
 | Operational | `OperativeAction` | [Operational](../ontology/operational.md) |
-| Functional | `SystemFunction` | [Functional](../ontology/functional.md) |
-| Logical | `LogicalComponent` | [Logical](../ontology/logical.md) |
-| Implementation and realization | `MechanicalPart`, `SoftwareModule` | [Implementation and realization](../ontology/implementation.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
+| Functional | `FunctionalFlow`, `SystemFunction` | [Functional](../ontology/functional.md) |
+| Logical | `LogicalComponent`, `System` | [Logical](../ontology/logical.md) |
+| Implementation | `MechanicalPart`, `SoftwareModule` | [Implementation](../ontology/implementation.md) |
+| Requirements | `Need`, `Requirement` | [Requirements](../ontology/requirements.md) |
+| Verification and validation | `ValidationCase`, `VerificationCase` | [Verification and validation](../ontology/verification-validation.md) |
+| Core | `MemoEvidence` | [Core](../reference/areas/core.md) |
+| Views and methodology | `MemoDiagramView`, `ModelMethodBinding` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `AllocatedTo`, `Enables`, `Realizes` — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
+**MEMO relationships it uses:** `DerivesFrom`, `ProducesEvidence`, `RealizedBy`, `Validates`. See [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
-**Layers it does not populate:** assurance. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+**Native SysML relationships it uses:** `subject`, `perform`, `allocate`, `satisfy`, `expose`.
+
+**Architecture layers it does not populate:** realization. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md).
 

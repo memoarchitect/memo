@@ -88,106 +88,121 @@
 <g opacity="0.62">
   <rect x="40" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="40" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareModule</text>
+  <text x="145" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">spo2Item</text>
+  <text x="145" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareModule</text>
   
 </g>
 <g opacity="0.62">
   <rect x="410" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="410" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="515" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="515" y="265" text-anchor="middle" font-size="13.5" font-weight="700" fill="#123b6b">SoftwareDeploymentUnit</text>
+  <text x="515" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="515" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">firmwareImage</text>
+  <text x="515" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareDeploymentUnit</text>
   
 </g>
 <g opacity="0.62">
   <rect x="410" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="410" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="515" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="515" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">ProcessingNode</text>
+  <text x="515" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="515" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">mcu</text>
+  <text x="515" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: ProcessingNode</text>
   
 </g>
 <g opacity="0.62">
   <rect x="780" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="780" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="885" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="885" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareAssembly</text>
+  <text x="885" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="885" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">mainBoard</text>
+  <text x="885" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: HardwareAssembly</text>
   
 </g>
 <g opacity="0.62">
   <rect x="40" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="40" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="415" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">RuntimeEnvironment</text>
+  <text x="145" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">kernelRuntime</text>
+  <text x="145" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: RuntimeEnvironment</text>
   
 </g>
 <g opacity="0.62">
   <rect x="40" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="40" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">MemoryDevice</text>
+  <text x="145" y="537" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="557" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">sram</text>
+  <text x="145" y="574" text-anchor="middle" font-size="12.5" fill="#123b6b">: MemoryDevice</text>
   
 </g>
 <g opacity="0.62">
   <rect x="40" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="40" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareComponent</text>
+  <text x="145" y="687" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="707" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">measurementTask</text>
+  <text x="145" y="724" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareComponent</text>
   
 </g>
 <g opacity="0.62">
   <rect x="410" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="410" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="515" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="515" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">EndToEndFlow</text>
+  <text x="515" y="87" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="515" y="107" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">e2eReading</text>
+  <text x="515" y="124" text-anchor="middle" font-size="12.5" fill="#123b6b">: EndToEndFlow</text>
   
 </g>
 <g opacity="0.62">
   <rect x="780" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="780" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="885" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="885" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">FlowSpecification</text>
+  <text x="885" y="87" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="885" y="107" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">fsSensing</text>
+  <text x="885" y="124" text-anchor="middle" font-size="12.5" fill="#123b6b">: FlowSpecification</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1150" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1150" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1255" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«port def»</text>
-  <text x="1255" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">LogicalPort</text>
+  <text x="1255" y="87" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«port»</text>
+  <text x="1255" y="107" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">signalOut</text>
+  <text x="1255" y="124" text-anchor="middle" font-size="12.5" fill="#123b6b">: LogicalPort</text>
   
 </g>
 <g opacity="1">
   <rect x="410" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="410" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="515" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«port def»</text>
-  <text x="515" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">PhysicalPort (in)</text>
+  <text x="515" y="537" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«port»</text>
+  <text x="515" y="557" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">spiIn</text>
+  <text x="515" y="574" text-anchor="middle" font-size="12.5" fill="#123b6b">: PhysicalPort</text>
   <rect x="576" y="510" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="596" y="523" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="1150" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="1150" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1255" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="1255" y="415" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">ElectronicComponent</text>
+  <text x="1255" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1255" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">frontEnd</text>
+  <text x="1255" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: ElectronicComponent</text>
   <rect x="1316" y="360" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="1336" y="373" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="1150" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="1150" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1255" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«port def»</text>
-  <text x="1255" y="565" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">PhysicalPort (out)</text>
+  <text x="1255" y="537" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«port»</text>
+  <text x="1255" y="557" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">spiOut</text>
+  <text x="1255" y="574" text-anchor="middle" font-size="12.5" fill="#123b6b">: PhysicalPort</text>
   <rect x="1316" y="510" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="1336" y="523" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="780" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="780" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="885" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«interface def»</text>
-  <text x="885" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">PhysicalInterface</text>
+  <text x="885" y="687" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«interface»</text>
+  <text x="885" y="707" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">spiLink</text>
+  <text x="885" y="724" text-anchor="middle" font-size="12.5" fill="#123b6b">: PhysicalInterface</text>
   <rect x="946" y="660" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="966" y="673" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="780" y="820" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="780" y="820" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="885" y="843" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="885" y="865" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareComponent</text>
+  <text x="885" y="837" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="885" y="857" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">spiTraces</text>
+  <text x="885" y="874" text-anchor="middle" font-size="12.5" fill="#123b6b">: HardwareComponent</text>
   <rect x="946" y="810" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="966" y="823" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <rect x="40" y="922" width="16" height="16" rx="3" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="2"/><text x="64" y="935" font-size="13" fill="#2c3640">Architecture</text>

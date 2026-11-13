@@ -7,21 +7,46 @@ provides the setup steps.
 You will create one file: `temperature_alarm.sysml`. Start with the small file
 below, then add each following snippet immediately above the final `}` of
 `package temperature_alarm`. The final section shows the whole completed file.
+Every stage of it has been compiled and run through `memo validate`, and each
+section says what `memo validate` reports at that point.
 
 ## What you will build
 
 You will build one connected engineering slice for a temperature alarm. The
-slice starts with the clinician’s use-case goal, follows the clinical workflow
-into an operational scenario, and identifies the functional flow that the
-system must perform. From that function, you will create an EARS requirement,
-allocate software and hardware, identify a risk control, and define a
-verification case.
+slice starts with the clinician's need, follows the clinical workflow into an
+operational scenario, and identifies the functions the system must perform.
+From those functions you will write an EARS requirement, assign the work to a
+logical component realized in software and hardware, record a hazard and the
+control that reduces it, and define a verification case.
 
-![Function-anchored model slice for the temperature alarm](../assets/temperature-alarm-argument.svg)
+```mermaid
+flowchart LR
+  need["maintainSafePatientTemperature<br/><small>Need</small>"]
+  uc["keepTemperatureSafe<br/><small>ClinicalUseCase</small>"]
+  wf["temperatureCare<br/><small>ClinicalWorkflow</small>"]
+  req["alarmAboveLimit<br/><small>Requirement</small>"]
+  fn["evaluateTemperature<br/><small>SystemFunction</small>"]
+  lc["alarmChannel<br/><small>LogicalComponent</small>"]
+  sw["evaluationModule<br/><small>SoftwareModule</small>"]
+  hz["missedHighTemperature<br/><small>Hazard</small>"]
+  rc["independentAlarmCheck<br/><small>RiskControlMeasure</small>"]
+  vc["highTemperatureAlarmTest<br/><small>VerificationCase</small>"]
+  need -->|Motivates| uc
+  wf -->|RealizesUseCase| uc
+  need -->|DerivesFrom| req
+  hz -->|DerivesFrom| req
+  req -->|satisfy … by| fn
+  fn -->|allocate| lc
+  lc -->|RealizedBy| sw
+  rc -->|Mitigates| hz
+  rc -->|ControlImplementedBy| sw
+  vc -->|subject| fn
+  vc -->|subject| rc
+```
 
-The diagram is the destination for this tutorial. Read it from left to right to
-understand the rationale and response; use the central system function as the
-anchor when you review requirements, architecture, risk, and tests.
+The diagram is the destination. Read it from the need on the left to the test
+on the right, and use the system function in the middle as the anchor when you
+review requirements, architecture, risk, and tests.
 
 <div class="memo-tutorial-overview" markdown>
   <div class="memo-tutorial-copy">
@@ -80,124 +105,137 @@ model becomes more detailed.
 
 ## 1. Clinical need
 
-Create `temperature_alarm.sysml` with this initial content. The `Actor` names
-the person in the scenario; the `Need` (needKind: stakeholder) records that
-person’s desired clinical outcome.
+Create `temperature_alarm.sysml` with this content.
 
 ```sysml
 // temperature_alarm.sysml
 package temperature_alarm {
-    // Import the public MEMO library surface once for this package.
     private import memo::*;
 
-    // The person who relies on the device in this scenario.
-    part clinician : User {
-        attribute :>> id = "ACT-001";
-        attribute :>> actorKind = ActorKind::clinician;
+    part def TemperatureAlarm specializes System {
+        attribute :>> systemBoundaryDescription = "A bedside temperature alarm: the probe, the firmware, and the audible alert.";
     }
 
-    // The clinician's clinical goal for the monitored patient.
-    requirement maintainSafePatientTemperature : Need {
-        attribute :>> id = "NEED-001";
-        attribute :>> needKind = NeedKind::stakeholder;
-        doc /* The clinician needs to maintain the patient's temperature within a safe range. */
+    part clinician : User {
+        attribute :>> actorKind = ActorKind::clinician;
     }
+    requirement maintainSafePatientTemperature : Need {
+        attribute :>> needKind = NeedKind::clinicalUser;
+        doc /* The clinician needs to keep the patient's temperature within a safe range. */
+    }
+    connection : HeldBy connect maintainSafePatientTemperature to clinician;
 }
 ```
 
-The need provides the rationale for the model. It uses clinical language that
-people can review together before translating it into a measurable system claim.
+- `part def TemperatureAlarm specializes System` declares the device the model
+  is about. Everything else in the file is linked back to it.
+- `clinician` is a `User`: a person who uses the device.
+- The `Need` records that person's desired clinical outcome in clinical
+  language, before any of it becomes a measurable system claim. `needKind`
+  says whose need it is, and `HeldBy` names who holds it.
 
-## 2. Workflow and operational scenario
+Every element has a plain name and nothing else. MEMO shows that name wherever
+the element appears. If your project gives elements identifiers such as
+`NEED-001`, add them later with `@MemoIdentity { :>> providedId = "NEED-001"; }`
+inside the element; nothing requires it.
 
-Add this snippet above the closing `}`. The activities form a simple operational
-workflow; the scenario records the event that makes the workflow relevant.
+`memo validate` reports nothing at this point.
+
+## 2. Use case, workflow and scenario
+
+Add this snippet above the closing `}`.
 
 ```sysml
-    // The clinician observes the patient's current temperature.
-    action monitorTemperatureStatus : OperativeAction {
-        attribute :>> id = "OA-001";
+    use case keepTemperatureSafe : ClinicalUseCase {
+        attribute :>> useCaseKind = UseCaseKind::care;
+        attribute :>> goalStatement = "Keep the monitored patient's temperature within a safe range.";
+        subject supportingSystem;
+        actor clinicianActor = clinician;
     }
+    connection : Motivates connect maintainSafePatientTemperature to keepTemperatureSafe;
 
-    // The clinician responds when an alert is raised.
-    action respondToTemperatureAlert : OperativeAction {
-        attribute :>> id = "OA-002";
+    action monitorTemperatureStatus : OperativeAction;
+    action respondToTemperatureAlert : OperativeAction;
+    part temperatureCare : ClinicalWorkflow {
+        action highTemperatureScenario : OperativeScenario {
+            attribute :>> scenarioKind = ScenarioKind::nominal;
+            attribute :>> pathSummary = "The clinician observes status and responds to a high-temperature alert.";
+            perform monitorTemperatureStatus;
+            perform respondToTemperatureAlert;
+            first monitorTemperatureStatus then respondToTemperatureAlert;
+        }
     }
-
-    // The operational event that frames this slice of work.
-    action highTemperatureScenario : OperativeScenario {
-        attribute :>> id = "OS-001";
-        attribute :>> scenarioKind = ScenarioKind::operative;
-        attribute :>> variantKind = ScenarioVariantKind::exception;
-        attribute :>> operationalCondition = OperationalConditionKind::normal;
-        attribute :>> pathSummary =
-            "The clinician observes status and responds to a high-temperature alert.";
-    }
-
-    // The workflow direction: observe status, then respond to the alert.
-    connection : Precedes
-        connect monitorTemperatureStatus to respondToTemperatureAlert;
+    connection : RealizesUseCase connect temperatureCare to keepTemperatureSafe;
 ```
 
-This workflow describes people and clinical work. It gives the next layer a
-clear source for the system behavior that must support the scenario.
+- The use case is the clinician's goal. The clinician is its native SysML
+  `actor`, and `Motivates` records that the need is the reason for it.
+- The two `OperativeAction`s are clinical work: observing the temperature and
+  responding to an alert.
+- The workflow `temperatureCare` organises that work, and `RealizesUseCase`
+  says which goal it serves. Its scenario is one path through it: it
+  `perform`s the two actions, and `first … then` gives their order.
 
-## 3. Functional flow
+This describes people and clinical work. It gives the next layer a clear source
+for the behaviour the system must provide. `memo validate` still reports
+nothing.
+
+## 3. Functions
 
 Add this snippet above the closing `}`. These functions are the anchor for the
 rest of the model: requirements specify them, architecture realizes them, risk
 analysis challenges them, and verification checks them.
 
 ```sysml
-    // Determines whether the measured temperature is inside the safe range.
-    part evaluateTemperature : SystemFunction {
-        attribute :>> id = "LF-001";
-    }
-
-    // Produces the system alert that supports the clinician's response.
-    part notifyClinician : SystemFunction {
-        attribute :>> id = "LF-002";
+    action evaluateTemperature : SystemFunction;
+    action notifyClinician : SystemFunction;
+    action alarmChain : FunctionalFlow {
+        action evaluate :> evaluateTemperature;
+        action notify :> notifyClinician;
+        first evaluate then notify;
     }
 ```
 
-The functional flow is **evaluate temperature → notify clinician**. It is
-independent of whether the final implementation uses a microcontroller, mobile
-application, display, buzzer, or network service.
+- A `SystemFunction` is a technology-independent responsibility. It is an
+  `action`, because a function is behaviour.
+- The `FunctionalFlow` `alarmChain` puts them in order: each step is a
+  function performed at one position (`action evaluate :> evaluateTemperature`),
+  and `first … then` orders the steps.
+
+The functions say nothing about whether the alarm is a microcontroller, a
+mobile app, a display or a buzzer.
+
+`memo validate` now warns twice with **CR-MED-022**: neither function is
+allocated to anything that carries it out yet. Section 5 does that.
 
 ## 4. Requirement
 
-The clinical goal explains why the model matters, and the functional flow says
-what behavior the system must provide. Now turn that behavior into a precise,
-testable system claim. This requirement is derived from the goal and satisfied
-by `evaluateTemperature`, which keeps the requirement connected to both its
-rationale and its functional response.
-
-Add this snippet above the closing `}`. It uses the **event-driven EARS** form:
-**When** a trigger occurs, **the system shall** provide a defined response.
+The need explains why the model matters, and the functions say what the system
+does. Now turn that into a precise, testable system claim. Add this snippet
+above the closing `}`. It uses the **event-driven EARS** form: **When** a
+trigger occurs, **the system shall** provide a defined response.
 
 ```sysml
-    // A testable EARS requirement extracted from the evaluation function.
     requirement alarmAboveLimit : Requirement {
-        attribute :>> id = "REQ-001";
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         doc /* When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
         attribute :>> obligation = ObligationKind::shall;
         attribute :>> conditionClause = "When the measured temperature exceeds 38.0 °C";
         attribute :>> systemResponse = "issue an audible alert within 2 seconds";
-        attribute :>> acceptanceCriteria =
-            "At 38.1 °C, an audible alert begins within 2 seconds.";
+        attribute :>> acceptanceCriteria = "At 38.1 °C, an audible alert begins within 2 seconds.";
     }
-
-    // Preserve the clinical rationale for this requirement.
-    connection : DerivesFrom
-        connect maintainSafePatientTemperature to alarmAboveLimit;
-
-    // The functional response that satisfies the system requirement.
-    connection : SatisfiedBy
-        connect alarmAboveLimit to evaluateTemperature;
+    connection : DerivesFrom connect maintainSafePatientTemperature to alarmAboveLimit;
+    satisfy alarmAboveLimit by evaluateTemperature;
 ```
+
+- `doc` is the requirement's text. The attributes after it record the same
+  sentence in its EARS parts, so a tool can check each part is present.
+- `DerivesFrom` records the clinical rationale: the requirement comes from
+  the need.
+- `satisfy alarmAboveLimit by evaluateTemperature` is SysML's own
+  relationship: the function is the design response that meets it.
 
 EARS creates a consistent sentence pattern. SOPHIST adds a quality check:
 state the condition, the system subject, the `shall` obligation, the response,
@@ -208,236 +246,257 @@ and an observable acceptance criterion. This requirement has all five.
   <div><span>SOPHIST check</span><strong>Condition + subject + shall + response + measurable acceptance criterion</strong></div>
 </div>
 
+`memo validate` still reports the two CR-MED-022 warnings from section 3.
+
 ## 5. Architecture and risk
 
-Add this snippet above the closing `}`. The two implementation elements are
-allocated from the functional flow. The hazard and risk control are also linked
-to the function that they concern.
+Add this snippet above the closing `}`. It assigns the work, says what builds
+it, and records what could go wrong.
 
 ```sysml
-    // The software component that implements temperature evaluation.
-    part temperatureEvaluationSoftware : SoftwareComponent {
-        attribute :>> id = "SW-001";
+    part alarmChannel : LogicalComponent {
+        attribute :>> responsibility = "Decide when the temperature is out of range and raise the alert";
     }
+    allocate evaluateTemperature to alarmChannel;
+    allocate notifyClinician to alarmChannel;
 
-    // The hardware assembly that provides the temperature measurement.
-    part temperatureSensorAssembly : HardwareAssembly {
-        attribute :>> id = "HW-001";
+    part alarmFirmware : SoftwareSystem {
+        attribute :>> safetyClass = SafetyClassKind::B;
+        part evaluationModule : SoftwareModule {
+            attribute :>> moduleKind = ModuleKind::unit;
+            attribute :>> safetyClass = SafetyClassKind::B;
+            attribute :>> responsibility = "Compare the measured temperature with the limit";
+        }
     }
+    part sensorProbe : HardwareAssembly {
+        attribute :>> responsibility = "Measure the patient's temperature";
+        part thermistor : Sensor {
+            attribute :>> measurand = "Skin temperature";
+            attribute :>> patientContact = true;
+            attribute :>> contactNature = "Intact skin";
+            attribute :>> contactDuration = "Prolonged, up to 30 days";
+        }
+    }
+    allocation : RealizedBy allocate alarmChannel to alarmFirmware.evaluationModule;
+    allocation : RealizedBy allocate alarmChannel to sensorProbe;
+    satisfy alarmAboveLimit by alarmFirmware.evaluationModule;
 
-    // A potential source of harm that must be considered.
     item missedHighTemperature : Hazard {
-        attribute :>> id = "HAZ-001";
+        attribute :>> hazardType = HazardTypeKind::informationError;
+        attribute :>> severity = SeverityKind::serious;
     }
-
-    // A distinct measure intended to reduce the missed-alert hazard.
-    item independentAlarmCheck : RiskControlMeasure {
-        attribute :>> id = "RC-001";
+    part independentAlarmCheck : RiskControlMeasure {
+        attribute :>> controlKind = RiskControlKind::alarm;
+        attribute :>> implementationKind = RiskControlImplementationKind::softwareDesign;
     }
-
-    // Allocate the evaluation function to its software realization.
-    connection : AllocatedTo
-        connect evaluateTemperature to temperatureEvaluationSoftware;
-
-    // Allocate the evaluation function to its sensing hardware.
-    connection : AllocatedTo
-        connect evaluateTemperature to temperatureSensorAssembly;
-
-    // State which control reduces this particular hazard.
-    connection : Mitigates {
+    connection : Mitigates connect independentAlarmCheck to missedHighTemperature {
         attribute :>> mitigationKind = MitigationKind::hazard;
-        connect independentAlarmCheck to missedHighTemperature;
     }
+    connection : ControlImplementedBy connect independentAlarmCheck to alarmFirmware.evaluationModule;
 
-    // State which function implements the risk-control behavior.
-    connection : ControlImplementedBy
-        connect independentAlarmCheck to evaluateTemperature;
+    item feverUnnoticed : HazardousSituation {
+        attribute :>> exposedPersons = "patient";
+        attribute :>> operatingCondition = "The patient's temperature is above the limit and no alert sounds.";
+    }
+    connection : TracesRisk connect missedHighTemperature to feverUnnoticed;
+    item heatInjury : Harm {
+        attribute :>> clinicalImpact = "Untreated fever or hyperthermia that needs clinical intervention.";
+    }
+    connection : LeadsToHarm connect feverUnnoticed to heatInjury;
+    connection : DerivesFrom connect missedHighTemperature to alarmAboveLimit;
 ```
 
-The function, hazard, and control are separate model elements because they
-answer separate review questions: what the system does, what can cause harm,
-and which measure reduces that concern.
+- **Responsibility.** Both functions are allocated, with SysML's own
+  `allocate`, to `alarmChannel`, a `LogicalComponent`: the part of the design
+  answerable for deciding and alerting, before any technology is chosen.
+- **Realization.** The channel is `RealizedBy` the firmware module that runs
+  the comparison and by the probe that measures. `safetyClass` is the IEC 62304
+  class of the software; `patientContact` and its details say the sensor
+  touches the patient. The module also satisfies the requirement.
+- **Risk.** The `Hazard` is what could cause harm; `TracesRisk` and
+  `LeadsToHarm` carry it to the hazardous situation and the harm. The
+  `RiskControlMeasure` `Mitigates` the hazard and is implemented by the module
+  (`ControlImplementedBy`). The hazard also drives the requirement
+  (`DerivesFrom`): the alarm exists because a missed fever can hurt.
 
-Before completing verification, show how the functional flow is realized in
-the internal block diagram. This focused design view presents parts, exchanges,
-and direction; the requirement and verification relationships remain connected
-in the underlying model.
+The function, hazard, and control are separate elements because they answer
+separate review questions: what the system does, what can cause harm, and which
+measure reduces it.
 
-![Internal block diagram for the temperature alarm](../assets/temperature-alarm-ibd.svg)
+The CR-MED-022 warnings are gone. `memo validate` now reports **CR-MED-003**:
+the risk control has not been verified yet, which ISO 14971 clause 7.2
+requires. Section 6 adds the test. It also warns **CR-MED-006**, which stays:
+see the note after the complete file.
 
 ## 6. Verification
 
-Add this snippet above the closing `}`. The verification case states the
-planned check and connects it to the requirement it evaluates.
+Add this snippet above the closing `}`.
 
 ```sysml
-    // The planned check and its observable pass condition.
-    part highTemperatureAlarmTest : VerificationCase {
-        attribute :>> id = "VER-001";
-        attribute :>> acceptanceCriteria =
-            "With a simulated temperature of 38.1 °C, an audible alert starts within 2 seconds.";
+    verification highTemperatureAlarmTest : VerificationCase {
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "With a simulated temperature of 38.1 °C, an audible alert starts within 2 seconds.";
+        subject verified : Base::Anything[*] = (evaluateTemperature, independentAlarmCheck);
+        objective { verify alarmAboveLimit; }
     }
-
-    // Connect the function to the test that will verify its behavior.
-    connection : VerifiedBy
-        connect evaluateTemperature to highTemperatureAlarmTest;
+    part alarmTestReport : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::testArtifact;
+        attribute :>> evidenceType = "test report";
+    }
+    connection : ProducesEvidence connect highTemperatureAlarmTest to alarmTestReport;
 ```
 
-Verification turns the requirement into a checkable engineering claim. The
-acceptance criterion is shared with the requirement so the expected result is
-consistent from specification through test.
+- A `verification` case names what it checks as its `subject`: here the
+  evaluation function and the risk control. Its `objective` names the
+  requirement it verifies.
+- The acceptance criterion repeats the requirement's, so the expected result is
+  the same from specification to test.
+- `ProducesEvidence` links the case to the record its run produces, a
+  `MemoEvidence` whose `evidenceKind` says it is a test artifact.
+
+CR-MED-003 is gone.
 
 ## Complete file
 
-Your finished `temperature_alarm.sysml` should contain this connected model:
+Your finished `temperature_alarm.sysml`:
 
 ```sysml
 // temperature_alarm.sysml
 package temperature_alarm {
-    // Import the public MEMO library surface once for this package.
     private import memo::*;
 
-    // The person who relies on the device in this scenario.
+    part def TemperatureAlarm specializes System {
+        attribute :>> systemBoundaryDescription = "A bedside temperature alarm: the probe, the firmware, and the audible alert.";
+    }
+
     part clinician : User {
-        attribute :>> id = "ACT-001";
         attribute :>> actorKind = ActorKind::clinician;
     }
-
-    // The clinician's clinical goal for the monitored patient.
     requirement maintainSafePatientTemperature : Need {
-        attribute :>> id = "NEED-001";
-        attribute :>> needKind = NeedKind::stakeholder;
-        doc /* The clinician needs to maintain the patient's temperature within a safe range. */
+        attribute :>> needKind = NeedKind::clinicalUser;
+        doc /* The clinician needs to keep the patient's temperature within a safe range. */
+    }
+    connection : HeldBy connect maintainSafePatientTemperature to clinician;
+
+    use case keepTemperatureSafe : ClinicalUseCase {
+        attribute :>> useCaseKind = UseCaseKind::care;
+        attribute :>> goalStatement = "Keep the monitored patient's temperature within a safe range.";
+        subject supportingSystem;
+        actor clinicianActor = clinician;
+    }
+    connection : Motivates connect maintainSafePatientTemperature to keepTemperatureSafe;
+
+    action monitorTemperatureStatus : OperativeAction;
+    action respondToTemperatureAlert : OperativeAction;
+    part temperatureCare : ClinicalWorkflow {
+        action highTemperatureScenario : OperativeScenario {
+            attribute :>> scenarioKind = ScenarioKind::nominal;
+            attribute :>> pathSummary = "The clinician observes status and responds to a high-temperature alert.";
+            perform monitorTemperatureStatus;
+            perform respondToTemperatureAlert;
+            first monitorTemperatureStatus then respondToTemperatureAlert;
+        }
+    }
+    connection : RealizesUseCase connect temperatureCare to keepTemperatureSafe;
+
+    action evaluateTemperature : SystemFunction;
+    action notifyClinician : SystemFunction;
+    action alarmChain : FunctionalFlow {
+        action evaluate :> evaluateTemperature;
+        action notify :> notifyClinician;
+        first evaluate then notify;
     }
 
-    // The clinician observes the patient's current temperature.
-    action monitorTemperatureStatus : OperativeAction {
-        attribute :>> id = "OA-001";
-    }
-
-    // The clinician responds when an alert is raised.
-    action respondToTemperatureAlert : OperativeAction {
-        attribute :>> id = "OA-002";
-    }
-
-    // The operational event that frames this slice of work.
-    action highTemperatureScenario : OperativeScenario {
-        attribute :>> id = "OS-001";
-        attribute :>> scenarioKind = ScenarioKind::operative;
-        attribute :>> variantKind = ScenarioVariantKind::exception;
-        attribute :>> operationalCondition = OperationalConditionKind::normal;
-        attribute :>> pathSummary =
-            "The clinician observes status and responds to a high-temperature alert.";
-    }
-
-    // The workflow direction: observe status, then respond to the alert.
-    connection : Precedes
-        connect monitorTemperatureStatus to respondToTemperatureAlert;
-
-    // Determines whether the measured temperature is inside the safe range.
-    part evaluateTemperature : SystemFunction {
-        attribute :>> id = "LF-001";
-    }
-
-    // Produces the system alert that supports the clinician's response.
-    part notifyClinician : SystemFunction {
-        attribute :>> id = "LF-002";
-    }
-
-    // A testable EARS requirement extracted from the evaluation function.
     requirement alarmAboveLimit : Requirement {
-        attribute :>> id = "REQ-001";
-        attribute :>> requirementKind = RequirementKind::system;
+        attribute :>> requirementType = RequirementTypeKind::system;
         doc /* When the measured temperature exceeds 38.0 °C, the temperature alarm shall issue an audible alert within 2 seconds. */
         attribute :>> notation = RequirementNotationKind::ears;
         attribute :>> earsPattern = EarsPatternKind::eventDriven;
         attribute :>> obligation = ObligationKind::shall;
         attribute :>> conditionClause = "When the measured temperature exceeds 38.0 °C";
         attribute :>> systemResponse = "issue an audible alert within 2 seconds";
-        attribute :>> acceptanceCriteria =
-            "At 38.1 °C, an audible alert begins within 2 seconds.";
+        attribute :>> acceptanceCriteria = "At 38.1 °C, an audible alert begins within 2 seconds.";
     }
+    connection : DerivesFrom connect maintainSafePatientTemperature to alarmAboveLimit;
+    satisfy alarmAboveLimit by evaluateTemperature;
 
-    // The software component that implements temperature evaluation.
-    part temperatureEvaluationSoftware : SoftwareComponent {
-        attribute :>> id = "SW-001";
+    part alarmChannel : LogicalComponent {
+        attribute :>> responsibility = "Decide when the temperature is out of range and raise the alert";
     }
+    allocate evaluateTemperature to alarmChannel;
+    allocate notifyClinician to alarmChannel;
 
-    // The hardware assembly that provides the temperature measurement.
-    part temperatureSensorAssembly : HardwareAssembly {
-        attribute :>> id = "HW-001";
+    part alarmFirmware : SoftwareSystem {
+        attribute :>> safetyClass = SafetyClassKind::B;
+        part evaluationModule : SoftwareModule {
+            attribute :>> moduleKind = ModuleKind::unit;
+            attribute :>> safetyClass = SafetyClassKind::B;
+            attribute :>> responsibility = "Compare the measured temperature with the limit";
+        }
     }
+    part sensorProbe : HardwareAssembly {
+        attribute :>> responsibility = "Measure the patient's temperature";
+        part thermistor : Sensor {
+            attribute :>> measurand = "Skin temperature";
+            attribute :>> patientContact = true;
+            attribute :>> contactNature = "Intact skin";
+            attribute :>> contactDuration = "Prolonged, up to 30 days";
+        }
+    }
+    allocation : RealizedBy allocate alarmChannel to alarmFirmware.evaluationModule;
+    allocation : RealizedBy allocate alarmChannel to sensorProbe;
+    satisfy alarmAboveLimit by alarmFirmware.evaluationModule;
 
-    // A potential source of harm that must be considered.
     item missedHighTemperature : Hazard {
-        attribute :>> id = "HAZ-001";
+        attribute :>> hazardType = HazardTypeKind::informationError;
+        attribute :>> severity = SeverityKind::serious;
     }
-
-    // A distinct measure intended to reduce the missed-alert hazard.
-    item independentAlarmCheck : RiskControlMeasure {
-        attribute :>> id = "RC-001";
+    part independentAlarmCheck : RiskControlMeasure {
+        attribute :>> controlKind = RiskControlKind::alarm;
+        attribute :>> implementationKind = RiskControlImplementationKind::softwareDesign;
     }
-
-    // The planned check and its observable pass condition.
-    part highTemperatureAlarmTest : VerificationCase {
-        attribute :>> id = "VER-001";
-        attribute :>> acceptanceCriteria =
-            "With a simulated temperature of 38.1 °C, an audible alert starts within 2 seconds.";
-    }
-
-    // Preserve the clinical rationale for this requirement.
-    connection : DerivesFrom
-        connect maintainSafePatientTemperature to alarmAboveLimit;
-
-    // The functional response that satisfies the system requirement.
-    connection : SatisfiedBy
-        connect alarmAboveLimit to evaluateTemperature;
-
-    // Allocate the evaluation function to its software realization.
-    connection : AllocatedTo
-        connect evaluateTemperature to temperatureEvaluationSoftware;
-
-    // Allocate the evaluation function to its sensing hardware.
-    connection : AllocatedTo
-        connect evaluateTemperature to temperatureSensorAssembly;
-
-    // State which control reduces this particular hazard.
-    connection : Mitigates {
+    connection : Mitigates connect independentAlarmCheck to missedHighTemperature {
         attribute :>> mitigationKind = MitigationKind::hazard;
-        connect independentAlarmCheck to missedHighTemperature;
     }
+    connection : ControlImplementedBy connect independentAlarmCheck to alarmFirmware.evaluationModule;
 
-    connection : ControlImplementedBy
-        connect independentAlarmCheck to evaluateTemperature;
+    item feverUnnoticed : HazardousSituation {
+        attribute :>> exposedPersons = "patient";
+        attribute :>> operatingCondition = "The patient's temperature is above the limit and no alert sounds.";
+    }
+    connection : TracesRisk connect missedHighTemperature to feverUnnoticed;
+    item heatInjury : Harm {
+        attribute :>> clinicalImpact = "Untreated fever or hyperthermia that needs clinical intervention.";
+    }
+    connection : LeadsToHarm connect feverUnnoticed to heatInjury;
+    connection : DerivesFrom connect missedHighTemperature to alarmAboveLimit;
 
-    // Connect the function to the test that will verify its behavior.
-    connection : VerifiedBy
-        connect evaluateTemperature to highTemperatureAlarmTest;
+    verification highTemperatureAlarmTest : VerificationCase {
+        attribute :>> methodKind = MemoVerificationMethodKind::test;
+        attribute :>> acceptanceCriteria = "With a simulated temperature of 38.1 °C, an audible alert starts within 2 seconds.";
+        subject verified : Base::Anything[*] = (evaluateTemperature, independentAlarmCheck);
+        objective { verify alarmAboveLimit; }
+    }
+    part alarmTestReport : MemoEvidence {
+        attribute :>> evidenceKind = EvidenceKind::testArtifact;
+        attribute :>> evidenceType = "test report";
+    }
+    connection : ProducesEvidence connect highTemperatureAlarmTest to alarmTestReport;
 }
 ```
 
-Use your editor’s reference navigation and check that you can follow the need
-to its requirement, the requirement to its design response, and the
-requirement to its verification case. Next, use the [Layer Map](../layers/index.md)
-to place this slice in the wider product argument.
+`memo validate` reports one warning on this file, **CR-MED-006**: "a hazardous
+situation is described by the harm it can cause". The model does link the
+situation to its harm, with `LeadsToHarm`, the relationship MEMO declares for
+exactly that pair. The rule reads only `TracesRisk` today, so it does not see
+the link. That is a known MEMO issue; writing `TracesRisk` there instead would
+silence the warning.
 
-<!-- memo:reinforce -->
+Use your editor's reference navigation and check that you can follow the need
+to its requirement, the requirement to the function that satisfies it, the
+function to the component that carries it, and the hazard to the test that
+checks its control. Next, the step-by-step series take one area in depth:
+[hardware](hardware/index.md), [operational](operational/index.md) and
+[functional flow](functional-flow/index.md). [MEMO in a nutshell](../ontology/index.md)
+shows every element MEMO offers.
 
-## Where this sits in MEMO
-
-Every tutorial is one slice of the same structure. This example populates these layers:
-
-| Layer | Element types it uses | Reference |
-| --- | --- | --- |
-| Operational | `OperativeAction`, `UseCase`, `User` | [Operational](../ontology/operational.md) |
-| Functional | `SystemFunction` | [Functional](../ontology/functional.md) |
-| Logical | `LogicalComponent` | [Logical](../ontology/logical.md) |
-| Implementation and realization | `HardwareAssembly`, `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../ontology/implementation.md) |
-| Assurance | `Evidence`, `Hazard`, `Need`, `Requirement`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase` | [Assurance](../reference/areas/assurance.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
-
-**Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `DerivesFrom`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates` … +6 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
-
-**Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
-
-**Source model:** [`examples/temperature-alarm`](https://github.com/memoarchitect/memo/tree/main/examples/temperature-alarm)

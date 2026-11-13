@@ -15,6 +15,7 @@ package memo_examples_reusable_instrument {
         attribute :>> serviceScope = "central sterile services department";
     }
 
+    // --8<-- [start:use-case]
     use case ucSterilize : ClinicalUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> providedId = "RI-UC-001"; :>> label = "Sterilize reusable instrument"; }
@@ -24,8 +25,10 @@ package memo_examples_reusable_instrument {
         subject supportingSystem;
         actor sterileProcessingTechActor = sterileProcessingTech;
     }
+    // --8<-- [end:use-case]
 
     // Reprocessing workflow: exists independently of any single instrument.
+    // --8<-- [start:workflow]
     part wfReprocess : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "RI-WF-001"; :>> label = "Instrument reprocessing workflow"; }
         attribute :>> entryCondition = "used instrument received in decontamination";
@@ -40,6 +43,7 @@ package memo_examples_reusable_instrument {
             first actInspect then actSterilizeLoad;
         }
     }
+    // --8<-- [end:workflow]
     action actClean : OperativeAction {
         @MemoIdentity { :>> providedId = "RI-ACT-001"; :>> label = "Clean and disinfect"; }
         attribute :>> criticality = CriticalityKind::high;
@@ -54,7 +58,9 @@ package memo_examples_reusable_instrument {
     }
 
 
+    // --8<-- [start:realizes]
     connection : RealizesUseCase connect wfReprocess to ucSterilize;
+    // --8<-- [end:realizes]
 
 
     // Illustrative: authored for this example, not the record of a real evaluation.

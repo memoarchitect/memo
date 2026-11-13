@@ -135,6 +135,7 @@ package memo_examples_gpca_pump_gpca_operational {
     // ── Scenario-driven operational model ──────────────────────
     // The use case is the patient and clinician goal. It is supported by
     // several workflows, each of which owns multiple selected scenarios.
+    // --8<-- [start:use-case]
     use case ucDeliverPcaTherapy : SystemUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> providedId = "UC-001"; :>> label = "Deliver patient controlled analgesia"; }
@@ -148,6 +149,7 @@ package memo_examples_gpca_pump_gpca_operational {
         actor prescriberActor = actorPrescriber;
         actor pharmacistActor = actorPharmacist;
     }
+    // --8<-- [end:use-case]
 
     part wfPrepareAndStartTherapy : SystemWorkflow {
         @MemoIdentity { :>> label = "Prepare and start therapy"; }
@@ -172,6 +174,7 @@ package memo_examples_gpca_pump_gpca_operational {
                 first start then deliverWithinLimits; first deliverWithinLimits then recordTherapyEvent; first recordTherapyEvent then done;
             }
         }
+        // --8<-- [start:lockout-scenario]
         action osLockoutBolus : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;
             @MemoIdentity { :>> providedId = "OS-002"; :>> label = "Bolus request during lockout"; }
@@ -186,6 +189,7 @@ package memo_examples_gpca_pump_gpca_operational {
                 first start then checkLockout; first checkLockout then rejectAndLog; first rejectAndLog then done;
             }
         }
+        // --8<-- [end:lockout-scenario]
     }
     part wfRespondToTherapyAlarm : SystemWorkflow {
         @MemoIdentity { :>> label = "Respond to therapy alarm"; }
@@ -267,16 +271,20 @@ package memo_examples_gpca_pump_gpca_operational {
 
     // ── Operational scenarios ───────────────────────────────────
     #refinement dependency wfManageActiveTherapy::osNominalTherapy to ucDeliverPcaTherapy;
+    // --8<-- [start:lockout-refines]
     #refinement dependency wfManageActiveTherapy::osLockoutBolus to ucDeliverPcaTherapy;
+    // --8<-- [end:lockout-refines]
     #refinement dependency wfRespondToTherapyAlarm::osOcclusionAlarm to ucDeliverPcaTherapy;
     #refinement dependency wfRespondToTherapyAlarm::osAirInLine to ucDeliverPcaTherapy;
     #refinement dependency wfRespondToTherapyAlarm::osEmptyReservoir to ucDeliverPcaTherapy;
     #refinement dependency wfRespondToTherapyAlarm::osPowerLoss to ucDeliverPcaTherapy;
 
     // ── Operational trace relations ─────────────────────────────
+    // --8<-- [start:realizes-use-case]
     connection : RealizesUseCase connect wfPrepareAndStartTherapy to ucDeliverPcaTherapy;
     connection : RealizesUseCase connect wfManageActiveTherapy to ucDeliverPcaTherapy;
     connection : RealizesUseCase connect wfRespondToTherapyAlarm to ucDeliverPcaTherapy;
+    // --8<-- [end:realizes-use-case]
     connection : EnablesUseCase connect ocTitratedAnalgesia to ucDeliverPcaTherapy;
     connection : EnablesUseCase connect ocFailSafeTherapy to ucDeliverPcaTherapy;
     connection : RequiresCapability connect gpcaIntendedUse to ocTitratedAnalgesia;

@@ -8,9 +8,11 @@ a design control is checked with evidence.
 
 | File | Role |
 | --- | --- |
-| `model/temperature_alarm.sysml` | public parent package |
 | `model/catalog/temperature_alarm.sysml` | model elements and relationships |
-| `model/viewpoints/temperature_alarm_overview.sysml` | view of the catalog |
+| `model/catalog/viewpoints/logical/views/temperature_alarm_overview.sysml` | view of the catalog |
+| `model/methodology/project.sysml` | the project's entrypoint and its methodology |
+
+The code below is included from those files, so it is the model as it compiles.
 
 ```mermaid
 flowchart LR
@@ -28,100 +30,62 @@ flowchart LR
 
 ## Clinical purpose and human work
 
-The use case states the clinical goal once. The `Initiates` connection says
-who starts that use. The acknowledgement activity contains a critical task, so
-the human work can be traced to its possible harm and validation.
+The use case states the clinical goal once, and the nurse is its `actor`, the
+native SysML way to say who pursues a use case. The acknowledgement activity
+contains the task where the risk sits: `taskAckAlarm` is an `OperativeAction`
+with `criticality` high, and it states its goal, the harm if it fails, and how
+serious that harm is. A critical task is an operative action marked that way,
+not a separate kind of element.
 
 ```sysml
-part icuNurse : User {
-    attribute :>> id = "TA-USR-001";
-    attribute :>> actorKind = ActorKind::clinician;
-}
-use case ucMonitorTemp : UseCase {
-    attribute :>> id = "TA-UC-001";
-    @MemoIdentity { :>> label = "Monitor patient temperature"; }
-    attribute :>> useCaseKind = UseCaseKind::care;
-    attribute :>> goalStatement =
-        "Continuously monitor core temperature and be alerted when it leaves the safe range.";
-}
-connection : Initiates connect icuNurse to ucMonitorTemp;
-
-action taskAckAlarm : CriticalTask {
-    @MemoIdentity { :>> label = "Acknowledge temperature alarm"; }
-    attribute :>> taskGoal = "recognize, assess, and acknowledge the alarm";
-    attribute :>> potentialHarm = "delayed intervention for hypo-/hyperthermia";
-}
-connection : Composes connect actAcknowledgeAlarm to taskAckAlarm;
+--8<-- "examples/temperature-alarm/model/catalog/temperature_alarm.sysml:operational"
 ```
 
 ## System responsibility and logical channel
 
 `fnDetectDeviation` is the technology-independent responsibility. It is
-allocated to `chMonitor`, a logical channel. The model can later allocate that
-channel to software or hardware without changing the functional claim.
+allocated with native `allocate` to `chMonitor`, a logical channel whose role
+is to monitor. The monitor states that it fails independently of the primary
+measurement channel, and why (`IndependentOf`, with its basis). The model can
+later realize the channel in software or hardware without changing the
+functional claim.
 
 ```sysml
-part fnDetectDeviation : SystemFunction {
-    attribute :>> id = "TA-FN-001";
-    @MemoIdentity { :>> label = "Detect temperature deviation"; }
-    attribute :>> perspective = ArchitecturePerspectiveKind::functional;
-    attribute :>> disciplines =
-        (EngineeringDisciplineKind::safety, EngineeringDisciplineKind::'verification');
-}
-part chMonitor : LogicalComponent {
-    @MemoIdentity { :>> label = "Temperature monitor channel"; }
-    attribute :>> componentRole = ComponentRoleKind::channel;
-    attribute :>> channelRole = ChannelRoleKind::monitor;
-}
-connection : AllocatedTo connect fnDetectDeviation to chMonitor;
+--8<-- "examples/temperature-alarm/model/catalog/temperature_alarm.sysml:functional"
+```
+
+```sysml
+--8<-- "examples/temperature-alarm/model/catalog/temperature_alarm.sysml:logical"
 ```
 
 ## Alarm interaction and safety control
 
-The alarm banner is an element in the model. It triggers an acknowledgement
-action and supports the critical task. The connections below form a readable
-safety argument: task → use error → hazard; risk control → mitigated hazard;
-risk control → the element that implements it.
+The alarm banner is an element of the bedside display. It triggers the
+acknowledge action, and the display supports the nurse's task with a native
+`dependency`. The connections that follow form the safety argument: the task
+is where a use error is committed (`CommitsUseError`), the use error causes the
+hazard (`Causes`), the risk control mitigates it (`Mitigates`), and the control
+is implemented by the banner (`ControlImplementedBy`).
 
 ```sysml
-part elAlarmBanner : UIElement {
-    @MemoIdentity { :>> label = "Temp alarm banner"; }
-    attribute :>> alarmPriority = NotificationPriorityKind::high;
-    attribute :>> annunciationModality = "flashing banner + tone";
-    attribute :>> silenceable = true;
-}
-connection : ElementTriggersAction connect elAlarmBanner to uiaAcknowledge;
-connection : Supports { attribute :>> supportKind = SupportKind::task;
-    connect uiBedside to taskAckAlarm; }
+--8<-- "examples/temperature-alarm/model/catalog/temperature_alarm.sysml:implementation"
+```
 
-connection : CommitsUseError connect taskAckAlarm to ueSilenceAndForget;
-connection : Causes { attribute :>> causeKind = CauseKind::useErrorLeadsToHazard;
-    connect ueSilenceAndForget to hzUndetectedDeviation; }
-connection : Mitigates { attribute :>> mitigationKind = MitigationKind::hazard;
-    connect rcReAnnunciate to hzUndetectedDeviation; }
-connection : ControlImplementedBy connect rcReAnnunciate to elAlarmBanner;
+```sysml
+--8<-- "examples/temperature-alarm/model/catalog/temperature_alarm.sysml:risk-chain"
 ```
 
 ## Evidence is separate from the design
 
-The latency test checks the detection function. The usability validation checks
-the nurse's acknowledgement task. These are different claims and therefore
-different model elements. The verification case produces a test report.
+The latency test checks the detection function: it is a `VerificationCase`
+whose `subject` is the function and which performs a latency scenario. The
+summative usability test checks the nurse's task: it is a `ValidationCase` that
+the task `Validates`. They are different claims, so they are different
+elements, and each `ProducesEvidence`: a `MemoEvidence` whose `evidenceKind`
+says what it is.
 
 ```sysml
-part vcAlarmLatency : VerificationCase {
-    @MemoIdentity { :>> label = "Verify alarm latency"; }
-    attribute :>> methodKind = VerificationMethodKind::test;
-    attribute :>> acceptanceCriteria = "annunciation within 2 s of sustained deviation";
-}
-part uvAckTask : UsabilityValidation {
-    @MemoIdentity { :>> label = "Summative alarm acknowledgement"; }
-    attribute :>> acceptanceCriteria =
-        "no critical-task failures; all alarms assessed before silencing";
-}
-connection : VerifiedBy connect vcAlarmLatency to fnDetectDeviation;
-connection : Validates connect uvAckTask to taskAckAlarm;
-connection : ProducesEvidence connect vcAlarmLatency to evLatencyReport;
+--8<-- "examples/temperature-alarm/model/catalog/temperature_alarm.sysml:verification-validation"
 ```
 
 ## The viewpoint does not duplicate the model
@@ -130,34 +94,37 @@ The overview view exposes the catalog. It selects and presents existing
 elements; it does not introduce a second temperature-alarm architecture.
 
 ```sysml
-view temperatureAlarmOverview : MemoDiagramView {
-    expose memo_examples_temperature_alarm::*;
-    attribute depth = 2;
-    attribute :>> title = "Temperature Alarm Overview";
-    attribute :>> viewKind = DiagramViewKind::general;
-    attribute :>> diagramType = "bdd";
-}
+--8<-- "examples/temperature-alarm/model/catalog/viewpoints/logical/views/temperature_alarm_overview.sysml"
 ```
 
 The [full catalog source](https://github.com/memoarchitect/memo/tree/main/examples/temperature-alarm/model/catalog)
-contains the remaining attributes and elements used by these excerpts.
+also holds the illustrative requirement, hazardous situation, harm and second
+verification case, which these excerpts leave out.
 
 <!-- memo:reinforce -->
 
 ## Where this sits in MEMO
 
-Every tutorial is one slice of the same structure. This example populates these layers:
+Every tutorial is one slice of the same structure. This example uses these definitions, by the part of the ontology they come from:
 
-| Layer | Element types it uses | Reference |
+| Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperativeAction`, `UseCase`, `User` | [Operational](../ontology/operational.md) |
+| Operational | `OperativeAction`, `OperativeScenario`, `SystemUseCase`, `User` | [Operational](../ontology/operational.md) |
 | Functional | `SystemFunction` | [Functional](../ontology/functional.md) |
-| Logical | `LogicalComponent` | [Logical](../ontology/logical.md) |
-| Implementation and realization | `UIAction`, `UIElement`, `UserInterface` | [Implementation and realization](../ontology/implementation.md) |
-| Assurance | `Evidence`, `Hazard`, `RiskControlMeasure`, `UsabilityValidation`, `UseError`, `VerificationCase` | [Assurance](../reference/areas/assurance.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
+| Logical | `LogicalComponent`, `System` | [Logical](../ontology/logical.md) |
+| Implementation | `UIAction`, `UIElement`, `UserInterface` | [Implementation](../ontology/implementation.md) |
+| Requirements | `Requirement` | [Requirements](../ontology/requirements.md) |
+| Safety and risk | `Harm`, `Hazard`, `HazardousSituation`, `RiskControlMeasure` | [Safety and risk](../ontology/safety-risk.md) |
+| Human factors | `UseError` | [Human factors](../ontology/human-factors.md) |
+| Verification and validation | `ValidationCase`, `VerificationCase` | [Verification and validation](../ontology/verification-validation.md) |
+| Core | `MemoEvidence` | [Core](../reference/areas/core.md) |
+| Views and methodology | `MemoDiagramView`, `ModelMethodBinding` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `ActionInvokesFunction`, `AllocatedTo`, `Causes`, `CommitsUseError`, `Composes`, `ControlImplementedBy`, `ElementTriggersAction`, `ExecutesScenario`, `IndependentOf`, `Initiates`, `Mitigates`, `ProducesEvidence` … +3 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
+**MEMO relationships it uses:** `Causes`, `CommitsUseError`, `ControlImplementedBy`, `DerivesFrom`, `ElementTriggersAction`, `IndependentOf`, `Mitigates`, `ProducesEvidence`, `TracesRisk`, `Validates`. See [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
+
+**Native SysML relationships it uses:** `actor`, `subject`, `perform`, `allocate`, `satisfy`, `dependency`, `expose`.
+
+**Architecture layers it does not populate:** realization. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 

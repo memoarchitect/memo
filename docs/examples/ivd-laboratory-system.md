@@ -13,17 +13,22 @@ Use this example when the system moves material as well as information.
 
 ## Where this sits in MEMO
 
-Every tutorial is one slice of the same structure. This example populates these layers:
+Every tutorial is one slice of the same structure. This example uses these definitions, by the part of the ontology they come from:
 
-| Layer | Element types it uses | Reference |
+| Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
 | Operational | `OperativeAction` | [Operational](../ontology/operational.md) |
-| Logical | `LogicalExchange`, `LogicalExchangeItem` | [Logical](../ontology/logical.md) |
-| Implementation and realization | `FluidicComponent`, `OpticalComponent`, `PhysicalAssembly` | [Implementation and realization](../ontology/implementation.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
-| Core | `TerminologyCode` | [Core](../reference/areas/core.md) |
+| Logical | `LogicalExchangeItem`, `System` | [Logical](../ontology/logical.md) |
+| Implementation | `FluidicComponent`, `OpticalComponent`, `PhysicalAssembly` | [Implementation](../ontology/implementation.md) |
+| Realization | `PhysicalPort` | [Realization](../ontology/realization.md) |
+| Verification and validation | `ValidationCase` | [Verification and validation](../ontology/verification-validation.md) |
+| Views and methodology | `MemoDiagramView`, `ModelMethodBinding` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Layers it does not populate:** functional, assurance. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+**MEMO relationships it uses:** `LogicalTransfer`, `Validates`. See [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
+
+**Native SysML relationships it uses:** `flow`, `expose`.
+
+**Architecture layers it does not populate:** functional. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Requirements and Architecture](../layers/requirements-architecture.md).
 

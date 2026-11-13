@@ -13,7 +13,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { RELATIONSHIP_KINDS, byName, conformsTo, declarationRecords, root } from './lib/sysml-source.mjs';
-import { LAYER_FIGURES, OVERVIEW } from './ontology-figures.mjs';
+import { FIGURES, LAYER_FIGURES, OVERVIEW, REFERENCE_CARDS } from './ontology-figures.mjs';
 
 const output = join(root, 'docs', 'assets', 'ontology');
 
@@ -25,7 +25,7 @@ export const AREAS = {
 };
 
 // Native SysML relationships a figure may draw, with how each reads.
-const NATIVE = new Set(['actor', 'subject', 'perform', 'allocate', 'satisfy', '#refinement', 'dependency', 'succession', 'flow', 'bind', 'include', 'transition', 'connect']);
+const NATIVE = new Set(['actor', 'subject', 'perform', 'allocate', 'satisfy', '#refinement', 'dependency', 'succession', 'flow', 'bind', 'include', 'transition', 'connect', 'subsets']);
 
 const areaOf = (type) => {
   const path = byName.get(type)?.record.relativeSource ?? '';
@@ -59,7 +59,7 @@ function checkEdge(where, edge, nodes) {
     const owner = byName.get(from.type);
     const ref = owner?.refs.find(({ name }) => name === edge.ref);
     check(where, ref, `${from.type} declares no reference \`${edge.ref}\``);
-    check(where, !ref || conformsTo(to.type, ref.type), `${from.type}.${edge.ref} is typed ${ref?.type}, not ${to.type}`);
+    check(where, !ref?.type || conformsTo(to.type, ref.type), `${from.type}.${edge.ref} is typed ${ref?.type}, not ${to.type}`);
   } else {
     check(where, edge.contains, 'an edge must be a relationship, a native relationship, a reference, or containment');
   }
@@ -86,17 +86,24 @@ function boxEdgePoint(box, toward) {
   return { x: cx + dx * scale, y: cy + dy * scale };
 }
 
+// A node is a definition («part def» over its name) or, when it has a `name`, a usage of one:
+// «part» over `name` and `: Type`, as SysML writes a usage. `as` shows the example's own type
+// where it specializes the library definition the figure checks against.
 function renderNode(node, state) {
   const { x, y } = position(node);
   const area = AREAS[areaOf(node.type)];
   const faded = state === 'earlier';
-  const label = node.label ?? node.type;
-  const nameSize = label.length > 21 ? 13.5 : label.length > 17 ? 15 : 16;
+  const kind = kindLabel(node.type);
+  const lines = node.name
+    ? `<text x="${x + W / 2}" y="${y + 17}" text-anchor="middle" font-size="11.5" fill="${area.text}" font-style="italic">«${esc(kind.replace(/ def$/, ''))}»</text>
+  <text x="${x + W / 2}" y="${y + 37}" text-anchor="middle" font-size="${node.name.length > 20 ? 13.5 : 15.5}" font-weight="700" fill="${area.text}">${esc(node.name)}</text>
+  ${node.subsets ? '' : `<text x="${x + W / 2}" y="${y + 54}" text-anchor="middle" font-size="12.5" fill="${area.text}">: ${esc(node.as ?? node.type)}</text>`}`
+    : `<text x="${x + W / 2}" y="${y + 23}" text-anchor="middle" font-size="12" fill="${area.text}" font-style="italic">«${esc(kind)}»</text>
+  <text x="${x + W / 2}" y="${y + 45}" text-anchor="middle" font-size="${(node.label ?? node.type).length > 21 ? 13.5 : (node.label ?? node.type).length > 17 ? 15 : 16}" font-weight="700" fill="${area.text}">${esc(node.label ?? node.type)}</text>`;
   return `<g opacity="${faded ? 0.62 : 1}">
   <rect x="${x}" y="${y}" width="${W}" height="${H}" rx="10" fill="${area.fill}" stroke="${area.stroke}" stroke-width="${state === 'new' ? 3 : 1.5}"/>
   <rect x="${x}" y="${y}" width="6" height="${H}" rx="3" fill="${area.stroke}"/>
-  <text x="${x + W / 2}" y="${y + 23}" text-anchor="middle" font-size="12" fill="${area.text}" font-style="italic">«${esc(kindLabel(node.type))}»</text>
-  <text x="${x + W / 2}" y="${y + 45}" text-anchor="middle" font-size="${nameSize}" font-weight="700" fill="${area.text}">${esc(label)}</text>
+  ${lines}
   ${state === 'new' ? `<rect x="${x + W - 44}" y="${y - 10}" width="40" height="18" rx="9" fill="${area.stroke}"/><text x="${x + W - 24}" y="${y + 3}" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>` : ''}
 </g>`;
 }
@@ -108,7 +115,7 @@ function renderEdge(edge, nodes, state) {
   const b = boxEdgePoint(to, { x: from.x + W / 2, y: from.y + H / 2 });
   const memo = Boolean(edge.rel);
   const colour = memo ? '#1f2a37' : '#4b5866';
-  const label = edge.rel ?? (edge.native ? edge.native : edge.ref ? edge.ref : 'contains');
+  const label = edge.label ?? edge.rel ?? (edge.native ? edge.native : edge.ref ? edge.ref : 'contains');
   const mid = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
   const textWidth = label.length * 7.4 + 14;
   const dash = edge.ref ? 'stroke-dasharray="2 4"' : edge.contains || memo ? '' : 'stroke-dasharray="7 5"';
@@ -165,7 +172,7 @@ function renderStep(figure, stepIndex, complete = false) {
   <marker id="diamond" viewBox="0 0 14 10" refX="13" refY="5" markerWidth="14" markerHeight="10" orient="auto-start-reverse"><path d="M1,5 L7,1 L13,5 L7,9 z" fill="#1f2a37"/></marker>
 </defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="${PAD}" y="${PAD}" font-size="18" font-weight="800" fill="#123b6b">${complete ? `${esc(figure.title)} · the whole picture` : `Step ${stepIndex + 1} of ${figure.steps.length} · ${esc(step.title)}`}</text>
+<text x="${PAD}" y="${PAD}" font-size="18" font-weight="800" fill="#123b6b">${figure.single ? esc(figure.title) : complete ? `${esc(figure.title)} · the whole picture` : `Step ${stepIndex + 1} of ${figure.steps.length} · ${esc(step.title)}`}</text>
 ${edges.map((edge) => renderEdge(edge, nodes, edge.state)).join('\n')}
 ${[...nodes.values()].map((node) => renderNode(node, node.state)).join('\n')}
 ${legend(legendY, areasShown, complete)}
@@ -188,20 +195,25 @@ const RED = '#a12e2a';
 // metadata. Interface and flow definitions count unless they are MEMO
 // relationships, because a model writes `interface x : PhysicalInterface`.
 const NOT_ELEMENTS = new Set(['enum def', 'attribute def', 'metadata def', 'constraint def', 'viewpoint def', 'view def', 'calc def', 'analysis def', 'connection def', 'allocation def']);
-const isElement = (declaration) => !declaration.abstract && !NOT_ELEMENTS.has(declaration.kind) && !conformsTo(declaration.name, 'MemoRelationship');
-const groupLabel = (sub) => sub.split('/').map((part) => (part === 'ui' ? 'UI' : part.replaceAll('_', ' '))).join(' · ').replace(/^./, (c) => c.toUpperCase());
+// A reference card may also show abstract bases (`abstract: true`) or further
+// kinds (`kinds`), where those are what its area is about.
+const isElement = (declaration, { abstract = false, kinds = [] } = {}) =>
+  (abstract || !declaration.abstract) && (kinds.includes(declaration.kind) || !NOT_ELEMENTS.has(declaration.kind)) && !conformsTo(declaration.name, 'MemoRelationship');
+const groupLabel = (sub) => sub.split('/').map((part) => (part === 'ui' ? 'UI' : part.replaceAll('_', ' '))).join(' · ').replace(/^./, (c) => c.toUpperCase()).replace(/\bUi\b/g, 'UI');
 // An entry groups its elements by subfolder, or, when it names `groups`, by
 // the base each element specializes.
-function elementGroups({ folder, rootLabel = '', groups: byBase }) {
+// `depth` groups by only the first levels of subfolder.
+function elementGroups(entry) {
+  const { folder, rootLabel = '', groups: byBase, depth } = entry;
   if (byBase) {
-    const names = declarationRecords.filter((d) => d.record.relativeSource.startsWith(`${folder}/`) && isElement(d)).map((d) => d.name);
+    const names = declarationRecords.filter((d) => d.record.relativeSource.startsWith(`${folder}/`) && isElement(d, entry)).map((d) => d.name);
     return byBase.map(({ label, base }) => ({ label, names: names.filter((name) => conformsTo(name, base)) }));
   }
   const groups = new Map();
   for (const declaration of declarationRecords) {
     const path = declaration.record.relativeSource;
-    if (!path.startsWith(`${folder}/`) || !isElement(declaration)) continue;
-    const sub = path.slice(folder.length + 1).split('/').slice(0, -1).join('/');
+    if (!path.startsWith(`${folder}/`) || !isElement(declaration, entry)) continue;
+    const sub = path.slice(folder.length + 1).split('/').slice(0, -1).slice(0, depth).join('/');
     const label = sub ? groupLabel(sub) : rootLabel;
     if (!groups.has(label)) groups.set(label, []);
     groups.get(label).push(declaration.name);
@@ -330,12 +342,15 @@ function overviewSvg(parts, height, label) {
 
 // ─── Run ──────────────────────────────────────────────────────────────────
 
-for (const figure of LAYER_FIGURES) {
+// A single figure is drawn as a one-step figure with its own title.
+const SINGLE = FIGURES.map(({ nodes, edges, ...figure }) => ({ ...figure, single: true, steps: [{ title: figure.title, nodes, edges }] }));
+for (const figure of [...LAYER_FIGURES, ...SINGLE]) {
   const placed = new Map();
   figure.steps.forEach((step, index) => {
-    const where = `${figure.id} step ${index + 1}`;
+    const where = figure.single ? figure.id : `${figure.id} step ${index + 1}`;
     for (const node of step.nodes ?? []) {
       check(where, byName.has(node.type), `${node.type} is not a definition the ontology declares`);
+      check(where, !figure.usages || node.name, `${node.id} needs a name: the figure draws usages`);
       check(where, !placed.has(node.id), `places ${node.id} twice`);
       placed.set(node.id, node);
     }
@@ -373,10 +388,11 @@ OVERVIEW.layers.forEach((layer, index) => {
     check(`${where} assurance`, own.length, `${link.rel ?? link.native} names none of this layer's elements`);
   }
 });
+for (const card of REFERENCE_CARDS) check(`reference ${card.name}`, elementsOf(card).length, `${card.folder} declares no element definitions`);
 for (const discipline of OVERVIEW.disciplines) check(`overview ${discipline.name}`, elementsOf(discipline).length, `${discipline.folder} declares no element definitions`);
 for (const foundation of OVERVIEW.foundations) {
   const shown = new Set(elementsOf(foundation));
-  const declared = declarationRecords.filter((d) => d.record.relativeSource.startsWith(`${foundation.folder}/`) && isElement(d)).map((d) => d.name);
+  const declared = declarationRecords.filter((d) => d.record.relativeSource.startsWith(`${foundation.folder}/`) && isElement(d, foundation)).map((d) => d.name);
   for (const name of declared) check(`overview ${foundation.name}`, shown.has(name), `${name} is declared in ${foundation.folder} but falls in none of the card's groups`);
 }
 if (problems.length) {
@@ -393,4 +409,6 @@ for (const figure of LAYER_FIGURES) {
   figure.steps.forEach((_, index) => writeFileSync(join(output, `${figure.id}-step${index + 1}.svg`), renderStep(figure, index)));
   writeFileSync(join(output, `${figure.id}.svg`), renderStep(figure, figure.steps.length - 1, true));
 }
-console.log(`Generated ontology figures: overview and ${LAYER_FIGURES.length} layer(s).`);
+for (const card of REFERENCE_CARDS) writeFileSync(join(output, `area-${card.id}.svg`), renderCard(card, AREAS[card.area]));
+for (const figure of SINGLE) writeFileSync(join(output, `${figure.id}.svg`), renderStep(figure, 0, true));
+console.log(`Generated ontology figures: overview, ${LAYER_FIGURES.length} layer(s) and ${SINGLE.length} single figure(s).`);

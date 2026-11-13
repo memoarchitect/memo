@@ -5,7 +5,7 @@ element on its own is a note; a typed relationship is a claim a reviewer can
 challenge. Select the narrowest relationship whose meaning and endpoint
 direction match what you are asserting.
 
-![Visual relationship guide](../assets/relationship-sentences.svg)
+![Relationships state engineering claims: need to use case, function to logical component, verification case to evidence.](../assets/ontology/relationship-sentences.svg)
 
 ## Relationship families
 
@@ -13,7 +13,7 @@ MEMO defines typed relationships across operational, architecture, assurance,
 and product domains. The chart shows representative pairs in the direction
 declared by the ontology:
 
-![Representative typed relationships across MEMO domains](../assets/traceability-backbone.svg)
+![Representative typed relationships across MEMO domains](../assets/ontology/traceability-backbone.svg)
 
 ## High-value traceability links
 

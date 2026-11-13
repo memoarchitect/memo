@@ -5,6 +5,7 @@ package memo_examples_gpca_pump_gpca_context {
     private import memo_examples_gpca_pump_gpca_operational::*;
 
     // ── Intended use (ISO 14971 §5.2, IEC 62366-1) ──────────────
+    // --8<-- [start:intended-use]
     requirement gpcaIntendedUse : IntendedUse {
         @MemoIdentity { :>> providedId = "IU-001"; :>> shortDescription = "Patient-controlled analgesia infusion of prescribed opioid analgesics."; }
         doc /* The GPCA pump delivers a prescribed analgesic drug intravenously at a programmed basal rate, supplemented by square boluses delivered automatically at programmed intervals and by patient-requested bolus doses, subject to lockout intervals and maximum-dose limits. */
@@ -18,6 +19,8 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> operationalContext = "Acute-care hospital ward, fixed (non-ambulatory) location (UC-001).";
         @MemoIdentity { :>> sourceReference = "CITE-001: CriSys GPCA System Requirements (2013), §2.1-2.3 (GPCA overview, system functions, user characteristics)"; }
     }
+    // --8<-- [end:intended-use]
+    // --8<-- [start:misuse]
     part bolusByProxyMisuse : ReasonablyForeseeableMisuse {
         @MemoIdentity { :>> providedId = "RFM-001"; :>> label = "Bolus request by someone other than patient"; :>> shortDescription = "A caregiver or visitor presses the patient bolus control."; }
         doc /* A person other than the patient activates the bolus request control, bypassing the intended patient self-limiting behavior. */
@@ -26,6 +29,7 @@ package memo_examples_gpca_pump_gpca_context {
         attribute :>> affectedUseContext = "UC-001";
         @MemoIdentity { :>> sourceReference = "CITE-004: GIP Hazard Analysis v1.0 (2009), §2.4.8; CITE-005: Open PCA ISO 14971 risk analysis, bolus-by-proxy event"; }
     }
+    // --8<-- [end:misuse]
 
     // ── Use contexts ────────────────────────────────────────────
     part hospitalWardContext : UseContext {

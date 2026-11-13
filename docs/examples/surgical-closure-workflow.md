@@ -7,98 +7,56 @@ architecture is selected.
 
 ```mermaid
 flowchart LR
-    U["Clinical use case\nPerform sleeve gastrectomy"] --> W["Operational workflow\nTime-out → access → mobilise → create sleeve → assess → handover"]
-    W --> N["Nominal scenario\nProcedure completes"]
-    W --> R["Recovery scenario\nStaple-line bleeding"]
-    N --> NA["Own operational activity\nComplete nominal procedure"]
+    U["Clinical use case\nPerform sleeve gastrectomy"] --> W["Clinical procedure workflow\nTime-out → access → mobilise → create sleeve → assess → handover"]
+    W --> N["Nominal scenario\nPerforms the seven activities in order"]
+    W --> R["Alternate scenario\nStaple-line bleeding"]
     R --> RA["Own operational activity\nRecognize → control → reassess → escalate"]
 ```
+
+The code below is included from the example's source, so it is the model as it
+compiles.
 
 ## The clinical goal and setting
 
 The use case records the operation's goal, people, and operating-room context.
-It is one clinical `UseCase`, supported by a reusable workflow and shared by
-its scenarios.
+It is one `ClinicalUseCase`: its actors are native `actor` features, its
+setting is the `useContext` it references, and a need `Motivates` it.
 
 ```sysml
-use case ucPerformSleeveGastrectomy : UseCase {
-    @MemoIdentity { :>> label = "Perform laparoscopic sleeve gastrectomy"; }
-    attribute :>> useCaseKind = UseCaseKind::care;
-    attribute :>> goalStatement =
-        "Complete the planned laparoscopic sleeve gastrectomy and transfer the patient with the staple line assessed.";
-    ref :>> useContext = bariatricOr;
-    subject supportingSystem;
-    actor bariatricSurgeonInitiator = bariatricSurgeon;
-    actor scrubNurseActor = scrubNurse;
-    actor anesthetistActor = anesthetist;
-}
-```
-
-## The reusable workflow
-
-The workflow names the normal work of the operation: confirm time-out and
-position, establish access, mobilise the stomach, create the sleeve, assess the
-staple line, close, and hand over. The scenario's steps are `OperativeAction` usages
-with successions between them, so the order is inspectable without embedding it in prose.
-
-```sysml
-action wfSleeveGastrectomy : ClinicalProcedureWorkflow {
-    @MemoIdentity { :>> label = "Laparoscopic sleeve gastrectomy workflow"; }
-    attribute :>> entryCondition = "patient prepared; time-out ready";
-    attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
-}
-connection : Composes connect wfSleeveGastrectomy to wsMobilize;
-connection : Composes connect wfSleeveGastrectomy to wsSleeve;
-connection : StepPrecedes connect wsMobilize to wsSleeve;
-connection : Supports { attribute :>> supportKind = SupportKind::useCase;
-    connect wfSleeveGastrectomy to ucPerformSleeveGastrectomy; }
+--8<-- "examples/surgical-closure-workflow/model/catalog/surgical_closure_workflow.sysml:use-case"
 ```
 
 ## A critical task inside the operation
 
-`CreateAndInspectStapleLine` is a critical task, not merely a workflow step.
-Its task steps state the work that needs focused review: confirm anatomy,
-create the staple line, inspect for bleeding, and assess integrity.
+Sizing and creating the sleeve contains the task where the risk sits:
+`taskCreateStapleLine` is an `OperativeAction` with `criticality` high, which
+is what makes it a critical task. It states its goal, the harm if it fails, and
+how serious that is, and its four steps are ordered with native `first … then`
+successions: confirm anatomy, create the staple line, inspect for bleeding,
+assess integrity.
 
 ```sysml
-action taskCreateStapleLine : CriticalTask {
-    @MemoIdentity { :>> label = "Create and inspect staple line"; }
-    attribute :>> taskGoal =
-        "create the planned sleeve and identify bleeding or integrity concerns before completion";
-    attribute :>> potentialHarm =
-        "bleeding or staple-line complication not recognized before handover";
-}
-connection : Composes connect actSizeAndCreateSleeve to taskCreateStapleLine;
-connection : Composes connect taskCreateStapleLine to stInspectBleeding;
+--8<-- "examples/surgical-closure-workflow/model/catalog/surgical_closure_workflow.sysml:critical-task"
 ```
 
-## Scenarios own their operational activity
+## The workflow and its scenarios
 
-The model has a nominal procedure path and a recovery path for observed
-staple-line bleeding. Each scenario references its own operational activity.
-The recovery activity is an action flow: recognize, control, reassess, then
-escalate if needed. It is not a copy of the full surgical workflow.
+`wfSleeveGastrectomy` is a `ClinicalProcedureWorkflow`, from the clinical
+extension. It owns two scenarios. The nominal scenario performs the seven
+procedure activities and orders them with successions. The recovery scenario is
+an `alternate` path for staple-line bleeding, and it owns its own activity:
+recognize, control, reassess, then escalate if needed. It is not a copy of the
+full surgical workflow.
 
 ```sysml
-action oaControlStapleLineBleeding : OperativeAction {
-    @MemoIdentity { :>> label = "Control staple line bleeding"; }
-    action recognizeBleeding; action controlBleeding;
-    action reassessStapleLine; action escalateIfNeeded;
-    first start then recognizeBleeding;
-    first recognizeBleeding then controlBleeding;
-    first controlBleeding then reassessStapleLine;
-}
+--8<-- "examples/surgical-closure-workflow/model/catalog/surgical_closure_workflow.sysml:workflow"
+```
 
-action scStapleLineBleeding : OperativeScenario {
-    @MemoIdentity { :>> label = "Staple line bleeding recovery"; }
-    attribute :>> scenarioKind = ScenarioKind::operative;
-    attribute :>> variantKind = ScenarioVariantKind::recovery;
-    attribute :>> variationPoint = "bleeding observed during staple-line assessment";
-    ref :>> baseScenario = scNominalSleeveProcedure;
-    ref :>> parentWorkflow = wfSleeveGastrectomy;
-    ref :>> activities = oaControlStapleLineBleeding;
-}
-connection : Composes connect scStapleLineBleeding to oaControlStapleLineBleeding;
+Each scenario refines the use case it is a path of, and the workflow realizes
+it:
+
+```sysml
+--8<-- "examples/surgical-closure-workflow/model/catalog/surgical_closure_workflow.sysml:refines"
 ```
 
 ## What this example deliberately does not model
@@ -115,18 +73,21 @@ to inspect the full workflow and both scenario paths.
 
 ## Where this sits in MEMO
 
-Every tutorial is one slice of the same structure. This example populates these layers:
+Every tutorial is one slice of the same structure. This example uses these definitions, by the part of the ontology they come from:
 
-| Layer | Element types it uses | Reference |
+| Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperativeAction`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
-| Clinical extension | `ClinicalProcedureWorkflow` | [Extension modules](../reference/areas/methodology.md#extensions) |
-| Assurance | `Need` | [Assurance](../reference/areas/assurance.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
+| Operational | `ClinicalUseCase`, `OperativeAction`, `OperativeScenario`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
+| Logical | `System` | [Logical](../ontology/logical.md) |
+| Requirements | `Need` | [Requirements](../ontology/requirements.md) |
+| Verification and validation | `ValidationCase` | [Verification and validation](../ontology/verification-validation.md) |
+| Views and methodology | `MemoDiagramView`, `ModelMethodBinding` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `Composes`, `Initiates`, `Motivates`, `Realizes`, `StepPrecedes`, and `Supports` come from the base ontology. The clinical extension adds no relationship type.
+**MEMO relationships it uses:** `HeldBy`, `Motivates`, `RealizesUseCase`, `Validates`. See [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
 
-**Layers it does not populate:** functional, logical, implementation and realization. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+**Native SysML relationships it uses:** `actor`, `subject`, `perform`, `dependency`, `#refinement`, succession (`first … then`), `expose`.
+
+**Architecture layers it does not populate:** functional, implementation, realization. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 

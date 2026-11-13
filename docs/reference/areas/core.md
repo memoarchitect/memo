@@ -9,7 +9,7 @@ Core contains definitions shared by the rest of the ontology.
 
 ## Namespace structure
 
-![Core ontology elements](../../assets/reference/core-elements.svg){ .memo-presentation-graphic }
+![Core: every definition it declares, abstract foundations included, by subfolder.](../../assets/ontology/area-core.svg){ .memo-presentation-graphic }
 
 ```text
 core/
@@ -40,8 +40,10 @@ core/
 
 `MemoRelationship` is the common base for MEMO semantic connections. The
 `relationships` namespace owns reusable cross-area verbs such as
-`AllocatedTo`, `Realizes`, `DerivesFrom`, `SatisfiedBy`, `Mitigates`,
-`VerifiedBy`, `Validates`, and `ProducesEvidence`.
+`DerivesFrom`, `Validates`, `ProducesEvidence`, `HostedBy` and `ScopedTo`.
+Allocation, satisfaction, refinement and verification are SysML's own
+`allocate`, `satisfy`, `#refinement` and a verification case's `subject`, so
+MEMO declares no relationship for them.
 
 Use [Relationships](../building-blocks.md#relationships) for organization by semantic purpose.
 

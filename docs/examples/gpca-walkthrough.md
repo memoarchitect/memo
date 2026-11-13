@@ -74,18 +74,17 @@ happen, and how would you check the model answers correctly? Follow the
 question through the layers:
 
 1. **Operational.** `gpca_context.sysml` gives you the patient
-   (`PatientUser`), the nurse, the ward context, and the foreseeable use
-   errors. `gpca_operational.sysml` holds the `RequestPatientBolus` activity
-   and the `BolusRequestDuringLockout` scenario — variant *alternate*,
-   condition *foreseeable misuse*, because a patient pressing early is
-   expected behavior, not an error path.
+   (`actorPatient`), the nurse, the ward context, and the foreseeable use
+   errors. `gpca_operational.sysml` holds the `oaRequestBolus` activity and
+   the `osLockoutBolus` scenario, an *alternate* path: a patient pressing early
+   is expected behaviour, not an error path.
 2. **Functional.** `gpca_behavior_subsystems.sysml` defines the functions;
-   `gpca_system.sysml` organizes the `PatientBolusChain` functional flow whose
-   steps carry typed references: sense request → check lockout and max dose →
+   `gpca_system.sysml` organizes the `fcPatientBolus` chain, whose steps are
+   positions of those functions: sense request → check lockout and max dose →
    command flow → actuate → log.
-3. **Implementation.** `gpca_architecture.sysml` holds the software components
-   (`Infusion_Manager`, `Alarm`, …) and hardware assemblies;
-   `gpca_interfaces.sysml` binds 46 component exchanges with typed endpoints.
+3. **Implementation.** `gpca_architecture.sysml` holds the software modules
+   (`infusionMgr`, `alarm`, …) and the hardware assemblies;
+   `gpca_interfaces.sysml` declares the component exchanges between their ports.
 4. **Assurance.** `gpca_risk.sysml` carries dedicated
    `SafetyRelatedCharacteristic`, `HazardCause`, `Hazard`,
    `SequenceOfEvents`, `HazardousSituation`, `Harm`, `Risk`,
@@ -109,99 +108,65 @@ flowchart LR
 
 ## Read the actual SysML
 
-The following excerpts are from the GPCA model. They show the distinction
-between model content and a viewpoint. The catalog declares the facts; a view
-selects the facts needed for one review question.
+The following excerpts are included from the GPCA model files, so they are the
+model as it compiles. They show the distinction between model content and a
+viewpoint. The catalog declares the facts; a view selects the facts needed for
+one review question.
 
-### 1. One use case, supported by several workflows
+### 1. One use case, realized by several workflows
 
-The use case is the goal. It is not duplicated as a separate “user goal”
-element. Three workflows support that one goal.
+The use case is the goal. It is not duplicated as a separate "user goal"
+element. Its actors are native SysML `actor` features, and the system that
+supports it is its `subject`.
 
 ```sysml
-use case ucDeliverPcaTherapy : UseCase {
-    @MemoIdentity { :>> label = "Deliver patient controlled analgesia"; }
-    attribute :>> useCaseKind = UseCaseKind::care;
-    attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
-    ref :>> useContext = hospitalWardContext;
-    subject supportingSystem;
-    actor nurseInitiator = actorNurse;
-    actor patientActor = actorPatient;
-    actor prescriberActor = actorPrescriber;
-    actor pharmacistActor = actorPharmacist;
-}
+--8<-- "examples/gpca-pump/model/catalog/gpca_operational.sysml:use-case"
+```
 
-connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect wfPrepareAndStartTherapy to ucDeliverPcaTherapy; }
-connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect wfManageActiveTherapy to ucDeliverPcaTherapy; }
-connection : Supports { attribute :>> supportKind = SupportKind::useCase; connect wfRespondToTherapyAlarm to ucDeliverPcaTherapy; }
+Three workflows realize that one goal, each with `RealizesUseCase`:
+
+```sysml
+--8<-- "examples/gpca-pump/model/catalog/gpca_operational.sysml:realizes-use-case"
 ```
 
 ### 2. A workflow has scenarios; each scenario owns its operational activity
 
-`osLockoutBolus` is an alternate path in active therapy. Its activity is an
-action flow with the operational steps for this particular path. A different
-scenario has a different activity; it is not one shared generic activity.
+`osLockoutBolus` is an alternate path in active therapy (`scenarioKind` is
+`alternate`). It is nested in the workflow it belongs to, and its activity is
+nested in it: an action flow with the operational steps for this particular
+path. A different scenario has a different activity; it is not one shared
+generic activity.
 
 ```sysml
-action oaRejectBolusDuringLockout : OperativeAction {
-    @MemoIdentity { :>> label = "Reject bolus during lockout"; }
-    action checkLockout; action rejectAndLog;
-    first start then checkLockout;
-    first checkLockout then rejectAndLog;
-    first rejectAndLog then done;
-}
-
-action osLockoutBolus : OperativeScenario {
-    @MemoIdentity { :>> label = "Bolus request during lockout"; }
-    attribute :>> scenarioKind = ScenarioKind::operative;
-    attribute :>> variantKind = ScenarioVariantKind::alternate;
-    ref :>> parentWorkflow = wfManageActiveTherapy;
-    ref :>> parentUseCase = ucDeliverPcaTherapy;
-    ref :>> activities = oaRejectBolusDuringLockout;
-}
+--8<-- "examples/gpca-pump/model/catalog/gpca_operational.sysml:lockout-scenario"
 ```
 
-### 3. A functional flow names the system responsibilities on the path
-
-The functional flow orders the system work. Typed trace links then state which
-functions are involved. The same functions can support more than one scenario
-without making the scenarios identical.
+The scenario refines the use case it is a path of:
 
 ```sysml
-part fcPatientBolus : FunctionalFlow {
-    @MemoIdentity { :>> label = "Patient bolus chain"; }
-    ref :>> startFunction = fnAcquireSensors;
-    ref :>> endFunction = fnCommandPump;
-    attribute :>> endToEndLatencyBudgetMs = "100";
-}
+--8<-- "examples/gpca-pump/model/catalog/gpca_operational.sysml:lockout-refines"
+```
 
-connection : InvolvesFunction connect fcPatientBolus to fnAcquireSensors;
-connection : InvolvesFunction connect fcPatientBolus to fnEnforceLimits;
-connection : InvolvesFunction connect fcPatientBolus to fnManageInfusion;
-connection : InvolvesFunction connect fcPatientBolus to fnCommandPump;
-connection : IncludesStep connect fcPatientBolus to fcsBolusValidate;
+### 3. A functional chain names the system responsibilities on the path
+
+A `FunctionalFlow` orders the system work. Each step is a function performed at
+one position, `action <step> :> <function>`, so the same function can appear in
+several chains while each position keeps its own identity. A step's items
+subset the exchange items, and a `flow` joins two steps where one's output is
+the next one's input.
+
+```sysml
+--8<-- "examples/gpca-pump/model/catalog/gpca_system.sysml:patient-bolus-chain"
 ```
 
 ### 4. A viewpoint selects the model for a review
 
-The scenario-sequence viewpoint does not define another scenario model. It
-selects operational scenarios, functional flows, and flow steps from the GPCA
-catalog and presents them as a sequence diagram.
+The scenario-sequence view does not define another scenario model. It selects
+operational scenarios and functional chains from the GPCA catalog and presents
+them as a sequence diagram, under the operational viewpoint.
 
 ```sysml
-view gpcaScenarioSequenceView : MemoDiagramView {
-    attribute :>> title = "GPCA Scenario Sequence View";
-    attribute :>> outputKind = (ViewOutputKind::diagram);
-    attribute :>> presentationKind = (PresentationKind::activityDiagram);
-    attribute :>> viewKind = DiagramViewKind::sequence;
-    part :>> selectionQuery {
-        attribute :>> includeElementKinds =
-            ("OperativeScenario", "FunctionalFlow");
-        attribute :>> includeLayers = ("operational", "system");
-        attribute :>> selectionExpression = "product == 'GPCA'";
-    }
-    part :>> viewpointDefinition = operationalViewpoint;
-}
+--8<-- "examples/gpca-pump/model/catalog/viewpoints/operational/views/operational_scenario_sequence_view.sysml"
 ```
 
 ## How the viewpoints work together
@@ -300,19 +265,26 @@ viewpoints make that one connected model usable in different reviews.
 
 ## Where this sits in MEMO
 
-Unlike the focused tutorials, this model is populated all the way through. It is the conformance target the other examples point at:
+Every tutorial is one slice of the same structure. This example uses these definitions, by the part of the ontology they come from:
 
-| Layer | Element types it uses | Reference |
+| Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
-| Operational | `ArchitectureDescription`, `OperativeAction`, `OperationalCapability`, `OperationalEntity`, `OperationalWorkflow`, `UseCase`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
-| Functional | `BehaviorProperty`, `Contract`, `FunctionalExchange`, `FunctionalFlow`, `ModeState`, `StateMachine`, `SystemFunction`, `TimingConstraint` … +1 | [Functional](../ontology/functional.md) |
-| Logical | `ComponentExchange`, `Interface`, `InterfaceItem`, `LogicalComponent`, `SoftwarePort` | [Logical](../ontology/logical.md) |
-| Implementation and realization | `HardwareAssembly`, `PhysicalPort`, `ProcessingNode`, `SoftwareComponent`, `SoftwareModule`, `SoftwareSystem` | [Implementation and realization](../ontology/implementation.md) |
-| Assurance | `Benefit`, `CyberHazard`, `CyberMitigation`, `CyberRisk`, `CybersecurityAsset`, `DetectionMethod`, `Evidence`, `FMEAAction`, `FMEAWorksheet`, `FailureCause` … +32 | [Assurance](../reference/areas/assurance.md) |
-| Views and methodology | `MemoCybersecurityAssessmentView`, `MemoCybersecurityThreatModelView`, `MemoDiagramView`, `MemoDocumentView`, `MemoUsabilityEngineeringView`, `MethodologyDefinition`, `ResolvedMethodology` | [Views and methodology](../reference/areas/viewpoints.md) |
-| Core | `Citation`, `MethodologyScope` | [Core](../reference/areas/core.md) |
+| Operational | `IntendedUse`, `OperationalCapability`, `OperationalEntity`, `OperativeAction`, `OperativeScenario`, `SystemUseCase`, `SystemWorkflow`, `UseCase`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
+| Functional | `BehaviorProperty`, `ComponentFunction`, `Contract`, `FunctionalFlow`, `ModeConfiguration`, `StateMachine`, `SystemFunction`, `TimingConstraint` | [Functional](../ontology/functional.md) |
+| Logical | `InterfaceItem`, `LogicalComponent`, `SensorPort`, `SoftwarePort`, `System` | [Logical](../ontology/logical.md) |
+| Implementation | `HardwareAssembly`, `PhysicalAssembly`, `SoftwareModule`, `SoftwareSystem` | [Implementation](../ontology/implementation.md) |
+| Realization | `PhysicalPort`, `ProcessingNode`, `SoftwareDeploymentUnit` | [Realization](../ontology/realization.md) |
+| Requirements | `Need`, `NotificationSpec`, `Requirement`, `SystemConstant` | [Requirements](../ontology/requirements.md) |
+| Safety and risk | `Benefit`, `DetectionMethod`, `FMEAAction`, `FMEAWorksheet`, `FailureCause`, `FailureEffect`, `FailureMode`, `FaultTree`, `FaultTreeNode`, `Harm`, `Hazard`, `HazardCause`, `HazardousSituation`, `MinimalCutSet`, `OverallResidualRiskEvaluation`, `ReasonablyForeseeableMisuse`, `ResidualRisk`, `Risk`, `RiskControlMeasure`, `RiskMatrix`, `SafetyRelatedCharacteristic`, `SequenceOfEvents` | [Safety and risk](../ontology/safety-risk.md) |
+| Cybersecurity | `CyberHazard`, `CyberMitigation`, `CyberRisk`, `CybersecurityAsset`, `SecurityRequirement`, `Threat`, `TrustBoundary`, `Vulnerability` | [Cybersecurity](../ontology/cybersecurity.md) |
+| Human factors | `UseError` | [Human factors](../ontology/human-factors.md) |
+| Verification and validation | `ValidationCase`, `VerificationCase` | [Verification and validation](../ontology/verification-validation.md) |
+| Core | `Citation`, `MemoEvidence`, `MemoItem`, `MemoState` | [Core](../reference/areas/core.md) |
+| Views and methodology | `MarkdownDocumentSource`, `MemoCybersecurityAssessmentView`, `MemoCybersecurityThreatModelView`, `MemoDiagramView`, `MemoDocumentView`, `MemoUsabilityEngineeringView`, `MethodologyDefinition`, `ModelMethodBinding`, `Performance`, `RegulatedDevice` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `AllocatedTo`, `AnalyzedBy`, `AppliesInContext`, `AssessedAgainst`, `BindsToInterface`, `Causes`, `Composes`, `ConnectsPhysically`, `ContainsEvent`, `CrossesTrustBoundary`, `DeploysTo`, `DerivesCyberRequirement` … +30 — see [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
+**MEMO relationships it uses:** `AppliesInContext`, `AssessedAgainst`, `BindsToInterface`, `BuildsInto`, `Causes`, `CommitsUseError`, `ComponentExchange`, `ConformsTo`, `ContainsEvent`, `CrossesTrustBoundary`, `DataInterface`, `DeploysTo`, `DerivesCyberRequirement`, `DerivesFrom`, `DetectedBy`, `EnablesUseCase`, `EstimatedFor`, `EvaluatedIn`, `Exploits`, `FunctionalTransfer`, `Governs`, `HasFailureMode`, `HostedBy`, `ImpactsSafety`, `InputToGate`, `Interface`, `LogicalConnector`, `LogicalInterface`, `Mitigates`, `PhysicalInterface`, `ProducesEvent`, `ProducesEvidence`, `RealizedBy`, `RealizedByScenario`, `RealizesUseCase`, `ReducedBy`, `RequiresCapability`, `TestedByUsability`, `ThreatenedBy`, `TracesRisk`, `TracesToDocument`, `Validates`, `WeighedAgainst`. See [Relationships](../reference/building-blocks.md#relationships) for what each one claims and which ends are legal.
+
+**Native SysML relationships it uses:** `actor`, `subject`, `perform`, `allocate`, `satisfy`, `dependency`, `#refinement`, `flow`, `bind`, succession (`first … then`), `transition`, `expose`.
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Functional Analysis](../layers/operations-system.md) · [Requirements and Architecture](../layers/requirements-architecture.md) · [Risk, Cybersecurity, and Assurance](../layers/risk-assurance.md).
 

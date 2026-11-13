@@ -98,141 +98,161 @@
 <g opacity="0.62">
   <rect x="40" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="40" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareSystem</text>
+  <text x="145" y="87" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="107" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">firmware</text>
+  <text x="145" y="124" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareSystem</text>
   
 </g>
 <g opacity="0.62">
   <rect x="370" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="370" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="475" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="475" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">LogicalComponent</text>
+  <text x="475" y="87" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="475" y="107" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">processing</text>
+  <text x="475" y="124" text-anchor="middle" font-size="12.5" fill="#123b6b">: LogicalComponent</text>
   
 </g>
 <g opacity="0.62">
   <rect x="40" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="40" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareComponent</text>
+  <text x="145" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">measurementTask</text>
+  <text x="145" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareComponent</text>
   
 </g>
 <g opacity="0.62">
   <rect x="370" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="370" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="475" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="475" y="265" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">SoftwareModule (item)</text>
+  <text x="475" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="475" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">spo2Item</text>
+  <text x="475" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareModule</text>
   
 </g>
 <g opacity="0.62">
   <rect x="40" y="370" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="40" y="370" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="145" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement def»</text>
-  <text x="145" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Requirement</text>
+  <text x="145" y="387" text-anchor="middle" font-size="11.5" fill="#6b1916" font-style="italic">«requirement»</text>
+  <text x="145" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#6b1916">reqComputeSpo2</text>
+  <text x="145" y="424" text-anchor="middle" font-size="12.5" fill="#6b1916">: Requirement</text>
   
 </g>
 <g opacity="0.62">
   <rect x="370" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="370" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="475" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="475" y="415" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">SoftwareModule (unit)</text>
+  <text x="475" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="475" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">ratioUnit</text>
+  <text x="475" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareModule</text>
   
 </g>
 <g opacity="0.62">
   <rect x="700" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="700" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="805" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="805" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">LogicalComponent</text>
+  <text x="805" y="87" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="805" y="107" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">sensing</text>
+  <text x="805" y="124" text-anchor="middle" font-size="12.5" fill="#123b6b">: LogicalComponent</text>
   
 </g>
 <g opacity="0.62">
   <rect x="700" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="700" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="805" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="805" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareAssembly</text>
+  <text x="805" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="805" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">probe</text>
+  <text x="805" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: HardwareAssembly</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1030" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1030" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1135" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="1135" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">OpticalComponent</text>
+  <text x="1135" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1135" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">emitter</text>
+  <text x="1135" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: OpticalComponent</text>
   
 </g>
 <g opacity="0.62">
   <rect x="700" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="700" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="805" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="805" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">Sensor</text>
+  <text x="805" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="805" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">photodiode</text>
+  <text x="805" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: Sensor</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1030" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1030" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1135" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="1135" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareComponent</text>
+  <text x="1135" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1135" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">fingerPad</text>
+  <text x="1135" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: HardwareComponent</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1360" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1360" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1465" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="1465" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">LogicalComponent</text>
+  <text x="1465" y="87" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1465" y="107" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">display</text>
+  <text x="1465" y="124" text-anchor="middle" font-size="12.5" fill="#123b6b">: LogicalComponent</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1360" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1360" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1465" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="1465" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UserInterface</text>
+  <text x="1465" y="237" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1465" y="257" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">frontPanel</text>
+  <text x="1465" y="274" text-anchor="middle" font-size="12.5" fill="#123b6b">: UserInterface</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1360" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1360" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1465" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="1465" y="415" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">UIElement (screen)</text>
+  <text x="1465" y="387" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1465" y="407" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">readingScreen</text>
+  <text x="1465" y="424" text-anchor="middle" font-size="12.5" fill="#123b6b">: UIElement</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1360" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1360" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1465" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="1465" y="565" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">UIElement (button)</text>
+  <text x="1465" y="537" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1465" y="557" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">spotCheckButton</text>
+  <text x="1465" y="574" text-anchor="middle" font-size="12.5" fill="#123b6b">: UIElement</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1360" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1360" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1465" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action def»</text>
-  <text x="1465" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UIAction</text>
+  <text x="1465" y="687" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="1465" y="707" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">startSpotCheck</text>
+  <text x="1465" y="724" text-anchor="middle" font-size="12.5" fill="#123b6b">: UIAction</text>
   
 </g>
 <g opacity="0.62">
   <rect x="1030" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1030" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1135" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action def»</text>
-  <text x="1135" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SystemFunction</text>
+  <text x="1135" y="687" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="1135" y="707" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">fnMeasureSpO2</text>
+  <text x="1135" y="724" text-anchor="middle" font-size="12.5" fill="#123b6b">: SystemFunction</text>
   
 </g>
 <g opacity="1">
   <rect x="40" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="40" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">OTSSoftwareModule</text>
+  <text x="145" y="537" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="557" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">rtosKernel</text>
+  <text x="145" y="574" text-anchor="middle" font-size="12.5" fill="#123b6b">: OTSSoftwareModule</text>
   <rect x="206" y="510" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="226" y="523" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="40" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="40" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="145" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SBOMEntry</text>
+  <text x="145" y="687" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="145" y="707" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">rtosEntry</text>
+  <text x="145" y="724" text-anchor="middle" font-size="12.5" fill="#123b6b">: SBOMEntry</text>
   <rect x="206" y="660" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="226" y="673" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <g opacity="1">
   <rect x="370" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="3"/>
   <rect x="370" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="475" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
-  <text x="475" y="715" text-anchor="middle" font-size="13.5" font-weight="700" fill="#123b6b">SoftwareBillOfMaterials</text>
+  <text x="475" y="687" text-anchor="middle" font-size="11.5" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="475" y="707" text-anchor="middle" font-size="15.5" font-weight="700" fill="#123b6b">sbom</text>
+  <text x="475" y="724" text-anchor="middle" font-size="12.5" fill="#123b6b">: SoftwareBillOfMaterials</text>
   <rect x="536" y="660" width="40" height="18" rx="9" fill="#2f6fc4"/><text x="556" y="673" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">NEW</text>
 </g>
 <rect x="40" y="772" width="16" height="16" rx="3" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="2"/><text x="64" y="785" font-size="13" fill="#2c3640">Architecture</text>

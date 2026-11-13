@@ -8,7 +8,7 @@
 Methodology defines how a project selects and governs ontology use. It refers
 to model, viewpoint, artifact, and rule definitions without redefining them.
 
-![Methodology ontology elements](../../assets/reference/methodology-elements.svg){ .memo-presentation-graphic }
+![Methodology: every element definition it declares, by subfolder.](../../assets/ontology/area-methodology.svg){ .memo-presentation-graphic }
 
 ## Namespace structure
 
@@ -34,7 +34,7 @@ methodology/
 | `patterns` | `ModelingPattern` | Describe repeatable modeling expectations |
 | `viewpoints` | methodology viewpoint selection | Select views by scope or lifecycle stage |
 | `rules` | `ElementUsageRule`, `RelationUsageRule` | State permitted and required vocabulary use |
-| `workflow` | `WorkflowStep` | Define ordered methodology work |
+| `workflow` | `MethodologyWorkflowStep` | Define ordered methodology work |
 | `gates` | `QualityGate` | Define review boundaries and required checks |
 
 ## Relationships

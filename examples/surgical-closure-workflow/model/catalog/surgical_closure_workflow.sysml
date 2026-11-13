@@ -38,6 +38,7 @@ package memo_examples_surgical_closure_workflow {
         @MemoIdentity { :>> providedId = "LSG-N-001"; }
         doc /* The surgical team needs to perform gastric resection with controlled anatomy, haemostasis, and a checked staple line. */
     }
+    // --8<-- [start:use-case]
     use case ucPerformSleeveGastrectomy : ClinicalUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> providedId = "LSG-UC-001"; :>> label = "Perform laparoscopic sleeve gastrectomy"; }
@@ -51,12 +52,14 @@ package memo_examples_surgical_closure_workflow {
         actor scrubNurseActor = scrubNurse;
         actor anesthetistActor = anesthetist;
     }
+    // --8<-- [end:use-case]
     connection : Motivates connect needControlledGastricResection to ucPerformSleeveGastrectomy;
 
     // ── Procedure workflow ──────────────────────────────────────
     action actTimeOutAndPosition : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-001"; :>> label = "Confirm time out and position"; } }
     action actEstablishAccess : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-002"; :>> label = "Establish laparoscopic access"; } }
     action actMobilizeStomach : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-003"; :>> label = "Mobilize stomach"; } }
+    // --8<-- [start:critical-task]
     action actSizeAndCreateSleeve : OperativeAction {
         @MemoIdentity { :>> providedId = "LSG-ACT-004"; :>> label = "Size and create sleeve"; } attribute :>> criticality = CriticalityKind::high;
 
@@ -76,10 +79,12 @@ package memo_examples_surgical_closure_workflow {
             first stInspectBleeding then stAssessIntegrity;
         }
     }
+    // --8<-- [end:critical-task]
     action actAssessStapleLine : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-005"; :>> label = "Assess staple line"; } attribute :>> criticality = CriticalityKind::high; }
     action actExtractSpecimenAndClose : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-006"; :>> label = "Extract specimen and close ports"; } }
     action actHandover : OperativeAction { @MemoIdentity { :>> providedId = "LSG-ACT-007"; :>> label = "Complete postoperative handover"; } }
 
+    // --8<-- [start:workflow]
     part wfSleeveGastrectomy : ClinicalProcedureWorkflow {
         @MemoIdentity { :>> providedId = "LSG-WF-001"; :>> label = "Laparoscopic sleeve gastrectomy workflow"; }
         attribute :>> entryCondition = "patient prepared; time-out ready";
@@ -115,12 +120,15 @@ package memo_examples_surgical_closure_workflow {
             }
         }
     }
+    // --8<-- [end:workflow]
 
     // ── Scenario paths, each with its own activity/action flow ──
+    // --8<-- [start:refines]
     #refinement dependency wfSleeveGastrectomy::scNominalSleeveProcedure to ucPerformSleeveGastrectomy;
     #refinement dependency wfSleeveGastrectomy::scStapleLineBleeding to ucPerformSleeveGastrectomy;
 
     connection : RealizesUseCase connect wfSleeveGastrectomy to ucPerformSleeveGastrectomy;
+    // --8<-- [end:refines]
 
 
 

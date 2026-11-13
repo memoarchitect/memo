@@ -29,7 +29,7 @@ same port, interface and flow pattern is built for hardware in
 ## Building it up
 ### Step 1 · The hierarchy
 
-[![Step 1: System, Subsystem, LogicalComponent](../assets/ontology/logical-step1.svg){ .memo-presentation-graphic }](../assets/ontology/logical-step1.svg){ title="Open full size" }
+[![Step 1: oximeter contains measurement : Subsystem, which contains sensing : LogicalComponent](../assets/ontology/logical-step1.svg){ .memo-presentation-graphic }](../assets/ontology/logical-step1.svg){ title="Open full size" }
 
 A `LogicalComponent` is one block of the solution, named for what it is
 responsible for rather than what it is built from. Its `componentRole` says what
@@ -269,7 +269,7 @@ thought through. Step 2 adds the connections and the warnings go.
 
 ### Step 2 · Interfaces
 
-[![Step 2: LogicalPort, ComponentExchange](../assets/ontology/logical-step2.svg){ .memo-presentation-graphic }](../assets/ontology/logical-step2.svg){ title="Open full size" }
+[![Step 2: sensing.signalOut and processing.signalIn : LogicalPort, joined by ceSignal : ComponentExchange](../assets/ontology/logical-step2.svg){ .memo-presentation-graphic }](../assets/ontology/logical-step2.svg){ title="Open full size" }
 
 Components meet only at **ports**. A `LogicalPort` is a component's boundary
 feature, and it declares, with a direction, the **item** that crosses it. Two
@@ -512,7 +512,7 @@ attribute :>> latencyRequirement = "Shown within one second of the measurement";
 
 ### Step 3 · Independence
 
-[![Step 3: IndependentOf, IsolationBoundary, FaultContainmentRegion](../assets/ontology/logical-step3.svg){ .memo-presentation-graphic }](../assets/ontology/logical-step3.svg){ title="Open full size" }
+[![Step 3: monitor IndependentOf processing](../assets/ontology/logical-step3.svg){ .memo-presentation-graphic }](../assets/ontology/logical-step3.svg){ title="Open full size" }
 
 Redundancy and monitoring are expressed by **channel roles** and **stated
 independence**, never by copying a component under a similar name. A channel's
@@ -665,15 +665,13 @@ dependency monitor to processing;
 #### Boundaries
 
 `IsolationBoundary` and `FaultContainmentRegion` mark where faults and trust must
-stop, and the figure draws each one around a component. They are not in the
-example because MEMO cannot record that yet. Nothing relates a boundary to the
+stop. They are not in the example or the figure because MEMO cannot record
+that yet. Nothing relates a boundary to the
 components it encloses, and nesting components inside one within the system is
 rejected by CR-ONT-078, which admits only ports and logical components inside a
 logical component.
 
 ### Step 4 · State
-
-[![Step 4: LogicalBehavior](../assets/ontology/logical-step4.svg){ .memo-presentation-graphic }](../assets/ontology/logical-step4.svg){ title="Open full size" }
 
 `LogicalBehavior` is meant to hold the states and modes of the logical solution,
 kept apart from UI state and from physical configuration. A state machine is

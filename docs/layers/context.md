@@ -61,17 +61,7 @@ several standards read, and a requirement rather than a part: it is the top
 obligation the device's design inputs derive from, not a structural thing.
 
 ```sysml
-requirement gpcaIntendedUse : IntendedUse {
-    attribute :>> id = "IU-001";
-    attribute :>> indication =
-        "Management of acute post-operative or chronic pain requiring "
-        "titrated intravenous opioid analgesia.";
-    attribute :>> contraindication =
-        "Patients unable to comprehend or operate the bolus request mechanism.";
-    attribute :>> patientPopulation = "Adult in-patients under clinical supervision.";
-    attribute :>> regulatoryClassification =
-        "FDA Class II infusion pump (21 CFR 880.5725); IEC 62304 software safety class C.";
-}
+--8<-- "examples/gpca-pump/model/catalog/gpca_context.sysml:intended-use"
 ```
 
 ### Use context
@@ -111,14 +101,7 @@ Misuse is recorded at this layer rather than at the risk layer, because it is a
 fact about people in a setting rather than a property of the design.
 
 ```sysml
-part bolusByProxyMisuse : ReasonablyForeseeableMisuse {
-    attribute :>> id = "RFM-001";
-    attribute :>> title = "Bolus by proxy";
-    attribute :>> longDescription =
-        "A person other than the patient activates the bolus request control, "
-        "bypassing the intended patient self-limiting behavior.";
-    attribute :>> affectedUseContext = "UC-001";
-}
+--8<-- "examples/gpca-pump/model/catalog/gpca_context.sysml:misuse"
 ```
 
 Patient-controlled analgesia is safe in part because a sedated patient ceases

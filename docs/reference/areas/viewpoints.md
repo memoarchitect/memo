@@ -9,7 +9,7 @@ A viewpoint defines how model content is selected and presented for a stated
 concern. A view applies that contract to a particular model. Neither owns a
 second copy of the selected content.
 
-![Viewpoint ontology elements](../../assets/reference/viewpoints-elements.svg){ .memo-presentation-graphic }
+![Viewpoints: every element, viewpoint and view definition it declares, by subfolder.](../../assets/ontology/area-viewpoints.svg){ .memo-presentation-graphic }
 
 ## Namespace structure
 
@@ -35,7 +35,7 @@ viewpoints/
 
 | Element family | Purpose |
 | --- | --- |
-| `Viewpoint` | State concern, audience, scope, selection, and presentation contract |
+| `MemoViewpoint` | State concern, audience, scope, selection, and presentation contract |
 | `ViewSelectionQuery`, `ViewInclusionRule` | Select elements and relationships from an existing model |
 | `MemoView` | Common model-specific view definition |
 | `MemoDiagramView` | Describe diagram-oriented presentation |
@@ -44,7 +44,7 @@ viewpoints/
 
 ## Relationships
 
-Viewpoints frame concerns through typed relationships such as `FramesConcern`.
+A viewpoint names the concerns it frames with its `framedConcerns` reference, and its stakeholders with `memoStakeholders`; both point at the stakeholder and concern definitions, not at enum values.
 A view selects existing model content with the native `expose` member, not a
 typed relationship — see [Naming and native constructs](../naming-and-native-constructs.md).
 Selection does not change ownership of the selected element.
@@ -53,7 +53,7 @@ Selection does not change ownership of the selected element.
 
 Viewpoint definitions use controlled values for audience, concern,
 presentation, output, diagram kind, document kind, and workflow stage. Examples
-include `AudienceKind`, `ConcernKind`, `PresentationKind`, `ViewOutputKind`,
+include `ConcernKind`, `PresentationKind`, `ViewOutputKind`,
 `DiagramViewKind`, and `DocumentViewKind`.
 
 | Concern area | View definitions |

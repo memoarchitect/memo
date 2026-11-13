@@ -13,17 +13,18 @@ Use this example for the physical architecture of a passive needle holder.
 
 ## Where this sits in MEMO
 
-Every tutorial is one slice of the same structure. This example populates these layers:
+Every tutorial is one slice of the same structure. This example uses these definitions, by the part of the ontology they come from:
 
-| Layer | Element types it uses | Reference |
+| Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
 | Operational | `OperativeAction` | [Operational](../ontology/operational.md) |
-| Implementation and realization | `MechanicalPart`, `PhysicalAssembly` | [Implementation and realization](../ontology/implementation.md) |
-| Views and methodology | `MemoDiagramView` | [Views and methodology](../reference/areas/viewpoints.md) |
+| Logical | `System` | [Logical](../ontology/logical.md) |
+| Implementation | `MechanicalPart`, `PhysicalAssembly` | [Implementation](../ontology/implementation.md) |
+| Views and methodology | `MemoDiagramView`, `ModelMethodBinding` | [Views and methodology](../reference/areas/viewpoints.md) |
 
-**Typed links it uses:** `Realizes`.
+**Native SysML relationships it uses:** `dependency`, `#refinement`, `expose`.
 
-**Layers it does not populate:** functional, logical, assurance. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
+**Architecture layers it does not populate:** functional, realization. A MEMO project includes only the layers selected by its methodology. For a device modelled all the way through, see the [GPCA Pump case study](../case-studies/gpca/index.md).
 
 **Narrative treatment:** [Context and Use](../layers/context.md) · [Requirements and Architecture](../layers/requirements-architecture.md).
 

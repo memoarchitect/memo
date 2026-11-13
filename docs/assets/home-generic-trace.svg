@@ -24,7 +24,7 @@
     <text x="58" y="132" font-size="13" fill="#5e5157">while lockout is active</text>
 
     <path d="M378 99 H454" stroke="#8d6670" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow-trace)"/>
-    <text x="416" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="#745c64">VerifiedBy</text>
+    <text x="416" y="87" text-anchor="middle" font-size="13" font-weight="700" fill="#745c64">verified by</text>
 
     <rect x="464" y="58" width="274" height="82" rx="12" fill="#fff8f7" stroke="#d78b99" stroke-width="2"/>
     <text x="484" y="85" font-size="13" font-weight="700" fill="#8d3043">VERIFICATION CASE · TC-221</text>
@@ -32,7 +32,7 @@
     <text x="484" y="132" font-size="13" fill="#5e5157">during lockout</text>
 
     <path d="M748 99 H794" stroke="#8d6670" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrow-trace)"/>
-    <text x="771" y="159" text-anchor="middle" font-size="11" font-weight="700" fill="#745c64">ProducesEvidence</text>
+    <text x="771" y="159" text-anchor="middle" font-size="11" font-weight="700" fill="#745c64">produced</text>
 
     <rect x="804" y="58" width="118" height="82" rx="12" fill="#fff8f7" stroke="#d78b99" stroke-width="2"/>
     <text x="824" y="85" font-size="13" font-weight="700" fill="#8d3043">EVIDENCE</text>

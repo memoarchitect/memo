@@ -170,11 +170,12 @@ medical-device semantic layer:
 - **Closure rules** that express completeness and consistency questions as
   model constraints.
 
-![A semantic model records that the overdose hazard is a source for the lockout requirement, the infusion manager satisfies that requirement and implements its risk control, the control mitigates the hazard, and a verification case produces evidence.](assets/home-semantic-thread.svg)
+![A hazard is the source of a requirement; a software module satisfies the requirement and implements the risk control; the control mitigates the hazard; a verification case names the control as its subject and produces evidence.](assets/ontology/semantic-thread.svg)
 
-In this model, the requirement exists because of a known hazard, the component
-satisfies that requirement and implements the lockout control, the control
-mitigates the hazard, and the verification case produces evidence. A change can
+In this model, the requirement exists because of a known hazard, a software
+module satisfies that requirement and implements the risk control, the control
+mitigates the hazard, and the verification case checks the control and produces
+evidence. A change can
 therefore follow the meaning of the model instead of stopping at a list of IDs.
 
 ## Project links

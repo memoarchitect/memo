@@ -28,7 +28,7 @@ the same ideas are built as a story in
 ## Building it up
 ### Step 1 · The chain
 
-[![Step 1: SystemFunction, ComponentFunction](../assets/ontology/functional-step1.svg){ .memo-presentation-graphic }](../assets/ontology/functional-step1.svg){ title="Open full size" }
+[![Step 1: fnMeasureSpO2 : SystemFunction contains fnSenseLight and fnComputeSpO2 : ComponentFunction](../assets/ontology/functional-step1.svg){ .memo-presentation-graphic }](../assets/ontology/functional-step1.svg){ title="Open full size" }
 
 A `SystemFunction` is a responsibility of the system as a whole. Allocating it is
 optional: a system function that no single component owns is a normal
@@ -227,7 +227,7 @@ allocate fnMeasureSpO2.fnComputeSpO2 to processing;
 
 ### Step 2 · Exchanges
 
-[![Step 2: a second ComponentFunction](../assets/ontology/functional-step2.svg){ .memo-presentation-graphic }](../assets/ontology/functional-step2.svg){ title="Open full size" }
+[![Step 2: fnSenseLight passes its signal to fnComputeSpO2 over flow fxSignal : FunctionalTransfer](../assets/ontology/functional-step2.svg){ .memo-presentation-graphic }](../assets/ontology/functional-step2.svg){ title="Open full size" }
 
 Functions pass things to each other. What passes is an **item**, defined once.
 Each function declares what it takes in and gives out as directed parameters
@@ -344,7 +344,7 @@ attribute :>> latencyBudgetMs = 200 [milli*s];
 
 ### Step 3 · Obligations
 
-[![Step 3: BehaviorProperty, TimingConstraint](../assets/ontology/functional-step3.svg){ .memo-presentation-graphic }](../assets/ontology/functional-step3.svg){ title="Open full size" }
+[![Step 3: bpNoValueOnPoorSignal : BehaviorProperty is satisfied by fnMeasureSpO2; tcReadingLatency : TimingConstraint references it](../assets/ontology/functional-step3.svg){ .memo-presentation-graphic }](../assets/ontology/functional-step3.svg){ title="Open full size" }
 
 A `BehaviorProperty` is a behavioural obligation: an invariant, a transition
 rule, a temporal claim, an assumption or a guarantee. It is a `requirement def`,
@@ -483,7 +483,7 @@ attribute :>> verificationMethod = MemoVerificationMethodKind::test;
 
 ### Step 4 · Behaviour and reuse
 
-[![Step 4: StateMachine, ModeConfiguration, FunctionalFlow](../assets/ontology/functional-step4.svg){ .memo-presentation-graphic }](../assets/ontology/functional-step4.svg){ title="Open full size" }
+[![Step 4: oximeterModes : StateMachine with its measuring state; fcSpotReading : FunctionalFlow whose step sense subsets fnSenseLight](../assets/ontology/functional-step4.svg){ .memo-presentation-graphic }](../assets/ontology/functional-step4.svg){ title="Open full size" }
 
 A `StateMachine` and its mode states are native SysML states, with native
 `transition`s inside them. A `ModeConfiguration` is the selection made at a

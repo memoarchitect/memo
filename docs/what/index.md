@@ -36,12 +36,12 @@ constructs for medical-device engineering:
 | SysML v2 capability | MEMO specialization | Engineering use |
 |---|---|---|
 | parts, actions, requirements, items, and ports | medical-device domain definitions with required properties | represent users, scenarios, functions, components, hazards, controls, products, verification, and evidence consistently |
-| `connection def` | typed relationships such as `AllocatedTo`, `Mitigates`, `ControlImplementedBy`, and `VerifiedBy` | record the engineering claim and constrain the element types at each endpoint |
+| `connection def`, `allocation def` | typed relationships such as `Mitigates`, `ControlImplementedBy`, `RealizedBy`, and `DeploysTo`, used where SysML's own relationships (`allocate`, `satisfy`, `perform`, `subject`) would lose a meaning a medical-device argument needs | record the engineering claim and constrain the element types at each endpoint |
 | constraints | closure, coverage, lifecycle, quantitative, and ontology-consistency rules | evaluate whether required model paths and conditions are complete |
 | views and viewpoints | architecture and assurance review viewpoints | select relevant facts from the same model for different engineering roles |
 | packages and imports | a versioned public medical-device library | reuse the ontology across device projects and project-specific extensions |
 
-![Typed relationships turn model connections into reviewable engineering sentences.](../assets/relationship-sentences.svg){ .memo-presentation-graphic }
+![A need motivates a use case that a workflow realizes; a functional flow's step subsets a system function, which is allocated to a logical component; a verification case names the function as its subject and produces evidence.](../assets/ontology/relationship-sentences.svg){ .memo-presentation-graphic }
 
 ## The mental model
 
@@ -141,15 +141,15 @@ Assurance elements remain distinct engineering facts and connect to the
 relevant scenario, function, architecture, implementation, and realization
 elements through typed relationships.
 
-![Representative assurance relationships show requirements, safety, cybersecurity, human factors, and verification facts connected to architecture elements or evidence through typed MEMO relationships.](../assets/assurance-relationships.svg){ .memo-presentation-graphic }
+![A requirement is satisfied by a logical component; a risk control and a cybersecurity mitigation are each implemented by software; a validation case produces evidence that evaluates an operative action; a verification case names a system function as its subject.](../assets/ontology/assurance-relationships.svg){ .memo-presentation-graphic }
 
 | Discipline | Engineering question | Representative MEMO definitions |
 |---|---|---|
 | **Requirements** | Which needs and obligations govern the device and its behavior? | `Need`, `Requirement` |
 | **Safety / risk** | Which hazardous situations, risks, and controls require management? | `Hazard`, `Risk`, `RiskControlMeasure`, FMEA and fault-tree elements |
 | **Cybersecurity** | Which assets, threats, vulnerabilities, and controls affect the device? | `CybersecurityAsset`, `Threat`, `Vulnerability`, cybersecurity controls |
-| **Human factors** | Which users, tasks, use errors, and evaluations shape safe and effective use? | `OperativeAction` with its `criticality`, `UseError`, `FormativeEvaluation`, `UsabilityValidation` |
-| **Verification & validation** | Which cases and evidence establish that engineering claims are met? | `VerificationCase`, `ValidationCase`, `Evidence` |
+| **Human factors** | Which users, tasks, use errors, and evaluations shape safe and effective use? | `OperativeAction` with its `criticality`, `UseError`, and the formative and summative evaluations recorded as `ValidationCase` and `MemoEvidence` |
+| **Verification & validation** | Which cases and evidence establish that engineering claims are met? | `VerificationCase`, `ValidationCase`, `MemoEvidence` |
 
 Architecture definitions and assurance definitions retain their own package
 ownership. Typed relationships connect a requirement, hazard, control,
@@ -163,37 +163,38 @@ become the hub of the engineering description. Requirements state the
 obligations those functions satisfy, architecture assigns responsibility for
 them, safety analysis examines them, and verification cases check them.
 
-![A system function participates in a functional flow, satisfies a requirement, is allocated to a logical component, is examined by an analysis artifact, and connects to verification evidence through typed MEMO relationships.](../assets/function-relationships.svg){ .memo-presentation-graphic }
+![A requirement is satisfied by a system function; a functional flow's step subsets it; it is allocated to a logical component, which has a failure mode; a verification case names it as its subject and produces evidence.](../assets/ontology/function-relationships.svg){ .memo-presentation-graphic }
 
 ### Read each relationship by its meaning
 
 | Relationship | Reads as |
 |---|---|
 | `Motivates` | a need motivates a use case |
-| `Supports` | an operational workflow supports a use case |
-| `Selects` | an operative scenario selects a workflow step or flow for its path |
-| `InvolvesFunction` | a functional flow involves a system function |
-| `SatisfiedBy` | a requirement is satisfied by a design element |
-| `AllocatedTo` | a function is allocated to a responsible architecture element |
-| `AnalyzedBy` | an architecture element is examined by an analysis artifact |
+| `RealizesUseCase` | an operational workflow realizes a use case |
+| nesting and `#refinement` | an operative scenario is a path nested in its workflow, refining its use case |
+| `action step :> fn` in a `FunctionalFlow` | a functional flow performs a system function at one step |
+| `satisfy req by x` | a requirement is satisfied by a design element |
+| `allocate fn to c` | a function is allocated to a responsible architecture element |
+| `HasFailureMode` | an architecture element has a failure mode the FMEA analyses |
 | `IdentifiesHazard` | an analysis identifies a hazard |
 | `Mitigates` | a risk control mitigates a hazard or other risk element |
 | `ControlImplementedBy` | a risk control is implemented by a design element |
-| `VerifiedBy` | a model element is verified by a verification case |
+| a verification case's `subject` | a verification case checks the element named as its subject |
 | `ProducesEvidence` | a verification case produces evidence |
 
-The relationship graph supports traversal in either direction. A reviewer can
-ask:
+The lowercase forms are SysML's own relationships; the capitalised ones are
+MEMO's. The relationship graph supports traversal in either direction. A
+reviewer can ask:
 
-- *Which operational path requires this function?* Follow
-  `InvolvesFunction` to its functional flow and scenario, then to the operative
-  scenario, workflow, and use case.
-- *Which part is responsible for it?* Follow `AllocatedTo` into the logical
-  and implementation architecture.
-- *What could go wrong with it?* Follow `AnalyzedBy` into safety analysis and
-  onward to hazards and controls.
-- *How do we know it works?* Follow `VerifiedBy` to the verification case and
-  `ProducesEvidence` to the resulting record.
+- *Which operational path requires this function?* Follow the functional flow
+  steps that perform it to their flow and scenario, then to the workflow and
+  use case.
+- *Which part is responsible for it?* Follow its `allocate` into the logical
+  architecture, and `RealizedBy` into the implementation.
+- *What could go wrong with it?* Follow `HasFailureMode` into safety analysis
+  and onward to hazards and controls.
+- *How do we know it works?* Find the verification cases that name it as their
+  `subject`, and follow `ProducesEvidence` to the resulting record.
 
 When a function changes, the same graph identifies the affected requirements,
 responsible components, analyses, hazards, controls, verification cases, and

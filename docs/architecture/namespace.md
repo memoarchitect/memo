@@ -41,10 +41,10 @@ that extension facade. Extension packages do not become `memo::` children.
 
 ## Design decisions worth knowing
 
-**Typed links, not free-form arrows.** Every relation is a native SysML v2
-`connection def` specializing `MemoRelationship`: its name is the verb
-(`Mitigates`, `VerifiedBy`, `AllocatedTo`), its typed ends carry the
-roles, a `linkStatus` carries state, and navigation is bidirectional. This is
+**Typed links, not free-form arrows.** Every MEMO relation is a native SysML v2
+`connection def` or `allocation def` specializing `MemoRelationship`: its name is the verb
+(`Mitigates`, `ControlImplementedBy`, `RealizedBy`), its typed ends carry the
+roles, and navigation is bidirectional. This is
 what makes change impact computable instead of a manual search.
 
 **Closure rules are checked, not promised.** Review questions such as *"does

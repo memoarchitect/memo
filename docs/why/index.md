@@ -144,21 +144,22 @@ model.
 ## Relationships need defined semantics
 
 The relationship between two model elements must state the engineering claim
-being made. MEMO defines relationships with specific meanings and legal
-endpoint types:
+being made. MEMO uses SysML's own relationships where they say it, and defines
+its own, with specific meanings and legal endpoint types, where a medical-device
+argument needs more:
 
 | Relationship | Engineering meaning |
 |---|---|
-| `Motivates` | a `Need` provides the rationale for a `UseCase` |
-| `SatisfiedBy` | a requirement or other verifiable element is satisfied by an architecture element |
-| `AllocatedTo` | a function is allocated to the architecture element responsible for it |
-| `AnalyzedBy` | an architecture element is examined by an analysis artifact |
+| `Motivates` | a `Need` provides the rationale for a use case |
+| `satisfy … by` | a requirement is satisfied by an architecture element (SysML's own) |
+| `allocate … to` | a function is allocated to the architecture element responsible for it (SysML's own) |
+| `HasFailureMode` | an architecture element has a failure mode that safety analysis examines |
 | `Mitigates` | a control mitigates a hazard or another risk element |
 | `ControlImplementedBy` | a risk control is implemented by a design element |
-| `VerifiedBy` | a model element is checked by a `VerificationCase` |
+| a verification case's `subject` | the element a `VerificationCase` checks (SysML's own) |
 | `ProducesEvidence` | a `VerificationCase` produces an evidence record |
 
-![Representative typed relationships across MEMO domains](../assets/traceability-backbone.svg){ .memo-presentation-graphic }
+![Representative typed relationships across MEMO domains](../assets/ontology/traceability-backbone.svg){ .memo-presentation-graphic }
 
 The distinction between these relationships allows tools to evaluate specific
 questions. For example:

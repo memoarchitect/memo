@@ -49,25 +49,7 @@ lockout logic a matter of the primary goal rather than an added safety feature.
 The GPCA model records one clinical use case.
 
 ```sysml
-use case ucDeliverPcaTherapy : UseCase {
-    attribute :>> useCaseKind = UseCaseKind::care;
-    attribute :>> id = "UC-001";
-    @MemoIdentity { :>> label = "Deliver patient controlled analgesia"; }
-    attribute :>> goalStatement =
-        "Deliver prescribed analgesia safely while allowing patient-controlled "
-        "bolus requests within configured limits.";
-    attribute :>> trigger =
-        "A clinician starts prescribed patient-controlled analgesia therapy.";
-    attribute :>> successOutcome =
-        "The patient receives prescribed analgesia without exceeding dose, "
-        "lockout, or safety limits.";
-    ref :>> useContext = hospitalWardContext;
-    subject supportingSystem;
-    actor nurseInitiator = actorNurse;
-    actor patientActor = actorPatient;
-    actor prescriberActor = actorPrescriber;
-    actor pharmacistActor = actorPharmacist;
-}
+--8<-- "examples/gpca-pump/model/catalog/gpca_operational.sysml:use-case"
 ```
 
 Its participants are references to Layer 1 rather than restatements of it.

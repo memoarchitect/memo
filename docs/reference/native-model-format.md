@@ -117,8 +117,7 @@ package infusion_pump_catalog {
     private import infusion_pump_assurance::*;
 
     part projectMethodBinding : ModelMethodBinding {
-        attribute :>> id = "PMB-001";
-        @MemoIdentity { :>> label = "InfusionPumpModelMethodBinding"; }
+        @MemoIdentity { :>> providedId = "PMB-001"; :>> label = "Infusion pump model method binding"; }
         attribute :>> modelName = "Infusion Pump";
         ref :>> selectedMethodology = mdDefaultDefinition;
         attribute :>> scopeMode = ScopeModeKind::explicit;

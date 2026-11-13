@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 568" width="860" height="568" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Core: every element definition it declares">
+<defs>
+  <marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e07a1f"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="20" y="20" width="820" height="528" rx="12" fill="#f1f3f5" stroke="#7a8794" stroke-width="1.5"/>
+  <rect x="20" y="20" width="7" height="528" rx="3" fill="#7a8794"/>
+  <text x="38" y="50" font-size="21" font-weight="800" fill="#2c3640">Core</text>
+  <text x="38" y="72" font-size="15" font-style="italic" fill="#2c3640" opacity="0.85">The shared foundations every other area builds on</text>
+  <text x="38" y="105" font-size="12.5" font-weight="800" fill="#7a8794">Annotations</text>
+  <rect x="206" y="84" width="150.5" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="281.25" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">ModelAnnotation</text>
+  <rect x="364.5" y="84" width="124.39999999999999" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="426.7" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">ModelComment</text>
+  <rect x="496.9" y="84" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="567.8" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">ModelRationale</text>
+  <rect x="646.7" y="84" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="695.85" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">ModelNote</text>
+  <text x="38" y="149" font-size="12.5" font-weight="800" fill="#7a8794">Common</text>
+  <rect x="206" y="128" width="89.6" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="250.8" y="149" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoPart</text>
+  <rect x="303.6" y="128" width="124.39999999999999" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="365.8" y="149" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoResource</text>
+  <rect x="436" y="128" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="519.95" y="149" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">RequirementDriver</text>
+  <rect x="611.9" y="128" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="695.85" y="149" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">VerifiableElement</text>
+  <rect x="206" y="168" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="285.6" y="189" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">InterfaceElement</text>
+  <rect x="373.2" y="168" width="124.39999999999999" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="435.4" y="189" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoEvidence</text>
+  <rect x="505.59999999999997" y="168" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="585.1999999999999" y="189" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">AnalysisArtifact</text>
+  <rect x="672.8" y="168" width="107" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="726.3" y="189" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoAction</text>
+  <rect x="206" y="208" width="237.5" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="324.75" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoConstrainedOccurrence</text>
+  <rect x="451.5" y="208" width="89.6" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="496.3" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoPort</text>
+  <rect x="549.1" y="208" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="615.65" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoInterface</text>
+  <rect x="690.2" y="208" width="89.6" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="735" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoItem</text>
+  <rect x="206" y="248" width="115.7" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="263.85" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoUseCase</text>
+  <rect x="329.7" y="248" width="211.4" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="435.4" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoRequirementElement</text>
+  <rect x="549.1" y="248" width="89.6" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="593.9" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoNeed</text>
+  <rect x="646.7" y="248" width="150.5" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="721.95" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoRequirement</text>
+  <rect x="206" y="288" width="115.7" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="263.85" y="309" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoMission</text>
+  <rect x="329.7" y="288" width="194" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="426.7" y="309" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoVerificationCase</text>
+  <rect x="531.7" y="288" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="580.85" y="309" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">MemoState</text>
+  <rect x="638" y="288" width="89.6" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="682.8" y="309" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">Citation</text>
+  <text x="38" y="353" font-size="12.5" font-weight="800" fill="#7a8794">Consistency rules</text>
+  <rect x="206" y="332" width="150.5" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="281.25" y="353" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">ConsistencyRule</text>
+  <rect x="364.5" y="332" width="254.89999999999998" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="491.95" y="353" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">RelationshipConsistencyRule</text>
+  <rect x="206" y="372" width="228.79999999999998" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="320.4" y="393" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">AttributeConsistencyRule</text>
+  <rect x="442.79999999999995" y="372" width="246.2" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="565.9" y="393" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">ConditionalConsistencyRule</text>
+  <rect x="206" y="412" width="220.1" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="316.05" y="433" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">CoverageConsistencyRule</text>
+  <text x="38" y="477" font-size="12.5" font-weight="800" fill="#7a8794">Methodology scope</text>
+  <rect x="206" y="456" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="285.6" y="477" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">ElementKindAlias</text>
+  <text x="38" y="521" font-size="12.5" font-weight="800" fill="#7a8794">Relationships</text>
+  <rect x="206" y="500" width="228.79999999999998" height="32" rx="8" fill="#ffffff" stroke="#7a8794" stroke-width="1.4"/><text x="320.4" y="521" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2c3640">WorkspaceMembershipEntry</text>
+</svg>

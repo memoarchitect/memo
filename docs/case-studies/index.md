@@ -46,8 +46,8 @@ description is complete when every identified concern is framed by at least one
 viewpoint, and every view conforms to a viewpoint. That gives a reviewable
 question — *which concern has no viewpoint?* — instead of an aesthetic one.
 
-MEMO encodes this directly. A `Viewpoint` carries `audience` (the stakeholders)
-and `concernKinds` (the concerns it frames); a `MemoDiagramView` carries a
+MEMO encodes this directly. A viewpoint (`MemoViewpoint`) names its
+stakeholders (`memoStakeholders`) and the concerns it frames (`framedConcerns`); a `MemoDiagramView` carries a
 `viewpointDefinition` naming the viewpoint it conforms to. The tables in each
 case study are read out of the model, not maintained by hand.
 
