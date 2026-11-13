@@ -139,6 +139,41 @@ nav:
       - examples/index.md
       - Lessons:
           - "Your first model: temperature alarm": tutorials/first-model.md
+          - Model hardware, step by step:
+              - tutorials/hardware/index.md
+              - "0 · Reading the notation": tutorials/hardware/00-reading-the-notation.md
+              - "1 · One part": tutorials/hardware/01-one-part.md
+              - "2 · A port": tutorials/hardware/02-a-port.md
+              - "3 · A nested port": tutorials/hardware/03-a-nested-port.md
+              - "4 · Parts inside parts": tutorials/hardware/04-a-second-part.md
+              - "5 · Connect them": tutorials/hardware/05-connect-them.md
+              - "6 · What flows": tutorials/hardware/06-what-flows.md
+              - "7 · Recap: the hardware": tutorials/hardware/07-recap-hardware.md
+              - "8 · Functions": tutorials/hardware/08-functions.md
+              - "9 · Requirements on functions": tutorials/hardware/09-requirements.md
+              - "10 · Risk on functions": tutorials/hardware/10-risk.md
+              - "11 · Interfaces as contracts": tutorials/hardware/11-interfaces.md
+              - "12 · Verify it": tutorials/hardware/12-verify.md
+              - "13 · Recap: the whole slice": tutorials/hardware/13-recap.md
+          - Model the use, step by step:
+              - tutorials/operational/index.md
+              - "1 · The setting": tutorials/operational/01-the-setting.md
+              - "2 · The goal": tutorials/operational/02-the-goal.md
+              - "3 · The steps, defined once": tutorials/operational/03-the-steps.md
+              - "4 · The workflow": tutorials/operational/04-the-workflow.md
+              - "5 · The nominal scenario": tutorials/operational/05-the-nominal-scenario.md
+              - "6 · An alternate scenario": tutorials/operational/06-an-alternate-scenario.md
+              - "7 · Who does each step": tutorials/operational/07-who-does-each-step.md
+              - "8 · Level 2: the work with the oximeter": tutorials/operational/08-level-two.md
+              - "9 · Recap: the use, end to end": tutorials/operational/09-recap.md
+          - Model the functions, step by step:
+              - tutorials/functional-flow/index.md
+              - "1 · What flows": tutorials/functional-flow/01-what-flows.md
+              - "2 · What each function takes and gives": tutorials/functional-flow/02-parameters.md
+              - "3 · The flow and its steps": tutorials/functional-flow/03-the-flow.md
+              - "4 · Exchanges between steps": tutorials/functional-flow/04-exchanges.md
+              - "5 · Safety and its tests": tutorials/functional-flow/05-safety.md
+              - "6 · Recap: the function, opened up": tutorials/functional-flow/06-recap.md
           - Surgical workflow modelling: examples/surgical-closure-workflow.md
       - Worked examples:
           - Temperature Alarm: examples/temperature-alarm.md

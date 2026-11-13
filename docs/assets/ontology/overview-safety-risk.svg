@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 440" width="860" height="440" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Safety and risk: every element definition it declares">
+<defs>
+  <marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e07a1f"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="20" y="20" width="820" height="400" rx="12" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
+  <rect x="20" y="20" width="7" height="400" rx="3" fill="#c7433f"/>
+  <text x="38" y="50" font-size="21" font-weight="800" fill="#6b1916">Safety and risk</text>
+  <text x="38" y="72" font-size="15" font-style="italic" fill="#6b1916" opacity="0.85">What can harm the patient or user, and what controls it?</text>
+  <text x="38" y="105" font-size="12.5" font-weight="800" fill="#c7433f">Analysis</text>
+  <rect x="206" y="84" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="272.55" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">FMEAWorksheet</text>
+  <rect x="347.1" y="84" width="115.7" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="404.95000000000005" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">FailureMode</text>
+  <rect x="470.8" y="84" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="537.35" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">FailureEffect</text>
+  <rect x="611.9" y="84" width="124.39999999999999" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="674.1" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">FailureCause</text>
+  <rect x="206" y="124" width="150.5" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="281.25" y="145" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">DetectionMethod</text>
+  <rect x="364.5" y="124" width="107" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="418" y="145" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">FMEAAction</text>
+  <rect x="479.5" y="124" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="528.65" y="145" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">FaultTree</text>
+  <rect x="585.8" y="124" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="652.3499999999999" y="145" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">FaultTreeNode</text>
+  <rect x="206" y="164" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="272.55" y="185" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">MinimalCutSet</text>
+  <rect x="347.1" y="164" width="107" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="400.6" y="185" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">HAZOPStudy</text>
+  <rect x="462.1" y="164" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="511.25" y="185" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">HAZOPNode</text>
+  <rect x="568.4" y="164" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="639.3" y="185" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">HAZOPDeviation</text>
+  <text x="38" y="229" font-size="12.5" font-weight="800" fill="#c7433f">Risk</text>
+  <rect x="206" y="208" width="254.89999999999998" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="333.45" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">ReasonablyForeseeableMisuse</text>
+  <rect x="468.9" y="208" width="54.8" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="496.29999999999995" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">Risk</text>
+  <rect x="531.6999999999999" y="208" width="124.39999999999999" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="593.9" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">ResidualRisk</text>
+  <rect x="664.0999999999999" y="208" width="107" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="717.5999999999999" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">RiskMatrix</text>
+  <rect x="206" y="248" width="254.89999999999998" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="333.45" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">SafetyRelatedCharacteristic</text>
+  <rect x="468.9" y="248" width="72.19999999999999" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="505" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">Hazard</text>
+  <rect x="549.0999999999999" y="248" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="628.6999999999999" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">SequenceOfEvents</text>
+  <rect x="206" y="288" width="115.7" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="263.85" y="309" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">HazardCause</text>
+  <rect x="329.7" y="288" width="176.6" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="418" y="309" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">HazardousSituation</text>
+  <rect x="514.3" y="288" width="54.8" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="541.6999999999999" y="309" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">Harm</text>
+  <rect x="577.0999999999999" y="288" width="176.6" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="665.3999999999999" y="309" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">RiskControlMeasure</text>
+  <rect x="206" y="328" width="80.9" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="246.45" y="349" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">Benefit</text>
+  <rect x="294.9" y="328" width="272.29999999999995" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="431.04999999999995" y="349" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">OverallResidualRiskEvaluation</text>
+  <text x="38" y="393" font-size="12.5" font-weight="800" fill="#c7433f">Postmarket surveillance</text>
+  <rect x="206" y="372" width="211.4" height="32" rx="8" fill="#ffffff" stroke="#c7433f" stroke-width="1.4"/><text x="311.7" y="393" text-anchor="middle" font-size="14.5" font-weight="700" fill="#6b1916">PostMarketSurveillance</text>
+</svg>

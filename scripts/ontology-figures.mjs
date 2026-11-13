@@ -10,53 +10,94 @@
 //   { ref: 'featureName' }        a typed reference feature of the source
 //   { contains: true }            native containment, owner first
 
+// The overview: each architecture layer and assurance discipline names the
+// folder of src/ it lives in, and the generator draws every element definition
+// declared there; the links that carry the work down to the next layer, and the
+// links the assurance disciplines reach into each layer with, are listed here. A link is { from, rel | native, to } and is
+// checked like an edge: a MEMO relationship's declared ends must accept the
+// definitions named. `to` may list several targets the same link accepts.
 export const OVERVIEW = {
-  groups: [
-    { label: 'Understanding the need', from: 0, to: 1 },
-    { label: 'Designing the solution', from: 2, to: 4 },
-  ],
   layers: [
     {
+      id: 'operational',
       name: 'Operational',
+      group: 'Understanding the need',
       question: 'Why does the device exist, for whom, in what setting?',
-      elements: ['UseCase', 'OperationalWorkflow', 'OperativeScenario', 'OperativeAction'],
-      down: 'perform · #refinement',
-      assurance: 'Motivates · Validates',
+      folder: 'architecture/operational',
+      down: [{ from: 'OperativeAction', native: 'perform', to: ['SystemFunction'] }],
+      assurance: [
+        { from: 'Need', rel: 'Motivates', to: ['ClinicalUseCase'] },
+        { from: 'OperativeAction', rel: 'CommitsUseError', to: ['UseError'] },
+        { from: 'OperativeAction', rel: 'Validates', to: ['ValidationCase'] },
+      ],
     },
     {
+      id: 'functional',
       name: 'Functional',
       question: 'What must the system do?',
-      elements: ['SystemFunction', 'ComponentFunction', 'FunctionalFlow', 'StateMachine'],
-      down: 'allocate',
-      assurance: 'satisfy · subject',
+      folder: 'architecture/functional',
+      down: [{ from: 'ComponentFunction', native: 'allocate', to: ['LogicalComponent'] }],
+      assurance: [
+        { from: 'Requirement', native: 'satisfy', to: ['SystemFunction'] },
+        { from: 'VerificationCase', native: 'subject', to: ['SystemFunction'] },
+      ],
     },
     {
+      id: 'logical',
       name: 'Logical',
+      group: 'Designing the solution',
       question: 'How is the solution organised, before choosing a technology?',
-      elements: ['LogicalComponent', 'LogicalPort', 'ComponentExchange', 'IsolationBoundary'],
-      down: '#refinement',
-      assurance: 'satisfy',
+      folder: 'architecture/logical',
+      down: [{ from: 'LogicalComponent', rel: 'RealizedBy', to: ['SoftwareSystem', 'HardwareAssembly'] }],
+      assurance: [
+        { from: 'Requirement', native: 'satisfy', to: ['LogicalComponent'] },
+        { from: 'TrustBoundary', rel: 'CrossesTrustBoundary', to: ['ComponentExchange'] },
+      ],
     },
     {
+      id: 'implementation',
       name: 'Implementation',
       question: 'What is it built from?',
-      elements: ['SoftwareModule', 'SoftwareComponent', 'HardwareComponent', 'UIElement'],
-      down: 'BuildsInto · DeploysTo',
-      assurance: 'ControlImplementedBy',
+      folder: 'architecture/implementation',
+      down: [
+        { from: 'SoftwareModule', rel: 'BuildsInto', to: ['SoftwareDeploymentUnit'] },
+        { from: 'SoftwareComponent', rel: 'MemoryBinding', to: ['MemoryDevice'] },
+      ],
+      assurance: [
+        { from: 'RiskControlMeasure', rel: 'ControlImplementedBy', to: ['UIElement'] },
+        { from: 'UseError', rel: 'ErrorAtElement', to: ['UIElement'] },
+        { from: 'HardwareComponent', rel: 'HasFailureMode', to: ['FailureMode'] },
+      ],
     },
     {
+      id: 'realization',
       name: 'Realization',
       question: 'Where does it run, and how do its parts reach each other?',
-      elements: ['SoftwareDeploymentUnit', 'ProcessingNode', 'RuntimeEnvironment', 'EndToEndFlow'],
-      assurance: 'satisfy',
+      folder: 'architecture/realization',
+      assurance: [
+        { from: 'ProcessingNode', rel: 'HasFailureMode', to: ['FailureMode'] },
+      ],
     },
   ],
   disciplines: [
-    { name: 'Requirements', elements: ['Need', 'Requirement'] },
-    { name: 'Safety and risk', elements: ['Hazard', 'Risk', 'RiskControlMeasure'] },
-    { name: 'Cybersecurity', elements: ['Threat', 'Vulnerability', 'CyberMitigation'] },
-    { name: 'Human factors', elements: ['UseError'] },
-    { name: 'Verification and validation', elements: ['VerificationCase', 'ValidationCase'] },
+    { id: 'requirements', name: 'Requirements', question: 'What must be true, and why?', folder: 'assurance/requirements', rootLabel: 'Requirements' },
+    { id: 'safety-risk', name: 'Safety and risk', question: 'What can harm the patient or user, and what controls it?', folder: 'assurance/safety_risk', rootLabel: 'Risk' },
+    { id: 'cybersecurity', name: 'Cybersecurity', question: 'What can an attacker reach, and what stops them?', folder: 'assurance/cybersecurity' },
+    { id: 'human-factors', name: 'Human factors', question: 'Where can a user get it wrong?', folder: 'assurance/human_factors' },
+    { id: 'verification-validation', name: 'Verification and validation', question: 'What shows it was built right, and is the right thing?', folder: 'assurance/verification_validation', rootLabel: 'Verification and validation' },
+  ],
+  foundations: [
+    {
+      id: 'stakeholders-concerns',
+      name: 'Stakeholders and concerns',
+      question: 'Who has a stake in the device, and what do they care about?',
+      folder: 'viewpoints/stakeholders_concerns',
+      groups: [
+        { label: 'Stakeholders', base: 'MemoStakeholder' },
+        { label: 'Concerns', base: 'MemoConcern' },
+        { label: 'Quality attributes', base: 'MemoQualityAttribute' },
+      ],
+    },
   ],
 };
 
@@ -210,98 +251,139 @@ export const LAYER_FIGURES = [
   {
     id: 'implementation',
     title: 'Implementation layer',
+    colWidth: 330,
     steps: [
       {
-        title: 'Software: a system of modules, and what the modules contain',
+        title: 'Software: a logical component is realized by a module, inside a software system, with the task that runs it',
         nodes: [
-          { id: 'ss', type: 'SoftwareSystem', col: 1, row: 0 },
-          { id: 'sm', type: 'SoftwareModule', col: 1, row: 1 },
-          { id: 'alg', type: 'Algorithm', col: 0, row: 2 },
-          { id: 'dm', type: 'DataModel', col: 1, row: 2 },
+          { id: 'ss', type: 'SoftwareSystem', col: 0, row: 0 },
+          { id: 'lcP', type: 'LogicalComponent', col: 1, row: 0 },
+          { id: 'task', type: 'SoftwareComponent', col: 0, row: 1 },
+          { id: 'item', type: 'SoftwareModule', label: 'SoftwareModule (item)', col: 1, row: 1 },
+          { id: 'req', type: 'Requirement', col: 0, row: 2 },
+          { id: 'unit', type: 'SoftwareModule', label: 'SoftwareModule (unit)', col: 1, row: 2 },
         ],
         edges: [
-          { from: 'ss', to: 'sm', contains: true },
-          { from: 'sm', to: 'alg', contains: true },
-          { from: 'sm', to: 'dm', contains: true },
+          { from: 'lcP', to: 'item', rel: 'RealizedBy' },
+          { from: 'ss', to: 'item', contains: true },
+          { from: 'ss', to: 'task', contains: true },
+          { from: 'item', to: 'unit', contains: true },
+          { from: 'task', to: 'item', native: '#refinement' },
+          { from: 'req', to: 'item', native: 'satisfy' },
         ],
       },
       {
-        title: 'Hardware: assemblies, the components inside them, the parts that meet the physical world',
+        title: 'Hardware: a logical component is realized by an assembly, and the assembly holds the parts',
         nodes: [
-          { id: 'ha', type: 'HardwareAssembly', col: 3, row: 0 },
-          { id: 'hc', type: 'HardwareComponent', col: 3, row: 1 },
-          { id: 'sen', type: 'Sensor', col: 3, row: 2 },
-          { id: 'act', type: 'Actuator', col: 4, row: 2 },
+          { id: 'lcS', type: 'LogicalComponent', col: 2, row: 0 },
+          { id: 'ha', type: 'HardwareAssembly', col: 2, row: 1 },
+          { id: 'emitter', type: 'OpticalComponent', col: 3, row: 1 },
+          { id: 'sensor', type: 'Sensor', col: 2, row: 2 },
+          { id: 'pad', type: 'HardwareComponent', col: 3, row: 2 },
         ],
         edges: [
-          { from: 'ha', to: 'hc', contains: true },
-          { from: 'hc', to: 'sen', contains: true },
-          { from: 'hc', to: 'act', contains: true },
+          { from: 'lcS', to: 'ha', rel: 'RealizedBy' },
+          { from: 'ha', to: 'emitter', contains: true },
+          { from: 'ha', to: 'sensor', contains: true },
+          { from: 'ha', to: 'pad', contains: true },
         ],
       },
       {
-        title: 'User interface: what the user operates, and the actions its elements trigger',
+        title: 'User interface: what the user operates, and the action an element triggers',
         nodes: [
-          { id: 'ui', type: 'UserInterface', col: 1, row: 3 },
-          { id: 'uie', type: 'UIElement', col: 1, row: 4 },
-          { id: 'uia', type: 'UIAction', col: 2, row: 4 },
+          { id: 'lcD', type: 'LogicalComponent', col: 4, row: 0 },
+          { id: 'ui', type: 'UserInterface', col: 4, row: 1 },
+          { id: 'screen', type: 'UIElement', label: 'UIElement (screen)', col: 4, row: 2 },
+          { id: 'button', type: 'UIElement', label: 'UIElement (button)', col: 4, row: 3 },
+          { id: 'uia', type: 'UIAction', col: 4, row: 4 },
+          { id: 'fn', type: 'SystemFunction', col: 3, row: 4 },
         ],
         edges: [
-          { from: 'ui', to: 'uie', contains: true },
-          { from: 'uie', to: 'uia', rel: 'ElementTriggersAction' },
+          { from: 'lcD', to: 'ui', rel: 'RealizedBy' },
+          { from: 'ui', to: 'screen', contains: true },
+          { from: 'screen', to: 'button', contains: true },
+          { from: 'button', to: 'uia', rel: 'ElementTriggersAction' },
+          { from: 'uia', to: 'fn', native: 'perform' },
         ],
       },
       {
-        title: 'Third-party software: a module depends on SOUP',
-        nodes: [{ id: 'soup', type: 'SOUPSoftwareModule', col: 2, row: 1 }],
-        edges: [{ from: 'sm', to: 'soup', rel: 'DependsOnSoup' }],
+        title: 'Third-party software: a module depends on an off-the-shelf module, which the SBOM lists',
+        nodes: [
+          { id: 'ots', type: 'OTSSoftwareModule', col: 0, row: 3 },
+          { id: 'entry', type: 'SBOMEntry', col: 0, row: 4 },
+          { id: 'sbom', type: 'SoftwareBillOfMaterials', col: 1, row: 4 },
+        ],
+        edges: [
+          { from: 'item', to: 'ots', rel: 'DependsOnSoup' },
+          { from: 'sbom', to: 'entry', contains: true },
+          { from: 'entry', to: 'ots', ref: 'inventoriedElement' },
+        ],
       },
     ],
   },
   {
     id: 'realization',
     title: 'Realization layer',
+    colWidth: 370,
     steps: [
       {
-        title: 'The deployment chain: modules build into a unit, the unit deploys to a node, the node is hosted by its board',
+        title: 'The deployment chain: a module builds into a unit, the unit deploys to a node, the node is hosted by its board',
         nodes: [
           { id: 'sm', type: 'SoftwareModule', col: 0, row: 1 },
           { id: 'sdu', type: 'SoftwareDeploymentUnit', col: 1, row: 1 },
-          { id: 'pn', type: 'ProcessingNode', col: 2, row: 1 },
-          { id: 'hc', type: 'HardwareComponent', col: 3, row: 1 },
+          { id: 'pn', type: 'ProcessingNode', col: 1, row: 2 },
+          { id: 'board', type: 'HardwareAssembly', col: 2, row: 2 },
         ],
         edges: [
           { from: 'sm', to: 'sdu', rel: 'BuildsInto' },
           { from: 'sdu', to: 'pn', rel: 'DeploysTo' },
-          { from: 'pn', to: 'hc', rel: 'HostedBy' },
+          { from: 'pn', to: 'board', rel: 'HostedBy' },
         ],
       },
       {
-        title: 'What the node provides: a runtime environment, and the memory it uses',
+        title: 'What the node provides: a runtime environment, and the memory a task is bound to',
         nodes: [
-          { id: 're', type: 'RuntimeEnvironment', col: 2, row: 2 },
-          { id: 'md', type: 'MemoryDevice', col: 1, row: 2 },
+          { id: 're', type: 'RuntimeEnvironment', col: 0, row: 2 },
+          { id: 'mem', type: 'MemoryDevice', col: 0, row: 3 },
+          { id: 'task', type: 'SoftwareComponent', col: 0, row: 4 },
         ],
         edges: [
           { from: 'pn', to: 're', rel: 'ProvidesEnvironment' },
-          { from: 'pn', to: 'md', contains: true },
+          { from: 'pn', to: 'mem', contains: true },
+          { from: 'task', to: 'mem', rel: 'MemoryBinding' },
         ],
       },
       {
-        title: 'End to end: a flow traced across the layers, from specification to the units it crosses',
+        title: 'End to end: a flow made of flow specifications on logical ports, traced to the unit it crosses',
         nodes: [
           { id: 'e2e', type: 'EndToEndFlow', col: 1, row: 0 },
           { id: 'fs', type: 'FlowSpecification', col: 2, row: 0 },
+          { id: 'lp', type: 'LogicalPort', col: 3, row: 0 },
         ],
         edges: [
-          { from: 'e2e', to: 'fs', rel: 'FlowComprisesSpec' },
           { from: 'e2e', to: 'sdu', rel: 'FlowTraversesBinding' },
+          { from: 'e2e', to: 'fs', rel: 'FlowComprisesSpec' },
+          { from: 'fs', to: 'lp', ref: 'outPort' },
         ],
       },
       {
-        title: 'The physical boundary: the connector the outside world plugs into',
-        nodes: [{ id: 'pp', type: 'PhysicalPort', col: 4, row: 1 }],
-        edges: [{ from: 'hc', to: 'pp', contains: true }],
+        title: 'The physical boundary: a physical interface joins two ports, carries the flow, and is bound to the traces',
+        nodes: [
+          { id: 'pIn', type: 'PhysicalPort', label: 'PhysicalPort (in)', col: 1, row: 3 },
+          { id: 'fe', type: 'ElectronicComponent', col: 3, row: 2 },
+          { id: 'pOut', type: 'PhysicalPort', label: 'PhysicalPort (out)', col: 3, row: 3 },
+          { id: 'iface', type: 'PhysicalInterface', col: 2, row: 4 },
+          { id: 'traces', type: 'HardwareComponent', col: 2, row: 5 },
+        ],
+        edges: [
+          { from: 'pn', to: 'pIn', contains: true },
+          { from: 'board', to: 'fe', contains: true },
+          { from: 'fe', to: 'pOut', contains: true },
+          { from: 'iface', to: 'pOut', native: 'connect' },
+          { from: 'iface', to: 'pIn', native: 'connect' },
+          { from: 'pOut', to: 'pIn', native: 'flow' },
+          { from: 'iface', to: 'traces', rel: 'ConnectionBinding' },
+        ],
       },
     ],
   },

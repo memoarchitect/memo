@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 526" width="860" height="526" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Operational: every element definition it declares">
+<defs>
+  <marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e07a1f"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="20" y="20" width="820" height="486" rx="12" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="20" y="20" width="7" height="486" rx="3" fill="#2f6fc4"/>
+  <text x="38" y="50" font-size="21" font-weight="800" fill="#123b6b">Operational</text>
+  <text x="38" y="72" font-size="15" font-style="italic" fill="#123b6b" opacity="0.85">Why does the device exist, for whom, in what setting?</text>
+  <text x="38" y="105" font-size="12.5" font-weight="800" fill="#2f6fc4">Activities</text>
+  <rect x="206" y="84" width="150.5" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="281.25" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OperativeAction</text>
+  <rect x="364.5" y="84" width="228.79999999999998" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="478.9" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">TaskDifficultyAssessment</text>
+  <text x="38" y="149" font-size="12.5" font-weight="800" fill="#2f6fc4">Context · actors</text>
+  <rect x="206" y="128" width="54.8" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="233.4" y="149" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">User</text>
+  <rect x="268.8" y="128" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="317.95" y="149" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">MemoActor</text>
+  <text x="38" y="193" font-size="12.5" font-weight="800" fill="#2f6fc4">Context · stakeholders</text>
+  <rect x="206" y="172" width="220.1" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="316.05" y="193" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ArchitectureDescription</text>
+  <rect x="434.1" y="172" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="483.25" y="193" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ModelKind</text>
+  <rect x="540.4" y="172" width="176.6" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="628.6999999999999" y="193" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">CorrespondenceRule</text>
+  <text x="38" y="237" font-size="12.5" font-weight="800" fill="#2f6fc4">Context · use context</text>
+  <rect x="206" y="216" width="107" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="259.5" y="237" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">UseContext</text>
+  <rect x="321" y="216" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="391.9" y="237" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">UseEnvironment</text>
+  <text x="38" y="281" font-size="12.5" font-weight="800" fill="#2f6fc4">Scenarios</text>
+  <rect x="206" y="260" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="289.95" y="281" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OperativeScenario</text>
+  <text x="38" y="325" font-size="12.5" font-weight="800" fill="#2f6fc4">Structure</text>
+  <rect x="206" y="304" width="115.7" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="263.85" y="325" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">IntendedUse</text>
+  <rect x="329.7" y="304" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="413.65" y="325" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OperationalEntity</text>
+  <rect x="505.6" y="304" width="202.7" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="606.95" y="325" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OperationalCapability</text>
+  <text x="38" y="369" font-size="12.5" font-weight="800" fill="#2f6fc4">Use cases</text>
+  <rect x="206" y="348" width="150.5" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="281.25" y="369" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ClinicalUseCase</text>
+  <rect x="364.5" y="348" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="431.05" y="369" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SystemUseCase</text>
+  <text x="38" y="413" font-size="12.5" font-weight="800" fill="#2f6fc4">Workflows</text>
+  <rect x="206" y="392" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="285.6" y="413" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ClinicalWorkflow</text>
+  <rect x="373.2" y="392" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="444.1" y="413" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SystemWorkflow</text>
+  <rect x="523" y="392" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="602.6" y="413" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">WorkflowResource</text>
+  <line x1="38" y1="438" x2="822" y2="438" stroke="#c7433f" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+  <text x="38" y="459" font-size="13" font-weight="800" fill="#a12e2a">ASSURANCE</text>
+  <text x="138" y="459" font-size="14" fill="#1f2a37">Need  <tspan font-weight="800" fill="#a12e2a">Motivates</tspan>  ClinicalUseCase</text>
+  <text x="399.56" y="459" font-size="14" fill="#1f2a37">OperativeAction  <tspan font-weight="800" fill="#a12e2a">CommitsUseError</tspan>  UseError</text>
+  <text x="138" y="481" font-size="14" fill="#1f2a37">OperativeAction  <tspan font-weight="800" fill="#a12e2a">Validates</tspan>  ValidationCase</text>
+</svg>

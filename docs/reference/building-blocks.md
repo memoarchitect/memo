@@ -24,7 +24,7 @@ Elements are SysML definitions used to create model content.
 MEMO connects elements with native SysML v2 relationships where the language has
 one, and with its own typed relationships (`connection def`s, and `allocation
 def`s for the deployment chain) where the native form would lose meaning.
-[MEMO in a nutshell](../ontology/index.md#how-the-layers-connect) explains the
+[MEMO in a nutshell](../ontology/index.md) explains the
 split, and each layer page lists every relationship that touches the layer.
 
 | Purpose | Native SysML | MEMO relationships |

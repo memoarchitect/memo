@@ -30,7 +30,8 @@ generated from the source.
 | `RealizesUseCase` | OperationalWorkflow | UseCase | This organised work realises the goal |
 | `perform` (native) | Action or UI action | Function or scenario | This action carries out that behaviour |
 | `allocate` (native) | Function | Component | This component is responsible for this behaviour |
-| `#refinement dependency` (native) | Realizing element | Realized element | This implementation realises that design element |
+| `allocation … : RealizedBy` | Logical component | Hardware or software | This implementation realizes that logical block |
+| `#refinement dependency` (native) | Realizing element | Realized element | This element realizes that one, wherever no more specific relation is declared |
 | `allocation … : BuildsInto` / `: DeploysTo` / `: HostedBy` | Module / unit / node | Unit / node / board | The deployment chain |
 | `DerivesFrom` | Need, risk, threat, or other driver | Requirement | This requirement exists because of this driver |
 | `satisfy` (native) | Requirement | Design element | This design element satisfies the obligation |

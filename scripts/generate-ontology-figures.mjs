@@ -12,7 +12,7 @@
 
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { RELATIONSHIP_KINDS, byName, conformsTo, root } from './lib/sysml-source.mjs';
+import { RELATIONSHIP_KINDS, byName, conformsTo, declarationRecords, root } from './lib/sysml-source.mjs';
 import { LAYER_FIGURES, OVERVIEW } from './ontology-figures.mjs';
 
 const output = join(root, 'docs', 'assets', 'ontology');
@@ -25,7 +25,7 @@ export const AREAS = {
 };
 
 // Native SysML relationships a figure may draw, with how each reads.
-const NATIVE = new Set(['actor', 'subject', 'perform', 'allocate', 'satisfy', '#refinement', 'dependency', 'succession', 'flow', 'bind', 'include', 'transition']);
+const NATIVE = new Set(['actor', 'subject', 'perform', 'allocate', 'satisfy', '#refinement', 'dependency', 'succession', 'flow', 'bind', 'include', 'transition', 'connect']);
 
 const areaOf = (type) => {
   const path = byName.get(type)?.record.relativeSource ?? '';
@@ -34,7 +34,7 @@ const areaOf = (type) => {
   if (path.startsWith('methodology/')) return 'methodology';
   return 'core';
 };
-const kindLabel = (type) => byName.get(type)?.kind.replace(/ def$/, '') ?? '';
+const kindLabel = (type) => byName.get(type)?.kind ?? '';
 
 // ─── Checking ─────────────────────────────────────────────────────────────
 
@@ -73,7 +73,9 @@ const H = 62;
 const COL = 410;
 const ROW = 150;
 const PAD = 40;
-const position = ({ col, row }) => ({ x: PAD + col * COL, y: PAD + 30 + row * ROW });
+// A figure may set its own column spacing (colWidth) when its edge labels are short.
+let colWidth = COL;
+const position = ({ col, row }) => ({ x: PAD + col * colWidth, y: PAD + 30 + row * ROW });
 
 function boxEdgePoint(box, toward) {
   const cx = box.x + W / 2;
@@ -140,6 +142,7 @@ function legend(y, areasShown, complete) {
 }
 
 function renderStep(figure, stepIndex, complete = false) {
+  colWidth = figure.colWidth ?? COL;
   const shown = figure.steps.slice(0, stepIndex + 1);
   const nodes = new Map();
   const edges = [];
@@ -151,7 +154,7 @@ function renderStep(figure, stepIndex, complete = false) {
   const allNodes = figure.steps.flatMap((step) => step.nodes ?? []);
   const cols = Math.max(...allNodes.map(({ col }) => col)) + 1;
   const rows = Math.max(...allNodes.map(({ row }) => row)) + 1;
-  const width = PAD * 2 + (cols - 1) * COL + W;
+  const width = PAD * 2 + (cols - 1) * colWidth + W;
   const legendY = PAD + 30 + (rows - 1) * ROW + H + 40;
   const height = legendY + 40;
   const areasShown = new Set(allNodes.map(({ type }) => areaOf(type)));
@@ -170,66 +173,157 @@ ${legend(legendY, areasShown, complete)}
 `;
 }
 
-// The stacked-layer overview: the architecture layers as planes, the
-// assurance disciplines as a band across all of them.
-function renderOverview() {
-  const planeW = 760;
-  const planeH = 120;
-  const skew = 60;
-  const gap = 56;
-  const left = 210;
-  const top = 60;
-  const bandX = left + planeW + skew + 150;
-  const height = top + OVERVIEW.layers.length * (planeH + gap) - gap + 30;
-  const width = bandX + 300;
-  const planes = OVERVIEW.layers.map((layer, index) => {
-    const y = top + index * (planeH + gap);
-    const shade = ['#dbe8fb', '#d3e3fa', '#cadcf7', '#c1d5f4', '#b8cef1'][index];
-    const chips = layer.elements.map((name, chipIndex) => {
-      const cx = left + skew + 22 + chipIndex * 172;
-      return `<rect x="${cx}" y="${y + 60}" width="160" height="34" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.5"/><text x="${cx + 80}" y="${y + 82}" text-anchor="middle" font-size="${name.length > 20 ? 12 : 14}" font-weight="700" fill="#123b6b">${esc(name)}</text>`;
-    }).join('');
-    const arrow = index < OVERVIEW.layers.length - 1 ? `
-  <path d="M${left + 40} ${y + planeH + 4} C ${left + 10} ${y + planeH + 30}, ${left + 10} ${y + planeH + 30}, ${left + 40} ${y + planeH + gap - 4}" fill="none" stroke="#e07a1f" stroke-width="2.2" stroke-dasharray="6 5" marker-end="url(#orange)"/>
-  <text x="${left + 54}" y="${y + planeH + gap / 2 + 5}" font-size="13" font-style="italic" fill="#b25a0c">${esc(layer.down)}</text>` : '';
-    return `
-  <polygon points="${left + skew},${y} ${left + skew + planeW},${y} ${left + planeW},${y + planeH} ${left},${y + planeH}" fill="${shade}" stroke="#2f6fc4" stroke-width="1.5"/>
-  <text x="${left + skew + 22}" y="${y + 28}" font-size="19" font-weight="800" fill="#123b6b">${esc(layer.name)}</text>
-  <text x="${left + skew + 22}" y="${y + 48}" font-size="14" font-style="italic" fill="#2c4f7a">${esc(layer.question)}</text>
-  ${chips}${arrow}`;
-  }).join('');
-  const groups = OVERVIEW.groups.map(({ label, from, to }) => {
-    const y1 = top + from * (planeH + gap);
-    const y2 = top + to * (planeH + gap) + planeH;
-    const mid = (y1 + y2) / 2;
-    return `<line x1="${left - 40}" y1="${y1}" x2="${left - 40}" y2="${y2}" stroke="#2f6fc4" stroke-width="3"/>
-  <text transform="translate(${left - 56} ${mid}) rotate(-90)" text-anchor="middle" font-size="16" font-weight="800" fill="#123b6b">${esc(label)}</text>`;
-  }).join('\n  ');
-  const bandTop = top - 10;
-  const bandBottom = top + (OVERVIEW.layers.length - 1) * (planeH + gap) + planeH + 10;
-  const disciplines = OVERVIEW.disciplines.map(({ name, elements }, index) => {
-    const y = bandTop + 78 + index * ((bandBottom - bandTop - 96) / OVERVIEW.disciplines.length);
-    return `<text x="${bandX + 20}" y="${y}" font-size="16" font-weight="800" fill="#ffffff">${esc(name)}</text>
-  <text x="${bandX + 20}" y="${y + 20}" font-size="12.5" fill="#fde7e6">${esc(elements.join(' · '))}</text>`;
-  }).join('\n  ');
-  const links = OVERVIEW.layers.map((layer, index) => {
-    const y = top + index * (planeH + gap) + planeH / 2;
-    return `<line x1="${bandX - 6}" y1="${y}" x2="${left + planeW + skew / 2 + 8}" y2="${y}" stroke="#c7433f" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#red)"/>
-  <text x="${(bandX + left + planeW + skew / 2) / 2 + 2}" y="${y - 8}" text-anchor="middle" font-size="12" font-style="italic" fill="#a12e2a">${esc(layer.assurance)}</text>`;
-  }).join('\n  ');
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="MEMO's architecture layers, stacked, with the assurance disciplines across them">
+// The overview: the architecture layers top to bottom, each with every element
+// definition its folder in src/ declares, the link that carries the work down,
+// and the links the assurance disciplines reach into it with; the disciplines
+// follow in a second figure. The elements are read from the source, so a
+// definition added to a layer appears here without anyone listing it. Drawn
+// at about the width of the page column, so it is read at close to full size.
+const OV = { width: 860, pad: 20, chipH: 32, chipGap: 8, chipFont: 14.5, labelW: 168 };
+const ORANGE = '#b25a0c';
+const RED = '#a12e2a';
+
+// An element is a concrete definition a model element is typed by: not an
+// abstract base, not a relationship, not an attribute, enum, constraint or
+// metadata. Interface and flow definitions count unless they are MEMO
+// relationships, because a model writes `interface x : PhysicalInterface`.
+const NOT_ELEMENTS = new Set(['enum def', 'attribute def', 'metadata def', 'constraint def', 'viewpoint def', 'view def', 'calc def', 'analysis def', 'connection def', 'allocation def']);
+const isElement = (declaration) => !declaration.abstract && !NOT_ELEMENTS.has(declaration.kind) && !conformsTo(declaration.name, 'MemoRelationship');
+const groupLabel = (sub) => sub.split('/').map((part) => (part === 'ui' ? 'UI' : part.replaceAll('_', ' '))).join(' · ').replace(/^./, (c) => c.toUpperCase());
+// An entry groups its elements by subfolder, or, when it names `groups`, by
+// the base each element specializes.
+function elementGroups({ folder, rootLabel = '', groups: byBase }) {
+  if (byBase) {
+    const names = declarationRecords.filter((d) => d.record.relativeSource.startsWith(`${folder}/`) && isElement(d)).map((d) => d.name);
+    return byBase.map(({ label, base }) => ({ label, names: names.filter((name) => conformsTo(name, base)) }));
+  }
+  const groups = new Map();
+  for (const declaration of declarationRecords) {
+    const path = declaration.record.relativeSource;
+    if (!path.startsWith(`${folder}/`) || !isElement(declaration)) continue;
+    const sub = path.slice(folder.length + 1).split('/').slice(0, -1).join('/');
+    const label = sub ? groupLabel(sub) : rootLabel;
+    if (!groups.has(label)) groups.set(label, []);
+    groups.get(label).push(declaration.name);
+  }
+  return [...groups].map(([label, names]) => ({ label, names }));
+}
+const elementsOf = (entry) => elementGroups(entry).flatMap(({ names }) => names);
+
+const chipWidth = (name) => name.length * OV.chipFont * 0.6 + 20;
+// Lays the groups out: a label column, then the group's chips wrapping in the
+// rest of the card. Returns the SVG and the height it takes.
+function chipGroups(groups, x, y, right, area) {
+  const labelled = groups.some(({ label }) => label);
+  const start = x + (labelled ? OV.labelW : 0);
+  const parts = [];
+  let top = y;
+  for (const { label, names } of groups) {
+    if (label) parts.push(`<text x="${x}" y="${top + 21}" font-size="12.5" font-weight="800" fill="${area.stroke}">${esc(label)}</text>`);
+    let cx = start;
+    let cy = top;
+    for (const name of names) {
+      const w = chipWidth(name);
+      if (cx > start && cx + w > right) { cx = start; cy += OV.chipH + OV.chipGap; }
+      parts.push(`<rect x="${cx}" y="${cy}" width="${w}" height="${OV.chipH}" rx="8" fill="#ffffff" stroke="${area.stroke}" stroke-width="1.4"/><text x="${cx + w / 2}" y="${cy + 21}" text-anchor="middle" font-size="${OV.chipFont}" font-weight="700" fill="${area.text}">${esc(name)}</text>`);
+      cx += w + OV.chipGap;
+    }
+    top = cy + OV.chipH + OV.chipGap + 4;
+  }
+  return { svg: parts.join('\n  '), height: top - y - OV.chipGap - 4 };
+}
+
+// One link as a sentence: From  relation  To. A MEMO relationship is bold, a
+// native one italic, as in every other figure.
+const linkWidth = ({ from, rel, native, to }, size) => (from.length + to.join(' or ').length + 4) * size * 0.5 + (rel ?? native).length * size * 0.56;
+function linkText({ from, rel, native, to }, x, y, size, colour) {
+  const relation = rel ? `<tspan font-weight="800" fill="${colour}">${esc(rel)}</tspan>` : `<tspan font-style="italic" font-weight="700" fill="${colour}">${esc(native)}</tspan>`;
+  return `<text x="${x}" y="${y}" font-size="${size}" fill="#1f2a37">${esc(from)}  ${relation}  ${esc(to.join(' or '))}</text>`;
+}
+function linkRows(links, size, maxWidth) {
+  const rows = [];
+  let row = [];
+  let used = 0;
+  for (const link of links) {
+    const width = linkWidth(link, size);
+    if (row.length && used + 30 + width > maxWidth) { rows.push(row); row = []; used = 0; }
+    row.push({ link, x: used ? used + 30 : 0 });
+    used += (used ? 30 : 0) + width;
+  }
+  if (row.length) rows.push(row);
+  return rows;
+}
+
+// The map: the five layers as one line each, and the link that carries the
+// work from each layer to the next. The elements are in the per-layer cards.
+function renderMap() {
+  const { width, pad } = OV;
+  const cardW = width - pad * 2;
+  const arch = AREAS.architecture;
+  const parts = [];
+  let y = pad;
+  OVERVIEW.layers.forEach((layer) => {
+    if (layer.group) {
+      y += 18;
+      parts.push(`<text x="${pad}" y="${y}" font-size="13" font-weight="800" letter-spacing="1.2" fill="#2f6fc4">${esc(layer.group.toUpperCase())}</text>`);
+      parts.push(`<line x1="${pad + layer.group.length * 9.6 + 12}" y1="${y - 4}" x2="${width - pad}" y2="${y - 4}" stroke="#2f6fc4" stroke-width="1" opacity="0.5"/>`);
+      y += 12;
+    }
+    const cardH = 62;
+    parts.push(`<rect x="${pad}" y="${y}" width="${cardW}" height="${cardH}" rx="12" fill="${arch.fill}" stroke="${arch.stroke}" stroke-width="1.5"/>`);
+    parts.push(`<rect x="${pad}" y="${y}" width="7" height="${cardH}" rx="3" fill="${arch.stroke}"/>`);
+    parts.push(`<text x="${pad + 22}" y="${y + 39}" font-size="21" font-weight="800" fill="${arch.text}">${esc(layer.name)}</text>`);
+    parts.push(`<text x="${pad + 210}" y="${y + 38}" font-size="16" font-style="italic" fill="#2c4f7a">${esc(layer.question)}</text>`);
+    y += cardH;
+    if (layer.down) {
+      const gap = 20 + layer.down.length * 23;
+      const ax = pad + 60;
+      parts.push(`<line x1="${ax}" y1="${y + 4}" x2="${ax}" y2="${y + gap - 4}" stroke="#e07a1f" stroke-width="3" marker-end="url(#orange)"/>`);
+      layer.down.forEach((link, line) => parts.push(linkText(link, ax + 20, y + 27 + line * 23, 15.5, ORANGE)));
+      y += gap;
+    }
+  });
+  return overviewSvg(parts, y + pad, "MEMO's five architecture layers, the question each answers, and the link that carries the work from each layer to the next");
+}
+
+// One card per layer or discipline: every element its folder declares and,
+// for a layer, the links the assurance disciplines reach into it with.
+function renderCard(entry, area) {
+  const { width, pad } = OV;
+  const cardW = width - pad * 2;
+  const inner = pad + 18;
+  const parts = [];
+  const y = pad;
+  const assuranceRows = entry.assurance ? linkRows(entry.assurance, 14, cardW - 130) : [];
+  const chips = chipGroups(elementGroups(entry), inner, y + 64, pad + cardW - 16, area);
+  const footer = assuranceRows.length ? 16 + assuranceRows.length * 22 + 6 : 0;
+  const cardH = 64 + chips.height + 16 + footer;
+  parts.push(`<rect x="${pad}" y="${y}" width="${cardW}" height="${cardH}" rx="12" fill="${area.fill}" stroke="${area.stroke}" stroke-width="1.5"/>`);
+  parts.push(`<rect x="${pad}" y="${y}" width="7" height="${cardH}" rx="3" fill="${area.stroke}"/>`);
+  parts.push(`<text x="${inner}" y="${y + 30}" font-size="21" font-weight="800" fill="${area.text}">${esc(entry.name)}</text>`);
+  parts.push(`<text x="${inner}" y="${y + 52}" font-size="15" font-style="italic" fill="${area.text}" opacity="0.85">${esc(entry.question)}</text>`);
+  parts.push(chips.svg);
+  if (assuranceRows.length) {
+    let ay = y + 64 + chips.height + 16;
+    parts.push(`<line x1="${inner}" y1="${ay - 2}" x2="${pad + cardW - 18}" y2="${ay - 2}" stroke="#c7433f" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>`);
+    ay += 4;
+    parts.push(`<text x="${inner}" y="${ay + 15}" font-size="13" font-weight="800" fill="${RED}">ASSURANCE</text>`);
+    for (const row of assuranceRows) {
+      for (const { link, x } of row) parts.push(linkText(link, inner + 100 + x, ay + 15, 14, RED));
+      ay += 22;
+    }
+  }
+  return overviewSvg(parts, y + cardH + pad, `${entry.name}: every element definition it declares`);
+}
+
+function overviewSvg(parts, height, label) {
+  const { width } = OV;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="${esc(label)}">
 <defs>
-  <marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e07a1f"/></marker>
-  <marker id="red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c7433f"/></marker>
+  <marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e07a1f"/></marker>
 </defs>
 <rect width="100%" height="100%" fill="#ffffff"/>
-<text x="${left + skew}" y="${top - 26}" font-size="15" font-weight="800" fill="#123b6b">ARCHITECTURE LAYERS · the device, from purpose to deployment</text>
-  ${groups}
-  ${planes}
-<rect x="${bandX}" y="${bandTop}" width="270" height="${bandBottom - bandTop}" rx="14" fill="#c7433f"/>
-<text x="${bandX + 20}" y="${bandTop + 28}" font-size="15" font-weight="800" fill="#ffffff">ASSURANCE · across every layer</text>
-  ${disciplines}
-  ${links}
+  ${parts.join('\n  ')}
 </svg>
 `;
 }
@@ -248,11 +342,42 @@ for (const figure of LAYER_FIGURES) {
     for (const edge of step.edges ?? []) checkEdge(where, edge, placed);
   });
 }
-for (const layer of OVERVIEW.layers) {
-  for (const name of layer.elements) check(`overview ${layer.name}`, byName.has(name), `${name} is not a definition the ontology declares`);
+function checkLink(where, link) {
+  const ends = [link.from, ...link.to];
+  for (const name of ends) check(where, byName.has(name), `${name} is not a definition the ontology declares`);
+  if (link.native) {
+    check(where, NATIVE.has(link.native), `${link.native} is not a native relationship this generator draws`);
+    return;
+  }
+  const relation = byName.get(link.rel);
+  check(where, relation && RELATIONSHIP_KINDS.has(relation.kind), `${link.rel} is not a relationship the ontology declares`);
+  if (!relation) return;
+  const [source, target] = [relation.relationEnds[0], relation.relationEnds.at(-1)];
+  check(where, !source?.type || conformsTo(link.from, source.type), `${link.rel} accepts ${source?.type} at its source, not ${link.from}`);
+  for (const to of link.to) check(where, !target?.type || conformsTo(to, target.type), `${link.rel} accepts ${target?.type} at its target, not ${to}`);
 }
-for (const { name, elements } of OVERVIEW.disciplines) {
-  for (const element of elements) check(`overview ${name}`, byName.has(element), `${element} is not a definition the ontology declares`);
+OVERVIEW.layers.forEach((layer, index) => {
+  const where = `overview ${layer.name}`;
+  const elements = elementsOf(layer);
+  check(where, elements.length, `${layer.folder} declares no element definitions`);
+  const next = OVERVIEW.layers[index + 1];
+  const nextElements = next ? elementsOf(next) : [];
+  for (const link of layer.down ?? []) {
+    checkLink(`${where} down`, link);
+    check(`${where} down`, elements.includes(link.from), `${link.from} starts the link down but is not one of this layer's elements`);
+    for (const to of link.to) check(`${where} down`, nextElements.includes(to), `${to} ends the link down but is not one of ${next?.name ?? 'the next layer'}'s elements`);
+  }
+  for (const link of layer.assurance) {
+    checkLink(`${where} assurance`, link);
+    const own = [link.from, ...link.to].filter((name) => elements.includes(name));
+    check(`${where} assurance`, own.length, `${link.rel ?? link.native} names none of this layer's elements`);
+  }
+});
+for (const discipline of OVERVIEW.disciplines) check(`overview ${discipline.name}`, elementsOf(discipline).length, `${discipline.folder} declares no element definitions`);
+for (const foundation of OVERVIEW.foundations) {
+  const shown = new Set(elementsOf(foundation));
+  const declared = declarationRecords.filter((d) => d.record.relativeSource.startsWith(`${foundation.folder}/`) && isElement(d)).map((d) => d.name);
+  for (const name of declared) check(`overview ${foundation.name}`, shown.has(name), `${name} is declared in ${foundation.folder} but falls in none of the card's groups`);
 }
 if (problems.length) {
   console.error(`Ontology figures do not match the source:\n  ${problems.join('\n  ')}`);
@@ -260,7 +385,10 @@ if (problems.length) {
 }
 
 mkdirSync(output, { recursive: true });
-writeFileSync(join(output, 'overview-layers.svg'), renderOverview());
+writeFileSync(join(output, 'overview-layers.svg'), renderMap());
+for (const layer of OVERVIEW.layers) writeFileSync(join(output, `overview-${layer.id}.svg`), renderCard(layer, AREAS.architecture));
+for (const discipline of OVERVIEW.disciplines) writeFileSync(join(output, `overview-${discipline.id}.svg`), renderCard(discipline, AREAS.assurance));
+for (const foundation of OVERVIEW.foundations) writeFileSync(join(output, `overview-${foundation.id}.svg`), renderCard(foundation, AREAS.core));
 for (const figure of LAYER_FIGURES) {
   figure.steps.forEach((_, index) => writeFileSync(join(output, `${figure.id}-step${index + 1}.svg`), renderStep(figure, index)));
   writeFileSync(join(output, `${figure.id}.svg`), renderStep(figure, figure.steps.length - 1, true));

@@ -93,133 +93,133 @@
 <g opacity="1">
   <rect x="40" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="40" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«use case»</text>
+  <text x="145" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«use case def»</text>
   <text x="145" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UseCase</text>
   
 </g>
 <g opacity="1">
   <rect x="450" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="450" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="555" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="555" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action def»</text>
   <text x="555" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SystemFunction</text>
   
 </g>
 <g opacity="1">
   <rect x="40" y="220" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="40" y="220" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="145" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement»</text>
+  <text x="145" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement def»</text>
   <text x="145" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Need</text>
   
 </g>
 <g opacity="1">
   <rect x="450" y="220" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="450" y="220" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="555" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement»</text>
+  <text x="555" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement def»</text>
   <text x="555" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Requirement</text>
   
 </g>
 <g opacity="1">
   <rect x="860" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="860" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="965" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
+  <text x="965" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action def»</text>
   <text x="965" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">OperativeAction</text>
   
 </g>
 <g opacity="1">
   <rect x="1270" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
   <rect x="1270" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1375" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
+  <text x="1375" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
   <text x="1375" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareModule</text>
   
 </g>
 <g opacity="1">
   <rect x="860" y="220" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="860" y="220" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="965" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part»</text>
+  <text x="965" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part def»</text>
   <text x="965" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">UseError</text>
   
 </g>
 <g opacity="1">
   <rect x="860" y="370" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="860" y="370" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="965" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item»</text>
+  <text x="965" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item def»</text>
   <text x="965" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Hazard</text>
   
 </g>
 <g opacity="1">
   <rect x="860" y="520" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="860" y="520" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="965" y="543" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item»</text>
+  <text x="965" y="543" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item def»</text>
   <text x="965" y="565" text-anchor="middle" font-size="15" font-weight="700" fill="#6b1916">HazardousSituation</text>
   
 </g>
 <g opacity="1">
   <rect x="860" y="670" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="860" y="670" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="965" y="693" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item»</text>
+  <text x="965" y="693" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item def»</text>
   <text x="965" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Harm</text>
   
 </g>
 <g opacity="1">
   <rect x="450" y="520" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="450" y="520" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="555" y="543" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part»</text>
+  <text x="555" y="543" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part def»</text>
   <text x="555" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Risk</text>
   
 </g>
 <g opacity="1">
   <rect x="1270" y="370" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="1270" y="370" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="1375" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part»</text>
+  <text x="1375" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part def»</text>
   <text x="1375" y="415" text-anchor="middle" font-size="15" font-weight="700" fill="#6b1916">RiskControlMeasure</text>
   
 </g>
 <g opacity="1">
   <rect x="1680" y="220" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="1680" y="220" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="1785" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part»</text>
+  <text x="1785" y="243" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part def»</text>
   <text x="1785" y="265" text-anchor="middle" font-size="15" font-weight="700" fill="#6b1916">CybersecurityAsset</text>
   
 </g>
 <g opacity="1">
   <rect x="1680" y="370" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="1680" y="370" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="1785" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part»</text>
+  <text x="1785" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part def»</text>
   <text x="1785" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Threat</text>
   
 </g>
 <g opacity="1">
   <rect x="1680" y="520" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="1680" y="520" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="1785" y="543" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item»</text>
+  <text x="1785" y="543" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«item def»</text>
   <text x="1785" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Vulnerability</text>
   
 </g>
 <g opacity="1">
   <rect x="1270" y="520" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="1270" y="520" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="1375" y="543" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part»</text>
+  <text x="1375" y="543" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«part def»</text>
   <text x="1375" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">CyberMitigation</text>
   
 </g>
 <g opacity="1">
   <rect x="40" y="370" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="40" y="370" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="145" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«verification»</text>
+  <text x="145" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«verification def»</text>
   <text x="145" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">VerificationCase</text>
   
 </g>
 <g opacity="1">
   <rect x="450" y="370" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
   <rect x="450" y="370" width="6" height="62" rx="3" fill="#c7433f"/>
-  <text x="555" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«verification»</text>
+  <text x="555" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«verification def»</text>
   <text x="555" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">ValidationCase</text>
   
 </g>
 <g opacity="1">
   <rect x="40" y="520" width="210" height="62" rx="10" fill="#f1f3f5" stroke="#7a8794" stroke-width="1.5"/>
   <rect x="40" y="520" width="6" height="62" rx="3" fill="#7a8794"/>
-  <text x="145" y="543" text-anchor="middle" font-size="12" fill="#2c3640" font-style="italic">«part»</text>
+  <text x="145" y="543" text-anchor="middle" font-size="12" fill="#2c3640" font-style="italic">«part def»</text>
   <text x="145" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#2c3640">MemoEvidence</text>
   
 </g>

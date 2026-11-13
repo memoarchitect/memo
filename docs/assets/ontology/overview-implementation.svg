@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 810" width="860" height="810" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Implementation: every element definition it declares">
+<defs>
+  <marker id="orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e07a1f"/></marker>
+</defs>
+<rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="20" y="20" width="820" height="770" rx="12" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="20" y="20" width="7" height="770" rx="3" fill="#2f6fc4"/>
+  <text x="38" y="50" font-size="21" font-weight="800" fill="#123b6b">Implementation</text>
+  <text x="38" y="72" font-size="15" font-style="italic" fill="#123b6b" opacity="0.85">What is it built from?</text>
+  <text x="38" y="105" font-size="12.5" font-weight="800" fill="#2f6fc4">Hardware · common</text>
+  <rect x="206" y="84" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="285.6" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">PhysicalAssembly</text>
+  <rect x="373.2" y="84" width="185.29999999999998" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="465.84999999999997" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">PhysicalSubassembly</text>
+  <rect x="566.5" y="84" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="646.1" y="105" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">HardwareAssembly</text>
+  <rect x="206" y="124" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="289.95" y="145" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">PhysicalComponent</text>
+  <rect x="381.9" y="124" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="465.84999999999997" y="145" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">HardwareComponent</text>
+  <rect x="557.8" y="124" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="641.75" y="145" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">AcousticComponent</text>
+  <rect x="206" y="164" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="285.6" y="185" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ThermalComponent</text>
+  <text x="38" y="229" font-size="12.5" font-weight="800" fill="#2f6fc4">Hardware · electrical</text>
+  <rect x="206" y="208" width="185.29999999999998" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="298.65" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ElectricalComponent</text>
+  <rect x="399.29999999999995" y="208" width="185.29999999999998" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="491.94999999999993" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ElectronicComponent</text>
+  <rect x="592.5999999999999" y="208" width="115.7" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="650.4499999999999" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">PowerSupply</text>
+  <rect x="716.3" y="208" width="80.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="756.75" y="229" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">Battery</text>
+  <rect x="206" y="248" width="63.5" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="237.75" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">Cable</text>
+  <rect x="277.5" y="248" width="202.7" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="378.85" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">PhysicalConnectorPart</text>
+  <rect x="488.2" y="248" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="554.75" y="269" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">NetworkMedium</text>
+  <text x="38" y="313" font-size="12.5" font-weight="800" fill="#2f6fc4">Hardware · fluidic</text>
+  <rect x="206" y="292" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="285.6" y="313" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">FluidicComponent</text>
+  <rect x="373.2" y="292" width="176.6" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="461.5" y="313" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">PneumaticComponent</text>
+  <text x="38" y="357" font-size="12.5" font-weight="800" fill="#2f6fc4">Hardware · mechanical</text>
+  <rect x="206" y="336" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="276.9" y="357" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">MechanicalPart</text>
+  <rect x="355.8" y="336" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="404.95" y="357" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">Enclosure</text>
+  <text x="38" y="401" font-size="12.5" font-weight="800" fill="#2f6fc4">Hardware · optical</text>
+  <rect x="206" y="380" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="285.6" y="401" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OpticalComponent</text>
+  <text x="38" y="445" font-size="12.5" font-weight="800" fill="#2f6fc4">Hardware · sensing</text>
+  <rect x="206" y="424" width="72.19999999999999" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="242.1" y="445" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">Sensor</text>
+  <rect x="286.2" y="424" width="89.6" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="331" y="445" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">Actuator</text>
+  <text x="38" y="489" font-size="12.5" font-weight="800" fill="#2f6fc4">Software · runtime</text>
+  <rect x="206" y="468" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="289.95" y="489" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SoftwareComponent</text>
+  <rect x="381.9" y="468" width="194" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="478.9" y="489" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OTSSoftwareComponent</text>
+  <text x="38" y="533" font-size="12.5" font-weight="800" fill="#2f6fc4">Software · structure</text>
+  <rect x="206" y="512" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="276.9" y="533" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SoftwareSystem</text>
+  <rect x="355.8" y="512" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="426.70000000000005" y="533" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SoftwareModule</text>
+  <rect x="505.6" y="512" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="554.75" y="533" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">Algorithm</text>
+  <rect x="611.9" y="512" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="661.05" y="533" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">DataModel</text>
+  <rect x="206" y="552" width="202.7" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="307.35" y="573" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ConfigurationArtifact</text>
+  <rect x="416.7" y="552" width="176.6" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="505" y="573" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SOUPSoftwareModule</text>
+  <rect x="601.3" y="552" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="685.25" y="573" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OTSSoftwareModule</text>
+  <rect x="206" y="592" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="255.15" y="613" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SBOMEntry</text>
+  <rect x="312.3" y="592" width="220.1" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="422.35" y="613" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SoftwareBillOfMaterials</text>
+  <text x="38" y="657" font-size="12.5" font-weight="800" fill="#2f6fc4">UI</text>
+  <rect x="206" y="636" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="272.55" y="657" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">UserInterface</text>
+  <rect x="347.1" y="636" width="98.3" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="396.25" y="657" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">UIElement</text>
+  <rect x="453.40000000000003" y="636" width="228.79999999999998" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="567.8000000000001" y="657" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OperatorInterfaceElement</text>
+  <rect x="690.2" y="636" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="756.75" y="657" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ScreenCapture</text>
+  <rect x="206" y="676" width="80.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="246.45" y="697" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">UIState</text>
+  <rect x="294.9" y="676" width="80.9" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="335.34999999999997" y="697" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">UIEvent</text>
+  <rect x="383.79999999999995" y="676" width="89.6" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="428.59999999999997" y="697" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">UIAction</text>
+  <rect x="481.4" y="676" width="150.5" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="556.65" y="697" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">InteractionFlow</text>
+  <line x1="38" y1="722" x2="822" y2="722" stroke="#c7433f" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
+  <text x="38" y="743" font-size="13" font-weight="800" fill="#a12e2a">ASSURANCE</text>
+  <text x="138" y="743" font-size="14" fill="#1f2a37">RiskControlMeasure  <tspan font-weight="800" fill="#a12e2a">ControlImplementedBy</tspan>  UIElement</text>
+  <text x="541.8" y="743" font-size="14" fill="#1f2a37">UseError  <tspan font-weight="800" fill="#a12e2a">ErrorAtElement</tspan>  UIElement</text>
+  <text x="138" y="765" font-size="14" fill="#1f2a37">HardwareComponent  <tspan font-weight="800" fill="#a12e2a">HasFailureMode</tspan>  FailureMode</text>
+</svg>

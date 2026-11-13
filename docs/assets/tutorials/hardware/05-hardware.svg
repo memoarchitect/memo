@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 350" font-family="Helvetica, Arial, sans-serif" font-size="13" role="img" aria-label="Pulse oximeter hardware">
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3d5a80"/></marker><marker id="r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c0392b"/></marker></defs>
+<style>.box{fill:#f4f7fb;stroke:#3d5a80;stroke-width:2}.inner{fill:#ffffff;stroke:#3d5a80;stroke-width:1.5}.port{fill:#ffffff;stroke:#3d5a80;stroke-width:2}.pin{fill:#e0ecf8;stroke:#3d5a80;stroke-width:1.5}.t{fill:#1d2a3a}.s{fill:#4a5a6a;font-size:11px}.k{fill:#4a5a6a;font-size:11px;font-style:italic}.ty{font-weight:normal}.bind{stroke:#7a8a9a;stroke-width:1.5;stroke-dasharray:5 4;fill:none}.flow{stroke:#c0392b;stroke-width:2;fill:none}.ifc{fill:#fdf2e3;stroke:#d08b2c;stroke-width:1.5}.fl{fill:#c0392b;font-size:11px}.il{fill:#9a5d12;font-size:11px}.edge{stroke:#3d5a80;stroke-width:1.5;fill:none}.contain{stroke:#7a8a9a;stroke-width:1.5;stroke-dasharray:5 4;fill:none}.el{fill:#3d5a80;font-size:11px}</style>
+<rect width="100%" height="100%" rx="8" fill="#f7fbfd"/>
+<rect class="box" x="20" y="30" width="300" height="300" rx="6"/>
+<text class="k" x="170" y="52" text-anchor="middle">«part»</text><text class="t" x="170" y="70" text-anchor="middle" font-size="13" font-weight="bold">oximeter<tspan class="ty"> : HardwareAssembly</tspan></text>
+<text class="s" x="170" y="88" text-anchor="middle">HW-1 · Pulse oximeter</text>
+<rect class="port" x="12" y="270" width="16" height="16"/>
+<text class="s" x="34" y="283" text-anchor="start">chargeIn</text>
+<text class="s" x="34" y="297" text-anchor="start">in · USB-C</text>
+<rect class="port" x="310" y="145" width="20" height="90" />
+<rect class="pin" x="324" y="163" width="14" height="14"/><rect class="pin" x="324" y="198" width="14" height="14"/>
+<text class="s" x="310" y="136" text-anchor="end">probeSocket</text>
+<rect class="inner" x="40" y="140" width="220" height="90" rx="4"/>
+<text class="k" x="150" y="162" text-anchor="middle">«part»</text><text class="t" x="150" y="180" text-anchor="middle" font-size="12" font-weight="bold">frontEnd<tspan class="ty"> : ElectronicComponent</tspan></text>
+<rect class="port" x="252" y="162" width="16" height="16"/><rect class="port" x="252" y="197" width="16" height="16"/>
+<text class="s" x="246" y="222" text-anchor="end">ledDriveOut · signalIn</text>
+<rect class="box" x="480" y="30" width="330" height="300" rx="6"/>
+<text class="k" x="645" y="52" text-anchor="middle">«part»</text><text class="t" x="645" y="70" text-anchor="middle" font-size="13" font-weight="bold">fingerProbe<tspan class="ty"> : HardwareAssembly</tspan></text>
+<rect class="inner" x="570" y="85" width="225" height="52" rx="4"/>
+<text class="k" x="682" y="105" text-anchor="middle">«part»</text><text class="t" x="682" y="123" text-anchor="middle" font-size="12" font-weight="bold">ledPair<tspan class="ty"> : ElectronicComponent</tspan></text>
+<rect class="inner" x="570" y="160" width="225" height="52" rx="4"/>
+<text class="k" x="682" y="180" text-anchor="middle">«part»</text><text class="t" x="682" y="198" text-anchor="middle" font-size="12" font-weight="bold">photodiode<tspan class="ty"> : Sensor</tspan></text>
+<rect class="inner" x="570" y="235" width="225" height="52" rx="4"/>
+<text class="k" x="682" y="255" text-anchor="middle">«part»</text><text class="t" x="682" y="273" text-anchor="middle" font-size="12" font-weight="bold">fingerPad<tspan class="ty"> : MechanicalPart</tspan></text>
+<rect class="port" x="562" y="103" width="16" height="16"/><rect class="port" x="562" y="178" width="16" height="16"/>
+<text class="s" x="682" y="302" text-anchor="middle">patientContact = true</text>
+<rect class="port" x="470" y="145" width="20" height="90"/>
+<rect class="pin" x="462" y="163" width="14" height="14"/><rect class="pin" x="462" y="198" width="14" height="14"/>
+<text class="s" x="496" y="252" text-anchor="start">probePlug</text>
+<path class="bind" d="M268 170 H310"/><path class="bind" d="M268 205 H310"/>
+<path class="bind" d="M490 170 H530 V111 H562"/><path class="bind" d="M490 205 H530 V186 H562"/>
+<text class="s" x="289" y="163" text-anchor="middle">bind</text>
+<text class="s" x="546" y="104" text-anchor="middle">bind</text>
+<rect class="ifc" x="338" y="150" width="124" height="80" rx="4"/>
+<text class="il" x="400" y="250" text-anchor="middle">probeLink</text>
+<text class="il" x="400" y="264" text-anchor="middle">: PhysicalInterface</text>
+</svg>

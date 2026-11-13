@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1930 812" width="1930" height="812" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Implementation layer, step 4: Third-party software: a module depends on SOUP">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1610 812" width="1610" height="812" font-family="Nunito, 'Segoe UI', Arial, sans-serif" role="img" aria-label="Implementation layer, step 4: Third-party software: a module depends on an off-the-shelf module, which the SBOM lists">
 <defs>
   <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1f2a37"/></marker>
   <marker id="diamond" viewBox="0 0 14 10" refX="13" refY="5" markerWidth="14" markerHeight="10" orient="auto-start-reverse"><path d="M1,5 L7,1 L13,5 L7,9 z" fill="#1f2a37"/></marker>
@@ -6,137 +6,239 @@
 <rect width="100%" height="100%" fill="#ffffff"/>
 <text x="40" y="40" font-size="18" font-weight="800" fill="#123b6b">Implementation layer · the whole picture</text>
 <g opacity="1">
-  <line x1="555" y1="132" x2="555" y2="220" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
-  <rect x="518.4" y="165" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
-  <text x="555" y="180" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+  <line x1="475" y1="132" x2="475" y2="220" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="431" y="165" width="88" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="475" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">RealizedBy</text>
 </g>
 <g opacity="1">
-  <line x1="470.26666666666665" y1="282" x2="229.73333333333335" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
-  <rect x="313.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
-  <text x="350" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+  <line x1="213.2" y1="132" x2="406.8" y2="220" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="273.4" y="165" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="310" y="180" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
 </g>
 <g opacity="1">
-  <line x1="555" y1="282" x2="555" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
-  <rect x="518.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
-  <text x="555" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+  <line x1="145" y1="132" x2="145" y2="220" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="108.4" y="165" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="145" y="180" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
 </g>
 <g opacity="1">
-  <line x1="1375" y1="132" x2="1375" y2="220" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
-  <rect x="1338.4" y="165" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
-  <text x="1375" y="180" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+  <line x1="475" y1="282" x2="475" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="438.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="475" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
 </g>
 <g opacity="1">
-  <line x1="1375" y1="282" x2="1375" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
-  <rect x="1338.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
-  <text x="1375" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+  <line x1="250" y1="251" x2="370" y2="251" stroke="#4b5866" stroke-width="1.6" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+  <rect x="262.3" y="240" width="95.4" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="310" y="255" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">#refinement</text>
 </g>
 <g opacity="1">
-  <line x1="1459.7333333333333" y1="282" x2="1700.2666666666667" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
-  <rect x="1543.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
-  <text x="1580" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+  <line x1="213.2" y1="370" x2="406.8" y2="282" stroke="#4b5866" stroke-width="1.6" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+  <rect x="277.1" y="315" width="65.80000000000001" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="310" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">satisfy</text>
 </g>
 <g opacity="1">
-  <line x1="555" y1="582" x2="555" y2="670" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
-  <rect x="518.4" y="615" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
-  <text x="555" y="630" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+  <line x1="805" y1="132" x2="805" y2="220" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="761" y="165" width="88" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="805" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">RealizedBy</text>
 </g>
 <g opacity="1">
-  <line x1="660" y1="701" x2="860" y2="701" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
-  <rect x="675.3" y="690" width="169.4" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
-  <text x="760" y="705" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">ElementTriggersAction</text>
+  <line x1="910" y1="251" x2="1030" y2="251" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="933.4" y="240" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="970" y="255" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
 </g>
 <g opacity="1">
-  <line x1="660" y1="251" x2="860" y2="251" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
-  <rect x="704.9" y="240" width="110.2" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
-  <text x="760" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">DependsOnSoup</text>
+  <line x1="805" y1="282" x2="805" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="768.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="805" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
 </g>
 <g opacity="1">
-  <rect x="450" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="450" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="555" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="555" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareSystem</text>
+  <line x1="873.2" y1="282" x2="1066.8" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="933.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="970" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+</g>
+<g opacity="1">
+  <line x1="1465" y1="132" x2="1465" y2="220" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="1421" y="165" width="88" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="1465" y="180" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">RealizedBy</text>
+</g>
+<g opacity="1">
+  <line x1="1465" y1="282" x2="1465" y2="370" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="1428.4" y="315" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="1465" y="330" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+</g>
+<g opacity="1">
+  <line x1="1465" y1="432" x2="1465" y2="520" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="1428.4" y="465" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="1465" y="480" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+</g>
+<g opacity="1">
+  <line x1="1465" y1="582" x2="1465" y2="670" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="1380.3" y="615" width="169.4" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="1465" y="630" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">ElementTriggersAction</text>
+</g>
+<g opacity="1">
+  <line x1="1360" y1="701" x2="1240" y2="701" stroke="#4b5866" stroke-width="1.6" stroke-dasharray="7 5" marker-end="url(#arrow)"/>
+  <rect x="1267.1" y="690" width="65.80000000000001" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="1300" y="705" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">perform</text>
+</g>
+<g opacity="1">
+  <line x1="440.9" y1="282" x2="179.1" y2="520" stroke="#1f2a37" stroke-width="1.6"  marker-end="url(#arrow)"/>
+  <rect x="254.9" y="390" width="110.2" height="20" rx="10" fill="#ffffff" stroke="#1f2a37" stroke-width="0.8"/>
+  <text x="310" y="405" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2a37">DependsOnSoup</text>
+</g>
+<g opacity="1">
+  <line x1="370" y1="701" x2="250" y2="701" stroke="#4b5866" stroke-width="1.6"  marker-start="url(#diamond)"/>
+  <rect x="273.4" y="690" width="73.2" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="310" y="705" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">contains</text>
+</g>
+<g opacity="1">
+  <line x1="145" y1="670" x2="145" y2="582" stroke="#4b5866" stroke-width="1.6" stroke-dasharray="2 4" marker-end="url(#arrow)"/>
+  <rect x="71.39999999999999" y="615" width="147.20000000000002" height="20" rx="10" fill="#ffffff" stroke="#4b5866" stroke-width="0.8"/>
+  <text x="145" y="630" text-anchor="middle" font-size="12" font-style="italic" fill="#4b5866">inventoriedElement</text>
+</g>
+<g opacity="1">
+  <rect x="40" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="40" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="145" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="145" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareSystem</text>
   
 </g>
 <g opacity="1">
-  <rect x="450" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="450" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="555" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="555" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareModule</text>
+  <rect x="370" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="370" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="475" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="475" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">LogicalComponent</text>
   
 </g>
 <g opacity="1">
-  <rect x="40" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="40" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="145" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="145" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">Algorithm</text>
+  <rect x="40" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="40" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="145" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="145" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SoftwareComponent</text>
   
 </g>
 <g opacity="1">
-  <rect x="450" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="450" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="555" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="555" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">DataModel</text>
+  <rect x="370" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="370" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="475" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="475" y="265" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">SoftwareModule (item)</text>
   
 </g>
 <g opacity="1">
-  <rect x="1270" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="1270" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1375" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="1375" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareAssembly</text>
+  <rect x="40" y="370" width="210" height="62" rx="10" fill="#fdebea" stroke="#c7433f" stroke-width="1.5"/>
+  <rect x="40" y="370" width="6" height="62" rx="3" fill="#c7433f"/>
+  <text x="145" y="393" text-anchor="middle" font-size="12" fill="#6b1916" font-style="italic">«requirement def»</text>
+  <text x="145" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#6b1916">Requirement</text>
   
 </g>
 <g opacity="1">
-  <rect x="1270" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="1270" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1375" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="1375" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareComponent</text>
+  <rect x="370" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="370" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="475" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="475" y="415" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">SoftwareModule (unit)</text>
   
 </g>
 <g opacity="1">
-  <rect x="1270" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="1270" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1375" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="1375" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">Sensor</text>
+  <rect x="700" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="700" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="805" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="805" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">LogicalComponent</text>
   
 </g>
 <g opacity="1">
-  <rect x="1680" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="1680" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="1785" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="1785" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">Actuator</text>
+  <rect x="700" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="700" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="805" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="805" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareAssembly</text>
   
 </g>
 <g opacity="1">
-  <rect x="450" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="450" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="555" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="555" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UserInterface</text>
+  <rect x="1030" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1030" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1135" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="1135" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">OpticalComponent</text>
   
 </g>
 <g opacity="1">
-  <rect x="450" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="450" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="555" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="555" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UIElement</text>
+  <rect x="700" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="700" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="805" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="805" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">Sensor</text>
   
 </g>
 <g opacity="1">
-  <rect x="860" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="860" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="965" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action»</text>
-  <text x="965" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UIAction</text>
+  <rect x="1030" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1030" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1135" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="1135" y="415" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">HardwareComponent</text>
   
 </g>
 <g opacity="1">
-  <rect x="860" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
-  <rect x="860" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
-  <text x="965" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part»</text>
-  <text x="965" y="265" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">SOUPSoftwareModule</text>
+  <rect x="1360" y="70" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1360" y="70" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1465" y="93" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="1465" y="115" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">LogicalComponent</text>
+  
+</g>
+<g opacity="1">
+  <rect x="1360" y="220" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1360" y="220" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1465" y="243" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="1465" y="265" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UserInterface</text>
+  
+</g>
+<g opacity="1">
+  <rect x="1360" y="370" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1360" y="370" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1465" y="393" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="1465" y="415" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">UIElement (screen)</text>
+  
+</g>
+<g opacity="1">
+  <rect x="1360" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1360" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1465" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="1465" y="565" text-anchor="middle" font-size="15" font-weight="700" fill="#123b6b">UIElement (button)</text>
+  
+</g>
+<g opacity="1">
+  <rect x="1360" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1360" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1465" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action def»</text>
+  <text x="1465" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">UIAction</text>
+  
+</g>
+<g opacity="1">
+  <rect x="1030" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="1030" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="1135" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«action def»</text>
+  <text x="1135" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SystemFunction</text>
+  
+</g>
+<g opacity="1">
+  <rect x="40" y="520" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="40" y="520" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="145" y="543" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="145" y="565" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">OTSSoftwareModule</text>
+  
+</g>
+<g opacity="1">
+  <rect x="40" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="40" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="145" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="145" y="715" text-anchor="middle" font-size="16" font-weight="700" fill="#123b6b">SBOMEntry</text>
+  
+</g>
+<g opacity="1">
+  <rect x="370" y="670" width="210" height="62" rx="10" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="1.5"/>
+  <rect x="370" y="670" width="6" height="62" rx="3" fill="#2f6fc4"/>
+  <text x="475" y="693" text-anchor="middle" font-size="12" fill="#123b6b" font-style="italic">«part def»</text>
+  <text x="475" y="715" text-anchor="middle" font-size="13.5" font-weight="700" fill="#123b6b">SoftwareBillOfMaterials</text>
   
 </g>
 <rect x="40" y="772" width="16" height="16" rx="3" fill="#e8f1fc" stroke="#2f6fc4" stroke-width="2"/><text x="64" y="785" font-size="13" fill="#2c3640">Architecture</text>
-  <line x1="170" y1="780" x2="204" y2="780" stroke="#1f2a37" stroke-width="2"  /><text x="212" y="785" font-size="13" fill="#2c3640"><tspan font-weight="700">MEMO relationship</tspan></text>
-  <line x1="369.2" y1="780" x2="403.2" y2="780" stroke="#1f2a37" stroke-width="2" stroke-dasharray="7 5" /><text x="411.2" y="785" font-size="13" fill="#2c3640"><tspan font-style="italic">native SysML</tspan></text>
-  <line x1="530.4" y1="780" x2="564.4" y2="780" stroke="#1f2a37" stroke-width="2"  marker-start="url(#diamond)"/><text x="572.4" y="785" font-size="13" fill="#2c3640">contains</text>
-  <line x1="661.2" y1="780" x2="695.2" y2="780" stroke="#1f2a37" stroke-width="2" stroke-dasharray="2 4" /><text x="703.2" y="785" font-size="13" fill="#2c3640">reference</text>
+  <rect x="170" y="772" width="16" height="16" rx="3" fill="#fdebea" stroke="#c7433f" stroke-width="2"/><text x="194" y="785" font-size="13" fill="#2c3640">Assurance</text>
+  <line x1="277.5" y1="780" x2="311.5" y2="780" stroke="#1f2a37" stroke-width="2"  /><text x="319.5" y="785" font-size="13" fill="#2c3640"><tspan font-weight="700">MEMO relationship</tspan></text>
+  <line x1="476.7" y1="780" x2="510.7" y2="780" stroke="#1f2a37" stroke-width="2" stroke-dasharray="7 5" /><text x="518.7" y="785" font-size="13" fill="#2c3640"><tspan font-style="italic">native SysML</tspan></text>
+  <line x1="637.9" y1="780" x2="671.9" y2="780" stroke="#1f2a37" stroke-width="2"  marker-start="url(#diamond)"/><text x="679.9" y="785" font-size="13" fill="#2c3640">contains</text>
+  <line x1="768.7" y1="780" x2="802.7" y2="780" stroke="#1f2a37" stroke-width="2" stroke-dasharray="2 4" /><text x="810.7" y="785" font-size="13" fill="#2c3640">reference</text>
 </svg>
