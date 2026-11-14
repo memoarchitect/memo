@@ -62,6 +62,8 @@ package memo_methodology_workflow {
         attribute axis : MethodAxisKind;
         attribute stages : WorkflowStageKind[1..*];
         ref layerViewpoints : MemoViewpoint[0..*];
+        // Kinds worked in this row, including their specializations; independent of step completion criteria.
+        attribute elementKinds : String[0..*];
         // For a discipline: the standard it is worked to, as the map writes it ("ISO 14971").
         attribute standardReference : String[0..1];
         // For a discipline: how its work links to the layers, as one line.

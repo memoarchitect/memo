@@ -14,6 +14,18 @@ architecture, **red** is assurance. A solid line is one of MEMO's own
 relationships, a dashed line is native SysML, a diamond is containment, and a
 dotted line is a reference. [How to read the figures](index.md#how-to-read-the-figures)
 
+## One root per system
+
+Each system and system of systems has one explicit parent `SystemFunction`.
+`#FunctionalRoot dependency from <system> to <parentFunction>;` identifies that
+parent independently of ordinary function allocation. Its native action body holds
+its functional breakdown. Existing responsibilities can be performed by reference
+beneath a new parent, keeping their declarations and qualified identities intact.
+
+`ComponentFunction` remains a functional kind. Its allocation also makes it visible
+with its owning component in Logical. Architect's component context menu creates
+the child action beneath the system's parent and its allocation in one checked edit.
+
 ## How to read this page
 
 Each step below introduces a few elements, then shows them in SysML and explains

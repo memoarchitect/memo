@@ -75,6 +75,11 @@ package memo_architecture_functional_functions {
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_scenarios::*;
 
+    metadata def FunctionalRoot :> MemoTypedDependency {
+        doc /* The single top-level system function of a System or SystemOfSystems. Its native action decomposition describes that system's functional breakdown. */
+        @MemoIdentity { :>> label = "Functional root"; }
+    }
+
     abstract action def MemoFunction specializes MemoAction, MemoConstrainedOccurrence {
         @MemoIdentity { :>> label = "Function"; }
         attribute functionCategory : String;

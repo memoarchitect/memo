@@ -286,6 +286,9 @@ package memo_core_relationships_workspace_membership {
     // for different systems).
     part membershipUsedWith : WorkspaceMembershipEntry { attribute :>> relation = "usedWith"; attribute :>> direction = WorkspaceMembershipKind::neither; }
 
+    // The distinguished functional root belongs to its system; its owned actions follow by native composition.
+    part membershipFunctionalRoot : WorkspaceMembershipEntry { attribute :>> relation = "functionalRoot"; attribute :>> direction = WorkspaceMembershipKind::targetFollowsSource; }
+
     // Neither: a step is not placed by the rule that says when it is done.
     part membershipDoneWhen : WorkspaceMembershipEntry { attribute :>> relation = "doneWhen"; attribute :>> direction = WorkspaceMembershipKind::neither; }
     part membershipLinkedWhen : WorkspaceMembershipEntry { attribute :>> relation = "linkedWhen"; attribute :>> direction = WorkspaceMembershipKind::neither; }

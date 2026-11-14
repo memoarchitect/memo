@@ -17,6 +17,7 @@
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
+| [`FunctionalRoot`](../sysml-api/architecture/functional/functions/memo_functions.md#functionalroot) | `metadata def` | The single top-level system function of a System or SystemOfSystems. Its native action decomposition describes that system's functional breakdown. |
 | [`MemoFunction`](../sysml-api/architecture/functional/functions/memo_functions.md#memofunction) *(abstract)* | `action def` | Memo function definition specializing `MemoAction`. |
 | [`SystemFunction`](../sysml-api/architecture/functional/functions/memo_functions.md#systemfunction) | `action def` | A responsibility of the system as a whole. Allocation is optional: a system function that no single component owns is a normal intermediate state of the functional chain, not a defect. |
 | [`ComponentFunction`](../sysml-api/architecture/functional/functions/memo_functions.md#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. |

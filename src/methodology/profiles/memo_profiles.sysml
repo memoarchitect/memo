@@ -91,6 +91,7 @@ package memo_methodology_profiles {
     // ── The rows of the method map ───────────────────────────────────────────
 
     part layerContext : MethodLayer {
+        attribute :>> elementKinds = ("OperationalParticipant", "User", "MemoActor", "OperationalEntity", "IntendedUse", "UseContext", "UseEnvironment");
         @MemoIdentity { :>> providedId = "ROW-ARC-0"; :>> label = "Context"; }
         doc /* Who and what is around it: users, organizations, external systems. */
         attribute :>> axis = MethodAxisKind::architecture;
@@ -98,6 +99,7 @@ package memo_methodology_profiles {
         ref :>> layerViewpoints = (vpSystemContext, contextViewpoint);
     }
     part layerOperational : MethodLayer {
+        attribute :>> elementKinds = ("OperativeAction", "TaskDifficultyAssessment", "OperationalParticipant", "User", "MemoActor", "ArchitectureDescription", "ModelKind", "CorrespondenceRule", "UseContext", "UseEnvironment", "OperativeScenario", "IntendedUse", "OperationalEntity", "OperationalCapability", "UseCase", "ClinicalUseCase", "SystemUseCase", "OperationalWorkflow", "ClinicalWorkflow", "SystemWorkflow", "WorkflowResource");
         @MemoIdentity { :>> providedId = "ROW-ARC-1"; :>> label = "Operational"; }
         doc /* What users need to accomplish. */
         attribute :>> axis = MethodAxisKind::architecture;
@@ -105,6 +107,7 @@ package memo_methodology_profiles {
         ref :>> layerViewpoints = (vpUseCase, vpClinicalWorkflow, vpScenario, operationalViewpoint);
     }
     part layerFunctional : MethodLayer {
+        attribute :>> elementKinds = ("StateMachine", "ModeConfiguration", "BehaviorProperty", "Contract", "TimingConstraint", "MemoFunction", "SystemFunction", "ComponentFunction", "FunctionalExchange", "FunctionalTransfer", "FunctionalFlow");
         @MemoIdentity { :>> providedId = "ROW-ARC-2"; :>> label = "Functional"; }
         doc /* What the system has to accomplish. */
         attribute :>> axis = MethodAxisKind::architecture;
@@ -112,6 +115,7 @@ package memo_methodology_profiles {
         ref :>> layerViewpoints = (vpFunctionalArchitecture, vpFunctionalFlow, vpStateMode, functionalViewpoint);
     }
     part layerLogical : MethodLayer {
+        attribute :>> elementKinds = ("DesignDecision", "ComponentFunction", "Interface", "SoftwareInterface", "InterfaceItem", "DataInterface", "DataPort", "SensorPort", "CommandPort", "ComponentExchange", "SoftwarePort", "SystemOfSystems", "System", "Subsystem", "LogicalComponent", "LogicalPort", "LogicalInterface", "LogicalExchangeItem", "LogicalExchange", "LogicalTransfer", "LogicalBehavior", "IsolationBoundary", "FaultContainmentRegion");
         @MemoIdentity { :>> providedId = "ROW-ARC-3"; :>> label = "Logical"; }
         doc /* How the system will work. */
         attribute :>> axis = MethodAxisKind::architecture;
@@ -119,6 +123,7 @@ package memo_methodology_profiles {
         ref :>> layerViewpoints = (vpLogicalArchitecture, vpInternalInterconnection, vpSequenceInteraction, vpStateMode, logicalArchitectureViewpoint);
     }
     part layerImplementation : MethodLayer {
+        attribute :>> elementKinds = ("PhysicalElement", "PhysicalAssembly", "PhysicalSubassembly", "HardwareAssembly", "PhysicalComponent", "HardwareComponent", "AcousticComponent", "ThermalComponent", "ElectricalComponent", "ElectronicComponent", "PowerSupply", "Battery", "Cable", "PhysicalConnectorPart", "NetworkMedium", "FluidicComponent", "PneumaticComponent", "MechanicalPart", "Enclosure", "OpticalComponent", "Sensor", "Actuator", "SoftwareComponent", "OTSSoftwareComponent", "SoftwareElement", "SoftwareSystem", "SoftwareModule", "Algorithm", "DataModel", "ConfigurationArtifact", "DataItem", "SOUPSoftwareModule", "OTSSoftwareModule", "SBOMEntry", "SoftwareBillOfMaterials", "UserInterface", "UIElement", "OperatorInterfaceElement", "ScreenCapture", "UIState", "UIEvent", "UIAction", "InteractionFlow");
         @MemoIdentity { :>> providedId = "ROW-ARC-4"; :>> label = "Implementation"; }
         doc /* How it is built. */
         attribute :>> axis = MethodAxisKind::architecture;
@@ -126,6 +131,7 @@ package memo_methodology_profiles {
         ref :>> layerViewpoints = (vpSoftwareComponents, vpHardwareArchitecture, vpUILayout, softwareViewpoint);
     }
     part layerRealization : MethodLayer {
+        attribute :>> elementKinds = ("SoftwareDeploymentUnit", "RuntimeEnvironment", "FlowSpecification", "EndToEndFlow", "ProcessingNode", "MemoryDevice", "PhysicalPort", "PhysicalInterface", "PhysicalFlow", "PhysicalTransfer");
         @MemoIdentity { :>> providedId = "ROW-ARC-5"; :>> label = "Realization"; }
         doc /* How it is assembled and deployed. */
         attribute :>> axis = MethodAxisKind::architecture;
@@ -133,6 +139,7 @@ package memo_methodology_profiles {
         ref :>> layerViewpoints = (vpPhysicalArchitecture, vpNetworkDeployment, physicalViewpoint);
     }
     part disciplineRequirements : MethodLayer {
+        attribute :>> elementKinds = ("ProductFeature", "RiskDriver", "Requirement", "SystemConstant", "NotificationSpec", "Need");
         @MemoIdentity { :>> providedId = "ROW-ASR-1"; :>> label = "Requirements"; }
         doc /* What the device must do, and why. */
         attribute :>> axis = MethodAxisKind::assurance;
@@ -142,6 +149,7 @@ package memo_methodology_profiles {
         attribute :>> importable = true;
     }
     part disciplineSafetyRisk : MethodLayer {
+        attribute :>> elementKinds = ("FMEAWorksheet", "FailureMode", "FailureEffect", "FailureCause", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeNode", "MinimalCutSet", "HAZOPStudy", "HAZOPNode", "HAZOPDeviation", "ReasonablyForeseeableMisuse", "Risk", "ResidualRisk", "RiskMatrix", "SafetyRelatedCharacteristic", "RiskItem", "Hazard", "SequenceOfEvents", "HazardCause", "HazardousSituation", "Harm", "RiskControlMeasure", "Benefit", "OverallResidualRiskEvaluation", "PostMarketSurveillance");
         @MemoIdentity { :>> providedId = "ROW-ASR-2"; :>> label = "Safety and risk"; }
         doc /* What can go wrong, and how it is controlled. */
         attribute :>> axis = MethodAxisKind::assurance;
@@ -152,6 +160,7 @@ package memo_methodology_profiles {
         attribute :>> importable = true;
     }
     part disciplineCybersecurity : MethodLayer {
+        attribute :>> elementKinds = ("CybersecurityAsset", "AttackSurface", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "ThreatActor", "AttackTechnique", "SecurityProperty", "CybersecurityAssumption", "AttackPath", "SecurityAssessmentCase", "SecurityFinding", "SecurityAssessmentReport", "PostmarketProcess", "CyberRiskAssessment");
         @MemoIdentity { :>> providedId = "ROW-ASR-3"; :>> label = "Cybersecurity"; }
         doc /* What can be attacked, and how it is mitigated. */
         attribute :>> axis = MethodAxisKind::assurance;
@@ -160,6 +169,7 @@ package memo_methodology_profiles {
         attribute :>> linkDescription = "trust boundaries in Logical · SOUP and SBOM in Implementation · exposed assets in Realization";
     }
     part disciplineHumanFactors : MethodLayer {
+        attribute :>> elementKinds = ("UseError");
         @MemoIdentity { :>> providedId = "ROW-ASR-4"; :>> label = "Human factors"; }
         doc /* How people use it safely. */
         attribute :>> axis = MethodAxisKind::assurance;
@@ -169,6 +179,7 @@ package memo_methodology_profiles {
         attribute :>> linkDescription = "use errors in Operational tasks · screens in Implementation";
     }
     part disciplineVerification : MethodLayer {
+        attribute :>> elementKinds = ("ClinicalEvaluation", "TestStep", "VerificationCase", "TestRun", "ValidationCase");
         @MemoIdentity { :>> providedId = "ROW-ASR-5"; :>> label = "Verification and validation"; }
         doc /* How we know it works, and the evidence. */
         attribute :>> axis = MethodAxisKind::assurance;
@@ -235,7 +246,7 @@ package memo_methodology_profiles {
         ref :>> role = systemArchitect;
         ref :>> guideViewpoint = vpFunctionalFlow;
         attribute :>> outputKinds = ("FunctionalFlow");
-        attribute :>> objectiveDescription = "Follow the functions across the systems in functional chains.";
+        attribute :>> objectiveDescription = "Give the system of systems one explicit parent function, then follow its responsibilities across the constituent systems in functional chains.";
         attribute :>> entryCriteria = "Clinical procedures and workflows help.";
         attribute :>> exitCriteria = "Each cross-system chain is stated.";
     }
@@ -335,7 +346,7 @@ package memo_methodology_profiles {
         ref :>> role = systemArchitect;
         ref :>> guideViewpoint = vpFunctionalArchitecture;
         attribute :>> outputKinds = ("SystemFunction");
-        attribute :>> objectiveDescription = "Name what the system has to do. Many scenario steps need the same function: link them to one.";
+        attribute :>> objectiveDescription = "Give the system one explicit parent function, then decompose its responsibilities beneath it. Many scenario steps need the same function: link them to one.";
         attribute :>> entryCriteria = "Nothing: start here.";
         attribute :>> exitCriteria = "Each function is stated.";
     }
@@ -375,6 +386,19 @@ package memo_methodology_profiles {
         attribute :>> entryCriteria = "Nothing: start here.";
         attribute :>> exitCriteria = "The system is divided into components.";
     }
+
+    action stepSysComponentFunctions : MethodologyWorkflowStep {
+        @MemoIdentity { :>> label = "Define component functions"; }
+        attribute :>> stage = WorkflowStageKind::logical;
+        attribute :>> level = MethodLevelKind::system;
+        ref :>> role = systemArchitect;
+        ref :>> guideViewpoint = vpLogicalArchitecture;
+        attribute :>> outputKinds = ("ComponentFunction");
+        attribute :>> objectiveDescription = "Describe each component's responsibilities beneath the system's parent function. Allocate each component function to exactly one component; show it beside that component in Logical.";
+        attribute :>> entryCriteria = "A logical component exists.";
+        attribute :>> exitCriteria = "Each component function is allocated to its component.";
+    }
+    #DoneWhen dependency from stepSysComponentFunctions to memo_rules_ontology::ComponentFunctionAllocatedRule;
 
     action stepSysLogicalAllocation : MethodologyWorkflowStep {
         @MemoIdentity { :>> providedId = "STEP-SYS-10"; :>> label = "Give each function to a component"; }
@@ -714,7 +738,8 @@ package memo_methodology_profiles {
     first stepSysFunctional then stepSysFunctionalExchanges;
     first stepSysFunctionalExchanges then stepSysFunctionalChains;
     first stepSysFunctional then stepSysLogical;
-    first stepSysLogical then stepSysLogicalAllocation;
+    first stepSysLogical then stepSysComponentFunctions;
+    first stepSysComponentFunctions then stepSysLogicalAllocation;
     first stepSysLogicalAllocation then stepSysLogicalInterfaces;
     first stepSysLogicalInterfaces then stepSysLogicalInteraction;
     first stepSysLogicalInteraction then stepSysLogicalSegregation;
