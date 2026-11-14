@@ -1239,8 +1239,8 @@ constraint def WorkflowRealizesUseCaseOfItsLevelRule :> MemoConsistencyRule
             attribute obligation = RuleObligationKind::recommended;
             attribute appliesTo = "Model";
             attribute severity = RuleSeverityKind::error;
-            attribute rationaleText = "A function is allocated to a part — including a system or actor — as ARCADIA System Analysis requires; a functional exchange is allocated to a component exchange.";
-            attribute predicateExpression = "targetsOf(allocatedTo)->forAll(conformsTo(MemoPart) or conformsTo(ComponentExchange))";
+            attribute rationaleText = "A function is allocated to a part — including a system or actor — as ARCADIA System Analysis requires; a functional exchange is allocated to the interface that carries it: a component exchange, as ARCADIA allocates one, or an implementation interface such as a ROS topic, which carries one hop of a signal's path.";
+            attribute predicateExpression = "targetsOf(allocatedTo)->forAll(conformsTo(MemoPart) or conformsTo(MemoInterface))";
             constraint { true }
         }
         constraint def ComposesParentKindRule :> MemoConsistencyRule {

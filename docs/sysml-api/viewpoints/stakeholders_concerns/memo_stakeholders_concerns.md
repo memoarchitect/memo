@@ -654,37 +654,37 @@ part def UsabilityEngineer :> MemoStakeholder
         }
 
         part def SystemArchitect :> MemoStakeholder {
-            @MemoIdentity { :>> label = "System architect"; :>> providedId = "STK-1"; :>> label = "System Architect"; }
+            @MemoIdentity { :>> providedId = "STK-1"; :>> label = "System Architect"; }
         }
         part def SoftwareArchitect :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Software architect"; :>> providedId = "STK-2"; :>> label = "Software Architect"; }
+            @MemoIdentity { :>> providedId = "STK-2"; :>> label = "Software Architect"; }
         }
         part def HardwareEngineer :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Hardware engineer"; :>> providedId = "STK-3"; :>> label = "Hardware Engineer"; }
+            @MemoIdentity { :>> providedId = "STK-3"; :>> label = "Hardware Engineer"; }
         }
         part def SafetyEngineer :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Safety engineer"; :>> providedId = "STK-4"; :>> label = "Safety Engineer"; }
+            @MemoIdentity { :>> providedId = "STK-4"; :>> label = "Safety Engineer"; }
         }
         part def VerificationEngineer :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Verification engineer"; :>> providedId = "STK-5"; :>> label = "Verification Engineer"; }
+            @MemoIdentity { :>> providedId = "STK-5"; :>> label = "Verification Engineer"; }
         }
         part def RegulatoryEngineer :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Regulatory engineer"; :>> providedId = "STK-6"; :>> label = "Regulatory Engineer"; }
+            @MemoIdentity { :>> providedId = "STK-6"; :>> label = "Regulatory Engineer"; }
         }
         part def ProjectLead :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Project lead"; :>> providedId = "STK-7"; :>> label = "Project Lead"; }
+            @MemoIdentity { :>> providedId = "STK-7"; :>> label = "Project Lead"; }
         }
         part def SecurityEngineer :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Security engineer"; :>> providedId = "STK-8"; :>> label = "Security Engineer"; }
+            @MemoIdentity { :>> providedId = "STK-8"; :>> label = "Security Engineer"; }
         }
         part def PrivacyEngineer :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Privacy engineer"; :>> providedId = "STK-9"; :>> label = "Privacy Engineer"; }
+            @MemoIdentity { :>> providedId = "STK-9"; :>> label = "Privacy Engineer"; }
         }
         part def ClinicalEngineer :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Clinical engineer"; :>> providedId = "STK-10"; :>> label = "Clinical Engineer"; }
+            @MemoIdentity { :>> providedId = "STK-10"; :>> label = "Clinical Engineer"; }
         }
         part def UsabilityEngineer :> MemoStakeholder {
-            @MemoIdentity { :>> label = "Usability engineer"; :>> providedId = "STK-11"; :>> label = "Usability Engineer"; }
+            @MemoIdentity { :>> providedId = "STK-11"; :>> label = "Usability Engineer"; }
         }
 
         // ─── The catalog, as usages ─────────────────────────────────────────
