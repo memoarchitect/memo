@@ -50,7 +50,7 @@
 
         private import memo_core_common::*;
         viewpoint verificationViewpoint : MemoViewpoint {
-            @MemoIdentity { :>> providedId = "VP-VER"; :>> label = "VerificationViewpoint"; }
+            @MemoIdentity { :>> providedId = "VP-VER"; :>> label = "Verification views"; }
             doc /* Default viewpoint derived from the requirements and assurance layers for V&V coverage — which requirements are verified/validated, by which case, and what evidence was produced, supporting ISO 13485 §7.3.6/§7.3.7 and IEC 62304 §5.7/§5.8. */
             @MemoIdentity { :>> shortDescription = "Shows verification cases, validation cases, and the evidence they produce, traced to requirements."; }
             attribute :>> purpose = "Communicate verification and validation coverage against requirements.";

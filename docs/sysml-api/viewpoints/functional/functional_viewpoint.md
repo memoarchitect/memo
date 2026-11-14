@@ -50,7 +50,7 @@
 
         private import memo_core_common::*;
         viewpoint functionalViewpoint : MemoViewpoint {
-            @MemoIdentity { :>> providedId = "VP-FUNC"; :>> label = "FunctionalViewpoint"; }
+            @MemoIdentity { :>> providedId = "VP-FUNC"; :>> label = "Functional views"; }
             doc /* Default viewpoint derived from the functions layer for what the system does, independent of how it is structured — function trees, function allocation, and behavior triggers. */
             @MemoIdentity { :>> shortDescription = "Shows system functions, their decomposition, and allocation."; }
             attribute :>> purpose = "Describe the system's functional decomposition and behavior.";

@@ -31,6 +31,17 @@
 | private | `memo_methodology_gates::*` |
 | private | `memo_rules_closure::*` |
 | private | `memo_viewpoints_catalog::*` |
+| private | `memo_viewpoints_context_context_viewpoint::*` |
+| private | `memo_viewpoints_operational_operational_viewpoint::*` |
+| private | `memo_viewpoints_functional_functional_viewpoint::*` |
+| private | `memo_viewpoints_logical_logical_viewpoint::*` |
+| private | `memo_viewpoints_software_software_viewpoint::*` |
+| private | `memo_viewpoints_physical_physical_viewpoint::*` |
+| private | `memo_viewpoints_requirements_requirements_viewpoint::*` |
+| private | `memo_viewpoints_risk_risk_viewpoint::*` |
+| private | `memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*` |
+| private | `memo_viewpoints_usability_usability_viewpoint::*` |
+| private | `memo_viewpoints_verification_verification_viewpoint::*` |
 | private | `memo_viewpoints_stakeholders_concerns::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_methodology_scope::*` |
@@ -58,6 +69,18 @@
         private import memo_methodology_gates::*;
         private import memo_rules_closure::*;
         private import memo_viewpoints_catalog::*;
+        private import memo_viewpoints_context_context_viewpoint::*;
+        private import memo_viewpoints_operational_operational_viewpoint::*;
+        private import memo_viewpoints_functional_functional_viewpoint::*;
+        private import memo_viewpoints_logical_logical_viewpoint::*;
+        private import memo_viewpoints_software_software_viewpoint::*;
+        private import memo_viewpoints_physical_physical_viewpoint::*;
+        private import memo_viewpoints_requirements_requirements_viewpoint::*;
+        private import memo_viewpoints_risk_risk_viewpoint::*;
+        private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
+        private import memo_viewpoints_usability_usability_viewpoint::*;
+        private import memo_viewpoints_verification_verification_viewpoint::*;
+
         private import memo_viewpoints_stakeholders_concerns::*;
         private import memo_core_enumerations::*;
         private import memo_core_methodology_scope::*;
@@ -133,49 +156,49 @@
             doc /* Who and what is around it: users, organizations, external systems. */
             attribute :>> axis = MethodAxisKind::architecture;
             attribute :>> stages = (WorkflowStageKind::context);
-            ref :>> layerViewpoints = (vpSystemContext);
+            ref :>> layerViewpoints = (vpSystemContext, contextViewpoint);
         }
         part layerOperational : MethodLayer {
             @MemoIdentity { :>> providedId = "ROW-ARC-1"; :>> label = "Operational"; }
             doc /* What users need to accomplish. */
             attribute :>> axis = MethodAxisKind::architecture;
             attribute :>> stages = (WorkflowStageKind::operational);
-            ref :>> layerViewpoints = (vpUseCase, vpClinicalWorkflow, vpScenario);
+            ref :>> layerViewpoints = (vpUseCase, vpClinicalWorkflow, vpScenario, operationalViewpoint);
         }
         part layerFunctional : MethodLayer {
             @MemoIdentity { :>> providedId = "ROW-ARC-2"; :>> label = "Functional"; }
             doc /* What the system has to accomplish. */
             attribute :>> axis = MethodAxisKind::architecture;
             attribute :>> stages = (WorkflowStageKind::functional);
-            ref :>> layerViewpoints = (vpFunctionalArchitecture, vpFunctionalFlow, vpStateMode);
+            ref :>> layerViewpoints = (vpFunctionalArchitecture, vpFunctionalFlow, vpStateMode, functionalViewpoint);
         }
         part layerLogical : MethodLayer {
             @MemoIdentity { :>> providedId = "ROW-ARC-3"; :>> label = "Logical"; }
             doc /* How the system will work. */
             attribute :>> axis = MethodAxisKind::architecture;
             attribute :>> stages = (WorkflowStageKind::logical);
-            ref :>> layerViewpoints = (vpLogicalArchitecture, vpInternalInterconnection, vpSequenceInteraction, vpStateMode);
+            ref :>> layerViewpoints = (vpLogicalArchitecture, vpInternalInterconnection, vpSequenceInteraction, vpStateMode, logicalArchitectureViewpoint);
         }
         part layerImplementation : MethodLayer {
             @MemoIdentity { :>> providedId = "ROW-ARC-4"; :>> label = "Implementation"; }
             doc /* How it is built. */
             attribute :>> axis = MethodAxisKind::architecture;
             attribute :>> stages = (WorkflowStageKind::implementation);
-            ref :>> layerViewpoints = (vpSoftwareComponents, vpHardwareArchitecture, vpUILayout);
+            ref :>> layerViewpoints = (vpSoftwareComponents, vpHardwareArchitecture, vpUILayout, softwareViewpoint);
         }
         part layerRealization : MethodLayer {
             @MemoIdentity { :>> providedId = "ROW-ARC-5"; :>> label = "Realization"; }
             doc /* How it is assembled and deployed. */
             attribute :>> axis = MethodAxisKind::architecture;
             attribute :>> stages = (WorkflowStageKind::realization);
-            ref :>> layerViewpoints = (vpPhysicalArchitecture, vpNetworkDeployment);
+            ref :>> layerViewpoints = (vpPhysicalArchitecture, vpNetworkDeployment, physicalViewpoint);
         }
         part disciplineRequirements : MethodLayer {
             @MemoIdentity { :>> providedId = "ROW-ASR-1"; :>> label = "Requirements"; }
             doc /* What the device must do, and why. */
             attribute :>> axis = MethodAxisKind::assurance;
             attribute :>> stages = (WorkflowStageKind::requirements);
-            ref :>> layerViewpoints = (vpRequirementsTraceability);
+            ref :>> layerViewpoints = (vpRequirementsTraceability, requirementsViewpoint);
             attribute :>> linkDescription = "needs from Operational · satisfied by Functional and Logical";
             attribute :>> importable = true;
         }
@@ -184,7 +207,7 @@
             doc /* What can go wrong, and how it is controlled. */
             attribute :>> axis = MethodAxisKind::assurance;
             attribute :>> stages = (WorkflowStageKind::risk);
-            ref :>> layerViewpoints = (vpRiskChain);
+            ref :>> layerViewpoints = (vpRiskChain, riskViewpoint);
             attribute :>> standardReference = "ISO 14971";
             attribute :>> linkDescription = "hazards from Operational scenarios · failure modes in Functional · controls placed in Logical and Implementation";
             attribute :>> importable = true;
@@ -194,7 +217,7 @@
             doc /* What can be attacked, and how it is mitigated. */
             attribute :>> axis = MethodAxisKind::assurance;
             attribute :>> stages = (WorkflowStageKind::security);
-            ref :>> layerViewpoints = (vpCybersecurity);
+            ref :>> layerViewpoints = (vpCybersecurity, cybersecurityViewpoint);
             attribute :>> linkDescription = "trust boundaries in Logical · SOUP and SBOM in Implementation · exposed assets in Realization";
         }
         part disciplineHumanFactors : MethodLayer {
@@ -202,7 +225,7 @@
             doc /* How people use it safely. */
             attribute :>> axis = MethodAxisKind::assurance;
             attribute :>> stages = (WorkflowStageKind::humanFactors);
-            ref :>> layerViewpoints = (vpHumanFactors, vpUiFlow);
+            ref :>> layerViewpoints = (vpHumanFactors, vpUiFlow, usabilityViewpoint);
             attribute :>> standardReference = "IEC 62366-1";
             attribute :>> linkDescription = "use errors in Operational tasks · screens in Implementation";
         }
@@ -211,7 +234,7 @@
             doc /* How we know it works, and the evidence. */
             attribute :>> axis = MethodAxisKind::assurance;
             attribute :>> stages = (WorkflowStageKind::verificationStage);
-            ref :>> layerViewpoints = (vpVerificationCoverage, vpValidationCoverage, vpEvidenceTraceability);
+            ref :>> layerViewpoints = (vpVerificationCoverage, vpValidationCoverage, vpEvidenceTraceability, verificationViewpoint);
             attribute :>> linkDescription = "verifies requirements, functions, interfaces and controls · validates the use in Operational";
             attribute :>> importable = true;
         }
@@ -296,6 +319,7 @@
             attribute :>> level = MethodLevelKind::systemOfSystems;
             ref :>> role = safetyEngineer;
             ref :>> guideViewpoint = vpRiskChain;
+            attribute :>> inputKinds = ("OperativeScenario");
             attribute :>> outputKinds = ("Hazard");
             attribute :>> objectiveDescription = "Identify the hazards that arise only from the systems working together, and control each.";
             attribute :>> entryCriteria = "The systems and their interfaces help.";
@@ -554,6 +578,7 @@
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = safetyEngineer;
             ref :>> guideViewpoint = vpRiskChain;
+            attribute :>> inputKinds = ("OperativeScenario");
             attribute :>> outputKinds = ("Hazard");
             attribute :>> objectiveDescription = "Imported or found here, each hazard needs the scenario it arises in. Walk a scenario task by task and ask what could hurt the patient, the operator or a bystander.";
             attribute :>> entryCriteria = "Nothing: start here, or import a hazard list.";
