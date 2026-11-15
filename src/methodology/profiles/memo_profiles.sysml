@@ -106,7 +106,41 @@ package memo_methodology_profiles {
         attribute :>> stages = (WorkflowStageKind::operational);
         ref :>> layerViewpoints = (vpUseCase, vpClinicalWorkflow, vpScenario, operationalViewpoint);
     }
+    part taskFunctionalTree : MethodWorkTask {
+        @MemoIdentity { :>> label = "Functional tree"; }
+        attribute :>> taskKind = MethodTaskKind::decomposition;
+        attribute :>> primary = true;
+        attribute :>> taskSubjectKind = "SystemFunction";
+        attribute :>> objectiveDescription = "Break down what this system must do. Select a function to review its purpose and realization.";
+        attribute :>> reviewDescription = "Review the functional breakdown and functions that still need realization.";
+        ref :>> taskViewpoint = vpFunctionalArchitecture;
+    }
+    part taskFunctionalFlows : MethodWorkTask {
+        @MemoIdentity { :>> label = "Functional flows"; }
+        attribute :>> taskKind = MethodTaskKind::sequence;
+        attribute :>> primary = true;
+        attribute :>> taskSubjectKind = "FunctionalFlow";
+        attribute :>> taskReferenceKind = "SystemFunction";
+        attribute :>> taskRelationshipKind = "performs";
+        attribute :>> objectiveDescription = "Describe a path through the system functions. Reuse the functions in the tree; a flow step calls a function.";
+        attribute :>> reviewDescription = "Review the steps, their order and the system functions they call.";
+        ref :>> taskViewpoint = vpFunctionalFlow;
+    }
+    part taskFunctionRealization : MethodWorkTask {
+        @MemoIdentity { :>> label = "Realization and allocation"; }
+        attribute :>> taskKind = MethodTaskKind::realization;
+        attribute :>> primary = false;
+        attribute :>> taskSubjectKind = "SystemFunction";
+        attribute :>> taskImplementationKind = "ComponentFunction";
+        attribute :>> taskAllocationKind = "LogicalComponent";
+        attribute :>> taskRelationshipKind = "realizes";
+        attribute :>> objectiveDescription = "Realize a system function with component functions. Allocate each component function to the component responsible for it.";
+        attribute :>> reviewDescription = "Review the system function, its realizing component functions and their allocated components.";
+        ref :>> taskViewpoint = vpFunctionalArchitecture;
+    }
     part layerFunctional : MethodLayer {
+        attribute :>> workbench = "functional";
+        ref :>> workTasks = (taskFunctionalTree, taskFunctionalFlows, taskFunctionRealization);
         attribute :>> elementKinds = ("StateMachine", "ModeConfiguration", "BehaviorProperty", "Contract", "TimingConstraint", "MemoFunction", "SystemFunction", "ComponentFunction", "FunctionalExchange", "FunctionalTransfer", "FunctionalFlow");
         @MemoIdentity { :>> providedId = "ROW-ARC-2"; :>> label = "Functional"; }
         doc /* What the system has to accomplish. */

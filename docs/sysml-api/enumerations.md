@@ -233,6 +233,13 @@ SysML `enum def` declarations in `src/`.
 | [`WorkspaceMembershipKind`](core/enumerations/memo_enumerations.md#workspacemembershipkind) | `enum def` | How a relation places elements in a workspace; see memo_core_relationships_workspace_membership. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 
 
+## `memo::methodology::workflow`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MethodTaskKind`](methodology/workflow/memo_workflow.md#methodtaskkind) | `enum def` | A row of the method map: a layer of the architecture, or an assurance discipline. Its label is what the map calls it ("Logical"), its doc the question it answers ("How the system will work"). Rows are listed in the order the methodology declares them, each side apart.… | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+
+
 ## `memo::viewpoints::definitions`
 
 | Name | SysML kind | Description | Source |

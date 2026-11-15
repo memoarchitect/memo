@@ -35,7 +35,9 @@
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
 | [`MethodologyWorkflowStep`](#methodologyworkflowstep) | `action def` | Methodology workflow step definition specializing `MemoAction`. | `MemoAction` |
-| [`MethodLayer`](#methodlayer) | `part def` | A row of the method map: a layer of the architecture, or an assurance discipline. Its label is what the map calls it ("Logical"), its doc the question it answers ("How the system will work"). Rows are listed in the order the methodology declares them, each side apart.… | `MemoPart` |
+| [`MethodTaskKind`](#methodtaskkind) | `enum def` | A row of the method map: a layer of the architecture, or an assurance discipline. Its label is what the map calls it ("Logical"), its doc the question it answers ("How the system will work"). Rows are listed in the order the methodology declares them, each side apart.… | — |
+| [`MethodWorkTask`](#methodworktask) | `part def` | Method work task definition specializing `MemoPart`. | `MemoPart` |
+| [`MethodLayer`](#methodlayer) | `part def` | Method layer definition specializing `MemoPart`. | `MemoPart` |
 | [`DoneWhen`](#donewhen) | `metadata def` | `#DoneWhen dependency from <step> to <rule>, <rule>;` The step's own work is done when each of these rules has a subject in the workspace and no finding on it. | `MemoTypedDependency` |
 | [`LinkedWhen`](#linkedwhen) | `metadata def` | `#LinkedWhen dependency from <step> to <rule>, <rule>;` Each rule is a link from this step's work to another layer's. The links are made when each rule has no finding; a rule with no subject yet is waiting for the step that produces them. | `MemoTypedDependency` |
 
@@ -54,6 +56,36 @@ action def MethodologyWorkflowStep :> MemoAction
 | Owning package | `memo_methodology_workflow` |
 
 
+## MethodTaskKind
+
+```sysml
+enum def MethodTaskKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | A row of the method map: a layer of the architecture, or an assurance discipline. Its label is what the map calls it ("Logical"), its doc the question it answers ("How the system will work"). Rows are listed in the order the methodology declares them, each side apart.… |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_methodology_workflow` |
+
+
+## MethodWorkTask
+
+```sysml
+part def MethodWorkTask :> MemoPart
+```
+
+| Property | Value |
+| --- | --- |
+| Description | Method work task definition specializing `MemoPart`. |
+| Kind | `part def` |
+| Abstract | No |
+| Specializes | `MemoPart` |
+| Owning package | `memo_methodology_workflow` |
+
+
 ## MethodLayer
 
 ```sysml
@@ -62,7 +94,7 @@ part def MethodLayer :> MemoPart
 
 | Property | Value |
 | --- | --- |
-| Description | A row of the method map: a layer of the architecture, or an assurance discipline. Its label is what the map calls it ("Logical"), its doc the question it answers ("How the system will work"). Rows are listed in the order the methodology declares them, each side apart.… |
+| Description | Method layer definition specializing `MemoPart`. |
 | Kind | `part def` |
 | Abstract | No |
 | Specializes | `MemoPart` |
@@ -164,7 +196,27 @@ metadata def LinkedWhen :> MemoTypedDependency
         // whose `stage` it names, at whichever level is being worked, numbered in the methodology's order: a
         // step names its stage, never its row, so the grouping has one authority. The row's viewpoints are
         // the ones its views are made in, in the order they are offered.
+        enum def MethodTaskKind {
+            enum decomposition;
+            enum sequence;
+            enum realization;
+        }
+        part def MethodWorkTask :> MemoPart {
+            attribute taskKind : MethodTaskKind;
+            attribute primary : Boolean;
+            attribute taskSubjectKind : String;
+            attribute taskReferenceKind : String[0..1];
+            attribute taskImplementationKind : String[0..1];
+            attribute taskAllocationKind : String[0..1];
+            attribute taskRelationshipKind : String[0..1];
+            attribute objectiveDescription : String;
+            attribute reviewDescription : String;
+            ref taskViewpoint : MemoViewpoint[0..1];
+        }
+
         part def MethodLayer :> MemoPart {
+            attribute workbench : String[0..1];
+            ref workTasks : MethodWorkTask[0..*];
             attribute axis : MethodAxisKind;
             attribute stages : WorkflowStageKind[1..*];
             ref layerViewpoints : MemoViewpoint[0..*];

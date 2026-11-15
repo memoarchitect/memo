@@ -592,8 +592,9 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | --- | --- | --- | --- |
 | [`DoneWhen`](methodology/workflow/memo_workflow.md#donewhen) | `metadata def` | `#DoneWhen dependency from <step> to <rule>, <rule>;` The step's own work is done when each of these rules has a subject in the workspace and no finding on it. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 | [`LinkedWhen`](methodology/workflow/memo_workflow.md#linkedwhen) | `metadata def` | `#LinkedWhen dependency from <step> to <rule>, <rule>;` Each rule is a link from this step's work to another layer's. The links are made when each rule has no finding; a rule with no subject yet is waiting for the step that produces them. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
-| [`MethodLayer`](methodology/workflow/memo_workflow.md#methodlayer) | `part def` | A row of the method map: a layer of the architecture, or an assurance discipline. Its label is what the map calls it ("Logical"), its doc the question it answers ("How the system will work"). Rows are listed in the order the methodology declares them, each side apart.… | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`MethodLayer`](methodology/workflow/memo_workflow.md#methodlayer) | `part def` | Method layer definition specializing `MemoPart`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 | [`MethodologyWorkflowStep`](methodology/workflow/memo_workflow.md#methodologyworkflowstep) | `action def` | Methodology workflow step definition specializing `MemoAction`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`MethodWorkTask`](methodology/workflow/memo_workflow.md#methodworktask) | `part def` | Method work task definition specializing `MemoPart`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 
 
 ## `memo::viewpoints::catalog`

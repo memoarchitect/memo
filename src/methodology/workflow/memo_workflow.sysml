@@ -58,7 +58,27 @@ package memo_methodology_workflow {
     // whose `stage` it names, at whichever level is being worked, numbered in the methodology's order: a
     // step names its stage, never its row, so the grouping has one authority. The row's viewpoints are
     // the ones its views are made in, in the order they are offered.
+    enum def MethodTaskKind {
+        enum decomposition;
+        enum sequence;
+        enum realization;
+    }
+    part def MethodWorkTask :> MemoPart {
+        attribute taskKind : MethodTaskKind;
+        attribute primary : Boolean;
+        attribute taskSubjectKind : String;
+        attribute taskReferenceKind : String[0..1];
+        attribute taskImplementationKind : String[0..1];
+        attribute taskAllocationKind : String[0..1];
+        attribute taskRelationshipKind : String[0..1];
+        attribute objectiveDescription : String;
+        attribute reviewDescription : String;
+        ref taskViewpoint : MemoViewpoint[0..1];
+    }
+
     part def MethodLayer :> MemoPart {
+        attribute workbench : String[0..1];
+        ref workTasks : MethodWorkTask[0..*];
         attribute axis : MethodAxisKind;
         attribute stages : WorkflowStageKind[1..*];
         ref layerViewpoints : MemoViewpoint[0..*];
