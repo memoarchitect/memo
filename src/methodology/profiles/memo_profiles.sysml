@@ -98,7 +98,37 @@ package memo_methodology_profiles {
         attribute :>> stages = (WorkflowStageKind::context);
         ref :>> layerViewpoints = (vpSystemContext, contextViewpoint);
     }
+    part taskClinicalWork : MethodWorkTask {
+        @MemoIdentity { :>> label = "Clinical"; }
+        attribute :>> taskKind = MethodTaskKind::decomposition;
+        attribute :>> primary = true;
+        attribute :>> taskLevel = "clinical";
+        attribute :>> taskSubjectKind = "ClinicalUseCase";
+        attribute :>> taskWorkflowKind = "ClinicalWorkflow";
+        attribute :>> taskScenarioKind = "OperativeScenario";
+        attribute :>> taskStepKind = "OperativeAction";
+        attribute :>> taskRelationshipKind = "realizesUseCase";
+        attribute :>> objectiveDescription = "Describe clinical goals and the workflows, scenarios and steps that achieve them, independently of a product.";
+        attribute :>> reviewDescription = "Review each goal, its workflows, nominal and alternate paths, and the steps in each path.";
+        ref :>> taskViewpoint = vpScenario;
+    }
+    part taskSystemWork : MethodWorkTask {
+        @MemoIdentity { :>> label = "System"; }
+        attribute :>> taskKind = MethodTaskKind::decomposition;
+        attribute :>> primary = true;
+        attribute :>> taskLevel = "system";
+        attribute :>> taskSubjectKind = "SystemUseCase";
+        attribute :>> taskWorkflowKind = "SystemWorkflow";
+        attribute :>> taskScenarioKind = "OperativeScenario";
+        attribute :>> taskStepKind = "OperativeAction";
+        attribute :>> taskRelationshipKind = "realizesUseCase";
+        attribute :>> objectiveDescription = "Describe goals supported by this system, their workflows, scenarios and activities. Connect system activities to the clinical baseline and functional behavior.";
+        attribute :>> reviewDescription = "Review each goal, its workflows, nominal and alternate paths, and the steps in each path.";
+        ref :>> taskViewpoint = vpScenario;
+    }
     part layerOperational : MethodLayer {
+        attribute :>> workbench = "operational";
+        ref :>> workTasks = (taskClinicalWork, taskSystemWork);
         attribute :>> elementKinds = ("OperativeAction", "TaskDifficultyAssessment", "OperationalParticipant", "User", "MemoActor", "ArchitectureDescription", "ModelKind", "CorrespondenceRule", "UseContext", "UseEnvironment", "OperativeScenario", "IntendedUse", "OperationalEntity", "OperationalCapability", "UseCase", "ClinicalUseCase", "SystemUseCase", "OperationalWorkflow", "ClinicalWorkflow", "SystemWorkflow", "WorkflowResource");
         @MemoIdentity { :>> providedId = "ROW-ARC-1"; :>> label = "Operational"; }
         doc /* What users need to accomplish. */

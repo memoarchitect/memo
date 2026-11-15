@@ -68,6 +68,10 @@ package memo_methodology_workflow {
         attribute primary : Boolean;
         attribute taskSubjectKind : String;
         attribute taskReferenceKind : String[0..1];
+        attribute taskLevel : String[0..1];
+        attribute taskWorkflowKind : String[0..1];
+        attribute taskScenarioKind : String[0..1];
+        attribute taskStepKind : String[0..1];
         attribute taskImplementationKind : String[0..1];
         attribute taskAllocationKind : String[0..1];
         attribute taskRelationshipKind : String[0..1];
