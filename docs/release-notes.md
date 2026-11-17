@@ -2,10 +2,12 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a breaking change to the ontology raises the minor number; any other release raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
-## Unreleased
+## 0.22.0
+
+Breaking.
 
 - **Added.** Every definition carries its readable name as `@MemoIdentity { :>> label = …; }` (`SoftwareRequirement` is "Software requirement"). Tools show that label for the kind, and the declared name where a definition states none.
-- **Changed.** The concern definitions' `name` and `description` attributes are gone: the name is the label and the description is `doc`. Nothing in MEMO read either attribute.
+- **Removed.** The concern definitions' `name` and `description` attributes are gone. A model that sets either stops compiling: the name is the label and the description is `doc`. Nothing in MEMO read either attribute.
 
 ## 0.21.0
 
