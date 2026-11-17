@@ -6,6 +6,7 @@ package memo_examples_gpca_pump_gpca_operational {
     private import memo_examples_gpca_pump_gpca_context::*;
     private import memo_examples_gpca_pump_gpca_system::*;
     private import memo_examples_gpca_pump_gpca_behavior_subsystems::*;
+    private import memo_examples_gpca_pump_gpca_architecture::gpcaPump;
 
     // ── Operational entities beyond the human actors ────────────
     part entityPharmacy : OperationalEntity {
@@ -143,7 +144,7 @@ package memo_examples_gpca_pump_gpca_operational {
         attribute :>> trigger = "A clinician starts prescribed patient-controlled analgesia therapy.";
         attribute :>> successOutcome = "The patient receives prescribed analgesia without exceeding dose, lockout, or safety limits.";
         ref :>> useContext = hospitalWardContext;
-        subject supportingSystem;
+        subject :>> supportingSystem = gpcaPump;
         actor nurseInitiator = actorNurse;
         actor patientActor = actorPatient;
         actor prescriberActor = actorPrescriber;
