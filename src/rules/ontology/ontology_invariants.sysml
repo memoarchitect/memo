@@ -55,6 +55,50 @@ package memo_rules_ontology {
         attribute predicateExpression = "allOfKind('System')->exists(isDefinition == 'true')";
         constraint { true }
     }
+    // ─── Where systems are declared ─────────────────────────────
+    //
+    // A model's systems are its products, and a workspace starts at a system's definition. All of
+    // them are defined in one package, so one file lists every product and system of systems the
+    // model has. A package is declared in exactly one file, so comparing packages compares files.
+    // Their usages, subsystems, components and connections stay in the packages that describe them.
+    // The System and SystemOfSystems extents are compared separately: both kinds specialize
+    // LogicalComponent, so neither extent holds the other. A usage carries no `isDefinition`, so
+    // the test is `!= 'true'`, never `== 'false'`.
+    constraint def SystemDefinitionsInOnePackageRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-106"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "System";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "Every System and SystemOfSystems definition of a model is declared in one package, so one file lists the products the model describes. Usages, subsystems, components and connections stay in the packages that describe them and import that package.";
+        attribute predicateExpression = "isDefinition != 'true' or (allOfKind('System')->forAll(isDefinition != 'true' or package == subject.package) and allOfKind('SystemOfSystems')->forAll(isDefinition != 'true' or package == subject.package))";
+        constraint { true }
+    }
+    // A usage typed by the System or SystemOfSystems kind itself states a system the model never
+    // defines. It is valid SysML, but no workspace starts at it and nothing else can be typed by it.
+    constraint def SystemUsageHasDefinitionRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-107"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "System";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A system is defined before it is used: a part typed by System itself names a product the model never defines, so no workspace starts at it. Declare a part def that specializes System and type the usage by it.";
+        attribute predicateExpression = "isDefinition == 'true' or usageType != 'System'";
+        constraint { true }
+    }
+    constraint def SystemOfSystemsUsageHasDefinitionRule :> MemoConsistencyRule {
+        @MemoIdentity { :>> providedId = "CR-ONT-108"; }
+        attribute tailoring = RuleTailoringKind::methodology;
+        attribute domain = RuleDomainKind::modelling;
+        attribute obligation = RuleObligationKind::recommended;
+        attribute appliesTo = "SystemOfSystems";
+        attribute severity = RuleSeverityKind::warning;
+        attribute rationaleText = "A system of systems is defined before it is used: a part typed by SystemOfSystems itself names a system of systems the model never defines, so no workspace starts at it. Declare a part def that specializes SystemOfSystems and type the usage by it.";
+        attribute predicateExpression = "isDefinition == 'true' or usageType != 'SystemOfSystems'";
+        constraint { true }
+    }
     // ─── Use case scope ─────────────────────────────────────────
     //
     // The level of a use case is its declared type (`ClinicalUseCase`, `SystemUseCase`), and
