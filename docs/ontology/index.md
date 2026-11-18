@@ -207,7 +207,7 @@ a base does not change the kind: a `HardwareAssembly` is still a `part def`.
 | `port def` | `MemoPort` | `LogicalPort`, `PhysicalPort`, `DataPort` | no |
 | `interface def` | `MemoInterface` (abstract) | `PhysicalInterface` | no |
 | `item def` | `MemoItem` (abstract) | `InterfaceItem`, `Hazard`, `DataItem` | no |
-| `use case def` | `MemoUseCase` (abstract) | `ClinicalUseCase`, `SystemUseCase` | no |
+| `use case def` | `MemoUseCase` (abstract) | `ClinicalUseCase`, `OperationalUseCase` | no |
 | `requirement def` | `MemoRequirementElement` (abstract) | `Need`, `Requirement` | no |
 | `verification def` | `MemoVerificationCase` | `VerificationCase` | no |
 | `state def` | `MemoState` | `StateMachine`, for the machine | **yes**, for the states inside a machine: `state standby : MemoState` with its `stateKind` set |

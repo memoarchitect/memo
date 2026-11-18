@@ -140,7 +140,7 @@ package memo_architecture_functional_functions {
     // flows are part of functional architecture, never logical structure.
     //
     // An `action def`, like every other behaviour in MEMO. A route through
-    // responsibilities is the same shape as the `OperationalWorkflow` and
+    // responsibilities is the same shape as the `Workflow` and
     // `OperativeScenario` it sits beside: the scenarios package calls a
     // scenario "a selected path through a workflow (or functional flow)",
     // naming the two as one kind of thing, and its steps are `action def`s

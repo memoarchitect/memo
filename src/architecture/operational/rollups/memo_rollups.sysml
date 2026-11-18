@@ -9,7 +9,7 @@
 // it. It reads `enclosedPerformances`, which holds a step's composite `subactions`, the activities
 // it `perform`s by reference (a scenario that performs activities declared once and used in
 // several), and the `includedUseCases` of a use case, which are `enclosedPerformances` and not
-// `subactions`, so a walk over `subactions` alone would miss every reusable system use case. It
+// `subactions`, so a walk over `subactions` alone would miss every reusable operational use case. It
 // descends only into what can hold activities: an activity, a scenario or a use case. A
 // `perform` of a `SystemFunction` is therefore never entered, which is the point of the stop:
 // level 3 is how the system does its share, not more time, and following it would count the
@@ -88,7 +88,7 @@ package memo_architecture_operational_rollups {
     }
 
     calc def ProcedureCost {
-        in workflow : OperationalWorkflow[1];
+        in workflow : Workflow[1];
         return cost : MoneyValue[1] = QuantityCalculations::sum((
             workflow.ownedActions->select { in s : MemoAction[1]; s istype OperativeScenario }
                 ->collect { in s : OperativeScenario[1]; (ScenarioWeight(s) * ScenarioCost(s)) as MoneyValue },
@@ -96,7 +96,7 @@ package memo_architecture_operational_rollups {
     }
 
     calc def ProcedureDuration {
-        in workflow : OperationalWorkflow[1];
+        in workflow : Workflow[1];
         return duration : DurationValue[1] = QuantityCalculations::sum(
             workflow.ownedActions->select { in s : MemoAction[1]; s istype OperativeScenario }
                 ->collect { in s : OperativeScenario[1]; (ScenarioWeight(s) * ScenarioDuration(s)) as DurationValue });

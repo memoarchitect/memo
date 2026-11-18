@@ -111,7 +111,7 @@ functions required on that path.
 | Concept | MEMO definition | Package |
 |---|---|---|
 | Use case | `UseCase` | `use_cases` |
-| Workflow | `OperationalWorkflow` | `workflows` |
+| Workflow | `Workflow` | `workflows` |
 | Scenario | `OperativeScenario` | `scenarios` |
 | Activity on a path | `OperativeAction` | `activities` |
 
@@ -123,7 +123,7 @@ the clinical intent and scenario established above it.
 
 | Layer | Engineering question | Representative MEMO definitions |
 |---|---|---|
-| **Operational** | Who uses the device, for what goal, in which context and scenario? | `User`, `UseContext`, `Need`, `UseCase`, `OperationalWorkflow`, `OperativeScenario` |
+| **Operational** | Who uses the device, for what goal, in which context and scenario? | `User`, `UseContext`, `Need`, `UseCase`, `Workflow`, `OperativeScenario` |
 | **Functional** | What must the system accomplish on that scenario path? | `SystemFunction`, `FunctionalFlow`, `FunctionalExchange` |
 | **Logical** | How are responsibilities, interactions, interfaces, and modes organized? | `LogicalComponent`, channels, ports, interfaces, modes |
 | **Implementation** | Which technology implements those responsibilities? | `SoftwareComponent`, `SoftwareModule`, `ElectronicComponent`, `MechanicalPart`, `UserInterface` |
@@ -209,7 +209,7 @@ A project develops a scenario-driven vertical slice in three steps:
     <span class="memo-step-number">1</span>
     <div class="memo-step-content">
       <h3>Model the operational scenario</h3>
-      <p>Define the <code>Need</code> and <code>UseCase</code>, the <code>OperationalWorkflow</code> that supports the use case, and an <code>OperativeScenario</code> whose <code>OperativeAction</code> steps are the path.</p>
+      <p>Define the <code>Need</code> and <code>UseCase</code>, the <code>Workflow</code> that supports the use case, and an <code>OperativeScenario</code> whose <code>OperativeAction</code> steps are the path.</p>
     </div>
     <a href="../reference/elements/operational/">Operational definitions →</a>
   </article>

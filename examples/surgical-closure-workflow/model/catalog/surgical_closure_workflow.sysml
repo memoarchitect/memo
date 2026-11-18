@@ -87,11 +87,11 @@ package memo_examples_surgical_closure_workflow {
     // --8<-- [start:workflow]
     part wfSleeveGastrectomy : ClinicalProcedureWorkflow {
         @MemoIdentity { :>> providedId = "LSG-WF-001"; :>> label = "Laparoscopic sleeve gastrectomy workflow"; }
-        attribute :>> entryCondition = "patient prepared; time-out ready";
-        attribute :>> completionCondition = "staple line assessed; postoperative handover complete";
         attribute :>> clinicalObjective = "create a gastric sleeve after controlled mobilisation and staple-line assessment";
         action scNominalSleeveProcedure : OperativeScenario {
             @MemoIdentity { :>> providedId = "LSG-SC-001"; :>> label = "Nominal sleeve gastrectomy"; }
+            attribute :>> postCondition = "staple line assessed; postoperative handover complete";
+            attribute :>> preCondition = "patient prepared; time-out ready";
             attribute :>> pathSummary = "Time-out, access, mobilisation, sleeve creation, staple-line assessment, closure, and handover complete without rework.";
 
             perform actTimeOutAndPosition;

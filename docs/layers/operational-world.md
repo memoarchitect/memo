@@ -31,13 +31,13 @@ The standard has no "workflow"; MEMO's workflow is the use specification scoped 
 ## Two levels
 
 A use case and a workflow are each declared at a level by their type, and the level decides what
-they may say. `UseCase` and `OperationalWorkflow` are abstract: a project states which level each
+they may say. `UseCase` and `Workflow` are abstract: a project states which level each
 one is at.
 
 | | Level 1: clinical | Level 2: black box |
 | --- | --- | --- |
 | Question | What must happen to the patient? | Who and what does it, with what, how long, at what cost? |
-| Use case and workflow | `ClinicalUseCase`, `ClinicalWorkflow` | `SystemUseCase`, `SystemWorkflow` |
+| Use case and workflow | `ClinicalUseCase`, `ClinicalWorkflow` | `OperationalUseCase`, `OperationalWorkflow` |
 | Subject | An `OperationalEntity`: the care team, the setting | A `System` or `SystemOfSystems`: one variant of a platform |
 | Names a product? | Never | Yes, the variant's |
 | Numbers | None | Time, cost, success and likelihood, per variant |
@@ -45,7 +45,7 @@ one is at.
 
 The type and the subject must agree (`CR-ONT-093`), and a workflow realizes a use case of its own
 level (`CR-ONT-103`). The Architect groups use cases, the explorer and the viewpoints by the type:
-the clinical workflow is in the Clinical workflow viewpoint, the system workflows in the
+the clinical workflow is in the Clinical workflow viewpoint, the operational workflows in the
 Operational viewpoint. A step written once as an action definition and used from both levels is at
 neither, and the explorer lists it outside both groups.
 
@@ -80,7 +80,7 @@ The separation matters. Preparing therapy, managing active delivery, and
 responding to an alarm have different actors, preconditions, and success
 criteria. Combining them into one large flow would hide those boundaries.
 
-Each workflow is an `OperationalWorkflow` part. Its analysis is modelled, not
+Each workflow is an `Workflow` part. Its analysis is modelled, not
 written as prose: the use context and environment are `UseContext` and
 `UseEnvironment` references, the equipment is its own `WorkflowResource` parts,
 and a `Need` names the workflow it arises in, with `metByCurrentPractice` false

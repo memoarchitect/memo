@@ -112,24 +112,24 @@ package memo_methodology_profiles {
         attribute :>> reviewDescription = "Review each goal, its workflows, nominal and alternate paths, and the steps in each path.";
         ref :>> taskViewpoint = vpScenario;
     }
-    part taskSystemWork : MethodWorkTask {
-        @MemoIdentity { :>> label = "System"; }
+    part taskOperationalWork : MethodWorkTask {
+        @MemoIdentity { :>> label = "Operational"; }
         attribute :>> taskKind = MethodTaskKind::decomposition;
         attribute :>> primary = true;
-        attribute :>> taskLevel = "system";
-        attribute :>> taskSubjectKind = "SystemUseCase";
-        attribute :>> taskWorkflowKind = "SystemWorkflow";
+        attribute :>> taskLevel = "operational";
+        attribute :>> taskSubjectKind = "OperationalUseCase";
+        attribute :>> taskWorkflowKind = "OperationalWorkflow";
         attribute :>> taskScenarioKind = "OperativeScenario";
         attribute :>> taskStepKind = "OperativeAction";
         attribute :>> taskRelationshipKind = "realizesUseCase";
-        attribute :>> objectiveDescription = "Describe goals supported by this system, their workflows, scenarios and activities. Connect system activities to the clinical baseline and functional behavior.";
+        attribute :>> objectiveDescription = "Describe how the work is done with this system: its goals, workflows, scenarios and activities. Each activity realizes a clinical step and is realized by functions.";
         attribute :>> reviewDescription = "Review each goal, its workflows, nominal and alternate paths, and the steps in each path.";
         ref :>> taskViewpoint = vpScenario;
     }
     part layerOperational : MethodLayer {
         attribute :>> workbench = "operational";
-        ref :>> workTasks = (taskClinicalWork, taskSystemWork);
-        attribute :>> elementKinds = ("OperativeAction", "TaskDifficultyAssessment", "OperationalParticipant", "User", "MemoActor", "ArchitectureDescription", "ModelKind", "CorrespondenceRule", "UseContext", "UseEnvironment", "OperativeScenario", "IntendedUse", "OperationalEntity", "OperationalCapability", "UseCase", "ClinicalUseCase", "SystemUseCase", "OperationalWorkflow", "ClinicalWorkflow", "SystemWorkflow", "WorkflowResource");
+        ref :>> workTasks = (taskClinicalWork, taskOperationalWork);
+        attribute :>> elementKinds = ("OperativeAction", "TaskDifficultyAssessment", "OperationalParticipant", "User", "MemoActor", "ArchitectureDescription", "ModelKind", "CorrespondenceRule", "UseContext", "UseEnvironment", "OperativeScenario", "IntendedUse", "OperationalEntity", "OperationalCapability", "UseCase", "ClinicalUseCase", "OperationalUseCase", "Workflow", "ClinicalWorkflow", "OperationalWorkflow", "WorkflowResource");
         @MemoIdentity { :>> providedId = "ROW-ARC-1"; :>> label = "Operational"; }
         doc /* What users need to accomplish. */
         attribute :>> axis = MethodAxisKind::architecture;
@@ -297,7 +297,7 @@ package memo_methodology_profiles {
         attribute :>> level = MethodLevelKind::systemOfSystems;
         ref :>> role = systemArchitect;
         ref :>> guideViewpoint = vpClinicalWorkflow;
-        attribute :>> outputKinds = ("OperationalWorkflow");
+        attribute :>> outputKinds = ("Workflow");
         attribute :>> objectiveDescription = "For each procedure, say who takes part, where, with what, and what they need.";
         attribute :>> entryCriteria = "A clinical goal helps; a workflow may come first.";
         attribute :>> exitCriteria = "Each clinical procedure has a workflow.";
@@ -385,7 +385,7 @@ package memo_methodology_profiles {
         attribute :>> level = MethodLevelKind::system;
         ref :>> role = systemArchitect;
         ref :>> guideViewpoint = vpClinicalWorkflow;
-        attribute :>> outputKinds = ("OperationalWorkflow");
+        attribute :>> outputKinds = ("Workflow");
         attribute :>> objectiveDescription = "For each body of work, say who takes part, where, with what equipment, and what they need. Steps go in scenarios.";
         attribute :>> entryCriteria = "A use case helps; the workflow may come first.";
         attribute :>> exitCriteria = "Each use case is realized by a workflow.";
@@ -398,7 +398,7 @@ package memo_methodology_profiles {
         ref :>> role = systemArchitect;
         ref :>> guideViewpoint = vpScenario;
         attribute :>> outputKinds = ("OperativeScenario");
-        attribute :>> objectiveDescription = "Write the nominal and alternate paths through each workflow, saying who performs each step. A system step needs a function.";
+        attribute :>> objectiveDescription = "Write the nominal and alternate paths through each workflow, saying who performs each step. An operational activity is realized by functions.";
         attribute :>> entryCriteria = "A workflow helps.";
         attribute :>> exitCriteria = "Each workflow has its nominal scenario.";
     }

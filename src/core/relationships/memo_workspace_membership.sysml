@@ -23,7 +23,7 @@
 // dependent end follows the anchor end (a function follows the component it is
 // allocated to, a comment follows the element it annotates). `neither` is for
 // peers, for shared catalogue entries, and for the elements that sit above the
-// systems: a clinical use case that includes three system use cases, or a chain
+// systems: a clinical use case that includes the operational use cases of three systems, or a chain
 // that performs functions of three systems, belongs to the system of systems and
 // must not be pulled into each system it touches (`includesStep`, `performs`,
 // `interface`, `flow`).

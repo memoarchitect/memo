@@ -39,7 +39,7 @@
 | [`UseCaseKind`](#usecasekind) | `enum def` | Controlled values for use case: `care`, `service`, `manufacturing`, `development`. | — |
 | [`UseCase`](#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. | `MemoUseCase` |
 | [`ClinicalUseCase`](#clinicalusecase) | `use case def` | Clinical use case definition specializing `UseCase`. | `UseCase` |
-| [`SystemUseCase`](#systemusecase) | `use case def` | System use case definition specializing `UseCase`. | `UseCase` |
+| [`OperationalUseCase`](#operationalusecase) | `use case def` | Operational use case definition specializing `UseCase`. | `UseCase` |
 | [`Motivates`](#motivates) | `connection def` | Typed relationship from `Need` to `UseCase`. | `MemoRelationship` |
 
 ## UseCaseKind
@@ -87,15 +87,15 @@ use case def ClinicalUseCase :> UseCase
 | Owning package | `memo_architecture_operational_use_cases` |
 
 
-## SystemUseCase
+## OperationalUseCase
 
 ```sysml
-use case def SystemUseCase :> UseCase
+use case def OperationalUseCase :> UseCase
 ```
 
 | Property | Value |
 | --- | --- |
-| Description | System use case definition specializing `UseCase`. |
+| Description | Operational use case definition specializing `UseCase`. |
 | Kind | `use case def` |
 | Abstract | No |
 | Specializes | `UseCase` |
@@ -127,7 +127,7 @@ connection def Motivates :> MemoRelationship
     // manufacturing, and development use cases specialize the same base.
     //
     // A use case is at one of two levels, and the level is its own type (`ClinicalUseCase` or
-    // `SystemUseCase`), kept in agreement with its subject by CR-ONT-093.
+    // `OperationalUseCase`), kept in agreement with its subject by CR-ONT-093.
     // Level 1 is clinical: the subject is an `OperationalEntity` (the care team, the setting), the
     // use case names no product, and nothing on its workflow, scenarios or steps carries a number.
     // Level 2 is a black box: the subject is a `System` or `SystemOfSystems`, one variant of a
@@ -187,14 +187,14 @@ connection def Motivates :> MemoRelationship
 
         // The two levels are types, declared and not derived. A clinical use case has an
         // `OperationalEntity` (the care team, the setting) as its subject, names no product and carries
-        // no number; a system use case has a `System` or `SystemOfSystems`, one variant of a platform.
+        // no number; an operational use case has a `System` or `SystemOfSystems`, one variant of a platform.
         // CR-ONT-093 keeps the declared type and the subject in agreement. `UseCase` is abstract: a
         // project states which level each use case is at.
         use case def ClinicalUseCase :> UseCase {
             @MemoIdentity { :>> label = "Clinical use case"; }
         }
-        use case def SystemUseCase :> UseCase {
-            @MemoIdentity { :>> label = "System use case"; }
+        use case def OperationalUseCase :> UseCase {
+            @MemoIdentity { :>> label = "Operational use case"; }
         }
 
         connection def Motivates :> MemoRelationship {

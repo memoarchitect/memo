@@ -234,7 +234,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ClinicalUseCase`](architecture/operational/use_cases/memo_use_cases.md#clinicalusecase) | `use case def` | Clinical use case definition specializing `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| [`SystemUseCase`](architecture/operational/use_cases/memo_use_cases.md#systemusecase) | `use case def` | System use case definition specializing `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
+| [`OperationalUseCase`](architecture/operational/use_cases/memo_use_cases.md#operationalusecase) | `use case def` | Operational use case definition specializing `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 | [`UseCase`](architecture/operational/use_cases/memo_use_cases.md#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 
 
@@ -242,9 +242,9 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ClinicalWorkflow`](architecture/operational/workflows/memo_workflows.md#clinicalworkflow) | `part def` | Clinical workflow definition specializing `OperationalWorkflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`SystemWorkflow`](architecture/operational/workflows/memo_workflows.md#systemworkflow) | `part def` | System workflow definition specializing `OperationalWorkflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`ClinicalWorkflow`](architecture/operational/workflows/memo_workflows.md#clinicalworkflow) | `part def` | Clinical workflow definition specializing `Workflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `Workflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`Workflow`](architecture/operational/workflows/memo_workflows.md#workflow) | `part def` | Workflow definition specializing `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowResource`](architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 

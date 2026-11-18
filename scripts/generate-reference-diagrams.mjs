@@ -153,7 +153,7 @@ const write = (name, spec) => writeFileSync(join(output, `${name}.svg`), diagram
 // Grouped by semantic role (people / context / mission / work / workflows /
 // scenarios), not by raw sub-package — the earlier package-literal grouping
 // buried the actual reading order. Containment (OperationalParticipant→User,
-// OperationalWorkflow→its steps) is drawn as a parent/child TREE, the same
+// Workflow→its steps) is drawn as a parent/child TREE, the same
 // elbow-connector convention ARCADIA breakdown diagrams use, not a box
 // nested inside a box.
 //
@@ -207,11 +207,11 @@ const write = (name, spec) => writeFileSync(join(output, `${name}.svg`), diagram
     'UseCase', 'OperationalActivity', 'UserTask', 'TaskStep', 'TaskDifficultyAssessment',
   ]);
 
-  // Workflows — OperationalWorkflow is composed of its steps (tree); WorkflowResource is referenced, not contained, so it sits
+  // Workflows — Workflow is composed of its steps (tree); WorkflowResource is referenced, not contained, so it sits
   // apart with no tree connector into it.
   {
     const parentY = y + 90;
-    const parent = autoNode(x0 + 30, parentY, 'OperationalWorkflow', accent);
+    const parent = autoNode(x0 + 30, parentY, 'Workflow', accent);
     const childY = parentY + parent.height + 46;
     const stepX = x0 + 30;
     const step = autoNode(stepX, childY, 'WorkflowStep', accent);
@@ -278,7 +278,7 @@ const write = (name, spec) => writeFileSync(join(output, `${name}.svg`), diagram
   addRow('Need', 'Motivates', 'UseCase', { sourcePackage: 'memo::assurance::requirements::needs' });
   addRow('UseCase', 'Extends', 'UseCase');
   addRow('any action', 'Supports', 'MemoAction', { untypedSource: true, targetPackage: 'memo::core::common' });
-  addRow('OperationalWorkflow', 'RequiresResource', 'WorkflowResource');
+  addRow('Workflow', 'RequiresResource', 'WorkflowResource');
   addRow('MemoAction', 'Transforms', 'MemoAction', { sourcePackage: 'memo::core::common', targetPackage: 'memo::core::common' });
   addRow('MemoScenario', 'Selects', 'step or flow (any)', { untypedTarget: true });
   addRow('ScenarioOccurrence', 'OccursDuring', 'UseContext');

@@ -137,7 +137,7 @@ package memo_examples_gpca_pump_gpca_operational {
     // The use case is the patient and clinician goal. It is supported by
     // several workflows, each of which owns multiple selected scenarios.
     // --8<-- [start:use-case]
-    use case ucDeliverPcaTherapy : SystemUseCase {
+    use case ucDeliverPcaTherapy : OperationalUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> providedId = "UC-001"; :>> label = "Deliver patient controlled analgesia"; }
         attribute :>> goalStatement = "Deliver prescribed analgesia safely while allowing patient-controlled bolus requests within configured limits.";
@@ -152,16 +152,11 @@ package memo_examples_gpca_pump_gpca_operational {
     }
     // --8<-- [end:use-case]
 
-    part wfPrepareAndStartTherapy : SystemWorkflow {
+    part wfPrepareAndStartTherapy : OperationalWorkflow {
         @MemoIdentity { :>> label = "Prepare and start therapy"; }
-        attribute :>> entryCondition = "A valid prescription and prepared reservoir are available.";
-        attribute :>> completionCondition = "Therapy is started with confirmed prescription limits.";
-
     }
-    part wfManageActiveTherapy : SystemWorkflow {
+    part wfManageActiveTherapy : OperationalWorkflow {
         @MemoIdentity { :>> label = "Manage active therapy"; }
-        attribute :>> entryCondition = "Basal therapy is active.";
-        attribute :>> completionCondition = "A bolus is handled or active therapy continues safely.";
         action osNominalTherapy : OperativeScenario {
             @MemoIdentity { :>> providedId = "OS-001"; :>> label = "Nominal therapy session"; }
             attribute :>> preCondition = "prescription issued, reservoir loaded";
@@ -192,10 +187,8 @@ package memo_examples_gpca_pump_gpca_operational {
         }
         // --8<-- [end:lockout-scenario]
     }
-    part wfRespondToTherapyAlarm : SystemWorkflow {
+    part wfRespondToTherapyAlarm : OperationalWorkflow {
         @MemoIdentity { :>> label = "Respond to therapy alarm"; }
-        attribute :>> entryCondition = "A therapy alarm or degraded condition is detected.";
-        attribute :>> completionCondition = "The pump is safe and the clinician has resolved or escalated the condition.";
 
         action osOcclusionAlarm : OperativeScenario {
             attribute :>> scenarioKind = ScenarioKind::alternate;

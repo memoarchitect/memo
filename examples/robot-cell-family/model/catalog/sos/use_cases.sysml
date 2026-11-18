@@ -8,7 +8,7 @@ package robot_cell_family_sos_use_cases {
     private import robot_cell_family_systems_manipulation_manipulation_system::*;
     private import robot_cell_family_systems_perception_perception_system::*;
 
-    use case ucPerformPickAndPlace : SystemUseCase {
+    use case ucPerformPickAndPlace : OperationalUseCase {
         @MemoIdentity { :>> providedId = "RCF-UC-001"; :>> label = "Perform Pick And Place"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         attribute :>> goalStatement = "Move a workpiece by mapping the cell and grasping it.";

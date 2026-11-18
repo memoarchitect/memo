@@ -35,5 +35,5 @@ folder, as its own package. Lesson 1 shows how to tell the project about it.
 | 5 | [The nominal scenario](05-the-nominal-scenario.md) | `OperativeScenario`, step usages, `first … then` |
 | 6 | [An alternate scenario](06-an-alternate-scenario.md) | `scenarioKind = alternate`, reused steps |
 | 7 | [Who does each step](07-who-does-each-step.md) | `perform action … references …`, in the hardware file |
-| 8 | [Level 2: with the oximeter](08-level-two.md) | `SystemUseCase`, `SystemWorkflow`, `#refinement`, numbers, `perform` of a function |
+| 8 | [Level 2: with the oximeter](08-level-two.md) | `OperationalUseCase`, `OperationalWorkflow`, `#refinement`, numbers, `perform` of a function |
 | 9 | [Recap](09-recap.md) | — |

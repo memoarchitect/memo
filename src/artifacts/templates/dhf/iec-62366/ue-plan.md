@@ -39,7 +39,7 @@ _[TODO: Describe all use environments: clinical, home, ambulatory, etc.]_
 This section is generated from the system model. The table below lists the **Use-Related Hazards** elements currently defined:
 
 ```memo-query
-kind: [ClinicalUseCase, SystemUseCase, OperativeAction]
+kind: [ClinicalUseCase, OperationalUseCase, OperativeAction]
 display: table
 columns: name, layer, doc
 sort: name

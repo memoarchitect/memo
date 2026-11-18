@@ -109,7 +109,7 @@ Every tutorial is one slice of the same structure. This example uses these defin
 
 | Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperativeAction`, `OperativeScenario`, `SystemUseCase`, `User` | [Operational](../ontology/operational.md) |
+| Operational | `OperativeAction`, `OperativeScenario`, `OperationalUseCase`, `User` | [Operational](../ontology/operational.md) |
 | Functional | `SystemFunction` | [Functional](../ontology/functional.md) |
 | Logical | `LogicalComponent`, `System` | [Logical](../ontology/logical.md) |
 | Implementation | `UIAction`, `UIElement`, `UserInterface` | [Implementation](../ontology/implementation.md) |

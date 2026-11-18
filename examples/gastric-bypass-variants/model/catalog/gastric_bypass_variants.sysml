@@ -67,10 +67,10 @@ package memo_examples_gastric_bypass_variants {
     }
     part wfRouxEnY : ClinicalProcedureWorkflow {
         @MemoIdentity { :>> label = "Clinical workflow: Roux-en-Y gastric bypass"; }
-        attribute :>> entryCondition = "patient prepared; time-out complete";
-        attribute :>> completionCondition = "pouch and anastomosis created and leak-tested";
         action scNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Nominal path"; }
+            attribute :>> postCondition = "pouch and anastomosis created and leak-tested";
+            attribute :>> preCondition = "patient prepared; time-out complete";
             action establishAccess : EstablishPneumoperitoneumAndAccess {
                 @MemoIdentity { :>> label = "Establish access"; }
             }
@@ -171,15 +171,13 @@ package memo_examples_gastric_bypass_variants {
     allocate fnFireStapler to platform.ourRobot;
 
     // ── Tier 2: the system workflow, laparoscopic ──────────────────────
-    use case ucRouxEnYLap : SystemUseCase {
+    use case ucRouxEnYLap : OperationalUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (laparoscopic)"; }
         subject :>> supportingSystem = platform.laparoscopicTower;
     }
-    part wfRouxEnYLap : SystemWorkflow {
+    part wfRouxEnYLap : OperationalWorkflow {
         @MemoIdentity { :>> label = "System workflow: Roux-en-Y gastric bypass (laparoscopic)"; }
-        attribute :>> entryCondition = "patient prepared; time-out complete";
-        attribute :>> completionCondition = "pouch and anastomosis created and leak-tested";
         attribute :>> perProcedureCost = 450 [EUR];
         part staplerLap : Stapler {
             @MemoIdentity { :>> label = "Stapler (laparoscopic)"; }
@@ -188,6 +186,8 @@ package memo_examples_gastric_bypass_variants {
         }
         action scLapNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Nominal path (laparoscopic)"; }
+            attribute :>> postCondition = "pouch and anastomosis created and leak-tested";
+            attribute :>> preCondition = "patient prepared; time-out complete";
             action establishAccess : EstablishPneumoperitoneumAndAccess {
                 @MemoIdentity { :>> label = "Establish access"; }
                 attribute :>> expectedDuration = 20 [min];
@@ -236,15 +236,13 @@ package memo_examples_gastric_bypass_variants {
     #refinement dependency wfRouxEnYLap::scLapConversion::convertToOpen to wfRouxEnY::scConversion::convertToOpen;
 
     // ── Tier 2: the system workflow, our robot ──────────────────────
-    use case ucRouxEnYOur : SystemUseCase {
+    use case ucRouxEnYOur : OperationalUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (our robot)"; }
         subject :>> supportingSystem = platform.ourRobot;
     }
-    part wfRouxEnYOur : SystemWorkflow {
+    part wfRouxEnYOur : OperationalWorkflow {
         @MemoIdentity { :>> label = "System workflow: Roux-en-Y gastric bypass (our robot)"; }
-        attribute :>> entryCondition = "patient prepared; time-out complete";
-        attribute :>> completionCondition = "pouch and anastomosis created and leak-tested";
         attribute :>> perProcedureCost = 900 [EUR];
         part staplerOur : Stapler {
             @MemoIdentity { :>> label = "Stapler (our robot)"; }
@@ -253,6 +251,8 @@ package memo_examples_gastric_bypass_variants {
         }
         action scOurNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Nominal path (our robot)"; }
+            attribute :>> postCondition = "pouch and anastomosis created and leak-tested";
+            attribute :>> preCondition = "patient prepared; time-out complete";
             action establishAccess : EstablishPneumoperitoneumAndAccess {
                 @MemoIdentity { :>> label = "Establish access"; }
                 attribute :>> expectedDuration = 30 [min];
@@ -306,15 +306,13 @@ package memo_examples_gastric_bypass_variants {
     #refinement dependency wfRouxEnYOur::scOurConversion::convertToOpen to wfRouxEnY::scConversion::convertToOpen;
 
     // ── Tier 2: the system workflow, competitor robot ──────────────────────
-    use case ucRouxEnYCmp : SystemUseCase {
+    use case ucRouxEnYCmp : OperationalUseCase {
         attribute :>> useCaseKind = UseCaseKind::care;
         @MemoIdentity { :>> label = "Perform Roux-en-Y gastric bypass (competitor robot)"; }
         subject :>> supportingSystem = platform.competitorRobot;
     }
-    part wfRouxEnYCmp : SystemWorkflow {
+    part wfRouxEnYCmp : OperationalWorkflow {
         @MemoIdentity { :>> label = "System workflow: Roux-en-Y gastric bypass (competitor robot)"; }
-        attribute :>> entryCondition = "patient prepared; time-out complete";
-        attribute :>> completionCondition = "pouch and anastomosis created and leak-tested";
         attribute :>> perProcedureCost = 1100 [EUR];
         part staplerCmp : Stapler {
             @MemoIdentity { :>> label = "Stapler (competitor robot)"; }
@@ -323,6 +321,8 @@ package memo_examples_gastric_bypass_variants {
         }
         action scCmpNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Nominal path (competitor robot)"; }
+            attribute :>> postCondition = "pouch and anastomosis created and leak-tested";
+            attribute :>> preCondition = "patient prepared; time-out complete";
             action establishAccess : EstablishPneumoperitoneumAndAccess {
                 @MemoIdentity { :>> label = "Establish access"; }
                 attribute :>> expectedDuration = 35 [min];
@@ -386,17 +386,17 @@ package memo_examples_gastric_bypass_variants {
     // procedure, which the roll-up derives from the activities' times, the resources' rates and the
     // alternate scenarios' likelihoods. The lowest wins.
     analysis bypassTradeStudy : TradeStudy {
-        subject : OperationalWorkflow = (wfRouxEnYLap, wfRouxEnYOur, wfRouxEnYCmp);
+        subject : Workflow = (wfRouxEnYLap, wfRouxEnYOur, wfRouxEnYCmp);
         objective : MinimizeObjective;
 
         calc :>> evaluationFunction {
-            in part aWorkflow :>> alternative : OperationalWorkflow;
+            in part aWorkflow :>> alternative : Workflow;
 
             calc procedureCost : ProcedureCost { in workflow = aWorkflow; return cost; }
 
             return :>> result : Real = procedureCost.cost.num;
         }
 
-        return part :>> selectedAlternative : OperationalWorkflow;
+        return part :>> selectedAlternative : Workflow;
     }
 }

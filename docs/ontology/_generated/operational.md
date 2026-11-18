@@ -59,15 +59,15 @@
 | --- | --- | --- |
 | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) *(abstract)* | `use case def` | Use case definition specializing `MemoUseCase`. |
 | [`ClinicalUseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#clinicalusecase) | `use case def` | Clinical use case definition specializing `UseCase`. |
-| [`SystemUseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#systemusecase) | `use case def` | System use case definition specializing `UseCase`. |
+| [`OperationalUseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#operationalusecase) | `use case def` | Operational use case definition specializing `UseCase`. |
 
 **Workflows**
 
 | Element | SysML kind | What it is |
 | --- | --- | --- |
-| [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) *(abstract)* | `part def` | Operational workflow definition specializing `MemoPart`. |
-| [`ClinicalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#clinicalworkflow) | `part def` | Clinical workflow definition specializing `OperationalWorkflow`. |
-| [`SystemWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#systemworkflow) | `part def` | System workflow definition specializing `OperationalWorkflow`. |
+| [`Workflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflow) *(abstract)* | `part def` | Workflow definition specializing `MemoPart`. |
+| [`ClinicalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#clinicalworkflow) | `part def` | Clinical workflow definition specializing `Workflow`. |
+| [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `Workflow`. |
 | [`WorkflowResource`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. |
 
 
@@ -87,7 +87,7 @@ flowchart LR
   OperationalCapability["OperationalCapability"]
   UseCase["UseCase"]
   Need["Need"]:::other
-  OperationalWorkflow["OperationalWorkflow"]
+  Workflow["Workflow"]
   InteractionFlow["InteractionFlow"]:::other
   RequirementDriver["RequirementDriver"]:::other
   OperativeScenario["OperativeScenario"]
@@ -104,7 +104,7 @@ flowchart LR
   IntendedUse -->|RequiresCapability| OperationalCapability
   OperationalCapability -->|EnablesUseCase| UseCase
   Need -->|Motivates| UseCase
-  OperationalWorkflow -->|RealizesUseCase| UseCase
+  Workflow -->|RealizesUseCase| UseCase
   InteractionFlow -->|FlowServesUseCase| UseCase
   RequirementDriver -->|RealizedByScenario| OperativeScenario
   OperativeAction -->|CommitsUseError| UseError
@@ -126,7 +126,7 @@ flowchart LR
 | [`RequiresCapability`](../sysml-api/architecture/operational/structure/memo_operational.md#requirescapability) | [`IntendedUse`](../sysml-api/architecture/operational/structure/memo_operational.md#intendeduse) | [`OperationalCapability`](../sysml-api/architecture/operational/structure/memo_operational.md#operationalcapability) | The intended use requires these operational capabilities (ARCADIA: Mission Requires Capability). |
 | [`EnablesUseCase`](../sysml-api/architecture/operational/structure/memo_operational.md#enablesusecase) | [`OperationalCapability`](../sysml-api/architecture/operational/structure/memo_operational.md#operationalcapability) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | An operational capability enables a use case (the ability the actor draws on to accomplish the goal). Capability is tied to the use case, not to individual activities. |
 | [`Motivates`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#motivates) | [`Need`](../sysml-api/assurance/requirements/needs/memo_needs.md#need) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | Typed relationship from `Need` to `UseCase`. |
-| [`RealizesUseCase`](../sysml-api/architecture/operational/workflows/memo_workflows.md#realizesusecase) | [`OperationalWorkflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#operationalworkflow) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). |
+| [`RealizesUseCase`](../sysml-api/architecture/operational/workflows/memo_workflows.md#realizesusecase) | [`Workflow`](../sysml-api/architecture/operational/workflows/memo_workflows.md#workflow) | [`UseCase`](../sysml-api/architecture/operational/use_cases/memo_use_cases.md#usecase) | The use case a workflow realizes. Many workflows may trace to one use case; the use case does not own its workflows (the trace points upward, workflow → use case). |
 
 ### Relationships from elsewhere that reach this layer
 

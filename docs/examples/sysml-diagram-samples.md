@@ -46,7 +46,7 @@ Every tutorial is one slice of the same structure. This example uses these defin
 
 | Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
-| Operational | `OperationalEntity`, `OperativeAction`, `SystemUseCase`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
+| Operational | `OperationalEntity`, `OperativeAction`, `OperationalUseCase`, `UseContext`, `User` | [Operational](../ontology/operational.md) |
 | Functional | `FunctionalFlow`, `StateMachine`, `SystemFunction` | [Functional](../ontology/functional.md) |
 | Logical | `DataPort`, `InterfaceItem`, `LogicalComponent`, `System` | [Logical](../ontology/logical.md) |
 | Implementation | `HardwareAssembly` | [Implementation](../ontology/implementation.md) |

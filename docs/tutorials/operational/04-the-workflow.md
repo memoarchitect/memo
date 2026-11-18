@@ -20,8 +20,6 @@ After the step definitions:
 ```sysml
 part wfSpotCheck : ClinicalWorkflow {
     @MemoIdentity { :>> providedId = "WF-1"; :>> label = "Spot-check oxygenation"; }
-    attribute :>> entryCondition = "a patient needs an oxygenation check";
-    attribute :>> completionCondition = "a value is recorded, or the check is escalated";
     ref :>> useContext = generalWard;
 }
 connection : RealizesUseCase connect wfSpotCheck to ucCheckOxygenation;
@@ -36,7 +34,7 @@ part wfSpotCheck : ClinicalWorkflow {
 ```
 
 - **Notation.** A part usage.
-- **What it says.** There is a clinical workflow, the spot check.
+- **What it says.** There is a clinical workflow, the spot check. It has no pre- or postcondition: each of its scenarios says where its own path starts and ends (lesson 5).
 - **Why.** `ClinicalWorkflow` is the level-1 workflow, and it must realize a level-1 use case (CR-ONT-103 reports a clinical workflow that realizes a system use case). A part because its scenarios are alternatives, as the idea above explains.
 
 ```sysml
@@ -45,15 +43,6 @@ part wfSpotCheck : ClinicalWorkflow {
 
 - **Notation.** `@MemoIdentity { … }` attaches metadata to the element whose body it is in; `:>> providedId = "…";` gives a value to an attribute the metadata already declares.
 - **What it says.** Its engineering id and the name people read.
-
-```sysml
-attribute :>> entryCondition = "a patient needs an oxygenation check";
-attribute :>> completionCondition = "a value is recorded, or the check is escalated";
-```
-
-- **Notation.** Two text values.
-- **What it says.** Where the work starts and where it ends.
-- **Why.** Every scenario of the workflow sits between these two; a scenario's own pre- and post-conditions are narrower.
 
 ```sysml
 ref :>> useContext = generalWard;
@@ -130,8 +119,6 @@ package pulse_oximeter_use {
 
     part wfSpotCheck : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "WF-1"; :>> label = "Spot-check oxygenation"; }
-        attribute :>> entryCondition = "a patient needs an oxygenation check";
-        attribute :>> completionCondition = "a value is recorded, or the check is escalated";
         ref :>> useContext = generalWard;
     }
     connection : RealizesUseCase connect wfSpotCheck to ucCheckOxygenation;

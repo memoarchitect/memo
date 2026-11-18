@@ -26,4 +26,6 @@
   <rect x="373.2" y="296" width="167.9" height="32" rx="8" fill="#ffffff" stroke="#2f8a4a" stroke-width="1.4"/><text x="457.15" y="317" text-anchor="middle" font-size="14.5" font-weight="700" fill="#14462a">RelationUsageRule</text>
   <text x="38" y="361" font-size="12.5" font-weight="800" fill="#2f8a4a">Workflow</text>
   <rect x="206" y="340" width="220.1" height="32" rx="8" fill="#ffffff" stroke="#2f8a4a" stroke-width="1.4"/><text x="316.05" y="361" text-anchor="middle" font-size="14.5" font-weight="700" fill="#14462a">MethodologyWorkflowStep</text>
+  <rect x="434.1" y="340" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#2f8a4a" stroke-width="1.4"/><text x="505" y="361" text-anchor="middle" font-size="14.5" font-weight="700" fill="#14462a">MethodWorkTask</text>
+  <rect x="583.9000000000001" y="340" width="115.7" height="32" rx="8" fill="#ffffff" stroke="#2f8a4a" stroke-width="1.4"/><text x="641.7500000000001" y="361" text-anchor="middle" font-size="14.5" font-weight="700" fill="#14462a">MethodLayer</text>
 </svg>

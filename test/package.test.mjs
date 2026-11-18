@@ -190,7 +190,7 @@ test('use cases use one standard type with a context kind, and two level types',
   );
   assert.match(useCases, /use case def UseCase/);
   assert.match(useCases, /use case def ClinicalUseCase :> UseCase/);
-  assert.match(useCases, /use case def SystemUseCase :> UseCase/);
+  assert.match(useCases, /use case def OperationalUseCase :> UseCase/);
   assert.match(useCases, /attribute useCaseKind : UseCaseKind/);
   assert.doesNotMatch(useCases, /(?:Service|Manufacturing|Development|Medical)UseCase/);
 });
