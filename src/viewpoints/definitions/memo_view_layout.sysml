@@ -44,6 +44,12 @@ package memo_viewpoints_definitions_layout {
         enum bottom;
     }
 
+    /** Which way a label's text runs: across the page, or turned a quarter to read bottom to top. */
+    enum def MemoLayoutTextOrientation {
+        enum horizontal;
+        enum vertical;
+    }
+
     /** The view-wide choices. One per view, absent when the view keeps every default. */
     metadata def MemoLayout {
         :> annotatedElement : SysML::ViewUsage;
@@ -98,6 +104,7 @@ package memo_viewpoints_definitions_layout {
         attribute fontWeight : Real[0..1];
         attribute textAlign : MemoLayoutAlign[0..1];
         attribute verticalAlign : MemoLayoutVerticalAlign[0..1];
+        attribute textOrientation : MemoLayoutTextOrientation[0..1];
         attribute opacity : Real[0..1];
     }
 
@@ -113,6 +120,11 @@ package memo_viewpoints_definitions_layout {
         /** A port nested in a port: how far along its parent, and whether it faces out. */
         attribute alongOffset : Real[0..1];
         attribute faceOuter : Boolean[0..1];
+        /** How the port's name is drawn. */
+        attribute textColor : String[0..1];
+        attribute fontSize : Real[0..1];
+        attribute fontWeight : Real[0..1];
+        attribute textOrientation : MemoLayoutTextOrientation[0..1];
     }
 
     /**
@@ -159,6 +171,13 @@ package memo_viewpoints_definitions_layout {
         /** Where the connector's label sits, on the board. */
         attribute labelX : Real[0..1];
         attribute labelY : Real[0..1];
+        /** True once a person has placed the label, so routing leaves it where they put it. */
+        attribute manualLabel : Boolean[0..1];
+        /** How the connector's label is drawn. */
+        attribute textColor : String[0..1];
+        attribute fontSize : Real[0..1];
+        attribute fontWeight : Real[0..1];
+        attribute textOrientation : MemoLayoutTextOrientation[0..1];
         /** Where each end leaves its box, relative to the box, and on which wall. */
         attribute sourceOffsetX : Real[0..1];
         attribute sourceOffsetY : Real[0..1];

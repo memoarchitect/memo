@@ -124,5 +124,6 @@ _None with an end typed in this layer._
 | [`MemoLayoutLineStyle`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutlinestyle) | `solid`, `dashed`, `dotted` |
 | [`MemoLayoutAlign`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutalign) | `left`, `center`, `right` |
 | [`MemoLayoutVerticalAlign`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayoutverticalalign) | `top`, `middle`, `bottom` |
+| [`MemoLayoutTextOrientation`](../sysml-api/viewpoints/definitions/memo_view_layout.md#memolayouttextorientation) | `horizontal`, `vertical` |
 | [`MatrixOrderingKind`](../sysml-api/viewpoints/matrix/memo_matrix_views.md#matrixorderingkind) | `natural`, `kind`, `partition`, `cluster` |
 | [`MatrixGroupKind`](../sysml-api/viewpoints/matrix/memo_matrix_views.md#matrixgroupkind) | `owningPackage`, `memoQuery`, `clusterResult` |

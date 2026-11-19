@@ -239,6 +239,7 @@ SysML `enum def` declarations in `src/`.
 | [`MemoLayoutAlign`](viewpoints/definitions/memo_view_layout.md#memolayoutalign) | `enum def` | Controlled values for memo layout align: `left`, `center`, `right`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
 | [`MemoLayoutLineStyle`](viewpoints/definitions/memo_view_layout.md#memolayoutlinestyle) | `enum def` | Controlled values for memo layout line style: `solid`, `dashed`, `dotted`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
 | [`MemoLayoutSide`](viewpoints/definitions/memo_view_layout.md#memolayoutside) | `enum def` | Controlled values for memo layout side: `top`, `bottom`, `left`, `right`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
+| [`MemoLayoutTextOrientation`](viewpoints/definitions/memo_view_layout.md#memolayouttextorientation) | `enum def` | Controlled values for memo layout text orientation: `horizontal`, `vertical`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
 | [`MemoLayoutVerticalAlign`](viewpoints/definitions/memo_view_layout.md#memolayoutverticalalign) | `enum def` | Controlled values for memo layout vertical align: `top`, `middle`, `bottom`. | [`viewpoints/definitions/memo_view_layout.sysml`](viewpoints/definitions/memo_view_layout.md) |
 
 
