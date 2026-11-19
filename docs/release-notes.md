@@ -2,13 +2,15 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a breaking change to the ontology raises the minor number; any other release raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
-## Unreleased
+## 0.23.0
 
-Breaking. The next release raises the minor number.
+Breaking.
 
 - **Renamed.** The middle operational level is **Operational**, Arcadia's Operational Analysis. The clinical level, a product-independent procedure, sits above it. `SystemUseCase` is now `OperationalUseCase` and `SystemWorkflow` is now `OperationalWorkflow`. The abstract parent that was `OperationalWorkflow` is now `Workflow`. The method task's `taskLevel` is `"operational"` and its label "Operational". A model that types an element by an old name stops compiling: rename the type.
 - **Removed.** A workflow's `entryCondition` and `completionCondition`. A workflow is a set of alternative paths, and each path, the scenario, says where it starts and ends with `preCondition` and `postCondition`. Move a workflow's values to its usual-path scenario.
 - **Added.** `CR-ONT-106`: a model's `System` and `SystemOfSystems` definitions are in one package. `CR-ONT-107` and `CR-ONT-108`: no usage is typed by `System` or `SystemOfSystems` itself. All three are tailorable warnings.
+- **Added.** The method is data. `MethodLayer` and `MethodWorkTask` declare each layer of the method map and the guided tasks in it, with `MethodAxisKind` and `MethodTaskKind`, and MEMO's method declares its own. `FunctionalRoot` is a typed dependency from a `System` or `SystemOfSystems` to the one top-level function its function tree grows from.
+- **Added.** A view's layout styles labels: a port's name and a connector's label take `textColor`, `fontSize` and `fontWeight`, any label can read bottom to top (`MemoLayoutTextOrientation`), and `manualLabel` keeps a label where a person placed it.
 
 ## 0.22.0
 
