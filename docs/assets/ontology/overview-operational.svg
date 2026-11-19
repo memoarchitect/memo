@@ -28,11 +28,11 @@
   <rect x="505.6" y="304" width="202.7" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="606.95" y="325" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OperationalCapability</text>
   <text x="38" y="369" font-size="12.5" font-weight="800" fill="#2f6fc4">Use cases</text>
   <rect x="206" y="348" width="150.5" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="281.25" y="369" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ClinicalUseCase</text>
-  <rect x="364.5" y="348" width="133.1" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="431.05" y="369" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SystemUseCase</text>
+  <rect x="364.5" y="348" width="176.6" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="452.8" y="369" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OperationalUseCase</text>
   <text x="38" y="413" font-size="12.5" font-weight="800" fill="#2f6fc4">Workflows</text>
   <rect x="206" y="392" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="285.6" y="413" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">ClinicalWorkflow</text>
-  <rect x="373.2" y="392" width="141.8" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="444.1" y="413" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">SystemWorkflow</text>
-  <rect x="523" y="392" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="602.6" y="413" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">WorkflowResource</text>
+  <rect x="373.2" y="392" width="185.29999999999998" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="465.84999999999997" y="413" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">OperationalWorkflow</text>
+  <rect x="566.5" y="392" width="159.2" height="32" rx="8" fill="#ffffff" stroke="#2f6fc4" stroke-width="1.4"/><text x="646.1" y="413" text-anchor="middle" font-size="14.5" font-weight="700" fill="#123b6b">WorkflowResource</text>
   <line x1="38" y1="438" x2="822" y2="438" stroke="#c7433f" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>
   <text x="38" y="459" font-size="13" font-weight="800" fill="#a12e2a">ASSURANCE</text>
   <text x="138" y="459" font-size="14" fill="#1f2a37">Need  <tspan font-weight="800" fill="#a12e2a">Motivates</tspan>  ClinicalUseCase</text>

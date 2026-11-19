@@ -28,7 +28,7 @@ package robot_cell_family_systems_perception_perception_system {
         attribute :>> outputDescription = "Filtered, timestamped point clouds";
     }
 
-    use case ucRecordRun : SystemUseCase {
+    use case ucRecordRun : OperationalUseCase {
         @MemoIdentity { :>> providedId = "RCF-PER-UC-001"; :>> label = "Record Run Data"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         subject :>> supportingSystem : PerceptionSystem;

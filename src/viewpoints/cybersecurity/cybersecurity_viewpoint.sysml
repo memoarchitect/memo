@@ -7,7 +7,7 @@ package memo_viewpoints_cybersecurity_cybersecurity_viewpoint {
 
     private import memo_core_common::*;
     viewpoint cybersecurityViewpoint : MemoViewpoint {
-        @MemoIdentity { :>> providedId = "VP-CYB"; :>> label = "CybersecurityViewpoint"; }
+        @MemoIdentity { :>> providedId = "VP-CYB"; :>> label = "Cybersecurity views"; }
         doc /* Default viewpoint derived from the cybersecurity layer, using STRIDE-style threat categories by default while allowing safety and privacy impacts to be traced into the broader model. */
         @MemoIdentity { :>> shortDescription = "Shows assets, trust boundaries, threats, vulnerabilities, cyber hazards, cyber risks, and mitigations."; }
         attribute :>> purpose = "Communicate cybersecurity design, threat analysis, and cyber risk posture.";

@@ -26,8 +26,8 @@ The operational perspective answers **why, for whom, and in what context**.
 | --- | --- | --- |
 | `User`, `MemoActor`, `OperationalEntity` | Who uses the device; another person or thing in the setting | native `actor` on a use case; `perform` |
 | `IntendedUse`, `ReasonablyForeseeableMisuse`, `UseContext`, `Need` | Purpose, foreseeable misuse, setting, and what users need | `Motivates`, `HeldBy`, `DerivesFrom` |
-| `ClinicalUseCase`, `SystemUseCase`, with `useCaseKind` | A care, service, manufacturing, or development goal | native `actor` and `subject`; `Motivates`, `Validates` |
-| `ClinicalWorkflow`, `SystemWorkflow` | Reusable organization of work | `RealizesUseCase` |
+| `ClinicalUseCase`, `OperationalUseCase`, with `useCaseKind` | A care, service, manufacturing, or development goal | native `actor` and `subject`; `Motivates`, `Validates` |
+| `ClinicalWorkflow`, `OperationalWorkflow` | Reusable organization of work | `RealizesUseCase` |
 | `OperativeScenario` (`scenarioKind`: nominal, alternate) | One path through a workflow, nested in it | `#refinement` to its use case; native `perform` and `first … then` |
 | `OperativeAction` | Work performed along a path; a critical task is one whose `criticality` is high | native `perform` of a system function; `CommitsUseError`, `Validates` |
 

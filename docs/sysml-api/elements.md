@@ -32,6 +32,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | --- | --- | --- | --- |
 | [`ComponentFunction`](architecture/functional/functions/memo_functions.md#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 | [`FunctionalFlow`](architecture/functional/functions/memo_functions.md#functionalflow) | `action def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. An `action def`, like every other behaviour in MEMO.… | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
+| [`FunctionalRoot`](architecture/functional/functions/memo_functions.md#functionalroot) | `metadata def` | The single top-level system function of a System or SystemOfSystems. Its native action decomposition describes that system's functional breakdown. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 | [`MemoFunction`](architecture/functional/functions/memo_functions.md#memofunction) | `action def` | Memo function definition specializing `MemoAction`. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 | [`SystemFunction`](architecture/functional/functions/memo_functions.md#systemfunction) | `action def` | A responsibility of the system as a whole. Allocation is optional: a system function that no single component owns is a normal intermediate state of the functional chain, not a defect. | [`architecture/functional/functions/memo_functions.sysml`](architecture/functional/functions/memo_functions.md) |
 
@@ -233,7 +234,7 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
 | [`ClinicalUseCase`](architecture/operational/use_cases/memo_use_cases.md#clinicalusecase) | `use case def` | Clinical use case definition specializing `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
-| [`SystemUseCase`](architecture/operational/use_cases/memo_use_cases.md#systemusecase) | `use case def` | System use case definition specializing `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
+| [`OperationalUseCase`](architecture/operational/use_cases/memo_use_cases.md#operationalusecase) | `use case def` | Operational use case definition specializing `UseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 | [`UseCase`](architecture/operational/use_cases/memo_use_cases.md#usecase) | `use case def` | Use case definition specializing `MemoUseCase`. | [`architecture/operational/use_cases/memo_use_cases.sysml`](architecture/operational/use_cases/memo_use_cases.md) |
 
 
@@ -241,9 +242,9 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 
 | Name | SysML kind | Description | Source |
 | --- | --- | --- | --- |
-| [`ClinicalWorkflow`](architecture/operational/workflows/memo_workflows.md#clinicalworkflow) | `part def` | Clinical workflow definition specializing `OperationalWorkflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
-| [`SystemWorkflow`](architecture/operational/workflows/memo_workflows.md#systemworkflow) | `part def` | System workflow definition specializing `OperationalWorkflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`ClinicalWorkflow`](architecture/operational/workflows/memo_workflows.md#clinicalworkflow) | `part def` | Clinical workflow definition specializing `Workflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`OperationalWorkflow`](architecture/operational/workflows/memo_workflows.md#operationalworkflow) | `part def` | Operational workflow definition specializing `Workflow`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
+| [`Workflow`](architecture/operational/workflows/memo_workflows.md#workflow) | `part def` | Workflow definition specializing `MemoPart`. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 | [`WorkflowResource`](architecture/operational/workflows/memo_workflows.md#workflowresource) | `part def` | Resources a workflow requires: instruments, equipment, consumables, materials, information or space, by reference. Owned by the workflow as its parts. A staff member is not one: that is a `User`, which is a `MemoResource` of its own. | [`architecture/operational/workflows/memo_workflows.sysml`](architecture/operational/workflows/memo_workflows.md) |
 
 
@@ -591,7 +592,9 @@ Element definitions declared in `src/`, excluding relationships, enumerations, a
 | --- | --- | --- | --- |
 | [`DoneWhen`](methodology/workflow/memo_workflow.md#donewhen) | `metadata def` | `#DoneWhen dependency from <step> to <rule>, <rule>;` The step's own work is done when each of these rules has a subject in the workspace and no finding on it. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 | [`LinkedWhen`](methodology/workflow/memo_workflow.md#linkedwhen) | `metadata def` | `#LinkedWhen dependency from <step> to <rule>, <rule>;` Each rule is a link from this step's work to another layer's. The links are made when each rule has no finding; a rule with no subject yet is waiting for the step that produces them. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`MethodLayer`](methodology/workflow/memo_workflow.md#methodlayer) | `part def` | Method layer definition specializing `MemoPart`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 | [`MethodologyWorkflowStep`](methodology/workflow/memo_workflow.md#methodologyworkflowstep) | `action def` | Methodology workflow step definition specializing `MemoAction`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
+| [`MethodWorkTask`](methodology/workflow/memo_workflow.md#methodworktask) | `part def` | Method work task definition specializing `MemoPart`. | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 
 
 ## `memo::viewpoints::catalog`

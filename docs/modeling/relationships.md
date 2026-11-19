@@ -27,7 +27,7 @@ generated from the source.
 |---|---|---|---|
 | `actor` (native) | User | UseCase | This user pursues the goal |
 | `Motivates` | Need | UseCase | This need is why the goal exists |
-| `RealizesUseCase` | OperationalWorkflow | UseCase | This organised work realises the goal |
+| `RealizesUseCase` | Workflow | UseCase | This organised work realises the goal |
 | `perform` (native) | Action or UI action | Function or scenario | This action carries out that behaviour |
 | `allocate` (native) | Function | Component | This component is responsible for this behaviour |
 | `allocation … : RealizedBy` | Logical component | Hardware or software | This implementation realizes that logical block |

@@ -32,11 +32,11 @@ same example is built as a story in
 
 ### Step 1 · The work
 
-[![Step 1: UseCase, OperationalWorkflow, OperativeScenario, OperativeAction](../assets/ontology/operational-step1.svg){ .memo-presentation-graphic }](../assets/ontology/operational-step1.svg){ title="Open full size" }
+[![Step 1: UseCase, Workflow, OperativeScenario, OperativeAction](../assets/ontology/operational-step1.svg){ .memo-presentation-graphic }](../assets/ontology/operational-step1.svg){ title="Open full size" }
 
 Start from the goal. A `UseCase` is a standard SysML use case: a goal held by an
 actor, with a subject it is pursued with. At the clinical level its subject is
-the care team, not the device (`ClinicalUseCase`). An `OperationalWorkflow` is
+the care team, not the device (`ClinicalUseCase`). An `Workflow` is
 how the work toward that goal is organised; it realises the use case
 (`RealizesUseCase`), and many workflows can realise one use case.
 
@@ -71,8 +71,6 @@ package layer_operational {
 
     part wfSpotCheck : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "WF-1"; :>> label = "Spot-check oxygenation"; }
-        attribute :>> entryCondition = "a patient needs an oxygenation check";
-        attribute :>> completionCondition = "a value is recorded, or the check is escalated";
         action scNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Reading obtained first time"; }
             action attach : AttachProbe;
@@ -206,15 +204,6 @@ part wfSpotCheck : ClinicalWorkflow {
 
 - **Notation.** `@MemoIdentity { … }` attaches metadata to the element it sits in; `:>> label = "…";` gives a value to an attribute the metadata declares.
 - **What it says.** Its id and display name.
-
-```sysml
-attribute :>> entryCondition = "a patient needs an oxygenation check";
-attribute :>> completionCondition = "a value is recorded, or the check is escalated";
-```
-
-- **Notation.** Two text values.
-- **What it says.** Where the work starts and ends.
-- **Why.** Every scenario of the workflow lies between these two.
 
 ```sysml
 action scNominal : OperativeScenario {
@@ -540,7 +529,7 @@ environment serve several contexts.
 
 #### Write it
 
-Inside `ucCheckOxygenation`, after `actor`, and inside `wfSpotCheck`, after `completionCondition`:
+Inside `ucCheckOxygenation`, after `actor`, and inside `wfSpotCheck`, after its `@MemoIdentity`:
 
 ```sysml
 ref :>> useContext = generalWard;
@@ -570,7 +559,7 @@ ref :>> useContext = generalWard;
 ref :>> useContext = generalWard;
 ```
 
-- **Notation.** `ref` declares a reference: it points at an element owned elsewhere. `:>>` redefines the `useContext` reference that `UseCase` and `OperationalWorkflow` each declare. The same line goes in each of the two.
+- **Notation.** `ref` declares a reference: it points at an element owned elsewhere. `:>>` redefines the `useContext` reference that `UseCase` and `Workflow` each declare. The same line goes in each of the two.
 - **What it says.** The goal and the workflow both happen in the general ward.
 - **Why.** A reference, not ownership: the ward exists apart from any one use case.
 
@@ -753,12 +742,12 @@ part oximeter : OximeterSystem {
     perform wfWithOximeter.scNominal.read;
 }
 allocate fnMeasureSpO2 to oximeter;
-use case ucCheckWithOximeter : SystemUseCase {
+use case ucCheckWithOximeter : OperationalUseCase {
     @MemoIdentity { :>> providedId = "UC-2"; :>> label = "Check oxygenation with the oximeter"; }
     subject :>> supportingSystem = oximeter;
     actor clinicianActor = clinician;
 }
-part wfWithOximeter : SystemWorkflow {
+part wfWithOximeter : OperationalWorkflow {
     @MemoIdentity { :>> providedId = "WF-2"; :>> label = "Spot-check with the oximeter"; }
     action scNominal : OperativeScenario {
         action attach : AttachProbe {
@@ -834,12 +823,12 @@ allocate fnMeasureSpO2 to oximeter;
 - **Why.** A system function should be allocated somewhere (CR-MED-022).
 
 ```sysml
-use case ucCheckWithOximeter : SystemUseCase {
+use case ucCheckWithOximeter : OperationalUseCase {
 ```
 
 - **Notation.** A use case usage.
 - **What it says.** The same goal, pursued with the oximeter.
-- **Why.** `SystemUseCase` is level 2; its subject must be a system (CR-ONT-093).
+- **Why.** `OperationalUseCase` is level 2; its subject must be a system (CR-ONT-093).
 
 ```sysml
 @MemoIdentity { :>> providedId = "UC-2"; :>> label = "Check oxygenation with the oximeter"; }
@@ -869,12 +858,12 @@ actor clinicianActor = clinician;
 - **Notation.** Closes the use case.
 
 ```sysml
-part wfWithOximeter : SystemWorkflow {
+part wfWithOximeter : OperationalWorkflow {
 ```
 
 - **Notation.** A part usage.
 - **What it says.** There is a level-2 workflow.
-- **Why.** `SystemWorkflow` realizes a system use case (CR-ONT-103).
+- **Why.** `OperationalWorkflow` realizes an operational use case (CR-ONT-103).
 
 ```sysml
 @MemoIdentity { :>> providedId = "WF-2"; :>> label = "Spot-check with the oximeter"; }
@@ -960,8 +949,8 @@ connection : RealizesUseCase connect wfWithOximeter to ucCheckWithOximeter;
 
 | | Level 1 | Level 2 |
 |---|---|---|
-| Use case | `ClinicalUseCase`, subject an `OperationalEntity` | `SystemUseCase`, subject a usage of your `System` |
-| Workflow | `ClinicalWorkflow` | `SystemWorkflow` |
+| Use case | `ClinicalUseCase`, subject an `OperationalEntity` | `OperationalUseCase`, subject a usage of your `System` |
+| Workflow | `ClinicalWorkflow` | `OperationalWorkflow` |
 | Numbers | none | `expectedDuration`, `plannedSuccessProbability`, scenario `likelihood` |
 | Functions | never performed | an activity `perform`s the function behind it |
 | Link | — | `#refinement` from each activity to its level-1 step |
@@ -1019,8 +1008,6 @@ package layer_operational {
 
     part wfSpotCheck : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "WF-1"; :>> label = "Spot-check oxygenation"; }
-        attribute :>> entryCondition = "a patient needs an oxygenation check";
-        attribute :>> completionCondition = "a value is recorded, or the check is escalated";
         ref :>> useContext = generalWard;
         action scNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Reading obtained first time"; }
@@ -1095,12 +1082,12 @@ package layer_operational {
         perform wfWithOximeter.scNominal.read;
     }
     allocate fnMeasureSpO2 to oximeter;
-    use case ucCheckWithOximeter : SystemUseCase {
+    use case ucCheckWithOximeter : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-2"; :>> label = "Check oxygenation with the oximeter"; }
         subject :>> supportingSystem = oximeter;
         actor clinicianActor = clinician;
     }
-    part wfWithOximeter : SystemWorkflow {
+    part wfWithOximeter : OperationalWorkflow {
         @MemoIdentity { :>> providedId = "WF-2"; :>> label = "Spot-check with the oximeter"; }
         action scNominal : OperativeScenario {
             action attach : AttachProbe {

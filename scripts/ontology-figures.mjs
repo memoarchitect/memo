@@ -110,7 +110,7 @@ export const LAYER_FIGURES = [
         title: 'The work: a goal, the workflow that realises it, its scenarios, their actions',
         nodes: [
           { id: 'uc', type: 'UseCase', col: 2, row: 0 },
-          { id: 'wf', type: 'OperationalWorkflow', col: 2, row: 1 },
+          { id: 'wf', type: 'Workflow', col: 2, row: 1 },
           { id: 'sc', type: 'OperativeScenario', col: 2, row: 2 },
           { id: 'ac', type: 'OperativeAction', col: 2, row: 3 },
         ],
@@ -705,7 +705,7 @@ export const FIGURES = [
     nodes: [
       { id: 'need', type: 'Need', col: 0, row: 0 },
       { id: 'uc', type: 'UseCase', col: 1, row: 0 },
-      { id: 'wf', type: 'OperationalWorkflow', col: 2, row: 0 },
+      { id: 'wf', type: 'Workflow', col: 2, row: 0 },
       { id: 'ff', type: 'FunctionalFlow', col: 0, row: 1 },
       { id: 'sf', type: 'SystemFunction', col: 1, row: 1 },
       { id: 'lc', type: 'LogicalComponent', col: 2, row: 1 },
@@ -728,7 +728,7 @@ export const FIGURES = [
     nodes: [
       { id: 'need', type: 'Need', col: 0, row: 0 },
       { id: 'uc', type: 'UseCase', col: 1, row: 0 },
-      { id: 'wf', type: 'OperationalWorkflow', col: 2, row: 0 },
+      { id: 'wf', type: 'Workflow', col: 2, row: 0 },
       { id: 'sc', type: 'OperativeScenario', col: 3, row: 0 },
       { id: 'req', type: 'Requirement', col: 0, row: 1 },
       { id: 'sf', type: 'SystemFunction', col: 1, row: 1 },

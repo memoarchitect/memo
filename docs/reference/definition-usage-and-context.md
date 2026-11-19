@@ -211,7 +211,54 @@ The moment a second scenario performs the same step, that claim is false.
 Promote it to a definition and type both usages — do not copy the step, and do
 not reach across into the other scenario's usage.
 
-## 7. What this does not change
+## 7. A model's systems are defined in one package
+
+A `System` is a product and a `SystemOfSystems` is the configuration of
+products the model describes. A workspace starts at a system's **definition**,
+so each one is a `part def`, and every one of them is declared in **one
+package**. A package is declared in exactly one file, so that file lists every
+product the model has.
+
+```sysml
+package systems {
+    part def InfusionSystem specializes SystemOfSystems;
+    part def Pump specializes System;
+    part def Controller specializes System;
+    part def HospitalNetwork specializes System {
+        attribute :>> origin = SystemOriginKind::external;
+    }
+}
+```
+
+Only the definitions move there. A system's usages, its subsystems and logical
+components, the connections between systems, and its work in each layer stay in
+the packages that describe them, and those packages import `systems`:
+
+```sysml
+package logical_system {
+    private import systems::*;
+
+    part infusionSystem : InfusionSystem {
+        part pump : Pump;
+        part controller : Controller;
+    }
+}
+```
+
+A usage typed by the kind itself — `part pump : System;` — is valid SysML, but
+it names a product the model never defines: no workspace starts at it and
+nothing else can be typed by it. Declare the definition and type the usage by
+it.
+
+Three rules check this, as warnings a methodology can tailor:
+
+| Rule | Checks |
+|---|---|
+| `CR-ONT-106` | every `System` and `SystemOfSystems` definition is in the same package |
+| `CR-ONT-107` | no usage is typed by `System` itself |
+| `CR-ONT-108` | no usage is typed by `SystemOfSystems` itself |
+
+## 8. What this does not change
 
 No filesystem reorganization, no renamed packages, and no change to the five
 architecture layers. `memo::architecture`, `memo::assurance`, `memo::core`,

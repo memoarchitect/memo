@@ -116,8 +116,6 @@ package pulse_oximeter_use {
 
     part wfSpotCheck : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "WF-1"; :>> label = "Spot-check oxygenation"; }
-        attribute :>> entryCondition = "a patient needs an oxygenation check";
-        attribute :>> completionCondition = "a value is recorded, or the check is escalated";
         ref :>> useContext = generalWard;
 
         action scNominal : OperativeScenario {

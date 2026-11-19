@@ -60,12 +60,12 @@
   <rect x="40" y="1086" width="1520" height="58" rx="24" fill="#6f42c1"/>
   <rect x="40" y="1120" width="1520" height="24" fill="#6f42c1"/>
   <text x="64" y="1124" text-anchor="start" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="850" fill="#ffffff"><tspan x="64" dy="0">Workflows — workflows</tspan></text>
-  <rect x="70" y="1176" width="246" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
-  <text x="193" y="1215" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="193" dy="0">OperationalWorkflow</tspan></text>
+  <rect x="70" y="1176" width="125" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
+  <text x="132.5" y="1215" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="132.5" dy="0">Workflow</tspan></text>
   <rect x="70" y="1286" width="169" height="64" rx="14" fill="#ffffff" stroke="#6f42c1" stroke-width="2"/>
   <text x="154.5" y="1325" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="154.5" dy="0">WorkflowStep</tspan></text>
   <rect x="359" y="1286" width="213" height="64" rx="14" fill="#fbfbfe" stroke="#6f42c1" stroke-width="2"/>
-  <text x="465.5" y="1325" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="465.5" dy="0">WorkflowResource</tspan></text><path d="M 193 1240 L 193 1266" fill="none" stroke="#6f42c1" stroke-width="2"/><path d="M 154.5 1266 L 154.5 1286" fill="none" stroke="#6f42c1" stroke-width="2"/><text x="465.5" y="1274" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="12" font-weight="650" fill="#7c8798"><tspan x="465.5" dy="0">referenced, not contained</tspan></text>
+  <text x="465.5" y="1325" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="19" font-weight="750" fill="#0b2b49"><tspan x="465.5" dy="0">WorkflowResource</tspan></text><path d="M 132.5 1240 L 132.5 1266" fill="none" stroke="#6f42c1" stroke-width="2"/><path d="M 154.5 1266 L 154.5 1286" fill="none" stroke="#6f42c1" stroke-width="2"/><text x="465.5" y="1274" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="12" font-weight="650" fill="#7c8798"><tspan x="465.5" dy="0">referenced, not contained</tspan></text>
   <rect x="40" y="1410" width="1520" height="184" rx="24" fill="#f7fafc" stroke="#6f42c1" stroke-width="2"/>
   <rect x="40" y="1410" width="1520" height="58" rx="24" fill="#6f42c1"/>
   <rect x="40" y="1444" width="1520" height="24" fill="#6f42c1"/>

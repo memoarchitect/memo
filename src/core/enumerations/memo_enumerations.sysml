@@ -468,6 +468,10 @@ package memo_core_enumerations {
         enum functional;
         enum logical;
         enum physical;
+        // How the system is built, in software, hardware and its user interface.
+        enum implementation;
+        // How it is assembled and deployed.
+        enum realization;
         enum humanFactors;
         enum security;
         enum release;
@@ -476,6 +480,12 @@ package memo_core_enumerations {
     enum def MethodLevelKind {
         enum systemOfSystems;
         enum system;
+    }
+    // The two sides of the method map: the architecture, from intent to realization, and the
+    // assurance disciplines that work across every layer of it.
+    enum def MethodAxisKind {
+        enum architecture;
+        enum assurance;
     }
     enum def ThreatCategoryKind {
         enum spoofing;

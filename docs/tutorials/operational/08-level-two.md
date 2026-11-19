@@ -29,13 +29,13 @@ part oximeterSystem : PulseOximeterSystem {
     @MemoIdentity { :>> label = "Pulse oximeter, as used"; }
     perform wfSpotCheckOximeter.scNominal.read;
 }
-use case ucSpotCheckWithOximeter : SystemUseCase {
+use case ucSpotCheckWithOximeter : OperationalUseCase {
     @MemoIdentity { :>> providedId = "UC-2"; :>> label = "Spot-check SpO2 with the oximeter"; }
     attribute :>> useCaseKind = UseCaseKind::care;
     subject :>> supportingSystem = oximeterSystem;
     actor clinicianActor = clinician;
 }
-part wfSpotCheckOximeter : SystemWorkflow {
+part wfSpotCheckOximeter : OperationalWorkflow {
     @MemoIdentity { :>> providedId = "WF-2"; :>> label = "Spot-check with the oximeter"; }
     action scNominal : OperativeScenario {
         @MemoIdentity { :>> label = "Reading obtained first time, with the oximeter"; }
@@ -101,12 +101,12 @@ perform wfSpotCheckOximeter.scNominal.read;
 - **Notation.** Closes `oximeterSystem`.
 
 ```sysml
-use case ucSpotCheckWithOximeter : SystemUseCase {
+use case ucSpotCheckWithOximeter : OperationalUseCase {
 ```
 
 - **Notation.** A use case usage, as in lesson 2.
 - **What it says.** The same goal, pursued with the oximeter.
-- **Why.** `SystemUseCase` is level 2. It names a product, so it may carry numbers.
+- **Why.** `OperationalUseCase` is level 2. It names a product, so it may carry numbers.
 
 ```sysml
 @MemoIdentity { :>> providedId = "UC-2"; :>> label = "Spot-check SpO2 with the oximeter"; }
@@ -144,12 +144,12 @@ actor clinicianActor = clinician;
 - **Notation.** Closes the use case.
 
 ```sysml
-part wfSpotCheckOximeter : SystemWorkflow {
+part wfSpotCheckOximeter : OperationalWorkflow {
 ```
 
 - **Notation.** A part usage, as in lesson 4.
-- **What it says.** There is a system workflow for the spot check with the oximeter.
-- **Why.** `SystemWorkflow` is the level-2 workflow and realizes the level-2 use case (CR-ONT-103).
+- **What it says.** There is an operational workflow for the spot check with the oximeter.
+- **Why.** `OperationalWorkflow` is the level-2 workflow and realizes the level-2 use case (CR-ONT-103).
 
 ```sysml
 @MemoIdentity { :>> providedId = "WF-2"; :>> label = "Spot-check with the oximeter"; }
@@ -227,7 +227,7 @@ connection : RealizesUseCase connect wfSpotCheckOximeter to ucSpotCheckWithOxime
 ```
 
 - **Notation.** As in lesson 4.
-- **What it says.** The system workflow realizes the system use case.
+- **What it says.** The operational workflow realizes the operational use case.
 
 ```sysml
 #refinement dependency wfSpotCheckOximeter::scNominal::attach to wfSpotCheck::scNominal::attach;
@@ -249,8 +249,8 @@ connection : RealizesUseCase connect wfSpotCheckOximeter to ucSpotCheckWithOxime
 
 | | Level 1 | Level 2 |
 |---|---|---|
-| Use case | `ClinicalUseCase`, subject an `OperationalEntity` | `SystemUseCase`, subject a usage of your `System` |
-| Workflow | `ClinicalWorkflow` | `SystemWorkflow` |
+| Use case | `ClinicalUseCase`, subject an `OperationalEntity` | `OperationalUseCase`, subject a usage of your `System` |
+| Workflow | `ClinicalWorkflow` | `OperationalWorkflow` |
 | Numbers | none | `expectedDuration`, `plannedSuccessProbability`, scenario `likelihood` |
 | Functions | never performed | an activity `perform`s the function behind it |
 | Link between them | — | `#refinement` from each activity to its level-1 step |
@@ -304,8 +304,6 @@ package pulse_oximeter_use {
 
     part wfSpotCheck : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "WF-1"; :>> label = "Spot-check oxygenation"; }
-        attribute :>> entryCondition = "a patient needs an oxygenation check";
-        attribute :>> completionCondition = "a value is recorded, or the check is escalated";
         ref :>> useContext = generalWard;
 
         action scNominal : OperativeScenario {
@@ -339,13 +337,13 @@ package pulse_oximeter_use {
         @MemoIdentity { :>> label = "Pulse oximeter, as used"; }
         perform wfSpotCheckOximeter.scNominal.read;
     }
-    use case ucSpotCheckWithOximeter : SystemUseCase {
+    use case ucSpotCheckWithOximeter : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-2"; :>> label = "Spot-check SpO2 with the oximeter"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         subject :>> supportingSystem = oximeterSystem;
         actor clinicianActor = clinician;
     }
-    part wfSpotCheckOximeter : SystemWorkflow {
+    part wfSpotCheckOximeter : OperationalWorkflow {
         @MemoIdentity { :>> providedId = "WF-2"; :>> label = "Spot-check with the oximeter"; }
         action scNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Reading obtained first time, with the oximeter"; }

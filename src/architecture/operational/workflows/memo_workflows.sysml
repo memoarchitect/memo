@@ -1,6 +1,6 @@
-// First-class operational workflows. A use case is the user's goal; an
-// OperationalWorkflow is the ANALYSIS of one body of work that pursues it: who
-// does it, where, with what equipment, between which entry and completion
+// First-class workflows. A use case is the user's goal; a
+// Workflow is the ANALYSIS of one body of work that pursues it: who
+// does it, where, with what equipment, and
 // conditions, and (from the needs that point at it) what is needed and what
 // is not yet met. It may exist before any device is selected. It is not a
 // sequence of steps: the steps are its scenarios' (memo_architecture_operational_scenarios),
@@ -35,12 +35,11 @@ package memo_architecture_operational_workflows {
     private import memo_architecture_operational_activities::*;
     private import memo_architecture_operational_use_cases::*;
 
-    abstract part def OperationalWorkflow specializes MemoPart {
-        @MemoIdentity { :>> label = "Operational workflow"; }
-        // Where the body of work starts and ends. A scenario's pre- and
-        // post-conditions are its own path's, inside these.
-        attribute entryCondition : String;
-        attribute completionCondition : String;
+    abstract part def Workflow specializes MemoPart {
+        @MemoIdentity { :>> label = "Workflow"; }
+        // A workflow has no pre- or postcondition: where a path starts and ends is its
+        // scenario's (`preCondition`, `postCondition`), because each path starts and ends
+        // on its own terms.
         // What one procedure costs apart from its activities (set-up, capital per case); a number,
         // so it is set on a level-2 variant's workflow, never on level 1.
         attribute perProcedureCost : MoneyValue[0..1];
@@ -57,13 +56,13 @@ package memo_architecture_operational_workflows {
     }
 
     // A workflow is at the level of the use case it realizes, and says so by its type: a
-    // `ClinicalWorkflow` realizes a `ClinicalUseCase` (no product, no number); a `SystemWorkflow`
-    // realizes a `SystemUseCase` (one variant, every number). CR-ONT-103 keeps the two in step.
-    part def ClinicalWorkflow specializes OperationalWorkflow {
+    // `ClinicalWorkflow` realizes a `ClinicalUseCase` (no product, no number); an `OperationalWorkflow`
+    // realizes an `OperationalUseCase` (one variant, every number). CR-ONT-103 keeps the two in step.
+    part def ClinicalWorkflow specializes Workflow {
         @MemoIdentity { :>> label = "Clinical workflow"; }
     }
-    part def SystemWorkflow specializes OperationalWorkflow {
-        @MemoIdentity { :>> label = "System workflow"; }
+    part def OperationalWorkflow specializes Workflow {
+        @MemoIdentity { :>> label = "Operational workflow"; }
     }
 
     // The use case a workflow realizes. Many workflows may trace to one use
@@ -71,7 +70,7 @@ package memo_architecture_operational_workflows {
     // workflow → use case).
     connection def RealizesUseCase :> MemoRelationship {
         @MemoIdentity { :>> label = "Realizes use case"; }
-        end realizingWorkflow : OperationalWorkflow :>> source;
+        end realizingWorkflow : Workflow :>> source;
         end realizedUseCase : UseCase :>> target;
     }
     abstract connection realizesUseCaseLinks : RealizesUseCase[*];
@@ -104,7 +103,7 @@ package memo_architecture_operational_workflows {
     // ── Workflow-level relationships ─────────────────────────────
     // An element supports (affords, enables) an action — e.g. a UI element that
     // affords a user task. Use-case and capability tracing are direct refs
-    // (OperationalWorkflow.useCase, OperativeAction.contributesToCapabilities),
+    // (Workflow.useCase, OperativeAction.contributesToCapabilities),
     // so this is one plain relation.
 
 }

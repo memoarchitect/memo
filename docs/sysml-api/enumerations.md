@@ -189,6 +189,7 @@ SysML `enum def` declarations in `src/`.
 | [`LifecycleStateKind`](core/enumerations/memo_enumerations.md#lifecyclestatekind) | `enum def` | Controlled values for lifecycle state: `concept`, `development`, `released`, `maintenance`, `obsolete`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`MemoVerificationMethodKind`](core/enumerations/memo_enumerations.md#memoverificationmethodkind) | `enum def` | Controlled values for memo verification method: `inspection`, `analytical`, `demonstration`, `test`, `simulation`, `formalProof`, `modelChecking`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`MessageKind`](core/enumerations/memo_enumerations.md#messagekind) | `enum def` | Controlled values for message: `synchronous`, `asynchronous`, `reply`, `create`, `destroy`, `timeout`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
+| [`MethodAxisKind`](core/enumerations/memo_enumerations.md#methodaxiskind) | `enum def` | The two sides of the method map: the architecture, from intent to realization, and the assurance disciplines that work across every layer of it. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`MethodLevelKind`](core/enumerations/memo_enumerations.md#methodlevelkind) | `enum def` | The level a method step is worked at: the system of systems, or one system. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`NotificationPriorityKind`](core/enumerations/memo_enumerations.md#notificationprioritykind) | `enum def` | Notification/alarm priority as used by source requirement documents (e.g. CriSys GPCA REQ 59 action table: High/Med/Low). | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`ObligationKind`](core/enumerations/memo_enumerations.md#obligationkind) | `enum def` | Controlled values for obligation: `shall`, `should`, `will`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
@@ -228,8 +229,15 @@ SysML `enum def` declarations in `src/`.
 | [`UseErrorCategoryKind`](core/enumerations/memo_enumerations.md#useerrorcategorykind) | `enum def` | Controlled values for use error category: `perception`, `cognition`, `actionCategory`, `memoryRecall`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`ValidationMethodKind`](core/enumerations/memo_enumerations.md#validationmethodkind) | `enum def` | Controlled values for validation method: `clinicalTrial`, `summativeUsabilityTest`, `comparativeStudy`, `benchmarkTest`, `simulatedUse`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`ViewOutputKind`](core/enumerations/memo_enumerations.md#viewoutputkind) | `enum def` | Controlled values for view output: `diagram`, `table`, `matrix`, `documentSection`, `dashboard`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
-| [`WorkflowStageKind`](core/enumerations/memo_enumerations.md#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `humanFactors`, `security`, `release`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
+| [`WorkflowStageKind`](core/enumerations/memo_enumerations.md#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `implementation`, `realization`, `humanFactors`, `security`, `release`. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
 | [`WorkspaceMembershipKind`](core/enumerations/memo_enumerations.md#workspacemembershipkind) | `enum def` | How a relation places elements in a workspace; see memo_core_relationships_workspace_membership. | [`core/enumerations/memo_enumerations.sysml`](core/enumerations/memo_enumerations.md) |
+
+
+## `memo::methodology::workflow`
+
+| Name | SysML kind | Description | Source |
+| --- | --- | --- | --- |
+| [`MethodTaskKind`](methodology/workflow/memo_workflow.md#methodtaskkind) | `enum def` | A row of the method map: a layer of the architecture, or an assurance discipline. Its label is what the map calls it ("Logical"), its doc the question it answers ("How the system will work"). Rows are listed in the order the methodology declares them, each side apart.… | [`methodology/workflow/memo_workflow.sysml`](methodology/workflow/memo_workflow.md) |
 
 
 ## `memo::viewpoints::definitions`

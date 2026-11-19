@@ -36,12 +36,28 @@
 
 | Name | SysML kind | Description | Specializes |
 | --- | --- | --- | --- |
+| [`FunctionalRoot`](#functionalroot) | `metadata def` | The single top-level system function of a System or SystemOfSystems. Its native action decomposition describes that system's functional breakdown. | `MemoTypedDependency` |
 | [`MemoFunction`](#memofunction) | `action def` | Memo function definition specializing `MemoAction`. | `MemoAction` |
 | [`SystemFunction`](#systemfunction) | `action def` | A responsibility of the system as a whole. Allocation is optional: a system function that no single component owns is a normal intermediate state of the functional chain, not a defect. | `MemoFunction` |
 | [`ComponentFunction`](#componentfunction) | `action def` | A responsibility of exactly one component. `AllocatedTo` names that component; CR-ONT-074 requires it. A component function that reaches no component is a responsibility nobody has accepted. | `MemoFunction` |
 | [`FunctionalExchange`](#functionalexchange) | `flow def` | Typed relationship for functional exchange. | — |
 | [`FunctionalTransfer`](#functionaltransfer) | `flow def` | The concrete exchange. A concrete `flow def` must declare its two ends, so this is the member of the family a model types its flows by; the ends are left untyped, as an exchange runs from an `out` parameter of one function to an `in` parameter of another (or between ports). | `FunctionalExchange` |
 | [`FunctionalFlow`](#functionalflow) | `action def` | A reusable functional route through system responsibilities. Functional flows are part of functional architecture, never logical structure. An `action def`, like every other behaviour in MEMO.… | `MemoAction` |
+
+## FunctionalRoot
+
+```sysml
+metadata def FunctionalRoot :> MemoTypedDependency
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The single top-level system function of a System or SystemOfSystems. Its native action decomposition describes that system's functional breakdown. |
+| Kind | `metadata def` |
+| Abstract | No |
+| Specializes | `MemoTypedDependency` |
+| Owning package | `memo_architecture_functional_functions` |
+
 
 ## MemoFunction
 
@@ -215,6 +231,11 @@ action def FunctionalFlow specializes MemoAction
         private import memo_architecture_operational_activities::*;
         private import memo_architecture_operational_scenarios::*;
 
+        metadata def FunctionalRoot :> MemoTypedDependency {
+            doc /* The single top-level system function of a System or SystemOfSystems. Its native action decomposition describes that system's functional breakdown. */
+            @MemoIdentity { :>> label = "Functional root"; }
+        }
+
         abstract action def MemoFunction specializes MemoAction, MemoConstrainedOccurrence {
             @MemoIdentity { :>> label = "Function"; }
             attribute functionCategory : String;
@@ -275,7 +296,7 @@ action def FunctionalFlow specializes MemoAction
         // flows are part of functional architecture, never logical structure.
         //
         // An `action def`, like every other behaviour in MEMO. A route through
-        // responsibilities is the same shape as the `OperationalWorkflow` and
+        // responsibilities is the same shape as the `Workflow` and
         // `OperativeScenario` it sits beside: the scenarios package calls a
         // scenario "a selected path through a workflow (or functional flow)",
         // naming the two as one kind of thing, and its steps are `action def`s

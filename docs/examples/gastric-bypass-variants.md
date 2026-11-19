@@ -4,7 +4,7 @@ Use this example to see the two operational levels, and how three platforms are 
 clinical baseline.
 
 - The clinical workflow (level 1) uses each clinical action once, in order, and carries no number.
-- A system workflow (level 2) per platform uses the same action definitions again as usages, and sets the time, success probability and instruments on its own usage. Who does the action is a `perform` from the platform, never a copy of the action.
+- An operational workflow (level 2) per platform uses the same action definitions again as usages, and sets the time, success probability and instruments on its own usage. Who does the action is a `perform` from the platform, never a copy of the action.
 - The functional workflow (level 3) is a functional flow of our robot's functions, which a level-2 usage performs.
 - Every occurrence of an action is a usage, so how often a step is repeated is the number of its usages.
 - Resources carry a capacity cost rate and a unit cost, in the one currency the project declares.
@@ -22,7 +22,7 @@ Every tutorial is one slice of the same structure. This example uses these defin
 
 | Part of the ontology | Definitions it uses | Reference |
 | --- | --- | --- |
-| Operational | `ClinicalUseCase`, `OperationalEntity`, `OperationalWorkflow`, `OperativeAction`, `OperativeScenario`, `ProcedureCost`, `ProcedureDuration`, `ScenarioSuccess`, `SystemUseCase`, `SystemWorkflow`, `User`, `WorkflowResource` | [Operational](../ontology/operational.md) |
+| Operational | `ClinicalUseCase`, `OperationalEntity`, `Workflow`, `OperativeAction`, `OperativeScenario`, `ProcedureCost`, `ProcedureDuration`, `ScenarioSuccess`, `OperationalUseCase`, `OperationalWorkflow`, `User`, `WorkflowResource` | [Operational](../ontology/operational.md) |
 | Functional | `FunctionalFlow`, `SystemFunction` | [Functional](../ontology/functional.md) |
 | Logical | `System` | [Logical](../ontology/logical.md) |
 | Views and methodology | `MemoDiagramView`, `ModelMethodBinding` | [Views and methodology](../reference/areas/viewpoints.md) |

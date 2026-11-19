@@ -31,6 +31,17 @@
 | private | `memo_methodology_gates::*` |
 | private | `memo_rules_closure::*` |
 | private | `memo_viewpoints_catalog::*` |
+| private | `memo_viewpoints_context_context_viewpoint::*` |
+| private | `memo_viewpoints_operational_operational_viewpoint::*` |
+| private | `memo_viewpoints_functional_functional_viewpoint::*` |
+| private | `memo_viewpoints_logical_logical_viewpoint::*` |
+| private | `memo_viewpoints_software_software_viewpoint::*` |
+| private | `memo_viewpoints_physical_physical_viewpoint::*` |
+| private | `memo_viewpoints_requirements_requirements_viewpoint::*` |
+| private | `memo_viewpoints_risk_risk_viewpoint::*` |
+| private | `memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*` |
+| private | `memo_viewpoints_usability_usability_viewpoint::*` |
+| private | `memo_viewpoints_verification_verification_viewpoint::*` |
 | private | `memo_viewpoints_stakeholders_concerns::*` |
 | private | `memo_core_enumerations::*` |
 | private | `memo_core_methodology_scope::*` |
@@ -58,6 +69,18 @@
         private import memo_methodology_gates::*;
         private import memo_rules_closure::*;
         private import memo_viewpoints_catalog::*;
+        private import memo_viewpoints_context_context_viewpoint::*;
+        private import memo_viewpoints_operational_operational_viewpoint::*;
+        private import memo_viewpoints_functional_functional_viewpoint::*;
+        private import memo_viewpoints_logical_logical_viewpoint::*;
+        private import memo_viewpoints_software_software_viewpoint::*;
+        private import memo_viewpoints_physical_physical_viewpoint::*;
+        private import memo_viewpoints_requirements_requirements_viewpoint::*;
+        private import memo_viewpoints_risk_risk_viewpoint::*;
+        private import memo_viewpoints_cybersecurity_cybersecurity_viewpoint::*;
+        private import memo_viewpoints_usability_usability_viewpoint::*;
+        private import memo_viewpoints_verification_verification_viewpoint::*;
+
         private import memo_viewpoints_stakeholders_concerns::*;
         private import memo_core_enumerations::*;
         private import memo_core_methodology_scope::*;
@@ -120,186 +143,701 @@
             attribute :>> strength = RuleStrengthKind::required;
         }
 
-        // The default method: the steps a family works through, at the system of
-        // systems and at each system. `outputKinds` and the rules a step is
-        // `#DoneWhen` say when its own work is done; the rules it is `#LinkedWhen`
-        // say when it is linked to the other layers.
+        // The default method: the rows of the method map, and the steps a family works through in
+        // each, at the system of systems and at each system. A step's label is what it asks for, as a verb
+        // phrase; `objectiveDescription` says how; `exitCriteria` says when it is done. `outputKinds` and the
+        // rules a step is `#DoneWhen` say when its own work is done; the rules it is `#LinkedWhen` say when it is
+        // linked to the other layers. Teams start in any row; nothing waits for anything.
+
+        // ── The rows of the method map ───────────────────────────────────────────
+
+        part layerContext : MethodLayer {
+            attribute :>> elementKinds = ("OperationalParticipant", "User", "MemoActor", "OperationalEntity", "IntendedUse", "UseContext", "UseEnvironment");
+            @MemoIdentity { :>> providedId = "ROW-ARC-0"; :>> label = "Context"; }
+            doc /* Who and what is around it: users, organizations, external systems. */
+            attribute :>> axis = MethodAxisKind::architecture;
+            attribute :>> stages = (WorkflowStageKind::context);
+            ref :>> layerViewpoints = (vpSystemContext, contextViewpoint);
+        }
+        part taskClinicalWork : MethodWorkTask {
+            @MemoIdentity { :>> label = "Clinical"; }
+            attribute :>> taskKind = MethodTaskKind::decomposition;
+            attribute :>> primary = true;
+            attribute :>> taskLevel = "clinical";
+            attribute :>> taskSubjectKind = "ClinicalUseCase";
+            attribute :>> taskWorkflowKind = "ClinicalWorkflow";
+            attribute :>> taskScenarioKind = "OperativeScenario";
+            attribute :>> taskStepKind = "OperativeAction";
+            attribute :>> taskRelationshipKind = "realizesUseCase";
+            attribute :>> objectiveDescription = "Describe clinical goals and the workflows, scenarios and steps that achieve them, independently of a product.";
+            attribute :>> reviewDescription = "Review each goal, its workflows, nominal and alternate paths, and the steps in each path.";
+            ref :>> taskViewpoint = vpScenario;
+        }
+        part taskOperationalWork : MethodWorkTask {
+            @MemoIdentity { :>> label = "Operational"; }
+            attribute :>> taskKind = MethodTaskKind::decomposition;
+            attribute :>> primary = true;
+            attribute :>> taskLevel = "operational";
+            attribute :>> taskSubjectKind = "OperationalUseCase";
+            attribute :>> taskWorkflowKind = "OperationalWorkflow";
+            attribute :>> taskScenarioKind = "OperativeScenario";
+            attribute :>> taskStepKind = "OperativeAction";
+            attribute :>> taskRelationshipKind = "realizesUseCase";
+            attribute :>> objectiveDescription = "Describe how the work is done with this system: its goals, workflows, scenarios and activities. Each activity realizes a clinical step and is realized by functions.";
+            attribute :>> reviewDescription = "Review each goal, its workflows, nominal and alternate paths, and the steps in each path.";
+            ref :>> taskViewpoint = vpScenario;
+        }
+        part layerOperational : MethodLayer {
+            attribute :>> workbench = "operational";
+            ref :>> workTasks = (taskClinicalWork, taskOperationalWork);
+            attribute :>> elementKinds = ("OperativeAction", "TaskDifficultyAssessment", "OperationalParticipant", "User", "MemoActor", "ArchitectureDescription", "ModelKind", "CorrespondenceRule", "UseContext", "UseEnvironment", "OperativeScenario", "IntendedUse", "OperationalEntity", "OperationalCapability", "UseCase", "ClinicalUseCase", "OperationalUseCase", "Workflow", "ClinicalWorkflow", "OperationalWorkflow", "WorkflowResource");
+            @MemoIdentity { :>> providedId = "ROW-ARC-1"; :>> label = "Operational"; }
+            doc /* What users need to accomplish. */
+            attribute :>> axis = MethodAxisKind::architecture;
+            attribute :>> stages = (WorkflowStageKind::operational);
+            ref :>> layerViewpoints = (vpUseCase, vpClinicalWorkflow, vpScenario, operationalViewpoint);
+        }
+        part taskFunctionalTree : MethodWorkTask {
+            @MemoIdentity { :>> label = "Functional tree"; }
+            attribute :>> taskKind = MethodTaskKind::decomposition;
+            attribute :>> primary = true;
+            attribute :>> taskSubjectKind = "SystemFunction";
+            attribute :>> objectiveDescription = "Break down what this system must do. Select a function to review its purpose and realization.";
+            attribute :>> reviewDescription = "Review the functional breakdown and functions that still need realization.";
+            ref :>> taskViewpoint = vpFunctionalArchitecture;
+        }
+        part taskFunctionalFlows : MethodWorkTask {
+            @MemoIdentity { :>> label = "Functional flows"; }
+            attribute :>> taskKind = MethodTaskKind::sequence;
+            attribute :>> primary = true;
+            attribute :>> taskSubjectKind = "FunctionalFlow";
+            attribute :>> taskReferenceKind = "SystemFunction";
+            attribute :>> taskRelationshipKind = "performs";
+            attribute :>> objectiveDescription = "Describe a path through the system functions. Reuse the functions in the tree; a flow step calls a function.";
+            attribute :>> reviewDescription = "Review the steps, their order and the system functions they call.";
+            ref :>> taskViewpoint = vpFunctionalFlow;
+        }
+        part taskFunctionRealization : MethodWorkTask {
+            @MemoIdentity { :>> label = "Realization and allocation"; }
+            attribute :>> taskKind = MethodTaskKind::realization;
+            attribute :>> primary = false;
+            attribute :>> taskSubjectKind = "SystemFunction";
+            attribute :>> taskImplementationKind = "ComponentFunction";
+            attribute :>> taskAllocationKind = "LogicalComponent";
+            attribute :>> taskRelationshipKind = "realizes";
+            attribute :>> objectiveDescription = "Realize a system function with component functions. Allocate each component function to the component responsible for it.";
+            attribute :>> reviewDescription = "Review the system function, its realizing component functions and their allocated components.";
+            ref :>> taskViewpoint = vpFunctionalArchitecture;
+        }
+        part layerFunctional : MethodLayer {
+            attribute :>> workbench = "functional";
+            ref :>> workTasks = (taskFunctionalTree, taskFunctionalFlows, taskFunctionRealization);
+            attribute :>> elementKinds = ("StateMachine", "ModeConfiguration", "BehaviorProperty", "Contract", "TimingConstraint", "MemoFunction", "SystemFunction", "ComponentFunction", "FunctionalExchange", "FunctionalTransfer", "FunctionalFlow");
+            @MemoIdentity { :>> providedId = "ROW-ARC-2"; :>> label = "Functional"; }
+            doc /* What the system has to accomplish. */
+            attribute :>> axis = MethodAxisKind::architecture;
+            attribute :>> stages = (WorkflowStageKind::functional);
+            ref :>> layerViewpoints = (vpFunctionalArchitecture, vpFunctionalFlow, vpStateMode, functionalViewpoint);
+        }
+        part layerLogical : MethodLayer {
+            attribute :>> elementKinds = ("DesignDecision", "ComponentFunction", "Interface", "SoftwareInterface", "InterfaceItem", "DataInterface", "DataPort", "SensorPort", "CommandPort", "ComponentExchange", "SoftwarePort", "SystemOfSystems", "System", "Subsystem", "LogicalComponent", "LogicalPort", "LogicalInterface", "LogicalExchangeItem", "LogicalExchange", "LogicalTransfer", "LogicalBehavior", "IsolationBoundary", "FaultContainmentRegion");
+            @MemoIdentity { :>> providedId = "ROW-ARC-3"; :>> label = "Logical"; }
+            doc /* How the system will work. */
+            attribute :>> axis = MethodAxisKind::architecture;
+            attribute :>> stages = (WorkflowStageKind::logical);
+            ref :>> layerViewpoints = (vpLogicalArchitecture, vpInternalInterconnection, vpSequenceInteraction, vpStateMode, logicalArchitectureViewpoint);
+        }
+        part layerImplementation : MethodLayer {
+            attribute :>> elementKinds = ("PhysicalElement", "PhysicalAssembly", "PhysicalSubassembly", "HardwareAssembly", "PhysicalComponent", "HardwareComponent", "AcousticComponent", "ThermalComponent", "ElectricalComponent", "ElectronicComponent", "PowerSupply", "Battery", "Cable", "PhysicalConnectorPart", "NetworkMedium", "FluidicComponent", "PneumaticComponent", "MechanicalPart", "Enclosure", "OpticalComponent", "Sensor", "Actuator", "SoftwareComponent", "OTSSoftwareComponent", "SoftwareElement", "SoftwareSystem", "SoftwareModule", "Algorithm", "DataModel", "ConfigurationArtifact", "DataItem", "SOUPSoftwareModule", "OTSSoftwareModule", "SBOMEntry", "SoftwareBillOfMaterials", "UserInterface", "UIElement", "OperatorInterfaceElement", "ScreenCapture", "UIState", "UIEvent", "UIAction", "InteractionFlow");
+            @MemoIdentity { :>> providedId = "ROW-ARC-4"; :>> label = "Implementation"; }
+            doc /* How it is built. */
+            attribute :>> axis = MethodAxisKind::architecture;
+            attribute :>> stages = (WorkflowStageKind::implementation);
+            ref :>> layerViewpoints = (vpSoftwareComponents, vpHardwareArchitecture, vpUILayout, softwareViewpoint);
+        }
+        part layerRealization : MethodLayer {
+            attribute :>> elementKinds = ("SoftwareDeploymentUnit", "RuntimeEnvironment", "FlowSpecification", "EndToEndFlow", "ProcessingNode", "MemoryDevice", "PhysicalPort", "PhysicalInterface", "PhysicalFlow", "PhysicalTransfer");
+            @MemoIdentity { :>> providedId = "ROW-ARC-5"; :>> label = "Realization"; }
+            doc /* How it is assembled and deployed. */
+            attribute :>> axis = MethodAxisKind::architecture;
+            attribute :>> stages = (WorkflowStageKind::realization);
+            ref :>> layerViewpoints = (vpPhysicalArchitecture, vpNetworkDeployment, physicalViewpoint);
+        }
+        part disciplineRequirements : MethodLayer {
+            attribute :>> elementKinds = ("ProductFeature", "RiskDriver", "Requirement", "SystemConstant", "NotificationSpec", "Need");
+            @MemoIdentity { :>> providedId = "ROW-ASR-1"; :>> label = "Requirements"; }
+            doc /* What the device must do, and why. */
+            attribute :>> axis = MethodAxisKind::assurance;
+            attribute :>> stages = (WorkflowStageKind::requirements);
+            ref :>> layerViewpoints = (vpRequirementsTraceability, requirementsViewpoint);
+            attribute :>> linkDescription = "needs from Operational · satisfied by Functional and Logical";
+            attribute :>> importable = true;
+        }
+        part disciplineSafetyRisk : MethodLayer {
+            attribute :>> elementKinds = ("FMEAWorksheet", "FailureMode", "FailureEffect", "FailureCause", "DetectionMethod", "FMEAAction", "FaultTree", "FaultTreeNode", "MinimalCutSet", "HAZOPStudy", "HAZOPNode", "HAZOPDeviation", "ReasonablyForeseeableMisuse", "Risk", "ResidualRisk", "RiskMatrix", "SafetyRelatedCharacteristic", "RiskItem", "Hazard", "SequenceOfEvents", "HazardCause", "HazardousSituation", "Harm", "RiskControlMeasure", "Benefit", "OverallResidualRiskEvaluation", "PostMarketSurveillance");
+            @MemoIdentity { :>> providedId = "ROW-ASR-2"; :>> label = "Safety and risk"; }
+            doc /* What can go wrong, and how it is controlled. */
+            attribute :>> axis = MethodAxisKind::assurance;
+            attribute :>> stages = (WorkflowStageKind::risk);
+            ref :>> layerViewpoints = (vpRiskChain, riskViewpoint);
+            attribute :>> standardReference = "ISO 14971";
+            attribute :>> linkDescription = "hazards from Operational scenarios · failure modes in Functional · controls placed in Logical and Implementation";
+            attribute :>> importable = true;
+        }
+        part disciplineCybersecurity : MethodLayer {
+            attribute :>> elementKinds = ("CybersecurityAsset", "AttackSurface", "Threat", "Vulnerability", "CyberHazard", "CyberRisk", "CyberMitigation", "SecurityRequirement", "TrustBoundary", "ThreatActor", "AttackTechnique", "SecurityProperty", "CybersecurityAssumption", "AttackPath", "SecurityAssessmentCase", "SecurityFinding", "SecurityAssessmentReport", "PostmarketProcess", "CyberRiskAssessment");
+            @MemoIdentity { :>> providedId = "ROW-ASR-3"; :>> label = "Cybersecurity"; }
+            doc /* What can be attacked, and how it is mitigated. */
+            attribute :>> axis = MethodAxisKind::assurance;
+            attribute :>> stages = (WorkflowStageKind::security);
+            ref :>> layerViewpoints = (vpCybersecurity, cybersecurityViewpoint);
+            attribute :>> linkDescription = "trust boundaries in Logical · SOUP and SBOM in Implementation · exposed assets in Realization";
+        }
+        part disciplineHumanFactors : MethodLayer {
+            attribute :>> elementKinds = ("UseError");
+            @MemoIdentity { :>> providedId = "ROW-ASR-4"; :>> label = "Human factors"; }
+            doc /* How people use it safely. */
+            attribute :>> axis = MethodAxisKind::assurance;
+            attribute :>> stages = (WorkflowStageKind::humanFactors);
+            ref :>> layerViewpoints = (vpHumanFactors, vpUiFlow, usabilityViewpoint);
+            attribute :>> standardReference = "IEC 62366-1";
+            attribute :>> linkDescription = "use errors in Operational tasks · screens in Implementation";
+        }
+        part disciplineVerification : MethodLayer {
+            attribute :>> elementKinds = ("ClinicalEvaluation", "TestStep", "VerificationCase", "TestRun", "ValidationCase");
+            @MemoIdentity { :>> providedId = "ROW-ASR-5"; :>> label = "Verification and validation"; }
+            doc /* How we know it works, and the evidence. */
+            attribute :>> axis = MethodAxisKind::assurance;
+            attribute :>> stages = (WorkflowStageKind::verificationStage);
+            ref :>> layerViewpoints = (vpVerificationCoverage, vpValidationCoverage, vpEvidenceTraceability, verificationViewpoint);
+            attribute :>> linkDescription = "verifies requirements, functions, interfaces and controls · validates the use in Operational";
+            attribute :>> importable = true;
+        }
+
+        // ── The system of systems ────────────────────────────────────────────────
 
         action stepSosContext : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SOS-01"; :>> label = "SosContext"; }
+            @MemoIdentity { :>> providedId = "STEP-SOS-01"; :>> label = "Declare the systems"; }
             attribute :>> stage = WorkflowStageKind::context;
             attribute :>> level = MethodLevelKind::systemOfSystems;
             ref :>> role = projectLead;
             ref :>> guideViewpoint = vpSystemContext;
             attribute :>> outputKinds = ("SystemOfSystems", "System");
-            attribute :>> objectiveDescription = "State the system of systems and the systems it is made of.";
+            attribute :>> objectiveDescription = "State the system of systems and the systems it is made of, to any depth.";
             attribute :>> entryCriteria = "The family is chosen.";
             attribute :>> exitCriteria = "The system of systems and its constituent systems are declared.";
         }
 
-        action stepSosOperational : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SOS-02"; :>> label = "SosOperationalAnalysis"; }
+        action stepSosUsers : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SOS-02"; :>> label = "Name the users and the people around them"; }
+            attribute :>> stage = WorkflowStageKind::context;
+            attribute :>> level = MethodLevelKind::systemOfSystems;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpSystemContext;
+            attribute :>> outputKinds = ("User");
+            attribute :>> objectiveDescription = "Name who uses the systems together: clinicians, patients, service staff. Stakeholders are kept apart from the users.";
+            attribute :>> entryCriteria = "Nothing: start here if you know who uses it.";
+            attribute :>> exitCriteria = "Each user group is named.";
+        }
+
+        action stepSosUseCases : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SOS-03"; :>> label = "State the clinical goals"; }
             attribute :>> stage = WorkflowStageKind::operational;
             attribute :>> level = MethodLevelKind::systemOfSystems;
             ref :>> role = systemArchitect;
             ref :>> guideViewpoint = vpUseCase;
-            attribute :>> outputKinds = ("UseCase", "OperationalWorkflow");
-            attribute :>> objectiveDescription = "Describe the clinical procedures the systems serve together, and the workflows that realize them.";
-            attribute :>> entryCriteria = "The constituent systems are declared.";
+            attribute :>> outputKinds = ("UseCase");
+            attribute :>> objectiveDescription = "State the clinical indications and procedures the systems serve together, each as one goal.";
+            attribute :>> entryCriteria = "Nothing: start here if you know the procedures.";
+            attribute :>> exitCriteria = "Each clinical procedure is a use case.";
+        }
+
+        action stepSosOperational : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SOS-04"; :>> label = "Analyse the clinical workflows"; }
+            attribute :>> stage = WorkflowStageKind::operational;
+            attribute :>> level = MethodLevelKind::systemOfSystems;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpClinicalWorkflow;
+            attribute :>> outputKinds = ("Workflow");
+            attribute :>> objectiveDescription = "For each procedure, say who takes part, where, with what, and what they need.";
+            attribute :>> entryCriteria = "A clinical goal helps; a workflow may come first.";
             attribute :>> exitCriteria = "Each clinical procedure has a workflow.";
         }
 
         action stepSosFunctions : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SOS-03"; :>> label = "SosFunctionsAndChains"; }
+            @MemoIdentity { :>> providedId = "STEP-SOS-05"; :>> label = "Follow the functions across the systems"; }
             attribute :>> stage = WorkflowStageKind::functional;
             attribute :>> level = MethodLevelKind::systemOfSystems;
             ref :>> role = systemArchitect;
             ref :>> guideViewpoint = vpFunctionalFlow;
             attribute :>> outputKinds = ("FunctionalFlow");
-            attribute :>> objectiveDescription = "Follow the functions across the systems in functional chains.";
-            attribute :>> entryCriteria = "Clinical procedures and workflows exist.";
+            attribute :>> objectiveDescription = "Give the system of systems one explicit parent function, then follow its responsibilities across the constituent systems in functional chains.";
+            attribute :>> entryCriteria = "Clinical procedures and workflows help.";
             attribute :>> exitCriteria = "Each cross-system chain is stated.";
         }
 
         action stepSosArchitecture : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SOS-04"; :>> label = "SosArchitecture"; }
-            attribute :>> stage = WorkflowStageKind::architecture;
+            @MemoIdentity { :>> providedId = "STEP-SOS-06"; :>> label = "Define the interfaces between the systems"; }
+            attribute :>> stage = WorkflowStageKind::logical;
             attribute :>> level = MethodLevelKind::systemOfSystems;
             ref :>> role = systemArchitect;
             ref :>> guideViewpoint = vpSystemDecomposition;
             attribute :>> outputKinds = ("Interface");
-            attribute :>> objectiveDescription = "Define the interfaces between the systems.";
-            attribute :>> entryCriteria = "Functional chains exist.";
+            attribute :>> objectiveDescription = "Give each pair of systems that exchange something an interface.";
+            attribute :>> entryCriteria = "The systems are declared.";
             attribute :>> exitCriteria = "Each pair of systems that exchange something has an interface.";
         }
 
         action stepSosHazards : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SOS-05"; :>> label = "SosHazards"; }
+            @MemoIdentity { :>> providedId = "STEP-SOS-07"; :>> label = "Identify the hazards of the systems together"; }
             attribute :>> stage = WorkflowStageKind::risk;
             attribute :>> level = MethodLevelKind::systemOfSystems;
             ref :>> role = safetyEngineer;
             ref :>> guideViewpoint = vpRiskChain;
+            attribute :>> inputKinds = ("OperativeScenario");
             attribute :>> outputKinds = ("Hazard");
-            attribute :>> objectiveDescription = "Identify the hazards that arise only from the systems working together.";
-            attribute :>> entryCriteria = "The architecture and its interfaces exist.";
+            attribute :>> objectiveDescription = "Identify the hazards that arise only from the systems working together, and control each.";
+            attribute :>> entryCriteria = "The systems and their interfaces help.";
             attribute :>> exitCriteria = "Each hazard of the combination has a control.";
         }
         #LinkedWhen dependency from stepSosHazards to memo_rules_closure::HazardMitigationRule;
 
+        // ── One system: context and the architecture ─────────────────────────────
+
+        action stepSysUsers : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-01"; :>> label = "Name the users"; }
+            attribute :>> stage = WorkflowStageKind::context;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpSystemContext;
+            attribute :>> outputKinds = ("User");
+            attribute :>> objectiveDescription = "Name the people who use the system, kept apart from the stakeholders who have a say in it.";
+            attribute :>> entryCriteria = "Nothing: start here.";
+            attribute :>> exitCriteria = "Each user group is named.";
+        }
+
+        action stepSysUseContext : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-02"; :>> label = "Describe where it is used"; }
+            attribute :>> stage = WorkflowStageKind::context;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpSystemContext;
+            attribute :>> outputKinds = ("UseContext");
+            attribute :>> objectiveDescription = "Describe the places and conditions the system is used in, and the external systems it works with.";
+            attribute :>> entryCriteria = "Nothing: start here.";
+            attribute :>> exitCriteria = "Each place of use is described.";
+        }
+
         action stepSysOperational : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-01"; :>> label = "SystemOperational"; }
+            @MemoIdentity { :>> providedId = "STEP-SYS-03"; :>> label = "State what the system is used for"; }
             attribute :>> stage = WorkflowStageKind::operational;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = systemArchitect;
             ref :>> guideViewpoint = vpUseCase;
             attribute :>> outputKinds = ("UseCase");
-            attribute :>> objectiveDescription = "State what the system is used for.";
-            attribute :>> entryCriteria = "The system is declared.";
+            attribute :>> objectiveDescription = "State each use of the system as one goal. Group goals by including smaller ones; a goal is never a step.";
+            attribute :>> entryCriteria = "Nothing: start here.";
             attribute :>> exitCriteria = "Each use of the system is a use case.";
         }
 
+        action stepSysWorkflows : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-04"; :>> label = "Analyse the work in workflows"; }
+            attribute :>> stage = WorkflowStageKind::operational;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpClinicalWorkflow;
+            attribute :>> outputKinds = ("Workflow");
+            attribute :>> objectiveDescription = "For each body of work, say who takes part, where, with what equipment, and what they need. Steps go in scenarios.";
+            attribute :>> entryCriteria = "A use case helps; the workflow may come first.";
+            attribute :>> exitCriteria = "Each use case is realized by a workflow.";
+        }
+
+        action stepSysScenarios : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-05"; :>> label = "Step through the work in scenarios"; }
+            attribute :>> stage = WorkflowStageKind::operational;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpScenario;
+            attribute :>> outputKinds = ("OperativeScenario");
+            attribute :>> objectiveDescription = "Write the nominal and alternate paths through each workflow, saying who performs each step. An operational activity is realized by functions.";
+            attribute :>> entryCriteria = "A workflow helps.";
+            attribute :>> exitCriteria = "Each workflow has its nominal scenario.";
+        }
+
         action stepSysFunctional : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-02"; :>> label = "SystemFunctional"; }
+            @MemoIdentity { :>> providedId = "STEP-SYS-06"; :>> label = "Name the system functions"; }
             attribute :>> stage = WorkflowStageKind::functional;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = systemArchitect;
             ref :>> guideViewpoint = vpFunctionalArchitecture;
             attribute :>> outputKinds = ("SystemFunction");
-            attribute :>> objectiveDescription = "State what the system does.";
-            attribute :>> entryCriteria = "The system use cases exist.";
+            attribute :>> objectiveDescription = "Give the system one explicit parent function, then decompose its responsibilities beneath it. Many scenario steps need the same function: link them to one.";
+            attribute :>> entryCriteria = "Nothing: start here.";
             attribute :>> exitCriteria = "Each function is stated.";
         }
 
+        action stepSysFunctionalExchanges : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-07"; :>> label = "Describe what the functions exchange"; }
+            attribute :>> stage = WorkflowStageKind::functional;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpFunctionalFlow;
+            attribute :>> outputKinds = ("FunctionalFlow");
+            attribute :>> objectiveDescription = "Connect the functions by the data, energy and material they pass to each other.";
+            attribute :>> entryCriteria = "Functions exist.";
+            attribute :>> exitCriteria = "Each function that needs an input has one.";
+        }
+
+        action stepSysFunctionalChains : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-08"; :>> label = "Chain the functions end to end"; }
+            attribute :>> stage = WorkflowStageKind::functional;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpFunctionalFlow;
+            attribute :>> objectiveDescription = "A functional chain is the end-to-end path one goal needs; it sets the latency and safety budget.";
+            attribute :>> entryCriteria = "Functions exist.";
+            attribute :>> exitCriteria = "Each function is in a chain.";
+        }
+        #DoneWhen dependency from stepSysFunctionalChains to memo_rules_closure::FunctionInChainRule;
+
         action stepSysLogical : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-03"; :>> label = "SystemLogical"; }
+            @MemoIdentity { :>> providedId = "STEP-SYS-09"; :>> label = "Name the logical components"; }
             attribute :>> stage = WorkflowStageKind::logical;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = systemArchitect;
             ref :>> guideViewpoint = vpLogicalArchitecture;
             attribute :>> outputKinds = ("LogicalComponent");
-            attribute :>> objectiveDescription = "Divide the system into logical components and allocate its functions.";
-            attribute :>> entryCriteria = "The system functions exist.";
+            attribute :>> objectiveDescription = "Divide the system into the parts it is made of, independent of technology.";
+            attribute :>> entryCriteria = "Nothing: start here.";
+            attribute :>> exitCriteria = "The system is divided into components.";
+        }
+
+        action stepSysComponentFunctions : MethodologyWorkflowStep {
+            @MemoIdentity { :>> label = "Define component functions"; }
+            attribute :>> stage = WorkflowStageKind::logical;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpLogicalArchitecture;
+            attribute :>> outputKinds = ("ComponentFunction");
+            attribute :>> objectiveDescription = "Describe each component's responsibilities beneath the system's parent function. Allocate each component function to exactly one component; show it beside that component in Logical.";
+            attribute :>> entryCriteria = "A logical component exists.";
+            attribute :>> exitCriteria = "Each component function is allocated to its component.";
+        }
+        #DoneWhen dependency from stepSysComponentFunctions to memo_rules_ontology::ComponentFunctionAllocatedRule;
+
+        action stepSysLogicalAllocation : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-10"; :>> label = "Give each function to a component"; }
+            attribute :>> stage = WorkflowStageKind::logical;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpLogicalArchitecture;
+            attribute :>> objectiveDescription = "Allocate each system function to the one component that performs it. A function split across two components is two functions.";
+            attribute :>> entryCriteria = "Functions and components exist; either side may come first.";
             attribute :>> exitCriteria = "Every function is allocated to a component.";
         }
-        #LinkedWhen dependency from stepSysLogical to memo_rules_closure::LogicalFunctionAllocationRule;
+        #LinkedWhen dependency from stepSysLogicalAllocation to memo_rules_closure::LogicalFunctionAllocationRule;
 
-        action stepSysHardware : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-04"; :>> label = "SystemHardware"; }
-            attribute :>> stage = WorkflowStageKind::physical;
+        action stepSysLogicalInterfaces : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-11"; :>> label = "Connect the components"; }
+            attribute :>> stage = WorkflowStageKind::logical;
             attribute :>> level = MethodLevelKind::system;
-            ref :>> role = hardwareEngineer;
-            ref :>> guideViewpoint = vpHardwareArchitecture;
-            attribute :>> outputKinds = ("PhysicalAssembly");
-            attribute :>> objectiveDescription = "Realize the logical components in hardware.";
-            attribute :>> entryCriteria = "The logical components exist.";
-            attribute :>> exitCriteria = "The hardware assemblies are declared.";
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpInternalInterconnection;
+            attribute :>> outputKinds = ("LogicalPort");
+            attribute :>> objectiveDescription = "Give each component the ports it exposes, then connect port to port.";
+            attribute :>> entryCriteria = "Components exist.";
+            attribute :>> exitCriteria = "Every connection goes port to port.";
+        }
+
+        action stepSysLogicalInteraction : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-12"; :>> label = "Describe how they interact"; }
+            attribute :>> stage = WorkflowStageKind::logical;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpSequenceInteraction;
+            attribute :>> outputKinds = ("LogicalExchangeItem");
+            attribute :>> objectiveDescription = "Show, scenario by scenario, the messages the components send each other.";
+            attribute :>> entryCriteria = "Components and their connections exist.";
+            attribute :>> exitCriteria = "Each exchange carries a named item.";
+        }
+
+        action stepSysLogicalSegregation : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-13"; :>> label = "Mark segregation for risk control"; }
+            attribute :>> stage = WorkflowStageKind::logical;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpLogicalArchitecture;
+            attribute :>> outputKinds = ("IsolationBoundary");
+            attribute :>> objectiveDescription = "Where a risk control relies on separation, draw the boundary that keeps the parts apart.";
+            attribute :>> entryCriteria = "Only if Safety and risk needs it.";
+            attribute :>> exitCriteria = "Each segregation a control relies on is drawn.";
         }
 
         action stepSysSoftware : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-05"; :>> label = "SystemSoftware"; }
-            attribute :>> stage = WorkflowStageKind::physical;
+            @MemoIdentity { :>> providedId = "STEP-SYS-14"; :>> label = "Realize the components in software"; }
+            attribute :>> stage = WorkflowStageKind::implementation;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = softwareArchitect;
             ref :>> guideViewpoint = vpSoftwareComponents;
             attribute :>> outputKinds = ("SoftwareSystem");
-            attribute :>> objectiveDescription = "Realize the logical components in software.";
-            attribute :>> entryCriteria = "The logical components exist.";
+            attribute :>> objectiveDescription = "Declare the software and the components it is made of.";
+            attribute :>> entryCriteria = "Nothing: start here if the software exists.";
             attribute :>> exitCriteria = "The software is declared.";
         }
 
-        action stepSysHumanFactors : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-06"; :>> label = "SystemHumanFactors"; }
-            attribute :>> stage = WorkflowStageKind::humanFactors;
+        action stepSysHardware : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-15"; :>> label = "Realize the components in hardware"; }
+            attribute :>> stage = WorkflowStageKind::implementation;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = hardwareEngineer;
+            ref :>> guideViewpoint = vpHardwareArchitecture;
+            attribute :>> outputKinds = ("PhysicalAssembly");
+            attribute :>> objectiveDescription = "Declare the hardware assemblies, from the catalog where they are supplied.";
+            attribute :>> entryCriteria = "Nothing: start here if the hardware exists.";
+            attribute :>> exitCriteria = "The hardware assemblies are declared.";
+        }
+
+        action stepSysUserInterface : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-16"; :>> label = "Lay out the user interface"; }
+            attribute :>> stage = WorkflowStageKind::implementation;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = usabilityEngineer;
-            ref :>> guideViewpoint = vpHumanFactors;
+            ref :>> guideViewpoint = vpUILayout;
             attribute :>> outputKinds = ("UserInterface");
-            attribute :>> objectiveDescription = "Design how people use the system.";
-            attribute :>> entryCriteria = "The system use cases exist.";
+            attribute :>> objectiveDescription = "Declare the user interface and lay out its screens.";
+            attribute :>> entryCriteria = "Nothing: start here if the screens exist.";
             attribute :>> exitCriteria = "The user interface is declared.";
         }
 
+        action stepSysDeployment : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-17"; :>> label = "Deploy the software onto its hardware"; }
+            attribute :>> stage = WorkflowStageKind::realization;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = softwareArchitect;
+            ref :>> guideViewpoint = vpNetworkDeployment;
+            attribute :>> outputKinds = ("SoftwareDeploymentUnit");
+            attribute :>> objectiveDescription = "Say which software runs on which processing node.";
+            attribute :>> entryCriteria = "Software and hardware help.";
+            attribute :>> exitCriteria = "Each deployment unit is placed.";
+        }
+
+        action stepSysAssembly : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-18"; :>> label = "Place the processing nodes"; }
+            attribute :>> stage = WorkflowStageKind::realization;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = hardwareEngineer;
+            ref :>> guideViewpoint = vpPhysicalArchitecture;
+            attribute :>> outputKinds = ("ProcessingNode");
+            attribute :>> objectiveDescription = "Declare the processing nodes the device is assembled from and how they are connected.";
+            attribute :>> entryCriteria = "Hardware helps.";
+            attribute :>> exitCriteria = "Each processing node is declared.";
+        }
+
+        // ── One system: the assurance disciplines ────────────────────────────────
+
+        action stepSysNeeds : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-19"; :>> label = "State the user needs"; }
+            attribute :>> stage = WorkflowStageKind::requirements;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpRequirementsTraceability;
+            attribute :>> outputKinds = ("Need");
+            attribute :>> objectiveDescription = "State what the users need, each naming who needs it. Imported needs keep their source.";
+            attribute :>> entryCriteria = "Nothing: start here, or import.";
+            attribute :>> exitCriteria = "Each need names its user.";
+        }
+        #DoneWhen dependency from stepSysNeeds to memo_rules_closure::UserNeedIdentifiesUserRule;
+
+        action stepSysRequirements : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-20"; :>> label = "Write the requirements"; }
+            attribute :>> stage = WorkflowStageKind::requirements;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = systemArchitect;
+            ref :>> guideViewpoint = vpRequirementsTraceability;
+            attribute :>> outputKinds = ("Requirement");
+            attribute :>> objectiveDescription = "Write what the device must do, each derived from a need and satisfied by the design.";
+            attribute :>> entryCriteria = "Nothing: start here, or import.";
+            attribute :>> exitCriteria = "The requirements are written.";
+        }
+
         action stepSysRisk : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-07"; :>> label = "SystemRisk"; }
+            @MemoIdentity { :>> providedId = "STEP-SYS-21"; :>> label = "Identify the hazards"; }
             attribute :>> stage = WorkflowStageKind::risk;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = safetyEngineer;
             ref :>> guideViewpoint = vpRiskChain;
-            attribute :>> outputKinds = ("Hazard", "Risk");
-            attribute :>> objectiveDescription = "Identify hazards, estimate risk and state the controls.";
-            attribute :>> entryCriteria = "The system functions exist.";
+            attribute :>> inputKinds = ("OperativeScenario");
+            attribute :>> outputKinds = ("Hazard");
+            attribute :>> objectiveDescription = "Imported or found here, each hazard needs the scenario it arises in. Walk a scenario task by task and ask what could hurt the patient, the operator or a bystander.";
+            attribute :>> entryCriteria = "Nothing: start here, or import a hazard list.";
+            attribute :>> exitCriteria = "Each hazard has its scenario.";
+        }
+
+        action stepSysHarm : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-22"; :>> label = "Describe how harm happens"; }
+            attribute :>> stage = WorkflowStageKind::risk;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = safetyEngineer;
+            ref :>> guideViewpoint = vpRiskChain;
+            attribute :>> outputKinds = ("HazardousSituation", "Harm");
+            attribute :>> objectiveDescription = "For each hazard, the hazardous situation it leads to and the harm that can follow.";
+            attribute :>> entryCriteria = "Hazards exist.";
+            attribute :>> exitCriteria = "Each hazard has its hazardous situation.";
+        }
+        #DoneWhen dependency from stepSysHarm to memo_rules_closure::HazardHasSituationRule;
+
+        action stepSysRiskEstimate : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-23"; :>> label = "Estimate the risk"; }
+            attribute :>> stage = WorkflowStageKind::risk;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = safetyEngineer;
+            ref :>> guideViewpoint = vpRiskChain;
+            attribute :>> outputKinds = ("Risk");
+            attribute :>> objectiveDescription = "Estimate the probability and severity of each harm against the risk matrix.";
+            attribute :>> entryCriteria = "Hazardous situations exist.";
+            attribute :>> exitCriteria = "Each risk is estimated.";
+        }
+        #DoneWhen dependency from stepSysRiskEstimate to memo_rules_closure::RiskEstimateRule;
+
+        action stepSysRiskControls : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-24"; :>> label = "Decide the controls"; }
+            attribute :>> stage = WorkflowStageKind::risk;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = safetyEngineer;
+            ref :>> guideViewpoint = vpRiskChain;
+            attribute :>> outputKinds = ("RiskControlMeasure");
+            attribute :>> objectiveDescription = "Decide how each hazard is controlled: by design, by protection, or by information. A control is placed in the design by the team that owns it.";
+            attribute :>> entryCriteria = "Hazards exist.";
             attribute :>> exitCriteria = "Each hazard has a control.";
         }
-        #LinkedWhen dependency from stepSysRisk to memo_rules_closure::HazardMitigationRule;
+        #LinkedWhen dependency from stepSysRiskControls to memo_rules_closure::HazardMitigationRule;
+
+        action stepSysResidualRisk : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-25"; :>> label = "Evaluate residual risk"; }
+            attribute :>> stage = WorkflowStageKind::risk;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = safetyEngineer;
+            ref :>> guideViewpoint = vpRiskChain;
+            attribute :>> outputKinds = ("ResidualRisk");
+            attribute :>> objectiveDescription = "Estimate what is left after the controls, and judge whether it is acceptable.";
+            attribute :>> entryCriteria = "Controls exist.";
+            attribute :>> exitCriteria = "Each residual risk is evaluated.";
+        }
+        #DoneWhen dependency from stepSysResidualRisk to memo_rules_closure::ResidualRiskEvaluatedRule;
+
+        action stepSysAssets : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-26"; :>> label = "Identify what can be attacked"; }
+            attribute :>> stage = WorkflowStageKind::security;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = securityEngineer;
+            ref :>> guideViewpoint = vpCybersecurity;
+            attribute :>> outputKinds = ("CybersecurityAsset");
+            attribute :>> objectiveDescription = "Name the assets worth protecting: data, functions and the interfaces that expose them.";
+            attribute :>> entryCriteria = "Nothing: start here.";
+            attribute :>> exitCriteria = "Each asset is named.";
+        }
 
         action stepSysSecurity : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-08"; :>> label = "SystemSecurity"; }
+            @MemoIdentity { :>> providedId = "STEP-SYS-27"; :>> label = "Identify the threats"; }
             attribute :>> stage = WorkflowStageKind::security;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = securityEngineer;
             ref :>> guideViewpoint = vpCybersecurity;
             attribute :>> outputKinds = ("Threat");
-            attribute :>> objectiveDescription = "Identify threats and state the mitigations.";
-            attribute :>> entryCriteria = "The system functions exist.";
+            attribute :>> objectiveDescription = "For each asset, the threats to it.";
+            attribute :>> entryCriteria = "Assets help.";
+            attribute :>> exitCriteria = "Each asset has its threats.";
+        }
+        #DoneWhen dependency from stepSysSecurity to memo_rules_closure::AssetThreatLinkRule;
+
+        action stepSysThreatMitigation : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-28"; :>> label = "Mitigate the threats"; }
+            attribute :>> stage = WorkflowStageKind::security;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = securityEngineer;
+            ref :>> guideViewpoint = vpCybersecurity;
+            attribute :>> outputKinds = ("CyberMitigation");
+            attribute :>> objectiveDescription = "State how each threat is mitigated, and where in the design the mitigation lives.";
+            attribute :>> entryCriteria = "Threats exist.";
             attribute :>> exitCriteria = "Each threat is mitigated.";
         }
-        #LinkedWhen dependency from stepSysSecurity to memo_rules_closure::ThreatMitigationRule;
+        #LinkedWhen dependency from stepSysThreatMitigation to memo_rules_closure::ThreatMitigationRule;
+
+        action stepSysUseEnvironment : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-29"; :>> label = "Describe the use environment"; }
+            attribute :>> stage = WorkflowStageKind::humanFactors;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = usabilityEngineer;
+            ref :>> guideViewpoint = vpHumanFactors;
+            attribute :>> outputKinds = ("UseEnvironment");
+            attribute :>> objectiveDescription = "Describe the conditions people use the device in: light, noise, interruptions, what they wear.";
+            attribute :>> entryCriteria = "Nothing: start here.";
+            attribute :>> exitCriteria = "Each use environment is described.";
+        }
+
+        action stepSysHumanFactors : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-30"; :>> label = "Identify the use errors"; }
+            attribute :>> stage = WorkflowStageKind::humanFactors;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = usabilityEngineer;
+            ref :>> guideViewpoint = vpHumanFactors;
+            attribute :>> outputKinds = ("UseError");
+            attribute :>> objectiveDescription = "Walk the operational tasks for the use errors people could make, starting with the known use problems.";
+            attribute :>> entryCriteria = "Workflows and scenarios help.";
+            attribute :>> exitCriteria = "Each known use problem is a use error.";
+        }
 
         action stepSysVerification : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-09"; :>> label = "SystemVerification"; }
+            @MemoIdentity { :>> providedId = "STEP-SYS-31"; :>> label = "Write the verification cases"; }
             attribute :>> stage = WorkflowStageKind::verificationStage;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = verificationEngineer;
             ref :>> guideViewpoint = vpVerificationCoverage;
             attribute :>> outputKinds = ("VerificationCase");
-            attribute :>> objectiveDescription = "Verify what the system must do and the controls it relies on.";
-            attribute :>> entryCriteria = "Risks and their controls exist.";
+            attribute :>> objectiveDescription = "Write how each requirement and control is verified, and by which method.";
+            attribute :>> entryCriteria = "Nothing: start here, or import.";
+            attribute :>> exitCriteria = "Each case states its method.";
+        }
+        #DoneWhen dependency from stepSysVerification to memo_rules_closure::VerificationCaseMethodRule;
+
+        action stepSysVerificationTargets : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-32"; :>> label = "Give each case what it verifies"; }
+            attribute :>> stage = WorkflowStageKind::verificationStage;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = verificationEngineer;
+            ref :>> guideViewpoint = vpVerificationCoverage;
+            attribute :>> objectiveDescription = "Link each case to the requirements, functions, interfaces and controls it verifies.";
+            attribute :>> entryCriteria = "Cases exist; what they verify may come later.";
             attribute :>> exitCriteria = "Each verification case has a target.";
         }
-        #LinkedWhen dependency from stepSysVerification to memo_rules_closure::VerificationCaseTargetRule;
+        #LinkedWhen dependency from stepSysVerificationTargets to memo_rules_closure::VerificationCaseTargetRule;
+
+        action stepSysControlVerification : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-33"; :>> label = "Verify the risk controls"; }
+            attribute :>> stage = WorkflowStageKind::verificationStage;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = verificationEngineer;
+            ref :>> guideViewpoint = vpVerificationCoverage;
+            attribute :>> objectiveDescription = "Every risk control is verified for its implementation and its effectiveness.";
+            attribute :>> entryCriteria = "Controls exist.";
+            attribute :>> exitCriteria = "Each risk control is verified.";
+        }
+        #LinkedWhen dependency from stepSysControlVerification to memo_rules_closure::RiskControlVerificationRule;
+
+        action stepSysValidation : MethodologyWorkflowStep {
+            @MemoIdentity { :>> providedId = "STEP-SYS-34"; :>> label = "Validate the use"; }
+            attribute :>> stage = WorkflowStageKind::verificationStage;
+            attribute :>> level = MethodLevelKind::system;
+            ref :>> role = verificationEngineer;
+            ref :>> guideViewpoint = vpValidationCoverage;
+            attribute :>> outputKinds = ("ValidationCase");
+            attribute :>> objectiveDescription = "Show that the device meets the users' needs in its intended use.";
+            attribute :>> entryCriteria = "Needs and use cases help.";
+            attribute :>> exitCriteria = "Each user need is validated.";
+        }
 
         action stepSysRelease : MethodologyWorkflowStep {
-            @MemoIdentity { :>> providedId = "STEP-SYS-10"; :>> label = "SystemRelease"; }
+            @MemoIdentity { :>> providedId = "STEP-SYS-35"; :>> label = "Record a release"; }
             attribute :>> stage = WorkflowStageKind::release;
             attribute :>> level = MethodLevelKind::system;
             ref :>> role = regulatoryEngineer;
@@ -310,19 +848,47 @@
         }
 
         // Recommended order, within a level: which step feeds which. It never holds a step back.
-        first stepSosContext then stepSosOperational;
+        first stepSosContext then stepSosUsers;
+        first stepSosUsers then stepSosUseCases;
+        first stepSosUseCases then stepSosOperational;
         first stepSosOperational then stepSosFunctions;
         first stepSosFunctions then stepSosArchitecture;
         first stepSosArchitecture then stepSosHazards;
 
-        first stepSysOperational then stepSysFunctional;
+        first stepSysUsers then stepSysUseContext;
+        first stepSysUseContext then stepSysOperational;
+        first stepSysOperational then stepSysWorkflows;
+        first stepSysWorkflows then stepSysScenarios;
+        first stepSysScenarios then stepSysFunctional;
+        first stepSysFunctional then stepSysFunctionalExchanges;
+        first stepSysFunctionalExchanges then stepSysFunctionalChains;
         first stepSysFunctional then stepSysLogical;
-        first stepSysLogical then stepSysHardware;
+        first stepSysLogical then stepSysComponentFunctions;
+        first stepSysComponentFunctions then stepSysLogicalAllocation;
+        first stepSysLogicalAllocation then stepSysLogicalInterfaces;
+        first stepSysLogicalInterfaces then stepSysLogicalInteraction;
+        first stepSysLogicalInteraction then stepSysLogicalSegregation;
         first stepSysLogical then stepSysSoftware;
-        first stepSysOperational then stepSysHumanFactors;
-        first stepSysFunctional then stepSysRisk;
-        first stepSysFunctional then stepSysSecurity;
-        first stepSysRisk then stepSysVerification;
+        first stepSysLogical then stepSysHardware;
+        first stepSysSoftware then stepSysUserInterface;
+        first stepSysSoftware then stepSysDeployment;
+        first stepSysHardware then stepSysAssembly;
+        first stepSysOperational then stepSysNeeds;
+        first stepSysNeeds then stepSysRequirements;
+        first stepSysScenarios then stepSysRisk;
+        first stepSysRisk then stepSysHarm;
+        first stepSysHarm then stepSysRiskEstimate;
+        first stepSysRiskEstimate then stepSysRiskControls;
+        first stepSysRiskControls then stepSysResidualRisk;
+        first stepSysFunctional then stepSysAssets;
+        first stepSysAssets then stepSysSecurity;
+        first stepSysSecurity then stepSysThreatMitigation;
+        first stepSysUseContext then stepSysUseEnvironment;
+        first stepSysUseEnvironment then stepSysHumanFactors;
+        first stepSysRequirements then stepSysVerification;
+        first stepSysVerification then stepSysVerificationTargets;
+        first stepSysRiskControls then stepSysControlVerification;
+        first stepSysNeeds then stepSysValidation;
         first stepSysVerification then stepSysRelease;
 
         part gateLightComplete : QualityGate {

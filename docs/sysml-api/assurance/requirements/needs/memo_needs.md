@@ -146,7 +146,7 @@ connection def HeldBy :> MemoRelationship
             // The body of work the need arises in: its workflow, the analysis of
             // that work (IEC 62366-1 5.1). The need points at the workflow, never
             // the reverse, so a workflow's needs are found upstream of it.
-            ref workflow : OperationalWorkflow[0..1];
+            ref workflow : Workflow[0..1];
             // Whether current practice meets the need. False is an unmet need, the
             // gap a device is for; unset is not yet assessed.
             attribute metByCurrentPractice : Boolean[0..1];

@@ -120,7 +120,7 @@ connection : Motivates connect needTrustworthyReading to ucCheckOxygenation;
 | Level | Use case type | Subject |
 |---|---|---|
 | 1, clinical | `ClinicalUseCase` | an `OperationalEntity`: the team, the setting |
-| 2, system | `SystemUseCase` (lesson 8) | a usage of your `System` |
+| 2, system | `OperationalUseCase` (lesson 8) | a usage of your `System` |
 
 ## The operational file so far
 

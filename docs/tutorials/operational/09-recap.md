@@ -19,7 +19,7 @@ which device function carries the reading out.
 | clinical workflow | owns | nominal and alternate scenarios |
 | scenario | owns, ordered by `first … then` | step usages, typed by step definitions |
 | clinician | `perform action … references` | each step usage |
-| system workflow | `RealizesUseCase` | system use case, subject the oximeter |
+| operational workflow | `RealizesUseCase` | operational use case, subject the oximeter |
 | level-2 activity | `#refinement` | the level-1 step |
 | level-2 activity | `perform` | `fnMeasureSpO2`, the function |
 | oximeter | `perform` | the level-2 reading activity |
@@ -37,7 +37,7 @@ validator reports it:
 | function performed from a level-1 step | CR-ONT-097 |
 | `likelihood` on a level-1 scenario | CR-ONT-099 |
 | step owned by the workflow instead of a scenario | CR-ONT-102 |
-| clinical workflow realizing a system use case | CR-ONT-103 |
+| clinical workflow realizing an operational use case | CR-ONT-103 |
 
 ## Where to go next
 
@@ -93,8 +93,6 @@ package pulse_oximeter_use {
 
     part wfSpotCheck : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "WF-1"; :>> label = "Spot-check oxygenation"; }
-        attribute :>> entryCondition = "a patient needs an oxygenation check";
-        attribute :>> completionCondition = "a value is recorded, or the check is escalated";
         ref :>> useContext = generalWard;
 
         action scNominal : OperativeScenario {
@@ -128,13 +126,13 @@ package pulse_oximeter_use {
         @MemoIdentity { :>> label = "Pulse oximeter, as used"; }
         perform wfSpotCheckOximeter.scNominal.read;
     }
-    use case ucSpotCheckWithOximeter : SystemUseCase {
+    use case ucSpotCheckWithOximeter : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-2"; :>> label = "Spot-check SpO2 with the oximeter"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         subject :>> supportingSystem = oximeterSystem;
         actor clinicianActor = clinician;
     }
-    part wfSpotCheckOximeter : SystemWorkflow {
+    part wfSpotCheckOximeter : OperationalWorkflow {
         @MemoIdentity { :>> providedId = "WF-2"; :>> label = "Spot-check with the oximeter"; }
         action scNominal : OperativeScenario {
             @MemoIdentity { :>> label = "Reading obtained first time, with the oximeter"; }

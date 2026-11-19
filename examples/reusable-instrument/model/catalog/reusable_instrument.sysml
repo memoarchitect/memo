@@ -31,10 +31,10 @@ package memo_examples_reusable_instrument {
     // --8<-- [start:workflow]
     part wfReprocess : ClinicalWorkflow {
         @MemoIdentity { :>> providedId = "RI-WF-001"; :>> label = "Instrument reprocessing workflow"; }
-        attribute :>> entryCondition = "used instrument received in decontamination";
-        attribute :>> completionCondition = "sterile pack released to storage";
         action scNominalCycle : OperativeScenario {
             @MemoIdentity { :>> providedId = "RI-SC-001"; :>> label = "Nominal reprocessing cycle"; }
+            attribute :>> postCondition = "sterile pack released to storage";
+            attribute :>> preCondition = "used instrument received in decontamination";
 
             perform actClean;
             perform actInspect;

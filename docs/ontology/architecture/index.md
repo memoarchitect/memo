@@ -21,7 +21,7 @@ device's parts, and the functional layer never names a technology.
 
 | Layer | The question it answers | Key elements |
 | --- | --- | --- |
-| [Operational](../operational.md) | Why does the device exist, for whom, and in what setting? | `UseCase`, `OperationalWorkflow`, `OperativeScenario`, `OperativeAction`; supported by `User`, `IntendedUse`, `UseContext` |
+| [Operational](../operational.md) | Why does the device exist, for whom, and in what setting? | `UseCase`, `Workflow`, `OperativeScenario`, `OperativeAction`; supported by `User`, `IntendedUse`, `UseContext` |
 | [Functional](../functional.md) | What must the system do? | `SystemFunction`, `ComponentFunction`, `FunctionalFlow`, `FunctionalExchange`, `StateMachine` |
 | [Logical](../logical.md) | How is the solution organised, before choosing a technology? | `LogicalComponent`, `LogicalPort`, `LogicalInterface`, `ComponentExchange`, `IsolationBoundary` |
 | [Implementation](../implementation.md) | What is it built from? | `SoftwareSystem`, `SoftwareModule`, `HardwareComponent`, `Sensor`, `UserInterface`, `UIElement` |

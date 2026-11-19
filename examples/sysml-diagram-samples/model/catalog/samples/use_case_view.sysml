@@ -27,14 +27,14 @@ package memo_examples_sysml_diagram_samples_samples_use_case_view {
         @MemoIdentity { :>> label = "Nursing Staff"; }
     }
 
-    use case reviewStatus : SystemUseCase {
+    use case reviewStatus : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-1"; :>> label = "Review Device Status"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         include validateTherapySettings;
         subject supportingSystem;
         actor patientActor = patient;
     }
-    use case configureTherapy : SystemUseCase {
+    use case configureTherapy : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-2"; :>> label = "Configure Therapy"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         include reviewStatus;
@@ -42,20 +42,20 @@ package memo_examples_sysml_diagram_samples_samples_use_case_view {
         actor clinicianInitiator = clinician;
         actor patientActor = patient;
     }
-    use case maintainDevice : SystemUseCase {
+    use case maintainDevice : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-3"; :>> label = "Maintain Device"; }
         attribute :>> useCaseKind = UseCaseKind::service;
         subject supportingSystem;
         actor serviceTechnicianActor = serviceTechnician;
     }
 
-    use case documentTreatment : SystemUseCase {
+    use case documentTreatment : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-4"; :>> label = "Document Treatment"; }
         attribute :>> useCaseKind = UseCaseKind::care;
     }
 
     // L2 child of Review Device Status: makes L0 → L1 → L2 selectable.
-    use case validateTherapySettings : SystemUseCase {
+    use case validateTherapySettings : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-SAMPLE-5"; :>> label = "Validate Therapy Settings"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         subject supportingSystem;

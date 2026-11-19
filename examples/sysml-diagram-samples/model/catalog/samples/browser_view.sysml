@@ -34,19 +34,19 @@ package memo_examples_sysml_diagram_samples_samples_browser_view {
         @MemoIdentity { :>> label = "Remote Monitor"; }
     }
 
-    use case startSystem : SystemUseCase {
+    use case startSystem : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-BRW-1"; :>> label = "Start System"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         subject controlSystem;
         actor operatorActor = systemOperator;
     }
-    use case runDiagnostics : SystemUseCase {
+    use case runDiagnostics : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-BRW-2"; :>> label = "Run Diagnostics"; }
         attribute :>> useCaseKind = UseCaseKind::service;
         subject controlSystem;
         actor engineerActor = maintenanceEngineer;
     }
-    use case monitorStatus : SystemUseCase {
+    use case monitorStatus : OperationalUseCase {
         @MemoIdentity { :>> providedId = "UC-BRW-3"; :>> label = "Monitor Status"; }
         attribute :>> useCaseKind = UseCaseKind::care;
         subject controlSystem;

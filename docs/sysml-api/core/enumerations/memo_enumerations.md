@@ -73,8 +73,9 @@
 | [`WorkspaceMembershipKind`](#workspacemembershipkind) | `enum def` | How a relation places elements in a workspace; see memo_core_relationships_workspace_membership. | — |
 | [`RuleDispositionKind`](#ruledispositionkind) | `enum def` | Controlled values for rule disposition: `enabled`, `disabled`, `replaced`. | — |
 | [`ScopeModeKind`](#scopemodekind) | `enum def` | Whether a methodology's inclusion lists are the whole selection or a deliberate subset. An empty list under `explicit` selects nothing; it never means "everything". `allAvailable` is the only way to say "all", and it is always deliberate.… | — |
-| [`WorkflowStageKind`](#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `humanFactors`, `security`, `release`. | — |
+| [`WorkflowStageKind`](#workflowstagekind) | `enum def` | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `implementation`, `realization`, `humanFactors`, `security`, `release`. | — |
 | [`MethodLevelKind`](#methodlevelkind) | `enum def` | The level a method step is worked at: the system of systems, or one system. | — |
+| [`MethodAxisKind`](#methodaxiskind) | `enum def` | The two sides of the method map: the architecture, from intent to realization, and the assurance disciplines that work across every layer of it. | — |
 | [`ThreatCategoryKind`](#threatcategorykind) | `enum def` | Controlled values for threat category: `spoofing`, `tampering`, `repudiation`, `informationDisclosure`, `denialOfService`, `elevationOfPrivilege`, `privacyLoss`, `supplyChain`. | — |
 | [`CyberControlKind`](#cybercontrolkind) | `enum def` | Controlled values for cyber control: `prevent`, `detect`, `respond`, `recover`, `hardening`, `monitoring`, `authentication`, `authorization`, `encryption`, `integrityProtection`, `audit`, `updateMechanism`. | — |
 | [`AssetKind`](#assetkind) | `enum def` | Controlled values for asset: `data`, `credential`, `configuration`, `software`, `hardware`, `networkConnection`, `auditRecord`, `safetyCriticalFunction`. | — |
@@ -778,7 +779,7 @@ enum def WorkflowStageKind
 
 | Property | Value |
 | --- | --- |
-| Description | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `humanFactors`, `security`, `release`. |
+| Description | Controlled values for workflow stage: `context`, `requirements`, `behavior`, `architecture`, `interfaces`, `risk`, `verificationStage`, `evidence`, `documents`, `operational`, `functional`, `logical`, `physical`, `implementation`, `realization`, `humanFactors`, `security`, `release`. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -794,6 +795,21 @@ enum def MethodLevelKind
 | Property | Value |
 | --- | --- |
 | Description | The level a method step is worked at: the system of systems, or one system. |
+| Kind | `enum def` |
+| Abstract | No |
+| Specializes | — |
+| Owning package | `memo_core_enumerations` |
+
+
+## MethodAxisKind
+
+```sysml
+enum def MethodAxisKind
+```
+
+| Property | Value |
+| --- | --- |
+| Description | The two sides of the method map: the architecture, from intent to realization, and the assurance disciplines that work across every layer of it. |
 | Kind | `enum def` |
 | Abstract | No |
 | Specializes | — |
@@ -1785,6 +1801,10 @@ enum def CommentStatusKind
             enum functional;
             enum logical;
             enum physical;
+            // How the system is built, in software, hardware and its user interface.
+            enum implementation;
+            // How it is assembled and deployed.
+            enum realization;
             enum humanFactors;
             enum security;
             enum release;
@@ -1793,6 +1813,12 @@ enum def CommentStatusKind
         enum def MethodLevelKind {
             enum systemOfSystems;
             enum system;
+        }
+        // The two sides of the method map: the architecture, from intent to realization, and the
+        // assurance disciplines that work across every layer of it.
+        enum def MethodAxisKind {
+            enum architecture;
+            enum assurance;
         }
         enum def ThreatCategoryKind {
             enum spoofing;
