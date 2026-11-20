@@ -157,9 +157,9 @@ action def FunctionalFlow specializes MemoAction
     // Functional architecture. A function is a responsibility: what the system, or
     // one of its components, is answerable for. A FunctionalExchange is a typed
     // transfer between functions. A function may be realized by human action,
-    // mechanical design, electrical hardware, software, or a combination —
-    // allocation to the system's own parts is what ComponentFunction records, and
-    // it never assumes software.
+    // mechanical design, electrical hardware, software, or a combination. A
+    // SystemFunction is allocated to a system, a system of systems or a logical
+    // component; a ComponentFunction to one software or hardware component.
     //
     // ─── A function is a behaviour ───────────────────────────────────────────
     //

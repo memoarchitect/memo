@@ -2,6 +2,12 @@
 
 Versioned under [semantic versioning](https://semver.org/). Before 1.0 a breaking change to the ontology raises the minor number; any other release raises the patch. Every release is tagged in the repository. The notes for all three packages are also on [memoarchitect.com/releases.html](https://memoarchitect.com/releases.html).
 
+## Unreleased
+
+Breaking.
+
+- **Changed.** A method task's `taskAllocationKind` is now `taskAllocationKinds`, a list. The Functional tree task lists where a system function may be allocated (`System`, `SystemOfSystems`, `LogicalComponent`); the realization task lists where a component function goes (`SoftwareComponent`, `HardwareComponent`), no longer `LogicalComponent`. A methodology that sets the old attribute stops compiling: rename it and give it a list.
+
 ## 0.23.0
 
 Breaking.

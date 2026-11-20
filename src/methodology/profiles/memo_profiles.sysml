@@ -141,7 +141,8 @@ package memo_methodology_profiles {
         attribute :>> taskKind = MethodTaskKind::decomposition;
         attribute :>> primary = true;
         attribute :>> taskSubjectKind = "SystemFunction";
-        attribute :>> objectiveDescription = "Break down what this system must do. Select a function to review its purpose and realization.";
+        attribute :>> taskAllocationKinds = ("System", "SystemOfSystems", "LogicalComponent");
+        attribute :>> objectiveDescription = "Break down what this system must do, and allocate each function to a system, a system of systems or a logical component.";
         attribute :>> reviewDescription = "Review the functional breakdown and functions that still need realization.";
         ref :>> taskViewpoint = vpFunctionalArchitecture;
     }
@@ -162,9 +163,9 @@ package memo_methodology_profiles {
         attribute :>> primary = false;
         attribute :>> taskSubjectKind = "SystemFunction";
         attribute :>> taskImplementationKind = "ComponentFunction";
-        attribute :>> taskAllocationKind = "LogicalComponent";
+        attribute :>> taskAllocationKinds = ("SoftwareComponent", "HardwareComponent");
         attribute :>> taskRelationshipKind = "realizes";
-        attribute :>> objectiveDescription = "Realize a system function with component functions. Allocate each component function to the component responsible for it.";
+        attribute :>> objectiveDescription = "Realize a system function with component functions. Allocate each component function to the one software or hardware component responsible for it.";
         attribute :>> reviewDescription = "Review the system function, its realizing component functions and their allocated components.";
         ref :>> taskViewpoint = vpFunctionalArchitecture;
     }
@@ -458,9 +459,9 @@ package memo_methodology_profiles {
         ref :>> role = systemArchitect;
         ref :>> guideViewpoint = vpLogicalArchitecture;
         attribute :>> outputKinds = ("ComponentFunction");
-        attribute :>> objectiveDescription = "Describe each component's responsibilities beneath the system's parent function. Allocate each component function to exactly one component; show it beside that component in Logical.";
-        attribute :>> entryCriteria = "A logical component exists.";
-        attribute :>> exitCriteria = "Each component function is allocated to its component.";
+        attribute :>> objectiveDescription = "Describe each component's responsibilities beneath the system's parent function. Allocate each component function to exactly one software or hardware component.";
+        attribute :>> entryCriteria = "A software or hardware component exists.";
+        attribute :>> exitCriteria = "Each component function is allocated to one software or hardware component.";
     }
     #DoneWhen dependency from stepSysComponentFunctions to memo_rules_ontology::ComponentFunctionAllocatedRule;
 

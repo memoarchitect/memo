@@ -211,7 +211,9 @@ metadata def LinkedWhen :> MemoTypedDependency
             attribute taskScenarioKind : String[0..1];
             attribute taskStepKind : String[0..1];
             attribute taskImplementationKind : String[0..1];
-            attribute taskAllocationKind : String[0..1];
+            // The kinds the task's work is allocated to: where a system function, or the component
+            // function realizing it, may go. Read by Guided Pathways; never listed in TypeScript.
+            attribute taskAllocationKinds : String[0..*];
             attribute taskRelationshipKind : String[0..1];
             attribute objectiveDescription : String;
             attribute reviewDescription : String;
